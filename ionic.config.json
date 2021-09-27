@@ -1,0 +1,7 @@
+{
+  "name": "stranerd_app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
