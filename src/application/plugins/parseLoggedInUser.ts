@@ -1,4 +1,4 @@
-import { defineNuxtPlugin } from '@nuxtjs/composition-api'
+import { defineNuxtPlugin } from 'vue'
 import { useAuth } from '@/application/hooks/auth/auth'
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME, USER_SESSION_NAME } from '@utils/constants'
 import { saveTokens } from '@/utils/tokens'

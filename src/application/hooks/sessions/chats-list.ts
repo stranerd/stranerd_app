@@ -1,4 +1,4 @@
-import { Ref, ssrRef, useFetch } from '@nuxtjs/composition-api'
+import { Ref, ssrRef, useFetch } from 'vue'
 import { useAuth } from '@app/hooks/auth/auth'
 import { ChatMetaEntity, GetPersonalChatsMeta, ListenToPersonalChatsMeta } from '@modules/sessions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/hooks/core/states'

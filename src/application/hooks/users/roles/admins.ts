@@ -1,4 +1,4 @@
-import { computed, reactive, ssrRef, toRefs, useFetch } from '@nuxtjs/composition-api'
+import { computed, reactive, ssrRef, toRefs, useFetch } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/hooks/core/states'
 import { GetAllAdmins, GetUsersByEmail, MakeAdmin, RemoveAdmin, UserEntity } from '@modules/users'
 import { useAuth } from '@app/hooks/auth/auth'

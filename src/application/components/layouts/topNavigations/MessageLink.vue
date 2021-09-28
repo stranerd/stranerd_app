@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from '@nuxtjs/composition-api'
+import { defineComponent, onMounted } from 'vue'
 import { useChatsList } from '@app/hooks/sessions/chats-list'
 
 export default defineComponent({

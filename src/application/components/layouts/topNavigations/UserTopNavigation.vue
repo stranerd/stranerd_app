@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { defineComponent, PropType } from 'vue'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({

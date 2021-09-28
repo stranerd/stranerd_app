@@ -1,4 +1,4 @@
-import { Ref, ref, ssrRef, useFetch } from '@nuxtjs/composition-api'
+import { Ref, ref, ssrRef, useFetch } from 'vue'
 import {
 	AddQuestionComment,
 	CommentEntity,

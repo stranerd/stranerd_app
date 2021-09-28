@@ -98,7 +98,7 @@
 import SearchBar from '@app/components/search/SearchBar.vue'
 import NotificationBell from '@app/components/layouts/topNavigations/NotificationBell.vue'
 import MessageLink from '@app/components/layouts/topNavigations/MessageLink.vue'
-import { defineComponent, PropType, ref } from '@nuxtjs/composition-api'
+import { defineComponent, PropType, ref } from 'vue'
 import { useAuth } from '@app/hooks/auth/auth'
 import { useSessionSignout } from '@app/hooks/auth/session'
 import { useMenuModal } from '@app/hooks/core/modals'

@@ -1,4 +1,4 @@
-import { defineNuxtPlugin, onGlobalSetup } from '@nuxtjs/composition-api'
+import { defineNuxtPlugin, onGlobalSetup } from 'vue'
 import { useAuth } from '@/application/hooks/auth/auth'
 import { useCurrentSession, useLobbySessions, useRequestSessions } from '@app/hooks/sessions/session'
 

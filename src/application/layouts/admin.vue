@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from 'vue'
 import TopNavigation from '@app/components/layouts/topNavigations/DefaultTopNavigation.vue'
 import AdminTopNavigation from '@app/components/layouts/topNavigations/AdminTopNavigation.vue'
 import MobileBottomNavigation from '@app/components/layouts/bottomNavigations/MobileBottomNavigation.vue'

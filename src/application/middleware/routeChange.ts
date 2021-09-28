@@ -1,4 +1,4 @@
-import { defineNuxtMiddleware } from '@nuxtjs/composition-api'
+import { defineNuxtMiddleware } from 'vue'
 import { useMenuModal } from '@app/hooks/core/modals'
 import { analytics } from '@modules/core'
 import { isClient } from '@utils/environment'

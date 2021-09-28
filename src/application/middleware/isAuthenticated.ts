@@ -1,4 +1,4 @@
-import { defineNuxtMiddleware } from '@nuxtjs/composition-api'
+import { defineNuxtMiddleware } from 'vue'
 import { isServer } from '@utils/environment'
 import { REDIRECT_SESSION_NAME } from '@utils/constants'
 import { useAuth } from '@app/hooks/auth/auth'

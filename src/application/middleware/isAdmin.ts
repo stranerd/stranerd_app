@@ -1,4 +1,4 @@
-import { defineNuxtMiddleware } from '@nuxtjs/composition-api'
+import { defineNuxtMiddleware } from 'vue'
 import { useAuth } from '@app/hooks/auth/auth'
 
 export default defineNuxtMiddleware(({ redirect }) => {

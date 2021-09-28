@@ -1,4 +1,4 @@
-import { computed, Ref, ssrRef, useFetch } from '@nuxtjs/composition-api'
+import { computed, Ref, ssrRef, useFetch } from 'vue'
 import { GetTagQuestions, ListenToTagQuestions, QuestionEntity } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/hooks/core/states'
 

@@ -89,7 +89,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from 'vue'
 import { useAuth } from '@app/hooks/auth/auth'
 import { useAccountModal } from '@app/hooks/core/modals'
 import { useSessionSignout } from '@app/hooks/auth/session'

@@ -1,4 +1,4 @@
-import { computed, Ref, ref, ssrRef, useFetch } from '@nuxtjs/composition-api'
+import { computed, Ref, ref, ssrRef, useFetch } from 'vue'
 import { AddChat, ChatEntity, ChatFactory, GetChats, ListenToChats, MarkChatRead } from '@modules/sessions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/hooks/core/states'
 import { useAuth } from '@app/hooks/auth/auth'

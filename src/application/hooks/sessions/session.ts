@@ -1,4 +1,4 @@
-import { computed, Ref, ssrRef, useFetch, useRouter, watch } from '@nuxtjs/composition-api'
+import { computed, Ref, ssrRef, useFetch, useRouter, watch } from 'vue'
 import VueRouter from 'vue-router'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/hooks/core/states'
 import { FindSession, GetSessions, ListenToSession, ListenToSessions, SessionEntity } from '@modules/sessions'

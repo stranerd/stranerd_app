@@ -1,4 +1,4 @@
-import { computed, ssrRef, useFetch } from '@nuxtjs/composition-api'
+import { computed, ssrRef, useFetch } from 'vue'
 import { GetAllSessionTutors, ListenToAllSessionTutors, UserEntity } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/hooks/core/states'
 

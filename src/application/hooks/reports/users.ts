@@ -1,4 +1,4 @@
-import { ssrRef, useFetch } from '@nuxtjs/composition-api'
+import { ssrRef, useFetch } from 'vue'
 import {
 	AddUserReport,
 	DeleteUserReport,
