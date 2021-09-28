@@ -3,9 +3,9 @@ import { GetReviews, ReviewEntity } from '@modules/users'
 import { useErrorHandler, useLoadingHandler } from '@app/hooks/core/states'
 
 const global = {} as Record<string, {
-	reviews: Ref<ReviewEntity[]>,
-	fetched: Ref<boolean>,
-	hasMore: Ref<boolean>
+	reviews: Ref<ReviewEntity[]>;
+	fetched: Ref<boolean>;
+	hasMore: Ref<boolean>;
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToReviewList = (id: string, review: ReviewEntity) => {

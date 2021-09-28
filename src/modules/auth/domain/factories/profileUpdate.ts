@@ -16,7 +16,7 @@ import { UserEntity } from '@modules/users'
 import { UpdateUser } from '../entities/auth'
 
 type Content = File | Media | undefined
-type Keys = { first: string, last: string, email: string, description: string, avatar: Content, oldPassword: string | undefined, password: string | undefined, cPassword: string | undefined, strongestSubject: string, weakerSubjects: string[] }
+type Keys = { first: string; last: string; email: string; description: string; avatar: Content; oldPassword: string | undefined; password: string | undefined; cPassword: string | undefined; strongestSubject: string; weakerSubjects: string[] }
 
 export class ProfileUpdateFactory extends BaseFactory<UserEntity, UpdateUser, Keys> {
 	readonly rules = {

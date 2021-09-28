@@ -3,8 +3,8 @@ import { GetSimilarQuestions, ListenToSimilarQuestions, QuestionEntity } from '@
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/hooks/core/states'
 
 const global = {} as Record<string, {
-	questions: Ref<QuestionEntity[]>,
-	fetched: Ref<boolean>
+	questions: Ref<QuestionEntity[]>;
+	fetched: Ref<boolean>;
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useSimilarQuestionList = (question: QuestionEntity) => {

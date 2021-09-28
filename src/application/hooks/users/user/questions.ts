@@ -17,11 +17,11 @@ const answeredChoices = [
 ]
 
 const global = {} as Record<string, {
-	questions: Ref<QuestionEntity[]>,
-	fetched: Ref<boolean>,
-	hasMore: Ref<boolean>,
-	subjectId: Ref<string>,
-	answered: Ref<Answered>
+	questions: Ref<QuestionEntity[]>;
+	fetched: Ref<boolean>;
+	hasMore: Ref<boolean>;
+	subjectId: Ref<string>;
+	answered: Ref<Answered>;
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToQuestionList = (id: string, question: QuestionEntity) => {

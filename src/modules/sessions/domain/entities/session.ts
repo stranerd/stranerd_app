@@ -13,7 +13,7 @@ export class SessionEntity extends BaseEntity {
 	readonly price: number
 	readonly accepted: boolean
 	readonly done: boolean
-	readonly cancelled: { student: boolean, tutor: boolean, busy: boolean }
+	readonly cancelled: { student: boolean; tutor: boolean; busy: boolean }
 	readonly createdAt: number
 	readonly updatedAt: number
 	readonly startedAt: number | null
@@ -58,13 +58,13 @@ export class SessionEntity extends BaseEntity {
 }
 
 type SessionConstructorArgs = {
-	id: string, duration: number, price: number, message: string,
-	studentId: string, tutorId: string, studentBio: UserBio, tutorBio: UserBio,
-	accepted: boolean | null, done: boolean,
-	cancelled: { tutor: boolean, student: boolean, busy: boolean },
-	createdAt: number,
-	updatedAt: number,
-	startedAt: number | null
-	endedAt: number | null
-	taskId: string
+	id: string; duration: number; price: number; message: string;
+	studentId: string; tutorId: string; studentBio: UserBio; tutorBio: UserBio;
+	accepted: boolean | null; done: boolean;
+	cancelled: { tutor: boolean; student: boolean; busy: boolean };
+	createdAt: number;
+	updatedAt: number;
+	startedAt: number | null;
+	endedAt: number | null;
+	taskId: string;
 }

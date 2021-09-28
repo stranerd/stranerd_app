@@ -9,7 +9,7 @@ export class RoleApiDataSource implements RoleBaseDataSource {
 		this.authClient = new HttpClient(apiBases.STRANERD)
 	}
 
-	async toggleAdmin (data: { id: string, isAdmin: boolean }) {
+	async toggleAdmin (data: { id: string; isAdmin: boolean }) {
 		await this.authClient.post<any, boolean>('/user/roles', {
 			app: appName,
 			role: 'isAdmin',

@@ -17,4 +17,4 @@ export class TagEntity extends BaseEntity {
 	}
 }
 
-type TagConstructorArgs = { id: string, name: string, count: number, createdAt: number, updatedAt: number }
+type TagConstructorArgs = { id: string; name: string; count: number; createdAt: number; updatedAt: number }

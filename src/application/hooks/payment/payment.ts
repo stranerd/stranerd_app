@@ -78,14 +78,14 @@ export const useStripePayment = () => {
 }
 
 type RawPaymentProps = {
-	afterPayment: null | ((res: boolean) => Promise<void>)
-	amount: number | null
+	afterPayment: null | ((res: boolean) => Promise<void>);
+	amount: number | null;
 }
 
 type PaymentData = {
-	type: 'buyCoins',
-	data: { gold: number, bronze: number }
+	type: 'buyCoins';
+	data: { gold: number; bronze: number };
 } | {
-	type: null,
-	data: {}
+	type: null;
+	data: {};
 }

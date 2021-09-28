@@ -2,7 +2,7 @@ import { BaseFactory } from '@modules/core'
 import { isEmail, isLongerThanX, isShallowEqualTo, isShorterThanX, isString } from '@stranerd/validate'
 import { AuthUser } from '../entities/auth'
 
-type Keys = { first: string, last: string, email: string, password: string, cPassword: string }
+type Keys = { first: string; last: string; email: string; password: string; cPassword: string }
 
 export class EmailSignupFactory extends BaseFactory<null, AuthUser, Keys> {
 	readonly rules = {

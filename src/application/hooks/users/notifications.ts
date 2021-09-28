@@ -4,10 +4,10 @@ import { GetNotifications, ListenToNotifications, MarkNotificationSeen, Notifica
 import { useAuth } from '@app/hooks/auth/auth'
 
 const global = {} as Record<string, {
-	notifications: Ref<NotificationEntity[]>
-	hasMore: Ref<boolean>
-	fetched: Ref<boolean>
-	listener: ReturnType<typeof useListener>
+	notifications: Ref<NotificationEntity[]>;
+	hasMore: Ref<boolean>;
+	fetched: Ref<boolean>;
+	listener: ReturnType<typeof useListener>;
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToNotificationList = (userId: string, notification: NotificationEntity) => {

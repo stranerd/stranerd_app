@@ -18,5 +18,5 @@ export class ReferralEntity extends BaseEntity {
 }
 
 type ReferralConstructorArgs = {
-	id: string, referred: string, userId: string, createdAt: number, updatedAt: number
+	id: string; referred: string; userId: string; createdAt: number; updatedAt: number;
 }

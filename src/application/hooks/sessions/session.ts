@@ -15,9 +15,9 @@ const currentGlobal = {
 }
 
 const global = {} as Record<SessionKey, {
-	sessions: Ref<SessionEntity[]>,
-	fetched: Ref<boolean>,
-	listener: ReturnType<typeof useListener>
+	sessions: Ref<SessionEntity[]>;
+	fetched: Ref<boolean>;
+	listener: ReturnType<typeof useListener>;
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useCurrentSession = () => {

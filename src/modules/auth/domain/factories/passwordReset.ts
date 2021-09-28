@@ -1,7 +1,7 @@
 import { BaseFactory } from '@modules/core'
 import { isLongerThanX, isRequiredIf, isShallowEqualTo, isShorterThanX, isString } from '@stranerd/validate'
 
-type Keys = { password: string, cPassword: string }
+type Keys = { password: string; cPassword: string }
 
 export class PasswordResetFactory extends BaseFactory<null, { password: string }, Keys> {
 	readonly rules = {

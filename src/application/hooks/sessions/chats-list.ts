@@ -7,9 +7,9 @@ import { AudioSounds, useAudioPlayer } from '@app/hooks/core/audios'
 const player = useAudioPlayer(AudioSounds.CHAT)
 
 const global = {} as Record<string, {
-	meta: Ref<ChatMetaEntity[]>,
-	fetched: Ref<boolean>
-	listener: ReturnType<typeof useListener>
+	meta: Ref<ChatMetaEntity[]>;
+	fetched: Ref<boolean>;
+	listener: ReturnType<typeof useListener>;
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useChatsList = () => {

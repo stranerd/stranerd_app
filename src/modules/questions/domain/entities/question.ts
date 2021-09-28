@@ -11,7 +11,7 @@ export class QuestionEntity extends BaseEntity {
 	public readonly userId: string
 	public readonly userBio: UserBio
 	public readonly bestAnswers: string[]
-	public readonly answers: { id: string, userId: string }[]
+	public readonly answers: { id: string; userId: string }[]
 	public readonly commentsCount: number
 	public readonly creditable: number
 	public readonly isAnswered: boolean
@@ -74,18 +74,18 @@ export class QuestionEntity extends BaseEntity {
 }
 
 type QuestionConstructorArgs = {
-	id: string
-	body: string
-	coins: number
-	creditable: number
-	isAnswered: boolean
-	tags: string[]
-	subjectId: string
-	userId: string
-	userBio: UserBio
-	bestAnswers: string[]
-	answers: { id: string, userId: string }[]
-	commentsCount: number
-	createdAt: number
-	updatedAt: number
+	id: string;
+	body: string;
+	coins: number;
+	creditable: number;
+	isAnswered: boolean;
+	tags: string[];
+	subjectId: string;
+	userId: string;
+	userBio: UserBio;
+	bestAnswers: string[];
+	answers: { id: string; userId: string }[];
+	commentsCount: number;
+	createdAt: number;
+	updatedAt: number;
 }

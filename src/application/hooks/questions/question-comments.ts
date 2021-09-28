@@ -9,8 +9,8 @@ import {
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/hooks/core/states'
 
 const global = {} as Record<string, {
-	comments: Ref<CommentEntity[]>,
-	fetched: Ref<boolean>
+	comments: Ref<CommentEntity[]>;
+	fetched: Ref<boolean>;
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useQuestionCommentList = (questionId: string) => {
