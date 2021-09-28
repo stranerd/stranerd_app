@@ -1,0 +1,130 @@
+<template>
+	<div class="d-flex flex-column gap-0-5 gap-lg-1-5 background">
+		<template v-if="isLoggedIn">
+			<div class="d-flex d-lg-none flex-column align-items-center gap-0-5 inner-bg">
+				<Avatar :size="72" :src="user.avatar" class="align-self-center" />
+				<DynamicText class="name align-self-center text-center">
+					{{ user.fullName }}
+				</DynamicText>
+				<NuxtLink class="btn btn-primary" to="/account/">
+					View Profile
+				</NuxtLink>
+				<NuxtLink class="btn btn-outline-primary" to="/invite/">
+					Refer A Friend
+				</NuxtLink>
+			</div>
+			<ProfileHeadCard :user="user" class="inner-bg" />
+			<div class="d-flex flex-column gap-1 inner-bg">
+				<Heading class="color-dark text-center" no-grow variant="2">
+					Challenges
+				</Heading>
+				<p class="text-center">
+					Unlock a new badge for every milestone reached
+				</p>
+				<div class="d-flex gap-1 align-items-center text-dark">
+					<img :src="user.rankImage" alt="" class="img-rank">
+					<ProgressBar :current="user.rankProgress" :primary="true" />
+					<img v-if="user.nextRank" :src="user.nextRankImage" alt="" class="img-rank">
+				</div>
+			</div>
+
+			<div class="d-flex flex-column gap-1 inner-bg">
+				<div class="d-flex justify-content-between align-items-center">
+					<Heading class="color-dark w-50" no-grow variant="2">
+						Top Rookies
+					</Heading>
+
+					<select class="form-select">
+						<option>
+							Daily
+						</option>
+					</select>
+				</div>
+
+				<div v-for="n in 5" :key="n" class="d-flex gap-1 align-items-center justify-content-between text-sub">
+					<div class="d-flex align-items-center gap-1">
+						<span class="leaderBoardCount">120</span>
+						<Avatar :size="24" :src="user.avatar" />
+						<span class="text-normal">
+							Jerry Maguire
+						</span>
+					</div>
+					<span class="fw-bold text-primary">14</span>
+				</div>
+				<button v-if="isLoggedIn" class="sidebar-btn btn w-100">
+					<span>Go to Leaderboard</span>
+				</button>
+			</div>
+		</template>
+		<TagsList class="inner-bg" />
+	</div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from '@nuxtjs/composition-api'
+import { useAuth } from '@app/hooks/auth/auth'
+import ProfileHeadCard from '@app/components/users/account/ProfileHeadCard.vue'
+import TagsList from '@app/components/questions/tags/TagsList.vue'
+
+export default defineComponent({
+	name: 'RightSidebar',
+	components: { ProfileHeadCard, TagsList },
+	setup () {
+		const { id, isLoggedIn, user } = useAuth()
+		return { id, isLoggedIn, user }
+	}
+})
+</script>
+
+<style lang="scss" scoped>
+	.leaderBoardCount {
+		font-size: 14px;
+		font-weight: bold;
+		color: $color-sub;
+	}
+
+	select {
+		width: 45%;
+	}
+
+	.background {
+		background: $color-line;
+		@media (min-width: $lg) {
+			background: unset;
+		}
+	}
+
+	.inner-bg {
+		background: $color-white;
+		padding: 30px;
+		box-shadow: 0 5px 10px rgba(19, 39, 64, 0.047);
+		@media (min-width: $lg) {
+			border: 0.5px solid $color-line;
+			background: $color-white;
+			padding: 36px;
+			border-radius: 6px;
+		}
+	}
+
+	.img-rank {
+		width: 62px;
+	}
+
+	.stat {
+		width: 350px;
+		font-size: 14px;
+		font-weight: 600;
+		color: $color-sub;
+	}
+
+	.name {
+		font-size: 20px;
+		color: $color-dark;
+		font-weight: 600;
+	}
+
+	.btn {
+		width: 100%;
+		max-width: 500px;
+	}
+</style>

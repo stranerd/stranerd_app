@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router';
+import AppLayout from './application/layouts/AppLayout.vue'
+import routes from './application/router/routes'
+import { createRouter, createWebHistory } from 'vue-router'
 
 import { IonicVue } from '@ionic/vue';
 
@@ -21,15 +23,45 @@ import '@ionic/vue/css/typography.css';
 // import '@ionic/vue/css/display.css';
 
 // tailwind utility classes
-import '@/assets/css/tailwind.css'
+import '@/application/assets/styles/tailwind.css'
 
-/* Theme variables */
-import './theme/variables.css';
+// global css styles
+import '@/application/assets/styles/globals.scss'
 
-const app = createApp(App)
-  .use(IonicVue)
-  .use(router);
+/*Ionic Theme variables */
+import '@/application/assets/theme/variables.css';
+
+const router = Promise.all(routes).then(routes => {
+    const router = createRouter({
+      history: createWebHistory(),
+      routes
+    })
+
+    router.beforeEach((to, from, next) => {
+      if (!to.meta.middlewares) {
+        return next()
+      }
+      const middlewares: any = to.meta.middlewares
+      Object.keys(middlewares).forEach(middleware => {
+        middlewares[middleware]({ to, from, next })
+      })
+      return next()
+    })
+
+    return router
+})
+
+const init = async() => {
+	createApp({
+	components: {
+		App,
+	},
+  })
+	.component('AppLayout', AppLayout)
+	.use(IonicVue)
+	.use(await router)
+	.mount('#app')
   
-router.isReady().then(() => {
-  app.mount('#app');
-});
+  }
+  
+init()
