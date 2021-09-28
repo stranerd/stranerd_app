@@ -1,6 +1,6 @@
-import { ssrRef } from '@nuxtjs/composition-api'
-import { AddMessage, MessageFactory } from '@modules/meta'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/hooks/core/states'
+import { ssrRef } from 'vue'
+import { AddMessage, MessageFactory } from '@/modules/meta'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/hooks/core/states'
 
 export const useCreateMessage = () => {
 	const factory = ssrRef(new MessageFactory())

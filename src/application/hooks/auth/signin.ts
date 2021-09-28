@@ -1,4 +1,4 @@
-import { Ref, ref, ssrRef, useRouter } from '@nuxtjs/composition-api'
+import { Ref, ref, ssrRef, useRouter } from 'vue'
 import {
 	CompleteEmailVerification,
 	EmailSigninFactory,
@@ -7,12 +7,12 @@ import {
 	SigninWithEmail,
 	SigninWithGoogle,
 	SignupWithEmail
-} from '@modules/auth'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/hooks/core/states'
-import { createSession } from '@app/hooks/auth/session'
-import { isClient } from '@utils/environment'
-import { NetworkError, StatusCodes } from '@modules/core'
-import { useAuth } from '@app/hooks/auth/auth'
+} from '@/modules/auth'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/hooks/core/states'
+import { createSession } from '@/application/hooks/auth/session'
+import { isClient } from '@/utils/environment'
+import { NetworkError, StatusCodes } from '@/modules/core'
+import { useAuth } from '@/application/hooks/auth/auth'
 
 const global = {
 	referrerId: ssrRef(undefined as string | undefined)

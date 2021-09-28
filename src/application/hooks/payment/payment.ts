@@ -1,10 +1,10 @@
-import { BuyCoinsWithStripe, VerifyStripePayment } from '@modules/meta'
-import { useErrorHandler, useLoadingHandler } from '@app/hooks/core/states'
-import { stripeConfig } from '@utils/environment'
-import { usePaymentModal } from '@app/hooks/core/modals'
-import { analytics } from '@modules/core'
+import { BuyCoinsWithStripe, VerifyStripePayment } from '@/modules/meta'
+import { useErrorHandler, useLoadingHandler } from '@/application/hooks/core/states'
+import { stripeConfig } from '@/utils/environment'
+import { usePaymentModal } from '@/application/hooks/core/modals'
+import { analytics } from '@/modules/core'
 import { loadStripe } from '@stripe/stripe-js'
-import { useAuth } from '@app/hooks/auth/auth'
+import { useAuth } from '@/application/hooks/auth/auth'
 
 let props: RawPaymentProps & PaymentData = {
 	type: null,
@@ -78,14 +78,14 @@ export const useStripePayment = () => {
 }
 
 type RawPaymentProps = {
-	afterPayment: null | ((res: boolean) => Promise<void>)
-	amount: number | null
+	afterPayment: null | ((res: boolean) => Promise<void>);
+	amount: number | null;
 }
 
 type PaymentData = {
-	type: 'buyCoins',
-	data: { gold: number, bronze: number }
+	type: 'buyCoins';
+	data: { gold: number; bronze: number };
 } | {
-	type: null,
-	data: {}
+	type: null;
+	data: {};
 }

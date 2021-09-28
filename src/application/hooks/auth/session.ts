@@ -1,13 +1,13 @@
-import { SessionSignin } from '@modules/auth'
-import { useErrorHandler, useLoadingHandler } from '@app/hooks/core/states'
-import { isServer } from '@utils/environment'
-import { REDIRECT_SESSION_NAME } from '@utils/constants'
-import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
-import { useContext } from '@nuxtjs/composition-api'
-import VueRouter from 'vue-router'
-import { useAuth } from '@app/hooks/auth/auth'
-import { Alert } from '@app/hooks/core/notifications'
-import { parseCookie, serializeToCookie } from '@utils/cookie'
+import { SessionSignin } from '@/modules/auth'
+import { useErrorHandler, useLoadingHandler } from '@/application/hooks/core/states'
+import { isServer } from '@/utils/environment'
+import { REDIRECT_SESSION_NAME } from '@/utils/constants'
+import { AfterAuthUser } from '@/modules/auth/domain/entities/auth'
+import { useContext } from 'vue'
+import { VueRouter } from 'vue-router'
+import { useAuth } from '@/application/hooks/auth/auth'
+import { Alert } from '@/application/hooks/core/notifications'
+import { parseCookie, serializeToCookie } from '@/utils/cookie'
 
 export const createSession = async (afterAuth: AfterAuthUser, router: VueRouter) => {
 	if (!afterAuth.user.isVerified) {

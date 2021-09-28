@@ -1,4 +1,4 @@
-import { Ref } from '@nuxtjs/composition-api'
+import { Ref } from 'vue'
 import { VueConstructor as Vue } from 'vue/types/umd'
 
 const capitalize = (text: string) => (text[0] ?? '').toUpperCase() + text.slice(1)

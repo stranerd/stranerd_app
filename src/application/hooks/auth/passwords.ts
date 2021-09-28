@@ -1,8 +1,9 @@
-import { Ref, ref, useRouter } from '@nuxtjs/composition-api'
-import { PasswordResetFactory, PasswordResetRequestFactory, ResetPassword, SendPasswordResetEmail } from '@modules/auth'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/hooks/core/states'
-import { createSession } from '@app/hooks/auth/session'
-import { NetworkError, StatusCodes } from '@modules/core'
+import { Ref, ref } from 'vue'
+import { PasswordResetFactory, PasswordResetRequestFactory, ResetPassword, SendPasswordResetEmail } from '@/modules/auth'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/hooks/core/states'
+import { createSession } from '@/application/hooks/auth/session'
+import { NetworkError, StatusCodes } from '@/modules/core'
+import { useRouter } from 'vue-router'
 
 export const usePasswordResetRequest = () => {
 	const factory = ref(new PasswordResetRequestFactory()) as Ref<PasswordResetRequestFactory>

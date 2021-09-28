@@ -1,9 +1,9 @@
-import { reqRef } from '@nuxtjs/composition-api'
-import { Notify } from '@app/hooks/core/notifications'
-import { isClient } from '@utils/environment'
-import { analytics, NetworkError, StatusCodes } from '@modules/core'
-import { capitalize } from '@utils/commons'
-import { useAuth } from '@app/hooks/auth/auth'
+import { reqRef } from 'vue'
+import { Notify } from '@/application/hooks/core/notifications'
+import { isClient } from '@/utils/environment'
+import { analytics, NetworkError, StatusCodes } from '@/modules/core'
+import { capitalize } from '@/utils/commons'
+import { useAuth } from '@/application/hooks/auth/auth'
 
 export const useErrorHandler = () => {
 	const errorState = reqRef('')

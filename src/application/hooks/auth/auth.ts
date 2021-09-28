@@ -1,10 +1,10 @@
-import { computed, reqSsrRef } from '@nuxtjs/composition-api'
-import { FindUser, ListenToUser, UpdateStreak, UserEntity } from '@modules/users'
-import { AuthDetails, AuthTypes, UserLocation } from '@modules/auth/domain/entities/auth'
-import { SessionSignout } from '@modules/auth'
-import { isClient } from '@utils/environment'
-import { analytics } from '@modules/core'
-import { saveTokens } from '@utils/tokens'
+import { computed, reqSsrRef } from 'vue'
+import { FindUser, ListenToUser, UpdateStreak, UserEntity } from '@/modules/users'
+import { AuthDetails, AuthTypes, UserLocation } from '@/modules/auth/domain/entities/auth'
+import { SessionSignout } from '@/modules/auth'
+import { isClient } from '@/utils/environment'
+import { analytics } from '@/modules/core'
+import { saveTokens } from '@/utils/tokens'
 
 const global = {
 	tokens: reqSsrRef({
@@ -19,34 +19,41 @@ const global = {
 
 export const useAuth = () => {
 	const id = computed({
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		get: () => global.auth.value?.id ?? '', set: () => {
 		}
 	})
 	const bio = computed({
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		get: () => global.user.value?.bio, set: () => {
 		}
 	})
 
 	const isLoggedIn = computed({
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		get: () => !!id.value && !!global.user.value, set: () => {
 		}
 	})
 	const isVerified = computed({
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		get: () => !!global.auth.value?.isVerified, set: () => {
 		}
 	})
 	const isAdmin = computed({
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		get: () => !!global.user.value?.isAdmin, set: () => {
 		}
 	})
 	const currentSessionId = computed({
 		get: () => global.user.value?.currentSession ?? null,
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		set: () => {
 		}
 	})
 
 	const hasPassword = computed({
 		get: () => !!global.auth.value?.authTypes.includes(AuthTypes.email),
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		set: () => {
 		}
 	})
@@ -78,6 +85,7 @@ export const useAuth = () => {
 		}
 		if (id) {
 			global.listener = await ListenToUser.call(id, { created: setUser, updated: setUser, deleted: setUser })
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			await UpdateStreak.call().catch(() => {
 			})
 		}
