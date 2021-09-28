@@ -15,9 +15,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { AnswerEntity } from '@modules/questions'
-import { formatTime } from '@utils/dates'
+import { defineComponent, PropType } from 'vue'
+import { AnswerEntity } from '@/modules/questions'
+import { formatTime } from '@/utils/dates'
 
 export default defineComponent({
 	name: 'UserAnswerListCard',

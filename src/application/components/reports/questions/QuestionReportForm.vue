@@ -20,9 +20,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { ReportFactory } from '@modules/reports'
-import { QuestionMessages } from '@app/hooks/reports/form'
+import { defineComponent, PropType } from 'vue'
+import { ReportFactory } from '@/modules/reports'
+import { QuestionMessages } from '@/application/hooks/reports/form'
 
 export default defineComponent({
 	name: 'QuestionReportForm',

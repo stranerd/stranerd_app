@@ -13,10 +13,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { NotificationEntity } from '@modules/users'
-import { formatTime } from '@utils/dates'
-import { useNotification } from '@app/hooks/users/notifications'
+import { defineComponent, PropType } from 'vue'
+import { NotificationEntity } from '@/modules/users'
+import { formatTime } from '@/utils/dates'
+import { useNotification } from '@/application/hooks/users/notifications'
 
 export default defineComponent({
 	name: 'NotificationsListCard',

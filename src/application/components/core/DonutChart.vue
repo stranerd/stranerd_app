@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from '@nuxtjs/composition-api'
-import { formatNumber } from '@utils/commons'
+import { computed, defineComponent, PropType } from 'vue'
+import { formatNumber } from '@/utils/commons'
 import Donut from '@app/components/DonutChart/Donut.vue'
 
 export default defineComponent({
@@ -45,6 +45,7 @@ export default defineComponent({
 		onClick: {
 			required: false,
 			type: Function as PropType<() => {}>,
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			default: () => {
 			}
 		}

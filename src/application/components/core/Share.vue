@@ -5,10 +5,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useRoute } from '@nuxtjs/composition-api'
-import { domain, isClient } from '@utils/environment'
-import { Notify } from '@app/hooks/core/notifications'
-import { copyToClipboard } from '@utils/commons'
+import { defineComponent } from 'vue'
+import { domain, isClient } from '@/utils/environment'
+import { Notify } from '@/application/hooks/core/notifications'
+import { copyToClipboard } from '@/utils/commons'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'Share',
@@ -33,7 +34,7 @@ export default defineComponent({
 		const route = useRoute()
 		const share = async () => {
 			if (!isClient()) return
-			const link = props.link || route.value.fullPath
+			const link = props.link || route.fullPath
 			if (window.navigator.share) await window.navigator.share({
 				url: domain + link.startsWith('/') ? link : `/${link}`,
 				title: props.title,

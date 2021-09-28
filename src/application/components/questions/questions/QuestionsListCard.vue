@@ -78,15 +78,16 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, useRouter } from '@nuxtjs/composition-api'
-import { QuestionEntity } from '@modules/questions'
-import { useAuth } from '@app/hooks/auth/auth'
-import { openAnswerModal } from '@app/hooks/questions/answers'
-import { formatNumber, pluralize } from '@utils/commons'
-import { formatTime } from '@utils/dates'
+import { computed, defineComponent, PropType } from 'vue'
+import { QuestionEntity } from '@/modules/questions'
+import { useAuth } from '@/application/hooks/auth/auth'
+import { openAnswerModal } from '@/application/hooks/questions/answers'
+import { formatNumber, pluralize } from '@/utils/commons'
+import { formatTime } from '@/utils/dates'
 import Tag from '@app/components/questions/tags/Tag.vue'
 import Subject from '@app/components/questions/subjects/Subject.vue'
-import { openQuestionEditModal, useDeleteQuestion } from '@app/hooks/questions/questions'
+import { openQuestionEditModal, useDeleteQuestion } from '@/application/hooks/questions/questions'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'QuestionsListCard',
@@ -102,16 +103,19 @@ export default defineComponent({
 		const router = useRouter()
 		const showAnswerButton = computed({
 			get: () => props.question.userId !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})
 		const showEditButton = computed({
 			get: () => props.question.userId === id.value && props.question.canBeEdited,
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})
 		const showDeleteButton = computed({
 			get: () => props.question.userId === id.value && props.question.canBeDeleted,
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})

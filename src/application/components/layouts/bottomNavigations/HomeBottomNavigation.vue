@@ -148,7 +148,7 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'HomeBottomNavigation'

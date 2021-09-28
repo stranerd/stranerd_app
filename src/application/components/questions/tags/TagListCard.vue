@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { TagEntity } from '@modules/questions'
+import { defineComponent, PropType } from 'vue'
+import { TagEntity } from '@/modules/questions'
 import Tag from '@app/components/questions/tags/Tag.vue'
 
 export default defineComponent({

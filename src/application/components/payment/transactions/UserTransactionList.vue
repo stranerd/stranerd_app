@@ -29,8 +29,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { useTransactionList } from '@app/hooks/payment/transactions'
+import { defineComponent } from 'vue'
+import { useTransactionList } from '@/application/hooks/payment/transactions'
 import UserTransactionListCard from '@app/components/payment/transactions/UserTransactionListCard.vue'
 
 export default defineComponent({

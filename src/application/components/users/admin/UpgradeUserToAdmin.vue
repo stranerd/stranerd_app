@@ -47,8 +47,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { useAdminRoles } from '@app/hooks/users/roles/admins'
+import { defineComponent } from 'vue'
+import { useAdminRoles } from '@/application/hooks/users/roles/admins'
 
 export default defineComponent({
 	setup () {

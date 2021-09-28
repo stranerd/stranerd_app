@@ -58,12 +58,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from '@nuxtjs/composition-api'
-import { useAuth } from '@app/hooks/auth/auth'
-import { formatNumber } from '@utils/commons'
-import { useBuyCoins } from '@app/hooks/users/account'
+import { defineComponent, onMounted } from 'vue'
+import { useAuth } from '@/application/hooks/auth/auth'
+import { formatNumber } from '@/utils/commons'
+import { useBuyCoins } from '@/application/hooks/users/account'
 import AccountCoinBalance from '@app/components/users/account/AccountCoinBalance.vue'
-import { analytics } from '@modules/core'
+import { analytics } from '@/modules/core'
 
 export default defineComponent({
 	name: 'AccountBuyCoins',

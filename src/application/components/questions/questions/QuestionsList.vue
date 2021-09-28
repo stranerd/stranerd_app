@@ -21,7 +21,7 @@
 					{{ choice.key }}
 				</option>
 			</select>
-			<SelectSubject :subject-id.sync="subjectId" class="p-0" />
+			<SelectSubject v-model:subject-id="subjectId" class="p-0" />
 		</form>
 
 		<QuestionCard v-for="question in questions" :key="question.hash" :question="question" />
@@ -35,13 +35,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from '@nuxtjs/composition-api'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import QuestionCard from '@app/components/questions/questions/QuestionsListCard.vue'
-import { useQuestionList } from '@app/hooks/questions/questions'
+import { useQuestionList } from '@/application/hooks/questions/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
-import { useAuth } from '@app/hooks/auth/auth'
-import { useQuestionsModal } from '@app/hooks/core/modals'
-import { useRedirectToAuth } from '@app/hooks/auth/session'
+import { useAuth } from '@/application/hooks/auth/auth'
+import { useQuestionsModal } from '@/application/hooks/core/modals'
+import { useRedirectToAuth } from '@/application/hooks/auth/session'
 
 export default defineComponent({
 	name: 'QuestionsList',
@@ -53,12 +53,11 @@ export default defineComponent({
 			fetchOlderQuestions, listener
 		} = useQuestionList()
 		const { redirect } = useRedirectToAuth()
+			const { isLoggedIn, user } = useAuth()
 		const askQuestion = () => {
 			if (isLoggedIn.value) useQuestionsModal().openAskQuestions()
 			else redirect()
 		}
-
-		const { isLoggedIn, user } = useAuth()
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 		return {

@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { useCreateReport } from '@app/hooks/reports/questions'
+import { defineComponent } from 'vue'
+import { useCreateReport } from '@/application/hooks/reports/questions'
 import ReportForm from '@app/components/reports/questions/QuestionReportForm.vue'
 
 export default defineComponent({

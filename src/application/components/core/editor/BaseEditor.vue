@@ -14,10 +14,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-import { Notify } from '@app/hooks/core/notifications'
-import { UploaderService } from '@modules/core'
-import { isClient } from '@utils/environment'
+import { defineComponent } from 'vue'
+import { Notify } from '@/application/hooks/core/notifications'
+import { UploaderService } from '@/modules/core'
+import { isClient } from '@/utils/environment'
 
 let VueEditor = null
 if (isClient()) VueEditor = require('vue2-editor').VueEditor

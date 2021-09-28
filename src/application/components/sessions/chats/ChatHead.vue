@@ -37,15 +37,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted, PropType, ref } from '@nuxtjs/composition-api'
-import { UserEntity } from '@modules/users'
-import { useCountdown, useTimeDifference } from '@app/hooks/core/dates'
-import { setNewSessionTutorIdBio, useSession } from '@app/hooks/sessions/sessions'
-import { useReportModal, useSessionModal } from '@app/hooks/core/modals'
-import { useAuth } from '@app/hooks/auth/auth'
-import { useCurrentSession } from '@app/hooks/sessions/session'
-import { setReportedEntity } from '@app/hooks/reports/users'
-import { analytics } from '@modules/core'
+import { computed, defineComponent, onBeforeUnmount, onMounted, PropType, ref } from 'vue'
+import { UserEntity } from '@/modules/users'
+import { useCountdown, useTimeDifference } from '@/application/hooks/core/dates'
+import { setNewSessionTutorIdBio, useSession } from '@/application/hooks/sessions/sessions'
+import { useReportModal, useSessionModal } from '@/application/hooks/core/modals'
+import { useAuth } from '@/application/hooks/auth/auth'
+import { useCurrentSession } from '@/application/hooks/sessions/session'
+import { setReportedEntity } from '@/application/hooks/reports/users'
+import { analytics } from '@/modules/core'
 
 export default defineComponent({
 	name: 'ChatHead',
@@ -79,6 +79,7 @@ export default defineComponent({
 				const rest = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`
 				return hr + rest
 			},
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})
@@ -104,18 +105,21 @@ export default defineComponent({
 		}
 		const canRequestSession = computed({
 			get: () => user.value?.canRequestSessions && props.user.canHostSessions,
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})
 		const inSession = computed({
 			get: () => currentSessionId.value &&
 				currentSessionId.value === props.user.currentSession,
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})
 		const canEndSession = computed({
 			get: () => currentSessionId.value === props.user.currentSession &&
 				currentSession.value?.studentId === id.value,
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})

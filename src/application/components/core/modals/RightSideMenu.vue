@@ -40,11 +40,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { modal } from '@app/hooks/core/modals'
+import { defineComponent } from 'vue'
+import { modal } from '@/application/hooks/core/modals'
 import SideMenu from '@app/components/core/modals/SideMenu.vue'
-import { useAuth } from '@app/hooks/auth/auth'
-import { useSessionSignout } from '@app/hooks/auth/session'
+import { useAuth } from '@/application/hooks/auth/auth'
+import { useSessionSignout } from '@/application/hooks/auth/session'
 import MessageLink from '@app/components/layouts/topNavigations/MessageLink.vue'
 
 export default defineComponent({

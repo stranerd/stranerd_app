@@ -10,7 +10,7 @@ const global = {
 	tokens: reqSsrRef({
 		accessToken: null,
 		refreshToken: null
-	} as { accessToken: string | null, refreshToken: string | null }),
+	} as { accessToken: string | null; refreshToken: string | null }),
 	auth: reqSsrRef(null as AuthDetails | null),
 	user: reqSsrRef(null as UserEntity | null),
 	location: reqSsrRef(null as UserLocation | null),

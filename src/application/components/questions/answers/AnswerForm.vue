@@ -26,7 +26,7 @@
 			<BodyText class="sub-title">
 				Write out the step-by-step explanation of the answer you gave above
 			</BodyText>
-			<AnswerEditor :error="factory.errors.body" :model.sync="factory.body" :valid="factory.isValid('body')" />
+			<AnswerEditor :error="factory.errors.body" v-model:model="factory.body" :valid="factory.isValid('body')" />
 		</div>
 
 		<button :disabled="loading || !factory.valid" class="btn btn-primary px-2 py-1" type="submit">
@@ -40,8 +40,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { AnswerFactory } from '@modules/questions'
+import { defineComponent, PropType } from 'vue'
+import { AnswerFactory } from '@/modules/questions'
 import AnswerEditor from '@app/components/core/editor/AnswerEditor.vue'
 
 export default defineComponent({

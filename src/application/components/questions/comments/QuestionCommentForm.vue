@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { useCreateQuestionComments } from '@app/hooks/questions/question-comments'
+import { defineComponent } from 'vue'
+import { useCreateQuestionComments } from '@/application/hooks/questions/question-comments'
 import CommentForm from '@app/components/questions/comments/CommentForm.vue'
 
 export default defineComponent({

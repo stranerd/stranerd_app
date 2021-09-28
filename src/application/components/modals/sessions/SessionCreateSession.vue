@@ -46,10 +46,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from '@nuxtjs/composition-api'
-import { useAccountModal } from '@app/hooks/core/modals'
-import { useCreateSession } from '@app/hooks/sessions/sessions'
-import { analytics } from '@modules/core'
+import { defineComponent, onMounted } from 'vue'
+import { useAccountModal } from '@/application/hooks/core/modals'
+import { useCreateSession } from '@/application/hooks/sessions/sessions'
+import { analytics } from '@/modules/core'
 // import SessionEditor from '@app/components/core/editor/SessionEditor.vue'
 export default defineComponent({
 	name: 'SessionCreateSession',

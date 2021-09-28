@@ -22,8 +22,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { SubjectFactory } from '@modules/questions'
+import { defineComponent, PropType } from 'vue'
+import { SubjectFactory } from '@/modules/questions'
 
 export default defineComponent({
 	name: 'SubjectForm',

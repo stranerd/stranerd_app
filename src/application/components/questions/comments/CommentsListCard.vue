@@ -20,9 +20,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { CommentEntity } from '@modules/questions'
-import { formatTime } from '@utils/dates'
+import { defineComponent, PropType } from 'vue'
+import { CommentEntity } from '@/modules/questions'
+import { formatTime } from '@/utils/dates'
 
 export default defineComponent({
 	name: 'CommentsListCard',

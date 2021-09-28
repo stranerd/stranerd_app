@@ -9,9 +9,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { QuestionEntity } from '@modules/questions'
-import { formatNumber } from '@utils/commons'
+import { defineComponent, PropType } from 'vue'
+import { QuestionEntity } from '@/modules/questions'
+import { formatNumber } from '@/utils/commons'
 
 export default defineComponent({
 	name: 'SimilarQuestionsListCard',

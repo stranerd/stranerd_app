@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { useSubjectList } from '@app/hooks/questions/subjects'
+import { defineComponent } from 'vue'
+import { useSubjectList } from '@/application/hooks/questions/subjects'
 import SubjectCard from '@app/components/questions/subjects/AdminSubjectsListCard.vue'
 
 export default defineComponent({

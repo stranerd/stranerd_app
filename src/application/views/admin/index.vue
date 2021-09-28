@@ -3,12 +3,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'AdminIndexPage',
 	middleware: [
-		({ redirect }) => redirect('/admin/questions/subjects')
+		// ({ redirect }) => redirect('/admin/questions/subjects')
 	]
 })
 </script>

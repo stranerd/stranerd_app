@@ -17,10 +17,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from 'vue'
 import QuestionCard from '@app/components/questions/questions/TagQuestionsListCard.vue'
 import Tag from '@app/components/questions/tags/Tag.vue'
-import { useTagQuestionList } from '@app/hooks/questions/tag-questions'
+import { useTagQuestionList } from '@/application/hooks/questions/tag-questions'
 
 export default defineComponent({
 	name: 'TagQuestionsList',

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from 'vue'
 import Sidebar from '@app/components/layouts/sidebars/DefaultSidebar.vue'
 
 export default defineComponent({

@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted, PropType } from '@nuxtjs/composition-api'
-import { disableScroll, enableScroll } from '@utils/html'
+import { defineComponent, onBeforeUnmount, onMounted, PropType } from 'vue'
+import { disableScroll, enableScroll } from '@/utils/html'
 
 export default defineComponent({
 	name: 'Modal',

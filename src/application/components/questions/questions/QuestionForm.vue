@@ -7,7 +7,7 @@
 			<BodyText class="sub-title" variant="normal">
 				Explain your question in full detail
 			</BodyText>
-			<QuestionEditor :error="factory.errors.body" :model.sync="factory.body" :valid="factory.isValid('body')" />
+			<QuestionEditor :error="factory.errors.body" v-model:model="factory.body" :valid="factory.isValid('body')" />
 		</div>
 
 		<div class="form-group">
@@ -19,7 +19,7 @@
 			</BodyText>
 			<SelectSubject
 				:show-all="false"
-				:subject-id.sync="factory.subjectId"
+				v-model:subject-id="factory.subjectId"
 				class="border border-line p-0-25 rounded-3"
 				style="min-height: 3rem;"
 			/>
@@ -94,11 +94,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { QuestionFactory } from '@modules/questions'
+import { defineComponent, PropType } from 'vue'
+import { QuestionFactory } from '@/modules/questions'
 import QuestionEditor from '@app/components/core/editor/QuestionEditor.vue'
-import { useAccountModal } from '@app/hooks/core/modals'
-import { useTags } from '@app/hooks/core/forms'
+import { useAccountModal } from '@/application/hooks/core/modals'
+import { useTags } from '@/application/hooks/core/forms'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 
 export default defineComponent({

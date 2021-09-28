@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { useAdminRoles } from '@app/hooks/users/roles/admins'
-import { UserEntity } from '@modules/users'
+import { defineComponent, PropType } from 'vue'
+import { useAdminRoles } from '@/application/hooks/users/roles/admins'
+import { UserEntity } from '@/modules/users'
 
 export default defineComponent({
 	name: 'AdminsListCard',

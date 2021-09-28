@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from 'vue'
 import ReviewCard from '@app/components/users/reviews/ReviewListCard.vue'
-import { useUserReviewList } from '@app/hooks/users/user/reviews'
+import { useUserReviewList } from '@/application/hooks/users/user/reviews'
 
 export default defineComponent({
 	name: 'ReviewsList',

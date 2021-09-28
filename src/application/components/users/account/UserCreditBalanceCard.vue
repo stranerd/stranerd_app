@@ -30,10 +30,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { UserEntity } from '@modules/users'
-import { formatNumber } from '@utils/commons'
-import { useAccountModal } from '@app/hooks/core/modals'
+import { defineComponent, PropType } from 'vue'
+import { UserEntity } from '@/modules/users'
+import { formatNumber } from '@/utils/commons'
+import { useAccountModal } from '@/application/hooks/core/modals'
 
 export default defineComponent({
 	name: 'UserCreditBalanceCard',

@@ -27,9 +27,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { formatTime } from '@utils/dates'
-import { ChatMetaEntity } from '@modules/sessions'
+import { defineComponent, PropType } from 'vue'
+import { formatTime } from '@/utils/dates'
+import { ChatMetaEntity } from '@/modules/sessions'
 
 export default defineComponent({
 	name: 'UserChatCard',

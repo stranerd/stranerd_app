@@ -6,7 +6,7 @@
 					{{ choice.key }}
 				</option>
 			</select>
-			<SelectSubject :subject-id.sync="subjectId" class="p-0" />
+			<SelectSubject v-model:subject-id="subjectId" class="p-0" />
 		</form>
 		<QuestionCard v-for="question in questions" :key="question.hash" :question="question" />
 		<div v-if="hasMore" class="text-center py-2 text-18 text-primary-dark">
@@ -19,9 +19,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from 'vue'
 import QuestionCard from '@app/components/questions/questions/UserQuestionsListCard.vue'
-import { useUserQuestionList } from '@app/hooks/users/user/questions'
+import { useUserQuestionList } from '@/application/hooks/users/user/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 
 export default defineComponent({

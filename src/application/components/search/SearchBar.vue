@@ -63,9 +63,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { useSearch } from '@app/hooks/meta/search'
-import { extractTextFromHTML } from '@utils/commons'
+import { defineComponent } from 'vue'
+import { useSearch } from '@/application/hooks/meta/search'
+import { extractTextFromHTML } from '@/utils/commons'
 
 export default defineComponent({
 	name: 'SearchBar',

@@ -91,14 +91,15 @@
 </template>
 
 <script lang="ts">
-import { useAuth } from '@app/hooks/auth/auth'
-import { computed, defineComponent } from '@nuxtjs/composition-api'
+import { useAuth } from '@/application/hooks/auth/auth'
+import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'HowItWorks',
 	setup () {
 		const isNigerian = computed({
 			get: () => useAuth().location.value?.countryCode === 'NG',
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})

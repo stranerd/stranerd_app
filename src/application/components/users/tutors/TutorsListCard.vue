@@ -61,12 +61,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from '@nuxtjs/composition-api'
-import { UserEntity } from '@modules/users'
-import { formatNumber, pluralize } from '@utils/commons'
-import { useAuth } from '@app/hooks/auth/auth'
-import { useSessionModal } from '@app/hooks/core/modals'
-import { setNewSessionTutorIdBio } from '@app/hooks/sessions/sessions'
+import { computed, defineComponent, PropType } from 'vue'
+import { UserEntity } from '@/modules/users'
+import { formatNumber, pluralize } from '@/utils/commons'
+import { useAuth } from '@/application/hooks/auth/auth'
+import { useSessionModal } from '@/application/hooks/core/modals'
+import { setNewSessionTutorIdBio } from '@/application/hooks/sessions/sessions'
 
 export default defineComponent({
 	name: 'TutorsListCard',
@@ -83,6 +83,7 @@ export default defineComponent({
 				user.value.id !== props.tutor.id &&
 				user.value.canRequestSessions &&
 				props.tutor.canHostSessions,
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})

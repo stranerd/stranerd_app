@@ -55,9 +55,9 @@
 </template>
 
 <script>
-import { useQuestionsModal } from '@app/hooks/core/modals'
-import { useRedirectToAuth } from '@app/hooks/auth/session'
-import { useAuth } from '@app/hooks/auth/auth'
+import { useQuestionsModal } from '@/application/hooks/core/modals'
+import { useRedirectToAuth } from '@/application/hooks/auth/session'
+import { useAuth } from '@/application/hooks/auth/auth'
 
 export default {
 

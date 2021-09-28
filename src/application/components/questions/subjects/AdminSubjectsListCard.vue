@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { SubjectEntity } from '@modules/questions'
-import { useDeleteSubject } from '@app/hooks/questions/subjects'
+import { defineComponent, PropType } from 'vue'
+import { SubjectEntity } from '@/modules/questions'
+import { useDeleteSubject } from '@/application/hooks/questions/subjects'
 
 export default defineComponent({
 	name: 'AdminSubjectsListCard',

@@ -7,8 +7,8 @@
 </template>
 
 <script lang="ts">
-import { SessionEntity } from '@modules/sessions'
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { SessionEntity } from '@/modules/sessions'
+import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
 	name: 'StudentWaitingSession',

@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from '@nuxtjs/composition-api'
-import { useSubjectList } from '@app/hooks/questions/subjects'
+import { defineComponent, PropType, ref } from 'vue'
+import { useSubjectList } from '@/application/hooks/questions/subjects'
 
 export default defineComponent({
 	name: 'SelectSubject',
@@ -47,7 +47,7 @@ export default defineComponent({
 		const def = { search: '', value: '', title: 'All' }
 		const { subjects } = useSubjectList()
 		const value = ref(subjects.value.find((s) => s.id === props.subjectId)?.name ?? def.search)
-		const update = (res: { term: string, value: string }) => {
+		const update = (res: { term: string; value: string }) => {
 			value.value = res.term
 			emit('update:subjectId', res.value)
 		}

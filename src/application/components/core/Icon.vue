@@ -12,7 +12,7 @@
 
 <script>
 /* eslint-disable vue/require-default-prop */
-import iconSvg from '@/assets/icons/sprite.svg'
+import iconSvg from '@/application/assets/icons/sprite.svg'
 
 export default {
 	name: 'Icon',

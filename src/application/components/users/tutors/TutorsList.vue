@@ -8,7 +8,7 @@
 				Request a tutorial chat session for your academic needs. <br>
 				All tutors have been vetted by us and meet professional standards.
 			</span>
-			<SelectSubject :subject-id.sync="subjectId" :has-icon="true" class="select mt-1 mt-md-2 mb-2 mb-md-4" />
+			<SelectSubject v-model:subject-id="subjectId" :has-icon="true" class="select mt-1 mt-md-2 mb-2 mb-md-4" />
 		</div>
 		<TutorsListCard v-for="tutor in tutors" :key="tutor.hash" :tutor="tutor" />
 		<DisplayWarning v-if="!loading && !error && tutors.length === 0" message="No nerds found." />
@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from '@nuxtjs/composition-api'
-import { useTutorsList } from '@app/hooks/users/roles/tutors'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { useTutorsList } from '@/application/hooks/users/roles/tutors'
 import TutorsListCard from '@app/components/users/tutors/TutorsListCard.vue'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 

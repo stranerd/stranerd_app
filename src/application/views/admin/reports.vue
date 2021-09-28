@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from 'vue'
 import ReportTopNavigation from '@app/components/layouts/topNavigations/ReportTopNavigation.vue'
 
 export default defineComponent({

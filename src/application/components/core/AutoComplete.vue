@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from '@nuxtjs/composition-api'
+import { computed, defineComponent, PropType, ref } from 'vue'
 
 export default defineComponent({
 	name: 'AutoComplete',
@@ -46,7 +46,7 @@ export default defineComponent({
 			default: false
 		},
 		suggestions: {
-			type: Array as PropType<{ search: string, value: string, title: string }[]>,
+			type: Array as PropType<{ search: string; value: string; title: string }[]>,
 			required: true
 		},
 		value: {
@@ -54,7 +54,7 @@ export default defineComponent({
 			required: true
 		},
 		default: {
-			type: Object as PropType<{ search: string, value: string, title: string }>,
+			type: Object as PropType<{ search: string; value: string; title: string }>,
 			required: true
 		},
 		placeholder: {
@@ -71,6 +71,7 @@ export default defineComponent({
 			get: () => props.suggestions.filter(
 				(s) => s.search.toLowerCase().includes(props.value.toLowerCase())
 			),
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})

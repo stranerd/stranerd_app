@@ -21,9 +21,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { defineComponent, PropType } from 'vue'
 import ModalRoot from '@app/components/core/modals/ModalRoot.vue'
-import { modal } from '@app/hooks/core/modals'
+import { modal } from '@/application/hooks/core/modals'
 
 export default defineComponent({
 	name: 'Modal',
@@ -36,6 +36,7 @@ export default defineComponent({
 		close: {
 			type: Function as PropType<() => void>,
 			required: false,
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			default: () => {
 			}
 		},

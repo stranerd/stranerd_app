@@ -1,7 +1,7 @@
 <template>
 	<div class="d-flex flex-column">
 		<flutterwave-pay-button
-			:amount="getLocalAmount(amount)"
+			:amount="getLocalAmount(amount ? amount : 0)"
 			:callback="makePaymentCallback"
 			:currency="getLocalCurrency()"
 			:customer="{
@@ -30,11 +30,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { useAuth } from '@app/hooks/auth/auth'
-import { getRandomValue } from '@utils/commons'
-import { logo } from '@utils/environment'
-import { useFlutterwavePayment } from '@app/hooks/payment/payment'
+import { defineComponent } from 'vue'
+import { useAuth } from '@/application/hooks/auth/auth'
+import { getRandomValue } from '@/utils/commons'
+import { logo } from '@/utils/environment'
+import { useFlutterwavePayment } from '@/application/hooks/payment/payment'
 
 export default defineComponent({
 	name: 'Flutterwave',

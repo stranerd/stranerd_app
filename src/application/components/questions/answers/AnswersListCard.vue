@@ -104,16 +104,17 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref, useRouter } from '@nuxtjs/composition-api'
-import { AnswerEntity, QuestionEntity } from '@modules/questions'
-import { openAnswerEditModal, useAnswer, useDeleteAnswer } from '@app/hooks/questions/answers'
-import { useAuth } from '@app/hooks/auth/auth'
+import { computed, defineComponent, PropType, ref } from 'vue'
+import { AnswerEntity, QuestionEntity } from '@/modules/questions'
+import { openAnswerEditModal, useAnswer, useDeleteAnswer } from '@/application/hooks/questions/answers'
+import { useAuth } from '@/application/hooks/auth/auth'
 import CommentForm from '@app/components/questions/comments/AnswerCommentForm.vue'
 import CommentList from '@app/components/questions/comments/AnswerCommentsList.vue'
-import { formatTime } from '@utils/dates'
-import { useReportModal } from '@app/hooks/core/modals'
-import { setReportedEntity } from '@app/hooks/reports/answers'
-import { formatNumber } from '@utils/commons'
+import { formatTime } from '@/utils/dates'
+import { useReportModal } from '@/application/hooks/core/modals'
+import { setReportedEntity } from '@/application/hooks/reports/answers'
+import { formatNumber } from '@/utils/commons'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'AnswerListCard',
@@ -138,11 +139,13 @@ export default defineComponent({
 		const { id, isLoggedIn, user } = useAuth()
 		const showEditButton = computed({
 			get: () => props.answer.userId === id.value && props.answer.canBeEdited,
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})
 		const showDeleteButton = computed({
 			get: () => props.answer.userId === id.value && props.answer.canBeDeleted,
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})

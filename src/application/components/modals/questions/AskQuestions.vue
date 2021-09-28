@@ -18,10 +18,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, useMeta } from '@nuxtjs/composition-api'
+import { defineComponent, onMounted } from 'vue'
 import QuestionForm from '@app/components/questions/questions/QuestionForm.vue'
-import { useCreateQuestion } from '@app/hooks/questions/questions'
-import { analytics } from '@modules/core'
+import { useCreateQuestion } from '@/application/hooks/questions/questions'
+import { analytics } from '@/modules/core'
 
 export default defineComponent({
 	name: 'AskQuestion',
@@ -31,9 +31,9 @@ export default defineComponent({
 		onMounted(() => {
 			analytics.logEvent('ask_question_start')
 		})
-		useMeta({
-			title: 'Ask a Question | Stranerd'
-		})
+		// useMeta({
+		// 	title: 'Ask a Question | Stranerd'
+		// })
 		return { loading, createQuestion, factory, error, coins }
 	},
 	head: {}

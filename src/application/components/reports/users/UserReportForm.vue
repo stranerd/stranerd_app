@@ -23,8 +23,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { ReportFactory } from '@modules/reports'
+import { defineComponent, PropType } from 'vue'
+import { ReportFactory } from '@/modules/reports'
 
 export default defineComponent({
 	name: 'UserReportForm',

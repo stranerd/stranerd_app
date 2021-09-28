@@ -38,12 +38,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { defineComponent, PropType } from 'vue'
 import Tag from '@app/components/questions/tags/Tag.vue'
 import Subject from '@app/components/questions/subjects/Subject.vue'
-import { QuestionEntity } from '@modules/questions'
-import { formatNumber, pluralize } from '@utils/commons'
-import { formatTime } from '@utils/dates'
+import { QuestionEntity } from '@/modules/questions'
+import { formatNumber, pluralize } from '@/utils/commons'
+import { formatTime } from '@/utils/dates'
 
 export default defineComponent({
 	name: 'UserQuestionsListCard',

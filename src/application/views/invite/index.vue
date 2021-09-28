@@ -1,7 +1,7 @@
 <template>
 	<div class="d-flex flex-column">
 		<div v-if="isLoggedIn" class="d-flex flex-column align-items-center text-center gap-1 gap-1-5 box py-1">
-			<img class="w-100" src="@app/assets/images/invite.svg">
+			<img class="w-100" src="@/application/assets/images/invite.svg">
 			<Heading class="text-primary" variant="1">
 				Invite A Friend
 			</Heading>

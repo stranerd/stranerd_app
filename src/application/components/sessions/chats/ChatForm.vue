@@ -9,9 +9,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { useCreateChat } from '@app/hooks/sessions/chats'
-import { useMultipleFileInputs } from '@app/hooks/core/forms'
+import { defineComponent, PropType } from 'vue'
+import { useCreateChat } from '@/application/hooks/sessions/chats'
+import { useMultipleFileInputs } from '@/application/hooks/core/forms'
 
 export default defineComponent({
 	name: 'ChatForm',

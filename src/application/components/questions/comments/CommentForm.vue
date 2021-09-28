@@ -23,10 +23,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { CommentFactory } from '@modules/questions'
-import { useAuth } from '@app/hooks/auth/auth'
-import { useRedirectToAuth } from '@app/hooks/auth/session'
+import { defineComponent, PropType } from 'vue'
+import { CommentFactory } from '@/modules/questions'
+import { useAuth } from '@/application/hooks/auth/auth'
+import { useRedirectToAuth } from '@/application/hooks/auth/session'
 
 export default defineComponent({
 	name: 'CommentForm',

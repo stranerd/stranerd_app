@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from '@nuxtjs/composition-api'
-import { useQuestionCommentList } from '@app/hooks/questions/question-comments'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { useQuestionCommentList } from '@/application/hooks/questions/question-comments'
 import CommentCard from '@app/components/questions/comments/CommentsListCard.vue'
 
 export default defineComponent({

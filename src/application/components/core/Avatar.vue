@@ -7,9 +7,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from '@nuxtjs/composition-api'
-import { Media } from '@modules/core'
-import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
+import { computed, defineComponent, PropType } from 'vue'
+import { Media } from '@/modules/core'
+import { DEFAULT_PROFILE_IMAGE } from '@/utils/constants'
 
 export default defineComponent({
 	name: 'Avatar',
@@ -28,6 +28,7 @@ export default defineComponent({
 	setup (props) {
 		const source = computed({
 			get: () => typeof props.src?.link === 'string' ? props.src.link : DEFAULT_PROFILE_IMAGE,
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})

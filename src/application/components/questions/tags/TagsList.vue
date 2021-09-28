@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from 'vue'
 import TagListCard from '@app/components/questions/tags/TagListCard.vue'
-import { useTagsList } from '@app/hooks/questions/tags'
+import { useTagsList } from '@/application/hooks/questions/tags'
 
 export default defineComponent({
 	name: 'TagsList',

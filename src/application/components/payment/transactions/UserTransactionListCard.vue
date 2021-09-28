@@ -16,10 +16,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { TransactionEntity } from '@modules/users'
-import { formatNumber } from '@utils/commons'
-import { formatTime } from '@utils/dates'
+import { defineComponent, PropType } from 'vue'
+import { TransactionEntity } from '@/modules/users'
+import { formatNumber } from '@/utils/commons'
+import { formatTime } from '@/utils/dates'
 
 export default defineComponent({
 	name: 'UserTransactionListCard',

@@ -7,8 +7,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { QuestionEntity } from '@modules/questions'
+import { defineComponent, PropType } from 'vue'
+import { QuestionEntity } from '@/modules/questions'
 
 export default defineComponent({
 	name: 'TagQuestionsListCard',

@@ -32,8 +32,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { UserReportEntity } from '@modules/reports'
+import { defineComponent, PropType } from 'vue'
+import { UserReportEntity } from '@/modules/reports'
 
 export default defineComponent({
 	name: 'UserReportCard',

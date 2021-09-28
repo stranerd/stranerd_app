@@ -13,10 +13,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted, PropType } from '@nuxtjs/composition-api'
+import { defineComponent, onBeforeUnmount, onMounted, PropType } from 'vue'
 import QuestionCard from '@app/components/questions/questions/SimilarQuestionsListCard.vue'
-import { useSimilarQuestionList } from '@app/hooks/questions/similar-questions'
-import { QuestionEntity } from '@modules/questions'
+import { useSimilarQuestionList } from '@/application/hooks/questions/similar-questions'
+import { QuestionEntity } from '@/modules/questions'
 
 export default defineComponent({
 	name: 'SimilarQuestionsList',
@@ -32,8 +32,10 @@ export default defineComponent({
 		// TODO: Consider whether to watch similar questions
 		// onMounted(listener.startListener)
 		// onBeforeUnmount(listener.closeListener)
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		onMounted(() => {
 		})
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		onBeforeUnmount(() => {
 		})
 		return { questions, error, loading }

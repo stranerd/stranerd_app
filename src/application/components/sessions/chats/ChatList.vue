@@ -18,10 +18,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from '@nuxtjs/composition-api'
-import { useChats } from '@app/hooks/sessions/chats'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { useChats } from '@/application/hooks/sessions/chats'
 import ChatListCard from '@app/components/sessions/chats/ChatListCard.vue'
-import { formatTime } from '@utils/dates'
+import { formatTime } from '@/utils/dates'
 
 export default defineComponent({
 	name: 'ChatList',

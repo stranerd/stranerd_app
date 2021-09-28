@@ -21,12 +21,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, PropType } from '@nuxtjs/composition-api'
-import { ChatEntity } from '@modules/sessions'
-import { useAuth } from '@app/hooks/auth/auth'
-import { formatTimeAsDigits } from '@utils/dates'
-import { useChat } from '@app/hooks/sessions/chats'
-import { copyToClipboard } from '@utils/commons'
+import { computed, defineComponent, onMounted, PropType } from 'vue'
+import { ChatEntity } from '@/modules/sessions'
+import { useAuth } from '@/application/hooks/auth/auth'
+import { formatTimeAsDigits } from '@/utils/dates'
+import { useChat } from '@/application/hooks/sessions/chats'
+import { copyToClipboard } from '@/utils/commons'
 
 export default defineComponent({
 	name: 'ChatListCard',
@@ -44,6 +44,7 @@ export default defineComponent({
 		const { id } = useAuth()
 		const isMine = computed({
 			get: () => props.chat.from === id.value,
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})

@@ -15,10 +15,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted, PropType } from '@nuxtjs/composition-api'
-import { useAnswerList } from '@app/hooks/questions/answers'
+import { defineComponent, onBeforeUnmount, onMounted, PropType } from 'vue'
+import { useAnswerList } from '@/application/hooks/questions/answers'
 import AnswerCard from '@app/components/questions/answers/AnswersListCard.vue'
-import { QuestionEntity } from '@modules/questions'
+import { QuestionEntity } from '@/modules/questions'
 
 export default defineComponent({
 	name: 'AnswersList',

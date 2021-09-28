@@ -12,7 +12,8 @@
 					class="fas fa-times position-absolute rounded-pill text-danger"
 					style="z-index: 1; right: 0; bottom: 0; font-size: 1.5rem;"
 					@click="removeImage"
-				/>
+				></i>
+
 			</div>
 			<DynamicText v-if="factory.errors.avatar" class="small text-danger d-block">
 				{{ factory.errors.avatar }}
@@ -68,7 +69,7 @@
 			<SelectSubject
 				:exclude="factory.weakerSubjects"
 				:show-all="false"
-				:subject-id.sync="factory.strongestSubject"
+				v-model:subject-id="factory.strongestSubject"
 				class="p-0 select"
 			/>
 		</div>
@@ -86,7 +87,7 @@
 			<SelectSubject
 				:exclude="[factory.strongestSubject]"
 				:show-all="false"
-				:subject-id.sync="sTag"
+				v-model:subject-id="sTag"
 				class="p-0 select"
 			/>
 		</div>
@@ -178,12 +179,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from '@nuxtjs/composition-api'
-import { useUpdateProfile } from '@app/hooks/users/account'
-import { useAuth } from '@app/hooks/auth/auth'
-import { useFileInputs, usePassword, useSubjectAsTags } from '@app/hooks/core/forms'
-import { isClient } from '@utils/environment'
-import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
+import { defineComponent, PropType, ref } from 'vue'
+import { useUpdateProfile } from '@/application/hooks/users/account'
+import { useAuth } from '@/application/hooks/auth/auth'
+import { useFileInputs, usePassword, useSubjectAsTags } from '@/application/hooks/core/forms'
+import { isClient } from '@/utils/environment'
+import { DEFAULT_PROFILE_IMAGE } from '@/utils/constants'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import Subject from '@app/components/questions/subjects/Subject.vue'
 

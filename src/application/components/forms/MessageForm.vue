@@ -75,8 +75,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { useCreateMessage } from '@app/hooks/forms/messages'
+import { defineComponent } from 'vue'
+import { useCreateMessage } from '@/application/hooks/forms/messages'
 
 export default defineComponent({
 	name: 'MessageForm',

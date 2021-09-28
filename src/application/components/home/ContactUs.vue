@@ -28,9 +28,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api'
+import { computed, defineComponent } from 'vue'
 import MessageForm from '@app/components/forms/MessageForm.vue'
-import { useAuth } from '@app/hooks/auth/auth'
+import { useAuth } from '@/application/hooks/auth/auth'
 
 export default defineComponent({
 	name: 'ContactUs',
@@ -38,6 +38,7 @@ export default defineComponent({
 	setup () {
 		const isNigerian = computed({
 			get: () => useAuth().location.value?.countryCode === 'NG',
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})

@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { useSubject } from '@app/hooks/questions/subjects'
+import { defineComponent } from 'vue'
+import { useSubject } from '@/application/hooks/questions/subjects'
 
 export default defineComponent({
 	name: 'Subject',

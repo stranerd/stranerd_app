@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { UserEntity } from '@modules/users'
+import { defineComponent, PropType } from 'vue'
+import { UserEntity } from '@/modules/users'
 import AccountCoinBalance from '@app/components/users/account/AccountCoinBalance.vue'
 
 export default defineComponent({

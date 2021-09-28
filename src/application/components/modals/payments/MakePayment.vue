@@ -11,14 +11,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api'
-import { useAuth } from '@app/hooks/auth/auth'
+import { computed, defineComponent } from 'vue'
+import { useAuth } from '@/application/hooks/auth/auth'
 
 export default defineComponent({
 	name: 'MakePayment',
 	setup () {
 		const isAfrican = computed({
 			get: () => useAuth().location.value?.continentCode === 'AF',
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})

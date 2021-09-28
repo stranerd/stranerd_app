@@ -22,8 +22,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { modal } from '@app/hooks/core/modals'
+import { defineComponent } from 'vue'
+import { modal } from '@/application/hooks/core/modals'
 import SideMenu from '@app/components/core/modals/SideMenu.vue'
 
 export default defineComponent({

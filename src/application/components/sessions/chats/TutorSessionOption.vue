@@ -12,9 +12,9 @@
 </template>
 
 <script lang="ts">
-import { SessionEntity } from '@modules/sessions'
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { useSession } from '@app/hooks/sessions/sessions'
+import { SessionEntity } from '@/modules/sessions'
+import { defineComponent, PropType } from 'vue'
+import { useSession } from '@/application/hooks/sessions/sessions'
 
 export default defineComponent({
 	name: 'TutorSessionOption',

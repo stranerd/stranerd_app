@@ -13,15 +13,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted } from '@nuxtjs/composition-api'
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import ChatHead from '@app/components/sessions/chats/ChatHead.vue'
 import ChatList from '@app/components/sessions/chats/ChatList.vue'
 import ChatForm from '@app/components/sessions/chats/ChatForm.vue'
 import TutorSessionOption from '@app/components/sessions/chats/TutorSessionOption.vue'
 import StudentWaitingSession from '@app/components/sessions/chats/StudentWaitingSession.vue'
-import { useUser } from '@app/hooks/users/user'
-import { useAuth } from '@app/hooks/auth/auth'
-import { hasRequestedSessionWith, isRequestingSessionWith, useCurrentSession } from '@app/hooks/sessions/session'
+import { useUser } from '@/application/hooks/users/user'
+import { useAuth } from '@/application/hooks/auth/auth'
+import { hasRequestedSessionWith, isRequestingSessionWith, useCurrentSession } from '@/application/hooks/sessions/session'
 
 export default defineComponent({
 	name: 'ContactListMessages',
@@ -42,6 +42,7 @@ export default defineComponent({
 			get: () => currentSessionId.value && user.value?.currentSession === currentSessionId.value
 				? currentSessionId.value
 				: '',
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})
@@ -52,6 +53,7 @@ export default defineComponent({
 				sessionId.value,
 				currentSession.value?.hash ?? ''
 			].join('--'),
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})

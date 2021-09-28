@@ -19,10 +19,10 @@
 </template>
 
 <script lang="ts">
-import { ReviewEntity } from '@modules/users'
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { formatTime } from '@utils/dates'
-import { formatNumber } from '@utils/commons'
+import { ReviewEntity } from '@/modules/users'
+import { defineComponent, PropType } from 'vue'
+import { formatTime } from '@/utils/dates'
+import { formatNumber } from '@/utils/commons'
 
 export default defineComponent({
 	name: 'ReviewListCard',

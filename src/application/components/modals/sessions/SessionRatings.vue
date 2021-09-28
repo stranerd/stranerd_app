@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import { useCurrentSession } from '@app/hooks/sessions/session'
-import { useRateSession } from '@app/hooks/sessions/sessions'
-import { defineComponent } from '@nuxtjs/composition-api'
+import { useCurrentSession } from '@/application/hooks/sessions/session'
+import { useRateSession } from '@/application/hooks/sessions/sessions'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'SessionRatings',
