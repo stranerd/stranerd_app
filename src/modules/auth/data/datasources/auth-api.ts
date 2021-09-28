@@ -1,4 +1,4 @@
-import { closeSocket, HttpClient } from '@modules/core'
+import { HttpClient, closeSocket } from '@modules/core'
 import { apiBases, domain } from '@utils/environment'
 import { deleteTokensFromCookies, saveTokensToCookies } from '@utils/tokens'
 import { AfterAuthUser, AuthExtras, NewUser, UpdateUser } from '../../domain/entities/auth'
