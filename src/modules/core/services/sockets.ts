@@ -16,7 +16,7 @@ const getSocketBaseAndPath = () => {
 	return { path, domain }
 }
 
-type SocketReturn = { code: StatusCodes, message: string, channel: string }
+type SocketReturn = { code: StatusCodes; message: string; channel: string }
 
 export async function listenOnSocket<Model> (channel: string, listeners: Listeners<Model>) {
 	const { accessToken } = await getTokens()
@@ -36,7 +36,7 @@ export async function listenOnSocket<Model> (channel: string, listeners: Listene
 		finalChannel = res.channel
 		// eslint-disable-next-line no-console
 		if (res.code !== StatusCodes.Ok) return
-		socket?.on(finalChannel, async (data: { channel: string, type: EmitTypes, data: Model }) => {
+		socket?.on(finalChannel, async (data: { channel: string; type: EmitTypes; data: Model }) => {
 			if (finalChannel !== data.channel) return
 			await listeners[data.type]?.(data.data)
 		})

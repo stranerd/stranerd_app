@@ -34,12 +34,12 @@ export class ChatMetaEntity extends BaseEntity {
 }
 
 type ChatMetaConstructorArgs = {
-	id: string
-	unRead: string[]
-	ownerId: string
-	userId: string
-	userBio: UserBio
-	last: ChatEntity
-	createdAt: number
-	updatedAt: number
+	id: string;
+	unRead: string[];
+	ownerId: string;
+	userId: string;
+	userBio: UserBio;
+	last: ChatEntity;
+	createdAt: number;
+	updatedAt: number;
 }

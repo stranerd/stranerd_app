@@ -14,14 +14,14 @@ export class MetaApiDataSource implements MetaBaseDataSource {
 
 	async search (search: string) {
 		return this.stranerdClient.get<{}, {
-			questions: QueryResults<QuestionFromModel>
-			answers: QueryResults<AnswerFromModel>
-			users: QueryResults<UserFromModel>
+			questions: QueryResults<QuestionFromModel>;
+			answers: QueryResults<AnswerFromModel>;
+			users: QueryResults<UserFromModel>;
 		}>(`/meta/search/${search}`, {})
 	}
 
 	async buyCoinsWithStripe (data: { amount: number; currency: string; gold: number; bronze: number }) {
-		return this.stranerdClient.post<any, { id: string, clientSecret: string }>('/payment/stripe/coins', data)
+		return this.stranerdClient.post<any, { id: string; clientSecret: string }>('/payment/stripe/coins', data)
 	}
 
 	async verifyStripePayment (data: { intentId: string }) {

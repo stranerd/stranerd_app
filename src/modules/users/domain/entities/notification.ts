@@ -41,6 +41,6 @@ export class NotificationEntity extends BaseEntity {
 }
 
 type NotificationConstructorArgs = {
-	id: string, body: string, action: string, userId: string, data: Record<string, any>
-	createdAt: number, seen: boolean, updatedAt: number
+	id: string; body: string; action: string; userId: string; data: Record<string, any>;
+	createdAt: number; seen: boolean; updatedAt: number;
 }

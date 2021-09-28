@@ -18,8 +18,8 @@ import { analytics } from '@modules/core'
 import VueRouter from 'vue-router'
 
 const global = {} as Record<string, {
-	answers: Ref<AnswerEntity[]>,
-	fetched: Ref<boolean>
+	answers: Ref<AnswerEntity[]>;
+	fetched: Ref<boolean>;
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useAnswerList = (questionId: string) => {
@@ -163,9 +163,9 @@ export const useAnswer = (answer: AnswerEntity) => {
 	}
 }
 
-let editingQuestionAnswer = null as { answer: AnswerEntity, question: QuestionEntity } | null
+let editingQuestionAnswer = null as { answer: AnswerEntity; question: QuestionEntity } | null
 export const getEditingAnswer = () => editingQuestionAnswer
-export const openAnswerEditModal = (data: { question: QuestionEntity, answer: AnswerEntity }, router: VueRouter) => {
+export const openAnswerEditModal = (data: { question: QuestionEntity; answer: AnswerEntity }, router: VueRouter) => {
 	editingQuestionAnswer = data
 	router.push(`/questions/${data.question.id}/answers/${data.answer.id}/edit`)
 }

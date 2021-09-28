@@ -33,7 +33,7 @@ export class UserApiDataSource implements UserBaseDataSource {
 	}
 
 	async updateStreak () {
-		type Streak = { skip: boolean, increase: boolean, reset: boolean, streak: number }
+		type Streak = { skip: boolean; increase: boolean; reset: boolean; streak: number }
 		await this.stranerdClient.post<{}, Streak>('/users/streak', {})
 	}
 }

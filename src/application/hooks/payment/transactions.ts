@@ -3,9 +3,9 @@ import { useErrorHandler, useLoadingHandler } from '@app/hooks/core/states'
 import { GetTransactions, TransactionEntity } from '@modules/users'
 
 const global = {} as Record<string, {
-	transactions: Ref<TransactionEntity[]>
-	hasMore: Ref<boolean>
-	fetched: Ref<boolean>
+	transactions: Ref<TransactionEntity[]>;
+	hasMore: Ref<boolean>;
+	fetched: Ref<boolean>;
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToTransactionList = (userId: string, transaction: TransactionEntity) => {

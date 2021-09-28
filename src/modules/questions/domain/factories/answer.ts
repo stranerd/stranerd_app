@@ -4,7 +4,7 @@ import { AnswerEntity } from '../entities/answer'
 import { AnswerToModel } from '../../data/models/answer'
 
 type Keys = {
-	title: string, body: string, questionId: string
+	title: string; body: string; questionId: string;
 }
 
 export class AnswerFactory extends BaseFactory<AnswerEntity, AnswerToModel, Keys> {

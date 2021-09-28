@@ -14,7 +14,7 @@ import { QuestionEntity } from '../entities/question'
 import { QuestionToModel } from '../../data/models/question'
 
 type Keys = {
-	body: string, coins: number, subjectId: string, tags: string[]
+	body: string; coins: number; subjectId: string; tags: string[];
 }
 
 export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel, Keys> {

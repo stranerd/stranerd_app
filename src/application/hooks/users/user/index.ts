@@ -4,8 +4,8 @@ import { useErrorHandler, useListener, useLoadingHandler } from '@app/hooks/core
 import { useAuth } from '@app/hooks/auth/auth'
 
 const global = {} as Record<string, {
-	user: Ref<UserEntity | null>,
-	fetched: Ref<boolean>
+	user: Ref<UserEntity | null>;
+	fetched: Ref<boolean>;
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useUser = (userId: string) => {

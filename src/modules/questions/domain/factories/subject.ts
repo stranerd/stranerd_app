@@ -4,7 +4,7 @@ import { SubjectEntity } from '../entities/subject'
 import { SubjectToModel } from '../../data/models/subject'
 
 interface Keys {
-	name: string
+	name: string;
 }
 
 export class SubjectFactory extends BaseFactory<SubjectEntity, SubjectToModel, Keys> {

@@ -29,6 +29,6 @@ export class ReviewEntity extends BaseEntity {
 }
 
 type ReviewConstructorArgs = {
-	id: string, review: string, rating: number, tutorId: string
-	createdAt: number, userId: string, userBio: UserBio, updatedAt: number
+	id: string; review: string; rating: number; tutorId: string;
+	createdAt: number; userId: string; userBio: UserBio; updatedAt: number;
 }

@@ -7,8 +7,8 @@ import { useSessionModal } from '@app/hooks/core/modals'
 import { Alert } from '@app/hooks/core/notifications'
 import { analytics } from '@modules/core'
 
-let newSessionTutorIdBio = null as null | { id: string, user: UserBio }
-export const setNewSessionTutorIdBio = (data: { id: string, user: UserBio }) => {
+let newSessionTutorIdBio = null as null | { id: string; user: UserBio }
+export const setNewSessionTutorIdBio = (data: { id: string; user: UserBio }) => {
 	newSessionTutorIdBio = data
 }
 
