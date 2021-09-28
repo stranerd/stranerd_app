@@ -1,8 +1,8 @@
 export const appName = 'stranerd'
 export const isDev = process.env.ENVIRONMENT === 'local'
 
-export const isServer = () => process.server
-export const isClient = () => process.client
+export const isServer = () => false
+export const isClient = () => true
 
 export const googleClientId = process.env.GOOGLE_CLIENT_ID ?? ''
 
