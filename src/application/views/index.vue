@@ -1,15 +1,19 @@
 <template>
-	<div class="col-span-12 grid grid-col-12">
-		<h4>Hello Ionic app</h4>
+	<div class="mt-4">
+	<span>Index page</span>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-
 export default defineComponent({
-	name: 'IndexPage',
-	layout: 'home'
+	name: 'Index',
+	layout: 'home',
+	setup () {
+		return { }
+	}
 })
 </script>
+
+
