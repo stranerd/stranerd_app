@@ -3,7 +3,7 @@
 		<h1 class="text-dark mb-1">
 			Honor Code
 		</h1>
-		<p>Last updated on <span class="fw-bold">August 3rd, 2021</span></p>
+		<p>Last updated on <span class="font-bold">August 3rd, 2021</span></p>
 
 		<p>
 			Stranerd’s Honour Code aims to communicate academic integrity in the Stranerd learning process and seeks to
@@ -16,52 +16,52 @@
 			good learning habits and discipline. Our core values are embedded in the very letters of our name:
 		</p>
 		<div>
-			<p class="d-flex align-items-center">
-				<span class="h1 text-primary fw-bold text-nowrap">S -</span>
+			<p class="flex align-items-center">
+				<span class="h1 text-primary font-bold text-nowrap">S -</span>
 				<span
 					class="ms-0-5 h3 fw-normal"
 				> Student forever, because life is an endless learning experience.</span>
 			</p>
-			<p class="d-flex align-items-center">
-				<span class="h1 text-primary fw-bold text-nowrap">T -</span>
+			<p class="flex align-items-center">
+				<span class="h1 text-primary font-bold text-nowrap">T -</span>
 				<span
 					class="ms-0-5 h3 fw-normal"
 				> Teacher when I can be, because knowledge shared is knowledge gained.</span>
 			</p>
-			<p class="d-flex align-items-center">
-				<span class="h1 text-primary fw-bold text-nowrap">R -</span>
+			<p class="flex align-items-center">
+				<span class="h1 text-primary font-bold text-nowrap">R -</span>
 				<span class=" ms-0-5 h3 fw-normal"> Responsibility to the learning community, to uphold such principles that contribute to the learning process.</span>
 			</p>
-			<p class="d-flex align-items-center">
-				<span class="h1 text-primary fw-bold text-nowrap">A -</span>
+			<p class="flex align-items-center">
+				<span class="h1 text-primary font-bold text-nowrap">A -</span>
 				<span class="ms-0-5 h3 fw-normal"> Academic honesty must be demonstrated at all times, in terms of attribution where and when due, reporting accomplishments accurately, paying the required body for services rendered.</span>
 			</p>
-			<p class="d-flex align-items-center">
-				<span class="h1 text-primary fw-bold text-nowrap">N -</span>
+			<p class="flex align-items-center">
+				<span class="h1 text-primary font-bold text-nowrap">N -</span>
 				<span class="ms-0-5 h3 fw-normal"> Never stop learning. </span>
 			</p>
-			<p class="d-flex align-items-center">
-				<span class="h1 text-primary fw-bold text-nowrap">E -</span>
+			<p class="flex align-items-center">
+				<span class="h1 text-primary font-bold text-nowrap">E -</span>
 				<span class="ms-0-5 h3 fw-normal"> Expertise is a result of constant stimulation of the mind.</span>
 			</p>
-			<p class="d-flex align-items-center">
-				<span class="h1 text-primary fw-bold text-nowrap">R -</span>
+			<p class="flex align-items-center">
+				<span class="h1 text-primary font-bold text-nowrap">R -</span>
 				<span class="ms-0-5 h3 fw-normal"> Reading develops mental ability .</span>
 			</p>
-			<p class="d-flex align-items-center">
-				<span class="h1 text-primary fw-bold text-nowrap">D -</span>
+			<p class="flex align-items-center">
+				<span class="h1 text-primary font-bold text-nowrap">D -</span>
 				<span class="ms-0-5 h3 fw-normal"> Diligence in all academic endeavors. </span>
 			</p>
 		</div>
 		<div>
-			<h4 class="fw-bold mt-2">
+			<h4 class="font-bold mt-2">
 				As a Student,
 			</h4>
 			<p>
 				It’s very straightforward. Do not cheat, do not help others cheat. Stranerd provides a platform for
 				learning through collaboration and should not be used as an avenue to cheat.
 			</p>
-			<h5 class="fw-bold">
+			<h5 class="font-bold">
 				Do not:
 			</h5>
 			Use information from Stranerd to cheat on a test or assignment <br>
@@ -70,14 +70,14 @@
 			Use Stranerd on your phone to cheat or commit malpractice <br>
 		</div>
 		<div>
-			<h4 class="fw-bold mt-3">
+			<h4 class="font-bold mt-3">
 				As a Tutor,
 			</h4>
 			<p>
 				Engage with students in a manner that conveys integrity, maturity and upholds all our Policies, Terms &
 				Conditions as well as this Honour Code.
 			</p>
-			<h5 class="fw-bold">
+			<h5 class="font-bold">
 				Do not:
 			</h5>
 			Aid any student to cheat either within or outside Stranerd Websites or Services <br>
@@ -98,7 +98,7 @@
 			which my insubordination may attract.
 		</p>
 
-		<h4 class="fw-bold">
+		<h4 class="font-bold">
 			Reporting Honour Code Violations
 		</h4>
 		<p>

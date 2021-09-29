@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<div class="d-flex flex-column gap-1 gap-lg-2 mb-1-5 mb-md-2-5">
+		<div class="flex flex-col gap-1 gap-lg-2 mb-1-5 mb-md-2-5">
 			<Heading class="color-dark" variant="1">
 				Question
 			</Heading>
 			<BodyText variant="large">
 				<div class="mb-0-5 editor-body" v-html="question.body" />
 			</BodyText>
-			<div class="gap-0-5 d-flex align-items-center flex-row flex-wrap">
+			<div class="gap-0-5 flex align-items-center flex-row flex-wrap">
 				<Tag v-for="tag in question.tags" :key="tag" :tag="tag" />
 			</div>
 		</div>

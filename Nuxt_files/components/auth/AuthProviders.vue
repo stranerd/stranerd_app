@@ -1,5 +1,5 @@
 <template>
-	<div class="d-flex flex-column gap-1 gap-md-2">
+	<div class="flex flex-col gap-1 gap-md-2">
 		<GoogleLogin
 			:on-failure="onFailure"
 			:on-success="onSuccess"

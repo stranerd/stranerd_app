@@ -1,7 +1,7 @@
 <template>
-	<div class="d-flex flex-column gap-0-5 gap-lg-1-5 background">
+	<div class="flex flex-col gap-0-5 gap-lg-1-5 background">
 		<template v-if="isLoggedIn">
-			<div class="d-flex d-lg-none flex-column align-items-center gap-0-5 inner-bg">
+			<div class="flex d-lg-none flex-col align-items-center gap-0-5 inner-bg">
 				<Avatar :size="72" :src="user.avatar" class="align-self-center" />
 				<DynamicText class="name align-self-center text-center">
 					{{ user.fullName }}
@@ -14,22 +14,22 @@
 				</NuxtLink>
 			</div>
 			<ProfileHeadCard :user="user" class="inner-bg" />
-			<div class="d-flex flex-column gap-1 inner-bg">
+			<div class="flex flex-col gap-1 inner-bg">
 				<Heading class="color-dark text-center" no-grow variant="2">
 					Challenges
 				</Heading>
 				<p class="text-center">
 					Unlock a new badge for every milestone reached
 				</p>
-				<div class="d-flex gap-1 align-items-center text-dark">
+				<div class="flex gap-1 align-items-center text-dark">
 					<img :src="user.rankImage" alt="" class="img-rank">
 					<ProgressBar :current="user.rankProgress" :primary="true" />
 					<img v-if="user.nextRank" :src="user.nextRankImage" alt="" class="img-rank">
 				</div>
 			</div>
 
-			<div class="d-flex flex-column gap-1 inner-bg">
-				<div class="d-flex justify-content-between align-items-center">
+			<div class="flex flex-col gap-1 inner-bg">
+				<div class="flex justify-content-between align-items-center">
 					<Heading class="color-dark w-50" no-grow variant="2">
 						Top Rookies
 					</Heading>
@@ -41,15 +41,15 @@
 					</select>
 				</div>
 
-				<div v-for="n in 5" :key="n" class="d-flex gap-1 align-items-center justify-content-between text-sub">
-					<div class="d-flex align-items-center gap-1">
+				<div v-for="n in 5" :key="n" class="flex gap-1 align-items-center justify-content-between text-sub">
+					<div class="flex align-items-center gap-1">
 						<span class="leaderBoardCount">120</span>
 						<Avatar :size="24" :src="user.avatar" />
 						<span class="text-normal">
 							Jerry Maguire
 						</span>
 					</div>
-					<span class="fw-bold text-primary">14</span>
+					<span class="font-bold text-primary">14</span>
 				</div>
 				<button v-if="isLoggedIn" class="sidebar-btn btn w-100">
 					<span>Go to Leaderboard</span>

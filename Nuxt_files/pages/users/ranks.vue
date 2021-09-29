@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="ranking-body d-flex flex-column gap-2-25">
+		<div class="ranking-body flex flex-col gap-2-25">
 			<div class="ranking-card">
 				<div class="rank-contain">
 					<img alt="" src="/images/ranking/rookie.svg">

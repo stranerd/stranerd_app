@@ -1,6 +1,6 @@
 <template>
 	<div :id="subject.id" class="wrapper">
-		<div class="p-1 d-flex flex-row align-items-center">
+		<div class="p-1 flex flex-row align-items-center">
 			<DynamicText class="subject-custom">
 				{{ subject.name }}
 			</DynamicText>

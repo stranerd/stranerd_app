@@ -1,5 +1,5 @@
 <template>
-	<div class="d-flex flex-column gap-1">
+	<div class="flex flex-col gap-1">
 		<UserReportCard v-for="report in reports" :key="report.hash" :report="report" />
 		<div v-if="hasMore" class="text-center py-2 text-18 text-primaryDark">
 			<a @click.prevent="fetchOlderReports">Load More</a>

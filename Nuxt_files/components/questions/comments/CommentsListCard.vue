@@ -1,10 +1,10 @@
 <template>
-	<div :id="comment.id" class="my-0-5 d-flex align-items-start gap-0-5">
+	<div :id="comment.id" class="my-0-5 flex align-items-start gap-0-5">
 		<NuxtLink :to="`/users/${comment.userId}`" class="flex-shrink-0">
 			<Avatar :size="35" :src="comment.avatar" />
 		</NuxtLink>
 		<div>
-			<NuxtLink :to="`/users/${comment.userId}`" class="d-block text-wrap fw-bold text-sub">
+			<NuxtLink :to="`/users/${comment.userId}`" class="d-block text-wrap font-bold text-sub">
 				<DynamicText>
 					{{ comment.userName }}
 				</DynamicText>

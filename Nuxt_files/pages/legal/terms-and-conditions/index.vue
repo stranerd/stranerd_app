@@ -3,9 +3,9 @@
 		<h1 class="text-dark mb-1">
 			Terms and Conditions
 		</h1>
-		<p>Last updated on <span class="fw-bold">August 3rd, 2021</span></p>
+		<p>Last updated on <span class="font-bold">August 3rd, 2021</span></p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Your Account
 		</h5>
 		<p>
@@ -16,7 +16,7 @@
 			immediately at support@stranerd if you suspect any unauthorized use of your account.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Privacy/Personal Information
 		</h5>
 		<p>
@@ -41,7 +41,7 @@
 			immediately.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Your Content
 		</h5>
 		<p>
@@ -57,7 +57,7 @@
 			Please find additional information on how we use and store content in our Privacy Policy.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Modifying/Stopping Our Services
 		</h5>
 		<p>
@@ -68,7 +68,7 @@
 			data from our services, if for any reason we have to remove your account.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Employees Rights and Liabilities
 		</h5>
 		<p>
@@ -79,7 +79,7 @@
 			providing the requested services.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Disclaimer
 		</h5>
 		<p>
@@ -96,7 +96,7 @@
 			If you have any questions regarding these Terms of Service, please contact us at support@stranerd.com
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			About These Terms
 		</h5>
 		<p>
@@ -105,7 +105,7 @@
 			our services.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Violation of Terms of Service
 		</h5>
 		<p>
@@ -114,7 +114,7 @@
 			criminal or fraudulent intent in order to comply with applicable laws.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Contact Us
 		</h5>
 		<p>
@@ -123,7 +123,7 @@
 			unrestricted basis.
 		</p>
 
-		<h3 class="fw-bold">
+		<h3 class="font-bold">
 			Refund Policy
 		</h3>
 		<p>
@@ -134,7 +134,7 @@
 			provided there is tangible and satisfactory proof that there was indeed poor service delivery on our part.
 		</p>
 
-		<h3 class="fw-bold">
+		<h3 class="font-bold">
 			Cookies Policy
 		</h3>
 		<p>
@@ -195,7 +195,7 @@
 			</span>
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Entire Agreement
 		</h5>
 		<p>

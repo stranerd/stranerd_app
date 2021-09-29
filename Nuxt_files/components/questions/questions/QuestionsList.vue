@@ -4,8 +4,8 @@
 			Ask A Question
 		</button>
 
-		<div class="d-flex justify-content-between align-items-center gap-1 mb-1 mb-md-2 ">
-			<Heading class="text-dark d-flex align-items-center flex-grow-1 d-none d-sm-inline" variant="1">
+		<div class="flex justify-content-between align-items-center gap-1 mb-1 mb-md-2 ">
+			<Heading class="text-dark flex align-items-center flex-grow-1 d-none d-sm-inline" variant="1">
 				<div class="dash me-0-5" />
 				<span class="w-100 title">All Questions</span>
 				<div class="dash ms-0-5" />
@@ -15,7 +15,7 @@
 			</button>
 		</div>
 
-		<form class="d-flex options gap-0-5 gap-md-1-5">
+		<form class="flex options gap-0-5 gap-md-1-5">
 			<select v-model="answered" class="form-select">
 				<option v-for="choice in answeredChoices" :key="choice.val" :value="choice.val">
 					{{ choice.key }}

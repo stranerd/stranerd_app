@@ -3,7 +3,7 @@
 		<h1 class="text-dark mb-1">
 			Privacy Policy
 		</h1>
-		<p>Last updated on <span class="fw-bold">August 3rd, 2021</span></p>
+		<p>Last updated on <span class="font-bold">August 3rd, 2021</span></p>
 
 		<Introduction />
 		<InfoWeCollect />

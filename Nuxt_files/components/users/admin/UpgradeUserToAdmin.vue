@@ -1,6 +1,6 @@
 <template>
-	<div class="d-flex flex-column gap-1">
-		<form class="d-flex flex-row align-items-center" @submit.prevent="getUsersByEmail">
+	<div class="flex flex-col gap-1">
+		<form class="flex flex-row align-items-center" @submit.prevent="getUsersByEmail">
 			<div class="flex-grow-1">
 				<input
 					id="email"
@@ -17,12 +17,12 @@
 				<span class="d-inline-block d-md-none" style="font-size: 13px; width: 80px;">Find User</span>
 			</button>
 		</form>
-		<div v-if="fetched" class="d-flex flex-column gap-1">
+		<div v-if="fetched" class="flex flex-col gap-1">
 			<DisplayError v-if="users.length === 0" error="No user with such email exists" />
 			<div
 				v-for="user in users"
 				:key="user.hash"
-				class="d-flex flex-wrap justify-content-between gap-0-5 align-items-center"
+				class="flex flex-wrap justify-content-between gap-0-5 align-items-center"
 			>
 				<div>
 					<DynamicText :truncate="true" class="lead">

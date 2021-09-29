@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+$sm: 480px;
+$mmd: 575px;
+$md: 767px;
+$lg: 1280px;
+$xl: 1600px;
+
+* {
+	font-family: 'Nunito Sans', sans-serif !important;
+}
+
+.btn {
+	padding: 0.5rem 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 600;
+}
+
+body {
+	width: 100%;
+	max-width: vw(100);
+
+	* {
+		max-width: 100%;
+		line-height: 1.1em;
+	}
+
+	overflow-x: hidden;
+
+	img {
+		flex-shrink: 0;
+		object-fit: contain;
+	}
+
+	.text-truncate {
+		white-space: nowrap !important;
+	}
+}
+
+h1, h2, h3 {
+	weight: bold;
+	text-transform: capitalize;
+}
+
+h4, h5, h6 {
+	font-weight: 500;
+	text-transform: capitalize;
+}
+
+.btn {
+	padding: 0.5rem 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 600;
+}
+
+.label {
+	font-size: 1em;
+	line-height: 1.5;
+	font-weight: 600;
+}
+
+.label-sm {
+	font-size: 0.875rem;
+	line-height: 1.5;
+	font-weight: 500;
+}
+
+.form-group {
+	min-width: auto;
+	max-width: 100%;
+}
+
+input.form-control, textarea.form-control {
+	font-size: 1.125em;
+	padding: 0.75em;
+}
+
+.form-control::placeholder {
+	color: inherit;
+	opacity: 0.5;
+	font-size: 0.9em;
+}
+
+.form-control, .form-control:focus {
+	background: inherit;
+}
+
+a {
+	text-decoration: none;
+	cursor: pointer;
+	color: inherit;
+
+	&:hover {
+		text-decoration: none;
+		// font-size: 1.02em;
+		transition: all 0.2s;
+		// transform: scale(1.02);
+	}
+}
+
+// .editor-container {
+// 	margin-bottom: 0.5rem;
+
+// 	* {
+// 		max-width: 100%;
+// 	}
+// }
+
+// .editor-body {
+// 	p {
+// 		margin-bottom: 0.25rem;
+// 	}
+
+// 	& > p:last-child {
+// 		margin-bottom: 0;
+// 	}
+
+// 	* {
+// 		word-wrap: break-word;
+// 		word-break: break-word;
+// 		overflow-wrap: break-word;
+// 	}
+// }
+
+
+
+
+// @each $key, $val in $spacers {
+// 	@each $bp, $width in $grid-breakpoints {
+// 		$infix: breakpoint-infix($bp, $grid-breakpoints);
+
+// 		body[data-no-gap='true'] .gap#{$infix}-#{$key} {
+// 			@media (min-width: $width) {
+// 				gap: 0 !important;
+
+// 				& > *:not(:only-child) {
+// 					margin: calc(#{$val} * 0.25);
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+
+

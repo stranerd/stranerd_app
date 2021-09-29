@@ -1,7 +1,7 @@
 <template>
 	<form @submit.prevent="submitComment">
 		<div class="form-group">
-			<div class="d-flex align-items-center gap-0-5 gap-md-1">
+			<div class="flex align-items-center gap-0-5 gap-md-1">
 				<Avatar :size="35" :src="isLoggedIn ? user.avatar : null" />
 				<input
 					v-model="factory.body"

@@ -58,7 +58,7 @@
 						@click="show = !show"
 					>
 						<Avatar :size="36" :src="user.avatar" />
-						<span class="d-flex gap-0-5 align-items-center">
+						<span class="flex gap-0-5 align-items-center">
 							<DynamicText :truncate="true" class="username">
 								{{ user.fullName }}
 							</DynamicText>

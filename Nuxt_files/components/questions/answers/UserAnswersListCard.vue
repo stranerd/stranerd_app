@@ -1,11 +1,11 @@
 <template>
-	<div :id="answer.id" class="d-flex flex-column gap-0-5 py-1 border-bottom border-line">
+	<div :id="answer.id" class="flex flex-col gap-0-5 py-1 border-bottom border-line">
 		<NuxtLink :to="`/questions/${answer.questionId}#${answer.id}`" class="text-18">
 			<DynamicText>
 				{{ answer.trimmedTitle }}
 			</DynamicText>
 		</NuxtLink>
-		<div class="d-flex align-items-center gap-0-5">
+		<div class="flex align-items-center gap-0-5">
 			<DynamicText class="me-auto">
 				Posted {{ formatTime(answer.createdAt) }}
 			</DynamicText>

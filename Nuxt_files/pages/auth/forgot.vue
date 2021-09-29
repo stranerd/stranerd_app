@@ -1,6 +1,6 @@
 <template>
-	<div class="gap-1 gap-md-2 d-flex flex-column">
-		<form class="gap-1 gap-md-2 d-flex flex-column" @submit.prevent="sendResetEmail">
+	<div class="gap-1 gap-md-2 flex flex-col">
+		<form class="gap-1 gap-md-2 flex flex-col" @submit.prevent="sendResetEmail">
 			<Heading class="text-center" variant="1">
 				Forgot Your Password?
 			</Heading>
@@ -28,7 +28,7 @@
 			<DisplayError :error="error" />
 			<PageLoading v-if="loading" />
 		</form>
-		<div class="d-flex align-items-center justify-content-center gap-0-25">
+		<div class="flex align-items-center justify-content-center gap-0-25">
 			<span>Return to</span>
 			<NuxtLink class="linkText" to="/auth/signin">
 				Sign In

@@ -3,7 +3,7 @@
 		<h1 class="text-dark mb-1">
 			Terms Of Service
 		</h1>
-		<p>Last updated on <span class="fw-bold">August 3rd, 2021</span></p>
+		<p>Last updated on <span class="font-bold">August 3rd, 2021</span></p>
 
 		<p>
 			Welcome to Stranerd, operated by Stranerd LLC, located in Delaware, United States of America. By using the
@@ -23,7 +23,7 @@
 			GOVERNS HOW DISPUTES WILL BE RESOLVED.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Electronic Agreement
 		</h5>
 		<p>
@@ -45,7 +45,7 @@
 			Privacy Policy.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Access and Retention
 		</h5>
 		<p>
@@ -56,7 +56,7 @@
 			records. To retain an electronic copy of this Agreement, you may save it into any word processing program.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Commercial Use of Service
 		</h5>
 		<p>
@@ -69,7 +69,7 @@
 			c. You agree to this Terms of Service on behalf of the Subscribing Entity. <br> <br>
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Illegal and/or unauthorized uses of the Websites
 		</h5>
 		<p>
@@ -87,7 +87,7 @@
 			sole discretion.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Account Security
 		</h5>
 		<p>
@@ -103,7 +103,7 @@
 			consider disabling your auto-login feature if you have it linked to your Stranerd account.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Your Use of the Websites
 		</h5>
 		<p>
@@ -184,7 +184,7 @@
 			and/or reporting offending users to the relevant authorities.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Representations and Warranties
 		</h5>
 		<p>
@@ -220,7 +220,7 @@
 			regulation.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Term
 		</h5>
 		<p>
@@ -239,7 +239,7 @@
 			this Agreement shall be deemed to survive such termination.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Modifications to Service
 		</h5>
 		<p>
@@ -248,7 +248,7 @@
 			third party for any modification, suspension or discontinuance of the Service.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Blocking of IP Addresses
 		</h5>
 		<p>
@@ -256,7 +256,7 @@
 			discretion to block Members from certain IP addresses from accessing the Websites.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Proprietary Rights
 		</h5>
 		<p>
@@ -276,7 +276,7 @@
 			party content providers.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Ownership of Your Content; Licenses.
 		</h5>
 		<p>
@@ -298,7 +298,7 @@
 			expressly granted in this section, all rights in Content are reserved to the relevant Uploader.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Information We Collect
 		</h5>
 		<p>
@@ -308,7 +308,7 @@
 			whether you want to combine such information or not.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Restrictions on Use of Materials
 		</h5>
 		<p>
@@ -327,7 +327,7 @@
 			strictly prohibited unless you receive our prior written consent.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Copyright Policy
 		</h5>
 		<p>
@@ -364,7 +364,7 @@
 			further submissions
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Information We Collect
 		</h5>
 		<p>
@@ -374,7 +374,7 @@
 			whether you want to combine such information or not.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Liability for Content:
 		</h5>
 		<p>
@@ -402,7 +402,7 @@
 			against Stranerd or any of its subsidiaries, affiliates, successors, assigns, employees, agents, directors,
 			officers or shareholders.
 		</p>
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Repeat Infringers
 		</h5>
 		<p>
@@ -424,7 +424,7 @@
 			.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Limitation of Liability
 		</h5>
 		<p>
@@ -465,7 +465,7 @@
 			.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Indemnity by You
 		</h5>
 		<p>
@@ -487,7 +487,7 @@
 			.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Attorney Fees
 		</h5>
 		<p>
@@ -496,7 +496,7 @@
 			.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Parental or Guardian Permission
 		</h5>
 		<p>
@@ -504,14 +504,14 @@
 			NOT PERMITTED TO USE THE WEBSITES UNLESS A SUPERVISING PARENT OR GUARDIAN IS PRESENT.
 		</p>or not
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Privacy
 		</h5>
 		<p>
 			Use of the Websites and/or the Service is also governed by our Privacy Policy, located at [PRIVACY URL]
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Jurisdiction and Choice of Law
 		</h5>
 		<p>
@@ -528,7 +528,7 @@
 			affect the validity and enforceability of the remaining provisions.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Arbitration Provision/No Class Action
 		</h5>
 		<p>
@@ -549,7 +549,7 @@
 			in the courts of the State of Delaware, County of Middletown.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			No Third Party Beneficiaries
 		</h5>
 		<p>
@@ -558,7 +558,7 @@
 			t.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Availability Outside the U.S
 		</h5>
 		<p>
@@ -570,14 +570,14 @@
 			sst.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Entire Agreement
 		</h5>
 		<p>
 			This Agreement contains the entire agreement between you and Stranerd regarding the use of the Websites
 			and/or the Service.
 		</p>
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Severability; Waiver
 		</h5>
 		<p>
@@ -589,7 +589,7 @@
 			to enforce such term at any point in the future.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Headings
 		</h5>
 		<p>
@@ -599,7 +599,7 @@
 			.
 		</p>
 
-		<h3 class="fw-bold">
+		<h3 class="font-bold">
 			Tutor Terms of Service
 		</h3>
 		<p>
@@ -619,7 +619,7 @@
 			compensation where due, also specified by Stranerd. <br>
 		</p>
 
-		<h3 class="fw-bold">
+		<h3 class="font-bold">
 			Entire Agreement
 		</h3>
 
@@ -635,7 +635,7 @@
 			relationship with Stranerd.
 		</p>
 
-		<h3 class="fw-bold">
+		<h3 class="font-bold">
 			In summary:
 		</h3>
 		<p>

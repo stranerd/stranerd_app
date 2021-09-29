@@ -1,27 +1,27 @@
 <template>
 	<div :id="answer.id" class="answer">
-		<div class="border-bottom-line answer-content d-flex align-items-center gap-0-5">
+		<div class="border-bottom-line answer-content flex align-items-center gap-0-5">
 			<NuxtLink :to="`/users/${answer.userId}`">
 				<Avatar :size="40" :src="answer.avatar" />
 			</NuxtLink>
-			<NuxtLink :to="`/users/${answer.userId}`" class="d-block fw-bold text-dark text-wrap">
+			<NuxtLink :to="`/users/${answer.userId}`" class="d-block font-bold text-dark text-wrap">
 				<BodyText class="text-dark" variant="large">
 					<DynamicText>{{ answer.userName }}</DynamicText>
 				</BodyText>
 			</NuxtLink>
 		</div>
-		<div class="answer-content d-flex flex-column gap-1">
+		<div class="answer-content flex flex-col gap-1">
 			<BodyText class="text-dark" variant="large">
 				<DynamicText>{{ answer.title || 'N/A' }}</DynamicText>
 			</BodyText>
-			<div class="d-flex gap-1 gap-md-2 align-items-center text-primary fw-bold flex-row flex-wrap">
-				<span class="d-flex align-items-center gap-0-25 me-auto" @click="showExplanation = !showExplanation">
+			<div class="flex gap-1 gap-md-2 align-items-center text-primary font-bold flex-row flex-wrap">
+				<span class="flex align-items-center gap-0-25 me-auto" @click="showExplanation = !showExplanation">
 					<span>Explanation</span>
 					<i :class="showExplanation ? 'fa-angle-up' : 'fa-angle-down'" class="fas" />
 				</span>
 				<span
 					v-if="answer.best"
-					class="d-flex align-items-center gap-0-25 text-success"
+					class="flex align-items-center gap-0-25 text-success"
 					@click.prevent="markBestAnswer"
 				>
 					<span>Best answer</span>
@@ -29,7 +29,7 @@
 				</span>
 				<a
 					v-if="answer.commentsCount"
-					class="d-flex align-items-center gap-0-25"
+					class="flex align-items-center gap-0-25"
 					@click.prevent="showComments = !showComments"
 				>
 					<span>{{ showComments ? 'Hide' : 'Show' }} Comments</span>
@@ -37,14 +37,14 @@
 				</a>
 				<span
 					v-if="isLoggedIn && question && !question.isAnswered && !answer.best && question.userId === id"
-					class="d-flex align-items-center gap-0-25"
+					class="flex align-items-center gap-0-25"
 					@click.prevent="markBestAnswer"
 				>
 					<span>Mark as best</span>
 					<i class="fas fa-check-circle" />
 				</span>
-				<span class="d-flex gap-0-75 text-sub">
-					<span class="d-flex gap-0-25 align-items-center">
+				<span class="flex gap-0-75 text-sub">
+					<span class="flex gap-0-25 align-items-center">
 						<span>{{ answer.upVotes }}</span>
 						<i
 							:class="{'text-primary': answer.votes.find((v) => v.vote === 1 && v.userId === id)}"
@@ -52,7 +52,7 @@
 							@click="() => voteAnswer(true)"
 						/>
 					</span>
-					<span class="d-flex gap-0-25 align-items-center">
+					<span class="flex gap-0-25 align-items-center">
 						<span>{{ answer.downVotes }}</span>
 						<i
 							:class="{'text-primary': answer.votes.find((v) => v.vote === -1 && v.userId === id)}"
@@ -71,7 +71,7 @@
 				</span>
 				<span
 					v-if="showEditButton"
-					class="d-flex align-items-center gap-0-25 text-warning"
+					class="flex align-items-center gap-0-25 text-warning"
 					@click.prevent="openEditModal"
 				>
 					<span>Edit answer</span>
@@ -79,7 +79,7 @@
 				</span>
 				<span
 					v-if="showDeleteButton"
-					class="d-flex align-items-center gap-0-25 text-danger"
+					class="flex align-items-center gap-0-25 text-danger"
 					@click.prevent="deleteAnswer"
 				>
 					<span>Delete answer</span>

@@ -1,5 +1,5 @@
 <template>
-	<div class="d-flex py-0-5 gap-1 align-items-center position-relative bg-primary text-white">
+	<div class="flex py-0-5 gap-1 align-items-center position-relative bg-primary text-white">
 		<NuxtLink to="/sessions">
 			<i class="fas fa-arrow-left" />
 		</NuxtLink>

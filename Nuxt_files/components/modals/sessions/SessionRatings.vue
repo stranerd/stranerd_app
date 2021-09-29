@@ -13,7 +13,7 @@
 		<div class="form-group my-1">
 			<textarea v-model="review" class="form-control" placeholder="Please leave a review ..." rows="5" />
 		</div>
-		<div class="d-flex justify-content-end my-1">
+		<div class="flex justify-content-end my-1">
 			<button class="btn btn-dark" @click="rateSession">
 				Submit
 			</button>

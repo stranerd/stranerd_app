@@ -3,7 +3,7 @@
 		<h1 class="text-primary mb-1">
 			About Us
 		</h1>
-		<p>Last updated on <span class="fw-bold">August 12, 2021</span></p>
+		<p>Last updated on <span class="font-bold">August 12, 2021</span></p>
 	</div>
 </template>
 

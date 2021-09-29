@@ -12,7 +12,16 @@ module.exports = {
 			sub: '#d7e2ec',
 			dark: '#132740',
 			footerDark: '#191c29',
+			white: '#fff',
+			black: '#000',
     
+		},
+		screens: {
+			'sm': '640px',
+			'md': '768px',
+			'lg': '1024px',
+			'xl': '1280px',
+			'2xl': '1536px',
 		},
 		extend: {},
 	},

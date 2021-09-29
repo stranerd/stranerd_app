@@ -41,11 +41,11 @@
 				placeholder="Example: Algebra, quadratic-equation, linear-equation"
 				type="text"
 			>
-			<p class="my-0-5 d-flex gap-0-5 flex-wrap">
+			<p class="my-0-5 flex gap-0-5 flex-wrap">
 				<span
 					v-for="qTag in factory.tags"
 					:key="qTag"
-					class="p-0-5 d-flex gap-0-5 cursor-pointer btn-dark rounded-3"
+					class="p-0-5 flex gap-0-5 cursor-pointer btn-dark rounded-3"
 					@click="removeTag(qTag)"
 				>
 					<DynamicText class="text-white">
@@ -79,7 +79,7 @@
 			</DynamicText>
 			<div class="text-end mt-0-5">
 				<span>Out of coins?&nbsp;</span>
-				<a class="fw-bold text-decoration-underline" @click="openBuyCoins">Buy more coins</a>
+				<a class="font-bold text-decoration-underline" @click="openBuyCoins">Buy more coins</a>
 			</div>
 		</div>
 

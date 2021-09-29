@@ -3,7 +3,7 @@
 		<Heading class="color-dark text-center mb-1" no-grow variant="2">
 			Popular Tags
 		</Heading>
-		<div class="d-flex flex-wrap gap-0-5">
+		<div class="flex flex-wrap gap-0-5">
 			<TagListCard v-for="tag in tags" :key="tag.hash" :tag="tag" class="bg-white" />
 		</div>
 		<PageLoading v-if="loading" />

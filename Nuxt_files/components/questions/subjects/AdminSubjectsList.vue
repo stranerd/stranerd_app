@@ -1,5 +1,5 @@
 <template>
-	<div class="d-flex flex-column gap-1">
+	<div class="flex flex-col gap-1">
 		<SubjectCard v-for="subject in subjects" :key="subject.hash" :subject="subject" />
 		<DisplayWarning v-if="!loading && !error && subjects.length === 0" message="No subjects found" />
 		<PageLoading v-if="loading" />

@@ -1,5 +1,5 @@
 <template>
-	<div class="flex-grow-1 d-flex gap-0-25">
+	<div class="flex-grow-1 flex gap-0-25">
 		<ContactList class="contact-list" />
 		<div class="contact-messages">
 			<span class="lead p-0-5 rounded-3 bg-line">Select a contact to message</span>

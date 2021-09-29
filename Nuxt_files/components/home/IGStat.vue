@@ -22,7 +22,7 @@
 								{{ comments[currentIndex].author }}
 							</div>
 						</div>
-						<div class="d-flex justify-content-center align-items-center mt-1">
+						<div class="flex justify-content-center align-items-center mt-1">
 							<a class="commentIcons" to="#" @click.prevent="goToPrev">
 								<i class="fas fa-chevron-left" />
 							</a>

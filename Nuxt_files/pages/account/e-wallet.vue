@@ -1,5 +1,5 @@
 <template>
-	<div class="d-flex flex-column gap-3">
+	<div class="flex flex-col gap-3">
 		<UserCreditBalanceCard :user="user" />
 		<UserTransactionList :user-id="id" />
 	</div>

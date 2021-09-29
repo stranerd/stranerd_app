@@ -1,13 +1,13 @@
 <template>
 	<form @submit.prevent="submit">
 		<p>What is wrong with this answer?</p>
-		<div class="d-flex flex-column gap-0-5 mb-1">
-			<span v-for="message in AnswerMessages" :key="message.id" class="d-flex gap-0-5 align-items-center fw-bold">
+		<div class="flex flex-col gap-0-5 mb-1">
+			<span v-for="message in AnswerMessages" :key="message.id" class="flex gap-0-5 align-items-center font-bold">
 				<input v-model="factory.message" :value="message.body" name="message" type="radio">
 				<DynamicText>It {{ message.body }}</DynamicText>
 			</span>
 		</div>
-		<button :disabled="loading || !factory.valid" class="btn btn-primary btn-lg px-2 fw-bold" type="submit">
+		<button :disabled="loading || !factory.valid" class="btn btn-primary btn-lg px-2 font-bold" type="submit">
 			<PageLoading v-if="loading" />
 			<span>Report</span>
 		</button>

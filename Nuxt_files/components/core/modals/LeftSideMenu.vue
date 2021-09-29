@@ -15,7 +15,7 @@
 				/>
 			</div>
 		</div>
-		<div class="d-flex flex-column flex-grow-1">
+		<div class="flex flex-col flex-grow-1">
 			<slot />
 		</div>
 	</SideMenu>

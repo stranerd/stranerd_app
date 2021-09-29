@@ -1,5 +1,5 @@
 <template>
-	<div class="position-relative d-flex">
+	<div class="position-relative flex">
 		<div v-if="icon" class="bg-primary filter">
 			<Icon
 				class-name="text-white"

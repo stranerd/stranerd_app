@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Information We Collect
 		</h5>
 		<p>
@@ -16,7 +16,7 @@
 		</p>
 
 		<div>
-			<h6 class="ms-1 fw-bold">
+			<h6 class="ms-1 font-bold">
 				Unique Device ID
 			</h6>
 			<p>
@@ -56,7 +56,7 @@
 		</div>
 
 		<div>
-			<h6 class="ms-1 fw-bold">
+			<h6 class="ms-1 font-bold">
 				GPS Location
 			</h6>
 			<p>
@@ -73,7 +73,7 @@
 			</p>
 		</div>
 		<div>
-			<h6 class="ms-1 fw-bold">
+			<h6 class="ms-1 font-bold">
 				Log Information & Activities
 			</h6>
 			<p>
@@ -90,7 +90,7 @@
 			</p>
 		</div>
 		<div>
-			<h6 class="ms-1 fw-bold">
+			<h6 class="ms-1 font-bold">
 				Cookies
 			</h6>
 			<p>
@@ -125,7 +125,7 @@
 			</p>
 		</div>
 		<div>
-			<h6 class="ms-1 fw-bold">
+			<h6 class="ms-1 font-bold">
 				Analytics and Conversion Tracking
 			</h6>
 			<p>
@@ -173,7 +173,7 @@
 			</p>
 		</div>
 		<div>
-			<h6 class="ms-1 fw-bold">
+			<h6 class="ms-1 font-bold">
 				Automatically Collected Information
 			</h6>
 			<p>
@@ -189,7 +189,7 @@
 			</p>
 		</div>
 		<div>
-			<h6 class="ms-1 fw-bold">
+			<h6 class="ms-1 font-bold">
 				Your Disclosures In Blogs And Other Social Media
 			</h6>
 			<p>

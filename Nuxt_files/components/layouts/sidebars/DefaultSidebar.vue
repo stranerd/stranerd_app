@@ -1,12 +1,12 @@
 <template>
-	<aside class="d-flex flex-column gap-1">
-		<div v-if="isLoggedIn" class="d-flex align-items-center mx-1-5 d-block d-sm-none">
+	<aside class="flex flex-col gap-1">
+		<div v-if="isLoggedIn" class="flex align-items-center mx-1-5 d-block d-sm-none">
 			<Avatar :size="50" :src="user.avatar" />
-			<div class="d-flex flex-column ms-1 gap-0-5">
-				<DynamicText :truncate="true" class="fw-bold text-sub">
+			<div class="flex flex-col ms-1 gap-0-5">
+				<DynamicText :truncate="true" class="font-bold text-sub">
 					{{ user.firstName }}
 				</DynamicText>
-				<NuxtLink class="fw-bold text-primary" to="/account/">
+				<NuxtLink class="font-bold text-primary" to="/account/">
 					Go to Profile
 				</NuxtLink>
 			</div>
@@ -76,7 +76,7 @@
 			</div>
 		</div>
 		<div class="sidebar-links px-1-5 gap-1 d-inline d-sm-none fixed ">
-			<div v-if="isLoggedIn" class="text-primary fw-bold" @click="buy">
+			<div v-if="isLoggedIn" class="text-primary font-bold" @click="buy">
 				<span>Buy Coins</span>
 			</div>
 		</div>

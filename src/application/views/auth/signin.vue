@@ -1,6 +1,6 @@
 <template>
 	<div class="gap-1 gap-md-2 flex flex-col">
-		<form class="gap-1 gap-md-2 d-flex flex-column" @submit.prevent="signin">
+		<form class="gap-1 gap-md-2 flex flex-col" @submit.prevent="signin">
 			<Heading class="text-center" variant="1">
 				Sign In
 			</Heading>
@@ -8,7 +8,7 @@
 				<input
 					id="email"
 					autocomplete="email"
-					class="form-control"
+					class="form-control text-sub p-4 rounded-md border border-sub outline-none"
 					name="email"
 					placeholder="Email"
 					required
@@ -22,7 +22,7 @@
 				<input
 					id="password"
 					autocomplete="password"
-					class="form-control"
+					class="form-control text-sub p-4 rounded-md border border-sub outline-none"
 					name="password"
 					placeholder="Password"
 					required
@@ -32,25 +32,25 @@
 					{{ factory.errors.password }}
 				</DynamicText> -->
 				<div class="text-end mt-1">
-					<RouterLink class="linkText text-decoration-none" to="/auth/forgot">
+					<RouterLink class="text-primary font-bold underline text-decoration-none" to="/auth/forgot">
 						Forgot Password
 					</RouterLink>
 				</div>
 			</div>
-			<button  class="btn btn-lg btn-custom py-1" type="submit">
+			<button  class="btn text-base text-white bg-primary border-2 rounded-md font-bold py-4" type="submit">
 				Sign In
 			</button>
 		
 		</form>
-		<div class="d-flex gap-1 align-items-center">
+		<div class="flex gap-1 align-items-center">
 			<div class="flex-grow-1 border-bottom border-line" style="height: 2px;" />
 			<span>or sign in with</span>
 			<div class="flex-grow-1 border-bottom border-line" style="height: 2px;" />
 		</div>
 		<AuthProviders />
-		<div class="d-flex align-items-center justify-content-center gap-0-25">
+		<div class="flex align-items-center justify-content-center gap-0-25">
 			<span>Not a member yet?</span>
-			<RouterLink class="linkText" to="/auth/signup">
+			<RouterLink class="text-primary font-bold underline" to="/auth/signup">
 				Sign Up
 			</RouterLink>
 		</div>
@@ -80,3 +80,4 @@ export default defineComponent({
 	head: {}
 })
 </script>
+

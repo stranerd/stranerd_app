@@ -1,9 +1,9 @@
 <template>
 	<div v-if="user">
 		<div
-			class="d-flex flex-column flex-md-row d-lg-none justify-content-center align-items-center gap-1-5 px-1 py-1-5"
+			class="flex flex-col flex-md-row d-lg-none justify-content-center align-items-center gap-1-5 px-1 py-1-5"
 		>
-			<div class="col-md-6 d-flex flex-column gap-1 align-items-center">
+			<div class="col-md-6 flex flex-col gap-1 align-items-center">
 				<Heading class="color-dark" no-grow variant="2">
 					<DynamicText>
 						{{ user.id === id ? 'My Rank' : user.firstName + '\'s Badge' }}
@@ -12,7 +12,7 @@
 				<img :src="user.rankImage" alt="" class="img-rank">
 			</div>
 			<div class="border border-line align-self-stretch w-75 mx-auto" style="border-width: 1px !important;" />
-			<div class="col-md-6 d-flex flex-column gap-1 align-items-center">
+			<div class="col-md-6 flex flex-col gap-1 align-items-center">
 				<Heading class="color-dark" no-grow variant="2">
 					<DynamicText>
 						{{ user.id === id ? 'My' : user.firstName + '\'s' }} Nerd Score
@@ -27,14 +27,14 @@
 				<span v-else class="score"><DynamicText>{{ user.formattedScore }}</DynamicText></span>
 			</div>
 		</div>
-		<div class="d-none d-lg-flex flex-column gap-2-25">
+		<div class="d-none d-lg-flex flex-col gap-2-25">
 			<template v-if="user.id === id">
 				<ProfileHeadCard :user="user" class="balance" />
-				<div class="d-flex flex-column gap-1 ranking">
+				<div class="flex flex-col gap-1 ranking">
 					<Heading class="text-center color-dark" no-grow varaint="2">
 						Ranking Up
 					</Heading>
-					<div class="d-flex gap-1 align-items-center text-dark">
+					<div class="flex gap-1 align-items-center text-dark">
 						<img :src="user.rankImage" alt="" class="img-rank-2">
 						<ProgressBar :current="user.rankProgress" :primary="true" />
 						<img
@@ -46,8 +46,8 @@
 					</div>
 				</div>
 			</template>
-			<div v-else class="d-flex flex-column gap-1 ranking">
-				<div class="d-flex flex-column gap-1 align-items-center text-blue">
+			<div v-else class="flex flex-col gap-1 ranking">
+				<div class="flex flex-col gap-1 align-items-center text-blue">
 					<Heading class="color-dark" no-grow variant="2">
 						<DynamicText>
 							{{ user.id === id ? 'My Rank' : user.firstName + '\'s Badge' }}
@@ -56,7 +56,7 @@
 					<img :src="user.rankImage" alt="" class="img-rank">
 				</div>
 			</div>
-			<div class="d-flex flex-column gap-1 align-items-center ranking">
+			<div class="flex flex-col gap-1 align-items-center ranking">
 				<Heading class="color-dark" no-grow variant="2">
 					<DynamicText>
 						{{ user.id === id ? 'My' : user.firstName + '\'s' }} Nerd Score

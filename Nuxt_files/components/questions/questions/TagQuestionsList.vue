@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="d-flex">
+		<div class="flex">
 			<Tag :tag="tagId" class="tag mx-auto mx-lg-0" />
 		</div>
 		<QuestionCard v-for="question in questions" :key="question.hash" :question="question" />

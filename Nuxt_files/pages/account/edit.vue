@@ -1,5 +1,5 @@
 <template>
-	<div class="d-flex flex-column gap-1">
+	<div class="flex flex-col gap-1">
 		<h1 class="mb-0 mx-auto">
 			Edit Your Profile
 		</h1>

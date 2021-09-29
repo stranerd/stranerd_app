@@ -14,7 +14,7 @@
 				{{ factory.errors.message }}
 			</DynamicText>
 		</div>
-		<button :disabled="loading || !factory.valid" class="btn btn-dark fw-bold px-2 btn-lg" type="submit">
+		<button :disabled="loading || !factory.valid" class="btn btn-dark font-bold px-2 btn-lg" type="submit">
 			<PageLoading v-if="loading" />
 			<span>Report</span>
 		</button>

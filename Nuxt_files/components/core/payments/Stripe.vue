@@ -1,5 +1,5 @@
 <template>
-	<div v-if="isLoggedIn" class="p-1 d-flex flex-column">
+	<div v-if="isLoggedIn" class="p-1 flex flex-col">
 		<StripeElementCard
 			ref="cardRef"
 			:disabled="loading"

@@ -1,5 +1,5 @@
 <template>
-	<div class="d-flex flex-column align-items-center gap-0-5 p-2">
+	<div class="flex flex-col align-items-center gap-0-5 p-2">
 		<Heading class="color-dark" no-grow variant="2">
 			Balance
 		</Heading>

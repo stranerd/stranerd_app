@@ -86,7 +86,7 @@
 					</NuxtLink>
 				</div>
 				<div class="block">
-					<h5 class="sessionHead d-flex gap-0-25" style="font-size: 15px;">
+					<h5 class="sessionHead flex gap-0-25" style="font-size: 15px;">
 						<i class="fas fa-circle" />
 						<i class="fas fa-circle" />
 						<i class="fas fa-circle" />
@@ -123,9 +123,9 @@
 				</div>
 			</div>
 			<div
-				class="w-100 mt-3 d-flex flex-column gap-1 pt-3 class border-top border-white align-items-center justify-content-center"
+				class="w-100 mt-3 flex flex-col gap-1 pt-3 class border-top border-white align-items-center justify-content-center"
 			>
-				<div class="d-flex gap-2">
+				<div class="flex gap-2">
 					<a class="linkText" href="https://instagram.com/officialstranerd" target="_blank">
 						<img alt="" height="30" src="@app/assets/images/homepage/instagram_white.svg">
 					</a>

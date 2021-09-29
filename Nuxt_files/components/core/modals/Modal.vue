@@ -5,7 +5,7 @@
 		background-class="modal-background"
 		modal-class="modal-inner"
 	>
-		<div class="d-flex justify-content-end">
+		<div class="flex justify-content-end">
 			<a class="fas fa-times" style="font-size: 1.5rem;" @click.prevent="closeModal" />
 		</div>
 		<Heading class="my-1" variant="3">

@@ -1,10 +1,10 @@
 <template>
-	<div class="gap-1 gap-md-2 d-flex flex-column">
-		<form class="d-flex gap-1 gap-md-2 flex-column" @submit.prevent="signup">
+	<div class="gap-1 gap-md-2 flex flex-col">
+		<form class="flex gap-1 gap-md-2 flex-col" @submit.prevent="signup">
 			<Heading class="text-center" variant="1">
 				Sign Up
 			</Heading>
-			<div class="d-flex flex-column gap-1 gap-md-2 flex-md-row">
+			<div class="flex flex-col gap-1 gap-md-2 flex-md-row">
 				<div class="flew-grow-1 w-100">
 					<input
 						id="first"
@@ -87,13 +87,13 @@
 			<DisplayError :error="error" />
 			<PageLoading v-if="loading" />
 		</form>
-		<div class="d-flex gap-1 align-items-center">
+		<div class="flex gap-1 align-items-center">
 			<div class="flex-grow-1 border-bottom border-line" style="height: 2px;" />
 			<span>or sign up with</span>
 			<div class="flex-grow-1 border-bottom border-line" style="height: 2px;" />
 		</div>
 		<AuthProviders />
-		<div class="d-flex align-items-center justify-content-center gap-0-25">
+		<div class="flex align-items-center justify-content-center gap-0-25">
 			<span>Already have an account?</span>
 			<NuxtLink class="linkText" to="/auth/signin">
 				Sign in

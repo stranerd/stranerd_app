@@ -1,5 +1,5 @@
 <template>
-	<span class="w-100 mx-auto d-flex justify-content-center gap-2" style="max-width: 300px;">
+	<span class="w-100 mx-auto flex justify-content-center gap-2" style="max-width: 300px;">
 		<span class="balance">
 			<Coins :size="30" />
 			<span class="amount">

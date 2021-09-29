@@ -1,7 +1,7 @@
 <template>
-	<div v-if="user" class="d-flex flex-column gap-0-5 gap-lg-2-25 background">
-		<div class="d-flex flex-column gap-0-5 gap-md-1 box">
-			<div class="d-flex flex-column gap-0-5 gap-md-1-5 align-items-center text-blue">
+	<div v-if="user" class="flex flex-col gap-0-5 gap-lg-2-25 background">
+		<div class="flex flex-col gap-0-5 gap-md-1 box">
+			<div class="flex flex-col gap-0-5 gap-md-1-5 align-items-center text-blue">
 				<div class="position-relative">
 					<Avatar :size="96" :src="user.avatar" class="d-md-none" />
 					<Avatar :size="120" :src="user.avatar" class="d-none d-md-inline-block" />
@@ -10,14 +10,14 @@
 					</NuxtLink>
 				</div>
 
-				<div class="d-flex flex-column gap-0-25 align-items-center">
+				<div class="flex flex-col gap-0-25 align-items-center">
 					<h1 class="mb-0">
 						<DynamicText>{{ user.fullName }}</DynamicText>
 					</h1>
 					<NuxtLink class="text-primary text-18" to="/users/ranks">
 						<DynamicText>{{ user.rank.id }}</DynamicText>
 					</NuxtLink>
-					<div class="d-flex align-items-baseline gap-0-5">
+					<div class="flex align-items-baseline gap-0-5">
 						<ShowRatings :rating="user.averageRating" />
 						<DynamicText>
 							({{ formatNumber(user.ratingCount) }}
@@ -37,7 +37,7 @@
 					<img alt="" src="@app/assets/images/icons/profileSidebar/questions.svg">
 					<span>Questions</span>
 				</div>
-				<DynamicText class="count fw-bold">
+				<DynamicText class="count font-bold">
 					{{ formatNumber(user.meta.questions) }}
 				</DynamicText>
 			</div>
@@ -46,7 +46,7 @@
 					<img alt="" src="@app/assets/images/icons/profileSidebar/answers.svg">
 					<span>Answers</span>
 				</div>
-				<DynamicText class="count fw-bold">
+				<DynamicText class="count font-bold">
 					{{ formatNumber(user.meta.answers) }}
 				</DynamicText>
 			</div>
@@ -88,8 +88,8 @@
 			</div>
 		</div>
 
-		<div class="d-flex flex-column gap-0-5 text-dark box">
-			<h1 class="fw-bold">
+		<div class="flex flex-col gap-0-5 text-dark box">
+			<h1 class="font-bold">
 				About {{ user.id === id ? 'Me' : user.firstName }}
 			</h1>
 			<template v-if="user.id === id">
@@ -108,17 +108,17 @@
 			</DynamicText>
 			<div class="thin" />
 
-			<h1 class="fw-bold">
+			<h1 class="font-bold">
 				Strongest In
 			</h1>
 			<Subject v-if="user.strongestSubject" :subject-id="user.strongestSubject" />
 			<span v-else>N/A</span>
 			<div class="thin" />
 
-			<h1 class="fw-bold">
+			<h1 class="font-bold">
 				Also Good In
 			</h1>
-			<div v-if="user.weakerSubjects.length > 0" class="d-flex flex-wrap gap-0-25">
+			<div v-if="user.weakerSubjects.length > 0" class="flex flex-wrap gap-0-25">
 				<span v-for="(subject, index) in user.weakerSubjects" :key="subject.id">
 					<Subject :subject-id="subject" />
 					<span v-if="index < user.weakerSubjects.length - 1">,&nbsp;</span>
@@ -127,10 +127,10 @@
 			<span v-else>N/A</span>
 			<div class="thin" />
 
-			<h1 class="fw-bold">
+			<h1 class="font-bold">
 				Frequent Tags
 			</h1>
-			<div v-if="user.tags.length > 0" class="d-flex flex-wrap gap-0-5">
+			<div v-if="user.tags.length > 0" class="flex flex-wrap gap-0-5">
 				<Tag v-for="tag in user.tags" :key="tag.id" :tag="tag.id" />
 			</div>
 			<span v-else>N/A</span>

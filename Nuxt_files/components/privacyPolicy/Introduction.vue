@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Introduction
 		</h5>
 		<p>
@@ -22,7 +22,7 @@
 			Please take your time to go through this policy and feel free to contact us if you have any questions.
 			Key aspects of our privacy practices described in this Privacy Policy include the following explanations:
 		</p>
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Information You Provide
 		</h5>
 		<p>

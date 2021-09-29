@@ -1,12 +1,12 @@
 <template>
-	<div class="d-flex flex-column gap-1 gap-md-2">
-		<!-- <GoogleLogin
+	<div class="flex flex-col gap-1 gap-md-2">
+		<GoogleLogin
 		
 			class="btn btn-auth"
 		>
 			<img alt="" src="../../assets/images/icons/google.svg">
 			<span>Google</span>
-		</GoogleLogin> -->
+		</GoogleLogin>
 		<!-- <DisplayError :error="googleError" />
 		<PageLoading v-if="googleLoading" /> -->
 	</div>
@@ -18,19 +18,19 @@ import { defineComponent } from 'vue'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import GoogleLogin from 'vue-google-login'
-// import { googleClientId } from '@utils/environment'
+import { googleClientId } from '@utils/environment'
 
 export default defineComponent({
 	components: {
 		GoogleLogin
 	},
-	// setup () {
-	// 	const { loading: googleLoading, signin: googleSignin, error: googleError, setError } = useGoogleSignin()
-	// 	const googleParams = { client_id: googleClientId }
-	// 	const onFailure = async (_: any) => await setError('Error signing in with google')
-	// 	const onSuccess = async (data: any) => await googleSignin(data.getAuthResponse().id_token)
-	// 	return { googleError, googleLoading, googleSignin, onSuccess, onFailure, googleParams }
-	// }
+	setup () {
+		// const { loading: googleLoading, signin: googleSignin, error: googleError, setError } = useGoogleSignin()
+		// const googleParams = { client_id: googleClientId }
+		// const onFailure = async (_: any) => await setError('Error signing in with google')
+		// const onSuccess = async (data: any) => await googleSignin(data.getAuthResponse().id_token)
+		// return { googleError, googleLoading, googleSignin, onSuccess, onFailure, googleParams }
+	}
 })
 </script>
 

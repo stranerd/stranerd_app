@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<form class="gap-1 d-flex px-1">
+		<form class="gap-1 flex px-1">
 			<div class="search-container gap-0-25">
 				<img alt="" class="sub-icons" src="@app/assets/images/icons/search.svg">
 				<input
@@ -10,7 +10,7 @@
 				>
 			</div>
 		</form>
-		<div v-if="searchTerm" class="d-flex flex-column results p-1-5 gap-1-5 mt-0-5">
+		<div v-if="searchTerm" class="flex flex-col results p-1-5 gap-1-5 mt-0-5">
 			<div v-if="questionsResult.length > 0">
 				<Heading variant="2">
 					Questions
@@ -43,7 +43,7 @@
 					Users
 				</Heading>
 				<div v-for="user in usersResult" :key="user.hash">
-					<NuxtLink :to="`/users/${user.id}`" class="d-flex align-items-center gap-0-5">
+					<NuxtLink :to="`/users/${user.id}`" class="flex align-items-center gap-0-5">
 						<Avatar :size="45" :src="user.avatar" />
 						<DynamicText :truncate="true">
 							{{ user.fullName }}

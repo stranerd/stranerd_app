@@ -1,5 +1,5 @@
 <template>
-	<div class="flex-grow-1 d-flex gap-0-25">
+	<div class="flex-grow-1 flex gap-0-25">
 		<ContactList class="contact-list" />
 		<ContactListMessages :user-id="userId" class="contact-messages" />
 	</div>

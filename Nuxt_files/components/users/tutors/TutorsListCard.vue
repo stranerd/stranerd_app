@@ -1,9 +1,9 @@
 <template>
-	<div class="d-flex flex-wrap justify-content-between w-100">
+	<div class="flex flex-wrap justify-content-between w-100">
 		<div class="mb-2 mb-md-2-25 w-48">
-			<div class="flex-column nerd-body shadow gap-0-5 d-md-flex">
-				<div class="d-flex align-items-center nerd-card gap-1-5 custom-p">
-					<span class="d-flex justify-content-end w-30">
+			<div class="flex-col nerd-body shadow gap-0-5 d-md-flex">
+				<div class="flex align-items-center nerd-card gap-1-5 custom-p">
+					<span class="flex justify-content-end w-30">
 						<NuxtLink :to="`/users/${tutor.id}`" class="position-relative">
 							<Avatar :size="72" :src="tutor.avatar" />
 							<i
@@ -13,9 +13,9 @@
 							/>
 						</NuxtLink>
 					</span>
-					<div class="d-flex align-items-start align-self-end flex-column  gap-0-75 w-50">
+					<div class="flex align-items-start align-self-end flex-col  gap-0-75 w-50">
 						<NuxtLink :to="`/users/${tutor.id}`" class="name">
-							<DynamicText class="fw-bold">
+							<DynamicText class="font-bold">
 								{{ tutor.fullName }}
 							</DynamicText>
 						</NuxtLink>
@@ -25,13 +25,13 @@
 					</div>
 				</div>
 
-				<div class="nerd-card gap-1-5 custom-p d-flex">
+				<div class="nerd-card gap-1-5 custom-p flex">
 					<ShowRatings :rating="tutor.averageRating" class="w-30" />
 					<span class="session">
 						36 Sessions Hosted
 					</span>
 				</div>
-				<div class="nerd-card gap-1-5 custom-p d-flex">
+				<div class="nerd-card gap-1-5 custom-p flex">
 					<span class=" text-sub text-right w-30">
 						Teaches
 					</span>
@@ -39,15 +39,15 @@
 						Mathematics
 					</DynamicText>
 				</div>
-				<div class="nerd-card gap-1-5 custom-p d-flex">
+				<div class="nerd-card gap-1-5 custom-p flex">
 					<span class=" text-sub text-right w-30">
 						Takes
 					</span>
-					<DynamicText class="head-text fw-bold text-sub w-50">
+					<DynamicText class="head-text font-bold text-sub w-50">
 						High School
 					</DynamicText>
 				</div>
-				<div class="d-flex justify-content-center">
+				<div class="flex justify-content-center">
 					<button
 						class="btn btn-primary ms-auto rounded-pill mt-1"
 						@click="requestNewSession"

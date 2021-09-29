@@ -1,17 +1,17 @@
 <template>
 	<form @submit.prevent="submit">
 		<p>What is wrong with this question?</p>
-		<div class="d-flex flex-column gap-0-5 mb-1">
+		<div class="flex flex-col gap-0-5 mb-1">
 			<span
 				v-for="message in QuestionMessages"
 				:key="message.id"
-				class="d-flex gap-0-5 align-items-center fw-bold"
+				class="flex gap-0-5 align-items-center font-bold"
 			>
 				<input v-model="factory.message" :value="message.body" name="message" type="radio">
 				<DynamicText>It {{ message.body }}</DynamicText>
 			</span>
 		</div>
-		<button :disabled="loading || !factory.valid" class="btn btn-primary fw-bold px-2 btn-lg" type="submit">
+		<button :disabled="loading || !factory.valid" class="btn btn-primary font-bold px-2 btn-lg" type="submit">
 			<PageLoading v-if="loading" />
 			<span>Report</span>
 		</button>

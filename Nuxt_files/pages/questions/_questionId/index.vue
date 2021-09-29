@@ -1,7 +1,7 @@
 <template>
-	<div class="d-flex flex-column gap-2">
+	<div class="flex flex-col gap-2">
 		<PageLoading v-if="loading" />
-		<div class="d-flex flex-column">
+		<div class="flex flex-col">
 			<QuestionPageCard v-if="question" :key="question.hash" :question="question" />
 			<DisplayError v-else error="No such question found!" />
 			<DisplayError :error="error" />

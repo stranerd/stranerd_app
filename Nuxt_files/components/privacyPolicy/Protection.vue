@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Protection for Children
 		</h5>
 		<p>
@@ -14,7 +14,7 @@
 			we will use all reasonable efforts to delete such information from our database.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			User Communications
 		</h5>
 		<p>
@@ -24,7 +24,7 @@
 			services better for you.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Third Party sites
 		</h5>
 		<p>
@@ -45,7 +45,7 @@
 			Policies, should you choose to visit their sites.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Why Do We Need This Information?
 		</h5>
 		<p>
@@ -69,7 +69,7 @@
 			regular updates about our products and services or other information which you may have subscribed for. <br>
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			How Do We Use Your Information?
 		</h5>
 		<p>
@@ -108,7 +108,7 @@
 			you. <br> <br>
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			How We Protect Your Information/Information Sharing
 		</h5>
 		<p>
@@ -144,7 +144,7 @@
 			termination and criminal prosecution, if they fail to meet these obligations.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			You Control The Information We Collect
 		</h5>
 		<p>
@@ -157,7 +157,7 @@
 			we will use all reasonable efforts to delete such information from our database.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Accessing and Updating Your Information
 		</h5>
 		<p>
@@ -171,7 +171,7 @@
 			However, we may decline to process requests that are impractical or jeopardize the safety of others.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Enforcement / Changes to this Privacy Policy:
 		</h5>
 		<p>
@@ -192,7 +192,7 @@
 			notice (including, for certain services, email notification of Privacy Policy changes).
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Opt-Out Process
 		</h5>
 		<p>
@@ -206,7 +206,7 @@
 			reasonable amount of time.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Communications with Stranerd
 		</h5>
 		<p>
@@ -239,7 +239,7 @@
 			developing, manufacturing and marketing products and services using such information.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			No Rights of Third Parties
 		</h5>
 		<p>
@@ -247,7 +247,7 @@
 			any personal information relating to users of the Service
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Terms of use
 		</h5>
 		<p>
@@ -257,7 +257,7 @@
 			IF YOU DO NOT AGREE TO THE TERMS AND THIS PRIVACY POLICY YOU MAY NOT ACCESS OR OTHERWISE USE THE SERVICE.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Servers
 		</h5>
 		<p>
@@ -267,7 +267,7 @@
 			States may be subject to lawful requests by the courts or law enforcement authorities in the United States.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Governing Law
 		</h5>
 		<p>
@@ -277,14 +277,14 @@
 			Services.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Effective Date
 		</h5>
 		<p>
 			This Privacy Policy was last updated on 3rd August, 2021.
 		</p>
 
-		<h5 class="fw-bold">
+		<h5 class="font-bold">
 			Contact
 		</h5>
 		<p>

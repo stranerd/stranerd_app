@@ -4,8 +4,8 @@
 			<span class="text-center w-100 d-block">Withdraw money</span>
 		</template>
 
-		<div class="d-flex flex-column">
-			<div class="d-flex w-100">
+		<div class="flex flex-col">
+			<div class="flex w-100">
 				<div class="coin_tab">
 					Withdraw Bronze Coins
 				</div>
@@ -18,9 +18,9 @@
 				Enter withdrawal amount
 			</span>
 
-			<div class="d-flex w-100 align-items-center gap-1">
+			<div class="flex w-100 align-items-center gap-1">
 				<div class="convert_box">
-					<div class="d-flex align-items-center gap-1">
+					<div class="flex align-items-center gap-1">
 						<Coins :gold="true" :size="48" />
 						<span>
 							7500
@@ -38,8 +38,8 @@
 				</div>
 			</div>
 
-			<div class="d-flex w-100 justify-content-end  mt-1">
-				<div class="d-flex flex-column text-right gap-0-5 align-items-end">
+			<div class="flex w-100 justify-content-end  mt-1">
+				<div class="flex flex-col text-right gap-0-5 align-items-end">
 					<span>Stranerd Service Fee (20%) :   N 15,000</span>
 					<span class="text-right">You will receive:   N 60,000</span>
 				</div>
@@ -49,9 +49,9 @@
 				Enter your bank account details
 			</span>
 
-			<div class="d-flex w-100 align-items-center gap-1">
+			<div class="flex w-100 align-items-center gap-1">
 				<form action="" class="w-100">
-					<div class="form-group d-flex w-100 gap-1">
+					<div class="form-group flex w-100 gap-1">
 						<input
 							class="form-control w-50"
 							placeholder="Account Number"
@@ -63,7 +63,7 @@
 							type="text"
 						>
 					</div>
-					<div class="form-group d-flex w-100 gap-1 mt-1">
+					<div class="form-group flex w-100 gap-1 mt-1">
 						<input
 							class="form-control w-50"
 							placeholder="Bank"
@@ -76,7 +76,7 @@
 						>
 					</div>
 
-					<div class="form-group d-flex w-100 gap-1 mt-1">
+					<div class="form-group flex w-100 gap-1 mt-1">
 						<button class="sidebar-btn btn">
 							<span>Make Withdrawal</span>
 						</button>

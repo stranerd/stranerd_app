@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-tags border border-line rounded-3 mb-1">
-		<div class="d-flex flex-column flex-md-row gap-1 p-1 px-md-2">
-			<div class="d-flex flex-column gap-1 w-100 color-dark">
+		<div class="flex flex-col flex-md-row gap-1 p-1 px-md-2">
+			<div class="flex flex-col gap-1 w-100 color-dark">
 				<NuxtLink :to="`/questions/${report.reported.questionId}#${report.reportedId}`">
 					<div class="mb-1">
 						<DynamicText>It {{ report.reported.title }}</DynamicText>
@@ -19,7 +19,7 @@
 				<span>This answer <DynamicText>It {{ report.message }}</DynamicText>.</span>
 			</div>
 			<div
-				class="text-danger ms-md-auto d-flex flex-wrap flex-md-column gap-1 text-nowrap custom-border"
+				class="text-danger ms-md-auto flex flex-wrap flex-md-column gap-1 text-nowrap custom-border"
 				style="font-size: 14px;"
 			>
 				<a>Send warning</a>

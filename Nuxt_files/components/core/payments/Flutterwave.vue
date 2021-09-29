@@ -1,5 +1,5 @@
 <template>
-	<div class="d-flex flex-column">
+	<div class="flex flex-col">
 		<flutterwave-pay-button
 			:amount="getLocalAmount(amount ? amount : 0)"
 			:callback="makePaymentCallback"

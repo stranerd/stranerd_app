@@ -1,5 +1,5 @@
 <template>
-	<component :is="`h${variant}`" :class="noGrow ? 'no-grow' : 'grow'" class="fw-bold m-0">
+	<component :is="`h${variant}`" :class="noGrow ? 'no-grow' : 'grow'" class="font-bold m-0">
 		<slot />
 	</component>
 </template>

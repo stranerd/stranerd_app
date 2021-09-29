@@ -1,6 +1,6 @@
 <template>
-	<div class="d-flex flex-column">
-		<div v-if="isLoggedIn" class="d-flex flex-column align-items-center text-center gap-1 gap-1-5 box py-1">
+	<div class="flex flex-col">
+		<div v-if="isLoggedIn" class="flex flex-col align-items-center text-center gap-1 gap-1-5 box py-1">
 			<img class="w-100" src="@/application/assets/images/invite.svg">
 			<Heading class="text-primary" variant="1">
 				Invite A Friend
@@ -20,7 +20,7 @@
 					{{ link }}
 				</DynamicText>
 			</div>
-			<div class="d-flex gap-1 w-100">
+			<div class="flex gap-1 w-100">
 				<button
 					class="flex-grow-1 w-100 btn btn-primary rounded-3"
 					@click="copy"

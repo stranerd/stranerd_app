@@ -1,11 +1,11 @@
 <template>
-	<div :id="review.id" class="d-flex flex-column gap-0-5 gap-md-1 py-1 text-dark border-bottom border-line">
-		<div class="d-flex gap-0-5 gap-md-1 align-items-center">
+	<div :id="review.id" class="flex flex-col gap-0-5 gap-md-1 py-1 text-dark border-bottom border-line">
+		<div class="flex gap-0-5 gap-md-1 align-items-center">
 			<Avatar :size="36" :src="review.avatar" />
 			<DynamicText class="name">
 				{{ review.userBio.fullName }}
 			</DynamicText>
-			<span class="d-flex align-items-baseline gap-0-25 mx-auto">
+			<span class="flex align-items-baseline gap-0-25 mx-auto">
 				<i class="fas fa-star text-gold" style="font-size: 21px;" />
 				<DynamicText class="text-primary">{{ formatNumber(review.rating, 1) }}/5</DynamicText>
 			</span>

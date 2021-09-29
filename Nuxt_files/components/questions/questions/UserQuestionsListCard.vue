@@ -1,10 +1,10 @@
 <template>
-	<div :id="question.id" class="d-flex flex-column py-1 border-bottom border-line gap-1">
+	<div :id="question.id" class="flex flex-col py-1 border-bottom border-line gap-1">
 		<NuxtLink :to="`/questions/${question.id}`" class="text-18">
 			<DynamicText>{{ question.trimmedBody }}</DynamicText>
 		</NuxtLink>
-		<div class="d-flex align-items-center flex-row flex-wrap gap-1">
-			<div class="d-flex align-items-center flex-wrap gap-0-5 gap-md-1 me-auto tags">
+		<div class="flex align-items-center flex-row flex-wrap gap-1">
+			<div class="flex align-items-center flex-wrap gap-0-5 gap-md-1 me-auto tags">
 				<Tag v-for="tag in question.tags" :key="tag" :tag="tag" />
 			</div>
 			<img v-if="question.isAnswered" class="sub-icons" src="@app/assets/images/icons/profile-best-answers.svg">
@@ -15,8 +15,8 @@
 				Posted {{ formatTime(question.createdAt) }}
 			</DynamicText>
 			<div class="dot" />
-			<div class="d-flex align-items-center gap-1">
-				<span class="d-flex align-items-center gap-0-25">
+			<div class="flex align-items-center gap-1">
+				<span class="flex align-items-center gap-0-25">
 					<img alt="" class="sub-icons" src="@app/assets/images/icons/answers.svg">
 					<DynamicText>
 						{{
@@ -24,7 +24,7 @@
 						}} {{ pluralize(question.answers.length, 'answer', 'answers') }}
 					</DynamicText>
 				</span>
-				<span v-if="question.attachments" class="d-flex align-items-center gap-0-25">
+				<span v-if="question.attachments" class="flex align-items-center gap-0-25">
 					<i class="sub-icons fas fa-paperclip" />
 					<DynamicText>
 						{{

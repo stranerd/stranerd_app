@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-tags border border-line rounded-3 mb-1">
-		<div class="d-flex flex-column flex-md-row gap-1 p-1 px-md-2">
-			<div class="d-flex flex-column gap-1 w-100 color-dark">
+		<div class="flex flex-col flex-md-row gap-1 p-1 px-md-2">
+			<div class="flex flex-col gap-1 w-100 color-dark">
 				<NuxtLink :to="`/questions/${report.reportedId}`">
 					<div class="editor-body" v-html="report.reported.body" />
 				</NuxtLink>
@@ -15,7 +15,7 @@
 				<span>This question {{ report.message }}.</span>
 			</div>
 			<div
-				class="text-danger ms-md-auto d-flex flex-wrap flex-md-column gap-1 text-nowrap custom-border"
+				class="text-danger ms-md-auto flex flex-wrap flex-md-column gap-1 text-nowrap custom-border"
 				style="font-size: 14px;"
 			>
 				<a>Send warning</a>

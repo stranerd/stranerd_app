@@ -1,5 +1,5 @@
 <template>
-	<form class="d-flex flex-column gap-1-5" @submit.prevent="updateProfile">
+	<form class="flex flex-col gap-1-5" @submit.prevent="updateProfile">
 		<div class="mx-auto">
 			<div class="position-relative mx-auto">
 				<img
@@ -32,7 +32,7 @@
 				@change.prevent="catchFiles"
 			>
 		</div>
-		<div class="form-group d-flex flex-column flex-md-row gap-1">
+		<div class="form-group flex flex-col flex-md-row gap-1">
 			<div class="flex-grow-1 w-100">
 				<input
 					id="fName"
@@ -47,7 +47,7 @@
 				</DynamicText>
 			</div>
 		</div>
-		<div class="form-group d-flex flex-column">
+		<div class="form-group flex flex-col">
 			<div class="flex-grow-1 w-100">
 				<input
 					id="lName"
@@ -62,8 +62,8 @@
 				</DynamicText>
 			</div>
 		</div>
-		<div class="form-group w-100 justify-content-between d-flex align-items-center">
-			<span class="text-dark fw-bold">
+		<div class="form-group w-100 justify-content-between flex align-items-center">
+			<span class="text-dark font-bold">
 				What subject are you strongest in?
 			</span>
 			<SelectSubject
@@ -80,8 +80,8 @@
 			{{ factory.errors.strongestSubject }}
 		</DynamicText>
 
-		<div class="form-group w-100 justify-content-between d-flex align-items-center">
-			<span class="text-dark fw-bold">
+		<div class="form-group w-100 justify-content-between flex align-items-center">
+			<span class="text-dark font-bold">
 				What subject are you also good in?
 			</span>
 			<SelectSubject
@@ -94,11 +94,11 @@
 		<DynamicText v-if="factory.errors.weakerSubjects" class="small text-danger d-block">
 			{{ factory.errors.weakerSubjects }}
 		</DynamicText>
-		<div class="d-flex gap-0-5">
+		<div class="flex gap-0-5">
 			<span
 				v-for="subTag in factory.weakerSubjects"
 				:key="subTag"
-				class="p-0-5 d-flex gap-0-5 cursor-pointer btn-dark rounded-3"
+				class="p-0-5 flex gap-0-5 cursor-pointer btn-dark rounded-3"
 				@click="removeTag(subTag)"
 			>
 				<DynamicText class="text-white">
@@ -165,7 +165,7 @@
 				</DynamicText>
 			</div>
 		</template>
-		<div class="d-flex justify-content-between align-items-center gap-1">
+		<div class="flex justify-content-between align-items-center gap-1">
 			<button class="btn btn-dark w-50 mx-0" type="button" @click="cancel">
 				Cancel
 			</button>
