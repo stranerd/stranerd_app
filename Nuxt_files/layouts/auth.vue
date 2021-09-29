@@ -1,6 +1,6 @@
 <template>
 	<section class="layout-page">
-		<div class="flex py-1 py-md-1-25 py-lg-1-5 px-1 px-md-2 px-lg-3 align-items-center bg-primaryDark">
+		<div class="flex py-1 py-md-1-25 py-lg-1-5 px-1 px-md-2 px-lg-3 items-center bg-primaryDark">
 			<router-link class="logo" to="/">
 				<Logo />
 			</router-link>

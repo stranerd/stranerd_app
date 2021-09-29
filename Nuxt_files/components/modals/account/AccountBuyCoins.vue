@@ -8,7 +8,7 @@
 				</span>
 			</div>
 		</template>
-		<div class="flex flex-col flex-md-row align-items-center">
+		<div class="flex flex-col flex-md-row items-center">
 			<div class="flex flex-col gap-1 flex-grow-1 w-100 border-lg p-1">
 				<h5 class="headertext">
 					Bronze
@@ -16,7 +16,7 @@
 				<div
 					v-for="option in BRONZE_PRICES"
 					:key="option.amount"
-					class="flex align-items-center gap-1"
+					class="flex items-center gap-1"
 					style="font-size: 1.5rem;"
 				>
 					<img :src="option.src" alt="" width="48">
@@ -37,7 +37,7 @@
 				<div
 					v-for="option in GOLD_PRICES"
 					:key="option.amount"
-					class="flex align-items-center gap-1"
+					class="flex items-center gap-1"
 					style="font-size: 1.5rem;"
 				>
 					<img :src="option.src" alt="" width="48">

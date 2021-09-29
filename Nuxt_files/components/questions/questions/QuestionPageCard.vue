@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col gap-1 gap-lg-2 pb-1 border-bottom border-line">
-		<div class="question-head flex flex-row flex-wrap align-items-center">
-			<div class="flex align-items-center gap-0-5">
+		<div class="question-head flex flex-row flex-wrap items-center">
+			<div class="flex items-center gap-0-5">
 				<NuxtLink :to="`/users/${question.userId}`">
 					<Avatar :size="40" :src="question.avatar" class="d-md-none" />
 					<Avatar :size="50" :src="question.avatar" class="d-none d-md-inline" />
@@ -19,12 +19,12 @@
 				</div>
 			</div>
 
-			<div class="flex align-items-center ms-auto gap-0-5">
+			<div class="flex items-center ms-auto gap-0-5">
 				<template v-if="question.isAnswered">
 					<img alt="" class="sub-icons" src="@app/assets/images/icons/profile-best-answers.svg">
 				</template>
 				<template v-else-if="showAnswerButton">
-					<div class="flex align-items-center gap-0-25">
+					<div class="flex items-center gap-0-25">
 						<DynamicText>+{{ formatNumber(question.creditable) }}</DynamicText>
 						<Coins :size="28" />
 					</div>
@@ -47,16 +47,16 @@
 
 		<div class="question-body editor-body" v-html="question.body" />
 
-		<div class="flex align-items-center flex-row flex-wrap gap-1">
-			<div class="flex align-items-center flex-wrap gap-0-5 gap-md-1 me-auto tags">
+		<div class="flex items-center flex-row flex-wrap gap-1">
+			<div class="flex items-center flex-wrap gap-0-5 gap-md-1 me-auto tags">
 				<Tag v-for="tag in question.tags" :key="tag" :tag="tag" />
 			</div>
 			<DynamicText class="name">
 				Posted {{ formatTime(question.createdAt) }}
 			</DynamicText>
 			<div class="dot" />
-			<div class="flex align-items-center gap-1">
-				<span class="flex align-items-center gap-0-5">
+			<div class="flex items-center gap-1">
+				<span class="flex items-center gap-0-5">
 					<img alt="" class="sub-icons" src="@app/assets/images/icons/answers.svg">
 					<DynamicText>
 						{{

@@ -1,5 +1,5 @@
 <template>
-	<nav class="flex justify-content-center align-items-center" role="navigation">
+	<nav class="flex justify-center items-center" role="navigation">
 		<NuxtLink :to="`/users/${user.id}/questions`">
 			Questions
 		</NuxtLink>

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="flex flex-col align-items-center">
+		<div class="flex flex-col items-center">
 			<h1 class="text-primaryDark font-bold fs-32">
 				Access expert tutors in any subject
 			</h1>

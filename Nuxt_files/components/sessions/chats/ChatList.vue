@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col align-items-center py-0-5">
+	<div class="flex flex-col items-center py-0-5">
 		<span v-if="chats.length === 0" class="text-center my-auto bg-line p-1">
 			No messages found. Send a message now
 		</span>

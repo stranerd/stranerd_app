@@ -6,7 +6,7 @@
 			<span class="name text-primary">Schedule Manager</span>
 		</div>
 
-		<div class="scheduler shadow w-100 p-3 flex justify-content-between align-items-center">
+		<div class="scheduler shadow w-100 p-3 flex justify-content-between items-center">
 			<!-- <img src="" alt=""> -->
 			<Icon
 				class-name="text-primaryDark"
@@ -15,11 +15,11 @@
 			/>
 
 			<div class="flex gap-1">
-				<div class="flex flex-col justify-content-center align-items-center gap-1 date_tab bg-primary">
+				<div class="flex flex-col justify-center items-center gap-1 date_tab bg-primary">
 					<span class="text-white fs-8 font-bold">Mon</span>
 					<span class="font-bold text-white fs-7">9</span>
 				</div>
-				<div v-for="n in 5" :key="n" class="flex flex-col justify-content-center align-items-center gap-1 date_tab">
+				<div v-for="n in 5" :key="n" class="flex flex-col justify-center items-center gap-1 date_tab">
 					<span class="text-primary fs-8 font-bold">Tue</span>
 					<span class="font-bold text-primaryDark fs-7">10</span>
 				</div>

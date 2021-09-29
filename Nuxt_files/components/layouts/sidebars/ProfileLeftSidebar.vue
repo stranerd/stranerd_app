@@ -1,7 +1,7 @@
 <template>
 	<div v-if="user" class="flex flex-col gap-0-5 gap-lg-2-25 background">
 		<div class="flex flex-col gap-0-5 gap-md-1 box">
-			<div class="flex flex-col gap-0-5 gap-md-1-5 align-items-center text-blue">
+			<div class="flex flex-col gap-0-5 gap-md-1-5 items-center text-blue">
 				<div class="position-relative">
 					<Avatar :size="96" :src="user.avatar" class="d-md-none" />
 					<Avatar :size="120" :src="user.avatar" class="d-none d-md-inline-block" />
@@ -10,7 +10,7 @@
 					</NuxtLink>
 				</div>
 
-				<div class="flex flex-col gap-0-25 align-items-center">
+				<div class="flex flex-col gap-0-25 items-center">
 					<h1 class="mb-0">
 						<DynamicText>{{ user.fullName }}</DynamicText>
 					</h1>

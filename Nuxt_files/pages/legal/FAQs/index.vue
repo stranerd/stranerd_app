@@ -3,7 +3,7 @@
 		<h1 class="text-dark mb-1 text-center">
 			FAQs
 		</h1>
-		<div class="flex mw-100 justify-content-center ">
+		<div class="flex mw-100 justify-center ">
 			<div id="accordionFlushExample" class="border-tags border rounded mw-lg ">
 				<div v-for="(item, index) in faqs" :key="index" class="accordion-item">
 					<h2 id="flush-headingOne" class="accordion-header">

@@ -5,7 +5,7 @@
 			<span
 				v-for="message in QuestionMessages"
 				:key="message.id"
-				class="flex gap-0-5 align-items-center font-bold"
+				class="flex gap-0-5 items-center font-bold"
 			>
 				<input v-model="factory.message" :value="message.body" name="message" type="radio">
 				<DynamicText>It {{ message.body }}</DynamicText>

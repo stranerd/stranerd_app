@@ -5,7 +5,7 @@
 				{{ answer.trimmedTitle }}
 			</DynamicText>
 		</NuxtLink>
-		<div class="flex align-items-center gap-0-5">
+		<div class="flex items-center gap-0-5">
 			<DynamicText class="me-auto">
 				Posted {{ formatTime(answer.createdAt) }}
 			</DynamicText>

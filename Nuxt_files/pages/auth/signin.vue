@@ -45,13 +45,13 @@
 			<DisplayError :error="error" />
 			<PageLoading v-if="loading" />
 		</form>
-		<div class="flex gap-1 align-items-center">
+		<div class="flex gap-1 items-center">
 			<div class="flex-grow-1 border-bottom border-line" style="height: 2px;" />
 			<span>or sign in with</span>
 			<div class="flex-grow-1 border-bottom border-line" style="height: 2px;" />
 		</div>
 		<AuthProviders />
-		<div class="flex align-items-center justify-content-center gap-0-25">
+		<div class="flex items-center justify-center gap-0-25">
 			<span>Not a member yet?</span>
 			<NuxtLink class="linkText" to="/auth/signup">
 				Sign Up

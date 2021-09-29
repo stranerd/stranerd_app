@@ -43,7 +43,7 @@
 					Users
 				</Heading>
 				<div v-for="user in usersResult" :key="user.hash">
-					<NuxtLink :to="`/users/${user.id}`" class="flex align-items-center gap-0-5">
+					<NuxtLink :to="`/users/${user.id}`" class="flex items-center gap-0-5">
 						<Avatar :size="45" :src="user.avatar" />
 						<DynamicText :truncate="true">
 							{{ user.fullName }}

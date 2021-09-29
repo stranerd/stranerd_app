@@ -1,19 +1,19 @@
 <template>
-	<div class="flex flex-col gap-1 gap-md-2 align-items-center justify-content-center">
+	<div class="flex flex-col gap-1 gap-md-2 items-center justify-center">
 		<h4 class="headertext mb-0">
 			Available Balance
 		</h4>
 		<div
-			class="px-0-5 px-sm-1 py-3 p-md-3 boxStyle shadow flex col-12 col-md-10 gap-1 align-content-center justify-content-center"
+			class="px-0-5 px-sm-1 py-3 p-md-3 boxStyle shadow flex col-12 col-md-10 gap-1 align-content-center justify-center"
 		>
-			<div class="flex col-6 gap-2 align-items-center justify-content-center ">
+			<div class="flex col-6 gap-2 items-center justify-center ">
 				<Coins :size="45" />
 				<DynamicText class="largeText">
 					{{ formatNumber(user.account.coins.bronze) }}
 				</DynamicText>
 			</div>
 			<div class="border border-line" />
-			<div class="flex col-6 gap-2 align-items-center justify-content-center">
+			<div class="flex col-6 gap-2 items-center justify-center">
 				<DynamicText class="largeText">
 					{{ formatNumber(user.account.coins.gold) }}
 				</DynamicText>

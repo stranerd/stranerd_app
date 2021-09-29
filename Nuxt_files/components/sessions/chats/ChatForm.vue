@@ -1,5 +1,5 @@
 <template>
-	<form class="flex align-items-center py-1 gap-1 gap-md-2 bg-primary text-white" @submit.prevent="createTextChat">
+	<form class="flex items-center py-1 gap-1 gap-md-2 bg-primary text-white" @submit.prevent="createTextChat">
 		<input v-model="factory.content" class="form-control bg-white p-0-5" placeholder="Type a message here...">
 		<a class="fas fa-paperclip" @click.prevent="() => { $refs.mediaInput.value= ''; $refs.mediaInput.click() }" />
 		<a class="fas fa-paper-plane" @click.prevent="() => { factory.content && createTextChat() }" />

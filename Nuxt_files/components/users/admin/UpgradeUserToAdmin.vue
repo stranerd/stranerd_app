@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col gap-1">
-		<form class="flex flex-row align-items-center" @submit.prevent="getUsersByEmail">
+		<form class="flex flex-row items-center" @submit.prevent="getUsersByEmail">
 			<div class="flex-grow-1">
 				<input
 					id="email"
@@ -22,7 +22,7 @@
 			<div
 				v-for="user in users"
 				:key="user.hash"
-				class="flex flex-wrap justify-content-between gap-0-5 align-items-center"
+				class="flex flex-wrap justify-content-between gap-0-5 items-center"
 			>
 				<div>
 					<DynamicText :truncate="true" class="lead">

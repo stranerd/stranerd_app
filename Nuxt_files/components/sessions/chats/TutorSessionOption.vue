@@ -1,5 +1,5 @@
 <template>
-	<div class="flex justify-content-center bg-primary text-white">
+	<div class="flex justify-center bg-primary text-white">
 		<button class="btn text-white flex-grow-1 w-100 py-1" @click="acceptSession">
 			Accept
 		</button>

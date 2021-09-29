@@ -1,6 +1,6 @@
 <template>
 	<div :id="review.id" class="flex flex-col gap-0-5 gap-md-1 py-1 text-dark border-bottom border-line">
-		<div class="flex gap-0-5 gap-md-1 align-items-center">
+		<div class="flex gap-0-5 gap-md-1 items-center">
 			<Avatar :size="36" :src="review.avatar" />
 			<DynamicText class="name">
 				{{ review.userBio.fullName }}

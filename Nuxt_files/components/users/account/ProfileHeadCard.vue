@@ -1,10 +1,10 @@
 <template>
-	<div class="flex flex-col align-items-center gap-0-5 p-2">
+	<div class="flex flex-col items-center gap-0-5 p-2">
 		<Heading class="color-dark" no-grow variant="2">
 			Balance
 		</Heading>
 		<NuxtLink class="d-block w-92" to="/account/e-wallet">
-			<AccountCoinBalance :user="user" class="justify-content-center" />
+			<AccountCoinBalance :user="user" class="justify-center" />
 		</NuxtLink>
 	</div>
 </template>

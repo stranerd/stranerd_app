@@ -123,7 +123,7 @@
 				</div>
 			</div>
 			<div
-				class="w-100 mt-3 flex flex-col gap-1 pt-3 class border-top border-white align-items-center justify-content-center"
+				class="w-100 mt-3 flex flex-col gap-1 pt-3 class border-top border-white items-center justify-center"
 			>
 				<div class="flex gap-2">
 					<a class="linkText" href="https://instagram.com/officialstranerd" target="_blank">

@@ -2,7 +2,7 @@
 	<div class="flex flex-wrap justify-content-between w-100">
 		<div class="mb-2 mb-md-2-25 w-48">
 			<div class="flex-col nerd-body shadow gap-0-5 d-md-flex">
-				<div class="flex align-items-center nerd-card gap-1-5 custom-p">
+				<div class="flex items-center nerd-card gap-1-5 custom-p">
 					<span class="flex justify-content-end w-30">
 						<NuxtLink :to="`/users/${tutor.id}`" class="position-relative">
 							<Avatar :size="72" :src="tutor.avatar" />
@@ -47,7 +47,7 @@
 						High School
 					</DynamicText>
 				</div>
-				<div class="flex justify-content-center">
+				<div class="flex justify-center">
 					<button
 						class="btn btn-primary ms-auto rounded-pill mt-1"
 						@click="requestNewSession"

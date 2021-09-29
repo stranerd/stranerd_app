@@ -6,19 +6,45 @@ $md: 767px;
 $lg: 1280px;
 $xl: 1600px;
 
+$color-dark: #132740;
+$color-footer-dark: #191c29;
+$color-sub: #4d5c6f;
+$color-primary: #546dd2;
+$color-primary-dark: #374b99;
+$color-line: #d7e2ec;
+$color-tags: #f8f8ff;
+
+$color-white: #fefefe;
+$color-black: #111b25;
+$color-gold: #ffda20;
+$color-red: #dc3545;
+$color-green: #15e886;
+
+$body-color: $color-dark;
+$min-contrast-ratio: 4.5;
+$color-contrast-dark: $color-dark;
+$color-contrast-light: $color-white;
+
 * {
 	font-family: 'Nunito Sans', sans-serif !important;
 }
 
-.btn {
-	padding: 0.5rem 1rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-weight: 600;
-}
+:root {
+  /* Set the background of the entire app */
+  --ion-background-color: #ff3700;
 
+}
 body {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: $color-dark;
+    color: $color-dark;
+    background-color: #fff;
+    background-color: $color-white;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 	width: 100%;
 	max-width: vw(100);
 
@@ -50,7 +76,6 @@ h4, h5, h6 {
 }
 
 .btn {
-	padding: 0.5rem 1rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;

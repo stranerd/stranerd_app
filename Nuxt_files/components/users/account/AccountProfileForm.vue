@@ -62,7 +62,7 @@
 				</DynamicText>
 			</div>
 		</div>
-		<div class="form-group w-100 justify-content-between flex align-items-center">
+		<div class="form-group w-100 justify-content-between flex items-center">
 			<span class="text-dark font-bold">
 				What subject are you strongest in?
 			</span>
@@ -80,7 +80,7 @@
 			{{ factory.errors.strongestSubject }}
 		</DynamicText>
 
-		<div class="form-group w-100 justify-content-between flex align-items-center">
+		<div class="form-group w-100 justify-content-between flex items-center">
 			<span class="text-dark font-bold">
 				What subject are you also good in?
 			</span>
@@ -165,7 +165,7 @@
 				</DynamicText>
 			</div>
 		</template>
-		<div class="flex justify-content-between align-items-center gap-1">
+		<div class="flex justify-content-between items-center gap-1">
 			<button class="btn btn-dark w-50 mx-0" type="button" @click="cancel">
 				Cancel
 			</button>

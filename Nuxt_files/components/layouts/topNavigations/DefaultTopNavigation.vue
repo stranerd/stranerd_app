@@ -54,11 +54,11 @@
 
 					<div
 						v-if="isLoggedIn"
-						class="d-none d-lg-flex gap-0-25 gap-lg-0-5 align-items-center cursor-pointer"
+						class="d-none d-lg-flex gap-0-25 gap-lg-0-5 items-center cursor-pointer"
 						@click="show = !show"
 					>
 						<Avatar :size="36" :src="user.avatar" />
-						<span class="flex gap-0-5 align-items-center">
+						<span class="flex gap-0-5 items-center">
 							<DynamicText :truncate="true" class="username">
 								{{ user.fullName }}
 							</DynamicText>

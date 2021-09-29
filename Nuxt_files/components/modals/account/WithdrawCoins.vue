@@ -18,9 +18,9 @@
 				Enter withdrawal amount
 			</span>
 
-			<div class="flex w-100 align-items-center gap-1">
+			<div class="flex w-100 items-center gap-1">
 				<div class="convert_box">
-					<div class="flex align-items-center gap-1">
+					<div class="flex items-center gap-1">
 						<Coins :gold="true" :size="48" />
 						<span>
 							7500
@@ -49,7 +49,7 @@
 				Enter your bank account details
 			</span>
 
-			<div class="flex w-100 align-items-center gap-1">
+			<div class="flex w-100 items-center gap-1">
 				<form action="" class="w-100">
 					<div class="form-group flex w-100 gap-1">
 						<input

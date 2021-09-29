@@ -1,6 +1,6 @@
 <template>
 	<aside class="flex flex-col gap-1">
-		<div v-if="isLoggedIn" class="flex align-items-center mx-1-5 d-block d-sm-none">
+		<div v-if="isLoggedIn" class="flex items-center mx-1-5 d-block d-sm-none">
 			<Avatar :size="50" :src="user.avatar" />
 			<div class="flex flex-col ms-1 gap-0-5">
 				<DynamicText :truncate="true" class="font-bold text-sub">

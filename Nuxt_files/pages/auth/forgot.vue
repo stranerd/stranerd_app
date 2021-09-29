@@ -28,7 +28,7 @@
 			<DisplayError :error="error" />
 			<PageLoading v-if="loading" />
 		</form>
-		<div class="flex align-items-center justify-content-center gap-0-25">
+		<div class="flex items-center justify-center gap-0-25">
 			<span>Return to</span>
 			<NuxtLink class="linkText" to="/auth/signin">
 				Sign In

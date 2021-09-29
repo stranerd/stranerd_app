@@ -3,7 +3,7 @@
 		<div class="col-3">
 			<DynamicText>{{ formatTime(transaction.createdAt) }}</DynamicText>
 		</div>
-		<div class="col-3 flex align-items-center gap-0-25">
+		<div class="col-3 flex items-center gap-0-25">
 			<Coins :gold="transaction.isGold" :size="24" />
 			<DynamicText :class="transaction.isGain ? 'text-success' : 'text-danger'">
 				{{ formatNumber(transaction.amount) }}

@@ -1,6 +1,6 @@
 <template>
 	<form class="flex flex-col" @submit.prevent="submit">
-		<div class="flex align-items-center">
+		<div class="flex items-center">
 			<div class="form-group w-100">
 				<input
 					v-model="factory.name"
