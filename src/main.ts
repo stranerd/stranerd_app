@@ -25,9 +25,6 @@ import '@ionic/vue/css/typography.css';
 // tailwind utility classes
 import '@/application/assets/styles/tailwind.css'
 
-// global css styles
-import '@/application/assets/styles/globals.scss'
-
 /*Ionic Theme variables */
 import '@/application/assets/theme/variables.css';
 
@@ -51,15 +48,16 @@ const router = Promise.all(routes).then(routes => {
     return router
 })
 
+
 const init = async() => {
 	createApp({
 	components: {
-		App,
+		App
 	},
   })
 	.component('AppLayout', AppLayout)
-	.use(IonicVue)
 	.use(await router)
+	.use(IonicVue)
 	.mount('#app')
   
   }

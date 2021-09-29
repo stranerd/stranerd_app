@@ -11408,7 +11408,11 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+<<<<<<< HEAD
+sweetalert2@^11.1.7:
+=======
 sweetalert2@^11.1.5:
+>>>>>>> 3a9ad75d47db8ed8ee8a7f725db1ea014b363a95
   version "11.1.7"
   resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.1.7.tgz#0ff2851eae77a76a3fe0ab289d3c32493e811b6d"
   integrity sha512-7MHQVtKCTORfA9e58g9ZOfT3X58DkSBtvoCQJnqSHobXXb5C7aB8Yg/tAccTFnefCUBU41PoStjXMkzG3bNeig==
