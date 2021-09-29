@@ -1,4 +1,4 @@
-import { Ref, ref, ssrRef, useFetch, useRouter } from 'vue'
+import { Ref, ref,  useFetch, useRouter } from 'vue'
 import {
 	AddAnswer,
 	AnswerEntity,
@@ -24,8 +24,8 @@ const global = {} as Record<string, {
 
 export const useAnswerList = (questionId: string) => {
 	if (global[questionId] === undefined) global[questionId] = {
-		answers: ssrRef([]),
-		fetched: ssrRef(false),
+		answers: Ref([]),
+		fetched: Ref(false),
 		...useErrorHandler(),
 		...useLoadingHandler()
 	}
