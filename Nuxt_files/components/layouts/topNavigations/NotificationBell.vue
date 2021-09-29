@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from '@nuxtjs/composition-api'
+import { defineComponent, onMounted } from 'vue'
 import { useNotificationList } from '@app/hooks/users/notifications'
 
 export default defineComponent({

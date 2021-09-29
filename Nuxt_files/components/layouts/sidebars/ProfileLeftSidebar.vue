@@ -139,7 +139,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, useRoute } from '@nuxtjs/composition-api'
+import { computed, defineComponent, useRoute } from 'vue'
 import { useUser } from '@app/hooks/users/user'
 import { formatNumber, pluralize } from '@utils/commons'
 import { formatTime } from '@utils/dates'

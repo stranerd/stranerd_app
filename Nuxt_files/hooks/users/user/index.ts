@@ -1,4 +1,4 @@
-import { Ref, ssrRef, useFetch, watch } from '@nuxtjs/composition-api'
+import { Ref, ssrRef, useFetch, watch } from 'vue'
 import { FindUser, ListenToUser, UserEntity } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/hooks/core/states'
 import { useAuth } from '@app/hooks/auth/auth'

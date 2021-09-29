@@ -1,4 +1,4 @@
-import { Ref, ref, ssrRef, useFetch, useRouter } from '@nuxtjs/composition-api'
+import { Ref, ref, ssrRef, useFetch, useRouter } from 'vue'
 import {
 	AddAnswer,
 	AnswerEntity,

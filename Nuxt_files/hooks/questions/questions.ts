@@ -1,4 +1,4 @@
-import { computed, ref, Ref, ssrRef, useFetch, useRouter } from '@nuxtjs/composition-api'
+import { computed, ref, Ref, ref, useFetch, useRouter } from 'vue'
 import {
 	AddQuestion,
 	DeleteQuestion,
@@ -32,11 +32,11 @@ const answeredChoices = [
 	{ val: Answered.Unanswered, key: 'Unanswered' }
 ]
 const global = {
-	questions: ssrRef([] as QuestionEntity[]),
-	subjectId: ssrRef(''),
-	answered: ssrRef(answeredChoices[0].val),
-	fetched: ssrRef(false),
-	hasMore: ssrRef(false),
+	questions: ref([] as QuestionEntity[]),
+	subjectId: ref(''),
+	answered: ref(answeredChoices[0].val),
+	fetched: ref(false),
+	hasMore: ref(false),
 	...useErrorHandler(),
 	...useLoadingHandler()
 }

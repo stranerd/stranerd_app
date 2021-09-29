@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useRoute } from '@nuxtjs/composition-api'
+import { defineComponent, useRoute } from 'vue'
 import { useUser } from '@app/hooks/users/user'
 import ProfileHeadCard from '@app/components/users/account/ProfileHeadCard.vue'
 import { useAuth } from '@app/hooks/auth/auth'

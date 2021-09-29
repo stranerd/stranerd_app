@@ -1,4 +1,4 @@
-import { computed, ref, Ref, ssrRef, useFetch } from '@nuxtjs/composition-api'
+import { computed, ref, Ref, ssrRef, useFetch } from 'vue'
 import { AddSubject, DeleteSubject, FindSubject, GetSubjects, SubjectEntity, SubjectFactory } from '@modules/questions'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/hooks/core/states'
 import { Alert } from '@app/hooks/core/notifications'

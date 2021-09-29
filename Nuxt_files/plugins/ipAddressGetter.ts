@@ -1,4 +1,4 @@
-import { defineNuxtPlugin } from '@nuxtjs/composition-api'
+import { defineNuxtPlugin } from 'vue'
 import { HttpClient } from '@/modules/core'
 import { useAuth } from '@/application/hooks/auth/auth'
 

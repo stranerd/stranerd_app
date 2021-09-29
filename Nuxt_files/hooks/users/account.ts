@@ -1,5 +1,5 @@
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/hooks/core/states'
-import { Ref, ref, useRouter, watch } from '@nuxtjs/composition-api'
+import { Ref, ref, useRouter, watch } from 'vue'
 import { ProfileUpdateFactory, UpdateProfile } from '@modules/auth'
 import { useAuth } from '@app/hooks/auth/auth'
 import { useAccountModal, usePaymentModal } from '@app/hooks/core/modals'

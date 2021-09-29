@@ -1,4 +1,4 @@
-import { computed, Ref, ref, ssrRef, useRouter } from '@nuxtjs/composition-api'
+import { computed, Ref, ref, ssrRef, useRouter } from 'vue'
 import { AddSession, BeginSession, CancelSession, SessionFactory } from '@modules/sessions'
 import { CreateReview, UserBio } from '@modules/users'
 import { useAuth } from '@app/hooks/auth/auth'

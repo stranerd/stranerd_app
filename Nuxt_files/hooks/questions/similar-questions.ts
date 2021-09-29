@@ -1,4 +1,4 @@
-import { Ref, ssrRef, useFetch } from '@nuxtjs/composition-api'
+import { Ref, ssrRef, useFetch } from 'vue'
 import { GetSimilarQuestions, ListenToSimilarQuestions, QuestionEntity } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/hooks/core/states'
 

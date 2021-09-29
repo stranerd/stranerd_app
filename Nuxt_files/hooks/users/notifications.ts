@@ -1,4 +1,4 @@
-import { Ref, ssrRef, useFetch } from '@nuxtjs/composition-api'
+import { Ref, ssrRef, useFetch } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/hooks/core/states'
 import { GetNotifications, ListenToNotifications, MarkNotificationSeen, NotificationEntity } from '@modules/users'
 import { useAuth } from '@app/hooks/auth/auth'

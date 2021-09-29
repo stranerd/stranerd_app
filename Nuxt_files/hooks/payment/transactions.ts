@@ -1,6 +1,6 @@
-import { Ref, ref, onServerPrefetch } from 'vue'
-import { useErrorHandler, useLoadingHandler } from '@/application/hooks/core/states'
-import { GetTransactions, TransactionEntity } from '@/modules/users'
+import { Ref, ssrRef, useFetch } from 'vue'
+import { useErrorHandler, useLoadingHandler } from '@app/hooks/core/states'
+import { GetTransactions, TransactionEntity } from '@modules/users'
 
 const global = {} as Record<string, {
 	transactions: Ref<TransactionEntity[]>;

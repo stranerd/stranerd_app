@@ -61,7 +61,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from 'vue'
 import { useAuth } from '@app/hooks/auth/auth'
 import ProfileHeadCard from '@app/components/users/account/ProfileHeadCard.vue'
 import TagsList from '@app/components/questions/tags/TagsList.vue'

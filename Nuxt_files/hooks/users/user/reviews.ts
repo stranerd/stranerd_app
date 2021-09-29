@@ -1,4 +1,4 @@
-import { Ref, ssrRef, useFetch } from '@nuxtjs/composition-api'
+import { Ref, ssrRef, useFetch } from 'vue'
 import { GetReviews, ReviewEntity } from '@modules/users'
 import { useErrorHandler, useLoadingHandler } from '@app/hooks/core/states'
 

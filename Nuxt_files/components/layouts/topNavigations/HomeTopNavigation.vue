@@ -77,7 +77,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useRouter } from 'vue'
 import { disableScroll, enableScroll } from '@utils/html'
 
 export default defineComponent({

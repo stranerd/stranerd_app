@@ -1,4 +1,4 @@
-import { defineNuxtPlugin } from '@nuxtjs/composition-api'
+import { defineNuxtPlugin } from 'vue'
 import Vue from 'vue'
 // @ts-ignore
 import Flutterwave from 'flutterwave-vue-v3'
