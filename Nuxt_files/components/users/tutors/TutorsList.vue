@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="d-flex flex-column align-items-center">
-			<h1 class="text-primary-dark fw-bold fs-32">
+			<h1 class="text-primaryDark fw-bold fs-32">
 				Access expert tutors in any subject
 			</h1>
 			<span class="text-sub text-center sub">

@@ -2,14 +2,14 @@
 	<div>
 		<div class="d-flex justify-content-between align-items-end">
 			<span class="date">Tuesday, August 10</span>
-			<span class="year fw-bold text-primary-dark">2021</span>
+			<span class="year fw-bold text-primaryDark">2021</span>
 			<span class="name text-primary">Schedule Manager</span>
 		</div>
 
 		<div class="scheduler shadow w-100 p-3 d-flex justify-content-between align-items-center">
 			<!-- <img src="" alt=""> -->
 			<Icon
-				class-name="text-primary-dark"
+				class-name="text-primaryDark"
 				size="l"
 				icon-name="arrow-left"
 			/>
@@ -21,11 +21,11 @@
 				</div>
 				<div v-for="n in 5" :key="n" class="d-flex flex-column justify-content-center align-items-center gap-1 date_tab">
 					<span class="text-primary fs-8 fw-bold">Tue</span>
-					<span class="fw-bold text-primary-dark fs-7">10</span>
+					<span class="fw-bold text-primaryDark fs-7">10</span>
 				</div>
 			</div>
 			<Icon
-				class-name="text-primary-dark"
+				class-name="text-primaryDark"
 				size="l"
 				icon-name="arrow-right"
 			/>

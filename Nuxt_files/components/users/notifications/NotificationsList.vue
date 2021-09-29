@@ -5,7 +5,7 @@
 			:key="notification.hassssssh"
 			:notification="notification"
 		/>
-		<div v-if="hasMore" class="text-center py-2 text-18 text-primary-dark">
+		<div v-if="hasMore" class="text-center py-2 text-18 text-primaryDark">
 			<a @click.prevent="fetchOlderNotifications">Load More</a>
 		</div>
 		<DisplayWarning v-if="!loading && !error && notifications.length === 0" message="No notifications found." />

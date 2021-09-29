@@ -188,16 +188,16 @@ export default defineComponent({
 		position: fixed;
 		top: 0;
 		z-index: 3;
-		// box-shadow: 0 8px 16px 5px rgba($color-primary-dark, 0.2);
+		// box-shadow: 0 8px 16px 5px rgba($color-primaryDark, 0.2);
 		width: 100%;
 		display: flex;
 		align-items: center;
 		color: $color-white;
-		background: $color-primary-dark;
+		background: $color-primaryDark;
 		padding: 0.75rem 1rem;
 		@media (max-width: $md) {
 			background: $color-white;
-			border-bottom: 4px solid $color-primary-dark;
+			border-bottom: 4px solid $color-primaryDark;
 			padding: 0.75rem 1.875rem;
 		}
 		@media (max-width: $sm) {
@@ -253,7 +253,7 @@ export default defineComponent({
 	.head-icons {
 		color: white;
 		@media (max-width: $md) {
-			color: $color-primary-dark;
+			color: $color-primaryDark;
 		}
 		@media (max-width: $sm) {
 			color: $color-dark;

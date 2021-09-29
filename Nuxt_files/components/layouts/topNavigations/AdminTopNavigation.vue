@@ -33,6 +33,6 @@ export default defineComponent({
 	a.nuxt-link-active {
 		font-size: 17px;
 		color: white;
-		background-color: $color-primary-dark;
+		background-color: $color-primaryDark;
 	}
 </style>

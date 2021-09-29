@@ -74,7 +74,7 @@ export default defineComponent({
 	}
 
 	.btn-custom {
-		background-color: $color-primary-dark;
+		background-color: $color-primaryDark;
 		color: #fff;
 		border: 2px solid;
 		border-radius: 6px;

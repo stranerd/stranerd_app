@@ -127,7 +127,7 @@ export default defineComponent({
 		padding: 0.6rem;
 		border-radius: 12px;
 		font-size: 2.25rem;
-		background: $color-primary-dark;
+		background: $color-primaryDark;
 		color: $color-white;
 	}
 

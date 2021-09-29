@@ -4,7 +4,7 @@
 			<Tag :tag="tagId" class="tag mx-auto mx-lg-0" />
 		</div>
 		<QuestionCard v-for="question in questions" :key="question.hash" :question="question" />
-		<div v-if="hasMore" class="text-center py-2 text-18 text-primary-dark">
+		<div v-if="hasMore" class="text-center py-2 text-18 text-primaryDark">
 			<a @click.prevent="fetchOlderQuestions">Load More</a>
 		</div>
 		<DisplayWarning

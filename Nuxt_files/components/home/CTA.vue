@@ -9,7 +9,7 @@
 					Your quick help for homework and study problems
 				</h1>
 				<!--
-				<Heading class="text-primary-dark mb-1" variant="4">
+				<Heading class="text-primaryDark mb-1" variant="4">
 					Link up with smart students in various subjects
 				</Heading>
 				-->

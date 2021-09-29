@@ -23,7 +23,7 @@
 		</div>
 		<div v-if="hasMore" class="text-center text-18">
 			<div class="thick my-0" />
-			<a class="text-primary-dark py-2" @click.prevent="fetchOlderTransactions">LOAD MORE</a>
+			<a class="text-primaryDark py-2" @click.prevent="fetchOlderTransactions">LOAD MORE</a>
 		</div>
 	</div>
 </template>

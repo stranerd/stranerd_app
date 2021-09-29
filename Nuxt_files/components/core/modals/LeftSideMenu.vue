@@ -4,12 +4,12 @@
 			<Logo :secondary="true" class="bright" />
 			<div @click="close">
 				<Icon
-					class="text-primary-dark bright d-none d-sm-block "
+					class="text-primaryDark bright d-none d-sm-block "
 					size="s"
 					icon-name="close"
 				/>
 				<Icon
-					class="text-primary-dark bright d-block d-sm-none"
+					class="text-primaryDark bright d-block d-sm-none"
 					size="s"
 					icon-name="close-thin"
 				/>
@@ -47,12 +47,12 @@ export default defineComponent({
 		align-items: center;
 		justify-content: space-between;
 		margin-bottom: 1.4rem;
-		background: $color-primary-dark;
+		background: $color-primaryDark;
 		color: $color-white;
 		padding: 0.75rem 1rem;
 		@media (max-width: $md) {
 			background: $color-white;
-			border-bottom: 4px solid $color-primary-dark;
+			border-bottom: 4px solid $color-primaryDark;
 			padding: 0.63rem 1.875rem;
 		}
 		@media (max-width: $sm) {

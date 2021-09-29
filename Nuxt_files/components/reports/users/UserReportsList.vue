@@ -1,7 +1,7 @@
 <template>
 	<div class="d-flex flex-column gap-1">
 		<UserReportCard v-for="report in reports" :key="report.hash" :report="report" />
-		<div v-if="hasMore" class="text-center py-2 text-18 text-primary-dark">
+		<div v-if="hasMore" class="text-center py-2 text-18 text-primaryDark">
 			<a @click.prevent="fetchOlderReports">Load More</a>
 		</div>
 		<DisplayWarning v-if="!loading && !error && reports.length === 0" message="No reports found." />

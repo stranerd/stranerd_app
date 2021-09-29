@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<ReviewCard v-for="review in reviews" :key="review.hash" :review="review" />
-		<div v-if="hasMore" class="text-center py-2 text-18 text-primary-dark">
+		<div v-if="hasMore" class="text-center py-2 text-18 text-primaryDark">
 			<a @click.prevent="fetchOlderReviews">Load More</a>
 		</div>
 		<DisplayWarning

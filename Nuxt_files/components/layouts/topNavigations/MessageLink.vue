@@ -36,7 +36,7 @@ export default defineComponent({
 	.head-icons {
 		color: white;
 		@media (max-width: $md) {
-			color: $color-primary-dark;
+			color: $color-primaryDark;
 		}
 	}
 </style>
