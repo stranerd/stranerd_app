@@ -1,6 +1,6 @@
 <template>
 	<div class="mt-4">
-	<span>Index page</span>
+		<span>Index page</span>
 	</div>
 </template>
 

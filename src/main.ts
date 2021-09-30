@@ -24,6 +24,8 @@ import '@ionic/vue/css/typography.css'
 // tailwind utility classes
 import '@/application/assets/styles/tailwind.css'
 
+// line awesome icons
+import 'line-awesome/dist/line-awesome/css/line-awesome.min.css'
 
 /*Ionic Theme variables */
 import '@/application/assets/theme/variables.css'
