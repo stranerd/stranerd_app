@@ -1,44 +1,31 @@
-
 <template>
-	<swiper :pagination="true" class="mySwiper">
-		<swiper-slide>Slide 1</swiper-slide>
-		<swiper-slide>Slide 2</swiper-slide>
-		<swiper-slide>Slide 3</swiper-slide>
-		<swiper-slide>Slide 4</swiper-slide>
-	</swiper>
+	<ion-slides  :options="slideOpts">
+		<ion-slide>
+			<h1>Slide 1</h1>
+		</ion-slide>
+		<ion-slide>
+			<h1>Slide 2</h1>
+		</ion-slide>
+		<ion-slide>
+			<h1>Slide 3</h1>
+		</ion-slide>
+	</ion-slides>
 </template>
+
+
 <script>
-// Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from 'swiper/vue'
+import { IonSlides, IonSlide } from '@ionic/vue'
+import { defineComponent } from 'vue'
 
-// Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/pagination'
-
-
-// import Swiper core and required modules
-import SwiperCore, {
-	Pagination
-} from 'swiper'
-
-// install Swiper modules
-SwiperCore.use([Pagination])
-
-
-export default {
-	components: {
-		Swiper,
-		SwiperSlide,
-	},
-	data() {
-		return {
-        
-        
+export default defineComponent({
+	components: { IonSlides, IonSlide },
+	setup() {
+		// Optional parameters to pass to the swiper instance. See http://idangero.us/swiper/api/ for valid options.
+		const slideOpts = {
+			initialSlide: 0,
+			speed: 400
 		}
-	},
-	methods: {
-    
+		return { slideOpts }
 	}
-  
-}
+})
 </script>

@@ -10,7 +10,7 @@ module.exports = {
 				primaryDark: '#374b99',
 				line: '#d7e2ec',
 				tags: '#f8f8ff',
-				sub: '#d7e2ec',
+				sub: '#4D5C6F',
 				dark: '#132740',
 				footerDark: '#191c29',
 				white: '#fff',
@@ -24,6 +24,9 @@ module.exports = {
 				'xl': '1280px',
 				'2xl': '1536px',
 			},
+			  fontFamily: {
+				'nuni': ['"Nunito Sans"', 'sans-serif']
+			}
 		},
 	},
 	variants: {
