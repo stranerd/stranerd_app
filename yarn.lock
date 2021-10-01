@@ -10840,9 +10840,9 @@ sass-graph@2.2.5:
     scss-tokenizer "^0.2.3"
     yargs "^13.3.2"
 
-sass-loader@^10.2.0:
+sass-loader@^10.1.1:
   version "10.2.0"
-  resolved "https://registry.npmjs.org/sass-loader/-/sass-loader-10.2.0.tgz"
+  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-10.2.0.tgz#3d64c1590f911013b3fa48a0b22a83d5e1494716"
   integrity sha512-kUceLzC1gIHz0zNJPpqRsJyisWatGYNFRmv2CKZK2/ngMJgLqxTbXwe/hJ85luyvZkgqU3VlJ33UVF2T/0g6mw==
   dependencies:
     klona "^2.0.4"
@@ -10897,7 +10897,7 @@ schema-utils@^2.0.0, schema-utils@^2.5.0, schema-utils@^2.6.5, schema-utils@^2.7
 
 schema-utils@^3.0.0:
   version "3.1.1"
-  resolved "https://registry.npmjs.org/schema-utils/-/schema-utils-3.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-3.1.1.tgz#bc74c4b6b6995c1d88f76a8b77bea7219e0c8281"
   integrity sha512-Y5PQxS4ITlC+EahLuXaY86TXfR7Dc5lw294alXOq86JAHCihAIZfqv8nNCWvaEJvaC51uN9hbLGeV0cFBdH+Fw==
   dependencies:
     "@types/json-schema" "^7.0.8"
@@ -11694,7 +11694,7 @@ sweetalert2@^11.1.5:
   resolved "https://registry.npmjs.org/sweetalert2/-/sweetalert2-11.1.7.tgz"
   integrity sha512-7MHQVtKCTORfA9e58g9ZOfT3X58DkSBtvoCQJnqSHobXXb5C7aB8Yg/tAccTFnefCUBU41PoStjXMkzG3bNeig==
 
-swiper@^7.0.0:
+swiper@^7.0.7:
   version "7.0.7"
   resolved "https://registry.yarnpkg.com/swiper/-/swiper-7.0.7.tgz#c837684527838359870485477155e790b8c4ef76"
   integrity sha512-oCpbG0zdBUFKMGlVlcRjtIQCJhAh5Y1+yX9wSYkhC6W92OExETtLXuWdNUiBnXQbWCx3n7nfFD7mxaCnWWDjPA==
