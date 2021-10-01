@@ -6,7 +6,7 @@
 		@ionScroll="logScrolling($event)"
 		@ionScrollEnd="logScrollEnd()">
 
-		<div slot="fixed" class="flex flex-col bg-dark h-screen w-screen items-center py-3" v-touch:swipe="onTapItem">
+		<div  class="flex flex-col bg-dark h-screen w-screen items-center py-3" v-touch:swipe="onTapItem">
 			<img :src="screens[currentIndex].img" alt="ask a question" class="object-fit">
 
 			<h1 class="text-xl text-white font-extrabold  mt-6 text-center font-nuni">	{{ screens[currentIndex].title }}</h1>

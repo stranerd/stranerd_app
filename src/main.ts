@@ -4,8 +4,7 @@ import AppLayout from './application/layouts/AppLayout.vue'
 import routes from './application/router/routes'
 import { createRouter, createWebHistory } from '@ionic/vue-router'
 import { IonicVue } from '@ionic/vue'
-import Vue from 'vue'
-import Vue3TouchEvents from 'vue3-touch-events'
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css'
@@ -62,7 +61,6 @@ const init = async() => {
 		.component('AppLayout', AppLayout)
 		.use(await router)
 		.use(IonicVue)
-		.use(Vue3TouchEvents)
 		.mount('#app')
   
 }
