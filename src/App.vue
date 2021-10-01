@@ -1,5 +1,5 @@
 <template>
-	<ion-app class="font-nuni">
+	<ion-app>
 		<ion-router-outlet />
 	</ion-app>
 </template>

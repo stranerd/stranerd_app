@@ -87,8 +87,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+
 ion-input {
-    border: 1px solid $color-black;
+    border: 1px solid ;
     --color:  $color-sub;
     --padding-top:1rem;
     --padding-bottom:1rem;
@@ -98,14 +99,13 @@ ion-input {
 
 }
 	input {
-		border: 1px solid $color-sub;
+		border: 1px solid ;
 		border-radius: 6px;
 		padding: 1rem;
 	}
 
 	.btn-custom {
-		background-color: $color-primary;
-		color: $color-white;
+
 		border: 2px solid;
 		border-radius: 6px;
 		font-size: 16px;

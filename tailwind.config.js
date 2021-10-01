@@ -11,6 +11,7 @@ module.exports = {
 				line: '#d7e2ec',
 				tags: '#f8f8ff',
 				sub: '#4D5C6F',
+				star: '#FFDA20',
 				dark: '#132740',
 				footerDark: '#191c29',
 				white: '#fff',
