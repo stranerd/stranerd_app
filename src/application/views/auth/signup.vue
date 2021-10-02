@@ -8,18 +8,21 @@
 				<img src="../../assets/images/icons/logo-xs.svg" alt="ask a question" class="object-fit h-4 ">
 			</div>
 
-			<h1 class="text-center text-3xl text-white font-semibold font-nuni mt-12">Welcome back.</h1>
+			<h1 class="text-center text-3xl text-white font-semibold font-nuni mt-12">Create your Account.</h1>
 
 			<form class=" px-5 flex flex-col justify-center mx-auto mt-20">
 
+				<ion-input placeholder="First name" position="floating"></ion-input>
+				<ion-input placeholder="Last name" position="floating"></ion-input>
 				<ion-input placeholder="Email Address" position="floating"></ion-input>
 				<ion-input placeholder="Password" position="floating"></ion-input>
+				<ion-input placeholder="Confirm Password" position="floating"></ion-input>
 
 			</form>
 
-			<div class="flex justify-between items-center  px-5 mt-10">
-				<p class="text-xs text-white font-semibold font-nuni">Not a member on Stranerd?</p>
-				<span @click="() => router.push('/auth/signup')" class="flex items-center text-yellow-300 font-nuni text-xs font-bold">Sign Up <i class="las la-arrow-right text-xl"></i> </span>
+			<div class="flex justify-between items-center  px-5 mt-14">
+				<p class="text-xs text-white font-semibold font-nuni">Already have an Account on Stranerd?</p>
+				<span @click="() => router.push('/auth/signin')" class="flex items-center text-yellow-300 font-nuni text-xs font-bold">Sign In <i class="las la-arrow-right text-xl"></i> </span>
 			</div>
 
 			<div class="flex justify-between px-5 items-center mt-14">
@@ -29,7 +32,7 @@
 			</div>
 
 			<p class="text-center text-xs font-nuni text-white font-bold mt-5 ">
-				Sign in with Google
+				Sign Up with Google
 			</p>
 
 			<div class="flex justify-center w-full px-5">
@@ -53,7 +56,7 @@ import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	components: { IonContent,IonPage, IonInput, IonButton},
-	  setup() {
+		  setup() {
 		const router = useRouter()
 		return { router }
 	}
