@@ -1,6 +1,6 @@
 <template>
 	<ion-page>
-		<ion-header>
+		<ion-header mode="ios">
 			<ion-toolbar>
 				<ion-title>Wallet</ion-title>
 			</ion-toolbar>

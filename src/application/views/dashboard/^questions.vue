@@ -1,19 +1,19 @@
 <template>
 	<ion-page>
-		<ion-header>
+		<ion-header mode="ios">
 			<ion-toolbar>
 				<ion-title>Questions</ion-title>
 			</ion-toolbar>
 		</ion-header>
 		<ion-content :fullscreen="true" id="container_content">
-			<div class="px-3 pt-2 sticky top-0 bg-white z-30">
+			<div class="px-3 pt-2 pb-1 sticky top-0 bg-white z-30">
 				<div class="flex flex-row items-center justify-center col-span-6">
 					<button @click="slideToPrev" :class="selectedTab == 'ask' ? 'askBtn customShadow activebtn ion-activatable' : ' askBtn customShadow inactivebtn ion-activatable'">
-						Ask
+						Ask a Question
 						<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 					</button>
 					<button @click="slideToNext" :class="selectedTab == 'answer' ? ' answerBtn customShadow activebtn ion-activatable' : ' answerBtn customShadow inactivebtn ion-activatable'">
-						Answer
+						Answer a Question
 						<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 					</button>
 				</div>
@@ -116,11 +116,11 @@ ion-toolbar {
 }
 
 .inactivebtn {
-	@apply w-1/2 py-2 px-2  relative font-medium text-center text-sm text-primary rounded-lg  bg-white
+	@apply w-1/2 py-3 px-2  relative font-medium text-center text-xs text-primary rounded-lg  bg-white
 }
 
 .activebtn {
-	@apply w-1/2 py-2 px-2 font-medium border  relative border-gray-400 text-center text-sm text-white rounded-lg bg-primary
+	@apply w-1/2 py-3 px-2 font-medium border  relative border-gray-400 text-center text-xs text-white rounded-lg bg-primary
 }
 
 
