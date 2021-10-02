@@ -35,35 +35,7 @@
 				<img src="../../assets/images/icons/logo-xs.svg" alt="ask a question" class="object-fit fixed bottom-5">
 
 			</div>
-		<!-- <div  class="flex flex-col bg-dark h-screen w-screen items-center py-3" v-touch:swipe="onTapItem">
-			<img :src="screens[currentIndex].img" alt="ask a question" class="object-fit">
 
-			<h1 class="text-xl text-white font-extrabold  mt-6 text-center font-nuni">	{{ screens[currentIndex].title }}</h1>
-			<p class="text-center text-white w-64 text-xs mt-2 font-nuni">
-				{{ screens[currentIndex].text }}
-				
-			</p>
-
-			<div class="flex justify-center items-center  mt-12">
-			
-				<div
-					v-for="(comment,index) in screens"
-					:key="'comment'+ index"
-					:class="currentIndex === index ? 'commentIconsDotActive' : 'commentIconsDot'"
-					@click.prevent="goToComment(index)"
-				>
-				</div>
-			
-			
-			</div>
-			<div class="mt-12 w-10/12">
-				<ion-button  class="w-full font-bold mb-3 capitalize text-base">Get Started</ion-button>
-				<ion-button  class="w-full font-bold capitalize text-base">Log In</ion-button>
-			</div>
-	
-
-			<img src="../../assets/images/icons/logo-xs.svg" alt="ask a question" class="object-fit fixed bottom-5">
-		</div> -->
 		</ion-content>
 	</ion-page>
 </template>
