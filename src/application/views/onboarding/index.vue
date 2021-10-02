@@ -59,7 +59,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 img {
     -webkit-transform: translateZ(0);
     transform: translateZ(0);

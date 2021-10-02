@@ -66,7 +66,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 ion-input, ion-select{
 	background: #EFF0F6 !important;
