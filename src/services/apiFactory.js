@@ -18,3 +18,5 @@ const apiFactory = {
 //     return AxiosAAA.get(url);
 //   },
 }
+
+export default apiFactory
