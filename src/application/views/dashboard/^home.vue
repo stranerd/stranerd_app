@@ -1,10 +1,6 @@
 <template>
 	<ion-page>
-		<ion-header mode="ios">
-			<ion-toolbar>
-				<ion-title>Home</ion-title>
-			</ion-toolbar>
-		</ion-header>
+		<top-bar></top-bar>
 		<ion-content :fullscreen="true">
 					
 		</ion-content>
@@ -12,11 +8,15 @@
 </template>
 
 <script lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue'
+import { defineAsyncComponent } from 'vue'
+
+import { IonPage, IonContent } from '@ionic/vue'
+const TopBar = defineAsyncComponent(() => import('@/application/components/nav/Topbar.vue'))
+
 
 export default  {
-	name: 'Home',
-	components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
+	name: 'home',
+	components: { TopBar, IonPage, IonContent }
 }
 </script>
 <style scoped>
