@@ -29,7 +29,7 @@ import TutorCard from '@/application/components/tutors/TutorCard.vue'
 
 
 export default  {
-	name: 'Home',
+	name: 'home',
 	components: { IonContent, IonPage, IonIcon, SliderController, TutorCard, },
 	setup(){
 		return{

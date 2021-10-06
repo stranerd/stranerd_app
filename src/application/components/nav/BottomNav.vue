@@ -1,28 +1,22 @@
 <template>
-	<ion-tab-bar slot="bottom" class="md:hidden">
-		<ion-tab-button tab="home" class="tabStyle tabStyleActive" href="/dashboard/home">
-			<div class="flex flex-col py-1 items-center justify-center">
-				<ion-icon :icon="home"></ion-icon>
-			</div>
-		</ion-tab-button>
-		<ion-tab-button tab="questions" class="tabStyle tabStyleActive" href="/dashboard/questions">
-			<div class="flex flex-col py-1 items-center justify-center">
-				<ion-icon :icon="helpCircle"></ion-icon>
-			</div>
-		</ion-tab-button>
-          
-		<ion-tab-button tab="tutors" class="tabStyle" href="/dashboard/tutors">
-			<div class="flex py-1 flex-col items-center justify-center">
-				<ion-icon :icon="people"></ion-icon>
-			</div>
-		</ion-tab-button>
-        
-		<ion-tab-button tab="chat" class="tabStyle" href="/dashboard/chat">
-			<div class="flex flex-col py-1 items-center justify-center">
-				<ion-icon :icon="chatbubble"></ion-icon>
-			</div>
-		</ion-tab-button>	
-	</ion-tab-bar>
+	<!-- smaller screens -->
+	<div class="md:hidden  bg-[#F7F7FC] py-[10px] fixed w-full bottom-0  grid grid-cols-4 z-50">
+		<router-link to="/dashboard/home" class="col-span-1 text-icon_inactive flex flex-row items-center justify-center">
+			<ion-icon :icon="home" :class="route.name == 'home' ? 'w-6 text-primary' : ' w-6' "></ion-icon>
+		</router-link>
+
+		<router-link to="/dashboard/questions" class="col-span-1 text-icon_inactive flex flex-row items-center justify-center">
+			<ion-icon :icon="helpCircle" :class="route.name == 'questions' ? 'w-6 text-primary' : ' w-6' "></ion-icon>
+		</router-link>
+
+		<router-link to="/dashboard/tutors" class="col-span-1 text-icon_inactive flex flex-row items-center justify-center">
+			<ion-icon :icon="people" :class="route.name == 'tutors' ? 'w-6 text-primary' : ' w-6' "></ion-icon>
+		</router-link>
+
+		<router-link to="/dashboard/chat" class="col-span-1  text-icon_inactive flex flex-row items-center justify-center">
+			<ion-icon :icon="chatbubble" :class="route.name == 'chat' ? 'w-6 text-primary' : ' w-6' "></ion-icon>
+		</router-link>
+	</div>
 
 	<!-- medium screens -->
 	<div class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full bottom-0 flex-row items-center z-50">
@@ -70,14 +64,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { IonTabBar, IonTabButton, IonIcon } from '@ionic/vue'
+import { IonIcon } from '@ionic/vue'
 import { home, helpCircle, people , chatbubble, add } from 'ionicons/icons'
 
 import { useRoute } from 'vue-router'
 
 
 export default defineComponent({
-	components: {  IonTabBar, IonTabButton, IonIcon },
+	components: { IonIcon },
 	setup() {
 		const route = useRoute()
 		return {
@@ -100,18 +94,14 @@ export default defineComponent({
 
 ion-tab-button  {
 	--color-selected: #546DD3;
-	--padding-top: 2px;
-	--padding-bottom: 2px;
-	--color: #8B9EB1;
+	--padding-top: 1px;
+	--padding-bottom: 1px;
+	--color: #808e9c;
 	--ripple-color: #546DD3;
 }
 
 ion-tab-bar {
 	--background: #F7F7FC;
-}
-
-.tabText {
-	font-size: 10px;
 }
 
 ion-icon {
