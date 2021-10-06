@@ -7,16 +7,17 @@ module.exports = {
 			colors: {
 				// Build your palette here
 				primary: '#546DD3',
+				green: '#3DFF64',
 				butter_yellow: '#FFF7D0',
 				tinted_pink: '#FFECFF',
 				light_blue: '#EDF6FF',
 				light_gray: '#F7F7FC',
 				light_orange: '#FFEEDC',
 				light_green: '#E8FFED',
-				dark_grey: '#4D5C6F',
+				dark_gray: '#4D5C6F',
 				star_yellow: '#FFD11C',
 				icon_inactive: '#8B9EB1',
-				light_grey: '#C7D6E3'
+				faded_gray: '#C7D6E3'
 			},
 			screens: {
 				'sm': '640px',

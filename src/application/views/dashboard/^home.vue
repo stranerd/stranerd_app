@@ -2,31 +2,20 @@
 	<ion-page>
 		<ion-content :fullscreen="true" class=" mx-auto">
 			<div class="w-full flex justify-between">
-				<span class="text-[24px] font-bold text-sub">
+				<span class="text-[24px] font-bold text-dark_gray">
 					Featured tutors
 				</span>
 
-				<div class="flex justify-center items-center ">
-					<a class="commentIcons" to="#" >
-						<ion-icon :icon="chevronBackOutline" class="text-2xl"/>
-					</a>
-					<a
-						v-for="(comment,index) in 3"
-						:key="'comment'+ index"
-						:class="currentIndex === index ? 'commentIconsDotActive' : 'commentIconsDot'"
-							
-					>
-						<i class="fas fa-circle" />
-					</a>
-					<a class="commentIcons" to="#" @click.prevent="goToNext">
-						<ion-icon :icon="chevronForwardOutline" class="text-2xl"/>
-					</a>
-				</div>
+				<slider-controller/>
 
 				<div class="text-primary flex items-center font-bold text-base">
 					<span>view all</span>
-					<ion-icon :icon="chevronForwardOutline" class="text-2xl"></ion-icon>	
+					<ion-icon :icon="chevronForwardOutline" class="text-2xl "></ion-icon>	
 				</div>
+			</div>
+
+			<div class="flex md:gap-6 gap-3 mt-3">
+				<tutor-card/>
 			</div>
 		</ion-content>
 	</ion-page>
@@ -34,20 +23,18 @@
 
 <script lang="ts">
 import { IonPage,  IonContent, IonIcon } from '@ionic/vue'
-import { chevronForwardOutline, chevronBackOutline } from 'ionicons/icons'
+import { chevronForwardOutline, chevronBackOutline, ellipse } from 'ionicons/icons'
+import SliderController from '@/application/components/core/nav/sliderController.vue'
+import TutorCard from '@/application/components/tutors/TutorCard.vue'
+
 
 export default  {
 	name: 'Home',
-	components: { IonContent, IonPage, IonIcon },
+	components: { IonContent, IonPage, IonIcon, SliderController, TutorCard, },
 	setup(){
 		return{
-			chevronForwardOutline, chevronBackOutline
+			chevronForwardOutline, chevronBackOutline, ellipse
 		}
 	}
 }
 </script>
-<style scoped>
-ion-toolbar {
-	--background: #ffffff;
-}
-</style>

@@ -40,7 +40,8 @@ module.exports = {
 		'vue/no-mutating-props': 'off',
 		'object-property-newline': 'off',
 		'require-atomic-updates': 'off',
-		'require-await': 'off'
+		'require-await': 'off',
+    'vue/no-deprecated-slot-attribute': 'off'
   },
   overrides: [
     {
