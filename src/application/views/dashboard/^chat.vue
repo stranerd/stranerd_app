@@ -8,13 +8,13 @@
 </template>
 
 <script lang="ts">
+import { IonPage, IonContent } from '@ionic/vue'
 import { defineAsyncComponent } from 'vue'
 
-import { IonPage, IonContent } from '@ionic/vue'
 const TopBar = defineAsyncComponent(() => import('@/application/components/nav/Topbar.vue'))
 
 export default  {
-	name: 'profile',
+	name: 'chat',
 	components: { TopBar, IonPage, IonContent }
 }
 </script>

@@ -7,16 +7,16 @@ module.exports = {
 			colors: {
 				// Build your palette here
 				primary: '#546DD3',
-				primaryDark: '#374b99',
-				line: '#d7e2ec',
-				tags: '#f8f8ff',
-				sub: '#4D5C6F',
-				star: '#FFDA20',
-				dark: '#132740',
-				footerDark: '#191c29',
-				white: '#fff',
-				black: '#000',
-		
+				butter_yellow: '#FFF7D0',
+				tinted_pink: '#FFECFF',
+				light_blue: '#EDF6FF',
+				light_gray: '#F7F7FC',
+				light_orange: '#FFEEDC',
+				light_green: '#E8FFED',
+				dark_grey: '#4D5C6F',
+				star_yellow: '#FFD11C',
+				icon_inactive: '#8B9EB1',
+				light_grey: '#C7D6E3'
 			},
 			screens: {
 				'sm': '640px',
