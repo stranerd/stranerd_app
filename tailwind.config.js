@@ -17,7 +17,8 @@ module.exports = {
 				dark_gray: '#4D5C6F',
 				star_yellow: '#FFD11C',
 				icon_inactive: '#8B9EB1',
-				faded_gray: '#C7D6E3'
+				faded_gray: '#C7D6E3',
+				main_dark: '#132740',
 			},
 			  fontFamily: {
 				'nuni': ['"Nunito Sans"', 'sans-serif']
