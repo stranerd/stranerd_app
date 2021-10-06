@@ -20,18 +20,8 @@ import RecentTransaction from '@/application/components/dashboard/RecentTransact
 
 
 export default  {
-<<<<<<< HEAD
-	name: 'home',
-	components: { IonContent, IonPage, IonIcon, SliderController, TutorCard, },
-	setup(){
-		return{
-			chevronForwardOutline, chevronBackOutline, ellipse
-		}
-	}
-=======
 	name: 'Home',
 	components: { IonContent, IonPage,  FeaturedTutors, RecentQuestions, UpcomingEvent, RecentTransaction,  },
 
->>>>>>> de73c6ec358a2fa283a571cdd0f3fcad50c072e1
 }
 </script>
