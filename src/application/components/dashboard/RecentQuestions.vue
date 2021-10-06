@@ -19,8 +19,8 @@
 			<swiper-slide
 				v-for="(card,index) in 10"
 				:key="index"
-				class="flex md:!w-[246px] !w-[150px]">
-				<tutor-card :style="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'"/>
+				class="flex md:!w-[336px] !w-[242px]">
+				<QuestionCard :style="0 === index ? 'bg-tinted_pink' : 'bg-light_gray'"/>
 			</swiper-slide>
 				
 		</swiper>
@@ -32,18 +32,16 @@
 import {  IonIcon } from '@ionic/vue'
 import { chevronForwardOutline, chevronBackOutline, ellipse } from 'ionicons/icons'
 import SliderController from '@/application/components/core/nav/sliderController.vue'
-import TutorCard from '@/application/components/tutors/TutorCard.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
+import QuestionCard from '../questions/QuestionCard.vue'
 
 
 export default  {
 	name: 'Home',
-	components: {  IonIcon, SliderController, TutorCard, Swiper, SwiperSlide },
+	components: {  IonIcon, SliderController, Swiper, SwiperSlide, QuestionCard },
 	setup(){
-		return{
-			chevronForwardOutline, chevronBackOutline, ellipse
-		}
+		return{	chevronForwardOutline, chevronBackOutline, ellipse}
 	}
 }
 </script>

@@ -14,7 +14,7 @@
 		</div>
 
 		<div class="flex gap-2">
-			<span class="font-bold text-xs md:text-base">
+			<span class="font-bold text-xs md:text-base text-main_dark">
 				Timmy Martin
 			</span>
 			<img src="../../assets/images/icons/verified.svg" alt="ask a question" class="w-[10px] md:w-4">
