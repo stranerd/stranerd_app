@@ -10,7 +10,7 @@
 import { IonPage, IonContent } from '@ionic/vue'
 import { defineAsyncComponent } from 'vue'
 
-const TopBar = defineAsyncComponent(() => import('@/application/components/nav/Topbar.vue'))
+const TopBar = defineAsyncComponent(() => import('@/application/components/layout/topNavigations/Topbar.vue'))
 
 export default  {
 	name: 'chat',
