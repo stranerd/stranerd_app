@@ -1,8 +1,7 @@
 <template>
 	<ion-page>
 		<top-bar></top-bar>
-		<ion-content :fullscreen="true">
-					
+		<ion-content :fullscreen="true">			
 		</ion-content>
 	</ion-page>
 </template>

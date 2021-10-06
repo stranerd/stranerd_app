@@ -18,13 +18,6 @@ module.exports = {
 				icon_inactive: '#8B9EB1',
 				light_grey: '#C7D6E3'
 			},
-			screens: {
-				'sm': '640px',
-				'md': '768px',
-				'lg': '1024px',
-				'xl': '1280px',
-				'2xl': '1536px',
-			},
 			  fontFamily: {
 				'nuni': ['"Nunito Sans"', 'sans-serif']
 			}

@@ -1,6 +1,6 @@
 <template>
 	<!-- Small screens -->
-	<ion-header mode="ios" class="md:hidden">
+	<ion-header mode="ios" class="md:hidden block">
 		<ion-toolbar>
 			<ion-buttons slot="start" class="px-1">
 				<ion-button class="relative ion-activatable rounded-full ">
