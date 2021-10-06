@@ -1,7 +1,7 @@
 <template>
 	<div class="w-full flex justify-between mt-10">
 		<span class="text-base md:text-[24px] font-bold text-dark_gray">
-			Recent questions
+			Upcoming events
 		</span>
 
 		<slider-controller class="hidden md:flex"/>
@@ -19,8 +19,9 @@
 			<swiper-slide
 				v-for="(card,index) in 10"
 				:key="index"
-				class="flex md:!w-[336px] !w-[242px]">
-				<QuestionCard :style="0 === index ? 'bg-tinted_pink' : 'bg-light_gray'"/>
+
+				class="flex md:!w-[21rem] !w-[12.5rem]">
+				<ScheduleCard :style="0 === index ? 'bg-light_green' : 'bg-light_gray'"/>
 			</swiper-slide>
 				
 		</swiper>
@@ -34,12 +35,11 @@ import { chevronForwardOutline, chevronBackOutline, ellipse } from 'ionicons/ico
 import SliderController from '@/application/components/core/nav/sliderController.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
-import QuestionCard from '../questions/QuestionCard.vue'
-
+import ScheduleCard from '../schedule/ScheduleCard.vue'
 
 export default  {
 	name: 'Home',
-	components: {  IonIcon, SliderController, Swiper, SwiperSlide, QuestionCard },
+	components: {  IonIcon, SliderController, Swiper, SwiperSlide,  ScheduleCard },
 	setup(){
 		return{	chevronForwardOutline, chevronBackOutline, ellipse}
 	}

@@ -14,7 +14,7 @@
 				</span>
 			</div>
 
-			<span class="font-bold text-base text-icon_inactive">
+			<span class="font-bold text-xs md:text-base text-icon_inactive">
 				30m ago    
 			</span>
 		
