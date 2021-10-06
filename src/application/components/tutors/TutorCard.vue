@@ -1,8 +1,7 @@
 <template>
 	<ion-card
-		v-for="(card,index) in 4"
-		:key="index"
-		:class="[0 === index ? 'bg-butter_yellow' : 'bg-light_gray',' md:w-[246px] md:h-[246px] w-[150px] h-[150px]  md:rounded-xl rounded-md flex flex-col md:gap-5 gap-2 justify-center items-center']"
+	
+		:class="[ style ,' md:min-w-[246px] md:min-h-[246px] min-w-[150px] min-h-[150px]  md:rounded-xl rounded-md flex flex-col md:gap-5 gap-2 justify-center items-center']"
 	>
 		<div class="relative">
 			<avatar
@@ -34,12 +33,19 @@ import ShowRatings from '@/application/components/core/ShowRatings.vue'
 export default {
 	name: 'TutorCard',
 	components: {IonCard, Avatar, ShowRatings },
+	props:{
+		style: {
+			required: false,
+			type: String,
+		}
+	}
 
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 ion-card{
 	box-shadow: none !important;
+
 }
 </style>
