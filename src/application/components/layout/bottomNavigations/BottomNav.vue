@@ -60,18 +60,42 @@
 		</div>
 		
 	</div>
+
+	<!-- large screens -->
+	<div class="hidden md:hidden lg:flex bg-light_gray py-3 pl-3 fixed w-[16%] h-full bottom-0 flex-col rounded-tr-3xl rounded-br-3xl">
+
+		<div class="py-5  pl-11 flex flex-row items-center">
+			<img src="/assets/images/logo.svg" class="w-32" />
+		</div>
+
+		<div class="flex flex-col pl-8 mt-6">
+			
+			<nav-element :icon="home" :route="route" tab="home" ></nav-element>
+
+			<nav-element :icon="helpCircle" :route="route" tab="questions" ></nav-element>
+
+			<nav-element :icon="people" :route="route" tab="tutors" ></nav-element>
+
+			<nav-element :icon="calendarClear" :route="route" tab="schedule" ></nav-element>
+
+			<nav-element :icon="wallet" :route="route" tab="wallet" ></nav-element>
+
+		</div>
+		
+	</div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineAsyncComponent, defineComponent } from 'vue'
 
 import { IonIcon } from '@ionic/vue'
-import { home, helpCircle, people , chatbubble, add } from 'ionicons/icons'
+import { home, helpCircle, people , chatbubble, add, calendarClear, wallet } from 'ionicons/icons'
+const NavElement = defineAsyncComponent(() => import('@/application/components/layout/bottomNavigations/SideBarElement.vue'))
 
 import { useRoute } from 'vue-router'
 
 
 export default defineComponent({
-	components: { IonIcon },
+	components: { IonIcon, NavElement },
 	setup() {
 		const route = useRoute()
 		return {
@@ -80,7 +104,9 @@ export default defineComponent({
 			people,
 			chatbubble,
 			add,
-			route
+			route,
+			calendarClear,
+			wallet
 		}
 	}
 })

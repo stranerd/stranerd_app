@@ -1,22 +1,20 @@
 <template>
 	<ion-page>
-		<ion-header mode="ios">
-			<ion-toolbar>
-				<ion-title>Wallet</ion-title>
-			</ion-toolbar>
-		</ion-header>
 		<ion-content :fullscreen="true">
-	
+			<div class="w-full lg:w-[84%] lg:ml-[16%] grid grid-cols-12">
+				
+			</div>		
 		</ion-content>
 	</ion-page>
 </template>
 
 <script lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue'
+
+import { IonPage, IonContent } from '@ionic/vue'
 
 export default  {
-	name: 'Wallet',
-	components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
+	name: 'wallet',
+	components: { IonPage, IonContent }
 }
 </script>
 <style scoped>

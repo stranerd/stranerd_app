@@ -1,20 +1,21 @@
 import { defineAsyncComponent } from 'vue'
 <template>
 	<ion-page>
-		<top-bar></top-bar>
 		<ion-content :fullscreen="true">
-			<div class="w-full px-3 mt-[64px]">
-				<div class="bg-light_gray rounded-md flex flex-row items-center">
-					<button class="py-3 px-3 text-xs font-semibold text-white bg-icon_inactive rounded-md w-1/2">
-						All questions
-					</button>
-					<button class="py-3 px-3 text-xs font-semibold bg-light_gray text-dark_gray rounded-md w-1/2">
-						Ask your question
-					</button>
+			<div class="w-full lg:w-[84%] lg:ml-[16%] grid grid-cols-12">
+				<div class="col-span-12  md:col-start-3 md:col-end-11 px-3 mt-[64px] md:mt-[74px]">
+					<div class="bg-light_gray rounded-md flex flex-row items-center">
+						<button class="py-3 px-3 text-xs md:text-sm  font-semibold text-white bg-icon_inactive rounded-md w-1/2">
+							All questions
+						</button>
+						<button class="py-3 px-3 text-xs md:text-sm  font-semibold bg-light_gray text-dark_gray rounded-md w-1/2">
+							Ask your question
+						</button>
+					</div>
 				</div>
-			</div>
-			<all-questions></all-questions>
-			<div class="mb-[60px]">
+				<all-questions></all-questions>
+				<div class="mb-[60px] col-span-12 md:mb-[80px]">
+				</div>
 			</div>
 		</ion-content>
 	</ion-page>
@@ -24,12 +25,11 @@ import { defineAsyncComponent } from 'vue'
 
 import { IonPage, IonContent } from '@ionic/vue'
 import { defineAsyncComponent } from 'vue'
-const TopBar = defineAsyncComponent(() => import('@/application/components/layout/topNavigations/Topbar.vue'))
 const AllQuestions = defineAsyncComponent(() => import('@/application/components/questions/all.vue'))
 
 export default  {
 	name: 'questions',
-	components: { TopBar, IonPage, IonContent, AllQuestions }
+	components: { IonPage, IonContent, AllQuestions }
 }
 </script>
 <style scoped>

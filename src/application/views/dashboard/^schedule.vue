@@ -3,7 +3,7 @@
 		<ion-content :fullscreen="true">
 			<div class="w-full lg:w-[84%] lg:ml-[16%] grid grid-cols-12">
 				
-			</div>		
+			</div>			
 		</ion-content>
 	</ion-page>
 </template>
@@ -13,7 +13,7 @@
 import { IonPage, IonContent } from '@ionic/vue'
 
 export default  {
-	name: 'tutors',
+	name: 'schedule',
 	components: { IonPage, IonContent }
 }
 </script>

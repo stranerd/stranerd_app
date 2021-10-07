@@ -1,11 +1,12 @@
 <template>
 	<ion-page>
 		<ion-content :fullscreen="true" class=" mx-auto">
-			<FeaturedTutors/>
-			<RecentQuestions />
-			<UpcomingEvent/>
-			<RecentTransaction />
-	
+			<div class="w-full lg:w-[84%] lg:ml-[16%] grid grid-cols-12">
+				<FeaturedTutors/>
+				<RecentQuestions />
+				<UpcomingEvent/>
+				<RecentTransaction />
+			</div>	
 		</ion-content>
 	</ion-page>
 </template>
@@ -20,7 +21,7 @@ import RecentTransaction from '@/application/components/dashboard/RecentTransact
 
 
 export default  {
-	name: 'Home',
+	name: 'home',
 	components: { IonContent, IonPage,  FeaturedTutors, RecentQuestions, UpcomingEvent, RecentTransaction,  },
 
 }
