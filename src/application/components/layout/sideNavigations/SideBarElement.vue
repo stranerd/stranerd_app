@@ -7,7 +7,7 @@
 			</div>
 		</div>
 		<div :class="`py-3 flex flex-row px-4 items-center ${props.route.name == props.tab ? 'text-dark_gray bg-white' : '' }   rounded-l-3xl`">
-			<ion-icon :icon="props.icon" class="text-[21px] mr-4" ></ion-icon>
+			<ion-icon :icon="props.icon" class="text-[23px] mr-4" ></ion-icon>
 			<span class="font-semibold  capitalize">{{props.tab}}</span>
 		</div>
 		<div :class="`${props.route.name == props.tab ? 'flex' : 'hidden' }  bg-white flex-row-reverse`">
@@ -19,8 +19,8 @@
 	</router-link>
 </template>
 <script lang="ts">
-import { defineComponent,  Ref } from 'vue'
-import { RouteLocationNormalized } from 'vue-router'
+import { IonIcon } from '@ionic/vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
 	props: {
@@ -33,5 +33,8 @@ export default defineComponent({
 			props
 		}
 	},
+	components: {
+		IonIcon
+	}
 })
 </script>

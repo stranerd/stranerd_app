@@ -35,19 +35,19 @@
 				</div>
 			
 
-				<div class=" md:w-1/2 w-full md:px-2 md:py-3 mb-4 md:mb-0">
+				<div class=" md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0">
 					<question></question>
 				</div>
 
-				<div class=" md:w-1/2 w-full md:px-2 md:py-3 mb-4 md:mb-0">
+				<div class=" md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0">
 					<question></question>
 				</div>
 
-				<div class=" md:w-1/2 w-full md:px-2 md:py-3 mb-4 md:mb-0">
+				<div class=" md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0">
 					<question></question>
 				</div>
 
-				<div class=" md:w-1/2 w-full md:px-2 md:py-3 mb-4 md:mb-0">
+				<div class=" md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0">
 					<question></question>
 				</div>
 			</div>
