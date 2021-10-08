@@ -28,25 +28,28 @@
 			Calculate the total time the ball is in the air?
 		</p>
 
-		<div class="mt-2 mb-2 flex flex-row items-center gap-4">
-			<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg">
-				Motion
-			</span>
-			<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg">
-				projectile-motion
-			</span>
-			<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg">
-				projectile
-			</span>
-		</div>
+		<div class="w-full flex flex-col lg:flex-row lg:justify-between">
+			<div class="mt-2 mb-2 flex flex-row items-center gap-4">
+				<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg">
+					Motion
+				</span>
+				<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg">
+					projectile-motion
+				</span>
+				<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg">
+					projectile
+				</span>
+			</div>
 
-		<div  class="mt-2 flex flex-row items-center ">
-			<span class="font-bold text-icon_inactive">30m ago</span>
-			<div class="flex flex-row-reverse items-center flex-grow">
-				<span class="font-bold text-icon_inactive">5 answers</span>
-				<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3" ></span>
+			<div  class="mt-2 flex flex-row items-center ">
+				<span class="font-bold text-icon_inactive lg:mr-2">30m ago</span>
+				<div class="flex flex-row-reverse items-center flex-grow">
+					<span class="font-bold text-icon_inactive">5 answers</span>
+					<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3" ></span>
+				</div>
 			</div>
 		</div>
+		
 	</div>
 </template>
 <script lang="ts">

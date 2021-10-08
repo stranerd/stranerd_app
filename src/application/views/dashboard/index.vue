@@ -6,6 +6,7 @@
 			<bottom-nav></bottom-nav>
 		</ion-tabs>
 	</ion-page>
+	<side-nav-bar></side-nav-bar>
 </template>
 
 <script lang="ts">
@@ -13,11 +14,12 @@ import { defineAsyncComponent } from 'vue'
 
 const BottomNav = defineAsyncComponent(() => import('@/application/components/layout/bottomNavigations/BottomNav.vue'))
 const TopBar = defineAsyncComponent(() => import('@/application/components/layout/topNavigations/Topbar.vue'))
+const SideNavBar = defineAsyncComponent(() => import('@/application/components/layout/sideNavigations/SideTabbar.vue'))
 import { IonPage, IonTabs, IonRouterOutlet } from '@ionic/vue'
 
 export default {
 	name: 'dashboard',
-	components: { BottomNav, IonPage, IonTabs, IonRouterOutlet, TopBar },
+	components: { BottomNav, IonPage, IonTabs, IonRouterOutlet, TopBar, SideNavBar },
 	setup() {
 		return {
 			

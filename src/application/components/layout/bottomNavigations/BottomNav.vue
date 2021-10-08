@@ -6,7 +6,7 @@
 		</router-link>
 
 		<router-link to="/dashboard/questions" class="col-span-1 text-icon_inactive flex flex-row items-center justify-center">
-			<ion-icon :icon="helpCircle" :class="route.name == 'questions' ? 'w-6 text-primary' : ' w-6' "></ion-icon>
+			<ion-icon :icon="helpCircle" :class="route.name == 'questions' ? 'w-7 text-primary' : ' w-7' "></ion-icon>
 		</router-link>
 
 		<router-link to="/dashboard/tutors" class="col-span-1 text-icon_inactive flex flex-row items-center justify-center">
@@ -61,41 +61,18 @@
 		
 	</div>
 
-	<!-- large screens -->
-	<div class="hidden md:hidden lg:flex bg-light_gray py-3 pl-3 fixed w-[16%] h-full bottom-0 flex-col rounded-tr-3xl rounded-br-3xl">
-
-		<div class="py-5  pl-11 flex flex-row items-center">
-			<img src="/assets/images/logo.svg" class="w-32" />
-		</div>
-
-		<div class="flex flex-col pl-8 mt-6">
-			
-			<nav-element :icon="home" :route="route" tab="home" ></nav-element>
-
-			<nav-element :icon="helpCircle" :route="route" tab="questions" ></nav-element>
-
-			<nav-element :icon="people" :route="route" tab="tutors" ></nav-element>
-
-			<nav-element :icon="calendarClear" :route="route" tab="schedule" ></nav-element>
-
-			<nav-element :icon="wallet" :route="route" tab="wallet" ></nav-element>
-
-		</div>
-		
-	</div>
 </template>
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 
 import { IonIcon } from '@ionic/vue'
 import { home, helpCircle, people , chatbubble, add, calendarClear, wallet } from 'ionicons/icons'
-const NavElement = defineAsyncComponent(() => import('@/application/components/layout/bottomNavigations/SideBarElement.vue'))
 
 import { useRoute } from 'vue-router'
 
 
 export default defineComponent({
-	components: { IonIcon, NavElement },
+	components: { IonIcon },
 	setup() {
 		const route = useRoute()
 		return {
