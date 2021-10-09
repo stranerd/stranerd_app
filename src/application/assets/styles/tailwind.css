@@ -11,3 +11,20 @@
     background: #ffffff;
 }
 
+@layer utilities {
+    .layout-page{
+        @apply w-full lg:w-[84%] lg:ml-[16%] lg:px-20 relative flex  mt-[64px] md:mt-[74px] flex-row lg:gap-16 lg:mt-[93px]
+    }
+    .layout-body{
+        @apply lg:w-3/4 w-full grid-cols-12 grid lg:mt-6
+    }
+    .layout-main{
+    @apply lg:w-[60%] !max-w-[60%] lg:p-0 pt-14 flex flex-col mx-auto my-0 w-full flex-grow
+    }
+    .layout-side-left{
+    @apply hidden lg:flex bg-light_gray py-3 pl-3 fixed  h-full bottom-0 flex-col rounded-tr-3xl rounded-br-3xl
+    }
+    .layout-side-right{
+    @apply hidden lg:inline-block w-1/4 py-1
+    }
+}

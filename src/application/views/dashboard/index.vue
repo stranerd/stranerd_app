@@ -14,7 +14,7 @@ import { defineAsyncComponent } from 'vue'
 
 const BottomNav = defineAsyncComponent(() => import('@/application/components/layout/bottomNavigations/BottomNav.vue'))
 const TopBar = defineAsyncComponent(() => import('@/application/components/layout/topNavigations/Topbar.vue'))
-const SideNavBar = defineAsyncComponent(() => import('@/application/components/layout/sideNavigations/SideTabbar.vue'))
+const SideNavBar = defineAsyncComponent(() => import('@/application/components/layout/sidebars/DefaultSidebar.vue'))
 import { IonPage, IonTabs, IonRouterOutlet } from '@ionic/vue'
 
 export default {

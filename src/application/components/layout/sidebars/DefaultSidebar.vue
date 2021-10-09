@@ -26,7 +26,7 @@
 import { defineAsyncComponent, defineComponent } from 'vue'
 import { home, helpCircle, people, calendarClear, wallet } from 'ionicons/icons'
 
-const NavElement = defineAsyncComponent(() => import('@/application/components/layout/sideNavigations/SideBarElement.vue'))
+const NavElement = defineAsyncComponent(() => import('@/application/components/layout/sidebars/SideBarElement.vue'))
 
 import { useRoute } from 'vue-router'
 
