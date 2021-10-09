@@ -1,15 +1,22 @@
 <template>
-	<div :class="`py-4 px-4 rounded-lg ${props.colorClass} flex flex-col w-full`">
+	<div :class="`py-4 px-4 rounded-lg ${props.colorClass} flex flex-col w-full relative cursor-pointer`" @click="showAnswers">
+		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
 			<img src="/assets/images/person-circle.svg" class="inline h-7 mr-2"/>
 			<span class="font-bold text-dark_gray">Timmy Nuetron</span>
 			<div class="flex flex-row-reverse flex-grow">
-				<button class="py-1 px-3 rounded-lg text-white bg-dark_gray font-bold flex flex-row items-center">
-					<span class="mr-2">Answer</span>
-					<span class="h-1 w-1 rounded-full bg-white mr-2" ></span>
-					<span class="mr-1 text-sm">+20</span>
-					<img src="/assets/images/bronze.svg" class=" h-4"/>
-				</button>
+				<template v-if="!props.fromViewQuestion">
+					<button class="py-1 px-3 rounded-lg text-white bg-dark_gray font-bold flex flex-row items-center">
+						<span class="mr-2">Answer</span>
+						<span class="h-1 w-1 rounded-full bg-white mr-2" ></span>
+						<span class="mr-1 text-sm">+20</span>
+						<img src="/assets/images/bronze.svg" class=" h-4"/>
+					</button>
+				</template>
+				<template v-else>
+					<ion-icon :icon="share" class="text-[22px] mr-1 text-icon_inactive"></ion-icon>
+					<ion-icon :icon="flag" class="text-[22px] text-icon_inactive"></ion-icon>
+				</template>
 			</div>
 		</div>
 
@@ -45,7 +52,7 @@
 				<span class="font-bold text-icon_inactive lg:mr-2">30m ago</span>
 				<div class="flex flex-row-reverse items-center flex-grow">
 					<span class="font-bold text-icon_inactive">5 answers</span>
-					<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3" ></span>
+					<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 " ></span>
 				</div>
 			</div>
 		</div>
@@ -54,6 +61,10 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { IonIcon, IonRippleEffect } from '@ionic/vue'
+import { share, flag} from 'ionicons/icons'
+import { useRouter } from 'vue-router'
+import { useStore } from '@/application/store'
 
 export default defineComponent({
 	props: {
@@ -64,11 +75,32 @@ export default defineComponent({
 		isFeatured: {
 			type: Boolean,
 			default: false
+		},
+		fromViewQuestion: {
+			type: Boolean,
+			default: false
 		}
 	},
+	components: {
+		IonIcon, IonRippleEffect
+	},
 	setup(props) {
+
+		const router = useRouter()
+
+		const store = useStore()
+
+		const showAnswers = () => {
+			
+			store.commit('showIonPage')
+			router.push({ path: '/questions/answers' })
+		}
+
 		return {
-			props
+			props,
+			share,
+			flag,
+			showAnswers
 		}
 	},
 })

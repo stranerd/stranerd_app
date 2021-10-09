@@ -3,19 +3,19 @@
 		
 		<div class="col-span-6 grid grid-cols-6 py-2 mt-2 md:mt-3">
 
-			<div class="col-span-6 grid grid-cols-6 md:px-2 ">
-				<div class="py-1 px-2 px-md text-sm col-span-6 md:col-span-3 md:mt-1 md:order-last bg-light_gray rounded-xl md:rounded-md flex flex-row">
+			<div class="col-span-6 grid grid-cols-12 md:px-2 ">
+				<div class="py-1 px-2 px-md text-sm col-span-12 md:col-start-4 md:col-end-10 md:mb-3   bg-light_gray rounded-xl md:rounded-md flex flex-row">
 					<ion-select value="notifications" class="w-full text-xs md:text-sm  placeholder-[#8B9EB1] font-bold" placeholder="Filter by subject" interface="action-sheet">
-						<ion-select-option value="maths" class="text-sm">Mathematics</ion-select-option>
-						<ion-select-option value="physics" class="text-sm">Physics</ion-select-option>
-						<ion-select-option value="bio" class="text-sm">Biology</ion-select-option>
-						<ion-select-option value="geo" class="text-sm" >Geography</ion-select-option>
-						<ion-select-option value="business" class="text-sm">Business</ion-select-option>
-						<ion-select-option value="civil" class="text-sm">Civil Right</ion-select-option>
+						<ion-select-option value="maths" >Mathematics</ion-select-option>
+						<ion-select-option value="physics" >Physics</ion-select-option>
+						<ion-select-option value="bio" >Biology</ion-select-option>
+						<ion-select-option value="geo"  >Geography</ion-select-option>
+						<ion-select-option value="business" >Business</ion-select-option>
+						<ion-select-option value="civil" >Civil Right</ion-select-option>
 					</ion-select>
 				</div>
 
-				<div class="mt-2 col-span-6 md:col-span-3 flex flex-row-reverse md:order-first md:mt-1 justify-center items-center md:justify-end">
+				<div class="mt-2 col-span-12  md:col-start-4 md:col-end-10 flex flex-row-reverse  justify-center items-center ">
 					<div class="flex flex-row items-center mr-2">
 						<ion-icon :icon="ellipse" class="text-lg mr-1 text-primary"></ion-icon>
 						<span class="font-bold text-icon_inactive">Answered </span>

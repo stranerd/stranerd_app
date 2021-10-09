@@ -27,4 +27,12 @@
     .layout-side-right{
     @apply hidden lg:inline-block w-1/4 py-1
     }
+
+	.inactiveSlideTab {
+		@apply py-3 px-3 text-xs md:text-sm  font-semibold bg-light_gray text-dark_gray rounded-md focus:outline-none
+	}
+
+	.activeSlideTab {
+		@apply py-3 px-3 text-xs md:text-sm  font-semibold text-white bg-icon_inactive rounded-md focus:outline-none
+	}
 }

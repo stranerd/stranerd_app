@@ -5,6 +5,7 @@ import routes from './application/router/routes'
 import { createRouter, createWebHistory } from '@ionic/vue-router'
 import { IonicVue } from '@ionic/vue'
 
+import { store, key } from './application/store'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css'
@@ -60,6 +61,7 @@ const init = async() => {
 	})
 		.component('AppLayout', AppLayout)
 		.use(await router)
+		.use(store, key)
 		.use(IonicVue)
 		.mount('#app')
   

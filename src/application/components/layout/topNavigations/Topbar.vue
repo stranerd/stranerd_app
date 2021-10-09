@@ -1,6 +1,6 @@
 <template>
 	<!-- Small screens -->
-	<div class="md:hidden bg-[#F7F7FC] py-[8px] px-4 fixed flex w-full top-0 border-0 flex-row items-center z-50">
+	<div class="md:hidden bg-[#F7F7FC] py-[8px] px-4 fixed flex w-full top-0 border-0 flex-row items-center z-50" v-if="!props.isNotDashboard && !store.state.showPage">
 		<div class="flex flex-row items-center w-[15%]">
 			<img src="/assets/images/person-circle.svg" class="inline h-7"/>
 		</div>
@@ -28,7 +28,7 @@
 	</div>
 
 	<!-- medium screens -->
-	<div class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50">
+	<div class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50" v-if="!props.isNotDashboard && !store.state.showPage ">
 		<div class="flex flex-row items-center gap-9 w-1/4">
 			<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
 				<img src="/assets/images/person-circle.svg" class="inline h-6"/>
@@ -115,11 +115,22 @@
 import { defineComponent } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { add } from 'ionicons/icons'
+import { useStore } from '@/application/store'
 
 export default defineComponent({
-	setup() {
+	props: {
+		isNotDashboard: {
+			type: Boolean,
+			default: true
+		}
+	},
+	setup(props) {
+
+		const store = useStore()
 		return {
-			add
+			add,
+			props,
+			store
 		}
 	},
 	components: { IonIcon }
