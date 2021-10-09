@@ -1,6 +1,7 @@
 <template>
-	<div class="w-full flex flex-col py-3 px-2">
-		<div class="flex flex-row justify-between items-center">
+	<div class="w-full flex flex-col py-3 px-2 ">
+
+		<div class="flex flex-row justify-between items-center ">
 			<h2 class="text-dark_gray text-base font-bold ">Challenges</h2>
 			<div class="flex flex-row items-center text-sm font-semibold text-primary ">
 				<span class="text-sm text-primary  ">view all</span>

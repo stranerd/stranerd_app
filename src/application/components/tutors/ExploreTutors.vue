@@ -1,6 +1,5 @@
 <template>
 	<div class="grid grid-col-6 px-3  text-xs md:text-sm  col-span-12">
-
 		<div class="col-span-6 grid grid-cols-6 py-2 mt-2 md:mt-3">
 
 			<div class="col-span-6 grid grid-cols-6 md:px-2 ">
@@ -25,7 +24,6 @@
 						<span class="font-bold text-icon_inactive">Unanswered </span>
 					</div>
 					<span class="font-bold text-icon_inactive mr-3">Sort by: </span>
-
 				</div>
 			</div>
 

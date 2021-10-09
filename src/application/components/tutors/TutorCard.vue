@@ -39,7 +39,13 @@ export default {
 		style: {
 			required: false,
 			type: String,
+		},
+		showButton: {
+			required: false,
+			type: Boolean,
+			default:false
 		}
+
 	}
 
 }
@@ -48,6 +54,28 @@ export default {
 <style scoped lang="scss">
 ion-card{
 	box-shadow: none !important;
+
+
+}
+
+	ion-button{
+    --background: #F7F7FC;
+    --color: #8B9EB1;
+    --border-radius: .75rem;
+    --border-width: .0625rem;
+    --border-style: solid;
+    --border-color: #8B9EB1;
+	--padding-top: 1rem;
+	--padding-bottom: 1rem;
+	--box-shadow: none;
+
+		@media (max-width: $sm) {
+			 --border-radius:.454268rem;
+			 --padding-right: 1rem;
+			 --padding-left: 2rem;
+			 --padding-top: 0.5rem;
+			 --padding-bottom: 0.5rem;
+		}
 
 }
 
