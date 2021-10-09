@@ -51,13 +51,13 @@
 
 			<div class="flex flex-row px-3 mt-7  text-white">
 				<div class="w-1/2 flex flex-row justify-center items-center">
-					<button class=" px-5 py-3 relative ion-activatable rounded-lg  font-bold bg-dark_gray ">
+					<button class=" px-6 py-3 relative ion-activatable rounded-lg  font-bold bg-dark_gray ">
 						Cancle
 						<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 					</button>
 				</div>
 				<div class="w-1/2 flex flex-row justify-center items-center">
-					<button class=" px-5 relative ion-activatable font-bold py-3 rounded-lg bg-primary">
+					<button class=" px-6 relative ion-activatable font-bold py-3 rounded-lg bg-primary">
 						Post question
 						<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 					</button>

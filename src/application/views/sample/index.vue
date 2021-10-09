@@ -1,0 +1,27 @@
+<template>
+	<ion-page>
+		<ion-header>
+			<ion-toolbar>
+				<ion-title>TSample 00</ion-title>
+			</ion-toolbar>
+		</ion-header>
+		<ion-content :fullscreen="true">
+			<ion-header collapse="condense">
+				<ion-toolbar>
+					<ion-title size="large">Sample</ion-title>
+				</ion-toolbar>
+			</ion-header>
+    
+			You you oo
+		</ion-content>
+	</ion-page>
+</template>
+
+<script lang="ts">
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue'
+
+export default  {
+	name: 'Sample2',
+	components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
+}
+</script>
