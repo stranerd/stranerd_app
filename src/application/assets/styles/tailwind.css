@@ -5,9 +5,31 @@
 ::-webkit-scrollbar {
     width: 0;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
+    display: none;
 }
+
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
     background: #ffffff;
 }
 
+@layer utilities {
+    .layout-page{
+        @apply flex flex-col min-h-screen mx-auto my-0 max-w-[1920px]
+    }
+    .layout-body{
+        @apply w-full flex-grow flex flex-row my-0 mx-auto gap-8 py-3 px-[1.125rem] md:p-8 lg:py-9 lg:px-0
+    }
+    .layout-main{
+    @apply lg:w-[60%] !max-w-[60%] lg:p-0 pt-14 flex flex-col mx-auto my-0 w-full flex-grow
+    }
+    .layout-side-left{
+    @apply hidden lg:flex bg-light_gray py-3 pl-3 fixed  h-full bottom-0 flex-col rounded-tr-3xl rounded-br-3xl
+    }
+    .layout-side-right{
+    @apply hidden flex-col w-[19%] mr-4 lg:flex fixed right-0 top-0
+    }
+
+
+
+}
