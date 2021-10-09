@@ -1,7 +1,7 @@
 <template>
 	<ion-card
 	
-		:class="[ style ,' md:min-w-[246px] md:min-h-[246px] min-w-[150px] min-h-[150px]  md:rounded-xl rounded-md flex flex-col md:gap-4 gap-2 justify-center items-center']"
+		:class="[ style ,' md:min-w-[246px] md:min-h-[246px] min-w-[143px] min-h-[150px]  md:rounded-xl rounded-md flex flex-col md:gap-4 gap-2 justify-center items-center pb-4 pt-2']"
 	>
 		<div class="relative">
 			<avatar
@@ -22,7 +22,7 @@
 
 		<show-ratings :rating="4"/>
 			
-		<ion-button  class="w-full font-bold capitalize text-base max-w-[198px]">
+		<ion-button  class="font-bold capitalize md:text-base text-[9.69px] max-w-[100px] md:max-w-[198px] w-[198px] lg:w-full h-[21.8px] box-border" v-if="showButton">
 			Request a session</ion-button>
 
 	</ion-card>
@@ -39,7 +39,13 @@ export default {
 		style: {
 			required: false,
 			type: String,
+		},
+		showButton: {
+			required: false,
+			type: Boolean,
+			default:false
 		}
+
 	}
 
 }
@@ -48,6 +54,7 @@ export default {
 <style scoped lang="scss">
 ion-card{
 	box-shadow: none !important;
+
 
 }
 
@@ -62,6 +69,13 @@ ion-card{
 	--padding-bottom: 1rem;
 	--box-shadow: none;
 
+		@media (max-width: $sm) {
+			 --border-radius:.454268rem;
+			 --padding-right: 1rem;
+			 --padding-left: 2rem;
+			 --padding-top: 0.5rem;
+			 --padding-bottom: 0.5rem;
+		}
 
 }
 </style>

@@ -1,6 +1,23 @@
 <template>
-	<div class="w-full flex flex-col py-3 px-2">
-		<div class="flex flex-row justify-between items-center">
+	<div class="w-full flex flex-col py-3 px-2 ">
+
+		<div class="flex flex-row items-center w-full py-1 ">
+			<div class="py-[10px] px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
+				<div class="w-1/3 flex flex-row items-center">
+					<img src="/assets/images/bronze.svg" class="inline h-5 mr-2"/>
+					<span class="font-semibold text-sm text-dark_grey ">10k</span>
+				</div>
+				<div class="w-1/3 flex flex-row items-center justify-center">
+					<img src="/assets/images/add.svg" class="inline h-5"/>
+				</div>
+				<div class="w-1/3 flex flex-row-reverse items-center">
+					<span class="font-semibold text-sm text-dark_grey ">250</span>
+					<img src="/assets/images/gold.svg" class="inline h-5 mr-2"/>
+				</div>
+			</div>
+		</div>
+
+		<div class="flex flex-row justify-between items-center mt-8">
 			<h2 class="text-dark_gray text-base font-bold ">Challenges</h2>
 			<div class="flex flex-row items-center text-sm font-semibold text-primary ">
 				<span class="text-sm text-primary  ">view all</span>

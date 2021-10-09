@@ -30,7 +30,7 @@
 			</div>
 
 			<div class="mt-5 md:mt-6  col-span-6 flex flex-row flex-wrap justify-center">
-				<tutor-card class="bg-light_gray flex md:!w-[246px] !w-[150px]" :showButton="true" v-for="n in 10" :key="n"/>
+				<tutor-card class="bg-light_gray flex md:!w-[246px] !w-[143px]" :showButton="true" v-for="n in 10" :key="n"/>
 			</div>
 		</div>
 				
