@@ -10,7 +10,7 @@
 			</ion-input>
 		</div>
 		
-		<div class="mt-3 border-2 border-faded_gray rounded-lg py-5 flex-col px-3">
+		<div class="mt-3 border border-faded_gray rounded-lg py-5 flex-col px-3">
 			<span class="text-dark_gray font-bold">Explanation - </span>
 			<ion-textarea rows="9" 
 				class="bg-white border-0 focus:outline-none  w-full"  

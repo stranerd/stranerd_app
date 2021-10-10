@@ -1,12 +1,12 @@
 <template>
 	<div class="grid grid-col-12 px-3 text-xs md:text-sm mt-6 col-span-12 md:flex md:flex-row md:justify-center">
 		
-		<div class="col-span-12 flex flex-col md:w-4/5  md:border-2 md:border-faded_gray md:rounded-lg md:py-6 md:px-6">
+		<div class="col-span-12 flex flex-col md:w-4/5  md:border md:border-faded_gray md:rounded-lg md:py-6 md:px-6">
 			<h3 class="text-center font-bold text-dark_gray mb-2s">
 				Get requests from tutors to help with your homework and studies.
 			</h3>
 
-			<div class="mt-3 border-2 border-faded_gray rounded-lg py-5 px-3">
+			<div class="mt-3 border border-faded_gray rounded-lg py-5 px-3">
 				<ion-textarea rows="9" 
 					class="bg-white border-0 focus:outline-none  w-full"  
 					placeholder="Explain exactly what you need help with."></ion-textarea>

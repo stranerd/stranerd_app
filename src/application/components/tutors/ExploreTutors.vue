@@ -38,8 +38,7 @@
 <script lang="ts">
 import { IonSelect, IonSelectOption, } from '@ionic/vue'
 import {  defineComponent } from 'vue'
-// Import Swiper Vue.js components
-// Import Swiper styles
+
 import 'swiper/swiper-bundle.min.css'
 import TutorCard from './TutorCard.vue'
 export default defineComponent({

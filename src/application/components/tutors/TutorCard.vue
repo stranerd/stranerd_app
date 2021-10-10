@@ -24,17 +24,20 @@
 			
 		<ion-button  class="w-full font-bold capitalize text-base max-w-[198px]" v-if="showButton">
 			Request a session</ion-button>
-
 	</ion-card>
+
+	<!-- <Modal :showModal="true" /> -->
+
 </template>
 
 <script lang="ts">
 import { IonCard, IonButton } from '@ionic/vue'
 import Avatar from '@/application/components/core/Avatar.vue'
 import ShowRatings from '@/application/components/core/ShowRatings.vue'
+
 export default {
 	name: 'TutorCard',
-	components: {IonCard, Avatar, ShowRatings, IonButton },
+	components: {IonCard, Avatar, ShowRatings, IonButton,  },
 	props:{
 		style: {
 			required: false,
