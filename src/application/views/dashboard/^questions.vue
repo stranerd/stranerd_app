@@ -50,7 +50,6 @@ const SideProfileNav = defineAsyncComponent(() => import('@/application/componen
 
 // Import Swiper styles
 import 'swiper/swiper-bundle.min.css'
-
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { useStore } from '@/application/store'
 
