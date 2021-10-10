@@ -1,5 +1,5 @@
 <template>
-	<div :class="`py-4 px-4 rounded-lg ${props.colorClass} flex flex-col w-full relative cursor-pointer`" @click="showAnswers">
+	<router-link :class="`py-4 px-4 rounded-lg ${props.colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer`" to="/questions/answers">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
 			<img src="/assets/images/person-circle.svg" class="inline h-7 mr-2"/>
@@ -14,8 +14,8 @@
 					</button>
 				</template>
 				<template v-else>
-					<ion-icon :icon="share" class="text-[22px] mr-1 text-icon_inactive"></ion-icon>
-					<ion-icon :icon="flag" class="text-[22px] text-icon_inactive"></ion-icon>
+					<ion-icon :icon="flag" class="text-[22px]  text-icon_inactive"></ion-icon>
+					<ion-icon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive"></ion-icon>
 				</template>
 			</div>
 		</div>
@@ -57,12 +57,12 @@
 			</div>
 		</div>
 		
-	</div>
+	</router-link>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonIcon, IonRippleEffect } from '@ionic/vue'
-import { share, flag} from 'ionicons/icons'
+import { arrowRedo, flag} from 'ionicons/icons'
 import { useRouter } from 'vue-router'
 import { useStore } from '@/application/store'
 
@@ -93,13 +93,16 @@ export default defineComponent({
 		const showAnswers = () => {
 			
 			store.commit('showIonPage')
-			router.push({ path: '/questions/answers' })
+			router.push({ 
+				 name: 'answers'
+			 })
 		}
 
 		return {
 			props,
-			share,
+			arrowRedo,
 			flag,
+			router,
 			showAnswers
 		}
 	},
