@@ -8,9 +8,7 @@
 						<span class="font-bold text-dark_gray text-base md:text-2xl mb-3">
 							Available balance
 						</span>
-
 						<BalanceCard/>
-
 						<TranscractionHistory/>
 					</div>
 				
