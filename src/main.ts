@@ -58,9 +58,7 @@ const init = async() => {
 		components: {
 			App
 		},
-	})
-		.component('AppLayout', AppLayout)
-		.use(await router)
+	}).use(await router)
 		.use(store, key)
 		.use(IonicVue)
 		.mount('#app')

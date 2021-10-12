@@ -1,7 +1,7 @@
 <template>
 	<ion-card
 	
-		:class="[ style ,' md:min-w-[246px] md:min-h-[246px] min-w-[150px] min-h-[150px]  md:rounded-xl rounded-md flex flex-col md:gap-4 gap-2 justify-center items-center']"
+		:class="[ style ,' md:min-w-[260px] md:min-h-[260px] min-w-[150px] min-h-[150px]  md:rounded-xl rounded-md flex flex-col md:gap-5 gap-2 justify-center items-center']"
 	>
 		<div class="relative">
 			<avatar
@@ -22,19 +22,22 @@
 
 		<show-ratings :rating="4"/>
 			
-		<ion-button  class="w-full font-bold capitalize text-base max-w-[198px]">
+		<ion-button  class="w-full font-bold capitalize text-base max-w-[198px]" v-if="showButton">
 			Request a session</ion-button>
-
 	</ion-card>
+
+	<!-- <Modal :showModal="true" /> -->
+
 </template>
 
 <script lang="ts">
 import { IonCard, IonButton } from '@ionic/vue'
 import Avatar from '@/application/components/core/Avatar.vue'
 import ShowRatings from '@/application/components/core/ShowRatings.vue'
+
 export default {
 	name: 'TutorCard',
-	components: {IonCard, Avatar, ShowRatings, IonButton },
+	components: {IonCard, Avatar, ShowRatings, IonButton,  },
 	props:{
 		style: {
 			required: false,
@@ -68,13 +71,17 @@ ion-card{
 	--padding-top: 1rem;
 	--padding-bottom: 1rem;
 	--box-shadow: none;
+	--background-hover:transparent !important;
 
 		@media (max-width: $sm) {
-			 --border-radius:.454268rem;
-			 --padding-right: 1rem;
-			 --padding-left: 2rem;
-			 --padding-top: 0.5rem;
-			 --padding-bottom: 0.5rem;
+			 --border-radius:.454268rem !important;
+			 --padding-top: 0.8rem !important;
+			 --padding-bottom: 0.8rem !important;
+			 --padding-right: 0.5rem !important;
+			 --padding-left: 0.5rem !important;
+			 max-width: 135px !important;
+             font-size: 10px !important;
+             max-height: 22px !important;
 		}
 
 }

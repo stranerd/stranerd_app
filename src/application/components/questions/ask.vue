@@ -1,12 +1,12 @@
 <template>
 	<div class="grid grid-col-12 px-3 text-xs md:text-sm mt-6 col-span-12 md:flex md:flex-row md:justify-center">
 		
-		<div class="col-span-12 flex flex-col md:w-4/5  md:border-2 md:border-faded_gray md:rounded-lg md:py-6 md:px-6">
+		<div class="col-span-12 flex flex-col md:w-4/5  md:border md:border-faded_gray md:rounded-lg md:py-6 md:px-6">
 			<h3 class="text-center font-bold text-dark_gray">
 				Ask questions to help with your homework and studies.
 			</h3>
 
-			<div class="mt-3 border-2 border-faded_gray rounded-lg py-5 px-3">
+			<div class="mt-3 border border-faded_gray rounded-lg py-5 px-3">
 				<ion-textarea rows="9" 
 					class="bg-white border-0 focus:outline-none  w-full"  
 					placeholder="Write your question here and make sure it is explained in full detail."></ion-textarea>
@@ -51,13 +51,13 @@
 
 			<div class="flex flex-row px-3 mt-7  text-white">
 				<div class="w-1/2 flex flex-row justify-center items-center">
-					<button class=" px-5 py-3 relative ion-activatable rounded-lg  font-bold bg-dark_gray ">
+					<button class=" px-6 py-3 relative ion-activatable rounded-lg  font-bold bg-dark_gray ">
 						Cancle
 						<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 					</button>
 				</div>
 				<div class="w-1/2 flex flex-row justify-center items-center">
-					<button class=" px-5 relative ion-activatable font-bold py-3 rounded-lg bg-primary">
+					<button class=" px-6 relative ion-activatable font-bold py-3 rounded-lg bg-primary">
 						Post question
 						<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 					</button>
