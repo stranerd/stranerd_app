@@ -42,4 +42,5 @@
 	.activeSlideTab {
 		@apply py-3 px-3 text-xs md:text-sm  font-semibold text-white bg-icon_inactive rounded-md focus:outline-none
 	}
+
 }
