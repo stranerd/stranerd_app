@@ -20,17 +20,28 @@
 			</div>
 		</div>
 
-		<ion-button  class="md:w-[200px] w-[134px] md:mt-14 mt-7 font-bold capitalize md:text-base ">Buy coins</ion-button>
+		<ion-button @click="buyCoins" class="md:w-[200px] w-[134px] md:mt-14 mt-7 font-bold capitalize md:text-base ">Buy coins</ion-button>
 	</div>
 </template>
 
-<script>
+<script lang="ts">
 
 import { IonButton } from '@ionic/vue'
 import Coins from '@/application/components/core/Coins.vue'
+import { componentName, showModal } from '@/modules/Modal'
 export default {
 	name:'Balance Card',
-	components:{IonButton, Coins, }
+	components:{IonButton, Coins, },
+	setup(props) {
+		const buyCoins = () => {
+			showModal.value = true
+			componentName.value = 'buyCoins'
+		}
+
+		return {
+			buyCoins
+		}
+	}
 }
 </script>
 

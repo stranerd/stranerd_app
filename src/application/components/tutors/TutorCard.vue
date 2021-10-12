@@ -22,11 +22,10 @@
 
 		<show-ratings :rating="4"/>
 			
-		<ion-button  class="w-full font-bold capitalize text-base max-w-[198px]" v-if="showButton">
+		<ion-button @click="requestSession" class="w-full font-bold capitalize text-base max-w-[198px]" v-if="showButton">
 			Request a session</ion-button>
-	</ion-card>
 
-	<!-- <Modal :showModal="true" /> -->
+	</ion-card>	
 
 </template>
 
@@ -34,10 +33,11 @@
 import { IonCard, IonButton } from '@ionic/vue'
 import Avatar from '@/application/components/core/Avatar.vue'
 import ShowRatings from '@/application/components/core/ShowRatings.vue'
+import { componentName, showModal } from  '../../../modules/Modal'
 
 export default {
 	name: 'TutorCard',
-	components: {IonCard, Avatar, ShowRatings, IonButton,  },
+	components: {IonCard, Avatar, ShowRatings, IonButton },
 	props:{
 		style: {
 			required: false,
@@ -49,6 +49,18 @@ export default {
 			default:false
 		}
 
+	},
+	setup(props: any) {
+
+		const requestSession = () => {
+			componentName.value = 'requestSession'
+			showModal.value = true
+		}
+
+		return {
+			requestSession
+		}
+		
 	}
 
 }
