@@ -1,11 +1,16 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "ES2018",
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"lib": [
+			"ESNext",
+			"ESNext.AsyncIterable",
+			"DOM"
+		],
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
-    "moduleResolution": "node",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -13,12 +18,22 @@
     "baseUrl": ".",
     "types": [
       "webpack-env",
-      "jest"
+      "jest",
+      "@types/node",
     ],
     "paths": {
       "@/*": [
         "src/*"
-      ]
+      ],
+      "@app/*": [
+				"src/application/*"
+			],
+			"@modules/*": [
+				"src/modules/*"
+			],
+			"@utils/*": [
+				"src/utils/*"
+			]
     },
     "lib": [
       "esnext",
@@ -28,13 +43,12 @@
     ]
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "src"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "build",
+		"dist",
+    "Nust_files"
   ]
 }

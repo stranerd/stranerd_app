@@ -1,107 +1,89 @@
 <template>
-	<div class="gap-1 gap-md-2 d-flex flex-column">
-		<form class="gap-1 gap-md-2 d-flex flex-column" @submit.prevent="signin">
-			<Heading class="text-center" variant="1">
-				Sign In
-			</Heading>
-			<div>
-				<input
-					id="email"
-					v-model="factory.email"
-					autocomplete="email"
-					class="form-control"
-					name="email"
-					placeholder="Email"
-					required
-					type="email"
-				>
-				<DynamicText v-if="factory.errors.email" class="small text-danger d-block">
-					{{ factory.errors.email }}
-				</DynamicText>
+	<ion-page>
+		<ion-content
+			class="flex flex-col bg-dark h-screen w-screen items-start justify-center py-3 px-5 "
+		>
+			<div class="flex justify-between  py-6 px-5">
+				<i class="las la-arrow-left text-white text-xl"></i>
+				<img src="../../assets/images/icons/logo-xs.svg" alt="ask a question" class="object-fit h-4 ">
 			</div>
-			<div>
-				<input
-					id="password"
-					v-model="factory.password"
-					autocomplete="password"
-					class="form-control"
-					name="password"
-					placeholder="Password"
-					required
-					type="password"
-				>
-				<DynamicText v-if="factory.errors.password" class="small text-danger d-block">
-					{{ factory.errors.password }}
-				</DynamicText>
-				<div class="text-end mt-1">
-					<NuxtLink class="linkText text-decoration-none" to="/auth/forgot">
-						Forgot Password
-					</NuxtLink>
-				</div>
+
+			<h1 class="text-center text-3xl text-white font-semibold font-nuni mt-12">Welcome back.</h1>
+
+			<form class=" px-5 flex flex-col justify-center mx-auto mt-20">
+
+				<ion-input placeholder="Email Address" position="floating"></ion-input>
+				<ion-input placeholder="Password" position="floating"></ion-input>
+
+			</form>
+
+			<div class="flex justify-between items-center  px-5 mt-10">
+				<p class="text-xs text-white font-semibold font-nuni">Not a member on Stranerd?</p>
+				<span @click="() => router.push('/auth/signup')" class="flex items-center text-yellow-300 font-nuni text-xs font-bold">Sign Up <i class="las la-arrow-right text-xl"></i> </span>
 			</div>
-			<button :disabled="loading || !factory.valid" class="btn btn-lg btn-custom py-1" type="submit">
-				Sign In
-			</button>
-			<DisplayError :error="error" />
-			<PageLoading v-if="loading" />
-		</form>
-		<div class="d-flex gap-1 align-items-center">
-			<div class="flex-grow-1 border-bottom border-line" style="height: 2px;" />
-			<span>or sign in with</span>
-			<div class="flex-grow-1 border-bottom border-line" style="height: 2px;" />
-		</div>
-		<AuthProviders />
-		<div class="d-flex align-items-center justify-content-center gap-0-25">
-			<span>Not a member yet?</span>
-			<NuxtLink class="linkText" to="/auth/signup">
-				Sign Up
-			</NuxtLink>
-		</div>
-	</div>
+
+			<div class="flex justify-between px-5 items-center mt-14">
+				<div class="border-white border-b h-1 w-5/12"/>
+				<span class="font-nuni text-white">or</span>
+				<div class="border-white border-b h-1 w-5/12"/>
+			</div>
+
+			<p class="text-center text-xs font-nuni text-white font-bold mt-5 ">
+				Sign in with Google
+			</p>
+
+			<div class="flex justify-center w-full px-5">
+				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6">
+					<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
+					Google</ion-button>
+			</div>
+
+		
+		</ion-content>
+	</ion-page>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import AuthProviders from '@/application/components/auth/AuthProviders.vue'
-import { usePassword } from '@/application/hooks/core/forms'
-import { useEmailSignin } from '@/application/hooks/auth/signin'
+<script>
+// import { IonContent, IonButton, IonPage } from '@ionic/vue'
+import { IonContent, IonPage, IonInput, IonButton } from '@ionic/vue'
+import { defineComponent, ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+
 
 export default defineComponent({
-	name: 'AuthSigninPage',
-	components: { AuthProviders },
-	layout: 'auth',
-	middleware: ['isNotAuthenticated'],
-	setup () {
-		const { show, toggle } = usePassword()
-		const { loading, signin, factory, error } = useEmailSignin()
-		// useMeta(() => ({
-		// 	title: 'Sign in for Stranerd'
-		// }))
-		return { show, toggle, factory, loading, error, signin }
-	},
-	head: {}
+	components: { IonContent,IonPage, IonInput, IonButton},
+	  setup() {
+		const router = useRouter()
+		return { router }
+	}
+
 })
 </script>
+
 <style lang="scss" scoped>
-	input {
-		border: 1px solid $color-sub;
-		border-radius: 6px;
-		color: $color-sub;
-		padding: 1rem;
-	}
+ion-input{
+	--background: #EFF0F6 !important;
+	--padding-start: 1.5rem !important;
+	--padding-end: 1.5rem !important;
+	--padding-top: .69rem !important;
+	--padding-bottom: .69rem !important;
+	--color: $color-dark !important;
+	--placeholder-color: $color-dark !important;
+	border-radius: 10px;
+	margin-bottom: 1.25rem;
+}
 
-	.btn-custom {
-		background-color: $color-primary;
-		color: $color-white;
-		border: 2px solid;
-		border-radius: 6px;
-		font-size: 16px;
-		font-weight: bold;
-	}
+	ion-button{
+    --background: white;
+    --border-radius: 3.125rem;
+    --color: #4D5C6F;
+    --background-hover: white;
+	--padding-top: 1rem;
+	--padding-bottom: 1rem;
+	height: 2.75rem;
+	transition: all .5s ease-in-out;
 
-	.linkText {
-		color: $color-primary;
-		text-decoration: underline;
-		font-weight: bold;
-	}
+}
+
 </style>

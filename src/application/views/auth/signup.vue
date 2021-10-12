@@ -1,149 +1,92 @@
 <template>
-	<div class="gap-1 gap-md-2 d-flex flex-column">
-		<form class="d-flex gap-1 gap-md-2 flex-column" @submit.prevent="signup">
-			<Heading class="text-center" variant="1">
-				Sign Up
-			</Heading>
-			<div class="d-flex flex-column gap-1 gap-md-2 flex-md-row">
-				<div class="flew-grow-1 w-100">
-					<input
-						id="first"
-						v-model="factory.first"
-						autocomplete="first-name"
-						class="form-control"
-						name="first"
-						placeholder="First name"
-						required
-						type="text"
-					>
-					<DynamicText v-if="factory.errors.first" class="small text-danger d-block">
-						{{ factory.errors.first }}
-					</DynamicText>
-				</div>
-				<div class="flew-grow-1 w-100">
-					<input
-						id="last"
-						v-model="factory.last"
-						autocomplete="last-name"
-						class="form-control"
-						name="last"
-						placeholder="Last name"
-						required
-						type="text"
-					>
-					<DynamicText v-if="factory.errors.last" class="small text-danger d-block">
-						{{ factory.errors.last }}
-					</DynamicText>
-				</div>
+	<ion-page>
+		<ion-content
+			class="flex flex-col bg-dark h-screen w-screen items-start justify-center py-3 px-5 "
+		>
+			<div class="flex justify-between  py-6 px-5">
+				<i class="las la-arrow-left text-white text-xl"></i>
+				<img src="../../assets/images/icons/logo-xs.svg" alt="ask a question" class="object-fit h-4 ">
 			</div>
-			<div>
-				<input
-					id="email"
-					v-model="factory.email"
-					autocomplete="email"
-					class="form-control"
-					name="email"
-					placeholder="Email"
-					required
-					type="email"
-				>
-				<DynamicText v-if="factory.errors.email" class="small text-danger d-block">
-					{{ factory.errors.email }}
-				</DynamicText>
+
+			<h1 class="text-center text-3xl text-white font-semibold font-nuni mt-12">Create your Account.</h1>
+
+			<form class=" px-5 flex flex-col justify-center mx-auto mt-20">
+
+				<ion-input placeholder="First name" position="floating"></ion-input>
+				<ion-input placeholder="Last name" position="floating"></ion-input>
+				<ion-input placeholder="Email Address" position="floating"></ion-input>
+				<ion-input placeholder="Password" position="floating"></ion-input>
+				<ion-input placeholder="Confirm Password" position="floating"></ion-input>
+
+			</form>
+
+			<div class="flex justify-between items-center  px-5 mt-14">
+				<p class="text-xs text-white font-semibold font-nuni">Already have an Account on Stranerd?</p>
+				<span @click="() => router.push('/auth/signin')" class="flex items-center text-yellow-300 font-nuni text-xs font-bold">Sign In <i class="las la-arrow-right text-xl"></i> </span>
 			</div>
-			<div>
-				<input
-					id="password"
-					v-model="factory.password"
-					autocomplete="password"
-					class="form-control"
-					name="password"
-					placeholder="Password"
-					required
-					type="password"
-				>
-				<DynamicText v-if="factory.errors.password" class="small text-danger d-block">
-					{{ factory.errors.password }}
-				</DynamicText>
+
+			<div class="flex justify-between px-5 items-center mt-14">
+				<div class="border-white border-b h-1 w-5/12"/>
+				<span class="font-nuni text-white">or</span>
+				<div class="border-white border-b h-1 w-5/12"/>
 			</div>
-			<div>
-				<input
-					id="cPassword"
-					v-model="factory.cPassword"
-					autocomplete="password"
-					class="form-control"
-					name="cPassword"
-					placeholder="Confirm Password"
-					required
-					type="password"
-				>
-				<DynamicText v-if="factory.errors.cPassword" class="small text-danger d-block">
-					{{ factory.errors.cPassword }}
-				</DynamicText>
+
+			<p class="text-center text-xs font-nuni text-white font-bold mt-5 ">
+				Sign Up with Google
+			</p>
+
+			<div class="flex justify-center w-full px-5">
+				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6">
+					<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
+					Google</ion-button>
 			</div>
-			<button :disabled="loading || !factory.valid" class="btn btn-lg btn-custom py-1 " type="submit">
-				Sign Up
-			</button>
-			<DisplayError :error="error" />
-			<PageLoading v-if="loading" />
-		</form>
-		<div class="d-flex gap-1 align-items-center">
-			<div class="flex-grow-1 border-bottom border-line" style="height: 2px;" />
-			<span>or sign up with</span>
-			<div class="flex-grow-1 border-bottom border-line" style="height: 2px;" />
-		</div>
-		<AuthProviders />
-		<div class="d-flex align-items-center justify-content-center gap-0-25">
-			<span>Already have an account?</span>
-			<NuxtLink class="linkText" to="/auth/signin">
-				Sign in
-			</NuxtLink>
-		</div>
-	</div>
+
+		
+		</ion-content>
+	</ion-page>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import AuthProviders from '@/application/components/auth/AuthProviders.vue'
-import { usePassword } from '@/application/hooks/core/forms'
-import { useEmailSignup } from '@/application/hooks/auth/signin'
+<script>
+// import { IonContent, IonButton, IonPage } from '@ionic/vue'
+import { IonContent, IonPage, IonInput, IonButton } from '@ionic/vue'
+import { defineComponent, ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+
 
 export default defineComponent({
-	name: 'AuthSignupPage',
-	components: { AuthProviders },
-	layout: 'auth',
-	middleware: ['isNotAuthenticated'],
-	setup () {
-		const { show, toggle } = usePassword()
-		const { factory, loading, error, signup } = useEmailSignup()
-		// useMeta(() => ({
-		// 	title: 'Sign up for Stranerd'
-		// }))
-		return { show, toggle, factory, loading, error, signup }
-	},
-	head: {}
+	components: { IonContent,IonPage, IonInput, IonButton},
+		  setup() {
+		const router = useRouter()
+		return { router }
+	}
+
 })
 </script>
+
 <style lang="scss" scoped>
-	input {
-		border: 1px solid $color-sub;
-		border-radius: 6px;
-		color: $color-sub;
-		padding: 1rem;
-	}
+ion-input{
+	--background: #EFF0F6 !important;
+	--padding-start: 1.5rem !important;
+	--padding-end: 1.5rem !important;
+	--padding-top: .69rem !important;
+	--padding-bottom: .69rem !important;
+	--color: $color-dark !important;
+	--placeholder-color: $color-dark !important;
+	border-radius: 10px;
+	margin-bottom: 1.25rem;
+}
 
-	.btn-custom {
-		background-color: $color-primary;
-		color: $color-white;
-		border: 2px solid;
-		border-radius: 6px;
-		font-size: 16px;
-		font-weight: bold;
-	}
+	ion-button{
+    --background: white;
+    --border-radius: 3.125rem;
+    --color: #4D5C6F;
+    --background-hover: white;
+	--padding-top: 1rem;
+	--padding-bottom: 1rem;
+	height: 2.75rem;
+	transition: all .5s ease-in-out;
 
-	.linkText {
-		color: $color-primary;
-		text-decoration: underline;
-		font-weight: bold;
-	}
+}
+
 </style>

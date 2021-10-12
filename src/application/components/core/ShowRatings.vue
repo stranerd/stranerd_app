@@ -1,6 +1,13 @@
 <template>
-	<div class="d-inline-flex text-no-wrap justify-content-end">
-		<i
+	<div class="flex no-wrap justify-end">
+		<ion-icon
+			v-for="(comment,index) in 5"
+			:key="'comment'+ index"
+			:class="[index <= rating-1 ? 'text-star_yellow' : 'text-icon_inactive', 'h-4 text-2xl  text-[18px]']"
+			:icon="starSharp" 
+		/>
+
+		<!-- <i
 			:class="{'fa-star text-gold': rating >= 0.5, 'fa-star-half-alt text-gold': rating > 0 && rating < 0.5, 'fa-star text-sub': rating <= 0 }"
 			class="fas"
 		/>
@@ -19,21 +26,30 @@
 		<i
 			:class="{'fa-star text-gold': rating >= 4.5, 'fa-star-half-alt text-gold': rating > 4 && rating < 4.5, 'fa-star text-sub': rating <= 4 }"
 			class="fas"
-		/>
+		/> -->
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from 'vue'
+import {  IonIcon } from '@ionic/vue'
+import { starSharp, chevronBackOutline, ellipse } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'ShowRatings',
+	components: {  IonIcon },
 	props: {
 		rating: {
 			type: Number,
 			required: true
 		}
-	}
+	},
+	setup(){
+		return{
+			starSharp, chevronBackOutline, ellipse
+		}
+	},
+
 })
 </script>
 

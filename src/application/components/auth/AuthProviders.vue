@@ -1,22 +1,21 @@
 <template>
-	<div class="d-flex flex-column gap-1 gap-md-2">
+	<div class="flex flex-col gap-1 gap-md-2">
 		<GoogleLogin
-			:on-failure="onFailure"
-			:on-success="onSuccess"
-			:params="googleParams"
+		
 			class="btn btn-auth"
 		>
-			<img alt="" src="@app/assets/images/icons/google.svg">
+			<img alt="" src="../../assets/images/icons/google.svg">
 			<span>Google</span>
 		</GoogleLogin>
-		<DisplayError :error="googleError" />
-		<PageLoading v-if="googleLoading" />
+		<!-- <DisplayError :error="googleError" />
+		<PageLoading v-if="googleLoading" /> -->
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { useGoogleSignin } from '@app/hooks/auth/signin'
+import { defineComponent } from 'vue'
+// import { useGoogleSignin } from '@app/hooks/auth/signin'
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import GoogleLogin from 'vue-google-login'
 import { googleClientId } from '@utils/environment'
@@ -26,11 +25,11 @@ export default defineComponent({
 		GoogleLogin
 	},
 	setup () {
-		const { loading: googleLoading, signin: googleSignin, error: googleError, setError } = useGoogleSignin()
-		const googleParams = { client_id: googleClientId }
-		const onFailure = async (_: any) => await setError('Error signing in with google')
-		const onSuccess = async (data: any) => await googleSignin(data.getAuthResponse().id_token)
-		return { googleError, googleLoading, googleSignin, onSuccess, onFailure, googleParams }
+		// const { loading: googleLoading, signin: googleSignin, error: googleError, setError } = useGoogleSignin()
+		// const googleParams = { client_id: googleClientId }
+		// const onFailure = async (_: any) => await setError('Error signing in with google')
+		// const onSuccess = async (data: any) => await googleSignin(data.getAuthResponse().id_token)
+		// return { googleError, googleLoading, googleSignin, onSuccess, onFailure, googleParams }
 	}
 })
 </script>
