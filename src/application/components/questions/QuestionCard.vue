@@ -1,7 +1,7 @@
 <template>
 	<ion-card
 	
-		:class="[ style ,' md:min-w-[17rem] md:h-[8.5rem] !m-0 min-w-[242px] h-[162px]  md:rounded-xl rounded-md flex flex-col gap-3 box-border  cardPadding']"
+		:class="[ style ,' md:min-w-[17rem] md:h-[8.7rem] !m-0 min-w-[242px] h-[162px]  md:rounded-xl rounded-md flex flex-col gap-3 box-border  cardPadding']"
 	>
 		<div class="flex items-center justify-between w-full">
 			<div class="flex items-center gap-2">

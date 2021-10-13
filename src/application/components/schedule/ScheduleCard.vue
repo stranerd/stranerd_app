@@ -1,9 +1,9 @@
 <template>
 	<ion-card
 	
-		:class="[ style ,' md:min-w-[21rem] md:h-[14rem]  min-w-[12.5rem] h-[10.125rem]  md:rounded-xl rounded-md flex flex-col md:gap-6 gap-[1rem] box-border  p-6']"
+		:class="[ style ,' md:min-w-[17rem] md:h-[10.5rem] !m-0 min-w-[12.5rem] h-[10.125rem]  md:rounded-xl rounded-md flex flex-col md:gap-3 gap-[1rem] box-border  cardPadding']"
 	>
-		<span class="text-base md:text-2xl font-bold">
+		<span class="heading font-bold">
 			Organic Chemistry
 		</span>
 

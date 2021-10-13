@@ -8,19 +8,19 @@
 
 		<div class="text-primary normalText flex items-center font-bold ">
 			<span>view all</span>
-			<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-2xl"></ion-icon>	
+			<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>	
 		</div>
 	</div>
 
 	<div class="flex md:gap-6 gap-3 mt-3">
 		<swiper
-			:direction="'horizontal'" :slidesPerView="3" :spaceBetween="30" :freeMode="true" class="overflow-x-auto"
+			:direction="'horizontal'" :slidesPerView="3" :spaceBetween="16" :freeMode="true" class="overflow-x-auto"
 		>
 			<swiper-slide
 				v-for="(card,index) in 10"
 				:key="index"
 
-				class="flex md:!w-[21rem] !w-[12.5rem]">
+				class="flex md:!w-[17rem] !w-[12.5rem]">
 				<ScheduleCard :style="0 === index ? 'bg-light_green' : 'bg-light_gray'"/>
 			</swiper-slide>
 				
