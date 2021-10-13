@@ -1,6 +1,6 @@
 <template>
 	<transition name="slide" appear>
-		<div class="fixed top-0 w-screen h-screen bg-modal_bg  bg-opacity-20 flex flex-col px-4 overflow-y-auto" v-if="showModal" >
+		<div class="fixed top-0 w-screen h-screen bg-modal_bg z-50 bg-opacity-20 flex flex-col px-4 overflow-y-auto" v-if="showModal" >
 			<div class="py-3  flex flex-row-reverse sticky top-0 cursor-pointer" @click="showModal = false">
 				<ion-icon class="text-white text-[23px] md:text-[30px]" :icon="closeOutline"></ion-icon>
 			</div>

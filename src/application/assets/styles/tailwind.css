@@ -43,4 +43,20 @@
 		@apply py-3 px-3 text-xs md:text-sm  font-semibold text-white bg-icon_inactive rounded-md focus:outline-none
 	}
 
+	.normalText {
+		@apply md:text-sm text-xs
+	}
+
+	.headings {
+		@apply md:text-sm text-xs
+	}
+
+	.headingsVeryLarge {
+		@apply md:text-lg text-sm
+	}
+
+	.cardPadding {
+		@apply py-4 px-4
+	}
+
 }
