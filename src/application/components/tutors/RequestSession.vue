@@ -69,7 +69,7 @@
 		<div class="flex flex-row  mt-5  text-white gap-4">
 			<div class="w-1/2 flex flex-row justify-center items-center">
 				<button @click="showModal = false" class=" px-6 py-3 relative ion-activatable rounded-lg w-full font-bold bg-dark_gray ">
-					Cancle
+					Cancel
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</button>
 			</div>

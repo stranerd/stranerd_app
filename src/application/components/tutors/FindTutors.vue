@@ -44,7 +44,7 @@
 			</div>
 
 			<div class="flex items-center">
-				<span class="font-bold text-base text-dark_gray">Start: </span>
+				<span class="font-bold normalText  text-icon_inactive">Start: </span>
 
 				<ion-radio-group value="now" v-model="radioValue" class="flex text-light_gray font-bold">
 					<ion-item>
