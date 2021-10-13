@@ -1,12 +1,12 @@
 <template>
 	<div class="w-full flex justify-between mt-10">
-		<span class="text-base md:text-[24px] font-bold text-dark_gray">
+		<span class="heading font-bold text-dark_gray">
 			Upcoming events
 		</span>
 
 		<slider-controller class="hidden md:flex"/>
 
-		<div class="text-primary text-xs md:text-base flex items-center font-bold ">
+		<div class="text-primary normalText flex items-center font-bold ">
 			<span>view all</span>
 			<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-2xl"></ion-icon>	
 		</div>

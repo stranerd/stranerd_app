@@ -12,7 +12,7 @@
 				class="!h-[14px] !w-[14px] md:!h-[24px] md:!w-[24px] "
 				:size="24"
 			/>
-			<span class="text-xs md:text-base font-bold text-dark_gray">Session with Jerry</span>
+			<span class="normalText font-bold text-dark_gray">Session with Jerry</span>
 		</div>
 
 		<div class="flex items-center gap-3">
@@ -20,7 +20,7 @@
 				:icon="calendar" 
 				class="!h-[14px] !w-[14px] md:!h-[24px] md:!w-[24px] text-icon_inactive"
 			/>
-			<span class="text-xs md:text-base font-bold text-dark_gray">Oct 10, 2021</span>
+			<span class="normalText font-bold text-dark_gray">Oct 10, 2021</span>
 		</div>
 
 		<div class="flex items-center gap-3">
@@ -28,7 +28,7 @@
 				:icon="time" 
 				class="!h-[14px] !w-[14px] md:!h-[24px] md:!w-[24px] text-icon_inactive"
 			/>
-			<span class="text-xs md:text-base font-bold text-dark_gray">10:00 - 11:00</span>
+			<span class="normalText font-bold text-dark_gray">10:00 - 11:00</span>
 		</div>
 
 	

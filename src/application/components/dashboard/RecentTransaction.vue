@@ -1,18 +1,18 @@
 <template>
 	<div class="w-full flex justify-between mt-10">
-		<span class="text-base md:text-[24px] font-bold text-dark_gray">
+		<span class="heading font-bold text-dark_gray">
 			Recent transactions
 		</span>
 
 		<slider-controller class="hidden md:flex"/>
 
-		<div class="text-primary text-xs md:text-base flex items-center font-bold ">
+		<div class="text-primary normalText flex items-center font-bold ">
 			<span>view all</span>
-			<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-2xl"></ion-icon>	
+			<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>	
 		</div>
 	</div>
 
-	<div class="flex md:gap-6 gap-3 mt-3">
+	<div class="flex md:gap-6 gap-3 mt-3 mb-8">
 		<swiper
 			:direction="'horizontal'" :slidesPerView="3" :spaceBetween="30" :freeMode="true" class="overflow-x-auto"
 		>
@@ -20,7 +20,7 @@
 				v-for="(card,index) in 10"
 				:key="index"
 
-				class="flex md:!w-[21rem] !w-[12.5rem]">
+				class="flex md:!w-[17rem] !w-[12.5rem] !mr-4">
 				<TransactionCard :style="0 === index ? 'bg-light_orange' : 'bg-light_gray'"/>
 			</swiper-slide>
 				

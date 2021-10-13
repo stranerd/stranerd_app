@@ -1,7 +1,7 @@
 <template>
 	<ion-card
 	
-		:class="[ style ,' md:min-w-[336px] md:h-[184px]  min-w-[242px] h-[162px]  md:rounded-xl rounded-md flex flex-col md:gap-5 gap-[16px] box-border  p-6']"
+		:class="[ style ,' md:min-w-[17rem] md:h-[8.5rem] !m-0 min-w-[242px] h-[162px]  md:rounded-xl rounded-md flex flex-col gap-3 box-border  cardPadding']"
 	>
 		<div class="flex items-center justify-between w-full">
 			<div class="flex items-center gap-2">
@@ -9,27 +9,27 @@
 					class="!h-[14px] !w-[14px] md:!h-[24px] md:!w-[24px] "
 					:size="24"
 				/>
-				<span class="font-bold text-dark_gray text-xs md:text-base">
+				<span class="font-bold text-dark_gray normalText">
 					Timmy Martin
 				</span>
 			</div>
 
-			<span class="font-bold text-xs md:text-base text-icon_inactive">
+			<span class="font-bold normalText text-icon_inactive">
 				30m ago    
 			</span>
 		
 		
 		</div>
 
-		<div class="text-xs md:text-base">
-			<span>
+		<div >
+			<span class="normalText">
 				From the top of a building with a height
 				degrees to the horizontal plane at...... 
 			</span>
 		
 		</div>
 
-		<div class="text-xs md:text-base">
+		<div class="normalText">
 			<span class="font-bold text-base text-icon_inactive">
 				5 answers   
 			</span>

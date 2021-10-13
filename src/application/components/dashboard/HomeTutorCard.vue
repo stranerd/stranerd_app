@@ -1,7 +1,7 @@
 <template>
 	<ion-card
 	
-		:class="[ style ,' md:min-w-[260px] md:min-h-[260px] min-w-[150px] min-h-[150px]  md:rounded-xl rounded-md flex flex-col md:gap-5 gap-2 justify-center items-center']"
+		:class="[ style ,' md:min-w-[180px] md:min-h-[180px] min-w-[150px] min-h-[150px] !m-0 cardPadding  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-2 justify-center items-center']"
 	>
 		<div class="relative">
 			<avatar
@@ -36,7 +36,7 @@ import ShowRatings from '@/application/components/core/ShowRatings.vue'
 import { componentName, showModal } from  '../../../modules/Modal'
 
 export default {
-	name: 'TutorCard',
+	name: 'Home TutorCard',
 	components: {IonCard, Avatar, ShowRatings, IonButton },
 	props:{
 		style: {
