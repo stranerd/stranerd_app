@@ -6,9 +6,8 @@
 			<bottom-nav></bottom-nav>
 		</ion-tabs>
 		<side-nav-bar></side-nav-bar>
+		<modal></modal>
 	</ion-page>
-
-	<modal></modal>
 </template>
 
 <script lang="ts">
