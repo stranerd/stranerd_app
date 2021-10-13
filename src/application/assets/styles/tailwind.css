@@ -22,6 +22,10 @@
         @apply w-full lg:w-[84%] lg:ml-[16%] lg:px-20 relative flex  mt-[14px] flex-row lg:gap-16 lg:mt-[93px]
     }
 
+	.layout-page-nosidebars {
+		@apply w-full relative flex  mt-[14px] flex-row lg:gap-16 lg:mt-[63px]
+	}
+
     .layout-body{
         @apply lg:w-3/4 w-full grid-cols-12 grid lg:mt-6
     }
@@ -47,16 +51,21 @@
 		@apply md:text-sm text-xs
 	}
 
-	.headings {
-		@apply md:text-sm text-xs
-	}
-
-	.headingsVeryLarge {
-		@apply md:text-lg text-sm
+	.headings{
+		@apply md:text-base text-sm
 	}
 
 	.cardPadding {
 		@apply py-4 px-4
 	}
+	
+	.cancleBtn {
+		@apply  px-6 py-3 relative rounded-lg  font-bold bg-dark_gray
+	}
+
+	.actionBtn {
+		@apply px-6 relative  font-bold py-3 rounded-lg bg-primary
+	}
 
 }
+ 

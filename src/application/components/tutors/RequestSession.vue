@@ -88,7 +88,7 @@ import { defineComponent } from 'vue'
 
 import { IonSelect, IonSelectOption, IonTextarea, IonRippleEffect, IonIcon } from '@ionic/vue'
 import { document,ellipse, ellipseOutline } from 'ionicons/icons'
-import { showModal } from '@/modules/Modal'
+import { showModal } from '@/modules/core/Modal'
 
 export default defineComponent({
 	setup() {

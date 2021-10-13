@@ -123,7 +123,7 @@ import { defineComponent } from 'vue'
 
 import {  IonIcon } from '@ionic/vue'
 import { add, removeOutline } from 'ionicons/icons'
-import { showModal } from '@/modules/Modal'
+import { showModal } from '@/modules/core/Modal'
 
 export default defineComponent({
 	setup() {

@@ -33,7 +33,7 @@
 import { IonCard, IonButton } from '@ionic/vue'
 import Avatar from '@/application/components/core/Avatar.vue'
 import ShowRatings from '@/application/components/core/ShowRatings.vue'
-import { componentName, showModal } from  '../../../modules/Modal'
+import { componentName, showModal } from  '../../../modules/core/Modal'
 
 export default {
 	name: 'TutorCard',
