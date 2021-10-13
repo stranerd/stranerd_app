@@ -32,7 +32,7 @@ import { componentName, showModal } from '@/modules/Modal'
 export default {
 	name:'Balance Card',
 	components:{IonButton, Coins, },
-	setup(props) {
+	setup(props: any) {
 		const buyCoins = () => {
 			showModal.value = true
 			componentName.value = 'buyCoins'
