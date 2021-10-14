@@ -1,15 +1,14 @@
 <template>
 	<ion-card
 	
-		:class="[ style ,' md:min-w-[260px] md:min-h-[260px] min-w-[150px] min-h-[150px]  md:rounded-xl rounded-md flex flex-col md:gap-5 gap-2 justify-center items-center']"
+		:class="[ style ,'!mx-0 mt-3 md:min-w-[160px] min-h-[150px]  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-1 cardPadding justify-center items-center']"
 	>
 		<div class="relative">
 			<avatar
-				class="!h-[43px] !w-[43px] md:!h-[72px] md:!w-[72px] "
-				:size="43"
+				:size="45"
 			/>
 			<i
-				class="absolute rounded-full bottom-0 right-0 z-10 text-xl bg-green md:w-6 md:h-6 w-[14px] h-[14px]"
+				class="absolute rounded-full bottom-0 right-0 z-10 text-xl bg-green md:w-4 md:h-4 w-[14px] h-[14px]"
 			/>
 		</div>
 
@@ -22,7 +21,7 @@
 
 		<show-ratings :rating="4"/>
 			
-		<ion-button @click="requestSession" class="w-full font-bold capitalize text-base max-w-[198px]" v-if="showButton">
+		<ion-button @click="requestSession" class="w-full font-bold capitalize normalText max-w-[198px]" v-if="showButton">
 			Request a session</ion-button>
 
 	</ion-card>	
@@ -76,14 +75,19 @@ ion-card{
 	ion-button{
     --background: #F7F7FC;
     --color: #8B9EB1;
-    --border-radius: .75rem;
+    --border-radius: .454268rem !important;
     --border-width: .0625rem;
     --border-style: solid;
     --border-color: #8B9EB1;
-	--padding-top: 1rem;
-	--padding-bottom: 1rem;
+			 --padding-top: 0.8rem !important;
+			 --padding-bottom: 0.8rem !important;
+	--padding-right: 0.5rem !important;
+	--padding-left: 0.5rem !important;
 	--box-shadow: none;
 	--background-hover:transparent !important;
+	 max-width: 135px !important;
+             font-size: 10px !important;
+             max-height: 22px !important;
 
 		@media (max-width: $sm) {
 			 --border-radius:.454268rem !important;

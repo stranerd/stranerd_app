@@ -27,8 +27,8 @@
 	
 			</div>
 
-			<div class="mt-5 md:mt-8  col-span-6 flex flex-row flex-wrap justify-center">
-				<tutor-card class="bg-light_gray flex md:!w-[260px] !w-[150px]" :showButton="true" v-for="n in 10" :key="n"/>
+			<div class="mt-5 md:mt-8  col-span-6 flex flex-row flex-wrap justify-evenly">
+				<tutor-card class="bg-light_gray flex  !w-[150px]" :showButton="true" v-for="n in 10" :key="n"/>
 			</div>
 		</div>
 
