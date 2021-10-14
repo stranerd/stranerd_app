@@ -1,5 +1,5 @@
 <template>
-	<ion-page class="pt-8">
+	<ion-page>
 		<ion-content :fullscreen="true">
 			<div class="layout-page">
 				<div class="layout-body">

@@ -33,7 +33,7 @@
 		<div class="flex flex-row px-3 my-7 md:gap-5 text-white">
 			<div class="w-1/2 flex flex-row justify-center items-center">
 				<button class=" md:w-full px-6 py-3 relative ion-activatable rounded-lg  font-bold bg-dark_gray ">
-					Cancle
+					Cancel
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</button>
 			</div>

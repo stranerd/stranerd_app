@@ -3,7 +3,8 @@
 		<ion-content :fullscreen="true" class=" mx-auto">	
 			<div class="layout-page">
 				<div class="layout-body">
-					<div class="col-span-12 px-3 ">
+					<div class="col-span-12 px-3 mb-8">
+						<ChallengesCard class="lg:hidden"/>
 						<FeaturedTutors/>
 						<RecentQuestions />
 						<UpcomingEvent/>
@@ -25,11 +26,12 @@ import RecentQuestions from '@/application/components/dashboard/RecentQuestions.
 import UpcomingEvent from '@/application/components/dashboard/UpcomingEvent.vue'
 import RecentTransaction from '@/application/components/dashboard/RecentTransaction.vue'
 import { defineAsyncComponent } from 'vue'
+import ChallengesCard from '@/application/components/dashboard/Challenges.vue'
 const SideProfileNav = defineAsyncComponent(() => import('@/application/components/layout/sidebars/SideProfileNav.vue'))
 
 export default  {
 	name: 'home',
-	components: { IonContent, IonPage,  FeaturedTutors, RecentQuestions, UpcomingEvent, RecentTransaction, SideProfileNav },
+	components: { IonContent, IonPage,  FeaturedTutors, RecentQuestions, UpcomingEvent, RecentTransaction, SideProfileNav, ChallengesCard },
 
 }
 </script>

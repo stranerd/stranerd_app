@@ -1,25 +1,25 @@
 <template>
 	<div class="w-full flex justify-between mt-10">
-		<span class="text-base md:text-[24px] font-bold text-dark_gray">
+		<span class="heading font-bold text-dark_gray">
 			Recent questions
 		</span>
 
 		<slider-controller class="hidden md:flex"/>
 
-		<div class="text-primary text-xs md:text-base flex items-center font-bold ">
+		<div class="text-primary normalText flex items-center font-bold">
 			<span>view all</span>
-			<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-2xl"></ion-icon>	
+			<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>	
 		</div>
 	</div>
 
-	<div class="flex md:gap-6 gap-3 mt-3">
+	<div class="flex md:gap-6 gap-3 mt-2">
 		<swiper
-			:direction="'horizontal'" :slidesPerView="3" :spaceBetween="30" :freeMode="true" class="overflow-x-auto"
+			:direction="'horizontal'" :slidesPerView="3" :spaceBetween="16" :freeMode="true" class="overflow-x-auto"
 		>
 			<swiper-slide
 				v-for="(card,index) in 10"
 				:key="index"
-				class="flex md:!w-[336px] !w-[242px]">
+				class="flex md:!w-[300px] !w-[242px]">
 				<QuestionCard :style="0 === index ? 'bg-tinted_pink' : 'bg-light_gray'"/>
 			</swiper-slide>
 				
