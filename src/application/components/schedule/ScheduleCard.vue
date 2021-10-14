@@ -1,9 +1,6 @@
 <template>
-	<ion-card
-	
-		:class="[ style ,' md:min-w-[17rem] md:h-[10.5rem] !m-0 min-w-[12.5rem] h-[10.125rem]  md:rounded-xl rounded-md flex flex-col md:gap-3 gap-[1rem] box-border  cardPadding']"
-	>
-		<span class="heading font-bold">
+	<div :class="`md:min-w-[17rem] md:h-[10.5rem] lg:w-full ${colorClass} !m-0 min-w-[12.5rem] h-[10.125rem]  md:rounded-xl rounded-md flex flex-col md:gap-3 gap-[1rem] box-border  cardPadding`">
+		<span class="heading font-bold text-dark_gray">
 			Organic Chemistry
 		</span>
 
@@ -35,22 +32,21 @@
 
 			
 
-	</ion-card>
+	</div>
 </template>
 
-<script>
-import { IonCard } from '@ionic/vue'
+<script lang="ts">
 import Avatar from '@/application/components/core/Avatar.vue'
 import {  IonIcon } from '@ionic/vue'
 import { calendar, time } from 'ionicons/icons'
 export default {
 	name: 'TutorCard',
-	components: {IonCard, Avatar, IonIcon },
+	components: { Avatar, IonIcon },
 	props:{
-		style: {
-			required: false,
+		colorClass: {
 			type: String,
-		}
+			default: 'bg-light_gray'
+		},
 	},
 	setup(){
 		return{

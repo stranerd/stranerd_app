@@ -1,7 +1,6 @@
 <template>
-	<ion-card
-	
-		:class="[ style ,'!mx-0 mt-3 md:min-w-[160px] min-h-[150px]  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-1 cardPadding justify-center items-center']"
+	<div
+		class="mx-0 md:min-w-[160px] w-full min-h-[150px]  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-1 cardPadding justify-center items-center"
 	>
 		<div class="relative">
 			<avatar
@@ -16,27 +15,27 @@
 			<span class="font-bold normalText text-main_dark">
 				Timmy Martin
 			</span>
-			<img src="../../assets/images/icons/verified.svg" alt="ask a question" class="w-[10px] md:w-4">
+			<img src="../../assets/images/icons/verified.svg" alt="ask a question" class="w-[14px] md:w-4">
 		</div>
 
 		<show-ratings :rating="4"/>
-			
-		<ion-button @click="requestSession" class="w-full font-bold capitalize normalText max-w-[198px]" v-if="showButton">
-			Request a session</ion-button>
+	
+		<a @click="requestSession"  class="mt-2 font-bold  normalText border-[1px] py-2 md:py-2 md:px-4 px-2 text-icon_inactive rounded-xl border-icon_inactive">
+			Request a session
+		</a>
 
-	</ion-card>	
+	</div>	
 
 </template>
 
 <script lang="ts">
-import { IonCard, IonButton } from '@ionic/vue'
 import Avatar from '@/application/components/core/Avatar.vue'
 import ShowRatings from '@/application/components/core/ShowRatings.vue'
 import { componentName, showModal } from  '../../../modules/core/Modal'
 
 export default {
 	name: 'TutorCard',
-	components: {IonCard, Avatar, ShowRatings, IonButton },
+	components: { Avatar, ShowRatings },
 	props:{
 		style: {
 			required: false,
@@ -72,47 +71,4 @@ ion-card{
 
 }
 
-	ion-button{
-    --background: #F7F7FC;
-    --color: #8B9EB1;
-    --border-radius: .454268rem !important;
-    --border-width: .0625rem;
-    --border-style: solid;
-    --border-color: #8B9EB1;
-			 --padding-top: 0.8rem !important;
-			 --padding-bottom: 0.8rem !important;
-	--padding-right: 0.5rem !important;
-	--padding-left: 0.5rem !important;
-	--box-shadow: none;
-	--background-hover:transparent !important;
-	 max-width: 135px !important;
-             font-size: 10px !important;
-             max-height: 22px !important;
-
-		@media (max-width: $sm) {
-			 --border-radius:.454268rem !important;
-			 --padding-top: 0.8rem !important;
-			 --padding-bottom: 0.8rem !important;
-			 --padding-right: 0.5rem !important;
-			 --padding-left: 0.5rem !important;
-			 max-width: 135px !important;
-             font-size: 10px !important;
-             max-height: 22px !important;
-		}
-
-}
-
-	ion-button{
-    --background: #F7F7FC;
-    --color: #8B9EB1;
-    --border-radius: .75rem;
-    --border-width: .0625rem;
-    --border-style: solid;
-    --border-color: #8B9EB1;
-	--padding-top: 1rem;
-	--padding-bottom: 1rem;
-	--box-shadow: none;
-
-
-}
 </style>

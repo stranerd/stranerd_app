@@ -4,7 +4,7 @@
 			Recent transactions
 		</span>
 
-		<slider-controller class="hidden md:flex"/>
+		<slider-controller class="hidden lg:flex"/>
 
 		<div class="text-primary normalText flex items-center font-bold ">
 			<span>view all</span>
@@ -12,7 +12,7 @@
 		</div>
 	</div>
 
-	<div class="flex md:gap-6 gap-3 mt-3 mb-8">
+	<div class="flex md:gap-6 gap-3 mt-3 mb-8 lg:hidden">
 		<swiper
 			:direction="'horizontal'" :slidesPerView="3" :spaceBetween="30" :freeMode="true" class="overflow-x-auto"
 		>
@@ -21,7 +21,20 @@
 				:key="index"
 
 				class="flex md:!w-[17rem] !w-[12.5rem] !mr-4">
-				<TransactionCard :style="0 === index ? 'bg-light_orange' : 'bg-light_gray'"/>
+				<TransactionCard :colorClass="0 === index ? 'bg-light_orange' : 'bg-light_gray'"/>
+			</swiper-slide>
+				
+		</swiper>
+	</div>
+
+	<div class="lg:flex md:gap-6 gap-3 mt-2 hidden">
+		<swiper
+			:direction="'horizontal'" :slidesPerView="3" :spaceBetween="15"
+		>
+			<swiper-slide
+				v-for="(card,index) in 10"
+				:key="index + 1">
+				<TransactionCard :colorClass="0 === index ? 'bg-light_orange' : 'bg-light_gray'"/>
 			</swiper-slide>
 				
 		</swiper>

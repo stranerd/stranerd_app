@@ -23,7 +23,7 @@
 
 							<template v-if="!showAddAnswer">
 								<div class="mt-5 col-span-12">
-									<button @click="showAddAnswer = true" class="py-3 px-4 justify-center rounded-lg text-white bg-primary lg:bg-dark_gray w-full font-bold flex flex-row items-center">
+									<button @click="showAddAnswer = true" class="py-3 px-4 justify-center rounded-lg text-white bg-dark_gray w-full font-bold flex flex-row items-center">
 										<span class="mr-2">Add your answer</span>
 										<span class="h-1 w-1 rounded-full bg-white mr-2" ></span>
 										<span class="mr-1 text-sm">+20</span>

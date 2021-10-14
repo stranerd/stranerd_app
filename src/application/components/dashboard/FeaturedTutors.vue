@@ -5,7 +5,7 @@
 				Featured tutors
 			</span>
 
-			<slider-controller class="hidden md:flex"/>
+			<slider-controller class="hidden lg:flex"/>
 
 			<div class="text-primary normalText flex items-center font-bold ">
 				<span>view all</span>
@@ -13,7 +13,7 @@
 			</div>
 		</div>
 
-		<div class="flex md:gap-6 gap-3 mt-2">
+		<div class="flex md:gap-6 gap-3 mt-2 lg:hidden">
 			<swiper
 				:direction="'horizontal'" :slidesPerView="3" :spaceBetween="16" :freeMode="true" class="overflow-x-auto"
 			>
@@ -26,6 +26,25 @@
 				
 			</swiper>
 		</div>
+
+		<div class="lg:flex md:gap-6 gap-3 mt-2 hidden">
+			<swiper
+				:direction="'horizontal'" :slidesPerView="4" :spaceBetween="15"
+			>
+				<swiper-slide :key="0">
+					<tutor-card
+						
+						:isFirst="true"/>
+				</swiper-slide>
+				<swiper-slide
+					v-for="(card,index) in 10"
+					:key="index + 1">
+					<tutor-card/>
+				</swiper-slide>
+				
+			</swiper>
+		</div>
+
 	</div>
 </template>
 

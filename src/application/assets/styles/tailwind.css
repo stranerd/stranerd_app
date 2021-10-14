@@ -15,7 +15,7 @@
 
 @layer utilities {
     .layout-page{
-        @apply w-full lg:w-[84%] lg:ml-[16%] lg:px-12 relative flex  mt-[64px] md:mt-[74px] flex-row lg:gap-10 lg:mt-[93px]
+        @apply w-full lg:w-[84%] lg:ml-[16%] lg:px-12 relative flex  mt-[64px] md:mt-[74px] flex-row lg:gap-10 lg:mt-[80px]
     }
 
 	.layout-page-notab{
@@ -51,6 +51,10 @@
 		@apply md:text-sm text-xs
 	}
 
+	.headings{
+		@apply md:text-base text-sm
+
+	}
 
 	.heading {
 		@apply md:text-lg text-sm

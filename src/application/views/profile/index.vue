@@ -6,7 +6,7 @@
 				<ion-buttons @click="router.go(-1)" slot="start">
 					<ion-icon :icon="arrowBackOutline" class="text-[23px] text-dark_gray"></ion-icon>
 				</ion-buttons>
-				<ion-title>Dashboard</ion-title>
+				<ion-title>My Profile</ion-title>
 			</ion-toolbar>
 		</ion-header>
 		<ion-router-outlet class="mt-10"></ion-router-outlet>

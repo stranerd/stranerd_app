@@ -1,8 +1,6 @@
 <template>
-	<ion-card
-	
-		:class="[ style ,' md:min-w-[180px] md:min-h-[180px] min-w-[150px] min-h-[150px] !m-0 cardPadding  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-2 justify-center items-center']"
-	>
+	<div 
+		:class="`md:min-w-[180px] lg:w-full ${isFirst ? 'bg-butter_yellow' : 'bg-light_gray'}  md:min-h-[180px] min-w-[150px] min-h-[150px] !m-0 cardPadding  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-2 justify-center items-center`">
 		<div class="relative">
 			<avatar
 				class="!h-[43px] !w-[43px] md:!h-[60px] md:!w-[60px] "
@@ -17,27 +15,27 @@
 			<span class="font-bold normalText text-main_dark">
 				Timmy Martin
 			</span>
-			<img src="../../assets/images/icons/verified.svg" alt="ask a question" class="w-[10px] md:w-4">
+			<img src="../../assets/images/icons/verified.svg" alt="ask a question" class="w-[15px] md:w-4">
 		</div>
 
 		<show-ratings :rating="4"/>
 			
-		<!-- <ion-button @click="requestSession" class="w-full font-bold capitalize text-base max-w-[198px]" v-if="showButton">
-			Request a session</ion-button> -->
+		<ion-button @click="requestSession" class="w-full font-bold capitalize text-base max-w-[198px]" v-if="showButton">
+			Request a session</ion-button>
 
-	</ion-card>	
+	</div>	
 
 </template>
 
 <script lang="ts">
-import { IonCard,  } from '@ionic/vue'
+import { IonButton  } from '@ionic/vue'
 import Avatar from '@/application/components/core/Avatar.vue'
 import ShowRatings from '@/application/components/core/ShowRatings.vue'
-// import { componentName, showModal } from  '../../../modules/Modal'
+import { componentName, showModal } from  '../../../modules/core/Modal'
 
 export default {
 	name: 'Home TutorCard',
-	components: {IonCard, Avatar, ShowRatings,  },
+	components: { Avatar, ShowRatings, IonButton },
 	props:{
 		style: {
 			required: false,
@@ -47,21 +45,25 @@ export default {
 			required: false,
 			type: Boolean,
 			default:false
+		},
+		isFirst: {
+			type: Boolean,
+			default: false
 		}
 
 	},
-	// setup(props: any) {
+	setup(props: any) {
 
-	// 	const requestSession = () => {
-	// 		componentName.value = 'requestSession'
-	// 		showModal.value = true
-	// 	}
+		const requestSession = () => {
+			componentName.value = 'requestSession'
+			showModal.value = true
+		}
 
-	// 	return {
-	// 		requestSession
-	// 	}
+		return {
+			requestSession
+		}
 		
-	// }
+	}
 
 }
 </script>
