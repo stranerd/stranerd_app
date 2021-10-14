@@ -1,16 +1,16 @@
 <template>
 	<ion-card
 	
-		:class="[ style ,' md:min-w-[21rem] md:h-[8.25rem]  min-w-[12.5rem] h-[7rem]  md:rounded-xl rounded-md flex flex-col md:gap-6 gap-[1rem] box-border  p-5']"
+		:class="[ style ,' !m-0 md:min-w-[17rem]  min-w-[12.5rem] h-[6rem] cardPadding  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-[1rem] box-border  p-5']"
 	>
-		<div class="flex items-center text-xs md:text-base font-bold text-dark_gray gap-2">
+		<div class="flex items-center normalText font-bold text-dark_gray gap-2">
 			<Coins :gold="false" :size="24"/>
 			<span>+24</span>
 			<span>|</span>
 			<span>Aug 10, 2021</span>
 		</div>
 
-		<span class="text-xs md:text-base font-normal text-dark">
+		<span class="normalText font-normal text-dark">
 			You got coins for best answer.
 		</span>
 

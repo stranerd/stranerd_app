@@ -1,9 +1,9 @@
 <template>
 	<ion-card
 	
-		:class="[ style ,' md:min-w-[21rem] md:h-[14rem]  min-w-[12.5rem] h-[10.125rem]  md:rounded-xl rounded-md flex flex-col md:gap-6 gap-[1rem] box-border  p-6']"
+		:class="[ style ,' md:min-w-[17rem] md:h-[10.5rem] !m-0 min-w-[12.5rem] h-[10.125rem]  md:rounded-xl rounded-md flex flex-col md:gap-3 gap-[1rem] box-border  cardPadding']"
 	>
-		<span class="text-base md:text-2xl font-bold">
+		<span class="heading font-bold">
 			Organic Chemistry
 		</span>
 
@@ -12,7 +12,7 @@
 				class="!h-[14px] !w-[14px] md:!h-[24px] md:!w-[24px] "
 				:size="24"
 			/>
-			<span class="text-xs md:text-base font-bold text-dark_gray">Session with Jerry</span>
+			<span class="normalText font-bold text-dark_gray">Session with Jerry</span>
 		</div>
 
 		<div class="flex items-center gap-3">
@@ -20,7 +20,7 @@
 				:icon="calendar" 
 				class="!h-[14px] !w-[14px] md:!h-[24px] md:!w-[24px] text-icon_inactive"
 			/>
-			<span class="text-xs md:text-base font-bold text-dark_gray">Oct 10, 2021</span>
+			<span class="normalText font-bold text-dark_gray">Oct 10, 2021</span>
 		</div>
 
 		<div class="flex items-center gap-3">
@@ -28,7 +28,7 @@
 				:icon="time" 
 				class="!h-[14px] !w-[14px] md:!h-[24px] md:!w-[24px] text-icon_inactive"
 			/>
-			<span class="text-xs md:text-base font-bold text-dark_gray">10:00 - 11:00</span>
+			<span class="normalText font-bold text-dark_gray">10:00 - 11:00</span>
 		</div>
 
 	

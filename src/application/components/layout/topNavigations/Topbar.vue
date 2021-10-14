@@ -69,8 +69,16 @@
 	</div>
 
 	<!-- large screens -->
-	<div class="hidden md:hidden lg:flex bg-white py-3 pl-20 pr-[100px] fixed w-[84%]  top-0 left-[16%] flex-row items-center gap-16 z-50">
-		<div class="flex flex-row items-center w-3/4 py-1 gap-6 justify-around">
+	<div class="hidden md:hidden lg:flex bg-white py-3 pl-20 pr-[100px] fixed w-[84%]  top-0  flex-row items-center gap-16 z-50" :class="noSideBar ? 'w-[100%]' : 'w-[84%] left-[16%]'">
+		<div class="flex flex-row items-center py-1 gap-3 w-[16%] justify-between" v-if="noSideBar">
+			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/dashboard">
+				<ion-icon :icon="home" class="text-xl text-icon_inactive" ></ion-icon>
+			</router-link>
+			<div class="py-2 px-3 rounded-md flex flex-row items-center justify-center">
+				<img src="/assets/images/logo.svg" class="inline h-6"/>
+			</div>
+		</div>
+		<div class="flex flex-row items-center py-1 gap-6 justify-around" :class="noSideBar ? 'w-[63%]' : 'w-3/4'">
 			<div class="bg-light_gray py-2 px-6 rounded-lg flex-grow flex flex-row items-center">
 				<input class="focus:outline-none bg-light_gray flex-grow text-sm placeholder-gray-400 py-1 px-1"
 					placeholder="Search for anything" />
@@ -94,7 +102,7 @@
 				<img src="/assets/images/person-circle.svg" class="inline h-6"/>
 			</router-link>
 		</div>
-		<div class="flex flex-row items-center w-1/4 py-1 ">
+		<div class="flex flex-row items-center py-1 "  :class="noSideBar ? 'w-[21%]' : 'w-1/4'">
 			<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
 				<div class="w-1/3 flex flex-row items-center">
 					<img src="/assets/images/bronze.svg" class="inline h-5 mr-2"/>
@@ -114,7 +122,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { add } from 'ionicons/icons'
+import { add, home } from 'ionicons/icons'
 import { useStore } from '@/application/store'
 
 export default defineComponent({
@@ -122,6 +130,10 @@ export default defineComponent({
 		isNotDashboard: {
 			type: Boolean,
 			default: true
+		},
+		noSideBar: {
+			type: Boolean,
+			default: false
 		}
 	},
 	setup(props) {
@@ -130,7 +142,8 @@ export default defineComponent({
 		return {
 			add,
 			props,
-			store
+			store,
+			home
 		}
 	},
 	components: { IonIcon }

@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-light_green md:p-8 py-8 px-4 rounded-xl">
+	<div class="bg-light_green md:p-8 py-8 px-4 rounded-xl mt-2">
 		<div class="flex justify-between items-center">
 			<div class="flex flex-col">
 				<span class="font-bold text-dark_gray text-xs md:text-2xl md:mb-7 mb-4">Bronze coins</span>
@@ -20,17 +20,28 @@
 			</div>
 		</div>
 
-		<ion-button  class="md:w-[200px] w-[134px] md:mt-14 mt-7 font-bold capitalize md:text-base ">Buy coins</ion-button>
+		<ion-button @click="buyCoins" class="md:w-[200px] w-[134px] md:mt-14 mt-5 font-bold capitalize md:text-base ">Buy coins</ion-button>
 	</div>
 </template>
 
-<script>
+<script lang="ts">
 
 import { IonButton } from '@ionic/vue'
 import Coins from '@/application/components/core/Coins.vue'
+import { componentName, showModal } from '@/modules/core/Modal'
 export default {
 	name:'Balance Card',
-	components:{IonButton, Coins, }
+	components:{IonButton, Coins, },
+	setup(props: any) {
+		const buyCoins = () => {
+			showModal.value = true
+			componentName.value = 'buyCoins'
+		}
+
+		return {
+			buyCoins
+		}
+	}
 }
 </script>
 

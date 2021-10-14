@@ -1,14 +1,15 @@
 <template>
 	<ion-card
 	
-		:class="[ style ,'!mx-0 mt-3 md:min-w-[160px] min-h-[150px]  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-1 cardPadding justify-center items-center']"
+		:class="[ style ,' md:min-w-[180px] md:min-h-[180px] min-w-[150px] min-h-[150px] !m-0 cardPadding  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-2 justify-center items-center']"
 	>
 		<div class="relative">
 			<avatar
+				class="!h-[43px] !w-[43px] md:!h-[60px] md:!w-[60px] "
 				:size="45"
 			/>
 			<i
-				class="absolute rounded-full bottom-0 right-0 z-10 text-xl bg-green md:w-4 md:h-4 w-[14px] h-[14px]"
+				class="absolute rounded-full bottom-0.5 right-1 z-10 text-xl bg-green md:w-4 md:h-4 w-[14px] h-[14px]"
 			/>
 		</div>
 
@@ -21,22 +22,22 @@
 
 		<show-ratings :rating="4"/>
 			
-		<ion-button @click="requestSession" class="w-full font-bold capitalize normalText max-w-[198px]" v-if="showButton">
-			Request a session</ion-button>
+		<!-- <ion-button @click="requestSession" class="w-full font-bold capitalize text-base max-w-[198px]" v-if="showButton">
+			Request a session</ion-button> -->
 
 	</ion-card>	
 
 </template>
 
 <script lang="ts">
-import { IonCard, IonButton } from '@ionic/vue'
+import { IonCard,  } from '@ionic/vue'
 import Avatar from '@/application/components/core/Avatar.vue'
 import ShowRatings from '@/application/components/core/ShowRatings.vue'
-import { componentName, showModal } from  '../../../modules/core/Modal'
+// import { componentName, showModal } from  '../../../modules/Modal'
 
 export default {
-	name: 'TutorCard',
-	components: {IonCard, Avatar, ShowRatings, IonButton },
+	name: 'Home TutorCard',
+	components: {IonCard, Avatar, ShowRatings,  },
 	props:{
 		style: {
 			required: false,
@@ -49,18 +50,18 @@ export default {
 		}
 
 	},
-	setup(props: any) {
+	// setup(props: any) {
 
-		const requestSession = () => {
-			componentName.value = 'requestSession'
-			showModal.value = true
-		}
+	// 	const requestSession = () => {
+	// 		componentName.value = 'requestSession'
+	// 		showModal.value = true
+	// 	}
 
-		return {
-			requestSession
-		}
+	// 	return {
+	// 		requestSession
+	// 	}
 		
-	}
+	// }
 
 }
 </script>
@@ -75,19 +76,14 @@ ion-card{
 	ion-button{
     --background: #F7F7FC;
     --color: #8B9EB1;
-    --border-radius: .454268rem !important;
+    --border-radius: .75rem;
     --border-width: .0625rem;
     --border-style: solid;
     --border-color: #8B9EB1;
-			 --padding-top: 0.8rem !important;
-			 --padding-bottom: 0.8rem !important;
-	--padding-right: 0.5rem !important;
-	--padding-left: 0.5rem !important;
+	--padding-top: 1rem;
+	--padding-bottom: 1rem;
 	--box-shadow: none;
 	--background-hover:transparent !important;
-	 max-width: 135px !important;
-             font-size: 10px !important;
-             max-height: 22px !important;
 
 		@media (max-width: $sm) {
 			 --border-radius:.454268rem !important;

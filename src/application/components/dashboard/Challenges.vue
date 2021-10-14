@@ -1,11 +1,10 @@
 <template>
-	<div class="w-full lg:mt-0 mt-10">
+	<div class="w-full">
 		<div class="w-full flex justify-between">
 			<span class="heading font-bold text-dark_gray">
-				Featured tutors
+				Challenges
 			</span>
 
-			<slider-controller class="hidden md:flex"/>
 
 			<div class="text-primary normalText flex items-center font-bold ">
 				<span>view all</span>
@@ -20,28 +19,27 @@
 				<swiper-slide
 					v-for="(card,index) in 10"
 					:key="index"
-					class="flex md:!min-w-[180px] !w-[150px]">
-					<tutor-card :style="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'"/>
+					class="flex !w-[14rem]">
+					<ChallengesCard :style="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'"/>
 				</swiper-slide>
 				
 			</swiper>
 		</div>
-	</div>
+	</div> 
 </template>
 
 
 <script lang="ts">
 import {  IonIcon } from '@ionic/vue'
 import { chevronForwardOutline, chevronBackOutline, ellipse } from 'ionicons/icons'
-import SliderController from '@/application/components/core/nav/sliderController.vue'
-import TutorCard from '@/application/components/dashboard/HomeTutorCard.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
+import ChallengesCard from './ChallengesCard.vue'
 
 
 export default  {
 	name: 'Home',
-	components: {  IonIcon, SliderController, TutorCard, Swiper, SwiperSlide },
+	components: {  IonIcon,   Swiper, SwiperSlide, ChallengesCard },
 	setup(){
 		return{
 			chevronForwardOutline, chevronBackOutline, ellipse

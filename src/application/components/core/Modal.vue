@@ -1,87 +1,46 @@
 <template>
-	<ion-backdrop></ion-backdrop>
 	<transition name="slide" appear>
-		<div class="fixed top-0 w-screen h-screen " v-if="showModal" @click="close($event)">
-			<div>
-				<div class="card text-black" >
-					
-				</div>
-
-			
+		<div class="fixed top-0 w-screen h-screen bg-modal_bg z-50 bg-opacity-20 flex flex-col px-4 overflow-y-auto" v-if="showModal" >
+			<div class="py-3  flex flex-row-reverse sticky top-0 cursor-pointer" @click="showModal = false">
+				<ion-icon class="text-white text-[23px] md:text-[30px]" :icon="closeOutline"></ion-icon>
+			</div>
+			<div class="py-3  md:mt-5 mt-2 w-full grid grid-cols-12">
+				<request-session v-if="componentName == 'requestSession'"></request-session>
+				<buy-coins v-if="componentName == 'buyCoins'" ></buy-coins>
 			</div>
 		</div>
 	</transition>
 </template>
 
-<script>
-import { IonBackdrop } from '@ionic/vue'
+<script lang="ts">
+import { showModal, toggleModal, componentName } from '../../../modules/core/Modal'
+
+import { IonIcon } from '@ionic/vue'
+import { closeOutline } from 'ionicons/icons'
+import { defineAsyncComponent } from 'vue'
+
+const RequestSession = defineAsyncComponent(() => import('@/application/components/tutors/RequestSession.vue'))
+const BuyCoins = defineAsyncComponent(() => import('@/application/components/wallet/BuyCoins.vue'))
+
 export default {
-	name: 'success',
-	components: { IonBackdrop },
-	props: ['showModal', 'title', 'sub'],
-	data() {
-		return {
-			loading: false,
-			options: [],
-			downloadMode: localStorage.getItem('mode') == 'Download',
+	name: 'modal',
+	props: {
+		hasCloseIcon: {
+			type: Boolean,
+			default: false
 		}
 	},
-	methods: {
-		close(e) {
-			if (e.target.className == 'bg') {
-				this.$emit('close')
-			}
-		},
-	},
-	mounted() {
-		this.options = []
-		this.loading = true
-	},
-	created() {
-		this.options = []
-		this.loading = true
-	},
+	components: { IonIcon, RequestSession, BuyCoins },
+	setup(props: any) {
+
+		return {
+			showModal,
+			props,
+			toggleModal,
+			closeOutline,
+			componentName
+		}
+
+	}
 }
 </script>
-
-<style scoped>
-
-.bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(35, 31, 31, 0.893);
-  width: 100vw;
-  max-width: 100vw;
-  min-height: 100%;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* overflow: hidden; */
-}
-
-.card {
-  overflow: hidden;
-  padding: 1rem;
-  background: #515d4b;
-  width: 500px;
-  min-height: 300px;
-  max-width: 85vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.5s;
-}
-.slide-enter-from,
-.slide-leave-to {
-  transform: scale(0);
-}
-</style>

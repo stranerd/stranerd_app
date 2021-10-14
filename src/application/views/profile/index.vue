@@ -1,32 +1,33 @@
 <template>
 	<ion-page>
-		<top-bar :isNotDashboard="true"></top-bar>
-		<ion-tabs>
-			<ion-router-outlet></ion-router-outlet>
-			<bottom-nav></bottom-nav>
-		</ion-tabs>
+		<top-bar :isNotDashboard="true" :noSideBar="true" ></top-bar>
+		<ion-header mode="ios" class="block lg:hidden">
+			<ion-toolbar class="px-2">
+				<ion-buttons @click="router.go(-1)" slot="start">
+					<ion-icon :icon="arrowBackOutline" class="text-[23px] text-dark_gray"></ion-icon>
+				</ion-buttons>
+				<ion-title>Dashboard</ion-title>
+			</ion-toolbar>
+		</ion-header>
+		<ion-router-outlet class="mt-10"></ion-router-outlet>
 	</ion-page>
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, onMounted } from 'vue'
-
-const BottomNav = defineAsyncComponent(() => import('@/application/components/layout/bottomNavigations/BottomNav.vue'))
+import { defineAsyncComponent } from 'vue'
+import { arrowBackOutline } from 'ionicons/icons'
 const TopBar = defineAsyncComponent(() => import('@/application/components/layout/topNavigations/Topbar.vue'))
-import { IonPage, IonTabs, IonRouterOutlet } from '@ionic/vue'
-import { useStore } from '@/application/store'
+import { IonPage, IonRouterOutlet, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar  } from '@ionic/vue'
+import { useRouter } from 'vue-router'
 
 export default {
-	name: 'dashboard',
-	components: { BottomNav, IonPage, IonTabs, IonRouterOutlet, TopBar },
+	name: 'profilePage',
+	components: { IonPage, IonRouterOutlet, TopBar, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar  },
 	setup() {
-
-		const store = useStore()
-		onMounted(() => {
-			store.commit('hideIonPage')
-		})
+		const router = useRouter()
 		return {
-			
+			router,
+			arrowBackOutline
 		}
 	}
 }

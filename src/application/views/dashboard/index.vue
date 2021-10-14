@@ -6,27 +6,26 @@
 			<bottom-nav></bottom-nav>
 		</ion-tabs>
 		<side-nav-bar></side-nav-bar>
+		<modal></modal>
 	</ion-page>
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, onMounted } from 'vue'
+import { defineAsyncComponent } from 'vue'
 
 const BottomNav = defineAsyncComponent(() => import('@/application/components/layout/bottomNavigations/BottomNav.vue'))
 const TopBar = defineAsyncComponent(() => import('@/application/components/layout/topNavigations/Topbar.vue'))
 const SideNavBar = defineAsyncComponent(() => import('@/application/components/layout/sidebars/DefaultSidebar.vue'))
+const Modal = defineAsyncComponent(() => import('@/application/components/core/Modal.vue'))
+
 import { IonPage, IonTabs, IonRouterOutlet } from '@ionic/vue'
-import { useStore } from '@/application/store'
+
 
 export default {
 	name: 'dashboard',
-	components: { BottomNav, IonPage, IonTabs, IonRouterOutlet, TopBar, SideNavBar },
+	components: { BottomNav, IonPage, IonTabs, IonRouterOutlet, TopBar, SideNavBar, Modal },
 	setup() {
 
-		const store = useStore()
-		onMounted(() => {
-			store.commit('hideIonPage')
-		})
 		return {
 			
 		}
