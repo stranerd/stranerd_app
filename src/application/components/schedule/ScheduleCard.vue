@@ -1,5 +1,5 @@
 <template>
-	<div :class="`md:min-w-[17rem] md:h-[10.5rem] lg:w-full !m-0 min-w-[12.5rem] h-[10.125rem]  md:rounded-xl rounded-md flex flex-col md:gap-3 gap-[1rem] box-border  cardPadding`">
+	<div :class="`md:min-w-[17rem] md:h-[10.5rem] lg:w-full ${colorClass} !m-0 min-w-[12.5rem] h-[10.125rem]  md:rounded-xl rounded-md flex flex-col md:gap-3 gap-[1rem] box-border  cardPadding`">
 		<span class="heading font-bold text-dark_gray">
 			Organic Chemistry
 		</span>
