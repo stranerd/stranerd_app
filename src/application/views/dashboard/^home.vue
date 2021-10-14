@@ -3,7 +3,7 @@
 		<ion-content :fullscreen="true" class=" mx-auto">	
 			<div class="layout-page">
 				<div class="layout-body">
-					<div class="col-span-12 px-3 mb-8">
+					<div class="col-span-12 px-3 mb-14 md:px-5">
 						<ChallengesCard class="lg:hidden"/>
 						<FeaturedTutors/>
 						<RecentQuestions />

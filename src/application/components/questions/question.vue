@@ -5,18 +5,25 @@
 			<img src="/assets/images/person-circle.svg" class="inline h-7 mr-2"/>
 			<span class="font-bold text-dark_gray">Timmy Nuetron</span>
 			<div class="flex flex-row-reverse flex-grow">
-				<template v-if="!props.fromViewQuestion">
-					<button class="py-1 px-3 rounded-lg text-white bg-dark_gray font-bold flex flex-row items-center">
-						<span class="mr-2">Answer</span>
-						<span class="h-1 w-1 rounded-full bg-white mr-2" ></span>
-						<span class="mr-1 text-sm">+20</span>
-						<img src="/assets/images/bronze.svg" class=" h-4"/>
-					</button>
+
+				<template v-if="fromHome">
+					<span class="font-bold text-icon_inactive lg:mr-2" >30m ago</span>
 				</template>
 				<template v-else>
-					<ion-icon :icon="flag" class="text-[22px]  text-icon_inactive"></ion-icon>
-					<ion-icon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive"></ion-icon>
+					<template v-if="!props.fromViewQuestion">
+						<button class="py-1 px-3 rounded-lg text-white bg-dark_gray font-bold flex flex-row items-center">
+							<span class="mr-2">Answer</span>
+							<span class="h-1 w-1 rounded-full bg-white mr-2" ></span>
+							<span class="mr-1 text-sm">+20</span>
+							<img src="/assets/images/bronze.svg" class=" h-4"/>
+						</button>
+					</template>
+					<template v-if="props.fromViewQuestion">
+						<ion-icon :icon="flag" class="text-[22px]  text-icon_inactive"></ion-icon>
+						<ion-icon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive"></ion-icon>
+					</template>
 				</template>
+				
 			</div>
 		</div>
 
@@ -25,7 +32,7 @@
 				Featured
 			</button>
 		</div>
-		<div class="mt-3 flex flex-row items-center">
+		<div class="mt-3 flex flex-row items-center" v-if="!fromHome">
 			<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3" ></span>
 			<span class="font-semibold text-dark_gray">Physics</span>
 		</div>
@@ -36,7 +43,7 @@
 		</p>
 
 		<div class="w-full flex flex-col lg:flex-row lg:justify-between">
-			<div class="mt-2 mb-2 flex flex-row items-center gap-4">
+			<div class="mt-2 mb-2 flex flex-row items-center gap-4" v-if="!fromHome">
 				<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg">
 					Motion
 				</span>
@@ -49,10 +56,10 @@
 			</div>
 
 			<div  class="mt-2 flex flex-row items-center ">
-				<span class="font-bold text-icon_inactive lg:mr-2">30m ago</span>
-				<div class="flex flex-row-reverse items-center flex-grow">
+				<span class="font-bold text-icon_inactive lg:mr-2" v-if="!fromHome">30m ago</span>
+				<div :class="`flex ${fromHome ? 'flex-row' : 'flex-row-reverse'}  items-center flex-grow`">
 					<span class="font-bold text-icon_inactive">5 answers</span>
-					<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 " ></span>
+					<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 " v-if="!fromHome" ></span>
 				</div>
 			</div>
 		</div>
@@ -79,7 +86,12 @@ export default defineComponent({
 		fromViewQuestion: {
 			type: Boolean,
 			default: false
+		},
+		fromHome: {
+			type: Boolean,
+			default: false
 		}
+
 	},
 	components: {
 		IonIcon, IonRippleEffect

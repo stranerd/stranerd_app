@@ -37,7 +37,7 @@
 						10
 					</span>
 				</div>
-				<div class="w-6/12 ">
+				<div class="w-6/12 font-normal">
 					<span>You got coins for a best answer</span>
 				</div>
 			</div>

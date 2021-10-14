@@ -1,9 +1,9 @@
 <template>
 	<!-- Small screens -->
 	<div class="md:hidden bg-[#F7F7FC] py-[8px] px-4 fixed flex w-full top-0 border-0 flex-row items-center z-50" v-if="!props.isNotDashboard && !store.state.showPage">
-		<div class="flex flex-row items-center w-[15%]">
+		<router-link class="flex flex-row items-center w-[15%]" to="/profile/dashboard">
 			<img src="/assets/images/person-circle.svg" class="inline h-7"/>
-		</div>
+		</router-link>
 
 		<div class="flex flex-row items-center px-3 w-[70%] justify-center" >
 			<div class="py-1 px-3 w-full bg-[#8B9EB1] flex rounded-xl flex-row items-center">
@@ -30,9 +30,9 @@
 	<!-- medium screens -->
 	<div class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50" v-if="!props.isNotDashboard && !store.state.showPage ">
 		<div class="flex flex-row items-center gap-9 w-1/4">
-			<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
+			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/profile/dashboard">
 				<img src="/assets/images/person-circle.svg" class="inline h-6"/>
-			</div>
+			</router-link>
 
 			<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
 				<img src="/assets/images/cap.svg" class="inline h-6"/>
@@ -98,7 +98,7 @@
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/dashboard/questions">
 				<img src="/assets/images/chatbubble.svg" class="inline h-5"/>
 			</router-link>
-			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/dashboard/questions">
+			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/profile/dashboard">
 				<img src="/assets/images/person-circle.svg" class="inline h-6"/>
 			</router-link>
 		</div>

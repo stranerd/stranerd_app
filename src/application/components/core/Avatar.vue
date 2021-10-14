@@ -1,6 +1,6 @@
 <template>
 	<img
-		:src="source || require('../../assets/images/avatars/user_profile.svg')"
+		:src="require('../../assets/images/avatars/user_profile.svg')"
 		:style="`width: ${size}px; height: ${size}px; border-radius: 10rem; border: 1.5px solid transparent; object-fit: cover;`"
 		alt=""
 	>

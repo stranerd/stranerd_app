@@ -15,7 +15,7 @@
 						</div>
 					</div>
 
-					<div class="col-span-12 ">
+					<div class="col-span-12 mb-16">
 						<swiper
 							@swiper="onSwiper"
 							@slideChange="onSlideChange"
