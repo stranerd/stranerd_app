@@ -1,36 +1,34 @@
 <template>
 	<ion-page>
-		<top-bar :isNotDashboard="false"></top-bar>
-		<ion-tabs>
-			<ion-router-outlet></ion-router-outlet>
-			<bottom-nav></bottom-nav>
-		</ion-tabs>
-		<side-nav-bar></side-nav-bar>
+		<top-bar :isNotDashboard="true" :noSideBar="true" ></top-bar>
+		<ion-header mode="ios" class="block lg:hidden">
+			<ion-toolbar class="px-2">
+				<ion-buttons @click="router.go(-1)" slot="start">
+					<ion-icon :icon="arrowBackOutline" class="text-[23px] text-dark_gray"></ion-icon>
+				</ion-buttons>
+				<ion-title>Dashboard</ion-title>
+			</ion-toolbar>
+		</ion-header>
+		<ion-router-outlet class="mt-10"></ion-router-outlet>
 	</ion-page>
-
-	<modal></modal>
 </template>
 
 <script lang="ts">
 import { defineAsyncComponent } from 'vue'
-
-const BottomNav = defineAsyncComponent(() => import('@/application/components/layout/bottomNavigations/BottomNav.vue'))
+import { arrowBackOutline } from 'ionicons/icons'
 const TopBar = defineAsyncComponent(() => import('@/application/components/layout/topNavigations/Topbar.vue'))
-const SideNavBar = defineAsyncComponent(() => import('@/application/components/layout/sidebars/DefaultSidebar.vue'))
-const Modal = defineAsyncComponent(() => import('@/application/components/core/Modal.vue'))
-
-import { IonPage, IonTabs, IonRouterOutlet } from '@ionic/vue'
-
+import { IonPage, IonRouterOutlet, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar  } from '@ionic/vue'
+import { useRouter } from 'vue-router'
 
 export default {
-	name: 'profileDashboard',
-	components: { BottomNav, IonPage, IonTabs, IonRouterOutlet, TopBar, SideNavBar, Modal },
+	name: 'profilePage',
+	components: { IonPage, IonRouterOutlet, TopBar, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar  },
 	setup() {
-
+		const router = useRouter()
 		return {
-			
+			router,
+			arrowBackOutline
 		}
 	}
 }
 </script>
-

@@ -28,7 +28,7 @@
 
 import { IonButton } from '@ionic/vue'
 import Coins from '@/application/components/core/Coins.vue'
-import { componentName, showModal } from '@/modules/Modal'
+import { componentName, showModal } from '@/modules/core/Modal'
 export default {
 	name:'Balance Card',
 	components:{IonButton, Coins, },
