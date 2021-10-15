@@ -1,5 +1,5 @@
 <template>
-	<router-link :to="`/dashboard/${props.tab}`" @click="store.commit('hideIonPage')" class="flex flex-col rounded-l-[150px] text-icon_inactive cursor-pointer text-sm hover:text-dark_gray mb-2">
+	<router-link :to="props.tab != 'schedule' ? `/dashboard/${props.tab}` : '/schedule/calendar'" @click="store.commit('hideIonPage')" class="flex flex-col rounded-l-[150px] text-icon_inactive cursor-pointer text-sm hover:text-dark_gray mb-2">
 		<div :class="`${props.route.path.includes(props.tab) ? 'flex' : 'hidden' } flex bg-white flex-row-reverse`">
 			<div class="w-1/2 rounded-br-[150px] py-2 bg-light_gray">
 			</div>
@@ -12,7 +12,7 @@
 		</div>
 		<div :class="`${props.route.path.includes(props.tab) ? 'flex' : 'hidden' }  bg-white flex-row-reverse`">
 			<div class="w-1/2 rounded-tr-[150px] py-2 bg-light_gray">
-			</div>
+			</div> 
 			<div class="w-1/2  py-2 bg-light_gray">
 			</div>
 		</div>

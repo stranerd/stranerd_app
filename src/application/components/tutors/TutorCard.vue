@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="mx-0 md:min-w-[160px] w-full min-h-[150px]  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-1 cardPadding justify-center items-center"
+		class=" w-full  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-1 cardPadding justify-center items-center"
 	>
 		<div class="relative">
 			<avatar

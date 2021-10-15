@@ -2,44 +2,61 @@
 	<div class="bg-light_green md:p-8 py-8 px-4 rounded-xl mt-2">
 		<div class="flex justify-between items-center">
 			<div class="flex flex-col">
-				<span class="font-bold text-dark_gray text-xs md:text-2xl md:mb-7 mb-4">Bronze coins</span>
+				<span class="font-bold text-dark_gray text-xs md:text-base md:mb-7 mb-4">Bronze coins</span>
 				<div class="flex items-center">
 					<Coins :size="24" class="md:hidden"/>
 					<Coins :size="48" class="hidden md:block"/>
-					<span class="font-bold text-dark_gray text-2xl md:text-5xl ml-3">10,000</span>
+					<span class="font-bold text-dark_gray text-2xl md:text-3xl ml-3">10,000</span>
 				</div>
 			</div>
 
 			<div class="flex flex-col">
-				<span class="font-bold text-dark_gray text-xs md:text-2xl md:mb-7 mb-4 text-right">Gold coins</span>
+				<span class="font-bold text-dark_gray text-xs md:text-base md:mb-7 mb-4 text-right">Gold coins</span>
 				<div class="flex items-center">
 					<Coins :size="24" :gold="true" class="md:hidden"/>
 					<Coins :size="48" :gold="true" class="hidden md:block"/>
-					<span class="font-bold text-dark_gray text-2xl md:text-5xl ml-3">2500</span>
+					<span class="font-bold text-dark_gray text-2xl md:text-3xl ml-3">2,500</span>
 				</div>
 			</div>
 		</div>
 
-		<ion-button @click="buyCoins" class="md:w-[200px] w-[134px] md:mt-14 mt-5 font-bold capitalize md:text-base ">Buy coins</ion-button>
+		<div class="mt-9 flex flex-row items-center gap-4 md:gap-6 ">
+			<button @click="buyCoins" class=" px-6 py-3 md:px-10 headings relative ion-activatable rounded-lg text-white font-bold bg-dark_gray ">
+				Buy coins
+				<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
+			</button>
+
+			<button @click="makeWithdrawal"  class=" px-6 py-3 md:px-10 headings relative ion-activatable border-[1px] border-solid border-dark_gray rounded-lg text-dark_gray font-bold bg-transparent ">
+				Withdraw
+				<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
+			</button>
+		</div>
+		
 	</div>
 </template>
 
 <script lang="ts">
 
-import { IonButton } from '@ionic/vue'
+import { IonRippleEffect } from '@ionic/vue'
 import Coins from '@/application/components/core/Coins.vue'
 import { componentName, showModal } from '@/modules/core/Modal'
 export default {
 	name:'Balance Card',
-	components:{IonButton, Coins, },
+	components:{IonRippleEffect, Coins, },
 	setup(props: any) {
 		const buyCoins = () => {
 			showModal.value = true
 			componentName.value = 'buyCoins'
 		}
 
+		const makeWithdrawal = () => {
+			showModal.value = true
+			componentName.value = 'withdrawal'
+		}
+
 		return {
-			buyCoins
+			buyCoins,
+			makeWithdrawal
 		}
 	}
 }
