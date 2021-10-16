@@ -19,7 +19,8 @@ module.exports = {
 				icon_inactive: '#8B9EB1',
 				faded_gray: '#C7D6E3',
 				main_dark: '#132740',
-				modal_bg: 'rgba(77, 92, 111, 0.75)'
+				modal_bg: 'rgba(77, 92, 111, 0.75)',
+				delete_red: '#FF6C6C'
 			},
 			  fontFamily: {
 				'nuni': ['"Nunito Sans"', 'sans-serif']
