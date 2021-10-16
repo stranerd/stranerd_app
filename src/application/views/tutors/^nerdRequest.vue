@@ -11,10 +11,13 @@
 
 				<div class="w-full mt-2">
 					<div class="flex items-center font-bold text-dark_gray justify-end normalText">
-						Hide Filters
-						<ion-icon :icon="filter" class="text-[22px] mr-1 "></ion-icon>
+						<div class="cursor-pointer flex items-center gap-2" @click="showFilter = !showFilter">
+							<span> {{showFilter ? 'Hide Filters' : 'Filter'}} </span>	
+							<ion-icon :icon="filter" :class="['text-[22px] mr-1', showFilter ? ' rotate-180' : '']"></ion-icon>
+						</div>
+					
 					</div>
-					<div class="bg-dark_gray cardPadding rounded-md lg:flex gap-4 items-center">
+					<div class="bg-dark_gray cardPadding rounded-md lg:flex gap-4 items-center mt-2" v-if="showFilter">
 						<div class="flex gap-4 lg:w-2/4">
 							<div class="flex flex-col w-1/2">
 								<ion-label class="normalText text-white font-bold mb-2">Urgency</ion-label>
@@ -40,7 +43,7 @@
 						</div>
 						<div class="flex flex-col mt-3 lg:mt-0 lg:w-1/4">
 							<ion-label class="normalText text-white font-bold mb-2">Price</ion-label>
-							<ion-range min="0" max="100" step="20" class="p-0">
+							<ion-range min="0" max="100" pin="true" step="1" class="p-0 normalText font-semibold">
 								<ion-icon size="small" slot="start" name="sunny"></ion-icon>
 								<ion-icon slot="end" name="sunny"></ion-icon>
 							</ion-range>
@@ -59,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent , ref} from 'vue'
 import { IonSelect, IonSelectOption, IonPage, IonContent, IonSearchbar,   IonLabel, IonRange, IonIcon  } from '@ionic/vue'
 import { filter} from 'ionicons/icons'
 import NerdRequest from '@/application/components/tutors/NerdRequestCard.vue'
@@ -68,8 +71,11 @@ export default defineComponent({
 	name: 'tutor a Nerd',
 	components: { IonSelect, IonSelectOption, IonPage, IonContent, IonSearchbar,  IonLabel,  NerdRequest, IonRange ,IonIcon, },
 	setup(){
+		const showFilter = ref(false)
 		return{
-			filter
+			filter,
+			showFilter
+			
 		}
 	}
 
@@ -83,8 +89,11 @@ ion-range {
 	--bar-height: 5px;
 	--bar-border-radius:6px;
 	--height: 1.75rem;
-  background-color: transparent;
-      position: relative;
+	--pin-background: transparent;
+	--pin-color: white;
+	--knob-size: 16px;
+    background-color: transparent;
+    position: relative;
     left: -30px;
   
   
