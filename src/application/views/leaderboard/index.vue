@@ -6,7 +6,7 @@
 				<ion-buttons @click="router.go(-1)" slot="start">
 					<ion-icon :icon="arrowBackOutline" class="text-[23px] text-dark_gray"></ion-icon>
 				</ion-buttons>
-				<ion-title>Tutor Requests</ion-title>
+				<ion-title>Leaderboard</ion-title>
 			</ion-toolbar>
 		</ion-header>
 		<ion-router-outlet class="mt-10"></ion-router-outlet>
@@ -21,7 +21,7 @@ import { IonPage, IonRouterOutlet, IonTitle, IonIcon, IonButtons, IonHeader, Ion
 import { useRouter } from 'vue-router'
 
 export default {
-	name: 'tutors page',
+	name: 'leaderBoard',
 	components: { IonPage, IonRouterOutlet, TopBar, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar  },
 	setup() {
 		const router = useRouter()
