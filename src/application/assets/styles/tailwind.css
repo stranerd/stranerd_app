@@ -57,7 +57,7 @@
 	}
 
 	.heading {
-		@apply md:text-lg text-sm
+		@apply md:text-base text-sm
 	}
 
 	.cardPadding {

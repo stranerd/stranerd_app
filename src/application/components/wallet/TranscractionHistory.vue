@@ -1,6 +1,6 @@
 <template>
-	<div class="flex justify-between items-center mt-14 mb-4">
-		<span class="font-bold text-dark_gray text-2xl" variant="1">
+	<div class="flex justify-between items-center mt-8 pb-2">
+		<span class="font-bold text-dark_gray text-base" variant="1">
 			Transaction history
 		</span>
 

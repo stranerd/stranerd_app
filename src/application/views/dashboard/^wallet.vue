@@ -5,7 +5,7 @@
 				<div class="layout-body">
 					<!-- page contents goes here -->
 					<div class="col-span-12 px-3">
-						<span class="font-bold text-dark_gray text-base md:text-2xl mb-3">
+						<span class="font-bold text-dark_gray headings mb-3">
 							Available balance
 						</span>
 						<BalanceCard/>

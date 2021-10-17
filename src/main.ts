@@ -7,6 +7,8 @@ import { IonicVue } from '@ionic/vue'
 
 import { store, key } from './application/store'
 
+// import apiFactory from './services/apiFactory'
+
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css'
 
@@ -55,6 +57,7 @@ const router = Promise.all(routes).then((routes) => {
 
 const init = async() => {
 	createApp({
+		// mixins: [apiFactory],
 		components: {
 			App
 		},

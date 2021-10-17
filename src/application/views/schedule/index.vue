@@ -1,30 +1,30 @@
 <template>
 	<ion-page>
-		<top-bar :isNotDashboard="false"></top-bar>
-		<ion-tabs>
-			<ion-router-outlet></ion-router-outlet>
-			<bottom-nav></bottom-nav>
-		</ion-tabs>
+		<top-bar :isNotDashboard="true"></top-bar>
+		<ion-router-outlet></ion-router-outlet>
 		<side-nav-bar></side-nav-bar>
 		<modal></modal>
 	</ion-page>
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, onMounted } from 'vue'
 
-const BottomNav = defineAsyncComponent(() => import('@/application/components/layout/bottomNavigations/BottomNav.vue'))
 const TopBar = defineAsyncComponent(() => import('@/application/components/layout/topNavigations/Topbar.vue'))
 const SideNavBar = defineAsyncComponent(() => import('@/application/components/layout/sidebars/DefaultSidebar.vue'))
+import { IonPage, IonRouterOutlet } from '@ionic/vue'
+import { useStore } from '@/application/store'
 const Modal = defineAsyncComponent(() => import('@/application/components/core/Modal.vue'))
-import { IonPage, IonTabs, IonRouterOutlet } from '@ionic/vue'
-
 
 export default {
-	name: 'dashboard',
-	components: { BottomNav, IonPage, IonTabs, IonRouterOutlet, TopBar, SideNavBar, Modal },
+	name: 'SchedulePages',
+	components: { IonPage, IonRouterOutlet, TopBar, SideNavBar, Modal },
 	setup() {
 
+		const store = useStore()
+		onMounted(() => {
+			store.commit('hideIonPage')
+		})
 		return {
 			
 		}

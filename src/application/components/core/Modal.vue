@@ -7,6 +7,8 @@
 			<div class="py-3  md:mt-5 mt-2 w-full grid grid-cols-12">
 				<request-session v-if="componentName == 'requestSession'"></request-session>
 				<buy-coins v-if="componentName == 'buyCoins'" ></buy-coins>
+				<create-schedule v-if="componentName ==  'createSchedule'" ></create-schedule>
+				<withdrawal v-if="componentName == 'withdrawal'"></withdrawal>
 			</div>
 		</div>
 	</transition>
@@ -21,6 +23,8 @@ import { defineAsyncComponent } from 'vue'
 
 const RequestSession = defineAsyncComponent(() => import('@/application/components/tutors/RequestSession.vue'))
 const BuyCoins = defineAsyncComponent(() => import('@/application/components/wallet/BuyCoins.vue'))
+const CreateSchedule = defineAsyncComponent(() => import('@/application/components/schedule/CreateSchedule.vue'))
+const Withdrawal = defineAsyncComponent(() => import('@/application/components/wallet/Withdrawal.vue'))
 
 export default {
 	name: 'modal',
@@ -30,7 +34,7 @@ export default {
 			default: false
 		}
 	},
-	components: { IonIcon, RequestSession, BuyCoins },
+	components: { IonIcon, RequestSession, BuyCoins, CreateSchedule, Withdrawal },
 	setup(props: any) {
 
 		return {
