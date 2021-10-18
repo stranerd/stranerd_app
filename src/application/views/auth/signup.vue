@@ -12,11 +12,11 @@
 
 			<form class=" px-5 flex flex-col justify-center mx-auto mt-20">
 
-				<ion-input placeholder="First name" position="floating"></ion-input>
-				<ion-input placeholder="Last name" position="floating"></ion-input>
-				<ion-input placeholder="Email Address" position="floating"></ion-input>
-				<ion-input placeholder="Password" position="floating"></ion-input>
-				<ion-input placeholder="Confirm Password" position="floating"></ion-input>
+				<ion-input placeholder="First name" position="floating" v-model="firstName"></ion-input>
+				<ion-input placeholder="Last name" position="floating" v-model="lastName"></ion-input>
+				<ion-input placeholder="Email Address" position="floating" v-model="email"></ion-input>
+				<ion-input placeholder="Password" position="floating"  v-model="password"></ion-input>
+				<!-- <ion-input placeholder="Confirm Password" position="floating"></ion-input> -->
 
 			</form>
 
@@ -36,7 +36,7 @@
 			</p>
 
 			<div class="flex justify-center w-full px-5">
-				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6">
+				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="signup">
 					<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
 					Google</ion-button>
 			</div>
@@ -51,14 +51,22 @@
 import { IonContent, IonPage, IonInput, IonButton } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import {signUp} from '@/services/api'
 
 
 
 export default defineComponent({
 	components: { IonContent,IonPage, IonInput, IonButton},
 		  setup() {
+		const email = ref('')
+		const password = ref('')
+		const firstName = ref('')
+		const lastName = ref('')
+			 const signup = ()=>{
+				  signUp({email:email.value, password:password.value, firstName:firstName.value, lastName:lastName.value})
+			  }
 		const router = useRouter()
-		return { router }
+		return { router, signup, email, password,firstName,lastName }
 	}
 
 })
