@@ -33,7 +33,7 @@
 			</p>
 
 			<div class="flex justify-center w-full px-5">
-				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="signIn">
+				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="login">
 					<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
 					Google</ion-button>
 			</div>
@@ -48,6 +48,7 @@
 import { IonContent, IonPage, IonInput, IonButton } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import {signIn} from '@/services/api'
 
 
 
@@ -55,14 +56,15 @@ export default defineComponent({
 	components: { IonContent,IonPage, IonInput, IonButton},
 	  setup() {
 		const router = useRouter()
-		return { router }
+
+		const login = ()=>{
+			signIn({email:'abc@gmail.com', password:'12345678'})
+		} 
+	
+		return { router, login }
 	},
 
-	methods:{
-		signIn(){
-			console.log(this.$api.signIn({email:'abc@gmail.com', password:'12345678'}))
-		}
-	}
+
 
 })
 </script>
