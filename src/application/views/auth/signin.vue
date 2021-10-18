@@ -36,6 +36,9 @@
 				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="login">
 					<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
 					Google</ion-button>
+				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="getuser">
+					<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
+					user</ion-button>
 			</div>
 
 		
@@ -48,7 +51,9 @@
 import { IonContent, IonPage, IonInput, IonButton } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import {signIn} from '@/services/api'
+import {signIn , getUser} from '@/services/api'
+import {SetToken} from '@/services/Auth/AuthServices'
+
 
 
 
@@ -59,11 +64,21 @@ export default defineComponent({
 		const email = ref('')
 		const password = ref('')
 
-		const login = ()=>{
-			signIn({email:email.value, password:password.value})
+		const login = async()=>{
+			const userInfo = await signIn({email:email.value, password:password.value})
+
+			console.log(userInfo.data)
+			const user = userInfo.data
+			SetToken(user.accessToken, user.refreshToken)
+		} 
+		const getuser = async()=>{
+			const userInfo = await getUser()
+
+			console.log(userInfo.data)
+			
 		} 
 	
-		return { router, login, email, password }
+		return { router, login, email, password, getuser }
 	},
 
 

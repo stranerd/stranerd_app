@@ -9,10 +9,10 @@ const $API_GATEWAY_STORAGE = `${process.env.VUE_APP_API_STORAGE}`
 // const urlParams = new URLSearchParams(window.location.search)
 // const linchpin = urlParams.get('linchpin')
 
-// export const $simpleAuthHeader = {
-// 	Accept: 'application/json',
-// 	authorization: typeof linchpin === 'string' ? linchpin : localStorage.getItem('token'),
-// }
+export const $simpleAuthHeader = {
+	Accept: 'application/json',
+	authorization: localStorage.getItem('accessToken'),
+}
 
 // let $orgId = ''
 // let authUser = ''
@@ -25,19 +25,19 @@ const $API_GATEWAY_STORAGE = `${process.env.VUE_APP_API_STORAGE}`
 
 export const AxiosStranerd = axios.create({
 	baseURL: $API_GATEWAY_STRANERD,
-	// headers: $simpleAuthHeader,
+	headers: $simpleAuthHeader,
 })
 export const AxiosAuth = axios.create({
 	baseURL: $API_GATEWAY_AUTH,
-	// headers: $simpleAuthHeader,
+	headers: $simpleAuthHeader,
 })
 export const AxiosStorage = axios.create({
 	baseURL: $API_GATEWAY_STORAGE,
-	// headers: $simpleAuthHeader,
+	headers: $simpleAuthHeader,
 })
 
 
 AxiosStranerd.interceptors.response.use(
 	(response) => response,
-	(err) => err,
+	(err) => {console.log(err)},
 )

@@ -1,5 +1,6 @@
 import {
 	AxiosAuth,
+	$simpleAuthHeader
 } from './orgRepository'
 
 
@@ -27,8 +28,9 @@ export	const roles = (payload: any)=> {
 	const url = '/roles'
 	return AxiosAuth.post(url, payload)
 }
-export	const getUser = (payload: any)=> {
+export	const getUser = ()=> {
 	const url = '/user'
+	console.log($simpleAuthHeader)
 	return AxiosAuth.get(url)
 }
 export	const updateUser = (payload: any)=> {

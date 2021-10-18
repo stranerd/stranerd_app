@@ -23,7 +23,7 @@ module.exports = {
 		'accessor-pairs': 'off',
 		'no-use-before-define': 'off',
 		indent: ['error', 'tab', { SwitchCase: 1 }],
-		'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
+		'no-mixed-spaces-and-tabs': ['warn', 'smart-tabs'],
 		semi: ['error', 'never'],
 		quotes: ['error', 'single'],
 		'prefer-const': ['error'],
