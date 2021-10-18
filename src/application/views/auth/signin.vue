@@ -1,7 +1,7 @@
 <template>
 	<ion-page>
 		<ion-content
-			class="flex flex-col bg-dark h-screen w-screen items-start justify-center py-3 px-5 "
+			class="flex flex-col bg-dark h-screen w-screen items-start justify-center py-3 px-5 bg-gray-800"
 		>
 			<div class="flex justify-between  py-6 px-5">
 				<i class="las la-arrow-left text-white text-xl"></i>
@@ -43,7 +43,7 @@
 	</ion-page>
 </template>
 
-<script>
+<script lang="ts">
 // import { IonContent, IonButton, IonPage } from '@ionic/vue'
 import { IonContent, IonPage, IonInput, IonButton } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'

@@ -1,14 +1,14 @@
 <template>
 	<ion-page>
 		<ion-content
-			class="flex flex-col bg-dark h-screen w-screen items-start justify-center py-3 px-5 "
+			class="flex flex-col bg-dark h-screen w-screen items-start justify-center py-3 px-5 bg-gray-800"
 		>
 			<div class="flex justify-between  py-6 px-5">
-				<i class="las la-arrow-left text-white text-xl"></i>
+				<i class="las la-arrow-left  text-xl"></i>
 				<img src="../../assets/images/icons/logo-xs.svg" alt="ask a question" class="object-fit h-4 ">
 			</div>
 
-			<h1 class="text-center text-3xl text-white font-semibold font-nuni mt-12">Create your Account.</h1>
+			<h1 class="text-center text-3xl  font-semibold font-nuni mt-12">Create your Account.</h1>
 
 			<form class=" px-5 flex flex-col justify-center mx-auto mt-20">
 
@@ -20,18 +20,24 @@
 
 			</form>
 
+			<div class="py-2 px-4 text-center">
+				<button class="bg-primary rounded-md py-3 px-3  text-white">
+					Sign Up
+				</button>
+			</div>
+
 			<div class="flex justify-between items-center  px-5 mt-14">
-				<p class="text-xs text-white font-semibold font-nuni">Already have an Account on Stranerd?</p>
+				<p class="text-xs  font-semibold font-nuni">Already have an Account on Stranerd?</p>
 				<span @click="() => router.push('/auth/signin')" class="flex items-center text-yellow-300 font-nuni text-xs font-bold">Sign In <i class="las la-arrow-right text-xl"></i> </span>
 			</div>
 
 			<div class="flex justify-between px-5 items-center mt-14">
 				<div class="border-white border-b h-1 w-5/12"/>
-				<span class="font-nuni text-white">or</span>
+				<span class="font-nuni ">or</span>
 				<div class="border-white border-b h-1 w-5/12"/>
 			</div>
 
-			<p class="text-center text-xs font-nuni text-white font-bold mt-5 ">
+			<p class="text-center text-xs font-nuni  font-bold mt-5 ">
 				Sign Up with Google
 			</p>
 
@@ -46,7 +52,7 @@
 	</ion-page>
 </template>
 
-<script>
+<script lang="ts">
 // import { IonContent, IonButton, IonPage } from '@ionic/vue'
 import { IonContent, IonPage, IonInput, IonButton } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'
