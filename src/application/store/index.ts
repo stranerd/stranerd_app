@@ -21,7 +21,7 @@ export const store = createStore<State>({
 			state.showPage = false
 		}
 	},
-	plugins: []
+	plugins: [],
 })
 
 // define your own `useStore` composition function

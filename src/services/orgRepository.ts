@@ -1,9 +1,10 @@
-// import axios from 'axios'
+import axios from 'axios'
 
-// // Org Repository
+// Org Repository
 
-// // const $API_GATEWAY_Stranerd = `${process.env.VUE_APP_API_GATEWAY_ENDPOINT}/auth/`
-// // const $API_GATEWAY_AAA = `${process.env.VUE_APP_API_GATEWAY_ENDPOINT}/`
+const $API_GATEWAY_STRANERD = `${process.env.VUE_APP_API_STRANERD}`
+const $API_GATEWAY_AUTH = `${process.env.VUE_APP_API_AUTH}`
+const $API_GATEWAY_STORAGE = `${process.env.VUE_APP_API_STORAGE}`
 
 // const urlParams = new URLSearchParams(window.location.search)
 // const linchpin = urlParams.get('linchpin')
@@ -22,26 +23,21 @@
 // export const OrgId = $orgId
 // export const $AuthUser = authUser
 
-// export const AxiosStranerd = axios.create({
-// 	baseURL: $API_GATEWAY_Stranerd,
-// 	headers: $simpleAuthHeader,
-// })
-// export const AxiosPerformance = axios.create({
-// 	baseURL: $API_GATEWAY_PERFORMANCE,
-// 	headers: $simpleAuthHeader,
-// })
-// export const AxiosAAA = axios.create({
-// 	baseURL: $API_GATEWAY_AAA,
-// 	headers: $simpleAuthHeader,
-// })
-// AxiosStranerd.interceptors.response.use(
-// 	(response) => response,
-// 	// eslint-disable-next-line consistent-return
-// 	(err) => {
-// 		if (err.response.status === 401 && err.response.data === 'Unauthorized') {
-// 			// if you ever get an unauthorized, logout the user
-// 			window.location.assign(process.env.VUE_APP_CLOUDENLY)
-// 			// you can also redirect to /login if needed !
-// 		}
-// 	},
-// )
+export const AxiosStranerd = axios.create({
+	baseURL: $API_GATEWAY_STRANERD,
+	// headers: $simpleAuthHeader,
+})
+export const AxiosAuth = axios.create({
+	baseURL: $API_GATEWAY_AUTH,
+	// headers: $simpleAuthHeader,
+})
+export const AxiosStorage = axios.create({
+	baseURL: $API_GATEWAY_STORAGE,
+	// headers: $simpleAuthHeader,
+})
+
+
+AxiosStranerd.interceptors.response.use(
+	(response) => response,
+	(err) => err,
+)
