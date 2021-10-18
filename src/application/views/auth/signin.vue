@@ -12,8 +12,8 @@
 
 			<form class=" px-5 flex flex-col justify-center mx-auto mt-20">
 
-				<ion-input placeholder="Email Address" position="floating"></ion-input>
-				<ion-input placeholder="Password" position="floating"></ion-input>
+				<ion-input placeholder="Email Address" position="floating" v-model="email"></ion-input>
+				<ion-input placeholder="Password" position="floating" v-model="password"></ion-input>
 
 			</form>
 
@@ -56,12 +56,14 @@ export default defineComponent({
 	components: { IonContent,IonPage, IonInput, IonButton},
 	  setup() {
 		const router = useRouter()
+		const email = ref('')
+		const password = ref('')
 
 		const login = ()=>{
-			signIn({email:'abc@gmail.com', password:'12345678'})
+			signIn({email:email.value, password:password.value})
 		} 
 	
-		return { router, login }
+		return { router, login, email, password }
 	},
 
 
