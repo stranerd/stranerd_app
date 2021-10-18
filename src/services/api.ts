@@ -20,9 +20,9 @@ export	const verify = (payload: any)=> {
 	const url = '/emails/verify'
 	return AxiosAuth.post(url, payload)
 }
-export	const token = (payload: any)=> {
+export	const token = ()=> {
 	const url = '/token'
-	return AxiosAuth.post(url, payload)
+	return AxiosAuth.post(url)
 }
 export	const roles = (payload: any)=> {
 	const url = '/roles'

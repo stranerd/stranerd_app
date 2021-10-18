@@ -15,6 +15,7 @@ export const $simpleAuthHeader = {
 
 
 
+
 export const AxiosStranerd = axios.create({
 	baseURL: $API_GATEWAY_STRANERD,
 	headers: $simpleAuthHeader,
@@ -29,7 +30,18 @@ export const AxiosStorage = axios.create({
 })
 
 
-AxiosStranerd.interceptors.response.use(
-	(response) => response,
-	(err) => {console.log(err)},
+AxiosAuth.interceptors.request.use(
+	(request)=>{
+		console.log(request)
+		return request
+	}
+)
+AxiosAuth.interceptors.response.use(
+	(response) =>{
+		response
+		console.log(axios.interceptors.response)	
+	},
+	(err) => {
+		console.log(axios.interceptors.request)	
+		console.log(err)},
 )
