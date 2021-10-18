@@ -33,13 +33,16 @@ export const AxiosStorage = axios.create({
 AxiosAuth.interceptors.request.use(
 	(request)=>{
 		console.log(request)
+		request.headers['Access-Token'] = localStorage.getItem('accessToken')
+		request.headers['Refresh-Token'] = localStorage.getItem('refreshToken')
 		return request
 	}
 )
 AxiosAuth.interceptors.response.use(
 	(response) =>{
-		response
-		console.log(axios.interceptors.response)	
+		console.log(axios.interceptors.response)
+		return response
+			
 	},
 	(err) => {
 		console.log(axios.interceptors.request)	

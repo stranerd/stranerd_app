@@ -72,7 +72,7 @@ export default defineComponent({
 			SetToken(user.accessToken, user.refreshToken)
 		} 
 		const getuser = async()=>{
-			const userInfo = await token()
+			const userInfo = await getUser()
 
 			console.log(userInfo)
 			
