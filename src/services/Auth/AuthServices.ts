@@ -1,7 +1,8 @@
 import {$simpleAuthHeader} from '@/services/orgRepository'
 
-export const SetToken = (accessToken: string, resetToken: string)=>{
-	$simpleAuthHeader.authorization = accessToken
+export const SetToken = (accessToken: string, refreshToken: string)=>{
+	$simpleAuthHeader['Access-Token'] = accessToken
+	$simpleAuthHeader['Refresh-Token'] = accessToken
 	localStorage.setItem('accessToken', accessToken)
-	localStorage.setItem('resetToken', resetToken)
+	localStorage.setItem('refreshToken', refreshToken)
 }
