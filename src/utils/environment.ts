@@ -22,9 +22,9 @@ const host = (process.env.DOMAIN ?? '') + (isDev ? `:${process.env.PORT}` : '')
 export const domain = `http${!isDev ? 's' : ''}://${host}`
 export const logo = `${domain}/images/logo-blue.svg`
 
-const apis = JSON.parse(process.env.API_BASES ?? '{}')
+const apis = JSON.parse(process.env.VUE_APP_API_API_BASES ?? '{}')
 export const apiBases = {
-	AUTH: `${process.env.VUE_APP_API_AUTH}`,
-	STRANERD: `${process.env.VUE_APP_API_STRANERD}`,
-	STORAGE: `${process.env.VUE_APP_API_STORAGE}`
+	AUTH: apis.auth,
+	STRANERD: apis.stranerd,
+	UTILS: apis.utils
 }

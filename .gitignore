@@ -18,7 +18,6 @@ log.txt
 npm-debug.log*
 .env*
 *.env
-.env
 /.env
 
 /.idea
@@ -33,3 +32,8 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+
+package-lock.json
+# Service worker
+sw.*
+env.json
