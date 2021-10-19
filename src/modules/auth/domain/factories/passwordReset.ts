@@ -1,4 +1,4 @@
-import { BaseFactory } from '@modules/core'
+import { BaseFactory } from '@/modules/core'
 import { isLongerThanX, isRequiredIf, isShallowEqualTo, isShorterThanX, isString } from '@stranerd/validate'
 
 type Keys = { password: string; cPassword: string }

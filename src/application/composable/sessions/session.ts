@@ -2,10 +2,10 @@
 import { computed, Ref, ref, onMounted, watch } from 'vue'
 import  { useRouter } from 'vue-router'
 import VueRouter from 'vue-router'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
-import { FindSession, GetSessions, ListenToSession, ListenToSessions, SessionEntity } from '@modules/sessions'
-import { useAuth } from '@app/composable/auth/auth'
-import { Alert } from '@app/composable/core/notifications'
+import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
+import { FindSession, GetSessions, ListenToSession, ListenToSessions, SessionEntity } from '@/modules/sessions'
+import { useAuth } from '@/application/composable/auth/auth'
+import { Alert } from '@/application/composable/core/notifications'
 
 const currentGlobal = {
 	previousSession: ref(null as SessionEntity | null),

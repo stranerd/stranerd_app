@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Ref, ref, onMounted, watch } from 'vue'
-import { FindUser, ListenToUser, UserEntity } from '@modules/users'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
-import { useAuth } from '@app/composable/auth/auth'
+import { FindUser, ListenToUser, UserEntity } from '@/modules/users'
+import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
+import { useAuth } from '@/application/composable/auth/auth'
 
 const global = {} as Record<string, {
 	user: Ref<UserEntity | null>;

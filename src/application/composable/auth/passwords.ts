@@ -1,8 +1,8 @@
 import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { PasswordResetFactory, PasswordResetRequestFactory, ResetPassword, SendPasswordResetEmail } from '@modules/auth'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { NetworkError, StatusCodes } from '@modules/core'
+import { PasswordResetFactory, PasswordResetRequestFactory, ResetPassword, SendPasswordResetEmail } from '@/modules/auth'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
+import { NetworkError, StatusCodes } from '@/modules/core'
 import { createStorage } from './storage'
 
 export const usePasswordResetRequest = () => {

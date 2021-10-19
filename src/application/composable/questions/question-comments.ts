@@ -5,8 +5,8 @@ import {
 	CommentFactory,
 	GetQuestionComments,
 	ListenToQuestionComments
-} from '@modules/questions'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+} from '@/modules/questions'
+import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
 
 const global = {} as Record<string, {
 	comments: Ref<CommentEntity[]>;

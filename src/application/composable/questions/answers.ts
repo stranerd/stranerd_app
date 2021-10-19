@@ -10,11 +10,11 @@ import {
 	MarkBestAnswer,
 	QuestionEntity,
 	VoteAnswer
-} from '@modules/questions'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { useAuth } from '@app/composable/auth/auth'
-import { Alert } from '@app/composable/core/notifications'
-import { analytics } from '@modules/core'
+} from '@/modules/questions'
+import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
+import { useAuth } from '@/application/composable/auth/auth'
+import { Alert } from '@/application/composable/core/notifications'
+import { analytics } from '@/modules/core'
 import VueRouter, { useRouter } from 'vue-router'
 
 const global = {} as Record<string, {

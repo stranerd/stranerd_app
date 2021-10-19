@@ -1,4 +1,4 @@
-import { BaseFactory, Media } from '@modules/core'
+import { BaseFactory, Media } from '@/modules/core'
 import {
 	hasLessThanX,
 	isArrayOfX,
@@ -12,7 +12,7 @@ import {
 	isString,
 	isValid
 } from '@stranerd/validate'
-import { UserEntity } from '@modules/users'
+import { UserEntity } from '@/modules/users'
 import { UpdateUser } from '../entities/auth'
 
 type Content = File | Media | undefined

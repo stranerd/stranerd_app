@@ -1,9 +1,9 @@
 import { ref } from 'vue'
-import { Notify } from '@app/composable/core/notifications'
-import { isClient } from '@utils/environment'
-import { analytics, NetworkError, StatusCodes } from '@modules/core'
-import { capitalize } from '@utils/commons'
-import { useAuth } from '@app/composable/auth/auth'
+import { Notify } from '@/application/composable/core/notifications'
+import { isClient } from '@/utils/environment'
+import { analytics, NetworkError, StatusCodes } from '@/modules/core'
+import { capitalize } from '@/utils/commons'
+import { useAuth } from '@/application/composable/auth/auth'
 
 export const useErrorHandler = () => {
 	const errorState = ref('')

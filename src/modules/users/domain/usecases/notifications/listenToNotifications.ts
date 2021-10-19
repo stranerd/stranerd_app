@@ -1,4 +1,4 @@
-import { Conditions, Listeners, QueryParams } from '@modules/core'
+import { Conditions, Listeners, QueryParams } from '@/modules/core'
 import { INotificationRepository } from '../../irepositories/inotification'
 import { NotificationEntity } from '../../entities/notification'
 

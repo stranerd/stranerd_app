@@ -1,4 +1,4 @@
-import { Listeners, QueryParams } from '@modules/core'
+import { Listeners, QueryParams } from '@/modules/core'
 import { IReviewRepository } from '../../domain/irepositories/ireview'
 import { ReviewBaseDataSource } from '../datasources/review-base'
 import { ReviewTransformer } from '../transformers/review'

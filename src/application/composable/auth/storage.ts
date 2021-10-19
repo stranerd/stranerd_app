@@ -1,6 +1,6 @@
-import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
-import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
-import { useAuth } from '@app/composable/auth/auth'
+import { useErrorHandler, useLoadingHandler } from '@/application/composable/core/states'
+import { AfterAuthUser } from '@/modules/auth/domain/entities/auth'
+import { useAuth } from '@/application/composable/auth/auth'
 import { useRouter  } from 'vue-router'
 
 export const createStorage = async (afterAuth: AfterAuthUser) => {

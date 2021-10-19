@@ -1,5 +1,5 @@
-import { Conditions, QueryParams } from '@modules/core'
-import { PAGINATION_LIMIT } from '@utils/constants'
+import { Conditions, QueryParams } from '@/modules/core'
+import { PAGINATION_LIMIT } from '@/utils/constants'
 import { INotificationRepository } from '../../irepositories/inotification'
 
 export class GetNotificationsUseCase {

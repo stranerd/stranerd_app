@@ -1,6 +1,6 @@
 import { ref } from 'vue'
-import { AddMessage, MessageFactory } from '@modules/meta'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { AddMessage, MessageFactory } from '@/modules/meta'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
 
 export const useCreateMessage = () => {
 	const factory = ref(new MessageFactory())

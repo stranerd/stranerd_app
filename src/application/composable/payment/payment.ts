@@ -1,9 +1,9 @@
-import { BuyCoinsWithStripe, VerifyStripePayment } from '@modules/meta'
-import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
-import { stripeConfig } from '@utils/environment'
-import { analytics } from '@modules/core'
+import { BuyCoinsWithStripe, VerifyStripePayment } from '@/modules/meta'
+import { useErrorHandler, useLoadingHandler } from '@/application/composable/core/states'
+import { stripeConfig } from '@/utils/environment'
+import { analytics } from '@/modules/core'
 import { loadStripe } from '@stripe/stripe-js'
-import { useAuth } from '@app/composable/auth/auth'
+import { useAuth } from '@/application/composable/auth/auth'
 
 
 type RawPaymentProps = {
@@ -38,7 +38,6 @@ export const useFlutterwavePayment = () => {
 		try {
 			// usePaymentModal().closeMakePayment()
 			await props.afterPayment?.(successful)
-			// @ts-ignore
 			await analytics.logEvent('purchase', {
 				value: props.amount!
 			})
@@ -78,7 +77,6 @@ export const useStripePayment = () => {
 				await props.afterPayment?.(succeeded)
 			}
 			// usePaymentModal().closeMakePayment()
-			// @ts-ignore
 			await analytics.logEvent('purchase', {
 				value: props.amount!
 			})

@@ -1,8 +1,8 @@
 import { ref, watch } from 'vue'
-import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
-import { Search } from '@modules/meta'
-import { AnswerEntity, QuestionEntity } from '@modules/questions'
-import { UserEntity } from '@modules/users'
+import { useErrorHandler, useLoadingHandler } from '@/application/composable/core/states'
+import { Search } from '@/modules/meta'
+import { AnswerEntity, QuestionEntity } from '@/modules/questions'
+import { UserEntity } from '@/modules/users'
 
 export const useSearch = () => {
 	const { error, setError } = useErrorHandler()

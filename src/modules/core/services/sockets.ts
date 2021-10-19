@@ -1,7 +1,7 @@
 import io, { Socket } from 'socket.io-client'
-import { getTokens } from '@utils/tokens'
-import { apiBases } from '@utils/environment'
-import { Listeners, StatusCodes } from '@modules/core'
+import { getTokens } from '@/utils/tokens'
+import { apiBases } from '@/utils/environment'
+import { Listeners, StatusCodes } from '@/modules/core'
 import { DefaultEventsMap } from 'socket.io-client/build/typed-events'
 
 let socket = null as Socket<DefaultEventsMap, DefaultEventsMap> | null

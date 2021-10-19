@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Ref, ref, onMounted } from 'vue'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
-import { GetNotifications, ListenToNotifications, MarkNotificationSeen, NotificationEntity } from '@modules/users'
-import { useAuth } from '@app/composable/auth/auth'
+import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
+import { GetNotifications, ListenToNotifications, MarkNotificationSeen, NotificationEntity } from '@/modules/users'
+import { useAuth } from '@/application/composable/auth/auth'
 
 const global = {} as Record<string, {
 	notifications: Ref<NotificationEntity[]>;

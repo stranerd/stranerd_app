@@ -1,6 +1,6 @@
-import { closeSocket, HttpClient } from '@modules/core'
-import { apiBases, domain } from '@utils/environment'
-import { deleteTokensFromCookies, saveTokens } from '@utils/tokens'
+import { closeSocket, HttpClient } from '@/modules/core'
+import { apiBases, domain } from '@/utils/environment'
+import { deleteTokensFromCookies, saveTokens } from '@/utils/tokens'
 import { AfterAuthUser, AuthDetails, AuthExtras, NewUser, UpdateUser } from '../../domain/entities/auth'
 import { AuthBaseDataSource } from './auth-base'
 

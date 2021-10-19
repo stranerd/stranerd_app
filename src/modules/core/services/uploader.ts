@@ -1,4 +1,4 @@
-import { apiBases } from '@utils/environment'
+import { apiBases } from '@/utils/environment'
 import { Media } from '../data/models/base'
 import { HttpClient } from './http'
 

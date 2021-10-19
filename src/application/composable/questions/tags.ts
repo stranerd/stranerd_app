@@ -1,6 +1,6 @@
 import { ref, onMounted } from 'vue'
-import { GetTags, TagEntity } from '@modules/questions'
-import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
+import { GetTags, TagEntity } from '@/modules/questions'
+import { useErrorHandler, useLoadingHandler } from '@/application/composable/core/states'
 
 const global = {
 	fetched: ref(false),

@@ -12,8 +12,8 @@
 
 			<form class=" px-5 flex flex-col justify-center mx-auto mt-20">
 
-				<ion-input placeholder="Email Address" position="floating" v-model="email"></ion-input>
-				<ion-input placeholder="Password" position="floating" v-model="password"></ion-input>
+				<ion-input placeholder="Email Address" position="floating" v-model="factory.email"></ion-input>
+				<ion-input placeholder="Password" position="floating" v-model="factory.password"></ion-input>
 
 			</form>
 
@@ -33,7 +33,7 @@
 			</p>
 
 			<div class="flex justify-center w-full px-5">
-				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="login">
+				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="signin">
 					<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
 					Google</ion-button>
 				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="getuser">
@@ -53,6 +53,7 @@ import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { SetToken } from '@/services/api'
 import { signIn , getUser, token} from '@/services/Auth/AuthServices'
+import { useEmailSignin } from '@/application/composable/auth/signin'
 
 
 
@@ -64,18 +65,21 @@ export default defineComponent({
 		const email = ref('')
 		const password = ref('')
 
+		const { factory, loading, error, signin } = useEmailSignin()
+
 		const login = async()=>{
+			const userData = useEmailSignin()
 			const userInfo = await signIn({email:email.value, password:password.value})
 			const user = userInfo.data
 			SetToken(user.accessToken, user.refreshToken)
 		} 
-		
+
 		const getuser = async()=>{
 			const userInfo = await getUser()
 			
 		} 
 	
-		return { router, login, email, password, getuser }
+		return { router, login, email, password, getuser, factory, loading, error, signin }
 	},
 
 

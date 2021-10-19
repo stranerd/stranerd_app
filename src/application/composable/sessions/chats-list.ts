@@ -1,8 +1,8 @@
 import { Ref, ref, onMounted } from 'vue'
-import { useAuth } from '@app/composable/auth/auth'
-import { ChatMetaEntity, GetPersonalChatsMeta, ListenToPersonalChatsMeta } from '@modules/sessions'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
-import { AudioSounds, useAudioPlayer } from '@app/composable/core/audios'
+import { useAuth } from '@/application/composable/auth/auth'
+import { ChatMetaEntity, GetPersonalChatsMeta, ListenToPersonalChatsMeta } from '@/modules/sessions'
+import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
+import { AudioSounds, useAudioPlayer } from '@/application/composable/core/audios'
 
 const player = useAudioPlayer(AudioSounds.CHAT)
 

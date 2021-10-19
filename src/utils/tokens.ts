@@ -1,4 +1,4 @@
-import { isClient } from '@utils/environment'
+import { isClient } from '@/utils/environment'
 import { ref } from 'vue'
 
 type Tokens = {

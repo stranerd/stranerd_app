@@ -11,13 +11,13 @@ import {
 	ListenToQuestions,
 	QuestionEntity,
 	QuestionFactory
-} from '@modules/questions'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { COINS_GAP, MAXIMUM_COINS, MINIMUM_COINS } from '@utils/constants'
-import { useAuth } from '@app/composable/auth/auth'
-import { analytics } from '@modules/core'
+} from '@/modules/questions'
+import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
+import { COINS_GAP, MAXIMUM_COINS, MINIMUM_COINS } from '@/utils/constants'
+import { useAuth } from '@/application/composable/auth/auth'
+import { analytics } from '@/modules/core'
 import VueRouter from 'vue-router'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@/application/composable/core/notifications'
 
 enum Answered {
 	All,

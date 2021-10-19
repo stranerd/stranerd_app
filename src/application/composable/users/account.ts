@@ -1,10 +1,10 @@
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
 import { Ref, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { ProfileUpdateFactory, UpdateProfile } from '@modules/auth'
-import { useAuth } from '@app/composable/auth/auth'
-import { setPaymentProps } from '@app/composable/payment/payment'
-import { analytics } from '@modules/core'
+import { ProfileUpdateFactory, UpdateProfile } from '@/modules/auth'
+import { useAuth } from '@/application/composable/auth/auth'
+import { setPaymentProps } from '@/application/composable/payment/payment'
+import { analytics } from '@/modules/core'
 
 export const useUpdateProfile = () => {
 	const router = useRouter()

@@ -1,8 +1,8 @@
 import { computed, Ref, ref, onMounted } from 'vue'
-import { AddChat, ChatEntity, ChatFactory, GetChats, ListenToChats, MarkChatRead } from '@modules/sessions'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
-import { useAuth } from '@app/composable/auth/auth'
-import { getRandomValue } from '@utils/commons'
+import { AddChat, ChatEntity, ChatFactory, GetChats, ListenToChats, MarkChatRead } from '@/modules/sessions'
+import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
+import { useAuth } from '@/application/composable/auth/auth'
+import { getRandomValue } from '@/utils/commons'
 
 const global = {} as Record<string, {
 	chats: Ref<ChatEntity[]>;

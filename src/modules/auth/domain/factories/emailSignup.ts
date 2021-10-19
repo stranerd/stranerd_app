@@ -1,4 +1,4 @@
-import { BaseFactory } from '@modules/core'
+import { BaseFactory } from '@/modules/core'
 import { isEmail, isLongerThanX, isShallowEqualTo, isShorterThanX, isString } from '@stranerd/validate'
 import { AuthUser } from '../entities/auth'
 

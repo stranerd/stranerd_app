@@ -1,6 +1,6 @@
 import { Ref, ref, onMounted } from 'vue'
-import { GetSimilarQuestions, ListenToSimilarQuestions, QuestionEntity } from '@modules/questions'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { GetSimilarQuestions, ListenToSimilarQuestions, QuestionEntity } from '@/modules/questions'
+import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
 
 const global = {} as Record<string, {
 	questions: Ref<QuestionEntity[]>;

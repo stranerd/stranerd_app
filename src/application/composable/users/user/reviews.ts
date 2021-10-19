@@ -1,6 +1,6 @@
 import { Ref, ref, onMounted } from 'vue'
-import { GetReviews, ReviewEntity } from '@modules/users'
-import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
+import { GetReviews, ReviewEntity } from '@/modules/users'
+import { useErrorHandler, useLoadingHandler } from '@/application/composable/core/states'
 
 const global = {} as Record<string, {
 	reviews: Ref<ReviewEntity[]>;

@@ -8,11 +8,11 @@ import {
 	SigninWithEmail,
 	SigninWithGoogle,
 	SignupWithEmail
-} from '@modules/auth'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { isClient } from '@utils/environment'
-import { NetworkError, StatusCodes } from '@modules/core'
-import { useAuth } from '@app/composable/auth/auth'
+} from '@/modules/auth'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
+import { isClient } from '@/utils/environment'
+import { NetworkError, StatusCodes } from '@/modules/core'
+import { useAuth } from '@/application/composable/auth/auth'
 import { createStorage } from './storage'
 
 const global = {

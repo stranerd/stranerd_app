@@ -1,6 +1,6 @@
 import { computed, Ref, ref, onMounted } from 'vue'
-import { GetUserQuestions, QuestionEntity } from '@modules/questions'
-import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
+import { GetUserQuestions, QuestionEntity } from '@/modules/questions'
+import { useErrorHandler, useLoadingHandler } from '@/application/composable/core/states'
 
 enum Answered {
 	All,

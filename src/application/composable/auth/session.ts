@@ -1,12 +1,12 @@
 import { SessionSignin } from '@modules/auth'
-import { useErrorHandler, useLoadingHandler } from '@app/hooks/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { isServer } from '@utils/environment'
 import { REDIRECT_SESSION_NAME } from '@utils/constants'
 import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
 import { useContext } from '@nuxtjs/composition-api'
 import VueRouter from 'vue-router'
-import { useAuth } from '@app/hooks/auth/auth'
-import { Alert } from '@app/hooks/core/notifications'
+import { useAuth } from '@app/composable/auth/auth'
+import { Alert } from '@app/composable/core/notifications'
 import { parseCookie, serializeToCookie } from '@utils/cookie'
 
 export const createSession = async (afterAuth: AfterAuthUser, router: VueRouter) => {

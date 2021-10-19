@@ -1,9 +1,9 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, Method } from 'axios'
-import { getTokens, saveTokens } from '@utils/tokens'
-import { apiBases } from '@utils/environment'
-import type { QueryParams, QueryResults } from '@utils/http'
-import { Conditions, StatusCodes } from '@utils/http'
-import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
+import { getTokens, saveTokens } from '@/utils/tokens'
+import { apiBases } from '@/utils/environment'
+import type { QueryParams, QueryResults } from '@/utils/http'
+import { Conditions, StatusCodes } from '@/utils/http'
+import { AfterAuthUser } from '@/modules/auth/domain/entities/auth'
 
 export { StatusCodes, Conditions, QueryResults, QueryParams }
 
