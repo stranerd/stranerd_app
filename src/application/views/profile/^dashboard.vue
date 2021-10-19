@@ -49,7 +49,7 @@ const Settings = defineAsyncComponent(() => import('@/application/components/pro
 const Achievements = defineAsyncComponent(() => import('@/application/components/profile/achievements.vue'))
 import { star } from 'ionicons/icons'
 import { useRouter } from 'vue-router'
-import { selectedTab } from '@/modules/profile'
+import { selectedTab } from '@/application/composable/profile'
 
 export default  {
 	name: 'profileDashboard',

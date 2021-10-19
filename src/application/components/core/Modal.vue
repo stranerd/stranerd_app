@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { showModal, toggleModal, componentName } from '../../../modules/core/Modal'
+import { showModal, toggleModal, componentName } from '../../composable/core/Modal'
 
 import { IonIcon } from '@ionic/vue'
 import { closeOutline } from 'ionicons/icons'

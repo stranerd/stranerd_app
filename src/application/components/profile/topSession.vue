@@ -49,7 +49,7 @@ import { defineComponent } from 'vue'
 
 import { IonIcon } from '@ionic/vue'
 import {  star } from 'ionicons/icons'
-import { selectedTab } from '@/modules/profile'
+import { selectedTab } from '@/application/composable/profile'
 
 export default defineComponent({
 	setup() {

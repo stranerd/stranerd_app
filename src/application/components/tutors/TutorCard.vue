@@ -31,7 +31,7 @@
 <script lang="ts">
 import Avatar from '@/application/components/core/Avatar.vue'
 import ShowRatings from '@/application/components/core/ShowRatings.vue'
-import { componentName, showModal } from  '../../../modules/core/Modal'
+import { componentName, showModal } from  '../../composable/core/Modal'
 
 export default {
 	name: 'TutorCard',

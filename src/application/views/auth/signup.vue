@@ -57,7 +57,7 @@
 import { IonContent, IonPage, IonInput, IonButton } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import {signUp} from '@/services/api'
+import { signUp } from '@/services/Auth/AuthServices'
 
 
 

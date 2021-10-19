@@ -24,7 +24,7 @@ export const logo = `${domain}/images/logo-blue.svg`
 
 const apis = JSON.parse(process.env.API_BASES ?? '{}')
 export const apiBases = {
-	AUTH: apis.auth,
-	STRANERD: apis.stranerd,
-	STORAGE: apis.storage
+	AUTH: `${process.env.VUE_APP_API_AUTH}`,
+	STRANERD: `${process.env.VUE_APP_API_STRANERD}`,
+	STORAGE: `${process.env.VUE_APP_API_STORAGE}`
 }

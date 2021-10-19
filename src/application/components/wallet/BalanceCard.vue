@@ -39,7 +39,7 @@
 
 import { IonRippleEffect } from '@ionic/vue'
 import Coins from '@/application/components/core/Coins.vue'
-import { componentName, showModal } from '@/modules/core/Modal'
+import { componentName, showModal } from '@/application/composable/core/Modal'
 export default {
 	name:'Balance Card',
 	components:{IonRippleEffect, Coins, },

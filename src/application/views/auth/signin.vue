@@ -51,8 +51,8 @@
 import { IonContent, IonPage, IonInput, IonButton } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import {signIn , getUser, token} from '@/services/api'
-import {SetToken} from '@/services/Auth/AuthServices'
+import { SetToken } from '@/services/api'
+import { signIn , getUser, token} from '@/services/Auth/AuthServices'
 
 
 
@@ -66,15 +66,12 @@ export default defineComponent({
 
 		const login = async()=>{
 			const userInfo = await signIn({email:email.value, password:password.value})
-
-			console.log(userInfo.data)
 			const user = userInfo.data
 			SetToken(user.accessToken, user.refreshToken)
 		} 
+		
 		const getuser = async()=>{
 			const userInfo = await getUser()
-
-			console.log(userInfo)
 			
 		} 
 	
