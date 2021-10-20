@@ -8,7 +8,7 @@ export const createStorage = async (afterAuth: AfterAuthUser) => {
 
 	if (!afterAuth.user.isVerified) {
 		await useAuth().setAuthUser(afterAuth.user)
-		return await router.push('/auth/verify')
+		// return await router.push('/auth/verify')
 	}
 
 	const { setAuthUser, signin } = useAuth()
@@ -18,6 +18,7 @@ export const createStorage = async (afterAuth: AfterAuthUser) => {
 	localStorage.setItem('accessToken', afterAuth.accessToken)
 	localStorage.setItem('refreshToken', afterAuth.refreshToken)
 	localStorage.setItem('authUser', JSON.stringify(afterAuth.user))
+	localStorage.setItem('authUserId', JSON.stringify(afterAuth.user.id))
 }
 
 export const useStorageSignout = () => {
