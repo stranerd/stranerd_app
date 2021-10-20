@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import AppLayout from './application/layouts/AppLayout.vue'
 import routes from './application/router/routes'
 import { createRouter, createWebHistory } from '@ionic/vue-router'
 import { IonicVue } from '@ionic/vue'
@@ -32,6 +31,7 @@ import 'line-awesome/dist/line-awesome/css/line-awesome.min.css'
 
 /*Ionic Theme variables */
 import '@/application/assets/theme/variables.css'
+import { setAuthUser } from './application/plugins/setLoggedIn'
 
 const router = Promise.all(routes).then((routes) => {
 	const router = createRouter({
@@ -59,6 +59,9 @@ const init = async() => {
 		components: {
 			App
 		},
+		async mounted(){
+			await setAuthUser()
+		}
 	}).use(await router)
 		.use(store, key)
 		.use(IonicVue)

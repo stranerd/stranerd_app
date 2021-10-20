@@ -9,13 +9,13 @@
 			<div class="py-1 px-3 w-full bg-[#8B9EB1] flex rounded-xl flex-row items-center">
 				<div class="w-1/3 flex flex-row items-center">
 					<img src="/assets/images/bronze.svg" class="inline h-6 mr-2"/>
-					<span class="font-semibold text-xs text-white ">10k</span>
+					<span class="font-semibold text-xs text-white ">{{ userData?.account.coins.bronze }}</span>
 				</div>
 				<div class="w-1/3 flex flex-row items-center justify-center">
 					<img src="/assets/images/add.svg" class="inline h-4 text-white"/>
 				</div>
 				<div class="w-1/3 flex flex-row-reverse items-center">
-					<span class="font-semibold text-xs text-white ">250</span>
+					<span class="font-semibold text-xs text-white ">{{ userData?.account.coins.gold }}</span>
 					<img src="/assets/images/gold.svg" class="inline h-6 mr-2"/>
 				</div>
 			</div>
@@ -44,13 +44,13 @@
 			<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
 				<div class="w-1/3 flex flex-row items-center">
 					<img src="/assets/images/bronze.svg" class="inline h-7 mr-2"/>
-					<span class="font-semibold text-sm text-dark_grey ">10k</span>
+					<span class="font-semibold text-sm text-dark_grey ">{{ userData?.account.coins.bronze }}</span>
 				</div>
 				<div class="w-1/3 flex flex-row items-center justify-center">
 					<img src="/assets/images/add.svg" class="inline h-6"/>
 				</div>
 				<div class="w-1/3 flex flex-row-reverse items-center">
-					<span class="font-semibold text-sm text-dark_grey ">250</span>
+					<span class="font-semibold text-sm text-dark_grey ">{{ userData?.account.coins.gold }}</span>
 					<img src="/assets/images/gold.svg" class="inline h-7 mr-2"/>
 				</div>
 			</div>
@@ -106,13 +106,13 @@
 			<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
 				<div class="w-1/3 flex flex-row items-center">
 					<img src="/assets/images/bronze.svg" class="inline h-5 mr-2"/>
-					<span class="font-semibold text-sm text-dark_grey ">10k</span>
+					<span class="font-semibold text-sm text-dark_grey ">{{ userData?.account.coins.bronze }}</span>
 				</div>
 				<div class="w-1/3 flex flex-row items-center justify-center">
 					<img src="/assets/images/add.svg" class="inline h-5"/>
 				</div>
 				<div class="w-1/3 flex flex-row-reverse items-center">
-					<span class="font-semibold text-sm text-dark_grey ">250</span>
+					<span class="font-semibold text-sm text-dark_grey ">{{ userData?.account.coins.gold }}</span>
 					<img src="/assets/images/gold.svg" class="inline h-5 mr-2"/>
 				</div>
 			</div>
@@ -124,6 +124,7 @@ import { defineComponent } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { add, home } from 'ionicons/icons'
 import { useStore } from '@/application/store'
+import { UserEntity } from '@/modules/users'
 
 export default defineComponent({
 	props: {
@@ -134,6 +135,10 @@ export default defineComponent({
 		noSideBar: {
 			type: Boolean,
 			default: false
+		},
+		userData: {
+			type: UserEntity,
+			default: undefined
 		}
 	},
 	setup(props) {
