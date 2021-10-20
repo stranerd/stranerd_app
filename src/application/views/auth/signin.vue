@@ -36,7 +36,7 @@
 				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="signin">
 					<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
 					Google</ion-button>
-				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="getuser">
+				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="check()">
 					<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
 					user</ion-button>
 			</div>
@@ -51,9 +51,8 @@
 import { IonContent, IonPage, IonInput, IonButton } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { SetToken } from '@/services/api'
-import { signIn , getUser, token} from '@/services/Auth/AuthServices'
 import { useEmailSignin } from '@/application/composable/auth/signin'
+import { useAuth } from '@/application/composable/auth/auth'
 
 
 
@@ -62,24 +61,14 @@ export default defineComponent({
 	components: { IonContent,IonPage, IonInput, IonButton},
 	  setup() {
 		const router = useRouter()
-		const email = ref('')
-		const password = ref('')
+		const check = ()=>{
+			console.log(useAuth())
+		}
 
 		const { factory, loading, error, signin } = useEmailSignin()
 
-		const login = async()=>{
-			const userData = useEmailSignin()
-			const userInfo = await signIn({email:email.value, password:password.value})
-			const user = userInfo.data
-			SetToken(user.accessToken, user.refreshToken)
-		} 
-
-		const getuser = async()=>{
-			const userInfo = await getUser()
-			
-		} 
 	
-		return { router, login, email, password, getuser, factory, loading, error, signin }
+		return { router,  factory, loading, error, signin, check }
 	},
 
 

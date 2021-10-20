@@ -1,6 +1,7 @@
 <template>
 	<div class="w-full col-span-12 mb-4 flex-col flex gap-2 items-center justify-center normalText">
-		<img src="/assets/images/person-circle.svg" class="inline h-20 "/>
+		<!-- <img src="/assets/images/person-circle.svg" class="inline h-20 "/> -->
+		<avatar :size="90" :src="user.avatar"/>
 		<h2 class="headings font-bold text-dark_gray">Timmy Neutron</h2>
 		<span class="py-1 px-4 rounded-md border-faded_gray border-[1px] font-bold text-icon_inactive bg-light_green">
 			Rookie
@@ -50,21 +51,28 @@ import { defineComponent } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import {  star } from 'ionicons/icons'
 import { selectedTab } from '@/application/composable/profile'
+import Avatar from '../core/Avatar.vue'
+import { useAuth } from '@/application/composable/auth/auth'
 
 export default defineComponent({
 	setup() {
-	
+		
+		const { id, user } = useAuth()
+		console.log(useAuth())
 	  const goToTab = (tabname: string) => {
 		  selectedTab.value = tabname
 	  }
 		return {
+			id,
+			user,
 			star,
 			selectedTab,
 			goToTab
 		}
 	},
 	components: {
-		IonIcon
+		IonIcon,
+		Avatar
 
 	}
 })
