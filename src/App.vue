@@ -1,9 +1,9 @@
 <template>
-	<AppLayout>
-		<ion-app>
-			<ion-router-outlet />
-		</ion-app>
-	</AppLayout>
+	<ion-app>
+		<AppLayout>
+			<ion-router-outlet class="z-[-1]" />
+		</AppLayout>
+	</ion-app>
 </template>
 
 <script lang="ts">

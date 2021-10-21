@@ -1,9 +1,7 @@
 <template>
 
-	<div class="flex justify-between  py-6 px-5">
-		<i class="las la-arrow-left text-white text-xl"></i>
-		<img src="../../assets/images/icons/logo-xs.svg" alt="ask a question" class="object-fit h-4 ">
-	</div>
+	<h1>Hello</h1>
+<!-- 
 
 	<h1 class="text-center text-3xl text-white font-semibold font-nuni mt-12">Welcome back.</h1>
 
@@ -36,14 +34,14 @@
 		<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="check()">
 			<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
 			user</ion-button>
-	</div>
+	</div> -->
 
 		
 	
 </template>
 
 <script lang="ts">
-import { IonInput, IonButton } from '@ionic/vue'
+// import { IonInput, IonButton } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useEmailSignin } from '@/application/composable/auth/signin'
@@ -53,7 +51,7 @@ import { useAuth } from '@/application/composable/auth/auth'
 
 
 export default defineComponent({
-	components: { IonInput, IonButton},
+	// components: { IonInput, IonButton},
 	layout:'Auth',
 	  setup() {
 		const router = useRouter()
