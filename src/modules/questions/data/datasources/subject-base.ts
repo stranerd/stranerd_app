@@ -1,4 +1,4 @@
-import { Listeners, QueryParams, QueryResults } from '@modules/core'
+import { Listeners, QueryParams, QueryResults } from '@/modules/core'
 import { SubjectFromModel, SubjectToModel } from '../models/subject'
 
 export interface SubjectBaseDataSource {

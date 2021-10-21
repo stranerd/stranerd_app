@@ -1,4 +1,4 @@
-import { UserBio } from '@modules/users'
+import { UserBio } from '@/modules/users'
 import { ChatFromModel } from './chat'
 
 export interface ChatMetaFromModel {

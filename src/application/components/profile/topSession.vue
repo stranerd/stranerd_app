@@ -1,19 +1,15 @@
 <template>
-	<div class="w-full col-span-12 mb-4 flex-col flex gap-2 items-center justify-center normalText">
+	<div class="w-full col-span-12 mb-4 flex-col flex gap-2 items-center justify-center normalText" v-if="user">
 		<!-- <img src="/assets/images/person-circle.svg" class="inline h-20 "/> -->
 		<avatar :size="90" :src="user.avatar"/>
-		<h2 class="headings font-bold text-dark_gray">Timmy Neutron</h2>
+		<h2 class="headings font-bold text-dark_gray">{{ user.fullName }}</h2>
 		<span class="py-1 px-4 rounded-md border-faded_gray border-[1px] font-bold text-icon_inactive bg-light_green">
-			Rookie
+			{{ user.rank.id }}
 		</span>
 		<div class="flex flex-row gap-1 items-center justify-center ">
-			<ion-icon :icon="star" class="text-[20px] text-star_yellow"></ion-icon>
-			<ion-icon :icon="star" class="text-[20px] text-star_yellow"></ion-icon>
-			<ion-icon :icon="star" class="text-[20px] text-star_yellow"></ion-icon>
-			<ion-icon :icon="star" class="text-[20px] text-star_yellow"></ion-icon>
-			<ion-icon :icon="star" class="text-[20px] text-icon_inactive"></ion-icon>
+			<ShowRatings :rating="user.averageRating"/>
 		</div>
-		<button class="actionBtn mt-2 text-white">
+		<button v-if="canRequestSession" class="actionBtn mt-2 text-white" @click="requestNewSession">
 			Request a session
 		</button>
 
@@ -46,33 +42,62 @@
 	</div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 
-import { IonIcon } from '@ionic/vue'
 import {  star } from 'ionicons/icons'
 import { selectedTab } from '@/application/composable/profile'
 import Avatar from '../core/Avatar.vue'
 import { useAuth } from '@/application/composable/auth/auth'
+import { useUser } from '@/application/composable/users/user'
+import ShowRatings from '../core/ShowRatings.vue'
+import { toggleModal } from '@/application/composable/core/Modal'
+import { setNewSessionTutorIdBio } from '@/application/composable/sessions/sessions'
 
 export default defineComponent({
-	setup() {
-		
-		const { id, user } = useAuth()
-		console.log(useAuth())
+	props:{
+		userId:{
+			required:true,
+			type:String,
+			default:''
+		}
+	},
+	setup(props) {
+	  const { id, user: authUser } = useAuth()
+	  const { error, loading, user } = useUser(props.userId)
+		const canRequestSession = computed({
+			get: () => authUser.value &&
+				authUser.value.id !== user.value?.id &&
+				authUser.value.canRequestSessions &&
+				user.value?.canHostSessions,
+			set: () => {
+			}
+		})
+
+		console.log(error)
+		const requestNewSession = () => {
+			setNewSessionTutorIdBio({ id: user.value?.id!, user: user.value?.bio! })
+			// useSessionModal().openCreateSession()
+			toggleModal()
+		}
+
 	  const goToTab = (tabname: string) => {
 		  selectedTab.value = tabname
 	  }
 		return {
 			id,
+			error,
+			loading,
 			user,
+			requestNewSession,
+			canRequestSession,
 			star,
 			selectedTab,
 			goToTab
 		}
 	},
 	components: {
-		IonIcon,
-		Avatar
+		Avatar,
+		ShowRatings
 
 	}
 })

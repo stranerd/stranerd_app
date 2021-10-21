@@ -1,4 +1,4 @@
-import { Listeners, QueryParams } from '@modules/core'
+import { Listeners, QueryParams } from '@/modules/core'
 import { IReportRepository } from '../../domain/irepositories/ireport'
 import { ReportBaseDataSource } from '../datasources/report-base'
 import { ReportTransformer } from '../transformers/report'

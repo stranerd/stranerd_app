@@ -6,7 +6,7 @@ import {
 	isLongerThanX,
 	isString
 } from '@stranerd/validate'
-import { BaseFactory, Media } from '@modules/core'
+import { BaseFactory, Media } from '@/modules/core'
 import { AnswerEntity } from '../entities/answer'
 import { AnswerToModel } from '../../data/models/answer'
 

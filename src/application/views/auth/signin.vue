@@ -1,54 +1,49 @@
 <template>
-	<ion-page>
-		<ion-content
-			class="flex flex-col bg-dark h-screen w-screen items-start justify-center py-3 px-5 bg-gray-800"
-		>
-			<div class="flex justify-between  py-6 px-5">
-				<i class="las la-arrow-left text-white text-xl"></i>
-				<img src="../../assets/images/icons/logo-xs.svg" alt="ask a question" class="object-fit h-4 ">
-			</div>
 
-			<h1 class="text-center text-3xl text-white font-semibold font-nuni mt-12">Welcome back.</h1>
+	<div class="flex justify-between  py-6 px-5">
+		<i class="las la-arrow-left text-white text-xl"></i>
+		<img src="../../assets/images/icons/logo-xs.svg" alt="ask a question" class="object-fit h-4 ">
+	</div>
 
-			<form class=" px-5 flex flex-col justify-center mx-auto mt-20">
+	<h1 class="text-center text-3xl text-white font-semibold font-nuni mt-12">Welcome back.</h1>
 
-				<ion-input placeholder="Email Address" position="floating" v-model="factory.email"></ion-input>
-				<ion-input placeholder="Password" position="floating" v-model="factory.password"></ion-input>
+	<form class=" px-5 flex flex-col justify-center mx-auto mt-20">
 
-			</form>
+		<ion-input placeholder="Email Address" position="floating" v-model="factory.email"></ion-input>
+		<ion-input placeholder="Password" position="floating" v-model="factory.password"></ion-input>
 
-			<div class="flex justify-between items-center  px-5 mt-10">
-				<p class="text-xs text-white font-semibold font-nuni">Not a member on Stranerd?</p>
-				<span @click="() => router.push('/auth/signup')" class="flex items-center text-yellow-300 font-nuni text-xs font-bold">Sign Up <i class="las la-arrow-right text-xl"></i> </span>
-			</div>
+	</form>
 
-			<div class="flex justify-between px-5 items-center mt-14">
-				<div class="border-white border-b h-1 w-5/12"/>
-				<span class="font-nuni text-white">or</span>
-				<div class="border-white border-b h-1 w-5/12"/>
-			</div>
+	<div class="flex justify-between items-center  px-5 mt-10">
+		<p class="text-xs text-white font-semibold font-nuni">Not a member on Stranerd?</p>
+		<span @click="() => router.push('/auth/signup')" class="flex items-center text-yellow-300 font-nuni text-xs font-bold">Sign Up <i class="las la-arrow-right text-xl"></i> </span>
+	</div>
 
-			<p class="text-center text-xs font-nuni text-white font-bold mt-5 ">
-				Sign in with Google
-			</p>
+	<div class="flex justify-between px-5 items-center mt-14">
+		<div class="border-white border-b h-1 w-5/12"/>
+		<span class="font-nuni text-white">or</span>
+		<div class="border-white border-b h-1 w-5/12"/>
+	</div>
 
-			<div class="flex justify-center w-full px-5">
-				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="signin">
-					<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
-					Google</ion-button>
-				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="check()">
-					<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
-					user</ion-button>
-			</div>
+	<p class="text-center text-xs font-nuni text-white font-bold mt-5 ">
+		Sign in with Google
+	</p>
+
+	<div class="flex justify-center w-full px-5">
+		<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="signin">
+			<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
+			Google</ion-button>
+		<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="check()">
+			<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
+			user</ion-button>
+	</div>
 
 		
-		</ion-content>
-	</ion-page>
+	
 </template>
 
 <script lang="ts">
-// import { IonContent, IonButton, IonPage } from '@ionic/vue'
-import { IonContent, IonPage, IonInput, IonButton } from '@ionic/vue'
+import { IonInput, IonButton } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useEmailSignin } from '@/application/composable/auth/signin'
@@ -58,7 +53,8 @@ import { useAuth } from '@/application/composable/auth/auth'
 
 
 export default defineComponent({
-	components: { IonContent,IonPage, IonInput, IonButton},
+	components: { IonInput, IonButton},
+	layout:'Auth',
 	  setup() {
 		const router = useRouter()
 		const check = ()=>{

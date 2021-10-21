@@ -1,4 +1,4 @@
-import { Listeners, QueryParams, QueryResults } from '@modules/core'
+import { Listeners, QueryParams, QueryResults } from '@/modules/core'
 import { TagFromModel } from '../models/tag'
 
 export interface TagBaseDataSource {

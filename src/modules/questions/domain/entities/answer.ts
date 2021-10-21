@@ -1,6 +1,6 @@
-import { generateDefaultBio, UserBio } from '@modules/users'
-import { BaseEntity, Media } from '@modules/core'
-import { extractTextFromHTML, trimToLength } from '@utils/commons'
+import { generateDefaultBio, UserBio } from '@/modules/users'
+import { BaseEntity, Media } from '@/modules/core'
+import { extractTextFromHTML, trimToLength } from '@/utils/commons'
 
 export class AnswerEntity extends BaseEntity {
 	public readonly id: string

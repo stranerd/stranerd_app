@@ -1,5 +1,5 @@
-import { UserBio } from '@modules/users'
-import { Media } from '@modules/core'
+import { UserBio } from '@/modules/users'
+import { Media } from '@/modules/core'
 
 export interface QuestionFromModel extends QuestionToModel {
 	id: string

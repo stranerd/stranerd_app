@@ -1,5 +1,5 @@
-import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, UserBio } from '@modules/users'
+import { BaseEntity } from '@/modules/core'
+import { generateDefaultBio, UserBio } from '@/modules/users'
 
 export class SessionEntity extends BaseEntity {
 	readonly id: string

@@ -1,4 +1,4 @@
-import { QueryParams, QueryResults } from '@modules/core'
+import { QueryParams, QueryResults } from '@/modules/core'
 import { TagEntity } from '../entities/tag'
 
 export interface ITagRepository {

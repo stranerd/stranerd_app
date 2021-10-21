@@ -1,4 +1,4 @@
-import { Listeners, QueryParams } from '@modules/core'
+import { Listeners, QueryParams } from '@/modules/core'
 import { ChatBaseDataSource } from '../datasources/chat-base'
 import { ChatTransformer } from '../transformers/chat'
 import { IChatRepository } from '../../domain/irepositories/ichat'

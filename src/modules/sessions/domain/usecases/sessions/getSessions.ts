@@ -1,4 +1,4 @@
-import { Conditions } from '@modules/core'
+import { Conditions } from '@/modules/core'
 import { ISessionRepository } from '../../irepositories/isession'
 
 export class GetSessionsUseCase {

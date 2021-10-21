@@ -1,4 +1,4 @@
-import { Conditions, QueryParams } from '@modules/core'
+import { Conditions, QueryParams } from '@/modules/core'
 import { IQuestionRepository } from '../../irepositories/iquestion'
 
 export class GetSimilarQuestionsUseCase {

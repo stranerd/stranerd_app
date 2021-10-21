@@ -1,4 +1,4 @@
-import { Listeners, QueryParams, QueryResults } from '@modules/core'
+import { Listeners, QueryParams, QueryResults } from '@/modules/core'
 import { CommentFromModel, CommentToModel } from '../models/comment'
 
 export interface CommentBaseDataSource {

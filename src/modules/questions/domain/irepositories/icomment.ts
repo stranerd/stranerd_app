@@ -1,4 +1,4 @@
-import { Listeners, QueryParams, QueryResults } from '@modules/core'
+import { Listeners, QueryParams, QueryResults } from '@/modules/core'
 import { CommentToModel } from '../../data/models/comment'
 import { CommentEntity } from '../entities/comment'
 

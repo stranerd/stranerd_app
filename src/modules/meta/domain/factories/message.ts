@@ -1,4 +1,4 @@
-import { BaseFactory } from '@modules/core'
+import { BaseFactory } from '@/modules/core'
 import { isEmail, isLongerThanX, isString } from '@stranerd/validate'
 import { MessageToModel } from '../../data/models/message'
 

@@ -1,4 +1,4 @@
-import { Listeners, QueryParams, QueryResults } from '@modules/core'
+import { Listeners, QueryParams, QueryResults } from '@/modules/core'
 import { AnswerToModel } from '../../data/models/answer'
 import { AnswerEntity } from '../entities/answer'
 

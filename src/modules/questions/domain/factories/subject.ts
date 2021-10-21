@@ -1,4 +1,4 @@
-import { BaseFactory } from '@modules/core'
+import { BaseFactory } from '@/modules/core'
 import { isLongerThanX, isString } from '@stranerd/validate'
 import { SubjectEntity } from '../entities/subject'
 import { SubjectToModel } from '../../data/models/subject'
