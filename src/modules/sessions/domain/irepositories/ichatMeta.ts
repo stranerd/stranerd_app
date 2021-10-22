@@ -1,4 +1,4 @@
-import { Listeners, QueryParams, QueryResults } from '@modules/core'
+import { Listeners, QueryParams, QueryResults } from '@/modules/core'
 import { ChatMetaEntity } from '../entities/chatMeta'
 
 export interface IChatMetaRepository {

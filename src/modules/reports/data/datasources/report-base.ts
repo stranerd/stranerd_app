@@ -1,4 +1,4 @@
-import { Listeners, QueryParams, QueryResults } from '@modules/core'
+import { Listeners, QueryParams, QueryResults } from '@/modules/core'
 import { ReportFromModel, ReportToModel } from '../models/report'
 
 export interface ReportBaseDataSource {

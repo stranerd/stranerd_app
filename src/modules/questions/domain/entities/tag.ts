@@ -1,4 +1,4 @@
-import { BaseEntity } from '@modules/core'
+import { BaseEntity } from '@/modules/core'
 
 export class TagEntity extends BaseEntity {
 	public readonly id: string

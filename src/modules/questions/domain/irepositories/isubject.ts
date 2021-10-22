@@ -1,4 +1,4 @@
-import { QueryParams, QueryResults } from '@modules/core'
+import { QueryParams, QueryResults } from '@/modules/core'
 import { SubjectEntity } from '../entities/subject'
 import { SubjectToModel } from '../../data/models/subject'
 

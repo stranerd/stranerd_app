@@ -1,4 +1,4 @@
-import { Listeners } from '@modules/core'
+import { Listeners } from '@/modules/core'
 import { ICommentRepository } from '../../irepositories/icomment'
 import { CommentEntity } from '../../entities/comment'
 

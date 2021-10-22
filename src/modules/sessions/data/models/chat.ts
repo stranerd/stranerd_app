@@ -1,4 +1,4 @@
-import { Media } from '@modules/core'
+import { Media } from '@/modules/core'
 
 export interface ChatFromModel extends ChatToModel {
 	id: string

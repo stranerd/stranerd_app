@@ -33,6 +33,7 @@ import 'line-awesome/dist/line-awesome/css/line-awesome.min.css'
 import '@/application/assets/theme/variables.css'
 import { setAuthUser } from './application/plugins/setLoggedIn'
 
+
 const router = Promise.all(routes).then((routes) => {
 	const router = createRouter({
 		history: createWebHistory(),

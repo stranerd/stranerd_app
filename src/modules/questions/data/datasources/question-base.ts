@@ -1,4 +1,4 @@
-import { Listeners, QueryParams, QueryResults } from '@modules/core'
+import { Listeners, QueryParams, QueryResults } from '@/modules/core'
 import { QuestionFromModel, QuestionToModel } from '../models/question'
 
 export interface QuestionBaseDataSource {

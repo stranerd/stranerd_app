@@ -1,4 +1,4 @@
-import { Listeners } from '@modules/core'
+import { Listeners } from '@/modules/core'
 import { IQuestionRepository } from '../../irepositories/iquestion'
 import { QuestionEntity } from '../../entities/question'
 

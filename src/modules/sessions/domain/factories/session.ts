@@ -1,4 +1,4 @@
-import { BaseFactory } from '@modules/core'
+import { BaseFactory } from '@/modules/core'
 import { arrayContainsX, isLongerThanX, isNumber, isString } from '@stranerd/validate'
 import { SessionToModel } from '../../data/models/session'
 import { SessionEntity } from '../entities/session'

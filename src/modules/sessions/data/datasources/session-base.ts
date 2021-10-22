@@ -1,4 +1,4 @@
-import { Listeners, QueryParams, QueryResults } from '@modules/core'
+import { Listeners, QueryParams, QueryResults } from '@/modules/core'
 import { SessionFromModel, SessionToModel } from '../models/session'
 
 export interface SessionBaseDataSource {

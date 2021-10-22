@@ -23,10 +23,10 @@
       "@app/*": [
 				"src/application/*"
 			],
-			"@modules/*": [
+			"@/modules/*": [
 				"src/modules/*"
 			],
-			"@utils/*": [
+			"@/utils/*": [
 				"src/utils/*"
 			]
     },

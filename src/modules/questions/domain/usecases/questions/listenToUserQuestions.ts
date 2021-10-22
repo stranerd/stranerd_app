@@ -1,4 +1,4 @@
-import { Conditions, Listeners, QueryParams } from '@modules/core'
+import { Conditions, Listeners, QueryParams } from '@/modules/core'
 import { IQuestionRepository } from '../../irepositories/iquestion'
 import { QuestionEntity } from '../../entities/question'
 

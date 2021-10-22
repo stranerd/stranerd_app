@@ -1,5 +1,5 @@
 import { isLongerThanX, isString } from '@stranerd/validate'
-import { BaseFactory } from '@modules/core'
+import { BaseFactory } from '@/modules/core'
 import { CommentEntity } from '../entities/comment'
 import { CommentToModel } from '../../data/models/comment'
 

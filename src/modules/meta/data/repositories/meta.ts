@@ -1,6 +1,6 @@
-import { QuestionTransformer } from '@modules/questions/data/transformers/question'
-import { AnswerTransformer } from '@modules/questions/data/transformers/answer'
-import { UserTransformer } from '@modules/users/data/transformers/user'
+import { QuestionTransformer } from '@/modules/questions/data/transformers/question'
+import { AnswerTransformer } from '@/modules/questions/data/transformers/answer'
+import { UserTransformer } from '@/modules/users/data/transformers/user'
 import { IMetaRepository } from '../../domain/irepositories/imeta'
 import { MetaBaseDataSource } from '../datasources/meta-base'
 

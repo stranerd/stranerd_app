@@ -31,7 +31,9 @@
     "sweetalert2": "^11.1.9",
     "swiper": "^6.8.4",
     "vue": "^3.0.0",
+    "vue-google-login": "^2.0.5",
     "vue-router": "^4.0.11",
+    "vue3-google-oauth2": "^1.0.6",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
