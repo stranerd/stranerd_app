@@ -70,6 +70,7 @@ export const useEmailSignin = () => {
 }
 
 export const useEmailSignup = () => {
+	const router = useRouter()
 	const factory = ref(new EmailSignupFactory()) as Ref<EmailSignupFactory>
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
@@ -83,6 +84,7 @@ export const useEmailSignup = () => {
 				})
 				await createStorage(user)
 				if (isClient()) window.localStorage.removeItem('referrer')
+				await router.replace('/dashboard/home')
 			} catch (error) {
 				await setError(error)
 			}
