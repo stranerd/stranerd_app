@@ -12,8 +12,14 @@
 					<h1 class="headings lg:text-xl  text-dark_gray font-bold mb-5 text-center">sign In <span class="lg:hidden"> to continue </span></h1>
 					<div class="h-[65%]">
 						<form >
-							<ion-input placeholder="Email Address" type="email" position="floating" :size="24" v-model="factory.email"></ion-input>
-							<ion-input placeholder="Password" position="floating" type="password" :size="24" v-model="factory.password"></ion-input>
+							<div class="mb-4">
+								<ion-input placeholder="Email Address" type="email" position="floating" :size="24" v-model="factory.email"></ion-input>
+								<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
+							</div>
+							<div class="mb-4">
+								<ion-input placeholder="Password" position="floating" type="password" :size="24" v-model="factory.password"></ion-input>
+								<span class="normalText text-red-500 font-semibold">{{ factory.errors.password }}</span>
+							</div>
 							<ion-button  class="w-full mb-4" @click="signin">SIGN IN <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
 						</form>
 						<div class="w-full flex justify-between items-center  text-dark_gray">
