@@ -1,22 +1,26 @@
 <template>
 	<ion-page>
 		<ion-content>
-			<div class="w-full mt-10 h-full flex ">
+			<div class="w-full mt-10 h-full flex flex-col items-center justify-start ">
 
-				<div class="flex flex-col items-center justify-center w-full">
+				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
 					<h1 class="text-xl text-dark_gray font-bold mb-2 ">Forgot Password</h1>
 					<span class="normalText text-dark_gray mb-4">Enter your email to reset your password</span>
 					<div class="h-[65%]">
 						<form >
-							<ion-input placeholder="Email Address" type="email" position="floating" :size="24" v-model="factory.email"></ion-input>
-							<ion-input placeholder="Password" position="floating" type="password" :size="24" v-model="factory.password"></ion-input>
-							<ion-button  class="w-full mb-4" @click="signin">RESET PASSWORD <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
+							<div class="mb-4">
+								<ion-input placeholder="Email Address" type="email" position="floating" :size="24" v-model="factory.email" required></ion-input>
+								<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
+							</div>
+							
+							<ion-button  class="w-full mb-4" @click="sendResetEmail">RESET PASSWORD <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
 						</form>
-			
-
-			
 					</div>
 				</div>
+
+				<router-link  to="/auth/signin" class="text-primary font-bold normalText mt-8">
+					Back to Sign In
+				</router-link>
 			</div>
 		</ion-content>
 	</ion-page>
@@ -25,7 +29,7 @@
 
 <script lang="ts">
 import { defineComponent,  } from 'vue'
-import { useEmailSignin } from '@/application/composable/auth/signin'
+import { usePasswordResetRequest } from '@/application/composable/auth/passwords'
 import { IonContent, IonPage, IonInput,IonButton,  IonSpinner } from '@ionic/vue'
 
 
@@ -36,10 +40,10 @@ export default defineComponent({
 	  setup() {
 	
 
-		const { factory, loading, error, signin } = useEmailSignin()
+		const { factory, loading, error, sendResetEmail, message } = usePasswordResetRequest()
 
 	
-		return {   factory, loading, error, signin }
+		return {   factory, loading, error, sendResetEmail, message }
 	},
 
 
@@ -52,7 +56,7 @@ ion-checkbox{
 	--size:20px;
 }
 ion-input{
-	--background: #F7F7FC !important;
+	--background: #fff !important;
 	--padding-start: 1.8rem !important;
 	--padding-end: 1.5rem !important;
 	--padding-top: .69rem !important;
@@ -60,7 +64,10 @@ ion-input{
 	--color: $color-dark !important;
 	--placeholder-color: $color-dark !important;
 	border-radius: 10px;
-	margin-bottom: 1.25rem;
+
+	@media screen and (max-width:1024px) {
+		--background: #F7F7FC !important;
+	}
 }
 
 
