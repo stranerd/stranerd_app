@@ -28,9 +28,9 @@
 						</div>
 
 						<div class="flex justify-between px-5 items-center mt-8">
-							<div class="border-faded_gray border-b h-1 w-5/12"/>
-							<span class="font-nuni text-faded_gray">or</span>
-							<div class="border-faded_gray border-b h-1 w-5/12"/>
+							<div class="border-faded_gray border-b h-1 w-4/12"/>
+							<span class="text-faded_gray">or use</span>
+							<div class="border-faded_gray border-b h-1 w-4/12"/>
 						</div>
 
 						<AuthProviders/>
@@ -53,9 +53,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { useEmailSignin } from '@/application/composable/auth/signin'
-import { useAuth } from '@/application/composable/auth/auth'
 import { IonContent, IonPage, IonInput,IonButton, IonCheckbox, IonSpinner } from '@ionic/vue'
 import AuthProviders from '@/application/components/auth/AuthProviders.vue'
 
@@ -65,15 +63,12 @@ export default defineComponent({
 	components: { IonContent,IonPage,IonInput,IonButton, IonCheckbox, AuthProviders, IonSpinner,  },
 	layout:'Auth',
 	  setup() {
-		const router = useRouter()
-		const check = ()=>{
-			console.log(useAuth())
-		}
+	
 
 		const { factory, loading, error, signin } = useEmailSignin()
 
 	
-		return { router,  factory, loading, error, signin, check }
+		return {   factory, loading, error, signin }
 	},
 
 

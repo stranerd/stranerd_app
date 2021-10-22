@@ -33,7 +33,9 @@ rules: {
     '@typescript-eslint/no-non-null-assertion': 'off',
 		curly: 'off',
      "no-empty-function": "off",
+     "no-empty": "off",
   "@typescript-eslint/no-empty-function": ["off"],
+  "@typescript-eslint/ban-ts-ignore": ["off"],
 		"@typescript-eslint/member-delimiter-style": ["warn", {
       multiline: {
         delimiter: 'none',    // 'none' or 'semi' or 'comma'

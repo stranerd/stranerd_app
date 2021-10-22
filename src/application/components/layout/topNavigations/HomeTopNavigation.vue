@@ -1,5 +1,5 @@
 <template>
-	<nav :class="[show ?'fixed bg-dark_gray top-0 bottom-0 !text-white':'', 'w-full flex flex-col  z-10 bg-white text-primary shadow']" role="navigation">
+	<nav :class="[show ?'fixed bg-dark_gray top-0 bottom-0 !text-white':'', 'w-full flex flex-col  z-10 bg-white text-primary lg:shadow']" role="navigation">
 		<div class="md:px-8 p-4 flex items-center">
 			<router-link class="mr-auto" to="/">
 				<Logo :secondary="true" v-if="!show" />

@@ -70,13 +70,14 @@ export const useEmailSignin = () => {
 }
 
 export const useEmailSignup = () => {
-	const router = useRouter()
+	
 	const factory = ref(new EmailSignupFactory()) as Ref<EmailSignupFactory>
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const signup = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+	
+		if (!factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
 				const user = await SignupWithEmail.call(factory.value, {
@@ -84,7 +85,6 @@ export const useEmailSignup = () => {
 				})
 				await createStorage(user)
 				if (isClient()) window.localStorage.removeItem('referrer')
-				await router.replace('/dashboard/home')
 			} catch (error) {
 				await setError(error)
 			}
