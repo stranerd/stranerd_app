@@ -1,5 +1,18 @@
-import { generateDefaultBio, UserBio } from '@modules/users'
-import { BaseEntity } from '@modules/core'
+import { generateDefaultBio, UserBio } from '@/modules/users'
+import { BaseEntity } from '@/modules/core'
+
+
+type CommentConstructorArgs = {
+	id: string;
+	body: string;
+	userId: string;
+	answerId?: string;
+	questionId?: string;
+	userBio: UserBio;
+	createdAt: number;
+	updatedAt: number;
+}
+
 
 export class CommentEntity extends BaseEntity {
 	public readonly id: string
@@ -32,13 +45,3 @@ export class CommentEntity extends BaseEntity {
 	}
 }
 
-type CommentConstructorArgs = {
-	id: string
-	body: string
-	userId: string
-	answerId?: string
-	questionId?: string
-	userBio: UserBio
-	createdAt: number
-	updatedAt: number
-}

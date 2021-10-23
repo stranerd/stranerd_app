@@ -1,6 +1,26 @@
-import { generateDefaultBio, UserBio } from '@modules/users'
-import { BaseEntity, Media } from '@modules/core'
-import { extractTextFromHTML, trimToLength } from '@utils/commons'
+import { generateDefaultBio, UserBio } from '@/modules/users'
+import { BaseEntity, Media } from '@/modules/core'
+import { extractTextFromHTML, trimToLength } from '@/utils/commons'
+
+
+
+type AnswerConstructorArgs = {
+	id: string;
+	title: string;
+	body: string;
+	coins: number;
+	questionId: string;
+	tags: string[];
+	attachments: Media[];
+	createdAt: number;
+	updatedAt: number;
+	userId: string;
+	userBio: UserBio;
+	best: boolean;
+	votes: { userId: string; vote: 1 | -1 }[];
+	commentsCount: number;
+}
+
 
 export class AnswerEntity extends BaseEntity {
 	public readonly id: string
@@ -13,7 +33,7 @@ export class AnswerEntity extends BaseEntity {
 	public readonly attachments: Media[]
 	public readonly userId: string
 	public readonly userBio: UserBio
-	public readonly votes: { userId: string, vote: 1 | -1 }[]
+	public readonly votes: { userId: string; vote: 1 | -1 }[]
 	public readonly commentsCount: number
 	public readonly createdAt: number
 	public readonly updatedAt: number
@@ -85,19 +105,3 @@ export class AnswerEntity extends BaseEntity {
 	}
 }
 
-type AnswerConstructorArgs = {
-	id: string
-	title: string
-	body: string
-	coins: number
-	questionId: string
-	tags: string[]
-	attachments: Media[]
-	createdAt: number
-	updatedAt: number
-	userId: string
-	userBio: UserBio
-	best: boolean
-	votes: { userId: string, vote: 1 | -1 }[]
-	commentsCount: number
-}

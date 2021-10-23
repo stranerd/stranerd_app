@@ -14,7 +14,7 @@
 
 	<div class="flex md:gap-6 gap-3 mt-3 lg:hidden">
 		<swiper
-			:direction="'horizontal'" :slidesPerView="3" :spaceBetween="16" :freeMode="true" class="overflow-x-auto"
+			:direction="'horizontal'" :spaceBetween="16" :freeMode="true" class="overflow-x-auto"
 		>
 			<swiper-slide
 				v-for="(card,index) in 10"

@@ -2,20 +2,20 @@
 	<!-- Small screens -->
 	<div class="md:hidden bg-[#F7F7FC] py-[8px] px-4 fixed flex w-full top-0 border-0 flex-row items-center z-50" v-if="!props.isNotDashboard && !store.state.showPage">
 		<router-link class="flex flex-row items-center w-[15%]" to="/profile/dashboard">
-			<img src="/assets/images/person-circle.svg" class="inline h-7"/>
+			<avatar :photo-url="user?.avatar?.link" :size="'30'"/>
 		</router-link>
 
 		<div class="flex flex-row items-center px-3 w-[70%] justify-center" >
 			<div class="py-1 px-3 w-full bg-[#8B9EB1] flex rounded-xl flex-row items-center">
 				<div class="w-1/3 flex flex-row items-center">
 					<img src="/assets/images/bronze.svg" class="inline h-6 mr-2"/>
-					<span class="font-semibold text-xs text-white ">{{ userData?.account.coins.bronze }}</span>
+					<span class="font-semibold text-xs text-white ">{{ user?.account.coins.bronze }}</span>
 				</div>
 				<div class="w-1/3 flex flex-row items-center justify-center">
 					<img src="/assets/images/add.svg" class="inline h-4 text-white"/>
 				</div>
 				<div class="w-1/3 flex flex-row-reverse items-center">
-					<span class="font-semibold text-xs text-white ">{{ userData?.account.coins.gold }}</span>
+					<span class="font-semibold text-xs text-white ">{{ user?.account.coins.gold }}</span>
 					<img src="/assets/images/gold.svg" class="inline h-6 mr-2"/>
 				</div>
 			</div>
@@ -31,11 +31,11 @@
 	<div class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50" v-if="!props.isNotDashboard && !store.state.showPage ">
 		<div class="flex flex-row items-center gap-9 w-1/4">
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/profile/dashboard">
-				<img src="/assets/images/person-circle.svg" class="inline h-6"/>
+				<avatar :photo-url="user?.avatar?.link" :custom-class="'h-6'"/>
 			</router-link>
 
 			<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
-				<img src="/assets/images/cap.svg" class="inline h-6"/>
+				<img src="/assets/images/cap.svg" :size="'28'"/>
 			</div>
 
 		</div>
@@ -44,13 +44,13 @@
 			<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
 				<div class="w-1/3 flex flex-row items-center">
 					<img src="/assets/images/bronze.svg" class="inline h-7 mr-2"/>
-					<span class="font-semibold text-sm text-dark_grey ">{{ userData?.account.coins.bronze }}</span>
+					<span class="font-semibold text-sm text-dark_grey ">{{ user?.account.coins.bronze }}</span>
 				</div>
 				<div class="w-1/3 flex flex-row items-center justify-center">
 					<img src="/assets/images/add.svg" class="inline h-6"/>
 				</div>
 				<div class="w-1/3 flex flex-row-reverse items-center">
-					<span class="font-semibold text-sm text-dark_grey ">{{ userData?.account.coins.gold }}</span>
+					<span class="font-semibold text-sm text-dark_grey ">{{ user?.account.coins.gold }}</span>
 					<img src="/assets/images/gold.svg" class="inline h-7 mr-2"/>
 				</div>
 			</div>
@@ -99,20 +99,20 @@
 				<img src="/assets/images/chatbubble.svg" class="inline h-5"/>
 			</router-link>
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/profile/dashboard">
-				<img src="/assets/images/person-circle.svg" class="inline h-6"/>
+				<avatar :photo-url="user?.avatar?.link" :size="'26'"/>
 			</router-link>
 		</div>
 		<div class="flex flex-row items-center py-1 -mr-5"  :class="noSideBar ? 'w-[21%]' : 'w-1/4'">
 			<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
 				<div class="w-1/3 flex flex-row items-center">
 					<img src="/assets/images/bronze.svg" class="inline h-5 mr-2"/>
-					<span class="font-semibold text-sm text-dark_grey ">{{ userData?.account.coins.bronze }}</span>
+					<span class="font-semibold text-sm text-dark_grey ">{{ user?.account.coins.bronze }}</span>
 				</div>
 				<div class="w-1/3 flex flex-row items-center justify-center">
 					<img src="/assets/images/add.svg" class="inline h-5"/>
 				</div>
 				<div class="w-1/3 flex flex-row-reverse items-center">
-					<span class="font-semibold text-sm text-dark_grey ">{{ userData?.account.coins.gold }}</span>
+					<span class="font-semibold text-sm text-dark_grey ">{{ user?.account.coins.gold }}</span>
 					<img src="/assets/images/gold.svg" class="inline h-5 mr-2"/>
 				</div>
 			</div>
@@ -120,11 +120,12 @@
 	</div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineAsyncComponent, defineComponent } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { add, home } from 'ionicons/icons'
 import { useStore } from '@/application/store'
-import { UserEntity } from '@/modules/users'
+import { useAuth } from '@/application/composable/auth/auth'
+const Avatar = defineAsyncComponent(() => import('@/application/components/core/AvatarUser.vue'))
 
 export default defineComponent({
 	props: {
@@ -136,21 +137,19 @@ export default defineComponent({
 			type: Boolean,
 			default: false
 		},
-		userData: {
-			type: UserEntity,
-			default: undefined
-		}
 	},
 	setup(props) {
-
+		const { user } = useAuth()	
+		
 		const store = useStore()
 		return {
 			add,
 			props,
 			store,
-			home
+			home,
+			user
 		}
 	},
-	components: { IonIcon }
+	components: { IonIcon, Avatar }
 })
 </script>

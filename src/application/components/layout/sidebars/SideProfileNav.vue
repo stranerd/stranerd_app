@@ -11,9 +11,9 @@
 
 		<div class="mt-3 flex flex-col text-sm text-dark_gray gap-3">
 			<div class="bg-light_blue py-4 px-4 rounded-xl flex flex-col">
-				<h2 class="mb-2">Reach the rank of <b>Comrade</b></h2>
+				<h2 class="mb-2">Reach the rank of <b>{{ user?.nextRank?.id }}</b></h2>
 				<div class="flex flex-row rounded-xl py-[4px] relative bg-faded_gray">
-					<div class="absolute left-0 top-0 h-full w-9/12 rounded-xl bg-primary">
+					<div :class="`absolute left-0 top-0 h-full rounded-xl bg-primary`" :style="`width:${rankPercentage(user?.nextRank?.score, user?.rank.score)};`">
 					</div>
 				</div>
 			</div>
@@ -21,7 +21,7 @@
 			<div class="bg-light_gray py-4 px-4 rounded-xl flex flex-col">
 				<h2 class="mb-2">Answer 30 questions</h2>
 				<div class="flex flex-row rounded-xl py-[4px] relative bg-faded_gray">
-					<div class="absolute left-0 top-0 h-full w-8/12 rounded-xl bg-primary">
+					<div class="absolute left-0 top-0 h-full rounded-xl bg-primary" :style="`width:${rankPercentage(30, user?.account?.meta?.answers )};`">
 					</div>
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 			<div class="bg-light_gray py-4 px-4 rounded-xl flex flex-col">
 				<h2 class="mb-2">Get 30 best answers</h2>
 				<div class="flex flex-row rounded-xl py-[4px] relative bg-faded_gray">
-					<div class="absolute left-0 top-0 h-full w-5/12 rounded-xl bg-primary">
+					<div class="absolute left-0 top-0 h-full rounded-xl bg-primary" :style="`width:${rankPercentage(30, user?.account?.meta?.bestAnswers )};`">
 					</div>
 				</div>
 			</div>
@@ -37,7 +37,7 @@
 			<div class="bg-light_gray py-4 px-4 rounded-xl flex flex-col">
 				<h2 class="mb-2">5 days login streak</h2>
 				<div class="flex flex-row rounded-xl py-[4px] relative bg-faded_gray">
-					<div class="absolute left-0 top-0 h-full w-5/12 rounded-xl bg-primary">
+					<div class="absolute left-0 top-0 h-full rounded-xl bg-primary" :style="`width:${rankPercentage(5, user?.account?.streak.longestStreak )};`">
 					</div>
 				</div>
 			</div>
@@ -105,10 +105,27 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonSelect, IonSelectOption } from '@ionic/vue'
+import { useAuth } from '@/application/composable/auth/auth'
 
 export default defineComponent({
 	setup() {
-		return {}
+		const { user } = useAuth()	
+		
+		const rankPercentage = (next: number | undefined, present: number | undefined) => {
+			let percentage = 0
+			 if(next && present != undefined) {
+				 if(present == 0 ) {
+					  percentage = (2 / next) * 100 
+				 } else {
+					  percentage = (present / next) * 100 
+				 }
+			 }
+			return percentage.toString() + '%'
+		}
+		return {
+			user,
+			rankPercentage
+		}
 	},
 	components: {
 		IonSelect,
