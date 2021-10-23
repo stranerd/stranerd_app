@@ -47,12 +47,21 @@
 
 import { star } from 'ionicons/icons'
 import { useAuth } from '@/application/composable/auth/auth'
+import { useUser } from '@/application/composable/users/user'
 
 export default  {
 	name: 'profileBio',
 
-	setup() {
-		const { id, user } = useAuth()
+	props:{
+		userId:{
+			required:true,
+			type:String,
+			default:''
+		}
+	},
+	setup(props: any) {
+	  const { id, user: authUser } = useAuth()
+	  const { error, loading, user } = useUser(props.userId)
 		
 		return {
 			id,

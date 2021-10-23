@@ -13,37 +13,33 @@
 			</div>
 		</div>
 
-		<div class="flex md:gap-6 gap-3 mt-2 lg:hidden">
+	
+		<div class=" md:gap-6 gap-3 mt-2 lg:hidden">
 			<swiper
-				:direction="'horizontal'" :slidesPerView="3" :spaceBetween="16" :freeMode="true" class="overflow-x-auto"
+				:direction="'horizontal'" :spaceBetween="16" :freeMode="true" class="overflow-x-auto"
 			>
 				<swiper-slide
-					v-for="(card,index) in 10"
+					v-for="(tutor,index) in tutors"
 					:key="index"
 					class="flex md:!min-w-[180px] !w-[150px]">
-					<tutor-card :style="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'"/>
+					<tutor-card :style="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'" :tutor="tutor"/>
 				</swiper-slide>
 				
 			</swiper>
 		</div>
 
-		<div class="lg:flex md:gap-6 gap-3 mt-2 hidden">
-			<swiper
-				:direction="'horizontal'" :slidesPerView="4" :spaceBetween="15"
-			>
-				<swiper-slide :key="0">
-					<tutor-card
-						
-						:isFirst="true"/>
-				</swiper-slide>
-				<swiper-slide
-					v-for="(card,index) in 10"
-					:key="index + 1">
-					<tutor-card/>
-				</swiper-slide>
+		<swiper
+			:direction="'horizontal'" :slidesPerView="4" :spaceBetween="15" class="mt-3 hidden lg:block"
+		>
+
+			<swiper-slide
+				v-for="(tutor,index) in tutors"
+				:key="index">
+				<tutor-card :style="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'" :tutor="tutor"/>
+			</swiper-slide>
 				
-			</swiper>
-		</div>
+		</swiper>
+
 
 	</div>
 </template>
@@ -56,14 +52,17 @@ import SliderController from '@/application/components/core/nav/sliderController
 import TutorCard from '@/application/components/dashboard/HomeTutorCard.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
+import { useTutorsList } from '@/application/composable/users/roles/tutors'
 
 
 export default  {
 	name: 'Home',
 	components: {  IonIcon, SliderController, TutorCard, Swiper, SwiperSlide },
 	setup(){
+
+		const { tutors } = useTutorsList()
 		return{
-			chevronForwardOutline, chevronBackOutline, ellipse
+			chevronForwardOutline, chevronBackOutline, ellipse, tutors
 		}
 	}
 }

@@ -1,5 +1,6 @@
 <template>
 	<ion-page>
+		<top-bar :isNotDashboard="true"></top-bar>
 		<ion-header mode="ios" class="block lg:hidden">
 			<ion-toolbar class="px-2">
 				<ion-buttons @click="router.go(-1)" slot="start">
@@ -18,11 +19,17 @@
 						</div>
 						<div class="grid grid-cols-12 md:px-2 w-full mb-4 text-xs md:text-sm">
 							<div class="col-span-12">
-								<question :fromViewQuestion="true"></question>
+								<question :fromViewQuestion="true" 
+									:colorClass="'bg-light_gray'"
+									:question="question"></question>
+							</div>
+
+							<div class="col-span-12 py-3">
+								<photo-list  :photos="question?.attachments"></photo-list>
 							</div>
 
 							<template v-if="!showAddAnswer">
-								<div class="mt-5 col-span-12">
+								<div class="mt-3 col-span-12">
 									<button @click="showAddAnswer = true" class="py-3 px-4 justify-center rounded-lg text-white bg-dark_gray w-full font-bold flex flex-row items-center">
 										<span class="mr-2">Add your answer</span>
 										<span class="h-1 w-1 rounded-full bg-white mr-2" ></span>
@@ -37,15 +44,12 @@
 								</div>
 							</template>
 							
-
 							<div class="mt-6 col-span-12 flex flex-col">
 								<h2 class="text-dark_gray text-sm font-bold">
-									Answers<span class="text-icon_inactive">(2)</span>
+									Answers<span class="text-icon_inactive">({{ question?.answers.length }})</span>
 								</h2>
-								<answer></answer>
-								<answer></answer>
+								<answer v-for="(answer,index) in answers"  :answer="answer"  :key="index"></answer>
 							</div>
-
 
 						</div>
 					</div>
@@ -55,6 +59,7 @@
 				</div>
 			</div>		
 		</ion-content>
+		<side-nav-bar></side-nav-bar>
 	</ion-page>
 </template>
 
@@ -63,22 +68,31 @@
 import { IonPage, IonContent, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar } from '@ionic/vue'
 import { defineAsyncComponent, ref } from 'vue'
 import { arrowBackOutline, arrowRedo, shareSocial, chevronDown, thumbsDown, thumbsUp, star, send } from 'ionicons/icons'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { useQuestion } from '@/application/composable/questions/questions'
+import { useAnswerList } from '@/application/composable/questions/answers'
 const SideProfileNav = defineAsyncComponent(() => import('@/application/components/layout/sidebars/SideProfileNav.vue'))
 const Question = defineAsyncComponent(() => import('@/application/components/questions/question.vue'))
 const Answer = defineAsyncComponent(() => import('@/application/components/questions/answers/each.vue'))
 const CreateAnswer = defineAsyncComponent(() => import('@/application/components/questions/answers/create.vue'))
+const TopBar = defineAsyncComponent(() => import('@/application/components/layout/topNavigations/Topbar.vue'))
+const SideNavBar = defineAsyncComponent(() => import('@/application/components/layout/sidebars/DefaultSidebar.vue'))
+const PhotoList = defineAsyncComponent(() => import('@/application/components/core/photoList.vue'))
 
 export default  {
 	name: 'answers',
-	components: { IonPage, IonContent, SideProfileNav, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar, Question, Answer, CreateAnswer },
+	components: { IonPage, IonContent, SideProfileNav, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar, Question, Answer, CreateAnswer, TopBar, SideNavBar, PhotoList },
 	setup() {
+		const route = useRoute()
 		const router = useRouter()
+
+		const { error, loading, question } = useQuestion(Array.isArray(route.params.id ) ? '' : route.params.id )
+
+		const { answers } = useAnswerList(question.value?.id ? question.value?.id : '')
 
 		const showAddAnswer = ref(false)
 
 		return {
-			router,
 			arrowBackOutline,
 			arrowRedo,
 			shareSocial,
@@ -87,7 +101,10 @@ export default  {
 			thumbsUp,
 			star,
 			send,
-			showAddAnswer
+			router,
+			showAddAnswer,
+			error, loading, question ,
+			answers
 		}
 	}
 }

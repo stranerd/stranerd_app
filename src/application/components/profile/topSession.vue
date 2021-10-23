@@ -17,25 +17,25 @@
 	</div>
 	<div class="col-span-12 grid grid-cols-12 border-b-[1px] border-faded_gray mt-5 mb-5 lg:rounded-br-3xl lg:rounded-bl-3xl">
 		<div class=" col-span-12  md:col-start-2 md:col-end-12 lg:col-start-3 lg:col-end-11 lg:justify-center lg:items-center flex flex-row  px-3 headings gap-5 text-icon_inactive font-bold  whitespace-normal overflow-x-auto">
-			<div class="pb-2 pr-3 cursor-pointer" @click="goToTab('dashboard')" :class="selectedTab == 'dashboard' ? 'border-b-4 text-dark_gray border-primary' : ''">
+			<div class="pb-2 pr-3 cursor-pointer" @click="goToTab('#dashboard')" :class="selectedTab == '#dashboard' ? 'border-b-4 text-dark_gray border-primary' : ''">
 				Dashboard
 			</div>
-			<div class="pb-2  pr-3 cursor-pointer" @click="goToTab('bio')"  :class="selectedTab == 'bio' ? 'border-b-4 text-dark_gray border-primary' : ''">
+			<div class="pb-2  pr-3 cursor-pointer" @click="goToTab('#bio')"  :class="selectedTab == '#bio' ? 'border-b-4 text-dark_gray border-primary' : ''">
 				Bio
 			</div>
-			<div  class="pb-2  pr-3 cursor-pointer"  @click="goToTab('questions')" :class="selectedTab == 'questions' ? 'border-b-4 text-dark_gray border-primary' : ''">
+			<div  class="pb-2  pr-3 cursor-pointer"  @click="goToTab('#questions')" :class="selectedTab == '#questions' ? 'border-b-4 text-dark_gray border-primary' : ''">
 				Questions
 			</div>
-			<div  class="pb-2  pr-3 cursor-pointer" @click="goToTab('answers')" :class="selectedTab == 'answers' ? 'border-b-4 text-dark_gray border-primary' : ''">
+			<div  class="pb-2  pr-3 cursor-pointer" @click="goToTab('#answers')" :class="selectedTab == '#answers' ? 'border-b-4 text-dark_gray border-primary' : ''">
 				Answers
 			</div>
-			<div class="pb-2  pr-3 cursor-pointer" @click="goToTab('achievements')" :class="selectedTab == 'achievements' ? 'border-b-4 text-dark_gray border-primary' : ''">
+			<div class="pb-2  pr-3 cursor-pointer" @click="goToTab('#achievements')" :class="selectedTab == '#achievements' ? 'border-b-4 text-dark_gray border-primary' : ''">
 				Achievements
 			</div>
-			<div  class="pb-2 pr-3 cursor-pointer" @click="goToTab('reviews')" :class="selectedTab == 'reviews' ? 'border-b-4 text-dark_gray border-primary' : ''">
+			<div  class="pb-2 pr-3 cursor-pointer" @click="goToTab('#reviews')" :class="selectedTab == '#reviews' ? 'border-b-4 text-dark_gray border-primary' : ''">
 				Reviews
 			</div>
-			<div  class="pb-2  pr-3 cursor-pointer" @click="goToTab('settings')" :class="selectedTab == 'settings' ? 'border-b-4 text-dark_gray border-primary' : ''">
+			<div  class="pb-2  pr-3 cursor-pointer" @click="goToTab('#settings')" :class="selectedTab == '#settings' ? 'border-b-4 text-dark_gray border-primary' : ''">
 				Settings
 			</div>
 		</div>
@@ -52,6 +52,7 @@ import { useUser } from '@/application/composable/users/user'
 import ShowRatings from '../core/ShowRatings.vue'
 import { toggleModal } from '@/application/composable/core/Modal'
 import { setNewSessionTutorIdBio } from '@/application/composable/sessions/sessions'
+import {   useRouter } from 'vue-router'
 
 export default defineComponent({
 	props:{
@@ -62,6 +63,7 @@ export default defineComponent({
 		}
 	},
 	setup(props) {
+		const router = useRouter()
 	  const { id, user: authUser } = useAuth()
 	  const { error, loading, user } = useUser(props.userId)
 		const canRequestSession = computed({
@@ -73,7 +75,6 @@ export default defineComponent({
 			}
 		})
 
-		console.log(error)
 		const requestNewSession = () => {
 			setNewSessionTutorIdBio({ id: user.value?.id!, user: user.value?.bio! })
 			// useSessionModal().openCreateSession()
@@ -81,6 +82,7 @@ export default defineComponent({
 		}
 
 	  const goToTab = (tabname: string) => {
+		  router.push(`/profile/${props.userId}${tabname}`)
 		  selectedTab.value = tabname
 	  }
 		return {
