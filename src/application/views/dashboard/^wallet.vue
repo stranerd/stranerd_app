@@ -8,8 +8,8 @@
 						<span class="font-bold text-dark_gray headings mb-3">
 							Available balance
 						</span>
-						<BalanceCard/>
-						<TranscractionHistory/>
+						<BalanceCard :user="user"/>
+						<TranscractionHistory :user-id="id"/>
 					</div>
 				
 				</div>
@@ -22,15 +22,21 @@
 </template>
 
 <script lang="ts">
-
+import { defineComponent,  defineAsyncComponent } from 'vue'
+import { useAuth } from '@/application/composable/auth/auth'
 import { IonPage, IonContent } from '@ionic/vue'
-import { defineAsyncComponent } from 'vue'
 import BalanceCard from '@/application/components/wallet/BalanceCard.vue'
 import TranscractionHistory from '@/application/components/wallet/TranscractionHistory.vue'
 const SideProfileNav = defineAsyncComponent(() => import('@/application/components/layout/sidebars/SideProfileNav.vue'))
 
-export default  {
+export default defineComponent(  {
 	name: 'wallet',
-	components: { IonPage, IonContent, SideProfileNav,  BalanceCard, TranscractionHistory,  }
-}
+	components: { IonPage, IonContent, SideProfileNav,  BalanceCard, TranscractionHistory,  },
+	setup(){
+		const { id, user } = useAuth()
+		return { id, user }
+
+	},
+	
+})
 </script>

@@ -26,24 +26,17 @@
 				</div>
 			</div>
 
+			<TranscrationHistoryCard
+				v-for="transaction in transactions"
+				:key="transaction.hash"
+				:transaction="transaction"
+			/>
 
-			<div v-for="(n) in 10" :key="n" class="flex items-center mt-4 table-data-style">
-				<div class="w-3/12">
-					<span>Aug 10 - 2021 </span>
-				</div>
-				<div class="w-3/12 flex items-center gap-2">
-					<Coins :size="24"/>
-					<span>
-						10
-					</span>
-				</div>
-				<div class="w-6/12 font-normal">
-					<span>You got coins for a best answer</span>
-				</div>
-			</div>
+
+		
 		</div>
 
-		<div class="text-center text-18">
+		<div class="text-center text-18" v-if="hasMore" >
 			<a class="text-primary-dark py-2" @click.prevent="fetchOlderTransactions">LOAD MORE</a>
 		</div>
 	</div>
@@ -51,12 +44,25 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useTransactionList } from '@/application/composable/payment/transactions'
 import { IonSelect, IonSelectOption, } from '@ionic/vue'
-import Coins from '../core/Coins.vue'
+import TranscrationHistoryCard from './TranscrationHistoryCard.vue'
+
 
 export default defineComponent({
 	name: 'Transcration History',
-	components: { IonSelect, IonSelectOption, Coins,    }
+	props: {
+		userId: {
+			required: true,
+			type: String
+		}
+	},
+	components: { IonSelect, IonSelectOption,TranscrationHistoryCard },
+	setup (props) {
+		const { loading, error, transactions, hasMore, fetchOlderTransactions } = useTransactionList(props.userId)
+		return { loading, error, transactions, hasMore, fetchOlderTransactions }
+	},
+	
 
 })
 </script>
@@ -83,12 +89,5 @@ ion-select {
         padding: 1rem 2.281rem;
 	}
 
-	.table-data-style {
-		border-radius: 6px;
-		background: #F7F7FC;
-		font-weight: 700;
-		font-size: 15px;
-		color: $color-sub;
-		padding: 1rem 2.281rem;
-	}
+
 </style>

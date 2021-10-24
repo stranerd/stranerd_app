@@ -6,7 +6,7 @@
 
 <script lang="ts">
 
-import { defineAsyncComponent } from 'vue'
+
 import AnswerCard from '@/application/components/questions/answers/AnswerListCard.vue'
 import { useUserAnswerList } from '@/application/composable/users/user/answers'
 

@@ -15,7 +15,7 @@
 						<template v-if="selectedTab == '#reviews'">
 							<reviews :userId="id"></reviews>
 						</template>
-						<template v-if="selectedTab == '#answers'">
+						<template v-if="selectedTab == '#answers'"> 
 							<answers :userId="id"></answers>
 						</template>
 						<template v-if="selectedTab == '#bio'">
