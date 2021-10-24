@@ -100,7 +100,7 @@ const DateCard = defineAsyncComponent(() => import('@/application/components/sch
 
 export default  {
 	name: 'calendar',
-	layout: 'Dashboard',
+	layout: 'SubPages',
 	components: { IonPage, IonContent, SideProfileNav, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar, Opening, DateCard },
 	setup() {
 		const router = useRouter()

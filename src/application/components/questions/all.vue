@@ -5,24 +5,24 @@
 
 			<div class="col-span-6 grid grid-cols-12 md:px-2 ">
 				<div class="py-1 px-2 px-md text-sm col-span-12 md:col-start-4 md:col-end-10 md:mb-3   bg-light_gray rounded-xl md:rounded-md flex flex-row">
-					<ion-select value="notifications" class="w-full text-xs md:text-sm  placeholder-[#8B9EB1] font-bold" placeholder="Filter by subject" interface="action-sheet">
-						<ion-select-option value="maths" >Mathematics</ion-select-option>
-						<ion-select-option value="physics" >Physics</ion-select-option>
-						<ion-select-option value="bio" >Biology</ion-select-option>
-						<ion-select-option value="geo"  >Geography</ion-select-option>
-						<ion-select-option value="business" >Business</ion-select-option>
-						<ion-select-option value="civil" >Civil Right</ion-select-option>
+					<ion-select v-model="subjectId" class="w-full text-xs md:text-sm text-icon_inactive  placeholder-[#8B9EB1] font-bold" placeholder="Filter by subject" interface="action-sheet">
+						<ion-select-option :value="''" >All Subjects</ion-select-option>
+						<ion-select-option :value="subject.id" v-for="(subject, index) in subjects" :key="index + 'subject'">{{ subject.name }}</ion-select-option>
 					</ion-select>
 				</div>
 
 				<div class="mt-2 col-span-12  md:col-start-4 md:col-end-10 flex flex-row-reverse  justify-center items-center ">
-					<div class="flex flex-row items-center mr-2">
-						<ion-icon :icon="ellipse" class="text-lg mr-1 text-primary"></ion-icon>
+					<div class="flex flex-row items-center mr-2 cursor-pointer" @click="answered = answeredChoices[2].val; selectedFilter = 'All'">
+						<ion-icon :icon=" selectedFilter == 'All' ? ellipse : ellipseOutline" class="text-lg mr-1 text-primary"></ion-icon>
 						<span class="font-bold text-icon_inactive">Answered </span>
 					</div>
-					<div class="flex flex-row items-center mr-2">
-						<ion-icon :icon="ellipseOutline" class="text-lg mr-1 text-primary"></ion-icon>
+					<div class="flex flex-row items-center mr-2 cursor-pointer"  @click="answered = answeredChoices[3].val; selectedFilter = 'Answered'">
+						<ion-icon :icon=" selectedFilter == 'Answered' ? ellipse : ellipseOutline" class="text-lg mr-1 text-primary"></ion-icon>
 						<span class="font-bold text-icon_inactive">Unanswered </span>
+					</div>
+					<div class="flex flex-row items-center mr-2 cursor-pointer" @click="answered = answeredChoices[0].val; selectedFilter = 'Unanswered'">
+						<ion-icon :icon=" selectedFilter == 'Unanswered' ? ellipse : ellipseOutline" class="text-lg mr-1 text-primary"></ion-icon>
+						<span class="font-bold text-icon_inactive">All </span>
 					</div>
 					<span class="font-bold text-icon_inactive mr-3">Sort by: </span>
 				
@@ -31,11 +31,19 @@
 
 			<div class="mt-5 md:mt-6  col-span-6 flex flex-row flex-wrap ">
 				
-				<div v-for="(question,index) in questions"
-					:key="index"
-					:class="0 === index ? 'w-full md:px-2 mb-3' :  'md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0'">
-					<question :colorClass="0 === index ? 'bg-butter_yellow h-[230px] md:h-[220px]' : 'bg-light_gray h-[230px] md:h-[220px]'" :isFeatured="0 === index ? true : false" :question="question"/>
-				</div>
+				<template v-if="questions.length == 0">
+					<empty-state :info="'No questions found! Start asking questions to help with homework and studying.'" 
+						:btnText="'Ask a question'"
+						:route="'/dashboard/question'"
+					></empty-state>
+				</template>
+				<template v-else>
+					<div v-for="(question,index) in questions"
+						:key="index"
+						:class="0 === index ? 'w-full md:px-2 mb-3' :  'md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0'">
+						<question :colorClass="0 === index ? 'bg-butter_yellow h-[230px] md:h-[220px]' : 'bg-light_gray h-[230px] md:h-[220px]'" :isFeatured="0 === index ? true : false" :question="question"/>
+					</div>
+				</template>
 
 			</div>
 		</div>
@@ -54,20 +62,30 @@ import { ellipse, ellipseOutline } from 'ionicons/icons'
 // Import Swiper styles
 import 'swiper/swiper-bundle.min.css'
 import { useQuestionList } from '@/application/composable/questions/questions'
+import { useSubjectList } from '@/application/composable/questions/subjects'
 
 const Question = defineAsyncComponent(() => import('@/application/components/questions/question.vue'))
+const EmptyState = defineAsyncComponent(() => import('@/application/components/core/emptyState.vue'))
 
 export default defineComponent({
 	setup() {
 
-		const { questions } = useQuestionList()
+		const { filteredQuestions: questions, error, loading, hasMore,
+			answeredChoices, answered, subjectId,
+			fetchOlderQuestions, } = useQuestionList()
+		const { subjects } = useSubjectList()
+		const selectedFilter = ref('All')
 		return {
 			ellipseOutline,
 			ellipse,
-			questions
+			questions, error, loading, hasMore,
+			answeredChoices, answered, subjectId,
+			fetchOlderQuestions,
+			selectedFilter,
+			subjects
 		}
 	},
-	components: { IonSelect, IonSelectOption, IonIcon, Question }
+	components: { IonSelect, IonSelectOption, IonIcon, Question, EmptyState }
 })
 </script>
 <style scoped>
