@@ -1,4 +1,6 @@
 import { BaseEntity } from '@/modules/core'
+
+
 type SubjectConstructorArgs = { id: string; name: string; createdAt: number; updatedAt: number }
 
 const capitalize = (value: string) => {

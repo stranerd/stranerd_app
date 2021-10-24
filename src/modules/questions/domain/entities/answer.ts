@@ -2,6 +2,8 @@ import { generateDefaultBio, UserBio } from '@/modules/users'
 import { BaseEntity, Media } from '@/modules/core'
 import { extractTextFromHTML, trimToLength } from '@/utils/commons'
 
+
+
 type AnswerConstructorArgs = {
 	id: string
 	title: string

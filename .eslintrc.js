@@ -13,9 +13,9 @@ module.exports = {
   },
 rules: {
 		'vue/no-v-html': 'off',
-    'vue/no-deprecated-slot-attribute':'off',
-		'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-		'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+		'vue/no-deprecated-slot-attribute': 'off',
+		'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+		'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
 		'no-tabs': 'off',
 		'no-var': 'error',
 		'accessor-pairs': 'off',
