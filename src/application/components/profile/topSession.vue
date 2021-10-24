@@ -35,7 +35,7 @@
 			<div  class="pb-2 pr-3 cursor-pointer" @click="goToTab('#reviews')" :class="selectedTab == '#reviews' ? 'border-b-4 text-dark_gray border-primary' : ''">
 				Reviews
 			</div>
-			<div  class="pb-2  pr-3 cursor-pointer" @click="goToTab('#settings')" :class="selectedTab == '#settings' ? 'border-b-4 text-dark_gray border-primary' : ''">
+			<div  class="pb-2  pr-3 cursor-pointer" v-if="id === userId" @click="goToTab('#settings')" :class="selectedTab == '#settings' ? 'border-b-4 text-dark_gray border-primary' : ''">
 				Settings
 			</div>
 		</div>
