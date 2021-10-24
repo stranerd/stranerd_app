@@ -18,8 +18,8 @@ import { analytics } from '@/modules/core'
 import VueRouter, { useRouter } from 'vue-router'
 
 const global = {} as Record<string, {
-	answers: Ref<AnswerEntity[]>;
-	fetched: Ref<boolean>;
+	answers: Ref<AnswerEntity[]>
+	fetched: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useAnswerList = (questionId: string) => {
@@ -74,18 +74,21 @@ export const useAnswerList = (questionId: string) => {
 
 let answeringQuestion = null as QuestionEntity | null
 export const getAnsweringQuestion = () => answeringQuestion
+export const showAddAnswer = ref(false)
 export const openAnswerModal = (question: QuestionEntity) => {
 	const router = useRouter()
 	answeringQuestion = question
 	router.push(`/questions/${question.id}/answers/create`)
 }
 
-export const useCreateAnswer = () => {
+export const useCreateAnswer = (question: QuestionEntity | null) => {
 	const router = useRouter()
 	const factory = ref(new AnswerFactory()) as Ref<AnswerFactory>
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
+
+	answeringQuestion = question
 
 	if (!answeringQuestion) router.replace('/questions')
 	factory.value.questionId = answeringQuestion!.id
@@ -98,12 +101,13 @@ export const useCreateAnswer = () => {
 				const answerId = await AddAnswer.call(factory.value)
 				await setMessage('Answer submitted successfully.')
 				factory.value.reset()
-				await router.replace(`/questions/${answeringQuestion?.id ?? ''}/#${answerId}`)
+				await router.replace(`/questions/${answeringQuestion?.id ?? ''}`)
 				await analytics.logEvent('answer_question_completed', {
 					questionId: answeringQuestion?.id,
 					answerId,
 					subject: answeringQuestion?.subjectId
 				})
+				showAddAnswer.value = false
 			} catch (error) {
 				await setError(error)
 			}

@@ -7,6 +7,7 @@
 				<input
 					type="file" id="images"
 					name="images"
+					@change.prevent="catchFiles"
 					class="cursor-pointer w-full h-full absolute"
 					style="opacity:0; overflow:hidden; position:absolute;"
 					accept="image/x-png,image/jpeg,image/jpg"/>
@@ -24,13 +25,13 @@
 			<div class="flex flex-row items-center flex-wrap ">
 				<div class="pr-1 w-full md:w-1/2">
 					<div class="py-2 px-2  pl-6 bg-light_gray rounded-xl flex flex-row">
-						<ion-input value="" class="w-full font-medium" placeholder="First name">
+						<ion-input value="" class="w-full font-medium" placeholder="First name" v-model="factory.first">
 						</ion-input>
 					</div>
 				</div>
 				<div class="pl-1 w-full md:w-1/2">
 					<div class="py-2 px-2 w-full   pl-6 bg-light_gray rounded-xl flex flex-row">
-						<ion-input value="" class="w-full font-medium" placeholder="Last name">
+						<ion-input value="" class="w-full font-medium" placeholder="Last name" v-model="factory.last">
 						</ion-input>
 					</div>
 				</div>
@@ -43,6 +44,7 @@
 			<div class="border border-faded_gray rounded-xl py-4 px-3">
 				<ion-textarea rows="6" 
 					class="bg-white border-0 focus:outline-none  w-full"  
+					v-model="factory.description"
 					placeholder="Write your question here and make sure it is explained in full detail."></ion-textarea>
 			</div>
 		</div>
@@ -85,13 +87,13 @@
 			<div class="flex flex-row items-center flex-wrap ">
 				<div class="pr-1 w-full md:w-1/2">
 					<div class="py-2 px-2 w-full pl-6 bg-light_gray rounded-xl flex flex-row">
-						<ion-input value="" type="password" class="w-full font-medium" placeholder="New Password">
+						<ion-input value="" type="password" class="w-full font-medium" placeholder="New Password" v-model="factory.password">
 						</ion-input>
 					</div>
 				</div>
 				<div class="pl-1 w-full md:w-1/2">
 					<div class="py-2 px-2 w-full pl-6 bg-light_gray rounded-xl flex flex-row">
-						<ion-input value="" type="password" class="w-full font-medium" placeholder="Confirm Password">
+						<ion-input value="" type="password" class="w-full font-medium" placeholder="Confirm Password" v-html="factory.cPassword">
 						</ion-input>
 					</div>
 				</div>
@@ -99,41 +101,18 @@
 
 		</div>
 
-
-		<div class="flex flex-col gap-2">
-			<h2 class="headings font-bold text-dark_gray">Email</h2>
-			<p>
-				*Present email is “timmyneutron@gmail.com”
-			</p>
-			<div class="flex flex-row items-center flex-wrap">
-				<div class="pr-1 w-full md:w-1/2">
-					<div class="py-2 px-2 w-full pl-6 bg-light_gray rounded-xl flex flex-row">
-						<ion-input value="" class="w-full font-medium" placeholder="New Email">
-						</ion-input>
-					</div>
-				</div>
-				<div class="pl-1 w-full md:w-1/2">
-					<div class="py-2 px-2 w-full pl-6 bg-light_gray rounded-xl flex flex-row">
-						<ion-input value="" class="w-full font-medium" placeholder="Stranerd Password">
-						</ion-input>
-					</div>
-
-				</div>
-			</div>
-		</div>
 
 		<div class="flex flex-row gap-3 mt-7  text-white">
 			<div class="w-1/2 flex flex-row justify-center items-center">
 				<button class="cancleBtn w-full">
-					Cancle
+					Cancel
 					<ion-ripple-effect class="rounded-lg  ion-activatable"></ion-ripple-effect>
 				</button>
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<button class=" actionBtn  ion-activatable w-full">
-					Save
-					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-				</button>
+				<ion-button class=" actionBtn  ion-activatable w-full " @click="updateProfile">
+					Save <ion-spinner name="lines-small" v-if="loading"></ion-spinner>
+				</ion-button>
 			</div>
 		</div>
 
@@ -143,17 +122,56 @@
 
 <script lang="ts">
 
-import { IonIcon, IonInput, IonTextarea, IonSelect, IonSelectOption, IonRippleEffect } from '@ionic/vue'
+import { IonIcon, IonInput, IonTextarea, IonSelect, IonSelectOption, IonRippleEffect, IonSpinner, IonButton } from '@ionic/vue'
 import { image } from 'ionicons/icons'
+import { ref } from 'vue'
+import { useUpdateProfile } from '@/application/composable/users/account'
+import { useAuth } from '@/application/composable/auth/auth'
+import { useFileInputs, usePassword, useSubjectAsTags } from '@/application/composable/core/forms'
+import { selectedTab } from '@/application/composable/profile'
+import { useRouter } from 'vue-router'
+// import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
+// import Subject from '@app/components/questions/subjects/Subject.vue'
 
 
 export default  {
 	name: 'profileSettings',
-	components: {  IonIcon, IonInput, IonTextarea, IonSelect, IonSelectOption, IonRippleEffect },
-	setup() {
+	components: {  IonIcon, IonInput, IonTextarea, IonSelect, IonSelectOption, IonRippleEffect, IonSpinner, IonButton },
+	props: {
+		userId: {
+			type: String ,
+			required: true
+		}
+	},
+	async setup  (props: any) {
+		const router = useRouter()
+		const { hasPassword, id } = useAuth()
+		const { show, toggle } = usePassword()
+		if(props.userId !== id.value){
+			console.log(id.value);
+			 await router.push(`/profile/${id.value}#dashboard`)
+				 selectedTab.value = '#dashboard'
+		}
+	
+	
+		const { factory, error, loading, updateProfile } = useUpdateProfile()
+		const imageLink = ref((factory.value.avatar as any)?.link ?? '')
+		const { catchFiles } = useFileInputs((file) => {
+			imageLink.value = window.URL.createObjectURL(file)
+			factory.value.avatar = file
+		})
+		const removeImage = () => {
+			imageLink.value = ''
+			factory.value.avatar = undefined
+		}
 
+		const { sTag, removeTag } = useSubjectAsTags(
+			(sTag: string) => factory.value.addWeakerSubjects(sTag),
+			(sTag: string) => factory.value.removeWeakerSubjects(sTag)
+		)
 		return {
-			image
+			hasPassword, show, toggle, catchFiles, imageLink, removeImage, sTag, removeTag,
+			factory, error, loading, updateProfile, image
 		}
 	}
 }
@@ -161,6 +179,13 @@ export default  {
 <style scoped>
 ion-toolbar {
 	--background: #F7F7FC;
+}
+	ion-button{
+    --background: #546DD3;
+	--box-shadow:none;
+	height: 2.75rem;
+
+
 }
 
 ion-input {

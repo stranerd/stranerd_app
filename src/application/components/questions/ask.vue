@@ -7,7 +7,7 @@
 			</h3>
 
 			<div class="mt-3 border border-faded_gray rounded-lg py-5 px-3">
-				<ion-textarea rows="9" 
+				<ion-textarea rows="9"  v-model="factory.body"
 					class="bg-white border-0 focus:outline-none  w-full"  
 					placeholder="Write your question here and make sure it is explained in full detail."></ion-textarea>
 			</div>
@@ -19,33 +19,42 @@
 					name="images"
 					class="cursor-pointer w-full h-full absolute"
 					style="opacity:0; overflow:hidden; position:absolute;"
+					@change="catchAttachments"
+					multiple
 					accept="image/x-png,image/jpeg,image/jpg"/>
 				<p class="mt-3">
 					Add images to help with your question <b>(Optional)</b>
 				</p>
+				<div class="py-2 flex flex-row flex-wrap gap-x-2" v-if="factory.attachments.length > 0">
+					<span  v-for="(attachment, index) in factory.attachments" :key="index + 'attachment'">
+						<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg flex flex-row items-center">
+							{{ attachment.name }}  <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="factory.removeAttachment(attachment)"></ion-icon>
+						</span>
+					</span>
+				</div>
 			</div>
 
 			<div class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex flex-row">
-				<ion-select value="notifications" class="w-full  font-medium" placeholder="Select the subject" interface="action-sheet">
-					<ion-select-option value="maths" >Mathematics</ion-select-option>
-					<ion-select-option value="physics" >Physics</ion-select-option>
-					<ion-select-option value="bio" >Biology</ion-select-option>
-					<ion-select-option value="geo"  >Geography</ion-select-option>
-					<ion-select-option value="business" >Business</ion-select-option>
-					<ion-select-option value="civil" >Civil Right</ion-select-option>
+				<ion-select v-model="factory.subjectId" class="w-full  font-medium" placeholder="Select the subject" interface="action-sheet">
+					<ion-select-option :value="subject.id" v-for="(subject, index) in subjects" :key="index + 'subject'">{{ subject.name }}</ion-select-option>
 				</ion-select>
 			</div>
 
-			<div class="py-2 px-2 pl-6 mt-3 bg-light_gray rounded-lg flex flex-row">
-				<ion-input value="" class="w-full font-medium" placeholder="Add related tags">
+			<div class="py-2 px-2 pl-6 mt-3 bg-light_gray rounded-lg flex flex-col">
+				<ion-input class="w-full font-medium" placeholder="Add related tags" v-model="tag">
 				</ion-input>
+				<div class="py-2 flex flex-row flex-wrap gap-x-2" v-if="factory.tags.length > 0">
+					<span  v-for="(tag, index) in factory.tags" :key="index + 'tag'">
+						<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg flex flex-row items-center" v-if="tag">
+							{{ tag }}  <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag"></ion-icon>
+						</span>
+					</span>
+				</div>
 			</div>
 
 			<div class="py-1  px-2 mt-3 bg-light_gray rounded-lg flex flex-row">
-				<ion-select value="notifications" class="w-full  font-medium" placeholder="Set a reward for Best Answers" interface="action-sheet">
-					<ion-select-option value="maths" >20 Bronze Coins</ion-select-option>
-					<ion-select-option value="physics" >40 Bronze Coins</ion-select-option>
-					<ion-select-option value="bio" >10 Gold Coins</ion-select-option>
+				<ion-select v-model="factory.coins" class="w-full  font-medium" placeholder="Set a reward for Best Answers" interface="action-sheet">
+					<ion-select-option :value="coin" v-for="(coin, index) in coins" :key="index + 'coin'">{{ coin }} Bronze Coins</ion-select-option>
 				</ion-select>
 			</div>
 
@@ -57,7 +66,7 @@
 					</button>
 				</div>
 				<div class="w-1/2 flex flex-row justify-center items-center">
-					<button class=" px-6 relative ion-activatable font-bold py-3 rounded-lg bg-primary">
+					<button class=" px-6 relative ion-activatable font-bold py-3 rounded-lg bg-primary" @click="createQuestion">
 						Post question
 						<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 					</button>
@@ -75,12 +84,31 @@
 import { defineComponent } from 'vue'
 
 import { IonSelect, IonSelectOption, IonTextarea, IonInput, IonRippleEffect, IonIcon } from '@ionic/vue'
-import { image} from 'ionicons/icons'
+import { image, close } from 'ionicons/icons'
+import { useSubjectList } from '@/application/composable/questions/subjects'
+import { useCreateQuestion } from '@/application/composable/questions/questions'
+import { useMultipleFileInputs, useTags } from '@/application/composable/core/forms'
 
 export default defineComponent({
 	setup() {
+
+		const { subjects } = useSubjectList()
+
+		const { error, loading, factory, coins, createQuestion  } = useCreateQuestion()
+
+		const { tag, removeTag } = useTags(
+			(tag: string) => factory.value.addTag(tag),
+			(tag: string) => factory.value.removeTag(tag)
+		)
+
+		const { catchMultipleFiles: catchAttachments } = useMultipleFileInputs(
+			(files: File[]) => files.map(factory.value.addAttachment)
+		)
+
 		return {
-			image
+			image,
+			subjects,
+			error, loading, factory, coins, tag, removeTag, createQuestion , close, catchAttachments
 		}
 	},
 	components: { IonTextarea, IonIcon, IonSelect, IonSelectOption, IonInput, IonRippleEffect }

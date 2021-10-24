@@ -6,7 +6,7 @@
 				<div class="flex items-center">
 					<Coins :size="24" class="md:hidden"/>
 					<Coins :size="48" class="hidden md:block"/>
-					<span class="font-bold text-dark_gray text-2xl md:text-3xl ml-3">10,000</span>
+					<span class="font-bold text-dark_gray text-2xl md:text-3xl ml-3" v-if="user">{{ formatNumber(user.account.coins.bronze, 5) }}</span>
 				</div>
 			</div>
 
@@ -15,7 +15,7 @@
 				<div class="flex items-center">
 					<Coins :size="24" :gold="true" class="md:hidden"/>
 					<Coins :size="48" :gold="true" class="hidden md:block"/>
-					<span class="font-bold text-dark_gray text-2xl md:text-3xl ml-3">2,500</span>
+					<span class="font-bold text-dark_gray text-2xl md:text-3xl ml-3" v-if="user">{{ formatNumber(user.account.coins.gold, 5) }}</span>
 				</div>
 			</div>
 		</div>
@@ -36,14 +36,22 @@
 </template>
 
 <script lang="ts">
-
+import { defineComponent, PropType } from 'vue'
 import { IonRippleEffect } from '@ionic/vue'
 import Coins from '@/application/components/core/Coins.vue'
 import { componentName, showModal } from '@/application/composable/core/Modal'
-export default {
+import { UserEntity } from '@/modules/users'
+import { formatNumber } from '@/utils/commons'
+export default defineComponent({
 	name:'Balance Card',
 	components:{IonRippleEffect, Coins, },
-	setup(props: any) {
+	props: {
+		user: {
+			required: true,
+			type: Object as PropType<UserEntity>
+		}
+	},
+	setup () {
 		const buyCoins = () => {
 			showModal.value = true
 			componentName.value = 'buyCoins'
@@ -53,13 +61,10 @@ export default {
 			showModal.value = true
 			componentName.value = 'withdrawal'
 		}
-
-		return {
-			buyCoins,
-			makeWithdrawal
-		}
+		return { formatNumber, 	buyCoins, makeWithdrawal }
 	}
-}
+
+})
 </script>
 
 <style scoped lang="scss">

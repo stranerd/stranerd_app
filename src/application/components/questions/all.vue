@@ -30,26 +30,13 @@
 			</div>
 
 			<div class="mt-5 md:mt-6  col-span-6 flex flex-row flex-wrap ">
-				<div class=" w-full md:px-2 mb-3">
-					<question :isFeatured="true" :colorClass="'bg-tinted_pink'"></question>
-				</div>
-			
-
-				<div class=" md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0">
-					<question></question>
+				
+				<div v-for="(question,index) in questions"
+					:key="index"
+					:class="0 === index ? 'w-full md:px-2 mb-3' :  'md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0'">
+					<question :colorClass="0 === index ? 'bg-butter_yellow h-[230px] md:h-[220px]' : 'bg-light_gray h-[230px] md:h-[220px]'" :isFeatured="0 === index ? true : false" :question="question"/>
 				</div>
 
-				<div class=" md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0">
-					<question></question>
-				</div>
-
-				<div class=" md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0">
-					<question></question>
-				</div>
-
-				<div class=" md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0">
-					<question></question>
-				</div>
 			</div>
 		</div>
 				
@@ -66,22 +53,18 @@ import { ellipse, ellipseOutline } from 'ionicons/icons'
 
 // Import Swiper styles
 import 'swiper/swiper-bundle.min.css'
+import { useQuestionList } from '@/application/composable/questions/questions'
 
 const Question = defineAsyncComponent(() => import('@/application/components/questions/question.vue'))
 
 export default defineComponent({
 	setup() {
 
-		const router = useRouter()
-
-		const showSearch = ref(false)
-
-		const showAnswers = () => {
-			router.push({ path: '/question/answers' })
-		}
+		const { questions } = useQuestionList()
 		return {
 			ellipseOutline,
-			ellipse
+			ellipse,
+			questions
 		}
 	},
 	components: { IonSelect, IonSelectOption, IonIcon, Question }

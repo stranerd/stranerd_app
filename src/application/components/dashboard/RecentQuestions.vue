@@ -12,39 +12,43 @@
 		</div>
 	</div>
 
-	<div class="flex md:gap-6 gap-3 mt-2 lg:hidden">
-		<swiper
-			:direction="'horizontal'" :slidesPerView="3" :spaceBetween="16" :freeMode="true" class="overflow-x-auto"
-		>
-			<swiper-slide :key="0"
-				class="flex md:!w-[300px] !w-[242px]">
-				<question :fromHome="true" :colorClass="'bg-tinted_pink'"/>
-			</swiper-slide>
-			<swiper-slide
-				v-for="(card,index) in 10"
-				:key="index + 1"
-				class="flex md:!w-[300px] !w-[242px]">
-				<question :fromHome="true"/>
-			</swiper-slide>
+	<template v-if="questions.length == 0">
+		<div class="py-3">
+			<empty-state :info="'You have no recent questions! Start asking questions to help with homework and studying.'" 
+				:btnText="'Ask a question'"
+				:route="'/dashboard/question'"
+			></empty-state>
+		</div>
+	</template>
+	<template v-else>
+		<div class="flex md:gap-6 gap-3 mt-2 lg:hidden">
+			<swiper
+				:direction="'horizontal'"  :spaceBetween="16" :freeMode="true" class="overflow-x-auto"
+			>
+				<swiper-slide
+					v-for="(question,index) in questions"
+					:key="index + 1"
+					class="flex md:!w-[300px] !w-[265px]">
+					<question :colorClass="0 === index ? 'bg-butter_yellow h-[150px]' : 'bg-light_gray h-[150px]'"  :fromHome="true" :question="question"/>
+				</swiper-slide>
 				
-		</swiper>
-	</div>
+			</swiper>
+		</div>
 
-	<div class="lg:flex md:gap-6 gap-3 mt-2 hidden">
-		<swiper
-			:direction="'horizontal'" :slidesPerView="3" :spaceBetween="15"
-		>
-			<swiper-slide :key="0">
-				<question :fromHome="true" :colorClass="'bg-tinted_pink'"/>
-			</swiper-slide>
-			<swiper-slide
-				v-for="(card,index) in 10"
-				:key="index + 1">
-				<question :fromHome="true"/>
-			</swiper-slide>
+		<div class="lg:flex md:gap-6 gap-3 mt-2 hidden">
+			<swiper
+				:direction="'horizontal'" :slidesPerView="3" :spaceBetween="15"
+			>
+				<swiper-slide
+					v-for="(question,index) in questions"
+					:key="index">
+					<question :colorClass="0 === index ? 'bg-butter_yellow h-[155px]' : 'bg-light_gray h-[155px]'" :fromHome="true" :question="question"/>
+				</swiper-slide>
 				
-		</swiper>
-	</div>
+			</swiper>
+		</div>
+	</template>
+	
 </template>
 
 
@@ -55,13 +59,17 @@ import SliderController from '@/application/components/core/nav/sliderController
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
 import Question from '../questions/question.vue'
+import { useQuestionList } from '@/application/composable/questions/questions'
+import EmptyState from '../core/emptyState.vue'
 
 
 export default  {
 	name: 'Home',
-	components: {  IonIcon, SliderController, Swiper, SwiperSlide, Question },
+	components: {  IonIcon, SliderController, Swiper, SwiperSlide, Question, EmptyState },
 	setup(){
-		return{	chevronForwardOutline, chevronBackOutline, ellipse}
+
+		const { questions } = useQuestionList()
+		return{	chevronForwardOutline, chevronBackOutline, ellipse, questions}
 	}
 }
 </script>

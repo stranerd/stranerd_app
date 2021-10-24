@@ -22,7 +22,7 @@
 				</div>
 			</div>
 			<div class="w-1/2 pl-2">
-				<div class="flex fl ex-col rounded-lg bg-light_gray py-5 px-4 gap-3 justify-center items-center">
+				<div class="flex flex-col rounded-lg bg-light_gray py-5 px-4 gap-3 justify-center items-center">
 					<h4 class=" text-icon_inactive font-bold">Answers</h4>
 					<h4 class="text-base md:text-lg text-dark_gray font-bold">{{ formatNumber(user.meta.answers) }}</h4>
 					<div class="flex flex-row items-center">
@@ -54,15 +54,24 @@ import { IonIcon } from '@ionic/vue'
 import { defineAsyncComponent } from 'vue'
 const progressBar = defineAsyncComponent(() => import('@/application/components/profile/progressRing.vue'))
 import { star } from 'ionicons/icons'
-import { useAuth } from '@/application/composable/auth/auth'
+// import { useAuth } from '@/application/composable/auth/auth'
+import { useUser } from '@/application/composable/users/user'
 import { formatNumber, pluralize } from '@/utils/commons'
 import { formatTime } from '@/utils/dates'
 
 export default  {
 	name: 'profileDashboard',
 	components: { IonIcon, progressBar },
-	setup() {
-		const { id, user } = useAuth()
+	props:{
+		userId:{
+			required:true,
+			type:String,
+			default:''
+		}
+	},
+	setup(props: any) {
+	//   const { id, user: authUser } = useAuth()
+	  const { error, loading, user } = useUser(props.userId)
 		return {
 			user,
 			formatNumber,

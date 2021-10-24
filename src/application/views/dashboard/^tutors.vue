@@ -55,6 +55,7 @@ import FindTutors from '@/application/components/tutors/FindTutors.vue'
 
 export default  {
 	name: 'tutors',
+	layout: 'Dashboard',
 	components: { IonPage, IonContent, SideProfileNav , ExploreTutors, Swiper, SwiperSlide, FindTutors, },
 
 	setup() {

@@ -20,6 +20,7 @@ const SideProfileNav = defineAsyncComponent(() => import('@/application/componen
 
 export default  {
 	name: 'chat',
+	layout: 'Dashboard',
 	components: { IonPage, IonContent, SideProfileNav }
 }
 </script>
