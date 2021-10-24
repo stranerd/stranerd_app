@@ -1,4 +1,4 @@
-import { Conditions, Listeners, QueryParams } from '@modules/core'
+import { Conditions, Listeners, QueryParams } from '@/modules/core'
 import { IReportRepository } from '../irepositories/ireport'
 import { ReportEntity, ReportType, Type } from '../entities/report'
 

@@ -40,6 +40,7 @@ const SideProfileNav = defineAsyncComponent(() => import('@/application/componen
 
 export default  {
 	name: 'schedule',
+	layout: 'Dashboard',
 	components: { IonPage, IonContent, SideProfileNav, Calendar,  },
 	setup(){
 		return{

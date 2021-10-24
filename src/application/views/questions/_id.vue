@@ -29,7 +29,7 @@
 							</div>
 
 							<template v-if="!showAddAnswer">
-								<div class="mt-3 col-span-12">
+								<div class="mt-1 col-span-12">
 									<button @click="showAddAnswer = true" class="py-3 px-4 justify-center rounded-lg text-white bg-dark_gray w-full font-bold flex flex-row items-center">
 										<span class="mr-2">Add your answer</span>
 										<span class="h-1 w-1 rounded-full bg-white mr-2" ></span>
@@ -40,7 +40,7 @@
 							</template>
 							<template v-else>
 								<div class="col-span-12 mt-8">
-									<create-answer></create-answer>
+									<create-answer :question="question"></create-answer>
 								</div>
 							</template>
 							
@@ -70,7 +70,7 @@ import { defineAsyncComponent, ref } from 'vue'
 import { arrowBackOutline, arrowRedo, shareSocial, chevronDown, thumbsDown, thumbsUp, star, send } from 'ionicons/icons'
 import { useRoute, useRouter } from 'vue-router'
 import { useQuestion } from '@/application/composable/questions/questions'
-import { useAnswerList } from '@/application/composable/questions/answers'
+import { showAddAnswer, useAnswerList } from '@/application/composable/questions/answers'
 const SideProfileNav = defineAsyncComponent(() => import('@/application/components/layout/sidebars/SideProfileNav.vue'))
 const Question = defineAsyncComponent(() => import('@/application/components/questions/question.vue'))
 const Answer = defineAsyncComponent(() => import('@/application/components/questions/answers/each.vue'))
@@ -81,6 +81,7 @@ const PhotoList = defineAsyncComponent(() => import('@/application/components/co
 
 export default  {
 	name: 'answers',
+	layout: 'Dashboard',
 	components: { IonPage, IonContent, SideProfileNav, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar, Question, Answer, CreateAnswer, TopBar, SideNavBar, PhotoList },
 	setup() {
 		const route = useRoute()
@@ -89,8 +90,6 @@ export default  {
 		const { error, loading, question } = useQuestion(Array.isArray(route.params.id ) ? '' : route.params.id )
 
 		const { answers } = useAnswerList(question.value?.id ? question.value?.id : '')
-
-		const showAddAnswer = ref(false)
 
 		return {
 			arrowBackOutline,

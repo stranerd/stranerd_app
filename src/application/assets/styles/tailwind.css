@@ -71,6 +71,11 @@
 	.actionBtn {
 		@apply px-6 relative  font-bold py-3 rounded-lg bg-primary
 	}
+	.btn {
+		@apply px-4 py-2 flex justify-center items-center font-semibold
+
+}
+
 
 }
  

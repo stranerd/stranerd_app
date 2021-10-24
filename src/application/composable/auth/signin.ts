@@ -70,12 +70,14 @@ export const useEmailSignin = () => {
 }
 
 export const useEmailSignup = () => {
+	
 	const factory = ref(new EmailSignupFactory()) as Ref<EmailSignupFactory>
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const signup = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+	
+		if (!factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
 				const user = await SignupWithEmail.call(factory.value, {

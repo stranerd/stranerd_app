@@ -1,4 +1,4 @@
-import { BaseFactory, Media } from '@modules/core'
+import { BaseFactory, Media } from '@/modules/core'
 import { isFile, isLongerThanX, isRequiredIf, isString } from '@stranerd/validate'
 import { ChatToModel } from '../../data/models/chat'
 import { ChatEntity } from '../entities/chat'

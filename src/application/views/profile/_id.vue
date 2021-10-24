@@ -3,7 +3,7 @@
 		<ion-content :fullscreen="true">
 			<div class="layout-page-nosidebars normalText ">
 				<div class="w-full grid grid-cols-12" >
-					<top-session></top-session>
+					<top-session :userId="id"></top-session>
 
 					<div class="col-span-12 grid grid-cols-12 md:col-start-2 md:col-end-12 lg:col-start-4 lg:col-end-10">
 						<template v-if="selectedTab == 'dashboard'">
@@ -48,7 +48,7 @@ const Bio = defineAsyncComponent(() => import('@/application/components/profile/
 const Settings = defineAsyncComponent(() => import('@/application/components/profile/settings.vue'))
 const Achievements = defineAsyncComponent(() => import('@/application/components/profile/achievements.vue'))
 import { star } from 'ionicons/icons'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { selectedTab } from '@/application/composable/profile'
 
 export default  {
@@ -56,8 +56,10 @@ export default  {
 	components: { IonPage, IonContent, topSession, Dashboard, Questions, Reviews, Answers, Bio, Settings, Achievements},
 	setup() {
 		const router = useRouter()
+		const { id } = useRoute().params
 
 		return {
+			id,
 			router,
 			star,
 			selectedTab

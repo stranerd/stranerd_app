@@ -2,10 +2,7 @@ import { apiBases } from '@/utils/environment'
 import { Media } from '../data/models/base'
 import { HttpClient } from './http'
 
-export const UploaderService = {
-	single: async (path: string, file: File): Promise<Media> => await uploadFile(path, file),
-	multiple: async (path: string, files: File[]): Promise<Media[]> => await uploadFiles(path, files)
-}
+
 
 export const uploadFile = async (path: string, file: File): Promise<Media> => {
 	try {
@@ -35,4 +32,9 @@ export const uploadFiles = async (path: string, files: File[]): Promise<Media[]>
 	} catch {
 		throw new Error('Error uploading files')
 	}
+}
+
+export const UploaderService = {
+	single: async (path: string, file: File): Promise<Media> => await uploadFile(path, file),
+	multiple: async (path: string, files: File[]): Promise<Media[]> => await uploadFiles(path, files)
 }

@@ -1,5 +1,5 @@
-import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, UserBio } from '@modules/users'
+import { BaseEntity } from '@/modules/core'
+import { generateDefaultBio, UserBio } from '@/modules/users'
 
 export type Type = {
 	type: ReportType,

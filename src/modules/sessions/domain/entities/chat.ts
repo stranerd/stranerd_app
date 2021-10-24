@@ -1,4 +1,4 @@
-import { BaseEntity, Media } from '@modules/core'
+import { BaseEntity, Media } from '@/modules/core'
 
 export class ChatEntity extends BaseEntity {
 	readonly id: string

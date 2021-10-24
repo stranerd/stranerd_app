@@ -19,10 +19,19 @@
 					name="images"
 					class="cursor-pointer w-full h-full absolute"
 					style="opacity:0; overflow:hidden; position:absolute;"
+					@change="catchAttachments"
+					multiple
 					accept="image/x-png,image/jpeg,image/jpg"/>
 				<p class="mt-3">
 					Add images to help with your question <b>(Optional)</b>
 				</p>
+				<div class="py-2 flex flex-row flex-wrap gap-x-2" v-if="factory.attachments.length > 0">
+					<span  v-for="(attachment, index) in factory.attachments" :key="index + 'attachment'">
+						<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg flex flex-row items-center">
+							{{ attachment.name }}  <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="factory.removeAttachment(attachment)"></ion-icon>
+						</span>
+					</span>
+				</div>
 			</div>
 
 			<div class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex flex-row">
@@ -78,7 +87,7 @@ import { IonSelect, IonSelectOption, IonTextarea, IonInput, IonRippleEffect, Ion
 import { image, close } from 'ionicons/icons'
 import { useSubjectList } from '@/application/composable/questions/subjects'
 import { useCreateQuestion } from '@/application/composable/questions/questions'
-import { useTags } from '@/application/composable/core/forms'
+import { useMultipleFileInputs, useTags } from '@/application/composable/core/forms'
 
 export default defineComponent({
 	setup() {
@@ -92,11 +101,14 @@ export default defineComponent({
 			(tag: string) => factory.value.removeTag(tag)
 		)
 
+		const { catchMultipleFiles: catchAttachments } = useMultipleFileInputs(
+			(files: File[]) => files.map(factory.value.addAttachment)
+		)
 
 		return {
 			image,
 			subjects,
-			error, loading, factory, coins, tag, removeTag, createQuestion , close
+			error, loading, factory, coins, tag, removeTag, createQuestion , close, catchAttachments
 		}
 	},
 	components: { IonTextarea, IonIcon, IonSelect, IonSelectOption, IonInput, IonRippleEffect }

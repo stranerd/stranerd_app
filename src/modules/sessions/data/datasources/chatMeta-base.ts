@@ -1,4 +1,4 @@
-import { Listeners, QueryParams, QueryResults } from '@modules/core'
+import { Listeners, QueryParams, QueryResults } from '@/modules/core'
 import { ChatMetaFromModel } from '../models/chatMeta'
 
 export interface ChatMetaBaseDataSource {

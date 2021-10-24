@@ -1,4 +1,4 @@
-import { UserBio } from '@modules/users'
+import { UserBio } from '@/modules/users'
 
 export interface CommentFromModel extends CommentToModel {
 	id: string

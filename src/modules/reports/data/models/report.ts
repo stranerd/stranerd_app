@@ -1,4 +1,4 @@
-import { UserBio } from '@modules/users'
+import { UserBio } from '@/modules/users'
 import { ReportType } from '../../domain/entities/report'
 
 export interface ReportFromModel extends ReportToModel {

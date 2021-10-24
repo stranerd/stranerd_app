@@ -31,6 +31,7 @@ const SideProfileNav = defineAsyncComponent(() => import('@/application/componen
 
 export default  {
 	name: 'home',
+	layout: 'Dashboard',
 	components: { IonContent, IonPage,  FeaturedTutors, RecentQuestions, UpcomingEvent, RecentTransaction, SideProfileNav, ChallengesCard },
 
 }

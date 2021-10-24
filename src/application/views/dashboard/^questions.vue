@@ -55,6 +55,7 @@ import { useStore } from '@/application/store'
 
 export default  {
 	name: 'questions',
+	layout: 'Dashboard',
 	components: { IonPage, IonContent, AllQuestions, SideProfileNav, Swiper, SwiperSlide, AskQuestions },
 	setup() {
 

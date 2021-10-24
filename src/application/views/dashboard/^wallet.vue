@@ -31,6 +31,7 @@ const SideProfileNav = defineAsyncComponent(() => import('@/application/componen
 
 export default  {
 	name: 'wallet',
+	layout: 'Dashboard',
 	components: { IonPage, IonContent, SideProfileNav,  BalanceCard, TranscractionHistory,  }
 }
 </script>
