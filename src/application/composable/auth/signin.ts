@@ -47,6 +47,7 @@ export const useGoogleSignin = () => {
 }
 
 export const useEmailSignin = () => {
+	const router = useRouter()
 	const factory = ref(new EmailSigninFactory()) as Ref<EmailSigninFactory>
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
@@ -59,7 +60,9 @@ export const useEmailSignin = () => {
 					referrer: getReferrerId()
 				})
 				await createStorage(user)
-				if (isClient()) window.localStorage.removeItem('referrer')
+				await  router.push(`/dashboard/home`)
+				window.localStorage.removeItem('referrer')
+
 			} catch (error) {
 				await setError(error)
 			}

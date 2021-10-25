@@ -10,7 +10,7 @@
 				<create-schedule v-if="componentName ==  'createSchedule'" ></create-schedule>
 				<withdrawal v-if="componentName == 'withdrawal'"></withdrawal>
 			</div>
-		</div>
+		</div> 
 	</transition>
 </template>
 
