@@ -1,7 +1,7 @@
 <template>
 	<!-- Small screens -->
 	<div class="md:hidden bg-[#F7F7FC] py-[8px] px-4 fixed flex w-full top-0 border-0 flex-row items-center z-50" v-if="!props.isNotDashboard && !store.state.showPage">
-		<router-link class="flex flex-row items-center w-[15%]" to="/profile/dashboard">
+		<router-link class="flex flex-row items-center w-[15%]" :to="profileLink">
 			<avatar :photo-url="user?.avatar?.link" :size="'30'"/>
 		</router-link>
 
@@ -30,7 +30,7 @@
 	<!-- medium screens -->
 	<div class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50" v-if="!props.isNotDashboard && !store.state.showPage ">
 		<div class="flex flex-row items-center gap-9 w-1/4">
-			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/profile/dashboard">
+			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" :to="profileLink">
 				<avatar :photo-url="user?.avatar?.link" :custom-class="'h-6'"/>
 			</router-link>
 
@@ -98,7 +98,7 @@
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/dashboard/questions">
 				<img src="/assets/images/chatbubble.svg" class="inline h-5"/>
 			</router-link>
-			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/profile/dashboard">
+			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" :to="profileLink">
 				<avatar :photo-url="user?.avatar?.link" :size="'26'"/>
 			</router-link>
 		</div>
@@ -140,9 +140,11 @@ export default defineComponent({
 	},
 	setup(props) {
 		const { user } = useAuth()	
+		const profileLink = `/profile/${user.value?.id}#dashboard`
 		
 		const store = useStore()
 		return {
+			profileLink,
 			add,
 			props,
 			store,

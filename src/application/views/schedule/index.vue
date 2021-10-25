@@ -1,7 +1,6 @@
 <template>
 	<ion-page>
 		<ion-router-outlet></ion-router-outlet>
-		<modal></modal>
 	</ion-page>
 </template>
 

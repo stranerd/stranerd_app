@@ -24,7 +24,7 @@
 									:question="question"></question>
 							</div>
 
-							<div class="col-span-12 py-3">
+							<div class="col-span-12 py-3" v-if="question?.attachments">
 								<photo-list  :photos="question?.attachments"></photo-list>
 							</div>
 
@@ -79,10 +79,24 @@ const TopBar = defineAsyncComponent(() => import('@/application/components/layou
 const SideNavBar = defineAsyncComponent(() => import('@/application/components/layout/sidebars/DefaultSidebar.vue'))
 const PhotoList = defineAsyncComponent(() => import('@/application/components/core/photoList.vue'))
 
+
 export default  {
 	name: 'answers',
-	layout: 'Dashboard',
-	components: { IonPage, IonContent, SideProfileNav, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar, Question, Answer, CreateAnswer, TopBar, SideNavBar, PhotoList },
+	layout: 'SubPages',
+	components: { IonPage,
+	 IonContent,
+	  SideProfileNav,
+	   IonTitle, 
+	   IonIcon, 
+	   IonButtons, 
+	   IonHeader, 
+	   IonToolbar, 
+	   Question, 
+	   Answer, 
+	   CreateAnswer, 
+	   TopBar, 
+	   SideNavBar, 
+	   PhotoList },
 	setup() {
 		const route = useRoute()
 		const router = useRouter()

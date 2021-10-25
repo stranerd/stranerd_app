@@ -16,30 +16,32 @@
 	
 		<div class=" md:gap-6 gap-3 mt-2 lg:hidden">
 			<swiper
-				:direction="'horizontal'" :spaceBetween="16" :freeMode="true" class="overflow-x-auto"
+				:direction="'horizontal'"  :freeMode="true" class="overflow-x-auto"
 			>
 				<swiper-slide
 					v-for="(tutor,index) in tutors"
 					:key="index"
-					class="flex md:!min-w-[180px] !w-[150px]">
+					class="flex md:!min-w-[180px] !w-[150px] mr-3">
 					<tutor-card :style="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'" :tutor="tutor"/>
 				</swiper-slide>
 				
 			</swiper>
 		</div>
 
-		<swiper
-			:direction="'horizontal'" :slidesPerView="4" :spaceBetween="15" class="mt-3 hidden lg:block"
-		>
-
-			<swiper-slide
-				v-for="(tutor,index) in tutors"
-				:key="index">
-				<tutor-card :style="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'" :tutor="tutor"/>
-			</swiper-slide>
+		<div class="lg:flex  w-full  md:gap-6 gap-3 mt-2 hidden">
+			<swiper
+				class="flex flex-row w-full items-center"
+				:direction="'horizontal'" :slidesPerView="4" 
+			>
+				<swiper-slide
+					class="!w-1/4 !pr-3"
+					v-for="(tutor,index) in tutors"
+					:key="index">
+					<tutor-card :style="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'" :tutor="tutor"/>
+				</swiper-slide>
 				
-		</swiper>
-
+			</swiper>
+		</div>
 
 	</div>
 </template>

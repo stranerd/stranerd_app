@@ -34,8 +34,8 @@
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.password }}</span>
 							</div>
 							<div class="mb-4">
-								<ion-input placeholder="Confirm Password" position="floating" type="password" :size="24" v-model="factory.cpassword"></ion-input>
-								<span class="normalText text-red-500 font-semibold">{{ factory.errors.cpassword }}</span>
+								<ion-input placeholder="Confirm Password" position="floating" type="password" :size="24" v-model="factory.cPassword"></ion-input>
+								<span class="normalText text-red-500 font-semibold">{{ factory.errors.cPassword }}</span>
 							</div>
 
 							<ion-button  class="w-full mb-4" @click="signup()">SIGN UP <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>

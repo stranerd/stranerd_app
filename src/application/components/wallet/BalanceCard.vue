@@ -53,13 +53,15 @@ export default defineComponent({
 	},
 	setup () {
 		const buyCoins = () => {
-			showModal.value = true
 			componentName.value = 'buyCoins'
+			showModal.value = true
+			
 		}
 
 		const makeWithdrawal = () => {
-			showModal.value = true
 			componentName.value = 'withdrawal'
+			showModal.value = true
+			
 		}
 		return { formatNumber, 	buyCoins, makeWithdrawal }
 	}
