@@ -11,6 +11,7 @@ import { onMounted } from 'vue'
 import { IonPage, IonRouterOutlet } from '@ionic/vue'
 import { useStore } from '@/application/store'
 
+
 export default {
 	name: 'questionPage',
 	components: { IonPage, IonRouterOutlet },

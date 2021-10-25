@@ -26,7 +26,7 @@
 			<p class="py-3" v-html="answer?.body" v-if="showExplanation">
 			</p>
 
-			<div class="col-span-12 py-3" v-if="showExplanation">
+			<div class="col-span-12 py-3" v-if="answer?.attachments && showExplanation">
 				<photo-list  :photos="answer?.attachments"></photo-list>
 			</div>
 

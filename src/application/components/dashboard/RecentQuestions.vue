@@ -23,23 +23,25 @@
 	<template v-else>
 		<div class="flex md:gap-6 gap-3 mt-2 lg:hidden">
 			<swiper
-				:direction="'horizontal'"  :spaceBetween="16" :freeMode="true" class="overflow-x-auto"
+				:direction="'horizontal'"   :freeMode="true" class="overflow-x-auto"
 			>
 				<swiper-slide
 					v-for="(question,index) in questions"
 					:key="index + 1"
-					class="flex md:!w-[300px] !w-[265px]">
+					class="flex md:!w-[300px] !w-[265px] mr-3">
 					<question :colorClass="0 === index ? 'bg-butter_yellow h-[150px]' : 'bg-light_gray h-[150px]'"  :fromHome="true" :question="question"/>
 				</swiper-slide>
 				
 			</swiper>
 		</div>
 
-		<div class="lg:flex md:gap-6 gap-3 mt-2 hidden">
+		<div class="lg:flex  w-full  md:gap-6 gap-3 mt-2 hidden">
 			<swiper
-				:direction="'horizontal'" :slidesPerView="3" :spaceBetween="15"
+				class="flex flex-row w-full items-center"
+				:direction="'horizontal'" :slidesPerView="3" 
 			>
 				<swiper-slide
+					class="!w-1/3 !pr-3"
 					v-for="(question,index) in questions"
 					:key="index">
 					<question :colorClass="0 === index ? 'bg-butter_yellow h-[155px]' : 'bg-light_gray h-[155px]'" :fromHome="true" :question="question"/>

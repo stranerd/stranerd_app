@@ -27,18 +27,21 @@
 		</swiper>
 	</div>
 
-	<div class="lg:flex md:gap-6 gap-3 mt-2 hidden">
+	<div class="lg:flex  w-full  md:gap-6 gap-3 mt-2 hidden">
 		<swiper
-			:direction="'horizontal'" :slidesPerView="3" :spaceBetween="15"
+			class="flex flex-row w-full items-center"
+			:direction="'horizontal'" :slidesPerView="3" 
 		>
 			<swiper-slide
+				class="!w-1/3 !pr-3"
 				v-for="(card,index) in 10"
-				:key="index + 1">
+				:key="index">
 				<TransactionCard :colorClass="0 === index ? 'bg-light_orange' : 'bg-light_gray'"/>
 			</swiper-slide>
 				
 		</swiper>
 	</div>
+	
 </template>
 
 
