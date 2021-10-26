@@ -8,7 +8,7 @@
 		<div class="flex flex-row items-center px-3 w-[70%] justify-center" >
 			<div class="py-1 px-3 w-full bg-[#8B9EB1] flex rounded-xl flex-row items-center">
 				<div class="w-1/3 flex flex-row items-center">
-					<img src="/assets/images/bronze.svg" class="inline h-6 mr-2"/>
+                    <Coins :gold="false" :size="24" class="mr-2"/>
 					<span class="font-semibold text-xs text-white ">{{ user?.account.coins.bronze }}</span>
 				</div>
 				<div class="w-1/3 flex flex-row items-center justify-center">
@@ -16,7 +16,7 @@
 				</div>
 				<div class="w-1/3 flex flex-row-reverse items-center">
 					<span class="font-semibold text-xs text-white ">{{ user?.account.coins.gold }}</span>
-					<img src="/assets/images/gold.svg" class="inline h-6 mr-2"/>
+					 <Coins :gold="true" :size="24" class="mr-2"/>
 				</div>
 			</div>
 		</div>
@@ -127,6 +127,7 @@ import { IonIcon } from '@ionic/vue'
 import { add, home } from 'ionicons/icons'
 import { useStore } from '@/application/store'
 import { useAuth } from '@/application/composable/auth/auth'
+import Coins from '../../core/Coins.vue'
 const Avatar = defineAsyncComponent(() => import('@/application/components/core/AvatarUser.vue'))
 
 export default defineComponent({
@@ -156,6 +157,6 @@ export default defineComponent({
 			user
 		}
 	},
-	components: { IonIcon, Avatar }
+	components: { IonIcon, Avatar, Coins }
 })
 </script>
