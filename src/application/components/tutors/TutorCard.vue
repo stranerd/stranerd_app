@@ -2,11 +2,11 @@
 	<div
 		class=" w-full  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-1 cardPadding justify-center items-center"
 	>
-		<avatar :photo-url="tutor?.avatar?.link" :size="'32'" :has-dot="true"/>
+		<avatar :photo-url="tutor?.avatar?.link" :size="'46'" :has-dot="true"/>
 
 		<div class="flex gap-2">
 			<span class="font-bold normalText text-main_dark">
-				Timmy Martin
+				{{ tutor.bio.fullName }}
 			</span>
 			<img src="../../assets/images/icons/verified.svg" alt="ask a question" class="w-[14px] md:w-4">
 		</div>

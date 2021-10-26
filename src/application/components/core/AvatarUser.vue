@@ -7,7 +7,7 @@
 		<template v-else>
 			<img src="/assets/images/person-circle.svg" :class="`inline`" :style="`height:${size}px`"/>
 			<i  v-if="hasDot"
-				class="absolute rounded-full bottom-0 right-0 z-10 text-xl bg-green md:w-3 md:h-3 w-[10px] h-[10px]"
+				class="absolute rounded-full bottom-0 right-0 z-10 text-xl bg-green md:w-3 md:h-3 w-[13px] h-[13px]"
 			/>	
 		</template>
 		
