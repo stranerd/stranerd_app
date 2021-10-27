@@ -1,9 +1,9 @@
 <template>
 	<div class=" flex flex-col text-sm text-dark_gray gap-3 min-w-[13.25rem]">
 		<div class="bg-light_blue py-4 px-4 rounded-xl flex flex-col">
-			<h2 class="mb-2 normalText font-bold">Reach the rank of Comrade</h2>
+			<h2 class="mb-2 normalText font-bold">{{ challenge?.title }}</h2>
 			<div class="flex flex-row rounded-xl py-[4px] relative bg-faded_gray">
-				<div class="absolute left-0 top-0 h-full w-9/12 rounded-xl bg-primary">
+				<div class="absolute left-0 top-0 h-full rounded-xl bg-primary" :style="`width:${rankPercentage(challenge?.target, challenge?.present )};`">
 				</div>
 			</div>
 		</div> 
@@ -11,8 +11,31 @@
 </template>
 
 <script lang="ts">
-export default {
+import {  ChallengeData } from '@/modules/users/data/models/user'
 
+export default {
+	props: {
+		challenge: {
+			type: Object as () => ChallengeData
+		}
+	},
+	setup(props: any) {
+		const rankPercentage = (next: number | undefined, present: number | undefined) => {
+			let percentage = 0
+			 if(next && present != undefined) {
+				 if(present == 0 ) {
+					  percentage = (2 / next) * 100 
+				 } else {
+					  percentage = (present / next) * 100 
+				 }
+			 }
+			return percentage.toString() + '%'
+		}
+
+		return {
+			rankPercentage
+		}
+	}
 }
 </script>
 

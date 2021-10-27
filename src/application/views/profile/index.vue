@@ -25,6 +25,7 @@ export default {
 	components: { IonPage, IonRouterOutlet, TopBar, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar  },
 	setup() {
 		const router = useRouter()
+		console.log(router)
 		return {
 			router,
 			arrowBackOutline

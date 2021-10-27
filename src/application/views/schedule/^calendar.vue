@@ -93,13 +93,14 @@ import { IonPage, IonContent, IonTitle, IonIcon, IonButtons, IonHeader, IonToolb
 import { defineAsyncComponent, ref } from 'vue'
 import { arrowBackOutline, calendar, add, chevronBack, chevronForward, chevronDown } from 'ionicons/icons'
 import { useRouter } from 'vue-router'
-import { componentName, showModal } from '@/modules/core/Modal'
+import { componentName, showModal } from '@/application/composable/core/Modal'
 const SideProfileNav = defineAsyncComponent(() => import('@/application/components/layout/sidebars/SideProfileNav.vue'))
 const Opening = defineAsyncComponent(() => import('@/application/components/schedule/Openings.vue'))
 const DateCard = defineAsyncComponent(() => import('@/application/components/schedule/DateCard.vue'))
 
 export default  {
 	name: 'calendar',
+	layout: 'SubPages',
 	components: { IonPage, IonContent, SideProfileNav, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar, Opening, DateCard },
 	setup() {
 		const router = useRouter()

@@ -19,7 +19,7 @@
     }
 
 	.layout-page-notab{
-        @apply w-full lg:w-[84%] lg:ml-[16%] lg:px-20 relative flex  mt-[14px] flex-row lg:gap-16 lg:mt-[93px]
+        @apply w-full lg:w-[84%] lg:ml-[16%] lg:px-12 relative flex  mt-[14px] flex-row lg:gap-16 lg:mt-[93px]
     }
 
 	.layout-page-nosidebars {
@@ -71,6 +71,11 @@
 	.actionBtn {
 		@apply px-6 relative  font-bold py-3 rounded-lg bg-primary
 	}
+	.btn {
+		@apply px-4 py-2 flex justify-center items-center font-semibold
+
+}
+
 
 }
  

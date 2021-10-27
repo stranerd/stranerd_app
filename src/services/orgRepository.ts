@@ -7,13 +7,10 @@ const $API_GATEWAY_AUTH = `${process.env.VUE_APP_API_AUTH}`
 const $API_GATEWAY_STORAGE = `${process.env.VUE_APP_API_STORAGE}`
 
 
-
 export const $simpleAuthHeader = {
 	'Access-Token': localStorage.getItem('accessToken'),
 	'Refresh-Token': localStorage.getItem('refreshToken'),
 }
-
-
 
 
 export const AxiosStranerd = axios.create({
@@ -30,21 +27,34 @@ export const AxiosStorage = axios.create({
 })
 
 
+// auth config
 AxiosAuth.interceptors.request.use(
 	(request)=>{
-		console.log(request)
 		request.headers['Access-Token'] = localStorage.getItem('accessToken')
 		request.headers['Refresh-Token'] = localStorage.getItem('refreshToken')
 		return request
 	}
 )
+
 AxiosAuth.interceptors.response.use(
 	(response) =>{
-		console.log(axios.interceptors.response)
+
+		console.log(response)
 		return response
 			
 	},
 	(err) => {
 		console.log(axios.interceptors.request)	
-		console.log(err)},
+		console.log(err)
+	},
+)
+
+// stranerd config
+
+AxiosStranerd.interceptors.request.use(
+	(request)=>{
+		request.headers['Access-Token'] = localStorage.getItem('accessToken')
+		request.headers['Refresh-Token'] = localStorage.getItem('refreshToken')
+		return request
+	}
 )

@@ -1,94 +1,127 @@
 <template>
 	<ion-page>
-		<ion-content
-			class="flex flex-col bg-dark h-screen w-screen items-start justify-center py-3 px-5 "
-		>
-			<div class="flex justify-between  py-6 px-5">
-				<i class="las la-arrow-left text-white text-xl"></i>
-				<img src="../../assets/images/icons/logo-xs.svg" alt="ask a question" class="object-fit h-4 ">
+		<ion-content>
+			<div class="w-full mt-1 min-h-full flex ">
+				<div class="gap-3 bg-light_orange w-1/2 lg:flex flex-col  items-center justify-center min-h-full hidden ">
+					<h1 class="text-xl  text-dark_gray font-bold ">Join the community!</h1>
+					<span class="text-dark_gray">Get study help, learn from tutors, learn with <br>
+						your friends and enjoy new study tools.</span>
+					<img src="@/application/assets/images/auth/signin.png" alt="" class="h-[55%]">
+				</div>
+
+				<div class="flex flex-col items-center justify-center lg:w-1/2 w-full px-4 max-w-sm mx-auto">
+					<h1 class="text-xl text-dark_gray font-bold mb-1 lg:hidden ">Join the community!</h1>
+					<span class="lg:text-main_darktext-dark_gray lg:hidden text-icon_inactive mb-8 text-center text-xs">Get study help, learn from tutors, learn with <br>
+						your friends and enjoy new study tools.</span>
+					<h1 class=" lg:text-xl  text-dark_gray font-bold mb-5 text-center">Sign Up </h1>
+					<span class="normalText text-red-500 font-semibold"> {{error}} </span>
+					<div class="h-[65%]">
+						<form >
+							<div class="mb-4">
+								<ion-input placeholder="First Name" position="floating" type="text" :size="24" v-model="factory.first"></ion-input>
+								<span class="normalText text-red-500 font-semibold">{{ factory.errors.first }}</span>
+							</div>
+							<div class="mb-4">
+								<ion-input placeholder="Last Name" position="floating" type="text" :size="24" v-model="factory.last"></ion-input>
+								<span class="normalText text-red-500 font-semibold">{{ factory.errors.last }}</span>
+							</div>
+							<div class="mb-4">
+								<ion-input placeholder="Email Address" type="email" position="floating" :size="24" v-model="factory.email"></ion-input>
+								<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
+							</div>
+							<div class="mb-4">
+								<ion-input placeholder="Password" position="floating" type="password" :size="24" v-model="factory.password"></ion-input>
+								<span class="normalText text-red-500 font-semibold">{{ factory.errors.password }}</span>
+							</div>
+							<div class="mb-4">
+								<ion-input placeholder="Confirm Password" position="floating" type="password" :size="24" v-model="factory.cPassword"></ion-input>
+								<span class="normalText text-red-500 font-semibold">{{ factory.errors.cPassword }}</span>
+							</div>
+
+							<ion-button  class="w-full mb-4" @click="signup()">SIGN UP <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
+						</form>
+
+						<div class="flex justify-between px-5 items-center mt-8">
+							<div class="border-faded_gray border-b h-1 w-4/12"/>
+							<span class="font-nuni text-faded_gray">or use</span>
+							<div class="border-faded_gray border-b h-1 w-4/12"/>
+						</div>
+
+						<AuthProviders/>
+						<span class="text-xs flex flex-wrap justify-center items-center text-icon_inactive mt-8 max-w-full text-center">
+							By signing up, you accept the Stranerd 	<router-link  to="/auth/signup" class="text-primary font-bold normalText">
+								Terms and Conditions 
+							</router-link> & <router-link  to="/auth/signup" class="text-primary font-bold normalText">
+								Privacy Policy.
+							</router-link>
+
+
+						</span>
+
+						<span class="text- w-full flex justify-center items-center text-icon_inactive mt-8">
+							Have an account? 
+
+						
+						
+							<router-link  to="/auth/signin" class="text-primary font-bold normalText">
+								Sign In
+							</router-link>
+							
+						</span>
+					</div>
+				</div>
 			</div>
-
-			<h1 class="text-center text-3xl text-white font-semibold font-nuni mt-12">Create your Account.</h1>
-
-			<form class=" px-5 flex flex-col justify-center mx-auto mt-20">
-
-				<ion-input placeholder="First name" position="floating" v-model="firstName"></ion-input>
-				<ion-input placeholder="Last name" position="floating" v-model="lastName"></ion-input>
-				<ion-input placeholder="Email Address" position="floating" v-model="email"></ion-input>
-				<ion-input placeholder="Password" position="floating"  v-model="password"></ion-input>
-				<!-- <ion-input placeholder="Confirm Password" position="floating"></ion-input> -->
-
-			</form>
-
-			<div class="flex justify-between items-center  px-5 mt-14">
-				<p class="text-xs text-white font-semibold font-nuni">Already have an Account on Stranerd?</p>
-				<span @click="() => router.push('/auth/signin')" class="flex items-center text-yellow-300 font-nuni text-xs font-bold">Sign In <i class="las la-arrow-right text-xl"></i> </span>
-			</div>
-
-			<div class="flex justify-between px-5 items-center mt-14">
-				<div class="border-white border-b h-1 w-5/12"/>
-				<span class="font-nuni text-white">or</span>
-				<div class="border-white border-b h-1 w-5/12"/>
-			</div>
-
-			<p class="text-center text-xs font-nuni text-white font-bold mt-5 ">
-				Sign Up with Google
-			</p>
-
-			<div class="flex justify-center w-full px-5">
-				<ion-button  class="w-full font-bold capitalize text-base flex gap-2 justify-center items-center my-6" @click="signup">
-					<img src="../../assets/images/icons/google.svg" alt="ask a question" class="object-fit w-5 mr-2">
-					Google</ion-button>
-			</div>
-
-		
 		</ion-content>
 	</ion-page>
+	
 </template>
 
-<script>
-// import { IonContent, IonButton, IonPage } from '@ionic/vue'
-import { IonContent, IonPage, IonInput, IonButton } from '@ionic/vue'
-import { defineComponent, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import {signUp} from '@/services/api'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useEmailSignup } from '@/application/composable/auth/signin'
+import { IonContent, IonPage, IonInput,IonButton,  IonSpinner } from '@ionic/vue'
+import AuthProviders from '@/application/components/auth/AuthProviders.vue'
 
 
 
 export default defineComponent({
-	components: { IonContent,IonPage, IonInput, IonButton},
-		  setup() {
-		const email = ref('')
-		const password = ref('')
-		const firstName = ref('')
-		const lastName = ref('')
-			 const signup = ()=>{
-				  signUp({email:email.value, password:password.value, firstName:firstName.value, lastName:lastName.value})
-			  }
-		const router = useRouter()
-		return { router, signup, email, password,firstName,lastName }
-	}
+	components: { IonContent,IonPage,IonInput,IonButton,  AuthProviders, IonSpinner,  },
+	layout:'Auth',
+	  setup() {
+	
+
+		const { factory, loading, error, signup } = useEmailSignup()
+
+	
+		return {   factory, loading, error, signup,  }
+	},
+
+
 
 })
 </script>
 
 <style lang="scss" scoped>
+ion-checkbox{
+	--size:20px;
+}
 ion-input{
-	--background: #EFF0F6 !important;
-	--padding-start: 1.5rem !important;
+	--background: #F7F7FC !important;
+	--padding-start: 1.8rem !important;
 	--padding-end: 1.5rem !important;
 	--padding-top: .69rem !important;
 	--padding-bottom: .69rem !important;
 	--color: $color-dark !important;
 	--placeholder-color: $color-dark !important;
 	border-radius: 10px;
-	margin-bottom: 1.25rem;
 }
 
+
+
 	ion-button{
-    --background: white;
-    --border-radius: 3.125rem;
-    --color: #4D5C6F;
+    --background: #546DD3;
+    --border-radius: .4rem;
+    --color: white;
     --background-hover: white;
 	--padding-top: 1rem;
 	--padding-bottom: 1rem;

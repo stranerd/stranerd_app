@@ -1,9 +1,9 @@
 <template>
-	<router-link :class="`py-4 px-4 rounded-lg ${props.colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer`" to="/questions/answers">
+	<router-link :class="`py-4 px-4 rounded-lg ${props.colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer`" :to="`/questions/${question?.id}`">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
-			<img src="/assets/images/person-circle.svg" class="inline h-7 mr-2"/>
-			<span class="font-bold text-dark_gray">Timmy Nuetron</span>
+			<span class="mr-2"><avatar :photo-url="question?.avatar?.link" :size="'28'"/></span>
+			<span class="font-bold text-dark_gray">{{ question?.userBio.fullName}}</span>
 			<div class="flex flex-row-reverse flex-grow">
 
 				<template v-if="fromHome">
@@ -14,7 +14,7 @@
 						<button class="py-1 px-3 rounded-lg text-white bg-dark_gray font-bold flex flex-row items-center">
 							<span class="mr-2">Answer</span>
 							<span class="h-1 w-1 rounded-full bg-white mr-2" ></span>
-							<span class="mr-1 text-sm">+20</span>
+							<span class="mr-1 text-sm">+{{ question?.coins }}</span>
 							<img src="/assets/images/bronze.svg" class=" h-4"/>
 						</button>
 					</template>
@@ -34,31 +34,27 @@
 		</div>
 		<div class="mt-3 flex flex-row items-center" v-if="!fromHome">
 			<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3" ></span>
-			<span class="font-semibold text-dark_gray">Physics</span>
+			<span class="font-semibold text-dark_gray">{{ subject?.name }}</span>
 		</div>
 
-		<p class="py-2 text-dark_gray leading-normal">
-			From the top of a building with a height of 16 meters, a ball is thrown at angle of 30 degrees to the horizontal plane at a speed of 21 m/s.
-			Calculate the total time the ball is in the air?
+		<p class="py-2 text-dark_gray leading-normal mb-3 lg:mb-5" v-html="question?.trimmedBody" v-if="!fromViewQuestion">
+		</p>
+		<p class="py-2 text-dark_gray leading-normal mb-3 lg:mb-5" v-html="question?.body" v-if="fromViewQuestion">
 		</p>
 
-		<div class="w-full flex flex-col lg:flex-row lg:justify-between">
-			<div class="mt-2 mb-2 flex flex-row items-center gap-4" v-if="!fromHome">
-				<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg">
-					Motion
-				</span>
-				<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg">
-					projectile-motion
-				</span>
-				<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg">
-					projectile
+		<div :class="`w-full flex flex-col lg:flex-row lg:justify-between ${!fromViewQuestion ? 'absolute bottom-3 left-0 px-4' : ''} w-full `">
+			<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap" v-if="!fromHome">
+				<span  v-for="(tag, index) in question?.tags" :key="index">
+					<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg inline-block" v-if="tag">
+						{{ tag }}
+					</span>
 				</span>
 			</div>
 
 			<div  class="mt-2 flex flex-row items-center ">
-				<span class="font-bold text-icon_inactive lg:mr-2" v-if="!fromHome">30m ago</span>
+				<span class="font-bold text-icon_inactive lg:mr-2" v-if="!fromHome">{{ moment(question?.createdAt).fromNow() }}</span>
 				<div :class="`flex ${fromHome ? 'flex-row' : 'flex-row-reverse'}  items-center flex-grow`">
-					<span class="font-bold text-icon_inactive">5 answers</span>
+					<span class="font-bold text-icon_inactive">{{ question?.answers.length }} answers</span>
 					<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 " v-if="!fromHome" ></span>
 				</div>
 			</div>
@@ -67,11 +63,15 @@
 	</router-link>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineAsyncComponent, defineComponent } from 'vue'
 import { IonIcon, IonRippleEffect } from '@ionic/vue'
 import { arrowRedo, flag} from 'ionicons/icons'
 import { useRouter } from 'vue-router'
 import { useStore } from '@/application/store'
+import { QuestionEntity } from '@/modules/questions'
+import { useSubject } from '@/application/composable/questions/subjects'
+const Avatar = defineAsyncComponent(() => import('@/application/components/core/AvatarUser.vue'))
+import moment from 'moment'
 
 export default defineComponent({
 	props: {
@@ -90,17 +90,21 @@ export default defineComponent({
 		fromHome: {
 			type: Boolean,
 			default: false
+		},
+		question: {
+			type: QuestionEntity
 		}
-
 	},
 	components: {
-		IonIcon, IonRippleEffect
+		IonIcon, IonRippleEffect, Avatar
 	},
 	setup(props) {
 
 		const router = useRouter()
 
 		const store = useStore()
+
+		const { subject }  = useSubject(props.question?.subjectId ? props.question?.subjectId : '')
 
 		const showAnswers = () => {
 			
@@ -115,7 +119,9 @@ export default defineComponent({
 			arrowRedo,
 			flag,
 			router,
-			showAnswers
+			showAnswers,
+			subject,
+			moment
 		}
 	},
 })

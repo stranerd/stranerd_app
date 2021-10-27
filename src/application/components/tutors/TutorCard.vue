@@ -2,14 +2,7 @@
 	<div
 		class=" w-full  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-1 cardPadding justify-center items-center"
 	>
-		<div class="relative">
-			<avatar
-				:size="45"
-			/>
-			<i
-				class="absolute rounded-full bottom-0 right-0 z-10 text-xl bg-green md:w-4 md:h-4 w-[14px] h-[14px]"
-			/>
-		</div>
+		<avatar :photo-url="tutor?.avatar?.link" :size="'32'" :has-dot="true"/>
 
 		<div class="flex gap-2">
 			<span class="font-bold normalText text-main_dark">
@@ -29,9 +22,11 @@
 </template>
 
 <script lang="ts">
-import Avatar from '@/application/components/core/Avatar.vue'
 import ShowRatings from '@/application/components/core/ShowRatings.vue'
-import { componentName, showModal } from  '../../../modules/core/Modal'
+import { componentName, showModal } from  '../../composable/core/Modal'
+import { UserEntity } from '@/modules/users'
+import { defineAsyncComponent } from 'vue'
+const Avatar = defineAsyncComponent(() => import('@/application/components/core/AvatarUser.vue'))
 
 export default {
 	name: 'TutorCard',
@@ -45,8 +40,11 @@ export default {
 			required: false,
 			type: Boolean,
 			default:false
+		},
+		tutor: {
+			required: true,
+			type: UserEntity
 		}
-
 	},
 	setup(props: any) {
 
