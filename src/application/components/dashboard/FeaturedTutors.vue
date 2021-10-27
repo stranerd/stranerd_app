@@ -22,7 +22,7 @@
 					v-for="(tutor,index) in tutors"
 					:key="index"
 					class="flex md:!min-w-[180px] !w-[150px] mr-3">
-					<tutor-card :style="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'" :tutor="tutor"/>
+					<tutor-card  :class="0 === index ? 'bg-light_gray flex' : 'bg-light_gray flex'" :tutor="tutor" :showButton="false" />
 				</swiper-slide>
 				
 			</swiper>
@@ -37,7 +37,7 @@
 					class="!w-1/4 !pr-3"
 					v-for="(tutor,index) in tutors"
 					:key="index">
-					<tutor-card :style="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'" :tutor="tutor"/>
+					<tutor-card  :class="0 === index ? 'bg-light_gray flex' : 'bg-light_gray flex'" :tutor="tutor" :showButton="false" />
 				</swiper-slide>
 				
 			</swiper>
@@ -51,7 +51,7 @@
 import {  IonIcon } from '@ionic/vue'
 import { chevronForwardOutline, chevronBackOutline, ellipse } from 'ionicons/icons'
 import SliderController from '@/application/components/core/nav/sliderController.vue'
-import TutorCard from '@/application/components/dashboard/HomeTutorCard.vue'
+import TutorCard from '@/application/components/tutors/TutorCard.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
 import { useTutorsList } from '@/application/composable/users/roles/tutors'

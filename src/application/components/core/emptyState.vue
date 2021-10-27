@@ -5,7 +5,7 @@
 			{{ info }}
 		</p>
 
-		<router-link class="py-3 px-7 font-bold border-[1px] border-solid border-dark_gray rounded-lg" :to="route">
+		<router-link class="py-3 px-7 font-bold border-[1px] border-solid border-dark_gray rounded-lg" :to="route" v-if="btnText">
 			{{ btnText }}
 		</router-link>
 
