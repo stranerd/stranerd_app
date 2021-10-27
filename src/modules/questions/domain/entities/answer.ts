@@ -5,20 +5,20 @@ import { extractTextFromHTML, trimToLength } from '@/utils/commons'
 
 
 type AnswerConstructorArgs = {
-	id: string
-	title: string
-	body: string
-	coins: number
-	questionId: string
-	tags: string[]
-	attachments: Media[]
-	createdAt: number
-	updatedAt: number
-	userId: string
-	userBio: UserBio
-	best: boolean
-	votes: { userId: string; vote: 1 | -1 }[]
-	commentsCount: number
+	id: string;
+	title: string;
+	body: string;
+	coins: number;
+	questionId: string;
+	tags: string[];
+	attachments: Media[];
+	createdAt: number;
+	updatedAt: number;
+	userId: string;
+	userBio: UserBio;
+	best: boolean;
+	votes: { userId: string; vote: 1 | -1 }[];
+	commentsCount: number;
 }
 
 

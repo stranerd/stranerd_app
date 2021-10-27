@@ -9,7 +9,7 @@
 					<img src="@/application/assets/images/auth/signin.png" alt="" class="h-[55%]">
 				</div>
 
-				<div class="flex flex-col items-center justify-center lg:w-1/2 w-full px-4 max-w-sm mx-auto">
+				<div class="flex flex-col items-center justify-center lg:w-1/2 w-full max-w-[18rem] mx-auto">
 					<h1 class="text-xl text-dark_gray font-bold mb-1 lg:hidden ">Join the community!</h1>
 					<span class="lg:text-main_darktext-dark_gray lg:hidden text-icon_inactive mb-8 text-center text-xs">Get study help, learn from tutors, learn with <br>
 						your friends and enjoy new study tools.</span>
@@ -49,16 +49,15 @@
 
 						<AuthProviders/>
 						<span class="text-xs flex flex-wrap justify-center items-center text-icon_inactive mt-8 max-w-full text-center">
-							By signing up, you accept the Stranerd 	<router-link  to="/auth/signup" class="text-primary font-bold normalText">
-								Terms and Conditions 
-							</router-link> & <router-link  to="/auth/signup" class="text-primary font-bold normalText">
+							By signing up, you accept the Stranerd 	<router-link  to="/auth/signup" class="text-primary font-bold normalText mx-1"> Terms and Conditions 
+							</router-link> & <router-link  to="/auth/signup" class="text-primary font-bold normalText mx-1">
 								Privacy Policy.
 							</router-link>
 
 
 						</span>
 
-						<span class="text- w-full flex justify-center items-center text-icon_inactive mt-8">
+						<span class="text- w-full flex justify-center items-center text-icon_inactive mt-8 mb-5">
 							Have an account? 
 
 						

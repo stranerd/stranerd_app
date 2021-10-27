@@ -60,7 +60,7 @@ export const useEmailSignin = () => {
 					referrer: getReferrerId()
 				})
 				await createStorage(user)
-				await  router.push(`/dashboard/home`)
+				await  router.push('/dashboard/home')
 				window.localStorage.removeItem('referrer')
 
 			} catch (error) {
@@ -79,7 +79,7 @@ export const useEmailSignup = () => {
 	const { loading, setLoading } = useLoadingHandler()
 	const signup = async () => {
 		await setError('')
-		console.log(factory.value);
+		console.log(factory.value)
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
@@ -87,7 +87,7 @@ export const useEmailSignup = () => {
 					referrer: getReferrerId()
 				})
 				await createStorage(user)
-				await  router.push(`/auth/verify`)
+				await  router.push('/auth/verify')
 				 window.localStorage.removeItem('referrer')
 			} catch (error) {
 				await setError(error)
@@ -108,7 +108,7 @@ export const useCompleteEmailVerification = (token: string) => {
 		try {
 			const user = await CompleteEmailVerification.call(token)
 			await createStorage(user)
-			await  router.push(`/dashboard/home`)
+			await  router.push('/dashboard/home')
 		} catch (error) {
 			await setError(error)
 			if (error instanceof NetworkError && error.statusCode === StatusCodes.InvalidToken) {

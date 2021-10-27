@@ -2,7 +2,7 @@ import io, { Socket } from 'socket.io-client'
 import { getTokens } from '@/utils/tokens'
 import { apiBases } from '@/utils/environment'
 import { Listeners, StatusCodes } from '@/modules/core'
-import { DefaultEventsMap } from 'socket.io-client/build/typed-events'
+import { DefaultEventsMap } from '@socket.io/component-emitter'
 
 let socket = null as Socket<DefaultEventsMap, DefaultEventsMap> | null
 const getSocketBaseAndPath = () => {
@@ -15,11 +15,17 @@ const getSocketBaseAndPath = () => {
 	const domain = [http, minusHttp.split('/')[0]].join('//')
 	return { path, domain }
 }
+export enum EmitTypes {
+	created = 'created',
+	updated = 'updated',
+	deleted = 'deleted'
+}
 
 type SocketReturn = { code: StatusCodes; message: string; channel: string }
 
 export async function listenOnSocket<Model> (channel: string, listeners: Listeners<Model>) {
 	const { accessToken } = await getTokens()
+	// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 	// @ts-ignore
 	if (!socket || (!socket.auth.token && accessToken)) {
 		socket = io(getSocketBaseAndPath().domain, {
@@ -43,9 +49,9 @@ export async function listenOnSocket<Model> (channel: string, listeners: Listene
 	})
 	return () => {
 		try {
-			socket?.emit('leave', { channel: finalChannel }, (_: SocketReturn) => {
-			})
+			socket?.emit('leave', { channel: finalChannel }, (_: SocketReturn) => {	return _})
 		} catch (e) {
+			return e
 		}
 	}
 }
@@ -54,8 +60,4 @@ export async function closeSocket () {
 	socket?.disconnect()
 }
 
-export enum EmitTypes {
-	created = 'created',
-	updated = 'updated',
-	deleted = 'deleted'
-}
+

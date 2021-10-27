@@ -1,0 +1,26 @@
+{
+	"extends": "stylelint-config-standard",
+	"plugins": [
+		"stylelint-scss"
+	],
+	"rules": {
+		"at-rule-empty-line-before": [
+			"always",
+			{
+				"except": "inside-block"
+			}
+		],
+		"selector-list-comma-newline-before": "never-multi-line",
+		"selector-list-comma-newline-after": "never-multi-line",
+		"selector-list-comma-space-after": "always",
+		"at-rule-no-unknown": null,
+		"scss/at-rule-no-unknown": true,
+		"no-descending-specificity": null,
+		"indentation": [
+			"tab",
+			{
+				"baseIndentLevel": 1
+			}
+		]
+	}
+}

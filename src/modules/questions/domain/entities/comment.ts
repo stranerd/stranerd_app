@@ -3,14 +3,14 @@ import { BaseEntity } from '@/modules/core'
 
 
 type CommentConstructorArgs = {
-	id: string
-	body: string
-	userId: string
-	answerId?: string
-	questionId?: string
-	userBio: UserBio
-	createdAt: number
-	updatedAt: number
+	id: string;
+	body: string;
+	userId: string;
+	answerId?: string;
+	questionId?: string;
+	userBio: UserBio;
+	createdAt: number;
+	updatedAt: number;
 }
 
 
