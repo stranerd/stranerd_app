@@ -49,8 +49,7 @@
 
 						<AuthProviders/>
 						<span class="text-xs flex flex-wrap justify-center items-center text-icon_inactive mt-8 max-w-full text-center">
-							By signing up, you accept the Stranerd 	<router-link  to="/auth/signup" class="text-primary font-bold normalText">
-								Terms and Conditions 
+							By signing up, you accept the Stranerd 	<router-link  to="/auth/signup" class="text-primary font-bold normalText ml-1"> Terms and Conditions 
 							</router-link> & <router-link  to="/auth/signup" class="text-primary font-bold normalText">
 								Privacy Policy.
 							</router-link>
@@ -58,7 +57,7 @@
 
 						</span>
 
-						<span class="text- w-full flex justify-center items-center text-icon_inactive mt-8">
+						<span class="text- w-full flex justify-center items-center text-icon_inactive mt-8 mb-5">
 							Have an account? 
 
 						

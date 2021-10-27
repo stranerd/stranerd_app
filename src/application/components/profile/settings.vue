@@ -124,7 +124,7 @@
 
 import { IonIcon, IonInput, IonTextarea, IonSelect, IonSelectOption, IonRippleEffect, IonSpinner, IonButton } from '@ionic/vue'
 import { image } from 'ionicons/icons'
-import { ref } from 'vue'
+import { ref, defineComponent } from 'vue'
 import { useUpdateProfile } from '@/application/composable/users/account'
 import { useAuth } from '@/application/composable/auth/auth'
 import { useFileInputs, usePassword, useSubjectAsTags } from '@/application/composable/core/forms'
@@ -133,15 +133,16 @@ import { useRouter } from 'vue-router'
 // import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 // import Subject from '@app/components/questions/subjects/Subject.vue'
 
-
-export default  {
+export default defineComponent( {
 	name: 'profileSettings',
 	components: {  IonIcon, IonInput, IonTextarea, IonSelect, IonSelectOption, IonRippleEffect, IonSpinner, IonButton },
+	
 	props: {
 		userId: {
-			type: String ,
-			required: true
-		}
+			type: String,
+			required: true,
+			default:''
+		} 
 	},
 	async setup  (props: any) {
 		const router = useRouter()
@@ -174,7 +175,7 @@ export default  {
 			factory, error, loading, updateProfile, image
 		}
 	}
-}
+})
 </script>
 <style scoped>
 ion-toolbar {
