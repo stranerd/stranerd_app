@@ -1,15 +1,13 @@
 {
   "name": "stranerd_app",
-  "description": "Stranerd App",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "serve": "yarn env:copy:app && vue-cli-service serve",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "env:copy:app": "node bin/copy-env-app",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "eslint src/ --ext .ts,.js,.vue --fix && stylelint src/**/*.scss src/**/*.vue --fix",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@capacitor/app": "1.0.3",
@@ -26,16 +24,14 @@
     "cookie": "^0.4.1",
     "core-js": "^3.17.3",
     "firebase": "^9.0.2",
+    "husky": "^7.0.4",
     "line-awesome": "^1.3.0",
-    "moment": "^2.29.1",
     "socket.io-client": "^4.2.0",
     "stripe": "^8.174.0",
-    "sweetalert2": "^11.1.9",
+    "sweetalert2": "^11.1.7",
     "swiper": "^6.8.4",
     "vue": "^3.0.0",
-    "vue-google-login": "^2.0.5",
     "vue-router": "^4.0.11",
-    "vue3-google-oauth2": "^1.0.6",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
@@ -63,15 +59,7 @@
     "sass-loader": "^10.1.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.16",
     "typescript": "^4.3.5",
-    "vue-jest": "^5.0.0-0",
-    "stylelint": "^13.13.1",
-		"stylelint-config-standard": "^22.0.0",
-		"stylelint-scss": "^3.21.0"
+    "vue-jest": "^5.0.0-0"
   },
-  	"commitlint": {
-		"extends": [
-			"@commitlint/config-conventional"
-		]
-	}
-
+  "description": "Stranerd App"
 }

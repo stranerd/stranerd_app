@@ -4,21 +4,21 @@ import { extractTextFromHTML, trimToLength } from '@/utils/commons'
 
 
 type QuestionConstructorArgs = {
-	id: string
-	body: string
-	coins: number
-	creditable: number
-	isAnswered: boolean
-	tags: string[]
-	attachments: Media[]
-	subjectId: string
-	userId: string
-	userBio: UserBio
-	bestAnswers: string[]
-	answers: { id: string; userId: string }[]
-	commentsCount: number
-	createdAt: number
-	updatedAt: number
+	id: string;
+	body: string;
+	coins: number;
+	creditable: number;
+	isAnswered: boolean;
+	tags: string[];
+	attachments: Media[];
+	subjectId: string;
+	userId: string;
+	userBio: UserBio;
+	bestAnswers: string[];
+	answers: { id: string; userId: string }[];
+	commentsCount: number;
+	createdAt: number;
+	updatedAt: number;
 }
 
 

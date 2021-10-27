@@ -18,8 +18,8 @@ import { analytics } from '@/modules/core'
 import VueRouter, { useRouter } from 'vue-router'
 
 const global = {} as Record<string, {
-	answers: Ref<AnswerEntity[]>
-	fetched: Ref<boolean>
+	answers: Ref<AnswerEntity[]>;
+	fetched: Ref<boolean>;
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useAnswerList = (questionId: string) => {

@@ -143,7 +143,7 @@ export default defineComponent({
 	 setup(props) {
 		const  { user } =  useAuth()	
 		const Localid = localStorage.getItem('authUserId')
-		const id = Localid!.replace(/^"|"$/g,'');
+		const id = Localid!.replace(/^"|"$/g,'')
 		const profileLink = `/profile/${id}#dashboard`
 		
 		const store = useStore()

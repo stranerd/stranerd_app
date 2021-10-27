@@ -1,24 +1,31 @@
 module.exports = {
-	root: true,
-	env: {
-		browser: true,
-		node: true
-	},
+  root: true,
+    "env": {
+        "browser": true,
+    },
   'extends': [
     'plugin:vue/vue3-essential',
     'eslint:recommended',
     '@vue/typescript/recommended'
   ],
-	rules: {
-		'vue/no-v-html': 'off',
+  'parserOptions': {
+    ecmaVersion: 2020
+  },
+  'rules': {
 		'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+    'vue/no-deprecated-slot-attribute': 'off',
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": ["off"],
+    '@typescript-eslint/no-explicit-any': 'off',
+    "@typescript-eslint/camelcase": ["off"],
+    'vue/no-v-html': 'off',
 		'no-tabs': 'off',
 		'no-var': 'error',
 		'accessor-pairs': 'off',
 		'no-use-before-define': 'off',
 		indent: ['error', 'tab', { SwitchCase: 1 }],
-		'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
+		'no-mixed-spaces-and-tabs': ['warn', 'smart-tabs'],
 		semi: ['error', 'never'],
 		quotes: ['error', 'single'],
 		'prefer-const': ['error'],
@@ -35,17 +42,18 @@ module.exports = {
 		'vue/no-mutating-props': 'off',
 		'object-property-newline': 'off',
 		'require-atomic-updates': 'off',
-		'require-await': 'off'
-	},
-	overrides: [
-		{
-			files: ['tests/**/*.[jt]s?(x)', 'tests/**/*.spec.[jt]s?(x)'],
-			env: {
-				jest: true
-			}
-		}
-	],
-	ignorePatterns: [
-		'src/application/static/sw.js'
-	]
+		'require-await': 'off',
+    'vue/no-deprecated-slot-attribute': 'off'
+  },
+  'overrides': [
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+      ],
+      env: {
+        jest: true
+      }
+    }
+  ]
 }

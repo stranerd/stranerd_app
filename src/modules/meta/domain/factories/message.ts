@@ -2,7 +2,7 @@ import { BaseFactory } from '@/modules/core'
 import { isEmail, isLongerThanX, isString } from '@stranerd/validate'
 import { MessageToModel } from '../../data/models/message'
 
-type Keys = { firstName: string, lastName: string, email: string, message: string }
+type Keys = { firstName: string; lastName: string; email: string; message: string }
 
 export class MessageFactory extends BaseFactory<null, MessageToModel, Keys> {
 	public rules = {

@@ -71,8 +71,8 @@ export default defineComponent({
 				authUser.value.id !== user.value?.id &&
 				authUser.value.canRequestSessions &&
 				user.value?.canHostSessions,
-			set: () => {
-			}
+				
+			set: () => {}
 		})
 
 		const requestNewSession = () => {

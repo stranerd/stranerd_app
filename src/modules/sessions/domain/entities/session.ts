@@ -4,22 +4,22 @@ import { generateDefaultBio, UserBio } from '@/modules/users'
 
 
 type SessionConstructorArgs = {
-	id: string 
-	duration: number
-	price: number
-	message: string
-	studentId: string
-	tutorId: string
-	studentBio: UserBio
-	tutorBio: UserBio
-	accepted: boolean | null 
-	done: boolean
-	cancelled: { tutor: boolean; student: boolean }
-	createdAt: number
-	updatedAt: number
-	startedAt: number | null
-	endedAt: number | null
-	taskId: string
+	id: string; 
+	duration: number;
+	price: number;
+	message: string;
+	studentId: string;
+	tutorId: string;
+	studentBio: UserBio;
+	tutorBio: UserBio;
+	accepted: boolean | null; 
+	done: boolean;
+	cancelled: { tutor: boolean; student: boolean };
+	createdAt: number;
+	updatedAt: number;
+	startedAt: number | null;
+	endedAt: number | null;
+	taskId: string;
 }
 export class SessionEntity extends BaseEntity {
 	readonly id: string

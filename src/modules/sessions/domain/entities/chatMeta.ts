@@ -2,6 +2,18 @@ import { BaseEntity } from '@/modules/core'
 import { generateDefaultBio, UserBio } from '@/modules/users'
 import { ChatEntity } from './chat'
 
+
+type ChatMetaConstructorArgs = {
+	id: string;
+	unRead: string[];
+	ownerId: string;
+	userId: string;
+	userBio: UserBio;
+	last: ChatEntity;
+	createdAt: number;
+	updatedAt: number;
+}
+
 export class ChatMetaEntity extends BaseEntity {
 	readonly id: string
 	readonly unRead: string[]
@@ -33,13 +45,3 @@ export class ChatMetaEntity extends BaseEntity {
 	}
 }
 
-type ChatMetaConstructorArgs = {
-	id: string
-	unRead: string[]
-	ownerId: string
-	userId: string
-	userBio: UserBio
-	last: ChatEntity
-	createdAt: number
-	updatedAt: number
-}
