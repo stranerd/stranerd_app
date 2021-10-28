@@ -42,6 +42,7 @@ const router = Promise.all(routes).then((routes) => {
 
 	router.beforeEach((to, from, next) => {
 		if (!to.meta.middlewares) {
+			console.log(to.meta.middlewares)
 			return next()
 		}
 		const middlewares: any = to.meta.middlewares
