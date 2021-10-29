@@ -47,12 +47,14 @@ const Answers = defineAsyncComponent(() => import('@/application/components/prof
 const Bio = defineAsyncComponent(() => import('@/application/components/profile/bio.vue'))
 const Settings = defineAsyncComponent(() => import('@/application/components/profile/settings.vue'))
 const Achievements = defineAsyncComponent(() => import('@/application/components/profile/achievements.vue'))
+import isAuthenticated from '@/application/middlewares/isAuthenticated'
 import { star } from 'ionicons/icons'
 import {  useRoute } from 'vue-router'
 import { selectedTab } from '@/application/composable/profile'
 
 export default  {
 	name: 'profileDashboard',
+	middlewares:[isAuthenticated],
 	components: { IonPage, IonContent, topSession, Dashboard, Questions, Reviews, Answers, Bio, Settings, Achievements},
 	setup() {
 		

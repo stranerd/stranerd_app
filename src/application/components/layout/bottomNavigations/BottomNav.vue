@@ -13,7 +13,7 @@
 			<ion-icon :icon="people" :class="route.name == 'tutors' ? 'w-6 text-primary' : ' w-6' "></ion-icon>
 		</router-link>
 
-		<router-link to="/dashboard/chat" class="col-span-1  text-icon_inactive flex flex-row items-center justify-center">
+		<router-link to="/chat" class="col-span-1  text-icon_inactive flex flex-row items-center justify-center">
 			<ion-icon :icon="chatbubble" :class="route.name == 'chat' ? 'w-6 text-primary' : ' w-6' "></ion-icon>
 		</router-link>
 	</div>
@@ -45,7 +45,7 @@
 		
 		<div class="w-2/5 flex flex-row-reverse items-center gap-20">
 			
-			<router-link tab="chat" class="px-3 py-2  bg-light_gray text-icon_inactive rounded-lg" to="/dashboard/chat">
+			<router-link tab="chat" class="px-3 py-2  bg-light_gray text-icon_inactive rounded-lg" to="/chat">
 				<div class="flex flex-col py-1 items-center justify-center">
 					<ion-icon :icon="chatbubble" :class="route.name == 'chat' ? 'w-12 text-primary' : ' w-12' "></ion-icon>
 				</div>

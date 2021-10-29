@@ -21,14 +21,14 @@
 				<swiper-slide
 					v-for="(tutor,index) in tutors"
 					:key="index"
-					class="flex md:!min-w-[180px] !w-[150px] mr-3">
+					class="flex md:!min-w-[200px] !w-[190px] mr-3">
 					<tutor-card  :class="0 === index ? 'bg-light_gray flex' : 'bg-light_gray flex'" :tutor="tutor" :showButton="false" />
 				</swiper-slide>
 				
 			</swiper>
 		</div>
 
-		<div class="lg:flex  w-full  md:gap-6 gap-3 mt-2 hidden">
+	<div class="lg:flex  w-full  md:gap-6 gap-3 mt-2 hidden">
 			<swiper
 				class="flex flex-row w-full items-center"
 				:direction="'horizontal'" :slidesPerView="4" 
