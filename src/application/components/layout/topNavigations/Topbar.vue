@@ -97,7 +97,7 @@
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/dashboard/questions">
 				<img src="/assets/images/cap.svg" class="inline h-5"/>
 			</router-link>
-			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/dashboard/questions">
+			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/chat">
 				<img src="/assets/images/chatbubble.svg" class="inline h-5"/>
 			</router-link>
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" :to="profileLink">
