@@ -1,24 +1,59 @@
 <template>
 <div class=" flex flex-col relative h-full w-full  border-r-[1px] border-faded_gray overflow-y-hidden">
-	<chat-top></chat-top>
-	<chat-content></chat-content>
-	<chat-bottom></chat-bottom>
+	<chat-top :key="hash" :user="user ? user : undefined" ></chat-top>
+	<chat-content :user-id="userId" ></chat-content>
+	<chat-bottom :session-id="sessionId" :user-id="userId"></chat-bottom>
 </div>
 </template>
 
 <script lang="ts">
 
-import { defineAsyncComponent } from 'vue'
+import { computed, defineAsyncComponent, onBeforeUnmount, onMounted } from 'vue'
 const ChatTop = defineAsyncComponent(() => import('@/application/components/chat/ChatTop.vue'))
 const ChatBottom = defineAsyncComponent(() => import('@/application/components/chat/ChatBottom.vue'))
 const ChatContent = defineAsyncComponent(() => import('@/application/components/chat/ChatContent.vue'))
 
 import { ellipsisVertical, search  } from 'ionicons/icons'
+import { useAuth } from '@/application/composable/auth/auth'
+import { useUser } from '@/application/composable/users/user'
+import { hasRequestedSessionWith, isRequestingSessionWith, useCurrentSession } from '@/application/composable/sessions/session'
 
 export default  {
 	components: { ChatTop, ChatBottom, ChatContent },
-	setup(){
-		return { ellipsisVertical, search }
+	props: {
+		userId: {
+			type: String,
+			required: true
+		}
+	},
+	setup(props: any){
+
+		const { currentSessionId, user: authUser } = useAuth()
+		const { user, loading, error, listener } = useUser(props.userId)
+		const { currentSession } = useCurrentSession()
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+		const sessionId = computed({
+			get: () => currentSessionId.value && user.value?.currentSession === currentSessionId.value
+				? currentSessionId.value
+				: '',
+			set: () => {
+			}
+		})
+		const hash = computed({
+			get: () => [
+				authUser.value?.hash ?? 'auth',
+				user.value?.hash ?? 'user',
+				sessionId.value,
+				currentSession.value?.hash ?? ''
+			].join('--'),
+			set: () => {
+			}
+		})
+		const requestedSession = hasRequestedSessionWith(props.userId)
+		const requestingSession = isRequestingSessionWith(props.userId)
+		
+		return { ellipsisVertical, search, user, loading, error, sessionId, hash, requestedSession, requestingSession }
 	}
 }
 </script>

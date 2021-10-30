@@ -9,7 +9,7 @@
 		</div>
 
 		<div class="mt-3 border border-faded_gray rounded-lg py-1 px-3">
-			<ion-textarea rows="5" 
+			<ion-textarea rows="5" v-model="factory.message"
 				class="bg-white border-0 focus:outline-none text-center  w-full"  
 				placeholder="Explain exactly what you need help with."></ion-textarea>
 		</div>
@@ -27,7 +27,7 @@
 		</div>
 
 		<div class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex flex-row">
-			<ion-select value="subject" class="w-full  font-medium" placeholder="Select the subject" interface="action-sheet">
+			<ion-select class="w-full  font-medium" placeholder="Select the subject" interface="action-sheet">
 				<ion-select-option value="maths" >Mathematics</ion-select-option>
 				<ion-select-option value="physics" >Physics</ion-select-option>
 				<ion-select-option value="bio" >Biology</ion-select-option>
@@ -56,13 +56,8 @@
 		</div>
 
 		<div class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex flex-row">
-			<ion-select value="duration" class="w-full  font-medium" placeholder="Duration and payment" interface="action-sheet">
-				<ion-select-option value="maths" >Mathematics</ion-select-option>
-				<ion-select-option value="physics" >Physics</ion-select-option>
-				<ion-select-option value="bio" >Biology</ion-select-option>
-				<ion-select-option value="geo"  >Geography</ion-select-option>
-				<ion-select-option value="business" >Business</ion-select-option>
-				<ion-select-option value="civil" >Civil Right</ion-select-option>
+			<ion-select v-model="factory.duration" class="w-full  font-medium" placeholder="Duration and payment" interface="action-sheet">
+				<ion-select-option v-for="option in factory.prices" :key="option.duration" :value="option.duration" >{{ option.duration }} minutes - {{ option.price }} gold coins</ion-select-option>
 			</ion-select>
 		</div>
 
@@ -74,8 +69,9 @@
 				</button>
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<button class=" px-6 relative ion-activatable font-bold w-full py-3 rounded-lg bg-primary">
-					Post question
+				<button @click="createSession" :disabled="loading || !factory.valid || !hasEnoughCoins"
+				 class=" px-6 relative ion-activatable font-bold w-full py-3 rounded-lg bg-primary">
+					Request Session
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</button>
 			</div>
@@ -84,19 +80,29 @@
 	</div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 
 import { IonSelect, IonSelectOption, IonTextarea, IonRippleEffect, IonIcon } from '@ionic/vue'
 import { document,ellipse, ellipseOutline } from 'ionicons/icons'
 import { showModal } from '@/application/composable/core/Modal'
+import { analytics } from '@/modules/core'
+import { useCreateSession } from '@/application/composable/sessions/sessions'
 
 export default defineComponent({
 	setup() {
+
+		const { factory, loading, error, hasEnoughCoins, createSession } = useCreateSession()
+		onMounted(async () => {
+			await analytics.logEvent('view_session_request')
+		})
+		
 		return {
 			document,
 			ellipse,
 		    ellipseOutline,
-			showModal
+			showModal,
+			hasEnoughCoins,
+			factory, loading, error, createSession
 		}
 	},
 	components: { IonTextarea, IonSelectOption, IonSelect, IonRippleEffect, IonIcon  }

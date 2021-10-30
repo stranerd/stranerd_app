@@ -13,10 +13,10 @@
 
 		<show-ratings :rating="4"/>
 	
-		<a @click="requestSession"  class="mt-2 font-bold  normalText border-[1px] py-2 md:py-2 md:px-4 px-2 text-icon_inactive rounded-xl border-icon_inactive">
+		<a @click="requestNewSession"  class="mt-2 font-bold cursor-pointer normalText border-[1px] py-2 md:py-2 md:px-4 px-2 text-icon_inactive rounded-xl border-icon_inactive">
 			Request a session
 		</a>
-
+		
 	</div>	
 
 </template>
@@ -26,6 +26,7 @@ import ShowRatings from '@/application/components/core/ShowRatings.vue'
 import { componentName, showModal } from  '../../composable/core/Modal'
 import { UserEntity } from '@/modules/users'
 import { defineAsyncComponent } from 'vue'
+import { setNewSessionTutorIdBio } from '@/application/composable/sessions/sessions'
 const Avatar = defineAsyncComponent(() => import('@/application/components/core/AvatarUser.vue'))
 
 export default {
@@ -48,13 +49,14 @@ export default {
 	},
 	setup(props: any) {
 
-		const requestSession = () => {
+		const requestNewSession = () => {
+			setNewSessionTutorIdBio({ id: props.tutor.id!, user: props.tutor.bio })
 			componentName.value = 'requestSession'
 			showModal.value = true
 		}
 
 		return {
-			requestSession
+			requestNewSession
 		}
 		
 	}
