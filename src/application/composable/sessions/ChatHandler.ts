@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-export const openChat = ref(false)
+export const openChat = ref(true)
 
 export const handleOpenChat = () => {
 	openChat.value = true

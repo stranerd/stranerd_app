@@ -13,25 +13,38 @@
 				</div>
 		   </div>
 		</div>
+		<template v-if="meta.length === 0">
+		<div class="py-3 px-3">
+			<empty-state :info="'No chats found. Go message a nerd'" ></empty-state>
+		</div>
+	</template>
 		<div class="flex-grow overflow-y-scroll pb-11">
-		<each-chat v-for="(chat, index) in 10" :key="index"></each-chat>
+		<each-chat v-for="chat in meta" :key="chat.id" :meta="chat"></each-chat>
 		</div>
 </div>
 </template>
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from 'vue'
+import { defineAsyncComponent, defineComponent, onMounted } from 'vue'
 import {  IonIcon } from '@ionic/vue'
 import { search, ellipsisVertical } from 'ionicons/icons'
+import { useChatsList } from '@/application/composable/sessions/chats-list'
 const EachChat = defineAsyncComponent(() => import('@/application/components/chat/eachChat.vue'))
+import EmptyState from '../core/emptyState.vue'
 
 export default defineComponent({
 	setup() {
+
+		const { meta, listener } = useChatsList()
+		onMounted(() => {
+			if (!listener.isRunning.value) listener.startListener()
+		})
+		
 		return { 
-			 search, ellipsisVertical
+			 search, ellipsisVertical, meta
 		}
 	},
 	components: { 
-		IonIcon, EachChat
+		IonIcon, EachChat, EmptyState
 	}
 })
 </script>

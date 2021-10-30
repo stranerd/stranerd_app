@@ -6,15 +6,15 @@
 
 		<div class="py-4 w-full px-3 flex items-center flex-row gap-2   border-b-[1px] border-light_gray">
 		
-		 <avatar :size="'55'"/>
+		 <avatar :size="'55'" :photoUrl="user?.avatar?.link" />
 		<div class="flex flex-col gap-1">
-		  <h2 class="font-bold text-dark_gray">Timmy Nuetron</h2>
+		  <h2 class="font-bold text-dark_gray">{{ user?.fullName }}</h2>
 		  <div class="flex flex-row gap-1 items-center  ">
-			<ShowRatings :rating="4" />
+			<ShowRatings :rating="user?.ratingCount ? user.ratingCount : 3" />
 		  </div>
-		 <div>
-		  <span class="py-1 px-3 mt-1 rounded-xl border-faded_gray border-[1px] text-center font-bold text-xs text-icon_inactive bg-light_green">
-			Rookie
+		 <div class="mt-1">
+		  <span class="py-1 px-3  rounded-xl border-faded_gray border-[1px] text-center font-bold text-xs text-icon_inactive bg-light_green">
+			{{ user?.rank.id }}
 		  </span>
 		 </div>
 		</div>
@@ -83,21 +83,30 @@
 </div>
 </template>
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from 'vue'
+import {  defineComponent } from 'vue'
 import {  IonIcon } from '@ionic/vue'
 import { chevronForward, documentText, logoYoutube, document, images, ellipseOutline } from 'ionicons/icons'
 import Avatar from '../core/AvatarUser.vue'
 import ShowRatings from '../core/ShowRatings.vue'
-const EachChat = defineAsyncComponent(() => import('@/application/components/chat/eachChat.vue'))
+import { useUser } from '@/application/composable/users/user'
+
 
 export default defineComponent({
-	setup() {
+	props: {
+		userId: {
+			type: String,
+			required: true
+		}
+	},
+	setup(props: any) {
+
+		const { user } = useUser(props.userId)
 		return { 
-			 chevronForward, documentText, logoYoutube, document, images, ellipseOutline
+			 chevronForward, documentText, logoYoutube, user, document, images, ellipseOutline
 		}
 	},
 	components: { 
-		Avatar, ShowRatings, IonIcon
+		Avatar, ShowRatings, IonIcon,
 	}
 })
 </script>
