@@ -2,7 +2,7 @@
 	<ion-page>
 		<ion-content :fullscreen="true">
 			<div class="layout-page-nosidebars normalText ">
-				<div class="w-full grid grid-cols-12" >
+				<div class="w-full grid grid-cols-12 mt-12" >
 					<top-session :userId="id"></top-session>
 
 					<div class="col-span-12 grid grid-cols-12 md:col-start-2 md:col-end-12 lg:col-start-4 lg:col-end-10">
