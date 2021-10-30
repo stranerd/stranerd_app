@@ -6,8 +6,8 @@
 				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
 					<h1 class="lg:text-2xl text-xl text-dark_gray font-bold mb-2 text-center">Verifying Your Email Address</h1>
 					<span class="normalText text-dark_gray mb-4 text-center">
-                If an error occurred, click the button below to retry verification.
-                        </span>
+						If an error occurred, click the button below to retry verification.
+					</span>
 					<div class="h-[65%]">
 						<form >
 					
@@ -37,6 +37,11 @@ import {  useRoute } from 'vue-router'
 export default defineComponent({
 	components: { IonContent,IonPage,IonButton, IonSpinner,  },
 	layout:'Auth',
+	middlewares: [(data: any) => {
+		const  { to,  from, next } = data
+		
+		if (!useRoute()?.query?.token) next({ path: '/auth/signin' })
+	}],
 	  setup() {
 		const { token } = useRoute().query
 		const { loading, error, completeVerification } = useCompleteEmailVerification(token as string)
