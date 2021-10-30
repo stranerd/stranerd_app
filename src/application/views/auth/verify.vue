@@ -6,9 +6,9 @@
 				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
 					<h1 class="lg:text-2xl text-xl text-dark_gray font-bold mb-2 text-center">Verify Your Email Address</h1>
 					<span class="normalText text-dark_gray mb-4 text-center max-w-lg">
-                   	An email was just sent to <b>{{ email }}</b>. Follow the link to verify your account.
-			If an error occurred or you didn't receive the email, click the button below to resend the email.
-                        </span>
+						An email was just sent to <b>{{ email }}</b>. Follow the link to verify your account.
+						If an error occurred or you didn't receive the email, click the button below to resend the email.
+					</span>
 					<div class="h-[65%]">
 						<form >
 					
@@ -31,12 +31,14 @@
 import { defineComponent, onMounted  } from 'vue'
 import { useEmailVerificationRequest } from '@/application/composable/auth/signin'
 import { IonContent, IonPage, IonButton,  IonSpinner } from '@ionic/vue'
+import isAuthenticated from '@/application/middlewares/isAuthenticated'
 
 
 
 export default defineComponent({
 	components: { IonContent,IonPage,IonButton, IonSpinner,  },
 	layout:'Auth',
+	middlewares:[isAuthenticated],
 	  setup() {
 		const { email, loading, error, message, sendVerificationEmail } = useEmailVerificationRequest()
 		onMounted(sendVerificationEmail)

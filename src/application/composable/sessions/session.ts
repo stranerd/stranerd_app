@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { computed, Ref, ref, onMounted, watch } from 'vue'
-import  { useRouter } from 'vue-router'
-import VueRouter from 'vue-router'
+import  { Router, RouteRecord, useRouter } from 'vue-router'
 import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
 import { FindSession, GetSessions, ListenToSession, ListenToSessions, SessionEntity } from '@/modules/sessions'
 import { useAuth } from '@/application/composable/auth/auth'
@@ -85,7 +84,7 @@ export const useCurrentSession = () => {
 	return { ...currentGlobal, otherParticipantId, endDate }
 }
 
-const useSession = (key: SessionKey, router: VueRouter, callback: (key: SessionKey, sessions: SessionEntity[], id: string, router: VueRouter) => void) => {
+const useSession = (key: SessionKey, router: Router, callback: (key: SessionKey, sessions: SessionEntity[], id: string, router: Router) => void) => {
 	const { user, id } = useAuth()
 	const listenerCb = async () => {
 		const sessionIds = user.value?.session?.[key] ?? []
@@ -149,7 +148,7 @@ const useSession = (key: SessionKey, router: VueRouter, callback: (key: SessionK
 	return { ...global[key] }
 }
 
-const callback = (key: SessionKey, sessions: SessionEntity[], userId: string, router: VueRouter) => {
+const callback = (key: SessionKey, sessions: SessionEntity[], userId: string, router: Router) => {
 	sessions
 		.filter((session) => {
 			const index = global[key].sessions.value.findIndex((s) => s.id === session.id)
@@ -158,7 +157,7 @@ const callback = (key: SessionKey, sessions: SessionEntity[], userId: string, ro
 		.filter((session) => session.tutorId === userId)
 		.forEach(async (session) => {
 			const route = `/sessions/${session.studentId}`
-			if (!router || router.currentRoute.path === route) return
+			if (!router || router.currentRoute.value.path === route) return
 			const res = await Alert({
 				title: 'New session request',
 				text: '',
@@ -172,8 +171,8 @@ const callback = (key: SessionKey, sessions: SessionEntity[], userId: string, ro
 	// If using modal though, remember that only one instance of the modal can be open at once
 }
 
-export const useRequestSessions = (router: VueRouter) => useSession('requests', router, callback)
-export const useLobbySessions = (router: VueRouter) => useSession('lobby', router, callback)
+export const useRequestSessions = (router: Router) => useSession('requests', router, callback)
+export const useLobbySessions = (router: Router) => useSession('lobby', router, callback)
 
 
 

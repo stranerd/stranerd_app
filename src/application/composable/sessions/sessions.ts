@@ -7,6 +7,7 @@ import { useAuth } from '@/application/composable/auth/auth'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
 import { Alert } from '@/application/composable/core/notifications'
 import { analytics } from '@/modules/core'
+import { showModal } from  '../../composable/core/Modal'
 
 let newSessionTutorIdBio = null as null | { id: string; user: UserBio }
 export const setNewSessionTutorIdBio = (data: { id: string; user: UserBio }) => {
@@ -33,8 +34,8 @@ export const useCreateSession = () => {
 			try {
 				await setLoading(true)
 				const sessionId = await AddSession.call(factory.value)
-				//useSessionModal().closeCreateSession()
-				await router.push(`/sessions/${newSessionTutorIdBio?.id}`)
+				showModal.value = true
+				await router.push(`/chat/${newSessionTutorIdBio?.id}`)
 				factory.value.reset()
 				await setMessage('Session request successful.')
 				await analytics.logEvent('session_request', { sessionId })

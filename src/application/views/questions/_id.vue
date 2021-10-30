@@ -78,11 +78,13 @@ const CreateAnswer = defineAsyncComponent(() => import('@/application/components
 const TopBar = defineAsyncComponent(() => import('@/application/components/layout/topNavigations/Topbar.vue'))
 const SideNavBar = defineAsyncComponent(() => import('@/application/components/layout/sidebars/DefaultSidebar.vue'))
 const PhotoList = defineAsyncComponent(() => import('@/application/components/core/photoList.vue'))
+import isAuthenticated from '@/application/middlewares/isAuthenticated'
 
 
 export default  {
 	name: 'answers',
 	layout: 'SubPages',
+	middlewares:[isAuthenticated],
 	components: { IonPage,
 	 IonContent,
 	  SideProfileNav,

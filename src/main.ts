@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import routes from './application/router/routes'
-import { createRouter, createWebHistory } from '@ionic/vue-router'
+import { createRouter, createWebHistory, } from '@ionic/vue-router'
 import { IonicVue } from '@ionic/vue'
 
 import { store, key } from './application/store'
@@ -40,16 +40,25 @@ const router = Promise.all(routes).then((routes) => {
 		routes
 	})
 
-	router.beforeEach((to, from, next) => {
-		if (!to.meta.middlewares) {
-			console.log(to.meta.middlewares)
-			return next()
-		}
+	router.beforeEach(async (to, from, next) => {
 		const middlewares: any = to.meta.middlewares
-		Object.keys(middlewares).forEach((middleware) => {
-			middlewares[middleware]({ to, from, next })
-		})
-		return next()
+		let newPath = null
+		const middlewareArr = Object.keys(middlewares)
+		  for (const middleware of middlewareArr) {
+   			await setAuthUser()
+			newPath = await middlewares[middleware]({ to, from, next })
+
+		
+		}
+
+		// Object.keys(middlewares).forEach(async (middleware) => {
+		
+		// })
+	
+		console.log(newPath)
+		if(newPath)	 next({ path: newPath })
+		else  next()
+		
 	})
 
 	return router

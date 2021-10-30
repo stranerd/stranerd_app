@@ -62,12 +62,14 @@ import { defineComponent, ref } from 'vue'
 import { useEmailSignin } from '@/application/composable/auth/signin'
 import { IonContent, IonPage, IonInput,IonButton, IonCheckbox, IonSpinner } from '@ionic/vue'
 import AuthProviders from '@/application/components/auth/AuthProviders.vue'
+import isNotAuthenticated from '@/application/middlewares/isNotAuthenticated'
 
 
 
 export default defineComponent({
 	components: { IonContent,IonPage,IonInput,IonButton, IonCheckbox, AuthProviders, IonSpinner,  },
 	layout:'Auth',
+	middlewares: [isNotAuthenticated],
 	  setup() {
 	
 
