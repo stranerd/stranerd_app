@@ -55,6 +55,7 @@ import { selectedTab } from '@/application/composable/profile'
 export default  {
 	name: 'profileDashboard',
 	middlewares:[isAuthenticated],
+	layout: 'Justified',
 	components: { IonPage, IonContent, topSession, Dashboard, Questions, Reviews, Answers, Bio, Settings, Achievements},
 	setup() {
 		

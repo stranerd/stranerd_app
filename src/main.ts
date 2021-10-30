@@ -43,20 +43,15 @@ const router = Promise.all(routes).then((routes) => {
 	router.beforeEach(async (to, from, next) => {
 		const middlewares: any = to.meta.middlewares
 		let newPath = null
-		const middlewareArr = Object.keys(middlewares)
+		if(middlewares){
+			const middlewareArr = Object.keys(middlewares)
 		  for (const middleware of middlewareArr) {
    			await setAuthUser()
-			newPath = await middlewares[middleware]({ to, from, next })
-
-		
+				newPath = await middlewares[middleware]({ to, from, next })
+			}
 		}
-
-		// Object.keys(middlewares).forEach(async (middleware) => {
-		
-		// })
 	
-		console.log(newPath)
-		if(newPath)	 next({ path: newPath })
+		if(newPath)	 null
 		else  next()
 		
 	})
