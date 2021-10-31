@@ -6,6 +6,10 @@ export default async ( data: any) => {
 	console.log(await useAuth())
 	console.log(await useAuth().isLoggedIn.value)
 	
-	if (useAuth().isLoggedIn.value) return '/dashboard/home'  
+	if (useAuth().isLoggedIn.value) {
+		 next({ path: '/dashboard/home'  })
+
+		 return true
+	}
     
 }
