@@ -142,6 +142,7 @@ export default defineComponent({
 		const { user } = useAuth()	
 		const profileLink = `/profile/${user.value?.id}#dashboard`
 		
+
 		const store = useStore()
 		return {
 			profileLink,

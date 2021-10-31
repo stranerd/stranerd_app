@@ -1,14 +1,16 @@
 <template>
-<div class="flex flex-row items-center px-3 py-4 border-b-[1px] border-light_gray cursor-pointer text-icon_inactive" @click="handleOpenChat" >
-	 <avatar :size="'41'" :photo-url="meta?.avatar?.link"  :has-dot="true"/>
-	 <div class="flex flex-col justify-center  px-3  flex-grow">
+<router-link @click="handleOpenChat" class="flex flex-row  px-3 py-3 gap-2 border-b-[1px] border-light_gray cursor-pointer text-icon_inactive" :to="`/chat/${meta.userId}`" >
+	<div>
+	  <avatar :size="'41'" :photo-url="meta?.avatar?.link"  :has-dot="true"/>
+	</div>
+	 <span class="flex flex-col justify-center flex-grow ">
 		<h3 class="text-dark_gray heading font-bold">{{ meta.fullName }}</h3>
 		<span>{{ meta.last.isMedia ? meta?.last?.media?.name : meta.last.content }}</span>
-		</div>
-		<div class="flex flex-row-reverse justify-start h-full">
+	 </span>
+	 <div class="flex flex-row-reverse justify-start h-full">
 		<span>{{ formatTime(meta.last.createdAt, true) }}</span>
 	</div>
-</div>
+</router-link>
 </template>
 
 <script lang="ts">

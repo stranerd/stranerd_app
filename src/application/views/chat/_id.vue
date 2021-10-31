@@ -30,7 +30,7 @@
 
 <script lang="ts">
 import { IonPage, IonContent, IonIcon } from '@ionic/vue'
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, onMounted } from 'vue'
 const ChatList = defineAsyncComponent(() => import('@/application/components/chat/ChatList.vue'))
 const FullChat = defineAsyncComponent(() => import('@/application/components/chat/Chat.vue'))
 const ChatInfo = defineAsyncComponent(() => import('@/application/components/chat/ChatInfo.vue'))
@@ -40,9 +40,11 @@ import { useRoute } from 'vue-router'
 
 export default  {
 	name: 'chatView',
-	layout: 'Chat',
 	components: { IonPage, IonContent, ChatList, FullChat, ChatInfo, IonIcon },
 	setup(){
+		onMounted(() => {
+			openChat.value = true
+		})
 		const route = useRoute()
 		const  userId  = Array.isArray(route.params.id ) ? '' : route.params.id 
 		
