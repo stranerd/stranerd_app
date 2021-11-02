@@ -1,10 +1,11 @@
 <template>
 	<ion-page>
 		<ion-content :fullscreen="true">
-			<div class="max-w-4xl mx-auto ">
+			<page-loading v-if="loading"/>
+			<div class="max-w-4xl mx-auto " v-else>
 
 	
-				<div class="flex justify-center items-center mt-8 lg:mt-20 mb-2 md:px-2">
+				<div class="flex justify-center items-center mt-24 lg:mt-28 mb-2 md:px-2">
 					<span class="font-bold text-dark_gray heading hidden md:block" variant="1">
 						Tutor Leaderboard
 					</span>
@@ -16,11 +17,10 @@
 					
 						</ion-select>
 
-						<ion-select value="notifications" class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold" placeholder="Daily" interface="action-sheet">
-							<ion-select-option value="maths" >Daily</ion-select-option>
-							<ion-select-option value="physics" >Monthly</ion-select-option>
-							<ion-select-option value="bio" >Yearly</ion-select-option>
-					
+						<ion-select value="notifications" class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold" placeholder="Daily" interface="action-sheet" v-model="RankType">
+							<ion-select-option value="daily" >Daily</ion-select-option>
+							<ion-select-option value="weekly" >Weekly</ion-select-option>
+							<ion-select-option value="monthly" >Monthly</ion-select-option>
 						</ion-select>
 					</div>
 
@@ -40,41 +40,43 @@
 							</div>
 						</div>
 				
-						<div class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4 border border-faded_gray">
+						<div v-if="user" class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4 border border-faded_gray">
 							<div class="w-3/12">
-								<span> 124 </span>
+								<span> - </span>
 							</div>
 							<div class="w-7/12 flex items-center gap-2">
-								<avatar :size="24"/>
+								<avatar :size="24" :src="user.bio.photo"/>
 								<span>
-									Timmy Neutron
+									{{user.bio.fullName}}
 								</span>
 							</div>
 							<div class="w-2/12 text-right text-primary font-semibold">
-								<span>14</span>
+								<span>{{ user.account.rankings[RankType] }}</span>
 							</div>
 						</div>
 
-
-						<div v-for="(n) in 10" :key="n" class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4">
-							<div class="w-3/12">
-								<span>{{n}} </span>
+						<template v-if="leaderboardData.length">
+							<div  v-for="(person, index) in leaderboardData" :key="person.id" class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4">
+								<div class="w-3/12">
+									<span>{{index + 1}} </span>
+								</div>
+								<div class="w-3/12 flex items-center gap-2">
+									<avatar :size="24" :src="person.bio.photo"/>
+									<span>
+										{{person.bio.fullName}}
+									</span>
+								</div>
+								<div class="w-6/12 font-normal text-right text-primary ">
+									<span>{{ person.account.rankings[RankType] }}</span>
+								</div>
 							</div>
-							<div class="w-3/12 flex items-center gap-2">
-								<avatar :size="24"/>
-								<span>
-									Jeremy Schipp
-								</span>
-							</div>
-							<div class="w-6/12 font-normal text-right text-primary ">
-								<span>{{ 700 - n}}</span>
-							</div>
-						</div>
+						</template>
+					
 					</div>
 
-					<div class="text-center text-18">
-						<a class="text-primary-dark py-2" @click.prevent="fetchOlderTransactions">LOAD MORE</a>
-					</div>
+					<!-- <div class="text-center text-18">
+						<a class="text-primary-dark py-2" @click.prevent="fetchOlder">LOAD MORE</a>
+					</div> -->
 				</div>
 			</div>
 		</ion-content>
@@ -82,19 +84,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { IonSelect, IonSelectOption, IonPage, IonContent } from '@ionic/vue'
 import Avatar from '@/application/components/core/Avatar.vue'
 import {useLeaderboardList} from '@/application/composable/users/leaderboard'
+import PageLoading from '@/application/components/core/PageLoading.vue'
+import { useAuth } from '@/application/composable/auth/auth'
+
 
 export default defineComponent({
 	name: 'tutor learderboard',
 	layout: 'Justified',
-	components: { IonSelect, IonSelectOption,  Avatar, IonPage, IonContent,   },
+	displayName:'LeaderBoard',
+	components: { IonSelect, IonSelectOption,  Avatar, IonPage, IonContent, PageLoading,   },
 	 setup(){
-		const {filteredUsers, users} =  useLeaderboardList()
-		console.log(filteredUsers)
-		console.log(users)
+		const {filteredUsers:leaderboardData,  loading, Userindex} =  useLeaderboardList()
+		const RankType = ref('daily')
+		const {user} = useAuth()
+
+		console.log(user)
+
+		return{
+			user,
+			RankType,
+			leaderboardData,
+			loading,
+			Userindex
+			
+		}
 	}
 
 })
@@ -105,10 +122,11 @@ ion-select {
   --placeholder-color: #8B9EB1;
   --placeholder-opacity: 1;
   background-color: #F7F7FC;
+  --color:#8B9EB1;
   --padding-end:1rem;
   --padding-top:0.5rem !important;
   --padding-bottom:0.5rem !important;
-  border-radius: 12px;
+  border-radius: 6px;
   
 }
 

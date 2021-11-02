@@ -15,8 +15,8 @@
 	<!-- medium screens -->
 	<div class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50" v-if="!props.isNotDashboard && !store.state.showPage ">
 		<div class="flex flex-row items-center gap-9 w-1/4">
-			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" :to="profileLink">
-				<avatar :photo-url="user?.avatar?.link" :custom-class="'h-6'"/>
+			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center " :to="profileLink">
+				<avatar :src="user?.avatar?.link" :size="26"/>
 			</router-link>
 
 			<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
@@ -67,7 +67,7 @@
 				<ion-icon :icon="home" class="text-xl text-icon_inactive" ></ion-icon>
 			</router-link>
 			<div class="py-2 px-3 rounded-md flex flex-row items-center justify-center">
-				<img src="/assets/images/logo.svg" class="min-h-[25px] object-fit"/>
+				<img src="/assets/images/logo.svg" class="min-h-[25px] object-fit max-w-[8.9rem]"/>
 			</div>
 		</div>
 		<div class="flex flex-row items-center py-1 gap-6 justify-around" :class="noSideBar ? 'w-[63%]' : 'w-3/4'">
@@ -91,7 +91,7 @@
 				<ion-icon :icon="chatbubble" class="text-xl text-icon_inactive" ></ion-icon>
 			</router-link>
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" :to="profileLink">
-				<avatar :photo-url="user?.avatar?.link" :size="'26'"/>
+				<avatar :src="user?.avatar?.link" :size="26"/>
 			</router-link>
 		</div>
 		<div class="flex flex-row items-center py-1 -mr-5"  :class="noSideBar ? 'w-[21%]' : 'w-1/4'">
@@ -101,7 +101,7 @@
 					<span class="font-semibold text-sm text-dark_grey ">{{ user?.account.coins.bronze }}</span>
 				</div>
 				<div class="w-1/3 flex flex-row items-center justify-center">
-					<img src="/assets/images/add.svg" class="inline h-5"/>
+					<ion-icon :icon="add" class="text-xl" ></ion-icon>
 				</div>
 				<div class="w-1/3 flex flex-row-reverse items-center">
 					<span class="font-semibold text-sm text-dark_grey ">{{ user?.account.coins.gold }}</span>
@@ -112,13 +112,13 @@
 	</div>
 </template>
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from 'vue'
+import {  defineComponent } from 'vue'
 import { IonIcon, IonButtons, IonHeader,  IonToolbar } from '@ionic/vue'
 import { add, home, school, notifications, search, chatbubble } from 'ionicons/icons'
 import { useStore } from '@/application/store'
 import { useAuth } from '@/application/composable/auth/auth'
 import Coins from '../../core/Coins.vue'
-const Avatar = defineAsyncComponent(() => import('@/application/components/core/AvatarUser.vue'))
+import Avatar from '@/application/components/core/Avatar.vue'
 import { useRouter, useRoute } from 'vue-router'
 import { arrowBackOutline } from 'ionicons/icons'
 
@@ -136,7 +136,7 @@ export default defineComponent({
 	},
 	 setup(props) {
 		const router = useRouter()
-
+		
 		const displayName = useRoute().meta.displayName
 
 		const  { user } =  useAuth()	

@@ -1,7 +1,8 @@
 <template>
 	<img
 		:src="source"
-		:style="`width: ${size}px; height: ${size}px; border-radius: 10rem; border: 1.5px solid transparent; object-fit: cover !max-w-[1920px];`"
+		:style="`width: ${size}px; height: ${size}px; border-radius: 10rem; border: 1.5px solid transparent; object-fit: cover;`"
+		class="!max-w-[1920px]"
 		alt=""
 	>
 </template>

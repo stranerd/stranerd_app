@@ -5,6 +5,7 @@ import { useAuth } from '@/application/composable/auth/auth'
 
 const global = {
 	users: ref([] as UserEntity[]),
+	Userindex:ref(0),
 	fetched: ref(false),
 	...useErrorHandler(),
 	...useLoadingHandler()
@@ -32,9 +33,12 @@ export const useLeaderboardList = () => {
 		await global.setLoading(false)
 	}
 	const filteredUsers = computed({
-		get: () => global.users.value.filter((user) => {
+		get: () => global.users.value.filter((user, index) => {
 			let matched = true
-			if (user.id === id.value) matched = false
+			if (user.id === id.value){
+				global.Userindex.value = index
+				return matched = false
+			} 
 			return matched
 		}).map((user)=>{
 			return user 

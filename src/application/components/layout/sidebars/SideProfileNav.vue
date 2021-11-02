@@ -94,9 +94,9 @@
 						<span class="text-primary font-semibold">14</span>
 					</div>
 				</div>
-				<div class="py-3 px-3 rounded-lg flex w-full bg-primary text-white justify-center flex-row items-center">
+				<router-link to="/leaderboard" class="py-3 px-3 rounded-lg flex w-full bg-primary text-white justify-center flex-row items-center">
 					<span class="font-semibold">Leaderboard</span>
-				</div>
+				</router-link>
 			</div>
 
 		</div>

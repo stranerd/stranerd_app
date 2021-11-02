@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full lg:mt-0 mt-10">
+	<div class="w-full lg:mt-0 mt-1">
 		<div class="w-full flex justify-between">
 			<span class="heading font-bold text-dark_gray">
 				Featured tutors
@@ -28,7 +28,7 @@
 			</swiper>
 		</div>
 
-	<div class="lg:flex  w-full  md:gap-6 gap-3 mt-2 hidden">
+		<div class="lg:flex  w-full  md:gap-6 gap-3 mt-2 hidden">
 			<swiper
 				class="flex flex-row w-full items-center"
 				:direction="'horizontal'" :slidesPerView="4" 
