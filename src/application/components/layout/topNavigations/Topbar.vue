@@ -146,6 +146,7 @@ export default defineComponent({
 		const id = Localid!.replace(/^"|"$/g,'')
 		const profileLink = `/profile/${id}#dashboard`
 		
+
 		const store = useStore()
 		return {
 			profileLink,

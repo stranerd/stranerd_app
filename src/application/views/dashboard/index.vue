@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineAsyncComponent } from 'vue'
 
-const BottomNav = defineAsyncComponent(() => import('@/application/components/layout/bottomNavigations/BottomNav.vue'))
+import BottomNav from '@/application/components/layout/bottomNavigations/BottomNav.vue'
 
 import { IonPage, IonTabs, IonRouterOutlet } from '@ionic/vue'
 

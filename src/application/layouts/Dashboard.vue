@@ -5,11 +5,11 @@
 	<slot />
 </template>
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 
-const TopBar = defineAsyncComponent(() => import('@/application/components/layout/topNavigations/Topbar.vue'))
-const SideNavBar = defineAsyncComponent(() => import('@/application/components/layout/sidebars/DefaultSidebar.vue'))
-const Modal = defineAsyncComponent(() => import('@/application/components/core/Modal.vue'))
+import TopBar from '@/application/components/layout/topNavigations/Topbar.vue'
+import SideNavBar from '@/application/components/layout/sidebars/DefaultSidebar.vue'
+import Modal from '@/application/components/core/Modal.vue'
 
 export default defineComponent({
 	setup() {
