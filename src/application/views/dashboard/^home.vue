@@ -4,7 +4,7 @@
 			<div class="layout-page">
 				<div class="layout-body">
 					<div class="col-span-12 px-3 mb-14 md:px-5">
-						<ChallengesCard class="lg:hidden"/>
+						<!-- <ChallengesCard class="lg:hidden"/> -->
 						<FeaturedTutors/>
 						<RecentQuestions />
 						<UpcomingEvent/>
@@ -26,13 +26,13 @@ import RecentQuestions from '@/application/components/dashboard/RecentQuestions.
 import UpcomingEvent from '@/application/components/dashboard/UpcomingEvent.vue'
 import RecentTransaction from '@/application/components/dashboard/RecentTransaction.vue'
 import { defineAsyncComponent } from 'vue'
-import ChallengesCard from '@/application/components/dashboard/Challenges.vue'
+// import ChallengesCard from '@/application/components/dashboard/Challenges.vue'
 const SideProfileNav = defineAsyncComponent(() => import('@/application/components/layout/sidebars/SideProfileNav.vue'))
 
 export default  {
 	name: 'home',
 	layout: 'Dashboard',
-	components: { IonContent, IonPage,  FeaturedTutors, RecentQuestions, UpcomingEvent, RecentTransaction, SideProfileNav, ChallengesCard },
+	components: { IonContent, IonPage,  FeaturedTutors, RecentQuestions, UpcomingEvent, RecentTransaction, SideProfileNav,  },
 
 }
 </script>

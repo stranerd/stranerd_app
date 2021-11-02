@@ -6,7 +6,7 @@
 			<ion-buttons @click="router.go(-1)" slot="start">
 				<ion-icon :icon="arrowBackOutline" class="text-[23px] text-dark_gray"></ion-icon>
 			</ion-buttons>
-			<ion-title class="mx-auto text-base font-bold text-dark_gray">Notifications</ion-title>
+			<ion-title class="mx-auto text-base font-bold text-dark_gray">{{displayName}}</ion-title>
 		</ion-toolbar>
 	</ion-header>
 		
@@ -119,7 +119,7 @@ import { useStore } from '@/application/store'
 import { useAuth } from '@/application/composable/auth/auth'
 import Coins from '../../core/Coins.vue'
 const Avatar = defineAsyncComponent(() => import('@/application/components/core/AvatarUser.vue'))
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { arrowBackOutline } from 'ionicons/icons'
 
 export default defineComponent({
@@ -137,6 +137,8 @@ export default defineComponent({
 	 setup(props) {
 		const router = useRouter()
 
+		const displayName = useRoute().meta.displayName
+
 		const  { user } =  useAuth()	
 		const Localid = localStorage.getItem('authUserId')
 		const id = Localid!.replace(/^"|"$/g,'')
@@ -144,6 +146,7 @@ export default defineComponent({
 		
 		const store = useStore()
 		return {
+			displayName,
 			profileLink,
 			add,
 			props,

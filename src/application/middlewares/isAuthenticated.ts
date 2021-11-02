@@ -4,11 +4,8 @@ import { serializeToCookie } from '@/utils/cookie'
 
 export default async ( data: any) => {
 
-	const  { to,  from, next } = data
+	const  { to,  next } = data
 
-	console.log('to',to)
-	console.log('from',from)
-	console.log('next',next)
 	if (!useAuth().isLoggedIn.value) {
 		document.cookie = serializeToCookie(REDIRECT_SESSION_NAME,  to.fullPath)
 		next({ path: '/auth/signin' })

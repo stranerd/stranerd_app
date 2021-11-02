@@ -1,16 +1,16 @@
 <template>
 	<div class="w-full flex flex-col py-3 px-2 ">
 
-		<div class="flex flex-row justify-between items-center ">
+		<!-- <div class="flex flex-row justify-between items-center ">
 			<h2 class="text-dark_gray text-base font-bold ">Challenges</h2>
 			<div class="flex flex-row items-center text-sm font-semibold text-primary ">
 				<span class="text-sm text-primary  ">view all</span>
 				<i class="las la-angle-right" style="font-size: 22px;"></i>
 			</div>
-		</div>
+		</div> -->
 
-		<div class="mt-3 flex flex-col text-sm text-dark_gray gap-3">
-			<div class="bg-light_blue py-4 px-4 rounded-xl flex flex-col">
+		<div class="flex flex-col text-sm text-dark_gray gap-3">
+			<!-- <div class="bg-light_blue py-4 px-4 rounded-xl flex flex-col">
 				<h2 class="mb-2">Reach the rank of <b>{{ user?.nextRank?.id }}</b></h2>
 				<div class="flex flex-row rounded-xl py-[4px] relative bg-faded_gray">
 					<div :class="`absolute left-0 top-0 h-full rounded-xl bg-primary`" :style="`width:${rankPercentage(user?.nextRank?.score, user?.rank.score)};`">
@@ -40,10 +40,10 @@
 					<div class="absolute left-0 top-0 h-full rounded-xl bg-primary" :style="`width:${rankPercentage(5, user?.account?.streak.longestStreak )};`">
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 
-			<div class="flex flex-row justify-between items-center mt-4">
+			<div class="flex flex-row justify-between items-center">
 				<h2 class="text-dark_gray text-base font-bold ">Ranking</h2>
 				<div class="flex flex-row items-center text-sm py-0 pr-2 rounded-lg bg-light_gray">
 					<ion-select value="notifications" class="w-full text-xs md:text-sm  placeholder-[#8B9EB1] font-semibold" placeholder="Filter by subject" interface="action-sheet">

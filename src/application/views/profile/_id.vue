@@ -56,6 +56,7 @@ export default  {
 	name: 'profileDashboard',
 	middlewares:[isAuthenticated],
 	layout: 'Justified',
+	displayName: 'Profile',
 	components: { IonPage, IonContent, topSession, Dashboard, Questions, Reviews, Answers, Bio, Settings, Achievements},
 	setup() {
 		

@@ -21,6 +21,7 @@ import { RemoveAdminUseCase } from './domain/usecases/roles/removeAdmin'
 import { MakeTutorUseCase } from './domain/usecases/roles/makeTutor'
 import { RemoveTutorUseCase } from './domain/usecases/roles/removeTutor'
 import { GetUsersByEmailUseCase } from './domain/usecases/users/getUsersByEmail'
+import { GetLeaderboardUsecase } from './domain/usecases/users/getLeaderboard'
 import { GetAllAdminsUseCase } from './domain/usecases/users/getAllAdmins'
 import { GetAllTutorsUseCase } from './domain/usecases/users/getAllTutors'
 import { ListenToAllTutorsUseCase } from './domain/usecases/users/listenToAllTutors'
@@ -63,7 +64,8 @@ const referralRepository = new ReferralRepository(referralDataSource, referralTr
 const transactionRepository = new TransactionRepository(transactionDataSource, transactionTransformer)
 
 export const FindUser = new FindUserUseCase(userRepository)
-export const GetUsersByEmail = new GetUsersByEmailUseCase(userRepository)
+export const GetUsersByEmail = new GetUsersByEmailUseCase(userRepository) 
+export const GetLeaderboard = new GetLeaderboardUsecase(userRepository) 
 export const GetAllAdmins = new GetAllAdminsUseCase(userRepository)
 export const GetAllTutors = new GetAllTutorsUseCase(userRepository)
 export const ListenToAllTutors = new ListenToAllTutorsUseCase(userRepository)
