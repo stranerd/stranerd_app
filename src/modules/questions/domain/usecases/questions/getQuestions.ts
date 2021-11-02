@@ -19,3 +19,4 @@ export class GetQuestionsUseCase {
 		return await this.repository.get(conditions)
 	}
 }
+ 

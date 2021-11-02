@@ -2,7 +2,7 @@
 	<div class="w-full">
 		<div class="w-full flex justify-between">
 			<span class="heading font-bold text-dark_gray">
-				Challenges
+				Activities
 			</span>
 
 
@@ -14,12 +14,12 @@
 
 		<div class="flex md:gap-6 gap-3 mt-2">
 			<swiper
-				:direction="'horizontal'" :spaceBetween="16" :freeMode="true" class="overflow-x-auto"
+				:direction="'horizontal'"  :freeMode="true" class="overflow-x-auto"
 			>
 				<swiper-slide
 					v-for="(challenge,index) in challengeData"
 					:key="index"
-					class="flex !w-[14rem]">
+					class="flex md:!w-[300px] !w-[265px] mr-3">
 					<ChallengesCard :style="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'" :challenge="challenge"/>
 				</swiper-slide>
 				
@@ -36,7 +36,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
 import ChallengesCard from './ChallengesCard.vue'
 import { useAuth } from '@/application/composable/auth/auth'
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { ChallengeData } from '@/modules/users/data/models/user'
 
 
@@ -75,6 +75,10 @@ export default  {
 				]
 			}
 		} 
+
+		onMounted(() => {
+			setChallenges()
+		})
 
 	    watch(user,setChallenges)
 

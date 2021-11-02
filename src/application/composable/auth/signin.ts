@@ -14,6 +14,7 @@ import { isClient } from '@/utils/environment'
 import { NetworkError, StatusCodes } from '@/modules/core'
 import { useAuth } from '@/application/composable/auth/auth'
 import { createStorage } from './storage'
+import { setAuthUser } from '@/application/plugins/setLoggedIn'
 
 const global = {
 	referrerId: ref(undefined as string | undefined)
@@ -60,6 +61,7 @@ export const useEmailSignin = () => {
 					referrer: getReferrerId()
 				})
 				await createStorage(user)
+				await setAuthUser() 
 				await  router.push('/dashboard/home')
 				window.localStorage.removeItem('referrer')
 
@@ -87,6 +89,7 @@ export const useEmailSignup = () => {
 					referrer: getReferrerId()
 				})
 				await createStorage(user)
+				await setAuthUser() 
 				await  router.push('/auth/verify')
 				 window.localStorage.removeItem('referrer')
 			} catch (error) {

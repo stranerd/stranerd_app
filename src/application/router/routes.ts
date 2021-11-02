@@ -67,14 +67,15 @@ export default pages
 	.filter((path: any[]) => !path.some(childrenFilter))
 	.map(async (path: any[]) => {
 		const { default: component } = await import(`../views/${path.join('/')}`)
-		const { layout, middlewares, name } = component
+		const { layout, middlewares, name, displayName } = component
 		const route = `/${generateRoute([...path])}`
-		let children: { path: any; name: any; component: any; meta: { layout: any; middlewares: any } }[] = []
+		let children: { path: any; name: any; component: any; meta: { layout: any; middlewares: any; displayName: any } }[] = []
 		if (childrenByPath[route]) {
 			const promises = childrenByPath[route].map(async ({ path, route }) => {
 				const { default: childComponent } =
           await import(`../views/${path.join('/')}`)
 				const {
+					displayName: childDisplayName,
 					layout: childLayout,
 					middlewares: childMiddleware,
 					name: childName
@@ -85,7 +86,8 @@ export default pages
 					component: childComponent,
 					meta: {
 						layout: childLayout || defaultLayout,
-						middlewares: childMiddleware || {}
+						middlewares: childMiddleware || {},
+						displayName: childDisplayName || {}
 					}
 				}
 			})
@@ -97,7 +99,8 @@ export default pages
 			component,
 			meta: {
 				layout: layout || defaultLayout,
-				middlewares: middlewares || {}
+				middlewares: middlewares || {},
+				displayName: displayName || {}
 			},
 			children
 		}

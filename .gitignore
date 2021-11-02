@@ -36,4 +36,5 @@ npm-debug.log*
 package-lock.json
 # Service worker
 sw.*
-env.json
+/env.json
+*env.json
