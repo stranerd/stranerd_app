@@ -149,7 +149,6 @@ export default defineComponent( {
 		const { hasPassword, id } = useAuth()
 		const { show, toggle } = usePassword()
 		if(props.userId !== id.value){
-			console.log(id.value)
 			 await router.push(`/profile/${id.value}#dashboard`)
 				 selectedTab.value = '#dashboard'
 		}

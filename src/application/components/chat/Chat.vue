@@ -1,9 +1,9 @@
 <template>
-<div class=" flex flex-col relative h-full w-full  border-r-[1px] border-faded_gray overflow-y-hidden">
-	<chat-top :key="hash" :user="user ? user : undefined" ></chat-top>
-	<chat-content :user-id="userId" ></chat-content>
-	<chat-bottom :session-id="sessionId" :user-id="userId"></chat-bottom>
-</div>
+	<div class=" flex flex-col relative h-full w-full  border-r-[1px] border-faded_gray overflow-y-hidden">
+		<chat-top :key="hash" :user="user ? user : undefined" ></chat-top>
+		<chat-content :user-id="userId" ></chat-content>
+		<chat-bottom :session-id="sessionId" :user-id="userId"></chat-bottom>
+	</div>
 </template>
 
 <script lang="ts">

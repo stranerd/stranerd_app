@@ -102,7 +102,6 @@ export default defineComponent({
 		const RankType = ref('daily')
 		const {user} = useAuth()
 
-		console.log(user)
 
 		return{
 			user,

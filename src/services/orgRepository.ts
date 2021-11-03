@@ -39,14 +39,10 @@ AxiosAuth.interceptors.request.use(
 AxiosAuth.interceptors.response.use(
 	(response) =>{
 
-		console.log(response)
 		return response
 			
 	},
-	(err) => {
-		console.log(axios.interceptors.request)	
-		console.log(err)
-	},
+
 )
 
 // stranerd config
