@@ -9,10 +9,10 @@
 						If an error occurred, click the button below to retry verification.
 					</span>
 					<div class="h-[65%]">
-						<form >
-					
-							
-							<ion-button  class="w-full mb-4 uppercase" @click="completeVerification" :disabled="loading">	Retry Verification <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
+						<form 
+							@submit.prevent="completeVerification"
+						>
+							<ion-button  class="w-full mb-4 uppercase" :disabled="loading">	Retry Verification <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
 						</form>
 					</div>
 				</div>

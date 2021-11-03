@@ -12,9 +12,9 @@
 						<template v-if="selectedTab == '#questions'">
 							<questions :userId="id"></questions>
 						</template>
-						<template v-if="selectedTab == '#reviews'">
+						<!-- <template v-if="selectedTab == '#reviews'">
 							<reviews :userId="id"></reviews>
-						</template>
+						</template> -->
 						<template v-if="selectedTab == '#answers'"> 
 							<answers :userId="id"></answers>
 						</template>
@@ -24,9 +24,9 @@
 						<template v-if="selectedTab == '#settings'">
 							<settings :userId="id"></settings>
 						</template>
-						<template v-if="selectedTab == '#achievements'">
+						<!-- <template v-if="selectedTab == '#achievements'">
 							<achievements :userId="id"></achievements>
-						</template>
+						</template> -->
 					</div>
 					
 				</div> 
@@ -46,7 +46,7 @@ const Reviews = defineAsyncComponent(() => import('@/application/components/prof
 const Answers = defineAsyncComponent(() => import('@/application/components/profile/UserAnswerList.vue'))
 const Bio = defineAsyncComponent(() => import('@/application/components/profile/bio.vue'))
 const Settings = defineAsyncComponent(() => import('@/application/components/profile/settings.vue'))
-const Achievements = defineAsyncComponent(() => import('@/application/components/profile/achievements.vue'))
+// const Achievements = defineAsyncComponent(() => import('@/application/components/profile/achievements.vue'))
 import isAuthenticated from '@/application/middlewares/isAuthenticated'
 import { star } from 'ionicons/icons'
 import {  useRoute } from 'vue-router'
@@ -57,7 +57,7 @@ export default  {
 	middlewares:[isAuthenticated],
 	layout: 'Justified',
 	displayName: 'Profile',
-	components: { IonPage, IonContent, topSession, Dashboard, Questions, Reviews, Answers, Bio, Settings, Achievements},
+	components: { IonPage, IonContent, topSession, Dashboard, Questions, Answers, Bio, Settings,},
 	setup() {
 		
 		const { id } = useRoute().params
