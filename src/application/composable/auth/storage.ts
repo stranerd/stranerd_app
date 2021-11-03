@@ -1,7 +1,7 @@
 import { useErrorHandler, useLoadingHandler } from '@/application/composable/core/states'
 import { AfterAuthUser } from '@/modules/auth/domain/entities/auth'
 import { useAuth } from '@/application/composable/auth/auth'
-import { useRouter  } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 export const createStorage = async (afterAuth: AfterAuthUser) => {
 	const router = useRouter()
@@ -17,8 +17,6 @@ export const createStorage = async (afterAuth: AfterAuthUser) => {
 
 	localStorage.setItem('accessToken', afterAuth.accessToken)
 	localStorage.setItem('refreshToken', afterAuth.refreshToken)
-	localStorage.setItem('authUser', JSON.stringify(afterAuth.user))
-	localStorage.setItem('authUserId', JSON.stringify(afterAuth.user.id))
 }
 
 export const useStorageSignout = () => {
