@@ -3,12 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "yarn env:copy:app && vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+	"env:copy:example": "copy env.example.json env.json",
+	"env:copy:app": "node bin/copy-env-app"
+
   },
   "dependencies": {
     "@capacitor/app": "1.0.3",

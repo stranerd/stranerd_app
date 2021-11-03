@@ -1,12 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import routes from './application/router/routes'
-import Manualroutes from './application/router/index'
-import { createRouter, createWebHistory, } from '@ionic/vue-router'
+import { createRouter, createWebHistory } from '@ionic/vue-router'
 import { IonicVue } from '@ionic/vue'
 
-import { store, key } from './application/store'
-
+import { key, store } from './application/store'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css'
@@ -23,7 +21,6 @@ import '@ionic/vue/css/typography.css'
 // import '@ionic/vue/css/text-transformation.css';
 // import '@ionic/vue/css/flex-utils.css';
 // import '@ionic/vue/css/display.css';
-
 // tailwind utility classes
 import '@/application/assets/styles/tailwind.css'
 
@@ -34,7 +31,6 @@ import 'line-awesome/dist/line-awesome/css/line-awesome.min.css'
 import '@/application/assets/theme/variables.css'
 import { setAuthUser } from './application/plugins/setLoggedIn'
 
-
 const router = Promise.all(routes).then((routes) => {
 	const router = createRouter({
 		history: createWebHistory(),
@@ -44,36 +40,30 @@ const router = Promise.all(routes).then((routes) => {
 	router.beforeEach(async (to, from, next) => {
 		const middlewares: any = to.meta.middlewares
 		let newPath = null
-		if(middlewares){
+		if (middlewares) {
 			const middlewareArr = Object.keys(middlewares)
-		  for (const middleware of middlewareArr) {
-   			await setAuthUser()
+			for (const middleware of middlewareArr) {
+				await setAuthUser()
 				newPath = await middlewares[middleware]({ to, from, next })
 			}
 		}
-	
-		if(newPath)	 null
-		else  next()
-		
+
+		if (newPath) null
+		else next()
+
 	})
 
 	return router
 })
 
-
-const init = async() => {
+const init = async () => {
+	await setAuthUser().catch()
 	createApp({
-		components: {
-			App
-		},
-		async mounted(){
-			await setAuthUser()
-		}
+		components: { App }
 	}).use(await router)
 		.use(store, key)
 		.use(IonicVue)
 		.mount('#app')
-  
 }
-  
+
 init()
