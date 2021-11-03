@@ -13,7 +13,7 @@
 	<!-- </div> -->
 
 	<!-- medium screens -->
-	<div class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50" v-if="!props.isNotDashboard && !store.state.showPage ">
+	<div class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50" v-if="!isNotDashboard && !store.state.showPage ">
 		<div class="flex flex-row items-center gap-9 w-1/4">
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center " :to="profileLink">
 				<avatar :src="user?.avatar?.link" :size="26"/>
@@ -134,7 +134,7 @@ export default defineComponent({
 			default: false
 		},
 	},
-	 setup(props) {
+	 setup() {
 		const router = useRouter()
 		
 		const displayName = useRoute().meta.displayName
@@ -149,7 +149,6 @@ export default defineComponent({
 			displayName,
 			profileLink,
 			add,
-			props,
 			store,
 			home,
 			user,

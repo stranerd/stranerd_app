@@ -144,12 +144,12 @@ export default defineComponent( {
 			default:''
 		} 
 	},
-	async setup  (props: any) {
+	setup  (props: any) {
 		const router = useRouter()
 		const { hasPassword, id } = useAuth()
 		const { show, toggle } = usePassword()
 		if(props.userId !== id.value){
-			 await router.push(`/profile/${id.value}#dashboard`)
+			  router.push(`/profile/${id.value}#dashboard`)
 				 selectedTab.value = '#dashboard'
 		}
 	

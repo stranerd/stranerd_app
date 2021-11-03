@@ -33,6 +33,7 @@
     "swiper": "^6.8.4",
     "vue": "^3.0.0",
     "vue-router": "^4.0.11",
+    "vue-unused-components-checker": "^1.1.2",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

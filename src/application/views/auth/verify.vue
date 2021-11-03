@@ -10,10 +10,10 @@
 						If an error occurred or you didn't receive the email, click the button below to resend the email.
 					</span>
 					<div class="h-[65%]">
-						<form >
-					
-							
-							<ion-button  class="w-full mb-4 uppercase" @click="sendVerificationEmail">Resend Mail <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
+						<form
+							@submit.prevent="sendVerificationEmail"
+						>
+							<ion-button  class="w-full mb-4 uppercase" >Resend Mail <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
 						</form>
 					</div>
 				</div>

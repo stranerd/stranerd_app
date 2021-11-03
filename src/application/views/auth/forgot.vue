@@ -7,13 +7,15 @@
 					<h1 class="text-xl text-dark_gray font-bold mb-2 ">Forgot Password</h1>
 					<span class="normalText text-dark_gray mb-4">Enter your email to reset your password</span>
 					<div class="h-[65%]">
-						<form >
+						<form
+							@submit.prevent="sendResetEmail"
+						>
 							<div class="mb-4">
 								<ion-input placeholder="Email Address" type="email" position="floating" :size="24" v-model="factory.email" required></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
 							</div>
 							
-							<ion-button  class="w-full mb-4" @click="sendResetEmail">RESET PASSWORD <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
+							<ion-button  class="w-full mb-4" >RESET PASSWORD <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
 						</form>
 					</div>
 				</div>
