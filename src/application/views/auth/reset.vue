@@ -4,18 +4,22 @@
 			<div class="w-full mt-10 h-full flex flex-col items-center justify-start ">
 
 				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
-					<h1 class="text-xl text-dark_gray font-bold mb-2 ">Forgot Password</h1>
-					<span class="normalText text-dark_gray mb-4">Enter your email to reset your password</span>
+					<h1 class="text-xl text-dark_gray font-bold mb-2 ">Reset Password</h1>
+					<span class="normalText text-dark_gray mb-4">To reset your password, type your new password below and reset</span>
 					<div class="h-[65%]">
 						<form
-							@submit.prevent="sendResetEmail"
+							@submit.prevent="resetPassword"
 						>
 							<div class="mb-4">
-								<ion-input placeholder="Email Address" type="email" position="floating" :size="24" v-model="factory.email" required></ion-input>
+								<ion-input placeholder="New Password" type="email" position="floating" :size="24" v-model="factory.password" required></ion-input>
+								<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
+							</div>
+							<div class="mb-4">
+								<ion-input placeholder="Confirm New Password" type="email" position="floating" :size="24" v-model="factory.cPassword" required></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
 							</div>
 							
-							<ion-button  class="w-full mb-4" type="submit">RESET PASSWORD <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
+							<ion-button type="submit"  class="w-full mb-4" >RESET PASSWORD <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
 						</form>
 					</div>
 				</div>
@@ -24,6 +28,8 @@
 					Back to Sign In
 				</router-link>
 			</div>
+
+			<page-loading v-if="loading"/>
 		</ion-content>
 	</ion-page>
 	
@@ -31,21 +37,27 @@
 
 <script lang="ts">
 import { defineComponent,  } from 'vue'
-import { usePasswordResetRequest } from '@/application/composable/auth/passwords'
+import { usePasswordReset } from '@/application/composable/auth/passwords'
 import { IonContent, IonPage, IonInput,IonButton,  IonSpinner } from '@ionic/vue'
+import PageLoading from '@/application/components/core/PageLoading.vue'
+import {  useRoute } from 'vue-router'
 
 
 
 export default defineComponent({
-	components: { IonContent,IonPage,IonInput,IonButton, IonSpinner,  },
+	components: { IonContent,IonPage,IonInput,IonButton, IonSpinner, PageLoading,  },
 	layout:'Auth',
+    	middlewares: [(data: any) => {
+		const  { to,  from, next } = data
+		
+		if (!useRoute()?.query?.token) next({ path: '/auth/signin' })
+	}],
 	  setup() {
-	
+		const { token } = useRoute().query
+		const { factory, loading, resetPassword, error, message } = usePasswordReset(token as string)
 
-		const { factory, loading, error, sendResetEmail, message } = usePasswordResetRequest()
-
 	
-		return {   factory, loading, error, sendResetEmail, message }
+		return { factory, loading, resetPassword, error, message }
 	},
 
 

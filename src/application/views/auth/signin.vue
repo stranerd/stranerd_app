@@ -22,7 +22,7 @@
 								<ion-input placeholder="Password" position="floating" type="password" :size="24" v-model="factory.password"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.password }}</span>
 							</div>
-							<ion-button  class="w-full mb-4" :disabled="loading">SIGN IN <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
+							<ion-button  class="w-full mb-4" :disabled="loading" type="submit">SIGN IN <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
 						</form>
 						<div class="w-full flex justify-between items-center  text-dark_gray">
 							<div class="flex justify-between items-center gap-2">

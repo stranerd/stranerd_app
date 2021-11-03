@@ -40,7 +40,7 @@
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.cPassword }}</span>
 							</div>
 
-							<ion-button  class="w-full mb-4" >SIGN UP <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
+							<ion-button  class="w-full mb-4" type="submit">SIGN UP <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
 						</form>
 
 						<div class="flex justify-between px-5 items-center mt-8">
