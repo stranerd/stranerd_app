@@ -10,7 +10,7 @@ export class GetLeaderboardUsecase {
 
 	async call (type: string) {
 		const conditions: QueryParams = {
-			sort: { field: `account.ranking.${type}`, order: 1 },
+			sort: { field: `account.ranking.${type}`, order: -1 },
 			limit: 50
 		}
 

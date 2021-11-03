@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import routes from './application/router/routes'
+import Manualroutes from './application/router/index'
 import { createRouter, createWebHistory, } from '@ionic/vue-router'
 import { IonicVue } from '@ionic/vue'
 
@@ -35,6 +36,10 @@ import { setAuthUser } from './application/plugins/setLoggedIn'
 
 
 const router = Promise.all(routes).then((routes) => {
+	// console.log(routes)
+	// @ts-ignore
+	const combinedRoutes = routes.concat(Manualroutes)
+	console.log(combinedRoutes)
 	const router = createRouter({
 		history: createWebHistory(),
 		routes
