@@ -12,7 +12,7 @@
 						<form 
 							@submit.prevent="completeVerification"
 						>
-							<ion-button  class="w-full mb-4 uppercase" :disabled="loading">	Retry Verification <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
+							<ion-button  class="w-full mb-4 uppercase" type="submit" :disabled="loading">	Retry Verification <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
 						</form>
 					</div>
 				</div>

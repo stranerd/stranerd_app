@@ -12,13 +12,22 @@
 						<ion-icon :icon="checkmarkDone" class="text-xl text-icon_inactive" ></ion-icon>
 					</span>
 				</div>
-
-				<NotificationCard
-					class="px-4"
-					v-for="notification in notifications"
-					:key="notification.hash"
-					:notification="notification"
+				<empty-state
+					info="You have no notifications yet"
+					route="/dashboard/home"
+					btnText="Go To Home"
+					v-if="!notifications.length"
 				/>
+
+				<template v-else>
+					<NotificationCard
+						class="px-4"
+						v-for="notification in notifications"
+						:key="notification.hash"
+						:notification="notification"
+					/>
+				</template>
+	
 				<span class="text-icon_inactive normalText flex items-end justify-center mt-3 md:hidden">
 					Mark all as read
 					<ion-icon :icon="checkmarkDone" class="text-xl text-icon_inactive" ></ion-icon>
@@ -41,11 +50,14 @@ import NotificationCard from '@/application/components/Notification/Notification
 import { IonContent, IonPage,IonIcon,IonSkeletonText } from '@ionic/vue'
 import { checkmarkDone } from 'ionicons/icons'
 import PageLoading from '@/application/components/core/PageLoading.vue'
+import EmptyState from '@/application/components/core/emptyState.vue'
+import isAuthenticated from '@/application/middlewares/isAuthenticated'
 
 export default defineComponent( {
 	name:'Notification',
 	layout: 'Justified',
-	components: {NotificationCard, IonContent, IonPage, IonIcon,  PageLoading },
+	middlewares:[isAuthenticated],
+	components: {NotificationCard, IonContent, IonPage, IonIcon,  PageLoading, EmptyState },
 	setup () {
 		const { notifications, error, loading, listener, hasMore, fetchOlderNotifications } = useNotificationList()
 		onMounted(() => {

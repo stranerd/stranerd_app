@@ -1,5 +1,8 @@
 <template>
-	<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
+	<div class="flex items-center justify-center w-full col-span-12 pt-12 px-5"  v-if="loading">
+		<ion-progress-bar type="indeterminate"></ion-progress-bar>
+	</div>
+	<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive" v-else>
 		<div class="flex flex-col gap-2">
 			<h2 class="headings font-bold text-dark_gray">Profile picture</h2>
 			<div
@@ -134,7 +137,8 @@ import {
 	IonSelect,
 	IonSelectOption,
 	IonSpinner,
-	IonTextarea
+	IonTextarea,
+	IonProgressBar 
 } from '@ionic/vue'
 import { image } from 'ionicons/icons'
 import { defineComponent, ref } from 'vue'
@@ -146,7 +150,7 @@ import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'profileSettings',
-	components: { IonIcon, IonInput, IonTextarea, IonSelect, IonSelectOption, IonRippleEffect, IonSpinner, IonButton },
+	components: { IonIcon, IonInput, IonTextarea, IonSelect, IonSelectOption, IonRippleEffect, IonSpinner, IonButton, IonProgressBar  },
 
 	props: {
 		userId: {

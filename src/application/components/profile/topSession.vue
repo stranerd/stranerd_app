@@ -1,4 +1,5 @@
 <template>
+	<page-loading v-if="loading"/>
 	<div class="w-full col-span-12 mb-4 flex-col flex gap-2 items-center justify-center normalText" v-if="user">
 		<!-- <img src="/assets/images/person-circle.svg" class="inline h-20 "/> -->
 		<avatar :size="90" :src="user.avatar"/>
@@ -47,6 +48,7 @@ import ShowRatings from '../core/ShowRatings.vue'
 import { toggleModal } from '@/application/composable/core/Modal'
 import { setNewSessionTutorIdBio } from '@/application/composable/sessions/sessions'
 import {   useRouter } from 'vue-router'
+import PageLoading from '../core/PageLoading.vue'
 
 export default defineComponent({
 	props:{
@@ -93,7 +95,8 @@ export default defineComponent({
 	},
 	components: {
 		Avatar,
-		ShowRatings
+		ShowRatings,
+		PageLoading
 
 	}
 })
