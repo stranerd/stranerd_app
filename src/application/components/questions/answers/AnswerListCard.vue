@@ -52,7 +52,6 @@ export default defineComponent( {
 	},
 
 	setup(props: any) {
-		console.log(props.answer)
 		
 		return {
 			formatTime,

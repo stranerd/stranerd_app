@@ -1,18 +1,18 @@
 <template>
-<div class="flex flex-row items-center px-3 py-4 bg-light_gray border-b-[1px] border-faded_gray text-icon_inactive gap-3 normalText sticky w-full bottom-0 justify-between">
-  <ion-icon :icon="addCircle" class=" text-[23px]" ></ion-icon>
-	<textarea  v-model="factory.content"  class="bg-light_gray leading-tight focus:outline-none resize-none flex-grow placeholder-icon_inactive" placeholder="Type your response here" ></textarea>
-	<div class="flex flex-row items-center gap-3"> 
-	 <template v-if="factory.content?.length == 0 || factory.content == undefined ">
-	   <ion-icon :icon="videocam" class=" text-[23px]" ></ion-icon>
-	   <ion-icon :icon="camera" class=" text-[23px]" ></ion-icon>
-	   <ion-icon :icon="mic" class=" text-[23px]" ></ion-icon>
-	 </template>
-	  <span v-else  @click="createTextChat" class="md:h-10 h-8 w-8 cursor-pointer md:w-10 bg-primary rounded-full flex flex-row justify-center items-center">
-	    <ion-icon :icon="send" class=" md:text-[20px] text-[16px] text-white"></ion-icon>
-	   </span>
+	<div class="flex flex-row items-center px-3 py-4 bg-light_gray border-b-[1px] border-faded_gray text-icon_inactive gap-3 normalText sticky w-full bottom-0 justify-between">
+		<ion-icon :icon="addCircle" class=" text-[23px]" ></ion-icon>
+		<textarea  v-model="factory.content"  class="bg-light_gray leading-tight focus:outline-none resize-none flex-grow placeholder-icon_inactive" placeholder="Type your response here" ></textarea>
+		<div class="flex flex-row items-center gap-3"> 
+			<template v-if="factory.content?.length == 0 || factory.content == undefined ">
+				<ion-icon :icon="videocam" class=" text-[23px]" ></ion-icon>
+				<ion-icon :icon="camera" class=" text-[23px]" ></ion-icon>
+				<ion-icon :icon="mic" class=" text-[23px]" ></ion-icon>
+			</template>
+			<span v-else  @click="createTextChat" class="md:h-10 h-8 w-8 cursor-pointer md:w-10 bg-primary rounded-full flex flex-row justify-center items-center">
+				<ion-icon :icon="send" class=" md:text-[20px] text-[16px] text-white"></ion-icon>
+			</span>
+		</div>
 	</div>
-</div>
 </template>
 
 <script lang="ts">

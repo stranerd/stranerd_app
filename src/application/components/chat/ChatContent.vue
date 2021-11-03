@@ -1,18 +1,18 @@
 <template>
-<div class="flex flex-col px-3 py-7 gap-5 text-icon_inactive normalText  flex-grow overflow-y-auto">
-    <template v-if="chats.length === 0">
-	<div class="w-full flex flex-row justify-center bg">
-	  <span class="px-4 py-2 bg-light_gray rounded-xl">No messages found. Send a message now</span>
-   </div>
-	</template>
+	<div class="flex flex-col px-3 py-7 gap-5 text-icon_inactive normalText  flex-grow overflow-y-auto">
+		<template v-if="chats.length === 0">
+			<div class="w-full flex flex-row justify-center bg">
+				<span class="px-4 py-2 bg-light_gray rounded-xl">No messages found. Send a message now</span>
+			</div>
+		</template>
 
-	<template v-else>
-	 <div class="w-full flex flex-col gap-4"  v-for="session in chats" :key="session.hash">
-	  <chat-message v-for="chat in session.chats" :key="chat.hash" :chat="chat" :user-id="userId"  />
-	 </div >
-	</template>
+		<template v-else>
+			<div class="w-full flex flex-col gap-4"  v-for="session in chats" :key="session.hash">
+				<chat-message v-for="chat in session.chats" :key="chat.hash" :chat="chat" :user-id="userId"  />
+			</div >
+		</template>
 
-</div>
+	</div>
 
 </template>
 <script lang="ts">

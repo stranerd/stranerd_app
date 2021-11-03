@@ -1,20 +1,20 @@
 <template>
-  	<div class="flex items-center mt-4 table-data-style">
-				<div class="w-3/12">
-					<span>{{ formatTime(transaction.createdAt) }}</span>
-				</div>
-				<div class="w-3/12 flex items-center gap-2">
-					<Coins :gold="transaction.isGold" :size="24"/>
+	<div class="flex items-center mt-4 table-data-style">
+		<div class="w-3/12">
+			<span>{{ formatTime(transaction.createdAt) }}</span>
+		</div>
+		<div class="w-3/12 flex items-center gap-2">
+			<Coins :gold="transaction.isGold" :size="24"/>
                     
-					<span >
-						<!-- {{transaction.isGain ? '+' : '-'}} -->
-                        {{ formatNumber(transaction.amount) }}
-					</span>
-				</div>
-				<div class="w-6/12 font-normal">
-					<span>{{ transaction.event }}</span>
-				</div>
-			</div>
+			<span >
+				<!-- {{transaction.isGain ? '+' : '-'}} -->
+				{{ formatNumber(transaction.amount) }}
+			</span>
+		</div>
+		<div class="w-6/12 font-normal">
+			<span>{{ transaction.event }}</span>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">

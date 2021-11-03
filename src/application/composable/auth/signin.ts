@@ -81,7 +81,6 @@ export const useEmailSignup = () => {
 	const { loading, setLoading } = useLoadingHandler()
 	const signup = async () => {
 		await setError('')
-		console.log(factory.value)
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {

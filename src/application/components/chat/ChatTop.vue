@@ -1,24 +1,24 @@
 <template>
-<div class="flex flex-row items-center px-2 py-[9.5px] z-50 border-b-[1px] border-faded_gray normalText text-icon_inactive justify-between normalText bg-white sticky w-full top-0">
-	<div class="flex flex-row items-center gap-2">
-	 <router-link to="/chat">
-	 <ion-icon :icon="arrowBack" class="text-dark_gray mr-2 text-[25px] cursor-pointer"></ion-icon>
-	 </router-link> 
-	 <avatar :size="'32'" :photo-url="user?.avatar?.link"/>
-	 <div class="flex flex-col ">
-	    <h2 class="font-bold text-dark_gray">
-	       {{ user?.fullName }}
-	     </h2>
-	     <span>{{ user?.isOnline ? 'Active now' : time }}</span>
-	 </div>
-	</div>
+	<div class="flex flex-row items-center px-2 py-[9.5px] z-50 border-b-[1px] border-faded_gray normalText text-icon_inactive justify-between normalText bg-white sticky w-full top-0">
+		<div class="flex flex-row items-center gap-2">
+			<router-link to="/chat">
+				<ion-icon :icon="arrowBack" class="text-dark_gray mr-2 text-[25px] cursor-pointer"></ion-icon>
+			</router-link> 
+			<avatar :size="'32'" :photo-url="user?.avatar?.link"/>
+			<div class="flex flex-col ">
+				<h2 class="font-bold text-dark_gray">
+					{{ user?.fullName }}
+				</h2>
+				<span>{{ user?.isOnline ? 'Active now' : time }}</span>
+			</div>
+		</div>
 
-	<div class="flex flex-row items-center gap-3">
-	  <ion-icon :icon="search" class=" text-[23px]" ></ion-icon>
-	  <ion-icon :icon="ellipsisVertical" class="text-[23px]" ></ion-icon>
-	</div>
+		<div class="flex flex-row items-center gap-3">
+			<ion-icon :icon="search" class=" text-[23px]" ></ion-icon>
+			<ion-icon :icon="ellipsisVertical" class="text-[23px]" ></ion-icon>
+		</div>
 	
-</div>
+	</div>
 
 </template>
 <script lang="ts">

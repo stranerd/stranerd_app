@@ -70,7 +70,7 @@
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
 				<button @click="createSession" :disabled="loading || !factory.valid || !hasEnoughCoins"
-				 class=" px-6 relative ion-activatable font-bold w-full py-3 rounded-lg bg-primary">
+					class=" px-6 relative ion-activatable font-bold w-full py-3 rounded-lg bg-primary">
 					Request Session
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</button>
