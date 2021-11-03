@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import { computed, ref, Ref, onMounted } from 'vue'
+import { computed, onMounted, Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import {
 	AddQuestion,
@@ -12,11 +11,15 @@ import {
 	QuestionEntity,
 	QuestionFactory
 } from '@/modules/questions'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
+import {
+	useErrorHandler,
+	useListener,
+	useLoadingHandler,
+	useSuccessHandler
+} from '@/application/composable/core/states'
 import { COINS_GAP, MAXIMUM_COINS, MINIMUM_COINS } from '@/utils/constants'
 import { useAuth } from '@/application/composable/auth/auth'
 import { analytics } from '@/modules/core'
-import VueRouter from 'vue-router'
 import { Alert } from '@/application/composable/core/notifications'
 
 enum Answered {
@@ -225,7 +228,7 @@ export const useQuestion = (questionId: string) => {
 let editingQuestion = null as QuestionEntity | null
 export const getEditingQuestion = () => editingQuestion
 export const openQuestionEditModal = (question: QuestionEntity) => {
-	const router = useRouter() 
+	const router = useRouter()
 	editingQuestion = question
 	router.push(`/questions/${question.id}/edit`)
 }

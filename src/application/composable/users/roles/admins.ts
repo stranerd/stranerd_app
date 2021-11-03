@@ -1,6 +1,10 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import { computed, reactive, ref, toRefs, onMounted } from 'vue'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
+import { computed, onMounted, reactive, ref, toRefs } from 'vue'
+import {
+	useErrorHandler,
+	useListener,
+	useLoadingHandler,
+	useSuccessHandler
+} from '@/application/composable/core/states'
 import { GetAllAdmins, GetUsersByEmail, MakeAdmin, RemoveAdmin, UserEntity } from '@/modules/users'
 import { useAuth } from '@/application/composable/auth/auth'
 import { Alert } from '@/application/composable/core/notifications'
