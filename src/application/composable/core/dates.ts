@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { computed, ref, watch } from 'vue'
 import { getTimeFormatted, TIMES } from '@/utils/dates'
 
