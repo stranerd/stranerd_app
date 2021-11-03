@@ -16,7 +16,9 @@
 					<h1 class=" lg:text-xl  text-dark_gray font-bold mb-5 text-center">Sign Up </h1>
 					<span class="normalText text-red-500 font-semibold"> {{error}} </span>
 					<div class="h-[65%]">
-						<form >
+						<form 
+							@submit.prevent="signup"
+						>
 							<div class="mb-4">
 								<ion-input placeholder="First Name" position="floating" type="text" :size="24" v-model="factory.first"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.first }}</span>
@@ -38,7 +40,7 @@
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.cPassword }}</span>
 							</div>
 
-							<ion-button  class="w-full mb-4" @click="signup()">SIGN UP <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
+							<ion-button  class="w-full mb-4" >SIGN UP <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
 						</form>
 
 						<div class="flex justify-between px-5 items-center mt-8">

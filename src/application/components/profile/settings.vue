@@ -44,9 +44,9 @@
 			<h2 class="headings font-bold text-dark_gray">About</h2>
 			<div class="border border-faded_gray rounded-xl py-4 px-3">
 				<ion-textarea v-model="factory.description"
-							  class="bg-white border-0 focus:outline-none  w-full"
-							  placeholder="Write your question here and make sure it is explained in full detail."
-							  rows="6" />
+					class="bg-white border-0 focus:outline-none  w-full"
+					placeholder="Write your question here and make sure it is explained in full detail."
+					rows="6" />
 			</div>
 		</div>
 
@@ -54,7 +54,7 @@
 			<h2 class="headings font-bold text-dark_gray">Level</h2>
 			<div class="py-1 px-2 bg-light_gray rounded-xl flex flex-row">
 				<ion-select class="w-full  font-medium" interface="action-sheet"
-							placeholder="Select your present level of education" value="notifications">
+					placeholder="Select your present level of education" value="notifications">
 					<ion-select-option value="maths">Mathematics</ion-select-option>
 					<ion-select-option value="physics">Physics</ion-select-option>
 					<ion-select-option value="bio">Biology</ion-select-option>
@@ -90,14 +90,14 @@
 				<div class="pr-1 w-full md:w-1/2">
 					<div class="py-2 px-2 w-full pl-6 bg-light_gray rounded-xl flex flex-row">
 						<ion-input v-model="factory.password" class="w-full font-medium" placeholder="New Password"
-								   type="password">
+							type="password">
 						</ion-input>
 					</div>
 				</div>
 				<div class="pl-1 w-full md:w-1/2">
 					<div class="py-2 px-2 w-full pl-6 bg-light_gray rounded-xl flex flex-row">
 						<ion-input v-model="factory.cPassword" class="w-full font-medium" placeholder="Confirm Password"
-								   type="password">
+							type="password">
 						</ion-input>
 					</div>
 				</div>
@@ -155,13 +155,13 @@ export default defineComponent({
 			default: ''
 		}
 	},
-	async setup (props: any) {
+	setup  (props: any) {
 		const router = useRouter()
 		const { hasPassword, id } = useAuth()
 		const { show, toggle } = usePassword()
-		if (props.userId !== id.value) {
-			await router.push(`/profile/${id.value}#dashboard`)
-			selectedTab.value = '#dashboard'
+		if(props.userId !== id.value){
+			  router.push(`/profile/${id.value}#dashboard`)
+				 selectedTab.value = '#dashboard'
 		}
 
 		const { factory, error, loading, updateProfile } = useUpdateProfile()
