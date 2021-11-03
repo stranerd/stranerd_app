@@ -2,9 +2,8 @@ import io, { Socket } from 'socket.io-client'
 import { getTokens } from '@/utils/tokens'
 import { apiBases } from '@/utils/environment'
 import { Listeners, StatusCodes } from '@/modules/core'
-import { DefaultEventsMap } from '@socket.io/component-emitter'
 
-let socket = null as Socket<DefaultEventsMap, DefaultEventsMap> | null
+let socket = null as Socket<any, any> | null
 const getSocketBaseAndPath = () => {
 	const stranerdBase = apiBases.STRANERD
 	const splitOnDoubleSlash = stranerdBase.split('//')
@@ -15,6 +14,7 @@ const getSocketBaseAndPath = () => {
 	const domain = [http, minusHttp.split('/')[0]].join('//')
 	return { path, domain }
 }
+
 export enum EmitTypes {
 	created = 'created',
 	updated = 'updated',
@@ -49,7 +49,9 @@ export async function listenOnSocket<Model> (channel: string, listeners: Listene
 	})
 	return () => {
 		try {
-			socket?.emit('leave', { channel: finalChannel }, (_: SocketReturn) => {	return _})
+			socket?.emit('leave', { channel: finalChannel }, (_: SocketReturn) => {
+				return _
+			})
 		} catch (e) {
 			return e
 		}

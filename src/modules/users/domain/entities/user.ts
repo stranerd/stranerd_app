@@ -3,6 +3,11 @@ import { appName } from '@/utils/environment'
 import { capitalize, catchDivideByZero, formatNumber } from '@/utils/commons'
 import { getRankImage, RankTypes } from './rank'
 
+export enum RankingTimes {
+	daily = 'daily',
+	weekly = 'weekly',
+	monthly = 'monthly'
+}
 
 export interface UserBio {
 	firstName: string;
@@ -44,6 +49,7 @@ export interface UserAccount {
 		count: number;
 	};
 	referrals: Record<string, boolean>;
+	rankings: Record<RankingTimes, number>;
 }
 
 export interface UserStatus {
@@ -75,7 +81,6 @@ export interface UserRank {
 	level: number;
 }
 
-
 type UserConstructorArgs = {
 	id: string;
 	bio: UserBio;
@@ -90,8 +95,6 @@ type UserConstructorArgs = {
 	nextRank: UserRank | null;
 }
 
-
-
 export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
 	const firstName = capitalize(bio?.firstName ?? 'Anon')
 	const lastName = capitalize(bio?.lastName ?? 'Ymous')
@@ -101,7 +104,6 @@ export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
 	const photo = bio?.photo ?? null
 	return { firstName, lastName, fullName, email, description, photo }
 }
-
 
 export class UserEntity extends BaseEntity {
 	public readonly id: string
