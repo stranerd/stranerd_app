@@ -10,8 +10,8 @@
 					</span>
 					<div class="h-[65%]">
 						<form 
-						@submit.prevent="completeVerification"
-						 >
+							@submit.prevent="completeVerification"
+						>
 							<ion-button  class="w-full mb-4 uppercase" :disabled="loading">	Retry Verification <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
 						</form>
 					</div>
