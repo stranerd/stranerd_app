@@ -23,7 +23,7 @@ export const getTokens = async (): Promise<Tokens> => tokens.value
 
 export const deleteTokensFromCookies = async () => {
 	if (isClient()) {
-		localStorage.setItem('accessToken', '')
-		localStorage.setItem('refreshToken', '')
+		localStorage.removeItem('accessToken')
+		localStorage.removeItem('refreshToken')
 	}
 }
