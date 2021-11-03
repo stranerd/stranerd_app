@@ -21,7 +21,7 @@ import { RemoveAdminUseCase } from './domain/usecases/roles/removeAdmin'
 import { MakeTutorUseCase } from './domain/usecases/roles/makeTutor'
 import { RemoveTutorUseCase } from './domain/usecases/roles/removeTutor'
 import { GetUsersByEmailUseCase } from './domain/usecases/users/getUsersByEmail'
-import { GetLeaderboardUsecase } from './domain/usecases/users/getLeaderboard'
+import { GetLeaderboardUseCase } from './domain/usecases/users/getLeaderboard'
 import { GetAllAdminsUseCase } from './domain/usecases/users/getAllAdmins'
 import { GetAllTutorsUseCase } from './domain/usecases/users/getAllTutors'
 import { ListenToAllTutorsUseCase } from './domain/usecases/users/listenToAllTutors'
@@ -37,7 +37,7 @@ import { GetReferralsUseCase } from './domain/usecases/referrals/getReferrals'
 import { ListenToReferralsUseCase } from './domain/usecases/referrals/listenToReferrals'
 import { GetTransactionsUseCase } from './domain/usecases/transactions/getTransactions'
 import { ListenToTransactionsUseCase } from './domain/usecases/transactions/listenToTransactions'
-import { generateDefaultBio, UserBio, UserEntity } from './domain/entities/user'
+import { generateDefaultBio, RankingTimes, UserBio, UserEntity } from './domain/entities/user'
 import { NotificationEntity } from './domain/entities/notification'
 import { ReviewEntity } from './domain/entities/review'
 import { ReferralEntity } from './domain/entities/referral'
@@ -64,8 +64,8 @@ const referralRepository = new ReferralRepository(referralDataSource, referralTr
 const transactionRepository = new TransactionRepository(transactionDataSource, transactionTransformer)
 
 export const FindUser = new FindUserUseCase(userRepository)
-export const GetUsersByEmail = new GetUsersByEmailUseCase(userRepository) 
-export const GetLeaderboard = new GetLeaderboardUsecase(userRepository) 
+export const GetUsersByEmail = new GetUsersByEmailUseCase(userRepository)
+export const GetLeaderboard = new GetLeaderboardUseCase(userRepository)
 export const GetAllAdmins = new GetAllAdminsUseCase(userRepository)
 export const GetAllTutors = new GetAllTutorsUseCase(userRepository)
 export const ListenToAllTutors = new ListenToAllTutorsUseCase(userRepository)
@@ -91,5 +91,13 @@ export const ListenToReferrals = new ListenToReferralsUseCase(referralRepository
 export const GetTransactions = new GetTransactionsUseCase(transactionRepository)
 export const ListenToTransactions = new ListenToTransactionsUseCase(transactionRepository)
 
-export { UserEntity, generateDefaultBio, NotificationEntity, ReviewEntity, TransactionEntity, ReferralEntity }
+export {
+	UserEntity,
+	RankingTimes,
+	generateDefaultBio,
+	NotificationEntity,
+	ReviewEntity,
+	TransactionEntity,
+	ReferralEntity
+}
 export type { UserBio }

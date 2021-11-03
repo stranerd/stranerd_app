@@ -1,11 +1,11 @@
-import { computed, reactive, ref, toRefs, onMounted } from 'vue'
-import {GetLeaderboard, UserEntity} from '@/modules/users'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
+import { computed, onMounted, ref } from 'vue'
+import { GetLeaderboard, RankingTimes, UserEntity } from '@/modules/users'
+import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
 import { useAuth } from '@/application/composable/auth/auth'
 
 const global = {
 	users: ref([] as UserEntity[]),
-	Userindex:ref(0),
+	Userindex: ref(0),
 	fetched: ref(false),
 	...useErrorHandler(),
 	...useLoadingHandler()
@@ -24,8 +24,8 @@ export const useLeaderboardList = () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const users = await GetLeaderboard.call('date')
- 			users.results.forEach(pushToUsersList)
+			const users = await GetLeaderboard.call(RankingTimes.daily)
+			users.results.forEach(pushToUsersList)
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)
@@ -35,13 +35,11 @@ export const useLeaderboardList = () => {
 	const filteredUsers = computed({
 		get: () => global.users.value.filter((user, index) => {
 			let matched = true
-			if (user.id === id.value){
+			if (user.id === id.value) {
 				global.Userindex.value = index
 				return matched = false
-			} 
+			}
 			return matched
-		}).map((user)=>{
-			return user 
 		}),
 		set: (users) => {
 			users.map(pushToUsersList)

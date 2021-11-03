@@ -16,7 +16,7 @@
 		
 	</div>
 	<div class="col-span-12 grid grid-cols-12 border-b-[1px] border-faded_gray mt-5 mb-5 lg:rounded-br-3xl lg:rounded-bl-3xl ">
-		<div class=" col-span-12 md:place-content-center md:col-start-2 md:col-end-12 lg:col-start-3 lg:col-end-11 lg:justify-center lg:items-center flex flex-row  px-3 headings gap-5 text-icon_inactive font-bold  whitespace-normal overflow-x-auto">
+		<div class=" col-span-12 sm:place-content-center md:col-start-2 md:col-end-12 lg:col-start-3 lg:col-end-11 lg:justify-center lg:items-center flex flex-row  px-3 headings gap-5 text-icon_inactive font-bold  whitespace-normal overflow-x-auto">
 			<div class="pb-2 pr-3 cursor-pointer" @click="goToTab('#dashboard')" :class="selectedTab == '#dashboard' ? 'border-b-4 text-dark_gray border-primary' : ''">
 				Dashboard
 			</div>
