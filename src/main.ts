@@ -36,10 +36,6 @@ import { setAuthUser } from './application/plugins/setLoggedIn'
 
 
 const router = Promise.all(routes).then((routes) => {
-	// console.log(routes)
-	// @ts-ignore
-	const combinedRoutes = routes.concat(Manualroutes)
-	console.log(combinedRoutes)
 	const router = createRouter({
 		history: createWebHistory(),
 		routes
