@@ -121,7 +121,7 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { IonButtons, IonHeader, IonIcon, IonToolbar } from '@ionic/vue'
+import { IonButtons, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue'
 import { add, arrowBackOutline, chatbubble, home, notifications, school, search } from 'ionicons/icons'
 import { useStore } from '@/application/store'
 import { useAuth } from '@/application/composable/auth/auth'
@@ -130,7 +130,7 @@ import Avatar from '@/application/components/core/Avatar.vue'
 import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent({
-	components: { IonIcon, Avatar, IonButtons, IonHeader, IonToolbar, Coins },
+	components: { IonIcon, Avatar, IonButtons, IonHeader, IonToolbar, IonTitle, Coins },
 	props: {
 		isNotDashboard: {
 			type: Boolean,
