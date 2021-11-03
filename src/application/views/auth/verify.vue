@@ -13,7 +13,7 @@
 						<form
 							@submit.prevent="sendVerificationEmail"
 						>
-							<ion-button  class="w-full mb-4 uppercase" >Resend Mail <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
+							<ion-button  class="w-full mb-4 uppercase" type="submit">Resend Mail <ion-spinner name="lines-small" v-if="loading"></ion-spinner></ion-button>
 						</form>
 					</div>
 				</div>
