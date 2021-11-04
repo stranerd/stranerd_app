@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import { computed, Ref, ref, onMounted, watch } from 'vue'
-import  { Router, RouteRecord, useRouter } from 'vue-router'
+import { computed, onMounted, ref, Ref, watch } from 'vue'
+import { Router, useRouter } from 'vue-router'
 import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
 import { FindSession, GetSessions, ListenToSession, ListenToSessions, SessionEntity } from '@/modules/sessions'
 import { useAuth } from '@/application/composable/auth/auth'
@@ -173,8 +172,6 @@ const callback = (key: SessionKey, sessions: SessionEntity[], userId: string, ro
 
 export const useRequestSessions = (router: Router) => useSession('requests', router, callback)
 export const useLobbySessions = (router: Router) => useSession('lobby', router, callback)
-
-
 
 export const isRequestingSessionWith = (userId: string) => computed({
 	get: () => global.requests?.sessions?.value?.find((s) => s.tutorId === userId) ?? null,

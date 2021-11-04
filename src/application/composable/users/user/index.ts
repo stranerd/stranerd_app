@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import { Ref, ref, onMounted, watch } from 'vue'
+import { onMounted, ref, Ref, watch } from 'vue'
 import { FindUser, ListenToUser, UserEntity } from '@/modules/users'
 import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
 import { useAuth } from '@/application/composable/auth/auth'

@@ -1,9 +1,14 @@
 import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { PasswordResetFactory, PasswordResetRequestFactory, ResetPassword, SendPasswordResetEmail } from '@/modules/auth'
+import {
+	PasswordResetFactory,
+	PasswordResetRequestFactory,
+	ResetPassword,
+	SendPasswordResetEmail
+} from '@/modules/auth'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
+import { createSession } from '@/application/composable/auth/session'
 import { NetworkError, StatusCodes } from '@/modules/core'
-import { createStorage } from './storage'
 
 export const usePasswordResetRequest = () => {
 	const factory = ref(new PasswordResetRequestFactory()) as Ref<PasswordResetRequestFactory>
@@ -40,7 +45,7 @@ export const usePasswordReset = (token: string) => {
 			try {
 				const user = await ResetPassword.call(token, factory.value)
 				await setMessage('Password reset successfully!')
-				await createStorage(user)
+				await createSession(user, router)
 			} catch (error) {
 				if (error instanceof NetworkError && error.statusCode === StatusCodes.InvalidToken) {
 					await setError('Invalid or expired token. Request a new link sent to your email')
