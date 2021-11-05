@@ -1,4 +1,4 @@
-import { Listeners, QueryParams } from '@/modules/core'
+import { Listeners, QueryParams } from '@modules/core'
 import { IUserRepository } from '../../domain/irepositories/iuser'
 import { UserBaseDataSource } from '../datasources/user-base'
 import { UserTransformer } from '../transformers/user'

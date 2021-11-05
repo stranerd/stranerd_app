@@ -1,5 +1,5 @@
-import { HttpClient } from '@/modules/core'
-import { apiBases } from '@/utils/environment'
+import { HttpClient } from '@modules/core'
+import { apiBases } from '@utils/environment'
 import { MessageToModel } from '../models/message'
 import { FormBaseDataSource } from './form-base'
 

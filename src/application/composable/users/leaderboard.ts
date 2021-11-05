@@ -1,7 +1,7 @@
 import { computed, onMounted, ref } from 'vue'
-import { GetLeaderboard, RankingTimes, UserEntity } from '@/modules/users'
-import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
-import { useAuth } from '@/application/composable/auth/auth'
+import { GetLeaderboard, RankingTimes, UserEntity } from '@modules/users'
+import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useAuth } from '@app/composable/auth/auth'
 
 const global = {
 	users: ref([] as UserEntity[]),

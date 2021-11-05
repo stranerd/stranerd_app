@@ -10,17 +10,17 @@ import {
 	ListenToQuestions,
 	QuestionEntity,
 	QuestionFactory
-} from '@/modules/questions'
+} from '@modules/questions'
 import {
 	useErrorHandler,
 	useListener,
 	useLoadingHandler,
 	useSuccessHandler
-} from '@/application/composable/core/states'
-import { COINS_GAP, MAXIMUM_COINS, MINIMUM_COINS } from '@/utils/constants'
-import { useAuth } from '@/application/composable/auth/auth'
-import { analytics } from '@/modules/core'
-import { Alert } from '@/application/composable/core/notifications'
+} from '@app/composable/core/states'
+import { COINS_GAP, MAXIMUM_COINS, MINIMUM_COINS } from '@utils/constants'
+import { useAuth } from '@app/composable/auth/auth'
+import { analytics } from '@modules/core'
+import { Alert } from '@app/composable/core/notifications'
 
 enum Answered {
 	All,

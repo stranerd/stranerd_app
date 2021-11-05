@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
-import { useCompleteEmailVerification } from '@/application/composable/auth/signin'
+import { useCompleteEmailVerification } from '@app/composable/auth/signin'
 import { IonButton, IonContent, IonPage, IonSpinner } from '@ionic/vue'
 import { useRoute } from 'vue-router'
 

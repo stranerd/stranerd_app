@@ -1,9 +1,11 @@
 <template>
-	<nav :class="[show ?'fixed bg-dark_gray top-0 bottom-0 !text-white':'', 'w-full flex flex-col  z-10 bg-white text-primary lg:shadow']" role="navigation">
+	<nav
+		:class="[show ?'fixed bg-dark_gray top-0 bottom-0 !text-white':'', 'w-full flex flex-col  z-10 bg-white text-primary lg:shadow']"
+		role="navigation">
 		<div class="md:px-8 p-4 flex items-center">
 			<router-link class="mr-auto" to="/">
-				<Logo :secondary="true" v-if="!show" />
-				<Logo v-else/>
+				<Logo v-if="!show" :secondary="true" />
+				<Logo v-else />
 			</router-link>
 			<div class="gap-8 flex-row lg:flex hidden items-center">
 				<router-link class="link-custom px-4" to="/">
@@ -21,20 +23,17 @@
 				<router-link class="btn bg-dark_gray  text-white !px-10 rounded-md" to="/auth/signup">
 					Sign Up
 				</router-link>
-				<router-link class="btn btn-custom  border border-dark_gray text-dark_gray !px-10 rounded-md" to="/auth/signin">
+				<router-link class="btn btn-custom  border border-dark_gray text-dark_gray !px-10 rounded-md"
+					to="/auth/signin">
 					Sign In
 				</router-link>
-			
-		
-			
-		
-			
-			
+
+
 			</div>
 			<div class="lg:hidden">
 				<span class="cursor-pointer" @click="toggleMenu">
-					<ion-icon :icon="menu" size="100px" v-if="!show"/>
-					<ion-icon :icon="close" size="100px" v-else/>
+					<ion-icon v-if="!show" :icon="menu" size="100px" />
+					<ion-icon v-else :icon="close" size="100px" />
 				</span>
 			</div>
 		</div>
@@ -81,11 +80,10 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { disableScroll, enableScroll } from '@/utils/html'
+import { disableScroll, enableScroll } from '@utils/html'
 import Logo from '../../core/Logo.vue'
 import { IonIcon } from '@ionic/vue'
 import { menu, close } from 'ionicons/icons'
-
 
 export default defineComponent({
 	components: { Logo, IonIcon },
@@ -109,14 +107,11 @@ export default defineComponent({
 <style lang="scss" scoped>
 
 
-
-
 	.white-btn-custom {
 		font-size: 16px;
 		border: 2px solid $color-primary;
 		border-radius: 6px;
 	}
-
 
 
 	.link-custom {
@@ -130,7 +125,6 @@ export default defineComponent({
 		font-weight: 500;
 		font-size: 14px;
 	}
-
 
 
 	.bottomLogo {

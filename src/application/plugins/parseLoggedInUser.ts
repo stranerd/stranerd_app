@@ -1,8 +1,8 @@
-import { useAuth } from '@/application/composable/auth/auth'
-import { GetAuthUser } from '@/modules/auth'
-import { getTokens, saveTokens } from '@/utils/tokens'
+import { useAuth } from '@app/composable/auth/auth'
+import { GetAuthUser } from '@modules/auth'
+import { getTokens, saveTokens } from '@utils/tokens'
 
-export const setAuthUser = async () => {
+export const parseLoggedInUser = async () => {
 	const { accessToken, refreshToken } = await getTokens()
 
 	if (accessToken && refreshToken) {

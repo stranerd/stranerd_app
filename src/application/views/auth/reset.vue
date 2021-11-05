@@ -44,9 +44,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { usePasswordReset } from '@/application/composable/auth/passwords'
+import { usePasswordReset } from '@app/composable/auth/passwords'
 import { IonButton, IonContent, IonInput, IonPage, IonSpinner } from '@ionic/vue'
-import PageLoading from '@/application/components/core/PageLoading.vue'
+import PageLoading from '@app/components/core/PageLoading.vue'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({

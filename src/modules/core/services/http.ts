@@ -1,17 +1,17 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, Method } from 'axios'
-import { getTokens, saveTokens } from '@/utils/tokens'
-import { apiBases } from '@/utils/environment'
-import type { QueryParams, QueryResults } from '@/utils/http'
-import { Conditions, StatusCodes } from '@/utils/http'
-import { AfterAuthUser } from '@/modules/auth/domain/entities/auth'
+import { getTokens, saveTokens } from '@utils/tokens'
+import { apiBases } from '@utils/environment'
+import type { QueryParams, QueryResults } from '@utils/http'
+import { Conditions, StatusCodes } from '@utils/http'
+import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
 
 export { StatusCodes, Conditions, QueryResults, QueryParams }
 
 export class NetworkError extends Error {
 	readonly statusCode: StatusCodes
-	readonly errors: { message: string; field?: string }[]
+	readonly errors: { message: string, field?: string }[]
 
-	constructor (statusCode: number, errors: { message: string; field?: string }[]) {
+	constructor (statusCode: number, errors: { message: string, field?: string }[]) {
 		super()
 		this.statusCode = statusCode
 		this.errors = errors

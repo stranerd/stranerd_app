@@ -1,9 +1,9 @@
 import { computed, ref } from 'vue'
-import { FindUser, ListenToUser, UpdateStreak, UserEntity } from '@/modules/users'
-import { AuthDetails, AuthTypes, UserLocation } from '@/modules/auth/domain/entities/auth'
-import { SessionSignout } from '@/modules/auth'
-import { isClient } from '@/utils/environment'
-import { analytics } from '@/modules/core'
+import { FindUser, ListenToUser, UpdateStreak, UserEntity } from '@modules/users'
+import { AuthDetails, AuthTypes, UserLocation } from '@modules/auth/domain/entities/auth'
+import { SessionSignout } from '@modules/auth'
+import { isClient } from '@utils/environment'
+import { analytics } from '@modules/core'
 
 const global = {
 	auth: ref(null as AuthDetails | null),

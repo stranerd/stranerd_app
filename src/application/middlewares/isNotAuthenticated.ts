@@ -1,13 +1,8 @@
-import { useAuth } from '@/application/composable/auth/auth' 
+import { useAuth } from '@app/composable/auth/auth'
+import { defineMiddleware } from './'
 
+export const isNotAuthenticated = defineMiddleware(async ({ to }) => {
+	if (useAuth().isLoggedIn.value) return '/dashboard/home'
+})
 
-export default async ( data: any) => {
-	const  { to,  from, next } = data
-	
-	if (useAuth().isLoggedIn.value) {
-		 next({ path: '/dashboard/home'  })
-
-		 return true
-	}
-    
-}
+export default isNotAuthenticated

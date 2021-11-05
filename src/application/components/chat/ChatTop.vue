@@ -1,10 +1,11 @@
 <template>
-	<div class="flex flex-row items-center px-2 py-[9.5px] z-50 border-b-[1px] border-faded_gray normalText text-icon_inactive justify-between normalText bg-white sticky w-full top-0">
+	<div
+		class="flex flex-row items-center px-2 py-[9.5px] z-50 border-b-[1px] border-faded_gray normalText text-icon_inactive justify-between normalText bg-white sticky w-full top-0">
 		<div class="flex flex-row items-center gap-2">
 			<router-link to="/chat">
 				<ion-icon :icon="arrowBack" class="text-dark_gray mr-2 text-[25px] cursor-pointer"></ion-icon>
-			</router-link> 
-			<avatar :size="'32'" :photo-url="user?.avatar?.link"/>
+			</router-link>
+			<avatar :photo-url="user?.avatar?.link" :size="'32'" />
 			<div class="flex flex-col ">
 				<h2 class="font-bold text-dark_gray">
 					{{ user?.fullName }}
@@ -14,27 +15,28 @@
 		</div>
 
 		<div class="flex flex-row items-center gap-3">
-			<ion-icon :icon="search" class=" text-[23px]" ></ion-icon>
-			<ion-icon :icon="ellipsisVertical" class="text-[23px]" ></ion-icon>
+			<ion-icon :icon="search" class=" text-[23px]"></ion-icon>
+			<ion-icon :icon="ellipsisVertical" class="text-[23px]"></ion-icon>
 		</div>
-	
+
 	</div>
 
 </template>
 <script lang="ts">
 import { computed, defineAsyncComponent, defineComponent, onBeforeUnmount, onMounted, PropType, ref } from 'vue'
-import {  IonIcon } from '@ionic/vue'
+import { IonIcon } from '@ionic/vue'
 import { arrowBack, search, ellipsisVertical } from 'ionicons/icons'
 import { useRouter } from 'vue-router'
-import { handleCloseChat } from '@/application/composable/sessions/ChatHandler'
-import { UserEntity } from '@/modules/users'
-import { useCountdown, useTimeDifference } from '@/application/composable/core/dates'
-import { useAuth } from '@/application/composable/auth/auth'
-import { setNewSessionTutorIdBio, useSession } from '@/application/composable/sessions/sessions'
-import { analytics } from '@/modules/core'
-import { setReportedEntity } from '@/application/composable/reports/answers'
-import { useCurrentSession } from '@/application/composable/sessions/session'
-const Avatar = defineAsyncComponent(() => import('@/application/components/core/AvatarUser.vue'))
+import { handleCloseChat } from '@app/composable/sessions/ChatHandler'
+import { UserEntity } from '@modules/users'
+import { useCountdown, useTimeDifference } from '@app/composable/core/dates'
+import { useAuth } from '@app/composable/auth/auth'
+import { setNewSessionTutorIdBio, useSession } from '@app/composable/sessions/sessions'
+import { analytics } from '@modules/core'
+import { setReportedEntity } from '@app/composable/reports/answers'
+import { useCurrentSession } from '@app/composable/sessions/session'
+
+const Avatar = defineAsyncComponent(() => import('@app/components/core/AvatarUser.vue'))
 
 export default defineComponent({
 	props: {
@@ -42,7 +44,7 @@ export default defineComponent({
 			type: Object as PropType<UserEntity>
 		}
 	},
-	setup(props: any) {
+	setup (props: any) {
 		const router = useRouter()
 		const show = ref(false)
 		const { time, startTimer, stopTimer } = useTimeDifference(props.user?.lastSeen)
@@ -106,14 +108,14 @@ export default defineComponent({
 			set: () => {
 			}
 		})
-		return { 
+		return {
 			arrowBack, search, ellipsisVertical, router, handleCloseChat,
 			canRequestSession, canEndSession, inSession,
 			show, time, countDown, requestNewSession,
 			endSession, loading, error
 		}
 	},
-	components: { 
+	components: {
 		Avatar,
 		IonIcon
 	}
@@ -121,5 +123,5 @@ export default defineComponent({
 </script>
 
 function useReportModal() {
-  throw new Error('Function not implemented.')
+throw new Error('Function not implemented.')
 }

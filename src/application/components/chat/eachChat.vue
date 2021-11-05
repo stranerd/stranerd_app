@@ -1,7 +1,9 @@
 <template>
-	<router-link @click="handleOpenChat" class="flex flex-row  px-3 py-3 gap-2 border-b-[1px] border-light_gray cursor-pointer text-icon_inactive" :to="`/chat/${meta.userId}`" >
+	<router-link :to="`/chat/${meta.userId}`"
+		class="flex flex-row  px-3 py-3 gap-2 border-b-[1px] border-light_gray cursor-pointer text-icon_inactive"
+		@click="handleOpenChat">
 		<div>
-			<avatar :size="'41'" :photo-url="meta?.avatar?.link"  :has-dot="true"/>
+			<avatar :has-dot="true" :photo-url="meta?.avatar?.link" :size="'41'" />
 		</div>
 		<span class="flex flex-col justify-center flex-grow ">
 			<h3 class="text-dark_gray heading font-bold">{{ meta.fullName }}</h3>
@@ -14,11 +16,12 @@
 </template>
 
 <script lang="ts">
-import { handleOpenChat } from '@/application/composable/sessions/ChatHandler'
-import { ChatMetaEntity } from '@/modules/sessions'
-import { formatTime } from '@/utils/dates'
+import { handleOpenChat } from '@app/composable/sessions/ChatHandler'
+import { ChatMetaEntity } from '@modules/sessions'
+import { formatTime } from '@utils/dates'
 import { defineAsyncComponent, defineComponent, PropType } from 'vue'
-const Avatar = defineAsyncComponent(() => import('@/application/components/core/AvatarUser.vue'))
+
+const Avatar = defineAsyncComponent(() => import('@app/components/core/AvatarUser.vue'))
 
 export default defineComponent({
 	props: {
@@ -27,10 +30,10 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup() {
+	setup () {
 		return {
 			handleOpenChat, formatTime
-		 }
+		}
 	},
 	components: { Avatar }
 })

@@ -8,38 +8,39 @@
 						<span class="font-bold text-dark_gray headings mb-3">
 							Available balance
 						</span>
-						<BalanceCard :user="user"/>
-						<TranscractionHistory :user-id="id"/>
+						<BalanceCard :user="user" />
+						<TranscractionHistory :user-id="id" />
 					</div>
-				
+
 				</div>
 				<div class="layout-side-right">
 					<side-profile-nav></side-profile-nav>
 				</div>
-			</div>		
+			</div>
 		</ion-content>
 	</ion-page>
 </template>
 
 <script lang="ts">
-import { defineComponent,  defineAsyncComponent } from 'vue'
-import { useAuth } from '@/application/composable/auth/auth'
+import { defineComponent, defineAsyncComponent } from 'vue'
+import { useAuth } from '@app/composable/auth/auth'
 import { IonPage, IonContent } from '@ionic/vue'
-import BalanceCard from '@/application/components/wallet/BalanceCard.vue'
-import TranscractionHistory from '@/application/components/wallet/TranscractionHistory.vue'
-const SideProfileNav = defineAsyncComponent(() => import('@/application/components/layout/sidebars/SideProfileNav.vue'))
+import BalanceCard from '@app/components/wallet/BalanceCard.vue'
+import TranscractionHistory from '@app/components/wallet/TranscractionHistory.vue'
 
-export default defineComponent(  {
+const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout/sidebars/SideProfileNav.vue'))
+
+export default defineComponent({
 	name: 'wallet',
 	layout: 'Dashboard',
-	components: { IonPage, IonContent, SideProfileNav,  BalanceCard, TranscractionHistory,  },
-	setup(){
+	components: { IonPage, IonContent, SideProfileNav, BalanceCard, TranscractionHistory, },
+	setup () {
 		const { id, user } = useAuth()
 		return { id, user }
 
 	},
-	
+
 })
-	
+
 
 </script>

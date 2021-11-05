@@ -1,10 +1,9 @@
-import { BaseEntity } from '@/modules/core'
+import { BaseEntity } from '@modules/core'
 import { generateDefaultBio, UserBio } from './user'
 
-
 type ReviewConstructorArgs = {
-	id: string; review: string; rating: number; tutorId: string;
-	createdAt: number; userId: string; userBio: UserBio; updatedAt: number;
+	id: string review: string rating: number tutorId: string
+	createdAt: number userId: string userBio: UserBio updatedAt: number
 }
 
 export class ReviewEntity extends BaseEntity {

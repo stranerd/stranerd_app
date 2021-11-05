@@ -6,15 +6,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import InnerTopBar from '@/application/components/layout/topNavigations/InnerTopBar.vue'
-import Modal from  '@/application/components/core/Modal.vue'
+import InnerTopBar from '@app/components/layout/topNavigations/InnerTopBar.vue'
+import Modal from '@app/components/core/Modal.vue'
 
 export default defineComponent({
-	setup() {
+	setup () {
 		return {}
 	},
 	components: {
-		 InnerTopBar, Modal,
+		InnerTopBar, Modal,
 	}
 })
 </script>

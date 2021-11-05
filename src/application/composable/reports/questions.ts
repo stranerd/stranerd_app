@@ -6,8 +6,8 @@ import {
 	QuestionReportEntity,
 	ReportFactory,
 	ReportType
-} from '@/modules/reports'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
+} from '@modules/reports'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '../core/notifications'
 
 let reportedEntity = null as string | null

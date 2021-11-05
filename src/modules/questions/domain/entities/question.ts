@@ -1,26 +1,24 @@
-import { generateDefaultBio, UserBio } from '@/modules/users'
-import { BaseEntity, Media } from '@/modules/core'
-import { extractTextFromHTML, trimToLength } from '@/utils/commons'
-
+import { generateDefaultBio, UserBio } from '@modules/users'
+import { BaseEntity, Media } from '@modules/core'
+import { extractTextFromHTML, trimToLength } from '@utils/commons'
 
 type QuestionConstructorArgs = {
-	id: string;
-	body: string;
-	coins: number;
-	creditable: number;
-	isAnswered: boolean;
-	tags: string[];
-	attachments: Media[];
-	subjectId: string;
-	userId: string;
-	userBio: UserBio;
-	bestAnswers: string[];
-	answers: { id: string; userId: string }[];
-	commentsCount: number;
-	createdAt: number;
-	updatedAt: number;
+	id: string
+	body: string
+	coins: number
+	creditable: number
+	isAnswered: boolean
+	tags: string[]
+	attachments: Media[]
+	subjectId: string
+	userId: string
+	userBio: UserBio
+	bestAnswers: string[]
+	answers: { id: string, userId: string }[]
+	commentsCount: number
+	createdAt: number
+	updatedAt: number
 }
-
 
 export class QuestionEntity extends BaseEntity {
 	public readonly id: string
@@ -32,7 +30,7 @@ export class QuestionEntity extends BaseEntity {
 	public readonly userId: string
 	public readonly userBio: UserBio
 	public readonly bestAnswers: string[]
-	public readonly answers: { id: string; userId: string }[]
+	public readonly answers: { id: string, userId: string }[]
 	public readonly commentsCount: number
 	public readonly creditable: number
 	public readonly isAnswered: boolean

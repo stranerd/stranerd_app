@@ -4,10 +4,10 @@ import {
 	useListener,
 	useLoadingHandler,
 	useSuccessHandler
-} from '@/application/composable/core/states'
-import { GetAllAdmins, GetUsersByEmail, MakeAdmin, RemoveAdmin, UserEntity } from '@/modules/users'
-import { useAuth } from '@/application/composable/auth/auth'
-import { Alert } from '@/application/composable/core/notifications'
+} from '@app/composable/core/states'
+import { GetAllAdmins, GetUsersByEmail, MakeAdmin, RemoveAdmin, UserEntity } from '@modules/users'
+import { useAuth } from '@app/composable/auth/auth'
+import { Alert } from '@app/composable/core/notifications'
 
 const global = {
 	admins: ref([] as UserEntity[]),

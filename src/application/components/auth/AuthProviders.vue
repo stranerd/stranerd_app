@@ -10,7 +10,7 @@
 			:on-success="onSuccess"
 			class="btn btn-auth"
 		>
-			
+
 			<span>Google</span>
 		</GoogleLogin> -->
 		<!-- <DisplayError :error="googleError" /> -->
@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useGoogleSignin } from '@/application/composable/auth/signin'
+import { useGoogleSignin } from '@app/composable/auth/signin'
 import { IonButton, IonIcon } from '@ionic/vue'
 import { logoGoogle } from 'ionicons/icons'
 

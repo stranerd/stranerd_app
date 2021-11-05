@@ -1,8 +1,8 @@
 <template>
-	<div class="flex items-center justify-center w-full col-span-12 pt-12 px-5"  v-if="loading">
+	<div v-if="loading" class="flex items-center justify-center w-full col-span-12 pt-12 px-5">
 		<ion-progress-bar type="indeterminate"></ion-progress-bar>
 	</div>
-	<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive" v-else>
+	<div v-else class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
 		<div class="flex flex-col gap-2">
 			<h2 class="headings font-bold text-dark_gray">Profile picture</h2>
 			<div
@@ -138,19 +138,29 @@ import {
 	IonSelectOption,
 	IonSpinner,
 	IonTextarea,
-	IonProgressBar 
+	IonProgressBar
 } from '@ionic/vue'
 import { image } from 'ionicons/icons'
 import { defineComponent, ref } from 'vue'
-import { useUpdateProfile } from '@/application/composable/users/account'
-import { useAuth } from '@/application/composable/auth/auth'
-import { useFileInputs, usePassword, useSubjectAsTags } from '@/application/composable/core/forms'
-import { selectedTab } from '@/application/composable/profile'
+import { useUpdateProfile } from '@app/composable/users/account'
+import { useAuth } from '@app/composable/auth/auth'
+import { useFileInputs, usePassword, useSubjectAsTags } from '@app/composable/core/forms'
+import { selectedTab } from '@app/composable/profile'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'profileSettings',
-	components: { IonIcon, IonInput, IonTextarea, IonSelect, IonSelectOption, IonRippleEffect, IonSpinner, IonButton, IonProgressBar  },
+	components: {
+		IonIcon,
+		IonInput,
+		IonTextarea,
+		IonSelect,
+		IonSelectOption,
+		IonRippleEffect,
+		IonSpinner,
+		IonButton,
+		IonProgressBar
+	},
 
 	props: {
 		userId: {
@@ -159,13 +169,13 @@ export default defineComponent({
 			default: ''
 		}
 	},
-	setup  (props: any) {
+	setup (props: any) {
 		const router = useRouter()
 		const { hasPassword, id } = useAuth()
 		const { show, toggle } = usePassword()
-		if(props.userId !== id.value){
-			  router.push(`/profile/${id.value}#dashboard`)
-				 selectedTab.value = '#dashboard'
+		if (props.userId !== id.value) {
+			router.push(`/profile/${id.value}#dashboard`)
+			selectedTab.value = '#dashboard'
 		}
 
 		const { factory, error, loading, updateProfile } = useUpdateProfile()

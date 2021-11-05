@@ -8,7 +8,7 @@
 				<div class="layout-side-right">
 					<side-profile-nav></side-profile-nav>
 				</div>
-			</div>		
+			</div>
 		</ion-content>
 	</ion-page>
 </template>
@@ -17,15 +17,16 @@
 
 import { IonPage, IonContent } from '@ionic/vue'
 import { defineAsyncComponent } from 'vue'
-const SideProfileNav = defineAsyncComponent(() => import('@/application/components/layout/sidebars/SideProfileNav.vue'))
 
-export default  {
+const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout/sidebars/SideProfileNav.vue'))
+
+export default {
 	name: 'profile',
 	components: { IonPage, IonContent, SideProfileNav }
 }
 </script>
 <style scoped>
-ion-toolbar {
-	--background: #ffffff;
-}
+	ion-toolbar {
+		--background: #ffffff;
+	}
 </style>

@@ -1,11 +1,11 @@
 import { Ref, ref, onMounted } from 'vue'
-import { useErrorHandler, useLoadingHandler } from '@/application/composable/core/states'
-import { GetTransactions, TransactionEntity } from '@/modules/users'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
+import { GetTransactions, TransactionEntity } from '@modules/users'
 
 const global = {} as Record<string, {
-	transactions: Ref<TransactionEntity[]>;
-	hasMore: Ref<boolean>;
-	fetched: Ref<boolean>;
+	transactions: Ref<TransactionEntity[]>
+	hasMore: Ref<boolean>
+	fetched: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToTransactionList = (userId: string, transaction: TransactionEntity) => {

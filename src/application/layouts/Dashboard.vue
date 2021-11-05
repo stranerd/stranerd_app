@@ -7,16 +7,16 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import TopBar from '@/application/components/layout/topNavigations/Topbar.vue'
-import SideNavBar from '@/application/components/layout/sidebars/DefaultSidebar.vue'
-import Modal from '@/application/components/core/Modal.vue'
+import TopBar from '@app/components/layout/topNavigations/Topbar.vue'
+import SideNavBar from '@app/components/layout/sidebars/DefaultSidebar.vue'
+import Modal from '@app/components/core/Modal.vue'
 
 export default defineComponent({
-	setup() {
+	setup () {
 		return {}
 	},
 	components: {
-		 TopBar, SideNavBar, Modal
+		TopBar, SideNavBar, Modal
 	}
 })
 </script>

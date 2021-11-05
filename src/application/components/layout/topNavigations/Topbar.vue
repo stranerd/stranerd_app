@@ -135,10 +135,10 @@
 import { computed, defineAsyncComponent, defineComponent } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { add, home } from 'ionicons/icons'
-import { useStore } from '@/application/store'
-import { useAuth } from '@/application/composable/auth/auth'
+import { useStore } from '@app/store'
+import { useAuth } from '@app/composable/auth/auth'
 
-const Avatar = defineAsyncComponent(() => import('@/application/components/core/AvatarUser.vue'))
+const Avatar = defineAsyncComponent(() => import('@app/components/core/AvatarUser.vue'))
 
 export default defineComponent({
 	props: {

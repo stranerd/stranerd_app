@@ -1,9 +1,9 @@
-import { isClient } from '@/utils/environment'
+import { isClient } from '@utils/environment'
 import { ref } from 'vue'
 
 type Tokens = {
-	accessToken: string | null;
-	refreshToken: string | null;
+	accessToken: string | null
+	refreshToken: string | null
 }
 
 const tokens = ref<Tokens>({

@@ -1,4 +1,4 @@
-import { Conditions, Listeners, QueryParams } from '@/modules/core'
+import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { IReferralRepository } from '../../irepositories/ireferral'
 import { ReferralEntity } from '../../entities/referral'
 

@@ -3,7 +3,7 @@ import { InjectionKey } from 'vue'
 
 // define your typings for the store state
 export interface State {
-    showPage: boolean;
+    showPage: boolean
 }
 
 // define injection key

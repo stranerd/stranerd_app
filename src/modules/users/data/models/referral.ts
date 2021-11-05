@@ -1,12 +1,12 @@
 export interface ReferralToModel {
-	referred: string;
+	referred: string
 }
 
 
 export interface ReferralFromModel extends ReferralToModel {
-	id: string;
-	userId: string;
-	createdAt: number;
-	updatedAt: number;
+	id: string
+	userId: string
+	createdAt: number
+	updatedAt: number
 }
 

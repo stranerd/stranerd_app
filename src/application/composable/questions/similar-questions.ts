@@ -1,10 +1,10 @@
 import { Ref, ref, onMounted } from 'vue'
-import { GetSimilarQuestions, ListenToSimilarQuestions, QuestionEntity } from '@/modules/questions'
-import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
+import { GetSimilarQuestions, ListenToSimilarQuestions, QuestionEntity } from '@modules/questions'
+import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 
 const global = {} as Record<string, {
-	questions: Ref<QuestionEntity[]>;
-	fetched: Ref<boolean>;
+	questions: Ref<QuestionEntity[]>
+	fetched: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useSimilarQuestionList = (question: QuestionEntity) => {

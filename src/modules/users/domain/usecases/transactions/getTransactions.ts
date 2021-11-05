@@ -1,5 +1,5 @@
-import { Conditions, QueryParams } from '@/modules/core'
-import { PAGINATION_LIMIT } from '@/utils/constants'
+import { Conditions, QueryParams } from '@modules/core'
+import { PAGINATION_LIMIT } from '@utils/constants'
 import { ITransactionRepository } from '../../irepositories/itransaction'
 
 export class GetTransactionsUseCase {

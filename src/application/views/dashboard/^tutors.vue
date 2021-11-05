@@ -6,10 +6,12 @@
 					<!-- page contents goes here -->
 					<div class="col-span-12  md:col-start-3 md:col-end-11 px-3 ">
 						<div class="bg-light_gray rounded-md flex flex-row items-center">
-							<button @click="handleSliding('0')" :class="selectedTab == 'explore' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'">
+							<button :class="selectedTab == 'explore' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'"
+								@click="handleSliding('0')">
 								Explore tutors
 							</button>
-							<button @click="handleSliding('1')"  :class="selectedTab == 'find' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'">
+							<button :class="selectedTab == 'find' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'"
+								@click="handleSliding('1')">
 								Find a tutor
 							</button>
 						</div>
@@ -17,19 +19,19 @@
 
 					<div class="col-span-12 mb-16">
 						<swiper
-							@swiper="onSwiper"
 							@slideChange="onSlideChange"
+							@swiper="onSwiper"
 						>
-							<swiper-slide >
-								<ExploreTutors/>
+							<swiper-slide>
+								<ExploreTutors />
 							</swiper-slide>
-							<swiper-slide >
-								<FindTutors/>			
+							<swiper-slide>
+								<FindTutors />
 							</swiper-slide>
 						</swiper>
 					</div>
 
-					
+
 				</div>
 				<div class="layout-side-right">
 					<side-profile-nav></side-profile-nav>
@@ -47,27 +49,27 @@ import { defineAsyncComponent, ref, onMounted } from 'vue'
 // Import Swiper styles
 import 'swiper/swiper-bundle.min.css'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { useStore } from '@/application/store'
+import { useStore } from '@app/store'
 
-const SideProfileNav = defineAsyncComponent(() => import('@/application/components/layout/sidebars/SideProfileNav.vue'))
-import ExploreTutors from '@/application/components/tutors/ExploreTutors.vue'
-import FindTutors from '@/application/components/tutors/FindTutors.vue'
+const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout/sidebars/SideProfileNav.vue'))
+import ExploreTutors from '@app/components/tutors/ExploreTutors.vue'
+import FindTutors from '@app/components/tutors/FindTutors.vue'
 
-export default  {
+export default {
 	name: 'tutors',
 	layout: 'Dashboard',
-	components: { IonPage, IonContent, SideProfileNav , ExploreTutors, Swiper, SwiperSlide, FindTutors, },
+	components: { IonPage, IonContent, SideProfileNav, ExploreTutors, Swiper, SwiperSlide, FindTutors, },
 
-	setup() {
+	setup () {
 
-		 const selectedTab = ref('explore')
-		 
-		 const swiperData = ref({
-			 slideTo: Function,
-			 update: Function
-		 })
+		const selectedTab = ref('explore')
 
-		 const onSwiper = (swiper: any) => {
+		const swiperData = ref({
+			slideTo: Function,
+			update: Function
+		})
+
+		const onSwiper = (swiper: any) => {
 
 			swiperData.value = swiper
 		}
@@ -83,12 +85,12 @@ export default  {
 			ionPage?.scrollToTop()
 		}
 
-	 const handleSliding = (index: string) => {
-		 swiperData.value.slideTo(index)
+		const handleSliding = (index: string) => {
+			swiperData.value.slideTo(index)
 
-		 swiperData.value.update()
+			swiperData.value.update()
 
-	 }
+		}
 		return {
 			onSwiper,
 			swiperData,
@@ -100,7 +102,7 @@ export default  {
 }
 </script>
 <style scoped>
-ion-toolbar {
-	--background: #ffffff;
-}
+	ion-toolbar {
+		--background: #ffffff;
+	}
 </style>

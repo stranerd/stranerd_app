@@ -5,10 +5,10 @@ import {
 	PasswordResetRequestFactory,
 	ResetPassword,
 	SendPasswordResetEmail
-} from '@/modules/auth'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
-import { createSession } from '@/application/composable/auth/session'
-import { NetworkError, StatusCodes } from '@/modules/core'
+} from '@modules/auth'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { createSession } from '@app/composable/auth/session'
+import { NetworkError, StatusCodes } from '@modules/core'
 
 export const usePasswordResetRequest = () => {
 	const factory = ref(new PasswordResetRequestFactory()) as Ref<PasswordResetRequestFactory>

@@ -7,10 +7,10 @@ export enum RankTypes {
 }
 
 type Rank = {
-	id: RankTypes;
-	level: number;
-	score: number;
-	image: string;
+	id: RankTypes
+	level: number
+	score: number
+	image: string
 }
 
 export const Ranks: Record<RankTypes, Rank> = {

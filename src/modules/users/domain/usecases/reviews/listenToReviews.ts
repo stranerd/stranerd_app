@@ -1,4 +1,4 @@
-import { Conditions, Listeners, QueryParams } from '@/modules/core'
+import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { IReviewRepository } from '../../irepositories/ireview'
 import { ReviewEntity } from '../../entities/review'
 

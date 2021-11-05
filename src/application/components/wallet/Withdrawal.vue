@@ -1,5 +1,6 @@
 <template>
-	<div class="rounded-xl bg-white md:py-6 md:px-6 py-4 px-3 md:text-sm text-xs flex flex-col lg:col-start-5 lg:col-end-9 md:col-start-3 md:col-end-11 col-span-12">
+	<div
+		class="rounded-xl bg-white md:py-6 md:px-6 py-4 px-3 md:text-sm text-xs flex flex-col lg:col-start-5 lg:col-end-9 md:col-start-3 md:col-end-11 col-span-12">
 
 		<div class="flex flex-col gap-1 text-center justify-center items-center ">
 			<h3 class="text-xl font-semibold text-dark_gray">Coins withdrawal</h3>
@@ -8,19 +9,19 @@
 
 		<div class="flex flex-row mt-3 py-2 px-2 justify-between border-faded_gray border-2 rounded-lg">
 			<div class="flex flex-row items-center">
-				<img src="/assets/images/bronze.svg" class="inline h-7 mr-2"/>
+				<img class="inline h-7 mr-2" src="/assets/images/bronze.svg" />
 				<span class="font-semibold text-dark_gray ">10k</span>
 			</div>
 			<div class="flex flex-row-reverse items-center">
 				<span class="font-semibold  text-dark_gray  ">250</span>
-				<img src="/assets/images/gold.svg" class="inline h-7 mr-2"/>
+				<img class="inline h-7 mr-2" src="/assets/images/gold.svg" />
 			</div>
 		</div>
 
 
 		<div class="flex flex-row mt-4 py-3 px-3 items-center bg-light_gray justify-between rounded-lg">
 			<div class="flex flex-row items-center">
-				<img src="/assets/images/bronze.svg" class="inline h-9 mr-1"/>
+				<img class="inline h-9 mr-1" src="/assets/images/bronze.svg" />
 				<ion-icon :icon="chevronDown" class="text-[20px] mr-3 text-icon_inactive"></ion-icon>
 				<span class="font-semibold text-dark_gray ">10,000</span>
 			</div>
@@ -28,7 +29,7 @@
 				<ion-icon :icon="repeatOutline" class="text-[26px] text-icon_inactive"></ion-icon>
 			</div>
 			<div class="flex flex-row-reverse items-center">
-				<img src="/assets/images/dollar.svg" class="inline h-9 ml-1"/>
+				<img class="inline h-9 ml-1" src="/assets/images/dollar.svg" />
 				<ion-icon :icon="chevronDown" class="text-[20px] ml-3 text-icon_inactive"></ion-icon>
 				<span class="font-semibold  text-dark_gray  ">100</span>
 			</div>
@@ -61,34 +62,35 @@
 		<div class="mt-3 py-2 px-2 grid grid-cols-12 w-full gap-3">
 			<div class="col-span-12 md:col-span-6">
 				<div class="py-2 px-2 w-full bg-light_gray rounded-xl flex flex-row">
-					<ion-input value="" class="w-full font-medium" placeholder="Bank">
+					<ion-input class="w-full font-medium" placeholder="Bank" value="">
 					</ion-input>
 				</div>
 			</div>
 			<div class="col-span-12 md:col-span-6">
 				<div class="py-2 px-2 w-full  bg-light_gray rounded-xl flex flex-row">
-					<ion-input value="" class="w-full font-medium" placeholder="Account name">
+					<ion-input class="w-full font-medium" placeholder="Account name" value="">
 					</ion-input>
 				</div>
 			</div>
 			<div class="col-span-12 md:col-span-6">
 				<div class="py-2 px-2 w-full  bg-light_gray rounded-xl flex flex-row">
-					<ion-input value="" class="w-full font-medium" placeholder="Account number">
+					<ion-input class="w-full font-medium" placeholder="Account number" value="">
 					</ion-input>
 				</div>
 			</div>
 			<div class="col-span-12 md:col-span-6">
 				<div class="py-2 px-2 w-full  bg-light_gray rounded-xl flex flex-row">
-					<ion-input value="" class="w-full font-medium" placeholder="Authorization (Stranerd Password)">
+					<ion-input class="w-full font-medium" placeholder="Authorization (Stranerd Password)" value="">
 					</ion-input>
 				</div>
 			</div>
 		</div>
-		
+
 
 		<div class="flex flex-row  mt-5  text-white gap-4">
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<button @click="showModal = false" class=" px-6 py-3 relative ion-activatable rounded-lg w-full font-bold bg-dark_gray ">
+				<button class=" px-6 py-3 relative ion-activatable rounded-lg w-full font-bold bg-dark_gray "
+					@click="showModal = false">
 					Cancel
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</button>
@@ -106,17 +108,17 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import {  IonIcon, IonInput, IonRippleEffect,  } from '@ionic/vue'
+import { IonIcon, IonInput, IonRippleEffect, } from '@ionic/vue'
 import { chevronDown, ellipse, ellipseOutline, repeatOutline } from 'ionicons/icons'
-import { showModal } from '@/application/composable/core/Modal'
+import { showModal } from '@app/composable/core/Modal'
 
 export default defineComponent({
-	setup() {
+	setup () {
 
 		return {
 			chevronDown,
 			showModal,
-			ellipse, 
+			ellipse,
 			ellipseOutline,
 			repeatOutline
 		}
@@ -127,14 +129,13 @@ export default defineComponent({
 })
 </script>
 <style scoped>
-ion-input {
- 
-  /* Set a different placeholder color */
-  --placeholder-color: #8B9EB1;
+	ion-input {
 
-  /* Set full opacity on the placeholder */
-  --placeholder-opacity: 1;
-}
+		/* Set a different placeholder color */
+		--placeholder-color: #8B9EB1;
+
+		/* Set full opacity on the placeholder */
+		--placeholder-opacity: 1;
+	}
 
 </style>
- 
