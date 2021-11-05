@@ -1,5 +1,8 @@
 <template>
-	<page-loading/>
+	<div>
+		<h1>Hello from Home Page</h1>
+		<page-loading />
+	</div>
 </template>
 
 <script lang="ts">
@@ -10,9 +13,9 @@ export default defineComponent({
 	components: { PageLoading },
 	name: 'Index',
 	layout: 'home',
-	redirect:'/dashboard/home',
+	redirect: '/dashboard/home',
 	setup () {
-		return { }
+		return {}
 	}
 })
 </script>

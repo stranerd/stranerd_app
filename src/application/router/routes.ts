@@ -1,6 +1,6 @@
 const getPath = (page: string[]) => page.map((path) => {
 	if (path === 'index') return null
-	if (path === '404') return '*'
+	if (path === '~') return ':pathMatch(.*)*'
 	if (path.startsWith('^')) path = path.replace('^', '')
 	if (path.startsWith('_')) path = path.replace('_', ':')
 	return path
