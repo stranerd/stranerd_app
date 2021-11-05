@@ -1,15 +1,15 @@
 import { computed, Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { AddSession, BeginSession, CancelSession, EndSession, SessionFactory } from '@/modules/sessions'
-import { CreateReview, UserBio } from '@/modules/users'
-import { useAuth } from '@/application/composable/auth/auth'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
-import { Alert } from '@/application/composable/core/notifications'
-import { analytics } from '@/modules/core'
+import { AddSession, BeginSession, CancelSession, EndSession, SessionFactory } from '@modules/sessions'
+import { CreateReview, UserBio } from '@modules/users'
+import { useAuth } from '@app/composable/auth/auth'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { Alert } from '@app/composable/core/notifications'
+import { analytics } from '@modules/core'
 import { showModal } from '../../composable/core/Modal'
 
-let newSessionTutorIdBio = null as null | { id: string; user: UserBio }
-export const setNewSessionTutorIdBio = (data: { id: string; user: UserBio }) => {
+let newSessionTutorIdBio = null as null | { id: string, user: UserBio }
+export const setNewSessionTutorIdBio = (data: { id: string, user: UserBio }) => {
 	newSessionTutorIdBio = data
 }
 

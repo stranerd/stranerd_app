@@ -1,5 +1,5 @@
-import { Conditions, QueryParams, QueryResults } from '@/modules/core'
-import { PAGINATION_LIMIT } from '@/utils/constants'
+import { Conditions, QueryParams, QueryResults } from '@modules/core'
+import { PAGINATION_LIMIT } from '@utils/constants'
 import { IReportRepository } from '../irepositories/ireport'
 import { ReportEntity, ReportType, Type } from '../entities/report'
 

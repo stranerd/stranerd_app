@@ -8,20 +8,18 @@
 import { onMounted } from 'vue'
 
 import { IonPage, IonRouterOutlet } from '@ionic/vue'
-import { useStore } from '@/application/store'
+import { useStore } from '@app/store'
 
 export default {
 	name: 'SchedulePages',
 	components: { IonPage, IonRouterOutlet },
-	setup() {
+	setup () {
 
 		const store = useStore()
 		onMounted(() => {
 			store.commit('hideIonPage')
 		})
-		return {
-			
-		}
+		return {}
 	}
 }
 </script>

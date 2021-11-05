@@ -1,17 +1,16 @@
-import { BaseEntity } from '@/modules/core'
-import { generateDefaultBio, UserBio } from '@/modules/users'
+import { BaseEntity } from '@modules/core'
+import { generateDefaultBio, UserBio } from '@modules/users'
 import { ChatEntity } from './chat'
 
-
 type ChatMetaConstructorArgs = {
-	id: string;
-	unRead: string[];
-	ownerId: string;
-	userId: string;
-	userBio: UserBio;
-	last: ChatEntity;
-	createdAt: number;
-	updatedAt: number;
+	id: string
+	unRead: string[]
+	ownerId: string
+	userId: string
+	userBio: UserBio
+	last: ChatEntity
+	createdAt: number
+	updatedAt: number
 }
 
 export class ChatMetaEntity extends BaseEntity {

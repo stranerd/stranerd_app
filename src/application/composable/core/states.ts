@@ -1,9 +1,9 @@
 import { ref } from 'vue'
-import { Notify } from '@/application/composable/core/notifications'
-import { isClient } from '@/utils/environment'
-import { analytics, NetworkError, StatusCodes } from '@/modules/core'
-import { capitalize } from '@/utils/commons'
-import { useAuth } from '@/application/composable/auth/auth'
+import { Notify } from '@app/composable/core/notifications'
+import { isClient } from '@utils/environment'
+import { analytics, NetworkError, StatusCodes } from '@modules/core'
+import { capitalize } from '@utils/commons'
+import { useAuth } from '@app/composable/auth/auth'
 
 export const useErrorHandler = () => {
 	const errorState = ref('')
@@ -50,7 +50,7 @@ export const useLoadingHandler = () => {
 export const useListener = (start: () => Promise<() => void>) => {
 	let listener = null as null | (() => void)
 	const isRunning = ref(false)
-	
+
 	const closeListener = async () => {
 		listener?.()
 		isRunning.value = false
@@ -61,7 +61,7 @@ export const useListener = (start: () => Promise<() => void>) => {
 		listener = await start()
 		isRunning.value = true
 	}
-	
+
 	const resetListener = async (reset: () => Promise<() => void>) => {
 		start = reset
 		if (isRunning.value) await startListener()

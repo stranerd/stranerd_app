@@ -1,11 +1,11 @@
 import { onMounted, ref, Ref, watch } from 'vue'
-import { FindUser, ListenToUser, UserEntity } from '@/modules/users'
-import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
-import { useAuth } from '@/application/composable/auth/auth'
+import { FindUser, ListenToUser, UserEntity } from '@modules/users'
+import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useAuth } from '@app/composable/auth/auth'
 
 const global = {} as Record<string, {
-	user: Ref<UserEntity | null>;
-	fetched: Ref<boolean>;
+	user: Ref<UserEntity | null>
+	fetched: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useUser = (userId: string) => {

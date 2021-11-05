@@ -1,4 +1,4 @@
-import { Listeners } from '@/modules/core'
+import { Listeners } from '@modules/core'
 import { IReportRepository } from '../irepositories/ireport'
 import { ReportEntity, Type } from '../entities/report'
 

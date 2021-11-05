@@ -7,7 +7,7 @@ export class BuyCoinsWithStripeUseCase {
 		this.repository = repository
 	}
 
-	async call (amount: number, currency: string, coins: { gold: number; bronze: number }) {
+	async call (amount: number, currency: string, coins: { gold: number, bronze: number }) {
 		return await this.repository.buyCoinsWithStripe({ amount, currency, ...coins })
 	}
 }

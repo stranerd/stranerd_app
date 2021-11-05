@@ -96,9 +96,9 @@ import { defineComponent } from 'vue'
 
 import { IonIcon, IonInput, IonRippleEffect, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
 import { close, image } from 'ionicons/icons'
-import { useSubjectList } from '@/application/composable/questions/subjects'
-import { useCreateQuestion } from '@/application/composable/questions/questions'
-import { useMultipleFileInputs, useTags } from '@/application/composable/core/forms'
+import { useSubjectList } from '@app/composable/questions/subjects'
+import { useCreateQuestion } from '@app/composable/questions/questions'
+import { useMultipleFileInputs, useTags } from '@app/composable/core/forms'
 
 export default defineComponent({
 	setup () {

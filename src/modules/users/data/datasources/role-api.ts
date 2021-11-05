@@ -1,5 +1,5 @@
-import { HttpClient } from '@/modules/core'
-import { apiBases, appName } from '@/utils/environment'
+import { HttpClient } from '@modules/core'
+import { apiBases, appName } from '@utils/environment'
 import { RoleBaseDataSource } from '../datasources/role-base'
 
 export class RoleApiDataSource implements RoleBaseDataSource {
@@ -9,7 +9,7 @@ export class RoleApiDataSource implements RoleBaseDataSource {
 		this.authClient = new HttpClient(apiBases.AUTH)
 	}
 
-	async toggleAdmin (data: { id: string; isAdmin: boolean }) {
+	async toggleAdmin (data: { id: string, isAdmin: boolean }) {
 		await this.authClient.post<any, boolean>('/user/roles', {
 			app: appName,
 			role: 'isAdmin',
@@ -18,7 +18,7 @@ export class RoleApiDataSource implements RoleBaseDataSource {
 		})
 	}
 
-	async toggleTutor (data: { id: string; isTutor: boolean }) {
+	async toggleTutor (data: { id: string, isTutor: boolean }) {
 		await this.authClient.post<any, boolean>('/user/roles', {
 			app: appName,
 			role: 'isTutor',

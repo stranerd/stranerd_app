@@ -1,6 +1,5 @@
 import { ref } from 'vue'
-import { Media } from '@/modules/core'
-
+import { Media } from '@modules/core'
 
 export const showModal = ref(false)
 

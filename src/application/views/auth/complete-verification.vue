@@ -32,17 +32,14 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
-import { useCompleteEmailVerification } from '@/application/composable/auth/signin'
+import { useCompleteEmailVerification } from '@app/composable/auth/signin'
 import { IonButton, IonContent, IonPage, IonSpinner } from '@ionic/vue'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	components: { IonContent, IonPage, IonButton, IonSpinner },
 	layout: 'Auth',
-	middlewares: [(data: any) => {
-		const { to, next } = data
-		if (!to.query.token) next({ path: '/auth/signin' })
-	}],
+	middlewares: ['hasQueryToken'],
 	setup () {
 		const { token } = useRoute().query
 		const { loading, error, completeVerification } = useCompleteEmailVerification(token as string)

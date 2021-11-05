@@ -4,11 +4,12 @@
 			Transaction history
 		</span>
 
-		<ion-select value="notifications" class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold" placeholder="Daily" interface="action-sheet">
-			<ion-select-option value="maths" >Daily</ion-select-option>
-			<ion-select-option value="physics" >Monthly</ion-select-option>
-			<ion-select-option value="bio" >Yearly</ion-select-option>
-					
+		<ion-select class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold" interface="action-sheet"
+			placeholder="Daily" value="notifications">
+			<ion-select-option value="maths">Daily</ion-select-option>
+			<ion-select-option value="physics">Monthly</ion-select-option>
+			<ion-select-option value="bio">Yearly</ion-select-option>
+
 		</ion-select>
 	</div>
 
@@ -33,10 +34,9 @@
 			/>
 
 
-		
 		</div>
 
-		<div class="text-center text-18" v-if="hasMore" >
+		<div v-if="hasMore" class="text-center text-18">
 			<a class="text-primary-dark py-2" @click.prevent="fetchOlderTransactions">LOAD MORE</a>
 		</div>
 	</div>
@@ -44,10 +44,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useTransactionList } from '@/application/composable/payment/transactions'
+import { useTransactionList } from '@app/composable/payment/transactions'
 import { IonSelect, IonSelectOption, } from '@ionic/vue'
 import TranscrationHistoryCard from './TranscrationHistoryCard.vue'
-
 
 export default defineComponent({
 	name: 'Transcration History',
@@ -57,27 +56,26 @@ export default defineComponent({
 			type: String
 		}
 	},
-	components: { IonSelect, IonSelectOption,TranscrationHistoryCard },
+	components: { IonSelect, IonSelectOption, TranscrationHistoryCard },
 	setup (props) {
 		const { loading, error, transactions, hasMore, fetchOlderTransactions } = useTransactionList(props.userId)
 		return { loading, error, transactions, hasMore, fetchOlderTransactions }
 	},
-	
 
 })
 </script>
 
 <style lang="scss" scoped>
-ion-select {
-  --placeholder-color: #8B9EB1;
-  --placeholder-opacity: 1;
-  background-color: #F7F7FC;
-  --padding-end:1rem;
-  --padding-top:0.8rem;
-  --padding-bottom:0.8rem;
-  border-radius: 12px;
-  
-}
+	ion-select {
+		--placeholder-color: #8B9EB1;
+		--placeholder-opacity: 1;
+		background-color: #F7F7FC;
+		--padding-end: 1rem;
+		--padding-top: 0.8rem;
+		--padding-bottom: 0.8rem;
+		border-radius: 12px;
+
+	}
 
 
 	.table-custom-style {
@@ -86,7 +84,7 @@ ion-select {
 		font-weight: bold;
 		font-size: 15px;
 		color: white;
-        padding: 1rem 2.281rem;
+		padding: 1rem 2.281rem;
 	}
 
 

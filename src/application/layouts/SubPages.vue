@@ -7,16 +7,16 @@
 <script lang="ts">
 import { defineAsyncComponent, defineComponent } from 'vue'
 
-const TopBar = defineAsyncComponent(() => import('@/application/components/layout/topNavigations/Topbar.vue'))
-const SideNavBar = defineAsyncComponent(() => import('@/application/components/layout/sidebars/DefaultSidebar.vue'))
-const Modal = defineAsyncComponent(() => import('@/application/components/core/Modal.vue'))
+const TopBar = defineAsyncComponent(() => import('@app/components/layout/topNavigations/Topbar.vue'))
+const SideNavBar = defineAsyncComponent(() => import('@app/components/layout/sidebars/DefaultSidebar.vue'))
+const Modal = defineAsyncComponent(() => import('@app/components/core/Modal.vue'))
 
 export default defineComponent({
-	setup() {
+	setup () {
 		return {}
 	},
 	components: {
-		 TopBar, SideNavBar, Modal
+		TopBar, SideNavBar, Modal
 	}
 })
 </script>

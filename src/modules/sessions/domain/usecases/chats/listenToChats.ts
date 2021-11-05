@@ -1,4 +1,4 @@
-import { Conditions, Listeners, QueryParams } from '@/modules/core'
+import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { IChatRepository } from '../../irepositories/ichat'
 import { ChatEntity } from '../../entities/chat'
 

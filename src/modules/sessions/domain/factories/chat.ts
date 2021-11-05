@@ -1,10 +1,10 @@
-import { BaseFactory, Media } from '@/modules/core'
+import { BaseFactory, Media } from '@modules/core'
 import { isFile, isLongerThanX, isRequiredIf, isString } from '@stranerd/validate'
 import { ChatToModel } from '../../data/models/chat'
 import { ChatEntity } from '../entities/chat'
 
 type Content = Media | File | null
-type Keys = { content: string | null; to: string; sessionId: string | null; media: Content | null }
+type Keys = { content: string | null, to: string, sessionId: string | null, media: Content | null }
 
 export class ChatFactory extends BaseFactory<ChatEntity, ChatToModel, Keys> {
 	readonly rules = {

@@ -1,15 +1,15 @@
 import { Ref, ref, onMounted } from 'vue'
-import { useAuth } from '@/application/composable/auth/auth'
-import { ChatMetaEntity, GetPersonalChatsMeta, ListenToPersonalChatsMeta } from '@/modules/sessions'
-import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
-import { AudioSounds, useAudioPlayer } from '@/application/composable/core/audios'
+import { useAuth } from '@app/composable/auth/auth'
+import { ChatMetaEntity, GetPersonalChatsMeta, ListenToPersonalChatsMeta } from '@modules/sessions'
+import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { AudioSounds, useAudioPlayer } from '@app/composable/core/audios'
 
 const player = useAudioPlayer(AudioSounds.CHAT)
 
 const global = {} as Record<string, {
-	meta: Ref<ChatMetaEntity[]>;
-	fetched: Ref<boolean>;
-	listener: ReturnType<typeof useListener>;
+	meta: Ref<ChatMetaEntity[]>
+	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useChatsList = () => {

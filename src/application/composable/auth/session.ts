@@ -1,11 +1,11 @@
-import { SessionSignin } from '@/modules/auth'
-import { useErrorHandler, useLoadingHandler } from '@/application/composable/core/states'
-import { REDIRECT_SESSION_NAME } from '@/utils/constants'
-import { AfterAuthUser } from '@/modules/auth/domain/entities/auth'
+import { SessionSignin } from '@modules/auth'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
+import { REDIRECT_SESSION_NAME } from '@utils/constants'
+import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
 import { Router, useRoute, useRouter } from 'vue-router'
-import { useAuth } from '@/application/composable/auth/auth'
-import { Alert } from '@/application/composable/core/notifications'
-import { parseCookie, serializeToCookie } from '@/utils/cookie'
+import { useAuth } from '@app/composable/auth/auth'
+import { Alert } from '@app/composable/core/notifications'
+import { parseCookie, serializeToCookie } from '@utils/cookie'
 
 export const createSession = async (afterAuth: AfterAuthUser, router: Router) => {
 	if (!afterAuth.user.isVerified) {

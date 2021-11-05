@@ -2,15 +2,15 @@
 	<img
 		:src="source"
 		:style="`width: ${size}px; height: ${size}px; border-radius: 10rem; border: 1.5px solid transparent; object-fit: cover;`"
-		class="!max-w-[1920px]"
 		alt=""
+		class="!max-w-[1920px]"
 	>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { Media } from '@/modules/core'
-import { DEFAULT_PROFILE_IMAGE } from '@/utils/constants'
+import { Media } from '@modules/core'
+import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
 
 export default defineComponent({
 	name: 'Avatar',
@@ -30,7 +30,8 @@ export default defineComponent({
 		const source = computed({
 			get: () => typeof props.src?.link === 'string' ? props.src.link : DEFAULT_PROFILE_IMAGE,
 			// eslint-disable-next-line @typescript-eslint/no-empty-function
-			set: () => {}
+			set: () => {
+			}
 		})
 		return { source }
 	}

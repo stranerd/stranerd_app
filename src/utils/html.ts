@@ -1,4 +1,4 @@
-import { isClient } from '@/utils/environment'
+import { isClient } from '@utils/environment'
 
 export const disableScroll = () => {
 	if (!isClient()) return

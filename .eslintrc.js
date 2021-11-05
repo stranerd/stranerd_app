@@ -26,6 +26,13 @@ module.exports = {
 		'@typescript-eslint/no-explicit-any': 'off',
 		'@typescript-eslint/camelcase': 'off',
 		'vue/no-v-html': 'off',
+		'@typescript-eslint/member-delimiter-style': [
+			'off',
+			{
+				multiline: { delimiter: 'none', requireLast: false },
+				singleline: { delimiter: 'comma', requireLast: false }
+			}
+		],
 		'no-tabs': 'off',
 		'no-var': 'error',
 		'accessor-pairs': 'off',

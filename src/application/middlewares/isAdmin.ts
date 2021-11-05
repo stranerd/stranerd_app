@@ -1,6 +1,6 @@
-import { useAuth } from '@/application/composable/auth/auth'
+import { useAuth } from '@app/composable/auth/auth'
+import { defineMiddleware } from './'
 
-export default async (data: any) => {
-	const { to, from, next } = data
-	if (!useAuth().isAdmin.value) next({ path: '/dashboard/home' })
-}
+export const isAdmin = defineMiddleware(async () => {
+	if (!useAuth().isAdmin.value) return '/dashboard/home'
+})

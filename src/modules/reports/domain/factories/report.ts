@@ -1,10 +1,10 @@
-import { BaseFactory } from '@/modules/core'
+import { BaseFactory } from '@modules/core'
 import { arrayContainsX, isLongerThanX, isString } from '@stranerd/validate'
 import { ReportToModel } from '../../data/models/report'
 import { ReportEntity, ReportType } from '../entities/report'
 
 type Keys = {
-	reportedId: string; type: ReportType; message: string;
+	reportedId: string type: ReportType message: string
 }
 
 export class ReportFactory extends BaseFactory<ReportEntity<any>, ReportToModel, Keys> {

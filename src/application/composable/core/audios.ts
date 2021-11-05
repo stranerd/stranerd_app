@@ -1,4 +1,4 @@
-import { isClient } from '@/utils/environment'
+import { isClient } from '@utils/environment'
 
 export enum AudioSounds {
 	CHAT = '/audios/new-chat.mp3'

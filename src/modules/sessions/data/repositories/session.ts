@@ -1,4 +1,4 @@
-import { Listeners, QueryParams } from '@/modules/core'
+import { Listeners, QueryParams } from '@modules/core'
 import { SessionBaseDataSource } from '../datasources/session-base'
 import { SessionTransformer } from '../transformers/session'
 import { ISessionRepository } from '../../domain/irepositories/isession'

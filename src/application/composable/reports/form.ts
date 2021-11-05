@@ -1,4 +1,4 @@
-type Message = { id: string; body: string }
+type Message = { id: string, body: string }
 
 export const QuestionMessages = [
 	{ id: '1', body: 'is incorrect or improper' },

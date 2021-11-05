@@ -1,5 +1,5 @@
-import { Conditions, QueryParams } from '@/modules/core'
-import { CHAT_PAGINATION_LIMIT } from '@/utils/constants'
+import { Conditions, QueryParams } from '@modules/core'
+import { CHAT_PAGINATION_LIMIT } from '@utils/constants'
 import { IChatRepository } from '../../irepositories/ichat'
 
 export class GetChatsUseCase {

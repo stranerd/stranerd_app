@@ -1,5 +1,5 @@
 import { computed, ref, watch } from 'vue'
-import { getTimeFormatted, TIMES } from '@/utils/dates'
+import { getTimeFormatted, TIMES } from '@utils/dates'
 
 const startInterval = (dif: number, caller: (time: number) => void) => {
 	if (dif <= TIMES.minute) return window.setInterval(() => caller(1), 1000)

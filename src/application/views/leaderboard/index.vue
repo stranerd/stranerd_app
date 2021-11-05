@@ -1,26 +1,30 @@
 <template>
 	<ion-page>
 		<ion-content :fullscreen="true">
-			<page-loading v-if="loading"/>
-			<div class="max-w-4xl mx-auto " v-else>
+			<page-loading v-if="loading" />
+			<div v-else class="max-w-4xl mx-auto ">
 
-	
+
 				<div class="flex justify-center items-center mt-24 lg:mt-28 mb-2 md:px-2">
 					<span class="font-bold text-dark_gray heading hidden md:block" variant="1">
 						Tutor Leaderboard
 					</span>
 					<div class="flex gap-4 md:ml-auto">
-						<ion-select value="notifications" class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold" placeholder="General" interface="action-sheet">
-							<ion-select-option value="maths" >Daily</ion-select-option>
-							<ion-select-option value="physics" >Monthly</ion-select-option>
-							<ion-select-option value="bio" >Yearly</ion-select-option>
-					
+						<ion-select class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold"
+							interface="action-sheet"
+							placeholder="General" value="notifications">
+							<ion-select-option value="maths">Daily</ion-select-option>
+							<ion-select-option value="physics">Monthly</ion-select-option>
+							<ion-select-option value="bio">Yearly</ion-select-option>
+
 						</ion-select>
 
-						<ion-select value="notifications" class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold" placeholder="Daily" interface="action-sheet" v-model="RankType">
-							<ion-select-option value="daily" >Daily</ion-select-option>
-							<ion-select-option value="weekly" >Weekly</ion-select-option>
-							<ion-select-option value="monthly" >Monthly</ion-select-option>
+						<ion-select v-model="RankType"
+							class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold"
+							interface="action-sheet" placeholder="Daily" value="notifications">
+							<ion-select-option value="daily">Daily</ion-select-option>
+							<ion-select-option value="weekly">Weekly</ion-select-option>
+							<ion-select-option value="monthly">Monthly</ion-select-option>
 						</ion-select>
 					</div>
 
@@ -28,7 +32,8 @@
 
 				<div class="flex flex-col items-center justify-content-center gap-1 gap-md-2">
 					<div class="flex flex-col gap-0-5 w-full">
-						<div class="flex rounded-none lg:rounded-md bg-dark_gray font-bold normalText text-white py-4 lg:px-8 px-4 text-dark">
+						<div
+							class="flex rounded-none lg:rounded-md bg-dark_gray font-bold normalText text-white py-4 lg:px-8 px-4 text-dark">
 							<div class="w-3/12">
 								<span>No.</span>
 							</div>
@@ -39,13 +44,14 @@
 								<span>Tutor Score</span>
 							</div>
 						</div>
-				
-						<div v-if="user" class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4 border border-faded_gray">
+
+						<div v-if="user"
+							class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4 border border-faded_gray">
 							<div class="w-3/12">
 								<span> - </span>
 							</div>
 							<div class="w-7/12 flex items-center gap-2">
-								<avatar :size="24" :src="user.bio.photo"/>
+								<avatar :size="24" :src="user.bio.photo" />
 								<span>
 									{{user.bio.fullName}}
 								</span>
@@ -56,12 +62,13 @@
 						</div>
 
 						<template v-if="leaderboardData.length">
-							<div  v-for="(person, index) in leaderboardData" :key="person.id" class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4">
+							<div v-for="(person, index) in leaderboardData" :key="person.id"
+								class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4">
 								<div class="w-3/12">
 									<span>{{index + 1}} </span>
 								</div>
 								<div class="w-3/12 flex items-center gap-2">
-									<avatar :size="24" :src="person.bio.photo"/>
+									<avatar :size="24" :src="person.bio.photo" />
 									<span>
 										{{person.bio.fullName}}
 									</span>
@@ -71,7 +78,7 @@
 								</div>
 							</div>
 						</template>
-					
+
 					</div>
 
 					<!-- <div class="text-center text-18">
@@ -86,30 +93,28 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonSelect, IonSelectOption, IonPage, IonContent } from '@ionic/vue'
-import Avatar from '@/application/components/core/Avatar.vue'
-import {useLeaderboardList} from '@/application/composable/users/leaderboard'
-import PageLoading from '@/application/components/core/PageLoading.vue'
-import { useAuth } from '@/application/composable/auth/auth'
-
+import Avatar from '@app/components/core/Avatar.vue'
+import { useLeaderboardList } from '@app/composable/users/leaderboard'
+import PageLoading from '@app/components/core/PageLoading.vue'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'tutor learderboard',
 	layout: 'Justified',
-	displayName:'LeaderBoard',
-	components: { IonSelect, IonSelectOption,  Avatar, IonPage, IonContent, PageLoading,   },
-	 setup(){
-		const {filteredUsers:leaderboardData,  loading, Userindex} =  useLeaderboardList()
+	displayName: 'LeaderBoard',
+	components: { IonSelect, IonSelectOption, Avatar, IonPage, IonContent, PageLoading, },
+	setup () {
+		const { filteredUsers: leaderboardData, loading, Userindex } = useLeaderboardList()
 		const RankType = ref('daily')
-		const {user} = useAuth()
+		const { user } = useAuth()
 
-
-		return{
+		return {
 			user,
 			RankType,
 			leaderboardData,
 			loading,
 			Userindex
-			
+
 		}
 	}
 
@@ -117,19 +122,17 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-ion-select {
-  --placeholder-color: #8B9EB1;
-  --placeholder-opacity: 1;
-  background-color: #F7F7FC;
-  --color:#8B9EB1;
-  --padding-end:1rem;
-  --padding-top:0.5rem !important;
-  --padding-bottom:0.5rem !important;
-  border-radius: 6px;
-  
-}
+	ion-select {
+		--placeholder-color: #8B9EB1;
+		--placeholder-opacity: 1;
+		background-color: #F7F7FC;
+		--color: #8B9EB1;
+		--padding-end: 1rem;
+		--padding-top: 0.5rem !important;
+		--padding-bottom: 0.5rem !important;
+		border-radius: 6px;
 
-
+	}
 
 
 </style>

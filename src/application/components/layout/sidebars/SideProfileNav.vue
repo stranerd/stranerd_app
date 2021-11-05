@@ -46,13 +46,15 @@
 			<div class="flex flex-row justify-between items-center">
 				<h2 class="text-dark_gray text-base font-bold ">Ranking</h2>
 				<div class="flex flex-row items-center text-sm py-0 pr-2 rounded-lg bg-light_gray">
-					<ion-select value="notifications" class="w-full text-xs md:text-sm  placeholder-[#8B9EB1] font-semibold" placeholder="Filter by subject" interface="action-sheet">
-						<ion-select-option value="maths" class="text-sm">Mathematics</ion-select-option>
-						<ion-select-option value="physics" class="text-sm">Physics</ion-select-option>
-						<ion-select-option value="bio" class="text-sm">Biology</ion-select-option>
-						<ion-select-option value="geo" class="text-sm" >Geography</ion-select-option>
-						<ion-select-option value="business" class="text-sm">Business</ion-select-option>
-						<ion-select-option value="civil" class="text-sm">Civil Right</ion-select-option>
+					<ion-select class="w-full text-xs md:text-sm  placeholder-[#8B9EB1] font-semibold"
+						interface="action-sheet"
+						placeholder="Filter by subject" value="notifications">
+						<ion-select-option class="text-sm" value="maths">Mathematics</ion-select-option>
+						<ion-select-option class="text-sm" value="physics">Physics</ion-select-option>
+						<ion-select-option class="text-sm" value="bio">Biology</ion-select-option>
+						<ion-select-option class="text-sm" value="geo">Geography</ion-select-option>
+						<ion-select-option class="text-sm" value="business">Business</ion-select-option>
+						<ion-select-option class="text-sm" value="civil">Civil Right</ion-select-option>
 					</ion-select>
 				</div>
 			</div>
@@ -94,7 +96,8 @@
 						<span class="text-primary font-semibold">14</span>
 					</div>
 				</div>
-				<router-link to="/leaderboard" class="py-3 px-3 rounded-lg flex w-full bg-primary text-white justify-center flex-row items-center">
+				<router-link class="py-3 px-3 rounded-lg flex w-full bg-primary text-white justify-center flex-row items-center"
+					to="/leaderboard">
 					<span class="font-semibold">Leaderboard</span>
 				</router-link>
 			</div>
@@ -105,21 +108,21 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonSelect, IonSelectOption } from '@ionic/vue'
-import { useAuth } from '@/application/composable/auth/auth'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
-	setup() {
-		const { user } = useAuth()	
-		
+	setup () {
+		const { user } = useAuth()
+
 		const rankPercentage = (next: number | undefined, present: number | undefined) => {
 			let percentage = 0
-			 if(next && present != undefined) {
-				 if(present == 0 ) {
-					  percentage = (2 / next) * 100 
-				 } else {
-					  percentage = (present / next) * 100 
-				 }
-			 }
+			if (next && present != undefined) {
+				if (present == 0) {
+					percentage = (2 / next) * 100
+				} else {
+					percentage = (present / next) * 100
+				}
+			}
 			return percentage.toString() + '%'
 		}
 		return {

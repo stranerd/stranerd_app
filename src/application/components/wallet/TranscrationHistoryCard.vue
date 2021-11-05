@@ -4,9 +4,9 @@
 			<span>{{ formatTime(transaction.createdAt) }}</span>
 		</div>
 		<div class="w-3/12 flex items-center gap-2">
-			<Coins :gold="transaction.isGold" :size="24"/>
-                    
-			<span >
+			<Coins :gold="transaction.isGold" :size="24" />
+
+			<span>
 				<!-- {{transaction.isGain ? '+' : '-'}} -->
 				{{ formatNumber(transaction.amount) }}
 			</span>
@@ -20,14 +20,14 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import Coins from '../core/Coins.vue'
-import { formatNumber } from '@/utils/commons'
-import { formatTime } from '@/utils/dates'
-import { TransactionEntity } from '@/modules/users'
+import { formatNumber } from '@utils/commons'
+import { formatTime } from '@utils/dates'
+import { TransactionEntity } from '@modules/users'
 
-export default defineComponent( {
+export default defineComponent({
 	name: 'UserTransactionListCard',
-	components:{Coins, },
-    	props: {
+	components: { Coins },
+	props: {
 		transaction: {
 			required: true,
 			type: Object as PropType<TransactionEntity>
@@ -39,7 +39,7 @@ export default defineComponent( {
 })
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 	.table-data-style {
 		border-radius: 6px;
 		background: #F7F7FC;

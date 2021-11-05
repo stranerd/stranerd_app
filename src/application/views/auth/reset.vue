@@ -12,16 +12,16 @@
 						>
 							<div class="mb-4">
 								<ion-input v-model="factory.password" :size="24" placeholder="New Password"
-									position="floating"
-									required type="password"></ion-input>
+										   position="floating"
+										   required type="password"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.password }}</span>
 							</div>
 							<div class="mb-4">
 								<ion-input v-model="factory.cPassword" :size="24" placeholder="Confirm New Password"
-									position="floating" required type="password" />
+										   position="floating" required type="password" />
 								<span class="normalText text-red-500 font-semibold">{{
-									factory.errors.cPassword
-								}}</span>
+										factory.errors.cPassword
+									}}</span>
 							</div>
 
 							<ion-button class="w-full mb-4" type="submit">RESET PASSWORD
@@ -44,18 +44,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { usePasswordReset } from '@/application/composable/auth/passwords'
+import { usePasswordReset } from '@app/composable/auth/passwords'
 import { IonButton, IonContent, IonInput, IonPage, IonSpinner } from '@ionic/vue'
-import PageLoading from '@/application/components/core/PageLoading.vue'
+import PageLoading from '@app/components/core/PageLoading.vue'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	components: { IonContent, IonPage, IonInput, IonButton, IonSpinner, PageLoading },
 	layout: 'Auth',
-	middlewares: [(data: any) => {
-		const { to, from, next } = data
-		if (!to.query.token) next({ path: '/auth/signin' })
-	}],
+	middlewares: ['hasQueryToken'],
 	setup () {
 		const { token } = useRoute().query
 		const { factory, loading, resetPassword, error, message } = usePasswordReset(token as string)

@@ -1,7 +1,7 @@
 import { computed, ref, Ref, onMounted } from 'vue'
-import { AddSubject, DeleteSubject, FindSubject, GetSubjects, SubjectEntity, SubjectFactory } from '@/modules/questions'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
-import { Alert } from '@/application/composable/core/notifications'
+import { AddSubject, DeleteSubject, FindSubject, GetSubjects, SubjectEntity, SubjectFactory } from '@modules/questions'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { Alert } from '@app/composable/core/notifications'
 
 const global = {
 	fetched: ref(false),
