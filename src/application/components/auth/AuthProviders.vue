@@ -5,6 +5,8 @@
 			<ion-icon :icon="logoGoogle" class="mr-4" size="100px" />
 			<span>Google</span>
 		</ion-button>
+		<div class="g-signin2"></div>
+
 		<!-- <GoogleLogin
 			:on-failure="onFailure"
 			:on-success="onSuccess"
@@ -19,8 +21,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent,} from 'vue'
 import { useGoogleSignin } from '@app/composable/auth/signin'
+import { useLoadScript } from '@app/composable/core/loadScript'
 import { IonButton, IonIcon } from '@ionic/vue'
 import { logoGoogle } from 'ionicons/icons'
 
@@ -29,9 +32,27 @@ export default defineComponent({
 		IonButton, IonIcon
 	},
 	setup () {
+
+		const {load} = useLoadScript()
+		load('https://apis.google.com/js/platform.js?onload=renderButton')
 		const { loading: googleLoading, signin: googleSignin, error: googleError, setError } = useGoogleSignin()
 		const onFailure = async (_: any) => await setError('Error signing in with google')
 		const onSuccess = async (data: any) => await googleSignin(data.getAuthResponse().id_token)
+		// const renderButton = () =>{
+		// 	// eslint-disable-next-line no-undef
+		// 	gapi.signin2.render('my-signin2', {
+		// 		'scope': 'profile email',
+		// 		'width': 240,
+		// 		'height': 50,
+		// 		'longtitle': true,
+		// 		'theme': 'dark',
+		// 		'onsuccess': onSuccess,
+		// 		'onfailure': onFailure
+		// 	})
+		// }
+
+
+
 		return { googleError, googleLoading, onSuccess, onFailure, logoGoogle }
 	}
 })
