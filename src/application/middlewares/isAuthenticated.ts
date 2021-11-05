@@ -9,5 +9,3 @@ export const isAuthenticated = defineMiddleware(async ({ to }) => {
 		return '/auth/signin'
 	}
 })
-
-export default isAuthenticated

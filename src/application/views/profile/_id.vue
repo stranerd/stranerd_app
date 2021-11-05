@@ -38,8 +38,12 @@
 
 <script lang="ts">
 
-import { IonPage, IonContent } from '@ionic/vue'
+import { IonContent, IonPage } from '@ionic/vue'
 import { defineAsyncComponent } from 'vue'
+// const Achievements = defineAsyncComponent(() => import('@app/components/profile/achievements.vue'))
+import { star } from 'ionicons/icons'
+import { useRoute } from 'vue-router'
+import { selectedTab } from '@app/composable/profile'
 
 const topSession = defineAsyncComponent(() => import('@app/components/profile/topSession.vue'))
 const Dashboard = defineAsyncComponent(() => import('@app/components/profile/dashboard.vue'))
@@ -48,18 +52,13 @@ const Reviews = defineAsyncComponent(() => import('@app/components/profile/revie
 const Answers = defineAsyncComponent(() => import('@app/components/profile/UserAnswerList.vue'))
 const Bio = defineAsyncComponent(() => import('@app/components/profile/bio.vue'))
 const Settings = defineAsyncComponent(() => import('@app/components/profile/settings.vue'))
-// const Achievements = defineAsyncComponent(() => import('@app/components/profile/achievements.vue'))
-import isAuthenticated from '@app/middlewares/isAuthenticated'
-import { star } from 'ionicons/icons'
-import { useRoute } from 'vue-router'
-import { selectedTab } from '@app/composable/profile'
 
 export default {
 	name: 'profileDashboard',
-	middlewares: [isAuthenticated],
+	middlewares: ['isAuthenticated'],
 	layout: 'Justified',
 	displayName: 'Profile',
-	components: { IonPage, IonContent, topSession, Dashboard, Questions, Answers, Bio, Settings, },
+	components: { IonPage, IonContent, topSession, Dashboard, Questions, Answers, Bio, Settings },
 	setup () {
 
 		const { id } = useRoute().params

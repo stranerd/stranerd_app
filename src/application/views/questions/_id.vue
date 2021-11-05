@@ -13,7 +13,8 @@
 			<div class="layout-page-notab">
 				<div class="layout-body">
 					<div class="w-full flex flex-col px-3 col-span-12">
-						<div class="col-span-12 pb-3 px-1 flex-row items-center text-dark_gray font-bold hidden lg:flex cursor-pointer"
+						<div
+							class="col-span-12 pb-3 px-1 flex-row items-center text-dark_gray font-bold hidden lg:flex cursor-pointer"
 							@click="router.go(-1)">
 							<ion-icon :icon="arrowBackOutline" class="text-[25px]  mr-2"></ion-icon>
 							<span>Back</span>
@@ -21,8 +22,8 @@
 						<div class="grid grid-cols-12 md:px-2 w-full mb-4 text-xs md:text-sm">
 							<div class="col-span-12">
 								<question :colorClass="'bg-light_gray'"
-									:fromViewQuestion="true"
-									:question="question"></question>
+										  :fromViewQuestion="true"
+										  :question="question"></question>
 							</div>
 
 							<div v-if="question?.attachments" class="col-span-12 py-3">
@@ -31,7 +32,8 @@
 
 							<template v-if="!showAddAnswer">
 								<div class="mt-1 col-span-12">
-									<button class="py-3 px-4 justify-center rounded-lg text-white bg-dark_gray w-full font-bold flex flex-row items-center"
+									<button
+										class="py-3 px-4 justify-center rounded-lg text-white bg-dark_gray w-full font-bold flex flex-row items-center"
 										@click="showAddAnswer = true">
 										<span class="mr-2">Add your answer</span>
 										<span class="h-1 w-1 rounded-full bg-white mr-2"></span>
@@ -67,9 +69,9 @@
 
 <script lang="ts">
 
-import { IonPage, IonContent, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar } from '@ionic/vue'
-import { defineAsyncComponent, ref } from 'vue'
-import { arrowBackOutline, arrowRedo, shareSocial, chevronDown, thumbsDown, thumbsUp, star, send } from 'ionicons/icons'
+import { IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/vue'
+import { defineAsyncComponent } from 'vue'
+import { arrowBackOutline, arrowRedo, chevronDown, send, shareSocial, star, thumbsDown, thumbsUp } from 'ionicons/icons'
 import { useRoute, useRouter } from 'vue-router'
 import { useQuestion } from '@app/composable/questions/questions'
 import { showAddAnswer, useAnswerList } from '@app/composable/questions/answers'
@@ -81,12 +83,11 @@ const CreateAnswer = defineAsyncComponent(() => import('@app/components/question
 const TopBar = defineAsyncComponent(() => import('@app/components/layout/topNavigations/Topbar.vue'))
 const SideNavBar = defineAsyncComponent(() => import('@app/components/layout/sidebars/DefaultSidebar.vue'))
 const PhotoList = defineAsyncComponent(() => import('@app/components/core/photoList.vue'))
-import isAuthenticated from '@app/middlewares/isAuthenticated'
 
 export default {
 	name: 'answers',
 	layout: 'SubPages',
-	middlewares: [isAuthenticated],
+	middlewares: ['isAuthenticated'],
 	components: {
 		IonPage,
 		IonContent,

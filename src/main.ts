@@ -7,7 +7,16 @@ import './application/assets/styles/index.scss'
 import './application/assets/styles/tailwind.css'
 import { setupPlugins } from '@app/plugins'
 import { key, store } from '@app/store'
-import { globalMiddlewares, Middleware } from '@app/middlewares/'
+import { MiddlewareFunction } from '@app/middlewares/'
+import { isAuthenticated } from '@app/middlewares/isAuthenticated'
+import { isNotAuthenticated } from '@app/middlewares/isNotAuthenticated'
+import { isAdmin } from '@app/middlewares/isAdmin'
+import { hasQueryToken } from '@app/middlewares/hasQueryToken'
+
+const globalMiddlewares = {
+	isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken
+}
+export type Middleware = MiddlewareFunction | keyof typeof globalMiddlewares
 
 const init = async () => {
 	const router = createRouter({
@@ -16,7 +25,7 @@ const init = async () => {
 	})
 
 	router.beforeEach(async (to, from, next) => {
-		const middlewares = (to.meta.middlewares ?? []) as (Middleware | keyof typeof globalMiddlewares)[]
+		const middlewares = (to.meta.middlewares ?? []) as Middleware[]
 		let redirect = null
 		for (const middleware of middlewares) {
 			const callback = typeof middleware === 'string' ? globalMiddlewares[middleware] : middleware

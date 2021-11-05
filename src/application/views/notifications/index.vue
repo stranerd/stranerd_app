@@ -47,16 +47,15 @@
 import { defineComponent, onMounted } from 'vue'
 import { useNotificationList } from '@app/composable/users/notifications'
 import NotificationCard from '@app/components/Notification/NotificationCard.vue'
-import { IonContent, IonPage, IonIcon, IonSkeletonText } from '@ionic/vue'
+import { IonContent, IonIcon, IonPage } from '@ionic/vue'
 import { checkmarkDone } from 'ionicons/icons'
 import PageLoading from '@app/components/core/PageLoading.vue'
 import EmptyState from '@app/components/core/emptyState.vue'
-import isAuthenticated from '@app/middlewares/isAuthenticated'
 
 export default defineComponent({
 	name: 'Notification',
 	layout: 'Justified',
-	middlewares: [isAuthenticated],
+	middlewares: ['isAuthenticated'],
 	components: { NotificationCard, IonContent, IonPage, IonIcon, PageLoading, EmptyState },
 	setup () {
 		const { notifications, error, loading, listener, hasMore, fetchOlderNotifications } = useNotificationList()

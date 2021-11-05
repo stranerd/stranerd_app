@@ -39,10 +39,7 @@ import { useRoute } from 'vue-router'
 export default defineComponent({
 	components: { IonContent, IonPage, IonButton, IonSpinner },
 	layout: 'Auth',
-	middlewares: [(data: any) => {
-		const { to, next } = data
-		if (!to.query.token) next({ path: '/auth/signin' })
-	}],
+	middlewares: ['hasQueryToken'],
 	setup () {
 		const { token } = useRoute().query
 		const { loading, error, completeVerification } = useCompleteEmailVerification(token as string)

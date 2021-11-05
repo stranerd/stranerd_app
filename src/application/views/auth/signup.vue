@@ -15,34 +15,38 @@
 					<span class="lg:text-main_darktext-dark_gray lg:hidden text-icon_inactive mb-8 text-center text-xs">Get study help, learn from tutors, learn with <br>
 						your friends and enjoy new study tools.</span>
 					<h1 class=" lg:text-xl  text-dark_gray font-bold mb-5 text-center">Sign Up </h1>
-					<span class="normalText text-red-500 font-semibold"> {{error}} </span>
+					<span class="normalText text-red-500 font-semibold"> {{ error }} </span>
 					<div class="h-[65%]">
 						<form
 							@submit.prevent="signup"
 						>
 							<div class="mb-4">
-								<ion-input v-model="factory.first" :size="24" placeholder="First Name" position="floating"
-									type="text"></ion-input>
+								<ion-input v-model="factory.first" :size="24" placeholder="First Name"
+										   position="floating"
+										   type="text"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.first }}</span>
 							</div>
 							<div class="mb-4">
 								<ion-input v-model="factory.last" :size="24" placeholder="Last Name" position="floating"
-									type="text"></ion-input>
+										   type="text"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.last }}</span>
 							</div>
 							<div class="mb-4">
-								<ion-input v-model="factory.email" :size="24" placeholder="Email Address" position="floating"
-									type="email"></ion-input>
+								<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
+										   position="floating"
+										   type="email"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
 							</div>
 							<div class="mb-4">
-								<ion-input v-model="factory.password" :size="24" placeholder="Password" position="floating"
-									type="password"></ion-input>
+								<ion-input v-model="factory.password" :size="24" placeholder="Password"
+										   position="floating"
+										   type="password"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.password }}</span>
 							</div>
 							<div class="mb-4">
-								<ion-input v-model="factory.cPassword" :size="24" placeholder="Confirm Password" position="floating"
-									type="password"></ion-input>
+								<ion-input v-model="factory.cPassword" :size="24" placeholder="Confirm Password"
+										   position="floating"
+										   type="password"></ion-input>
 								<span
 									class="normalText text-red-500 font-semibold">{{ factory.errors.cPassword }}</span>
 							</div>
@@ -61,10 +65,11 @@
 						<AuthProviders />
 						<span
 							class="text-xs flex flex-wrap justify-center items-center text-icon_inactive mt-8 max-w-full text-center">
-							By signing up, you accept the Stranerd 	<router-link class="text-primary font-bold normalText mx-1"
-								to="/auth/signup"> Terms and Conditions
+							By signing up, you accept the Stranerd 	<router-link
+							class="text-primary font-bold normalText mx-1"
+							to="/auth/signup"> Terms and Conditions
 							</router-link> & <router-link class="text-primary font-bold normalText mx-1"
-								to="/auth/signup">
+														  to="/auth/signup">
 								Privacy Policy.
 							</router-link>
 
@@ -92,14 +97,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useEmailSignup } from '@app/composable/auth/signin'
-import { IonContent, IonPage, IonInput, IonButton, IonSpinner } from '@ionic/vue'
+import { IonButton, IonContent, IonInput, IonPage, IonSpinner } from '@ionic/vue'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
-import isNotAuthenticated from '@app/middlewares/isNotAuthenticated'
 
 export default defineComponent({
 	components: { IonContent, IonPage, IonInput, IonButton, AuthProviders, IonSpinner },
 	layout: 'Auth',
-	middlewares: [isNotAuthenticated],
+	middlewares: ['isNotAuthenticated'],
 	setup () {
 
 		const { factory, loading, error, signup } = useEmailSignup()

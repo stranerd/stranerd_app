@@ -33,19 +33,18 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
 import { useEmailVerificationRequest } from '@app/composable/auth/signin'
-import { IonContent, IonPage, IonButton, IonSpinner } from '@ionic/vue'
-import isAuthenticated from '@app/middlewares/isAuthenticated'
+import { IonButton, IonContent, IonPage, IonSpinner } from '@ionic/vue'
 
 export default defineComponent({
-	components: { IonContent, IonPage, IonButton, IonSpinner, },
+	components: { IonContent, IonPage, IonButton, IonSpinner },
 	layout: 'Auth',
-	middlewares: [isAuthenticated],
+	middlewares: ['isAuthenticated'],
 	setup () {
 		const { email, loading, error, message, sendVerificationEmail } = useEmailVerificationRequest()
 		onMounted(sendVerificationEmail)
 
 		return { email, loading, error, message, sendVerificationEmail }
-	},
+	}
 
 })
 </script>

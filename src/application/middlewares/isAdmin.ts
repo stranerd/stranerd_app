@@ -4,5 +4,3 @@ import { defineMiddleware } from './'
 export const isAdmin = defineMiddleware(async () => {
 	if (!useAuth().isAdmin.value) return '/dashboard/home'
 })
-
-export default isAdmin

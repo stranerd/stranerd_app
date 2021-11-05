@@ -16,13 +16,15 @@
 							@submit.prevent="signin"
 						>
 							<div class="mb-4">
-								<ion-input v-model="factory.email" :size="24" placeholder="Email Address" position="floating"
-									type="email"></ion-input>
+								<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
+										   position="floating"
+										   type="email"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
 							</div>
 							<div class="mb-4">
-								<ion-input v-model="factory.password" :size="24" placeholder="Password" position="floating"
-									type="password"></ion-input>
+								<ion-input v-model="factory.password" :size="24" placeholder="Password"
+										   position="floating"
+										   type="password"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.password }}</span>
 							</div>
 							<ion-button :disabled="loading" class="w-full mb-4" type="submit">SIGN IN
@@ -65,22 +67,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { useEmailSignin } from '@app/composable/auth/signin'
-import { IonContent, IonPage, IonInput, IonButton, IonCheckbox, IonSpinner } from '@ionic/vue'
+import { IonButton, IonCheckbox, IonContent, IonInput, IonPage, IonSpinner } from '@ionic/vue'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
-import isNotAuthenticated from '@app/middlewares/isNotAuthenticated'
 
 export default defineComponent({
-	components: { IonContent, IonPage, IonInput, IonButton, IonCheckbox, AuthProviders, IonSpinner, },
+	components: { IonContent, IonPage, IonInput, IonButton, IonCheckbox, AuthProviders, IonSpinner },
 	layout: 'Auth',
-	middlewares: [isNotAuthenticated],
+	middlewares: ['isNotAuthenticated'],
 	setup () {
-
 		const { factory, loading, error, signin } = useEmailSignin()
 
 		return { factory, loading, error, signin }
-	},
+	}
 
 })
 </script>
