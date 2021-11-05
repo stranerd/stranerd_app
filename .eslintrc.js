@@ -25,6 +25,7 @@ module.exports = {
 		'@typescript-eslint/no-explicit-any': 'off',
 		'@typescript-eslint/camelcase': ['off'],
 		'vue/no-v-html': 'off',
+		'import/no-default-export':'off',
 		'no-tabs': 'off',
 		'no-var': 'error',
 		'accessor-pairs': 'off',
