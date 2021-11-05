@@ -1,22 +1,15 @@
 <template>
 	<div>
 		<h1>Hello from Home Page</h1>
-		<page-loading />
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import PageLoading from '../components/core/PageLoading.vue'
 
 export default defineComponent({
-	components: { PageLoading },
 	name: 'Index',
-	layout: 'home',
-	redirect: '/dashboard/home',
-	setup () {
-		return {}
-	}
+	layout: 'home'
 })
 </script>
 <style scoped>
