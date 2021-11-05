@@ -17,7 +17,7 @@
 			<empty-state
 				:btnText="'Ask a question'"
 				:info="'You have no recent questions! Start asking questions to help with homework and studying.'"
-				:route="'/dashboard/question'"
+				:route="'/dashboard/questions'"
 			></empty-state>
 		</div>
 	</template>
@@ -31,7 +31,7 @@
 					:key="index + 1"
 					class="flex md:!w-[300px] !w-[265px] mr-3">
 					<question :colorClass="0 === index ? 'bg-butter_yellow h-[150px]' : 'bg-light_gray h-[150px]'"
-						:fromHome="true" :question="question" />
+							  :fromHome="true" :question="question" />
 				</swiper-slide>
 
 			</swiper>
@@ -47,7 +47,7 @@
 					:key="index"
 					class="!w-1/3 !pr-3">
 					<question :colorClass="0 === index ? 'bg-butter_yellow h-[155px]' : 'bg-light_gray h-[155px]'"
-						:fromHome="true" :question="question" />
+							  :fromHome="true" :question="question" />
 				</swiper-slide>
 
 			</swiper>
@@ -59,7 +59,7 @@
 
 <script lang="ts">
 import { IonIcon } from '@ionic/vue'
-import { chevronForwardOutline, chevronBackOutline, ellipse } from 'ionicons/icons'
+import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import SliderController from '@app/components/core/nav/sliderController.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'

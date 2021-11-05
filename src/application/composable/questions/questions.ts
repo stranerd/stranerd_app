@@ -11,12 +11,7 @@ import {
 	QuestionEntity,
 	QuestionFactory
 } from '@modules/questions'
-import {
-	useErrorHandler,
-	useListener,
-	useLoadingHandler,
-	useSuccessHandler
-} from '@app/composable/core/states'
+import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { COINS_GAP, MAXIMUM_COINS, MINIMUM_COINS } from '@utils/constants'
 import { useAuth } from '@app/composable/auth/auth'
 import { analytics } from '@modules/core'
@@ -143,7 +138,7 @@ export const useCreateQuestion = () => {
 				setError('Login to continue').then()
 				return []
 			}
-			if (user.value!.account.coins.bronze < MINIMUM_COINS) {
+			if (user.value?.account.coins.bronze ?? 0 < MINIMUM_COINS) {
 				setError(`You need at least ${MINIMUM_COINS} coins to ask a question`).then()
 				return []
 			}

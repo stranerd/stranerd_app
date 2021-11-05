@@ -17,14 +17,14 @@
 						>
 							<div class="mb-4">
 								<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
-									position="floating"
-									type="email"></ion-input>
+										   position="floating"
+										   type="email"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
 							</div>
 							<div class="mb-4">
 								<ion-input v-model="factory.password" :size="24" placeholder="Password"
-									position="floating"
-									type="password"></ion-input>
+										   position="floating"
+										   type="password"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.password }}</span>
 							</div>
 							<ion-button :disabled="loading" class="w-full mb-4" type="submit">SIGN IN
@@ -37,7 +37,7 @@
 								<span class="normalText">Stay signed in</span>
 							</div>
 
-							<router-link class="underline normalText" to="/auth/Forgot">
+							<router-link class="underline normalText" to="/auth/forgot">
 								Forgot Password
 							</router-link>
 						</div>
