@@ -9,30 +9,33 @@
 
 		<div class="flex flex-col pl-8 mt-6">
 
-			<nav-element :icon="home" :route="route" tab="home"></nav-element>
-
-			<nav-element :icon="helpCircle" :route="route" tab="questions"></nav-element>
-
-			<nav-element :icon="people" :route="route" tab="tutors"></nav-element>
-
-			<nav-element :icon="calendarClear" :route="route" tab="schedule"></nav-element>
-
-			<nav-element :icon="wallet" :route="route" tab="wallet"></nav-element>
+			<router-link v-for="{ path, icon, name } in [
+				{ name: 'home', path: '/dashboard/home', icon: home },
+				{ name: 'questions', path: '/questions', icon: helpCircle },
+				{ name: 'tutors', path: '/dashboard/tutors', icon: people },
+				{ name: 'schedule', path: '/schedule/calendar', icon: calendarClear },
+				{ name: 'wallet', path: '/dashboard/wallet', icon: wallet }
+			]" :key="path" :to="path"
+						 class="flex flex-col rounded-l-[150px] text-icon_inactive cursor-pointer text-sm hover:text-dark_gray mb-2">
+				<div :class="{'text-dark_gray bg-white' : $route.path.includes(path) }"
+					 class="py-5 flex flex-row px-4 items-center rounded-l-3xl">
+					<ion-icon :icon="icon" class="text-[23px] mr-4"></ion-icon>
+					<span class="font-semibold capitalize">{{ name }}</span>
+				</div>
+			</router-link>
 
 		</div>
 
 	</div>
 </template>
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from 'vue'
-import { home, helpCircle, people, calendarClear, wallet } from 'ionicons/icons'
-
-const NavElement = defineAsyncComponent(() => import('@app/components/layout/sidebars/SideBarElement.vue'))
-
+import { defineComponent } from 'vue'
+import { calendarClear, helpCircle, home, people, wallet } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
+import { IonIcon } from '@ionic/vue'
 
 export default defineComponent({
-	components: { NavElement },
+	components: { IonIcon },
 	setup () {
 		const route = useRoute()
 		return {

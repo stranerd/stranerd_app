@@ -43,11 +43,11 @@
 
 			<div class="mt-5 md:mt-6  col-span-6 flex flex-row flex-wrap ">
 
-				<template v-if="questions.length == 0">
+				<template v-if="questions.length === 0">
 					<empty-state
 						:btnText="'Ask a question'"
 						:info="'No questions found! Start asking questions to help with homework and studying.'"
-						:route="'/dashboard/questions'"
+						route="/questions/create"
 					></empty-state>
 				</template>
 				<template v-else>
@@ -68,21 +68,15 @@
 </template>
 <script lang="ts">
 import { IonIcon, IonSelect, IonSelectOption } from '@ionic/vue'
-import { defineAsyncComponent, defineComponent, ref } from 'vue'
-
+import { defineComponent, ref } from 'vue'
 import { ellipse, ellipseOutline } from 'ionicons/icons'
-// Import Swiper Vue.js components
-// Import Swiper styles
-import 'swiper/swiper-bundle.min.css'
 import { useQuestionList } from '@app/composable/questions/questions'
 import { useSubjectList } from '@app/composable/questions/subjects'
-
-const Question = defineAsyncComponent(() => import('@app/components/questions/question.vue'))
-const EmptyState = defineAsyncComponent(() => import('@app/components/core/emptyState.vue'))
+import Question from '@app/components/questions/question.vue'
+import EmptyState from '@app/components/core/emptyState.vue'
 
 export default defineComponent({
 	setup () {
-
 		const {
 			filteredQuestions: questions, error, loading, hasMore,
 			answeredChoices, answered, subjectId,

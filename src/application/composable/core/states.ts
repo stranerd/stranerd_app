@@ -7,7 +7,7 @@ import { useAuth } from '@app/composable/auth/auth'
 
 export const useErrorHandler = () => {
 	const errorState = ref('')
-	const setError = async (error: any) => {
+	const setError = async (error: any, skipAlert = false) => {
 		if (error instanceof NetworkError) {
 			errorState.value = error.errors
 				.map(({ message, field }) => `${capitalize(field ?? 'Error')}: ${message}`)
@@ -18,7 +18,7 @@ export const useErrorHandler = () => {
 				StatusCodes.RefreshTokenMisused
 			].includes(error.statusCode)) await useAuth().signout()
 		} else errorState.value = error.message ?? error
-		if (isClient() && errorState.value) Notify({
+		if (isClient() && errorState.value && !skipAlert) Notify({
 			title: errorState.value,
 			icon: 'error'
 		}).then()
