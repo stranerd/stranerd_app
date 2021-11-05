@@ -12,16 +12,16 @@
 						>
 							<div class="mb-4">
 								<ion-input v-model="factory.password" :size="24" placeholder="New Password"
-										   position="floating"
-										   required type="password"></ion-input>
+									position="floating"
+									required type="password"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.password }}</span>
 							</div>
 							<div class="mb-4">
 								<ion-input v-model="factory.cPassword" :size="24" placeholder="Confirm New Password"
-										   position="floating" required type="password" />
+									position="floating" required type="password" />
 								<span class="normalText text-red-500 font-semibold">{{
-										factory.errors.cPassword
-									}}</span>
+									factory.errors.cPassword
+								}}</span>
 							</div>
 
 							<ion-button class="w-full mb-4" type="submit">RESET PASSWORD
@@ -51,7 +51,7 @@ import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	components: { IonContent, IonPage, IonInput, IonButton, IonSpinner, PageLoading },
-	layout: 'Auth',
+	layout: 'auth',
 	middlewares: ['hasQueryToken'],
 	setup () {
 		const { token } = useRoute().query

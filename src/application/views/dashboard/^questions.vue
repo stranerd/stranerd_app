@@ -43,20 +43,19 @@
 
 <script lang="ts">
 
-import { IonPage, IonContent } from '@ionic/vue'
+import { IonContent, IonPage } from '@ionic/vue'
 import { defineAsyncComponent, ref } from 'vue'
+// Import Swiper styles
+import 'swiper/swiper-bundle.min.css'
+import { Swiper, SwiperSlide } from 'swiper/vue'
 
 const AllQuestions = defineAsyncComponent(() => import('@app/components/questions/all.vue'))
 const AskQuestions = defineAsyncComponent(() => import('@app/components/questions/ask.vue'))
 const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout/sidebars/SideProfileNav.vue'))
 
-// Import Swiper styles
-import 'swiper/swiper-bundle.min.css'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-
 export default {
 	name: 'questions',
-	layout: 'Dashboard',
+	layout: 'dashboard',
 	components: { IonPage, IonContent, AllQuestions, SideProfileNav, Swiper, SwiperSlide, AskQuestions },
 	setup () {
 

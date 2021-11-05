@@ -11,7 +11,8 @@
 							@submit.prevent="sendResetEmail"
 						>
 							<div class="mb-4">
-								<ion-input v-model="factory.email" :size="24" placeholder="Email Address" position="floating"
+								<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
+									position="floating"
 									required type="email"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
 							</div>
@@ -33,19 +34,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, } from 'vue'
+import { defineComponent } from 'vue'
 import { usePasswordResetRequest } from '@app/composable/auth/passwords'
-import { IonContent, IonPage, IonInput, IonButton, IonSpinner } from '@ionic/vue'
+import { IonButton, IonContent, IonInput, IonPage, IonSpinner } from '@ionic/vue'
 
 export default defineComponent({
-	components: { IonContent, IonPage, IonInput, IonButton, IonSpinner, },
-	layout: 'Auth',
+	components: { IonContent, IonPage, IonInput, IonButton, IonSpinner },
+	layout: 'auth',
 	setup () {
 
 		const { factory, loading, error, sendResetEmail, message } = usePasswordResetRequest()
 
 		return { factory, loading, error, sendResetEmail, message }
-	},
+	}
 
 })
 </script>

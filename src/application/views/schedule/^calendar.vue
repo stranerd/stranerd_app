@@ -98,9 +98,9 @@
 
 <script lang="ts">
 
-import { IonPage, IonContent, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar } from '@ionic/vue'
+import { IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/vue'
 import { defineAsyncComponent, ref } from 'vue'
-import { arrowBackOutline, calendar, add, chevronBack, chevronForward, chevronDown } from 'ionicons/icons'
+import { add, arrowBackOutline, calendar, chevronBack, chevronDown, chevronForward } from 'ionicons/icons'
 import { useRouter } from 'vue-router'
 import { componentName, showModal } from '@app/composable/core/Modal'
 
@@ -110,7 +110,7 @@ const DateCard = defineAsyncComponent(() => import('@app/components/schedule/Dat
 
 export default {
 	name: 'calendar',
-	layout: 'SubPages',
+	layout: 'subpages',
 	components: {
 		IonPage,
 		IonContent,

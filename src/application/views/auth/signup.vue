@@ -22,31 +22,31 @@
 						>
 							<div class="mb-4">
 								<ion-input v-model="factory.first" :size="24" placeholder="First Name"
-										   position="floating"
-										   type="text"></ion-input>
+									position="floating"
+									type="text"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.first }}</span>
 							</div>
 							<div class="mb-4">
 								<ion-input v-model="factory.last" :size="24" placeholder="Last Name" position="floating"
-										   type="text"></ion-input>
+									type="text"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.last }}</span>
 							</div>
 							<div class="mb-4">
 								<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
-										   position="floating"
-										   type="email"></ion-input>
+									position="floating"
+									type="email"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
 							</div>
 							<div class="mb-4">
 								<ion-input v-model="factory.password" :size="24" placeholder="Password"
-										   position="floating"
-										   type="password"></ion-input>
+									position="floating"
+									type="password"></ion-input>
 								<span class="normalText text-red-500 font-semibold">{{ factory.errors.password }}</span>
 							</div>
 							<div class="mb-4">
 								<ion-input v-model="factory.cPassword" :size="24" placeholder="Confirm Password"
-										   position="floating"
-										   type="password"></ion-input>
+									position="floating"
+									type="password"></ion-input>
 								<span
 									class="normalText text-red-500 font-semibold">{{ factory.errors.cPassword }}</span>
 							</div>
@@ -66,10 +66,10 @@
 						<span
 							class="text-xs flex flex-wrap justify-center items-center text-icon_inactive mt-8 max-w-full text-center">
 							By signing up, you accept the Stranerd 	<router-link
-							class="text-primary font-bold normalText mx-1"
-							to="/auth/signup"> Terms and Conditions
+								class="text-primary font-bold normalText mx-1"
+								to="/auth/signup"> Terms and Conditions
 							</router-link> & <router-link class="text-primary font-bold normalText mx-1"
-														  to="/auth/signup">
+								to="/auth/signup">
 								Privacy Policy.
 							</router-link>
 
@@ -102,7 +102,7 @@ import AuthProviders from '@app/components/auth/AuthProviders.vue'
 
 export default defineComponent({
 	components: { IonContent, IonPage, IonInput, IonButton, AuthProviders, IonSpinner },
-	layout: 'Auth',
+	layout: 'auth',
 	middlewares: ['isNotAuthenticated'],
 	setup () {
 

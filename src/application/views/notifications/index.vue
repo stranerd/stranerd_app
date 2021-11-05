@@ -46,7 +46,7 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
 import { useNotificationList } from '@app/composable/users/notifications'
-import NotificationCard from '@app/components/Notification/NotificationCard.vue'
+import NotificationCard from '@app/components/notifications/NotificationCard.vue'
 import { IonContent, IonIcon, IonPage } from '@ionic/vue'
 import { checkmarkDone } from 'ionicons/icons'
 import PageLoading from '@app/components/core/PageLoading.vue'
@@ -54,7 +54,7 @@ import EmptyState from '@app/components/core/emptyState.vue'
 
 export default defineComponent({
 	name: 'Notification',
-	layout: 'Justified',
+	layout: 'justified',
 	middlewares: ['isAuthenticated'],
 	components: { NotificationCard, IonContent, IonPage, IonIcon, PageLoading, EmptyState },
 	setup () {

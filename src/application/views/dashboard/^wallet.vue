@@ -22,9 +22,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { IonPage, IonContent } from '@ionic/vue'
+import { IonContent, IonPage } from '@ionic/vue'
 import BalanceCard from '@app/components/wallet/BalanceCard.vue'
 import TranscractionHistory from '@app/components/wallet/TranscractionHistory.vue'
 
@@ -32,13 +32,13 @@ const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout
 
 export default defineComponent({
 	name: 'wallet',
-	layout: 'Dashboard',
-	components: { IonPage, IonContent, SideProfileNav, BalanceCard, TranscractionHistory, },
+	layout: 'dashboard',
+	components: { IonPage, IonContent, SideProfileNav, BalanceCard, TranscractionHistory },
 	setup () {
 		const { id, user } = useAuth()
 		return { id, user }
 
-	},
+	}
 
 })
 

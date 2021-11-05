@@ -22,8 +22,8 @@
 						<div class="grid grid-cols-12 md:px-2 w-full mb-4 text-xs md:text-sm">
 							<div class="col-span-12">
 								<question :colorClass="'bg-light_gray'"
-										  :fromViewQuestion="true"
-										  :question="question"></question>
+									:fromViewQuestion="true"
+									:question="question"></question>
 							</div>
 
 							<div v-if="question?.attachments" class="col-span-12 py-3">
@@ -86,7 +86,7 @@ const PhotoList = defineAsyncComponent(() => import('@app/components/core/photoL
 
 export default {
 	name: 'answers',
-	layout: 'SubPages',
+	layout: 'subpages',
 	middlewares: ['isAuthenticated'],
 	components: {
 		IonPage,

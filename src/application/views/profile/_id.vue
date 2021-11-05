@@ -56,7 +56,7 @@ const Settings = defineAsyncComponent(() => import('@app/components/profile/sett
 export default {
 	name: 'profileDashboard',
 	middlewares: ['isAuthenticated'],
-	layout: 'Justified',
+	layout: 'justified',
 	displayName: 'Profile',
 	components: { IonPage, IonContent, topSession, Dashboard, Questions, Answers, Bio, Settings },
 	setup () {

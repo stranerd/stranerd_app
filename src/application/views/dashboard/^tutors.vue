@@ -6,7 +6,8 @@
 					<!-- page contents goes here -->
 					<div class="col-span-12  md:col-start-3 md:col-end-11 px-3 ">
 						<div class="bg-light_gray rounded-md flex flex-row items-center">
-							<button :class="selectedTab == 'explore' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'"
+							<button
+								:class="selectedTab == 'explore' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'"
 								@click="handleSliding('0')">
 								Explore tutors
 							</button>
@@ -43,22 +44,21 @@
 
 <script lang="ts">
 
-import { IonPage, IonContent } from '@ionic/vue'
-import { defineAsyncComponent, ref, onMounted } from 'vue'
+import { IonContent, IonPage } from '@ionic/vue'
+import { defineAsyncComponent, ref } from 'vue'
 
 // Import Swiper styles
 import 'swiper/swiper-bundle.min.css'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { useStore } from '@app/store'
-
-const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout/sidebars/SideProfileNav.vue'))
 import ExploreTutors from '@app/components/tutors/ExploreTutors.vue'
 import FindTutors from '@app/components/tutors/FindTutors.vue'
 
+const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout/sidebars/SideProfileNav.vue'))
+
 export default {
 	name: 'tutors',
-	layout: 'Dashboard',
-	components: { IonPage, IonContent, SideProfileNav, ExploreTutors, Swiper, SwiperSlide, FindTutors, },
+	layout: 'dashboard',
+	components: { IonPage, IonContent, SideProfileNav, ExploreTutors, Swiper, SwiperSlide, FindTutors },
 
 	setup () {
 

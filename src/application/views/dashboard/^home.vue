@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { IonPage, IonContent } from '@ionic/vue'
+import { IonContent, IonPage } from '@ionic/vue'
 import FeaturedTutors from '@app/components/dashboard/FeaturedTutors.vue'
 import RecentQuestions from '@app/components/dashboard/RecentQuestions.vue'
 import UpcomingEvent from '@app/components/dashboard/UpcomingEvent.vue'
@@ -31,7 +31,7 @@ const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout
 
 export default {
 	name: 'home',
-	layout: 'Dashboard',
+	layout: 'dashboard',
 	components: {
 		IonContent,
 		IonPage,
@@ -39,8 +39,8 @@ export default {
 		RecentQuestions,
 		UpcomingEvent,
 		RecentTransaction,
-		SideProfileNav,
-	},
+		SideProfileNav
+	}
 
 }
 </script>

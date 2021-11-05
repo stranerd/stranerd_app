@@ -34,8 +34,8 @@
 
 <script lang="ts">
 
-import { IonPage, IonContent } from '@ionic/vue'
-import { chevronForwardOutline, chevronBackOutline, calendarClear } from 'ionicons/icons'
+import { IonContent, IonPage } from '@ionic/vue'
+import { calendarClear, chevronBackOutline, chevronForwardOutline } from 'ionicons/icons'
 import { defineAsyncComponent } from 'vue'
 import Calendar from '@app/components/schedule/Calendar.vue'
 
@@ -43,7 +43,7 @@ const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout
 
 export default {
 	name: 'schedule',
-	layout: 'Dashboard',
+	layout: 'dashboard',
 	components: { IonPage, IonContent, SideProfileNav, Calendar },
 	setup () {
 		return {

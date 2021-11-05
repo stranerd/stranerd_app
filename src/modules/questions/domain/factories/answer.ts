@@ -12,7 +12,7 @@ import { AnswerToModel } from '../../data/models/answer'
 
 type Content = File | Media
 type Keys = {
-	title: string body: string questionId: string attachments: Content[]
+	title: string, body: string, questionId: string, attachments: Content[]
 }
 
 export class AnswerFactory extends BaseFactory<AnswerEntity, AnswerToModel, Keys> {

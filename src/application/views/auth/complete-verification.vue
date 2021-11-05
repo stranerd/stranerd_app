@@ -38,7 +38,7 @@ import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	components: { IonContent, IonPage, IonButton, IonSpinner },
-	layout: 'Auth',
+	layout: 'auth',
 	middlewares: ['hasQueryToken'],
 	setup () {
 		const { token } = useRoute().query

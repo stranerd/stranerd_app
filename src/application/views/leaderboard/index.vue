@@ -53,7 +53,7 @@
 							<div class="w-7/12 flex items-center gap-2">
 								<avatar :size="24" :src="user.bio.photo" />
 								<span>
-									{{user.bio.fullName}}
+									{{ user.bio.fullName }}
 								</span>
 							</div>
 							<div class="w-2/12 text-right text-primary font-semibold">
@@ -65,12 +65,12 @@
 							<div v-for="(person, index) in leaderboardData" :key="person.id"
 								class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4">
 								<div class="w-3/12">
-									<span>{{index + 1}} </span>
+									<span>{{ index + 1 }} </span>
 								</div>
 								<div class="w-3/12 flex items-center gap-2">
 									<avatar :size="24" :src="person.bio.photo" />
 									<span>
-										{{person.bio.fullName}}
+										{{ person.bio.fullName }}
 									</span>
 								</div>
 								<div class="w-6/12 font-normal text-right text-primary ">
@@ -92,7 +92,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IonSelect, IonSelectOption, IonPage, IonContent } from '@ionic/vue'
+import { IonContent, IonPage, IonSelect, IonSelectOption } from '@ionic/vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { useLeaderboardList } from '@app/composable/users/leaderboard'
 import PageLoading from '@app/components/core/PageLoading.vue'
@@ -100,9 +100,9 @@ import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'tutor learderboard',
-	layout: 'Justified',
+	layout: 'justified',
 	displayName: 'LeaderBoard',
-	components: { IonSelect, IonSelectOption, Avatar, IonPage, IonContent, PageLoading, },
+	components: { IonSelect, IonSelectOption, Avatar, IonPage, IonContent, PageLoading },
 	setup () {
 		const { filteredUsers: leaderboardData, loading, Userindex } = useLeaderboardList()
 		const RankType = ref('daily')

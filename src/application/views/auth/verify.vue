@@ -37,7 +37,7 @@ import { IonButton, IonContent, IonPage, IonSpinner } from '@ionic/vue'
 
 export default defineComponent({
 	components: { IonContent, IonPage, IonButton, IonSpinner },
-	layout: 'Auth',
+	layout: 'auth',
 	middlewares: ['isAuthenticated'],
 	setup () {
 		const { email, loading, error, message, sendVerificationEmail } = useEmailVerificationRequest()
