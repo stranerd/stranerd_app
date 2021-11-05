@@ -1,10 +1,8 @@
-import { BaseEntity } from '@/modules/core'
-
-
+import { BaseEntity } from '@modules/core'
 
 type NotificationConstructorArgs = {
-	id: string; body: string; action: string; userId: string; data: Record<string, any>;
-	createdAt: number; seen: boolean; updatedAt: number;
+	id: string, body: string, action: string, userId: string, data: Record<string, any>
+	createdAt: number, seen: boolean, updatedAt: number
 }
 
 export class NotificationEntity extends BaseEntity {

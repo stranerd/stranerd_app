@@ -1,19 +1,22 @@
 <template>
-	<div class=" flex flex-col absolute h-full w-full overflow-y-auto border-r-[1px] normalText text-icon_inactive border-faded_gray lg:rounded-tr-xl lg:rounded-br-xl">
-		<div class="flex flex-row items-center justify-between px-3 py-4 border-b-[1px] border-faded_gray sticky top-0 bg-white z-50">
+	<div
+		class=" flex flex-col absolute h-full w-full overflow-y-auto border-r-[1px] normalText text-icon_inactive border-faded_gray lg:rounded-tr-xl lg:rounded-br-xl">
+		<div
+			class="flex flex-row items-center justify-between px-3 py-4 border-b-[1px] border-faded_gray sticky top-0 bg-white z-50">
 			<h2 class="text-dark_gray text-base font-bold ">Info</h2>
 		</div>
 
 		<div class="py-4 w-full px-3 flex items-center flex-row gap-2   border-b-[1px] border-light_gray">
-		
-			<avatar :size="'55'" :photoUrl="user?.avatar?.link" />
+
+			<avatar :photoUrl="user?.avatar?.link" :size="'55'" />
 			<div class="flex flex-col gap-1">
 				<h2 class="font-bold text-dark_gray">{{ user?.fullName }}</h2>
 				<div class="flex flex-row gap-1 items-center  ">
 					<ShowRatings :rating="user?.ratingCount ? user.ratingCount : 3" />
 				</div>
 				<div class="mt-1">
-					<span class="py-1 px-3  rounded-xl border-faded_gray border-[1px] text-center font-bold text-xs text-icon_inactive bg-light_green">
+					<span
+						class="py-1 px-3  rounded-xl border-faded_gray border-[1px] text-center font-bold text-xs text-icon_inactive bg-light_green">
 						{{ user?.rank.id }}
 					</span>
 				</div>
@@ -45,27 +48,33 @@
 					<ion-icon :icon="chevronForward" class="text-[20px]"></ion-icon>
 				</div>
 				<div class="w-full grid grid-cols-12 gap-3">
-					<div class="py-7 col-span-4 bg-light_gray rounded-xl text-icon_inactive flex flex-row items-center justify-center">
+					<div
+						class="py-7 col-span-4 bg-light_gray rounded-xl text-icon_inactive flex flex-row items-center justify-center">
 						<ion-icon :icon="documentText" class="text-[30px]"></ion-icon>
 					</div>
 
-					<div class="py-7 col-span-4 bg-light_gray rounded-xl text-icon_inactive flex flex-row items-center justify-center">
+					<div
+						class="py-7 col-span-4 bg-light_gray rounded-xl text-icon_inactive flex flex-row items-center justify-center">
 						<ion-icon :icon="logoYoutube" class="text-[30px]"></ion-icon>
 					</div>
 
-					<div class="py-7 col-span-4 bg-light_gray rounded-xl text-icon_inactive flex flex-row items-center justify-center">
+					<div
+						class="py-7 col-span-4 bg-light_gray rounded-xl text-icon_inactive flex flex-row items-center justify-center">
 						<ion-icon :icon="document" class="text-[30px]"></ion-icon>
 					</div>
 
-					<div class="py-7 col-span-4 bg-light_gray rounded-xl text-icon_inactive flex flex-row items-center justify-center">
+					<div
+						class="py-7 col-span-4 bg-light_gray rounded-xl text-icon_inactive flex flex-row items-center justify-center">
 						<ion-icon :icon="images" class="text-[30px]"></ion-icon>
 					</div>
 
-					<div class="py-7 col-span-4 bg-light_gray rounded-xl text-icon_inactive flex flex-row items-center justify-center">
+					<div
+						class="py-7 col-span-4 bg-light_gray rounded-xl text-icon_inactive flex flex-row items-center justify-center">
 						<ion-icon :icon="document" class="text-[30px]"></ion-icon>
 					</div>
 
-					<div class="py-7 col-span-4 bg-light_gray rounded-xl text-icon_inactive flex flex-row items-center justify-center">
+					<div
+						class="py-7 col-span-4 bg-light_gray rounded-xl text-icon_inactive flex flex-row items-center justify-center">
 						<ion-icon :icon="documentText" class="text-[30px]"></ion-icon>
 					</div>
 
@@ -73,7 +82,8 @@
 			</div>
 
 
-			<div class="flex flex-row gap-1 px-3 py-2 pb-6 border-b-[1px] border-light_gray justify-between items-center">
+			<div
+				class="flex flex-row gap-1 px-3 py-2 pb-6 border-b-[1px] border-light_gray justify-between items-center">
 				<h2 class="text-xs font-bold text-dark_gray">Date & Time</h2>
 				<ion-icon :icon="ellipseOutline" class="text-[22px]"></ion-icon>
 			</div>
@@ -83,13 +93,12 @@
 	</div>
 </template>
 <script lang="ts">
-import {  defineComponent } from 'vue'
-import {  IonIcon } from '@ionic/vue'
+import { defineComponent } from 'vue'
+import { IonIcon } from '@ionic/vue'
 import { chevronForward, documentText, logoYoutube, document, images, ellipseOutline } from 'ionicons/icons'
 import Avatar from '../core/AvatarUser.vue'
 import ShowRatings from '../core/ShowRatings.vue'
-import { useUser } from '@/application/composable/users/user'
-
+import { useUser } from '@app/composable/users/user'
 
 export default defineComponent({
 	props: {
@@ -98,14 +107,14 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup(props: any) {
+	setup (props: any) {
 
 		const { user } = useUser(props.userId)
-		return { 
-			 chevronForward, documentText, logoYoutube, user, document, images, ellipseOutline
+		return {
+			chevronForward, documentText, logoYoutube, user, document, images, ellipseOutline
 		}
 	},
-	components: { 
+	components: {
 		Avatar, ShowRatings, IonIcon,
 	}
 })

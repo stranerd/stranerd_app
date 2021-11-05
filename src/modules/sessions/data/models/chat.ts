@@ -1,18 +1,19 @@
-import { Media } from '@/modules/core'
+import { Media } from '@modules/core'
 
 export interface ChatToModel {
-	content: string | null;
-	media: Media | null;
-	sessionId: string | null;
-	to: string;
+	content: string | null
+	media: Media | null
+	sessionId: string | null
+	to: string
 }
+
 export interface ChatFromModel extends ChatToModel {
-	id: string;
-	from: string;
-	path: [string, string];
-	readAt: number | null;
-	createdAt: number;
-	updatedAt: number;
+	id: string
+	from: string
+	path: [string, string]
+	readAt: number | null
+	createdAt: number
+	updatedAt: number
 }
 
 

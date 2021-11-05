@@ -1,5 +1,5 @@
-import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@/modules/core'
-import { apiBases } from '@/utils/environment'
+import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
+import { apiBases } from '@utils/environment'
 import { AnswerFromModel, AnswerToModel } from '../models/answer'
 import { AnswerBaseDataSource } from './answer-base'
 

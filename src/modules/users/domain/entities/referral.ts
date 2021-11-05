@@ -1,7 +1,7 @@
-import { BaseEntity } from '@/modules/core'
+import { BaseEntity } from '@modules/core'
 
 type ReferralConstructorArgs = {
-	id: string; referred: string; userId: string; createdAt: number; updatedAt: number;
+	id: string, referred: string, userId: string, createdAt: number, updatedAt: number
 }
 
 export class ReferralEntity extends BaseEntity {

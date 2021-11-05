@@ -8,24 +8,29 @@ import {
 	SigninWithEmail,
 	SigninWithGoogle,
 	SignupWithEmail
-} from '@/modules/auth'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
-import { isClient } from '@/utils/environment'
-import { NetworkError, StatusCodes } from '@/modules/core'
-import { useAuth } from '@/application/composable/auth/auth'
-import { createStorage } from './storage'
-import { setAuthUser } from '@/application/plugins/setLoggedIn'
+} from '@modules/auth'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { createSession } from '@app/composable/auth/session'
+import { NetworkError, StatusCodes } from '@modules/core'
+import { useAuth } from '@app/composable/auth/auth'
 
 const global = {
 	referrerId: ref(undefined as string | undefined)
 }
 
+export const getReferrerId = () => window.localStorage.getItem('referrer') ?? global.referrerId.value
 
-export const getReferrerId = () => isClient()
-	? (window.localStorage.getItem('referrer') ?? global.referrerId.value)
-	: global.referrerId.value
+export const setReferrerId = (id: string) => {
+	global.referrerId.value = id
+	window.localStorage.setItem('referrer', id)
+}
+export const saveReferrerId = () => {
+	const id = getReferrerId()
+	if (id) window.localStorage.setItem('referrer', id)
+}
 
 export const useGoogleSignin = () => {
+	const router = useRouter()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const signin = async (idToken: string) => {
@@ -36,8 +41,8 @@ export const useGoogleSignin = () => {
 				const user = await SigninWithGoogle.call(idToken, {
 					referrer: getReferrerId()
 				})
-				await createStorage(user)
-				if (isClient()) window.localStorage.removeItem('referrer')
+				await createSession(user, router)
+				window.localStorage.removeItem('referrer')
 			} catch (error) {
 				await setError(error)
 			}
@@ -60,11 +65,8 @@ export const useEmailSignin = () => {
 				const user = await SigninWithEmail.call(factory.value, {
 					referrer: getReferrerId()
 				})
-				await createStorage(user)
-				await setAuthUser() 
-				await  router.push('/dashboard/home')
+				await createSession(user, router)
 				window.localStorage.removeItem('referrer')
-
 			} catch (error) {
 				await setError(error)
 			}
@@ -87,10 +89,8 @@ export const useEmailSignup = () => {
 				const user = await SignupWithEmail.call(factory.value, {
 					referrer: getReferrerId()
 				})
-				await createStorage(user)
-				await setAuthUser() 
-				await  router.push('/auth/verify')
-				 window.localStorage.removeItem('referrer')
+				await createSession(user, router)
+				window.localStorage.removeItem('referrer')
 			} catch (error) {
 				await setError(error)
 			}
@@ -109,8 +109,7 @@ export const useCompleteEmailVerification = (token: string) => {
 		await setLoading(true)
 		try {
 			const user = await CompleteEmailVerification.call(token)
-			await createStorage(user)
-			await  router.push('/dashboard/home')
+			await createSession(user, router)
 		} catch (error) {
 			await setError(error)
 			if (error instanceof NetworkError && error.statusCode === StatusCodes.InvalidToken) {
@@ -148,13 +147,3 @@ export const useEmailVerificationRequest = () => {
 		sendVerificationEmail
 	}
 }
-
-export const setReferrerId = (id: string) => {
-	global.referrerId.value = id
-	if (isClient()) window.localStorage.setItem('referrer', id)
-}
-export const saveReferrerId = () => {
-	const id = getReferrerId()
-	if (id && isClient()) window.localStorage.setItem('referrer', id)
-}
-

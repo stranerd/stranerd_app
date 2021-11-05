@@ -9,14 +9,14 @@
 <script lang="ts">
 import { IonApp, IonRouterOutlet } from '@ionic/vue'
 import { defineComponent } from 'vue'
-import AppLayout from '@/application/layouts/AppLayout.vue'
+import AppLayout from '@app/layouts/AppLayout.vue'
 
 export default defineComponent({
 	name: 'App',
 	components: {
 		IonApp,
 		IonRouterOutlet,
-		AppLayout 
+		AppLayout
 	}
 })
 </script>

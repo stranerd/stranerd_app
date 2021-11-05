@@ -10,18 +10,18 @@ import {
 	isNumber,
 	isString
 } from '@stranerd/validate'
-import { BaseFactory, Media } from '@/modules/core'
-import { MAXIMUM_COINS, MINIMUM_COINS } from '@/utils/constants'
+import { BaseFactory, Media } from '@modules/core'
+import { MAXIMUM_COINS, MINIMUM_COINS } from '@utils/constants'
 import { QuestionEntity } from '../entities/question'
 import { QuestionToModel } from '../../data/models/question'
 
 type Content = File | Media
 type Keys = {
-	body: string;
-	 coins: number; 
-	 subjectId: string;
-	 tags: string[]; 
-	 attachments: Content[];
+	body: string
+	coins: number
+	subjectId: string
+	tags: string[]
+	attachments: Content[]
 }
 
 export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel, Keys> {

@@ -18,7 +18,7 @@
 			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-2 border-faded_gray">
 				<h1 class="headings text-dark_gray font-bold">School</h1>
 				<p class="leading-relaxed">
-					Northwestern  University
+					Northwestern University
 				</p>
 			</div>
 
@@ -46,23 +46,23 @@
 <script lang="ts">
 
 import { star } from 'ionicons/icons'
-import { useAuth } from '@/application/composable/auth/auth'
-import { useUser } from '@/application/composable/users/user'
+import { useAuth } from '@app/composable/auth/auth'
+import { useUser } from '@app/composable/users/user'
 
-export default  {
+export default {
 	name: 'profileBio',
 
-	props:{
-		userId:{
-			required:true,
-			type:String,
-			default:''
+	props: {
+		userId: {
+			required: true,
+			type: String,
+			default: ''
 		}
 	},
-	setup(props: any) {
-	  const { id, user: authUser } = useAuth()
-	  const { error, loading, user } = useUser(props.userId)
-		
+	setup (props: any) {
+		const { id, user: authUser } = useAuth()
+		const { error, loading, user } = useUser(props.userId)
+
 		return {
 			id,
 			user,
@@ -72,8 +72,8 @@ export default  {
 }
 </script>
 <style scoped>
-ion-toolbar {
-	--background: #F7F7FC;
-}
+	ion-toolbar {
+		--background: #F7F7FC;
+	}
 
 </style>

@@ -1,5 +1,5 @@
-import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@/modules/core'
-import { apiBases } from '@/utils/environment'
+import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
+import { apiBases } from '@utils/environment'
 import { ChatFromModel, ChatToModel } from '../models/chat'
 import { ChatBaseDataSource } from './chat-base'
 

@@ -1,4 +1,4 @@
-import { Listeners, QueryParams } from '@/modules/core'
+import { Listeners, QueryParams } from '@modules/core'
 import { ChatMetaBaseDataSource } from '../datasources/chatMeta-base'
 import { ChatMetaTransformer } from '../transformers/chatMeta'
 import { IChatMetaRepository } from '../../domain/irepositories/ichatMeta'

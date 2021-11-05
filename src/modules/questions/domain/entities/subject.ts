@@ -1,13 +1,11 @@
-import { BaseEntity } from '@/modules/core'
+import { BaseEntity } from '@modules/core'
 
-
-type SubjectConstructorArgs = { id: string; name: string; createdAt: number; updatedAt: number }
+type SubjectConstructorArgs = { id: string, name: string, createdAt: number, updatedAt: number }
 
 const capitalize = (value: string) => {
 	const c = (v: string) => (v[0]?.toUpperCase() ?? '') + v.slice(1)
 	return value.trim().split(' ').map(c).join(' ')
 }
-
 
 export class SubjectEntity extends BaseEntity {
 	public readonly id: string

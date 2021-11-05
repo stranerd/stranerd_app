@@ -1,4 +1,4 @@
-import { QueryParams } from '@/modules/core'
+import { QueryParams } from '@modules/core'
 import { ISubjectRepository } from '../../domain/irepositories/isubject'
 import { SubjectBaseDataSource } from '../datasources/subject-base'
 import { SubjectTransformer } from '../transformers/subject'

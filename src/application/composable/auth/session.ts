@@ -1,15 +1,13 @@
-import { SessionSignin } from '@/modules/auth'
+import { SessionSignin } from '@modules/auth'
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
-import { isServer } from '@/utils/environment'
-import { REDIRECT_SESSION_NAME } from '@/utils/constants'
+import { REDIRECT_SESSION_NAME } from '@utils/constants'
 import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
-import { useContext } from '@nuxtjs/composition-api'
-import VueRouter from 'vue-router'
+import { Router, useRoute, useRouter } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@app/composable/core/notifications'
-import { parseCookie, serializeToCookie } from '@/utils/cookie'
+import { parseCookie, serializeToCookie } from '@utils/cookie'
 
-export const createSession = async (afterAuth: AfterAuthUser, router: VueRouter) => {
+export const createSession = async (afterAuth: AfterAuthUser, router: Router) => {
 	if (!afterAuth.user.isVerified) {
 		await useAuth().setAuthUser(afterAuth.user)
 		return await router.push('/auth/verify')
@@ -50,12 +48,12 @@ export const useSessionSignout = () => {
 }
 
 export const useRedirectToAuth = () => {
-	const { app, res, route } = useContext()
+	const route = useRoute()
+	const router = useRouter()
 
-	const redirect = () => {
-		if (isServer()) res.setHeader('Set-Cookie', serializeToCookie(REDIRECT_SESSION_NAME, route.value.fullPath))
-		else document.cookie = serializeToCookie(REDIRECT_SESSION_NAME, route.value.fullPath)
-		if (app.router) app.router.push('/auth/signin')
+	const redirect = async () => {
+		document.cookie = serializeToCookie(REDIRECT_SESSION_NAME, route.fullPath)
+		if (router) await router.push('/auth/signin')
 	}
 
 	return { redirect }

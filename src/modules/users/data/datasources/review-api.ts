@@ -1,5 +1,5 @@
-import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@/modules/core'
-import { apiBases } from '@/utils/environment'
+import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
+import { apiBases } from '@utils/environment'
 import { ReviewFromModel, ReviewToModel } from '../models/review'
 import { ReviewBaseDataSource } from './review-base'
 

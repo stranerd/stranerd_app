@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import { Ref, ref, onMounted } from 'vue'
-import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
-import { GetReferrals, ListenToReferrals, ReferralEntity } from '@/modules/users'
-import { useAuth } from '@/application/composable/auth/auth'
+import { onMounted, ref, Ref } from 'vue'
+import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { GetReferrals, ListenToReferrals, ReferralEntity } from '@modules/users'
+import { useAuth } from '@app/composable/auth/auth'
 
 const global = {} as Record<string, {
-	referrals: Ref<ReferralEntity[]>;
-	hasMore: Ref<boolean>;
-	fetched: Ref<boolean>;
-	listener: ReturnType<typeof useListener>;
+	referrals: Ref<ReferralEntity[]>
+	hasMore: Ref<boolean>
+	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToReferralList = (userId: string, referral: ReferralEntity) => {

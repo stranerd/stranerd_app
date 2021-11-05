@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import { computed, ref, Ref, onMounted } from 'vue'
+import { computed, onMounted, Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import {
 	AddQuestion,
@@ -11,13 +10,12 @@ import {
 	ListenToQuestions,
 	QuestionEntity,
 	QuestionFactory
-} from '@/modules/questions'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
-import { COINS_GAP, MAXIMUM_COINS, MINIMUM_COINS } from '@/utils/constants'
-import { useAuth } from '@/application/composable/auth/auth'
-import { analytics } from '@/modules/core'
-import VueRouter from 'vue-router'
-import { Alert } from '@/application/composable/core/notifications'
+} from '@modules/questions'
+import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { COINS_GAP, MAXIMUM_COINS, MINIMUM_COINS } from '@utils/constants'
+import { useAuth } from '@app/composable/auth/auth'
+import { analytics } from '@modules/core'
+import { Alert } from '@app/composable/core/notifications'
 
 enum Answered {
 	All,
@@ -140,7 +138,7 @@ export const useCreateQuestion = () => {
 				setError('Login to continue').then()
 				return []
 			}
-			if (user.value!.account.coins.bronze < MINIMUM_COINS) {
+			if (user.value?.account.coins.bronze ?? 0 < MINIMUM_COINS) {
 				setError(`You need at least ${MINIMUM_COINS} coins to ask a question`).then()
 				return []
 			}
@@ -225,7 +223,7 @@ export const useQuestion = (questionId: string) => {
 let editingQuestion = null as QuestionEntity | null
 export const getEditingQuestion = () => editingQuestion
 export const openQuestionEditModal = (question: QuestionEntity) => {
-	const router = useRouter() 
+	const router = useRouter()
 	editingQuestion = question
 	router.push(`/questions/${question.id}/edit`)
 }

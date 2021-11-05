@@ -1,4 +1,4 @@
-import { Conditions, Listeners } from '@/modules/core'
+import { Conditions, Listeners } from '@modules/core'
 import { ISessionRepository } from '../../irepositories/isession'
 import { SessionEntity } from '../../entities/session'
 

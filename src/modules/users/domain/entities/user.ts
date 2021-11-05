@@ -1,6 +1,6 @@
-import { BaseEntity, Media } from '@/modules/core'
-import { appName } from '@/utils/environment'
-import { capitalize, catchDivideByZero, formatNumber } from '@/utils/commons'
+import { BaseEntity, Media } from '@modules/core'
+import { appName } from '@utils/environment'
+import { capitalize, catchDivideByZero, formatNumber } from '@utils/commons'
 import { getRankImage, RankTypes } from './rank'
 
 export enum RankingTimes {
@@ -10,89 +10,89 @@ export enum RankingTimes {
 }
 
 export interface UserBio {
-	firstName: string;
-	lastName: string;
-	fullName: string;
-	email: string;
-	description: string;
-	photo: Media | null;
+	firstName: string
+	lastName: string
+	fullName: string
+	email: string
+	description: string
+	photo: Media | null
 }
 
 export interface UserRoles {
 	[appName]: {
-		isAdmin: boolean;
-		isTutor: boolean;
-	};
+		isAdmin: boolean
+		isTutor: boolean
+	}
 }
 
 export interface UserAccount {
-	score: number;
+	score: number
 	coins: {
-		bronze: number;
-		gold: number;
-	};
+		bronze: number
+		gold: number
+	}
 	meta: {
-		questions: number;
-		answers: number;
-		bestAnswers: number;
-		answerComments: number;
-		sessions: number;
-		tutorSessions: number;
-	};
+		questions: number
+		answers: number
+		bestAnswers: number
+		answerComments: number
+		sessions: number
+		tutorSessions: number
+	}
 	streak: {
-		count: number;
-		longestStreak: number;
-		lastEvaluatedAt: number;
-	};
+		count: number
+		longestStreak: number
+		lastEvaluatedAt: number
+	}
 	ratings: {
-		total: number;
-		count: number;
-	};
-	referrals: Record<string, boolean>;
-	rankings: Record<RankingTimes, number>;
+		total: number
+		count: number
+	}
+	referrals: Record<string, boolean>
+	rankings: Record<RankingTimes, number>
 }
 
 export interface UserStatus {
-	connections: string[];
-	lastUpdatedAt: number;
+	connections: string[]
+	lastUpdatedAt: number
 }
 
 export interface UserSession {
-	currentSessions: string[];
-	currentTutorSessions: string[];
-	requests: string[];
-	lobby: string[];
+	currentSessions: string[]
+	currentTutorSessions: string[]
+	requests: string[]
+	lobby: string[]
 }
 
 export interface UserDates {
-	createdAt: number;
-	deletedAt: number | null;
+	createdAt: number
+	deletedAt: number | null
 }
 
 export interface UserTutor {
-	tags: Record<string, number>;
-	strongestSubject: string | null;
-	weakerSubjects: string[];
+	tags: Record<string, number>
+	strongestSubject: string | null
+	weakerSubjects: string[]
 }
 
 export interface UserRank {
-	id: RankTypes;
-	score: number;
-	level: number;
+	id: RankTypes
+	score: number
+	level: number
 }
 
 type UserConstructorArgs = {
-	id: string;
-	bio: UserBio;
-	roles: UserRoles;
-	account: UserAccount;
-	status: UserStatus;
-	tutor: UserTutor;
-	session: UserSession;
-	dates: UserDates;
-	rankProgress: number;
-	rank: UserRank;
-	nextRank: UserRank | null;
+	id: string
+	bio: UserBio
+	roles: UserRoles
+	account: UserAccount
+	status: UserStatus
+	tutor: UserTutor
+	session: UserSession
+	dates: UserDates
+	rankProgress: number
+	rank: UserRank
+	nextRank: UserRank | null
 }
 
 export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {

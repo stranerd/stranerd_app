@@ -1,24 +1,18 @@
 <template>
-	<ion-page>
-		<ion-tabs>
-			<ion-router-outlet></ion-router-outlet>
-			<bottom-nav></bottom-nav>
-		</ion-tabs>
-	</ion-page>
+	<ion-tabs>
+		<ion-router-outlet />
+		<bottom-nav />
+	</ion-tabs>
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent } from 'vue'
+import { defineComponent } from 'vue'
+import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
+import { IonRouterOutlet, IonTabs } from '@ionic/vue'
 
-import BottomNav from '@/application/components/layout/bottomNavigations/BottomNav.vue'
-
-import { IonPage, IonTabs, IonRouterOutlet } from '@ionic/vue'
-
-export default {
-	name: 'dashboard',
-	components: { BottomNav, IonPage, IonTabs, IonRouterOutlet },
-	setup() {
-		return {}
-	}
-}
+export default defineComponent({
+	name: 'Dashboard',
+	layout: 'dashboard',
+	components: { BottomNav, IonTabs, IonRouterOutlet }
+})
 </script>

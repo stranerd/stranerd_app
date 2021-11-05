@@ -1,6 +1,6 @@
-import { QuestionTransformer } from '@/modules/questions/data/transformers/question'
-import { AnswerTransformer } from '@/modules/questions/data/transformers/answer'
-import { UserTransformer } from '@/modules/users/data/transformers/user'
+import { QuestionTransformer } from '@modules/questions/data/transformers/question'
+import { AnswerTransformer } from '@modules/questions/data/transformers/answer'
+import { UserTransformer } from '@modules/users/data/transformers/user'
 import { IMetaRepository } from '../../domain/irepositories/imeta'
 import { MetaBaseDataSource } from '../datasources/meta-base'
 
@@ -32,7 +32,7 @@ export class MetaRepository implements IMetaRepository {
 		}
 	}
 
-	async buyCoinsWithStripe (data: { amount: number; currency: string; gold: number; bronze: number }) {
+	async buyCoinsWithStripe (data: { amount: number, currency: string, gold: number, bronze: number }) {
 		return await this.dataSource.buyCoinsWithStripe(data)
 	}
 

@@ -1,8 +1,8 @@
 <template>
-	<div class="flex flex-col mt-1 py-3" :id="answer.id">
+	<div :id="answer.id" class="flex flex-col mt-1 py-3">
 		<div class="bg-light_gray rounded-lg py-4 px-3 flex flex-col">
-		
-			<router-link class="py-5" :to="`/questions/${answer.questionId}#${answer.id}`" >
+
+			<router-link :to="`/questions/${answer.questionId}#${answer.id}`" class="py-5">
 				{{ answer.trimmedTitle }}
 			</router-link>
 
@@ -17,20 +17,20 @@
 						<span class="mr-1">(2)</span>
 						<ion-icon :icon="thumbsDown" class="text-[22px] mr-2"></ion-icon>
 					</div>
-				
-				
+
+
 					<ion-icon :icon="star" class="text-[20px] text-star_yellow"></ion-icon>
-				
+
 				</div>
 
-				<div class="flex flex-row items-center justify-between mt-4" >
+				<div class="flex flex-row items-center justify-between mt-4">
 					<span class="font-bold text-icon_inactive">Posted {{ formatTime(answer.createdAt) }}</span>
 				</div>
 			</div>
-	
+
 
 		</div>
-	
+
 	</div>
 </template>
 <script lang="ts">
@@ -38,10 +38,10 @@ import { defineComponent, PropType } from 'vue'
 import { IonIcon } from '@ionic/vue'
 
 import { arrowBackOutline, arrowRedo, shareSocial, chevronDown, thumbsDown, thumbsUp, star, send } from 'ionicons/icons'
-import { AnswerEntity } from '@/modules/questions'
-import { formatTime } from '@/utils/dates'
+import { AnswerEntity } from '@modules/questions'
+import { formatTime } from '@utils/dates'
 
-export default defineComponent( {
+export default defineComponent({
 	name: 'eachAnswer',
 	components: { IonIcon },
 	props: {
@@ -51,8 +51,8 @@ export default defineComponent( {
 		}
 	},
 
-	setup(props: any) {
-		
+	setup (props: any) {
+
 		return {
 			formatTime,
 			arrowBackOutline,

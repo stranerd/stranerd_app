@@ -7,20 +7,21 @@
 		</template>
 
 		<template v-else>
-			<div class="w-full flex flex-col gap-4"  v-for="session in chats" :key="session.hash">
-				<chat-message v-for="chat in session.chats" :key="chat.hash" :chat="chat" :user-id="userId"  />
-			</div >
+			<div v-for="session in chats" :key="session.hash" class="w-full flex flex-col gap-4">
+				<chat-message v-for="chat in session.chats" :key="chat.hash" :chat="chat" :user-id="userId" />
+			</div>
 		</template>
 
 	</div>
 
 </template>
 <script lang="ts">
-import {  defineAsyncComponent, defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import { checkmarkDoneOutline} from 'ionicons/icons'
-import { useChats } from '@/application/composable/sessions/chats'
-import { formatTime } from '@/utils/dates'
-const ChatMessage = defineAsyncComponent(() => import('@/application/components/chat/ChatMessage.vue'))
+import { defineAsyncComponent, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { checkmarkDoneOutline } from 'ionicons/icons'
+import { useChats } from '@app/composable/sessions/chats'
+import { formatTime } from '@utils/dates'
+
+const ChatMessage = defineAsyncComponent(() => import('@app/components/chat/ChatMessage.vue'))
 
 export default defineComponent({
 	props: {
@@ -29,7 +30,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup(props: any) {
+	setup (props: any) {
 
 		const { chats, listener, fetchOlderChats, hasMore, error, loading } = useChats(props.userId)
 		onMounted(listener.startListener)
@@ -38,7 +39,7 @@ export default defineComponent({
 		return { chats, checkmarkDoneOutline, error, loading, fetchOlderChats, hasMore, formatTime, chatProps }
 
 	},
-	components: { 
+	components: {
 		ChatMessage
 	}
 })

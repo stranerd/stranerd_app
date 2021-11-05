@@ -1,11 +1,11 @@
 import { Ref, ref, onMounted } from 'vue'
-import { AnswerEntity, GetUserAnswers } from '@/modules/questions'
-import { useErrorHandler, useLoadingHandler } from '@/application/composable/core/states'
+import { AnswerEntity, GetUserAnswers } from '@modules/questions'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 
 const global = {} as Record<string, {
-	answers: Ref<AnswerEntity[]>;
-	fetched: Ref<boolean>;
-	hasMore: Ref<boolean>;
+	answers: Ref<AnswerEntity[]>
+	fetched: Ref<boolean>
+	hasMore: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToAnswerList = (id: string, answer: AnswerEntity) => {

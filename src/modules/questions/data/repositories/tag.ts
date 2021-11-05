@@ -1,4 +1,4 @@
-import { QueryParams } from '@/modules/core'
+import { QueryParams } from '@modules/core'
 import { ITagRepository } from '../../domain/irepositories/itag'
 import { TagBaseDataSource } from '../datasources/tag-base'
 import { TagTransformer } from '../transformers/tag'

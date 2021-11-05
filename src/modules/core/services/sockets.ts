@@ -1,7 +1,7 @@
 import io, { Socket } from 'socket.io-client'
-import { getTokens } from '@/utils/tokens'
-import { apiBases } from '@/utils/environment'
-import { Listeners, StatusCodes } from '@/modules/core'
+import { getTokens } from '@utils/tokens'
+import { apiBases } from '@utils/environment'
+import { Listeners, StatusCodes } from '@modules/core'
 
 let socket = null as Socket<any, any> | null
 const getSocketBaseAndPath = () => {
@@ -21,7 +21,7 @@ export enum EmitTypes {
 	deleted = 'deleted'
 }
 
-type SocketReturn = { code: StatusCodes; message: string; channel: string }
+type SocketReturn = { code: StatusCodes, message: string, channel: string }
 
 export async function listenOnSocket<Model> (channel: string, listeners: Listeners<Model>) {
 	const { accessToken } = await getTokens()
@@ -42,7 +42,7 @@ export async function listenOnSocket<Model> (channel: string, listeners: Listene
 		finalChannel = res.channel
 		// eslint-disable-next-line no-console
 		if (res.code !== StatusCodes.Ok) return
-		socket?.on(finalChannel, async (data: { channel: string; type: EmitTypes; data: Model }) => {
+		socket?.on(finalChannel, async (data: { channel: string, type: EmitTypes, data: Model }) => {
 			if (finalChannel !== data.channel) return
 			await listeners[data.type]?.(data.data)
 		})

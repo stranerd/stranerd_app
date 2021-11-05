@@ -1,8 +1,8 @@
-import { BaseFactory } from '@/modules/core'
+import { BaseFactory } from '@modules/core'
 import { isEmail, isLongerThanX, isShorterThanX, isString } from '@stranerd/validate'
 import { AuthUser } from '../entities/auth'
 
-type Keys = { email: string; password: string }
+type Keys = { email: string, password: string }
 
 export class EmailSigninFactory extends BaseFactory<null, AuthUser, Keys> {
 	readonly rules = {

@@ -1,13 +1,13 @@
 import { computed, Ref, ref, onMounted } from 'vue'
-import { AddChat, ChatEntity, ChatFactory, GetChats, ListenToChats, MarkChatRead } from '@/modules/sessions'
-import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
-import { useAuth } from '@/application/composable/auth/auth'
-import { getRandomValue } from '@/utils/commons'
+import { AddChat, ChatEntity, ChatFactory, GetChats, ListenToChats, MarkChatRead } from '@modules/sessions'
+import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useAuth } from '@app/composable/auth/auth'
+import { getRandomValue } from '@utils/commons'
 
 const global = {} as Record<string, {
-	chats: Ref<ChatEntity[]>;
-	fetched: Ref<boolean>;
-	hasMore: Ref<boolean>;
+	chats: Ref<ChatEntity[]>
+	fetched: Ref<boolean>
+	hasMore: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToChats = (userId: string, chat: ChatEntity) => {
@@ -20,7 +20,6 @@ const unshiftToChats = (userId: string, chat: ChatEntity) => {
 	if (index !== -1) global[userId].chats.value.splice(index, 1, chat)
 	else global[userId].chats.value.unshift(chat)
 }
-
 
 const orderChats = (chats: ChatEntity[]) => {
 	const isSameDay = (date1: Date, date2: Date) => date1.getDate() === date2.getDate() &&
@@ -170,8 +169,6 @@ export const useCreateChat = (userId: string, sessionId?: string) => {
 
 	return { factory, error, loading, createTextChat, createMediaChat }
 }
-
-
 
 export const useChat = (chat: ChatEntity, userId: string) => {
 	const { id } = useAuth()

@@ -1,6 +1,6 @@
 import { computed, Ref, ref, onMounted } from 'vue'
-import { GetTagQuestions, ListenToTagQuestions, QuestionEntity } from '@/modules/questions'
-import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
+import { GetTagQuestions, ListenToTagQuestions, QuestionEntity } from '@modules/questions'
+import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 
 enum Answered {
 	All,
@@ -17,11 +17,11 @@ const answeredChoices = [
 ]
 
 const global = {} as Record<string, {
-	questions: Ref<QuestionEntity[]>;
-	fetched: Ref<boolean>;
-	hasMore: Ref<boolean>;
-	subjectId: Ref<string>;
-	answered: Ref<Answered>;
+	questions: Ref<QuestionEntity[]>
+	fetched: Ref<boolean>
+	hasMore: Ref<boolean>
+	subjectId: Ref<string>
+	answered: Ref<Answered>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToQuestionList = (tag: string, question: QuestionEntity) => {

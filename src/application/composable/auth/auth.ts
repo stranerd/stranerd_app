@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { computed, ref } from 'vue'
-import { FindUser, ListenToUser, UpdateStreak, UserEntity } from '@/modules/users'
-import { AuthDetails, AuthTypes, UserLocation } from '@/modules/auth/domain/entities/auth'
-import { isClient } from '@/utils/environment'
-import { analytics } from '@/modules/core'
+import { FindUser, ListenToUser, UpdateStreak, UserEntity } from '@modules/users'
+import { AuthDetails, AuthTypes, UserLocation } from '@modules/auth/domain/entities/auth'
+import { SessionSignout } from '@modules/auth'
+import { isClient } from '@utils/environment'
+import { analytics } from '@modules/core'
 
 const global = {
 	auth: ref(null as AuthDetails | null),
@@ -82,13 +82,12 @@ export const useAuth = () => {
 	}
 
 	const signin = async (remembered: boolean) => {
-		// await startProfileListener()
-		// await analytics.logEvent('login', { remembered })
+		await startProfileListener()
+		await analytics.logEvent('login', { remembered })
 	}
 
 	const signout = async () => {
-		// await SessionSignout.call()
-		// we would replace this with a function that clears the browser local storage
+		await SessionSignout.call()
 		await setAuthUser(null)
 		if (isClient()) window.location.assign('/auth/signin')
 	}
@@ -110,5 +109,3 @@ export const useAuth = () => {
 		getLocalAmount, getLocalCurrency, getLocalCurrencySymbol
 	}
 }
-
-

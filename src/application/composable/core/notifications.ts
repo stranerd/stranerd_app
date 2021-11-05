@@ -1,8 +1,8 @@
 import SweetAlert from 'sweetalert2'
 
 type ToastArgs = {
-	title: string;
-	icon?: 'warning' | 'success' | 'error' | 'info';
+	title: string
+	icon?: 'warning' | 'success' | 'error' | 'info'
 }
 
 export const Notify = async (args: ToastArgs) => {
@@ -17,10 +17,10 @@ export const Notify = async (args: ToastArgs) => {
 }
 
 type AlertArgs = ToastArgs & {
-	text: string;
-	confirmButtonText: string;
-	cancelButtonText?: string;
-	showCancelButton?: boolean;
+	text: string
+	confirmButtonText: string
+	cancelButtonText?: string
+	showCancelButton?: boolean
 }
 export const Alert = async (args: AlertArgs) => {
 	const res = await SweetAlert.fire<boolean>({

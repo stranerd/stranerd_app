@@ -1,6 +1,7 @@
 module.exports = {
 	root: true,
 	env: {
+		browser: true,
 		node: true
 	},
 	'extends': [
@@ -12,23 +13,27 @@ module.exports = {
 		ecmaVersion: 2020
 	},
 	rules: {
-		'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
-		'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+		'no-console': 'warn',
+		'no-debugger': 'warn',
 		'vue/no-deprecated-slot-attribute': 'off',
-		'@typescript-eslint/no-unused-vars':'off',
-		'@typescript-eslint/no-non-null-assertion':'off',
-		'@typescript-eslint/ban-ts-ignore':'off',
-		'@typescript-eslint/no-var-requires':'off',
-		'@typescript-eslint/interface-name-prefix':'off',
+		'@typescript-eslint/no-unused-vars': 'off',
+		'@typescript-eslint/no-non-null-assertion': 'off',
+		'@typescript-eslint/ban-ts-ignore': 'off',
+		'@typescript-eslint/no-var-requires': 'off',
+		'@typescript-eslint/interface-name-prefix': 'off',
 		'no-empty-function': 'off',
-		'@typescript-eslint/no-empty-function': ['off'],
+		'@typescript-eslint/no-empty-function': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
-		'@typescript-eslint/camelcase': ['off'],
+		'@typescript-eslint/camelcase': 'off',
 		'vue/no-v-html': 'off',
-		'import/no-default-export':'off',
+		'@typescript-eslint/member-delimiter-style': [
+			{
+				multiline: { delimiter: 'none', requireLast: false },
+				singleline: { delimiter: 'comma', requireLast: false }
+			}
+		],
 		'no-tabs': 'off',
 		'no-var': 'error',
-		'accessor-pairs': 'off',
 		'no-use-before-define': 'off',
 		indent: ['error', 'tab', { SwitchCase: 1 }],
 		'no-mixed-spaces-and-tabs': ['off', 'smart-tabs'],
@@ -48,7 +53,7 @@ module.exports = {
 		'vue/no-mutating-props': 'off',
 		'object-property-newline': 'off',
 		'require-atomic-updates': 'off',
-		'require-await': 'off',
+		'require-await': 'off'
 	},
 	overrides: [
 		{

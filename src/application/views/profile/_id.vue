@@ -2,10 +2,11 @@
 	<ion-page>
 		<ion-content :fullscreen="true">
 			<div class="layout-page-nosidebars normalText ">
-				<div class="w-full grid grid-cols-12 mt-12" >
+				<div class="w-full grid grid-cols-12 mt-12">
 					<top-session :userId="id"></top-session>
 
-					<div class="col-span-12 grid grid-cols-12 md:col-start-2 md:col-end-12 lg:col-start-4 lg:col-end-10">
+					<div
+						class="col-span-12 grid grid-cols-12 md:col-start-2 md:col-end-12 lg:col-start-4 lg:col-end-10">
 						<template v-if="selectedTab == '#dashboard'">
 							<dashboard :userId="id"></dashboard>
 						</template>
@@ -15,7 +16,7 @@
 						<!-- <template v-if="selectedTab == '#reviews'">
 							<reviews :userId="id"></reviews>
 						</template> -->
-						<template v-if="selectedTab == '#answers'"> 
+						<template v-if="selectedTab == '#answers'">
 							<answers :userId="id"></answers>
 						</template>
 						<template v-if="selectedTab == '#bio'">
@@ -28,8 +29,8 @@
 							<achievements :userId="id"></achievements>
 						</template> -->
 					</div>
-					
-				</div> 
+
+				</div>
 			</div>
 		</ion-content>
 	</ion-page>
@@ -37,29 +38,29 @@
 
 <script lang="ts">
 
-import { IonPage, IonContent } from '@ionic/vue'
+import { IonContent, IonPage } from '@ionic/vue'
 import { defineAsyncComponent } from 'vue'
-const topSession = defineAsyncComponent(() => import('@/application/components/profile/topSession.vue'))
-const Dashboard = defineAsyncComponent(() => import('@/application/components/profile/dashboard.vue'))
-const Questions = defineAsyncComponent(() => import('@/application/components/profile/questions.vue'))
-const Reviews = defineAsyncComponent(() => import('@/application/components/profile/reviews.vue'))
-const Answers = defineAsyncComponent(() => import('@/application/components/profile/UserAnswerList.vue'))
-const Bio = defineAsyncComponent(() => import('@/application/components/profile/bio.vue'))
-const Settings = defineAsyncComponent(() => import('@/application/components/profile/settings.vue'))
-// const Achievements = defineAsyncComponent(() => import('@/application/components/profile/achievements.vue'))
-import isAuthenticated from '@/application/middlewares/isAuthenticated'
+// const Achievements = defineAsyncComponent(() => import('@app/components/profile/achievements.vue'))
 import { star } from 'ionicons/icons'
-import {  useRoute } from 'vue-router'
-import { selectedTab } from '@/application/composable/profile'
+import { useRoute } from 'vue-router'
+import { selectedTab } from '@app/composable/profile'
 
-export default  {
+const topSession = defineAsyncComponent(() => import('@app/components/profile/topSession.vue'))
+const Dashboard = defineAsyncComponent(() => import('@app/components/profile/dashboard.vue'))
+const Questions = defineAsyncComponent(() => import('@app/components/profile/questions.vue'))
+const Reviews = defineAsyncComponent(() => import('@app/components/profile/reviews.vue'))
+const Answers = defineAsyncComponent(() => import('@app/components/profile/UserAnswerList.vue'))
+const Bio = defineAsyncComponent(() => import('@app/components/profile/bio.vue'))
+const Settings = defineAsyncComponent(() => import('@app/components/profile/settings.vue'))
+
+export default {
 	name: 'profileDashboard',
-	middlewares:[isAuthenticated],
-	layout: 'Justified',
+	middlewares: ['isAuthenticated'],
+	layout: 'justified',
 	displayName: 'Profile',
-	components: { IonPage, IonContent, topSession, Dashboard, Questions, Answers, Bio, Settings,},
-	setup() {
-		
+	components: { IonPage, IonContent, topSession, Dashboard, Questions, Answers, Bio, Settings },
+	setup () {
+
 		const { id } = useRoute().params
 		selectedTab.value = useRoute().hash
 
@@ -72,8 +73,8 @@ export default  {
 }
 </script>
 <style scoped>
-ion-toolbar {
-	--background: #F7F7FC;
-}
+	ion-toolbar {
+		--background: #F7F7FC;
+	}
 
 </style>

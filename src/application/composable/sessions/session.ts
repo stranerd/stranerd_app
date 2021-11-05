@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import { computed, Ref, ref, onMounted, watch } from 'vue'
-import  { Router, RouteRecord, useRouter } from 'vue-router'
-import { useErrorHandler, useListener, useLoadingHandler } from '@/application/composable/core/states'
-import { FindSession, GetSessions, ListenToSession, ListenToSessions, SessionEntity } from '@/modules/sessions'
-import { useAuth } from '@/application/composable/auth/auth'
-import { Alert } from '@/application/composable/core/notifications'
+import { computed, onMounted, ref, Ref, watch } from 'vue'
+import { Router, useRouter } from 'vue-router'
+import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { FindSession, GetSessions, ListenToSession, ListenToSessions, SessionEntity } from '@modules/sessions'
+import { useAuth } from '@app/composable/auth/auth'
+import { Alert } from '@app/composable/core/notifications'
 
 const currentGlobal = {
 	previousSession: ref(null as SessionEntity | null),
@@ -16,9 +15,9 @@ const currentGlobal = {
 type SessionKey = 'requests' | 'lobby'
 
 const global = {} as Record<SessionKey, {
-	sessions: Ref<SessionEntity[]>;
-	fetched: Ref<boolean>;
-	listener: ReturnType<typeof useListener>;
+	sessions: Ref<SessionEntity[]>
+	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useCurrentSession = () => {
@@ -173,8 +172,6 @@ const callback = (key: SessionKey, sessions: SessionEntity[], userId: string, ro
 
 export const useRequestSessions = (router: Router) => useSession('requests', router, callback)
 export const useLobbySessions = (router: Router) => useSession('lobby', router, callback)
-
-
 
 export const isRequestingSessionWith = (userId: string) => computed({
 	get: () => global.requests?.sessions?.value?.find((s) => s.tutorId === userId) ?? null,

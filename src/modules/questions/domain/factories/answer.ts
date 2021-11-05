@@ -6,13 +6,13 @@ import {
 	isLongerThanX,
 	isString
 } from '@stranerd/validate'
-import { BaseFactory, Media } from '@/modules/core'
+import { BaseFactory, Media } from '@modules/core'
 import { AnswerEntity } from '../entities/answer'
 import { AnswerToModel } from '../../data/models/answer'
 
 type Content = File | Media
 type Keys = {
-	title: string; body: string; questionId: string; attachments: Content[];
+	title: string, body: string, questionId: string, attachments: Content[]
 }
 
 export class AnswerFactory extends BaseFactory<AnswerEntity, AnswerToModel, Keys> {

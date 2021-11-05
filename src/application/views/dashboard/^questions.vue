@@ -5,28 +5,30 @@
 				<div class="layout-body">
 					<div class="col-span-12  md:col-start-3 md:col-end-11 px-3 ">
 						<div class="bg-light_gray rounded-md flex flex-row items-center">
-							<button @click="handleSliding('0')" :class="selectedTab == 'all' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'">
+							<button :class="selectedTab == 'all' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'"
+								@click="handleSliding('0')">
 								All questions
 							</button>
-							<button @click="handleSliding('1')"  :class="selectedTab == 'ask' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'">
+							<button :class="selectedTab == 'ask' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'"
+								@click="handleSliding('1')">
 								Ask your question
 							</button>
 						</div>
 					</div>
 					<div class="col-span-12 ">
 						<swiper
-							@swiper="onSwiper"
 							@slideChange="onSlideChange"
+							@swiper="onSwiper"
 						>
-							<swiper-slide >
+							<swiper-slide>
 								<all-questions></all-questions>
 							</swiper-slide>
-							<swiper-slide >
-								<ask-questions></ask-questions>				
+							<swiper-slide>
+								<ask-questions></ask-questions>
 							</swiper-slide>
 						</swiper>
 					</div>
-					
+
 					<div class="mb-[60px] col-span-12 md:mb-[80px]">
 					</div>
 				</div>
@@ -34,38 +36,37 @@
 					<side-profile-nav></side-profile-nav>
 				</div>
 			</div>
-			
+
 		</ion-content>
 	</ion-page>
 </template>
 
 <script lang="ts">
 
-import { IonPage, IonContent } from '@ionic/vue'
+import { IonContent, IonPage } from '@ionic/vue'
 import { defineAsyncComponent, ref } from 'vue'
-const AllQuestions = defineAsyncComponent(() => import('@/application/components/questions/all.vue'))
-const AskQuestions = defineAsyncComponent(() => import('@/application/components/questions/ask.vue'))
-const SideProfileNav = defineAsyncComponent(() => import('@/application/components/layout/sidebars/SideProfileNav.vue'))
-
-
 // Import Swiper styles
 import 'swiper/swiper-bundle.min.css'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
-export default  {
+const AllQuestions = defineAsyncComponent(() => import('@app/components/questions/all.vue'))
+const AskQuestions = defineAsyncComponent(() => import('@app/components/questions/ask.vue'))
+const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout/sidebars/SideProfileNav.vue'))
+
+export default {
 	name: 'questions',
-	layout: 'Dashboard',
+	layout: 'dashboard',
 	components: { IonPage, IonContent, AllQuestions, SideProfileNav, Swiper, SwiperSlide, AskQuestions },
-	setup() {
+	setup () {
 
-		 const selectedTab = ref('all')
-		 
-		 const swiperData = ref({
-			 slideTo: Function,
-			 update: Function
-		 })
+		const selectedTab = ref('all')
 
-		 const onSwiper = (swiper: any) => {
+		const swiperData = ref({
+			slideTo: Function,
+			update: Function
+		})
+
+		const onSwiper = (swiper: any) => {
 
 			swiperData.value = swiper
 		}
@@ -81,12 +82,12 @@ export default  {
 			ionPage?.scrollToTop()
 		}
 
-	 const handleSliding = (index: string) => {
-		 swiperData.value.slideTo(index)
+		const handleSliding = (index: string) => {
+			swiperData.value.slideTo(index)
 
-		 swiperData.value.update()
+			swiperData.value.update()
 
-	 }
+		}
 		return {
 			onSwiper,
 			swiperData,
@@ -98,7 +99,7 @@ export default  {
 }
 </script>
 <style scoped>
-ion-toolbar {
-	--background: #ffffff;
-}
+	ion-toolbar {
+		--background: #ffffff;
+	}
 </style>

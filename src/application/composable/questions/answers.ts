@@ -1,4 +1,4 @@
-import { Ref, ref, onMounted  } from 'vue'
+import { Ref, ref, onMounted } from 'vue'
 import {
 	AddAnswer,
 	AnswerEntity,
@@ -10,16 +10,21 @@ import {
 	MarkBestAnswer,
 	QuestionEntity,
 	VoteAnswer
-} from '@/modules/questions'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@/application/composable/core/states'
-import { useAuth } from '@/application/composable/auth/auth'
-import { Alert } from '@/application/composable/core/notifications'
-import { analytics } from '@/modules/core'
+} from '@modules/questions'
+import {
+	useErrorHandler,
+	useListener,
+	useLoadingHandler,
+	useSuccessHandler
+} from '@app/composable/core/states'
+import { useAuth } from '@app/composable/auth/auth'
+import { Alert } from '@app/composable/core/notifications'
+import { analytics } from '@modules/core'
 import VueRouter, { useRouter } from 'vue-router'
 
 const global = {} as Record<string, {
-	answers: Ref<AnswerEntity[]>;
-	fetched: Ref<boolean>;
+	answers: Ref<AnswerEntity[]>
+	fetched: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useAnswerList = (questionId: string) => {
@@ -168,9 +173,9 @@ export const useAnswer = (answer: AnswerEntity) => {
 	}
 }
 
-let editingQuestionAnswer = null as { answer: AnswerEntity; question: QuestionEntity } | null
+let editingQuestionAnswer = null as { answer: AnswerEntity, question: QuestionEntity } | null
 export const getEditingAnswer = () => editingQuestionAnswer
-export const openAnswerEditModal = (data: { question: QuestionEntity; answer: AnswerEntity }) => {
+export const openAnswerEditModal = (data: { question: QuestionEntity, answer: AnswerEntity }) => {
 	const router = useRouter()
 	editingQuestionAnswer = data
 	router.push(`/questions/${data.question.id}/answers/${data.answer.id}/edit`)

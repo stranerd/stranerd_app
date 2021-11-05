@@ -1,4 +1,4 @@
-import { appName } from '@/utils/environment'
+import { appName } from '@utils/environment'
 import { IUserRepository } from '../../irepositories/iuser'
 
 export class GetAllAdminsUseCase {

@@ -1,4 +1,4 @@
-import { isClient } from '@/utils/environment'
+import { isClient } from '@utils/environment'
 
 enum Numbers {
 	thousand = 10 ** 3,

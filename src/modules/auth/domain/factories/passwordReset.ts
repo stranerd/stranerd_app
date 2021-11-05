@@ -1,14 +1,14 @@
-import { BaseFactory } from '@/modules/core'
+import { BaseFactory } from '@modules/core'
 import { isLongerThanX, isRequiredIf, isShallowEqualTo, isShorterThanX, isString } from '@stranerd/validate'
 
-type Keys = { password: string; cPassword: string }
+type Keys = { password: string, cPassword: string }
 
 export class PasswordResetFactory extends BaseFactory<null, { password: string }, Keys> {
 	readonly rules = {
 		password: { required: false, rules: [isString, isLongerThanX(7), isShorterThanX(17)] },
 		cPassword: {
 			required: false,
-			rules: [isString, (val: string) => isRequiredIf(val, !!this.password), (val: string) => isShallowEqualTo(val, this.password), isLongerThanX(7), isShorterThanX(17)]
+			rules: [isString, (val: string) => isRequiredIf(val, !!this.password), (val: string) => isShallowEqualTo(val, this.password, 'is not equal to the new password'), isLongerThanX(7), isShorterThanX(17)]
 		}
 	}
 

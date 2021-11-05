@@ -13,7 +13,8 @@
 	<!-- </div> -->
 
 	<!-- medium screens -->
-	<div class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50" v-if="!isNotDashboard && !store.state.showPage ">
+	<div v-if="!isNotDashboard && !store.state.showPage "
+		class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50">
 		<div class="flex flex-row items-center gap-9 w-1/4">
 			<router-link :to="profileLink"
 				class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center ">
@@ -122,10 +123,10 @@
 import { computed, defineComponent } from 'vue'
 import { IonButtons, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue'
 import { add, arrowBackOutline, chatbubble, home, notifications, school, search } from 'ionicons/icons'
-import { useStore } from '@/application/store'
-import { useAuth } from '@/application/composable/auth/auth'
+import { useStore } from '@app/store'
+import { useAuth } from '@app/composable/auth/auth'
 import Coins from '../../core/Coins.vue'
-import Avatar from '@/application/components/core/Avatar.vue'
+import Avatar from '@app/components/core/Avatar.vue'
 import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent({
@@ -140,7 +141,7 @@ export default defineComponent({
 			default: false
 		}
 	},
-	 setup() {
+	setup () {
 		const router = useRouter()
 
 		const displayName = useRoute().meta.displayName

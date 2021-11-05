@@ -1,24 +1,22 @@
-import { BuyCoinsWithStripe, VerifyStripePayment } from '@/modules/meta'
-import { useErrorHandler, useLoadingHandler } from '@/application/composable/core/states'
-import { stripeConfig } from '@/utils/environment'
-import { analytics } from '@/modules/core'
+import { BuyCoinsWithStripe, VerifyStripePayment } from '@modules/meta'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
+import { stripeConfig } from '@utils/environment'
+import { analytics } from '@modules/core'
 import { loadStripe } from '@stripe/stripe-js'
-import { useAuth } from '@/application/composable/auth/auth'
-
+import { useAuth } from '@app/composable/auth/auth'
 
 type RawPaymentProps = {
-	afterPayment: null | ((res: boolean) => Promise<void>);
-	amount: number | null;
+	afterPayment: null | ((res: boolean) => Promise<void>)
+	amount: number | null
 }
 
 type PaymentData = {
-	type: 'buyCoins';
-	data: { gold: number; bronze: number };
+	type: 'buyCoins'
+	data: { gold: number, bronze: number }
 } | {
-	type: null;
-	data: {};
+	type: null
+	data: {}
 }
-
 
 let props: RawPaymentProps & PaymentData = {
 	type: null,
