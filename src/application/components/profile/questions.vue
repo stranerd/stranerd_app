@@ -3,15 +3,16 @@
 		<ion-progress-bar type="indeterminate"></ion-progress-bar>
 	</div>
 
-	<div v-else class="col-span-12 flex flex-col px-3  normalText">
-		<template v-if="!questions.length">
+
+	<div v-if="!loading && questions" class="col-span-12 flex flex-col px-3  normalText">
+		<template v-if="questions.length">
 			<div v-for="question in questions" :key="question.hash" class=" w-full md:px-2 md:py-3 mb-4 md:mb-0">
 				<UserQuestionsCard :question="question" />
 			</div>
 		</template>
 
 		<empty-state
-		v-else
+			v-else
 			btnText="Go and ask a Question"
 			info="You haven't asked any questions yet, click the button below to ask a question"
 			route="/dashboard/questions"

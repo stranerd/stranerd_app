@@ -4,8 +4,8 @@
 	</div>
 
 	<div v-else class="col-span-12 flex flex-col px-3 normalText">
-		<template v-if="!answers.length">
-		<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer"></AnswerCard>
+		<template v-if="answers.length">
+			<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer"></AnswerCard>
 		</template>
 		<empty-state
 			v-else
@@ -35,6 +35,8 @@ export default {
 	},
 	setup (props: any) {
 		const { answers, error, loading, hasMore, fetchOlderAnswers } = useUserAnswerList(props.userId)
+
+		console.log(answers.value.length)
 		return {
 			answers, error, loading, hasMore,
 			fetchOlderAnswers
