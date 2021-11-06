@@ -26,10 +26,10 @@ import { IonIcon } from '@ionic/vue'
 import { closeOutline } from 'ionicons/icons'
 import { defineAsyncComponent } from 'vue'
 
-const RequestSession = defineAsyncComponent(() => import('@app/components/tutors/RequestSession.vue'))
-const BuyCoins = defineAsyncComponent(() => import('@app/components/wallet/BuyCoins.vue'))
-const CreateSchedule = defineAsyncComponent(() => import('@app/components/schedule/CreateSchedule.vue'))
-const Withdrawal = defineAsyncComponent(() => import('@app/components/wallet/Withdrawal.vue'))
+const RequestSession = defineAsyncComponent(() => import('@root/application/components/modals/RequestSession.vue'))
+const BuyCoins = defineAsyncComponent(() => import('@root/application/components/modals/BuyCoins.vue'))
+const CreateSchedule = defineAsyncComponent(() => import('@root/application/components/modals/CreateSchedule.vue'))
+const Withdrawal = defineAsyncComponent(() => import('@root/application/components/modals/Withdrawal.vue'))
 const PhotoView = defineAsyncComponent(() => import('@app/components/core/PhotoView.vue'))
 
 export default {

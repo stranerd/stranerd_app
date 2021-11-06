@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router'
 import { IonicVue } from '@ionic/vue'
 import './application/assets/styles/index.scss'
 import './application/assets/styles/tailwind.css'
+import { Gauth } from '@app/composable/auth/signin'
 import { setupPlugins } from '@app/plugins'
 import { key, store } from '@app/store'
 import { MiddlewareFunction } from '@app/middlewares/'
@@ -40,10 +41,37 @@ const init = async () => {
 	})
 
 	await setupPlugins().catch()
-	createApp({
-		components: { App }
+
+	const requireComponent = require.context(
+		'./application/components/modals',
+		true,
+		/\.vue$/,
+		'lazy'
+	)
+	console.log(requireComponent)
+	const app = createApp({	components: { App }	})
+
+	requireComponent.keys().forEach((fileName: any) => {
+		console.log(fileName)
+		const componentConfig = requireComponent(fileName)
+
+		const componentName =
+				fileName
+					.split('/')
+					.pop()
+					.replace(/\.\w+$/, '')
+
+		console.log(componentName)
+		app.component(
+			componentName,
+			componentConfig.default || componentConfig
+		)
 	})
-		.use(router)
+
+
+	app.use(router).directive(
+		'gauth', Gauth
+	)
 		.use(store, key)
 		.use(IonicVue)
 		.mount('#app')

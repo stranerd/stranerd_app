@@ -9,9 +9,11 @@ import {
 	SigninWithGoogle,
 	SignupWithEmail
 } from '@modules/auth'
+
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'
+import { googleClientId} from '@utils/environment'
 import { useAuth } from '@app/composable/auth/auth'
 
 const global = {
@@ -31,28 +33,7 @@ export const saveReferrerId = () => {
 
 
 
-export const useGoogleSignin = () => {
-	const router = useRouter()
-	const { error, setError } = useErrorHandler()
-	const { loading, setLoading } = useLoadingHandler()
-	const signin = async (idToken: string) => {
-		await setError('')
-		if (!loading.value) {
-			await setLoading(true)
-			try {
-				const user = await SigninWithGoogle.call(idToken, {
-					referrer: getReferrerId()
-				})
-				await createSession(user, router)
-				window.localStorage.removeItem('referrer')
-			} catch (error) {
-				await setError(error)
-			}
-			await setLoading(false)
-		}
-	}
-	return { loading, error, signin, setError }
-}
+
 
 export const useEmailSignin = () => {
 	const router = useRouter()
@@ -147,5 +128,68 @@ export const useEmailVerificationRequest = () => {
 		email: useAuth().auth.value?.email,
 		loading, error, message,
 		sendVerificationEmail
+	}
+}
+
+export const useGoogleSignin = () => {
+	const router = useRouter()
+	const { error, setError } = useErrorHandler()
+	const { loading, setLoading } = useLoadingHandler()
+	const signin = async (idToken: string) => {
+		await setError('')
+		if (!loading.value) {
+			await setLoading(true)
+			try {
+				const user = await SigninWithGoogle.call(idToken, {
+					referrer: getReferrerId()
+				})
+				await createSession(user, router)
+				window.localStorage.removeItem('referrer')
+			} catch (error) {
+				await setError(error)
+			}
+			await setLoading(false)
+		}
+	}
+	return { loading, error, signin, setError }
+}
+
+export const Gauth: any = {
+	  beforeMount (el: any, binding: any, vnode: any) {
+		const clientId = binding.value
+		const googleSignInAPI = document.createElement('script')
+		googleSignInAPI.setAttribute('src', 'https://apis.google.com/js/api:client.js')
+		document.head.appendChild(googleSignInAPI)
+		function OnSuccess(googleUser: any) {
+			useGoogleSignin().signin(googleUser.getAuthResponse().id_token)
+			googleUser.disconnect()
+		}
+		function Onfail(error: any) {
+			useGoogleSignin().setError('Error signing in with google')
+		}
+
+
+		const  InitGoogleButton = ()=> {
+			//@ts-ignore
+			gapi.load('auth2', () => {
+				//@ts-ignore
+				const auth2 = gapi.auth2.init({
+					client_id: googleClientId,
+					cookiepolicy: 'single_host_origin'
+				})
+				auth2.attachClickHandler(el, {},
+					OnSuccess,
+					Onfail
+				)
+			})
+		}
+
+
+
+
+		googleSignInAPI.onload = InitGoogleButton
+
+
+
 	}
 }

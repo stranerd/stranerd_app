@@ -4,9 +4,19 @@
 	</div>
 
 	<div v-else class="col-span-12 flex flex-col px-3  normalText">
-		<div v-for="question in questions" :key="question.hash" class=" w-full md:px-2 md:py-3 mb-4 md:mb-0">
-			<UserQuestionsCard :question="question" />
-		</div>
+		<template v-if="!questions.length">
+			<div v-for="question in questions" :key="question.hash" class=" w-full md:px-2 md:py-3 mb-4 md:mb-0">
+				<UserQuestionsCard :question="question" />
+			</div>
+		</template>
+
+		<empty-state
+		v-else
+			btnText="Go and ask a Question"
+			info="You haven't asked any questions yet, click the button below to ask a question"
+			route="/dashboard/questions"
+		/>
+
 
 
 	</div>
@@ -18,10 +28,11 @@
 import UserQuestionsCard from '@app/components/questions/UserQuestionsCard.vue'
 import { useUserQuestionList } from '@app/composable/users/user/questions'
 import { IonProgressBar } from '@ionic/vue'
+import EmptyState from '../core/emptyState.vue'
 
 export default {
 	name: 'profileQuestions',
-	components: { UserQuestionsCard, IonProgressBar },
+	components: { UserQuestionsCard, IonProgressBar, EmptyState },
 	props: {
 		userId: {
 			type: String,
