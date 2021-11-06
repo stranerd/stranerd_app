@@ -17,7 +17,7 @@
 			<empty-state
 				:btnText="'Ask a question'"
 				:info="'You have no recent questions! Start asking questions to help with homework and studying.'"
-				:route="'/dashboard/questions'"
+				route="/questions"
 			></empty-state>
 		</div>
 	</template>

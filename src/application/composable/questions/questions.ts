@@ -135,11 +135,11 @@ export const useCreateQuestion = () => {
 	const coins = computed({
 		get: () => {
 			if (!isLoggedIn) {
-				setError('Login to continue').then()
+				setError('Login to continue', true).then()
 				return []
 			}
 			if (user.value?.account.coins.bronze ?? 0 < MINIMUM_COINS) {
-				setError(`You need at least ${MINIMUM_COINS} coins to ask a question`).then()
+				setError(`You need at least ${MINIMUM_COINS} coins to ask a question`, true).then()
 				return []
 			}
 			const coins = [] as number[]
