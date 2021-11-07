@@ -32,13 +32,12 @@ export const useModal = (stack: Ref<string[]>) => {
 		Object.assign(modals, spreadModals(type, modalObject))
 
 		const helpers = Object.fromEntries(
-			Object.entries(modalObject)
-				.map(([key, value]) => [capitalize(key), value])
-				.map(([key, value]) => {
-					let modal = null as any
+			Object.keys(modalObject)
+				.map((key) => merge(type, capitalize(key)))
+				.map((key) => {
 					return [
-						[`open${key}`, async () => open(merge(type, key as string))],
-						[`close${key}`, async () => close(merge(type, key as string))]
+						[`open${key}`, async () => open(key)],
+						[`close${key}`, async () => close(key)]
 					]
 				})
 				.reduce((acc, curr) => acc.concat(curr), [])
