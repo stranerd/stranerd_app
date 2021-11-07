@@ -24,12 +24,11 @@
 
 <script lang="ts">
 import ShowRatings from '@app/components/core/ShowRatings.vue'
-import { componentName, showModal } from '../../composable/core/Modal'
 import { UserEntity } from '@modules/users'
 import { defineAsyncComponent } from 'vue'
 import { setNewSessionTutorIdBio } from '@app/composable/sessions/sessions'
-
 const Avatar = defineAsyncComponent(() => import('@app/components/core/AvatarUser.vue'))
+import { useSessionModal} from '@app/composable/core/modals'
 
 export default {
 	name: 'TutorCard',
@@ -53,8 +52,8 @@ export default {
 
 		const requestNewSession = () => {
 			setNewSessionTutorIdBio({ id: props.tutor.id!, user: props.tutor.bio })
-			componentName.value = 'requestSession'
-			showModal.value = true
+			useSessionModal().openCreateSession()
+
 		}
 
 		return {

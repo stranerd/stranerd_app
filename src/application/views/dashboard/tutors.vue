@@ -13,20 +13,19 @@
 						Find a tutor
 					</button>
 				</div>
-			</div>
-
-			<div class="col-span-12 mb-16">
-				<swiper
-					@slideChange="onSlideChange"
-					@swiper="onSwiper"
-				>
-					<swiper-slide>
-						<ExploreTutors />
-					</swiper-slide>
-					<swiper-slide>
-						<FindTutors />
-					</swiper-slide>
-				</swiper>
+				<div class="col-span-12 mb-16">
+					<swiper
+						@slideChange="onSlideChange"
+						@swiper="onSwiper"
+					>
+						<swiper-slide>
+							<ExploreTutors />
+						</swiper-slide>
+						<swiper-slide>
+							<FindTutors />
+						</swiper-slide>
+					</swiper>
+				</div>
 			</div>
 		</IonContent>
 	</IonPage>

@@ -25,7 +25,6 @@
 						<IonIcon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive" />
 					</template>
 				</template>
-
 			</div>
 		</div>
 

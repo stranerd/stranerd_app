@@ -1,0 +1,47 @@
+import { ref } from 'vue'
+import { useModal } from '@app/composable/core/modal'
+// import MakePayment from '@app/components/modals/payments/MakePayment.vue'
+import BuyCoins from '@app/components/modals/BuyCoins.vue'
+import WithdrawCoins from '@app/components/modals/Withdrawal.vue'
+import CreateSchedule from '@app/components/modals/CreateSchedule.vue'
+import CreateSession from '@app/components/modals/RequestSession.vue'
+// import RightSidebar from '@app/components/modals/menus/RightSidebarMenu.vue'
+// import Sidebar from '@app/components/modals/menus/SidebarMenu.vue'
+// import Ratings from '@app/components/modals/sessions/SessionRatings.vue'
+// import ReportUser from '@app/components/modals/reports/ReportUser.vue'
+// import ReportQuestion from '@app/components/modals/reports/ReportQuestion.vue'
+// import ReportAnswer from '@app/components/modals/reports/ReportAnswer.vue'
+// import AskQuestions from '@app/components/modals/questions/AskQuestions.vue'
+
+type AccountTypes = 'BuyCoins' | 'WithdrawCoins'
+type ScheduleTypes = 'CreateSchedule'
+type SessionTypes = 'CreateSession'
+// type MenuTypes = 'RightSidebar' | 'Sidebar'
+// type PaymentTypes = 'MakePayment'
+// type ReportTypes = 'ReportUser' | 'ReportQuestion' | 'ReportAnswer'
+// type QuestionTypes = 'AskQuestions'
+
+const AccountModals = { BuyCoins, WithdrawCoins } as Record<AccountTypes, any>
+const ScheduleModals = { CreateSchedule } as Record<ScheduleTypes, any>
+const SessionModals = { CreateSession } as Record<SessionTypes, any>
+// const MenuModals = { RightSidebar, Sidebar } as Record<MenuTypes, any>
+// const PaymentModals = { MakePayment } as Record<PaymentTypes, any>
+// const ReportModals = { ReportUser, ReportQuestion, ReportAnswer } as Record<ReportTypes, any>
+// const QuestionModals = { AskQuestions } as Record<QuestionTypes, any>
+
+export const modal = useModal(ref([] as string[]))
+const accountModal = modal.register('Account', AccountModals)
+const ScheduleModal = modal.register('Schedule', ScheduleModals)
+const sessionModal = modal.register('Session', SessionModals)
+// const menuModal = modal.register('Menu', MenuModals)
+// const paymentModal = modal.register('Payment', PaymentModals)
+// const reportModal = modal.register('Report', ReportModals)
+// const questionModals = modal.register('Question', QuestionModals)
+
+export const useAccountModal = () => accountModal
+export const useScheduleModal = () => ScheduleModal
+export const useSessionModal = () => sessionModal
+// export const useMenuModal = () => menuModal
+// export const usePaymentModal = () => paymentModal
+// export const useReportModal = () => reportModal
+// export const useQuestionsModal = () => questionModals

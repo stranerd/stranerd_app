@@ -4,7 +4,15 @@
 	</div>
 
 	<div v-else class="col-span-12 flex flex-col px-3 normalText">
-		<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer"></AnswerCard>
+		<template v-if="answers.length">
+			<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer"></AnswerCard>
+		</template>
+		<empty-state
+			v-else
+			btnText="Go and answer a Question"
+			info="You haven't answered any questions yet, click the button below to answer a question"
+			route="/dashboard/answers"
+		/>
 	</div>
 </template>
 
@@ -14,10 +22,11 @@
 import AnswerCard from '@app/components/questions/answers/UserAnswerListCard.vue'
 import { useUserAnswerList } from '@app/composable/users/user/answers'
 import { IonProgressBar } from '@ionic/vue'
+import EmptyState from '../core/emptyState.vue'
 
 export default {
 	name: 'profileAnswers',
-	components: { AnswerCard, IonProgressBar },
+	components: { AnswerCard, IonProgressBar, EmptyState },
 	props: {
 		userId: {
 			type: String,
@@ -26,6 +35,8 @@ export default {
 	},
 	setup (props: any) {
 		const { answers, error, loading, hasMore, fetchOlderAnswers } = useUserAnswerList(props.userId)
+
+		console.log(answers.value.length)
 		return {
 			answers, error, loading, hasMore,
 			fetchOlderAnswers

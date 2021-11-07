@@ -52,10 +52,12 @@ import Avatar from '../core/Avatar.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useUser } from '@app/composable/users/user'
 import ShowRatings from '../core/ShowRatings.vue'
-import { toggleModal } from '@app/composable/core/Modal'
 import { setNewSessionTutorIdBio } from '@app/composable/sessions/sessions'
 import { useRouter } from 'vue-router'
 import PageLoading from '../core/PageLoading.vue'
+import { useSessionModal} from '@app/composable/core/modals'
+
+
 
 export default defineComponent({
 	props: {
@@ -81,8 +83,7 @@ export default defineComponent({
 
 		const requestNewSession = () => {
 			setNewSessionTutorIdBio({ id: user.value?.id!, user: user.value?.bio! })
-			// useSessionModal().openCreateSession()
-			toggleModal()
+			useSessionModal().openCreateSession()
 		}
 
 		const goToTab = (tabname: string) => {

@@ -97,18 +97,16 @@
 </template>
 
 <script lang="ts">
-
+import { defineComponent, ref } from 'vue'
 import { IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/vue'
-import { defineAsyncComponent, ref } from 'vue'
 import { add, arrowBackOutline, calendar, chevronBack, chevronDown, chevronForward } from 'ionicons/icons'
 import { useRouter } from 'vue-router'
-import { componentName, showModal } from '@app/composable/core/Modal'
+import SideProfileNav from '@app/components/layout/sidebars/RightSidebar.vue'
+import Opening from '@app/components/schedule/Openings.vue'
+import DateCard from '@app/components/schedule/DateCard.vue'
+import { useScheduleModal } from '@app/composable/core/modals'
 
-const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout/sidebars/RightSidebar.vue'))
-const Opening = defineAsyncComponent(() => import('@app/components/schedule/Openings.vue'))
-const DateCard = defineAsyncComponent(() => import('@app/components/schedule/DateCard.vue'))
-
-export default {
+export default defineComponent({
 	name: 'calendar',
 	layout: 'subpages',
 	components: {
@@ -127,8 +125,7 @@ export default {
 		const router = useRouter()
 
 		const createSchedule = () => {
-			componentName.value = 'createSchedule'
-			showModal.value = true
+			useScheduleModal().openCreateSchedule()
 		}
 
 		const showAddAnswer = ref(false)
@@ -145,7 +142,7 @@ export default {
 			chevronDown
 		}
 	}
-}
+})
 </script>
 <style scoped>
 	ion-toolbar {

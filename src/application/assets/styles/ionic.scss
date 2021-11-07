@@ -96,3 +96,17 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-light-tint: #f5f6f9;
 }
 
+.modal{
+	--background-color: #00000065;
+	--height: 39rem;
+	--width: 400px;
+	--border-radius:.75rem;
+}
+
+@media (max-width: 992px) {
+.modal{
+	--height: 100vh;
+	--border-radius:0rem;
+}
+}
+

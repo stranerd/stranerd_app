@@ -32,7 +32,7 @@
 		<div class="flex flex-row  mt-5  text-white gap-4">
 			<div class="w-1/2 flex flex-row justify-center items-center">
 				<button class=" px-6 py-3 relative ion-activatable rounded-lg w-full font-bold bg-dark_gray "
-					@click="showModal = false">
+					@click="closeCreateSchedule">
 					Cancel
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</button>
@@ -52,14 +52,16 @@ import { defineComponent } from 'vue'
 
 import { IonIcon, IonInput, IonRippleEffect, } from '@ionic/vue'
 import { chevronDown, ellipse, ellipseOutline } from 'ionicons/icons'
-import { showModal } from '@app/composable/core/Modal'
+import { useScheduleModal} from '@app/composable/core/modals'
 
 export default defineComponent({
 	setup () {
-
+		const closeCreateSchedule =()=>{
+			useScheduleModal().closeCreateSchedule()
+		}
 		return {
+			closeCreateSchedule,
 			chevronDown,
-			showModal,
 			ellipse,
 			ellipseOutline
 		}
