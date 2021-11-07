@@ -67,21 +67,25 @@
 				</ion-select>
 			</div>
 		</div>
-
-		<div class="flex flex-col gap-2">
+		<!-- <div class="flex flex-col gap-2">
 			<h2 class="headings font-bold text-dark_gray">Course</h2>
 			<div class="py-2 px-2 w-full pl-6 bg-light_gray rounded-xl flex flex-row">
 				<ion-input class="w-full font-medium" placeholder="What course are you presently studying?" value="">
 				</ion-input>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="flex flex-col gap-2">
 			<h2 class="headings font-bold text-dark_gray">Best Subject</h2>
-			<div class="py-2 px-2 w-full pl-6 bg-light_gray rounded-xl flex flex-row">
-				<ion-input class="w-full font-medium" placeholder="What subject do you excel at the most?" value="">
-				</ion-input>
-			</div>
+			<SelectSubject
+				:exclude="factory.weakerSubjects"
+				:show-all="false"
+				v-model:subject-id="factory.strongestSubject"
+				class="p-0 select"
+			/>
+			<span v-if="factory.strongestSubject">
+				Strongest subject chosen: <Subject :subject-id="factory.strongestSubject" />
+			</span>
 		</div>
 
 		<div class="flex flex-col gap-2">
@@ -124,6 +128,9 @@
 			</div>
 		</div>
 
+		<!-- <Subject/> -->
+		<!-- <SelectSubject/> -->
+
 
 	</div>
 </template>
@@ -147,6 +154,8 @@ import { useAuth } from '@app/composable/auth/auth'
 import { useFileInputs, usePassword, useSubjectAsTags } from '@app/composable/core/forms'
 import { selectedTab } from '@app/composable/profile'
 import { useRouter } from 'vue-router'
+import Subject from '../questions/subjects/Subject.vue'
+import SelectSubject from '../questions/subjects/SelectSubject.vue'
 
 export default defineComponent({
 	name: 'profileSettings',
@@ -159,7 +168,9 @@ export default defineComponent({
 		IonRippleEffect,
 		IonSpinner,
 		IonButton,
-		IonProgressBar
+		IonProgressBar,
+		Subject,
+		SelectSubject,
 	},
 
 	props: {
