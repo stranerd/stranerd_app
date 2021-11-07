@@ -10,7 +10,7 @@ import AllQuestions from '@app/components/questions/all.vue'
 import { IonPage } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'QuestionIndex',
+	name: 'QuestionsPage',
 	components: {
 		AllQuestions, IonPage
 	},

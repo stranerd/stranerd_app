@@ -8,7 +8,7 @@
 					Explore tutors
 				</button>
 				<button :class="selectedTab == 'find' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'"
-						@click="handleSliding('1')">
+					@click="handleSliding('1')">
 					Find a tutor
 				</button>
 			</div>

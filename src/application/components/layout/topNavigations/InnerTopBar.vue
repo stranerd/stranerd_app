@@ -14,10 +14,10 @@
 
 	<!-- medium screens -->
 	<div v-if="!isNotDashboard && !store.state.showPage "
-		 class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50">
+		class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50">
 		<div class="flex flex-row items-center gap-9 w-1/4">
-			<router-link :to="profileLink"
-						 class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center ">
+			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center "
+				to="/account">
 				<avatar :size="26" :src="user?.avatar?.link" />
 			</router-link>
 
@@ -47,7 +47,7 @@
 
 		<div class="flex flex-row-reverse items-center gap-9 w-1/4">
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-						 to="/notifications">
+				to="/notifications">
 				<ion-icon :icon="notifications" class="text-2xl text-icon_inactive"></ion-icon>
 
 			</router-link>
@@ -67,7 +67,7 @@
 		class="hidden md:hidden lg:flex bg-white py-3 pl-16 pr-[100px] fixed   top-0  flex-row items-center gap-16 z-50 w-full">
 		<div class="flex flex-row items-center py-1 gap-3 w-[16%] justify-between">
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-						 to="/dashboard/home">
+				to="/dashboard/home">
 				<ion-icon :icon="home" class="text-xl text-icon_inactive"></ion-icon>
 			</router-link>
 			<div class="py-2 px-3 rounded-md flex flex-row items-center justify-center">
@@ -77,7 +77,7 @@
 		<div :class="noSideBar ? 'w-[63%]' : 'w-3/4'" class="flex flex-row items-center py-1 gap-6 justify-around">
 			<div class="bg-light_gray py-2 px-6 rounded-lg flex-grow flex flex-row items-center">
 				<input class="focus:outline-none bg-light_gray flex-grow text-sm placeholder-gray-400 py-1 px-1"
-					   placeholder="Search for anything" />
+					placeholder="Search for anything" />
 				<ion-icon :icon="search" class="text-xl text-icon_inactive"></ion-icon>
 			</div>
 			<router-link class="px-4 py-1 bg-primary text-white rounded-lg" to="/questions">
@@ -86,19 +86,19 @@
 				</div>
 			</router-link>
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-						 to="/notifications">
+				to="/notifications">
 				<ion-icon :icon="notifications" class="text-xl text-icon_inactive"></ion-icon>
 			</router-link>
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-						 to="/questions">
+				to="/questions">
 				<ion-icon :icon="school" class="text-xl text-icon_inactive"></ion-icon>
 			</router-link>
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-						 to="/questions">
+				to="/questions">
 				<ion-icon :icon="chatbubble" class="text-xl text-icon_inactive"></ion-icon>
 			</router-link>
-			<router-link :to="profileLink"
-						 class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
+			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
+				to="/account">
 				<avatar :size="26" :src="user?.avatar?.link" />
 			</router-link>
 		</div>
@@ -120,7 +120,7 @@
 	</div>
 </template>
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { IonButtons, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue'
 import { add, arrowBackOutline, chatbubble, home, notifications, school, search } from 'ionicons/icons'
 import { useStore } from '@app/store'
@@ -146,17 +146,11 @@ export default defineComponent({
 
 		const displayName = useRoute().meta.displayName
 
-		const { id, isLoggedIn, user } = useAuth()
-		const profileLink = computed({
-			get: () => isLoggedIn.value ? `/profile/${id.value}#dashboard` : '/auth/signin',
-			set: () => {
-			}
-		})
+		const { user } = useAuth()
 
 		const store = useStore()
 		return {
 			displayName,
-			profileLink,
 			add,
 			store,
 			home,

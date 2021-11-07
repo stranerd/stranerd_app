@@ -10,7 +10,7 @@ import AskQuestions from '@app/components/questions/ask.vue'
 import { IonPage } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'QuestionCreate',
+	name: 'CreateQuestionPage',
 	components: {
 		AskQuestions, IonPage
 	},

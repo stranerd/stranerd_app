@@ -13,8 +13,8 @@
 		<div class="mt-3 border border-faded_gray rounded-lg py-5 flex-col px-3">
 			<span class="text-dark_gray font-bold">Explanation - </span>
 			<ion-textarea v-model="factory.body" class="bg-white border-0 focus:outline-none  w-full"
-				placeholder="Write out the detailed explanation of the answer you gave above. (Optional)"
-				rows="9"></ion-textarea>
+						  placeholder="Write out the detailed explanation of the answer you gave above. (Optional)"
+						  rows="9"></ion-textarea>
 		</div>
 
 		<div
@@ -35,7 +35,7 @@
 				<span v-for="(attachment, index) in factory.attachments" :key="index + 'attachment'">
 					<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg flex flex-row items-center">
 						{{ attachment.name }}  <ion-icon :icon="close" class="ml-1 cursor-pointer"
-							@click="factory.removeAttachment(attachment)"></ion-icon>
+														 @click="factory.removeAttachment(attachment)"></ion-icon>
 					</span>
 				</span>
 			</div>
@@ -44,14 +44,14 @@
 		<div class="flex flex-row px-3 my-7 md:gap-5 text-white">
 			<div class="w-1/2 flex flex-row justify-center items-center">
 				<button class=" md:w-full px-6 py-3 relative ion-activatable rounded-lg  font-bold bg-dark_gray "
-					@click="showAddAnswer = false">
+						@click="showAddAnswer = false">
 					Cancel
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</button>
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
 				<button class="md:w-full px-6 relative ion-activatable font-bold py-3 rounded-lg bg-primary"
-					@click="createAnswer">
+						@click="createAnswer">
 					Post answer
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</button>
@@ -63,9 +63,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { IonIcon, IonInput, IonTextarea, IonRippleEffect } from '@ionic/vue'
+import { IonIcon, IonInput, IonRippleEffect, IonTextarea } from '@ionic/vue'
 
-import { image, close } from 'ionicons/icons'
+import { close, image } from 'ionicons/icons'
 import { showAddAnswer, useCreateAnswer } from '@app/composable/questions/answers'
 import { useRoute } from 'vue-router'
 import { QuestionEntity } from '@modules/questions'
@@ -77,7 +77,7 @@ export default defineComponent({
 			type: Object as () => QuestionEntity
 		}
 	},
-	setup (props) {
+	setup () {
 		const route = useRoute()
 		const {
 			factory,
@@ -85,7 +85,7 @@ export default defineComponent({
 			loading,
 			answeringQuestion,
 			createAnswer
-		} = useCreateAnswer(props.question ? props.question : null)
+		} = useCreateAnswer()
 		factory.value.questionId = Array.isArray(route.params.id) ? '' : route.params.id
 
 		const { catchMultipleFiles: catchAttachments } = useMultipleFileInputs(
