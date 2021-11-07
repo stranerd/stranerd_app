@@ -7,8 +7,9 @@
 					<div class="text-dark_gray bg-white rounded-xl justify-center items-center py-3 px-4">
 						<ion-icon :icon="chatbubbles" class="text-[23px] text-dark_gray"></ion-icon>
 					</div>
-					<router-link class="text-dark_gray bg-icon_inactive rounded-xl justify-center items-center py-3 px-4 absolute bottom-1"
-						to="/dashboard/home">
+					<router-link
+						class="text-dark_gray bg-icon_inactive rounded-xl justify-center items-center py-3 px-4 absolute bottom-1"
+						to="/dashboard/">
 						<ion-icon :icon="home" class="text-[23px] text-white"></ion-icon>
 					</router-link>
 				</div>
@@ -31,13 +32,13 @@
 </template>
 
 <script lang="ts">
-import { IonPage, IonContent, IonIcon, IonTabs, IonRouterOutlet } from '@ionic/vue'
+import { IonContent, IonIcon, IonPage } from '@ionic/vue'
 import { defineAsyncComponent, onMounted } from 'vue'
-
-const ChatList = defineAsyncComponent(() => import('@app/components/chat/ChatList.vue'))
-import { ellipsisVertical, chatbubbles, home } from 'ionicons/icons'
+import { chatbubbles, ellipsisVertical, home } from 'ionicons/icons'
 import { openChat } from '@app/composable/sessions/ChatHandler'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
+
+const ChatList = defineAsyncComponent(() => import('@app/components/chat/ChatList.vue'))
 
 export default {
 	name: 'chat',

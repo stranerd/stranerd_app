@@ -31,7 +31,7 @@
 					:key="index + 1"
 					class="flex md:!w-[300px] !w-[265px] mr-3">
 					<question :colorClass="0 === index ? 'bg-butter_yellow h-[150px]' : 'bg-light_gray h-[150px]'"
-						:fromHome="true" :question="question" />
+							  :fromHome="true" :question="question" />
 				</swiper-slide>
 
 			</swiper>
@@ -47,7 +47,7 @@
 					:key="index"
 					class="!w-1/3 !pr-3">
 					<question :colorClass="0 === index ? 'bg-butter_yellow h-[155px]' : 'bg-light_gray h-[155px]'"
-						:fromHome="true" :question="question" />
+							  :fromHome="true" :question="question" />
 				</swiper-slide>
 
 			</swiper>
@@ -63,7 +63,7 @@ import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/ico
 import SliderController from '@app/components/core/nav/sliderController.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
-import Question from '../questions/question.vue'
+import Question from '../questions/QuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '../core/emptyState.vue'
 

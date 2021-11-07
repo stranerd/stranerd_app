@@ -28,7 +28,7 @@
 				</div>
 
 				<div class="mt-2 flex flex-row items-center">
-					<span class="font-bold text-icon_inactive lg:mr-2">{{ moment(question.createdAt).fromNow() }}</span>
+					<span class="font-bold text-icon_inactive lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 					<div :class="`flex flex-row-reverse items-center flex-grow`">
 						<span class="font-bold text-icon_inactive">{{
 								question.answers.length
@@ -57,7 +57,6 @@ import { IonIcon, IonRippleEffect } from '@ionic/vue'
 import { arrowRedo, flag } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import Subject from '@app/components/questions/subjects/Subject.vue'
-import moment from 'moment'
 import Avatar from '@app/components/core/AvatarUser.vue'
 import PhotoList from '@app/components/core/PhotoList.vue'
 import CreateAnswer from '@app/components/questions/answers/create.vue'
@@ -65,6 +64,7 @@ import { pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
 import { openAnswerModal, showAddAnswer } from '@app/composable/questions/answers'
 import { useDeleteQuestion } from '@app/composable/questions/questions'
+import { formatTime } from '@utils/dates'
 
 export default defineComponent({
 	name: 'QuestionPageCard',
@@ -98,7 +98,7 @@ export default defineComponent({
 		const { loading, error, deleteQuestion } = useDeleteQuestion(props.question.id)
 
 		return {
-			arrowRedo, flag, moment, pluralize,
+			arrowRedo, flag, formatTime, pluralize,
 			showAnswerButton, openAnswerModal, showAddAnswer,
 			showEditButton, showDeleteButton,
 			loading, error, deleteQuestion

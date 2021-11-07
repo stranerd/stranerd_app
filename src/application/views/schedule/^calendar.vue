@@ -69,21 +69,21 @@
 							</div>
 							<div class="col-span-12 md:col-span-6 lg:col-span-4">
 								<opening :colorClass="'bg-white border-[1px] border-faded_gray'"
-									:is-opening="true"></opening>
+										 :is-opening="true"></opening>
 							</div>
 							<div class="col-span-12 md:col-span-6 lg:col-span-4">
 								<opening :colorClass="'bg-tinted_pink'"></opening>
 							</div>
 							<div class="col-span-12 md:col-span-6 lg:col-span-4">
 								<opening :colorClass="'bg-white border-[1px] border-faded_gray'"
-									:is-opening="true"></opening>
+										 :is-opening="true"></opening>
 							</div>
 							<div class="col-span-12 md:col-span-6 lg:col-span-4">
 								<opening :colorClass="'bg-butter_yellow'"></opening>
 							</div>
 							<div class="col-span-12 md:col-span-6 lg:col-span-4">
 								<opening :colorClass="'bg-white border-[1px] border-faded_gray'"
-									:is-opening="true"></opening>
+										 :is-opening="true"></opening>
 							</div>
 						</div>
 					</div>
@@ -104,7 +104,7 @@ import { add, arrowBackOutline, calendar, chevronBack, chevronDown, chevronForwa
 import { useRouter } from 'vue-router'
 import { componentName, showModal } from '@app/composable/core/Modal'
 
-const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout/sidebars/SideProfileNav.vue'))
+const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout/sidebars/RightSidebar.vue'))
 const Opening = defineAsyncComponent(() => import('@app/components/schedule/Openings.vue'))
 const DateCard = defineAsyncComponent(() => import('@app/components/schedule/DateCard.vue'))
 

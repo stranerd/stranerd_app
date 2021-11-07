@@ -1,47 +1,49 @@
 <template>
-	<ion-page>
-		<div class="col-span-12  md:col-start-3 md:col-end-11 px-3 ">
-			<div class="bg-light_gray rounded-md flex flex-row items-center">
-				<button
-					:class="selectedTab == 'explore' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'"
-					@click="handleSliding('0')">
-					Explore tutors
-				</button>
-				<button :class="selectedTab == 'find' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'"
-					@click="handleSliding('1')">
-					Find a tutor
-				</button>
+	<IonPage>
+		<IonContent>
+			<div class="col-span-12  md:col-start-3 md:col-end-11 px-3 ">
+				<div class="bg-light_gray rounded-md flex flex-row items-center">
+					<button
+						:class="selectedTab == 'explore' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'"
+						@click="handleSliding('0')">
+						Explore tutors
+					</button>
+					<button :class="selectedTab == 'find' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'"
+							@click="handleSliding('1')">
+						Find a tutor
+					</button>
+				</div>
 			</div>
-		</div>
 
-		<div class="col-span-12 mb-16">
-			<swiper
-				@slideChange="onSlideChange"
-				@swiper="onSwiper"
-			>
-				<swiper-slide>
-					<ExploreTutors />
-				</swiper-slide>
-				<swiper-slide>
-					<FindTutors />
-				</swiper-slide>
-			</swiper>
-		</div>
-	</ion-page>
+			<div class="col-span-12 mb-16">
+				<swiper
+					@slideChange="onSlideChange"
+					@swiper="onSwiper"
+				>
+					<swiper-slide>
+						<ExploreTutors />
+					</swiper-slide>
+					<swiper-slide>
+						<FindTutors />
+					</swiper-slide>
+				</swiper>
+			</div>
+		</IonContent>
+	</IonPage>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IonPage } from '@ionic/vue'
+import { IonContent, IonPage } from '@ionic/vue'
 import 'swiper/swiper-bundle.min.css'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import ExploreTutors from '@app/components/tutors/ExploreTutors.vue'
 import FindTutors from '@app/components/tutors/FindTutors.vue'
 
 export default defineComponent({
-	name: 'tutors',
+	name: 'DashboardTutorsPage',
 	layout: 'dashboard',
-	components: { IonPage, ExploreTutors, Swiper, SwiperSlide, FindTutors },
+	components: { IonPage, IonContent, ExploreTutors, Swiper, SwiperSlide, FindTutors },
 
 	setup () {
 

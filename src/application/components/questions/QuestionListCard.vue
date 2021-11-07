@@ -1,50 +1,46 @@
 <template>
 	<router-link
-		:class="`py-4 px-4 rounded-lg ${props.colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer`"
-		:to="`/questions/${question?.id}`">
+		:class="`py-4 px-4 rounded-lg ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer`"
+		:to="`/questions/${question.id}`">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
-			<span class="mr-2"><avatar :photo-url="question?.avatar?.link" :size="'28'" /></span>
-			<span class="font-bold text-dark_gray">{{ question?.userBio.fullName}}</span>
+			<avatar :photo-url="question.avatar?.link" class="mr-2" size="28" />
+			<span class="font-bold text-dark_gray">{{ question.userBio.fullName }}</span>
 			<div class="flex flex-row-reverse flex-grow">
-
 				<template v-if="fromHome">
-					<span class="font-bold text-icon_inactive lg:mr-2">30m ago</span>
+					<span class="font-bold text-icon_inactive lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 				</template>
 				<template v-else>
-					<template v-if="!props.fromViewQuestion">
+					<template v-if="!fromViewQuestion">
 						<button
 							class="py-1 px-3 rounded-lg text-white bg-dark_gray font-bold flex flex-row items-center">
 							<span class="mr-2">Answer</span>
 							<span class="h-1 w-1 rounded-full bg-white mr-2"></span>
-							<span class="mr-1 text-sm">+{{ question?.coins }}</span>
+							<span class="mr-1 text-sm">+{{ question.creditable }}</span>
 							<img class=" h-4" src="/assets/images/bronze.svg" />
 						</button>
 					</template>
-					<template v-if="props.fromViewQuestion">
-						<ion-icon :icon="flag" class="text-[22px]  text-icon_inactive"></ion-icon>
-						<ion-icon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive"></ion-icon>
+					<template v-if="fromViewQuestion">
+						<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive" />
+						<IonIcon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive" />
 					</template>
 				</template>
 
 			</div>
 		</div>
 
-		<div v-if="props.isFeatured" class="mt-3">
+		<div v-if="isFeatured" class="mt-3">
 			<button class="py-1 px-3 rounded-lg text-white bg-star_yellow font-bold flex flex-row items-center">
 				Featured
 			</button>
 		</div>
 		<div v-if="!fromHome" class="mt-3 flex flex-row items-center">
 			<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3"></span>
-			<span class="font-semibold text-dark_gray">{{ subject?.name }}</span>
+			<Subject :subjectId="question.subjectId" class="font-semibold text-dark_gray" />
 		</div>
 
-		<p v-if="!fromViewQuestion" class="py-2 text-dark_gray leading-normal mb-3 lg:mb-5"
-			v-html="question?.trimmedBody">
-		</p>
-		<p v-if="fromViewQuestion" class="py-2 text-dark_gray leading-normal mb-3 lg:mb-5" v-html="question?.body">
-		</p>
+		<pre class="py-2 text-dark_gray leading-normal mb-3 lg:mb-5"
+			 v-html="fromViewQuestion ? question.body : question.trimmedBody" />
 
 		<div
 			:class="`w-full flex flex-col lg:flex-row lg:justify-between ${!fromViewQuestion ? 'absolute bottom-3 left-0 px-4' : ''} w-full `">
@@ -57,9 +53,12 @@
 			</div>
 
 			<div class="mt-2 flex flex-row items-center ">
-				<span v-if="!fromHome" class="font-bold text-icon_inactive lg:mr-2">{{ moment(question?.createdAt).fromNow() }}</span>
+				<span v-if="!fromHome"
+					  class="font-bold text-icon_inactive lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 				<div :class="`flex ${fromHome ? 'flex-row' : 'flex-row-reverse'}  items-center flex-grow`">
-					<span class="font-bold text-icon_inactive">{{ question?.answers.length }} answers</span>
+					<span class="font-bold text-icon_inactive">{{
+							question.answers.length
+						}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
 					<span v-if="!fromHome" class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 "></span>
 				</div>
 			</div>
@@ -71,15 +70,15 @@
 import { defineAsyncComponent, defineComponent } from 'vue'
 import { IonIcon, IonRippleEffect } from '@ionic/vue'
 import { arrowRedo, flag } from 'ionicons/icons'
-import { useRouter } from 'vue-router'
-import { useStore } from '@app/store'
 import { QuestionEntity } from '@modules/questions'
-import { useSubject } from '@app/composable/questions/subjects'
+import { formatTime } from '@utils/dates'
+import { pluralize } from '@utils/commons'
+import Subject from '@app/components/questions/subjects/Subject.vue'
 
 const Avatar = defineAsyncComponent(() => import('@app/components/core/AvatarUser.vue'))
-import moment from 'moment'
 
 export default defineComponent({
+	name: 'QuestionListCard',
 	props: {
 		colorClass: {
 			type: String,
@@ -98,37 +97,19 @@ export default defineComponent({
 			default: false
 		},
 		question: {
-			type: QuestionEntity
+			type: QuestionEntity,
+			required: true
 		}
 	},
 	components: {
-		IonIcon, IonRippleEffect, Avatar
+		IonIcon, IonRippleEffect, Avatar, Subject
 	},
-	setup (props) {
-
-		const router = useRouter()
-
-		const store = useStore()
-
-		const { subject } = useSubject(props.question?.subjectId ? props.question?.subjectId : '')
-
-		const showAnswers = () => {
-
-			store.commit('showIonPage')
-			router.push({
-				name: 'answers'
-			})
-		}
-
+	setup () {
 		return {
-			props,
 			arrowRedo,
 			flag,
-			router,
-			showAnswers,
-			subject,
-			moment
+			formatTime, pluralize
 		}
-	},
+	}
 })
 </script>

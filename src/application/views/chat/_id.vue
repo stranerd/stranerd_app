@@ -7,8 +7,9 @@
 					<div class="text-dark_gray bg-white rounded-xl justify-center items-center py-3 px-4">
 						<ion-icon :icon="chatbubbles" class="text-[23px] text-dark_gray"></ion-icon>
 					</div>
-					<router-link class="text-dark_gray bg-icon_inactive rounded-xl justify-center items-center py-3 px-4 absolute bottom-1"
-						to="/dashboard/home">
+					<router-link
+						class="text-dark_gray bg-icon_inactive rounded-xl justify-center items-center py-3 px-4 absolute bottom-1"
+						to="/dashboard/">
 						<ion-icon :icon="home" class="text-[23px] text-white"></ion-icon>
 					</router-link>
 				</div>
@@ -31,15 +32,15 @@
 </template>
 
 <script lang="ts">
-import { IonPage, IonContent, IonIcon } from '@ionic/vue'
+import { IonContent, IonIcon, IonPage } from '@ionic/vue'
 import { defineAsyncComponent, onMounted } from 'vue'
+import { chatbubbles, ellipsisVertical, home } from 'ionicons/icons'
+import { openChat } from '@app/composable/sessions/ChatHandler'
+import { useRoute } from 'vue-router'
 
 const ChatList = defineAsyncComponent(() => import('@app/components/chat/ChatList.vue'))
 const FullChat = defineAsyncComponent(() => import('@app/components/chat/Chat.vue'))
 const ChatInfo = defineAsyncComponent(() => import('@app/components/chat/ChatInfo.vue'))
-import { ellipsisVertical, chatbubbles, home } from 'ionicons/icons'
-import { openChat } from '@app/composable/sessions/ChatHandler'
-import { useRoute } from 'vue-router'
 
 export default {
 	name: 'chatView',
