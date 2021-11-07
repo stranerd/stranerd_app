@@ -33,11 +33,11 @@ export const useModal = (stack: Ref<string[]>) => {
 
 		const helpers = Object.fromEntries(
 			Object.keys(modalObject)
-				.map((key) => merge(type, capitalize(key)))
+				.map((key) => capitalize(key))
 				.map((key) => {
 					return [
-						[`open${key}`, async () => open(key)],
-						[`close${key}`, async () => close(key)]
+						[`open${key}`, async () => open(merge(type, key))],
+						[`close${key}`, async () => close(merge(type, key))]
 					]
 				})
 				.reduce((acc, curr) => acc.concat(curr), [])

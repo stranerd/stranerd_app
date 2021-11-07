@@ -41,7 +41,7 @@
 		<PhotoList v-if="question.attachments" :photos="question.attachments" class="py-3" />
 		<span v-if="question.isAnswered" />
 		<CreateAnswer v-else-if="showAddAnswer" :question="question" class="mt-8" />
-		<button v-else
+		<button v-else-if="showAnswerButton"
 				class="py-3 px-4 mt-1 justify-center rounded-lg text-white bg-dark_gray w-full font-bold flex flex-row items-center"
 				@click="openAnswerModal(question)">
 			<span class="mr-2">Add your answer</span>

@@ -23,7 +23,7 @@
 					:key="index"
 					class="flex md:!min-w-[200px] !w-[190px] mr-3">
 					<tutor-card :class="0 === index ? 'bg-light_gray flex' : 'bg-light_gray flex'" :showButton="false"
-						:tutor="tutor" />
+								:tutor="tutor" />
 				</swiper-slide>
 
 			</swiper>
@@ -39,7 +39,7 @@
 					:key="index"
 					class="!w-1/4 !pr-3">
 					<tutor-card :class="0 === index ? 'bg-light_gray flex' : 'bg-light_gray flex'" :showButton="false"
-						:tutor="tutor" />
+								:tutor="tutor" />
 				</swiper-slide>
 
 			</swiper>
@@ -48,10 +48,9 @@
 	</div>
 </template>
 
-
 <script lang="ts">
 import { IonIcon } from '@ionic/vue'
-import { chevronForwardOutline, chevronBackOutline, ellipse } from 'ionicons/icons'
+import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import SliderController from '@app/components/core/nav/sliderController.vue'
 import TutorCard from '@app/components/tutors/TutorCard.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'

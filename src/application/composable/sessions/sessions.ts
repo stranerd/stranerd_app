@@ -45,7 +45,7 @@ export const useCreateSession = () => {
 
 	return {
 		factory, loading, error, hasEnoughCoins,
-		createSession
+		createSession, newSessionTutorIdBio
 	}
 }
 

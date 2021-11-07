@@ -5,14 +5,14 @@
 			<span class="mr-2 text-dark_gray ">You are requesting a session from</span>
 			<div class="flex flex-row items-center py-1">
 				<img class="inline h-4 mr-2" src="/assets/images/person-circle.svg" />
-				<span class="mr-2 text-primary">Timmy Neutron</span>
+				<span class="mr-2 text-primary">{{ newSessionTutorIdBio?.user.fullName ?? '' }}</span>
 			</div>
 		</div>
 
 		<div class="mt-3 border border-faded_gray rounded-lg py-1 px-3">
 			<ion-textarea v-model="factory.message" class="bg-white border-0 focus:outline-none text-center  w-full"
-				placeholder="Explain exactly what you need help with."
-				rows="5"></ion-textarea>
+						  placeholder="Explain exactly what you need help with."
+						  rows="5"></ion-textarea>
 		</div>
 
 		<div
@@ -59,9 +59,10 @@
 
 		<div class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex flex-row">
 			<ion-select v-model="factory.duration" class="w-full  font-medium" interface="action-sheet"
-				placeholder="Duration and payment">
+						placeholder="Duration and payment">
 				<ion-select-option v-for="option in factory.prices" :key="option.duration" :value="option.duration">{{
-					option.duration }} minutes - {{ option.price }} gold coins
+						option.duration
+					}} minutes - {{ option.price }} gold coins
 				</ion-select-option>
 			</ion-select>
 		</div>
@@ -69,15 +70,15 @@
 		<div class="flex flex-row  mt-5  text-white gap-4">
 			<div class="w-1/2 flex flex-row justify-center items-center">
 				<button class=" px-6 py-3 relative ion-activatable rounded-lg w-full font-bold bg-dark_gray "
-					@click="closeSessionModal">
+						@click="closeSessionModal">
 					Cancel
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</button>
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
 				<button :disabled="loading || !factory.valid || !hasEnoughCoins"
-					class=" px-6 relative ion-activatable font-bold w-full py-3 rounded-lg bg-primary"
-					@click="createSession">
+						class=" px-6 relative ion-activatable font-bold w-full py-3 rounded-lg bg-primary"
+						@click="createSession">
 					Request Session
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</button>
@@ -88,20 +89,18 @@
 </template>
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
-
-import { IonSelect, IonSelectOption, IonTextarea, IonRippleEffect, IonIcon } from '@ionic/vue'
+import { IonIcon, IonRippleEffect, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
 import { document, ellipse, ellipseOutline } from 'ionicons/icons'
-// import { showModal } from '@app/composable/core/Modal'
 import { analytics } from '@modules/core'
 import { useCreateSession } from '@app/composable/sessions/sessions'
-import { useSessionModal} from '@app/composable/core/modals'
+import { useSessionModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	setup () {
-		const closeSessionModal = ()=>{
+		const closeSessionModal = () => {
 			useSessionModal().closeCreateSession()
 		}
-		const { factory, loading, error, hasEnoughCoins, createSession } = useCreateSession()
+		const { factory, loading, error, hasEnoughCoins, createSession, newSessionTutorIdBio } = useCreateSession()
 		onMounted(async () => {
 			await analytics.logEvent('view_session_request')
 		})
@@ -112,7 +111,7 @@ export default defineComponent({
 			ellipse,
 			ellipseOutline,
 			hasEnoughCoins,
-			factory, loading, error, createSession
+			factory, loading, error, createSession, newSessionTutorIdBio
 		}
 	},
 	components: { IonTextarea, IonSelectOption, IonSelect, IonRippleEffect, IonIcon }
