@@ -22,7 +22,7 @@
 						</button>
 					</template>
 					<template v-if="props.fromViewQuestion">
-						<ion-icon :icon="flag" class="text-[22px]  text-icon_inactive"></ion-icon>
+						<ion-icon :icon="flag" class="text-[22px] text-icon_inactive"></ion-icon>
 						<ion-icon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive"></ion-icon>
 					</template>
 				</template>

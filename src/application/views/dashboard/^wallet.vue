@@ -26,6 +26,7 @@ import TranscractionHistory from '@app/components/wallet/TranscractionHistory.vu
 export default defineComponent({
 	name: 'wallet',
 	layout: 'dashboard',
+	middlewares: ['isAuthenticated'],
 	components: { IonPage, IonContent, BalanceCard, TranscractionHistory },
 	setup () {
 		const { id, user } = useAuth()

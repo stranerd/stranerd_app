@@ -102,11 +102,11 @@ import { IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolb
 import { defineAsyncComponent, ref } from 'vue'
 import { add, arrowBackOutline, calendar, chevronBack, chevronDown, chevronForward } from 'ionicons/icons'
 import { useRouter } from 'vue-router'
-// import { componentName, showModal } from '@app/composable/core/Modal'
 
-const SideProfileNav = defineAsyncComponent(() => import('@app/components/layout/sidebars/SideProfileNav.vue'))
-const Opening = defineAsyncComponent(() => import('@app/components/schedule/Openings.vue'))
-const DateCard = defineAsyncComponent(() => import('@app/components/schedule/DateCard.vue'))
+import SideProfileNav from '@app/components/layout/sidebars/SideProfileNav.vue'
+import Opening from '@app/components/schedule/Openings.vue'
+import DateCard  from '@app/components/schedule/DateCard.vue'
+import { useScheduleModal} from '@app/composable/core/modals'
 
 export default {
 	name: 'calendar',
@@ -126,10 +126,9 @@ export default {
 	setup () {
 		const router = useRouter()
 
-		// const createSchedule = () => {
-		// 	componentName.value = 'createSchedule'
-		// 	showModal.value = true
-		// }
+		const createSchedule = () => {
+			useScheduleModal().openCreateSchedule()
+		}
 
 		const showAddAnswer = ref(false)
 
@@ -138,7 +137,7 @@ export default {
 			arrowBackOutline,
 			calendar,
 			showAddAnswer,
-			// createSchedule,
+			createSchedule,
 			add,
 			chevronBack,
 			chevronForward,

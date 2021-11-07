@@ -34,6 +34,7 @@ import { IonButton } from '@ionic/vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import ShowRatings from '@app/components/core/ShowRatings.vue'
 import { componentName, showModal } from '../../composable/core/Modal'
+import { useSessionModal} from '@app/composable/core/modals'
 
 export default {
 	name: 'Home TutorCard',
@@ -57,8 +58,7 @@ export default {
 	setup (props: any) {
 
 		const requestSession = () => {
-			componentName.value = 'requestSession'
-			showModal.value = true
+			useSessionModal().openCreateSession()
 		}
 
 		return {
