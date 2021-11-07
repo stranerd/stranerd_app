@@ -55,6 +55,9 @@ import ShowRatings from '../core/ShowRatings.vue'
 import { setNewSessionTutorIdBio } from '@app/composable/sessions/sessions'
 import { useRouter } from 'vue-router'
 import PageLoading from '../core/PageLoading.vue'
+import { useSessionModal} from '@app/composable/core/modals'
+
+
 
 export default defineComponent({
 	props: {
@@ -80,7 +83,7 @@ export default defineComponent({
 
 		const requestNewSession = () => {
 			setNewSessionTutorIdBio({ id: user.value?.id!, user: user.value?.bio! })
-			// useSessionModal().openCreateSession()
+			useSessionModal().openCreateSession()
 		}
 
 		const goToTab = (tabname: string) => {
