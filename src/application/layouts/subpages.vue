@@ -9,14 +9,14 @@ import { defineAsyncComponent, defineComponent } from 'vue'
 
 const TopBar = defineAsyncComponent(() => import('@app/components/layout/topNavigations/Topbar.vue'))
 const SideNavBar = defineAsyncComponent(() => import('@app/components/layout/sidebars/DefaultSidebar.vue'))
-const Modal = defineAsyncComponent(() => import('@app/components/core/Modal.vue'))
+// const Modal = defineAsyncComponent(() => import('@app/components/core/Modal.vue'))
 
 export default defineComponent({
 	setup () {
 		return {}
 	},
 	components: {
-		TopBar, SideNavBar, Modal
+		TopBar, SideNavBar
 	}
 })
 </script>

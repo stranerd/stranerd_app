@@ -35,7 +35,6 @@ module.exports = {
 		],
 		'no-tabs': 'off',
 		'no-var': 'error',
-		'accessor-pairs': 'off',
 		'no-use-before-define': 'off',
 		indent: ['error', 'tab', { SwitchCase: 1 }],
 		'no-mixed-spaces-and-tabs': ['off', 'smart-tabs'],

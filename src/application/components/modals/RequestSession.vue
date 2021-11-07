@@ -91,7 +91,7 @@ import { defineComponent, onMounted } from 'vue'
 
 import { IonSelect, IonSelectOption, IonTextarea, IonRippleEffect, IonIcon } from '@ionic/vue'
 import { document, ellipse, ellipseOutline } from 'ionicons/icons'
-import { showModal } from '@app/composable/core/Modal'
+// import { showModal } from '@app/composable/core/Modal'
 import { analytics } from '@modules/core'
 import { useCreateSession } from '@app/composable/sessions/sessions'
 
@@ -107,7 +107,6 @@ export default defineComponent({
 			document,
 			ellipse,
 			ellipseOutline,
-			showModal,
 			hasEnoughCoins,
 			factory, loading, error, createSession
 		}

@@ -52,14 +52,13 @@ import { defineComponent } from 'vue'
 
 import { IonIcon, IonInput, IonRippleEffect, } from '@ionic/vue'
 import { chevronDown, ellipse, ellipseOutline } from 'ionicons/icons'
-import { showModal } from '@app/composable/core/Modal'
+// import { showModal } from '@app/composable/core/Modal'
 
 export default defineComponent({
 	setup () {
 
 		return {
 			chevronDown,
-			showModal,
 			ellipse,
 			ellipseOutline
 		}

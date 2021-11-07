@@ -23,7 +23,7 @@
 		<div class="mt-9 flex flex-row items-center gap-4 md:gap-6 ">
 			<button
 				class=" px-6 py-3 md:px-10 headings relative ion-activatable rounded-lg text-white font-bold bg-dark_gray "
-				@click="buyCoins">
+				@click="buyCoins()">
 				Buy coins
 				<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 			</button>
@@ -43,7 +43,7 @@
 import { defineComponent, PropType } from 'vue'
 import { IonRippleEffect } from '@ionic/vue'
 import Coins from '@app/components/core/Coins.vue'
-import { componentName, showModal } from '@app/composable/core/Modal'
+import { useAccountModal} from '@app/composable/core/modals'
 import { UserEntity } from '@modules/users'
 import { formatNumber } from '@utils/commons'
 
@@ -57,16 +57,12 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const buyCoins = () => {
-			componentName.value = 'buyCoins'
-			showModal.value = true
-
+		const buyCoins =  () => {
+			 useAccountModal().openBuyCoins()
 		}
 
 		const makeWithdrawal = () => {
-			componentName.value = 'withdrawal'
-			showModal.value = true
-
+		 useAccountModal().openWithdrawCoins()
 		}
 		return { formatNumber, buyCoins, makeWithdrawal }
 	}
