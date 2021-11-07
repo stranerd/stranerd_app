@@ -31,7 +31,8 @@
 						<ion-icon :icon="add" class="text-[24px]">
 						</ion-icon>
 					</div>
-					<button class="rounded-md bg-icon_inactive py-2 px-2 mt-1 text text-white center w-full font-semibold">
+					<button
+						class="rounded-md bg-icon_inactive py-2 px-2 mt-1 text text-white center w-full font-semibold">
 						N500
 					</button>
 				</div>
@@ -47,7 +48,8 @@
 						<ion-icon :icon="add" class="text-[24px]">
 						</ion-icon>
 					</div>
-					<button class="rounded-md bg-icon_inactive py-2 px-2 mt-1 text text-white center w-full font-semibold">
+					<button
+						class="rounded-md bg-icon_inactive py-2 px-2 mt-1 text text-white center w-full font-semibold">
 						N500
 					</button>
 				</div>
@@ -98,7 +100,7 @@
 					</ion-icon>
 				</div>
 				<button class="rounded-md text-icon_inactive py-2 px-2 mt-1 text border-2 center w-full font-semibold"
-					style="border: 2px solid #8B9EB1;">
+						style="border: 2px solid #8B9EB1;">
 					N500
 				</button>
 			</div>
@@ -107,7 +109,7 @@
 			<div class="flex flex-row  mt-5  text-white gap-4">
 				<div class="w-1/2 flex flex-row justify-center items-center">
 					<button class=" px-6 py-3 relative ion-activatable rounded-lg w-full font-bold bg-dark_gray "
-						@click="closeBuyCoins()">
+							@click="closeBuyCoins()">
 						Cancel
 						<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 					</button>
@@ -126,25 +128,24 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-
-import { IonIcon } from '@ionic/vue'
+import { IonIcon, IonRippleEffect } from '@ionic/vue'
 import { add, removeOutline } from 'ionicons/icons'
-import { useAccountModal} from '@app/composable/core/modals'
+import { useAccountModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	setup () {
-		const closeBuyCoins =  () => {
-			 useAccountModal().closeBuyCoins()
+		const closeBuyCoins = () => {
+			useAccountModal().closeBuyCoins()
 		}
 
 		return {
 			closeBuyCoins,
 			removeOutline,
-			add,
+			add
 		}
 	},
 	components: {
-		IonIcon
+		IonIcon, IonRippleEffect
 	}
 })
 </script>

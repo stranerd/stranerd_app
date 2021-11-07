@@ -21,7 +21,7 @@
 		<show-ratings :rating="4" />
 
 		<ion-button v-if="showButton" class="w-full font-bold capitalize text-base max-w-[198px]"
-			@click="requestSession">
+					@click="requestSession">
 			Request a session
 		</ion-button>
 
@@ -33,8 +33,7 @@
 import { IonButton } from '@ionic/vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import ShowRatings from '@app/components/core/ShowRatings.vue'
-import { componentName, showModal } from '../../composable/core/Modal'
-import { useSessionModal} from '@app/composable/core/modals'
+import { useSessionModal } from '@app/composable/core/modals'
 
 export default {
 	name: 'Home TutorCard',
@@ -42,7 +41,7 @@ export default {
 	props: {
 		style: {
 			required: false,
-			type: String,
+			type: String
 		},
 		showButton: {
 			required: false,

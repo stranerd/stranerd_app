@@ -35,7 +35,7 @@
 		</div>
 		<div v-if="!fromHome" class="mt-3 flex flex-row items-center">
 			<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3"></span>
-			<Subject :subjectId="question.subjectId" class="font-semibold text-dark_gray" />
+			<Subject :key="question.subjectId" :subjectId="question.subjectId" class="font-semibold text-dark_gray" />
 		</div>
 
 		<pre class="py-2 text-dark_gray leading-normal mb-3 lg:mb-5"

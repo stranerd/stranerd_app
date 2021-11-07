@@ -76,7 +76,7 @@
 
 		<!-- large screens -->
 		<div
-			class="hidden md:hidden lg:flex bg-white py-3 pl-16 pr-[100px] top-0  flex-row items-center gap-16 z-50">
+			class="hidden md:hidden lg:flex bg-white py-3 pl-16 pr-[3rem] top-0  flex-row items-center gap-16 z-50">
 			<div class="w-3/4 flex flex-row items-center py-1 gap-6 justify-around">
 				<div class="bg-light_gray py-2 px-6 rounded-lg flex-grow flex flex-row items-center">
 					<input class="focus:outline-none bg-light_gray flex-grow text-sm placeholder-gray-400 py-1 px-1"
@@ -105,7 +105,7 @@
 					<avatar :photo-url="user?.avatar?.link" :size="'26'" />
 				</router-link>
 			</div>
-			<div class="w-1/4 flex flex-row items-center py-1 -mr-5">
+			<div class="w-1/4 flex flex-row items-center py-1 px-2">
 				<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
 					<div class="w-1/3 flex flex-row items-center">
 						<img class="inline h-5 mr-2" src="/assets/images/bronze.svg" />
