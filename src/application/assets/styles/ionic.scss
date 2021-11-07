@@ -96,3 +96,13 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-light-tint: #f5f6f9;
 }
 
+.BuyCoins{
+	background-color: #00000065;
+	overflow-y: scroll;
+	// height: 100vw;
+	.ion-page{
+		// height: 100vw;
+	}
+}
+
+

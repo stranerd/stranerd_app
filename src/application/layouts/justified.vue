@@ -7,14 +7,14 @@
 import { defineComponent } from 'vue'
 
 import InnerTopBar from '@app/components/layout/topNavigations/InnerTopBar.vue'
-import Modal from '@app/components/core/Modal.vue'
+// import Modal from '@app/components/core/Modal.vue'
 
 export default defineComponent({
 	setup () {
 		return {}
 	},
 	components: {
-		InnerTopBar, Modal,
+		InnerTopBar,
 	}
 })
 </script>

@@ -35,7 +35,7 @@ import { defineComponent, ref } from 'vue'
 import { Media } from '@modules/core'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
-import { componentName, imageSrc, selectedImageIndex, showModal } from '@app/composable/core/Modal'
+// import { componentName, imageSrc, selectedImageIndex, showModal } from '@app/composable/core/Modal'
 
 export default defineComponent({
 	name: 'Photo list',
@@ -58,18 +58,17 @@ export default defineComponent({
 
 		}
 
-		const showImage = (images: Media[] | undefined, index = 0) => {
-			if (images) {
-				imageSrc.value = images
-				showModal.value = true
-				componentName.value = 'photoView'
-				selectedImageIndex.value = index
-			}
-		}
+		// const showImage = (images: Media[] | undefined, index = 0) => {
+		// 	if (images) {
+		// 		imageSrc.value = images
+		// 		showModal.value = true
+		// 		componentName.value = 'photoView'
+		// 		selectedImageIndex.value = index
+		// 	}
+		// }
 		return {
 			onSwiper,
 			swiperData,
-			showImage
 		}
 	}
 })

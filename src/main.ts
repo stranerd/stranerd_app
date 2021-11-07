@@ -41,37 +41,12 @@ const init = async () => {
 	})
 
 	await setupPlugins().catch()
-
-	const requireComponent = require.context(
-		'./application/components/modals',
-		true,
-		/\.vue$/,
-		'lazy'
-	)
-	console.log(requireComponent)
-	const app = createApp({	components: { App }	})
-
-	requireComponent.keys().forEach((fileName: any) => {
-		console.log(fileName)
-		const componentConfig = requireComponent(fileName)
-
-		const componentName =
-				fileName
-					.split('/')
-					.pop()
-					.replace(/\.\w+$/, '')
-
-		console.log(componentName)
-		app.component(
-			componentName,
-			componentConfig.default || componentConfig
-		)
+	createApp({
+		components: { App }
 	})
-
-
-	app.use(router).directive(
-		'gauth', Gauth
-	)
+		.use(router).directive(
+			'gauth', Gauth
+		)
 		.use(store, key)
 		.use(IonicVue)
 		.mount('#app')
