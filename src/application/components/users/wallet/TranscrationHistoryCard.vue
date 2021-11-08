@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import Coins from '../core/Coins.vue'
+import Coins from '../../core/Coins.vue'
 import { formatNumber } from '@utils/commons'
 import { formatTime } from '@utils/dates'
 import { TransactionEntity } from '@modules/users'

@@ -19,7 +19,6 @@
 		/>
 
 
-
 	</div>
 </template>
 
@@ -29,7 +28,7 @@
 import UserQuestionsCard from '@app/components/questions/UserQuestionsCard.vue'
 import { useUserQuestionList } from '@app/composable/users/user/questions'
 import { IonProgressBar } from '@ionic/vue'
-import EmptyState from '../core/emptyState.vue'
+import EmptyState from '../../core/emptyState.vue'
 
 export default {
 	name: 'profileQuestions',

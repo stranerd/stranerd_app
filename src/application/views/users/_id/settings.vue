@@ -1,13 +1,13 @@
 <template>
 	<UserPageWrapper :userId="id">
-		<Settings :userId="id" />
+		<UserSettings :userId="id" />
 	</UserPageWrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
-import Settings from '@app/components/profile/settings.vue'
+import UserSettings from '@app/components/users/users/UserSettings.vue'
 import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 import { useAuth } from '@app/composable/auth/auth'
 
@@ -19,7 +19,7 @@ export default defineComponent({
 		const id = useRoute().params.id
 		if (id !== useAuth().id.value) return `/users/${useAuth().id.value}/settings`
 	}],
-	components: { UserPageWrapper, Settings },
+	components: { UserPageWrapper, UserSettings },
 	setup () {
 		const route = useRoute()
 		const id = route.params.id

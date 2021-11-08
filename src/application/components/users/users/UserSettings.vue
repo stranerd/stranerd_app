@@ -152,10 +152,8 @@ import { defineComponent, ref } from 'vue'
 import { useUpdateProfile } from '@app/composable/users/account'
 import { useAuth } from '@app/composable/auth/auth'
 import { useFileInputs, usePassword, useSubjectAsTags } from '@app/composable/core/forms'
-import { selectedTab } from '@app/composable/profile'
-import { useRouter } from 'vue-router'
-import Subject from '../questions/subjects/Subject.vue'
-import SelectSubject from '../questions/subjects/SelectSubject.vue'
+import Subject from '../../questions/subjects/Subject.vue'
+import SelectSubject from '../../questions/subjects/SelectSubject.vue'
 
 export default defineComponent({
 	name: 'profileSettings',
@@ -179,14 +177,9 @@ export default defineComponent({
 			default: ''
 		}
 	},
-	setup (props) {
-		const router = useRouter()
-		const { hasPassword, id } = useAuth()
+	setup () {
+		const { hasPassword } = useAuth()
 		const { show, toggle } = usePassword()
-		if (props.userId !== id.value) {
-			router.push(`/profile/${id.value}#dashboard`)
-			selectedTab.value = '#dashboard'
-		}
 
 		const { factory, error, loading, updateProfile } = useUpdateProfile()
 		const imageLink = ref((factory.value.avatar as any)?.link ?? '')

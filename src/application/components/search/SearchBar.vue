@@ -11,42 +11,34 @@
 		</form>
 		<div v-if="searchTerm" class="flex flex-col results p-6 gap-6 mt-6">
 			<div v-if="questionsResult.length > 0">
-				<h2 variant="2">
-					Questions
-				</h2>
+				<h2>Questions</h2>
 				<div v-for="question in questionsResult" :key="question.hash">
 					<router-link :to="`/questions/${question.id}`">
-						<DynamicText :truncate="true" class="lead">
+						<span class="lead">
 							{{ extractTextFromHTML(question.body) }}
-						</DynamicText>
+						</span>
 					</router-link>
 				</div>
 			</div>
 			<div v-if="answersResult.length > 0">
-				<h2 variant="2">
-					Answers
-				</h2>
+				<h2>Answers</h2>
 				<div v-for="answer in answersResult" :key="answer.hash">
 					<router-link :to="`/questions/${answer.questionId}#${answer.id}`">
-						<DynamicText class="lead d-block">
+						<span class="lead d-block">
 							{{ extractTextFromHTML(answer.title) }}
-						</DynamicText>
-						<DynamicText v-if="answer.body" :truncate="true">
+						</span>
+						<span v-if="answer.body">
 							{{ extractTextFromHTML(answer.body) }}
-						</DynamicText>
+						</span>
 					</router-link>
 				</div>
 			</div>
 			<div v-if="usersResult.length > 0">
-				<h2 variant="2">
-					Users
-				</h2>
+				<h2>Users</h2>
 				<div v-for="user in usersResult" :key="user.hash">
-					<router-link :to="`/profile/${user.id}#dashboard`" class="d-flex align-items-center gap-0-5">
+					<router-link :to="`/users/${user.id}/`" class="d-flex align-items-center gap-0-5">
 						<Avatar :size="45" :src="user.avatar" />
-						<DynamicText :truncate="true">
-							{{ user.fullName }}
-						</DynamicText>
+						<span>{{ user.fullName }}</span>
 					</router-link>
 				</div>
 			</div>

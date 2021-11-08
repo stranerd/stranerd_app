@@ -48,11 +48,11 @@
 import { star } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useUser } from '@app/composable/users/user'
-import Subject from '../questions/subjects/Subject.vue'
+import Subject from '../../questions/subjects/Subject.vue'
 
 export default {
 	name: 'profileBio',
-	components:{Subject},
+	components: { Subject },
 	props: {
 		userId: {
 			required: true,

@@ -13,7 +13,7 @@
 				<div class="w-full mt-2">
 					<div class="flex items-center font-bold text-dark_gray justify-end normalText">
 						<div class="cursor-pointer flex items-center gap-2" @click="showFilter = !showFilter">
-							<span> {{showFilter ? 'Hide Filters' : 'Filter'}} </span>
+							<span> {{ showFilter ? 'Hide Filters' : 'Filter' }} </span>
 							<ion-icon :class="['text-[22px] mr-1', showFilter ? ' rotate-180' : '']"
 								:icon="filter"></ion-icon>
 						</div>
@@ -68,9 +68,9 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IonSelect, IonSelectOption, IonPage, IonContent, IonSearchbar, IonLabel, IonRange, IonIcon } from '@ionic/vue'
+import { IonContent, IonIcon, IonLabel, IonPage, IonRange, IonSearchbar, IonSelect, IonSelectOption } from '@ionic/vue'
 import { filter } from 'ionicons/icons'
-import NerdRequest from '@app/components/tutors/NerdRequestCard.vue'
+import NerdRequest from '@app/components/users/tutors/NerdRequestCard.vue'
 
 export default defineComponent({
 	name: 'tutor a Nerd',
@@ -83,7 +83,7 @@ export default defineComponent({
 		IonLabel,
 		NerdRequest,
 		IonRange,
-		IonIcon,
+		IonIcon
 	},
 	setup () {
 		const showFilter = ref(false)

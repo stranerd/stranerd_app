@@ -36,8 +36,8 @@ import { defineComponent, ref } from 'vue'
 import { IonContent, IonPage } from '@ionic/vue'
 import 'swiper/swiper-bundle.min.css'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import ExploreTutors from '@app/components/tutors/ExploreTutors.vue'
-import FindTutors from '@app/components/tutors/FindTutors.vue'
+import ExploreTutors from '@app/components/users/tutors/ExploreTutors.vue'
+import FindTutors from '@app/components/users/tutors/FindTutors.vue'
 
 export default defineComponent({
 	name: 'DashboardTutorsPage',

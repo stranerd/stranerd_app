@@ -21,7 +21,7 @@ import { checkmarkDoneOutline } from 'ionicons/icons'
 import { useChats } from '@app/composable/sessions/chats'
 import { formatTime } from '@utils/dates'
 
-const ChatMessage = defineAsyncComponent(() => import('@app/components/chat/ChatMessage.vue'))
+const ChatMessage = defineAsyncComponent(() => import('@app/components/sessions/chat/ChatMessage.vue'))
 
 export default defineComponent({
 	props: {

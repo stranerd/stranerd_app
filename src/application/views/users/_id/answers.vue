@@ -1,20 +1,20 @@
 <template>
 	<UserPageWrapper :userId="id">
-		<Answers :userId="id" />
+		<UserAnswers :userId="id" />
 	</UserPageWrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
-import Answers from '@app/components/profile/answers.vue'
+import UserAnswers from '@app/components/users/users/UserAnswers.vue'
 import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 
 export default defineComponent({
 	name: 'ProfileAnswers',
 	displayName: 'Profile',
 	layout: 'users',
-	components: { UserPageWrapper, Answers },
+	components: { UserPageWrapper, UserAnswers },
 	setup () {
 		const route = useRoute()
 		const id = route.params.id

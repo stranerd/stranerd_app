@@ -95,9 +95,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { chevronForward, documentText, logoYoutube, document, images, ellipseOutline } from 'ionicons/icons'
-import Avatar from '../core/AvatarUser.vue'
-import ShowRatings from '../core/ShowRatings.vue'
+import { chevronForward, document, documentText, ellipseOutline, images, logoYoutube } from 'ionicons/icons'
+import Avatar from '../../core/AvatarUser.vue'
+import ShowRatings from '../../core/ShowRatings.vue'
 import { useUser } from '@app/composable/users/user'
 
 export default defineComponent({
@@ -115,7 +115,7 @@ export default defineComponent({
 		}
 	},
 	components: {
-		Avatar, ShowRatings, IonIcon,
+		Avatar, ShowRatings, IonIcon
 	}
 })
 </script>

@@ -38,9 +38,9 @@ import { chatbubbles, ellipsisVertical, home } from 'ionicons/icons'
 import { openChat } from '@app/composable/sessions/ChatHandler'
 import { useRoute } from 'vue-router'
 
-const ChatList = defineAsyncComponent(() => import('@app/components/chat/ChatList.vue'))
-const FullChat = defineAsyncComponent(() => import('@app/components/chat/Chat.vue'))
-const ChatInfo = defineAsyncComponent(() => import('@app/components/chat/ChatInfo.vue'))
+const ChatList = defineAsyncComponent(() => import('@app/components/sessions/chat/ChatList.vue'))
+const FullChat = defineAsyncComponent(() => import('@app/components/sessions/chat/Chat.vue'))
+const ChatInfo = defineAsyncComponent(() => import('@app/components/sessions/chat/ChatInfo.vue'))
 
 export default {
 	name: 'chatView',

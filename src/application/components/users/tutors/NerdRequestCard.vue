@@ -1,7 +1,8 @@
 <template>
 	<div
 		v-for="n in  10"
-		:key="n" class='py-4 px-4 bg-light_gray mt-6  rounded-lg flex flex-col w-full text-xs md:text-sm relative cursor-pointer'>
+		:key="n"
+		class='py-4 px-4 bg-light_gray mt-6  rounded-lg flex flex-col w-full text-xs md:text-sm relative cursor-pointer'>
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
 			<img class="inline h-7 mr-2" src="/assets/images/person-circle.svg" />
@@ -71,10 +72,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonIcon, IonRippleEffect } from '@ionic/vue'
-import { time, calendar, attachOutline, school } from 'ionicons/icons'
+import { attachOutline, calendar, school, time } from 'ionicons/icons'
 import { useRouter } from 'vue-router'
 import { useStore } from '@app/store'
-import Coins from '../core/Coins.vue'
+import Coins from '../../core/Coins.vue'
 
 export default defineComponent({
 	props: {
@@ -123,6 +124,6 @@ export default defineComponent({
 			router,
 			showAnswers
 		}
-	},
+	}
 })
 </script>

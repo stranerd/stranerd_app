@@ -1,20 +1,20 @@
 <template>
 	<UserPageWrapper :userId="id">
-		<Questions :userId="id" />
+		<UserQuestions :userId="id" />
 	</UserPageWrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
-import Questions from '@app/components/profile/questions.vue'
+import UserQuestions from '@app/components/users/users/UserQuestions.vue'
 import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 
 export default defineComponent({
 	name: 'ProfileQuestions',
 	displayName: 'Profile',
 	layout: 'users',
-	components: { UserPageWrapper, Questions },
+	components: { UserPageWrapper, UserQuestions },
 	setup () {
 		const route = useRoute()
 		const id = route.params.id

@@ -24,14 +24,16 @@
 				<div class="w-1/2 pr-2">
 					<div class="flex flex-col rounded-lg bg-light_gray py-9 px-4 gap-3 justify-center items-center">
 						<h4 class=" text-icon_inactive font-bold">Questions</h4>
-						<h4 class="text-base md:text-lg text-dark_gray font-bold">{{ formatNumber(user.meta.questions)
+						<h4 class="text-base md:text-lg text-dark_gray font-bold">{{
+							formatNumber(user.meta.questions)
 						}}</h4>
 					</div>
 				</div>
 				<div class="w-1/2 pl-2">
 					<div class="flex flex-col rounded-lg bg-light_gray py-5 px-4 gap-3 justify-center items-center">
 						<h4 class=" text-icon_inactive font-bold">Answers</h4>
-						<h4 class="text-base md:text-lg text-dark_gray font-bold">{{ formatNumber(user.meta.answers)
+						<h4 class="text-base md:text-lg text-dark_gray font-bold">{{
+							formatNumber(user.meta.answers)
 						}}</h4>
 						<div class="flex flex-row items-center">
 							<ion-icon :icon="star" class="text-[20px] text-star_yellow mr-1"></ion-icon>
@@ -42,14 +44,16 @@
 				<div class="w-1/2 pr-2 mt-2 lg:mt-4">
 					<div class="flex flex-col rounded-lg bg-light_gray py-9 px-4 gap-3 justify-center items-center">
 						<h4 class=" text-icon_inactive font-bold">Sessions</h4>
-						<h4 class="text-base md:text-lg text-dark_gray font-bold">{{ formatNumber(user.meta.sessions)
+						<h4 class="text-base md:text-lg text-dark_gray font-bold">{{
+							formatNumber(user.meta.sessions)
 						}}</h4>
 					</div>
 				</div>
 				<div class="w-1/2 pl-2 mt-2 lg:mt-4">
 					<div class="flex flex-col rounded-lg bg-light_gray py-9 px-4 gap-3 justify-center items-center">
 						<h4 class=" text-icon_inactive font-bold">Joined</h4>
-						<h4 class="text-sm md:text-lg text-dark_gray font-bold">{{ formatTime(user.dates.createdAt)
+						<h4 class="text-sm md:text-lg text-dark_gray font-bold">{{
+							formatTime(user.dates.createdAt)
 						}}</h4>
 					</div>
 				</div>
@@ -63,16 +67,16 @@
 
 import { IonIcon, IonProgressBar } from '@ionic/vue'
 import { defineAsyncComponent } from 'vue'
-
-const progressBar = defineAsyncComponent(() => import('@app/components/profile/progressRing.vue'))
 import { star } from 'ionicons/icons'
 import { useUser } from '@app/composable/users/user'
 import { formatNumber, pluralize } from '@utils/commons'
 import { formatTime } from '@utils/dates'
 
+const progressBar = defineAsyncComponent(() => import('@app/components/users/users/ProgressRing.vue'))
+
 export default {
 	name: 'profileDashboard',
-	components: { IonIcon, progressBar, IonProgressBar, },
+	components: { IonIcon, progressBar, IonProgressBar },
 	props: {
 		userId: {
 			required: true,
@@ -87,7 +91,7 @@ export default {
 			formatNumber,
 			formatTime,
 			pluralize,
-			star,
+			star
 		}
 	}
 }

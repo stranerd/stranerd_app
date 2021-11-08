@@ -8,7 +8,7 @@
 			<span class="font-bold normalText text-main_dark">
 				{{ tutor.bio.fullName }}
 			</span>
-			<img alt="ask a question" class="w-[14px] md:w-4" src="../../assets/images/icons/verified.svg">
+			<img alt="ask a question" class="w-[14px] md:w-4" src="../../../assets/images/icons/verified.svg">
 		</div>
 
 		<show-ratings :rating="4" />
