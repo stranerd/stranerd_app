@@ -13,7 +13,7 @@
 
 		<show-ratings :rating="4" />
 
-		<a class="mt-2 font-bold cursor-pointer normalText border-[1px] py-2 md:py-2 md:px-4 px-2 text-icon_inactive rounded-xl border-icon_inactive"
+		<a class="mt-2 font-bold cursor-pointer text-sm border-[1px] py-2  px-2 text-icon_inactive rounded-xl border-icon_inactive"
 			@click="requestNewSession">
 			Request a session
 		</a>

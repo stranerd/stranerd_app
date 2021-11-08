@@ -6,6 +6,7 @@
 					v-model.trim="searchTerm"
 					class="form-control"
 					placeholder="Search for anything..."
+					cancel-button-icon="never"
 				></ion-searchbar>
 			</div>
 		</form>
