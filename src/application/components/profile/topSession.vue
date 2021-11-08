@@ -20,23 +20,29 @@
 		class="col-span-12 grid grid-cols-12 border-b-[1px] border-faded_gray mt-5 mb-5 lg:rounded-br-3xl lg:rounded-bl-3xl ">
 		<div
 			class=" col-span-12 sm:place-content-center md:col-start-2 md:col-end-12 lg:col-start-3 lg:col-end-11 lg:justify-center lg:items-center flex flex-row  px-3 headings gap-5 text-icon_inactive font-bold  whitespace-normal overflow-x-auto">
-			<div :class="selectedTab == '#dashboard' ? 'border-b-4 text-dark_gray border-primary' : ''" class="pb-2 pr-3 cursor-pointer"
+			<div :class="selectedTab == '#dashboard' ? 'border-b-4 text-dark_gray border-primary' : ''"
+				class="pb-2 pr-3 cursor-pointer"
 				@click="goToTab('#dashboard')">
 				Dashboard
 			</div>
-			<div :class="selectedTab == '#bio' ? 'border-b-4 text-dark_gray border-primary' : ''" class="pb-2  pr-3 cursor-pointer"
+			<div :class="selectedTab == '#bio' ? 'border-b-4 text-dark_gray border-primary' : ''"
+				class="pb-2  pr-3 cursor-pointer"
 				@click="goToTab('#bio')">
 				Bio
 			</div>
-			<div :class="selectedTab == '#questions' ? 'border-b-4 text-dark_gray border-primary' : ''" class="pb-2  pr-3 cursor-pointer"
+			<div :class="selectedTab == '#questions' ? 'border-b-4 text-dark_gray border-primary' : ''"
+				class="pb-2  pr-3 cursor-pointer"
 				@click="goToTab('#questions')">
 				Questions
 			</div>
-			<div :class="selectedTab == '#answers' ? 'border-b-4 text-dark_gray border-primary' : ''" class="pb-2  pr-3 cursor-pointer"
+			<div :class="selectedTab == '#answers' ? 'border-b-4 text-dark_gray border-primary' : ''"
+				class="pb-2  pr-3 cursor-pointer"
 				@click="goToTab('#answers')">
 				Answers
 			</div>
-			<div v-if="id === userId" :class="selectedTab == '#settings' ? 'border-b-4 text-dark_gray border-primary' : ''" class="pb-2  pr-3 cursor-pointer"
+			<div v-if="id === userId"
+				:class="selectedTab == '#settings' ? 'border-b-4 text-dark_gray border-primary' : ''"
+				class="pb-2  pr-3 cursor-pointer"
 				@click="goToTab('#settings')">
 				Settings
 			</div>
@@ -44,7 +50,7 @@
 	</div>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { computed, defineComponent } from 'vue'
 
 import { star } from 'ionicons/icons'
 import { selectedTab } from '@app/composable/profile'
@@ -55,9 +61,7 @@ import ShowRatings from '../core/ShowRatings.vue'
 import { setNewSessionTutorIdBio } from '@app/composable/sessions/sessions'
 import { useRouter } from 'vue-router'
 import PageLoading from '../core/PageLoading.vue'
-import { useSessionModal} from '@app/composable/core/modals'
-
-
+import { useSessionModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	props: {

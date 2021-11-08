@@ -78,9 +78,9 @@
 		<div class="flex flex-col gap-2">
 			<h2 class="headings font-bold text-dark_gray">Best Subject</h2>
 			<SelectSubject
+				v-model:subject-id="factory.strongestSubject"
 				:exclude="factory.weakerSubjects"
 				:show-all="false"
-				v-model:subject-id="factory.strongestSubject"
 				class="p-0 select"
 			/>
 			<span v-if="factory.strongestSubject">
@@ -140,12 +140,12 @@ import {
 	IonButton,
 	IonIcon,
 	IonInput,
+	IonProgressBar,
 	IonRippleEffect,
 	IonSelect,
 	IonSelectOption,
 	IonSpinner,
-	IonTextarea,
-	IonProgressBar
+	IonTextarea
 } from '@ionic/vue'
 import { image } from 'ionicons/icons'
 import { defineComponent, ref } from 'vue'
@@ -170,9 +170,8 @@ export default defineComponent({
 		IonButton,
 		IonProgressBar,
 		Subject,
-		SelectSubject,
+		SelectSubject
 	},
-
 	props: {
 		userId: {
 			type: String,
@@ -180,7 +179,7 @@ export default defineComponent({
 			default: ''
 		}
 	},
-	setup (props: any) {
+	setup (props) {
 		const router = useRouter()
 		const { hasPassword, id } = useAuth()
 		const { show, toggle } = usePassword()

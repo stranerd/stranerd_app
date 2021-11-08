@@ -49,7 +49,7 @@ const topSession = defineAsyncComponent(() => import('@app/components/profile/to
 const Dashboard = defineAsyncComponent(() => import('@app/components/profile/dashboard.vue'))
 const Questions = defineAsyncComponent(() => import('@app/components/profile/questions.vue'))
 const Reviews = defineAsyncComponent(() => import('@app/components/profile/reviews.vue'))
-const Answers = defineAsyncComponent(() => import('@app/components/profile/UserAnswerList.vue'))
+const Answers = defineAsyncComponent(() => import('@app/components/profile/answers.vue'))
 const Bio = defineAsyncComponent(() => import('@app/components/profile/bio.vue'))
 const Settings = defineAsyncComponent(() => import('@app/components/profile/settings.vue'))
 

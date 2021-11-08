@@ -117,6 +117,7 @@
 		</div>
 	</div>
 </template>
+
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
@@ -146,6 +147,5 @@ export default defineComponent({
 			search
 		}
 	}
-
 })
 </script>
