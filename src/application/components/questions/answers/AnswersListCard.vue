@@ -14,10 +14,10 @@
 
 			<div class="flex flex-row items-center justify-between">
 				<div class="flex flex-row items-center text-primary font-bold cursor-pointer"
-					 @click="showExplanation = !showExplanation">
+					@click="showExplanation = !showExplanation">
 					<span class="mr-1">Explanation</span>
 					<IonIcon v-if="showExplanation" :icon="showExplanation ? chevronUp : chevronDown"
-							 class="text-[22px]" />
+						class="text-[22px]" />
 				</div>
 				<div class="flex flex-row items-center text-primary font-bold">
 					<span class="mr-1">Comments</span>

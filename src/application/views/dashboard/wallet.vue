@@ -2,9 +2,9 @@
 	<IonPage>
 		<IonContent>
 			<div class="col-span-12 px-3">
-						<span class="font-bold text-dark_gray headings mb-3">
-							Available balance
-						</span>
+				<span class="font-bold text-dark_gray headings mb-3">
+					Available balance
+				</span>
 				<BalanceCard :user="user" />
 				<TransactionHistory :user-id="id" />
 			</div>

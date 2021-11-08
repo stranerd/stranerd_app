@@ -1,279 +1,163 @@
 <template>
-	<form class="d-flex flex-column gap-1-5" @submit.prevent="updateProfile">
-		<div class="mx-auto">
-			<div class="position-relative mx-auto">
-				<img
-					:src="imageLink || DEFAULT_PROFILE_IMAGE"
-					alt=""
-					style="width: 72px; height: 72px; border-radius: 10rem; border: 1.5px solid transparent;"
-				>
-				<i
-					v-if="imageLink"
-					class="fas fa-times position-absolute rounded-pill text-danger"
-					style="z-index: 1; right: 0; bottom: 0; font-size: 1.5rem;"
-					@click="removeImage"
-				/>
-			</div>
-			<DynamicText v-if="factory.errors.avatar" class="small text-danger d-block">
-				{{ factory.errors.avatar }}
-			</DynamicText>
-		</div>
-		<div class="form-group">
-			<label id="uploadbtn" class="px-3 bg-tags text-primary border border-line text-center" for="picture">
-				{{ imageLink ? 'Change' : 'Upload' }} Profile Picture
-			</label>
-			<input
-				id="picture"
-				accept="image/*"
-				class="d-none"
-				name="file"
-				type="file"
-				@change.prevent="catchFiles"
+	<div class="relative flex">
+		<IonInput
+			v-model="term"
+			:placeholder="placeholder"
+			autocomplete="autocomplete"
+			class="form-control w-100"
+			type="text"
+			@keydown.enter.prevent="onEnter"
+			@keydown.down.prevent="onDown"
+			@keydown.up.prevent="onUp"
+		/>
+		<div v-if="value && open" class="suggestions">
+			<a
+				v-for="(suggestion, i) in matches"
+				:key="suggestion.value"
+				:class="{'isActive': current === i}"
+				@click="select(suggestion.search)"
 			>
-		</div>
-		<div class="form-group d-flex flex-column flex-md-row gap-1">
-			<div class="flex-grow-1 w-100">
-				<input
-					id="fName"
-					v-model="factory.first"
-					:class="{'is-invalid': factory.errors.first}"
-					autocomplete="first-name"
-					class="form-control"
-					placeholder="First Name"
-				>
-				<DynamicText v-if="factory.errors.first" class="small text-danger d-block">
-					{{ factory.errors.first }}
-				</DynamicText>
-			</div>
-		</div>
-		<div class="form-group d-flex flex-column">
-			<div class="flex-grow-1 w-100">
-				<input
-					id="lName"
-					v-model="factory.last"
-					:class="{'is-invalid': factory.errors.last}"
-					autocomplete="last-name"
-					class="form-control"
-					placeholder="Last Name"
-				>
-				<DynamicText v-if="factory.errors.last" class="small text-danger d-block">
-					{{ factory.errors.last }}
-				</DynamicText>
-			</div>
-		</div>
-		<div class="form-group w-100 justify-content-between d-flex align-items-center">
-			<span class="text-dark fw-bold">
-				What subject are you strongest in?
-			</span>
-			<SelectSubject
-				:exclude="factory.weakerSubjects"
-				:show-all="false"
-				v-model:subject-id="factory.strongestSubject"
-				class="p-0 select"
-			/>
-		</div>
-		<span v-if="factory.strongestSubject">
-			Strongest subject chosen: <Subject :subject-id="factory.strongestSubject" />
-		</span>
-		<DynamicText v-if="factory.errors.strongestSubject" class="small text-danger d-block">
-			{{ factory.errors.strongestSubject }}
-		</DynamicText>
+				<DynamicText>{{ suggestion.title }}</DynamicText>
 
-		<div class="form-group w-100 justify-content-between d-flex align-items-center">
-			<span class="text-dark fw-bold">
-				What subject are you also good in?
-			</span>
-			<SelectSubject
-				:exclude="[factory.strongestSubject]"
-				:show-all="false"
-				:subject-id="sTag"
-				class="p-0 select"
-			/>
+			</a>
+			<a v-if="matches.length === 0" class="text-lowercase">
+				<span class="text-capitalize">No</span> option matches '{{ value }}'
+			</a>
 		</div>
-		<DynamicText v-if="factory.errors.weakerSubjects" class="small text-danger d-block">
-			{{ factory.errors.weakerSubjects }}
-		</DynamicText>
-		<div class="d-flex gap-0-5">
-			<span
-				v-for="subTag in factory.weakerSubjects"
-				:key="subTag"
-				class="p-0-5 d-flex gap-0-5 cursor-pointer btn-dark rounded-3"
-				@click="removeTag(subTag)"
-			>
-				<DynamicText class="text-white">
-					<Subject :subject-id="subTag" />
-				</DynamicText>
-				<span class="text-danger">&times;</span>
-			</span>
-		</div>
-		<div class="form-group">
-			<textarea
-				id="description"
-				v-model="factory.description"
-				:class="{'is-invalid': factory.errors.description}"
-				class="form-control"
-				placeholder="Write a short description about yourself"
-				rows="6"
-			/>
-			<DynamicText v-if="factory.errors.description" class="small text-danger d-block">
-				{{ factory.errors.description }}
-			</DynamicText>
-		</div>
-		<template v-if="hasPassword">
-			<hr>
-			<p class="small text-center mt-n1">
-				Fill this if you want to update your password
-			</p>
-			<div class="form-group">
-				<input
-					id="oldPassword"
-					v-model="factory.oldPassword"
-					:class="{'is-invalid': factory.errors.oldPassword}"
-					:type="show ? 'text' : 'password'"
-					class="form-control"
-					placeholder="Old Password"
-				>
-				<DynamicText v-if="factory.errors.password" class="small text-danger d-block">
-					{{ factory.errors.password }}
-				</DynamicText>
-			</div>
-			<div class="form-group">
-				<input
-					id="password"
-					v-model="factory.password"
-					:class="{'is-invalid': factory.errors.password}"
-					:type="show ? 'text' : 'password'"
-					class="form-control"
-					placeholder="New Password"
-				>
-				<DynamicText v-if="factory.errors.password" class="small text-danger d-block">
-					{{ factory.errors.password }}
-				</DynamicText>
-			</div>
-			<div class="form-group">
-				<input
-					id="cPassword"
-					v-model="factory.cPassword"
-					:class="{'is-invalid': factory.errors.cPassword}"
-					:type="show ? 'text' : 'password'"
-					class="form-control"
-					placeholder="Confirm New Password"
-				>
-				<DynamicText v-if="factory.errors.cPassword" class="small text-danger d-block">
-					{{ factory.errors.cPassword }}
-				</DynamicText>
-			</div>
-		</template>
-		<div class="d-flex justify-content-between align-items-center gap-1">
-			<button class="btn btn-dark w-50 mx-0" type="button" @click="cancel">
-				Cancel
-			</button>
-			<button :disabled="loading || !factory.valid" class="btn btn-primary w-50 mx-0" type="submit">
-				Save
-			</button>
-		</div>
-		<PageLoading v-if="loading" />
-		<DisplayError :error="error" />
-	</form>
+	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue'
-import { useUpdateProfile } from '@app/composable/users/account'
-import { useAuth } from '@app/composable/auth/auth'
-import { useFileInputs, usePassword, useSubjectAsTags } from '@app/composable/core/forms'
-import { isClient } from '@utils/environment'
-import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
-import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
-import Subject from '@app/components/questions/subjects/Subject.vue'
+import { computed, defineComponent, PropType, ref } from 'vue'
+import {IonInput } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'AccountProfileForm',
-	components: { SelectSubject, Subject },
+	name: 'AutoComplete',
+	components:{IonInput},
 	props: {
-		cancel: {
-			required: true,
-			type: Function as PropType<() => {}>
+		icon: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
+		suggestions: {
+			type: Array as PropType<{ search: string, value: string, title: string }[]>,
+			required: true
+		},
+		value: {
+			type: String,
+			required: true
+		},
+		default: {
+			type: Object as PropType<{ search: string, value: string, title: string }>,
+			required: true
+		},
+		placeholder: {
+			type: String,
+			required: false,
+			default: ''
 		}
 	},
-	setup () {
-		const { hasPassword } = useAuth()
-		const { show, toggle } = usePassword()
-		const { factory, error, loading, updateProfile } = useUpdateProfile()
-		const imageLink = ref((factory.value.avatar as any)?.link ?? '')
-		const { catchFiles } = useFileInputs((file) => {
-			if (isClient()) imageLink.value = window.URL.createObjectURL(file)
-			factory.value.avatar = file
+	setup (props, { emit }) {
+		const open = ref(false)
+		const current = ref(0)
+
+		const matches = computed({
+			get: () => props.suggestions.filter(
+				(s) => s.search.toLowerCase().includes(props.value.toLowerCase())
+			),
+			set: () => {
+			}
 		})
-		const removeImage = () => {
-			imageLink.value = ''
-			factory.value.avatar = undefined
+
+		const update = (value: string) => {
+			if (!open.value) {
+				open.value = true
+				current.value = 0
+			}
+			if (!value) return emit('update:value', { term: value, ...props.default })
+			const match = props.suggestions.find(
+				(s) => s.search.toLowerCase() === value.toLowerCase()
+			)
+			return emit('update:value', { term: value, ...(match ?? props.default) })
+		}
+		const select = (value: string) => {
+			update(value)
+			open.value = false
 		}
 
-		const { sTag, removeTag } = useSubjectAsTags(
-			(sTag: string) => factory.value.addWeakerSubjects(sTag),
-			(sTag: string) => factory.value.removeWeakerSubjects(sTag)
-		)
-		return {
-			hasPassword, show, toggle, catchFiles, imageLink, removeImage, sTag, removeTag,
-			factory, error, loading, updateProfile, DEFAULT_PROFILE_IMAGE
+		const term = computed({
+			get: () => props.value,
+			set: update
+		})
+
+		const onEnter = () => {
+			select(matches.value[current.value].search)
+			open.value = false
 		}
+		const onUp = () => current.value > 0 ? current.value-- : 0
+		const onDown = () => {
+			const index = matches.value.length - 1
+			return current.value < index ? current.value++ : index
+		}
+
+		return { open, current, matches, term, update, select, onEnter, onUp, onDown }
 	}
-
 })
 </script>
 
 <style lang="scss" scoped>
-	form {
-		max-width: 45rem;
-		margin: 0 auto;
+	ion-input {
+		--background: #F7F7FC !important;
+		--padding-start: 1.8rem !important;
+		--padding-end: 1.5rem !important;
+		--padding-top: .69rem !important;
+		--padding-bottom: .69rem !important;
+		--color: $color-dark !important;
+		--placeholder-color: $color-dark !important;
+		border-radius: 10px;
+		margin-bottom: 1.25rem;
 	}
-
-	label {
-		box-sizing: border-box;
-		border-radius: 0.375rem;
-		border: 1px solid $color-line;
-		font-size: 1.125rem;
-		text-align: center;
-		height: 3rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	input, textarea {
-		background: $color-white;
-		color: $color-sub;
-		border-radius: 0.375rem;
-		border: 1px solid $color-line;
-		font-size: 1.125rem;
-		outline: none;
-		min-height: 3rem;
-		padding: 0.5rem;
-		padding-left: 24px !important;
-	}
-
-	button {
+	.filter {
+		padding: 1rem;
+		border-radius: 12px 0 0 12px;
+		width: 5rem;
 		display: grid;
 		place-items: center;
-		outline: none;
-		border-radius: 6px;
-		border: none;
-		font-size: 24px;
-		color: white;
-		margin: 0 12px;
 	}
 
-	.select {
-		flex-grow: 1;
-		color: $color-sub;
-		box-sizing: border-box;
-		max-width: 40%;
-		margin: 0;
-		border-radius: 0.1rem;
-		box-shadow: -5px 5px 15px rgba($color-primary, 0.1);
+	input.form-control {
+		font-size: 1em;
+		line-height: 1em;
+		color: inherit;
+		border: 0;
+		outline: 0;
+		background-color: inherit;
+		box-shadow: none;
+		min-height: unset;
+		padding: 0.5em;
+	}
+
+	.suggestions {
+		z-index: 3;
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		width: 100%;
+		top: 100%;
+		background: $color-white;
 		border: 1px solid $color-line;
-		background-color: $color-white;
-		padding: 0.5rem;
+		border-radius: 0.25rem;
+
+		& > * {
+			padding: 0.5rem 1rem;
+			border-bottom: 1px solid $color-line;
+			text-transform: capitalize;
+		}
+
+		.isActive {
+			background-color: $color-primary;
+			color: $color-white;
+		}
 	}
 </style>

@@ -1,13 +1,13 @@
 <template>
 	<ion-card
 
-		:class="[ style ,' md:min-w-[17rem] md:h-[8.7rem] !m-0 min-w-[242px] h-[162px]  md:rounded-xl rounded-md flex flex-col gap-3 box-border  cardPadding']"
+		:class="[ style ,' md:min-w-[17rem] md:h-[10.7rem] !m-0 min-w-[242px] h-[162px]  md:rounded-xl rounded-md flex flex-col gap-3 box-border  cardPadding']"
 	>
 		<div class="flex items-center justify-between w-full">
 			<div class="flex items-center gap-2">
 				<avatar
 					:size="24"
-					class="!h-[14px] !w-[14px] md:!h-[24px] md:!w-[24px] "
+					class="!h-[20px] !w-[20px] md:!h-[24px] md:!w-[24px] "
 				/>
 				<span class="font-bold text-dark_gray normalText">
 					Timmy Martin
@@ -22,9 +22,8 @@
 		</div>
 
 		<div>
-			<span class="normalText">
-				From the top of a building with a height
-				degrees to the horizontal plane at......
+			<span class="normalText whitespace-pre-line" >
+				{{question.trimmedBody}}
 			</span>
 
 		</div>
@@ -43,6 +42,8 @@
 <script>
 import { IonCard } from '@ionic/vue'
 import Avatar from '@app/components/core/Avatar.vue'
+import { QuestionEntity } from '@modules/questions'
+import { useSubject } from '@app/composable/questions/subjects'
 
 export default {
 	name: 'TutorCard',
@@ -51,6 +52,9 @@ export default {
 		style: {
 			required: false,
 			type: String,
+		},
+		question: {
+			type: QuestionEntity
 		}
 	}
 

@@ -20,19 +20,19 @@
 
 			<div class="w-full flex flex-col lg:flex-row lg:justify-between w-full">
 				<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">
-				<span v-for="tag in question.tags" :key="tag">
-					<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg inline-block">
-						{{ tag }}
+					<span v-for="tag in question.tags" :key="tag">
+						<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg inline-block">
+							{{ tag }}
+						</span>
 					</span>
-				</span>
 				</div>
 
 				<div class="mt-2 flex flex-row items-center">
 					<span class="font-bold text-icon_inactive lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 					<div :class="`flex flex-row-reverse items-center flex-grow`">
 						<span class="font-bold text-icon_inactive">{{
-								question.answers.length
-							}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
+							question.answers.length
+						}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
 						<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3" />
 					</div>
 				</div>
@@ -42,8 +42,8 @@
 		<span v-if="question.isAnswered" />
 		<CreateAnswer v-else-if="showAddAnswer" :question="question" class="mt-8" />
 		<button v-else-if="showAnswerButton"
-				class="py-3 px-4 mt-1 justify-center rounded-lg text-white bg-dark_gray w-full font-bold flex flex-row items-center"
-				@click="openAnswerModal(question)">
+			class="py-3 px-4 mt-1 justify-center rounded-lg text-white bg-dark_gray w-full font-bold flex flex-row items-center"
+			@click="openAnswerModal(question)">
 			<span class="mr-2">Add your answer</span>
 			<span class="h-1 w-1 rounded-full bg-white mr-2"></span>
 			<span class="mr-1 text-sm">+{{ question.creditable }}</span>

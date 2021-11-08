@@ -36,7 +36,6 @@ export default {
 	setup (props: any) {
 		const { answers, error, loading, hasMore, fetchOlderAnswers } = useUserAnswerList(props.userId)
 
-		console.log(answers.value.length)
 		return {
 			answers, error, loading, hasMore,
 			fetchOlderAnswers

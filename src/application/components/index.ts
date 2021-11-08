@@ -8,8 +8,6 @@ export const registerComponentGlobally = (app: any, folder: string)=>{
 		regex
 	)
 
-	console.log(requireComponent)
-
 
 	requireComponent.keys().forEach((fileName: any) => {
 		const componentConfig = requireComponent(fileName)

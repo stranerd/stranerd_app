@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<!-- Small screens -->
-		<div class="md:hidden bg-[#F7F7FC] py-2 px-4 flex border-0 items-center justify-between z-50">
+		<div class="md:hidden bg-[#F7F7FC] py-2 px-4 flex border-0 items-center justify-between items-center z-50">
 			<router-link class="flex flex-row items-center w-[15%]" to="/account">
 				<avatar :photo-url="user?.avatar?.link" size="30" />
 			</router-link>
@@ -22,17 +22,20 @@
 				</div>
 			</div>
 
-			<div class="flex flex-row-reverse items-center w-[15%] ">
-				<img class=" h-6" src="/assets/images/search.svg" />
+			<div class="flex items-center w-[15%]">
+				<IonIcon :icon="showSearch ? close : search" class="text-2xl text-icon_inactive"
+						 @click="toggleSearch" />
 			</div>
 
+			<search-bar v-if="showSearch" class="absolute left-0 " />
 		</div>
 
 		<!-- medium screens -->
 		<div class="hidden lg:hidden md:flex bg-white py-3 px-3 w-full top-0 flex-row items-center z-50">
 			<div class="flex flex-row items-center gap-9 w-1/4">
-				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-							 to="/account">
+				<router-link
+					class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
+					to="/account">
 					<avatar :custom-class="'h-6'" :photo-url="user?.avatar?.link" />
 				</router-link>
 			</div>
@@ -41,22 +44,26 @@
 				<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
 					<div class="w-1/3 flex flex-row items-center">
 						<img class="inline h-7 mr-2" src="/assets/images/bronze.svg" />
-						<span class="font-semibold text-sm text-dark_grey ">{{ user?.account.coins.bronze }}</span>
+						<span class="font-semibold text-sm text-dark_grey ">
+									{{ user?.account.coins.bronze }}
+								</span>
 					</div>
 					<div class="w-1/3 flex flex-row items-center justify-center">
 						<img class="inline h-6" src="/assets/images/add.svg" />
 					</div>
 					<div class="w-1/3 flex flex-row-reverse items-center">
-						<span class="font-semibold text-sm text-dark_grey ">{{ user?.account.coins.gold }}</span>
+									<span class="font-semibold text-sm text-dark_grey ">
+										{{ user?.account.coins.gold }}
+									</span>
 						<img class="inline h-7 mr-2" src="/assets/images/gold.svg" />
 					</div>
 				</div>
 			</div>
 
-
 			<div class="flex flex-row-reverse items-center gap-9 w-1/4">
-				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-							 to="/notifications">
+				<router-link
+					class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
+					to="/notifications">
 					<img class="inline h-6" src="/assets/images/bell.svg" />
 				</router-link>
 
@@ -71,18 +78,17 @@
 		<div
 			class="hidden md:hidden lg:flex bg-white py-3 pl-16 pr-[3rem] top-0  flex-row items-center gap-16 z-50">
 			<div class="w-3/4 flex flex-row items-center py-1 gap-6 justify-around">
-				<div class="bg-light_gray py-2 px-6 rounded-lg flex-grow flex flex-row items-center">
-					<input class="focus:outline-none bg-light_gray flex-grow text-sm placeholder-gray-400 py-1 px-1"
-						   placeholder="Search for anything" />
-					<img class="inline h-5" src="/assets/images/search.svg" />
-				</div>
+				<search-bar />
+
 				<router-link class="px-4 py-2 bg-primary text-white rounded-lg" to="/questions/create">
 					<IonIcon :icon="add" class="text-xl" />
 				</router-link>
+
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
 							 to="/notifications">
 					<img class="inline h-5" src="/assets/images/bell.svg" />
 				</router-link>
+
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
 							 to="/account">
 					<avatar :photo-url="user?.avatar?.link" :size="'26'" />
@@ -92,13 +98,17 @@
 				<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
 					<div class="w-1/3 flex flex-row items-center">
 						<img class="inline h-5 mr-2" src="/assets/images/bronze.svg" />
-						<span class="font-semibold text-sm text-dark_grey ">{{ user?.account.coins.bronze }}</span>
+						<span class="font-semibold text-sm text-dark_grey ">{{
+								user?.account.coins.bronze
+							}}</span>
 					</div>
 					<div class="w-1/3 flex flex-row items-center justify-center">
 						<img class="inline h-5" src="/assets/images/add.svg" />
 					</div>
 					<div class="w-1/3 flex flex-row-reverse items-center">
-						<span class="font-semibold text-sm text-dark_grey ">{{ user?.account.coins.gold }}</span>
+									<span class="font-semibold text-sm text-dark_grey ">{{
+											user?.account.coins.gold
+										}}</span>
 						<img class="inline h-5 mr-2" src="/assets/images/gold.svg" />
 					</div>
 				</div>
@@ -107,25 +117,34 @@
 	</div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { add, home } from 'ionicons/icons'
+import { add, close, home, search } from 'ionicons/icons'
 import { useStore } from '@app/store'
 import { useAuth } from '@app/composable/auth/auth'
 import Avatar from '@app/components/core/AvatarUser.vue'
+import SearchBar from '@app/components/search/SearchBar.vue'
 
 export default defineComponent({
+	components: { IonIcon, Avatar, SearchBar },
 	setup () {
 		const { user } = useAuth()
-
+		const showSearch = ref(false)
+		const toggleSearch = () => {
+			showSearch.value = !showSearch.value
+		}
 		const store = useStore()
 		return {
+			close,
+			showSearch,
+			toggleSearch,
 			add,
 			store,
 			home,
-			user
+			user,
+			search
 		}
-	},
-	components: { IonIcon, Avatar }
+	}
+
 })
 </script>
