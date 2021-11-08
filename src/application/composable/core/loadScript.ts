@@ -8,7 +8,6 @@ export const useLoadScript = () => {
 		document.body.appendChild(newScript)
 	}
 	const unload =(script: string): any=>{
-		console.log(document.getElementById(script))
 		if(document.getElementById(script)){
 			const removeScript = document?.getElementById(script) as HTMLElement
 			document.body.removeChild(removeScript)

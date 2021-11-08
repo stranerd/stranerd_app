@@ -24,8 +24,11 @@
 			</div>
 
 			<div class="flex flex-row-reverse items-center  w-[15%] ">
-				<img class=" h-6" src="/assets/images/search.svg" />
+				<ion-icon :icon="search" class="text-2xl text-icon_inactive" v-if="!showSearch" @click="toggleSearch"></ion-icon>
+				<ion-icon :icon="close" class="text-2xl text-icon_inactive" v-else @click="toggleSearch"></ion-icon>
 			</div>
+
+			<search-bar class="absolute left-0 " v-if="showSearch"/>
 
 		</div>
 
@@ -121,9 +124,9 @@
 	</div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { add, home } from 'ionicons/icons'
+import { add, home, search, close } from 'ionicons/icons'
 import { useStore } from '@app/store'
 import { useAuth } from '@app/composable/auth/auth'
 import Avatar from '@app/components/core/AvatarUser.vue'
@@ -134,13 +137,20 @@ export default defineComponent({
 	components: { IonIcon, Avatar, SearchBar },
 	setup () {
 		const { user } = useAuth()
-
+		const showSearch = ref(false)
+		const toggleSearch = ()=>{
+			showSearch.value =  !showSearch.value
+		}
 		const store = useStore()
 		return {
+			close,
+			showSearch,
+			toggleSearch,
 			add,
 			store,
 			home,
-			user
+			user,
+			search
 		}
 	},
 

@@ -44,7 +44,7 @@
 					Users
 				</h2>
 				<div v-for="user in usersResult" :key="user.hash">
-					<router-link :to="`/users/${user.id}`" class="d-flex align-items-center gap-0-5">
+					<router-link :to="`/profile/${user.id}#dashboard`" class="d-flex align-items-center gap-0-5">
 						<Avatar :size="45" :src="user.avatar" />
 						<DynamicText :truncate="true">
 							{{ user.fullName }}
@@ -91,8 +91,11 @@ export default defineComponent({
 		border-radius: .75rem;
 		--icon-color: #8B9EB1;
 		--color: #8B9EB1;
-		min-width:calc(100vw - 74vw);
-		--padding-bottom:4em
+		min-width:26vw;
+		--padding-bottom:4em;
+		@media (max-width: 500px) {
+			min-width:88vw;
+		}
 
 	}
 	form {
@@ -128,7 +131,7 @@ export default defineComponent({
 		z-index: 3;
 		white-space: normal;
 		min-width: 250px;
-		max-width: vw(90);
+		max-width: 90vw;
 		box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 		right: 0.25rem;
 		@media (min-width: 500px) {
