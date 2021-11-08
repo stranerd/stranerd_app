@@ -1,7 +1,7 @@
 <template>
 	<IonPage>
 		<IonContent>
-			<div class="col-span-12 px-3 mb-14 md:px-5">
+			<div class="col-span-12 px-3 md:px-5">
 				<RecentQuestions class="mb-10" />
 				<RecentTransaction />
 			</div>

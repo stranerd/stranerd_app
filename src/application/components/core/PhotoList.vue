@@ -7,22 +7,22 @@
 				v-for="(photo, index) in photos"
 				:key="index + 'photo'" class="!w-24 mr-3">
 				<div :style="`background:url(${photo.link}); background-size:cover; background-position:center;`"
-					 class="rounded-lg border-[1px] border-faded_gray bg-light_gray h-24 md:h-28 w-24 md:w-28"
-					 @click="showImage(photos,index)">
+					class="rounded-lg border-[1px] border-faded_gray bg-light_gray h-24 md:h-28 w-24 md:w-28"
+					@click="showImage(photos,index)">
 				</div>
 			</swiper-slide>
 
 		</swiper>
 
 		<swiper :freeMode="true" class=" hidden w-full md:block"
-				@swiper="onSwiper"
+			@swiper="onSwiper"
 		>
 			<swiper-slide
 				v-for="(photo, index) in photos"
 				:key="index + 'photo'" class="!w-40 mr-4">
 				<div :style="`background:url(${photo.link}); background-size:cover; background-position:center;`"
-					 class="rounded-lg border-[1px] border-faded_gray bg-light_gray h-36 w-40 cursor-pointer"
-					 @click="showImage(photos,index)">
+					class="rounded-lg border-[1px] border-faded_gray bg-light_gray h-36 w-40 cursor-pointer"
+					@click="showImage(photos,index)">
 				</div>
 			</swiper-slide>
 

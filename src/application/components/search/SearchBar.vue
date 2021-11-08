@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<form class="gap-1 d-flex px-1">
+		<form class="gap-1 d-flex">
 			<div class="search-container gap-0-25">
 				<ion-searchbar
 					v-model.trim="searchTerm"
@@ -71,7 +71,7 @@ import Avatar from '../core/Avatar.vue'
 
 export default defineComponent({
 	name: 'SearchBar',
-	 components: { IonSearchbar, Avatar,  },
+	components: { IonSearchbar, Avatar },
 	setup () {
 		const { searchTerm, loading, error, questionsResult, answersResult, usersResult } = useSearch()
 		return {
@@ -85,19 +85,20 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-searchbar {
-		--background:  #F7F7FC;
+		--background: #F7F7FC;
 		--box-shadow: none;
 		--border-radius: .75rem;
 		border-radius: .75rem;
 		--icon-color: #8B9EB1;
 		--color: #8B9EB1;
-		min-width:26vw;
-		--padding-bottom:4em;
+		min-width: 26vw;
+		--padding-bottom: 4em;
 		@media (max-width: 500px) {
-			min-width:88vw;
+			min-width: 88vw;
 		}
 
 	}
+
 	form {
 		flex-grow: 1;
 

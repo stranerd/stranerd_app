@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<div class="w-full flex justify-between">
-		<span class="heading font-bold text-dark_gray">
-			Recent questions
-		</span>
+			<span class="heading font-bold text-dark_gray">
+				Recent questions
+			</span>
 
 			<slider-controller class="hidden lg:flex" />
 
@@ -32,7 +32,7 @@
 						:key="index + 1"
 						class="flex md:!w-[300px] !w-[265px] mr-3">
 						<question :colorClass="0 === index ? 'bg-butter_yellow h-[150px]' : 'bg-light_gray h-[150px]'"
-								  :fromHome="true" :question="question" />
+							:fromHome="true" :question="question" />
 					</swiper-slide>
 
 				</swiper>
@@ -48,7 +48,7 @@
 						:key="index"
 						class="!w-1/3 !pr-3">
 						<question :colorClass="0 === index ? 'bg-butter_yellow h-[155px]' : 'bg-light_gray h-[155px]'"
-								  :fromHome="true" :question="question" />
+							:fromHome="true" :question="question" />
 					</swiper-slide>
 
 				</swiper>

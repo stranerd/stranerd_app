@@ -22,9 +22,9 @@
 				</div>
 			</div>
 
-			<div class="flex items-center w-[15%]">
+			<div class="flex items-center justify-end w-[15%]">
 				<IonIcon :icon="showSearch ? close : search" class="text-2xl text-icon_inactive"
-						 @click="toggleSearch" />
+					@click="toggleSearch" />
 			</div>
 
 			<search-bar v-if="showSearch" class="absolute left-0 " />
@@ -45,16 +45,16 @@
 					<div class="w-1/3 flex flex-row items-center">
 						<img class="inline h-7 mr-2" src="/assets/images/bronze.svg" />
 						<span class="font-semibold text-sm text-dark_grey ">
-									{{ user?.account.coins.bronze }}
-								</span>
+							{{ user?.account.coins.bronze }}
+						</span>
 					</div>
 					<div class="w-1/3 flex flex-row items-center justify-center">
 						<img class="inline h-6" src="/assets/images/add.svg" />
 					</div>
 					<div class="w-1/3 flex flex-row-reverse items-center">
-									<span class="font-semibold text-sm text-dark_grey ">
-										{{ user?.account.coins.gold }}
-									</span>
+						<span class="font-semibold text-sm text-dark_grey ">
+							{{ user?.account.coins.gold }}
+						</span>
 						<img class="inline h-7 mr-2" src="/assets/images/gold.svg" />
 					</div>
 				</div>
@@ -77,20 +77,21 @@
 		<!-- large screens -->
 		<div
 			class="hidden md:hidden lg:flex bg-white py-3 pl-16 pr-[3rem] top-0  flex-row items-center gap-16 z-50">
-			<div class="w-3/4 flex flex-row items-center py-1 gap-6 justify-around">
-				<search-bar />
+			<div class="w-3/4 flex flex-row items-center py-1 gap-6 justify-between">
+				<search-bar class="flex-grow" />
 
-				<router-link class="px-4 py-2 bg-primary text-white rounded-lg" to="/questions/create">
+				<router-link class="px-4 py-2 bg-primary text-white rounded-lg flex items-center"
+					to="/questions/create">
 					<IonIcon :icon="add" class="text-xl" />
 				</router-link>
 
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-							 to="/notifications">
+					to="/notifications">
 					<img class="inline h-5" src="/assets/images/bell.svg" />
 				</router-link>
 
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-							 to="/account">
+					to="/account">
 					<avatar :photo-url="user?.avatar?.link" :size="'26'" />
 				</router-link>
 			</div>
@@ -99,16 +100,16 @@
 					<div class="w-1/3 flex flex-row items-center">
 						<img class="inline h-5 mr-2" src="/assets/images/bronze.svg" />
 						<span class="font-semibold text-sm text-dark_grey ">{{
-								user?.account.coins.bronze
-							}}</span>
+							user?.account.coins.bronze
+						}}</span>
 					</div>
 					<div class="w-1/3 flex flex-row items-center justify-center">
 						<img class="inline h-5" src="/assets/images/add.svg" />
 					</div>
 					<div class="w-1/3 flex flex-row-reverse items-center">
-									<span class="font-semibold text-sm text-dark_grey ">{{
-											user?.account.coins.gold
-										}}</span>
+						<span class="font-semibold text-sm text-dark_grey ">{{
+							user?.account.coins.gold
+						}}</span>
 						<img class="inline h-5 mr-2" src="/assets/images/gold.svg" />
 					</div>
 				</div>

@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<div class="w-full flex justify-between mt-10">
-		<span class="heading font-bold text-dark_gray">
-			Upcoming events
-		</span>
+			<span class="heading font-bold text-dark_gray">
+				Upcoming events
+			</span>
 
 			<slider-controller class="hidden lg:flex" />
 

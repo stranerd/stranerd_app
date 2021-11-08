@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<div class="w-full flex justify-between">
-		<span class="heading font-bold text-dark_gray">
-			Recent transactions
-		</span>
+			<span class="heading font-bold text-dark_gray">
+				Recent transactions
+			</span>
 
 			<slider-controller class="hidden lg:flex" />
 
