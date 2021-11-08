@@ -1,7 +1,7 @@
 <template>
 	<div class="d-flex flex-column gap-1 gap-md-2">
 		<ion-button class="w-full font-bold capitalize text-base flex gap-9 justify-center items-center my-6"
-			v-gauth>
+			v-g-auth>
 			<ion-icon :icon="logoGoogle" class="mr-4" size="100px" />
 			<span>Google</span>
 		</ion-button>

@@ -32,7 +32,7 @@ export default defineComponent({
 	components: {
 		AskQuestions, IonPage, IonContent
 	},
-	// middlewares: ['isAuthenticated'],
+	middlewares: ['isAuthenticated'],
 	layout: 'dashboard'
 })
 </script>

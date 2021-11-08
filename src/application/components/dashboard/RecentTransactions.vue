@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between mt-10">
+		<div class="w-full flex justify-between">
 		<span class="heading font-bold text-dark_gray">
-			Upcoming events
+			Recent transactions
 		</span>
 
 			<slider-controller class="hidden lg:flex" />
@@ -13,16 +13,16 @@
 			</div>
 		</div>
 
-		<div class="flex md:gap-6 gap-3 mt-3 lg:hidden">
+		<div class="flex md:gap-6 gap-3 mt-3 mb-8 lg:hidden">
 			<swiper
-				:direction="'horizontal'" :freeMode="true" class="overflow-x-auto"
+				:direction="'horizontal'" :freeMode="true" :spaceBetween="30" class="overflow-x-auto"
 			>
 				<swiper-slide
 					v-for="(card,index) in 10"
 					:key="index"
 
-					class="flex md:!w-[17rem] !w-[12.5rem] mr-3">
-					<ScheduleCard :colorClass="0 === index ? 'bg-light_green' : 'bg-light_gray'" />
+					class="flex md:!w-[17rem] !w-[12.5rem] !mr-4">
+					<TransactionCard :colorClass="0 === index ? 'bg-light_orange' : 'bg-light_gray'" />
 				</swiper-slide>
 
 			</swiper>
@@ -37,13 +37,12 @@
 					v-for="(card,index) in 10"
 					:key="index"
 					class="!w-1/3 !pr-3">
-					<ScheduleCard :colorClass="0 === index ? 'bg-light_green' : 'bg-light_gray'" />
+					<TransactionCard :colorClass="0 === index ? 'bg-light_orange' : 'bg-light_gray'" />
 				</swiper-slide>
 
 			</swiper>
 		</div>
 	</div>
-
 </template>
 
 
@@ -53,11 +52,11 @@ import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/ico
 import SliderController from '@app/components/core/nav/sliderController.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
-import ScheduleCard from '../schedule/ScheduleCard.vue'
+import TransactionCard from '../wallet/TransactionCard.vue'
 
 export default {
-	name: 'Home',
-	components: { IonIcon, SliderController, Swiper, SwiperSlide, ScheduleCard },
+	name: 'RecentTransactions',
+	components: { IonIcon, SliderController, Swiper, SwiperSlide, TransactionCard },
 	setup () {
 		return { chevronForwardOutline, chevronBackOutline, ellipse }
 	}

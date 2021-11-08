@@ -25,15 +25,13 @@
 <script lang="ts">
 import { computed, defineAsyncComponent, defineComponent, onBeforeUnmount, onMounted, PropType, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { arrowBack, search, ellipsisVertical } from 'ionicons/icons'
+import { arrowBack, ellipsisVertical, search } from 'ionicons/icons'
 import { useRouter } from 'vue-router'
 import { handleCloseChat } from '@app/composable/sessions/ChatHandler'
 import { UserEntity } from '@modules/users'
 import { useCountdown, useTimeDifference } from '@app/composable/core/dates'
 import { useAuth } from '@app/composable/auth/auth'
 import { setNewSessionTutorIdBio, useSession } from '@app/composable/sessions/sessions'
-import { analytics } from '@modules/core'
-import { setReportedEntity } from '@app/composable/reports/answers'
 import { useCurrentSession } from '@app/composable/sessions/session'
 
 const Avatar = defineAsyncComponent(() => import('@app/components/core/AvatarUser.vue'))
@@ -121,7 +119,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-function useReportModal() {
-throw new Error('Function not implemented.')
-}

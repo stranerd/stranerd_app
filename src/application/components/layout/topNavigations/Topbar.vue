@@ -1,8 +1,7 @@
 <template>
 	<div>
 		<!-- Small screens -->
-		<div v-if="!store.state.showPage"
-			 class="md:hidden bg-[#F7F7FC] py-[8px] px-4 flex w-full top-0 border-0 flex-row items-center z-50">
+		<div class="md:hidden bg-[#F7F7FC] py-2 px-4 flex border-0 items-center justify-between z-50">
 			<router-link class="flex flex-row items-center w-[15%]" to="/account">
 				<avatar :photo-url="user?.avatar?.link" size="30" />
 			</router-link>
@@ -23,25 +22,19 @@
 				</div>
 			</div>
 
-			<div class="flex flex-row-reverse items-center  w-[15%] ">
+			<div class="flex flex-row-reverse items-center w-[15%] ">
 				<img class=" h-6" src="/assets/images/search.svg" />
 			</div>
 
 		</div>
 
 		<!-- medium screens -->
-		<div v-if="!store.state.showPage "
-			 class="hidden lg:hidden md:flex bg-white py-3 px-3 w-full top-0 flex-row items-center z-50">
+		<div class="hidden lg:hidden md:flex bg-white py-3 px-3 w-full top-0 flex-row items-center z-50">
 			<div class="flex flex-row items-center gap-9 w-1/4">
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
 							 to="/account">
 					<avatar :custom-class="'h-6'" :photo-url="user?.avatar?.link" />
 				</router-link>
-
-				<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
-					<img :size="'28'" src="/assets/images/cap.svg" />
-				</div>
-
 			</div>
 
 			<div class="flex flex-row items-center px-6 w-2/4 justify-center">
@@ -83,22 +76,12 @@
 						   placeholder="Search for anything" />
 					<img class="inline h-5" src="/assets/images/search.svg" />
 				</div>
-				<router-link class="px-4 py-1 bg-primary text-white rounded-lg" to="/questions">
-					<div class="flex flex-col py-1 items-center justify-center">
-						<ion-icon :icon="add" class="text-xl"></ion-icon>
-					</div>
+				<router-link class="px-4 py-2 bg-primary text-white rounded-lg" to="/questions/create">
+					<IonIcon :icon="add" class="text-xl" />
 				</router-link>
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
 							 to="/notifications">
 					<img class="inline h-5" src="/assets/images/bell.svg" />
-				</router-link>
-				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-							 to="/questions">
-					<img class="inline h-5" src="/assets/images/cap.svg" />
-				</router-link>
-				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-							 to="/chat">
-					<img class="inline h-5" src="/assets/images/chatbubble.svg" />
 				</router-link>
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
 							 to="/account">
