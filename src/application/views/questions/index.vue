@@ -4,13 +4,13 @@
 			<div class="col-span-12 md:col-start-3 md:col-end-11 px-3">
 				<div class="rounded-md flex flex-row items-center">
 					<router-link active-class="activeSlideTab"
-								 class="w-1/2 text-center inactiveSlideTab"
-								 to="/questions/">
+						class="w-1/2 text-center inactiveSlideTab"
+						to="/questions/">
 						All Questions
 					</router-link>
 					<router-link active-class="activeSlideTab"
-								 class="w-1/2 text-center inactiveSlideTab"
-								 to="/questions/create">
+						class="w-1/2 text-center inactiveSlideTab"
+						to="/questions/create">
 						Ask your question
 					</router-link>
 				</div>

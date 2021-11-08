@@ -21,7 +21,7 @@
 		<show-ratings :rating="4" />
 
 		<ion-button v-if="showButton" class="w-full font-bold capitalize text-base max-w-[198px]"
-					@click="requestSession">
+			@click="requestSession">
 			Request a session
 		</ion-button>
 

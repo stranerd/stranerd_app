@@ -100,7 +100,7 @@
 					</ion-icon>
 				</div>
 				<button class="rounded-md text-icon_inactive py-2 px-2 mt-1 text border-2 center w-full font-semibold"
-						style="border: 2px solid #8B9EB1;">
+					style="border: 2px solid #8B9EB1;">
 					N500
 				</button>
 			</div>
@@ -109,7 +109,7 @@
 			<div class="flex flex-row  mt-5  text-white gap-4">
 				<div class="w-1/2 flex flex-row justify-center items-center">
 					<button class=" px-6 py-3 relative ion-activatable rounded-lg w-full font-bold bg-dark_gray "
-							@click="closeBuyCoins()">
+						@click="closeBuyCoins()">
 						Cancel
 						<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 					</button>

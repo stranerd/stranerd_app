@@ -39,7 +39,7 @@
 		</div>
 
 		<pre class="py-2 text-dark_gray leading-normal mb-3 lg:mb-5"
-			 v-html="fromViewQuestion ? question.body : question.trimmedBody" />
+			v-html="fromViewQuestion ? question.body : question.trimmedBody" />
 
 		<div
 			:class="`w-full flex flex-col lg:flex-row lg:justify-between ${!fromViewQuestion ? 'absolute bottom-3 left-0 px-4' : ''} w-full `">
@@ -53,11 +53,11 @@
 
 			<div class="mt-2 flex flex-row items-center ">
 				<span v-if="!fromHome"
-					  class="font-bold text-icon_inactive lg:mr-2">{{ formatTime(question.createdAt) }}</span>
+					class="font-bold text-icon_inactive lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 				<div :class="`flex ${fromHome ? 'flex-row' : 'flex-row-reverse'}  items-center flex-grow`">
 					<span class="font-bold text-icon_inactive">{{
-							question.answers.length
-						}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
+						question.answers.length
+					}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
 					<span v-if="!fromHome" class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 "></span>
 				</div>
 			</div>

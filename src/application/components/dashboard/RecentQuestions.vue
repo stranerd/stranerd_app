@@ -63,7 +63,11 @@ import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/ico
 import SliderController from '@app/components/core/nav/sliderController.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
+<<<<<<< HEAD
 import Question from '../questions/QuestionCard.vue'
+=======
+import Question from '../questions/QuestionListCard.vue'
+>>>>>>> f70932dab58cfdcf2548614f415109ad21e3e547
 import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '../core/emptyState.vue'
 
