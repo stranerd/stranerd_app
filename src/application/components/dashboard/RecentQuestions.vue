@@ -30,8 +30,8 @@
 					v-for="(question,index) in questions"
 					:key="index + 1"
 					class="flex md:!w-[300px] !w-[265px] mr-3">
-					<question :colorClass="0 === index ? 'bg-butter_yellow h-[150px]' : 'bg-light_gray h-[150px]'"
-						:fromHome="true" :question="question" />
+					<question :style="0 === index ? 'bg-butter_yellow h-[140px]' : 'bg-light_gray h-[140px]'"
+						:question="question" />
 				</swiper-slide>
 
 			</swiper>
@@ -45,9 +45,9 @@
 				<swiper-slide
 					v-for="(question,index) in questions"
 					:key="index"
-					class="!w-1/3 !pr-3">
-					<question :colorClass="0 === index ? 'bg-butter_yellow h-[155px]' : 'bg-light_gray h-[155px]'"
-						:fromHome="true" :question="question" />
+					class=" md:!w-[18rem] !w-[242px] !pr-24">
+					<question :style="0 === index ? 'bg-butter_yellow ' : 'bg-light_gray '"
+						:question="question" />
 				</swiper-slide>
 
 			</swiper>
@@ -63,7 +63,7 @@ import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/ico
 import SliderController from '@app/components/core/nav/sliderController.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
-import Question from '../questions/question.vue'
+import Question from '../questions/QuestionCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '../core/emptyState.vue'
 
