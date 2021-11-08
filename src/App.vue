@@ -1,7 +1,8 @@
 <template>
 	<ion-app>
 		<AppLayout>
-			<ion-router-outlet class="static h-full" />
+			<!-- TODO: Add custom animation for navigation -->
+			<ion-router-outlet :animated="false" class="static h-full" />
 		</AppLayout>
 	</ion-app>
 </template>

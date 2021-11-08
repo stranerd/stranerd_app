@@ -16,7 +16,7 @@
 					v-if="!notifications.length"
 					btnText="Go To Home"
 					info="You have no notifications yet"
-					route="/dashboard/home"
+					route="/dashboard/"
 				/>
 
 				<template v-else>

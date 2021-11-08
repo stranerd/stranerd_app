@@ -19,7 +19,7 @@
 <script lang="ts">
 
 
-import AnswerCard from '@app/components/questions/answers/AnswerListCard.vue'
+import AnswerCard from '@app/components/questions/answers/UserAnswerListCard.vue'
 import { useUserAnswerList } from '@app/composable/users/user/answers'
 import { IonProgressBar } from '@ionic/vue'
 import EmptyState from '../core/emptyState.vue'

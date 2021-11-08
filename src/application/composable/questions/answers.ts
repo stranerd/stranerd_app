@@ -1,4 +1,4 @@
-import { Ref, ref, onMounted } from 'vue'
+import { onMounted, ref, Ref } from 'vue'
 import {
 	AddAnswer,
 	AnswerEntity,
@@ -11,16 +11,11 @@ import {
 	QuestionEntity,
 	VoteAnswer
 } from '@modules/questions'
-import {
-	useErrorHandler,
-	useListener,
-	useLoadingHandler,
-	useSuccessHandler
-} from '@app/composable/core/states'
+import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@app/composable/core/notifications'
 import { analytics } from '@modules/core'
-import VueRouter, { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const global = {} as Record<string, {
 	answers: Ref<AnswerEntity[]>
@@ -78,22 +73,18 @@ export const useAnswerList = (questionId: string) => {
 }
 
 let answeringQuestion = null as QuestionEntity | null
-export const getAnsweringQuestion = () => answeringQuestion
 export const showAddAnswer = ref(false)
 export const openAnswerModal = (question: QuestionEntity) => {
-	const router = useRouter()
 	answeringQuestion = question
-	router.push(`/questions/${question.id}/answers/create`)
+	showAddAnswer.value = true
 }
 
-export const useCreateAnswer = (question: QuestionEntity | null) => {
+export const useCreateAnswer = () => {
 	const router = useRouter()
 	const factory = ref(new AnswerFactory()) as Ref<AnswerFactory>
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
-
-	answeringQuestion = question
 
 	if (!answeringQuestion) router.replace('/questions')
 	factory.value.questionId = answeringQuestion!.id

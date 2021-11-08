@@ -72,7 +72,7 @@ import { defineComponent, ref } from 'vue'
 import { ellipse, ellipseOutline } from 'ionicons/icons'
 import { useQuestionList } from '@app/composable/questions/questions'
 import { useSubjectList } from '@app/composable/questions/subjects'
-import Question from '@app/components/questions/question.vue'
+import Question from '@app/components/questions/QuestionListCard.vue'
 import EmptyState from '@app/components/core/emptyState.vue'
 
 export default defineComponent({

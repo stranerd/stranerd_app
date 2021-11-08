@@ -11,12 +11,20 @@ import defaultLayout from './default.vue'
 import homeLayout from './home.vue'
 import justifiedLayout from './justified.vue'
 import subpagesLayout from './subpages.vue'
-import questionsLayout from './questions.vue'
+import questionLayout from './question.vue'
+import scheduleLayout from './schedule.vue'
 import { shallowRef, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const components = {
-	authLayout, dashboardLayout, defaultLayout, homeLayout, justifiedLayout, subpagesLayout, questionsLayout
+	authLayout,
+	dashboardLayout,
+	defaultLayout,
+	homeLayout,
+	justifiedLayout,
+	subpagesLayout,
+	questionLayout,
+	scheduleLayout
 } as any
 
 export default {

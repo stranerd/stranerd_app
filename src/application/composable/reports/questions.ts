@@ -1,4 +1,4 @@
-import { ref, onMounted } from 'vue'
+import { onMounted, ref, Ref } from 'vue'
 import {
 	AddQuestionReport,
 	DeleteQuestionReport,
@@ -14,7 +14,7 @@ let reportedEntity = null as string | null
 export const setReportedEntity = (questionId: string) => reportedEntity = questionId
 
 export const useCreateReport = () => {
-	const factory = ref(new ReportFactory())
+	const factory = ref(new ReportFactory()) as Ref<ReportFactory>
 	const { message, setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()

@@ -14,7 +14,7 @@
 		<show-ratings :rating="4" />
 
 		<a class="mt-2 font-bold cursor-pointer normalText border-[1px] py-2 md:py-2 md:px-4 px-2 text-icon_inactive rounded-xl border-icon_inactive"
-			@click="requestNewSession">
+		   @click="requestNewSession">
 			Request a session
 		</a>
 
@@ -27,8 +27,9 @@ import ShowRatings from '@app/components/core/ShowRatings.vue'
 import { UserEntity } from '@modules/users'
 import { defineAsyncComponent } from 'vue'
 import { setNewSessionTutorIdBio } from '@app/composable/sessions/sessions'
+import { useSessionModal } from '@app/composable/core/modals'
+
 const Avatar = defineAsyncComponent(() => import('@app/components/core/AvatarUser.vue'))
-import { useSessionModal} from '@app/composable/core/modals'
 
 export default {
 	name: 'TutorCard',
@@ -36,7 +37,7 @@ export default {
 	props: {
 		style: {
 			required: false,
-			type: String,
+			type: String
 		},
 		showButton: {
 			required: false,

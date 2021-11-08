@@ -14,8 +14,12 @@
 }
 
 @layer utilities {
+	.layout {
+		@apply flex flex-col h-full flex-grow
+	}
+
 	.layout-page {
-		@apply w-full lg:w-[84%] lg:ml-[16%] lg:px-12 relative flex  mt-[64px] md:mt-[74px] flex-row lg:gap-10 lg:mt-[80px] h-screen
+		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow
 	}
 
 	.layout-page-chat {
@@ -31,7 +35,7 @@
 	}
 
 	.layout-body {
-		@apply lg:w-3/4 w-full lg:mt-6 flex flex-col
+		@apply lg:w-3/4 w-full flex flex-col pt-6
 	}
 
 	.layout-body-chat {
