@@ -7,8 +7,6 @@
 					class="form-control"
 					placeholder="Search for anything..."
 				></ion-searchbar>
-
-
 			</div>
 		</form>
 		<div v-if="searchTerm" class="flex flex-col results p-6 gap-6 mt-6">

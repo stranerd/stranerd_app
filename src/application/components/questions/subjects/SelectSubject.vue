@@ -2,11 +2,11 @@
 	<AutoComplete
 		:class="{'showAll': showAll}"
 		:default="def"
+		:icon="hasIcon"
 		:placeholder="showAll ? 'All Subjects' : placeholder"
 		:suggestions="subjects.filter((s) => !exclude.includes(s.id)).map((s) => ({ search: s.name, value: s.id, title: s.name }))"
 		:value="value"
 		class="w-full"
-		:icon="hasIcon"
 		@update:value="update($event)"
 	/>
 </template>
@@ -17,8 +17,8 @@ import { useSubjectList } from '@app/composable/questions/subjects'
 import AutoComplete from '@app/components/core/AutoComplete.vue'
 
 export default defineComponent({
-
 	name: 'SelectSubject',
+	components: { AutoComplete },
 	props: {
 		hasIcon: {
 			type: Boolean,
@@ -54,8 +54,7 @@ export default defineComponent({
 			emit('update:subjectId', res.value)
 		}
 		return { def, subjects, value, update }
-	},
-	components: { AutoComplete },
+	}
 })
 </script>
 
