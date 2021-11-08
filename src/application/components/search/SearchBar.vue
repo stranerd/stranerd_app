@@ -2,56 +2,56 @@
 	<div>
 		<form class="gap-1 d-flex px-1">
 			<div class="search-container gap-0-25">
-				<img alt="" class="sub-icons" src="@app/assets/images/icons/search.svg">
-				<input
+				<ion-searchbar
 					v-model.trim="searchTerm"
 					class="form-control"
 					placeholder="Search for anything..."
-				>
+				></ion-searchbar>
+
+
 			</div>
 		</form>
-		<div v-if="searchTerm" class="d-flex flex-column results p-1-5 gap-1-5 mt-0-5">
+		<div v-if="searchTerm" class="flex flex-col results p-6 gap-6 mt-6">
 			<div v-if="questionsResult.length > 0">
-				<Heading variant="2">
+				<h2 variant="2">
 					Questions
-				</Heading>
+				</h2>
 				<div v-for="question in questionsResult" :key="question.hash">
-					<NuxtLink :to="`/questions/${question.id}`">
+					<router-link :to="`/questions/${question.id}`">
 						<DynamicText :truncate="true" class="lead">
 							{{ extractTextFromHTML(question.body) }}
 						</DynamicText>
-					</NuxtLink>
+					</router-link>
 				</div>
 			</div>
 			<div v-if="answersResult.length > 0">
-				<Heading variant="2">
+				<h2 variant="2">
 					Answers
-				</Heading>
+				</h2>
 				<div v-for="answer in answersResult" :key="answer.hash">
-					<NuxtLink :to="`/questions/${answer.questionId}#${answer.id}`">
+					<router-link :to="`/questions/${answer.questionId}#${answer.id}`">
 						<DynamicText class="lead d-block">
 							{{ extractTextFromHTML(answer.title) }}
 						</DynamicText>
 						<DynamicText v-if="answer.body" :truncate="true">
 							{{ extractTextFromHTML(answer.body) }}
 						</DynamicText>
-					</NuxtLink>
+					</router-link>
 				</div>
 			</div>
 			<div v-if="usersResult.length > 0">
-				<Heading variant="2">
+				<h2 variant="2">
 					Users
-				</Heading>
+				</h2>
 				<div v-for="user in usersResult" :key="user.hash">
-					<NuxtLink :to="`/users/${user.id}`" class="d-flex align-items-center gap-0-5">
+					<router-link :to="`/users/${user.id}`" class="d-flex align-items-center gap-0-5">
 						<Avatar :size="45" :src="user.avatar" />
 						<DynamicText :truncate="true">
 							{{ user.fullName }}
 						</DynamicText>
-					</NuxtLink>
+					</router-link>
 				</div>
 			</div>
-
 			<span
 				v-if="questionsResult.length === 0 && answersResult.length === 0 && usersResult.length === 0"
 				class="lead"
@@ -66,9 +66,12 @@
 import { defineComponent } from 'vue'
 import { useSearch } from '@app/composable/meta/search'
 import { extractTextFromHTML } from '@utils/commons'
+import { IonSearchbar } from '@ionic/vue'
+import Avatar from '../core/Avatar.vue'
 
 export default defineComponent({
 	name: 'SearchBar',
+	 components: { IonSearchbar, Avatar,  },
 	setup () {
 		const { searchTerm, loading, error, questionsResult, answersResult, usersResult } = useSearch()
 		return {
@@ -81,13 +84,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+	ion-searchbar {
+		--background:  #F7F7FC;
+		--box-shadow: none;
+		--border-radius: .75rem;
+		border-radius: .75rem;
+		--icon-color: #8B9EB1;
+		--color: #8B9EB1;
+		min-width:calc(100vw - 74vw);
+		--padding-bottom:4em
+
+	}
 	form {
 		flex-grow: 1;
-		border: 1px solid $color-line;
-		background-color: $color-tags;
-		border-radius: 40px;
-		font-size: 14px;
-		color: $color-sub;
 
 		.search-container {
 			display: flex;

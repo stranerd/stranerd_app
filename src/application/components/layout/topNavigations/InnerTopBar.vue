@@ -75,11 +75,8 @@
 			</div>
 		</div>
 		<div :class="noSideBar ? 'w-[63%]' : 'w-3/4'" class="flex flex-row items-center py-1 gap-6 justify-around">
-			<div class="bg-light_gray py-2 px-6 rounded-lg flex-grow flex flex-row items-center">
-				<input class="focus:outline-none bg-light_gray flex-grow text-sm placeholder-gray-400 py-1 px-1"
-					placeholder="Search for anything" />
-				<ion-icon :icon="search" class="text-xl text-icon_inactive"></ion-icon>
-			</div>
+			<search-bar/>
+
 			<router-link class="px-4 py-1 bg-primary text-white rounded-lg" to="/questions">
 				<div class="flex flex-col py-1 items-center justify-center">
 					<ion-icon :icon="add" class="text-xl"></ion-icon>
@@ -128,9 +125,10 @@ import { useAuth } from '@app/composable/auth/auth'
 import Coins from '../../core/Coins.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { useRoute, useRouter } from 'vue-router'
+import SearchBar from '@app/components/search/SearchBar.vue'
 
 export default defineComponent({
-	components: { IonIcon, Avatar, IonButtons, IonHeader, IonToolbar, IonTitle, Coins },
+	components: { IonIcon, Avatar, IonButtons, IonHeader, IonToolbar, IonTitle, Coins, SearchBar, },
 	props: {
 		isNotDashboard: {
 			type: Boolean,

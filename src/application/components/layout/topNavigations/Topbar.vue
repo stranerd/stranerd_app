@@ -78,11 +78,8 @@
 		<div
 			class="hidden md:hidden lg:flex bg-white py-3 pl-16 pr-[3rem] top-0  flex-row items-center gap-16 z-50">
 			<div class="w-3/4 flex flex-row items-center py-1 gap-6 justify-around">
-				<div class="bg-light_gray py-2 px-6 rounded-lg flex-grow flex flex-row items-center">
-					<input class="focus:outline-none bg-light_gray flex-grow text-sm placeholder-gray-400 py-1 px-1"
-						placeholder="Search for anything" />
-					<img class="inline h-5" src="/assets/images/search.svg" />
-				</div>
+				<search-bar/>
+
 				<router-link class="px-4 py-1 bg-primary text-white rounded-lg" to="/questions">
 					<div class="flex flex-col py-1 items-center justify-center">
 						<ion-icon :icon="add" class="text-xl"></ion-icon>
@@ -130,8 +127,11 @@ import { add, home } from 'ionicons/icons'
 import { useStore } from '@app/store'
 import { useAuth } from '@app/composable/auth/auth'
 import Avatar from '@app/components/core/AvatarUser.vue'
+import SearchBar from '@app/components/search/SearchBar.vue'
+
 
 export default defineComponent({
+	components: { IonIcon, Avatar, SearchBar },
 	setup () {
 		const { user } = useAuth()
 
@@ -143,6 +143,6 @@ export default defineComponent({
 			user
 		}
 	},
-	components: { IonIcon, Avatar }
+
 })
 </script>
