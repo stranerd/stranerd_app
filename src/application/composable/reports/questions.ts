@@ -8,6 +8,7 @@ import {
 	ReportType
 } from '@modules/reports'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useReportModal } from '@app/composable/core/modals'
 import { Alert } from '../core/notifications'
 
 let reportedEntity = null as string | null
@@ -28,7 +29,7 @@ export const useCreateReport = () => {
 			try {
 				await setLoading(true)
 				await AddQuestionReport.call(factory.value)
-				//useReportModal().closeReportQuestion()
+				useReportModal().closeReportQuestion()
 				factory.value.reset()
 				await setMessage('Report sent successfully')
 			} catch (error) {
@@ -52,11 +53,11 @@ const global = {
 	...useLoadingHandler()
 }
 
-/* const pushToReportList = (report: QuestionReportEntity) => {
- const index = global.reports.value.findIndex((r) => r.id === report.id)
- if (index !== -1) global.reports.value.splice(index, 1, report)
- else global.reports.value.push(report)
- } */
+const pushToReportList = (report: QuestionReportEntity) => {
+	const index = global.reports.value.findIndex((r) => r.id === report.id)
+	if (index !== -1) global.reports.value.splice(index, 1, report)
+	else global.reports.value.push(report)
+}
 
 const unshiftToReportList = (report: QuestionReportEntity) => {
 	const index = global.reports.value.findIndex((r) => r.id === report.id)

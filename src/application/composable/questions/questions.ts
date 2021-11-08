@@ -1,5 +1,5 @@
 import { computed, onMounted, Ref, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { Router, useRouter } from 'vue-router'
 import {
 	AddQuestion,
 	DeleteQuestion,
@@ -160,10 +160,7 @@ export const useCreateQuestion = () => {
 				const subject = factory.value.subjectId
 				factory.value.reset()
 				await router.replace(`/questions/${questionId}`)
-				// await analytics.logEvent('ask_question_completed', {
-				// 	questionId, subject
-				// })
-				// useQuestionsModal().closeAskQuestions()
+				await analytics.logEvent('ask_question_completed', { questionId, subject })
 			} catch (error) {
 				await setError(error)
 			}
@@ -222,8 +219,7 @@ export const useQuestion = (questionId: string) => {
 
 let editingQuestion = null as QuestionEntity | null
 export const getEditingQuestion = () => editingQuestion
-export const openQuestionEditModal = (question: QuestionEntity) => {
-	const router = useRouter()
+export const openQuestionEditModal = (question: QuestionEntity, router: Router) => {
 	editingQuestion = question
 	router.push(`/questions/${question.id}/edit`)
 }

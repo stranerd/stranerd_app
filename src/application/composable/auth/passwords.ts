@@ -1,11 +1,6 @@
 import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import {
-	PasswordResetFactory,
-	PasswordResetRequestFactory,
-	ResetPassword,
-	SendPasswordResetEmail
-} from '@modules/auth'
+import { PasswordResetFactory, PasswordResetRequestFactory, ResetPassword, SendPasswordResetEmail } from '@modules/auth'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'

@@ -19,7 +19,7 @@ export const createSession = async (afterAuth: AfterAuthUser, router: Router) =>
 
 	const { [REDIRECT_SESSION_NAME]: redirect } = parseCookie(document.cookie ?? '')
 	document.cookie = serializeToCookie(REDIRECT_SESSION_NAME, '', -1)
-	await window.location.assign(redirect ?? '/dashboard')
+	await router.push(redirect ?? '/dashboard')
 }
 
 export const useSessionSignout = () => {
