@@ -31,16 +31,16 @@ export interface QueryParams {
 
 export interface QueryResults<Model> {
 	pages: {
-		start: number
-		last: number
-		previous: number | null
-		next: number | null
-		current: number
-	}
+		start: number,
+		last: number,
+		previous: number | null,
+		next: number | null,
+		current: number,
+	},
 	docs: {
-		limit: number
-		total: number
+		limit: number,
+		total: number,
 		count: number
-	}
+	},
 	results: Model[]
 }
