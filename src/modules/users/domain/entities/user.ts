@@ -256,10 +256,6 @@ export class UserEntity extends BaseEntity {
 		return this.account.meta
 	}
 
-	get referrals () {
-		return Object.keys(this.account.referrals ?? {})
-	}
-
 	get nerdScoreMessage () {
 		if (this.score / this.expectedScore > 0.75) return 'Your Nerd Score is high. Nice job.'
 		if (this.score / this.expectedScore > 0.5) return 'Your Nerd Score is ok but not there yet. Keep pushing.'

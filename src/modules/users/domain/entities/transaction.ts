@@ -1,9 +1,5 @@
 import { BaseEntity } from '@modules/core'
 
-type TransactionConstructorArgs = {
-	id: string, userId: string, isGold: boolean, event: string, amount: number, createdAt: number, updatedAt: number
-}
-
 export class TransactionEntity extends BaseEntity {
 	public readonly id: string
 	public readonly userId: string
@@ -29,4 +25,6 @@ export class TransactionEntity extends BaseEntity {
 	}
 }
 
-
+type TransactionConstructorArgs = {
+	id: string, userId: string, isGold: boolean, event: string, amount: number, createdAt: number, updatedAt: number
+}

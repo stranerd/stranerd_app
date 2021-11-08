@@ -1,7 +1,5 @@
 import { BaseEntity } from '@modules/core'
 
-type TagConstructorArgs = { id: string, name: string, count: number, createdAt: number, updatedAt: number }
-
 export class TagEntity extends BaseEntity {
 	public readonly id: string
 	public readonly name: string
@@ -19,4 +17,4 @@ export class TagEntity extends BaseEntity {
 	}
 }
 
-
+type TagConstructorArgs = { id: string, name: string, count: number, createdAt: number, updatedAt: number }

@@ -1,9 +1,3 @@
-export interface TransactionToModel {
-	isGold: boolean
-	amount: number
-	event: string
-}
-
 export interface TransactionFromModel extends TransactionToModel {
 	id: string
 	userId: string
@@ -11,4 +5,8 @@ export interface TransactionFromModel extends TransactionToModel {
 	updatedAt: number
 }
 
-
+export interface TransactionToModel {
+	isGold: boolean
+	amount: number
+	event: string
+}

@@ -33,6 +33,7 @@ module.exports = {
 				singleline: { delimiter: 'comma', requireLast: false }
 			}
 		],
+		'@typescript-eslint/no-use-before-define': 'off',
 		'no-tabs': 'off',
 		'no-var': 'error',
 		'no-use-before-define': 'off',

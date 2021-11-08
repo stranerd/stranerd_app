@@ -2,23 +2,6 @@ import { generateDefaultBio, UserBio } from '@modules/users'
 import { BaseEntity, Media } from '@modules/core'
 import { extractTextFromHTML, trimToLength } from '@utils/commons'
 
-type AnswerConstructorArgs = {
-	id: string
-	title: string
-	body: string
-	coins: number
-	questionId: string
-	tags: string[]
-	attachments: Media[]
-	createdAt: number
-	updatedAt: number
-	userId: string
-	userBio: UserBio
-	best: boolean
-	votes: { userId: string, vote: 1 | -1 }[]
-	commentsCount: number
-}
-
 export class AnswerEntity extends BaseEntity {
 	public readonly id: string
 	public readonly title: string
@@ -102,3 +85,19 @@ export class AnswerEntity extends BaseEntity {
 	}
 }
 
+type AnswerConstructorArgs = {
+	id: string
+	title: string
+	body: string
+	coins: number
+	questionId: string
+	tags: string[]
+	attachments: Media[]
+	createdAt: number
+	updatedAt: number
+	userId: string
+	userBio: UserBio
+	best: boolean
+	votes: { userId: string, vote: 1 | -1 }[]
+	commentsCount: number
+}

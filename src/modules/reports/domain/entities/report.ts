@@ -1,42 +1,9 @@
 import { BaseEntity } from '@modules/core'
 import { generateDefaultBio, UserBio } from '@modules/users'
 
-export enum ReportType {
-	questions = 'questions',
-	answers = 'answers',
-	users = 'users'
-}
-
-export type UserReportType = {
-	type: ReportType.users
-	reported: { bio: UserBio, userId: string }
-}
-
-export type QuestionReportType = {
-	type: ReportType.questions
-	reported: { body: string, userId: string }
-}
-
-export type AnswerReportType = {
-	type: ReportType.answers
-	reported: { title: string, body: string, questionId: string, userId: string }
-}
-
 export type Type = {
-	type: ReportType
+	type: ReportType,
 	reported: Record<string, any>
-}
-
-type ReportConstructorArgs = {
-	id: string
-	type: ReportType
-	reporterId: string
-	reportedId: string
-	reporterBio: UserBio
-	reported: Record<string, any>
-	message: string
-	createdAt: number
-	updatedAt: number
 }
 
 export class ReportEntity<T extends Type> extends BaseEntity {
@@ -75,6 +42,24 @@ export class ReportEntity<T extends Type> extends BaseEntity {
 	}
 }
 
+type ReportConstructorArgs = {
+	id: string
+	type: ReportType
+	reporterId: string
+	reportedId: string
+	reporterBio: UserBio
+	reported: Record<string, any>
+	message: string,
+	createdAt: number
+	updatedAt: number
+}
+
+export enum ReportType {
+	questions = 'questions',
+	answers = 'answers',
+	users = 'users'
+}
+
 export class UserReportEntity extends ReportEntity<UserReportType> {
 }
 
@@ -84,3 +69,17 @@ export class QuestionReportEntity extends ReportEntity<QuestionReportType> {
 export class AnswerReportEntity extends ReportEntity<AnswerReportType> {
 }
 
+export type UserReportType = {
+	type: ReportType.users,
+	reported: { bio: UserBio, userId: string }
+}
+
+export type QuestionReportType = {
+	type: ReportType.questions,
+	reported: { body: string, userId: string }
+}
+
+export type AnswerReportType = {
+	type: ReportType.answers,
+	reported: { title: string, body: string, questionId: string, userId: string }
+}

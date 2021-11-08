@@ -2,8 +2,9 @@ import io, { Socket } from 'socket.io-client'
 import { getTokens } from '@utils/tokens'
 import { apiBases } from '@utils/environment'
 import { Listeners, StatusCodes } from '@modules/core'
+import { DefaultEventsMap } from 'socket.io-client/build/typed-events'
 
-let socket = null as Socket<any, any> | null
+let socket = null as Socket<DefaultEventsMap, DefaultEventsMap> | null
 const getSocketBaseAndPath = () => {
 	const stranerdBase = apiBases.STRANERD
 	const splitOnDoubleSlash = stranerdBase.split('//')
@@ -25,7 +26,6 @@ type SocketReturn = { code: StatusCodes, message: string, channel: string }
 
 export async function listenOnSocket<Model> (channel: string, listeners: Listeners<Model>) {
 	const { accessToken } = await getTokens()
-	// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 	// @ts-ignore
 	if (!socket || (!socket.auth.token && accessToken)) {
 		socket = io(getSocketBaseAndPath().domain, {
@@ -61,5 +61,3 @@ export async function listenOnSocket<Model> (channel: string, listeners: Listene
 export async function closeSocket () {
 	socket?.disconnect()
 }
-
-

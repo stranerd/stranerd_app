@@ -1,4 +1,4 @@
-import { UserFromModel } from '../models/user'
+import { UserFromModel, UserToModel } from '../models/user'
 import { UserEntity } from '../../domain/entities/user'
 
 export class UserTransformer {
@@ -9,5 +9,7 @@ export class UserTransformer {
 		})
 	}
 
-	
+	toJSON (_: UserEntity): UserToModel {
+		return {}
+	}
 }
