@@ -4,6 +4,8 @@ import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable
 import { FindSession, GetSessions, ListenToSession, ListenToSessions, SessionEntity } from '@modules/sessions'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@app/composable/core/notifications'
+import { setOtherParticipantId } from '@app/composable/sessions/sessions'
+import { useSessionModal } from '@app/composable/core/modals'
 
 const currentGlobal = {
 	previousSession: ref(null as SessionEntity | null),
@@ -11,8 +13,6 @@ const currentGlobal = {
 	listener: useListener(async () => () => {
 	})
 }
-
-type SessionKey = 'requests' | 'lobby'
 
 const global = {} as Record<SessionKey, {
 	sessions: Ref<SessionEntity[]>
@@ -36,8 +36,8 @@ export const useCurrentSession = () => {
 				const oldDone = currentGlobal.currentSession.value?.done ?? false
 				if (!oldDone && entity?.done) {
 					const id = userId === entity.tutorId ? entity.studentId : entity.tutorId
-					//setOtherParticipantId(id)
-					//useSessionModal().openRatings()
+					setOtherParticipantId(id)
+					useSessionModal().openRatings()
 				}
 				currentGlobal.previousSession.value = currentGlobal.currentSession.value
 				if (entity) currentGlobal.currentSession.value = entity
@@ -172,6 +172,8 @@ const callback = (key: SessionKey, sessions: SessionEntity[], userId: string, ro
 
 export const useRequestSessions = (router: Router) => useSession('requests', router, callback)
 export const useLobbySessions = (router: Router) => useSession('lobby', router, callback)
+
+type SessionKey = 'requests' | 'lobby'
 
 export const isRequestingSessionWith = (userId: string) => computed({
 	get: () => global.requests?.sessions?.value?.find((s) => s.tutorId === userId) ?? null,

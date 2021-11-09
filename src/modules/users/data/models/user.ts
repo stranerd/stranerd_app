@@ -9,9 +9,7 @@ import {
 	UserTutor
 } from '../../domain/entities/user'
 
-
-
-export interface UserFromModel {
+export interface UserFromModel extends UserToModel {
 	id: string
 	bio: UserBio
 	roles: UserRoles
@@ -25,10 +23,4 @@ export interface UserFromModel {
 	nextRank: UserRank | null
 }
 
-
-
-export interface ChallengeData {
-    title: string
-    target: number | undefined
-    present: number | undefined
-}
+export type UserToModel = {}

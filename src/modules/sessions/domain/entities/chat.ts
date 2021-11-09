@@ -1,17 +1,5 @@
 import { BaseEntity, Media } from '@modules/core'
 
-type ChatConstructorArgs = {
-	id: string
-	from: string
-	path: [string, string]
-	content: string | null
-	media: Media | null
-	createdAt: number
-	updatedAt: number
-	readAt: number | null
-	sessionId: string | null
-}
-
 export class ChatEntity extends BaseEntity {
 	readonly id: string
 	readonly from: string
@@ -53,4 +41,14 @@ export class ChatEntity extends BaseEntity {
 	}
 }
 
-
+type ChatConstructorArgs = {
+	id: string,
+	from: string,
+	path: [string, string],
+	content: string | null,
+	media: Media | null,
+	createdAt: number
+	updatedAt: number
+	readAt: number | null
+	sessionId: string | null
+}

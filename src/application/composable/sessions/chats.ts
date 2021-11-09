@@ -1,4 +1,4 @@
-import { computed, Ref, ref, onMounted } from 'vue'
+import { computed, onMounted, ref, Ref } from 'vue'
 import { AddChat, ChatEntity, ChatFactory, GetChats, ListenToChats, MarkChatRead } from '@modules/sessions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'

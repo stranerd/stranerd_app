@@ -7,6 +7,7 @@
 <script lang="ts">
 
 import { defineAsyncComponent, defineComponent } from 'vue'
+
 const TopBar = defineAsyncComponent(() => import('@app/components/layout/topNavigations/Topbar.vue'))
 const SideNavBar = defineAsyncComponent(() => import('@app/components/layout/sidebars/DefaultSidebar.vue'))
 

@@ -1,22 +1,10 @@
 import { BuyCoinsWithStripe, VerifyStripePayment } from '@modules/meta'
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { stripeConfig } from '@utils/environment'
+import { usePaymentModal } from '@app/composable/core/modals'
 import { analytics } from '@modules/core'
 import { loadStripe } from '@stripe/stripe-js'
 import { useAuth } from '@app/composable/auth/auth'
-
-type RawPaymentProps = {
-	afterPayment: null | ((res: boolean) => Promise<void>)
-	amount: number | null
-}
-
-type PaymentData = {
-	type: 'buyCoins'
-	data: { gold: number, bronze: number }
-} | {
-	type: null
-	data: {}
-}
 
 let props: RawPaymentProps & PaymentData = {
 	type: null,
@@ -34,7 +22,7 @@ export const useFlutterwavePayment = () => {
 		await setError('')
 		await setLoading(true)
 		try {
-			// usePaymentModal().closeMakePayment()
+			usePaymentModal().closeMakePayment()
 			await props.afterPayment?.(successful)
 			await analytics.logEvent('purchase', {
 				value: props.amount!
@@ -74,7 +62,7 @@ export const useStripePayment = () => {
 				const succeeded = await VerifyStripePayment.call(id)
 				await props.afterPayment?.(succeeded)
 			}
-			// usePaymentModal().closeMakePayment()
+			usePaymentModal().closeMakePayment()
 			await analytics.logEvent('purchase', {
 				value: props.amount!
 			})
@@ -85,4 +73,17 @@ export const useStripePayment = () => {
 	}
 
 	return { error, loading, pay, setLoading }
+}
+
+type RawPaymentProps = {
+	afterPayment: null | ((res: boolean) => Promise<void>)
+	amount: number | null
+}
+
+type PaymentData = {
+	type: 'buyCoins',
+	data: { gold: number, bronze: number }
+} | {
+	type: null,
+	data: {}
 }

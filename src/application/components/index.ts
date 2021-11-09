@@ -1,5 +1,4 @@
-
-export const registerComponentGlobally = (app: any, folder: string)=>{
+export const registerComponentGlobally = (app: any, folder: string) => {
 
 	const regex = new RegExp(`/${folder}[A-Z]w+.(vue|js)$/`)
 	const requireComponent = require.context(
@@ -7,7 +6,6 @@ export const registerComponentGlobally = (app: any, folder: string)=>{
 		true,
 		regex
 	)
-
 
 	requireComponent.keys().forEach((fileName: any) => {
 		const componentConfig = requireComponent(fileName)
@@ -17,7 +15,6 @@ export const registerComponentGlobally = (app: any, folder: string)=>{
 				.split('/')
 				.pop()
 				.replace(/\.\w+$/, '')
-
 
 		app.component(
 			componentName,

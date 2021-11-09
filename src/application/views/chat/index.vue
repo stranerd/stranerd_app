@@ -38,7 +38,7 @@ import { chatbubbles, ellipsisVertical, home } from 'ionicons/icons'
 import { openChat } from '@app/composable/sessions/ChatHandler'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 
-const ChatList = defineAsyncComponent(() => import('@app/components/chat/ChatList.vue'))
+const ChatList = defineAsyncComponent(() => import('@app/components/sessions/chat/ChatList.vue'))
 
 export default {
 	name: 'chat',

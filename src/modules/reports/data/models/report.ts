@@ -1,12 +1,6 @@
 import { UserBio } from '@modules/users'
 import { ReportType } from '../../domain/entities/report'
 
-export interface ReportToModel {
-	type: ReportType
-	reportedId: string
-	message: string
-}
-
 export interface ReportFromModel extends ReportToModel {
 	id: string
 	reporterId: string
@@ -17,4 +11,8 @@ export interface ReportFromModel extends ReportToModel {
 	updatedAt: number
 }
 
-
+export interface ReportToModel {
+	type: ReportType
+	reportedId: string
+	message: string
+}

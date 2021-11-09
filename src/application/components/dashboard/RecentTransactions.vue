@@ -52,7 +52,7 @@ import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/ico
 import SliderController from '@app/components/core/nav/sliderController.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
-import TransactionCard from '../wallet/TransactionCard.vue'
+import TransactionCard from '../users/wallet/TransactionCard.vue'
 
 export default {
 	name: 'RecentTransactions',

@@ -8,9 +8,9 @@ import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'account',
-	middlewares: [() => {
+	middlewares: [async () => {
 		const { isLoggedIn, id } = useAuth()
-		if (isLoggedIn.value) return `/profile/${id.value}#dashboard`
+		if (isLoggedIn.value) return `/users/${id.value}/`
 		return '/auth/signin'
 	}]
 })

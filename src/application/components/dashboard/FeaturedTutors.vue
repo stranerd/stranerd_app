@@ -52,7 +52,7 @@
 import { IonIcon } from '@ionic/vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import SliderController from '@app/components/core/nav/sliderController.vue'
-import TutorCard from '@app/components/tutors/TutorCard.vue'
+import TutorCard from '@app/components/users/tutors/TutorCard.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
 import { useTutorsList } from '@app/composable/users/roles/tutors'

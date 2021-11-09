@@ -79,8 +79,8 @@ import { defineComponent, ref } from 'vue'
 import { IonContent, IonIcon, IonPage } from '@ionic/vue'
 import { add, arrowBackOutline, calendar, chevronBack, chevronDown, chevronForward } from 'ionicons/icons'
 import { useRouter } from 'vue-router'
-import Opening from '@app/components/schedule/Openings.vue'
-import DateCard from '@app/components/schedule/DateCard.vue'
+import Opening from '@app/components/users/schedule/Openings.vue'
+import DateCard from '@app/components/users/schedule/DateCard.vue'
 import { useScheduleModal } from '@app/composable/core/modals'
 
 export default defineComponent({

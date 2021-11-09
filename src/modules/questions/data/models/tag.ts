@@ -1,6 +1,3 @@
-export interface TagToModel {
-	name: string
-}
 export interface TagFromModel extends TagToModel {
 	id: string
 	count: number
@@ -8,4 +5,6 @@ export interface TagFromModel extends TagToModel {
 	updatedAt: number
 }
 
-
+export interface TagToModel {
+	name: string
+}

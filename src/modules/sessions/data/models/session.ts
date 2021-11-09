@@ -1,11 +1,5 @@
 import { UserBio } from '@modules/users'
 
-export interface SessionToModel {
-	message: string
-	tutorId: string
-	duration: number
-}
-
 export interface SessionFromModel extends SessionToModel {
 	id: string
 	price: number
@@ -22,4 +16,8 @@ export interface SessionFromModel extends SessionToModel {
 	taskId: string
 }
 
-
+export interface SessionToModel {
+	message: string
+	tutorId: string
+	duration: number
+}

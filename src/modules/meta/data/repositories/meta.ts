@@ -32,7 +32,7 @@ export class MetaRepository implements IMetaRepository {
 		}
 	}
 
-	async buyCoinsWithStripe (data: { amount: number, currency: string, gold: number, bronze: number }) {
+	async buyCoinsWithStripe (data: { amount: number; currency: string; gold: number; bronze: number }) {
 		return await this.dataSource.buyCoinsWithStripe(data)
 	}
 

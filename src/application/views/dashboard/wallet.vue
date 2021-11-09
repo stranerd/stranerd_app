@@ -16,8 +16,8 @@
 import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { IonContent, IonPage } from '@ionic/vue'
-import BalanceCard from '@app/components/wallet/BalanceCard.vue'
-import TransactionHistory from '@app/components/wallet/TranscractionHistory.vue'
+import BalanceCard from '@app/components/users/wallet/BalanceCard.vue'
+import TransactionHistory from '@app/components/users/wallet/TranscractionHistory.vue'
 
 export default defineComponent({
 	name: 'DashboardWalletPage',

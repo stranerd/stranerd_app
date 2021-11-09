@@ -9,9 +9,9 @@ export { StatusCodes, Conditions, QueryResults, QueryParams }
 
 export class NetworkError extends Error {
 	readonly statusCode: StatusCodes
-	readonly errors: { message: string, field?: string }[]
+	readonly errors: { message: string; field?: string }[]
 
-	constructor (statusCode: number, errors: { message: string, field?: string }[]) {
+	constructor (statusCode: number, errors: { message: string; field?: string }[]) {
 		super()
 		this.statusCode = statusCode
 		this.errors = errors

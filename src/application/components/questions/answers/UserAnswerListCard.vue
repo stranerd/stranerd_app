@@ -37,7 +37,7 @@
 import { defineComponent, PropType } from 'vue'
 import { IonIcon } from '@ionic/vue'
 
-import { arrowBackOutline, arrowRedo, shareSocial, chevronDown, thumbsDown, thumbsUp, star, send } from 'ionicons/icons'
+import { arrowBackOutline, arrowRedo, chevronDown, send, shareSocial, star, thumbsDown, thumbsUp } from 'ionicons/icons'
 import { AnswerEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 

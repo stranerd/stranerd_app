@@ -13,6 +13,7 @@ import justifiedLayout from './justified.vue'
 import subpagesLayout from './subpages.vue'
 import questionLayout from './question.vue'
 import scheduleLayout from './schedule.vue'
+import usersLayout from './users.vue'
 import { shallowRef, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -24,7 +25,8 @@ const components = {
 	justifiedLayout,
 	subpagesLayout,
 	questionLayout,
-	scheduleLayout
+	scheduleLayout,
+	usersLayout
 } as any
 
 export default {

@@ -59,7 +59,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	.showAll /deep/ input.form-control {
+	.showAll :deep(input.form-control) {
 		background-color: inherit;
 		color: $color-sub;
 

@@ -5,7 +5,6 @@ import { ProfileUpdateFactory, UpdateProfile } from '@modules/auth'
 import { useAuth } from '@app/composable/auth/auth'
 import { setPaymentProps } from '@app/composable/payment/payment'
 import { analytics } from '@modules/core'
-import { selectedTab } from '@app/composable/profile'
 
 export const useUpdateProfile = () => {
 	const router = useRouter()
@@ -24,8 +23,7 @@ export const useUpdateProfile = () => {
 			try {
 				await setLoading(true)
 				await UpdateProfile.call(factory.value)
-				await router.push(`/profile/${id.value}#dashboard`)
-				selectedTab.value = '#dashboard'
+				await router.push(`/users/${id.value}/`)
 				await setMessage('Profile updated successfully!')
 			} catch (error) {
 				await setError(error)

@@ -18,7 +18,7 @@ export const stripeConfig = {
 	publicKey: stripe.publicKey
 }
 
-const host = process.env.VUE_APP_API_DOMAIN ?? ''
+const host = (process.env.VUE_APP_API_DOMAIN ?? '') + (isDev ? `:${process.env.VUE_APP_API_PORT}` : '')
 export const domain = `http${!isDev ? 's' : ''}://${host}`
 export const logo = `${domain}/images/logo-blue.svg`
 

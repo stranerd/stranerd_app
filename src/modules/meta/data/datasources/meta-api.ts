@@ -20,7 +20,7 @@ export class MetaApiDataSource implements MetaBaseDataSource {
 		}>(`/meta/search/${search}`, {})
 	}
 
-	async buyCoinsWithStripe (data: { amount: number, currency: string, gold: number, bronze: number }) {
+	async buyCoinsWithStripe (data: { amount: number; currency: string; gold: number; bronze: number }) {
 		return this.stranerdClient.post<any, { id: string, clientSecret: string }>('/payment/stripe/coins', data)
 	}
 

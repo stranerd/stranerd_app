@@ -50,13 +50,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { IonIcon, IonInput, IonRippleEffect, } from '@ionic/vue'
+import { IonIcon, IonInput, IonRippleEffect } from '@ionic/vue'
 import { chevronDown, ellipse, ellipseOutline } from 'ionicons/icons'
-import { useScheduleModal} from '@app/composable/core/modals'
+import { useScheduleModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	setup () {
-		const closeCreateSchedule =()=>{
+		const closeCreateSchedule = () => {
 			useScheduleModal().closeCreateSchedule()
 		}
 		return {

@@ -31,7 +31,7 @@
 	}
 
 	.layout-page-nosidebars {
-		@apply w-full relative flex  mt-[14px] flex-row lg:gap-16 lg:mt-[63px]
+		@apply flex mt-[14px] flex-row lg:gap-16 lg:mt-[63px] flex-grow
 	}
 
 	.layout-body {

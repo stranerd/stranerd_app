@@ -1,14 +1,6 @@
 import { UserBio } from '@modules/users'
 import { Media } from '@modules/core'
 
-export interface QuestionToModel {
-	body: string
-	coins: number
-	tags: string[]
-	attachments: Media[]
-	subjectId: string
-}
-
 export interface QuestionFromModel extends QuestionToModel {
 	id: string
 	userId: string
@@ -22,4 +14,10 @@ export interface QuestionFromModel extends QuestionToModel {
 	updatedAt: number
 }
 
-
+export interface QuestionToModel {
+	body: string
+	coins: number
+	tags: string[]
+	attachments: Media[]
+	subjectId: string
+}

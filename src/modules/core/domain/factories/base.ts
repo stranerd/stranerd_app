@@ -1,4 +1,5 @@
 import { Rule, Validator } from '@stranerd/validate'
+import { reactive } from 'vue'
 import { UploaderService } from '../../services/uploader'
 
 export abstract class BaseFactory<E, T, K extends Record<string, any>> {
@@ -12,13 +13,14 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 	protected validValues: K
 
 	protected constructor (keys: K) {
-		this.defaults = { ...keys }
-		this.values = { ...keys }
-		this.validValues = { ...keys }
+		this.defaults = reactive({ ...keys })
+		this.values = reactive({ ...keys })
+		this.validValues = reactive({ ...keys })
 		this.errors = Object.keys(keys)
-			.reduce((acc, value: keyof K) => ({
-				...acc, [value]: ''
-			}), {} as Record<keyof K, string>)
+			.reduce((acc, value: keyof K) => {
+				acc[value] = ''
+				return acc
+			}, reactive({}) as Record<keyof K, string>)
 	}
 
 	get valid () {

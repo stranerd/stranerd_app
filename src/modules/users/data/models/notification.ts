@@ -1,10 +1,3 @@
-export interface NotificationToModel {
-	body: string
-	seen: boolean
-	action: string
-	data: Record<string, any>
-}
-
 export interface NotificationFromModel extends NotificationToModel {
 	id: string
 	userId: string
@@ -12,4 +5,9 @@ export interface NotificationFromModel extends NotificationToModel {
 	updatedAt: number
 }
 
-
+export interface NotificationToModel {
+	body: string
+	seen: boolean
+	action: string
+	data: Record<string, any>
+}

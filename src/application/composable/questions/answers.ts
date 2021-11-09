@@ -15,7 +15,7 @@ import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } fr
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@app/composable/core/notifications'
 import { analytics } from '@modules/core'
-import { useRouter } from 'vue-router'
+import { Router, useRouter } from 'vue-router'
 
 const global = {} as Record<string, {
 	answers: Ref<AnswerEntity[]>
@@ -97,7 +97,7 @@ export const useCreateAnswer = () => {
 				const answerId = await AddAnswer.call(factory.value)
 				await setMessage('Answer submitted successfully.')
 				factory.value.reset()
-				await router.replace(`/questions/${answeringQuestion?.id ?? ''}`)
+				await router.replace(`/questions/${answeringQuestion?.id ?? ''}/#${answerId}`)
 				await analytics.logEvent('answer_question_completed', {
 					questionId: answeringQuestion?.id,
 					answerId,
@@ -166,8 +166,7 @@ export const useAnswer = (answer: AnswerEntity) => {
 
 let editingQuestionAnswer = null as { answer: AnswerEntity, question: QuestionEntity } | null
 export const getEditingAnswer = () => editingQuestionAnswer
-export const openAnswerEditModal = (data: { question: QuestionEntity, answer: AnswerEntity }) => {
-	const router = useRouter()
+export const openAnswerEditModal = (data: { question: QuestionEntity, answer: AnswerEntity }, router: Router) => {
 	editingQuestionAnswer = data
 	router.push(`/questions/${data.question.id}/answers/${data.answer.id}/edit`)
 }

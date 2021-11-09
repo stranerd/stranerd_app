@@ -9,7 +9,7 @@
 						<IonButtons slot="start">
 							<IonBackButton color="dark" default-href="/questions" text="" />
 						</IonButtons>
-						<IonTitle>Answers</IonTitle>
+						<IonTitle>{{ $route.meta.displayName ?? '' }}</IonTitle>
 					</IonToolbar>
 				</IonHeader>
 				<div class="layout-page">
@@ -48,6 +48,7 @@ export default defineComponent({
 })
 
 </script>
+
 <style scoped>
 	ion-toolbar {
 		--background: #F7F7FC;

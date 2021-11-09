@@ -108,15 +108,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { IonIcon, IonInput, IonRippleEffect, } from '@ionic/vue'
+import { IonIcon, IonInput, IonRippleEffect } from '@ionic/vue'
 import { chevronDown, ellipse, ellipseOutline, repeatOutline } from 'ionicons/icons'
-import { useAccountModal} from '@app/composable/core/modals'
+import { useAccountModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	setup () {
 
-		const closeWithdrawCoins =  () => {
-			 useAccountModal().closeWithdrawCoins()
+		const closeWithdrawCoins = () => {
+			useAccountModal().closeWithdrawCoins()
 		}
 
 		return {

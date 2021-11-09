@@ -53,7 +53,7 @@ import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/ico
 import SliderController from '@app/components/core/nav/sliderController.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
-import ScheduleCard from '../schedule/ScheduleCard.vue'
+import ScheduleCard from '../users/schedule/ScheduleCard.vue'
 
 export default {
 	name: 'Home',
