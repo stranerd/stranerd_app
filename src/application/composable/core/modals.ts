@@ -7,7 +7,7 @@ import CreateSession from '@app/components/modals/RequestSession.vue'
 
 type AccountTypes = 'BuyCoins' | 'WithdrawCoins'
 type ScheduleTypes = 'CreateSchedule'
-type SessionTypes = 'CreateSession'
+type SessionTypes = 'CreateSession' | 'Ratings'
 type ReportTypes = 'ReportUser' | 'ReportQuestion' | 'ReportAnswer'
 type PaymentTypes = 'MakePayment'
 

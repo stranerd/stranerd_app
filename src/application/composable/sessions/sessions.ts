@@ -4,6 +4,7 @@ import { AddSession, BeginSession, CancelSession, EndSession, SessionFactory } f
 import { CreateReview, UserBio } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useSessionModal } from '@app/composable/core/modals'
 import { Alert } from '@app/composable/core/notifications'
 import { analytics } from '@modules/core'
 
@@ -32,6 +33,7 @@ export const useCreateSession = () => {
 			try {
 				await setLoading(true)
 				const sessionId = await AddSession.call(factory.value)
+				useSessionModal().closeCreateSession()
 				await router.push(`/chat/${newSessionTutorIdBio?.id}`)
 				factory.value.reset()
 				await setMessage('Session request successful.')
@@ -160,7 +162,7 @@ export const useRateSession = () => {
 					rating: rating.value,
 					review: review.value
 				})
-				//useSessionModal().closeRatings()
+				useSessionModal().closeRatings()
 			} catch (error) {
 				await setError(error)
 			}
