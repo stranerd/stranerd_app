@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<HomeTopNavigation/>
+		<HomeTopNavigation />
 		<slot />
 	</div>
 </template>
@@ -9,12 +9,10 @@ import { defineComponent } from 'vue'
 import HomeTopNavigation from '../components/layout/topNavigations/HomeTopNavigation.vue'
 
 export default defineComponent({
-	components: {  HomeTopNavigation, },
-	setup() {
-		return {
-
-		}
-	},
+	components: { HomeTopNavigation },
+	setup () {
+		return {}
+	}
 })
 </script>
 

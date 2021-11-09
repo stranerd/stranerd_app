@@ -4,9 +4,9 @@
 			<div class="search-container gap-0-25">
 				<ion-searchbar
 					v-model.trim="searchTerm"
+					cancel-button-icon="never"
 					class="form-control"
 					placeholder="Search for anything..."
-					cancel-button-icon="never"
 				></ion-searchbar>
 			</div>
 		</form>
@@ -25,7 +25,7 @@
 				<h2>Answers</h2>
 				<div v-for="answer in answersResult" :key="answer.hash">
 					<router-link :to="`/questions/${answer.questionId}#${answer.id}`">
-						<span class="lead d-block">
+						<span class="lead block">
 							{{ extractTextFromHTML(answer.title) }}
 						</span>
 						<span v-if="answer.body">
@@ -127,11 +127,11 @@ export default defineComponent({
 		box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 		right: 0.25rem;
 		@media (min-width: 500px) {
-			max-width: vw(75);
+			max-width: 75vw;
 			right: unset;
 		}
 		@media (min-width: $lg) {
-			max-width: vw(60);
+			max-width: 60vw;
 		}
 
 		& > * > * {

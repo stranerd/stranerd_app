@@ -36,6 +36,21 @@
 						<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3" />
 					</div>
 				</div>
+
+				<div class="flex gap-2">
+					<button v-if="showEditButton"
+						class="mt-2 rounded-lg py-3 px-4 bg-butter_yellow flex items-center gap-1"
+						@click="openEditModal">
+						<span>Edit</span>
+						<IonIcon :icon="pencil" />
+					</button>
+					<button v-if="showDeleteButton"
+						class="mt-2 rounded-lg py-3 px-4 bg-delete_red flex items-center gap-1"
+						@click="deleteQuestion">
+						<span>Delete</span>
+						<IonIcon :icon="trashBinOutline" />
+					</button>
+				</div>
 			</div>
 		</div>
 		<PhotoList v-if="question.attachments" :photos="question.attachments" class="py-3" />
@@ -51,10 +66,11 @@
 		</button>
 	</div>
 </template>
+
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { IonIcon, IonRippleEffect } from '@ionic/vue'
-import { arrowRedo, flag } from 'ionicons/icons'
+import { arrowRedo, flag, pencil, trashBinOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/AvatarUser.vue'
@@ -63,8 +79,9 @@ import CreateAnswer from '@app/components/questions/answers/create.vue'
 import { pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
 import { openAnswerModal, showAddAnswer } from '@app/composable/questions/answers'
-import { useDeleteQuestion } from '@app/composable/questions/questions'
+import { openQuestionEditModal, useDeleteQuestion } from '@app/composable/questions/questions'
 import { formatTime } from '@utils/dates'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'QuestionPageCard',
@@ -79,6 +96,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { id } = useAuth()
+		const router = useRouter()
 
 		const showAnswerButton = computed({
 			get: () => props.question.userId !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
@@ -98,10 +116,13 @@ export default defineComponent({
 		const { loading, error, deleteQuestion } = useDeleteQuestion(props.question.id)
 
 		return {
-			arrowRedo, flag, formatTime, pluralize,
-			showAnswerButton, openAnswerModal, showAddAnswer,
+			arrowRedo, flag, pencil, trashBinOutline,
+			formatTime, pluralize,
+			showAnswerButton, showAddAnswer,
 			showEditButton, showDeleteButton,
-			loading, error, deleteQuestion
+			loading, error, deleteQuestion,
+			openAnswerModal: () => openAnswerModal(props.question),
+			openEditModal: () => openQuestionEditModal(props.question, router)
 		}
 	}
 })

@@ -22,8 +22,8 @@
 		</div>
 
 		<div>
-			<span class="normalText whitespace-pre-line" >
-				{{question.trimmedBody}}
+			<span class="normalText whitespace-pre-line">
+				{{ question.trimmedBody }}
 			</span>
 
 		</div>
@@ -43,7 +43,6 @@
 import { IonCard } from '@ionic/vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { QuestionEntity } from '@modules/questions'
-import { useSubject } from '@app/composable/questions/subjects'
 
 export default {
 	name: 'TutorCard',
@@ -51,7 +50,7 @@ export default {
 	props: {
 		style: {
 			required: false,
-			type: String,
+			type: String
 		},
 		question: {
 			type: QuestionEntity

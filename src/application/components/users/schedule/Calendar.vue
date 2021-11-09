@@ -66,43 +66,43 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-*{
-    box-sizing: border-box;
-	table {
-		width: 100%;
-		height: 100%;
+<style lang="scss" scoped>
+	* {
+		box-sizing: border-box;
+
+		table {
+			width: 100%;
+			height: 100%;
+		}
+
+
+		th, tr, td {
+			border: 1px solid #C7D6E3;
+			text-align: center;
+		}
+
+		td {
+			padding: 7px;
+			margin: 2px;
+			cursor: pointer;
+			padding-top: 2rem;
+			padding-bottom: 2rem;
+		}
+
+		tr {
+			padding-top: 8px;
+			padding-bottom: 8px;
+		}
+
+		th {
+			font-weight: bold;
+			font-size: 16px;
+			text-transform: uppercase;
+			color: #8B9EB1;
+			padding: 0.5rem 1rem;
+		}
+
+
 	}
-
-
-
-	th, tr, td {
-        border: 1px solid #C7D6E3;
-		text-align: center;
-	}
-
-	td {
-		padding: 7px;
-		margin: 2px;
-		cursor: pointer;
-            padding-top: 2rem;
-    padding-bottom: 2rem;
-	}
-
-	tr {
-		padding-top: 8px;
-		padding-bottom: 8px;
-	}
-
-	th {
-		font-weight: bold;
-        font-size: 16px;
-        text-transform: uppercase;
-        color: #8B9EB1;
-        padding: 0.5rem 1rem;
-	}
-
-
-}
 </style>
 

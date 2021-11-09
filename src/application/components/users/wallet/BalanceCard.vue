@@ -6,7 +6,9 @@
 				<div class="flex items-center">
 					<Coins :size="24" class="md:hidden" />
 					<Coins :size="48" class="hidden md:block" />
-					<span v-if="user" class="font-bold text-dark_gray text-2xl md:text-3xl ml-3">{{ formatNumber(user.account.coins.bronze, 5) }}</span>
+					<span v-if="user" class="font-bold text-dark_gray text-2xl md:text-3xl ml-3">{{
+						formatNumber(user.account.coins.bronze, 5)
+					}}</span>
 				</div>
 			</div>
 
@@ -15,7 +17,9 @@
 				<div class="flex items-center">
 					<Coins :gold="true" :size="24" class="md:hidden" />
 					<Coins :gold="true" :size="48" class="hidden md:block" />
-					<span v-if="user" class="font-bold text-dark_gray text-2xl md:text-3xl ml-3">{{ formatNumber(user.account.coins.gold, 5) }}</span>
+					<span v-if="user" class="font-bold text-dark_gray text-2xl md:text-3xl ml-3">{{
+						formatNumber(user.account.coins.gold, 5)
+					}}</span>
 				</div>
 			</div>
 		</div>
@@ -43,7 +47,7 @@
 import { defineComponent, PropType } from 'vue'
 import { IonRippleEffect } from '@ionic/vue'
 import Coins from '@app/components/core/Coins.vue'
-import { useAccountModal} from '@app/composable/core/modals'
+import { useAccountModal } from '@app/composable/core/modals'
 import { UserEntity } from '@modules/users'
 import { formatNumber } from '@utils/commons'
 
@@ -57,12 +61,12 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const buyCoins =  () => {
-			 useAccountModal().openBuyCoins()
+		const buyCoins = () => {
+			useAccountModal().openBuyCoins()
 		}
 
 		const makeWithdrawal = () => {
-		 useAccountModal().openWithdrawCoins()
+			useAccountModal().openWithdrawCoins()
 		}
 		return { formatNumber, buyCoins, makeWithdrawal }
 	}

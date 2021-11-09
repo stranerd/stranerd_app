@@ -11,7 +11,8 @@
 				<ion-icon :icon="camera" class=" text-[23px]"></ion-icon>
 				<ion-icon :icon="mic" class=" text-[23px]"></ion-icon>
 			</template>
-			<span v-else class="md:h-10 h-8 w-8 cursor-pointer md:w-10 bg-primary rounded-full flex flex-row justify-center items-center"
+			<span v-else
+				class="md:h-10 h-8 w-8 cursor-pointer md:w-10 bg-primary rounded-full flex flex-row justify-center items-center"
 				@click="createTextChat">
 				<ion-icon :icon="send" class=" md:text-[20px] text-[16px] text-white"></ion-icon>
 			</span>
@@ -22,7 +23,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { mic, videocam, camera, addCircle, send } from 'ionicons/icons'
+import { addCircle, camera, mic, send, videocam } from 'ionicons/icons'
 import { useCreateChat } from '@app/composable/sessions/chats'
 import { useMultipleFileInputs } from '@app/composable/core/forms'
 

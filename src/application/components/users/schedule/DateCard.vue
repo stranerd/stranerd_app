@@ -1,5 +1,6 @@
 <template>
-	<div :class="`py-3 px-5 md:px-8 md:py-6 lg:px-10 ${isSelected ? 'text-white bg-icon_inactive' : 'md:bg-light_gray'}  flex-col ${colorClass} gap-2 flex justify-center items-center rounded-lg font-bold md:text-base`">
+	<div
+		:class="`py-3 px-5 md:px-8 md:py-6 lg:px-10 ${isSelected ? 'text-white bg-icon_inactive' : 'md:bg-light_gray'}  flex-col ${colorClass} gap-2 flex justify-center items-center rounded-lg font-bold md:text-base`">
 		<h1 class="mb-[2px] font-semibold md:hidden">{{ dayLabel[dateDay].small }}</h1>
 		<h1 class="mb-[2px] font-semibold hidden md:block">{{ dayLabel[dateDay].large }}</h1>
 		<h2>{{ dateNumber }}</h2>
@@ -9,8 +10,8 @@
 <script lang="ts">
 export default {
 	name: 'TutorCard',
-	components: {  },
-	props:{
+	components: {},
+	props: {
 		colorClass: {
 			type: String,
 			default: 'bg-white'
@@ -32,7 +33,7 @@ export default {
 			default: false
 		}
 	},
-	setup(props: any){
+	setup (props: any) {
 
 		const dayLabel = {
 			m: {
@@ -62,9 +63,9 @@ export default {
 			su: {
 				small: 'S',
 				large: 'Sun'
-			},
+			}
 		}
-		return{
+		return {
 			dayLabel
 		}
 	}

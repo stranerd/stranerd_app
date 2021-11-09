@@ -1,11 +1,6 @@
-import { computed, reactive, ref, toRefs, onMounted } from 'vue'
+import { computed, onMounted, reactive, ref, toRefs } from 'vue'
 import { GetAllTutors, GetUsersByEmail, ListenToAllTutors, MakeTutor, RemoveTutor, UserEntity } from '@modules/users'
-import {
-	useErrorHandler,
-	useListener,
-	useLoadingHandler,
-	useSuccessHandler
-} from '@app/composable/core/states'
+import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@app/composable/core/notifications'
 import { useAuth } from '@app/composable/auth/auth'
 

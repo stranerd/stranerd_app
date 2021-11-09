@@ -83,7 +83,7 @@ import { useRouter } from 'vue-router'
 import { disableScroll, enableScroll } from '@utils/html'
 import Logo from '../../core/Logo.vue'
 import { IonIcon } from '@ionic/vue'
-import { menu, close } from 'ionicons/icons'
+import { close, menu } from 'ionicons/icons'
 
 export default defineComponent({
 	components: { Logo, IonIcon },

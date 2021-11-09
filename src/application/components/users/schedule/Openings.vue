@@ -9,7 +9,7 @@
 		</div>
 		<div class="flex flex-row items-center mt-9 normalText">
 			<template v-if="!isOpening">
-				<img src="/assets/images/person-circle.svg" class="inline h-5 mr-2"/>
+				<img class="inline h-5 mr-2" src="/assets/images/person-circle.svg" />
 				<span>Session with Jerry</span>
 			</template>
 			<template v-else>
@@ -20,12 +20,13 @@
 </template>
 <script lang="ts">
 
-import {  IonIcon } from '@ionic/vue'
+import { IonIcon } from '@ionic/vue'
 import { calendar, time } from 'ionicons/icons'
+
 export default {
 	name: 'Opening',
 	components: { IonIcon },
-	props:{
+	props: {
 		colorClass: {
 			type: String,
 			default: 'bg-light_gray'
@@ -33,10 +34,10 @@ export default {
 		isOpening: {
 			type: Boolean,
 			default: false
-		},
+		}
 	},
-	setup(){
-		return{
+	setup () {
+		return {
 			calendar, time
 		}
 	}

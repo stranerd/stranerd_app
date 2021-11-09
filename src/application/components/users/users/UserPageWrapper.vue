@@ -26,8 +26,8 @@ export default defineComponent({
 	name: 'UserPageWrapper',
 	components: { IonPage, IonContent, UserProfileCard, PageLoading },
 	setup () {
-		const { id } = useRoute().params
-		const { user, loading, error } = useUser(id as string)
+		const { userId } = useRoute().params
+		const { user, loading, error } = useUser(userId as string)
 		return { user, loading, error }
 	}
 })

@@ -3,10 +3,13 @@
 		<!-- Small screens -->
 		<ion-header class="block md:hidden">
 			<ion-toolbar class="px-2">
-				<ion-buttons slot="start" @click="router.go(-1)">
+				<ion-buttons slot="start" @click="$router.go(-1)">
 					<ion-icon :icon="arrowBackOutline" class="text-[23px] text-dark_gray"></ion-icon>
 				</ion-buttons>
-				<ion-title class="mx-auto text-base font-bold text-dark_gray">{{ displayName }}</ion-title>
+				<ion-title class="mx-auto text-base font-bold text-dark_gray">{{
+					$route.meta.displayName ?? ''
+				}}
+				</ion-title>
 			</ion-toolbar>
 		</ion-header>
 
@@ -121,24 +124,17 @@ import { add, arrowBackOutline, chatbubble, home, notifications, school, search 
 import { useAuth } from '@app/composable/auth/auth'
 import Coins from '../../core/Coins.vue'
 import Avatar from '@app/components/core/Avatar.vue'
-import { useRoute, useRouter } from 'vue-router'
 import SearchBar from '@app/components/search/SearchBar.vue'
 
 export default defineComponent({
 	components: { IonIcon, Avatar, IonButtons, IonHeader, IonToolbar, IonTitle, Coins, SearchBar },
 	setup () {
-		const router = useRouter()
-
-		const displayName = useRoute().meta.displayName
-
 		const { user } = useAuth()
 
 		return {
-			displayName,
 			add,
 			home,
 			user,
-			router,
 			arrowBackOutline,
 			school,
 			notifications,

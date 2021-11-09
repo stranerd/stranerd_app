@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { IonIcon } from '@ionic/vue'
-import { chevronForwardOutline, chevronBackOutline, ellipse } from 'ionicons/icons'
+import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
 import ChallengesCard from './ChallengesCard.vue'

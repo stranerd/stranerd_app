@@ -1,4 +1,4 @@
-import { Ref, ref, onMounted } from 'vue'
+import { onMounted, ref, Ref } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { ChatMetaEntity, GetPersonalChatsMeta, ListenToPersonalChatsMeta } from '@modules/sessions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'

@@ -1,4 +1,4 @@
-import { Ref, ref, onMounted } from 'vue'
+import { onMounted, ref, Ref } from 'vue'
 import {
 	AddQuestionComment,
 	CommentEntity,

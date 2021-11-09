@@ -45,7 +45,7 @@ export default {
 		colorClass: {
 			type: String,
 			default: 'bg-light_gray'
-		},
+		}
 	},
 	setup () {
 		return {

@@ -4,7 +4,7 @@
 			v-for="(comment,index) in 5"
 			:key="'comment'+ index"
 			:class="[index <= rating-1 ? 'text-star_yellow' : 'text-icon_inactive', 'h-4 text-2xl  text-[18px]']"
-			:icon="starSharp" 
+			:icon="starSharp"
 		/>
 
 		<!-- <i
@@ -32,23 +32,23 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import {  IonIcon } from '@ionic/vue'
-import { starSharp, chevronBackOutline, ellipse } from 'ionicons/icons'
+import { IonIcon } from '@ionic/vue'
+import { chevronBackOutline, ellipse, starSharp } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'ShowRatings',
-	components: {  IonIcon },
+	components: { IonIcon },
 	props: {
 		rating: {
 			type: Number,
 			required: true
 		}
 	},
-	setup(){
-		return{
+	setup () {
+		return {
 			starSharp, chevronBackOutline, ellipse
 		}
-	},
+	}
 
 })
 </script>

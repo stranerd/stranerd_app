@@ -128,8 +128,5 @@ export default defineComponent({
 		--padding-top: 0.5rem !important;
 		--padding-bottom: 0.5rem !important;
 		border-radius: 6px;
-
 	}
-
-
 </style>
