@@ -19,7 +19,7 @@
 
 						</ion-select>
 
-						<ion-select v-model="RankType"
+						<ion-select v-model="rankType"
 							class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold"
 							interface="action-sheet" placeholder="Daily" value="notifications">
 							<ion-select-option value="daily">Daily</ion-select-option>
@@ -57,7 +57,7 @@
 								</span>
 							</div>
 							<div class="w-2/12 text-right text-primary font-semibold">
-								<span>{{ user.account.rankings[RankType] }}</span>
+								<span>{{ user.account.rankings[rankType] }}</span>
 							</div>
 						</div>
 
@@ -74,7 +74,7 @@
 									</span>
 								</div>
 								<div class="w-6/12 font-normal text-right text-primary ">
-									<span>{{ person.account.rankings[RankType] }}</span>
+									<span>{{ person.account.rankings[rankType] }}</span>
 								</div>
 							</div>
 						</template>
@@ -91,7 +91,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { IonContent, IonPage, IonSelect, IonSelectOption } from '@ionic/vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { useLeaderboardList } from '@app/composable/users/leaderboard'
@@ -99,25 +99,22 @@ import PageLoading from '@app/components/core/PageLoading.vue'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
-	name: 'tutor learderboard',
+	name: 'tutor leaderboard',
 	layout: 'justified',
 	displayName: 'LeaderBoard',
 	components: { IonSelect, IonSelectOption, Avatar, IonPage, IonContent, PageLoading },
 	setup () {
-		const { filteredUsers: leaderboardData, loading, Userindex } = useLeaderboardList()
-		const RankType = ref('daily')
+		const { filteredUsers: leaderboardData, rankType, loading, userIndex } = useLeaderboardList()
 		const { user } = useAuth()
 
 		return {
 			user,
-			RankType,
+			rankType,
 			leaderboardData,
 			loading,
-			Userindex
-
+			userIndex
 		}
 	}
-
 })
 </script>
 

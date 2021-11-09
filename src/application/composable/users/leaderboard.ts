@@ -5,8 +5,8 @@ import { useAuth } from '@app/composable/auth/auth'
 
 const global = {
 	users: ref([] as UserEntity[]),
-	Userindex: ref(0),
-	RankType:  RankingTimes.daily,
+	userIndex: ref(0),
+	rankType: RankingTimes.daily,
 	fetched: ref(false),
 	...useErrorHandler(),
 	...useLoadingHandler()
@@ -25,7 +25,7 @@ export const useLeaderboardList = () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const users = await GetLeaderboard.call(global.RankType)
+			const users = await GetLeaderboard.call(global.rankType)
 			users.results.forEach(pushToUsersList)
 			global.fetched.value = true
 		} catch (error) {
@@ -37,7 +37,7 @@ export const useLeaderboardList = () => {
 		get: () => global.users.value.filter((user, index) => {
 			let matched = true
 			if (user.id === id.value) {
-				global.Userindex.value = index
+				global.userIndex.value = index
 				return matched = false
 			}
 			return matched
