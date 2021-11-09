@@ -13,6 +13,6 @@ import { IonContent, IonPage } from '@ionic/vue'
 export default defineComponent({
 	components: { IonContent, IonPage },
 	layout: 'users',
-	middlewares: [async ({ to }) => `/users/${to.params.id}/`]
+	middlewares: [async ({ to }) => `/users/${to.params.id}/dashboard`]
 })
 </script>

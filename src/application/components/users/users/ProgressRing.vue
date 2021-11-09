@@ -74,11 +74,10 @@ export default defineComponent({
 	}
 })
 </script>
+
 <style scoped>
 	#svg circle {
 		stroke-dashoffset: 0;
 		transition: stroke-dashoffset 1s linear;
 	}
-
-
 </style>

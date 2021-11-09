@@ -136,6 +136,7 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, ref } from 'vue'
 import {
 	IonButton,
 	IonIcon,
@@ -148,15 +149,15 @@ import {
 	IonTextarea
 } from '@ionic/vue'
 import { image } from 'ionicons/icons'
-import { defineComponent, ref } from 'vue'
 import { useUpdateProfile } from '@app/composable/users/account'
 import { useAuth } from '@app/composable/auth/auth'
 import { useFileInputs, usePassword, useSubjectAsTags } from '@app/composable/core/forms'
 import Subject from '../../questions/subjects/Subject.vue'
 import SelectSubject from '../../questions/subjects/SelectSubject.vue'
+import { UserEntity } from '@modules/users'
 
 export default defineComponent({
-	name: 'profileSettings',
+	name: 'ProfileSettings',
 	components: {
 		IonIcon,
 		IonInput,
@@ -171,8 +172,8 @@ export default defineComponent({
 		SelectSubject
 	},
 	props: {
-		userId: {
-			type: String,
+		user: {
+			type: UserEntity,
 			required: true,
 			default: ''
 		}

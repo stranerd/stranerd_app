@@ -122,7 +122,6 @@
 import { defineComponent, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { add, close, home, search } from 'ionicons/icons'
-import { useStore } from '@app/store'
 import { useAuth } from '@app/composable/auth/auth'
 import Avatar from '@app/components/core/AvatarUser.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
@@ -135,13 +134,11 @@ export default defineComponent({
 		const toggleSearch = () => {
 			showSearch.value = !showSearch.value
 		}
-		const store = useStore()
 		return {
 			close,
 			showSearch,
 			toggleSearch,
 			add,
-			store,
 			home,
 			user,
 			search

@@ -73,8 +73,6 @@
 import { defineComponent } from 'vue'
 import { IonIcon, IonRippleEffect } from '@ionic/vue'
 import { attachOutline, calendar, school, time } from 'ionicons/icons'
-import { useRouter } from 'vue-router'
-import { useStore } from '@app/store'
 import Coins from '../../core/Coins.vue'
 
 export default defineComponent({
@@ -102,17 +100,7 @@ export default defineComponent({
 	},
 
 	setup (props) {
-
-		const router = useRouter()
-
-		const store = useStore()
-
 		const showAnswers = () => {
-
-			store.commit('showIonPage')
-			router.push({
-				name: 'answers'
-			})
 		}
 
 		return {
@@ -121,7 +109,6 @@ export default defineComponent({
 			school,
 			calendar,
 			time,
-			router,
 			showAnswers
 		}
 	}

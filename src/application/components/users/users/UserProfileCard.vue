@@ -1,7 +1,6 @@
 <template>
 	<div>
-		<PageLoading v-if="loading" />
-		<div v-if="user" class="w-full col-span-12 mb-4 flex-col flex gap-2 items-center justify-center normalText">
+		<div class="w-full col-span-12 mb-4 flex-col flex gap-2 items-center justify-center normalText">
 			<Avatar :size="90" :src="user.avatar" />
 			<h2 class="headings font-bold text-dark_gray">{{ user.fullName }}</h2>
 			<span
@@ -16,35 +15,25 @@
 		<div class="grid grid-cols-12 border-b-[1px] border-faded_gray my-5 lg:rounded-br-3xl lg:rounded-bl-3xl">
 			<div
 				class="col-span-12 sm:place-content-center md:col-start-2 md:col-end-12 lg:col-start-3 lg:col-end-11 lg:justify-center lg:items-center flex flex-row  px-3 headings gap-5 text-icon_inactive font-bold  whitespace-normal overflow-x-auto">
-				<router-link :to="`/users/${userId}/`" class="pb-2 pr-3 cursor-pointer"
+				<router-link :to="`/users/${user.id}/`" class="pb-2 pr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-dark_gray border-primary">
 					Dashboard
 				</router-link>
-				<router-link :to="`/users/${userId}/bio`" class="pb-2 pr-3 cursor-pointer"
+				<router-link :to="`/users/${user.id}/bio`" class="pb-2 pr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-dark_gray border-primary">
 					Bio
 				</router-link>
-				<router-link :to="`/users/${userId}/questions`"
+				<router-link :to="`/users/${user.id}/questions`"
 					class="pb-2 pr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-dark_gray border-primary">
 					Questions
 				</router-link>
-				<router-link :to="`/users/${userId}/answers`"
+				<router-link :to="`/users/${user.id}/answers`"
 					class="pb-2 pr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-dark_gray border-primary">
 					Answers
 				</router-link>
-				<router-link :to="`/users/${userId}/answers`"
-					class="pb-2 pr-3 cursor-pointer"
-					exact-active-class="border-b-4 text-dark_gray border-primary">
-					Answers
-				</router-link>
-				<router-link :to="`/users/${userId}/answers`"
-					class="pb-2 pr-3 cursor-pointer"
-					exact-active-class="border-b-4 text-dark_gray border-primary">
-					Answers
-				</router-link>
-				<router-link v-if="id === userId" :to="`/users/${userId}/settings`"
+				<router-link v-if="id === user.id" :to="`/users/${user.id}/settings`"
 					class="pb-2 pr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-dark_gray border-primary">
 					Settings
@@ -56,53 +45,39 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import Avatar from '@app/components/core/Avatar.vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { useUser } from '@app/composable/users/user'
+import Avatar from '@app/components/core/Avatar.vue'
 import ShowRatings from '@app/components/core/ShowRatings.vue'
 import { setNewSessionTutorIdBio } from '@app/composable/sessions/sessions'
-import PageLoading from '@app/components/core/PageLoading.vue'
 import { useSessionModal } from '@app/composable/core/modals'
+import { UserEntity } from '@modules/users'
 
 export default defineComponent({
 	name: 'UserProfileCard',
-	components: {
-		Avatar,
-		ShowRatings,
-		PageLoading
-
-	},
+	components: { Avatar, ShowRatings },
 	props: {
-		userId: {
+		user: {
 			required: true,
-			type: String
+			type: UserEntity
 		}
 	},
 	setup (props) {
 		const { id, user: authUser } = useAuth()
-		const { error, loading, user } = useUser(props.userId)
 		const canRequestSession = computed({
 			get: () => authUser.value &&
-				authUser.value.id !== user.value?.id &&
+				authUser.value.id !== props.user.id &&
 				authUser.value.canRequestSessions &&
-				user.value?.canHostSessions,
+				props.user.canHostSessions,
 			set: () => {
 			}
 		})
 
 		const requestNewSession = () => {
-			setNewSessionTutorIdBio({ id: user.value?.id!, user: user.value?.bio! })
+			setNewSessionTutorIdBio({ id: props.user.id, user: props.user.bio })
 			useSessionModal().openCreateSession()
 		}
 
-		return {
-			id,
-			error,
-			loading,
-			user,
-			requestNewSession,
-			canRequestSession
-		}
+		return { id, requestNewSession, canRequestSession }
 	}
 })
 </script>

@@ -44,30 +44,22 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { star } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
-import { useUser } from '@app/composable/users/user'
 import Subject from '@app/components/questions/subjects/Subject.vue'
+import { UserEntity } from '@modules/users'
 
 export default defineComponent({
 	name: 'profileBio',
 	components: { Subject },
 	props: {
-		userId: {
+		user: {
 			required: true,
-			type: String,
-			default: ''
+			type: UserEntity
 		}
 	},
-	setup (props) {
+	setup () {
 		const { id } = useAuth()
-		const { user } = useUser(props.userId)
-
-		return {
-			id,
-			user,
-			star
-		}
+		return { id }
 	}
 })
 </script>
@@ -76,5 +68,4 @@ export default defineComponent({
 	ion-toolbar {
 		--background: #F7F7FC;
 	}
-
 </style>

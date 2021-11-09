@@ -1,5 +1,5 @@
 <template>
-	<InnerTopBar :isNotDashboard="false"></InnerTopBar>
+	<InnerTopBar />
 	<slot />
 </template>
 <script lang="ts">
@@ -12,7 +12,7 @@ export default defineComponent({
 		return {}
 	},
 	components: {
-		InnerTopBar,
+		InnerTopBar
 	}
 })
 </script>

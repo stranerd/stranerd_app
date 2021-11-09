@@ -17,32 +17,29 @@
 </template>
 
 <script lang="ts">
-
-
 import AnswerCard from '@app/components/questions/answers/UserAnswerListCard.vue'
 import { useUserAnswerList } from '@app/composable/users/user/answers'
 import { IonProgressBar } from '@ionic/vue'
 import EmptyState from '../../core/emptyState.vue'
+import { UserEntity } from '@modules/users'
+import { defineComponent } from 'vue'
 
-export default {
-	name: 'profileAnswers',
+export default defineComponent({
+	name: 'ProfileAnswers',
 	components: { AnswerCard, IonProgressBar, EmptyState },
 	props: {
-		userId: {
-			type: String,
+		user: {
+			type: UserEntity,
 			required: true
 		}
 	},
-	setup (props: any) {
-		const { answers, error, loading, hasMore, fetchOlderAnswers } = useUserAnswerList(props.userId)
-
-		return {
-			answers, error, loading, hasMore,
-			fetchOlderAnswers
-		}
+	setup (props) {
+		const { answers, error, loading, hasMore, fetchOlderAnswers } = useUserAnswerList(props.user.id)
+		return { answers, error, loading, hasMore, fetchOlderAnswers }
 	}
-}
+})
 </script>
+
 <style scoped>
 	ion-toolbar {
 		--background: #F7F7FC;

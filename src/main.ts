@@ -7,7 +7,6 @@ import './application/assets/styles/index.scss'
 import './application/assets/styles/tailwind.css'
 import { GoogleAuth } from '@app/composable/auth/signin'
 import { setupPlugins } from '@app/plugins'
-import { key, store } from '@app/store'
 import { MiddlewareFunction } from '@app/middlewares/'
 import { isAuthenticated } from '@app/middlewares/isAuthenticated'
 import { isNotAuthenticated } from '@app/middlewares/isNotAuthenticated'
@@ -46,7 +45,6 @@ const init = async () => {
 	})
 		.use(router)
 		.directive('g-auth', GoogleAuth)
-		.use(store, key)
 		.use(IonicVue)
 		.mount('#app')
 }

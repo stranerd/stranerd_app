@@ -23,35 +23,36 @@
 </template>
 
 <script lang="ts">
-
-
+import { defineComponent } from 'vue'
+import { IonProgressBar } from '@ionic/vue'
 import UserQuestionsCard from '@app/components/questions/UserQuestionsCard.vue'
 import { useUserQuestionList } from '@app/composable/users/user/questions'
-import { IonProgressBar } from '@ionic/vue'
 import EmptyState from '../../core/emptyState.vue'
+import { UserEntity } from '@modules/users'
 
-export default {
-	name: 'profileQuestions',
+export default defineComponent({
+	name: 'ProfileQuestions',
 	components: { UserQuestionsCard, IonProgressBar, EmptyState },
 	props: {
-		userId: {
-			type: String,
+		user: {
+			type: UserEntity,
 			required: true
 		}
 	},
-	setup (props: any) {
+	setup (props) {
 		const {
 			filteredQuestions: questions, subjectId, error, loading, hasMore,
 			answered, answeredChoices, fetchOlderQuestions
-		} = useUserQuestionList(props.userId)
+		} = useUserQuestionList(props.user.id)
 		return {
 			questions, error, loading, hasMore, subjectId,
 			answeredChoices, answered,
 			fetchOlderQuestions
 		}
 	}
-}
+})
 </script>
+
 <style scoped>
 	ion-toolbar {
 		--background: #F7F7FC;

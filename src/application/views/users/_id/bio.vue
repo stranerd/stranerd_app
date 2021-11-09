@@ -1,12 +1,13 @@
 <template>
-	<UserPageWrapper :userId="id">
-		<UserBio :userId="id" />
+	<UserPageWrapper>
+		<template v-slot:default="{ user }">
+			<UserBio :user="user" />
+		</template>
 	</UserPageWrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useRoute } from 'vue-router'
 import UserBio from '@app/components/users/users/UserBio.vue'
 import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 
@@ -14,12 +15,7 @@ export default defineComponent({
 	name: 'ProfileBio',
 	displayName: 'Profile',
 	layout: 'users',
-	components: { UserPageWrapper, UserBio },
-	setup () {
-		const route = useRoute()
-		const id = route.params.id
-		return { id }
-	}
+	components: { UserPageWrapper, UserBio }
 })
 </script>
 
@@ -27,5 +23,4 @@ export default defineComponent({
 	ion-toolbar {
 		--background: #F7F7FC;
 	}
-
 </style>

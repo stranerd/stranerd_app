@@ -1,8 +1,7 @@
 <template>
 	<div>
 		<!-- Small screens -->
-		<!-- <div class="md:hidden bg-[#F7F7FC] py-[8px] px-4 fixed flex w-full top-0 border-0 flex-row items-center z-50" v-if="!props.isNotDashboard && !store.state.showPage"> -->
-		<ion-header class="block lg:hidden">
+		<ion-header class="block md:hidden">
 			<ion-toolbar class="px-2">
 				<ion-buttons slot="start" @click="router.go(-1)">
 					<ion-icon :icon="arrowBackOutline" class="text-[23px] text-dark_gray"></ion-icon>
@@ -11,11 +10,8 @@
 			</ion-toolbar>
 		</ion-header>
 
-		<!-- </div> -->
-
 		<!-- medium screens -->
-		<div v-if="!isNotDashboard && !store.state.showPage "
-			class="hidden lg:hidden md:flex bg-white py-3 px-3 items-center z-50">
+		<div class="hidden lg:hidden md:flex bg-white py-3 px-3 items-center z-50">
 			<div class="flex flex-row items-center gap-9 w-1/4">
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center "
 					to="/account">
@@ -75,7 +71,7 @@
 					<img class="min-h-[25px] object-fit max-w-[8.9rem]" src="/assets/images/logo.svg" />
 				</div>
 			</div>
-			<div :class="noSideBar ? 'w-[63%]' : 'w-3/4'" class="flex flex-row items-center py-1 gap-6 justify-around">
+			<div class="w-3/4 flex flex-row items-center py-1 gap-6 justify-around">
 				<search-bar />
 
 				<router-link class="px-4 py-1 bg-primary text-white rounded-lg" to="/questions">
@@ -100,7 +96,7 @@
 					<avatar :size="26" :src="user?.avatar?.link" />
 				</router-link>
 			</div>
-			<div :class="noSideBar ? 'w-[21%]' : 'w-1/4'" class="flex flex-row items-center py-1 -mr-5">
+			<div class="w-1/4 flex flex-row items-center py-1 -mr-5">
 				<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
 					<div class="w-1/3 flex flex-row items-center">
 						<Coins :gold="false" :size="20" class="mr-2 inline" />
@@ -122,7 +118,6 @@
 import { defineComponent } from 'vue'
 import { IonButtons, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue'
 import { add, arrowBackOutline, chatbubble, home, notifications, school, search } from 'ionicons/icons'
-import { useStore } from '@app/store'
 import { useAuth } from '@app/composable/auth/auth'
 import Coins from '../../core/Coins.vue'
 import Avatar from '@app/components/core/Avatar.vue'
@@ -131,16 +126,6 @@ import SearchBar from '@app/components/search/SearchBar.vue'
 
 export default defineComponent({
 	components: { IonIcon, Avatar, IonButtons, IonHeader, IonToolbar, IonTitle, Coins, SearchBar },
-	props: {
-		isNotDashboard: {
-			type: Boolean,
-			default: true
-		},
-		noSideBar: {
-			type: Boolean,
-			default: false
-		}
-	},
 	setup () {
 		const router = useRouter()
 
@@ -148,11 +133,9 @@ export default defineComponent({
 
 		const { user } = useAuth()
 
-		const store = useStore()
 		return {
 			displayName,
 			add,
-			store,
 			home,
 			user,
 			router,

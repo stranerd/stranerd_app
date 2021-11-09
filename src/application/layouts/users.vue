@@ -2,7 +2,7 @@
 	<IonContent :fullscreen="true">
 		<div class="flex h-full">
 			<div class="layout">
-				<InnerTopBar :isNotDashboard="false" />
+				<InnerTopBar />
 				<div class="layout-page">
 					<div class="!w-full layout-body">
 						<slot />
