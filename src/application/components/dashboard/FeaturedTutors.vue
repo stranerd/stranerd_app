@@ -37,7 +37,7 @@
 				<swiper-slide
 					v-for="(tutor,index) in tutors"
 					:key="index"
-					class="!w-1/4 !pr-3">
+					class="!w-1/3 !pr-3">
 					<tutor-card :class="0 === index ? 'bg-light_gray flex' : 'bg-light_gray flex'" :showButton="false"
 						:tutor="tutor" />
 				</swiper-slide>
