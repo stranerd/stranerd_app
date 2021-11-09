@@ -50,7 +50,7 @@ export const useLeaderboardList = () => {
 		get: () => global.users.value.filter((user, index) => {
 			let matched = true
 			if (user.id === id.value) {
-				global.Userindex.value = index
+				global.userIndex.value = index
 				return matched = false
 			}
 			return matched

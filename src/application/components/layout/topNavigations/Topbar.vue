@@ -3,7 +3,7 @@
 		<!-- Small screens -->
 		<div class="md:hidden bg-[#F7F7FC] py-2 px-4 flex border-0 items-center justify-between items-center z-50">
 			<router-link class="flex flex-row items-center w-[15%]" to="/account">
-				<avatar :photo-url="user?.avatar?.link" size="30" />
+				<avatar :src="user?.avatar?.link" :size="30" />
 			</router-link>
 
 			<div class="flex flex-row items-center px-3 w-[70%] justify-center">
@@ -31,7 +31,7 @@
 		</div>
 
 		<!-- medium screens -->
-		<div v-if="!isNotDashboard && !store.state.showPage "
+		<div
 			class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50">
 			<div class="flex flex-row items-center gap-9 w-1/4">
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center "
@@ -96,7 +96,7 @@
 
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
 					to="/account">
-					<avatar :photo-url="user?.avatar?.link" :size="'26'" />
+					<avatar :photo-url="user?.avatar?.link" :size="26" />
 				</router-link>
 			</div>
 			<div class="w-1/4 flex flex-row items-center py-1 px-2">
@@ -125,13 +125,14 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { add, close, home, search } from 'ionicons/icons'
+import { add, close, home, search, school, notifications } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
-import Avatar from '@app/components/core/AvatarUser.vue'
+import Avatar from '@app/components/core/Avatar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
+import Coins from '@app/components/core/Coins.vue'
 
 export default defineComponent({
-	components: { IonIcon, Avatar, SearchBar },
+	components: { IonIcon, Avatar, SearchBar,Coins },
 	setup () {
 		const { user } = useAuth()
 		const showSearch = ref(false)
@@ -145,7 +146,9 @@ export default defineComponent({
 			add,
 			home,
 			user,
-			search
+			search,
+			school,
+			notifications
 		}
 	}
 })
