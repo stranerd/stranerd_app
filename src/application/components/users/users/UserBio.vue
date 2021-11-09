@@ -38,19 +38,18 @@
 				</div>
 				<span v-else>N/A</span>
 			</div>
-
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-
+import { defineComponent } from 'vue'
 import { star } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useUser } from '@app/composable/users/user'
-import Subject from '../../questions/subjects/Subject.vue'
+import Subject from '@app/components/questions/subjects/Subject.vue'
 
-export default {
+export default defineComponent({
 	name: 'profileBio',
 	components: { Subject },
 	props: {
@@ -60,9 +59,9 @@ export default {
 			default: ''
 		}
 	},
-	setup (props: any) {
-		const { id, user: authUser } = useAuth()
-		const { error, loading, user } = useUser(props.userId)
+	setup (props) {
+		const { id } = useAuth()
+		const { user } = useUser(props.userId)
 
 		return {
 			id,
@@ -70,8 +69,9 @@ export default {
 			star
 		}
 	}
-}
+})
 </script>
+
 <style scoped>
 	ion-toolbar {
 		--background: #F7F7FC;

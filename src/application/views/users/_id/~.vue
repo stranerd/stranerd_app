@@ -9,14 +9,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonContent, IonPage } from '@ionic/vue'
-import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	components: { IonContent, IonPage },
 	layout: 'users',
-	middlewares: [async () => {
-		const { id } = useRoute().params
-		return `/users/${id}/`
-	}]
+	middlewares: [async ({ to }) => `/users/${to.params.id}/`]
 })
 </script>
