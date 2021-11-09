@@ -16,7 +16,22 @@
 						</router-link>
 					</div>
 				</div>
-				<ask-questions />
+				<div class="text-xs md:text-sm py-6">
+					<h3 class="text-center font-bold text-dark_gray">
+						Ask questions to help with your homework and studies.
+					</h3>
+					<QuestionForm
+						:coins="coins"
+						:error="error"
+						:factory="factory"
+						:loading="loading"
+						:submit="createQuestion"
+					>
+						<template v-slot:buttonText>
+							Post Question
+						</template>
+					</QuestionForm>
+				</div>
 			</div>
 		</IonContent>
 	</IonPage>
@@ -24,15 +39,18 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import AskQuestions from '@app/components/questions/ask.vue'
+import QuestionForm from '@app/components/questions/questions/QuestionForm.vue'
 import { IonContent, IonPage } from '@ionic/vue'
+import { useCreateQuestion } from '@app/composable/questions/questions'
 
 export default defineComponent({
 	name: 'CreateQuestionPage',
-	components: {
-		AskQuestions, IonPage, IonContent
-	},
-	// middlewares: ['isAuthenticated'],
-	layout: 'dashboard'
+	components: { IonPage, IonContent, QuestionForm },
+	middlewares: ['isAuthenticated'],
+	layout: 'dashboard',
+	setup () {
+		const { factory, error, loading, coins, createQuestion } = useCreateQuestion()
+		return { factory, error, loading, coins, createQuestion }
+	}
 })
 </script>

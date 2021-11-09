@@ -17,11 +17,7 @@ import { QuestionToModel } from '../../data/models/question'
 
 type Content = File | Media
 type Keys = {
-	body: string
-	coins: number
-	subjectId: string
-	tags: string[]
-	attachments: Content[]
+	body: string, coins: number, subjectId: string, tags: string[], attachments: Content[]
 }
 
 export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel, Keys> {

@@ -4,10 +4,7 @@
 			<div class="flex flex-row items-center">
 				<Avatar :photo-url="answer.avatar?.link" :size="'30'" class="mr-2" />
 				<span class="font-bold text-dark_gray">{{ answer.userBio.fullName }}</span>
-				<div class="flex flex-row-reverse flex-grow">
-					<IonIcon :icon="shareSocial" class="text-[22px]  text-icon_inactive" />
-					<IonIcon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive" />
-				</div>
+
 			</div>
 
 			<pre class="py-5" v-html="answer.title" />

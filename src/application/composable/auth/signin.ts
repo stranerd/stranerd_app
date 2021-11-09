@@ -1,4 +1,4 @@
-import { Ref, ref } from 'vue'
+import { Directive, Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import {
 	CompleteEmailVerification,
@@ -13,7 +13,7 @@ import {
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'
-import { googleClientId} from '@utils/environment'
+import { googleClientId } from '@utils/environment'
 import { useAuth } from '@app/composable/auth/auth'
 
 const global = {
@@ -30,10 +30,6 @@ export const saveReferrerId = () => {
 	const id = getReferrerId()
 	if (id) window.localStorage.setItem('referrer', id)
 }
-
-
-
-
 
 export const useEmailSignin = () => {
 	const router = useRouter()
@@ -154,22 +150,21 @@ export const useGoogleSignin = () => {
 	return { loading, error, signin, setError }
 }
 
-export const Gauth: any = {
-	  beforeMount (el: any, binding: any, vnode: any) {
-		const clientId = binding.value
+export const GoogleAuth: Directive = {
+	beforeMount (el: Element) {
+		const { setError, signin } = useGoogleSignin()
 		const googleSignInAPI = document.createElement('script')
 		googleSignInAPI.setAttribute('src', 'https://apis.google.com/js/api:client.js')
 		document.head.appendChild(googleSignInAPI)
-		function OnSuccess(googleUser: any) {
-			useGoogleSignin().signin(googleUser.getAuthResponse().id_token)
+		const onSuccess = async (googleUser: any) => {
+			await signin(googleUser.getAuthResponse().id_token)
 			googleUser.disconnect()
 		}
-		function Onfail(error: any) {
-			useGoogleSignin().setError('Error signing in with google')
+		const onFail = async () => {
+			await setError('Error signing in with google')
 		}
 
-
-		const  InitGoogleButton = ()=> {
+		googleSignInAPI.onload = () => {
 			//@ts-ignore
 			gapi.load('auth2', () => {
 				//@ts-ignore
@@ -177,19 +172,8 @@ export const Gauth: any = {
 					client_id: googleClientId,
 					cookiepolicy: 'single_host_origin'
 				})
-				auth2.attachClickHandler(el, {},
-					OnSuccess,
-					Onfail
-				)
+				auth2.attachClickHandler(el, {}, onSuccess, onFail)
 			})
 		}
-
-
-
-
-		googleSignInAPI.onload = InitGoogleButton
-
-
-
 	}
 }

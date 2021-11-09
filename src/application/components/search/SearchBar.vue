@@ -1,15 +1,14 @@
 <template>
 	<div>
-		<form class="gap-1 d-flex px-1">
+		<form class="gap-1 d-flex">
 			<div class="search-container gap-0-25">
 				<ion-searchbar
 					v-model.trim="searchTerm"
 					class="form-control"
 					placeholder="Search for anything..."
 					cancel-button-icon="never"
+					clear-icon="undefined"
 				></ion-searchbar>
-
-
 			</div>
 		</form>
 		<div v-if="searchTerm" class="flex flex-col results p-6 gap-6 mt-6">
@@ -29,7 +28,7 @@
 				<h2 variant="2">
 					Answers
 				</h2>
-				<div v-for="answer in answersResult" :key="answer.hash">
+				<div v-for="answer in answersResult" :key="answer.hash">,
 					<router-link :to="`/questions/${answer.questionId}#${answer.id}`">
 						<DynamicText class="lead d-block">
 							{{ extractTextFromHTML(answer.title) }}
@@ -72,7 +71,7 @@ import Avatar from '../core/Avatar.vue'
 
 export default defineComponent({
 	name: 'SearchBar',
-	 components: { IonSearchbar, Avatar,  },
+	components: { IonSearchbar, Avatar },
 	setup () {
 		const { searchTerm, loading, error, questionsResult, answersResult, usersResult } = useSearch()
 		return {
@@ -86,19 +85,20 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-searchbar {
-		--background:  #F7F7FC;
+		--background: #F7F7FC;
 		--box-shadow: none;
 		--border-radius: .75rem;
 		border-radius: .75rem;
 		--icon-color: #8B9EB1;
 		--color: #8B9EB1;
-		min-width:26vw;
-		--padding-bottom:4em;
-		@media (max-width: 500px) {
-			min-width:88vw;
+		min-width: 26vw;
+		--padding-bottom: 4em;
+		@media (max-width: 1024px) {
+			min-width: 92vw;
 		}
 
 	}
+
 	form {
 		flex-grow: 1;
 

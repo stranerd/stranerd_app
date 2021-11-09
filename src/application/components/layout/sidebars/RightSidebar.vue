@@ -59,7 +59,7 @@ import { useLeaderboardList } from '@app/composable/users/leaderboard'
 
 export default defineComponent({
 	setup () {
-		const { filteredUsers: leaderboardData, loading, Userindex, RankType } = useLeaderboardList()
+		const { ShortenedfilteredUsers: leaderboardData, loading, Userindex, RankType } = useLeaderboardList()
 		const { user } = useAuth()
 
 		return {

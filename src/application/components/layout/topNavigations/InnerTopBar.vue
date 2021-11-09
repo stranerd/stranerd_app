@@ -45,7 +45,7 @@
 		</div>
 
 
-		<div class="flex flex-row-reverse items-center gap-9 w-1/4">
+		<div class="flex flex-row items-center justify-end gap-9 w-1/4">
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
 				to="/notifications">
 				<ion-icon :icon="notifications" class="text-2xl text-icon_inactive"></ion-icon>
@@ -53,10 +53,8 @@
 			</router-link>
 
 			<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
-
-				<ion-icon :icon="search" class="text-2xl text-icon_inactive"></ion-icon>
-
-
+				<search-bar v-if="showSearch" class="absolute left-3.5"/>
+				<ion-icon :icon="showSearch ? close : search" class="text-2xl text-icon_inactive"  @click="toggleSearch"></ion-icon>
 			</div>
 
 		</div>
@@ -117,9 +115,9 @@
 	</div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { IonButtons, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue'
-import { add, arrowBackOutline, chatbubble, home, notifications, school, search } from 'ionicons/icons'
+import { add, arrowBackOutline, chatbubble, home, notifications, school, search, close } from 'ionicons/icons'
 import { useStore } from '@app/store'
 import { useAuth } from '@app/composable/auth/auth'
 import Coins from '../../core/Coins.vue'
@@ -141,13 +139,17 @@ export default defineComponent({
 	},
 	setup () {
 		const router = useRouter()
-
 		const displayName = useRoute().meta.displayName
-
 		const { user } = useAuth()
+		const showSearch = ref(false)
+		const toggleSearch = () => {
+			showSearch.value = !showSearch.value
+		}
 
 		const store = useStore()
 		return {
+			showSearch,
+			toggleSearch,
 			displayName,
 			add,
 			store,
@@ -158,6 +160,7 @@ export default defineComponent({
 			school,
 			notifications,
 			search,
+			close,
 			chatbubble
 		}
 	}

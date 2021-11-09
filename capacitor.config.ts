@@ -1,10 +1,10 @@
-import { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'stranerd_app',
-  webDir: 'dist',
-  bundledWebRuntime: false
-};
+	appId: 'com.stranerd.app',
+	appName: 'stranerd',
+	webDir: 'dist',
+	bundledWebRuntime: false
+}
 
-export default config;
+export default config

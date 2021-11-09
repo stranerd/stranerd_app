@@ -3,8 +3,8 @@
 		<IonInput
 			v-model="term"
 			:placeholder="placeholder"
-			autocomplete="autocomplete"
-			class="form-control w-100"
+			autocomplete="on"
+			class="w-full"
 			type="text"
 			@keydown.enter.prevent="onEnter"
 			@keydown.down.prevent="onDown"
@@ -17,8 +17,7 @@
 				:class="{'isActive': current === i}"
 				@click="select(suggestion.search)"
 			>
-				<DynamicText>{{ suggestion.title }}</DynamicText>
-
+				<span>{{ suggestion.title }}</span>
 			</a>
 			<a v-if="matches.length === 0" class="text-lowercase">
 				<span class="text-capitalize">No</span> option matches '{{ value }}'
@@ -29,11 +28,11 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue'
-import {IonInput } from '@ionic/vue'
+import { IonInput } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'AutoComplete',
-	components:{IonInput},
+	components: { IonInput },
 	props: {
 		icon: {
 			type: Boolean,
@@ -116,8 +115,8 @@ export default defineComponent({
 		--color: $color-dark !important;
 		--placeholder-color: $color-dark !important;
 		border-radius: 10px;
-		margin-bottom: 1.25rem;
 	}
+
 	.filter {
 		padding: 1rem;
 		border-radius: 12px 0 0 12px;
