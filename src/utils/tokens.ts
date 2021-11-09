@@ -9,7 +9,7 @@ type Tokens = {
 
 const tokens = ref<Tokens>({
 	accessToken: localStorage.getItem(ACCESS_TOKEN_NAME),
-	refreshToken: localStorage.getItem('refreshToken')
+	refreshToken: localStorage.getItem(REFRESH_TOKEN_NAME)
 })
 
 export const saveTokens = async ({ accessToken, refreshToken }: Tokens) => {

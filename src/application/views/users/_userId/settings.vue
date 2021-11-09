@@ -17,9 +17,9 @@ export default defineComponent({
 	displayName: 'Profile',
 	layout: 'users',
 	middlewares: ['isAuthenticated', async ({ to }) => {
-		const id = to.params.id
+		const userId = to.params.userId
 		const authId = useAuth().id.value
-		if (id !== authId) return `/users/${authId}/settings`
+		if (userId !== authId) return `/users/${userId}/`
 	}],
 	components: { UserPageWrapper, UserSettings }
 })
