@@ -1,10 +1,10 @@
 const getPath = (page: string[]) => page.map((path) => {
-	if (path === 'index') return null
+	if (path === 'index') return ''
 	if (path === '~') return ':pathMatch(.*)*'
 	if (path.startsWith('^')) path = path.replace('^', '')
 	if (path.startsWith('_')) path = path.replace('_', ':')
 	return path
-}).filter((p) => !!p).join('/')
+}).join('/').replaceAll('///', '/').replaceAll('//', '/')
 
 const makeRoute = async (page: string[]) => {
 	const path = '/' + getPath(page)
