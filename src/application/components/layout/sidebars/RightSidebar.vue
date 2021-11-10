@@ -1,7 +1,5 @@
 <template>
 	<div class="w-full flex flex-col py-3 px-2 ">
-
-
 		<div class="flex flex-col text-sm text-dark_gray gap-3">
 			<div class="flex flex-row justify-between items-center">
 				<h2 class="text-dark_gray text-base font-bold ">Ranking</h2>
@@ -37,6 +35,7 @@
 		</div>
 	</div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
@@ -56,3 +55,4 @@ export default defineComponent({
 		}
 	}
 })
+</script>
