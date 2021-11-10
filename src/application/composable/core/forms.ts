@@ -44,7 +44,6 @@ export const useTags = (addCb: callback, removeCb: callback) => {
 
 		removeCb(tag.toLowerCase())
 		nextTick()
-		console.log('Now DOM is updated')
 	}
 	return { tag, removeTag }
 }

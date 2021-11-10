@@ -51,7 +51,7 @@
 								<span> - </span>
 							</div>
 							<div class="w-7/12 flex items-center gap-2">
-								<avatar :size="24" :src="user.bio.photo" />
+								<avatar :size="24" :src="user.bio.photo" :id="user.id" />
 								<span>
 									{{ user.bio.fullName }}
 								</span>
@@ -68,7 +68,7 @@
 									<span>{{ index + 1 }} </span>
 								</div>
 								<div class="w-3/12 flex items-center gap-2">
-									<avatar :size="24" :src="person.bio.photo" />
+									<avatar :size="24" :src="person.bio.photo" :id="person.id" />
 									<span>
 										{{ person.bio.fullName }}
 									</span>

@@ -1,5 +1,5 @@
 <template>
-	<router-link :to="`/profile/${id}`">
+	<router-link :to="`/users/${id}`">
 		<img
 			:src="source"
 			:style="`width: ${size}px; height: ${size}px; border-radius: 10rem; border: 1.5px solid transparent; object-fit: cover;`"
@@ -20,7 +20,7 @@ export default defineComponent({
 	props: {
 		id:{
 			type: String,
-			default:null
+			default:''
 		},
 		src: {
 			type: Object as PropType<Media | null>,

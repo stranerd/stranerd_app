@@ -8,7 +8,7 @@
 
 		<div class="py-4 w-full px-3 flex items-center flex-row gap-2   border-b-[1px] border-light_gray">
 
-			<avatar :photoUrl="user?.avatar?.link" :size="55" :id="user.id" />
+			<avatar :src="user?.avatar?.link" :size="55" :id="user.id" />
 			<div class="flex flex-col gap-1">
 				<h2 class="font-bold text-dark_gray">{{ user?.fullName }}</h2>
 				<div class="flex flex-row gap-1 items-center  ">
