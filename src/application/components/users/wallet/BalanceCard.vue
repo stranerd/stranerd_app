@@ -32,12 +32,6 @@
 				<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 			</button>
 
-			<button
-				class=" px-6 py-3 md:px-10 headings relative ion-activatable border-[1px] border-solid border-dark_gray rounded-lg text-dark_gray font-bold bg-transparent "
-				@click="makeWithdrawal">
-				Withdraw
-				<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-			</button>
 		</div>
 
 	</div>

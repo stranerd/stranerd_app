@@ -31,11 +31,8 @@
 								<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
 							</ion-button>
 						</form>
-						<div class="w-full flex justify-between items-center  text-dark_gray">
-							<div class="flex justify-between items-center gap-2">
-								<ion-checkbox checked="true" color="primary" mode="ios"></ion-checkbox>
-								<span class="normalText">Stay signed in</span>
-							</div>
+						<div class="w-full flex justify-center items-center  text-dark_gray">
+
 
 							<router-link class="underline normalText" to="/auth/forgot">
 								Forgot Password
@@ -69,11 +66,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useEmailSignin } from '@app/composable/auth/signin'
-import { IonButton, IonCheckbox, IonContent, IonInput, IonPage, IonSpinner } from '@ionic/vue'
+import { IonButton, IonContent, IonInput, IonPage, IonSpinner } from '@ionic/vue'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
 
 export default defineComponent({
-	components: { IonContent, IonPage, IonInput, IonButton, IonCheckbox, AuthProviders, IonSpinner },
+	components: { IonContent, IonPage, IonInput, IonButton, AuthProviders, IonSpinner },
 	layout: 'auth',
 	middlewares: ['isNotAuthenticated'],
 	setup () {

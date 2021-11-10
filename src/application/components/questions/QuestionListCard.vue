@@ -13,6 +13,7 @@
 				<template v-else>
 					<template v-if="!fromViewQuestion">
 						<button
+							@click="openAnswerModal(question)"
 							class="py-1 px-3 rounded-lg text-white bg-dark_gray font-bold flex flex-row items-center">
 							<span class="mr-2">Answer</span>
 							<span class="h-1 w-1 rounded-full bg-white mr-2"></span>
@@ -74,6 +75,7 @@ import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
 import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/Avatar.vue'
+import { openAnswerModal, showAddAnswer } from '@app/composable/questions/answers'
 
 
 export default defineComponent({
@@ -103,8 +105,9 @@ export default defineComponent({
 	components: {
 		IonIcon, IonRippleEffect, Avatar, Subject
 	},
-	setup () {
+	setup (props) {
 		return {
+			openAnswerModal: () => openAnswerModal(props.question),
 			arrowRedo,
 			flag,
 			formatTime, pluralize
