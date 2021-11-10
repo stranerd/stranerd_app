@@ -3,7 +3,7 @@
 		<div class="py-4 px-4 rounded-lg bg-light_gray flex flex-col text-xs md:text-sm">
 			<IonRippleEffect class="rounded-lg" />
 			<div class="flex flex-row items-center">
-				<span class="mr-2"><avatar :photo-url="question.avatar?.link" size="28" /></span>
+				<span class="mr-2"><avatar :photo-url="question.avatar?.link" size="28" :id="question.userId"/></span>
 				<span class="font-bold text-dark_gray">{{ question.userBio.fullName }}</span>
 				<div class="flex flex-row-reverse flex-grow">
 					<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive" />
@@ -73,7 +73,7 @@ import { IonIcon, IonRippleEffect } from '@ionic/vue'
 import { arrowRedo, flag, pencil, trashBinOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import Subject from '@app/components/questions/subjects/Subject.vue'
-import Avatar from '@app/components/core/AvatarUser.vue'
+import Avatar from '@app/components/core/Avatar.vue'
 import PhotoList from '@app/components/core/PhotoList.vue'
 import CreateAnswer from '@app/components/questions/answers/create.vue'
 import { pluralize } from '@utils/commons'

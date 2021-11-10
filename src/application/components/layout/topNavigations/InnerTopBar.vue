@@ -14,7 +14,8 @@
 		</ion-header>
 
 		<!-- medium screens -->
-		<div class="hidden lg:hidden md:flex bg-white py-3 px-3 items-center z-50">
+		<div
+			class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50">
 			<div class="flex flex-row items-center gap-9 w-1/4">
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center "
 					to="/account">
@@ -24,6 +25,7 @@
 				<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
 					<ion-icon :icon="school" class="text-2xl text-icon_inactive"></ion-icon>
 				</div>
+
 			</div>
 
 			<div class="flex flex-row items-center px-6 w-2/4 justify-center">
@@ -34,6 +36,7 @@
 					</div>
 					<div class="w-1/3 flex flex-row items-center justify-center">
 						<ion-icon :icon="add" class="text-3xl text-icon_inactive"></ion-icon>
+
 					</div>
 					<div class="w-1/3 flex flex-row-reverse items-center">
 						<span class="font-semibold text-sm text-dark_grey ">{{ user?.account.coins.gold }}</span>
@@ -43,17 +46,19 @@
 			</div>
 
 
-			<div class="flex flex-row-reverse items-center gap-9 w-1/4">
-				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/notifications"/>
-				<ion-icon :icon="notifications" class="text-2xl text-icon_inactive"></ion-icon>
+			<div class="flex flex-row items-center justify-end gap-9 w-1/4">
+				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
+					to="/notifications">
+					<ion-icon :icon="notifications" class="text-2xl text-icon_inactive"></ion-icon>
+
+				</router-link>
 
 				<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
-					<search-bar v-if="showSearch" class="absolute left-3.5"/>
+					<search-bar v-if="showSearch" class="absolute left-0"/>
 					<ion-icon :icon="showSearch ? close : search" class="text-2xl text-icon_inactive"  @click="toggleSearch"></ion-icon>
 				</div>
 
 			</div>
-
 		</div>
 
 		<!-- large screens -->

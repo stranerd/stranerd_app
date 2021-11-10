@@ -3,7 +3,7 @@
 		<!-- Small screens -->
 		<div class="md:hidden bg-[#F7F7FC] py-2 px-4 flex border-0 items-center justify-between items-center z-50">
 			<router-link class="flex flex-row items-center w-[15%]" to="/account">
-				<avatar :src="user?.avatar?.link" :size="30" />
+				<avatar :src="user?.avatar?.link" :id="user.id" :size="30" />
 			</router-link>
 
 			<div class="flex flex-row items-center px-3 w-[70%] justify-center">
@@ -36,7 +36,7 @@
 			<div class="flex flex-row items-center gap-9 w-1/4">
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center "
 					to="/account">
-					<avatar :size="26" :src="user?.avatar?.link" />
+					<avatar :size="26" :src="user?.avatar?.link" :id="user.id" />
 				</router-link>
 
 				<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
@@ -96,7 +96,7 @@
 
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
 					to="/account">
-					<avatar :photo-url="user?.avatar?.link" :size="26" />
+					<avatar :photo-url="user?.avatar?.link" :id="user.id" :size="26" />
 				</router-link>
 			</div>
 			<div class="w-1/4 flex flex-row items-center py-1 px-2">

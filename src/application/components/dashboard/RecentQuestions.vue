@@ -5,19 +5,18 @@
 				Recent questions
 			</span>
 
-			<slider-controller class="hidden lg:flex" />
 
-			<div class="text-primary normalText flex items-center font-bold">
+			<router-link to="/questions" class="text-primary normalText flex items-center font-bold" v-if="questions.length ">
 				<span>view all</span>
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
-			</div>
+			</router-link>
 		</div>
 
 		<template v-if="questions.length === 0">
 			<div class="py-3">
 				<empty-state
-					:btnText="'Ask a question'"
-					:info="'You have no recent questions! Start asking questions to help with homework and studying.'"
+					btnText="Ask a question"
+					info="You have no recent questions! Start asking questions to help with homework and studying."
 					route="/questions"
 				></empty-state>
 			</div>
@@ -46,8 +45,8 @@
 					<swiper-slide
 						v-for="(question,index) in questions"
 						:key="index"
-						class="!w-1/3 !pr-3">
-						<question :colorClass="0 === index ? 'bg-butter_yellow h-[155px]' : 'bg-light_gray h-[155px]'"
+						class="!w-2/5 !max-w-[18rem] !pr-3">
+						<question :colorClass="0 === index ? 'bg-butter_yellow h-[9rem]' : 'bg-light_gray h-[9rem]'"
 							:fromHome="true" :question="question" />
 					</swiper-slide>
 
@@ -61,7 +60,6 @@
 <script lang="ts">
 import { IonIcon } from '@ionic/vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
-import SliderController from '@app/components/core/nav/sliderController.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
 import Question from '../questions/QuestionListCard.vue'
@@ -70,7 +68,7 @@ import EmptyState from '../core/emptyState.vue'
 
 export default {
 	name: 'RecentTransactions',
-	components: { IonIcon, SliderController, Swiper, SwiperSlide, Question, EmptyState },
+	components: { IonIcon, Swiper, SwiperSlide, Question, EmptyState },
 	setup () {
 
 		const { questions } = useQuestionList()

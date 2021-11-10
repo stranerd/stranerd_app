@@ -4,7 +4,7 @@
 		:to="`/questions/${question.id}`">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
-			<avatar :photo-url="question.avatar?.link" class="mr-2" size="28" />
+			<avatar :photo-url="question.avatar?.link" class="mr-2" size="28" :id="question.userId" />
 			<span class="font-bold text-dark_gray">{{ question.userBio.fullName }}</span>
 			<div class="flex flex-row-reverse flex-grow">
 				<template v-if="fromHome">
@@ -38,7 +38,7 @@
 			<Subject :key="question.subjectId" :subjectId="question.subjectId" class="font-semibold text-dark_gray" />
 		</div>
 
-		<pre class="py-2 text-dark_gray leading-normal mb-3 lg:mb-5"
+		<span class="py-2 text-dark_gray leading-normal mb-3 lg:mb-5"
 			v-html="fromViewQuestion ? question.body : question.trimmedBody" />
 
 		<div
@@ -73,8 +73,8 @@ import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
 import Subject from '@app/components/questions/subjects/Subject.vue'
+import Avatar from '@app/components/core/Avatar.vue'
 
-const Avatar = defineAsyncComponent(() => import('@app/components/core/AvatarUser.vue'))
 
 export default defineComponent({
 	name: 'QuestionListCard',

@@ -7,7 +7,8 @@
 			<div class="flex items-center gap-2">
 				<avatar
 					:size="24"
-					class="!h-[20px] !w-[20px] md:!h-[24px] md:!w-[24px] "
+					class="!h-[20px] !w-[20px] md:!h-[24px] md:!w-[24px]"
+					:id="user.id"
 				/>
 				<span class="font-bold text-dark_gray normalText">
 					Timmy Martin
