@@ -46,6 +46,19 @@ export const useLeaderboardList = () => {
 			users.map(pushToUsersList)
 		}
 	})
+	const ShortenedfilteredUsers = computed({
+		get: () => global.users.value.filter((user, index) => {
+			let matched = true
+			if (user.id === id.value) {
+				global.userIndex.value = index
+				return matched = false
+			}
+			return matched
+		}).splice(0,5),
+		set: (users) => {
+			users.map(pushToUsersList)
+		}
+	})
 	const listener = useListener(async () => () => {
 	})
 
@@ -53,5 +66,5 @@ export const useLeaderboardList = () => {
 		if (!global.fetched.value && !global.loading.value) await fetchUsers()
 	})
 
-	return { ...global, listener, filteredUsers }
+	return { ...global, listener, filteredUsers, ShortenedfilteredUsers }
 }

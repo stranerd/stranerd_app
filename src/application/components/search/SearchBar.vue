@@ -84,8 +84,8 @@ export default defineComponent({
 		--color: #8B9EB1;
 		min-width: 26vw;
 		--padding-bottom: 4em;
-		@media (max-width: 500px) {
-			min-width: 88vw;
+		@media (max-width: 1024px) {
+			min-width: 92vw;
 		}
 
 	}

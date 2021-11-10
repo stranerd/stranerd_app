@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue'
+import { ref, watch, nextTick  } from 'vue'
 
 export const usePassword = () => {
 	const show = ref(false)
@@ -40,7 +40,12 @@ export const useTags = (addCb: callback, removeCb: callback) => {
 			tag.value = ''
 		}
 	})
-	const removeTag = (tag: string) => removeCb(tag.toLowerCase())
+	const removeTag =  (tag: string) => {
+
+		removeCb(tag.toLowerCase())
+		nextTick()
+		console.log('Now DOM is updated')
+	}
 	return { tag, removeTag }
 }
 export const useSubjectAsTags = (addCb: callback, removeCb: callback) => {

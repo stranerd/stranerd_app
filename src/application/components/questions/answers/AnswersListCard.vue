@@ -4,10 +4,7 @@
 			<div class="flex flex-row items-center">
 				<Avatar :photo-url="answer.avatar?.link" :size="'30'" class="mr-2" />
 				<span class="font-bold text-dark_gray">{{ answer.userBio.fullName }}</span>
-				<div class="flex flex-row-reverse flex-grow">
-					<IonIcon :icon="shareSocial" class="text-[22px]  text-icon_inactive" />
-					<IonIcon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive" />
-				</div>
+
 			</div>
 
 			<pre class="py-5" v-html="answer.title" />
@@ -34,9 +31,9 @@
 			<div class="flex flex-row items-center justify-between mt-5">
 				<div class="flex flex-row items-center text-primary font-bold">
 					<span class="mr-1">({{ answer.upVotes }})</span>
-					<IonIcon :icon="thumbsUp" class="text-[22px] mr-2" />
+					<IonIcon :icon="thumbsUp" class="text-[22px] mr-2 cursor-pointer" @click="() => voteAnswer(true)"/>
 					<span class="mr-1 text-icon_inactive">({{ answer.downVotes }})</span>
-					<IonIcon :icon="thumbsDown" class="text-[22px] text-icon_inactive" />
+					<IonIcon :icon="thumbsDown" class="text-[22px] text-icon_inactive cursor-pointer" @click="() => voteAnswer(false)" />
 				</div>
 				<div class="flex flex-row items-center text-icon_inactive font-bold">
 					<template v-if="!answer.best">
@@ -54,6 +51,7 @@
 			<IonIcon :icon="send" class="text-[22px] mr-2 text-dark_gray" />
 		</div>
 	</div>
+	<page-loading v-if="loading"/>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
@@ -73,19 +71,27 @@ import {
 
 import Avatar from '@app/components/core/AvatarUser.vue'
 import PhotoList from '@app/components/core/PhotoList.vue'
+import { openAnswerEditModal, useAnswer, useDeleteAnswer } from '@app/composable/questions/answers'
+import PageLoading from '../../core/PageLoading.vue'
 
 export default defineComponent({
 	name: 'AnswerListCard',
-	components: { IonIcon, Avatar, PhotoList },
+	components: { IonIcon, Avatar, PhotoList, PageLoading },
 	props: {
 		answer: {
 			type: AnswerEntity,
 			required: true
 		}
 	},
-	setup () {
+	setup (props) {
 		const showExplanation = ref(false)
+		const { error, loading, markBestAnswer, voteAnswer } = useAnswer(props.answer)
 		return {
+			voteAnswer,
+			loading,
+
+
+
 			arrowBackOutline,
 			arrowRedo,
 			shareSocial,

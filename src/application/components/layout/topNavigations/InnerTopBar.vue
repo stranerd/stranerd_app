@@ -24,7 +24,6 @@
 				<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
 					<ion-icon :icon="school" class="text-2xl text-icon_inactive"></ion-icon>
 				</div>
-
 			</div>
 
 			<div class="flex flex-row items-center px-6 w-2/4 justify-center">
@@ -35,7 +34,6 @@
 					</div>
 					<div class="w-1/3 flex flex-row items-center justify-center">
 						<ion-icon :icon="add" class="text-3xl text-icon_inactive"></ion-icon>
-
 					</div>
 					<div class="w-1/3 flex flex-row-reverse items-center">
 						<span class="font-semibold text-sm text-dark_grey ">{{ user?.account.coins.gold }}</span>
@@ -46,20 +44,16 @@
 
 
 			<div class="flex flex-row-reverse items-center gap-9 w-1/4">
-				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-					to="/notifications">
-					<ion-icon :icon="notifications" class="text-2xl text-icon_inactive"></ion-icon>
-
-				</router-link>
+				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center" to="/notifications"/>
+				<ion-icon :icon="notifications" class="text-2xl text-icon_inactive"></ion-icon>
 
 				<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
-
-					<ion-icon :icon="search" class="text-2xl text-icon_inactive"></ion-icon>
-
-
+					<search-bar v-if="showSearch" class="absolute left-3.5"/>
+					<ion-icon :icon="showSearch ? close : search" class="text-2xl text-icon_inactive"  @click="toggleSearch"></ion-icon>
 				</div>
 
 			</div>
+
 		</div>
 
 		<!-- large screens -->
@@ -115,12 +109,14 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 </template>
+
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { IonButtons, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue'
-import { add, arrowBackOutline, chatbubble, home, notifications, school, search } from 'ionicons/icons'
+import { add, arrowBackOutline, chatbubble, home, notifications, school, search, close } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import Coins from '../../core/Coins.vue'
 import Avatar from '@app/components/core/Avatar.vue'
@@ -129,9 +125,16 @@ import SearchBar from '@app/components/search/SearchBar.vue'
 export default defineComponent({
 	components: { IonIcon, Avatar, IonButtons, IonHeader, IonToolbar, IonTitle, Coins, SearchBar },
 	setup () {
+
 		const { user } = useAuth()
+		const showSearch = ref(false)
+		const toggleSearch = () => {
+			showSearch.value = !showSearch.value
+		}
 
 		return {
+			showSearch,
+			toggleSearch,
 			add,
 			home,
 			user,
@@ -139,6 +142,7 @@ export default defineComponent({
 			school,
 			notifications,
 			search,
+			close,
 			chatbubble
 		}
 	}

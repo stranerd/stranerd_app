@@ -1,5 +1,7 @@
 <template>
 	<div class="w-full flex flex-col py-3 px-2 ">
+
+
 		<div class="flex flex-col text-sm text-dark_gray gap-3">
 			<div class="flex flex-row justify-between items-center">
 				<h2 class="text-dark_gray text-base font-bold ">Ranking</h2>
@@ -54,4 +56,3 @@ export default defineComponent({
 		}
 	}
 })
-</script>
