@@ -5,20 +5,11 @@
 			<div v-else class="max-w-4xl mx-auto ">
 
 
-				<div class="flex justify-center items-center mt-24 lg:mt-28 mb-2 md:px-2">
+				<div class="flex justify-center items-center mt-24 lg:mt-8 mb-2 md:px-2">
 					<span class="font-bold text-dark_gray heading hidden md:block" variant="1">
-						Tutor Leaderboard
+						Leaderboard
 					</span>
 					<div class="flex gap-4 md:ml-auto">
-						<ion-select class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold"
-							interface="action-sheet"
-							placeholder="General" value="notifications">
-							<ion-select-option value="maths">Daily</ion-select-option>
-							<ion-select-option value="physics">Monthly</ion-select-option>
-							<ion-select-option value="bio">Yearly</ion-select-option>
-
-						</ion-select>
-
 						<ion-select v-model="rankType"
 							class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold"
 							interface="action-sheet" placeholder="Daily" value="notifications">
