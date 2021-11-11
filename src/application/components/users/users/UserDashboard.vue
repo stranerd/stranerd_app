@@ -11,10 +11,7 @@
 			</div>
 			<div class="flex flex-col justify-center items-center w-full lg:w-1/2 ">
 				<div class="py-3">
-					<ProgressRing :base-color="'#CAE2E8'" :dimension="100"
-						:progress="user.score"
-						:radius="90"
-						:stroke="15" :stroke-color="'#546DD3'" />
+					<DonutChart :score="user.score" :size="120" :total="user.expectedScore" />
 				</div>
 			</div>
 		</div>
@@ -57,13 +54,13 @@ import { defineComponent } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { formatNumber, pluralize } from '@utils/commons'
 import { formatTime } from '@utils/dates'
-import ProgressRing from '@app/components/users/users/ProgressRing.vue'
 import { UserEntity } from '@modules/users'
 import { star } from 'ionicons/icons'
+import DonutChart from '@app/components/core/DonutChart.vue'
 
 export default defineComponent({
 	name: 'ProfileDashboard',
-	components: { IonIcon, ProgressRing },
+	components: { IonIcon, DonutChart },
 	props: {
 		user: {
 			type: UserEntity,

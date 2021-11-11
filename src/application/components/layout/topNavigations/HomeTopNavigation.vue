@@ -1,5 +1,5 @@
 <template>
-	<nav
+	<ion-header
 		:class="[show ?'fixed bg-dark_gray top-0 bottom-0 !text-white':'', 'w-full flex flex-col  z-10 bg-white text-primary lg:shadow']"
 		role="navigation">
 		<div class="md:px-8 p-4 flex items-center">
@@ -74,7 +74,7 @@
 				</a>
 			</div> -->
 		</div>
-	</nav>
+	</ion-header>
 </template>
 
 <script lang="ts">
@@ -82,11 +82,11 @@ import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { disableScroll, enableScroll } from '@utils/html'
 import Logo from '../../core/Logo.vue'
-import { IonIcon } from '@ionic/vue'
+import { IonIcon, IonHeader } from '@ionic/vue'
 import { close, menu } from 'ionicons/icons'
 
 export default defineComponent({
-	components: { Logo, IonIcon },
+	components: { Logo, IonIcon, IonHeader },
 	name: 'HomeTopNavigation',
 	setup () {
 		const router = useRouter()
