@@ -22,7 +22,7 @@
 					<swiper-slide
 						v-for="(transaction,index) in transactions"
 						:key="index"
-						class="!w-2/5 !max-w-[18rem] !pr-3">
+						class="!w-2/5 !max-w-[18rem] !min-w-[15rem] !pr-3">
 						<TransactionCard :transaction="transaction" :colorClass="0 === index ? 'bg-light_orange' : 'bg-light_gray'" />
 					</swiper-slide>
 
