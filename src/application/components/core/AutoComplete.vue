@@ -3,7 +3,6 @@
 		<IonInput
 			v-model="term"
 			:placeholder="placeholder"
-			autocomplete="on"
 			class="w-full"
 			type="text"
 			@keydown.enter.prevent="onEnter"

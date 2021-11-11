@@ -22,10 +22,7 @@
 		</div>
 
 		<div class="flex flex-col gap-2">
-			<h2 class="headings font-bold text-dark_gray">Username</h2>
-			<p>
-				*Use your real names, they can only be changed once
-			</p>
+			<h2 class="headings font-bold text-dark_gray">Name</h2>
 			<div class="flex flex-row items-center flex-wrap ">
 				<div class="pr-1 w-full md:w-1/2">
 					<div class="py-2 px-2  pl-6 bg-light_gray rounded-xl flex flex-row">
@@ -39,7 +36,6 @@
 						</ion-input>
 					</div>
 				</div>
-
 			</div>
 		</div>
 
@@ -115,7 +111,7 @@
 
 		<div class="flex flex-row gap-3 mt-7  text-white">
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<button class="cancleBtn w-full">
+				<button class="cancelBtn w-full" @click="$router.go(-1)">
 					Cancel
 					<ion-ripple-effect class="rounded-lg  ion-activatable"></ion-ripple-effect>
 				</button>
@@ -127,11 +123,6 @@
 				</ion-button>
 			</div>
 		</div>
-
-		<!-- <Subject/> -->
-		<!-- <SelectSubject/> -->
-
-
 	</div>
 </template>
 
@@ -204,6 +195,7 @@ export default defineComponent({
 	}
 })
 </script>
+
 <style scoped>
 	ion-toolbar {
 		--background: #F7F7FC;

@@ -79,7 +79,7 @@
 		@apply py-5 px-4
 	}
 
-	.cancleBtn {
+	.cancelBtn {
 		@apply px-6 py-3 relative rounded-lg  font-bold bg-dark_gray
 	}
 
