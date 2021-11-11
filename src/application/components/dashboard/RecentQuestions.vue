@@ -6,13 +6,13 @@
 			</span>
 
 
-			<router-link to="/questions" class="text-primary normalText flex items-center font-bold" v-if="questions.length ">
+			<router-link to="/questions" class="text-primary normalText flex items-center font-bold" v-if="shortenQuestionsList.length ">
 				<span>view all</span>
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>
 		</div>
 
-		<template v-if="questions.length === 0">
+		<template v-if="shortenQuestionsList.length === 0">
 			<div class="py-3">
 				<empty-state
 					btnText="Ask a question"
@@ -27,7 +27,7 @@
 					:direction="'horizontal'" :freeMode="true" class="overflow-x-auto"
 				>
 					<swiper-slide
-						v-for="(question,index) in questions"
+						v-for="(question,index) in shortenQuestionsList"
 						:key="index + 1"
 						class="flex md:!w-[300px] !w-[265px] mr-3">
 						<question :colorClass="0 === index ? 'bg-butter_yellow h-[150px]' : 'bg-light_gray h-[150px]'"
@@ -43,7 +43,7 @@
 					:slidesPerView="3" class="flex flex-row w-full items-center"
 				>
 					<swiper-slide
-						v-for="(question,index) in questions"
+						v-for="(question,index) in shortenQuestionsList"
 						:key="index"
 						class="!w-2/5 !max-w-[18rem] !pr-3">
 						<question :colorClass="0 === index ? 'bg-butter_yellow h-[9rem]' : 'bg-light_gray h-[9rem]'"
@@ -65,6 +65,7 @@ import 'swiper/swiper-bundle.min.css'
 import Question from '../questions/QuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '../core/emptyState.vue'
+import { computed } from '@vue/reactivity'
 
 export default {
 	name: 'RecentTransactions',
@@ -72,7 +73,16 @@ export default {
 	setup () {
 
 		const { questions } = useQuestionList()
-		return { chevronForwardOutline, chevronBackOutline, ellipse, questions }
+
+		const shortenQuestionsList = computed({
+			get:()=>{
+				return questions.value.slice(0,6)
+			},
+			set:()=>{	}
+		}
+
+		)
+		return { chevronForwardOutline, chevronBackOutline, ellipse, shortenQuestionsList }
 	}
 }
 </script>
