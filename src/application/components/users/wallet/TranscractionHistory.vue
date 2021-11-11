@@ -4,13 +4,13 @@
 			Transaction history
 		</span>
 
-		<ion-select class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold" interface="action-sheet"
+		<!-- <ion-select class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold" interface="action-sheet"
 			placeholder="Daily" value="notifications">
 			<ion-select-option value="maths">Daily</ion-select-option>
 			<ion-select-option value="physics">Monthly</ion-select-option>
 			<ion-select-option value="bio">Yearly</ion-select-option>
 
-		</ion-select>
+		</ion-select> -->
 	</div>
 
 	<div class="flex flex-col items-center justify-content-center gap-1 gap-md-2">
@@ -36,7 +36,7 @@
 
 		</div>
 
-		<div v-if="hasMore" class="text-center text-18">
+		<div v-if="hasMore" class="text-center text-lg text-primary font-bold cursor-pointer">
 			<a class="text-primary-dark py-2" @click.prevent="fetchOlderTransactions">LOAD MORE</a>
 		</div>
 	</div>
@@ -56,7 +56,7 @@ export default defineComponent({
 			type: String
 		}
 	},
-	components: { IonSelect, IonSelectOption, TranscrationHistoryCard },
+	components: { TranscrationHistoryCard },
 	setup (props) {
 		const { loading, error, transactions, hasMore, fetchOlderTransactions } = useTransactionList(props.userId)
 		return { loading, error, transactions, hasMore, fetchOlderTransactions }

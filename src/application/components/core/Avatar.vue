@@ -1,10 +1,13 @@
 <template>
-	<img
-		:src="source"
-		:style="`width: ${size}px; height: ${size}px; border-radius: 10rem; border: 1.5px solid transparent; object-fit: cover;`"
-		alt=""
-		class="!max-w-[1920px]"
-	>
+	<router-link :to="`/users/${id}`">
+		<img
+			:src="source"
+			:style="`width: ${size}px; height: ${size}px; border-radius: 10rem; border: 1.5px solid transparent; object-fit: cover;`"
+			alt=""
+			class="!max-w-[1920px]"
+		>
+	</router-link>
+
 </template>
 
 <script lang="ts">
@@ -15,6 +18,10 @@ import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
 export default defineComponent({
 	name: 'Avatar',
 	props: {
+		id:{
+			type: String,
+			default:''
+		},
 		src: {
 			type: Object as PropType<Media | null>,
 			default: null,

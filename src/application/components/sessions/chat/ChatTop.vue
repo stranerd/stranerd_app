@@ -5,7 +5,7 @@
 			<router-link to="/chat">
 				<ion-icon :icon="arrowBack" class="text-dark_gray mr-2 text-[25px] cursor-pointer"></ion-icon>
 			</router-link>
-			<avatar :photo-url="user?.avatar?.link" :size="'32'" />
+			<avatar :src="user?.avatar?.link" :size="32" :id="user.id"  />
 			<div class="flex flex-col ">
 				<h2 class="font-bold text-dark_gray">
 					{{ user?.fullName }}
@@ -33,8 +33,8 @@ import { useCountdown, useTimeDifference } from '@app/composable/core/dates'
 import { useAuth } from '@app/composable/auth/auth'
 import { setNewSessionTutorIdBio, useSession } from '@app/composable/sessions/sessions'
 import { useCurrentSession } from '@app/composable/sessions/session'
+import Avatar from '../../core/Avatar.vue'
 
-const Avatar = defineAsyncComponent(() => import('@app/components/core/AvatarUser.vue'))
 
 export default defineComponent({
 	props: {

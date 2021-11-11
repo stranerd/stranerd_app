@@ -6,37 +6,31 @@
 			<div class="col-span-6 grid grid-cols-12 md:px-2 ">
 				<div
 					class="py-1 px-2 px-md text-sm col-span-12 md:col-start-4 md:col-end-10 md:mb-3   bg-light_gray rounded-xl md:rounded-md flex flex-row">
-					<ion-select v-model="subjectId"
-						class="w-full text-xs md:text-sm text-icon_inactive  placeholder-[#8B9EB1] font-bold"
-						interface="action-sheet" placeholder="Filter by subject">
-						<ion-select-option :value="''">All Subjects</ion-select-option>
-						<ion-select-option v-for="(subject, index) in subjects" :key="index + 'subject'"
-							:value="subject.id">{{ subject.name }}
-						</ion-select-option>
-					</ion-select>
+					<select-subject v-model:subjectId="subjectId" :show-all="true"/>
 				</div>
 
 				<div
-					class="mt-2 col-span-12  md:col-start-4 md:col-end-10 flex flex-row-reverse  justify-center items-center ">
+					class="mt-2 col-span-12  md:col-start-4 md:col-end-10 flex flex-row  justify-center items-center ">
+					<span class="font-bold text-icon_inactive mr-3">Sort by: </span>
 					<div class="flex flex-row items-center mr-2 cursor-pointer"
-						@click="answered = answeredChoices[2].val; selectedFilter = 'All'">
-						<ion-icon :icon=" selectedFilter == 'All' ? ellipse : ellipseOutline"
+						@click="answered = answeredChoices[0].val; selectedFilter = 'All'">
+						<ion-icon :icon=" selectedFilter === 'All' ? ellipse : ellipseOutline"
+							class="text-lg mr-1 text-primary"></ion-icon>
+						<span class="font-bold text-icon_inactive">All </span>
+					</div>
+					<div class="flex flex-row items-center mr-2 cursor-pointer"
+						@click="answered = answeredChoices[2].val; selectedFilter = 'Answered'">
+						<ion-icon :icon=" selectedFilter === 'Answered' ? ellipse : ellipseOutline"
 							class="text-lg mr-1 text-primary"></ion-icon>
 						<span class="font-bold text-icon_inactive">Answered </span>
 					</div>
 					<div class="flex flex-row items-center mr-2 cursor-pointer"
-						@click="answered = answeredChoices[3].val; selectedFilter = 'Answered'">
-						<ion-icon :icon=" selectedFilter == 'Answered' ? ellipse : ellipseOutline"
+						@click="answered = answeredChoices[3].val; selectedFilter = 'Unanswered'">
+						<ion-icon :icon=" selectedFilter === 'Unanswered' ? ellipse : ellipseOutline"
 							class="text-lg mr-1 text-primary"></ion-icon>
 						<span class="font-bold text-icon_inactive">Unanswered </span>
 					</div>
-					<div class="flex flex-row items-center mr-2 cursor-pointer"
-						@click="answered = answeredChoices[0].val; selectedFilter = 'Unanswered'">
-						<ion-icon :icon=" selectedFilter == 'Unanswered' ? ellipse : ellipseOutline"
-							class="text-lg mr-1 text-primary"></ion-icon>
-						<span class="font-bold text-icon_inactive">All </span>
-					</div>
-					<span class="font-bold text-icon_inactive mr-3">Sort by: </span>
+
 
 				</div>
 			</div>
@@ -58,22 +52,28 @@
 							:colorClass="0 === index ? 'bg-butter_yellow h-[230px] md:h-[220px]' : 'bg-light_gray h-[230px] md:h-[220px]'"
 							:isFeatured="0 === index ? true : false" :question="question" />
 					</div>
+
+					<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
+						<a @click.prevent="fetchOlderQuestions">Load More</a>
+					</div>
 				</template>
 
 			</div>
 		</div>
 
 	</div>
-
+	<page-loading v-if="loading"/>
 </template>
 <script lang="ts">
-import { IonIcon, IonSelect, IonSelectOption } from '@ionic/vue'
+import { IonIcon } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'
 import { ellipse, ellipseOutline } from 'ionicons/icons'
 import { useQuestionList } from '@app/composable/questions/questions'
 import { useSubjectList } from '@app/composable/questions/subjects'
 import Question from '@app/components/questions/QuestionListCard.vue'
 import EmptyState from '@app/components/core/emptyState.vue'
+import SelectSubject from './subjects/SelectSubject.vue'
+import PageLoading from '../core/PageLoading.vue'
 
 export default defineComponent({
 	setup () {
@@ -94,9 +94,10 @@ export default defineComponent({
 			subjects
 		}
 	},
-	components: { IonSelect, IonSelectOption, IonIcon, Question, EmptyState }
+	components: {  IonIcon, Question, EmptyState, SelectSubject, PageLoading }
 })
 </script>
+
 <style scoped>
 	.customShadow {
 		box-shadow: 0 2px 6px rgb(0 0 0 / 0.2);

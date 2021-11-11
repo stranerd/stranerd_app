@@ -1,16 +1,13 @@
 <template>
 	<div>
 		<div class="w-full col-span-12 mb-4 flex-col flex gap-2 items-center justify-center normalText">
-			<Avatar :size="90" :src="user.avatar" />
+			<Avatar :size="90" :src="user.avatar" :id="user.id" />
 			<h2 class="headings font-bold text-dark_gray">{{ user.fullName }}</h2>
 			<span
 				class="py-1 px-4 rounded-md border-faded_gray border-[1px] font-bold text-icon_inactive bg-light_green">
 				{{ user.rank.id }}
 			</span>
-			<ShowRatings :rating="user.averageRating" />
-			<button v-if="canRequestSession" class="actionBtn mt-2 text-white" @click="requestNewSession">
-				Request a session
-			</button>
+
 		</div>
 		<div class="grid grid-cols-12 border-b-[1px] border-faded_gray my-5 lg:rounded-br-3xl lg:rounded-bl-3xl">
 			<div
@@ -47,14 +44,13 @@
 import { computed, defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import Avatar from '@app/components/core/Avatar.vue'
-import ShowRatings from '@app/components/core/ShowRatings.vue'
 import { setNewSessionTutorIdBio } from '@app/composable/sessions/sessions'
 import { useSessionModal } from '@app/composable/core/modals'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({
 	name: 'UserProfileCard',
-	components: { Avatar, ShowRatings },
+	components: { Avatar },
 	props: {
 		user: {
 			required: true,
