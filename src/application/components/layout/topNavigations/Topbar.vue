@@ -1,34 +1,36 @@
 <template>
 	<div>
-		<!-- Small screens -->
-		<div class="md:hidden bg-[#F7F7FC] py-2 px-4 flex border-0 items-center justify-between items-center z-50">
-			<router-link class="flex flex-row items-center w-[15%]" to="/account">
-				<avatar :src="user?.avatar" :id="user?.id" :size="30" />
-			</router-link>
 
-			<div class="flex flex-row items-center px-3 w-[70%] justify-center">
-				<div class="py-1 px-3 w-full bg-[#8B9EB1] flex rounded-xl flex-row items-center">
-					<div class="w-1/3 flex flex-row items-center">
-						<img class="inline h-6 mr-2" src="/assets/images/bronze.svg" />
-						<span class="font-semibold text-xs text-white ">{{ isLoggedIn ? user.account.coins.bronze : '-' }}</span>
-					</div>
-					<div class="w-1/3 flex flex-row items-center justify-center">
-						<ion-icon :icon="add" class="text-base cursor-pointer text-white" @click="isLoggedIn ? buyCoins() : null"></ion-icon>
-					</div>
-					<div class="w-1/3 flex flex-row-reverse items-center">
-						<span class="font-semibold text-xs text-white ">{{ isLoggedIn ? user.account.coins.gold : '-' }}</span>
-						<img class="inline h-6 mr-2" src="/assets/images/gold.svg" />
+		<ion-header class="block md:hidden ion-no-border">
+			<ion-toolbar class="md:hidden bg-[#F7F7FC] py-2 px-4 flex border-0 items-center justify-between items-center z-50">
+				<router-link class="flex flex-row items-center " to="/account" slot="start">
+					<avatar :src="user?.avatar" :id="user?.id" :size="30" />
+				</router-link>
+
+				<div class="flex flex-row items-center px-3 w-[75%] mx-auto justify-center">
+					<div class="py-1 px-3 w-full bg-[#8B9EB1] flex rounded-xl flex-row items-center">
+						<div class="w-1/3 flex flex-row items-center">
+							<img class="inline h-6 mr-2" src="/assets/images/bronze.svg" />
+							<span class="font-semibold text-xs text-white ">{{ isLoggedIn ? user.account.coins.bronze : '-' }}</span>
+						</div>
+						<div class="w-1/3 flex flex-row items-center justify-center">
+							<ion-icon :icon="add" class="text-base cursor-pointer text-white" @click="isLoggedIn ? buyCoins() : null"></ion-icon>
+						</div>
+						<div class="w-1/3 flex flex-row-reverse items-center">
+							<span class="font-semibold text-xs text-white ">{{ isLoggedIn ? user.account.coins.gold : '-' }}</span>
+							<img class="inline h-6 mr-2" src="/assets/images/gold.svg" />
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="flex items-center justify-end w-[15%]">
-				<IonIcon :icon="showSearch ? close : search" class="text-2xl text-icon_inactive"
-					@click="toggleSearch" />
-			</div>
+				<div class="flex items-center justify-end " slot="end">
+					<IonIcon :icon="showSearch ? close : search" class="text-2xl text-icon_inactive"
+						@click="toggleSearch" />
+				</div>
 
-			<search-bar v-if="showSearch" class="absolute left-3.5 " />
-		</div>
+				<search-bar v-if="showSearch" class="absolute left-3.5 " />
+			</ion-toolbar>
+		</ion-header>
 
 		<!-- medium screens -->
 		<div
@@ -126,7 +128,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IonIcon } from '@ionic/vue'
+import { IonIcon,   IonHeader,   IonToolbar } from '@ionic/vue'
 import { add, close, home, search, school, notifications } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import Avatar from '@app/components/core/Avatar.vue'
@@ -135,7 +137,7 @@ import Coins from '@app/components/core/Coins.vue'
 import { useAccountModal } from '@app/composable/core/modals'
 
 export default defineComponent({
-	components: { IonIcon, Avatar, SearchBar,Coins },
+	components: { IonIcon, Avatar, SearchBar,Coins,  IonHeader,   IonToolbar },
 	setup () {
 		const { user, isLoggedIn } = useAuth()
 		const showSearch = ref(false)
@@ -161,3 +163,18 @@ export default defineComponent({
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+	ion-toolbar {
+		--background: #F7F7FC;
+		--box-shadow: none;
+	}
+
+	ion-header {
+		--background: #F7F7FC;
+		--box-shadow: none;
+		height: 40px;
+	}
+
+
+</style>
