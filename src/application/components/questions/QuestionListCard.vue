@@ -4,7 +4,7 @@
 		:to="`/questions/${question.id}`">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
-			<avatar :photo-url="question.avatar?.link" class="mr-2" size="28" :id="question.userId" />
+			<avatar :id="question.userId" :photo-url="question.avatar?.link" :size="28" class="mr-2" />
 			<span class="font-bold text-dark_gray">{{ question.userBio.fullName }}</span>
 			<div class="flex flex-row-reverse flex-grow">
 				<template v-if="fromHome">
@@ -13,8 +13,8 @@
 				<template v-else>
 					<template v-if="!fromViewQuestion">
 						<button
-							@click="openAnswerModal(question)"
-							class="py-1 px-3 rounded-lg text-white bg-dark_gray font-bold flex flex-row items-center">
+							class="py-1 px-3 rounded-lg text-white bg-dark_gray font-bold flex flex-row items-center"
+							@click="openAnswerModal(question)">
 							<span class="mr-2">Answer</span>
 							<span class="h-1 w-1 rounded-full bg-white mr-2"></span>
 							<span class="mr-1 text-sm">+{{ question.creditable }}</span>
@@ -67,7 +67,7 @@
 	</router-link>
 </template>
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { IonIcon, IonRippleEffect } from '@ionic/vue'
 import { arrowRedo, flag } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
@@ -75,8 +75,7 @@ import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
 import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/Avatar.vue'
-import { openAnswerModal, showAddAnswer } from '@app/composable/questions/answers'
-
+import { openAnswerModal } from '@app/composable/questions/answers'
 
 export default defineComponent({
 	name: 'QuestionListCard',

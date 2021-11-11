@@ -5,8 +5,8 @@
 				Recent questions
 			</span>
 
-
-			<router-link to="/questions" class="text-primary normalText flex items-center font-bold" v-if="shortenQuestionsList.length ">
+			<router-link v-if="shortenQuestionsList.length " class="text-primary normalText flex items-center font-bold"
+				to="/questions">
 				<span>view all</span>
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>
@@ -58,16 +58,16 @@
 
 
 <script lang="ts">
+import { computed, defineComponent } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
 import Question from '../questions/QuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
-import EmptyState from '../core/emptyState.vue'
-import { computed } from '@vue/reactivity'
+import EmptyState from '@app/components/core/EmptyState.vue'
 
-export default {
+export default defineComponent({
 	name: 'RecentTransactions',
 	components: { IonIcon, Swiper, SwiperSlide, Question, EmptyState },
 	setup () {
@@ -75,16 +75,16 @@ export default {
 		const { questions } = useQuestionList()
 
 		const shortenQuestionsList = computed({
-			get:()=>{
-				return questions.value.slice(0,6)
+			get: () => {
+				return questions.value.slice(0, 6)
 			},
-			set:()=>{	}
+			set: () => {
+			}
 		}
-
 		)
 		return { chevronForwardOutline, chevronBackOutline, ellipse, shortenQuestionsList }
 	}
-}
+})
 </script>
 
 <style>

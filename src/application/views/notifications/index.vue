@@ -50,7 +50,7 @@ import NotificationCard from '@app/components/users/notifications/NotificationCa
 import { IonContent, IonIcon, IonPage } from '@ionic/vue'
 import { checkmarkDone } from 'ionicons/icons'
 import PageLoading from '@app/components/core/PageLoading.vue'
-import EmptyState from '@app/components/core/emptyState.vue'
+import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
 	name: 'Notification',

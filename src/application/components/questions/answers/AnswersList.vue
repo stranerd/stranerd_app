@@ -20,7 +20,7 @@ import { defineComponent } from 'vue'
 import { useAnswerList } from '@app/composable/questions/answers'
 import { QuestionEntity } from '@modules/questions'
 import AnswersListCard from '@app/components/questions/answers/AnswersListCard.vue'
-import EmptyState from '../../core/emptyState.vue'
+import EmptyState from '../../core/EmptyState.vue'
 
 export default defineComponent({
 	name: 'AnswersList',

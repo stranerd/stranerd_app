@@ -11,12 +11,7 @@
 			</div>
 			<div class="flex flex-col justify-center items-center w-full lg:w-1/2 ">
 				<div class="py-3">
-					<!-- <ProgressRing :base-color="'#CAE2E8'" :dimension="100"
-						:progress="user.score"
-						:radius="90"
-						:stroke="15" :stroke-color="'#546DD3'" /> -->
-					<DonutChart :score="user.score" :size="120" :total="user.expectedScore" :text="score" />
-
+					<DonutChart :score="user.score" :size="120" :total="user.expectedScore" />
 				</div>
 			</div>
 		</div>
@@ -65,7 +60,7 @@ import DonutChart from '@app/components/core/DonutChart.vue'
 
 export default defineComponent({
 	name: 'ProfileDashboard',
-	components: { IonIcon,  DonutChart },
+	components: { IonIcon, DonutChart },
 	props: {
 		user: {
 			type: UserEntity,

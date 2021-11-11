@@ -16,7 +16,12 @@ import { googleClientId } from '@utils/environment'
 import { useAuth } from '@app/composable/auth/auth'
 
 const global = {
-	referrerId: ref(undefined as string | undefined)
+	referrerId: ref(undefined as string | undefined),
+	emailSignin: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
+	emailSignup: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
+	googleSignin: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
+	emailVerificationRequest: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
+	emailVerificationComplete: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() }
 }
 
 export const getReferrerId = () => window.localStorage.getItem('referrer') ?? global.referrerId.value
@@ -33,8 +38,7 @@ export const saveReferrerId = () => {
 export const useEmailSignin = () => {
 	const router = useRouter()
 	const factory = ref(new EmailSigninFactory()) as Ref<EmailSigninFactory>
-	const { error, setError } = useErrorHandler()
-	const { loading, setLoading } = useLoadingHandler()
+	const { error, loading, setError, setLoading } = global.emailSignin
 	const signin = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
@@ -57,8 +61,7 @@ export const useEmailSignin = () => {
 export const useEmailSignup = () => {
 	const router = useRouter()
 	const factory = ref(new EmailSignupFactory()) as Ref<EmailSignupFactory>
-	const { error, setError } = useErrorHandler()
-	const { loading, setLoading } = useLoadingHandler()
+	const { error, loading, setError, setLoading } = global.emailSignup
 	const signup = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
@@ -80,8 +83,7 @@ export const useEmailSignup = () => {
 
 export const useCompleteEmailVerification = (token: string) => {
 	const router = useRouter()
-	const { error, setError } = useErrorHandler()
-	const { loading, setLoading } = useLoadingHandler()
+	const { error, loading, setError, setLoading } = global.emailVerificationComplete
 	const completeVerification = async () => {
 		await setError('')
 		await setLoading(true)
@@ -101,9 +103,7 @@ export const useCompleteEmailVerification = (token: string) => {
 }
 
 export const useEmailVerificationRequest = () => {
-	const { loading, setLoading } = useLoadingHandler()
-	const { error, setError } = useErrorHandler()
-	const { message, setMessage } = useSuccessHandler()
+	const { error, loading, message, setError, setLoading, setMessage } = global.emailVerificationRequest
 
 	const sendVerificationEmail = async () => {
 		const email = useAuth().auth.value?.email
@@ -128,8 +128,7 @@ export const useEmailVerificationRequest = () => {
 
 export const useGoogleSignin = () => {
 	const router = useRouter()
-	const { error, setError } = useErrorHandler()
-	const { loading, setLoading } = useLoadingHandler()
+	const { error, loading, setError, setLoading } = global.emailVerificationRequest
 	const signin = async (idToken: string) => {
 		await setError('')
 		if (!loading.value) {

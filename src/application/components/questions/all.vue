@@ -6,7 +6,7 @@
 			<div class="col-span-6 grid grid-cols-12 md:px-2 ">
 				<div
 					class="py-1 px-2 px-md text-sm col-span-12 md:col-start-4 md:col-end-10 md:mb-3   bg-light_gray rounded-xl md:rounded-md flex flex-row">
-					<select-subject v-model:subjectId="subjectId" :show-all="true"/>
+					<select-subject v-model:subjectId="subjectId" :show-all="true" />
 				</div>
 
 				<div
@@ -53,7 +53,8 @@
 							:isFeatured="0 === index ? true : false" :question="question" />
 					</div>
 
-					<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
+					<div v-if="hasMore"
+						class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
 						<a @click.prevent="fetchOlderQuestions">Load More</a>
 					</div>
 				</template>
@@ -62,7 +63,7 @@
 		</div>
 
 	</div>
-	<page-loading v-if="loading"/>
+	<page-loading v-if="loading" />
 </template>
 <script lang="ts">
 import { IonIcon } from '@ionic/vue'
@@ -71,7 +72,7 @@ import { ellipse, ellipseOutline } from 'ionicons/icons'
 import { useQuestionList } from '@app/composable/questions/questions'
 import { useSubjectList } from '@app/composable/questions/subjects'
 import Question from '@app/components/questions/QuestionListCard.vue'
-import EmptyState from '@app/components/core/emptyState.vue'
+import EmptyState from '@app/components/core/EmptyState.vue'
 import SelectSubject from './subjects/SelectSubject.vue'
 import PageLoading from '../core/PageLoading.vue'
 
@@ -94,7 +95,7 @@ export default defineComponent({
 			subjects
 		}
 	},
-	components: {  IonIcon, Question, EmptyState, SelectSubject, PageLoading }
+	components: { IonIcon, Question, EmptyState, SelectSubject, PageLoading }
 })
 </script>
 

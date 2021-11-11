@@ -27,7 +27,7 @@ import { defineComponent } from 'vue'
 import { IonProgressBar } from '@ionic/vue'
 import UserQuestionsCard from '@app/components/questions/UserQuestionsCard.vue'
 import { useUserQuestionList } from '@app/composable/users/user/questions'
-import EmptyState from '../../core/emptyState.vue'
+import EmptyState from '../../core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({

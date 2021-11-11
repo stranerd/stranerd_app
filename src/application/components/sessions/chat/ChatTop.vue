@@ -5,7 +5,7 @@
 			<router-link to="/chat">
 				<ion-icon :icon="arrowBack" class="text-dark_gray mr-2 text-[25px] cursor-pointer"></ion-icon>
 			</router-link>
-			<avatar :src="user?.avatar?.link" :size="32" :id="user.id"  />
+			<avatar :id="user.id" :size="32" :src="user?.avatar?.link" />
 			<div class="flex flex-col ">
 				<h2 class="font-bold text-dark_gray">
 					{{ user?.fullName }}
@@ -23,7 +23,7 @@
 
 </template>
 <script lang="ts">
-import { computed, defineAsyncComponent, defineComponent, onBeforeUnmount, onMounted, PropType, ref } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted, PropType, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { arrowBack, ellipsisVertical, search } from 'ionicons/icons'
 import { useRouter } from 'vue-router'
@@ -34,7 +34,6 @@ import { useAuth } from '@app/composable/auth/auth'
 import { setNewSessionTutorIdBio, useSession } from '@app/composable/sessions/sessions'
 import { useCurrentSession } from '@app/composable/sessions/session'
 import Avatar from '../../core/Avatar.vue'
-
 
 export default defineComponent({
 	props: {
