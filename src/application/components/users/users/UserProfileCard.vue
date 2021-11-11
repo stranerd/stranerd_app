@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="w-full col-span-12 mb-4 flex-col flex gap-2 items-center justify-center normalText">
-			<Avatar :size="90" :src="user.avatar" :id="user.id" />
+			<Avatar :id="user.id" :size="90" :src="user.avatar" />
 			<h2 class="headings font-bold text-dark_gray">{{ user.fullName }}</h2>
 			<span
 				class="py-1 px-4 rounded-md border-faded_gray border-[1px] font-bold text-icon_inactive bg-light_green">

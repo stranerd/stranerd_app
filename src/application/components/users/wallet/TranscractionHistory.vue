@@ -45,7 +45,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useTransactionList } from '@app/composable/payment/transactions'
-import { IonSelect, IonSelectOption } from '@ionic/vue'
 import TranscrationHistoryCard from './TranscrationHistoryCard.vue'
 
 export default defineComponent({

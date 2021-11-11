@@ -6,7 +6,8 @@
 			</span>
 
 
-			<router-link to="/questions" class="text-primary normalText flex items-center font-bold" v-if="questions.length ">
+			<router-link v-if="questions.length " class="text-primary normalText flex items-center font-bold"
+				to="/questions">
 				<span>view all</span>
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>
@@ -64,7 +65,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
 import Question from '../questions/QuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
-import EmptyState from '../core/emptyState.vue'
+import EmptyState from '../core/EmptyState.vue'
 
 export default {
 	name: 'RecentTransactions',

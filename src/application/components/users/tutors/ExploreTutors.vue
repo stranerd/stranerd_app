@@ -56,7 +56,7 @@ import TutorCard from './TutorCard.vue'
 import { useTutorsList } from '@app/composable/users/roles/tutors'
 import { useSubjectList } from '@app/composable/questions/subjects'
 
-const EmptyState = defineAsyncComponent(() => import('@app/components/core/emptyState.vue'))
+const EmptyState = defineAsyncComponent(() => import('@app/components/core/EmptyState.vue'))
 
 export default defineComponent({
 	components: { IonSelect, IonSelectOption, TutorCard, EmptyState },

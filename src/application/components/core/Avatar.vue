@@ -18,9 +18,9 @@ import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
 export default defineComponent({
 	name: 'Avatar',
 	props: {
-		id:{
+		id: {
 			type: String,
-			default:''
+			default: ''
 		},
 		src: {
 			type: Object as PropType<Media | null>,

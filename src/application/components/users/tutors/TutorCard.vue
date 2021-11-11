@@ -2,7 +2,7 @@
 	<div
 		class=" w-full  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-1 cardPadding justify-center items-center"
 	>
-		<avatar  :photo-url="tutor?.avatar?.link" :id="tutor.id"  :size="46" />
+		<avatar :id="tutor.id" :photo-url="tutor?.avatar?.link" :size="46" />
 
 		<div class="flex gap-2">
 			<span class="font-bold normalText text-main_dark">
@@ -25,11 +25,9 @@
 <script lang="ts">
 import ShowRatings from '@app/components/core/ShowRatings.vue'
 import { UserEntity } from '@modules/users'
-import { defineAsyncComponent } from 'vue'
 import { setNewSessionTutorIdBio } from '@app/composable/sessions/sessions'
 import { useSessionModal } from '@app/composable/core/modals'
 import Avatar from '../../core/Avatar.vue'
-
 
 export default {
 	name: 'TutorCard',

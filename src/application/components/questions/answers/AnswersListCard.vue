@@ -2,7 +2,7 @@
 	<div class="flex flex-col mt-1 py-3">
 		<div class="bg-light_gray rounded-lg py-4 px-3 flex flex-col">
 			<div class="flex flex-row items-center">
-				<Avatar :photo-url="answer.avatar?.link" :size="30" class="mr-2" :id="answer.userId" />
+				<Avatar :id="answer.userId" :photo-url="answer.avatar?.link" :size="30" class="mr-2" />
 				<span class="font-bold text-dark_gray">{{ answer.userBio.fullName }}</span>
 
 			</div>
@@ -31,9 +31,10 @@
 			<div class="flex flex-row items-center justify-between mt-5">
 				<div class="flex flex-row items-center text-primary font-bold">
 					<span class="mr-1">({{ answer.upVotes }})</span>
-					<IonIcon :icon="thumbsUp" class="text-[22px] mr-2 cursor-pointer" @click="() => voteAnswer(true)"/>
+					<IonIcon :icon="thumbsUp" class="text-[22px] mr-2 cursor-pointer" @click="() => voteAnswer(true)" />
 					<span class="mr-1 text-icon_inactive">({{ answer.downVotes }})</span>
-					<IonIcon :icon="thumbsDown" class="text-[22px] text-icon_inactive cursor-pointer" @click="() => voteAnswer(false)" />
+					<IonIcon :icon="thumbsDown" class="text-[22px] text-icon_inactive cursor-pointer"
+						@click="() => voteAnswer(false)" />
 				</div>
 				<div class="flex flex-row items-center text-icon_inactive font-bold">
 					<template v-if="!answer.best">
@@ -47,11 +48,12 @@
 			</div>
 		</div>
 		<div class="mt-2 py-1 flex flex-row border-faded_gray border-b-2">
-			<textarea class="px-1  focus:outline-none placeholder-gray-400 flex-grow" v-model="commentFactory.body"  placeholder="Leave a comment" />
-			<IonIcon :icon="send" class="text-[22px] mr-2 text-dark_gray cursor-pointer" @click="createComment"/>
+			<textarea v-model="commentFactory.body" class="px-1  focus:outline-none placeholder-gray-400 flex-grow"
+				placeholder="Leave a comment" />
+			<IonIcon :icon="send" class="text-[22px] mr-2 text-dark_gray cursor-pointer" @click="createComment" />
 		</div>
 	</div>
-	<page-loading v-if="loading || commentLoading"/>
+	<page-loading v-if="loading || commentLoading" />
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
@@ -71,10 +73,9 @@ import {
 
 import Avatar from '@app/components/core/Avatar.vue'
 import PhotoList from '@app/components/core/PhotoList.vue'
-import { openAnswerEditModal, useAnswer, useDeleteAnswer } from '@app/composable/questions/answers'
+import { useAnswer } from '@app/composable/questions/answers'
 import PageLoading from '../../core/PageLoading.vue'
 import { useCreateAnswerComments } from '@app/composable/questions/answer-comments'
-
 
 export default defineComponent({
 	name: 'AnswerListCard',
@@ -88,7 +89,12 @@ export default defineComponent({
 	setup (props) {
 		const showExplanation = ref(false)
 		const { error, loading, markBestAnswer, voteAnswer } = useAnswer(props.answer)
-		const { loading:commentLoading, error:commentError, factory:commentFactory, createComment } = useCreateAnswerComments(props.answer.id)
+		const {
+			loading: commentLoading,
+			error: commentError,
+			factory: commentFactory,
+			createComment
+		} = useCreateAnswerComments(props.answer.id)
 		return {
 			voteAnswer,
 			loading,
@@ -96,8 +102,6 @@ export default defineComponent({
 			commentError,
 			commentFactory,
 			createComment,
-
-
 
 			arrowBackOutline,
 			arrowRedo,

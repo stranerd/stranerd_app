@@ -38,7 +38,7 @@
 				<h2>Users</h2>
 				<div v-for="user in usersResult" :key="user.hash">
 					<router-link :to="`/users/${user.id}/`" class="d-flex align-items-center gap-0-5">
-						<Avatar :size="45" :src="user.avatar" :id="user.id"/>
+						<Avatar :id="user.id" :size="45" :src="user.avatar" />
 						<span>{{ user.fullName }}</span>
 					</router-link>
 				</div>

@@ -3,20 +3,25 @@
 		<!-- Small screens -->
 		<div class="md:hidden bg-[#F7F7FC] py-2 px-4 flex border-0 items-center justify-between items-center z-50">
 			<router-link class="flex flex-row items-center w-[15%]" to="/account">
-				<avatar :src="user?.avatar" :id="user?.id" :size="30" />
+				<avatar :id="user?.id" :size="30" :src="user?.avatar" />
 			</router-link>
 
 			<div class="flex flex-row items-center px-3 w-[70%] justify-center">
 				<div class="py-1 px-3 w-full bg-[#8B9EB1] flex rounded-xl flex-row items-center">
 					<div class="w-1/3 flex flex-row items-center">
 						<img class="inline h-6 mr-2" src="/assets/images/bronze.svg" />
-						<span class="font-semibold text-xs text-white ">{{ isLoggedIn ? user.account.coins.bronze : '-' }}</span>
+						<span class="font-semibold text-xs text-white ">{{
+							isLoggedIn ? user.account.coins.bronze : '-'
+						}}</span>
 					</div>
 					<div class="w-1/3 flex flex-row items-center justify-center">
-						<ion-icon :icon="add" class="text-base cursor-pointer text-white" @click="isLoggedIn ? buyCoins() : null"></ion-icon>
+						<ion-icon :icon="add" class="text-base cursor-pointer text-white"
+							@click="isLoggedIn ? buyCoins() : null"></ion-icon>
 					</div>
 					<div class="w-1/3 flex flex-row-reverse items-center">
-						<span class="font-semibold text-xs text-white ">{{ isLoggedIn ? user.account.coins.gold : '-' }}</span>
+						<span class="font-semibold text-xs text-white ">{{
+							isLoggedIn ? user.account.coins.gold : '-'
+						}}</span>
 						<img class="inline h-6 mr-2" src="/assets/images/gold.svg" />
 					</div>
 				</div>
@@ -36,7 +41,7 @@
 			<div class="flex flex-row items-center gap-9 w-1/4">
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center "
 					to="/account">
-					<avatar :size="26" :src="user?.avatar" :id="user?.id" />
+					<avatar :id="user?.id" :size="26" :src="user?.avatar" />
 				</router-link>
 
 				<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
@@ -49,14 +54,19 @@
 				<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
 					<div class="w-1/3 flex flex-row items-center">
 						<Coins :gold="false" :size="28" class="mr-2 inline" />
-						<span class="font-semibold text-sm text-dark_grey ">{{ isLoggedIn ? user.account.coins.bronze : '-' }}</span>
+						<span class="font-semibold text-sm text-dark_grey ">{{
+							isLoggedIn ? user.account.coins.bronze : '-'
+						}}</span>
 					</div>
 					<div class="w-1/3 flex flex-row items-center justify-center">
-						<ion-icon :icon="add" class="text-3xl cursor-pointer text-icon_inactive" @click="isLoggedIn ? buyCoins() : null"></ion-icon>
+						<ion-icon :icon="add" class="text-3xl cursor-pointer text-icon_inactive"
+							@click="isLoggedIn ? buyCoins() : null"></ion-icon>
 
 					</div>
 					<div class="w-1/3 flex flex-row-reverse items-center">
-						<span class="font-semibold text-sm text-dark_grey ">{{ isLoggedIn ? user.account.coins.gold : '-' }}</span>
+						<span class="font-semibold text-sm text-dark_grey ">{{
+							isLoggedIn ? user.account.coins.gold : '-'
+						}}</span>
 						<Coins :gold="true" :size="28" class="mr-2 inline" />
 					</div>
 				</div>
@@ -71,8 +81,9 @@
 				</router-link>
 
 				<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
-					<search-bar v-if="showSearch" class="absolute left-0"/>
-					<ion-icon :icon="showSearch ? close : search" class="text-2xl text-icon_inactive"  @click="toggleSearch"></ion-icon>
+					<search-bar v-if="showSearch" class="absolute left-0" />
+					<ion-icon :icon="showSearch ? close : search" class="text-2xl text-icon_inactive"
+						@click="toggleSearch"></ion-icon>
 				</div>
 
 			</div>
@@ -96,7 +107,7 @@
 
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
 					to="/account">
-					<avatar :photo-url="user?.avatar" :id="user?.id" :size="26" />
+					<avatar :id="user?.id" :photo-url="user?.avatar" :size="26" />
 				</router-link>
 			</div>
 			<div class="w-1/4 flex flex-row items-center py-1 px-2">
@@ -108,7 +119,8 @@
 						}}</span>
 					</div>
 					<div class="w-1/3 flex flex-row items-center justify-center">
-						<ion-icon :icon="add" class="text-xl cursor-pointer" @click=" isLoggedIn ? buyCoins() : null"></ion-icon>
+						<ion-icon :icon="add" class="text-xl cursor-pointer"
+							@click=" isLoggedIn ? buyCoins() : null"></ion-icon>
 					</div>
 					<div class="w-1/3 flex flex-row-reverse items-center">
 						<span class="font-semibold text-sm text-dark_grey ">{{
@@ -127,7 +139,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { add, close, home, search, school, notifications } from 'ionicons/icons'
+import { add, close, home, notifications, school, search } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import Avatar from '@app/components/core/Avatar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
@@ -135,7 +147,7 @@ import Coins from '@app/components/core/Coins.vue'
 import { useAccountModal } from '@app/composable/core/modals'
 
 export default defineComponent({
-	components: { IonIcon, Avatar, SearchBar,Coins },
+	components: { IonIcon, Avatar, SearchBar, Coins },
 	setup () {
 		const { user, isLoggedIn } = useAuth()
 		const showSearch = ref(false)
