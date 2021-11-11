@@ -4,6 +4,9 @@ import BuyCoins from '@app/components/modals/BuyCoins.vue'
 import WithdrawCoins from '@app/components/modals/Withdrawal.vue'
 import CreateSchedule from '@app/components/modals/CreateSchedule.vue'
 import CreateSession from '@app/components/modals/RequestSession.vue'
+import ReportUser from '@app/components/modals/reports/ReportUser.vue'
+import ReportQuestion from '@app/components/modals/reports/ReportQuestion.vue'
+import ReportAnswer from '@app/components/modals/reports/ReportAnswer.vue'
 
 type AccountTypes = 'BuyCoins' | 'WithdrawCoins'
 type ScheduleTypes = 'CreateSchedule'
@@ -14,7 +17,7 @@ type PaymentTypes = 'MakePayment'
 const AccountModals = { BuyCoins, WithdrawCoins } as Record<AccountTypes, any>
 const ScheduleModals = { CreateSchedule } as Record<ScheduleTypes, any>
 const SessionModals = { CreateSession } as Record<SessionTypes, any>
-const ReportModals = {} as Record<ReportTypes, any>
+const ReportModals = {ReportUser, ReportQuestion, ReportAnswer} as Record<ReportTypes, any>
 const PaymentModals = {} as Record<PaymentTypes, any>
 
 export const modal = useModal(ref([] as string[]))

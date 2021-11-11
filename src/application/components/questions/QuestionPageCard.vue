@@ -6,7 +6,7 @@
 				<span class="mr-2"><avatar :photo-url="question.avatar?.link" size="28" :id="question.userId"/></span>
 				<span class="font-bold text-dark_gray">{{ question.userBio.fullName }}</span>
 				<div class="flex flex-row-reverse flex-grow">
-					<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive" />
+					<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive cursor-pointer" @click="openReportQuestionModal"/>
 					<IonIcon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive" />
 				</div>
 			</div>
@@ -82,6 +82,8 @@ import { openAnswerModal, showAddAnswer } from '@app/composable/questions/answer
 import { openQuestionEditModal, useDeleteQuestion } from '@app/composable/questions/questions'
 import { formatTime } from '@utils/dates'
 import { useRouter } from 'vue-router'
+import { useReportModal } from '@app/composable/core/modals'
+
 
 export default defineComponent({
 	name: 'QuestionPageCard',
@@ -122,6 +124,7 @@ export default defineComponent({
 			showEditButton, showDeleteButton,
 			loading, error, deleteQuestion,
 			openAnswerModal: () => openAnswerModal(props.question),
+			openReportQuestionModal: ()=> useReportModal().openReportQuestion(),
 			openEditModal: () => openQuestionEditModal(props.question, router)
 		}
 	}

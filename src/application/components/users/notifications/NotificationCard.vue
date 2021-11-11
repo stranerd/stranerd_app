@@ -14,7 +14,7 @@
 			<span v-if="!notification.seen"
 				class="text-icon_inactive normalText flex items-end justify-center cursor-pointer"
 				@click="markNotificationSeen">
-				Mark all as read
+				Mark as read
 				<ion-icon :icon="checkmark" class="text-xl text-icon_inactive"></ion-icon>
 			</span>
 		</div>

@@ -114,3 +114,12 @@ http://ionicframework.com/docs/theming/ */
 		display: none;
 	}
 }
+
+.btn-primary{
+	--background:#546DD3;
+	--padding-top:0.75rem;
+	--padding-bottom:0.75rem;
+	--padding-start:1.5rem;
+	--padding-end:1.5rem;
+	--color:white;
+}

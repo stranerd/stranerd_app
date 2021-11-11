@@ -108,17 +108,17 @@
 
 			<div class="flex flex-row  mt-5  text-white gap-4">
 				<div class="w-1/2 flex flex-row justify-center items-center">
-					<button class=" px-6 py-3 relative ion-activatable rounded-lg w-full font-bold bg-dark_gray "
+					<IonButton class=" px-6 py-3 relative ion-activatable rounded-lg w-full font-bold bg-dark_gray "
 						@click="closeBuyCoins()">
 						Cancel
 						<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-					</button>
+					</IonButton>
 				</div>
 				<div class="w-1/2 flex flex-row justify-center items-center">
-					<button class=" px-6 relative ion-activatable font-bold w-full py-3 rounded-lg bg-primary">
+					<IonButton class=" px-6 relative ion-activatable font-bold w-full py-3 rounded-lg bg-primary">
 						Buy all(N2000)
 						<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-					</button>
+					</IonButton>
 				</div>
 			</div>
 
@@ -128,7 +128,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonIcon, IonRippleEffect } from '@ionic/vue'
+import { IonIcon, IonRippleEffect, IonButton } from '@ionic/vue'
 import { add, removeOutline } from 'ionicons/icons'
 import { useAccountModal } from '@app/composable/core/modals'
 
@@ -145,7 +145,7 @@ export default defineComponent({
 		}
 	},
 	components: {
-		IonIcon, IonRippleEffect
+		IonIcon, IonRippleEffect, IonButton
 	}
 })
 </script>
