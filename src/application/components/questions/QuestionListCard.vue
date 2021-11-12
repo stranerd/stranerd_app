@@ -22,7 +22,7 @@
 						</button>
 					</template>
 					<template v-if="fromViewQuestion">
-						<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive" />
+						<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive cursor-pointer"  @click="openReportQuestionModal"/>
 						<IonIcon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive" />
 					</template>
 				</template>
@@ -75,7 +75,9 @@ import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
 import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/Avatar.vue'
-import { openAnswerModal } from '@app/composable/questions/answers'
+import { openAnswerModal, showAddAnswer } from '@app/composable/questions/answers'
+import { useReportModal } from '@app/composable/core/modals'
+
 
 export default defineComponent({
 	name: 'QuestionListCard',
@@ -107,6 +109,7 @@ export default defineComponent({
 	setup (props) {
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),
+			openReportQuestionModal: ()=> useReportModal().openReportQuestion(),
 			arrowRedo,
 			flag,
 			formatTime, pluralize

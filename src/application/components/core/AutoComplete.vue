@@ -4,10 +4,11 @@
 			v-model="term"
 			:placeholder="placeholder"
 			class="w-full"
-			type="text"
+			type="search"
 			@keydown.enter.prevent="onEnter"
 			@keydown.down.prevent="onDown"
 			@keydown.up.prevent="onUp"
+			autocomplete="off"
 		/>
 		<div v-if="value && open" class="suggestions">
 			<a

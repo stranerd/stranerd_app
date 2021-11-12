@@ -168,7 +168,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IonButton, IonIcon, IonInput, IonRippleEffect, IonSpinner, IonTextarea } from '@ionic/vue'
+import { IonButton, IonRippleEffect, IonSpinner, IonTextarea } from '@ionic/vue'
 import { image } from 'ionicons/icons'
 import { useProfileUpdate, useTutorUpdate } from '@app/composable/auth/profile'
 import { useAuth } from '@app/composable/auth/auth'
@@ -180,8 +180,6 @@ import { usePasswordUpdate } from '@app/composable/auth/passwords'
 export default defineComponent({
 	name: 'ProfileSettings',
 	components: {
-		IonIcon,
-		IonInput,
 		IonTextarea,
 		IonRippleEffect,
 		IonSpinner,
