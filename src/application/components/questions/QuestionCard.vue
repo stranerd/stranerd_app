@@ -6,9 +6,9 @@
 		<div class="flex items-center justify-between w-full">
 			<div class="flex items-center gap-2">
 				<avatar
+					:id="user.id"
 					:size="24"
 					class="!h-[20px] !w-[20px] md:!h-[24px] md:!w-[24px]"
-					:id="user.id"
 				/>
 				<span class="font-bold text-dark_gray normalText">
 					Timmy Martin

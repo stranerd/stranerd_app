@@ -12,9 +12,9 @@
 		unit="px"
 		@section-click="onClick"
 	>
-		<DynamicText class="score">
+		<span class="score">
 			{{ formatNumber(score, 1) }}
-		</DynamicText>
+		</span>
 	</Donut>
 </template>
 

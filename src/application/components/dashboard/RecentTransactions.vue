@@ -5,30 +5,31 @@
 				Recent transactions
 			</span>
 
-
-			<router-link to="/dashboard/wallet" class="text-primary normalText flex items-center font-bold " v-if="transactions.length && isLoggedIn">
+			<router-link v-if="transactions.length && isLoggedIn"
+				class="text-primary normalText flex items-center font-bold "
+				to="/dashboard/wallet">
 				<span>view all</span>
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>
 		</div>
 
 		<template v-if="isLoggedIn">
-			<div class="flex md:gap-6 gap-3 mt-2 mb-8" v-if="transactions.length">
+			<div v-if="transactions.length" class="flex md:gap-6 gap-3 mt-2 mb-8">
 				<swiper
-					direction="horizontal"
 					:freeMode="true"
-					:slidesPerView="3" class="flex flex-row w-full items-center"
+					:slidesPerView="3"
+					class="flex flex-row w-full items-center" direction="horizontal"
 				>
 					<swiper-slide
 						v-for="(transaction,index) in shortenTransactionList"
-						:key="index"
-						class="!w-2/5 !max-w-[18rem] !min-w-[15rem] !pr-3">
-						<TransactionCard :transaction="transaction" :colorClass="0 === index ? 'bg-light_orange' : 'bg-light_gray'" />
+						:key="index" class="!w-2/5 !max-w-[18rem] !min-w-[15rem] !pr-3">
+						<TransactionCard :colorClass="0 === index ? 'bg-light_orange' : 'bg-light_gray'"
+							:transaction="transaction" />
 					</swiper-slide>
 
 				</swiper>
 			</div>
-			<div class="py-3" v-else>
+			<div v-else class="py-3">
 				<empty-state
 					btnText="go to Wallet"
 					info="You haven't made any transaction yet"
@@ -57,26 +58,27 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper-bundle.min.css'
 import TransactionCard from '../users/wallet/TransactionCard.vue'
 import { useTransactionList } from '@app/composable/payment/transactions'
-import {useAuth} from '@app/composable/auth/auth'
-import EmptyState from '../core/emptyState.vue'
-import { computed } from '@vue/reactivity'
+import { useAuth } from '@app/composable/auth/auth'
+import EmptyState from '@app/components/core/EmptyState.vue'
+import { computed, defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
 	name: 'RecentTransactions',
-	components: { IonIcon, Swiper, SwiperSlide, TransactionCard, EmptyState, },
+	components: { IonIcon, Swiper, SwiperSlide, TransactionCard, EmptyState },
 	setup () {
 		const { id, isLoggedIn } = useAuth()
 		const { loading, error, transactions } = useTransactionList(id.value)
 		const shortenTransactionList = computed({
-			get:()=>{
-				return transactions.value.slice(0,6)
+			get: () => {
+				return transactions.value.slice(0, 6)
 			},
-			set:()=>{	}
+			set: () => {
+			}
 		})
 
-		return { chevronForwardOutline, chevronBackOutline, ellipse, transactions, isLoggedIn,shortenTransactionList }
+		return { chevronForwardOutline, chevronBackOutline, ellipse, transactions, isLoggedIn, shortenTransactionList }
 	}
-}
+})
 </script>
 
 <style>

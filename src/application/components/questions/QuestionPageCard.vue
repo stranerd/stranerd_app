@@ -3,7 +3,7 @@
 		<div class="py-4 px-4 rounded-lg bg-light_gray flex flex-col text-xs md:text-sm">
 			<IonRippleEffect class="rounded-lg" />
 			<div class="flex flex-row items-center">
-				<span class="mr-2"><avatar :photo-url="question.avatar?.link" size="28" :id="question.userId"/></span>
+				<span class="mr-2"><avatar :id="question.userId" :photo-url="question.avatar?.link" :size="28" /></span>
 				<span class="font-bold text-dark_gray">{{ question.userBio.fullName }}</span>
 				<div class="flex flex-row-reverse flex-grow">
 					<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive cursor-pointer" @click="openReportQuestionModal"/>

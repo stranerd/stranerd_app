@@ -31,7 +31,7 @@ import { defineAsyncComponent, defineComponent, onMounted } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { ellipsisVertical, search } from 'ionicons/icons'
 import { useChatsList } from '@app/composable/sessions/chats-list'
-import EmptyState from '../../core/emptyState.vue'
+import EmptyState from '../../core/EmptyState.vue'
 
 const EachChat = defineAsyncComponent(() => import('@app/components/sessions/chat/eachChat.vue'))
 
