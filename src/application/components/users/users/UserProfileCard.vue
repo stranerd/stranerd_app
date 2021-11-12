@@ -5,9 +5,9 @@
 				<Avatar :id="user.id" :size="90" :src="user.avatar" />
 				<ion-icon
 					v-if="showUpload"
-					@click="openUploadModal()"
 					:icon="camera"
 					class="text-primary absolute rounded-full right-1 bottom-1 text-lg bg-white p-1 border border-primary cursor-pointer"
+					@click="openUploadModal()"
 
 				/>
 			</div>
@@ -80,10 +80,9 @@ export default defineComponent({
 		})
 
 		const showUpload = computed({
-			get: () => authUser.value && authUser.value.id === props.user.id,
-
-			set: () => {}
-
+			get: () => authUser.value?.id === props.user.id,
+			set: () => {
+			}
 		})
 
 		const requestNewSession = () => {
@@ -92,12 +91,13 @@ export default defineComponent({
 		}
 
 		const openUploadModal = () => {
-			 useUploadModal().openUploadImage()
+			useUploadModal().openUploadImage()
 		}
 
 		return {
 			openUploadModal,
-			id, requestNewSession, canRequestSession, camera , showUpload}
+			id, requestNewSession, canRequestSession, camera, showUpload
+		}
 	}
 })
 </script>

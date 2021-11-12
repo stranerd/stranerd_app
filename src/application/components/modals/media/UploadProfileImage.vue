@@ -1,13 +1,12 @@
 <template>
-	<Modal >
+	<Modal>
 		<template v-slot:title>
 			Upload New profile Image
 		</template>
-		<template v-slot:subtext >
+		<template v-slot:subtext>
 			<span class="mb-4">
 				What is wrong with this Question
 			</span>
-
 		</template>
 
 		<div class="relative mt-5">
@@ -31,7 +30,6 @@
 
 				/>
 			</label>
-
 		</div>
 
 
@@ -44,51 +42,47 @@
 				</ion-button>
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<ion-button class="btn-primary w-full h-11">
+				<ion-button class="btn-primary w-full h-11" @click="updateProfile">
 					save
 					<!-- <ion-ripple-effect class="rounded-lg"></ion-ripple-effect> -->
 				</ion-button>
 			</div>
 		</div>
 	</Modal>
-
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-
-import {  IonRippleEffect } from '@ionic/vue'
+import { IonIcon, IonRippleEffect } from '@ionic/vue'
 import { useUploadModal } from '@app/composable/core/modals'
 import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
 import { camera } from 'ionicons/icons'
-
-import { useUpdateProfile } from '@app/composable/users/account'
+import { useProfileUpdate } from '@app/composable/auth/profile'
 import { useFileInputs } from '@app/composable/core/forms'
 
 export default defineComponent({
+	name: 'UploadProfileImage',
+	components: { IonRippleEffect, IonIcon },
 	setup () {
 		const closeUploadImage = () => {
 			useUploadModal().closeUploadImage()
 		}
-		const { factory, error, loading, updateProfilePicture } = useUpdateProfile()
+		const { factory, error, loading, updateProfile } = useProfileUpdate()
 		const imageLink = ref((factory.value.avatar as any)?.link ?? '')
 		const { catchFiles } = useFileInputs((file) => {
 			imageLink.value = window.URL.createObjectURL(file)
 			factory.value.avatar = file
 		})
 		return {
-			updateProfilePicture,
+			updateProfile,
 			imageLink, catchFiles,
 			error, loading,
-			camera,	DEFAULT_PROFILE_IMAGE,
-			closeUploadImage,
-
+			camera, DEFAULT_PROFILE_IMAGE,
+			closeUploadImage
 		}
-	},
-	components: {
-		 IonRippleEffect
 	}
 })
 </script>
+
 <style scoped>
 	ion-input {
 
