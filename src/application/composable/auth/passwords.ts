@@ -1,6 +1,13 @@
 import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { PasswordResetFactory, PasswordResetRequestFactory, ResetPassword, SendPasswordResetEmail } from '@modules/auth'
+import {
+	PasswordResetFactory,
+	PasswordResetRequestFactory,
+	PasswordUpdateFactory,
+	ResetPassword,
+	SendPasswordResetEmail,
+	UpdatePassword
+} from '@modules/auth'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'
@@ -51,4 +58,28 @@ export const usePasswordReset = (token: string) => {
 		} else factory.value.validateAll()
 	}
 	return { factory, loading, message, error, resetPassword }
+}
+
+export const usePasswordUpdate = () => {
+	const factory = ref(new PasswordUpdateFactory()) as Ref<PasswordUpdateFactory>
+	const { error, setError } = useErrorHandler()
+	const { loading, setLoading } = useLoadingHandler()
+	const { setMessage } = useSuccessHandler()
+
+	const updatePassword = async () => {
+		await setError('')
+		if (factory.value.valid && !loading.value) {
+			try {
+				await setLoading(true)
+				await UpdatePassword.call(factory.value)
+				await setMessage('Password updated successfully!')
+				factory.value.reset()
+			} catch (error) {
+				await setError(error)
+			}
+			await setLoading(false)
+		} else factory.value.validateAll()
+	}
+
+	return { error, loading, factory, updatePassword }
 }

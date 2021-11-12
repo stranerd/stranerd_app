@@ -186,8 +186,5 @@ export default defineComponent({
 	ion-header {
 		--background: #F7F7FC;
 		--box-shadow: none;
-		height: 40px;
 	}
-
-
 </style>

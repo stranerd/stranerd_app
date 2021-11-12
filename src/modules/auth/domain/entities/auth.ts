@@ -28,14 +28,11 @@ export type UserLocation = {
 	timezone: string
 }
 
-export type UpdateUser = {
-	bio: Omit<UserBio, 'fullName'>
-	passwords?: {
-		oldPassword: string
-		newPassword: string
-	}
-	strongestSubject: string,
-	weakerSubjects: string[]
+export type ProfileUpdate = Omit<UserBio, 'fullName' | 'email'>
+
+export type PasswordUpdate = {
+	oldPassword: string
+	password: string
 }
 
 export enum AuthTypes {

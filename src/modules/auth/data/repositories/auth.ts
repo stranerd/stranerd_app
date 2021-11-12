@@ -1,6 +1,6 @@
 import { AuthBaseDataSource } from '../datasources/auth-base'
 import { IAuthRepository } from '../../domain/irepositories/iauth'
-import { AfterAuthUser, AuthExtras, NewUser, UpdateUser } from '../../domain/entities/auth'
+import { AfterAuthUser, AuthExtras, NewUser, PasswordUpdate, ProfileUpdate } from '../../domain/entities/auth'
 
 export class AuthRepository implements IAuthRepository {
 	private dataSource: AuthBaseDataSource
@@ -41,8 +41,12 @@ export class AuthRepository implements IAuthRepository {
 		return await this.dataSource.resetPassword(token, password)
 	}
 
-	async updateProfile (profile: UpdateUser) {
+	async updateProfile (profile: ProfileUpdate) {
 		return await this.dataSource.updateProfile(profile)
+	}
+
+	async updatePassword (password: PasswordUpdate) {
+		return await this.dataSource.updatePassword(password)
 	}
 
 	async session (afterAuth: AfterAuthUser) {

@@ -27,6 +27,7 @@ import { GetAllTutorsUseCase } from './domain/usecases/users/getAllTutors'
 import { ListenToAllTutorsUseCase } from './domain/usecases/users/listenToAllTutors'
 import { ListenToUserUseCase } from './domain/usecases/users/listenToUser'
 import { UpdateStreakUseCase } from './domain/usecases/users/updateStreak'
+import { UpdateTutorUseCase } from './domain/usecases/users/updateTutor'
 import { GetNotificationsUseCase } from './domain/usecases/notifications/getNotifications'
 import { ListenToNotificationsUseCase } from './domain/usecases/notifications/listenToNotifications'
 import { MarkNotificationSeenUseCase } from './domain/usecases/notifications/markNotificationSeen'
@@ -42,6 +43,8 @@ import { NotificationEntity } from './domain/entities/notification'
 import { ReviewEntity } from './domain/entities/review'
 import { ReferralEntity } from './domain/entities/referral'
 import { TransactionEntity } from './domain/entities/transaction'
+
+export { TutorUpdateFactory } from '../users/domain/factories/tutorUpdate'
 
 const userDataSource = new UserApiDataSource()
 const roleDataSource = new RoleApiDataSource()
@@ -71,6 +74,7 @@ export const GetAllTutors = new GetAllTutorsUseCase(userRepository)
 export const ListenToAllTutors = new ListenToAllTutorsUseCase(userRepository)
 export const ListenToUser = new ListenToUserUseCase(userRepository)
 export const UpdateStreak = new UpdateStreakUseCase(userRepository)
+export const UpdateTutor = new UpdateTutorUseCase(userRepository)
 
 export const MakeAdmin = new MakeAdminUseCase(roleRepository)
 export const MakeTutor = new MakeTutorUseCase(roleRepository)

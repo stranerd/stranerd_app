@@ -1,7 +1,7 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
 import { apiBases } from '@utils/environment'
 import { UserBaseDataSource } from '../datasources/user-base'
-import { UserFromModel } from '../models/user'
+import { TutorUpdate, UserFromModel } from '../models/user'
 
 export class UserApiDataSource implements UserBaseDataSource {
 	private stranerdClient: HttpClient
@@ -35,5 +35,9 @@ export class UserApiDataSource implements UserBaseDataSource {
 	async updateStreak () {
 		type Streak = { skip: boolean, increase: boolean, reset: boolean, streak: number }
 		await this.stranerdClient.post<{}, Streak>('/streak', {})
+	}
+
+	async updateTutor (tutor: TutorUpdate) {
+		await this.stranerdClient.post<TutorUpdate, any>('/subjects', tutor)
 	}
 }

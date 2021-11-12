@@ -1,4 +1,11 @@
-import { AfterAuthUser, AuthDetails, AuthExtras, NewUser, UpdateUser } from '../../domain/entities/auth'
+import {
+	AfterAuthUser,
+	AuthDetails,
+	AuthExtras,
+	NewUser,
+	PasswordUpdate,
+	ProfileUpdate
+} from '../../domain/entities/auth'
 
 export interface AuthBaseDataSource {
 	getAuthUser: () => Promise<AuthDetails | null>
@@ -9,7 +16,8 @@ export interface AuthBaseDataSource {
 	completeEmailVerification: (token: string) => Promise<AfterAuthUser>
 	sendPasswordResetEmail: (email: string) => Promise<void>
 	resetPassword: (token: string, password: string) => Promise<AfterAuthUser>
-	updateProfile: (profile: UpdateUser) => Promise<void>
+	updateProfile: (profile: ProfileUpdate) => Promise<void>
+	updatePassword: (passwords: PasswordUpdate) => Promise<void>
 	session: (afterAuth: AfterAuthUser) => Promise<AuthDetails>
 	signout: () => Promise<void>
 }

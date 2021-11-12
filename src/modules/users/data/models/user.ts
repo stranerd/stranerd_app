@@ -24,3 +24,8 @@ export interface UserFromModel extends UserToModel {
 }
 
 export type UserToModel = {}
+
+export type TutorUpdate = {
+	strongestSubject: string,
+	weakerSubjects: string[]
+}

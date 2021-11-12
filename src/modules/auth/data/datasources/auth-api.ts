@@ -1,16 +1,21 @@
 import { closeSocket, HttpClient } from '@modules/core'
 import { apiBases, domain } from '@utils/environment'
 import { deleteTokensFromCookies, saveTokens } from '@utils/tokens'
-import { AfterAuthUser, AuthDetails, AuthExtras, NewUser, UpdateUser } from '../../domain/entities/auth'
+import {
+	AfterAuthUser,
+	AuthDetails,
+	AuthExtras,
+	NewUser,
+	PasswordUpdate,
+	ProfileUpdate
+} from '../../domain/entities/auth'
 import { AuthBaseDataSource } from './auth-base'
 
 export class AuthApiDataSource implements AuthBaseDataSource {
 	private authClient: HttpClient
-	private stranerdClient: HttpClient
 
 	constructor () {
 		this.authClient = new HttpClient(apiBases.AUTH)
-		this.stranerdClient = new HttpClient(apiBases.STRANERD)
 	}
 
 	async getAuthUser () {
@@ -64,22 +69,12 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 		})
 	}
 
-	async updateProfile ({ bio, strongestSubject, weakerSubjects, passwords }: UpdateUser) {
-		await Promise.all([
-			await this.authClient.put<any, any>('/user', {
-				firstName: bio.firstName, lastName: bio.lastName,
-				description: bio.description, photo: bio.photo
-			}),
-			passwords
-				? await this.authClient.post<any, any>('/passwords/update', {
-					oldPassword: passwords.oldPassword,
-					password: passwords.newPassword
-				})
-				: Promise.resolve(),
-			await this.stranerdClient.post<any, any>('/users/users/subjects', {
-				strongestSubject, weakerSubjects
-			})
-		])
+	async updateProfile (bio: ProfileUpdate) {
+		await this.authClient.put<ProfileUpdate, any>('/user', bio)
+	}
+
+	async updatePassword (passwords: PasswordUpdate) {
+		await this.authClient.post<PasswordUpdate, any>('/passwords/update', passwords)
 	}
 
 	async session (afterAuth: AfterAuthUser) {
