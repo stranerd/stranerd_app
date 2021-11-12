@@ -7,7 +7,12 @@
 				<span class="font-bold text-dark_gray">{{ question.userBio.fullName }}</span>
 				<div class="flex flex-row-reverse flex-grow">
 					<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive cursor-pointer" @click="openReportQuestionModal"/>
-					<IonIcon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive" />
+					<!-- <IonIcon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive" /> -->
+					<share
+						:link="`/questions/${question.id}`"
+						:text="question.body"
+						:title="question?.tags[0]"
+						cssClass="text-[22px] mr-2 text-icon_inactive"/>
 				</div>
 			</div>
 
