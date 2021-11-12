@@ -1,58 +1,6 @@
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Ref, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
-import { ProfileUpdateFactory, UpdateProfile } from '@modules/auth'
-import { useAuth } from '@app/composable/auth/auth'
 import { setPaymentProps } from '@app/composable/payment/payment'
 import { analytics } from '@modules/core'
-
-export const useUpdateProfile = () => {
-	const router = useRouter()
-	const factory = ref(new ProfileUpdateFactory()) as Ref<ProfileUpdateFactory>
-	const { error, setError } = useErrorHandler()
-	const { loading, setLoading } = useLoadingHandler()
-	const { setMessage } = useSuccessHandler()
-	const { id, user } = useAuth()
-
-	if (user.value) factory.value.loadEntity(user.value)
-	watch(() => user.value?.hash, () => user.value ? factory.value.loadEntity(user.value) : null)
-
-	const updateProfile = async () => {
-		await setError('')
-		if (factory.value.valid && !loading.value) {
-			try {
-				await setLoading(true)
-				await UpdateProfile.call(factory.value)
-				await router.push(`/users/${id.value}/`)
-				await setMessage('Profile updated successfully!')
-			} catch (error) {
-				await setError(error)
-			}
-			await setLoading(false)
-		} else factory.value.validateAll()
-	}
-
-	const updateProfilePicture = async () => {
-		await setError('')
-		if (factory.value.valid && !loading.value) {
-			try {
-				await setLoading(true)
-				await UpdateProfile.call(factory.value)
-				await router.push(`/users/${id.value}/`)
-				await setMessage('Profile updated successfully!')
-			} catch (error) {
-				await setError(error)
-			}
-			await setLoading(false)
-		} else factory.value.validateAll()
-	}
-
-	return {
-		error, loading,
-		factory,updateProfilePicture,
-		updateProfile
-	}
-}
 
 const BRONZE_PRICES = [
 	{ amount: 200, price: 0.99, src: '/images/buyCoins/bronze-1.svg' },
