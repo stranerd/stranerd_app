@@ -18,7 +18,7 @@
 							<span class="mr-2">Answer</span>
 							<span class="h-1 w-1 rounded-full bg-white mr-2"></span>
 							<span class="mr-1 text-sm">+{{ question.creditable }}</span>
-							<img class=" h-4" src="/assets/images/bronze.svg" />
+							<img class=" h-4" src="@app/assets/images/icons/bronze.svg" />
 						</button>
 					</template>
 					<template v-if="fromViewQuestion">

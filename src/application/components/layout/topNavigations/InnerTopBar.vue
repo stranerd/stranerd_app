@@ -74,7 +74,7 @@
 					<ion-icon :icon="home" class="text-xl text-icon_inactive"></ion-icon>
 				</router-link>
 				<div class="py-2 px-3 rounded-md flex flex-row items-center justify-center">
-					<img class="min-h-[25px] object-fit max-w-[8.9rem]" src="/assets/images/logo.svg" />
+					<img class="min-h-[25px] object-fit max-w-[8.9rem]" src="@app/assets/images/icons/logo.svg" />
 				</div>
 			</div>
 			<div class="w-3/4 flex flex-row items-center py-1 gap-6 justify-around">

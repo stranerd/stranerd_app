@@ -9,19 +9,19 @@
 
 		<div class="flex flex-row mt-3 py-2 px-2 justify-between border-faded_gray border-2 rounded-lg">
 			<div class="flex flex-row items-center">
-				<img class="inline h-7 mr-2" src="/assets/images/bronze.svg" />
+				<img class="inline h-7 mr-2" src="@app/assets/images/icons/bronze.svg" />
 				<span class="font-semibold text-dark_gray ">10k</span>
 			</div>
 			<div class="flex flex-row-reverse items-center">
-				<span class="font-semibold  text-dark_gray  ">250</span>
-				<img class="inline h-7 mr-2" src="/assets/images/gold.svg" />
+				<span class="font-semibold  text-dark_gray">250</span>
+				<img class="inline h-7 mr-2" src="@app/assets/images/icons/gold.svg" />
 			</div>
 		</div>
 
 
 		<div class="flex flex-row mt-4 py-3 px-3 items-center bg-light_gray justify-between rounded-lg">
 			<div class="flex flex-row items-center">
-				<img class="inline h-9 mr-1" src="/assets/images/bronze.svg" />
+				<img class="inline h-9 mr-1" src="@app/assets/images/icons/bronze.svg" />
 				<ion-icon :icon="chevronDown" class="text-[20px] mr-3 text-icon_inactive"></ion-icon>
 				<span class="font-semibold text-dark_gray ">10,000</span>
 			</div>
@@ -29,7 +29,7 @@
 				<ion-icon :icon="repeatOutline" class="text-[26px] text-icon_inactive"></ion-icon>
 			</div>
 			<div class="flex flex-row-reverse items-center">
-				<img class="inline h-9 ml-1" src="/assets/images/dollar.svg" />
+				<img class="inline h-9 ml-1" src="@app/assets/images/icons/dollar.svg" />
 				<ion-icon :icon="chevronDown" class="text-[20px] ml-3 text-icon_inactive"></ion-icon>
 				<span class="font-semibold  text-dark_gray  ">100</span>
 			</div>

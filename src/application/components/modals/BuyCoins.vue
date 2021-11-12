@@ -9,12 +9,12 @@
 
 			<div class="flex flex-row mt-3 py-2 px-2 justify-between border-faded_gray border-2 rounded-lg">
 				<div class="flex flex-row items-center">
-					<img class="inline h-7 mr-2" src="/assets/images/bronze.svg" />
+					<img class="inline h-7 mr-2" src="@app/assets/images/icons/bronze.svg" />
 					<span class="font-semibold text-dark_gray ">10k</span>
 				</div>
 				<div class="flex flex-row-reverse items-center">
-					<span class="font-semibold  text-dark_gray  ">250</span>
-					<img class="inline h-7 mr-2" src="/assets/images/gold.svg" />
+					<span class="font-semibold  text-dark_gray">250</span>
+					<img class="inline h-7 mr-2" src="@app/assets/images/icons/gold.svg" />
 				</div>
 			</div>
 
@@ -25,7 +25,7 @@
 						<ion-icon :icon="removeOutline" class="text-[24px]">
 						</ion-icon>
 						<div class="flex flex-row items-center">
-							<img class="inline h-8 mr-2" src="/assets/images/bronze.svg" />
+							<img class="inline h-8 mr-2" src="@app/assets/images/icons/bronze.svg" />
 							<span class="font-semibold text-dark_gray ">100</span>
 						</div>
 						<ion-icon :icon="add" class="text-[24px]">
@@ -42,7 +42,7 @@
 						<ion-icon :icon="removeOutline" class="text-[24px]">
 						</ion-icon>
 						<div class="flex flex-row items-center">
-							<img class="inline h-8 mr-2" src="/assets/images/gold.svg" />
+							<img class="inline h-8 mr-2" src="@app/assets/images/icons/gold.svg" />
 							<span class="font-semibold text-dark_gray ">5</span>
 						</div>
 						<ion-icon :icon="add" class="text-[24px]">
@@ -62,12 +62,12 @@
 					</ion-icon>
 					<div class="flex flex-row items-center">
 						<div class="flex flex-row items-center">
-							<img class="inline h-7 mr-1" src="/assets/images/bronze.svg" />
+							<img class="inline h-7 mr-1" src="@app/assets/images/icons/bronze.svg" />
 							<span class="font-semibold text-dark_gray">100</span>
 						</div>
 						<span class="w-2 h-2 bg-icon_inactive rounded-full mx-3"></span>
 						<div class="flex flex-row items-center">
-							<img class="inline h-7 mr-1" src="/assets/images/gold.svg" />
+							<img class="inline h-7 mr-1" src="@app/assets/images/icons/gold.svg" />
 							<span class="font-semibold text-dark_gray ">5</span>
 						</div>
 
@@ -86,12 +86,12 @@
 					</ion-icon>
 					<div class="flex flex-row items-center">
 						<div class="flex flex-row items-center">
-							<img class="inline h-7 mr-1" src="/assets/images/bronze.svg" />
+							<img class="inline h-7 mr-1" src="@app/assets/images/icons/bronze.svg" />
 							<span class="font-semibold text-dark_gray">250</span>
 						</div>
 						<span class="w-2 h-2 bg-icon_inactive rounded-full mx-3"></span>
 						<div class="flex flex-row items-center">
-							<img class="inline h-7 mr-1" src="/assets/images/gold.svg" />
+							<img class="inline h-7 mr-1" src="@app/assets/images/icons/gold.svg" />
 							<span class="font-semibold text-dark_gray ">10</span>
 						</div>
 
@@ -128,7 +128,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonIcon, IonRippleEffect, IonButton } from '@ionic/vue'
+import { IonButton, IonIcon, IonRippleEffect } from '@ionic/vue'
 import { add, removeOutline } from 'ionicons/icons'
 import { useAccountModal } from '@app/composable/core/modals'
 

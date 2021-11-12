@@ -28,7 +28,7 @@
 
 			<div class="flex flex-col gap-1 px-3 py-2 pb-6 border-b-[1px] border-light_gray">
 				<h2 class="text-xs font-bold text-dark_gray">Subject</h2>
-				<span>Matheematics</span>
+				<span>Mathematics</span>
 			</div>
 
 			<div class="flex flex-col gap-1 px-3 py-2 pb-6 border-b-[1px] border-light_gray">

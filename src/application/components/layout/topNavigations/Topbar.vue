@@ -11,7 +11,7 @@
 				<div class="flex flex-row items-center px-3 w-[75%] mx-auto justify-center">
 					<div class="py-1 px-3 w-full bg-[#8B9EB1] flex rounded-xl flex-row items-center">
 						<div class="w-1/3 flex flex-row items-center">
-							<img class="inline h-6 mr-2" src="/assets/images/bronze.svg" />
+							<img class="inline h-6 mr-2" src="@app/assets/images/icons/bronze.svg" />
 							<span class="font-semibold text-xs text-white ">{{
 								isLoggedIn ? user.account.coins.bronze : '-'
 							}}</span>
@@ -24,7 +24,7 @@
 							<span class="font-semibold text-xs text-white ">{{
 								isLoggedIn ? user.account.coins.gold : '-'
 							}}</span>
-							<img class="inline h-6 mr-2" src="/assets/images/gold.svg" />
+							<img class="inline h-6 mr-2" src="@app/assets/images/icons/gold.svg" />
 						</div>
 					</div>
 				</div>
@@ -105,7 +105,7 @@
 
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
 					to="/notifications">
-					<img class="inline h-5" src="/assets/images/bell.svg" />
+					<img class="inline h-5" src="@app/assets/images/icons/bell.svg" />
 				</router-link>
 
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"

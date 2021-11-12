@@ -15,7 +15,7 @@
 			<span class="font-bold normalText text-main_dark">
 				Timmy Martin
 			</span>
-			<img alt="ask a question" class="w-[15px] md:w-4" src="../../assets/images/icons/verified.svg">
+			<img alt="ask a question" class="w-[15px] md:w-4" src="@app/assets/images/icons/verified.svg">
 		</div>
 
 		<show-ratings :rating="4" />
