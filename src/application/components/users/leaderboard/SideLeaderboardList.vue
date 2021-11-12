@@ -25,7 +25,7 @@
 
 			<router-link
 				class="py-3 px-3 rounded-lg flex w-full bg-primary text-white justify-center flex-row items-center"
-				to="/leaderboard">
+				to="/users/leaderboard">
 				<span class="font-semibold">Leaderboard</span>
 			</router-link>
 		</div>

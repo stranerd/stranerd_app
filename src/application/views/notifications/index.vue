@@ -1,46 +1,48 @@
 <template>
-	<ion-page>
-		<ion-content>
-			<div class="w-full h-full flex flex-col items-center md:mt-24 lg:mt-10 mt-4 px-4 max-w-4xl mx-auto">
-				<div class="md:flex justify-between items-center  w-full hidden">
-					<h1 class="lg:text-2xl text-lg font-bold text-dark_gray">
-						Notifications
-					</h1>
+	<IonPage>
+		<IonContent>
+			<div>
+				<div class="flex flex-col items-center px-4 max-w-4xl mx-auto">
+					<div class="md:flex justify-between items-center w-full hidden">
+						<h1 class="lg:text-2xl text-lg font-bold text-dark_gray">
+							Notifications
+						</h1>
 
-					<span class="text-icon_inactive normalText flex items-end justify-center">
+						<span class="text-icon_inactive normalText flex items-end justify-center">
+							Mark all as read
+							<ion-icon :icon="checkmarkDone" class="text-xl text-icon_inactive"></ion-icon>
+						</span>
+					</div>
+					<empty-state
+						v-if="!notifications.length"
+						btnText="Go To Home"
+						info="You have no notifications yet"
+						route="/dashboard/"
+					/>
+
+					<template v-else>
+						<NotificationCard
+							v-for="notification in notifications"
+							:key="notification.hash"
+							:notification="notification"
+							class="px-4"
+						/>
+					</template>
+
+					<span class="text-icon_inactive normalText flex items-end justify-center mt-3 md:hidden">
 						Mark all as read
 						<ion-icon :icon="checkmarkDone" class="text-xl text-icon_inactive"></ion-icon>
 					</span>
+
+					<div v-if="hasMore" class="text-center py-2 text-18 text-primary-dark">
+						<a @click.prevent="fetchOlderNotifications">Load More</a>
+					</div>
+
 				</div>
-				<empty-state
-					v-if="!notifications.length"
-					btnText="Go To Home"
-					info="You have no notifications yet"
-					route="/dashboard/"
-				/>
-
-				<template v-else>
-					<NotificationCard
-						v-for="notification in notifications"
-						:key="notification.hash"
-						:notification="notification"
-						class="px-4"
-					/>
-				</template>
-
-				<span class="text-icon_inactive normalText flex items-end justify-center mt-3 md:hidden">
-					Mark all as read
-					<ion-icon :icon="checkmarkDone" class="text-xl text-icon_inactive"></ion-icon>
-				</span>
-
-				<div v-if="hasMore" class="text-center py-2 text-18 text-primary-dark">
-					<a @click.prevent="fetchOlderNotifications">Load More</a>
-				</div>
-
+				<PageLoading v-if="loading" />
 			</div>
-			<page-loading v-if="loading" />
-		</ion-content>
-	</ion-page>
+		</IonContent>
+	</IonPage>
 </template>
 
 <script lang="ts">

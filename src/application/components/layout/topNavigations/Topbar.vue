@@ -3,7 +3,7 @@
 
 		<ion-header class="block md:hidden ion-no-border">
 			<ion-toolbar
-				class="md:hidden bg-[#F7F7FC] py-2 px-4 flex border-0 items-center justify-between items-center z-50">
+				class="md:hidden bg-[#F7F7FC] px-4 flex border-0 items-center justify-between items-center z-50">
 				<router-link slot="start" class="flex flex-row items-center " to="/account">
 					<avatar :id="user?.id" :size="30" :src="user?.avatar" />
 				</router-link>
@@ -40,7 +40,7 @@
 
 		<!-- medium screens -->
 		<div
-			class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50">
+			class="hidden lg:hidden md:flex bg-white py-3 px-3 items-center z-50">
 			<div class="flex flex-row items-center gap-9 w-1/4">
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center "
 					to="/account">
@@ -94,7 +94,7 @@
 
 		<!-- large screens -->
 		<div
-			class="hidden md:hidden lg:flex bg-white py-3 pl-16 pr-[3rem] top-0  flex-row items-center gap-16 z-50">
+			class="hidden md:hidden lg:flex bg-white py-3 pl-16 pr-[3rem] items-center gap-16 z-50">
 			<div class="w-3/4 flex flex-row items-center py-1 gap-6 justify-between">
 				<search-bar class="flex-grow" />
 

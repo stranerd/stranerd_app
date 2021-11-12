@@ -1,9 +1,9 @@
 <template>
-	<ion-page>
-		<ion-content :fullscreen="true">
+	<IonPage>
+		<IonContent>
 			<Leaderboard class="max-w-4xl mx-auto" />
-		</ion-content>
-	</ion-page>
+		</IonContent>
+	</IonPage>
 </template>
 
 <script lang="ts">

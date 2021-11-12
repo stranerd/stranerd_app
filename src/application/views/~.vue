@@ -12,7 +12,6 @@ import { IonContent, IonPage } from '@ionic/vue'
 
 export default defineComponent({
 	components: { IonContent, IonPage },
-	layout: 'dashboard',
 	middlewares: [async () => '/dashboard/']
 })
 </script>

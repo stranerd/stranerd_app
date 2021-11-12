@@ -46,7 +46,6 @@ export default defineComponent({
 		Sidebar
 	}
 })
-
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="flex justify-center items-center mt-24 lg:mt-8 mb-2 md:px-2">
+		<div class="flex justify-center items-center">
 			<span class="font-bold text-dark_gray heading hidden md:block">
 				Leaderboard
 			</span>

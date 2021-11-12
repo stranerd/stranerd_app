@@ -1,7 +1,7 @@
 <template>
 	<IonPage>
 		<IonContent>
-			<div class="col-span-12 px-3">
+			<div class="col-span-12">
 				<span class="font-bold text-dark_gray headings mb-3">
 					Available balance
 				</span>

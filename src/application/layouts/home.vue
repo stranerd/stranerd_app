@@ -12,6 +12,7 @@ import { defineComponent } from 'vue'
 import { IonContent, IonPage } from '@ionic/vue'
 
 export default defineComponent({
+	name: 'HomeLayout',
 	components: { IonContent, IonPage }
 })
 </script>

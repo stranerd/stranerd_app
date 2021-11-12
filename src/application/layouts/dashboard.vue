@@ -27,7 +27,7 @@ import RightSidebar from '@app/components/layout/sidebars/RightSidebar.vue'
 import TopBar from '@app/components/layout/topNavigations/Topbar.vue'
 
 export default defineComponent({
-	name: 'dashboard',
+	name: 'DashboardLayout',
 	components: {
 		BottomNav,
 		Sidebar,
