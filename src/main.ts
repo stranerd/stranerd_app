@@ -12,7 +12,7 @@ import { isAuthenticated } from '@app/middlewares/isAuthenticated'
 import { isNotAuthenticated } from '@app/middlewares/isNotAuthenticated'
 import { isAdmin } from '@app/middlewares/isAdmin'
 import { hasQueryToken } from '@app/middlewares/hasQueryToken'
-import {registerIonicComponent} from '@app/plugins/registerGlobally'
+import {registerIonicComponent, registerComponents} from '@app/plugins/registerGlobally'
 
 const globalMiddlewares = {
 	isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken
@@ -45,6 +45,7 @@ const init = async () => {
 
 	const app = createApp(App)
 	await registerIonicComponent(app)
+	await registerComponents(app)
 
 	app.use(router)
 		.directive('g-auth', GoogleAuth)

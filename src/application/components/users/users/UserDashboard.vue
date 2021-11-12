@@ -51,16 +51,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonIcon } from '@ionic/vue'
 import { formatNumber, pluralize } from '@utils/commons'
 import { formatTime } from '@utils/dates'
 import { UserEntity } from '@modules/users'
 import { star } from 'ionicons/icons'
-import DonutChart from '@app/components/core/DonutChart.vue'
 
 export default defineComponent({
 	name: 'ProfileDashboard',
-	components: { IonIcon, DonutChart },
 	props: {
 		user: {
 			type: UserEntity,
