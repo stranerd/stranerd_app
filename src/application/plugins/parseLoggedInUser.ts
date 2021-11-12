@@ -1,8 +1,9 @@
 import { useAuth } from '@app/composable/auth/auth'
 import { GetAuthUser } from '@modules/auth'
 import { getTokens, saveTokens } from '@utils/tokens'
+import { definePlugin } from '@app/plugins/index'
 
-export const parseLoggedInUser = async () => {
+export const parseLoggedInUser = definePlugin(async () => {
 	const { accessToken, refreshToken } = await getTokens()
 
 	if (accessToken && refreshToken) {
@@ -14,4 +15,4 @@ export const parseLoggedInUser = async () => {
 			await saveTokens({ accessToken: null, refreshToken: null })
 		}
 	}
-}
+})

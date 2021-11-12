@@ -5,47 +5,20 @@
 </template>
 
 <script lang="ts">
-import authLayout from './auth.vue'
-import dashboardLayout from './dashboard.vue'
-import defaultLayout from './default.vue'
-import homeLayout from './home.vue'
-import justifiedLayout from './justified.vue'
-import subpagesLayout from './subpages.vue'
-import questionLayout from './question.vue'
-import scheduleLayout from './schedule.vue'
-import usersLayout from './users.vue'
 import { shallowRef, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
-const components = {
-	authLayout,
-	dashboardLayout,
-	defaultLayout,
-	homeLayout,
-	justifiedLayout,
-	subpagesLayout,
-	questionLayout,
-	scheduleLayout,
-	usersLayout
-} as any
-
 export default {
 	name: 'AppLayout',
-	components,
 	setup () {
-		const layout = shallowRef(defaultLayout)
+		const layout = shallowRef('default')
 		const route = useRoute()
 		watch(
 			() => route.meta,
-			async (meta) => {
-				let layoutName = (meta.layout as string || 'default') + 'Layout'
-				if (!components[layoutName]) layoutName = 'defaultLayout'
-				layout.value = components[layoutName]
-			},
+			async (meta) => layout.value = meta.layout as string || 'default',
 			{ immediate: true }
 		)
 		return { layout }
 	}
 }
-
 </script>

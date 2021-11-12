@@ -6,17 +6,17 @@ import { IonicVue } from '@ionic/vue'
 import './application/assets/styles/index.scss'
 import './application/assets/styles/tailwind.css'
 import { GoogleAuth } from '@app/composable/auth/signin'
-import { setupPlugins } from '@app/plugins'
 import { MiddlewareFunction } from '@app/middlewares/'
 import { isAuthenticated } from '@app/middlewares/isAuthenticated'
 import { isNotAuthenticated } from '@app/middlewares/isNotAuthenticated'
 import { isAdmin } from '@app/middlewares/isAdmin'
 import { hasQueryToken } from '@app/middlewares/hasQueryToken'
-import {registerIonicComponent, registerComponents} from '@app/plugins/registerGlobally'
+import { registerComponents, registerIonicComponent } from '@app/plugins/components'
+import { parseLoggedInUser } from '@app/plugins/parseLoggedInUser'
+import { ipAddressGetter } from '@app/plugins/ipAddressGetter'
 
-const globalMiddlewares = {
-	isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken
-}
+const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken }
+const globalPlugins = [parseLoggedInUser, registerIonicComponent, registerComponents, ipAddressGetter]
 export type Middleware = MiddlewareFunction | keyof typeof globalMiddlewares
 
 const init = async () => {
@@ -39,18 +39,17 @@ const init = async () => {
 		if (redirect) next(redirect)
 		else next()
 	})
-
-	await setupPlugins().catch()
-
+	router.afterEach(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }))
 
 	const app = createApp(App)
-	await registerIonicComponent(app)
-	await registerComponents(app)
-
-	app.use(router)
+	app
+		.use(router)
 		.directive('g-auth', GoogleAuth)
 		.use(IonicVue)
-		.mount('#app')
+
+	await Promise.all(globalPlugins.map((plugin) => plugin(app))).catch()
+
+	app.mount('#app')
 }
 
 init()
