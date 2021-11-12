@@ -44,14 +44,14 @@
 				</ion-button>
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<ion-button class="btn-primary w-full h-11">
+				<ion-button class="btn-primary w-full h-11" @click="submitImage">
 					save
-					<!-- <ion-ripple-effect class="rounded-lg"></ion-ripple-effect> -->
+					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</ion-button>
 			</div>
 		</div>
 	</Modal>
-
+	<page-loading v-if="loading"/>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
@@ -61,7 +61,7 @@ import { useUploadModal } from '@app/composable/core/modals'
 import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
 import { camera } from 'ionicons/icons'
 
-import { useUpdateProfile } from '@app/composable/users/account'
+import { useProfileUpdate  } from '@app/composable/auth/profile'
 import { useFileInputs } from '@app/composable/core/forms'
 
 export default defineComponent({
@@ -69,14 +69,18 @@ export default defineComponent({
 		const closeUploadImage = () => {
 			useUploadModal().closeUploadImage()
 		}
-		const { factory, error, loading, updateProfilePicture } = useUpdateProfile()
+		const { factory, error, loading, updateProfile  } = useProfileUpdate()
+		const submitImage = async()=>{
+			await updateProfile()
+			closeUploadImage()
+		}
 		const imageLink = ref((factory.value.avatar as any)?.link ?? '')
 		const { catchFiles } = useFileInputs((file) => {
 			imageLink.value = window.URL.createObjectURL(file)
 			factory.value.avatar = file
 		})
 		return {
-			updateProfilePicture,
+			submitImage,
 			imageLink, catchFiles,
 			error, loading,
 			camera,	DEFAULT_PROFILE_IMAGE,
@@ -84,9 +88,7 @@ export default defineComponent({
 
 		}
 	},
-	components: {
-		 IonRippleEffect
-	}
+	components: { IonRippleEffect}
 })
 </script>
 <style scoped>

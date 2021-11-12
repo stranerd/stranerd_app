@@ -1,23 +1,7 @@
 <template>
 	<div class="col-span-12 flex flex-col gap-[8rem]">
 		<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
-			<div class="flex flex-col gap-2">
-				<h2 class="headings font-bold text-dark_gray">Profile picture</h2>
-				<div
-					class=" rounded-lg py-5 px-3 text-icon_inactive relative bg-light_gray flex flex-col justify-center items-center">
-					<IonIcon :icon="image" class="text-[32px]" />
-					<input
-						id="images" accept="image/*"
-						class="cursor-pointer w-full h-full absolute"
-						name="images"
-						style="opacity:0; overflow:hidden; position:absolute;"
-						type="file"
-						@change.prevent="catchFiles" />
-					<p class="mt-3">
-						Upload a new profile picture
-					</p>
-				</div>
-			</div>
+
 
 			<div class="flex flex-col gap-2">
 				<h2 class="headings font-bold text-dark_gray">Name</h2>
@@ -68,7 +52,7 @@
 				<h2 class="headings font-bold text-dark_gray">Level</h2>
 				<div class="py-1 px-2 bg-light_gray rounded-xl flex flex-row">
 					<ion-select class="w-full  font-medium" interface="action-sheet"
-								placeholder="Select your present level of education" value="notifications">
+						placeholder="Select your present level of education" value="notifications">
 						<ion-select-option value="maths">Mathematics</ion-select-option>
 						<ion-select-option value="physics">Physics</ion-select-option>
 						<ion-select-option value="bio">Biology</ion-select-option>
@@ -101,13 +85,13 @@
 
 			<div class="flex flex-row gap-3 mt-7 text-white">
 				<div class="w-1/2 flex flex-row justify-center items-center">
-					<IonButton class="cancelBtn w-full hidden" @click="tutorFactory.reset()">
+					<IonButton class="btn-secondary w-full hidden" @click="tutorFactory.reset()">
 						Cancel
 						<IonRippleEffect class="rounded-lg ion-activatable" />
 					</IonButton>
 				</div>
 				<div class="w-1/2 flex flex-row justify-center items-center">
-					<IonButton class="actionBtn ion-activatable w-full" @click="updateTutor">
+					<IonButton class="btn-primary ion-activatable w-full" @click="updateTutor">
 						Save
 						<IonSpinner v-if="tutorLoading" name="lines-small" />
 						<IonRippleEffect class="rounded-lg ion-activatable" />
@@ -168,7 +152,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IonButton, IonIcon, IonInput, IonRippleEffect, IonSpinner, IonTextarea } from '@ionic/vue'
+import { IonButton,  IonRippleEffect, IonSpinner, IonTextarea } from '@ionic/vue'
 import { image } from 'ionicons/icons'
 import { useProfileUpdate, useTutorUpdate } from '@app/composable/auth/profile'
 import { useAuth } from '@app/composable/auth/auth'
