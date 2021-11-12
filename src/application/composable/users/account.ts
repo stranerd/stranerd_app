@@ -32,9 +32,24 @@ export const useUpdateProfile = () => {
 		} else factory.value.validateAll()
 	}
 
+	const updateProfilePicture = async () => {
+		await setError('')
+		if (factory.value.valid && !loading.value) {
+			try {
+				await setLoading(true)
+				await UpdateProfile.call(factory.value)
+				await router.push(`/users/${id.value}/`)
+				await setMessage('Profile updated successfully!')
+			} catch (error) {
+				await setError(error)
+			}
+			await setLoading(false)
+		} else factory.value.validateAll()
+	}
+
 	return {
 		error, loading,
-		factory,
+		factory,updateProfilePicture,
 		updateProfile
 	}
 }

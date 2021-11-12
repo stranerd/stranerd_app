@@ -1,7 +1,17 @@
 <template>
 	<div>
 		<div class="w-full col-span-12 mb-4 flex-col flex gap-2 items-center justify-center normalText">
-			<Avatar :id="user.id" :size="90" :src="user.avatar" />
+			<div class="relative">
+				<Avatar :id="user.id" :size="90" :src="user.avatar" />
+				<ion-icon
+					v-if="showUpload"
+					@click="openUploadModal()"
+					:icon="camera"
+					class="text-primary absolute rounded-full right-1 bottom-1 text-lg bg-white p-1 border border-primary cursor-pointer"
+
+				/>
+			</div>
+
 			<h2 class="headings font-bold text-dark_gray">{{ user.fullName }}</h2>
 			<span
 				class="py-1 px-4 rounded-md border-faded_gray border-[1px] font-bold text-icon_inactive bg-light_green">
@@ -45,8 +55,9 @@ import { computed, defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import Avatar from '@app/components/core/Avatar.vue'
 import { setNewSessionTutorIdBio } from '@app/composable/sessions/sessions'
-import { useSessionModal } from '@app/composable/core/modals'
+import { useSessionModal, useUploadModal } from '@app/composable/core/modals'
 import { UserEntity } from '@modules/users'
+import { camera } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'UserProfileCard',
@@ -68,12 +79,25 @@ export default defineComponent({
 			}
 		})
 
+		const showUpload = computed({
+			get: () => authUser.value && authUser.value.id === props.user.id,
+
+			set: () => {}
+
+		})
+
 		const requestNewSession = () => {
 			setNewSessionTutorIdBio({ id: props.user.id, user: props.user.bio })
 			useSessionModal().openCreateSession()
 		}
 
-		return { id, requestNewSession, canRequestSession }
+		const openUploadModal = () => {
+			 useUploadModal().openUploadImage()
+		}
+
+		return {
+			openUploadModal,
+			id, requestNewSession, canRequestSession, camera , showUpload}
 	}
 })
 </script>

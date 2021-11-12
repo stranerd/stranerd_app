@@ -116,9 +116,23 @@ http://ionicframework.com/docs/theming/ */
 
 .btn-primary{
 	--background:#546DD3;
-	--padding-top:0.75rem;
-	--padding-bottom:0.75rem;
+	--padding-top:1rem;
+	--padding-bottom:1rem;
 	--padding-start:1.5rem;
 	--padding-end:1.5rem;
 	--color:white;
+	--box-shadow:none;
+	--border-radius:0.5rem;
+	font-weight: 700;
+}
+.btn-secondary{
+	--background:#4D5C6F;
+	--padding-top:1rem;
+	--padding-bottom:1rem;
+	--padding-start:1.5rem;
+	--padding-end:1.5rem;
+	--color:white;
+	--box-shadow:none;
+	--border-radius:0.5rem;
+	font-weight: 700;
 }

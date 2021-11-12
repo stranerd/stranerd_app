@@ -25,7 +25,7 @@ import { defineComponent, PropType } from 'vue'
 import { ReportFactory } from '@modules/reports'
 import { QuestionMessages } from '@app/composable/reports/form'
 import PageLoading from '../../core/PageLoading.vue'
-import { IonIcon, IonRippleEffect, IonButton } from '@ionic/vue'
+import { IonButton } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'QuestionReportForm',

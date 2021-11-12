@@ -3,23 +3,7 @@
 		<ion-progress-bar type="indeterminate"></ion-progress-bar>
 	</div>
 	<div v-else class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
-		<div class="flex flex-col gap-2">
-			<h2 class="headings font-bold text-dark_gray">Profile picture</h2>
-			<div
-				class=" rounded-lg py-5 px-3 text-icon_inactive relative bg-light_gray flex flex-col justify-center items-center">
-				<ion-icon :icon="image" class="text-[32px]"></ion-icon>
-				<input
-					id="images" accept="image/x-png,image/jpeg,image/jpg"
-					class="cursor-pointer w-full h-full absolute"
-					name="images"
-					style="opacity:0; overflow:hidden; position:absolute;"
-					type="file"
-					@change.prevent="catchFiles" />
-				<p class="mt-3">
-					Upload a new profile picture
-				</p>
-			</div>
-		</div>
+
 
 		<div class="flex flex-col gap-2">
 			<h2 class="headings font-bold text-dark_gray">Name</h2>
@@ -129,9 +113,6 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import {
-	IonButton,
-	IonIcon,
-	IonInput,
 	IonProgressBar,
 	IonRippleEffect,
 	IonSelect,
@@ -150,14 +131,11 @@ import { UserEntity } from '@modules/users'
 export default defineComponent({
 	name: 'ProfileSettings',
 	components: {
-		IonIcon,
-		IonInput,
 		IonTextarea,
 		IonSelect,
 		IonSelectOption,
 		IonRippleEffect,
 		IonSpinner,
-		IonButton,
 		IonProgressBar,
 		Subject,
 		SelectSubject
