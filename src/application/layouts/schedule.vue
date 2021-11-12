@@ -37,7 +37,7 @@ import TopBar from '@app/components/layout/topNavigations/Topbar.vue'
 import Sidebar from '@app/components/layout/sidebars/DefaultSidebar.vue'
 
 export default defineComponent({
-	name: 'QuestionLayout',
+	name: 'ScheduleLayout',
 	components: {
 		IonContent,
 		IonBackButton,
@@ -54,8 +54,8 @@ export default defineComponent({
 		return { calendar }
 	}
 })
-
 </script>
+
 <style scoped>
 	ion-toolbar {
 		--background: #F7F7FC;

@@ -15,7 +15,7 @@
 
 		<!-- medium screens -->
 		<div
-			class="hidden lg:hidden md:flex bg-white py-3 px-3 fixed w-full top-0 flex-row items-center z-50">
+			class="hidden lg:hidden md:flex bg-white py-3 px-3 w-full flex-row items-center z-50">
 			<div class="flex flex-row items-center gap-9 w-1/4">
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center "
 					to="/account">
@@ -171,7 +171,6 @@ export default defineComponent({
 	ion-header {
 		--background: #F7F7FC;
 		--box-shadow: none;
-		height: 40px;
 	}
 
 	ion-title {

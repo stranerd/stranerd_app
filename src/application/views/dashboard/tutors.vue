@@ -1,7 +1,7 @@
 <template>
 	<IonPage>
 		<IonContent>
-			<div class="col-span-12  md:col-start-3 md:col-end-11 px-3 ">
+			<div class="col-span-12 md:col-start-3 md:col-end-11">
 				<div class="bg-light_gray rounded-md flex flex-row items-center">
 					<button
 						:class="selectedTab == 'explore' ? 'activeSlideTab w-1/2' : 'inactiveSlideTab w-1/2'"

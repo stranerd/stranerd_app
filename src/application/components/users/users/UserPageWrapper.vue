@@ -1,7 +1,7 @@
 <template>
 	<IonPage>
 		<IonContent>
-			<div class="normalText pt-4">
+			<div class="normalText">
 				<PageLoading v-if="loading" />
 				<template v-if="user">
 					<UserProfileCard :user="user" />

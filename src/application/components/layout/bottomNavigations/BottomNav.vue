@@ -73,8 +73,6 @@ export default defineComponent({
 })
 </script>
 <style scoped>
-
-
 	.tabStyle {
 		@apply border-t-2 border-gray-300
 	}

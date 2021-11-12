@@ -13,7 +13,6 @@ import { IonContent, IonPage } from '@ionic/vue'
 
 export default defineComponent({
 	components: { IonContent, IonPage },
-	layout: 'auth',
 	middlewares: [async () => '/auth/signin']
 })
 </script>

@@ -14,7 +14,7 @@ import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 export default defineComponent({
 	name: 'ProfileDashboard',
 	displayName: 'Profile',
-	layout: 'users',
+	layout: 'justified',
 	components: { UserPageWrapper, UserDashboard }
 })
 </script>
