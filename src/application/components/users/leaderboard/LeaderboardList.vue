@@ -22,7 +22,7 @@
 					<span> - </span>
 				</div>
 				<div class="w-7/12 flex items-center gap-2">
-					<avatar :id="user.id" :size="24" :src="user.bio.photo" />
+					<avatar :id="user?.id" :size="24" :src="user.avatar" />
 					<span>
 						{{ user.bio.fullName }}
 					</span>
@@ -41,7 +41,7 @@
 						<span>{{ index + 1 }} </span>
 					</div>
 					<div class="w-3/12 flex items-center gap-2">
-						<avatar :id="person.id" :size="24" :src="person.bio.photo" />
+						<avatar :id="person.id" :size="24" :src="person.avatar" />
 						<span>
 							{{ person.bio.fullName }}
 						</span>

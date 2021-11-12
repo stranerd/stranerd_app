@@ -3,10 +3,11 @@
 		<div class="py-4 px-4 rounded-lg bg-light_gray flex flex-col text-xs md:text-sm">
 			<IonRippleEffect class="rounded-lg" />
 			<div class="flex flex-row items-center">
-				<span class="mr-2"><avatar :id="question.userId" :photo-url="question.avatar?.link" :size="28" /></span>
+				<span class="mr-2"><avatar :id="question.userId" :size="28" :src="question.avatar" /></span>
 				<span class="font-bold text-dark_gray">{{ question.userBio.fullName }}</span>
 				<div class="flex flex-row-reverse flex-grow">
-					<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive cursor-pointer" @click="openReportQuestionModal"/>
+					<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive cursor-pointer"
+						@click="openReportQuestionModal" />
 					<IonIcon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive" />
 				</div>
 			</div>
@@ -84,7 +85,6 @@ import { formatTime } from '@utils/dates'
 import { useRouter } from 'vue-router'
 import { useReportModal } from '@app/composable/core/modals'
 
-
 export default defineComponent({
 	name: 'QuestionPageCard',
 	props: {
@@ -124,7 +124,7 @@ export default defineComponent({
 			showEditButton, showDeleteButton,
 			loading, error, deleteQuestion,
 			openAnswerModal: () => openAnswerModal(props.question),
-			openReportQuestionModal: ()=> useReportModal().openReportQuestion(),
+			openReportQuestionModal: () => useReportModal().openReportQuestion(),
 			openEditModal: () => openQuestionEditModal(props.question, router)
 		}
 	}

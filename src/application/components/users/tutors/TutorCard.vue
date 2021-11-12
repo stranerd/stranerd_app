@@ -2,7 +2,7 @@
 	<div
 		class=" w-full  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-1 cardPadding justify-center items-center"
 	>
-		<avatar :id="tutor.id" :photo-url="tutor?.avatar?.link" :size="46" />
+		<avatar :id="tutor.id" :size="46" :src="tutor?.avatar" />
 
 		<div class="flex gap-2">
 			<span class="font-bold normalText text-main_dark">

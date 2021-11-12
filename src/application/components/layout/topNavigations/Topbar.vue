@@ -110,7 +110,7 @@
 
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
 					to="/account">
-					<avatar :id="user?.id" :photo-url="user?.avatar" :size="26" />
+					<avatar :id="user?.id" :size="26" :src="user?.avatar" />
 				</router-link>
 			</div>
 			<div class="w-1/4 flex flex-row items-center py-1 px-2">

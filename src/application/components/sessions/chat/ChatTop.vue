@@ -5,7 +5,7 @@
 			<router-link to="/chat">
 				<ion-icon :icon="arrowBack" class="text-dark_gray mr-2 text-[25px] cursor-pointer"></ion-icon>
 			</router-link>
-			<avatar :id="user.id" :size="32" :src="user?.avatar?.link" />
+			<avatar :id="user?.id" :size="32" :src="user?.avatar" />
 			<div class="flex flex-col ">
 				<h2 class="font-bold text-dark_gray">
 					{{ user?.fullName }}

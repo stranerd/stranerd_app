@@ -9,7 +9,7 @@
 		<div class="flex flex-col pl-8 mt-6">
 
 			<router-link v-for="{ path, icon, name } in [
-					{ name: 'home', path: '/dashboard/', icon: home },
+					{ name: 'home', path: '/dashboard', icon: home },
 					{ name: 'questions', path: '/questions', icon: helpCircle },
 					{ name: 'wallet', path: '/dashboard/wallet', icon: wallet }
 				]" :key="path" :to="path"

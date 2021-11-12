@@ -2,7 +2,7 @@
 	<div class="flex flex-col mt-1 py-3">
 		<div class="bg-light_gray rounded-lg py-4 px-3 flex flex-col">
 			<div class="flex flex-row items-center">
-				<Avatar :id="answer.userId" :photo-url="answer.avatar?.link" :size="30" class="mr-2" />
+				<Avatar :id="answer.userId" :size="30" :src="answer.avatar" class="mr-2" />
 				<span class="font-bold text-dark_gray">{{ answer.userBio.fullName }}</span>
 
 			</div>
