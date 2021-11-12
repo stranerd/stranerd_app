@@ -42,13 +42,13 @@ const init = async () => {
 	router.afterEach(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }))
 
 	const app = createApp(App)
+
+	await Promise.all(globalPlugins.map((plugin) => plugin(app))).catch()
+
 	app
 		.use(router)
 		.directive('g-auth', GoogleAuth)
 		.use(IonicVue)
-
-	await Promise.all(globalPlugins.map((plugin) => plugin(app))).catch()
-
 	app.mount('#app')
 }
 
