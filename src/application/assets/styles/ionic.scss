@@ -136,3 +136,13 @@ http://ionicframework.com/docs/theming/ */
 	--border-radius:0.5rem;
 	font-weight: 700;
 }
+
+ion-input{
+--background: #F7F7FC;
+		--box-shadow: none;
+		--border-radius: .75rem;
+		border-radius: .75rem;
+		--icon-color: #8B9EB1;
+		--color: #8B9EB1;
+		--padding-bottom: 4em;
+}

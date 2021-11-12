@@ -37,7 +37,7 @@
 						@click="() => voteAnswer(false)" />
 				</div>
 				<div class="flex flex-row items-center text-icon_inactive font-bold">
-					<template v-if="!answer.best">
+					<template v-if="answer.best" class="items-center flex justify-between cursor-pointer">
 						<span class="mr-1">Mark as best</span>
 						<IonIcon :icon="star" class="text-[20px]" />
 					</template>

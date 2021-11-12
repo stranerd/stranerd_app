@@ -4,9 +4,7 @@
 			Upload New profile Image
 		</template>
 		<template v-slot:subtext>
-			<span class="mb-4">
-				What is wrong with this Question
-			</span>
+			<span class="mb-4"></span>
 		</template>
 
 		<div class="relative mt-5">
@@ -42,12 +40,13 @@
 				</ion-button>
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<ion-button class="btn-primary w-full h-11" @click="updateProfile">
+				<ion-button class="btn-primary w-full h-11" @click="submitImage">
 					save
-					<!-- <ion-ripple-effect class="rounded-lg"></ion-ripple-effect> -->
+					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</ion-button>
 			</div>
 		</div>
+		<page-loading v-if="loading" />
 	</Modal>
 </template>
 <script lang="ts">
@@ -67,6 +66,10 @@ export default defineComponent({
 			useUploadModal().closeUploadImage()
 		}
 		const { factory, error, loading, updateProfile } = useProfileUpdate()
+		const submitImage = async () => {
+			await updateProfile()
+			closeUploadImage()
+		}
 		const imageLink = ref((factory.value.avatar as any)?.link ?? '')
 		const { catchFiles } = useFileInputs((file) => {
 			imageLink.value = window.URL.createObjectURL(file)
@@ -74,6 +77,7 @@ export default defineComponent({
 		})
 		return {
 			updateProfile,
+			submitImage,
 			imageLink, catchFiles,
 			error, loading,
 			camera, DEFAULT_PROFILE_IMAGE,
