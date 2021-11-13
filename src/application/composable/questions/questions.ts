@@ -138,7 +138,7 @@ export const useCreateQuestion = () => {
 				setError('Login to continue', true).then()
 				return []
 			}
-			if (user.value?.account.coins.bronze ?? 0 < MINIMUM_COINS) {
+			if ((user.value?.account.coins.bronze ?? 0) < MINIMUM_COINS) {
 				setError(`You need at least ${MINIMUM_COINS} coins to ask a question`, true).then()
 				return []
 			}

@@ -50,8 +50,6 @@
 <script lang="ts">
 import { IonSelect, IonSelectOption } from '@ionic/vue'
 import { defineAsyncComponent, defineComponent } from 'vue'
-
-import 'swiper/swiper-bundle.min.css'
 import TutorCard from './TutorCard.vue'
 import { useTutorsList } from '@app/composable/users/roles/tutors'
 import { useSubjectList } from '@app/composable/questions/subjects'

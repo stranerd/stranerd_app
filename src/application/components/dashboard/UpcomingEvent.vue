@@ -13,57 +13,35 @@
 			</div>
 		</div>
 
-		<div class="flex md:gap-6 gap-3 mt-3 lg:hidden">
-			<swiper
-				:direction="'horizontal'" :freeMode="true" class="overflow-x-auto"
-			>
-				<swiper-slide
-					v-for="(card,index) in 10"
-					:key="index"
+		<Swiper :freeMode="true" :items="[1,2,3,4,5]" :slides="3" class="mt-3 lg:hidden overflow-x-auto"
+			slideClass="flex md:!w-[17rem] !w-[12.5rem] mr-3"
+		>
+			<template v-slot:default="{ index }">
+				<ScheduleCard :colorClass="0 === index ? 'bg-light_green' : 'bg-light_gray'" />
+			</template>
+		</Swiper>
 
-					class="flex md:!w-[17rem] !w-[12.5rem] mr-3">
-					<ScheduleCard :colorClass="0 === index ? 'bg-light_green' : 'bg-light_gray'" />
-				</swiper-slide>
-
-			</swiper>
-		</div>
-
-		<div class="lg:flex  w-full  md:gap-6 gap-3 mt-2 hidden">
-			<swiper
-				:direction="'horizontal'"
-				:slidesPerView="3" class="flex flex-row w-full items-center"
-			>
-				<swiper-slide
-					v-for="(card,index) in 10"
-					:key="index"
-					class="!w-1/3 !pr-3">
-					<ScheduleCard :colorClass="0 === index ? 'bg-light_green' : 'bg-light_gray'" />
-				</swiper-slide>
-
-			</swiper>
-		</div>
+		<Swiper :items="[1,2,3,4,5]" :slides="3" class="mt-2 hidden lg:flex" slideClass="!w-1/3 !pr-3">
+			<template v-slot:default="{ index }">
+				<ScheduleCard :colorClass="0 === index ? 'bg-light_green' : 'bg-light_gray'" />
+			</template>
+		</Swiper>
 	</div>
-
 </template>
 
-
 <script lang="ts">
+import { defineComponent } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
+import Swiper from '@app/components/core/Swiper.vue'
 import SliderController from '@app/components/core/nav/sliderController.vue'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/swiper-bundle.min.css'
-import ScheduleCard from '../users/schedule/ScheduleCard.vue'
+import ScheduleCard from '@app/components/users/schedule/ScheduleCard.vue'
 
-export default {
+export default defineComponent({
 	name: 'Home',
-	components: { IonIcon, SliderController, Swiper, SwiperSlide, ScheduleCard },
+	components: { IonIcon, SliderController, Swiper, ScheduleCard },
 	setup () {
 		return { chevronForwardOutline, chevronBackOutline, ellipse }
 	}
-}
+})
 </script>
-
-<style>
-
-</style>
