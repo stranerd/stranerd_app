@@ -30,7 +30,7 @@ import QuestionPageCard from '@app/components/questions/QuestionPageCard.vue'
 import AnswersList from '@app/components/questions/answers/AnswersList.vue'
 
 export default defineComponent({
-	name: 'QuestionPage',
+	name: 'QuestionIdPage',
 	displayName: 'Answers',
 	layout: 'question',
 	components: {

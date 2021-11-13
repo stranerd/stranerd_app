@@ -16,15 +16,14 @@
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { arrowBackOutline } from 'ionicons/icons'
 import { IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonRouterOutlet, IonTitle, IonToolbar } from '@ionic/vue'
 import { useRouter } from 'vue-router'
+import TopBar from '@app/components/layout/topNavigations/Topbar.vue'
 
-const TopBar = defineAsyncComponent(() => import('@app/components/layout/topNavigations/Topbar.vue'))
-
-export default {
-	name: 'tutors page',
+export default defineComponent({
+	name: 'Tutors',
 	components: { IonPage, IonContent, IonRouterOutlet, TopBar, IonTitle, IonIcon, IonButtons, IonHeader, IonToolbar },
 	setup () {
 		const router = useRouter()
@@ -33,5 +32,5 @@ export default {
 			arrowBackOutline
 		}
 	}
-}
+})
 </script>

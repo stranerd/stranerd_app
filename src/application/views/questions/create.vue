@@ -44,7 +44,7 @@ import { IonContent, IonPage } from '@ionic/vue'
 import { useCreateQuestion } from '@app/composable/questions/questions'
 
 export default defineComponent({
-	name: 'CreateQuestionPage',
+	name: 'QuestionsCreate',
 	components: { IonPage, IonContent, QuestionForm },
 	middlewares: ['isAuthenticated'],
 	layout: 'dashboard',

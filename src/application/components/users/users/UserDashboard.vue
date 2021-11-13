@@ -69,10 +69,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style scoped>
-	ion-toolbar {
-		--background: #F7F7FC;
-	}
-
-</style>

@@ -55,7 +55,7 @@ import PageLoading from '@app/components/core/PageLoading.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
-	name: 'Notification',
+	name: 'Notifications',
 	layout: 'justified',
 	displayName: 'Notifications',
 	middlewares: ['isAuthenticated'],
@@ -69,7 +69,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style>
-
-</style>

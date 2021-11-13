@@ -26,7 +26,7 @@ import AllQuestions from '@app/components/questions/all.vue'
 import { IonContent, IonPage } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'QuestionsPage',
+	name: 'Questions',
 	components: {
 		AllQuestions, IonContent, IonPage
 	},

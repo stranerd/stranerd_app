@@ -26,7 +26,7 @@ import { IonContent, IonPage } from '@ionic/vue'
 import ExploreTutors from '@app/components/users/tutors/ExploreTutors.vue'
 
 export default defineComponent({
-	name: 'DashboardTutorsExplorePage',
+	name: 'TutorsExplore',
 	layout: 'dashboard',
 	components: { IonPage, IonContent, ExploreTutors }
 })

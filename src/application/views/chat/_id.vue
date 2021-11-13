@@ -32,18 +32,17 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, onMounted } from 'vue'
 import { IonContent, IonIcon, IonPage } from '@ionic/vue'
-import { defineAsyncComponent, onMounted } from 'vue'
 import { chatbubbles, ellipsisVertical, home } from 'ionicons/icons'
 import { openChat } from '@app/composable/sessions/ChatHandler'
 import { useRoute } from 'vue-router'
+import ChatList from '@app/components/sessions/chat/ChatList.vue'
+import FullChat from '@app/components/sessions/chat/Chat.vue'
+import ChatInfo from '@app/components/sessions/chat/ChatInfo.vue'
 
-const ChatList = defineAsyncComponent(() => import('@app/components/sessions/chat/ChatList.vue'))
-const FullChat = defineAsyncComponent(() => import('@app/components/sessions/chat/Chat.vue'))
-const ChatInfo = defineAsyncComponent(() => import('@app/components/sessions/chat/ChatInfo.vue'))
-
-export default {
-	name: 'chatView',
+export default defineComponent({
+	name: 'ChatId',
 	components: { IonPage, IonContent, ChatList, FullChat, ChatInfo, IonIcon },
 	setup () {
 		onMounted(() => {
@@ -54,5 +53,5 @@ export default {
 
 		return { ellipsisVertical, chatbubbles, home, openChat, userId }
 	}
-}
+})
 </script>

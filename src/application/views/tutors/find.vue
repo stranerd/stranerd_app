@@ -26,7 +26,7 @@ import { IonContent, IonPage } from '@ionic/vue'
 import FindTutors from '@app/components/users/tutors/FindTutors.vue'
 
 export default defineComponent({
-	name: 'DashboardTutorsFindPage',
+	name: 'TutorsFind',
 	layout: 'dashboard',
 	components: { IonPage, IonContent, FindTutors }
 })

@@ -210,10 +210,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-	ion-toolbar {
-		--background: #F7F7FC;
-	}
-
 	ion-button {
 		--background: #546DD3;
 		--box-shadow: none;

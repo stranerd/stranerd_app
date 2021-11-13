@@ -84,7 +84,7 @@ import DateCard from '@app/components/users/schedule/DateCard.vue'
 import { useScheduleModal } from '@app/composable/core/modals'
 
 export default defineComponent({
-	name: 'ScheduleCalendarPage',
+	name: 'ScheduleCalendar',
 	layout: 'schedule',
 	components: {
 		IonPage,
@@ -116,8 +116,3 @@ export default defineComponent({
 	}
 })
 </script>
-<style scoped>
-	ion-toolbar {
-		--background: #F7F7FC;
-	}
-</style>

@@ -7,7 +7,7 @@ import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
-	name: 'account',
+	name: 'Account',
 	middlewares: [async () => {
 		const { isLoggedIn, id } = useAuth()
 		if (isLoggedIn.value) return `/users/${id.value}/`

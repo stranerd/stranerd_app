@@ -20,7 +20,7 @@ import BalanceCard from '@app/components/users/wallet/BalanceCard.vue'
 import TransactionHistory from '@app/components/users/wallet/TranscractionHistory.vue'
 
 export default defineComponent({
-	name: 'DashboardWalletPage',
+	name: 'Wallet',
 	layout: 'dashboard',
 	middlewares: ['isAuthenticated'],
 	components: { IonPage, IonContent, BalanceCard, TransactionHistory },
@@ -29,6 +29,4 @@ export default defineComponent({
 		return { id, user }
 	}
 })
-
-
 </script>

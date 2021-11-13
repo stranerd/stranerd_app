@@ -37,6 +37,7 @@ import { IonButton, IonContent, IonPage, IonSpinner } from '@ionic/vue'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
+	name: 'CompleteVerification',
 	components: { IonContent, IonPage, IonButton, IonSpinner },
 	layout: 'auth',
 	middlewares: ['hasQueryToken'],

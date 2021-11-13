@@ -73,7 +73,7 @@ import { filter } from 'ionicons/icons'
 import NerdRequest from '@app/components/users/tutors/NerdRequestCard.vue'
 
 export default defineComponent({
-	name: 'tutor a Nerd',
+	name: 'NerdRequest',
 	components: {
 		IonSelect,
 		IonSelectOption,
@@ -87,13 +87,8 @@ export default defineComponent({
 	},
 	setup () {
 		const showFilter = ref(false)
-		return {
-			filter,
-			showFilter
-
-		}
+		return { filter, showFilter }
 	}
-
 })
 </script>
 
@@ -137,6 +132,4 @@ export default defineComponent({
 	ion-item {
 		--background: transparent;
 	}
-
-
 </style>

@@ -8,17 +8,16 @@
 
 <script lang="ts">
 
-import { computed, defineAsyncComponent, onBeforeUnmount, onMounted } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { ellipsisVertical, search } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useUser } from '@app/composable/users/user'
 import { hasRequestedSessionWith, isRequestingSessionWith, useCurrentSession } from '@app/composable/sessions/session'
+import ChatTop from '@app/components/sessions/chat/ChatTop.vue'
+import ChatBottom from '@app/components/sessions/chat/ChatBottom.vue'
+import ChatContent from '@app/components/sessions/chat/ChatContent.vue'
 
-const ChatTop = defineAsyncComponent(() => import('@app/components/sessions/chat/ChatTop.vue'))
-const ChatBottom = defineAsyncComponent(() => import('@app/components/sessions/chat/ChatBottom.vue'))
-const ChatContent = defineAsyncComponent(() => import('@app/components/sessions/chat/ChatContent.vue'))
-
-export default {
+export default defineComponent({
 	components: { ChatTop, ChatBottom, ChatContent },
 	props: {
 		userId: {
@@ -26,8 +25,7 @@ export default {
 			required: true
 		}
 	},
-	setup (props: any) {
-
+	setup (props) {
 		const { currentSessionId, user: authUser } = useAuth()
 		const { user, loading, error, listener } = useUser(props.userId)
 		const { currentSession } = useCurrentSession()
@@ -55,5 +53,5 @@ export default {
 
 		return { ellipsisVertical, search, user, loading, error, sessionId, hash, requestedSession, requestingSession }
 	}
-}
+})
 </script>

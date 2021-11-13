@@ -12,15 +12,9 @@ import UserReviews from '@app/components/users/users/UserReviews.vue'
 import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 
 export default defineComponent({
-	name: 'ProfileReviews',
+	name: 'UserIdReviews',
 	displayName: 'Profile',
 	layout: 'justified',
 	components: { UserPageWrapper, UserReviews }
 })
 </script>
-
-<style scoped>
-	ion-toolbar {
-		--background: #F7F7FC;
-	}
-</style>

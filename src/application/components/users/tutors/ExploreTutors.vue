@@ -48,13 +48,12 @@
 
 </template>
 <script lang="ts">
+import { defineComponent } from 'vue'
 import { IonSelect, IonSelectOption } from '@ionic/vue'
-import { defineAsyncComponent, defineComponent } from 'vue'
 import TutorCard from './TutorCard.vue'
 import { useTutorsList } from '@app/composable/users/roles/tutors'
 import { useSubjectList } from '@app/composable/questions/subjects'
-
-const EmptyState = defineAsyncComponent(() => import('@app/components/core/EmptyState.vue'))
+import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
 	components: { IonSelect, IonSelectOption, TutorCard, EmptyState },
@@ -69,10 +68,6 @@ export default defineComponent({
 })
 </script>
 <style scoped>
-	.customShadow {
-		box-shadow: 0 2px 6px rgb(0 0 0 / 0.2);
-	}
-
 	ion-select {
 
 		/* Set a different placeholder color */

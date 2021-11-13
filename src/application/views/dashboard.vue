@@ -16,7 +16,7 @@ import RecentQuestions from '@app/components/dashboard/RecentQuestions.vue'
 import RecentTransaction from '@app/components/dashboard/RecentTransactions.vue'
 
 export default defineComponent({
-	name: 'DashboardHomePage',
+	name: 'Dashboard',
 	layout: 'dashboard',
 	components: {
 		IonPage,

@@ -16,12 +16,11 @@
 
 </template>
 <script lang="ts">
-import { defineAsyncComponent, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { checkmarkDoneOutline } from 'ionicons/icons'
 import { useChats } from '@app/composable/sessions/chats'
 import { formatTime } from '@utils/dates'
-
-const ChatMessage = defineAsyncComponent(() => import('@app/components/sessions/chat/ChatMessage.vue'))
+import ChatMessage from '@app/components/sessions/chat/ChatMessage.vue'
 
 export default defineComponent({
 	props: {

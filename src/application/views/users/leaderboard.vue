@@ -12,7 +12,7 @@ import { IonContent, IonPage } from '@ionic/vue'
 import Leaderboard from '@app/components/users/leaderboard/Leaderboard.vue'
 
 export default defineComponent({
-	name: 'tutor leaderboard',
+	name: 'UsersLeaderboard',
 	layout: 'justified',
 	displayName: 'LeaderBoard',
 	components: { IonPage, IonContent, Leaderboard }
