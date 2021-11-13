@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
 import 'swiper/swiper-bundle.min.css'
 
 export default defineComponent({

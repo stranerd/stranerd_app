@@ -27,6 +27,7 @@ export class HttpClient {
 			const isFromOurServer = Object.values(apiBases).find((base) => !!config.baseURL?.startsWith(base))
 			if (!isFromOurServer) return config
 			const { accessToken, refreshToken } = await getTokens()
+			if (!config.headers) config.headers = {}
 			if (accessToken) config.headers['Access-Token'] = accessToken
 			if (refreshToken) config.headers['Refresh-Token'] = refreshToken
 			return config
