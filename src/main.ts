@@ -5,7 +5,6 @@ import { createRouter, createWebHistory } from '@ionic/vue-router'
 import { IonicVue } from '@ionic/vue'
 import './application/assets/styles/index.scss'
 import './application/assets/styles/tailwind.css'
-import { GoogleAuth } from '@app/composable/auth/signin'
 import { MiddlewareFunction } from '@app/middlewares/'
 import { isAuthenticated } from '@app/middlewares/isAuthenticated'
 import { isNotAuthenticated } from '@app/middlewares/isNotAuthenticated'
@@ -48,7 +47,6 @@ const init = async () => {
 
 	app
 		.use(router)
-		.directive('g-auth', GoogleAuth)
 		.use(IonicVue)
 	app.mount('#app')
 }
