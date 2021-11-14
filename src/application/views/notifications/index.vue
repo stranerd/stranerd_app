@@ -53,6 +53,7 @@ import { IonContent, IonIcon, IonPage } from '@ionic/vue'
 import { checkmarkDone } from 'ionicons/icons'
 import PageLoading from '@app/components/core/PageLoading.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'Notification',
@@ -61,7 +62,8 @@ export default defineComponent({
 	middlewares: ['isAuthenticated'],
 	components: { NotificationCard, IonContent, IonPage, IonIcon, PageLoading, EmptyState },
 	setup () {
-		const { notifications, error, loading, listener, hasMore, fetchOlderNotifications } = useNotificationList()
+		const { id } = useAuth()
+		const { notifications, error, loading, listener, hasMore, fetchOlderNotifications } = useNotificationList(id.value)
 		onMounted(() => {
 			if (!listener.isRunning.value) listener.startListener()
 		})
