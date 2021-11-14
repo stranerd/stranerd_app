@@ -1,19 +1,17 @@
 <template>
-	<div class="h-screen">
-		<div class="flex h-full">
-			<Sidebar />
-			<div class="layout">
-				<TopBar />
-				<div class="layout-page">
-					<div class="layout-body">
-						<slot />
-					</div>
-					<div class="layout-side-right">
-						<RightSidebar />
-					</div>
+	<div class="flex h-screen">
+		<Sidebar />
+		<div class="layout">
+			<TopBar />
+			<div class="layout-page">
+				<div class="layout-body">
+					<slot />
 				</div>
-				<BottomNav class="mt-auto" />
+				<div class="layout-side-right">
+					<RightSidebar />
+				</div>
 			</div>
+			<BottomNav class="mt-auto" />
 		</div>
 	</div>
 </template>
