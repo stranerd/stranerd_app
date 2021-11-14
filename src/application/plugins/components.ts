@@ -2,11 +2,11 @@ import { IonButton, IonContent, IonIcon, IonInput, IonPage } from '@ionic/vue'
 import { definePlugin } from '@app/plugins/index'
 
 export const registerIonicComponent = definePlugin(async (app) => {
-	await app.component('ion-page', IonPage)
-	await app.component('ion-content', IonContent)
-	await app.component('ion-button', IonButton)
-	await app.component('ion-input', IonInput)
-	await app.component('ion-icon', IonIcon)
+	app.component('ion-page', IonPage)
+	app.component('ion-content', IonContent)
+	app.component('ion-button', IonButton)
+	app.component('ion-input', IonInput)
+	app.component('ion-icon', IonIcon)
 })
 
 export const registerComponents = definePlugin(async (app) => {
@@ -21,7 +21,7 @@ export const registerComponents = definePlugin(async (app) => {
 
 			const componentName = fileName.split('/').pop()?.replace(/\.\w+$/, '') ?? ''
 
-			await app.component(componentName, componentConfig.default || componentConfig)
+			app.component(componentName, componentConfig.default || componentConfig)
 		})
 	})
 })

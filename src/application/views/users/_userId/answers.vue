@@ -14,7 +14,6 @@ import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 export default defineComponent({
 	name: 'UserIdAnswers',
 	displayName: 'Profile',
-	layout: 'justified',
 	components: { UserPageWrapper, UserAnswers }
 })
 </script>
