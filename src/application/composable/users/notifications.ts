@@ -22,12 +22,10 @@ const unshiftToNotificationList = (userId: string, notification: NotificationEnt
 	else global[userId].notifications.value.unshift(notification)
 }
 
-export const useNotificationList = () => {
-	const { id } = useAuth()
-	const userId = id.value ?? 'empty'
+export const useNotificationList = (userId: string) => {
 	if (global[userId] === undefined) {
 		const listener = useListener(async () => {
-			if (!id.value) return () => {
+			if (!userId) return () => {
 			}
 			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
 			return ListenToNotifications.call(userId, {
@@ -54,7 +52,7 @@ export const useNotificationList = () => {
 	}
 
 	const fetchNotifications = async () => {
-		if (!id.value) return
+		if (!userId) return
 		await global[userId].setError('')
 		await global[userId].setLoading(true)
 		try {
@@ -71,7 +69,7 @@ export const useNotificationList = () => {
 	const fetchOlderNotifications = async () => {
 		await fetchNotifications()
 		await global[userId].listener.resetListener(async () => {
-			if (!id.value) return () => {
+			if (!userId) return () => {
 			}
 			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
 			return ListenToNotifications.call(userId, {
@@ -90,7 +88,6 @@ export const useNotificationList = () => {
 	}
 
 	onMounted(async () => {
-		if (!id.value) return
 		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchNotifications()
 	})
 

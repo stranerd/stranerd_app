@@ -24,6 +24,7 @@ export const useTransactionList = (userId: string) => {
 	}
 
 	const fetchTransactions = async () => {
+		if (!userId) return
 		await global[userId].setError('')
 		await global[userId].setLoading(true)
 		try {
