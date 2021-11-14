@@ -1,5 +1,5 @@
 <template>
-	<IonContent :fullscreen="true">
+	<div class="h-screen">
 		<div class="flex h-full">
 			<Sidebar />
 			<div class="layout">
@@ -15,12 +15,11 @@
 				<BottomNav class="mt-auto" />
 			</div>
 		</div>
-	</IonContent>
+	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonContent } from '@ionic/vue'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 import Sidebar from '@app/components/layout/sidebars/DefaultSidebar.vue'
 import RightSidebar from '@app/components/layout/sidebars/RightSidebar.vue'
@@ -31,7 +30,6 @@ export default defineComponent({
 	components: {
 		BottomNav,
 		Sidebar,
-		IonContent,
 		TopBar,
 		RightSidebar
 	}
