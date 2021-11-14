@@ -1,4 +1,4 @@
-import { QueryParams } from '@modules/core'
+import { Conditions, QueryParams } from '@modules/core'
 import { IUserRepository } from '../../irepositories/iuser'
 import { RankingTimes } from '@modules/users/domain/entities/user'
 
@@ -11,6 +11,7 @@ export class GetLeaderboardUseCase {
 
 	async call (type: RankingTimes) {
 		const conditions: QueryParams = {
+			where: [{ field: `account.rankings.${type}`, condition: Conditions.gt, value: 0 }],
 			sort: { field: `account.rankings.${type}`, order: -1 },
 			limit: 50
 		}

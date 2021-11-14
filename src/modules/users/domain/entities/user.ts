@@ -6,7 +6,8 @@ import { getRankImage, RankTypes } from './rank'
 export enum RankingTimes {
 	daily = 'daily',
 	weekly = 'weekly',
-	monthly = 'monthly'
+	monthly = 'monthly',
+	overall = 'overall'
 }
 
 export interface UserBio {
