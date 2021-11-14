@@ -1,35 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Ionic App</title>
+<head>
+	<meta charset="utf-8" />
+	<title>Stranerd</title>
 
-    <base href="/" />
+	<base href="/" />
 
-    <meta name="color-scheme" content="light dark" />
-    <meta
-      name="viewport"
-      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <meta name="format-detection" content="telephone=no" />
-	<meta name="google-signin-client_id" content="1060370867985-j5oogrsukj9rksujtkjb6101i49923hg.apps.googleusercontent.com">
-   <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-    <meta name="msapplication-tap-highlight" content="no" />
+	<meta content="light dark" name="color-scheme" />
+	<meta
+		content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+		name="viewport"
+	/>
+	<meta content="no" name="msapplication-tap-highlight" />
 
+	<link href="<%= BASE_URL %>images/icon.png" rel="shortcut icon" type="image/png" />
 
-    <link rel="shortcut icon" type="image/png" href="<%= BASE_URL %>assets/icon/favicon.png" />
+	<!-- add to homescreen for ios -->
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="Stranerd" name="apple-mobile-web-app-title" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+</head>
 
-    <!-- add to homescreen for ios -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="Ionic App" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  </head>
-
-  <body>
-    <div id="app">
-		<App />
-	</div>
-  </body>
-
+<body>
+<div id="app">
+	<App />
+</div>
+</body>
 </html>
 
