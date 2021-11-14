@@ -1,4 +1,4 @@
-import { Directive, Ref, ref } from 'vue'
+import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import {
 	CompleteEmailVerification,
@@ -12,7 +12,6 @@ import {
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'
-import { googleClientId } from '@utils/environment'
 import { useAuth } from '@app/composable/auth/auth'
 
 const global = {
@@ -146,32 +145,4 @@ export const useGoogleSignin = () => {
 		}
 	}
 	return { loading, error, signin, setError }
-}
-
-export const GoogleAuth: Directive = {
-	beforeMount (el: Element) {
-		const { setError, signin } = useGoogleSignin()
-		const googleSignInAPI = document.createElement('script')
-		googleSignInAPI.setAttribute('src', 'https://apis.google.com/js/api:client.js')
-		document.head.appendChild(googleSignInAPI)
-		const onSuccess = async (googleUser: any) => {
-			await signin(googleUser.getAuthResponse().id_token)
-			googleUser.disconnect()
-		}
-		const onFail = async () => {
-			await setError('Error signing in with google')
-		}
-
-		googleSignInAPI.onload = () => {
-			//@ts-ignore
-			gapi.load('auth2', () => {
-				//@ts-ignore
-				const auth2 = gapi.auth2.init({
-					client_id: googleClientId,
-					cookiepolicy: 'single_host_origin'
-				})
-				auth2.attachClickHandler(el, {}, onSuccess, onFail)
-			})
-		}
-	}
 }

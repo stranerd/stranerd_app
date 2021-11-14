@@ -1,6 +1,6 @@
 <template>
 	<div class="d-flex flex-column gap-1 gap-md-2">
-		<ion-button v-g-auth
+		<ion-button id="g-auth"
 			class="w-full font-bold capitalize text-base flex gap-9 justify-center items-center my-6">
 			<ion-icon :icon="logoGoogle" class="mr-4" size="100px" />
 			<span>Google</span>
@@ -11,20 +11,41 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { useGoogleSignin } from '@app/composable/auth/signin'
 import { IonButton, IonIcon } from '@ionic/vue'
 import { logoGoogle } from 'ionicons/icons'
 import PageLoading from '../core/PageLoading.vue'
+import { googleClientId } from '@utils/environment'
 
 export default defineComponent({
-	components: {
-		IonButton, IonIcon, PageLoading
-	},
+	name: 'AuthProviders',
+	components: { IonButton, IonIcon, PageLoading },
 	setup () {
+		const { loading, error, setError, signin } = useGoogleSignin()
 
-		const { loading } = useGoogleSignin()
-		return { loading, logoGoogle }
+		onMounted(() => {
+			const googleSignInAPI = document.createElement('script')
+			googleSignInAPI.setAttribute('src', 'https://apis.google.com/js/api:client.js')
+			document.head.appendChild(googleSignInAPI)
+			const onSuccess = async (googleUser: any) => {
+				await signin(googleUser.getAuthResponse().id_token)
+				googleUser.disconnect()
+			}
+			const onFail = async () => {
+				await setError('Error signing in with google')
+			}
+
+			googleSignInAPI.onload = () => {
+				//@ts-ignore
+				window.gapi.load('auth2', () => {
+					//@ts-ignore
+					window.gapi.auth2.init({ client_id: googleClientId, cookiepolicy: 'single_host_origin' })
+						.attachClickHandler(document.getElementById('g-auth'), {}, onSuccess, onFail)
+				})
+			}
+		})
+		return { loading, error, logoGoogle }
 	}
 })
 </script>

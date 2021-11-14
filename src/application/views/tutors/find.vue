@@ -15,7 +15,7 @@
 					</router-link>
 				</div>
 			</div>
-			<FindTutors/>
+			<FindTutors />
 		</div>
 	</DashboardLayout>
 </template>

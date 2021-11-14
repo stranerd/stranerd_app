@@ -9,10 +9,10 @@ const getPath = (page: string[]) => page.map((path) => {
 const makeRoute = async (page: string[]) => {
 	const path = '/' + getPath(page)
 	const { default: component } = await import(`../views/${page.join('/')}.vue`)
-	const { displayName = '', layout = null, middlewares = [], name = '' } = component
+	const { displayName = '', middlewares = [], name = '' } = component
 	return {
 		path, name, component,
-		meta: { layout, middlewares, displayName }
+		meta: { middlewares, displayName }
 	}
 }
 

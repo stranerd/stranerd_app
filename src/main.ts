@@ -5,7 +5,6 @@ import { createRouter, createWebHistory } from '@ionic/vue-router'
 import { IonicVue } from '@ionic/vue'
 import './application/assets/styles/index.scss'
 import './application/assets/styles/tailwind.css'
-import { GoogleAuth } from '@app/composable/auth/signin'
 import { MiddlewareFunction } from '@app/middlewares/'
 import { isAuthenticated } from '@app/middlewares/isAuthenticated'
 import { isNotAuthenticated } from '@app/middlewares/isNotAuthenticated'
@@ -14,9 +13,10 @@ import { hasQueryToken } from '@app/middlewares/hasQueryToken'
 import { registerComponents, registerIonicComponent } from '@app/plugins/components'
 import { parseLoggedInUser } from '@app/plugins/parseLoggedInUser'
 import { ipAddressGetter } from '@app/plugins/ipAddressGetter'
+import { authClient } from '@app/plugins/authClient'
 
 const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken }
-const globalPlugins = [parseLoggedInUser, registerIonicComponent, registerComponents, ipAddressGetter]
+const globalPlugins = [parseLoggedInUser, authClient, registerIonicComponent, registerComponents, ipAddressGetter]
 export type Middleware = MiddlewareFunction | keyof typeof globalMiddlewares
 
 const init = async () => {
@@ -30,7 +30,7 @@ const init = async () => {
 		let redirect = null
 		for (const middleware of middlewares) {
 			const callback = typeof middleware === 'string' ? globalMiddlewares[middleware] : middleware
-			const path = await callback?.({ to, from })
+			const path = await callback?.({ to, from }).catch(() => null)
 			if (!path) continue
 			redirect = path
 			break
@@ -43,13 +43,12 @@ const init = async () => {
 
 	const app = createApp(App)
 
-	await Promise.all(globalPlugins.map((plugin) => plugin(app))).catch()
+	for (const plugin of globalPlugins) await plugin({ app, router }).catch()
 
 	app
 		.use(router)
-		.directive('g-auth', GoogleAuth)
 		.use(IonicVue)
 	app.mount('#app')
 }
 
-init()
+init().then()

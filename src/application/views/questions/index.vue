@@ -15,7 +15,7 @@
 					</router-link>
 				</div>
 			</div>
-			<all-questions/>
+			<all-questions />
 		</div>
 	</DashboardLayout>
 </template>

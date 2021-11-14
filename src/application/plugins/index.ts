@@ -1,5 +1,11 @@
 import { App } from 'vue'
+import { Router } from 'vue-router'
 
-type PluginFunction = (app: App) => Promise<void>
+type Args = {
+	app: App,
+	router: Router
+}
+
+type PluginFunction = (args: Args) => Promise<void>
 
 export const definePlugin = (plugin: PluginFunction) => plugin

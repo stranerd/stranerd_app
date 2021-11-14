@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<div>
-			<Leaderboard class="max-w-4xl mx-auto"/>
+			<Leaderboard class="max-w-4xl mx-auto" />
 		</div>
 	</Justified>
 </template>

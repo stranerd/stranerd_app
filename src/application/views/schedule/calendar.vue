@@ -8,26 +8,26 @@
 				</span>
 				<span
 					class="flex flex-row items-center w-full md:w-5/12  px-2 py-3 bg-light_gray rounded-md justify-between">
-					<IonIcon :icon="chevronBack" class="text-[24px]"/>
+					<IonIcon :icon="chevronBack" class="text-[24px]" />
 					<h2 class="headings font-bold">October 2021</h2>
-					<IonIcon :icon="chevronForward" class="text-[24px]"/>
+					<IonIcon :icon="chevronForward" class="text-[24px]" />
 				</span>
 				<span
 					class="hidden md:flex flex-row items-center px-2 py-3 bg-light_gray rounded-md justify-between cursor-pointer"
 					@click="createSchedule()">
-					<IonIcon :icon="add" class="text-[26px]"/>
+					<IonIcon :icon="add" class="text-[26px]" />
 				</span>
 			</div>
 
 			<div
 				class="flex flex-row items-center px-2 md:px-2 gap-[2px] py-3 mt-2 md:mt-4 md:justify-between justify-around normalText font-bold lg:px-0">
-				<date-card :date-day="'m'" :date-number="5" :has-dot="true"/>
-				<date-card :date-day="'tu'" :date-number="6" :is-selected="true"/>
-				<date-card :date-day="'w'" :date-number="7" :has-dot="true"/>
-				<date-card :date-day="'th'" :date-number="8" :has-dot="true"/>
-				<date-card :date-day="'f'" :date-number="9"/>
-				<date-card :date-day="'sa'" :date-number="10"/>
-				<date-card :date-day="'su'" :date-number="11"/>
+				<date-card :date-day="'m'" :date-number="5" :has-dot="true" />
+				<date-card :date-day="'tu'" :date-number="6" :is-selected="true" />
+				<date-card :date-day="'w'" :date-number="7" :has-dot="true" />
+				<date-card :date-day="'th'" :date-number="8" :has-dot="true" />
+				<date-card :date-day="'f'" :date-number="9" />
+				<date-card :date-day="'sa'" :date-number="10" />
+				<date-card :date-day="'su'" :date-number="11" />
 
 			</div>
 			<div class="mt-1 flex-row flex justify-center md:mt-4 items-center">
@@ -41,31 +41,31 @@
 			<div class="mt-4 md:mt-5 flex-row flex justify-center items-center">
 				<span
 					class="px-4 py-2 md:py-3 flex-row flex items-center rounded-lg text-icon_inactive font-bold bg-light_gray headings">
-					Openings <IonIcon :icon="chevronDown" class="text-[22px] ml-2"/>
+					Openings <IonIcon :icon="chevronDown" class="text-[22px] ml-2" />
 				</span>
 			</div>
 
 			<div class="mt-3 grid grid-cols-12 gap-4 md:gap-6 md:mt-6 mb-14 md:px-3 lg:px-0">
 				<div class="col-span-12 md:col-span-6 lg:col-span-4">
-					<opening :colorClass="'bg-light_green'"/>
+					<opening :colorClass="'bg-light_green'" />
 				</div>
 				<div class="col-span-12 md:col-span-6 lg:col-span-4">
 					<opening :colorClass="'bg-white border-[1px] border-faded_gray'"
-						:is-opening="true"/>
+						:is-opening="true" />
 				</div>
 				<div class="col-span-12 md:col-span-6 lg:col-span-4">
-					<opening :colorClass="'bg-tinted_pink'"/>
-				</div>
-				<div class="col-span-12 md:col-span-6 lg:col-span-4">
-					<opening :colorClass="'bg-white border-[1px] border-faded_gray'"
-						:is-opening="true"/>
-				</div>
-				<div class="col-span-12 md:col-span-6 lg:col-span-4">
-					<opening :colorClass="'bg-butter_yellow'"/>
+					<opening :colorClass="'bg-tinted_pink'" />
 				</div>
 				<div class="col-span-12 md:col-span-6 lg:col-span-4">
 					<opening :colorClass="'bg-white border-[1px] border-faded_gray'"
-						:is-opening="true"/>
+						:is-opening="true" />
+				</div>
+				<div class="col-span-12 md:col-span-6 lg:col-span-4">
+					<opening :colorClass="'bg-butter_yellow'" />
+				</div>
+				<div class="col-span-12 md:col-span-6 lg:col-span-4">
+					<opening :colorClass="'bg-white border-[1px] border-faded_gray'"
+						:is-opening="true" />
 				</div>
 			</div>
 		</div>
@@ -90,7 +90,7 @@ export default defineComponent({
 		Opening,
 		DateCard
 	},
-	setup() {
+	setup () {
 		const router = useRouter()
 
 		const createSchedule = () => {

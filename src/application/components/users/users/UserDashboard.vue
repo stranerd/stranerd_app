@@ -37,7 +37,7 @@
 				</div>
 			</div>
 
-			<div class="w-full pl-2 mt-2 lg:mt-4">
+			<div class="w-full mt-2 lg:mt-4">
 				<div class="flex flex-col rounded-lg bg-light_gray py-9 px-4 gap-3 justify-center items-center">
 					<h4 class=" text-icon_inactive font-bold">Joined</h4>
 					<h4 class="text-sm md:text-lg text-dark_gray font-bold">
