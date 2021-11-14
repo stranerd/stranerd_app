@@ -72,7 +72,6 @@ import AuthProviders from '@app/components/auth/AuthProviders.vue'
 export default defineComponent({
 	name: 'Signin',
 	components: { AuthProviders, IonSpinner },
-	layout: 'auth',
 	middlewares: ['isNotAuthenticated'],
 	setup () {
 		const { factory, loading, error, signin } = useEmailSignin()
