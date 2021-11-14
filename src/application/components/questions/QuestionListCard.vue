@@ -4,7 +4,7 @@
 		:to="`/questions/${question.id}`">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
-			<avatar :id="question.userId" :photo-url="question.avatar?.link" :size="28" class="mr-2" />
+			<avatar :id="question.userId" :size="28" :src="question.avatar" class="mr-2" />
 			<span class="font-bold text-dark_gray">{{ question.userBio.fullName }}</span>
 			<div class="flex flex-row-reverse flex-grow">
 				<template v-if="fromHome">
@@ -18,11 +18,12 @@
 							<span class="mr-2">Answer</span>
 							<span class="h-1 w-1 rounded-full bg-white mr-2"></span>
 							<span class="mr-1 text-sm">+{{ question.creditable }}</span>
-							<img class=" h-4" src="/assets/images/bronze.svg" />
+							<img class=" h-4" src="@app/assets/images/icons/bronze.svg" />
 						</button>
 					</template>
 					<template v-if="fromViewQuestion">
-						<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive cursor-pointer"  @click="openReportQuestionModal"/>
+						<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive cursor-pointer"
+							@click="openReportQuestionModal" />
 						<IonIcon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive" />
 					</template>
 				</template>
@@ -75,9 +76,8 @@ import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
 import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/Avatar.vue'
-import { openAnswerModal, showAddAnswer } from '@app/composable/questions/answers'
+import { openAnswerModal } from '@app/composable/questions/answers'
 import { useReportModal } from '@app/composable/core/modals'
-
 
 export default defineComponent({
 	name: 'QuestionListCard',
@@ -109,7 +109,7 @@ export default defineComponent({
 	setup (props) {
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),
-			openReportQuestionModal: ()=> useReportModal().openReportQuestion(),
+			openReportQuestionModal: () => useReportModal().openReportQuestion(),
 			arrowRedo,
 			flag,
 			formatTime, pluralize

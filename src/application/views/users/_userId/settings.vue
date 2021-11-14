@@ -13,9 +13,8 @@ import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
-	name: 'ProfileSettings',
+	name: 'UserIdSettings',
 	displayName: 'Profile',
-	layout: 'justified',
 	middlewares: ['isAuthenticated', async ({ to }) => {
 		const userId = to.params.userId
 		const authId = useAuth().id.value
@@ -24,9 +23,3 @@ export default defineComponent({
 	components: { UserPageWrapper, UserSettings }
 })
 </script>
-
-<style scoped>
-	ion-toolbar {
-		--background: #F7F7FC;
-	}
-</style>

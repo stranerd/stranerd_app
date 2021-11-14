@@ -9,7 +9,7 @@
 		</div>
 		<div class="flex flex-row items-center mt-9 normalText">
 			<template v-if="!isOpening">
-				<img class="inline h-5 mr-2" src="/assets/images/person-circle.svg" />
+				<img class="inline h-5 mr-2" src="@app/assets/images/icons/person-circle.svg" />
 				<span>Session with Jerry</span>
 			</template>
 			<template v-else>

@@ -15,7 +15,7 @@
 			v-else
 			btnText="Go and ask a Question"
 			info="You haven't asked any questions yet, click the button below to ask a question"
-			route="/dashboard/questions"
+			route="/questions"
 		/>
 
 
@@ -52,10 +52,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style scoped>
-	ion-toolbar {
-		--background: #F7F7FC;
-	}
-
-</style>

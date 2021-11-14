@@ -1,13 +1,10 @@
 <template>
-	<Modal >
+	<Modal>
 		<template v-slot:title>
 			Upload New profile Image
 		</template>
-		<template v-slot:subtext >
-			<span class="mb-4">
-				What is wrong with this Question
-			</span>
-
+		<template v-slot:subtext>
+			<span class="mb-4"></span>
 		</template>
 
 		<div class="relative mt-5">
@@ -31,7 +28,6 @@
 
 				/>
 			</label>
-
 		</div>
 
 
@@ -50,27 +46,27 @@
 				</ion-button>
 			</div>
 		</div>
+		<page-loading v-if="loading" />
 	</Modal>
-	<page-loading v-if="loading"/>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-
-import {  IonRippleEffect } from '@ionic/vue'
+import { IonIcon, IonRippleEffect } from '@ionic/vue'
 import { useUploadModal } from '@app/composable/core/modals'
 import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
 import { camera } from 'ionicons/icons'
-
-import { useProfileUpdate  } from '@app/composable/auth/profile'
+import { useProfileUpdate } from '@app/composable/auth/profile'
 import { useFileInputs } from '@app/composable/core/forms'
 
 export default defineComponent({
+	name: 'UploadProfileImage',
+	components: { IonRippleEffect, IonIcon },
 	setup () {
 		const closeUploadImage = () => {
 			useUploadModal().closeUploadImage()
 		}
-		const { factory, error, loading, updateProfile  } = useProfileUpdate()
-		const submitImage = async()=>{
+		const { factory, error, loading, updateProfile } = useProfileUpdate()
+		const submitImage = async () => {
 			await updateProfile()
 			closeUploadImage()
 		}
@@ -80,17 +76,17 @@ export default defineComponent({
 			factory.value.avatar = file
 		})
 		return {
+			updateProfile,
 			submitImage,
 			imageLink, catchFiles,
 			error, loading,
-			camera,	DEFAULT_PROFILE_IMAGE,
-			closeUploadImage,
-
+			camera, DEFAULT_PROFILE_IMAGE,
+			closeUploadImage
 		}
-	},
-	components: { IonRippleEffect}
+	}
 })
 </script>
+
 <style scoped>
 	ion-input {
 

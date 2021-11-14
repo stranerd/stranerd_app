@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<form class="gap-1 d-flex">
-			<div class="search-container gap-0-25">
+			<div class="search-container gap-1">
 				<ion-searchbar
 					v-model.trim="searchTerm"
 					cancel-button-icon="never"
@@ -38,7 +38,7 @@
 				<h2>Users</h2>
 				<div v-for="user in usersResult" :key="user.hash">
 					<router-link :to="`/users/${user.id}/`" class="d-flex align-items-center gap-0-5">
-						<Avatar :id="user.id" :size="45" :src="user.avatar" />
+						<Avatar :id="user?.id" :size="45" :src="user.avatar" />
 						<span>{{ user.fullName }}</span>
 					</router-link>
 				</div>

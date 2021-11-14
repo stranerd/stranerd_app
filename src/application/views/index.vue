@@ -8,8 +8,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'Index',
-	layout: 'home'
+	name: 'Index'
 })
 </script>
 <style scoped>

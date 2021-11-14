@@ -11,6 +11,7 @@ import { defineComponent } from 'vue'
 import { IonContent, IonPage } from '@ionic/vue'
 
 export default defineComponent({
+	name: '404',
 	components: { IonContent, IonPage },
 	middlewares: [async () => '/dashboard/']
 })

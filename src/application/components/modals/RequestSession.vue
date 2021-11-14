@@ -4,7 +4,7 @@
 		<div class="py-1 text-center flex md:flex-row flex-col items-center font-semibold justify-center">
 			<span class="mr-2 text-dark_gray ">You are requesting a session from</span>
 			<div class="flex flex-row items-center py-1">
-				<img class="inline h-4 mr-2" src="/assets/images/person-circle.svg" />
+				<img class="inline h-4 mr-2" src="@app/assets/images/icons/person-circle.svg" />
 				<span class="mr-2 text-primary">{{ newSessionTutorIdBio?.user.fullName ?? '' }}</span>
 			</div>
 		</div>

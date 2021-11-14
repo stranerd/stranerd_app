@@ -8,7 +8,7 @@
 
 		<div class="py-4 w-full px-3 flex items-center flex-row gap-2   border-b-[1px] border-light_gray">
 
-			<avatar :id="user.id" :size="55" :src="user?.avatar?.link" />
+			<avatar :id="user?.id" :size="55" :src="user?.avatar" />
 			<div class="flex flex-col gap-1">
 				<h2 class="font-bold text-dark_gray">{{ user?.fullName }}</h2>
 				<div class="flex flex-row gap-1 items-center  ">
@@ -28,7 +28,7 @@
 
 			<div class="flex flex-col gap-1 px-3 py-2 pb-6 border-b-[1px] border-light_gray">
 				<h2 class="text-xs font-bold text-dark_gray">Subject</h2>
-				<span>Matheematics</span>
+				<span>Mathematics</span>
 			</div>
 
 			<div class="flex flex-col gap-1 px-3 py-2 pb-6 border-b-[1px] border-light_gray">

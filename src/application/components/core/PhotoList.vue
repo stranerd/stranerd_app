@@ -1,75 +1,46 @@
 <template>
 	<div>
-		<swiper
-			:direction="'horizontal'" :freeMode="true" class="md:hidden overflow-x-auto"
-		>
-			<swiper-slide
-				v-for="(photo, index) in photos"
-				:key="index + 'photo'" class="!w-24 mr-3">
-				<div :style="`background:url(${photo.link}); background-size:cover; background-position:center;`"
-					class="rounded-lg border-[1px] border-faded_gray bg-light_gray h-24 md:h-28 w-24 md:w-28"
-					@click="showImage(photos,index)">
-				</div>
-			</swiper-slide>
-
-		</swiper>
-
-		<swiper :freeMode="true" class=" hidden w-full md:block"
-			@swiper="onSwiper"
-		>
-			<swiper-slide
-				v-for="(photo, index) in photos"
-				:key="index + 'photo'" class="!w-40 mr-4">
-				<div :style="`background:url(${photo.link}); background-size:cover; background-position:center;`"
-					class="rounded-lg border-[1px] border-faded_gray bg-light_gray h-36 w-40 cursor-pointer"
-					@click="showImage(photos,index)">
-				</div>
-			</swiper-slide>
-
-		</swiper>
+		<Swiper :freeMode="true" :items="photos" :slides="3" class="md:hidden overflow-x-auto" slideClass="!w-24 mr-3">
+			<template v-slot:default="{ item: photo, index }">
+				<img :src="photo.link" alt=""
+					class="rounded-lg border-[1px] border-faded_gray bg-light_gray h-24 w-24 cursor-pointer"
+					@click="showImage(photo, index)">
+			</template>
+		</Swiper>
+		<Swiper :items="photos" :slides="3" class="hidden w-full md:block" slideClass="!w-40 mr-4">
+			<template v-slot:default="{ item: photo, index }">
+				<img :src="photo.link" alt=""
+					class="rounded-lg border-[1px] border-faded_gray bg-light_gray h-40 w-40 cursor-pointer"
+					@click="showImage(photo, index)">
+			</template>
+		</Swiper>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { Media } from '@modules/core'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/swiper-bundle.min.css'
-// import { componentName, imageSrc, selectedImageIndex, showModal } from '@app/composable/core/Modal'
+import Swiper from '@app/components/core/Swiper.vue'
 
 export default defineComponent({
-	name: 'Photo list',
+	name: 'PhotoList',
 	props: {
 		photos: {
-			type: Object as () => Media[]
+			type: Object as () => Media[],
+			required: true
 		}
 	},
-	components: { Swiper, SwiperSlide },
-	setup (props) {
-
-		const swiperData = ref({
-			slideTo: Function,
-			update: Function
-		})
-
-		const onSwiper = (swiper: any) => {
-
-			swiperData.value = swiper
-
+	components: { Swiper },
+	setup () {
+		const showImage = (image: Media, index: number) => {
+			// console.log(image, index)
+			//imageSrc.value = props.photos
+			//showModal.value = true
+			//componentName.value = 'photoView'
+			//selectedImageIndex.value = index
 		}
 
-		// const showImage = (images: Media[] | undefined, index = 0) => {
-		// 	if (images) {
-		// 		imageSrc.value = images
-		// 		showModal.value = true
-		// 		componentName.value = 'photoView'
-		// 		selectedImageIndex.value = index
-		// 	}
-		// }
-		return {
-			onSwiper,
-			swiperData
-		}
+		return { showImage }
 	}
 })
 </script>

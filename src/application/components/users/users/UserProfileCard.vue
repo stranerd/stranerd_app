@@ -5,9 +5,9 @@
 				<Avatar :id="user.id" :size="90" :src="user.avatar" />
 				<ion-icon
 					v-if="showUpload"
-					@click="openUploadModal()"
 					:icon="camera"
 					class="text-primary absolute rounded-full right-1 bottom-1 text-lg bg-white p-1 border border-primary cursor-pointer"
+					@click="openUploadModal()"
 
 				/>
 			</div>
@@ -22,7 +22,7 @@
 		<div class="grid grid-cols-12 border-b-[1px] border-faded_gray my-5 lg:rounded-br-3xl lg:rounded-bl-3xl">
 			<div
 				class="col-span-12 sm:place-content-center md:col-start-2 md:col-end-12 lg:col-start-3 lg:col-end-11 lg:justify-center lg:items-center flex flex-row  px-3 headings gap-5 text-icon_inactive font-bold  whitespace-normal overflow-x-auto">
-				<router-link :to="`/users/${user.id}/`" class="pb-2 pr-3 cursor-pointer"
+				<router-link :to="`/users/${user.id}`" class="pb-2 pr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-dark_gray border-primary">
 					Dashboard
 				</router-link>
@@ -80,10 +80,9 @@ export default defineComponent({
 		})
 
 		const showUpload = computed({
-			get: () => authUser.value && authUser.value.id === props.user.id,
-
-			set: () => {}
-
+			get: () => authUser.value?.id === props.user.id,
+			set: () => {
+			}
 		})
 
 		const requestNewSession = () => {
@@ -92,12 +91,13 @@ export default defineComponent({
 		}
 
 		const openUploadModal = () => {
-			 useUploadModal().openUploadImage()
+			useUploadModal().openUploadImage()
 		}
 
 		return {
 			openUploadModal,
-			id, requestNewSession, canRequestSession, camera , showUpload}
+			id, requestNewSession, canRequestSession, camera, showUpload
+		}
 	}
 })
 </script>

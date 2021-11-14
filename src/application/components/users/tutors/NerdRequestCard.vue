@@ -5,7 +5,7 @@
 		class='py-4 px-4 bg-light_gray mt-6  rounded-lg flex flex-col w-full text-xs md:text-sm relative cursor-pointer'>
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
-			<img class="inline h-7 mr-2" src="/assets/images/person-circle.svg" />
+			<img class="inline h-7 mr-2" src="@app/assets/images/icons/person-circle.svg" />
 			<span class="font-bold text-dark_gray">Timmy Nuetron</span>
 			<div class="flex flex-row items-center ml-4 hidden md:flex">
 				<span class="h-[4px] w-[4px] rounded-full bg-icon_inactive mr-3"></span>

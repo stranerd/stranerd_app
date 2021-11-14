@@ -12,15 +12,8 @@ import UserAnswers from '@app/components/users/users/UserAnswers.vue'
 import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 
 export default defineComponent({
-	name: 'ProfileAnswers',
+	name: 'UserIdAnswers',
 	displayName: 'Profile',
-	layout: 'justified',
 	components: { UserPageWrapper, UserAnswers }
 })
 </script>
-
-<style scoped>
-	ion-toolbar {
-		--background: #F7F7FC;
-	}
-</style>

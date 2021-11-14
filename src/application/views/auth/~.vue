@@ -6,12 +6,12 @@
 	</ion-page>
 </template>
 
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonContent, IonPage } from '@ionic/vue'
 
 export default defineComponent({
+	name: 'Auth404',
 	components: { IonContent, IonPage },
 	middlewares: [async () => '/auth/signin']
 })

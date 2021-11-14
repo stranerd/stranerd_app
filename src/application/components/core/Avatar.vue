@@ -1,13 +1,12 @@
 <template>
-	<router-link :to="`/users/${id}`">
+	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}`">
 		<img
 			:src="source"
 			:style="`width: ${size}px; height: ${size}px; border-radius: 10rem; border: 1.5px solid transparent; object-fit: cover;`"
 			alt=""
 			class="!max-w-[1920px]"
 		>
-	</router-link>
-
+	</component>
 </template>
 
 <script lang="ts">
@@ -25,7 +24,7 @@ export default defineComponent({
 		src: {
 			type: Object as PropType<Media | null>,
 			default: null,
-			validator: (p: any) => p === null || typeof p.link === 'string'
+			validator: (p: any) => p === null || p === undefined || typeof p.link === 'string'
 		},
 		size: {
 			required: false,

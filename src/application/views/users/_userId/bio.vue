@@ -12,15 +12,8 @@ import UserBio from '@app/components/users/users/UserBio.vue'
 import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 
 export default defineComponent({
-	name: 'ProfileBio',
+	name: 'UserIdBio',
 	displayName: 'Profile',
-	layout: 'justified',
 	components: { UserPageWrapper, UserBio }
 })
 </script>
-
-<style scoped>
-	ion-toolbar {
-		--background: #F7F7FC;
-	}
-</style>

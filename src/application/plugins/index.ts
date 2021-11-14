@@ -1,5 +1,5 @@
-import { parseLoggedInUser } from './parseLoggedInUser'
+import { App } from 'vue'
 
-export const setupPlugins = async () => {
-	await parseLoggedInUser()
-}
+type PluginFunction = (app: App) => Promise<void>
+
+export const definePlugin = (plugin: PluginFunction) => plugin

@@ -1,8 +1,7 @@
 <template>
 	<div class="col-span-12 flex flex-col gap-[8rem]">
 		<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
-
-
+			<h1 class="headings mb-4">Profile</h1>
 			<div class="flex flex-col gap-2">
 				<h2 class="headings font-bold text-dark_gray">Name</h2>
 				<div class="flex flex-row items-center flex-wrap ">
@@ -152,7 +151,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IonButton,  IonRippleEffect, IonSpinner, IonTextarea } from '@ionic/vue'
+import { IonButton, IonInput, IonRippleEffect, IonSpinner, IonTextarea } from '@ionic/vue'
 import { image } from 'ionicons/icons'
 import { useProfileUpdate, useTutorUpdate } from '@app/composable/auth/profile'
 import { useAuth } from '@app/composable/auth/auth'
@@ -168,6 +167,7 @@ export default defineComponent({
 		IonRippleEffect,
 		IonSpinner,
 		IonButton,
+		IonInput,
 		Subject,
 		SelectSubject
 	},
@@ -210,10 +210,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-	ion-toolbar {
-		--background: #F7F7FC;
-	}
-
 	ion-button {
 		--background: #546DD3;
 		--box-shadow: none;

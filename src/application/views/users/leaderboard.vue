@@ -1,20 +1,19 @@
 <template>
-	<IonPage>
-		<IonContent>
-			<Leaderboard class="max-w-4xl mx-auto" />
-		</IonContent>
-	</IonPage>
+	<Justified>
+		<div>
+			<Leaderboard class="max-w-4xl mx-auto"/>
+		</div>
+	</Justified>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonContent, IonPage } from '@ionic/vue'
+import Justified from '@app/layouts/Justified.vue'
 import Leaderboard from '@app/components/users/leaderboard/Leaderboard.vue'
 
 export default defineComponent({
-	name: 'tutor leaderboard',
-	layout: 'justified',
+	name: 'UsersLeaderboard',
 	displayName: 'LeaderBoard',
-	components: { IonPage, IonContent, Leaderboard }
+	components: { Justified, Leaderboard }
 })
 </script>
