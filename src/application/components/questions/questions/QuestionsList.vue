@@ -6,32 +6,19 @@
 			<div class="col-span-6 grid grid-cols-12 md:px-2 ">
 				<div
 					class="py-1 px-2 px-md text-sm col-span-12 md:col-start-4 md:col-end-10 md:mb-3   bg-light_gray rounded-xl md:rounded-md flex flex-row">
-					<select-subject v-model:subjectId="subjectId" :show-all="true" />
+					<SelectSubject v-model:subjectId="subjectId" :show-all="true" />
 				</div>
 
 				<div
 					class="mt-2 col-span-12  md:col-start-4 md:col-end-10 flex flex-row  justify-center items-center ">
 					<span class="font-bold text-icon_inactive mr-3">Sort by: </span>
-					<div class="flex flex-row items-center mr-2 cursor-pointer"
-						@click="answered = answeredChoices[0].val; selectedFilter = 'All'">
-						<ion-icon :icon=" selectedFilter === 'All' ? ellipse : ellipseOutline"
-							class="text-lg mr-1 text-primary"></ion-icon>
-						<span class="font-bold text-icon_inactive">All </span>
+					<div v-for="choice in answeredChoices" :key="choice.key"
+						class="flex flex-row items-center mr-2 cursor-pointer"
+						@click="answered = choice.val">
+						<ion-icon :icon=" answered === choice.val ? ellipse : ellipseOutline"
+							class="text-lg mr-1 text-primary" />
+						<span class="font-bold text-icon_inactive">{{ choice.key }}</span>
 					</div>
-					<div class="flex flex-row items-center mr-2 cursor-pointer"
-						@click="answered = answeredChoices[2].val; selectedFilter = 'Answered'">
-						<ion-icon :icon=" selectedFilter === 'Answered' ? ellipse : ellipseOutline"
-							class="text-lg mr-1 text-primary"></ion-icon>
-						<span class="font-bold text-icon_inactive">Answered </span>
-					</div>
-					<div class="flex flex-row items-center mr-2 cursor-pointer"
-						@click="answered = answeredChoices[3].val; selectedFilter = 'Unanswered'">
-						<ion-icon :icon=" selectedFilter === 'Unanswered' ? ellipse : ellipseOutline"
-							class="text-lg mr-1 text-primary"></ion-icon>
-						<span class="font-bold text-icon_inactive">Unanswered </span>
-					</div>
-
-
 				</div>
 			</div>
 
@@ -65,52 +52,35 @@
 	</div>
 	<page-loading v-if="loading" />
 </template>
+
 <script lang="ts">
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { defineComponent, ref } from 'vue'
 import { ellipse, ellipseOutline } from 'ionicons/icons'
 import { useQuestionList } from '@app/composable/questions/questions'
-import { useSubjectList } from '@app/composable/questions/subjects'
 import Question from '@app/components/questions/QuestionListCard.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
-import SelectSubject from './subjects/SelectSubject.vue'
-import PageLoading from '../core/PageLoading.vue'
+import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
+import PageLoading from '@app/components/core/PageLoading.vue'
 
 export default defineComponent({
+	name: 'QuestionsList',
+	components: { IonIcon, Question, EmptyState, SelectSubject, PageLoading },
 	setup () {
 		const {
 			filteredQuestions: questions, error, loading, hasMore,
-			answeredChoices, answered, subjectId,
+			answeredChoices, answered, subjectId, listener,
 			fetchOlderQuestions
 		} = useQuestionList()
-		const { subjects } = useSubjectList()
-		const selectedFilter = ref('All')
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+
 		return {
-			ellipseOutline,
-			ellipse,
+			ellipseOutline, ellipse,
 			questions, error, loading, hasMore,
 			answeredChoices, answered, subjectId,
-			fetchOlderQuestions,
-			selectedFilter,
-			subjects
+			fetchOlderQuestions
 		}
-	},
-	components: { IonIcon, Question, EmptyState, SelectSubject, PageLoading }
+	}
 })
 </script>
-
-<style scoped>
-	.customShadow {
-		box-shadow: 0 2px 6px rgb(0 0 0 / 0.2);
-	}
-
-	ion-select {
-
-		/* Set a different placeholder color */
-		--placeholder-color: #8B9EB1;
-
-		/* Set full opacity on the placeholder */
-		--placeholder-opacity: 1;
-	}
-
-</style>

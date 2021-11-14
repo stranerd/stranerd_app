@@ -44,6 +44,7 @@
 </template>
 
 <script lang="ts">
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
@@ -51,21 +52,25 @@ import TransactionCard from '../users/wallet/TransactionCard.vue'
 import { useTransactionList } from '@app/composable/payment/transactions'
 import { useAuth } from '@app/composable/auth/auth'
 import EmptyState from '@app/components/core/EmptyState.vue'
-import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'RecentTransactions',
 	components: { IonIcon, Swiper, TransactionCard, EmptyState },
 	setup () {
 		const { id, isLoggedIn } = useAuth()
-		const { loading, error, transactions: allTransactions } = useTransactionList(id.value)
+		const { loading, error, listener, transactions: allTransactions } = useTransactionList(id.value)
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
 		const transactions = computed({
 			get: () => allTransactions.value.slice(0, 6),
 			set: () => {
 			}
 		})
 
-		return { chevronForwardOutline, chevronBackOutline, ellipse, transactions, isLoggedIn }
+		return {
+			chevronForwardOutline, chevronBackOutline, ellipse,
+			transactions, isLoggedIn, loading, error
+		}
 	}
 })
 </script>

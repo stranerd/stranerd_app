@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
@@ -52,18 +52,22 @@ import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
-	name: 'RecentTransactions',
+	name: 'RecentQuestions',
 	components: { IonIcon, Swiper, QuestionListCard, EmptyState },
 	setup () {
-		const { questions: allQuestions } = useQuestionList()
-
+		const { questions: allQuestions, listener, loading, error } = useQuestionList()
 		const questions = computed({
 			get: () => allQuestions.value.slice(0, 6),
 			set: () => {
 			}
 		})
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
 
-		return { chevronForwardOutline, chevronBackOutline, ellipse, questions }
+		return {
+			chevronForwardOutline, chevronBackOutline, ellipse,
+			questions, loading, error
+		}
 	}
 })
 </script>

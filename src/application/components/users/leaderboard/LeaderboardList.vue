@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted, PropType } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useLeaderboardList } from '@app/composable/users/leaderboard'
 import { RankingTimes } from '@modules/users'
@@ -76,8 +76,10 @@ export default defineComponent({
 	},
 	components: { Avatar, PageLoading },
 	setup (props) {
-		const { users, loading, hasAuthUser } = useLeaderboardList(props.time)
+		const { users, loading, hasAuthUser, listener } = useLeaderboardList(props.time)
 		const { user, id } = useAuth()
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
 
 		return { user, id, users, loading, hasAuthUser }
 	}

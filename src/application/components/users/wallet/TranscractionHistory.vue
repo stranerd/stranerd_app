@@ -27,7 +27,7 @@
 				</div>
 			</div>
 
-			<TranscrationHistoryCard
+			<TransactionHistoryCard
 				v-for="transaction in transactions"
 				:key="transaction.hash"
 				:transaction="transaction"
@@ -43,21 +43,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { useTransactionList } from '@app/composable/payment/transactions'
-import TranscrationHistoryCard from './TranscrationHistoryCard.vue'
+import TransactionHistoryCard from './TransactionHistoryCard.vue'
 
 export default defineComponent({
-	name: 'Transcration History',
+	name: 'Transaction History',
 	props: {
 		userId: {
 			required: true,
 			type: String
 		}
 	},
-	components: { TranscrationHistoryCard },
+	components: { TransactionHistoryCard },
 	setup (props) {
-		const { loading, error, transactions, hasMore, fetchOlderTransactions } = useTransactionList(props.userId)
+		const {
+			loading,
+			error,
+			transactions,
+			hasMore,
+			listener,
+			fetchOlderTransactions
+		} = useTransactionList(props.userId)
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
 		return { loading, error, transactions, hasMore, fetchOlderTransactions }
 	}
 

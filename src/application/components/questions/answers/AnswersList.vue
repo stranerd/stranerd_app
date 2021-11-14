@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { useAnswerList } from '@app/composable/questions/answers'
 import { QuestionEntity } from '@modules/questions'
 import AnswersListCard from '@app/components/questions/answers/AnswersListCard.vue'
@@ -32,8 +32,10 @@ export default defineComponent({
 	},
 	components: { AnswersListCard, EmptyState },
 	setup (props) {
-		const { answers } = useAnswerList(props.question.id)
-		return { answers }
+		const { answers, listener, error, loading } = useAnswerList(props.question.id)
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+		return { answers, error, loading }
 	}
 })
 </script>
