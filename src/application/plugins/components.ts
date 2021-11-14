@@ -1,7 +1,7 @@
 import { IonButton, IonContent, IonIcon, IonInput, IonPage } from '@ionic/vue'
 import { definePlugin } from '@app/plugins/index'
 
-export const registerIonicComponent = definePlugin(async (app) => {
+export const registerIonicComponent = definePlugin(async ({ app }) => {
 	app.component('ion-page', IonPage)
 	app.component('ion-content', IonContent)
 	app.component('ion-button', IonButton)
@@ -9,7 +9,7 @@ export const registerIonicComponent = definePlugin(async (app) => {
 	app.component('ion-icon', IonIcon)
 })
 
-export const registerComponents = definePlugin(async (app) => {
+export const registerComponents = definePlugin(async ({ app }) => {
 	const contexts = [
 		require.context('../components/core', true, /\.vue$/),
 		require.context('../layouts/', true, /\.vue$/)
