@@ -35,7 +35,7 @@ import TopBar from '@app/components/layout/topNavigations/Topbar.vue'
 import Sidebar from '@app/components/layout/sidebars/DefaultSidebar.vue'
 
 export default defineComponent({
-	name: 'QuestionLayout',
+	name: 'DashboardWithToolbarLayout',
 	components: {
 		IonPage,
 		IonContent,

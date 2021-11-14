@@ -38,7 +38,7 @@
 				</div>
 
 			</div>
-			<PageLoading v-if="loading" />
+			<PageLoading v-if="loading"/>
 		</div>
 	</Justified>
 </template>
@@ -46,7 +46,7 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
 import { useNotificationList } from '@app/composable/users/notifications'
-import Justified from '@app/layouts/justified.vue'
+import Justified from '@app/layouts/Justified.vue'
 import NotificationCard from '@app/components/users/notifications/NotificationCard.vue'
 import { IonIcon } from '@ionic/vue'
 import { checkmarkDone } from 'ionicons/icons'
@@ -59,7 +59,7 @@ export default defineComponent({
 	displayName: 'Notifications',
 	middlewares: ['isAuthenticated'],
 	components: { NotificationCard, Justified, IonIcon, PageLoading, EmptyState },
-	setup () {
+	setup() {
 		const { id } = useAuth()
 		const {
 			notifications,

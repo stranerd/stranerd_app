@@ -5,9 +5,8 @@
 			<ion-buttons slot="start" @click="$router.go(-1)">
 				<ion-icon :icon="arrowBackOutline" class="text-[23px] text-dark_gray"></ion-icon>
 			</ion-buttons>
-			<ion-title class="mx-auto text-base font-bold text-dark_gray">{{
-				$route.meta.displayName ?? ''
-			}}
+			<ion-title class="mx-auto text-base font-bold text-dark_gray">
+				{{ $route.meta.displayName ?? '' }}
 			</ion-title>
 		</ion-toolbar>
 	</ion-header>
@@ -18,7 +17,7 @@
 		<div class="flex flex-row items-center gap-9 w-1/4">
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center "
 				to="/account">
-				<avatar :size="26" :src="user?.avatar" />
+				<avatar :size="26" :src="user?.avatar"/>
 			</router-link>
 
 
@@ -27,7 +26,7 @@
 		<div class="flex flex-row items-center px-6 w-2/4 justify-center">
 			<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
 				<div class="w-1/3 flex flex-row items-center">
-					<Coins :gold="false" :size="28" class="mr-2 inline" />
+					<Coins :gold="false" :size="28" class="mr-2 inline"/>
 					<span class="font-semibold text-sm text-dark_grey ">{{
 						isLoggedIn ? user.account.coins.bronze : '-'
 					}}</span>
@@ -42,7 +41,7 @@
 					<span class="font-semibold text-sm text-dark_grey ">{{
 						isLoggedIn ? user.account.coins.gold : '-'
 					}}</span>
-					<Coins :gold="true" :size="28" class="mr-2 inline" />
+					<Coins :gold="true" :size="28" class="mr-2 inline"/>
 				</div>
 			</div>
 		</div>
@@ -56,7 +55,7 @@
 			</router-link>
 
 			<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
-				<search-bar v-if="showSearch" class="absolute left-0" />
+				<search-bar v-if="showSearch" class="absolute left-0"/>
 				<ion-icon :icon="showSearch ? close : search" class="text-2xl text-icon_inactive"
 					@click="toggleSearch"></ion-icon>
 			</div>
@@ -73,11 +72,11 @@
 				<ion-icon :icon="home" class="text-xl text-icon_inactive"></ion-icon>
 			</router-link>
 			<div class="py-2 px-3 rounded-md flex flex-row items-center justify-center">
-				<img class="min-h-[25px] object-fit max-w-[8.9rem]" src="@app/assets/images/icons/logo.svg" />
+				<img class="min-h-[25px] object-fit max-w-[8.9rem]" src="@app/assets/images/icons/logo.svg"/>
 			</div>
 		</div>
 		<div class="w-3/4 flex flex-row items-center py-1 gap-6 justify-around">
-			<search-bar />
+			<search-bar/>
 
 			<router-link class="px-4 py-1 bg-primary text-white rounded-lg" to="/questions">
 				<div class="flex flex-col py-1 items-center justify-center">
@@ -91,13 +90,13 @@
 
 			<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
 				to="/account">
-				<avatar :size="26" :src="user?.avatar" />
+				<avatar :size="26" :src="user?.avatar"/>
 			</router-link>
 		</div>
 		<div class="w-1/4 flex flex-row items-center py-1 -mr-5">
 			<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
 				<div class="w-1/3 flex flex-row items-center">
-					<Coins :gold="false" :size="20" class="mr-2 inline" />
+					<Coins :gold="false" :size="20" class="mr-2 inline"/>
 					<span class="font-semibold text-sm text-dark_grey ">{{
 						isLoggedIn ? user.account.coins.bronze : '-'
 					}}</span>
@@ -111,7 +110,7 @@
 					<span class="font-semibold text-sm text-dark_grey ">{{
 						isLoggedIn ? user.account.coins.gold : '-'
 					}}</span>
-					<Coins :gold="true" :size="20" class="mr-2 inline" />
+					<Coins :gold="true" :size="20" class="mr-2 inline"/>
 				</div>
 			</div>
 		</div>
@@ -130,7 +129,7 @@ import { useAccountModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	components: { IonIcon, Avatar, IonButtons, IonHeader, IonToolbar, IonTitle, Coins, SearchBar },
-	setup () {
+	setup() {
 
 		const { user, isLoggedIn } = useAuth()
 		const showSearch = ref(false)
@@ -160,21 +159,21 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-toolbar {
-		--background: #F7F7FC;
-		--box-shadow: none;
-	}
+ion-toolbar {
+	--background: #F7F7FC;
+	--box-shadow: none;
+}
 
-	ion-header {
-		--background: #F7F7FC;
-		--box-shadow: none;
-	}
+ion-header {
+	--background: #F7F7FC;
+	--box-shadow: none;
+}
 
-	ion-title {
-		--background: #F7F7FC;
-		--box-shadow: none;
-		width: fit-content;
-		position: relative;
-		left: -23px;
-	}
+ion-title {
+	--background: #F7F7FC;
+	--box-shadow: none;
+	width: fit-content;
+	position: relative;
+	left: -23px;
+}
 </style>
