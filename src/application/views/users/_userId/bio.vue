@@ -14,7 +14,6 @@ import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 export default defineComponent({
 	name: 'UserIdBio',
 	displayName: 'Profile',
-	layout: 'justified',
 	components: { UserPageWrapper, UserBio }
 })
 </script>

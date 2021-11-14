@@ -101,7 +101,6 @@ import AuthProviders from '@app/components/auth/AuthProviders.vue'
 export default defineComponent({
 	name: 'Signup',
 	components: { IonContent, IonPage, IonInput, IonButton, AuthProviders, IonSpinner },
-	layout: 'auth',
 	middlewares: ['isNotAuthenticated'],
 	setup () {
 

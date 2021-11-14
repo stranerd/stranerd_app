@@ -1,6 +1,6 @@
 <template>
-	<IonPage>
-		<IonContent>
+	<DashboardLayout>
+		<div>
 			<div class="col-span-12 md:col-start-3 md:col-end-11">
 				<div class="rounded-md flex flex-row items-center">
 					<router-link active-class="activeSlideTab"
@@ -15,21 +15,18 @@
 					</router-link>
 				</div>
 			</div>
-			<all-questions />
-		</IonContent>
-	</IonPage>
+			<all-questions/>
+		</div>
+	</DashboardLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import DashboardLayout from '@app/layouts/Dashboard.vue'
 import AllQuestions from '@app/components/questions/all.vue'
-import { IonContent, IonPage } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'Questions',
-	components: {
-		AllQuestions, IonContent, IonPage
-	},
-	layout: 'dashboard'
+	components: { AllQuestions, DashboardLayout }
 })
 </script>

@@ -1,6 +1,6 @@
 <template>
-	<IonPage>
-		<IonContent>
+	<DashboardLayout>
+		<div>
 			<div class="col-span-12 md:col-start-3 md:col-end-11">
 				<div class="rounded-md flex flex-row items-center">
 					<router-link active-class="activeSlideTab"
@@ -15,19 +15,18 @@
 					</router-link>
 				</div>
 			</div>
-			<ExploreTutors />
-		</IonContent>
-	</IonPage>
+			<ExploreTutors/>
+		</div>
+	</DashboardLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonContent, IonPage } from '@ionic/vue'
 import ExploreTutors from '@app/components/users/tutors/ExploreTutors.vue'
+import DashboardLayout from '@app/layouts/Dashboard.vue'
 
 export default defineComponent({
 	name: 'TutorsExplore',
-	layout: 'dashboard',
-	components: { IonPage, IonContent, ExploreTutors }
+	components: { DashboardLayout, ExploreTutors }
 })
 </script>
