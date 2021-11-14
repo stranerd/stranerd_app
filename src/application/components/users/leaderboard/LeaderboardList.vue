@@ -16,22 +16,6 @@
 				</div>
 			</div>
 
-			<div v-if="user && !hasAuthUser"
-				class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4 border border-faded_gray">
-				<div class="w-3/12">
-					<span> - </span>
-				</div>
-				<div class="w-7/12 flex items-center gap-2">
-					<avatar :id="user?.id" :size="24" :src="user.avatar" />
-					<span>
-						{{ user.bio.fullName }}
-					</span>
-				</div>
-				<div class="w-2/12 text-right text-primary font-semibold">
-					<span>{{ user.account.rankings[time] }}</span>
-				</div>
-			</div>
-
 			<template v-if="users.length">
 				<div v-for="(person, index) in users" :key="person.id"
 					:class="{'border border-faded_gray': person.id === id}"
@@ -52,8 +36,22 @@
 				</div>
 			</template>
 
+			<div v-if="user && !hasAuthUser"
+				class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4 border border-faded_gray">
+				<div class="w-3/12">
+					<span> - </span>
+				</div>
+				<div class="w-7/12 flex items-center gap-2">
+					<avatar :id="user?.id" :size="24" :src="user.avatar" />
+					<span>
+						{{ user.bio.fullName }}
+					</span>
+				</div>
+				<div class="w-2/12 text-right text-primary font-semibold">
+					<span>{{ user.account.rankings[time] }}</span>
+				</div>
+			</div>
 		</div>
-
 		<!-- <div class="text-center text-18">
 			<a class="text-primary-dark py-2" @click.prevent="fetchOlder">LOAD MORE</a>
 		</div> -->

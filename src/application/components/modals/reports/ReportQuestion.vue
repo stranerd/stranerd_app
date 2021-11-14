@@ -1,9 +1,9 @@
 <template>
-	<Modal >
+	<Modal>
 		<template v-slot:title>
 			Report Question
 		</template>
-		<template v-slot:subtext >
+		<template v-slot:subtext>
 			<span class="mb-4">
 				What is wrong with this Question
 			</span>

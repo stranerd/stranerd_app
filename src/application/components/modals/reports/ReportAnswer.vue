@@ -1,5 +1,5 @@
 <template>
-	<Modal >
+	<Modal>
 		<slot name="title">
 			Report Question
 		</slot>

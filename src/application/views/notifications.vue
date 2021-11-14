@@ -38,7 +38,7 @@
 				</div>
 
 			</div>
-			<PageLoading v-if="loading"/>
+			<PageLoading v-if="loading" />
 		</div>
 	</Justified>
 </template>
@@ -59,7 +59,7 @@ export default defineComponent({
 	displayName: 'Notifications',
 	middlewares: ['isAuthenticated'],
 	components: { NotificationCard, Justified, IonIcon, PageLoading, EmptyState },
-	setup() {
+	setup () {
 		const { id } = useAuth()
 		const {
 			notifications,

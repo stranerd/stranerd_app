@@ -45,7 +45,7 @@ export default defineComponent({
 	name: 'QuestionsCreate',
 	components: { DashboardLayout, QuestionForm },
 	middlewares: ['isAuthenticated'],
-	setup() {
+	setup () {
 		const { factory, error, loading, coins, createQuestion } = useCreateQuestion()
 		return { factory, error, loading, coins, createQuestion }
 	}

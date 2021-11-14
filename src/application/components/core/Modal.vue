@@ -37,12 +37,12 @@ export default defineComponent({
 			required: false,
 			default: () => {
 			}
-		},
+		}
 
 	},
 	setup () {
 
-		return {  }
+		return {}
 	}
 })
 </script>

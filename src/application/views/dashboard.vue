@@ -1,8 +1,8 @@
 <template>
 	<DashboardLayout>
 		<div>
-			<RecentQuestions class="mb-10"/>
-			<RecentTransaction/>
+			<RecentQuestions class="mb-10" />
+			<RecentTransaction />
 		</div>
 	</DashboardLayout>
 </template>

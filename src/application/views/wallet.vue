@@ -4,8 +4,8 @@
 			<span class="font-bold text-dark_gray headings mb-3">
 				Available balance
 			</span>
-			<BalanceCard :user="user"/>
-			<TransactionHistory :user-id="id"/>
+			<BalanceCard :user="user" />
+			<TransactionHistory :user-id="id" />
 		</div>
 	</DashboardLayout>
 </template>
@@ -21,7 +21,7 @@ export default defineComponent({
 	name: 'Wallet',
 	middlewares: ['isAuthenticated'],
 	components: { DashboardLayout, BalanceCard, TransactionHistory },
-	setup() {
+	setup () {
 		const { id, user } = useAuth()
 		return { id, user }
 	}

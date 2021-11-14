@@ -56,7 +56,7 @@ export default defineComponent({
 		const canEdit = question.userId === id.value && question.canBeEdited
 		if (!canEdit) return `/questions/${question.id}`
 	}],
-	setup() {
+	setup () {
 		const { questionId } = useRoute().params
 		const { factory, error, loading, coins, editQuestion } = useEditQuestion(questionId as string)
 		return { factory, error, loading, coins, editQuestion }
