@@ -9,7 +9,7 @@
 					</div>
 					<router-link
 						class="text-dark_gray bg-icon_inactive rounded-xl justify-center items-center py-3 px-4 absolute bottom-1"
-						to="/dashboard/">
+						to="/dashboard">
 						<ion-icon :icon="home" class="text-[23px] text-white"></ion-icon>
 					</router-link>
 				</div>

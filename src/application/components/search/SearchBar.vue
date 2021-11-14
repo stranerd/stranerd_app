@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<form class="gap-1 d-flex">
-			<div class="search-container gap-0-25">
+			<div class="search-container gap-1">
 				<ion-searchbar
 					v-model.trim="searchTerm"
 					cancel-button-icon="never"

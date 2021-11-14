@@ -5,7 +5,7 @@
 				<div class="bg-light_gray rounded-md flex flex-row items-center">
 					<router-link active-class="activeSlideTab"
 						class="w-1/2 text-center inactiveSlideTab"
-						to="/questions/">
+						to="/questions">
 						All Questions
 					</router-link>
 					<router-link active-class="activeSlideTab"

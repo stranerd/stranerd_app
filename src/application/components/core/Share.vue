@@ -42,22 +42,23 @@ export default defineComponent({
 		const route = useRoute()
 		const shareInfo = async () => {
 			const link = props.link || route.fullPath
+			const url = domain + (link.startsWith('/') ? link : `/${link}`)
 			if (window.navigator.share) {
 				try {
 					await window.navigator.share({
-						url: domain + link.startsWith('/') ? link : `/${link}`,
+						url,
 						title: props.title,
 						text: props.text
 					})
 				} catch {
-					const res = await copyToClipboard(domain + link.startsWith('/') ? link : `/${link}`)
+					const res = await copyToClipboard(url)
 					await Notify({
 						title: `something went wrong somewhere.${res ? ' The link has been copied to your clipboard instead' : ''}`,
 						icon: 'info'
 					})
 				}
 			} else {
-				const res = await copyToClipboard(domain + link.startsWith('/') ? link : `/${link}`)
+				const res = await copyToClipboard(url)
 				await Notify({
 					title: `Your current device is unable to share links.${res ? ' The link has been copied to your clipboard instead' : ''}`,
 					icon: 'info'

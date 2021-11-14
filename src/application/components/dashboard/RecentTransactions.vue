@@ -7,7 +7,7 @@
 
 			<router-link v-if="transactions.length && isLoggedIn"
 				class="text-primary normalText flex items-center font-bold "
-				to="/dashboard/wallet">
+				to="/wallet">
 				<span>view all</span>
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>
@@ -29,7 +29,7 @@
 			<empty-state v-else btnText="go to Wallet"
 				class="my-3"
 				info="You don't have any transaction yet"
-				route="/dashboard/wallet"
+				route="/wallet"
 			/>
 		</template>
 		<template v-else>
@@ -37,7 +37,7 @@
 				btnText="Sign In"
 				class="my-3"
 				info="You need to sign in to view Transaction details"
-				route="/auth/Signin"
+				route="/auth/signin"
 			/>
 		</template>
 	</div>

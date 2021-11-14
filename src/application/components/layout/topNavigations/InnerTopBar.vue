@@ -70,7 +70,7 @@
 			class="hidden md:hidden lg:flex bg-white py-3 pl-16 pr-[100px] items-center gap-16 z-50">
 			<div class="flex flex-row items-center py-1 gap-3 w-[16%] justify-between">
 				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-					to="/dashboard/">
+					to="/dashboard">
 					<ion-icon :icon="home" class="text-xl text-icon_inactive"></ion-icon>
 				</router-link>
 				<div class="py-2 px-3 rounded-md flex flex-row items-center justify-center">

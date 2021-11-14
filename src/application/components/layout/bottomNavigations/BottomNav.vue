@@ -4,7 +4,7 @@
 		<div class="md:hidden bg-[#F7F7FC] py-[10px] flex justify-around items-center z-50">
 			<router-link class="col-span-1 text-icon_inactive flex flex-row items-center justify-center"
 				exact-active-class="text-primary"
-				to="/dashboard/">
+				to="/dashboard">
 				<ion-icon :icon="home" class="w-7" />
 			</router-link>
 
@@ -25,7 +25,7 @@
 		<div class="hidden lg:hidden md:flex bg-white p-3 justify-around items-center z-50">
 			<router-link class="px-3 py-2 bg-light_gray text-icon_inactive rounded-lg"
 				exact-active-class="text-primary"
-				to="/dashboard/">
+				to="/dashboard">
 				<div class="flex flex-col py-1 items-center justify-center">
 					<ion-icon :icon="home" class="w-12" />
 				</div>
