@@ -11,6 +11,7 @@
 			<router-link v-for="{ path, icon, name } in [
 					{ name: 'home', path: '/dashboard', icon: home },
 					{ name: 'questions', path: '/questions', icon: helpCircle },
+					{ name: 'Study', path: '/study', icon: library },
 					{ name: 'wallet', path: '/wallet', icon: wallet }
 				]" :key="path" :to="path"
 				class="flex flex-col rounded-l-[150px] text-icon_inactive cursor-pointer text-sm hover:text-dark_gray mb-2">
@@ -19,7 +20,7 @@
 					<ion-icon :icon="icon" class="text-[23px] mr-4"></ion-icon>
 					<span class="font-semibold capitalize">{{ name }}</span>
 				</div>
-			</router-link>
+			</router-link> 
 
 		</div>
 
@@ -27,7 +28,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { calendarClear, helpCircle, home, people, wallet } from 'ionicons/icons'
+import { calendarClear, helpCircle, home, people, wallet, library } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
 import { IonIcon } from '@ionic/vue'
 
@@ -36,6 +37,7 @@ export default defineComponent({
 	setup () {
 		const route = useRoute()
 		return {
+			library,
 			home,
 			helpCircle,
 			people,

@@ -1,0 +1,67 @@
+<template>
+	<div
+		:class="`m-0  h-[9rem] cardPadding ${colorClass}  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-[1rem] box-border  p-5`"
+	>
+		<div class="flex items-center justify-between w-full">
+			<div class="bg-faded_gray min-h-[57px] min-w-[57px] grid place-items-center rounded-md mr-5">
+				<ion-icon
+					class="text-white text-2xl"
+					:icon="play"
+				/>
+			</div>
+            
+			<ion-text class="text-sm text-dark_gray">
+				Work and Energy 
+				Introduction to
+				University Physics
+			</ion-text>
+		</div>
+
+		<div class="w-full flex items-center justify-between mt-4">
+			<ShowRatings :rating="4"/>
+
+			<div class="flex items-center">
+				<ion-text class="text-xs font-bold text-dark_gray mr-3">
+					Timmy
+				</ion-text>
+				<Avatar :size="24"/>
+			</div>
+		</div>
+	
+
+
+	</div>
+</template>
+
+<script lang="ts">
+import { calendar, play } from 'ionicons/icons'
+import { defineComponent,  } from 'vue'
+import { formatNumber } from '@utils/commons'
+import ShowRatings from '../core/ShowRatings.vue'
+import Avatar from '../core/Avatar.vue'
+
+export default defineComponent({
+	name: 'TutorCard',
+	props: {
+		colorClass: {
+			type: String,
+			default: 'bg-light_gray'
+		},
+	},
+	setup() {
+		return {
+			formatNumber,
+			calendar,
+			play
+		}
+	},
+	components: { ShowRatings, Avatar }
+})
+</script>
+
+<style lang="scss" scoped>
+	ion-card {
+		box-shadow: none !important;
+
+	}
+</style>
