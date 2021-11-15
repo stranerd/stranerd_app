@@ -35,7 +35,7 @@
 	}
 
 	.layout-body {
-		@apply lg:w-3/4 w-full flex flex-col p-2 md:p-4
+		@apply lg:w-3/4 w-full flex flex-col p-2 md:p-4 lg:p-0
 	}
 
 	.layout-body-chat {
