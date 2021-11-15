@@ -1,0 +1,72 @@
+{
+	"name": "stranerd",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"serve": "yarn env:copy:app && vue-cli-service serve",
+		"build": "vue-cli-service build",
+		"test:unit": "vue-cli-service test:unit",
+		"test:e2e": "vue-cli-service test:e2e",
+		"lint": "vue-cli-service lint",
+		"prepare": "husky install",
+		"env:copy:example": "copy env.example.json env.json",
+		"env:copy:app": "node bin/copy-env-app"
+	},
+	"dependencies": {
+		"@capacitor/app": "1.0.6",
+		"@capacitor/core": "3.3.1",
+		"@capacitor/haptics": "1.1.3",
+		"@capacitor/keyboard": "1.1.3",
+		"@capacitor/status-bar": "1.0.6",
+		"@ionic/vue": "^6.0.0-beta.6",
+		"@ionic/vue-router": "^6.0.0-beta.6",
+		"@stranerd/validate": "^1.6.0",
+		"@stripe/stripe-js": "^1.21.1",
+		"@vue-stripe/vue-stripe": "^4.2.8",
+		"axios": "^0.24.0",
+		"cookie": "^0.4.1",
+		"core-js": "^3.19.1",
+		"firebase": "^9.4.1",
+		"husky": "^7.0.4",
+		"line-awesome": "^1.3.0",
+		"socket.io-client": "^4.3.2",
+		"stripe": "^8.188.0",
+		"sweetalert2": "^11.1.10",
+		"swiper": "^7.2.0",
+		"vue": "^3.0.0",
+		"vue-google-signin-button": "^1.0.4",
+		"vue-router": "^4.0.11",
+		"vue-unused-components-checker": "^1.1.2",
+		"vuex": "^4.0.2"
+	},
+	"devDependencies": {
+		"@capacitor/cli": "3.3.1",
+		"@commitlint/cli": "^14.1.0",
+		"@commitlint/config-conventional": "^14.1.0",
+		"@types/cookie": "^0.4.1",
+		"@types/vue2-editor": "^2.6.1",
+		"@typescript-eslint/eslint-plugin": "^2.33.0",
+		"@typescript-eslint/parser": "^4.31.0",
+		"@vue/cli-plugin-babel": "~4.5.0",
+		"@vue/cli-plugin-eslint": "~4.5.0",
+		"@vue/cli-plugin-router": "~4.5.0",
+		"@vue/cli-plugin-typescript": "~4.5.0",
+		"@vue/cli-service": "~4.5.0",
+		"@vue/compiler-sfc": "^3.0.0-0",
+		"@vue/eslint-config-typescript": "^5.0.2",
+		"autoprefixer": "^9.8.7",
+		"eslint": "^6.7.2",
+		"eslint-plugin-vue": "^7.0.0-0",
+		"node-sass": "^6.0.1",
+		"postcss": "^7.0.38",
+		"sass-loader": "^10.1.1",
+		"tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+		"typescript": "^4.4.4"
+	},
+	"commitlint": {
+		"extends": [
+			"@commitlint/config-conventional"
+		]
+	},
+	"description": "Stranerd App"
+}

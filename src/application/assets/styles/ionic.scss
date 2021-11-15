@@ -1,0 +1,154 @@
+/* Core CSS required for Ionic components to work properly */
+@import '~@ionic/vue/css/core.css';
+
+/* Basic CSS for apps built with Ionic */
+@import '~@ionic/vue/css/normalize.css';
+@import '~@ionic/vue/css/structure.css';
+@import '~@ionic/vue/css/typography.css';
+
+/* Optional CSS utils that can be commented out */
+// @import '~@ionic/vue/css/padding.css';
+// @import '~@ionic/vue/css/float-elements.css';
+// @import '~@ionic/vue/css/text-alignment.css';
+// @import '~@ionic/vue/css/text-transformation.css';
+// @import '~@ionic/vue/css/flex-utils.css';
+// @import '~@ionic/vue/css/display.css';
+
+/* Ionic Variables and Theming. For more info, please see:
+http://ionicframework.com/docs/theming/ */
+
+/** Ionic CSS Variables **/
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600&display=swap');
+
+:root {
+
+	--ion-font-family: 'Raleway', sans-serif;
+	/** primary **/
+	--ion-color-primary: #546DD3;
+	--ion-color-primary-rgb: 56, 128, 255;
+	--ion-color-primary-contrast: #ffffff;
+	--ion-color-primary-contrast-rgb: 255, 255, 255;
+	--ion-color-primary-shade: #3171e0;
+	--ion-color-primary-tint: #4c8dff;
+
+	/** secondary **/
+	--ion-color-secondary: #3dc2ff;
+	--ion-color-secondary-rgb: 61, 194, 255;
+	--ion-color-secondary-contrast: #ffffff;
+	--ion-color-secondary-contrast-rgb: 255, 255, 255;
+	--ion-color-secondary-shade: #36abe0;
+	--ion-color-secondary-tint: #50c8ff;
+
+	/** tertiary **/
+	--ion-color-tertiary: #5260ff;
+	--ion-color-tertiary-rgb: 82, 96, 255;
+	--ion-color-tertiary-contrast: #ffffff;
+	--ion-color-tertiary-contrast-rgb: 255, 255, 255;
+	--ion-color-tertiary-shade: #4854e0;
+	--ion-color-tertiary-tint: #6370ff;
+
+	/** success **/
+	--ion-color-success: #2dd36f;
+	--ion-color-success-rgb: 45, 211, 111;
+	--ion-color-success-contrast: #ffffff;
+	--ion-color-success-contrast-rgb: 255, 255, 255;
+	--ion-color-success-shade: #28ba62;
+	--ion-color-success-tint: #42d77d;
+
+	/** warning **/
+	--ion-color-warning: #ffc409;
+	--ion-color-warning-rgb: 255, 196, 9;
+	--ion-color-warning-contrast: #000000;
+	--ion-color-warning-contrast-rgb: 0, 0, 0;
+	--ion-color-warning-shade: #e0ac08;
+	--ion-color-warning-tint: #ffca22;
+
+	/** danger **/
+	--ion-color-danger: #eb445a;
+	--ion-color-danger-rgb: 235, 68, 90;
+	--ion-color-danger-contrast: #ffffff;
+	--ion-color-danger-contrast-rgb: 255, 255, 255;
+	--ion-color-danger-shade: #cf3c4f;
+	--ion-color-danger-tint: #ed576b;
+
+	/** dark **/
+	--ion-color-dark: #222428;
+	--ion-color-dark-rgb: 34, 36, 40;
+	--ion-color-dark-contrast: #ffffff;
+	--ion-color-dark-contrast-rgb: 255, 255, 255;
+	--ion-color-dark-shade: #1e2023;
+	--ion-color-dark-tint: #383a3e;
+
+	/** medium **/
+	--ion-color-medium: #92949c;
+	--ion-color-medium-rgb: 146, 148, 156;
+	--ion-color-medium-contrast: #ffffff;
+	--ion-color-medium-contrast-rgb: 255, 255, 255;
+	--ion-color-medium-shade: #808289;
+	--ion-color-medium-tint: #9d9fa6;
+
+	/** light **/
+	--ion-color-light: #f4f5f8;
+	--ion-color-light-rgb: 244, 245, 248;
+	--ion-color-light-contrast: #000000;
+	--ion-color-light-contrast-rgb: 0, 0, 0;
+	--ion-color-light-shade: #d7d8da;
+	--ion-color-light-tint: #f5f6f9;
+}
+
+.modal-class {
+	--background-color: #00000065;
+	--height: 39rem;
+	--width: 400px;
+	--border-radius: .75rem;
+	@media (max-width: 500px) {
+		--height: 80vh;
+		--border-radius: 0rem;
+	}
+}
+
+
+.searchbar-clear-icon.sc-ion-searchbar-md {
+	@media (max-width: 1024px) {
+		display: none;
+	}
+}
+
+.btn-primary {
+	--background: #546DD3;
+	--padding-top: 1rem;
+	--padding-bottom: 1rem;
+	--padding-start: 1.5rem;
+	--padding-end: 1.5rem;
+	--color: white;
+	--box-shadow: none;
+	--border-radius: 0.5rem;
+	font-weight: 700;
+}
+
+.btn-secondary {
+	--background: #4D5C6F;
+	--padding-top: 1rem;
+	--padding-bottom: 1rem;
+	--padding-start: 1.5rem;
+	--padding-end: 1.5rem;
+	--color: white;
+	--box-shadow: none;
+	--border-radius: 0.5rem;
+	font-weight: 700;
+}
+
+ion-input {
+	--background: #F7F7FC;
+	--box-shadow: none;
+	--border-radius: .75rem;
+	border-radius: .75rem;
+	--icon-color: #8B9EB1;
+	--color: #8B9EB1;
+	--padding-bottom: 4em;
+}
+
+
+ion-toolbar {
+	--background: #F7F7FC;
+}

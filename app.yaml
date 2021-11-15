@@ -1,0 +1,14 @@
+runtime: nodejs16
+
+instance_class: F1
+
+handlers:
+  - url: /(.*\..+)$
+    secure: always
+    static_files: dist/\1
+    upload: dist/(.*\..+)$
+    # catch all handler to index.html
+  - url: /.*
+    secure: always
+    static_files: dist/index.html
+    upload: dist/index.html

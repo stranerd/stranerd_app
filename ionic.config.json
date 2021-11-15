@@ -1,0 +1,7 @@
+{
+	"name": "stranerd",
+	"integrations": {
+		"capacitor": {}
+	},
+	"type": "vue"
+}
