@@ -37,12 +37,20 @@ export default defineComponent({
 			required: false,
 			default: () => {
 			}
+<<<<<<< HEAD
 		},
+=======
+		}
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 
 	},
 	setup () {
 
+<<<<<<< HEAD
 		return {  }
+=======
+		return {}
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 	}
 })
 </script>

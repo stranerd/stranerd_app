@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Directive, Ref, ref } from 'vue'
+=======
+import { Ref, ref } from 'vue'
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 import { useRouter } from 'vue-router'
 import {
 	CompleteEmailVerification,
@@ -12,7 +16,10 @@ import {
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'
+<<<<<<< HEAD
 import { googleClientId } from '@utils/environment'
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 import { useAuth } from '@app/composable/auth/auth'
 
 const global = {
@@ -147,6 +154,7 @@ export const useGoogleSignin = () => {
 	}
 	return { loading, error, signin, setError }
 }
+<<<<<<< HEAD
 
 export const GoogleAuth: Directive = {
 	beforeMount (el: Element) {
@@ -175,3 +183,5 @@ export const GoogleAuth: Directive = {
 		}
 	}
 }
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c

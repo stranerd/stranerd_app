@@ -30,7 +30,11 @@ export default {
 	computed: {
 		containerStyles () {
 			return {
+<<<<<<< HEAD
 				transform: `rotate(${this.startAngle}deg)`
+=======
+				transform: `rotate(${ this.startAngle }deg)`
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 			}
 		},
 		donutSections () {
@@ -49,9 +53,15 @@ export default {
 
 				const fillerStyles = {
 					backgroundColor: section.color || defaultColor,
+<<<<<<< HEAD
 					transform: `rotate(${degree}deg)`
 				}
 				const sectionStyles = { transform: `rotate(${offsetBy}deg)` }
+=======
+					transform: `rotate(${ degree }deg)`
+				}
+				const sectionStyles = { transform: `rotate(${ offsetBy }deg)` }
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 
 				degreesConsumed += section.degree
 				if (degreesConsumed === 180) offsetBy = 0

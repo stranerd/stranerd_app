@@ -101,7 +101,11 @@ export default {
 			valueTotal = Number(valueTotal.toFixed(2))
 
 			if (valueTotal > this.total) {
+<<<<<<< HEAD
 				const err = `Sum of all the sections' values (${valueTotal}) should not exceed \`total\` (${this.total})`
+=======
+				const err = `Sum of all the sections' values (${ valueTotal }) should not exceed \`total\` (${ this.total })`
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 				throw new Error(err)
 			}
 			const degreesInACircle = 360
@@ -156,8 +160,13 @@ export default {
 			let currentDefaultColorIdx = 0
 
 			return this.sections.map((section, idx) => ({
+<<<<<<< HEAD
 				label: section.label || `Section ${idx + 1}`,
 				percent: `${section.value} (${(section.value / this.total) * 100}%)`,
+=======
+				label: section.label || `Section ${ idx + 1 }`,
+				percent: `${ section.value } (${ (section.value / this.total) * 100 }%)`,
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 				styles: {
 					backgroundColor: section.color || defaultColors[currentDefaultColorIdx++]
 				}
@@ -168,7 +177,11 @@ export default {
 			return placementStyles[this.legendPlacement]
 		},
 		donutStyles () {
+<<<<<<< HEAD
 			const size = `${this.size}${this.unit}`
+=======
+			const size = `${ this.size }${ this.unit }`
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 			const styles = {
 				width: size,
 				paddingBottom: size,
@@ -180,8 +193,13 @@ export default {
 			const availablePercent = 100
 			const size = availablePercent - this.thickness
 
+<<<<<<< HEAD
 			const sizePercent = `${size}%`
 			const pos = `calc(50% - ${size / 2}%)`
+=======
+			const sizePercent = `${ size }%`
+			const pos = `calc(50% - ${ size / 2 }%)`
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 
 			return {
 				height: sizePercent,
@@ -246,7 +264,11 @@ export default {
 					else widthInPx = null
 				}
 
+<<<<<<< HEAD
 				this.fontSize = widthInPx ? `${(widthInPx * scaleDownBy).toFixed(2)}px` : '1em'
+=======
+				this.fontSize = widthInPx ? `${ (widthInPx * scaleDownBy).toFixed(2) }px` : '1em'
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 			})
 		},
 		emitSectionEvent (sectionEventName, ...args) {

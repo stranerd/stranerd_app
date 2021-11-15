@@ -15,7 +15,11 @@
 			v-else
 			btnText="Go and ask a Question"
 			info="You haven't asked any questions yet, click the button below to ask a question"
+<<<<<<< HEAD
 			route="/questions/"
+=======
+			route="/questions"
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		/>
 
 

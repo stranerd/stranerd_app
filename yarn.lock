@@ -2386,7 +2386,11 @@
   optionalDependencies:
     prettier "^1.18.2"
 
+<<<<<<< HEAD
 "@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.0.0-beta.14":
+=======
+"@vue/devtools-api@^6.0.0-beta.14":
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
   version "6.0.0-beta.19"
   resolved "https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.0.0-beta.19.tgz"
   integrity sha512-ObzQhgkoVeoyKv+e8+tB/jQBL2smtk/NmC9OmFK8UqdDpoOdv/Kf9pyDWL+IFyM7qLD2C75rszJujvGSPSpGlw==
@@ -2876,12 +2880,16 @@ array-unique@^0.3.2:
   resolved "https://registry.npmjs.org/array-unique/-/array-unique-0.3.2.tgz"
   integrity sha1-qJS3XUvE9s1nnvMkSp/Y9Gri1Cg=
 
+<<<<<<< HEAD
 arrify@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.0.tgz#d6c361518250802fa2147ea7fb67597128cb8c81"
   integrity sha1-1sNhUYJQgC+iFH6n+2dZcSjLjIE=
 
 arrify@^1.0.0, arrify@^1.0.1:
+=======
+arrify@^1.0.1:
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
   version "1.0.1"
   resolved "https://registry.npmjs.org/arrify/-/arrify-1.0.1.tgz"
   integrity sha1-iYUI2iIm84DfkEcoRWhJwVAaSw0=
@@ -2946,7 +2954,11 @@ async-limiter@~1.0.0:
   resolved "https://registry.npmjs.org/async-limiter/-/async-limiter-1.0.1.tgz"
   integrity sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==
 
+<<<<<<< HEAD
 async@^2.6.0, async@^2.6.2:
+=======
+async@^2.6.2:
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
   version "2.6.3"
   resolved "https://registry.npmjs.org/async/-/async-2.6.3.tgz"
   integrity sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==
@@ -3135,11 +3147,14 @@ bindings@^1.5.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
+<<<<<<< HEAD
 bluebird@3.0.5:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.0.5.tgz#2ff9d07c9b3edb29d6d280fe07528365e7ecd392"
   integrity sha1-L/nQfJs+2ynW0oD+B1KDZefs05I=
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 bluebird@^3.1.1, bluebird@^3.5.5:
   version "3.7.2"
   resolved "https://registry.npmjs.org/bluebird/-/bluebird-3.7.2.tgz"
@@ -3510,7 +3525,11 @@ chalk@^1.1.1, chalk@^1.1.3:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
+<<<<<<< HEAD
 chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.3.1, chalk@^2.4.1, chalk@^2.4.2:
+=======
+chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.4.1, chalk@^2.4.2:
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
   version "2.4.2"
   resolved "https://registry.npmjs.org/chalk/-/chalk-2.4.2.tgz"
   integrity sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
@@ -3642,11 +3661,14 @@ cli-highlight@^2.1.4:
     parse5-htmlparser2-tree-adapter "^6.0.0"
     yargs "^16.0.0"
 
+<<<<<<< HEAD
 cli-spinners@^1.1.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/cli-spinners/-/cli-spinners-1.3.1.tgz#002c1990912d0d59580c93bd36c056de99e4259a"
   integrity sha512-1QL4544moEsDVH9T/l6Cemov/37iv1RtoKf7NJ04A60+4MREXNfx/QvavbH6QoGdsD4N4Mwy49cmaINR/o2mdg==
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 cli-spinners@^2.0.0:
   version "2.6.1"
   resolved "https://registry.npmjs.org/cli-spinners/-/cli-spinners-2.6.1.tgz"
@@ -3790,11 +3812,14 @@ commander@^6.0.0:
   resolved "https://registry.npmjs.org/commander/-/commander-6.2.1.tgz"
   integrity sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==
 
+<<<<<<< HEAD
 commander@^7.2.0:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-7.2.0.tgz#a36cb57d0b501ce108e4d20559a150a391d97ab7"
   integrity sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 commander@~2.19.0:
   version "2.19.0"
   resolved "https://registry.npmjs.org/commander/-/commander-2.19.0.tgz"
@@ -5721,6 +5746,7 @@ glob-to-regexp@^0.3.0:
   resolved "https://registry.npmjs.org/glob-to-regexp/-/glob-to-regexp-0.3.0.tgz"
   integrity sha1-jFoUlNIGbFcMw7/kSWF1rMTVAqs=
 
+<<<<<<< HEAD
 glob@^5.0.3:
   version "5.0.15"
   resolved "https://registry.yarnpkg.com/glob/-/glob-5.0.15.tgz#1bc936b9e02f4a603fcc222ecf7633d30b8b93b1"
@@ -5732,6 +5758,8 @@ glob@^5.0.3:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 glob@^7.0.0, glob@^7.0.3, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6:
   version "7.2.0"
   resolved "https://registry.npmjs.org/glob/-/glob-7.2.0.tgz"
@@ -5775,6 +5803,7 @@ globals@^12.1.0:
   dependencies:
     type-fest "^0.8.1"
 
+<<<<<<< HEAD
 globby@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/globby/-/globby-3.0.1.tgz#2094af8421e19152150d5893eb6416b312d9a22f"
@@ -5787,6 +5816,8 @@ globby@3.0.1:
     pify "^2.0.0"
     pinkie-promise "^1.0.0"
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 globby@^11.0.3:
   version "11.0.4"
   resolved "https://registry.yarnpkg.com/globby/-/globby-11.0.4.tgz#2cbaff77c2f2a62e71e9b2813a67b97a3a3001a5"
@@ -6189,7 +6220,11 @@ human-signals@^2.1.0:
 
 husky@^7.0.4:
   version "7.0.4"
+<<<<<<< HEAD
   resolved "https://registry.npmjs.org/husky/-/husky-7.0.4.tgz"
+=======
+  resolved "https://registry.yarnpkg.com/husky/-/husky-7.0.4.tgz#242048245dc49c8fb1bf0cc7cfb98dd722531535"
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
   integrity sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
@@ -7002,11 +7037,14 @@ lilconfig@^2.0.3:
   resolved "https://registry.npmjs.org/lilconfig/-/lilconfig-2.0.3.tgz"
   integrity sha512-EHKqr/+ZvdKCifpNrJCKxBTgk5XupZA3y/aCPY9mxfgBzmgh93Mt/WqjjQ38oMxXuvDokaKiM3lAgvSH2sjtHg==
 
+<<<<<<< HEAD
 line-awesome@^1.3.0:
   version "1.3.0"
   resolved "https://registry.npmjs.org/line-awesome/-/line-awesome-1.3.0.tgz"
   integrity sha512-Y0YHksL37ixDsHz+ihCwOtF5jwJgCDxQ3q+zOVgaSW8VugHGTsZZXMacPYZB1/JULBi6BAuTCTek+4ZY/UIwcw==
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 lines-and-columns@^1.1.6:
   version "1.1.6"
   resolved "https://registry.npmjs.org/lines-and-columns/-/lines-and-columns-1.1.6.tgz"
@@ -7429,7 +7467,11 @@ minimalistic-crypto-utils@^1.0.1:
   resolved "https://registry.npmjs.org/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz"
   integrity sha1-9sAMHAsIIkblxNmd+4x8CDsrWCo=
 
+<<<<<<< HEAD
 "minimatch@2 || 3", minimatch@^3.0.4, minimatch@~3.0.2:
+=======
+minimatch@^3.0.4, minimatch@~3.0.2:
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
   version "3.0.4"
   resolved "https://registry.npmjs.org/minimatch/-/minimatch-3.0.4.tgz"
   integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
@@ -8008,6 +8050,7 @@ optionator@^0.8.3:
     type-check "~0.3.2"
     word-wrap "~1.2.3"
 
+<<<<<<< HEAD
 ora@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/ora/-/ora-2.1.0.tgz#6caf2830eb924941861ec53a173799e008b51e5b"
@@ -8020,6 +8063,8 @@ ora@^2.0.0:
     strip-ansi "^4.0.0"
     wcwidth "^1.0.1"
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 ora@^3.4.0:
   version "3.4.0"
   resolved "https://registry.npmjs.org/ora/-/ora-3.4.0.tgz"
@@ -8320,6 +8365,7 @@ pify@^4.0.1:
   resolved "https://registry.npmjs.org/pify/-/pify-4.0.1.tgz"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
+<<<<<<< HEAD
 pinkie-promise@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/pinkie-promise/-/pinkie-promise-1.0.0.tgz#d1da67f5482563bb7cf57f286ae2822ecfbf3670"
@@ -8327,6 +8373,8 @@ pinkie-promise@^1.0.0:
   dependencies:
     pinkie "^1.0.0"
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 pinkie-promise@^2.0.0:
   version "2.0.1"
   resolved "https://registry.npmjs.org/pinkie-promise/-/pinkie-promise-2.0.1.tgz"
@@ -8334,11 +8382,14 @@ pinkie-promise@^2.0.0:
   dependencies:
     pinkie "^2.0.0"
 
+<<<<<<< HEAD
 pinkie@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-1.0.0.tgz#5a47f28ba1015d0201bda7bf0f358e47bec8c7e4"
   integrity sha1-Wkfyi6EBXQIBvae/DzWOR77Ix+Q=
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.npmjs.org/pinkie/-/pinkie-2.0.4.tgz"
@@ -9384,6 +9435,7 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
+<<<<<<< HEAD
 rx-text-search@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/rx-text-search/-/rx-text-search-1.0.0.tgz#e8ac082a831dcd6a18edc2089c99d15699f2dee0"
@@ -9400,6 +9452,8 @@ rx@4.0.6:
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.0.6.tgz#28774aa84352d0c010514eb699d714125eaea436"
   integrity sha1-KHdKqENS0MAQUU62mdcUEl6upDY=
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 rxjs@^6.6.0:
   version "6.6.7"
   resolved "https://registry.npmjs.org/rxjs/-/rxjs-6.6.7.tgz"
@@ -10036,6 +10090,7 @@ strict-uri-encode@^1.0.0:
   resolved "https://registry.npmjs.org/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz"
   integrity sha1-J5siXfHVgrH1TmWt3UNS4Y+qBxM=
 
+<<<<<<< HEAD
 string-search@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/string-search/-/string-search-1.2.0.tgz#b42d1b9496d24853d263b39d37fae8f7c3be9278"
@@ -10043,6 +10098,8 @@ string-search@1.2.0:
   dependencies:
     bluebird "3.0.5"
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 string-width@^1.0.1:
   version "1.0.2"
   resolved "https://registry.npmjs.org/string-width/-/string-width-1.0.2.tgz"
@@ -10889,11 +10946,14 @@ vue-eslint-parser@^7.0.0, vue-eslint-parser@^7.10.0:
     lodash "^4.17.21"
     semver "^6.3.0"
 
+<<<<<<< HEAD
 vue-google-signin-button@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/vue-google-signin-button/-/vue-google-signin-button-1.0.4.tgz#733e9fea786ff730278c8eef8be9f594adc8d7b8"
   integrity sha512-spmf+qPQQ1zAEndDxybYsf22U47eYPuvU9cb1N9YETmPQ4+UBG9ALLxgID1mHkusvBVclRyxmvJc3zc7hD56wg==
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.npmjs.org/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz"
@@ -10939,6 +10999,7 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
+<<<<<<< HEAD
 vue-unused-components-checker@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vue-unused-components-checker/-/vue-unused-components-checker-1.1.2.tgz#f3963c1303b6d7850be7481c34afaa3f8e4d0f95"
@@ -10950,6 +11011,8 @@ vue-unused-components-checker@^1.1.2:
     ora "^2.0.0"
     rx-text-search "^1.0.0"
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 vue@^2.0.0:
   version "2.6.14"
   resolved "https://registry.npmjs.org/vue/-/vue-2.6.14.tgz"
@@ -10966,6 +11029,7 @@ vue@^3.0.0:
     "@vue/server-renderer" "3.2.20"
     "@vue/shared" "3.2.20"
 
+<<<<<<< HEAD
 vuex@^4.0.2:
   version "4.0.2"
   resolved "https://registry.npmjs.org/vuex/-/vuex-4.0.2.tgz"
@@ -10973,6 +11037,8 @@ vuex@^4.0.2:
   dependencies:
     "@vue/devtools-api" "^6.0.0-beta.11"
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 watchpack-chokidar2@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/watchpack-chokidar2/-/watchpack-chokidar2-2.0.1.tgz"

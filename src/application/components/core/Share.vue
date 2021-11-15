@@ -42,22 +42,38 @@ export default defineComponent({
 		const route = useRoute()
 		const shareInfo = async () => {
 			const link = props.link || route.fullPath
+<<<<<<< HEAD
 			if (window.navigator.share) {
 				try {
 					await window.navigator.share({
 						url: domain + link.startsWith('/') ? link : `/${link}`,
+=======
+			const url = domain + (link.startsWith('/') ? link : `/${link}`)
+			if (window.navigator.share) {
+				try {
+					await window.navigator.share({
+						url,
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 						title: props.title,
 						text: props.text
 					})
 				} catch {
+<<<<<<< HEAD
 					const res = await copyToClipboard(domain + link.startsWith('/') ? link : `/${link}`)
+=======
+					const res = await copyToClipboard(url)
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 					await Notify({
 						title: `something went wrong somewhere.${res ? ' The link has been copied to your clipboard instead' : ''}`,
 						icon: 'info'
 					})
 				}
 			} else {
+<<<<<<< HEAD
 				const res = await copyToClipboard(domain + link.startsWith('/') ? link : `/${link}`)
+=======
+				const res = await copyToClipboard(url)
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 				await Notify({
 					title: `Your current device is unable to share links.${res ? ' The link has been copied to your clipboard instead' : ''}`,
 					icon: 'info'

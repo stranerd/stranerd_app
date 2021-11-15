@@ -52,7 +52,10 @@ import { useRoute } from 'vue-router'
 export default defineComponent({
 	name: 'ResetPassword',
 	components: { IonContent, IonPage, IonInput, IonButton, IonSpinner, PageLoading },
+<<<<<<< HEAD
 	layout: 'auth',
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 	middlewares: ['hasQueryToken'],
 	setup () {
 		const { token } = useRoute().query

@@ -4,16 +4,29 @@
 		<ion-header class="block md:hidden ion-no-border">
 			<ion-toolbar
 				class="md:hidden bg-[#F7F7FC] px-4 flex border-0 items-center justify-between items-center z-50">
+<<<<<<< HEAD
 				<router-link slot="start" class="flex flex-row items-center " to="/account">
 					<avatar :id="user?.id" :size="30" :src="user?.avatar" />
 				</router-link>
+=======
+				<router-link slot="start" class="flex flex-row items-center mr-4" to="/account">
+					<avatar :id="user?.id" :size="30" :src="user?.avatar" />
+				</router-link>
+				<router-link slot="start" class="flex flex-row items-center " to="/notifications">
+					<ion-icon :icon="notifications" class="text-2xl text-icon_inactive"></ion-icon>
+				</router-link>
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 
 				<div class="flex flex-row items-center px-3 w-[75%] mx-auto justify-center">
 					<div class="py-1 px-3 w-full bg-[#8B9EB1] flex rounded-xl flex-row items-center">
 						<div class="w-1/3 flex flex-row items-center">
 							<img class="inline h-6 mr-2" src="@app/assets/images/icons/bronze.svg" />
 							<span class="font-semibold text-xs text-white ">{{
+<<<<<<< HEAD
 								isLoggedIn ? user.account.coins.bronze : '-'
+=======
+								isLoggedIn ? user?.account.coins.bronze : '-'
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 							}}</span>
 						</div>
 						<div class="w-1/3 flex flex-row items-center justify-center">
@@ -22,19 +35,33 @@
 						</div>
 						<div class="w-1/3 flex flex-row-reverse items-center">
 							<span class="font-semibold text-xs text-white ">{{
+<<<<<<< HEAD
 								isLoggedIn ? user.account.coins.gold : '-'
+=======
+								isLoggedIn ? user?.account.coins.gold : '-'
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 							}}</span>
 							<img class="inline h-6 mr-2" src="@app/assets/images/icons/gold.svg" />
 						</div>
 					</div>
 				</div>
 
+<<<<<<< HEAD
+=======
+				<router-link to="/users/leaderboard" slot="end" class="flex items-center justify-end mr-4">
+					<ion-icon :icon="school" class="text-2xl text-icon_inactive"></ion-icon>
+				</router-link>
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 				<div slot="end" class="flex items-center justify-end ">
 					<IonIcon :icon="showSearch ? close : search" class="text-2xl text-icon_inactive"
 						@click="toggleSearch" />
 				</div>
 
+<<<<<<< HEAD
 				<search-bar v-if="showSearch" class="absolute left-3.5 " />
+=======
+				<search-bar v-if="showSearch" class="absolute -left-3 z-50 top-1" />
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 			</ion-toolbar>
 		</ion-header>
 
@@ -58,7 +85,11 @@
 					<div class="w-1/3 flex flex-row items-center">
 						<Coins :gold="false" :size="28" class="mr-2 inline" />
 						<span class="font-semibold text-sm text-dark_grey ">{{
+<<<<<<< HEAD
 							isLoggedIn ? user.account.coins.bronze : '-'
+=======
+							isLoggedIn ? user?.account.coins.bronze : '-'
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 						}}</span>
 					</div>
 					<div class="w-1/3 flex flex-row items-center justify-center">
@@ -68,7 +99,11 @@
 					</div>
 					<div class="w-1/3 flex flex-row-reverse items-center">
 						<span class="font-semibold text-sm text-dark_grey ">{{
+<<<<<<< HEAD
 							isLoggedIn ? user.account.coins.gold : '-'
+=======
+							isLoggedIn ? user?.account.coins.gold : '-'
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 						}}</span>
 						<Coins :gold="true" :size="28" class="mr-2 inline" />
 					</div>
@@ -118,7 +153,11 @@
 					<div class="w-1/3 flex flex-row items-center">
 						<Coins :gold="false" :size="20" class="mr-2 inline" />
 						<span class="font-semibold text-sm text-dark_grey ">{{
+<<<<<<< HEAD
 							isLoggedIn ? user.account.coins.bronze : '-'
+=======
+							isLoggedIn ? user?.account.coins.bronze : '-'
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 						}}</span>
 					</div>
 					<div class="w-1/3 flex flex-row items-center justify-center">
@@ -127,7 +166,11 @@
 					</div>
 					<div class="w-1/3 flex flex-row-reverse items-center">
 						<span class="font-semibold text-sm text-dark_grey ">{{
+<<<<<<< HEAD
 							isLoggedIn ? user.account.coins.gold : '-'
+=======
+							isLoggedIn ? user?.account.coins.gold : '-'
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 						}}</span>
 						<Coins :gold="true" :size="20" class="mr-2 inline" />
 

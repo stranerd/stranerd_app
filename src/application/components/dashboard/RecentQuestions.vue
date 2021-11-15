@@ -43,7 +43,11 @@
 </template>
 
 <script lang="ts">
+<<<<<<< HEAD
 import { computed, defineComponent } from 'vue'
+=======
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 import { IonIcon } from '@ionic/vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
@@ -52,18 +56,35 @@ import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
+<<<<<<< HEAD
 	name: 'RecentTransactions',
 	components: { IonIcon, Swiper, QuestionListCard, EmptyState },
 	setup () {
 		const { questions: allQuestions } = useQuestionList()
 
+=======
+	name: 'RecentQuestions',
+	components: { IonIcon, Swiper, QuestionListCard, EmptyState },
+	setup () {
+		const { questions: allQuestions, listener, loading, error } = useQuestionList()
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		const questions = computed({
 			get: () => allQuestions.value.slice(0, 6),
 			set: () => {
 			}
 		})
+<<<<<<< HEAD
 
 		return { chevronForwardOutline, chevronBackOutline, ellipse, questions }
+=======
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+
+		return {
+			chevronForwardOutline, chevronBackOutline, ellipse,
+			questions, loading, error
+		}
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 	}
 })
 </script>

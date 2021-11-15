@@ -26,7 +26,11 @@ enum Answered {
 
 const answeredChoices = [
 	{ val: Answered.All, key: 'All' },
+<<<<<<< HEAD
 	{ val: Answered.BestAnswered, key: 'Best Answered' },
+=======
+	// { val: Answered.BestAnswered, key: 'Best Answered' },
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 	{ val: Answered.Answered, key: 'Answered' },
 	{ val: Answered.Unanswered, key: 'Unanswered' }
 ]

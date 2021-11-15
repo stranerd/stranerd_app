@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
 	<div>
 		<!-- smaller screens -->
 		<div class="md:hidden bg-[#F7F7FC] py-[10px] flex justify-around items-center z-50">
@@ -59,19 +60,89 @@ export default defineComponent({
 	components: { IonIcon },
 	setup () {
 		const route = useRoute()
+=======
+	<IonFooter>
+		<!-- smaller screens -->
+		<IonToolbar class="md:hidden bg-[#F7F7FC]">
+			<div class="flex justify-around items-center">
+				<router-link class="col-span-1 text-icon_inactive flex flex-row items-center justify-center"
+					exact-active-class="text-primary"
+					to="/dashboard">
+					<ion-icon :icon="home" class="w-7" />
+				</router-link>
+
+				<router-link class="col-span-1 text-icon_inactive flex flex-row items-center justify-center"
+					exact-active-class="text-primary"
+					to="/questions/create">
+					<ion-icon :icon="add" class="w-7" />
+				</router-link>
+
+				<router-link class="col-span-1 text-icon_inactive flex flex-row items-center justify-center"
+					exact-active-class="text-primary"
+					to="/questions">
+					<ion-icon :icon="helpCircle" class="w-6" />
+				</router-link>
+			</div>
+		</IonToolbar>
+
+		<!-- medium screens -->
+		<IonToolbar class="hidden lg:hidden md:flex bg-white">
+			<div class="flex justify-around items-center">
+				<router-link class="px-3 py-2 bg-light_gray text-icon_inactive rounded-lg"
+					exact-active-class="text-primary"
+					to="/dashboard">
+					<div class="flex flex-col py-1 items-center justify-center">
+						<ion-icon :icon="home" class="w-12" />
+					</div>
+				</router-link>
+
+				<router-link class="px-3 py-2 bg-primary text-white rounded-lg" to="/questions/create">
+					<div class="flex flex-col py-1 items-center justify-center">
+						<ion-icon :icon="add" class="w-12" />
+					</div>
+				</router-link>
+
+				<router-link class="px-3 py-2 bg-light_gray text-icon_inactive rounded-lg"
+					exact-active-class="text-primary"
+					to="/questions">
+					<div class="flex flex-col py-1 items-center justify-center">
+						<ion-icon :icon="helpCircle" class="w-12" />
+					</div>
+				</router-link>
+			</div>
+		</IonToolbar>
+	</IonFooter>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { IonFooter, IonIcon, IonToolbar } from '@ionic/vue'
+import { add, calendarClear, chatbubble, helpCircle, home, people, wallet } from 'ionicons/icons'
+
+export default defineComponent({
+	components: { IonFooter, IonIcon, IonToolbar },
+	setup () {
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		return {
 			home,
 			helpCircle,
 			people,
 			chatbubble,
 			add,
+<<<<<<< HEAD
 			route,
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 			calendarClear,
 			wallet
 		}
 	}
 })
 </script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 <style scoped>
 	.tabStyle {
 		@apply border-t-2 border-gray-300

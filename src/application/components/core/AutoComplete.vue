@@ -3,12 +3,19 @@
 		<IonInput
 			v-model="term"
 			:placeholder="placeholder"
+<<<<<<< HEAD
+=======
+			autocomplete="off"
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 			class="w-full"
 			type="search"
 			@keydown.enter.prevent="onEnter"
 			@keydown.down.prevent="onDown"
 			@keydown.up.prevent="onUp"
+<<<<<<< HEAD
 			autocomplete="off"
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		/>
 		<div v-if="value && open" class="suggestions">
 			<a

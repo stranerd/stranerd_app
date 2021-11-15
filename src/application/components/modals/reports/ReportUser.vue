@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
 	<Modal >
+=======
+	<Modal>
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		<slot name="title">
 			Report Question
 		</slot>

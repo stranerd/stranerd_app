@@ -11,7 +11,11 @@
 			v-else
 			btnText="Go and answer a Question"
 			info="You haven't answered any questions yet, click the button below to answer a question"
+<<<<<<< HEAD
 			route="/questions/"
+=======
+			route="/questions"
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		/>
 	</div>
 </template>

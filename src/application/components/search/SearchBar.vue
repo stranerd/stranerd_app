@@ -1,7 +1,11 @@
 <template>
 	<div>
 		<form class="gap-1 d-flex">
+<<<<<<< HEAD
 			<div class="search-container gap-0-25">
+=======
+			<div class="search-container gap-1">
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 				<ion-searchbar
 					v-model.trim="searchTerm"
 					cancel-button-icon="never"

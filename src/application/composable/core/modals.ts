@@ -20,7 +20,11 @@ const AccountModals = { BuyCoins, WithdrawCoins } as Record<AccountTypes, any>
 const ScheduleModals = { CreateSchedule } as Record<ScheduleTypes, any>
 const UploadModals = { UploadImage } as Record<UploadTypes, any>
 const SessionModals = { CreateSession } as Record<SessionTypes, any>
+<<<<<<< HEAD
 const ReportModals = {ReportUser, ReportQuestion, ReportAnswer} as Record<ReportTypes, any>
+=======
+const ReportModals = { ReportUser, ReportQuestion, ReportAnswer } as Record<ReportTypes, any>
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 const PaymentModals = {} as Record<PaymentTypes, any>
 
 export const modal = useModal(ref([] as string[]))

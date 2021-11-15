@@ -97,7 +97,11 @@ export const useCreateAnswer = () => {
 				const answerId = await AddAnswer.call(factory.value)
 				await setMessage('Answer submitted successfully.')
 				factory.value.reset()
+<<<<<<< HEAD
 				await router.replace(`/questions/${answeringQuestion?.id ?? ''}/#${answerId}`)
+=======
+				await router.replace(`/questions/${answeringQuestion?.id ?? ''}#${answerId}`)
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 				await analytics.logEvent('answer_question_completed', {
 					questionId: answeringQuestion?.id,
 					answerId,

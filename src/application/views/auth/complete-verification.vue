@@ -27,7 +27,10 @@
 			</div>
 		</ion-content>
 	</ion-page>
+<<<<<<< HEAD
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 </template>
 
 <script lang="ts">
@@ -39,7 +42,10 @@ import { useRoute } from 'vue-router'
 export default defineComponent({
 	name: 'CompleteVerification',
 	components: { IonContent, IonPage, IonButton, IonSpinner },
+<<<<<<< HEAD
 	layout: 'auth',
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 	middlewares: ['hasQueryToken'],
 	setup () {
 		const { token } = useRoute().query

@@ -1,9 +1,17 @@
 <template>
+<<<<<<< HEAD
 	<Modal >
 		<template v-slot:title>
 			Report Question
 		</template>
 		<template v-slot:subtext >
+=======
+	<Modal>
+		<template v-slot:title>
+			Report Question
+		</template>
+		<template v-slot:subtext>
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 			<span class="mb-4">
 				What is wrong with this Question
 			</span>

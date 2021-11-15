@@ -27,7 +27,11 @@
 				</div>
 			</div>
 
+<<<<<<< HEAD
 			<TranscrationHistoryCard
+=======
+			<TransactionHistoryCard
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 				v-for="transaction in transactions"
 				:key="transaction.hash"
 				:transaction="transaction"
@@ -43,21 +47,45 @@
 </template>
 
 <script lang="ts">
+<<<<<<< HEAD
 import { defineComponent } from 'vue'
 import { useTransactionList } from '@app/composable/payment/transactions'
 import TranscrationHistoryCard from './TranscrationHistoryCard.vue'
 
 export default defineComponent({
 	name: 'Transcration History',
+=======
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { useTransactionList } from '@app/composable/payment/transactions'
+import TransactionHistoryCard from './TransactionHistoryCard.vue'
+
+export default defineComponent({
+	name: 'Transaction History',
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 	props: {
 		userId: {
 			required: true,
 			type: String
 		}
 	},
+<<<<<<< HEAD
 	components: { TranscrationHistoryCard },
 	setup (props) {
 		const { loading, error, transactions, hasMore, fetchOlderTransactions } = useTransactionList(props.userId)
+=======
+	components: { TransactionHistoryCard },
+	setup (props) {
+		const {
+			loading,
+			error,
+			transactions,
+			hasMore,
+			listener,
+			fetchOlderTransactions
+		} = useTransactionList(props.userId)
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		return { loading, error, transactions, hasMore, fetchOlderTransactions }
 	}
 

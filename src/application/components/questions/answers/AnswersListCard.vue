@@ -37,11 +37,19 @@
 						@click="() => voteAnswer(false)" />
 				</div>
 				<div class="flex flex-row items-center text-icon_inactive font-bold">
+<<<<<<< HEAD
 					<template v-if="answer.best" class="items-center flex justify-between cursor-pointer">
 						<span class="mr-1">Mark as best</span>
 						<IonIcon :icon="star" class="text-[20px]" />
 					</template>
 					<template v-else>
+=======
+					<template v-if="isLoggedIn && question && !question.isAnswered && !answer.best && question.userId === id" class="items-center flex justify-between cursor-pointer" @click.prevent="markBestAnswer">
+						<span class="mr-1">Mark as best</span>
+						<IonIcon :icon="star" class="text-[20px]" />
+					</template>
+					<template v-if="answer.best">
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 						<IonIcon :icon="star" class="text-[20px] text-star_yellow" />
 					</template>
 				</div>
@@ -56,9 +64,15 @@
 	<page-loading v-if="loading || commentLoading" />
 </template>
 <script lang="ts">
+<<<<<<< HEAD
 import { defineComponent, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { AnswerEntity } from '@modules/questions'
+=======
+import { defineComponent, ref, PropType, computed } from 'vue'
+import { IonIcon } from '@ionic/vue'
+import { AnswerEntity, QuestionEntity } from '@modules/questions'
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 import {
 	arrowBackOutline,
 	arrowRedo,
@@ -76,18 +90,47 @@ import PhotoList from '@app/components/core/PhotoList.vue'
 import { useAnswer } from '@app/composable/questions/answers'
 import PageLoading from '../../core/PageLoading.vue'
 import { useCreateAnswerComments } from '@app/composable/questions/answer-comments'
+<<<<<<< HEAD
+=======
+import { useAuth } from '@app/composable/auth/auth'
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 
 export default defineComponent({
 	name: 'AnswerListCard',
 	components: { IonIcon, Avatar, PhotoList, PageLoading },
 	props: {
 		answer: {
+<<<<<<< HEAD
 			type: AnswerEntity,
 			required: true
 		}
 	},
 	setup (props) {
 		const showExplanation = ref(false)
+=======
+			type: AnswerEntity as PropType<AnswerEntity>,
+			required: true
+		},
+		question: {
+			required: true,
+			type: Object as PropType<QuestionEntity>
+		}
+	},
+	setup (props) {
+		const showComments = ref(false)
+		const showExplanation = ref(false)
+		const { id, isLoggedIn, user } = useAuth()
+		const showEditButton = computed({
+			get: () => props.answer.userId === id.value && props.answer.canBeEdited,
+			set: () => {
+			}
+		})
+		const showDeleteButton = computed({
+			get: () => props.answer.userId === id.value && props.answer.canBeDeleted,
+			set: () => {
+			}
+		})
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		const { error, loading, markBestAnswer, voteAnswer } = useAnswer(props.answer)
 		const {
 			loading: commentLoading,
@@ -96,12 +139,20 @@ export default defineComponent({
 			createComment
 		} = useCreateAnswerComments(props.answer.id)
 		return {
+<<<<<<< HEAD
 			voteAnswer,
 			loading,
 			commentLoading,
 			commentError,
 			commentFactory,
 			createComment,
+=======
+			id, isLoggedIn, user,
+			voteAnswer,	loading,
+			commentLoading,	commentError,
+			commentFactory,	createComment,
+			markBestAnswer,
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 
 			arrowBackOutline,
 			arrowRedo,

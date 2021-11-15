@@ -22,12 +22,19 @@ const unshiftToNotificationList = (userId: string, notification: NotificationEnt
 	else global[userId].notifications.value.unshift(notification)
 }
 
+<<<<<<< HEAD
 export const useNotificationList = () => {
 	const { id } = useAuth()
 	const userId = id.value ?? 'empty'
 	if (global[userId] === undefined) {
 		const listener = useListener(async () => {
 			if (!id.value) return () => {
+=======
+export const useNotificationList = (userId: string) => {
+	if (global[userId] === undefined) {
+		const listener = useListener(async () => {
+			if (!userId) return () => {
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 			}
 			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
 			return ListenToNotifications.call(userId, {
@@ -54,7 +61,11 @@ export const useNotificationList = () => {
 	}
 
 	const fetchNotifications = async () => {
+<<<<<<< HEAD
 		if (!id.value) return
+=======
+		if (!userId) return
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		await global[userId].setError('')
 		await global[userId].setLoading(true)
 		try {
@@ -71,7 +82,11 @@ export const useNotificationList = () => {
 	const fetchOlderNotifications = async () => {
 		await fetchNotifications()
 		await global[userId].listener.resetListener(async () => {
+<<<<<<< HEAD
 			if (!id.value) return () => {
+=======
+			if (!userId) return () => {
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 			}
 			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
 			return ListenToNotifications.call(userId, {
@@ -90,7 +105,10 @@ export const useNotificationList = () => {
 	}
 
 	onMounted(async () => {
+<<<<<<< HEAD
 		if (!id.value) return
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchNotifications()
 	})
 

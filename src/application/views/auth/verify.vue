@@ -38,7 +38,10 @@ import { IonButton, IonContent, IonPage, IonSpinner } from '@ionic/vue'
 export default defineComponent({
 	name: 'EmailVerificationRequest',
 	components: { IonContent, IonPage, IonButton, IonSpinner },
+<<<<<<< HEAD
 	layout: 'auth',
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 	middlewares: ['isAuthenticated'],
 	setup () {
 		const { email, loading, error, message, sendVerificationEmail } = useEmailVerificationRequest()

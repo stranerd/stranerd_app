@@ -9,7 +9,11 @@
 					</div>
 					<router-link
 						class="text-dark_gray bg-icon_inactive rounded-xl justify-center items-center py-3 px-4 absolute bottom-1"
+<<<<<<< HEAD
 						to="/dashboard/">
+=======
+						to="/dashboard">
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 						<ion-icon :icon="home" class="text-[23px] text-white"></ion-icon>
 					</router-link>
 				</div>

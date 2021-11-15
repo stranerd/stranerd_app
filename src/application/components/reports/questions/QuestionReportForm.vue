@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
 	<form @submit.prevent="submit" class="mt-5">
+=======
+	<form class="mt-5" @submit.prevent="submit">
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		<div class="flex flex-col gap-4 mb-4">
 			<span
 				v-for="message in QuestionMessages"
@@ -29,7 +33,11 @@ import { IonButton } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'QuestionReportForm',
+<<<<<<< HEAD
 	components:{PageLoading, IonButton},
+=======
+	components: { PageLoading, IonButton },
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 	props: {
 		factory: {
 			type: Object as PropType<ReportFactory>,

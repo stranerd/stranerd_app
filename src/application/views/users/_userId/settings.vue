@@ -15,7 +15,10 @@ import { useAuth } from '@app/composable/auth/auth'
 export default defineComponent({
 	name: 'UserIdSettings',
 	displayName: 'Profile',
+<<<<<<< HEAD
 	layout: 'justified',
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 	middlewares: ['isAuthenticated', async ({ to }) => {
 		const userId = to.params.userId
 		const authId = useAuth().id.value

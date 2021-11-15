@@ -22,7 +22,11 @@
 		<div class="grid grid-cols-12 border-b-[1px] border-faded_gray my-5 lg:rounded-br-3xl lg:rounded-bl-3xl">
 			<div
 				class="col-span-12 sm:place-content-center md:col-start-2 md:col-end-12 lg:col-start-3 lg:col-end-11 lg:justify-center lg:items-center flex flex-row  px-3 headings gap-5 text-icon_inactive font-bold  whitespace-normal overflow-x-auto">
+<<<<<<< HEAD
 				<router-link :to="`/users/${user.id}/`" class="pb-2 pr-3 cursor-pointer"
+=======
+				<router-link :to="`/users/${user.id}`" class="pb-2 pr-3 cursor-pointer"
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 					exact-active-class="border-b-4 text-dark_gray border-primary">
 					Dashboard
 				</router-link>

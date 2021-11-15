@@ -1,5 +1,9 @@
 {
 	"name": "stranerd",
+<<<<<<< HEAD
+=======
+	"description": "Stranerd App",
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -27,17 +31,24 @@
 		"cookie": "^0.4.1",
 		"core-js": "^3.19.1",
 		"firebase": "^9.4.1",
+<<<<<<< HEAD
 		"husky": "^7.0.4",
 		"line-awesome": "^1.3.0",
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		"socket.io-client": "^4.3.2",
 		"stripe": "^8.188.0",
 		"sweetalert2": "^11.1.10",
 		"swiper": "^7.2.0",
 		"vue": "^3.0.0",
+<<<<<<< HEAD
 		"vue-google-signin-button": "^1.0.4",
 		"vue-router": "^4.0.11",
 		"vue-unused-components-checker": "^1.1.2",
 		"vuex": "^4.0.2"
+=======
+		"vue-router": "^4.0.11"
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 	},
 	"devDependencies": {
 		"@capacitor/cli": "3.3.1",
@@ -57,6 +68,10 @@
 		"autoprefixer": "^9.8.7",
 		"eslint": "^6.7.2",
 		"eslint-plugin-vue": "^7.0.0-0",
+<<<<<<< HEAD
+=======
+		"husky": "^7.0.4",
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		"node-sass": "^6.0.1",
 		"postcss": "^7.0.38",
 		"sass-loader": "^10.1.1",
@@ -67,6 +82,10 @@
 		"extends": [
 			"@commitlint/config-conventional"
 		]
+<<<<<<< HEAD
 	},
 	"description": "Stranerd App"
+=======
+	}
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 }

@@ -16,6 +16,7 @@
 				</div>
 			</div>
 
+<<<<<<< HEAD
 			<div v-if="user && !hasAuthUser"
 				class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4 border border-faded_gray">
 				<div class="w-3/12">
@@ -32,6 +33,8 @@
 				</div>
 			</div>
 
+=======
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 			<template v-if="users.length">
 				<div v-for="(person, index) in users" :key="person.id"
 					:class="{'border border-faded_gray': person.id === id}"
@@ -52,8 +55,27 @@
 				</div>
 			</template>
 
+<<<<<<< HEAD
 		</div>
 
+=======
+			<div v-if="user && !hasAuthUser"
+				class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4 border border-faded_gray">
+				<div class="w-3/12">
+					<span> - </span>
+				</div>
+				<div class="w-7/12 flex items-center gap-2">
+					<avatar :id="user?.id" :size="24" :src="user.avatar" />
+					<span>
+						{{ user.bio.fullName }}
+					</span>
+				</div>
+				<div class="w-2/12 text-right text-primary font-semibold">
+					<span>{{ user.account.rankings[time] }}</span>
+				</div>
+			</div>
+		</div>
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 		<!-- <div class="text-center text-18">
 			<a class="text-primary-dark py-2" @click.prevent="fetchOlder">LOAD MORE</a>
 		</div> -->
@@ -61,7 +83,11 @@
 </template>
 
 <script lang="ts">
+<<<<<<< HEAD
 import { defineComponent, PropType } from 'vue'
+=======
+import { defineComponent, onBeforeUnmount, onMounted, PropType } from 'vue'
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 import { useAuth } from '@app/composable/auth/auth'
 import { useLeaderboardList } from '@app/composable/users/leaderboard'
 import { RankingTimes } from '@modules/users'
@@ -78,8 +104,15 @@ export default defineComponent({
 	},
 	components: { Avatar, PageLoading },
 	setup (props) {
+<<<<<<< HEAD
 		const { users, loading, hasAuthUser } = useLeaderboardList(props.time)
 		const { user, id } = useAuth()
+=======
+		const { users, loading, hasAuthUser, listener } = useLeaderboardList(props.time)
+		const { user, id } = useAuth()
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+>>>>>>> cfd3b62752a3a1b19b2ae5633522a66ebbe7150c
 
 		return { user, id, users, loading, hasAuthUser }
 	}
