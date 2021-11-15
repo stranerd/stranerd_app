@@ -1,11 +1,12 @@
 import { onMounted, ref, Ref } from 'vue'
-import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
-import { GetTransactions, TransactionEntity } from '@modules/users'
+import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { GetTransactions, ListenToTransactions, TransactionEntity } from '@modules/users'
 
 const global = {} as Record<string, {
 	transactions: Ref<TransactionEntity[]>
 	hasMore: Ref<boolean>
 	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToTransactionList = (userId: string, transaction: TransactionEntity) => {
@@ -13,14 +14,39 @@ const pushToTransactionList = (userId: string, transaction: TransactionEntity) =
 	if (index !== -1) global[userId].transactions.value.splice(index, 1, transaction)
 	else global[userId].transactions.value.push(transaction)
 }
+const unshiftToTransactionList = (userId: string, transaction: TransactionEntity) => {
+	const index = global[userId].transactions.value.findIndex((t) => t.id === transaction.id)
+	if (index !== -1) global[userId].transactions.value.splice(index, 1, transaction)
+	else global[userId].transactions.value.unshift(transaction)
+}
 
 export const useTransactionList = (userId: string) => {
-	if (global[userId] === undefined) global[userId] = {
-		transactions: ref([]),
-		hasMore: ref(false),
-		fetched: ref(false),
-		...useErrorHandler(),
-		...useLoadingHandler()
+	if (global[userId] === undefined) {
+		const listener = useListener(async () => {
+			if (!userId) return () => {
+			}
+			const lastDate = global[userId].transactions.value[global[userId].transactions.value.length - 1]?.createdAt
+			return ListenToTransactions.call(userId, {
+				created: async (entity) => {
+					unshiftToTransactionList(userId, entity)
+				},
+				updated: async (entity) => {
+					unshiftToTransactionList(userId, entity)
+				},
+				deleted: async (entity) => {
+					const index = global[userId].transactions.value.findIndex((t) => t.id === entity.id)
+					if (index !== -1) global[userId].transactions.value.splice(index, 1)
+				}
+			}, lastDate)
+		})
+		global[userId] = {
+			transactions: ref([]),
+			hasMore: ref(false),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
 	}
 
 	const fetchTransactions = async () => {

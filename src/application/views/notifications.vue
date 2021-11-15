@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<div>
-			<div class="fl">
+			<div class="flex flex-col items-center px-4 max-w-4xl mx-auto">
 				<div class="md:flex justify-between items-center w-full hidden">
 					<h1 class="lg:text-2xl text-lg font-bold text-dark_gray">
 						Notifications
