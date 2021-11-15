@@ -1,23 +1,22 @@
 <template>
 	<div
-		:class="`m-0  h-[9rem] cardPadding ${colorClass}  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-[1rem] box-border  p-5`"
+		:class="`m-0  h-[19rem]  ${colorClass}  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-[1rem] box-border  pb-5 `"
 	>
-		<div class="flex items-center justify-between w-full">
-			<div class="bg-faded_gray min-h-[57px] min-w-[57px] grid place-items-center rounded-md mr-5">
-				<ion-icon
-					class="text-white text-2xl"
-					:icon="play"
-				/>
+		<div class="flex flex-col items-center justify-between w-full">
+			<div class="bg-faded_gray min-h-[10.5rem] min-w-[57px] w-full grid place-items-center rounded-md ">
+				<ion-text class="text-2xl text-white font-bold p-5 pb-2">
+					PREVIEW
+				</ion-text>
 			</div>
             
-			<ion-text class="text-sm text-dark_gray">
+			<ion-text class="text-sm text-dark_gray p-5 pb-2">
 				Work and Energy 
-				Introduction to
-				University Physics
+				Work and Energy - Introduction to
+				University physics
 			</ion-text>
 		</div>
 
-		<div class="w-full flex items-center justify-between mt-4">
+		<div class="w-full flex items-center justify-between  px-5">
 			<ShowRatings :rating="4"/>
 
 			<div class="flex items-center">

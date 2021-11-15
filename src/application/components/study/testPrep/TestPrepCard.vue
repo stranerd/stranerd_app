@@ -1,6 +1,6 @@
 <template>
 	<div
-		:class="`m-0  h-[17rem] cardPadding border ${colorClass}    md:rounded-xl rounded-md flex flex-col items-center md:gap-2 gap-[1rem] box-border  p-5`"
+		:class="`m-0  h-[18rem] cardPadding border ${colorClass}    md:rounded-xl rounded-md flex flex-col items-center md:gap-2 gap-[1rem] box-border  p-5`"
 	>
     
 		<ion-text class="font-bold text-2xl text-dark_gray">

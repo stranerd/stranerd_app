@@ -1,27 +1,30 @@
 <template>
 	<div
-		:class="`m-0  h-[9rem] cardPadding ${colorClass}  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-[1rem] box-border  p-5`"
+		:class="`m-0  h-[10rem] cardPadding ${colorClass}  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-[1rem] box-border  p-5`"
 	>
 		<div class="flex items-center justify-between w-full">
-			<div class="bg-faded_gray min-h-[57px] min-w-[57px] grid place-items-center rounded-md mr-5">
-				<ion-icon
-					class="text-white text-2xl"
-					:icon="play"
-				/>
-			</div>
-            
-			<ion-text class="text-sm text-dark_gray">
-				Work and Energy 
-				Introduction to
-				University Physics
+			<ion-text class="text-sm text-dark_gray font-bold">
+				Physics - Waves and Sounds (100l 1st
+				semester exams)
 			</ion-text>
 		</div>
-
-		<div class="w-full flex items-center justify-between mt-4">
+		<div class="flex items-center justify-between w-full mt-2">
 			<ShowRatings :rating="4"/>
+		</div>
+
+		<div class="w-full flex items-center justify-between mt-2">
+			<div class="flex items-center">
+				<ion-icon
+					:icon='flash'
+					class="text-icon_inactive mr-3"
+				/>
+				<ion-text class="text-sm text-icon_inactive font-bold">
+					50 cards
+				</ion-text>
+			</div>
 
 			<div class="flex items-center">
-				<ion-text class="text-xs font-bold text-dark_gray mr-3">
+				<ion-text class="text-xs font-bold text-icon_inactive mr-3">
 					Timmy
 				</ion-text>
 				<Avatar :size="24"/>
@@ -34,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { calendar, play } from 'ionicons/icons'
+import { flash } from 'ionicons/icons'
 import { defineComponent,  } from 'vue'
 import { formatNumber } from '@utils/commons'
 import ShowRatings from '@app/components/core/ShowRatings.vue'
@@ -51,8 +54,7 @@ export default defineComponent({
 	setup() {
 		return {
 			formatNumber,
-			calendar,
-			play
+			flash,
 		}
 	},
 	components: { ShowRatings, Avatar }

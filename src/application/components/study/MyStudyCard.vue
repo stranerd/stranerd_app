@@ -1,6 +1,6 @@
 <template>
 	<div
-		:class="`m-0  h-[9rem] cardPadding ${colorClass}  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-[1rem] box-border  p-5`"
+		:class="`m-0  h-[9.5rem] cardPadding ${colorClass}  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-[1rem] box-border  p-5`"
 	>
 		<div class="flex items-center justify-between w-full">
 			<div class="bg-faded_gray min-h-[57px] min-w-[57px] grid place-items-center rounded-md mr-5">

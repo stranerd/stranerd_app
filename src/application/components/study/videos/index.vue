@@ -21,7 +21,7 @@
 			slideClass="!w-3/6 !max-w-[17rem] !min-w-[15rem] !pr-3"
 		>
 			<template v-slot:default="{ item, index }">
-				<VideoCard :colorClass=" index  === 0 ? 'bg-butter_yellow' : 'bg-light_gray'" :item="item"
+				<VideoCard :colorClass=" index  === 0 ? 'bg-light_blue' : 'bg-light_gray'" :item="item"
 				/>
 
 			</template>
