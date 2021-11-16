@@ -11,6 +11,7 @@ export interface NoteFromModel extends NoteToModel {
 
 export interface NoteToModel {
 	title: string
+	description: string
 	tags: string[]
 	isHosted: boolean
 	link: string | null
