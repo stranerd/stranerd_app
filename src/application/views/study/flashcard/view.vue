@@ -3,9 +3,26 @@
 		<!-- TODO: Break into sections -->
 		<div class="bg-primary w-full min-h-[264px] flex flex-col justify-between items-center pt-12 pb-1">
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-5 mb-6">
-				Physics - Waves and Sounds (100l 1st semester exam)
+				Create a Flashcard set
 			</ion-text>
-	
+			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
+				<ion-text class="text-primary font-bold w-12">
+					TITLE
+				</ion-text>
+				<ion-input show-cancel-button="never" class="max-w-[1054px]  !h-14 " placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"></ion-input>
+			</div>
+			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
+				<ion-text class="text-primary font-bold w-12">
+					TAGS
+				</ion-text>
+				<ion-input show-cancel-button="never" class="max-w-[1054px]  !h-14 " placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"></ion-input>
+			</div>
+			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
+				<ion-text class="text-primary font-bold w-12">
+					PRICE
+				</ion-text>
+				<ion-input show-cancel-button="never" class="max-w-[1054px]  !h-14 " placeholder="Make it free or attach a price to it."></ion-input>
+			</div>
 
 			<div class="flex items-center w-full max-w-[25rem] justify-center">
 				<ion-radio-group class="flex w-full">
