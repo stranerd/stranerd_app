@@ -1,135 +1,132 @@
 <template>
 	<Justified>
 		<!-- TODO: Break into sections -->
-		<div class="bg-primary w-full min-h-[264px] flex flex-col justify-between items-center pt-12 pb-1">
-			<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-5 mb-6">
-				Create a Flashcard set
+		<div class="bg-primary w-full min-h-[150px] flex flex-col justify-center items-center pt-0 pb-1">
+			<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
+				Physics - Waves and Sounds (100l 1st semester exam)
 			</ion-text>
-			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
-				<ion-text class="text-primary font-bold w-12">
-					TITLE
+			<div class="flex items-center md:flex-row flex-col">
+				<div class="flex items-center mr-6">
+					<ShowRatings :rating="5" class="mr-3"/>
+					<ion-text class="text-white font-semibold">
+						(14 reviews)
+					</ion-text>
+				</div>
+				<ion-text class="text-faded_gray font-semibold">
+					leave a rating
 				</ion-text>
-				<ion-input show-cancel-button="never" class="max-w-[1054px]  !h-14 " placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"></ion-input>
+               
 			</div>
-			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
-				<ion-text class="text-primary font-bold w-12">
-					TAGS
-				</ion-text>
-				<ion-input show-cancel-button="never" class="max-w-[1054px]  !h-14 " placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"></ion-input>
-			</div>
-			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
-				<ion-text class="text-primary font-bold w-12">
-					PRICE
-				</ion-text>
-				<ion-input show-cancel-button="never" class="max-w-[1054px]  !h-14 " placeholder="Make it free or attach a price to it."></ion-input>
-			</div>
-
-			<div class="flex items-center w-full max-w-[25rem] justify-center">
-				<ion-radio-group class="flex w-full">
-					<ion-list-header>
-						<ion-label class="text-white font-bold text-base ">
-							Set privacy:
-						</ion-label>
-					</ion-list-header>
-
-					<ion-item class="w-full ion-iten-transparent">
-						<ion-radio value="public" class=" ion-white"></ion-radio>
-						<ion-label class="text-white font-bold text-base ml-3 ion-white">Public</ion-label>
-					</ion-item>
-
-					<ion-item class="w-full ion-iten-transparent">
-						<ion-radio value="private" class=" ion-white"></ion-radio>
-						<ion-label class="text-white font-bold text-base ml-3 ion-white">Private</ion-label>
-					</ion-item>
-				</ion-radio-group>
-			</div>
-			
-
-
 		</div>
 
-		<div class="lg:w-8/12 w-full px-4 mx-auto mt-8">
-			<ion-reorder-group  disabled="false">
+		<div :class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 bg-white']" ref="screen">
+			<div class="flex items-center text-center justify-center h-96 custom-shadow w-full text-3xl p-4 max-w-[60rem]">
+				What will an air bubble in water act like?
+			</div>
 
-				<ion-reorder class="flex flex-col bg-light_gray p-4 rounded-xl mb-4" v-for="n in 5" :key="n">
-					<div class="flex w-full items-center justify-between">
-						<ion-text class="text-dark_gray font-bold">Card {{n}}</ion-text>
-						<div class="flex">
-							<ion-icon
-								class="text-dark_gray"
-								:icon='trash'
-							/>
-						</div>
-					</div>
-
-					<div class="flex w-full md:flex-row flex-col gap-4 h-80 md:h-auto">
-						<ion-textarea class="ion-bg-white ion-rounded-xl rounded-xl h-40 md:w-1/2 md:mr-4 w-full" placeholder="Front ( Questions or Words) "/>
-						<ion-textarea class="ion-bg-white ion-rounded-xl rounded-xl h-40 md:w-1/2 w-full" placeholder="Back ( Answers or Definitions or Translations )"/>
-					</div>
-
-				</ion-reorder>
-
-			</ion-reorder-group>
-
-			<div class="w-full flex bg-light_gray items-center p-8 rounded-xl text-lg text-icon_inactive justify-center font-bold my-4 cursor-pointer">
+			<div class="w-full flex items-center justify-between my-8 max-w-[30rem] mx-auto">
 				<ion-icon
-					:icon="add"
-					class="text-2xl"
+					:icon="play"
+					class="text-icon_inactive text-xl cursor-pointer"
 				/>
-				<ion-text>
-					ADD CARD
-				</ion-text>
-			</div>
-
-			<div class="w-full flex justify-end mb-8">
-				<ion-button class="btn-primary btn-lg !pr-0 ">
-					Create
-				</ion-button>
+				<div class="flex items-center gap-5">
+					<ion-icon
+						:icon="chevronBack"
+						class="text-icon_inactive text-xl cursor-pointer"
+					/>
+					<ion-text class="mx-4 text-icon_inactive">
+						<b>12</b> of <b>50</b>
+					</ion-text>
+					<ion-icon
+						:icon="chevronForward"
+						class="text-icon_inactive text-xl cursor-pointer"
+					/>
+				</div>
+				<ion-icon
+					v-if="!isFullscreen"
+					:icon="scan"
+					@click="enter()"
+					class="text-icon_inactive text-xl cursor-pointer"
+				/>
+				<ion-icon
+					v-else
+					:icon="contract"
+					@click="exit()"
+					class="text-icon_inactive text-xl cursor-pointer"
+				/>
 			</div>
 		</div>
 
-    
+		<div class="footer-shadow py-4">
+			<div class="lg:w-8/12 w-full px-4 mx-auto flex items-center justify-between">
+				<div class="flex">
+					<Avatar :size="28" class="mr-3"/>
+					<ion-text class="text-icon_inactive">created by <b>Timmy Neutron</b></ion-text>
+				</div>
+
+				<div class="flex items-center">
+					<ion-icon
+						:icon="add"
+						class="text-icon_inactive text-2xl cursor-pointer mx-2"
+					/>
+					<ion-icon
+						:icon="pencil"
+						class="text-icon_inactive text-xl cursor-pointer mx-2"
+					/>
+					<ion-icon
+						:icon="bookmark"
+						class="text-icon_inactive text-xl cursor-pointer mx-2"
+					/>
+					<ion-icon
+						:icon="shareSocial"
+						class="text-icon_inactive text-xl cursor-pointer mx-2"
+					/>
+				</div>
+			</div>
+		</div>
+       
+
 	</Justified>
 </template>
 
 <script lang="ts">
-import { 
-    
-	IonItem, 
-	IonLabel, 
-	IonListHeader, 
-	IonRadio, 
-	IonRadioGroup,
-	IonTextarea,
-	IonReorderGroup,
-	IonReorder
-} from '@ionic/vue'
 import Justified from '@app/layouts/Justified.vue'
-import { trash, add } from 'ionicons/icons'
+import { play, add, scan, chevronBack, chevronForward, pencil, bookmark, shareSocial, contract
+} from 'ionicons/icons'
+import ShowRatings from '@root/application/components/core/ShowRatings.vue'
+import Avatar from '@root/application/components/core/Avatar.vue'
 
 export default {
 	name:'StudyExploreTopSection',
-	displayName: 'Create Flashcard',
-	components: {   
+	displayName: 'Flashcard Set',
+	components: {
 		Justified,
-		IonItem, 
-		IonLabel, 
-		IonListHeader, 
-		IonRadio, 
-		IonRadioGroup,
-		IonTextarea,
-		IonReorderGroup,
-		IonReorder 
+		ShowRatings,
+		Avatar
 	},
 	setup(){
 		return{
-			trash, add
+			play, add, scan, chevronBack, chevronForward, pencil, contract, bookmark, shareSocial, 
 		}
 	}
 }
 </script>
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useFullscreen  } from '@vueuse/core'
+const screen = ref(null)
+const { isFullscreen, enter, exit, toggle } = useFullscreen(screen)
+</script>
+
 <style lang="scss" scoped>
+.footer-shadow{
+    box-shadow: 0px -5px 5px rgba(139, 158, 177, 0.05);
+}
+.custom-shadow{
+    box-shadow: 0px 0px 50px rgba(77, 92, 111, 0.1);
+border-radius: 24px;
+}
 .ion-iten-transparent{
     --background:transparent;
 }
