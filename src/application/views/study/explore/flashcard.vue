@@ -11,7 +11,7 @@ import ExploreFlashcard from '@app//components/study/explore/ExploreFlashcard.vu
 
 export default defineComponent({
 	name: 'ExploreFlashCard',
-	displayName: 'Profile',
+	displayName: 'Explore',
 	components: {  ExploreWrapper, ExploreFlashcard }
 })
 </script>

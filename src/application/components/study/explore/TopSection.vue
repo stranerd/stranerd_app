@@ -1,6 +1,6 @@
 <template>
 	<div class="bg-primary w-full min-h-[264px] flex flex-col justify-between items-center pt-12">
-		<ion-text class="heading lg:text-xl font-bold text-white text-center mt-5">
+		<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-5">
 			Explore thousands of study materials
 		</ion-text>
 		<ion-searchbar show-cancel-button="never" class="max-w-[1054px] lg:w-7/12 !h-16 " placeholder="Search by subjects, topics and related keywords"></ion-searchbar>
