@@ -71,7 +71,7 @@
 
 			</ion-reorder-group>
 
-			<div class="w-full flex bg-light_gray items-center p-8 rounded-xl text-lg text-icon_inactive justify-center font-bold my-4">
+			<div class="w-full flex bg-light_gray items-center p-8 rounded-xl text-lg text-icon_inactive justify-center font-bold my-4 cursor-pointer">
 				<ion-icon
 					:icon="add"
 					class="text-2xl"
