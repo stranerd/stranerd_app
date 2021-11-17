@@ -3,7 +3,6 @@ import { Media } from '@modules/core'
 
 export interface AnswerFromModel extends AnswerToModel {
 	id: string
-	coins: number
 	tags: string[]
 	createdAt: number
 	updatedAt: number

@@ -88,7 +88,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonHeader, IonIcon, IonToolbar } from '@ionic/vue'
-import { close, home, notifications, school, search } from 'ionicons/icons'
+import { add, close, home, notifications, school, search } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import Avatar from '@app/components/core/Avatar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
@@ -102,6 +102,7 @@ export default defineComponent({
 			showSearch.value = !showSearch.value
 		}
 		return {
+			add,
 			close,
 			showSearch,
 			toggleSearch,

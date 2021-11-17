@@ -28,10 +28,6 @@ export interface UserRoles {
 
 export interface UserAccount {
 	score: number
-	coins: {
-		bronze: number
-		gold: number
-	}
 	meta: {
 		questions: number
 		answers: number

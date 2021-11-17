@@ -31,12 +31,4 @@ export class MetaRepository implements IMetaRepository {
 			}
 		}
 	}
-
-	async buyCoinsWithStripe (data: { amount: number; currency: string; gold: number; bronze: number }) {
-		return await this.dataSource.buyCoinsWithStripe(data)
-	}
-
-	async verifyStripePayment (data: { intentId: string }) {
-		return await this.dataSource.verifyStripePayment(data)
-	}
 }

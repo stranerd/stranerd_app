@@ -81,7 +81,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonButtons, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue'
-import { arrowBackOutline, close, home, notifications, search } from 'ionicons/icons'
+import { add, arrowBackOutline, close, home, notifications, search } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import Avatar from '@app/components/core/Avatar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
@@ -97,6 +97,7 @@ export default defineComponent({
 		}
 
 		return {
+			add,
 			showSearch,
 			toggleSearch,
 			home,
