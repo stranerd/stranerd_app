@@ -2,7 +2,7 @@
 	<!-- <ion-card>	   -->
 	<div class="h-full flex items-start">
 		<div class="card-arrow border" :class="secondCard ? 'border-light_blue' : 'border-white'"></div>
-		<div class="card relative w-44 lg:w-64 rounded-tl-none rounded-xl h-full flex items-center" :class="secondCard ? 'bg-light_blue' : 'bg-white'">
+		<div class="card relative w-44 lg:w-80 rounded-tl-none rounded-xl h-full flex items-center" :class="secondCard ? 'bg-light_blue' : 'bg-white'">
 			<div class="card-body px-5 py-8">
 				<div class="my-3" v-for="(paragraph, i) in testimony.testimonies" :key="i">
 					<p class="testimony text-xs lg:text-base font-normal">
