@@ -6,4 +6,6 @@ export interface InstitutionFromModel extends InstitutionToModel {
 
 export interface InstitutionToModel {
 	name: string
+	isSchool: boolean
+	isGateway: boolean
 }
