@@ -94,6 +94,20 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-light-contrast-rgb: 0, 0, 0;
 	--ion-color-light-shade: #d7d8da;
 	--ion-color-light-tint: #f5f6f9;
+
+	
+}
+// custom colors
+.ion-white{
+	--color: white !important;
+	--color-checked: white !important;
+	
+}
+.ion-bg-white{
+	--background: white !important;
+}
+.ion-rounded-xl{
+    --border-radius:0.75rem !important;
 }
 
 .modal-class {
@@ -114,6 +128,23 @@ http://ionicframework.com/docs/theming/ */
 	}
 }
 
+.btn-outline{
+	--background: transparent;
+	--padding-top: 1.4rem;
+	--padding-bottom: 1.4rem;
+	--padding-start: 1.5rem;
+	--padding-end: 1.5rem;
+	--color: white;
+	--box-shadow: none;
+	--border-radius: 0.75rem;
+	--border-width: 1px;
+	--border-style: solid;
+	--border-color: #4D5C6F;
+	font-weight: 700;
+	text-transform: capitalize !important;
+	letter-spacing: 0.03em !important;
+	
+}
 .btn-primary {
 	--background: #546DD3;
 	--padding-top: 1rem;
@@ -123,19 +154,36 @@ http://ionicframework.com/docs/theming/ */
 	--color: white;
 	--box-shadow: none;
 	--border-radius: 0.5rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	color: white;
+	box-shadow: none;
+	border-radius: 0.5rem;
 	font-weight: 700;
+	text-transform: capitalize !important;
+	letter-spacing: 0.03em !important;
+}
+.btn-lg {
+	--padding-top: 1.5rem;
+	--padding-bottom: 1.5rem;
+	--padding-start: 4.5rem;
+	--padding-end: 4.5rem;
 }
 
 .btn-secondary {
 	--background: #4D5C6F;
-	--padding-top: 1rem;
-	--padding-bottom: 1rem;
+	--padding-top: 1.4rem;
+	--padding-bottom: 1.4rem;
 	--padding-start: 1.5rem;
 	--padding-end: 1.5rem;
 	--color: white;
 	--box-shadow: none;
 	--border-radius: 0.5rem;
 	font-weight: 700;
+	text-transform: capitalize !important;
+	letter-spacing: 0.03em !important;
 }
 
 ion-input {

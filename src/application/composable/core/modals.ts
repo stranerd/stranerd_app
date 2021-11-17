@@ -5,7 +5,7 @@ import CreateSession from '@app/components/modals/RequestSession.vue'
 import ReportUser from '@app/components/modals/reports/ReportUser.vue'
 import ReportQuestion from '@app/components/modals/reports/ReportQuestion.vue'
 import ReportAnswer from '@app/components/modals/reports/ReportAnswer.vue'
-import UploadImage from '@root/application/components/modals/media/UploadProfileImage.vue'
+import UploadImage from '@app/components/modals/media/UploadProfileImage.vue'
 
 type ScheduleTypes = 'CreateSchedule'
 type UploadTypes = 'UploadImage'

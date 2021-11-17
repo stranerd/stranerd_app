@@ -17,7 +17,7 @@
 import { defineComponent } from 'vue'
 import { IonSelect, IonSelectOption } from '@ionic/vue'
 import SideLeaderboardList from '@app/components/users/leaderboard/SideLeaderboardList.vue'
-import { time, times } from '@root/application/composable/users/leaderboard'
+import { time, times } from '@app/composable/users/leaderboard'
 
 export default defineComponent({
 	name: 'SideLeaderboard',
