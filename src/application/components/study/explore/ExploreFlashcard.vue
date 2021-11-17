@@ -49,6 +49,9 @@ export default {
 </script>
 
 <style scoped>
+.segment-button-checked{
+    color: white !important
+}
 ion-select{
    --background: #F7F7FC;  
    background: #F7F7FC;  
