@@ -87,12 +87,15 @@ export default defineComponent({
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
 .card-arrow {
 	height: 0;
 	width: 0;
-	/* border: 10px solid #ffffff; */
 	border-width: 10px;
 	border-bottom-color: transparent;
 	border-left-color: transparent;
+}
+.testimony {
+	font-family: 'DM Sans', sans-serif;
 }
 </style>
