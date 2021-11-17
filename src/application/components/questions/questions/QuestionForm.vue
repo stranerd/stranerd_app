@@ -1,12 +1,12 @@
 <template>
 	<form class="px-2" @submit.prevent="submit">
-		<div v-if="!disabled.body" class="mt-3 border border-faded_gray rounded-lg py-5 px-1">
+		<div class="mt-3 border border-faded_gray rounded-lg py-5 px-1">
 			<IonTextarea v-model="factory.body" class="bg-white border-0 focus:outline-none w-full"
 				placeholder="Write your question here and make sure it is explained in full detail."
 				rows="9" />
 		</div>
 
-		<div v-if="!disabled.attachments"
+		<div
 			class="mt-3 rounded-lg py-5 px-1 text-icon_inactive relative bg-light_gray flex flex-col justify-center items-center">
 			<IonIcon :icon="image" class="text-[32px]" />
 			<input
@@ -31,11 +31,11 @@
 			</div>
 		</div>
 
-		<div v-if="!disabled.subjectId" class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex">
+		<div class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex">
 			<SelectSubject v-model:subject-id="factory.subjectId" :show-all="false" />
 		</div>
 
-		<div v-if="!disabled.tags" class="py-2 pl-6 mt-3 bg-light_gray rounded-lg flex flex-col">
+		<div class="py-2 pl-6 mt-3 bg-light_gray rounded-lg flex flex-col">
 			<IonInput v-model="tag" class="w-full font-medium" placeholder="Add related tags">
 			</IonInput>
 			<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
@@ -46,15 +46,6 @@
 					</span>
 				</span>
 			</div>
-		</div>
-
-		<div v-if="!disabled.coins" class="py-1 px-2 mt-3 bg-light_gray rounded-lg">
-			<IonSelect v-model="factory.coins" class="w-full  font-medium"
-				interface="action-sheet" placeholder="Set a reward for Best Answers">
-				<IonSelectOption v-for="coin in coins" :key="coin" :value="coin">
-					{{ coin }} Bronze Coins
-				</IonSelectOption>
-			</IonSelect>
 		</div>
 
 		<div class="flex mt-7 text-white">
@@ -79,20 +70,17 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { IonIcon, IonInput, IonRippleEffect, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
+import { IonIcon, IonInput, IonRippleEffect, IonTextarea } from '@ionic/vue'
 import { close, image } from 'ionicons/icons'
 import { useMultipleFileInputs, useTags } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
-import { useAccountModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'QuestionForm',
 	components: {
 		IonTextarea,
 		IonIcon,
-		IonSelect,
-		IonSelectOption,
 		IonInput,
 		IonRippleEffect,
 		SelectSubject
@@ -100,10 +88,6 @@ export default defineComponent({
 	props: {
 		factory: {
 			type: Object as PropType<QuestionFactory>,
-			required: true
-		},
-		coins: {
-			type: Array,
 			required: true
 		},
 		submit: {
@@ -117,16 +101,9 @@ export default defineComponent({
 		error: {
 			type: String,
 			required: true
-		},
-		disabled: {
-			type: Object,
-			required: false,
-			default: () => ({})
 		}
 	},
 	setup (props) {
-		const { openBuyCoins } = useAccountModal()
-
 		const { tag, removeTag } = useTags(
 			(tag: string) => props.factory.addTag(tag),
 			(tag: string) => props.factory.removeTag(tag)
@@ -138,8 +115,7 @@ export default defineComponent({
 
 		return {
 			image, close,
-			tag, removeTag, catchAttachments,
-			openBuyCoins
+			tag, removeTag, catchAttachments
 		}
 	}
 })

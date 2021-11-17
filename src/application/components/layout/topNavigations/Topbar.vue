@@ -11,28 +11,9 @@
 					<ion-icon :icon="notifications" class="text-2xl text-icon_inactive"></ion-icon>
 				</router-link>
 
-				<div class="flex flex-row items-center px-3 w-[75%] mx-auto justify-center">
-					<div class="py-1 px-3 w-full bg-[#8B9EB1] flex rounded-xl flex-row items-center">
-						<div class="w-1/3 flex flex-row items-center">
-							<img class="inline h-6 mr-2" src="@app/assets/images/icons/bronze.svg" />
-							<span class="font-semibold text-xs text-white ">{{
-								isLoggedIn ? user?.account.coins.bronze : '-'
-							}}</span>
-						</div>
-						<div class="w-1/3 flex flex-row items-center justify-center">
-							<ion-icon :icon="add" class="text-base cursor-pointer text-white"
-								@click="isLoggedIn ? buyCoins() : null"></ion-icon>
-						</div>
-						<div class="w-1/3 flex flex-row-reverse items-center">
-							<span class="font-semibold text-xs text-white ">{{
-								isLoggedIn ? user?.account.coins.gold : '-'
-							}}</span>
-							<img class="inline h-6 mr-2" src="@app/assets/images/icons/gold.svg" />
-						</div>
-					</div>
-				</div>
+				<div class="flex flex-row items-center px-3 w-[75%] mx-auto justify-center" />
 
-				<router-link to="/users/leaderboard" slot="end" class="flex items-center justify-end mr-4">
+				<router-link slot="end" class="flex items-center justify-end mr-4" to="/users/leaderboard">
 					<ion-icon :icon="school" class="text-2xl text-icon_inactive"></ion-icon>
 				</router-link>
 				<div slot="end" class="flex items-center justify-end ">
@@ -59,27 +40,7 @@
 
 			</div>
 
-			<div class="flex flex-row items-center px-6 w-2/4 justify-center">
-				<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
-					<div class="w-1/3 flex flex-row items-center">
-						<Coins :gold="false" :size="28" class="mr-2 inline" />
-						<span class="font-semibold text-sm text-dark_grey ">{{
-							isLoggedIn ? user?.account.coins.bronze : '-'
-						}}</span>
-					</div>
-					<div class="w-1/3 flex flex-row items-center justify-center">
-						<ion-icon :icon="add" class="text-3xl cursor-pointer text-icon_inactive"
-							@click="isLoggedIn ? buyCoins() : null"></ion-icon>
-
-					</div>
-					<div class="w-1/3 flex flex-row-reverse items-center">
-						<span class="font-semibold text-sm text-dark_grey ">{{
-							isLoggedIn ? user?.account.coins.gold : '-'
-						}}</span>
-						<Coins :gold="true" :size="28" class="mr-2 inline" />
-					</div>
-				</div>
-			</div>
+			<div class="flex flex-row items-center px-6 w-2/4 justify-center" />
 
 
 			<div class="flex flex-row items-center justify-end gap-9 w-1/4">
@@ -119,28 +80,7 @@
 					<avatar :id="user?.id" :size="26" :src="user?.avatar" />
 				</router-link>
 			</div>
-			<div class="w-1/4 flex flex-row items-center py-1 px-2">
-				<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
-					<div class="w-1/3 flex flex-row items-center">
-						<Coins :gold="false" :size="20" class="mr-2 inline" />
-						<span class="font-semibold text-sm text-dark_grey ">{{
-							isLoggedIn ? user?.account.coins.bronze : '-'
-						}}</span>
-					</div>
-					<div class="w-1/3 flex flex-row items-center justify-center">
-						<ion-icon :icon="add" class="text-xl cursor-pointer"
-							@click=" isLoggedIn ? buyCoins() : null"></ion-icon>
-					</div>
-					<div class="w-1/3 flex flex-row-reverse items-center">
-						<span class="font-semibold text-sm text-dark_grey ">{{
-							isLoggedIn ? user?.account.coins.gold : '-'
-						}}</span>
-						<Coins :gold="true" :size="20" class="mr-2 inline" />
-
-
-					</div>
-				</div>
-			</div>
+			<div class="w-1/4 flex flex-row items-center py-1 px-2" />
 		</div>
 	</div>
 </template>
@@ -148,31 +88,23 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonHeader, IonIcon, IonToolbar } from '@ionic/vue'
-import { add, close, home, notifications, school, search } from 'ionicons/icons'
+import { close, home, notifications, school, search } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import Avatar from '@app/components/core/Avatar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
-import Coins from '@app/components/core/Coins.vue'
-import { useAccountModal } from '@app/composable/core/modals'
 
 export default defineComponent({
-	components: { IonIcon, Avatar, SearchBar, Coins, IonHeader, IonToolbar },
+	components: { IonIcon, Avatar, SearchBar, IonHeader, IonToolbar },
 	setup () {
-		const { user, isLoggedIn } = useAuth()
+		const { user } = useAuth()
 		const showSearch = ref(false)
 		const toggleSearch = () => {
 			showSearch.value = !showSearch.value
 		}
-		const buyCoins = () => {
-			useAccountModal().openBuyCoins()
-		}
 		return {
-			buyCoins,
-			isLoggedIn,
 			close,
 			showSearch,
 			toggleSearch,
-			add,
 			home,
 			user,
 			search,

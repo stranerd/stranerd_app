@@ -20,7 +20,6 @@
 					Ask questions to help with your homework and studies.
 				</h3>
 				<QuestionForm
-					:coins="coins"
 					:error="error"
 					:factory="factory"
 					:loading="loading"
@@ -46,8 +45,8 @@ export default defineComponent({
 	components: { DashboardLayout, QuestionForm },
 	middlewares: ['isAuthenticated'],
 	setup () {
-		const { factory, error, loading, coins, createQuestion } = useCreateQuestion()
-		return { factory, error, loading, coins, createQuestion }
+		const { factory, error, loading, createQuestion } = useCreateQuestion()
+		return { factory, error, loading, createQuestion }
 	}
 })
 </script>
