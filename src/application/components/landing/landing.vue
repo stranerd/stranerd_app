@@ -1,13 +1,13 @@
 <template>
 	<div class="w-full pt-14 relative">
 		<div class="w-full relative">
-			<div class="landing-section w-full h-full relative">
+			<div class="landing-section h-72 sm:h-80 w-full relative">
 				<div class="container h-full mx-auto">
-					<div class="py-12 px-5 md:py-32 md:px-10 h-full">
+					<div class="py-5 px-5 md:py-32 md:px-8 h-full">
 						<div class="flex items-start justify-end h-full">
 							<div class="w-full md:w-1/2 h-full">
-								<div class="flex items-end justify-start md:justify-center h-full md:px-12">
-									<img src="@app/assets/images/landing-imgs/mobile-group-cards.png" class="w-2/3 md:hidden" alt="">
+								<div class="flex items-end justify-center h-full md:px-12">
+									<img src="@app/assets/images/landing-imgs/mobile-group-cards.png" class="w-auto h-full md:hidden" alt="">
 									<img src="@app/assets/images/landing-imgs/desktop-group-cards.png" class="w-full -mb-10 hidden md:inline-block" alt="">
 								</div>
 							</div>
@@ -17,13 +17,13 @@
 			</div>
 			<div class="bg-transparent relative md:absolute top-0 left-0 w-full h-full">
 				<div class="container mx-auto h-full">
-					<div class="py-32 px-10 h-full">
+					<div class="py-10 px-5 md:py-32 md:px-8 h-full">
 						<div class="flex items-center justify-start h-full">
-							<div class="text-dark_gray text-center md:text-left md:text-white w-full md:w-1/2">
-								<h1 class="text-4xl md:text-5xl text-center md:text-left font-extrabold max-w-xs md:max-w-sm mx-auto md:mx-0">
+							<div class="text-dark text-center md:text-left md:text-white w-full md:w-1/2">
+								<h1 class="text-4xl md:text-5xl text-center md:text-left font-black max-w-xs md:max-w-sm mx-auto md:mx-0">
 									Study smarter with Stranerd
 								</h1>
-								<div class="my-14 font-medium text-sm">
+								<div class="my-8 md:my-14 font-bold text-xs md:text-sm">
 									<p class="leading-loose text-center md:text-left">Improve your results through:</p>
 									<ul class="list-disc ml-5">
 										<li class="leading-loose max-w-max md:w-full mx-auto md:mx-0">
@@ -37,7 +37,7 @@
 										</li>
 									</ul>
 								</div>
-								<router-link to="" class="md:border-2 md:border-white rounded-md block bg-primary md:bg-transparent text-white text-xl text-center font-medium mx-auto md:mx-0 w-60 py-2.5">
+								<router-link to="" class="md:border-2 md:border-white rounded-md block bg-primary md:bg-transparent text-white text-xs text-center font-medium mx-auto md:mx-0 w-60 py-2.5">
 									Get Started
 								</router-link>
 							</div>
@@ -48,7 +48,7 @@
 		</div>
 		<div class="lower-section bg-butter_yellow px-3 py-10">
 			<div class="max-w-2xl text-center text-dark_gray mx-auto">
-				<p class="font-bold text-3xl">
+				<p class="font-bold text-lg md:text-3xl">
 					87% of students who use Stranerd confirm increased grades and better study habits
 				</p>
 			</div>
@@ -65,10 +65,19 @@ export default {
 <style scoped>
 .landing-section {
   background: url("~@app/assets/images/backgrounds/home/landing-bg.jpg")
-    no-repeat center right 20% / cover;
+    no-repeat center right 20% / auto 100%;
 }
-@media (min-width: 540px) {
-.landing-section {
+@media (min-width: 574px) {
+	.landing-section {
+	background: url("~@app/assets/images/backgrounds/home/landing-bg.jpg")
+    no-repeat center right 20% / cover;
+	/* height: 80vh; */
+}	
+}	
+@media (min-width: 768px) {
+	.landing-section {
+	background: url("~@app/assets/images/backgrounds/home/landing-bg.jpg")
+    no-repeat center right 20% / cover;
 	height: 80vh;
 }	
 }

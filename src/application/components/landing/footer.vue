@@ -1,6 +1,6 @@
 <template>
 	<footer>
-		<div class="w-full bg-main_dark">
+		<div class="w-full bg-main_dark md:px-8 px-4">
 			<div class="container mx-auto px-3 py-10">
 				<div class="text-white">
 					<div class="flex items-stretch flex-wrap lg:flex-nowrap gap-10 my-10">
@@ -8,7 +8,7 @@
 							<div class="w-1/2 flex-auto">
 								<div class="">
 									<h2 class="footer-title font-bold">Company</h2>
-									<ul class="footer-links-contain">
+									<ul class="footer-links-contain text-sm">
 										<li class="my-10">
 											<router-link to="" class="font-light">About us</router-link>
 										</li>
@@ -30,7 +30,7 @@
 							<div class="w-1/2 flex-auto">
 								<div class="">
 									<h2 class="footer-title font-bold">Community</h2>
-									<ul class="footer-links-contain">
+									<ul class="footer-links-contain text-sm">
 										<li class="my-10">
 											<router-link to="" class="font-light">Ask a question</router-link>
 										</li>
@@ -54,7 +54,7 @@
 							<div class="w-1/2 flex-auto">
 								<div class="">
 									<h2 class="footer-title font-bold">About</h2>
-									<ul class="footer-links-contain">
+									<ul class="footer-links-contain text-sm">
 										<li class="my-10">
 											<router-link to="" class="font-light">Company</router-link>
 										</li>
@@ -76,7 +76,7 @@
 							<div class="w-1/2 flex-auto">
 								<div class="">
 									<h2 class="footer-title font-bold">Help</h2>
-									<ul class="footer-links-contain">
+									<ul class="footer-links-contain text-sm">
 										<li class="my-10">
 											<router-link to="" class="font-light">FAQs</router-link>
 										</li>
@@ -91,7 +91,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="flex flex-col sm:flex-row items-center justify-between">
+					<div class="flex flex-col sm:flex-row md:items-center justify-between">
 						<div class="my-10">
 							<h2 class="text-primary mb-8">Language</h2>
 							<select name="language" id="language" class="bg-transparent pr-4">

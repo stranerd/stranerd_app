@@ -32,8 +32,6 @@ import Landing from '@app/components/landing/landing.vue'
 
 export default defineComponent({
 	name: 'Index',
-	// name: 'Landing',
-	// layout: 'home',
 	components: {
 		Footer,
 		Navigation,

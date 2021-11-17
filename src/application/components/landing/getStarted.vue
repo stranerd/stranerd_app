@@ -1,8 +1,8 @@
 <template>
-	<div class="w-full bg-light_gray">
-		<div class="text-center container mx-auto px-3 py-10">
+	<div class="w-full bg-light_gray md:px-8 px-4">
+		<div class="text-center container px-3 mx-auto py-10">
 			<div class="text-dark_gray">
-				<h2 class="max-w-xl mx-auto font-bold text-3xl my-10">
+				<h2 class="max-w-xl mx-auto font-bold text-xl md:text-3xl my-10">
 					Stranerd is reducing the friction between students and their success
 				</h2>
 				<div class="flex items-stretch flex-wrap lg:flex-nowrap gap-4 lg:gap-10 my-10">
@@ -39,7 +39,7 @@
 						</div>
 					</div>
 				</div>
-				<router-link to="" class="bg-primary rounded-md block text-white text-xl text-center font-medium w-60 py-2.5 my-10 mx-auto">
+				<router-link to="" class="bg-primary rounded-md block text-white text-sm text-center font-bold w-60 py-3 my-10 mx-auto">
 					Get Started
 				</router-link>
 			</div>
