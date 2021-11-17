@@ -7,20 +7,20 @@
 
 		<div
 			class="col-span-12 mb-0.5 sm:place-content-center md:col-start-2 md:col-end-12 lg:col-start-3 lg:col-end-11 lg:justify-center lg:items-center flex flex-row  px-3 headings gap-5 text-faded_gray font-bold  whitespace-normal overflow-x-auto">
-			<router-link :to="`/study/explore`" class="pb-2 pr-3 cursor-pointer"
+			<router-link :to="`/study/testprep/explore`" class="pb-2 pr-3 cursor-pointer"
 				exact-active-class="border-b-4 text-white border-white">
 				Test Prep
 			</router-link>
-			<router-link :to="`/study/explore/flashcard`" class="pb-2 pr-3 cursor-pointer"
+			<router-link :to="`/study/flashcard/explore`" class="pb-2 pr-3 cursor-pointer"
 				exact-active-class="border-b-4 text-white border-white">
 				Flashcards
 			</router-link>
-			<router-link :to="`/study/explore/Notes`"
+			<router-link :to="`/study/note/explore`"
 				class="pb-2 pr-3 cursor-pointer"
 				exact-active-class="border-b-4 text-white border-white">
 				Notes
 			</router-link>
-			<router-link :to="`/study/explore/videos`"
+			<router-link :to="`/study/video/explore`"
 				class="pb-2 pr-3 cursor-pointer"
 				exact-active-class="border-b-4 text-white border-white">
 				Videos

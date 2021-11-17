@@ -7,7 +7,7 @@
 
 			<router-link v-if="true && isLoggedIn"
 				class="text-primary normalText flex items-center font-bold "
-				to="#">
+				to="/study/testprep/explore">
 				<span>view all</span>
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>

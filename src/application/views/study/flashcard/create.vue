@@ -104,11 +104,11 @@ import {
 	IonReorderGroup,
 	IonReorder
 } from '@ionic/vue'
-import Justified from '@app/layouts/Justified.vue'
+import Justified from '@root/application/layouts/Justified.vue'
 import { trash, add } from 'ionicons/icons'
 
 export default {
-	name:'StudyExploreTopSection',
+	name:'Create Flashcard',
 	displayName: 'Create Flashcard',
 	components: {   
 		Justified,

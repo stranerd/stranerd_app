@@ -19,8 +19,8 @@
 			</div>
 		</div>
 
-		<div :class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 bg-white']" ref="screen">
-			<div class="flex items-center text-center justify-center h-96 custom-shadow w-full text-3xl p-4 max-w-[60rem]">
+		<div :class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']" ref="screen">
+			<div class="flex items-center text-center justify-center h-96 custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto">
 				What will an air bubble in water act like?
 			</div>
 
@@ -57,18 +57,15 @@
 			</div>
 		</div>
 
-		<div class="footer-shadow py-4">
-			<div class="lg:w-8/12 w-full px-4 mx-auto flex items-center justify-between">
+		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
+			<div class="lg:w-8/12 max-w-[60rem] w-full px-4 mx-auto flex items-center justify-between">
 				<div class="flex">
-					<Avatar :size="28" class="mr-3"/>
-					<ion-text class="text-icon_inactive">created by <b>Timmy Neutron</b></ion-text>
+					<Avatar :size="28" class="mx-2"/>
+					<ion-text class="text-icon_inactive"> by <b>Timmy</b></ion-text>
 				</div>
 
 				<div class="flex items-center">
-					<ion-icon
-						:icon="add"
-						class="text-icon_inactive text-2xl cursor-pointer mx-2"
-					/>
+			
 					<ion-icon
 						:icon="pencil"
 						class="text-icon_inactive text-xl cursor-pointer mx-2"
@@ -90,7 +87,7 @@
 </template>
 
 <script lang="ts">
-import Justified from '@app/layouts/Justified.vue'
+import Justified from '@root/application/layouts/Justified.vue'
 import { play, add, scan, chevronBack, chevronForward, pencil, bookmark, shareSocial, contract
 } from 'ionicons/icons'
 import ShowRatings from '@root/application/components/core/ShowRatings.vue'

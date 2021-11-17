@@ -12,7 +12,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import DashboardLayout from '@app/layouts/Dashboard.vue'
+import DashboardLayout from '@root/application/layouts/Dashboard.vue'
 import MyStudy from '@root/application/components/study/MyStudy.vue'
 import StudyTools from '@app/components/study/studyTools/index.vue'
 import TestPrep from '@app/components/study/testPrep/index.vue'

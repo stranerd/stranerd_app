@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import DashboardLayout from '@app/layouts/Dashboard.vue'
+import DashboardLayout from '@root/application/layouts/Dashboard.vue'
 import QuestionsList from '@app/components/questions/questions/QuestionsList.vue'
 
 export default defineComponent({
