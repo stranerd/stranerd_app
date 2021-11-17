@@ -13,7 +13,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
-import DashboardLayout from '@app/layouts/Dashboard.vue'
+import DashboardLayout from '@root/application/layouts/Dashboard.vue'
 import BalanceCard from '@app/components/users/wallet/BalanceCard.vue'
 import TransactionHistory from '@app/components/users/wallet/TranscractionHistory.vue'
 
