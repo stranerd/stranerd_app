@@ -8,7 +8,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import DashboardLayout from '@app/layouts/Dashboard.vue'
+import DashboardLayout from '@root/application/layouts/Dashboard.vue'
 import RecentQuestions from '@app/components/dashboard/RecentQuestions.vue'
 import RecentTransaction from '@app/components/dashboard/RecentTransactions.vue'
 

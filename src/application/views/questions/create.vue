@@ -37,7 +37,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import DashboardLayout from '@app/layouts/Dashboard.vue'
+import DashboardLayout from '@root/application/layouts/Dashboard.vue'
 import QuestionForm from '@app/components/questions/questions/QuestionForm.vue'
 import { useCreateQuestion } from '@app/composable/questions/questions'
 

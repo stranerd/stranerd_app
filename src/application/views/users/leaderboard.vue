@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
+import Justified from '@root/application/layouts/Justified.vue'
 import Leaderboard from '@app/components/users/leaderboard/Leaderboard.vue'
 
 export default defineComponent({

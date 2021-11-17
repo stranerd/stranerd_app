@@ -24,6 +24,7 @@
 		"@stranerd/validate": "^1.6.0",
 		"@stripe/stripe-js": "^1.21.1",
 		"@vue-stripe/vue-stripe": "^4.2.8",
+		"@vueuse/core": "^6.9.1",
 		"axios": "^0.24.0",
 		"cookie": "^0.4.1",
 		"core-js": "^3.19.1",
