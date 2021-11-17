@@ -1,8 +1,7 @@
-import { computed, Ref, ref } from 'vue'
+import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { AddSession, BeginSession, CancelSession, EndSession, SessionFactory } from '@modules/sessions'
 import { CreateReview, UserBio } from '@modules/users'
-import { useAuth } from '@app/composable/auth/auth'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useSessionModal } from '@app/composable/core/modals'
 import { Alert } from '@app/composable/core/notifications'
@@ -14,22 +13,16 @@ export const setNewSessionTutorIdBio = (data: { id: string, user: UserBio }) => 
 }
 
 export const useCreateSession = () => {
-	const { user } = useAuth()
 	const router = useRouter()
 	const factory = ref(new SessionFactory()) as Ref<SessionFactory>
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	factory.value.tutorId = newSessionTutorIdBio!.id
-	const hasEnoughCoins = computed({
-		get: () => factory.value.price <= (user.value?.account?.coins?.gold ?? 0),
-		set: () => {
-		}
-	})
 
 	const createSession = async () => {
 		await setError('')
-		if (factory.value.valid && hasEnoughCoins.value && !loading.value) {
+		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
 				const sessionId = await AddSession.call(factory.value)
@@ -46,7 +39,7 @@ export const useCreateSession = () => {
 	}
 
 	return {
-		factory, loading, error, hasEnoughCoins,
+		factory, loading, error,
 		createSession, newSessionTutorIdBio
 	}
 }

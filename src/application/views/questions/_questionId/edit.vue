@@ -20,8 +20,6 @@
 					Ask questions to help with your homework and studies.
 				</h3>
 				<QuestionForm
-					:coins="coins"
-					:disabled="{ coins: true }"
 					:error="error"
 					:factory="factory"
 					:loading="loading"
@@ -58,8 +56,8 @@ export default defineComponent({
 	}],
 	setup () {
 		const { questionId } = useRoute().params
-		const { factory, error, loading, coins, editQuestion } = useEditQuestion(questionId as string)
-		return { factory, error, loading, coins, editQuestion }
+		const { factory, error, loading, editQuestion } = useEditQuestion(questionId as string)
+		return { factory, error, loading, editQuestion }
 	}
 })
 </script>

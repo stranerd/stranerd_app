@@ -12,7 +12,6 @@ import {
 	QuestionFactory
 } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { COINS_GAP, MAXIMUM_COINS, MINIMUM_COINS } from '@utils/constants'
 import { useAuth } from '@app/composable/auth/auth'
 import { analytics } from '@modules/core'
 import { Alert } from '@app/composable/core/notifications'
@@ -127,28 +126,10 @@ export const useQuestionList = () => {
 
 const factory = ref(new QuestionFactory()) as Ref<QuestionFactory>
 export const useCreateQuestion = () => {
-	const { user, isLoggedIn } = useAuth()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 	const router = useRouter()
-	const coins = computed({
-		get: () => {
-			if (!isLoggedIn) {
-				setError('Login to continue', true).then()
-				return []
-			}
-			if ((user.value?.account.coins.bronze ?? 0) < MINIMUM_COINS) {
-				setError(`You need at least ${MINIMUM_COINS} coins to ask a question`, true).then()
-				return []
-			}
-			const coins = [] as number[]
-			const maximum = user.value!.account.coins.bronze <= MAXIMUM_COINS ? user.value!.account.coins.bronze : MAXIMUM_COINS
-			for (let i = MINIMUM_COINS; i <= maximum; i = i + COINS_GAP) coins.push(i)
-			return coins
-		}, set: () => {
-		}
-	})
 
 	const createQuestion = async () => {
 		await setError('')
@@ -168,7 +149,7 @@ export const useCreateQuestion = () => {
 		} else factory.value.validateAll()
 	}
 
-	return { error, loading, factory, coins, createQuestion }
+	return { error, loading, factory, createQuestion }
 }
 
 export const useQuestion = (questionId: string) => {
@@ -230,24 +211,6 @@ export const useEditQuestion = (questionId: string) => {
 	const { setMessage } = useSuccessHandler()
 	const router = useRouter()
 	const factory = ref(new QuestionFactory()) as Ref<QuestionFactory>
-	const coins = computed({
-		get: () => {
-			if (!isLoggedIn) {
-				setError('Login to continue').then()
-				return []
-			}
-			if (user.value!.account.coins.bronze < MINIMUM_COINS) {
-				setError(`You need at least ${MINIMUM_COINS} coins to ask a question`).then()
-				return []
-			}
-			const coins = [] as number[]
-			const maximum = user.value!.account.coins.bronze <= MAXIMUM_COINS ? user.value!.account.coins.bronze : MAXIMUM_COINS
-			for (let i = MINIMUM_COINS; i <= maximum; i = i + COINS_GAP) coins.push(i)
-			return coins
-		}, set: () => {
-		}
-	})
-
 	if (editingQuestion) factory.value.loadEntity(editingQuestion)
 
 	const editQuestion = async () => {
@@ -270,7 +233,7 @@ export const useEditQuestion = (questionId: string) => {
 		} else factory.value.validateAll()
 	}
 
-	return { error, loading, factory, coins, editQuestion }
+	return { error, loading, factory, editQuestion }
 }
 
 export const useDeleteQuestion = (questionId: string) => {

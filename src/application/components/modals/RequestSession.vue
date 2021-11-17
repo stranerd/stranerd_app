@@ -76,7 +76,7 @@
 				</button>
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<button :disabled="loading || !factory.valid || !hasEnoughCoins"
+				<button :disabled="loading || !factory.valid"
 					class=" px-6 relative ion-activatable font-bold w-full py-3 rounded-lg bg-primary"
 					@click="createSession">
 					Request Session
@@ -100,7 +100,7 @@ export default defineComponent({
 		const closeSessionModal = () => {
 			useSessionModal().closeCreateSession()
 		}
-		const { factory, loading, error, hasEnoughCoins, createSession, newSessionTutorIdBio } = useCreateSession()
+		const { factory, loading, error, createSession, newSessionTutorIdBio } = useCreateSession()
 		onMounted(async () => {
 			await analytics.logEvent('view_session_request')
 		})
@@ -110,7 +110,6 @@ export default defineComponent({
 			document,
 			ellipse,
 			ellipseOutline,
-			hasEnoughCoins,
 			factory, loading, error, createSession, newSessionTutorIdBio
 		}
 	},
