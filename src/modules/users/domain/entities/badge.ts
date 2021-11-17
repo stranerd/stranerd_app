@@ -12,27 +12,19 @@ enum CountStreakBadges {
 	HostSession = 'HostSession'
 }
 
-enum CoinBadges {
-	SpendBronze = 'SpendBronze',
-	SpendGold = 'SpendGold'
-}
-
 export interface BadgeData {
 	streak: Record<CountStreakBadges, number[]>
-	coin: Record<CoinBadges, number[]>
 	rank: RankTypes[]
 }
 
 export interface BadgeBadges {
 	count: Record<CountStreakBadges, number[]>
 	streak: Record<CountStreakBadges, number[]>
-	coin: Record<CoinBadges, number[]>
 	rank: RankTypes[]
 }
 
 export interface BadgeAllBadges {
 	rankBadges: { name: RankTypes, key: string, levelName: RankTypes, level: number }[]
-	coinBadges: { name: string, key: string, levelName: string, level: number }[]
 	countBadges: { name: string, key: string, levelName: string, level: number }[]
 	streakBadges: { name: string, key: string, levelName: string, level: number }[]
 }

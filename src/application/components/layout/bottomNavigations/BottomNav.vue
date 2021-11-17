@@ -55,7 +55,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonFooter, IonIcon, IonToolbar } from '@ionic/vue'
-import { add, calendarClear, chatbubble, helpCircle, home, people, wallet } from 'ionicons/icons'
+import { add, calendarClear, chatbubble, helpCircle, home, people } from 'ionicons/icons'
 
 export default defineComponent({
 	components: { IonFooter, IonIcon, IonToolbar },
@@ -66,8 +66,7 @@ export default defineComponent({
 			people,
 			chatbubble,
 			add,
-			calendarClear,
-			wallet
+			calendarClear
 		}
 	}
 })

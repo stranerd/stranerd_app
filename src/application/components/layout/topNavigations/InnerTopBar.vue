@@ -24,26 +24,7 @@
 		</div>
 
 		<div class="flex flex-row items-center px-6 w-2/4 justify-center">
-			<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
-				<div class="w-1/3 flex flex-row items-center">
-					<Coins :gold="false" :size="28" class="mr-2 inline" />
-					<span class="font-semibold text-sm text-dark_grey ">{{
-						isLoggedIn ? user.account.coins.bronze : '-'
-					}}</span>
-				</div>
-				<div class="w-1/3 flex flex-row items-center justify-center">
-					<ion-icon :icon="add" class="text-3xl cursor-pointer text-icon_inactive"
-						@click="isLoggedIn ? buyCoins() : null"></ion-icon>
-
-
-				</div>
-				<div class="w-1/3 flex flex-row-reverse items-center">
-					<span class="font-semibold text-sm text-dark_grey ">{{
-						isLoggedIn ? user.account.coins.gold : '-'
-					}}</span>
-					<Coins :gold="true" :size="28" class="mr-2 inline" />
-				</div>
-			</div>
+			<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center" />
 		</div>
 
 
@@ -93,27 +74,7 @@
 				<avatar :size="26" :src="user?.avatar" />
 			</router-link>
 		</div>
-		<div class="w-1/4 flex flex-row items-center py-1 -mr-5">
-			<div class="py-2 px-4 w-full bg-light_gray flex rounded-lg flex-row items-center">
-				<div class="w-1/3 flex flex-row items-center">
-					<Coins :gold="false" :size="20" class="mr-2 inline" />
-					<span class="font-semibold text-sm text-dark_grey ">{{
-						isLoggedIn ? user.account.coins.bronze : '-'
-					}}</span>
-				</div>
-				<div class="w-1/3 flex flex-row items-center justify-center">
-					<ion-icon :icon="add" class="text-xl cursor-pointer"
-						@click="isLoggedIn ? buyCoins() : null"></ion-icon>
-
-				</div>
-				<div class="w-1/3 flex flex-row-reverse items-center">
-					<span class="font-semibold text-sm text-dark_grey ">{{
-						isLoggedIn ? user.account.coins.gold : '-'
-					}}</span>
-					<Coins :gold="true" :size="20" class="mr-2 inline" />
-				</div>
-			</div>
-		</div>
+		<div class="w-1/4 flex flex-row items-center py-1 -mr-5" />
 	</div>
 </template>
 
@@ -122,30 +83,23 @@ import { defineComponent, ref } from 'vue'
 import { IonButtons, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue'
 import { add, arrowBackOutline, close, home, notifications, search } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
-import Coins from '../../core/Coins.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
-import { useAccountModal } from '@app/composable/core/modals'
 
 export default defineComponent({
-	components: { IonIcon, Avatar, IonButtons, IonHeader, IonToolbar, IonTitle, Coins, SearchBar },
+	components: { IonIcon, Avatar, IonButtons, IonHeader, IonToolbar, IonTitle, SearchBar },
 	setup () {
 
-		const { user, isLoggedIn } = useAuth()
+		const { user } = useAuth()
 		const showSearch = ref(false)
 		const toggleSearch = () => {
 			showSearch.value = !showSearch.value
 		}
-		const buyCoins = () => {
-			useAccountModal().openBuyCoins()
-		}
 
 		return {
-			buyCoins,
-			isLoggedIn,
+			add,
 			showSearch,
 			toggleSearch,
-			add,
 			home,
 			user,
 			arrowBackOutline,

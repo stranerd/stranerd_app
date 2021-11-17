@@ -1,8 +1,7 @@
 <template>
 	<DashboardLayout>
 		<div>
-			<RecentQuestions class="mb-10" />
-			<RecentTransaction />
+			<RecentQuestions />
 		</div>
 	</DashboardLayout>
 </template>
@@ -10,14 +9,12 @@
 import { defineComponent } from 'vue'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import RecentQuestions from '@app/components/dashboard/RecentQuestions.vue'
-import RecentTransaction from '@app/components/dashboard/RecentTransactions.vue'
 
 export default defineComponent({
 	name: 'Dashboard',
 	components: {
 		DashboardLayout,
-		RecentQuestions,
-		RecentTransaction
+		RecentQuestions
 	}
 })
 </script>

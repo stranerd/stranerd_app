@@ -11,7 +11,7 @@
 			<router-link v-for="{ path, icon, name } in [
 					{ name: 'home', path: '/dashboard', icon: home },
 					{ name: 'questions', path: '/questions', icon: helpCircle },
-					{ name: 'wallet', path: '/wallet', icon: wallet }
+					{ name: 'Study', path: '/study', icon: library }
 				]" :key="path" :to="path"
 				class="flex flex-col rounded-l-[150px] text-icon_inactive cursor-pointer text-sm hover:text-dark_gray mb-2">
 				<div :class="{'text-dark_gray bg-white' : $route.path === path }"
@@ -27,7 +27,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { calendarClear, helpCircle, home, people, wallet } from 'ionicons/icons'
+import { calendarClear, helpCircle, home, library, people } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
 import { IonIcon } from '@ionic/vue'
 
@@ -36,12 +36,12 @@ export default defineComponent({
 	setup () {
 		const route = useRoute()
 		return {
+			library,
 			home,
 			helpCircle,
 			people,
 			route,
-			calendarClear,
-			wallet
+			calendarClear
 		}
 	}
 })
