@@ -3,12 +3,7 @@ import { isLongerThanX, isString } from '@stranerd/validate'
 import { CourseEntity } from '../entities/course'
 import { CourseToModel } from '../../data/models/course'
 
-interface Keys {
-	name: string,
-	institutionId: string
-}
-
-export class CourseFactory extends BaseFactory<CourseEntity, CourseToModel, Keys> {
+export class CourseFactory extends BaseFactory<CourseEntity, CourseToModel, CourseToModel> {
 	readonly rules = {
 		name: { required: true, rules: [isString, isLongerThanX(0)] },
 		institutionId: { required: true, rules: [isString, isLongerThanX(0)] }

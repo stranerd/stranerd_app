@@ -1,15 +1,18 @@
+import { SetApiDataSource } from './data/datasources/set-api'
 import { CourseApiDataSource } from './data/datasources/course-api'
 import { InstitutionApiDataSource } from './data/datasources/institution-api'
 import { FlashCardApiDataSource } from './data/datasources/flashCard-api'
 import { NoteApiDataSource } from './data/datasources/note-api'
 import { VideoApiDataSource } from './data/datasources/video-api'
 import { VideoCommentApiDataSource } from './data/datasources/videoComment-api'
+import { SetTransformer } from './data/transformers/set'
 import { CourseTransformer } from './data/transformers/course'
 import { InstitutionTransformer } from './data/transformers/institution'
 import { FlashCardTransformer } from './data/transformers/flashCard'
 import { NoteTransformer } from './data/transformers/note'
 import { VideoTransformer } from './data/transformers/video'
 import { VideoCommentTransformer } from './data/transformers/videoComment'
+import { SetRepository } from './data/repositories/set'
 import { CourseRepository } from './data/repositories/course'
 import { InstitutionRepository } from './data/repositories/institution'
 import { FlashCardRepository } from './data/repositories/flashCard'
@@ -28,6 +31,12 @@ import { VideoEntity } from './domain/entities/video'
 import { VideoFactory } from './domain/factories/video'
 import { VideoCommentEntity } from './domain/entities/videoComment'
 import { VideoCommentFactory } from './domain/factories/videoComment'
+import { GetSetsUseCase } from './domain/usecases/sets/getSets'
+import { ListenToSetsUseCase } from './domain/usecases/sets/listenToSets'
+import { FindSetUseCase } from './domain/usecases/sets/findSet'
+import { AddSetUseCase } from './domain/usecases/sets/addSet'
+import { EditSetUseCase } from './domain/usecases/sets/editSet'
+import { DeleteSetUseCase } from './domain/usecases/sets/deleteSet'
 import { GetCoursesUseCase } from './domain/usecases/courses/getCourses'
 import { ListenToCoursesUseCase } from './domain/usecases/courses/listenToCourses'
 import { FindCourseUseCase } from './domain/usecases/courses/findCourse'
@@ -65,6 +74,7 @@ import { GetNotesUseCase } from './domain/usecases/notes/getNotes'
 import { AddVideoCommentUseCase } from './domain/usecases/videoComments/addVideoComment'
 import { DeleteFlashCardUseCase } from './domain/usecases/flashCards/deleteFlashCard'
 
+const setDataSource = new SetApiDataSource()
 const courseDataSource = new CourseApiDataSource()
 const institutionDataSource = new InstitutionApiDataSource()
 const flashCardDataSource = new FlashCardApiDataSource()
@@ -72,6 +82,7 @@ const noteDataSource = new NoteApiDataSource()
 const videoDataSource = new VideoApiDataSource()
 const videoCommentDataSource = new VideoCommentApiDataSource()
 
+const setTransformer = new SetTransformer()
 const courseTransformer = new CourseTransformer()
 const institutionTransformer = new InstitutionTransformer()
 const flashCardTransformer = new FlashCardTransformer()
@@ -79,12 +90,20 @@ const noteTransformer = new NoteTransformer()
 const videoTransformer = new VideoTransformer()
 const videoCommentTransformer = new VideoCommentTransformer()
 
+const setRepository = new SetRepository(setDataSource, setTransformer)
 const courseRepository = new CourseRepository(courseDataSource, courseTransformer)
 const institutionRepository = new InstitutionRepository(institutionDataSource, institutionTransformer)
 const flashCardRepository = new FlashCardRepository(flashCardDataSource, flashCardTransformer)
 const noteRepository = new NoteRepository(noteDataSource, noteTransformer)
 const videoRepository = new VideoRepository(videoDataSource, videoTransformer)
 const videoCommentRepository = new VideoCommentRepository(videoCommentDataSource, videoCommentTransformer)
+
+export const FindSet = new FindSetUseCase(setRepository)
+export const GetSets = new GetSetsUseCase(setRepository)
+export const ListenToSets = new ListenToSetsUseCase(setRepository)
+export const AddSet = new AddSetUseCase(setRepository)
+export const EditSet = new EditSetUseCase(setRepository)
+export const DeleteSet = new DeleteSetUseCase(setRepository)
 
 export const FindCourse = new FindCourseUseCase(courseRepository)
 export const GetCourses = new GetCoursesUseCase(courseRepository)

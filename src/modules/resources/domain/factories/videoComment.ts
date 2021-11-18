@@ -3,9 +3,7 @@ import { BaseFactory } from '@modules/core'
 import { VideoCommentEntity } from '../entities/videoComment'
 import { VideoCommentToModel } from '../../data/models/videoComment'
 
-type Keys = { body: string, videoId: string }
-
-export class VideoCommentFactory extends BaseFactory<VideoCommentEntity, VideoCommentToModel, Keys> {
+export class VideoCommentFactory extends BaseFactory<VideoCommentEntity, VideoCommentToModel, VideoCommentToModel> {
 	readonly rules = {
 		body: { required: true, rules: [isString, isLongerThanX(2)] },
 		videoId: { required: true, rules: [isString, isLongerThanX(0)] }
