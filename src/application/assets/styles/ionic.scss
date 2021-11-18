@@ -110,13 +110,24 @@ http://ionicframework.com/docs/theming/ */
     --border-radius:0.75rem !important;
 }
 
+.sm-modal {
+	--background-color: #00000065;
+	--height: 21% !important;
+	--width: 400px;
+	--border-radius: .75rem;
+	@media (max-width: 500px) {
+		--height: 18% !important;
+		--width: 80vw;
+		--border-radius: 0.75rem;
+	}
+}
 .modal-class {
 	--background-color: #00000065;
 	--height: 39rem;
 	--width: 400px;
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
-		--height: 80vh;
+		--height: 100vh;
 		--border-radius: 0rem;
 	}
 }
@@ -154,10 +165,7 @@ http://ionicframework.com/docs/theming/ */
 	--color: white;
 	--box-shadow: none;
 	--border-radius: 0.5rem;
-	padding-top: 1rem;
-	padding-bottom: 1rem;
-	padding-left: 1.5rem;
-	padding-right: 1.5rem;
+
 	color: white;
 	box-shadow: none;
 	border-radius: 0.5rem;

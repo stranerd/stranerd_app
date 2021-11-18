@@ -61,9 +61,9 @@
 		</div>
 
 		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
-			<div class="lg:w-8/12 max-w-[60rem] w-full px-4 mx-auto flex items-center justify-between">
+			<div class="lg:w-8/12 max-w-[60rem] w-full px-4 lg:p-0 mx-auto flex items-center justify-between">
 				<div class="flex">
-					<Avatar :size="28" class="mx-2" />
+					<Avatar :size="28" class="mx-2 lg:ml-0" />
 					<ion-text class="text-icon_inactive"> by <b>Timmy</b></ion-text>
 				</div>
 
