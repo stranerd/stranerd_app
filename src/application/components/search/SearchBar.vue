@@ -76,8 +76,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-searchbar {
-		--background: #F7F7FC;
-		--box-shadow: none;
+		--background: #FFFFFF;
+		--box-shadow: 0px 0px 0px 1px #F7F7FC;
 		--border-radius: .75rem;
 		border-radius: .75rem;
 		--icon-color: #8B9EB1;
