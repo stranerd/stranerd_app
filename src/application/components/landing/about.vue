@@ -8,7 +8,7 @@
 					</h2>
 					<img src="@app/assets/images/landing-lines/about-heading-boder.png" class="mx-auto w-44" alt="">
 				</div>
-				<div class="flex items-center flex-wrap justify-between md:flex-nowrap md:flex-row-reverse gap-4 md:gap-10 my-10">
+				<div class="flex items-center flex-wrap justify-between md:flex-nowrap md:flex-row-reverse gap-4 md:gap-10 my-10 md:my-12">
 					<div class="w-full md:w-1/2 flex items-stretch flex-none">
 						<VideoCard></VideoCard>
 					</div>
@@ -29,7 +29,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="flex items-center flex-wrap justify-between md:flex-nowrap md:flex-row gap-4 md:gap-10 my-10">
+				<div class="flex items-center flex-wrap justify-between md:flex-nowrap md:flex-row gap-4 md:gap-10 my-10 md:my-12">
 					<div class="w-full md:w-1/2 flex items-stretch flex-none">
 						<VideoCard></VideoCard>
 					</div>
@@ -56,7 +56,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="flex items-center flex-wrap justify-between md:flex-nowrap md:flex-row-reverse gap-4 md:gap-10 my-10">
+				<div class="flex items-center flex-wrap justify-between md:flex-nowrap md:flex-row-reverse gap-4 md:gap-10 my-10 md:my-12">
 					<div class="w-full md:w-1/2 flex items-stretch flex-none">
 						<VideoCard></VideoCard>
 					</div>

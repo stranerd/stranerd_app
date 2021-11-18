@@ -37,7 +37,7 @@
 										</li>
 									</ul>
 								</div>
-								<router-link to="" class="md:border-2 md:border-white rounded-md block bg-primary md:bg-transparent text-white text-xs md:text-sm font-bold text-center font-medium mx-auto md:mx-0 w-44 lg:w-80 py-4">
+								<router-link to="" class="md:border-2 md:border-white rounded-md block bg-primary md:bg-transparent text-white text-xs md:text-sm font-bold text-center mx-auto md:mx-0 w-44 lg:w-80 py-4">
 									Get Started
 								</router-link>
 							</div>
