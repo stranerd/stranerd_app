@@ -42,8 +42,8 @@
 
 				<div class="answers flex flex-col">
 					<div class="flex w-full hover:bg-light_gray px-5 py-3" v-for="n in ['A', 'B', 'C', 'D']" :key="n">
-						<input type="radio" :name="num" :id="n+num" class="hidden">
-						<label :for="n+num" :name="num" class="label border-4 rounded-full border-light_gray h-8 w-8 text-base font-bold grid place-items-center  hover:border-primary"> {{n}}</label>
+						<input type="radio" :name="`${num}`" :id="n+num" class="hidden">
+						<label :for="n+num" :name="`${num}`" class="label border-4 rounded-full border-light_gray h-8 w-8 text-base font-bold grid place-items-center  hover:border-primary"> {{n}}</label>
 						<ion-text class="text-lg ml-5">{{n}}</ion-text>
 						
 					</div>
