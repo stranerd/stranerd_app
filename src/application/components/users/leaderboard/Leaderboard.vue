@@ -23,7 +23,7 @@
 import { defineComponent } from 'vue'
 import { IonSelect, IonSelectOption } from '@ionic/vue'
 import LeaderboardList from '@app/components/users/leaderboard/LeaderboardList.vue'
-import { time, times } from '@root/application/composable/users/leaderboard'
+import { time, times } from '@app/composable/users/leaderboard'
 
 export default defineComponent({
 	name: 'Leaderboard',

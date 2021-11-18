@@ -5,8 +5,6 @@ import { extractTextFromHTML, trimToLength } from '@utils/commons'
 type QuestionConstructorArgs = {
 	id: string
 	body: string
-	coins: number
-	creditable: number
 	isAnswered: boolean
 	tags: string[]
 	attachments: Media[]
@@ -23,7 +21,6 @@ type QuestionConstructorArgs = {
 export class QuestionEntity extends BaseEntity {
 	public readonly id: string
 	public readonly body: string
-	public readonly coins: number
 	public readonly tags: string[]
 	public readonly attachments: Media[]
 	public readonly subjectId: string
@@ -32,21 +29,18 @@ export class QuestionEntity extends BaseEntity {
 	public readonly bestAnswers: string[]
 	public readonly answers: { id: string, userId: string }[]
 	public readonly commentsCount: number
-	public readonly creditable: number
 	public readonly isAnswered: boolean
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, body, coins, subjectId, creditable, isAnswered,
+		             id, body, subjectId, isAnswered,
 		             bestAnswers, createdAt, userId, userBio, attachments,
 		             answers, commentsCount, tags, updatedAt
 	             }: QuestionConstructorArgs) {
 		super()
 		this.id = id
 		this.body = body
-		this.coins = coins
-		this.creditable = creditable
 		this.isAnswered = isAnswered
 		this.tags = tags
 		this.attachments = attachments ?? []

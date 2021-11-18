@@ -46,7 +46,7 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
 import { useNotificationList } from '@app/composable/users/notifications'
-import Justified from '@root/application/layouts/Justified.vue'
+import Justified from '@app/layouts/Justified.vue'
 import NotificationCard from '@app/components/users/notifications/NotificationCard.vue'
 import { IonIcon } from '@ionic/vue'
 import { checkmarkDone } from 'ionicons/icons'

@@ -8,7 +8,6 @@ export interface QuestionFromModel extends QuestionToModel {
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
 	isAnswered: boolean
-	creditable: number
 	commentsCount: number
 	createdAt: number
 	updatedAt: number
@@ -16,7 +15,6 @@ export interface QuestionFromModel extends QuestionToModel {
 
 export interface QuestionToModel {
 	body: string
-	coins: number
 	tags: string[]
 	attachments: Media[]
 	subjectId: string

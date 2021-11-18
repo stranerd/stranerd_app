@@ -3,18 +3,18 @@ import { RoleApiDataSource } from './data/datasources/role-api'
 import { NotificationApiDataSource } from './data/datasources/notification-api'
 import { ReviewApiDataSource } from './data/datasources/review-api'
 import { ReferralApiDataSource } from './data/datasources/referral-api'
-import { TransactionApiDataSource } from './data/datasources/transaction-api'
+import { BadgeApiDataSource } from './data/datasources/badge-api'
 import { UserTransformer } from './data/transformers/user'
 import { NotificationTransformer } from './data/transformers/notification'
 import { ReviewTransformer } from './data/transformers/review'
 import { ReferralTransformer } from './data/transformers/referral'
-import { TransactionTransformer } from './data/transformers/transaction'
+import { BadgeTransformer } from './data/transformers/badge'
 import { UserRepository } from './data/repositories/user'
 import { RoleRepository } from './data/repositories/role'
 import { NotificationRepository } from './data/repositories/notification'
 import { ReviewRepository } from './data/repositories/review'
 import { ReferralRepository } from './data/repositories/referral'
-import { TransactionRepository } from './data/repositories/transaction'
+import { BadgeRepository } from './data/repositories/badge'
 import { FindUserUseCase } from './domain/usecases/users/findUser'
 import { MakeAdminUseCase } from './domain/usecases/roles/makeAdmin'
 import { RemoveAdminUseCase } from './domain/usecases/roles/removeAdmin'
@@ -36,13 +36,13 @@ import { ListenToReviewsUseCase } from './domain/usecases/reviews/listenToReview
 import { CreateReviewUseCase } from './domain/usecases/reviews/createReview'
 import { GetReferralsUseCase } from './domain/usecases/referrals/getReferrals'
 import { ListenToReferralsUseCase } from './domain/usecases/referrals/listenToReferrals'
-import { GetTransactionsUseCase } from './domain/usecases/transactions/getTransactions'
-import { ListenToTransactionsUseCase } from './domain/usecases/transactions/listenToTransactions'
+import { GetBadgeUseCase } from './domain/usecases/badges/getBadge'
+import { ListenToBadgeUseCase } from './domain/usecases/badges/listenToBadge'
 import { generateDefaultBio, RankingTimes, UserBio, UserEntity } from './domain/entities/user'
 import { NotificationEntity } from './domain/entities/notification'
 import { ReviewEntity } from './domain/entities/review'
 import { ReferralEntity } from './domain/entities/referral'
-import { TransactionEntity } from './domain/entities/transaction'
+import { BadgeEntity } from './domain/entities/badge'
 
 export { TutorUpdateFactory } from '../users/domain/factories/tutorUpdate'
 
@@ -51,20 +51,20 @@ const roleDataSource = new RoleApiDataSource()
 const notificationDataSource = new NotificationApiDataSource()
 const reviewDataSource = new ReviewApiDataSource()
 const referralDataSource = new ReferralApiDataSource()
-const transactionDataSource = new TransactionApiDataSource()
+const badgeDataSource = new BadgeApiDataSource()
 
 const userTransformer = new UserTransformer()
 const notificationTransformer = new NotificationTransformer()
 const reviewTransformer = new ReviewTransformer()
 const referralTransformer = new ReferralTransformer()
-const transactionTransformer = new TransactionTransformer()
+const badgeTransformer = new BadgeTransformer()
 
 const userRepository = new UserRepository(userDataSource, userTransformer)
 const roleRepository = new RoleRepository(roleDataSource)
 const notificationRepository = new NotificationRepository(notificationDataSource, notificationTransformer)
 const reviewRepository = new ReviewRepository(reviewDataSource, reviewTransformer)
 const referralRepository = new ReferralRepository(referralDataSource, referralTransformer)
-const transactionRepository = new TransactionRepository(transactionDataSource, transactionTransformer)
+const badgeRepository = new BadgeRepository(badgeDataSource, badgeTransformer)
 
 export const FindUser = new FindUserUseCase(userRepository)
 export const GetUsersByEmail = new GetUsersByEmailUseCase(userRepository)
@@ -92,8 +92,8 @@ export const ListenToReviews = new ListenToReviewsUseCase(reviewRepository)
 export const GetReferrals = new GetReferralsUseCase(referralRepository)
 export const ListenToReferrals = new ListenToReferralsUseCase(referralRepository)
 
-export const GetTransactions = new GetTransactionsUseCase(transactionRepository)
-export const ListenToTransactions = new ListenToTransactionsUseCase(transactionRepository)
+export const GetBadge = new GetBadgeUseCase(badgeRepository)
+export const ListenToBadge = new ListenToBadgeUseCase(badgeRepository)
 
 export {
 	UserEntity,
@@ -101,7 +101,7 @@ export {
 	generateDefaultBio,
 	NotificationEntity,
 	ReviewEntity,
-	TransactionEntity,
-	ReferralEntity
+	ReferralEntity,
+	BadgeEntity
 }
 export type { UserBio }

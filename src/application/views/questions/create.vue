@@ -20,7 +20,6 @@
 					Ask questions to help with your homework and studies.
 				</h3>
 				<QuestionForm
-					:coins="coins"
 					:error="error"
 					:factory="factory"
 					:loading="loading"
@@ -37,7 +36,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import DashboardLayout from '@root/application/layouts/Dashboard.vue'
+import DashboardLayout from '@app/layouts/Dashboard.vue'
 import QuestionForm from '@app/components/questions/questions/QuestionForm.vue'
 import { useCreateQuestion } from '@app/composable/questions/questions'
 
@@ -46,8 +45,8 @@ export default defineComponent({
 	components: { DashboardLayout, QuestionForm },
 	middlewares: ['isAuthenticated'],
 	setup () {
-		const { factory, error, loading, coins, createQuestion } = useCreateQuestion()
-		return { factory, error, loading, coins, createQuestion }
+		const { factory, error, loading, createQuestion } = useCreateQuestion()
+		return { factory, error, loading, createQuestion }
 	}
 })
 </script>

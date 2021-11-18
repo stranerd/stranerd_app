@@ -23,7 +23,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ExploreTutors from '@app/components/users/tutors/ExploreTutors.vue'
-import DashboardLayout from '@root/application/layouts/Dashboard.vue'
+import DashboardLayout from '@app/layouts/Dashboard.vue'
 
 export default defineComponent({
 	name: 'TutorsExplore',

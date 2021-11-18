@@ -16,7 +16,7 @@
 import { defineComponent, onBeforeMount, onMounted } from 'vue'
 import UserProfileCard from '@app/components/users/users/UserProfileCard.vue'
 import PageLoading from '@app/components/core/PageLoading.vue'
-import Justified from '@root/application/layouts/Justified.vue'
+import Justified from '@app/layouts/Justified.vue'
 import { useUser } from '@app/composable/users/user'
 import { useRoute } from 'vue-router'
 

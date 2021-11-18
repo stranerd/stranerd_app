@@ -5,8 +5,4 @@ export const REDIRECT_SESSION_NAME = 'redirect-to'
 export const PAGINATION_LIMIT = 10
 export const CHAT_PAGINATION_LIMIT = 20
 
-export const MINIMUM_COINS = 20
-export const COINS_GAP = 4
-export const MAXIMUM_COINS = 100
-
 export const DEFAULT_PROFILE_IMAGE = '/images/avatars/user_profile.svg'
