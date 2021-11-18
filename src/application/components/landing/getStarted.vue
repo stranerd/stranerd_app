@@ -39,7 +39,7 @@
 						</div>
 					</div>
 				</div>
-				<router-link to="" class="bg-primary rounded-md block text-white text-sm text-center font-bold w-60 py-3 my-10 mx-auto">
+				<router-link to="" class="bg-primary rounded-md block text-white text-sm text-center font-bold w-44 lg:w-80 py-4 my-10 mx-auto">
 					Get Started
 				</router-link>
 			</div>

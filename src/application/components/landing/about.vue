@@ -8,12 +8,12 @@
 					</h2>
 					<img src="@app/assets/images/landing-lines/about-heading-boder.png" class="mx-auto w-44" alt="">
 				</div>
-				<div class="flex items-center flex-wrap md:flex-nowrap md:flex-row-reverse gap-4 md:gap-10 my-10">
-					<div class="w-full md:w-1/2 md:flex-auto flex-none">
+				<div class="flex items-center flex-wrap justify-between md:flex-nowrap md:flex-row-reverse gap-4 md:gap-10 my-10">
+					<div class="w-full md:w-1/2 flex items-stretch flex-none">
 						<VideoCard></VideoCard>
 					</div>
-					<div class="w-full md:w-1/2 lg:flex-auto flex-none">
-						<div class="md:mr-20">
+					<div class="w-full md:max-w-xs lg:max-w-md xl:max-w-lg flex-none">
+						<div class="">
 							<h3 class="text-orange font-bold text-xl md:text-3xl my-5 md:mb-8">Save time doing homework</h3>
 							<ul class="list-disc font-medium text-xs lg:text-base ml-5 my-3.5">
 								<li class="leading-8">
@@ -23,18 +23,18 @@
 									Ask questions and get quick solutions from a community of students and tutors..
 								</li>
 							</ul>
-							<router-link to="" class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-60 py-2.5">
+							<router-link to="" class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-44 lg:w-80 py-4">
 								Ask a Question
 							</router-link>                                
 						</div>
 					</div>
 				</div>
-				<div class="flex items-center flex-wrap md:flex-nowrap gap-4 md:gap-10 my-10">
-					<div class="w-full md:w-1/2 flex items-stretch md:flex-auto flex-none gap-4 md:gap-10">
+				<div class="flex items-center flex-wrap justify-between md:flex-nowrap md:flex-row gap-4 md:gap-10 my-10">
+					<div class="w-full md:w-1/2 flex items-stretch flex-none">
 						<VideoCard></VideoCard>
 					</div>
-					<div class="w-full md:w-1/2 lg:flex-auto flex-none">
-						<div class="md:ml-10">
+					<div class="w-full md:max-w-xs lg:max-w-md xl:max-w-lg flex-none">
+						<div class="">
 							<h3 class="text-orange font-bold text-xl md:text-3xl my-5 md:mb-8">Create your own learning environment</h3>
 							<ul class="list-disc font-medium text-xs lg:text-base ml-5 my-3.5">
 								<li class="leading-8">
@@ -50,18 +50,18 @@
 									Course notes
 								</li>
 							</ul>
-							<router-link to="" class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-60 py-2.5">
+							<router-link to="" class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-44 lg:w-80 py-4">
 								Create Study Sets
 							</router-link>                                
 						</div>
 					</div>
 				</div>
-				<div class="flex items-center flex-wrap md:flex-nowrap md:flex-row-reverse gap-4 md:gap-10 my-10">
-					<div class="w-full md:w-1/2 flex items-stretch md:flex-auto flex-none gap-4 md:gap-10">
+				<div class="flex items-center flex-wrap justify-between md:flex-nowrap md:flex-row-reverse gap-4 md:gap-10 my-10">
+					<div class="w-full md:w-1/2 flex items-stretch flex-none">
 						<VideoCard></VideoCard>
 					</div>
-					<div class="w-full md:w-1/2 gap-y-5 lg:flex-auto flex-none">
-						<div class="md:mr-10">
+					<div class="w-full md:max-w-xs lg:max-w-md xl:max-w-lg flex-none">
+						<div class="">
 							<h3 class="text-orange font-bold text-xl md:text-3xl my-5 md:mb-8">Redefine how you prepare for tests & exams</h3>
 							<ul class="list-disc font-medium text-xs lg:text-base ml-5 my-3.5">
 								<li class="leading-8">
@@ -80,7 +80,7 @@
 									A dedicated tutor for all your prep needs
 								</li>
 							</ul>
-							<router-link to="" class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-60 py-2.5">
+							<router-link to="" class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-44 lg:w-80 py-4">
 								Take Test Preps
 							</router-link>                                
 						</div>

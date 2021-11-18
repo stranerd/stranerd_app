@@ -17,7 +17,7 @@
 			</div>
 			<div class="bg-transparent relative md:absolute top-0 left-0 w-full h-full">
 				<div class="container mx-auto h-full">
-					<div class="py-10 px-5 md:py-32 md:px-8 h-full">
+					<div class="py-10 px-3.5 md:py-32 md:px-8 h-full">
 						<div class="flex items-center justify-start h-full">
 							<div class="text-dark text-center md:text-left md:text-white w-full md:w-1/2">
 								<h1 class="text-4xl md:text-5xl text-center md:text-left font-black max-w-xs md:max-w-sm mx-auto md:mx-0">
@@ -25,7 +25,7 @@
 								</h1>
 								<div class="my-8 md:my-14 font-bold text-xs md:text-sm">
 									<p class="leading-loose text-center md:text-left">Improve your results through:</p>
-									<ul class="list-disc ml-5">
+									<ul class="list-disc ml-3.5">
 										<li class="leading-loose max-w-max md:w-full mx-auto md:mx-0">
 											Incentivized learning (<a href="/landing" class="underline">see how this works</a>)
 										</li>
@@ -37,7 +37,7 @@
 										</li>
 									</ul>
 								</div>
-								<router-link to="" class="md:border-2 md:border-white rounded-md block bg-primary md:bg-transparent text-white text-xs text-center font-medium mx-auto md:mx-0 w-60 py-2.5">
+								<router-link to="" class="md:border-2 md:border-white rounded-md block bg-primary md:bg-transparent text-white text-xs md:text-sm font-bold text-center font-medium mx-auto md:mx-0 w-44 lg:w-80 py-4">
 									Get Started
 								</router-link>
 							</div>
@@ -67,17 +67,24 @@ export default {
   background: url("~@app/assets/images/backgrounds/home/landing-bg.jpg")
     no-repeat center right 20% / auto 100%;
 }
+.text-xs {
+	font-size: 10px;
+}
 @media (min-width: 574px) {
 	.landing-section {
 	background: url("~@app/assets/images/backgrounds/home/landing-bg.jpg")
     no-repeat center right 20% / cover;
 	/* height: 80vh; */
 }	
+.text-xs {
+	font-size: 14px;
+}
 }	
 @media (min-width: 768px) {
 	.landing-section {
 	background: url("~@app/assets/images/backgrounds/home/landing-bg.jpg")
     no-repeat center right 20% / cover;
+	/* height: 65rem; */
 	height: 80vh;
 }	
 }

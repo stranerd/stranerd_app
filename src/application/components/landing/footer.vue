@@ -1,10 +1,10 @@
 <template>
 	<footer>
 		<div class="w-full bg-main_dark md:px-8 px-4">
-			<div class="container mx-auto px-3 py-10">
+			<div class="container mx-auto px-3 py-10 lg:py-24">
 				<div class="text-white">
-					<div class="flex items-stretch flex-wrap lg:flex-nowrap gap-10 my-10">
-						<div class="w-full md:w-1/2 flex items-stretch md:flex-auto flex-none gap-10">
+					<div class="flex items-stretch flex-wrap lg:flex-nowrap gap-10 lg:gap-36 xl:gap-48 my-10">
+						<div class="w-full md:w-1/2 flex items-stretch md:flex-auto flex-none gap-10 lg:gap-36 xl:gap-48">
 							<div class="w-1/2 flex-auto">
 								<div class="">
 									<h2 class="footer-title font-bold">Company</h2>
@@ -50,7 +50,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="w-full md:w-1/2 flex items-stretch md:flex-auto flex-none gap-10">
+						<div class="w-full md:w-1/2 flex items-stretch md:flex-auto flex-none gap-10 lg:gap-36 xl:gap-48">
 							<div class="w-1/2 flex-auto">
 								<div class="">
 									<h2 class="footer-title font-bold">About</h2>

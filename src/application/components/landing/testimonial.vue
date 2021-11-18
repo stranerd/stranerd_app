@@ -3,15 +3,15 @@
 		<div class="container mx-auto">
 			<Swiper
 				:modules="modules"
-				:slides-per-view="3"
-				:dynamicBullets="true"
-				:dynamicMainBullets="5"
-				:space-between="20"
-				class="flex flex-row w-full gap-5 items-stretch"
-				:freeMode="true"
+				:dynamic-bullets="true"
+				:dynamic-main-bullets="1"
+				:space-between="10"
+				:breakpoints="swiperOptions.breakpoints"
+				class="flex flex-row w-full gap-5 md:gap-10 lg:gap-24 justify-between items-stretch"
+				:free-mode="true"
 				:pagination="{ clickable: true }"
 			>
-				<SwiperSlide v-for="(testimony, i) in testimonies" :key="i" class="!min-w-[18rem] !h-auto mb-16">
+				<SwiperSlide v-for="(testimony, i) in testimonies" :key="i" class="!min-w-[13rem] !max-w-[14rem] lg:!min-w-[18rem] lg:!max-w-[38rem] !h-auto mb-16">
 					<TestimonialCard :testimony="testimony" :secondCard="i === 1"></TestimonialCard>
 				</SwiperSlide>
 			</Swiper>
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
-import { Pagination, A11y } from 'swiper'
+import { Pagination } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
 import TestimonialCard from '@app/components/landing/TestimonialCard.vue'
 export default {
@@ -34,11 +34,23 @@ export default {
 	},
 	setup() {
 		return {
-			modules: [Pagination, A11y],
+			modules: [Pagination],
 		}
 	},
 	data() {
 		return {
+			swiperOptions: {
+				breakpoints: {       
+					0: {       
+						slidesPerView: 1.5,
+						spaceBetween: 10     
+					},
+					567: {       
+						slidesPerView: 3,       
+						spaceBetween: 30     
+					} 
+				}   
+			},
 			testimonies: [
 				{
 					name: 'Eunice Apo',

@@ -20,10 +20,10 @@
 							Download the app.
 						</p>
 						<div class="flex gap-3 justify-center md:justify-start">
-							<a href="" class="inline-block w-40">
+							<a href="" class="inline-block w-28 xl:w-64">
 								<img src="@app/assets/images/appstore/googleplay.png" alt="">
 							</a>
-							<a href="" class="inline-block w-40">
+							<a href="" class="inline-block w-28 xl:w-64">
 								<img src="@app/assets/images/appstore/appstore.png" alt="">
 							</a>
 						</div>
