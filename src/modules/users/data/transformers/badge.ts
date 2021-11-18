@@ -11,7 +11,10 @@ export class BadgeTransformer {
 		})
 	}
 
-	toJSON (_: BadgeEntity): BadgeToModel {
-		return {}
+	toJSON (entity: BadgeEntity): BadgeToModel {
+		return {
+			data: entity.data,
+			badges: entity.badges
+		}
 	}
 }
