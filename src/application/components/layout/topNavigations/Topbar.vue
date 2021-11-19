@@ -54,7 +54,7 @@
 								<router-link class="py-2 flex items-center relative"
 									to="/questions/create">
 									<ion-icon :icon="addCircle" class="text-xl text-main_dark w-7 relative"></ion-icon>
-	<!-- <ion-card class="w-24 px-4 py-6 top-full absolute z-50">	  
+									<!-- <ion-card class="w-24 px-4 py-6 top-full absolute z-50">	  
 	<ion-card-content>
 									<div class="flex items-center gap-2">
 								<ion-icon :icon="folder" class="relative"></ion-icon>
