@@ -1,100 +1,94 @@
 <template>
 	<div>
-
-		<ion-header class="block md:hidden ion-no-border">
+		<ion-header class="block ion-no-border lg:shadow-md">
 			<ion-toolbar
-				class="md:hidden bg-[#F7F7FC] px-4 flex border-0 items-center justify-between items-center z-50">
-				<router-link slot="start" class="flex flex-row items-center mr-4" to="/account">
-					<avatar :id="user?.id" :size="30" :src="user?.avatar" />
-				</router-link>
-				<router-link slot="start" class="flex flex-row items-center " to="/notifications">
-					<ion-icon :icon="notifications" class="text-2xl text-icon_inactive"></ion-icon>
-				</router-link>
+				class="md:hidden bg-white px-4 border-0 z-50">
+				<div class="flex items-center justify-between">
+					<router-link class="flex items-center " to="/notifications">
+						<ion-icon :icon="notifications" class="text-xl text-main_dark"></ion-icon>
+					</router-link>
+					<router-link class="flex items-center" to="/users/leaderboard">
+						<img class="w-24" src="@app/assets/images/logo/logo-dark.svg" />
+					</router-link>
+					<div class="flex items-center ">
+						<IonIcon :icon="showSearch ? close : search" class="text-xl text-main_dark"
+							@click="toggleSearch" />
+					</div>	
+					<search-bar v-if="showSearch" class="absolute -left-3 z-50 top-1" />
+				</div>		
+			</ion-toolbar>
 
-				<div class="flex flex-row items-center px-3 w-[75%] mx-auto justify-center" />
+			<!-- medium screens -->
+			<ion-toolbar
+				class="hidden lg:hidden md:flex bg-white py-3 px-3 items-center border-0 z-50">
+				<div class="flex items-center justify-between">
+					<router-link class="flex items-center " to="/notifications">
+						<ion-icon :icon="notifications" class="text-xl text-main_dark"></ion-icon>
+					</router-link>
+					<router-link class="flex items-center" to="/users/leaderboard">
+						<img class="w-24" src="@app/assets/images/logo/logo-dark.svg" />
+					</router-link>
+					<div class="flex items-center ">
+						<IonIcon :icon="showSearch ? close : search" class="text-xl text-main_dark"
+							@click="toggleSearch" />
+					</div>	
+					<search-bar v-if="showSearch" class="absolute -left-3 z-50 top-1" />
+				</div>		
+			</ion-toolbar>
 
-				<router-link slot="end" class="flex items-center justify-end mr-4" to="/users/leaderboard">
-					<ion-icon :icon="school" class="text-2xl text-icon_inactive"></ion-icon>
-				</router-link>
-				<div slot="end" class="flex items-center justify-end ">
-					<IonIcon :icon="showSearch ? close : search" class="text-2xl text-icon_inactive"
-						@click="toggleSearch" />
-				</div>
+			<!-- large screens -->
+			<ion-toolbar
+				class="hidden lg:flex px-4 border-0 z-50">
+				<ion-grid>
+					<ion-row class="items-center gap-10">
+						<ion-col>
+							<router-link class="flex items-center" to="/users/leaderboard">
+								<img class="w-32" src="@app/assets/images/logo/logo-dark.svg" />
+							</router-link>
+						</ion-col>
+						<ion-col size="7">
+							<search-bar class="flex-grow" />
+						</ion-col>
+						<ion-col>
+							<div class="flex flex-row items-center py-1 gap-6 justify-between">
+								<router-link class="py-2 flex items-center"
+									to="/questions/create">
+									<!-- <IonIcon :icon="add-circle" class="text-xl text-main_dark" /> -->
+									<ion-icon :icon="addCircle" class="text-xl text-main_dark"></ion-icon>
+								</router-link>		
+								<router-link class="py-2 flex flex-row items-center justify-center"
+									to="/notifications">
+									<ion-icon :icon="notifications" class="text-xl text-main_dark"></ion-icon>
+									<!-- <img class="inline h-5" src="@app/assets/images/icons/bell.svg" /> -->
+								</router-link>		
+								<router-link class="py-2 font-bold flex flex-row items-center justify-center gap-2"
+									to="/account">
+									<avatar :id="user?.id" :size="26" :src="user?.avatar" />
+									<span class="text-base text-main_dark">Timmy Neutron</span>
+									<ion-icon :icon="chevronDown" class="text-xl text-main_dark"></ion-icon>
+								</router-link>
+							</div>
+						</ion-col>
+					</ion-row>
 
-				<search-bar v-if="showSearch" class="absolute -left-3 z-50 top-1" />
+					<!-- <ion-row class="ion-align-items-center"> -->
+				</ion-grid>	
 			</ion-toolbar>
 		</ion-header>
-
-		<!-- medium screens -->
-		<div
-			class="hidden lg:hidden md:flex bg-white py-3 px-3 items-center z-50">
-			<div class="flex flex-row items-center gap-9 w-1/4">
-				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center "
-					to="/account">
-					<avatar :id="user?.id" :size="26" :src="user?.avatar" />
-				</router-link>
-
-				<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
-					<ion-icon :icon="school" class="text-2xl text-icon_inactive"></ion-icon>
-				</div>
-
-			</div>
-
-			<div class="flex flex-row items-center px-6 w-2/4 justify-center" />
-
-
-			<div class="flex flex-row items-center justify-end gap-9 w-1/4">
-				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-					to="/notifications">
-					<ion-icon :icon="notifications" class="text-2xl text-icon_inactive"></ion-icon>
-
-				</router-link>
-
-				<div class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center">
-					<search-bar v-if="showSearch" class="absolute left-0" />
-					<ion-icon :icon="showSearch ? close : search" class="text-2xl text-icon_inactive"
-						@click="toggleSearch"></ion-icon>
-				</div>
-
-			</div>
-		</div>
-
-		<!-- large screens -->
-		<div
-			class="hidden md:hidden lg:flex bg-white py-3 pl-16 pr-[3rem] items-center gap-16 z-50">
-			<div class="w-3/4 flex flex-row items-center py-1 gap-6 justify-between">
-				<search-bar class="flex-grow" />
-
-				<router-link class="px-4 py-2 bg-primary text-white rounded-lg flex items-center"
-					to="/questions/create">
-					<IonIcon :icon="add" class="text-xl" />
-				</router-link>
-
-				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-					to="/notifications">
-					<img class="inline h-5" src="@app/assets/images/icons/bell.svg" />
-				</router-link>
-
-				<router-link class="py-2 px-3 rounded-md bg-light_gray flex flex-row items-center justify-center"
-					to="/account">
-					<avatar :id="user?.id" :size="26" :src="user?.avatar" />
-				</router-link>
-			</div>
-			<div class="w-1/4 flex flex-row items-center py-1 px-2" />
-		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IonHeader, IonIcon, IonToolbar } from '@ionic/vue'
-import { add, close, home, notifications, school, search } from 'ionicons/icons'
+import { } from '@ionic/vue'
+import { IonHeader, IonIcon, IonToolbar, IonCol, IonGrid, IonRow } from '@ionic/vue'
+import { addCircle, close, home, notifications, school, search, chevronDown } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import Avatar from '@app/components/core/Avatar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
 
 export default defineComponent({
-	components: { IonIcon, Avatar, SearchBar, IonHeader, IonToolbar },
+	components: { IonIcon, Avatar, SearchBar, IonHeader, IonToolbar, IonCol, IonGrid, IonRow },
 	setup () {
 		const { user } = useAuth()
 		const showSearch = ref(false)
@@ -102,8 +96,9 @@ export default defineComponent({
 			showSearch.value = !showSearch.value
 		}
 		return {
-			add,
+			addCircle,
 			close,
+			chevronDown,
 			showSearch,
 			toggleSearch,
 			home,
@@ -118,12 +113,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-toolbar {
-		--background: #F7F7FC;
+		--background: #FFFFFF;
 		--box-shadow: none;
 	}
 
 	ion-header {
-		--background: #F7F7FC;
+		--background: #FFFFFF;
 		--box-shadow: none;
 	}
 </style>
