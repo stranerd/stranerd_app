@@ -46,23 +46,39 @@
 						</router-link>
 					</div>
 					<div class="flex w-[84%] gap-10 px-12">
-						<div class="w-3/4 flex-auto">
+						<div class="w-3/4 flex-auto flex flex-row items-center">
 							<search-bar class="flex-grow" />
 						</div>
 						<div class="w-1/4 flex-auto">
 							<div class="flex flex-row items-center py-1 gap-6 justify-between">
-								<router-link class="py-2 flex items-center"
+								<router-link class="py-2 flex items-center relative"
 									to="/questions/create">
-									<ion-icon :icon="addCircle" class="text-xl text-main_dark w-5"></ion-icon>
+									<ion-icon :icon="addCircle" class="text-xl text-main_dark w-7 relative"></ion-icon>
+	<!-- <ion-card class="w-24 px-4 py-6 top-full absolute z-50">	  
+	<ion-card-content>
+									<div class="flex items-center gap-2">
+								<ion-icon :icon="folder" class="relative"></ion-icon>
+								<ion-label class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">Create a study set</ion-label>
+									</div>
+									<div class="flex items-center gap-2">
+								<img src="@app/assets/images/icons/flashCard.png" class="w-4" alt="">
+								<ion-label class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">Create a flashcard</ion-label>
+									</div>
+									<div class="flex items-center gap-2">
+								<ion-icon :icon="helpCircle"></ion-icon>
+								<ion-label class="">Ask a question</ion-label>
+									</div>
+		</ion-card-content>
+	</ion-card> -->
 								</router-link>		
 								<router-link class="py-2 flex flex-row items-center justify-center"
 									to="/notifications">
-									<ion-icon :icon="notifications" class="text-xl text-main_dark w-5"></ion-icon>
+									<ion-icon :icon="notifications" class="text-xl text-main_dark w-7"></ion-icon>
 								</router-link>		
 								<router-link class="py-2 font-bold flex flex-row items-center justify-center gap-2"
 									to="/account">
 									<!-- <avatar :id="user?.id" :size="26" :src="user?.avatar" /> -->
-									<ion-icon :icon="personCircle" class="text-xl text-icon_inactive w-5"></ion-icon>
+									<ion-icon :icon="personCircle" class="text-5xl text-icon_inactive w-7"></ion-icon>
 									<span class="text-base text-main_dark">Timmy Neutron</span>
 									<ion-icon :icon="chevronDown" class="text-xl text-main_dark"></ion-icon>
 								</router-link>

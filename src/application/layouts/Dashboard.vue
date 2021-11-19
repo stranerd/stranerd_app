@@ -15,30 +15,30 @@
 					</div>
 					<!-- fab placed to the bottom start -->
 					<ion-fab vertical="bottom" horizontal="end" slot="fixed" class="lg:hidden">
+						<ion-fab-list class="w-screen h-screen left-0 top-0 bg-white bg-opacity-70 fixed z-50">
+						</ion-fab-list>
 						<ion-fab-button class="z-50 relative">
 							<ion-icon :icon="add"></ion-icon>
 						</ion-fab-button>
-						<ion-fab-list class="w-screen h-screen left-0 top-0 bg-white bg-opacity-70 fixed z-50">
-						</ion-fab-list>
 						<ion-fab-list side="top" class="z-50">
-									<ion-fab-button color="primary" class="relative">
-										<ion-icon :icon="folder" class="relative"></ion-icon>
-										<ion-label class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">Create a study set</ion-label>
-									<!-- <div >
-										<small class="text-xs text-dark_gray"></small>
-									</div> -->
-									</ion-fab-button>
 							<ion-fab-button color="primary" class="relative">
-								<img src="@app/assets/images/icons/flashCard.png" class="w-4" alt="">
-										<ion-label class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">Create a flashcard</ion-label>
-									<!-- <div class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">
-										<small class="text-xs text-dark_gray">Create a study set</small>
+								<ion-icon :icon="folder" class="relative"></ion-icon>
+								<ion-label class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">Create a study set</ion-label>
+								<!-- <div >
+										<small class="text-xs text-dark_gray"></small>
 									</div> -->
 							</ion-fab-button>
 							<ion-fab-button color="primary" class="relative">
+								<img src="@app/assets/images/icons/flashCard.png" class="w-4" alt="">
+								<ion-label class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">Create a flashcard</ion-label>
+								<!-- <div class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">
+										<small class="text-xs text-dark_gray">Create a study set</small>
+									</div> -->
+							</ion-fab-button>
+							<ion-fab-button color="primary" class="relative overflow-visible">
 								<ion-icon :icon="helpCircle"></ion-icon>
-										<ion-label class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">Ask a question</ion-label>
-									<!-- <div class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">
+								<ion-label class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">Ask a question</ion-label>
+								<!-- <div class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">
 										<small class="text-xs text-dark_gray">Create a study set</small>
 									</div> -->
 							</ion-fab-button>
@@ -89,3 +89,12 @@ export default defineComponent({
 	}
 })
 </script>
+
+
+<style scoped>
+	ion-fab-button {
+		--background: #546DD3;
+		/* --background-activated: #4D5C6F; */
+		--background-activated: #4D5C6F;
+	}
+</style>
