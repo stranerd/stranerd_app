@@ -18,32 +18,42 @@
 
 			</div>
 		</div>
+		<div class="w-screen h-screen bg-light_gray">
+			<div
+				:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
 
-		<div
-			:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
+				<div ref="screen" class="bg-white h-[25rem] min-w-[57px] w-full grid place-items-center rounded-md "
+					@click="toggle">
+					<ion-text class="text-3xl text-faded_gray font-bold">
+						MAX PDF WIDTH
+					</ion-text>
 
-			<div ref="screen" class="bg-faded_gray h-[25rem] min-w-[57px] w-full grid place-items-center rounded-md "
-				@click="toggle">
-				<div class="bg-white rounded-full grid place-items-center h-16 w-16">
-					<ion-icon
-						:icon="play"
-						class="text-faded_gray text-3xl"
-					/>
 				</div>
 
+				<div class="w-full mx-auto fixed bottom-12 md:inset-x-0 inset-x-4">
+					<div class="lg:w-8/12 w-full px-4 mx-auto flex  items-center  my-8 max-w-[40rem]  bg-dark_gray text-2xl text-white rounded-xl">
+						<div class="py-2 px-4 !-my-2 border-r border-light_gray flex justify-between items-center gap-4">
+							<ion-icon :icon="chevronDown"/>
+							<ion-text class="text-lg">3 of 50</ion-text>
+							<ion-icon :icon="chevronUp"/>
+						</div>
+						<div class="py-2 px-4 border-r border-light_gray flex justify-between items-center gap-4">
+							<ion-icon :icon="remove"/>
+							<ion-text class="text-lg border border-light_gray rounded-md py-1 px-4 ">100</ion-text>
+							<ion-icon :icon="add"/>
+						</div>
+						<div class="py-2 px-4 flex justify-center items-center">
+							<ion-icon :icon="scan"/>
+				
+						</div>
+				
+					</div>
+				</div>
+			
 			</div>
 
-			<div class="w-full flex flex-col items-center justify-between my-8 max-w-[40rem] mx-auto">
-				<ion-text class="text-lg text-dark_gray font-bold">
-					Description
-				</ion-text>
-				<ion-text class="text-dark_gray text-sm text-center">
-					This video cover the complete explanation, breakdown of problems, solving of questions under
-					Waves and Sound.
-				</ion-text>
-			</div>
 		</div>
-
+	
 		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
 			<div class="lg:w-8/12 max-w-[60rem] w-full px-4 mx-auto flex items-center justify-between">
 				<div class="flex">
@@ -75,13 +85,13 @@
 
 <script lang="ts">
 import Justified from '@app/layouts/Justified.vue'
-import { add, bookmark, chevronBack, chevronForward, contract, pencil, play, scan, shareSocial } from 'ionicons/icons'
+import { add, bookmark, chevronDown, chevronUp, contract, pencil, remove, scan, shareSocial } from 'ionicons/icons'
 import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 
 export default {
-	name: 'view Video',
-	displayName: 'Videos',
+	name: 'view Notes',
+	displayName: 'Notes',
 	components: {
 		Justified,
 		ShowRatings,
@@ -89,7 +99,7 @@ export default {
 	},
 	setup () {
 		return {
-			play, add, scan, chevronBack, chevronForward, pencil, contract, bookmark, shareSocial
+			add,remove, scan, chevronDown, chevronUp, pencil, contract, bookmark, shareSocial
 		}
 	}
 }

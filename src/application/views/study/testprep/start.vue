@@ -84,7 +84,7 @@
 import Justified from '@app/layouts/Justified.vue'
 import { IonSegment, IonSegmentButton, } from '@ionic/vue'
 import { ellipsisVertical, flag,  } from 'ionicons/icons'
-import { useSubmitModal } from '@app/composable/core/modals'
+import { useStudyModal } from '@app/composable/core/modals'
 
 export default {
 	name: 'start testprep',
@@ -96,7 +96,7 @@ export default {
 	},
 	setup () {
 		const submit = ()=>{
-			useSubmitModal().openSubmitTestprep()
+			useStudyModal().openSubmitTestprep()
 		}
 		return { submit, ellipsisVertical, flag,}
 	}
