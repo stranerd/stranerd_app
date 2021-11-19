@@ -1,6 +1,6 @@
 <template>
 	<DashboardLayout>
-		<div>
+		<div class="pl-3 pr-1.5 pt-2">
 			<RecentQuestions />
 		</div>
 	</DashboardLayout>
