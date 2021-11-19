@@ -1,10 +1,11 @@
 <template>
 	<div
-		class="hidden lg:flex bg-light_gray py-3 pl-3 w-[16%] h-full  left-0 top-0 flex-col rounded-tr-3xl rounded-br-3xl z-50">
+		class="hidden lg:flex bg-light_gray py-3 pl-3 w-[16%] h-full  left-0 top-0 flex-col z-30">
+		<!-- class="hidden lg:flex bg-light_gray py-3 pl-3 w-full h-full !max-h-full left-0 top-0 flex-col rounded-tr-3xl rounded-br-3xl z-50"> -->
 
-		<div class="py-5 pl-11 flex flex-row items-center">
+		<!-- <div class="py-5 pl-11 flex flex-row items-center">
 			<img class="w-32" src="@app/assets/images/icons/logo.svg" />
-		</div>
+		</div> -->
 
 		<div class="flex flex-col pl-8 mt-6">
 

@@ -2,7 +2,7 @@
 	<IonFooter>
 		<!-- smaller screens -->
 		<!-- <IonToolbar class="md:hidden bg-[#F7F7FC]"> -->
-		<IonToolbar class="md:hidden bg-white">
+		<IonToolbar class="md:hidden !bg-white">
 			<div class="flex justify-around items-center">
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
@@ -118,6 +118,10 @@ export default defineComponent({
 	/* .tabStyle {
 		@apply border-t-2 border-gray-300
 	} */
+
+	ion-toolbar {
+    	--background: #FFFFFF;
+	}
 
 	ion-tab-button {
 		--color-selected: #546DD3;
