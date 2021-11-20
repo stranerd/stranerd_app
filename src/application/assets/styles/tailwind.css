@@ -67,11 +67,11 @@
 	}
 
 	.headings {
-		@apply md:text-xl text-sm
+		@apply md:text-2xl text-base
 	}
 
 	.heading {
-		@apply md:text-xl text-sm
+		@apply md:text-2xl text-base
 	}
 
 	.cardPadding {

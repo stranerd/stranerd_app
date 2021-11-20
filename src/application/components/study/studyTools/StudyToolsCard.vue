@@ -1,22 +1,22 @@
 <template>
 	<div
-		:class="`m-0  h-[17rem] min-w-[15.80rem] lg:min-w-[33%] w-full cardPadding border border-faded_gray    md:rounded-xl rounded-md flex flex-col items-center md:gap-2 gap-[1rem] box-border  p-5`"
+		:class="`m-0  h-[13rem]  min-w-[16.5rem] w-full cardPadding border border-faded_gray    rounded-xl  flex flex-col justify-center items-center md:gap-2 gap-[0.2rem] box-border  p-5`"
 	>
     
 		<ion-icon
 			class="text-dark_gray text-5xl"
 			:icon="icon"
-		/>
+		/> 
 
-		<ion-text class="font-bold">
+		<ion-text class="font-bold text-main_dark">
 			{{title}}
 		</ion-text>
 
-		<ion-text class="text-center">
+		<ion-text class="text-center text-main_dark normalText ">
 			{{subText}}
 		</ion-text>
 
-		<ion-button :to="route" class="btn-outline min-w-[12rem] bg-transparent text-dark_gray font-bold">
+		<ion-button :to="route" class="btn-secondary min-w-[7rem] bg-transparent mb-4 text-white lg:text-base text-xs  font-bold">
 			{{btnText}}
 		</ion-button>
 

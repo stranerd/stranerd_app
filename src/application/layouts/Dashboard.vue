@@ -4,8 +4,8 @@
 		<div class="flex h-full">
 			<Sidebar />
 			<div class="layout">
-				<IonContent>
-					<div class="layout-page mt-10">
+				<IonContent >
+					<div class="layout-page ">
 						<div class="layout-body">
 							<slot />
 						</div>

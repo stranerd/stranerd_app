@@ -1,7 +1,6 @@
 <template>
-	<IonFooter class="">
+	<IonFooter class="ion-no-border">
 		<!-- smaller screens -->
-		<!-- <IonToolbar class="md:hidden bg-[#F7F7FC]"> -->
 		<IonToolbar class="md:hidden !bg-white">
 			<div class="flex justify-around items-center">
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
@@ -21,38 +20,13 @@
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
-					to="/profile">
+					to="/account">
 					<ion-icon :icon="person" class="w-5" />
 				</router-link>
 			</div>
 		</IonToolbar>
 
-		<!-- medium screens -->
-		<!-- <IonToolbar class="hidden lg:hidden md:flex bg-white">
-			<div class="flex justify-around items-center">
-				<router-link class="px-3 py-2 bg-light_gray text-icon_inactive rounded-lg"
-					exact-active-class="text-primary"
-					to="/dashboard">
-					<div class="flex flex-col py-1 items-center justify-center">
-						<ion-icon :icon="home" class="w-12" />
-					</div>
-				</router-link>
-
-				<router-link class="px-3 py-2 bg-primary text-white rounded-lg" to="/questions/create">
-					<div class="flex flex-col py-1 items-center justify-center">
-						<ion-icon :icon="add" class="w-12" />
-					</div>
-				</router-link>
-
-				<router-link class="px-3 py-2 bg-light_gray text-icon_inactive rounded-lg"
-					exact-active-class="text-primary"
-					to="/questions">
-					<div class="flex flex-col py-1 items-center justify-center">
-						<ion-icon :icon="helpCircle" class="w-12" />
-					</div>
-				</router-link>
-			</div>
-		</IonToolbar> -->
+	
 		<IonToolbar class="hidden lg:hidden md:flex bg-white">
 			<div class="flex justify-around items-center">
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"

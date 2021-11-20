@@ -1,9 +1,9 @@
 <template>
 	<div
-		:class="`m-0  h-[6.2rem] min-w-[15.80rem] cardPadding ${colorClass}  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-[1rem] box-border  p-5 border border-faded_gray lg:border-0`"
+		:class="`m-0  h-[7.5rem] min-w-[16.5rem] cardPadding ${colorClass}   rounded-xl  flex flex-col  items-center justify-center md:gap-2 gap-[1rem] box-border  p-5 px-10 border border-faded_gray lg:border-0`"
 	>
-		<div class="flex items-center justify-between w-full">
-			<div class="bg-faded_gray min-h-[57px] min-w-[57px] grid place-items-center rounded-md mr-5">
+		<div class="flex items-center justify-between w-full  mx-auto">
+			<div class="bg-icon_inactive min-h-[60px] min-w-[60px] grid place-items-center rounded-md mr-5 ml-2">
 				<ion-icon
 					class="text-white text-2xl"
 					:icon="play"

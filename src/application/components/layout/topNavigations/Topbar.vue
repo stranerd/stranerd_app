@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<ion-header class="block ion-no-border z-40 left-0 w-full top-0 lg:shadow-md py-2 lg:py-2.5">
+		<ion-header class="block ion-no-border z-40 inset-x-0 w-full top-0 lg:shadow-md ">
 			<ion-toolbar
-				class="md:hidden bg-white px-4 border-0">
+				class="md:hidden bg-white px-4 border-0 h-12 flex items-center justify-center">
 				<div class="flex items-center justify-between">
 					<router-link class="flex items-center " to="/notifications">
 						<ion-icon :icon="notifications" class="text-xl text-main_dark"></ion-icon>
@@ -108,36 +108,7 @@
 						</div>
 					</div>
 				</div>
-				<!-- <ion-grid>
-					<ion-row class="items-center gap-10">
-						<ion-col>
-							<router-link class="flex items-center" to="/users/leaderboard">
-								<img class="w-32" src="@app/assets/images/logo/logo-dark.svg" />
-							</router-link>
-						</ion-col>
-						<ion-col size="7">
-							<search-bar class="flex-grow" />
-						</ion-col>
-						<ion-col>
-							<div class="flex flex-row items-center py-1 gap-6 justify-between">
-								<router-link class="py-2 flex items-center"
-									to="/questions/create">
-									<ion-icon :icon="addCircle" class="text-xl text-main_dark"></ion-icon>
-								</router-link>		
-								<router-link class="py-2 flex flex-row items-center justify-center"
-									to="/notifications">
-									<ion-icon :icon="notifications" class="text-xl text-main_dark"></ion-icon>
-								</router-link>		
-								<router-link class="py-2 font-bold flex flex-row items-center justify-center gap-2"
-									to="/account">
-									<avatar :id="user?.id" :size="26" :src="user?.avatar" />
-									<span class="text-base text-main_dark">Timmy Neutron</span>
-									<ion-icon :icon="chevronDown" class="text-xl text-main_dark"></ion-icon>
-								</router-link>
-							</div>
-						</ion-col>
-					</ion-row>
-				</ion-grid>	 -->
+	
 			</ion-toolbar>
 		</ion-header>
 	</div>
