@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="w-full flex justify-between">
-			<span class="heading font-bold text-dark_gray">
+			<span class="heading font-bold text-main_dark">
 				My Study
 			</span>
 
@@ -16,9 +16,9 @@
 		<Swiper v-if="true"
 			:freeMode="true"
 			:items="[1,2,3]"
-			:slides="3"
-			class="flex flex-row w-full items-center mt-2 mb-8"
-			slideClass="!w-3/6 !max-w-[17rem] !min-w-[15rem] !pr-3"
+			:slides="2.5"
+			class="mt-2 overflow-x-auto flex"
+			slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !pr-3"
 		>
 			<template v-slot:default="{ item, index }">
 				<MyStudyCard :colorClass=" index  === 0 ? 'bg-butter_yellow' : 'bg-light_gray'" :item="item"

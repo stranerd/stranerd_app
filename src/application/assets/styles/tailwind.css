@@ -63,15 +63,15 @@
 	}
 
 	.normalText {
-		@apply md:text-sm text-xs
+		@apply md:text-base text-xs
 	}
 
 	.headings {
-		@apply md:text-base text-sm
+		@apply md:text-xl text-sm
 	}
 
 	.heading {
-		@apply md:text-base text-sm
+		@apply md:text-xl text-sm
 	}
 
 	.cardPadding {

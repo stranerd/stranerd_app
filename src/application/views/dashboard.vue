@@ -2,6 +2,9 @@
 	<DashboardLayout>
 		<div class="pl-3 pr-1.5 pt-2">
 			<RecentQuestions />
+			<ContinueStudy class="mt-8"/>
+			<MyStudy class="mt-8"/>
+			<StudyTools class="mt-8"/>
 		</div>
 	</DashboardLayout>
 </template>
@@ -9,12 +12,18 @@
 import { defineComponent } from 'vue'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import RecentQuestions from '@app/components/dashboard/RecentQuestions.vue'
+import ContinueStudy from '@app/components/dashboard/ContinueStudy.vue'
+import MyStudy from '@app/components/study/MyStudy.vue'
+import StudyTools from '../components/study/studyTools/index.vue'
 
 export default defineComponent({
 	name: 'Dashboard',
 	components: {
 		DashboardLayout,
-		RecentQuestions
+		RecentQuestions,
+		ContinueStudy,
+		MyStudy,
+		StudyTools
 	}
 })
 </script>
