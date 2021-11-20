@@ -15,7 +15,7 @@
 					{ name: 'Study', path: '/study', icon: library }
 				]" :key="path" :to="path"
 				class="flex flex-col rounded-l-[150px] text-icon_inactive cursor-pointer text-sm hover:text-dark_gray mb-2">
-				<div :class="{'text-dark_gray bg-white' : $route.path === path }"
+				<div :class="{'text-dark_gray bg-white active-route-link relative' : $route.path === path }"
 					class="py-5 flex flex-row px-4 items-center rounded-l-3xl">
 					<ion-icon :icon="icon" class="text-[23px] mr-4"></ion-icon>
 					<span class="font-semibold capitalize">{{ name }}</span>
@@ -47,3 +47,26 @@ export default defineComponent({
 	}
 })
 </script>
+
+
+<style scoped>
+.active-route-link::after,
+.active-route-link::before {
+  content: "";
+  position: absolute;
+  background-color: transparent;
+  height: 3rem;
+  width: 1.5rem;
+  right: 0;
+}
+.active-route-link::before {
+  bottom: -50px;
+  border-top-right-radius: 1.5rem;
+  box-shadow: 0 -1.5rem 0 0 #FFF;
+}
+.active-route-link::after {
+  top: -3rem;
+  border-bottom-right-radius: 1.5rem;
+  box-shadow: 0 1.5rem 0 0 #FFF;
+}
+</style>

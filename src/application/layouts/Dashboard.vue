@@ -21,27 +21,27 @@
 							<ion-icon :icon="add"></ion-icon>
 						</ion-fab-button>
 						<ion-fab-list side="top" class="z-50">
-							<ion-fab-button color="primary" class="relative">
-								<ion-icon :icon="folder" class="relative"></ion-icon>
-								<ion-label class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">Create a study set</ion-label>
-								<!-- <div >
-										<small class="text-xs text-dark_gray"></small>
-									</div> -->
-							</ion-fab-button>
-							<ion-fab-button color="primary" class="relative">
-								<img src="@app/assets/images/icons/flashCard.png" class="w-4" alt="">
-								<ion-label class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">Create a flashcard</ion-label>
-								<!-- <div class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">
-										<small class="text-xs text-dark_gray">Create a study set</small>
-									</div> -->
-							</ion-fab-button>
-							<ion-fab-button color="primary" class="relative overflow-visible">
-								<ion-icon :icon="helpCircle"></ion-icon>
-								<ion-label class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">Ask a question</ion-label>
-								<!-- <div class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">
-										<small class="text-xs text-dark_gray">Create a study set</small>
-									</div> -->
-							</ion-fab-button>
+							<router-link class="relative"
+								to="/study">
+								<ion-fab-button color="primary" size="small" class="relative">
+									<ion-icon :icon="folder" class="relative"></ion-icon>
+								</ion-fab-button>								
+								<ion-label class="px-2 py-1 mr-1.5 w-max bg-white text-xs font-bold shadow-md text-icon_inactive top-1/2 transform -translate-y-1/2 absolute right-full">Create a study set</ion-label>
+							</router-link>	
+							<router-link class="relative"
+								to="/notifications">
+								<ion-fab-button color="primary" size="small" class="relative">
+									<img src="@app/assets/images/icons/flashCard.png" class="w-4" alt="">
+								</ion-fab-button>								
+								<ion-label class="px-2 py-1 mr-1.5 w-max bg-white text-xs font-bold shadow-md text-icon_inactive top-1/2 transform -translate-y-1/2 absolute right-full">Create a flashcard</ion-label>
+							</router-link>
+							<router-link class="relative"
+								to="/questions/create">
+								<ion-fab-button color="primary" size="small" class="relative">
+									<ion-icon :icon="helpCircle"></ion-icon>
+								</ion-fab-button>								
+								<ion-label class="px-2 py-1 mr-1.5 w-max bg-white text-xs font-bold shadow-md text-icon_inactive top-1/2 transform -translate-y-1/2 absolute right-full">Ask a question</ion-label>
+							</router-link>
 						</ion-fab-list>
 					</ion-fab>
 				</IonContent>

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<ion-header class="block ion-no-border z-40 left-0 w-full top-0 lg:shadow-md py-4">
+		<ion-header class="block ion-no-border z-40 left-0 w-full top-0 lg:shadow-md py-2 lg:py-2.5">
 			<ion-toolbar
 				class="md:hidden bg-white px-4 border-0">
 				<div class="flex items-center justify-between">
@@ -20,7 +20,7 @@
 
 			<!-- medium screens -->
 			<ion-toolbar
-				class="hidden lg:hidden md:flex bg-white py-3 px-3 items-center border-0 z-50">
+				class="hidden lg:hidden md:flex bg-white px-3 items-center border-0 z-50">
 				<div class="flex items-center justify-between">
 					<router-link class="flex items-center " to="/notifications">
 						<ion-icon :icon="notifications" class="text-xl text-main_dark"></ion-icon>
@@ -51,34 +51,56 @@
 						</div>
 						<div class="w-1/4 flex-auto">
 							<div class="flex flex-row items-center py-1 gap-6 justify-between">
-								<router-link class="py-2 flex items-center relative"
-									to="/questions/create">
-									<ion-icon :icon="addCircle" class="text-xl text-main_dark w-7 relative"></ion-icon>
-									<!-- <ion-card class="w-24 px-4 py-6 top-full absolute z-50">	  
-	<ion-card-content>
-									<div class="flex items-center gap-2">
-								<ion-icon :icon="folder" class="relative"></ion-icon>
-								<ion-label class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">Create a study set</ion-label>
+								<!-- <router-link class="py-2 flex items-center relative"
+									to="/questions/create"> -->
+									
+								<!-- <ion-card class="w-24 px-4 py-6 top-full absolute z-50">	   -->
+								<ion-button @click="setOpen(true, $event)" fill="clear">
+									<ion-icon :icon="addCircle" class="text-2xl text-main_dark"></ion-icon>
+								</ion-button>
+								<ion-popover
+									:is-open="isOpenRef"
+									css-class="my-custom-class"
+									:event="event"
+									:translucent="true"
+									:showBackdrop="false"
+									@didDismiss="setOpen(false)"
+									class="mt-5"
+								>
+									<!-- <Popover></Popover> -->
+									<div class="mt-4">
+										<ion-content class="ion-padding w-60">
+											<div class="px-4 py-3">
+												<router-link class="py-2 my-2 flex gap-4 items-center text-icon_inactive"
+													to="/study">
+													<!-- <ion-icon :icon="notifications" class="text-xl text-main_dark w-7"></ion-icon> -->
+													<ion-icon :icon="folder" class="text-2xl"></ion-icon>
+													<ion-label class="">Create a study set</ion-label>
+												</router-link>	
+												<!-- <div class="flex items-center gap-2 w-full">
+												</div> -->
+												<router-link class="py-2 my-2 flex gap-4 items-center text-icon_inactive"
+													to="/notifications">
+													<img src="@app/assets/images/icons/flashCardNav.svg" class="w-6" alt="">
+													<ion-label class="">Create a flashcard</ion-label>
+												</router-link>
+												<router-link class="py-2 my-2 flex gap-4 items-center text-icon_inactive"
+													to="/questions/create">
+													<ion-icon :icon="helpCircle" class="text-3xl"></ion-icon>
+													<ion-label class="">Ask a question</ion-label>
+												</router-link>
+											</div>
+										</ion-content>
 									</div>
-									<div class="flex items-center gap-2">
-								<img src="@app/assets/images/icons/flashCard.png" class="w-4" alt="">
-								<ion-label class="px-1.5 py-1 mr-1.5 bg-white top-1/2 transform -translate-y-1/2 absolute right-full">Create a flashcard</ion-label>
-									</div>
-									<div class="flex items-center gap-2">
-								<ion-icon :icon="helpCircle"></ion-icon>
-								<ion-label class="">Ask a question</ion-label>
-									</div>
-		</ion-card-content>
-	</ion-card> -->
-								</router-link>		
+								</ion-popover>
 								<router-link class="py-2 flex flex-row items-center justify-center"
 									to="/notifications">
-									<ion-icon :icon="notifications" class="text-xl text-main_dark w-7"></ion-icon>
+									<ion-icon :icon="notifications" class="text-2xl text-main_dark"></ion-icon>
 								</router-link>		
 								<router-link class="py-2 font-bold flex flex-row items-center justify-center gap-2"
 									to="/account">
 									<!-- <avatar :id="user?.id" :size="26" :src="user?.avatar" /> -->
-									<ion-icon :icon="personCircle" class="text-5xl text-icon_inactive w-7"></ion-icon>
+									<ion-icon :icon="personCircle" class="text-4xl text-icon_inactive"></ion-icon>
 									<span class="text-base text-main_dark">Timmy Neutron</span>
 									<ion-icon :icon="chevronDown" class="text-xl text-main_dark"></ion-icon>
 								</router-link>
@@ -124,24 +146,36 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { } from '@ionic/vue'
-import { IonHeader, IonIcon, IonToolbar } from '@ionic/vue'
+import { IonHeader, IonIcon, IonToolbar, IonButton, IonPopover  } from '@ionic/vue'
 // import { IonHeader, IonIcon, IonToolbar, IonCol, IonGrid, IonRow } from '@ionic/vue'
-import { addCircle, personCircle, close, home, notifications, school, search, chevronDown } from 'ionicons/icons'
+import { addCircle, helpCircle, folder, personCircle, close, home, notifications, school, search, chevronDown } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 // import Avatar from '@app/components/core/Avatar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
+// import Popver from './popover.vue'
 
 export default defineComponent({
 	// components: { IonIcon, Avatar, SearchBar, IonHeader, IonToolbar, IonCol, IonGrid, IonRow },
-	components: { IonIcon, SearchBar, IonHeader, IonToolbar },
+	components: { IonButton, IonPopover, IonIcon, SearchBar, IonHeader, IonToolbar },
 	setup () {
+		const isOpenRef = ref(false)
+		const event = ref()
+		const setOpen = (state: boolean, ev?: Event) => {
+			event.value = ev 
+			isOpenRef.value = state
+		}
 		const { user } = useAuth()
 		const showSearch = ref(false)
 		const toggleSearch = () => {
 			showSearch.value = !showSearch.value
 		}
 		return {
+			isOpenRef, 
+			setOpen, 
+			event,
 			addCircle,
+			helpCircle, 
+			folder,
 			personCircle,
 			close,
 			chevronDown,
