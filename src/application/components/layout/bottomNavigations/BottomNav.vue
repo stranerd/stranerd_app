@@ -1,40 +1,28 @@
 <template>
-	<IonFooter>
+	<IonFooter class="">
 		<!-- smaller screens -->
 		<!-- <IonToolbar class="md:hidden bg-[#F7F7FC]"> -->
-		<IonToolbar class="md:hidden bg-white">
+		<IonToolbar class="md:hidden !bg-white">
 			<div class="flex justify-around items-center">
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/dashboard">
-					<ion-icon :icon="home" class="w-7" />
+					<ion-icon :icon="home" class="w-5" />
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
-					to="/">
-					<ion-icon :icon="book" class="w-7" />
+					to="/questions">
+					<ion-icon :icon="helpCircle" class="w-5" />
+				</router-link>
+				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
+					exact-active-class="!text-main_dark"
+					to="/study">
+					<ion-icon :icon="book" class="w-5" />
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/profile">
-					<ion-icon :icon="person" class="w-7" />
-				</router-link>
-
-				<!-- <router-link class="col-span-1 text-icon_inactive flex flex-row items-center justify-center"
-					exact-active-class="text-primary"
-					to="/questions/create">
-					<ion-icon :icon="add" class="w-7" />
-				</router-link> -->
-				<!-- <router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
-					exact-active-class="!text-main_dark"
-					to="/questions/create">
-					<ion-icon :icon="add" class="w-7" />
-				</router-link> -->
-
-				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
-					exact-active-class="!text-main_dark"
-					to="/questions">
-					<ion-icon :icon="helpCircle" class="w-6" />
+					<ion-icon :icon="person" class="w-5" />
 				</router-link>
 			</div>
 		</IonToolbar>
@@ -118,6 +106,11 @@ export default defineComponent({
 	/* .tabStyle {
 		@apply border-t-2 border-gray-300
 	} */
+
+	ion-toolbar {
+		--background: #FFFFFF;
+		--border-color: rgba(0, 0, 0, .4)
+	}
 
 	ion-tab-button {
 		--color-selected: #546DD3;
