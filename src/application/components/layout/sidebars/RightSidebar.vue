@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full flex flex-col py-3 px-2 ">
+	<div class="w-full flex flex-col py-3 px-2">
 		<SideLeaderboard />
 	</div>
 </template>

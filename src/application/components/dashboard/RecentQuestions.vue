@@ -1,11 +1,11 @@
 <template>
-	<div>
+	<div class="mt-7">
 		<div class="w-full flex justify-between">
-			<span class="heading font-bold text-dark_gray">
+			<span class="heading font-bold text-main_dark">
 				Recent questions
 			</span>
 
-			<router-link v-if="questions.length " class="text-primary normalText flex items-center font-bold"
+			<router-link v-if="questions.length " class="text-primary normalText flex items-center font-semibold"
 				to="/questions">
 				<span>view all</span>
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
@@ -22,22 +22,15 @@
 			</div>
 		</template>
 		<template v-else>
-			<Swiper :freeMode="true" :items="questions" :slides="3" class="mt-2 overflow-x-auto lg:hidden"
-				slideClass="flex md:!w-[300px] !w-[265px] mr-3">
+			<Swiper :freeMode="true" :items="questions" :slides="1.1" class="mt-2 overflow-x-auto flex"
+				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] min-w-[16.5rem] !mr-6">
 				<template v-slot:default="{ item: question, index }">
-					<QuestionListCard :colorClass="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'" :fromHome="true"
-						:question="question" class="h-[150px]" />
+					<QuestionListCard :colorClass="0 === index ? 'bg-butter_yellow min-w-[16.5rem]' : 'bg-light_gray min-w-[16.5rem]'" :fromHome="true"
+						:question="question" class="h-[9.7rem]" />
 				</template>
 			</Swiper>
 
-			<Swiper :items="questions" :slides="3"
-				class="mt-2 overflow-x-auto hidden lg:flex flex-row items-center"
-				slideClass="!w-2/5 !max-w-[18rem] !pr-3">
-				<template v-slot:default="{ item: question, index }">
-					<QuestionListCard :colorClass="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'" :fromHome="true"
-						:question="question" class="h-[9rem]" />
-				</template>
-			</Swiper>
+		
 		</template>
 	</div>
 </template>
