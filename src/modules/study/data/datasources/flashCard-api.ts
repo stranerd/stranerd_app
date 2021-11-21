@@ -7,7 +7,7 @@ export class FlashCardApiDataSource implements FlashCardBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/resources/flashCards')
+		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/flashCards')
 	}
 
 	async create (data: FlashCardToModel) {

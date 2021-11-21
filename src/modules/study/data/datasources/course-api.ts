@@ -7,7 +7,7 @@ export class CourseApiDataSource implements CourseBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/resources/courses')
+		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/courses')
 	}
 
 	async create (data: CourseToModel) {

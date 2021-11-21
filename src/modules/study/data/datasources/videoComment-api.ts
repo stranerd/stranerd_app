@@ -7,7 +7,7 @@ export class VideoCommentApiDataSource implements VideoCommentBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/resources/videoComments')
+		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/videoComments')
 	}
 
 	async create (data: VideoCommentToModel) {

@@ -7,7 +7,7 @@ export class NoteApiDataSource implements NoteBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/resources/notes')
+		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/notes')
 	}
 
 	async create (data: NoteToModel) {

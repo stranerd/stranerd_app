@@ -7,7 +7,7 @@ export class VideoApiDataSource implements VideoBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/resources/videos')
+		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/videos')
 	}
 
 	async create (data: VideoToModel) {

@@ -7,7 +7,7 @@ export class InstitutionApiDataSource implements InstitutionBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/resources/institutions')
+		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/institutions')
 	}
 
 	async create (data: InstitutionToModel) {

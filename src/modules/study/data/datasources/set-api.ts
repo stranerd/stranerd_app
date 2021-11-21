@@ -7,7 +7,7 @@ export class SetApiDataSource implements SetBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/resources/sets')
+		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/sets')
 	}
 
 	async create (data: SetToModel) {
