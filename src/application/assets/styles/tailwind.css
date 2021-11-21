@@ -55,11 +55,11 @@
 	}
 
 	.inactiveSlideTab {
-		@apply py-3 px-3 text-xs md:text-sm  font-semibold bg-light_gray text-dark_gray rounded-md focus:outline-none
+		@apply py-3 px-3 text-xs md:text-sm  font-semibold bg-light_gray text-icon_inactive rounded-xl focus:outline-none
 	}
 
 	.activeSlideTab {
-		@apply py-3 px-3 text-xs md:text-sm  font-semibold text-white bg-icon_inactive rounded-md focus:outline-none
+		@apply py-3 px-3 text-xs md:text-sm  font-semibold text-white bg-dark_gray rounded-xl focus:outline-none
 	}
 
 	.normalText {
