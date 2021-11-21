@@ -1,6 +1,6 @@
 <template>
 	<router-link
-		:class="`py-4 px-4 rounded-lg ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer`"
+		:class="`py-4 px-4 rounded-xl ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer border border-faded_gray lg:border-0`"
 		:to="`/questions/${question.id}`">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
@@ -8,7 +8,7 @@
 			<span class="font-bold text-dark_gray">{{ question.userBio.fullName }}</span>
 			<div class="flex flex-row-reverse flex-grow">
 				<template v-if="fromHome">
-					<span class="font-bold text-icon_inactive lg:mr-2">{{ formatTime(question.createdAt) }}</span>
+					<span class="font-bold text-dark_gray lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 				</template>
 				<template v-else>
 					<template v-if="!fromViewQuestion">
@@ -38,7 +38,7 @@
 			<Subject :key="question.subjectId" :subjectId="question.subjectId" class="font-semibold text-dark_gray" />
 		</div>
 
-		<span class="py-2 text-dark_gray leading-normal mb-3 lg:mb-5"
+		<span class="py-2 pb-1 text-main_dark leading-normal mb-2 lg:mb-4"
 			v-html="fromViewQuestion ? question.body : question.trimmedBody" />
 
 		<div
@@ -51,11 +51,11 @@
 				</span>
 			</div>
 
-			<div class="mt-2 flex flex-row items-center ">
+			<div class=" flex flex-row items-center ">
 				<span v-if="!fromHome"
-					class="font-bold text-icon_inactive lg:mr-2">{{ formatTime(question.createdAt) }}</span>
+					class="font-bold text-dark_gray lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 				<div :class="`flex ${fromHome ? 'flex-row' : 'flex-row-reverse'}  items-center flex-grow`">
-					<span class="font-bold text-icon_inactive">{{
+					<span class="font-bold text-dark_gray">{{
 						question.answers.length
 					}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
 					<span v-if="!fromHome" class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 "></span>

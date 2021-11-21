@@ -1,32 +1,22 @@
 <template>
 	<div
-		:class="`m-0  h-[9.5rem] cardPadding ${colorClass}  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-[1rem] box-border  p-5`"
+		:class="`m-0  h-[7.5rem] min-w-[16.5rem] cardPadding ${colorClass}   rounded-xl  flex flex-col  items-center justify-center md:gap-2 gap-[1rem] box-border  p-5 px-10 border border-faded_gray lg:border-0`"
 	>
-		<div class="flex items-center justify-between w-full">
-			<div class="bg-faded_gray min-h-[57px] min-w-[57px] grid place-items-center rounded-md mr-5">
+		<div class="flex items-center justify-between w-full  mx-auto">
+			<div class="bg-icon_inactive min-h-[60px] min-w-[60px] grid place-items-center rounded-md mr-5 ml-2">
 				<ion-icon
 					class="text-white text-2xl"
 					:icon="play"
 				/>
 			</div>
             
-			<ion-text class="text-sm text-dark_gray">
+			<ion-text class="text-sm text-main_dark font-bold">
 				Work and Energy 
 				Introduction to
 				University Physics
 			</ion-text>
 		</div>
 
-		<div class="w-full flex items-center justify-between mt-4">
-			<ShowRatings :rating="4"/>
-
-			<div class="flex items-center">
-				<ion-text class="text-xs font-bold text-dark_gray mr-3">
-					Timmy
-				</ion-text>
-				<Avatar :size="24"/>
-			</div>
-		</div>
 	
 
 
@@ -37,8 +27,7 @@
 import { calendar, play } from 'ionicons/icons'
 import { defineComponent,  } from 'vue'
 import { formatNumber } from '@utils/commons'
-import ShowRatings from '../core/ShowRatings.vue'
-import Avatar from '../core/Avatar.vue'
+
 
 export default defineComponent({
 	name: 'TutorCard',
@@ -55,7 +44,6 @@ export default defineComponent({
 			play
 		}
 	},
-	components: { ShowRatings, Avatar }
 })
 </script>
 

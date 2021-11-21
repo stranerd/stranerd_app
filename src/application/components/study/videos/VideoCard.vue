@@ -1,6 +1,6 @@
 <template>
 	<div
-		:class="`m-0  h-[19rem]  ${colorClass}  md:rounded-xl rounded-md flex flex-col md:gap-2 gap-[1rem] box-border  pb-5 `"
+		:class="`m-0  h-[18rem]   ${colorClass}  rounded-xl  flex flex-col md:gap-2 gap-[1rem] box-border  pb-5 border border-faded_gray lg:border-0`"
 	>
 		<div class="flex flex-col items-center justify-between w-full">
 			<div class="bg-faded_gray min-h-[10.5rem] min-w-[57px] w-full grid place-items-center rounded-md ">
@@ -13,9 +13,9 @@
 		
 			</div>
             
-			<ion-text class="text-sm text-dark_gray p-5 pb-2">
+			<ion-text class="text-sm text-main_dark font-bold p-5 pb-1">
 				Work and Energy 
-				Work and Energy - Introduction to
+				- Introduction to
 				University physics
 			</ion-text>
 		</div>
@@ -24,14 +24,12 @@
 			<ShowRatings :rating="4"/>
 
 			<div class="flex items-center">
-				<ion-text class="text-xs font-bold text-dark_gray mr-3">
+				<ion-text class="text-xs font-bold text-main_dark mr-3">
 					Timmy
 				</ion-text>
 				<Avatar :size="24"/>
 			</div>
 		</div>
-	
-
 
 	</div>
 </template>

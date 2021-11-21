@@ -18,52 +18,46 @@
 
 			</div>
 		</div>
-
-		<div
-			ref="screen"
-			:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
+		<div class="w-screen h-screen bg-light_gray">
 			<div
-				class="flex items-center text-center justify-center h-96 custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto">
-				What will an air bubble in water act like?
-			</div>
+				:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
 
-			<div class="w-full flex items-center justify-between my-8 max-w-[30rem] mx-auto">
-				<ion-icon
-					:icon="play"
-					class="text-icon_inactive text-xl cursor-pointer"
-				/>
-				<div class="flex items-center gap-5">
-					<ion-icon
-						:icon="chevronBack"
-						class="text-icon_inactive text-xl cursor-pointer"
-					/>
-					<ion-text class="mx-4 text-icon_inactive">
-						<b>12</b> of <b>50</b>
+				<div ref="screen" class="bg-white h-[25rem] min-w-[57px] w-full grid place-items-center rounded-md "
+					@click="toggle">
+					<ion-text class="text-3xl text-faded_gray font-bold">
+						MAX PDF WIDTH
 					</ion-text>
-					<ion-icon
-						:icon="chevronForward"
-						class="text-icon_inactive text-xl cursor-pointer"
-					/>
-				</div>
-				<ion-icon
-					v-if="!isFullscreen"
-					:icon="scan"
-					class="text-icon_inactive text-xl cursor-pointer"
-					@click="enter()"
-				/>
-				<ion-icon
-					v-else
-					:icon="contract"
-					class="text-icon_inactive text-xl cursor-pointer"
-					@click="exit()"
-				/>
-			</div>
-		</div>
 
+				</div>
+
+				<div class="w-full mx-auto fixed bottom-12 md:inset-x-0 inset-x-4">
+					<div class="lg:w-8/12 w-full px-4 mx-auto flex  items-center  my-8 max-w-[40rem]  bg-dark_gray text-2xl text-white rounded-xl">
+						<div class="py-2 px-4 !-my-2 border-r border-light_gray flex justify-between items-center gap-4">
+							<ion-icon :icon="chevronDown"/>
+							<ion-text class="text-lg">3 of 50</ion-text>
+							<ion-icon :icon="chevronUp"/>
+						</div>
+						<div class="py-2 px-4 border-r border-light_gray flex justify-between items-center gap-4">
+							<ion-icon :icon="remove"/>
+							<ion-text class="text-lg border border-light_gray rounded-md py-1 px-4 ">100</ion-text>
+							<ion-icon :icon="add"/>
+						</div>
+						<div class="py-2 px-4 flex justify-center items-center">
+							<ion-icon :icon="scan"/>
+				
+						</div>
+				
+					</div>
+				</div>
+			
+			</div>
+
+		</div>
+	
 		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
-			<div class="lg:w-8/12 max-w-[60rem] w-full px-4 lg:p-0 mx-auto flex items-center justify-between">
+			<div class="lg:w-8/12 max-w-[60rem] w-full px-4 mx-auto flex items-center justify-between">
 				<div class="flex">
-					<Avatar :size="28" class="mx-2 lg:ml-0" />
+					<Avatar :size="28" class="mx-2" />
 					<ion-text class="text-icon_inactive"> by <b>Timmy</b></ion-text>
 				</div>
 
@@ -91,13 +85,13 @@
 
 <script lang="ts">
 import Justified from '@app/layouts/Justified.vue'
-import { add, bookmark, chevronBack, chevronForward, contract, pencil, play, scan, shareSocial } from 'ionicons/icons'
+import { add, bookmark, chevronDown, chevronUp, contract, pencil, remove, scan, shareSocial } from 'ionicons/icons'
 import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 
 export default {
-	name: 'StudyExploreTopSection',
-	displayName: 'Flashcard Set',
+	name: 'view Notes',
+	displayName: 'Notes',
 	components: {
 		Justified,
 		ShowRatings,
@@ -105,7 +99,7 @@ export default {
 	},
 	setup () {
 		return {
-			play, add, scan, chevronBack, chevronForward, pencil, contract, bookmark, shareSocial
+			add,remove, scan, chevronDown, chevronUp, pencil, contract, bookmark, shareSocial
 		}
 	}
 }

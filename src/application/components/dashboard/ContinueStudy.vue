@@ -1,8 +1,8 @@
 <template>
-	<div class="mt-7">
+	<div >
 		<div class="w-full flex justify-between">
 			<span class="heading font-bold text-main_dark">
-				Recent questions
+				Continue where you stopped
 			</span>
 
 			<router-link v-if="questions.length " class="text-primary normalText flex items-center font-semibold"
@@ -23,10 +23,10 @@
 		</template>
 		<template v-else>
 			<Swiper :freeMode="true" :items="questions" :slides="1.1" class="mt-2 overflow-x-auto flex"
-				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] min-w-[16.5rem] !mr-6">
+				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
 				<template v-slot:default="{ item: question, index }">
-					<QuestionListCard :colorClass="0 === index ? 'bg-butter_yellow min-w-[16.5rem]' : 'bg-light_gray min-w-[16.5rem]'" :fromHome="true"
-						:question="question" class="h-[9.7rem]" />
+					<PlainStudyCard :colorClass="0 === index ? 'bg-tinted_pink' : 'bg-light_gray'" :fromHome="true"
+						:question="question" class="h-[9rem]" />
 				</template>
 			</Swiper>
 
@@ -40,13 +40,13 @@ import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
-import QuestionListCard from '@app/components/questions/QuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '@app/components/core/EmptyState.vue'
+import PlainStudyCard from '../study/PlainStudyCard.vue'
 
 export default defineComponent({
 	name: 'RecentQuestions',
-	components: { IonIcon, Swiper, QuestionListCard, EmptyState },
+	components: { IonIcon, Swiper, EmptyState, PlainStudyCard },
 	setup () {
 		const { questions: allQuestions, listener, loading, error } = useQuestionList()
 		const questions = computed({

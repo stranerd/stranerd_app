@@ -1,26 +1,38 @@
 <template>
 	<div>
 		<div class="w-full flex justify-between">
-			<span class="heading font-bold text-dark_gray">
-				Study Tools
+			<span class="heading font-bold text-main_dark">
+				Tools to help you study better!
 			</span>
 
 	
 		</div>
 
-		<div 
-			class="flex flex-row w-full items-center mt-2 mb-8 "
+		<Swiper v-if="true"
+			:freeMode="true"
+			:items="cardArr"
+			:slides="1.1"
+			class="mt-2 overflow-x-auto flex"
+			slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6"
 		>
-			<StudyToolsCard 
-				class="!w-3/6 !max-w-[17rem] !min-w-[15rem] !mr-3"
-				v-for="item in cardArr"
-				:btnText="item.btnText"
-				:subText="item.subText"
-				:route="item.route" 
-				:title="item.title"
-				:icon="item.icon"
-				:key="item.title"
-			/>
+			<template v-slot:default="{ item }">
+				<StudyToolsCard 
+					:btnText="item.btnText"
+					:subText="item.subText"
+					:route="item.route" 
+					:title="item.title"
+					:icon="item.icon"
+					:key="item.title"
+				/>
+
+			</template>
+		
+		</Swiper>
+
+		<div 
+			class="flex flex-row w-full items-center mt-2 mb-8 relative"
+		>
+		
 
 		
 		</div>
@@ -37,7 +49,7 @@ import StudyToolsCard from './StudyToolsCard.vue'
 
 export default defineComponent({
 	name: 'RecentTransactions',
-	components: {   StudyToolsCard },
+	components: {   StudyToolsCard }, 
 	setup () {
 		const { id, isLoggedIn } = useAuth()
 

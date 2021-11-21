@@ -81,7 +81,7 @@ import Avatar from '@app/components/core/Avatar.vue'
 
 export default {
 	name: 'view Video',
-	displayName: 'Flashcard Set',
+	displayName: 'Videos',
 	components: {
 		Justified,
 		ShowRatings,

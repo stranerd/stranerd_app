@@ -15,20 +15,20 @@ export const useModal = (stack: Ref<string[]>) => {
 		modals[id].modal?.dismiss?.()
 	}
 
-	const open = async (id: string) => {
+	const open = async (id: string , cssClass: string) => {
 		close(id)
 		if (Object.keys(modals).includes(id)) {
 			modals[id].modal = await modalController
 				.create({
 					component: modals[id].component,
-					cssClass: 'modal-class'
+					cssClass: cssClass
 
 				})
 			modals[id].modal?.present?.()
 		}
 	}
 
-	function register<Key extends string> (type: string, modalObject: Record<Key, Vue>) {
+	function register<Key extends string> (type: string, modalObject: Record<Key, Vue>, css: string) {
 		Object.assign(modals, spreadModals(type, modalObject))
 
 		const helpers = Object.fromEntries(
@@ -36,7 +36,7 @@ export const useModal = (stack: Ref<string[]>) => {
 				.map((key) => capitalize(key))
 				.map((key) => {
 					return [
-						[`open${key}`, async () => open(merge(type, key))],
+						[`open${key}`, async () => open(merge(type, key), css)],
 						[`close${key}`, async () => close(merge(type, key))]
 					]
 				})
