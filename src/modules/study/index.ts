@@ -5,6 +5,7 @@ import { FlashCardApiDataSource } from './data/datasources/flashCard-api'
 import { NoteApiDataSource } from './data/datasources/note-api'
 import { VideoApiDataSource } from './data/datasources/video-api'
 import { VideoCommentApiDataSource } from './data/datasources/videoComment-api'
+import { PastQuestionApiDataSource } from './data/datasources/pastQuestion-api'
 import { SetTransformer } from './data/transformers/set'
 import { CourseTransformer } from './data/transformers/course'
 import { InstitutionTransformer } from './data/transformers/institution'
@@ -12,6 +13,7 @@ import { FlashCardTransformer } from './data/transformers/flashCard'
 import { NoteTransformer } from './data/transformers/note'
 import { VideoTransformer } from './data/transformers/video'
 import { VideoCommentTransformer } from './data/transformers/videoComment'
+import { PastQuestionTransformer } from './data/transformers/pastQuestion'
 import { SetRepository } from './data/repositories/set'
 import { CourseRepository } from './data/repositories/course'
 import { InstitutionRepository } from './data/repositories/institution'
@@ -19,6 +21,7 @@ import { FlashCardRepository } from './data/repositories/flashCard'
 import { NoteRepository } from './data/repositories/note'
 import { VideoRepository } from './data/repositories/video'
 import { VideoCommentRepository } from './data/repositories/videoComment'
+import { PastQuestionRepository } from './data/repositories/pastQuestion'
 import { CourseEntity } from './domain/entities/course'
 import { CourseFactory } from './domain/factories/course'
 import { InstitutionEntity } from './domain/entities/institution'
@@ -73,6 +76,14 @@ import { FindFlashCardUseCase } from './domain/usecases/flashCards/findFlashCard
 import { GetNotesUseCase } from './domain/usecases/notes/getNotes'
 import { AddVideoCommentUseCase } from './domain/usecases/videoComments/addVideoComment'
 import { DeleteFlashCardUseCase } from './domain/usecases/flashCards/deleteFlashCard'
+import { GetPastQuestionsUseCase } from './domain/usecases/pastQuestions/getPastQuestions'
+import { ListenToPastQuestionsUseCase } from './domain/usecases/pastQuestions/listenToPastQuestions'
+import { FindPastQuestionUseCase } from './domain/usecases/pastQuestions/findPastQuestion'
+import { AddPastQuestionUseCase } from './domain/usecases/pastQuestions/addPastQuestion'
+import { EditPastQuestionUseCase } from './domain/usecases/pastQuestions/editPastQuestion'
+import { DeletePastQuestionUseCase } from './domain/usecases/pastQuestions/deletePastQuestion'
+import { PastQuestionData, PastQuestionEntity, PastQuestionType } from './domain/entities/pastQuestion'
+import { PastQuestionFactory } from './domain/factories/pastQuestion'
 
 const setDataSource = new SetApiDataSource()
 const courseDataSource = new CourseApiDataSource()
@@ -81,6 +92,7 @@ const flashCardDataSource = new FlashCardApiDataSource()
 const noteDataSource = new NoteApiDataSource()
 const videoDataSource = new VideoApiDataSource()
 const videoCommentDataSource = new VideoCommentApiDataSource()
+const pastQuestionDataSource = new PastQuestionApiDataSource()
 
 const setTransformer = new SetTransformer()
 const courseTransformer = new CourseTransformer()
@@ -89,6 +101,7 @@ const flashCardTransformer = new FlashCardTransformer()
 const noteTransformer = new NoteTransformer()
 const videoTransformer = new VideoTransformer()
 const videoCommentTransformer = new VideoCommentTransformer()
+const pastQuestionTransformer = new PastQuestionTransformer()
 
 const setRepository = new SetRepository(setDataSource, setTransformer)
 const courseRepository = new CourseRepository(courseDataSource, courseTransformer)
@@ -97,6 +110,7 @@ const flashCardRepository = new FlashCardRepository(flashCardDataSource, flashCa
 const noteRepository = new NoteRepository(noteDataSource, noteTransformer)
 const videoRepository = new VideoRepository(videoDataSource, videoTransformer)
 const videoCommentRepository = new VideoCommentRepository(videoCommentDataSource, videoCommentTransformer)
+const pastQuestionRepository = new PastQuestionRepository(pastQuestionDataSource, pastQuestionTransformer)
 
 export const FindSet = new FindSetUseCase(setRepository)
 export const GetSets = new GetSetsUseCase(setRepository)
@@ -147,9 +161,17 @@ export const AddVideoComment = new AddVideoCommentUseCase(videoCommentRepository
 export const EditVideoComment = new EditVideoCommentUseCase(videoCommentRepository)
 export const DeleteVideoComment = new DeleteVideoCommentUseCase(videoCommentRepository)
 
+export const FindPastQuestion = new FindPastQuestionUseCase(pastQuestionRepository)
+export const GetPastQuestions = new GetPastQuestionsUseCase(pastQuestionRepository)
+export const ListenToPastQuestions = new ListenToPastQuestionsUseCase(pastQuestionRepository)
+export const AddPastQuestion = new AddPastQuestionUseCase(pastQuestionRepository)
+export const EditPastQuestion = new EditPastQuestionUseCase(pastQuestionRepository)
+export const DeletePastQuestion = new DeletePastQuestionUseCase(pastQuestionRepository)
+
 export { CourseEntity, CourseFactory }
 export { InstitutionEntity, InstitutionFactory }
 export { FlashCardEntity, FlashCardFactory }
 export { NoteEntity, NoteFactory }
 export { VideoEntity, VideoFactory }
 export { VideoCommentEntity, VideoCommentFactory }
+export { PastQuestionFactory, PastQuestionEntity, PastQuestionData, PastQuestionType }
