@@ -57,20 +57,20 @@ export default defineComponent({
 			{ icon:flash, title:'Study with Flashcards',
 				subText:'Scientifically proven to improve memory and make studying easier.',
 				btnText:'Create a Flashcard',
-				route:''
+				route:'/study/flashcard/create'
 			},
 
 			{ 
 				icon:folder, 
 				title:'Organize your Study',
 				subText:'Put flashcards, notes and videos with the same aim together in a folder.',
-				btnText:'Create a Study Set', route:'' },
+				btnText:'Create a Study Set', route:'/study' },
 
 			{
 				icon:compass,
 				title:'Find more resources',
 				subText:'Browse through a library of flashcards, notes, videos and sets to study with.',
-				btnText:'Explore', route:'' 
+				btnText:'Explore', route:'/study/testprep/explore' 
 			}
 		]
 

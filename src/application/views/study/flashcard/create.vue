@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<!-- TODO: Break into sections -->
-		<div class="bg-primary w-full min-h-[264px] flex flex-col justify-between items-center pt-12 pb-1">
+		<div class="bg-primary w-full  h-auto flex flex-col justify-between items-center pt-12 pb-1">
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-5 mb-6">
 				Create a Flashcard set
 			</ion-text>

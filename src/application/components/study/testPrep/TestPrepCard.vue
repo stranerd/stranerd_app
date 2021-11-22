@@ -10,9 +10,12 @@
 	
 
 		<div class="mt-1">
-			<ion-button :to="route" class="btn-secondary   min-w-[7rem]  font-bold w-full mb-3">
-				Test yourself
-			</ion-button>
+			<router-link to="/study/testprep/view">
+				<ion-button  class="btn-secondary   min-w-[7rem]  font-bold w-full mb-3">
+					Test yourself
+				</ion-button>
+			</router-link>
+		
 			<ion-button :to="route" class="btn-outline  text-main_dark min-w-[7rem]  font-bold w-full">
 				Study solutions
 			</ion-button>

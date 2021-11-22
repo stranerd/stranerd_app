@@ -16,14 +16,12 @@
 			{{subText}}
 		</ion-text>
 
-		<ion-button :to="route" class="btn-secondary min-w-[7rem] bg-transparent mb-4 text-white lg:text-base text-xs  font-bold">
-			{{btnText}}
-		</ion-button>
-
-
+		<router-link :to="route">
+			<ion-button  class="btn-secondary min-w-[7rem] bg-transparent mb-4 text-white lg:text-base text-xs  font-bold">
+				{{btnText}}
+			</ion-button>
+		</router-link>
 	
-
-
 	</div>
 </template>
 
