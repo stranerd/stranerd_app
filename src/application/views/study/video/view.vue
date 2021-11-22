@@ -34,10 +34,10 @@
 			</div>
 
 			<div class="w-full flex flex-col items-center justify-between my-8 max-w-[40rem] mx-auto">
-				<ion-text class="text-lg text-dark_gray font-bold">
+				<ion-text class="text-lg text-main_dark font-bold">
 					Description
 				</ion-text>
-				<ion-text class="text-dark_gray text-sm text-center">
+				<ion-text class="text-main_dark text-sm text-center">
 					This video cover the complete explanation, breakdown of problems, solving of questions under
 					Waves and Sound.
 				</ion-text>

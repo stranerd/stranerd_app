@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="w-full flex justify-between mt-10">
-			<span class="heading font-bold text-dark_gray">
+			<span class="heading font-bold text-main_dark">
 				Upcoming events
 			</span>
 

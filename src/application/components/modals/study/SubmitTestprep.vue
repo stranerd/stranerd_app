@@ -3,7 +3,7 @@
 		class="rounded-xl bg-white md:py-6 md:px-6 py-4 px-3 md:text-sm text-xs flex flex-col lg:col-start-5 lg:col-end-9 md:col-start-3 md:col-end-11 col-span-12">
 
 		<div class="flex flex-col gap-1 text-center justify-center items-center ">
-			<h3 class="text-xl font-semibold text-dark_gray">Are you sure you want to submit?</h3>
+			<h3 class="text-xl font-semibold text-main_dark">Are you sure you want to submit?</h3>
 		
 		</div>
 

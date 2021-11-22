@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="w-full flex justify-between">
-			<span class="heading font-bold text-dark_gray">
+			<span class="heading font-bold text-main_dark">
 				Test Prep
 			</span>
 
@@ -16,9 +16,9 @@
 		<Swiper v-if="true"
 			:freeMode="true"
 			:items="cardArr"
-			:slides="3"
-			class="flex flex-row w-full items-center mt-2 mb-8"
-			slideClass="!w-3/6 !max-w-[17rem] !min-w-[15rem] !pr-3"
+			:slides="1.1"
+			class="mt-2 overflow-x-auto flex"
+			slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6"
 		>
 			<template v-slot:default="{ item, index }">
 				<TestPrepCard :colorClass=" index  === 0 ? 'bg-tinted_pink' : 'bg-light_gray'" :title="item?.title" :subText="item?.subText"
@@ -48,19 +48,16 @@ export default defineComponent({
 
         	const cardArr = [
 			{  title:'JAMB',
-				subText:'Gateway exams for tertiary level instituitions in Nigeria.',
 				btnText:'Create a Flashcard',
 				route:''
 			},
 
 			{ 
 				title:'SAT',
-				subText:'The SAT is a standardized test widely used for college admissions in the USA',
 				btnText:'Create a Study Set', route:'' },
 
 			{
 				title:'WAEC',
-				subText:'Standardized test for West African secondary education completion.',
 				btnText:'Explore', route:'' 
 			}
 		]

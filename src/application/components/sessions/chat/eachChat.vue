@@ -6,7 +6,7 @@
 			<avatar :id="meta.id" :has-dot="true" :size="41" :src="meta?.avatar?.link" />
 		</div>
 		<span class="flex flex-col justify-center flex-grow ">
-			<h3 class="text-dark_gray heading font-bold">{{ meta.fullName }}</h3>
+			<h3 class="text-main_dark heading font-bold">{{ meta.fullName }}</h3>
 			<span>{{ meta.last.isMedia ? meta?.last?.media?.name : meta.last.content }}</span>
 		</span>
 		<div class="flex flex-row-reverse justify-start h-full">

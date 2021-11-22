@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col items-center mt-3 text-sm text-dark_gray gap-2">
+	<div class="flex flex-col items-center mt-3 text-sm text-main_dark gap-2">
 		<template v-if="users.length">
 			<div v-for="(person, index) in users" :key="person.id"
 				:class="{'border border-faded_gray': person.id === id}"

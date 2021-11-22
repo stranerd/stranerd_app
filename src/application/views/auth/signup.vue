@@ -4,17 +4,17 @@
 			<div class="w-full mt-1 min-h-full flex ">
 				<div
 					class="gap-3 bg-light_orange w-1/2 lg:flex flex-col  items-center justify-center min-h-full hidden ">
-					<h1 class="text-xl  text-dark_gray font-bold ">Join the community!</h1>
-					<span class="text-dark_gray">Get study help, learn from tutors, learn with <br>
+					<h1 class="text-xl  text-main_dark font-bold ">Join the community!</h1>
+					<span class="text-main_dark">Get study help, learn from tutors, learn with <br>
 						your friends and enjoy new study tools.</span>
 					<img alt="" class="h-[55%]" src="@app/assets/images/auth/signin.png">
 				</div>
 
 				<div class="flex flex-col items-center justify-center lg:w-1/2 w-full max-w-[18rem] mx-auto">
-					<h1 class="text-xl text-dark_gray font-bold mb-1 lg:hidden ">Join the community!</h1>
-					<span class="lg:text-main_darktext-dark_gray lg:hidden text-icon_inactive mb-8 text-center text-xs">Get study help, learn from tutors, learn with <br>
+					<h1 class="text-xl text-main_dark font-bold mb-1 lg:hidden ">Join the community!</h1>
+					<span class="lg:text-main_darktext-main_dark lg:hidden text-icon_inactive mb-8 text-center text-xs">Get study help, learn from tutors, learn with <br>
 						your friends and enjoy new study tools.</span>
-					<h1 class=" lg:text-xl  text-dark_gray font-bold mb-5 text-center">Sign Up </h1>
+					<h1 class=" lg:text-xl  text-main_dark font-bold mb-5 text-center">Sign Up </h1>
 					<span class="normalText text-red-500 font-semibold"> {{ error }} </span>
 					<div class="h-[65%]">
 						<form

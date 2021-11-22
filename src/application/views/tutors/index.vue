@@ -5,7 +5,7 @@
 			<ion-header class="block lg:hidden" mode="ios">
 				<ion-toolbar class="px-2">
 					<ion-buttons slot="start" @click="router.go(-1)">
-						<ion-icon :icon="arrowBackOutline" class="text-[23px] text-dark_gray"></ion-icon>
+						<ion-icon :icon="arrowBackOutline" class="text-[23px] text-main_dark"></ion-icon>
 					</ion-buttons>
 					<ion-title>Tutor Requests</ion-title>
 				</ion-toolbar>

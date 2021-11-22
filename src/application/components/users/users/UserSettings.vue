@@ -3,7 +3,7 @@
 		<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
 			<h1 class="headings mb-4">Profile</h1>
 			<div class="flex flex-col gap-2">
-				<h2 class="headings font-bold text-dark_gray">Name</h2>
+				<h2 class="headings font-bold text-main_dark">Name</h2>
 				<div class="flex flex-row items-center flex-wrap ">
 					<div class="pr-1 w-full md:w-1/2">
 						<div class="py-2 px-2  pl-6 bg-light_gray rounded-xl flex flex-row">
@@ -21,7 +21,7 @@
 			</div>
 
 			<div class="flex flex-col gap-2">
-				<h2 class="headings font-bold text-dark_gray">About</h2>
+				<h2 class="headings font-bold text-main_dark">About</h2>
 				<div class="border border-faded_gray rounded-xl py-4 px-3">
 					<IonTextarea v-model="profileFactory.description"
 						class="bg-white border-0 focus:outline-none w-full"
@@ -48,7 +48,7 @@
 		</div>
 		<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
 			<!-- <div class="flex flex-col gap-2">
-				<h2 class="headings font-bold text-dark_gray">Level</h2>
+				<h2 class="headings font-bold text-main_dark">Level</h2>
 				<div class="py-1 px-2 bg-light_gray rounded-xl flex flex-row">
 					<ion-select class="w-full  font-medium" interface="action-sheet"
 						placeholder="Select your present level of education" value="notifications">
@@ -62,7 +62,7 @@
 				</div>
 			</div>
 			<div class="flex flex-col gap-2">
-				<h2 class="headings font-bold text-dark_gray">Course</h2>
+				<h2 class="headings font-bold text-main_dark">Course</h2>
 				<div class="py-2 px-2 w-full pl-6 bg-light_gray rounded-xl flex flex-row">
 					<ion-input class="w-full font-medium" placeholder="What course are you presently studying?" value="">
 					</ion-input>
@@ -70,7 +70,7 @@
 			</div> -->
 
 			<div class="flex flex-col gap-2">
-				<h2 class="headings font-bold text-dark_gray">Best Subject</h2>
+				<h2 class="headings font-bold text-main_dark">Best Subject</h2>
 				<SelectSubject
 					v-model:subject-id="tutorFactory.strongestSubject"
 					:exclude="tutorFactory.weakerSubjects"
@@ -100,7 +100,7 @@
 		</div>
 		<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
 			<div class="flex flex-col gap-2">
-				<h2 class="headings font-bold text-dark_gray">{{ hasPassword ? 'Update' : 'Add' }} Password</h2>
+				<h2 class="headings font-bold text-main_dark">{{ hasPassword ? 'Update' : 'Add' }} Password</h2>
 				<p>
 					*Login without Google
 				</p>

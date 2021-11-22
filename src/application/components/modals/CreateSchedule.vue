@@ -3,7 +3,7 @@
 		class="rounded-xl bg-white md:py-6 md:px-6 py-4 px-3 md:text-sm text-xs flex flex-col lg:col-start-5 lg:col-end-9 md:col-start-3 md:col-end-11 col-span-12">
 
 		<div class="flex flex-col gap-1 text-center justify-center items-center ">
-			<h3 class="text-xl font-semibold text-dark_gray">Create a schedule opening for students</h3>
+			<h3 class="text-xl font-semibold text-main_dark">Create a schedule opening for students</h3>
 			<span
 				class="text-icon_inactive px-10 mt-1 md:px-12">Let students know when you’re available to tutor them.</span>
 		</div>
@@ -15,7 +15,7 @@
 		</div>
 
 		<div class="mt-3 py-2 px-2 flex md:flex-row flex-col md:items-center">
-			<span class="mr-2 font-semibold text-dark_gray">Availability:</span>
+			<span class="mr-2 font-semibold text-main_dark">Availability:</span>
 			<div class="flex flex-row items-center gap-3 mt-2 md:mt-0">
 				<div class="flex flex-row items-center ">
 					<ion-icon :icon="ellipse" class="text-lg mr-1 text-primary"></ion-icon>

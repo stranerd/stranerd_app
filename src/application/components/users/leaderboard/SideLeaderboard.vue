@@ -1,7 +1,7 @@
 <template>
-	<div class="flex flex-col text-sm text-dark_gray gap-3">
+	<div class="flex flex-col text-sm text-main_dark gap-3">
 		<div class="flex flex-row justify-between items-center">
-			<h2 class="text-dark_gray text-base font-bold">Ranking</h2>
+			<h2 class="text-main_dark text-base font-bold">Ranking</h2>
 			<IonSelect v-model="time" class="capitalize" interface="action-sheet" placeholder="Daily">
 				<IonSelectOption v-for="time in times" :key="time" :value="time" class="capitalize">
 					{{ time }}

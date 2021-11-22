@@ -22,10 +22,10 @@
 			</div>
 		</template>
 		<template v-else>
-			<Swiper :freeMode="true" :items="questions" :slides="2.5" class="mt-2 overflow-x-auto flex"
-				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !pr-3">
+			<Swiper :freeMode="true" :items="questions" :slides="1.1" class="mt-2 overflow-x-auto flex"
+				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
 				<template v-slot:default="{ item: question, index }">
-					<PlainStudyCard :colorClass="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'" :fromHome="true"
+					<PlainStudyCard :colorClass="0 === index ? 'bg-tinted_pink' : 'bg-light_gray'" :fromHome="true"
 						:question="question" class="h-[9rem]" />
 				</template>
 			</Swiper>

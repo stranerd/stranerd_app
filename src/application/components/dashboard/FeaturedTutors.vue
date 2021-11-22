@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="w-full flex justify-between">
-			<span class="heading font-bold text-dark_gray">
+			<span class="heading font-bold text-main_dark">
 				Featured tutors
 			</span>
 			<slider-controller class="hidden lg:flex" />

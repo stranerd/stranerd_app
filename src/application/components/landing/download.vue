@@ -1,7 +1,7 @@
 <template>
 	<div class="w-full">
 		<div class="lower-section bg-light_blue md:px-8 px-4 py-10">
-			<div class="max-w-4xl text-dark_gray mx-auto">
+			<div class="max-w-4xl text-main_dark mx-auto">
 				<div class="flex flex-wrap flex-col md:flex-nowrap md:flex-row-reverse items-center text-center md:text-left gap-12">
 					<h2 class="text-primary font-bold text-2xl max-w-md mx-auto md:hidden my-5">
 						Journey through school with Stranerd

@@ -4,9 +4,9 @@
 			<div class="w-full mt-10 h-full flex flex-col items-center justify-start ">
 
 				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
-					<h1 class="lg:text-2xl text-xl text-dark_gray font-bold mb-2 text-center">Verifying Your Email
+					<h1 class="lg:text-2xl text-xl text-main_dark font-bold mb-2 text-center">Verifying Your Email
 						Address</h1>
-					<span class="normalText text-dark_gray mb-4 text-center">
+					<span class="normalText text-main_dark mb-4 text-center">
 						If an error occurred, click the button below to retry verification.
 					</span>
 					<div class="h-[65%]">

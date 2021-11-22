@@ -55,11 +55,11 @@
 
 				<ion-reorder v-for="n in 5" :key="n" class="flex flex-col bg-light_gray p-4 rounded-xl mb-4">
 					<div class="flex w-full items-center justify-between">
-						<ion-text class="text-dark_gray font-bold">Card {{ n }}</ion-text>
+						<ion-text class="text-main_dark font-bold">Card {{ n }}</ion-text>
 						<div class="flex">
 							<ion-icon
 								:icon='trash'
-								class="text-dark_gray"
+								class="text-main_dark"
 							/>
 						</div>
 					</div>

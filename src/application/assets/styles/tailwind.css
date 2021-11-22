@@ -55,11 +55,11 @@
 	}
 
 	.inactiveSlideTab {
-		@apply py-3 px-3 text-xs md:text-sm  font-semibold bg-light_gray text-dark_gray rounded-md focus:outline-none
+		@apply py-3 px-3 text-xs md:text-sm  font-semibold bg-light_gray text-icon_inactive rounded-xl focus:outline-none
 	}
 
 	.activeSlideTab {
-		@apply py-3 px-3 text-xs md:text-sm  font-semibold text-white bg-icon_inactive rounded-md focus:outline-none
+		@apply py-3 px-3 text-xs md:text-sm  font-semibold text-white bg-dark_gray rounded-xl focus:outline-none
 	}
 
 	.normalText {
@@ -67,11 +67,11 @@
 	}
 
 	.headings {
-		@apply md:text-xl text-sm
+		@apply md:text-2xl text-base
 	}
 
 	.heading {
-		@apply md:text-xl text-sm
+		@apply md:text-2xl text-base
 	}
 
 	.cardPadding {
@@ -88,5 +88,8 @@
 
 	.btn {
 		@apply px-4 py-2 flex justify-center items-center font-semibold
+	}
+	.headerShadow{
+		box-shadow: 0px 0px 15px 5px rgba(139, 158, 177, 0.1);
 	}
 }
