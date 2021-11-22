@@ -6,6 +6,7 @@ import { NoteApiDataSource } from './data/datasources/note-api'
 import { VideoApiDataSource } from './data/datasources/video-api'
 import { VideoCommentApiDataSource } from './data/datasources/videoComment-api'
 import { PastQuestionApiDataSource } from './data/datasources/pastQuestion-api'
+import { TestPrepApiDataSource } from './data/datasources/testPrep-api'
 import { SetTransformer } from './data/transformers/set'
 import { CourseTransformer } from './data/transformers/course'
 import { InstitutionTransformer } from './data/transformers/institution'
@@ -14,6 +15,7 @@ import { NoteTransformer } from './data/transformers/note'
 import { VideoTransformer } from './data/transformers/video'
 import { VideoCommentTransformer } from './data/transformers/videoComment'
 import { PastQuestionTransformer } from './data/transformers/pastQuestion'
+import { TestPrepTransformer } from './data/transformers/testPrep'
 import { SetRepository } from './data/repositories/set'
 import { CourseRepository } from './data/repositories/course'
 import { InstitutionRepository } from './data/repositories/institution'
@@ -22,6 +24,7 @@ import { NoteRepository } from './data/repositories/note'
 import { VideoRepository } from './data/repositories/video'
 import { VideoCommentRepository } from './data/repositories/videoComment'
 import { PastQuestionRepository } from './data/repositories/pastQuestion'
+import { TestPrepRepository } from './data/repositories/testPrep'
 import { CourseEntity } from './domain/entities/course'
 import { CourseFactory } from './domain/factories/course'
 import { InstitutionEntity } from './domain/entities/institution'
@@ -84,6 +87,14 @@ import { EditPastQuestionUseCase } from './domain/usecases/pastQuestions/editPas
 import { DeletePastQuestionUseCase } from './domain/usecases/pastQuestions/deletePastQuestion'
 import { PastQuestionData, PastQuestionEntity, PastQuestionType } from './domain/entities/pastQuestion'
 import { PastQuestionFactory } from './domain/factories/pastQuestion'
+import { GetTestPrepsUseCase } from './domain/usecases/testPreps/getTestPreps'
+import { ListenToTestPrepsUseCase } from './domain/usecases/testPreps/listenToTestPreps'
+import { FindTestPrepUseCase } from './domain/usecases/testPreps/findTestPrep'
+import { AddTestPrepUseCase } from './domain/usecases/testPreps/addTestPrep'
+import { EditTestPrepUseCase } from './domain/usecases/testPreps/editTestPrep'
+import { DeleteTestPrepUseCase } from './domain/usecases/testPreps/deleteTestPrep'
+import { PrepData, PrepType, TestPrepEntity } from './domain/entities/testPrep'
+import { TestPrepFactory } from './domain/factories/testPrep'
 
 const setDataSource = new SetApiDataSource()
 const courseDataSource = new CourseApiDataSource()
@@ -93,6 +104,7 @@ const noteDataSource = new NoteApiDataSource()
 const videoDataSource = new VideoApiDataSource()
 const videoCommentDataSource = new VideoCommentApiDataSource()
 const pastQuestionDataSource = new PastQuestionApiDataSource()
+const testPrepDataSource = new TestPrepApiDataSource()
 
 const setTransformer = new SetTransformer()
 const courseTransformer = new CourseTransformer()
@@ -102,6 +114,7 @@ const noteTransformer = new NoteTransformer()
 const videoTransformer = new VideoTransformer()
 const videoCommentTransformer = new VideoCommentTransformer()
 const pastQuestionTransformer = new PastQuestionTransformer()
+const testPrepTransformer = new TestPrepTransformer()
 
 const setRepository = new SetRepository(setDataSource, setTransformer)
 const courseRepository = new CourseRepository(courseDataSource, courseTransformer)
@@ -111,6 +124,7 @@ const noteRepository = new NoteRepository(noteDataSource, noteTransformer)
 const videoRepository = new VideoRepository(videoDataSource, videoTransformer)
 const videoCommentRepository = new VideoCommentRepository(videoCommentDataSource, videoCommentTransformer)
 const pastQuestionRepository = new PastQuestionRepository(pastQuestionDataSource, pastQuestionTransformer)
+const testPrepRepository = new TestPrepRepository(testPrepDataSource, testPrepTransformer)
 
 export const FindSet = new FindSetUseCase(setRepository)
 export const GetSets = new GetSetsUseCase(setRepository)
@@ -168,6 +182,13 @@ export const AddPastQuestion = new AddPastQuestionUseCase(pastQuestionRepository
 export const EditPastQuestion = new EditPastQuestionUseCase(pastQuestionRepository)
 export const DeletePastQuestion = new DeletePastQuestionUseCase(pastQuestionRepository)
 
+export const FindTestPrep = new FindTestPrepUseCase(testPrepRepository)
+export const GetTestPreps = new GetTestPrepsUseCase(testPrepRepository)
+export const ListenToTestPreps = new ListenToTestPrepsUseCase(testPrepRepository)
+export const AddTestPrep = new AddTestPrepUseCase(testPrepRepository)
+export const EditTestPrep = new EditTestPrepUseCase(testPrepRepository)
+export const DeleteTestPrep = new DeleteTestPrepUseCase(testPrepRepository)
+
 export { CourseEntity, CourseFactory }
 export { InstitutionEntity, InstitutionFactory }
 export { FlashCardEntity, FlashCardFactory }
@@ -175,3 +196,4 @@ export { NoteEntity, NoteFactory }
 export { VideoEntity, VideoFactory }
 export { VideoCommentEntity, VideoCommentFactory }
 export { PastQuestionFactory, PastQuestionEntity, PastQuestionData, PastQuestionType }
+export { TestPrepFactory, TestPrepEntity, PrepData, PrepType }

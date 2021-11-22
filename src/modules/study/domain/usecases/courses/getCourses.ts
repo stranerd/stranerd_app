@@ -1,5 +1,4 @@
-import { Conditions, QueryParams } from '@modules/core'
-import { PAGINATION_LIMIT } from '@utils/constants'
+import { QueryParams } from '@modules/core'
 import { ICourseRepository } from '../../irepositories/icourse'
 
 export class GetCoursesUseCase {
@@ -9,12 +8,11 @@ export class GetCoursesUseCase {
 		this.repository = repository
 	}
 
-	async call (date?: number) {
+	async call () {
 		const conditions: QueryParams = {
 			sort: { field: 'createdAt', order: -1 },
-			limit: PAGINATION_LIMIT
+			all: true
 		}
-		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.lt, value: date }]
 
 		return await this.repository.get(conditions)
 	}

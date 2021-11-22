@@ -1,10 +1,10 @@
 import { QueryParams } from '@modules/core'
-import { IInstitutionRepository } from '../../irepositories/iinstitution'
+import { ITestPrepRepository } from '../../irepositories/itestPrep'
 
-export class GetInstitutionsUseCase {
-	private repository: IInstitutionRepository
+export class GetTestPrepsUseCase {
+	private repository: ITestPrepRepository
 
-	constructor (repository: IInstitutionRepository) {
+	constructor (repository: ITestPrepRepository) {
 		this.repository = repository
 	}
 
