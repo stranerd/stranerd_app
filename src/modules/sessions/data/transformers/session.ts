@@ -7,13 +7,13 @@ export class SessionTransformer {
 			id, duration, price, message,
 			studentId, tutorId, studentBio, tutorBio,
 			accepted, done, cancelled,
-			createdAt, endedAt, startedAt, updatedAt, taskId
+			createdAt, endedAt, startedAt, updatedAt
 		} = model
 		return new SessionEntity({
 			id, duration, price, message,
 			studentId, tutorId, studentBio, tutorBio,
 			accepted, done, cancelled,
-			createdAt, endedAt, startedAt, updatedAt, taskId
+			createdAt, endedAt, startedAt, updatedAt
 		})
 	}
 

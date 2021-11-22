@@ -7,6 +7,7 @@ import { VideoApiDataSource } from './data/datasources/video-api'
 import { VideoCommentApiDataSource } from './data/datasources/videoComment-api'
 import { PastQuestionApiDataSource } from './data/datasources/pastQuestion-api'
 import { TestPrepApiDataSource } from './data/datasources/testPrep-api'
+import { TestApiDataSource } from './data/datasources/test-api'
 import { SetTransformer } from './data/transformers/set'
 import { CourseTransformer } from './data/transformers/course'
 import { InstitutionTransformer } from './data/transformers/institution'
@@ -16,6 +17,7 @@ import { VideoTransformer } from './data/transformers/video'
 import { VideoCommentTransformer } from './data/transformers/videoComment'
 import { PastQuestionTransformer } from './data/transformers/pastQuestion'
 import { TestPrepTransformer } from './data/transformers/testPrep'
+import { TestTransformer } from './data/transformers/test'
 import { SetRepository } from './data/repositories/set'
 import { CourseRepository } from './data/repositories/course'
 import { InstitutionRepository } from './data/repositories/institution'
@@ -25,6 +27,7 @@ import { VideoRepository } from './data/repositories/video'
 import { VideoCommentRepository } from './data/repositories/videoComment'
 import { PastQuestionRepository } from './data/repositories/pastQuestion'
 import { TestPrepRepository } from './data/repositories/testPrep'
+import { TestRepository } from './data/repositories/test'
 import { CourseEntity } from './domain/entities/course'
 import { CourseFactory } from './domain/factories/course'
 import { InstitutionEntity } from './domain/entities/institution'
@@ -85,6 +88,7 @@ import { FindPastQuestionUseCase } from './domain/usecases/pastQuestions/findPas
 import { AddPastQuestionUseCase } from './domain/usecases/pastQuestions/addPastQuestion'
 import { EditPastQuestionUseCase } from './domain/usecases/pastQuestions/editPastQuestion'
 import { DeletePastQuestionUseCase } from './domain/usecases/pastQuestions/deletePastQuestion'
+import { GetTestQuestionsUseCase } from './domain/usecases/pastQuestions/getTestQuestions'
 import { PastQuestionData, PastQuestionEntity, PastQuestionType } from './domain/entities/pastQuestion'
 import { PastQuestionFactory } from './domain/factories/pastQuestion'
 import { GetTestPrepsUseCase } from './domain/usecases/testPreps/getTestPreps'
@@ -95,6 +99,13 @@ import { EditTestPrepUseCase } from './domain/usecases/testPreps/editTestPrep'
 import { DeleteTestPrepUseCase } from './domain/usecases/testPreps/deleteTestPrep'
 import { PrepData, PrepType, TestPrepEntity } from './domain/entities/testPrep'
 import { TestPrepFactory } from './domain/factories/testPrep'
+import { GetTestsUseCase } from './domain/usecases/tests/getTests'
+import { ListenToTestsUseCase } from './domain/usecases/tests/listenToTests'
+import { FindTestUseCase } from './domain/usecases/tests/findTest'
+import { AddTestUseCase } from './domain/usecases/tests/addTest'
+import { EndTestUseCase } from './domain/usecases/tests/endTest'
+import { UpdateTestAnswerUseCase } from './domain/usecases/tests/updateTestAnswer'
+import { TestData, TestEntity, TestType } from './domain/entities/test'
 
 const setDataSource = new SetApiDataSource()
 const courseDataSource = new CourseApiDataSource()
@@ -105,6 +116,7 @@ const videoDataSource = new VideoApiDataSource()
 const videoCommentDataSource = new VideoCommentApiDataSource()
 const pastQuestionDataSource = new PastQuestionApiDataSource()
 const testPrepDataSource = new TestPrepApiDataSource()
+const testDataSource = new TestApiDataSource()
 
 const setTransformer = new SetTransformer()
 const courseTransformer = new CourseTransformer()
@@ -115,6 +127,7 @@ const videoTransformer = new VideoTransformer()
 const videoCommentTransformer = new VideoCommentTransformer()
 const pastQuestionTransformer = new PastQuestionTransformer()
 const testPrepTransformer = new TestPrepTransformer()
+const testTransformer = new TestTransformer()
 
 const setRepository = new SetRepository(setDataSource, setTransformer)
 const courseRepository = new CourseRepository(courseDataSource, courseTransformer)
@@ -125,6 +138,7 @@ const videoRepository = new VideoRepository(videoDataSource, videoTransformer)
 const videoCommentRepository = new VideoCommentRepository(videoCommentDataSource, videoCommentTransformer)
 const pastQuestionRepository = new PastQuestionRepository(pastQuestionDataSource, pastQuestionTransformer)
 const testPrepRepository = new TestPrepRepository(testPrepDataSource, testPrepTransformer)
+const testRepository = new TestRepository(testDataSource, testTransformer)
 
 export const FindSet = new FindSetUseCase(setRepository)
 export const GetSets = new GetSetsUseCase(setRepository)
@@ -181,6 +195,7 @@ export const ListenToPastQuestions = new ListenToPastQuestionsUseCase(pastQuesti
 export const AddPastQuestion = new AddPastQuestionUseCase(pastQuestionRepository)
 export const EditPastQuestion = new EditPastQuestionUseCase(pastQuestionRepository)
 export const DeletePastQuestion = new DeletePastQuestionUseCase(pastQuestionRepository)
+export const GetTestQuestions = new GetTestQuestionsUseCase(pastQuestionRepository)
 
 export const FindTestPrep = new FindTestPrepUseCase(testPrepRepository)
 export const GetTestPreps = new GetTestPrepsUseCase(testPrepRepository)
@@ -188,6 +203,13 @@ export const ListenToTestPreps = new ListenToTestPrepsUseCase(testPrepRepository
 export const AddTestPrep = new AddTestPrepUseCase(testPrepRepository)
 export const EditTestPrep = new EditTestPrepUseCase(testPrepRepository)
 export const DeleteTestPrep = new DeleteTestPrepUseCase(testPrepRepository)
+
+export const FindTest = new FindTestUseCase(testRepository)
+export const GetTests = new GetTestsUseCase(testRepository)
+export const ListenToTests = new ListenToTestsUseCase(testRepository)
+export const AddTest = new AddTestUseCase(testRepository)
+export const EndTest = new EndTestUseCase(testRepository)
+export const UpdateTestAnswer = new UpdateTestAnswerUseCase(testRepository)
 
 export { CourseEntity, CourseFactory }
 export { InstitutionEntity, InstitutionFactory }
@@ -197,3 +219,4 @@ export { VideoEntity, VideoFactory }
 export { VideoCommentEntity, VideoCommentFactory }
 export { PastQuestionFactory, PastQuestionEntity, PastQuestionData, PastQuestionType }
 export { TestPrepFactory, TestPrepEntity, PrepData, PrepType }
+export { TestData, TestType, TestEntity }

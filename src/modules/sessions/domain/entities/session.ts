@@ -3,7 +3,6 @@ import { generateDefaultBio, UserBio } from '@modules/users'
 
 export class SessionEntity extends BaseEntity {
 	readonly id: string
-	readonly taskId: string | null
 	readonly message: string
 	readonly studentId: string
 	readonly studentBio: UserBio
@@ -20,14 +19,13 @@ export class SessionEntity extends BaseEntity {
 	readonly endedAt: number | null
 
 	constructor ({
-		             id, taskId, duration, price, message,
+		             id, duration, price, message,
 		             studentId, tutorId, studentBio, tutorBio,
 		             accepted, done, createdAt, cancelled, endedAt,
 		             updatedAt, startedAt
 	             }: SessionConstructorArgs) {
 		super()
 		this.id = id
-		this.taskId = taskId
 		this.message = message
 		this.studentId = studentId
 		this.studentBio = generateDefaultBio(studentBio)
@@ -62,5 +60,4 @@ type SessionConstructorArgs = {
 	updatedAt: number,
 	startedAt: number | null
 	endedAt: number | null
-	taskId: string
 }

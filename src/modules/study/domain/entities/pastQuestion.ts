@@ -39,7 +39,8 @@ type PastQuestionConstructorArgs = {
 
 export enum PastQuestionType {
 	objective = 'objective',
-	theory = 'theory'
+	theory = 'theory',
+	practical = 'practical'
 }
 
 export type PastQuestionData = {
@@ -51,6 +52,10 @@ export type PastQuestionData = {
 	explanationMedia: Media[]
 } | {
 	type: PastQuestionType.theory
+	answer: string
+	answerMedia: Media[]
+} | {
+	type: PastQuestionType.practical
 	answer: string
 	answerMedia: Media[]
 }
