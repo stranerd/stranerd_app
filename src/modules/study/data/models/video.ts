@@ -5,7 +5,6 @@ export interface VideoFromModel extends VideoToModel {
 	id: string,
 	userId: string
 	userBio: UserBio
-	commentsCount: number
 	createdAt: number
 	updatedAt: number
 }

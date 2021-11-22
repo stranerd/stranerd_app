@@ -11,7 +11,6 @@ export class VideoEntity extends BaseEntity {
 	public readonly isHosted: boolean
 	public readonly link: string | null
 	public readonly media: Media | null
-	public readonly commentsCount: number
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -25,7 +24,6 @@ export class VideoEntity extends BaseEntity {
 		             isHosted,
 		             link,
 		             media,
-		             commentsCount,
 		             createdAt,
 		             updatedAt
 	             }: VideoConstructorArgs) {
@@ -39,7 +37,6 @@ export class VideoEntity extends BaseEntity {
 		this.isHosted = isHosted
 		this.link = link
 		this.media = media
-		this.commentsCount = commentsCount
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -55,7 +52,6 @@ type VideoConstructorArgs = {
 	title: string
 	description: string
 	tags: string[]
-	commentsCount: number
 	createdAt: number
 	updatedAt: number
 }
