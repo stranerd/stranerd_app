@@ -9,12 +9,13 @@ export class GetVideoCommentsUseCase {
 		this.repository = repository
 	}
 
-	async call (date?: number) {
+	async call (videoId: string, date?: number) {
 		const conditions: QueryParams = {
+			where: [{ field: 'videoId', value: videoId }],
 			sort: { field: 'createdAt', order: -1 },
 			limit: PAGINATION_LIMIT
 		}
-		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.lt, value: date }]
+		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
 
 		return await this.repository.get(conditions)
 	}

@@ -9,12 +9,13 @@ export class ListenToVideoCommentsUseCase {
 		this.repository = repository
 	}
 
-	async call (listener: Listeners<VideoCommentEntity>, date?: number) {
+	async call (videoId: string, listener: Listeners<VideoCommentEntity>, date?: number) {
 		const conditions: QueryParams = {
+			where: [{ field: 'videoId', value: videoId }],
 			sort: { field: 'createdAt', order: 1 },
 			all: true
 		}
-		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.gt, value: date }]
+		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
 			if (date) return entity.createdAt > date

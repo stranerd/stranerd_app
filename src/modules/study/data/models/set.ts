@@ -8,6 +8,7 @@ export interface SetFromModel extends SetToModel {
 		flashCards: string[]
 		testPreps: string[]
 	}
+	tags: string[]
 	isRoot: boolean
 	userId: string
 	userBio: UserBio
@@ -17,4 +18,5 @@ export interface SetFromModel extends SetToModel {
 
 export interface SetToModel {
 	name: string
+	isPublic: boolean
 }
