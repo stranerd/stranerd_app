@@ -1,7 +1,7 @@
 <template>
 	<div class="w-full bg-light_gray md:px-8 px-4">
 		<div class="text-center container px-3 mx-auto py-10">
-			<div class="text-dark_gray">
+			<div class="text-main_dark">
 				<h2 class="max-w-xl mx-auto font-bold text-xl md:text-3xl my-10">
 					Stranerd is reducing the friction between students and their success
 				</h2>

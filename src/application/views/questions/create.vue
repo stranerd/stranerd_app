@@ -17,9 +17,7 @@
 				</div>
 			</div>
 			<div class="text-xs md:text-sm py-6">
-				<h3 class="text-center font-bold text-dark_gray">
-					Ask questions to help with your homework and studies.
-				</h3>
+		
 				<QuestionForm
 					:error="error"
 					:factory="factory"

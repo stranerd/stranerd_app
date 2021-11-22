@@ -1,5 +1,5 @@
 <template>
-	<div class=" px-3  text-xs md:text-sm  ">
+	<div class=" text-xs md:text-sm  ">
 
 		<div class="lg:mt-8 mt-4">
 
@@ -20,7 +20,7 @@
 					</ion-segment>
 				</div>
 		
-			</div>
+			</div> 
 
 			<div class="mt-5 md:mt-6  col-span-6 flex flex-row flex-wrap ">
 
@@ -34,9 +34,9 @@
 				<template v-else>
 					<div v-for="(question,index) in questions"
 						:key="index"
-						:class="0 === index ? 'w-full md:px-2 mb-3' :  'md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0'">
+						:class="0 === index ? 'w-full md:px-2 mb-5' :  'md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0'">
 						<question
-							:colorClass="0 === index ? 'bg-butter_yellow h-[230px] md:h-[220px]' : 'bg-light_gray h-[230px] md:h-[220px]'"
+							:colorClass="0 === index ? 'bg-butter_yellow  md:h-[10.5rem]' : 'bg-light_gray  md:h-[10.5rem] '"
 							:isFeatured="0 === index ? true : false" :question="question" />
 					</div>
 
@@ -104,5 +104,6 @@ ion-segment-button{
     --padding-bottom:0.5rem;
     color: #8B9EB1;
     font-weight: bold;
+	margin:0 !important;
 }
 </style>

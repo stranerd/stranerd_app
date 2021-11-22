@@ -13,7 +13,7 @@
 			<ion-button :to="route" class="btn-secondary   min-w-[7rem]  font-bold w-full mb-3">
 				Test yourself
 			</ion-button>
-			<ion-button :to="route" class="btn-outline  text-dark_gray min-w-[7rem]  font-bold w-full">
+			<ion-button :to="route" class="btn-outline  text-main_dark min-w-[7rem]  font-bold w-full">
 				Study solutions
 			</ion-button>
 		</div>

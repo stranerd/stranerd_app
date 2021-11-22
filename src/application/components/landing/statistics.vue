@@ -1,7 +1,7 @@
 <template>
 	<div class="w-full">
 		<div class="text-center md:px-8 px-4 py-10">
-			<div class="max-w-4xl text-dark_gray mx-auto">
+			<div class="max-w-4xl text-main_dark mx-auto">
 				<h2 class="max-w-xl mx-auto text-primary font-bold text-xl md:text-3xl my-10">
 					Do away with academic stress because you can share all your problems here!
 				</h2>

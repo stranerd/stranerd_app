@@ -1,5 +1,5 @@
 <template>
-	<div class=" flex flex-col text-sm text-dark_gray gap-3 w-full">
+	<div class=" flex flex-col text-sm text-main_dark gap-3 w-full">
 		<div class="bg-light_blue py-4 px-4 rounded-xl flex flex-col">
 			<h2 class="mb-2 normalText font-bold">{{ challenge?.title }}</h2>
 			<div class="flex flex-row rounded-xl py-[4px] relative bg-faded_gray">

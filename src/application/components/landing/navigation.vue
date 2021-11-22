@@ -12,22 +12,22 @@
 				</router-link>
 				<ul class="gap-8 flex-row lg:flex items-center hidden">
 					<li>
-						<router-link class="link-custom text-md font-bold text-dark_gray px-4" to="/landing">
+						<router-link class="link-custom text-md font-bold text-main_dark px-4" to="/landing">
 							Home
 						</router-link>						
 					</li>
 					<li>
-						<router-link class="link-custom text-md font-bold text-dark_gray px-4" to="/landing#how-it-works">
+						<router-link class="link-custom text-md font-bold text-main_dark px-4" to="/landing#how-it-works">
 							How it works
 						</router-link>						
 					</li>
 					<li>
-						<router-link class="link-custom text-md font-bold text-dark_gray px-4" to="/landing#contact-us">
+						<router-link class="link-custom text-md font-bold text-main_dark px-4" to="/landing#contact-us">
 							About
 						</router-link>						
 					</li>
 					<li>
-						<router-link class="link-custom text-md font-bold text-dark_gray px-4" to="/landing#contact-us">
+						<router-link class="link-custom text-md font-bold text-main_dark px-4" to="/landing#contact-us">
 							Blog
 						</router-link>						
 					</li>
@@ -37,7 +37,7 @@
 						</router-link>					
 					</li>
 					<li>
-						<router-link class="btn btn-custom border border-dark_gray text-dark_gray !px-10 rounded-md"
+						<router-link class="btn btn-custom border border-dark_gray text-main_dark !px-10 rounded-md"
 							to="/auth/signin">
 							Sign In
 						</router-link>						
@@ -74,7 +74,7 @@
 					</li>
 					<li>
 						<a
-							class="btn bg-white border-2 border-white rounded-md text-dark_gray text-sm mx-auto min-w-[11rem] w-100"
+							class="btn bg-white border-2 border-white rounded-md text-main_dark text-sm mx-auto min-w-[11rem] w-100"
 							@click="navigate('/auth/signin')"
 						>
 							Sign In

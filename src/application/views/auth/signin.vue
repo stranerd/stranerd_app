@@ -3,13 +3,13 @@
 		<ion-content>
 			<div class="w-full mt-10 h-full flex ">
 				<div class="bg-butter_yellow w-1/2 lg:flex flex-col  items-center justify-center h-full hidden ">
-					<h1 class="text-xl  text-dark_gray font-bold mb-5">Welcome back!</h1>
+					<h1 class="text-xl  text-main_dark font-bold mb-5">Welcome back!</h1>
 					<img alt="" class="h-[65%]" src="@app/assets/images/auth/signin.png">
 				</div>
 
 				<div class="flex flex-col items-center justify-center lg:w-1/2 w-full">
-					<h1 class="text-xl text-dark_gray font-bold mb-5 lg:hidden ">Welcome back!</h1>
-					<h1 class="headings lg:text-xl  text-dark_gray font-bold mb-5 text-center">sign In <span
+					<h1 class="text-xl text-main_dark font-bold mb-5 lg:hidden ">Welcome back!</h1>
+					<h1 class="headings lg:text-xl  text-main_dark font-bold mb-5 text-center">sign In <span
 						class="lg:hidden"> to continue </span></h1>
 					<div class="h-[65%]">
 						<form
@@ -31,7 +31,7 @@
 								<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
 							</ion-button>
 						</form>
-						<div class="w-full flex justify-center items-center  text-dark_gray">
+						<div class="w-full flex justify-center items-center  text-main_dark">
 
 
 							<router-link class="underline normalText" to="/auth/forgot">

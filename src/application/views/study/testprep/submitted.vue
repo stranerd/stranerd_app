@@ -12,16 +12,16 @@
 		</div>
 
 		<div class="flex items-center justify-center flex-col lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white ">
-			<ion-text class="text-4xl text-dark_gray font-bold">Splendid!</ion-text>	
+			<ion-text class="text-4xl text-main_dark font-bold">Splendid!</ion-text>	
 
 			<div class="h-60 w-60 rounded-full grid place-items-center bg-light_blue my-12">
 				<DonutChart :score="70" :size="180" :total="100" />
 			</div>	
 
-			<ion-text class="text-dark_gray my-4">
+			<ion-text class="text-main_dark my-4">
 				Correct answers - <b>38/40 </b> 
 			</ion-text>
-			<ion-text class="text-dark_gray">
+			<ion-text class="text-main_dark">
 				Time used - <b>33m 46s </b> 
 			</ion-text>
 

@@ -4,8 +4,8 @@
 			<div class="w-full mt-10 h-full flex flex-col items-center justify-start ">
 
 				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
-					<h1 class="text-xl text-dark_gray font-bold mb-2 ">Reset Password</h1>
-					<span class="normalText text-dark_gray mb-4">To reset your password, type your new password below and reset</span>
+					<h1 class="text-xl text-main_dark font-bold mb-2 ">Reset Password</h1>
+					<span class="normalText text-main_dark mb-4">To reset your password, type your new password below and reset</span>
 					<div class="h-[65%]">
 						<form
 							@submit.prevent="resetPassword"

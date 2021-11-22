@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col">
-		<h2 class="text-dark_gray text-sm font-bold">
+		<h2 class="text-main_dark text-sm font-bold">
 			Answers<span class="text-icon_inactive">({{ question.answers.length }})</span>
 		</h2>
 		<template v-if="answers.length">

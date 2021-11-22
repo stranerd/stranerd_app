@@ -6,6 +6,7 @@
 				<slot />
 			</div>
 		</IonContent>
+		<BottomNav class="mt-auto" />
 	</IonPage>
 </template>
 
@@ -13,9 +14,11 @@
 import { defineComponent } from 'vue'
 import { IonContent, IonPage } from '@ionic/vue'
 import InnerTopBar from '@app/components/layout/topNavigations/InnerTopBar.vue'
+import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
+
 
 export default defineComponent({
 	name: 'JustifiedLayout',
-	components: { InnerTopBar, IonPage, IonContent }
+	components: { InnerTopBar, IonPage, IonContent , BottomNav}
 })
 </script>

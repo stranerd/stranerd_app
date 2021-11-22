@@ -4,7 +4,7 @@
 	>
     
 		<ion-icon
-			class="text-dark_gray text-5xl"
+			class="text-main_dark text-5xl"
 			:icon="icon"
 		/> 
 
