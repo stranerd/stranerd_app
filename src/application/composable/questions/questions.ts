@@ -12,7 +12,6 @@ import {
 	QuestionFactory
 } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { useAuth } from '@app/composable/auth/auth'
 import { analytics } from '@modules/core'
 import { Alert } from '@app/composable/core/notifications'
 
@@ -205,7 +204,6 @@ export const openQuestionEditModal = (question: QuestionEntity, router: Router) 
 	router.push(`/questions/${question.id}/edit`)
 }
 export const useEditQuestion = (questionId: string) => {
-	const { user, isLoggedIn } = useAuth()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
