@@ -1,6 +1,6 @@
 <template>
 	<div
-		:class="`m-0  h-[13rem]  min-w-[16.5rem] w-full cardPadding border border-faded_gray    rounded-xl  flex flex-col justify-center items-center md:gap-2 gap-[0.2rem] box-border  p-5`"
+		:class="`m-0  h-[13rem]  min-w-[16.5rem] w-full cardPadding bg-light_orange lg:border-0 border border-faded_gray    rounded-xl  flex flex-col justify-center items-center md:gap-2 gap-[0.2rem] box-border  p-5`"
 	>
     
 		<ion-icon

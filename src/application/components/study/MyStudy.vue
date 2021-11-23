@@ -21,7 +21,7 @@
 			slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6"
 		>
 			<template v-slot:default="{ item, index }">
-				<MyStudyCard :colorClass=" index  === 0 ? 'bg-light_green' : 'bg-light_gray'" :item="item"
+				<MyStudyCard :colorClass=" index  === 0 ? 'bg-light_green' : 'bg-light_green'" :item="item"
 				/>
 
 			</template>
@@ -45,8 +45,6 @@ export default defineComponent({
 	components: { IonIcon, Swiper,  MyStudyCard },
 	setup () {
 		const { id, isLoggedIn } = useAuth()
-
-
 		return {
 			chevronForwardOutline, chevronBackOutline, ellipse,
 			 isLoggedIn, 

@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import TestPrepCard from '@app/components/study/testPrep/TestPrepCard.vue'
+import TestPrepCard from '@app/components/study/PlainStudyCard.vue'
 export default {
 	components: { TestPrepCard },
 }
