@@ -26,7 +26,7 @@ export const pluralize = (count: number, singular: string, plural: string) => co
 
 export const getRandomValue = () => Date.now() + Math.random().toString(36).substr(2)
 
-export const capitalize = (text: string) => text[0].toUpperCase() + text.slice(1).toLowerCase()
+export const capitalize = (value: string) => value.trim().split(' ').map((c: string) => (c[0]?.toUpperCase() ?? '') + c.slice(1)).join(' ')
 
 export const extractTextFromHTML = (html: string) => html?.trim().replace(/<[^>]+>/g, '') ?? ''
 

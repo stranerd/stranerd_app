@@ -13,7 +13,6 @@ export interface SessionFromModel extends SessionToModel {
 	updatedAt: number
 	startedAt: number | null
 	endedAt: number | null
-	taskId: string
 }
 
 export interface SessionToModel {

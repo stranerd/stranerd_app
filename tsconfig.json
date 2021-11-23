@@ -13,7 +13,6 @@
 		"baseUrl": ".",
 		"types": [
 			"webpack-env",
-			"jest",
 			"@types/node"
 		],
 		"paths": {
@@ -43,7 +42,6 @@
 	"exclude": [
 		"node_modules",
 		"build",
-		"dist",
-		"Nust_files"
+		"dist"
 	]
 }
