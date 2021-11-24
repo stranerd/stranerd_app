@@ -29,8 +29,6 @@
 						:question="question" class="h-[9rem]" />
 				</template>
 			</Swiper>
-
-		
 		</template>
 	</div>
 </template>

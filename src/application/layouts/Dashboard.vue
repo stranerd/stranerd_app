@@ -23,6 +23,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { IonContent,  IonPage,  } from '@ionic/vue'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 import Sidebar from '@app/components/layout/sidebars/DefaultSidebar.vue'
 import RightSidebar from '@app/components/layout/sidebars/RightSidebar.vue'
@@ -32,7 +33,7 @@ import Fab from '@app/components/layout/Fab.vue'
 export default defineComponent({
 	name: 'DashboardLayout',
 	components: {
-		
+		IonContent,  IonPage,
 		BottomNav,
 		Sidebar,
 		TopBar,
