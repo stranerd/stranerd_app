@@ -12,17 +12,22 @@
 
 		<div class="flex flex-row  mt-5  text-white gap-4">
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<button class=" px-6 py-3 relative ion-activatable rounded-lg w-full font-bold bg-dark_gray "
+				<ion-button class=" btn-secondary !w-full"
 					@click="closeSubmitTestprep">
 					No
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-				</button>
+				</ion-button>
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<button class=" px-6 relative ion-activatable font-bold w-full py-3 rounded-lg bg-primary">
+				<router-link to="/study/testprep/submitted" class="w-full">
+					<ion-button  class="btn-primary      font-bold !w-full ">
+						Start
+					</ion-button>
+				</router-link>
+				<!-- <button class=" px-6 relative ion-activatable font-bold w-full py-3 rounded-lg bg-primary">
 					Yes
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-				</button>
+				</button> -->
 			</div>
 		</div>
 

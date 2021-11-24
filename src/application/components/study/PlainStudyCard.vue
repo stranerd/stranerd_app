@@ -11,22 +11,23 @@
 			<ion-text class="text-sm text-left w-full text-main_dark font-bold mt-1 ml-2">
 				Study > Mathematics (2021)
 			</ion-text>
+
+			<ion-progress-bar value="0.5" class="mt-6"></ion-progress-bar>
 		</div>
-
-	
-
 
 	</div>
 </template>
 
 <script lang="ts">
 import { calendar, play } from 'ionicons/icons'
+import { IonProgressBar } from '@ionic/vue'
 import { defineComponent,  } from 'vue'
 import { formatNumber } from '@utils/commons'
 
 
 export default defineComponent({
-	name: 'TutorCard',
+	name: 'Continue Study Card',
+	components: { IonProgressBar },
 	props: {
 		colorClass: {
 			type: String,
@@ -44,6 +45,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+	ion-progress-bar{
+		height: .55rem !important;
+		border-radius: 12px !important;
+	}
+
+	ion-progress-bar::part(progress){
+		border-radius: 120px !important;
+	}
 	ion-card {
 		box-shadow: none !important;
 
