@@ -26,7 +26,6 @@
 				<template v-slot:default="{ item, index }">
 					<TestPrepCard :colorClass=" index  === 0 ? 'bg-tinted_pink' : 'bg-tinted_pink'" :title="item?.title" :subText="item?.subText"
 					/>
-
 				</template>
 			</Swiper>
 		</template>

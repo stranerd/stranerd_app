@@ -4,7 +4,7 @@
 			<ion-segment mode="ios" value="all">
 				<ion-segment-button value="all">
 					<ion-label>All authors</ion-label>
-				</ion-segment-button>
+				</ion-segment-button> 
 				<ion-segment-button value="tutors">
 					<ion-label>Tutors</ion-label>
 				</ion-segment-button>

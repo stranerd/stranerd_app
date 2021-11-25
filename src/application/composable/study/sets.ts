@@ -2,7 +2,7 @@ import { computed, onMounted, Ref, ref } from 'vue'
 import { AddSet, GetSets, ListenToSets, SetEntity, SetFactory } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
-
+ 
 const global = {
 	sets: ref([] as SetEntity[]),
 	fetched: ref(false),

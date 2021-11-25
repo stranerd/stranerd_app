@@ -65,7 +65,7 @@
 					exact-active-class="border-b-4 text-white border-white">
 					Videos
 				</router-link>
-				<router-link :to="`/study/explore/Study-sets`"
+				<router-link :to="`/study/set/explore`"
 					class="pb-2 pr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
 					Study sets

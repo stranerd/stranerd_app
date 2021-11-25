@@ -51,7 +51,7 @@
 		</div>
 
 		<div class="lg:w-8/12 w-full px-4 mx-auto mt-8">
-			<ion-reorder-group disabled="false">
+			<ion-reorder-group disabled="true">
 
 				<ion-reorder v-for="n in 5" :key="n" class="flex flex-col bg-light_gray p-4 rounded-xl mb-4">
 					<div class="flex w-full items-center justify-between">

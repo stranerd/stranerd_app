@@ -2,17 +2,42 @@
 	<div class="md:w-8/12 w-full px-4 mx-auto   mt-8">
 	
 
-		<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
-			<TestPrepCard  v-for="n in 12" :key="n" title="Jamb"/>
-		</div>
+		<template v-if="testPreps.length === 0">
+			<div class="py-3">
+				<empty-state
+					info="No TestPreps to Explore."
+				></empty-state>
+			</div>
+		</template>
+		<template v-else>
+			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
+				<TestPrepCard  v-for="testPrep in testPreps" :key="testPrep.id" title="Jamb"/>
+			</div>
+		</template>
+
+	
 	
 	</div>
 </template>
 
 <script lang="ts">
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import TestPrepCard from '@app/components/study/PlainStudyCard.vue'
+import { useTestPrepList } from '@app/composable/study/testPreps'
+
 export default {
 	components: { TestPrepCard },
+    	setup () {
+		// const { id, isLoggedIn } = useAuth()
+      		const { testPreps, listener, loading, error } = useTestPrepList()
+
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+
+		return {
+			testPreps,
+		}
+	}
 }
 </script>
 

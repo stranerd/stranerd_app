@@ -11,7 +11,7 @@
 				<span>view all</span>
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>
-		</div>
+		</div> 
 
 		<Swiper v-if="true"
 			:freeMode="true"

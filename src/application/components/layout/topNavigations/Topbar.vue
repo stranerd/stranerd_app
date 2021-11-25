@@ -210,28 +210,12 @@ export default defineComponent({
 			showSearch.value = !showSearch.value
 		}
 		return {
-			isOpenMenuPopover,
-			isOpenStudyPopover, 
-			setMenuPopover,
-			setStudyPopover, 
-			event,
-			addCircle,
-			helpCircle, 
-			folder,
-			library,
-			 settings, logOut,
-			person,
-			personCircle,
-			podium,
-			close,
-			chevronDown,
-			showSearch,
-			toggleSearch,
-			home,
-			user,
-			search,
-			school,
-			notifications
+			isOpenMenuPopover,isOpenStudyPopover, 
+			setMenuPopover,	setStudyPopover, 
+			event,addCircle,helpCircle, chevronDown,
+			folder,	library, settings, logOut,
+			person,	podium,	showSearch,toggleSearch,
+			home,user,search,school,notifications
 		}
 	}
 })
