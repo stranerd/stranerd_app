@@ -1,4 +1,5 @@
 import { BaseEntity } from '@modules/core'
+import { catchDivideByZero } from '@utils/commons'
 
 export class TestEntity extends BaseEntity {
 	public readonly id: string
@@ -35,6 +36,12 @@ export class TestEntity extends BaseEntity {
 		this.done = done
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
+	}
+
+	get progress () {
+		const total = this.questions.length
+		const done = Object.keys(this.answers).length
+		return catchDivideByZero(done, total) * 100
 	}
 }
 

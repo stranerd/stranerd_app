@@ -36,6 +36,8 @@ import { FlashCardEntity } from './domain/entities/flashCard'
 import { FlashCardFactory } from './domain/factories/flashCard'
 import { NoteEntity } from './domain/entities/note'
 import { NoteFactory } from './domain/factories/note'
+import { SetFactory } from './domain/factories/set'
+import { SetEntity } from './domain/entities/set'
 import { VideoEntity } from './domain/entities/video'
 import { VideoFactory } from './domain/factories/video'
 import { VideoCommentEntity } from './domain/entities/videoComment'
@@ -101,6 +103,7 @@ import { PrepData, PrepType, TestPrepEntity } from './domain/entities/testPrep'
 import { TestPrepFactory } from './domain/factories/testPrep'
 import { GetTestsUseCase } from './domain/usecases/tests/getTests'
 import { ListenToTestsUseCase } from './domain/usecases/tests/listenToTests'
+import { ListenToTestUseCase } from './domain/usecases/tests/listenToTest'
 import { FindTestUseCase } from './domain/usecases/tests/findTest'
 import { AddTestUseCase } from './domain/usecases/tests/addTest'
 import { EndTestUseCase } from './domain/usecases/tests/endTest'
@@ -207,10 +210,12 @@ export const DeleteTestPrep = new DeleteTestPrepUseCase(testPrepRepository)
 export const FindTest = new FindTestUseCase(testRepository)
 export const GetTests = new GetTestsUseCase(testRepository)
 export const ListenToTests = new ListenToTestsUseCase(testRepository)
+export const ListenToTest = new ListenToTestUseCase(testRepository)
 export const AddTest = new AddTestUseCase(testRepository)
 export const EndTest = new EndTestUseCase(testRepository)
 export const UpdateTestAnswer = new UpdateTestAnswerUseCase(testRepository)
 
+export { SetEntity, SetFactory }
 export { CourseEntity, CourseFactory }
 export { InstitutionEntity, InstitutionFactory }
 export { FlashCardEntity, FlashCardFactory }

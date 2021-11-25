@@ -1,5 +1,5 @@
 import { BaseFactory } from '@modules/core'
-import { isLongerThanX, isString, isBoolean,  } from '@stranerd/validate'
+import { isBoolean, isLongerThanX, isString } from '@stranerd/validate'
 import { SetEntity } from '../entities/set'
 import { SetToModel } from '../../data/models/set'
 
@@ -7,13 +7,12 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
 	readonly rules = {
 		name: { required: true, rules: [isString, isLongerThanX(0)] },
 		isPublic: { required: true, rules: [isBoolean] }
-
 	}
 
 	reserved = []
 
 	constructor () {
-		super({ name: '', isPublic:true })
+		super({ name: '', isPublic: false })
 	}
 
 	get name () {
@@ -24,7 +23,7 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
 		this.set('name', value)
 	}
 
-	get isPublic (){
+	get isPublic () {
 		return this.values.isPublic
 	}
 
