@@ -5,6 +5,7 @@ import {
 	isBoolean,
 	isExtractedHTMLLongerThanX,
 	isFile,
+	isImage,
 	isRequiredIfX,
 	isString
 } from '@stranerd/validate'
@@ -14,7 +15,8 @@ import { VideoToModel } from '../../data/models/video'
 
 type Content = File | Media
 type Keys = {
-	title: string, description: string, tags: string[], isHosted: boolean, media: Content | null, link: string | null
+	title: string, description: string, tags: string[],
+	isHosted: boolean, media: Content | null, link: string | null, preview: Content | null
 }
 
 export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
@@ -27,13 +29,14 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		},
 		isHosted: { required: false, rules: [isBoolean] },
 		link: { required: false, rules: [isRequiredIfX(!this.isHosted), isString] },
+		preview: { required: true, rules: [isImage] },
 		media: { required: false, rules: [isRequiredIfX(this.isHosted), isFile] }
 	}
 
 	reserved = []
 
 	constructor () {
-		super({ title: '', description: '', isHosted: true, tags: [], media: null, link: null })
+		super({ title: '', description: '', isHosted: true, tags: [], media: null, link: null, preview: null })
 	}
 
 	get title () {
@@ -84,6 +87,14 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		if (value) this.isHosted = true
 	}
 
+	get preview () {
+		return this.values.preview!
+	}
+
+	set preview (value: Content) {
+		this.set('preview', value)
+	}
+
 	addTag = (value: string) => {
 		if (this.tags.find((t) => t === value.toLowerCase())) return
 		this.set('tags', [...this.tags, value.toLowerCase()])
@@ -103,8 +114,9 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 	toModel = async () => {
 		if (this.valid) {
 			if (this.media instanceof File) this.media = await this.uploadFile('videos', this.media)
-			const { title, description, isHosted, link, media, tags } = this.validValues
-			return { title, description, isHosted, link, media: media as Media | null, tags }
+			if (this.preview instanceof File) this.preview = await this.uploadFile('video-previews', this.preview)
+			const { title, description, isHosted, link, media, tags, preview } = this.validValues
+			return { title, description, isHosted, link, media: media as Media | null, tags, preview: preview as Media }
 		} else {
 			throw new Error('Validation errors')
 		}
