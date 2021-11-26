@@ -148,13 +148,3 @@ export const useDeleteVideo = (videoId: string) => {
 	return { loading, error, deleteVideo }
 }
 
-export const useEdit = ()=>{
-	const toggle = ()=>{
-		console.log(global.edit.value)
-		global.edit.value = !global.edit.value
-	}
-
-	return {
-		toggle
-	}
-}

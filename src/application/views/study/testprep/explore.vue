@@ -1,5 +1,5 @@
 <template>
-	<ExploreWrapper>
+	<ExploreWrapper name="testprep">
 		<ExploreTestPrep/>
 	</ExploreWrapper>
 </template>

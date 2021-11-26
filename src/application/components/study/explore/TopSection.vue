@@ -10,7 +10,7 @@
 
 			<div class="hidden flex-col gap-4 mb-3 lg:flex">
 
-				<div class="flex items-center" @click="setOpen(true, $event)">
+				<div class="flex items-center cursor-pointer" @click="setOpen(true, $event)" v-if="!editState[name]">
 					<ion-text class="text-white mr-1">
 						Create
 					</ion-text>
@@ -18,6 +18,12 @@
 						:icon=' isOpenRef ? chevronDown : chevronUp'
 						class="text-white mr-3 text-xl"
 					/>
+				</div>
+				<div class="flex items-center cursor-pointer" @click="edit()" v-else>
+					<ion-text class="text-white mr-1">
+						cancel
+					</ion-text>
+			
 				</div>
 			
 				<!-- <ion-icon/> -->
@@ -74,15 +80,23 @@
 
 			<div class="hidden flex-col gap-4 mb-3 lg:flex">
 
-				<div class="flex items-center cursor-pointer" @click="edit()">
+				<div class="flex items-center cursor-pointer" @click="edit()" v-if="!editState[name]">
 					<ion-text class="text-white mr-1">
-						edit
+						edit 
 					</ion-text>
 					<ion-icon
 						:icon='pencil'
 						class="text-white mr-3 text-xl"
 					/>
 				</div>
+				<div class="flex items-center cursor-pointer" @click="edit()" v-else>
+					<ion-text class="text-white mr-1">
+						save
+					</ion-text>
+			
+				</div>
+
+				
 			
 	
 			</div>
@@ -94,17 +108,23 @@
 import { IonSearchbar, IonPopover  } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'
 import { chevronDown, chevronUp, flash, folder,pencil } from 'ionicons/icons'
+import { useEditState } from '@app/composable/study/state'
 
 export default defineComponent({
 	name:'StudyExploreTopSection',
 	components: {  IonSearchbar , IonPopover},
 	props:{
-		edit:{
-			type: Function,
+		name:{
+			type: String,
 			required:true
 		}
 	},
-	setup() {
+	setup(props) {
+		const {toggle, editState} = useEditState()
+		const edit = ()=>{
+			console.log(typeof editState[props.name])
+			toggle(props.name)
+		}
 
 		const isOpenRef = ref(false)
 		const event = ref()
@@ -112,7 +132,7 @@ export default defineComponent({
 			event.value = ev 
 			isOpenRef.value = state
 		}
-		return { isOpenRef, setOpen, event, chevronDown, chevronUp, flash, folder, pencil }
+		return { edit,editState, isOpenRef, setOpen, event, chevronDown, chevronUp, flash, folder, pencil }
 	}
 })
 

@@ -1,5 +1,5 @@
 <template>
-	<ExploreWrapper>
+	<ExploreWrapper name="flashcard">
 		<ExploreFlashcard/>
 	</ExploreWrapper>
 </template>

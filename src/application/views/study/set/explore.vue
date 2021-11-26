@@ -1,5 +1,5 @@
 <template>
-	<ExploreWrapper>
+	<ExploreWrapper name="set">
 		<ExploreStudySet/>
 	</ExploreWrapper>
 </template>

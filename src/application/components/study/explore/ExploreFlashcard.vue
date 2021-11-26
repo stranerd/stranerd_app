@@ -34,7 +34,7 @@
 		</div> -->
 
 		<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
-			<FlashcardsCard  v-for="n in 12" :key="n"/>
+			<FlashcardsCard  v-for="(n, index) in 12" :key="n" :index="index + 1"/>
 		</div>
 	
 	</div>

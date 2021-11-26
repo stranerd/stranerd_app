@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<div>
-			<TopSection :edit="edit"/>
+			<TopSection :name="name"/>
 			<slot />
 		</div>
 	</Justified>
@@ -19,8 +19,8 @@ export default defineComponent({
 	middlewares: ['isAuthenticated'],
 	components: { Justified, TopSection },
 	props:{
-		edit:{
-			type: Function,
+		name:{
+			type: String,
 			required:true
 		}
 	},
