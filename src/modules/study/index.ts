@@ -13,11 +13,11 @@ import { CourseTransformer } from './data/transformers/course'
 import { InstitutionTransformer } from './data/transformers/institution'
 import { FlashCardTransformer } from './data/transformers/flashCard'
 import { NoteTransformer } from './data/transformers/note'
+import { TestTransformer } from './data/transformers/test'
 import { VideoTransformer } from './data/transformers/video'
+import { TestPrepTransformer } from './data/transformers/testPrep'
 import { VideoCommentTransformer } from './data/transformers/videoComment'
 import { PastQuestionTransformer } from './data/transformers/pastQuestion'
-import { TestPrepTransformer } from './data/transformers/testPrep'
-import { TestTransformer } from './data/transformers/test'
 import { SetRepository } from './data/repositories/set'
 import { CourseRepository } from './data/repositories/course'
 import { InstitutionRepository } from './data/repositories/institution'
@@ -42,6 +42,11 @@ import { VideoEntity } from './domain/entities/video'
 import { VideoFactory } from './domain/factories/video'
 import { VideoCommentEntity } from './domain/entities/videoComment'
 import { VideoCommentFactory } from './domain/factories/videoComment'
+import { PrepData, PrepType, TestPrepEntity } from './domain/entities/testPrep'
+import { TestPrepFactory } from './domain/factories/testPrep'
+import { PastQuestionData, PastQuestionEntity, PastQuestionType } from './domain/entities/pastQuestion'
+import { PastQuestionFactory } from './domain/factories/pastQuestion'
+import { TestData, TestEntity, TestType } from './domain/entities/test'
 import { GetSetsUseCase } from './domain/usecases/sets/getSets'
 import { ListenToSetsUseCase } from './domain/usecases/sets/listenToSets'
 import { FindSetUseCase } from './domain/usecases/sets/findSet'
@@ -54,36 +59,42 @@ import { FindCourseUseCase } from './domain/usecases/courses/findCourse'
 import { AddCourseUseCase } from './domain/usecases/courses/addCourse'
 import { EditCourseUseCase } from './domain/usecases/courses/editCourse'
 import { DeleteCourseUseCase } from './domain/usecases/courses/deleteCourse'
-import { DeleteVideoUseCase } from './domain/usecases/videos/deleteVideo'
+import { AddInstitutionUseCase } from './domain/usecases/institutions/addInstitution'
 import { DeleteInstitutionUseCase } from './domain/usecases/institutions/deleteInstitution'
-import { DeleteVideoCommentUseCase } from './domain/usecases/videoComments/deleteVideoComment'
+import { GetInstitutionsUseCase } from './domain/usecases/institutions/getInstitutions'
+import { ListenToInstitutionsUseCase } from './domain/usecases/institutions/listenToInstitutions'
+import { EditInstitutionUseCase } from './domain/usecases/institutions/editInstitution'
+import { FindInstitutionUseCase } from './domain/usecases/institutions/findInstitution'
+import { AddNoteUseCase } from './domain/usecases/notes/addNote'
 import { FindNoteUseCase } from './domain/usecases/notes/findNote'
+import { DeleteNoteUseCase } from './domain/usecases/notes/deleteNote'
+import { GetNotesInSetUseCase } from './domain/usecases/notes/getNotesInSet'
+import { ListenToNotesUseCase } from './domain/usecases/notes/listenToNotes'
+import { ListenToNotesInSetUseCase } from './domain/usecases/notes/listenToNotesInSet'
+import { EditNoteUseCase } from './domain/usecases/notes/editNote'
+import { GetNotesUseCase } from './domain/usecases/notes/getNotes'
 import { AddVideoUseCase } from './domain/usecases/videos/addVideo'
 import { FindVideoUseCase } from './domain/usecases/videos/findVideo'
-import { DeleteNoteUseCase } from './domain/usecases/notes/deleteNote'
+import { DeleteVideoUseCase } from './domain/usecases/videos/deleteVideo'
 import { ListenToVideosUseCase } from './domain/usecases/videos/listenToVideos'
-import { ListenToNotesUseCase } from './domain/usecases/notes/listenToNotes'
-import { AddInstitutionUseCase } from './domain/usecases/institutions/addInstitution'
-import { EditFlashCardUseCase } from './domain/usecases/flashCards/editFlashCard'
-import { ListenToFlashCardsUseCase } from './domain/usecases/flashCards/listenToFlashCards'
-import { AddFlashCardUseCase } from './domain/usecases/flashCards/addFlashCard'
-import { GetFlashCardsUseCase } from './domain/usecases/flashCards/getFlashCards'
-import { GetInstitutionsUseCase } from './domain/usecases/institutions/getInstitutions'
-import { FindVideoCommentUseCase } from './domain/usecases/videoComments/findVideoComment'
-import { AddNoteUseCase } from './domain/usecases/notes/addNote'
-import { ListenToInstitutionsUseCase } from './domain/usecases/institutions/listenToInstitutions'
-import { ListenToVideoCommentsUseCase } from './domain/usecases/videoComments/listenToVideoComments'
+import { ListenToVideosInSetUseCase } from './domain/usecases/videos/listenToVideosInSet'
 import { EditVideoUseCase } from './domain/usecases/videos/editVideo'
 import { GetVideosUseCase } from './domain/usecases/videos/getVideos'
-import { EditInstitutionUseCase } from './domain/usecases/institutions/editInstitution'
-import { GetVideoCommentsUseCase } from './domain/usecases/videoComments/getVideoComments'
-import { EditVideoCommentUseCase } from './domain/usecases/videoComments/editVideoComment'
-import { FindInstitutionUseCase } from './domain/usecases/institutions/findInstitution'
-import { EditNoteUseCase } from './domain/usecases/notes/editNote'
+import { GetVideosInSetUseCase } from './domain/usecases/videos/getVideosInSet'
+import { EditFlashCardUseCase } from './domain/usecases/flashCards/editFlashCard'
+import { ListenToFlashCardsUseCase } from './domain/usecases/flashCards/listenToFlashCards'
+import { ListenToFlashCardsInSetUseCase } from './domain/usecases/flashCards/listenToFlashCardsInSet'
+import { AddFlashCardUseCase } from './domain/usecases/flashCards/addFlashCard'
+import { GetFlashCardsUseCase } from './domain/usecases/flashCards/getFlashCards'
 import { FindFlashCardUseCase } from './domain/usecases/flashCards/findFlashCard'
-import { GetNotesUseCase } from './domain/usecases/notes/getNotes'
-import { AddVideoCommentUseCase } from './domain/usecases/videoComments/addVideoComment'
+import { GetFlashCardsInSetUseCase } from './domain/usecases/flashCards/getFlashCardsInSet'
 import { DeleteFlashCardUseCase } from './domain/usecases/flashCards/deleteFlashCard'
+import { FindVideoCommentUseCase } from './domain/usecases/videoComments/findVideoComment'
+import { DeleteVideoCommentUseCase } from './domain/usecases/videoComments/deleteVideoComment'
+import { ListenToVideoCommentsUseCase } from './domain/usecases/videoComments/listenToVideoComments'
+import { GetVideoCommentsUseCase } from './domain/usecases/videoComments/getVideoComments'
+import { AddVideoCommentUseCase } from './domain/usecases/videoComments/addVideoComment'
+import { EditVideoCommentUseCase } from './domain/usecases/videoComments/editVideoComment'
 import { GetPastQuestionsUseCase } from './domain/usecases/pastQuestions/getPastQuestions'
 import { ListenToPastQuestionsUseCase } from './domain/usecases/pastQuestions/listenToPastQuestions'
 import { FindPastQuestionUseCase } from './domain/usecases/pastQuestions/findPastQuestion'
@@ -91,16 +102,14 @@ import { AddPastQuestionUseCase } from './domain/usecases/pastQuestions/addPastQ
 import { EditPastQuestionUseCase } from './domain/usecases/pastQuestions/editPastQuestion'
 import { DeletePastQuestionUseCase } from './domain/usecases/pastQuestions/deletePastQuestion'
 import { GetTestQuestionsUseCase } from './domain/usecases/pastQuestions/getTestQuestions'
-import { PastQuestionData, PastQuestionEntity, PastQuestionType } from './domain/entities/pastQuestion'
-import { PastQuestionFactory } from './domain/factories/pastQuestion'
 import { GetTestPrepsUseCase } from './domain/usecases/testPreps/getTestPreps'
+import { GetTestPrepsInSetUseCase } from './domain/usecases/testPreps/getTestPrepsInSet'
 import { ListenToTestPrepsUseCase } from './domain/usecases/testPreps/listenToTestPreps'
+import { ListenToTestPrepsInSetUseCase } from './domain/usecases/testPreps/listenToTestPrepsInSet'
 import { FindTestPrepUseCase } from './domain/usecases/testPreps/findTestPrep'
 import { AddTestPrepUseCase } from './domain/usecases/testPreps/addTestPrep'
 import { EditTestPrepUseCase } from './domain/usecases/testPreps/editTestPrep'
 import { DeleteTestPrepUseCase } from './domain/usecases/testPreps/deleteTestPrep'
-import { PrepData, PrepType, TestPrepEntity } from './domain/entities/testPrep'
-import { TestPrepFactory } from './domain/factories/testPrep'
 import { GetTestsUseCase } from './domain/usecases/tests/getTests'
 import { ListenToTestsUseCase } from './domain/usecases/tests/listenToTests'
 import { ListenToTestUseCase } from './domain/usecases/tests/listenToTest'
@@ -108,7 +117,6 @@ import { FindTestUseCase } from './domain/usecases/tests/findTest'
 import { AddTestUseCase } from './domain/usecases/tests/addTest'
 import { EndTestUseCase } from './domain/usecases/tests/endTest'
 import { UpdateTestAnswerUseCase } from './domain/usecases/tests/updateTestAnswer'
-import { TestData, TestEntity, TestType } from './domain/entities/test'
 
 const setDataSource = new SetApiDataSource()
 const courseDataSource = new CourseApiDataSource()
@@ -166,21 +174,27 @@ export const DeleteInstitution = new DeleteInstitutionUseCase(institutionReposit
 
 export const FindFlashCard = new FindFlashCardUseCase(flashCardRepository)
 export const GetFlashCards = new GetFlashCardsUseCase(flashCardRepository)
+export const GetFlashCardsInSet = new GetFlashCardsInSetUseCase(flashCardRepository)
 export const ListenToFlashCards = new ListenToFlashCardsUseCase(flashCardRepository)
+export const ListenToFlashCardsInSet = new ListenToFlashCardsInSetUseCase(flashCardRepository)
 export const AddFlashCard = new AddFlashCardUseCase(flashCardRepository)
 export const EditFlashCard = new EditFlashCardUseCase(flashCardRepository)
 export const DeleteFlashCard = new DeleteFlashCardUseCase(flashCardRepository)
 
 export const FindNote = new FindNoteUseCase(noteRepository)
 export const GetNotes = new GetNotesUseCase(noteRepository)
+export const GetNotesInSet = new GetNotesInSetUseCase(noteRepository)
 export const ListenToNotes = new ListenToNotesUseCase(noteRepository)
+export const ListenToNotesInSet = new ListenToNotesInSetUseCase(noteRepository)
 export const AddNote = new AddNoteUseCase(noteRepository)
 export const EditNote = new EditNoteUseCase(noteRepository)
 export const DeleteNote = new DeleteNoteUseCase(noteRepository)
 
 export const FindVideo = new FindVideoUseCase(videoRepository)
 export const GetVideos = new GetVideosUseCase(videoRepository)
+export const GetVideosInSet = new GetVideosInSetUseCase(videoRepository)
 export const ListenToVideos = new ListenToVideosUseCase(videoRepository)
+export const ListenToVideosInSet = new ListenToVideosInSetUseCase(videoRepository)
 export const AddVideo = new AddVideoUseCase(videoRepository)
 export const EditVideo = new EditVideoUseCase(videoRepository)
 export const DeleteVideo = new DeleteVideoUseCase(videoRepository)
@@ -202,7 +216,9 @@ export const GetTestQuestions = new GetTestQuestionsUseCase(pastQuestionReposito
 
 export const FindTestPrep = new FindTestPrepUseCase(testPrepRepository)
 export const GetTestPreps = new GetTestPrepsUseCase(testPrepRepository)
+export const GetTestPrepsInSet = new GetTestPrepsInSetUseCase(testPrepRepository)
 export const ListenToTestPreps = new ListenToTestPrepsUseCase(testPrepRepository)
+export const ListenToTestPrepsInSet = new ListenToTestPrepsInSetUseCase(testPrepRepository)
 export const AddTestPrep = new AddTestPrepUseCase(testPrepRepository)
 export const EditTestPrep = new EditTestPrepUseCase(testPrepRepository)
 export const DeleteTestPrep = new DeleteTestPrepUseCase(testPrepRepository)
