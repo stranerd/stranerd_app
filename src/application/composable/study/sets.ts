@@ -189,6 +189,8 @@ export const useSet = (set: SetEntity) => {
 	onMounted(async () => {
 		if (!setGlobal[set.id].fetched.value && !setGlobal[set.id].loading.value) await fetchAllSetEntities()
 	})
+
+	return { ...setGlobal[set.id], listener, fetchAllSetEntities }
 }
 
 export const useCreateSet = () => {
