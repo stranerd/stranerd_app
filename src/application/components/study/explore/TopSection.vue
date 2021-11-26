@@ -74,7 +74,7 @@
 
 			<div class="hidden flex-col gap-4 mb-3 lg:flex">
 
-				<div class="flex items-center">
+				<div class="flex items-center cursor-pointer" @click="edit()">
 					<ion-text class="text-white mr-1">
 						edit
 					</ion-text>
@@ -98,8 +98,14 @@ import { chevronDown, chevronUp, flash, folder,pencil } from 'ionicons/icons'
 export default defineComponent({
 	name:'StudyExploreTopSection',
 	components: {  IonSearchbar , IonPopover},
-
+	props:{
+		edit:{
+			type: Function,
+			required:true
+		}
+	},
 	setup() {
+
 		const isOpenRef = ref(false)
 		const event = ref()
 		const setOpen = (state: boolean, ev?: Event) => {

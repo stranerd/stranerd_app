@@ -9,7 +9,7 @@ import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/study/explore/ExploreWrapper.vue'
 import ExploreStudySet from '@app//components/study/explore/ExploreStudySet.vue'
 export default defineComponent({
-	name: 'Explore Videos',
+	name: 'Explore Sets',
 	displayName: 'Explore',
 	components: {  ExploreWrapper, ExploreStudySet }
 })
@@ -28,4 +28,6 @@ ion-searchbar{
 	padding-top: 12px;
     padding-bottom: 12px;
 }
+
+
 </style>

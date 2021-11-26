@@ -173,7 +173,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import {  IonHeader, IonIcon, IonTitle, IonToolbar, IonPopover, IonButtons } from '@ionic/vue'
-import { addCircle, helpCircle, folder, personCircle, close, home, notifications, school, search, chevronDown, person, library, podium, settings, logOut } from 'ionicons/icons'
+import { addCircle, helpCircle, folder, personCircle, close, home, notifications, school, search, chevronDown, person, library, podium, settings, logOut , arrowBackOutline} from 'ionicons/icons'
 
 import { useAuth } from '@app/composable/auth/auth'
 // import Avatar from '@app/components/core/Avatar.vue'
@@ -204,7 +204,8 @@ export default defineComponent({
 			event,addCircle,helpCircle, chevronDown,
 			folder,	library, settings, logOut,
 			person,	podium,	showSearch,toggleSearch,
-			home,user,search,school,notifications
+			home,user,search,school,notifications,
+			arrowBackOutline
 		}
 	}
 

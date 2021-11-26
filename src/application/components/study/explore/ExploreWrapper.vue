@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<div>
-			<TopSection />
+			<TopSection :edit="edit"/>
 			<slot />
 		</div>
 	</Justified>
@@ -18,6 +18,12 @@ export default defineComponent({
 	displayName: 'Explore',
 	middlewares: ['isAuthenticated'],
 	components: { Justified, TopSection },
+	props:{
+		edit:{
+			type: Function,
+			required:true
+		}
+	},
 	setup () {
 
 		return { checkmarkDone }

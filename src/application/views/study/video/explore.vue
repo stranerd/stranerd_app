@@ -1,5 +1,5 @@
 <template>
-	<ExploreWrapper>
+	<ExploreWrapper :edit="toggle">
 		<ExploreVideos/>
 	</ExploreWrapper>
 </template>
@@ -8,10 +8,19 @@
 import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/study/explore/ExploreWrapper.vue'
 import ExploreVideos from '@app//components/study/explore/ExploreVideos.vue'
+import { useEdit } from '@app/composable/study/videos'
+
 export default defineComponent({
 	name: 'Explore Videos',
 	displayName: 'Explore',
-	components: {  ExploreWrapper, ExploreVideos }
+	components: {  ExploreWrapper, ExploreVideos },
+	setup(){
+		const {toggle} = useEdit()
+
+		return{
+			toggle
+		}
+	}
 })
 </script>
 
