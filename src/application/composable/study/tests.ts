@@ -1,4 +1,4 @@
-import { onMounted, Ref, ref } from 'vue'
+import { computed, onMounted, Ref, ref } from 'vue'
 import {
 	AddTest,
 	EndTest,
@@ -70,8 +70,15 @@ export const useTestList = () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTests()
 	})
 
+	const unCompletedTests = computed({
+		get: () => global.tests.value.filter((test) => !test.done && test.progress !== 100),
+		set: (tests) => {
+			tests.forEach(pushToTestList)
+		}
+	})
+
 	return {
-		...global, listener,
+		...global, listener, unCompletedTests,
 		fetchOlderTests: fetchTests
 	}
 }
