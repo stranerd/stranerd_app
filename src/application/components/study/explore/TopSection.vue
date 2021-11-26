@@ -122,7 +122,6 @@ export default defineComponent({
 	setup(props) {
 		const {toggle, editState} = useEditState()
 		const edit = ()=>{
-			console.log(typeof editState[props.name])
 			toggle(props.name)
 		}
 

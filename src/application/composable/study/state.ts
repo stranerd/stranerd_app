@@ -12,7 +12,6 @@ export const useEditState = ()=>{
 	const toggle= (type: string)=>{
 		editState[type] = !editState[type]
 
-		console.log(editState[type])
 	}
 
 	return {

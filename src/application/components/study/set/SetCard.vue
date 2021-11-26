@@ -47,7 +47,6 @@ export default defineComponent({
 	},
 	setup() {
 		const bgColor = (index: any)=>{
-			console.log(index)
 			if (index === 1 ) return 'bg-light_green'
 			else if (index ===2) return 'bg-tinted_pink'
 			else if(index === 3) return 'bg-butter_yellow'
