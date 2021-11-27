@@ -6,10 +6,10 @@
 		
              
 			<ion-text class="text-xl text-left w-full text-main_dark font-bold ml-2">
-				JAMB
+				{{testPreps.name}}
 			</ion-text>
 			<ion-text class="text-sm text-left w-full text-main_dark font-bold mt-1 ml-2">
-				Study > Mathematics (2021)
+				{{testPreps.data}}
 			</ion-text>
 
 			<ion-progress-bar value="0.5" class="mt-6"></ion-progress-bar>
@@ -23,6 +23,7 @@ import { calendar, play } from 'ionicons/icons'
 import { IonProgressBar } from '@ionic/vue'
 import { defineComponent,  } from 'vue'
 import { formatNumber } from '@utils/commons'
+import { TestPrepEntity } from '@root/modules/study'
 
 
 export default defineComponent({
@@ -33,6 +34,12 @@ export default defineComponent({
 			type: String,
 			default: 'bg-light_gray'
 		},
+		testPreps:{
+			required:true,
+			type: TestPrepEntity
+		}
+			
+		
 	},
 	setup() {
 		return {

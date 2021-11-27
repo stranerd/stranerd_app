@@ -53,9 +53,9 @@
 		<div class="lg:w-8/12 w-full px-4 mx-auto mt-8">
 			<ion-reorder-group disabled="true">
 
-				<ion-reorder v-for="n in 5" :key="n" class="flex flex-col bg-light_gray p-4 rounded-xl mb-4">
+				<ion-reorder v-for="(question, index) in factory.questions" :key="index" class="flex flex-col bg-light_gray p-4 rounded-xl mb-4">
 					<div class="flex w-full items-center justify-between">
-						<ion-text class="text-main_dark font-bold">Card {{ n }}</ion-text>
+						<ion-text class="text-main_dark font-bold">Card {{ index }}</ion-text>
 						<div class="flex">
 							<ion-icon
 								:icon='trash'
@@ -64,11 +64,11 @@
 						</div>
 					</div>
 
-					<div class="flex w-full md:flex-row flex-col gap-4 h-80 md:h-auto">
+					<div class="flex w-full md:flex-row flex-col gap-4 h-80 md:h-auto" @click="editCard">
 						<ion-textarea class="ion-bg-white ion-rounded-xl rounded-xl h-40 md:w-1/2 md:mr-4 w-full"
-							placeholder="Front ( Questions or Words) " />
+							placeholder="Front ( Questions or Words) " v-model="factory.question"/>
 						<ion-textarea class="ion-bg-white ion-rounded-xl rounded-xl h-40 md:w-1/2 w-full"
-							placeholder="Back ( Answers or Definitions or Translations )" />
+							placeholder="Back ( Answers or Definitions or Translations )" v-model="factory.answer"/>
 					</div>
 
 				</ion-reorder>
@@ -76,7 +76,9 @@
 			</ion-reorder-group>
 
 			<div
-				class="w-full flex bg-light_gray items-center p-8 rounded-xl text-lg text-icon_inactive justify-center font-bold my-4 cursor-pointer">
+				class="w-full flex bg-light_gray items-center p-8 rounded-xl text-lg text-icon_inactive justify-center font-bold my-4 cursor-pointer"
+				@click="factory.addQuestion"
+			>
 				<ion-icon
 					:icon="add"
 					class="text-2xl"
@@ -110,23 +112,24 @@ import {
 } from '@ionic/vue'
 import Justified from '@app/layouts/Justified.vue'
 import { add, trash } from 'ionicons/icons'
+import { useCreateFlashCard } from '@root/application/composable/study/flashCards'
 
 export default {
 	name: 'Create Flashcard',
 	displayName: 'Create Flashcard',
 	components: {
-		Justified,
-		IonItem,
-		IonLabel,
-		IonListHeader,
-		IonRadio,
-		IonRadioGroup,
-		IonTextarea,
-		IonReorderGroup,
-		IonReorder
+		Justified, IonItem, IonLabel,
+		IonListHeader, IonRadio, IonRadioGroup,
+		IonTextarea, IonReorderGroup, IonReorder
 	},
 	setup () {
+		const {createFlashCard, factory, error,loading} = useCreateFlashCard()
+		const editCard = ()=>{
+			console.log(factory.value.index)
+		}
 		return {
+			editCard,
+			createFlashCard, factory,
 			trash, add
 		}
 	}

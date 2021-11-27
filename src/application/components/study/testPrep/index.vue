@@ -13,7 +13,7 @@
 			</router-link>
 		</div>
 
-		<template v-if="testPreps.length === 0">
+		<template v-if="testPreps.length === 0"> 
 			<div class="py-3">
 				<empty-state
 					info="You Have no TestPreps Available."

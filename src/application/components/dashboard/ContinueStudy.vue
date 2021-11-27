@@ -5,28 +5,26 @@
 				Continue where you stopped
 			</span>
 
-			<router-link v-if="questions.length " class="text-primary normalText flex items-center font-semibold"
+			<router-link v-if="testPreps.length " class="text-primary normalText flex items-center font-semibold"
 				to="/questions">
 				<span>view all</span>
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>
 		</div>
 
-		<template v-if="questions.length === 0">
+		<template v-if="testPreps.length === 0">
 			<div class="py-3">
 				<empty-state
-					btnText="Ask a question"
-					info="You have no recent questions! Start asking questions to help with homework and studying."
-					route="/questions"
+					info="You have no uncompleted testPrep"
 				></empty-state>
 			</div>
 		</template>
 		<template v-else>
-			<Swiper :freeMode="true" :items="questions" :slides="1.1" class="mt-2 overflow-x-auto flex"
+			<Swiper :freeMode="true" :items="testPreps" :slides="1.1" class="mt-2 overflow-x-auto flex"
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
-				<template v-slot:default="{ item: question, index }">
-					<PlainStudyCard :colorClass="0 === index ? 'bg-tinted_pink' : 'bg-light_gray'" :fromHome="true"
-						:question="question" class="h-[9rem]" />
+				<template v-slot:default="{ item: testPreps, index }">
+					<PlainStudyCard :colorClass="0 === index ? 'bg-tinted_pink' : 'bg-tinted_pink'" :fromHome="true"
+						:testPreps="testPreps" class="h-[9rem]" />
 				</template>
 			</Swiper>
 		</template>
@@ -38,17 +36,17 @@ import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
-import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '@app/components/core/EmptyState.vue'
+import { useTestPrepList } from '@app/composable/study/testPreps'
 import PlainStudyCard from '../study/PlainStudyCard.vue'
 
 export default defineComponent({
 	name: 'RecentQuestions',
 	components: { IonIcon, Swiper, EmptyState, PlainStudyCard },
 	setup () {
-		const { questions: allQuestions, listener, loading, error } = useQuestionList()
-		const questions = computed({
-			get: () => allQuestions.value.slice(0, 6),
+		const { testPreps: allTestPreps, listener, loading, error } = useTestPrepList()
+		const testPreps = computed({
+			get: () => allTestPreps.value.slice(0, 6),
 			set: () => {
 			}
 		})
@@ -57,7 +55,7 @@ export default defineComponent({
 
 		return {
 			chevronForwardOutline, chevronBackOutline, ellipse,
-			questions, loading, error
+			testPreps, loading, error
 		}
 	}
 })
