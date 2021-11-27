@@ -19,13 +19,7 @@
 				<ion-input class="max-w-[1054px]  !h-14 " placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
 					show-cancel-button="never"></ion-input>
 			</div>
-			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
-				<ion-text class="text-primary font-bold w-12">
-					PRICE
-				</ion-text>
-				<ion-input class="max-w-[1054px]  !h-14 " placeholder="Make it free or attach a price to it."
-					show-cancel-button="never"></ion-input>
-			</div>
+
 
 			<div class="flex items-center w-full max-w-[25rem] justify-center">
 				<ion-radio-group class="flex w-full">
@@ -51,11 +45,17 @@
 		</div>
 
 		<div class="lg:w-8/12 w-full px-4 mx-auto mt-8">
+			<div class="mb-8 w-full mx-auto" v-if="error">
+				<ion-text class="text-xl text-delete_red font-bold text-center mb-8 grid place-items-center mx-auto">
+					{{error}}
+				</ion-text>
+			</div>
+	
 			<ion-reorder-group disabled="true">
 
 				<ion-reorder v-for="(question, index) in factory.questions" :key="index" class="flex flex-col bg-light_gray p-4 rounded-xl mb-4">
 					<div class="flex w-full items-center justify-between">
-						<ion-text class="text-main_dark font-bold">Card {{ index }}</ion-text>
+						<ion-text class="text-main_dark font-bold">Card {{ index + 1 }}</ion-text>
 						<div class="flex">
 							<ion-icon
 								:icon='trash'
@@ -64,7 +64,7 @@
 						</div>
 					</div>
 
-					<div class="flex w-full md:flex-row flex-col gap-4 h-80 md:h-auto" @click="editCard">
+					<div class="flex w-full md:flex-row flex-col gap-4 h-80 md:h-auto" @click="editCard(index)">
 						<ion-textarea class="ion-bg-white ion-rounded-xl rounded-xl h-40 md:w-1/2 md:mr-4 w-full"
 							placeholder="Front ( Questions or Words) " v-model="factory.question"/>
 						<ion-textarea class="ion-bg-white ion-rounded-xl rounded-xl h-40 md:w-1/2 w-full"
@@ -124,11 +124,14 @@ export default {
 	},
 	setup () {
 		const {createFlashCard, factory, error,loading} = useCreateFlashCard()
-		const editCard = ()=>{
-			console.log(factory.value.index)
+		const editCard = (value: number)=>{
+		
+
+			factory.value.index = value
 		}
 		return {
 			editCard,
+			error, loading,
 			createFlashCard, factory,
 			trash, add
 		}

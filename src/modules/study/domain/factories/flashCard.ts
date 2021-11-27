@@ -51,7 +51,6 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 	}
 
 	addQuestion () {
-		console.log(this.questions)
 		this.set('set', [...this.questions, { question: '', answer: '' }])
 		this.index = this.questions.length - 1
 	}
