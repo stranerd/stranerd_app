@@ -40,6 +40,7 @@ import { defineComponent,  } from 'vue'
 import { formatNumber } from '@utils/commons'
 import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
+import { VideoEntity } from '@root/modules/study'
 
 export default defineComponent({
 	name: 'TutorCard',
@@ -48,6 +49,10 @@ export default defineComponent({
 			type: String,
 			default: 'bg-light_gray'
 		},
+		video:{
+			type:VideoEntity,
+			required:true
+		}
 	},
 	setup() {
 		return {

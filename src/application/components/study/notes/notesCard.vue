@@ -38,6 +38,7 @@ import { defineComponent,  } from 'vue'
 import { formatNumber } from '@utils/commons'
 import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
+import { NoteEntity } from '@root/modules/study'
 
 export default defineComponent({
 	name: 'TutorCard',
@@ -46,6 +47,10 @@ export default defineComponent({
 			type: String,
 			default: 'bg-light_gray'
 		},
+		note:{
+			type:NoteEntity,
+			required:true
+		}
 	},
 	setup() {
 		return {
