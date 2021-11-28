@@ -34,7 +34,8 @@
 		"sweetalert2": "^11.1.10",
 		"swiper": "^7.2.0",
 		"vue": "^3.0.0",
-		"vue-router": "^4.0.11"
+		"vue-router": "^4.0.11",
+		"vue3-pdfjs": "^0.1.6"
 	},
 	"devDependencies": {
 		"@capacitor/cli": "3.3.1",

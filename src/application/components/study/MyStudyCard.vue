@@ -1,16 +1,22 @@
 <template>
-	<div>
+	<div class="flex">
 		<template v-if="set.saved.notes">
-			<notesC+ard v-for="note in set.saved.notes" :key="note" :note="note"/>
+			<notesCard v-for="note in set.saved.notes" :key="note" :note="note"/>
 		</template>
 		<template v-if="set.saved.videos">
 			<VideoCard v-for="video in set.saved.videos" :key="video" :video="video"/>
 		</template>
 		<template v-if="set.saved.flashCards">
-			<notes-card v-for="flashCard in set.saved.flashCard" :key="flashCard" :flashCard="flashCard"/>
+			<FlashcardsCard v-for="flashCard in set.saved.flashCards" :key="flashCard" :flashCard="flashCard"/>
 		</template>
-		<template v-if="set.saved.notes">
-			<notes-card v-for="note in set.saved.notes" :key="note" :note="note"/>
+		<template v-if="set.saved.testPreps">
+			<TestPrepCard  v-for="testPrep in set.saved.testPreps" :key="testPrep" :testPrep="testPrep"/>
+		</template>
+		<template v-if="empty()">
+			<empty-state
+				class="w-full"
+				info="You Have no material in your set"
+			></empty-state>
 		</template>
 	</div>
 
@@ -48,10 +54,12 @@ import { formatNumber } from '@utils/commons'
 import { SetEntity } from '@root/modules/study'
 import notesCard from './notes/notesCard.vue'
 import VideoCard from './videos/VideoCard.vue'
+import FlashcardsCard from './flashcard/FlashcardsCard.vue'
+import TestPrepCard from './testPrep/TestPrepCard.vue'
 
 
 export default defineComponent({
-	components: { notesCard, VideoCard },
+	components: { notesCard, VideoCard, FlashcardsCard, TestPrepCard },
 	name: 'TutorCard',
 	props: {
 		colorClass: {
@@ -63,9 +71,18 @@ export default defineComponent({
 			required:true
 		}
 	},
-	setup() {
+	setup(props) {
+		const notes = props.set.saved.notes.length === 0
+		const videos = props.set.saved.videos.length === 0
+		const flashCards = props.set.saved.flashCards.length === 0
+		const testPreps = props.set.saved.testPreps.length === 0
+
+		const empty = ()=>{
+			if(notes && videos && flashCards && testPreps) return true
+			else return false
+		}
 		return {
-			formatNumber,
+			empty, formatNumber,
 			calendar,
 			play
 		}

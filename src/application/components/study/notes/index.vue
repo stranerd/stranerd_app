@@ -7,7 +7,7 @@
 
 			<router-link v-if="true && isLoggedIn"
 				class="text-primary normalText flex items-center font-bold "
-				to="#">
+				to="/study/note/explore">
 				<span>view all</span>
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>
@@ -25,7 +25,7 @@
 			<Swiper :freeMode="true" :items="notes" :slides="1.1" class="mt-2 overflow-x-auto flex"
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
 				<template v-slot:default="{ item, index }">
-					<notesCard :colorClass=" index  === 0 ? 'bg-light_orange' : 'bg-light_gray'" :item="item"
+					<notesCard :colorClass=" index  === 0 ? 'bg-light_orange' : 'bg-light_gray'" :note="item"
 					/>
 
 				</template>  

@@ -1,6 +1,6 @@
 <template>
 	<div
-		:class="`m-0  h-[18rem]   ${colorClass}  rounded-xl  flex flex-col md:gap-2 gap-[1rem] box-border  pb-5 border border-faded_gray lg:border-0`"
+		:class="`m-0  h-[18rem]  md:!w-[300px] !w-[265px] ${colorClass}  rounded-xl  flex flex-col md:gap-2 gap-[1rem] box-border  pb-5 border border-faded_gray lg:border-0`"
 	>
 		<div class="flex flex-col items-center justify-between w-full">
 			<div class="bg-faded_gray min-h-[10.5rem] min-w-[57px] w-full grid place-items-center rounded-md ">

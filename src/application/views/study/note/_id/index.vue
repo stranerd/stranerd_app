@@ -20,13 +20,13 @@
 		</div>
 		<div class="w-screen h-screen bg-light_gray">
 			<div
-				:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
+				:class="[true ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
 
 				<div ref="screen" class="bg-white h-[25rem] min-w-[57px] w-full grid place-items-center rounded-md "
-					@click="toggle">
-					<ion-text class="text-3xl text-faded_gray font-bold">
-						MAX PDF WIDTH
-					</ion-text>
+				>
+					<VuePdf src="https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf" page="1"
+						enableTextSelection
+						enableAnnotations />
 
 				</div>
 
@@ -88,30 +88,45 @@ import Justified from '@app/layouts/Justified.vue'
 import { add, bookmark, chevronDown, chevronUp, contract, pencil, remove, scan, shareSocial } from 'ionicons/icons'
 import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
+import { defineComponent, onMounted, reactive, ref } from 'vue'
+//@ts-ignore
+import { createLoadingTask } from 'vue3-pdfjs/esm'
+import { VuePdfPropsType } from 'vue3-pdfjs/components/vue-pdf/vue-pdf-props' // Prop type definitions can also be imported
+import { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
 
-export default {
+export default defineComponent( {
 	name: 'view Notes',
 	displayName: 'Notes',
 	components: {
 		Justified,
 		ShowRatings,
-		Avatar
+		Avatar,
 	},
 	setup () {
+		    const pdfSrc = ref<VuePdfPropsType['src']>('https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf')
+		const numOfPages = ref(0)
+
+		onMounted(() => {
+			const loadingTask = createLoadingTask(pdfSrc.value)
+			loadingTask.promise.then((pdf: PDFDocumentProxy) => {
+				numOfPages.value = pdf.numPages
+			})
+		})
 		return {
-			add,remove, scan, chevronDown, chevronUp, pencil, contract, bookmark, shareSocial
+			 pdfSrc, numOfPages,add,remove,
+			  scan, chevronDown, chevronUp,
+			   pencil, contract, bookmark, shareSocial
 		}
 	}
-}
+})
 </script>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
+<!-- <script lang="ts" setup>
 import { useFullscreen } from '@vueuse/core'
 
 const screen = ref(null)
 const { isFullscreen, enter, exit, toggle } = useFullscreen(screen)
-</script>
+</script> -->
 
 <style lang="scss" scoped>
 	.footer-shadow {

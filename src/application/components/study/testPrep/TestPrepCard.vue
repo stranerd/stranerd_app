@@ -4,7 +4,7 @@
 	>
     
 		<ion-text class="font-bold text-2xl text-main_dark">
-			{{title}}
+			{{testPrep.name}}
 		</ion-text>
 
 	
@@ -16,7 +16,7 @@
 				</ion-button>
 			</router-link>
 		
-			<ion-button :to="route" class="btn-outline  text-main_dark min-w-[7rem]  font-bold w-full">
+			<ion-button to="#" class="btn-outline  text-main_dark min-w-[7rem]  font-bold w-full">
 				Study solutions
 			</ion-button>
 		</div>
@@ -32,6 +32,7 @@
 <script lang="ts">
 import { calendar, play } from 'ionicons/icons'
 import { defineComponent,  } from 'vue'
+import { TestPrepEntity } from '@root/modules/study'
 
 export default defineComponent({
 	name: 'TutorCard',
@@ -40,24 +41,9 @@ export default defineComponent({
 			type: String,
 			default: 'bg-light_gray'
 		},
-		title:{
-			type:String,
-			default:''
-		},
-		subText:{
-			type:String,
-			default:''
-		},
-		btnText:{
-			type:String,
-			default:''
-		},
-		route:{
-			type:String,
-			default:''
-		},
-		icon:{
-			type:String
+		testPrep:{
+			type:TestPrepEntity,
+			required: true
 		}
 	},
 	setup() {

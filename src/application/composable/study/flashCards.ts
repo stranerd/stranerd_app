@@ -10,6 +10,10 @@ import {
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@app/composable/core/notifications'
+import {useAuth} from '@app/composable/auth/auth'
+
+
+const {id} = useAuth()
 
 const global = {
 	flashCards: ref([] as FlashCardEntity[]),
@@ -36,7 +40,7 @@ export const useFlashCardList = () => {
 		try {
 			await global.setLoading(true)
 			const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
-			const flashCards = await GetFlashCards.call(lastDate)
+			const flashCards = await GetFlashCards.call(id.value,lastDate)
 			global.hasMore.value = !!flashCards.pages.next
 			flashCards.results.forEach(pushToFlashCardList)
 			global.fetched.value = true
@@ -47,7 +51,7 @@ export const useFlashCardList = () => {
 	}
 	const listener = useListener(async () => {
 		const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
-		return await ListenToFlashCards.call({
+		return await ListenToFlashCards.call(id.value, {
 			created: async (entity) => {
 				unshiftToFlashCardList(entity)
 			},
