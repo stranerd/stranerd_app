@@ -3,6 +3,8 @@ import { UserBio } from '@modules/users'
 
 export class FlashCardEntity extends BaseEntity {
 	public readonly id: string
+	public readonly title: string
+	public readonly isPublic: boolean
 	public readonly set: { question: string, answer: string }[]
 	public readonly tags: string[]
 	public readonly userId: string
@@ -12,6 +14,8 @@ export class FlashCardEntity extends BaseEntity {
 
 	constructor ({
 		             id,
+		             title,
+		             isPublic,
 		             set,
 		             tags,
 		             userId,
@@ -21,6 +25,8 @@ export class FlashCardEntity extends BaseEntity {
 	             }: FlashCardConstructorArgs) {
 		super()
 		this.id = id
+		this.title = title
+		this.isPublic = isPublic
 		this.set = set
 		this.tags = tags
 		this.userId = userId
@@ -32,6 +38,8 @@ export class FlashCardEntity extends BaseEntity {
 
 type FlashCardConstructorArgs = {
 	id: string,
+	title: string,
+	isPublic: boolean
 	set: { question: string, answer: string }[]
 	userId: string
 	userBio: UserBio
