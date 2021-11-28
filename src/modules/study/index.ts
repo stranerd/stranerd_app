@@ -53,6 +53,7 @@ import { FindSetUseCase } from './domain/usecases/sets/findSet'
 import { AddSetUseCase } from './domain/usecases/sets/addSet'
 import { EditSetUseCase } from './domain/usecases/sets/editSet'
 import { DeleteSetUseCase } from './domain/usecases/sets/deleteSet'
+import { ListenToSetUseCase } from './domain/usecases/sets/listenToSet'
 import { GetCoursesUseCase } from './domain/usecases/courses/getCourses'
 import { ListenToCoursesUseCase } from './domain/usecases/courses/listenToCourses'
 import { FindCourseUseCase } from './domain/usecases/courses/findCourse'
@@ -69,6 +70,7 @@ import { AddNoteUseCase } from './domain/usecases/notes/addNote'
 import { FindNoteUseCase } from './domain/usecases/notes/findNote'
 import { DeleteNoteUseCase } from './domain/usecases/notes/deleteNote'
 import { GetNotesInSetUseCase } from './domain/usecases/notes/getNotesInSet'
+import { ListenToNoteUseCase } from './domain/usecases/notes/listenToNote'
 import { ListenToNotesUseCase } from './domain/usecases/notes/listenToNotes'
 import { ListenToNotesInSetUseCase } from './domain/usecases/notes/listenToNotesInSet'
 import { EditNoteUseCase } from './domain/usecases/notes/editNote'
@@ -76,12 +78,14 @@ import { GetNotesUseCase } from './domain/usecases/notes/getNotes'
 import { AddVideoUseCase } from './domain/usecases/videos/addVideo'
 import { FindVideoUseCase } from './domain/usecases/videos/findVideo'
 import { DeleteVideoUseCase } from './domain/usecases/videos/deleteVideo'
+import { ListenToVideoUseCase } from './domain/usecases/videos/listenToVideo'
 import { ListenToVideosUseCase } from './domain/usecases/videos/listenToVideos'
 import { ListenToVideosInSetUseCase } from './domain/usecases/videos/listenToVideosInSet'
 import { EditVideoUseCase } from './domain/usecases/videos/editVideo'
 import { GetVideosUseCase } from './domain/usecases/videos/getVideos'
 import { GetVideosInSetUseCase } from './domain/usecases/videos/getVideosInSet'
 import { EditFlashCardUseCase } from './domain/usecases/flashCards/editFlashCard'
+import { ListenToFlashCardUseCase } from './domain/usecases/flashCards/listenToFlashCard'
 import { ListenToFlashCardsUseCase } from './domain/usecases/flashCards/listenToFlashCards'
 import { ListenToFlashCardsInSetUseCase } from './domain/usecases/flashCards/listenToFlashCardsInSet'
 import { AddFlashCardUseCase } from './domain/usecases/flashCards/addFlashCard'
@@ -157,6 +161,7 @@ export const ListenToSets = new ListenToSetsUseCase(setRepository)
 export const AddSet = new AddSetUseCase(setRepository)
 export const EditSet = new EditSetUseCase(setRepository)
 export const DeleteSet = new DeleteSetUseCase(setRepository)
+export const ListenToSet = new ListenToSetUseCase(setRepository)
 
 export const FindCourse = new FindCourseUseCase(courseRepository)
 export const GetCourses = new GetCoursesUseCase(courseRepository)
@@ -175,6 +180,7 @@ export const DeleteInstitution = new DeleteInstitutionUseCase(institutionReposit
 export const FindFlashCard = new FindFlashCardUseCase(flashCardRepository)
 export const GetFlashCards = new GetFlashCardsUseCase(flashCardRepository)
 export const GetFlashCardsInSet = new GetFlashCardsInSetUseCase(flashCardRepository)
+export const ListenToFlashCard = new ListenToFlashCardUseCase(flashCardRepository)
 export const ListenToFlashCards = new ListenToFlashCardsUseCase(flashCardRepository)
 export const ListenToFlashCardsInSet = new ListenToFlashCardsInSetUseCase(flashCardRepository)
 export const AddFlashCard = new AddFlashCardUseCase(flashCardRepository)
@@ -184,6 +190,7 @@ export const DeleteFlashCard = new DeleteFlashCardUseCase(flashCardRepository)
 export const FindNote = new FindNoteUseCase(noteRepository)
 export const GetNotes = new GetNotesUseCase(noteRepository)
 export const GetNotesInSet = new GetNotesInSetUseCase(noteRepository)
+export const ListenToNote = new ListenToNoteUseCase(noteRepository)
 export const ListenToNotes = new ListenToNotesUseCase(noteRepository)
 export const ListenToNotesInSet = new ListenToNotesInSetUseCase(noteRepository)
 export const AddNote = new AddNoteUseCase(noteRepository)
@@ -193,6 +200,7 @@ export const DeleteNote = new DeleteNoteUseCase(noteRepository)
 export const FindVideo = new FindVideoUseCase(videoRepository)
 export const GetVideos = new GetVideosUseCase(videoRepository)
 export const GetVideosInSet = new GetVideosInSetUseCase(videoRepository)
+export const ListenToVideo = new ListenToVideoUseCase(videoRepository)
 export const ListenToVideos = new ListenToVideosUseCase(videoRepository)
 export const ListenToVideosInSet = new ListenToVideosInSetUseCase(videoRepository)
 export const AddVideo = new AddVideoUseCase(videoRepository)

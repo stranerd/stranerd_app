@@ -1,5 +1,15 @@
-import { onMounted, Ref, ref } from 'vue'
-import { AddNote, DeleteNote, EditNote, GetNotes, ListenToNotes, NoteEntity, NoteFactory } from '@modules/study'
+import { computed, onMounted, Ref, ref } from 'vue'
+import {
+	AddNote,
+	DeleteNote,
+	EditNote,
+	FindNote,
+	GetNotes,
+	ListenToNote,
+	ListenToNotes,
+	NoteEntity,
+	NoteFactory
+} from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@app/composable/core/notifications'
 
@@ -145,4 +155,50 @@ export const useDeleteNote = (noteId: string) => {
 	}
 
 	return { loading, error, deleteNote }
+}
+
+export const useNote = (noteId: string) => {
+	const { error, setError } = useErrorHandler()
+	const { loading, setLoading } = useLoadingHandler()
+	const note = computed({
+		get: () => global.notes.value.find((q) => q.id === noteId) ?? null,
+		set: (q) => {
+			if (q) pushToNoteList(q)
+		}
+	})
+
+	const fetchNote = async () => {
+		await setError('')
+		try {
+			await setLoading(true)
+			let note = global.notes.value.find((q) => q.id === noteId) ?? null
+			if (note) {
+				await setLoading(false)
+				return
+			}
+			note = await FindNote.call(noteId)
+			if (note) unshiftToNoteList(note)
+		} catch (error) {
+			await setError(error)
+		}
+		await setLoading(false)
+	}
+	const listener = useListener(async () => {
+		return await ListenToNote.call(noteId, {
+			created: async (entity) => {
+				unshiftToNoteList(entity)
+			},
+			updated: async (entity) => {
+				unshiftToNoteList(entity)
+			},
+			deleted: async (entity) => {
+				const index = global.notes.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) global.notes.value.splice(index, 1)
+			}
+		})
+	})
+
+	onMounted(fetchNote)
+
+	return { error, loading, note, listener }
 }

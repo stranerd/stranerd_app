@@ -9,6 +9,7 @@ import {
 	GetVideosInSet,
 	ListenToFlashCardsInSet,
 	ListenToNotesInSet,
+	ListenToSet,
 	ListenToSets,
 	ListenToTestPrepsInSet,
 	ListenToVideosInSet,
@@ -124,6 +125,20 @@ export const useSet = (set: SetEntity) => {
 
 	const listener = useListener(async () => {
 		const listeners = await Promise.all([
+			ListenToSet.call(set.id, {
+				created: async (entity) => {
+					unshiftToSetList(entity)
+					set = entity
+				},
+				updated: async (entity) => {
+					unshiftToSetList(entity)
+					set = entity
+				},
+				deleted: async (entity) => {
+					const index = global.sets.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) global.sets.value.splice(index, 1)
+				}
+			}),
 			ListenToNotesInSet.call(set.saved.notes, {
 				created: async (entity) => {
 					setGlobal[set.id].notes.value.push(entity)

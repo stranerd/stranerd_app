@@ -1,11 +1,13 @@
-import { onMounted, Ref, ref } from 'vue'
+import { computed, onMounted, Ref, ref } from 'vue'
 import {
 	AddFlashCard,
 	DeleteFlashCard,
 	EditFlashCard,
+	FindFlashCard,
 	FlashCardEntity,
 	FlashCardFactory,
 	GetFlashCards,
+	ListenToFlashCard,
 	ListenToFlashCards
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
@@ -157,3 +159,50 @@ export const useDeleteFlashCard = (flashCardId: string) => {
 
 	return { loading, error, deleteFlashCard }
 }
+
+export const useFlashCard = (flashCardId: string) => {
+	const { error, setError } = useErrorHandler()
+	const { loading, setLoading } = useLoadingHandler()
+	const flashCard = computed({
+		get: () => global.flashCards.value.find((q) => q.id === flashCardId) ?? null,
+		set: (q) => {
+			if (q) pushToFlashCardList(q)
+		}
+	})
+
+	const fetchFlashCard = async () => {
+		await setError('')
+		try {
+			await setLoading(true)
+			let flashCard = global.flashCards.value.find((q) => q.id === flashCardId) ?? null
+			if (flashCard) {
+				await setLoading(false)
+				return
+			}
+			flashCard = await FindFlashCard.call(flashCardId)
+			if (flashCard) unshiftToFlashCardList(flashCard)
+		} catch (error) {
+			await setError(error)
+		}
+		await setLoading(false)
+	}
+	const listener = useListener(async () => {
+		return await ListenToFlashCard.call(flashCardId, {
+			created: async (entity) => {
+				unshiftToFlashCardList(entity)
+			},
+			updated: async (entity) => {
+				unshiftToFlashCardList(entity)
+			},
+			deleted: async (entity) => {
+				const index = global.flashCards.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) global.flashCards.value.splice(index, 1)
+			}
+		})
+	})
+
+	onMounted(fetchFlashCard)
+
+	return { error, loading, flashCard, listener }
+}
+

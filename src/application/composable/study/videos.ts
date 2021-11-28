@@ -1,5 +1,15 @@
-import { onMounted, Ref, ref } from 'vue'
-import { AddVideo, DeleteVideo, EditVideo, GetVideos, ListenToVideos, VideoEntity, VideoFactory } from '@modules/study'
+import { computed, onMounted, Ref, ref } from 'vue'
+import {
+	AddVideo,
+	DeleteVideo,
+	EditVideo,
+	FindVideo,
+	GetVideos,
+	ListenToVideo,
+	ListenToVideos,
+	VideoEntity,
+	VideoFactory
+} from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@app/composable/core/notifications'
 
@@ -145,4 +155,50 @@ export const useDeleteVideo = (videoId: string) => {
 	}
 
 	return { loading, error, deleteVideo }
+}
+
+export const useVideo = (videoId: string) => {
+	const { error, setError } = useErrorHandler()
+	const { loading, setLoading } = useLoadingHandler()
+	const video = computed({
+		get: () => global.videos.value.find((q) => q.id === videoId) ?? null,
+		set: (q) => {
+			if (q) pushToVideoList(q)
+		}
+	})
+
+	const fetchVideo = async () => {
+		await setError('')
+		try {
+			await setLoading(true)
+			let video = global.videos.value.find((q) => q.id === videoId) ?? null
+			if (video) {
+				await setLoading(false)
+				return
+			}
+			video = await FindVideo.call(videoId)
+			if (video) unshiftToVideoList(video)
+		} catch (error) {
+			await setError(error)
+		}
+		await setLoading(false)
+	}
+	const listener = useListener(async () => {
+		return await ListenToVideo.call(videoId, {
+			created: async (entity) => {
+				unshiftToVideoList(entity)
+			},
+			updated: async (entity) => {
+				unshiftToVideoList(entity)
+			},
+			deleted: async (entity) => {
+				const index = global.videos.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) global.videos.value.splice(index, 1)
+			}
+		})
+	})
+
+	onMounted(fetchVideo)
+
+	return { error, loading, video, listener }
 }
