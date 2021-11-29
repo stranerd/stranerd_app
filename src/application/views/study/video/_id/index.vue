@@ -3,9 +3,9 @@
 		<!-- TODO: Break into sections -->
 		<div class="bg-primary w-full min-h-[150px] flex flex-col justify-center items-center pt-0 pb-1">
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
-				Physics - Waves and Sounds (100l 1st semester exam)
+				{{video?.title}}
 			</ion-text>
-			<div class="flex items-center md:flex-row flex-col">
+			<!-- <div class="flex items-center md:flex-row flex-col">
 				<div class="flex items-center mr-6">
 					<ShowRatings :rating="5" class="mr-3" />
 					<ion-text class="text-white font-semibold">
@@ -14,9 +14,9 @@
 				</div>
 				<ion-text class="text-faded_gray font-semibold">
 					leave a rating
-				</ion-text>
+				</ion-text> 
 
-			</div>
+			</div> -->
 		</div>
 
 		<div
@@ -38,8 +38,7 @@
 					Description
 				</ion-text>
 				<ion-text class="text-main_dark text-sm text-center">
-					This video cover the complete explanation, breakdown of problems, solving of questions under
-					Waves and Sound.
+					{{video?.description}}
 				</ion-text>
 			</div>
 		</div>
@@ -47,8 +46,8 @@
 		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
 			<div class="lg:w-8/12 max-w-[60rem] w-full px-4 mx-auto flex items-center justify-between">
 				<div class="flex">
-					<Avatar :size="28" class="mx-2" />
-					<ion-text class="text-icon_inactive"> by <b>Timmy</b></ion-text>
+					<Avatar :size="28" class="mx-2" :src="video?.userBio?.photo" :id="video?.userId" />
+					<ion-text class="text-icon_inactive"> by <b>{{video?.userBio.firstName}}</b></ion-text>
 				</div>
 
 				<div class="flex items-center">
@@ -61,9 +60,8 @@
 						:icon="bookmark"
 						class="text-icon_inactive text-xl cursor-pointer mx-2"
 					/>
-					<ion-icon
-						:icon="shareSocial"
-						class="text-icon_inactive text-xl cursor-pointer mx-2"
+					<Share
+						cssClass="text-icon_inactive text-xl cursor-pointer mx-2"
 					/>
 				</div>
 			</div>
@@ -71,37 +69,51 @@
 
 
 	</Justified>
+	<page-loading v-if="loading"/>
 </template>
 
-<script lang="ts">
-import Justified from '@app/layouts/Justified.vue'
-import { add, bookmark, chevronBack, chevronForward, contract, pencil, play, scan, shareSocial } from 'ionicons/icons'
-import ShowRatings from '@app/components/core/ShowRatings.vue'
-import Avatar from '@app/components/core/Avatar.vue'
 
-export default {
-	name: 'view Video',
-	displayName: 'Videos',
-	components: {
-		Justified,
-		ShowRatings,
-		Avatar
-	},
-	setup () {
-		return {
-			play, add, scan, chevronBack, chevronForward, pencil, contract, bookmark, shareSocial
-		}
-	}
-}
-</script>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
+<!-- <script lang="ts" setup>
 import { useFullscreen } from '@vueuse/core'
 
 const screen = ref(null)
 const { isFullscreen, enter, exit, toggle } = useFullscreen(screen)
+</script> -->
+
+<script lang="ts">
+import Justified from '@app/layouts/Justified.vue'
+import { add, bookmark, chevronBack, chevronForward, contract, pencil, play, scan, shareSocial } from 'ionicons/icons'
+// import ShowRatings from '@app/components/core/ShowRatings.vue'
+import Avatar from '@app/components/core/Avatar.vue'
+import { defineComponent, onMounted, onBeforeUnmount, ref } from 'vue'
+
+import { useRoute } from 'vue-router'
+import { useVideo } from '@root/application/composable/study/videos'
+
+export default defineComponent({
+	name: 'view Video',
+	displayName: 'Videos',
+	components: {
+		Justified,
+		// ShowRatings,
+		Avatar
+	},
+	setup () {
+		const { id } = useRoute().params
+		const {error, loading, video, listener} = useVideo(id as string)
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+
+		return {
+			loading, video,	play, add, 
+			scan, chevronBack, chevronForward,
+			pencil, contract, bookmark, shareSocial
+		}
+	}
+})
 </script>
+
+
 
 <style lang="scss" scoped>
 	.footer-shadow {

@@ -89,7 +89,7 @@
 </template>
 
 <!-- <script lang="ts" setup>
-import { useFullscreen } from '@vueuse/core'
+import { useFullscreen } from '@vueuse/core' 
 
 const screen = ref(null)
 const { isFullscreen, enter, exit, toggle } = useFullscreen(screen)
@@ -124,7 +124,6 @@ export default defineComponent( {
 
 		const { id } = useRoute().params
 		const {error, loading, note, listener} = useNote(id as string)
-		console.log(note.value)
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 
