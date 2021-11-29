@@ -3,9 +3,9 @@
 		<!-- TODO: Break into sections -->
 		<div class="bg-primary w-full min-h-[150px] flex flex-col justify-center items-center pt-0 pb-1">
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
-				Physics - Waves and Sounds (100l 1st semester exam)
+				{{flashCard?.title}}
 			</ion-text>
-			<div class="flex items-center md:flex-row flex-col">
+			<!-- <div class="flex items-center md:flex-row flex-col">
 				<div class="flex items-center mr-6">
 					<ShowRatings :rating="5" class="mr-3" />
 					<ion-text class="text-white font-semibold">
@@ -16,16 +16,28 @@
 					leave a rating
 				</ion-text>
 
-			</div>
+			</div> -->
 		</div>
 
 		<div
 			ref="screen"
 			:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
-			<div
-				class="flex items-center text-center justify-center h-96 custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto">
-				What will an air bubble in water act like?
+			<div class="box h-96 flex  items-center text-center justify-center  custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto">
+
+				<div
+					class="  front ">
+					{{flashCard?.set[page].question}}
+				</div>
+
+				<div
+					class="back ">
+					{{flashCard?.set[page].answer}}
+				</div>
 			</div>
+
+
+			
+		   
 
 			<div class="w-full flex items-center justify-between my-8 max-w-[30rem] mx-auto">
 				<ion-icon
@@ -34,13 +46,15 @@
 				/>
 				<div class="flex items-center gap-5">
 					<ion-icon
+						@click="decrease()"
 						:icon="chevronBack"
 						class="text-icon_inactive text-xl cursor-pointer"
 					/>
 					<ion-text class="mx-4 text-icon_inactive">
-						<b>12</b> of <b>50</b>
+						<b>{{page + 1}}</b> of <b>{{flashCard?.set.length}}</b>
 					</ion-text>
 					<ion-icon
+						@click="increase()"
 						:icon="chevronForward"
 						class="text-icon_inactive text-xl cursor-pointer"
 					/>
@@ -62,24 +76,23 @@
 
 		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
 			<div class="lg:w-8/12 max-w-[60rem] w-full px-4 lg:p-0 mx-auto flex items-center justify-between">
-				<div class="flex">
-					<Avatar :size="28" class="mx-2 lg:ml-0" />
-					<ion-text class="text-icon_inactive"> by <b>Timmy</b></ion-text>
+				<div class="flex" v-if="flashCard">
+					<Avatar :size="28" class="mx-2" :src="flashCard?.userBio?.photo" :id="flashCard?.userId" />
+					<ion-text class="text-icon_inactive"> by <b>{{flashCard?.userBio.firstName}}</b></ion-text>
 				</div>
 
 				<div class="flex items-center">
 
-					<ion-icon
+					<!-- <ion-icon
 						:icon="pencil"
 						class="text-icon_inactive text-xl cursor-pointer mx-2"
 					/>
 					<ion-icon
 						:icon="bookmark"
 						class="text-icon_inactive text-xl cursor-pointer mx-2"
-					/>
-					<ion-icon
-						:icon="shareSocial"
-						class="text-icon_inactive text-xl cursor-pointer mx-2"
+					/> -->
+					<Share
+						cssClass="text-icon_inactive text-xl cursor-pointer mx-2"
 					/>
 				</div>
 			</div>
@@ -87,37 +100,53 @@
 
 
 	</Justified>
+	<page-loading v-if="loading"/>
 </template>
 
 <script lang="ts">
 import Justified from '@app/layouts/Justified.vue'
 import { add, bookmark, chevronBack, chevronForward, contract, pencil, play, scan, shareSocial } from 'ionicons/icons'
-import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
+import { useFlashCard } from '@root/application/composable/study/flashCards'
+import { useRoute } from 'vue-router'
+import { ref } from 'vue'
+import { useFullscreen } from '@vueuse/core'
+
 
 export default {
 	name: 'View Flashcard',
 	displayName: 'Flashcard Set',
 	components: {
 		Justified,
-		ShowRatings,
 		Avatar
 	},
 	setup () {
+		
+		const screen = ref(null)
+		const page = ref(0)
+		const { isFullscreen, enter, exit, toggle } = useFullscreen(screen)
+		const { id } = useRoute().params
+		const {flashCard, listener, error, loading} = useFlashCard(id as string)
+
+		const increase = ()=>{
+			page.value++
+		}
+		const decrease = ()=>{
+			page.value--
+		}
+
 		return {
-			play, add, scan, chevronBack, chevronForward, pencil, contract, bookmark, shareSocial
+			page,increase, decrease,
+			isFullscreen, toggle, exit, enter,
+			flashCard, error, loading,
+			play, add, scan, chevronBack,
+			chevronForward, pencil, contract, bookmark, shareSocial
 		}
 	}
 }
 </script>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { useFullscreen } from '@vueuse/core'
 
-const screen = ref(null)
-const { isFullscreen, enter, exit, toggle } = useFullscreen(screen)
-</script>
 
 <style lang="scss" scoped>
 	.footer-shadow {
@@ -142,4 +171,38 @@ const { isFullscreen, enter, exit, toggle } = useFullscreen(screen)
 		padding-top: 12px;
 		padding-bottom: 12px;
 	}
+
+
+ .front{
+    position: relative;
+    backface-visibility: hidden;
+    transform: perspective(1000px) rotateY(0deg);
+    transition: 0.00001s;
+}
+.box:hover .front{
+	opacity: 0;
+	position: absolute;
+    transform: perspective(1000px) rotateY(180deg);
+}
+.back{
+	opacity: 0;
+	position: absolute;
+	top:30rem;
+    backface-visibility: hidden;
+    transform: perspective(1000px) rotateY(-180deg);
+    transition: 0.0001s;
+}
+.box:hover .back{
+	opacity: 1;
+	position: relative;
+	top:0;
+    transform: perspective(1000px) rotateY(0deg);
+}
+
+.center{
+    position: absolute;
+    top: 50%;  left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
 </style>
