@@ -8330,10 +8330,24 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+pdfjs-dist@2.5.207:
+  version "2.5.207"
+  resolved "https://registry.yarnpkg.com/pdfjs-dist/-/pdfjs-dist-2.5.207.tgz#b5e8c19627be64269cd3fb6df3eaaf45ddffe7b6"
+  integrity sha512-xGDUhnCYPfHy+unMXCLCJtlpZaaZ17Ew3WIL0tnSgKFUZXHAPD49GO9xScyszSsQMoutNDgRb+rfBXIaX/lJbw==
+
 pdfjs-dist@^2.10.377:
   version "2.10.377"
   resolved "https://registry.yarnpkg.com/pdfjs-dist/-/pdfjs-dist-2.10.377.tgz#feadc9f31bf1790795994e54b18930974cf4970a"
   integrity sha512-i0jRShtvgfsVQUNCoFYH4SVhPO3U0yhtiFLfZ0RR0B+68N+Vnwq+8B3cjWjLEwWGh8wg1XQ/sYMYKUlHn/Qpsw==
+
+pdfvuer@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/pdfvuer/-/pdfvuer-2.0.1.tgz#0d0dbda6514ac861c73766a3d23c16a0b5e7afcc"
+  integrity sha512-5aEjPoYuaD9uc0Bw2gVadXw9Ez0J1s78xXrryUS1SqKaVVtCcTpyZ1eBllZXz3kD+DUVNhHr9O88ygxfYkLhzQ==
+  dependencies:
+    pdfjs-dist "2.5.207"
+    raw-loader "^0.5.1"
+    vue-resize-sensor "^2.0.0"
 
 pend@~1.2.0:
   version "1.2.0"
@@ -9071,6 +9085,11 @@ raw-body@2.4.0:
     http-errors "1.7.2"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
+
+raw-loader@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/raw-loader/-/raw-loader-0.5.1.tgz#0c3d0beaed8a01c966d9787bf778281252a979aa"
+  integrity sha1-DD0L6u2KAclm2Xh793goElKpeao=
 
 read-pkg-up@^7.0.1:
   version "7.0.1"
@@ -10933,6 +10952,11 @@ vue-loader@^15.9.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-resize-sensor@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/vue-resize-sensor/-/vue-resize-sensor-2.0.0.tgz#3a587fd6802e1688709cf2c5aadae7a0075952bf"
+  integrity sha512-W+y2EAI/BxS4Vlcca9scQv8ifeBFck56DRtSwWJ2H4Cw1GLNUYxiZxUHHkuzuI5JPW/cYtL1bPO5xPyEXx4LmQ==
 
 vue-router@^4.0.11:
   version "4.0.11"

@@ -14,8 +14,6 @@ import { registerComponents, registerIonicComponent } from '@app/plugins/compone
 import { parseLoggedInUser } from '@app/plugins/parseLoggedInUser'
 import { ipAddressGetter } from '@app/plugins/ipAddressGetter'
 import { authClient } from '@app/plugins/authClient'
-import VuePdf from 'vue3-pdfjs'
-
 
 const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken }
 const globalPlugins = [parseLoggedInUser, authClient, registerIonicComponent, registerComponents, ipAddressGetter]
@@ -47,11 +45,10 @@ const init = async () => {
 	const app = createApp(App)
 
 	for (const plugin of globalPlugins) await plugin({ app, router }).catch()
-	//@ts-ignore
-	app.use(VuePdf)
+
+	app
 		.use(router)
 		.use(IonicVue)
-		
 	app.mount('#app')
 }
 

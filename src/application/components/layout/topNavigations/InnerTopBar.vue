@@ -36,20 +36,20 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IonHeader, IonIcon, IonToolbar  } from '@ionic/vue'
-import {  notifications,  search, close } from 'ionicons/icons'
+import { IonHeader, IonIcon, IonToolbar, IonTitle, IonButtons  } from '@ionic/vue'
+import {  notifications,  search, close, arrowBackOutline } from 'ionicons/icons'
 import BigScreenBar from './screens/BigScreenBar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
 
 export default defineComponent({
-	components: { IonIcon, SearchBar, IonHeader, IonToolbar, BigScreenBar },
+	components: { IonIcon, SearchBar, IonHeader, IonToolbar, BigScreenBar, IonTitle,IonButtons },
 	setup () {
 
 		const showSearch = ref(false)
 		const toggleSearch = () => {
 			showSearch.value = !showSearch.value
 		}
-		return {close,
+		return {close, arrowBackOutline,
 			showSearch,toggleSearch,
 			search,notifications
 		}

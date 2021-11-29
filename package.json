@@ -29,6 +29,7 @@
 		"cookie": "^0.4.1",
 		"core-js": "^3.19.1",
 		"firebase": "^9.4.1",
+		"pdfvuer": "^2.0.1",
 		"socket.io-client": "^4.3.2",
 		"stripe": "^8.188.0",
 		"sweetalert2": "^11.1.10",

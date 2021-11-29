@@ -20,22 +20,25 @@
 		</div>
 		<div class="w-screen h-screen bg-light_gray">
 			<div
-				:class="[true ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
+				:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
 
-				<div ref="screen" class="bg-white h-[25rem] min-w-[57px] w-full grid place-items-center rounded-md "
+				<div  class="bg-white h-[25rem] min-w-[57px] w-full grid place-items-center rounded-md "
+					
 				>
-					<VuePdf src="https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf" page="1"
-						enableTextSelection
-						enableAnnotations />
+					<pdf ref="screen" @click="toggle" src="https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf" :page="page" class="!max-w-[90vw]">
+						<template slot="loading">
+							loading content here...
+						</template>
+					</pdf>
 
 				</div>
 
 				<div class="w-full mx-auto fixed bottom-12 md:inset-x-0 inset-x-4">
 					<div class="lg:w-8/12 w-full px-4 mx-auto flex  items-center  my-8 max-w-[40rem]  bg-dark_gray text-2xl text-white rounded-xl">
 						<div class="py-2 px-4 !-my-2 border-r border-light_gray flex justify-between items-center gap-4">
-							<ion-icon :icon="chevronDown"/>
-							<ion-text class="text-lg">3 of 50</ion-text>
-							<ion-icon :icon="chevronUp"/>
+							<ion-icon :icon="chevronDown" @click="page--"/>
+							<ion-text class="text-lg">{{page}} of 50</ion-text>
+							<ion-icon :icon="chevronUp" @click="page++"/>
 						</div>
 						<div class="py-2 px-4 border-r border-light_gray flex justify-between items-center gap-4">
 							<ion-icon :icon="remove"/>
@@ -83,37 +86,39 @@
 	</Justified>
 </template>
 
+<!-- <script lang="ts" setup>
+import { useFullscreen } from '@vueuse/core'
+
+const screen = ref(null)
+const { isFullscreen, enter, exit, toggle } = useFullscreen(screen)
+</script> -->
+
 <script lang="ts">
 import Justified from '@app/layouts/Justified.vue'
 import { add, bookmark, chevronDown, chevronUp, contract, pencil, remove, scan, shareSocial } from 'ionicons/icons'
 import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
-import { defineComponent, onMounted, reactive, ref } from 'vue'
+import { defineComponent, onMounted, computed, ref } from 'vue'
 //@ts-ignore
-import { createLoadingTask } from 'vue3-pdfjs/esm'
-import { VuePdfPropsType } from 'vue3-pdfjs/components/vue-pdf/vue-pdf-props' // Prop type definitions can also be imported
-import { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
+import pdfvuer from 'pdfvuer'
+
 
 export default defineComponent( {
 	name: 'view Notes',
-	displayName: 'Notes',
+	displayName: 'Notes', 
 	components: {
 		Justified,
 		ShowRatings,
 		Avatar,
+		pdf:pdfvuer,
 	},
 	setup () {
-		    const pdfSrc = ref<VuePdfPropsType['src']>('https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf')
-		const numOfPages = ref(0)
 
-		onMounted(() => {
-			const loadingTask = createLoadingTask(pdfSrc.value)
-			loadingTask.promise.then((pdf: PDFDocumentProxy) => {
-				numOfPages.value = pdf.numPages
-			})
-		})
+		const page = ref(1) 
+
 		return {
-			 pdfSrc, numOfPages,add,remove,
+			page,
+			add,remove,
 			  scan, chevronDown, chevronUp,
 			   pencil, contract, bookmark, shareSocial
 		}
@@ -121,12 +126,7 @@ export default defineComponent( {
 })
 </script>
 
-<!-- <script lang="ts" setup>
-import { useFullscreen } from '@vueuse/core'
 
-const screen = ref(null)
-const { isFullscreen, enter, exit, toggle } = useFullscreen(screen)
-</script> -->
 
 <style lang="scss" scoped>
 	.footer-shadow {
