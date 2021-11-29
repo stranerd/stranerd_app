@@ -138,11 +138,9 @@ export default {
 	},
 	setup () {
 		const { id } = useRoute().params
-		console.log(id)
 		const {editFlashCard, factory, error,loading} = useEditFlashCard(id as string)
 		const {flashCard, listener,error:flashCardError, loading:flashCardLoading} = useFlashCard(id as string)
 
-		console.log(flashCard)
 
 		const { tag, removeTag } = useTags(
 			(tag: string) => factory.value.addTag(tag),
