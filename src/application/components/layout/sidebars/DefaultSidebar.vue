@@ -1,11 +1,7 @@
 <template>
 	<div
 		class="hidden lg:flex bg-light_gray py-3 pl-3 w-[16%] h-full  left-0 top-0 flex-col z-30">
-		<!-- class="hidden lg:flex bg-light_gray py-3 pl-3 w-full h-full !max-h-full left-0 top-0 flex-col rounded-tr-3xl rounded-br-3xl z-50"> -->
-
-		<!-- <div class="py-5 pl-11 flex flex-row items-center">
-			<img class="w-32" src="@app/assets/images/icons/logo.svg" />
-		</div> -->
+	
 
 		<div class="flex flex-col pl-8 mt-6">
 
@@ -14,13 +10,13 @@
 					{ name: 'questions', path: '/questions', icon: helpCircle },
 					{ name: 'Study', path: '/study', icon: library }
 				]" :key="path" :to="path"
-				class="flex flex-col rounded-l-[150px] text-icon_inactive cursor-pointer text-sm hover:text-dark_gray mb-2">
-				<div :class="{'text-dark_gray bg-white active-route-link relative' : $route.path === path }"
-					class="py-5 flex flex-row px-4 items-center rounded-l-3xl">
+				class="flex flex-col rounded-l-full text-icon_inactive cursor-pointer text-sm hover:text-main_dark mb-2">
+				<div :class="{'text-main_dark bg-white active-route-link relative' : $route.path === path }"
+					class="py-5 flex flex-row px-4 items-center rounded-l-full">
 					<ion-icon :icon="icon" class="text-[23px] mr-4"></ion-icon>
 					<span class="font-semibold capitalize">{{ name }}</span>
 				</div>
-			</router-link>
+			</router-link> 
 
 		</div>
 

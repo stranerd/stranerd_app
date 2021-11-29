@@ -2,17 +2,46 @@
 	<div class="md:w-8/12 w-full px-4 mx-auto   mt-8">
 	
 
-		<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
-			<notesCard  v-for="n in 12" :key="n" title="Jamb"/>
-		</div>
+		<template v-if="notes.length === 0">
+			<div class="py-3">
+				<empty-state
+					info="No Notes to Explore."
+				></empty-state>
+			</div>
+		</template>
+		<template v-else>
+			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8"> 
+				<notesCard  v-for="(note, index) in notes" :key="note.id" :note="note" :index="index+1"/>
+			</div>
+		</template>
+
+
 	
-	</div>
+	</div>o
 </template>
 
 <script lang="ts">
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import notesCard from '@app/components/study/notes/notesCard.vue'
+import { useNoteList } from '@app/composable/study/notes'
+
 export default {
 	components: { notesCard },
+
+    	setup () {
+		// const { id, isLoggedIn } = useAuth()
+		const { notes, listener, loading, error } = useNoteList()
+	
+
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+
+
+		return {
+			notes,
+		
+		}
+	}
 }
 </script>
 

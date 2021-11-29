@@ -3,14 +3,14 @@
 		class=" flex flex-col absolute h-full w-full overflow-y-auto border-r-[1px] normalText text-icon_inactive border-faded_gray lg:rounded-tr-xl lg:rounded-br-xl">
 		<div
 			class="flex flex-row items-center justify-between px-3 py-4 border-b-[1px] border-faded_gray sticky top-0 bg-white z-50">
-			<h2 class="text-dark_gray text-base font-bold ">Info</h2>
+			<h2 class="text-main_dark text-base font-bold ">Info</h2>
 		</div>
 
 		<div class="py-4 w-full px-3 flex items-center flex-row gap-2   border-b-[1px] border-light_gray">
 
 			<avatar :id="user?.id" :size="55" :src="user?.avatar" />
 			<div class="flex flex-col gap-1">
-				<h2 class="font-bold text-dark_gray">{{ user?.fullName }}</h2>
+				<h2 class="font-bold text-main_dark">{{ user?.fullName }}</h2>
 				<div class="flex flex-row gap-1 items-center  ">
 					<ShowRatings :rating="user?.ratingCount ? user.ratingCount : 3" />
 				</div>
@@ -27,24 +27,24 @@
 		<div class="py-4 w-full flex flex-col gap-3 ">
 
 			<div class="flex flex-col gap-1 px-3 py-2 pb-6 border-b-[1px] border-light_gray">
-				<h2 class="text-xs font-bold text-dark_gray">Subject</h2>
+				<h2 class="text-xs font-bold text-main_dark">Subject</h2>
 				<span>Mathematics</span>
 			</div>
 
 			<div class="flex flex-col gap-1 px-3 py-2 pb-6 border-b-[1px] border-light_gray">
-				<h2 class="text-xs font-bold text-dark_gray">Date & Time</h2>
+				<h2 class="text-xs font-bold text-main_dark">Date & Time</h2>
 				<span>14:00 - 16:00</span>
-				<span class="text-xs text-dark_gray">19 October 2021</span>
+				<span class="text-xs text-main_dark">19 October 2021</span>
 			</div>
 
 			<div class="flex flex-col gap-1 px-3 py-2 pb-6 border-b-[1px] border-light_gray">
-				<h2 class="text-xs font-bold text-dark_gray">Status</h2>
+				<h2 class="text-xs font-bold text-main_dark">Status</h2>
 				<span>Ended</span>
 			</div>
 
 			<div class="flex flex-col gap-1 px-3 py-2 pb-6 border-b-[1px] border-light_gray">
 				<div class="flex flex-row items-center justify-between mb-2">
-					<h2 class="text-xs font-bold text-dark_gray">Share resources</h2>
+					<h2 class="text-xs font-bold text-main_dark">Share resources</h2>
 					<ion-icon :icon="chevronForward" class="text-[20px]"></ion-icon>
 				</div>
 				<div class="w-full grid grid-cols-12 gap-3">
@@ -84,7 +84,7 @@
 
 			<div
 				class="flex flex-row gap-1 px-3 py-2 pb-6 border-b-[1px] border-light_gray justify-between items-center">
-				<h2 class="text-xs font-bold text-dark_gray">Date & Time</h2>
+				<h2 class="text-xs font-bold text-main_dark">Date & Time</h2>
 				<ion-icon :icon="ellipseOutline" class="text-[22px]"></ion-icon>
 			</div>
 

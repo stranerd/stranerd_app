@@ -1,8 +1,8 @@
 <template>
 	<DashboardWithToolbarLayout>
-		<div class="px-3 w-full">
+		<div class="px-3 w-full mt-8">
 			<div
-				class="col-span-12 pb-3 px-1 flex-row items-center text-dark_gray font-bold hidden lg:flex cursor-pointer"
+				class="col-span-12 pb-3 px-1 flex-row items-center text-main_dark font-bold hidden lg:flex cursor-pointer"
 				@click="$router.go(-1)">
 				<IonIcon :icon="arrowBackOutline" class="text-[25px] mr-2" />
 				<span>Back</span>
@@ -28,7 +28,7 @@ import DashboardWithToolbarLayout from '@app/layouts/DashboardWithToolbar.vue'
 import QuestionPageCard from '@app/components/questions/QuestionPageCard.vue'
 import AnswersList from '@app/components/questions/answers/AnswersList.vue'
 
-export default defineComponent({
+export default defineComponent({ 
 	name: 'QuestionIdPage',
 	displayName: 'Answers',
 	components: {

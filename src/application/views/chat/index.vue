@@ -4,11 +4,11 @@
 			<div class="fixed h-full w-full flex flex-row lg:bg-dark_gray gap-3 lg:py-4 lg:px-3">
 
 				<div class="lg:flex flex-col gap-4 h-full hidden relative">
-					<div class="text-dark_gray bg-white rounded-xl justify-center items-center py-3 px-4">
-						<ion-icon :icon="chatbubbles" class="text-[23px] text-dark_gray"></ion-icon>
+					<div class="text-main_dark bg-white rounded-xl justify-center items-center py-3 px-4">
+						<ion-icon :icon="chatbubbles" class="text-[23px] text-main_dark"></ion-icon>
 					</div>
 					<router-link
-						class="text-dark_gray bg-icon_inactive rounded-xl justify-center items-center py-3 px-4 absolute bottom-1"
+						class="text-main_dark bg-icon_inactive rounded-xl justify-center items-center py-3 px-4 absolute bottom-1"
 						to="/dashboard">
 						<ion-icon :icon="home" class="text-[23px] text-white"></ion-icon>
 					</router-link>

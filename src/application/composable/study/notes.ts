@@ -16,7 +16,7 @@ import { Alert } from '@app/composable/core/notifications'
 const global = {
 	notes: ref([] as NoteEntity[]),
 	fetched: ref(false),
-	hasMore: ref(false),
+	hasMore: ref(false), 
 	...useErrorHandler(),
 	...useLoadingHandler()
 }

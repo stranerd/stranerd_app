@@ -1,16 +1,18 @@
 <template>
-	<UserPageWrapper>
+	<Justified>
+
 		<template v-slot:default="{ user }">
 			<UserSettings :user="user" />
 		</template>
-	</UserPageWrapper>
+	</Justified>
+
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import UserSettings from '@app/components/users/users/UserSettings.vue'
-import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 import { useAuth } from '@app/composable/auth/auth'
+import Justified from '@root/application/layouts/Justified.vue'
 
 export default defineComponent({
 	name: 'UserIdSettings',
@@ -20,6 +22,6 @@ export default defineComponent({
 		const authId = useAuth().id.value
 		if (userId !== authId) return `/users/${userId}/`
 	}],
-	components: { UserPageWrapper, UserSettings }
+	components: {  UserSettings, Justified }
 })
 </script>

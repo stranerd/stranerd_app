@@ -3,11 +3,11 @@
 		class="flex flex-row items-center px-2 py-[9.5px] z-50 border-b-[1px] border-faded_gray normalText text-icon_inactive justify-between normalText bg-white sticky w-full top-0">
 		<div class="flex flex-row items-center gap-2">
 			<router-link to="/chat">
-				<ion-icon :icon="arrowBack" class="text-dark_gray mr-2 text-[25px] cursor-pointer"></ion-icon>
+				<ion-icon :icon="arrowBack" class="text-main_dark mr-2 text-[25px] cursor-pointer"></ion-icon>
 			</router-link>
 			<avatar :id="user?.id" :size="32" :src="user?.avatar" />
 			<div class="flex flex-col ">
-				<h2 class="font-bold text-dark_gray">
+				<h2 class="font-bold text-main_dark">
 					{{ user?.fullName }}
 				</h2>
 				<span>{{ user?.isOnline ? 'Active now' : time }}</span>

@@ -5,7 +5,7 @@
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
 			<div class="mt-3 flex flex-row items-center">
-				<span class="font-bold text-dark_gray"><Subject :subject-id="question.subjectId" /></span>
+				<span class="font-bold text-main_dark"><Subject :subject-id="question.subjectId" /></span>
 			</div>
 			<div class="flex flex-row-reverse flex-grow">
 
@@ -20,7 +20,7 @@
 		</div>
 
 
-		<router-link :to="`/questions/${question.id}`" class="py-2 text-dark_gray leading-normal">
+		<router-link :to="`/questions/${question.id}`" class="py-2 text-main_dark leading-normal">
 			{{ question.trimmedBody }}
 		</router-link>
 

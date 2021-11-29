@@ -21,10 +21,11 @@ import {
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
-
+ 
 const global = {
 	sets: ref([] as SetEntity[]),
 	fetched: ref(false),
+	edit: ref(false),
 	hasMore: ref(false),
 	...useErrorHandler(),
 	...useLoadingHandler()
@@ -230,4 +231,14 @@ export const useCreateSet = () => {
 	}
 
 	return { error, loading, factory, createSet }
+}
+
+
+export const useEdit = ()=>{
+	const toggle = ()=>{
+		global.edit.value = !global.edit.value
+	}
+	return {
+		toggle
+	}
 }

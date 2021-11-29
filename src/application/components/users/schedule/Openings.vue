@@ -1,5 +1,5 @@
 <template>
-	<div :class="`w-full ${colorClass} rounded-lg py-5 px-4 text-dark_gray font-bold flex flex-col`">
+	<div :class="`w-full ${colorClass} rounded-lg py-5 px-4 text-main_dark font-bold flex flex-col`">
 		<div class="flex flex-row items-center normalText">
 			<ion-icon :icon="calendar" class="text-[22px] mr-2 text-icon_inactive"></ion-icon>
 			<span>10:00 - 11:00</span>

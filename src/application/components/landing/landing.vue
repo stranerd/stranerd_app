@@ -47,7 +47,7 @@
 			</div>
 		</div>
 		<div class="lower-section bg-butter_yellow px-3 py-10">
-			<div class="max-w-2xl text-center text-dark_gray mx-auto">
+			<div class="max-w-2xl text-center text-main_dark mx-auto">
 				<p class="font-bold text-lg md:text-3xl">
 					87% of students who use Stranerd confirm increased grades and better study habits
 				</p>

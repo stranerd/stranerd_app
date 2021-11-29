@@ -2,17 +2,45 @@
 	<div class="md:w-8/12 w-full px-4 mx-auto   mt-8">
 	
 
-		<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
-			<VideoCard  v-for="n in 12" :key="n" />
-		</div>
+		<template v-if="videos.length === 0">
+			<div class="py-3">
+				<empty-state
+					info="No Videos to Explore."
+				></empty-state>
+			</div>
+		</template>
+		<template v-else>
+			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
+				<VideoCard  v-for="(video, index) in videos" :key="video.id" :video="video" :index="index" />
+			</div>
+		</template>
+
+	
 	
 	</div>
 </template>
 
 <script lang="ts">
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+
 import VideoCard from '@app/components/study/videos/VideoCard.vue'
+import { useVideoList } from '@app/composable/study/videos'
 export default {
 	components: { VideoCard },
+    	setup () {
+		// const { id, isLoggedIn } = useAuth()
+		const { videos, listener, loading, error } = useVideoList()
+	
+
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+
+
+
+		return {
+			videos,
+		}
+	}
 }
 </script>
 

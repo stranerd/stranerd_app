@@ -19,6 +19,7 @@ const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQue
 const globalPlugins = [parseLoggedInUser, authClient, registerIonicComponent, registerComponents, ipAddressGetter]
 export type Middleware = MiddlewareFunction | keyof typeof globalMiddlewares
 
+
 const init = async () => {
 	const router = createRouter({
 		history: createWebHistory(),

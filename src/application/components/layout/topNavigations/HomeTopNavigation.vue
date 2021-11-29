@@ -20,10 +20,10 @@
 				<router-link class="link-custom px-4" to="/#contact-us">
 					Blog
 				</router-link>
-				<router-link class="btn bg-dark_gray  text-white !px-10 rounded-md" to="/auth/signup">
+				<router-link class="btn bg-main_dark  text-white !px-10 rounded-md" to="/auth/signup">
 					Sign Up
 				</router-link>
-				<router-link class="btn btn-custom  border border-dark_gray text-dark_gray !px-10 rounded-md"
+				<router-link class="btn btn-custom  border border-dark_gray text-main_dark !px-10 rounded-md"
 					to="/auth/signin">
 					Sign In
 				</router-link>
@@ -51,7 +51,7 @@
 				Blog
 			</a>
 			<a
-				class="btn bg-white rounded-md text-dark_gray mx-auto min-w-[11rem] w-100"
+				class="btn bg-white rounded-md text-main_dark mx-auto min-w-[11rem] w-100"
 				@click="navigate('/auth/signin')"
 			>
 				Sign In
@@ -115,7 +115,7 @@ export default defineComponent({
 
 
 	.link-custom {
-		color: $color-iconInactive;
+		color: $color-mainDark;
 		font-weight: 700;
 		font-size: 16px;
 	}

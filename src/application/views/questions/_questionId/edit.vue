@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<div class="text-xs md:text-sm py-6">
-				<h3 class="text-center font-bold text-dark_gray">
+				<h3 class="text-center font-bold text-main_dark">
 					Ask questions to help with your homework and studies.
 				</h3>
 				<QuestionForm

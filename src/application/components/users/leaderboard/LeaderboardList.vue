@@ -19,7 +19,7 @@
 			<template v-if="users.length">
 				<div v-for="(person, index) in users" :key="person.id"
 					:class="{'border border-faded_gray': person.id === id}"
-					class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4"
+					class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-main_dark py-4 lg:px-8 px-4"
 				>
 					<div class="w-3/12">
 						<span>{{ index + 1 }} </span>
@@ -37,7 +37,7 @@
 			</template>
 
 			<div v-if="user && !hasAuthUser"
-				class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-dark_gray py-4 lg:px-8 px-4 border border-faded_gray">
+				class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-main_dark py-4 lg:px-8 px-4 border border-faded_gray">
 				<div class="w-3/12">
 					<span> - </span>
 				</div>
