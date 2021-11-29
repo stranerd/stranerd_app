@@ -9,16 +9,19 @@ export class ListenToFlashCardsUseCase {
 		this.repository = repository
 	}
 
-	async call (listener: Listeners<FlashCardEntity>, date?: number) {
+	async call (userId: string, listener: Listeners<FlashCardEntity>, date?: number) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: 1 },
-			all: true
+			where: [{ field: 'userId', value: userId }, { field: 'isPublic', value: true }],
+			whereType: 'or',
+			sort: { field: 'createdAt', order: -1 }
 		}
-		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.gt, value: date }]
+		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
+			const matches = entity.userId === userId || entity.isPublic
+			if (!matches) return false
 			if (date) return entity.createdAt > date
-			return true
+			return matches
 		})
 	}
 }
