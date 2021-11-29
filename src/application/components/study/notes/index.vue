@@ -25,7 +25,7 @@
 			<Swiper :freeMode="true" :items="notes" :slides="1.1" class="mt-2 overflow-x-auto flex"
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
 				<template v-slot:default="{ item, index }">
-					<notesCard :colorClass=" index  === 0 ? 'bg-light_orange' : 'bg-light_gray'" :note="item"
+					<notesCard :colorClass=" index  === 0 ? 'bg-light_orange' : 'bg-light_gray'" :index="index + 1" :note="item"
 					/>
 
 				</template>  

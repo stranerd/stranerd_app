@@ -24,7 +24,7 @@
 			<Swiper :freeMode="true" :items="videos" :slides="1.1" class="mt-2 overflow-x-auto flex"
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
 				<template v-slot:default="{ item, index }">
-					<VideoCard :colorClass=" index  === 0 ? 'bg-light_blue' : 'bg-light_blue'" :video="item"
+					<VideoCard :colorClass=" index  === 0 ? 'bg-light_blue' : 'bg-light_blue'"  :index="index + 1" :video="item"
 					/>
 
 				</template>
