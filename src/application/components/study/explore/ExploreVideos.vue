@@ -11,7 +11,7 @@
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
-				<VideoCard  v-for="video in videos" :key="video.id" />
+				<VideoCard  v-for="(video, index) in videos" :key="video.id" :video="video" :index="index" />
 			</div>
 		</template>
 

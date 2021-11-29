@@ -49,6 +49,7 @@ import { formatNumber } from '@utils/commons'
 import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { useEditState } from '@app/composable/study/state'
+import { FlashCardEntity } from '@root/modules/study'
 
 
 export default defineComponent({
@@ -62,6 +63,10 @@ export default defineComponent({
 			type: Number,
 			required: false
 		},
+		flashCard:{
+			type:FlashCardEntity,
+			required:true
+		}
 	},
 	setup() {
 		const {editState} = useEditState()

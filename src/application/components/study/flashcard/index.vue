@@ -24,7 +24,7 @@
 			<Swiper :freeMode="true" :items="flashcards" :slides="1.1" class="mt-2 overflow-x-auto flex"
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
 				<template v-slot:default="{ item, index }">
-					<FlashcardsCard :colorClass=" index  === 0 ? 'bg-butter_yellow' : 'bg-light_gray'" :item="item" :index="index"
+					<FlashcardsCard :colorClass=" index  === 0 ? 'bg-butter_yellow' : 'bg-light_gray'" :flashCard="item" :index="index+1"
 					/>
 
 				</template> 

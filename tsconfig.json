@@ -39,6 +39,9 @@
 	"include": [
 		"src"
 	],
+	  "files": [
+      "./src/types/vue3-pdfjs.d.ts"
+  ],
 	"exclude": [
 		"node_modules",
 		"build",

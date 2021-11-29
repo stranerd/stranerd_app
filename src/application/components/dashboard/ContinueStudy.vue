@@ -47,8 +47,7 @@ export default defineComponent({
 		const { testPreps: allTestPreps, listener, loading, error } = useTestPrepList()
 		const testPreps = computed({
 			get: () => allTestPreps.value.slice(0, 6),
-			set: () => {
-			}
+			set: () => {}
 		})
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)

@@ -28,7 +28,7 @@ import DashboardWithToolbarLayout from '@app/layouts/DashboardWithToolbar.vue'
 import QuestionPageCard from '@app/components/questions/QuestionPageCard.vue'
 import AnswersList from '@app/components/questions/answers/AnswersList.vue'
 
-export default defineComponent({
+export default defineComponent({ 
 	name: 'QuestionIdPage',
 	displayName: 'Answers',
 	components: {
