@@ -6,22 +6,22 @@
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/dashboard">
-					<ion-icon :icon="home" class="w-5" />
+					<ion-icon :icon="home" class="w-6" />
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/questions">
-					<ion-icon :icon="helpCircle" class="w-5" />
+					<ion-icon :icon="helpCircle" class="w-6" />
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/study">
-					<ion-icon :icon="book" class="w-5" />
+					<ion-icon :icon="book" class="w-6" />
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/account">
-					<ion-icon :icon="person" class="w-5" />
+					<ion-icon :icon="person" class="w-6" />
 				</router-link>
 			</div>
 		</IonToolbar>
@@ -32,22 +32,23 @@
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/dashboard">
-					<ion-icon :icon="home" class="w-12" />
+					<ion-icon :icon="home" class="w-14" />
+				</router-link>
+			
+				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
+					exact-active-class="!text-main_dark"
+					to="/questions">
+					<ion-icon :icon="helpCircle" class="w-14" />
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/">
-					<ion-icon :icon="book" class="w-12" />
+					<ion-icon :icon="book" class="w-14" />
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/profile">
-					<ion-icon :icon="person" class="w-12" />
-				</router-link>
-				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
-					exact-active-class="!text-main_dark"
-					to="/questions">
-					<ion-icon :icon="helpCircle" class="w-12" />
+					<ion-icon :icon="person" class="w-14" />
 				</router-link>
 			</div>
 		</IonToolbar>

@@ -1,43 +1,42 @@
 <template>
 	<div>
-		<div class="py-4 px-4 rounded-lg bg-light_gray flex flex-col text-xs md:text-sm">
+		<div class="py-4 px-4 rounded-xl bg-light_gray flex flex-col text-xs md:text-sm border border-faded_gray lg:border-0">
 			<IonRippleEffect class="rounded-lg" />
-			<div class="flex flex-row items-center">
-				<span class="mr-2"><avatar :id="question.userId" :size="28" :src="question.avatar" /></span>
-				<span class="font-bold text-dark_gray">{{ question.userBio.fullName }}</span>
+			<div class="flex flex-row items-center gap-4">
+				<avatar :id="question.userId" :size="28" :src="question.avatar"  class="hidden lg:block" />
+				<span class="font-bold text-main_dark hidden lg:block">{{ question.userBio.fullName }}</span>
+				<div class="h-1 w-1 bg-icon_inactive rounded-full hidden lg:block"/>
+				<Subject :subjectId="question.subjectId" class="font-semibold text-main_dark" />
 				<div class="flex flex-row-reverse flex-grow">
-					<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive cursor-pointer"
+					<IonIcon :icon="flag" class="text-[22px]  text-main_dark cursor-pointer"
 						@click="openReportQuestionModal" />
 					<share
 						:text="question.body"
 						:title="question.strippedBody"
-						cssClass="text-[22px] mr-2 text-icon_inactive" />
+						cssClass="text-[22px] mr-2 text-main_dark" />
 				</div>
 			</div>
 
-			<div class="mt-3 flex flex-row items-center">
-				<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3"></span>
-				<Subject :subjectId="question.subjectId" class="font-semibold text-dark_gray" />
-			</div>
+		
 
-			<pre class="py-2 text-dark_gray leading-normal mb-3 lg:mb-5" v-html="question.body" />
+			<span class="py-2 text-main_dark  mb-3 lg:mb-5" v-html="question.body" />
 
-			<div class="w-full flex flex-col lg:flex-row lg:justify-between w-full">
+			<div class="w-full flex flex-wrap items-center lg:justify-between ">
 				<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">
 					<span v-for="tag in question.tags" :key="tag">
-						<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg inline-block">
+						<span v-if="tag" class="py-1 px-4 font-bold text-white bg-icon_inactive rounded-2xl inline-block">
 							{{ tag }}
 						</span>
 					</span>
 				</div>
 
-				<div class="mt-2 flex flex-row items-center">
-					<span class="font-bold text-icon_inactive lg:mr-2">{{ formatTime(question.createdAt) }}</span>
-					<div :class="`flex flex-row-reverse items-center flex-grow`">
-						<span class="font-bold text-icon_inactive">{{
+				<div class=" flex flex-row items-center ml-auto">
+					<span class="font-bold text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
+					<div :class="`flex flex-row-reverse items-center`">
+						<span class="font-bold text-main_dark">{{
 							question.answers.length
 						}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
-						<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3" />
+						<span class="h-[5px] w-[5px] rounded-full bg-main_dark mx-3" />
 					</div>
 				</div>
 
@@ -72,7 +71,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { IonIcon, IonRippleEffect } from '@ionic/vue'
-import { arrowRedo, flag, pencil, trashBinOutline } from 'ionicons/icons'
+import { shareSocial, flag, pencil,  trashBinOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/Avatar.vue'
@@ -119,7 +118,7 @@ export default defineComponent({
 		const { loading, error, deleteQuestion } = useDeleteQuestion(props.question.id)
 
 		return {
-			arrowRedo, flag, pencil, trashBinOutline,
+			shareSocial, flag, pencil, trashBinOutline,
 			formatTime, pluralize,
 			showAnswerButton, showAddAnswer,
 			showEditButton, showDeleteButton,

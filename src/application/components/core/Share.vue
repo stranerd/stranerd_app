@@ -1,7 +1,7 @@
 <template>
 	<span @click.prevent="shareInfo">
 		<slot>
-			<ion-icon :class="cssClass" :icon='arrowRedo' />
+			<ion-icon :class="cssClass" :icon='shareSocial' />
 		</slot>
 	</span>
 </template>
@@ -12,7 +12,7 @@ import { useRoute } from 'vue-router'
 import { domain } from '@utils/environment'
 import { Notify } from '@app/composable/core/notifications'
 import { copyToClipboard } from '@utils/commons'
-import { arrowRedo } from 'ionicons/icons'
+import { shareSocial } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'Share',
@@ -65,7 +65,7 @@ export default defineComponent({
 				})
 			}
 		}
-		return { arrowRedo, shareInfo }
+		return { shareSocial, shareInfo }
 	}
 })
 </script>

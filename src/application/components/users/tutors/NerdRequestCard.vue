@@ -6,10 +6,10 @@
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
 			<img class="inline h-7 mr-2" src="@app/assets/images/icons/person-circle.svg" />
-			<span class="font-bold text-dark_gray">Timmy Nuetron</span>
+			<span class="font-bold text-main_dark">Timmy Nuetron</span>
 			<div class="flex flex-row items-center ml-4 hidden md:flex">
 				<span class="h-[4px] w-[4px] rounded-full bg-icon_inactive mr-3"></span>
-				<span class="text-dark_gray font-bold">Physics</span>
+				<span class="text-main_dark font-bold">Physics</span>
 			</div>
 			<div class="flex-row items-center ml-4 hidden md:flex">
 				<span class="h-[4px] w-[4px] rounded-full bg-icon_inactive mr-3"></span>
@@ -29,12 +29,12 @@
 			</button>
 		</div>
 		<div class="mt-3 flex flex-row items-center gap-2 md:hidden">
-			<span class="font-bold text-dark_gray">Physics</span>
+			<span class="font-bold text-main_dark">Physics</span>
 			<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive "></span>
 			<span class="text-icon_inactive font-bold">30m ago  </span>
 		</div>
 
-		<p class="py-2 text-dark_gray leading-normal">
+		<p class="py-2 text-main_dark leading-normal">
 			From the top of a building with a height of 16 meters, a ball is thrown at angle of 30 degrees to the
 			horizontal plane at a speed of 21 m/s.
 			Calculate the total time the ball is in the air?
@@ -62,7 +62,7 @@
 			</div>
 			<div class="flex items-center text-icon_inactive ">
 				<Coins :gold="true" :size="22" />
-				<span class=" ml-1 font-bold text-dark_gray">20</span>
+				<span class=" ml-1 font-bold text-main_dark">20</span>
 			</div>
 
 		</div>

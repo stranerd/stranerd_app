@@ -25,7 +25,7 @@
 					<router-link class="flex items-center " to="/notifications">
 						<ion-icon :icon="notifications" class="text-xl text-main_dark"></ion-icon>
 					</router-link>
-					<router-link class="flex items-center" to="/users/leaderboard">
+					<router-link class="flex items-center" to="/dashboard">
 						<img class="w-24" src="@app/assets/images/logo/logo-dark.svg" />
 					</router-link>
 					<div class="flex items-center ">
@@ -41,7 +41,7 @@
 				class="hidden lg:flex border-0 z-50">
 				<div class="flex items-center">
 					<div class="w-[16%]">
-						<router-link class="flex items-center w-full justify-center" to="/users/leaderboard">
+						<router-link class="flex items-center w-full justify-center" to="/dashboard">
 							<img class="w-40" src="@app/assets/images/logo/logo-dark.svg" />
 						</router-link>
 					</div>
@@ -49,61 +49,125 @@
 						<div class="w-3/4 flex-auto flex flex-row items-center">
 							<search-bar class="flex-grow" />
 						</div>
-						<div class="w-1/4 flex-auto">
-							<div class="flex flex-row items-center py-1 gap-6 justify-between">
+						<div class="w-1/4 flex-auto flex">
+							<div class="flex flex-row items-center py-1 gap-6 justify-between m-auto">
 								<!-- <router-link class="py-2 flex items-center relative"
 									to="/questions/create"> -->
 									
 								<!-- <ion-card class="w-24 px-4 py-6 top-full absolute z-50">	   -->
-								<ion-button @click="setOpen(true, $event)" fill="clear">
-									<ion-icon :icon="addCircle" class="text-2xl text-main_dark"></ion-icon>
-								</ion-button>
+								<ion-icon :icon="addCircle" class="text-2xl text-main_dark" @click="setStudyPopover(true, $event)" />
 								<ion-popover
-									:is-open="isOpenRef"
+									:is-open="isOpenStudyPopover"
 									css-class="my-custom-class"
 									:event="event"
 									:translucent="true"
 									:showBackdrop="false"
-									@didDismiss="setOpen(false)"
+									@didDismiss="setStudyPopover(false)"
 									class="mt-5"
 								>
 									<!-- <Popover></Popover> -->
-									<div class="mt-4">
-										<ion-content class="ion-padding w-60">
-											<div class="px-4 py-3">
-												<router-link class="py-2 my-2 flex gap-4 items-center text-icon_inactive"
+									<div >
+										<ion-content>
+											<div class="mx-auto py-3 flex flex-col">
+												<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
 													to="/study">
-													<!-- <ion-icon :icon="notifications" class="text-xl text-main_dark w-7"></ion-icon> -->
-													<ion-icon :icon="folder" class="text-2xl"></ion-icon>
-													<ion-label class="">Create a study set</ion-label>
+													<div class="w-48 flex items-center gap-3">
+														<ion-icon :icon="folder" class="text-2xl"></ion-icon>
+														<ion-label class="font-bold">Create a study set</ion-label>
+													</div>
+												
 												</router-link>	
 												<!-- <div class="flex items-center gap-2 w-full">
 												</div> -->
-												<router-link class="py-2 my-2 flex gap-4 items-center text-icon_inactive"
+												<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
 													to="/notifications">
-													<img src="@app/assets/images/icons/flashCardNav.svg" class="w-6" alt="">
-													<ion-label class="">Create a flashcard</ion-label>
+													<div class="w-48 flex items-center gap-3">
+														<img src="@app/assets/images/icons/flashCardNav.svg" class="w-6" alt="">
+														<ion-label class="font-bold">Create a flashcard</ion-label>
+													</div>
+												
 												</router-link>
-												<router-link class="py-2 my-2 flex gap-4 items-center text-icon_inactive"
+												<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
 													to="/questions/create">
-													<ion-icon :icon="helpCircle" class="text-3xl"></ion-icon>
-													<ion-label class="">Ask a question</ion-label>
+													<div class="w-48 flex items-center gap-3">
+														<ion-icon :icon="helpCircle" class="text-3xl"></ion-icon>
+														<ion-label class="font-bold">Ask a question</ion-label>
+													</div>
+												
 												</router-link>
 											</div>
 										</ion-content>
 									</div>
 								</ion-popover>
-								<router-link class="py-2 flex flex-row items-center justify-center"
+								<router-link class=" flex flex-row items-center justify-center"
 									to="/notifications">
 									<ion-icon :icon="notifications" class="text-2xl text-main_dark"></ion-icon>
 								</router-link>		
-								<router-link class="py-2 font-bold flex flex-row items-center justify-center gap-2"
-									to="/account">
-									<!-- <avatar :id="user?.id" :size="26" :src="user?.avatar" /> -->
-									<ion-icon :icon="personCircle" class="text-4xl text-icon_inactive"></ion-icon>
-									<span class="text-base text-main_dark">Timmy Neutron</span>
+								<div class=" font-bold flex flex-row items-center justify-center gap-2 cursor-pointer"  @click="setMenuPopover(true, $event)"
+								>
+									<avatar :id="user?.id" :size="24" :src="user?.avatar" />
+									<span class="text-base text-main_dark w-[6.5rem]">{{user?.fullName}}</span>
 									<ion-icon :icon="chevronDown" class="text-xl text-main_dark"></ion-icon>
-								</router-link>
+								</div>
+
+								<ion-popover
+									:is-open="isOpenMenuPopover"
+									:event="event"
+									:translucent="true"
+									:showBackdrop="false"
+									@didDismiss="setMenuPopover(false)"
+									class="mt-5"
+								>
+									<!-- <Popover></Popover> -->
+									<div >
+										<ion-content>
+											<div class="mx-auto py-3 flex flex-col">
+												<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
+													to="/account">
+													<div class="w-48 flex items-center gap-3">
+														<ion-icon :icon="person" class="text-2xl"></ion-icon>
+														<ion-label class="font-bold">Profile</ion-label>
+													</div>
+												
+												</router-link>	
+												<!-- <div class="flex items-center gap-2 w-full">
+												</div> -->
+												<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
+													to="/study">
+													<div class="w-48 flex items-center gap-3">
+														<ion-icon :icon="library" class="text-2xl"></ion-icon>
+														<ion-label class="font-bold">Study</ion-label>
+													</div>
+												
+												</router-link>
+												<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
+													to="/users/leaderboard">
+													<div class="w-48 flex items-center gap-3">
+														<ion-icon :icon="podium" class="text-3xl"></ion-icon>
+														<ion-label class="font-bold">LeaderBoard</ion-label>
+													</div>
+												
+												</router-link>
+												<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
+													:to="`/users/${user.id}/settings`">
+													<div class="w-48 flex items-center gap-3">
+														<ion-icon :icon="settings" class="text-3xl"></ion-icon>
+														<ion-label class="font-bold">Settings</ion-label>
+													</div>
+												
+												</router-link>
+												<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
+													to="/users/leaderboard">
+													<div class="w-48 flex items-center gap-3">
+														<ion-icon :icon="logOut" class="text-3xl"></ion-icon>
+														<ion-label class="font-bold">LogOut</ion-label>
+													</div>
+												
+												</router-link>
+											</div>
+										</ion-content>
+									</div>
+								</ion-popover>
 							</div>
 						</div>
 					</div>
@@ -117,9 +181,9 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { } from '@ionic/vue'
-import { IonHeader, IonIcon, IonToolbar, IonButton, IonPopover  } from '@ionic/vue'
+import { IonHeader, IonIcon, IonToolbar,  IonPopover  } from '@ionic/vue'
 // import { IonHeader, IonIcon, IonToolbar, IonCol, IonGrid, IonRow } from '@ionic/vue'
-import { addCircle, helpCircle, folder, personCircle, close, home, notifications, school, search, chevronDown } from 'ionicons/icons'
+import { addCircle, helpCircle, folder, personCircle, close, home, notifications, school, search, chevronDown, person, library, podium, settings, logOut } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 // import Avatar from '@app/components/core/Avatar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
@@ -127,13 +191,18 @@ import SearchBar from '@app/components/search/SearchBar.vue'
 
 export default defineComponent({
 	// components: { IonIcon, Avatar, SearchBar, IonHeader, IonToolbar, IonCol, IonGrid, IonRow },
-	components: { IonButton, IonPopover, IonIcon, SearchBar, IonHeader, IonToolbar },
+	components: {  IonPopover, IonIcon, SearchBar, IonHeader, IonToolbar },
 	setup () {
-		const isOpenRef = ref(false)
+		const isOpenStudyPopover = ref(false)
+		const isOpenMenuPopover = ref(false)
 		const event = ref()
-		const setOpen = (state: boolean, ev?: Event) => {
+		const setMenuPopover = (state: boolean, ev?: Event) => {
 			event.value = ev 
-			isOpenRef.value = state
+			isOpenMenuPopover.value = state
+		}
+		const setStudyPopover = (state: boolean, ev?: Event) => {
+			event.value = ev 
+			isOpenStudyPopover.value = state
 		}
 		const { user } = useAuth()
 		const showSearch = ref(false)
@@ -141,22 +210,12 @@ export default defineComponent({
 			showSearch.value = !showSearch.value
 		}
 		return {
-			isOpenRef, 
-			setOpen, 
-			event,
-			addCircle,
-			helpCircle, 
-			folder,
-			personCircle,
-			close,
-			chevronDown,
-			showSearch,
-			toggleSearch,
-			home,
-			user,
-			search,
-			school,
-			notifications
+			isOpenMenuPopover,isOpenStudyPopover, 
+			setMenuPopover,	setStudyPopover, 
+			event,addCircle,helpCircle, chevronDown,
+			folder,	library, settings, logOut,
+			person,	podium,	showSearch,toggleSearch,
+			home,user,search,school,notifications
 		}
 	}
 })

@@ -25,7 +25,7 @@
 			<Swiper :freeMode="true" :items="questions" :slides="1.1" class="mt-2 overflow-x-auto flex"
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] min-w-[16.5rem] !mr-6">
 				<template v-slot:default="{ item: question, index }">
-					<QuestionListCard :colorClass="0 === index ? 'bg-butter_yellow min-w-[16.5rem]' : 'bg-light_gray min-w-[16.5rem]'" :fromHome="true"
+					<QuestionListCard :colorClass="0 === index ? 'bg-butter_yellow min-w-[16.5rem]' : 'bg-butter_yellow min-w-[16.5rem]'" :fromHome="true"
 						:question="question" class="h-[9.7rem]" />
 				</template>
 			</Swiper>

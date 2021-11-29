@@ -3,10 +3,10 @@
 		:class="{'showAll': showAll}"
 		:default="def"
 		:icon="hasIcon"
-		:placeholder="showAll ? 'All Subjects' : placeholder"
+		:placeholder="placeholder"
 		:suggestions="subjects.filter((s) => !exclude.includes(s.id)).map((s) => ({ search: s.name, value: s.id, title: s.name }))"
 		:value="value"
-		class="w-full"
+		class="w-full  border border-faded_gray rounded-xl lg:border-0"
 		@update:value="update($event)"
 	/>
 </template>

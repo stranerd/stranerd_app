@@ -3,8 +3,8 @@
 		class=" flex flex-col absolute h-full w-full overflow-y-auto lg:border-r-[1px] border-faded_gray  normalText lg:rounded-tl-xl">
 		<div
 			class="flex flex-row items-center justify-between px-3 py-4 border-b-[1px] border-faded_gray sticky top-0 bg-white z-50">
-			<h2 class="text-dark_gray text-base font-bold ">Sessions</h2>
-			<ion-icon :icon="ellipsisVertical" class="text-dark_gray text-[20px]"></ion-icon>
+			<h2 class="text-main_dark text-base font-bold ">Sessions</h2>
+			<ion-icon :icon="ellipsisVertical" class="text-main_dark text-[20px]"></ion-icon>
 		</div>
 
 		<div class="flex flex-row items-center px-3 py-3 border-b-[1px] border-faded_gray">

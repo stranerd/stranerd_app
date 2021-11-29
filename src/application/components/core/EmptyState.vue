@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="w-full rounded-lg bg-light_gray  flex flex-col items-center justify-center py-7 px-5 md:py-11 gap-3 text-center normalText text-dark_gray">
+		class="w-full rounded-lg bg-light_gray  flex flex-col items-center justify-center py-7 px-5 md:py-11 gap-3 text-center normalText text-main_dark">
 
 		<p>
 			{{ info }}

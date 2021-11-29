@@ -6,50 +6,146 @@
 		<ion-searchbar show-cancel-button="never" class="max-w-[1054px] lg:w-7/12 !h-16 " placeholder="Search by subjects, topics and related keywords"></ion-searchbar>
 
 		<div
-			class="col-span-12 mb-0.5 sm:place-content-center md:col-start-2 md:col-end-12 lg:col-start-3 lg:col-end-11 lg:justify-center lg:items-center flex flex-row  px-3 headings gap-5 text-faded_gray font-bold  whitespace-normal overflow-x-auto">
-			<router-link :to="`/study/testprep/explore`" class="pb-2 pr-3 cursor-pointer"
-				exact-active-class="border-b-4 text-white border-white">
-				Test Prep
-			</router-link>
-			<router-link :to="`/study/flashcard/explore`" class="pb-2 pr-3 cursor-pointer"
-				exact-active-class="border-b-4 text-white border-white">
-				Flashcards
-			</router-link>
-			<router-link :to="`/study/note/explore`"
-				class="pb-2 pr-3 cursor-pointer"
-				exact-active-class="border-b-4 text-white border-white">
-				Notes
-			</router-link>
-			<router-link :to="`/study/video/explore`"
-				class="pb-2 pr-3 cursor-pointer"
-				exact-active-class="border-b-4 text-white border-white">
-				Videos
-			</router-link>
-			<router-link :to="`/study/explore/Study-sets`"
-				class="pb-2 pr-3 cursor-pointer"
-				exact-active-class="border-b-4 text-white border-white">
-				Study sets
-			</router-link>
+			class="mb-0.5  lg:justify-between justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full  lg:px-3 text-xs mx-auto gap-5 text-faded_gray font-bold  whitespace-normal overflow-x-auto">
+
+			<div class="hidden flex-col gap-4 mb-3 lg:flex">
+
+				<div class="flex items-center cursor-pointer" @click="setOpen(true, $event)" v-if="!editState[name]">
+					<ion-text class="text-white mr-1">
+						Create
+					</ion-text>
+					<ion-icon
+						:icon=' isOpenRef ? chevronDown : chevronUp'
+						class="text-white mr-3 text-xl"
+					/>
+				</div>
+				<div class="flex items-center cursor-pointer" @click="edit()" v-else>
+					<ion-text class="text-white mr-1">
+						cancel
+					</ion-text>
+			
+				</div>
+			
+				<!-- <ion-icon/> -->
+				<ion-popover
+					:is-open="isOpenRef"
+					css-class="mt-4 rounded-xl"
+					:event="event"
+					:translucent="true"
+					@didDismiss="setOpen(false)"
+				>
+					<!-- <Popover></Popover> -->
+					<div class="flex flex-col  p-6 !w-52">
+						<router-link to="/study/flashcard/create" class="flex items-center justify-start w-auto mb-4 cursor-pointer">
+							<ion-icon :icon="flash"  alt="" class=" text-2xl text-main_dark"/>
+							<ion-text class="font-bold ml-4 text-lg text-main_dark">
+								Flashcard
+							</ion-text>
+						</router-link>
+						<router-link to="/study/set/create" class="flex items-center justify-start w-auto cursor-pointer">
+							<ion-icon :icon="folder"  alt="" class=" text-2xl text-main_dark"/>
+							<ion-text class="font-bold ml-4 text-lg text-main_dark">
+								Study set
+							</ion-text>
+						</router-link>
+					</div>
+
+				</ion-popover>
+			</div>
+			<div class="mb-3">
+				<router-link :to="`/study/testprep/explore`" class="pb-2 pr-3 cursor-pointer"
+					exact-active-class="border-b-4 text-white border-white">
+					Test Prep
+				</router-link>
+				<router-link :to="`/study/flashcard/explore`" class="pb-2 pr-3 cursor-pointer"
+					exact-active-class="border-b-4 text-white border-white">
+					Flashcards
+				</router-link>
+				<router-link :to="`/study/note/explore`"
+					class="pb-2 pr-3 cursor-pointer"
+					exact-active-class="border-b-4 text-white border-white">
+					Notes
+				</router-link>
+				<router-link :to="`/study/video/explore`"
+					class="pb-2 pr-3 cursor-pointer"
+					exact-active-class="border-b-4 text-white border-white">
+					Videos
+				</router-link>
+				<router-link :to="`/study/set/explore`"
+					class="pb-2 pr-3 cursor-pointer"
+					exact-active-class="border-b-4 text-white border-white">
+					Study sets
+				</router-link>
+			</div>
+
+			<div class="hidden flex-col gap-4 mb-3 lg:flex">
+
+				<div class="flex items-center cursor-pointer" @click="edit()" v-if="!editState[name]">
+					<ion-text class="text-white mr-1">
+						edit 
+					</ion-text>
+					<ion-icon
+						:icon='pencil'
+						class="text-white mr-3 text-xl"
+					/>
+				</div>
+				<div class="flex items-center cursor-pointer" @click="edit()" v-else>
+					<ion-text class="text-white mr-1">
+						save
+					</ion-text>
+			
+				</div>
+
 				
+			
+	
+			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { IonSearchbar } from '@ionic/vue'
-export default {
+import { IonSearchbar, IonPopover  } from '@ionic/vue'
+import { defineComponent, ref } from 'vue'
+import { chevronDown, chevronUp, flash, folder,pencil } from 'ionicons/icons'
+import { useEditState } from '@app/composable/study/state'
+
+export default defineComponent({
 	name:'StudyExploreTopSection',
-	components: {  IonSearchbar },
-}
+	components: {  IonSearchbar , IonPopover},
+	props:{
+		name:{
+			type: String,
+			required:true
+		}
+	},
+	setup(props) {
+		const {toggle, editState} = useEditState()
+		const edit = ()=>{
+			toggle(props.name)
+		}
+
+		const isOpenRef = ref(false)
+		const event = ref()
+		const setOpen = (state: boolean, ev?: Event) => {
+			event.value = ev 
+			isOpenRef.value = state
+		}
+		return { edit,editState, isOpenRef, setOpen, event, chevronDown, chevronUp, flash, folder, pencil }
+	}
+})
+
 </script>
 
 <style lang="scss" scoped>
 ion-searchbar{
     --box-shadow:'none';
-    --border-radius:0.5rem;
+    --border-radius:0.75rem;
+	--padding-top: 12rem !important;
 }
-.searchbar-input.sc-ion-searchbar-md{
-	padding-top: 12px;
-    padding-bottom: 12px;
+
+ion-popover::part(content){
+	width:auto !important;
 }
+
 </style>

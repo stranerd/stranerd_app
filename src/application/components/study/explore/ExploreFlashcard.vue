@@ -1,10 +1,10 @@
 <template>
 	<div class="md:w-8/12 w-full px-4 mx-auto   mt-8">
-		<div class="flex gap-4 flex-col md:flex-row items-center">
+		<!-- <div class="flex gap-4 flex-col md:flex-row items-center">
 			<ion-segment mode="ios" value="all">
 				<ion-segment-button value="all">
 					<ion-label>All authors</ion-label>
-				</ion-segment-button>
+				</ion-segment-button> 
 				<ion-segment-button value="tutors">
 					<ion-label>Tutors</ion-label>
 				</ion-segment-button>
@@ -31,20 +31,20 @@
 				<ion-select-option value="bio">Yearly</ion-select-option>
 
 			</ion-select>
-		</div>
+		</div> -->
 
 		<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
-			<FlashcardsCard  v-for="n in 12" :key="n"/>
+			<FlashcardsCard  v-for="(n, index) in 12" :key="n" :index="index + 1"/>
 		</div>
 	
 	</div>
 </template>
 
 <script lang="ts">
-import { IonSegment, IonSegmentButton, IonSelect, IonSelectOption  } from '@ionic/vue'
 import FlashcardsCard from '@app/components/study/flashcard/FlashcardsCard.vue'
 export default {
-	components: { IonSegment, IonSegmentButton, IonSelect, IonSelectOption, FlashcardsCard },
+	// components: { IonSegment, IonSegmentButton, IonSelect, IonSelectOption, FlashcardsCard },
+	components: {  FlashcardsCard },
 }
 </script>
 

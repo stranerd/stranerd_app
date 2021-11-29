@@ -1,46 +1,47 @@
 <template>
-	<ion-page>
-		<ion-content>
-			<div class="w-full mt-10 h-full flex flex-col items-center justify-start ">
+	<Auth>
+		<div class="w-full mt-10 h-full flex flex-col items-center justify-start ">
 
-				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
-					<h1 class="text-xl text-dark_gray font-bold mb-2 ">Forgot Password</h1>
-					<span class="normalText text-dark_gray mb-4">Enter your email to reset your password</span>
-					<div class="h-[65%]">
-						<form
-							@submit.prevent="sendResetEmail"
-						>
-							<div class="mb-4">
-								<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
-									position="floating"
-									required type="email"></ion-input>
-								<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
-							</div>
+			<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
+				<h1 class="text-xl text-main_dark font-bold mb-2 ">Forgot Password</h1>
+				<span class="normalText text-main_dark mb-4">Enter your email to reset your password</span>
+				<div class="h-[65%]">
+					<form
+						@submit.prevent="sendResetEmail"
+					>
+						<div class="mb-4">
+							<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
+								position="floating"
+								required type="email"></ion-input>
+							<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
+						</div>
 
-							<ion-button class="w-full mb-4" type="submit">RESET PASSWORD
-								<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
-							</ion-button>
-						</form>
-					</div>
+						<ion-button class="w-full mb-4" type="submit">RESET PASSWORD
+							<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
+						</ion-button>
+					</form>
 				</div>
-
-				<router-link class="text-primary font-bold normalText mt-8" to="/auth/signin">
-					Back to Sign In
-				</router-link>
 			</div>
-		</ion-content>
-	</ion-page>
+
+			<router-link class="text-primary font-bold normalText mt-8" to="/auth/signin">
+				Back to Sign In
+			</router-link>
+		</div>
+
+	</Auth>
+
 
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { usePasswordResetRequest } from '@app/composable/auth/passwords'
-import { IonButton, IonContent, IonInput, IonPage, IonSpinner } from '@ionic/vue'
+import { IonButton,  IonInput,  IonSpinner } from '@ionic/vue'
+import Auth from '@root/application/layouts/Auth.vue'
 
 export default defineComponent({
 	name: 'ForgotPassword',
-	components: { IonContent, IonPage, IonInput, IonButton, IonSpinner },
+	components: {  IonInput, IonButton, IonSpinner, Auth },
 	setup () {
 
 		const { factory, loading, error, sendResetEmail, message } = usePasswordResetRequest()

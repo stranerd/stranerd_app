@@ -2,7 +2,7 @@
 	<ion-page>
 		<ion-content :fullscreen="true">
 			<div class="flex flex-col justify-center w-full mt-9 lg:mt-20 px-4 max-w-4xl mx-auto">
-				<span class="heading font-bold text-dark_gray px-8 text-center lg:text-left lg:p-0">
+				<span class="heading font-bold text-main_dark px-8 text-center lg:text-left lg:p-0">
 					Find requests you specialize in
 					and start tutoring!
 				</span>
@@ -11,7 +11,7 @@
 					placeholder="Subjects, topics and related keywords"></ion-searchbar>
 
 				<div class="w-full mt-2">
-					<div class="flex items-center font-bold text-dark_gray justify-end normalText">
+					<div class="flex items-center font-bold text-main_dark justify-end normalText">
 						<div class="cursor-pointer flex items-center gap-2" @click="showFilter = !showFilter">
 							<span> {{ showFilter ? 'Hide Filters' : 'Filter' }} </span>
 							<ion-icon :class="['text-[22px] mr-1', showFilter ? ' rotate-180' : '']"

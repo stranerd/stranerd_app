@@ -5,10 +5,10 @@
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
 			<avatar :id="question.userId" :size="28" :src="question.avatar" class="mr-2" />
-			<span class="font-bold text-dark_gray">{{ question.userBio.fullName }}</span>
+			<span class="font-bold text-main_dark">{{ question.userBio.fullName }}</span>
 			<div class="flex flex-row-reverse flex-grow">
 				<template v-if="fromHome">
-					<span class="font-bold text-dark_gray lg:mr-2">{{ formatTime(question.createdAt) }}</span>
+					<span class="font-bold text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 				</template>
 				<template v-else>
 					<template v-if="!fromViewQuestion">
@@ -35,7 +35,7 @@
 		</div>
 		<div v-if="!fromHome" class="mt-3 flex flex-row items-center">
 			<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3"></span>
-			<Subject :key="question.subjectId" :subjectId="question.subjectId" class="font-semibold text-dark_gray" />
+			<Subject :key="question.subjectId" :subjectId="question.subjectId" class="font-semibold text-main_dark" />
 		</div>
 
 		<span class="py-2 pb-1 text-main_dark leading-normal mb-2 lg:mb-4"
@@ -53,9 +53,9 @@
 
 			<div class=" flex flex-row items-center ">
 				<span v-if="!fromHome"
-					class="font-bold text-dark_gray lg:mr-2">{{ formatTime(question.createdAt) }}</span>
+					class="font-bold text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 				<div :class="`flex ${fromHome ? 'flex-row' : 'flex-row-reverse'}  items-center flex-grow`">
-					<span class="font-bold text-dark_gray">{{
+					<span class="font-bold text-main_dark">{{
 						question.answers.length
 					}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
 					<span v-if="!fromHome" class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 "></span>

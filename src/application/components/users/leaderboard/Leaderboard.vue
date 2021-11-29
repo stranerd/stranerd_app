@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="flex justify-center items-center">
-			<span class="font-bold text-dark_gray heading hidden md:block">
+			<span class="font-bold text-main_dark heading hidden md:block">
 				Leaderboard
 			</span>
 			<div class="flex gap-4 md:ml-auto">

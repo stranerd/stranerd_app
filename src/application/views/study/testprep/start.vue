@@ -23,7 +23,7 @@
 
 			<div class="flex flex-col w-full" v-for="num in 10" :key="num">
 				<div class="flex item-center justify-between  mb-8 mt-10">
-					<ion-text class="text-dark_gray font-bold md:text-2xl">
+					<ion-text class="text-main_dark font-bold md:text-2xl">
 						Question {{num}}
 					</ion-text>
 					<div class="flex items-center text-lg text-icon_inactive gap-4">
@@ -36,7 +36,7 @@
 					</div>
 				</div>
 			
-				<ion-text class="text-dark_gray   mb-8">
+				<ion-text class="text-main_dark   mb-8">
 					Which of the following completely describes the number of points in which two distinct quadratic functions can intersect?
 				</ion-text>
 
@@ -55,7 +55,7 @@
 			<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
 				<div class="lg:w-8/12  w-full px-4  mx-auto flex items-center justify-between">
 					<div class="flex">
-						<ion-text class="text-dark_gray"> 2/40 answered</ion-text>
+						<ion-text class="text-main_dark"> 2/40 answered</ion-text>
 					</div>
                     
 					<div class="flex items-center">

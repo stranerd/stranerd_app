@@ -1,25 +1,26 @@
 <template>
 	<div class="w-full flex flex-col text-xs mg:text-sm">
-		<h2 class="text-sm md:text-base text-dark_gray font-bold">
+		<h2 class="text-sm md:text-base text-main_dark font-bold"> 
 			Give your answer
 		</h2>
 
-		<div class="mt-3 py-3 px-4 flex flex-row items-center bg-light_gray rounded-lg">
-			<span class="text-dark_gray font-bold">Main answer - </span>
+		<div class="mt-3 py-3 px-4 flex flex-row items-center bg-light_gray rounded-lg border border-faded_gray ">
+			<span class="text-main_dark font-bold">Main answer - </span>
 			<ion-input v-model="factory.title" class="w-full px-2 ml-1 font-medium" placeholder="Keep it short!">
 			</ion-input>
 		</div>
 
 		<div class="mt-3 border border-faded_gray rounded-lg py-5 flex-col px-3">
-			<span class="text-dark_gray font-bold">Explanation - </span>
+			<span class="text-main_dark font-bold">Explanation - </span>
 			<ion-textarea v-model="factory.body" class="bg-white border-0 focus:outline-none  w-full"
 				placeholder="Write out the detailed explanation of the answer you gave above. (Optional)"
 				rows="9"></ion-textarea>
 		</div>
 
+
 		<div
-			class="mt-3  rounded-lg py-5 px-3 text-icon_inactive relative bg-light_gray flex flex-col justify-center items-center">
-			<ion-icon :icon="image" class="text-[32px]"></ion-icon>
+			class="lg:mt-8 mt-5 rounded-xl  text-main_dark relative bg-light_gray border border-faded_gray flex flex-col h-32 justify-center items-center">
+			<IonIcon :icon="image" class="!text-3xl" />
 			<input
 				id="images" accept="image/x-png,image/jpeg,image/jpg"
 				class="cursor-pointer w-full h-full absolute"
@@ -28,42 +29,38 @@
 				style="opacity:0; overflow:hidden; position:absolute;"
 				type="file"
 				@change="catchAttachments" />
-			<p class="mt-3">
-				Add images to help with your question <b>(Optional)</b>
-			</p>
+			<ion-text class="mt-3 font-bold lg:text-base">
+				Add images to help with your question (Optional)
+			</ion-text>
 			<div v-if="factory.attachments.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
-				<span v-for="(attachment, index) in factory.attachments" :key="index + 'attachment'">
-					<span class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg flex flex-row items-center">
-						{{ attachment.name }}  <ion-icon :icon="close" class="ml-1 cursor-pointer"
-							@click="factory.removeAttachment(attachment)"></ion-icon>
+				<span v-for="attachment in factory.attachments" :key="attachment.name">
+					<span
+						class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
+						{{ attachment.name }}  <IonIcon :icon="close" class="ml-1 cursor-pointer"
+							@click="factory.removeAttachment(attachment)" />
 					</span>
 				</span>
 			</div>
 		</div>
 
-		<div class="flex flex-row px-3 my-7 md:gap-5 text-white">
-			<div class="w-1/2 flex flex-row justify-center items-center">
-				<button class=" md:w-full px-6 py-3 relative ion-activatable rounded-lg  font-bold bg-dark_gray "
-					@click="showAddAnswer = false">
-					Cancel
-					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-				</button>
-			</div>
-			<div class="w-1/2 flex flex-row justify-center items-center">
-				<button class="md:w-full px-6 relative ion-activatable font-bold py-3 rounded-lg bg-primary"
-					@click="createAnswer">
-					Post answer
-					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-				</button>
-			</div>
+
+		<div class="flex w-full lg:mt-8 mt-5 items-center gap-6">
+			<ion-button class="w-1/2 btn-secondary " @click="showAddAnswer = false">
+				Cancel
+			</ion-button>
+			<ion-button @click="createAnswer"
+				class=" w-1/2  btn-primary" type="submit">
+				Post answer
+			</ion-button>
 		</div>
+
 
 	</div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { IonIcon, IonInput, IonRippleEffect, IonTextarea } from '@ionic/vue'
+import { IonIcon, IonInput,  IonTextarea } from '@ionic/vue'
 
 import { close, image } from 'ionicons/icons'
 import { showAddAnswer, useCreateAnswer } from '@app/composable/questions/answers'
@@ -102,7 +99,6 @@ export default defineComponent({
 		IonIcon,
 		IonInput,
 		IonTextarea,
-		IonRippleEffect
 	}
 })
 </script>

@@ -12,7 +12,8 @@ export class GetSetsUseCase {
 		const conditions: QueryParams = {
 			where: [{ field: 'userId', value: userId }, { field: 'isPublic', value: true }],
 			whereType: 'or',
-			sort: { field: 'createdAt', order: -1 }
+			sort: { field: 'createdAt', order: -1 },
+			all: true
 		}
 
 		return await this.repository.get(conditions)
