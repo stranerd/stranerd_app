@@ -13,7 +13,7 @@ export default defineComponent({
 	displayName: 'Explore',
 	components: {  ExploreWrapper, ExploreFlashcard }
 })
-</script>
+</script> 
 
 <style lang="scss" scoped>
 .ion-iten-transparent{

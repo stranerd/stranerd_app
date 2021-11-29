@@ -20,13 +20,14 @@
 		</div>
 		<div class="w-screen h-screen bg-light_gray">
 			<div
-				:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
+				:class="[false ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
 
 				<div  class="bg-white h-[25rem] min-w-[57px] w-full grid place-items-center rounded-md "
+					v-if="pdfSrc"
 					
 				>
 					{{pdfSrc}}
-					<pdf ref="screen" @click="toggle" :src="pdfSrc" :page="page" class="!max-w-[90vw]" v-if="pdfSrc">
+					<pdf ref="screen"  src="https://arkokoley.github.io/pdfvuer/nationStates.pdf" :page="page" class="!max-w-[90vw]" v-if="pdfSrc">
 						<template slot="loading">
 							loading content here...
 						</template>
