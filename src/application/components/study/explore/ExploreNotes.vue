@@ -11,13 +11,13 @@
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8"> 
-				<notesCard  v-for="note in notes" :key="note.id" title="Jamb"/>
+				<notesCard  v-for="(note, index) in notes" :key="note.id" :note="note" :index="index+1"/>
 			</div>
 		</template>
 
 
 	
-	</div>
+	</div>o
 </template>
 
 <script lang="ts">

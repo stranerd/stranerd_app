@@ -3,7 +3,7 @@
 		<div class="w-full flex justify-between">
 			<span class="heading font-bold text-main_dark">
 				Notes
-			</span>
+			</span> 
 
 			<router-link v-if="true && isLoggedIn"
 				class="text-primary normalText flex items-center font-bold "

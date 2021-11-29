@@ -1,8 +1,8 @@
 <template>
 	<div class="flex flex-col items-end">
-		<router-link to="/study/note/view"
+		<router-link :to="`/study/note/${note.id}`"
 
-			:class="`m-0  h-[18rem] !w-[17.2rem]  ${colorClass}  rounded-xl  flex flex-col justify-between md:gap-2 gap-[1rem] box-border  pb-5 border border-faded_gray lg:border-0`"
+			:class="`m-0  h-[18rem] !w-[17.2rem]  ${bgColor(index)}  rounded-xl  flex flex-col justify-between md:gap-2 gap-[1rem] box-border  pb-5 border border-faded_gray lg:border-0`"
 		>
 			<div class="flex flex-col items-center justify-between w-full">
 				<template v-if="note.preview">
@@ -31,10 +31,11 @@
 			</div>
 		</router-link>
 
-		<ion-text class="font-bold text-delete_red cursor-pointer" v-if="editState['note']">
+		<ion-text class="font-bold text-delete_red cursor-pointer" v-if="editState['note']" @click="deleteNote">
 			Remove
 		</ion-text>
 	</div>
+	<page-loading v-if="deleteLoading"/>
 </template>
 
 <script lang="ts">
@@ -45,6 +46,7 @@ import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { NoteEntity } from '@root/modules/study'
 import { useEditState } from '@app/composable/study/state'
+import { useDeleteNote } from '@root/application/composable/study/notes'
 
 export default defineComponent({
 	name: 'TutorCard',
@@ -56,10 +58,16 @@ export default defineComponent({
 		note:{
 			type:NoteEntity,
 			required:true
+		},
+		index:{
+			type:Number,
+			required:false
 		}
 	},
-	setup() {
+	setup(props) {
 		const {editState} = useEditState()
+
+		const {loading: deleteLoading, error, deleteNote} = useDeleteNote(props.note.id)
 
 		const bgColor = (index: any)=>{
 			if (index === 1 ) return 'bg-light_green'
@@ -67,11 +75,9 @@ export default defineComponent({
 			else if(index === 3) return 'bg-butter_yellow'
 		}
 		return {
-			editState,
-			bgColor,
-			formatNumber,
-			calendar,
-			play
+			deleteNote,	deleteLoading,
+			editState, bgColor, formatNumber,
+			calendar, play
 		}
 	},
 	components: { ShowRatings, Avatar }
