@@ -34,17 +34,39 @@
 		</div> -->
 
 		<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
-			<FlashcardsCard  v-for="(n, index) in 12" :key="n" :index="index + 1"/>
+			<FlashcardsCard  v-for="(flashCard, index) in flashCards" :key="flashCard.id" :flashCard="flashCard" :index="index + 1"/>
 		</div>
 	
 	</div>
+
+	<page-loading v-if="loading"/>
 </template>
 
 <script lang="ts">
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import FlashcardsCard from '@app/components/study/flashcard/FlashcardsCard.vue'
+import { useFlashCardList } from '@app/composable/study/flashCards'
+import { useAuth } from '@app/composable/auth/auth'
+
+
 export default {
 	// components: { IonSegment, IonSegmentButton, IonSelect, IonSelectOption, FlashcardsCard },
 	components: {  FlashcardsCard },
+
+	setup(){
+
+
+		const { id, isLoggedIn } = useAuth()
+		const { flashCards ,listener, loading, error } = useFlashCardList()
+
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+
+		return {
+			flashCards, loading,
+			 id, isLoggedIn 
+		}
+	}
 }
 </script>
 
