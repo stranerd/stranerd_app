@@ -2,12 +2,14 @@ import { BaseFactory } from '@modules/core'
 import { arrayContainsX, isLongerThanX, isMoreThanX, isNumber, isRequiredIf, isString } from '@stranerd/validate'
 import { PrepType, TestPrepEntity } from '../entities/testPrep'
 import { TestPrepToModel } from '../../data/models/testPrep'
+import { PastQuestionType } from '../entities/pastQuestion'
 
 type Keys = {
 	name: string
 	questions: number
 	time: number
 	type: PrepType
+	questionType: PastQuestionType
 	courseId: string
 	year: number
 	institutionId: string
@@ -21,6 +23,10 @@ export class TestPrepFactory extends BaseFactory<TestPrepEntity, TestPrepToModel
 		type: {
 			required: true,
 			rules: [arrayContainsX(Object.keys(PrepType), (cur, val) => cur === val)]
+		},
+		questionType: {
+			required: true,
+			rules: [arrayContainsX(Object.keys(PastQuestionType), (cur, val) => cur === val)]
 		},
 		courseId: {
 			required: false,
@@ -41,7 +47,7 @@ export class TestPrepFactory extends BaseFactory<TestPrepEntity, TestPrepToModel
 	constructor () {
 		super({
 			name: '', questions: 0, time: 0, type: PrepType.pastQuestion,
-			institutionId: '', courseId: '', year: 0
+			questionType: PastQuestionType.objective, institutionId: '', courseId: '', year: 0
 		})
 	}
 
@@ -75,6 +81,14 @@ export class TestPrepFactory extends BaseFactory<TestPrepEntity, TestPrepToModel
 
 	set type (value: string) {
 		this.set('type', value)
+	}
+
+	get questionType () {
+		return this.values.questionType
+	}
+
+	set questionType (value: string) {
+		this.set('questionType', value)
 	}
 
 	get isPastQuestion () {
@@ -111,6 +125,7 @@ export class TestPrepFactory extends BaseFactory<TestPrepEntity, TestPrepToModel
 		this.time = entity.time
 		this.type = entity.data.type
 		if (entity.data.type === PrepType.pastQuestion) {
+			this.questionType = entity.data.questionType
 			this.institutionId = entity.data.institutionId
 			this.courseId = entity.data.courseId
 			this.year = entity.data.year
@@ -119,10 +134,10 @@ export class TestPrepFactory extends BaseFactory<TestPrepEntity, TestPrepToModel
 
 	toModel = async () => {
 		if (this.valid) {
-			const { name, questions, time, type, courseId, year, institutionId } = this.validValues
+			const { name, questions, time, type, questionType, courseId, year, institutionId } = this.validValues
 			return {
 				name, questions, time,
-				data: this.isPastQuestion ? { type, courseId, year, institutionId } : ({} as any)
+				data: this.isPastQuestion ? { type, questionType, courseId, year, institutionId } : ({} as any)
 			}
 		} else {
 			throw new Error('Validation errors')

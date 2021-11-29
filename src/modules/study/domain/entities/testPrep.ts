@@ -1,4 +1,5 @@
 import { BaseEntity } from '@modules/core'
+import { PastQuestionType } from './pastQuestion'
 
 export class TestPrepEntity extends BaseEntity {
 	public readonly id: string
@@ -35,11 +36,12 @@ export enum PrepType {
 	pastQuestion = 'pastQuestion'
 }
 
-type PastQuestionType = {
+type PQType = {
 	type: PrepType.pastQuestion
+	questionType: PastQuestionType
 	courseId: string
 	year: number
 	institutionId: string
 }
 
-export type PrepData = PastQuestionType
+export type PrepData = PQType
