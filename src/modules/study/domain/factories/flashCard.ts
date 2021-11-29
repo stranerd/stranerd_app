@@ -73,6 +73,11 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 		this.index = this.questions.length - 1
 	}
 
+	removeQuestion (index: number) {
+		this.set('set', this.questions.splice(index, 1))
+		this.index = 0
+	}
+
 	editQuestion (index: number) {
 		this.index = index
 	}
