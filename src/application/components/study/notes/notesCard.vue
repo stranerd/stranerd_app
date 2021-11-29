@@ -6,7 +6,7 @@
 	>
 		<div class="flex flex-col items-center justify-between w-full">
 			<template v-if="note.preview">
-				<img :src="note.preview " class="bg-faded_gray min-h-[10.5rem] min-w-[57px] w-full  rounded-md "/>
+				<img :src="note.preview.link" class="bg-faded_gray  h-[10.9rem] min-w-[57px] w-full  rounded-md "/>
 			</template>
 			<div class="bg-faded_gray min-h-[10.5rem] min-w-[57px] w-full grid place-items-center rounded-md " v-else>
 				<ion-text class="text-2xl text-white font-bold p-5 pb-2">
