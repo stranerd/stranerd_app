@@ -3,7 +3,7 @@
 
 
 	<router-link v-if="flashCard" :to="`/study/flashcard/${flashCard.id}`"
-		:class="`m-0  h-[10rem] md:!w-[18rem] !w-[17rem] cardPadding ${bgColor(index)} rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border justify-between p-5 border border-faded_gray lg:border-0`"
+		:class="`m-0  h-[10rem] md:!w-[18rem] !w-[17rem] cardPadding ${bgColor(index)} hover:border-2 hover:border-primary  rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border justify-between p-5 border border-faded_gray lg:border-0`"
 	>
 		<div class="flex items-center justify-between w-full" v-if="flashCard">
 			<ion-text class="text-sm text-main_dark font-bold">
@@ -29,7 +29,7 @@
 				<ion-text class="text-xs font-bold text-main_dark mr-2">
 					{{flashCard.userBio.firstName}}
 				</ion-text>
-				<Avatar :size="24"/>
+				<Avatar :size="24" :src="flashCard.userBio.photo"/>
 			</div>
 		</div>
 	</router-link>

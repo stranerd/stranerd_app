@@ -68,7 +68,7 @@
 				<ion-reorder v-for="(card, index) in factory.questions" :key="index" class="flex flex-col bg-light_gray p-4 rounded-xl mb-4">
 					<div class="flex w-full items-center justify-between">
 						<ion-text class="text-main_dark font-bold">Card {{ index + 1 }}</ion-text>
-						<div class="flex" >
+						<div class="flex" @click="factory.removeQuestion(index)">
 							<ion-icon
 								:icon='trash'
 								class="text-main_dark"
