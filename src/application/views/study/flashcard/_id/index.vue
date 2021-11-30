@@ -18,29 +18,26 @@
 
 			</div> -->
 		</div>
-
 		<div
-			ref="screen"
+			id="screen"
 			:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
-			<div class="box h-96 flex  items-center text-center justify-center  custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto">
+		
 
-				<div
-					class="  front ">
-					{{flashCard?.set[page].question}}
-				</div>
+			<div class="vertical divx w-full">
+				<!--  front side  -->
+				<section class="front h-96 flex  items-center text-center justify-center  custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto">
+					<h2 >{{flashCard?.set[page].question}}</h2>
+				</section>
 
-				<div
-					class="back ">
-					{{flashCard?.set[page].answer}}
-				</div>
+				<!--  back side  -->
+				<section class="back h-96 flex  items-center text-center justify-center  custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto">
+					<h2>	{{flashCard?.set[page].answer}}</h2>
+				</section>
 			</div>
-
-
-			
-		   
 
 			<div class="w-full flex items-center justify-between my-8 max-w-[30rem] mx-auto">
 				<ion-icon
+					@click="playCard(true)"
 					:icon="play"
 					class="text-icon_inactive text-xl cursor-pointer"
 				/>
@@ -63,13 +60,14 @@
 					v-if="!isFullscreen"
 					:icon="scan"
 					class="text-icon_inactive text-xl cursor-pointer"
-					@click="enter()"
+					@click="toggle()"
 				/>
 				<ion-icon
-					v-else
+					v-if="isFullscreen && canExit"
+					
 					:icon="contract"
 					class="text-icon_inactive text-xl cursor-pointer"
-					@click="exit()"
+					@click="toggle()"
 				/>
 			</div>
 		</div>
@@ -81,7 +79,7 @@
 					<ion-text class="text-icon_inactive"> by <b>{{flashCard?.userBio.firstName}}</b></ion-text>
 				</div>
 
-				<div class="flex items-center">
+				<div class="flex items-center" >
 
 					<!-- <ion-icon
 						:icon="pencil"
@@ -101,6 +99,7 @@
 
 	</Justified>
 	<page-loading v-if="loading"/>
+
 </template>
 
 <script lang="ts">
@@ -109,8 +108,7 @@ import { add, bookmark, chevronBack, chevronForward, contract, pencil, play, sca
 import Avatar from '@app/components/core/Avatar.vue'
 import { useFlashCard } from '@root/application/composable/study/flashCards'
 import { useRoute, useRouter } from 'vue-router'
-import { ref } from 'vue'
-import { useFullscreen } from '@vueuse/core'
+import { ref, onMounted } from 'vue'
 import { Alert } from '@app/composable/core/notifications'
 
 
@@ -122,16 +120,19 @@ export default {
 		Avatar
 	},
 	setup () {
-		
-		const screen = ref(null)
+		const isFullscreen = ref(false)
+		const canExit = ref(false)
+
 		const page = ref(0)
-		const { isFullscreen, enter, exit, toggle } = useFullscreen(screen)
 		const router = useRouter()
 		const { id } = useRoute().params
 		const {flashCard, listener, error, loading} = useFlashCard(id as string)
+		let interval: any
+		const isPlay = ref(false)
 
 		const increase = async ()=>{
 			if(page.value+1 === flashCard.value?.set.length){
+				
 				const accepted = await Alert({
 					title: 'You have gotten to the end of the flashCard set',
 					text: 'Do you want to try again or return back to Study',
@@ -139,12 +140,44 @@ export default {
 					confirmButtonText: 'Yes, Try again',
 					cancelButtonText: 'No, Back to study'
 				})
+				playCard()
 				if(accepted) page.value = 0
 				else router.push('/study')
 			}
 			else page.value++
-		
+		}
+		const enter = ()=>{
+			const screen = document.getElementById('screen')
+			screen?.requestFullscreen()
+			isFullscreen.value = true
 
+		}
+		const exit = ()=>{
+			const screen = document.getElementById('screen')
+			//@ts-ignore
+			if(screen?.exitFullscreen){
+				canExit.value = true
+				//@ts-ignore
+				screen?.exitFullscreen()
+				isFullscreen.value = false
+			}else canExit.value = false
+			
+		}
+		const toggle = ()=>{
+			const screen = document.getElementById('screen')
+			if(isFullscreen.value)  exit()
+			else enter()
+		}
+
+		const playCard = ()=>{
+			if(!isPlay.value ){
+				interval = setInterval(increase, 3000)
+				isPlay.value = true
+			}
+			else{
+				clearInterval(interval)
+				isPlay.value = false
+			}
 			
 		}
 		const decrease = ()=>{
@@ -153,7 +186,8 @@ export default {
 		}
 
 		return {
-			page,increase, decrease,
+			canExit,
+			page,increase, decrease, playCard,
 			isFullscreen, toggle, exit, enter,
 			flashCard, error, loading,
 			play, add, scan, chevronBack,
@@ -190,36 +224,84 @@ export default {
 	}
 
 
- .front{
-    position: relative;
-    backface-visibility: hidden;
-    transform: perspective(1000px) rotateY(0deg);
-    transition: 0.00001s;
-}
-.box:hover .front{
-	opacity: 0;
-	position: absolute;
-    transform: perspective(1000px) rotateY(180deg);
-}
-.back{
-	opacity: 0;
-	position: absolute;
-	top:30rem;
-    backface-visibility: hidden;
-    transform: perspective(1000px) rotateY(-180deg);
-    transition: 0.0001s;
-}
-.box:hover .back{
-	opacity: 1;
-	position: relative;
-	top:0;
-    transform: perspective(1000px) rotateY(0deg);
+
+
+
+.divx {
+  display: block;
+  position: relative;
+
+  & > .front {
+    // background-color: #ff9671;
+  }
+
+  & > .back {
+    // background-color: #ff6f91;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+
+  & > .front,
+  & > .back {
+    // height: 200px;
+    // width: 100%;
+    // color: white;
+    text-align: center;
+    // display: block;
+    transition-duration: 1s;
+    transition-property: transform, opacity;
+  }
 }
 
-.center{
-    position: absolute;
-    top: 50%;  left: 50%;
-    transform: translate(-50%,-50%);
-    text-align: center;
+// horizontal transition
+.horizontal {
+  & > .front {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+
+  & > .back {
+    opacity: 0;
+    transform: rotateY(180deg);
+  }
+
+  &:hover {
+    & > .front {
+      opacity: 0;
+      transform: rotateY(180deg);
+    }
+
+    & > .back {
+      opacity: 1;
+      transform: rotateY(0deg);
+    }
+  }
 }
+
+// vertical transition
+.vertical {
+  & > .front {
+    opacity: 1;
+    transform: rotateX(0deg);
+  }
+
+  & > .back {
+    opacity: 0;
+    transform: rotateX(180deg);
+  }
+
+  &:hover {
+    & > .front {
+      opacity: 0;
+      transform: rotateX(180deg);
+    }
+
+    & > .back {
+      opacity: 1;
+      transform: rotateX(0deg);
+    }
+  }
+}
+
 </style>

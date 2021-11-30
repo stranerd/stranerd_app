@@ -10,7 +10,7 @@
 					TITLE
 				</ion-text>
 				<ion-input class="max-w-[1054px]  !h-14 " placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
-					show-cancel-button="never"></ion-input>
+					show-cancel-button="never" v-model="factory.title"></ion-input>
 			</div>
 			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
 				<ion-text class="text-primary font-bold w-12" >
@@ -66,7 +66,7 @@
 				<ion-reorder v-for="(card, index) in factory.questions" :key="index" class="flex flex-col bg-light_gray p-4 rounded-xl mb-4">
 					<div class="flex w-full items-center justify-between">
 						<ion-text class="text-main_dark font-bold">Card {{ index + 1 }}</ion-text>
-						<div class="flex">
+						<div class="flex" @click="factory.removeQuestion(index)">
 							<ion-icon
 								:icon='trash'
 								class="text-main_dark"
@@ -100,7 +100,7 @@
 
 			<div class="w-full flex justify-end mb-8">
 				<ion-button class="btn-primary btn-lg !pr-0 " @click="editFlashCard()">
-					Create
+					Edit
 				</ion-button>
 			</div>
 		</div>
@@ -142,6 +142,7 @@ export default {
 		const {flashCard, listener,error:flashCardError, loading:flashCardLoading} = useFlashCard(id as string)
 
 
+
 		const { tag, removeTag } = useTags(
 			(tag: string) => factory.value.addTag(tag),
 			(tag: string) => factory.value.removeTag(tag)
@@ -150,7 +151,9 @@ export default {
 			factory.value.index = value
 
 		}
+
 		return {
+			flashCard,
 			flashCardLoading,loading,error, 
 			tag,removeTag, close,
 			editCard,
