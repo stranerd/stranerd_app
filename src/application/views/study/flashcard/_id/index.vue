@@ -37,7 +37,7 @@
 
 			<div class="w-full flex items-center justify-between my-8 max-w-[30rem] mx-auto">
 				<ion-icon
-					@click="playCard(true)"
+					@click="playCard()"
 					:icon="play"
 					class="text-icon_inactive text-xl cursor-pointer"
 				/>
@@ -63,7 +63,7 @@
 					@click="toggle()"
 				/>
 				<ion-icon
-					v-if="isFullscreen && canExit"
+					v-else
 					
 					:icon="contract"
 					class="text-icon_inactive text-xl cursor-pointer"
@@ -132,7 +132,7 @@ export default {
 
 		const increase = async ()=>{
 			if(page.value+1 === flashCard.value?.set.length){
-				
+				playCard()
 				const accepted = await Alert({
 					title: 'You have gotten to the end of the flashCard set',
 					text: 'Do you want to try again or return back to Study',
@@ -140,7 +140,7 @@ export default {
 					confirmButtonText: 'Yes, Try again',
 					cancelButtonText: 'No, Back to study'
 				})
-				playCard()
+				
 				if(accepted) page.value = 0
 				else router.push('/study')
 			}
@@ -153,18 +153,13 @@ export default {
 
 		}
 		const exit = ()=>{
-			const screen = document.getElementById('screen')
-			//@ts-ignore
-			if(screen?.exitFullscreen){
-				canExit.value = true
-				//@ts-ignore
-				screen?.exitFullscreen()
+			if(document?.exitFullscreen){
+				document?.exitFullscreen()
 				isFullscreen.value = false
-			}else canExit.value = false
+			}
 			
 		}
 		const toggle = ()=>{
-			const screen = document.getElementById('screen')
 			if(isFullscreen.value)  exit()
 			else enter()
 		}
@@ -228,8 +223,10 @@ export default {
 
 
 .divx {
-  display: block;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   & > .front {
     // background-color: #ff9671;
@@ -238,8 +235,8 @@ export default {
   & > .back {
     // background-color: #ff6f91;
     position: absolute;
-    top: 0px;
-    left: 0px;
+    // top: 0px;
+    // left: 0px;
   }
 
   & > .front,

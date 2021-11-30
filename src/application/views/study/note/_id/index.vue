@@ -26,7 +26,6 @@
 					v-if="pdfSrc"
 					
 				>
-					{{pdfSrc}}
 					<pdf ref="screen"  src="https://arkokoley.github.io/pdfvuer/nationStates.pdf" :page="page" class="!max-w-[90vw]" v-if="pdfSrc">
 						<template slot="loading">
 							loading content here...
@@ -115,7 +114,6 @@ export default defineComponent( {
 	displayName: 'Notes', 
 	components: {
 		Justified,
-		// ShowRatings,
 		Avatar,
 		pdf: pdfvuer,
 		Share
