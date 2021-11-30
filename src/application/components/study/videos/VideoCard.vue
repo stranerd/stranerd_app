@@ -2,21 +2,26 @@
 	<router-link :to="`/study/video/${video.id}`"
 		:class="`m-0  h-[18rem]  md:!w-[18rem] !w-[17rem]  ${bgColor(index)}  rounded-xl  flex flex-col md:gap-2 gap-[1rem] box-border justify-between  pb-5 border border-faded_gray lg:border-0`"
 	>
+
 		<div class="flex flex-col items-center justify-between w-full">
-			<div class="bg-faded_gray min-h-[10.5rem] min-w-[57px] w-full grid place-items-center rounded-md ">
+			<template v-if="video.preview">
+				<img :src="video.preview.link" class="bg-faded_gray  h-[10.9rem] min-w-[57px] w-full  rounded-md "/>
+			</template>
+			<div class="bg-faded_gray min-h-[10.5rem] min-w-[57px] w-full grid place-items-center rounded-md " v-else>
 				<div class="bg-white rounded-full grid place-items-center h-16 w-16">
 					<ion-icon
 						class="text-faded_gray text-3xl"
 						:icon="play"
 					/>
-				</div>
-		
+				</div> 
 			</div>
             
 			<ion-text class="text-sm text-main_dark font-bold p-5 pb-1 w-full text-left">
 				{{video.title}}
-			</ion-text> 
+			</ion-text>
 		</div>
+
+	
 
 		<div class="w-full flex items-center justify-start  px-5">
 			<!-- <ShowRatings :rating="4"/> -->

@@ -134,7 +134,6 @@ export default defineComponent( {
 		const getPdf = ()=> {
 			
 			pdfdata.value = pdfvuer.createLoadingTask('https://arkokoley.github.io/pdfvuer/nationStates.pdf')
-			console.log(pdfdata.value)
 			//@ts-ignore
 			pdfdata?.value?.then((pdf: any) => {
 				pdfLoading.value = false
