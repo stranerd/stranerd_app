@@ -35,10 +35,6 @@
 				</section>
 			</div>
 
-
-			
-		   
-
 			<div class="w-full flex items-center justify-between my-8 max-w-[30rem] mx-auto">
 				<ion-icon
 					@click="playCard(true)"
@@ -144,7 +140,7 @@ export default {
 					confirmButtonText: 'Yes, Try again',
 					cancelButtonText: 'No, Back to study'
 				})
-				playCard(false)
+				playCard()
 				if(accepted) page.value = 0
 				else router.push('/study')
 			}
@@ -169,13 +165,11 @@ export default {
 		}
 		const toggle = ()=>{
 			const screen = document.getElementById('screen')
-			console.log(screen)
 			if(isFullscreen.value)  exit()
 			else enter()
 		}
 
-		const playCard = (value: boolean)=>{
-			console.log(!isPlay.value , value)
+		const playCard = ()=>{
 			if(!isPlay.value ){
 				interval = setInterval(increase, 3000)
 				isPlay.value = true
