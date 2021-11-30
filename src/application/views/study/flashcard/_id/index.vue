@@ -5,7 +5,7 @@
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
 				{{flashCard?.title}}
 			</ion-text>
-			<!-- <div class="flex items-center md:flex-row flex-col">
+			<!-- <div class="flex items-center md:flex-row flex-col"> 
 				<div class="flex items-center mr-6">
 					<ShowRatings :rating="5" class="mr-3" />
 					<ion-text class="text-white font-semibold">
@@ -108,9 +108,10 @@ import Justified from '@app/layouts/Justified.vue'
 import { add, bookmark, chevronBack, chevronForward, contract, pencil, play, scan, shareSocial } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { useFlashCard } from '@root/application/composable/study/flashCards'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { useFullscreen } from '@vueuse/core'
+import { Alert } from '@app/composable/core/notifications'
 
 
 export default {
@@ -125,14 +126,30 @@ export default {
 		const screen = ref(null)
 		const page = ref(0)
 		const { isFullscreen, enter, exit, toggle } = useFullscreen(screen)
+		const router = useRouter()
 		const { id } = useRoute().params
 		const {flashCard, listener, error, loading} = useFlashCard(id as string)
 
-		const increase = ()=>{
-			page.value++
+		const increase = async ()=>{
+			if(page.value+1 === flashCard.value?.set.length){
+				const accepted = await Alert({
+					title: 'You have gotten to the end of the flashCard set',
+					text: 'Do you want to try again or return back to Study',
+					icon: 'info',
+					confirmButtonText: 'Yes, Try again',
+					cancelButtonText: 'No, Back to study'
+				})
+				if(accepted) page.value = 0
+				else router.push('/study')
+			}
+			else page.value++
+		
+
+			
 		}
 		const decrease = ()=>{
-			page.value--
+			if(page.value !== 0) page.value--
+			
 		}
 
 		return {

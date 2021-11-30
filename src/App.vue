@@ -1,7 +1,7 @@
 <template>
 	<ion-app>
 		<!-- TODO: Add custom animation for navigation -->
-		<ion-router-outlet :animated="false" />
+		<router-view />
 	</ion-app>
 </template>
 
@@ -13,7 +13,7 @@ export default defineComponent({
 	name: 'App',
 	components: {
 		IonApp,
-		IonRouterOutlet
+		// IonRouterOutlet
 	}
 })
 </script>
