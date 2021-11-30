@@ -18,27 +18,27 @@
 
 			</div> -->
 		</div>
-		<div class="w-screen h-screen bg-light_gray">
+		<div class="w-full pb-12 bg-light_gray">
 			<div
 				:class="[false ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
 
-				<div  class="bg-white h-[25rem] min-w-[57px] w-full grid place-items-center rounded-md "
-					v-if="pdfSrc"
-					
+		
+				<pdf :src="pdfdata" v-for="i in numPages" :key="i" :id="i" :page="i"
+					:scale="1" style="width:80%;margin:20px auto;"
+					:annotation="true"
+					:resize="true"
 				>
-					<pdf ref="screen"  src="https://arkokoley.github.io/pdfvuer/nationStates.pdf" :page="page" class="!max-w-[90vw]" v-if="pdfSrc">
-						<template slot="loading">
-							loading content here...
-						</template>
-					</pdf>
+					<template v-slot:loading>
+						loading content here...
+					</template>
+				</pdf>
 
-				</div>
 
-				<div class="w-full mx-auto fixed bottom-12 md:inset-x-0 inset-x-4">
+				<!-- <div class="w-full mx-auto fixed bottom-12 md:inset-x-0 inset-x-4">
 					<div class="lg:w-8/12 w-full px-4 mx-auto flex  items-center  my-8 max-w-[40rem]  bg-dark_gray text-2xl text-white rounded-xl">
 						<div class="py-2 px-4 !-my-2 border-r border-light_gray flex justify-between items-center gap-4">
 							<ion-icon :icon="chevronDown" @click="page--"/>
-							<ion-text class="text-lg">{{page}} of unknown</ion-text>
+							<ion-text class="text-lg">{{page}} of {{numPages}}</ion-text>
 							<ion-icon :icon="chevronUp" @click="page++"/>
 						</div>
 						<div class="py-2 px-4 border-r border-light_gray flex justify-between items-center gap-4">
@@ -52,7 +52,7 @@
 						</div>
 				
 					</div>
-				</div>
+				</div> -->
 			
 			</div>
 
@@ -85,22 +85,17 @@
 
 
 	</Justified>
-	<page-loading v-if="loading"/>
+	<page-loading v-if="loading && pdfLoading"/>
 </template>
 
-<!-- <script lang="ts" setup>
-import { useFullscreen } from '@vueuse/core' 
 
-const screen = ref(null)
-const { isFullscreen, enter, exit, toggle } = useFullscreen(screen)
-</script> -->
 
 <script lang="ts">
 import Justified from '@app/layouts/Justified.vue'
 import { add, bookmark, chevronDown, chevronUp, contract, pencil, remove, scan, shareSocial } from 'ionicons/icons'
 // import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
-import { defineComponent, onMounted, onBeforeUnmount, ref } from 'vue'
+import { defineComponent, onMounted, onBeforeUnmount, ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useNote } from '@root/application/composable/study/notes'
 
@@ -126,15 +121,37 @@ export default defineComponent( {
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 
-		const pdfSrc = note?.value?.link
 		const page = ref(1) 
+		const scale = ref(1) 
+		const numPages = ref(0) 
+		const pdfdata = ref(undefined) 
+		const pdfLoading = ref(true) 
+		const formattedZoom =	computed(()=>{
+			return scale.value *100
+		})
 
+
+		const getPdf = ()=> {
+			
+			pdfdata.value = pdfvuer.createLoadingTask('https://arkokoley.github.io/pdfvuer/nationStates.pdf')
+			console.log(pdfdata.value)
+			//@ts-ignore
+			pdfdata?.value?.then((pdf: any) => {
+				pdfLoading.value = false
+				numPages.value = pdf.numPages
+			})
+		}
+
+
+		//@ts-ignore
+		onMounted(getPdf)
 		return {
-			page,pdfSrc, note, loading,
+			page,pdfdata, note, loading,scale, numPages,pdfLoading,
 			add,remove, scan, chevronDown,
 			chevronUp,  pencil, contract, bookmark, shareSocial
 		}
-	}
+	},
+
 })
 </script>
 
