@@ -34,7 +34,7 @@
 
 				<!--  back side  -->
 				<section class="back h-96 flex  items-center text-center justify-center  custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto">
-					<h2>	{{flashCard?.set[page].answer}}</h2>
+					<h2 v-if="flipped">	{{flashCard?.set[page].answer}}</h2>
 				</section>
 			</div>
 
@@ -240,7 +240,7 @@ export default {
 }
 .divx > .front, .divx > .back {
   text-align: center;
-  transition-duration: 1s;
+  transition-duration: 0.5s;
   transition-property: transform, opacity;
 }
 
