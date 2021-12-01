@@ -44,7 +44,7 @@ import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/ico
 import Swiper from '@app/components/core/Swiper.vue'
 import { useNoteList } from '@app/composable/study/notes'
 import { useAuth } from '@app/composable/auth/auth'
-import notesCard from './notesCard.vue'
+import notesCard from './card/notesCard.vue'
 
 export default defineComponent({
 	name: 'RecentTransactions',
