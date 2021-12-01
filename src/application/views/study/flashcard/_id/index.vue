@@ -1,7 +1,10 @@
 <template>
 	<Justified>
 		<!-- TODO: Break into sections -->
-		<div class="bg-primary w-full min-h-[150px] flex flex-col justify-center items-center pt-0 pb-1">
+		<div class="bg-primary w-full min-h-[150px] flex  justify-center items-center pt-0 pb-1">
+			<div class="bg-white md:grid place-items-center p-1 rounded-sm mr-4 cursor-pointer hidden " @click="$router.go(-1)">
+				<ion-icon :icon="arrowBackOutline" class="text-[23px] text-primary"></ion-icon>
+			</div>
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
 				{{flashCard?.title}}
 			</ion-text>
@@ -23,7 +26,7 @@
 			:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
 		
 
-			<div class="vertical divx w-full">
+			<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full']" @click="flipped = !flipped">
 				<!--  front side  -->
 				<section class="front h-96 flex  items-center text-center justify-center  custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto">
 					<h2 >{{flashCard?.set[page].question}}</h2>
@@ -31,7 +34,7 @@
 
 				<!--  back side  -->
 				<section class="back h-96 flex  items-center text-center justify-center  custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto">
-					<h2>	{{flashCard?.set[page].answer}}</h2>
+					<h2 v-if="flipped">	{{flashCard?.set[page].answer}}</h2>
 				</section>
 			</div>
 
@@ -104,7 +107,7 @@
 
 <script lang="ts">
 import Justified from '@app/layouts/Justified.vue'
-import { add, bookmark, chevronBack, chevronForward, contract, pencil, play, scan, shareSocial } from 'ionicons/icons'
+import { add, bookmark, chevronBack, chevronForward, arrowBackOutline, contract, pencil, play, scan, shareSocial } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { useFlashCard } from '@root/application/composable/study/flashCards'
 import { useRoute, useRouter } from 'vue-router'
@@ -122,6 +125,7 @@ export default {
 	setup () {
 		const isFullscreen = ref(false)
 		const canExit = ref(false)
+		const flipped = ref(false)
 
 		const page = ref(0)
 		const router = useRouter()
@@ -131,6 +135,7 @@ export default {
 		const isPlay = ref(false)
 
 		const increase = async ()=>{
+			flipped.value = false
 			if(page.value+1 === flashCard.value?.set.length){
 				playCard()
 				const accepted = await Alert({
@@ -145,6 +150,11 @@ export default {
 				else router.push('/study')
 			}
 			else page.value++
+		}
+		const decrease = ()=>{
+			flipped.value = false
+			if(page.value !== 0) page.value--
+			
 		}
 		const enter = ()=>{
 			const screen = document.getElementById('screen')
@@ -175,18 +185,16 @@ export default {
 			}
 			
 		}
-		const decrease = ()=>{
-			if(page.value !== 0) page.value--
-			
-		}
+	
 
 		return {
-			canExit,
+			canExit,flipped,
 			page,increase, decrease, playCard,
 			isFullscreen, toggle, exit, enter,
 			flashCard, error, loading,
 			play, add, scan, chevronBack,
-			chevronForward, pencil, contract, bookmark, shareSocial
+			chevronForward, pencil, contract,
+			 bookmark, shareSocial, arrowBackOutline
 		}
 	}
 }
@@ -221,84 +229,57 @@ export default {
 
 
 
-
 .divx {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  & > .front {
-    // background-color: #ff9671;
-  }
-
-  & > .back {
-    // background-color: #ff6f91;
-    position: absolute;
-    // top: 0px;
-    // left: 0px;
-  }
-
-  & > .front,
-  & > .back {
-    // height: 200px;
-    // width: 100%;
-    // color: white;
-    text-align: center;
-    // display: block;
-    transition-duration: 1s;
-    transition-property: transform, opacity;
-  }
+}
+.divx > .back {
+  position: absolute;
+}
+.divx > .front, .divx > .back {
+  text-align: center;
+  transition-duration: 0.5s;
+  transition-property: transform, opacity;
 }
 
-// horizontal transition
-.horizontal {
-  & > .front {
-    opacity: 1;
-    transform: rotateY(0deg);
-  }
 
-  & > .back {
-    opacity: 0;
-    transform: rotateY(180deg);
-  }
 
-  &:hover {
-    & > .front {
-      opacity: 0;
-      transform: rotateY(180deg);
-    }
-
-    & > .back {
-      opacity: 1;
-      transform: rotateY(0deg);
-    }
-  }
+.vertical > .front {
+  opacity: 1;
+  transform: rotateX(0deg);
+}
+.vertical > .back {
+  opacity: 0;
+  transform: rotateX(180deg);
+}
+.vertical-flipped > .front {
+  opacity: 0;
+  transform: rotateX(180deg);
+}
+.vertical-flipped > .back {
+  opacity: 1;
+  transform: rotateX(0deg);
 }
 
-// vertical transition
-.vertical {
-  & > .front {
-    opacity: 1;
-    transform: rotateX(0deg);
-  }
 
-  & > .back {
-    opacity: 0;
-    transform: rotateX(180deg);
-  }
 
-  &:hover {
-    & > .front {
-      opacity: 0;
-      transform: rotateX(180deg);
-    }
 
-    & > .back {
-      opacity: 1;
-      transform: rotateX(0deg);
-    }
-  }
-}
-
+//.divx.horizontal > .front {
+//   opacity: 1;
+//   transform: rotateY(0deg);
+// }
+// .horizontal > .back {
+//   opacity: 0;
+//   transform: rotateY(180deg);
+// }
+// .horizontal:hover > .front {
+//   opacity: 0;
+//   transform: rotateY(180deg);
+// }
+// .horizontal:hover > .back {
+//   opacity: 1;
+//   transform: rotateY(0deg);
+// }
 </style>

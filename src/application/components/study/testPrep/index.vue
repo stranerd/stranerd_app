@@ -44,7 +44,7 @@ import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/ico
 import Swiper from '@app/components/core/Swiper.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useTestPrepList } from '@app/composable/study/testPreps'
-import TestPrepCard from './TestPrepCard.vue'
+import TestPrepCard from './card/TestPrepCard.vue'
 
 export default defineComponent({
 	name: 'RecentTransactions',
