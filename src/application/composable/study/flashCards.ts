@@ -7,14 +7,24 @@ import {
 	FlashCardEntity,
 	FlashCardFactory,
 	GetFlashCards,
+	GetUserFlashCards,
 	ListenToFlashCard,
-	ListenToFlashCards
+	ListenToFlashCards,
+	ListenToUserFlashCards
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@app/composable/core/notifications'
 import { useAuth } from '@app/composable/auth/auth'
 
 const global = {
+	flashCards: ref([] as FlashCardEntity[]),
+	fetched: ref(false),
+	hasMore: ref(false),
+	...useErrorHandler(),
+	...useLoadingHandler()
+}
+
+const myGlobal = {
 	flashCards: ref([] as FlashCardEntity[]),
 	fetched: ref(false),
 	hasMore: ref(false),
@@ -34,14 +44,12 @@ const unshiftToFlashCardList = (flashCard: FlashCardEntity) => {
 }
 
 export const useFlashCardList = () => {
-	const { id } = useAuth()
-
 	const fetchFlashCards = async () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
 			const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
-			const flashCards = await GetFlashCards.call(id.value, lastDate)
+			const flashCards = await GetFlashCards.call(lastDate)
 			global.hasMore.value = !!flashCards.pages.next
 			flashCards.results.forEach(pushToFlashCardList)
 			global.fetched.value = true
@@ -52,7 +60,7 @@ export const useFlashCardList = () => {
 	}
 	const listener = useListener(async () => {
 		const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
-		return await ListenToFlashCards.call(id.value, {
+		return await ListenToFlashCards.call({
 			created: async (entity) => {
 				unshiftToFlashCardList(entity)
 			},
@@ -63,17 +71,51 @@ export const useFlashCardList = () => {
 				const index = global.flashCards.value.findIndex((q) => q.id === entity.id)
 				if (index !== -1) global.flashCards.value.splice(index, 1)
 			}
-		}, lastDate ? lastDate - 1 : undefined)
+		}, lastDate)
 	})
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchFlashCards()
 	})
 
-	return {
-		...global, listener,
-		fetchOlderFlashCards: fetchFlashCards
+	return { ...global, listener }
+}
+
+export const useMyFlashCards = () => {
+	const { id } = useAuth()
+
+	const fetchFlashCards = async () => {
+		await myGlobal.setError('')
+		try {
+			await myGlobal.setLoading(true)
+			const flashCards = await GetUserFlashCards.call(id.value)
+			flashCards.results.forEach(pushToFlashCardList)
+			myGlobal.fetched.value = true
+		} catch (error) {
+			await myGlobal.setError(error)
+		}
+		await myGlobal.setLoading(false)
 	}
+	const listener = useListener(async () => {
+		return await ListenToUserFlashCards.call(id.value, {
+			created: async (entity) => {
+				unshiftToFlashCardList(entity)
+			},
+			updated: async (entity) => {
+				unshiftToFlashCardList(entity)
+			},
+			deleted: async (entity) => {
+				const index = myGlobal.flashCards.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) myGlobal.flashCards.value.splice(index, 1)
+			}
+		})
+	})
+
+	onMounted(async () => {
+		if (!myGlobal.fetched.value && !myGlobal.loading.value) await fetchFlashCards()
+	})
+
+	return { ...myGlobal, listener }
 }
 
 export const useCreateFlashCard = () => {

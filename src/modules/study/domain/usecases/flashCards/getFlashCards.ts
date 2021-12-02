@@ -1,6 +1,6 @@
 import { Conditions, QueryParams } from '@modules/core'
-import { PAGINATION_LIMIT } from '@utils/constants'
 import { IFlashCardRepository } from '../../irepositories/iflashCard'
+import { PAGINATION_LIMIT } from '@utils/constants'
 
 export class GetFlashCardsUseCase {
 	private repository: IFlashCardRepository
@@ -9,12 +9,11 @@ export class GetFlashCardsUseCase {
 		this.repository = repository
 	}
 
-	async call (userId: string, date?: number) {
+	async call (date?: number) {
 		const conditions: QueryParams = {
-			limit: PAGINATION_LIMIT,
-			where: [{ field: 'userId', value: userId }, { field: 'isPublic', value: true }],
-			whereType: 'or',
-			sort: { field: 'createdAt', order: -1 }
+			where: [{ field: 'isPublic', value: true }],
+			sort: { field: 'createdAt', order: -1 },
+			limit: PAGINATION_LIMIT
 		}
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
 

@@ -6,12 +6,14 @@ import {
 	GetNotesInSet,
 	GetSets,
 	GetTestPrepsInSet,
+	GetUserSets,
 	GetVideosInSet,
 	ListenToFlashCardsInSet,
 	ListenToNotesInSet,
 	ListenToSet,
 	ListenToSets,
 	ListenToTestPrepsInSet,
+	ListenToUserSets,
 	ListenToVideosInSet,
 	NoteEntity,
 	SetEntity,
@@ -21,12 +23,19 @@ import {
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
- 
+
 const global = {
 	sets: ref([] as SetEntity[]),
 	fetched: ref(false),
 	edit: ref(false),
 	hasMore: ref(false),
+	...useErrorHandler(),
+	...useLoadingHandler()
+}
+
+const myGlobal = {
+	sets: ref([] as SetEntity[]),
+	fetched: ref(false),
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
@@ -51,13 +60,12 @@ const unshiftToSetList = (set: SetEntity) => {
 }
 
 export const useSetList = () => {
-	const { id } = useAuth()
-
 	const fetchSets = async () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const sets = await GetSets.call(id.value)
+			const lastDate = global.sets.value[global.sets.value.length - 1]?.createdAt
+			const sets = await GetSets.call(lastDate)
 			global.hasMore.value = !!sets.pages.next
 			sets.results.forEach(pushToSetList)
 			global.fetched.value = true
@@ -67,7 +75,8 @@ export const useSetList = () => {
 		await global.setLoading(false)
 	}
 	const listener = useListener(async () => {
-		return await ListenToSets.call(id.value, {
+		const lastDate = global.sets.value[global.sets.value.length - 1]?.createdAt
+		return await ListenToSets.call({
 			created: async (entity) => {
 				unshiftToSetList(entity)
 			},
@@ -78,20 +87,63 @@ export const useSetList = () => {
 				const index = global.sets.value.findIndex((q) => q.id === entity.id)
 				if (index !== -1) global.sets.value.splice(index, 1)
 			}
-		})
+		}, lastDate)
 	})
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchSets()
 	})
 
+	return { ...global, listener }
+}
+
+export const useMySets = () => {
+	const { id } = useAuth()
+
+	const fetchSets = async () => {
+		await myGlobal.setError('')
+		try {
+			await myGlobal.setLoading(true)
+			const sets = await GetUserSets.call(id.value)
+			sets.results.forEach(pushToSetList)
+			myGlobal.fetched.value = true
+		} catch (error) {
+			await myGlobal.setError(error)
+		}
+		await myGlobal.setLoading(false)
+	}
+	const listener = useListener(async () => {
+		return await ListenToUserSets.call(id.value, {
+			created: async (entity) => {
+				unshiftToSetList(entity)
+			},
+			updated: async (entity) => {
+				unshiftToSetList(entity)
+			},
+			deleted: async (entity) => {
+				const index = myGlobal.sets.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) myGlobal.sets.value.splice(index, 1)
+			}
+		})
+	})
+
+	onMounted(async () => {
+		if (!myGlobal.fetched.value && !myGlobal.loading.value) await fetchSets()
+	})
+
 	const rootSet = computed({
-		get: () => global.sets.value.find((s) => s.isRoot) ?? null,
+		get: () => myGlobal.sets.value.find((s) => s.isRoot) ?? null,
 		set: () => {
 		}
 	})
 
-	return { ...global, listener, rootSet }
+	const normalSets = computed({
+		get: () => myGlobal.sets.value.filter((s) => !s.isRoot),
+		set: () => {
+		}
+	})
+
+	return { ...myGlobal, listener, rootSet, normalSets }
 }
 
 export const useSet = (set: SetEntity) => {
@@ -233,9 +285,8 @@ export const useCreateSet = () => {
 	return { error, loading, factory, createSet }
 }
 
-
-export const useEdit = ()=>{
-	const toggle = ()=>{
+export const useEdit = () => {
+	const toggle = () => {
 		global.edit.value = !global.edit.value
 	}
 	return {
