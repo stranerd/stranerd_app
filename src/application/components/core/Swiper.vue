@@ -1,9 +1,5 @@
 <template>
-	<Swiper
-		:pagination='{
-			"type": "fraction"
-		}'
-		:direction="direction" :freeMode="freeMode" :slidesPerView="slides">
+	<Swiper :direction="direction" :freeMode="freeMode" :slidesPerView="slides">
 		<SwiperSlide v-for="(item, index) in items" :key="index" :class="slideClass">
 			<slot :index="index" :item="item" />
 		</SwiperSlide>
@@ -12,11 +8,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import  {  SwiperSlide } from 'swiper/vue/swiper-vue'
-import SwiperCore, { Swiper,  Pagination,Navigation } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
 import 'swiper/swiper-bundle.min.css'
-
-SwiperCore.use([Pagination,Navigation])
 
 export default defineComponent({
 	name: 'SwiperWrapper',
