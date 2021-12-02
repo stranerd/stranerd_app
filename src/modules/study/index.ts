@@ -48,7 +48,9 @@ import { PastQuestionData, PastQuestionEntity, PastQuestionType } from './domain
 import { PastQuestionFactory } from './domain/factories/pastQuestion'
 import { TestData, TestEntity, TestType } from './domain/entities/test'
 import { GetSetsUseCase } from './domain/usecases/sets/getSets'
+import { GetUserSetsUseCase } from './domain/usecases/sets/getUserSets'
 import { ListenToSetsUseCase } from './domain/usecases/sets/listenToSets'
+import { ListenToUserSetsUseCase } from './domain/usecases/sets/listenToUserSets'
 import { FindSetUseCase } from './domain/usecases/sets/findSet'
 import { AddSetUseCase } from './domain/usecases/sets/addSet'
 import { EditSetUseCase } from './domain/usecases/sets/editSet'
@@ -87,9 +89,11 @@ import { GetVideosInSetUseCase } from './domain/usecases/videos/getVideosInSet'
 import { EditFlashCardUseCase } from './domain/usecases/flashCards/editFlashCard'
 import { ListenToFlashCardUseCase } from './domain/usecases/flashCards/listenToFlashCard'
 import { ListenToFlashCardsUseCase } from './domain/usecases/flashCards/listenToFlashCards'
+import { ListenToUserFlashCardsUseCase } from './domain/usecases/flashCards/listenToUserFlashCards'
 import { ListenToFlashCardsInSetUseCase } from './domain/usecases/flashCards/listenToFlashCardsInSet'
 import { AddFlashCardUseCase } from './domain/usecases/flashCards/addFlashCard'
 import { GetFlashCardsUseCase } from './domain/usecases/flashCards/getFlashCards'
+import { GetUserFlashCardsUseCase } from './domain/usecases/flashCards/getUserFlashCards'
 import { FindFlashCardUseCase } from './domain/usecases/flashCards/findFlashCard'
 import { GetFlashCardsInSetUseCase } from './domain/usecases/flashCards/getFlashCardsInSet'
 import { DeleteFlashCardUseCase } from './domain/usecases/flashCards/deleteFlashCard'
@@ -157,7 +161,9 @@ const testRepository = new TestRepository(testDataSource, testTransformer)
 
 export const FindSet = new FindSetUseCase(setRepository)
 export const GetSets = new GetSetsUseCase(setRepository)
+export const GetUserSets = new GetUserSetsUseCase(setRepository)
 export const ListenToSets = new ListenToSetsUseCase(setRepository)
+export const ListenToUserSets = new ListenToUserSetsUseCase(setRepository)
 export const AddSet = new AddSetUseCase(setRepository)
 export const EditSet = new EditSetUseCase(setRepository)
 export const DeleteSet = new DeleteSetUseCase(setRepository)
@@ -179,9 +185,11 @@ export const DeleteInstitution = new DeleteInstitutionUseCase(institutionReposit
 
 export const FindFlashCard = new FindFlashCardUseCase(flashCardRepository)
 export const GetFlashCards = new GetFlashCardsUseCase(flashCardRepository)
+export const GetUserFlashCards = new GetUserFlashCardsUseCase(flashCardRepository)
 export const GetFlashCardsInSet = new GetFlashCardsInSetUseCase(flashCardRepository)
 export const ListenToFlashCard = new ListenToFlashCardUseCase(flashCardRepository)
 export const ListenToFlashCards = new ListenToFlashCardsUseCase(flashCardRepository)
+export const ListenToUserFlashCards = new ListenToUserFlashCardsUseCase(flashCardRepository)
 export const ListenToFlashCardsInSet = new ListenToFlashCardsInSetUseCase(flashCardRepository)
 export const AddFlashCard = new AddFlashCardUseCase(flashCardRepository)
 export const EditFlashCard = new EditFlashCardUseCase(flashCardRepository)
