@@ -3,7 +3,7 @@
 		class="rounded-xl bg-white md:py-6 md:px-6 py-4 px-3 md:text-sm text-xs flex flex-col lg:col-start-5 lg:col-end-9 md:col-start-3 md:col-end-11 col-span-12">
 
 		<div class="flex flex-col gap-1 text-center justify-center items-center ">
-			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
+			<div class="input-holder bg-light_gray  w-full rounded-md flex items-center px-4 mb-4">
 				<ion-text class="text-primary font-bold w-12">
 					TITLE
 				</ion-text>
@@ -12,7 +12,7 @@
 					v-model="factory.name"
 				></ion-input>
 			</div>
-			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
+			<div class="input-holder bg-light_gray  w-full rounded-md flex items-center px-4 mb-4">
 				<ion-text class="text-primary font-bold w-12" >
 					TAGS
 				</ion-text>
@@ -34,19 +34,19 @@
 			<div class="flex items-center w-full max-w-[25rem] justify-center">
 				<ion-radio-group class="flex w-full" v-model="factory.isPublic">
 					<ion-list-header>
-						<ion-label class="text-white font-bold text-base ">
+						<ion-label class="text-icon_inactive font-bold text-base ">
 							Set privacy:
 						</ion-label>
 					</ion-list-header>
 
 					<ion-item class="w-full ion-iten-transparent">
 						<ion-radio class=" ion-white" :value="true"></ion-radio>
-						<ion-label class="text-white font-bold text-base ml-3 ion-white">Public</ion-label>
+						<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Public</ion-label>
 					</ion-item>
 
 					<ion-item class="w-full ion-iten-transparent">
 						<ion-radio class=" ion-white" :value="false"></ion-radio>
-						<ion-label class="text-white font-bold text-base ml-3 ion-white">Private</ion-label>
+						<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Private</ion-label>
 					</ion-item>
 				</ion-radio-group>
 			</div>
@@ -58,14 +58,14 @@
 
 		<div class="flex flex-row  mt-5  text-white gap-4">
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<ion-button class=" btn-secondary"
+				<ion-button class=" btn-secondary w-full"
 					@click="closeCreateSet">
 					No
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</ion-button>
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<ion-button class=" btn-primary" @click="createSet">
+				<ion-button class=" btn-primary w-full" @click="createSet">
 					Yes
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</ion-button>
@@ -111,7 +111,6 @@ export default defineComponent({
 </script>
 <style scoped>
 	ion-input {
-
 		/* Set a different placeholder color */
 		--placeholder-color: #8B9EB1;
 
