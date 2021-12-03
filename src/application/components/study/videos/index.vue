@@ -44,7 +44,7 @@ import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/ico
 import Swiper from '@app/components/core/Swiper.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useVideoList } from '@app/composable/study/videos'
-import VideoCard from './VideoCard.vue'
+import VideoCard from './card/VideoCard.vue'
 
 export default defineComponent({
 	name: 'RecentTransactions',

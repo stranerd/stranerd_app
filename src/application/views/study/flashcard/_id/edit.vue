@@ -3,16 +3,14 @@
 		<!-- TODO: Break into sections -->
 		<div class="bg-primary w-full  h-auto flex flex-col justify-between items-center pt-12 pb-1">
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-5 mb-6">
-				Create a Flashcard set
+				Edit a Flashcard set
 			</ion-text>
 			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
 				<ion-text class="text-primary font-bold w-12">
 					TITLE
 				</ion-text>
 				<ion-input class="max-w-[1054px]  !h-14 " placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
-					show-cancel-button="never"
-					v-model="factory.title"
-				></ion-input>
+					show-cancel-button="never" v-model="factory.title"></ion-input>
 			</div>
 			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
 				<ion-text class="text-primary font-bold w-12" >
@@ -34,7 +32,7 @@
 
 
 			<div class="flex items-center w-full max-w-[25rem] justify-center">
-				<ion-radio-group class="flex w-full" v-model="factory.isPublic">
+				<ion-radio-group class="flex w-full">
 					<ion-list-header>
 						<ion-label class="text-white font-bold text-base ">
 							Set privacy:
@@ -42,12 +40,12 @@
 					</ion-list-header>
 
 					<ion-item class="w-full ion-iten-transparent">
-						<ion-radio class=" ion-white" :value="true"></ion-radio>
+						<ion-radio class=" ion-white" value="public"></ion-radio>
 						<ion-label class="text-white font-bold text-base ml-3 ion-white">Public</ion-label>
 					</ion-item>
 
 					<ion-item class="w-full ion-iten-transparent">
-						<ion-radio class=" ion-white" :value="false"></ion-radio>
+						<ion-radio class=" ion-white" value="private"></ion-radio>
 						<ion-label class="text-white font-bold text-base ml-3 ion-white">Private</ion-label>
 					</ion-item>
 				</ion-radio-group>
@@ -101,8 +99,8 @@
 			</div>
 
 			<div class="w-full flex justify-end mb-8">
-				<ion-button class="btn-primary btn-lg !pr-0 " @click="createFlashCard()">
-					Create
+				<ion-button class="btn-primary btn-lg !pr-0 " @click="editFlashCard()">
+					Edit
 				</ion-button>
 			</div>
 		</div>
@@ -126,12 +124,12 @@ import {
 } from '@ionic/vue'
 import Justified from '@app/layouts/Justified.vue'
 import { add, trash , close} from 'ionicons/icons'
-import { useCreateFlashCard } from '@root/application/composable/study/flashCards'
 import {  useTags } from '@app/composable/core/forms'
-
+import { useFlashCard, useEditFlashCard } from '@root/application/composable/study/flashCards'
+import { useRoute } from 'vue-router'
 
 export default {
-	name: 'Create Flashcard',
+	name: 'Edit Flashcard',
 	displayName: 'Create Flashcard',
 	components: {
 		Justified, IonItem, IonLabel,
@@ -139,7 +137,11 @@ export default {
 		IonTextarea, IonReorderGroup, IonReorder
 	},
 	setup () {
-		const {createFlashCard, factory, error,loading} = useCreateFlashCard()
+		const { id } = useRoute().params
+		const {editFlashCard, factory, error,loading} = useEditFlashCard(id as string)
+		const {flashCard, listener,error:flashCardError, loading:flashCardLoading} = useFlashCard(id as string)
+
+
 
 		const { tag, removeTag } = useTags(
 			(tag: string) => factory.value.addTag(tag),
@@ -149,11 +151,13 @@ export default {
 			factory.value.index = value
 
 		}
+
 		return {
+			flashCard,
+			flashCardLoading,loading,error, 
 			tag,removeTag, close,
 			editCard,
-			error, loading,
-			createFlashCard, factory,
+			editFlashCard, factory,
 			trash, add
 		}
 	}

@@ -6,7 +6,7 @@
 	>
 		<div class="flex flex-col items-center justify-between w-full">
 			<template v-if="note.preview">
-				<img :src="note.preview " class="bg-faded_gray min-h-[10.5rem] min-w-[57px] w-full  rounded-md "/>
+				<img :src="note.preview.link" class="bg-faded_gray  h-[10.9rem] min-w-[57px] w-full  rounded-md "/>
 			</template>
 			<div class="bg-faded_gray min-h-[10.5rem] min-w-[57px] w-full grid place-items-center rounded-md " v-else>
 				<ion-text class="text-2xl text-white font-bold p-5 pb-2">
@@ -14,19 +14,20 @@
 				</ion-text>
 			</div>
             
-			<ion-text class="text-sm text-main_dark font-bold p-5 pb-1 w-full text-left">
+			<ion-text class="text-sm text-main_dark font-bold p-5 pb-1 w-full text-left" v-if="note">
 				{{note.title}}
 			</ion-text> 
 		</div>
 
-		<div class="w-full flex items-center justify-between  px-5">
-			<ShowRatings :rating="4"/>
+		<div class="w-full flex items-center justify-start  px-5">
+			<!-- <ShowRatings :rating="4"/> -->
 
-			<div class="flex items-center">
-				<ion-text class="text-xs font-bold text-main_dark mr-3">
+			<div class="flex items-center" v-if="note">
+				<Avatar :size="24" :src="note.userBio.photo"/>
+				<ion-text class="text-xs font-bold text-main_dark ml-3">
 					{{note.userBio.firstName}}
 				</ion-text>
-				<Avatar :size="24" :src="note.userBio.photo"/>
+				
 			</div>
 		</div>
 	</router-link>
@@ -42,7 +43,7 @@
 import { calendar, play } from 'ionicons/icons'
 import { defineComponent,  } from 'vue'
 import { formatNumber } from '@utils/commons'
-import ShowRatings from '@app/components/core/ShowRatings.vue'
+// import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { NoteEntity } from '@root/modules/study'
 import { useEditState } from '@app/composable/study/state'
@@ -80,7 +81,7 @@ export default defineComponent({
 			calendar, play
 		}
 	},
-	components: { ShowRatings, Avatar }
+	components: {  Avatar }
 })
 </script>
 

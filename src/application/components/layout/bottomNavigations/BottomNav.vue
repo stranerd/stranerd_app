@@ -42,12 +42,12 @@
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
-					to="/">
+					to="/study">
 					<ion-icon :icon="book" class="w-14" />
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
-					to="/profile">
+					to="/account">
 					<ion-icon :icon="person" class="w-14" />
 				</router-link>
 			</div>

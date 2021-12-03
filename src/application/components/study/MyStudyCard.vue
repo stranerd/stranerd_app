@@ -52,10 +52,10 @@ import { calendar, play } from 'ionicons/icons'
 import { defineComponent,  } from 'vue'
 import { formatNumber } from '@utils/commons'
 import { SetEntity } from '@root/modules/study'
-import notesCard from './notes/notesCard.vue'
-import VideoCard from './videos/VideoCard.vue'
-import FlashcardsCard from './flashcard/FlashcardsCard.vue'
-import TestPrepCard from './testPrep/TestPrepCard.vue'
+import notesCard from './notes/card/notesCard.vue'
+import VideoCard from './videos/card/VideoCard.vue'
+import FlashcardsCard from './flashcard/card/FlashcardsCard.vue'
+import TestPrepCard from './testPrep/card/TestPrepCard.vue'
 
 
 export default defineComponent({

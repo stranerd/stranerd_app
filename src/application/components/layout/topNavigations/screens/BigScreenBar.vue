@@ -31,14 +31,14 @@
 							<div >
 								<ion-content>
 									<div class="mx-auto py-3 flex flex-col">
-										<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
-											to="/study">
+										<div class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark cursor-pointer"
+											@click="createSet">
 											<div class="w-48 flex items-center gap-3">
 												<ion-icon :icon="folder" class="text-2xl"></ion-icon>
 												<ion-label class="font-bold">Create a study set</ion-label>
 											</div>
 												
-										</router-link>	
+										</div>	
 										<!-- <div class="flex items-center gap-2 w-full">
 												</div> -->
 										<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
@@ -149,6 +149,7 @@ import {
 } from 'ionicons/icons'
 import SearchBar from '@app/components/search/SearchBar.vue'
 import { useAuth } from '@app/composable/auth/auth'
+import { useStudyModal } from '@root/application/composable/core/modals'
 
 
 
@@ -170,10 +171,14 @@ export default defineComponent( {
 		}
 		const { user } = useAuth()
 		const showSearch = ref(false)
+
+		const createSet = ()=>{
+			useStudyModal().openCreateSet()
+		}
 	
 		return {
 			isOpenMenuPopover,isOpenStudyPopover, 
-			setMenuPopover,	setStudyPopover, 
+			setMenuPopover,	setStudyPopover, createSet,
 			event,addCircle,helpCircle, chevronDown,
 			folder,	library, settings, logOut,
 			person,	podium,	

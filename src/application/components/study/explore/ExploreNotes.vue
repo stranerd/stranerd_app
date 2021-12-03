@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import notesCard from '@app/components/study/notes/notesCard.vue'
+import notesCard from '@app/components/study/notes/card/notesCard.vue'
 import { useNoteList } from '@app/composable/study/notes'
 
 export default {

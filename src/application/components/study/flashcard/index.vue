@@ -7,7 +7,7 @@
 
 			<router-link v-if="flashcards.length && isLoggedIn"
 				class="text-primary normalText flex items-center font-bold "
-				to="#">
+				to="/study/flashcard/explore">
 				<span>view all</span>
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>
@@ -44,7 +44,7 @@ import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/ico
 import Swiper from '@app/components/core/Swiper.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useFlashCardList } from '@app/composable/study/flashCards'
-import FlashcardsCard from './FlashcardsCard.vue'
+import FlashcardsCard from './card/FlashcardsCard.vue'
 
 export default defineComponent({
 	name: 'RecentTransactions',
