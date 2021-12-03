@@ -3,14 +3,16 @@
 		<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-5">
 			Explore thousands of study materials
 		</ion-text>
-		<ion-searchbar show-cancel-button="never" class="max-w-[1054px] lg:w-7/12 !h-16 " placeholder="Search by subjects, topics and related keywords"></ion-searchbar>
+		<ion-searchbar class="max-w-[1054px] lg:w-7/12 !h-16 "
+			placeholder="Search by subjects, topics and related keywords"
+			show-cancel-button="never"></ion-searchbar>
 
 		<div
 			class="mb-0.5  lg:justify-between justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full  lg:px-3 text-xs mx-auto gap-5 text-faded_gray font-bold  whitespace-normal overflow-x-auto">
 
 			<div class="hidden flex-col gap-4 mb-3 lg:flex">
 
-				<div class="flex items-center cursor-pointer" @click="setOpen(true, $event)" v-if="!editState[name]">
+				<div v-if="!editState[name]" class="flex items-center cursor-pointer" @click="setOpen(true, $event)">
 					<ion-text class="text-white mr-1">
 						Create
 					</ion-text>
@@ -19,31 +21,33 @@
 						class="text-white mr-3 text-xl"
 					/>
 				</div>
-				<div class="flex items-center cursor-pointer" @click="edit()" v-else>
+				<div v-else class="flex items-center cursor-pointer" @click="edit()">
 					<ion-text class="text-white mr-1">
 						cancel
 					</ion-text>
-			
+
 				</div>
-			
+
 				<!-- <ion-icon/> -->
 				<ion-popover
-					:is-open="isOpenRef"
-					css-class="mt-4 rounded-xl"
 					:event="event"
+					:is-open="isOpenRef"
 					:translucent="true"
+					css-class="mt-4 rounded-xl"
 					@didDismiss="setOpen(false)"
 				>
 					<!-- <Popover></Popover> -->
 					<div class="flex flex-col  p-6 !w-52">
-						<router-link to="/study/flashcard/create" class="flex items-center justify-start w-auto mb-4 cursor-pointer">
-							<ion-icon :icon="flash"  alt="" class=" text-2xl text-main_dark"/>
+						<router-link class="flex items-center justify-start w-auto mb-4 cursor-pointer"
+							to="/study/flashCards/create">
+							<ion-icon :icon="flash" alt="" class=" text-2xl text-main_dark" />
 							<ion-text class="font-bold ml-4 text-lg text-main_dark">
 								Flashcard
 							</ion-text>
 						</router-link>
-						<router-link to="/study/set/create" class="flex items-center justify-start w-auto cursor-pointer">
-							<ion-icon :icon="folder"  alt="" class=" text-2xl text-main_dark"/>
+						<router-link class="flex items-center justify-start w-auto cursor-pointer"
+							to="/study/set/create">
+							<ion-icon :icon="folder" alt="" class=" text-2xl text-main_dark" />
 							<ion-text class="font-bold ml-4 text-lg text-main_dark">
 								Study set
 							</ion-text>
@@ -57,7 +61,7 @@
 					exact-active-class="border-b-4 text-white border-white">
 					Test Prep
 				</router-link>
-				<router-link :to="`/study/flashcard/explore`" class="pb-2 pr-3 cursor-pointer"
+				<router-link :to="`/study/flashCards/explore`" class="pb-2 pr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
 					Flashcards
 				</router-link>
@@ -80,72 +84,70 @@
 
 			<div class="hidden flex-col gap-4 mb-3 lg:flex">
 
-				<div class="flex items-center cursor-pointer" @click="edit()" v-if="!editState[name]">
+				<div v-if="!editState[name]" class="flex items-center cursor-pointer" @click="edit()">
 					<ion-text class="text-white mr-1">
-						edit 
+						edit
 					</ion-text>
 					<ion-icon
 						:icon='pencil'
 						class="text-white mr-3 text-xl"
 					/>
 				</div>
-				<div class="flex items-center cursor-pointer" @click="edit()" v-else>
+				<div v-else class="flex items-center cursor-pointer" @click="edit()">
 					<ion-text class="text-white mr-1">
 						save
 					</ion-text>
-			
+
 				</div>
 
-				
-			
-	
+
 			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { IonSearchbar, IonPopover  } from '@ionic/vue'
+import { IonPopover, IonSearchbar } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'
-import { chevronDown, chevronUp, flash, folder,pencil } from 'ionicons/icons'
+import { chevronDown, chevronUp, flash, folder, pencil } from 'ionicons/icons'
 import { useEditState } from '@app/composable/study/state'
 
 export default defineComponent({
-	name:'StudyExploreTopSection',
-	components: {  IonSearchbar , IonPopover},
-	props:{
-		name:{
+	name: 'StudyExploreTopSection',
+	components: { IonSearchbar, IonPopover },
+	props: {
+		name: {
 			type: String,
-			required:true
+			required: true
 		}
 	},
-	setup(props) {
-		const {toggle, editState} = useEditState()
-		const edit = ()=>{
+	setup (props) {
+		const { toggle, editState } = useEditState()
+		const edit = () => {
 			toggle(props.name)
 		}
 
 		const isOpenRef = ref(false)
 		const event = ref()
 		const setOpen = (state: boolean, ev?: Event) => {
-			event.value = ev 
+			event.value = ev
 			isOpenRef.value = state
 		}
-		return { edit,editState, isOpenRef, setOpen, event, chevronDown, chevronUp, flash, folder, pencil }
+		return { edit, editState, isOpenRef, setOpen, event, chevronDown, chevronUp, flash, folder, pencil }
 	}
 })
 
 </script>
 
 <style lang="scss" scoped>
-ion-searchbar{
-    --box-shadow:'none';
-    --border-radius:0.75rem;
-	--padding-top: 12rem !important;
-}
+	ion-searchbar {
+		--box-shadow: 'none';
+		--border-radius: 0.75rem;
+		--padding-top: 12rem !important;
+	}
 
-ion-popover::part(content){
-	width:auto !important;
-}
+	ion-popover::part(content) {
+		width: auto !important;
+	}
 
 </style>

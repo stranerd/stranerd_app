@@ -1,6 +1,6 @@
 <template>
 	<ExploreWrapper name="flashcard">
-		<ExploreFlashcard/>
+		<ExploreFlashcard />
 	</ExploreWrapper>
 </template>
 
@@ -8,24 +8,26 @@
 import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/study/explore/ExploreWrapper.vue'
 import ExploreFlashcard from '@app//components/study/explore/ExploreFlashcard.vue'
+
 export default defineComponent({
-	name: 'ExploreFlashCard',
+	name: 'Explore FlashCard',
 	displayName: 'Explore',
-	components: {  ExploreWrapper, ExploreFlashcard }
+	components: { ExploreWrapper, ExploreFlashcard }
 })
-</script> 
+</script>
 
 <style lang="scss" scoped>
-.ion-iten-transparent{
-    --background:transparent;
-}
+	.ion-iten-transparent {
+		--background: transparent;
+	}
 
-ion-searchbar{
-    --box-shadow:'none';
-    --border-radius:0.5rem;
-}
-.searchbar-input.sc-ion-searchbar-md{
-	padding-top: 12px;
-    padding-bottom: 12px;
-}
+	ion-searchbar {
+		--box-shadow: 'none';
+		--border-radius: 0.5rem;
+	}
+
+	.searchbar-input.sc-ion-searchbar-md {
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
 </style>

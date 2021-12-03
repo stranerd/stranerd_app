@@ -15,6 +15,7 @@ import {
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@app/composable/core/notifications'
 import { useAuth } from '@app/composable/auth/auth'
+import { Router, useRouter } from 'vue-router'
 
 const global = {
 	flashCards: ref([] as FlashCardEntity[]),
@@ -121,6 +122,7 @@ export const useMyFlashCards = () => {
 }
 
 export const useCreateFlashCard = () => {
+	const router = useRouter()
 	const factory = ref(new FlashCardFactory()) as Ref<FlashCardFactory>
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
@@ -131,8 +133,9 @@ export const useCreateFlashCard = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddFlashCard.call(factory.value)
+				const flashCardId = await AddFlashCard.call(factory.value)
 				await setMessage('FlashCard submitted successfully')
+				await router.replace(`/study/flashCards/${flashCardId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -146,10 +149,12 @@ export const useCreateFlashCard = () => {
 
 let editingFlashCard = null as FlashCardEntity | null
 export const getEditingFlashCard = () => editingFlashCard
-export const openFlashCardEditModal = (flashCard: FlashCardEntity) => {
+export const openFlashCardEditModal = (flashCard: FlashCardEntity, router: Router) => {
 	editingFlashCard = flashCard
+	router.push(`/study/flashCards/${flashCard.id}/edit`)
 }
 export const useEditFlashCard = (flashCardId: string) => {
+	const router = useRouter()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
@@ -163,6 +168,7 @@ export const useEditFlashCard = (flashCardId: string) => {
 				await setLoading(true)
 				await EditFlashCard.call(flashCardId, factory.value)
 				await setMessage('FlashCard edited successfully')
+				await router.replace(`/study/flashCards/${flashCardId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
