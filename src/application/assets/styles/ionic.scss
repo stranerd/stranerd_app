@@ -95,13 +95,13 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-light-shade: #d7d8da;
 	--ion-color-light-tint: #f5f6f9;
 
-	
+
 }
 // custom colors
 .ion-white{
 	--color: white !important;
 	--color-checked: white !important;
-	
+
 }
 .ion-bg-white{
 	--background: white !important;
@@ -112,11 +112,11 @@ http://ionicframework.com/docs/theming/ */
 
 .sm-modal {
 	--background-color: #00000065;
-	--height: 25% !important;
+	--height: 350px !important;
 	--width: 400px;
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
-		--height:25% !important;
+		--height:350px !important;
 		--width: 80vw;
 		--border-radius: 0.75rem;
 	}
@@ -182,7 +182,7 @@ http://ionicframework.com/docs/theming/ */
 	text-transform: capitalize !important;
 	letter-spacing: 0.01rem !important;
 	}
-	
+
 }
 
 .btn-outline{
@@ -217,7 +217,7 @@ http://ionicframework.com/docs/theming/ */
 	text-transform: capitalize !important;
 	letter-spacing: 0.01rem !important;
 	}
-	
+
 }
 
 .btn-primary {
@@ -259,4 +259,8 @@ ion-input {
 
 ion-toolbar {
 	--background: #F7F7FC;
+}
+
+.item-bottom{
+	display: none !important;
 }
