@@ -44,4 +44,12 @@ export class SetApiDataSource implements SetBaseDataSource {
 	async update (id: string, data: SetToModel) {
 		await this.stranerdClient.put<SetToModel, SetFromModel>(`/${id}`, data)
 	}
+
+	async saveProp (setId: string, type: string, propIds: string[]) {
+		await this.stranerdClient.put<any, any>(`/${setId}/save`, { type, propIds })
+	}
+
+	async deleteProp (setId: string, type: string, propIds: string[]) {
+		await this.stranerdClient.put<any, any>(`/${setId}/delete`, { type, propIds })
+	}
 }
