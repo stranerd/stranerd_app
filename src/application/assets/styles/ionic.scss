@@ -112,11 +112,11 @@ http://ionicframework.com/docs/theming/ */
 
 .sm-modal {
 	--background-color: #00000065;
-	--height: 25% !important;
+	--height: 21.875rem !important;
 	--width: 400px;
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
-		--height:25% !important;
+		--height:21.875rem !important;
 		--width: 80vw;
 		--border-radius: 0.75rem;
 	}
