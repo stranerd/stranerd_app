@@ -52,9 +52,9 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 	}
 
 	reset () {
-		const reserved = ['userId', 'user']
+		const reserved = (this.reserved ?? []).concat(['userId', 'user', 'userBio'])
 		Object.keys(this.defaults)
-			.filter((key) => !reserved.concat(this.reserved ?? []).includes(key))
+			.filter((key) => !reserved.includes(key))
 			.forEach((key: keyof K) => {
 				this.values[key] = this.defaults[key]
 				this.validValues[key] = this.defaults[key]

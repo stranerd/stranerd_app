@@ -4,7 +4,7 @@ import { InstitutionApiDataSource } from './data/datasources/institution-api'
 import { FlashCardApiDataSource } from './data/datasources/flashCard-api'
 import { NoteApiDataSource } from './data/datasources/note-api'
 import { VideoApiDataSource } from './data/datasources/video-api'
-import { VideoCommentApiDataSource } from './data/datasources/videoComment-api'
+import { CommentApiDataSource } from './data/datasources/comment-api'
 import { PastQuestionApiDataSource } from './data/datasources/pastQuestion-api'
 import { TestPrepApiDataSource } from './data/datasources/testPrep-api'
 import { TestApiDataSource } from './data/datasources/test-api'
@@ -16,7 +16,7 @@ import { NoteTransformer } from './data/transformers/note'
 import { TestTransformer } from './data/transformers/test'
 import { VideoTransformer } from './data/transformers/video'
 import { TestPrepTransformer } from './data/transformers/testPrep'
-import { VideoCommentTransformer } from './data/transformers/videoComment'
+import { CommentTransformer } from './data/transformers/comment'
 import { PastQuestionTransformer } from './data/transformers/pastQuestion'
 import { SetRepository } from './data/repositories/set'
 import { CourseRepository } from './data/repositories/course'
@@ -24,7 +24,7 @@ import { InstitutionRepository } from './data/repositories/institution'
 import { FlashCardRepository } from './data/repositories/flashCard'
 import { NoteRepository } from './data/repositories/note'
 import { VideoRepository } from './data/repositories/video'
-import { VideoCommentRepository } from './data/repositories/videoComment'
+import { CommentRepository } from './data/repositories/comment'
 import { PastQuestionRepository } from './data/repositories/pastQuestion'
 import { TestPrepRepository } from './data/repositories/testPrep'
 import { TestRepository } from './data/repositories/test'
@@ -40,8 +40,8 @@ import { SetFactory } from './domain/factories/set'
 import { SetEntity } from './domain/entities/set'
 import { VideoEntity } from './domain/entities/video'
 import { VideoFactory } from './domain/factories/video'
-import { VideoCommentEntity } from './domain/entities/videoComment'
-import { VideoCommentFactory } from './domain/factories/videoComment'
+import { CommentData, CommentEntity, CommentType } from './domain/entities/comment'
+import { CommentFactory } from './domain/factories/comment'
 import { PrepData, PrepType, TestPrepEntity } from './domain/entities/testPrep'
 import { TestPrepFactory } from './domain/factories/testPrep'
 import { PastQuestionData, PastQuestionEntity, PastQuestionType } from './domain/entities/pastQuestion'
@@ -99,12 +99,12 @@ import { GetUserFlashCardsUseCase } from './domain/usecases/flashCards/getUserFl
 import { FindFlashCardUseCase } from './domain/usecases/flashCards/findFlashCard'
 import { GetFlashCardsInSetUseCase } from './domain/usecases/flashCards/getFlashCardsInSet'
 import { DeleteFlashCardUseCase } from './domain/usecases/flashCards/deleteFlashCard'
-import { FindVideoCommentUseCase } from './domain/usecases/videoComments/findVideoComment'
-import { DeleteVideoCommentUseCase } from './domain/usecases/videoComments/deleteVideoComment'
-import { ListenToVideoCommentsUseCase } from './domain/usecases/videoComments/listenToVideoComments'
-import { GetVideoCommentsUseCase } from './domain/usecases/videoComments/getVideoComments'
-import { AddVideoCommentUseCase } from './domain/usecases/videoComments/addVideoComment'
-import { EditVideoCommentUseCase } from './domain/usecases/videoComments/editVideoComment'
+import { FindCommentUseCase } from './domain/usecases/comments/findComment'
+import { DeleteCommentUseCase } from './domain/usecases/comments/deleteComment'
+import { ListenToVideoCommentsUseCase } from './domain/usecases/comments/listenToVideoComments'
+import { GetVideoCommentsUseCase } from './domain/usecases/comments/getVideoComments'
+import { AddCommentUseCase } from './domain/usecases/comments/addComment'
+import { EditCommentUseCase } from './domain/usecases/comments/editComment'
 import { GetPastQuestionsUseCase } from './domain/usecases/pastQuestions/getPastQuestions'
 import { ListenToPastQuestionsUseCase } from './domain/usecases/pastQuestions/listenToPastQuestions'
 import { FindPastQuestionUseCase } from './domain/usecases/pastQuestions/findPastQuestion'
@@ -134,7 +134,7 @@ const institutionDataSource = new InstitutionApiDataSource()
 const flashCardDataSource = new FlashCardApiDataSource()
 const noteDataSource = new NoteApiDataSource()
 const videoDataSource = new VideoApiDataSource()
-const videoCommentDataSource = new VideoCommentApiDataSource()
+const commentDataSource = new CommentApiDataSource()
 const pastQuestionDataSource = new PastQuestionApiDataSource()
 const testPrepDataSource = new TestPrepApiDataSource()
 const testDataSource = new TestApiDataSource()
@@ -145,7 +145,7 @@ const institutionTransformer = new InstitutionTransformer()
 const flashCardTransformer = new FlashCardTransformer()
 const noteTransformer = new NoteTransformer()
 const videoTransformer = new VideoTransformer()
-const videoCommentTransformer = new VideoCommentTransformer()
+const commentTransformer = new CommentTransformer()
 const pastQuestionTransformer = new PastQuestionTransformer()
 const testPrepTransformer = new TestPrepTransformer()
 const testTransformer = new TestTransformer()
@@ -156,7 +156,7 @@ const institutionRepository = new InstitutionRepository(institutionDataSource, i
 const flashCardRepository = new FlashCardRepository(flashCardDataSource, flashCardTransformer)
 const noteRepository = new NoteRepository(noteDataSource, noteTransformer)
 const videoRepository = new VideoRepository(videoDataSource, videoTransformer)
-const videoCommentRepository = new VideoCommentRepository(videoCommentDataSource, videoCommentTransformer)
+const commentRepository = new CommentRepository(commentDataSource, commentTransformer)
 const pastQuestionRepository = new PastQuestionRepository(pastQuestionDataSource, pastQuestionTransformer)
 const testPrepRepository = new TestPrepRepository(testPrepDataSource, testPrepTransformer)
 const testRepository = new TestRepository(testDataSource, testTransformer)
@@ -219,12 +219,12 @@ export const AddVideo = new AddVideoUseCase(videoRepository)
 export const EditVideo = new EditVideoUseCase(videoRepository)
 export const DeleteVideo = new DeleteVideoUseCase(videoRepository)
 
-export const FindVideoComment = new FindVideoCommentUseCase(videoCommentRepository)
-export const GetVideoComments = new GetVideoCommentsUseCase(videoCommentRepository)
-export const ListenToVideoComments = new ListenToVideoCommentsUseCase(videoCommentRepository)
-export const AddVideoComment = new AddVideoCommentUseCase(videoCommentRepository)
-export const EditVideoComment = new EditVideoCommentUseCase(videoCommentRepository)
-export const DeleteVideoComment = new DeleteVideoCommentUseCase(videoCommentRepository)
+export const FindComment = new FindCommentUseCase(commentRepository)
+export const GetVideoComments = new GetVideoCommentsUseCase(commentRepository)
+export const ListenToVideoComments = new ListenToVideoCommentsUseCase(commentRepository)
+export const AddComment = new AddCommentUseCase(commentRepository)
+export const EditComment = new EditCommentUseCase(commentRepository)
+export const DeleteComment = new DeleteCommentUseCase(commentRepository)
 
 export const FindPastQuestion = new FindPastQuestionUseCase(pastQuestionRepository)
 export const GetPastQuestions = new GetPastQuestionsUseCase(pastQuestionRepository)
@@ -257,7 +257,7 @@ export { InstitutionEntity, InstitutionFactory }
 export { FlashCardEntity, FlashCardFactory }
 export { NoteEntity, NoteFactory }
 export { VideoEntity, VideoFactory }
-export { VideoCommentEntity, VideoCommentFactory }
+export { CommentEntity, CommentFactory, CommentType, CommentData }
 export { PastQuestionFactory, PastQuestionEntity }
 export { TestPrepFactory, TestPrepEntity, PrepType, PrepData }
 export { TestEntity, TestData, TestType }

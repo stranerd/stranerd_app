@@ -1,17 +1,17 @@
 import { Conditions, Listeners, QueryParams } from '@modules/core'
-import { IVideoCommentRepository } from '../../irepositories/ivideoComment'
-import { VideoCommentEntity } from '../../entities/videoComment'
+import { ICommentRepository } from '../../irepositories/icomment'
+import { CommentEntity } from '../../entities/comment'
 
 export class ListenToVideoCommentsUseCase {
-	private repository: IVideoCommentRepository
+	private repository: ICommentRepository
 
-	constructor (repository: IVideoCommentRepository) {
+	constructor (repository: ICommentRepository) {
 		this.repository = repository
 	}
 
-	async call (videoId: string, listener: Listeners<VideoCommentEntity>, date?: number) {
+	async call (videoId: string, listener: Listeners<CommentEntity>, date?: number) {
 		const conditions: QueryParams = {
-			where: [{ field: 'videoId', value: videoId }],
+			where: [{ field: 'data.videoId', value: videoId }],
 			sort: { field: 'createdAt', order: 1 },
 			all: true
 		}
