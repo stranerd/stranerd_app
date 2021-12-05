@@ -259,8 +259,6 @@ export { NoteEntity, NoteFactory }
 export { VideoEntity, VideoFactory }
 export { VideoCommentEntity, VideoCommentFactory }
 export { PastQuestionFactory, PastQuestionEntity }
-export { TestPrepFactory, TestPrepEntity }
-export { TestEntity }
-export type { PastQuestionType, PastQuestionData }
-export type { PrepType, PrepData }
-export type { TestData, TestType }
+export { TestPrepFactory, TestPrepEntity, PrepType, PrepData }
+export { TestEntity, TestData, TestType }
+export { PastQuestionType, PastQuestionData }
