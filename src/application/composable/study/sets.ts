@@ -27,6 +27,8 @@ import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } fr
 import { useAuth } from '@app/composable/auth/auth'
 import { capitalize, copyObject } from '@utils/commons'
 
+type SaveKey = keyof SetEntity['saved']
+
 const global = {
 	sets: ref([] as SetEntity[]),
 	fetched: ref(false),
@@ -275,8 +277,7 @@ export const useSaveToSet = () => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 
-	type Prop = keyof SetEntity['saved']
-	const props = ['notes', 'videos', 'flashCards', 'testPreps'] as Prop[]
+	const props = ['notes', 'videos', 'flashCards', 'testPreps'] as SaveKey[]
 
 	const obj = Object.fromEntries(
 		props.map((prop) => {
@@ -308,10 +309,50 @@ export const useSaveToSet = () => {
 
 			return [[`save${capitalize(prop)}`, save], [`remove${capitalize(prop)}`, remove]]
 		}).flat(1)
-	) as Record<`save${Capitalize<Prop>}`, (itemId: string, setId?: string) => Promise<void>>
-		& Record<`remove${Capitalize<Prop>}`, (itemId: string, setId?: string) => Promise<void>>
+	) as Record<`save${Capitalize<SaveKey>}`, (itemId: string, setId?: string) => Promise<void>>
+		& Record<`remove${Capitalize<SaveKey>}`, (itemId: string, setId?: string) => Promise<void>>
 
 	return { loading, error, ...obj }
+}
+
+export const useSaveFromASet = () => {
+	const { loading, setLoading } = useLoadingHandler()
+	const { error, setError } = useErrorHandler()
+
+	const setId = ref('')
+	const values = ref({
+		notes: [],
+		videos: [],
+		flashCards: [],
+		testPreps: []
+	} as Record<SaveKey, string[]>)
+
+	const addProp = (prop: SaveKey, id: string) => {
+		if (values.value[prop].includes(id)) return
+		values.value[prop].push(id)
+	}
+
+	const removeProp = (prop: SaveKey, id: string) => {
+		values.value[prop] = values.value[prop].filter((v) => v !== id)
+	}
+
+	const save = async () => {
+		const promises = Object.entries(values.value).map(async ([key, values]) => {
+			try {
+				await setLoading(true)
+				await SaveSetProp.call(setId.value, key as SaveKey, values)
+			} catch (e) {
+				await setError(e)
+			}
+			await setLoading(false)
+		})
+		await Promise.all(promises)
+	}
+
+	return {
+		loading, error, values, setId,
+		save, addProp, removeProp
+	}
 }
 
 export const useCreateSet = () => {
