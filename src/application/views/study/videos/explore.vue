@@ -1,6 +1,6 @@
 <template>
 	<ExploreWrapper name="video">
-		<ExploreVideos/>
+		<ExploreVideos />
 	</ExploreWrapper>
 </template>
 
@@ -12,22 +12,23 @@ import ExploreVideos from '@app//components/study/explore/ExploreVideos.vue'
 export default defineComponent({
 	name: 'Explore Videos',
 	displayName: 'Explore',
-	components: {  ExploreWrapper, ExploreVideos },
+	components: { ExploreWrapper, ExploreVideos }
 
 })
 </script>
 
 <style lang="scss" scoped>
-.ion-iten-transparent{
-    --background:transparent;
-}
+	.ion-iten-transparent {
+		--background: transparent;
+	}
 
-ion-searchbar{
-    --box-shadow:'none';
-    --border-radius:0.5rem;
-}
-.searchbar-input.sc-ion-searchbar-md{
-	padding-top: 12px;
-    padding-bottom: 12px;
-}
+	ion-searchbar {
+		--box-shadow: 'none';
+		--border-radius: 0.5rem;
+	}
+
+	.searchbar-input.sc-ion-searchbar-md {
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
 </style>

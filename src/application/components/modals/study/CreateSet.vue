@@ -7,32 +7,36 @@
 				<ion-text class="text-primary font-bold w-12">
 					TITLE
 				</ion-text>
-				<ion-input class="max-w-[1054px]  !h-14 text-left" placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
+				<ion-input v-model="factory.name"
+					class="max-w-[1054px]  !h-14 text-left"
+					placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
 					show-cancel-button="never"
-					v-model="factory.name"
 				></ion-input>
 			</div>
 			<div class="input-holder bg-light_gray  w-full rounded-md flex items-center px-4 mb-4">
-				<ion-text class="text-primary font-bold w-12 text-center"  >
+				<ion-text class="text-primary font-bold w-12 text-center">
 					TAGS
 				</ion-text>
 				<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
 					<span v-for="tag in factory.tags" :key="tag">
 						<span
 							class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-							{{ tag }}  <ion-icon :icon="close" class="ml-1 cursor-pointer text-white" @click="removeTag(tag)" />
+							{{ tag }}  <ion-icon :icon="close" class="ml-1 cursor-pointer text-white"
+								@click="removeTag(tag)" />
 						</span>
 					</span>
 				</div>
-				<ion-input class="max-w-[1054px]  !h-14 " placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
-					show-cancel-button="never" v-model="tag"></ion-input>
+				<ion-input v-model="tag"
+					class="max-w-[1054px]  !h-14 "
+					placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
+					show-cancel-button="never"></ion-input>
 
-			
+
 			</div>
 
 
 			<div class="flex items-center w-full max-w-[25rem] justify-center">
-				<ion-radio-group class="flex w-full" v-model="factory.isPublic">
+				<ion-radio-group v-model="factory.isPublic" class="flex w-full">
 					<ion-list-header>
 						<ion-label class="text-icon_inactive font-bold text-base ">
 							Set privacy:
@@ -40,20 +44,18 @@
 					</ion-list-header>
 
 					<ion-item class="w-full ion-iten-transparent">
-						<ion-radio class=" ion-white" :value="true"></ion-radio>
+						<ion-radio :value="true" class=" ion-white"></ion-radio>
 						<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Public</ion-label>
 					</ion-item>
 
 					<ion-item class="w-full ion-iten-transparent">
-						<ion-radio class=" ion-white" :value="false"></ion-radio>
+						<ion-radio :value="false" class=" ion-white"></ion-radio>
 						<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Private</ion-label>
 					</ion-item>
 				</ion-radio-group>
 			</div>
-		
+
 		</div>
-
-
 
 
 		<div class="flex flex-row  mt-5  text-white gap-4">
@@ -73,17 +75,16 @@
 		</div>
 
 	</div>
-	<PageLoading v-if="loading"/>
+	<PageLoading v-if="loading" />
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import {  IonRippleEffect } from '@ionic/vue'
+import { IonRippleEffect } from '@ionic/vue'
 import { chevronDown, ellipse, ellipseOutline } from 'ionicons/icons'
 import { useStudyModal } from '@app/composable/core/modals'
-import { useCreateSet } from '@root/application/composable/study/sets'
-import {  useTags } from '@app/composable/core/forms'
-
+import { useCreateSet } from '@app/composable/study/sets'
+import { useTags } from '@app/composable/core/forms'
 
 export default defineComponent({
 	setup () {
@@ -91,9 +92,9 @@ export default defineComponent({
 			useStudyModal().closeCreateSet()
 		}
 
-		const {createSet, factory, error,loading} = useCreateSet()
+		const { createSet, factory, error, loading } = useCreateSet()
 
-        		const { tag, removeTag } = useTags(
+		const { tag, removeTag } = useTags(
 			(tag: string) => factory.value.addTag(tag),
 			(tag: string) => factory.value.removeTag(tag)
 		)
@@ -105,7 +106,7 @@ export default defineComponent({
 		}
 	},
 	components: {
-		 IonRippleEffect
+		IonRippleEffect
 	}
 })
 </script>
@@ -115,12 +116,12 @@ export default defineComponent({
 		--placeholder-opacity: 1;
 	}
 
-	ion-radio{
-		--color: #8B9EB1 !important; 
+	ion-radio {
+		--color: #8B9EB1 !important;
 	}
 
-		ion-label{
-		--color: #8B9EB1 !important; 
+	ion-label {
+		--color: #8B9EB1 !important;
 	}
 
 

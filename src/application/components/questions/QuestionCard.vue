@@ -5,14 +5,15 @@
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex w-full items-center justify-between">
 			<div class="flex flex-row items-center gap-3">
-				<avatar :id="question.userId" :size="28" :src="question.avatar"  class="hidden lg:block" />
+				<avatar :id="question.userId" :size="28" :src="question.avatar" class="hidden lg:block" />
 				<span class="font-bold text-main_dark hidden lg:block">{{ question.userBio.fullName }}</span>
-				<div class="h-1 w-1 bg-icon_inactive rounded-full hidden lg:block"/>
-		
+				<div class="h-1 w-1 bg-icon_inactive rounded-full hidden lg:block" />
+
 				<Subject :key="question.subjectId" :subjectId="question.subjectId" class="font-bold text-main_dark" />
 
 				<div v-if="isFeatured">
-					<button class="py-1 px-3 rounded-lg text-white bg-primary font-bold flex-row items-center hidden lg:flex">
+					<button
+						class="py-1 px-3 rounded-lg text-white bg-primary font-bold flex-row items-center hidden lg:flex">
 						Featured
 					</button>
 				</div>
@@ -20,7 +21,7 @@
 			<button
 				class="py-1 px-4 rounded-lg text-white bg-dark_gray font-bold flex flex-row items-center"
 				@click="openAnswerModal(question)">
-				<span >Answer</span>
+				<span>Answer</span>
 			</button>
 		</div>
 
@@ -88,7 +89,7 @@ export default defineComponent({
 		}
 	},
 	components: {
-		 IonRippleEffect, Avatar, Subject
+		IonRippleEffect, Avatar, Subject
 	},
 	setup (props) {
 		return {

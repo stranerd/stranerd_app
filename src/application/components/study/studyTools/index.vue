@@ -71,13 +71,13 @@ export default defineComponent({
 				icon: compass,
 				title: 'Find more resources',
 				subText: 'Browse through a library of flashcards, notes, videos and sets to study with.',
-				btnText: 'Explore', route: '/study/testprep/explore'
+				btnText: 'Explore', route: '/study/preps/explore'
 			}
 		]
 
 		return {
 			cardArr,
-			isLoggedIn,
+			isLoggedIn
 		}
 	}
 })

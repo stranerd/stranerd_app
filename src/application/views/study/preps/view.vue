@@ -45,8 +45,8 @@
 						<ion-select-option value="bio">2020</ion-select-option>
 					</ion-select>
 
-					<router-link to="/study/testprep/start" class="w-full">
-						<ion-button  class="btn-primary      font-bold !w-full ">
+					<router-link class="w-full" to="/study/preps/start">
+						<ion-button class="btn-primary      font-bold !w-full ">
 							Start
 						</ion-button>
 					</router-link>

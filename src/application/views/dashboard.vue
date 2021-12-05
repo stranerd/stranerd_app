@@ -2,9 +2,9 @@
 	<DashboardLayout>
 		<div class="pl-6 lg:pl-2 pr-1.5 pt-2">
 			<RecentQuestions />
-			<ContinueStudy class="mt-8"/>
-			<MyStudy class="mt-8"/>
-			<StudyTools class="mt-8"/>
+			<ContinueStudy class="mt-8" />
+			<MyStudy class="mt-8" />
+			<StudyTools class="mt-8" />
 		</div>
 	</DashboardLayout>
 </template>
@@ -27,4 +27,3 @@ export default defineComponent({
 	}
 })
 </script>
- 

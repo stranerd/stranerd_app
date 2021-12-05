@@ -1,5 +1,5 @@
 import { BaseFactory } from '@modules/core'
-import { isBoolean, isLongerThanX, isString, isArrayOfX, hasMoreThanX, hasLessThanX } from '@stranerd/validate'
+import { hasLessThanX, hasMoreThanX, isArrayOfX, isBoolean, isLongerThanX, isString } from '@stranerd/validate'
 import { SetEntity } from '../entities/set'
 import { SetToModel } from '../../data/models/set'
 

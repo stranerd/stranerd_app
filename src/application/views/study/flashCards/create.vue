@@ -11,7 +11,7 @@
 import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import FlashCardForm from '@app/components/study/flashCards/FlashCardForm.vue'
-import { useCreateFlashCard } from '@root/application/composable/study/flashCards'
+import { useCreateFlashCard } from '@app/composable/study/flashCards'
 
 export default defineComponent({
 	name: 'Create Flashcard',

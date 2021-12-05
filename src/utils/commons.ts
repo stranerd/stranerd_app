@@ -55,3 +55,7 @@ export const copyToClipboard = async (data: string) => {
 	}
 	return false
 }
+
+export function copyObject<T extends Record<any, any>> (target: T, ...sources: T[]) {
+	return Object.assign(target, ...sources)
+}

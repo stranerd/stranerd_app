@@ -12,28 +12,28 @@
 		</div>
 
 		<div class="flex items-center justify-center flex-col lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white ">
-			<ion-text class="text-4xl text-main_dark font-bold">Splendid!</ion-text>	
+			<ion-text class="text-4xl text-main_dark font-bold">Splendid!</ion-text>
 
 			<div class="h-60 w-60 rounded-full grid place-items-center bg-light_blue my-12">
 				<DonutChart :score="70" :size="180" :total="100" />
-			</div>	
+			</div>
 
 			<ion-text class="text-main_dark my-4">
-				Correct answers - <b>38/40 </b> 
+				Correct answers - <b>38/40 </b>
 			</ion-text>
 			<ion-text class="text-main_dark">
-				Time used - <b>33m 46s </b> 
+				Time used - <b>33m 46s </b>
 			</ion-text>
 
 			<div class="md:w-80 mt-20 mx-auto w-full px-4 flex items-center justify-between">
 				<ion-text class="text-primary cursor-pointer">
-					See <b>Solutions</b> 
+					See <b>Solutions</b>
 				</ion-text>
-				
+
 				<router-link class="text-primary cursor-pointer" to="/study">
-					Back to <b> My Study</b> 
+					Back to <b> My Study</b>
 				</router-link>
-			
+
 			</div>
 
 		</div>
@@ -45,38 +45,40 @@
 <script lang="ts">
 import Justified from '@app/layouts/Justified.vue'
 
-
 export default {
 	name: 'submitted testprep',
 	displayName: 'Test Prep',
 	components: {
-		Justified,
+		Justified
 
 	},
 	setup () {
 
-		return { }
+		return {}
 	}
 }
 </script>
 
 
 <style lang="scss" scoped>
-.btn-lgx {
-    @media (min-width: 1042px){
-	--padding-top: 1.5rem;
-	--padding-bottom: 1.5rem;
-	--padding-start: 4.5rem;
-	--padding-end: 4.5rem;
-    }
+	.btn-lgx {
+		@media (min-width: 1042px) {
+			--padding-top: 1.5rem;
+			--padding-bottom: 1.5rem;
+			--padding-start: 4.5rem;
+			--padding-end: 4.5rem;
+		}
 
-}
+	}
+
 	.footer-shadow {
 		box-shadow: 0px -5px 5px rgba(139, 158, 177, 0.05);
 	}
-input[type="radio"]:checked+label{
-     @apply border-primary
-      } 
+
+	input[type="radio"]:checked + label {
+		@apply border-primary
+	}
+
 	.segment-button-checked {
 		color: white !important
 	}

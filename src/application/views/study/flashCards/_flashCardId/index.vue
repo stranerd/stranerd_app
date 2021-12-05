@@ -121,7 +121,7 @@ import {
 	shareSocial
 } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
-import { openFlashCardEditModal, useFlashCard } from '@root/application/composable/study/flashCards'
+import { openFlashCardEditModal, useFlashCard } from '@app/composable/study/flashCards'
 import { useRoute, useRouter } from 'vue-router'
 import { Alert } from '@app/composable/core/notifications'
 import { useAuth } from '@app/composable/auth/auth'

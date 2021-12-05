@@ -1,6 +1,6 @@
 <template>
 	<ExploreWrapper name="testprep">
-		<ExploreTestPrep/>
+		<ExploreTestPrep />
 	</ExploreWrapper>
 </template>
 
@@ -8,24 +8,26 @@
 import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/study/explore/ExploreWrapper.vue'
 import ExploreTestPrep from '@app//components/study/explore/ExploreTestPrep.vue'
+
 export default defineComponent({
 	name: 'Explore TestPreps',
 	displayName: 'Explore',
-	components: {  ExploreWrapper, ExploreTestPrep }
+	components: { ExploreWrapper, ExploreTestPrep }
 })
 </script>
 
 <style lang="scss" scoped>
-.ion-iten-transparent{
-    --background:transparent;
-}
+	.ion-iten-transparent {
+		--background: transparent;
+	}
 
-ion-searchbar{
-    --box-shadow:'none';
-    --border-radius:0.5rem;
-}
-.searchbar-input.sc-ion-searchbar-md{
-	padding-top: 12px;
-    padding-bottom: 12px;
-}
+	ion-searchbar {
+		--box-shadow: 'none';
+		--border-radius: 0.5rem;
+	}
+
+	.searchbar-input.sc-ion-searchbar-md {
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
 </style>

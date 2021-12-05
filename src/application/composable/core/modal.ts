@@ -15,7 +15,7 @@ export const useModal = (stack: Ref<string[]>) => {
 		modals[id].modal?.dismiss?.()
 	}
 
-	const open = async (id: string , cssClass: string) => {
+	const open = async (id: string, cssClass: string) => {
 		close(id)
 		if (Object.keys(modals).includes(id)) {
 			modals[id].modal = await modalController

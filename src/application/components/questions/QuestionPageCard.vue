@@ -1,11 +1,12 @@
 <template>
 	<div>
-		<div class="py-4 px-4 rounded-xl bg-light_gray flex flex-col text-xs md:text-sm border border-faded_gray lg:border-0">
+		<div
+			class="py-4 px-4 rounded-xl bg-light_gray flex flex-col text-xs md:text-sm border border-faded_gray lg:border-0">
 			<IonRippleEffect class="rounded-lg" />
 			<div class="flex flex-row items-center gap-4">
-				<avatar :id="question.userId" :size="28" :src="question.avatar"  class="hidden lg:block" />
+				<avatar :id="question.userId" :size="28" :src="question.avatar" class="hidden lg:block" />
 				<span class="font-bold text-main_dark hidden lg:block">{{ question.userBio.fullName }}</span>
-				<div class="h-1 w-1 bg-icon_inactive rounded-full hidden lg:block"/>
+				<div class="h-1 w-1 bg-icon_inactive rounded-full hidden lg:block" />
 				<Subject :subjectId="question.subjectId" class="font-semibold text-main_dark" />
 				<div class="flex flex-row-reverse flex-grow">
 					<IonIcon :icon="flag" class="text-[22px]  text-main_dark cursor-pointer"
@@ -17,14 +18,14 @@
 				</div>
 			</div>
 
-		
 
 			<span class="py-2 text-main_dark  mb-3 lg:mb-5" v-html="question.body" />
 
 			<div class="w-full flex flex-wrap items-center lg:justify-between ">
 				<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">
 					<span v-for="tag in question.tags" :key="tag">
-						<span v-if="tag" class="py-1 px-4 font-bold text-white bg-icon_inactive rounded-2xl inline-block">
+						<span v-if="tag"
+							class="py-1 px-4 font-bold text-white bg-icon_inactive rounded-2xl inline-block">
 							{{ tag }}
 						</span>
 					</span>
@@ -71,7 +72,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { IonIcon, IonRippleEffect } from '@ionic/vue'
-import { shareSocial, flag, pencil,  trashBinOutline } from 'ionicons/icons'
+import { flag, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/Avatar.vue'

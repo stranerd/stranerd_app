@@ -23,7 +23,6 @@ const SessionModals = { CreateSession } as Record<SessionTypes, any>
 const ReportModals = { ReportUser, ReportQuestion, ReportAnswer } as Record<ReportTypes, any>
 const StudyModals = { SubmitTestprep, RateFlashcard, CreateSet, AddSet } as Record<StudyTypes, any>
 
-
 export const modal = useModal(ref([] as string[]))
 const ScheduleModal = modal.register('Schedule', ScheduleModals, 'modal-class')
 const UploadModal = modal.register('Upload', UploadModals, 'modal-class')

@@ -12,7 +12,7 @@
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>
 		</div>
- 
+
 		<template v-if="sets.length === 0">
 			<div class="py-3">
 				<empty-state
@@ -30,13 +30,12 @@
 
 			</Swiper>
 		</template>
-	
+
 
 	</div>
 </template>
 
 
-	
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { IonIcon } from '@ionic/vue'
@@ -48,7 +47,7 @@ import MyStudyCard from './MyStudyCard.vue'
 
 export default defineComponent({
 	name: 'RecentTransactions',
-	components: { IonIcon, Swiper,  MyStudyCard },
+	components: { IonIcon, Swiper, MyStudyCard },
 	setup () {
 		const { id, isLoggedIn } = useAuth()
 		const { sets: allSets, listener, loading, error } = useSetList()
@@ -61,11 +60,10 @@ export default defineComponent({
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 
-
 		return {
 			sets,
 			chevronForwardOutline, chevronBackOutline, ellipse,
-			 isLoggedIn, 
+			isLoggedIn
 		}
 	}
 })

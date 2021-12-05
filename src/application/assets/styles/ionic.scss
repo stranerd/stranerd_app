@@ -95,19 +95,22 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-light-shade: #d7d8da;
 	--ion-color-light-tint: #f5f6f9;
 
-	
+
 }
+
 // custom colors
-.ion-white{
+.ion-white {
 	--color: white !important;
 	--color-checked: white !important;
-	
+
 }
-.ion-bg-white{
+
+.ion-bg-white {
 	--background: white !important;
 }
-.ion-rounded-xl{
-    --border-radius:0.75rem !important;
+
+.ion-rounded-xl {
+	--border-radius: 0.75rem !important;
 }
 
 .study-modal{
@@ -127,11 +130,12 @@ http://ionicframework.com/docs/theming/ */
 	--width: 400px;
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
-		--height:21.875rem !important;
+		--height: 21.875rem !important;
 		--width: 80vw;
 		--border-radius: 0.75rem;
 	}
 }
+
 .modal-class {
 	--background-color: #00000065;
 	--height: 39rem;
@@ -149,20 +153,20 @@ http://ionicframework.com/docs/theming/ */
 		display: none;
 	}
 }
-.searchbar-input{
+
+.searchbar-input {
 	padding-top: 0.7rem !important;
-    padding-bottom: 0.7rem !important;
+	padding-bottom: 0.7rem !important;
 }
 
 .searchbar-search-icon.sc-ion-searchbar-md, .searchbar-cancel-button.sc-ion-searchbar-md {
-    position: absolute;
-    margin-top: 5px !important;
+	position: absolute;
+	margin-top: 5px !important;
 }
 
 
-
-.btn-secondary{
-		--background: #4D5C6F;
+.btn-secondary {
+	--background: #4D5C6F;
 
 	--color: white;
 
@@ -179,24 +183,24 @@ http://ionicframework.com/docs/theming/ */
 	text-transform: capitalize !important;
 	letter-spacing: 0.02rem !important;
 
-		@media (max-width: 640px) {
-	--padding-top: 0.8rem;
-	--padding-bottom: 0.8rem;
-	--padding-start: 1rem;
-	--padding-end: 1rem;
-	--box-shadow: none;
-	--border-radius: .5rem;
-	--border-width: 1px;
-	--border-style: solid;
-	--border-color: #4D5C6F;
-	font-weight: 700;
-	text-transform: capitalize !important;
-	letter-spacing: 0.01rem !important;
+	@media (max-width: 640px) {
+		--padding-top: 0.8rem;
+		--padding-bottom: 0.8rem;
+		--padding-start: 1rem;
+		--padding-end: 1rem;
+		--box-shadow: none;
+		--border-radius: .5rem;
+		--border-width: 1px;
+		--border-style: solid;
+		--border-color: #4D5C6F;
+		font-weight: 700;
+		text-transform: capitalize !important;
+		letter-spacing: 0.01rem !important;
 	}
-	
+
 }
 
-.btn-outline{
+.btn-outline {
 	--background: transparent;
 	--padding-top: 1.3rem;
 	--padding-bottom: 1.3rem;
@@ -212,23 +216,23 @@ http://ionicframework.com/docs/theming/ */
 	text-transform: capitalize !important;
 	letter-spacing: 0.02rem !important;
 
-		@media (max-width: 640px) {
-	--background: transparent;
-	--padding-top: 0.8rem;
-	--padding-bottom: 0.8rem;
-	--padding-start: 1rem;
-	--padding-end: 1rem;
-	--color: white;
-	--box-shadow: none;
-	--border-radius: .5rem;
-	--border-width: 1px;
-	--border-style: solid;
-	--border-color: #4D5C6F;
-	font-weight: 700;
-	text-transform: capitalize !important;
-	letter-spacing: 0.01rem !important;
+	@media (max-width: 640px) {
+		--background: transparent;
+		--padding-top: 0.8rem;
+		--padding-bottom: 0.8rem;
+		--padding-start: 1rem;
+		--padding-end: 1rem;
+		--color: white;
+		--box-shadow: none;
+		--border-radius: .5rem;
+		--border-width: 1px;
+		--border-style: solid;
+		--border-color: #4D5C6F;
+		font-weight: 700;
+		text-transform: capitalize !important;
+		letter-spacing: 0.01rem !important;
 	}
-	
+
 }
 
 .btn-primary {
@@ -248,13 +252,13 @@ http://ionicframework.com/docs/theming/ */
 	text-transform: capitalize !important;
 	letter-spacing: 0.02rem !important;
 }
+
 .btn-lg {
 	--padding-top: 1.5rem;
 	--padding-bottom: 1.5rem;
 	--padding-start: 4.5rem;
 	--padding-end: 4.5rem;
 }
-
 
 
 ion-input {

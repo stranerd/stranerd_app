@@ -95,11 +95,11 @@ import { add, bookmark, chevronDown, chevronUp, contract, pencil, remove, scan, 
 import Avatar from '@app/components/core/Avatar.vue'
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { useNote } from '@root/application/composable/study/notes'
+import { useNote } from '@app/composable/study/notes'
 
 //@ts-ignore
 import pdfvuer from 'pdfvuer'
-import Share from '@root/application/components/core/Share.vue'
+import Share from '@app/components/core/Share.vue'
 
 export default defineComponent({
 	name: 'view Notes',
@@ -142,7 +142,7 @@ export default defineComponent({
 			add, remove, scan, chevronDown,
 			chevronUp, pencil, contract, bookmark, shareSocial
 		}
-	},
+	}
 
 })
 </script>

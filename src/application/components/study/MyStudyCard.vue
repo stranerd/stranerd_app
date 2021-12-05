@@ -55,7 +55,7 @@ import { SetEntity } from '@root/modules/study'
 import notesCard from './notes/NoteListCard.vue'
 import VideoCard from './videos/VideoListCard.vue'
 import FlashcardsCard from './flashCards/StudyFlashCardCard.vue'
-import TestPrepCard from './testPrep/card/TestPrepCard.vue'
+import TestPrepCard from './testPreps/TestPrepCard.vue'
 
 export default defineComponent({
 	components: { notesCard, VideoCard, FlashcardsCard, TestPrepCard },

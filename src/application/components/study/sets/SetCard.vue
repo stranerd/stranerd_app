@@ -5,14 +5,14 @@
 		>
 			<div class="flex items-start justify-between w-full  ">
 				<ion-icon
-					class="text-main_dark text-7xl mr-4 -mt-4"
 					:icon="folder"
+					class="text-main_dark text-7xl mr-4 -mt-4"
 				/>
 				<ion-text class="text-base text-main_dark font-bold ">
-					{{set.name}}
+					{{ set.name }}
 				</ion-text>
 			</div>
-	
+
 		</div>
 		<ion-text class="font-bold text-delete_red cursor-pointer">
 			Remove
@@ -22,44 +22,40 @@
 </template>
 
 
-
 <script lang="ts">
 
 import { folder } from 'ionicons/icons'
-import { defineComponent,  } from 'vue'
+import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
 import { SetEntity } from '@modules/study/'
-
-
 
 export default defineComponent({
 	name: 'TutorCard',
 
 	props: {
-		set:{
+		set: {
 			type: SetEntity,
-			required:true
+			required: true
 		},
 		index: {
 			type: Number,
 			required: false
-		},
+		}
 	},
-	setup() {
-		const bgColor = (index: any)=>{
-			if (index === 1 ) return 'bg-light_green'
-			else if (index ===2) return 'bg-tinted_pink'
-			else if(index === 3) return 'bg-butter_yellow'
+	setup () {
+		const bgColor = (index: any) => {
+			if (index === 1) return 'bg-light_green'
+			else if (index === 2) return 'bg-tinted_pink'
+			else if (index === 3) return 'bg-butter_yellow'
 		}
 		return {
 			bgColor,
 			formatNumber,
-			folder,
+			folder
 		}
-	},
+	}
 })
 </script>
-
 
 
 <style lang="scss" scoped>
