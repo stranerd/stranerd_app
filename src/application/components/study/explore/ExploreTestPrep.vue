@@ -11,7 +11,7 @@
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
-				<TestPrepCard  v-for="testPrep in testPreps" :key="testPrep.id" title="Jamb"/>
+				<TestPrepCard  v-for="testPrep in testPreps" :key="testPrep.id" :testPrep="testPrep"/>
 			</div>
 		</template>
 

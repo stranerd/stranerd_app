@@ -1,15 +1,16 @@
 <template>
 	<div
 		:class="`m-0  h-[7.5rem] min-w-[16.5rem] cardPadding ${colorClass}  w-full rounded-xl  flex flex-col md:gap-2 gap-[1rem] box-border  p-5 border border-faded_gray lg:border-0`"
+		v-if="testPrep"
 	>
 		<div class="flex flex-col items-center justify-between w-full  mx-auto">
 		
              
 			<ion-text class="text-xl text-left w-full text-main_dark font-bold ml-2">
-				{{testPreps.name}}
+				{{testPrep.name}}
 			</ion-text>
 			<ion-text class="text-sm text-left w-full text-main_dark font-bold mt-1 ml-2">
-				{{testPreps.data}}
+				{{testPrep.data.type}}
 			</ion-text>
 
 			<ion-progress-bar value="0.5" class="mt-6"></ion-progress-bar>
@@ -34,7 +35,7 @@ export default defineComponent({
 			type: String,
 			default: 'bg-light_gray'
 		},
-		testPreps:{
+		testPrep:{
 			required:true,
 			type: TestPrepEntity
 		}

@@ -7,20 +7,20 @@
 				<ion-text class="text-primary font-bold w-12">
 					TITLE
 				</ion-text>
-				<ion-input class="max-w-[1054px]  !h-14 " placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
+				<ion-input class="max-w-[1054px]  !h-14 text-left" placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
 					show-cancel-button="never"
 					v-model="factory.name"
 				></ion-input>
 			</div>
 			<div class="input-holder bg-light_gray  w-full rounded-md flex items-center px-4 mb-4">
-				<ion-text class="text-primary font-bold w-12" >
+				<ion-text class="text-primary font-bold w-12 text-center"  >
 					TAGS
 				</ion-text>
 				<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
 					<span v-for="tag in factory.tags" :key="tag">
 						<span
 							class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-							{{ tag }}  <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
+							{{ tag }}  <ion-icon :icon="close" class="ml-1 cursor-pointer text-white" @click="removeTag(tag)" />
 						</span>
 					</span>
 				</div>
@@ -111,11 +111,17 @@ export default defineComponent({
 </script>
 <style scoped>
 	ion-input {
-		/* Set a different placeholder color */
 		--placeholder-color: #8B9EB1;
-
-		/* Set full opacity on the placeholder */
 		--placeholder-opacity: 1;
 	}
+
+	ion-radio{
+		--color: #8B9EB1 !important; 
+	}
+
+		ion-label{
+		--color: #8B9EB1 !important; 
+	}
+
 
 </style>
