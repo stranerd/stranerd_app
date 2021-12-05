@@ -8,6 +8,7 @@ import {
 	ListenToTests,
 	PastQuestionEntity,
 	TestEntity,
+	TestPrepEntity,
 	TestType,
 	UpdateTestAnswer
 } from '@modules/study'
@@ -83,7 +84,7 @@ export const useTestList = () => {
 	}
 }
 
-export const useCreateTest = (prepId: string) => {
+export const useCreateTest = (prep: TestPrepEntity) => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
@@ -93,7 +94,11 @@ export const useCreateTest = (prepId: string) => {
 		if (!loading.value) {
 			try {
 				await setLoading(true)
-				await AddTest.call(prepId, timed ? TestType.timed : TestType.unTimed)
+				await AddTest.call({
+					name: prep.name,
+					prepId: prep.id,
+					type: timed ? TestType.timed : TestType.unTimed
+				})
 				await setMessage('Test created successfully')
 			} catch (error) {
 				await setError(error)

@@ -3,7 +3,7 @@
 		<!-- TODO: Break into sections -->
 		<div class="bg-primary w-full min-h-[150px] flex flex-col justify-center items-center pt-0 pb-1">
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
-				{{note?.title}}
+				{{ note?.title }}
 			</ion-text>
 			<!-- <div class="flex items-center md:flex-row flex-col">
 				<div class="flex items-center mr-6">
@@ -22,11 +22,11 @@
 			<div
 				:class="[false ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
 
-		
-				<pdf :src="pdfdata" v-for="i in numPages" :key="i" :id="i" :page="i"
-					:scale="1" style="width:80%;margin:20px auto;"
-					:annotation="true"
-					:resize="true"
+
+				<pdf v-for="i in numPages" :id="i" :key="i" :annotation="true" :page="i"
+					:resize="true" :scale="1"
+					:src="pdfdata"
+					style="width:80%;margin:20px auto;"
 				>
 					<template v-slot:loading>
 						loading content here...
@@ -48,21 +48,21 @@
 						</div>
 						<div class="py-2 px-4 flex justify-center items-center">
 							<ion-icon :icon="scan"/>
-				
+
 						</div>
-				
+
 					</div>
 				</div> -->
-			
+
 			</div>
 
 		</div>
-	
+
 		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
 			<div class="lg:w-8/12 max-w-[60rem] w-full px-4 mx-auto flex items-center justify-between">
-				<div class="flex" v-if="note">
-					<Avatar :size="28" class="mx-2" :src="note?.userBio?.photo" :id="note?.userId" />
-					<ion-text class="text-icon_inactive"> by <b>{{note?.userBio.firstName}}</b></ion-text>
+				<div v-if="note" class="flex">
+					<Avatar :id="note?.userId" :size="28" :src="note?.userBio?.photo" class="mx-2" />
+					<ion-text class="text-icon_inactive"> by <b>{{ note?.userBio.firstName }}</b></ion-text>
 				</div>
 
 				<div class="flex items-center ">
@@ -78,24 +78,22 @@
 					<Share
 						cssClass="text-icon_inactive text-xl cursor-pointer mx-2"
 					/>
-				
+
 				</div>
 			</div>
 		</div>
 
 
 	</Justified>
-	<page-loading v-if="loading && pdfLoading"/>
+	<page-loading v-if="loading && pdfLoading" />
 </template>
-
-
 
 <script lang="ts">
 import Justified from '@app/layouts/Justified.vue'
 import { add, bookmark, chevronDown, chevronUp, contract, pencil, remove, scan, shareSocial } from 'ionicons/icons'
 // import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
-import { defineComponent, onMounted, onBeforeUnmount, ref, computed, watch } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useNote } from '@root/application/composable/study/notes'
 
@@ -103,10 +101,9 @@ import { useNote } from '@root/application/composable/study/notes'
 import pdfvuer from 'pdfvuer'
 import Share from '@root/application/components/core/Share.vue'
 
-
-export default defineComponent( {
+export default defineComponent({
 	name: 'view Notes',
-	displayName: 'Notes', 
+	displayName: 'Notes',
 	components: {
 		Justified,
 		Avatar,
@@ -114,25 +111,22 @@ export default defineComponent( {
 		Share
 	},
 	setup () {
-		
-
-		const { id } = useRoute().params
-		const {error, loading, note, listener} = useNote(id as string)
+		const { noteId } = useRoute().params
+		const { error, loading, note, listener } = useNote(noteId as string)
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 
-		const page = ref(1) 
-		const scale = ref(1) 
-		const numPages = ref(0) 
-		const pdfdata = ref(undefined) 
-		const pdfLoading = ref(true) 
-		const formattedZoom =	computed(()=>{
-			return scale.value *100
+		const page = ref(1)
+		const scale = ref(1)
+		const numPages = ref(0)
+		const pdfdata = ref(undefined)
+		const pdfLoading = ref(true)
+		const formattedZoom = computed(() => {
+			return scale.value * 100
 		})
 
+		const getPdf = () => {
 
-		const getPdf = ()=> {
-			
 			pdfdata.value = pdfvuer.createLoadingTask('https://arkokoley.github.io/pdfvuer/nationStates.pdf')
 			//@ts-ignore
 			pdfdata?.value?.then((pdf: any) => {
@@ -141,20 +135,17 @@ export default defineComponent( {
 			})
 		}
 
-
 		//@ts-ignore
 		onMounted(getPdf)
 		return {
-			page,pdfdata, note, loading,scale, numPages,pdfLoading,
-			add,remove, scan, chevronDown,
-			chevronUp,  pencil, contract, bookmark, shareSocial
+			page, pdfdata, note, loading, scale, numPages, pdfLoading,
+			add, remove, scan, chevronDown,
+			chevronUp, pencil, contract, bookmark, shareSocial
 		}
 	},
 
 })
 </script>
-
-
 
 <style lang="scss" scoped>
 	.footer-shadow {
