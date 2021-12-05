@@ -119,9 +119,9 @@ http://ionicframework.com/docs/theming/ */
 	--width: 800px;
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
-		--height:21.875rem !important;
-		--width: 80vw;
-		--border-radius: 0.75rem;
+		--height:100vh !important;
+		--width: 100vw;
+		--border-radius: 0rem;
 	}
 }
 .sm-modal {

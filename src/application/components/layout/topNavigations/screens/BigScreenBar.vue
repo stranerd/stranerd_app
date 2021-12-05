@@ -182,7 +182,7 @@ export default defineComponent({
 		const showSearch = ref(false)
 
 		const createSet = ()=>{
-			useStudyModal().openAddSet()
+			useStudyModal().openCreateSet()
 		}
 
 		return {
@@ -190,8 +190,7 @@ export default defineComponent({
 			setMenuPopover, setStudyPopover, createSet,
 			event, addCircle, helpCircle, chevronDown,
 			folder, library, settings, logOut,
-			person, podium,
-			user, notifications
+			person, podium,	user, notifications
 		}
 	}
 
