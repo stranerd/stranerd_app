@@ -173,7 +173,7 @@ export default defineComponent( {
 		const showSearch = ref(false)
 
 		const createSet = ()=>{
-			useStudyModal().openCreateSet()
+			useStudyModal().openAddSet()
 		}
 	
 		return {

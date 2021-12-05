@@ -12,7 +12,6 @@
 				class="text-icon_inactive px-10 mt-1 md:px-12">
 
 				<slot name="subtext">
-					Default Sub text
 				</slot>
 
 			</span>

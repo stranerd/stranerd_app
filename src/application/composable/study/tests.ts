@@ -109,7 +109,7 @@ export const useTest = (test: TestEntity) => {
 	if (testGlobal[test.id] === undefined) testGlobal[test.id] = {
 		questions: ref([]),
 		fetched: ref(false),
-		...useErrorHandler(),
+		...useErrorHandler(), 
 		...useLoadingHandler()
 	}
 
