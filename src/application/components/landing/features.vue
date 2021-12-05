@@ -7,10 +7,10 @@
 				</h2>
 				<div class="flex flex-wrap gap-5 justify-center items-center my-10">
 					<div class="w-44 my-5">
-						<img src="@app/assets/images/features/techpoint.png" alt="">
+						<img alt="" src="@app/assets/images/features/techpoint.png">
 					</div>
 					<div class="w-44 my-5">
-						<img src="@app/assets/images/features/technext.png" alt="">
+						<img alt="" src="@app/assets/images/features/technext.png">
 					</div>
 				</div>
 			</div>
@@ -20,7 +20,7 @@
 
 <script lang="ts">
 export default {
-	name: '',
+	name: ''
 }
 </script>
 

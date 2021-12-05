@@ -10,14 +10,16 @@
 						<div class="w-1/2 flex-auto">
 							<div class="">
 								<div class="mb-10">
-									<img src="@app/assets/images/get-started/figure1.png" class="w-full rounded-md" alt="">
+									<img alt="" class="w-full rounded-md"
+										src="@app/assets/images/get-started/figure1.png">
 								</div>
 							</div>
 						</div>
 						<div class="w-1/2 flex-auto">
 							<div class="">
 								<div class="mt-10">
-									<img src="@app/assets/images/get-started/figure2.png" class="w-full rounded-md" alt="">
+									<img alt="" class="w-full rounded-md"
+										src="@app/assets/images/get-started/figure2.png">
 								</div>
 							</div>
 						</div>
@@ -26,20 +28,23 @@
 						<div class="w-1/2 flex-auto">
 							<div class="">
 								<div class="mb-10">
-									<img src="@app/assets/images/get-started/figure3.png" class="w-full rounded-md" alt="">
+									<img alt="" class="w-full rounded-md"
+										src="@app/assets/images/get-started/figure3.png">
 								</div>
 							</div>
 						</div>
 						<div class="w-1/2 flex-auto">
 							<div class="">
 								<div class="mt-10">
-									<img src="@app/assets/images/get-started/figure4.png" class="w-full rounded-md" alt="">
+									<img alt="" class="w-full rounded-md"
+										src="@app/assets/images/get-started/figure4.png">
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<router-link to="" class="bg-primary rounded-md block text-white text-sm text-center font-bold w-44 lg:w-80 py-4 my-10 mx-auto">
+				<router-link class="bg-primary rounded-md block text-white text-sm text-center font-bold w-44 lg:w-80 py-4 my-10 mx-auto"
+					to="">
 					Get Started
 				</router-link>
 			</div>
@@ -49,7 +54,7 @@
 
 <script lang="ts">
 export default {
-	name: '',
+	name: ''
 }
 </script>
 

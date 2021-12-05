@@ -4,10 +4,8 @@
 
 		<div class="flex flex-col gap-1 text-center justify-center items-center ">
 			<h3 class="text-xl font-semibold text-main_dark">Are you sure you want to submit?</h3>
-		
+
 		</div>
-
-
 
 
 		<div class="flex flex-row  mt-5  text-white gap-4">
@@ -31,7 +29,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import {  IonRippleEffect } from '@ionic/vue'
+import { IonRippleEffect } from '@ionic/vue'
 import { chevronDown, ellipse, ellipseOutline } from 'ionicons/icons'
 import { useStudyModal } from '@app/composable/core/modals'
 
@@ -48,7 +46,7 @@ export default defineComponent({
 		}
 	},
 	components: {
-		 IonRippleEffect
+		IonRippleEffect
 	}
 })
 </script>

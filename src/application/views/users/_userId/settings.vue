@@ -12,7 +12,7 @@
 import { defineComponent } from 'vue'
 import UserSettings from '@app/components/users/users/UserSettings.vue'
 import { useAuth } from '@app/composable/auth/auth'
-import Justified from '@root/application/layouts/Justified.vue'
+import Justified from '@app/layouts/Justified.vue'
 
 export default defineComponent({
 	name: 'UserIdSettings',
@@ -22,6 +22,6 @@ export default defineComponent({
 		const authId = useAuth().id.value
 		if (userId !== authId) return `/users/${userId}/`
 	}],
-	components: {  UserSettings, Justified }
+	components: { UserSettings, Justified }
 })
 </script>

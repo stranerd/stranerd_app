@@ -1,5 +1,5 @@
 <template>
-	<form  @submit.prevent="submit">
+	<form @submit.prevent="submit">
 		<div class="lg:mt-3 border border-faded_gray rounded-xl px-1">
 			<IonTextarea v-model="factory.body" class="bg-white border-0 focus:outline-none w-full"
 				placeholder="Write your question here and make sure it is explained in full detail."
@@ -62,7 +62,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { IonIcon, IonInput,  IonTextarea } from '@ionic/vue'
+import { IonIcon, IonInput, IonTextarea } from '@ionic/vue'
 import { close, image } from 'ionicons/icons'
 import { useMultipleFileInputs, useTags } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'

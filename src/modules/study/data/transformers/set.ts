@@ -13,7 +13,7 @@ export class SetTransformer {
 		return {
 			name: entity.name,
 			isPublic: entity.isPublic,
-			tags:entity.tags
+			tags: entity.tags
 		}
 	}
 }

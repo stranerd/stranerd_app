@@ -65,6 +65,7 @@ export class QuestionEntity extends BaseEntity {
 	get trimmedBody () {
 		return trimToLength(this.strippedBody, 60)
 	}
+
 	get shortBody () {
 		return trimToLength(this.strippedBody, 110)
 	}

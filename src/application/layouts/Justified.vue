@@ -7,7 +7,7 @@
 			</div>
 		</IonContent>
 		<BottomNav class="mt-auto" />
-		<Fab/>
+		<Fab />
 	</IonPage>
 </template>
 
@@ -17,9 +17,6 @@ import { IonContent, IonPage } from '@ionic/vue'
 import InnerTopBar from '@app/components/layout/topNavigations/InnerTopBar.vue'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 import Fab from '@app/components/layout/Fab.vue'
-
-
-
 
 export default defineComponent({
 	name: 'JustifiedLayout',

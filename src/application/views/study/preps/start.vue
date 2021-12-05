@@ -7,7 +7,7 @@
 				<ion-text class="text-white font-semibold text-center text-xl">
 					JAMB > Test (Timed) > Mathematics (2021)
 
-					{{tests}}
+					{{ tests }}
 				</ion-text>
 
 			</div>
@@ -23,31 +23,34 @@
 				</ion-segment-button>
 			</ion-segment>
 
-			<div class="flex flex-col w-full" v-for="num in 10" :key="num">
+			<div v-for="num in 10" :key="num" class="flex flex-col w-full">
 				<div class="flex item-center justify-between  mb-8 mt-10">
 					<ion-text class="text-main_dark font-bold md:text-2xl">
-						Question {{num}}
+						Question {{ num }}
 					</ion-text>
 					<div class="flex items-center text-lg text-icon_inactive gap-4">
-						<ion-icon 
+						<ion-icon
 							:icon="flag"
 						/>
-						<ion-icon 
+						<ion-icon
 							:icon="ellipsisVertical"
 						/>
 					</div>
 				</div>
-			
+
 				<ion-text class="text-main_dark   mb-8">
-					Which of the following completely describes the number of points in which two distinct quadratic functions can intersect?
+					Which of the following completely describes the number of points in which two distinct quadratic
+					functions can intersect?
 				</ion-text>
 
 				<div class="answers flex flex-col">
-					<div class="flex w-full hover:bg-light_gray px-5 py-3" v-for="n in ['A', 'B', 'C', 'D']" :key="n">
-						<input type="radio" :name="`${num}`" :id="n+num" class="hidden">
-						<label :for="n+num" :name="`${num}`" class="label border-4 rounded-full border-light_gray h-8 w-8 text-base font-bold grid place-items-center  hover:border-primary"> {{n}}</label>
-						<ion-text class="text-lg ml-5">{{n}}</ion-text>
-						
+					<div v-for="n in ['A', 'B', 'C', 'D']" :key="n" class="flex w-full hover:bg-light_gray px-5 py-3">
+						<input :id="n+num" :name="`${num}`" class="hidden" type="radio">
+						<label :for="n+num" :name="`${num}`"
+							class="label border-4 rounded-full border-light_gray h-8 w-8 text-base font-bold grid place-items-center  hover:border-primary">
+							{{ n }}</label>
+						<ion-text class="text-lg ml-5">{{ n }}</ion-text>
+
 					</div>
 				</div>
 
@@ -59,14 +62,14 @@
 					<div class="flex">
 						<ion-text class="text-main_dark"> 2/40 answered</ion-text>
 					</div>
-                    
+
 					<div class="flex items-center">
-						<div class="h-2 w-2 bg-red-500 rounded-full mr-4"/>
+						<div class="h-2 w-2 bg-red-500 rounded-full mr-4" />
 						<ion-text class="text-icon_inactive">
 							00:28:20
 						</ion-text>
 					</div>
-				
+
 
 					<div class="flex items-center">
 
@@ -84,10 +87,11 @@
 
 <script lang="ts">
 import Justified from '@app/layouts/Justified.vue'
-import { IonSegment, IonSegmentButton, } from '@ionic/vue'
-import { ellipsisVertical, flag,  } from 'ionicons/icons'
+import { IonSegment, IonSegmentButton } from '@ionic/vue'
+import { ellipsisVertical, flag } from 'ionicons/icons'
 import { useStudyModal } from '@app/composable/core/modals'
-import { useTestList } from '@root/application/composable/study/tests'
+import { useTestList } from '@app/composable/study/tests'
+
 export default {
 	name: 'start testprep',
 	displayName: 'Test Prep',
@@ -98,7 +102,7 @@ export default {
 	},
 	setup () {
 		const { tests, error, loading, fetchOlderTests } = useTestList()
-		const submit = ()=>{
+		const submit = () => {
 			useStudyModal().openSubmitTestprep()
 		}
 		return { submit, ellipsisVertical, flag, tests, error, loading, fetchOlderTests }
@@ -108,21 +112,24 @@ export default {
 
 
 <style lang="scss" scoped>
-.btn-lgx {
-    @media (min-width: 1042px){
-	--padding-top: 1.5rem;
-	--padding-bottom: 1.5rem;
-	--padding-start: 4.5rem;
-	--padding-end: 4.5rem;
-    }
+	.btn-lgx {
+		@media (min-width: 1042px) {
+			--padding-top: 1.5rem;
+			--padding-bottom: 1.5rem;
+			--padding-start: 4.5rem;
+			--padding-end: 4.5rem;
+		}
 
-}
+	}
+
 	.footer-shadow {
 		box-shadow: 0px -5px 5px rgba(139, 158, 177, 0.05);
 	}
-input[type="radio"]:checked+label{
-     @apply border-primary
-      } 
+
+	input[type="radio"]:checked + label {
+		@apply border-primary
+	}
+
 	.segment-button-checked {
 		color: white !important
 	}

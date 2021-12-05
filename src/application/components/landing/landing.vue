@@ -7,8 +7,10 @@
 						<div class="flex items-start justify-end h-full">
 							<div class="w-full md:w-1/2 h-full">
 								<div class="flex items-end justify-center h-full md:px-12">
-									<img src="@app/assets/images/landing-imgs/mobile-group-cards.png" class="w-auto h-full md:hidden" alt="">
-									<img src="@app/assets/images/landing-imgs/desktop-group-cards.png" class="w-full -mb-10 hidden md:inline-block" alt="">
+									<img alt=""
+										class="w-auto h-full md:hidden" src="@app/assets/images/landing-imgs/mobile-group-cards.png">
+									<img alt=""
+										class="w-full -mb-10 hidden md:inline-block" src="@app/assets/images/landing-imgs/desktop-group-cards.png">
 								</div>
 							</div>
 						</div>
@@ -27,7 +29,8 @@
 									<p class="leading-loose text-center md:text-left">Improve your results through:</p>
 									<ul class="list-disc ml-3.5">
 										<li class="leading-loose max-w-max md:w-full mx-auto md:mx-0">
-											Incentivized learning (<a href="/landing" class="underline">see how this works</a>)
+											Incentivized learning (<a class="underline" href="/landing">see how this
+												works</a>)
 										</li>
 										<li class="leading-loose max-w-max md:w-full mx-auto md:mx-0">
 											Access to 150,000+ flashcards, past questions & study sets
@@ -37,7 +40,8 @@
 										</li>
 									</ul>
 								</div>
-								<router-link to="" class="md:border-2 md:border-white rounded-md block bg-primary md:bg-transparent text-white text-xs md:text-sm font-bold text-center mx-auto md:mx-0 w-44 lg:w-80 py-4">
+								<router-link class="md:border-2 md:border-white rounded-md block bg-primary md:bg-transparent text-white text-xs md:text-sm font-bold text-center mx-auto md:mx-0 w-44 lg:w-80 py-4"
+									to="">
 									Get Started
 								</router-link>
 							</div>
@@ -58,35 +62,37 @@
 
 <script lang="ts">
 export default {
-	name: '',
+	name: ''
 }
 </script>
 
 <style scoped>
-.landing-section {
-  background: url("~@app/assets/images/backgrounds/home/landing-bg.jpg")
-    no-repeat center right 20% / auto 100%;
-}
-.text-xs {
-	font-size: 10px;
-}
-@media (min-width: 574px) {
 	.landing-section {
-	background: url("~@app/assets/images/backgrounds/home/landing-bg.jpg")
-    no-repeat center right 20% / cover;
-	/* height: 80vh; */
-}	
-.text-xs {
-	font-size: 14px;
-}
-}	
-@media (min-width: 768px) {
-	.landing-section {
-	background: url("~@app/assets/images/backgrounds/home/landing-bg.jpg")
-    no-repeat center right 20% / cover;
-	/* height: 65rem; */
-	height: 80vh;
-}	
-}
-/* m */
+		background: url("~@app/assets/images/backgrounds/home/landing-bg.jpg") no-repeat center right 20% / auto 100%;
+	}
+
+	.text-xs {
+		font-size: 10px;
+	}
+
+	@media (min-width: 574px) {
+		.landing-section {
+			background: url("~@app/assets/images/backgrounds/home/landing-bg.jpg") no-repeat center right 20% / cover;
+			/* height: 80vh; */
+		}
+
+		.text-xs {
+			font-size: 14px;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.landing-section {
+			background: url("~@app/assets/images/backgrounds/home/landing-bg.jpg") no-repeat center right 20% / cover;
+			/* height: 65rem; */
+			height: 80vh;
+		}
+	}
+
+	/* m */
 </style>

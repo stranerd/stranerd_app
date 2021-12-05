@@ -57,7 +57,7 @@
 				</ion-popover>
 			</div>
 			<div class="mb-3">
-				<router-link :to="`/study/testprep/explore`" class="pb-2 pr-3 cursor-pointer"
+				<router-link :to="`/study/preps/explore`" class="pb-2 pr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
 					Test Prep
 				</router-link>

@@ -160,7 +160,7 @@ import {
 } from 'ionicons/icons'
 import SearchBar from '@app/components/search/SearchBar.vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { useStudyModal } from '@root/application/composable/core/modals'
+import { useStudyModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'BigScreeBar',

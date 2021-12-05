@@ -1,7 +1,8 @@
 <template>
 	<div class="flex flex-col text-sm text-main_dark gap-3">
 		<div class="flex flex-row justify-start items-center">
-			<IonSelect v-model="time" interface="action-sheet" class="capitalize text-main_dark text-xl font-bold ion-left-0" placeholder="Daily" type="ios">
+			<IonSelect v-model="time" class="capitalize text-main_dark text-xl font-bold ion-left-0"
+				interface="action-sheet" placeholder="Daily" type="ios">
 				<IonSelectOption v-for="time in times" :key="time" :value="time" class="capitalize">
 					{{ time }} Ranking
 				</IonSelectOption>
@@ -28,12 +29,12 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.ion-left-0{
-	--padding-start:0px !important
-}
+	.ion-left-0 {
+		--padding-start: 0px !important
+	}
 
-ion-select::part(icon) {
-  margin-left: 1rem;
-  font-size: 14px;
-}
+	ion-select::part(icon) {
+		margin-left: 1rem;
+		font-size: 14px;
+	}
 </style>

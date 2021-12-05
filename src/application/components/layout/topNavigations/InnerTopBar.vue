@@ -23,35 +23,36 @@
 				<div class="flex items-center ">
 					<IonIcon :icon="showSearch ? close : search" class="text-xl text-main_dark"
 						@click="toggleSearch" />
-				</div>	
+				</div>
 				<search-bar v-if="showSearch" class="absolute -left-3 z-50 top-1" />
-			</div>		
+			</div>
 		</ion-toolbar>
 
 		<!-- large screens -->
-		<BigScreenBar/>
+		<BigScreenBar />
 	</ion-header>
 
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IonHeader, IonIcon, IonToolbar, IonTitle, IonButtons  } from '@ionic/vue'
-import {  notifications,  search, close, arrowBackOutline } from 'ionicons/icons'
+import { IonButtons, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue'
+import { arrowBackOutline, close, notifications, search } from 'ionicons/icons'
 import BigScreenBar from './screens/BigScreenBar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
 
 export default defineComponent({
-	components: { IonIcon, SearchBar, IonHeader, IonToolbar, BigScreenBar, IonTitle,IonButtons },
+	components: { IonIcon, SearchBar, IonHeader, IonToolbar, BigScreenBar, IonTitle, IonButtons },
 	setup () {
 
 		const showSearch = ref(false)
 		const toggleSearch = () => {
 			showSearch.value = !showSearch.value
 		}
-		return {close, arrowBackOutline,
-			showSearch,toggleSearch,
-			search,notifications
+		return {
+			close, arrowBackOutline,
+			showSearch, toggleSearch,
+			search, notifications
 		}
 	}
 })

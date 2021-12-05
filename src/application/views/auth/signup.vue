@@ -1,6 +1,6 @@
 <template>
 	<Auth>
-	
+
 		<div class="w-full min-h-full flex ">
 			<div
 				class="gap-3 bg-light_orange w-1/2 lg:flex flex-col  items-center justify-center min-h-full hidden ">
@@ -87,20 +87,20 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</Auth>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useEmailSignup } from '@app/composable/auth/signin'
-import { IonButton,  IonInput,  IonSpinner } from '@ionic/vue'
+import { IonButton, IonInput, IonSpinner } from '@ionic/vue'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
-import Auth from '@root/application/layouts/Auth.vue'
+import Auth from '@app/layouts/Auth.vue'
 
 export default defineComponent({
 	name: 'Signup',
-	components: {   IonInput, IonButton, AuthProviders, IonSpinner, Auth },
+	components: { IonInput, IonButton, AuthProviders, IonSpinner, Auth },
 	middlewares: ['isNotAuthenticated'],
 	setup () {
 

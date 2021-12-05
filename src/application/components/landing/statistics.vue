@@ -12,7 +12,7 @@
 					<div class="w-full md:w-1/3 flex-none md:flex-auto">
 						<div class="card rounded-md h-full bg-butter_yellow py-24 px-5">
 							<div class="w-14 mx-auto">
-								<img src="@app/assets/images/icons/help-circle.png" alt="">
+								<img alt="" src="@app/assets/images/icons/help-circle.png">
 							</div>
 							<h3 class="font-bold text-3xl my-8">Over 1000</h3>
 							<p class="font-medium">Questions asked</p>
@@ -21,7 +21,7 @@
 					<div class="w-full md:w-1/3 flex-none md:flex-auto">
 						<div class="card rounded-md h-full bg-light_green py-24 px-5">
 							<div class="w-14 mx-auto">
-								<img src="@app/assets/images/icons/people.png" alt="">
+								<img alt="" src="@app/assets/images/icons/people.png">
 							</div>
 							<h3 class="font-bold text-3xl my-8">Over 200</h3>
 							<p class="font-medium">Credible Tutors</p>
@@ -30,7 +30,7 @@
 					<div class="w-full md:w-1/3 flex-none md:flex-auto">
 						<div class="card rounded-md h-full bg-light_orange py-24 px-5">
 							<div class="w-14 mx-auto">
-								<img src="@app/assets/images/icons/book.png" alt="">
+								<img alt="" src="@app/assets/images/icons/book.png">
 							</div>
 							<h3 class="font-bold text-3xl my-8">Over 100k</h3>
 							<p class="font-medium">Study materials</p>
@@ -44,7 +44,7 @@
 
 <script lang="ts">
 export default {
-	name: '',
+	name: ''
 }
 </script>
 

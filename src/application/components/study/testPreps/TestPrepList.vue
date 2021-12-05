@@ -5,9 +5,9 @@
 				Test Prep
 			</span>
 
-			<router-link v-if="true && isLoggedIn"
+			<router-link v-if="isLoggedIn"
 				class="text-primary normalText flex items-center font-bold "
-				to="/study/testprep/explore">
+				to="/study/preps/explore">
 				<span>view all</span>
 				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>
@@ -29,8 +29,6 @@
 				</template>
 			</Swiper>
 		</template>
-
-
 	</div>
 </template>
 
@@ -41,10 +39,10 @@ import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useTestPrepList } from '@app/composable/study/testPreps'
-import TestPrepCard from './card/TestPrepCard.vue'
+import TestPrepCard from './TestPrepCard.vue'
 
 export default defineComponent({
-	name: 'RecentTransactions',
+	name: 'TestPrepList',
 	components: { IonIcon, Swiper, TestPrepCard },
 	setup () {
 		const { id, isLoggedIn } = useAuth()

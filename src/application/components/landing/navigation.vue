@@ -7,45 +7,46 @@
 		<div class="container flex flex-col mx-auto">
 			<div class="flex items-center">
 				<router-link class="mr-auto" to="">
-					<img src="@app/assets/images/logo/logo-gray.svg" class="w-24 md:w-32" v-if="!show" alt="Stranerd">
-					<img src="@app/assets/images/logo/logo-white.svg" v-else alt="Stranerd">
+					<img v-if="!show" alt="Stranerd" class="w-24 md:w-32" src="@app/assets/images/logo/logo-gray.svg">
+					<img v-else alt="Stranerd" src="@app/assets/images/logo/logo-white.svg">
 				</router-link>
 				<ul class="gap-8 flex-row lg:flex items-center hidden">
 					<li>
 						<router-link class="link-custom text-md font-bold text-main_dark px-4" to="/landing">
 							Home
-						</router-link>						
+						</router-link>
 					</li>
 					<li>
-						<router-link class="link-custom text-md font-bold text-main_dark px-4" to="/landing#how-it-works">
+						<router-link class="link-custom text-md font-bold text-main_dark px-4"
+							to="/landing#how-it-works">
 							How it works
-						</router-link>						
+						</router-link>
 					</li>
 					<li>
 						<router-link class="link-custom text-md font-bold text-main_dark px-4" to="/landing#contact-us">
 							About
-						</router-link>						
+						</router-link>
 					</li>
 					<li>
 						<router-link class="link-custom text-md font-bold text-main_dark px-4" to="/landing#contact-us">
 							Blog
-						</router-link>						
+						</router-link>
 					</li>
-					<li>	
+					<li>
 						<router-link class="btn bg-primary text-white !px-10 rounded-md" to="/auth/signup">
 							Sign Up
-						</router-link>					
+						</router-link>
 					</li>
 					<li>
 						<router-link class="btn btn-custom border border-dark_gray text-main_dark !px-10 rounded-md"
 							to="/auth/signin">
 							Sign In
-						</router-link>						
+						</router-link>
 					</li>
 				</ul>
 				<div class="lg:hidden">
 					<span class="cursor-pointer" @click="toggleMenu">
-						<img src="@app/assets/images/icons/menu-bars.png" v-if="!show" class="w-6" />
+						<img v-if="!show" class="w-6" src="@app/assets/images/icons/menu-bars.png" />
 						<ion-icon v-else :icon="close" size="100px" />
 					</span>
 				</div>
@@ -53,24 +54,28 @@
 			<div v-if="show" class="grow-1 lg:hidden px-2 flex flex-col text-center mt-8 gap-6 bg-dark_gray">
 				<ul class="grow-1 lg:hidden px-10 flex flex-col text-center mt-8 gap-8 bg-dark_gray">
 					<li>
-						<a class=" smallScreenLink text-sm font-medium text-white link-custom-sm" @click="navigate('/landing')">
+						<a class=" smallScreenLink text-sm font-medium text-white link-custom-sm"
+							@click="navigate('/landing')">
 							Home
-						</a>						
+						</a>
 					</li>
 					<li>
-						<a class=" smallScreenLink text-sm font-medium text-white link-custom-sm" @click="navigate('/landing#how-it-works')">
+						<a class=" smallScreenLink text-sm font-medium text-white link-custom-sm"
+							@click="navigate('/landing#how-it-works')">
 							How it works
-						</a>						
+						</a>
 					</li>
 					<li>
-						<a class=" smallScreenLink text-sm font-medium text-white link-custom-sm" @click="navigate('/landing#contact-us')">
+						<a class=" smallScreenLink text-sm font-medium text-white link-custom-sm"
+							@click="navigate('/landing#contact-us')">
 							About
-						</a>						
+						</a>
 					</li>
-					<li>	
-						<a class=" smallScreenLink text-sm font-medium text-white link-custom-sm" @click="navigate('/landing#contact-us')">
+					<li>
+						<a class=" smallScreenLink text-sm font-medium text-white link-custom-sm"
+							@click="navigate('/landing#contact-us')">
 							Blog
-						</a>						
+						</a>
 					</li>
 					<li>
 						<a
@@ -78,7 +83,7 @@
 							@click="navigate('/auth/signin')"
 						>
 							Sign In
-						</a>				
+						</a>
 					</li>
 					<li>
 						<a
@@ -86,7 +91,7 @@
 							@click="navigate('/auth/signup')"
 						>
 							Sign Up
-						</a>					
+						</a>
 					</li>
 				</ul>
 			</div>
