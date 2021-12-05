@@ -1,8 +1,7 @@
-import { TestData, TestType } from '../../domain/entities/test'
+import { TestData } from '../../domain/entities/test'
 
 export interface TestFromModel extends Omit<TestToModel, 'type'> {
 	id: string
-	data: TestData
 	questions: string[]
 	answers: Record<string, number>
 	score: number
@@ -15,5 +14,5 @@ export interface TestFromModel extends Omit<TestToModel, 'type'> {
 export interface TestToModel {
 	name: string
 	prepId: string
-	type: TestType
+	data: TestData
 }
