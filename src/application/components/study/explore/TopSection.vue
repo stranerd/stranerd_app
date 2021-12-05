@@ -65,12 +65,12 @@
 					exact-active-class="border-b-4 text-white border-white">
 					Flashcards
 				</router-link>
-				<router-link :to="`/study/note/explore`"
+				<router-link :to="`/study/notes/explore`"
 					class="pb-2 pr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
 					Notes
 				</router-link>
-				<router-link :to="`/study/video/explore`"
+				<router-link :to="`/study/videos/explore`"
 					class="pb-2 pr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
 					Videos

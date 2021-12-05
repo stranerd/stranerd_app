@@ -16,8 +16,8 @@ import { defineComponent } from 'vue'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import TestPrep from '@app/components/study/testPrep/index.vue'
 import FlashCard from '@app/components/study/flashCards/index.vue'
-import Notes from '@app/components/study/notes/index.vue'
-import Videos from '@app/components/study/videos/index.vue'
+import Notes from '@app/components/study/notes/NotesList.vue'
+import Videos from '@app/components/study/videos/VideosList.vue'
 
 export default defineComponent({
 	name: 'StudyHome',
