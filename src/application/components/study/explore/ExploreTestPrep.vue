@@ -15,13 +15,11 @@
 			</div>
 		</template>
 
-	
-	
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import {  onBeforeUnmount, onMounted } from 'vue'
 import TestPrepCard from '@app/components/study/PlainStudyCard.vue'
 import { useTestPrepList } from '@app/composable/study/testPreps'
 
