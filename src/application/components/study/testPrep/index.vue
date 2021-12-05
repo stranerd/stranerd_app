@@ -24,7 +24,8 @@
 			<Swiper :freeMode="true" :items="testPreps" :slides="1.1" class="mt-2 overflow-x-auto flex"
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
 				<template v-slot:default="{ item, index }">
-					<TestPrepCard :colorClass=" index  === 0 ? 'bg-tinted_pink' : 'bg-tinted_pink'" :testPrep="item" />
+					<TestPrepCard :colorClass=" index  === 0 ? 'bg-tinted_pink' : 'bg-tinted_pink'" :index="index"
+						:testPrep="item" />
 				</template>
 			</Swiper>
 		</template>
@@ -61,7 +62,7 @@ export default defineComponent({
 		return {
 			testPreps,
 			chevronForwardOutline, chevronBackOutline,
-			isLoggedIn,
+			isLoggedIn
 		}
 	}
 })

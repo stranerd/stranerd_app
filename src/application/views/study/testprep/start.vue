@@ -6,6 +6,8 @@
 
 				<ion-text class="text-white font-semibold text-center text-xl">
 					JAMB > Test (Timed) > Mathematics (2021)
+
+					{{tests}}
 				</ion-text>
 
 			</div>
@@ -85,7 +87,7 @@ import Justified from '@app/layouts/Justified.vue'
 import { IonSegment, IonSegmentButton, } from '@ionic/vue'
 import { ellipsisVertical, flag,  } from 'ionicons/icons'
 import { useStudyModal } from '@app/composable/core/modals'
-
+import { useTestList } from '@root/application/composable/study/tests'
 export default {
 	name: 'start testprep',
 	displayName: 'Test Prep',
@@ -95,10 +97,11 @@ export default {
 
 	},
 	setup () {
+		const { tests, error, loading, fetchOlderTests } = useTestList()
 		const submit = ()=>{
 			useStudyModal().openSubmitTestprep()
 		}
-		return { submit, ellipsisVertical, flag,}
+		return { submit, ellipsisVertical, flag, tests, error, loading, fetchOlderTests }
 	}
 }
 </script>
