@@ -25,7 +25,7 @@ import {
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
-import { capitalize } from '@utils/commons'
+import { capitalize, copyObject } from '@utils/commons'
 
 const global = {
 	sets: ref([] as SetEntity[]),
@@ -242,13 +242,13 @@ export const useSet = (set: SetEntity) => {
 		const setListener = await ListenToSet.call(set.id, {
 			created: async (entity) => {
 				unshiftToSetList(entity)
-				set = entity
+				set = copyObject(entity)
 				await Promise.all(listeners.map(((listener) => listener())))
 				listeners = await startPropListeners()
 			},
 			updated: async (entity) => {
 				unshiftToSetList(entity)
-				set = entity
+				set = copyObject(entity)
 				await Promise.all(listeners.map(((listener) => listener())))
 				listeners = await startPropListeners()
 			},

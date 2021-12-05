@@ -13,6 +13,7 @@ import {
 	UpdateTestAnswer
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { copyObject } from '@utils/commons'
 
 const global = {
 	tests: ref([] as TestEntity[]),
@@ -142,11 +143,11 @@ export const useTest = (test: TestEntity) => {
 		return await ListenToTest.call(test.id, {
 			created: async (entity) => {
 				pushToTestList(entity)
-				test = entity
+				test = copyObject(entity)
 			},
 			updated: async (entity) => {
 				pushToTestList(entity)
-				test = entity
+				test = copyObject(entity)
 			},
 			deleted: async (entity) => {
 				const index = global.tests.value.findIndex((q) => q.id === entity.id)
