@@ -2,10 +2,11 @@
 	<DashboardLayout>
 		<div class="pl-6 lg:pl-2 pr-1.5 pt-8">
 			<StatusBar/>
+			<StudyTools class="mt-20" />
 			<!-- <RecentQuestions /> -->
 			<!-- <ContinueStudy class="mt-8" /> -->
 			<!-- <MyStudy class="mt-8" /> -->
-			<StudyTools class="mt-20" />
+		
 		</div>
 	</DashboardLayout>
 </template>

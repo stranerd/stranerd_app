@@ -23,6 +23,7 @@
 					:route="item.route"
 					:subText="item.subText"
 					:title="item.title"
+					:color="item.colors"
 				/>
 
 			</template>
@@ -45,6 +46,7 @@ import { defineComponent } from 'vue'
 import { compass, flash, folder } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import StudyToolsCard from './StudyToolsCard.vue'
+import colors from '../../DonutChart/utils/colors'
 
 export default defineComponent({
 	name: 'RecentTransactions',
@@ -57,21 +59,24 @@ export default defineComponent({
 				icon: flash, title: 'Study with Flashcards',
 				subText: 'Scientifically proven to improve memory and make studying easier.',
 				btnText: 'Create a Flashcard',
-				route: '/study/flashCards/create'
+				route: '/study/flashCards/create',
+				colors: '#C864DC'
 			},
 
 			{
 				icon: folder,
 				title: 'Organize your Study',
 				subText: 'Put flashcards, notes and videos with the same aim together in a folder.',
-				btnText: 'Create a Study Set', route: '/study'
+				btnText: 'Create a Study Set', route: '/study',
+				colors: '#FFA84B'
 			},
 
 			{
 				icon: compass,
 				title: 'Find more resources',
 				subText: 'Browse through a library of flashcards, notes, videos and sets to study with.',
-				btnText: 'Explore', route: '/study/preps/explore'
+				btnText: 'Explore', route: '/study/preps/explore',
+				colors: '#00D246'
 			}
 		]
 

@@ -1,24 +1,27 @@
 <template>
 	<div
-		:class="`m-0  h-[13rem]  min-w-[16.5rem] w-full cardPadding bg-light_orange lg:border-0 border border-faded_gray    rounded-xl  flex flex-col justify-center items-center md:gap-2 gap-[0.2rem] box-border  p-5`"
+		:class="`m-0    min-w-[16.5rem] w-full cardPadding  lg:border-0  rounded-xl  flex flex-col justify-center items-center  gap-[0.2rem] box-border  p-5`"
+		:style="`background: ${color};`"
 	>
 
 		<ion-icon
 			:icon="icon"
-			class="text-main_dark text-5xl"
+			class="text-white text-5xl h-12"
 		/>
 
-		<ion-text class="font-bold text-main_dark">
+		<ion-text class="font-extrabold text-white">
 			{{ title }}
 		</ion-text>
 
-		<ion-text class="text-center text-main_dark normalText ">
+		<ion-text class="text-center text-white	 normalText font-semibold">
 			{{ subText }}
 		</ion-text>
 
 		<router-link :to="route">
 			<ion-button
-				class="btn-secondary min-w-[7rem] bg-transparent mb-4 text-white lg:text-base text-xs  font-bold">
+				class="btn-white min-w-[13rem] bg-transparent mb-4 text-white lg:text-base text-xs  font-bold"
+				:style="`color: ${color};`"
+			>
 				{{ btnText }}
 			</ion-button>
 		</router-link>
@@ -54,6 +57,9 @@ export default defineComponent({
 			default: ''
 		},
 		icon: {
+			type: String
+		},
+		color: {
 			type: String
 		}
 	},
