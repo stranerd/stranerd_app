@@ -19,7 +19,7 @@
 	}
 
 	.layout-page {
-		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow h-full overflow-y-hidden
+		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow h-full overflow-y-hidden bg-new_gray
 	}
 
 	.layout-page-chat {
@@ -89,7 +89,8 @@
 	.btn {
 		@apply px-4 py-2 flex justify-center items-center font-semibold
 	}
-	.headerShadow{
+
+	.headerShadow {
 		box-shadow: 0px 0px 15px 5px rgba(139, 158, 177, 0.1);
 	}
 }

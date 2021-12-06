@@ -2,7 +2,7 @@
 	<div class="bg-primary pt-8">
 		<div class="w-full col-span-12 mb-4 flex-col flex gap-2 items-center justify-center normalText ">
 			<div class="relative">
-				<Avatar :id="user.id" :size="90" :src="user.avatar" color="#C7D6E3"/>
+				<Avatar :id="user.id" :size="90" :src="user.avatar" color="#C7D6E3" />
 				<!-- <ion-icon
 					v-if="showUpload"
 					:icon="camera"
@@ -55,7 +55,7 @@ import { computed, defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import Avatar from '@app/components/core/Avatar.vue'
 import { setNewSessionTutorIdBio } from '@app/composable/sessions/sessions'
-import { useSessionModal, useUploadModal } from '@app/composable/core/modals'
+import { useSessionModal } from '@app/composable/core/modals'
 import { UserEntity } from '@modules/users'
 import { camera } from 'ionicons/icons'
 
@@ -89,8 +89,6 @@ export default defineComponent({
 			setNewSessionTutorIdBio({ id: props.user.id, user: props.user.bio })
 			useSessionModal().openCreateSession()
 		}
-
-	
 
 		return {
 			id, requestNewSession, canRequestSession, camera, showUpload

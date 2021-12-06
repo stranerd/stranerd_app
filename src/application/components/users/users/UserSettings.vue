@@ -1,19 +1,22 @@
 <template>
 	<div class="w-full  mt-8 px-4">
-		<div class=" custom-shadow lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl gap-2 mb-6">
+		<div
+			class=" custom-shadow lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl gap-2 mb-6">
 			<ion-text class="text-xl text-main_dark font-bold">
 				Profile picture
 			</ion-text>
-			<Avatar :id="user.id" :size="90" :src="user.avatar" color="#C7D6E3"/>
+			<Avatar :id="user.id" :size="90" :src="user.avatar" color="#C7D6E3" />
 			<ion-button class="btn-primary" @click="openUploadModal()">
 				Upload a profile picture
 			</ion-button>
 		</div>
 
 
-		<div class=" custom-shadow lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl gap-2 mb-6">
+		<div
+			class=" custom-shadow lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl gap-2 mb-6">
 			<ion-text class="text-xl text-main_dark font-bold text-left w-full">
-				Usernames <span class="font-normal text-sm">*Use your real names, they can only be changed once	</span> 
+				Usernames <span
+					class="font-normal text-sm">*Use your real names, they can only be changed once	</span>
 			</ion-text>
 			<div class="flex md:flex-row items-center justify-center flex-col w-full gap-4">
 				<div class="border border-faded_gray rounded-xl lg:w-1/2 md:mr-4 w-full">
@@ -31,13 +34,14 @@
 					<IonSpinner v-if="profileLoading" name="lines-small" />
 				</ion-button>
 			</div>
-		
+
 		</div>
 
 
-		<div class=" custom-shadow lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl gap-2 mb-6">
+		<div
+			class=" custom-shadow lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl gap-2 mb-6">
 			<ion-text class="text-xl text-main_dark font-bold text-left w-full">
-				About 
+				About
 			</ion-text>
 			<div class="flex md:flex-row items-center justify-center flex-col w-full gap-4">
 				<div class="border border-faded_gray rounded-xl w-full mr-4">
@@ -46,7 +50,7 @@
 						placeholder="Write your question here and make sure it is explained in full detail."
 						rows="6" />
 				</div>
-		
+
 			</div>
 			<div class="w-full justify-start">
 				<ion-button class="btn-primary w-32" @click="updateProfile()">
@@ -54,21 +58,21 @@
 					<IonSpinner v-if="profileLoading" name="lines-small" />
 				</ion-button>
 			</div>
-		
+
 		</div>
 
-		
+
 		<!-- <div class=" flex flex-col gap-[8rem]">
 			<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
 				<div class="flex flex-col gap-2">
 					<h2 class="headings font-bold text-main_dark">Name</h2>
-			
+
 				</div>
 
 				<div class="flex flex-col gap-2">
 					<h2 class="headings font-bold text-main_dark">About</h2>
 					<div class="border border-faded_gray rounded-xl py-4 px-3">
-					
+
 					</div>
 				</div>
 
@@ -89,7 +93,7 @@
 				</div>
 			</div>
 			<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
-		
+
 
 				<div class="flex flex-col gap-2">
 					<h2 class="headings font-bold text-main_dark">Best Subject</h2>
@@ -181,11 +185,8 @@ import { image } from 'ionicons/icons'
 import { useProfileUpdate, useTutorUpdate } from '@app/composable/auth/profile'
 import { useAuth } from '@app/composable/auth/auth'
 import { useFileInputs, useSubjectAsTags } from '@app/composable/core/forms'
-import Subject from '@app/components/questions/subjects/Subject.vue'
-import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import { usePasswordUpdate } from '@app/composable/auth/passwords'
-import {  useUploadModal } from '@app/composable/core/modals'
-
+import { useUploadModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'ProfileSettings',
@@ -193,7 +194,7 @@ export default defineComponent({
 		IonTextarea,
 		IonSpinner,
 		IonButton,
-		IonInput,
+		IonInput
 		// Subject,
 		// SelectSubject
 	},
@@ -241,9 +242,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.custom-shadow{
-	box-shadow: 0px 0px 25px rgba(77, 92, 111, 0.1);
-}
+	.custom-shadow {
+		box-shadow: 0px 0px 25px rgba(77, 92, 111, 0.1);
+	}
+
 	ion-button {
 		--background: #546DD3;
 		--box-shadow: none;

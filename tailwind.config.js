@@ -15,6 +15,7 @@ module.exports = {
 				light_orange: '#FFEEDC',
 				light_green: '#E8FFED',
 				dark_gray: '#4D5C6F',
+				new_gray: '#F2F3F5',
 				star_yellow: '#FFD11C',
 				icon_inactive: '#8B9EB1',
 				faded_gray: '#C7D6E3',

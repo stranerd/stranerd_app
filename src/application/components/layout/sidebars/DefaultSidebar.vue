@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="hidden lg:flex bg-light_gray py-3 pl-3 w-[16%] h-full  left-0 top-0 flex-col z-30">
-	
+
 
 		<div class="flex flex-col pl-8 mt-6">
 
@@ -16,7 +16,7 @@
 					<ion-icon :icon="icon" class="text-[23px] mr-4"></ion-icon>
 					<span class="font-semibold capitalize">{{ name }}</span>
 				</div>
-			</router-link> 
+			</router-link>
 
 		</div>
 
@@ -46,23 +46,25 @@ export default defineComponent({
 
 
 <style scoped>
-.active-route-link::after,
-.active-route-link::before {
-  content: "";
-  position: absolute;
-  background-color: transparent;
-  height: 3rem;
-  width: 1.5rem;
-  right: 0;
-}
-.active-route-link::before {
-  bottom: -50px;
-  border-top-right-radius: 1.5rem;
-  box-shadow: 0 -1.5rem 0 0 #FFF;
-}
-.active-route-link::after {
-  top: -3rem;
-  border-bottom-right-radius: 1.5rem;
-  box-shadow: 0 1.5rem 0 0 #FFF;
-}
+	.active-route-link::after,
+	.active-route-link::before {
+		content: "";
+		position: absolute;
+		background-color: transparent;
+		height: 3rem;
+		width: 1.5rem;
+		right: 0;
+	}
+
+	.active-route-link::before {
+		bottom: -50px;
+		border-top-right-radius: 1.5rem;
+		box-shadow: 0 -1.5rem 0 0 #FFF;
+	}
+
+	.active-route-link::after {
+		top: -3rem;
+		border-bottom-right-radius: 1.5rem;
+		box-shadow: 0 1.5rem 0 0 #FFF;
+	}
 </style>

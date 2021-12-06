@@ -108,6 +108,7 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		this.isHosted = entity.isHosted
 		this.link = entity.link
 		this.media = entity.media
+		this.preview = entity.preview
 		this.set('tags', entity.tags)
 	}
 

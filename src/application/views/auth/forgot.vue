@@ -36,12 +36,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { usePasswordResetRequest } from '@app/composable/auth/passwords'
-import { IonButton,  IonInput,  IonSpinner } from '@ionic/vue'
-import Auth from '@root/application/layouts/Auth.vue'
+import { IonButton, IonInput, IonSpinner } from '@ionic/vue'
+import Auth from '@app/layouts/Auth.vue'
 
 export default defineComponent({
 	name: 'ForgotPassword',
-	components: {  IonInput, IonButton, IonSpinner, Auth },
+	components: { IonInput, IonButton, IonSpinner, Auth },
 	setup () {
 
 		const { factory, loading, error, sendResetEmail, message } = usePasswordResetRequest()

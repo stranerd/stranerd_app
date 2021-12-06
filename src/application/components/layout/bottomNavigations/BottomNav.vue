@@ -26,7 +26,7 @@
 			</div>
 		</IonToolbar>
 
-	
+
 		<IonToolbar class="hidden lg:hidden md:flex bg-white">
 			<div class="flex justify-around items-center">
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
@@ -34,7 +34,7 @@
 					to="/dashboard">
 					<ion-icon :icon="home" class="w-14" />
 				</router-link>
-			
+
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/questions">
@@ -58,7 +58,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonFooter, IonIcon, IonToolbar } from '@ionic/vue'
-import { add, calendarClear, chatbubble, helpCircle, book, person, home, people } from 'ionicons/icons'
+import { add, book, calendarClear, chatbubble, helpCircle, home, people, person } from 'ionicons/icons'
 
 export default defineComponent({
 	components: { IonFooter, IonIcon, IonToolbar },

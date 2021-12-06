@@ -1,5 +1,5 @@
 <template>
-	<div >
+	<div>
 		<div class="w-full flex justify-between">
 			<span class="heading font-bold text-main_dark">
 				Continue where you stopped
@@ -22,9 +22,9 @@
 		<template v-else>
 			<Swiper :freeMode="true" :items="testPreps" :slides="1.1" class="mt-2 overflow-x-auto flex"
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
-				<template v-slot:default="{ item: testPreps, index }">
+				<template v-slot:default="{ item, index }">
 					<PlainStudyCard :colorClass="0 === index ? 'bg-tinted_pink' : 'bg-tinted_pink'" :fromHome="true"
-						:testPreps="testPreps" class="h-[9rem]" />
+						:testPrep="item" class="h-[9rem]" />
 				</template>
 			</Swiper>
 		</template>
@@ -47,7 +47,8 @@ export default defineComponent({
 		const { testPreps: allTestPreps, listener, loading, error } = useTestPrepList()
 		const testPreps = computed({
 			get: () => allTestPreps.value.slice(0, 6),
-			set: () => {}
+			set: () => {
+			}
 		})
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)

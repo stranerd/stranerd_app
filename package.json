@@ -67,5 +67,8 @@
 		"extends": [
 			"@commitlint/config-conventional"
 		]
-	}
+	},
+	"resolutions": {
+  "webpack-dev-server": "3.1.10"
+}
 }

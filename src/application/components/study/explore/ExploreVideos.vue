@@ -1,6 +1,6 @@
 <template>
 	<div class="md:w-8/12 w-full px-4 mx-auto   mt-8">
-	
+
 
 		<template v-if="videos.length === 0">
 			<div class="py-3">
@@ -11,59 +11,58 @@
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
-				<VideoCard  v-for="(video, index) in videos" :key="video.id" :video="video" :index="index" />
+				<VideoCard v-for="(video, index) in videos" :key="video.id" :index="index" :video="video" />
 			</div>
 		</template>
 
-	
-	
+
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { onBeforeUnmount, onMounted } from 'vue'
 
-import VideoCard from '@app/components/study/videos/card/VideoCard.vue'
+import VideoCard from '@app/components/study/videos/VideoListCard.vue'
 import { useVideoList } from '@app/composable/study/videos'
+
 export default {
 	components: { VideoCard },
-    	setup () {
+	setup () {
 		// const { id, isLoggedIn } = useAuth()
 		const { videos, listener, loading, error } = useVideoList()
-	
 
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 
-
-
 		return {
-			videos,
+			videos
 		}
 	}
 }
 </script>
 
 <style scoped>
-ion-select{
-   --background: #F7F7FC;  
-   background: #F7F7FC;  
-   --padding-start: 1rem;
-   --padding-end: 1rem;
-}
-ion-segment{
-    --background: #F7F7FC;
-    color: #8B9EB1;
-    font-weight: bold;
-}
-ion-segment-button{
-    --background-checked: #4D5C6F;
-    --background-focused: #4D5C6F;
-    --indicator-color: #4D5C6F;
-    --indicator-box-shadow:none;
-    --padding-top:0.5rem;
-    --padding-bottom:0.5rem;
-    color: #8B9EB1;
-    font-weight: bold;
-}
+	ion-select {
+		--background: #F7F7FC;
+		background: #F7F7FC;
+		--padding-start: 1rem;
+		--padding-end: 1rem;
+	}
+
+	ion-segment {
+		--background: #F7F7FC;
+		color: #8B9EB1;
+		font-weight: bold;
+	}
+
+	ion-segment-button {
+		--background-checked: #4D5C6F;
+		--background-focused: #4D5C6F;
+		--indicator-color: #4D5C6F;
+		--indicator-box-shadow: none;
+		--padding-top: 0.5rem;
+		--padding-bottom: 0.5rem;
+		color: #8B9EB1;
+		font-weight: bold;
+	}
 </style>

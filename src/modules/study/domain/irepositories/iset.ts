@@ -10,4 +10,6 @@ export interface ISetRepository {
 	find: (id: string) => Promise<SetEntity | null>
 	update: (id: string, data: SetToModel) => Promise<void>
 	delete: (id: string) => Promise<void>
+	saveProp: (setId: string, type: string, propIds: string[]) => Promise<void>
+	deleteProp: (setId: string, type: string, propIds: string[]) => Promise<void>
 }

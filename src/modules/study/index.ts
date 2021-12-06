@@ -56,6 +56,8 @@ import { AddSetUseCase } from './domain/usecases/sets/addSet'
 import { EditSetUseCase } from './domain/usecases/sets/editSet'
 import { DeleteSetUseCase } from './domain/usecases/sets/deleteSet'
 import { ListenToSetUseCase } from './domain/usecases/sets/listenToSet'
+import { SaveSetPropUseCase } from './domain/usecases/sets/saveSetProp'
+import { DeleteSetPropUseCase } from './domain/usecases/sets/deleteSetProp'
 import { GetCoursesUseCase } from './domain/usecases/courses/getCourses'
 import { ListenToCoursesUseCase } from './domain/usecases/courses/listenToCourses'
 import { FindCourseUseCase } from './domain/usecases/courses/findCourse'
@@ -168,6 +170,8 @@ export const AddSet = new AddSetUseCase(setRepository)
 export const EditSet = new EditSetUseCase(setRepository)
 export const DeleteSet = new DeleteSetUseCase(setRepository)
 export const ListenToSet = new ListenToSetUseCase(setRepository)
+export const SaveSetProp = new SaveSetPropUseCase(setRepository)
+export const DeleteSetProp = new DeleteSetPropUseCase(setRepository)
 
 export const FindCourse = new FindCourseUseCase(courseRepository)
 export const GetCourses = new GetCoursesUseCase(courseRepository)
@@ -254,6 +258,7 @@ export { FlashCardEntity, FlashCardFactory }
 export { NoteEntity, NoteFactory }
 export { VideoEntity, VideoFactory }
 export { VideoCommentEntity, VideoCommentFactory }
-export { PastQuestionFactory, PastQuestionEntity, PastQuestionData, PastQuestionType }
-export { TestPrepFactory, TestPrepEntity, PrepData, PrepType }
-export { TestData, TestType, TestEntity }
+export { PastQuestionFactory, PastQuestionEntity }
+export { TestPrepFactory, TestPrepEntity, PrepType, PrepData }
+export { TestEntity, TestData, TestType }
+export { PastQuestionType, PastQuestionData }
