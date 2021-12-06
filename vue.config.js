@@ -18,7 +18,5 @@ module.exports = {
 			.set('@utils', path.join(__dirname, 'src/utils'))
 			.set('@', path.join(__dirname, 'src/application'))
 	},
-	devServer: {
-		disableHostCheck: true
-	}
+
 }
