@@ -1,4 +1,4 @@
-<template>
+;<template>
 	<div>
 		<ion-header class="block ion-no-border z-40 inset-x-0 w-full top-0 lg:shadow-md ">
 			<ion-toolbar
@@ -13,9 +13,9 @@
 					<div class="flex items-center ">
 						<IonIcon :icon="showSearch ? close : search" class="text-xl text-main_dark"
 							@click="toggleSearch" />
-					</div>	
+					</div>
 					<search-bar v-if="showSearch" class="absolute -left-3 z-50 top-1" />
-				</div>		
+				</div>
 			</ion-toolbar>
 
 			<!-- medium screens -->
@@ -31,22 +31,22 @@
 					<div class="flex items-center ">
 						<IonIcon :icon="showSearch ? close : search" class="text-xl text-main_dark"
 							@click="toggleSearch" />
-					</div>	
+					</div>
 					<search-bar v-if="showSearch" class="absolute -left-3 z-50 top-1" />
-				</div>		
+				</div>
 			</ion-toolbar>
 
 			<!-- large screens -->
-			<BigScreenBar/>
-		
+			<BigScreenBar />
+
 		</ion-header>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { IonHeader, IonIcon, IonToolbar  } from '@ionic/vue'
-import {  notifications,  search, close } from 'ionicons/icons'
+import { IonHeader, IonIcon, IonToolbar } from '@ionic/vue'
+import { close, notifications, search } from 'ionicons/icons'
 import BigScreenBar from './screens/BigScreenBar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
 
@@ -58,9 +58,10 @@ export default defineComponent({
 		const toggleSearch = () => {
 			showSearch.value = !showSearch.value
 		}
-		return {close,
-			showSearch,toggleSearch,
-			search,notifications
+		return {
+			close,
+			showSearch, toggleSearch,
+			search, notifications
 		}
 	}
 })

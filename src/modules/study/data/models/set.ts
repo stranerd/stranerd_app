@@ -19,4 +19,5 @@ export interface SetFromModel extends SetToModel {
 export interface SetToModel {
 	name: string
 	isPublic: boolean
+	tags: string[]
 }

@@ -1,5 +1,6 @@
-import { QueryParams } from '@modules/core'
+import { Conditions, QueryParams } from '@modules/core'
 import { ISetRepository } from '../../irepositories/iset'
+import { PAGINATION_LIMIT } from '@utils/constants'
 
 export class GetSetsUseCase {
 	private repository: ISetRepository
@@ -8,13 +9,13 @@ export class GetSetsUseCase {
 		this.repository = repository
 	}
 
-	async call (userId: string) {
+	async call (date?: number) {
 		const conditions: QueryParams = {
-			where: [{ field: 'userId', value: userId }, { field: 'isPublic', value: true }],
-			whereType: 'or',
+			where: [{ field: 'isPublic', value: true }],
 			sort: { field: 'createdAt', order: -1 },
-			all: true
+			limit: PAGINATION_LIMIT
 		}
+		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
 
 		return await this.repository.get(conditions)
 	}

@@ -4,7 +4,7 @@
 			<ion-segment mode="ios" value="all">
 				<ion-segment-button value="all">
 					<ion-label>All authors</ion-label>
-				</ion-segment-button> 
+				</ion-segment-button>
 				<ion-segment-button value="tutors">
 					<ion-label>Tutors</ion-label>
 				</ion-segment-button>
@@ -23,7 +23,6 @@
 					<ion-label>Paid</ion-label>
 				</ion-segment-button>
 			</ion-segment>
-
 			<ion-select class=" lg:w-96 w-40 text-xs md:text-sm  placeholder-[#8B9EB1] font-bold rounded-md" interface="action-sheet"
 				placeholder="Rating" value="notifications">
 				<ion-select-option value="maths">Rating</ion-select-option>
@@ -34,65 +33,67 @@
 		</div> -->
 
 		<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
-			<FlashcardsCard  v-for="(flashCard, index) in flashCards" :key="flashCard.id" :flashCard="flashCard" :index="index + 1"/>
+			<FlashCardCard v-for="(flashCard, index) in flashCards" :key="flashCard.id" :flashCard="flashCard"
+				:index="index + 1" />
 		</div>
-	
+
 	</div>
 
-	<page-loading v-if="loading"/>
+	<page-loading v-if="loading" />
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import FlashcardsCard from '@root/application/components/study/flashcard/card/FlashcardsCard.vue'
+import { onBeforeUnmount, onMounted } from 'vue'
+import FlashCardCard from '@app/components/study/flashCards/StudyFlashCardCard.vue'
 import { useFlashCardList } from '@app/composable/study/flashCards'
 import { useAuth } from '@app/composable/auth/auth'
 
-
 export default {
 	// components: { IonSegment, IonSegmentButton, IonSelect, IonSelectOption, FlashcardsCard },
-	components: {  FlashcardsCard },
+	components: { FlashCardCard },
 
-	setup(){
-
+	setup () {
 
 		const { id, isLoggedIn } = useAuth()
-		const { flashCards ,listener, loading, error } = useFlashCardList()
+		const { flashCards, listener, loading, error } = useFlashCardList()
 
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 
 		return {
 			flashCards, loading,
-			 id, isLoggedIn 
+			id, isLoggedIn
 		}
 	}
 }
 </script>
 
 <style scoped>
-.segment-button-checked{
-    color: white !important
-}
-ion-select{
-   --background: #F7F7FC;  
-   background: #F7F7FC;  
-   --padding-start: 1rem;
-   --padding-end: 1rem;
-}
-ion-segment{
-    --background: #F7F7FC;
-    color: #8B9EB1;
-    font-weight: bold;
-}
-ion-segment-button{
-    --background-checked: #4D5C6F;
-    --background-focused: #4D5C6F;
-    --indicator-color: #4D5C6F;
-    --indicator-box-shadow:none;
-    --padding-top:0.5rem;
-    --padding-bottom:0.5rem;
-    color: #8B9EB1;
-    font-weight: bold;
-}
+	.segment-button-checked {
+		color: white !important
+	}
+
+	ion-select {
+		--background: #F7F7FC;
+		background: #F7F7FC;
+		--padding-start: 1rem;
+		--padding-end: 1rem;
+	}
+
+	ion-segment {
+		--background: #F7F7FC;
+		color: #8B9EB1;
+		font-weight: bold;
+	}
+
+	ion-segment-button {
+		--background-checked: #4D5C6F;
+		--background-focused: #4D5C6F;
+		--indicator-color: #4D5C6F;
+		--indicator-box-shadow: none;
+		--padding-top: 0.5rem;
+		--padding-bottom: 0.5rem;
+		color: #8B9EB1;
+		font-weight: bold;
+	}
 </style>

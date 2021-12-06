@@ -3,7 +3,8 @@
 		<div class="px-4 lg:pl-2  pt-2">
 
 			<div class="col-span-12 md:col-start-3 md:col-end-11 lg:mt-8 mt-4">
-				<div class="rounded-xl flex flex-row items-center bg-light_gray max-w-[33rem] mx-auto justify-center border border-faded_gray lg:border-0">
+				<div
+					class="rounded-xl flex flex-row items-center bg-light_gray max-w-[33rem] mx-auto justify-center border border-faded_gray lg:border-0">
 					<router-link active-class="activeSlideTab"
 						class="w-1/2 max-w-[16.5rem] text-center inactiveSlideTab"
 						to="/questions">
@@ -17,7 +18,7 @@
 				</div>
 			</div>
 			<div class="text-xs md:text-sm py-6">
-		
+
 				<QuestionForm
 					:error="error"
 					:factory="factory"

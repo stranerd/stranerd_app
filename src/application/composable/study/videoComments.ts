@@ -1,19 +1,20 @@
 import { onMounted, ref, Ref } from 'vue'
 import {
-	AddVideoComment,
+	AddComment,
+	CommentEntity,
+	CommentFactory,
+	CommentType,
 	GetVideoComments,
-	ListenToVideoComments,
-	VideoCommentEntity,
-	VideoCommentFactory
+	ListenToVideoComments
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 
 const global = {} as Record<string, {
-	comments: Ref<VideoCommentEntity[]>
+	comments: Ref<CommentEntity[]>
 	fetched: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-export const useVideoCommentList = (videoId: string) => {
+export const useVideoCommentsList = (videoId: string) => {
 	if (global[videoId] === undefined) global[videoId] = {
 		comments: ref([]),
 		fetched: ref(false),
@@ -64,7 +65,7 @@ export const useVideoCommentList = (videoId: string) => {
 }
 
 export const useCreateVideoComments = (videoId: string) => {
-	const factory = ref(new VideoCommentFactory()) as Ref<VideoCommentFactory>
+	const factory = ref(new CommentFactory(CommentType.video)) as Ref<CommentFactory>
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	factory.value.videoId = videoId
@@ -74,7 +75,7 @@ export const useCreateVideoComments = (videoId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddVideoComment.call(factory.value)
+				await AddComment.call(factory.value)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

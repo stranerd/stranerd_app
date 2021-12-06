@@ -3,6 +3,7 @@ import { catchDivideByZero } from '@utils/commons'
 
 export class TestEntity extends BaseEntity {
 	public readonly id: string
+	public readonly name: string
 	public readonly data: TestData
 	public readonly questions: string[]
 	public readonly answers: Record<string, number>
@@ -15,6 +16,7 @@ export class TestEntity extends BaseEntity {
 
 	constructor ({
 		             id,
+		             name,
 		             data,
 		             questions,
 		             answers,
@@ -27,6 +29,7 @@ export class TestEntity extends BaseEntity {
 	             }: TestConstructorArgs) {
 		super()
 		this.id = id
+		this.name = name
 		this.data = data
 		this.questions = questions
 		this.answers = answers
@@ -47,6 +50,7 @@ export class TestEntity extends BaseEntity {
 
 type TestConstructorArgs = {
 	id: string
+	name: string
 	data: TestData
 	questions: string[]
 	answers: Record<string, number>
@@ -69,8 +73,7 @@ type TimedType = {
 }
 
 type UnTimedType = {
-	type: TestType.timed
-	time: number
+	type: TestType.unTimed
 }
 
 export type TestData = TimedType | UnTimedType

@@ -11,15 +11,15 @@
 				<ion-text class="text-icon_inactive font-bold mb-2">
 					Main answer
 				</ion-text>
-				<span  v-html="answer.title" />
+				<span v-html="answer.title" />
 
 			</div>
 
-			<div class="flex flex-col pb-4" v-if="answer.body">
+			<div v-if="answer.body" class="flex flex-col pb-4">
 				<ion-text class="text-icon_inactive font-bold mb-2">
 					Explanation
 				</ion-text>
-				<span  v-html="answer.body" />
+				<span v-html="answer.body" />
 				<div v-if="answer.attachments" class="col-span-12 py-3">
 					<photo-list :photos="answer?.attachments"></photo-list>
 				</div>
@@ -35,7 +35,9 @@
 						@click="() => voteAnswer(false)" />
 				</div>
 				<div class="flex flex-row items-center text-icon_inactive font-bold">
-					<template v-if="isLoggedIn && question && !question.isAnswered && !answer.best && question.userId === id" class="items-center flex justify-between cursor-pointer" @click.prevent="markBestAnswer">
+					<template
+						v-if="isLoggedIn && question && !question.isAnswered && !answer.best && question.userId === id"
+						class="items-center flex justify-between cursor-pointer" @click.prevent="markBestAnswer">
 						<span class="mr-1">Mark as best</span>
 						<IonIcon :icon="star" class="text-[20px]" />
 					</template>
@@ -46,11 +48,11 @@
 			</div>
 		</div>
 
-		<div class="flex mt-2 items-center" v-for="comment in comments" :key="comment.hash" >
+		<div v-for="comment in comments" :key="comment.hash" class="flex mt-2 items-center">
 			<Avatar :id="comment.userId" :size="24" :src="comment.avatar" class="mr-2" />
 			<ion-text class="text-dark_gray">
-				<b>{{comment.userBio.firstName}} : </b>
-				{{comment.body}}
+				<b>{{ comment.userBio.firstName }} : </b>
+				{{ comment.body }}
 			</ion-text>
 		</div>
 		<div class="mt-2 py-1 flex flex-row border-faded_gray border-b-2">
@@ -62,7 +64,7 @@
 	<page-loading v-if="loading || commentLoading" />
 </template>
 <script lang="ts">
-import { defineComponent, ref, PropType, computed } from 'vue'
+import { computed, defineComponent, PropType, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
 import {
@@ -81,7 +83,7 @@ import Avatar from '@app/components/core/Avatar.vue'
 import PhotoList from '@app/components/core/PhotoList.vue'
 import { useAnswer } from '@app/composable/questions/answers'
 import PageLoading from '../../core/PageLoading.vue'
-import { useCreateAnswerComments, useAnswerCommentList } from '@app/composable/questions/answer-comments'
+import { useAnswerCommentList, useCreateAnswerComments } from '@app/composable/questions/answer-comments'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
@@ -119,14 +121,14 @@ export default defineComponent({
 			createComment
 		} = useCreateAnswerComments(props.answer.id)
 
-		const {comments }= useAnswerCommentList(props.answer.id)
-		
+		const { comments } = useAnswerCommentList(props.answer.id)
+
 		return {
 			comments,
 			id, isLoggedIn, user,
-			voteAnswer,	loading,
-			commentLoading,	commentError,
-			commentFactory,	createComment,
+			voteAnswer, loading,
+			commentLoading, commentError,
+			commentFactory, createComment,
 			markBestAnswer,
 
 			arrowBackOutline,

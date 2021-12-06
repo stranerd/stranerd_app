@@ -7,20 +7,23 @@
 				<div
 					class="py-1 px-2  text-sm   flex flex-row items-center gap-4 lg:w-1/2">
 					<ion-text class="text-icon_inactive font-bold w-20 hidden lg:block">Filter By:</ion-text>
-					<SelectSubject v-model:subjectId="subjectId" :show-all="true" placeholder="Search by subjects" class="w-[92vw] lg:w-auto" />
+					<SelectSubject v-model:subjectId="subjectId" :show-all="true" class="w-[92vw] lg:w-auto"
+						placeholder="Search by subjects" />
 				</div>
 
-		
+
 				<div class=" flex items-center">
 					<ion-text class="text-icon_inactive font-bold w-20 hidden lg:block">Sort By:</ion-text>
-					<ion-segment  mode="ios" :value="answeredChoices[0].val" class="w-[92vw] lg:w-auto border border-faded_gray lg:border-0">
-						<ion-segment-button :value="choice.val" v-for="choice in answeredChoices" :key="choice.key" @click="answered = choice.val">
+					<ion-segment :value="answeredChoices[0].val" class="w-[92vw] lg:w-auto border border-faded_gray lg:border-0"
+						mode="ios">
+						<ion-segment-button v-for="choice in answeredChoices" :key="choice.key" :value="choice.val"
+							@click="answered = choice.val">
 							<ion-label>{{ choice.key }}</ion-label>
 						</ion-segment-button>
 					</ion-segment>
 				</div>
-		
-			</div> 
+
+			</div>
 
 			<div class="mt-5 md:mt-6  col-span-6 flex flex-row flex-wrap ">
 
@@ -55,7 +58,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import { IonSegment, IonSegmentButton, } from '@ionic/vue'
+import { IonSegment, IonSegmentButton } from '@ionic/vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import Question from '@app/components/questions/QuestionCard.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
@@ -64,7 +67,7 @@ import PageLoading from '@app/components/core/PageLoading.vue'
 
 export default defineComponent({
 	name: 'QuestionsList',
-	components: {  Question, EmptyState, SelectSubject, PageLoading, IonSegment, IonSegmentButton, },
+	components: { Question, EmptyState, SelectSubject, PageLoading, IonSegment, IonSegmentButton },
 	setup () {
 		const {
 			filteredQuestions: questions, error, loading, hasMore,
@@ -84,26 +87,26 @@ export default defineComponent({
 </script>
 
 
-
 <style scoped>
-.segment-button-checked{
-    color: white !important
-}
+	.segment-button-checked {
+		color: white !important
+	}
 
-ion-segment{
-    --background: #F7F7FC;
-    color: #8B9EB1;
-    font-weight: bold;
-}
-ion-segment-button{
-    --background-checked: #4D5C6F;
-    --background-focused: #4D5C6F;
-    --indicator-color: #4D5C6F;
-    --indicator-box-shadow:none;
-    --padding-top:0.5rem;
-    --padding-bottom:0.5rem;
-    color: #8B9EB1;
-    font-weight: bold;
-	margin:0 !important;
-}
+	ion-segment {
+		--background: #F7F7FC;
+		color: #8B9EB1;
+		font-weight: bold;
+	}
+
+	ion-segment-button {
+		--background-checked: #4D5C6F;
+		--background-focused: #4D5C6F;
+		--indicator-color: #4D5C6F;
+		--indicator-box-shadow: none;
+		--padding-top: 0.5rem;
+		--padding-bottom: 0.5rem;
+		color: #8B9EB1;
+		font-weight: bold;
+		margin: 0 !important;
+	}
 </style>

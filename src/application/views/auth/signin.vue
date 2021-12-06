@@ -67,7 +67,7 @@ import { defineComponent } from 'vue'
 import { useEmailSignin } from '@app/composable/auth/signin'
 import { IonSpinner } from '@ionic/vue'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
-import Auth from '@root/application/layouts/Auth.vue'
+import Auth from '@app/layouts/Auth.vue'
 
 export default defineComponent({
 	name: 'Signin',

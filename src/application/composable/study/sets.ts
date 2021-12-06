@@ -1,19 +1,23 @@
 import { computed, onMounted, Ref, ref } from 'vue'
 import {
 	AddSet,
+	DeleteSetProp,
 	FlashCardEntity,
 	GetFlashCardsInSet,
 	GetNotesInSet,
 	GetSets,
 	GetTestPrepsInSet,
+	GetUserSets,
 	GetVideosInSet,
 	ListenToFlashCardsInSet,
 	ListenToNotesInSet,
 	ListenToSet,
 	ListenToSets,
 	ListenToTestPrepsInSet,
+	ListenToUserSets,
 	ListenToVideosInSet,
 	NoteEntity,
+	SaveSetProp,
 	SetEntity,
 	SetFactory,
 	TestPrepEntity,
@@ -21,12 +25,22 @@ import {
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
- 
+import { capitalize, copyObject } from '@utils/commons'
+
+type SaveKey = keyof SetEntity['saved']
+
 const global = {
 	sets: ref([] as SetEntity[]),
 	fetched: ref(false),
 	edit: ref(false),
 	hasMore: ref(false),
+	...useErrorHandler(),
+	...useLoadingHandler()
+}
+
+const myGlobal = {
+	sets: ref([] as SetEntity[]),
+	fetched: ref(false),
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
@@ -51,13 +65,12 @@ const unshiftToSetList = (set: SetEntity) => {
 }
 
 export const useSetList = () => {
-	const { id } = useAuth()
-
 	const fetchSets = async () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const sets = await GetSets.call(id.value)
+			const lastDate = global.sets.value[global.sets.value.length - 1]?.createdAt
+			const sets = await GetSets.call(lastDate)
 			global.hasMore.value = !!sets.pages.next
 			sets.results.forEach(pushToSetList)
 			global.fetched.value = true
@@ -67,7 +80,8 @@ export const useSetList = () => {
 		await global.setLoading(false)
 	}
 	const listener = useListener(async () => {
-		return await ListenToSets.call(id.value, {
+		const lastDate = global.sets.value[global.sets.value.length - 1]?.createdAt
+		return await ListenToSets.call({
 			created: async (entity) => {
 				unshiftToSetList(entity)
 			},
@@ -78,20 +92,63 @@ export const useSetList = () => {
 				const index = global.sets.value.findIndex((q) => q.id === entity.id)
 				if (index !== -1) global.sets.value.splice(index, 1)
 			}
-		})
+		}, lastDate)
 	})
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchSets()
 	})
 
+	return { ...global, listener }
+}
+
+export const useMySets = () => {
+	const { id } = useAuth()
+
+	const fetchSets = async () => {
+		await myGlobal.setError('')
+		try {
+			await myGlobal.setLoading(true)
+			const sets = await GetUserSets.call(id.value)
+			sets.results.forEach(pushToSetList)
+			myGlobal.fetched.value = true
+		} catch (error) {
+			await myGlobal.setError(error)
+		}
+		await myGlobal.setLoading(false)
+	}
+	const listener = useListener(async () => {
+		return await ListenToUserSets.call(id.value, {
+			created: async (entity) => {
+				unshiftToSetList(entity)
+			},
+			updated: async (entity) => {
+				unshiftToSetList(entity)
+			},
+			deleted: async (entity) => {
+				const index = myGlobal.sets.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) myGlobal.sets.value.splice(index, 1)
+			}
+		})
+	})
+
+	onMounted(async () => {
+		if (!myGlobal.fetched.value && !myGlobal.loading.value) await fetchSets()
+	})
+
 	const rootSet = computed({
-		get: () => global.sets.value.find((s) => s.isRoot) ?? null,
+		get: () => myGlobal.sets.value.find((s) => s.isRoot) ?? null,
 		set: () => {
 		}
 	})
 
-	return { ...global, listener, rootSet }
+	const normalSets = computed({
+		get: () => myGlobal.sets.value.filter((s) => !s.isRoot),
+		set: () => {
+		}
+	})
+
+	return { ...myGlobal, listener, rootSet, normalSets }
 }
 
 export const useSet = (set: SetEntity) => {
@@ -125,21 +182,7 @@ export const useSet = (set: SetEntity) => {
 	}
 
 	const listener = useListener(async () => {
-		const listeners = await Promise.all([
-			ListenToSet.call(set.id, {
-				created: async (entity) => {
-					unshiftToSetList(entity)
-					set = entity
-				},
-				updated: async (entity) => {
-					unshiftToSetList(entity)
-					set = entity
-				},
-				deleted: async (entity) => {
-					const index = global.sets.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) global.sets.value.splice(index, 1)
-				}
-			}),
+		const startPropListeners = async () => await Promise.all([
 			ListenToNotesInSet.call(set.saved.notes, {
 				created: async (entity) => {
 					setGlobal[set.id].notes.value.push(entity)
@@ -197,8 +240,28 @@ export const useSet = (set: SetEntity) => {
 				}
 			})
 		])
+		let listeners = await startPropListeners()
+		const setListener = await ListenToSet.call(set.id, {
+			created: async (entity) => {
+				unshiftToSetList(entity)
+				set = copyObject(entity)
+				await Promise.all(listeners.map(((listener) => listener())))
+				listeners = await startPropListeners()
+			},
+			updated: async (entity) => {
+				unshiftToSetList(entity)
+				set = copyObject(entity)
+				await Promise.all(listeners.map(((listener) => listener())))
+				listeners = await startPropListeners()
+			},
+			deleted: async (entity) => {
+				const index = global.sets.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) global.sets.value.splice(index, 1)
+				await Promise.all(listeners.map(((listener) => listener())))
+			}
+		})
 		return async () => {
-			await Promise.all(listeners.map(((listener) => listener())))
+			await Promise.all([...listeners, setListener].map(((listener) => listener())))
 		}
 	})
 
@@ -207,6 +270,89 @@ export const useSet = (set: SetEntity) => {
 	})
 
 	return { ...setGlobal[set.id], listener, fetchAllSetEntities }
+}
+
+export const useSaveToSet = () => {
+	const { rootSet } = useMySets()
+	const { loading, setLoading } = useLoadingHandler()
+	const { error, setError } = useErrorHandler()
+
+	const props = ['notes', 'videos', 'flashCards', 'testPreps'] as SaveKey[]
+
+	const obj = Object.fromEntries(
+		props.map((prop) => {
+			const save = async (itemId: string, setId?: string) => {
+				if (!setId) setId = rootSet.value?.id ?? ''
+				try {
+					await setLoading(true)
+					await SaveSetProp.call(setId, prop, [itemId])
+				} catch (e) {
+					await setError(e)
+				}
+				await setLoading(false)
+			}
+
+			const remove = async (itemId: string, setId?: string) => {
+				if (!setId) setId = rootSet.value?.id ?? ''
+				try {
+					await setLoading(true)
+					await DeleteSetProp.call(setId, prop, [itemId])
+				} catch (e) {
+					await setError(e)
+				}
+				await setLoading(false)
+				if (setGlobal[setId]) {
+					//@ts-ignore
+					setGlobal[setId][prop].value = setGlobal[setId][prop].value.filter((item) => item.id === itemId)
+				}
+			}
+
+			return [[`save${capitalize(prop)}`, save], [`remove${capitalize(prop)}`, remove]]
+		}).flat(1)
+	) as Record<`save${Capitalize<SaveKey>}`, (itemId: string, setId?: string) => Promise<void>>
+		& Record<`remove${Capitalize<SaveKey>}`, (itemId: string, setId?: string) => Promise<void>>
+
+	return { loading, error, ...obj }
+}
+
+export const useSaveFromASet = () => {
+	const { loading, setLoading } = useLoadingHandler()
+	const { error, setError } = useErrorHandler()
+
+	const setId = ref('')
+	const values = ref({
+		notes: [],
+		videos: [],
+		flashCards: [],
+		testPreps: []
+	} as Record<SaveKey, string[]>)
+
+	const addProp = (prop: SaveKey, id: string) => {
+		if (values.value[prop].includes(id)) return
+		values.value[prop].push(id)
+	}
+
+	const removeProp = (prop: SaveKey, id: string) => {
+		values.value[prop] = values.value[prop].filter((v) => v !== id)
+	}
+
+	const save = async () => {
+		const promises = Object.entries(values.value).map(async ([key, values]) => {
+			try {
+				await setLoading(true)
+				await SaveSetProp.call(setId.value, key as SaveKey, values)
+			} catch (e) {
+				await setError(e)
+			}
+			await setLoading(false)
+		})
+		await Promise.all(promises)
+	}
+
+	return {
+		loading, error, values, setId,
+		save, addProp, removeProp
+	}
 }
 
 export const useCreateSet = () => {
@@ -233,9 +379,8 @@ export const useCreateSet = () => {
 	return { error, loading, factory, createSet }
 }
 
-
-export const useEdit = ()=>{
-	const toggle = ()=>{
+export const useEdit = () => {
+	const toggle = () => {
 		global.edit.value = !global.edit.value
 	}
 	return {

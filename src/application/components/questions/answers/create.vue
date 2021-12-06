@@ -1,6 +1,6 @@
 <template>
 	<div class="w-full flex flex-col text-xs mg:text-sm">
-		<h2 class="text-sm md:text-base text-main_dark font-bold"> 
+		<h2 class="text-sm md:text-base text-main_dark font-bold">
 			Give your answer
 		</h2>
 
@@ -48,8 +48,8 @@
 			<ion-button class="w-1/2 btn-secondary " @click="showAddAnswer = false">
 				Cancel
 			</ion-button>
-			<ion-button @click="createAnswer"
-				class=" w-1/2  btn-primary" type="submit">
+			<ion-button class=" w-1/2  btn-primary"
+				type="submit" @click="createAnswer">
 				Post answer
 			</ion-button>
 		</div>
@@ -60,7 +60,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { IonIcon, IonInput,  IonTextarea } from '@ionic/vue'
+import { IonIcon, IonInput, IonTextarea } from '@ionic/vue'
 
 import { close, image } from 'ionicons/icons'
 import { showAddAnswer, useCreateAnswer } from '@app/composable/questions/answers'
@@ -98,7 +98,7 @@ export default defineComponent({
 	components: {
 		IonIcon,
 		IonInput,
-		IonTextarea,
+		IonTextarea
 	}
 })
 </script>

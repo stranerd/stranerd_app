@@ -74,7 +74,8 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 	}
 
 	removeQuestion (index: number) {
-		this.set('set', this.questions.splice(index, 1))
+		if (this.questions.length === 1) return
+		this.questions.splice(index, 1)
 		this.index = 0
 	}
 
@@ -90,6 +91,8 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 	removeTag = (value: string) => this.set('tags', this.tags.filter((tag) => tag !== value))
 
 	loadEntity = (entity: FlashCardEntity) => {
+		this.set('title', entity.title)
+		this.set('isPublic', entity.isPublic)
 		this.set('tags', entity.tags)
 		this.set('set', entity.set)
 	}

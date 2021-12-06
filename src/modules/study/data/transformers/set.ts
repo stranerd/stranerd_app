@@ -12,7 +12,8 @@ export class SetTransformer {
 	toJSON (entity: SetEntity): SetToModel {
 		return {
 			name: entity.name,
-			isPublic: entity.isPublic
+			isPublic: entity.isPublic,
+			tags: entity.tags
 		}
 	}
 }

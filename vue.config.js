@@ -17,5 +17,6 @@ module.exports = {
 			.set('@app', path.join(__dirname, 'src/application'))
 			.set('@utils', path.join(__dirname, 'src/utils'))
 			.set('@', path.join(__dirname, 'src/application'))
-	}
+	},
+
 }

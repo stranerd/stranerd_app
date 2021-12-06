@@ -13,7 +13,7 @@
 							<RightSidebar />
 						</div>
 					</div>
-					<Fab/>
+					<Fab />
 				</IonContent>
 			</div>
 		</div>
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonContent,  IonPage,  } from '@ionic/vue'
+import { IonContent, IonPage } from '@ionic/vue'
 import RightSidebar from '@app/components/layout/sidebars/RightSidebar.vue'
 import InnerTopBar from '@app/components/layout/topNavigations/InnerTopBar.vue'
 import Sidebar from '@app/components/layout/sidebars/DefaultSidebar.vue'

@@ -1,5 +1,5 @@
 import { ITestRepository } from '../../irepositories/itest'
-import { TestType } from '@modules/study/domain/entities/test'
+import { TestToModel } from '../../../data/models/test'
 
 export class AddTestUseCase {
 	private repository: ITestRepository
@@ -8,7 +8,7 @@ export class AddTestUseCase {
 		this.repository = repository
 	}
 
-	async call (prepId: string, type: TestType) {
-		return await this.repository.add({ prepId, type })
+	async call (data: TestToModel) {
+		return await this.repository.add(data)
 	}
 }

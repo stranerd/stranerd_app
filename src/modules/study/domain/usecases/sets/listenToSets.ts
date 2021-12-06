@@ -1,4 +1,4 @@
-import { Listeners, QueryParams } from '@modules/core'
+import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { ISetRepository } from '../../irepositories/iset'
 import { SetEntity } from '../../entities/set'
 
@@ -9,16 +9,19 @@ export class ListenToSetsUseCase {
 		this.repository = repository
 	}
 
-	async call (userId: string, listener: Listeners<SetEntity>) {
+	async call (listener: Listeners<SetEntity>, date?: number) {
 		const conditions: QueryParams = {
-			where: [{ field: 'userId', value: userId }, { field: 'isPublic', value: true }],
-			whereType: 'or',
+			where: [{ field: 'isPublic', value: true }],
 			sort: { field: 'createdAt', order: -1 },
 			all: true
 		}
+		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
-			return entity.userId === userId || entity.isPublic
+			const matches = entity.isPublic
+			if (!matches) return false
+			if (date) return entity.createdAt > date
+			return matches
 		})
 	}
 }
