@@ -1,15 +1,15 @@
 import { Listeners, QueryParams } from '@modules/core'
-import { IVideoCommentRepository } from '../../domain/irepositories/ivideoComment'
-import { VideoCommentEntity } from '../../domain/entities/videoComment'
-import { VideoCommentBaseDataSource } from '../datasources/videoComment-base'
-import { VideoCommentTransformer } from '../transformers/videoComment'
-import { VideoCommentToModel } from '../models/videoComment'
+import { ICommentRepository } from '../../domain/irepositories/icomment'
+import { CommentEntity } from '../../domain/entities/comment'
+import { CommentBaseDataSource } from '../datasources/comment-base'
+import { CommentTransformer } from '../transformers/comment'
+import { CommentToModel } from '../models/comment'
 
-export class VideoCommentRepository implements IVideoCommentRepository {
-	private dataSource: VideoCommentBaseDataSource
-	private transformer: VideoCommentTransformer
+export class CommentRepository implements ICommentRepository {
+	private dataSource: CommentBaseDataSource
+	private transformer: CommentTransformer
 
-	constructor (dataSource: VideoCommentBaseDataSource, transformer: VideoCommentTransformer) {
+	constructor (dataSource: CommentBaseDataSource, transformer: CommentTransformer) {
 		this.dataSource = dataSource
 		this.transformer = transformer
 	}
@@ -22,7 +22,7 @@ export class VideoCommentRepository implements IVideoCommentRepository {
 		}
 	}
 
-	async listenToOne (id: string, listener: Listeners<VideoCommentEntity>) {
+	async listenToOne (id: string, listener: Listeners<CommentEntity>) {
 		return this.dataSource.listenToOne(id, {
 			created: async (model) => {
 				await listener.created(this.transformer.fromJSON(model))
@@ -36,7 +36,7 @@ export class VideoCommentRepository implements IVideoCommentRepository {
 		})
 	}
 
-	async listenToMany (query: QueryParams, listener: Listeners<VideoCommentEntity>, matches: (entity: VideoCommentEntity) => boolean) {
+	async listenToMany (query: QueryParams, listener: Listeners<CommentEntity>, matches: (entity: CommentEntity) => boolean) {
 		return this.dataSource.listenToMany(query, {
 			created: async (model) => {
 				const entity = this.transformer.fromJSON(model)
@@ -53,7 +53,7 @@ export class VideoCommentRepository implements IVideoCommentRepository {
 		})
 	}
 
-	async add (data: VideoCommentToModel) {
+	async add (data: CommentToModel) {
 		return await this.dataSource.create(data)
 	}
 
@@ -62,7 +62,7 @@ export class VideoCommentRepository implements IVideoCommentRepository {
 		return model ? this.transformer.fromJSON(model) : null
 	}
 
-	async update (id: string, data: VideoCommentToModel) {
+	async update (id: string, data: CommentToModel) {
 		return this.dataSource.update(id, data)
 	}
 

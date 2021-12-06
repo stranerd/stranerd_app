@@ -98,7 +98,7 @@ export const useCreateTest = (prep: TestPrepEntity) => {
 				await AddTest.call({
 					name: prep.name,
 					prepId: prep.id,
-					type: timed ? TestType.timed : TestType.unTimed
+					data: timed ? { type: TestType.timed, time: prep.time } : { type: TestType.unTimed }
 				})
 				await setMessage('Test created successfully')
 			} catch (error) {

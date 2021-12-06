@@ -13,7 +13,7 @@ export class TestTransformer {
 		return {
 			name: entity.name,
 			prepId: entity.prepId,
-			type: entity.data.type
+			data: entity.data
 		}
 	}
 }
