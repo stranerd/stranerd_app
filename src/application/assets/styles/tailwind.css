@@ -19,7 +19,7 @@
 	}
 
 	.layout-page {
-		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow h-full overflow-y-hidden
+		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow h-full overflow-y-hidden bg-new_gray
 	}
 
 	.layout-page-chat {

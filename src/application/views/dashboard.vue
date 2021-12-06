@@ -1,11 +1,11 @@
 <template>
 	<DashboardLayout>
-		<div class="pl-6 lg:pl-2 pr-1.5 pt-2">
+		<div class="pl-6 lg:pl-2 pr-1.5 pt-8">
 			<StatusBar/>
-			<RecentQuestions />
-			<ContinueStudy class="mt-8" />
-			<MyStudy class="mt-8" />
-			<StudyTools class="mt-8" />
+			<!-- <RecentQuestions /> -->
+			<!-- <ContinueStudy class="mt-8" /> -->
+			<!-- <MyStudy class="mt-8" /> -->
+			<StudyTools class="mt-20" />
 		</div>
 	</DashboardLayout>
 </template>
@@ -22,53 +22,9 @@ export default defineComponent({
 	name: 'Dashboard',
 	components: {
 		DashboardLayout,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
-		RecentQuestions,
-		ContinueStudy,
-		MyStudy,
+		// RecentQuestions,
+		// ContinueStudy,
+		// MyStudy,
 		StudyTools,
 		StatusBar
 	}
