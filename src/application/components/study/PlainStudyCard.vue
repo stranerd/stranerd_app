@@ -1,14 +1,16 @@
 <template>
 	<div
 		v-if="testPrep"
-		:class="`m-0  h-[7.5rem] min-w-[16.5rem] cardPadding ${colorClass}  w-full rounded-xl  flex flex-col md:gap-2 gap-[1rem] box-border  p-5 border border-faded_gray lg:border-0`"
+		:class="`m-0  h-[7.5rem] min-w-[16.5rem] cardPadding ${colorClass}  w-full rounded-xl  flex flex-col md:gap-2 gap-[1rem] box-border  p-5 `"
 	>
 		<div class="flex flex-col items-center justify-between w-full  mx-auto">
-			<ion-text class="text-xl text-left w-full text-main_dark font-bold ml-2">
-				{{ testPrep.name }}
+			<ion-text class="text-base text-left w-full text-main_dark font-bold ml-2">
+				<!-- {{ testPrep.data.institutionId }} -->
+				Jamb
 			</ion-text>
-			<ion-text class="text-sm text-left w-full text-main_dark font-bold mt-1 ml-2">
-				{{ testPrep.data.type }}
+			<ion-text class="text-base text-left w-full text-gray font-bold mt-1 ml-2">
+				<!-- {{ testPrep.data.type }} -->
+				Study > Mathematics (2021)
 			</ion-text>
 
 			<ion-progress-bar class="mt-6" value="0.5"></ion-progress-bar>

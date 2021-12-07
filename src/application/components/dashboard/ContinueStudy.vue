@@ -2,17 +2,11 @@
 	<div>
 		<div class="w-full flex justify-between">
 			<span class="heading font-bold text-main_dark">
-				Continue where you stopped
+				Pick up where you left off
 			</span>
-
-			<router-link v-if="testPreps.length " class="text-primary normalText flex items-center font-semibold"
-				to="/questions">
-				<span>view all</span>
-				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
-			</router-link>
 		</div>
 
-		<template v-if="testPreps.length === 0">
+		<template v-if="unCompletedTests.length === 0">
 			<div class="py-3">
 				<empty-state
 					info="You have no uncompleted testPrep"
@@ -20,10 +14,10 @@
 			</div>
 		</template>
 		<template v-else>
-			<Swiper :freeMode="true" :items="testPreps" :slides="1.1" class="mt-2 overflow-x-auto flex"
+			<Swiper :freeMode="true" :items="unCompletedTests" :slides="1.1" class="mt-2 overflow-x-auto flex"
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
 				<template v-slot:default="{ item, index }">
-					<PlainStudyCard :colorClass="0 === index ? 'bg-tinted_pink' : 'bg-tinted_pink'" :fromHome="true"
+					<PlainStudyCard :colorClass="0 === index ? 'bg-white' : 'bg-white'" :fromHome="true"
 						:testPrep="item" class="h-[9rem]" />
 				</template>
 			</Swiper>
@@ -33,18 +27,18 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import { IonIcon } from '@ionic/vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
+import {useTestList} from '@app/composable/study/tests'
 import { useTestPrepList } from '@app/composable/study/testPreps'
 import PlainStudyCard from '../study/PlainStudyCard.vue'
 
 export default defineComponent({
 	name: 'RecentQuestions',
-	components: { IonIcon, Swiper, EmptyState, PlainStudyCard },
+	components: {  Swiper, EmptyState, PlainStudyCard },
 	setup () {
-		const { testPreps: allTestPreps, listener, loading, error } = useTestPrepList()
+		const { tests: allTestPreps, listener, loading, error, unCompletedTests } = useTestList()
 		const testPreps = computed({
 			get: () => allTestPreps.value.slice(0, 6),
 			set: () => {
@@ -55,7 +49,7 @@ export default defineComponent({
 
 		return {
 			chevronForwardOutline, chevronBackOutline, ellipse,
-			testPreps, loading, error
+			testPreps, loading, error, unCompletedTests
 		}
 	}
 })
