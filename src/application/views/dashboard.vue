@@ -2,7 +2,7 @@
 	<DashboardLayout>
 		<div class="pl-6 lg:pl-2 pr-1.5 pt-8 pb-32">
 			<StatusBar/>
-			<StudyTools class="mt-20" />
+			<StudyTools class="mt-28 lg:mt-20" />
 			<ContinueStudy class="mt-8" />
 			<RecentQuestions class="mt-8"/>
 
@@ -29,7 +29,6 @@ import StatusBar from '../components/dashboard/StatusBar.vue'
 import TestPrep from '@app/components/study/testPreps/TestPrepList.vue'
 import Notes from '@app/components/study/notes/NotesList.vue'
 import FlashCard from '@app/components/study/flashCards/index.vue'
-
 
 
 export default defineComponent({
