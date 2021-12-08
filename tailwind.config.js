@@ -9,6 +9,7 @@ module.exports = {
 				primary: '#546DD3',
 				gray: '#64778A',
 				red: '#FF6666',
+				pink: '#FF6496',
 				butter_yellow: '#FFF7D0',
 				yellow_star: '#FFDC00',
 				tinted_pink: '#FFECFF',

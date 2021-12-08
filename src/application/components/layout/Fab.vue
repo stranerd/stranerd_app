@@ -66,7 +66,7 @@ export default defineComponent({
 	--background: #FFA84B !important;
 	--color: #ffffff !important;
 }
-	ion-fab {
+	ion-fab {	
 		--background: #546DD3;
 		--background-activated: #FF6666 !important;
 		--background-focused: #FF6666 !important;
