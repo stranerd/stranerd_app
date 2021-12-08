@@ -3,9 +3,22 @@ import { TestEntity } from '../../domain/entities/test'
 
 export class TestTransformer {
 	fromJSON (model: TestFromModel) {
-		const { id, name, questions, answers, score, done, data, userId, prepId, createdAt, updatedAt } = model
+		const {
+			id,
+			name,
+			questionType,
+			questions,
+			answers,
+			score,
+			done,
+			data,
+			userId,
+			prepId,
+			createdAt,
+			updatedAt
+		} = model
 		return new TestEntity({
-			id, name, questions, answers, score, done, data, userId, prepId, createdAt, updatedAt
+			id, name, questionType, questions, answers, score, done, data, userId, prepId, createdAt, updatedAt
 		})
 	}
 

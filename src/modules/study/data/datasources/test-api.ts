@@ -41,8 +41,8 @@ export class TestApiDataSource implements TestBaseDataSource {
 		await this.stranerdClient.put<{}, boolean>(`/${id}/end`, {})
 	}
 
-	async updateAnswer (id: string, questionId: string, answer: number) {
-		await this.stranerdClient.put<{ questionId: string, answer: number }, boolean>(`/${id}/answer`, {
+	async updateAnswer (id: string, questionId: string, answer: number | string) {
+		await this.stranerdClient.put<{ questionId: string, answer: number | string }, boolean>(`/${id}/answer`, {
 			questionId, answer
 		})
 	}

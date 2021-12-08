@@ -8,6 +8,6 @@ export interface ITestRepository {
 	listenToOne: (id: string, listener: Listeners<TestEntity>) => Promise<() => void>
 	listenToMany: (query: QueryParams, listener: Listeners<TestEntity>, matches: (entity: TestEntity) => boolean) => Promise<() => void>
 	find: (id: string) => Promise<TestEntity | null>
-	updateAnswer: (id: string, questionId: string, answer: number) => Promise<void>
+	updateAnswer: (id: string, questionId: string, answer: number | string) => Promise<void>
 	end: (id: string) => Promise<void>
 }

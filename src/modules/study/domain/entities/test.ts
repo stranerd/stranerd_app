@@ -1,12 +1,14 @@
 import { BaseEntity } from '@modules/core'
 import { catchDivideByZero } from '@utils/commons'
+import { PastQuestionType } from './pastQuestion'
 
 export class TestEntity extends BaseEntity {
 	public readonly id: string
 	public readonly name: string
 	public readonly data: TestData
 	public readonly questions: string[]
-	public readonly answers: Record<string, number>
+	public readonly questionType: PastQuestionType
+	public readonly answers: Record<string, number | string>
 	public readonly score: number
 	public readonly userId: string
 	public readonly prepId: string
@@ -19,6 +21,7 @@ export class TestEntity extends BaseEntity {
 		             name,
 		             data,
 		             questions,
+		             questionType,
 		             answers,
 		             score,
 		             userId,
@@ -32,6 +35,7 @@ export class TestEntity extends BaseEntity {
 		this.name = name
 		this.data = data
 		this.questions = questions
+		this.questionType = questionType
 		this.answers = answers
 		this.score = score
 		this.userId = userId
@@ -52,8 +56,9 @@ type TestConstructorArgs = {
 	id: string
 	name: string
 	data: TestData
+	questionType: PastQuestionType
 	questions: string[]
-	answers: Record<string, number>
+	answers: Record<string, number | string>
 	score: number
 	userId: string
 	prepId: string

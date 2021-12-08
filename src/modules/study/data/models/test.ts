@@ -1,8 +1,10 @@
 import { TestData } from '../../domain/entities/test'
+import { PastQuestionType } from '../../domain/entities/pastQuestion'
 
 export interface TestFromModel extends Omit<TestToModel, 'type'> {
 	id: string
 	questions: string[]
+	questionType: PastQuestionType
 	answers: Record<string, number>
 	score: number
 	userId: string
