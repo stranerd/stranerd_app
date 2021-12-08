@@ -5,7 +5,7 @@
 		:sections="sections"
 		:size="size"
 		:start-angle="0"
-		:thickness="32"
+		:thickness="24"
 		:total="totalSections < total ? total : totalSections"
 		background="#FFFFFF"
 		foreground="#D7E2EC"
