@@ -25,6 +25,20 @@ http://ionicframework.com/docs/theming/ */
 	--ion-font-family: 'Raleway', sans-serif;
 	/** primary **/
 	--ion-color-primary: #546DD3;
+	--ion-color-primary-rgb: 19, 39, 64, 0.25;
+	--ion-color-primary-contrast: #ffffff;
+	--ion-color-primary-contrast-rgb: 255, 255, 255;
+	--ion-color-primary-shade: #3171e0;
+	--ion-color-primary-tint: #4c8dff;
+	/** orange **/
+	--ion-color-orange: #FFA84B;
+	--ion-color-orange-rgb: 56, 128, 255;
+	--ion-color-orange-contrast: #ffffff;
+	--ion-color-orange-contrast-rgb: 255, 255, 255;
+	--ion-color-orange-shade: #FFA84B;
+	--ion-color-orange-tint: #FFA84B;
+	/** primary **/
+	--ion-color-primary: #546DD3;
 	--ion-color-primary-rgb: 56, 128, 255;
 	--ion-color-primary-contrast: #ffffff;
 	--ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -211,27 +225,27 @@ http://ionicframework.com/docs/theming/ */
 	--border-radius: 0.75rem;
 	--border-width: 1px;
 	--border-style: solid;
-	--border-color: #4D5C6F;
+	--border-color: #C7D6E3;
 	font-weight: 700;
 	text-transform: capitalize !important;
 	letter-spacing: 0.02rem !important;
 
-	@media (max-width: 640px) {
-		--background: transparent;
-		--padding-top: 0.8rem;
-		--padding-bottom: 0.8rem;
-		--padding-start: 1rem;
-		--padding-end: 1rem;
-		--color: white;
-		--box-shadow: none;
-		--border-radius: .5rem;
-		--border-width: 1px;
-		--border-style: solid;
-		--border-color: #4D5C6F;
-		font-weight: 700;
-		text-transform: capitalize !important;
-		letter-spacing: 0.01rem !important;
-	}
+	// @media (max-width: 640px) {
+	// 	--background: transparent;
+	// 	--padding-top: 0.8rem;
+	// 	--padding-bottom: 0.8rem;
+	// 	--padding-start: 1rem;
+	// 	--padding-end: 1rem;
+	// 	--color: white;
+	// 	--box-shadow: none;
+	// 	--border-radius: .5rem;
+	// 	--border-width: 1px;
+	// 	--border-style: solid;
+	// 	--border-color: #C7D6E3;
+	// 	font-weight: 700;
+	// 	text-transform: capitalize !important;
+	// 	letter-spacing: 0.01rem !important;
+	// }
 
 }
 

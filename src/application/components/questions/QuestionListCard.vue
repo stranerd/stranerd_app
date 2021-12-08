@@ -1,14 +1,15 @@
 <template>
 	<router-link
-		:class="`py-4 px-4 rounded-xl ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer border border-faded_gray lg:border-0`"
+		:class="`py-6 px-6 rounded-xl ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer `"
 		:to="`/questions/${question.id}`">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
 			<avatar :id="question.userId" :size="28" :src="question.avatar" class="mr-2" />
+			
 			<span class="font-bold text-main_dark">{{ question.userBio.fullName }}</span>
 			<div class="flex flex-row-reverse flex-grow">
 				<template v-if="fromHome">
-					<span class="font-bold text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
+					<span class="font-bold text-gray lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 				</template>
 				<template v-else>
 					<template v-if="!fromViewQuestion">
@@ -42,7 +43,7 @@
 			v-html="fromViewQuestion ? question.body : question.trimmedBody" />
 
 		<div
-			:class="`w-full flex flex-col lg:flex-row lg:justify-between ${!fromViewQuestion ? 'absolute bottom-3 left-0 px-4' : ''} w-full `">
+			:class="`w-full flex flex-col lg:flex-row lg:justify-between ${!fromViewQuestion ? 'absolute bottom-6 left-0 px-6' : ''} w-full `">
 			<div v-if="!fromHome" class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">
 				<span v-for="(tag, index) in question?.tags" :key="index">
 					<span v-if="tag" class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg inline-block">

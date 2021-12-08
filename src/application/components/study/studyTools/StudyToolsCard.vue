@@ -1,19 +1,21 @@
 <template>
 	<div
-		:class="`m-0    min-w-[16.5rem] w-full cardPadding  lg:border-0  rounded-xl  flex flex-col justify-center items-center  gap-[0.2rem] box-border  p-5`"
+		:class="`m-0    min-w-[17.5rem] w-full cardPadding  lg:border-0  rounded-3xl  flex flex-col justify-center items-center  gap-[0.2rem] box-border  !p-5 `"
 		:style="`background: ${color};`"
 	>
 
 		<ion-icon
+			v-if="icon"
 			:icon="icon"
-			class="text-white text-5xl h-12"
+			class="text-white lg:text-5xl text-3xl h-8 lg:h-12"
 		/>
+		<img src="../../../assets/images/New/flashCard.png" alt="flashCard" class="h-8 lg:h-12" v-else>
 
-		<ion-text class="font-extrabold text-white">
+		<ion-text class="font-extrabold text-white text-xs lg:text-base mt-3">
 			{{ title }}
 		</ion-text>
 
-		<ion-text class="text-center text-white	 normalText font-semibold">
+		<ion-text class="text-center text-white	 normalText font-normal">
 			{{ subText }}
 		</ion-text>
 

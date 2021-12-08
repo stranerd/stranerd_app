@@ -13,11 +13,11 @@
 			</ion-text>
 		</div>
 
-		<div class="bg-white rounded-3xl h-full w-full sm:w-4/12 flex justify-center gap-8 items-center min-w-[20rem]  px-4 mt-1 sm:mt-0 p-8" >
-			<ion-text class="text-primary font-bold text-sm sm:text-lg">
+		<div class="bg-white rounded-3xl h-full w-full sm:w-4/12 flex justify-between gap-8 items-center min-w-[20rem]   mt-6 sm:mt-0 p-6 sm:mb-0 mb-5" >
+			<ion-text class="text-primary font-bold text-xl sm:text-lg">
 				Your nerd score
 			</ion-text>
-			<DonutChart :score="user ? user.score: 0" :size="110" :total="user ? user.expectedScore : 100" />
+			<DonutChart :score="user ? user.score: 0" :size="96" :total="user ? user.expectedScore : 100" />
 		</div>
 		
 		

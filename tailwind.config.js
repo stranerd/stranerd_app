@@ -7,7 +7,11 @@ module.exports = {
 			colors: {
 				// Build your palette here
 				primary: '#546DD3',
+				gray: '#64778A',
+				red: '#FF6666',
+				pink: '#FF6496',
 				butter_yellow: '#FFF7D0',
+				yellow_star: '#FFDC00',
 				tinted_pink: '#FFECFF',
 				light_blue: '#EDF6FF',
 				light_gray: '#F7F7FC',

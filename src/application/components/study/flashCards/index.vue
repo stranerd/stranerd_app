@@ -1,19 +1,26 @@
 <template>
 	<div>
 		<div class="w-full flex justify-between">
-			<span class="heading font-bold text-main_dark">
-				FlashCards
-			</span>
+
+			<div class="heading font-bold text-main_dark flex items-center">
+			
+
+				<ion-text class="mr-3">
+					FlashCards
+				</ion-text>
+				<ion-badge class="uppercase" v-if="suggested"> 
+					Suggested
+				</ion-badge>
+			</div>
 
 			<router-link v-if="flashcards.length && isLoggedIn"
 				class="text-primary normalText flex items-center font-bold "
 				to="/study/flashCards/explore">
 				<span>view all</span>
-				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>
 		</div>
 
-		<template v-if="flashcards.length === 0">
+		<template v-if="flashcards.length === 0"> 
 			<div class="py-3">
 				<empty-state
 					info="You Have no Flashcard Available."
@@ -24,7 +31,7 @@
 			<Swiper :freeMode="true" :items="flashcards" :slides="1.1" class="mt-2 overflow-x-auto flex"
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
 				<template v-slot:default="{ item, index }">
-					<FlashcardsCard :colorClass=" index  === 0 ? 'bg-butter_yellow' : 'bg-light_gray'" :flashCard="item"
+					<FlashcardsCard :colorClass=" index  === 0 ? 'bg-white' : 'bg-white'" :flashCard="item"
 						:index="index+1"
 					/>
 
@@ -38,7 +45,6 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import { IonIcon } from '@ionic/vue'
 import { chevronForwardOutline } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
 import { useAuth } from '@app/composable/auth/auth'
@@ -47,7 +53,13 @@ import FlashcardsCard from './StudyFlashCardCard.vue'
 
 export default defineComponent({
 	name: 'RecentTransactions',
-	components: { IonIcon, Swiper, FlashcardsCard },
+	components: {  Swiper, FlashcardsCard },
+	props:{
+		suggested:{
+			required: false,
+			default: false
+		}
+	},
 	setup () {
 
 		const { id, isLoggedIn } = useAuth()

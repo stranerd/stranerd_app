@@ -1,7 +1,7 @@
 <template>
 	<!-- <div class="flex flex-col items-end "> -->
 	<router-link
-		:class="`m-0  h-[18rem] md:!w-[18rem] !w-[17rem]  ${bgColor(index)}  rounded-xl  flex flex-col justify-between md:gap-2 gap-[1rem] box-border  pb-5 border border-faded_gray lg:border-0`"
+		:class="`m-0  h-[19.5rem] md:!w-[18rem] !w-[17rem]  ${colorClass}  rounded-xl  flex flex-col justify-between md:gap-2 gap-[1rem] box-border  pb-5 `"
 
 		:to="`/study/notes/${note.id}`"
 	>
@@ -15,22 +15,37 @@
 				</ion-text>
 			</div>
 
-			<ion-text class="text-sm text-main_dark font-bold p-5 pb-1 w-full text-left">
-				{{ note.title }}
-			</ion-text>
-		</div>
+	
 
-		<div class="w-full flex items-center justify-start  px-5">
-			<!-- <ShowRatings :rating="4"/> -->
 
-			<div class="flex items-center">
-				<Avatar :size="24" :src="note.userBio.photo" />
-				<ion-text class="text-xs font-bold text-main_dark ml-3">
-					{{ note.userBio.firstName }}
-				</ion-text>
+			<div class="w-full justify-between items-center flex px-4 pt-3 pb-1 w-full">
+				<div class="text-base text-main_dark font-bold  text-left flex-col flex">
+					<ion-text class="text-gray">
+						Mathematics
+					</ion-text>
+					<ion-text>
+						{{ note.title }}
+					</ion-text>
+				</div>
+			
+
+				<ion-icon
+
+					:icon="ellipsisVertical"
+					class="text-gray text-2xl"
+				/>
 
 			</div>
+
+
+			<div class="w-full flex items-center justify-center  px-4 mt-2">
+				<ion-button class="btn-outline  text-primary   font-bold w-full  lg:min-w-[7.5rem] " to="#">
+					Start reading
+				</ion-button>
+			</div>
 		</div>
+
+
 	</router-link>
 
 	<!-- <ion-text class="font-bold text-delete_red cursor-pointer" v-if="editState['note']" @click="deleteNote">
@@ -41,11 +56,10 @@
 </template>
 
 <script lang="ts">
-import { calendar, play } from 'ionicons/icons'
+import { calendar, play, ellipsisVertical } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
 // import ShowRatings from '@app/components/core/ShowRatings.vue'
-import Avatar from '@app/components/core/Avatar.vue'
 import { NoteEntity } from '@modules/study'
 import { useEditState } from '@app/composable/study/state'
 import { useDeleteNote } from '@app/composable/study/notes'
@@ -71,18 +85,13 @@ export default defineComponent({
 
 		const { loading: deleteLoading, error, deleteNote } = useDeleteNote(props.note.id)
 
-		const bgColor = (index: any) => {
-			if (index === 1) return 'bg-light_green'
-			else if (index === 2) return 'bg-tinted_pink'
-			else if (index === 3) return 'bg-butter_yellow'
-		}
+	
 		return {
 			deleteNote, deleteLoading,
-			editState, bgColor, formatNumber,
-			calendar, play
+			editState,  formatNumber,
+			calendar, play, ellipsisVertical
 		}
 	},
-	components: { Avatar }
 })
 </script>
 
