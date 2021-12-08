@@ -10,7 +10,7 @@
 			<!-- Suggested -->
 			<TestPrep :suggested="true" class="mt-8"/>
 			<Notes :suggested="true" class="mt-8" />
-			<FlashCard class="mt-8" />
+			<FlashCard :suggested="true" class="mt-8" />
 
 		
 			<!-- <MyStudy class="mt-8" /> -->
