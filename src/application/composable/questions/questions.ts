@@ -24,9 +24,10 @@ enum Answered {
 
 const answeredChoices = [
 	// { val: Answered.BestAnswered, key: 'Best Answered' },
+	{ val: Answered.All, key: 'All' },
 	{ val: Answered.Answered, key: 'Answered' },
 	{ val: Answered.Unanswered, key: 'Unanswered' },
-	{ val: Answered.All, key: 'Both' }
+	
 ]
 const global = {
 	questions: ref([] as QuestionEntity[]),

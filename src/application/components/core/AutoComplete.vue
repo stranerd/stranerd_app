@@ -107,7 +107,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-input {
-		--background: #F7F7FC !important;
+		--background: #F2F3F5 !important;
 		--padding-start: 1.8rem !important;
 		--padding-end: 1.5rem !important;
 		--padding-top: .69rem !important;

@@ -249,6 +249,24 @@ http://ionicframework.com/docs/theming/ */
 
 }
 
+.btn-outline-sm{
+		@media (max-width: 640px) {
+	--background: transparent;
+	--padding-top: 0.7rem;
+	--padding-bottom: 0.7rem;
+	--padding-start: 1.25rem;
+	--padding-end: 1.25rem;
+	--color:inherit !important;
+	--box-shadow: none;
+	--border-radius: 0.5rem;
+	box-shadow: none;
+	border-radius: 0.5rem;
+	font-weight: 700;
+	text-transform: capitalize !important;
+	letter-spacing: 0.02rem !important;
+	}
+}
+
 .btn-primary {
 	--background: #546DD3;
 	--padding-top: 1.3rem;
@@ -268,11 +286,11 @@ http://ionicframework.com/docs/theming/ */
 }
 .btn-white {
 	--background: #fff;
-	--padding-top: 1.3rem;
-	--padding-bottom: 1.3rem;
-	--padding-start: 1.4rem;
-	--padding-end: 1.4rem;
-	--color:inherit;
+	--padding-top: 1.4rem;
+	--padding-bottom: 1.4rem;
+	--padding-start: 2rem;
+	--padding-end: 2rem;
+	--color:#546DD3 !important;
 	--box-shadow: none;
 	--border-radius: 0.5rem;
 	box-shadow: none;
@@ -280,6 +298,23 @@ http://ionicframework.com/docs/theming/ */
 	font-weight: 700;
 	text-transform: capitalize !important;
 	letter-spacing: 0.02rem !important;
+}
+.btn-white-sm {
+	@media (max-width: 640px) {
+	--background: #fff;
+	--padding-top: 1.25rem;
+	--padding-bottom: 1.25rem;
+	--padding-start: 1.25rem;
+	--padding-end: 1.25rem;
+	--color:#546DD3 !important;
+	--box-shadow: none;
+	--border-radius: 0.5rem;
+	box-shadow: none;
+	border-radius: 0.5rem;
+	font-weight: 700;
+	text-transform: capitalize !important;
+	letter-spacing: 0.02rem !important;
+	}
 }
 
 .btn-lg {
