@@ -4,8 +4,8 @@
 			<div
 				class="col-span-12 pb-3 px-1 flex-row items-center text-main_dark font-bold hidden lg:flex cursor-pointer"
 				@click="$router.go(-1)">
-				<IonIcon :icon="arrowBackOutline" class="text-[25px] mr-2" />
-				<span>Back</span>
+				<IonIcon :icon="chevronBack"   class="text-[25px] mr-2" />
+				<span>Back to All questions</span>
 			</div>
 			<div class="md:px-2 mb-4 text-xs md:text-sm">
 				<template v-if="question">
@@ -21,7 +21,7 @@
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { arrowBackOutline } from 'ionicons/icons'
+import { chevronBack } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
 import { useQuestion } from '@app/composable/questions/questions'
 import DashboardWithToolbarLayout from '@app/layouts/DashboardWithToolbar.vue'
@@ -43,7 +43,7 @@ export default defineComponent({
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 
-		return { arrowBackOutline, error, loading, question }
+		return { chevronBack, error, loading, question }
 	}
 })
 </script>

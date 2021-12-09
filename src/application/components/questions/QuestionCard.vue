@@ -3,7 +3,7 @@
 		:class="`py-4 px-4 rounded-xl !min-h-[11rem] ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer `"
 		:to="`/questions/${question.id}`">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-		<div class="flex w-full lg:items-center justify-between">
+		<div class="flex w-full items-center justify-between">
 			<div class="flex lg:flex-row flex-col lg:items-center gap-3">
 				<avatar :id="question.userId" :size="28" :src="question.avatar" class="hidden lg:block" />
 				<span class="font-bold text-main_dark hidden lg:block">{{ question.userBio.fullName }}</span>
