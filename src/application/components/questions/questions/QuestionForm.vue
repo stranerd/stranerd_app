@@ -3,20 +3,41 @@
 		<div class="lg:mt-3 border border-faded_gray rounded-xl px-1">
 			<IonTextarea v-model="factory.body" class="bg-white border-0 focus:outline-none w-full"
 				placeholder="Write your question here and make sure it is explained in full detail."
-				rows="15" />
+				rows="7" />
+		</div>
+
+		<div class="flex items-center mt-5 gap-5 flex-col lg:flex-row">
+			<div class="flex items-center gap-5 w-full">
+				<input
+					id="images" accept="image/x-png,image/jpeg,image/jpg"
+					class="cursor-pointer lg:w-full h-full hidden"
+					multiple
+					name="images"
+					style="opacity:0; overflow:hidden; position:absolute;"
+					type="file"
+					@change="catchAttachments" />
+				<label for="images" class="cursor-pointer">
+					<ion-icon
+						:icon="image"
+						class="!text-4xl text-gray"
+					/>
+
+				</label>
+
+
+				<IonInput v-model="tag" class="w-1/4 font-medium bg-new_gray text-main_dark px-3" placeholder="Add related tags">
+				</IonInput>
+			</div>
+	
+
+			<SelectSubject v-model:subject-id="factory.subjectId" :show-all="false" class="w-full bg-new_gray"/>
+
 		</div>
 
 		<div
 			class="lg:mt-8 mt-5 rounded-xl  text-main_dark relative bg-light_gray border border-faded_gray flex flex-col h-48 justify-center items-center">
 			<IonIcon :icon="image" class="!text-3xl" />
-			<input
-				id="images" accept="image/x-png,image/jpeg,image/jpg"
-				class="cursor-pointer w-full h-full absolute"
-				multiple
-				name="images"
-				style="opacity:0; overflow:hidden; position:absolute;"
-				type="file"
-				@change="catchAttachments" />
+		
 			<ion-text class="mt-3 font-bold lg:text-base">
 				Add images to help with your question (Optional)
 			</ion-text>
@@ -32,12 +53,11 @@
 		</div>
 
 		<div class="lg:mt-8 mt-5 bg-light_gray rounded-xl border border-faded_gray flex">
-			<SelectSubject v-model:subject-id="factory.subjectId" :show-all="false" />
+		
 		</div>
 
 		<div class="py-2 pl-6 lg:mt-8 mt-5  rounded-xl flex flex-col border border-faded_gray">
-			<IonInput v-model="tag" class="w-full font-medium" placeholder="Add related tags">
-			</IonInput>
+		
 			<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
 				<span v-for="tag in factory.tags" :key="tag">
 					<span
@@ -49,7 +69,7 @@
 		</div>
 
 		<div class="flex w-full lg:mt-8 mt-5 items-center gap-6">
-			<ion-button class="w-1/2 btn-secondary ">
+			<ion-button class="w-1/2 btn-secondary " @click="closeAskQuestion()">
 				Cancel
 			</ion-button>
 			<ion-button :disabled="loading || !factory.valid"
@@ -67,6 +87,8 @@ import { close, image } from 'ionicons/icons'
 import { useMultipleFileInputs, useTags } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
+import { useQuestionModal } from '@app/composable/core/modals'
+
 
 export default defineComponent({
 	name: 'QuestionForm',
@@ -95,6 +117,11 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
+
+		const closeAskQuestion = () => {
+			useQuestionModal().closeAskQuestion()
+		}
+
 		const { tag, removeTag } = useTags(
 			(tag: string) => props.factory.addTag(tag),
 			(tag: string) => props.factory.removeTag(tag)
@@ -105,7 +132,7 @@ export default defineComponent({
 		)
 
 		return {
-			image, close,
+			image, close, closeAskQuestion,
 			tag, removeTag, catchAttachments
 		}
 	}

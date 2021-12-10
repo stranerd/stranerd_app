@@ -39,7 +39,7 @@
 
 
 			<div class="w-full flex items-center justify-center  px-4 mt-2">
-				<ion-button class="btn-outline  text-primary   font-bold w-full  lg:min-w-[7.5rem] " to="#">
+				<ion-button class="btn-outline  text-primary   font-bold w-full  lg:min-w-[7.5rem] " :href="`/study/notes/${note.id}`">
 					Start reading
 				</ion-button>
 			</div>

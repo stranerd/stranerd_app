@@ -6,7 +6,7 @@
 		:placeholder="placeholder"
 		:suggestions="subjects.filter((s) => !exclude.includes(s.id)).map((s) => ({ search: s.name, value: s.id, title: s.name }))"
 		:value="value"
-		class="w-full   rounded-xl "
+		class="w-full   rounded-xl text-main_dark"
 		@update:value="update($event)"
 	/>
 </template>

@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col mt-1 py-3 ">
-		<div class="bg-light_gray rounded-lg py-4 px-3 flex flex-col border border-faded_gray lg:border-0 mb-4">
+		<div class="bg-white rounded-xl p-6 flex flex-col  mb-4">
 			<div class="flex flex-row items-center">
 				<Avatar :id="answer.userId" :size="30" :src="answer.avatar" class="mr-2" />
 				<span class="font-bold text-main_dark">{{ answer.userBio.fullName }}</span>
@@ -8,18 +8,18 @@
 			</div>
 
 			<div class="flex flex-col py-4">
-				<ion-text class="text-icon_inactive font-bold mb-2">
+				<ion-text class="text-gray font-bold mb-2  text-xs lg:text-base">
 					Main answer
 				</ion-text>
-				<span v-html="answer.title" />
+				<span v-html="answer.title" class=" text-xs lg:text-base"/>
 
 			</div>
 
 			<div v-if="answer.body" class="flex flex-col pb-4">
-				<ion-text class="text-icon_inactive font-bold mb-2">
+				<ion-text class="text-gray font-bold mb-2  text-xs lg:text-base">
 					Explanation
 				</ion-text>
-				<span v-html="answer.body" />
+				<span v-html="answer.body" class=" text-xs lg:text-base" />
 				<div v-if="answer.attachments" class="col-span-12 py-3">
 					<photo-list :photos="answer?.attachments"></photo-list>
 				</div>
@@ -46,26 +46,28 @@
 					</template>
 				</div>
 			</div>
+
+			<div class="mt-6 p-3  flex flex-row items-center border-faded_gray border rounded-xl">
+				<ion-textarea :autoGrow="true" v-model="commentFactory.body" :rows="1" class="px-1  focus:outline-none placeholder-gray-400 mt-0 pt-0"
+					placeholder="Add comment" />
+				<IonIcon :icon="send" class="text-[22px] mr-2 text-primary cursor-pointer" @click="createComment" />
+			</div>
 		</div>
 
-		<div v-for="comment in comments" :key="comment.hash" class="flex mt-2 items-center">
-			<Avatar :id="comment.userId" :size="24" :src="comment.avatar" class="mr-2" />
+		<div v-for="comment in comments" :key="comment.hash" class="flex mt-2  items-center">
+			<Avatar :id="comment.userId" :size="24" :src="comment.avatar" class="mr-2 ml-4" />
 			<ion-text class="text-dark_gray">
 				<b>{{ comment.userBio.firstName }} : </b>
 				{{ comment.body }}
 			</ion-text>
 		</div>
-		<div class="mt-2 py-1 flex flex-row border-faded_gray border-b-2">
-			<textarea v-model="commentFactory.body" class="px-1  focus:outline-none placeholder-gray-400 flex-grow"
-				placeholder="Leave a comment" />
-			<IonIcon :icon="send" class="text-[22px] mr-2 text-main_dark cursor-pointer" @click="createComment" />
-		</div>
+	
 	</div>
 	<page-loading v-if="loading || commentLoading" />
 </template>
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue'
-import { IonIcon } from '@ionic/vue'
+import { IonTextarea, IonIcon } from '@ionic/vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
 import {
 	arrowBackOutline,
@@ -88,7 +90,7 @@ import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'AnswerListCard',
-	components: { IonIcon, Avatar, PhotoList, PageLoading },
+	components: { IonTextarea,IonIcon, Avatar, PhotoList, PageLoading },
 	props: {
 		answer: {
 			type: AnswerEntity as PropType<AnswerEntity>,
@@ -145,3 +147,12 @@ export default defineComponent({
 	}
 })
 </script>
+
+
+<style scoped>
+ion-textarea{
+	--background: transparent;
+	--padding-bottom:0;
+	--padding-top:0;
+}
+</style>

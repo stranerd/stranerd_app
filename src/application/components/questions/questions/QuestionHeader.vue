@@ -11,7 +11,7 @@
 				</ion-text>
 			</div>
 
-			<ion-button class="btn-white btn-white-sm mr-1 font-bold ">
+			<ion-button class="btn-white btn-white-sm mr-1 font-bold" @click="openAskQuestion">
 				Ask a question
 			</ion-button>
 
@@ -47,7 +47,7 @@ import { defineComponent, ref } from 'vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import { IonSegment, IonSegmentButton } from '@ionic/vue'
-
+import { useQuestionModal } from '@app/composable/core/modals'
 
 
 export default defineComponent({
@@ -57,6 +57,10 @@ export default defineComponent({
 
 
 	setup() {
+
+		const openAskQuestion = ()=>{
+			useQuestionModal().openAskQuestion()
+		}
         	const {
 			filteredQuestions: questions, error, loading, hasMore,
 			answeredChoices, answered, subjectId, 
@@ -71,6 +75,7 @@ export default defineComponent({
 		}
 
 		return {
+			openAskQuestion,
 			user,answeredChoices, answered, subjectId,  chevronDown, chevronUp, isOpenRef, setOpen, event, folder, flash 
 
 
