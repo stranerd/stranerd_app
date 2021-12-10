@@ -2,13 +2,13 @@ import { IonButton, IonContent, IonIcon, IonInput, IonLabel, IonPage, IonText } 
 import { definePlugin } from '@app/plugins/index'
 
 export const registerIonicComponent = definePlugin(async ({ app }) => {
-	app.component('ion-page', IonPage)
-	app.component('ion-content', IonContent)
-	app.component('ion-button', IonButton)
-	app.component('ion-input', IonInput)
-	app.component('ion-icon', IonIcon)
-	app.component('ion-text', IonText)
-	app.component('ion-label', IonLabel)
+	app.component('IonPage', IonPage)
+	app.component('IonContent', IonContent)
+	app.component('IonButton', IonButton)
+	app.component('IonInput', IonInput)
+	app.component('IonIcon', IonIcon)
+	app.component('IonText', IonText)
+	app.component('IonLabel', IonLabel)
 })
 
 export const registerComponents = definePlugin(async ({ app }) => {

@@ -5,34 +5,30 @@
 				FlashCards
 			</span>
 
-			<router-link v-if="flashcards.length && isLoggedIn"
-				class="text-primary normalText flex items-center font-bold "
+			<router-link class="text-primary normalText flex items-center font-bold"
 				to="/study/flashCards/explore">
 				<span>view all</span>
-				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
+				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl" />
 			</router-link>
 		</div>
 
 		<template v-if="flashcards.length === 0">
 			<div class="py-3">
-				<empty-state
-					info="You Have no Flashcard Available."
-				></empty-state>
+				<EmptyState info="No flashcards Available." />
 			</div>
 		</template>
 		<template v-else>
 			<Swiper :freeMode="true" :items="flashcards" :slides="1.1" class="mt-2 overflow-x-auto flex"
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
 				<template v-slot:default="{ item, index }">
-					<FlashcardsCard :colorClass=" index  === 0 ? 'bg-butter_yellow' : 'bg-light_gray'" :flashCard="item"
+					<StudyFlashCardListCard :colorClass="index  === 0 ? 'bg-butter_yellow' : 'bg-light_gray'"
+						:flashCard="item"
 						:index="index+1"
 					/>
 
 				</template>
 			</Swiper>
 		</template>
-
-
 	</div>
 </template>
 
@@ -41,16 +37,13 @@ import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { chevronForwardOutline } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
-import { useAuth } from '@app/composable/auth/auth'
 import { useFlashCardList } from '@app/composable/study/flashCards'
-import FlashcardsCard from './StudyFlashCardCard.vue'
+import StudyFlashCardListCard from '@app/components/study/flashCards/StudyFlashCardListCard.vue'
 
 export default defineComponent({
-	name: 'RecentTransactions',
-	components: { IonIcon, Swiper, FlashcardsCard },
+	name: 'StudyFlashCardList',
+	components: { IonIcon, Swiper, StudyFlashCardListCard },
 	setup () {
-
-		const { id, isLoggedIn } = useAuth()
 		const { flashCards: allFlashcard, listener, loading, error } = useFlashCardList()
 		const flashcards = computed({
 			get: () => allFlashcard.value.slice(0, 6),
@@ -63,8 +56,7 @@ export default defineComponent({
 
 		return {
 			flashcards,
-			chevronForwardOutline,
-			isLoggedIn
+			chevronForwardOutline
 		}
 	}
 })

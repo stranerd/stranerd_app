@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/study/explore/ExploreWrapper.vue'
-import ExploreFlashcard from '@app//components/study/explore/ExploreFlashcard.vue'
+import ExploreFlashcard from '@app//components/study/explore/ExploreFlashcards.vue'
 
 export default defineComponent({
 	name: 'Explore FlashCard',

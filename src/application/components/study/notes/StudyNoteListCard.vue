@@ -51,7 +51,7 @@ import { useEditState } from '@app/composable/study/state'
 import { useDeleteNote } from '@app/composable/study/notes'
 
 export default defineComponent({
-	name: 'NoteListCard',
+	name: 'StudyNoteListCard',
 	props: {
 		colorClass: {
 			type: String,

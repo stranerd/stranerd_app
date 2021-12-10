@@ -5,30 +5,20 @@
 		</ion-text>
 		<ion-searchbar class="max-w-[1054px] lg:w-7/12 !h-16 "
 			placeholder="Search by subjects, topics and related keywords"
-			show-cancel-button="never"></ion-searchbar>
+			show-cancel-button="never" />
 
 		<div
 			class="mb-0.5  lg:justify-between justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full  lg:px-3 text-xs mx-auto gap-5 text-faded_gray font-bold  whitespace-normal overflow-x-auto">
 
 			<div class="hidden flex-col gap-4 mb-3 lg:flex">
 
-				<div v-if="!editState[name]" class="flex items-center cursor-pointer" @click="setOpen(true, $event)">
+				<div class="flex items-center cursor-pointer" @click="setOpen(true, $event)">
 					<ion-text class="text-white mr-1">
 						Create
 					</ion-text>
-					<ion-icon
-						:icon=' isOpenRef ? chevronDown : chevronUp'
-						class="text-white mr-3 text-xl"
-					/>
-				</div>
-				<div v-else class="flex items-center cursor-pointer" @click="edit()">
-					<ion-text class="text-white mr-1">
-						cancel
-					</ion-text>
-
+					<ion-icon :icon='isOpenRef ? chevronDown : chevronUp' class="text-white mr-3 text-xl" />
 				</div>
 
-				<!-- <ion-icon/> -->
 				<ion-popover
 					:event="event"
 					:is-open="isOpenRef"
@@ -46,7 +36,7 @@
 							</ion-text>
 						</router-link>
 						<router-link class="flex items-center justify-start w-auto cursor-pointer"
-							to="/study/set/create">
+							to="/study/sets/create">
 							<ion-icon :icon="folder" alt="" class=" text-2xl text-main_dark" />
 							<ion-text class="font-bold ml-4 text-lg text-main_dark">
 								Study set
@@ -57,51 +47,32 @@
 				</ion-popover>
 			</div>
 			<div class="mb-3">
-				<router-link :to="`/study/preps/explore`" class="pb-2 pr-3 cursor-pointer"
+				<router-link :to="`/study/preps/explore`" class="pb-2 mr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
-					Test Prep
+					TestPreps
 				</router-link>
-				<router-link :to="`/study/flashCards/explore`" class="pb-2 pr-3 cursor-pointer"
+				<router-link :to="`/study/flashCards/explore`" class="pb-2 mr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
-					Flashcards
+					FlashCards
 				</router-link>
 				<router-link :to="`/study/notes/explore`"
-					class="pb-2 pr-3 cursor-pointer"
+					class="pb-2 mr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
 					Notes
 				</router-link>
 				<router-link :to="`/study/videos/explore`"
-					class="pb-2 pr-3 cursor-pointer"
+					class="pb-2 mr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
 					Videos
 				</router-link>
-				<router-link :to="`/study/set/explore`"
-					class="pb-2 pr-3 cursor-pointer"
+				<router-link :to="`/study/sets/explore`"
+					class="pb-2 mr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
-					Study sets
+					Study Sets
 				</router-link>
 			</div>
 
-			<div class="hidden flex-col gap-4 mb-3 lg:flex">
-
-				<div v-if="!editState[name]" class="flex items-center cursor-pointer" @click="edit()">
-					<ion-text class="text-white mr-1">
-						edit
-					</ion-text>
-					<ion-icon
-						:icon='pencil'
-						class="text-white mr-3 text-xl"
-					/>
-				</div>
-				<div v-else class="flex items-center cursor-pointer" @click="edit()">
-					<ion-text class="text-white mr-1">
-						save
-					</ion-text>
-
-				</div>
-
-
-			</div>
+			<div />
 		</div>
 	</div>
 </template>
@@ -110,7 +81,6 @@
 import { IonPopover, IonSearchbar } from '@ionic/vue'
 import { defineComponent, ref } from 'vue'
 import { chevronDown, chevronUp, flash, folder, pencil } from 'ionicons/icons'
-import { useEditState } from '@app/composable/study/state'
 
 export default defineComponent({
 	name: 'StudyExploreTopSection',
@@ -121,19 +91,14 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup (props) {
-		const { toggle, editState } = useEditState()
-		const edit = () => {
-			toggle(props.name)
-		}
-
+	setup () {
 		const isOpenRef = ref(false)
 		const event = ref()
 		const setOpen = (state: boolean, ev?: Event) => {
 			event.value = ev
 			isOpenRef.value = state
 		}
-		return { edit, editState, isOpenRef, setOpen, event, chevronDown, chevronUp, flash, folder, pencil }
+		return { isOpenRef, setOpen, event, chevronDown, chevronUp, flash, folder, pencil }
 	}
 })
 

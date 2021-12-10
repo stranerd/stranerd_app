@@ -6,13 +6,11 @@
 		</ion-text>
 
 		<div class="mt-1">
-			<router-link to="/study/preps/view">
-				<ion-button class="btn-secondary   min-w-[7rem]  font-bold w-full mb-3">
-					Test yourself
-				</ion-button>
-			</router-link>
-
-			<ion-button class="btn-outline  text-main_dark min-w-[7rem]  font-bold w-full" to="#">
+			<ion-button class="btn-secondary min-w-[7rem] font-bold w-full mb-3" @click="createTest(testPrep, true)">
+				Test yourself
+			</ion-button>
+			<ion-button class="btn-outline text-main_dark min-w-[7rem] font-bold w-full"
+				@click="createTest(testPrep, false)">
 				Study solutions
 			</ion-button>
 		</div>
@@ -23,9 +21,10 @@
 import { calendar, play } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { TestPrepEntity } from '@modules/study'
+import { useCreateTest } from '@app/composable/study/tests'
 
 export default defineComponent({
-	name: 'TestPrepListCard',
+	name: 'StudyTestPrepListCard',
 	props: {
 		colorClass: {
 			type: String,
@@ -37,9 +36,10 @@ export default defineComponent({
 		}
 	},
 	setup () {
+		const { loading, error, createTest } = useCreateTest()
 		return {
-			calendar,
-			play
+			calendar, play,
+			loading, error, createTest
 		}
 	}
 })

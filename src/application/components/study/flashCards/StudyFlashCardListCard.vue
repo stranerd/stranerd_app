@@ -51,7 +51,7 @@ import { useEditState } from '@app/composable/study/state'
 import { FlashCardEntity } from '@modules/study'
 
 export default defineComponent({
-	name: 'StudyFlashCardCard',
+	name: 'StudyFlashCardListCard',
 	props: {
 		colorClass: {
 			type: String,

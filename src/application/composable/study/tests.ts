@@ -2,6 +2,7 @@ import { computed, onMounted, Ref, ref } from 'vue'
 import {
 	AddTest,
 	EndTest,
+	FindTest,
 	GetTestQuestions,
 	GetTests,
 	ListenToTest,
@@ -13,7 +14,9 @@ import {
 	UpdateTestAnswer
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { copyObject } from '@utils/commons'
+import { useRouter } from 'vue-router'
+import { useAuth } from '@app/composable/auth/auth'
+import { useRedirectToAuth } from '@app/composable/auth/session'
 
 const global = {
 	tests: ref([] as TestEntity[]),
@@ -85,22 +88,27 @@ export const useTestList = () => {
 	}
 }
 
-export const useCreateTest = (prep: TestPrepEntity) => {
+export const useCreateTest = () => {
+	const { isLoggedIn } = useAuth()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
+	const router = useRouter()
+	const { redirect } = useRedirectToAuth()
 
-	const createTest = async (timed: boolean) => {
+	const createTest = async (prep: TestPrepEntity, timed: boolean) => {
+		if (!isLoggedIn.value) return await redirect()
 		await setError('')
 		if (!loading.value) {
 			try {
 				await setLoading(true)
-				await AddTest.call({
+				const testId = await AddTest.call({
 					name: prep.name,
 					prepId: prep.id,
 					data: timed ? { type: TestType.timed, time: prep.time } : { type: TestType.unTimed }
 				})
 				await setMessage('Test created successfully')
+				await router.push(`/study/tests/${testId}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -111,7 +119,53 @@ export const useCreateTest = (prep: TestPrepEntity) => {
 	return { error, loading, createTest }
 }
 
-export const useTest = (test: TestEntity) => {
+export const useTest = (testId: string) => {
+	const { error, setError } = useErrorHandler()
+	const { loading, setLoading } = useLoadingHandler()
+	const test = computed({
+		get: () => global.tests.value.find((q) => q.id === testId) ?? null,
+		set: (q) => {
+			if (q) pushToTestList(q)
+		}
+	})
+
+	const fetchTest = async () => {
+		await setError('')
+		try {
+			await setLoading(true)
+			let test = global.tests.value.find((q) => q.id === testId) ?? null
+			if (test) {
+				await setLoading(false)
+				return
+			}
+			test = await FindTest.call(testId)
+			if (test) unshiftToTestList(test)
+		} catch (error) {
+			await setError(error)
+		}
+		await setLoading(false)
+	}
+	const listener = useListener(async () => {
+		return await ListenToTest.call(testId, {
+			created: async (entity) => {
+				unshiftToTestList(entity)
+			},
+			updated: async (entity) => {
+				unshiftToTestList(entity)
+			},
+			deleted: async (entity) => {
+				const index = global.tests.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) global.tests.value.splice(index, 1)
+			}
+		})
+	})
+
+	onMounted(fetchTest)
+
+	return { error, loading, test, listener }
+}
+
+export const useTestDetails = (test: TestEntity) => {
 	if (testGlobal[test.id] === undefined) testGlobal[test.id] = {
 		questions: ref([]),
 		fetched: ref(false),
@@ -139,23 +193,6 @@ export const useTest = (test: TestEntity) => {
 		await UpdateTestAnswer.call(test.id, questionId, answer)
 	}
 
-	const listener = useListener(async () => {
-		return await ListenToTest.call(test.id, {
-			created: async (entity) => {
-				pushToTestList(entity)
-				test = copyObject(entity)
-			},
-			updated: async (entity) => {
-				pushToTestList(entity)
-				test = copyObject(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.tests.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.tests.value.splice(index, 1)
-			}
-		})
-	})
-
 	onMounted(async () => {
 		if (!testGlobal[test.id].fetched.value && !testGlobal[test.id].loading.value) await fetchQuestions()
 	})
@@ -164,6 +201,6 @@ export const useTest = (test: TestEntity) => {
 		error: testGlobal[test.id].error,
 		loading: testGlobal[test.id].loading,
 		questions: testGlobal[test.id].questions,
-		listener, endTest, updateAnswer
+		endTest, updateAnswer
 	}
 }

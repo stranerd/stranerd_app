@@ -5,19 +5,17 @@
 				Notes
 			</span>
 
-			<router-link v-if="true && isLoggedIn"
-				class="text-primary normalText flex items-center font-bold "
+			<router-link
+				class="text-primary normalText flex items-center font-bold"
 				to="/study/notes/explore">
 				<span>view all</span>
-				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
+				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl" />
 			</router-link>
 		</div>
 
 		<template v-if="notes.length === 0">
 			<div class="py-3">
-				<empty-state
-					info="You Have no Notes Available."
-				></empty-state>
+				<EmptyState info="No Notes Available." />
 			</div>
 		</template>
 		<template v-else>
@@ -38,14 +36,12 @@ import { IonIcon } from '@ionic/vue'
 import { chevronForwardOutline } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
 import { useNoteList } from '@app/composable/study/notes'
-import { useAuth } from '@app/composable/auth/auth'
-import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
+import NoteListCard from '@app/components/study/notes/StudyNoteListCard.vue'
 
 export default defineComponent({
-	name: 'NotesList',
+	name: 'StudyNotesList',
 	components: { IonIcon, Swiper, NoteListCard },
 	setup () {
-		const { id, isLoggedIn } = useAuth()
 		const { notes: allNotes, listener, loading, error } = useNoteList()
 		const notes = computed({
 			get: () => allNotes.value.slice(0, 6),
@@ -58,8 +54,7 @@ export default defineComponent({
 
 		return {
 			notes,
-			chevronForwardOutline,
-			isLoggedIn
+			chevronForwardOutline
 		}
 	}
 })

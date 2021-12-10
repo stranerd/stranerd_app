@@ -22,7 +22,7 @@
 <script lang="ts">
 import { onBeforeUnmount, onMounted } from 'vue'
 
-import VideoCard from '@app/components/study/videos/VideoListCard.vue'
+import VideoCard from '@app/components/study/videos/StudyVideoListCard.vue'
 import { useVideoList } from '@app/composable/study/videos'
 
 export default {

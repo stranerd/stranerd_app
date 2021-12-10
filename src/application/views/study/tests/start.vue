@@ -103,7 +103,7 @@ export default {
 	setup () {
 		const { tests, error, loading, fetchOlderTests } = useTestList()
 		const submit = () => {
-			useStudyModal().openSubmitTestprep()
+			useStudyModal().openSubmitTest()
 		}
 		return { submit, ellipsisVertical, flag, tests, error, loading, fetchOlderTests }
 	}

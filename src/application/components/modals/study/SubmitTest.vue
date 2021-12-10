@@ -11,14 +11,14 @@
 		<div class="flex flex-row  mt-5  text-white gap-4">
 			<div class="w-1/2 flex flex-row justify-center items-center">
 				<ion-button class=" btn-secondary !w-full"
-					@click="closeSubmitTestprep">
+					@click="closeSubmitTest">
 					No
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 				</ion-button>
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
 				<router-link class="w-full" to="/study/preps/submitted">
-					<ion-button class="btn-primary      font-bold !w-full ">
+					<ion-button class="btn-primary font-bold !w-full ">
 						Start
 					</ion-button>
 				</router-link>
@@ -28,9 +28,9 @@
 				</button> -->
 			</div>
 		</div>
-
 	</div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 
@@ -40,11 +40,11 @@ import { useStudyModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	setup () {
-		const closeSubmitTestprep = () => {
-			useStudyModal().closeSubmitTestprep()
+		const closeSubmitTest = () => {
+			useStudyModal().closeSubmitTest()
 		}
 		return {
-			closeSubmitTestprep,
+			closeSubmitTest,
 			chevronDown,
 			ellipse,
 			ellipseOutline
