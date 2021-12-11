@@ -4,7 +4,7 @@
 			Ask a question and get expert answers
 		</template>
 		<div
-			class="rounded-xl bg-white  md:px-6  px-3 md:text-sm text-xs flex flex-col lg:col-start-5 lg:col-end-9 md:col-start-3 md:col-end-11 col-span-12">
+			class="rounded-xl bg-white  md:px-6  px-3 py-6 md:text-sm text-xs flex flex-col lg:col-start-5 lg:col-end-9 md:col-start-3 md:col-end-11 col-span-12">
 
 			<QuestionForm
 				:error="error"

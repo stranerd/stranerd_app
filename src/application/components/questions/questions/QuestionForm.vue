@@ -34,39 +34,26 @@
 
 		</div>
 
-		<div
-			class="lg:mt-8 mt-5 rounded-xl  text-main_dark relative bg-light_gray border border-faded_gray flex flex-col h-48 justify-center items-center">
-			<IonIcon :icon="image" class="!text-3xl" />
-		
-			<ion-text class="mt-3 font-bold lg:text-base">
-				Add images to help with your question (Optional)
-			</ion-text>
-			<div v-if="factory.attachments.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
-				<span v-for="attachment in factory.attachments" :key="attachment.name">
-					<span
-						class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-						{{ attachment.name }}  <IonIcon :icon="close" class="ml-1 cursor-pointer"
-							@click="factory.removeAttachment(attachment)" />
-					</span>
+			
+		<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
+			<span v-for="tag in factory.tags" :key="tag">
+				<span
+					class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
+					{{ tag }}  <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
 				</span>
-			</div>
+			</span>
 		</div>
 
-		<div class="lg:mt-8 mt-5 bg-light_gray rounded-xl border border-faded_gray flex">
-		
+		<div v-if="factory.attachments.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
+			<span v-for="attachment in factory.attachments" :key="attachment.name" class="my-1">
+				<span
+					class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
+					{{ attachment.name }}  <IonIcon :icon="close" class="ml-1 cursor-pointer"
+						@click="factory.removeAttachment(attachment)" />
+				</span>
+			</span>
 		</div>
 
-		<div class="py-2 pl-6 lg:mt-8 mt-5  rounded-xl flex flex-col border border-faded_gray">
-		
-			<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
-				<span v-for="tag in factory.tags" :key="tag">
-					<span
-						class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-						{{ tag }}  <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
-					</span>
-				</span>
-			</div>
-		</div>
 
 		<div class="flex w-full lg:mt-8 mt-5 items-center gap-6">
 			<ion-button class="w-1/2 btn-secondary " @click="closeAskQuestion()">
@@ -148,6 +135,10 @@ export default defineComponent({
 	ion-input {
 		--placeholder-color: #8B9EB1;
 		--placeholder-opacity: 1;
+		--padding-start: 24px;
+		--padding-end: 24px;
+		--padding-top: 12px;
+		--padding-bottom: 12px;
 	}
 
 	ion-icon {

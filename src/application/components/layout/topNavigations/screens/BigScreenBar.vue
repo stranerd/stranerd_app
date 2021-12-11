@@ -123,14 +123,14 @@
 											</div>
 
 										</router-link>
-										<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
-											to="/users/leaderboard">
+										<div class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
+											@click="signout()">
 											<div class="w-48 flex items-center gap-3">
 												<ion-icon :icon="logOut" class="text-3xl"></ion-icon>
 												<ion-label class="font-bold">LogOut</ion-label>
 											</div>
 
-										</router-link>
+										</div>
 									</div>
 								</ion-content>
 							</div>
@@ -178,7 +178,7 @@ export default defineComponent({
 			event.value = ev
 			isOpenStudyPopover.value = state
 		}
-		const { user } = useAuth()
+		const { user, signout } = useAuth()
 		const showSearch = ref(false)
 
 		const createSet = ()=>{
@@ -186,7 +186,7 @@ export default defineComponent({
 		}
 
 		return {
-			isOpenMenuPopover, isOpenStudyPopover,
+			isOpenMenuPopover, isOpenStudyPopover, signout,
 			setMenuPopover, setStudyPopover, createSet,
 			event, addCircle, helpCircle, chevronDown,
 			folder, library, settings, logOut,

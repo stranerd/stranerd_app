@@ -45,11 +45,7 @@
 		<div
 			:class="`w-full flex flex-col lg:flex-row lg:justify-between ${!fromViewQuestion ? 'absolute bottom-6 left-0 px-6' : ''} w-full `">
 			<div v-if="!fromHome" class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">
-				<span v-for="(tag, index) in question?.tags" :key="index">
-					<span v-if="tag" class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg inline-block">
-						{{ tag }}
-					</span>
-				</span>
+				<Tag v-for="(tag, index) in question.tags" :key="tag" :tag="tag" :index="index + 1"/>
 			</div>
 
 			<div class=" flex flex-row items-center ">
@@ -77,6 +73,7 @@ import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { useReportModal } from '@app/composable/core/modals'
+import Tag from './tags/Tag.vue'
 
 export default defineComponent({
 	name: 'QuestionListCard',
@@ -103,7 +100,7 @@ export default defineComponent({
 		}
 	},
 	components: {
-		IonIcon, IonRippleEffect, Avatar, Subject
+		IonIcon, IonRippleEffect, Avatar, Subject, Tag,
 	},
 	setup (props) {
 		return {
