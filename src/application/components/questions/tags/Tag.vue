@@ -1,8 +1,21 @@
 <template>
-	<router-link :to="`/questions/tags/${tag}`" :class="[secondary ?'!text-white':'',`py-1 px-3 font-bold  rounded-3xl`]" 
-		:style="`color:${colors[index || randomNumber]}; background-color:${secondary? colors[index || randomNumber] : bgColors[index || randomNumber]}`" >
-		<span>{{ tag }}</span>
-	</router-link>
+
+	<slot 
+		:randomNumber="randomNumber"
+		:index="index"
+		:colors="colors"
+		:bgColors="bgColors"
+	
+	
+	>
+		<router-link 
+		:to="`/questions/tags/${tag}`" :class="[secondary ?'!text-white':'',`py-1 px-3 font-bold  rounded-3xl`]" 
+			:style="`color:${colors[index || randomNumber]}; background-color:${secondary? colors[index || randomNumber] : bgColors[index || randomNumber]}`" >
+			<span>{{ tag }}</span>
+		</router-link>
+
+	</slot>
+
 
 </template>
 
