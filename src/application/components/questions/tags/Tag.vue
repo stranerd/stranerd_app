@@ -1,7 +1,6 @@
 <template>
 	<router-link :to="`/questions/tags/${tag}`" class="py-1 px-3 font-bold  rounded-3xl" :style="`color:${colors[index || randomNumber]}; background-color:${bgColors[index || randomNumber]}`" >
 		<span>{{ tag }}</span>
-		<span>{{ index }}</span>
 	</router-link>
 
 </template>
@@ -23,6 +22,14 @@ export default defineComponent({
 	},
 
 	setup(){
+
+		// The Colors below
+		// 0: non-active
+		// 1: Cyan
+		// 2: Orange
+		// 3: Purple
+		// 4: Blue
+		// 5: Green
 		const colors: Array<string> = [
 			'0','rgba(84, 181, 211, 1)', 'rgba(255, 168, 75, 1)',  'rgba(200, 100, 220, 1)',
 			'rgba(84, 109, 211, 1)', 'rgba(0, 210, 90, 1)',  

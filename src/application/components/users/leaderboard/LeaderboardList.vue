@@ -2,52 +2,54 @@
 	<div class="flex flex-col items-center justify-content-center gap-1 gap-md-2">
 		<PageLoading v-if="loading" />
 
-		<div class="flex flex-col gap-0-5 w-full">
+		<div class="flex flex-col gap-0-5 w-full mt-6 md:mt-0">
 			<div
-				class="flex rounded-none lg:rounded-md bg-dark_gray font-bold normalText text-white py-4 lg:px-8 px-4 text-dark">
-				<div class="w-3/12">
-					<span>No.</span>
+				class="flex  rounded-xl bg-gray font-bold lg:text-base text-xs text-white py-4 lg:px-8 px-4 mx-5 text-dark">
+				<div class="lg:w-1/12 w-2/12">
+					<span>Rank</span>
 				</div>
-				<div class="w-6/12">
-					<span>Profile</span>
+				<div class="w-8/12">
 				</div>
 				<div class="w-3/12 text-right">
-					<span>Score</span>
+					<span>Nerd Score</span>
 				</div>
 			</div>
 
 			<template v-if="users.length">
 				<div v-for="(person, index) in users" :key="person.id"
-					:class="{'border border-faded_gray': person.id === id}"
-					class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-main_dark py-4 lg:px-8 px-4"
+					:class="{'bg-yellow_star': person.id === id}"
+					class="flex items-center mt-4 bg-white  rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 lg:px-8 px-4 mx-5"
 				>
-					<div class="w-3/12">
+					<div class="lg:w-1/12 w-2/12">
 						<span>{{ index + 1 }} </span>
 					</div>
-					<div class="w-3/12 flex items-center gap-2">
+					<div class="w-8/12 flex items-center gap-2">
 						<avatar :id="person.id" :size="24" :src="person.avatar" />
 						<span>
 							{{ person.bio.fullName }}
 						</span>
+						<Tag :tag="person.rank.id" :index="index + 1"/>
+
 					</div>
-					<div class="w-6/12 font-normal text-right text-primary">
+					<div class="w-3/12 font-bold text-right text-primary">
 						<span>{{ person.account.rankings[time] }}</span>
 					</div>
 				</div>
 			</template>
 
 			<div v-if="user && !hasAuthUser"
-				class="flex items-center mt-4 bg-light_gray rounded-none lg:rounded-md font-bold normalText text-main_dark py-4 lg:px-8 px-4 border border-faded_gray">
-				<div class="w-3/12">
+				class="flex items-center mt-4 bg-white rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 lg:px-8 px-4 mx-5 bg-yellow_star ">
+				<div class="lg:w-1/12 w-2/12">
 					<span> - </span>
 				</div>
-				<div class="w-7/12 flex items-center gap-2">
+				<div class="w-8/12 flex items-center gap-2">
 					<avatar :id="user?.id" :size="24" :src="user.avatar" />
 					<span>
 						{{ user.bio.fullName }}
 					</span>
+					<Tag :tag="user.rank.id" />
 				</div>
-				<div class="w-2/12 text-right text-primary font-semibold">
+				<div class="w-3/12 text-right text-primary font-bold">
 					<span>{{ user.account.rankings[time] }}</span>
 				</div>
 			</div>
@@ -65,16 +67,19 @@ import { useLeaderboardList } from '@app/composable/users/leaderboard'
 import { RankingTimes } from '@modules/users'
 import Avatar from '@app/components/core/Avatar.vue'
 import PageLoading from '@app/components/core/PageLoading.vue'
+import Tag from '../../questions/tags/Tag.vue'
 
 export default defineComponent({
 	name: 'LeaderboardList',
+	components: { Avatar, PageLoading, Tag },
 	props: {
 		time: {
 			type: String as PropType<RankingTimes>,
 			required: true
 		}
 	},
-	components: { Avatar, PageLoading },
+
+	
 	setup (props) {
 		const { users, loading, hasAuthUser, listener } = useLeaderboardList(props.time)
 		const { user, id } = useAuth()

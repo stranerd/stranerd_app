@@ -7,7 +7,7 @@
 	<div v-if="!loading && questions" class="col-span-12 flex flex-col px-3  normalText">
 		<template v-if="questions.length">
 			<div v-for="question in questions" :key="question.hash" class=" w-full md:px-2 md:py-3 mb-4 md:mb-0">
-			<UserQuestionsCard :question="question" />
+				<UserQuestionsCard :question="question" />
 			</div>
 		</template>
 

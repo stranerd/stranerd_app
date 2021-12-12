@@ -46,11 +46,7 @@
 				exact-active-class="border-b-4 text-white border-white">
 				Answers
 			</router-link>
-			<router-link v-if="id === user.id" :to="`/users/${user.id}/settings`"
-				class="pb-2 pr-3 cursor-pointer"
-				exact-active-class="border-b-4 text-white border-white">
-				Settings
-			</router-link>
+		
 		</div>
 	</div>
 </template>
