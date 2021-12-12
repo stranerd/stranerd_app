@@ -21,7 +21,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
-import RecentQuestions from '@app/components/dashboard/RecentQuestions.vue'
+import RecentQuestions from '@app/components/dashboard/RecentQuestions.vue' 
 import ContinueStudy from '@app/components/dashboard/ContinueStudy.vue'
 import MyStudy from '@app/components/study/MyStudy.vue'
 import StudyTools from '../components/study/studyTools/index.vue'

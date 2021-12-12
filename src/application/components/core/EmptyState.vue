@@ -9,7 +9,7 @@
 			{{ btnText }}
 		</router-link>
 
-		<ion-button class="btn-outline text-gray"  @click="onClick(funcParams)"> 
+		<ion-button class="btn-outline text-gray"  @click="onClick(funcParams)" v-else> 
 			{{ btnText }}
 		</ion-button>
 
