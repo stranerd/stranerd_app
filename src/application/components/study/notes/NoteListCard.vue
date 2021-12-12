@@ -1,7 +1,7 @@
 <template>
 	<!-- <div class="flex flex-col items-end "> -->
 	<router-link
-		:class="`m-0  h-[19.5rem] md:!w-[18rem] !w-[17rem]  ${colorClass}  rounded-xl  flex flex-col justify-between md:gap-2 gap-[1rem] box-border  pb-5 `"
+		:class="`m-0   md:!w-[18rem] !w-[17rem]  ${colorClass}  rounded-xl  flex flex-col justify-between md:gap-2 gap-[1rem] box-border  pb-5 `"
 
 		:to="`/study/notes/${note.id}`"
 	>
@@ -38,8 +38,8 @@
 			</div>
 
 
-			<div class="w-full flex items-center justify-center  px-4 mt-2">
-				<ion-button class="btn-outline  text-primary   font-bold w-full  lg:min-w-[7.5rem] " to="#">
+			<div class="w-full flex items-center justify-center  px-4 mt-2 pb-4">
+				<ion-button class="btn-outline  text-primary   font-bold w-full  lg:min-w-[7.5rem] " :href="`/study/notes/${note.id}`">
 					Start reading
 				</ion-button>
 			</div>

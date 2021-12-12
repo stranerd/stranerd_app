@@ -1,9 +1,9 @@
 <template>
-	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}`">
+	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}/bio`">
 		<img
 			v-if="source"
 			:src="source"
-			:style="`width: ${size}px; height: ${size}px; border-radius: 10rem; border: 1.5px solid transparent; object-fit: cover;`"
+			:style="`width: ${size}px; height: ${size}px; border-radius: 10rem;  object-fit: cover;`"
 			alt=""
 			class="!max-w-[1920px]"
 		>

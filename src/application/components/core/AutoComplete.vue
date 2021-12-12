@@ -23,7 +23,7 @@
 				<span class="text-capitalize">No</span> option matches '{{ value }}'
 			</a>
 		</div>
-	</div>
+	</div> 
 </template>
 
 <script lang="ts">

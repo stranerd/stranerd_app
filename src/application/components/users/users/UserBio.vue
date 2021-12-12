@@ -1,38 +1,38 @@
 <template>
-	<div class="col-span-12 flex flex-col px-3 normalText mb-14">
-		<div class="flex flex-col gap-3 border-2 py-10 px-4 border-faded_gray rounded-lg">
-			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-2 border-faded_gray">
-				<h1 class="headings text-main_dark font-bold">About {{ user.id === id ? 'Me' : user.firstName }}</h1>
-				<p class="leading-relaxed">
+	<div class="col-span-12 flex flex-col  normalText">
+		<div class="flex flex-col gap-3  lg:p-12 p-5 bg-white rounded-xl">
+			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-1 border-new_gray">
+				<h1 class="text-base text-main_dark font-bold">Bio {{ user.id === id ? 'Me' : user.firstName }}</h1>
+				<p class="leading-relaxed text-main_dark text-base">
 					{{ user.description }}
 				</p>
 			</div>
 
-			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-2 border-faded_gray">
-				<h1 class="headings text-main_dark font-bold">Level</h1>
-				<p class="leading-relaxed">
+			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-1 border-new_gray">
+				<h1 class="text-base text-main_dark font-bold">Level</h1>
+				<p class="leading-relaxed text-main_dark text-base">
 					University - 1st year
 				</p>
 			</div>
 
-			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-2 border-faded_gray">
-				<h1 class="headings text-main_dark font-bold">School</h1>
-				<p class="leading-relaxed">
+			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-1 border-new_gray">
+				<h1 class="text-base text-main_dark font-bold">School</h1>
+				<p class="leading-relaxed text-main_dark text-base">
 					Northwestern University
 				</p>
 			</div>
 
-			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-2 border-faded_gray">
-				<h1 class="headings text-main_dark font-bold">Best Subject</h1>
-				<Subject v-if="user.strongestSubject" :subject-id="user.strongestSubject" />
+			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-1 border-new_gray">
+				<h1 class="text-base text-main_dark font-bold">Best Subject</h1>
+				<Subject v-if="user.strongestSubject" :subject-id="user.strongestSubject" class="text-main_dark text-base" />
 				<span v-else>N/A</span>
 			</div>
 
-			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-2 border-faded_gray">
-				<h1 class="headings text-main_dark font-bold">Also Good In</h1>
+			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-1 border-new_gray">
+				<h1 class="text-base text-main_dark font-bold">Also Good In</h1>
 				<div v-if="user.weakerSubjects.length > 0" class="d-flex flex-wrap gap-0-25">
 					<span v-for="(subject, index) in user.weakerSubjects" :key="subject.id">
-						<Subject :subject-id="subject" />
+						<Subject :subject-id="subject" class="text-main_dark text-base" />
 						<span v-if="index < user.weakerSubjects.length - 1">,&nbsp;</span>
 					</span>
 				</div>
