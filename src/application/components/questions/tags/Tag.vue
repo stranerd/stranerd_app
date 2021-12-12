@@ -1,5 +1,6 @@
 <template>
-	<router-link :to="`/questions/tags/${tag}`" class="py-1 px-3 font-bold  rounded-3xl" :style="`color:${colors[index || randomNumber]}; background-color:${bgColors[index || randomNumber]}`" >
+	<router-link :to="`/questions/tags/${tag}`" :class="[secondary ?'!text-white':'',`py-1 px-3 font-bold  rounded-3xl`]" 
+		:style="`color:${colors[index || randomNumber]}; background-color:${secondary? colors[index || randomNumber] : bgColors[index || randomNumber]}`" >
 		<span>{{ tag }}</span>
 	</router-link>
 
@@ -17,6 +18,11 @@ export default defineComponent({
 		},
 		index:{
 			type: Number,
+			required: false
+		},
+		secondary:{
+			type: Boolean,
+			default: false,
 			required: false
 		}
 	},

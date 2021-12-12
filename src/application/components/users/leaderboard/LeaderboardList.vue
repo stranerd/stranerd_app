@@ -28,7 +28,7 @@
 						<span>
 							{{ person.bio.fullName }}
 						</span>
-						<Tag :tag="person.rank.id" :index="index + 1"/>
+						<Tag :tag="person.rank.id"   :secondary="true"/>
 
 					</div>
 					<div class="w-3/12 font-bold text-right text-primary">
@@ -47,7 +47,7 @@
 					<span>
 						{{ user.bio.fullName }}
 					</span>
-					<Tag :tag="user.rank.id" />
+					<Tag :tag="user.rank.id" :secondary="true"/>
 				</div>
 				<div class="w-3/12 text-right text-primary font-bold">
 					<span>{{ user.account.rankings[time] }}</span>
