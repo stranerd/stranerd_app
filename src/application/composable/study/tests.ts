@@ -108,7 +108,7 @@ export const useCreateTest = () => {
 					data: timed ? { type: TestType.timed, time: prep.time } : { type: TestType.unTimed }
 				})
 				await setMessage('Test created successfully')
-				await router.push(`/study/tests/${testId}`)
+				await router.push(`/study/tests/${testId}/take`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -190,7 +190,15 @@ export const useTestDetails = (test: TestEntity) => {
 	}
 
 	const updateAnswer = async (questionId: string, answer: number) => {
-		await UpdateTestAnswer.call(test.id, questionId, answer)
+		await testGlobal[test.id].setError('')
+		if (test.done) return
+		try {
+			await testGlobal[test.id].setLoading(true)
+			await UpdateTestAnswer.call(test.id, questionId, answer)
+		} catch (error) {
+			await testGlobal[test.id].setError(error)
+		}
+		await testGlobal[test.id].setLoading(false)
 	}
 
 	onMounted(async () => {

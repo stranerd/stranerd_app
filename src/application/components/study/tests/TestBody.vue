@@ -1,80 +1,81 @@
 <template>
-	<div>
-		<ion-segment class="md:w-96 mb-12" mode="ios" value="testYourself">
-			<ion-segment-button value="testYourself">
+	<div class="flex justify-center flex-col lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white">
+		<ion-segment v-model="tab" class="md:w-96 mb-12 mx-auto" mode="ios" value="testYourself">
+			<ion-segment-button value="list">
 				<ion-label>All questions</ion-label>
 			</ion-segment-button>
-			<ion-segment-button value="solutions">
+			<ion-segment-button value="single">
 				<ion-label>Single question</ion-label>
 			</ion-segment-button>
 		</ion-segment>
 
-		<div v-for="num in 10" :key="num" class="flex flex-col w-full">
-			<div class="flex item-center justify-between  mb-8 mt-10">
-				<ion-text class="text-main_dark font-bold md:text-2xl">
-					Question {{ num }}
-				</ion-text>
-				<div class="flex items-center text-lg text-icon_inactive gap-4">
-					<ion-icon
-						:icon="flag"
-					/>
-					<ion-icon
-						:icon="ellipsisVertical"
-					/>
-				</div>
+		<template v-if="tab === 'list'">
+			<TestQuestion v-for="(question, index) in questions" :key="question.hash" :answer="updateAnswer"
+				:question="question" :questionIndex="index"
+				:showBorder="index < questions.length - 1" :test="test" />
+		</template>
+
+		<template v-if="tab === 'single'">
+			<TestQuestion :answer="updateAnswer" :question="questions[questionIndex]" :questionIndex="questionIndex"
+				:test="test" />
+
+			<div class="mt-16 flex justify-between items-center gap-4">
+				<IonIcon :color="canGoBack ? 'grey' : 'light'" :icon="chevronBackCircle" size="large" @click="back" />
+				<span class="flex gap-2 items-center">
+					<span>Jump to</span>
+					<IonSelect v-model="questionIndex" interface="action-sheet">
+						<IonSelectOption v-for="num in questions.length" :key="num" :value="num - 1">
+							{{ num }}
+						</IonSelectOption>
+					</IonSelect>
+				</span>
+				<IonIcon :color="canGoForward ? 'grey' : 'light'" :icon="chevronForwardCircle" size="large"
+					@click="forward" />
 			</div>
-
-			<ion-text class="text-main_dark   mb-8">
-				Which of the following completely describes the number of points in which two distinct quadratic
-				functions can intersect?
-			</ion-text>
-
-			<div class="answers flex flex-col">
-				<div v-for="n in ['A', 'B', 'C', 'D']" :key="n" class="flex w-full hover:bg-light_gray px-5 py-3">
-					<input :id="n+num" :name="`${num}`" class="hidden" type="radio">
-					<label :for="n+num" :name="`${num}`"
-						class="label border-4 rounded-full border-light_gray h-8 w-8 text-base font-bold grid place-items-center  hover:border-primary">
-						{{ n }}</label>
-					<ion-text class="text-lg ml-5">{{ n }}</ion-text>
-
-				</div>
-			</div>
-
-			<div class="bg-light_gray rounded-lg w-full h-2 mt-12"></div>
-		</div>
+		</template>
 
 		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
 			<div class="lg:w-8/12  w-full px-4  mx-auto flex items-center justify-between">
 				<div class="flex">
-					<ion-text class="text-main_dark"> 2/40 answered</ion-text>
+					<ion-text class="text-main_dark">{{ test.answered }}/{{ questions.length }} answered</ion-text>
 				</div>
 
 				<div class="flex items-center">
-					<div class="h-2 w-2 bg-red-500 rounded-full mr-4" />
-					<ion-text class="text-icon_inactive">
-						00:28:20
-					</ion-text>
+					<template v-if="test.isTimed && !test.done">
+						<div class="h-2 w-2 bg-red-500 rounded-full mr-4" />
+						<ion-text class="text-icon_inactive">
+							{{ countDown }}
+						</ion-text>
+					</template>
 				</div>
 
-
 				<div class="flex items-center">
-
-					<ion-button class="btn-primary btn-lgx mr-4" @click="submit">Submit</ion-button>
+					<router-link v-if="test.done" :to="`/study/tests/${test.id}/results`">
+						<ion-button class="btn-primary btn-lgx">See Results</ion-button>
+					</router-link>
+					<ion-button v-else class="btn-primary btn-lgx" @click="submit">Submit</ion-button>
 				</div>
 			</div>
 		</div>
+
+		<PageLoading v-if="loading" />
 	</div>
 </template>
 
 <script lang="ts">
-import { IonSegment, IonSegmentButton } from '@ionic/vue'
+import { IonSegment, IonSegmentButton, IonSelect, IonSelectOption } from '@ionic/vue'
 import { useTestDetails } from '@app/composable/study/tests'
-import { defineComponent } from 'vue'
+import { chevronBackCircle, chevronForwardCircle } from 'ionicons/icons'
+import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 import { TestEntity } from '@modules/study'
+import { useCountdown } from '@app/composable/core/dates'
+import { getDigitalTime } from '@utils/dates'
+import { useStudyModal } from '@app/composable/core/modals'
+import TestQuestion from '@app/components/study/tests/TestQuestion.vue'
 
 export default defineComponent({
 	name: 'TestBody',
-	components: { IonSegment, IonSegmentButton },
+	components: { IonSegment, IonSegmentButton, TestQuestion, IonSelect, IonSelectOption },
 	props: {
 		test: {
 			type: TestEntity,
@@ -82,8 +83,33 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { error, loading, questions } = useTestDetails(props.test)
-		return { error, loading, questions }
+		const { error, loading, questions, updateAnswer } = useTestDetails(props.test)
+		const tab = ref('list')
+		const questionIndex = ref(0)
+		const canGoBack = computed(() => questionIndex.value > 0)
+		const canGoForward = computed(() => questionIndex.value < questions.value.length - 1)
+		const back = () => canGoBack.value && questionIndex.value--
+		const forward = () => canGoForward.value && questionIndex.value++
+		const { diffInSec, startTimer: startCountdown, stopTimer: stopCountdown } = useCountdown(props.test.endedAt, {})
+		onMounted(() => {
+			startCountdown()
+		})
+		onBeforeUnmount(() => {
+			stopCountdown()
+		})
+		const countDown = computed({
+			get: () => getDigitalTime(diffInSec.value),
+			set: () => {
+			}
+		})
+		const submit = () => {
+			useStudyModal().openSubmitTest()
+		}
+		return {
+			error, loading, questions, submit, updateAnswer,
+			countDown, tab, questionIndex, canGoBack, canGoForward, back, forward,
+			chevronForwardCircle, chevronBackCircle
+		}
 	}
 })
 </script>

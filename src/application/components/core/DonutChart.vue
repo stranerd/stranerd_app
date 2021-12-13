@@ -1,19 +1,19 @@
 <template>
 	<Donut
 		:auto-adjust-text-size="true"
+		:foreground="bgColor"
 		:has-legend="false"
 		:sections="sections"
 		:size="size"
 		:start-angle="0"
-		:thickness="32"
+		:thickness="thickness"
 		:total="totalSections < total ? total : totalSections"
 		background="#FFFFFF"
-		foreground="#D7E2EC"
 		unit="px"
 		@section-click="onClick"
 	>
-		<span class="score">
-			{{ formatNumber(score, 1) }}
+		<span :style="`color:${fgColor} !important;`" class="score">
+			<slot>{{ formatNumber(score, 1) }}</slot>
 		</span>
 	</Donut>
 </template>
@@ -47,10 +47,25 @@ export default defineComponent({
 			type: Function as PropType<() => {}>,
 			default: () => {
 			}
+		},
+		fgColor: {
+			type: String,
+			required: false,
+			default: '#546DD3'
+		},
+		bgColor: {
+			type: String,
+			required: false,
+			default: '#546DD322'
+		},
+		thickness: {
+			type: Number,
+			required: false,
+			default: 32
 		}
 	},
-	setup (props: any) {
-		const sections = computed(() => [{ value: props.score, color: '#546DD3' }])
+	setup (props) {
+		const sections = computed(() => [{ value: props.score, color: props.fgColor }])
 		const totalSections = computed(() => sections.value.map((s) => s.value).reduce((acc, v) => acc + v, 0))
 		return { sections, formatNumber, totalSections }
 	}
@@ -62,6 +77,5 @@ export default defineComponent({
 	.score, .cdc-text {
 		font-size: 1.5rem;
 		font-weight: 700;
-		color: $color-primary;
 	}
 </style>

@@ -50,6 +50,31 @@ export class TestEntity extends BaseEntity {
 		const done = Object.keys(this.answers).length
 		return catchDivideByZero(done, total) * 100
 	}
+
+	get isTimed () {
+		return this.data.type === TestType.timed
+	}
+
+	get endedAt () {
+		//@ts-ignore
+		return this.createdAt + (this.data.time ?? 0)
+	}
+
+	get answered () {
+		return Object.values(this.answers).length
+	}
+
+	get correctAnswers () {
+		return Math.round(this.questions.length * this.score)
+	}
+
+	get scoreText () {
+		return this.score > 90 ? 'Splendid' : this.score > 70 ? 'Nice try' : this.score > 50 ? 'Close call' : 'Keep trying'
+	}
+
+	get passed () {
+		return this.score > 50
+	}
 }
 
 type TestConstructorArgs = {
