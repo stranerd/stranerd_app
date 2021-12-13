@@ -1,20 +1,16 @@
 <template>
-	<div
-		v-if="testPrep"
+	<router-link
 		:class="`m-0  h-[7.5rem] min-w-[16.5rem] cardPadding ${colorClass}  w-full rounded-xl  flex flex-col md:gap-2 gap-[1rem] box-border  p-5 border border-faded_gray lg:border-0`"
+		:to="`/study/tests/${test.id}/take`"
 	>
-		<div class="flex flex-col items-center justify-between w-full  mx-auto">
-			<ion-text class="text-xl text-left w-full text-main_dark font-bold ml-2">
-				{{ testPrep.name }}
+		<div class="flex flex-col items-center justify-between w-full mx-auto capitalize">
+			<ion-text class="text-xl text-left w-full text-main_dark font-bold">
+				{{ test.name }}
 			</ion-text>
-			<ion-text class="text-sm text-left w-full text-main_dark font-bold mt-1 ml-2">
-				{{ testPrep.data.type }}
-			</ion-text>
-
-			<ion-progress-bar class="mt-6" value="0.5"></ion-progress-bar>
+			<ion-progress-bar class="mt-6" value="0.5" />
 		</div>
 
-	</div>
+	</router-link>
 </template>
 
 <script lang="ts">
@@ -22,19 +18,19 @@ import { calendar, play } from 'ionicons/icons'
 import { IonProgressBar } from '@ionic/vue'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
-import { TestPrepEntity } from '@modules/study'
+import { TestEntity } from '@modules/study'
 
 export default defineComponent({
-	name: 'Continue Study Card',
+	name: 'ContinueTestCard',
 	components: { IonProgressBar },
 	props: {
 		colorClass: {
 			type: String,
 			default: 'bg-light_gray'
 		},
-		testPrep: {
+		test: {
 			required: true,
-			type: TestPrepEntity
+			type: TestEntity
 		}
 	},
 	setup () {

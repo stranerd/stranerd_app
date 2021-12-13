@@ -30,11 +30,8 @@
 
 			</Swiper>
 		</template>
-
-
 	</div>
 </template>
-
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
