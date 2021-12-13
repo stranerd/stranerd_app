@@ -1,12 +1,5 @@
 import { onMounted, ref, Ref } from 'vue'
-import {
-	AddAnswerReport,
-	AnswerReportEntity,
-	DeleteAnswerReport,
-	GetAnswerReports,
-	ReportFactory,
-	ReportType
-} from '@modules/reports'
+import { AddReport, DeleteReport, GetReports, ReportEntity, ReportFactory, ReportType } from '@modules/reports'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useReportModal } from '@app/composable/core/modals'
 import { Alert } from '../core/notifications'
@@ -28,7 +21,7 @@ export const useCreateReport = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddAnswerReport.call(factory.value)
+				await AddReport.call(factory.value)
 				useReportModal().closeReportAnswer()
 				factory.value.reset()
 				await setMessage('Report sent successfully')
@@ -46,20 +39,20 @@ export const useCreateReport = () => {
 }
 
 const global = {
-	reports: ref([] as AnswerReportEntity[]),
+	reports: ref([] as ReportEntity[]),
 	fetched: ref(false),
 	hasMore: ref(false),
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
 
-const pushToReportList = (report: AnswerReportEntity) => {
+const pushToReportList = (report: ReportEntity) => {
 	const index = global.reports.value.findIndex((r) => r.id === report.id)
 	if (index !== -1) global.reports.value.splice(index, 1, report)
 	else global.reports.value.push(report)
 }
 
-const unshiftToReportList = (report: AnswerReportEntity) => {
+const unshiftToReportList = (report: ReportEntity) => {
 	const index = global.reports.value.findIndex((r) => r.id === report.id)
 	if (index !== -1) global.reports.value.splice(index, 1, report)
 	else global.reports.value.unshift(report)
@@ -71,7 +64,7 @@ export const useReportsList = () => {
 		try {
 			await global.setLoading(true)
 			const lastDate = global.reports.value[0]?.createdAt
-			const reports = await GetAnswerReports.call(lastDate)
+			const reports = await GetReports.call(ReportType.answers, lastDate)
 			global.hasMore.value = !!reports.pages.next
 			reports.results.forEach(unshiftToReportList)
 			global.fetched.value = true
@@ -104,7 +97,7 @@ export const useDeleteReport = (id: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteAnswerReport.call(id)
+				await DeleteReport.call(id)
 				global.reports.value = global.reports.value
 					.filter((r) => r.id !== id)
 				await setMessage('Report deleted successfully')

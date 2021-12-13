@@ -7,7 +7,7 @@ type Keys = {
 	reportedId: string, type: ReportType, message: string
 }
 
-export class ReportFactory extends BaseFactory<ReportEntity<any>, ReportToModel, Keys> {
+export class ReportFactory extends BaseFactory<ReportEntity, ReportToModel, Keys> {
 	public rules = {
 		type: {
 			required: true,
@@ -56,9 +56,9 @@ export class ReportFactory extends BaseFactory<ReportEntity<any>, ReportToModel,
 		}
 	}
 
-	public loadEntity = (entity: ReportEntity<any>) => {
+	public loadEntity = (entity: ReportEntity) => {
 		this.reportedId = entity.reportedId
-		this.type = entity.type
+		this.type = entity.data.type
 		this.message = entity.message
 	}
 }

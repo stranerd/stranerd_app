@@ -1,12 +1,13 @@
 <template>
 	<div class="flex flex-col items-start w-full">
+		<PageLoading v-if="loading" />
+
 		<div class="flex item-center justify-between mb-8 mt-10 w-full">
 			<ion-text class="text-main_dark font-bold md:text-2xl">
 				Question {{ questionIndex + 1 }}
 			</ion-text>
 			<div class="flex items-center text-lg text-icon_inactive gap-4">
-				<IonIcon :icon="flag" />
-				<IonIcon :icon="ellipsisVertical" />
+				<IonIcon :icon="flag" @click="createReport(question)" />
 			</div>
 		</div>
 
@@ -49,6 +50,8 @@
 			</template>
 		</template>
 
+		<span v-if="error" class="text-danger my-4">{{ error }}</span>
+
 		<div v-if="showBorder" class="bg-light_gray rounded-lg w-full h-2 mt-12" />
 	</div>
 </template>
@@ -65,9 +68,12 @@ import {
 } from 'ionicons/icons'
 import { PastQuestionEntity, TestEntity, TestType } from '@modules/study'
 import { getAlphabet } from '@utils/commons'
+import { useCreateReport } from '@root/application/composable/reports/pastQuestions'
 
 export default defineComponent({
 	name: 'TestQuestion',
+	components: {},
+
 	props: {
 		test: {
 			type: TestEntity,
@@ -96,6 +102,7 @@ export default defineComponent({
 			if (props.test.data.type === TestType.unTimed) return props.test.answers[props.question.id] !== undefined
 			return props.test.done
 		})
+		const { loading, error, createReport } = useCreateReport()
 		// @ts-ignore
 		const isCorrect = computed(() => showAnswers.value && props.test.answers[props.question.id] === props.question.data.correctIndex)
 		// @ts-ignore
@@ -112,7 +119,8 @@ export default defineComponent({
 			getAlphabet,
 			isCorrect,
 			isInCorrect,
-			showExplanation
+			showExplanation,
+			loading, error, createReport
 		}
 	}
 })

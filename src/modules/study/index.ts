@@ -257,8 +257,12 @@ export { InstitutionEntity, InstitutionFactory }
 export { FlashCardEntity, FlashCardFactory }
 export { NoteEntity, NoteFactory }
 export { VideoEntity, VideoFactory }
-export { CommentEntity, CommentFactory, CommentType, CommentData }
+export { CommentEntity, CommentFactory }
 export { PastQuestionFactory, PastQuestionEntity }
-export { TestPrepFactory, TestPrepEntity, PrepType, PrepData }
-export { TestEntity, TestData, TestType }
-export { PastQuestionType, PastQuestionData }
+export { TestPrepFactory, TestPrepEntity }
+export { TestEntity }
+
+export { CommentType, CommentData } from './domain/entities/comment'
+export { PrepType, PrepData } from './domain/entities/testPrep'
+export { TestType, TestData } from './domain/entities/test'
+export { PastQuestionType, PastQuestionData } from './domain/entities/pastQuestion'
