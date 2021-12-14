@@ -22,7 +22,6 @@ export const useModal = (stack: Ref<string[]>) => {
 				.create({
 					component: modals[id].component,
 					cssClass: cssClass
-
 				})
 			modals[id].modal?.present?.()
 		}

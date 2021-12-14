@@ -2,17 +2,15 @@
 	<div>
 		<div class="w-full flex justify-between">
 			<div class="heading font-bold text-main_dark flex items-center">
-
-
 				<ion-text class="mr-3">
-					Test Prep
+					Test Preps
 				</ion-text>
 				<ion-badge v-if="suggested" class="uppercase">
 					Suggested
 				</ion-badge>
 			</div>
 
-			<router-link class="text-primary normalText flex items-center font-bold "
+			<router-link class="text-primary normalText flex items-center font-bold"
 				to="/study/preps/explore">
 				<span>view all</span>
 			</router-link>

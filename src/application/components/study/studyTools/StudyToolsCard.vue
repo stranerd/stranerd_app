@@ -27,7 +27,8 @@
 			</ion-button>
 		</router-link>
 		<ion-button v-if="onClick"
-			class="btn-secondary min-w-[7rem] bg-transparent mb-4 text-white lg:text-base text-xs font-bold"
+			:style="`color: ${color};`"
+			class="btn-white min-w-[13rem] bg-transparent mb-4 text-white lg:text-base text-xs  font-bold"
 			@click="onClick">
 			{{ btnText }}
 		</ion-button>

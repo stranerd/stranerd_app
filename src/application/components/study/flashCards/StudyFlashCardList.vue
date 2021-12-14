@@ -3,8 +3,6 @@
 		<div class="w-full flex justify-between">
 
 			<div class="heading font-bold text-main_dark flex items-center">
-
-
 				<ion-text class="mr-3">
 					FlashCards
 				</ion-text>
