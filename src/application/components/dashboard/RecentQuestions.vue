@@ -1,6 +1,6 @@
 <template>
 	<div class="mt-7">
-		<div class="w-full flex justify-between">
+		<div class="w-full flex justify-between mb-8">
 			<span class="heading font-bold text-main_dark">
 				Latest questions
 			</span>
@@ -21,15 +21,9 @@
 			</div>
 		</template>
 		<template v-else>
-			<Swiper :freeMode="true" :items="questions" :slides="1.1" class="mt-2 overflow-x-auto flex"
-				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] min-w-[16.5rem] !mr-6">
-				<template v-slot:default="{ item: question, index }">
-					<QuestionListCard
-						:colorClass="0 === index ? 'bg-white min-w-[16.5rem]' : 'bg-white min-w-[16.5rem]'"
-						:fromHome="true"
-						:question="question" class="h-[9.7rem]" />
-				</template>
-			</Swiper>
+			<div class="showcase">
+				<QuestionListCard v-for="(question, index) in questions" :key="question" :question="question" :index="index+1"  />
+			</div>
 		</template>
 	</div>
 </template>
@@ -37,14 +31,13 @@
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
-import Swiper from '@app/components/core/Swiper.vue'
 import QuestionListCard from '@app/components/questions/questions/RecentQuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
 	name: 'RecentQuestions',
-	components: { Swiper, QuestionListCard, EmptyState },
+	components: {  QuestionListCard, EmptyState },
 	setup () {
 		const { questions: allQuestions, listener, loading, error } = useQuestionList()
 		const questions = computed({

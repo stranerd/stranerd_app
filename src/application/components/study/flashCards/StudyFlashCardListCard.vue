@@ -3,7 +3,7 @@
 
 
 	<router-link v-if="flashCard"
-		:class="`m-0  h-[11rem] md:!w-[21rem] !w-[17rem] cardPadding ${colorClass}   rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border justify-between p-5 `"
+		:class="`m-0  h-[11rem]  !w-full cardPadding bg-white   rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border justify-between p-5 `"
 		:to="`/study/flashCards/${flashCard.id}`"
 	>
 		<div class="w-full justify-between items-start flex">
@@ -12,7 +12,8 @@
 					{{ flashCard.title }}
 				</ion-text>
 
-				<Tag>
+				<Tag
+				>
 					<template v-slot="slotProps">
 						<div
 							:style="`color:${slotProps.colors[slotProps.index || slotProps.randomNumber]}; background-color:${slotProps.bgColors[slotProps.index || slotProps.randomNumber]}`"
@@ -80,14 +81,14 @@ import { formatNumber, pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { useEditState } from '@app/composable/study/state'
 import { FlashCardEntity } from '@modules/study'
-import Tag from '../../questions/tags/Tag.vue'
+import Tag from '../../questions/tags/StudyTag.vue'
 
 export default defineComponent({
 	name: 'StudyFlashCardListCard',
 	props: {
 		colorClass: {
 			type: String,
-			default: 'bg-light_gray'
+			default: 'bg-white'
 		},
 		index: {
 			type: Number,
