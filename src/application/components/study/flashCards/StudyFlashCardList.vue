@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between">
+		<div class="w-full flex justify-between mb-8">
 
 			<div class="heading font-bold text-main_dark flex items-center">
 
@@ -25,12 +25,9 @@
 			</div>
 		</template>
 		<template v-else>
-			<Swiper :freeMode="true" :items="flashcards" :slides="1.1" class="mt-2 overflow-x-auto flex"
-				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
-				<template v-slot:default="{ item, index }">
-					<StudyFlashCardListCard :flashCard="item" :index="index+1" colorClass="bg-white" />
-				</template>
-			</Swiper>
+			<div class="showcase">
+				<StudyFlashCardListCard v-for="(flashcard, index) in flashcards" :key="flashcard" :flashCard="flashcard" :index="index+1"  />
+			</div>
 		</template>
 	</div>
 </template>
@@ -38,7 +35,6 @@
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { chevronForwardOutline } from 'ionicons/icons'
-import Swiper from '@app/components/core/Swiper.vue'
 import { useFlashCardList } from '@app/composable/study/flashCards'
 import StudyFlashCardListCard from '@app/components/study/flashCards/StudyFlashCardListCard.vue'
 import { IonBadge } from '@ionic/vue'
@@ -51,7 +47,7 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: { Swiper, StudyFlashCardListCard, IonBadge },
+	components: {  StudyFlashCardListCard, IonBadge },
 	setup () {
 		const { flashCards: allFlashcard, listener, loading, error } = useFlashCardList()
 		const flashcards = computed({

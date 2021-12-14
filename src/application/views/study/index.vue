@@ -1,6 +1,6 @@
 <template>
 	<DashboardLayout>
-		<div class="pl-6 lg:pl-2 pr-1.5 pt-8 pb-8">
+		<div class="px-3 pt-8 pb-8">
 			<StudyHeader />
 
 			<StudySection class="mt-8" />

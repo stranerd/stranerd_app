@@ -3,6 +3,15 @@ module.exports = {
 	darkMode: false, // or 'media' or 'class'
 	mode:'jit',
 	theme: {
+		screens: {
+			'sm': '640px',
+ 			'md': '768px',
+			'lg': '1280px',
+			'mmd': '1420px', 
+			'2xl': '1536px',
+
+	 
+		},
 		extend: {
 			colors: {
 				// Build your palette here
@@ -31,7 +40,10 @@ module.exports = {
 			},
 			  fontFamily: {
 				'nuni': ['"Nunito Sans"', 'sans-serif']
-			}
+			},
+	
+
+
 		},
 	},
 	variants: {

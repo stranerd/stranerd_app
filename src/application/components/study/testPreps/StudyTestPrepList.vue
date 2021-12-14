@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between">
+		<div class="w-full flex justify-between mb-8">
 			<div class="heading font-bold text-main_dark flex items-center">
 
 
@@ -23,29 +23,27 @@
 				<EmptyState info="No TestPreps Available." />
 			</div>
 		</template>
+
 		<template v-else>
-			<Swiper :freeMode="true" :items="testPreps" :slides="1.1" class="mt-2 overflow-x-auto flex"
-				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] min-w-[16.5rem] !mr-6">
-				<template v-slot:default="{ item, index }">
-					<TestPrepCard :colorClass=" index  === 0 ? 'bg-white' : 'bg-white'" :index="index"
-						:testPrep="item" />
-				</template>
-			</Swiper>
+			<div class="showcase">
+				<TestPrepCard v-for="(testPrep, index) in testPreps" :key="testPrep" :testPrep="testPrep" :index="index+1"  />
+			</div>
 		</template>
+
+
 	</div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons'
-import Swiper from '@app/components/core/Swiper.vue'
 import { useTestPrepList } from '@app/composable/study/testPreps'
 import TestPrepCard from './StudyTestPrepListCard.vue'
 import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'StudyTestPrepList',
-	components: { Swiper, TestPrepCard, IonBadge },
+	components: {  TestPrepCard, IonBadge },
 	props: {
 		suggested: {
 			required: false,
