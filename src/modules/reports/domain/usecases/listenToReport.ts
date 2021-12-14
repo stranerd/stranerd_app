@@ -1,15 +1,15 @@
 import { Listeners } from '@modules/core'
 import { IReportRepository } from '../irepositories/ireport'
-import { ReportEntity, Type } from '../entities/report'
+import { ReportEntity } from '../entities/report'
 
-export class ListenToReportUseCase<T extends Type> {
+export class ListenToReportUseCase {
 	private repository: IReportRepository
 
 	constructor (repository: IReportRepository) {
 		this.repository = repository
 	}
 
-	async call (id: string, listeners: Listeners<ReportEntity<T>>) {
+	async call (id: string, listeners: Listeners<ReportEntity>) {
 		return await this.repository.listenToOne(id, listeners)
 	}
 }

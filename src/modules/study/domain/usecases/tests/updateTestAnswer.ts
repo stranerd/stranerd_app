@@ -7,7 +7,7 @@ export class UpdateTestAnswerUseCase {
 		this.repository = repository
 	}
 
-	async call (id: string, questionId: string, answer: number) {
+	async call (id: string, questionId: string, answer: number | string) {
 		return await this.repository.updateAnswer(id, questionId, answer)
 	}
 }

@@ -32,7 +32,7 @@
 			:event="event"
 			:is-open="isOpenRef"
 			:translucent="true"
-			css-class="mt-4 rounded-xl"
+			css-class="pt-8 rounded-xl"
 			@didDismiss="setOpen(false)"
 		>
 			<div class="flex flex-col  p-6 !w-52">

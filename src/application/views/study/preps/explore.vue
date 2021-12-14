@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/study/explore/ExploreWrapper.vue'
-import ExploreTestPrep from '@app//components/study/explore/ExploreTestPrep.vue'
+import ExploreTestPrep from '@app//components/study/explore/ExploreTestPreps.vue'
 
 export default defineComponent({
 	name: 'Explore TestPreps',

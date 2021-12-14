@@ -1,21 +1,25 @@
 <template>
 	<div>
-		<div class="flex justify-center items-center">
-			<span class="font-bold text-main_dark heading hidden md:block">
-				Leaderboard
-			</span>
-			<div class="flex gap-4 md:ml-auto">
-				<IonSelect v-model="time"
-					class="max-w-[138px] text-xs md:text-sm  placeholder-[#8B9EB1] font-bold capitalize"
-					interface="action-sheet" placeholder="Daily">
-					<IonSelectOption v-for="time in times" :key="time" :value="time" class="capitalize">
-						{{ time }}
-					</IonSelectOption>
-				</IonSelect>
+		<div class="bg-primary w-full md:p-6 p-6 mb-6 rounded-b-xl md:rounded-none ">
+
+			<div class="flex flex-col md:flex-row justify-center items-center  w-full md:max-w-4xl md:mx-auto  px-6">
+				<span class="font-bold text-white text-3xl hidden md:block">
+					Leaderboard
+				</span>
+				<div class="flex gap-4 md:ml-auto -mb-11 md:mb-0 md:w-auto w-full">
+					<IonSelect v-model="time"
+						class="md:w-[138px] py-4 md:py-3 px-5 md:px-4  w-full text-xs md:text-base  placeholder-[#8B9EB1] font-bold capitalize"
+						interface="action-sheet" placeholder="Daily">
+						<IonSelectOption v-for="time in times" :key="time" :value="time" class="capitalize">
+							{{ time }}
+						</IonSelectOption>
+					</IonSelect>
+				</div>
 			</div>
 		</div>
+	
 
-		<LeaderboardList :key="time" :time="time" />
+		<LeaderboardList :key="time" :time="time" class="max-w-4xl mx-auto" />
 	</div>
 </template>
 
@@ -39,11 +43,11 @@ export default defineComponent({
 	ion-select {
 		--placeholder-color: #8B9EB1;
 		--placeholder-opacity: 1;
-		background-color: #F7F7FC;
+		background-color: #fff !important;
 		--color: #8B9EB1;
 		--padding-end: 1rem;
 		--padding-top: 0.5rem !important;
 		--padding-bottom: 0.5rem !important;
-		border-radius: 6px;
+		border-radius: 12px;
 	}
 </style>

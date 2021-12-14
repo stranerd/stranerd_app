@@ -1,15 +1,14 @@
 <template>
 	<div
-		:class="`m-0    min-w-[17.5rem] w-full cardPadding  lg:border-0  rounded-3xl  flex flex-col justify-center items-center  gap-[0.2rem] box-border  !p-5 `"
+		:class="`m-0 min-w-[17.5rem] w-full cardPadding  lg:border-0  rounded-3xl  flex flex-col justify-center items-center  gap-[0.2rem] box-border  !p-5 `"
 		:style="`background: ${color};`"
 	>
-
 		<ion-icon
 			v-if="icon"
 			:icon="icon"
 			class="text-white lg:text-5xl text-3xl h-8 lg:h-12"
 		/>
-		<img src="../../../assets/images/New/flashCard.png" alt="flashCard" class="h-8 lg:h-12" v-else>
+		<img v-else alt="flashCard" class="h-8 lg:h-12" src="../../../assets/images/New/flashCard.png">
 
 		<ion-text class="font-extrabold text-white text-xs lg:text-base mt-3">
 			{{ title }}
@@ -19,14 +18,19 @@
 			{{ subText }}
 		</ion-text>
 
-		<router-link :to="route">
+		<router-link v-if="route" :to="route">
 			<ion-button
-				class="btn-white min-w-[13rem] bg-transparent mb-4 text-white lg:text-base text-xs  font-bold"
 				:style="`color: ${color};`"
+				class="btn-white min-w-[13rem] bg-transparent mb-4 text-white lg:text-base text-xs  font-bold"
 			>
 				{{ btnText }}
 			</ion-button>
 		</router-link>
+		<ion-button v-if="onClick"
+			class="btn-secondary min-w-[7rem] bg-transparent mb-4 text-white lg:text-base text-xs font-bold"
+			@click="onClick">
+			{{ btnText }}
+		</ion-button>
 
 	</div>
 </template>
@@ -36,12 +40,8 @@ import { calendar, play } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'TutorCard',
+	name: 'StudyToolsCard',
 	props: {
-		// colorClass: {
-		// 	type: String,
-		// 	default: 'bg-light_gray'
-		// },
 		title: {
 			type: String,
 			default: ''
@@ -56,13 +56,18 @@ export default defineComponent({
 		},
 		route: {
 			type: String,
-			default: ''
+			required: false
 		},
 		icon: {
 			type: String
 		},
 		color: {
-			type: String
+			type: String,
+			required: true
+		},
+		onClick: {
+			type: Function,
+			required: false
 		}
 	},
 	setup () {

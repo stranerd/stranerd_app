@@ -5,7 +5,7 @@
 				My Study
 			</span>
 
-			<router-link v-if="true && isLoggedIn"
+			<router-link v-if="isLoggedIn"
 				class="text-primary normalText flex items-center font-bold "
 				to="#">
 				<span>view all</span>
@@ -30,11 +30,8 @@
 
 			</Swiper>
 		</template>
-
-
 	</div>
 </template>
-
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'

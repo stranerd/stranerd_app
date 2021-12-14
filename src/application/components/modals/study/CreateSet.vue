@@ -79,19 +79,20 @@
 			</div>
 
 		</div>
-	</Modal>	
+	</Modal>
 	<PageLoading v-if="loading" />
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
-
-import { IonRippleEffect } from '@ionic/vue'
+import { IonItem, IonListHeader, IonRadio, IonRadioGroup, IonRippleEffect } from '@ionic/vue'
 import { chevronDown, ellipse, ellipseOutline } from 'ionicons/icons'
 import { useStudyModal } from '@app/composable/core/modals'
 import { useCreateSet } from '@app/composable/study/sets'
 import { useTags } from '@app/composable/core/forms'
 
 export default defineComponent({
+	components: { IonRippleEffect, IonListHeader, IonRadio, IonItem, IonRadioGroup },
 	setup () {
 		const closeCreateSet = () => {
 			useStudyModal().closeCreateSet()
@@ -109,12 +110,10 @@ export default defineComponent({
 			createSet, factory, closeCreateSet,
 			chevronDown, ellipse, ellipseOutline
 		}
-	},
-	components: {
-		IonRippleEffect
 	}
 })
 </script>
+
 <style scoped>
 	ion-input {
 		--placeholder-color: #8B9EB1;
@@ -129,6 +128,4 @@ export default defineComponent({
 	ion-label {
 		--color: #8B9EB1 !important;
 	}
-
-
 </style>

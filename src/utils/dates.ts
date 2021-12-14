@@ -50,3 +50,13 @@ export const getTimeFormatted = (timeInSecs: number) => {
 		return `${months} mon${months > 1 ? 's' : ''}`
 	}
 }
+
+export const getDigitalTime = (timeInSecs: number) => {
+	const hours = Math.floor(timeInSecs / 3600)
+	const minutes = Math.floor((timeInSecs % 3600) / 60)
+	const seconds = Math.floor(timeInSecs % 60)
+	let hr = ''
+	if (hours) hr = `${hours < 10 ? '0' + hours : hours}:`
+	const rest = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`
+	return hr + rest
+}

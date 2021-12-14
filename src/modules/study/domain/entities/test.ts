@@ -1,12 +1,14 @@
 import { BaseEntity } from '@modules/core'
 import { catchDivideByZero } from '@utils/commons'
+import { PastQuestionType } from './pastQuestion'
 
 export class TestEntity extends BaseEntity {
 	public readonly id: string
 	public readonly name: string
 	public readonly data: TestData
 	public readonly questions: string[]
-	public readonly answers: Record<string, number>
+	public readonly questionType: PastQuestionType
+	public readonly answers: Record<string, number | string>
 	public readonly score: number
 	public readonly userId: string
 	public readonly prepId: string
@@ -19,6 +21,7 @@ export class TestEntity extends BaseEntity {
 		             name,
 		             data,
 		             questions,
+		             questionType,
 		             answers,
 		             score,
 		             userId,
@@ -32,6 +35,7 @@ export class TestEntity extends BaseEntity {
 		this.name = name
 		this.data = data
 		this.questions = questions
+		this.questionType = questionType
 		this.answers = answers
 		this.score = score
 		this.userId = userId
@@ -46,14 +50,40 @@ export class TestEntity extends BaseEntity {
 		const done = Object.keys(this.answers).length
 		return catchDivideByZero(done, total) * 100
 	}
+
+	get isTimed () {
+		return this.data.type === TestType.timed
+	}
+
+	get endedAt () {
+		//@ts-ignore
+		return this.createdAt + (this.data.time ?? 0)
+	}
+
+	get answered () {
+		return Object.values(this.answers).length
+	}
+
+	get correctAnswers () {
+		return Math.round(this.questions.length * this.score)
+	}
+
+	get scoreText () {
+		return this.score > 90 ? 'Splendid' : this.score > 70 ? 'Nice try' : this.score > 50 ? 'Close call' : 'Keep trying'
+	}
+
+	get passed () {
+		return this.score > 50
+	}
 }
 
 type TestConstructorArgs = {
 	id: string
 	name: string
 	data: TestData
+	questionType: PastQuestionType
 	questions: string[]
-	answers: Record<string, number>
+	answers: Record<string, number | string>
 	score: number
 	userId: string
 	prepId: string

@@ -35,7 +35,7 @@
 	}
 
 	.layout-body {
-		@apply lg:w-3/4 w-full flex flex-col p-0 h-full overflow-y-auto overflow-x-hidden max-w-[100vw]
+		@apply lg:w-3/4 w-full flex flex-col p-0 h-full overflow-y-auto overflow-x-hidden max-w-[100vw] bg-new_gray
 	}
 
 	.layout-body-chat {

@@ -1,7 +1,6 @@
 <template>
-	<!-- <div class="flex flex-col items-end "> -->
 	<router-link
-		:class="`m-0  h-[19.5rem] md:!w-[18rem] !w-[17rem]  ${colorClass}  rounded-xl  flex flex-col justify-between md:gap-2 gap-[1rem] box-border  pb-5 `"
+		:class="`m-0   md:!w-[18rem] !w-[17rem]  ${colorClass}  rounded-xl  flex flex-col justify-between md:gap-2 gap-[1rem] box-border  pb-5 `"
 
 		:to="`/study/notes/${note.id}`"
 	>
@@ -15,9 +14,6 @@
 				</ion-text>
 			</div>
 
-	
-
-
 			<div class="w-full justify-between items-center flex px-4 pt-3 pb-1 w-full">
 				<div class="text-base text-main_dark font-bold  text-left flex-col flex">
 					<ion-text class="text-gray">
@@ -27,7 +23,7 @@
 						{{ note.title }}
 					</ion-text>
 				</div>
-			
+
 
 				<ion-icon
 
@@ -38,34 +34,27 @@
 			</div>
 
 
-			<div class="w-full flex items-center justify-center  px-4 mt-2">
-				<ion-button class="btn-outline  text-primary   font-bold w-full  lg:min-w-[7.5rem] " to="#">
+			<div class="w-full flex items-center justify-center  px-4 mt-2 pb-4">
+				<ion-button :href="`/study/notes/${note.id}`"
+					class="btn-outline  text-primary   font-bold w-full  lg:min-w-[7.5rem] ">
 					Start reading
 				</ion-button>
 			</div>
 		</div>
 
-
 	</router-link>
-
-	<!-- <ion-text class="font-bold text-delete_red cursor-pointer" v-if="editState['note']" @click="deleteNote">
-			Remove
-		</ion-text> -->
-	<!-- </div> -->
-	<!-- <page-loading v-if="deleteLoading"/> -->
 </template>
 
 <script lang="ts">
-import { calendar, play, ellipsisVertical } from 'ionicons/icons'
+import { calendar, ellipsisVertical, play } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
-// import ShowRatings from '@app/components/core/ShowRatings.vue'
 import { NoteEntity } from '@modules/study'
 import { useEditState } from '@app/composable/study/state'
 import { useDeleteNote } from '@app/composable/study/notes'
 
 export default defineComponent({
-	name: 'NoteListCard',
+	name: 'StudyNoteListCard',
 	props: {
 		colorClass: {
 			type: String,
@@ -82,16 +71,13 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { editState } = useEditState()
-
 		const { loading: deleteLoading, error, deleteNote } = useDeleteNote(props.note.id)
-
-	
 		return {
 			deleteNote, deleteLoading,
-			editState,  formatNumber,
+			editState, formatNumber,
 			calendar, play, ellipsisVertical
 		}
-	},
+	}
 })
 </script>
 

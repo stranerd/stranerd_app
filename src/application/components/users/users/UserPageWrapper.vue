@@ -1,6 +1,6 @@
 <template>
 	<Justified>
-		<div class="normalText">
+		<div class="normalText  h-full md:bg-new_gray">
 			<PageLoading v-if="loading" />
 			<template v-if="user">
 				<UserProfileCard :user="user" />

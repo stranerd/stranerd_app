@@ -62,7 +62,7 @@ export class TestRepository implements ITestRepository {
 		return model ? this.transformer.fromJSON(model) : null
 	}
 
-	async updateAnswer (id: string, questionId: string, answer: number) {
+	async updateAnswer (id: string, questionId: string, answer: number | string) {
 		return this.dataSource.updateAnswer(id, questionId, answer)
 	}
 

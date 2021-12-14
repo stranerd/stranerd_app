@@ -1,5 +1,5 @@
 <template>
-	<div class="md:w-8/12 w-full px-4 mx-auto   mt-8">
+	<div class="md:w-8/12 w-full px-4 mx-auto mt-8">
 		<!-- <div class="flex gap-4 flex-col md:flex-row items-center">
 			<ion-segment mode="ios" value="all">
 				<ion-segment-button value="all">
@@ -36,7 +36,6 @@
 			<FlashCardCard v-for="(flashCard, index) in flashCards" :key="flashCard.id" :flashCard="flashCard"
 				:index="index + 1" />
 		</div>
-
 	</div>
 
 	<page-loading v-if="loading" />
@@ -44,7 +43,7 @@
 
 <script lang="ts">
 import { onBeforeUnmount, onMounted } from 'vue'
-import FlashCardCard from '@app/components/study/flashCards/StudyFlashCardCard.vue'
+import FlashCardCard from '@app/components/study/flashCards/StudyFlashCardListCard.vue'
 import { useFlashCardList } from '@app/composable/study/flashCards'
 import { useAuth } from '@app/composable/auth/auth'
 

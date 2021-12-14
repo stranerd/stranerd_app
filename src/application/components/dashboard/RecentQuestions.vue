@@ -30,8 +30,6 @@
 						:question="question" class="h-[9.7rem]" />
 				</template>
 			</Swiper>
-
-
 		</template>
 	</div>
 </template>
@@ -40,13 +38,13 @@
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
-import QuestionListCard from '@app/components/questions/QuestionListCard.vue'
+import QuestionListCard from '@app/components/questions/questions/RecentQuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
 	name: 'RecentQuestions',
-	components: {  Swiper, QuestionListCard, EmptyState },
+	components: { Swiper, QuestionListCard, EmptyState },
 	setup () {
 		const { questions: allQuestions, listener, loading, error } = useQuestionList()
 		const questions = computed({
