@@ -25,6 +25,20 @@ http://ionicframework.com/docs/theming/ */
 	--ion-font-family: 'Raleway', sans-serif;
 	/** primary **/
 	--ion-color-primary: #546DD3;
+	--ion-color-primary-rgb: 19, 39, 64, 0.25;
+	--ion-color-primary-contrast: #ffffff;
+	--ion-color-primary-contrast-rgb: 255, 255, 255;
+	--ion-color-primary-shade: #3171e0;
+	--ion-color-primary-tint: #4c8dff;
+	/** orange **/
+	--ion-color-orange: #FFA84B;
+	--ion-color-orange-rgb: 56, 128, 255;
+	--ion-color-orange-contrast: #ffffff;
+	--ion-color-orange-contrast-rgb: 255, 255, 255;
+	--ion-color-orange-shade: #FFA84B;
+	--ion-color-orange-tint: #FFA84B;
+	/** primary **/
+	--ion-color-primary: #546DD3;
 	--ion-color-primary-rgb: 56, 128, 255;
 	--ion-color-primary-contrast: #ffffff;
 	--ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -113,9 +127,20 @@ http://ionicframework.com/docs/theming/ */
 	--border-radius: 0.75rem !important;
 }
 
+.study-modal{
+		--background-color: #00000065;
+	--height: 28rem !important;
+	--width: 800px;
+	--border-radius: .75rem;
+	@media (max-width: 500px) {
+		--height:100vh !important;
+		--width: 100vw;
+		--border-radius: 0rem;
+	}
+}
 .sm-modal {
 	--background-color: #00000065;
-	--height: 21.875rem !important;
+	--height: 28rem !important;
 	--width: 400px;
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
@@ -125,6 +150,17 @@ http://ionicframework.com/docs/theming/ */
 	}
 }
 
+.question-modal {
+	--background-color: #00000065;
+	--height: 39rem;
+	--width: 800px;
+	--border-radius: .75rem;
+	@media (max-width: 500px) {
+		--height: 100vh;
+		--width: 100vw;
+		--border-radius: 0rem;
+	}
+}
 .modal-class {
 	--background-color: #00000065;
 	--height: 39rem;
@@ -178,7 +214,7 @@ http://ionicframework.com/docs/theming/ */
 		--padding-start: 1rem;
 		--padding-end: 1rem;
 		--box-shadow: none;
-		--border-radius: .5rem;
+		--border-radius: .75rem;
 		--border-width: 1px;
 		--border-style: solid;
 		--border-color: #4D5C6F;
@@ -200,28 +236,46 @@ http://ionicframework.com/docs/theming/ */
 	--border-radius: 0.75rem;
 	--border-width: 1px;
 	--border-style: solid;
-	--border-color: #4D5C6F;
+	--border-color: #C7D6E3;
 	font-weight: 700;
 	text-transform: capitalize !important;
 	letter-spacing: 0.02rem !important;
 
-	@media (max-width: 640px) {
-		--background: transparent;
-		--padding-top: 0.8rem;
-		--padding-bottom: 0.8rem;
-		--padding-start: 1rem;
-		--padding-end: 1rem;
-		--color: white;
-		--box-shadow: none;
-		--border-radius: .5rem;
-		--border-width: 1px;
-		--border-style: solid;
-		--border-color: #4D5C6F;
-		font-weight: 700;
-		text-transform: capitalize !important;
-		letter-spacing: 0.01rem !important;
-	}
+	// @media (max-width: 640px) {
+	// 	--background: transparent;
+	// 	--padding-top: 0.8rem;
+	// 	--padding-bottom: 0.8rem;
+	// 	--padding-start: 1rem;
+	// 	--padding-end: 1rem;
+	// 	--color: white;
+	// 	--box-shadow: none;
+	// 	--border-radius: .5rem;
+	// 	--border-width: 1px;
+	// 	--border-style: solid;
+	// 	--border-color: #C7D6E3;
+	// 	font-weight: 700;
+	// 	text-transform: capitalize !important;
+	// 	letter-spacing: 0.01rem !important;
+	// }
 
+}
+
+.btn-outline-sm{
+		@media (max-width: 640px) {
+	--background: transparent;
+	--padding-top: 0.7rem;
+	--padding-bottom: 0.7rem;
+	--padding-start: 1.25rem;
+	--padding-end: 1.25rem;
+	--color:inherit !important;
+	--box-shadow: none;
+	--border-radius: 0.5rem;
+	box-shadow: none;
+	border-radius: 0.5rem;
+	font-weight: 700;
+	text-transform: capitalize !important;
+	letter-spacing: 0.02rem !important;
+	}
 }
 
 .btn-primary {
@@ -232,14 +286,46 @@ http://ionicframework.com/docs/theming/ */
 	--padding-end: 1.4rem;
 	--color: white;
 	--box-shadow: none;
-	--border-radius: 0.5rem;
+	--border-radius: 0.75rem;
 
 	color: white;
+	box-shadow: none;
+	border-radius: 0.75rem;
+	font-weight: 700;
+	text-transform: capitalize !important;
+	letter-spacing: 0.02rem !important;
+}
+.btn-white {
+	--background: #fff;
+	--padding-top: 1.4rem;
+	--padding-bottom: 1.4rem;
+	--padding-start: 2rem;
+	--padding-end: 2rem;
+	--color:#546DD3 !important;
+	--box-shadow: none;
+	--border-radius: 0.5rem;
 	box-shadow: none;
 	border-radius: 0.5rem;
 	font-weight: 700;
 	text-transform: capitalize !important;
 	letter-spacing: 0.02rem !important;
+}
+.btn-white-sm {
+	@media (max-width: 640px) {
+	--background: #fff;
+	--padding-top: 1.25rem;
+	--padding-bottom: 1.25rem;
+	--padding-start: 1.25rem;
+	--padding-end: 1.25rem;
+	--color:#546DD3 !important;
+	--box-shadow: none;
+	--border-radius: 0.5rem;
+	box-shadow: none;
+	border-radius: 0.5rem;
+	font-weight: 700;
+	text-transform: capitalize !important;
+	letter-spacing: 0.02rem !important;
+	}
 }
 
 .btn-lg {
@@ -263,4 +349,8 @@ ion-input {
 
 ion-toolbar {
 	--background: #F7F7FC;
+}
+
+.item-bottom{
+	display: none !important;
 }

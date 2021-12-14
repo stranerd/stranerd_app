@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div class="bg-white p-6 rounded-xl">
 		<div
-			class="py-4 px-4 rounded-xl bg-light_gray flex flex-col text-xs md:text-sm border border-faded_gray lg:border-0">
+			class=" rounded-xl bg-white flex flex-col text-xs md:text-sm ">
 			<IonRippleEffect class="rounded-lg" />
 			<div class="flex flex-row items-center gap-4">
 				<avatar :id="question.userId" :size="28" :src="question.avatar" class="hidden lg:block" />
@@ -21,52 +21,70 @@
 
 			<span class="py-2 text-main_dark  mb-3 lg:mb-5" v-html="question.body" />
 
+			<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap lg:hidden">
+				<span v-for="tag in question.tags" :key="tag">
+					<span v-if="tag"
+						class="py-1 px-4 font-bold text-gray bg-new_gray rounded-2xl inline-block">
+						{{ tag }}
+					</span>
+				</span>
+			</div>
+
 			<div class="w-full flex flex-wrap items-center lg:justify-between ">
-				<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">
+
+				<div class="mt-2 mb-2 lg:flex flex-row items-center gap-y-2 gap-x-2 flex-wrap hidden">
 					<span v-for="tag in question.tags" :key="tag">
 						<span v-if="tag"
-							class="py-1 px-4 font-bold text-white bg-icon_inactive rounded-2xl inline-block">
+							class="py-1 px-4 font-bold text-gray bg-new_gray rounded-2xl inline-block">
 							{{ tag }}
 						</span>
 					</span>
 				</div>
+		
 
-				<div class=" flex flex-row items-center ml-auto">
-					<span class="font-bold text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
+				<div class="lg:hidden flex items-center">
+					<avatar :id="question.userId" :size="20" :src="question.avatar"  />
+					<span class="font-bold text-main_dark text-xs ml-2">{{ question.userBio.fullName }}</span>
+				</div>
+
+			
+
+				<div class=" flex flex-row items-center ml-auto" v-if="!showEditButton">
+					<span class="font-bold text-gray lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 					<div :class="`flex flex-row-reverse items-center`">
-						<span class="font-bold text-main_dark">{{
+						<span class="font-bold text-gray ">{{
 							question.answers.length
 						}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
 						<span class="h-[5px] w-[5px] rounded-full bg-main_dark mx-3" />
 					</div>
 				</div>
 
-				<div class="flex gap-2">
-					<button v-if="showEditButton"
+				<div class="flex gap-2 ml-auto" v-else>
+					<!-- <button v-if="showEditButton"
 						class="mt-2 rounded-lg py-3 px-4 bg-butter_yellow flex items-center gap-1"
-						@click="openEditModal">
-						<span>Edit</span>
-						<IonIcon :icon="pencil" />
-					</button>
-					<button v-if="showDeleteButton"
+						@click="openEditModal"> -->
+					<ion-text class="font-bold text-primary lg:text-base cursor-pointer" @click="openEditModal">Edit</ion-text>
+					<!-- </button> -->
+					<!-- <button v-if="showDeleteButton"
 						class="mt-2 rounded-lg py-3 px-4 bg-delete_red flex items-center gap-1"
-						@click="deleteQuestion">
-						<span>Delete</span>
-						<IonIcon :icon="trashBinOutline" />
-					</button>
+						@click="deleteQuestion"> -->
+					<ion-text class="font-bold text-red lg:text-base cursor-pointer" @click="deleteQuestion">Delete</ion-text>
+					<!-- </button> -->
 				</div>
 			</div>
 		</div>
 		<PhotoList v-if="question.attachments" :photos="question.attachments" class="py-3" />
-		<span v-if="question.isAnswered" />
-		<CreateAnswer v-else-if="showAddAnswer" :question="question" class="mt-8" />
-		<button v-else-if="showAnswerButton"
-			class="py-3 px-4 mt-1 justify-center rounded-lg text-white bg-dark_gray w-full font-bold flex flex-row items-center"
+	
+		<ion-button v-else-if="showAnswerButton"
+			class="btn-primary w-full"
 			@click="openAnswerModal(question)">
 			<span class="mr-2">Add your answer</span>
-			<span class="h-1 w-1 rounded-full bg-white mr-2"></span>
-		</button>
+		</ion-button>
 	</div>
+
+	<span v-if="question.isAnswered" />
+	<CreateAnswer v-else-if="showAddAnswer" :question="question" class="mt-8" />
+
 </template>
 
 <script lang="ts">

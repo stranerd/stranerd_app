@@ -1,11 +1,10 @@
 <template>
 	<div :id="question.id"
-		class="py-4 px-4 rounded-lg bg-light_gray flex flex-col w-full text-xs md:text-sm relative cursor-pointer"
-		to="/questions/answers">
-		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
+		class="p-6 rounded-xl bg-white flex flex-col w-full text-xs md:text-sm relative cursor-pointer">
+		<ion-ripple-effect class="rounded-xl"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
-			<div class="mt-3 flex flex-row items-center">
-				<span class="font-bold text-main_dark"><Subject :subject-id="question.subjectId" /></span>
+			<div class=" flex flex-row items-center">
+				<span class="font-bold text-main_dark lg:text-base text-xs"><Subject :subject-id="question.subjectId" /></span>
 			</div>
 			<div class="flex flex-row-reverse flex-grow">
 
@@ -20,13 +19,14 @@
 		</div>
 
 
-		<router-link :to="`/questions/${question.id}`" class="py-2 text-main_dark leading-normal">
+		<router-link :to="`/questions/${question.id}`" class="py-2 text-main_dark leading-normal lg:text-base text-xs">
 			{{ question.trimmedBody }}
 		</router-link>
 
 		<div class="w-full flex flex-col lg:flex-row lg:justify-between lg:items-center  mt-2">
 			<div class=" flex flex-row items-center flex-wrap gap-4">
-				<Tag v-for="tag in question.tags" :key="tag" :tag="tag" />
+				<Tag v-for="(tag, index) in question.tags" :key="tag" :index="index +1" :tag="tag" />
+
 			</div>
 
 			<div class=" flex flex-row items-center justify-between mt-3 lg:mt-0">
@@ -36,7 +36,6 @@
 				}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
 			</div>
 		</div>
-
 	</div>
 </template>
 <script lang="ts">
@@ -46,8 +45,8 @@ import { arrowRedo, flag } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatNumber, pluralize } from '@utils/commons'
 import { formatTime } from '@utils/dates'
-import Subject from './subjects/Subject.vue'
-import Tag from './tags/Tag.vue'
+import Subject from '../subjects/Subject.vue'
+import Tag from '../tags/Tag.vue'
 
 export default defineComponent({
 	props: {

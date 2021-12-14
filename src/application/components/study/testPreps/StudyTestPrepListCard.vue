@@ -1,24 +1,32 @@
 <template>
 	<div
-		:class="[`m-0 h-[13rem] min-w-[16.5rem] cardPadding border ${colorClass} rounded-xl flex flex-col items-center md:gap-2 gap-[1rem] box-border !p-4 md:!p-7 border border-faded_gray lg:border-0`]">
-		<ion-text class="font-bold text-lg text-main_dark">
-			{{ testPrep.name }}
-		</ion-text>
+		:class="[`m-0 lg:min-w-[18rem] min-w-[16.5rem] h-44 lg:h-44 ${colorClass} rounded-xl flex flex-col items-start justify-between md:gap-2 gap-[1rem] box-border p-6 md:!px-4`]">
+		<div class="w-full justify-between items-center flex">
+			<ion-text class="font-bold text-xl text-main_dark">
+				{{ testPrep.name }}
+			</ion-text>
 
-		<div class="mt-1">
-			<ion-button class="btn-secondary min-w-[7rem] font-bold w-full mb-3" @click="createTest(testPrep, true)">
-				Test yourself
+			<ion-icon
+				:icon="ellipsisVertical"
+				class="text-gray text-2xl"
+			/>
+		</div>
+
+		<div class="flex items-center justify-between gap-3">
+			<ion-button class="btn-primary font-bold lg:min-w-[7.5rem] w-28" @click="createTest(testPrep, true)">
+				Test
 			</ion-button>
-			<ion-button class="btn-outline text-main_dark min-w-[7rem] font-bold w-full"
+
+			<ion-button class="btn-outline text-primary font-bold lg:min-w-[7.5rem] w-28"
 				@click="createTest(testPrep, false)">
-				Study solutions
+				Solutions
 			</ion-button>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { calendar, play } from 'ionicons/icons'
+import { calendar, ellipsisVertical, play } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import { useCreateTest } from '@app/composable/study/tests'
@@ -38,7 +46,7 @@ export default defineComponent({
 	setup () {
 		const { loading, error, createTest } = useCreateTest()
 		return {
-			calendar, play,
+			ellipsisVertical, calendar, play,
 			loading, error, createTest
 		}
 	}

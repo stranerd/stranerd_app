@@ -1,6 +1,6 @@
 <template>
 	<div class="flex justify-center flex-col lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white">
-		<ion-segment v-model="tab" class="md:w-96 mb-12 mx-auto" mode="ios" value="testYourself">
+		<ion-segment v-model="tab" class="md:w-96 mb-12 mx-auto" mode="ios">
 			<ion-segment-button value="list">
 				<ion-label>All questions</ion-label>
 			</ion-segment-button>

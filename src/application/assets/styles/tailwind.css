@@ -19,7 +19,7 @@
 	}
 
 	.layout-page {
-		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow h-full overflow-y-hidden
+		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow h-full overflow-y-hidden bg-new_gray
 	}
 
 	.layout-page-chat {
@@ -35,7 +35,7 @@
 	}
 
 	.layout-body {
-		@apply lg:w-3/4 w-full flex flex-col p-0 h-full overflow-y-auto
+		@apply lg:w-3/4 w-full flex flex-col p-0 h-full overflow-y-auto overflow-x-hidden max-w-[100vw] bg-new_gray
 	}
 
 	.layout-body-chat {
@@ -67,11 +67,11 @@
 	}
 
 	.headings {
-		@apply md:text-2xl text-base
+		@apply md:text-xl text-base
 	}
 
 	.heading {
-		@apply md:text-2xl text-base
+		@apply md:text-xl text-base
 	}
 
 	.cardPadding {

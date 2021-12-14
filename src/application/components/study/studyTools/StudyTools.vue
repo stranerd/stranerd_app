@@ -10,13 +10,14 @@
 			:freeMode="true"
 			:items="cardArr"
 			:slides="1.1"
-			class="mt-2 overflow-x-auto flex"
-			slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6"
+			class="mt-2 overflow-x-auto flex mr-8"
+			slideClass="flex md:!w-[336px] !w-[266px]  lg:!w-2/5 lg:!max-w-[21rem] !mr-8"
 		>
 			<template v-slot:default="{ item }">
 				<StudyToolsCard
 					:key="item.title"
 					:btnText="item.btnText"
+					:color="item.colors"
 					:icon="item.icon"
 					:onClick="item.onClick"
 					:route="item.route"
@@ -46,22 +47,25 @@ export default defineComponent({
 				title: 'Study with Flashcards',
 				subText: 'Scientifically proven to improve memory and make studying easier.',
 				btnText: 'Create a Flashcard',
-				route: '/study/flashCards/create'
+				route: '/study/flashCards/create',
+				colors: '#C864DC'
 			},
 
 			{
 				icon: folder,
 				title: 'Organize your Study',
-				subText: 'Put flashcards, notes and videos with the same aim together in a folder.',
+				subText: 'Put similar flashcards, notes and videos in a folder.',
 				btnText: 'Create a Study Set',
+				colors: '#FFA84B',
 				onClick: useStudyModal().openCreateSet
 			},
 
 			{
 				icon: compass,
 				title: 'Find more resources',
-				subText: 'Browse through a library of flashcards, notes, videos and sets to study with.',
+				subText: 'Browse through a collection of study materials and resources.',
 				btnText: 'Explore',
+				colors: '#00D246',
 				route: '/study/preps/explore'
 			}
 		]

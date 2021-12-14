@@ -10,7 +10,7 @@ export default defineComponent({
 	name: 'Account',
 	middlewares: [async () => {
 		const { isLoggedIn, id } = useAuth()
-		if (isLoggedIn.value) return `/users/${id.value}/`
+		if (isLoggedIn.value) return `/users/${id.value}/bio`
 		return '/auth/signin'
 	}]
 })

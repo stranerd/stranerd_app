@@ -1,25 +1,25 @@
 <template>
-	<div class="w-full flex flex-col text-xs mg:text-sm">
-		<h2 class="text-sm md:text-base text-main_dark font-bold">
+	<div class="w-full flex flex-col bg-white mt-9 lg:p-12 p-5  lg:rounded-3xl rounded-xl">
+		<h2 class="lg:text-xl text-base text-main_dark font-bold">
 			Give your answer
 		</h2>
 
-		<div class="mt-3 py-3 px-4 flex flex-row items-center bg-light_gray rounded-lg border border-faded_gray ">
+		<div class="lg:mt-9 mt-5 py-3 px-4 flex flex-row items-center bg-light_gray rounded-lg border border-faded_gray ">
 			<span class="text-main_dark font-bold">Main answer - </span>
 			<ion-input v-model="factory.title" class="w-full px-2 ml-1 font-medium" placeholder="Keep it short!">
 			</ion-input>
 		</div>
 
-		<div class="mt-3 border border-faded_gray rounded-lg py-5 flex-col px-3">
+		<div class="lg:mt-9 mt-5 border border-faded_gray rounded-lg py-5 flex-col px-3">
 			<span class="text-main_dark font-bold">Explanation - </span>
 			<ion-textarea v-model="factory.body" class="bg-white border-0 focus:outline-none  w-full"
-				placeholder="Write out the detailed explanation of the answer you gave above. (Optional)"
+				placeholder="Write out the detailed explanation of the answer you gave a8bove. (Optional)"
 				rows="9"></ion-textarea>
 		</div>
 
 
 		<div
-			class="lg:mt-8 mt-5 rounded-xl  text-main_dark relative bg-light_gray border border-faded_gray flex flex-col h-32 justify-center items-center">
+			class="lg:mt-9 mt-5 rounded-xl  text-main_dark relative bg-light_gray border border-faded_gray flex flex-col h-32 justify-center items-center">
 			<IonIcon :icon="image" class="!text-3xl" />
 			<input
 				id="images" accept="image/x-png,image/jpeg,image/jpg"

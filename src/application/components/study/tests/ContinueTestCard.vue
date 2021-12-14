@@ -4,12 +4,11 @@
 		:to="`/study/tests/${test.id}/take`"
 	>
 		<div class="flex flex-col items-center justify-between w-full mx-auto capitalize">
-			<ion-text class="text-xl text-left w-full text-main_dark font-bold">
+			<ion-text class="text-base text-left w-full text-main_dark font-bold">
 				{{ test.name }}
 			</ion-text>
 			<ion-progress-bar class="mt-6" value="0.5" />
 		</div>
-
 	</router-link>
 </template>
 

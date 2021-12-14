@@ -1,15 +1,17 @@
 <template>
 	<div
-		class="w-full rounded-lg bg-light_gray  flex flex-col items-center justify-center py-7 px-5 md:py-11 gap-3 text-center normalText text-main_dark">
+		class="w-full rounded-xl bg-white  flex flex-col items-center justify-center py-7 px-5 md:py-11 gap-3 text-center normalText text-main_dark">
 
-		<p>
-			{{ info }}
-		</p>
+		<p v-html="info" :class="infoClass"/>
 
-		<router-link v-if="btnText" :to="route"
-			class="py-3 px-7 font-bold border-[1px] border-solid border-dark_gray rounded-lg">
+		<router-link v-if="btnText && link" :to="route"  :class="btnTextClass" 
+			class="py-3 px-7 border-[1px] border-solid border-dark_gray rounded-lg">
 			{{ btnText }}
 		</router-link>
+
+		<ion-button class="btn-outline text-gray"  @click="onClick(funcParams)" v-else-if="btnText && onClick"> 
+			{{ btnText }}
+		</ion-button>
 
 	</div>
 </template>
@@ -20,7 +22,19 @@ import { defineComponent } from 'vue'
 export default defineComponent({
 	name: 'Emptystate',
 	props: {
+		funcParams: {
+			type: String
+		},
+		onClick: {
+			type: Function
+		},
+		link: {
+			type: String
+		},
 		info: {
+			type: String
+		},
+		infoClass: {
 			type: String
 		},
 		route: {
@@ -28,8 +42,14 @@ export default defineComponent({
 		},
 		btnText: {
 			type: String
+		},
+		btnTextClass: {
+			type: String
 		}
-	}
+
+	},
+
+
 
 })
 </script>

@@ -10,21 +10,22 @@
 
 		<div class="flex flex-row  mt-5  text-white gap-4">
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<button class=" px-6 py-3 relative ion-activatable rounded-lg w-full font-bold bg-dark_gray "
-					@click="closeRateFlashcard">
+				<ion-button class=" btn-secondary w-full"
+					@click="closeCreateSet">
 					No
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-				</button>
+				</ion-button>
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<button class=" px-6 relative ion-activatable font-bold w-full py-3 rounded-lg bg-primary">
+				<ion-button class=" btn-primary w-full" @click="createSet">
 					Yes
 					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-				</button>
+				</ion-button>
 			</div>
 		</div>
 
 	</div>
+	<PageLoading v-if="loading"/>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
@@ -32,17 +33,27 @@ import { defineComponent } from 'vue'
 import { IonRippleEffect } from '@ionic/vue'
 import { chevronDown, ellipse, ellipseOutline } from 'ionicons/icons'
 import { useStudyModal } from '@app/composable/core/modals'
+import { useCreateSet } from '@root/application/composable/study/sets'
+import {  useTags } from '@app/composable/core/forms'
+
 
 export default defineComponent({
 	setup () {
-		const closeRateFlashcard = () => {
-			useStudyModal().closeRateFlashcard()
+		const closeCreateSet = () => {
+			useStudyModal().closeCreateSet()
 		}
+
+		const {createSet, factory, error,loading} = useCreateSet()
+
+        		const { tag, removeTag } = useTags(
+			(tag: string) => factory.value.addTag(tag),
+			(tag: string) => factory.value.removeTag(tag)
+		)
+
 		return {
-			closeRateFlashcard,
-			chevronDown,
-			ellipse,
-			ellipseOutline
+			error, loading, tag, removeTag,
+			createSet, factory, closeCreateSet,
+			chevronDown, ellipse, ellipseOutline
 		}
 	},
 	components: {
@@ -52,12 +63,17 @@ export default defineComponent({
 </script>
 <style scoped>
 	ion-input {
-
-		/* Set a different placeholder color */
 		--placeholder-color: #8B9EB1;
-
-		/* Set full opacity on the placeholder */
 		--placeholder-opacity: 1;
 	}
+
+	ion-radio{
+		--color: #8B9EB1 !important; 
+	}
+
+		ion-label{
+		--color: #8B9EB1 !important; 
+	}
+
 
 </style>

@@ -1,14 +1,21 @@
 <template>
 	<div>
 		<div class="w-full flex justify-between">
-			<span class="heading font-bold text-main_dark">
-				FlashCards
-			</span>
+
+			<div class="heading font-bold text-main_dark flex items-center">
+
+
+				<ion-text class="mr-3">
+					FlashCards
+				</ion-text>
+				<ion-badge v-if="suggested" class="uppercase">
+					Suggested
+				</ion-badge>
+			</div>
 
 			<router-link class="text-primary normalText flex items-center font-bold"
 				to="/study/flashCards/explore">
 				<span>view all</span>
-				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl" />
 			</router-link>
 		</div>
 
@@ -21,11 +28,7 @@
 			<Swiper :freeMode="true" :items="flashcards" :slides="1.1" class="mt-2 overflow-x-auto flex"
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
 				<template v-slot:default="{ item, index }">
-					<StudyFlashCardListCard :colorClass="index  === 0 ? 'bg-butter_yellow' : 'bg-light_gray'"
-						:flashCard="item"
-						:index="index+1"
-					/>
-
+					<StudyFlashCardListCard :flashCard="item" :index="index+1" colorClass="bg-white" />
 				</template>
 			</Swiper>
 		</template>
@@ -34,15 +37,21 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import { IonIcon } from '@ionic/vue'
 import { chevronForwardOutline } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
 import { useFlashCardList } from '@app/composable/study/flashCards'
 import StudyFlashCardListCard from '@app/components/study/flashCards/StudyFlashCardListCard.vue'
+import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'StudyFlashCardList',
-	components: { IonIcon, Swiper, StudyFlashCardListCard },
+	props: {
+		suggested: {
+			required: false,
+			default: false
+		}
+	},
+	components: { Swiper, StudyFlashCardListCard, IonBadge },
 	setup () {
 		const { flashCards: allFlashcard, listener, loading, error } = useFlashCardList()
 		const flashcards = computed({

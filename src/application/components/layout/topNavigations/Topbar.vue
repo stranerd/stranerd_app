@@ -1,4 +1,4 @@
-<template>
+;<template>
 	<div>
 		<ion-header class="block ion-no-border z-40 inset-x-0 w-full top-0 lg:shadow-md ">
 			<ion-toolbar

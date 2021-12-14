@@ -23,7 +23,6 @@
 					<ion-label>Paid</ion-label>
 				</ion-segment-button>
 			</ion-segment>
-
 			<ion-select class=" lg:w-96 w-40 text-xs md:text-sm  placeholder-[#8B9EB1] font-bold rounded-md" interface="action-sheet"
 				placeholder="Rating" value="notifications">
 				<ion-select-option value="maths">Rating</ion-select-option>

@@ -2,13 +2,12 @@
 	<div class="mt-7">
 		<div class="w-full flex justify-between">
 			<span class="heading font-bold text-main_dark">
-				Recent questions
+				Latest questions
 			</span>
 
-			<router-link v-if="questions.length " class="text-primary normalText flex items-center font-semibold"
+			<router-link v-if="questions.length " class="text-primary normalText flex items-center font-bold"
 				to="/questions">
 				<span>view all</span>
-				<ion-icon :icon="chevronForwardOutline" class="text-xs md:text-xl"></ion-icon>
 			</router-link>
 		</div>
 
@@ -26,29 +25,26 @@
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] min-w-[16.5rem] !mr-6">
 				<template v-slot:default="{ item: question, index }">
 					<QuestionListCard
-						:colorClass="0 === index ? 'bg-butter_yellow min-w-[16.5rem]' : 'bg-butter_yellow min-w-[16.5rem]'"
+						:colorClass="0 === index ? 'bg-white min-w-[16.5rem]' : 'bg-white min-w-[16.5rem]'"
 						:fromHome="true"
 						:question="question" class="h-[9.7rem]" />
 				</template>
 			</Swiper>
-
-
 		</template>
 	</div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import { IonIcon } from '@ionic/vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
-import QuestionListCard from '@app/components/questions/RecentQuestionListCard.vue'
+import QuestionListCard from '@app/components/questions/questions/RecentQuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
 	name: 'RecentQuestions',
-	components: { IonIcon, Swiper, QuestionListCard, EmptyState },
+	components: { Swiper, QuestionListCard, EmptyState },
 	setup () {
 		const { questions: allQuestions, listener, loading, error } = useQuestionList()
 		const questions = computed({

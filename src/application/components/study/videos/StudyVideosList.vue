@@ -22,9 +22,7 @@
 			<Swiper :freeMode="true" :items="videos" :slides="1.1" class="mt-2 overflow-x-auto flex"
 				slideClass="flex md:!w-[300px] !w-[265px] mr-3 lg:!w-2/5 lg:!max-w-[18rem] !mr-6">
 				<template v-slot:default="{ item, index }">
-					<VideoCard :colorClass="index  === 0 ? 'bg-light_blue' : 'bg-light_blue'"
-						:index="index + 1" :video="item"
-					/>
+					<VideoCard :index="index + 1" :video="item" colorClass="bg-light_blue" />
 				</template>
 			</Swiper>
 		</template>
@@ -37,7 +35,7 @@ import { IonIcon } from '@ionic/vue'
 import { chevronForwardOutline } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
 import { useVideoList } from '@app/composable/study/videos'
-import VideoCard from './StudyVideoListCard.vue'
+import VideoCard from '@app/components/study/videos/StudyVideoListCard.vue'
 
 export default defineComponent({
 	name: 'StudyVideosList',

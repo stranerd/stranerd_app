@@ -23,7 +23,6 @@
 					:event="event"
 					:is-open="isOpenRef"
 					:translucent="true"
-					css-class="mt-4 rounded-xl"
 					@didDismiss="setOpen(false)"
 				>
 					<!-- <Popover></Popover> -->

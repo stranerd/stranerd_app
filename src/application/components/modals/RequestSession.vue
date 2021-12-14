@@ -89,7 +89,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
-import { IonIcon, IonRippleEffect, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
+import { IonIcon,  IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
 import { document, ellipse, ellipseOutline } from 'ionicons/icons'
 import { analytics } from '@modules/core'
 import { useCreateSession } from '@app/composable/sessions/sessions'
@@ -113,7 +113,7 @@ export default defineComponent({
 			factory, loading, error, createSession, newSessionTutorIdBio
 		}
 	},
-	components: { IonTextarea, IonSelectOption, IonSelect, IonRippleEffect, IonIcon }
+	components: { IonTextarea, IonSelectOption, IonSelect,  IonIcon }
 })
 </script>
 <style scoped>
