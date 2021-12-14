@@ -1,38 +1,51 @@
 <template>
 	<router-link
-		:class="`py-4 px-4 rounded-xl !min-h-[12rem] ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer border border-faded_gray lg:border-0`"
+		:class="`py-4 px-4 rounded-xl ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer border border-faded_gray lg:border-0`"
 		:to="`/questions/${question.id}`">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-		<div class="flex w-full items-center justify-between">
-			<div class="flex flex-row items-center gap-3">
-				<avatar :id="question.userId" :size="28" :src="question.avatar" class="hidden lg:block" />
-				<span class="font-bold text-main_dark hidden lg:block">{{ question.userBio.fullName }}</span>
-				<div class="h-1 w-1 bg-icon_inactive rounded-full hidden lg:block" />
-
-				<Subject :key="question.subjectId" :subjectId="question.subjectId" class="font-bold text-main_dark" />
-
-				<div v-if="isFeatured">
-					<button
-						class="py-1 px-3 rounded-lg text-white bg-primary font-bold flex-row items-center hidden lg:flex">
-						Featured
-					</button>
-				</div>
+		<div class="flex flex-row items-center">
+			<avatar :id="question.userId" :size="28" :src="question.avatar" class="mr-2" />
+			<span class="font-bold text-main_dark">{{ question.userBio.fullName }}</span>
+			<div class="flex flex-row-reverse flex-grow">
+				<template v-if="fromHome">
+					<span class="font-bold text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
+				</template>
+				<template v-else>
+					<template v-if="!fromViewQuestion">
+						<button
+							class="py-1 px-3 rounded-lg text-white bg-dark_gray font-bold flex flex-row items-center"
+							@click="openAnswerModal(question)">
+							<span class="mr-2">Answer</span>
+							<span class="h-1 w-1 rounded-full bg-white mr-2"></span>
+						</button>
+					</template>
+					<template v-if="fromViewQuestion">
+						<IonIcon :icon="flag" class="text-[22px]  text-icon_inactive cursor-pointer"
+							@click="openReportQuestionModal" />
+						<IonIcon :icon="arrowRedo" class="text-[22px] mr-2 text-icon_inactive" />
+					</template>
+				</template>
 			</div>
-			<button
-				class="py-1 px-4 rounded-lg text-white bg-dark_gray font-bold flex flex-row items-center"
-				@click="openAnswerModal(question)">
-				<span>Answer</span>
-			</button>
 		</div>
 
-		<span class="py-2 pb-1 text-main_dark leading-normal mb-2 lg:mb-4 mt-2"
-			v-html="question.shortBody " />
+		<div v-if="isFeatured" class="mt-3">
+			<button class="py-1 px-3 rounded-lg text-white bg-star_yellow font-bold flex flex-row items-center">
+				Featured
+			</button>
+		</div>
+		<div v-if="!fromHome" class="mt-3 flex flex-row items-center">
+			<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3"></span>
+			<Subject :key="question.subjectId" :subjectId="question.subjectId" class="font-semibold text-main_dark" />
+		</div>
+
+		<span class="py-2 pb-1 text-main_dark leading-normal mb-2 lg:mb-4"
+			v-html="fromViewQuestion ? question.body : question.trimmedBody" />
 
 		<div
 			:class="`w-full flex flex-col lg:flex-row lg:justify-between ${!fromViewQuestion ? 'absolute bottom-3 left-0 px-4' : ''} w-full `">
 			<div v-if="!fromHome" class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">
 				<span v-for="(tag, index) in question?.tags" :key="index">
-					<span v-if="tag" class="py-1 px-4 font-bold text-white bg-icon_inactive rounded-2xl inline-block">
+					<span v-if="tag" class="py-1 px-2 font-bold text-white bg-faded_gray rounded-lg inline-block">
 						{{ tag }}
 					</span>
 				</span>
@@ -54,7 +67,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonRippleEffect } from '@ionic/vue'
+import { IonIcon, IonRippleEffect } from '@ionic/vue'
 import { arrowRedo, flag } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
@@ -89,7 +102,7 @@ export default defineComponent({
 		}
 	},
 	components: {
-		IonRippleEffect, Avatar, Subject
+		IonIcon, IonRippleEffect, Avatar, Subject
 	},
 	setup (props) {
 		return {

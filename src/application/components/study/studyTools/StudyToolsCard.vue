@@ -2,7 +2,6 @@
 	<div
 		:class="`m-0  h-[13rem]  min-w-[16.5rem] w-full cardPadding bg-light_orange lg:border-0 border border-faded_gray    rounded-xl  flex flex-col justify-center items-center md:gap-2 gap-[0.2rem] box-border  p-5`"
 	>
-
 		<ion-icon
 			:icon="icon"
 			class="text-main_dark text-5xl"
@@ -16,12 +15,17 @@
 			{{ subText }}
 		</ion-text>
 
-		<router-link :to="route">
+		<router-link v-if="route" :to="route">
 			<ion-button
 				class="btn-secondary min-w-[7rem] bg-transparent mb-4 text-white lg:text-base text-xs  font-bold">
 				{{ btnText }}
 			</ion-button>
 		</router-link>
+		<ion-button v-if="onClick"
+			class="btn-secondary min-w-[7rem] bg-transparent mb-4 text-white lg:text-base text-xs font-bold"
+			@click="onClick">
+			{{ btnText }}
+		</ion-button>
 
 	</div>
 </template>
@@ -31,12 +35,8 @@ import { calendar, play } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'TutorCard',
+	name: 'StudyToolsCard',
 	props: {
-		// colorClass: {
-		// 	type: String,
-		// 	default: 'bg-light_gray'
-		// },
 		title: {
 			type: String,
 			default: ''
@@ -51,10 +51,14 @@ export default defineComponent({
 		},
 		route: {
 			type: String,
-			default: ''
+			required: false
 		},
 		icon: {
 			type: String
+		},
+		onClick: {
+			type: Function,
+			required: false
 		}
 	},
 	setup () {

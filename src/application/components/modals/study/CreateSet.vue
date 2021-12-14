@@ -30,10 +30,7 @@
 					class="max-w-[1054px]  !h-14 "
 					placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
 					show-cancel-button="never"></ion-input>
-
-
 			</div>
-
 
 			<div class="flex items-center w-full max-w-[25rem] justify-center">
 				<ion-radio-group v-model="factory.isPublic" class="flex w-full">
@@ -43,22 +40,20 @@
 						</ion-label>
 					</ion-list-header>
 
-					<ion-item class="w-full ion-iten-transparent">
+					<ion-item class="w-full ion-item-transparent">
 						<ion-radio :value="true" class=" ion-white"></ion-radio>
 						<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Public</ion-label>
 					</ion-item>
 
-					<ion-item class="w-full ion-iten-transparent">
+					<ion-item class="w-full ion-item-transparent">
 						<ion-radio :value="false" class=" ion-white"></ion-radio>
 						<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Private</ion-label>
 					</ion-item>
 				</ion-radio-group>
 			</div>
-
 		</div>
 
-
-		<div class="flex flex-row  mt-5  text-white gap-4">
+		<div class="flex flex-row mt-5 text-white gap-4">
 			<div class="w-1/2 flex flex-row justify-center items-center">
 				<ion-button class=" btn-secondary w-full"
 					@click="closeCreateSet">
@@ -77,16 +72,17 @@
 	</div>
 	<PageLoading v-if="loading" />
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
-
-import { IonRippleEffect } from '@ionic/vue'
+import { IonItem, IonListHeader, IonRadio, IonRadioGroup, IonRippleEffect } from '@ionic/vue'
 import { chevronDown, ellipse, ellipseOutline } from 'ionicons/icons'
 import { useStudyModal } from '@app/composable/core/modals'
 import { useCreateSet } from '@app/composable/study/sets'
 import { useTags } from '@app/composable/core/forms'
 
 export default defineComponent({
+	components: { IonRippleEffect, IonListHeader, IonRadio, IonItem, IonRadioGroup },
 	setup () {
 		const closeCreateSet = () => {
 			useStudyModal().closeCreateSet()
@@ -104,12 +100,10 @@ export default defineComponent({
 			createSet, factory, closeCreateSet,
 			chevronDown, ellipse, ellipseOutline
 		}
-	},
-	components: {
-		IonRippleEffect
 	}
 })
 </script>
+
 <style scoped>
 	ion-input {
 		--placeholder-color: #8B9EB1;
@@ -123,6 +117,4 @@ export default defineComponent({
 	ion-label {
 		--color: #8B9EB1 !important;
 	}
-
-
 </style>

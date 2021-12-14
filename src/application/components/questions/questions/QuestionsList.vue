@@ -1,5 +1,5 @@
 <template>
-	<div class=" text-xs md:text-sm  ">
+	<div class=" text-xs md:text-sm ">
 
 		<div class="lg:mt-8 mt-4">
 
@@ -14,7 +14,8 @@
 
 				<div class=" flex items-center">
 					<ion-text class="text-icon_inactive font-bold w-20 hidden lg:block">Sort By:</ion-text>
-					<ion-segment :value="answeredChoices[0].val" class="w-[92vw] lg:w-auto border border-faded_gray lg:border-0"
+					<ion-segment :value="answeredChoices[0].val"
+						class="w-[92vw] lg:w-auto border border-faded_gray lg:border-0"
 						mode="ios">
 						<ion-segment-button v-for="choice in answeredChoices" :key="choice.key" :value="choice.val"
 							@click="answered = choice.val">
@@ -35,12 +36,10 @@
 					></empty-state>
 				</template>
 				<template v-else>
-					<div v-for="(question,index) in questions"
-						:key="index"
+					<div v-for="(question,index) in questions" :key="index"
 						:class="0 === index ? 'w-full md:px-2 mb-5' :  'md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0'">
-						<question
-							:colorClass="0 === index ? 'bg-butter_yellow  md:h-[10.5rem]' : 'bg-light_gray  md:h-[10.5rem] '"
-							:isFeatured="0 === index ? true : false" :question="question" />
+						<QuestionListCard :colorClass="0 === index ? 'bg-butter_yellow' : 'bg-light_gray'"
+							:question="question" class="md:h-[10.5rem]" />
 					</div>
 
 					<div v-if="hasMore"
@@ -60,14 +59,14 @@
 import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { IonSegment, IonSegmentButton } from '@ionic/vue'
 import { useQuestionList } from '@app/composable/questions/questions'
-import Question from '@app/components/questions/QuestionCard.vue'
+import QuestionListCard from '@app/components/questions/QuestionListCard.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import PageLoading from '@app/components/core/PageLoading.vue'
 
 export default defineComponent({
 	name: 'QuestionsList',
-	components: { Question, EmptyState, SelectSubject, PageLoading, IonSegment, IonSegmentButton },
+	components: { QuestionListCard, EmptyState, SelectSubject, PageLoading, IonSegment, IonSegmentButton },
 	setup () {
 		const {
 			filteredQuestions: questions, error, loading, hasMore,

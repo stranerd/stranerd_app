@@ -14,7 +14,7 @@ import DashboardLayout from '@app/layouts/Dashboard.vue'
 import RecentQuestions from '@app/components/dashboard/RecentQuestions.vue'
 import ContinueStudy from '@app/components/dashboard/ContinueTests.vue'
 import MyStudy from '@app/components/study/MyStudy.vue'
-import StudyTools from '../components/study/studyTools/index.vue'
+import StudyTools from '../components/study/studyTools/StudyTools.vue'
 
 export default defineComponent({
 	name: 'Dashboard',
