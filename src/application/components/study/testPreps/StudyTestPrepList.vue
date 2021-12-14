@@ -2,18 +2,17 @@
 	<div>
 		<div class="w-full flex justify-between">
 			<div class="heading font-bold text-main_dark flex items-center">
-			
+
 
 				<ion-text class="mr-3">
 					Test Prep
 				</ion-text>
-				<ion-badge class="uppercase" v-if="suggested">  
+				<ion-badge v-if="suggested" class="uppercase">
 					Suggested
 				</ion-badge>
 			</div>
 
-			<router-link v-if="isLoggedIn"
-				class="text-primary normalText flex items-center font-bold "
+			<router-link class="text-primary normalText flex items-center font-bold "
 				to="/study/preps/explore">
 				<span>view all</span>
 			</router-link>
@@ -21,9 +20,7 @@
 
 		<template v-if="testPreps.length === 0">
 			<div class="py-3">
-				<empty-state
-					info="You Have no TestPreps Available."
-				></empty-state>
+				<EmptyState info="No TestPreps Available." />
 			</div>
 		</template>
 		<template v-else>
@@ -39,26 +36,23 @@
 </template>
 
 <script lang="ts">
-import
-{ computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
-import { useAuth } from '@app/composable/auth/auth'
 import { useTestPrepList } from '@app/composable/study/testPreps'
-import TestPrepCard from './TestPrepCard.vue'
+import TestPrepCard from './StudyTestPrepListCard.vue'
+import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'TestPrepList',
-	components: {  Swiper, TestPrepCard },
-	props:{
-		suggested:{
+	name: 'StudyTestPrepList',
+	components: { Swiper, TestPrepCard, IonBadge },
+	props: {
+		suggested: {
 			required: false,
 			default: false
 		}
 	},
 	setup () {
-		const { id, isLoggedIn } = useAuth()
-
 		const { testPreps: allTestPreps, listener, loading, error } = useTestPrepList()
 		const testPreps = computed({
 			get: () => allTestPreps.value.slice(0, 6),
@@ -70,18 +64,16 @@ export default defineComponent({
 		onBeforeUnmount(listener.closeListener)
 
 		return {
-			testPreps,
-			chevronForwardOutline, chevronBackOutline,
-			isLoggedIn
+			testPreps, chevronForwardOutline, chevronBackOutline
 		}
 	}
 })
 </script>
 
 <style>
-ion-badge{
-	--background:#FFDC00 !important;
-	--color: #132740 !important;
-	--padding-top:6px !important;	
-}
+	ion-badge {
+		--background: #FFDC00 !important;
+		--color: #132740 !important;
+		--padding-top: 6px !important;
+	}
 </style>

@@ -1,37 +1,31 @@
 <template>
-	<div class="bg-primary h-32 rounded-b-xl sm:rounded-3xl flex flex-col 
-	justify-between sm:items-center sm:mt-4 
-	-mt-8 -mx-4 sm:mx-0 !z-40
-	py-6 lg:px-9 px-5
-	">
-		<div class="w-full flex items-center justify-between lg:mt-0 mt-6">
-			<div class="flex w-full text-left" >
-				<ion-text class="text-white leading-tight lg:text-3xl text-xl font-bold">
-					All questions
-				</ion-text>
-			</div>
+	<div
+		class="bg-primary h-32 rounded-b-xl sm:rounded-3xl flex items-center justify-between sm:mt-4 -mt-8 -mx-4 sm:mx-0 !z-40 py-6 lg:px-9 px-5">
+		<ion-text class="text-white leading-tight lg:text-3xl text-xl font-bold">
+			All questions
+		</ion-text>
 
-			<ion-button class="btn-white btn-white-sm mr-1 font-bold" @click="openAskQuestion">
-				Ask a question
-			</ion-button>
-
-		</div>
+		<ion-button class="btn-white btn-white-sm font-bold" @click="openAskQuestion">
+			Ask a question
+		</ion-button>
 	</div>
 
-	<div class="flex items-center flex-col lg:flex-row justify-between  mb-8 lg:gap-14 gap-4 bg-white p-3 lg:rounded-2xl lg:py-3 py-4   lg:-mt-7 -mt-3 lg:!-mx-2.5	-mx-4">
+	<div
+		class="flex items-center flex-col lg:flex-row justify-between  mb-8 lg:gap-14 gap-4 bg-white p-3 lg:rounded-2xl lg:py-3 py-4   lg:-mt-7 -mt-3 lg:!-mx-2.5 -mx-4">
 		<div
 			class="rounded-xl  text-sm   flex flex-row items-center gap-4  w-[92vw] lg:w-auto  bg-new_gray">
-			<div class="bg-gray text-white px-4 py-2.5 rounded-lg font-bold w-44 grid place-items-center">All Subjects</div>
+			<span class="bg-gray text-white px-4 py-2.5 rounded-lg font-bold w-44 grid place-items-center">
+				All Subjects
+			</span>
 			<SelectSubject v-model:subjectId="subjectId" :show-all="true" class="w-auto -ml-4"
 				placeholder="Search by subjects" />
 		</div>
 
 
-		<div class=" flex items-center">
-			<ion-segment :value="answeredChoices[0].val" class="w-[92vw] lg:w-auto "
-				mode="ios">
-				<ion-segment-button v-for="choice in answeredChoices" :key="choice.key" :value="choice.val" class="!px-4"
-					@click="answered = choice.val">
+		<div class="flex items-center">
+			<ion-segment v-model="answered" class="w-[92vw] lg:w-auto" mode="ios">
+				<ion-segment-button v-for="choice in answeredChoices" :key="choice.key" :value="choice.val"
+					class="!px-4" @click="answered = choice.val">
 					<ion-label>{{ choice.key }}</ion-label>
 				</ion-segment-button>
 			</ion-segment>
@@ -42,31 +36,27 @@
 
 <script lang="ts">
 import { useAuth } from '@root/application/composable/auth/auth'
-import { chevronDown, chevronUp, folder, flash } from 'ionicons/icons'
+import { chevronDown, chevronUp, flash, folder } from 'ionicons/icons'
 import { defineComponent, ref } from 'vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import { IonSegment, IonSegmentButton } from '@ionic/vue'
 import { useQuestionModal } from '@app/composable/core/modals'
 
-
 export default defineComponent({
-	name: 'StydyHeader',
-	components: { SelectSubject,  IonSegment, IonSegmentButton },
+	name: 'QuestionListHeader',
+	components: { SelectSubject, IonSegment, IonSegmentButton },
 
-
-
-	setup() {
-
-		const openAskQuestion = ()=>{
+	setup () {
+		const openAskQuestion = () => {
 			useQuestionModal().openAskQuestion()
 		}
-        	const {
+		const {
 			filteredQuestions: questions, error, loading, hasMore,
-			answeredChoices, answered, subjectId, 
+			answeredChoices, answered, subjectId,
 			fetchOlderQuestions
 		} = useQuestionList()
-		const {user} = useAuth()
+		const { user } = useAuth()
 		const isOpenRef = ref(false)
 		const event = ref()
 		const setOpen = (state: boolean, ev?: Event) => {
@@ -76,12 +66,10 @@ export default defineComponent({
 
 		return {
 			openAskQuestion,
-			user,answeredChoices, answered, subjectId,  chevronDown, chevronUp, isOpenRef, setOpen, event, folder, flash 
-
+			user, answeredChoices, answered, subjectId, chevronDown, chevronUp, isOpenRef, setOpen, event, folder, flash
 
 		}
 	}
-
 
 })
 </script>
@@ -99,7 +87,7 @@ export default defineComponent({
 		--background: #F2F3F5;
 		color: #64778A;
 		font-weight: bold;
-		
+
 	}
 
 	ion-segment-button {

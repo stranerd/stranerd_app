@@ -49,7 +49,7 @@ import { useEditState } from '@app/composable/study/state'
 import { useDeleteVideo } from '@app/composable/study/videos'
 
 export default defineComponent({
-	name: 'VideoCard',
+	name: 'StudyVideosListCard',
 	props: {
 		colorClass: {
 			type: String,

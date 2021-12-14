@@ -4,7 +4,7 @@
 			<div
 				class="col-span-12 pb-3 px-1 flex-row items-center text-main_dark font-bold hidden lg:flex cursor-pointer"
 				@click="$router.go(-1)">
-				<IonIcon :icon="chevronBack"   class="text-[25px] mr-2" />
+				<IonIcon :icon="chevronBack" class="text-[25px] mr-2" />
 				<span>Back to All questions</span>
 			</div>
 			<div class="md:px-2 mb-4 text-xs md:text-sm">
@@ -25,7 +25,7 @@ import { chevronBack } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
 import { useQuestion } from '@app/composable/questions/questions'
 import DashboardWithToolbarLayout from '@app/layouts/DashboardWithToolbar.vue'
-import QuestionPageCard from '@app/components/questions/QuestionPageCard.vue'
+import QuestionPageCard from '@app/components/questions/questions/QuestionPageCard.vue'
 import AnswersList from '@app/components/questions/answers/AnswersList.vue'
 
 export default defineComponent({

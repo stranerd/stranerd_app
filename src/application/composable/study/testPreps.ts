@@ -1,4 +1,4 @@
-import { onMounted, Ref, ref } from 'vue'
+import { computed, onMounted, Ref, ref } from 'vue'
 import {
 	AddTestPrep,
 	DeleteTestPrep,
@@ -10,6 +10,7 @@ import {
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@app/composable/core/notifications'
+import { groupBy } from '@utils/commons'
 
 const global = {
 	testPreps: ref([] as TestPrepEntity[]),
@@ -60,12 +61,20 @@ export const useTestPrepList = () => {
 		})
 	})
 
+	const groupedByInstitution = computed({
+		get: () => Object.entries(groupBy(global.testPreps.value, (prep) => prep.data.institutionId)).map(([key, preps]) => {
+			return { institutionId: key, preps }
+		}),
+		set: () => {
+		}
+	})
+
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTestPreps()
 	})
 
 	return {
-		...global, listener,
+		...global, listener, groupedByInstitution,
 		fetchOlderTestPreps: fetchTestPreps
 	}
 }

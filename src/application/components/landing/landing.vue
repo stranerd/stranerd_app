@@ -8,9 +8,11 @@
 							<div class="w-full md:w-1/2 h-full">
 								<div class="flex items-end justify-center h-full md:px-12">
 									<img alt=""
-										class="w-auto h-full md:hidden" src="@app/assets/images/landing-imgs/mobile-group-cards.png">
+										class="w-auto h-full md:hidden"
+										src="@app/assets/images/landing-imgs/mobile-group-cards.png">
 									<img alt=""
-										class="w-full -mb-10 hidden md:inline-block" src="@app/assets/images/landing-imgs/desktop-group-cards.png">
+										class="w-full -mb-10 hidden md:inline-block"
+										src="@app/assets/images/landing-imgs/desktop-group-cards.png">
 								</div>
 							</div>
 						</div>
@@ -40,7 +42,8 @@
 										</li>
 									</ul>
 								</div>
-								<router-link class="md:border-2 md:border-white rounded-md block bg-primary md:bg-transparent text-white text-xs md:text-sm font-bold text-center mx-auto md:mx-0 w-44 lg:w-80 py-4"
+								<router-link
+									class="md:border-2 md:border-white rounded-md block bg-primary md:bg-transparent text-white text-xs md:text-sm font-bold text-center mx-auto md:mx-0 w-44 lg:w-80 py-4"
 									to="">
 									Get Started
 								</router-link>

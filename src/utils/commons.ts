@@ -59,3 +59,5 @@ export const copyToClipboard = async (data: string) => {
 export function copyObject<T extends Record<any, any>> (target: T, ...sources: T[]) {
 	return Object.assign(target, ...sources)
 }
+
+export const getAlphabet = (num: number) => 'abcdefghijklmnopqrstuv'.split('')[num - 1] ?? 'a'

@@ -4,11 +4,9 @@
 			<span class="heading font-bold text-main_dark">
 				Tools to help you study better!
 			</span>
-
-
 		</div>
 
-		<Swiper v-if="true"
+		<Swiper
 			:freeMode="true"
 			:items="cardArr"
 			:slides="1.1"
@@ -19,42 +17,33 @@
 				<StudyToolsCard
 					:key="item.title"
 					:btnText="item.btnText"
+					:color="item.colors"
 					:icon="item.icon"
+					:onClick="item.onClick"
 					:route="item.route"
 					:subText="item.subText"
 					:title="item.title"
-					:color="item.colors"
 				/>
-
 			</template>
 
 		</Swiper>
-
-		<div
-			class="flex flex-row w-full items-center mt-2 mb-8 relative"
-		>
-
-
-		</div>
-
-
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { compass,  folder } from 'ionicons/icons'
-import { useAuth } from '@app/composable/auth/auth'
-import StudyToolsCard from './StudyToolsCard.vue'
+import { compass, flash, folder } from 'ionicons/icons'
+import Swiper from '@app/components/core/Swiper.vue'
+import StudyToolsCard from '@app/components/study/studyTools/StudyToolsCard.vue'
+import { useStudyModal } from '@app/composable/core/modals'
 
 export default defineComponent({
-	name: 'RecentTransactions',
-	components: { StudyToolsCard },
+	name: 'StudyTools',
+	components: { Swiper, StudyToolsCard },
 	setup () {
-		const { id, isLoggedIn } = useAuth()
-
 		const cardArr = [
 			{
+				icon: flash,
 				title: 'Study with Flashcards',
 				subText: 'Scientifically proven to improve memory and make studying easier.',
 				btnText: 'Create a Flashcard',
@@ -66,23 +55,22 @@ export default defineComponent({
 				icon: folder,
 				title: 'Organize your Study',
 				subText: 'Put similar flashcards, notes and videos in a folder.',
-				btnText: 'Create a Study Set', route: '/study',
-				colors: '#FFA84B'
+				btnText: 'Create a Study Set',
+				colors: '#FFA84B',
+				onClick: useStudyModal().openCreateSet
 			},
 
 			{
 				icon: compass,
 				title: 'Find more resources',
 				subText: 'Browse through a collection of study materials and resources.',
-				btnText: 'Explore', route: '/study/preps/explore',
-				colors: '#00D246'
+				btnText: 'Explore',
+				colors: '#00D246',
+				route: '/study/preps/explore'
 			}
 		]
 
-		return {
-			cardArr,
-			isLoggedIn
-		}
+		return { cardArr }
 	}
 })
 </script>

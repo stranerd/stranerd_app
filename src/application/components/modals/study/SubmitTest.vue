@@ -4,47 +4,40 @@
 
 		<div class="flex flex-col gap-1 text-center justify-center items-center ">
 			<h3 class="text-xl font-semibold text-main_dark">Are you sure you want to submit?</h3>
-
 		</div>
-
 
 		<div class="flex flex-row  mt-5  text-white gap-4">
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<ion-button class=" btn-secondary !w-full"
-					@click="closeSubmitTestprep">
+				<ion-button class=" btn-secondary w-full" @click="closeSubmitTest">
 					No
-					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
+					<ion-ripple-effect class="rounded-lg" />
 				</ion-button>
 			</div>
 			<div class="w-1/2 flex flex-row justify-center items-center">
-				<router-link class="w-full" to="/study/preps/submitted">
-					<ion-button class="btn-primary      font-bold !w-full ">
-						Start
+				<router-link :to="`/study/tests/${$route.params.testId}/results`" class="w-full"
+					@click="closeSubmitTest">
+					<ion-button class="btn-primary font-bold !w-full">
+						Submit
 					</ion-button>
 				</router-link>
-				<!-- <button class=" px-6 relative ion-activatable font-bold w-full py-3 rounded-lg bg-primary">
-					Yes
-					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-				</button> -->
 			</div>
 		</div>
-
 	</div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
-
 import { IonRippleEffect } from '@ionic/vue'
 import { chevronDown, ellipse, ellipseOutline } from 'ionicons/icons'
 import { useStudyModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	setup () {
-		const closeSubmitTestprep = () => {
-			useStudyModal().closeSubmitTestprep()
+		const closeSubmitTest = () => {
+			useStudyModal().closeSubmitTest()
 		}
 		return {
-			closeSubmitTestprep,
+			closeSubmitTest,
 			chevronDown,
 			ellipse,
 			ellipseOutline

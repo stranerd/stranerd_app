@@ -6,25 +6,24 @@ import ReportUser from '@app/components/modals/reports/ReportUser.vue'
 import ReportQuestion from '@app/components/modals/reports/ReportQuestion.vue'
 import ReportAnswer from '@app/components/modals/reports/ReportAnswer.vue'
 import UploadImage from '@app/components/modals/media/UploadProfileImage.vue'
-import SubmitTestprep from '@app/components/modals/study/SubmitTestprep.vue'
+import SubmitTest from '@app/components/modals/study/SubmitTest.vue'
 import RateFlashcard from '@app/components/modals/study/RateFlashcard.vue'
 import CreateSet from '@app/components/modals/study/CreateSet.vue'
-import AddSet from '@app/components/modals/study/AddSet.vue'
-import AskQuestion from '@root/application/components/modals/questions/askQuestion.vue'
+import AskQuestion from '@app/components/modals/questions/AskQuestion.vue'
 
 type ScheduleTypes = 'CreateSchedule'
 type UploadTypes = 'UploadImage'
 type QuestionType = 'AskQuestion'
 type SessionTypes = 'CreateSession' | 'Ratings'
 type ReportTypes = 'ReportUser' | 'ReportQuestion' | 'ReportAnswer'
-type StudyTypes = 'SubmitTestprep' | 'RateFlashcard' | 'CreateSet' | 'AddSet'
+type StudyTypes = 'SubmitTest' | 'RateFlashcard' | 'CreateSet'
 
 const ScheduleModals = { CreateSchedule } as Record<ScheduleTypes, any>
 const QuestionModals = { AskQuestion } as Record<QuestionType, any>
 const UploadModals = { UploadImage } as Record<UploadTypes, any>
 const SessionModals = { CreateSession } as Record<SessionTypes, any>
 const ReportModals = { ReportUser, ReportQuestion, ReportAnswer } as Record<ReportTypes, any>
-const StudyModals = { SubmitTestprep, RateFlashcard, CreateSet, AddSet } as Record<StudyTypes, any>
+const StudyModals = { SubmitTest, RateFlashcard, CreateSet } as Record<StudyTypes, any>
 
 export const modal = useModal(ref([] as string[]))
 const ScheduleModal = modal.register('Schedule', ScheduleModals, 'modal-class')

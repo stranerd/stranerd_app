@@ -4,9 +4,9 @@ import { ReportToModel } from '../../data/models/report'
 
 export interface IReportRepository {
 	add: (data: ReportToModel) => Promise<string>,
-	find: (id: string) => Promise<ReportEntity<any> | null>
-	get: (query: QueryParams) => Promise<QueryResults<ReportEntity<any>>>
-	listenToOne: (id: string, listener: Listeners<ReportEntity<any>>) => Promise<() => void>
-	listenToMany: (queryParams: QueryParams, listener: Listeners<ReportEntity<any>>, matches: (entity: ReportEntity<any>) => boolean) => Promise<() => void>
+	find: (id: string) => Promise<ReportEntity | null>
+	get: (query: QueryParams) => Promise<QueryResults<ReportEntity>>
+	listenToOne: (id: string, listener: Listeners<ReportEntity>) => Promise<() => void>
+	listenToMany: (queryParams: QueryParams, listener: Listeners<ReportEntity>, matches: (entity: ReportEntity) => boolean) => Promise<() => void>
 	delete: (id: string) => Promise<void>
 }

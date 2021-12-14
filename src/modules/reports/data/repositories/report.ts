@@ -36,7 +36,7 @@ export class ReportRepository implements IReportRepository {
 		return await this.dataSource.delete(id)
 	}
 
-	async listenToOne (id: string, listener: Listeners<ReportEntity<any>>) {
+	async listenToOne (id: string, listener: Listeners<ReportEntity>) {
 		return this.dataSource.listenToOne(id, {
 			created: async (model) => {
 				await listener.created(this.transformer.fromJSON(model))
@@ -50,7 +50,7 @@ export class ReportRepository implements IReportRepository {
 		})
 	}
 
-	async listenToMany (query: QueryParams, listener: Listeners<ReportEntity<any>>, matches: (entity: ReportEntity<any>) => boolean) {
+	async listenToMany (query: QueryParams, listener: Listeners<ReportEntity>, matches: (entity: ReportEntity) => boolean) {
 		return this.dataSource.listenToMany(query, {
 			created: async (model) => {
 				const entity = this.transformer.fromJSON(model)

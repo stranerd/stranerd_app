@@ -16,10 +16,6 @@
 					Post Question
 				</template>
 			</QuestionForm>
-
-
-
-
 		</div>
 	</Modal>
 </template>
@@ -39,11 +35,11 @@ export default defineComponent({
 		const { factory, error, loading, createQuestion } = useCreateQuestion()
 		return {
 			factory, error, loading, createQuestion,
-			closeAskQuestion, chevronDown,	ellipse,	ellipseOutline
+			closeAskQuestion, chevronDown, ellipse, ellipseOutline
 		}
 	},
 	components: {
-	  QuestionForm
+		QuestionForm
 	}
 })
 </script>

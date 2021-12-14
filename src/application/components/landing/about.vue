@@ -25,7 +25,8 @@
 									Ask questions and get quick solutions from a community of students and tutors..
 								</li>
 							</ul>
-							<router-link class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-44 lg:w-80 py-4"
+							<router-link
+								class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-44 lg:w-80 py-4"
 								to="">
 								Ask a Question
 							</router-link>
@@ -55,7 +56,8 @@
 									Course notes
 								</li>
 							</ul>
-							<router-link class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-44 lg:w-80 py-4"
+							<router-link
+								class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-44 lg:w-80 py-4"
 								to="">
 								Create Study Sets
 							</router-link>
@@ -88,7 +90,8 @@
 									A dedicated tutor for all your prep needs
 								</li>
 							</ul>
-							<router-link class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-44 lg:w-80 py-4"
+							<router-link
+								class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-44 lg:w-80 py-4"
 								to="">
 								Take Test Preps
 							</router-link>
