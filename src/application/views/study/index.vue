@@ -1,37 +1,24 @@
 <template>
 	<DashboardLayout>
-		<div class="px-3 pt-8 pb-8">
-			<StudyHeader />
-
-			<StudySection class="mt-8" />
-
-			<TestPrepsList class="mt-8" />
-			<FlashCardsList class="mt-8" />
-			<NotesList class="mt-8" />
-			<VideosList class="hidden mt-8" />
+		<div>
+			<SetView v-if="rootSet" :key="rootSet.hash" :set="rootSet" />
+			<PageLoading v-if="loading" />
 		</div>
 	</DashboardLayout>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useMySets } from '@app/composable/study/sets'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
-import StudyHeader from '@app/components/study/StudyHeader.vue'
-import StudySection from '@app/components/study/StudySection.vue'
-import TestPrepsList from '@app/components/study/testPreps/StudyTestPrepList.vue'
-import FlashCardsList from '@app/components/study/flashCards/StudyFlashCardList.vue'
-import NotesList from '@app/components/study/notes/StudyNotesList.vue'
-import VideosList from '@app/components/study/videos/StudyVideosList.vue'
+import SetView from '@app/components/study/sets/SetView.vue'
 
 export default defineComponent({
-	name: 'StudyHome',
-	components: {
-		DashboardLayout,
-		StudyHeader,
-		StudySection,
-		TestPrepsList,
-		FlashCardsList,
-		NotesList,
-		VideosList
+	name: 'Study',
+	middleware: ['isAuthenticated'],
+	components: { DashboardLayout, SetView },
+	setup () {
+		const { rootSet, sets, error, loading } = useMySets()
+		return { rootSet, sets, error, loading }
 	}
 })
 </script>

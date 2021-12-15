@@ -1,62 +1,58 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between">
-
+		<div class="w-full flex justify-between mb-4">
 			<div class="heading font-bold text-main_dark flex items-center">
 
 
 				<ion-text class="mr-3">
-					Notes
+					Videos
 				</ion-text>
 				<ion-badge v-if="suggested" class="uppercase">
 					Suggested
 				</ion-badge>
 			</div>
 
-
 			<router-link
 				class="text-primary normalText flex items-center font-bold"
-				to="/study/notes/explore">
+				to="/study/explore/videos">
 				<span>view all</span>
 			</router-link>
 		</div>
 
-		<template v-if="notes.length === 0">
+		<template v-if="videos.length === 0">
 			<div class="py-3">
-				<EmptyState info="No Notes Available." />
+				<EmptyState info="No Videos Available." />
 			</div>
 		</template>
 
 		<template v-else>
 			<div class="showcase">
-				<NoteListCard v-for="(note, index) in notes" :key="note" :note="note" :index="index+1"  />
+				<VideoListCard v-for="(video, index) in videos" :key="video" :index="index+1" :video="video" />
 			</div>
 		</template>
-
-
 	</div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { chevronForwardOutline } from 'ionicons/icons'
-import { useNoteList } from '@app/composable/study/notes'
-import NoteListCard from '@app/components/study/notes/StudyNoteListCard.vue'
+import { useVideoList } from '@app/composable/study/videos'
+import VideoListCard from '@app/components/study/videos/VideoListCard.vue'
 import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'StudyNotesList',
+	name: 'VideosList',
 	props: {
 		suggested: {
 			required: false,
 			default: false
 		}
 	},
-	components: {  NoteListCard, IonBadge },
+	components: { VideoListCard, IonBadge },
 	setup () {
-		const { notes: allNotes, listener, loading, error } = useNoteList()
-		const notes = computed({
-			get: () => allNotes.value.slice(0, 6),
+		const { videos: allVideos, listener, loading, error } = useVideoList()
+		const videos = computed({
+			get: () => allVideos.value.slice(0, 6),
 			set: () => {
 			}
 		})
@@ -65,7 +61,7 @@ export default defineComponent({
 		onBeforeUnmount(listener.closeListener)
 
 		return {
-			notes,
+			videos,
 			chevronForwardOutline
 		}
 	}

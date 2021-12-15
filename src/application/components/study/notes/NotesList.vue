@@ -1,30 +1,33 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between mb-8">
-
+		<div class="w-full flex justify-between mb-4">
 			<div class="heading font-bold text-main_dark flex items-center">
+
+
 				<ion-text class="mr-3">
-					FlashCards
+					Notes
 				</ion-text>
 				<ion-badge v-if="suggested" class="uppercase">
 					Suggested
 				</ion-badge>
 			</div>
 
-			<router-link class="text-primary normalText flex items-center font-bold"
-				to="/study/flashCards/explore">
+			<router-link
+				class="text-primary normalText flex items-center font-bold"
+				to="/study/explore/notes">
 				<span>view all</span>
 			</router-link>
 		</div>
 
-		<template v-if="flashcards.length === 0">
+		<template v-if="notes.length === 0">
 			<div class="py-3">
-				<EmptyState info="No flashcards Available." />
+				<EmptyState info="No Notes Available." />
 			</div>
 		</template>
+
 		<template v-else>
 			<div class="showcase">
-				<StudyFlashCardListCard v-for="(flashcard, index) in flashcards" :key="flashcard" :flashCard="flashcard" :index="index+1"  />
+				<NoteListCard v-for="(note, index) in notes" :key="note" :index="index+1" :note="note" />
 			</div>
 		</template>
 	</div>
@@ -33,23 +36,23 @@
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { chevronForwardOutline } from 'ionicons/icons'
-import { useFlashCardList } from '@app/composable/study/flashCards'
-import StudyFlashCardListCard from '@app/components/study/flashCards/StudyFlashCardListCard.vue'
+import { useNoteList } from '@app/composable/study/notes'
+import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'StudyFlashCardList',
+	name: 'NotesList',
 	props: {
 		suggested: {
 			required: false,
 			default: false
 		}
 	},
-	components: {  StudyFlashCardListCard, IonBadge },
+	components: { NoteListCard, IonBadge },
 	setup () {
-		const { flashCards: allFlashcard, listener, loading, error } = useFlashCardList()
-		const flashcards = computed({
-			get: () => allFlashcard.value.slice(0, 6),
+		const { notes: allNotes, listener, loading, error } = useNoteList()
+		const notes = computed({
+			get: () => allNotes.value.slice(0, 6),
 			set: () => {
 			}
 		})
@@ -58,7 +61,7 @@ export default defineComponent({
 		onBeforeUnmount(listener.closeListener)
 
 		return {
-			flashcards,
+			notes,
 			chevronForwardOutline
 		}
 	}

@@ -80,7 +80,7 @@ import { add, arrowBackOutline, calendar, chevronBack, chevronDown, chevronForwa
 import { useRouter } from 'vue-router'
 import Opening from '@app/components/users/schedule/Openings.vue'
 import DateCard from '@app/components/users/schedule/DateCard.vue'
-import { useScheduleModal } from '@app/composable/core/modals'
+import { useSessionModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'ScheduleCalendar',
@@ -94,7 +94,7 @@ export default defineComponent({
 		const router = useRouter()
 
 		const createSchedule = () => {
-			useScheduleModal().openCreateSchedule()
+			useSessionModal().openCreateSchedule()
 		}
 
 		const showAddAnswer = ref(false)

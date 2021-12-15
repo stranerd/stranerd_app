@@ -68,7 +68,7 @@ import {
 } from 'ionicons/icons'
 import { PastQuestionEntity, TestEntity, TestType } from '@modules/study'
 import { getAlphabet } from '@utils/commons'
-import { useCreateReport } from '@root/application/composable/reports/pastQuestions'
+import { useCreateReport } from '@app/composable/reports/pastQuestions'
 
 export default defineComponent({
 	name: 'TestQuestion',

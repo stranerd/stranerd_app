@@ -186,7 +186,7 @@ import { useProfileUpdate, useTutorUpdate } from '@app/composable/auth/profile'
 import { useAuth } from '@app/composable/auth/auth'
 import { useFileInputs, useSubjectAsTags } from '@app/composable/core/forms'
 import { usePasswordUpdate } from '@app/composable/auth/passwords'
-import { useUploadModal } from '@app/composable/core/modals'
+import { useProfileModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'ProfileSettings',
@@ -200,7 +200,7 @@ export default defineComponent({
 	},
 	setup () {
 		const openUploadModal = () => {
-			useUploadModal().openUploadImage()
+			useProfileModal().openUploadImage()
 		}
 		const { hasPassword, user } = useAuth()
 		const {

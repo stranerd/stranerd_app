@@ -52,7 +52,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonIcon, IonRippleEffect } from '@ionic/vue'
-import { useUploadModal } from '@app/composable/core/modals'
+import { useProfileModal } from '@app/composable/core/modals'
 import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
 import { camera } from 'ionicons/icons'
 import { useProfileUpdate } from '@app/composable/auth/profile'
@@ -63,7 +63,7 @@ export default defineComponent({
 	components: { IonRippleEffect, IonIcon },
 	setup () {
 		const closeUploadImage = () => {
-			useUploadModal().closeUploadImage()
+			useProfileModal().closeUploadImage()
 		}
 		const { factory, error, loading, updateProfile } = useProfileUpdate()
 		const submitImage = async () => {

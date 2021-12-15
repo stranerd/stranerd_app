@@ -25,7 +25,7 @@
 		</div>
 
 	</div>
-	<PageLoading v-if="loading"/>
+	<PageLoading v-if="loading" />
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
@@ -33,9 +33,8 @@ import { defineComponent } from 'vue'
 import { IonRippleEffect } from '@ionic/vue'
 import { chevronDown, ellipse, ellipseOutline } from 'ionicons/icons'
 import { useStudyModal } from '@app/composable/core/modals'
-import { useCreateSet } from '@root/application/composable/study/sets'
-import {  useTags } from '@app/composable/core/forms'
-
+import { useCreateSet } from '@app/composable/study/sets'
+import { useTags } from '@app/composable/core/forms'
 
 export default defineComponent({
 	setup () {
@@ -43,9 +42,9 @@ export default defineComponent({
 			useStudyModal().closeCreateSet()
 		}
 
-		const {createSet, factory, error,loading} = useCreateSet()
+		const { createSet, factory, error, loading } = useCreateSet()
 
-        		const { tag, removeTag } = useTags(
+		const { tag, removeTag } = useTags(
 			(tag: string) => factory.value.addTag(tag),
 			(tag: string) => factory.value.removeTag(tag)
 		)
@@ -67,12 +66,12 @@ export default defineComponent({
 		--placeholder-opacity: 1;
 	}
 
-	ion-radio{
-		--color: #8B9EB1 !important; 
+	ion-radio {
+		--color: #8B9EB1 !important;
 	}
 
-		ion-label{
-		--color: #8B9EB1 !important; 
+	ion-label {
+		--color: #8B9EB1 !important;
 	}
 
 

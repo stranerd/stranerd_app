@@ -1,18 +1,16 @@
 <template>
-	<slot
-		:bgColors="bgColors"
-		:colors="colors"
-		:index="index"
-		:randomNumber="randomNumber"
+	<span
+		:class="[secondary ?'!text-white':'',`py-1 px-3 font-bold  rounded-3xl`]"
+		:style="`color:${colors[index || randomNumber]}; background-color:${secondary? colors[index || randomNumber] : bgColors[index || randomNumber]}`"
 	>
-		<div
-			:class="[secondary ?'!text-white':'',`py-1 px-3 font-bold  rounded-3xl`]"
-			:style="`color:${colors[index || randomNumber]}; background-color:${secondary? colors[index || randomNumber] : bgColors[index || randomNumber]}`"
-		>
-			<span>{{ tag }}</span>
-		</div>
-
-	</slot>
+		<slot
+			:bgColors="bgColors"
+			:colors="colors"
+			:index="index"
+			:randomNumber="randomNumber"
+			:tag="tag"
+		>{{ tag }}</slot>
+	</span>
 </template>
 
 <script lang="ts">

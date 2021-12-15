@@ -1,8 +1,8 @@
 <template>
 	<router-link
-		:class="`py-4 px-4 rounded-xl !min-h-[11rem] ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer `"
+		:class="`py-4 px-4 rounded-xl !min-h-[11rem] ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer box-border`"
 		:to="`/questions/${question.id}`">
-		<div class="flex lg:flex-row flex-col lg:items-center gap-3 mb-4">
+		<div class="flex flex-row items-center gap-2 mb-4">
 			<avatar :id="question.userId" :size="28" :src="question.avatar" />
 			<span class="font-bold text-main_dark">{{ question.userBio.firstName }}</span>
 
@@ -32,7 +32,7 @@ export default defineComponent({
 	props: {
 		colorClass: {
 			type: String,
-			default: 'bg-light_gray'
+			default: 'bg-white'
 		},
 		isFeatured: {
 			type: Boolean,
