@@ -58,10 +58,6 @@ export default defineComponent({
 			type: String,
 			default: 'bg-white'
 		},
-		index: {
-			type: Number,
-			required: false
-		},
 		flashCard: {
 			type: FlashCardEntity,
 			required: true

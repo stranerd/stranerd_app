@@ -1,31 +1,33 @@
 <template>
-	<div class="md:w-8/12 w-full px-4 mx-auto   mt-8">
-
-
+	<div>
 		<template v-if="videos.length === 0">
 			<div class="py-3">
-				<empty-state
-					info="No Videos to Explore."
-				></empty-state>
+				<EmptyState info="No videos available." />
 			</div>
 		</template>
 		<template v-else>
-			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
-				<VideoCard v-for="(video, index) in videos" :key="video.id" :index="index" :video="video" />
+			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mt-8">
+				<VideoCard v-for="video in videos" :key="video.id" :video="video" />
 			</div>
 		</template>
-
-
 	</div>
 </template>
 
 <script lang="ts">
-import { onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import VideoCard from '@app/components/study/videos/VideoListCard.vue'
 import { useVideoList } from '@app/composable/study/videos'
 
-export default {
+export default defineComponent({
+	name: 'ExploreVideos',
 	components: { VideoCard },
+	props: {
+		sliced: {
+			type: Boolean,
+			default: false,
+			required: false
+		}
+	},
 	setup () {
 		// const { id, isLoggedIn } = useAuth()
 		const { videos, listener, loading, error } = useVideoList()
@@ -37,7 +39,7 @@ export default {
 			videos
 		}
 	}
-}
+})
 </script>
 
 <style scoped>

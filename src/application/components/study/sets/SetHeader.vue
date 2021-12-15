@@ -2,16 +2,15 @@
 	<div
 		class="bg-primary h-40 h-36 rounded-b-xl sm:rounded-3xl flex flex-col sm:flex-row justify-between sm:items-center p-8">
 		<div class="flex flex-col w-full text-left">
-
 			<ion-text class="text-white leading-tight text-3xl font-bold">
-				Your library
+				{{ set.isRoot ? 'Your library' : set.name }}
 			</ion-text>
 			<ion-text class="text-white text-base font-bold">
 				Collection of your created and saved study materials
 			</ion-text>
 		</div>
 
-		<div class="bg-white p-3 px-6 rounded-xl lg:grid place-items-center cursor-pointer hidden"
+		<div v-if="set.isRoot" class="bg-white p-3 px-6 rounded-xl lg:grid place-items-center cursor-pointer"
 			@click="setOpen(true, $event)">
 			<div class="flex items-center cursor-pointer">
 				<ion-text class="text-primary mr-1 font-bold">
@@ -23,6 +22,7 @@
 				/>
 			</div>
 		</div>
+		<div v-else />
 
 		<ion-popover
 			:event="event"
@@ -53,19 +53,23 @@
 </template>
 
 <script lang="ts">
-import { IonPopover } from '@ionic/vue'
-import { useAuth } from '@root/application/composable/auth/auth'
-import { chevronDown, chevronUp, flash, folder } from 'ionicons/icons'
 import { defineComponent, ref } from 'vue'
+import { IonPopover } from '@ionic/vue'
+import { chevronDown, chevronUp, flash, folder } from 'ionicons/icons'
+import { SetEntity } from '@modules/study'
 
 export default defineComponent({
-	name: 'StudyHeader',
+	name: 'SetHeader',
 	components: {
 		IonPopover
 	},
-
+	props: {
+		set: {
+			type: SetEntity,
+			required: true
+		}
+	},
 	setup () {
-		const { user } = useAuth()
 		const isOpenRef = ref(false)
 		const event = ref()
 		const setOpen = (state: boolean, ev?: Event) => {
@@ -74,8 +78,7 @@ export default defineComponent({
 		}
 
 		return {
-			user, chevronDown, chevronUp, isOpenRef, setOpen, event, folder, flash
-
+			chevronDown, chevronUp, isOpenRef, setOpen, event, folder, flash
 		}
 	}
 

@@ -3,46 +3,30 @@
 		<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-5">
 			Explore thousands of study materials
 		</ion-text>
-		<ion-searchbar class="max-w-[1054px] lg:w-7/12 !h-16 "
-			placeholder="Search by subjects, topics and related keywords"
-			show-cancel-button="never" />
+		<ion-searchbar class="max-w-[1054px] lg:w-7/12 !h-16"
+			placeholder="Search by subjects, topics and related keywords" show-cancel-button="never" />
 		<div
-			class="mb-0.5  lg:justify-between justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full  lg:px-3 text-xs mx-auto gap-5 text-faded_gray font-bold  whitespace-normal overflow-x-auto">
-
-			<div class="hidden flex-col gap-4 mb-3 lg:flex">
-				<div class="flex items-center cursor-pointer" @click="openCreateStudy">
-					<ion-text class="text-white mr-1">
-						Create
-					</ion-text>
-					<ion-icon :icon='chevronDown' class="text-white mr-3 text-xl" />
-				</div>
-			</div>
-			<div class="mb-3">
-				<router-link :to="`/study/preps/explore`" class="pb-2 mr-3 cursor-pointer"
-					exact-active-class="border-b-4 text-white border-white">
-					TestPreps
-				</router-link>
-				<router-link :to="`/study/flashCards/explore`" class="pb-2 mr-3 cursor-pointer"
-					exact-active-class="border-b-4 text-white border-white">
-					FlashCards
-				</router-link>
-				<router-link :to="`/study/notes/explore`"
-					class="pb-2 mr-3 cursor-pointer"
-					exact-active-class="border-b-4 text-white border-white">
-					Notes
-				</router-link>
-				<router-link :to="`/study/videos/explore`"
-					class="pb-2 mr-3 cursor-pointer"
-					exact-active-class="border-b-4 text-white border-white">
-					Videos
-				</router-link>
-				<router-link :to="`/study/sets/explore`"
-					class="pb-2 mr-3 cursor-pointer"
-					exact-active-class="border-b-4 text-white border-white">
-					Study Sets
-				</router-link>
-			</div>
-			<div />
+			class="flex justify-center md:text-sm lg:text-base text-faded_gray font-bold  whitespace-normal overflow-x-auto">
+			<router-link class="pb-2 mr-3 cursor-pointer" exact-active-class="border-b-4 text-white border-white"
+				to="/study/explore/all">
+				All
+			</router-link>
+			<router-link class="pb-2 mr-3 cursor-pointer" exact-active-class="border-b-4 text-white border-white"
+				to="/study/explore/preps">
+				TestPreps
+			</router-link>
+			<router-link class="pb-2 mr-3 cursor-pointer" exact-active-class="border-b-4 text-white border-white"
+				to="/study/explore/flashCards">
+				FlashCards
+			</router-link>
+			<router-link class="pb-2 mr-3 cursor-pointer" exact-active-class="border-b-4 text-white border-white"
+				to="/study/explore/notes">
+				Notes
+			</router-link>
+			<router-link class="pb-2 mr-3 cursor-pointer" exact-active-class="border-b-4 text-white border-white"
+				to="/study/explore/videos">
+				Videos
+			</router-link>
 		</div>
 	</div>
 </template>
@@ -56,12 +40,6 @@ import { useStudyPopover } from '@app/composable/core/modals'
 export default defineComponent({
 	name: 'StudyExploreTopSection',
 	components: { IonSearchbar },
-	props: {
-		name: {
-			type: String,
-			required: true
-		}
-	},
 	setup () {
 		const openCreateStudy = useStudyPopover().openCreateStudy
 		return { chevronDown, pencil, openCreateStudy }

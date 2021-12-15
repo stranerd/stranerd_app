@@ -42,7 +42,7 @@ import { useCreateTest } from '@app/composable/study/tests'
 import Tag from '@app/components/study/tags/Tag.vue'
 
 export default defineComponent({
-	name: 'StudyTestPrepListCard',
+	name: 'TestPrepListCard',
 	components: { Tag },
 	props: {
 		colorClass: {

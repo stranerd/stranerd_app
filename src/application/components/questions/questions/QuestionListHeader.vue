@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { useAuth } from '@root/application/composable/auth/auth'
+import { useAuth } from '@app/composable/auth/auth'
 import { chevronDown, chevronUp, flash, folder } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { useQuestionList } from '@app/composable/questions/questions'

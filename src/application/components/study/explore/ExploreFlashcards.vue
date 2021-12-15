@@ -1,58 +1,36 @@
 <template>
-	<div class="md:w-8/12 w-full px-4 mx-auto mt-8">
-		<!-- <div class="flex gap-4 flex-col md:flex-row items-center">
-			<ion-segment mode="ios" value="all">
-				<ion-segment-button value="all">
-					<ion-label>All authors</ion-label>
-				</ion-segment-button>
-				<ion-segment-button value="tutors">
-					<ion-label>Tutors</ion-label>
-				</ion-segment-button>
-				<ion-segment-button value="nerds">
-					<ion-label>Nerds</ion-label>
-				</ion-segment-button>
-			</ion-segment>
-			<ion-segment mode="ios" value="allCost">
-				<ion-segment-button value="allCost">
-					<ion-label>All cost</ion-label>
-				</ion-segment-button>
-				<ion-segment-button value="free">
-					<ion-label>Fres</ion-label>
-				</ion-segment-button>
-				<ion-segment-button value="paid">
-					<ion-label>Paid</ion-label>
-				</ion-segment-button>
-			</ion-segment>
-			<ion-select class=" lg:w-96 w-40 text-xs md:text-sm  placeholder-[#8B9EB1] font-bold rounded-md" interface="action-sheet"
-				placeholder="Rating" value="notifications">
-				<ion-select-option value="maths">Rating</ion-select-option>
-				<ion-select-option value="physics">Monthly</ion-select-option>
-				<ion-select-option value="bio">Yearly</ion-select-option>
-
-			</ion-select>
-		</div> -->
-
-		<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
-			<FlashCardCard v-for="(flashCard, index) in flashCards" :key="flashCard.id" :flashCard="flashCard"
-				:index="index + 1" />
-		</div>
+	<div>
+		<template v-if="flashCards.length === 0">
+			<div class="py-3">
+				<EmptyState info="No flashCards available." />
+			</div>
+		</template>
+		<template v-else>
+			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mt-8">
+				<FlashCardCard v-for="flashCard in flashCards" :key="flashCard.id" :flashCard="flashCard" />
+			</div>
+		</template>
+		<PageLoading v-if="loading" />
 	</div>
-
-	<page-loading v-if="loading" />
 </template>
 
 <script lang="ts">
-import { onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import FlashCardCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import { useFlashCardList } from '@app/composable/study/flashCards'
 import { useAuth } from '@app/composable/auth/auth'
 
-export default {
-	// components: { IonSegment, IonSegmentButton, IonSelect, IonSelectOption, FlashcardsCard },
+export default defineComponent({
+	name: 'ExploreFlashCards',
 	components: { FlashCardCard },
-
+	props: {
+		sliced: {
+			type: Boolean,
+			default: false,
+			required: false
+		}
+	},
 	setup () {
-
 		const { id, isLoggedIn } = useAuth()
 		const { flashCards, listener, loading, error } = useFlashCardList()
 
@@ -64,7 +42,7 @@ export default {
 			id, isLoggedIn
 		}
 	}
-}
+})
 </script>
 
 <style scoped>

@@ -70,7 +70,7 @@ export default defineComponent({
 				subText: 'Browse through a collection of study materials and resources.',
 				btnText: 'Explore',
 				colors: '#00D246',
-				route: '/study/preps/explore'
+				route: '/study/explore/all'
 			}
 		]
 

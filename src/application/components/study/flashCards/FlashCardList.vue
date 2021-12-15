@@ -11,7 +11,7 @@
 			</div>
 
 			<router-link class="text-primary normalText flex items-center font-bold"
-			             to="/study/flashCards/explore">
+				to="/study/explore/flashCards">
 				<span>view all</span>
 			</router-link>
 		</div>
@@ -24,7 +24,7 @@
 		<template v-else>
 			<div class="showcase">
 				<FlashCardListCard v-for="(flashcard, index) in flashcards" :key="flashcard" :flashCard="flashcard"
-				                   :index="index+1" />
+					:index="index+1" />
 			</div>
 		</template>
 	</div>

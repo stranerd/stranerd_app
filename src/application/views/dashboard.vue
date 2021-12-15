@@ -9,6 +9,7 @@
 				<TestPrepList :suggested="true" class="mt-16" />
 				<RecentQuestions class="mt-16" />
 				<NotesList :suggested="true" class="mt-16" />
+				<VideosList :suggested="true" class="mt-16" />
 				<FlashCardList :suggested="true" class="mt-16" />
 				<StudyTools class="mt-16" />
 			</div>
@@ -22,6 +23,7 @@ import DashboardLayout from '@app/layouts/Dashboard.vue'
 import StatusBar from '@app/components/dashboard/StatusBar.vue'
 import TestPrepList from '@app/components/study/testPreps/TestPrepList.vue'
 import NotesList from '@app/components/study/notes/NotesList.vue'
+import VideosList from '@app/components/study/videos/VideosList.vue'
 import FlashCardList from '@app/components/study/flashCards/FlashCardList.vue'
 import RecentQuestions from '@app/components/dashboard/RecentQuestions.vue'
 import ContinueStudy from '@app/components/dashboard/ContinueTests.vue'
@@ -35,6 +37,7 @@ export default defineComponent({
 		ContinueStudy,
 		TestPrepList,
 		NotesList,
+		VideosList,
 		FlashCardList,
 		StudyTools,
 		StatusBar

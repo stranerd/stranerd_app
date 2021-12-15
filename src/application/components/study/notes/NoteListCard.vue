@@ -31,7 +31,7 @@
 
 			<div class="w-full flex items-center justify-center  px-4 mt-2 pb-4">
 				<ion-button :href="`/study/notes/${note.id}`"
-				            class="btn-outline  text-primary   font-bold w-full  lg:min-w-[7.5rem] ">
+					class="btn-outline  text-primary   font-bold w-full  lg:min-w-[7.5rem] ">
 					Start reading
 				</ion-button>
 			</div>
@@ -40,12 +40,8 @@
 </template>
 
 <script lang="ts">
-import { calendar, ellipsisVertical, play } from 'ionicons/icons'
 import { defineComponent } from 'vue'
-import { formatNumber } from '@utils/commons'
 import { NoteEntity } from '@modules/study'
-import { useEditState } from '@app/composable/study/state'
-import { useDeleteNote } from '@app/composable/study/notes'
 
 export default defineComponent({
 	name: 'NoteListCard',
@@ -57,19 +53,6 @@ export default defineComponent({
 		note: {
 			type: NoteEntity,
 			required: true
-		},
-		index: {
-			type: Number,
-			required: false
-		}
-	},
-	setup (props) {
-		const { editState } = useEditState()
-		const { loading: deleteLoading, error, deleteNote } = useDeleteNote(props.note.id)
-		return {
-			deleteNote, deleteLoading,
-			editState, formatNumber,
-			calendar, play, ellipsisVertical
 		}
 	}
 })

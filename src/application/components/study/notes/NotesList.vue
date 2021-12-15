@@ -14,7 +14,7 @@
 
 			<router-link
 				class="text-primary normalText flex items-center font-bold"
-				to="/study/notes/explore">
+				to="/study/explore/notes">
 				<span>view all</span>
 			</router-link>
 		</div>

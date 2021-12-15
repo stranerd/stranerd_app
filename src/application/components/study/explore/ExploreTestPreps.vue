@@ -1,14 +1,14 @@
 <template>
-	<div class="md:w-8/12 w-full px-4 mx-auto mt-8">
+	<div>
 		<template v-if="groupedByInstitution.length === 0">
 			<div class="py-3">
-				<EmptyState info="No TestPreps to Explore" />
+				<EmptyState info="No test preps available" />
 			</div>
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
 				<div v-for="group in groupedByInstitution" :key="group.institutionId"
-					:class="[`m-0 h-[13rem] min-w-[16.5rem] cardPadding border bg-light_gray rounded-xl flex flex-col items-center md:gap-2 gap-[1rem] box-border !p-4 md:!p-7 border border-faded_gray lg:border-0`]">
+					:class="[`m-0 h-[13rem] min-w-[16.5rem] cardPadding border bg-white rounded-xl flex flex-col items-center md:gap-2 gap-[1rem] box-border !p-4 md:!p-7 border border-faded_gray lg:border-0`]">
 					<ion-text class="font-bold text-lg text-main_dark">
 						<Institution :institutionId="group.institutionId" />
 					</ion-text>
@@ -39,8 +39,15 @@ import { useTestPrepList } from '@app/composable/study/testPreps'
 import { calendar, play } from 'ionicons/icons'
 
 export default defineComponent({
-	name: 'ExploreTestPrep',
+	name: 'ExploreTestPreps',
 	components: { Institution },
+	props: {
+		sliced: {
+			type: Boolean,
+			default: false,
+			required: false
+		}
+	},
 	setup () {
 		const { groupedByInstitution, listener, loading, error } = useTestPrepList()
 

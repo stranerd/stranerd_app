@@ -11,7 +11,7 @@
 			</div>
 
 			<router-link class="text-primary normalText flex items-center font-bold"
-			             to="/study/preps/explore">
+				to="/study/explore/preps">
 				<span>view all</span>
 			</router-link>
 		</div>
@@ -25,7 +25,7 @@
 		<template v-else>
 			<div class="showcase">
 				<TestPrepCard v-for="(testPrep, index) in testPreps" :key="testPrep" :index="index+1"
-				              :testPrep="testPrep" />
+					:testPrep="testPrep" />
 			</div>
 		</template>
 	</div>
