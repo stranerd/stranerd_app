@@ -262,7 +262,11 @@ export { PastQuestionFactory, PastQuestionEntity }
 export { TestPrepFactory, TestPrepEntity }
 export { TestEntity }
 
-export { CommentType, CommentData } from './domain/entities/comment'
-export { PrepType, PrepData } from './domain/entities/testPrep'
-export { TestType, TestData } from './domain/entities/test'
-export { PastQuestionType, PastQuestionData } from './domain/entities/pastQuestion'
+export { CommentType } from './domain/entities/comment'
+export type { CommentData } from './domain/entities/comment'
+export { PrepType } from './domain/entities/testPrep'
+export type { PrepData } from './domain/entities/testPrep'
+export { TestType } from './domain/entities/test'
+export type { TestData } from './domain/entities/test'
+export { PastQuestionType } from './domain/entities/pastQuestion'
+export type { PastQuestionData } from './domain/entities/pastQuestion'
