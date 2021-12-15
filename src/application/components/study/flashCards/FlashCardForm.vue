@@ -4,7 +4,7 @@
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-5 mb-6">
 				{{ title }}
 			</ion-text>
-			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
+			<div class="bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
 				<ion-text class="text-primary font-bold w-12">
 					TITLE
 				</ion-text>
@@ -18,7 +18,7 @@
 				class="text-xl text-delete_red font-bold text-center mb-8 grid place-items-center mx-auto">
 				{{ factory.errors.title }}
 			</ion-text>
-			<div class="input-holder bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
+			<div class="bg-white lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
 				<ion-text class="text-primary font-bold w-12">
 					TAGS
 				</ion-text>

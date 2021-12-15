@@ -4,18 +4,7 @@
 		:to="`/study/videos/${video.id}`"
 	>
 		<div class="flex flex-col items-center justify-between w-full">
-			<template v-if="video.preview">
-				<img :src="video.preview.link" class="bg-faded_gray  h-[10.9rem] min-w-[57px] w-full  rounded-md " />
-			</template>
-			<div v-else class="bg-faded_gray min-h-[10.5rem] min-w-[57px] w-full grid place-items-center rounded-md ">
-				<div class="bg-white rounded-full grid place-items-center h-16 w-16">
-					<ion-icon
-						:icon="play"
-						class="text-faded_gray text-3xl"
-					/>
-				</div>
-			</div>
-
+			<img :src="video.preview.link" class="bg-faded_gray  h-[10.9rem] min-w-[57px] w-full  rounded-md " />
 			<ion-text class="text-sm text-main_dark font-bold p-5 pb-1 w-full text-left">
 				{{ video.title }}
 			</ion-text>

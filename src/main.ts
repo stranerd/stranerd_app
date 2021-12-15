@@ -27,6 +27,9 @@ const init = async () => {
 	})
 
 	router.beforeEach(async (to, from, next) => {
+		await Promise.all(allModals.map((modal) => modal().closeAll()))
+		await Promise.all(allPopovers.map((popover) => popover().closeAll()))
+
 		const middlewares = (to.meta.middlewares ?? []) as Middleware[]
 		let redirect = null
 		for (const middleware of middlewares) {
@@ -42,8 +45,6 @@ const init = async () => {
 	})
 	router.afterEach(() => {
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-		allModals.map((modal) => modal().closeAll())
-		allPopovers.map((popover) => popover().closeAll())
 	})
 
 	const app = createApp(App)

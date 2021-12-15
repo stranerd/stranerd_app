@@ -23,9 +23,8 @@
 				</ion-button>
 			</div>
 		</div>
-
+		<PageLoading v-if="loading" />
 	</div>
-	<PageLoading v-if="loading" />
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'

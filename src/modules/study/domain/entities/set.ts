@@ -42,6 +42,10 @@ export class SetEntity extends BaseEntity {
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
+
+	get totalSaved () {
+		return Object.values(this.saved).reduce((acc, cur) => acc + cur.length, 0)
+	}
 }
 
 type SetConstructorArgs = {

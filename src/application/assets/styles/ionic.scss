@@ -25,7 +25,7 @@ http://ionicframework.com/docs/theming/ */
 	--ion-font-family: 'Raleway', sans-serif;
 	/** primary **/
 	--ion-color-primary: #546DD3;
-	--ion-color-primary-rgb: 19, 39, 64, 0.25;
+	--ion-color-primary-rgb: 56, 128, 255;
 	--ion-color-primary-contrast: #ffffff;
 	--ion-color-primary-contrast-rgb: 255, 255, 255;
 	--ion-color-primary-shade: #3171e0;
@@ -37,13 +37,6 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-orange-contrast-rgb: 255, 255, 255;
 	--ion-color-orange-shade: #FFA84B;
 	--ion-color-orange-tint: #FFA84B;
-	/** primary **/
-	--ion-color-primary: #546DD3;
-	--ion-color-primary-rgb: 56, 128, 255;
-	--ion-color-primary-contrast: #ffffff;
-	--ion-color-primary-contrast-rgb: 255, 255, 255;
-	--ion-color-primary-shade: #3171e0;
-	--ion-color-primary-tint: #4c8dff;
 
 	/** secondary **/
 	--ion-color-secondary: #3dc2ff;
@@ -108,15 +101,12 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-light-contrast-rgb: 0, 0, 0;
 	--ion-color-light-shade: #d7d8da;
 	--ion-color-light-tint: #f5f6f9;
-
-
 }
 
 // custom colors
 .ion-white {
 	--color: white !important;
 	--color-checked: white !important;
-
 }
 
 .ion-bg-white {

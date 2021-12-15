@@ -9,7 +9,10 @@
 			<FlashCardsList :flashCards="flashCards" :set="set" class="mt-16" />
 			<NotesList :notes="notes" :set="set" class="mt-16" />
 			<VideosList :set="set" :videos="videos" class="mt-16" />
+			<RootSetList v-if="set.isRoot && set.userId === id" :set="set" :sets="sets" class="mt-16" />
 		</div>
+		<PageLoading v-if="loading" />
+		<PageLoading v-if="setLoading" />
 	</div>
 </template>
 
@@ -22,7 +25,9 @@ import TestPrepsList from '@app/components/study/testPreps/SetTestPrepList.vue'
 import FlashCardsList from '@app/components/study/flashCards/SetFlashCardList.vue'
 import NotesList from '@app/components/study/notes/SetNotesList.vue'
 import VideosList from '@app/components/study/videos/SetVideosList.vue'
-import { useSet } from '@app/composable/study/sets'
+import RootSetList from '@app/components/study/sets/RootSetList.vue'
+import { useMySets, useSet } from '@app/composable/study/sets'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'SetView',
@@ -38,13 +43,16 @@ export default defineComponent({
 		TestPrepsList,
 		FlashCardsList,
 		NotesList,
-		VideosList
+		VideosList,
+		RootSetList
 	},
 	setup (props) {
+		const { id } = useAuth()
 		const { listener, loading, error, notes, videos, flashCards, testPreps } = useSet(props.set)
+		const { normalSets: sets, loading: setLoading, error: setError } = useMySets()
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
-		return { loading, error, notes, videos, flashCards, testPreps }
+		return { id, loading, error, notes, videos, flashCards, testPreps, sets, setLoading, setError }
 	}
 })
 </script>

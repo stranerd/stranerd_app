@@ -46,9 +46,10 @@
 				</ion-button>
 			</div>
 		</div>
-		<page-loading v-if="loading" />
+		<PageLoading v-if="loading" />
 	</Modal>
 </template>
+
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonIcon, IonRippleEffect } from '@ionic/vue'

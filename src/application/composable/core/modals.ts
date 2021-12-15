@@ -14,10 +14,10 @@ import CreateStudy from '@app/components/popovers/study/CreateStudy.vue'
 
 export const modal = useModal(ref([]))
 const QuestionModal = modal.register('Question', { AskQuestion }, 'question-modal')
-const ProfileModal = modal.register('Upload', { UploadImage }, 'modal-class')
+const ProfileModal = modal.register('Profile', { UploadImage }, 'modal-class')
 const SessionModal = modal.register('Session', { CreateSession, CreateSchedule, Ratings: CreateSession }, 'modal-class')
 const ReportModal = modal.register('Report', { ReportUser, ReportQuestion, ReportAnswer }, 'modal-class')
-const StudyModal = modal.register('submit', { SubmitTest, RateFlashcard, CreateSet }, 'study-modal')
+const StudyModal = modal.register('Study', { SubmitTest, RateFlashcard, CreateSet }, 'study-modal')
 
 export const useQuestionModal = () => QuestionModal
 export const useProfileModal = () => ProfileModal

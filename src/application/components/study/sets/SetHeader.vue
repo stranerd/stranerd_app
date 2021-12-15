@@ -11,58 +11,24 @@
 		</div>
 
 		<div v-if="set.isRoot" class="bg-white p-3 px-6 rounded-xl lg:grid place-items-center cursor-pointer hidden"
-			@click="setOpen(true, $event)">
+			@click="openCreateStudy()">
 			<div class="flex items-center cursor-pointer">
-				<ion-text class="text-primary mr-1 font-bold">
-					Create
-				</ion-text>
-				<ion-icon
-					:icon=' !isOpenRef ? chevronDown : chevronUp'
-					class="text-primary text-xl"
-				/>
+				<ion-text class="text-primary mr-1 font-bold">Create</ion-text>
+				<ion-icon :icon='chevronDown' class="text-primary text-xl" />
 			</div>
 		</div>
 		<div v-else />
-
-		<ion-popover
-			:event="event"
-			:is-open="isOpenRef"
-			:translucent="true"
-			css-class="pt-8 rounded-xl"
-			@didDismiss="setOpen(false)"
-		>
-			<div class="flex flex-col  p-6 !w-52">
-				<router-link class="flex items-center justify-start w-auto mb-4 cursor-pointer"
-					to="/study/flashCards/create">
-					<ion-icon :icon="flash" alt="" class=" text-2xl text-main_dark" />
-					<ion-text class="font-bold ml-4 text-lg text-main_dark">
-						Flashcard
-					</ion-text>
-				</router-link>
-				<router-link class="flex items-center justify-start w-auto cursor-pointer"
-					to="/study/set/create">
-					<ion-icon :icon="folder" alt="" class=" text-2xl text-main_dark" />
-					<ion-text class="font-bold ml-4 text-lg text-main_dark">
-						Study set
-					</ion-text>
-				</router-link>
-			</div>
-
-		</ion-popover>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { IonPopover } from '@ionic/vue'
-import { chevronDown, chevronUp, flash, folder } from 'ionicons/icons'
+import { defineComponent } from 'vue'
+import { chevronDown, flash, folder } from 'ionicons/icons'
 import { SetEntity } from '@modules/study'
+import { useStudyPopover } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'SetHeader',
-	components: {
-		IonPopover
-	},
 	props: {
 		set: {
 			type: SetEntity,
@@ -70,23 +36,9 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const isOpenRef = ref(false)
-		const event = ref()
-		const setOpen = (state: boolean, ev?: Event) => {
-			event.value = ev
-			isOpenRef.value = state
-		}
-
-		return {
-			chevronDown, chevronUp, isOpenRef, setOpen, event, folder, flash
-		}
+		const openCreateStudy = useStudyPopover().openCreateStudy
+		return { chevronDown, openCreateStudy, folder, flash }
 	}
 
 })
 </script>
-
-<style scoped>
-	ion-popover::part(content) {
-		width: auto !important;
-	}
-</style>

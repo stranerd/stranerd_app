@@ -39,7 +39,6 @@
 import { defineComponent } from 'vue'
 import { compass, flash, folder } from 'ionicons/icons'
 import StudyToolsCard from '@app/components/study/studyTools/StudyToolsCard.vue'
-import { useStudyModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'StudyTools',
@@ -61,7 +60,7 @@ export default defineComponent({
 				subText: 'Put similar flashcards, notes and videos in a folder.',
 				btnText: 'Create a Study Set',
 				colors: '#FFA84B',
-				onClick: useStudyModal().openCreateSet
+				route: '/study/sets/create'
 			},
 
 			{

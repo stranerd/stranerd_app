@@ -31,6 +31,8 @@
 				Solutions
 			</ion-button>
 		</div>
+
+		<PageLoading v-if="loading" />
 	</div>
 </template>
 

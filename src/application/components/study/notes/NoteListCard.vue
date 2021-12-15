@@ -4,15 +4,7 @@
 		:to="`/study/notes/${note.id}`"
 	>
 		<div class="flex flex-col items-center justify-between w-full">
-			<template v-if="note.preview">
-				<img :src="note.preview.link" class="bg-faded_gray  h-[10.9rem] min-w-[57px] w-full  rounded-md " />
-			</template>
-			<div v-else class="bg-faded_gray min-h-[10.5rem] min-w-[57px] w-full grid place-items-center rounded-md ">
-				<ion-text class="text-2xl text-white font-bold p-5 pb-2">
-					PREVIEW
-				</ion-text>
-			</div>
-
+			<img :src="note.preview.link" class="bg-faded_gray  h-[10.9rem] min-w-[57px] w-full  rounded-md " />
 			<div class="w-full justify-between items-center flex px-4 pt-3 pb-1 w-full">
 				<div class="text-base text-main_dark font-bold  text-left flex-col flex">
 					<ion-text class="text-gray hidden">
