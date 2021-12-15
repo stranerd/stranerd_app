@@ -1,5 +1,5 @@
-import { DefineComponent as Vue, Ref } from 'vue'
-import { modalController } from '@ionic/vue'
+import { Component as Vue, Ref } from 'vue'
+import { modalController, popoverController } from '@ionic/vue'
 
 const capitalize = (text: string) => (text[0] ?? '').toUpperCase() + text.slice(1)
 const merge = (type: string, key: string) => type + key
@@ -13,6 +13,7 @@ export const useModal = (stack: Ref<string[]>) => {
 
 	const close = (id: string) => {
 		modals[id].modal?.dismiss?.()
+		modals[id].modal = null
 	}
 
 	const open = async (id: string, cssClass: string) => {
@@ -22,7 +23,6 @@ export const useModal = (stack: Ref<string[]>) => {
 				.create({
 					component: modals[id].component,
 					cssClass: cssClass
-
 				})
 			modals[id].modal?.present?.()
 		}
@@ -44,10 +44,55 @@ export const useModal = (stack: Ref<string[]>) => {
 		) as Record<`open${Capitalize<Key>}` | `close${Capitalize<Key>}`, () => void>
 
 		const closeAll = async () => Object.keys(modalObject)
-			.forEach((key) => helpers[`close${capitalize(key) as Capitalize<Key>}`])
+			.forEach((key) => helpers[`close${capitalize(key) as Capitalize<Key>}`]?.())
 
 		return { ...helpers, closeAll }
 	}
 
 	return { stack, modals, open, close, register }
+}
+
+export const usePopover = (stack: Ref<string[]>) => {
+	const popovers = {} as any
+
+	const close = (id: string) => {
+		popovers[id].popover?.dismiss?.()
+		popovers[id].popover = null
+	}
+
+	const open = async (id: string, cssClass: string) => {
+		close(id)
+		if (Object.keys(popovers).includes(id)) {
+			popovers[id].popover = await popoverController
+				.create({
+					component: popovers[id].component,
+					cssClass: cssClass
+
+				})
+			popovers[id].popover?.present?.()
+		}
+	}
+
+	function register<Key extends string> (type: string, popoverObject: Record<Key, Vue>, css: string) {
+		Object.assign(popovers, spreadModals(type, popoverObject))
+
+		const helpers = Object.fromEntries(
+			Object.keys(popoverObject)
+				.map((key) => capitalize(key))
+				.map((key) => {
+					return [
+						[`open${key}`, async () => open(merge(type, key), css)],
+						[`close${key}`, async () => close(merge(type, key))]
+					]
+				})
+				.reduce((acc, curr) => acc.concat(curr), [])
+		) as Record<`open${Capitalize<Key>}` | `close${Capitalize<Key>}`, () => void>
+
+		const closeAll = async () => Object.keys(popoverObject)
+			.forEach((key) => helpers[`close${capitalize(key) as Capitalize<Key>}`]?.())
+
+		return { ...helpers, closeAll }
+	}
+
+	return { stack, popovers, open, close, register }
 }

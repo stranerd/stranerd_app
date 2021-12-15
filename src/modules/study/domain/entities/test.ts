@@ -57,7 +57,7 @@ export class TestEntity extends BaseEntity {
 
 	get endedAt () {
 		//@ts-ignore
-		return this.createdAt + (this.data.time ?? 0)
+		return this.createdAt + (this.data.time ?? 0) * 60 * 1000
 	}
 
 	get answered () {

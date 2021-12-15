@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<div>
-			<TopSection :name="name" />
+			<TopSection />
 			<slot />
 		</div>
 	</Justified>
@@ -18,12 +18,6 @@ export default defineComponent({
 	displayName: 'Explore',
 	middlewares: ['isAuthenticated'],
 	components: { Justified, TopSection },
-	props: {
-		name: {
-			type: String,
-			required: true
-		}
-	},
 	setup () {
 		return { checkmarkDone }
 	}

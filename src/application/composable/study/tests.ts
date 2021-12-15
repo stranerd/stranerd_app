@@ -13,7 +13,7 @@ import {
 	TestType,
 	UpdateTestAnswer
 } from '@modules/study'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useRouter } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 import { useRedirectToAuth } from '@app/composable/auth/session'
@@ -92,7 +92,6 @@ export const useCreateTest = () => {
 	const { isLoggedIn } = useAuth()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
-	const { setMessage } = useSuccessHandler()
 	const router = useRouter()
 	const { redirect } = useRedirectToAuth()
 
@@ -107,7 +106,6 @@ export const useCreateTest = () => {
 					prepId: prep.id,
 					data: timed ? { type: TestType.timed, time: prep.time } : { type: TestType.unTimed }
 				})
-				await setMessage('Test created successfully')
 				await router.push(`/study/tests/${testId}/take`)
 			} catch (error) {
 				await setError(error)
@@ -169,7 +167,7 @@ export const useTestDetails = (test: TestEntity) => {
 	if (testGlobal[test.id] === undefined) testGlobal[test.id] = {
 		questions: ref([]),
 		fetched: ref(false),
-		...useErrorHandler(), 
+		...useErrorHandler(),
 		...useLoadingHandler()
 	}
 

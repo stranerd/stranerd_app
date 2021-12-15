@@ -14,6 +14,7 @@ import {
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { analytics } from '@modules/core'
 import { Alert } from '@app/composable/core/notifications'
+import { useQuestionModal } from '@app/composable/core/modals'
 
 enum Answered {
 	All,
@@ -27,7 +28,7 @@ const answeredChoices = [
 	{ val: Answered.All, key: 'All' },
 	{ val: Answered.Answered, key: 'Answered' },
 	{ val: Answered.Unanswered, key: 'Unanswered' },
-	
+
 ]
 const global = {
 	questions: ref([] as QuestionEntity[]),
@@ -140,6 +141,7 @@ export const useCreateQuestion = () => {
 				await setMessage('Question submitted successfully')
 				const subject = factory.value.subjectId
 				factory.value.reset()
+				useQuestionModal().closeAskQuestion()
 				await router.replace(`/questions/${questionId}`)
 				await analytics.logEvent('ask_question_completed', { questionId, subject })
 			} catch (error) {

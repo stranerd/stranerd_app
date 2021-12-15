@@ -1,13 +1,15 @@
 <template>
-	<ExploreWrapper name="testprep">
-		<ExploreTestPrep />
+	<ExploreWrapper>
+		<div class="p-4 md:w-8/12 w-full mx-auto">
+			<ExploreTestPrep />
+		</div>
 	</ExploreWrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/study/explore/ExploreWrapper.vue'
-import ExploreTestPrep from '@app//components/study/explore/ExploreTestPreps.vue'
+import ExploreTestPrep from '@app/components/study/explore/ExploreTestPreps.vue'
 
 export default defineComponent({
 	name: 'Explore TestPreps',

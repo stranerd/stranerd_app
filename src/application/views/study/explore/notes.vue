@@ -1,18 +1,20 @@
 <template>
-	<ExploreWrapper name="set">
-		<ExploreStudySet />
+	<ExploreWrapper>
+		<div class="p-4 md:w-8/12 w-full mx-auto">
+			<ExploreNotes />
+		</div>
 	</ExploreWrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/study/explore/ExploreWrapper.vue'
-import ExploreStudySet from '@app//components/study/explore/ExploreStudySet.vue'
+import ExploreNotes from '@app/components/study/explore/ExploreNotes.vue'
 
 export default defineComponent({
-	name: 'Explore Sets',
+	name: 'Explore Notes',
 	displayName: 'Explore',
-	components: { ExploreWrapper, ExploreStudySet }
+	components: { ExploreWrapper, ExploreNotes }
 })
 </script>
 
@@ -30,6 +32,4 @@ export default defineComponent({
 		padding-top: 12px;
 		padding-bottom: 12px;
 	}
-
-
 </style>

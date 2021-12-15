@@ -26,6 +26,7 @@ import {
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { capitalize, copyObject } from '@utils/commons'
+import { useStudyModal } from '@app/composable/core/modals'
 
 type SaveKey = keyof SetEntity['saved']
 
@@ -62,6 +63,16 @@ const unshiftToSetList = (set: SetEntity) => {
 	const index = global.sets.value.findIndex((q) => q.id === set.id)
 	if (index !== -1) global.sets.value.splice(index, 1, set)
 	else global.sets.value.unshift(set)
+}
+const pushToMyGlobalSetList = (set: SetEntity) => {
+	const index = myGlobal.sets.value.findIndex((q) => q.id === set.id)
+	if (index !== -1) myGlobal.sets.value.splice(index, 1, set)
+	else myGlobal.sets.value.push(set)
+}
+const unshiftToMyGlobalSetList = (set: SetEntity) => {
+	const index = myGlobal.sets.value.findIndex((q) => q.id === set.id)
+	if (index !== -1) myGlobal.sets.value.splice(index, 1, set)
+	else myGlobal.sets.value.unshift(set)
 }
 
 export const useSetList = () => {
@@ -110,7 +121,7 @@ export const useMySets = () => {
 		try {
 			await myGlobal.setLoading(true)
 			const sets = await GetUserSets.call(id.value)
-			sets.results.forEach(pushToSetList)
+			sets.results.forEach(pushToMyGlobalSetList)
 			myGlobal.fetched.value = true
 		} catch (error) {
 			await myGlobal.setError(error)
@@ -120,10 +131,10 @@ export const useMySets = () => {
 	const listener = useListener(async () => {
 		return await ListenToUserSets.call(id.value, {
 			created: async (entity) => {
-				unshiftToSetList(entity)
+				unshiftToMyGlobalSetList(entity)
 			},
 			updated: async (entity) => {
-				unshiftToSetList(entity)
+				unshiftToMyGlobalSetList(entity)
 			},
 			deleted: async (entity) => {
 				const index = myGlobal.sets.value.findIndex((q) => q.id === entity.id)
@@ -368,6 +379,7 @@ export const useCreateSet = () => {
 				await setLoading(true)
 				await AddSet.call(factory.value)
 				await setMessage('Set created successfully')
+				useStudyModal().closeCreateSet()
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

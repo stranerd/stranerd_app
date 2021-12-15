@@ -1,10 +1,10 @@
 <template>
 	<router-link
-		:class="`py-4 px-4 rounded-xl !min-h-[11rem] bg-white flex flex-col w-full text-xs md:text-sm relative cursor-pointer `"
+		:class="`py-4 px-4 rounded-xl !min-h-[11rem] ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer`"
 		:to="`/questions/${question.id}`">
-		<div class="flex lg:flex-row flex-col lg:items-center gap-3 mb-4">
-			<avatar :id="question.userId" :size="28" :src="question.avatar" class="hidden lg:block" />
-			<span class="font-bold text-main_dark hidden lg:block">{{ question.userBio.firstName }}</span>
+		<div class="flex flex-row items-center gap-2 mb-4">
+			<avatar :id="question.userId" :size="28" :src="question.avatar" />
+			<span class="font-bold text-main_dark">{{ question.userBio.firstName }}</span>
 
 			<span class="font-bold text-gray ml-auto">{{ formatTime(question.createdAt) }}</span>
 		</div>
@@ -30,34 +30,21 @@ import { pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { useReportModal } from '@app/composable/core/modals'
-import Tag from '../tags/Tag.vue'
-
+import Tag from '@app/components/questions/tags/Tag.vue'
 
 export default defineComponent({
 	name: 'RecentQuestionListCard',
 	props: {
 		colorClass: {
 			type: String,
-			default: 'bg-light_gray'
-		},
-		isFeatured: {
-			type: Boolean,
-			default: false
-		},
-		fromViewQuestion: {
-			type: Boolean,
-			default: false
-		},
-		fromHome: {
-			type: Boolean,
-			default: false
+			default: 'bg-white'
 		},
 		question: {
 			type: QuestionEntity,
 			required: true
 		}
 	},
-	components: { Avatar, Tag  },
+	components: { Avatar, Tag },
 	setup (props) {
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),

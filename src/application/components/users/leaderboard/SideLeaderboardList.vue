@@ -1,17 +1,15 @@
 <template>
-	<div class="flex flex-col items-center mt-3 text-sm text-main_dark gap-2">
-		<template v-if="users.length">
-			<div v-for="(person, index) in users" :key="person.id"
-				:class="{'!bg-yellow_star': person.id === id}"
-				class="py-3 px-3 rounded-xl flex w-full flex-row items-center bg-white mt-5"
-			>
-				<span class="font-bold text-sm mr-2">{{ index + 1 }}</span>
-				<span class="text-base font-normal">{{ person.bio.fullName }}</span>
-				<div class="flex flex-row-reverse items-center flex-grow">
-					<span class="text-primary font-bold text-lg">{{ person.account.rankings[time] }}</span>
-				</div>
+	<div class="flex flex-col items-center text-sm text-main_dark gap-2">
+		<div v-for="(person, index) in users" :key="person.id"
+			:class="{'!bg-yellow_star': person.id === id}"
+			class="py-3 px-3 rounded-xl flex w-full flex-row items-center bg-white"
+		>
+			<span class="font-bold text-sm mr-2">{{ index + 1 }}</span>
+			<span class="text-base font-normal">{{ person.bio.fullName }}</span>
+			<div class="flex flex-row-reverse items-center flex-grow">
+				<span class="text-primary font-bold text-lg">{{ person.account.rankings[time] }}</span>
 			</div>
-		</template>
+		</div>
 
 		<div v-if="user && !hasAuthUser"
 			class="py-3 px-3 rounded-lg flex w-full bg-yellow_star text-main_dark font-bold flex-row items-center">
@@ -46,6 +44,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { users, loading, hasAuthUser, listener } = useLeaderboardList(props.time)
+		// const users = computed(() => allUsers.value.slice(10))
 		const { user, id } = useAuth()
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)

@@ -27,6 +27,8 @@
 				</div>
 			</div>
 		</div>
+
+		<PageLoading v-if="loading" />
 	</Justified>
 </template>
 

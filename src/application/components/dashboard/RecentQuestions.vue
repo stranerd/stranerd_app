@@ -1,5 +1,5 @@
 <template>
-	<div class="mt-7">
+	<div class="mt-4">
 		<div class="w-full flex justify-between mb-8">
 			<span class="heading font-bold text-main_dark">
 				Latest questions
@@ -22,7 +22,8 @@
 		</template>
 		<template v-else>
 			<div class="showcase">
-				<QuestionListCard v-for="(question, index) in questions" :key="question" :question="question" :index="index+1"  />
+				<QuestionListCard v-for="(question, index) in questions" :key="question" :index="index+1"
+					:question="question" />
 			</div>
 		</template>
 	</div>
@@ -37,7 +38,7 @@ import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
 	name: 'RecentQuestions',
-	components: {  QuestionListCard, EmptyState },
+	components: { QuestionListCard, EmptyState },
 	setup () {
 		const { questions: allQuestions, listener, loading, error } = useQuestionList()
 		const questions = computed({

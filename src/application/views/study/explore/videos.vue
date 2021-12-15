@@ -1,18 +1,21 @@
 <template>
-	<ExploreWrapper name="flashcard">
-		<ExploreFlashcard />
+	<ExploreWrapper>
+		<div class="p-4 md:w-8/12 w-full mx-auto">
+			<ExploreVideos />
+		</div>
 	</ExploreWrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/study/explore/ExploreWrapper.vue'
-import ExploreFlashcard from '@app//components/study/explore/ExploreFlashcards.vue'
+import ExploreVideos from '@app/components/study/explore/ExploreVideos.vue'
 
 export default defineComponent({
-	name: 'Explore FlashCard',
+	name: 'Explore Videos',
 	displayName: 'Explore',
-	components: { ExploreWrapper, ExploreFlashcard }
+	components: { ExploreWrapper, ExploreVideos }
+
 })
 </script>
 

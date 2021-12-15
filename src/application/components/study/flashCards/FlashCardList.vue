@@ -1,10 +1,7 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between mb-8">
-
+		<div class="w-full flex justify-between mb-4">
 			<div class="heading font-bold text-main_dark flex items-center">
-
-
 				<ion-text class="mr-3">
 					FlashCards
 				</ion-text>
@@ -14,19 +11,18 @@
 			</div>
 
 			<router-link class="text-primary normalText flex items-center font-bold"
-				to="/study/flashCards/explore">
+				to="/study/explore/flashCards">
 				<span>view all</span>
 			</router-link>
 		</div>
 
 		<template v-if="flashcards.length === 0">
-			<div class="py-3">
-				<EmptyState info="No flashcards Available." />
-			</div>
+			<EmptyState info="No flashcards Available." />
 		</template>
 		<template v-else>
 			<div class="showcase">
-				<StudyFlashCardListCard v-for="(flashcard, index) in flashcards" :key="flashcard" :flashCard="flashcard" :index="index+1"  />
+				<FlashCardListCard v-for="(flashcard, index) in flashcards" :key="flashcard" :flashCard="flashcard"
+					:index="index+1" />
 			</div>
 		</template>
 	</div>
@@ -36,18 +32,18 @@
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { chevronForwardOutline } from 'ionicons/icons'
 import { useFlashCardList } from '@app/composable/study/flashCards'
-import StudyFlashCardListCard from '@app/components/study/flashCards/StudyFlashCardListCard.vue'
+import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'StudyFlashCardList',
+	name: 'FlashCardList',
 	props: {
 		suggested: {
 			required: false,
 			default: false
 		}
 	},
-	components: {  StudyFlashCardListCard, IonBadge },
+	components: { FlashCardListCard, IonBadge },
 	setup () {
 		const { flashCards: allFlashcard, listener, loading, error } = useFlashCardList()
 		const flashcards = computed({

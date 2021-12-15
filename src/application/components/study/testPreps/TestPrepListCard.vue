@@ -13,23 +13,12 @@
 		</div>
 
 
-		<Tag>
+		<Tag :tag="testPrep.data.year.toString()">
 			<template v-slot="slotProps">
-				<div
-					:style="`color:${slotProps.colors[slotProps.index || slotProps.randomNumber]}; background-color:${slotProps.bgColors[slotProps.index || slotProps.randomNumber]}`"
-					class="flex items-center py-1 px-3 font-bold  rounded-3xl w-auto mt-2"
-				>
-				
-					<ion-text
-						class="text-sm  font-bold"
-
-					>
-						{{ testPrep.data.year }}
-					</ion-text>
-				</div>
-
+				<ion-text class="text-sm font-bold">
+					{{ slotProps.tag }}
+				</ion-text>
 			</template>
-
 		</Tag>
 
 		<div class="w-full flex items-center justify-between gap-3">
@@ -42,6 +31,8 @@
 				Solutions
 			</ion-button>
 		</div>
+
+		<PageLoading v-if="loading" />
 	</div>
 </template>
 
@@ -50,12 +41,11 @@ import { calendar, ellipsisVertical, play } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import { useCreateTest } from '@app/composable/study/tests'
-import Tag from '../../questions/tags/StudyTag.vue'
-
+import Tag from '@app/components/study/tags/Tag.vue'
 
 export default defineComponent({
-	name: 'StudyTestPrepListCard',
-	components: {  Tag },
+	name: 'TestPrepListCard',
+	components: { Tag },
 	props: {
 		colorClass: {
 			type: String,

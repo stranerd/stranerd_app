@@ -17,12 +17,12 @@
 			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
 				class="flex w-full hover:bg-light_gray py-3"
 				@click="answer(question.id, optionIndex)">
-				<IonIcon v-if="optionIndex === test.answers[question.id] && isCorrect" :icon="checkmarkCircle"
-					color="primary"
-					size="large" />
+				<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
+					:icon="checkmarkCircle" color="primary" size="large" />
+				<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect" :icon="checkmarkCircle"
+					color="primary" size="large" />
 				<IonIcon v-else-if="optionIndex === test.answers[question.id] && isInCorrect" :icon="closeCircle"
-					color="danger"
-					size="large" />
+					color="danger" size="large" />
 				<span v-else
 					class="label border-4 rounded-full border-light_gray h-8 w-8 text-base font-bold grid place-items-center capitalize">
 					{{ getAlphabet(optionIndex + 1) }}</span>
@@ -68,7 +68,7 @@ import {
 } from 'ionicons/icons'
 import { PastQuestionEntity, TestEntity, TestType } from '@modules/study'
 import { getAlphabet } from '@utils/commons'
-import { useCreateReport } from '@root/application/composable/reports/pastQuestions'
+import { useCreateReport } from '@app/composable/reports/pastQuestions'
 
 export default defineComponent({
 	name: 'TestQuestion',

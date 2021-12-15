@@ -1,4 +1,5 @@
-;<template>
+;
+<template>
 	<div>
 		<ion-header class="block ion-no-border z-40 inset-x-0 w-full top-0 lg:shadow-md ">
 			<ion-toolbar
@@ -49,17 +50,18 @@ import { IonHeader, IonIcon, IonToolbar } from '@ionic/vue'
 import { close, notifications, search } from 'ionicons/icons'
 import BigScreenBar from './screens/BigScreenBar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	components: { IonIcon, SearchBar, IonHeader, IonToolbar, BigScreenBar },
 	setup () {
-
+		const { user } = useAuth()
 		const showSearch = ref(false)
 		const toggleSearch = () => {
 			showSearch.value = !showSearch.value
 		}
 		return {
-			close,
+			close, user,
 			showSearch, toggleSearch,
 			search, notifications
 		}

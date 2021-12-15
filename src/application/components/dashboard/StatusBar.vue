@@ -1,47 +1,36 @@
 <template>
-	<div class="bg-primary h-40 sm:h-36 rounded-b-xl sm:rounded-3xl flex flex-col sm:flex-row 
-	justify-between sm:items-center sm:mt-4 
-	-mt-8 -ml-3 sm:mx-0 -mr-3
-	sm:p-0 p-4
-	">
-		<div class="flex flex-col ml-4 sm:ml-8 w-full text-left" >
+	<div v-if="isLoggedIn"
+		class="bg-primary h-40 sm:h-36 rounded-b-xl sm:rounded-3xl flex flex-col sm:flex-row justify-between sm:items-center sm:p-0 p-4">
+		<div class="flex flex-col ml-4 sm:ml-8 w-full text-left">
 			<ion-text class="text-white text-xl font-bold">
 				Welcome home,
 			</ion-text>
 			<ion-text class="text-white leading-tight text-3xl sm:text-4xl font-bold">
-				{{user? user.fullName : 'Anonymous'}}
+				{{ user.fullName }}
 			</ion-text>
 		</div>
 
-		<div class="bg-white rounded-3xl h-full w-full sm:w-4/12 flex justify-between gap-8 items-center min-w-[20rem]   mt-6 sm:mt-0 p-6 sm:mb-0 mb-5" >
+		<div
+			class="bg-white rounded-3xl h-full w-full sm:w-4/12 flex justify-between gap-8 items-center min-w-[20rem] mt-6 sm:mt-0 p-6">
 			<ion-text class="text-primary font-bold text-xl sm:text-lg">
 				Your nerd score
 			</ion-text>
-			<DonutChart :score="user ? user.score: 0" :size="96" :total="user ? user.expectedScore : 100" />
+			<DonutChart :score="user.score" :size="96" :total="user.expectedScore" />
 		</div>
-		
-		
 	</div>
 </template>
 
 <script>
+import { defineComponent } from 'vue'
+import { useAuth } from '@app/composable/auth/auth'
+import DonutChart from '@app/components/core/DonutChart'
 
-import { useAuth } from '@root/application/composable/auth/auth'
-export default {
+export default defineComponent({
 	name: 'StatusBar',
-
-	setup() {
-		const {user} = useAuth()
-
-		return {
-			user
-		}
+	components: { DonutChart },
+	setup () {
+		const { user, isLoggedIn } = useAuth()
+		return { user, isLoggedIn }
 	}
-
-
-}
+})
 </script>
-
-<style>
-
-</style>

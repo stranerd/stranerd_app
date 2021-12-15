@@ -1,36 +1,31 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between mb-8">
+		<div class="w-full flex justify-between mb-4">
 			<div class="heading font-bold text-main_dark flex items-center">
-
-
 				<ion-text class="mr-3">
-					Test Prep
+					Test Preps
 				</ion-text>
 				<ion-badge v-if="suggested" class="uppercase">
 					Suggested
 				</ion-badge>
 			</div>
 
-			<router-link class="text-primary normalText flex items-center font-bold "
-				to="/study/preps/explore">
+			<router-link class="text-primary normalText flex items-center font-bold"
+				to="/study/explore/preps">
 				<span>view all</span>
 			</router-link>
 		</div>
 
 		<template v-if="testPreps.length === 0">
-			<div class="py-3">
-				<EmptyState info="No TestPreps Available." />
-			</div>
+			<EmptyState info="No TestPreps Available." />
 		</template>
 
 		<template v-else>
 			<div class="showcase">
-				<TestPrepCard v-for="(testPrep, index) in testPreps" :key="testPrep" :testPrep="testPrep" :index="index+1"  />
+				<TestPrepCard v-for="(testPrep, index) in testPreps" :key="testPrep" :index="index+1"
+					:testPrep="testPrep" />
 			</div>
 		</template>
-
-
 	</div>
 </template>
 
@@ -38,12 +33,12 @@
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons'
 import { useTestPrepList } from '@app/composable/study/testPreps'
-import TestPrepCard from './StudyTestPrepListCard.vue'
+import TestPrepCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'StudyTestPrepList',
-	components: {  TestPrepCard, IonBadge },
+	name: 'TestPrepList',
+	components: { TestPrepCard, IonBadge },
 	props: {
 		suggested: {
 			required: false,

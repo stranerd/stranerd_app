@@ -1,13 +1,11 @@
 <template>
-	<div class="md:w-8/12 w-full px-4 mx-auto mt-8">
+	<div>
 		<template v-if="testPreps.length === 0">
-			<div class="py-3">
-				<EmptyState info="No TestPreps to Explore" />
-			</div>
+			<EmptyState info="No test preps to explore" />
 		</template>
 		<template v-else>
-			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">
-				<TestPrepCard v-for="(testPrep, index) in testPreps" :key="testPrep" :testPrep="testPrep" :index="index+1"  />
+			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+				<TestPrepCard v-for="testPrep in testPreps" :key="testPrep" :testPrep="testPrep" />
 			</div>
 		</template>
 	</div>
@@ -15,17 +13,21 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import Institution from '@app/components/study/institutions/Institution.vue'
 import { useTestPrepList } from '@app/composable/study/testPreps'
 import { calendar, play } from 'ionicons/icons'
-import TestPrepCard from '@app/components/study/testPreps/StudyTestPrepListCard.vue'
-
+import TestPrepCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 
 export default defineComponent({
-	name: 'ExploreTestPrep',
+	name: 'ExploreTestPreps',
 	components: { TestPrepCard },
+	props: {
+		sliced: {
+			type: Boolean,
+			default: false,
+			required: false
+		}
+	},
 	setup () {
-		// const { groupedByInstitution, listener, loading, error } = useTestPrepList()
 		const { testPreps, listener, loading, error } = useTestPrepList()
 
 		onMounted(listener.startListener)

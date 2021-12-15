@@ -1,8 +1,5 @@
 <template>
-
-
-
-	<router-link v-if="route" :to="route">
+	<router-link :to="route">
 		<ion-button
 			:style="`color: ${color};`"
 			class="btn-white w-full  bg-transparent mb-4 text-white lg:text-base text-xs  font-bold"
@@ -10,13 +7,6 @@
 			{{ btnText }}
 		</ion-button>
 	</router-link>
-	<ion-button v-if="onClick"
-		:style="`color: ${color};`"
-		class="btn-white w-full  bg-transparent mb-4 text-white lg:text-base text-xs  font-bold"
-		@click="onClick">
-		{{ btnText }}
-	</ion-button>
-
 </template>
 
 <script lang="ts">
@@ -48,10 +38,6 @@ export default defineComponent({
 		color: {
 			type: String,
 			required: true
-		},
-		onClick: {
-			type: Function,
-			required: false
 		}
 	},
 	setup () {
