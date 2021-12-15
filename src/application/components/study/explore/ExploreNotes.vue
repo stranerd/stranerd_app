@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { onBeforeUnmount, onMounted } from 'vue'
-import NoteListCard from '@app/components/study/notes/StudyNoteListCard.vue'
+import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 import { useNoteList } from '@app/composable/study/notes'
 
 export default {

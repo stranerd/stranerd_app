@@ -11,7 +11,7 @@
 			</div>
 
 			<router-link class="text-primary normalText flex items-center font-bold"
-				to="/study/preps/explore">
+			             to="/study/preps/explore">
 				<span>view all</span>
 			</router-link>
 		</div>
@@ -25,7 +25,7 @@
 		<template v-else>
 			<div class="showcase">
 				<TestPrepCard v-for="(testPrep, index) in testPreps" :key="testPrep" :index="index+1"
-					:testPrep="testPrep" />
+				              :testPrep="testPrep" />
 			</div>
 		</template>
 	</div>
@@ -35,11 +35,11 @@
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons'
 import { useTestPrepList } from '@app/composable/study/testPreps'
-import TestPrepCard from './StudyTestPrepListCard.vue'
+import TestPrepCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'StudyTestPrepList',
+	name: 'TestPrepList',
 	components: { TestPrepCard, IonBadge },
 	props: {
 		suggested: {

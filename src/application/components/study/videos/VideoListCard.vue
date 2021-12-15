@@ -42,14 +42,13 @@
 import { calendar, play } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
-// import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { VideoEntity } from '@modules/study'
 import { useEditState } from '@app/composable/study/state'
 import { useDeleteVideo } from '@app/composable/study/videos'
 
 export default defineComponent({
-	name: 'StudyVideosListCard',
+	name: 'VideosListCard',
 	props: {
 		colorClass: {
 			type: String,

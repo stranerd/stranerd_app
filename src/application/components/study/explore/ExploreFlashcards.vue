@@ -43,7 +43,7 @@
 
 <script lang="ts">
 import { onBeforeUnmount, onMounted } from 'vue'
-import FlashCardCard from '@app/components/study/flashCards/StudyFlashCardListCard.vue'
+import FlashCardCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import { useFlashCardList } from '@app/composable/study/flashCards'
 import { useAuth } from '@app/composable/auth/auth'
 

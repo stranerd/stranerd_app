@@ -35,10 +35,10 @@ import { IonIcon } from '@ionic/vue'
 import { chevronForwardOutline } from 'ionicons/icons'
 import Swiper from '@app/components/core/Swiper.vue'
 import { useVideoList } from '@app/composable/study/videos'
-import VideoCard from '@app/components/study/videos/StudyVideoListCard.vue'
+import VideoCard from '@app/components/study/videos/VideoListCard.vue'
 
 export default defineComponent({
-	name: 'StudyVideosList',
+	name: 'VideosList',
 	components: { IonIcon, Swiper, VideoCard },
 	setup () {
 		const { videos: allVideos, listener, loading, error } = useVideoList()

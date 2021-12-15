@@ -52,7 +52,7 @@ import { FlashCardEntity } from '@modules/study'
 import Tag from '@app/components/study/tags/Tag.vue'
 
 export default defineComponent({
-	name: 'StudyFlashCardListCard',
+	name: 'FlashCardListCard',
 	props: {
 		colorClass: {
 			type: String,
