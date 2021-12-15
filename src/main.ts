@@ -14,6 +14,7 @@ import { registerComponents, registerIonicComponent } from '@app/plugins/compone
 import { parseLoggedInUser } from '@app/plugins/parseLoggedInUser'
 import { ipAddressGetter } from '@app/plugins/ipAddressGetter'
 import { authClient } from '@app/plugins/authClient'
+import { allModals, allPopovers } from '@app/composable/core/modals'
 
 const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken }
 const globalPlugins = [parseLoggedInUser, authClient, registerIonicComponent, registerComponents, ipAddressGetter]
@@ -39,7 +40,11 @@ const init = async () => {
 		if (redirect) next(redirect)
 		else next()
 	})
-	router.afterEach(() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }))
+	router.afterEach(() => {
+		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+		allModals.map((modal) => modal().closeAll())
+		allPopovers.map((popover) => popover().closeAll())
+	})
 
 	const app = createApp(App)
 
