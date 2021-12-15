@@ -24,8 +24,7 @@
 			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl" />
 		</div>
 
-		<div class="w-full flex items-center justify-between ">
-
+		<div class="w-full flex items-center justify-between">
 			<div class="flex items-center">
 				<Avatar :size="24" :src="flashCard.userBio.photo" />
 				<ion-text class="text-xs font-bold text-main_dark ml-2">

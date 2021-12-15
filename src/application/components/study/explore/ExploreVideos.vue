@@ -4,7 +4,7 @@
 			<EmptyState info="No videos available." />
 		</template>
 		<template v-else>
-			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mt-8">
+			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
 				<VideoCard v-for="video in videos" :key="video.id" :video="video" />
 			</div>
 		</template>

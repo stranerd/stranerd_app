@@ -1,7 +1,7 @@
 <template>
 	<form @submit.prevent="submit">
 		<div class="lg:mt-3 border border-faded_gray rounded-xl px-1">
-			<IonTextarea v-model="factory.body" class="bg-white border-0 focus:outline-none w-full"
+			<IonTextarea v-model="factory.body" class="bg-white border-0 focus:outline-none w-full p-2"
 				placeholder="Write your question here and make sure it is explained in full detail."
 				rows="7" />
 		</div>

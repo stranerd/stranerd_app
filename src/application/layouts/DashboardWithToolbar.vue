@@ -9,11 +9,12 @@
 						<div class="layout-body">
 							<slot />
 						</div>
+						<Fab />
 						<div class="layout-side-right">
 							<RightSidebar />
 						</div>
 					</div>
-					<Fab />
+			
 				</IonContent>
 			</div>
 		</div>

@@ -1,6 +1,6 @@
 <template>
 	<router-link
-		:class="`py-4 px-4 rounded-xl !min-h-[11rem] ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer box-border`"
+		:class="`py-4 px-4 rounded-xl !min-h-[11rem] ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer`"
 		:to="`/questions/${question.id}`">
 		<div class="flex flex-row items-center gap-2 mb-4">
 			<avatar :id="question.userId" :size="28" :src="question.avatar" />
@@ -11,7 +11,11 @@
 
 		<span class="py-1 text-main_dark leading-normal mb-2 lg:mb-4" v-html="question.trimmedBody" />
 
-		<span class="mt-auto">
+		<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">
+			<Tag v-for="tag in question.tags" :key="tag" :tag="tag" />
+		</div>
+
+		<span class="mt-auto text-gray font-bold">
 			{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
 		</span>
 	</router-link>
@@ -26,6 +30,7 @@ import { pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { useReportModal } from '@app/composable/core/modals'
+import Tag from '@app/components/questions/tags/Tag.vue'
 
 export default defineComponent({
 	name: 'RecentQuestionListCard',
@@ -34,24 +39,12 @@ export default defineComponent({
 			type: String,
 			default: 'bg-white'
 		},
-		isFeatured: {
-			type: Boolean,
-			default: false
-		},
-		fromViewQuestion: {
-			type: Boolean,
-			default: false
-		},
-		fromHome: {
-			type: Boolean,
-			default: false
-		},
 		question: {
 			type: QuestionEntity,
 			required: true
 		}
 	},
-	components: { Avatar },
+	components: { Avatar, Tag },
 	setup (props) {
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),

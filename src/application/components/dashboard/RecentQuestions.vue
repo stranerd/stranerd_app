@@ -42,7 +42,7 @@ export default defineComponent({
 	setup () {
 		const { questions: allQuestions, listener, loading, error } = useQuestionList()
 		const questions = computed({
-			get: () => allQuestions.value.slice(0, 6),
+			get: () => allQuestions.value.slice(0, 3),
 			set: () => {
 			}
 		})

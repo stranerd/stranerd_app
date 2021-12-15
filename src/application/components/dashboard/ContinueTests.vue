@@ -2,26 +2,24 @@
 	<div>
 		<div class="w-full flex mb-4">
 			<span class="heading font-bold text-main_dark">
-				Continue where you stopped
+				Recently Uncompleted tests
 			</span>
 		</div>
 
 		<template v-if="tests.length === 0">
-			<div class="py-3">
-				<empty-state info="You have no uncompleted tests" />
-			</div>
+			<EmptyState info="You have no uncompleted tests" />
 		</template>
 
 		<template v-else>
 			<div class="showcase">
-				<ContinueTestCard v-for="(test, index) in tests" :key="test" :index="index+1" :test="test" />
+				<ContinueTestCard v-for="test in tests" :key="test.hash" :test="test" />
 			</div>
 		</template>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import ContinueTestCard from '../study/tests/ContinueTestCard.vue'
@@ -31,7 +29,14 @@ export default defineComponent({
 	name: 'ContinueTests',
 	components: { EmptyState, ContinueTestCard },
 	setup () {
-		const { unCompletedTests: tests, listener, loading, error } = useTestList()
+		const { unCompletedTests, listener, loading, error } = useTestList()
+
+		const tests = computed({
+			get: () => unCompletedTests.value.slice(0, 3),
+			set: () => {
+			}
+		})
+
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 

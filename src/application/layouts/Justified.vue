@@ -5,9 +5,11 @@
 			<div class="!w-full layout-body">
 				<slot />
 			</div>
+			<Fab />
 		</IonContent>
+	
 		<BottomNav class="mt-auto" />
-		<Fab />
+	
 	</IonPage>
 </template>
 

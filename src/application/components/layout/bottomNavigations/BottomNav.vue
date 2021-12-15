@@ -1,5 +1,5 @@
 <template>
-	<IonFooter class="ion-no-border">
+	<IonFooter :class="[$route.name == 'TakeTest' ? 'hidden':'', `ion-no-border`]">
 		<!-- smaller screens -->
 		<IonToolbar class="md:hidden !bg-white">
 			<div class="flex justify-around items-center">
@@ -20,8 +20,8 @@
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
-					to="/account">
-					<ion-icon :icon="person" class="w-6" />
+					to="/notifications">
+					<ion-icon :icon="notifications" class="w-6" />
 				</router-link>
 			</div>
 		</IonToolbar>
@@ -47,8 +47,8 @@
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
-					to="/account">
-					<ion-icon :icon="person" class="w-14" />
+					to="/notifications">
+					<ion-icon :icon="notifications" class="w-14" />
 				</router-link>
 			</div>
 		</IonToolbar>
@@ -58,19 +58,18 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonFooter, IonIcon, IonToolbar } from '@ionic/vue'
-import { add, book, calendarClear, chatbubble, helpCircle, home, people, person } from 'ionicons/icons'
+import { add, book, calendarClear, chatbubble, helpCircle, home, people, notifications } from 'ionicons/icons'
+import {useRoute} from 'vue-router'
 
 export default defineComponent({
 	components: { IonFooter, IonIcon, IonToolbar },
 	setup () {
+
+		const routeName = useRoute().name
+
 		return {
-			home,
-			book,
-			helpCircle,
-			people,
-			person,
-			chatbubble,
-			add,
+			routeName, home, book, helpCircle,
+			people,	notifications,	chatbubble,	add,
 			calendarClear
 		}
 	}

@@ -4,7 +4,7 @@
 			<EmptyState info="No notes available." />
 		</template>
 		<template v-else>
-			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mt-8">
+			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
 				<NoteListCard v-for="note in notes" :key="note.id" :note="note" />
 			</div>
 		</template>

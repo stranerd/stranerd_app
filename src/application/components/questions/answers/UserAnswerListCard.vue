@@ -1,20 +1,7 @@
 <template>
-	<div :id="answer.id" class="flex flex-col mt-1 py-3">
+	<div :id="answer.id" class="flex flex-col  py-3 mt-4">
 		<div class="p-6 rounded-xl bg-white flex flex-col w-full md:text-base text-xs relative cursor-pointer gap-6">
-			<div class="w-full flex flex-col gap-3">
-				<ion-text class="text-main_dark font-bold">
-					Question
-					<span class="text-gray">
-						(<Subject :subject-id="subjectId" />, {{ formatTime(answer.createdAt) }}) 
-					</span>
-				</ion-text>
-				<router-link :to="`/questions/${answer.questionId}#${answer.id}`" >
-					<!-- {{ questions }} -->
 
-
-					Skipped this page for now performance reason
-				</router-link>
-			</div>
 
 			<div class="w-full flex flex-col gap-3">
 				<ion-text class="text-main_dark font-bold">

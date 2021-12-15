@@ -6,7 +6,6 @@
 			</span>
 		</div>
 
-
 		<div class="showcase">
 			<StudyToolsCard
 				v-for="(item) in cardArr"
@@ -14,24 +13,11 @@
 				:btnText="item.btnText"
 				:color="item.colors"
 				:icon="item.icon"
-				:onClick="item.onClick"
 				:route="item.route"
 				:subText="item.subText"
 				:title="item.title"
 			/>
 		</div>
-		<!-- <Swiper
-			:freeMode="true"
-			:items="cardArr"
-			:slides="1.1"
-			class="mt-2 overflow-x-auto flex mr-8"
-			slideClass="flex md:!w-[336px] !w-[266px]  lg:!w-2/5 lg:!max-w-[21rem] !mr-8"
-		>
-			<template v-slot:default="{ item }">
-
-			</template>
-
-		</Swiper> -->
 	</div>
 </template>
 

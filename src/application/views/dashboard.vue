@@ -11,7 +11,7 @@
 				<NotesList :suggested="true" class="mt-16" />
 				<VideosList :suggested="true" class="mt-16" />
 				<FlashCardList :suggested="true" class="mt-16" />
-				<StudyTools class="mt-16" />
+				<StudyTools class="mt-16 hidden" />
 			</div>
 		</div>
 	</DashboardLayout>

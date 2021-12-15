@@ -24,7 +24,7 @@
 		</div>
 		<div
 			id="screen"
-			:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
+			:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 ']">
 
 			<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full']" @click="flipped = !flipped">
 				<!--  front side  -->
@@ -42,7 +42,7 @@
 
 			<div class="w-full flex items-center justify-between my-8 max-w-[30rem] mx-auto">
 				<ion-icon
-					:icon="play"
+					:icon="isPlaying ? pause : play"
 					class="text-icon_inactive text-xl cursor-pointer"
 					@click="playCard()"
 				/>
@@ -69,7 +69,6 @@
 				/>
 				<ion-icon
 					v-else
-
 					:icon="contract"
 					class="text-icon_inactive text-xl cursor-pointer"
 					@click="toggle()"
@@ -118,7 +117,7 @@ import {
 	pencil,
 	play,
 	scan,
-	shareSocial
+	shareSocial, pause
 } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openFlashCardEditModal, useFlashCard } from '@app/composable/study/flashCards'
@@ -128,7 +127,7 @@ import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'View Flashcard',
-	displayName: 'Flashcard Set',
+	disPlayingName: 'Flashcard Set',
 	components: {
 		Justified,
 		Avatar
@@ -144,7 +143,7 @@ export default defineComponent({
 		const { flashCardId } = useRoute().params
 		const { flashCard, listener, error, loading } = useFlashCard(flashCardId as string)
 		let interval: any
-		const isPlay = ref(false)
+		const isPlaying = ref(false)
 
 		const increase = async () => {
 			flipped.value = false
@@ -183,12 +182,12 @@ export default defineComponent({
 		}
 
 		const playCard = () => {
-			if (!isPlay.value) {
+			if (!isPlaying.value) {
 				interval = setInterval(increase, 3000)
-				isPlay.value = true
+				isPlaying.value = true
 			} else {
 				clearInterval(interval)
-				isPlay.value = false
+				isPlaying.value = false
 			}
 		}
 
@@ -203,7 +202,7 @@ export default defineComponent({
 		}
 
 		return {
-			canExit, flipped,
+			canExit, flipped, isPlaying, pause,
 			page, increase, decrease, playCard,
 			isFullscreen, toggle, exit, enter,
 			flashCard, error, loading,
@@ -242,8 +241,10 @@ export default defineComponent({
 
 
 	.divx {
+		background: white;
+		border-radius: 12px;
 		position: relative;
-		display: flex;
+		disPlaying: flex;
 		justify-content: center;
 		align-items: center;
 	}
@@ -254,7 +255,7 @@ export default defineComponent({
 
 	.divx > .front, .divx > .back {
 		text-align: center;
-		transition-duration: 0.5s;
+		transition-duration: 0.7s;
 		transition-property: transform, opacity;
 	}
 

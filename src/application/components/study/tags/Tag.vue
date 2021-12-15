@@ -20,8 +20,8 @@ export default defineComponent({
 	name: 'Tag',
 	props: {
 		tag: {
-			type: String,
-			required: true
+			required: true,
+			type: String
 		},
 		index: {
 			type: Number,
