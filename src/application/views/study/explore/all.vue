@@ -1,6 +1,6 @@
 <template>
 	<ExploreWrapper>
-		<div class="p-4 md:w-8/12 w-full mx-auto">
+		<div>
 			<div class="mb-12">
 				<div class="w-full flex justify-between mb-4">
 					<div class="heading font-bold text-main_dark flex items-center">
@@ -35,7 +35,7 @@
 						<span>view all</span>
 					</router-link>
 				</div>
-				<ExploreFlashcards :sliced="true" class="mb-8" />
+				<ExploreFlashcards :sliced="true" />
 			</div>
 
 			<div class="mb-12">
