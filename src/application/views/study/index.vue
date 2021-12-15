@@ -3,7 +3,7 @@
 		<div class="px-3 pt-8 pb-8">
 			<StudyHeader />
 
-			<StudySection class="mt-8" />
+			<StudySection class="mt-4" />
 
 			<TestPrepsList class="mt-8" />
 			<FlashCardsList class="mt-8" />

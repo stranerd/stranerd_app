@@ -3,7 +3,7 @@
 		<div class="px-4  pt-8 pb-32">
 			<StatusBar />
 			<!-- <StudyTools class="mt-28 lg:mt-14" /> -->
-			<ContinueStudy  class="mt-8"/>
+			<ContinueStudy class="mt-28 lg:mt-12"/>
 			<TestPrep :suggested="true" class="mt-8" /> 
 			<RecentQuestions class="mt-8" />
 

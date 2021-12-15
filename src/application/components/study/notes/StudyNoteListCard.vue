@@ -1,28 +1,34 @@
 <template>
 	<router-link
-		:class="`m-0  w-full  bg-white  rounded-xl  flex flex-col justify-between md:gap-2 gap-[1rem] box-border  pb-5 `"
+		:class="`m-0  w-full  bg-white  rounded-xl  flex flex-col justify-center md:gap-2 gap-[1rem] box-border  py-4 `"
 
 		:to="`/study/notes/${note.id}`"
 	>
 		<div class="flex flex-col items-center justify-between w-full">
-			<template v-if="note.preview">
-				<img :src="note.preview.link" class="bg-faded_gray  h-[10.9rem] min-w-[57px] w-full  rounded-md " />
-			</template>
-			<div v-else class="bg-faded_gray min-h-[10.5rem] min-w-[57px] w-full grid place-items-center rounded-md ">
-				<ion-text class="text-2xl text-white font-bold p-5 pb-2">
-					PREVIEW
-				</ion-text>
-			</div>
+	
 
-			<div class="w-full justify-between items-center flex px-4 pt-3 pb-1 w-full">
-				<div class="text-base text-main_dark font-bold  text-left flex-col flex">
-					<ion-text class="text-gray">
-						Mathematics
-					</ion-text>
-					<ion-text>
-						{{ note.title }}
-					</ion-text>
+			<div class="w-full justify-between items-start flex px-4 pt-3 pb-1 ">
+				<div class="w-full flex ">
+					<template v-if="note.preview">
+						<img :src="note.preview.link" class="bg-faded_gray  h-[5.375rem] w-[4.5rem] rounded-md object-cover " />
+					</template>
+					<div v-else class="bg-faded_gray  h-[5.375rem] w-[4.5rem] w-full grid place-items-center rounded-md ">
+						<ion-text class="text-2xl text-white font-bold p-5 pb-2">
+							P
+						</ion-text>
+					</div>
+					<div class="text-base text-main_dark font-bold  text-left flex-col flex ml-4">
+						<ion-text>
+							{{ note.title }}
+						</ion-text>
+						<ion-text class="text-gray">
+							Mathematics
+							<!-- {{ note.subjecti }} -->
+						</ion-text>
+				
+					</div>
 				</div>
+		
 
 
 				<ion-icon

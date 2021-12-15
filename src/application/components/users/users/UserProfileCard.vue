@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-primary pt-12 md:mb-12 mb-3 rounded-b-xl lg:rounded-none ">
+	<div class="bg-primary pt-2 md:mb-12  rounded-b-xl lg:rounded-none ">
 		<div class="lg:w-6/12 px-4 lg:mx-auto flex md:flex-row md:mx-12 flex-col items-start  gap-2 md:items-center  justify-start normalText mt-3">
 			<div class="w-full flex gap-2 items-center  lg:justify-start">
 
@@ -11,7 +11,7 @@
 				<div class="flex flex-col justify-start items-start">
 					<h2 class="lg:text-xl text-base font-bold text-white">{{ user.fullName }}</h2>
 					<span
-						class="py-1 px-4 rounded-full lg:text-base text-xs w-auto flex border-white border font-bold text-white bg-transparent">
+						class="py-1 px-4 rounded-full lg:text-base text-xs w-auto flex border-white border-2 font-bold text-white bg-transparent">
 						{{ user.rank.id }}
 					</span>
 				</div>
@@ -19,7 +19,7 @@
 			</div>
 
 
-			<div class="bg-white rounded-3xl  w-full sm:w-4/12 flex justify-between gap-8 items-center min-w-[20rem]   mt-6 sm:mt-0 p-6 sm:mb-0 mb-5" >
+			<div class="bg-white rounded-3xl  w-full sm:w-4/12 flex justify-between gap-8 items-center min-w-[20rem]   mt-3 sm:mt-0 p-6 sm:mb-0 mb-5" >
 				<ion-text class="text-primary font-bold text-xl sm:text-lg">
 					Your nerd score
 				</ion-text>
@@ -29,7 +29,7 @@
 
 		</div>
 		<div
-			class="flex lg:w-6/12 px-4 mx-auto mt-9 md:justify-center lg:justify-start lg:items-center gap-3 text-faded_gray font-bold  whitespace-normal overflow-x-auto">
+			class="flex lg:w-6/12 px-4 mx-auto mt-3 md:justify-center lg:justify-start lg:items-center gap-3 text-faded_gray font-bold  whitespace-normal overflow-x-auto">
 
 	
 			<router-link :to="`/users/${user.id}/bio`" class="pb-2 pr-3 cursor-pointer"

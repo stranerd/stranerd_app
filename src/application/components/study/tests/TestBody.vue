@@ -1,5 +1,5 @@
 <template>
-	<div class="flex justify-center flex-col lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white">
+	<div class="flex justify-center flex-col lg:w-8/12 w-full px-8 py-8 mx-auto  mb-16 bg-white">
 		<ion-segment v-model="tab" class="md:w-96 mb-12 mx-auto" mode="ios">
 			<ion-segment-button value="list">
 				<ion-label>All questions</ion-label>
@@ -34,7 +34,7 @@
 			</div>
 		</template>
 
-		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
+		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white z-[1000000000000]">
 			<div class="lg:w-8/12  w-full px-4  mx-auto flex items-center justify-between">
 				<div class="flex">
 					<ion-text class="text-main_dark">{{ test.answered }}/{{ questions.length }} answered</ion-text>
@@ -49,7 +49,7 @@
 					</template>
 				</div>
 
-				<div class="flex items-center">
+				<div class="flex items-center  ">
 					<router-link v-if="test.done" :to="`/study/tests/${test.id}/results`">
 						<ion-button class="btn-primary btn-lgx">See Results</ion-button>
 					</router-link>

@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-primary h-40 sm:h-36 rounded-b-xl sm:rounded-3xl flex flex-col sm:flex-row 
 	justify-between sm:items-center sm:mt-4 
-	-mt-8 -ml-6 sm:mx-0 -mr-2
+	-mt-8 -ml-2.5 sm:mx-0 -mr-2.5
 	p-9
 	">
 		<div class="flex flex-col  w-full text-left" >
