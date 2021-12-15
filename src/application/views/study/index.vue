@@ -1,14 +1,16 @@
 <template>
 	<DashboardLayout>
-		<div class="px-3 pt-8 pb-8">
-			<StudyHeader />
-
-			<StudySection class="mt-8" />
-
-			<TestPrepsList class="mt-8" />
-			<FlashCardsList class="mt-8" />
-			<NotesList class="mt-8" />
-			<VideosList class="hidden mt-8" />
+		<div>
+			<div class="md:px-4 md:pt-8">
+				<StudyHeader />
+			</div>
+			<div class="px-4 pb-8">
+				<StudySection class="mt-16" />
+				<TestPrepsList class="mt-16" />
+				<FlashCardsList class="mt-16" />
+				<NotesList class="mt-16" />
+				<VideosList class="hidden mt-16" />
+			</div>
 		</div>
 	</DashboardLayout>
 </template>

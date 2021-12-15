@@ -1,7 +1,7 @@
 <template>
 	<div
-		class="bg-primary h-40 sm:h-36 rounded-b-xl sm:rounded-3xl flex flex-col sm:flex-row justify-between sm:items-center sm:mt-4 -mt-8 -ml-6 sm:mx-0 -mr-2p-9">
-		<div class="flex flex-col  w-full text-left">
+		class="bg-primary h-40 h-36 rounded-b-xl sm:rounded-3xl flex flex-col sm:flex-row justify-between sm:items-center p-8">
+		<div class="flex flex-col w-full text-left">
 
 			<ion-text class="text-white leading-tight text-3xl font-bold">
 				Your library
@@ -9,7 +9,6 @@
 			<ion-text class="text-white text-base font-bold">
 				Collection of your created and saved study materials
 			</ion-text>
-
 		</div>
 
 		<div class="bg-white p-3 px-6 rounded-xl lg:grid place-items-center cursor-pointer hidden"

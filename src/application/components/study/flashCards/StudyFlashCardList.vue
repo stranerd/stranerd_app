@@ -1,7 +1,6 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between mb-8">
-
+		<div class="w-full flex justify-between mb-4">
 			<div class="heading font-bold text-main_dark flex items-center">
 				<ion-text class="mr-3">
 					FlashCards
@@ -24,7 +23,8 @@
 		</template>
 		<template v-else>
 			<div class="showcase">
-				<StudyFlashCardListCard v-for="(flashcard, index) in flashcards" :key="flashcard" :flashCard="flashcard" :index="index+1"  />
+				<StudyFlashCardListCard v-for="(flashcard, index) in flashcards" :key="flashcard" :flashCard="flashcard"
+					:index="index+1" />
 			</div>
 		</template>
 	</div>
@@ -45,7 +45,7 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: {  StudyFlashCardListCard, IonBadge },
+	components: { StudyFlashCardListCard, IonBadge },
 	setup () {
 		const { flashCards: allFlashcard, listener, loading, error } = useFlashCardList()
 		const flashcards = computed({

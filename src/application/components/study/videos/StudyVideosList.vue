@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between">
+		<div class="w-full flex justify-between mb-4">
 			<span class="heading font-bold text-main_dark">
 				Videos
 			</span>

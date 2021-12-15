@@ -1,18 +1,17 @@
 <template>
 	<DashboardLayout>
-		<div class="px-4  pt-8 pb-32">
-			<StatusBar />
-			
-			<ContinueStudy class="mt-28 lg:mt-20" />
-			<TestPrep :suggested="true" class="mt-8" /> 
-			<RecentQuestions class="mt-8" />
-
-
-			<!-- Suggested -->
-			
-			<Notes :suggested="true" class="mt-8" />
-			<FlashCards :suggested="true" class="mt-8" />
-			<StudyTools class="mt-8" />
+		<div>
+			<div class="md:px-4 md:pt-8">
+				<StatusBar />
+			</div>
+			<div class="px-4 pb-8">
+				<ContinueStudy class="mt-28 md:mt-16" />
+				<TestPrep :suggested="true" class="mt-16" />
+				<RecentQuestions class="mt-16" />
+				<Notes :suggested="true" class="mt-16" />
+				<FlashCards :suggested="true" class="mt-16" />
+				<StudyTools class="mt-16" />
+			</div>
 		</div>
 	</DashboardLayout>
 </template>

@@ -37,7 +37,7 @@
 <script lang="ts">
 import { useAuth } from '@root/application/composable/auth/auth'
 import { chevronDown, chevronUp, flash, folder } from 'ionicons/icons'
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import { IonSegment, IonSegmentButton } from '@ionic/vue'
@@ -48,25 +48,16 @@ export default defineComponent({
 	components: { SelectSubject, IonSegment, IonSegmentButton },
 
 	setup () {
-		const openAskQuestion = () => {
-			useQuestionModal().openAskQuestion()
-		}
+		const openAskQuestion = useQuestionModal().openAskQuestion
 		const {
 			filteredQuestions: questions, error, loading, hasMore,
 			answeredChoices, answered, subjectId,
 			fetchOlderQuestions
 		} = useQuestionList()
 		const { user } = useAuth()
-		const isOpenRef = ref(false)
-		const event = ref()
-		const setOpen = (state: boolean, ev?: Event) => {
-			event.value = ev
-			isOpenRef.value = state
-		}
-
 		return {
 			openAskQuestion,
-			user, answeredChoices, answered, subjectId, chevronDown, chevronUp, isOpenRef, setOpen, event, folder, flash
+			user, answeredChoices, answered, subjectId, chevronDown, chevronUp, folder, flash
 
 		}
 	}
@@ -75,10 +66,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-	ion-popover::part(content) {
-		width: auto !important;
-	}
-
 	.segment-button-checked {
 		color: white !important
 	}

@@ -1,7 +1,6 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between">
-
+		<div class="w-full flex justify-between mb-4">
 			<div class="heading font-bold text-main_dark flex items-center">
 
 
@@ -12,8 +11,7 @@
 					Suggested
 				</ion-badge>
 			</div>
-
-
+			
 			<router-link
 				class="text-primary normalText flex items-center font-bold"
 				to="/study/notes/explore">
@@ -29,11 +27,9 @@
 
 		<template v-else>
 			<div class="showcase">
-				<NoteListCard v-for="(note, index) in notes" :key="note" :note="note" :index="index+1"  />
+				<NoteListCard v-for="(note, index) in notes" :key="note" :index="index+1" :note="note" />
 			</div>
 		</template>
-
-
 	</div>
 </template>
 
@@ -52,7 +48,7 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: {  NoteListCard, IonBadge },
+	components: { NoteListCard, IonBadge },
 	setup () {
 		const { notes: allNotes, listener, loading, error } = useNoteList()
 		const notes = computed({

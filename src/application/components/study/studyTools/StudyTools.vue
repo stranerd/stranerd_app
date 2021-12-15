@@ -1,15 +1,15 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between">
+		<div class="w-full flex justify-between mb-4">
 			<span class="heading font-bold text-main_dark">
 				Tools to help you study better!
-			</span> 
+			</span>
 		</div>
 
 
 		<div class="showcase">
 			<StudyToolsCard
-				v-for="(item) in cardArr" 
+				v-for="(item) in cardArr"
 				:key="item.title"
 				:btnText="item.btnText"
 				:color="item.colors"
@@ -28,7 +28,7 @@
 			slideClass="flex md:!w-[336px] !w-[266px]  lg:!w-2/5 lg:!max-w-[21rem] !mr-8"
 		>
 			<template v-slot:default="{ item }">
-			
+
 			</template>
 
 		</Swiper> -->
@@ -43,7 +43,7 @@ import { useStudyModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'StudyTools',
-	components: {  StudyToolsCard },
+	components: { StudyToolsCard },
 	setup () {
 		const cardArr = [
 			{

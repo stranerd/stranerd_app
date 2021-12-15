@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="w-full flex">
+		<div class="w-full flex mb-4">
 			<span class="heading font-bold text-main_dark">
 				Continue where you stopped
 			</span>
@@ -14,11 +14,9 @@
 
 		<template v-else>
 			<div class="showcase">
-				<ContinueTestCard v-for="(test, index) in tests" :key="test" :test="test" :index="index+1"  />
+				<ContinueTestCard v-for="(test, index) in tests" :key="test" :index="index+1" :test="test" />
 			</div>
 		</template>
-
-
 	</div>
 </template>
 
@@ -31,7 +29,7 @@ import { useTestList } from '@app/composable/study/tests'
 
 export default defineComponent({
 	name: 'ContinueTests',
-	components: {  EmptyState, ContinueTestCard },
+	components: { EmptyState, ContinueTestCard },
 	setup () {
 		const { unCompletedTests: tests, listener, loading, error } = useTestList()
 		onMounted(listener.startListener)

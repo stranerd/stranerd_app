@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between mb-8">
+		<div class="w-full flex justify-between mb-4">
 			<div class="heading font-bold text-main_dark flex items-center">
 				<ion-text class="mr-3">
 					Test Preps
@@ -24,11 +24,10 @@
 
 		<template v-else>
 			<div class="showcase">
-				<TestPrepCard v-for="(testPrep, index) in testPreps" :key="testPrep" :testPrep="testPrep" :index="index+1"  />
+				<TestPrepCard v-for="(testPrep, index) in testPreps" :key="testPrep" :index="index+1"
+					:testPrep="testPrep" />
 			</div>
 		</template>
-
-
 	</div>
 </template>
 
@@ -41,7 +40,7 @@ import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'StudyTestPrepList',
-	components: {  TestPrepCard, IonBadge },
+	components: { TestPrepCard, IonBadge },
 	props: {
 		suggested: {
 			required: false,
