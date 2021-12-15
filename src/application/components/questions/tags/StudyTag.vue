@@ -21,10 +21,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
 	name: 'Tag',
 	props: {
-		tag: {
-			type: String,
-			required: true
-		},
+
 		index: {
 			type: Number,
 			required: false

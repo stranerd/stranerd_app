@@ -86,10 +86,7 @@ import Tag from '../../questions/tags/StudyTag.vue'
 export default defineComponent({
 	name: 'StudyFlashCardListCard',
 	props: {
-		colorClass: {
-			type: String,
-			default: 'bg-white'
-		},
+
 		index: {
 			type: Number,
 			required: false

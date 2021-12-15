@@ -21,25 +21,15 @@
 
 			<span class="py-2 text-main_dark  mb-3 lg:mb-5" v-html="question.body" />
 
-			<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap lg:hidden">
-				<span v-for="tag in question.tags" :key="tag">
-					<span v-if="tag"
-						class="py-1 px-4 font-bold text-gray bg-new_gray rounded-2xl inline-block">
-						{{ tag }}
-					</span>
-				</span>
+			<div class="flex justify-start items-center gap-4 ">
+				<Tag v-for="tag in question.tags" :key="tag" :tag="tag" />
 			</div>
+
+		
 
 			<div class="w-full flex flex-wrap items-center lg:justify-between ">
 
-				<div class="mt-2 mb-2 lg:flex flex-row items-center gap-y-2 gap-x-2 flex-wrap hidden">
-					<span v-for="tag in question.tags" :key="tag">
-						<span v-if="tag"
-							class="py-1 px-4 font-bold text-gray bg-new_gray rounded-2xl inline-block">
-							{{ tag }}
-						</span>
-					</span>
-				</div>
+			
 		
 
 				<div class="lg:hidden flex items-center">
@@ -103,6 +93,8 @@ import { openQuestionEditModal, useDeleteQuestion } from '@app/composable/questi
 import { formatTime } from '@utils/dates'
 import { useRouter } from 'vue-router'
 import { useReportModal } from '@app/composable/core/modals'
+import Tag from '../tags/Tag.vue'
+
 
 export default defineComponent({
 	name: 'QuestionPageCard',
@@ -113,7 +105,7 @@ export default defineComponent({
 		}
 	},
 	components: {
-		IonIcon, IonRippleEffect, Avatar, Subject, PhotoList, CreateAnswer
+		IonIcon, IonRippleEffect, Avatar, Subject, PhotoList, CreateAnswer, Tag
 	},
 	setup (props) {
 		const { id } = useAuth()

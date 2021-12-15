@@ -1,6 +1,6 @@
 <template>
 	<router-link
-		:class="`m-0  w-full  ${colorClass}  rounded-xl  flex flex-col justify-between md:gap-2 gap-[1rem] box-border  pb-5 `"
+		:class="`m-0  w-full  bg-white  rounded-xl  flex flex-col justify-between md:gap-2 gap-[1rem] box-border  pb-5 `"
 
 		:to="`/study/notes/${note.id}`"
 	>
@@ -56,10 +56,7 @@ import { useDeleteNote } from '@app/composable/study/notes'
 export default defineComponent({
 	name: 'StudyNoteListCard',
 	props: {
-		colorClass: {
-			type: String,
-			default: 'bg-light_gray'
-		},
+
 		note: {
 			type: NoteEntity,
 			required: true

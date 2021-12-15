@@ -51,7 +51,7 @@ export default defineComponent({
 	setup () {
 		const { flashCards: allFlashcard, listener, loading, error } = useFlashCardList()
 		const flashcards = computed({
-			get: () => allFlashcard.value.slice(0, 6),
+			get: () => allFlashcard.value.slice(0, 3),
 			set: () => {
 			}
 		})

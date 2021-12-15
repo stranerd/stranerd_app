@@ -112,6 +112,10 @@ http://ionicframework.com/docs/theming/ */
 
 }
 
+ion-popover{
+	--box-shadow:none !important;
+}
+
 // custom colors
 .ion-white {
 	--color: white !important;

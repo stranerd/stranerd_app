@@ -13,8 +13,8 @@
 				<template v-else>
 					<div v-for="(question,index) in questions" :key="index"
 						:class="0 === index ? 'w-full md:px-2 mb-5' :  'md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0'">
-						<QuestionListCard :colorClass="0 === index ? 'bg-white' : 'bg-light_gray'" :question="question"
-							class="md:h-[10.5rem]" />
+						<QuestionListCard  :question="question"
+						/>
 					</div>
 
 					<div v-if="hasMore"

@@ -53,7 +53,7 @@ export default defineComponent({
 	setup () {
 		const { testPreps: allTestPreps, listener, loading, error } = useTestPrepList()
 		const testPreps = computed({
-			get: () => allTestPreps.value.slice(0, 6),
+			get: () => allTestPreps.value.slice(0, 3),
 			set: () => {
 			}
 		})

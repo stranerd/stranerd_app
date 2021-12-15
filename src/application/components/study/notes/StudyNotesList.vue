@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between">
+		<div class="w-full flex justify-between mb-8">
 
 			<div class="heading font-bold text-main_dark flex items-center">
 
@@ -56,7 +56,7 @@ export default defineComponent({
 	setup () {
 		const { notes: allNotes, listener, loading, error } = useNoteList()
 		const notes = computed({
-			get: () => allNotes.value.slice(0, 6),
+			get: () => allNotes.value.slice(0, 3),
 			set: () => {
 			}
 		})
