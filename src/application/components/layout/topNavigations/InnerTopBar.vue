@@ -1,13 +1,17 @@
 <template>
 	<!-- Small screens -->
 	<ion-header class=" headerShadow ion-no-border">
-		<ion-toolbar class="px-4 block md:hidden">
+		<ion-toolbar class="px-4 block md:hidden" mode="ios">
 			<ion-buttons slot="start" @click="$router.go(-1)">
-				<ion-icon :icon="arrowBackOutline" class="text-[23px] text-main_dark"></ion-icon>
+				<ion-icon :icon="chevronBack" class="text-[23px] text-main_dark"></ion-icon>
 			</ion-buttons>
 			<ion-title class="mx-auto text-base font-bold text-main_dark">
 				{{ $route.meta.displayName ?? '' }}
 			</ion-title>
+
+			<ion-buttons slot="end">
+				<ion-icon :icon="ellipsisVertical" class="text-[20px] text-main_dark"></ion-icon>
+			</ion-buttons>
 		</ion-toolbar>
 
 		<!-- medium screens -->
@@ -37,7 +41,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonButtons, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue'
-import { arrowBackOutline, close, notifications, search } from 'ionicons/icons'
+import { chevronBack, close, notifications, search, ellipsisVertical } from 'ionicons/icons'
 import BigScreenBar from './screens/BigScreenBar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
 
@@ -50,7 +54,7 @@ export default defineComponent({
 			showSearch.value = !showSearch.value
 		}
 		return {
-			close, arrowBackOutline,
+			close, chevronBack,ellipsisVertical,
 			showSearch, toggleSearch,
 			search, notifications
 		}

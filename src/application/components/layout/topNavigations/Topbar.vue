@@ -4,8 +4,8 @@
 			<ion-toolbar
 				class="md:hidden bg-white px-4 border-0 h-12 flex items-center justify-center">
 				<div class="flex items-center justify-between">
-					<router-link class="flex items-center " to="/notifications">
-						<ion-icon :icon="notifications" class="text-xl text-main_dark"></ion-icon>
+					<router-link class="flex items-center " to="/account">
+						<avatar :id="user?.id" :size="24" :src="user?.avatar" />
 					</router-link>
 					<router-link class="flex items-center" to="/users/leaderboard">
 						<img class="w-24" src="@app/assets/images/logo/logo-dark.svg" />

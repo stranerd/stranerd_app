@@ -21,7 +21,8 @@
 
 			<span class="py-2 text-main_dark  mb-3 lg:mb-5" v-html="question.body" />
 
-			<div class="flex justify-start items-center gap-4 ">
+			<div class="flex justify-start items-center gap-4 mb-4">
+				
 				<Tag v-for="tag in question.tags" :key="tag" :tag="tag" />
 			</div>
 
