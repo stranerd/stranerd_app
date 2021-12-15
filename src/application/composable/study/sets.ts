@@ -26,6 +26,7 @@ import {
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { capitalize, copyObject } from '@utils/commons'
+import { useStudyModal } from '@app/composable/core/modals'
 
 type SaveKey = keyof SetEntity['saved']
 
@@ -368,6 +369,7 @@ export const useCreateSet = () => {
 				await setLoading(true)
 				await AddSet.call(factory.value)
 				await setMessage('Set created successfully')
+				useStudyModal().closeCreateSet()
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

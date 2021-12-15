@@ -3,8 +3,8 @@
 		:class="`py-4 px-4 rounded-xl !min-h-[11rem] ${colorClass} flex flex-col w-full text-xs md:text-sm relative cursor-pointer `"
 		:to="`/questions/${question.id}`">
 		<div class="flex lg:flex-row flex-col lg:items-center gap-3 mb-4">
-			<avatar :id="question.userId" :size="28" :src="question.avatar" class="hidden lg:block" />
-			<span class="font-bold text-main_dark hidden lg:block">{{ question.userBio.firstName }}</span>
+			<avatar :id="question.userId" :size="28" :src="question.avatar" />
+			<span class="font-bold text-main_dark">{{ question.userBio.firstName }}</span>
 
 			<span class="font-bold text-gray ml-auto">{{ formatTime(question.createdAt) }}</span>
 		</div>

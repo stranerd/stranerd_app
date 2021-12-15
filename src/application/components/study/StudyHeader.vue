@@ -1,11 +1,8 @@
 <template>
-	<div class="bg-primary h-40 sm:h-36 rounded-b-xl sm:rounded-3xl flex flex-col sm:flex-row 
-	justify-between sm:items-center sm:mt-4 
-	-mt-8 -ml-6 sm:mx-0 -mr-2
-	p-9
-	">
-		<div class="flex flex-col  w-full text-left" >
-		
+	<div
+		class="bg-primary h-40 sm:h-36 rounded-b-xl sm:rounded-3xl flex flex-col sm:flex-row justify-between sm:items-center sm:mt-4 -mt-8 -ml-6 sm:mx-0 -mr-2p-9">
+		<div class="flex flex-col  w-full text-left">
+
 			<ion-text class="text-white leading-tight text-3xl font-bold">
 				Your library
 			</ion-text>
@@ -15,8 +12,9 @@
 
 		</div>
 
-		<div class="bg-white p-3 px-6 rounded-xl lg:grid place-items-center cursor-pointer hidden" @click="setOpen(true, $event)">
-			<div  class="flex items-center cursor-pointer" >
+		<div class="bg-white p-3 px-6 rounded-xl lg:grid place-items-center cursor-pointer hidden"
+			@click="setOpen(true, $event)">
+			<div class="flex items-center cursor-pointer">
 				<ion-text class="text-primary mr-1 font-bold">
 					Create
 				</ion-text>
@@ -26,7 +24,6 @@
 				/>
 			</div>
 		</div>
-
 
 		<ion-popover
 			:event="event"
@@ -53,26 +50,23 @@
 			</div>
 
 		</ion-popover>
-		
-		
 	</div>
 </template>
 
 <script lang="ts">
 import { IonPopover } from '@ionic/vue'
 import { useAuth } from '@root/application/composable/auth/auth'
-import { chevronDown, chevronUp, folder, flash } from 'ionicons/icons'
+import { chevronDown, chevronUp, flash, folder } from 'ionicons/icons'
 import { defineComponent, ref } from 'vue'
 
-
 export default defineComponent({
-	name: 'StydyHeader',
+	name: 'StudyHeader',
 	components: {
 		IonPopover
 	},
 
-	setup() {
-		const {user} = useAuth()
+	setup () {
+		const { user } = useAuth()
 		const isOpenRef = ref(false)
 		const event = ref()
 		const setOpen = (state: boolean, ev?: Event) => {
@@ -81,12 +75,10 @@ export default defineComponent({
 		}
 
 		return {
-			user, chevronDown, chevronUp, isOpenRef, setOpen, event, folder, flash 
-
+			user, chevronDown, chevronUp, isOpenRef, setOpen, event, folder, flash
 
 		}
 	}
-
 
 })
 </script>

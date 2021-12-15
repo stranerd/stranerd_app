@@ -1,6 +1,6 @@
 <template>
 	<router-link
-		:class="`m-0   md:!w-[18rem] !w-[17rem]  ${colorClass}  rounded-xl  flex flex-col justify-between md:gap-2 gap-[1rem] box-border  pb-5 `"
+		:class="`m-0  w-full  ${colorClass}  rounded-xl  flex flex-col justify-between md:gap-2 gap-[1rem] box-border  pb-5 `"
 
 		:to="`/study/notes/${note.id}`"
 	>
