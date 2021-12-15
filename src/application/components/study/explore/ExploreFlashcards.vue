@@ -1,9 +1,7 @@
 <template>
 	<div>
 		<template v-if="flashCards.length === 0">
-			<div class="py-3">
-				<EmptyState info="No flashCards available." />
-			</div>
+			<EmptyState info="No flashCards available." />
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mt-8">

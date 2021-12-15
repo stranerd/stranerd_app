@@ -5,43 +5,57 @@
 				<ion-text>FlashCards</ion-text>
 			</div>
 			<router-link
-				class="text-primary normalText flex items-center font-bold"
-				to="/study/explore/flashCards">
-				<span>explore</span>
+				:to="`/study/sets/${set.id}/flashCards`"
+				class="text-primary normalText flex items-center font-bold">
+				<span>view all</span>
 			</router-link>
 		</div>
 
-		<template v-if="flashCards.length === 0">
-			<div class="py-3">
-				<EmptyState info="No flashcards saved." />
-			</div>
+		<template v-if="filtered.length === 0">
+			<EmptyState info="No flashCards saved." />
 		</template>
+
 		<template v-else>
 			<div class="showcase">
-				<FlashCardListCard v-for="(flashCard, index) in flashCards" :key="flashCard.hash" :flashCard="flashCard"
-					:index="index+1" />
+				<FlashCardCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard" />
 			</div>
 		</template>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
-import { FlashCardEntity } from '@modules/study'
+import { computed, defineComponent, PropType } from 'vue'
+import FlashCardCard from '@app/components/study/flashCards/FlashCardListCard.vue'
+import { FlashCardEntity, SetEntity } from '@modules/study'
 
 export default defineComponent({
 	name: 'SetFlashCardList',
+	components: { FlashCardCard },
 	props: {
+		set: {
+			type: SetEntity,
+			required: true
+		},
 		flashCards: {
 			type: Array as PropType<FlashCardEntity[]>,
 			required: true
 		}
 	},
-	components: { FlashCardListCard }
+	setup (props) {
+		const filtered = computed({
+			get: () => props.flashCards.slice(0, 6),
+			set: () => {
+			}
+		})
+		return { filtered }
+	}
 })
 </script>
 
 <style>
-
+	ion-badge {
+		--background: #FFDC00 !important;
+		--color: #132740 !important;
+		--padding-top: 6px !important;
+	}
 </style>

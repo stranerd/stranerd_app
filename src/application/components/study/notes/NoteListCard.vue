@@ -23,7 +23,6 @@
 					</ion-text>
 				</div>
 				<ion-icon
-
 					:icon="ellipsisVertical"
 					class="text-gray text-2xl"
 				/>
@@ -42,6 +41,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { NoteEntity } from '@modules/study'
+import { ellipsisVertical } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'NoteListCard',
@@ -54,6 +54,9 @@ export default defineComponent({
 			type: NoteEntity,
 			required: true
 		}
+	},
+	setup () {
+		return { ellipsisVertical }
 	}
 })
 </script>

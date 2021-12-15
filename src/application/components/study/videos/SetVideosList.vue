@@ -5,43 +5,57 @@
 				<ion-text>Videos</ion-text>
 			</div>
 			<router-link
-				class="text-primary normalText flex items-center font-bold"
-				to="/study/explore/videos">
-				<span>explore</span>
+				:to="`/study/sets/${set.id}/videos`"
+				class="text-primary normalText flex items-center font-bold">
+				<span>view all</span>
 			</router-link>
 		</div>
 
-		<template v-if="videos.length === 0">
-			<div class="py-3">
-				<EmptyState info="No videos saved." />
-			</div>
+		<template v-if="filtered.length === 0">
+			<EmptyState info="No videos saved." />
 		</template>
 
 		<template v-else>
 			<div class="showcase">
-				<VideoListCard v-for="(video, index) in videos" :key="video.hash" :index="index+1" :video="video" />
+				<VideoCard v-for="video in filtered" :key="video.hash" :video="video" />
 			</div>
 		</template>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import VideoListCard from '@app/components/study/videos/VideoListCard.vue'
-import { VideoEntity } from '@modules/study'
+import { computed, defineComponent, PropType } from 'vue'
+import VideoCard from '@app/components/study/videos/VideoListCard.vue'
+import { SetEntity, VideoEntity } from '@modules/study'
 
 export default defineComponent({
-	name: 'SetVideosList',
+	name: 'SetVideoList',
+	components: { VideoCard },
 	props: {
+		set: {
+			type: SetEntity,
+			required: true
+		},
 		videos: {
 			type: Array as PropType<VideoEntity[]>,
 			required: true
 		}
 	},
-	components: { VideoListCard }
+	setup (props) {
+		const filtered = computed({
+			get: () => props.videos.slice(0, 6),
+			set: () => {
+			}
+		})
+		return { filtered }
+	}
 })
 </script>
 
 <style>
-
+	ion-badge {
+		--background: #FFDC00 !important;
+		--color: #132740 !important;
+		--padding-top: 6px !important;
+	}
 </style>

@@ -1,9 +1,7 @@
 <template>
 	<div>
 		<template v-if="groupedByInstitution.length === 0">
-			<div class="py-3">
-				<EmptyState info="No test preps available" />
-			</div>
+			<EmptyState info="No test preps available" />
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mt-8">

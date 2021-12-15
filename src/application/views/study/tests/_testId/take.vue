@@ -9,7 +9,7 @@
 			</div>
 		</div>
 
-		<TestBody v-if="test" :test="test" />
+		<TestBody v-if="test" :key="test.hash" :test="test" />
 
 		<PageLoading v-if="loading" />
 	</Justified>
@@ -44,7 +44,6 @@ export default defineComponent({
 			--padding-start: 4.5rem;
 			--padding-end: 4.5rem;
 		}
-
 	}
 
 	.footer-shadow {

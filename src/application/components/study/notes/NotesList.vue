@@ -20,9 +20,7 @@
 		</div>
 
 		<template v-if="notes.length === 0">
-			<div class="py-3">
-				<EmptyState info="No Notes Available." />
-			</div>
+			<EmptyState info="No Notes Available." />
 		</template>
 
 		<template v-else>

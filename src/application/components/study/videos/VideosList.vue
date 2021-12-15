@@ -20,9 +20,7 @@
 		</div>
 
 		<template v-if="videos.length === 0">
-			<div class="py-3">
-				<EmptyState info="No Videos Available." />
-			</div>
+			<EmptyState info="No Videos Available." />
 		</template>
 
 		<template v-else>

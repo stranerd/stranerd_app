@@ -17,9 +17,7 @@
 		</div>
 
 		<template v-if="testPreps.length === 0">
-			<div class="py-3">
-				<EmptyState info="No TestPreps Available." />
-			</div>
+			<EmptyState info="No TestPreps Available." />
 		</template>
 
 		<template v-else>

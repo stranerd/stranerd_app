@@ -10,7 +10,7 @@
 			</ion-text>
 		</div>
 
-		<div v-if="set.isRoot" class="bg-white p-3 px-6 rounded-xl lg:grid place-items-center cursor-pointer"
+		<div v-if="set.isRoot" class="bg-white p-3 px-6 rounded-xl lg:grid place-items-center cursor-pointer hidden"
 			@click="setOpen(true, $event)">
 			<div class="flex items-center cursor-pointer">
 				<ion-text class="text-primary mr-1 font-bold">
@@ -18,7 +18,7 @@
 				</ion-text>
 				<ion-icon
 					:icon=' !isOpenRef ? chevronDown : chevronUp'
-					class="text-primary  text-xl"
+					class="text-primary text-xl"
 				/>
 			</div>
 		</div>

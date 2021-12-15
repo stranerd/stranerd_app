@@ -5,10 +5,10 @@
 		</div>
 		<div class="px-4 pb-8">
 			<SetStats :set="set" class="mt-16" />
-			<TestPrepsList :testPreps="testPreps" class="mt-16" />
-			<FlashCardsList :flashCards="flashCards" class="mt-16" />
-			<NotesList :notes="notes" class="mt-16" />
-			<VideosList :videos="videos" class="mt-16" />
+			<TestPrepsList :set="set" :testPreps="testPreps" class="mt-16" />
+			<FlashCardsList :flashCards="flashCards" :set="set" class="mt-16" />
+			<NotesList :notes="notes" :set="set" class="mt-16" />
+			<VideosList :set="set" :videos="videos" class="mt-16" />
 		</div>
 	</div>
 </template>

@@ -17,9 +17,7 @@
 		</div>
 
 		<template v-if="flashcards.length === 0">
-			<div class="py-3">
-				<EmptyState info="No flashcards Available." />
-			</div>
+			<EmptyState info="No flashcards Available." />
 		</template>
 		<template v-else>
 			<div class="showcase">

@@ -7,10 +7,8 @@ module.exports = {
 			'sm': '640px',
  			'md': '768px',
 			'lg': '1280px',
-			'mmd': '1420px', 
+			'mmd': '1420px',
 			'2xl': '1536px',
-
-	 
 		},
 		extend: {
 			colors: {
@@ -38,12 +36,9 @@ module.exports = {
 				orange: '#FFA84B',
 				green: '#00D246'
 			},
-			  fontFamily: {
+			fontFamily: {
 				'nuni': ['"Nunito Sans"', 'sans-serif']
 			},
-	
-
-
 		},
 	},
 	variants: {
