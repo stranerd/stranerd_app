@@ -18,7 +18,7 @@
 			</router-link>
 			<router-link class="relative"
 				to="/study/flashCards/create">
-				<ion-fab-button  color="purple" size="small">
+				<ion-fab-button  color="tertiary" size="small">
 					<img alt="" class="w-4" src="@app/assets/images/icons/flashCard.png">
 				</ion-fab-button>
 				<ion-label
@@ -28,12 +28,22 @@
 			</router-link>
 			<router-link class="relative"
 				to="/questions/create">
-				<ion-fab-button  color="green" size="small">
+				<ion-fab-button  color="secondary" size="small">
 					<ion-icon :icon="helpCircle"></ion-icon>
 				</ion-fab-button>
 				<ion-label
 					class="px-2 py-1 mr-1.5 w-max  bg-green rounded-xl text-xs font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
 					Ask a question
+				</ion-label>
+			</router-link>
+			<router-link class="relative"
+				to="/questions/create">
+				<ion-fab-button  color="primary" size="small">
+					<ion-icon :icon="compass"></ion-icon>
+				</ion-fab-button>
+				<ion-label
+					class="px-2 py-1 mr-1.5 w-max  bg-primary rounded-xl text-xs font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
+					Explore
 				</ion-label>
 			</router-link>
 		</ion-fab-list>
@@ -43,7 +53,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonFab, IonFabButton, IonFabList, IonLabel } from '@ionic/vue'
-import { add, folder, helpCircle } from 'ionicons/icons'
+import { add, folder, helpCircle, compass } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'Fab',
@@ -51,7 +61,7 @@ export default defineComponent({
 	setup () {
 		const active = ref(false)
 		return {
-			active,
+			active, compass,
 			add,
 			helpCircle,
 			folder

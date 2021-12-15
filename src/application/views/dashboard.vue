@@ -2,8 +2,8 @@
 	<DashboardLayout>
 		<div class="px-4  pt-8 pb-32">
 			<StatusBar />
-			
-			<ContinueStudy class="mt-28 lg:mt-20" />
+			<!-- <StudyTools class="mt-28 lg:mt-14" /> -->
+			<ContinueStudy  class="mt-8"/>
 			<TestPrep :suggested="true" class="mt-8" /> 
 			<RecentQuestions class="mt-8" />
 
@@ -12,7 +12,7 @@
 			
 			<Notes :suggested="true" class="mt-8" />
 			<FlashCards :suggested="true" class="mt-8" />
-			<StudyTools class="mt-8" />
+			
 		</div>
 	</DashboardLayout>
 </template>
@@ -25,7 +25,7 @@ import Notes from '@app/components/study/notes/StudyNotesList.vue'
 import FlashCards from '@app/components/study/flashCards/StudyFlashCardList.vue'
 import RecentQuestions from '@app/components/dashboard/RecentQuestions.vue'
 import ContinueStudy from '@app/components/dashboard/ContinueTests.vue'
-import StudyTools from '@app/components/study/studyTools/StudyTools.vue'
+// import StudyTools from '@app/components/study/studyTools/StudyTools.vue'
 
 export default defineComponent({
 	name: 'Dashboard',
@@ -36,7 +36,7 @@ export default defineComponent({
 		TestPrep,
 		Notes,
 		FlashCards,
-		StudyTools,
+		// StudyTools,
 		StatusBar
 	}
 })

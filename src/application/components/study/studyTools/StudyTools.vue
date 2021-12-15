@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between">
+		<div class="w-full flex justify-between mb-8">
 			<span class="heading font-bold text-main_dark">
 				Tools to help you study better!
 			</span> 
