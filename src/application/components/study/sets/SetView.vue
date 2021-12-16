@@ -4,12 +4,12 @@
 			<SetHeader :set="set" />
 		</div>
 		<div class="px-4 pb-8">
-			<SetStats :set="set" class="mt-16" />
-			<TestPrepsList :set="set" :testPreps="testPreps" class="mt-16" />
-			<FlashCardsList :flashCards="flashCards" :set="set" class="mt-16" />
-			<NotesList :notes="notes" :set="set" class="mt-16" />
-			<VideosList :set="set" :videos="videos" class="mt-16" />
-			<RootSetList v-if="set.isRoot && set.userId === id" :set="set" :sets="sets" class="mt-16" />
+			<SetStats :set="set" class="mt-3 md:mt-8" />
+			<TestPrepsList :set="set" :testPreps="testPreps" class="mt-6 md:mt-8" />
+			<FlashCardsList :flashCards="flashCards" :set="set" class="mt-6 md:mt-8" />
+			<NotesList :notes="notes" :set="set" class="mt-6 md:mt-8" />
+			<VideosList :set="set" :videos="videos" class="mt-6 md:mt-8" />
+			<RootSetList v-if="set.isRoot && set.userId === id" :set="set" :sets="sets" class="mt-6 md:mt-8" />
 		</div>
 		<PageLoading v-if="loading" />
 		<PageLoading v-if="setLoading" />
