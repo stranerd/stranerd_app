@@ -8,7 +8,7 @@
 					Videos
 				</ion-text>
 				<ion-badge v-if="suggested" class="uppercase">
-					Suggested
+					Latest
 				</ion-badge>
 			</div>
 
@@ -20,12 +20,12 @@
 		</div>
 
 		<template v-if="videos.length === 0">
-			<EmptyState info="No Videos Available." />
+			<EmptyState info="No videos available." />
 		</template>
 
 		<template v-else>
 			<div class="showcase">
-				<VideoListCard v-for="(video, index) in videos" :key="video" :index="index+1" :video="video" />
+				<VideoListCard v-for="video in videos" :key="video.hash" :video="video" />
 			</div>
 		</template>
 	</div>

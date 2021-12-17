@@ -1,31 +1,23 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between mb-8">
+		<div class="w-full flex justify-between mb-4">
 			<span class="heading font-bold text-main_dark">
 				Latest questions
 			</span>
 
-			<router-link v-if="questions.length " class="text-primary normalText flex items-center font-bold"
-				to="/questions">
+			<router-link class="text-primary normalText flex items-center font-bold" to="/questions">
 				<span>view all</span>
 			</router-link>
 		</div>
 
-		<template v-if="questions.length === 0">
-			<div class="py-3">
-				<empty-state
-					btnText="Ask a question"
-					info="You have no recent questions! Start asking questions to help with homework and studying."
-					route="/questions"
-				></empty-state>
-			</div>
-		</template>
-		<template v-else>
-			<div class="showcase">
-				<QuestionListCard v-for="(question, index) in questions" :key="question" :index="index+1"
-					:question="question" />
-			</div>
-		</template>
+		<EmptyState v-if="questions.length === 0"
+			btnText="Ask a question"
+			info="You have no recent questions! Start asking questions to help with homework and studying."
+			route="/questions"
+		/>
+		<div v-else class="showcase">
+			<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
+		</div>
 	</div>
 </template>
 

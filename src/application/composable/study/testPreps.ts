@@ -15,7 +15,6 @@ import { groupBy } from '@utils/commons'
 const global = {
 	testPreps: ref([] as TestPrepEntity[]),
 	fetched: ref(false),
-	hasMore: ref(false),
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
@@ -30,23 +29,21 @@ const unshiftToTestPrepList = (testPrep: TestPrepEntity) => {
 	if (index !== -1) global.testPreps.value.splice(index, 1, testPrep)
 	else global.testPreps.value.unshift(testPrep)
 }
+const fetchTestPreps = async () => {
+	await global.setError('')
+	try {
+		await global.setLoading(true)
+		const testPreps = await GetTestPreps.call()
+		testPreps.results.forEach(pushToTestPrepList)
+		global.fetched.value = true
+	} catch (error) {
+		await global.setError(error)
+	}
+	await global.setLoading(false)
+}
 
 export const useTestPrepList = () => {
-	const fetchTestPreps = async () => {
-		await global.setError('')
-		try {
-			await global.setLoading(true)
-			const testPreps = await GetTestPreps.call()
-			global.hasMore.value = !!testPreps.pages.next
-			testPreps.results.forEach(pushToTestPrepList)
-			global.fetched.value = true
-		} catch (error) {
-			await global.setError(error)
-		}
-		await global.setLoading(false)
-	}
 	const listener = useListener(async () => {
-		const lastDate = global.testPreps.value[global.testPreps.value.length - 1]?.createdAt
 		return await ListenToTestPreps.call({
 			created: async (entity) => {
 				unshiftToTestPrepList(entity)
@@ -77,6 +74,20 @@ export const useTestPrepList = () => {
 		...global, listener, groupedByInstitution,
 		fetchOlderTestPreps: fetchTestPreps
 	}
+}
+
+export const useTestPrep = (id: string) => {
+	const testPrep = computed({
+		get: () => global.testPreps.value.find((s) => s.id === id) ?? null,
+		set: (s) => {
+			if (s) pushToTestPrepList(s)
+		}
+	})
+	onMounted(async () => {
+		if (!global.fetched.value && !global.loading.value) await fetchTestPreps()
+	})
+
+	return { testPrep }
 }
 
 export const useCreateTestPrep = () => {

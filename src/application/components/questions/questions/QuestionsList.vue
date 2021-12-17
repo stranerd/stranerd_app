@@ -3,29 +3,23 @@
 
 		<div class="lg:mt-8 mt-4">
 			<div class="mt-5 md:mt-6 col-span-6 flex flex-row flex-wrap ">
-				<template v-if="questions.length === 0">
-					<empty-state
-						:btnText="'Ask a question'"
-						:info="'No questions found! Start asking questions to help with homework and studying.'"
-						route="/questions/create"
-					></empty-state>
-				</template>
-				<template v-else>
-					<div v-for="(question,index) in questions" :key="index"
-						:class="0 === index ? 'w-full md:px-2 mb-5' :  'md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0'">
-						<QuestionListCard :question="question"
-						/>
-					</div>
+				<EmptyState v-if="questions.length === 0"
+					:btnText="'Ask a question'"
+					:info="'No questions found! Start asking questions to help with homework and studying.'"
+					route="/questions/create"
+				/>
+				<div v-for="(question,index) in questions" :key="index"
+					:class="0 === index ? 'w-full md:px-2 mb-5' :  'md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0'">
+					<QuestionListCard :question="question"
+					/>
+				</div>
 
-					<div v-if="hasMore"
-						class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
-						<a @click.prevent="fetchOlderQuestions">Load More</a>
-					</div>
-				</template>
-
+				<div v-if="hasMore"
+					class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
+					<a @click.prevent="fetchOlderQuestions">Load More</a>
+				</div>
 			</div>
 		</div>
-
 	</div>
 	<page-loading v-if="loading" />
 </template>

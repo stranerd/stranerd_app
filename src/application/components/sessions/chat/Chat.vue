@@ -1,13 +1,12 @@
 <template>
 	<div class=" flex flex-col relative h-full w-full  border-r-[1px] border-faded_gray overflow-y-hidden">
-		<chat-top :key="hash" :user="user ? user : undefined"></chat-top>
+		<chat-top :key="hash" :user="user" />
 		<chat-content :user-id="userId"></chat-content>
 		<chat-bottom :session-id="sessionId" :user-id="userId"></chat-bottom>
 	</div>
 </template>
 
 <script lang="ts">
-
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { ellipsisVertical, search } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'

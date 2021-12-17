@@ -38,7 +38,7 @@
 					</div>
 				</div>
 
-				<ion-text class="text-main_dark   mb-8">
+				<ion-text class="text-main_dark mb-8">
 					Which of the following completely describes the number of points in which two distinct quadratic
 					functions can intersect?
 				</ion-text>

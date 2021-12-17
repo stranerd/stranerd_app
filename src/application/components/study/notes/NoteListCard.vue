@@ -7,14 +7,10 @@
 			<div class="w-full justify-between items-start flex px-4 pt-3 pb-1 ">
 				<div class="w-full flex">
 					<img :src="note.preview.link"
-						class="bg-faded_gray  h-[5.375rem] w-[4.5rem] rounded-md object-cover " />
-					<div class="text-base text-main_dark font-bold  text-left flex-col flex ml-4">
+						class="bg-faded_gray h-[5.375rem] w-[4.5rem] rounded-md object-cover" />
+					<div class="text-base text-main_dark font-bold text-left flex-col flex ml-4 flex-grow">
 						<ion-text>
 							{{ note.title }}
-						</ion-text>
-						<ion-text class="text-gray">
-							Mathematics
-							<!-- {{ note.subjecti }} -->
 						</ion-text>
 					</div>
 				</div>

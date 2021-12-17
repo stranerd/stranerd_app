@@ -1,11 +1,9 @@
 <template>
 	<ExploreWrapper>
 		<div>
-			<EmptyState v-if="notes.length === 0" info=" No available notes" />
-			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-				<ExploreNotesList :notes="notes" />
-				<PageLoading v-if="loading" />
-			</div>
+			<EmptyState v-if="notes.length === 0" info="No available notes" />
+			<ExploreNotesList :notes="notes" />
+			<PageLoading v-if="loading" />
 		</div>
 	</ExploreWrapper>
 </template>

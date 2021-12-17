@@ -6,18 +6,20 @@
 		<div class="flex flex-col items-center justify-between w-full mx-auto capitalize">
 			<div class="w-full flex justify-between items-center">
 				<ion-text class="text-base text-left w-full text-main_dark font-bold">
-					{{ instituteName }}
+					<Institution v-if="testPrep && testPrep.isPastQuestionType"
+						:institutionId="testPrep.data.institutionId" />
+					<span v-else>{{ test.name }}</span>
 				</ion-text>
-
-
-				<ion-icon
-					:icon="arrowForward"
-					class="text-3xl text-gray "
-				/>
+				<ion-icon :icon="arrowForward" class="text-3xl text-gray" />
 			</div>
 
 			<ion-text class="text-base text-left w-full text-gray font-bold">
-				Study > {{ subject }} ({{ year }})
+				{{ test.isTimed ? 'Timed' : 'Study' }}
+				<span v-if="testPrep && testPrep.isPastQuestionType">
+					>
+					<Course :courseId="testPrep.data.courseId" />
+					({{ testPrep.data.year }})
+				</span>
 			</ion-text>
 
 			<ion-progress-bar class="mt-10" value="0.5" />
@@ -31,10 +33,13 @@ import { IonProgressBar } from '@ionic/vue'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
 import { TestEntity } from '@modules/study'
+import { useTestPrep } from '@app/composable/study/testPreps'
+import Institution from '@app/components/study/institutions/Institution.vue'
+import Course from '@app/components/study/courses/Course.vue'
 
 export default defineComponent({
 	name: 'ContinueTestCard',
-	components: { IonProgressBar },
+	components: { IonProgressBar, Institution, Course },
 	props: {
 		test: {
 			required: true,
@@ -42,16 +47,8 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		// TODO: Reimplement to get subject and year and institutionName
-		const instituteName = props.test.name.split(' ')[0]
-		const subject = props.test.name.split(' ')[1]
-		const year = props.test.name.split(' ')[2]
-		return {
-			instituteName, subject, year,
-			formatNumber, arrowForward,
-			calendar,
-			play
-		}
+		const { testPrep } = useTestPrep(props.test.prepId)
+		return { formatNumber, arrowForward, calendar, play, testPrep }
 	}
 })
 </script>

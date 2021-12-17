@@ -16,7 +16,7 @@
 			</div>
 
 			<template v-if="users.length">
-				<div v-for="(person, index) in users" :key="person.id"
+				<div v-for="(person, index) in users" :key="person.hash"
 					:class="{'bg-yellow_star': person.id === id}"
 					class="flex items-center mt-4 bg-white  rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 lg:px-8 px-4 mx-5"
 				>

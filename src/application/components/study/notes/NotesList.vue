@@ -8,7 +8,7 @@
 					Notes
 				</ion-text>
 				<ion-badge v-if="suggested" class="uppercase">
-					Suggested
+					Latest
 				</ion-badge>
 			</div>
 
@@ -20,12 +20,12 @@
 		</div>
 
 		<template v-if="notes.length === 0">
-			<EmptyState info="No Notes Available." />
+			<EmptyState info="No notes available." />
 		</template>
 
 		<template v-else>
 			<div class="showcase">
-				<NoteListCard v-for="(note, index) in notes" :key="note" :index="index+1" :note="note" />
+				<NoteListCard v-for="note in notes" :key="note.hash" :note="note" />
 			</div>
 		</template>
 	</div>
