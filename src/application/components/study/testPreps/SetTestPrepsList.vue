@@ -1,11 +1,11 @@
 <template>
 	<div>
 		<template v-if="filtered.length === 0">
-			<EmptyState info="No notes available." />
+			<EmptyState info="No testPreps available." />
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-				<NoteListCard v-for="note in filtered" :key="note.hash" :note="note" />
+				<TestPrepListCard v-for="testPrep in filtered" :key="testPrep.hash" :testPrep="testPrep" />
 			</div>
 		</template>
 	</div>
@@ -13,19 +13,19 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
-import { NoteEntity, SetEntity } from '@modules/study'
+import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
+import { SetEntity, TestPrepEntity } from '@modules/study'
 
 export default defineComponent({
-	name: 'SetNotesList',
-	components: { NoteListCard },
+	name: 'SetTestPrepsList',
+	components: { TestPrepListCard },
 	props: {
 		set: {
 			type: SetEntity,
 			required: true
 		},
-		notes: {
-			type: Array as PropType<NoteEntity[]>,
+		testPreps: {
+			type: Array as PropType<TestPrepEntity[]>,
 			required: true
 		},
 		sliced: {
@@ -35,7 +35,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const filtered = computed(() => props.notes.slice(0, props.sliced ? 6 : undefined))
+		const filtered = computed(() => props.testPreps.slice(0, props.sliced ? 6 : undefined))
 		return { filtered }
 	}
 })

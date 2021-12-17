@@ -2,6 +2,7 @@ import { computed, onMounted, Ref, ref } from 'vue'
 import {
 	AddSet,
 	DeleteSetProp,
+	FindSet,
 	FlashCardEntity,
 	GetFlashCardsInSet,
 	GetNotesInSet,
@@ -160,6 +161,39 @@ export const useMySets = () => {
 	})
 
 	return { ...myGlobal, listener, rootSet, normalSets }
+}
+
+export const useSetById = (setId: string) => {
+	const { error, setError } = useErrorHandler()
+	const { loading, setLoading } = useLoadingHandler()
+	const set = computed({
+		get: () => global.sets.value.find((q) => q.id === setId) ?? null,
+		set: (q) => {
+			if (q) pushToSetList(q)
+		}
+	})
+
+	const fetchSet = async () => {
+		await setError('')
+		try {
+			await setLoading(true)
+			let set = global.sets.value.find((q) => q.id === setId) ?? null
+			if (set) {
+				await setLoading(false)
+				return
+			}
+			set = await FindSet.call(setId)
+			console.log(await FindSet.call(setId))
+			if (set) unshiftToSetList(set)
+		} catch (error) {
+			await setError(error)
+		}
+		await setLoading(false)
+	}
+
+	onMounted(fetchSet)
+
+	return { error, loading, set }
 }
 
 export const useSet = (set: SetEntity) => {
