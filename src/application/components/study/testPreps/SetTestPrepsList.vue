@@ -4,7 +4,7 @@
 			<EmptyState info="No testPreps saved." />
 		</template>
 		<template v-else>
-			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+			<div class="showcase">
 				<TestPrepListCard v-for="testPrep in filtered" :key="testPrep.hash" :testPrep="testPrep" />
 			</div>
 		</template>
