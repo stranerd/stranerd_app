@@ -2,7 +2,9 @@
 	<Justified>
 		<div>
 			<TopSection />
-			<slot />
+			<div class="p-4 md:w-8/12 w-full mx-auto">
+				<slot />
+			</div>
 		</div>
 	</Justified>
 </template>

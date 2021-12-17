@@ -1,8 +1,6 @@
 <template>
 	<ExploreWrapper>
-		<div class="p-4 md:w-8/12 w-full mx-auto">
-			<ExploreVideos />
-		</div>
+		<ExploreVideos />
 	</ExploreWrapper>
 </template>
 
