@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<template v-if="filtered.length === 0">
-			<EmptyState info="No videos saved." />
+			<EmptyState info="No videos available." />
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
@@ -14,16 +14,12 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import VideoListCard from '@app/components/study/videos/VideoListCard.vue'
-import { SetEntity, VideoEntity } from '@modules/study'
+import { VideoEntity } from '@modules/study'
 
 export default defineComponent({
-	name: 'SetVideosList',
+	name: 'ExploreVideosList',
 	components: { VideoListCard },
 	props: {
-		set: {
-			type: SetEntity,
-			required: true
-		},
 		videos: {
 			type: Array as PropType<VideoEntity[]>,
 			required: true

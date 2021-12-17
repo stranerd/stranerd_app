@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<template v-if="filtered.length === 0">
-			<EmptyState info="No flashCards saved." />
+			<EmptyState info="No flashCards available." />
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
@@ -14,16 +14,12 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
-import { FlashCardEntity, SetEntity } from '@modules/study'
+import { FlashCardEntity } from '@modules/study'
 
 export default defineComponent({
-	name: 'SetFlashCardsList',
+	name: 'ExploreFlashCardsList',
 	components: { FlashCardListCard },
 	props: {
-		set: {
-			type: SetEntity,
-			required: true
-		},
 		flashCards: {
 			type: Array as PropType<FlashCardEntity[]>,
 			required: true

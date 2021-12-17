@@ -29,15 +29,14 @@
 							{{ person.bio.fullName }}
 						</span>
 						<Tag :secondary="true" :tag="person.rank.id" />
-
 					</div>
 					<div class="w-3/12 font-bold text-right text-primary">
-						<span>{{ person.account.rankings[time] }}</span>
+						<span>{{ formatNumber(person.account.rankings[time], 2) }}</span>
 					</div>
 				</div>
 			</template>
 
-			<div v-if="user && !hasAuthUser"
+			<div v-if="user && hasNoAuthUser"
 				class="flex items-center mt-4 bg-white rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 lg:px-8 px-4 mx-5 bg-yellow_star ">
 				<div class="lg:w-1/12 w-2/12">
 					<span> - </span>
@@ -50,13 +49,10 @@
 					<Tag :secondary="true" :tag="user.rank.id" />
 				</div>
 				<div class="w-3/12 text-right text-primary font-bold">
-					<span>{{ user.account.rankings[time] }}</span>
+					<span>{{ formatNumber(user.account.rankings[time], 2) }}</span>
 				</div>
 			</div>
 		</div>
-		<!-- <div class="text-center text-18">
-			<a class="text-primary-dark py-2" @click.prevent="fetchOlder">LOAD MORE</a>
-		</div> -->
 	</div>
 </template>
 
@@ -67,7 +63,8 @@ import { useLeaderboardList } from '@app/composable/users/leaderboard'
 import { RankingTimes } from '@modules/users'
 import Avatar from '@app/components/core/Avatar.vue'
 import PageLoading from '@app/components/core/PageLoading.vue'
-import Tag from '../../questions/tags/Tag.vue'
+import Tag from '@app/components/core/Tag.vue'
+import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'LeaderboardList',
@@ -80,12 +77,12 @@ export default defineComponent({
 	},
 
 	setup (props) {
-		const { users, loading, hasAuthUser, listener } = useLeaderboardList(props.time)
+		const { users, loading, hasNoAuthUser, listener } = useLeaderboardList(props.time)
 		const { user, id } = useAuth()
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 
-		return { user, id, users, loading, hasAuthUser }
+		return { user, id, users, loading, hasNoAuthUser, formatNumber }
 	}
 })
 </script>

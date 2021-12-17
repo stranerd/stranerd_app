@@ -1,33 +1,30 @@
 <template>
 	<ExploreWrapper>
-		<ExploreNotes />
+		<div>
+			<EmptyState v-if="notes.length === 0" info=" No available notes" />
+			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+				<ExploreNotesList :notes="notes" />
+				<PageLoading v-if="loading" />
+			</div>
+		</div>
 	</ExploreWrapper>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import ExploreWrapper from '@app/components/study/explore/ExploreWrapper.vue'
-import ExploreNotes from '@app/components/study/explore/ExploreNotes.vue'
+import { useNoteList } from '@app/composable/study/notes'
+import ExploreNotesList from '@app/components/study/notes/ExploreNotesList.vue'
 
 export default defineComponent({
-	name: 'Explore Notes',
+	name: 'ExploreNotes',
 	displayName: 'Explore',
-	components: { ExploreWrapper, ExploreNotes }
+	components: { ExploreWrapper, ExploreNotesList },
+	setup () {
+		const { notes, listener, loading, error } = useNoteList()
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+		return { notes, loading, error }
+	}
 })
 </script>
-
-<style lang="scss" scoped>
-	.ion-iten-transparent {
-		--background: transparent;
-	}
-
-	ion-searchbar {
-		--box-shadow: 'none';
-		--border-radius: 0.5rem;
-	}
-
-	.searchbar-input.sc-ion-searchbar-md {
-		padding-top: 12px;
-		padding-bottom: 12px;
-	}
-</style>

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<template v-if="filtered.length === 0">
-			<EmptyState info="No testPreps saved." />
+			<EmptyState info="No testPreps available." />
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
@@ -14,16 +14,12 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
-import { SetEntity, TestPrepEntity } from '@modules/study'
+import { TestPrepEntity } from '@modules/study'
 
 export default defineComponent({
-	name: 'SetTestPrepsList',
+	name: 'ExploreTestPrepsList',
 	components: { TestPrepListCard },
 	props: {
-		set: {
-			type: SetEntity,
-			required: true
-		},
 		testPreps: {
 			type: Array as PropType<TestPrepEntity[]>,
 			required: true

@@ -26,7 +26,7 @@ import {
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
-import { capitalize, copyObject } from '@utils/commons'
+import { capitalize } from '@utils/commons'
 import { useStudyModal } from '@app/composable/core/modals'
 
 type SaveKey = keyof SetEntity['saved']
@@ -173,6 +173,21 @@ export const useSetById = (setId: string) => {
 		}
 	})
 
+	const listener = useListener(async () => {
+		return ListenToSet.call(setId, {
+			created: async (entity) => {
+				pushToSetList(entity)
+			},
+			updated: async (entity) => {
+				pushToSetList(entity)
+			},
+			deleted: async (entity) => {
+				const index = global.sets.value.findIndex((q) => q.id === setId)
+				if (index > -1) global.sets.value.splice(index, 1)
+			}
+		})
+	})
+
 	const fetchSet = async () => {
 		await setError('')
 		try {
@@ -183,7 +198,6 @@ export const useSetById = (setId: string) => {
 				return
 			}
 			set = await FindSet.call(setId)
-			console.log(await FindSet.call(setId))
 			if (set) unshiftToSetList(set)
 		} catch (error) {
 			await setError(error)
@@ -193,7 +207,7 @@ export const useSetById = (setId: string) => {
 
 	onMounted(fetchSet)
 
-	return { error, loading, set }
+	return { error, loading, set, listener }
 }
 
 export const useSet = (set: SetEntity) => {
@@ -227,7 +241,7 @@ export const useSet = (set: SetEntity) => {
 	}
 
 	const listener = useListener(async () => {
-		const startPropListeners = async () => await Promise.all([
+		const listeners = await Promise.all([
 			ListenToNotesInSet.call(set.saved.notes, {
 				created: async (entity) => {
 					setGlobal[set.id].notes.value.push(entity)
@@ -285,28 +299,8 @@ export const useSet = (set: SetEntity) => {
 				}
 			})
 		])
-		let listeners = await startPropListeners()
-		const setListener = await ListenToSet.call(set.id, {
-			created: async (entity) => {
-				unshiftToSetList(entity)
-				set = copyObject(entity)
-				await Promise.all(listeners.map(((listener) => listener())))
-				listeners = await startPropListeners()
-			},
-			updated: async (entity) => {
-				unshiftToSetList(entity)
-				set = copyObject(entity)
-				await Promise.all(listeners.map(((listener) => listener())))
-				listeners = await startPropListeners()
-			},
-			deleted: async (entity) => {
-				const index = global.sets.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.sets.value.splice(index, 1)
-				await Promise.all(listeners.map(((listener) => listener())))
-			}
-		})
 		return async () => {
-			await Promise.all([...listeners, setListener].map(((listener) => listener())))
+			await Promise.all(listeners.map(((listener) => listener())))
 		}
 	})
 

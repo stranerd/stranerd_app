@@ -1,7 +1,7 @@
 <template>
 	<DashboardLayout>
 		<div>
-			<SetView v-if="rootSet" :key="rootSet.id" :set="rootSet" />
+			<RootSetView v-if="rootSet" :key="rootSet.id" :set="rootSet" />
 			<PageLoading v-if="loading" />
 		</div>
 	</DashboardLayout>
@@ -10,17 +10,17 @@
 import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { useMySets } from '@app/composable/study/sets'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
-import SetView from '@app/components/study/sets/SetView.vue'
+import RootSetView from '@app/components/study/sets/RootSetView.vue'
 
 export default defineComponent({
 	name: 'Study',
 	middleware: ['isAuthenticated'],
-	components: { DashboardLayout, SetView },
+	components: { DashboardLayout, RootSetView },
 	setup () {
-		const { rootSet, sets, error, loading, listener } = useMySets()
+		const { rootSet, error, loading, listener } = useMySets()
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
-		return { rootSet, sets, error, loading }
+		return { rootSet, error, loading }
 	}
 })
 </script>

@@ -1,5 +1,5 @@
 <template>
-	<div class="mt-4">
+	<div>
 		<div class="w-full flex justify-between mb-8">
 			<span class="heading font-bold text-main_dark">
 				Latest questions

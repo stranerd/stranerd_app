@@ -48,7 +48,7 @@ import { formatNumber, pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { useEditState } from '@app/composable/study/state'
 import { FlashCardEntity } from '@modules/study'
-import Tag from '@app/components/study/tags/Tag.vue'
+import Tag from '@app/components/core/Tag.vue'
 
 export default defineComponent({
 	name: 'FlashCardListCard',

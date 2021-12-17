@@ -1,33 +1,30 @@
 <template>
 	<ExploreWrapper>
-		<ExploreTestPrep />
+		<div>
+			<EmptyState v-if="testPreps.length === 0" info=" No available testPreps" />
+			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+				<ExploreTestPrepsList :testPreps="testPreps" />
+				<PageLoading v-if="loading" />
+			</div>
+		</div>
 	</ExploreWrapper>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import ExploreWrapper from '@app/components/study/explore/ExploreWrapper.vue'
-import ExploreTestPrep from '@app/components/study/explore/ExploreTestPreps.vue'
+import { useTestPrepList } from '@app/composable/study/testPreps'
+import ExploreTestPrepsList from '@app/components/study/testPreps/ExploreTestPrepsList.vue'
 
 export default defineComponent({
-	name: 'Explore TestPreps',
+	name: 'ExploreTestPreps',
 	displayName: 'Explore',
-	components: { ExploreWrapper, ExploreTestPrep }
+	components: { ExploreWrapper, ExploreTestPrepsList },
+	setup () {
+		const { testPreps, listener, loading, error } = useTestPrepList()
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+		return { testPreps, loading, error }
+	}
 })
 </script>
-
-<style lang="scss" scoped>
-	.ion-iten-transparent {
-		--background: transparent;
-	}
-
-	ion-searchbar {
-		--box-shadow: 'none';
-		--border-radius: 0.5rem;
-	}
-
-	.searchbar-input.sc-ion-searchbar-md {
-		padding-top: 12px;
-		padding-bottom: 12px;
-	}
-</style>
