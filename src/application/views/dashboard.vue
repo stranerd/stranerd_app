@@ -9,7 +9,7 @@
 				<TestPrepList :suggested="true" class="mt-16" />
 				<RecentQuestions class="mt-16" />
 				<NotesList :suggested="true" class="mt-16" />
-				<VideosList :suggested="true" class="mt-16" />
+				<VideosList :suggested="true" class="hidden mt-16" />
 				<FlashCardList :suggested="true" class="mt-16" />
 				<StudyTools class="mt-16 hidden" />
 			</div>

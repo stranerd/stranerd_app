@@ -1,11 +1,9 @@
 <template>
 	<ExploreWrapper>
 		<div>
-			<EmptyState v-if="testPreps.length === 0" info=" No available testPreps" />
-			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-				<ExploreTestPrepsList :testPreps="testPreps" />
-				<PageLoading v-if="loading" />
-			</div>
+			<EmptyState v-if="testPreps.length === 0" info="No available testPreps" />
+			<ExploreTestPrepsList :testPreps="testPreps" />
+			<PageLoading v-if="loading" />
 		</div>
 	</ExploreWrapper>
 </template>

@@ -16,13 +16,11 @@
 				</div>
 			</div>
 		</div>
-		<template v-if="meta.length === 0">
-			<div class="py-3 px-3">
-				<empty-state :info="'No chats found. Go message a nerd'"></empty-state>
-			</div>
-		</template>
+		<div v-if="meta.length === 0" class="py-3 px-3">
+			<EmptyState :info="'No chats found. Go message a nerd'" />
+		</div>
 		<div class="flex-grow overflow-y-scroll pb-11">
-			<each-chat v-for="chat in meta" :key="chat.id" :meta="chat"></each-chat>
+			<each-chat v-for="chat in meta" :key="chat.hash" :meta="chat"></each-chat>
 		</div>
 	</div>
 </template>

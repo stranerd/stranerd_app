@@ -20,6 +20,10 @@ export class TestPrepEntity extends BaseEntity {
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
+
+	get isPastQuestionType () {
+		return this.data.type === PrepType.pastQuestion
+	}
 }
 
 type TestPrepConstructorArgs = {

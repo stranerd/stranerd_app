@@ -1,11 +1,9 @@
 <template>
 	<ExploreWrapper>
 		<div>
-			<EmptyState v-if="videos.length === 0" info=" No available videos" />
-			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-				<ExploreVideosList :videos="videos" />
-				<PageLoading v-if="loading" />
-			</div>
+			<EmptyState v-if="videos.length === 0" info="No available videos" />
+			<ExploreVideosList :videos="videos" />
+			<PageLoading v-if="loading" />
 		</div>
 	</ExploreWrapper>
 </template>

@@ -7,7 +7,7 @@
 			<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question" />
 		</template>
 
-		<empty-state v-else
+		<EmptyState v-else
 			:funcParams="question"
 			:info="`No answers yet. <br/>Help ${question.userName} answer this question!`"
 			:onClick="openAnswerModal"

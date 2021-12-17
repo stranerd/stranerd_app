@@ -1,14 +1,11 @@
 <template>
 	<div>
 		<div class="bg-primary w-full flex flex-col justify-between items-center">
-			<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-16">
-				Explore thousands of study materials
+			<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-16 capitalize">
+				{{ set.name }}
 			</ion-text>
-			<ion-searchbar class="max-w-[1054px] lg:w-7/12 !h-16"
-				placeholder="Search by subjects, topics and related keywords"
-				show-cancel-button="never" />
 			<div
-				class="flex justify-center md:text-sm lg:text-base text-faded_gray font-bold  whitespace-normal overflow-x-auto mt-8 md:mt-16 gap-1">
+				class="flex justify-center md:text-sm lg:text-base text-faded_gray font-bold whitespace-normal overflow-x-auto mt-16 gap-1">
 				<router-link :to="`/study/sets/${set.id}/`"
 					class="py-2 mr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
@@ -30,7 +27,7 @@
 					Notes
 				</router-link>
 				<router-link :to="`/study/sets/${set.id}/videos`"
-					class="py-2 mr-3 cursor-pointer"
+					class="py-2 mr-3 cursor-pointer hidden"
 					exact-active-class="border-b-4 text-white border-white">
 					Videos
 				</router-link>

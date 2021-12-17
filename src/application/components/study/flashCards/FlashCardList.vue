@@ -6,7 +6,7 @@
 					FlashCards
 				</ion-text>
 				<ion-badge v-if="suggested" class="uppercase">
-					Suggested
+					Latest
 				</ion-badge>
 			</div>
 
@@ -17,12 +17,11 @@
 		</div>
 
 		<template v-if="flashcards.length === 0">
-			<EmptyState info="No flashcards Available." />
+			<EmptyState info="No flashcards available." />
 		</template>
 		<template v-else>
 			<div class="showcase">
-				<FlashCardListCard v-for="(flashcard, index) in flashcards" :key="flashcard" :flashCard="flashcard"
-					:index="index+1" />
+				<FlashCardListCard v-for="flashcard in flashcards" :key="flashcard" :flashCard="flashcard" />
 			</div>
 		</template>
 	</div>

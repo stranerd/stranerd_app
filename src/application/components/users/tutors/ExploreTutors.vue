@@ -31,12 +31,11 @@
 			<div class="mt-3 md:mt-5 col-span-6 grid grid-cols-12  px-3 gap-4 justify-evenly">
 				<template v-if="tutors.length == 0">
 					<div class="col-span-12 ">
-						<empty-state :info="'No tutors found!'"
-						></empty-state>
+						<EmptyState :info="'No tutors found!'" />
 					</div>
 				</template>
 				<template v-else>
-					<div v-for="(tutor, index) in tutors" :key="index" class="col-span-6 md:col-span-4 lg:col-span-3">
+					<div v-for="tutor in tutors" :key="tutor.hash" class="col-span-6 md:col-span-4 lg:col-span-3">
 						<tutor-card :showButton="true" :tutor="tutor" class="bg-light_gray flex " />
 					</div>
 				</template>

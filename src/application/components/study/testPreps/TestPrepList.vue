@@ -6,7 +6,7 @@
 					Test Preps
 				</ion-text>
 				<ion-badge v-if="suggested" class="uppercase">
-					Suggested
+					Latest
 				</ion-badge>
 			</div>
 
@@ -17,12 +17,12 @@
 		</div>
 
 		<template v-if="testPreps.length === 0">
-			<EmptyState info="No TestPreps Available." />
+			<EmptyState info="No testPreps available." />
 		</template>
 
 		<template v-else>
 			<div class="showcase">
-				<TestPrepCard v-for="(testPrep, index) in testPreps" :key="testPrep" :index="index+1"
+				<TestPrepCard v-for="testPrep in testPreps" :key="testPrep.hash"
 					:testPrep="testPrep" />
 			</div>
 		</template>

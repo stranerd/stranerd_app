@@ -7,7 +7,7 @@
 		<template v-if="answers.length">
 			<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer"></AnswerCard>
 		</template>
-		<empty-state
+		<EmptyState
 			v-else
 			btnText="Go and answer a Question"
 			info="You haven't answered any questions yet, click the button below to answer a question"

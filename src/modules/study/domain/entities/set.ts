@@ -32,7 +32,7 @@ export class SetEntity extends BaseEntity {
 	             }: SetConstructorArgs) {
 		super()
 		this.id = id
-		this.name = name
+		this.name = isRoot ? `${userBio.firstName ?? 'Anon'}'s Study` : name
 		this.isRoot = isRoot
 		this.isPublic = isPublic
 		this.tags = tags

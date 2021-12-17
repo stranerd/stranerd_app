@@ -31,9 +31,9 @@
 
 		<div class="bg-orange w-full lg:h-24 h-[5.25rem] rounded-3xl grid place-items-center">
 			<div class="flex items-center gap-4">
-				<ion-icon :icon="videocam" class="text-white text-2xl" />
+				<ion-icon :icon="folder" class="text-white text-2xl" />
 				<ion-text class="text-white text-2xl">
-					{{ set.saved.videos.length }}
+					{{ sets.length }}
 				</ion-text>
 			</div>
 		</div>
@@ -41,9 +41,10 @@
 </template>
 
 <script lang="ts">
-import { reader, videocam } from 'ionicons/icons'
+import { folder, reader, videocam } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { SetEntity } from '@modules/study'
+import { useMySets } from '@app/composable/study/sets'
 
 export default defineComponent({
 	name: 'SetStats',
@@ -54,7 +55,8 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { reader, videocam }
+		const { normalSets: sets } = useMySets()
+		return { reader, videocam, folder, sets }
 	}
 
 })

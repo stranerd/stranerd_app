@@ -11,7 +11,7 @@
 			</div>
 		</template>
 
-		<empty-state
+		<EmptyState
 			v-else
 			btnText="Go and ask a Question"
 			info="You haven't asked any questions yet, click the button below to ask a question"

@@ -17,7 +17,7 @@
 				</div>
 
 				<div class="w-full max-w-4xl mx-auto bg-white p-6 rounded-xl -mt-10">
-					<empty-state
+					<EmptyState
 						v-if="!notifications.length"
 						btnText="Go To Home"
 						info="You have no notifications yet"
