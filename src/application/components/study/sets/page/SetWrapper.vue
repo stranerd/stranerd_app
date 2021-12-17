@@ -27,7 +27,7 @@
 					Notes
 				</router-link>
 				<router-link :to="`/study/sets/${set.id}/videos`"
-					class="py-2 mr-3 cursor-pointer"
+					class="py-2 mr-3 cursor-pointer hidden"
 					exact-active-class="border-b-4 text-white border-white">
 					Videos
 				</router-link>
