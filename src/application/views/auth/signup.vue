@@ -1,21 +1,15 @@
 <template>
 	<Auth>
 
-		<div class="w-full min-h-full flex ">
-			<div
-				class="gap-3 bg-light_orange w-1/2 lg:flex flex-col  items-center justify-center min-h-full hidden ">
-				<h1 class="text-xl  text-main_dark font-bold ">Join the community!</h1>
-				<span class="text-main_dark">Get study help, learn from tutors, learn with <br>
-					your friends and enjoy new study tools.</span>
-				<img alt="" class="h-[55%]" src="@app/assets/images/auth/signin.png">
+		<div class="w-full md:min-h-[102vh] min-h-[120vh]  h-full flex bg-white">
+			<div class="bg-primary w-7/12 lg:flex flex-col  items-center justify-center h-full hidden  absolute bottom-0">
+				<h1 class="text-5xl  text-white font-extrabold mb-12">Studying has never been easier</h1>
+				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.svg">
 			</div>
 
-			<div class="flex flex-col items-center justify-center lg:w-1/2 w-full max-w-[18rem] mx-auto">
-				<h1 class="text-xl text-main_dark font-bold mb-1 lg:hidden ">Join the community!</h1>
-				<span class="lg:text-main_darktext-main_dark lg:hidden text-icon_inactive mb-8 text-center text-xs">Get study help, learn from tutors, learn with <br>
-					your friends and enjoy new study tools.</span>
-				<h1 class=" lg:text-xl  text-main_dark font-bold mb-5 text-center">Sign Up </h1>
-				<span class="normalText text-red-500 font-semibold"> {{ error }} </span>
+			
+			<div class="flex flex-col items-center justify-center lg:w-5/12 w-full ml-auto">
+				<h1 class="md:text-5xl text-2xl  text-main_dark font-extrabold mb-12 text-center">Sign up today</h1>
 				<div class="h-[65%]">
 					<form
 						@submit.prevent="signup"
@@ -51,7 +45,7 @@
 								class="normalText text-red-500 font-semibold">{{ factory.errors.cPassword }}</span>
 						</div>
 
-						<ion-button class="w-full mb-4" type="submit">SIGN UP
+						<ion-button class="w-full mb-4 !capitalize" type="submit">Sign up
 							<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
 						</ion-button>
 					</form>
@@ -118,26 +112,32 @@ export default defineComponent({
 	}
 
 	ion-input {
-		--background: #F7F7FC !important;
+		--background: #F2F3F5 !important;
 		--padding-start: 1.8rem !important;
 		--padding-end: 1.5rem !important;
-		--padding-top: .69rem !important;
-		--padding-bottom: .69rem !important;
+		--padding-top: 1.2rem !important;
+		--padding-bottom: 1.2rem !important;
 		--color: $color-dark !important;
-		--placeholder-color: $color-dark !important;
+	--placeholder-color: $color-dark !important;
 		border-radius: 10px;
+		margin-bottom: 1.25rem;
+		width: 420px;
+		max-width: 90vw !important;
 	}
 
 
 	ion-button {
 		--background: #546DD3;
-		--border-radius: .4rem;
+		--border-radius: .75rem;
 		--color: white;
 		--background-hover: white;
-		--padding-top: 1rem;
-		--padding-bottom: 1rem;
-		height: 2.75rem;
+		--padding-top: 1.4rem !important;
+		--padding-bottom: 1.4rem !important;
+		height: 3.5rem;
+		font-size: 24px;
+		font-weight: 700;
 		transition: all .5s ease-in-out;
+		max-width: 90vw !important;
 
 	}
 

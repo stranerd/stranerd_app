@@ -29,13 +29,13 @@
 			<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full']" @click="flipped = !flipped">
 				<!--  front side  -->
 				<section
-					class="front h-96 flex  items-center text-center justify-center  custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto">
+					class="front h-96 flex  items-center text-center justify-center  custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
 					<h2>{{ flashCard?.set[page].question }}</h2>
 				</section>
 
 				<!--  back side  -->
 				<section
-					class="back h-96 flex  items-center text-center justify-center  custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto">
+					class="back h-96 flex  items-center text-center justify-center  custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
 					<h2 v-if="flipped"> {{ flashCard?.set[page].answer }}</h2>
 				</section>
 			</div>
@@ -242,10 +242,10 @@ export default defineComponent({
 
 
 	.divx {
-		background: white;
+		background: #F2F3F5;
 		border-radius: 12px;
 		position: relative;
-		disPlaying: flex;
+		display: flex;
 		justify-content: center;
 		align-items: center;
 	}

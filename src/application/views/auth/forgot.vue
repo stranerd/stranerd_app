@@ -1,6 +1,6 @@
 <template>
 	<Auth>
-		<div class="w-full mt-10 h-full flex flex-col items-center justify-start ">
+		<div class="w-full mt-10 h-full flex flex-col items-center justify-start bg-white">
 
 			<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
 				<h1 class="text-xl text-main_dark font-bold mb-2 ">Forgot Password</h1>
@@ -58,31 +58,32 @@ export default defineComponent({
 	}
 
 	ion-input {
-		--background: #fff !important;
+		--background: #F2F3F5 !important;
 		--padding-start: 1.8rem !important;
 		--padding-end: 1.5rem !important;
-		--padding-top: .69rem !important;
-		--padding-bottom: .69rem !important;
+		--padding-top: 1.2rem !important;
+		--padding-bottom: 1.2rem !important;
 		--color: $color-dark !important;
-		--placeholder-color: $color-dark !important;
+	--placeholder-color: $color-dark !important;
 		border-radius: 10px;
-
-		@media screen and (max-width: 1024px) {
-			--background: #F7F7FC !important;
-		}
+		margin-bottom: 1.25rem;
+		width: 420px;
+		max-width: 90vw !important;
 	}
 
 
 	ion-button {
 		--background: #546DD3;
-		--border-radius: .4rem;
+		--border-radius: .75rem;
 		--color: white;
 		--background-hover: white;
-		--padding-top: 1rem;
-		--padding-bottom: 1rem;
-		height: 2.75rem;
+		--padding-top: 1.4rem !important;
+		--padding-bottom: 1.4rem !important;
+		height: 3.5rem;
+		font-size: 24px;
+		font-weight: 700;
 		transition: all .5s ease-in-out;
+		max-width: 90vw !important;
 
 	}
-
 </style>
