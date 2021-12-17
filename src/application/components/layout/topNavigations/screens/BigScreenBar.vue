@@ -181,7 +181,7 @@ export default defineComponent({
 		const { user, signout } = useAuth()
 		const showSearch = ref(false)
 
-		const createSet = ()=>{
+		const createSet = () => {
 			useStudyModal().openCreateSet()
 		}
 
@@ -190,7 +190,7 @@ export default defineComponent({
 			setMenuPopover, setStudyPopover, createSet,
 			event, addCircle, helpCircle, chevronDown,
 			folder, library, settings, logOut,
-			person, podium,	user, notifications
+			person, podium, user, notifications
 		}
 	}
 

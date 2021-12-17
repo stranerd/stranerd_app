@@ -16,7 +16,7 @@
 					style="opacity:0; overflow:hidden; position:absolute;"
 					type="file"
 					@change="catchAttachments" />
-				<label for="images" class="cursor-pointer">
+				<label class="cursor-pointer" for="images">
 					<ion-icon
 						:icon="image"
 						class="!text-4xl text-gray"
@@ -25,16 +25,17 @@
 				</label>
 
 
-				<IonInput v-model="tag" class="w-1/4 font-medium bg-new_gray text-main_dark px-3" placeholder="Add related tags">
+				<IonInput v-model="tag" class="w-1/4 font-medium bg-new_gray text-main_dark px-3"
+					placeholder="Add related tags">
 				</IonInput>
 			</div>
-	
 
-			<SelectSubject v-model:subject-id="factory.subjectId" :show-all="false" class="w-full bg-new_gray"/>
+
+			<SelectSubject v-model:subject-id="factory.subjectId" :show-all="false" class="w-full bg-new_gray" />
 
 		</div>
 
-			
+
 		<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
 			<span v-for="tag in factory.tags" :key="tag">
 				<span
@@ -75,7 +76,6 @@ import { useMultipleFileInputs, useTags } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import { useQuestionModal } from '@app/composable/core/modals'
-
 
 export default defineComponent({
 	name: 'QuestionForm',

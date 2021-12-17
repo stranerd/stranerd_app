@@ -30,6 +30,7 @@
 	</router-link>
 </template>
 
+
 <script lang="ts">
 import { calendar, ellipsisVertical, play } from 'ionicons/icons'
 import { defineComponent } from 'vue'
@@ -53,6 +54,5 @@ export default defineComponent({
 <style lang="scss" scoped>
 	ion-card {
 		box-shadow: none !important;
-
 	}
 </style>

@@ -13,7 +13,7 @@
 				<template v-else>
 					<div v-for="(question,index) in questions" :key="index"
 						:class="0 === index ? 'w-full md:px-2 mb-5' :  'md:w-1/2 lg:w-full w-full md:px-2 md:py-3 mb-4 md:mb-0'">
-						<QuestionListCard  :question="question"
+						<QuestionListCard :question="question"
 						/>
 					</div>
 

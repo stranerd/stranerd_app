@@ -17,7 +17,7 @@
 				</div>
 			</div>
 		</div>
-	
+
 
 		<LeaderboardList :key="time" :time="time" class="max-w-4xl mx-auto" />
 	</div>

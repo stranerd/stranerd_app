@@ -114,10 +114,11 @@ import {
 	chevronBack,
 	chevronForward,
 	contract,
+	pause,
 	pencil,
 	play,
 	scan,
-	shareSocial, pause
+	shareSocial
 } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openFlashCardEditModal, useFlashCard } from '@app/composable/study/flashCards'

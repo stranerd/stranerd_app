@@ -93,7 +93,8 @@
 	.headerShadow {
 		box-shadow: 0px 0px 15px 5px rgba(139, 158, 177, 0.1);
 	}
-	.showcase{
-		@apply grid  lg:grid-cols-2 mmd:!grid-cols-3 md:grid-cols-3 sm:!grid-cols-2 grid-cols-1 justify-between gap-4 
+
+	.showcase {
+		@apply grid  lg:grid-cols-2 mmd:!grid-cols-3 md:grid-cols-3 sm:!grid-cols-2 grid-cols-1 justify-between gap-4
 	}
 }

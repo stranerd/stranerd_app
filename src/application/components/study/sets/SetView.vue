@@ -4,8 +4,8 @@
 			<SetHeader :set="set" />
 		</div>
 		<div class="px-4 pb-8">
-			<SetStats :set="set" class="mt-16" />
-			<div class="mt-16">
+			<SetStats :set="set" class="mt-3 md:mt-8" />
+			<div class="mt-3 md:mt-8">
 				<div class="w-full flex justify-between mb-4">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text>Test Preps</ion-text>
@@ -18,7 +18,7 @@
 				</div>
 				<TestPrepsList :set="set" :sliced="true" :testPreps="testPreps" />
 			</div>
-			<div class="mt-16">
+			<div class="mt-3 md:mt-8">
 				<div class="w-full flex justify-between mb-4">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text>FlashCards</ion-text>
@@ -31,7 +31,7 @@
 				</div>
 				<FlashCardsList :flashCards="flashCards" :set="set" :sliced="true" />
 			</div>
-			<div class="mt-16">
+			<div class="mt-3 md:mt-8">
 				<div class="w-full flex justify-between mb-4">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text>Notes</ion-text>
@@ -44,7 +44,7 @@
 				</div>
 				<NotesList :notes="notes" :set="set" :sliced="true" />
 			</div>
-			<div class="mt-16">
+			<div class="mt-3 md:mt-8">
 				<div class="w-full flex justify-between mb-4">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text>Videos</ion-text>
@@ -57,7 +57,7 @@
 				</div>
 				<VideosList :set="set" :sliced="true" :videos="videos" />
 			</div>
-			<div class="mt-16">
+			<div class="mt-3 md:mt-8">
 				<div class="w-full flex justify-between mb-4">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text>Study sets</ion-text>

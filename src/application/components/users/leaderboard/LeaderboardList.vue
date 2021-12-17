@@ -28,7 +28,7 @@
 						<span>
 							{{ person.bio.fullName }}
 						</span>
-						<Tag :tag="person.rank.id"   :secondary="true"/>
+						<Tag :secondary="true" :tag="person.rank.id" />
 
 					</div>
 					<div class="w-3/12 font-bold text-right text-primary">
@@ -47,7 +47,7 @@
 					<span>
 						{{ user.bio.fullName }}
 					</span>
-					<Tag :tag="user.rank.id" :secondary="true"/>
+					<Tag :secondary="true" :tag="user.rank.id" />
 				</div>
 				<div class="w-3/12 text-right text-primary font-bold">
 					<span>{{ user.account.rankings[time] }}</span>
@@ -79,7 +79,6 @@ export default defineComponent({
 		}
 	},
 
-	
 	setup (props) {
 		const { users, loading, hasAuthUser, listener } = useLeaderboardList(props.time)
 		const { user, id } = useAuth()

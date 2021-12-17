@@ -7,9 +7,9 @@
 			</div>
 			<Fab />
 		</IonContent>
-	
+
 		<BottomNav class="mt-auto" />
-	
+
 	</IonPage>
 </template>
 

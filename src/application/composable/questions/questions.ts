@@ -27,7 +27,7 @@ const answeredChoices = [
 	// { val: Answered.BestAnswered, key: 'Best Answered' },
 	{ val: Answered.All, key: 'All' },
 	{ val: Answered.Answered, key: 'Answered' },
-	{ val: Answered.Unanswered, key: 'Unanswered' },
+	{ val: Answered.Unanswered, key: 'Unanswered' }
 
 ]
 const global = {

@@ -4,7 +4,8 @@
 			Give your answer
 		</h2>
 
-		<div class="lg:mt-9 mt-5 py-3 px-4 flex flex-row items-center bg-light_gray rounded-lg border border-faded_gray ">
+		<div
+			class="lg:mt-9 mt-5 py-3 px-4 flex flex-row items-center bg-light_gray rounded-lg border border-faded_gray ">
 			<span class="text-main_dark font-bold">Main answer - </span>
 			<ion-input v-model="factory.title" class="w-full px-2 ml-1 font-medium" placeholder="Keep it short!">
 			</ion-input>
