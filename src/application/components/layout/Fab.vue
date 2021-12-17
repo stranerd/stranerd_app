@@ -38,7 +38,7 @@
 				</ion-label>
 			</div>
 			<router-link class="relative"
-				to="/study/preps/explore">
+				to="/study/explore">
 				<ion-fab-button color="secondary" size="small">
 					<ion-icon :icon="compass" class="text-xl"></ion-icon>
 				</ion-fab-button>

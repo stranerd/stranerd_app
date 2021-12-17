@@ -1,11 +1,13 @@
 <template>
 	<div>
-		<div class="bg-primary w-full flex flex-col justify-between items-center">
-			<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-16 capitalize">
-				{{ set.name }}
-			</ion-text>
+		<div class="bg-primary w-full  flex flex-col items-center pt-5 md:pt-12 rounded-b-2xl md:rounded-none mb-4">
+			<div class="flex flex-col w-full justify-center items-center px-4">
+				<ion-text class="heading lg:text-2xl font-bold text-white text-center  mb-3 capitalize">
+					{{ set.name }}
+				</ion-text>
+			</div>
 			<div
-				class="flex justify-center md:text-sm lg:text-base text-faded_gray font-bold whitespace-normal overflow-x-auto mt-16 gap-1">
+				class="mb-0.5 mt-8 md:mt-12   justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full  lg:px-3 text-xs mx-auto text-faded_gray font-bold  whitespace-normal overflow-x-auto">
 				<router-link :to="`/study/sets/${set.id}/`"
 					class="py-2 mr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
@@ -16,7 +18,7 @@
 					exact-active-class="border-b-4 text-white border-white">
 					TestPreps
 				</router-link>
-				<router-link :to="`/study/sets/${set.id}/flashCards`"
+				<router-link :to="`/study/sets/${set.id}/flashCards`" 
 					class="py-2 mr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
 					FlashCards
