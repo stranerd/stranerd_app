@@ -1,6 +1,7 @@
 <template>
 	<!-- fab placed to the bottom start -->
-	<ion-fab slot="fixed"  :class="[$route.name == 'TakeTest' ? 'hidden':'', `lg:hidden active`]" horizontal="end" vertical="bottom">
+	<ion-fab slot="fixed" :class="[$route.name == 'TakeTest' ? 'hidden':'', `lg:hidden active`]" horizontal="end"
+		vertical="bottom">
 
 		<ion-fab-button :activated="active" :class="[active ? 'active':'', 'z-50 relative']" @click="active = !active">
 			<ion-icon :icon="add"></ion-icon>
@@ -18,7 +19,7 @@
 			</router-link> -->
 			<router-link class="relative"
 				to="/study/flashCards/create">
-				<ion-fab-button  color="success" size="small">
+				<ion-fab-button color="success" size="small">
 					<img alt="" class="w-4" src="@app/assets/images/icons/flashCard-purple.svg">
 				</ion-fab-button>
 				<ion-label
@@ -28,7 +29,7 @@
 			</router-link>
 			<div class="relative"
 				@click="openAskQuestion">
-				<ion-fab-button  color="tertiary" size="small">
+				<ion-fab-button color="tertiary" size="small">
 					<ion-icon :icon="helpCircle" class="text-xl"></ion-icon>
 				</ion-fab-button>
 				<ion-label
@@ -38,7 +39,7 @@
 			</div>
 			<router-link class="relative"
 				to="/study/preps/explore">
-				<ion-fab-button  color="secondary" size="small">
+				<ion-fab-button color="secondary" size="small">
 					<ion-icon :icon="compass" class="text-xl"></ion-icon>
 				</ion-fab-button>
 				<ion-label
@@ -53,7 +54,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonFab, IonFabButton, IonFabList, IonLabel } from '@ionic/vue'
-import { add, folder, helpCircle, compass } from 'ionicons/icons'
+import { add, compass, folder, helpCircle } from 'ionicons/icons'
 import { useQuestionModal } from '@app/composable/core/modals'
 
 export default defineComponent({
@@ -73,12 +74,13 @@ export default defineComponent({
 
 </script>
 
-<style >
-.orange{
-	--background: #FFA84B !important;
-	--color: #ffffff !important;
-}
-	ion-fab {	
+<style>
+	.orange {
+		--background: #FFA84B !important;
+		--color: #ffffff !important;
+	}
+
+	ion-fab {
 		--background: #546DD3;
 		--background-activated: #FF6666 !important;
 		--background-focused: #FF6666 !important;

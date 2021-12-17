@@ -1,35 +1,30 @@
 <template>
 	<ExploreWrapper>
-		<div class="p-4 md:w-8/12 w-full mx-auto">
-			<ExploreFlashcards />
+		<div>
+			<EmptyState v-if="flashCards.length === 0" info=" No available flashCards" />
+			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+				<ExploreFlashCardsList :flashCards="flashCards" />
+				<PageLoading v-if="loading" />
+			</div>
 		</div>
 	</ExploreWrapper>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import ExploreWrapper from '@app/components/study/explore/ExploreWrapper.vue'
-import ExploreFlashcards from '@app/components/study/explore/ExploreFlashcards.vue'
+import { useFlashCardList } from '@app/composable/study/flashCards'
+import ExploreFlashCardsList from '@app/components/study/flashCards/ExploreFlashCardsList.vue'
 
 export default defineComponent({
-	name: 'Explore FlashCard',
+	name: 'ExploreFlashCards',
 	displayName: 'Explore',
-	components: { ExploreWrapper, ExploreFlashcards }
+	components: { ExploreWrapper, ExploreFlashCardsList },
+	setup () {
+		const { flashCards, listener, loading, error } = useFlashCardList()
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+		return { flashCards, loading, error }
+	}
 })
 </script>
-
-<style lang="scss" scoped>
-	.ion-iten-transparent {
-		--background: transparent;
-	}
-
-	ion-searchbar {
-		--box-shadow: 'none';
-		--border-radius: 0.5rem;
-	}
-
-	.searchbar-input.sc-ion-searchbar-md {
-		padding-top: 12px;
-		padding-bottom: 12px;
-	}
-</style>

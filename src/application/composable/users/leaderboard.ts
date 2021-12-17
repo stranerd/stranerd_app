@@ -40,8 +40,8 @@ export const useLeaderboardList = (key: RankingTimes) => {
 	}
 	const listener = useListener(async () => () => {
 	})
-	const hasAuthUser = computed({
-		get: () => !!global[key].users.value.find((user) => user.id === id.value),
+	const hasNoAuthUser = computed({
+		get: () => !global[key].users.value.find((user) => user.id === id.value),
 		set: () => {
 		}
 	})
@@ -50,5 +50,5 @@ export const useLeaderboardList = (key: RankingTimes) => {
 		if (!global[key].fetched.value && !global[key].loading.value) await fetchUsers()
 	})
 
-	return { ...global[key], listener, hasAuthUser }
+	return { ...global[key], listener, hasNoAuthUser }
 }

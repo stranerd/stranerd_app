@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<div class="bg-primary w-full  h-auto flex flex-col justify-between items-center md:pt-12 pt-4 pb-1 md:rounded-none rounded-b-xl">
+		<div
+			class="bg-primary w-full  h-auto flex flex-col justify-between items-center md:pt-12 pt-4 pb-1 md:rounded-none rounded-b-xl">
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-5 mb-6 hidden md:block">
 				{{ title }}
 			</ion-text>
@@ -9,8 +10,8 @@
 					TITLE
 				</ion-text>
 				<ion-input v-model="factory.title"
-					mode="md"
 					class="max-w-[1054px]  !h-14 "
+					mode="md"
 					placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
 					show-cancel-button="never"
 				></ion-input>
@@ -191,10 +192,10 @@ export default defineComponent({
 		--box-shadow: 'none';
 		--border-radius: 0.5rem;
 	}
-	
-	ion-label{
-		@media (max-width: 640px){
-		font-size: 12px !important;
+
+	ion-label {
+		@media (max-width: 640px) {
+			font-size: 12px !important;
 		}
 	}
 

@@ -41,7 +41,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonButtons, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue'
-import { chevronBack, close, notifications, search, ellipsisVertical } from 'ionicons/icons'
+import { chevronBack, close, ellipsisVertical, notifications, search } from 'ionicons/icons'
 import BigScreenBar from './screens/BigScreenBar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
 
@@ -54,7 +54,7 @@ export default defineComponent({
 			showSearch.value = !showSearch.value
 		}
 		return {
-			close, chevronBack,ellipsisVertical,
+			close, chevronBack, ellipsisVertical,
 			showSearch, toggleSearch,
 			search, notifications
 		}

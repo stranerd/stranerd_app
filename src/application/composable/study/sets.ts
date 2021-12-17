@@ -2,6 +2,7 @@ import { computed, onMounted, Ref, ref } from 'vue'
 import {
 	AddSet,
 	DeleteSetProp,
+	FindSet,
 	FlashCardEntity,
 	GetFlashCardsInSet,
 	GetNotesInSet,
@@ -25,7 +26,7 @@ import {
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
-import { capitalize, copyObject } from '@utils/commons'
+import { capitalize } from '@utils/commons'
 import { useStudyModal } from '@app/composable/core/modals'
 
 type SaveKey = keyof SetEntity['saved']
@@ -162,6 +163,53 @@ export const useMySets = () => {
 	return { ...myGlobal, listener, rootSet, normalSets }
 }
 
+export const useSetById = (setId: string) => {
+	const { error, setError } = useErrorHandler()
+	const { loading, setLoading } = useLoadingHandler()
+	const set = computed({
+		get: () => global.sets.value.find((q) => q.id === setId) ?? null,
+		set: (q) => {
+			if (q) pushToSetList(q)
+		}
+	})
+
+	const listener = useListener(async () => {
+		return ListenToSet.call(setId, {
+			created: async (entity) => {
+				pushToSetList(entity)
+			},
+			updated: async (entity) => {
+				pushToSetList(entity)
+			},
+			deleted: async (entity) => {
+				const index = global.sets.value.findIndex((q) => q.id === setId)
+				if (index > -1) global.sets.value.splice(index, 1)
+			}
+		})
+	})
+
+	const fetchSet = async () => {
+		await setError('')
+		try {
+			await setLoading(true)
+			let set = global.sets.value.find((q) => q.id === setId) ?? null
+			if (set) {
+				await setLoading(false)
+				return
+			}
+			set = await FindSet.call(setId)
+			if (set) unshiftToSetList(set)
+		} catch (error) {
+			await setError(error)
+		}
+		await setLoading(false)
+	}
+
+	onMounted(fetchSet)
+
+	return { error, loading, set, listener }
+}
+
 export const useSet = (set: SetEntity) => {
 	if (setGlobal[set.id] === undefined) setGlobal[set.id] = {
 		notes: ref([]),
@@ -193,7 +241,7 @@ export const useSet = (set: SetEntity) => {
 	}
 
 	const listener = useListener(async () => {
-		const startPropListeners = async () => await Promise.all([
+		const listeners = await Promise.all([
 			ListenToNotesInSet.call(set.saved.notes, {
 				created: async (entity) => {
 					setGlobal[set.id].notes.value.push(entity)
@@ -251,28 +299,8 @@ export const useSet = (set: SetEntity) => {
 				}
 			})
 		])
-		let listeners = await startPropListeners()
-		const setListener = await ListenToSet.call(set.id, {
-			created: async (entity) => {
-				unshiftToSetList(entity)
-				set = copyObject(entity)
-				await Promise.all(listeners.map(((listener) => listener())))
-				listeners = await startPropListeners()
-			},
-			updated: async (entity) => {
-				unshiftToSetList(entity)
-				set = copyObject(entity)
-				await Promise.all(listeners.map(((listener) => listener())))
-				listeners = await startPropListeners()
-			},
-			deleted: async (entity) => {
-				const index = global.sets.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.sets.value.splice(index, 1)
-				await Promise.all(listeners.map(((listener) => listener())))
-			}
-		})
 		return async () => {
-			await Promise.all([...listeners, setListener].map(((listener) => listener())))
+			await Promise.all(listeners.map(((listener) => listener())))
 		}
 	})
 

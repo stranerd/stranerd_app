@@ -41,7 +41,7 @@ import { calendar, ellipsisVertical, play } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import { useCreateTest } from '@app/composable/study/tests'
-import Tag from '@app/components/study/tags/Tag.vue'
+import Tag from '@app/components/core/Tag.vue'
 
 export default defineComponent({
 	name: 'TestPrepListCard',

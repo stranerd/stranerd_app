@@ -5,19 +5,16 @@
 
 			<div class="w-full flex flex-col gap-3">
 				<ion-text class="text-main_dark font-bold">
-					Answer 
+					Answer
 
 					<span class="text-gray">
-						({{ formatTime(answer.createdAt) }}) 
+						({{ formatTime(answer.createdAt) }})
 					</span>
 				</ion-text>
-				<router-link :to="`/questions/${answer.questionId}#${answer.id}`" >
+				<router-link :to="`/questions/${answer.questionId}#${answer.id}`">
 					{{ answer.trimmedTitle }}
 				</router-link>
 			</div>
-		
-
-		
 
 
 		</div>
@@ -32,7 +29,6 @@ import { AnswerEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 // import { useUserQuestionList } from '@app/composable/users/user/questions'
 // import Subject from '../subjects/Subject.vue'
-
 
 export default defineComponent({
 	// components: { Subject },
@@ -53,8 +49,8 @@ export default defineComponent({
 
 		return {
 			// questions, subjectId,
-			formatTime,	arrowBackOutline,arrowRedo,	shareSocial,
-			chevronDown,thumbsDown,	thumbsUp, star,
+			formatTime, arrowBackOutline, arrowRedo, shareSocial,
+			chevronDown, thumbsDown, thumbsUp, star,
 			send
 		}
 	}

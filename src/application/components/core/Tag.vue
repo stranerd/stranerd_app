@@ -56,8 +56,5 @@ export default defineComponent({
 			colors, bgColors, randomNumber
 		}
 	}
-
 })
 </script>
-
-

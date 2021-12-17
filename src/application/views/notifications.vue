@@ -15,7 +15,7 @@
 					</div>
 
 				</div>
-			
+
 				<div class="w-full max-w-4xl mx-auto bg-white p-6 rounded-xl -mt-10">
 					<empty-state
 						v-if="!notifications.length"
@@ -33,9 +33,7 @@
 						/>
 					</template>
 				</div>
-		
 
-				
 
 				<div v-if="hasMore" class="text-center py-2 text-18 text-primary-dark">
 					<a @click.prevent="fetchOlderNotifications">Load More</a>

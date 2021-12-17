@@ -58,8 +58,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonFooter, IonIcon, IonToolbar } from '@ionic/vue'
-import { add, book, calendarClear, chatbubble, helpCircle, home, people, notifications } from 'ionicons/icons'
-import {useRoute} from 'vue-router'
+import { add, book, calendarClear, chatbubble, helpCircle, home, notifications, people } from 'ionicons/icons'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	components: { IonFooter, IonIcon, IonToolbar },
@@ -69,7 +69,7 @@ export default defineComponent({
 
 		return {
 			routeName, home, book, helpCircle,
-			people,	notifications,	chatbubble,	add,
+			people, notifications, chatbubble, add,
 			calendarClear
 		}
 	}

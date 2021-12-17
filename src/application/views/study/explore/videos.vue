@@ -1,36 +1,30 @@
 <template>
 	<ExploreWrapper>
-		<div class="p-4 md:w-8/12 w-full mx-auto">
-			<ExploreVideos />
+		<div>
+			<EmptyState v-if="videos.length === 0" info=" No available videos" />
+			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+				<ExploreVideosList :videos="videos" />
+				<PageLoading v-if="loading" />
+			</div>
 		</div>
 	</ExploreWrapper>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import ExploreWrapper from '@app/components/study/explore/ExploreWrapper.vue'
-import ExploreVideos from '@app/components/study/explore/ExploreVideos.vue'
+import { useVideoList } from '@app/composable/study/videos'
+import ExploreVideosList from '@app/components/study/videos/ExploreVideosList.vue'
 
 export default defineComponent({
-	name: 'Explore Videos',
+	name: 'ExploreVideos',
 	displayName: 'Explore',
-	components: { ExploreWrapper, ExploreVideos }
-
+	components: { ExploreWrapper, ExploreVideosList },
+	setup () {
+		const { videos, listener, loading, error } = useVideoList()
+		onMounted(listener.startListener)
+		onBeforeUnmount(listener.closeListener)
+		return { videos, loading, error }
+	}
 })
 </script>
-
-<style lang="scss" scoped>
-	.ion-iten-transparent {
-		--background: transparent;
-	}
-
-	ion-searchbar {
-		--box-shadow: 'none';
-		--border-radius: 0.5rem;
-	}
-
-	.searchbar-input.sc-ion-searchbar-md {
-		padding-top: 12px;
-		padding-bottom: 12px;
-	}
-</style>

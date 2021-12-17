@@ -1,11 +1,11 @@
 <template>
 	<div>
 		<template v-if="filtered.length === 0">
-			<EmptyState info="No notes saved." />
+			<EmptyState info="No flashCards saved." />
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-				<NoteListCard v-for="note in filtered" :key="note.hash" :note="note" />
+				<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard" />
 			</div>
 		</template>
 	</div>
@@ -13,19 +13,19 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
-import { NoteEntity, SetEntity } from '@modules/study'
+import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
+import { FlashCardEntity, SetEntity } from '@modules/study'
 
 export default defineComponent({
-	name: 'SetNotesList',
-	components: { NoteListCard },
+	name: 'SetFlashCardsList',
+	components: { FlashCardListCard },
 	props: {
 		set: {
 			type: SetEntity,
 			required: true
 		},
-		notes: {
-			type: Array as PropType<NoteEntity[]>,
+		flashCards: {
+			type: Array as PropType<FlashCardEntity[]>,
 			required: true
 		},
 		sliced: {
@@ -35,7 +35,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const filtered = computed(() => props.notes.slice(0, props.sliced ? 6 : undefined))
+		const filtered = computed(() => props.flashCards.slice(0, props.sliced ? 6 : undefined))
 		return { filtered }
 	}
 })

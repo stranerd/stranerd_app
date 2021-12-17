@@ -11,7 +11,7 @@
 				<ion-text class="text-gray font-bold mb-2  text-xs lg:text-base">
 					Main answer
 				</ion-text>
-				<span v-html="answer.title" class=" text-xs lg:text-base"/>
+				<span class=" text-xs lg:text-base" v-html="answer.title" />
 
 			</div>
 
@@ -19,7 +19,7 @@
 				<ion-text class="text-gray font-bold mb-2  text-xs lg:text-base">
 					Explanation
 				</ion-text>
-				<span v-html="answer.body" class=" text-xs lg:text-base" />
+				<span class=" text-xs lg:text-base" v-html="answer.body" />
 				<div v-if="answer.attachments" class="col-span-12 py-3">
 					<photo-list :photos="answer?.attachments"></photo-list>
 				</div>
@@ -48,7 +48,8 @@
 			</div>
 
 			<div class="mt-6 p-3  flex flex-row items-center border-faded_gray border rounded-xl">
-				<ion-textarea :autoGrow="true" v-model="commentFactory.body" :rows="1" class="px-1  focus:outline-none placeholder-gray-400 mt-0 pt-0"
+				<ion-textarea v-model="commentFactory.body" :autoGrow="true" :rows="1"
+					class="px-1  focus:outline-none placeholder-gray-400 mt-0 pt-0"
 					placeholder="Add comment" />
 				<IonIcon :icon="send" class="text-[22px] mr-2 text-primary cursor-pointer" @click="createComment" />
 			</div>
@@ -61,13 +62,13 @@
 				{{ comment.body }}
 			</ion-text>
 		</div>
-	
+
 	</div>
 	<page-loading v-if="loading || commentLoading" />
 </template>
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue'
-import { IonTextarea, IonIcon } from '@ionic/vue'
+import { IonIcon, IonTextarea } from '@ionic/vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
 import {
 	arrowBackOutline,
@@ -90,7 +91,7 @@ import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'AnswerListCard',
-	components: { IonTextarea,IonIcon, Avatar, PhotoList, PageLoading },
+	components: { IonTextarea, IonIcon, Avatar, PhotoList, PageLoading },
 	props: {
 		answer: {
 			type: AnswerEntity as PropType<AnswerEntity>,
@@ -150,9 +151,9 @@ export default defineComponent({
 
 
 <style scoped>
-ion-textarea{
-	--background: transparent;
-	--padding-bottom:0;
-	--padding-top:0;
-}
+	ion-textarea {
+		--background: transparent;
+		--padding-bottom: 0;
+		--padding-top: 0;
+	}
 </style>
