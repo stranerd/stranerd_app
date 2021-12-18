@@ -3,6 +3,9 @@ import { definePlugin } from '@app/plugins/index'
 import { useAuth } from '@app/composable/auth/auth'
 
 export const ipAddressGetter = definePlugin(async () => {
+	// TODO: Reactivate if currency functionality is returned
+	return
+
 	const geopluginApiSite = 'https://ssl.geoplugin.net/json.gp?k=5c113cbeb772aab6'
 	const res = await new HttpClient('').get<{}, any>(geopluginApiSite, {}).catch(() => null)
 	if (!res) return

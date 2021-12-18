@@ -44,6 +44,7 @@ export default defineComponent({
 	name: 'StartTimedTest',
 	displayName: 'Test Preps',
 	components: { Justified, Institution },
+	middlewares: ['isAuthenticated'],
 	setup () {
 		const { institutionId } = useRoute().params
 		const { groupedByInstitution } = useTestPrepList()

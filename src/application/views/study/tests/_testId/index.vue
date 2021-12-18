@@ -13,6 +13,6 @@ import { IonContent, IonPage } from '@ionic/vue'
 export default defineComponent({
 	name: 'TestIndex',
 	components: { IonContent, IonPage },
-	middlewares: [async ({ to }) => `/study/tests/${to.params.testId}/take`]
+	middlewares: ['isAuthenticated', async ({ to }) => `/study/tests/${to.params.testId}/take`]
 })
 </script>

@@ -20,7 +20,6 @@
 	</div>
 </template>
 
-
 <script lang="ts">
 import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
 import { Pagination } from 'swiper'
@@ -126,7 +125,6 @@ export default {
 	}
 }
 </script>
-
 
 <style>
 	.swiper-pagination-bullet {

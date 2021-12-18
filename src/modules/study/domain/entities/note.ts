@@ -1,5 +1,5 @@
 import { BaseEntity, Media } from '@modules/core'
-import { UserBio } from '@modules/users'
+import { generateDefaultBio, UserBio } from '@modules/users'
 
 export class NoteEntity extends BaseEntity {
 	public readonly id: string
@@ -35,7 +35,7 @@ export class NoteEntity extends BaseEntity {
 		this.description = description
 		this.tags = tags
 		this.userId = userId
-		this.userBio = userBio
+		this.userBio = generateDefaultBio(userBio)
 		this.isHosted = isHosted
 		this.link = link
 		this.media = media

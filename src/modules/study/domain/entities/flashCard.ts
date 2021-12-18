@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { UserBio } from '@modules/users'
+import { generateDefaultBio, UserBio } from '@modules/users'
 
 export class FlashCardEntity extends BaseEntity {
 	public readonly id: string
@@ -30,7 +30,7 @@ export class FlashCardEntity extends BaseEntity {
 		this.set = set
 		this.tags = tags
 		this.userId = userId
-		this.userBio = userBio
+		this.userBio = generateDefaultBio(userBio)
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}

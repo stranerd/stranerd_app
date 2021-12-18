@@ -94,11 +94,19 @@ import { useFlashCardList } from '@app/composable/study/flashCards'
 import { useTestPrepList } from '@app/composable/study/testPreps'
 import { useVideoList } from '@app/composable/study/videos'
 import { useNoteList } from '@app/composable/study/notes'
+import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ExploreAll',
 	displayName: 'Explore',
-	components: { ExploreWrapper, ExploreTestPrepsList, ExploreNotesList, ExploreVideosList, ExploreFlashCardsList },
+	components: {
+		IonBadge,
+		ExploreWrapper,
+		ExploreTestPrepsList,
+		ExploreNotesList,
+		ExploreVideosList,
+		ExploreFlashCardsList
+	},
 	setup () {
 		const {
 			flashCards,

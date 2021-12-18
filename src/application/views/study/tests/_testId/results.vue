@@ -26,6 +26,7 @@ export default defineComponent({
 	name: 'TestResult',
 	displayName: 'Test',
 	components: { TestResults, Justified },
+	middlewares: ['isAuthenticated'],
 	setup () {
 		const { testId } = useRoute().params
 		const { error, listener, loading, test } = useTest(testId as string)

@@ -82,19 +82,3 @@ export default defineComponent({
 	components: { PageWrapper, SetTestPrepsList, SetNotesList, SetVideosList, SetFlashCardsList }
 })
 </script>
-
-<style lang="scss" scoped>
-	.ion-iten-transparent {
-		--background: transparent;
-	}
-
-	ion-searchbar {
-		--box-shadow: 'none';
-		--border-radius: 0.5rem;
-	}
-
-	.searchbar-input.sc-ion-searchbar-md {
-		padding-top: 12px;
-		padding-bottom: 12px;
-	}
-</style>

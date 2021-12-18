@@ -66,8 +66,6 @@
 				</div>
 			</div>
 		</div>
-
-
 	</Justified>
 	<page-loading v-if="loading" />
 </template>
@@ -75,7 +73,6 @@
 <script lang="ts">
 import Justified from '@app/layouts/Justified.vue'
 import { add, bookmark, chevronBack, chevronForward, contract, pencil, play, scan, shareSocial } from 'ionicons/icons'
-// import ShowRatings from '@app/components/core/ShowRatings.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 

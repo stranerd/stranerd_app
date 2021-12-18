@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { UserBio } from '@modules/users'
+import { generateDefaultBio, UserBio } from '@modules/users'
 
 export class CommentEntity extends BaseEntity {
 	public readonly id: string
@@ -24,7 +24,7 @@ export class CommentEntity extends BaseEntity {
 		this.body = body
 		this.data = data
 		this.userId = userId
-		this.userBio = userBio
+		this.userBio = generateDefaultBio(userBio)
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}

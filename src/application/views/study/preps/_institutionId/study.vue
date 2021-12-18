@@ -44,6 +44,7 @@ export default defineComponent({
 	name: 'StartUnTimedTest',
 	displayName: 'Test Preps',
 	components: { Justified, Institution },
+	middlewares: ['isAuthenticated'],
 	setup () {
 		const { institutionId } = useRoute().params
 		const { groupedByInstitution } = useTestPrepList()

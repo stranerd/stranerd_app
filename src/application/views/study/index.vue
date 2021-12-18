@@ -6,6 +6,7 @@
 		</div>
 	</DashboardLayout>
 </template>
+
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { useMySets } from '@app/composable/study/sets'

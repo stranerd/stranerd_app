@@ -22,6 +22,7 @@ import ContinueStudy from '@app/components/study/tests/ContinueTests.vue'
 export default defineComponent({
 	name: 'TestsContinue',
 	displayName: 'Continue Tests',
-	components: { Justified, ContinueStudy }
+	components: { Justified, ContinueStudy },
+	middlewares: ['isAuthenticated']
 })
 </script>

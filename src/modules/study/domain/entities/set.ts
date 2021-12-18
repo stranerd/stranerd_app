@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { UserBio } from '@modules/users'
+import { generateDefaultBio, UserBio } from '@modules/users'
 
 export class SetEntity extends BaseEntity {
 	public readonly id: string
@@ -32,12 +32,12 @@ export class SetEntity extends BaseEntity {
 	             }: SetConstructorArgs) {
 		super()
 		this.id = id
-		this.name = isRoot ? `${userBio.firstName ?? 'Anon'}'s Study` : name
 		this.isRoot = isRoot
 		this.isPublic = isPublic
 		this.tags = tags
 		this.userId = userId
-		this.userBio = userBio
+		this.userBio = generateDefaultBio(userBio)
+		this.name = isRoot ? `${this.userBio.firstName}'s Study` : name
 		this.saved = saved
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
