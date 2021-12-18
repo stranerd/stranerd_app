@@ -70,12 +70,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	ion-card {
-		box-shadow: none !important;
-
-
-	}
-
 	ion-button {
 		--background: #F7F7FC;
 		--color: #8B9EB1;

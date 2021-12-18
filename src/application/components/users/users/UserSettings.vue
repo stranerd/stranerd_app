@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full  mt-8 px-4">
+	<div class="w-full mt-8 px-4">
 		<div
 			class=" custom-shadow lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl gap-2 mb-6">
 			<ion-text class="text-xl text-main_dark font-bold">
@@ -10,7 +10,6 @@
 				Upload a profile picture
 			</ion-button>
 		</div>
-
 
 		<div
 			class=" custom-shadow lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl gap-2 mb-6">
@@ -34,9 +33,7 @@
 					<IonSpinner v-if="profileLoading" name="lines-small" />
 				</ion-button>
 			</div>
-
 		</div>
-
 
 		<div
 			class=" custom-shadow lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl gap-2 mb-6">
@@ -50,7 +47,6 @@
 						placeholder="Write your question here and make sure it is explained in full detail."
 						rows="6" />
 				</div>
-
 			</div>
 			<div class="w-full justify-start">
 				<ion-button class="btn-primary w-32" @click="updateProfile()">
@@ -58,9 +54,7 @@
 					<IonSpinner v-if="profileLoading" name="lines-small" />
 				</ion-button>
 			</div>
-
 		</div>
-
 
 		<!-- <div class=" flex flex-col gap-[8rem]">
 			<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
@@ -175,7 +169,6 @@
 		</div> -->
 
 	</div>
-
 </template>
 
 <script lang="ts">
@@ -256,7 +249,7 @@ export default defineComponent({
 		--placeholder-color: #8B9EB1;
 		--border-width: 1px !important;
 		--border-style: solid !important;
-		--border-width: #8B9EB1 !important;
+		--border-color: #8B9EB1 !important;
 
 	}
 
@@ -269,7 +262,6 @@ export default defineComponent({
 	}
 
 	ion-textarea {
-
 		/* Set a different placeholder color */
 		--placeholder-color: #8B9EB1;
 

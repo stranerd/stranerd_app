@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between mb-4">
+		<div v-if="sliced" class="w-full flex justify-between mb-4">
 			<span class="heading font-bold text-main_dark">
 				Recently Uncompleted Tests
 			</span>
@@ -27,11 +27,18 @@ import { useTestList } from '@app/composable/study/tests'
 export default defineComponent({
 	name: 'ContinueTests',
 	components: { EmptyState, ContinueTestCard },
-	setup () {
+	props: {
+		sliced: {
+			type: Boolean,
+			default: false,
+			required: false
+		}
+	},
+	setup (props) {
 		const { unCompletedTests, listener, loading, error } = useTestList()
 
 		const tests = computed({
-			get: () => unCompletedTests.value.slice(0, 6),
+			get: () => unCompletedTests.value.slice(0, props.sliced ? 6 : undefined),
 			set: () => {
 			}
 		})

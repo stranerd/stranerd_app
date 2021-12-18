@@ -42,8 +42,8 @@ import Auth from '@app/layouts/Auth.vue'
 export default defineComponent({
 	name: 'ForgotPassword',
 	components: { IonInput, IonButton, IonSpinner, Auth },
+	middlewares: ['isNotAuthenticated'],
 	setup () {
-
 		const { factory, loading, error, sendResetEmail, message } = usePasswordResetRequest()
 
 		return { factory, loading, error, sendResetEmail, message }
@@ -64,7 +64,7 @@ export default defineComponent({
 		--padding-top: 1.2rem !important;
 		--padding-bottom: 1.2rem !important;
 		--color: $color-dark !important;
-	--placeholder-color: $color-dark !important;
+		--placeholder-color: $color-dark !important;
 		border-radius: 10px;
 		margin-bottom: 1.25rem;
 		width: 420px;

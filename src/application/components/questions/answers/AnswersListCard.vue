@@ -11,7 +11,7 @@
 				<ion-text class="text-gray font-bold mb-2  text-xs lg:text-base">
 					Main answer
 				</ion-text>
-				<span class=" text-xs lg:text-base" v-html="answer.title" />
+				<span class="editor-body text-xs lg:text-base" v-html="answer.title" />
 
 			</div>
 
@@ -19,7 +19,7 @@
 				<ion-text class="text-gray font-bold mb-2  text-xs lg:text-base">
 					Explanation
 				</ion-text>
-				<span class=" text-xs lg:text-base" v-html="answer.body" />
+				<span class="editor-body text-xs lg:text-base" v-html="answer.body" />
 				<div v-if="answer.attachments" class="col-span-12 py-3">
 					<photo-list :photos="answer?.attachments"></photo-list>
 				</div>

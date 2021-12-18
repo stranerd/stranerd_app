@@ -11,7 +11,3 @@ export default defineComponent({
 	name: 'Index'
 })
 </script>
-<style scoped>
-
-
-</style>

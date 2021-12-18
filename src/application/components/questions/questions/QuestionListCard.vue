@@ -19,7 +19,7 @@
 			</ion-button>
 		</div>
 
-		<span class="py-2 pb-1 text-main_dark leading-normal" v-html="question.trimmedBody" />
+		<span class="editor-body py-2 pb-1 text-main_dark leading-normal" v-html="question.trimmedBody" />
 
 		<div class="w-full flex flex-col lg:flex-row lg:justify-between w-full">
 			<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">

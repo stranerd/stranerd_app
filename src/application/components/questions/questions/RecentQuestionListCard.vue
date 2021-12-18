@@ -9,13 +9,13 @@
 			<span class="font-bold text-gray ml-auto">{{ formatTime(question.createdAt) }}</span>
 		</div>
 
-		<span class="py-1 text-main_dark leading-normal mb-2 lg:mb-4" v-html="question.trimmedBody" />
+		<span class="text-main_dark leading-normal mb-auto editor-body" v-html="question.trimmedBody" />
 
-		<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">
+		<div class="mt-4 flex items-center gap-2 flex-wrap">
 			<Tag v-for="tag in question.tags" :key="tag" :tag="tag" />
 		</div>
 
-		<span class="mt-auto text-gray font-bold">
+		<span class="mt-4 text-gray font-bold">
 			{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
 		</span>
 	</router-link>

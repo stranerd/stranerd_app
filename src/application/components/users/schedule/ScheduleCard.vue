@@ -55,10 +55,3 @@ export default {
 
 }
 </script>
-
-<style lang="scss" scoped>
-	ion-card {
-		box-shadow: none !important;
-
-	}
-</style>

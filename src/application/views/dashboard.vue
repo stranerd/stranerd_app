@@ -5,7 +5,7 @@
 				<StatusBar />
 			</div>
 			<div class="px-4 pb-8">
-				<ContinueStudy v-if="isLoggedIn" class="mt-28 md:mt-16" />
+				<ContinueStudy v-if="isLoggedIn" :sliced="true" class="mt-28 md:mt-16" />
 				<TestPrepList :suggested="true" class="mt-16" />
 				<RecentQuestions class="mt-16" />
 				<NotesList :suggested="true" class="mt-16" />
@@ -26,7 +26,7 @@ import NotesList from '@app/components/study/notes/NotesList.vue'
 import VideosList from '@app/components/study/videos/VideosList.vue'
 import FlashCardList from '@app/components/study/flashCards/FlashCardList.vue'
 import RecentQuestions from '@app/components/dashboard/RecentQuestions.vue'
-import ContinueStudy from '@app/components/dashboard/ContinueTests.vue'
+import ContinueStudy from '@app/components/study/tests/ContinueTests.vue'
 import StudyTools from '@app/components/study/studyTools/StudyTools.vue'
 import { useAuth } from '@app/composable/auth/auth'
 

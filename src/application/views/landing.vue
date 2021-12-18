@@ -2,7 +2,6 @@
 	<HomeLayout>
 		<div>
 			<div class="landing">
-				<!-- <h1>Hello from Home Page</h1> -->
 				<Navigation></Navigation>
 				<Landing></Landing>
 				<About></About>
@@ -46,5 +45,3 @@ export default defineComponent({
 	}
 })
 </script>
-<style scoped>
-</style>

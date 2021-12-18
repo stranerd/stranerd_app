@@ -1,5 +1,4 @@
 <template>
-	<!-- <ion-card>	   -->
 	<div class="h-full flex items-start">
 		<div :class="secondCard ? 'border-light_blue' : 'border-white'" class="card-arrow border"></div>
 		<div :class="secondCard ? 'bg-light_blue' : 'bg-white'"
@@ -26,46 +25,9 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- <ion-card-content>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae maecenas sed sagittis amet.
-			</p>
-			<ion-grid>
-				<ion-row>
-				<ion-col col-3>
-				<div class="rounded-full overflow-hidden w-14 h-14 flex items-center justify-center">
-					<img src="@app/assets/images/testimonials/eunice.jpeg" alt="testimonial image" class="w-full w-min-full h-min-full">
-				</div>
-				</ion-col>
-				<ion-col col-9>
-				<div class="">
-					<ion-card-title class="testimonial-name">Eunice Apo</ion-card-title>
-				</div>
-				</ion-col>
-				</ion-row>
-			</ion-grid>
-		</ion-card-content>
-		<ion-card-header>
-			<div class="flex gap-2 items-center">
-				<div class="rounded-full overflow-hidden w-14 h-14 flex items-center justify-center">
-					<img src="@app/assets/images/testimonials/eunice.jpeg" alt="testimonial image" class="w-full w-min-full h-min-full">
-				</div>
-				<div class="">
-					<ion-card-title class="testimonial-name">Eunice Apo</ion-card-title>
-				</div>
-			</div>
-			<div class="flag">
-				<img src="@app/assets/images/flags/nigeria.png" alt="flag image" class="flag-image">
-			</div>
-		</ion-card-header>
-	</ion-card> -->
 </template>
 
 <script lang="ts">
-// import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonItem, IonLabel } from '@ionic/vue'
-// import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonGrid} from '@ionic/vue'
-// import { pin, walk, warning, wifi, wine } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -82,10 +44,6 @@ export default defineComponent({
 		}
 
 	}
-	// components: { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonGrid },
-	// setup() {
-	// 	return { warning }
-	// }
 })
 </script>
 
