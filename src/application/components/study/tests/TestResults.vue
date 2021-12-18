@@ -9,7 +9,7 @@
 		</DonutChart>
 
 		<ion-text class="text-main_dark my-4">
-			Correct answers - <b>{{ correctAnswers }}/{{ test.questions.length }} </b>
+			Correct answers - <b>{{ test.correctAnswers }}/{{ test.questions.length }} </b>
 		</ion-text>
 
 		<div class="md:w-80 mt-20 mx-auto w-full px-4 flex items-center justify-between">
@@ -20,7 +20,6 @@
 			<router-link class="text-primary cursor-pointer" to="/study">
 				Back to <b> My Study</b>
 			</router-link>
-
 		</div>
 
 		<PageLoading v-if="loading" />
@@ -29,10 +28,11 @@
 
 <script lang="ts">
 import { useTestDetails } from '@app/composable/study/tests'
-import { computed, defineComponent, onMounted } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { TestEntity } from '@modules/study'
 import DonutChart from '@app/components/core/DonutChart.vue'
 import { formatNumber } from '@utils/commons'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'TestResults',
@@ -44,11 +44,13 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
+		const router = useRouter()
 		const { error, loading, questions, endTest } = useTestDetails(props.test)
-		onMounted(endTest)
-		// @ts-ignore
-		const correctAnswers = computed(() => questions.value.filter((q) => props.test.answers[q.id] === q.data.correctIndex).length)
-		return { error, loading, questions, correctAnswers, formatNumber }
+		onMounted(async () => {
+			await endTest()
+			if (!props.test.isTimed) await router.replace(`/study/tests/${props.test.id}/take`)
+		})
+		return { error, loading, questions, formatNumber }
 	}
 })
 </script>

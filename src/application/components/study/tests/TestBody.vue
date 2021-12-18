@@ -36,11 +36,13 @@
 
 		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white z-[1000000000000]">
 			<div class="lg:w-8/12  w-full px-4  mx-auto flex items-center justify-between">
-				<div class="flex">
-					<ion-text class="text-main_dark">{{ test.answered }}/{{ questions.length }} answered</ion-text>
+				<div>
+					<ion-text v-if="test.isOBJ" class="text-main_dark">
+						{{ test.answered }}/{{ questions.length }} answered
+					</ion-text>
 				</div>
 
-				<div class="flex items-center">
+				<div>
 					<template v-if="test.isTimed && !test.done">
 						<div class="h-2 w-2 bg-red-500 rounded-full mr-4" />
 						<ion-text class="text-icon_inactive">
@@ -49,7 +51,7 @@
 					</template>
 				</div>
 
-				<div class="flex items-center  ">
+				<div>
 					<router-link v-if="test.done" :to="`/study/tests/${test.id}/results`">
 						<ion-button class="btn-primary btn-lgx">See Results</ion-button>
 					</router-link>

@@ -114,7 +114,7 @@
 			</div>
 
 			<div class="w-full flex justify-end mb-8">
-				<ion-button class="btn-primary btn-lg !pr-0 " @click="submit()">
+				<ion-button :disabled="loading || !factory.valid" class="btn-primary btn-lg !pr-0" @click="submit()">
 					<slot name="buttonTitle">Submit</slot>
 				</ion-button>
 			</div>

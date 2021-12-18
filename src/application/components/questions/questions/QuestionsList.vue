@@ -1,8 +1,7 @@
 <template>
-	<div class=" text-xs md:text-sm ">
-
+	<div class="text-xs md:text-sm ">
 		<div class="lg:mt-8 mt-4">
-			<div class="mt-5 md:mt-6 col-span-6 flex flex-row flex-wrap ">
+			<div class="mt-5 md:mt-6 col-span-6 flex flex-row flex-wrap">
 				<EmptyState v-if="questions.length === 0"
 					:btnText="'Ask a question'"
 					:info="'No questions found! Start asking questions to help with homework and studying.'"

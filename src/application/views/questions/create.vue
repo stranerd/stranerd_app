@@ -39,11 +39,15 @@ import { defineComponent } from 'vue'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import QuestionForm from '@app/components/questions/questions/QuestionForm.vue'
 import { useCreateQuestion } from '@app/composable/questions/questions'
+import { useQuestionModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'QuestionsCreate',
 	components: { DashboardLayout, QuestionForm },
-	middlewares: ['isAuthenticated'],
+	middlewares: ['isAuthenticated', async ({ from }) => {
+		useQuestionModal().openAskQuestion()
+		return from?.fullPath ?? '/dashboard'
+	}],
 	setup () {
 		const { factory, error, loading, createQuestion } = useCreateQuestion()
 		return { factory, error, loading, createQuestion }

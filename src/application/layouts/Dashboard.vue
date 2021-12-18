@@ -21,6 +21,7 @@
 		</div>
 	</IonPage>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonContent, IonPage } from '@ionic/vue'
@@ -43,5 +44,3 @@ export default defineComponent({
 
 })
 </script>
-
-

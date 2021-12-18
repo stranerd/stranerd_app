@@ -1,11 +1,11 @@
 <template>
 	<DashboardLayout>
 		<div>
-			<div class="md:px-4 md:pt-8">
+			<div v-if="isLoggedIn" class="md:px-4 md:pt-8">
 				<StatusBar />
 			</div>
 			<div class="px-4 pb-8">
-				<ContinueStudy class="mt-28 md:mt-16" />
+				<ContinueStudy v-if="isLoggedIn" class="mt-28 md:mt-16" />
 				<TestPrepList :suggested="true" class="mt-16" />
 				<RecentQuestions class="mt-16" />
 				<NotesList :suggested="true" class="mt-16" />
@@ -28,6 +28,7 @@ import FlashCardList from '@app/components/study/flashCards/FlashCardList.vue'
 import RecentQuestions from '@app/components/dashboard/RecentQuestions.vue'
 import ContinueStudy from '@app/components/dashboard/ContinueTests.vue'
 import StudyTools from '@app/components/study/studyTools/StudyTools.vue'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'Dashboard',
@@ -41,6 +42,10 @@ export default defineComponent({
 		FlashCardList,
 		StudyTools,
 		StatusBar
+	},
+	setup () {
+		const { isLoggedIn } = useAuth()
+		return { isLoggedIn }
 	}
 })
 </script>

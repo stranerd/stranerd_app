@@ -45,10 +45,15 @@ export class TestEntity extends BaseEntity {
 		this.updatedAt = updatedAt
 	}
 
+	get isOBJ () {
+		return this.questionType === PastQuestionType.objective
+	}
+
 	get progress () {
+		if (!this.isOBJ) return 1
 		const total = this.questions.length
 		const done = Object.keys(this.answers).length
-		return catchDivideByZero(done, total) * 100
+		return catchDivideByZero(done, total)
 	}
 
 	get isTimed () {

@@ -22,7 +22,7 @@
 				</span>
 			</ion-text>
 
-			<ion-progress-bar class="mt-10" value="0.5" />
+			<ion-progress-bar :value="test.progress" class="mt-10" />
 		</div>
 	</router-link>
 </template>

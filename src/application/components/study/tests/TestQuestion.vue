@@ -66,14 +66,12 @@ import {
 	ellipsisVertical,
 	flag
 } from 'ionicons/icons'
-import { PastQuestionEntity, TestEntity, TestType } from '@modules/study'
+import { PastQuestionEntity, PastQuestionType, TestEntity, TestType } from '@modules/study'
 import { getAlphabet } from '@utils/commons'
 import { useCreateReport } from '@app/composable/reports/pastQuestions'
 
 export default defineComponent({
 	name: 'TestQuestion',
-	components: {},
-
 	props: {
 		test: {
 			type: TestEntity,
@@ -99,7 +97,10 @@ export default defineComponent({
 	},
 	setup (props) {
 		const showAnswers = computed(() => {
-			if (props.test.data.type === TestType.unTimed) return props.test.answers[props.question.id] !== undefined
+			if (props.test.data.type === TestType.unTimed) {
+				if (props.test.questionType === PastQuestionType.objective) return props.test.answers[props.question.id] !== undefined
+				else return true
+			}
 			return props.test.done
 		})
 		const { loading, error, createReport } = useCreateReport()

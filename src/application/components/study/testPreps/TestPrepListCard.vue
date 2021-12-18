@@ -11,8 +11,6 @@
 				class="text-gray text-2xl"
 			/>
 		</div>
-
-
 		<Tag :tag="testPrep.data.year.toString()">
 			<template v-slot="slotProps">
 				<ion-text class="text-sm font-bold">
@@ -22,11 +20,11 @@
 		</Tag>
 
 		<div class="w-full flex items-center justify-between gap-3">
-			<ion-button class="btn-primary font-bold  w-full" @click="createTest(testPrep, true)">
+			<ion-button v-if="testPrep.canTest" class="btn-primary flex-grow font-bold w-full"
+				@click="createTest(testPrep, true)">
 				Test
 			</ion-button>
-
-			<ion-button class="btn-outline text-primary font-bold  w-full"
+			<ion-button v-if="testPrep.canStudy" class="btn-outline text-primary flex-grow font-bold w-full"
 				@click="createTest(testPrep, false)">
 				Solutions
 			</ion-button>

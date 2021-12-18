@@ -27,8 +27,8 @@
 					Create a flashcard
 				</ion-label>
 			</router-link>
-			<div class="relative"
-				@click="openAskQuestion">
+			<router-link class="relative"
+				to="/questions/create">
 				<ion-fab-button color="tertiary" size="small">
 					<ion-icon :icon="helpCircle" class="text-xl"></ion-icon>
 				</ion-fab-button>
@@ -36,7 +36,7 @@
 					class="px-2 py-1 mr-1.5 w-max  bg-purple rounded-xl text-xs font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
 					Ask a question
 				</ion-label>
-			</div>
+			</router-link>
 			<router-link class="relative"
 				to="/study/explore">
 				<ion-fab-button color="secondary" size="small">
@@ -55,18 +55,14 @@
 import { defineComponent, ref } from 'vue'
 import { IonFab, IonFabButton, IonFabList, IonLabel } from '@ionic/vue'
 import { add, compass, folder, helpCircle } from 'ionicons/icons'
-import { useQuestionModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'Fab',
 	components: { IonFab, IonFabButton, IonFabList, IonLabel },
 	setup () {
-		const openAskQuestion = () => {
-			useQuestionModal().openAskQuestion()
-		}
 		const active = ref(false)
 		return {
-			openAskQuestion, active, compass,
+			active, compass,
 			add, helpCircle, folder
 		}
 	}

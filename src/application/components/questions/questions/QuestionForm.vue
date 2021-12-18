@@ -17,24 +17,15 @@
 					type="file"
 					@change="catchAttachments" />
 				<label class="cursor-pointer" for="images">
-					<ion-icon
-						:icon="image"
-						class="!text-4xl text-gray"
+					<ion-icon :icon="image" class="!text-4xl text-gray"
 					/>
-
 				</label>
-
-
 				<IonInput v-model="tag" class="w-1/4 font-medium bg-new_gray text-main_dark px-3"
 					placeholder="Add related tags">
 				</IonInput>
 			</div>
-
-
 			<SelectSubject v-model:subject-id="factory.subjectId" :show-all="false" class="w-full bg-new_gray" />
-
 		</div>
-
 
 		<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
 			<span v-for="tag in factory.tags" :key="tag">
@@ -55,16 +46,17 @@
 			</span>
 		</div>
 
-
 		<div class="flex w-full lg:mt-8 mt-5 items-center gap-6">
-			<ion-button class="w-1/2 btn-secondary " @click="closeAskQuestion()">
+			<ion-button class="w-1/2 btn-secondary" @click="closeAskQuestion()">
 				Cancel
 			</ion-button>
 			<ion-button :disabled="loading || !factory.valid"
-				class=" w-1/2  btn-primary" type="submit">
+				class="w-1/2 btn-primary" type="submit">
 				Submit
 			</ion-button>
 		</div>
+
+		<PageLoading v-if="loading" />
 	</form>
 </template>
 
@@ -104,7 +96,6 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-
 		const closeAskQuestion = () => {
 			useQuestionModal().closeAskQuestion()
 		}

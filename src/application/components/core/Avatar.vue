@@ -19,7 +19,6 @@
     26.484 28.0918 27.4678 28.9038 28.6252C27.4873 30.0839 25.7923 31.2432 23.9192 32.0343C22.0462 32.8254 20.0333
 	 33.2323 18 33.2308Z" />
 			</svg>
-
 		</template>
 	</component>
 </template>
@@ -27,7 +26,6 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import { Media } from '@modules/core'
-// import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
 
 export default defineComponent({
 	name: 'Avatar',
@@ -52,10 +50,9 @@ export default defineComponent({
 			default: '#132740'
 		}
 	},
-	setup (props: any) {
+	setup (props) {
 		const source = computed({
 			get: () => typeof props.src?.link === 'string' ? props.src.link : false,
-			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			set: () => {
 			}
 		})

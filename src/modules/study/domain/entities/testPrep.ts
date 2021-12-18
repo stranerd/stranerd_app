@@ -24,6 +24,14 @@ export class TestPrepEntity extends BaseEntity {
 	get isPastQuestionType () {
 		return this.data.type === PrepType.pastQuestion
 	}
+
+	get canTest () {
+		return this.data.questionType === PastQuestionType.objective
+	}
+
+	get canStudy () {
+		return true
+	}
 }
 
 type TestPrepConstructorArgs = {

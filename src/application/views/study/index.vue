@@ -14,7 +14,7 @@ import RootSetView from '@app/components/study/sets/RootSetView.vue'
 
 export default defineComponent({
 	name: 'Study',
-	middleware: ['isAuthenticated'],
+	middlewares: ['isAuthenticated'],
 	components: { DashboardLayout, RootSetView },
 	setup () {
 		const { rootSet, error, loading, listener } = useMySets()

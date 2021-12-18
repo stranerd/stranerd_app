@@ -4,10 +4,11 @@
 		<ion-text class="text-white leading-tight lg:text-3xl text-xl font-bold">
 			All questions
 		</ion-text>
-
-		<ion-button class="btn-white btn-white-sm font-bold" @click="openAskQuestion">
-			Ask a question
-		</ion-button>
+		<router-link to="/questions/create">
+			<ion-button class="btn-white btn-white-sm font-bold">
+				Ask a question
+			</ion-button>
+		</router-link>
 	</div>
 
 	<div
@@ -20,8 +21,6 @@
 			<SelectSubject v-model:subjectId="subjectId" :show-all="true" class="w-auto -ml-4"
 				placeholder="Search by subjects" />
 		</div>
-
-
 		<div class="flex items-center">
 			<ion-segment v-model="answered" class="w-[92vw] lg:w-auto" mode="ios">
 				<ion-segment-button v-for="choice in answeredChoices" :key="choice.key" :value="choice.val"
@@ -30,35 +29,25 @@
 				</ion-segment-button>
 			</ion-segment>
 		</div>
-
 	</div>
 </template>
 
 <script lang="ts">
-import { useAuth } from '@app/composable/auth/auth'
 import { chevronDown, chevronUp, flash, folder } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import { IonSegment, IonSegmentButton } from '@ionic/vue'
-import { useQuestionModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'QuestionListHeader',
 	components: { SelectSubject, IonSegment, IonSegmentButton },
 
 	setup () {
-		const openAskQuestion = useQuestionModal().openAskQuestion
-		const {
-			filteredQuestions: questions, error, loading, hasMore,
-			answeredChoices, answered, subjectId,
-			fetchOlderQuestions
-		} = useQuestionList()
-		const { user } = useAuth()
+		const { answeredChoices, answered, subjectId } = useQuestionList()
 		return {
-			openAskQuestion,
-			user, answeredChoices, answered, subjectId, chevronDown, chevronUp, folder, flash
-
+			answeredChoices, answered, subjectId,
+			chevronDown, chevronUp, folder, flash
 		}
 	}
 
