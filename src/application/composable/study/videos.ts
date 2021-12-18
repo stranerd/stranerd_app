@@ -16,7 +16,6 @@ import { Alert } from '@app/composable/core/notifications'
 const global = {
 	videos: ref([] as VideoEntity[]),
 	fetched: ref(false),
-	edit: ref(false),
 	hasMore: ref(false),
 	...useErrorHandler(),
 	...useLoadingHandler()

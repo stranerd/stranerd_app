@@ -34,7 +34,6 @@ type SaveKey = keyof SetEntity['saved']
 const global = {
 	sets: ref([] as SetEntity[]),
 	fetched: ref(false),
-	edit: ref(false),
 	hasMore: ref(false),
 	...useErrorHandler(),
 	...useLoadingHandler()
@@ -417,13 +416,4 @@ export const useCreateSet = () => {
 	}
 
 	return { error, loading, factory, createSet }
-}
-
-export const useEdit = () => {
-	const toggle = () => {
-		global.edit.value = !global.edit.value
-	}
-	return {
-		toggle
-	}
 }

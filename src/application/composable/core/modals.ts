@@ -13,6 +13,7 @@ import AskQuestion from '@app/components/modals/questions/AskQuestion.vue'
 import CreateStudy from '@app/components/popovers/study/CreateStudy.vue'
 import CreateDashboardMenu from '@app/components/popovers/menus/CreateDashboardMenu.vue'
 import UserDashboardMenu from '@app/components/popovers/menus/UserDashboardMenu.vue'
+import StudyEntityMenu from '@app/components/popovers/menus/StudyEntityMenu.vue'
 
 export const modal = useModal(ref([]))
 const QuestionModal = modal.register('Question', { AskQuestion }, 'question-modal')
@@ -30,7 +31,11 @@ export const allModals = [useQuestionModal, useProfileModal, useSessionModal, us
 
 export const popover = usePopover(ref([]))
 const StudyPopover = popover.register('Study', { CreateStudy }, 'popover-class')
-const MenuPopover = popover.register('Menu', { CreateDashboardMenu, UserDashboardMenu }, 'popover-class')
+const MenuPopover = popover.register('Menu', {
+	CreateDashboardMenu,
+	UserDashboardMenu,
+	StudyEntityMenu
+}, 'popover-class')
 
 export const useStudyPopover = () => StudyPopover
 export const useMenuPopover = () => MenuPopover

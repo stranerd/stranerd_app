@@ -1,6 +1,5 @@
 <template>
 	<Justified>
-		<!-- TODO: Break into sections -->
 		<div class="bg-primary w-full min-h-[150px] flex flex-col justify-center items-center pt-0 pb-1">
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
 				<Institution :institutionId="institutionId" />
@@ -13,18 +12,8 @@
 		</div>
 
 		<div class="md:w-8/12 w-full px-4 mx-auto mt-8">
-			<div class="grid lg:grid-cols-4 md:grid-cols-3 gap-5 mt-8">
-				<div v-for="prep in preps" :key="prep.hash"
-					:class="[`m-0 min-w-[16.5rem] cardPadding border bg-light_gray rounded-xl flex flex-col items-center md:gap-2 gap-[1rem] box-border !p-4 md:!p-7 border border-faded_gray lg:border-0`]">
-					<ion-text class="font-bold text-lg text-main_dark">
-						{{ prep.name }}
-					</ion-text>
-
-					<ion-button class="btn-secondary min-w-[7rem] font-bold w-full mt-1"
-						@click="createTest(prep, false)">
-						Study
-					</ion-button>
-				</div>
+			<div class="showcase">
+				<TestPrepListCard v-for="prep in preps" :key="prep.hash" :hideTest="true" :testPrep="prep" />
 			</div>
 		</div>
 
@@ -39,11 +28,12 @@ import Institution from '@app/components/study/institutions/Institution.vue'
 import { useRoute } from 'vue-router'
 import { useTestPrepList } from '@app/composable/study/testPreps'
 import { useCreateTest } from '@app/composable/study/tests'
+import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 
 export default defineComponent({
 	name: 'StartUnTimedTest',
 	displayName: 'Test Preps',
-	components: { Justified, Institution },
+	components: { TestPrepListCard, Justified, Institution },
 	middlewares: ['isAuthenticated'],
 	setup () {
 		const { institutionId } = useRoute().params

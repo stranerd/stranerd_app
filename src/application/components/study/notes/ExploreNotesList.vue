@@ -5,7 +5,7 @@
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-				<NoteListCard v-for="note in filtered" :key="note.hash" :note="note" />
+				<NoteListCard v-for="note in filtered" :key="note.hash" :note="note" :openMenu="() => openMenu(note)" />
 			</div>
 		</template>
 	</div>
@@ -15,6 +15,7 @@
 import { computed, defineComponent, PropType } from 'vue'
 import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 import { NoteEntity } from '@modules/study'
+import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'ExploreNotesList',
@@ -31,8 +32,9 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
+		const openMenu = (entity: NoteEntity) => openStudyEntityMenu(entity, {})
 		const filtered = computed(() => props.notes.slice(0, props.sliced ? 6 : undefined))
-		return { filtered }
+		return { filtered, openMenu }
 	}
 })
 </script>

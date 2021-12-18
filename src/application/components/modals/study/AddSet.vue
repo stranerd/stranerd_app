@@ -65,7 +65,7 @@ export default defineComponent({
 	name: 'Add set Modal',
 	setup () {
 		const closeAddSet = () => {
-			useStudyModal().closeAddSet()
+			useStudyModal()
 		}
 
 		const { loading, error, saveNotes, saveVideos } = useSaveToSet()

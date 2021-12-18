@@ -14,7 +14,7 @@
 					</template>
 				</Tag>
 			</div>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl" />
+			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl cursor-pointer" @click="openMenu" />
 		</div>
 
 		<div class="w-full flex items-center justify-between">
@@ -36,7 +36,6 @@ import { defineComponent } from 'vue'
 import { copy, ellipsisVertical, flash } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
-import { useEditState } from '@app/composable/study/state'
 import { FlashCardEntity } from '@modules/study'
 import Tag from '@app/components/core/Tag.vue'
 
@@ -50,12 +49,15 @@ export default defineComponent({
 		flashCard: {
 			type: FlashCardEntity,
 			required: true
+		},
+		openMenu: {
+			type: Function,
+			required: true
 		}
 	},
 	setup () {
-		const { editState } = useEditState()
 		return {
-			ellipsisVertical, editState, copy,
+			ellipsisVertical, copy,
 			formatNumber, flash, pluralize
 		}
 	},

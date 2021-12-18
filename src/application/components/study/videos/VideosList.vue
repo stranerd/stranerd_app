@@ -2,8 +2,6 @@
 	<div>
 		<div class="w-full flex justify-between mb-4">
 			<div class="heading font-bold text-main_dark flex items-center">
-
-
 				<ion-text class="mr-3">
 					Videos
 				</ion-text>
@@ -25,7 +23,8 @@
 
 		<template v-else>
 			<div class="showcase">
-				<VideoListCard v-for="video in videos" :key="video.hash" :video="video" />
+				<VideoListCard v-for="video in videos" :key="video.hash" :openMenu="() => openMenu(video)"
+					:video="video" />
 			</div>
 		</template>
 	</div>
@@ -33,10 +32,11 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import { chevronForwardOutline } from 'ionicons/icons'
 import { useVideoList } from '@app/composable/study/videos'
 import VideoListCard from '@app/components/study/videos/VideoListCard.vue'
 import { IonBadge } from '@ionic/vue'
+import { VideoEntity } from '@modules/study'
+import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'VideosList',
@@ -55,13 +55,12 @@ export default defineComponent({
 			}
 		})
 
+		const openMenu = (entity: VideoEntity) => openStudyEntityMenu(entity, {})
+
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 
-		return {
-			videos,
-			chevronForwardOutline
-		}
+		return { videos, openMenu }
 	}
 })
 </script>

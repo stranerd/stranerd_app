@@ -22,7 +22,7 @@
 
 		<template v-else>
 			<div class="showcase">
-				<TestPrepCard v-for="testPrep in testPreps" :key="testPrep.hash"
+				<TestPrepCard v-for="testPrep in testPreps" :key="testPrep.hash" :openMenu="() => openMenu(testPrep)"
 					:testPrep="testPrep" />
 			</div>
 		</template>
@@ -31,10 +31,11 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons'
 import { useTestPrepList } from '@app/composable/study/testPreps'
 import TestPrepCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import { IonBadge } from '@ionic/vue'
+import { TestPrepEntity } from '@modules/study'
+import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'TestPrepList',
@@ -53,12 +54,12 @@ export default defineComponent({
 			}
 		})
 
+		const openMenu = (entity: TestPrepEntity) => openStudyEntityMenu(entity, {})
+
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 
-		return {
-			testPreps, chevronForwardOutline, chevronBackOutline
-		}
+		return { testPreps, openMenu }
 	}
 })
 </script>

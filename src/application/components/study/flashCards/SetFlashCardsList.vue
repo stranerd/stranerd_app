@@ -5,7 +5,8 @@
 		</template>
 		<template v-else>
 			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-				<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard" />
+				<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard"
+					:openMenu="() => openMenu(flashCard)" />
 			</div>
 		</template>
 	</div>
@@ -15,6 +16,7 @@
 import { computed, defineComponent, PropType } from 'vue'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import { FlashCardEntity, SetEntity } from '@modules/study'
+import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'SetFlashCardsList',
@@ -35,8 +37,9 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
+		const openMenu = (entity: FlashCardEntity) => openStudyEntityMenu(entity, { set: props.set })
 		const filtered = computed(() => props.flashCards.slice(0, props.sliced ? 6 : undefined))
-		return { filtered }
+		return { filtered, openMenu }
 	}
 })
 </script>

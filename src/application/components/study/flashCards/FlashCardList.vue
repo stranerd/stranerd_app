@@ -21,7 +21,8 @@
 		</template>
 		<template v-else>
 			<div class="showcase">
-				<FlashCardListCard v-for="flashcard in flashcards" :key="flashcard" :flashCard="flashcard" />
+				<FlashCardListCard v-for="flashcard in flashcards" :key="flashcard" :flashCard="flashcard"
+					:openMenu="() => openMenu(flashcard)" />
 			</div>
 		</template>
 	</div>
@@ -29,10 +30,11 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import { chevronForwardOutline } from 'ionicons/icons'
 import { useFlashCardList } from '@app/composable/study/flashCards'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import { IonBadge } from '@ionic/vue'
+import { FlashCardEntity } from '@modules/study'
+import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'FlashCardList',
@@ -51,13 +53,12 @@ export default defineComponent({
 			}
 		})
 
+		const openMenu = (entity: FlashCardEntity) => openStudyEntityMenu(entity, {})
+
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 
-		return {
-			flashcards,
-			chevronForwardOutline
-		}
+		return { flashcards, openMenu }
 	}
 })
 </script>

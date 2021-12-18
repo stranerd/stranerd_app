@@ -4,8 +4,9 @@
 			<EmptyState info="No videos available." />
 		</template>
 		<template v-else>
-			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-				<VideoListCard v-for="video in filtered" :key="video.hash" :video="video" />
+			<div class="showcase">
+				<VideoListCard v-for="video in filtered" :key="video.hash" :openMenu="() => openMenu(video)"
+					:video="video" />
 			</div>
 		</template>
 	</div>
@@ -15,6 +16,7 @@
 import { computed, defineComponent, PropType } from 'vue'
 import VideoListCard from '@app/components/study/videos/VideoListCard.vue'
 import { VideoEntity } from '@modules/study'
+import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'ExploreVideosList',
@@ -31,8 +33,9 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
+		const openMenu = (entity: VideoEntity) => openStudyEntityMenu(entity, {})
 		const filtered = computed(() => props.videos.slice(0, props.sliced ? 6 : undefined))
-		return { filtered }
+		return { filtered, openMenu }
 	}
 })
 </script>

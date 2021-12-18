@@ -35,6 +35,10 @@ export default defineComponent({
 		video: {
 			type: VideoEntity,
 			required: true
+		},
+		openMenu: {
+			type: Function,
+			required: true
 		}
 	}
 })

@@ -25,7 +25,7 @@
 
 		<template v-else>
 			<div class="showcase">
-				<NoteListCard v-for="note in notes" :key="note.hash" :note="note" />
+				<NoteListCard v-for="note in notes" :key="note.hash" :note="note" :openMenu="() => openMenu(note)" />
 			</div>
 		</template>
 	</div>
@@ -33,10 +33,11 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import { chevronForwardOutline } from 'ionicons/icons'
 import { useNoteList } from '@app/composable/study/notes'
 import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 import { IonBadge } from '@ionic/vue'
+import { NoteEntity } from '@modules/study'
+import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'NotesList',
@@ -55,13 +56,12 @@ export default defineComponent({
 			}
 		})
 
+		const openMenu = (entity: NoteEntity) => openStudyEntityMenu(entity, {})
+
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 
-		return {
-			notes,
-			chevronForwardOutline
-		}
+		return { notes, openMenu }
 	}
 })
 </script>
