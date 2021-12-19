@@ -9,7 +9,7 @@
 				<div class="flex gap-4 md:ml-auto -mb-11 md:mb-0 md:w-auto w-full">
 					<IonSelect v-model="time"
 						class="md:w-[138px] py-4 md:py-3 px-5 md:px-4  w-full text-xs md:text-base  placeholder-[#8B9EB1] font-bold capitalize"
-						interface="action-sheet" placeholder="Daily">
+						interface="alert" placeholder="Daily">
 						<IonSelectOption v-for="time in times" :key="time" :value="time" class="capitalize">
 							{{ time }}
 						</IonSelectOption>

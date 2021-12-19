@@ -29,14 +29,14 @@
 		</div>
 
 		<div class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex flex-row">
-			<ion-select class="w-full  font-medium" interface="action-sheet" placeholder="Select the subject">
-				<ion-select-option value="maths">Mathematics</ion-select-option>
-				<ion-select-option value="physics">Physics</ion-select-option>
-				<ion-select-option value="bio">Biology</ion-select-option>
-				<ion-select-option value="geo">Geography</ion-select-option>
-				<ion-select-option value="business">Business</ion-select-option>
-				<ion-select-option value="civil">Civil Right</ion-select-option>
-			</ion-select>
+			<IonSelect class="w-full  font-medium" interface="alert" placeholder="Select the subject">
+				<IonSelectOption value="maths">Mathematics</IonSelectOption>
+				<IonSelectOption value="physics">Physics</IonSelectOption>
+				<IonSelectOption value="bio">Biology</IonSelectOption>
+				<IonSelectOption value="geo">Geography</IonSelectOption>
+				<IonSelectOption value="business">Business</IonSelectOption>
+				<IonSelectOption value="civil">Civil Right</IonSelectOption>
+			</IonSelect>
 		</div>
 
 		<div class="mt-3 py-2 px-2 flex md:flex-row flex-col md:items-center">
@@ -58,13 +58,12 @@
 		</div>
 
 		<div class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex flex-row">
-			<ion-select v-model="factory.duration" class="w-full  font-medium" interface="action-sheet"
+			<IonSelect v-model="factory.duration" class="w-full  font-medium" interface="alert"
 				placeholder="Duration and payment">
-				<ion-select-option v-for="option in factory.prices" :key="option.duration" :value="option.duration">{{
-					option.duration
-				}} minutes - {{ option.price }} gold coins
-				</ion-select-option>
-			</ion-select>
+				<IonSelectOption v-for="option in factory.prices" :key="option.duration" :value="option.duration">
+					{{ option.duration }} minutes - {{ option.price }} gold coins
+				</IonSelectOption>
+			</IonSelect>
 		</div>
 
 		<div class="flex flex-row  mt-5  text-white gap-4">

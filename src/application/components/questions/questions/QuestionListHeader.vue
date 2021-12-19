@@ -22,7 +22,7 @@
 				placeholder="Search by subjects" />
 		</div>
 		<div class="flex items-center">
-			<ion-segment v-model="answered" class="w-[92vw] lg:w-auto" mode="ios">
+			<ion-segment v-model="answered" class="w-[92vw] lg:w-auto">
 				<ion-segment-button v-for="choice in answeredChoices" :key="choice.key" :value="choice.val"
 					class="!px-4" @click="answered = choice.val">
 					<ion-label>{{ choice.key }}</ion-label>

@@ -35,6 +35,8 @@ export interface UserAccount {
 		answerComments: number
 		sessions: number
 		tutorSessions: number
+		flashCards: number
+		sets: number
 	}
 	streak: {
 		count: number
