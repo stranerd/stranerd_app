@@ -63,11 +63,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style>
-	ion-badge {
-		--background: #FFDC00 !important;
-		--color: #132740 !important;
-		--padding-top: 6px !important;
-	}
-</style>

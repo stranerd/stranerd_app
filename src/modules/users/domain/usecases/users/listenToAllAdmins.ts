@@ -3,7 +3,7 @@ import { appName } from '@utils/environment'
 import { IUserRepository } from '../../irepositories/iuser'
 import { UserEntity } from '../../entities/user'
 
-export class ListenToAllTutorsUseCase {
+export class ListenToAllAdminsUseCase {
 	private repository: IUserRepository
 
 	constructor(repository: IUserRepository) {
@@ -12,8 +12,8 @@ export class ListenToAllTutorsUseCase {
 
 	async call(listener: Listeners<UserEntity>) {
 		return await this.repository.listenToMany({
-			where: [ { field: `roles.${ appName }.isTutor`, value: true } ],
+			where: [ { field: `roles.${ appName }.isAdmin`, value: true } ],
 			all: true
-		}, listener, (entity) => entity.roles[appName].isTutor)
+		}, listener, (entity) => entity.roles[appName].isAdmin)
 	}
 }

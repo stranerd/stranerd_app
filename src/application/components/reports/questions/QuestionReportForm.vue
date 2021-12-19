@@ -7,7 +7,7 @@
 				class="flex gap-0.5 items-center font-semibold"
 			>
 				<input v-model="factory.message" :value="message.body" name="message" type="radio">
-				<DynamicText>It {{ message.body }}</DynamicText>
+				<span>It {{ message.body }}</span>
 			</span>
 		</div>
 

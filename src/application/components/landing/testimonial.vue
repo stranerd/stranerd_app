@@ -126,7 +126,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 	.swiper-pagination-bullet {
 		width: 10px;
 		height: 10px;

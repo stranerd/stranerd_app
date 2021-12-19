@@ -1,20 +1,13 @@
 <template>
-	<ion-loading
-		:duration="timeout"
-		:is-open="true"
-		message="Please wait..."
-	>
-	</ion-loading>
+	<ion-loading :is-open="true" message="Please wait..." />
 </template>
 
 <script>
-import { IonLoading } from '@ionic/vue'
 import { defineComponent } from 'vue'
+import { IonLoading } from '@ionic/vue'
 
 export default defineComponent({
-	props: {
-		timeout: { type: Number, default: 100000 }
-	},
+	name: 'PageLoading',
 	components: { IonLoading }
 })
 </script>

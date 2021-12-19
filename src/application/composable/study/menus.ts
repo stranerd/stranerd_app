@@ -47,6 +47,8 @@ export const useStudyMenuData = () => {
 		}
 	})
 
+	if (!global.entity.value || !global.type.value || !global.data.value) useMenuPopover().closeStudyEntityMenu()
+
 	const share = async () => {
 		useMenuPopover().closeStudyEntityMenu()
 		const url = domain + shareLink.value

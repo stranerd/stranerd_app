@@ -336,7 +336,6 @@ ion-popover::part(content) {
 	width: auto !important;
 }
 
-
 ion-input {
 	--background: #F7F7FC;
 	--box-shadow: none;
@@ -347,11 +346,16 @@ ion-input {
 	--padding-bottom: 4em;
 }
 
-
 ion-toolbar {
 	--background: #F7F7FC;
 }
 
 .item-bottom {
 	display: none !important;
+}
+
+ion-badge {
+	--background: #FFDC00 !important;
+	--color: #132740 !important;
+	--padding-top: 6px !important;
 }

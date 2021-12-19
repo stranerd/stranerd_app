@@ -43,8 +43,8 @@ export class SetEntity extends BaseEntity {
 		this.updatedAt = updatedAt
 	}
 
-	get totalSaved () {
-		return Object.values(this.saved).reduce((acc, cur) => acc + cur.length, 0)
+	get allSaved () {
+		return Object.values(this.saved).flat(1)
 	}
 }
 

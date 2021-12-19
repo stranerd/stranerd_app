@@ -25,6 +25,7 @@ import { GetLeaderboardUseCase } from './domain/usecases/users/getLeaderboard'
 import { GetAllAdminsUseCase } from './domain/usecases/users/getAllAdmins'
 import { GetAllTutorsUseCase } from './domain/usecases/users/getAllTutors'
 import { ListenToAllTutorsUseCase } from './domain/usecases/users/listenToAllTutors'
+import { ListenToAllAdminsUseCase } from './domain/usecases/users/listenToAllAdmins'
 import { ListenToUserUseCase } from './domain/usecases/users/listenToUser'
 import { UpdateStreakUseCase } from './domain/usecases/users/updateStreak'
 import { UpdateTutorUseCase } from './domain/usecases/users/updateTutor'
@@ -72,6 +73,7 @@ export const GetLeaderboard = new GetLeaderboardUseCase(userRepository)
 export const GetAllAdmins = new GetAllAdminsUseCase(userRepository)
 export const GetAllTutors = new GetAllTutorsUseCase(userRepository)
 export const ListenToAllTutors = new ListenToAllTutorsUseCase(userRepository)
+export const ListenToAllAdmins = new ListenToAllAdminsUseCase(userRepository)
 export const ListenToUser = new ListenToUserUseCase(userRepository)
 export const UpdateStreak = new UpdateStreakUseCase(userRepository)
 export const UpdateTutor = new UpdateTutorUseCase(userRepository)

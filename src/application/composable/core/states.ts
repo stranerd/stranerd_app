@@ -10,7 +10,7 @@ export const useErrorHandler = () => {
 	const setError = async (error: any, skipAlert = false) => {
 		if (error instanceof NetworkError) {
 			errorState.value = error.errors
-				.map(({ message, field }) => `${capitalize(field ?? 'Error')}: ${message}`)
+				.map(({ message, field }) => `${ capitalize(field ?? 'Error') }: ${ message }`)
 				.join('\n')
 			if ([
 				StatusCodes.NotAuthenticated,
@@ -50,21 +50,28 @@ export const useLoadingHandler = () => {
 export const useListener = (start: () => Promise<() => void>) => {
 	let listener = null as null | (() => void)
 	const isRunning = ref(false)
+	const watchers = ref(0)
 
 	const closeListener = async () => {
+		watchers.value--
+		if (watchers.value > 0) return
 		listener?.()
 		isRunning.value = false
 	}
 
 	const startListener = async () => {
-		await closeListener()
+		watchers.value++
+		if (watchers.value > 1) return
 		listener = await start()
 		isRunning.value = true
 	}
 
 	const resetListener = async (reset: () => Promise<() => void>) => {
 		start = reset
-		if (isRunning.value) await startListener()
+		if (isRunning.value) {
+			await closeListener()
+			await startListener()
+		}
 	}
 	return { startListener, closeListener, resetListener, isRunning }
 }

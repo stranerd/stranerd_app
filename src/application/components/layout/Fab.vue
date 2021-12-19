@@ -70,7 +70,7 @@ export default defineComponent({
 
 </script>
 
-<style>
+<style scoped>
 	.orange {
 		--background: #FFA84B !important;
 		--color: #ffffff !important;

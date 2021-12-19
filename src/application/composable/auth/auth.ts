@@ -4,6 +4,7 @@ import { AuthDetails, AuthTypes, UserLocation } from '@modules/auth/domain/entit
 import { SessionSignout } from '@modules/auth'
 import { isClient } from '@utils/environment'
 import { analytics } from '@modules/core'
+import { useMySets } from '@app/composable/study/sets'
 
 const global = {
 	auth: ref(null as AuthDetails | null),
@@ -83,6 +84,7 @@ export const useAuth = () => {
 
 	const signin = async (remembered: boolean) => {
 		await startProfileListener()
+		await useMySets().listener.startListener()
 		await analytics.logEvent('login', { remembered })
 	}
 
