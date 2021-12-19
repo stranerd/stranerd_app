@@ -5,12 +5,11 @@
 
 	<div v-else class="col-span-12 flex flex-col px-3 normalText">
 		<template v-if="answers.length">
-			<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer"></AnswerCard>
+			<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer" />
 		</template>
-		<EmptyState
-			v-else
-			btnText="Go and answer a Question"
-			info="You haven't answered any questions yet, click the button below to answer a question"
+		<EmptyState v-else
+			btnText="Explore Questions"
+			info="This user hasn't answered any questions yet."
 			route="/questions"
 		/>
 	</div>

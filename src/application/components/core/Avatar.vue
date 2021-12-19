@@ -1,5 +1,5 @@
 <template>
-	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}/bio`">
+	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}/`">
 		<img
 			v-if="source"
 			:src="source"

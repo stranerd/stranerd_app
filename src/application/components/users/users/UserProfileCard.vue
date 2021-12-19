@@ -22,7 +22,7 @@
 		</div>
 		<div
 			class="flex lg:w-6/12 px-4 mx-auto mt-3 md:justify-center lg:justify-start lg:items-center gap-3 text-faded_gray font-bold  whitespace-normal overflow-x-auto">
-			<router-link :to="`/users/${user.id}/bio`" class="pb-2 pr-3 cursor-pointer"
+			<router-link :to="`/users/${user.id}/`" class="pb-2 pr-3 cursor-pointer"
 				exact-active-class="border-b-4 text-white border-white">
 				About
 			</router-link>
@@ -60,7 +60,7 @@ export default defineComponent({
 			type: UserEntity
 		}
 	},
-	setup (props) {
+	setup () {
 		const { id } = useAuth()
 		return { id }
 	}

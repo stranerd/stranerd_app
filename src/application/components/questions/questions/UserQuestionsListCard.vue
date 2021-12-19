@@ -39,7 +39,7 @@
 	</div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import { IonRippleEffect } from '@ionic/vue'
 import { arrowRedo, flag } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
@@ -52,7 +52,7 @@ export default defineComponent({
 	props: {
 		question: {
 			required: true,
-			type: Object as PropType<QuestionEntity>
+			type: QuestionEntity
 		}
 	},
 	setup () {
@@ -63,6 +63,5 @@ export default defineComponent({
 		Subject,
 		Tag
 	}
-
 })
 </script>

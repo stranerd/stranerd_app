@@ -1,19 +1,19 @@
 <template>
 	<UserPageWrapper>
 		<template v-slot:default="{ user }">
-			<UserDashboard :user="user" />
+			<UserBio :user="user" />
 		</template>
 	</UserPageWrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import UserDashboard from '@app/components/users/users/UserDashboard.vue'
+import UserBio from '@app/components/users/users/UserBio.vue'
 import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 
 export default defineComponent({
 	name: 'UserIdDashboard',
 	displayName: 'Profile',
-	components: { UserPageWrapper, UserDashboard }
+	components: { UserPageWrapper, UserBio }
 })
 </script>
