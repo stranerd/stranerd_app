@@ -14,6 +14,7 @@ module.exports = {
 			colors: {
 				// Build your palette here
 				primary: '#546DD3',
+				cyan: '#54B5D3',
 				gray: '#64778A',
 				red: '#FF6666',
 				pink: '#FF6496',

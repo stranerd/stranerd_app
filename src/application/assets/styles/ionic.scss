@@ -359,3 +359,21 @@ ion-badge {
 	--color: #132740 !important;
 	--padding-top: 4px !important;
 }
+
+	.swiper-pagination{
+		top: 50% !important;
+	}
+
+		.swiper-pagination-bullet {
+		width: 10px;
+		height: 10px;
+		color: #C7D6E3 !important;
+		opacity: 1;
+		background: #C7D6E3 !important;
+	}
+
+	.swiper-pagination-bullet-active {
+		color: #fff !important;
+		background: #fff !important;
+		border: 2px solid #fff !important;
+	}

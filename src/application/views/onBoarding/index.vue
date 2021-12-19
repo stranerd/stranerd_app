@@ -1,24 +1,60 @@
 <template>
-	<div class="w-full h-full bg-primary">
-		<div class="bg-white h-[40%] rounded-b-[45%] flex flex-col justify-center items-center gap-4">
-			<img alt="" class="w-12 mr-4" src="@app/assets/images/New/testPrep.svg" />
-			<ion-text class="text-xl text-main_dark font-bold" >
-				Test Prep
-			</ion-text>
-			<ion-text class="text-base text-main_dark max" >
-				Practice tests and study solutions of all available questions on gateway exams (WAEC, JAMB, JUPEB e.t.c.).
-			</ion-text>
-		</div>
-	
-	</div>
+	<Swiper
+		:dynamic-bullets="true"
+		:dynamic-main-bullets="1"
+		:modules="modules"
+		:free-mode="true"
+		:pagination="{ clickable: true }"
+		:space-between="10"
+		class="flex flex-row w-full h-screen justify-between items-stretch"
+	>
+		<SwiperSlide>
+			<SlideOne/>
+		</SwiperSlide>
+		<SwiperSlide>
+			<SlideTwo/>
+		</SwiperSlide>
+		<SwiperSlide>
+			<SlideThree/>
+		</SwiperSlide>
+		<SwiperSlide>
+			<SlideFour/>
+		</SwiperSlide>
+	</Swiper>
+
+
+
 </template>
 
-<script>
+
+<script lang="ts">
+import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
+import { Pagination } from 'swiper'
+import 'swiper/swiper-bundle.min.css'
+import SlideOne from './slideOne.vue'
+import SlideTwo from './slideTwo.vue'
+import SlideThree from './slideThree.vue'
+import SlideFour from './slideFour.vue'
 export default {
+	name: '',
+	components: {
+		Swiper,
+		SwiperSlide,
+		SlideOne,
+		SlideTwo,
+		SlideThree,
+		SlideFour
+	},
+	setup () {
+
+		return {
+			modules: [Pagination]
+		}
+	},
 
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>
