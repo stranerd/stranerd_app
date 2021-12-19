@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, onMounted } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import UserProfileCard from '@app/components/users/users/UserProfileCard.vue'
 import PageLoading from '@app/components/core/PageLoading.vue'
 import Justified from '@app/layouts/Justified.vue'
@@ -27,7 +27,7 @@ export default defineComponent({
 		const { userId } = useRoute().params
 		const { user, loading, error, listener } = useUser(userId as string)
 		onMounted(listener.startListener)
-		onBeforeMount(listener.closeListener)
+		onBeforeUnmount(listener.closeListener)
 		return { user, loading, error }
 	}
 })

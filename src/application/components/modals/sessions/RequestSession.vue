@@ -29,7 +29,7 @@
 		</div>
 
 		<div class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex flex-row">
-			<IonSelect class="w-full  font-medium" interface="alert" placeholder="Select the subject">
+			<IonSelect class="w-full  font-medium" interface="action-sheet" mode="ios" placeholder="Select the subject">
 				<IonSelectOption value="maths">Mathematics</IonSelectOption>
 				<IonSelectOption value="physics">Physics</IonSelectOption>
 				<IonSelectOption value="bio">Biology</IonSelectOption>
@@ -58,7 +58,7 @@
 		</div>
 
 		<div class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex flex-row">
-			<IonSelect v-model="factory.duration" class="w-full  font-medium" interface="alert"
+			<IonSelect v-model="factory.duration" class="w-full font-medium" interface="action-sheet" mode="ios"
 				placeholder="Duration and payment">
 				<IonSelectOption v-for="option in factory.prices" :key="option.duration" :value="option.duration">
 					{{ option.duration }} minutes - {{ option.price }} gold coins

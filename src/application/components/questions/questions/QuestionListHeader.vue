@@ -12,7 +12,7 @@
 	</div>
 
 	<div
-		class="flex items-center flex-col lg:flex-row justify-between  mb-8 lg:gap-14 gap-4 bg-white p-3 lg:rounded-2xl lg:py-3 py-4   lg:-mt-7 -mt-3 lg:!-mx-2.5 -mx-4">
+		class="flex items-center flex-col lg:flex-row justify-between mb-8 lg:gap-14 gap-4 bg-white p-3 lg:rounded-2xl lg:py-3 py-4 lg:-mt-5 -mt-3 lg:!-mx-2.5 -mx-4">
 		<div
 			class="rounded-xl  text-sm   flex flex-row items-center gap-4  w-[92vw] lg:w-auto  bg-new_gray">
 			<span class="bg-gray text-white px-4 py-2.5 rounded-lg font-bold w-44 grid place-items-center">
@@ -22,7 +22,7 @@
 				placeholder="Search by subjects" />
 		</div>
 		<div class="flex items-center">
-			<ion-segment v-model="answered" class="w-[92vw] lg:w-auto">
+			<ion-segment v-model="answered" class="w-[92vw] lg:w-auto" mode="ios">
 				<ion-segment-button v-for="choice in answeredChoices" :key="choice.key" :value="choice.val"
 					class="!px-4" @click="answered = choice.val">
 					<ion-label>{{ choice.key }}</ion-label>
@@ -42,7 +42,6 @@ import { IonSegment, IonSegmentButton } from '@ionic/vue'
 export default defineComponent({
 	name: 'QuestionListHeader',
 	components: { SelectSubject, IonSegment, IonSegmentButton },
-
 	setup () {
 		const { answeredChoices, answered, subjectId } = useQuestionList()
 		return {
@@ -50,7 +49,6 @@ export default defineComponent({
 			chevronDown, chevronUp, folder, flash
 		}
 	}
-
 })
 </script>
 
@@ -63,7 +61,6 @@ export default defineComponent({
 		--background: #F2F3F5;
 		color: #64778A;
 		font-weight: bold;
-
 	}
 
 	ion-segment-button {
