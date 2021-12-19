@@ -12,15 +12,34 @@
 					<ion-label class="font-bold">Add To Your Library</ion-label>
 				</span>
 			</template>
-			<span class="my-4 flex gap-4 items-center cursor-pointer">
-				<ion-icon :icon="folder" class="text-2xl" />
-				<ion-label class="font-bold">Add To Study Set</ion-label>
-			</span>
-			<span v-if="data?.set && !data?.set?.isRoot && data?.set?.allSaved.includes(entity?.id)"
-				class="my-4 flex gap-4 items-center" @click="removeFromSet(type, entity?.id, data?.set)">
-				<ion-icon :icon="removeCircle" class="text-2xl" />
-				<ion-label class="font-bold">Remove From Study Set</ion-label>
-			</span>
+
+			<template v-if="normalSets.filter((s) => !s.saved[type].includes(entity?.id)).length">
+				<span class="my-4 flex gap-4 items-center" @click="showAddToSet = !showAddToSet">
+					<ion-icon :icon="showAddToSet ? chevronUp : folder" class="text-2xl" />
+					<ion-label class="font-bold">Add To Study Set</ion-label>
+				</span>
+				<div v-if="showAddToSet" class="ml-6 mb-4">
+					<span v-for="set in normalSets.filter((s) => !s.saved[type].includes(entity?.id))" :key="set.hash"
+						class="mb-4 flex gap-4 items-center" @click="saveToSet(type, entity?.id, set)">
+						<ion-icon :icon="folder" class="text-xl" />
+						<ion-label class="font-bold">{{ set.name }}</ion-label>
+					</span>
+				</div>
+			</template>
+
+			<template v-if="normalSets.filter((s) => s.saved[type].includes(entity?.id)).length">
+				<span class="my-4 flex gap-4 items-center" @click="showRemoveFromSet = !showRemoveFromSet">
+					<ion-icon :icon="showRemoveFromSet ? chevronUp : removeCircle" class="text-2xl" />
+					<ion-label class="font-bold">Remove From Study Set</ion-label>
+				</span>
+				<div v-if="showRemoveFromSet" class="ml-6 mb-4">
+					<span v-for="set in normalSets.filter((s) => s.saved[type].includes(entity?.id))" :key="set.hash"
+						class="mb-4 flex gap-4 items-center" @click="removeFromSet(type, entity?.id, set)">
+						<ion-icon :icon="folder" class="text-xl" />
+						<ion-label class="font-bold">{{ set.name }}</ion-label>
+					</span>
+				</div>
+			</template>
 		</template>
 		<span v-if="showDelete" class="my-4 flex gap-4 items-center" @click="deleteEntity">
 			<ion-icon :icon="trash" class="text-2xl" />
@@ -41,10 +60,10 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useMenuPopover } from '@app/composable/core/modals'
 import { useDeleteStudyEntity, useStudyMenuData } from '@app/composable/study/menus'
-import { folder, library, person, removeCircle, share as shareIcon, trash } from 'ionicons/icons'
+import { chevronUp, folder, library, person, removeCircle, share as shareIcon, trash } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useRouter } from 'vue-router'
 import { useMySets, useSaveToSet } from '@app/composable/study/sets'
@@ -68,15 +87,17 @@ export default defineComponent({
 		})
 		const { loading: deleteLoading, error: deleteError, deleteEntity } = useDeleteStudyEntity()
 
-		const { rootSet } = useMySets()
+		const { rootSet, normalSets } = useMySets()
 		const { loading: setLoading, error: setError, saveToSet, removeFromSet } = useSaveToSet()
+		const showAddToSet = ref(false)
+		const showRemoveFromSet = ref(false)
 
 		return {
 			entity, type, data,
-			library, folder, shareIcon, person, trash, removeCircle,
+			chevronUp, library, folder, shareIcon, person, trash, removeCircle,
 			share, id, isLoggedIn, isAdmin, goToAuthor,
 			showDelete, deleteLoading, deleteError, deleteEntity,
-			rootSet, setLoading, setError, saveToSet, removeFromSet
+			rootSet, normalSets, setLoading, setError, saveToSet, removeFromSet, showAddToSet, showRemoveFromSet
 		}
 	}
 })

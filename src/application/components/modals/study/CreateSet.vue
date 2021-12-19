@@ -49,7 +49,7 @@
 						</ion-item>
 
 						<ion-item class="w-full ion-item-transparent">
-							<ion-radio :value="1" class="ion-white"></ion-radio>
+							<ion-radio :value="false" class="ion-white"></ion-radio>
 							<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Private</ion-label>
 						</ion-item>
 					</ion-radio-group>

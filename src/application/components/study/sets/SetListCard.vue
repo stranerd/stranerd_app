@@ -3,16 +3,11 @@
 		:class="`w-full ${colorClass} rounded-xl flex flex-col gap-[1rem] box-border p-4`"
 		:to="`/study/sets/${set.id}`"
 	>
-		<ion-icon :icon="folder" class="text-faded_gray text-3xl"/>
+		<ion-icon :icon="folder" class="text-faded_gray text-3xl" />
 
-		<ion-text class="text-sm text-main_dark font-bold p-5 pb-1 w-full text-left">
-			{{ set.name }}
-		</ion-text>
+		<ion-text class="text-sm text-main_dark font-bold w-full text-left">{{ set.name }}</ion-text>
 
-		<div class="flex justify-between gap-4 items-center">
-			<span>{{ set.allSaved.length }} {{ pluralize(set.allSaved.length, 'item', 'items') }}</span>
-			<ion-icon :icon="ellipsisVertical" class="text-xl"/>
-		</div>
+		<span>{{ set.allSaved.length }} {{ pluralize(set.allSaved.length, 'item', 'items') }}</span>
 	</router-link>
 </template>
 
@@ -34,7 +29,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup() {
+	setup () {
 		return { ellipsisVertical, folder, pluralize }
 	}
 })

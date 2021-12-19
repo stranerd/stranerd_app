@@ -72,7 +72,7 @@ import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 import { TestEntity } from '@modules/study'
 import { useCountdown } from '@app/composable/core/dates'
 import { getDigitalTime } from '@utils/dates'
-import { useStudyModal } from '@app/composable/core/modals'
+import { useStudyPopover } from '@app/composable/core/modals'
 import TestQuestion from '@app/components/study/tests/TestQuestion.vue'
 
 export default defineComponent({
@@ -105,7 +105,7 @@ export default defineComponent({
 			}
 		})
 		const submit = () => {
-			useStudyModal().openSubmitTest()
+			useStudyPopover().openSubmitTest()
 		}
 		return {
 			error, loading, questions, submit, updateAnswer,
