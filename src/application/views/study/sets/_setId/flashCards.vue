@@ -13,7 +13,7 @@ import SetFlashCardsList from '@app/components/study/flashCards/SetFlashCardsLis
 
 export default defineComponent({
 	name: 'SetPageFlashCards',
-	displayName: 'Explore',
+	displayName: 'Study Set',
 	components: { PageWrapper, SetFlashCardsList }
 })
 </script>

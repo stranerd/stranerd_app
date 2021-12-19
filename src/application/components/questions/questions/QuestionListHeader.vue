@@ -22,7 +22,7 @@
 				placeholder="Search by subjects" />
 		</div>
 		<div class="flex items-center">
-			<ion-segment v-model="answered" class="w-[92vw] lg:w-auto">
+			<ion-segment v-model="answered" class="w-[92vw] lg:w-auto" mode="ios">
 				<ion-segment-button v-for="choice in answeredChoices" :key="choice.key" :value="choice.val"
 					class="!px-4" @click="answered = choice.val">
 					<ion-label>{{ choice.key }}</ion-label>
@@ -60,21 +60,21 @@ export default defineComponent({
 	}
 
 	ion-segment {
-		--background: #F2F3F5;
-		color: #64778A;
-		font-weight: bold;
+		--background: #F2F3F5 !important;
+		color: #64778A !important;
+		font-weight: bold !important;
 
 	}
 
 	ion-segment-button {
-		--background-checked: #64778A;
-		--background-focused: #64778A;
-		--indicator-color: #64778A;
-		--indicator-box-shadow: none;
-		--padding-top: 0.5rem;
-		--padding-bottom: 0.5rem;
-		color: #64778A;
-		font-weight: bold;
+		--background-checked: #64778A !important;
+		--background-focused: #64778A !important;
+		--indicator-color: #64778A !important;
+		--indicator-box-shadow: none !important;
+		--padding-top: 0.5rem !important;
+		--padding-bottom: 0.5rem !important;
+		color: #64778A !important;
+		font-weight: bold !important;
 		margin: 0 !important;
 	}
 </style>

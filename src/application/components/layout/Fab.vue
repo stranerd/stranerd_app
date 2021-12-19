@@ -7,8 +7,8 @@
 			<ion-icon :icon="add"></ion-icon>
 		</ion-fab-button>
 		<ion-fab-list class="z-50" side="top">
-			<!-- <router-link class="relative"
-				to="/study">
+			<router-link class="relative"
+				to="/study/sets/create">
 				<ion-fab-button  color="success" size="small">
 					<ion-icon :icon="folder" class="text-lg"></ion-icon>
 				</ion-fab-button>
@@ -16,34 +16,34 @@
 					class="px-2 py-1 mr-1.5 w-max bg-orange rounded-xl text-xs font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
 					Create a study set
 				</ion-label>
-			</router-link> -->
+			</router-link>
 			<router-link class="relative"
 				to="/study/flashCards/create">
-				<ion-fab-button color="success" size="small">
+				<ion-fab-button color="tertiary" size="small">
 					<img alt="" class="w-4" src="@app/assets/images/icons/flashCard-purple.svg">
 				</ion-fab-button>
 				<ion-label
-					class="px-2 py-1 mr-1.5 w-max  text-xs bg-orange rounded-xl  font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
+					class="px-2 py-1 mr-1.5 w-max  text-xs bg-purple rounded-xl  font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
 					Create a flashcard
 				</ion-label>
 			</router-link>
 			<router-link class="relative"
 				to="/questions/create">
-				<ion-fab-button color="tertiary" size="small">
+				<ion-fab-button color="secondary" size="small">
 					<ion-icon :icon="helpCircle" class="text-xl"></ion-icon>
 				</ion-fab-button>
 				<ion-label
-					class="px-2 py-1 mr-1.5 w-max  bg-purple rounded-xl text-xs font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
+					class="px-2 py-1 mr-1.5 w-max  bg-green rounded-xl text-xs font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
 					Ask a question
 				</ion-label>
 			</router-link>
 			<router-link class="relative"
 				to="/study/explore">
-				<ion-fab-button color="secondary" size="small">
+				<ion-fab-button color="primary" size="small">
 					<ion-icon :icon="compass" class="text-xl"></ion-icon>
 				</ion-fab-button>
 				<ion-label
-					class="px-2 py-1 mr-1.5 w-max  bg-green rounded-xl text-xs font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
+					class="px-2 py-1 mr-1.5 w-max  bg-primary rounded-xl text-xs font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
 					Explore
 				</ion-label>
 			</router-link>
