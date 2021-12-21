@@ -1,6 +1,6 @@
 <template>
 	<SearchWrapper>
-		<template v-slot:default="{ searchTerm, testPreps, notes, videos, flashCards }">
+		<template v-slot:default="{ searchTerm, testPreps, notes, videos, flashCards, users }">
 			<div>
 				<div class="mb-12">
 					<div class="w-full flex justify-between mb-4">
@@ -63,6 +63,22 @@
 					</div>
 					<SearchFlashCardsList :flashCards="flashCards" :sliced="true" />
 				</div>
+
+				<div class="mb-12">
+					<div class="w-full flex justify-between mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text class="mr-3">
+								Nerds
+							</ion-text>
+						</div>
+
+						<router-link :to="`/search/nerds?search=${searchTerm}`"
+							class="text-primary normalText flex items-center font-bold">
+							<span>view all</span>
+						</router-link>
+					</div>
+					<SearchUsersList :sliced="true" :users="users" />
+				</div>
 			</div>
 		</template>
 	</SearchWrapper>
@@ -75,6 +91,7 @@ import SearchTestPrepsList from '@app/components/study/testPreps/SearchTestPreps
 import SearchNotesList from '@app/components/study/notes/SearchNotesList.vue'
 import SearchVideosList from '@app/components/study/videos/SearchVideosList.vue'
 import SearchFlashCardsList from '@app/components/study/flashCards/SearchFlashCardsList.vue'
+import SearchUsersList from '@app/components/users/SearchUsersList.vue'
 
 export default defineComponent({
 	name: 'SearchAll',
@@ -84,7 +101,8 @@ export default defineComponent({
 		SearchTestPrepsList,
 		SearchNotesList,
 		SearchVideosList,
-		SearchFlashCardsList
+		SearchFlashCardsList,
+		SearchUsersList
 	}
 })
 </script>
