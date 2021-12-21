@@ -1,14 +1,14 @@
 module.exports = {
 	purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
 	darkMode: false, // or 'media' or 'class'
-	mode:'jit',
+	mode: 'jit',
 	theme: {
 		screens: {
 			'sm': '640px',
- 			'md': '768px',
+			'md': '768px',
 			'lg': '1280px',
-			'mmd': '1420px',
-			'2xl': '1536px',
+			'xl': '1420px',
+			'2xl': '1536px'
 		},
 		extend: {
 			colors: {
@@ -37,12 +37,12 @@ module.exports = {
 				green: '#00D246'
 			},
 			fontFamily: {
-				'nuni': ['"Nunito Sans"', 'sans-serif']
-			},
-		},
+				'nuni': ['Nunito Sans', 'sans-serif']
+			}
+		}
 	},
 	variants: {
-		extend: {},
+		extend: {}
 	},
-	plugins: [],
+	plugins: []
 }

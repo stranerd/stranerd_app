@@ -1,7 +1,6 @@
 <template>
 	<ExploreWrapper>
 		<div>
-			<EmptyState v-if="videos.length === 0" info="No available videos" />
 			<ExploreVideosList :videos="videos" />
 			<PageLoading v-if="loading" />
 		</div>

@@ -4,7 +4,7 @@
 			<EmptyState info="No flashCards saved." />
 		</template>
 		<template v-else>
-			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+			<div class="showcase">
 				<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard"
 					:openMenu="() => openMenu(flashCard)" />
 			</div>

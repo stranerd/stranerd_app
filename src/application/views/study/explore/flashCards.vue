@@ -1,7 +1,6 @@
 <template>
 	<ExploreWrapper>
 		<div>
-			<EmptyState v-if="flashCards.length === 0" info="No available flashCards" />
 			<ExploreFlashCardsList :flashCards="flashCards" />
 			<PageLoading v-if="loading" />
 		</div>

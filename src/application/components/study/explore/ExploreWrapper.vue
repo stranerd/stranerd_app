@@ -6,9 +6,12 @@
 					<ion-text class="heading lg:text-2xl font-bold text-white text-center  mb-3 hidden md:block">
 						Explore thousands of study materials
 					</ion-text>
-					<ion-searchbar class="max-w-[1054px] lg:w-7/12 !h-16 " mode="md"
-						placeholder="Search by subjects, topics and related keywords"
-						show-cancel-button="never" />
+					<router-link class="max-w-[1054px] lg:w-7/12" to="/search">
+						<ion-searchbar class="!h-16" mode="md"
+							placeholder="Search by subjects, topics and related keywords"
+							show-cancel-button="never"
+						/>
+					</router-link>
 				</div>
 				<div
 					class="mb-0.5 mt-8 md:mt-12   justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full  lg:px-3 text-xs mx-auto text-faded_gray font-bold  whitespace-normal overflow-x-auto">

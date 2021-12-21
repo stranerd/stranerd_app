@@ -27,6 +27,6 @@ export class MetaApiDataSource implements MetaBaseDataSource {
 			testPreps: QueryResults<TestPrepFromModel>
 			sets: QueryResults<SetFromModel>
 			flashCards: QueryResults<FlashCardFromModel>
-		}>(`/meta/search/${search}`, {})
+		}>('/meta/search', { search })
 	}
 }
