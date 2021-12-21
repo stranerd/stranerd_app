@@ -1,5 +1,5 @@
 <template>
-	<div class="mx-auto py-6 px-8 flex flex-col text-gray">
+	<Popover class="flex flex-col">
 		<template v-if="isLoggedIn">
 			<template v-if="rootSet">
 				<span v-if="rootSet.allSaved.includes(entity?.id)" class="my-4 flex gap-4 items-center"
@@ -56,7 +56,7 @@
 		</span>
 		<PageLoading v-if="deleteLoading" />
 		<PageLoading v-if="setLoading" />
-	</div>
+	</Popover>
 </template>
 
 <script lang="ts">

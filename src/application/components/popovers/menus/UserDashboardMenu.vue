@@ -1,5 +1,5 @@
 <template>
-	<div class="mx-auto py-2 px-4 flex flex-col">
+	<Popover class="flex flex-col">
 		<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
 			to="/account">
 			<div class="w-48 flex items-center gap-3">
@@ -37,7 +37,7 @@
 		</div>
 
 		<PageLoading v-if="loading" />
-	</div>
+	</Popover>
 </template>
 
 <script lang="ts">
