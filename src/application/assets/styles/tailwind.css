@@ -3,14 +3,15 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-	width: 0; /* Remove scrollbar space */
-	background: transparent; /* Optional: just make scrollbar invisible */
-	display: none;
+	width: 6px; /* Remove scrollbar space */
+	background: #7483bf4e; /* Optional: just make scrollbar invisible */
 }
 
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
-	background: #ffffff;
+	background: #4e474788;
+	border-radius: 100px;
+	cursor: pointer;
 }
 
 @layer utilities {

@@ -1,8 +1,10 @@
 <template>
 	<IonPage>
+		<HomeTopNavigation />
 		<IonContent>
-			<!-- <h2>Help</h2> -->
-			<slot />
+			<div class="!w-full layout-body">
+				<slot />
+			</div>
 		</IonContent>
 	</IonPage>
 </template>
@@ -10,9 +12,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonContent, IonPage } from '@ionic/vue'
+import HomeTopNavigation from '../components/layout/topNavigations/HomeTopNavigation.vue'
 
 export default defineComponent({
-	name: 'HomeLayout',
-	components: { IonContent, IonPage }
+	name: 'JustifiedLayout',
+	components: { IonPage, IonContent, HomeTopNavigation }
 })
 </script>
