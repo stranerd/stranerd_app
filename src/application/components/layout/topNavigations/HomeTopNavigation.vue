@@ -65,13 +65,13 @@
 			</a>
 	
 			<a
-				class="btn bg-white rounded-md text-main_dark mx-auto min-w-[11rem] w-100"
+				class="btn btn-custom  text-white bg-primary  h-12 rounded-xl w-60 mx-auto"
 				@click="navigate('/auth/signin')"
 			>
-				Sign In
+				Log In
 			</a>
 			<a
-				class="btn text-white mx-auto w-100 min-w-[11rem] border-2 border-white rounded-md"
+				class="btn border border-faded_gray text-primary   h-12 rounded-xl w-60 mx-auto"
 				@click="navigate('/auth/signup')"
 			>
 				Sign Up
@@ -132,8 +132,8 @@ export default defineComponent({
 	}
 
 	.link-custom-sm {
-		font-weight: 500;
-		font-size: 14px;
+		font-weight: 700;
+		font-size: 16px;
 	}
 
 
