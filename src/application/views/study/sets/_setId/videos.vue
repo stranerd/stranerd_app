@@ -13,7 +13,7 @@ import SetVideosList from '@app/components/study/videos/SetVideosList.vue'
 
 export default defineComponent({
 	name: 'SetPageVideos',
-	displayName: 'Explore',
+	displayName: 'Study Set',
 	components: { PageWrapper, SetVideosList }
 })
 </script>

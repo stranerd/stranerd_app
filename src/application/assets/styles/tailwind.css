@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+	width: 6px; /* Remove scrollbar space */
+	background: #7483bf4e; /* Optional: just make scrollbar invisible */
+}
+
+
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+	background: #4e474788;
+	border-radius: 100px;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 680px) {
+	::-webkit-scrollbar {
+	width: 0px; /* Remove scrollbar space */
+	background: #7483bf4e; /* Optional: just make scrollbar invisible */
+}
+}
+
 @layer utilities {
 	.layout {
 		@apply flex flex-col h-full flex-grow

@@ -13,7 +13,7 @@ import SetTestPrepsList from '@app/components/study/testPreps/SetTestPrepsList.v
 
 export default defineComponent({
 	name: 'SetPageTestPreps',
-	displayName: 'Explore',
+	displayName: 'Study Set',
 	components: { PageWrapper, SetTestPrepsList }
 })
 </script>

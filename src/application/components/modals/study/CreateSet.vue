@@ -35,8 +35,8 @@
 						placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
 						show-cancel-button="never"></ion-input>
 				</div>
-				<div class="flex items-center w-full max-w-[25rem] justify-center">
-					<ion-radio-group v-model="factory.isPublic" class="flex w-full">
+				<div class="flex items-center w-full max-w-[25rem] justify-center hidden">
+					<ion-radio-group v-model="factory.isPublic" class="flex w-full" mode="md">
 						<ion-list-header>
 							<ion-label class="text-icon_inactive font-bold text-base">
 								Set privacy:
@@ -107,7 +107,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	.ion-item-transparent {
 		--background: transparent;
 	}
@@ -124,5 +124,11 @@ export default defineComponent({
 
 	ion-label {
 		--color: #8B9EB1 !important;
+	}
+
+	ion-label {
+		@media (max-width: 640px) {
+			font-size: 12px !important;
+		}
 	}
 </style>

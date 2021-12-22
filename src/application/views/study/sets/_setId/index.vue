@@ -78,7 +78,7 @@ import SetFlashCardsList from '@app/components/study/flashCards/SetFlashCardsLis
 
 export default defineComponent({
 	name: 'SetPageIndex',
-	displayName: 'Explore',
+	displayName: 'Study Set',
 	components: { PageWrapper, SetTestPrepsList, SetNotesList, SetVideosList, SetFlashCardsList }
 })
 </script>

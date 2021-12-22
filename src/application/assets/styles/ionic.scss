@@ -231,7 +231,7 @@ ion-popover {
 	--border-radius: 0.75rem;
 	--border-width: 1px;
 	--border-style: solid;
-	--border-color: #C7D6E3;
+	--border-color: white;
 	font-weight: 700;
 	text-transform: capitalize !important;
 	letter-spacing: 0.02rem !important;
@@ -264,9 +264,9 @@ ion-popover {
 		--padding-end: 1.25rem;
 		--color: inherit !important;
 		--box-shadow: none;
-		--border-radius: 0.5rem;
+		--border-radius: 0.75rem;
 		box-shadow: none;
-		border-radius: 0.5rem;
+		border-radius: 0.75rem;
 		font-weight: 700;
 		text-transform: capitalize !important;
 		letter-spacing: 0.02rem !important;
@@ -359,3 +359,21 @@ ion-badge {
 	--color: #132740 !important;
 	--padding-top: 4px !important;
 }
+
+	.swiper-pagination{
+		top: 50% !important;
+	}
+
+		.swiper-pagination-bullet {
+		width: 10px;
+		height: 10px;
+		color: #C7D6E3 !important;
+		opacity: 1;
+		background: #C7D6E3 !important;
+	}
+
+	.swiper-pagination-bullet-active {
+		color: #fff !important;
+		background: #fff !important;
+		border: 2px solid #fff !important;
+	}

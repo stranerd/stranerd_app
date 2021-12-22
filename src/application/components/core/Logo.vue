@@ -27,7 +27,7 @@ export default defineComponent({
 			height: 22.5px;
 		}
 		@media (min-width: $lg) {
-			height: 25px;
+			height: 32px;
 		}
 	}
 </style>

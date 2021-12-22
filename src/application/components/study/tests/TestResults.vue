@@ -1,9 +1,16 @@
 <template>
-	<div class="flex items-center justify-center flex-col lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white">
+	<div class="flex items-center justify-center flex-col lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-new_gray">
 		<ion-text class="text-4xl text-main_dark font-bold my-8 mb-16">{{ test.scoreText }}</ion-text>
 
 		<DonutChart :bgColor="test.passed ? '#00D24622' : '#FF666622'" :fgColor="test.passed ? '#00D246' : '#FF6666'"
+			class="md:!block !hidden"
 			:score="test.score" :size="320"
+			:thickness="12" :total="100">
+			{{ formatNumber(test.score, 1) }}%
+		</DonutChart>
+		<DonutChart :bgColor="test.passed ? '#00D24622' : '#FF666622'" :fgColor="test.passed ? '#00D246' : '#FF6666'"
+			class="!block md:!hidden"
+			:score="test.score" :size="200"
 			:thickness="12" :total="100">
 			{{ formatNumber(test.score, 1) }}%
 		</DonutChart>

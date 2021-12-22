@@ -7,7 +7,7 @@
 					<Avatar :id="user.id" :size="90" :src="user.avatar" color="#C7D6E3" />
 				</div>
 				<div class="flex flex-col justify-start items-start">
-					<h2 class="lg:text-xl text-base font-bold text-white">{{ user.fullName }}</h2>
+					<h2 class="lg:text-xl text-base font-bold text-white mb-2">{{ user.fullName }}</h2>
 					<span
 						class="py-1 px-4 rounded-full lg:text-base text-xs w-auto flex border-white border-2 font-bold text-white bg-transparent">
 						{{ user.rank.id }}
@@ -35,11 +35,6 @@
 				class="pb-2 pr-3 cursor-pointer"
 				exact-active-class="border-b-4 text-white border-white">
 				Answers
-			</router-link>
-			<router-link v-if="user.id === id" :to="`/users/${user.id}/settings`"
-				class="pb-2 pr-3 cursor-pointer"
-				exact-active-class="border-b-4 text-white border-white">
-				Settings
 			</router-link>
 		</div>
 	</div>

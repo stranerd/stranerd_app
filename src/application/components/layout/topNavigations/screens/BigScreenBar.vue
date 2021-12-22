@@ -10,8 +10,8 @@
 				<div class="w-3/4 flex-auto flex flex-row items-center">
 					<search-bar class="flex-grow" />
 				</div>
-				<div class="w-1/4 flex-auto flex">
-					<div class="flex flex-row items-center py-1 gap-6 justify-between m-auto">
+				<div class="w-[25%] flex-auto flex">
+					<div class="flex flex-row items-center py-1 gap-6 justify-between ">
 						<ion-icon :icon="addCircle" class="text-2xl text-main_dark"
 							@click="openCreateDashboardMenu()" />
 						<router-link class=" flex flex-row items-center justify-center"
@@ -23,7 +23,7 @@
 							@click="openUserDashboardMenu()"
 						>
 							<avatar :id="user.id" :size="24" :src="user.avatar" />
-							<span class="text-base text-main_dark max-w-[6.5rem]">
+							<span class="text-base text-main_dark ">
 								{{ user.fullName }}
 							</span>
 							<ion-icon :icon="chevronDown" class="text-xl text-main_dark"></ion-icon>
