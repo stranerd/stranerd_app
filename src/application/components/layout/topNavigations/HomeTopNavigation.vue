@@ -1,55 +1,69 @@
 <template>
 	<ion-header
-		:class="[show ?'fixed bg-dark_gray top-0 bottom-0 !text-white':'', 'w-full flex flex-col  z-10 bg-white text-primary lg:shadow']"
+		:class="[show ?'fixed bg-white top-0 bottom-0 !text-white':'', 'w-full flex flex-col  z-10 bg-white text-primary lg:shadow']"
 		role="navigation">
-		<div class="md:px-8 p-4 flex items-center">
-			<router-link class="mr-auto" to="/">
-				<Logo v-if="!show" :secondary="true" />
-				<Logo v-else />
+		<div class="md:px-8 p-4 hidden md:flex items-center justify-between">
+			<router-link class="hidden lg:block" to="/">
+				<Logo  :secondary="true"  />
 			</router-link>
-			<div class="gap-8 flex-row lg:flex hidden items-center">
-				<router-link class="link-custom px-4" to="/">
+			<div class="gap-8 flex-row lg:flex hidden items-center text-gray	">
+				<router-link class="link-custom  px-4" to="/">
 					Home
 				</router-link>
 				<router-link class="link-custom px-4" to="/#how-it-works">
-					How it works
+					Questions
 				</router-link>
 				<router-link class="link-custom px-4" to="/#contact-us">
-					About
+					study
 				</router-link>
-				<router-link class="link-custom px-4" to="/#contact-us">
-					Blog
-				</router-link>
-				<router-link class="btn bg-main_dark  text-white !px-10 rounded-md" to="/auth/signup">
+		
+
+			</div>
+
+			<div class="gap-8 lg:flex hidden">
+				<router-link class="btn border border-faded_gray text-primary   !px-10 rounded-xl" to="/auth/signup">
 					Sign Up
 				</router-link>
-				<router-link class="btn btn-custom  border border-dark_gray text-main_dark !px-10 rounded-md"
+				<router-link class="btn btn-custom  text-white bg-primary  !px-10 rounded-xl"
 					to="/auth/signin">
-					Sign In
+					Log In
 				</router-link>
 
 
 			</div>
-			<div class="lg:hidden">
+		</div>
+
+		<ion-toolbar
+			:style="`--background:${show ? '#546DD3' : 'white'}`"
+			class="md:hidden  bg-white px-4 border-0 h-12 flex items-center justify-center "
+			:class= "{ 'text-white': show}"
+		>
+			<div class="flex items-center justify-between">
 				<span class="cursor-pointer" @click="toggleMenu">
 					<ion-icon v-if="!show" :icon="menu" size="100px" />
 					<ion-icon v-else :icon="close" size="100px" />
 				</span>
+				<router-link class="flex items-center" to="/">
+					<Logo   v-if="show" />
+					<img class="w-24" src="@app/assets/images/logo/logo-dark.svg" v-else />
+						
+				</router-link>
+				<IonIcon :icon="showSearch ? close : search" class="text-xl "
+					@click="toggleSearch" />
+				<search-bar v-if="showSearch" class="absolute -left-3 z-50 top-1" />
 			</div>
-		</div>
-		<div v-if="show" class="grow-1 lg:hidden px-2 flex flex-col text-center mt-8 gap-6 bg-dark_gray">
+		</ion-toolbar>		
+		<div v-if="show" class="grow-1 lg:hidden px-2 flex flex-col text-center mt-8 gap-6 bg-white text-main_dark">
 			<a class=" smallScreenLink link-custom-sm" @click="navigate('/')">
 				Home
 			</a>
 			<a class=" smallScreenLink link-custom-sm" @click="navigate('/#how-it-works')">
-				How it works
+				questions
 			</a>
 			<a class=" smallScreenLink link-custom-sm" @click="navigate('/#contact-us')">
-				About
+				Study
 			</a>
-			<a class=" smallScreenLink link-custom-sm" @click="navigate('/#contact-us')">
-				Blog
-			</a>
+	
 			<a
 				class="btn bg-white rounded-md text-main_dark mx-auto min-w-[11rem] w-100"
 				@click="navigate('/auth/signin')"
@@ -62,17 +76,7 @@
 			>
 				Sign Up
 			</a>
-			<!-- <div class="bottomLogo flex flex-row items-center justify-content-center gap-1">
-				<a href="https://instagram.com/officialstranerd" target="_blank">
-					<img alt="" height="30" src="@app/assets/images/homepage/instagram_white.svg">
-				</a>
-				<a href="https://twitter.com/stranerds" target="_blank">
-					<img alt="" height="30" src="@app/assets/images/homepage/twitter_white.svg">
-				</a>
-				<a href="https://facebook.com/officialstranerd" target="_blank">
-					<img alt="" height="30" src="@app/assets/images/homepage/facebook_white.svg">
-				</a>
-			</div> -->
+
 		</div>
 	</ion-header>
 </template>
@@ -83,10 +87,11 @@ import { useRouter } from 'vue-router'
 import { disableScroll, enableScroll } from '@utils/html'
 import Logo from '../../core/Logo.vue'
 import { IonHeader, IonIcon } from '@ionic/vue'
-import { close, menu } from 'ionicons/icons'
+import SearchBar from '@app/components/search/SearchBar.vue'
+import { close, menu, search } from 'ionicons/icons'
 
 export default defineComponent({
-	components: { Logo, IonIcon, IonHeader },
+	components: { Logo, IonIcon, IonHeader, SearchBar },
 	name: 'HomeTopNavigation',
 	setup () {
 		const router = useRouter()
@@ -95,11 +100,18 @@ export default defineComponent({
 			show.value ? enableScroll() : disableScroll()
 			show.value = !show.value
 		}
+		const showSearch = ref(false)
+		const toggleSearch = () => {
+			showSearch.value = !showSearch.value
+		}
 		const navigate = (link: string) => {
 			toggleMenu()
 			router.push(link)
 		}
-		return { show, toggleMenu, navigate, menu, close }
+		return { 
+			show, toggleMenu, navigate, showSearch, 
+			toggleSearch, menu, close, search
+		  }
 	}
 })
 </script>
@@ -115,13 +127,11 @@ export default defineComponent({
 
 
 	.link-custom {
-		color: $color-mainDark;
 		font-weight: 700;
 		font-size: 16px;
 	}
 
 	.link-custom-sm {
-		color: $color-white;
 		font-weight: 500;
 		font-size: 14px;
 	}
