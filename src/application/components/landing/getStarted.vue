@@ -2,9 +2,10 @@
 	<div class="w-full bg-light_gray md:px-8 px-4">
 		<div class="text-center container px-3 mx-auto py-10">
 			<div class="text-main_dark">
-				<h2 class="max-w-xl mx-auto font-bold text-xl md:text-3xl my-10">
-					Stranerd is reducing the friction between students and their success
-				</h2>
+		
+				<ion-text class="font-extrabold  mx-auto  lg:mt-48 lg:mb-24 mt-20 mb-12 text-center lg:text-5xl text-base text-main_dark ">
+					Journey through school with Stranerd
+				</ion-text>
 				<div class="flex items-stretch flex-wrap lg:flex-nowrap gap-4 lg:gap-10 my-10">
 					<div class="w-full lg:w-1/2 flex items-stretch lg:flex-auto flex-none gap-4 lg:gap-10">
 						<div class="w-1/2 flex-auto">
