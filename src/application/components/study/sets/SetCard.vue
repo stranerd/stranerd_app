@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col items-end">
 		<div
-			:class="`m-0  h-[9rem] cardPadding bg-light_gray ${bgColor(index)} rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border justify-start p-5 border border-faded_gray lg:border-0`"
+			:class="`m-0  h-[9rem] p-4 bg-light_gray ${bgColor(index)} rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border justify-start border border-faded_gray lg:border-0`"
 		>
 			<div class="flex items-start justify-between w-full  ">
 				<ion-icon

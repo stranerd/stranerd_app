@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<ion-header class="block ion-no-border z-40 inset-x-0 w-full top-0 lg:shadow-md ">
+		<ion-header class="block ion-no-border z-40 inset-x-0 w-full top-0 lg:shadow-md">
 			<ion-toolbar
 				class="md:hidden bg-white px-4 border-0 h-12 flex items-center justify-center">
 				<div class="flex items-center justify-between">
@@ -46,20 +46,21 @@ import { close, notifications, search } from 'ionicons/icons'
 import BigScreenBar from './screens/BigScreenBar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
 import { useAuth } from '@app/composable/auth/auth'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'Topbar',
 	components: { IonIcon, SearchBar, IonHeader, IonToolbar, BigScreenBar },
 	setup () {
 		const { user } = useAuth()
-		const showSearch = ref(false)
-		const toggleSearch = () => {
+		const route = useRoute()
+		const showSearch = ref(route.path.startsWith('/search'))
+		const toggleSearch = async () => {
 			showSearch.value = !showSearch.value
 		}
 		return {
-			close, user,
-			showSearch, toggleSearch,
-			search, notifications
+			user, showSearch, toggleSearch,
+			close, search, notifications
 		}
 	}
 })

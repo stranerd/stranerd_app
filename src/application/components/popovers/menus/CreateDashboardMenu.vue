@@ -1,5 +1,5 @@
 <template>
-	<div class="px-4 py-2 flex flex-col">
+	<Popover class="flex flex-col">
 		<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
 			to="/study/sets/create">
 			<div class="w-48 flex items-center gap-3">
@@ -21,7 +21,7 @@
 				<ion-label class="font-bold">Ask a question</ion-label>
 			</div>
 		</router-link>
-	</div>
+	</Popover>
 </template>
 
 <script lang="ts">

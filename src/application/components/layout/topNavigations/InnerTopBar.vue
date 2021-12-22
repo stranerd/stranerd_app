@@ -1,6 +1,6 @@
 <template>
-	<!-- Small screens -->
 	<ion-header class=" headerShadow ion-no-border">
+		<!-- Small screens -->
 		<ion-toolbar class="px-4 block md:hidden" mode="ios">
 			<ion-buttons slot="start" @click="$router.go(-1)">
 				<ion-icon :icon="chevronBack" class="text-[23px] text-main_dark"></ion-icon>
@@ -35,7 +35,6 @@
 		<!-- large screens -->
 		<BigScreenBar />
 	</ion-header>
-
 </template>
 
 <script lang="ts">
@@ -44,19 +43,20 @@ import { IonButtons, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue
 import { chevronBack, close, ellipsisVertical, notifications, search } from 'ionicons/icons'
 import BigScreenBar from './screens/BigScreenBar.vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
+	name: 'InnerTopBar',
 	components: { IonIcon, SearchBar, IonHeader, IonToolbar, BigScreenBar, IonTitle, IonButtons },
 	setup () {
-
-		const showSearch = ref(false)
-		const toggleSearch = () => {
+		const route = useRoute()
+		const showSearch = ref(route.path.startsWith('/search'))
+		const toggleSearch = async () => {
 			showSearch.value = !showSearch.value
 		}
 		return {
-			close, chevronBack, ellipsisVertical,
 			showSearch, toggleSearch,
-			search, notifications
+			close, chevronBack, ellipsisVertical, search, notifications
 		}
 	}
 })

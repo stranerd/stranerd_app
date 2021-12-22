@@ -70,7 +70,7 @@ export class TestEntity extends BaseEntity {
 	}
 
 	get correctAnswers () {
-		return Math.round(this.questions.length * this.score)
+		return Math.round(this.questions.length * this.score / 100)
 	}
 
 	get scoreText () {

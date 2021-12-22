@@ -1,7 +1,6 @@
 <template>
 	<ExploreWrapper>
 		<div>
-			<EmptyState v-if="notes.length === 0" info="No available notes" />
 			<ExploreNotesList :notes="notes" />
 			<PageLoading v-if="loading" />
 		</div>

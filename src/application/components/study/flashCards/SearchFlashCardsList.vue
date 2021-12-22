@@ -19,7 +19,7 @@ import { FlashCardEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
-	name: 'ExploreFlashCardsList',
+	name: 'SearchFlashCardsList',
 	components: { FlashCardListCard },
 	props: {
 		flashCards: {

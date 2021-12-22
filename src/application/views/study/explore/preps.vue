@@ -1,7 +1,6 @@
 <template>
 	<ExploreWrapper>
 		<div>
-			<EmptyState v-if="testPreps.length === 0" info="No available testPreps" />
 			<ExploreTestPrepsList :testPreps="testPreps" />
 			<PageLoading v-if="loading" />
 		</div>

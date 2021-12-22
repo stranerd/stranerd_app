@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col p-6 !w-52">
+	<Popover class="flex flex-col">
 		<router-link class="flex items-center justify-start w-auto mb-4 cursor-pointer"
 			to="/study/flashCards/create">
 			<ion-icon :icon="flash" alt="" class="text-2xl text-gray" />
@@ -14,7 +14,7 @@
 				Study set
 			</ion-text>
 		</router-link>
-	</div>
+	</Popover>
 </template>
 
 <script lang="ts">

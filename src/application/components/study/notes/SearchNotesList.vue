@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<template v-if="filtered.length === 0">
-			<EmptyState info="No notes saved." />
+			<EmptyState info="No notes available." />
 		</template>
 		<template v-else>
 			<div class="showcase">
@@ -14,17 +14,13 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
-import { NoteEntity, SetEntity } from '@modules/study'
+import { NoteEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
-	name: 'SetNotesList',
+	name: 'SearchNotesList',
 	components: { NoteListCard },
 	props: {
-		set: {
-			type: SetEntity,
-			required: true
-		},
 		notes: {
 			type: Array as PropType<NoteEntity[]>,
 			required: true
@@ -36,7 +32,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const openMenu = (entity: NoteEntity) => openStudyEntityMenu(entity, { set: props.set })
+		const openMenu = (entity: NoteEntity) => openStudyEntityMenu(entity, {})
 		const filtered = computed(() => props.notes.slice(0, props.sliced ? 6 : undefined))
 		return { filtered, openMenu }
 	}

@@ -4,7 +4,7 @@
 			<EmptyState info="No notes available." />
 		</template>
 		<template v-else>
-			<div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+			<div class="showcase">
 				<NoteListCard v-for="note in filtered" :key="note.hash" :note="note" :openMenu="() => openMenu(note)" />
 			</div>
 		</template>

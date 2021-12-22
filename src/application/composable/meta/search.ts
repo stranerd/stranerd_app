@@ -1,40 +1,62 @@
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { Search } from '@modules/meta'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
 import { UserEntity } from '@modules/users'
+import { useRoute, useRouter } from 'vue-router'
+import { FlashCardEntity, NoteEntity, SetEntity, TestPrepEntity, VideoEntity } from '@modules/study'
+
+const global = {
+	searchTerm: ref(''),
+	questions: ref([] as QuestionEntity[]),
+	answers: ref([] as AnswerEntity[]),
+	users: ref([] as UserEntity[]),
+	videos: ref([] as VideoEntity[]),
+	notes: ref([] as NoteEntity[]),
+	flashCards: ref([] as FlashCardEntity[]),
+	testPreps: ref([] as TestPrepEntity[]),
+	sets: ref([] as SetEntity[]),
+	fetched: ref(false),
+	...useErrorHandler(),
+	...useLoadingHandler()
+}
+
+const search = async () => {
+	const val = global.searchTerm.value.trim()
+	await global.setError('')
+	try {
+		await global.setLoading(true)
+		const res = await Search.call(val)
+		global.questions.value = res.questions.results
+		global.answers.value = res.answers.results
+		global.users.value = res.users.results
+		global.videos.value = res.videos.results
+		global.notes.value = res.notes.results
+		global.flashCards.value = res.flashCards.results
+		global.testPreps.value = res.testPreps.results
+		global.sets.value = res.sets.results
+		global.fetched.value = true
+	} catch (e) {
+		await global.setError(e)
+	}
+	await global.setLoading(false)
+}
 
 export const useSearch = () => {
-	const { error, setError } = useErrorHandler()
-	const { loading, setLoading } = useLoadingHandler()
-	const searchTerm = ref('')
-	const questionsResult = ref([] as QuestionEntity[])
-	const answersResult = ref([] as AnswerEntity[])
-	const usersResult = ref([] as UserEntity[])
+	const router = useRouter()
+	const route = useRoute()
 
-	watch(() => searchTerm.value, async () => {
-		const val = searchTerm.value.trim()
-		if (!val) {
-			questionsResult.value = []
-			answersResult.value = []
-			usersResult.value = []
-			return
-		}
-		await setError('')
-		try {
-			await setLoading(true)
-			const res = await Search.call(val)
-			questionsResult.value = res.questions.results
-			answersResult.value = res.answers.results
-			usersResult.value = res.users.results
-		} catch (e) {
-			await setError(e)
-		}
-		await setLoading(false)
+	global.searchTerm.value = route.query.search as string ?? ''
+
+	watch(() => global.searchTerm.value, async () => {
+		const val = global.searchTerm.value.trim()
+		if (!route.path.startsWith('/search')) await router.push(`/search?search=${val}`)
+		await search()
 	})
 
-	return {
-		searchTerm, error, loading,
-		questionsResult, answersResult, usersResult
-	}
+	onMounted(async () => {
+		if (!global.fetched.value && !global.loading.value) await search()
+	})
+
+	return { ...global }
 }

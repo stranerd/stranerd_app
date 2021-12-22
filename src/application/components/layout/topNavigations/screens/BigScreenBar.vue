@@ -1,6 +1,5 @@
 <template>
-	<ion-toolbar
-		class="hidden lg:flex border-0 z-50">
+	<ion-toolbar class="hidden lg:flex border-0 z-50">
 		<div class="flex items-center">
 			<div class="w-[16%]">
 				<router-link class="flex items-center w-full justify-center" to="/dashboard">
@@ -61,6 +60,5 @@ export default defineComponent({
 			isLoggedIn, user, signout
 		}
 	}
-
 })
 </script>

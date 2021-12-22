@@ -1,13 +1,15 @@
 <template>
 	<div>
-		<div class="bg-primary w-full  flex flex-col items-center pt-5 md:pt-12 rounded-b-2xl md:rounded-none mb-4">
-			<div class="flex flex-col w-full justify-center items-center px-4">
-				<ion-text class="heading lg:text-2xl font-bold text-white text-center  mb-3 capitalize">
-					{{ set.name }}
-				</ion-text>
+		<div class="bg-primary w-full flex flex-col items-center pt-5 md:pt-12 rounded-b-2xl md:rounded-none mb-4">
+			<div class="flex w-full md:w-8/12 mx-auto px-4 text-white items-center">
+				<IonIcon :icon="folder" class="text-6xl md:text-8xl" />
+				<div class="flex flex-col ml-2 md:ml-4">
+					<ion-text class="heading lg:text-2xl font-bold capitalize">{{ set.name }}</ion-text>
+					<ion-text>{{ set.allSaved.length }} {{ pluralize(set.allSaved.length, 'item', 'items') }}</ion-text>
+				</div>
 			</div>
 			<div
-				class="mb-0.5 mt-8 md:mt-12   justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full  lg:px-3 text-xs mx-auto text-faded_gray font-bold  whitespace-normal overflow-x-auto">
+				class="mb-0.5 mt-8 md:mt-12 justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full  lg:px-3 text-xs mx-auto text-faded_gray font-bold  whitespace-normal overflow-x-auto">
 				<router-link :to="`/study/sets/${set.id}/`"
 					class="py-2 mr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
@@ -18,7 +20,7 @@
 					exact-active-class="border-b-4 text-white border-white">
 					TestPreps
 				</router-link>
-				<router-link :to="`/study/sets/${set.id}/flashCards`" 
+				<router-link :to="`/study/sets/${set.id}/flashCards`"
 					class="py-2 mr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
 					FlashCards
@@ -45,6 +47,8 @@
 import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { SetEntity } from '@modules/study'
 import { useSet } from '@app/composable/study/sets'
+import { pluralize } from '@utils/commons'
+import { folder } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'SetWrapper',
@@ -58,7 +62,7 @@ export default defineComponent({
 		const { notes, flashCards, testPreps, videos, listener } = useSet(props.set)
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
-		return { notes, flashCards, testPreps, videos }
+		return { folder, notes, flashCards, testPreps, videos, pluralize }
 	}
 })
 </script>

@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="!loading"
-		:class="[!notification.seen?'bg-light_gray':' border-b border-light_gray', 'gap-0-5 text-dark w-full my-2 cardPadding rounded-md' ]">
+		:class="[!notification.seen?'bg-light_gray':' border-b border-light_gray', 'gap-0-5 text-dark w-full my-2 p-4 rounded-md' ]">
 		<router-link :class="{'text-primary-dark': !notification.seen}" :to="notification.link">
 			<p class="normalText lg:text-base cursor-pointer">
 				<span>{{ notification.body }}</span>
@@ -23,7 +23,7 @@
 
 	<div
 		v-else
-		:class="[notification.seen?'bg-light_gray':' border-b border-light_gray', 'gap-0-5 text-dark w-full my-2 cardPadding rounded-md' ]">
+		:class="[notification.seen?'bg-light_gray':' border-b border-light_gray', 'gap-0-5 text-dark w-full my-2 p-4 rounded-md' ]">
 		<p class="normalText lg:text-base cursor-pointer">
 			<ion-skeleton-text :animated="true" style="width: 250px"></ion-skeleton-text>
 		</p>
