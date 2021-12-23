@@ -10,9 +10,12 @@
 				<ion-text class=" text-xs md:text-lg w-[15rem] lg:w-full lg:text-2xl text-white ">
 					With Test Prep, Flashcards, Notes and Expert Answers.
 				</ion-text>
-				<ion-button class="btn-outline btn-outline-sm text-white w-80 lg:text-2xl text-sm md:text-lg block">
-					Get Started Now
-				</ion-button>
+				<router-link to="/dashboard" class="w-full h-auto">
+					<ion-button class="btn-outline btn-outline-sm text-white w-80 lg:text-2xl text-sm md:text-lg block">
+						Get Started Now
+					</ion-button>
+				</router-link>
+		
 
 				<ion-text class="text-2xl text-white mt-8 lg:block hidden">
 					or download the app instead
@@ -30,7 +33,7 @@
 				</div>
 			</div>
 
-			<div class="lg:w-6/12 max-w-[45rem] w-full lg:mt-0 mt-12">
+			<div class="lg:w-6/12 max-w-[49rem] w-full lg:mt-0 mt-12">
 				<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/auth.svg">
 			</div>
 			<div class="flex gap-4 lg:hidden mt-5">

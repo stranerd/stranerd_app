@@ -98,14 +98,24 @@
 						<div class="flex gap-5 items-center justify-center md:justify-end my-10">
 							<a aria-label="instagram link" class="inline-block"
 								href="https://www.instagram.com/officialstranerd/">
-								<img alt="instagram" src="@app/assets/images/social-media/instagram.png">
+
+								<ion-icon
+									class="text-3xl"
+									:icon="logoInstagram"
+								/>
 							</a>
 							<a aria-label="twiiter link" class="inline-block" href="https://twitter.com/stranerds">
-								<img alt="twitter" src="@app/assets/images/social-media/twitter.png">
+								<ion-icon
+									class="text-3xl"
+									:icon="logoTwitter"
+								/>
 							</a>
 							<a aria-label="facebook link" class="inline-block"
 								href="https://facebook.com/officialstranerd">
-								<img alt="facebook" src="@app/assets/images/social-media/facebook.png">
+								<ion-icon
+									class="text-3xl"
+									:icon="logoFacebook"
+								/>
 							</a>
 						</div>
 					</div>
@@ -119,8 +129,16 @@
 </template>
 
 <script lang="ts">
+import { logoInstagram, logoTwitter, logoFacebook } from 'ionicons/icons'
+
 export default {
-	name: ''
+	name: 'footer',
+
+	setup(){
+		return{
+			logoInstagram,  logoTwitter, logoFacebook
+		}
+	}
 }
 </script>
 

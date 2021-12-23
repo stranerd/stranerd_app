@@ -1,70 +1,73 @@
 <template>
-	<div class="w-full md:px-8 px-4 bg-light_gray">
-		<div class="container mx-auto flex flex-col">
+	<div class="w-full md:px-8 px-4 bg-white">
+		<div class="container mx-auto flex flex-col max-w-7xl">
 			
 			<ion-text class="font-extrabold  mx-auto  lg:my-48 my-20 text-center lg:text-5xl text-base text-main_dark ">
 				We make learning easy, convenient and accessible.
 			</ion-text>
 
-			<div class="flex justify-between items-center w-full">
-			
+			<div class="flex justify-between items-center w-full lg:flex-row flex-col gap-5">
+				<img alt="testprep image" class="" src="@app/assets/images/auth/test.svg" />
 
-				<div class="px-24 py-32	 bg-green text-white rounded-[3rem] w-1/2 flex flex-col max-w-[37.5rem] justify-center items-center gap-6">
-					<img alt="testprep image" class="w-[3.75rem]" src="@app/assets/images/New/testPrep.svg" />
-					<ion-text class="font-extrabold text-3xl">
+				<div class="lg:px-24 px-5 lg:py-32 py-12 bg-green text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2  w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
+					<img alt="testprep image" class="lg:w-[3.75rem] w-[2.75rem]" src="@app/assets/images/New/testPrep.svg" />
+					<ion-text class="font-extrabold lg:text-3xl text-xl">
 						Test Prep
 					</ion-text>
-					<ion-text class="text-xl text-center">
+					<ion-text class="lg:text-xl text-base text-center">
 						Practice tests and study solutions of all available questions on gateway exams (WAEC, JAMB, JUPEB e.t.c.).
 					</ion-text>
 				</div>
 			</div>
 
-			<div class="flex justify-between items-center w-full mt-24">
+			<div class="flex justify-between items-center w-full lg:flex-row flex-col-reverse mt-24 gap-5">
 			
 
-				<div class="px-24 py-32	 bg-purple text-white rounded-[3rem] w-1/2 flex flex-col max-w-[37.5rem] justify-center items-center gap-6">
-					<img alt="flashcard image" class="w-[3.75rem]" src="@app/assets/images/New/flashCard.png" />
-					<ion-text class="font-extrabold text-3xl">
+				<div class="lg:px-24 px-5 lg:py-32 py-12 bg-purple text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2 w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
+					<img alt="flashcard image" class="lg:w-[3.75rem] w-[2.75rem]" src="@app/assets/images/New/flashCard.png" />
+					<ion-text class="font-extrabold lg:text-3xl text-xl">
 						Flashcards
 					</ion-text>
-					<ion-text class="text-xl text-center">
+					<ion-text class="lg:text-xl text-base text-center">
 						Memorize answers to questions on the back of cards. Scientifically proven to help students get better grades
 					</ion-text>
 				</div>
+
+				<img alt="testprep image" class="" src="@app/assets/images/auth/flash.svg" />
 			</div>
 
 
-			<div class="flex justify-between items-center w-full mt-24">
-			
+			<div class="flex justify-between items-center w-full lg:flex-row flex-col mt-24 gap-5">
 
-				<div class="px-24 py-32	 bg-pink text-white rounded-[3rem] w-1/2 flex flex-col max-w-[37.5rem] justify-center items-center gap-6">
-					<ion-icon :icon="reader" class=" text-[3.75rem] text-white" />
-					<ion-text class="font-extrabold text-3xl">
+				<img alt="testprep image" class="" src="@app/assets/images/auth/note.svg" />
+
+				<div class="lg:px-24 px-5 lg:py-32 py-12 bg-pink text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2 w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
+					<ion-icon :icon="reader" class=" lg:text-[3.75rem] text-[2.75rem] text-white" />
+					<ion-text class="font-extrabold lg:text-3xl text-xl">
 						Notes
 					</ion-text>
-					<ion-text class="text-xl text-center">
+					<ion-text class="lg:text-xl text-base text-center">
 						Read beautiful and concise notes that cover every important aspects in topics under different subjects.
 					</ion-text>
 				</div>
 			</div>
 
-			<div class="flex justify-between items-center w-full mt-24">
+			<div class="flex justify-between items-center w-full lg:flex-row flex-col-reverse mt-24 gap-5">
 
-				<div class="px-24 py-32	 bg-cyan text-white rounded-[3rem] w-1/2 flex flex-col max-w-[37.5rem] justify-center items-center gap-6">
-					<ion-icon :icon="chatboxEllipses" class=" text-[3.75rem] text-white" />
-					<ion-text class="font-extrabold text-3xl">
+				<div class="lg:px-24 px-5 lg:py-32 py-12 bg-cyan text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2 w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
+					<ion-icon :icon="chatboxEllipses" class=" lg:text-[3.75rem] text-[2.75rem] text-white" />
+					<ion-text class="font-extrabold lg:text-3xl text-xl">
 						Expert Answers
 					</ion-text>
-					<ion-text class="text-xl text-center">
+					<ion-text class="lg:text-xl text-base text-center">
 						Ask questions and get expert answers and detailed explanations to help with your homework and studying.
 					</ion-text>
 				</div>
+
+				<img alt="testprep image" class="" src="@app/assets/images/auth/question.svg" />
 			</div>
 
-			<ion-text class="font-extrabold  mx-auto  lg:mt-48 lg:mb-24 mt-20 mb-12 text-center lg:text-5xl text-base text-main_dark ">
-				Made for students, loved by students
-			</ion-text>
+		
 
 		
 			
