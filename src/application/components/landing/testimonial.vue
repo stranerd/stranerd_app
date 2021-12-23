@@ -5,18 +5,28 @@
 		</ion-text>
 		<div class="container mx-auto">
 			<Swiper
-				:breakpoints="swiperOptions.breakpoints"
+		
 				:dynamic-bullets="true"
 				:dynamic-main-bullets="1"
 				:free-mode="true"
 				:modules="modules"
 				:pagination="{ clickable: true }"
-				:space-between="10"
-				class="flex flex-row w-full gap-5 md:gap-10 lg:gap-24 justify-between items-stretch"
 			>
-				<SwiperSlide v-for="(testimony, i) in testimonies" :key="i"
-					class="!min-w-[13rem] !max-w-[14rem] lg:!min-w-[18rem] lg:!max-w-[38rem] !h-auto mb-16">
-					<TestimonialCard :secondCard="i === 1" :testimony="testimony"></TestimonialCard>
+				<SwiperSlide v-for="(testimony, i) in testimonies" :key="i">
+					<div class="bg-primary p-5 lg:p-[3.25rem] lg:rounded-[3rem] rounded-3xl text-white max-w-[99rem] lg:h-[21rem] h-[18rem] flex flex-col justify-center">
+						<img alt="" class="object-contain h-9" src="@app/assets/images/New/comment.svg">
+						<ion-text class="text-center font-bold text-xs lg:text-2xl mt-6">
+							{{testimony.text}}
+						</ion-text>
+
+						<div class="flex items-center justify-center lg:mt-16 mt-10">
+							<img :src="testimony.img" class="object-cover lg:h-10 lg:w-10 h-5 w-5 rounded-full">
+
+							<ion-text class="text-center font-bold text-xs lg:text-xl ml-4">
+								{{testimony.author}}
+							</ion-text>
+						</div>
+					</div>
 				</SwiperSlide>
 			</Swiper>
 		</div>
@@ -27,120 +37,57 @@
 import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
 import { Pagination } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
-import TestimonialCard from '@app/components/landing/TestimonialCard.vue'
 
 export default {
 	name: '',
 	components: {
-		TestimonialCard,
 		Swiper,
 		SwiperSlide
 	},
 	setup () {
+		const testimonies = [
+			{
+				text: 'I’d say, for someone like me who has difficulty concentrating on stuff, you made navigation very easy. User interface, beautiful and easy to navigate. Cool and simple colors that do not confuse or hurt the eyes. And yay, I got my answer faster than I expected. I loved it.',
+				author: 'Eunice Apo',
+				img: require('@app/assets/images/testimonials/eunice.jpeg')
+			},
+			{
+				text: 'I like how it\'s very well spelt-out what I have to do to advance in ranking.',
+				author: 'Emmanuel Bello',
+				img: require('@app/assets/images/testimonials/emmanuel.jpeg')
+			},
+			{
+				text: 'It\'s very user friendly, and as someone mentioned earlier, the color palette of the website is easy on the eyes.',
+				author: 'Laureen Abayomi',
+				img: require('@app/assets/images/testimonials/laureen.jpeg')
+			},
+			{
+				text: 'I\'ve been impressed mostly! I really like the "coin system”',
+				author: 'Daniel Uwagwu',
+				img: require('@app/assets/images/testimonials/daniel.jpeg')
+			}
+		]
 		return {
+			testimonies,
 			modules: [Pagination]
 		}
 	},
-	data () {
-		return { 
-			swiperOptions: {
-				breakpoints: {
-					0: {
-						slidesPerView: 1.5,
-						spaceBetween: 10
-					},
-					567: {
-						slidesPerView: 3,
-						spaceBetween: 30
-					}
-				}
-			},
-			testimonies: [
-				{
-					name: 'Eunice Apo',
-					image: 'eunice',
-					testimonies: [
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae maecenas sed sagittis amet.',
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae maecenas sed sagittis amet.'
-					],
-					country: 'nigeria',
-					flag: 'nigeria'
-				},
-				{
-					name: 'Eunice Apo',
-					image: 'eunice',
-					testimonies: [
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae maecenas sed sagittis amet.'
-					],
-					country: 'usa',
-					flag: 'usa'
-				},
-				{
-					name: 'Eunice Apo',
-					image: 'eunice',
-					testimonies: [
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae maecenas sed sagittis amet.',
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae maecenas sed sagittis amet.'
-					],
-					country: 'nigeria',
-					flag: 'nigeria'
-				},
-				{
-					name: 'Eunice Apo',
-					image: 'eunice',
-					testimonies: [
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae maecenas sed sagittis amet.'
-					],
-					country: 'usa',
-					flag: 'usa'
-				},
-				{
-					name: 'Eunice Apo',
-					image: 'eunice',
-					testimonies: [
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae maecenas sed sagittis amet.',
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae maecenas sed sagittis amet.'
-					],
-					country: 'nigeria',
-					flag: 'nigeria'
-				},
-				{
-					name: 'Eunice Apo',
-					image: 'eunice',
-					testimonies: [
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae maecenas sed sagittis amet.'
-					],
-					country: 'usa',
-					flag: 'usa'
-				},
-				{
-					name: 'Eunice Apo',
-					image: 'eunice',
-					testimonies: [
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae maecenas sed sagittis amet.',
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae maecenas sed sagittis amet.'
-					],
-					country: 'nigeria',
-					flag: 'nigeria'
-				}
-			]
-		}
-	}
+
 }
 </script>
 
 <style scoped>
 	.swiper-pagination-bullet {
-		width: 10px;
-		height: 10px;
-		color: #8B9EB1;
+		width: 12px;
+		height: 12px;
+		color: #C7D6E3 !important;
 		opacity: 1;
-		background: #8B9EB1;
+		background: #C7D6E3 !important;
 	}
 
 	.swiper-pagination-bullet-active {
-		color: #fff;
-		background: #fff;
-		border: 2px solid #546dd2;
+		color: #132740 !important;
+		background: #132740 !important;
+		border: 2px solid #132740 !important;
 	}
 </style>
