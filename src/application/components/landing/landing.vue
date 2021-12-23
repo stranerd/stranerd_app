@@ -10,8 +10,8 @@
 				<ion-text class=" text-xs md:text-lg w-[15rem] lg:w-full lg:text-2xl text-white ">
 					With Test Prep, Flashcards, Notes and Expert Answers.
 				</ion-text>
-				<router-link to="/dashboard" class="w-full h-auto">
-					<ion-button class="btn-outline btn-outline-sm text-white w-80 lg:text-2xl text-sm md:text-lg block">
+				<router-link to="/dashboard" class="w-full h-auto mx-auto lg:m-0">
+					<ion-button class="btn-outline btn-outline-sm text-white lg:w-[22.5rem] w-[11.25rem] lg:h-[6rem] h-12 mx-auto lg:m-0  lg:text-2xl text-sm md:text-lg block">
 						Get Started Now
 					</ion-button>
 				</router-link>
