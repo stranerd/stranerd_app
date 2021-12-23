@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="bg-primary  h-32 rounded-b-xl sm:rounded-3xl flex flex-col sm:flex-row justify-between sm:items-center p-8 pt-5">
+		class="bg-primary h-36 rounded-b-xl sm:rounded-3xl flex flex-col sm:flex-row justify-between sm:items-center p-8 pt-5">
 		<div class="flex flex-col w-full text-left">
 			<ion-text class="text-white leading-tight text-3xl font-bold">
 				{{ set.isRoot ? 'Your library' : set.name }}

@@ -1,8 +1,10 @@
 <template>
 	<form>
 		<ion-searchbar v-model.trim="searchTerm"
-			cancel-button-icon="never"
+			class="w-full p-0"
 			placeholder="Search for anything..."
+			showCancelButton="never"
+			showClearButton="never"
 		/>
 	</form>
 </template>
@@ -30,10 +32,5 @@ export default defineComponent({
 		border-radius: .75rem;
 		--icon-color: #8B9EB1;
 		--color: #8B9EB1;
-		min-width: 26vw;
-		--padding-bottom: 4em;
-		@media (max-width: 1024px) {
-			min-width: 92vw;
-		}
 	}
 </style>

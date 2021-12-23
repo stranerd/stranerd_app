@@ -1,44 +1,40 @@
 <template>
 	<Justified>
 		<div>
-			<div class="flex flex-col items-center ">
-				<div class="w-full bg-white p-0 pt-3 md:bg-primary  md:py-6 md:pb-16">
+			<div class="flex flex-col items-center">
+				<div class="w-full bg-white pt-3 md:bg-primary md:py-6 md:pb-16 px-4">
 					<div class="md:flex justify-between items-center w-full hidden max-w-4xl mx-auto ">
 						<h1 class="lg:text-2xl text-lg font-bold text-white">
 							Notifications
 						</h1>
 
-						<span class="text-white normalText flex items-end justify-center">
+						<span class="text-white normalText flex items-end justify-center hidden">
 							Mark all as read
 							<ion-icon :icon="checkmarkDone" class="text-xl text-white"></ion-icon>
 						</span>
 					</div>
-
 				</div>
 
-				<div class="w-full max-w-4xl mx-auto bg-white p-6 rounded-xl -mt-10">
-					<EmptyState
-						v-if="!notifications.length"
-						btnText="Go To Home"
-						info="You have no notifications yet"
-						route="/dashboard"
-					/>
-
-					<template v-else>
+				<div class="px-4 w-full">
+					<div class="w-full max-w-4xl mx-auto bg-white p-6 rounded-xl -mt-10">
+						<EmptyState
+							v-if="!notifications.length"
+							btnText="Go To Home"
+							info="You have no notifications yet"
+							route="/dashboard"
+						/>
 						<NotificationCard
 							v-for="notification in notifications"
 							:key="notification.hash"
 							:notification="notification"
 							class="px-4"
 						/>
-					</template>
+					</div>
+
+					<div v-if="hasMore" class="text-center py-2 text-18 text-primary-dark">
+						<a @click.prevent="fetchOlderNotifications">Load More</a>
+					</div>
 				</div>
-
-
-				<div v-if="hasMore" class="text-center py-2 text-18 text-primary-dark">
-					<a @click.prevent="fetchOlderNotifications">Load More</a>
-				</div>
-
 			</div>
 			<PageLoading v-if="loading" />
 		</div>
