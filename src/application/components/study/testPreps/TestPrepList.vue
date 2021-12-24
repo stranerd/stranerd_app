@@ -22,8 +22,23 @@
 
 		<template v-else>
 			<div class="showcase">
-				<TestPrepCard v-for="testPrep in testPreps" :key="testPrep.hash" :openMenu="() => openMenu(testPrep)"
-					:testPrep="testPrep" />
+				<div v-for="group in testPreps" :key="group.institutionId"
+					:class="[`m-0 w-full h-44 bg-white rounded-xl flex flex-col items-start justify-between md:gap-2 gap-[1rem] box-border p-6`]">
+					<ion-text class="font-bold text-xl text-main_dark">
+						<Institution :institutionId="group.institutionId" />
+					</ion-text>
+
+					<div class="w-full flex items-center justify-between gap-3">
+						<router-link :to="`/study/preps/${group.institutionId}?type=test`" class="flex-grow">
+							<ion-button class="btn-primary font-bold w-full">Test</ion-button>
+						</router-link>
+						<router-link :to="`/study/preps/${group.institutionId}?type=study`" class="flex-grow">
+							<ion-button class="btn-outline text-primary font-bold w-full">
+								Solutions
+							</ion-button>
+						</router-link>
+					</div>
+				</div>
 			</div>
 		</template>
 	</div>
@@ -32,14 +47,14 @@
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { useTestPrepList } from '@app/composable/study/testPreps'
-import TestPrepCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import { IonBadge } from '@ionic/vue'
 import { TestPrepEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
+import Institution from '@app/components/study/institutions/Institution.vue'
 
 export default defineComponent({
 	name: 'TestPrepList',
-	components: { TestPrepCard, IonBadge },
+	components: { IonBadge, Institution },
 	props: {
 		suggested: {
 			required: false,
@@ -47,9 +62,9 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const { testPreps: allTestPreps, listener, loading, error } = useTestPrepList()
+		const { groupedByInstitution, listener, loading, error } = useTestPrepList()
 		const testPreps = computed({
-			get: () => allTestPreps.value.slice(0, 3),
+			get: () => groupedByInstitution.value.slice(0, 6),
 			set: () => {
 			}
 		})

@@ -1,7 +1,7 @@
 <template>
 	<ExploreWrapper>
 		<div>
-			<ExploreTestPrepsList :testPreps="testPreps" />
+			<ExploreTestPrepsList :testPreps="groupedByInstitution" />
 			<PageLoading v-if="loading" />
 		</div>
 	</ExploreWrapper>
@@ -18,10 +18,10 @@ export default defineComponent({
 	displayName: 'Explore',
 	components: { ExploreWrapper, ExploreTestPrepsList },
 	setup () {
-		const { testPreps, listener, loading, error } = useTestPrepList()
+		const { groupedByInstitution, listener, loading, error } = useTestPrepList()
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
-		return { testPreps, loading, error }
+		return { groupedByInstitution, loading, error }
 	}
 })
 </script>
