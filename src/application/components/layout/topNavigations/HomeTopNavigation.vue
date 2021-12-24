@@ -2,7 +2,7 @@
 	<ion-header
 		:class="[show ?'fixed bg-white top-0 bottom-0 !text-white':'', 'w-full flex flex-col  z-10 bg-white text-primary lg:shadow']"
 		role="navigation">
-		<div class="md:px-8 p-4 hidden md:flex items-center justify-between">
+		<div class="md:px-8 p-4 hidden lg:flex items-center justify-between">
 			<router-link class="hidden lg:block" to="/">
 				<Logo :secondary="true" />
 			</router-link>
@@ -10,14 +10,12 @@
 				<router-link class="link-custom  px-4" to="/">
 					Home
 				</router-link>
-				<router-link class="link-custom px-4" to="/#how-it-works">
+				<router-link class="link-custom px-4" to="/questions">
 					Questions
 				</router-link>
-				<router-link class="link-custom px-4" to="/#contact-us">
-					study
+				<router-link class="link-custom px-4" to="/study">
+					Study
 				</router-link>
-
-
 			</div>
 
 			<div class="gap-8 lg:flex hidden">
@@ -32,57 +30,52 @@
 		</div>
 
 		<ion-toolbar
-			:class="{ 'text-white': show}"
+			:class="{'text-white': show}"
 			:style="`--background:${show ? '#546DD3' : 'white'}`"
-			class="md:hidden bg-white px-4 border-0 h-12 flex items-center justify-center "
+			class="lg:hidden bg-white px-4 border-0 h-12 flex items-center justify-center"
 		>
 			<div class="flex items-center justify-between">
-				<span class="cursor-pointer" @click="toggleMenu">
-					<ion-icon v-if="!show" :icon="menu" size="100px" />
-					<ion-icon v-else :icon="close" size="100px" />
-				</span>
-				<router-link class="flex items-center" to="/">
-					<Logo v-if="show" />
-					<img v-else class="w-24" src="@app/assets/images/logo/logo-dark.svg" />
-				</router-link>
-				<IonIcon :icon="showSearch ? close : search" class="text-xl "
-					@click="toggleSearch" />
-				<search-bar v-if="showSearch" class="absolute -left-3 z-50 top-1" />
+				<template v-if="showSearch">
+					<search-bar />
+				</template>
+				<template v-else>
+					<span class="cursor-pointer" @click="toggleMenu">
+						<ion-icon :icon="show ? close : menu" size="100px" />
+					</span>
+					<router-link class="flex items-center" to="/">
+						<Logo :secondary="!show" />
+					</router-link>
+				</template>
+				<IonIcon :icon="showSearch ? close : search" class="text-xl ml-4" @click="toggleSearch" />
 			</div>
 		</ion-toolbar>
 		<div v-if="show" class="grow-1 lg:hidden px-2 flex flex-col text-center mt-8 gap-6 bg-white text-main_dark">
-			<a class=" smallScreenLink link-custom-sm" @click="navigate('/')">
+			<router-link class="smallScreenLink link-custom-sm" to="/">
 				Home
-			</a>
-			<a class=" smallScreenLink link-custom-sm" @click="navigate('/#how-it-works')">
-				questions
-			</a>
-			<a class=" smallScreenLink link-custom-sm" @click="navigate('/#contact-us')">
+			</router-link>
+			<router-link class=" smallScreenLink link-custom-sm" to="/questions">
+				Questions
+			</router-link>
+			<router-link class=" smallScreenLink link-custom-sm" to="/study)">
 				Study
-			</a>
+			</router-link>
 
-			<a
-				class="btn btn-custom  text-white bg-primary  h-12 rounded-xl w-60 mx-auto"
-				@click="navigate('/auth/signin')"
-			>
+			<router-link class="btn btn-custom  text-white bg-primary h-12 rounded-xl w-60 mx-auto"
+				to="/auth/signin">
 				Log In
-			</a>
-			<a
-				class="btn border border-faded_gray text-primary   h-12 rounded-xl w-60 mx-auto"
-				@click="navigate('/auth/signup')"
-			>
+			</router-link>
+			<router-link class="btn border border-faded_gray text-primary h-12 rounded-xl w-60 mx-auto"
+				to="/auth/signup">
 				Sign Up
-			</a>
-
+			</router-link>
 		</div>
 	</ion-header>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { disableScroll, enableScroll } from '@utils/html'
-import Logo from '../../core/Logo.vue'
+import Logo from '@app/components/core/Logo.vue'
 import { IonHeader, IonIcon, IonToolbar } from '@ionic/vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
 import { close, menu, search } from 'ionicons/icons'
@@ -91,7 +84,6 @@ export default defineComponent({
 	components: { Logo, IonIcon, IonHeader, IonToolbar, SearchBar },
 	name: 'HomeTopNavigation',
 	setup () {
-		const router = useRouter()
 		const show = ref(false)
 		const toggleMenu = () => {
 			show.value ? enableScroll() : disableScroll()
@@ -101,12 +93,8 @@ export default defineComponent({
 		const toggleSearch = () => {
 			showSearch.value = !showSearch.value
 		}
-		const navigate = (link: string) => {
-			toggleMenu()
-			router.push(link)
-		}
 		return {
-			show, toggleMenu, navigate, showSearch,
+			show, toggleMenu, showSearch,
 			toggleSearch, menu, close, search
 		}
 	}

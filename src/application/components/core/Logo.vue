@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<img v-if="secondary" alt="Stranerd" class="logo-img" src="/images/logo-blue.svg">
-		<img v-else alt="Stranerd" class="logo-img" src="/images/logo-white.svg">
+		<img v-if="secondary" alt="Stranerd" class="logo-img" src="@app/assets/images/logo/logo-dark.svg">
+		<img v-else alt="Stranerd" class="logo-img" src="@app/assets/images/logo/logo-white.svg">
 	</div>
 </template>
 

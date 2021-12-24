@@ -4,13 +4,14 @@ import { isClient } from '@utils/environment'
 import { analytics, NetworkError, StatusCodes } from '@modules/core'
 import { capitalize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
+import { isPlatform } from '@ionic/vue'
 
 export const useErrorHandler = () => {
 	const errorState = ref('')
 	const setError = async (error: any, skipAlert = false) => {
 		if (error instanceof NetworkError) {
 			errorState.value = error.errors
-				.map(({ message, field }) => `${ capitalize(field ?? 'Error') }: ${ message }`)
+				.map(({ message, field }) => `${capitalize(field ?? 'Error')}: ${message}`)
 				.join('\n')
 			if ([
 				StatusCodes.NotAuthenticated,
@@ -74,4 +75,11 @@ export const useListener = (start: () => Promise<() => void>) => {
 		}
 	}
 	return { startListener, closeListener, resetListener, isRunning }
+}
+
+export const usePlatform = () => {
+	const isWeb = isPlatform('desktop') || isPlatform('mobileweb')
+	const isIos = !isWeb && isPlatform('ios')
+	const isAndroid = !isWeb && isPlatform('android')
+	return { isIos, isAndroid, isWeb }
 }

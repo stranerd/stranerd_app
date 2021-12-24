@@ -1,17 +1,17 @@
 <template>
 	<DashboardLayout>
 		<div>
-			<div v-if="isLoggedIn" class="md:px-4 md:pt-8">
+			<div v-if="isLoggedIn" class="md:px-4 md:pt-8 pb-24 md:pb-12">
 				<StatusBar />
 			</div>
-			<div class="px-4 pb-8">
-				<ContinueStudy v-if="isLoggedIn" :sliced="true" class="mt-28 md:mt-16" />
-				<TestPrepList :suggested="true" class="mt-16" />
-				<RecentQuestions class="mt-16" />
-				<NotesList :suggested="true" class="mt-16" />
-				<VideosList :suggested="true" class="hidden mt-16" />
-				<FlashCardList :suggested="true" class="mt-16" />
-				<StudyTools class="mt-16 hidden" />
+			<div class="p-4">
+				<ContinueStudy v-if="isLoggedIn" :sliced="true" class="mb-16" />
+				<TestPrepList :suggested="true" class="mb-16" />
+				<RecentQuestions class="mb-16" />
+				<NotesList :suggested="true" class="mb-16" />
+				<VideosList :suggested="true" class="hidden mb-16" />
+				<FlashCardList :suggested="true" />
+				<StudyTools class="hidden" />
 			</div>
 		</div>
 	</DashboardLayout>

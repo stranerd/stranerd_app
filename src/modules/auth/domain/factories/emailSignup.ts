@@ -12,7 +12,7 @@ export class EmailSignupFactory extends BaseFactory<null, AuthUser, Keys> {
 		password: { required: true, rules: [isString, isLongerThanX(7), isShorterThanX(17)] },
 		cPassword: {
 			required: true,
-			rules: [(val: string) => isShallowEqualTo(val, this.password), isLongerThanX(7), isShorterThanX(17)]
+			rules: [(val: string) => isShallowEqualTo(val, this.password, 'is not equal'), isLongerThanX(7), isShorterThanX(17)]
 		}
 	}
 

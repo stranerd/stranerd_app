@@ -23,7 +23,6 @@
 	</Swiper>
 </template>
 
-
 <script lang="ts">
 import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
 import { Pagination } from 'swiper'
@@ -32,7 +31,8 @@ import SlideOne from '@app/components/onboarding/SlideOne.vue'
 import SlideTwo from '@app/components/onboarding/SlideTwo.vue'
 import SlideThree from '@app/components/onboarding/SlideThree.vue'
 import SlideFour from '@app/components/onboarding/SlideFour.vue'
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'Onboarding',
@@ -45,9 +45,15 @@ export default defineComponent({
 		SlideFour
 	},
 	setup () {
-		return {
-			modules: [Pagination]
-		}
+		const router = useRouter()
+
+		onMounted(async () => {
+			const isOnboardingDone = localStorage.getItem('onboarding-done')
+			if (isOnboardingDone) await router.replace('/dashboard')
+			else localStorage.setItem('onboarding-done', 'true')
+		})
+
+		return { modules: [Pagination] }
 	}
 })
 </script>
