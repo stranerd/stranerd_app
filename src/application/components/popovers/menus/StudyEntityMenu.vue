@@ -61,7 +61,6 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
-import { useMenuPopover } from '@app/composable/core/modals'
 import { useDeleteStudyEntity, useStudyMenuData } from '@app/composable/study/menus'
 import { chevronUp, folder, library, person, removeCircle, share as shareIcon, trash } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
@@ -73,12 +72,10 @@ export default defineComponent({
 	setup () {
 		const { id, isLoggedIn, isAdmin } = useAuth()
 		const router = useRouter()
-		const closeStudyEntityMenu = () => useMenuPopover().closeStudyEntityMenu()
 
 		const { entity, type, data, share, shareLink } = useStudyMenuData()
 		const goToAuthor = async () => {
 			await router.push(shareLink.value)
-			closeStudyEntityMenu()
 		}
 		const showDelete = computed(() => {
 			if (type.value === 'testPreps') return isAdmin.value

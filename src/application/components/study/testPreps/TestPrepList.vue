@@ -48,8 +48,6 @@
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { useTestPrepList } from '@app/composable/study/testPreps'
 import { IonBadge } from '@ionic/vue'
-import { TestPrepEntity } from '@modules/study'
-import { openStudyEntityMenu } from '@app/composable/study/menus'
 import Institution from '@app/components/study/institutions/Institution.vue'
 
 export default defineComponent({
@@ -69,12 +67,10 @@ export default defineComponent({
 			}
 		})
 
-		const openMenu = (entity: TestPrepEntity) => openStudyEntityMenu(entity, {})
-
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 
-		return { testPreps, openMenu }
+		return { testPreps }
 	}
 })
 </script>

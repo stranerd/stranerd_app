@@ -17,7 +17,7 @@
 						@click="toggleSearch" />
 					<div v-if="isLoggedIn"
 						class=" font-bold flex flex-row items-center justify-center gap-2 cursor-pointer"
-						@click="openUserDashboardMenu()"
+						@click="openUserDashboardMenu"
 					>
 						<ion-icon :icon="ellipsisVertical" class="text-xl text-main_dark"></ion-icon>
 					</div>
@@ -45,7 +45,7 @@
 						@click="toggleSearch" />
 					<div v-if="isLoggedIn"
 						class=" font-bold flex flex-row items-center justify-center gap-2 cursor-pointer"
-						@click="openUserDashboardMenu()">
+						@click="openUserDashboardMenu">
 						<ion-icon :icon="ellipsisVertical" class="text-xl text-main_dark"></ion-icon>
 					</div>
 				</div>
@@ -72,7 +72,7 @@ export default defineComponent({
 	components: { IonIcon, SearchBar, IonHeader, IonToolbar, BigScreenBar, IonTitle },
 	setup () {
 		const { isLoggedIn } = useAuth()
-		const openUserDashboardMenu = () => useMenuPopover().openUserDashboardMenu()
+		const openUserDashboardMenu = useMenuPopover().openUserDashboardMenu
 		const route = useRoute()
 		const showSearch = ref(route.path.startsWith('/search'))
 		const toggleSearch = async () => {

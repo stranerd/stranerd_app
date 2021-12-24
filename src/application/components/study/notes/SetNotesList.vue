@@ -5,7 +5,8 @@
 		</template>
 		<template v-else>
 			<div class="showcase">
-				<NoteListCard v-for="note in filtered" :key="note.hash" :note="note" :openMenu="() => openMenu(note)" />
+				<NoteListCard v-for="note in filtered" :key="note.hash" :note="note"
+					:openMenu="(event) => openMenu(note, event)" />
 			</div>
 		</template>
 	</div>
@@ -36,7 +37,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const openMenu = (entity: NoteEntity) => openStudyEntityMenu(entity, { set: props.set })
+		const openMenu = (entity: NoteEntity, event: Event) => openStudyEntityMenu(entity, { set: props.set }, event)
 		const filtered = computed(() => props.notes.slice(0, props.sliced ? 6 : undefined))
 		return { filtered, openMenu }
 	}

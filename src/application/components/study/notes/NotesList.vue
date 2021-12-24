@@ -23,7 +23,8 @@
 
 		<template v-else>
 			<div class="showcase">
-				<NoteListCard v-for="note in notes" :key="note.hash" :note="note" :openMenu="() => openMenu(note)" />
+				<NoteListCard v-for="note in notes" :key="note.hash" :note="note"
+					:openMenu="(event) => openMenu(note, event)" />
 			</div>
 		</template>
 	</div>
@@ -54,7 +55,7 @@ export default defineComponent({
 			}
 		})
 
-		const openMenu = (entity: NoteEntity) => openStudyEntityMenu(entity, {})
+		const openMenu = (entity: NoteEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)

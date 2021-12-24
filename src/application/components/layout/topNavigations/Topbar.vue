@@ -7,7 +7,8 @@
 						<search-bar class="flex-grow" />
 					</template>
 					<template v-else>
-						<avatar v-if="isLoggedIn" :size="24" :src="user?.avatar" @click="openUserDashboardMenu" />
+						<avatar v-if="isLoggedIn" :size="24" :src="user?.avatar"
+							@click="openUserDashboardMenu" />
 						<router-link v-else class="flex items-center" to="/account">
 							<avatar :size="24" :src="user?.avatar" />
 						</router-link>
@@ -39,7 +40,7 @@
 							@click="toggleSearch" />
 						<div v-if="isLoggedIn"
 							class=" font-bold flex flex-row items-center justify-center gap-2 cursor-pointer"
-							@click="openUserDashboardMenu()">
+							@click="openUserDashboardMenu">
 							<ion-icon :icon="ellipsisVertical" class="text-xl text-main_dark"></ion-icon>
 						</div>
 					</div>
@@ -67,7 +68,7 @@ export default defineComponent({
 	components: { IonIcon, SearchBar, IonHeader, IonToolbar, BigScreenBar },
 	setup () {
 		const { isLoggedIn, user } = useAuth()
-		const openUserDashboardMenu = () => useMenuPopover().openUserDashboardMenu()
+		const openUserDashboardMenu = useMenuPopover().openUserDashboardMenu
 		const route = useRoute()
 		const showSearch = ref(route.path.startsWith('/search'))
 		const toggleSearch = async () => {

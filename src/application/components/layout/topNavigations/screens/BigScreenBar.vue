@@ -20,7 +20,7 @@
 						</router-link>
 						<div v-if="isLoggedIn"
 							class=" font-bold flex flex-row items-center justify-center gap-2 cursor-pointer"
-							@click="openUserDashboardMenu()"
+							@click="openUserDashboardMenu"
 						>
 							<avatar :id="user.id" :size="24" :src="user.avatar" />
 							<span class="text-base text-main_dark ">

@@ -18,14 +18,14 @@ const global = {
 	data: ref(null as { set?: SetEntity } | null)
 }
 
-export const openStudyEntityMenu = (entity: typeof global['entity']['value'], data: typeof global['data']['value']) => {
+export const openStudyEntityMenu = (entity: typeof global['entity']['value'], data: typeof global['data']['value'], event: Event) => {
 	global.entity.value = entity
 	if (entity instanceof NoteEntity) global.type.value = 'notes'
 	else if (entity instanceof FlashCardEntity) global.type.value = 'flashCards'
 	else if (entity instanceof VideoEntity) global.type.value = 'videos'
 	else if (entity instanceof TestPrepEntity) global.type.value = 'testPreps'
 	global.data.value = data
-	useMenuPopover().openStudyEntityMenu()
+	useMenuPopover().openStudyEntityMenu(event)
 }
 
 export const useStudyMenuData = () => {

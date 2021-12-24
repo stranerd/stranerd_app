@@ -11,7 +11,7 @@
 		</div>
 
 		<div v-if="set.isRoot" class="bg-white p-3 px-6 rounded-xl lg:grid place-items-center cursor-pointer hidden"
-			@click="openCreateStudy()">
+			@click="openCreateStudy">
 			<div class="flex items-center cursor-pointer">
 				<ion-text class="text-primary mr-1 font-bold">Create</ion-text>
 				<ion-icon :icon='chevronDown' class="text-primary text-xl" />

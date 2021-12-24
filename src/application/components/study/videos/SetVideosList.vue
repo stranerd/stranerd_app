@@ -5,7 +5,7 @@
 		</template>
 		<template v-else>
 			<div class="showcase">
-				<VideoListCard v-for="video in filtered" :key="video.hash" :openMenu="() => openMenu(video)"
+				<VideoListCard v-for="video in filtered" :key="video.hash" :openMenu="(event) => openMenu(video, event)"
 					:video="video" />
 			</div>
 		</template>
@@ -37,7 +37,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const openMenu = (entity: VideoEntity) => openStudyEntityMenu(entity, { set: props.set })
+		const openMenu = (entity: VideoEntity, event: Event) => openStudyEntityMenu(entity, { set: props.set }, event)
 		const filtered = computed(() => props.videos.slice(0, props.sliced ? 6 : undefined))
 		return { filtered, openMenu }
 	}
