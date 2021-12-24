@@ -34,7 +34,7 @@
 			</div>
 		</template>
 
-		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white z-[1000000000000]">
+		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white z-[10]">
 			<div class="lg:w-8/12  w-full px-4  mx-auto flex items-center justify-between">
 				<div>
 					<ion-text v-if="test.isOBJ" class="text-main_dark">
@@ -55,7 +55,7 @@
 					<router-link v-if="test.done" :to="`/study/tests/${test.id}/results`">
 						<ion-button class="btn-primary btn-lgx">See Results</ion-button>
 					</router-link>
-					<ion-button v-else class="btn-primary btn-lgx" @click="submit">Submit</ion-button>
+					<ion-button v-else class="btn-primary btn-lgx" @click="openSubmitTest">Submit</ion-button>
 				</div>
 			</div>
 		</div>
@@ -104,11 +104,9 @@ export default defineComponent({
 			set: () => {
 			}
 		})
-		const submit = () => {
-			useStudyPopover().openSubmitTest()
-		}
+		const openSubmitTest = () => useStudyPopover().openSubmitTest
 		return {
-			error, loading, questions, submit, updateAnswer,
+			error, loading, questions, openSubmitTest, updateAnswer,
 			countDown, tab, questionIndex, canGoBack, canGoForward, back, forward,
 			chevronForwardCircle, chevronBackCircle
 		}

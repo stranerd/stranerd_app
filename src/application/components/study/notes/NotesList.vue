@@ -2,8 +2,6 @@
 	<div>
 		<div class="w-full flex justify-between mb-4">
 			<div class="heading font-bold text-main_dark flex items-center">
-
-
 				<ion-text class="mr-3">
 					Notes
 				</ion-text>
@@ -25,7 +23,8 @@
 
 		<template v-else>
 			<div class="showcase">
-				<NoteListCard v-for="note in notes" :key="note.hash" :note="note" :openMenu="() => openMenu(note)" />
+				<NoteListCard v-for="note in notes" :key="note.hash" :note="note"
+					:openMenu="(event) => openMenu(note, event)" />
 			</div>
 		</template>
 	</div>
@@ -51,12 +50,12 @@ export default defineComponent({
 	setup () {
 		const { notes: allNotes, listener, loading, error } = useNoteList()
 		const notes = computed({
-			get: () => allNotes.value.slice(0, 3),
+			get: () => allNotes.value.slice(0, 6),
 			set: () => {
 			}
 		})
 
-		const openMenu = (entity: NoteEntity) => openStudyEntityMenu(entity, {})
+		const openMenu = (entity: NoteEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)

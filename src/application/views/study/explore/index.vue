@@ -16,7 +16,7 @@
 						<span>view all</span>
 					</router-link>
 				</div>
-				<ExploreTestPrepsList :sliced="true" :testPreps="testPreps" />
+				<ExploreTestPrepsList :sliced="true" :testPreps="groupedByInstitution" />
 			</div>
 
 			<div class="mb-12">
@@ -117,7 +117,7 @@ export default defineComponent({
 		const { notes, listener: noteListener, loading: noteLoading, error: noteError } = useNoteList()
 		const { videos, listener: videoListener, loading: videoLoading, error: videoError } = useVideoList()
 		const {
-			testPreps,
+			groupedByInstitution,
 			listener: testPrepListener,
 			loading: testPrepLoading,
 			error: testPrepError
@@ -142,7 +142,7 @@ export default defineComponent({
 			flashCards, flashCardLoading, flashCardError,
 			notes, noteLoading, noteError,
 			videos, videoLoading, videoError,
-			testPreps, testPrepLoading, testPrepError
+			groupedByInstitution, testPrepLoading, testPrepError
 		}
 	}
 })

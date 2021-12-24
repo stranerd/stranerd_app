@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="bg-primary  h-32 rounded-b-xl sm:rounded-3xl flex flex-col sm:flex-row justify-between sm:items-center p-8 pt-5">
+		class="bg-primary h-36 rounded-b-xl sm:rounded-3xl flex flex-col sm:flex-row justify-between sm:items-center p-8 pt-5">
 		<div class="flex flex-col w-full text-left">
 			<ion-text class="text-white leading-tight text-3xl font-bold">
 				{{ set.isRoot ? 'Your library' : set.name }}
@@ -11,7 +11,7 @@
 		</div>
 
 		<div v-if="set.isRoot" class="bg-white p-3 px-6 rounded-xl lg:grid place-items-center cursor-pointer hidden"
-			@click="openCreateStudy()">
+			@click="openCreateStudy">
 			<div class="flex items-center cursor-pointer">
 				<ion-text class="text-primary mr-1 font-bold">Create</ion-text>
 				<ion-icon :icon='chevronDown' class="text-primary text-xl" />

@@ -6,7 +6,7 @@
 		<template v-else>
 			<div class="showcase">
 				<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard"
-					:openMenu="() => openMenu(flashCard)" />
+					:openMenu="(event) => openMenu(flashCard, event)" />
 			</div>
 		</template>
 	</div>
@@ -33,7 +33,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const openMenu = (entity: FlashCardEntity) => openStudyEntityMenu(entity, {})
+		const openMenu = (entity: FlashCardEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => props.flashCards.slice(0, props.sliced ? 6 : undefined))
 		return { filtered, openMenu }
 	}

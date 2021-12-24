@@ -23,7 +23,7 @@
 
 		<template v-else>
 			<div class="showcase">
-				<VideoListCard v-for="video in videos" :key="video.hash" :openMenu="() => openMenu(video)"
+				<VideoListCard v-for="video in videos" :key="video.hash" :openMenu="(event) => openMenu(video, event)"
 					:video="video" />
 			</div>
 		</template>
@@ -55,7 +55,7 @@ export default defineComponent({
 			}
 		})
 
-		const openMenu = (entity: VideoEntity) => openStudyEntityMenu(entity, {})
+		const openMenu = (entity: VideoEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)

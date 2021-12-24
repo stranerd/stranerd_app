@@ -1,13 +1,16 @@
 <template>
 	<div>
-		<h1>Hello from Home Page</h1>
+		<Onboarding />
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Onboarding from '@app/components/onboarding/Onboarding.vue'
 
 export default defineComponent({
-	name: 'Index'
+	name: 'IndexPage',
+	components: { Onboarding },
+	middlewares: ['isNotAuthenticated']
 })
 </script>

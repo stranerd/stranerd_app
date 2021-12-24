@@ -1,9 +1,14 @@
 <template>
 	<div>
 		<div class="w-full flex justify-between mb-4">
-			<span class="heading font-bold text-main_dark">
-				Latest questions
-			</span>
+			<div class="heading font-bold text-main_dark flex items-center">
+				<ion-text class="mr-3">
+					Questions
+				</ion-text>
+				<ion-badge class="uppercase">
+					Latest
+				</ion-badge>
+			</div>
 
 			<router-link class="text-primary normalText flex items-center font-bold" to="/questions">
 				<span>view all</span>
@@ -27,10 +32,11 @@ import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/ico
 import QuestionListCard from '@app/components/questions/questions/RecentQuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '@app/components/core/EmptyState.vue'
+import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'RecentQuestions',
-	components: { QuestionListCard, EmptyState },
+	components: { QuestionListCard, EmptyState, IonBadge },
 	setup () {
 		const { questions: allQuestions, listener, loading, error } = useQuestionList()
 		const questions = computed({

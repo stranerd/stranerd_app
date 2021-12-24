@@ -6,9 +6,11 @@
 
 		<div class="flex mt-5 text-white gap-4">
 			<div class="w-1/2 flex justify-center items-center">
-				<ion-button class="btn-secondary w-full" @click="closeSubmitTest">
-					No
-				</ion-button>
+				<router-link :to="`/study/tests/${$route.params.testId}/`" class="w-full">
+					<ion-button class="btn-secondary font-bold !w-full">
+						Cancel
+					</ion-button>
+				</router-link>
 			</div>
 			<div class="w-1/2 flex justify-center items-center">
 				<router-link :to="`/study/tests/${$route.params.testId}/results`" class="w-full">
@@ -23,14 +25,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useStudyPopover } from '@app/composable/core/modals'
 
 export default defineComponent({
-	setup () {
-		const closeSubmitTest = () => {
-			useStudyPopover().closeSubmitTest()
-		}
-		return { closeSubmitTest }
-	}
+	name: 'SubmitTestPopover'
 })
 </script>

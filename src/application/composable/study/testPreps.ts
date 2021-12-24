@@ -12,6 +12,11 @@ import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } fr
 import { Alert } from '@app/composable/core/notifications'
 import { groupBy } from '@utils/commons'
 
+export type InstitutionTestPreps = {
+	institutionId: string,
+	preps: TestPrepEntity[]
+}
+
 const global = {
 	testPreps: ref([] as TestPrepEntity[]),
 	fetched: ref(false),
@@ -59,9 +64,8 @@ export const useTestPrepList = () => {
 	})
 
 	const groupedByInstitution = computed({
-		get: () => Object.entries(groupBy(global.testPreps.value, (prep) => prep.data.institutionId)).map(([key, preps]) => {
-			return { institutionId: key, preps }
-		}),
+		get: () => groupBy(global.testPreps.value, (prep) => prep.data.institutionId)
+			.map(({ key, values }) => ({ institutionId: key, preps: values })),
 		set: () => {
 		}
 	})

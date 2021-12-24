@@ -22,7 +22,7 @@
 		<template v-else>
 			<div class="showcase">
 				<FlashCardListCard v-for="flashcard in flashcards" :key="flashcard" :flashCard="flashcard"
-					:openMenu="() => openMenu(flashcard)" />
+					:openMenu="(event) => openMenu(flashcard, event)" />
 			</div>
 		</template>
 	</div>
@@ -48,12 +48,12 @@ export default defineComponent({
 	setup () {
 		const { flashCards: allFlashcard, listener, loading, error } = useFlashCardList()
 		const flashcards = computed({
-			get: () => allFlashcard.value.slice(0, 3),
+			get: () => allFlashcard.value.slice(0, 6),
 			set: () => {
 			}
 		})
 
-		const openMenu = (entity: FlashCardEntity) => openStudyEntityMenu(entity, {})
+		const openMenu = (entity: FlashCardEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)

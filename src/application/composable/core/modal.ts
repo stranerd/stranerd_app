@@ -60,14 +60,13 @@ export const usePopover = (stack: Ref<string[]>) => {
 		popovers[id].popover = null
 	}
 
-	const open = async (id: string, cssClass: string) => {
+	const open = async (id: string, cssClass: string, event: Event) => {
 		close(id)
 		if (Object.keys(popovers).includes(id)) {
 			popovers[id].popover = await popoverController
 				.create({
 					component: popovers[id].component,
-					cssClass: cssClass
-
+					cssClass, event
 				})
 			popovers[id].popover?.present?.()
 		}
@@ -81,12 +80,12 @@ export const usePopover = (stack: Ref<string[]>) => {
 				.map((key) => capitalize(key))
 				.map((key) => {
 					return [
-						[`open${key}`, async () => open(merge(type, key), css)],
+						[`open${key}`, async (event: Event) => open(merge(type, key), css, event)],
 						[`close${key}`, async () => close(merge(type, key))]
 					]
 				})
 				.reduce((acc, curr) => acc.concat(curr), [])
-		) as Record<`open${Capitalize<Key>}` | `close${Capitalize<Key>}`, () => void>
+		) as Record<`open${Capitalize<Key>}` | `close${Capitalize<Key>}`, ((event?: Event) => void) | (() => void)>
 
 		const closeAll = async () => Object.keys(popoverObject)
 			.forEach((key) => helpers[`close${capitalize(key) as Capitalize<Key>}`]?.())

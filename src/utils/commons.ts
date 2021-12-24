@@ -33,12 +33,13 @@ export const extractTextFromHTML = (html: string) => html?.trim().replace(/<[^>]
 export const getStringCount = (text: string, occ: string) => (text.match(new RegExp(occ, 'gi')) ?? []).length
 
 export function groupBy<Type, Unique extends string | number> (array: Array<Type>, func: (item: Type) => Unique) {
-	return array.reduce((acc, cur) => {
+	const obj = array.reduce((acc, cur) => {
 		const item = func(cur)
 		acc[item] ||= []
 		acc[item].push(cur)
 		return acc
 	}, {} as Record<Unique, Type[]>)
+	return Object.entries(obj).map(([key, values]) => ({ key, values })) as { key: Unique, values: Type[] }[]
 }
 
 export const trimToLength = (body: string, length: number) => {

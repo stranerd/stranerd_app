@@ -2,28 +2,25 @@
 	<Swiper
 		:dynamic-bullets="true"
 		:dynamic-main-bullets="1"
-		:modules="modules"
 		:free-mode="true"
+		:modules="modules"
 		:pagination="{ clickable: true }"
 		:space-between="10"
 		class="flex flex-row w-full h-screen justify-between items-stretch"
 	>
 		<SwiperSlide>
-			<SlideOne/>
+			<SlideOne />
 		</SwiperSlide>
 		<SwiperSlide>
-			<SlideTwo/>
+			<SlideTwo />
 		</SwiperSlide>
 		<SwiperSlide>
-			<SlideThree/>
+			<SlideThree />
 		</SwiperSlide>
 		<SwiperSlide>
-			<SlideFour/>
+			<SlideFour />
 		</SwiperSlide>
 	</Swiper>
-
-
-
 </template>
 
 
@@ -31,12 +28,14 @@
 import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
 import { Pagination } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
-import SlideOne from './slideOne.vue'
-import SlideTwo from './slideTwo.vue'
-import SlideThree from './slideThree.vue'
-import SlideFour from './slideFour.vue'
-export default {
-	name: '',
+import SlideOne from '@app/components/onboarding/SlideOne.vue'
+import SlideTwo from '@app/components/onboarding/SlideTwo.vue'
+import SlideThree from '@app/components/onboarding/SlideThree.vue'
+import SlideFour from '@app/components/onboarding/SlideFour.vue'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+	name: 'Onboarding',
 	components: {
 		Swiper,
 		SwiperSlide,
@@ -46,13 +45,11 @@ export default {
 		SlideFour
 	},
 	setup () {
-
 		return {
 			modules: [Pagination]
 		}
-	},
-
-}
+	}
+})
 </script>
 
 <style scoped>
