@@ -91,7 +91,6 @@ export const useDeleteReport = (id: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to remove this report?',
 			text: 'This cannot be reversed',
-			icon: 'warning',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {

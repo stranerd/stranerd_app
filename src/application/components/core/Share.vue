@@ -53,15 +53,13 @@ export default defineComponent({
 				} catch {
 					const res = await copyToClipboard(url)
 					await Notify({
-						title: `something went wrong somewhere.${res ? ' The link has been copied to your clipboard instead' : ''}`,
-						icon: 'info'
+						title: `Something went wrong somewhere.${res ? ' The link has been copied to your clipboard instead' : ''}`
 					})
 				}
 			} else {
 				const res = await copyToClipboard(url)
 				await Notify({
-					title: `Your current device is unable to share links.${res ? ' The link has been copied to your clipboard instead' : ''}`,
-					icon: 'info'
+					title: `Your current device is unable to share links.${res ? ' The link has been copied to your clipboard instead' : ''}`
 				})
 			}
 		}

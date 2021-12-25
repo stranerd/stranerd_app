@@ -53,7 +53,6 @@ export const useSession = (sessionId: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to cancel this session',
 			text: 'This cannot be undone',
-			icon: 'info',
 			confirmButtonText: 'Yes, cancel',
 			cancelButtonText: 'No, ignore'
 		})
@@ -73,7 +72,6 @@ export const useSession = (sessionId: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to end this session',
 			text: 'This cannot be undone',
-			icon: 'info',
 			confirmButtonText: 'Yes, end',
 			cancelButtonText: 'No, ignore'
 		})
@@ -93,7 +91,6 @@ export const useSession = (sessionId: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to accept this session',
 			text: '',
-			icon: 'info',
 			confirmButtonText: 'Yes, accept',
 			cancelButtonText: 'No, ignore'
 		})
@@ -114,7 +111,6 @@ export const useSession = (sessionId: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to reject this session',
 			text: '',
-			icon: 'info',
 			confirmButtonText: 'Yes, reject',
 			cancelButtonText: 'No, ignore'
 		})

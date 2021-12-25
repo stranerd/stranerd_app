@@ -160,7 +160,6 @@ const callback = (key: SessionKey, sessions: SessionEntity[], userId: string, ro
 			const res = await Alert({
 				title: 'New session request',
 				text: '',
-				icon: 'info',
 				cancelButtonText: 'Ignore',
 				confirmButtonText: 'Continue'
 			})

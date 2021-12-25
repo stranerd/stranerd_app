@@ -158,7 +158,6 @@ export const useDeleteTestPrep = (testPrepId: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this testPrep?',
 			text: 'This cannot be reversed',
-			icon: 'warning',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

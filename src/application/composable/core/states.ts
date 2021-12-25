@@ -20,8 +20,7 @@ export const useErrorHandler = () => {
 			].includes(error.statusCode)) await useAuth().signout()
 		} else errorState.value = error.message ?? error
 		if (isClient() && errorState.value && !skipAlert) Notify({
-			title: errorState.value,
-			icon: 'error'
+			title: errorState.value
 		}).then()
 		if (errorState.value) await analytics.logEvent('error', {
 			error: errorState.value
@@ -35,8 +34,7 @@ export const useSuccessHandler = () => {
 	const setMessage = async (message: string) => {
 		successState.value = message
 		if (isClient() && successState.value) Notify({
-			title: successState.value,
-			icon: 'success'
+			title: successState.value
 		})
 	}
 	return { message: successState, setMessage }

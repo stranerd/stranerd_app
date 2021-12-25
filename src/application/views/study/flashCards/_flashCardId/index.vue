@@ -153,7 +153,6 @@ export default defineComponent({
 				const accepted = await Alert({
 					title: 'You have gotten to the end of the flashCard set',
 					text: 'Do you want to try again or return back to Study',
-					icon: 'info',
 					confirmButtonText: 'Yes, Try again',
 					cancelButtonText: 'No, Back to study'
 				})

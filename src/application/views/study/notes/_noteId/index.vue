@@ -19,10 +19,7 @@
 			</div> -->
 		</div>
 		<div class="w-full pb-12 bg-light_gray">
-			<div
-				:class="[false ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white']">
-
-
+			<div class="lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white">
 				<pdf v-for="i in numPages" :id="i" :key="i" :annotation="true" :page="i"
 					:resize="true" :scale="1"
 					:src="pdfdata"

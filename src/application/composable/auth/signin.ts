@@ -13,6 +13,7 @@ import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/comp
 import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'
 import { useAuth } from '@app/composable/auth/auth'
+import { storage } from '@utils/storage'
 
 const global = {
 	referrerId: ref(undefined as string | undefined),
@@ -23,15 +24,15 @@ const global = {
 	emailVerificationComplete: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() }
 }
 
-export const getReferrerId = () => window.localStorage.getItem('referrer') ?? global.referrerId.value
+export const getReferrerId = async () => await storage.get('referrer') ?? global.referrerId.value
 
-export const setReferrerId = (id: string) => {
+export const setReferrerId = async (id: string) => {
 	global.referrerId.value = id
-	window.localStorage.setItem('referrer', id)
+	await storage.set('referrer', id)
 }
-export const saveReferrerId = () => {
+export const saveReferrerId = async () => {
 	const id = getReferrerId()
-	if (id) window.localStorage.setItem('referrer', id)
+	if (id) await storage.set('referrer', id)
 }
 
 export const useEmailSignin = () => {
@@ -44,10 +45,10 @@ export const useEmailSignin = () => {
 			await setLoading(true)
 			try {
 				const user = await SigninWithEmail.call(factory.value, {
-					referrer: getReferrerId()
+					referrer: await getReferrerId()
 				})
 				await createSession(user, router)
-				window.localStorage.removeItem('referrer')
+				await storage.remove('referrer')
 			} catch (error) {
 				await setError(error)
 			}
@@ -67,10 +68,10 @@ export const useEmailSignup = () => {
 			await setLoading(true)
 			try {
 				const user = await SignupWithEmail.call(factory.value, {
-					referrer: getReferrerId()
+					referrer: await getReferrerId()
 				})
 				await createSession(user, router)
-				window.localStorage.removeItem('referrer')
+				await storage.remove('referrer')
 			} catch (error) {
 				await setError(error)
 			}
@@ -134,10 +135,10 @@ export const useGoogleSignin = () => {
 			await setLoading(true)
 			try {
 				const user = await SigninWithGoogle.call(idToken, {
-					referrer: getReferrerId()
+					referrer: await getReferrerId()
 				})
 				await createSession(user, router)
-				window.localStorage.removeItem('referrer')
+				await storage.remove('referrer')
 			} catch (error) {
 				await setError(error)
 			}

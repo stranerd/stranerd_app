@@ -9,7 +9,7 @@
 			</div>
 		</div>
 
-		<TestBody v-if="test" :key="test.hash" :test="test" />
+		<TestBody v-if="test" :test="test" />
 
 		<PageLoading v-if="loading" />
 	</Justified>

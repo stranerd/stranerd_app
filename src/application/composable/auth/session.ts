@@ -5,7 +5,7 @@ import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
 import { Router, useRoute, useRouter } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@app/composable/core/notifications'
-import { parseCookie, serializeToCookie } from '@utils/cookie'
+import { storage } from '@utils/storage'
 
 export const createSession = async (afterAuth: AfterAuthUser, router: Router) => {
 	if (!afterAuth.user.isVerified) {
@@ -17,8 +17,8 @@ export const createSession = async (afterAuth: AfterAuthUser, router: Router) =>
 	await setAuthUser(afterAuth.user)
 	await signin(false)
 
-	const { [REDIRECT_SESSION_NAME]: redirect } = parseCookie(document.cookie ?? '')
-	document.cookie = serializeToCookie(REDIRECT_SESSION_NAME, '', -1)
+	const redirect = await storage.get(REDIRECT_SESSION_NAME)
+	if (redirect) await storage.remove(REDIRECT_SESSION_NAME)
 	await router.push(redirect ?? '/dashboard')
 }
 
@@ -30,7 +30,6 @@ export const useSessionSignout = () => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to sign out?',
 			text: '',
-			icon: 'info',
 			confirmButtonText: 'Yes, signout'
 		})
 		if (accepted) {
@@ -52,7 +51,7 @@ export const useRedirectToAuth = () => {
 	const router = useRouter()
 
 	const redirect = async () => {
-		document.cookie = serializeToCookie(REDIRECT_SESSION_NAME, route.fullPath)
+		await storage.set(REDIRECT_SESSION_NAME, route.fullPath)
 		if (router) await router.push('/auth/signin')
 	}
 

@@ -145,7 +145,6 @@ export const useAnswer = (answer: AnswerEntity) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to mark this answer as the best',
 			text: 'This cannot be reversed',
-			icon: 'info',
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {
@@ -213,7 +212,6 @@ export const useDeleteAnswer = (answerId: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this answer?',
 			text: 'This cannot be reversed',
-			icon: 'warning',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {
