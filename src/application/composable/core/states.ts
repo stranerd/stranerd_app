@@ -4,7 +4,7 @@ import { isClient } from '@utils/environment'
 import { analytics, NetworkError, StatusCodes } from '@modules/core'
 import { capitalize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
-import { isPlatform } from '@ionic/vue'
+import { Capacitor } from '@capacitor/core'
 
 export const useErrorHandler = () => {
 	const errorState = ref('')
@@ -76,8 +76,8 @@ export const useListener = (start: () => Promise<() => void>) => {
 }
 
 export const usePlatform = () => {
-	const isWeb = isPlatform('desktop') || isPlatform('mobileweb')
-	const isIos = !isWeb && isPlatform('ios')
-	const isAndroid = !isWeb && isPlatform('android')
+	const isWeb = Capacitor.getPlatform() === 'web'
+	const isIos = Capacitor.getPlatform() === 'ios'
+	const isAndroid = Capacitor.getPlatform() === 'android'
 	return { isIos, isAndroid, isWeb }
 }
