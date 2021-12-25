@@ -1,114 +1,92 @@
 <template>
-	<div class="w-full md:px-8 px-4 bg-light_gray">
-		<div class="container mx-auto px-3 py-10">
-			<div class="text-black">
-				<div class="text-center max-w-xl mx-auto my-10">
-					<h2 class="font-bold mx-auto max-w-xs md:max-w-lg text-3xl text-primary">
-						Imagine a place where you can;
-					</h2>
-					<img alt="" class="mx-auto w-44" src="@app/assets/images/landing-lines/about-heading-boder.png">
-				</div>
-				<div
-					class="flex items-center flex-wrap justify-between md:flex-nowrap md:flex-row-reverse gap-4 md:gap-10 my-10 md:my-12">
-					<div class="w-full md:w-1/2 flex items-stretch flex-none">
-						<VideoCard></VideoCard>
-					</div>
-					<div class="w-full md:max-w-xs lg:max-w-md xl:max-w-lg flex-none">
-						<div class="">
-							<h3 class="text-orange font-bold text-xl md:text-3xl my-5 md:mb-8">Save time doing
-								homework</h3>
-							<ul class="list-disc font-medium text-xs lg:text-base ml-5 my-3.5">
-								<li class="leading-8">
-									Get correct answers to help you finish homework faster.
-								</li>
-								<li class="leading-8">
-									Ask questions and get quick solutions from a community of students and tutors..
-								</li>
-							</ul>
-							<router-link
-								class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-44 lg:w-80 py-4"
-								to="">
-								Ask a Question
-							</router-link>
-						</div>
-					</div>
-				</div>
-				<div
-					class="flex items-center flex-wrap justify-between md:flex-nowrap md:flex-row gap-4 md:gap-10 my-10 md:my-12">
-					<div class="w-full md:w-1/2 flex items-stretch flex-none">
-						<VideoCard></VideoCard>
-					</div>
-					<div class="w-full md:max-w-xs lg:max-w-md xl:max-w-lg flex-none">
-						<div class="">
-							<h3 class="text-orange font-bold text-xl md:text-3xl my-5 md:mb-8">Create your own learning
-								environment</h3>
-							<ul class="list-disc font-medium text-xs lg:text-base ml-5 my-3.5">
-								<li class="leading-8">
-									Curate your personal study set from over 150,000 study resources
-								</li>
-								<li class="leading-8">
-									Flash cards
-								</li>
-								<li class="leading-8">
-									JAMB, WAEC, TOEFL, SAT I & II, GRE past questions & more
-								</li>
-								<li class="leading-8">
-									Course notes
-								</li>
-							</ul>
-							<router-link
-								class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-44 lg:w-80 py-4"
-								to="">
-								Create Study Sets
-							</router-link>
-						</div>
-					</div>
-				</div>
-				<div
-					class="flex items-center flex-wrap justify-between md:flex-nowrap md:flex-row-reverse gap-4 md:gap-10 my-10 md:my-12">
-					<div class="w-full md:w-1/2 flex items-stretch flex-none">
-						<VideoCard></VideoCard>
-					</div>
-					<div class="w-full md:max-w-xs lg:max-w-md xl:max-w-lg flex-none">
-						<div class="">
-							<h3 class="text-orange font-bold text-xl md:text-3xl my-5 md:mb-8">Redefine how you prepare
-								for tests & exams</h3>
-							<ul class="list-disc font-medium text-xs lg:text-base ml-5 my-3.5">
-								<li class="leading-8">
-									Take SATs, JAMB, GRE, IJMB test practices
-								</li>
-								<li class="leading-8">
-									Get access to summary notes & revision guides
-								</li>
-								<li class="leading-8">
-									Learn on the go with video materials
-								</li>
-								<li class="leading-8">
-									Flexible classes that fit your study schedule
-								</li>
-								<li class="leading-8">
-									A dedicated tutor for all your prep needs
-								</li>
-							</ul>
-							<router-link
-								class="rounded-md block bg-icon_inactive text-white text-xs md:text-lg font-bold text-center w-44 lg:w-80 py-4"
-								to="">
-								Take Test Preps
-							</router-link>
-						</div>
-					</div>
+	<div class="w-full md:px-8 px-4 bg-white">
+		<div class="container mx-auto flex flex-col max-w-7xl">
+			
+			<ion-text class="font-extrabold  mx-auto  lg:my-48 my-20 text-center lg:text-5xl text-base text-main_dark ">
+				We make learning easy, convenient and accessible.
+			</ion-text>
+
+			<div class="flex justify-between items-center w-full lg:flex-row flex-col gap-5">
+				<img alt="testprep image" class="" src="@app/assets/images/auth/test.svg" />
+
+				<div class="lg:px-24 px-5 lg:py-32 py-12 bg-green text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2  w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
+					<img alt="testprep image" class="lg:w-[3.75rem] w-[2.75rem]" src="@app/assets/images/New/testPrep.svg" />
+					<ion-text class="font-extrabold lg:text-3xl text-xl">
+						Test Prep
+					</ion-text>
+					<ion-text class="lg:text-xl text-base text-center">
+						Practice tests and study solutions of all available questions on gateway exams (WAEC, JAMB, JUPEB e.t.c.).
+					</ion-text>
 				</div>
 			</div>
+
+			<div class="flex justify-between items-center w-full lg:flex-row flex-col-reverse mt-24 gap-5">
+			
+
+				<div class="lg:px-24 px-5 lg:py-32 py-12 bg-purple text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2 w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
+					<img alt="flashcard image" class="lg:w-[3.75rem] w-[2.75rem]" src="@app/assets/images/New/flashCard.png" />
+					<ion-text class="font-extrabold lg:text-3xl text-xl">
+						Flashcards
+					</ion-text>
+					<ion-text class="lg:text-xl text-base text-center">
+						Memorize answers to questions on the back of cards. Scientifically proven to help students get better grades
+					</ion-text>
+				</div>
+
+				<img alt="testprep image" class="" src="@app/assets/images/auth/flash.svg" />
+			</div>
+
+
+			<div class="flex justify-between items-center w-full lg:flex-row flex-col mt-24 gap-5">
+
+				<img alt="testprep image" class="" src="@app/assets/images/auth/note.svg" />
+
+				<div class="lg:px-24 px-5 lg:py-32 py-12 bg-pink text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2 w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
+					<ion-icon :icon="reader" class=" lg:text-[3.75rem] text-[2.75rem] text-white" />
+					<ion-text class="font-extrabold lg:text-3xl text-xl">
+						Notes
+					</ion-text>
+					<ion-text class="lg:text-xl text-base text-center">
+						Read beautiful and concise notes that cover every important aspects in topics under different subjects.
+					</ion-text>
+				</div>
+			</div>
+
+			<div class="flex justify-between items-center w-full lg:flex-row flex-col-reverse mt-24 gap-5">
+
+				<div class="lg:px-24 px-5 lg:py-32 py-12 bg-cyan text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2 w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
+					<ion-icon :icon="chatboxEllipses" class=" lg:text-[3.75rem] text-[2.75rem] text-white" />
+					<ion-text class="font-extrabold lg:text-3xl text-xl">
+						Expert Answers
+					</ion-text>
+					<ion-text class="lg:text-xl text-base text-center">
+						Ask questions and get expert answers and detailed explanations to help with your homework and studying.
+					</ion-text>
+				</div>
+
+				<img alt="testprep image" class="" src="@app/assets/images/auth/question.svg" />
+			</div>
+
+		
+
+		
+			
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import VideoCard from './VideoCard.vue'
+import { reader, chatboxEllipses } from 'ionicons/icons'
+
 
 export default {
-	components: { VideoCard },
-	name: ''
+	name: 'about',
+
+	setup(){
+		return{
+			reader, chatboxEllipses
+		}
+	}
 }
 </script>
 

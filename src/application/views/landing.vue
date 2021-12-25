@@ -2,10 +2,9 @@
 	<HomeLayout>
 		<Landing></Landing>
 		<About></About>
-		<Download></Download>
-		<Statistics></Statistics>
-		<GetStarted></GetStarted>
+		
 		<Testimonial></Testimonial>
+		<GetStarted></GetStarted>
 		<Features></Features>
 		<Footer></Footer>
 	</HomeLayout>
@@ -19,8 +18,6 @@ import About from '@app/components/landing/about.vue'
 import Testimonial from '@app/components/landing/testimonial.vue'
 import Features from '@app/components/landing/features.vue'
 import GetStarted from '@app/components/landing/getStarted.vue'
-import Statistics from '@app/components/landing/statistics.vue'
-import Download from '@app/components/landing/download.vue'
 import Landing from '@app/components/landing/landing.vue'
 
 export default defineComponent({
@@ -31,8 +28,6 @@ export default defineComponent({
 		Features,
 		GetStarted,
 		Testimonial,
-		Statistics,
-		Download,
 		Landing,
 		HomeLayout
 	}

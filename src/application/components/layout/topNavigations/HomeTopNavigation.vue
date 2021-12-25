@@ -1,8 +1,8 @@
 <template>
 	<ion-header
-		:class="[show ?'fixed bg-white top-0 bottom-0 !text-white':'', 'w-full flex flex-col  z-10 bg-white text-primary lg:shadow']"
+		:class="[show ?'fixed bg-white top-0 bottom-0 !text-white':'', 'w-full flex flex-col  z-10 bg-white text-primary nav-shadow']"
 		role="navigation">
-		<div class="md:px-8 p-4 hidden lg:flex items-center justify-between">
+		<div class="md:px-16 p-4 hidden lg:flex items-center justify-between">
 			<router-link class="hidden lg:block" to="/">
 				<Logo :secondary="true" />
 			</router-link>
@@ -123,5 +123,9 @@ export default defineComponent({
 		bottom: 2%;
 		width: 100%;
 		left: 0;
+	}
+
+	.nav-shadow {
+		box-shadow: 0 5px 10px rgba(84, 109, 211, 0.1);
 	}
 </style>
