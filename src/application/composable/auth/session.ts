@@ -4,7 +4,7 @@ import { REDIRECT_SESSION_NAME } from '@utils/constants'
 import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
 import { Router, useRoute, useRouter } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 import { storage } from '@utils/storage'
 
 export const createSession = async (afterAuth: AfterAuthUser, router: Router) => {

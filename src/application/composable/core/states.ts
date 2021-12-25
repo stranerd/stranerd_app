@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { Notify } from '@app/composable/core/notifications'
+import { Notify } from '@utils/dialog'
 import { isClient } from '@utils/environment'
 import { analytics, NetworkError, StatusCodes } from '@modules/core'
 import { capitalize } from '@utils/commons'

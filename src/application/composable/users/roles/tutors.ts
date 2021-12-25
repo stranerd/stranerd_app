@@ -1,7 +1,7 @@
 import { computed, onMounted, reactive, ref, toRefs } from 'vue'
 import { GetAllTutors, GetUsersByEmail, ListenToAllTutors, MakeTutor, RemoveTutor, UserEntity } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
 
 const global = {

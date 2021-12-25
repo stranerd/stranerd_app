@@ -4,7 +4,7 @@ import { AddSession, BeginSession, CancelSession, EndSession, SessionFactory } f
 import { CreateReview, UserBio } from '@modules/users'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useSessionModal } from '@app/composable/core/modals'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 import { analytics } from '@modules/core'
 
 let newSessionTutorIdBio = null as null | { id: string, user: UserBio }

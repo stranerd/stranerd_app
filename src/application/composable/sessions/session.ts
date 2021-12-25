@@ -3,7 +3,7 @@ import { Router, useRouter } from 'vue-router'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { FindSession, GetSessions, ListenToSession, ListenToSessions, SessionEntity } from '@modules/sessions'
 import { useAuth } from '@app/composable/auth/auth'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 import { setOtherParticipantId } from '@app/composable/sessions/sessions'
 import { useSessionModal } from '@app/composable/core/modals'
 

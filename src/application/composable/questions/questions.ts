@@ -13,7 +13,7 @@ import {
 } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { analytics } from '@modules/core'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 import { useQuestionModal } from '@app/composable/core/modals'
 
 enum Answered {

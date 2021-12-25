@@ -1,8 +1,7 @@
 import { FlashCardEntity, NoteEntity, SetEntity, TestPrepEntity, VideoEntity } from '@modules/study'
 import { computed, ref } from 'vue'
 import { useMenuPopover } from '@app/composable/core/modals'
-import { copyToClipboard } from '@utils/commons'
-import { Notify } from '@app/composable/core/notifications'
+import { share } from '@utils/commons'
 import { domain } from '@utils/environment'
 import { useDeleteFlashCard } from '@app/composable/study/flashCards'
 import { useDeleteTestPrep } from '@app/composable/study/testPreps'
@@ -49,31 +48,17 @@ export const useStudyMenuData = () => {
 
 	if (!global.entity.value || !global.type.value || !global.data.value) useMenuPopover().closeStudyEntityMenu()
 
-	const share = async () => {
+	const shareEntity = async () => {
 		useMenuPopover().closeStudyEntityMenu()
 		const url = domain + shareLink.value
-		if (window.navigator.share) {
-			try {
-				await window.navigator.share({
-					url,
-					title: title.value,
-					text: ''
-				})
-			} catch {
-				const res = await copyToClipboard(url)
-				await Notify({
-					title: `Something went wrong somewhere.${res ? ' The link has been copied to your clipboard instead' : ''}`
-				})
-			}
-		} else {
-			const res = await copyToClipboard(url)
-			await Notify({
-				title: `Your current device is unable to share links.${res ? ' The link has been copied to your clipboard instead' : ''}`
-			})
-		}
+		await share({
+			url,
+			title: title.value,
+			text: ''
+		})
 	}
 
-	return { ...global, shareLink, share }
+	return { ...global, shareLink, share: shareEntity }
 }
 
 export const useDeleteStudyEntity = () => {

@@ -13,7 +13,7 @@ import {
 } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 import { analytics } from '@modules/core'
 import { Router, useRouter } from 'vue-router'
 

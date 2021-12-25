@@ -11,7 +11,7 @@ import {
 	NoteFactory
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 
 const global = {
 	notes: ref([] as NoteEntity[]),
