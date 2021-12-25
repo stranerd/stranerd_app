@@ -1,40 +1,51 @@
 <template>
-	<div :class="`m-0 w-full bg-white rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border p-4`">
-		<div class="w-full justify-between items-start flex">
-			<img :src="note.preview.link" class="bg-faded_gray h-[5.375rem] w-[4.5rem] rounded-md object-cover" />
-			<div class="text-base text-main_dark font-bold text-left flex-col flex ml-4 flex-grow">
-				<ion-text>{{ note.title }}</ion-text>
-			</div>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl cursor-pointer" @click="openMenu" />
-		</div>
-		<router-link :to="`/study/notes/${note.id}`" class="mt-2">
-			<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem] ">
-				Start reading
-			</ion-button>
-		</router-link>
-	</div>
+	<Pdf v-for="i in numPages" :id="i" :key="i" :annotation="true" :page="i" :resize="true" :scale="scale"
+		:src="pdfData"
+		style="width:80%;margin:20px auto;">
+		<template v-slot:loading>
+			loading content here...
+		</template>
+	</Pdf>
 </template>
 
 <script lang="ts">
-import { calendar, ellipsisVertical, play } from 'ionicons/icons'
-import { defineComponent } from 'vue'
-import { formatNumber } from '@utils/commons'
+import { add, bookmark, chevronDown, chevronUp, contract, pencil, remove, scan, shareSocial } from 'ionicons/icons'
+import { computed, defineComponent, onMounted, ref } from 'vue'
 import { NoteEntity } from '@modules/study'
+//@ts-ignore
+import Pdfvuer from 'pdfvuer'
 
 export default defineComponent({
-	name: 'NoteListCard',
+	name: 'Note',
+	components: { Pdf: Pdfvuer },
 	props: {
 		note: {
 			type: NoteEntity,
 			required: true
-		},
-		openMenu: {
-			type: Function,
-			required: true
 		}
 	},
-	setup () {
-		return { formatNumber, calendar, play, ellipsisVertical }
+	setup (props) {
+		const page = ref(1)
+		const scale = ref(1)
+		const pdfData = ref(undefined)
+		const numPages = ref(0)
+		const pdfLoading = ref(true)
+		const formattedZoom = computed(() => {
+			return scale.value * 100
+		})
+
+		onMounted(async () => {
+			const pdf = await Pdfvuer.createLoadingTask(props.note.media?.link ?? props.note.link)
+			pdfLoading.value = false
+			numPages.value = pdf.numPages
+			pdfData.value = pdf
+		})
+
+		return {
+			page, scale, numPages, pdfLoading, formattedZoom, pdfData,
+			add, remove, scan, chevronDown,
+			chevronUp, pencil, contract, bookmark, shareSocial
+		}
 	}
 })
 </script>
