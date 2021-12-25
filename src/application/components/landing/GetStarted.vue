@@ -9,9 +9,10 @@
 				<ion-text class="lg:text-[32px] text-xs">
 					In class, at home or on the go, never be stranded
 				</ion-text>
-			
-				<router-link to="/auth/signup" class="w-full h-auto mx-auto">
-					<ion-button class="btn-primary  text-white lg:w-[20rem] w-32 lg:h-20 h-12 lg:text-2xl text-sm md:text-lg block mx-auto">
+
+				<router-link class="w-full h-auto mx-auto" to="/auth/signup">
+					<ion-button
+						class="btn-primary  text-white lg:w-[20rem] w-32 lg:h-20 h-12 lg:text-2xl text-sm md:text-lg block mx-auto">
 						Sign Up
 					</ion-button>
 				</router-link>
@@ -19,12 +20,3 @@
 		</div>
 	</div>
 </template>
-
-<script lang="ts">
-export default {
-	name: ''
-}
-</script>
-
-
-

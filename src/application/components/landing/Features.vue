@@ -2,7 +2,8 @@
 	<div class="w-full bg-white pb-12 lg:pb-48">
 		<div class="text-center px-3">
 			<div class="max-w-xl text-center mx-auto flex flex-col justify-center">
-				<ion-text class="font-extrabold  mx-auto  lg:mt-48 lg:mb-24 mt-20 mb-12 text-center lg:text-5xl text-base text-main_dark ">
+				<ion-text
+					class="font-extrabold  mx-auto  lg:mt-48 lg:mb-24 mt-20 mb-12 text-center lg:text-5xl text-base text-main_dark ">
 					Featured on
 				</ion-text>
 				<div class="flex  lg:gap-24 gap-5 justify-center items-center ">
@@ -17,12 +18,6 @@
 		</div>
 	</div>
 </template>
-
-<script lang="ts">
-export default {
-	name: ''
-}
-</script>
 
 <style scoped>
 </style>

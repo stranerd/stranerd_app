@@ -1,11 +1,11 @@
 <template>
 	<div class="md:px-8 px-4 py-10 bg-white flex flex-col">
-		<ion-text class="font-extrabold  mx-auto  lg:mt-48 lg:mb-24 mt-20 mb-12 text-center lg:text-5xl text-base text-main_dark ">
+		<ion-text
+			class="font-extrabold mx-auto lg:mt-48 lg:mb-24 mt-20 mb-12 text-center lg:text-5xl text-base text-main_dark ">
 			Made for students, loved by students
 		</ion-text>
 		<div class="container mx-auto">
 			<Swiper
-		
 				:dynamic-bullets="true"
 				:dynamic-main-bullets="1"
 				:free-mode="true"
@@ -13,17 +13,18 @@
 				:pagination="{ clickable: true }"
 			>
 				<SwiperSlide v-for="(testimony, i) in testimonies" :key="i">
-					<div class="bg-primary p-5 lg:p-[3.25rem] lg:rounded-[3rem] rounded-3xl text-white max-w-[99rem] lg:h-[21rem] h-[18rem] flex flex-col justify-center">
+					<div
+						class="bg-primary p-5 lg:p-[3.25rem] lg:rounded-[3rem] rounded-3xl text-white max-w-[99rem] lg:h-[21rem] h-[18rem] flex flex-col justify-center">
 						<img alt="" class="object-contain h-9" src="@app/assets/images/New/comment.svg">
 						<ion-text class="text-center font-bold text-xs lg:text-2xl mt-6">
-							{{testimony.text}}
+							{{ testimony.text }}
 						</ion-text>
 
 						<div class="flex items-center justify-center lg:mt-16 mt-10">
 							<img :src="testimony.img" class="object-cover lg:h-10 lg:w-10 h-5 w-5 rounded-full">
 
 							<ion-text class="text-center font-bold text-xs lg:text-xl ml-4">
-								{{testimony.author}}
+								{{ testimony.author }}
 							</ion-text>
 						</div>
 					</div>
@@ -37,9 +38,10 @@
 import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
 import { Pagination } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
+import { defineComponent } from 'vue'
 
-export default {
-	name: '',
+export default defineComponent({
+	name: 'Testimonials',
 	components: {
 		Swiper,
 		SwiperSlide
@@ -71,9 +73,8 @@ export default {
 			testimonies,
 			modules: [Pagination]
 		}
-	},
-
-}
+	}
+})
 </script>
 
 <style scoped>

@@ -94,27 +94,27 @@
 						</div>
 					</div>
 					<div class="flex flex-col sm:flex-row md:items-center justify-center">
-				
+
 						<div class="flex gap-5 items-center justify-center md:justify-end my-10">
 							<a aria-label="instagram link" class="inline-block"
 								href="https://www.instagram.com/officialstranerd/">
 
 								<ion-icon
-									class="text-3xl"
 									:icon="logoInstagram"
+									class="text-3xl"
 								/>
 							</a>
 							<a aria-label="twiiter link" class="inline-block" href="https://twitter.com/stranerds">
 								<ion-icon
-									class="text-3xl"
 									:icon="logoTwitter"
+									class="text-3xl"
 								/>
 							</a>
 							<a aria-label="facebook link" class="inline-block"
 								href="https://facebook.com/officialstranerd">
 								<ion-icon
-									class="text-3xl"
 									:icon="logoFacebook"
+									class="text-3xl"
 								/>
 							</a>
 						</div>
@@ -129,17 +129,17 @@
 </template>
 
 <script lang="ts">
-import { logoInstagram, logoTwitter, logoFacebook } from 'ionicons/icons'
+import { logoFacebook, logoInstagram, logoTwitter } from 'ionicons/icons'
+import { defineComponent } from 'vue'
 
-export default {
-	name: 'footer',
-
-	setup(){
-		return{
-			logoInstagram,  logoTwitter, logoFacebook
+export default defineComponent({
+	name: 'Footer',
+	setup () {
+		return {
+			logoInstagram, logoTwitter, logoFacebook
 		}
 	}
-}
+})
 </script>
 
 <style scoped>
