@@ -87,10 +87,9 @@
 	</div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { IonIcon, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
 import { document, ellipse, ellipseOutline } from 'ionicons/icons'
-import { analytics } from '@modules/core'
 import { useCreateSession } from '@app/composable/sessions/sessions'
 import { useSessionModal } from '@app/composable/core/modals'
 
@@ -100,9 +99,6 @@ export default defineComponent({
 			useSessionModal().closeCreateSession()
 		}
 		const { factory, loading, error, createSession, newSessionTutorIdBio } = useCreateSession()
-		onMounted(async () => {
-			await analytics.logEvent('view_session_request')
-		})
 
 		return {
 			closeSessionModal,

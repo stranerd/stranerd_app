@@ -5,7 +5,6 @@ import { CreateReview, UserBio } from '@modules/users'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useSessionModal } from '@app/composable/core/modals'
 import { Alert } from '@utils/dialog'
-import { analytics } from '@modules/core'
 
 let newSessionTutorIdBio = null as null | { id: string, user: UserBio }
 export const setNewSessionTutorIdBio = (data: { id: string, user: UserBio }) => {
@@ -30,7 +29,6 @@ export const useCreateSession = () => {
 				await router.push(`/chat/${newSessionTutorIdBio?.id}`)
 				factory.value.reset()
 				await setMessage('Session request successful.')
-				await analytics.logEvent('session_request', { sessionId })
 			} catch (error) {
 				await setError(error)
 			}
@@ -98,7 +96,6 @@ export const useSession = (sessionId: string) => {
 			try {
 				await setLoading(true)
 				if (sessionId) await BeginSession.call(sessionId, true)
-				await analytics.logEvent('session_accepted', { sessionId, accepted: true })
 			} catch (error) {
 				await setError(error)
 			}
@@ -118,7 +115,6 @@ export const useSession = (sessionId: string) => {
 			try {
 				await setLoading(true)
 				if (sessionId) await BeginSession.call(sessionId, false)
-				await analytics.logEvent('session_accepted', { sessionId, accepted: false })
 			} catch (error) {
 				await setError(error)
 			}

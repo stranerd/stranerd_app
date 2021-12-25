@@ -14,7 +14,6 @@ import {
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
-import { analytics } from '@modules/core'
 import { Router, useRouter } from 'vue-router'
 
 const global = {} as Record<string, {
@@ -98,11 +97,6 @@ export const useCreateAnswer = () => {
 				await setMessage('Answer submitted successfully.')
 				factory.value.reset()
 				await router.replace(`/questions/${answeringQuestion?.id ?? ''}#${answerId}`)
-				await analytics.logEvent('answer_question_completed', {
-					questionId: answeringQuestion?.id,
-					answerId,
-					subject: answeringQuestion?.subjectId
-				})
 				showAddAnswer.value = false
 			} catch (error) {
 				await setError(error)
@@ -187,11 +181,6 @@ export const useEditAnswer = (answerId: string) => {
 				await setMessage('Answer edited successfully')
 				factory.value.reset()
 				await router.replace(`/questions/${editingQuestionAnswer?.question.id}#${answerId}`)
-				await analytics.logEvent('edit_answer_completed', {
-					questionId: editingQuestionAnswer?.answer.questionId,
-					answerId,
-					subject: editingQuestionAnswer?.question.subjectId
-				})
 			} catch (error) {
 				await setError(error)
 			}

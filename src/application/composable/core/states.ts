@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { Notify } from '@utils/dialog'
 import { isClient } from '@utils/environment'
-import { analytics, NetworkError, StatusCodes } from '@modules/core'
+import { NetworkError, StatusCodes } from '@modules/core'
 import { capitalize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
 import { Capacitor } from '@capacitor/core'
@@ -22,9 +22,6 @@ export const useErrorHandler = () => {
 		if (isClient() && errorState.value && !skipAlert) Notify({
 			title: errorState.value
 		}).then()
-		if (errorState.value) await analytics.logEvent('error', {
-			error: errorState.value
-		})
 	}
 	return { error: errorState, setError }
 }

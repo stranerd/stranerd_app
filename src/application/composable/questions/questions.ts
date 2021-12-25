@@ -12,7 +12,6 @@ import {
 	QuestionFactory
 } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { analytics } from '@modules/core'
 import { Alert } from '@utils/dialog'
 import { useQuestionModal } from '@app/composable/core/modals'
 
@@ -143,7 +142,6 @@ export const useCreateQuestion = () => {
 				factory.value.reset()
 				useQuestionModal().closeAskQuestion()
 				await router.replace(`/questions/${questionId}`)
-				await analytics.logEvent('ask_question_completed', { questionId, subject })
 			} catch (error) {
 				await setError(error)
 			}
@@ -224,9 +222,6 @@ export const useEditQuestion = (questionId: string) => {
 				const subject = factory.value.subjectId
 				factory.value.reset()
 				await router.replace(`/questions/${questionId}`)
-				await analytics.logEvent('edit_question_completed', {
-					questionId, subject
-				})
 			} catch (error) {
 				await setError(error)
 			}

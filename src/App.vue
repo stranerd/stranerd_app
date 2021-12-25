@@ -1,6 +1,5 @@
 <template>
 	<ion-app>
-		<!-- TODO: Add custom animation for navigation -->
 		<router-view />
 	</ion-app>
 </template>
