@@ -102,4 +102,7 @@
 	.showcase {
 		@apply grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-4
 	}
+	.blueTop{
+		@apply bg-primary w-full flex items-center min-h-[5.25rem] lg:min-h-[9.75rem] rounded-b-2xl md:rounded-none mb-4  justify-center
+	}
 }

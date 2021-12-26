@@ -2,7 +2,8 @@
 	<form>
 		<ion-searchbar v-model.trim="searchTerm"
 			mode="md"
-			:debounce="1500"
+			:debounce="500"
+			@click="switchPage"
 			class="w-full p-0 cursor-pointer"
 			placeholder="Search for anything..."
 			showCancelButton="never"
@@ -16,13 +17,20 @@
 import { defineComponent } from 'vue'
 import { useSearch } from '@app/composable/meta/search'
 import { IonSearchbar } from '@ionic/vue'
+import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'SearchBar',
 	components: { IonSearchbar },
 	setup () {
+		const route = useRoute()
+		const router = useRouter()
+		const switchPage = ()=>{
+			const val = searchTerm.value.trim()
+			if (!route.path.startsWith('/search')) router.push(`/search?search=${val}`)
+		}
 		const { searchTerm } = useSearch()
-		return { searchTerm }
+		return { searchTerm, switchPage }
 	}
 })
 </script>

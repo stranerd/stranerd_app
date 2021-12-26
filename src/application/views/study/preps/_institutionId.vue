@@ -1,6 +1,6 @@
 <template>
 	<Justified>
-		<div class="bg-primary w-full py-6 flex flex-col justify-center items-center">
+		<div class="blueTop">
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
 				<Institution :institutionId="institutionId" />
 			</ion-text>
@@ -44,7 +44,7 @@
 					</IonSelectOption>
 				</IonSelect>
 
-				<IonButton :disabled="!prep" class="bg-primary rounded-xl" @click="startTest">
+				<IonButton :disabled="!prep" class="btn-primary" @click="startTest">
 					Start {{ testType === 'test' ? 'Test' : 'Studying' }}
 				</IonButton>
 			</div>

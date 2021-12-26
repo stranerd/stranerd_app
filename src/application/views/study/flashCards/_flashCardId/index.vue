@@ -1,14 +1,17 @@
 <template>
 	<Justified>
 		<!-- TODO: Break into sections -->
-		<div class="bg-primary w-full min-h-[150px] flex  justify-center items-center pt-0 pb-1">
-			<div class="bg-white md:grid place-items-center p-1 rounded-sm mr-4 cursor-pointer hidden "
-				@click="$router.go(-1)">
-				<ion-icon :icon="arrowBackOutline" class="text-[23px] text-primary"></ion-icon>
+		<div class="blueTop ">
+			<div class="flex justify-between items-center">
+				<div class="bg-white md:grid place-items-center p-1 rounded-sm mr-4 cursor-pointer hidden "
+					@click="$router.go(-1)">
+					<ion-icon :icon="arrowBackOutline" class="text-[23px] text-primary"></ion-icon>
+				</div>
+				<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
+					{{ flashCard?.title }}
+				</ion-text>
 			</div>
-			<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
-				{{ flashCard?.title }}
-			</ion-text>
+
 			<!-- <div class="flex items-center md:flex-row flex-col">
 				<div class="flex items-center mr-6">
 					<ShowRatings :rating="5" class="mr-3" />

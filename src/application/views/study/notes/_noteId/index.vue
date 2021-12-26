@@ -1,8 +1,8 @@
 <template>
 	<Justified>
 		<div v-if="note">
-			<div class="bg-primary w-full min-h-[150px] flex flex-col justify-center items-center pt-0 pb-1">
-				<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
+			<div class="blueTop ">
+				<ion-text class="heading lg:text-2xl font-bold text-white text-center ">
 					{{ note.title }}
 				</ion-text>
 			</div>

@@ -1,9 +1,9 @@
 <template>
 	<Justified>
 		<div>
-			<div class="bg-primary w-full flex flex-col items-center pt-4 rounded-b-2xl md:rounded-none mb-4">
+			<div class="blueTop">
 				<div
-					class="mb-0.5 justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full lg:px-3 text-xs mx-auto text-faded_gray font-bold  whitespace-normal overflow-x-auto">
+					class="mb-0.5 justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full lg:px-3 text-xs mx-auto text-faded_gray font-bold  whitespace-normal overflow-x-auto mt-auto">
 					<router-link :to="`/search?search=${searchTerm}`"
 						class="py-2 mr-3 cursor-pointer"
 						exact-active-class="border-b-4 text-white border-white">

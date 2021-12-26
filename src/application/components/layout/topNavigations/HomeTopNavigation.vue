@@ -16,6 +16,8 @@
 				<router-link class="link-custom px-4" to="/study">
 					Study
 				</router-link>
+
+				<search-bar class="flex-grow " />
 			</div>
 
 			<div class="gap-8 lg:flex hidden">

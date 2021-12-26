@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<!-- TODO: Break into sections -->
-		<div class="bg-primary w-full min-h-[130px] flex flex-col justify-center items-center pt-0 pb-1">
+		<div class=" blueTop">
 			<div class="flex items-center">
 				<ion-text class="text-white font-semibold text-center text-xl">
 					{{ test?.name ?? '' }}

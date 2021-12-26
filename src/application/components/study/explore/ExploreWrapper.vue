@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<div>
-			<div class="bg-primary w-full  flex flex-col items-center pt-5 md:pt-12 rounded-b-2xl md:rounded-none mb-4">
+			<div class="blueTop">
 				<div class="flex flex-col w-full justify-center items-center px-4">
 					<ion-text class="heading lg:text-2xl font-bold text-white text-center  mb-3 hidden md:block">
 						Explore thousands of study materials
