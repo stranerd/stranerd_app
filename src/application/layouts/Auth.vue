@@ -4,6 +4,7 @@
 		<IonContent>
 			<div class="!w-full layout-body">
 				<slot />
+
 			</div>
 		</IonContent>
 	</IonPage>
@@ -19,3 +20,4 @@ export default defineComponent({
 	components: { IonPage, IonContent, HomeTopNavigation }
 })
 </script>
+

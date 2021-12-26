@@ -15,6 +15,10 @@
 	cursor: pointer;
 }
 
+*{
+	transition: opacity 0.5s;
+}
+
 @media screen and (max-width: 680px) {
 	::-webkit-scrollbar {
 		width: 0; /* Remove scrollbar space */
