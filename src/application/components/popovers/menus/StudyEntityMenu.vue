@@ -49,11 +49,11 @@
 			<ion-icon :icon="shareIcon" class="text-2xl" />
 			<ion-label class="font-bold">Share</ion-label>
 		</span>
-		<span v-if="entity?.userId !== id && type === 'flashCards'" class="my-4 flex gap-4 items-center"
-			@click="goToAuthor">
+		<router-link v-if="entity?.userId !== id && type === 'flashCards'" :to="`/users/${entity?.userId ?? ''}`"
+			class="my-4 flex gap-4 items-center">
 			<ion-icon :icon="person" class="text-2xl" />
 			<ion-label class="font-bold">Go To Author</ion-label>
-		</span>
+		</router-link>
 		<PageLoading v-if="deleteLoading" />
 		<PageLoading v-if="setLoading" />
 	</Popover>
@@ -64,19 +64,14 @@ import { computed, defineComponent, ref } from 'vue'
 import { useDeleteStudyEntity, useStudyMenuData } from '@app/composable/study/menus'
 import { chevronUp, folder, library, person, removeCircle, share as shareIcon, trash } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
-import { useRouter } from 'vue-router'
 import { useMySets, useSaveToSet } from '@app/composable/study/sets'
 
 export default defineComponent({
 	name: 'StudyEntityMenu',
 	setup () {
 		const { id, isLoggedIn, isAdmin } = useAuth()
-		const router = useRouter()
 
-		const { entity, type, data, share, shareLink } = useStudyMenuData()
-		const goToAuthor = async () => {
-			await router.push(shareLink.value)
-		}
+		const { entity, type, data, share } = useStudyMenuData()
 		const showDelete = computed(() => {
 			if (type.value === 'testPreps') return isAdmin.value
 			// @ts-ignore
@@ -92,7 +87,7 @@ export default defineComponent({
 		return {
 			entity, type, data,
 			chevronUp, library, folder, shareIcon, person, trash, removeCircle,
-			share, id, isLoggedIn, isAdmin, goToAuthor,
+			share, id, isLoggedIn, isAdmin,
 			showDelete, deleteLoading, deleteError, deleteEntity,
 			rootSet, normalSets, setLoading, setError, saveToSet, removeFromSet, showAddToSet, showRemoveFromSet
 		}

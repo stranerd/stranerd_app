@@ -13,7 +13,7 @@
 
 		<div class="md:w-8/12 lg:w-6/12 w-full px-4 mx-auto bg-white rounded-xl md:my-16 p-8 md:p-16 max-w-[600px]">
 			<div class="flex flex-col">
-				<ion-segment v-model="testType" class="md:w-96 mx-auto mb-8" mode="ios">
+				<ion-segment v-model="testType" class="mb-8" mode="ios">
 					<ion-segment-button value="test">
 						<ion-label>Test yourself</ion-label>
 					</ion-segment-button>

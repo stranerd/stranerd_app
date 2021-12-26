@@ -23,7 +23,7 @@
 		<template v-else>
 			<div class="showcase">
 				<div v-for="group in testPreps" :key="group.institutionId"
-					:class="[`m-0 w-full h-44 bg-white rounded-xl flex flex-col items-start justify-between md:gap-2 gap-[1rem] box-border p-6`]">
+					:class="[`m-0 w-full h-40 bg-white rounded-xl flex flex-col items-start justify-between md:gap-2 gap-[1rem] box-border p-6`]">
 					<ion-text class="font-bold text-xl text-main_dark">
 						<Institution :institutionId="group.institutionId" />
 					</ion-text>

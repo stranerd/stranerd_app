@@ -2,7 +2,7 @@ import { computed, onMounted, reactive, ref, toRefs } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { GetAllAdmins, GetUsersByEmail, ListenToAllAdmins, MakeAdmin, RemoveAdmin, UserEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 
 const global = {
 	admins: ref([] as UserEntity[]),
@@ -100,7 +100,6 @@ export const useAdminRoles = () => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to make this user an admin?',
 			text: 'This user will gain admin privileges to the entire site',
-			icon: 'warning',
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {
@@ -123,7 +122,6 @@ export const useAdminRoles = () => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to de-admin this user?',
 			text: 'This user will lose admin privileges to the entire site',
-			icon: 'warning',
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {

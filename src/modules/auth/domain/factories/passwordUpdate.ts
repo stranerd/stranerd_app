@@ -13,7 +13,7 @@ export class PasswordUpdateFactory extends BaseFactory<null, PasswordUpdate, Key
 		},
 		cPassword: {
 			required: true,
-			rules: [isString, (val: string) => isShallowEqualTo(val, this.password), isLongerThanX(7), isShorterThanX(17)]
+			rules: [isString, (val: string) => isShallowEqualTo(val, this.password, 'is not equal'), isLongerThanX(7), isShorterThanX(17)]
 		}
 	}
 

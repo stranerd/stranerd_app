@@ -3,7 +3,6 @@ import { FindUser, ListenToUser, UpdateStreak, UserEntity } from '@modules/users
 import { AuthDetails, AuthTypes, UserLocation } from '@modules/auth/domain/entities/auth'
 import { SessionSignout } from '@modules/auth'
 import { isClient } from '@utils/environment'
-import { analytics } from '@modules/core'
 import { useMySets } from '@app/composable/study/sets'
 
 const global = {
@@ -85,7 +84,6 @@ export const useAuth = () => {
 	const signin = async (remembered: boolean) => {
 		await startProfileListener()
 		await useMySets().listener.startListener()
-		await analytics.logEvent('login', { remembered })
 	}
 
 	const signout = async () => {

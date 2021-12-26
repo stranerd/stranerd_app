@@ -13,7 +13,7 @@ import {
 	ListenToUserFlashCards
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
 import { Router, useRouter } from 'vue-router'
 
@@ -190,7 +190,6 @@ export const useDeleteFlashCard = (flashCardId: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this flashCard?',
 			text: 'This cannot be reversed',
-			icon: 'warning',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

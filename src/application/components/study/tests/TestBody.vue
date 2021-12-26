@@ -23,7 +23,7 @@
 				<IonIcon :color="canGoBack ? 'grey' : 'light'" :icon="chevronBackCircle" size="large" @click="back" />
 				<span class="flex gap-2 items-center">
 					<span>Jump to</span>
-					<IonSelect v-model="questionIndex" interface="action-sheet" mode="ios">
+					<IonSelect v-model="questionIndex" interface="action-sheet">
 						<IonSelectOption v-for="num in questions.length" :key="num" :value="num - 1">
 							{{ num }}
 						</IonSelectOption>

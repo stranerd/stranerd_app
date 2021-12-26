@@ -1,0 +1,6 @@
+{
+	"appId": "com.stranerd.app",
+	"appName": "stranerd",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}

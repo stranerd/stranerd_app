@@ -123,7 +123,7 @@ import {
 import Avatar from '@app/components/core/Avatar.vue'
 import { openFlashCardEditModal, useFlashCard } from '@app/composable/study/flashCards'
 import { useRoute, useRouter } from 'vue-router'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
@@ -153,7 +153,6 @@ export default defineComponent({
 				const accepted = await Alert({
 					title: 'You have gotten to the end of the flashCard set',
 					text: 'Do you want to try again or return back to Study',
-					icon: 'info',
 					confirmButtonText: 'Yes, Try again',
 					cancelButtonText: 'No, Back to study'
 				})

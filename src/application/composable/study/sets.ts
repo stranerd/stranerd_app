@@ -155,9 +155,7 @@ export const useMySets = () => {
 		await myGlobal[userId].setLoading(false)
 	}
 
-	onMounted(async () => {
-		if (!myGlobal[userId].fetched.value && !myGlobal[userId].loading.value) await fetchSets()
-	})
+	if (!myGlobal[userId].fetched.value && !myGlobal[userId].loading.value) fetchSets().then()
 
 	const rootSet = computed({
 		get: () => myGlobal[userId].sets.value.find((s) => s.isRoot) ?? null,

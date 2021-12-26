@@ -1,7 +1,7 @@
 import { computed, onMounted, Ref, ref } from 'vue'
 import { AddSubject, DeleteSubject, FindSubject, GetSubjects, SubjectEntity, SubjectFactory } from '@modules/questions'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 
 const global = {
 	fetched: ref(false),
@@ -86,7 +86,6 @@ export const useDeleteSubject = (subject: SubjectEntity) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to remove this subject?',
 			text: 'This cannot be reversed',
-			icon: 'warning',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {

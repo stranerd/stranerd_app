@@ -4,8 +4,7 @@ import { AddSession, BeginSession, CancelSession, EndSession, SessionFactory } f
 import { CreateReview, UserBio } from '@modules/users'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useSessionModal } from '@app/composable/core/modals'
-import { Alert } from '@app/composable/core/notifications'
-import { analytics } from '@modules/core'
+import { Alert } from '@utils/dialog'
 
 let newSessionTutorIdBio = null as null | { id: string, user: UserBio }
 export const setNewSessionTutorIdBio = (data: { id: string, user: UserBio }) => {
@@ -30,7 +29,6 @@ export const useCreateSession = () => {
 				await router.push(`/chat/${newSessionTutorIdBio?.id}`)
 				factory.value.reset()
 				await setMessage('Session request successful.')
-				await analytics.logEvent('session_request', { sessionId })
 			} catch (error) {
 				await setError(error)
 			}
@@ -53,7 +51,6 @@ export const useSession = (sessionId: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to cancel this session',
 			text: 'This cannot be undone',
-			icon: 'info',
 			confirmButtonText: 'Yes, cancel',
 			cancelButtonText: 'No, ignore'
 		})
@@ -73,7 +70,6 @@ export const useSession = (sessionId: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to end this session',
 			text: 'This cannot be undone',
-			icon: 'info',
 			confirmButtonText: 'Yes, end',
 			cancelButtonText: 'No, ignore'
 		})
@@ -93,7 +89,6 @@ export const useSession = (sessionId: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to accept this session',
 			text: '',
-			icon: 'info',
 			confirmButtonText: 'Yes, accept',
 			cancelButtonText: 'No, ignore'
 		})
@@ -101,7 +96,6 @@ export const useSession = (sessionId: string) => {
 			try {
 				await setLoading(true)
 				if (sessionId) await BeginSession.call(sessionId, true)
-				await analytics.logEvent('session_accepted', { sessionId, accepted: true })
 			} catch (error) {
 				await setError(error)
 			}
@@ -114,7 +108,6 @@ export const useSession = (sessionId: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to reject this session',
 			text: '',
-			icon: 'info',
 			confirmButtonText: 'Yes, reject',
 			cancelButtonText: 'No, ignore'
 		})
@@ -122,7 +115,6 @@ export const useSession = (sessionId: string) => {
 			try {
 				await setLoading(true)
 				if (sessionId) await BeginSession.call(sessionId, false)
-				await analytics.logEvent('session_accepted', { sessionId, accepted: false })
 			} catch (error) {
 				await setError(error)
 			}

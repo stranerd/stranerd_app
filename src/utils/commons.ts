@@ -1,4 +1,6 @@
-import { isClient } from '@utils/environment'
+import { Clipboard } from '@capacitor/clipboard'
+import { Share } from '@capacitor/share'
+import { Notify } from '@utils/dialog'
 
 enum Numbers {
 	thousand = 10 ** 3,
@@ -47,14 +49,8 @@ export const trimToLength = (body: string, length: number) => {
 	return `${body.slice(0, length)}...`
 }
 
-export const copyToClipboard = async (data: string) => {
-	if (!isClient()) return false
-	const result = await window.navigator.permissions.query({ name: 'clipboard-write' as any })
-	if (result.state === 'granted' || result.state === 'prompt') {
-		await window.navigator.clipboard.writeText(data)
-		return true
-	}
-	return false
+export const copyToClipboard = async (text: string) => {
+	await Clipboard.write({ string: text })
 }
 
 export function copyObject<T extends Record<any, any>> (target: T, ...sources: T[]) {
@@ -62,3 +58,14 @@ export function copyObject<T extends Record<any, any>> (target: T, ...sources: T
 }
 
 export const getAlphabet = (num: number) => 'abcdefghijklmnopqrstuv'.split('')[num - 1] ?? 'a'
+
+export const share = async ({ title, text, url }: { title: string, text: string, url: string }) => {
+	await Share.share({
+		title, text, url, dialogTitle: title
+	}).catch(async () => {
+		await copyToClipboard(url)
+		await Notify({
+			title: 'Something went wrong somewhere. The link has been copied to your clipboard instead'
+		})
+	})
+}

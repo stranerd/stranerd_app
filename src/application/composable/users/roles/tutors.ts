@@ -1,7 +1,7 @@
 import { computed, onMounted, reactive, ref, toRefs } from 'vue'
 import { GetAllTutors, GetUsersByEmail, ListenToAllTutors, MakeTutor, RemoveTutor, UserEntity } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
 
 const global = {
@@ -116,7 +116,6 @@ export const useTutorRoles = () => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to make this user a tutor?',
 			text: 'This user will gain tutor privileges to the entire site',
-			icon: 'warning',
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {
@@ -139,7 +138,6 @@ export const useTutorRoles = () => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to de-tutor this user?',
 			text: 'This user will lose tutor privileges to the entire site',
-			icon: 'warning',
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {

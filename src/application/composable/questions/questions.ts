@@ -12,8 +12,7 @@ import {
 	QuestionFactory
 } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { analytics } from '@modules/core'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 import { useQuestionModal } from '@app/composable/core/modals'
 
 enum Answered {
@@ -143,7 +142,6 @@ export const useCreateQuestion = () => {
 				factory.value.reset()
 				useQuestionModal().closeAskQuestion()
 				await router.replace(`/questions/${questionId}`)
-				await analytics.logEvent('ask_question_completed', { questionId, subject })
 			} catch (error) {
 				await setError(error)
 			}
@@ -224,9 +222,6 @@ export const useEditQuestion = (questionId: string) => {
 				const subject = factory.value.subjectId
 				factory.value.reset()
 				await router.replace(`/questions/${questionId}`)
-				await analytics.logEvent('edit_question_completed', {
-					questionId, subject
-				})
 			} catch (error) {
 				await setError(error)
 			}
@@ -248,7 +243,6 @@ export const useDeleteQuestion = (questionId: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this question?',
 			text: 'This cannot be reversed',
-			icon: 'warning',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

@@ -2,7 +2,7 @@ import { onMounted, ref, Ref } from 'vue'
 import { AddReport, DeleteReport, GetReports, ReportEntity, ReportFactory, ReportType } from '@modules/reports'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useReportModal } from '@app/composable/core/modals'
-import { Alert } from '../core/notifications'
+import { Alert } from '@utils/dialog'
 
 let reportedEntity = null as string | null
 export const setReportedEntity = (questionId: string) => reportedEntity = questionId
@@ -91,7 +91,6 @@ export const useDeleteReport = (id: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to remove this report?',
 			text: 'This cannot be reversed',
-			icon: 'warning',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {

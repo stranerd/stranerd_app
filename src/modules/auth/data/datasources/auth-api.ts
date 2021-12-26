@@ -1,6 +1,6 @@
 import { closeSocket, HttpClient } from '@modules/core'
 import { apiBases, domain } from '@utils/environment'
-import { deleteTokensFromCookies, saveTokens } from '@utils/tokens'
+import { deleteTokens, saveTokens } from '@utils/tokens'
 import {
 	AfterAuthUser,
 	AuthDetails,
@@ -85,7 +85,7 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 
 	async signout () {
 		await this.authClient.post<any, boolean>('/user/signout', {}).catch()
-		await deleteTokensFromCookies()
+		await deleteTokens()
 		await closeSocket()
 	}
 }

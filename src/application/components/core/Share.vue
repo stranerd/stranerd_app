@@ -10,8 +10,7 @@
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { domain } from '@utils/environment'
-import { Notify } from '@app/composable/core/notifications'
-import { copyToClipboard } from '@utils/commons'
+import { share } from '@utils/commons'
 import { shareSocial } from 'ionicons/icons'
 
 export default defineComponent({
@@ -43,27 +42,11 @@ export default defineComponent({
 		const shareInfo = async () => {
 			const link = props.link || route.fullPath
 			const url = domain + (link.startsWith('/') ? link : `/${link}`)
-			if (window.navigator.share) {
-				try {
-					await window.navigator.share({
-						url,
-						title: props.title,
-						text: props.text
-					})
-				} catch {
-					const res = await copyToClipboard(url)
-					await Notify({
-						title: `something went wrong somewhere.${res ? ' The link has been copied to your clipboard instead' : ''}`,
-						icon: 'info'
-					})
-				}
-			} else {
-				const res = await copyToClipboard(url)
-				await Notify({
-					title: `Your current device is unable to share links.${res ? ' The link has been copied to your clipboard instead' : ''}`,
-					icon: 'info'
-				})
-			}
+			await share({
+				url,
+				title: props.title,
+				text: props.text
+			})
 		}
 		return { shareSocial, shareInfo }
 	}

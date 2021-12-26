@@ -1,15 +1,12 @@
 <template>
 	<!-- fab placed to the bottom start -->
-	<ion-fab slot="fixed" :class="[$route.name == 'TakeTest' ? 'hidden':'', `lg:hidden active`]" horizontal="end"
-		vertical="bottom">
-
+	<ion-fab slot="fixed" class="lg:hidden active" horizontal="end" vertical="bottom">
 		<ion-fab-button :activated="active" :class="[active ? 'active':'', 'z-50 relative']" @click="active = !active">
 			<ion-icon :icon="add"></ion-icon>
 		</ion-fab-button>
 		<ion-fab-list class="z-50" side="top">
-			<router-link class="relative"
-				to="/study/sets/create">
-				<ion-fab-button  color="success" size="small">
+			<router-link class="relative" to="/study/sets/create">
+				<ion-fab-button color="success" size="small">
 					<ion-icon :icon="folder" class="text-lg"></ion-icon>
 				</ion-fab-button>
 				<ion-label
@@ -17,8 +14,7 @@
 					Create a study set
 				</ion-label>
 			</router-link>
-			<router-link class="relative"
-				to="/study/flashCards/create">
+			<router-link class="relative" to="/study/flashCards/create">
 				<ion-fab-button color="tertiary" size="small">
 					<img alt="" class="w-4" src="@app/assets/images/icons/flashCard-purple.svg">
 				</ion-fab-button>
@@ -27,8 +23,7 @@
 					Create a flashcard
 				</ion-label>
 			</router-link>
-			<router-link class="relative"
-				to="/questions/create">
+			<router-link class="relative" to="/questions/create">
 				<ion-fab-button color="secondary" size="small">
 					<ion-icon :icon="helpCircle" class="text-xl"></ion-icon>
 				</ion-fab-button>
@@ -37,8 +32,7 @@
 					Ask a question
 				</ion-label>
 			</router-link>
-			<router-link class="relative"
-				to="/study/explore">
+			<router-link class="relative" to="/study/explore">
 				<ion-fab-button color="primary" size="small">
 					<ion-icon :icon="compass" class="text-xl"></ion-icon>
 				</ion-fab-button>

@@ -5,7 +5,7 @@
 			<div class="!w-full layout-body">
 				<slot />
 			</div>
-			<Fab />
+			<Fab v-if="!hideFab" />
 		</IonContent>
 		<BottomNav class="mt-auto" />
 	</IonPage>
@@ -20,6 +20,12 @@ import Fab from '@app/components/layout/Fab.vue'
 
 export default defineComponent({
 	name: 'JustifiedLayout',
+	props: {
+		hideFab: {
+			required: false,
+			default: false
+		}
+	},
 	components: { InnerTopBar, IonPage, IonContent, BottomNav, Fab }
 })
 </script>

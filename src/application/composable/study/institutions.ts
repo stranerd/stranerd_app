@@ -8,7 +8,7 @@ import {
 	InstitutionFactory
 } from '@modules/study'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 
 const global = {
 	fetched: ref(false),
@@ -93,7 +93,6 @@ export const useDeleteInstitution = (institution: InstitutionEntity) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to remove this institution?',
 			text: 'This cannot be reversed',
-			icon: 'warning',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {

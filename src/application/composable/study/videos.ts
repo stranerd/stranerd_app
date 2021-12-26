@@ -11,7 +11,7 @@ import {
 	VideoFactory
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@app/composable/core/notifications'
+import { Alert } from '@utils/dialog'
 
 const global = {
 	videos: ref([] as VideoEntity[]),
@@ -137,7 +137,6 @@ export const useDeleteVideo = (videoId: string) => {
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this video?',
 			text: 'This cannot be reversed',
-			icon: 'warning',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

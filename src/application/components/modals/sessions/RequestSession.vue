@@ -29,7 +29,7 @@
 		</div>
 
 		<div class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex flex-row">
-			<IonSelect class="w-full  font-medium" interface="action-sheet" mode="ios" placeholder="Select the subject">
+			<IonSelect class="w-full font-medium" interface="action-sheet" placeholder="Select the subject">
 				<IonSelectOption value="maths">Mathematics</IonSelectOption>
 				<IonSelectOption value="physics">Physics</IonSelectOption>
 				<IonSelectOption value="bio">Biology</IonSelectOption>
@@ -58,7 +58,7 @@
 		</div>
 
 		<div class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex flex-row">
-			<IonSelect v-model="factory.duration" class="w-full font-medium" interface="action-sheet" mode="ios"
+			<IonSelect v-model="factory.duration" class="w-full font-medium" interface="action-sheet"
 				placeholder="Duration and payment">
 				<IonSelectOption v-for="option in factory.prices" :key="option.duration" :value="option.duration">
 					{{ option.duration }} minutes - {{ option.price }} gold coins
@@ -87,10 +87,9 @@
 	</div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { IonIcon, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
 import { document, ellipse, ellipseOutline } from 'ionicons/icons'
-import { analytics } from '@modules/core'
 import { useCreateSession } from '@app/composable/sessions/sessions'
 import { useSessionModal } from '@app/composable/core/modals'
 
@@ -100,9 +99,6 @@ export default defineComponent({
 			useSessionModal().closeCreateSession()
 		}
 		const { factory, loading, error, createSession, newSessionTutorIdBio } = useCreateSession()
-		onMounted(async () => {
-			await analytics.logEvent('view_session_request')
-		})
 
 		return {
 			closeSessionModal,

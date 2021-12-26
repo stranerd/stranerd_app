@@ -1,16 +1,17 @@
 import { ref } from 'vue'
-import { Notify } from '@app/composable/core/notifications'
+import { Notify } from '@utils/dialog'
 import { isClient } from '@utils/environment'
-import { analytics, NetworkError, StatusCodes } from '@modules/core'
+import { NetworkError, StatusCodes } from '@modules/core'
 import { capitalize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
+import { Capacitor } from '@capacitor/core'
 
 export const useErrorHandler = () => {
 	const errorState = ref('')
 	const setError = async (error: any, skipAlert = false) => {
 		if (error instanceof NetworkError) {
 			errorState.value = error.errors
-				.map(({ message, field }) => `${ capitalize(field ?? 'Error') }: ${ message }`)
+				.map(({ message, field }) => `${capitalize(field ?? 'Error')}: ${message}`)
 				.join('\n')
 			if ([
 				StatusCodes.NotAuthenticated,
@@ -19,12 +20,8 @@ export const useErrorHandler = () => {
 			].includes(error.statusCode)) await useAuth().signout()
 		} else errorState.value = error.message ?? error
 		if (isClient() && errorState.value && !skipAlert) Notify({
-			title: errorState.value,
-			icon: 'error'
+			title: errorState.value
 		}).then()
-		if (errorState.value) await analytics.logEvent('error', {
-			error: errorState.value
-		})
 	}
 	return { error: errorState, setError }
 }
@@ -34,8 +31,7 @@ export const useSuccessHandler = () => {
 	const setMessage = async (message: string) => {
 		successState.value = message
 		if (isClient() && successState.value) Notify({
-			title: successState.value,
-			icon: 'success'
+			title: successState.value
 		})
 	}
 	return { message: successState, setMessage }
@@ -74,4 +70,11 @@ export const useListener = (start: () => Promise<() => void>) => {
 		}
 	}
 	return { startListener, closeListener, resetListener, isRunning }
+}
+
+export const usePlatform = () => {
+	const isWeb = Capacitor.getPlatform() === 'web'
+	const isIos = Capacitor.getPlatform() === 'ios'
+	const isAndroid = Capacitor.getPlatform() === 'android'
+	return { isIos, isAndroid, isWeb }
 }

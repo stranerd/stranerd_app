@@ -32,6 +32,10 @@ export class TestPrepEntity extends BaseEntity {
 	get canStudy () {
 		return true
 	}
+
+	get userId () {
+		return ''
+	}
 }
 
 type TestPrepConstructorArgs = {

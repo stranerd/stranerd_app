@@ -17,9 +17,9 @@
 
 @media screen and (max-width: 680px) {
 	::-webkit-scrollbar {
-	width: 0px; /* Remove scrollbar space */
-	background: #7483bf4e; /* Optional: just make scrollbar invisible */
-}
+		width: 0; /* Remove scrollbar space */
+		background: #7483bf4e; /* Optional: just make scrollbar invisible */
+	}
 }
 
 @layer utilities {
