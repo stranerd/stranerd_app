@@ -21,9 +21,11 @@
 		</div>
 
 		<router-link
-			class="py-3 px-3 rounded-lg flex w-full bg-primary text-white justify-center flex-row items-center"
+			class="w-full"
 			to="/users/leaderboard">
-			<span class="font-semibold">Leaderboard</span>
+			<ion-button class="btn-primary w-full">
+				Leaderboard
+			</ion-button>
 		</router-link>
 	</div>
 </template>

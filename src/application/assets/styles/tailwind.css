@@ -15,9 +15,8 @@
 	cursor: pointer;
 }
 
-*{
-	transition: opacity 0.5s;
-}
+
+
 
 @media screen and (max-width: 680px) {
 	::-webkit-scrollbar {
@@ -79,13 +78,10 @@
 		@apply md:text-base text-xs
 	}
 
-	.headings {
-		@apply md:text-xl text-base
-	}
-
 	.heading {
 		@apply md:text-xl text-base
 	}
+
 
 	.cancelBtn {
 		@apply px-6 py-3 relative rounded-lg  font-bold bg-dark_gray

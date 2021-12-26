@@ -29,11 +29,11 @@
 					</ion-text>
 
 					<div class="w-full flex items-center justify-between gap-3">
-						<router-link :to="`/study/preps/${group.institutionId}?type=test`" class="flex-grow">
-							<ion-button class="btn-primary font-bold w-full">Test</ion-button>
+						<router-link :to="`/study/preps/${group.institutionId}?type=test`" class="w-full">
+							<ion-button class="btn-primary w-full">Test</ion-button>
 						</router-link>
-						<router-link :to="`/study/preps/${group.institutionId}?type=study`" class="flex-grow">
-							<ion-button class="btn-outline text-primary font-bold w-full">
+						<router-link :to="`/study/preps/${group.institutionId}?type=study`" class="w-full">
+							<ion-button class="btn-outline text-primary  w-full">
 								Solutions
 							</ion-button>
 						</router-link>

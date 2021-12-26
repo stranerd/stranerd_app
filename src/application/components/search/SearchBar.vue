@@ -1,10 +1,13 @@
 <template>
 	<form>
 		<ion-searchbar v-model.trim="searchTerm"
-			class="w-full p-0"
+			mode="md"
+			:debounce="1500"
+			class="w-full p-0 cursor-pointer"
 			placeholder="Search for anything..."
 			showCancelButton="never"
 			showClearButton="never"
+			autocapitalize="true"
 		/>
 	</form>
 </template>
@@ -26,8 +29,17 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-searchbar {
-		--background: #FFFFFF;
-		--box-shadow: 0px 0px 0px 1px #F7F7FC;
+		--background: #F2F3F5;
+		--box-shadow: none !important;
+		--border-radius: .75rem;
+		border-radius: .75rem;
+		--icon-color: #8B9EB1;
+		--color: #8B9EB1;
+	}
+	ion-searchbar::part(icon) {
+		--background: red !important;
+		background: red;
+		--box-shadow: none !important;
 		--border-radius: .75rem;
 		border-radius: .75rem;
 		--icon-color: #8B9EB1;
