@@ -35,10 +35,12 @@ export default defineComponent({
 		})
 
 		onMounted(async () => {
-			const pdf = await Pdfvuer.createLoadingTask(props.note.media?.link ?? props.note.link)
-			pdfLoading.value = false
-			numPages.value = pdf.numPages
-			pdfData.value = pdf
+			pdfData.value = Pdfvuer.createLoadingTask(props.note.media?.link ?? props.note.link)
+			// @ts-ignore
+			pdfData.value.then((pdf: any) => {
+				pdfLoading.value = false
+				numPages.value = pdf.numPages
+			})
 		})
 
 		return {
