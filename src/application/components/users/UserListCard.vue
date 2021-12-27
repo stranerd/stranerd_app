@@ -13,7 +13,7 @@
 				</span>
 			</div>
 		</div>
-		<div class="mt-8 flex justify-between items-center font-bold">
+		<div class="lg:mt-8 mt-5 text-gray flex justify-between items-center font-bold">
 			<div class="bg-light_gray text-gray py-2 px-4 rounded-full flex gap-1 items-center text-body">
 				<IonIcon :icon="helpCircle" class="text-lg lg:text-3xl text-gray" />
 				<span>{{ formatNumber(user.meta.questions, 0) }}</span>

@@ -2,7 +2,7 @@
 	<form>
 		<ion-searchbar v-model.trim="searchTerm"
 			mode="md"
-			:debounce="500"
+			:debounce="700"
 			@click="switchPage"
 			class="w-full p-0 cursor-pointer"
 			placeholder="Search for anything..."
