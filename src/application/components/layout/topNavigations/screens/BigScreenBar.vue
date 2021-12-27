@@ -22,8 +22,8 @@
 							class=" font-bold flex flex-row items-center justify-center gap-2 cursor-pointer"
 							@click="openUserDashboardMenu"
 						>
-							<avatar :id="user.id" :size="24" :src="user.avatar" />
-							<span class="text-base text-main_dark ">
+							<avatar :size="24" :src="user.avatar" />
+							<span class="text-base text-main_dark">
 								{{ user.fullName }}
 							</span>
 							<ion-icon :icon="chevronDown" class="text-xl text-main_dark"></ion-icon>

@@ -18,7 +18,6 @@
 		<template v-if="tab === 'single'">
 			<TestQuestion :answer="updateAnswer" :question="questions[questionIndex]" :questionIndex="questionIndex"
 				:test="test" />
-
 			<div class="mt-16 flex justify-between items-center gap-4">
 				<IonIcon :color="canGoBack ? 'grey' : 'light'" :icon="chevronBackCircle" size="large" @click="back" />
 				<span class="flex gap-2 items-center">
@@ -68,7 +67,7 @@
 import { IonSegment, IonSegmentButton, IonSelect, IonSelectOption } from '@ionic/vue'
 import { useTestDetails } from '@app/composable/study/tests'
 import { chevronBackCircle, chevronForwardCircle } from 'ionicons/icons'
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { TestEntity } from '@modules/study'
 import { useCountdown } from '@app/composable/core/dates'
 import { getDigitalTime } from '@utils/dates'
@@ -85,9 +84,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { error, loading, questions, updateAnswer } = useTestDetails(props.test)
-		const tab = ref('list')
-		const questionIndex = ref(0)
+		const { error, tab, questionIndex, loading, questions, updateAnswer } = useTestDetails(props.test)
 		const canGoBack = computed(() => questionIndex.value > 0)
 		const canGoForward = computed(() => questionIndex.value < questions.value.length - 1)
 		const back = () => canGoBack.value && questionIndex.value--
@@ -104,7 +101,7 @@ export default defineComponent({
 			set: () => {
 			}
 		})
-		const openSubmitTest = () => useStudyPopover().openSubmitTest
+		const openSubmitTest = useStudyPopover().openSubmitTest
 		return {
 			error, loading, questions, openSubmitTest, updateAnswer,
 			countDown, tab, questionIndex, canGoBack, canGoForward, back, forward,

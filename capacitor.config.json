@@ -3,6 +3,7 @@
 	"appName": "stranerd",
 	"webDir": "dist",
 	"bundledWebRuntime": false,
+	"npmClient": "yarn",
 	"plugins": {
 		"SplashScreen": {
 			"launchShowDuration": 3000,
