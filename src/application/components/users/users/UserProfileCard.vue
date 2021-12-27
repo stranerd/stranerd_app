@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-primary pt-2 md:mb-12  rounded-b-xl lg:rounded-none">
 		<div
-			class="lg:w-6/12 px-4 lg:mx-auto flex md:flex-row md:mx-12 flex-col items-start gap-2 md:items-center justify-start normalText mt-3">
+			class="lg:w-6/12 px-4 lg:mx-auto flex md:flex-row md:mx-12 flex-col items-start gap-2 md:items-center justify-start text-body mt-3">
 			<div class="w-full flex gap-2 items-center  lg:justify-start">
 				<div class="relative border-white border-4 rounded-full grid place-items-center mr-4">
 					<Avatar :id="user.id" :size="90" :src="user.avatar" color="#C7D6E3" />

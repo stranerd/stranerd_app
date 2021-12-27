@@ -10,7 +10,7 @@
 				</ion-badge>
 			</div>
 
-			<router-link class="text-primary normalText flex items-center font-bold" to="/questions">
+			<router-link class="text-primary text-body flex items-center font-bold" to="/questions">
 				<span>view all</span>
 			</router-link>
 		</div>

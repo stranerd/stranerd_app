@@ -57,7 +57,7 @@
 		</div>
 
 		<!-- <div class=" flex flex-col gap-[8rem]">
-			<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
+			<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 text-body text-icon_inactive">
 				<div class="flex flex-col gap-2">
 					<h2 class="headings font-bold text-main_dark">Name</h2>
 
@@ -86,7 +86,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
+			<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 text-body text-icon_inactive">
 
 
 				<div class="flex flex-col gap-2">
@@ -118,7 +118,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 normalText text-icon_inactive">
+			<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 text-body text-icon_inactive">
 				<div class="flex flex-col gap-2">
 					<h2 class="headings font-bold text-main_dark">{{ hasPassword ? 'Update' : 'Add' }} Password</h2>
 					<p>

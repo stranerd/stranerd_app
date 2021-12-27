@@ -8,7 +8,7 @@
 							Notifications
 						</h1>
 
-						<span class="text-white normalText flex items-end justify-center hidden">
+						<span class="text-white text-body flex items-end justify-center hidden">
 							Mark all as read
 							<ion-icon :icon="checkmarkDone" class="text-xl text-white"></ion-icon>
 						</span>

@@ -16,13 +16,13 @@
 							<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
 								position="floating"
 								type="email"></ion-input>
-							<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
+							<span class="text-body text-red-500 font-semibold">{{ factory.errors.email }}</span>
 						</div>
 						<div class="md:mb-6 mb-3">
 							<ion-input v-model="factory.password" :size="24" placeholder="Password"
 								position="floating"
 								type="password"></ion-input>
-							<span class="normalText text-red-500 font-semibold">{{ factory.errors.password }}</span>
+							<span class="text-body text-red-500 font-semibold">{{ factory.errors.password }}</span>
 						</div>
 						<ion-button :disabled="loading" class="w-full d:mb-6 mb-3 capitalize" type="submit">Login
 							<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
@@ -31,7 +31,7 @@
 					<div class="w-full flex justify-end items-center  text-main_dark">
 
 
-						<router-link class="text-primary normalText" to="/auth/forgot">
+						<router-link class="text-primary text-body" to="/auth/forgot">
 							Forgot Password ?
 						</router-link>
 					</div>
@@ -47,7 +47,7 @@
 					<span class="text- w-full flex justify-center items-center text-icon_inactive mt-8">
 						Don’t have an account?
 
-						<router-link class="text-primary font-bold normalText" to="/auth/signup">
+						<router-link class="text-primary font-bold text-body" to="/auth/signup">
 							Sign Up
 						</router-link>
 

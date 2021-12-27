@@ -11,7 +11,7 @@
 							Latest
 						</ion-badge>
 					</div>
-					<router-link class="text-primary normalText flex items-center font-bold"
+					<router-link class="text-primary text-body flex items-center font-bold"
 						to="/study/explore/preps">
 						<span>view all</span>
 					</router-link>
@@ -30,7 +30,7 @@
 						</ion-badge>
 					</div>
 
-					<router-link class="text-primary normalText flex items-center font-bold"
+					<router-link class="text-primary text-body flex items-center font-bold"
 						to="/study/explore/flashCards">
 						<span>view all</span>
 					</router-link>
@@ -48,7 +48,7 @@
 							Latest
 						</ion-badge>
 					</div>
-					<router-link class="text-primary normalText flex items-center font-bold"
+					<router-link class="text-primary text-body flex items-center font-bold"
 						to="/study/explore/notes">
 						<span>view all</span>
 					</router-link>
@@ -67,7 +67,7 @@
 						</ion-badge>
 					</div>
 
-					<router-link class="text-primary normalText flex items-center font-bold"
+					<router-link class="text-primary text-body flex items-center font-bold"
 						to="/study/explore/videos">
 						<span>view all</span>
 					</router-link>

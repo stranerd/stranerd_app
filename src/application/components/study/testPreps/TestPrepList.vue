@@ -10,7 +10,7 @@
 				</ion-badge>
 			</div>
 
-			<router-link class="text-primary normalText flex items-center font-bold"
+			<router-link class="text-primary text-body flex items-center font-bold"
 				to="/study/explore/preps">
 				<span>view all</span>
 			</router-link>

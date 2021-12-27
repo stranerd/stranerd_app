@@ -4,16 +4,16 @@
 		@click="markNotificationSeen"
 	>
 		<router-link :class="{'text-primary-dark': !notification.seen}" :to="notification.link">
-			<p class="normalText lg:text-base cursor-pointer">
+			<p class="text-body lg:text-base cursor-pointer">
 				<span>{{ notification.body }}</span>
 			</p>
 		</router-link>
-		<div class="flex justify-between font-bold normalText items-center mt-2">
+		<div class="flex justify-between font-bold text-body items-center mt-2">
 			<p class="text-icon_inactive">
 				<span>{{ formatTime(notification.createdAt) }}</span>
 			</p>
 			<span v-if="!notification.seen"
-				class="text-icon_inactive normalText flex items-end justify-center cursor-pointer hidden"
+				class="text-icon_inactive text-body flex items-end justify-center cursor-pointer hidden"
 				@click="markNotificationSeen">
 				Mark as read
 				<ion-icon :icon="checkmark" class="text-xl text-icon_inactive"></ion-icon>
