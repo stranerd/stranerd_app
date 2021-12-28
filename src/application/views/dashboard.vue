@@ -9,9 +9,9 @@
 				<TestPrepList :suggested="true" class="mb-16" />
 				<RecentQuestions class="mb-16" />
 				<NotesList :suggested="true" class="mb-16" />
-				<VideosList :suggested="true" class="hidden mb-16" />
+				<VideosList v-if="false" :suggested="true" class="mb-16" />
 				<FlashCardList :suggested="true" />
-				<StudyTools class="hidden" />
+				<StudyTools v-if="false" />
 			</div>
 		</div>
 	</DashboardLayout>

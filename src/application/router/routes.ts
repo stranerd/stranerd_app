@@ -4,7 +4,7 @@ const getPath = (page: string[]) => page.map((path) => {
 	if (path.startsWith('^')) path = path.replace('^', '')
 	if (path.startsWith('_')) path = path.replace('_', ':')
 	return path
-}).join('/').replaceAll('///', '/').replaceAll('//', '/')
+}).join('/').replace(new RegExp('///', 'g'), '/').replace(new RegExp('//', 'g'), '/')
 
 const makeRoute = async (page: string[]) => {
 	const path = '/' + getPath(page)

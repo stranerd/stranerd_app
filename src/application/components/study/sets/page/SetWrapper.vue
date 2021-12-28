@@ -30,8 +30,8 @@
 					exact-active-class="border-b-4 text-white border-white">
 					Notes
 				</router-link>
-				<router-link :to="`/study/sets/${set.id}/videos`"
-					class="py-2 mr-3 cursor-pointer hidden"
+				<router-link v-if="false" :to="`/study/sets/${set.id}/videos`"
+					class="py-2 mr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
 					Videos
 				</router-link>

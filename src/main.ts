@@ -54,6 +54,9 @@ const init = async () => {
 	app
 		.use(router)
 		.use(IonicVue)
+
+	await router.isReady()
+
 	app.mount('#app')
 }
 

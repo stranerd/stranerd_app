@@ -35,7 +35,7 @@
 						to="/study/explore/notes">
 						Notes
 					</router-link>
-					<router-link class="py-2 mr-3 cursor-pointer hidden"
+					<router-link v-if="false" class="py-2 mr-3 cursor-pointer"
 						exact-active-class="border-b-4 text-white border-white"
 						to="/study/explore/videos">
 						Videos

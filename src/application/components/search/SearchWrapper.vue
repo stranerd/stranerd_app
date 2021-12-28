@@ -19,8 +19,8 @@
 						exact-active-class="border-b-4 text-white border-white">
 						Notes
 					</router-link>
-					<router-link :to="`/search/videos?search=${searchTerm}`"
-						class="py-2 mr-3 cursor-pointer hidden"
+					<router-link v-if="false" :to="`/search/videos?search=${searchTerm}`"
+						class="py-2 mr-3 cursor-pointer"
 						exact-active-class="border-b-4 text-white border-white">
 						Videos
 					</router-link>
