@@ -21,7 +21,7 @@
 			route="/questions"
 		/>
 		<div v-else class="showcase">
-			<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
+			<QuestionListCard v-for="question in questions" :key="question.hash" :question="question"  />
 		</div>
 	</div>
 </template>
