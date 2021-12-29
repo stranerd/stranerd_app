@@ -12,7 +12,7 @@
 		"prepare": "husky install",
 		"env:copy:example": "copy env.example.json env.json",
 		"env:copy:app": "node bin/copy-env-app",
-		"cap:serve": "yarn cap run",
+		"cap:run": "yarn cap run",
 		"cap:sync": "yarn cap sync",
 		"cap:build": "yarn cap build"
 	},
@@ -38,8 +38,8 @@
 		"pdfvuer": "^2.0.1",
 		"socket.io-client": "^4.4.0",
 		"swiper": "^7.4.1",
-		"vue": "^3",
-		"vue-router": "^4.0.11"
+		"vue": "^3.2.21",
+		"vue-router": "^4.0.12"
 	},
 	"devDependencies": {
 		"@capacitor/cli": "3.3.3",

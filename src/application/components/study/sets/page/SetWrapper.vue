@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="blueTop">
+		<div class="blueTop flex-col  pt-5 md:pt-12">
 			<div class="flex w-full md:w-8/12 mx-auto px-4 text-white items-center">
 				<IonIcon :icon="folder" class="text-6xl md:text-8xl" />
 				<div class="flex flex-col ml-2 md:ml-4">
@@ -30,8 +30,8 @@
 					exact-active-class="border-b-4 text-white border-white">
 					Notes
 				</router-link>
-				<router-link :to="`/study/sets/${set.id}/videos`"
-					class="py-2 mr-3 cursor-pointer hidden"
+				<router-link v-if="false" :to="`/study/sets/${set.id}/videos`"
+					class="py-2 mr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
 					Videos
 				</router-link>

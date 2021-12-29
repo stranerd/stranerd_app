@@ -1,5 +1,5 @@
 <template>
-	<HomeLayout v-if="isWeb">
+	<HomeLayout v-if="true || isWeb">
 		<Landing />
 	</HomeLayout>
 	<OnboardingLayout v-else>

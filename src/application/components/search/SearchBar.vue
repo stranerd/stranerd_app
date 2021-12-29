@@ -1,27 +1,27 @@
 <template>
-	<form>
-		<ion-searchbar v-model.trim="searchTerm"
-			mode="md"
-			:debounce="700"
-			@click="switchPage"
-			class="w-full p-0 cursor-pointer"
-			placeholder="Search for anything..."
-			showCancelButton="never"
-			showClearButton="never"
-			autocapitalize="true"
+
+
+	<div class="h-11 w-full bg-new_gray rounded-2xl cursor-pointer flex justify-between items-center px-6 text-gray" @click="switchPage">
+		<ion-text >
+			Search for anything
+		</ion-text>
+
+		<ion-icon
+			:icon="search"
+			class=" text-xl"
+
 		/>
-	</form>
+	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useSearch } from '@app/composable/meta/search'
-import { IonSearchbar } from '@ionic/vue'
 import { useRoute, useRouter } from 'vue-router'
+import { search } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'SearchBar',
-	components: { IonSearchbar },
 	setup () {
 		const route = useRoute()
 		const router = useRouter()
@@ -30,7 +30,7 @@ export default defineComponent({
 			if (!route.path.startsWith('/search')) router.push(`/search?search=${val}`)
 		}
 		const { searchTerm } = useSearch()
-		return { searchTerm, switchPage }
+		return { searchTerm, switchPage, search }
 	}
 })
 </script>
@@ -44,13 +44,6 @@ export default defineComponent({
 		--icon-color: #8B9EB1;
 		--color: #8B9EB1;
 	}
-	ion-searchbar :disabled{
-		--background: #F2F3F5 !important;
-		--box-shadow: none !important;
-		--border-radius: .75rem;
-		border-radius: .75rem;
-		--icon-color: #8B9EB1;
-		--color: #8B9EB1;
-	}
+
 
 </style>

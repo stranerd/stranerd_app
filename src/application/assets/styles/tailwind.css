@@ -31,7 +31,7 @@
 	}
 
 	.layout-page {
-		@apply lg:px-12 flex flex-row  flex-grow h-full overflow-y-hidden bg-new_gray
+		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow bg-new_gray
 	}
 
 	.layout-page-chat {
@@ -47,7 +47,7 @@
 	}
 
 	.layout-body {
-		@apply lg:w-3/4 w-full flex flex-col p-0 h-full overflow-y-auto overflow-x-hidden max-w-[100vw] bg-new_gray
+		@apply lg:w-3/4 w-full h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] bg-new_gray
 	}
 
 	.layout-body-chat {
@@ -59,11 +59,11 @@
 	}
 
 	.layout-side-left {
-		@apply hidden lg:flex bg-light_gray py-3 pl-3 fixed h-full overflow-y-auto bottom-0 flex-col rounded-tr-3xl rounded-br-3xl
+		@apply hidden lg:flex bg-light_gray py-3 pl-3 fixed overflow-y-auto bottom-0 flex-col rounded-tr-3xl rounded-br-3xl
 	}
 
 	.layout-side-right {
-		@apply hidden lg:inline-block w-1/4 py-1 h-full overflow-y-auto
+		@apply hidden lg:inline-block w-1/4 py-1 overflow-y-auto
 	}
 
 	.inactiveSlideTab {
@@ -104,6 +104,6 @@
 		grid-gap: 1rem;
 	}
 	.blueTop{
-		@apply bg-primary w-full flex items-center min-h-[5.25rem] lg:min-h-[9.75rem] rounded-b-2xl md:rounded-none mb-4  justify-center
+		@apply bg-primary w-full flex items-center min-h-[5.5rem] lg:min-h-[9.75rem] rounded-b-2xl md:rounded-none mb-4  justify-center
 	}
 }

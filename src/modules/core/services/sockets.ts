@@ -9,8 +9,8 @@ const getSocketBaseAndPath = () => {
 	const splitOnDoubleSlash = stranerdBase.split('//')
 	const http = splitOnDoubleSlash[0]
 	const minusHttp = splitOnDoubleSlash[1]
-	const minusDomain = minusHttp.split('/').slice(1).join('/')
-	const path = '/' + (minusDomain ?? '') + '/socket.io'
+	const minusDomain = [null, ...minusHttp.split('/').slice(1), null].join('/')
+	const path = minusDomain + '/socket.io'
 	const domain = [http, minusHttp.split('/')[0]].join('//')
 	return { path, domain }
 }

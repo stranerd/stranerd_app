@@ -44,7 +44,7 @@
 				</div>
 				<NotesList :notes="notes" :set="set" :sliced="true" />
 			</div>
-			<div class="hidden mt-4 md:mt-8">
+			<div v-if="false" class="mt-4 md:mt-8">
 				<div class="w-full flex justify-between mb-4">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text>Videos</ion-text>
