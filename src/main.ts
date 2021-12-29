@@ -15,6 +15,7 @@ import { parseLoggedInUser } from '@app/plugins/parseLoggedInUser'
 import { ipAddressGetter } from '@app/plugins/ipAddressGetter'
 import { authClient } from '@app/plugins/authClient'
 import { allModals, allPopovers } from '@app/composable/core/modals'
+import { defineCustomElements } from '@ionic/pwa-elements/loader'
 
 const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken }
 const globalPlugins = [parseLoggedInUser, authClient, registerIonicComponent, registerComponents, ipAddressGetter]
@@ -58,6 +59,8 @@ const init = async () => {
 	await router.isReady()
 
 	app.mount('#app')
+
+	await defineCustomElements(window)
 }
 
 init().then()

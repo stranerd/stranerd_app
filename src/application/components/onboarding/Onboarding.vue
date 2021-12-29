@@ -31,9 +31,7 @@ import SlideOne from '@app/components/onboarding/SlideOne.vue'
 import SlideTwo from '@app/components/onboarding/SlideTwo.vue'
 import SlideThree from '@app/components/onboarding/SlideThree.vue'
 import SlideFour from '@app/components/onboarding/SlideFour.vue'
-import { defineComponent, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { storage } from '@utils/storage'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'Onboarding',
@@ -46,14 +44,6 @@ export default defineComponent({
 		SlideFour
 	},
 	setup () {
-		const router = useRouter()
-
-		onMounted(async () => {
-			const isOnboardingDone = await storage.get('onboarding-done')
-			if (isOnboardingDone) await router.replace('/dashboard')
-			else await storage.set('onboarding-done', true)
-		})
-
 		return { modules: [Pagination] }
 	}
 })

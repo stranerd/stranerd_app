@@ -1086,7 +1086,17 @@
     "@babel/helper-validator-identifier" "^7.15.7"
     to-fast-properties "^2.0.0"
 
-"@capacitor/android@^3.3.3":
+"@capacitor-community/http@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@capacitor-community/http/-/http-1.4.1.tgz#005f51c2129f48bff75c46b8679a2fff57ced5a9"
+  integrity sha512-+pCkBXrwfm97UfjOgjV950H/qZ8SE36Mrcb46BlL1ps3VIsGuIO+AulL8GqTC6LewheRVtGJpRspNtneXQotNA==
+  dependencies:
+    "@capacitor/android" "^3.0.0"
+    "@capacitor/core" "^3.0.0"
+    "@capacitor/filesystem" "^1.0.0"
+    "@capacitor/ios" "^3.0.0"
+
+"@capacitor/android@^3.0.0", "@capacitor/android@^3.3.3":
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.3.3.tgz#b09708e58fb942e2b5afe6081c7377d4785271aa"
   integrity sha512-YfLW8gh/b3ZifmhQPFS9ybAnPp4MutQWGFYiAVecRh3O5nJD/UgZAmUmqpSoWRAOWbNGLX4lhWUIs+cCf552fg==
@@ -1123,7 +1133,7 @@
   resolved "https://registry.yarnpkg.com/@capacitor/clipboard/-/clipboard-1.0.6.tgz#7b8259b96a6dec3422656953708f160a497ca271"
   integrity sha512-5vgarkdcFKflJJlX/cMBkpZ5ZRYg1Brl6b8LnM1P257lQbLPXeC5Aa0qVtiS9TFixULZ1rxGkQzWidt3+ngH4Q==
 
-"@capacitor/core@3.3.3":
+"@capacitor/core@3.3.3", "@capacitor/core@^3.0.0":
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-3.3.3.tgz#a1868a536a0b82381c2eaeb9aeca424ffbc5bca3"
   integrity sha512-5oN3dUxdVXSvrTvTkmKBoBh7qISi+PVrsxHyjqq7Kr573dQnm8LsZ0/24PpJsGp08lD/+nFtFzOtPODJvYLVgg==
@@ -1135,12 +1145,17 @@
   resolved "https://registry.yarnpkg.com/@capacitor/dialog/-/dialog-1.0.6.tgz#996ad8999d5aa639107ce45de6e4a88f771d0bc4"
   integrity sha512-IzfiJv1Lxl+jnT+P6ky2Lj16qMEYssih69wFH+0lXM6NSyGht/RniBHmQ1hVuXIkw8FDT9o+a5wvYhm3svwfAw==
 
+"@capacitor/filesystem@^1.0.0":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@capacitor/filesystem/-/filesystem-1.0.6.tgz#b837585e6b5d48dc705ee89e49cc7c6aeb8874ec"
+  integrity sha512-8xqUbDZFGBMhgqoBSn9wEd9OBPdHIRegQ9zCCZcpHNf3FFAIby1ck+aDFnoq+Da49xhD6ks1SKCBSxz/26qWTw==
+
 "@capacitor/haptics@1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@capacitor/haptics/-/haptics-1.1.3.tgz#54e25344d799b9bd7152246c57b5f56c142f225e"
   integrity sha512-ui2mY/riK1Y4bxnJKJfclWO61obZ0RHmtErPhpmt4wIEVjG1segYdFop45R2PxyEwoUJgzEsAxnviM/T6k8seQ==
 
-"@capacitor/ios@^3.3.3":
+"@capacitor/ios@^3.0.0", "@capacitor/ios@^3.3.3":
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.3.3.tgz#c5e3342187b35b2dcef13054461f9691f10351a0"
   integrity sha512-SQ35AaHUIJjjEX22wwdoN1sUZ3uMwG0HrZ0izMeBJBDE+vmNI78SP9wMqJxKuCaaX4oFKrxCtf/fQZGVTSxpCQ==
@@ -1437,6 +1452,11 @@
     chalk "^4.0.0"
     express "^4.16.2"
     tslib "^2.0.1"
+
+"@ionic/pwa-elements@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@ionic/pwa-elements/-/pwa-elements-3.1.1.tgz#ae1a97260886545b3285364974674576f2b090a7"
+  integrity sha512-BoEX1pSrKn5dP4VQwaf8DweAmT4ynmpW+9f6oj/W1xLe54bmuXcUY07ziuZX1DLu50xHSYcO5qJ/dbYC/w6wgA==
 
 "@ionic/utils-array@2.1.5":
   version "2.1.5"

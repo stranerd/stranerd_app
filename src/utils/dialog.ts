@@ -9,12 +9,11 @@ export const Notify = async (args: ToastArgs) => {
 	await Toast.show({
 		text: args.title,
 		position: 'top',
-		duration: 'long'
+		duration: 'short'
 	})
 }
 
 type AlertArgs = ToastArgs & {
-	text: string
 	confirmButtonText: string
 	cancelButtonText?: string
 }
@@ -22,7 +21,7 @@ type AlertArgs = ToastArgs & {
 export const Alert = async (args: AlertArgs) => {
 	const { value } = await Dialog.confirm({
 		title: args.title,
-		message: args.text,
+		message: args.title,
 		okButtonTitle: args.confirmButtonText,
 		cancelButtonTitle: args.cancelButtonText ?? 'Cancel'
 	})

@@ -189,7 +189,6 @@ export const useDeleteFlashCard = (flashCardId: string) => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this flashCard?',
-			text: 'This cannot be reversed',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

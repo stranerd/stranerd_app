@@ -136,7 +136,6 @@ export const useDeleteNote = (noteId: string) => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this note?',
-			text: 'This cannot be reversed',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

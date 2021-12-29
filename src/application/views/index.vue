@@ -1,5 +1,5 @@
 <template>
-	<HomeLayout v-if="true || isWeb">
+	<HomeLayout v-if="isWeb">
 		<Landing />
 	</HomeLayout>
 	<OnboardingLayout v-else>
@@ -13,14 +13,19 @@ import Onboarding from '@app/components/onboarding/Onboarding.vue'
 import OnboardingLayout from '@app/layouts/Onboarding.vue'
 import HomeLayout from '@app/layouts/Home.vue'
 import Landing from '@app/components/landing/Landing.vue'
-import { usePlatform } from '@app/composable/core/states'
+import { isWeb } from '@utils/constants'
+import { storage } from '@utils/storage'
 
 export default defineComponent({
 	name: 'IndexPage',
 	components: { Onboarding, OnboardingLayout, HomeLayout, Landing },
-	middlewares: ['isNotAuthenticated'],
+	middlewares: ['isNotAuthenticated', async () => {
+		if (isWeb) return
+		const isOnboardingDone = await storage.get('onboarding-done')
+		if (isOnboardingDone) return '/dashboard'
+		else await storage.set('onboarding-done', true)
+	}],
 	setup () {
-		const { isWeb } = usePlatform()
 		return { isWeb }
 	}
 })

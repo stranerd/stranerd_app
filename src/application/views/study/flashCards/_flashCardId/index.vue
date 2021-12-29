@@ -151,8 +151,7 @@ export default defineComponent({
 			if (page.value + 1 === flashCard.value?.set.length) {
 				playCard()
 				const accepted = await Alert({
-					title: 'You have gotten to the end of the flashCard set',
-					text: 'Do you want to try again or return back to Study',
+					title: 'You have gotten to the end of the flashCard set. Try again or return to study?',
 					confirmButtonText: 'Yes, Try again',
 					cancelButtonText: 'No, Back to study'
 				})

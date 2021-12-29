@@ -92,7 +92,6 @@ export const useDeleteInstitution = (institution: InstitutionEntity) => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to remove this institution?',
-			text: 'This cannot be reversed',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {
