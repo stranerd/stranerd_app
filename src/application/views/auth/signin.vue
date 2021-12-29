@@ -47,7 +47,7 @@
 					<span class="text- w-full flex justify-center items-center text-icon_inactive mt-8">
 						Don’t have an account?
 
-						<router-link class="text-primary font-bold text-body" to="/auth/signup">
+						<router-link class="text-primary font-bold text-body ml-2" to="/auth/signup">
 							Sign Up
 						</router-link>
 

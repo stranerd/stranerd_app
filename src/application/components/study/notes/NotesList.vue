@@ -50,7 +50,7 @@ export default defineComponent({
 	setup () {
 		const { notes: allNotes, listener, loading, error } = useNoteList()
 		const notes = computed({
-			get: () => allNotes.value.slice(0, 6),
+			get: () => allNotes.value.slice(0, 3),
 			set: () => {
 			}
 		})
