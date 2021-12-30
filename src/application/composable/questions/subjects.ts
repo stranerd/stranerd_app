@@ -85,7 +85,6 @@ export const useDeleteSubject = (subject: SubjectEntity) => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to remove this subject?',
-			text: 'This cannot be reversed',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {

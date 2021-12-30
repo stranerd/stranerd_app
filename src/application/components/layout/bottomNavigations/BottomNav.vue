@@ -20,8 +20,8 @@
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
-					to="/notifications">
-					<ion-icon :icon="notifications" class="w-6" />
+					to="/search">
+					<ion-icon :icon="search" class="w-6" />
 				</router-link>
 			</div>
 		</IonToolbar>
@@ -47,8 +47,8 @@
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
 					exact-active-class="!text-main_dark"
-					to="/notifications">
-					<ion-icon :icon="notifications" class="w-14" />
+					to="/search">
+					<ion-icon :icon="search" class="w-14" />
 				</router-link>
 			</div>
 		</IonToolbar>
@@ -58,7 +58,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonFooter, IonIcon, IonToolbar } from '@ionic/vue'
-import { add, book, calendarClear, chatbubble, helpCircle, home, notifications, people } from 'ionicons/icons'
+import { add, book, calendarClear, chatbubble, helpCircle, home, search, people } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
@@ -69,7 +69,7 @@ export default defineComponent({
 
 		return {
 			routeName, home, book, helpCircle,
-			people, notifications, chatbubble, add,
+			people, search, chatbubble, add,
 			calendarClear
 		}
 	}

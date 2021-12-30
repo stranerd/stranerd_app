@@ -159,7 +159,6 @@ const callback = (key: SessionKey, sessions: SessionEntity[], userId: string, ro
 			if (!router || router.currentRoute.value.path === route) return
 			const res = await Alert({
 				title: 'New session request',
-				text: '',
 				cancelButtonText: 'Ignore',
 				confirmButtonText: 'Continue'
 			})

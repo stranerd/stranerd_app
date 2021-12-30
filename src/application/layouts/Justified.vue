@@ -2,7 +2,7 @@
 	<IonPage>
 		<InnerTopBar />
 		<IonContent>
-			<div class="!w-full layout-body">
+			<div class="!w-full h-full layout-body">
 				<slot />
 			</div>
 			<Fab v-if="!hideFab" />

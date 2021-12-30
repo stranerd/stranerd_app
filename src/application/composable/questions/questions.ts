@@ -242,7 +242,6 @@ export const useDeleteQuestion = (questionId: string) => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this question?',
-			text: 'This cannot be reversed',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

@@ -92,7 +92,6 @@ export const useDeleteCourse = (course: CourseEntity) => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to remove this course?',
-			text: 'This cannot be reversed',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {

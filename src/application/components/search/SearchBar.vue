@@ -1,7 +1,7 @@
 <template>
 
 
-	<div class="h-11 w-full bg-new_gray rounded-2xl cursor-pointer flex justify-between items-center px-6 text-gray" @click="switchPage">
+	<div class="h-11 w-full bg-new_gray rounded-2xl cursor-pointer flex justify-between items-center px-6 text-gray min-w-[20.5rem]" @click="switchPage">
 		<ion-text >
 			Search for anything
 		</ion-text>

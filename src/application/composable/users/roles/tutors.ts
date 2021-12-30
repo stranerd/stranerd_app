@@ -115,7 +115,6 @@ export const useTutorRoles = () => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to make this user a tutor?',
-			text: 'This user will gain tutor privileges to the entire site',
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {
@@ -137,7 +136,6 @@ export const useTutorRoles = () => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to de-tutor this user?',
-			text: 'This user will lose tutor privileges to the entire site',
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {

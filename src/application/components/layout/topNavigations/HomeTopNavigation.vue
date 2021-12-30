@@ -17,7 +17,7 @@
 					Study
 				</router-link>
 
-				<search-bar class="flex-grow " />
+				<search-bar class="flex-grow w-full" />
 			</div>
 
 			<div class="gap-8 lg:flex hidden">

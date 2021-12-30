@@ -11,7 +11,7 @@
 			</div>
 
 			<router-link class="text-primary text-body flex items-center font-bold"
-				to="/study/explore/flashCards">
+				to="/search/flashCards">
 				<span>view all</span>
 			</router-link>
 		</div>

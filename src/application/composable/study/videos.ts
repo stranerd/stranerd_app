@@ -136,7 +136,6 @@ export const useDeleteVideo = (videoId: string) => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this video?',
-			text: 'This cannot be reversed',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {
