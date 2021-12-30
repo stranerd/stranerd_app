@@ -55,7 +55,7 @@
 				<slot :answers="answers" :flashCards="flashCards" :notes="notes" :questions="questions"
 					:searchTerm="searchTerm"
 					:sets="sets" :testPreps="testPreps" :users="users" :videos="videos" />
-				<PageLoading v-if="loading" />
+				<!-- <PageLoading v-if="loading" /> -->
 			</div>
 		</div>
 	</Justified>
