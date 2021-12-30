@@ -16,8 +16,6 @@
 }
 
 
-
-
 @media screen and (max-width: 680px) {
 	::-webkit-scrollbar {
 		width: 0; /* Remove scrollbar space */
@@ -31,11 +29,11 @@
 	}
 
 	.layout-page {
-		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow bg-new_gray
+		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow bg-new_gray min-h-full
 	}
 
 	.layout-page-chat {
-		@apply w-full  relative flex  flex-row 
+		@apply w-full  relative flex  flex-row
 	}
 
 	.layout-page-notab {
@@ -103,7 +101,8 @@
 		@apply grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1;
 		grid-gap: 1rem;
 	}
-	.blueTop{
+
+	.blueTop {
 		@apply bg-primary w-full flex items-center min-h-[5.5rem] lg:min-h-[9.75rem] rounded-b-2xl md:rounded-none mb-4  justify-center
 	}
 }

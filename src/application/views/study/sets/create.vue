@@ -16,7 +16,8 @@ export default defineComponent({
 	components: { IonContent, IonPage },
 	middlewares: ['isAuthenticated', async ({ from }) => {
 		useStudyModal().openCreateSet()
-		return from?.fullPath ?? '/dashboard'
+		const backPath = from?.fullPath ?? '/dashboard'
+		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
 	}]
 })
 </script>

@@ -46,7 +46,8 @@ export default defineComponent({
 	components: { DashboardLayout, QuestionForm },
 	middlewares: ['isAuthenticated', async ({ from }) => {
 		useQuestionModal().openAskQuestion()
-		return from?.fullPath ?? '/dashboard'
+		const backPath = from?.fullPath ?? '/dashboard'
+		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
 	}],
 	setup () {
 		const { factory, error, loading, createQuestion } = useCreateQuestion()

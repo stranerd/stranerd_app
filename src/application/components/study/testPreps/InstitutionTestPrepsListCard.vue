@@ -5,7 +5,7 @@
 			<ion-text class="font-bold text-main_dark">
 				<Institution :institutionId="institutionId" />
 			</ion-text>
-			<ion-text class="text-base">{{ formatNumber(testPreps.length) }} tests</ion-text>
+			<ion-text class="text-base text-gray">{{ formatNumber(testPreps.length) }} tests</ion-text>
 		</div>
 		<div class="w-full flex items-center justify-between gap-3">
 			<router-link :to="`/study/preps/${institutionId}?type=test`" class="w-full">
