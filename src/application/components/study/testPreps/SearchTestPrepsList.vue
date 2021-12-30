@@ -5,9 +5,8 @@
 		</template>
 		<template v-else>
 			<div class="showcase">
-				<TestPrepListCard v-for="testPrep in filtered" :key="testPrep.hash"
-					:openMenu="(event) => openMenu(testPrep, event)"
-					:testPrep="testPrep" />
+				<InstitutionTestPrepsListCard v-for="group in filtered" :key="group.institutionId"
+					:institutionId="group.institutionId" :testPreps="group.preps" />
 			</div>
 		</template>
 	</div>
@@ -15,13 +14,14 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import { TestPrepEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
+import { groupedByInstitution } from '@app/composable/study/testPreps'
+import InstitutionTestPrepsListCard from '@app/components/study/testPreps/InstitutionTestPrepsListCard.vue'
 
 export default defineComponent({
 	name: 'SearchTestPrepsList',
-	components: { TestPrepListCard },
+	components: { InstitutionTestPrepsListCard },
 	props: {
 		testPreps: {
 			type: Array as PropType<TestPrepEntity[]>,
@@ -35,7 +35,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const openMenu = (entity: TestPrepEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
-		const filtered = computed(() => props.testPreps.slice(0, props.sliced ? 6 : undefined))
+		const filtered = computed(() => groupedByInstitution(props.testPreps).value.slice(0, props.sliced ? 6 : undefined))
 		return { filtered, openMenu }
 	}
 })

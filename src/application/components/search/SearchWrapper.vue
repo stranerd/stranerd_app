@@ -8,14 +8,12 @@
 						Explore thousands of study materials
 					</ion-text>
 					<ion-searchbar v-model.trim="searchTerm"
-						mode="md"
 						:debounce="700"
 						class="lg:w-7/12 w-11/12 p-0  mb-8 mt-5 lg:mt-0"
 						placeholder="Search for anything..."
 						showCancelButton="never"
 					/>
 				</div>
-		
 
 				<div
 					class="mb-0.5 justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full lg:px-3 text-xs mx-auto text-faded_gray font-bold  whitespace-normal overflow-x-auto mt-auto">
@@ -76,7 +74,6 @@ export default defineComponent({
 	}
 })
 </script>
-
 
 <style lang="scss" scoped>
 	ion-searchbar {

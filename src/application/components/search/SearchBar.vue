@@ -1,36 +1,21 @@
 <template>
-
-
-	<div class="h-11 w-full bg-new_gray rounded-2xl cursor-pointer flex justify-between items-center px-6 text-gray min-w-[20.5rem]" @click="switchPage">
-		<ion-text >
-			Search for anything
-		</ion-text>
-
-		<ion-icon
-			:icon="search"
-			class=" text-xl"
-
-		/>
+	<div class="h-11 w-full bg-new_gray rounded-2xl cursor-pointer flex justify-between items-center px-6 text-gray min-w-[20.5rem]"
+		@click="navigateToSearch">
+		<ion-text>Search for anything</ion-text>
+		<ion-icon :icon="search" class=" text-xl" />
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useSearch } from '@app/composable/meta/search'
-import { useRoute, useRouter } from 'vue-router'
 import { search } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'SearchBar',
 	setup () {
-		const route = useRoute()
-		const router = useRouter()
-		const switchPage = ()=>{
-			const val = searchTerm.value.trim()
-			if (!route.path.startsWith('/search')) router.push(`/search?search=${val}`)
-		}
-		const { searchTerm } = useSearch()
-		return { searchTerm, switchPage, search }
+		const { searchTerm, navigateToSearch } = useSearch()
+		return { search, searchTerm, navigateToSearch }
 	}
 })
 </script>

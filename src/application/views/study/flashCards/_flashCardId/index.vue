@@ -49,18 +49,18 @@
 					class="text-icon_inactive text-xl cursor-pointer"
 					@click="playCard()"
 				/>
-				<div class="flex items-center gap-5">
+				<div class="flex items-center ">
 					<ion-icon
 						:icon="chevronBack"
-						class="text-icon_inactive text-xl cursor-pointer"
+						class="text-icon_inactive text-xl cursor-pointer "
 						@click="decrease()"
 					/>
-					<ion-text class="mx-4 text-icon_inactive">
+					<ion-text class="mx-4 text-icon_inactive mr-5">
 						<b>{{ page + 1 }}</b> of <b>{{ flashCard?.set.length }}</b>
 					</ion-text>
 					<ion-icon
 						:icon="chevronForward"
-						class="text-icon_inactive text-xl cursor-pointer"
+						class="text-icon_inactive text-xl cursor-pointer mr-5"
 						@click="increase()"
 					/>
 				</div>

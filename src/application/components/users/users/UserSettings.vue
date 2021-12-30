@@ -1,33 +1,36 @@
 <template>
-	<div class="w-full mt-8 px-4">
+	<div class="w-full px-4">
+
+		<div class="bg-primary h-24 -mx-4 hidden md:block" />
+
 		<div
-			class=" custom-shadow lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl gap-2 mb-6">
-			<ion-text class="text-xl text-main_dark font-bold">
+			class=" custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl  mb-6 md:-mt-12 mt-6">
+			<ion-text class="text-xl text-main_dark font-bold mt-2">
 				Profile picture
 			</ion-text>
-			<Avatar :id="user.id" :size="90" :src="user.avatar" color="#C7D6E3" />
-			<ion-button class="btn-primary" @click="openUploadModal()">
+			<Avatar :id="user.id" :size="90" :src="user.avatar" class="mt-3" color="#C7D6E3" />
+			<ion-button class="btn-primary mt-4" @click="openUploadModal()">
 				Upload a profile picture
 			</ion-button>
 		</div>
 
 		<div
-			class=" custom-shadow lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl gap-2 mb-6">
-			<ion-text class="text-xl text-main_dark font-bold text-left w-full">
+			class=" custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl  mb-6">
+			<ion-text class="text-xl text-main_dark font-bold text-left w-full mt-2">
 				Usernames <span
 					class="font-normal text-sm">*Use your real names, they can only be changed once	</span>
 			</ion-text>
-			<div class="flex md:flex-row items-center justify-center flex-col w-full gap-4">
-				<div class="border border-faded_gray rounded-xl lg:w-1/2 md:mr-4 w-full">
+			<div class="flex md:flex-row items-center justify-center flex-col w-full mt-2">
+				<div class="border border-faded_gray rounded-xl lg:w-1/2 md:mr-4 w-full mt-4">
 					<IonInput v-model="profileFactory.first" class="w-full font-medium"
 						placeholder="First name" />
 				</div>
-				<div class="border border-faded_gray rounded-xl lg:w-1/2 w-full">
+				<div class="border border-faded_gray rounded-xl lg:w-1/2 w-full mt-4">
 					<IonInput v-model="profileFactory.last" class="w-full font-medium"
 						placeholder="Last name" />
 				</div>
 			</div>
-			<div class="w-full justify-start">
+			<div class="w-full justify-start mt-2">
 				<ion-button class="btn-primary w-32" @click="updateProfile()">
 					Save
 					<IonSpinner v-if="profileLoading" name="lines-small" />
@@ -36,11 +39,11 @@
 		</div>
 
 		<div
-			class=" custom-shadow lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl gap-2 mb-6">
+			class=" custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl mb-6">
 			<ion-text class="text-xl text-main_dark font-bold text-left w-full">
 				About
 			</ion-text>
-			<div class="flex md:flex-row items-center justify-center flex-col w-full gap-4">
+			<div class="flex md:flex-row items-center justify-center flex-col w-full mt-2">
 				<div class="border border-faded_gray rounded-xl w-full mr-4">
 					<IonTextarea v-model="profileFactory.description"
 						class="bg-white border-0 focus:outline-none w-full"
@@ -48,7 +51,7 @@
 						rows="6" />
 				</div>
 			</div>
-			<div class="w-full justify-start">
+			<div class="w-full justify-start mt-2">
 				<ion-button class="btn-primary w-32" @click="updateProfile()">
 					Save
 					<IonSpinner v-if="profileLoading" name="lines-small" />
@@ -56,117 +59,7 @@
 			</div>
 		</div>
 
-		<!-- <div class=" flex flex-col gap-[8rem]">
-			<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 text-body text-icon_inactive">
-				<div class="flex flex-col gap-2">
-					<h2 class="headings font-bold text-main_dark">Name</h2>
-
-				</div>
-
-				<div class="flex flex-col gap-2">
-					<h2 class="headings font-bold text-main_dark">About</h2>
-					<div class="border border-faded_gray rounded-xl py-4 px-3">
-
-					</div>
-				</div>
-
-				<div class="flex flex-row gap-3 mt-7 text-white">
-					<div class="w-1/2 flex flex-row justify-center items-center">
-						<IonButton class="cancelBtn w-full hidden" @click="profileFactory.reset()">
-							Cancel
-							<IonRippleEffect class="rounded-lg ion-activatable" />
-						</IonButton>
-					</div>
-					<div class="w-1/2 flex flex-row justify-center items-center">
-						<IonButton class="actionBtn ion-activatable w-full" @click="updateProfile">
-							Save
-							<IonSpinner v-if="profileLoading" name="lines-small" />
-							<IonRippleEffect class="rounded-lg ion-activatable" />
-						</IonButton>
-					</div>
-				</div>
-			</div>
-			<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 text-body text-icon_inactive">
-
-
-				<div class="flex flex-col gap-2">
-					<h2 class="headings font-bold text-main_dark">Best Subject</h2>
-					<SelectSubject
-						v-model:subject-id="tutorFactory.strongestSubject"
-						:exclude="tutorFactory.weakerSubjects"
-						:show-all="false"
-						class="p-0 select"
-					/>
-					<span v-if="tutorFactory.strongestSubject">
-						Strongest subject chosen: <Subject :subject-id="tutorFactory.strongestSubject" />
-					</span>
-				</div>
-
-				<div class="flex flex-row gap-3 mt-7 text-white">
-					<div class="w-1/2 flex flex-row justify-center items-center">
-						<IonButton class="btn-secondary w-full hidden" @click="tutorFactory.reset()">
-							Cancel
-							<IonRippleEffect class="rounded-lg ion-activatable" />
-						</IonButton>
-					</div>
-					<div class="w-1/2 flex flex-row justify-center items-center">
-						<IonButton class="btn-primary ion-activatable w-full" @click="updateTutor">
-							Save
-							<IonSpinner v-if="tutorLoading" name="lines-small" />
-							<IonRippleEffect class="rounded-lg ion-activatable" />
-						</IonButton>
-					</div>
-				</div>
-			</div>
-			<div class="col-span-12 flex flex-col gap-6 px-3 mb-7 text-body text-icon_inactive">
-				<div class="flex flex-col gap-2">
-					<h2 class="headings font-bold text-main_dark">{{ hasPassword ? 'Update' : 'Add' }} Password</h2>
-					<p>
-						*Login without Google
-					</p>
-
-					<div v-if="hasPassword" class="flex flex-col gap-2">
-						<div class="py-2 px-2 w-full pl-6 bg-light_gray rounded-xl flex flex-row">
-							<IonInput v-model="passwordFactory.oldPassword" class="w-full font-medium"
-								placeholder="Current Password"
-								type="password" />
-						</div>
-					</div>
-
-					<div class="flex flex-row items-center flex-wrap">
-						<div class="pr-1 w-full md:w-1/2">
-							<div class="py-2 px-2 w-full pl-6 bg-light_gray rounded-xl flex flex-row">
-								<IonInput v-model="passwordFactory.password" class="w-full font-medium"
-									placeholder="New Password"
-									type="password" />
-							</div>
-						</div>
-						<div class="pl-1 w-full md:w-1/2">
-							<div class="py-2 px-2 w-full pl-6 bg-light_gray rounded-xl flex flex-row">
-								<IonInput v-model="passwordFactory.cPassword" class="w-full font-medium"
-									placeholder="Confirm Password"
-									type="password" />
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="flex flex-row gap-3 mt-7 text-white">
-					<div class="w-1/2 flex flex-row justify-center items-center">
-						<IonButton class="cancelBtn w-full hidden" @click="passwordFactory.reset()">
-							Cancel
-							<IonRippleEffect class="rounded-lg ion-activatable" />
-						</IonButton>
-					</div>
-					<div class="w-1/2 flex flex-row justify-center items-center">
-						<IonButton class="actionBtn ion-activatable w-full" @click="updatePassword">
-							Save
-							<IonSpinner v-if="passwordLoading" name="lines-small" />
-						</IonButton>
-					</div>
-				</div>
-			</div>
-		</div> -->
+	
 
 	</div>
 </template>

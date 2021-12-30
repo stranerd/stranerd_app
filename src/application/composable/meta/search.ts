@@ -48,9 +48,13 @@ export const useSearch = () => {
 
 	global.searchTerm.value = route.query.search as string ?? ''
 
-	watch(() => global.searchTerm.value, async () => {
+	const navigateToSearch = async () => {
 		const val = global.searchTerm.value.trim()
 		if (!route.path.startsWith('/search')) await router.push(`/search?search=${val}`)
+	}
+
+	watch(() => global.searchTerm.value, async () => {
+		await navigateToSearch()
 		await search()
 	})
 
@@ -58,5 +62,5 @@ export const useSearch = () => {
 		if (!global.fetched.value && !global.loading.value) await search()
 	})
 
-	return { ...global }
+	return { ...global, navigateToSearch, search }
 }

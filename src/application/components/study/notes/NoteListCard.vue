@@ -9,7 +9,7 @@
 			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl cursor-pointer" @click="openMenu" />
 		</div>
 		<router-link :to="`/study/notes/${note.id}`" class="mt-2">
-			<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem] ">
+			<ion-button class="btn-outline text-primary w-full">
 				Start reading
 			</ion-button>
 		</router-link>

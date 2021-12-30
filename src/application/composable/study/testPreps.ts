@@ -63,22 +63,22 @@ export const useTestPrepList = () => {
 		})
 	})
 
-	const groupedByInstitution = computed({
-		get: () => groupBy(global.testPreps.value, (prep) => prep.data.institutionId)
-			.map(({ key, values }) => ({ institutionId: key, preps: values })),
-		set: () => {
-		}
-	})
-
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTestPreps()
 	})
 
 	return {
-		...global, listener, groupedByInstitution,
+		...global, listener,
 		fetchOlderTestPreps: fetchTestPreps
 	}
 }
+
+export const groupedByInstitution = (testPreps: TestPrepEntity[]) => computed({
+	get: () => groupBy(testPreps, (prep) => prep.data.institutionId)
+		.map(({ key, values }) => ({ institutionId: key, preps: values })),
+	set: () => {
+	}
+})
 
 export const useTestPrep = (id: string) => {
 	const testPrep = computed({

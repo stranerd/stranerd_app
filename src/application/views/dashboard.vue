@@ -11,7 +11,6 @@
 				<NotesList :suggested="true" class="mb-16" />
 				<VideosList v-if="false" :suggested="true" class="mb-16" />
 				<FlashCardList :suggested="true" />
-				<StudyTools v-if="false" />
 			</div>
 		</div>
 	</DashboardLayout>
@@ -27,7 +26,6 @@ import VideosList from '@app/components/study/videos/VideosList.vue'
 import FlashCardList from '@app/components/study/flashCards/FlashCardList.vue'
 import RecentQuestions from '@app/components/questions/questions/RecentQuestions.vue'
 import ContinueStudy from '@app/components/study/tests/ContinueTests.vue'
-import StudyTools from '@app/components/study/studyTools/StudyTools.vue'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
@@ -40,7 +38,6 @@ export default defineComponent({
 		NotesList,
 		VideosList,
 		FlashCardList,
-		StudyTools,
 		StatusBar
 	},
 	setup () {
