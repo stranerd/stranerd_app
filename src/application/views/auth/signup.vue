@@ -18,31 +18,31 @@
 							<ion-input v-model="factory.first" :size="24" placeholder="First Name"
 								position="floating"
 								type="text"></ion-input>
-							<span class="normalText text-red-500 font-semibold">{{ factory.errors.first }}</span>
+							<span class="text-body text-red-500 font-semibold">{{ factory.errors.first }}</span>
 						</div>
 						<div class="mb-4">
 							<ion-input v-model="factory.last" :size="24" placeholder="Last Name" position="floating"
 								type="text"></ion-input>
-							<span class="normalText text-red-500 font-semibold">{{ factory.errors.last }}</span>
+							<span class="text-body text-red-500 font-semibold">{{ factory.errors.last }}</span>
 						</div>
 						<div class="mb-4">
 							<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
 								position="floating"
 								type="email"></ion-input>
-							<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
+							<span class="text-body text-red-500 font-semibold">{{ factory.errors.email }}</span>
 						</div>
 						<div class="mb-4">
 							<ion-input v-model="factory.password" :size="24" placeholder="Password"
 								position="floating"
 								type="password"></ion-input>
-							<span class="normalText text-red-500 font-semibold">{{ factory.errors.password }}</span>
+							<span class="text-body text-red-500 font-semibold">{{ factory.errors.password }}</span>
 						</div>
 						<div class="mb-4">
 							<ion-input v-model="factory.cPassword" :size="24" placeholder="Confirm Password"
 								position="floating"
 								type="password"></ion-input>
 							<span
-								class="normalText text-red-500 font-semibold">{{ factory.errors.cPassword }}</span>
+								class="text-body text-red-500 font-semibold">{{ factory.errors.cPassword }}</span>
 						</div>
 
 						<ion-button class="w-full mb-4 !capitalize" type="submit">Sign up
@@ -60,9 +60,9 @@
 					<!-- <span
 							class="text-xs flex flex-wrap justify-center items-center text-icon_inactive mt-8 max-w-full text-center">
 							By signing up, you accept the Stranerd 	<router-link
-								class="text-primary font-bold normalText mx-1"
+								class="text-primary font-bold text-body mx-1"
 								to="/auth/signup"> Terms and Conditions
-							</router-link> & <router-link class="text-primary font-bold normalText mx-1"
+							</router-link> & <router-link class="text-primary font-bold text-body mx-1"
 								to="/auth/signup">
 								Privacy Policy.
 							</router-link>
@@ -73,7 +73,7 @@
 
 
 
-						<router-link class="text-primary font-bold normalText" to="/auth/signin">
+						<router-link class="text-primary font-bold text-body" to="/auth/signin">
 							Sign In
 						</router-link>
 

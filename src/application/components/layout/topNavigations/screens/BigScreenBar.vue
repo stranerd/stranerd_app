@@ -1,5 +1,5 @@
 <template>
-	<ion-toolbar class="hidden lg:flex border-0 z-50">
+	<ion-toolbar class="hidden lg:flex border-0 z-50 h-16">
 		<div class="flex items-center">
 			<div class="w-[16%]">
 				<router-link class="flex items-center w-full justify-center" to="/dashboard">
@@ -8,7 +8,7 @@
 			</div>
 			<div class="flex w-[84%] gap-10 px-12">
 				<div class="w-3/4 flex-auto flex flex-row items-center">
-					<search-bar class="flex-grow" />
+					<search-bar class="flex-grow " />
 				</div>
 				<div class="w-[25%] flex-auto flex">
 					<div class="flex flex-row items-center py-1 gap-8 justify-between">

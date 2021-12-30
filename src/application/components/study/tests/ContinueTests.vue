@@ -4,7 +4,7 @@
 			<span class="heading font-bold text-main_dark">
 				Recently Uncompleted Tests
 			</span>
-			<router-link class="text-primary normalText flex items-center font-bold"
+			<router-link class="text-primary text-body flex items-center font-bold"
 				to="/study/tests/continue">
 				<span>view all</span>
 			</router-link>

@@ -1,36 +1,34 @@
 <template>
-	<form @click="navigateToSearch">
-		<ion-searchbar v-model.trim="searchTerm"
-			class="w-full p-0"
-			placeholder="Search for anything..."
-			showCancelButton="never"
-			showClearButton="never"
-		/>
-	</form>
+	<div class="h-11 w-full bg-new_gray rounded-2xl cursor-pointer flex justify-between items-center px-6 text-gray"
+		@click="navigateToSearch">
+		<ion-text>Search for anything</ion-text>
+		<ion-icon :icon="search" class=" text-xl" />
+	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useSearch } from '@app/composable/meta/search'
-import { IonSearchbar } from '@ionic/vue'
+import { search } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'SearchBar',
-	components: { IonSearchbar },
 	setup () {
 		const { searchTerm, navigateToSearch } = useSearch()
-		return { searchTerm, navigateToSearch }
+		return { search, searchTerm, navigateToSearch }
 	}
 })
 </script>
 
 <style lang="scss" scoped>
 	ion-searchbar {
-		--background: #FFFFFF;
-		--box-shadow: 0px 0px 0px 1px #F7F7FC;
+		--background: #F2F3F5 !important;
+		--box-shadow: none !important;
 		--border-radius: .75rem;
 		border-radius: .75rem;
 		--icon-color: #8B9EB1;
 		--color: #8B9EB1;
 	}
+
+
 </style>

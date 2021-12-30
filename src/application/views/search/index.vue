@@ -10,7 +10,7 @@
 							</ion-text>
 						</div>
 						<router-link :to="`/search/preps?search=${searchTerm}`"
-							class="text-primary normalText flex items-center font-bold">
+							class="text-primary text-body flex items-center font-bold">
 							<span>view all</span>
 						</router-link>
 					</div>
@@ -25,7 +25,7 @@
 							</ion-text>
 						</div>
 						<router-link :to="`/search/notes?search=${searchTerm}`"
-							class="text-primary normalText flex items-center font-bold">
+							class="text-primary text-body flex items-center font-bold">
 							<span>view all</span>
 						</router-link>
 					</div>
@@ -41,7 +41,7 @@
 						</div>
 
 						<router-link :to="`/search/videos?search=${searchTerm}`"
-							class="text-primary normalText flex items-center font-bold">
+							class="text-primary text-body flex items-center font-bold">
 							<span>view all</span>
 						</router-link>
 					</div>
@@ -57,7 +57,7 @@
 						</div>
 
 						<router-link :to="`/search/flashCards?search=${searchTerm}`"
-							class="text-primary normalText flex items-center font-bold">
+							class="text-primary text-body flex items-center font-bold">
 							<span>view all</span>
 						</router-link>
 					</div>
@@ -73,7 +73,7 @@
 						</div>
 
 						<router-link :to="`/search/nerds?search=${searchTerm}`"
-							class="text-primary normalText flex items-center font-bold">
+							class="text-primary text-body flex items-center font-bold">
 							<span>view all</span>
 						</router-link>
 					</div>

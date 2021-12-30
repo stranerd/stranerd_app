@@ -2,7 +2,7 @@
 	<div v-if="loading" class="flex items-center justify-center w-full col-span-12 pt-12 px-5">
 		<ion-progress-bar type="indeterminate"></ion-progress-bar>
 	</div>
-	<div v-if="!loading && questions" class="col-span-12 flex flex-col px-3 normalText">
+	<div v-if="!loading && questions" class="col-span-12 flex flex-col px-3 text-body">
 		<template v-if="questions.length">
 			<div v-for="question in questions" :key="question.hash" class="w-full md:px-2 md:py-3 mb-4 md:mb-0">
 				<UserQuestionsCard :question="question" />

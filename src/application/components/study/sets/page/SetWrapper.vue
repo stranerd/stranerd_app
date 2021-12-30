@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="bg-primary w-full flex flex-col items-center pt-5 md:pt-12 rounded-b-2xl md:rounded-none mb-4">
+		<div class="blueTop flex-col  pt-5 md:pt-12">
 			<div class="flex w-full md:w-8/12 mx-auto px-4 text-white items-center">
 				<IonIcon :icon="folder" class="text-6xl md:text-8xl" />
 				<div class="flex flex-col ml-2 md:ml-4">

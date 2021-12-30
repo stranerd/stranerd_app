@@ -4,7 +4,7 @@
 
 			<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
 				<h1 class="text-xl text-main_dark font-bold mb-2 ">Forgot Password</h1>
-				<span class="normalText text-main_dark mb-4">Enter your email to reset your password</span>
+				<span class="text-body text-main_dark mb-4">Enter your email to reset your password</span>
 				<div class="h-[65%]">
 					<form
 						@submit.prevent="sendResetEmail"
@@ -13,7 +13,7 @@
 							<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
 								position="floating"
 								required type="email"></ion-input>
-							<span class="normalText text-red-500 font-semibold">{{ factory.errors.email }}</span>
+							<span class="text-body text-red-500 font-semibold">{{ factory.errors.email }}</span>
 						</div>
 
 						<ion-button class="w-full mb-4" type="submit">RESET PASSWORD
@@ -23,7 +23,7 @@
 				</div>
 			</div>
 
-			<router-link class="text-primary font-bold normalText mt-8" to="/auth/signin">
+			<router-link class="text-primary font-bold text-body mt-8" to="/auth/signin">
 				Back to Sign In
 			</router-link>
 		</div>

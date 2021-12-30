@@ -10,7 +10,7 @@
 				</ion-badge>
 			</div>
 
-			<router-link class="text-primary normalText flex items-center font-bold"
+			<router-link class="text-primary text-body flex items-center font-bold"
 				to="/study/explore/flashCards">
 				<span>view all</span>
 			</router-link>
@@ -48,7 +48,7 @@ export default defineComponent({
 	setup () {
 		const { flashCards: allFlashcard, listener, loading, error } = useFlashCardList()
 		const flashcards = computed({
-			get: () => allFlashcard.value.slice(0, 6),
+			get: () => allFlashcard.value.slice(0, 3),
 			set: () => {
 			}
 		})

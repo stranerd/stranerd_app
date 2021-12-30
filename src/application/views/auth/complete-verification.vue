@@ -6,7 +6,7 @@
 				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
 					<h1 class="lg:text-2xl text-xl text-main_dark font-bold mb-2 text-center">Verifying Your Email
 						Address</h1>
-					<span class="normalText text-main_dark mb-4 text-center">
+					<span class="text-body text-main_dark mb-4 text-center">
 						If an error occurred, click the button below to retry verification.
 					</span>
 					<div class="h-[65%]">
@@ -21,7 +21,7 @@
 					</div>
 				</div>
 
-				<router-link class="text-primary font-bold normalText mt-8" to="/auth/signin">
+				<router-link class="text-primary font-bold text-body mt-8" to="/auth/signin">
 					Back to Sign In
 				</router-link>
 			</div>

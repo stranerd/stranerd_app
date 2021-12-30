@@ -11,7 +11,7 @@
 			</div>
 
 			<router-link
-				class="text-primary normalText flex items-center font-bold"
+				class="text-primary text-body flex items-center font-bold"
 				to="/study/explore/notes">
 				<span>view all</span>
 			</router-link>
@@ -50,7 +50,7 @@ export default defineComponent({
 	setup () {
 		const { notes: allNotes, listener, loading, error } = useNoteList()
 		const notes = computed({
-			get: () => allNotes.value.slice(0, 6),
+			get: () => allNotes.value.slice(0, 3),
 			set: () => {
 			}
 		})

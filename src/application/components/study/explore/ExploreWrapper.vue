@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<div>
-			<div class="bg-primary w-full  flex flex-col items-center pt-5 md:pt-12 rounded-b-2xl md:rounded-none mb-4">
+			<div class="blueTop flex-col  pt-5 md:pt-12">
 				<div class="flex flex-col w-full justify-center items-center px-4">
 					<ion-text class="heading lg:text-2xl font-bold text-white text-center  mb-3 hidden md:block">
 						Explore thousands of study materials
@@ -67,8 +67,8 @@ export default defineComponent({
 	}
 
 	.searchbar-input.sc-ion-searchbar-md {
-		padding-top: 12px;
-		padding-bottom: 12px;
+		padding-top: 24px !important;
+		padding-bottom: 24px !important;
 	}
 </style>
 

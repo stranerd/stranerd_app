@@ -15,6 +15,9 @@
 	cursor: pointer;
 }
 
+
+
+
 @media screen and (max-width: 680px) {
 	::-webkit-scrollbar {
 		width: 0; /* Remove scrollbar space */
@@ -32,19 +35,19 @@
 	}
 
 	.layout-page-chat {
-		@apply w-full  relative flex  flex-row lg:gap-10
+		@apply w-full  relative flex  flex-row 
 	}
 
 	.layout-page-notab {
-		@apply w-full lg:w-[84%] lg:ml-[16%] lg:px-12 relative flex  mt-[14px] flex-row lg:gap-16 lg:mt-[93px]
+		@apply w-full lg:w-[84%] lg:ml-[16%] lg:px-12 relative flex  mt-[14px] flex-row lg:mt-[93px]
 	}
 
 	.layout-page-nosidebars {
-		@apply flex mt-[14px] flex-row lg:gap-16 lg:mt-[63px] flex-grow
+		@apply flex mt-[14px] flex-row  lg:mt-[63px] flex-grow
 	}
 
 	.layout-body {
-		@apply lg:w-3/4 w-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] bg-new_gray
+		@apply lg:w-3/4 w-full h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] bg-new_gray
 	}
 
 	.layout-body-chat {
@@ -71,17 +74,14 @@
 		@apply py-3 px-3 text-xs md:text-sm  font-semibold text-white bg-dark_gray rounded-xl focus:outline-none
 	}
 
-	.normalText {
+	.text-body {
 		@apply md:text-base text-xs
-	}
-
-	.headings {
-		@apply md:text-xl text-base
 	}
 
 	.heading {
 		@apply md:text-xl text-base
 	}
+
 
 	.cancelBtn {
 		@apply px-6 py-3 relative rounded-lg  font-bold bg-dark_gray
@@ -100,6 +100,10 @@
 	}
 
 	.showcase {
-		@apply grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-4
+		@apply grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1;
+		grid-gap: 1rem;
+	}
+	.blueTop{
+		@apply bg-primary w-full flex items-center min-h-[5.5rem] lg:min-h-[9.75rem] rounded-b-2xl md:rounded-none mb-4  justify-center
 	}
 }

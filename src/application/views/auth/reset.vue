@@ -5,7 +5,7 @@
 
 				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
 					<h1 class="text-xl text-main_dark font-bold mb-2 ">Reset Password</h1>
-					<span class="normalText text-main_dark mb-4">To reset your password, type your new password below and reset</span>
+					<span class="text-body text-main_dark mb-4">To reset your password, type your new password below and reset</span>
 					<div class="h-[65%]">
 						<form
 							@submit.prevent="resetPassword"
@@ -14,12 +14,12 @@
 								<ion-input v-model="factory.password" :size="24" placeholder="New Password"
 									position="floating"
 									required type="password"></ion-input>
-								<span class="normalText text-red-500 font-semibold">{{ factory.errors.password }}</span>
+								<span class="text-body text-red-500 font-semibold">{{ factory.errors.password }}</span>
 							</div>
 							<div class="mb-4">
 								<ion-input v-model="factory.cPassword" :size="24" placeholder="Confirm New Password"
 									position="floating" required type="password" />
-								<span class="normalText text-red-500 font-semibold">{{
+								<span class="text-body text-red-500 font-semibold">{{
 									factory.errors.cPassword
 								}}</span>
 							</div>
@@ -31,7 +31,7 @@
 					</div>
 				</div>
 
-				<router-link class="text-primary font-bold normalText mt-8" to="/auth/signin">
+				<router-link class="text-primary font-bold text-body mt-8" to="/auth/signin">
 					Back to Sign In
 				</router-link>
 			</div>

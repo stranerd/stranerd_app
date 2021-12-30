@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="w-full rounded-xl bg-white  flex flex-col items-center justify-center py-7 px-5 md:py-11 gap-3 text-center normalText text-main_dark">
+		class="w-full rounded-xl bg-white  flex flex-col items-center justify-center py-7 px-5 md:py-11 gap-3 text-center text-body text-main_dark">
 
 		<p :class="infoClass" v-html="info" />
 

@@ -12,7 +12,7 @@
 					</div>
 					<router-link
 						:to="`/study/sets/${set.id}/preps`"
-						class="text-primary normalText flex items-center font-bold">
+						class="text-primary text-body flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>
@@ -25,7 +25,7 @@
 					</div>
 					<router-link
 						:to="`/study/sets/${set.id}/flashCards`"
-						class="text-primary normalText flex items-center font-bold">
+						class="text-primary text-body flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>
@@ -38,7 +38,7 @@
 					</div>
 					<router-link
 						:to="`/study/sets/${set.id}/notes`"
-						class="text-primary normalText flex items-center font-bold">
+						class="text-primary text-body flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>
@@ -51,7 +51,7 @@
 					</div>
 					<router-link
 						:to="`/study/sets/${set.id}/videos`"
-						class="text-primary normalText flex items-center font-bold">
+						class="text-primary text-body flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>
@@ -64,7 +64,7 @@
 					</div>
 					<router-link
 						:to="`/study/sets`"
-						class="text-primary normalText flex items-center font-bold">
+						class="text-primary text-body flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>

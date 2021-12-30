@@ -11,7 +11,7 @@
 			</div>
 
 			<router-link
-				class="text-primary normalText flex items-center font-bold"
+				class="text-primary text-body flex items-center font-bold"
 				to="/study/explore/videos">
 				<span>view all</span>
 			</router-link>

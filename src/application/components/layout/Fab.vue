@@ -32,15 +32,6 @@
 					Ask a question
 				</ion-label>
 			</router-link>
-			<router-link class="relative" to="/study/explore">
-				<ion-fab-button color="primary" size="small">
-					<ion-icon :icon="compass" class="text-xl"></ion-icon>
-				</ion-fab-button>
-				<ion-label
-					class="px-2 py-1 mr-1.5 w-max  bg-primary rounded-xl text-xs font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
-					Explore
-				</ion-label>
-			</router-link>
 		</ion-fab-list>
 	</ion-fab>
 </template>
@@ -48,7 +39,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonFab, IonFabButton, IonFabList, IonLabel } from '@ionic/vue'
-import { add, compass, folder, helpCircle } from 'ionicons/icons'
+import { add, folder, helpCircle } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'Fab',
@@ -56,8 +47,7 @@ export default defineComponent({
 	setup () {
 		const active = ref(false)
 		return {
-			active, compass,
-			add, helpCircle, folder
+			active, add, helpCircle, folder
 		}
 	}
 })

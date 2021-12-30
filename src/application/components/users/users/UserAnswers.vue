@@ -3,7 +3,7 @@
 		<ion-progress-bar type="indeterminate"></ion-progress-bar>
 	</div>
 
-	<div v-else class="col-span-12 flex flex-col px-3 normalText">
+	<div v-else class="col-span-12 flex flex-col px-3 text-body">
 		<template v-if="answers.length">
 			<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer" />
 		</template>
