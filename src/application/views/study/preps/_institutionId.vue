@@ -75,9 +75,9 @@ export default defineComponent({
 		const { type } = route.query
 		const testType = ref(['test', 'study'].includes(type as string) ? type : 'test')
 
-		const { groupedByInstitution } = useTestPrepList()
+		const { testPreps } = useTestPrepList()
 		const preps = computed({
-			get: () => groupedByInstitution.value.find((x) => x.institutionId === institutionId)?.preps ?? [],
+			get: () => testPreps.value.filter((prep) => prep.data.institutionId === institutionId),
 			set: () => {
 			}
 		})

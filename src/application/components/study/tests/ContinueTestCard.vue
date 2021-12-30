@@ -1,5 +1,6 @@
 <template>
-	<router-link :class="`m-0 min-w-[16.5rem] bg-white w-full rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border p-6`"
+	<router-link
+		:class="`m-0 min-w-[16.5rem] bg-white w-full rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border p-6`"
 		:to="`/study/tests/${test.id}/take`">
 		<div class="flex flex-col items-center justify-between w-full mx-auto capitalize">
 			<div class="w-full flex justify-between items-center">
@@ -11,16 +12,17 @@
 				<ion-icon :icon="arrowForward" class="text-3xl text-gray" />
 			</div>
 
-			<ion-text class="text-base text-left w-full text-gray font-bold">
+			<ion-text class="text-base text-left w-full text-gray">
 				{{ test.isTimed ? 'Timed' : 'Study' }}
 				<span v-if="testPrep && testPrep.isPastQuestionType">
 					>
 					<Course :courseId="testPrep.data.courseId" />
+					{{ testPrep.data.questionType }}
 					({{ testPrep.data.year }})
 				</span>
 			</ion-text>
 
-			<ion-progress-bar :value="test.progress" class="mt-10" />
+			<ion-progress-bar :value="test.progress" class="mt-5" />
 		</div>
 	</router-link>
 </template>

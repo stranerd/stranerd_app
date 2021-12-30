@@ -22,23 +22,8 @@
 
 		<template v-else>
 			<div class="showcase">
-				<div v-for="group in testPreps" :key="group.institutionId"
-					:class="[`m-0 w-full h-40 bg-white rounded-xl flex flex-col items-start justify-between md:gap-2 gap-[1rem] box-border p-6`]">
-					<ion-text class="font-bold text-xl text-main_dark">
-						<Institution :institutionId="group.institutionId" />
-					</ion-text>
-
-					<div class="w-full flex items-center justify-between gap-3">
-						<router-link :to="`/study/preps/${group.institutionId}?type=test`" class="w-full">
-							<ion-button class="btn-primary w-full">Test</ion-button>
-						</router-link>
-						<router-link :to="`/study/preps/${group.institutionId}?type=study`" class="w-full">
-							<ion-button class="btn-outline text-primary  w-full">
-								Solutions
-							</ion-button>
-						</router-link>
-					</div>
-				</div>
+				<InstitutionTestPrepsListCard v-for="group in testPreps" :key="group.institutionId"
+					:institutionId="group.institutionId" :testPreps="group.preps" />
 			</div>
 		</template>
 	</div>
@@ -46,13 +31,13 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
-import { useTestPrepList } from '@app/composable/study/testPreps'
+import { groupedByInstitution, useTestPrepList } from '@app/composable/study/testPreps'
 import { IonBadge } from '@ionic/vue'
-import Institution from '@app/components/study/institutions/Institution.vue'
+import InstitutionTestPrepsListCard from '@app/components/study/testPreps/InstitutionTestPrepsListCard.vue'
 
 export default defineComponent({
 	name: 'TestPrepList',
-	components: { IonBadge, Institution },
+	components: { InstitutionTestPrepsListCard, IonBadge },
 	props: {
 		suggested: {
 			required: false,
@@ -60,9 +45,9 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const { groupedByInstitution, listener, loading, error } = useTestPrepList()
+		const { testPreps: preps, listener, loading, error } = useTestPrepList()
 		const testPreps = computed({
-			get: () => groupedByInstitution.value.slice(0, 6),
+			get: () => groupedByInstitution(preps.value).value.slice(0, 6),
 			set: () => {
 			}
 		})
