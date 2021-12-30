@@ -14,7 +14,6 @@
 							<RightSidebar />
 						</div>
 					</div>
-
 				</IonContent>
 			</div>
 		</div>

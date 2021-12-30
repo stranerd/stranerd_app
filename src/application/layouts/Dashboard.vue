@@ -5,7 +5,7 @@
 			<Sidebar />
 			<div class="layout">
 				<IonContent>
-					<div class="layout-page ">
+					<div class="layout-page">
 						<div class="layout-body">
 							<slot />
 						</div>
