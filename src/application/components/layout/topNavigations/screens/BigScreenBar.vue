@@ -13,7 +13,7 @@
 				<div class="w-[25%] flex-auto flex">
 					<div class="flex flex-row items-center py-1 gap-8 justify-between">
 						<ion-icon :icon="addCircle" class="text-2xl text-main_dark"
-							@click="openCreateDashboardMenu()" />
+							@click="openCreateDashboardMenu" />
 						<router-link class=" flex flex-row items-center justify-center"
 							to="/notifications">
 							<ion-icon :icon="notifications" class="text-2xl text-main_dark"></ion-icon>

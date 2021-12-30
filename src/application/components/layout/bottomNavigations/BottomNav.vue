@@ -1,54 +1,26 @@
 <template>
 	<IonFooter :class="[$route.name == 'TakeTest' ? 'hidden':'', `ion-no-border`]">
-		<!-- smaller screens -->
-		<IonToolbar class="md:hidden !bg-white">
+		<IonToolbar class="lg:hidden !bg-white">
 			<div class="flex justify-around items-center">
-				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
+				<router-link class="col-span-1 text-faded_gray flex items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/dashboard">
-					<ion-icon :icon="home" class="w-6" />
+					<ion-icon :icon="home" class="w-6 md:w-14" />
 				</router-link>
-				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
+				<router-link class="col-span-1 text-faded_gray flex items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/questions">
-					<ion-icon :icon="helpCircle" class="w-6" />
+					<ion-icon :icon="helpCircle" class="w-6 md:w-14" />
 				</router-link>
-				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
+				<router-link class="col-span-1 text-faded_gray flex items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/study">
-					<ion-icon :icon="book" class="w-6" />
+					<ion-icon :icon="book" class="w-6 md:w-14" />
 				</router-link>
-				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
+				<router-link class="col-span-1 text-faded_gray flex items-center justify-center"
 					exact-active-class="!text-main_dark"
-					to="/notifications">
-					<ion-icon :icon="notifications" class="w-6" />
-				</router-link>
-			</div>
-		</IonToolbar>
-
-
-		<IonToolbar class="hidden lg:hidden md:flex bg-white">
-			<div class="flex justify-around items-center">
-				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
-					exact-active-class="!text-main_dark"
-					to="/dashboard">
-					<ion-icon :icon="home" class="w-14" />
-				</router-link>
-
-				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
-					exact-active-class="!text-main_dark"
-					to="/questions">
-					<ion-icon :icon="helpCircle" class="w-14" />
-				</router-link>
-				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
-					exact-active-class="!text-main_dark"
-					to="/study">
-					<ion-icon :icon="book" class="w-14" />
-				</router-link>
-				<router-link class="col-span-1 text-faded_gray flex flex-row items-center justify-center"
-					exact-active-class="!text-main_dark"
-					to="/notifications">
-					<ion-icon :icon="notifications" class="w-14" />
+					to="/search">
+					<ion-icon :icon="search" class="w-6 md:w-14" />
 				</router-link>
 			</div>
 		</IonToolbar>
@@ -58,18 +30,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonFooter, IonIcon, IonToolbar } from '@ionic/vue'
-import { add, book, calendarClear, chatbubble, helpCircle, home, notifications, people } from 'ionicons/icons'
-import { useRoute } from 'vue-router'
+import { add, book, calendarClear, chatbubble, helpCircle, home, people, search } from 'ionicons/icons'
 
 export default defineComponent({
 	components: { IonFooter, IonIcon, IonToolbar },
 	setup () {
-
-		const routeName = useRoute().name
-
 		return {
-			routeName, home, book, helpCircle,
-			people, notifications, chatbubble, add,
+			home, book, helpCircle,
+			people, search, chatbubble, add,
 			calendarClear
 		}
 	}

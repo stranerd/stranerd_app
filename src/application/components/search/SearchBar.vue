@@ -1,5 +1,5 @@
 <template>
-	<form>
+	<form @click="navigateToSearch">
 		<ion-searchbar v-model.trim="searchTerm"
 			class="w-full p-0"
 			placeholder="Search for anything..."
@@ -18,8 +18,8 @@ export default defineComponent({
 	name: 'SearchBar',
 	components: { IonSearchbar },
 	setup () {
-		const { searchTerm } = useSearch()
-		return { searchTerm }
+		const { searchTerm, navigateToSearch } = useSearch()
+		return { searchTerm, navigateToSearch }
 	}
 })
 </script>
