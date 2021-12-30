@@ -1,5 +1,5 @@
 <template>
-	<IonFooter :class="[$route.name == 'TakeTest' ? 'hidden':'', `ion-no-border`]">
+	<IonFooter class="ion-no-border">
 		<IonToolbar class="lg:hidden !bg-white">
 			<div class="flex justify-around items-center">
 				<router-link class="col-span-1 text-faded_gray flex items-center justify-center"

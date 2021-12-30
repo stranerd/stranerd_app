@@ -7,7 +7,7 @@
 			</div>
 			<Fab v-if="!hideFab" />
 		</IonContent>
-		<BottomNav class="mt-auto" />
+		<BottomNav v-if="!hideBottom" class="mt-auto" />
 	</IonPage>
 </template>
 
@@ -22,6 +22,10 @@ export default defineComponent({
 	name: 'JustifiedLayout',
 	props: {
 		hideFab: {
+			required: false,
+			default: false
+		},
+		hideBottom: {
 			required: false,
 			default: false
 		}

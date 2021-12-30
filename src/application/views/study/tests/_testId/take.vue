@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<Justified :hideBottom="true" :hideFab="true">
 		<!-- TODO: Break into sections -->
 		<div class=" blueTop">
 			<div class="flex items-center">
