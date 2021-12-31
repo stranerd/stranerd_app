@@ -194,10 +194,9 @@ ion-popover {
 	}
 }
 
-.searchbar-input sc-ion-searchbar-md{
+.searchbar-input sc-ion-searchbar-md {
 
 }
-
 
 
 .btn-secondary {
@@ -375,20 +374,41 @@ ion-badge {
 	--padding-top: 4px !important;
 }
 
-	.swiper-pagination{
-		top: 50% !important;
-	}
+.swiper-pagination {
+	top: 50% !important;
+}
 
-		.swiper-pagination-bullet {
-		width: 10px;
-		height: 10px;
-		color: #C7D6E3 !important;
-		opacity: 1;
-		background: #C7D6E3 !important;
-	}
+.swiper-pagination-bullet {
+	width: 10px;
+	height: 10px;
+	color: #C7D6E3 !important;
+	opacity: 1;
+	background: #C7D6E3 !important;
+}
 
-	.swiper-pagination-bullet-active {
-		color: #fff !important;
-		background: #fff !important;
-		border: 2px solid #fff !important;
-	}
+.swiper-pagination-bullet-active {
+	color: #fff !important;
+	background: #fff !important;
+	border: 2px solid #fff !important;
+}
+
+ion-segment {
+	--background: #F7F7FC;
+	color: #64778A;
+	font-weight: bold;
+}
+
+ion-segment-button {
+	--background-checked: #4D5C6F;
+	--background-focused: #4D5C6F;
+	--indicator-color: #4D5C6F;
+	--indicator-box-shadow: none;
+	--padding-top: 0.8rem;
+	--padding-bottom: 0.8rem;
+	color: #8B9EB1;
+	font-weight: bold;
+}
+
+.segment-button-checked {
+	color: white !important
+}

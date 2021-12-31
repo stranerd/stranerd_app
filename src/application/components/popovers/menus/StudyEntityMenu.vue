@@ -75,7 +75,7 @@ export default defineComponent({
 		const showDelete = computed(() => {
 			if (type.value === 'testPreps') return isAdmin.value
 			// @ts-ignore
-			return entity.value?.userId
+			return entity.value?.userId === id.value
 		})
 		const { loading: deleteLoading, error: deleteError, deleteEntity } = useDeleteStudyEntity()
 

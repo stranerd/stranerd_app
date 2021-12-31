@@ -3,15 +3,15 @@
 		<ion-text class="text-4xl text-main_dark font-bold my-8 mb-16">{{ test.scoreText }}</ion-text>
 
 		<DonutChart :bgColor="test.passed ? '#00D24622' : '#FF666622'" :fgColor="test.passed ? '#00D246' : '#FF6666'"
-			class="md:!block !hidden"
-			:score="test.score" :size="320"
-			:thickness="12" :total="100">
+			:score="test.score"
+			:size="320" :thickness="12"
+			:total="100" class="md:!block !hidden">
 			{{ formatNumber(test.score, 1) }}%
 		</DonutChart>
 		<DonutChart :bgColor="test.passed ? '#00D24622' : '#FF666622'" :fgColor="test.passed ? '#00D246' : '#FF6666'"
-			class="!block md:!hidden"
-			:score="test.score" :size="200"
-			:thickness="12" :total="100">
+			:score="test.score"
+			:size="200" :thickness="12"
+			:total="100" class="!block md:!hidden">
 			{{ formatNumber(test.score, 1) }}%
 		</DonutChart>
 
@@ -61,76 +61,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	.btn-lgx {
-		@media (min-width: 1042px) {
-			--padding-top: 1.5rem;
-			--padding-bottom: 1.5rem;
-			--padding-start: 4.5rem;
-			--padding-end: 4.5rem;
-		}
-
-	}
-
-	.footer-shadow {
-		box-shadow: 0px -5px 5px rgba(139, 158, 177, 0.05);
-	}
-
-	input[type="radio"]:checked + label {
-		@apply border-primary
-	}
-
-	.segment-button-checked {
-		color: white !important
-	}
-
-	ion-select {
-		--background: #F7F7FC;
-		background: #F7F7FC;
-		--padding-start: 1rem;
-		--padding-end: 1rem;
-		--padding-top: 0.8rem;
-		--padding-bottom: 0.8rem;
-	}
-
-	ion-segment {
-		--background: #F7F7FC;
-		color: #8B9EB1;
-		font-weight: bold;
-	}
-
-	ion-segment-button {
-		--background-checked: #4D5C6F;
-		--background-focused: #4D5C6F;
-		--indicator-color: #4D5C6F;
-		--indicator-box-shadow: none;
-		--padding-top: 0.8rem;
-		--padding-bottom: 0.8rem;
-		color: #8B9EB1;
-		font-weight: bold;
-	}
-
-	.custom-shadow {
-		box-shadow: 0px 0px 50px rgba(77, 92, 111, 0.1);
-		border-radius: 24px;
-		@media (max-width: 770px) {
-			box-shadow: none;
-			border-radius: 0;
-		}
-	}
-
-	.ion-iten-transparent {
-		--background: transparent;
-	}
-
-	ion-searchbar {
-		--box-shadow: 'none';
-		--border-radius: 0.5rem;
-	}
-
-	.searchbar-input.sc-ion-searchbar-md {
-		padding-top: 12px;
-		padding-bottom: 12px;
-	}
-</style>

@@ -51,27 +51,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style scoped>
-	.segment-button-checked {
-		color: white !important
-	}
-
-	ion-segment {
-		--background: #F2F3F5;
-		color: #64778A;
-		font-weight: bold;
-	}
-
-	ion-segment-button {
-		--background-checked: #64778A !important;
-		--background-focused: #64778A !important;
-		--indicator-color: #64778A !important;
-		--indicator-box-shadow: none !important;
-		--padding-top: 0.5rem !important;
-		--padding-bottom: 0.5rem !important;
-		color: #64778A !important;
-		font-weight: bold !important;
-		margin: 0 !important;
-	}
-</style>

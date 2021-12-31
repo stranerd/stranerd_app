@@ -12,7 +12,7 @@
 
 			<router-link class="text-primary text-body flex items-center font-bold"
 				to="/search/flashCards">
-				<span>view all</span>
+				<span>explore</span>
 			</router-link>
 		</div>
 

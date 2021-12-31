@@ -146,36 +146,6 @@ export default defineComponent({
 		@apply border-primary
 	}
 
-	.segment-button-checked {
-		color: white !important
-	}
-
-	ion-select {
-		--background: #F7F7FC;
-		background: #F7F7FC;
-		--padding-start: 1rem;
-		--padding-end: 1rem;
-		--padding-top: 0.8rem;
-		--padding-bottom: 0.8rem;
-	}
-
-	ion-segment {
-		--background: #F7F7FC;
-		color: #8B9EB1;
-		font-weight: bold;
-	}
-
-	ion-segment-button {
-		--background-checked: #4D5C6F;
-		--background-focused: #4D5C6F;
-		--indicator-color: #4D5C6F;
-		--indicator-box-shadow: none;
-		--padding-top: 0.8rem;
-		--padding-bottom: 0.8rem;
-		color: #8B9EB1;
-		font-weight: bold;
-	}
-
 	.custom-shadow {
 		box-shadow: 0px 0px 50px rgba(77, 92, 111, 0.1);
 		border-radius: 24px;

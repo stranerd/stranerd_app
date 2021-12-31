@@ -1,5 +1,5 @@
 <template>
-	<div class="flex justify-center flex-col lg:w-8/12 w-full mx-auto mt-8 mb-16 p-8 bg-white">
+	<div class="flex justify-center flex-col lg:w-8/12 w-full mx-auto bg-white md:my-16 p-8 md:p-16">
 		<ion-segment v-model="tab" class="md:w-96 mb-12 mx-auto" mode="ios">
 			<ion-segment-button value="list">
 				<ion-label>All questions</ion-label>
@@ -130,10 +130,6 @@ export default defineComponent({
 		@apply border-primary
 	}
 
-	.segment-button-checked {
-		color: white !important
-	}
-
 	ion-select {
 		--background: #F7F7FC;
 		background: #F7F7FC;
@@ -141,23 +137,6 @@ export default defineComponent({
 		--padding-end: 1rem;
 		--padding-top: 0.8rem;
 		--padding-bottom: 0.8rem;
-	}
-
-	ion-segment {
-		--background: #F7F7FC;
-		color: #8B9EB1;
-		font-weight: bold;
-	}
-
-	ion-segment-button {
-		--background-checked: #4D5C6F;
-		--background-focused: #4D5C6F;
-		--indicator-color: #4D5C6F;
-		--indicator-box-shadow: none;
-		--padding-top: 0.8rem;
-		--padding-bottom: 0.8rem;
-		color: #8B9EB1;
-		font-weight: bold;
 	}
 
 	.custom-shadow {

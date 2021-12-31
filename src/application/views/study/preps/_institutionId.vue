@@ -109,10 +109,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	.segment-button-checked {
-		color: white !important
-	}
-
 	ion-select {
 		--background: #F7F7FC;
 		background: #F7F7FC;
@@ -120,23 +116,6 @@ export default defineComponent({
 		--padding-end: 1rem;
 		--padding-top: 0.8rem;
 		--padding-bottom: 0.8rem;
-	}
-
-	ion-segment {
-		--background: #F7F7FC;
-		color: #8B9EB1;
-		font-weight: bold;
-	}
-
-	ion-segment-button {
-		--background-checked: #8B9EB1;
-		--background-focused: #8B9EB1;
-		--indicator-color: #8B9EB1;
-		--indicator-box-shadow: none;
-		--padding-top: 0.8rem;
-		--padding-bottom: 0.8rem;
-		color: #8B9EB1;
-		font-weight: bold;
 	}
 
 	.custom-shadow {

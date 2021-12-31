@@ -9,6 +9,11 @@
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex items-center justify-center"
 					exact-active-class="!text-main_dark"
+					to="/search">
+					<ion-icon :icon="search" class="w-6 md:w-14" />
+				</router-link>
+				<router-link class="col-span-1 text-faded_gray flex items-center justify-center"
+					exact-active-class="!text-main_dark"
 					to="/questions">
 					<ion-icon :icon="helpCircle" class="w-6 md:w-14" />
 				</router-link>
@@ -16,11 +21,6 @@
 					exact-active-class="!text-main_dark"
 					to="/study">
 					<ion-icon :icon="book" class="w-6 md:w-14" />
-				</router-link>
-				<router-link class="col-span-1 text-faded_gray flex items-center justify-center"
-					exact-active-class="!text-main_dark"
-					to="/search">
-					<ion-icon :icon="search" class="w-6 md:w-14" />
 				</router-link>
 			</div>
 		</IonToolbar>

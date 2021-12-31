@@ -11,7 +11,7 @@
 			</div>
 
 			<router-link class="text-primary text-body flex items-center font-bold" to="/questions">
-				<span>view all</span>
+				<span>explore</span>
 			</router-link>
 		</div>
 
@@ -21,7 +21,7 @@
 			route="/questions"
 		/>
 		<div v-else class="showcase">
-			<QuestionListCard v-for="question in questions" :key="question.hash" :question="question"  />
+			<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
 		</div>
 	</div>
 </template>
