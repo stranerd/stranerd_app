@@ -52,8 +52,7 @@
 			<div class="p-4 md:w-8/12 w-full mx-auto">
 				<slot :answers="answers" :flashCards="flashCards" :notes="notes" :questions="questions"
 					:searchTerm="searchTerm"
-					:sets="sets" :testPreps="testPreps" :users="users" :videos="videos" />
-				<!-- <PageLoading v-if="loading" /> -->
+					:sets="sets" :testPreps="testPreps" :users="users" :videos="videos"  />
 			</div>
 		</div>
 	</Justified>
@@ -73,7 +72,7 @@ export default defineComponent({
 		return { ...result }
 	}
 })
-</script>
+</script> 
 
 <style lang="scss" scoped>
 	ion-searchbar {

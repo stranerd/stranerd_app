@@ -1,12 +1,13 @@
 <template>
-	<div>
+	<IonSkeletonText v-if="loading" class="h-36 rounded-xl " animated/>
+	<div v-else>
 		<template v-if="filtered.length === 0">
 			<EmptyState info="No notes available." />
 		</template>
 		<template v-else>
 			<div class="showcase">
 				<NoteListCard v-for="note in filtered" :key="note.hash" :note="note"
-					:openMenu="(event) => openMenu(note, event)" />
+					:openMenu="(event:any) => openMenu(note, event)" />
 			</div>
 		</template>
 	</div>
@@ -17,10 +18,12 @@ import { computed, defineComponent, PropType } from 'vue'
 import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 import { NoteEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
+import { IonSkeletonText } from '@ionic/vue'
+import { useSearch } from '@app/composable/meta/search'
 
 export default defineComponent({
 	name: 'SearchNotesList',
-	components: { NoteListCard },
+	components: { NoteListCard, IonSkeletonText },
 	props: {
 		notes: {
 			type: Array as PropType<NoteEntity[]>,
@@ -33,9 +36,10 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
+		const {loading}=	useSearch()
 		const openMenu = (entity: NoteEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => props.notes.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, openMenu }
+		return { filtered, openMenu, loading }
 	}
 })
 </script>
