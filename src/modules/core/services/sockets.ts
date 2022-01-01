@@ -10,7 +10,7 @@ const getSocketBaseAndPath = () => {
 	const http = splitOnDoubleSlash[0]
 	const minusHttp = splitOnDoubleSlash[1]
 	const minusDomain = [null, ...minusHttp.split('/').slice(1), null].join('/')
-	const path = minusDomain + '/socket.io'
+	const path = minusDomain + 'socket.io'
 	const domain = [http, minusHttp.split('/')[0]].join('//')
 	return { path, domain }
 }
@@ -28,6 +28,7 @@ export async function listenOnSocket<Model> (channel: string, listeners: Listene
 	// @ts-ignore
 	if (!socket || (!socket.auth.token && accessToken)) {
 		socket = io(getSocketBaseAndPath().domain, {
+			transports: ['polling', 'websocket'],
 			path: getSocketBaseAndPath().path,
 			auth: {
 				token: accessToken,
