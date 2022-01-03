@@ -23,7 +23,7 @@ export default defineComponent({
 	name: 'SearchUsersList',
 	components: { UserListCard, IonSkeletonText },
 	props: {
-		users: {
+		users: { 
 			type: Array as PropType<UserEntity[]>,
 			required: true
 		},

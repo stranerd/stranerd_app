@@ -150,7 +150,7 @@ ion-popover {
 	--width: 800px;
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
-		--height: 100vh;
+		--min-height: 300px;
 		--width: 100vw;
 		--border-radius: 0rem;
 	}
@@ -162,7 +162,7 @@ ion-popover {
 	--width: 400px;
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
-		--height: 100vh;
+		--min-height: 300px;
 		--border-radius: 0rem;
 	}
 }
@@ -194,9 +194,15 @@ ion-popover {
 	}
 }
 
-.searchbar-input sc-ion-searchbar-md {
-
+ion-input{
+	--padding-start: 1rem !important;
+	--padding-end: 1rem !important;
 }
+ion-textarea{
+	--padding-start: 1rem !important;
+	--padding-end: 1rem !important;
+}
+
 
 
 .btn-secondary {
