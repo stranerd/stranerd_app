@@ -1,10 +1,7 @@
 <template>
 	<form @submit.prevent="submit">
-		<div class="lg:mt-3 border border-faded_gray rounded-xl px-1">
-			<IonTextarea v-model="factory.body" class="bg-white border-0 focus:outline-none w-full p-2"
-				placeholder="Write your question here and make sure it is explained in full detail."
-				rows="7" />
-		</div>
+		<QuestionEditor v-model:model="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
+			class="lg:mt-3 px-1" />
 
 		<div class="flex items-center mt-5 gap-5 flex-col lg:flex-row">
 			<div class="flex items-center gap-5 w-full">
@@ -62,17 +59,18 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { IonIcon, IonInput, IonTextarea } from '@ionic/vue'
+import { IonIcon, IonInput } from '@ionic/vue'
 import { close, image } from 'ionicons/icons'
 import { useMultipleFileInputs, useTags } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import { useQuestionModal } from '@app/composable/core/modals'
+import QuestionEditor from '@app/components/core/editors/QuestionEditor.vue'
 
 export default defineComponent({
 	name: 'QuestionForm',
 	components: {
-		IonTextarea,
+		QuestionEditor,
 		IonIcon,
 		IonInput,
 		SelectSubject
