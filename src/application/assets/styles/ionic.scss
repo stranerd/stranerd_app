@@ -126,7 +126,7 @@ ion-popover {
 	--width: 800px;
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
-		--height: 100vh !important;
+	--min-height: 300px;
 		--width: 100vw;
 		--border-radius: 0rem;
 	}
@@ -138,7 +138,7 @@ ion-popover {
 	--width: 400px;
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
-		--height: 21.875rem !important;
+		--min-height: 300px;
 		--width: 80vw;
 		--border-radius: 0.75rem;
 	}
