@@ -11,11 +11,11 @@
 		</div>
 
 		<div
-			class="bg-white rounded-3xl h-full w-full sm:w-4/12 flex justify-between gap-8 items-center min-w-[20rem] mt-6 sm:mt-0 p-6">
+			class="bg-white rounded-3xl h-full w-full sm:w-4/12 flex justify-between  items-center min-w-[20rem] mt-6 sm:mt-0 p-6">
 			<ion-text class="text-primary font-bold text-xl sm:text-lg">
-				Your nerd score
+				Your nerd score 
 			</ion-text>
-			<DonutChart :score="user.score" :size="96" :total="user.expectedScore" />
+			<DonutChart :score="user.score" :size="96" :total="user.expectedScore" :percentage="percentage" />
 		</div>
 	</div>
 </template>
@@ -24,13 +24,17 @@
 import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import DonutChart from '@app/components/core/DonutChart'
+import { getPecentage } from '@root/utils/commons'
 
 export default defineComponent({
 	name: 'StatusBar',
 	components: { DonutChart },
 	setup () {
 		const { user, isLoggedIn } = useAuth()
-		return { user, isLoggedIn }
+
+		const percentage = getPecentage(user.value.score, user.value.expectedScore)
+
+		return { user, isLoggedIn, percentage}
 	}
 })
 </script>

@@ -2,7 +2,7 @@
 	<Justified>
 		<div>
 			<div class="flex flex-col items-center">
-				<div class="w-full bg-white pt-3 md:bg-primary md:py-6 md:pb-16 px-4">
+				<div class="w-full lg:block hidden pt-3 md:bg-primary md:py-6 md:pb-16 px-4">
 					<div class="md:flex justify-between items-center w-full hidden max-w-4xl mx-auto ">
 						<h1 class="lg:text-2xl text-lg font-bold text-white">
 							Notifications
@@ -15,8 +15,8 @@
 					</div>
 				</div>
 
-				<div class="px-4 w-full">
-					<div class="w-full max-w-4xl mx-auto bg-white p-6 rounded-xl -mt-10">
+				<div class="px-4 w-full ">
+					<div class="w-full max-w-4xl mx-auto bg-white p-6 rounded-xl lg:-mt-10 mt-6">
 						<EmptyState
 							v-if="!notifications.length"
 							btnText="Go To Home"

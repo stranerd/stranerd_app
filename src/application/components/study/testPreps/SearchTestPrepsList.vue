@@ -1,5 +1,6 @@
 <template>
-	<div>
+	<IonSkeletonText v-if="loading" class="h-36 rounded-xl " animated/>
+	<div v-else>
 		<template v-if="filtered.length === 0">
 			<EmptyState info="No testPreps available." />
 		</template>
@@ -18,10 +19,12 @@ import { TestPrepEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
 import { groupedByInstitution } from '@app/composable/study/testPreps'
 import InstitutionTestPrepsListCard from '@app/components/study/testPreps/InstitutionTestPrepsListCard.vue'
+import { IonSkeletonText } from '@ionic/vue'
+import { useSearch } from '@app/composable/meta/search'
 
 export default defineComponent({
 	name: 'SearchTestPrepsList',
-	components: { InstitutionTestPrepsListCard },
+	components: { InstitutionTestPrepsListCard, IonSkeletonText },
 	props: {
 		testPreps: {
 			type: Array as PropType<TestPrepEntity[]>,
@@ -31,12 +34,14 @@ export default defineComponent({
 			type: Boolean,
 			default: false,
 			required: false
-		}
+		},
+
 	},
 	setup (props) {
+		const {loading}=	useSearch()
 		const openMenu = (entity: TestPrepEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => groupedByInstitution(props.testPreps).value.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, openMenu }
+		return { filtered, openMenu, loading }
 	}
 })
 </script>

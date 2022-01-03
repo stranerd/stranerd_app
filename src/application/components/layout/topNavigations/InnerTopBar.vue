@@ -53,14 +53,9 @@ export default defineComponent({
 	setup () {
 		const { isLoggedIn, user } = useAuth()
 		const openUserDashboardMenu = useMenuPopover().openUserDashboardMenu
-		const route = useRoute()
-		const showSearch = ref(route.path.startsWith('/search'))
-		const toggleSearch = async () => {
-			showSearch.value = !showSearch.value
-		}
+
 		return {
 			isLoggedIn, user, openUserDashboardMenu,
-			showSearch, toggleSearch,
 			close, chevronBack, ellipsisVertical, search, notifications
 		}
 	}
