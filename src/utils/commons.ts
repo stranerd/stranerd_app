@@ -69,3 +69,9 @@ export const share = async ({ title, text, url }: { title: string, text: string,
 		})
 	})
 }
+
+export const getPecentage = (num: number, den: number) => {
+	if (den === 0) return 0
+	return Math.round(num / den * 100)
+}
+	
