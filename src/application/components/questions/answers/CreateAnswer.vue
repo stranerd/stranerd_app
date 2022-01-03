@@ -13,9 +13,7 @@
 
 		<div class="lg:mt-9 mt-5 border border-faded_gray rounded-lg py-5 flex-col px-3">
 			<span class="text-main_dark font-bold">Explanation - </span>
-			<ion-textarea v-model="factory.body" class="bg-white border-0 focus:outline-none  w-full"
-				placeholder="Write out the detailed explanation of the answer you gave a8bove. (Optional)"
-				rows="9"></ion-textarea>
+			<AnswerEditor v-model:model="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')" />
 		</div>
 
 		<div
@@ -57,14 +55,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
-import { IonIcon, IonInput, IonTextarea } from '@ionic/vue'
-
+import { IonIcon, IonInput } from '@ionic/vue'
 import { close, image } from 'ionicons/icons'
 import { showAddAnswer, useCreateAnswer } from '@app/composable/questions/answers'
 import { useRoute } from 'vue-router'
 import { QuestionEntity } from '@modules/questions'
 import { useMultipleFileInputs } from '@app/composable/core/forms'
+import AnswerEditor from '@app/components/core/editors/AnswerEditor.vue'
 
 export default defineComponent({
 	props: {
@@ -96,7 +93,7 @@ export default defineComponent({
 	components: {
 		IonIcon,
 		IonInput,
-		IonTextarea
+		AnswerEditor
 	}
 })
 </script>

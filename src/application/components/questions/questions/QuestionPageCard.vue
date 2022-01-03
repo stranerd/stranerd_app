@@ -27,44 +27,36 @@
 			</div>
 
 
-			<div class="w-full flex flex-wrap items-center lg:justify-between ">
-
-
+			<div class="w-full flex flex-wrap items-center lg:justify-between">
 				<div class="lg:hidden flex items-center">
 					<avatar :id="question.userId" :size="20" :src="question.avatar" />
 					<span class="font-bold text-main_dark text-xs ml-2">{{ question.userBio.fullName }}</span>
 				</div>
 
 
-				<div v-if="!showEditButton" class=" flex flex-row items-center ml-auto">
+				<div class=" flex flex-row items-center ml-auto">
 					<span class="font-bold text-gray lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 					<div :class="`flex flex-row-reverse items-center`">
-						<span class="font-bold text-gray ">{{
-							question.answers.length
-						}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
+						<span class="font-bold text-gray ">
+							{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
+						</span>
 						<span class="h-[5px] w-[5px] rounded-full bg-main_dark mx-3" />
 					</div>
 				</div>
 
-				<div v-else class="flex gap-2 ml-auto">
-					<!-- <button v-if="showEditButton"
-						class="mt-2 rounded-lg py-3 px-4 bg-butter_yellow flex items-center gap-1"
-						@click="openEditModal"> -->
-					<ion-text class="font-bold text-primary lg:text-base cursor-pointer" @click="openEditModal">Edit
+				<div class="flex gap-2 ml-auto">
+					<ion-text v-if="showEditButton" class="font-bold text-primary lg:text-base cursor-pointer"
+						@click="openEditModal">Edit
 					</ion-text>
-					<!-- </button> -->
-					<!-- <button v-if="showDeleteButton"
-						class="mt-2 rounded-lg py-3 px-4 bg-delete_red flex items-center gap-1"
-						@click="deleteQuestion"> -->
-					<ion-text class="font-bold text-red lg:text-base cursor-pointer" @click="deleteQuestion">Delete
+					<ion-text v-if="showDeleteButton" class="font-bold text-red lg:text-base cursor-pointer"
+						@click="deleteQuestion">Delete
 					</ion-text>
-					<!-- </button> -->
 				</div>
 			</div>
 		</div>
 		<PhotoList v-if="question.attachments" :photos="question.attachments" class="py-3" />
 
-		<ion-button v-else-if="showAnswerButton"
+		<ion-button v-if="showAnswerButton"
 			class="btn-primary w-full"
 			@click="openAnswerModal(question)">
 			<span class="mr-2">Add your answer</span>
@@ -73,7 +65,6 @@
 
 	<span v-if="question.isAnswered" />
 	<CreateAnswer v-else-if="showAddAnswer" :question="question" class="mt-8" />
-
 </template>
 
 <script lang="ts">
@@ -92,7 +83,7 @@ import { openQuestionEditModal, useDeleteQuestion } from '@app/composable/questi
 import { formatTime } from '@utils/dates'
 import { useRouter } from 'vue-router'
 import { useReportModal } from '@app/composable/core/modals'
-import Tag from '../tags/Tag.vue'
+import Tag from '@app/components/questions/tags/Tag.vue'
 
 export default defineComponent({
 	name: 'QuestionPageCard',
