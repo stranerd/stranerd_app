@@ -69,7 +69,11 @@ export const usePopover = (stack: Ref<string[]>) => {
 			popovers[id].popover = await popoverController
 				.create({
 					component: popovers[id].component,
-					cssClass, event
+					cssClass, event,
+					backdropDismiss:true,
+					dismissOnSelect:true,
+					mode:'md',
+					showBackdrop:true,
 				})
 			popovers[id].popover?.present?.()
 		}
