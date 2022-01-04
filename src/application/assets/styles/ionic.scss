@@ -126,7 +126,7 @@ ion-popover {
 	--width: 800px;
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
-	--min-height: 300px;
+		--min-height: 300px;
 		--width: 100vw;
 		--border-radius: 0rem;
 	}
@@ -179,9 +179,9 @@ ion-popover {
 	padding-bottom: 1.05rem !important;
 	font-size: 1rem;
 
-		@media (max-width: 640px) {
-			padding-top: 0.7rem !important;
-	padding-bottom: 0.7rem !important;
+	@media (max-width: 640px) {
+		padding-top: 0.7rem !important;
+		padding-bottom: 0.7rem !important;
 	}
 }
 
@@ -194,15 +194,15 @@ ion-popover {
 	}
 }
 
-ion-input{
-	--padding-start: 1rem !important;
-	--padding-end: 1rem !important;
-}
-ion-textarea{
+ion-input {
 	--padding-start: 1rem !important;
 	--padding-end: 1rem !important;
 }
 
+ion-textarea {
+	--padding-start: 1rem !important;
+	--padding-end: 1rem !important;
+}
 
 
 .btn-secondary {
@@ -378,24 +378,6 @@ ion-badge {
 	--background: #FFDC00 !important;
 	--color: #132740 !important;
 	--padding-top: 4px !important;
-}
-
-.swiper-pagination {
-	top: 50% !important;
-}
-
-.swiper-pagination-bullet {
-	width: 10px;
-	height: 10px;
-	color: #C7D6E3 !important;
-	opacity: 1;
-	background: #C7D6E3 !important;
-}
-
-.swiper-pagination-bullet-active {
-	color: #fff !important;
-	background: #fff !important;
-	border: 2px solid #fff !important;
 }
 
 ion-segment {
