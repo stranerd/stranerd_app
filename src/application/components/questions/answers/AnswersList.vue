@@ -7,22 +7,25 @@
 			<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question" />
 		</template>
 
-		<EmptyState v-else
-			:funcParams="question"
+		<EmptyState v-else-if="showAnswerButton"
 			:info="`No answers yet. <br/>Help ${question.userName} answer this question!`"
-			:onClick="openAnswerModal"
-			btnText="Answer it"
 			class="mt-4 text-xs lg:text-base"
+		/>
+
+		<EmptyState v-else
+			class="mt-4 text-xs lg:text-base"
+			info="No answers yet"
 		/>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
 import { openAnswerModal, useAnswerList } from '@app/composable/questions/answers'
 import { QuestionEntity } from '@modules/questions'
 import AnswersListCard from '@app/components/questions/answers/AnswersListCard.vue'
 import EmptyState from '../../core/EmptyState.vue'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'AnswersList',
@@ -34,13 +37,20 @@ export default defineComponent({
 	},
 	components: { AnswersListCard, EmptyState },
 	setup (props) {
+		const { id } = useAuth()
 		const { answers, listener, error, loading } = useAnswerList(props.question.id)
+
+		const showAnswerButton = computed({
+			get: () => props.question.userId !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
+			set: () => {
+			}
+		})
 
 		onMounted(listener.startListener)
 		onBeforeUnmount(listener.closeListener)
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),
-			answers, error, loading
+			answers, error, loading, showAnswerButton
 		}
 	}
 })

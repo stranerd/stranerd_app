@@ -3,7 +3,7 @@
 		:class="`py-4 px-6 rounded-xl bg-white flex flex-col justify-between w-full text-xs md:text-sm relative cursor-pointer `"
 		:to="`/questions/${question.id}`">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-		<div class="flex flex-row items-center justify-between">
+		<div class="flex flex-row items-center">
 			<div class="flex items-center">
 				<avatar :id="question.userId" :size="28" :src="question.avatar" class="mr-2 " />
 				<span class="font-bold text-main_dark hidden lg:block">{{ question.userBio.fullName }}</span>
@@ -11,8 +11,8 @@
 				<Subject :key="question.subjectId" :subjectId="question.subjectId" class="font-bold text-main_dark" />
 			</div>
 
-			<ion-button
-				class="btn-outline text-primary btn-outline-sm"
+			<ion-button v-if="showAnswerButton"
+				class="btn-outline text-primary btn-outline-sm ml-auto"
 				mode="md"
 				@click="openAnswerModal(question)">
 				Answer
@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { IonRippleEffect } from '@ionic/vue'
 import { arrowRedo, flag, image } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
@@ -52,6 +52,7 @@ import Avatar from '@app/components/core/Avatar.vue'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { useReportModal } from '@app/composable/core/modals'
 import Tag from '../tags/Tag.vue'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'QuestionListCard',
@@ -67,7 +68,14 @@ export default defineComponent({
 	},
 	components: { IonRippleEffect, Avatar, Subject, Tag },
 	setup (props) {
+		const { id } = useAuth()
+		const showAnswerButton = computed({
+			get: () => props.question.userId !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
+			set: () => {
+			}
+		})
 		return {
+			showAnswerButton,
 			openAnswerModal: () => openAnswerModal(props.question),
 			openReportQuestionModal: () => useReportModal().openReportQuestion(),
 			arrowRedo, flag, image,
