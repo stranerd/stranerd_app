@@ -5,48 +5,39 @@
 			Made for students, loved by students
 		</ion-text>
 		<div class="container mx-auto">
-			<Swiper
-				:dynamic-bullets="true"
-				:dynamic-main-bullets="1"
-				:free-mode="true"
-				:modules="modules"
-				:pagination="{ clickable: true }"
-			>
-				<SwiperSlide v-for="(testimony, i) in testimonies" :key="i">
-					<div
-						class="bg-primary p-5 lg:p-[3.25rem] lg:rounded-[3rem] rounded-3xl text-white max-w-[99rem] lg:h-[21rem] h-[18rem] flex flex-col justify-center">
-						<img alt="" class="object-contain h-9" src="@app/assets/images/New/comment.svg">
-						<ion-text class="text-center font-bold text-xs lg:text-2xl mt-6">
-							{{ testimony.text }}
-						</ion-text>
+			<div
+				class="bg-primary p-5 lg:p-[3.25rem] lg:rounded-[3rem] rounded-3xl text-white max-w-[99rem] lg:h-[21rem] h-[18rem] flex flex-col justify-center">
+				<img alt="" class="object-contain h-9" src="@app/assets/images/New/comment.svg">
+				<ion-text class="text-center font-bold text-xs lg:text-2xl mt-6">
+					{{ testimonies[tab].text }}
+				</ion-text>
 
-						<div class="flex items-center justify-center lg:mt-16 mt-10">
-							<img :src="testimony.img" class="object-cover lg:h-10 lg:w-10 h-5 w-5 rounded-full">
+				<div class="flex items-center justify-center lg:mt-16 mt-10">
+					<img :src="testimonies[tab].img" class="object-cover lg:h-10 lg:w-10 h-5 w-5 rounded-full">
 
-							<ion-text class="text-center font-bold text-xs lg:text-xl ml-4">
-								{{ testimony.author }}
-							</ion-text>
-						</div>
-					</div>
-				</SwiperSlide>
-			</Swiper>
+					<ion-text class="text-center font-bold text-xs lg:text-xl ml-4">
+						{{ testimonies[tab].author }}
+					</ion-text>
+				</div>
+			</div>
+
+			<div class="flex my-4 gap-2 justify-center">
+				<IonIcon v-for="(t, i) in testimonies.length" :key="t" :class="tab === i ? 'text-white' : 'text-gray'"
+					:icon="ellipse"
+					class="border border-gray rounded-full" @click="tab = i" />
+			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
-import { Pagination } from 'swiper'
-import 'swiper/swiper-bundle.min.css'
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+import { ellipse } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'Testimonials',
-	components: {
-		Swiper,
-		SwiperSlide
-	},
 	setup () {
+		const tab = ref(0)
 		const testimonies = [
 			{
 				text: 'I’d say, for someone like me who has difficulty concentrating on stuff, you made navigation very easy. User interface, beautiful and easy to navigate. Cool and simple colors that do not confuse or hurt the eyes. And yay, I got my answer faster than I expected. I loved it.',
@@ -70,25 +61,9 @@ export default defineComponent({
 			}
 		]
 		return {
-			testimonies,
-			modules: [Pagination]
+			testimonies, tab,
+			ellipse
 		}
 	}
 })
 </script>
-
-<style scoped>
-	.swiper-pagination-bullet {
-		width: 12px;
-		height: 12px;
-		color: #C7D6E3 !important;
-		opacity: 1;
-		background: #C7D6E3 !important;
-	}
-
-	.swiper-pagination-bullet-active {
-		color: #132740 !important;
-		background: #132740 !important;
-		border: 2px solid #132740 !important;
-	}
-</style>
