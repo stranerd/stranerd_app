@@ -14,7 +14,9 @@
 		"env:copy:app": "node bin/copy-env-app",
 		"cap:run": "yarn cap run",
 		"cap:sync": "yarn cap sync",
-		"cap:build": "yarn cap build"
+		"build:android:debug": "yarn build && cd android && ./gradlew assembleDebug && ./gradlew installDebug && cd ..",
+		"build:android:release": "yarn build && cd android && ./gradlew assembleRelease && cd .. && yarn android:sign",
+		"android:sign": "jarsigner -keystore ./android/stranerd.keystore ./android/app/build/outputs/apk/release/app-release-unsigned.apk kevin@stranerd.com && zipalign 4 ./android/app/build/outputs/apk/release/app-release-unsigned.apk ./android/app/build/outputs/apk/release/app-release.apk"
 	},
 	"dependencies": {
 		"@capacitor-community/http": "^1.4.1",
