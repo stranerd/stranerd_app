@@ -62,7 +62,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import { useDeleteStudyEntity, useStudyMenuData } from '@app/composable/study/menus'
-import { chevronUp, folder, library, person, removeCircle, share as shareIcon, trash } from 'ionicons/icons'
+import { chevronUp, folder, library, person, removeCircle, shareSocial as shareIcon, trash } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useMySets, useSaveToSet } from '@app/composable/study/sets'
 

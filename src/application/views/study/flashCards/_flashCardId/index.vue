@@ -2,29 +2,28 @@
 	<Justified>
 		<!-- TODO: Break into sections -->
 		<div class="blueTop ">
-			<div class="flex justify-between items-center">
-				<div class="bg-white md:grid place-items-center p-1 rounded-sm mr-4 cursor-pointer hidden "
-					@click="$router.go(-1)">
-					<ion-icon :icon="arrowBackOutline" class="text-[23px] text-primary"></ion-icon>
-				</div>
-				<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
-					{{ flashCard?.title }}
-				</ion-text>
-			</div>
-
-			<!-- <div class="flex items-center md:flex-row flex-col">
-				<div class="flex items-center mr-6">
-					<ShowRatings :rating="5" class="mr-3" />
-					<ion-text class="text-white font-semibold">
-						(14 reviews)
+			<div class="flex justify-between items-center lg:w-8/12 w-full max-w-[60rem]">
+				<div class="flex flex-col lg:items-start w-full items-center justify-center">
+					<ion-text class="heading lg:text-xl font-bold text-white text-center ">
+						{{ flashCard?.title }}
 					</ion-text>
-				</div>
-				<ion-text class="text-faded_gray font-semibold">
-					leave a rating
-				</ion-text>
 
-			</div> -->
+					<div v-if="flashCard" class="flex items-center lg:mt-3 mt-1">
+						<Avatar :id="flashCard.userId" :size="28" :src="flashCard.userBio.photo" color="#C7D6E3" />
+						<ion-text class="text-white ml-2 text-base"> by <b>{{ flashCard.userBio.fullName }}</b></ion-text>
+					</div>
+				</div>
+
+				<ion-icon
+					:icon="ellipsisVertical"
+					class="text-white text-xl cursor-pointer hidden lg:block"
+					@click="openMenu(flashCard, $event)"
+				/>
+			
+			</div>
 		</div>
+
+
 		<div
 			id="screen"
 			:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 ']">
@@ -79,29 +78,7 @@
 			</div>
 		</div>
 
-		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
-			<div class="lg:w-8/12 max-w-[60rem] w-full px-4 lg:p-0 mx-auto flex items-center justify-between">
-				<div v-if="flashCard" class="flex">
-					<Avatar :id="flashCard.userId" :size="28" :src="flashCard.userBio.photo" class="mx-2" />
-					<ion-text class="text-icon_inactive"> by <b>{{ flashCard.userBio.firstName }}</b></ion-text>
-				</div>
-
-				<div class="flex items-center">
-
-					<!-- <ion-icon
-						:icon="pencil"
-						class="text-icon_inactive text-xl cursor-pointer mx-2"
-					/>
-					<ion-icon
-						:icon="bookmark"
-						class="text-icon_inactive text-xl cursor-pointer mx-2"
-					/> -->
-					<Share
-						cssClass="text-icon_inactive text-xl cursor-pointer mx-2"
-					/>
-				</div>
-			</div>
-		</div>
+	
 
 		<PageLoading v-if="loading" />
 	</Justified>
@@ -121,6 +98,7 @@ import {
 	pencil,
 	play,
 	scan,
+	ellipsisVertical,
 	shareSocial
 } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
@@ -128,15 +106,18 @@ import { openFlashCardEditModal, useFlashCard } from '@app/composable/study/flas
 import { useRoute, useRouter } from 'vue-router'
 import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
+import { FlashCardEntity } from '@modules/study'
+import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'View Flashcard',
-	disPlayingName: 'Flashcard Set',
+	displayName: 'Flashcard Set',
 	components: {
 		Justified,
 		Avatar
 	},
 	setup () {
+		const openMenu = (entity: FlashCardEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const { id } = useAuth()
 		const isFullscreen = ref(false)
 		const canExit = ref(false)
@@ -204,13 +185,13 @@ export default defineComponent({
 		}
 
 		return {
-			canExit, flipped, isPlaying, pause,
+			canExit, flipped, isPlaying, pause,openMenu,
 			page, increase, decrease, playCard,
 			isFullscreen, toggle, exit, enter,
-			flashCard, error, loading,
+			flashCard, error, loading,ellipsisVertical,
 			play, add, scan, chevronBack,
 			chevronForward, pencil, contract,
-			bookmark, shareSocial, arrowBackOutline,
+			bookmark, shareSocial,
 			canEdit, editFlashCard
 		}
 	}
