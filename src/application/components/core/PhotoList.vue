@@ -1,7 +1,7 @@
 <template>
-	<div class="overflow-x-auto">
+	<div class="overflow-x-auto flex gap-2 ">
 		<a v-for="photo in photos" :key="photo.link" :href="photo.link" target="_blank">
-			<img :src="photo.link" alt="" class="rounded-lg border-[1px] border-faded_gray bg-light_gray h-24 w-24">
+			<img :src="photo.link" alt="" class="rounded-lg border-[1px] border-faded_gray bg-light_gray h-24 w-24 ">
 		</a>
 	</div>
 </template>
