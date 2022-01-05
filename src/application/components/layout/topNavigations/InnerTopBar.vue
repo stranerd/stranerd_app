@@ -4,7 +4,7 @@
 		<ion-toolbar class="flex md:hidden bg-white px-4 items-center">
 			<div class="flex items-center justify-between">
 				<ion-icon :icon="chevronBack" class="text-[23px] text-main_dark" @click="$router.go(-1)" />
-				<ion-title class="mx-auto text-base font-bold text-main_dark">
+				<ion-title class="text-base font-bold text-main_dark w-auto">
 					{{ $route.meta.displayName ?? '' }}
 				</ion-title>
 				<Avatar v-if="isLoggedIn" :size="24" :src="user?.avatar"
@@ -39,11 +39,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue'
 import { chevronBack, close, ellipsisVertical, notifications, search } from 'ionicons/icons'
 import BigScreenBar from './screens/BigScreenBar.vue'
-import { useRoute } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 import { useMenuPopover } from '@app/composable/core/modals'
 

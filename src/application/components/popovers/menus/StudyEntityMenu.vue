@@ -41,6 +41,10 @@
 				</div>
 			</template>
 		</template>
+		<span v-if="canEdit && type === 'flashCards'" class="my-4 flex gap-4 items-center" @click="editEntity">
+			<ion-icon :icon="pencil" class="text-2xl" />
+			<ion-label class="font-bold">Edit</ion-label>
+		</span>
 		<span v-if="showDelete" class="my-4 flex gap-4 items-center" @click="deleteEntity">
 			<ion-icon :icon="trash" class="text-2xl" />
 			<ion-label class="font-bold">Delete</ion-label>
@@ -62,14 +66,26 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import { useDeleteStudyEntity, useStudyMenuData } from '@app/composable/study/menus'
-import { chevronUp, folder, library, person, removeCircle, shareSocial as shareIcon, trash } from 'ionicons/icons'
+import {
+	chevronUp,
+	folder,
+	library,
+	pencil,
+	person,
+	removeCircle,
+	shareSocial as shareIcon,
+	trash
+} from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useMySets, useSaveToSet } from '@app/composable/study/sets'
+import { openFlashCardEditModal } from '@app/composable/study/flashCards'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'StudyEntityMenu',
 	setup () {
 		const { id, isLoggedIn, isAdmin } = useAuth()
+		const router = useRouter()
 
 		const { entity, type, data, share } = useStudyMenuData()
 		const showDelete = computed(() => {
@@ -84,11 +100,21 @@ export default defineComponent({
 		const showAddToSet = ref(false)
 		const showRemoveFromSet = ref(false)
 
+		const canEdit = computed({
+			get: () => entity.value?.userId === id.value,
+			set: () => {
+			}
+		})
+
+		const editEntity = async () => {
+			if (type.value === 'flashCards') await openFlashCardEditModal(entity.value as any, router)
+		}
+
 		return {
 			entity, type, data,
-			chevronUp, library, folder, shareIcon, person, trash, removeCircle,
+			chevronUp, library, folder, shareIcon, pencil, person, trash, removeCircle,
 			share, id, isLoggedIn, isAdmin,
-			showDelete, deleteLoading, deleteError, deleteEntity,
+			showDelete, deleteLoading, deleteError, deleteEntity, canEdit, editEntity,
 			rootSet, normalSets, setLoading, setError, saveToSet, removeFromSet, showAddToSet, showRemoveFromSet
 		}
 	}

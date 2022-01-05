@@ -1,44 +1,40 @@
 <template>
 	<Justified>
 		<!-- TODO: Break into sections -->
-		<div class="blueTop ">
-			<div class="flex justify-between items-center lg:w-8/12 w-full max-w-[60rem]">
-				<div class="flex flex-col lg:items-start w-full items-center justify-center">
-					<ion-text class="heading lg:text-xl font-bold text-white text-center ">
-						{{ flashCard?.title }}
+		<div v-if="flashCard" class="blueTop">
+			<div class="flex items-center justify-between lg:w-8/12 w-full max-w-[60rem] mx-auto p-4">
+				<div>
+					<ion-text class="heading lg:text-xl font-bold text-white text-center">
+						{{ flashCard.title }}
 					</ion-text>
-
-					<div v-if="flashCard" class="flex items-center lg:mt-3 mt-1">
+					<div class="flex items-center mt-2">
 						<Avatar :id="flashCard.userId" :size="28" :src="flashCard.userBio.photo" color="#C7D6E3" />
-						<ion-text class="text-white ml-2 text-base"> by <b>{{ flashCard.userBio.fullName }}</b></ion-text>
+						<ion-text class="text-white ml-2 text-base"> by <b>{{ flashCard.userBio.fullName }}</b>
+						</ion-text>
 					</div>
 				</div>
-
 				<ion-icon
 					:icon="ellipsisVertical"
-					class="text-white text-xl cursor-pointer hidden lg:block"
-					@click="openMenu(flashCard, $event)"
+					class="text-white text-xl cursor-pointer"
+					@click="openMenu"
 				/>
-			
 			</div>
 		</div>
 
-
-		<div
-			id="screen"
+		<div v-if="flashCard" id="screen"
 			:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 ']">
 
 			<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full']" @click="flipped = !flipped">
 				<!--  front side  -->
 				<section
-					class="front h-96 flex  items-center text-center justify-center  custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
-					<h2>{{ flashCard?.set[page].question }}</h2>
+					class="front h-96 flex items-center text-center justify-center custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
+					<h2>{{ flashCard.set[page].question }}</h2>
 				</section>
 
 				<!--  back side  -->
 				<section
-					class="back h-96 flex  items-center text-center justify-center  custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
-					<h2 v-if="flipped"> {{ flashCard?.set[page].answer }}</h2>
+					class="back h-96 flex items-center text-center justify-center custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
+					<h2 v-if="flipped"> {{ flashCard.set[page].answer }}</h2>
 				</section>
 			</div>
 
@@ -46,67 +42,42 @@
 				<ion-icon
 					:icon="isPlaying ? pause : play"
 					class="text-icon_inactive text-xl cursor-pointer"
-					@click="playCard()"
+					@click="isPlaying ? pauseCard() : playCard()"
 				/>
-				<div class="flex items-center ">
+				<div class="flex items-center">
 					<ion-icon
 						:icon="chevronBack"
 						class="text-icon_inactive text-xl cursor-pointer "
-						@click="decrease()"
+						@click="decrease"
 					/>
 					<ion-text class="mx-4 text-icon_inactive mr-5">
-						<b>{{ page + 1 }}</b> of <b>{{ flashCard?.set.length }}</b>
+						<b>{{ page + 1 }}</b> of <b>{{ flashCard.set.length }}</b>
 					</ion-text>
 					<ion-icon
 						:icon="chevronForward"
 						class="text-icon_inactive text-xl cursor-pointer mr-5"
-						@click="increase()"
+						@click="increase"
 					/>
 				</div>
 				<ion-icon
-					v-if="!isFullscreen"
-					:icon="scan"
+					:icon="isFullscreen ? contract : scan"
 					class="text-icon_inactive text-xl cursor-pointer"
-					@click="toggle()"
-				/>
-				<ion-icon
-					v-else
-					:icon="contract"
-					class="text-icon_inactive text-xl cursor-pointer"
-					@click="toggle()"
+					@click="toggleFullscreen"
 				/>
 			</div>
 		</div>
-
-	
 
 		<PageLoading v-if="loading" />
 	</Justified>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
-import {
-	add,
-	arrowBackOutline,
-	bookmark,
-	chevronBack,
-	chevronForward,
-	contract,
-	pause,
-	pencil,
-	play,
-	scan,
-	ellipsisVertical,
-	shareSocial
-} from 'ionicons/icons'
+import { add, chevronBack, chevronForward, contract, ellipsisVertical, pause, play, scan } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
-import { openFlashCardEditModal, useFlashCard } from '@app/composable/study/flashCards'
-import { useRoute, useRouter } from 'vue-router'
-import { Alert } from '@utils/dialog'
-import { useAuth } from '@app/composable/auth/auth'
-import { FlashCardEntity } from '@modules/study'
+import { useFlashCard } from '@app/composable/study/flashCards'
+import { useRoute } from 'vue-router'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
@@ -117,31 +88,21 @@ export default defineComponent({
 		Avatar
 	},
 	setup () {
-		const openMenu = (entity: FlashCardEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
-		const { id } = useAuth()
 		const isFullscreen = ref(false)
-		const canExit = ref(false)
 		const flipped = ref(false)
-
+		const isPlaying = ref(false)
 		const page = ref(0)
-		const router = useRouter()
+
 		const { flashCardId } = useRoute().params
 		const { flashCard, listener, error, loading } = useFlashCard(flashCardId as string)
+		const openMenu = (event: Event) => openStudyEntityMenu(flashCard.value, {}, event)
 		let interval: any
-		const isPlaying = ref(false)
 
 		const increase = async () => {
 			flipped.value = false
 			if (page.value + 1 === flashCard.value?.set.length) {
-				playCard()
-				const accepted = await Alert({
-					title: 'You have gotten to the end of the flashCard set. Try again or return to study?',
-					confirmButtonText: 'Yes, Try again',
-					cancelButtonText: 'No, Back to study'
-				})
-
-				if (accepted) page.value = 0
-				else await router.push('/study')
+				pauseCard()
+				page.value = 0
 			} else page.value++
 		}
 		const decrease = () => {
@@ -154,45 +115,29 @@ export default defineComponent({
 			isFullscreen.value = true
 		}
 		const exit = () => {
-			if (document?.exitFullscreen) {
-				document?.exitFullscreen()
-				isFullscreen.value = false
-			}
+			document.exitFullscreen()
+			isFullscreen.value = false
 		}
-		const toggle = () => {
-			if (isFullscreen.value) exit()
-			else enter()
-		}
+		const toggleFullscreen = () => isFullscreen.value ? exit() : enter()
 
 		const playCard = () => {
-			if (!isPlaying.value) {
-				interval = setInterval(increase, 3000)
-				isPlaying.value = true
-			} else {
-				clearInterval(interval)
-				isPlaying.value = false
-			}
+			interval = setInterval(increase, 3000)
+			isPlaying.value = true
+		}
+		const pauseCard = () => {
+			clearInterval(interval)
+			isPlaying.value = false
 		}
 
-		const canEdit = computed({
-			get: () => flashCard.value?.userId === id.value,
-			set: () => {
-			}
-		})
-
-		const editFlashCard = async () => {
-			await openFlashCardEditModal(flashCard.value!, router)
-		}
+		onMounted(listener.startListener)
+		onUnmounted(listener.closeListener)
 
 		return {
-			canExit, flipped, isPlaying, pause,openMenu,
-			page, increase, decrease, playCard,
-			isFullscreen, toggle, exit, enter,
-			flashCard, error, loading,ellipsisVertical,
-			play, add, scan, chevronBack,
-			chevronForward, pencil, contract,
-			bookmark, shareSocial,
-			canEdit, editFlashCard
+			flipped, isPlaying, openMenu,
+			page, increase, decrease, playCard, pauseCard,
+			isFullscreen, toggleFullscreen, exit, enter,
+			flashCard, error, loading, ellipsisVertical,
+			play, pause, add, scan, chevronBack, chevronForward, contract
 		}
 	}
 })
@@ -207,21 +152,6 @@ export default defineComponent({
 		box-shadow: 0px 0px 50px rgba(77, 92, 111, 0.1);
 		border-radius: 24px;
 	}
-
-	.ion-iten-transparent {
-		--background: transparent;
-	}
-
-	ion-searchbar {
-		--box-shadow: 'none';
-		--border-radius: 0.5rem;
-	}
-
-	.searchbar-input.sc-ion-searchbar-md {
-		padding-top: 12px;
-		padding-bottom: 12px;
-	}
-
 
 	.divx {
 		background: #F2F3F5;
@@ -242,7 +172,6 @@ export default defineComponent({
 		transition-property: transform, opacity;
 	}
 
-
 	.vertical > .front {
 		opacity: 1;
 		transform: rotateX(0deg);
@@ -262,22 +191,4 @@ export default defineComponent({
 		opacity: 1;
 		transform: rotateX(0deg);
 	}
-
-
-	//.divx.horizontal > .front {
-	//   opacity: 1;
-	//   transform: rotateY(0deg);
-	// }
-	// .horizontal > .back {
-	//   opacity: 0;
-	//   transform: rotateY(180deg);
-	// }
-	// .horizontal:hover > .front {
-	//   opacity: 0;
-	//   transform: rotateY(180deg);
-	// }
-	// .horizontal:hover > .back {
-	//   opacity: 1;
-	//   transform: rotateY(0deg);
-	// }
 </style>
