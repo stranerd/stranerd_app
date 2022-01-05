@@ -1,12 +1,26 @@
 <template>
 	<div>
 		<template v-if="filtered.length === 0">
-			<EmptyState info="No flashCards saved." />
+			<EmptyState info="You have not created or saved any flashcards yet. <br>
+Create your own flashcards or explore the public and save ones you want." 
+			>
+				<div class="flex items-center gap-5">
+					<router-link to="/study/flashCards/create"
+						class="py-3 px-7  bg-gray text-white font-bold text-base rounded-xl">
+						Create Flashcards
+					</router-link>
+					<router-link to="search/flashCards"
+						class="py-3 px-7 border border-solid border-faded_gray text-gray font-bold text-base rounded-xl">
+						Explore Flashcards
+					</router-link>
+				</div>
+			
+			</EmptyState>
 		</template>
 		<template v-else>
 			<div class="showcase">
 				<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard"
-					:openMenu="(event) => openMenu(flashCard, event)" />
+					:openMenu="(event:any) => openMenu(flashCard, event)" />
 			</div>
 		</template>
 	</div>

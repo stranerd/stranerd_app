@@ -1,12 +1,17 @@
 <template>
 	<div>
 		<template v-if="filtered.length === 0">
-			<EmptyState info="No notes saved." />
+			<EmptyState info="You have not saved any notes yet. <br>
+Find the ones you need to study for your exam(s), test(s) or homework(s) and save them now." 
+
+				btnText="Explore Notes"
+				route="/search/notes"
+			/>
 		</template>
 		<template v-else>
 			<div class="showcase">
 				<NoteListCard v-for="note in filtered" :key="note.hash" :note="note"
-					:openMenu="(event) => openMenu(note, event)" />
+					:openMenu="(event:any) => openMenu(note, event)" />
 			</div>
 		</template>
 	</div>

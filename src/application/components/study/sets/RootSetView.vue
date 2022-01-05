@@ -68,7 +68,11 @@
 						<span>view all</span>
 					</router-link>
 				</div>
-				<EmptyState v-if="sets.length === 0" info="No sets created." />
+				<EmptyState v-if="sets.length === 0" info="You have not created any study sets yet. <br>
+Put flashcards, notes and test preps in the same a folder."
+					btnText="Create a Study set"
+					route="/study/sets/create"
+				/>
 
 				<div v-else class="showcase">
 					<SetCard v-for="set in sets" :key="set.hash" :set="set" />

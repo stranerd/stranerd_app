@@ -3,15 +3,17 @@
 		class="w-full rounded-xl bg-white  flex flex-col items-center justify-center py-7 px-5 md:py-11 gap-3 text-center text-body text-main_dark">
 
 		<p :class="infoClass" v-html="info" />
+		<slot>
+			<router-link v-if="btnText && route" :class="btnTextClass" :to="route"
+				class="py-3 px-7 border border-solid border-faded_gray text-gray font-bold text-base rounded-xl">
+				{{ btnText }}
+			</router-link>
 
-		<router-link v-if="btnText && link" :class="btnTextClass" :to="route"
-			class="py-3 px-7 border-[1px] border-solid border-dark_gray rounded-lg">
-			{{ btnText }}
-		</router-link>
-
-		<ion-button v-else-if="btnText && onClick" class="btn-outline text-gray" @click="onClick(funcParams)">
-			{{ btnText }}
-		</ion-button>
+			<ion-button v-else-if="btnText && onClick" class="py-3 px-7 border border-solid border-faded_gray text-gray font-bold text-base rounded-xl" @click="onClick(funcParams)">
+				{{ btnText }}
+			</ion-button>
+		</slot>
+	
 	</div>
 </template>
 
