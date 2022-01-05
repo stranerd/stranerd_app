@@ -1,7 +1,8 @@
 <template>
 	<div class="w-full relative bg-primary  h-screen flex justify-between items-center lg:py-32 py-10 ">
 		<div class="flex flex-col lg:flex-row justify-center items-center mx-auto max-w-[120rem] w-full px-6">
-			<div class="lg:w-6/12 w-full h-auto flex flex-col lg:items-start items-center lg:text-left text-center gap-3">
+			<div
+				class="lg:w-6/12 w-full h-auto flex flex-col lg:items-start items-center lg:text-left text-center gap-3">
 				<ion-text
 					class="text-white text-xl md:text-3xl leading-6 lg:text-5xl lg:leading-[56px] lg:font-bold font-extrabold capitalize">
 					Start studying <br>

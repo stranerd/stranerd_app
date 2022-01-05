@@ -1,10 +1,9 @@
 <template>
 	<div>
 		<template v-if="filtered.length === 0">
-			<EmptyState info="You have not saved any notes yet. <br>
-Find the ones you need to study for your exam(s), test(s) or homework(s) and save them now." 
-
-				btnText="Explore Notes"
+			<EmptyState btnText="Explore Notes"
+				info="You have not saved any notes yet. <br>
+Find the ones you need to study for your exams, tests or homeworks and save them now."
 				route="/search/notes"
 			/>
 		</template>

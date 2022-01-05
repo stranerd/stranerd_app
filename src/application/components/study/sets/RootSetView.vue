@@ -68,9 +68,9 @@
 						<span>view all</span>
 					</router-link>
 				</div>
-				<EmptyState v-if="sets.length === 0" info="You have not created any study sets yet. <br>
-Put flashcards, notes and test preps in the same a folder."
-					btnText="Create a Study set"
+				<EmptyState v-if="sets.length === 0" btnText="Create a Study set"
+					info="You have not created any study sets yet. <br>
+Put flashcards, notes and test preps in the same folder."
 					route="/study/sets/create"
 				/>
 

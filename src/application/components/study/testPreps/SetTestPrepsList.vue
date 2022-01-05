@@ -1,11 +1,10 @@
 <template>
 	<div>
 		<template v-if="filtered.length === 0">
-			<EmptyState info="You have not saved any test prep yet. <br>
-Find the one you need to study for your exam(s) and save them now." 
-				btnText="Explore Test Preps"
+			<EmptyState btnText="Explore Test Preps"
+				info="You have not saved any test preps yet. <br>
+Find the one you need to study for your exams and save them now."
 				route="/search/preps"
-
 			/>
 		</template>
 		<template v-else>

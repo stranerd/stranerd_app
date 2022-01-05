@@ -67,7 +67,7 @@ export default defineComponent({
 
 	}
 
-		ion-button {
+	ion-button {
 		--background: #546DD3;
 		--border-radius: .75rem;
 		height: 3.5rem;
@@ -77,7 +77,6 @@ export default defineComponent({
 		max-width: 90vw !important;
 
 	}
-
 
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<IonSkeletonText v-if="loading" class="h-36 rounded-xl " animated/>
+	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl " />
 	<div v-else>
 		<template v-if="filtered.length === 0">
 			<EmptyState info="No flashCards available." />
@@ -36,7 +36,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const {loading}=	useSearch()
+		const { loading } = useSearch()
 		const openMenu = (entity: FlashCardEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => props.flashCards.slice(0, props.sliced ? 6 : undefined))
 		return { filtered, openMenu, loading }

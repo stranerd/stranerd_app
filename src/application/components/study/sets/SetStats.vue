@@ -1,5 +1,6 @@
 <template>
-	<div class="grid grid-cols-2 lg:grid-cols-4 items-center justify-between gap-3 lg:gap-8 bg-white md:bg-transparent p-4 md:p-0 -mx-4 -mt-4 md:m-0 rounded-b-3xl">
+	<div
+		class="grid grid-cols-2 lg:grid-cols-4 items-center justify-between gap-3 lg:gap-8 bg-white md:bg-transparent p-4 md:p-0 -mx-4 -mt-4 md:m-0 rounded-b-3xl">
 
 		<div class="bg-purple w-full lg:h-24 h-[5.25rem] rounded-3xl grid place-items-center">
 			<div class="flex">

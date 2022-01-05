@@ -9,8 +9,9 @@ Create your own flashcards or explore the public and save ones you want."
 						to="/study/flashCards/create">
 						Create Flashcards
 					</router-link>
-					<router-link class="py-3 px-7 border border-solid border-faded_gray text-gray font-bold text-base rounded-xl"
-						to="search/flashCards">
+					<router-link
+						class="py-3 px-7 border border-solid border-faded_gray text-gray font-bold text-base rounded-xl"
+						to="/search/flashCards">
 						Explore Flashcards
 					</router-link>
 				</div>

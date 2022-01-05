@@ -2,12 +2,13 @@
 	<Auth>
 
 		<div class="w-full md:min-h-[102vh] min-h-[120vh]  h-full flex bg-white">
-			<div class="bg-primary w-7/12 lg:flex flex-col  items-center justify-center h-full hidden  absolute bottom-0">
+			<div
+				class="bg-primary w-7/12 lg:flex flex-col  items-center justify-center h-full hidden  absolute bottom-0">
 				<h1 class="text-5xl  text-white font-extrabold mb-12">Studying has never been easier</h1>
 				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.svg">
 			</div>
 
-			
+
 			<div class="flex flex-col items-center justify-center lg:w-5/12 w-full ml-auto">
 				<h1 class="md:text-5xl text-2xl  text-main_dark font-extrabold mb-12 text-center">Sign up today</h1>
 				<div class="h-[65%]">
@@ -118,7 +119,7 @@ export default defineComponent({
 		--padding-top: 1.2rem !important;
 		--padding-bottom: 1.2rem !important;
 		--color: $color-dark !important;
-	--placeholder-color: $color-dark !important;
+		--placeholder-color: $color-dark !important;
 		border-radius: 10px;
 		margin-bottom: 1.25rem;
 		width: 420px;

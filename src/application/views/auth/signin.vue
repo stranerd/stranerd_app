@@ -92,7 +92,7 @@ export default defineComponent({
 		--padding-top: 1.2rem !important;
 		--padding-bottom: 1.2rem !important;
 		--color: $color-dark !important;
-	--placeholder-color: $color-dark !important;
+		--placeholder-color: $color-dark !important;
 		border-radius: 10px;
 		margin-bottom: 1.25rem;
 		width: 420px;

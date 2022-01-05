@@ -1,7 +1,9 @@
 <template>
 	<div>
 		<template v-if="filtered.length === 0">
-			<EmptyState info="No videos saved." />
+			<EmptyState info="You have not saved any videos yet. <br>
+Find the ones you need to study for your exams, tests or homeworks and save them now."
+				route="/search/videos" />
 		</template>
 		<template v-else>
 			<div class="showcase">

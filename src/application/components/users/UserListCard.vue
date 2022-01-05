@@ -19,11 +19,11 @@
 				<span>{{ formatNumber(user.meta.questions, 0) }}</span>
 			</div>
 			<div class="bg-light_gray py-2 px-4 rounded-full flex gap-1 items-center text-body">
-				<IonIcon :icon="chatboxEllipses"  class="text-lg lg:text-3xl text-gray" />
+				<IonIcon :icon="chatboxEllipses" class="text-lg lg:text-3xl text-gray" />
 				<span>{{ formatNumber(user.meta.answers, 0) }}</span>
 			</div>
 			<div class="bg-light_gray py-2 px-4 rounded-full flex gap-1 items-center text-body">
-				<IonIcon :icon="flash"  class="text-lg lg:text-3xl text-gray" />
+				<IonIcon :icon="flash" class="text-lg lg:text-3xl text-gray" />
 				<span>{{ formatNumber(user.meta.flashCards, 0) }}</span>
 			</div>
 		</div>

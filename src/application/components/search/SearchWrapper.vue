@@ -52,7 +52,7 @@
 			<div class="p-4 md:w-8/12 w-full mx-auto">
 				<slot :answers="answers" :flashCards="flashCards" :notes="notes" :questions="questions"
 					:searchTerm="searchTerm"
-					:sets="sets" :testPreps="testPreps" :users="users" :videos="videos"  />
+					:sets="sets" :testPreps="testPreps" :users="users" :videos="videos" />
 			</div>
 		</div>
 	</Justified>
@@ -72,7 +72,7 @@ export default defineComponent({
 		return { ...result }
 	}
 })
-</script> 
+</script>
 
 <style lang="scss" scoped>
 	ion-searchbar {
@@ -82,7 +82,7 @@ export default defineComponent({
 		border-radius: .75rem;
 		--icon-color: #8B9EB1;
 		--color: #8B9EB1;
-		--placeholder-color:#8B9EB1;
+		--placeholder-color: #8B9EB1;
 	}
 
 
