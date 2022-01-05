@@ -25,7 +25,7 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 	reserved = []
 
 	constructor () {
-		super({ title: '', isPublic: false, set: [{ question: '', answer: '' }], tags: [] })
+		super({ title: '', isPublic: true, set: [{ question: '', answer: '' }], tags: [] })
 	}
 
 	get title () {

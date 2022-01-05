@@ -7,23 +7,19 @@
 						<div
 							class="w-full md:w-1/2 flex items-stretch md:flex-auto flex-none gap-10 lg:gap-36 xl:gap-48">
 							<div class="w-1/2 flex-auto">
-								<div class="">
+								<div>
 									<h2 class="footer-title font-bold">Company</h2>
 									<ul class="footer-links-contain text-sm">
 										<li class="my-10">
-											<router-link class="font-light" to="">About us</router-link>
+											<a class="font-light" href="/legal/privacy-policy.pdf">Privacy Policy</a>
 										</li>
 										<li class="my-10">
-											<router-link class="font-light" to="">Honor Code</router-link>
+											<a class="font-light" href="/legal/terms-of-use.pdf">Terms of Service</a>
 										</li>
 										<li class="my-10">
-											<router-link class="font-light" to="">Privacy Policy</router-link>
-										</li>
-										<li class="my-10">
-											<router-link class="font-light" to="">Terms of Service</router-link>
-										</li>
-										<li class="my-10">
-											<router-link class="font-light" to="">Terms and Conditions</router-link>
+											<a class="font-light" href="/legal/terms-and-conditions.pdf">
+												Terms and Conditions
+											</a>
 										</li>
 									</ul>
 								</div>
@@ -33,19 +29,22 @@
 									<h2 class="footer-title font-bold">Community</h2>
 									<ul class="footer-links-contain text-sm">
 										<li class="my-10">
-											<router-link class="font-light" to="">Ask a question</router-link>
+											<router-link class="font-light" to="/questions/create">
+												Ask a question
+											</router-link>
 										</li>
 										<li class="my-10">
-											<router-link class="font-light" to="">Become a Tutor</router-link>
+											<a class="font-light" href="https://stranerd.medium.com">Blog</a>
 										</li>
 										<li class="my-10">
-											<router-link class="font-light" to="">Blog</router-link>
+											<a class="font-light" href="https://www.instagram.com/stranerdafrica_/">
+												Stranerd Africa
+											</a>
 										</li>
 										<li class="my-10">
-											<router-link class="font-light" to="">StranerdAfrica</router-link>
-										</li>
-										<li class="my-10">
-											<router-link class="font-light" to="">StranerdOfficial</router-link>
+											<a class="font-light" href="https://www.instagram.com/officialstranerd/">
+												Stranerd Official
+											</a>
 										</li>
 									</ul>
 								</div>
@@ -67,9 +66,6 @@
 											<router-link class="font-light" to="">Press</router-link>
 										</li>
 										<li class="my-10">
-											<router-link class="font-light" to="">Terms and Policies</router-link>
-										</li>
-										<li class="my-10">
 											<router-link class="font-light" to="">Careers</router-link>
 										</li>
 									</ul>
@@ -83,10 +79,10 @@
 											<router-link class="font-light" to="">FAQs</router-link>
 										</li>
 										<li class="my-10">
-											<router-link class="font-light" to="">Support</router-link>
+											<a class="font-light" href="mailto:support@stranerd.com">Support</a>
 										</li>
 										<li class="my-10">
-											<router-link class="font-light" to="">Blog</router-link>
+											<a class="font-light" href="https://stranerd.medium.com">Blog</a>
 										</li>
 									</ul>
 								</div>
@@ -94,17 +90,15 @@
 						</div>
 					</div>
 					<div class="flex flex-col sm:flex-row md:items-center justify-center">
-
 						<div class="flex gap-5 items-center justify-center md:justify-end my-10">
 							<a aria-label="instagram link" class="inline-block"
 								href="https://www.instagram.com/officialstranerd/">
-
 								<ion-icon
 									:icon="logoInstagram"
 									class="text-3xl"
 								/>
 							</a>
-							<a aria-label="twiiter link" class="inline-block" href="https://twitter.com/stranerds">
+							<a aria-label="twitter link" class="inline-block" href="https://twitter.com/stranerds">
 								<ion-icon
 									:icon="logoTwitter"
 									class="text-3xl"

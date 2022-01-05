@@ -58,7 +58,7 @@
 			<router-link class=" smallScreenLink link-custom-sm" to="/questions">
 				Questions
 			</router-link>
-			<router-link class=" smallScreenLink link-custom-sm" to="/study)">
+			<router-link class=" smallScreenLink link-custom-sm" to="/study">
 				Study
 			</router-link>
 
@@ -104,12 +104,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	.white-btn-custom {
-		font-size: 16px;
-		border: 2px solid $color-primary;
-		border-radius: 6px;
-	}
-
 	.link-custom {
 		font-weight: 700;
 		font-size: 16px;
@@ -118,13 +112,6 @@ export default defineComponent({
 	.link-custom-sm {
 		font-weight: 700;
 		font-size: 16px;
-	}
-
-	.bottomLogo {
-		position: fixed;
-		bottom: 2%;
-		width: 100%;
-		left: 0;
 	}
 
 	.nav-shadow {

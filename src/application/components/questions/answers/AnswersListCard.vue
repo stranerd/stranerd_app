@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col mt-1 py-3 ">
-		<div class="bg-white rounded-xl p-6 flex flex-col  mb-4">
+		<div class="bg-white rounded-xl p-6 flex flex-col mb-4">
 			<div class="flex flex-row items-center">
 				<Avatar :id="answer.userId" :size="30" :src="answer.avatar" class="mr-2" />
 				<span class="font-bold text-main_dark">{{ answer.userBio.fullName }}</span>
@@ -20,11 +20,9 @@
 					Explanation
 				</ion-text>
 				<span class="editor-body text-xs lg:text-base" v-html="answer.body" />
-				<div v-if="answer.attachments" class="col-span-12 py-3">
-					<photo-list :photos="answer?.attachments"></photo-list>
-				</div>
-
 			</div>
+
+			<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" class="py-3" />
 
 			<div class="flex flex-row items-center justify-between mt-5">
 				<div class="flex flex-row items-center text-primary font-bold">
@@ -66,6 +64,7 @@
 	</div>
 	<page-loading v-if="loading || commentLoading" />
 </template>
+
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue'
 import { IonIcon, IonTextarea } from '@ionic/vue'
