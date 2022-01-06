@@ -89,7 +89,6 @@ import { computed, defineComponent, ref } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import {
 	add,
-	arrowBackOutline,
 	bookmark,
 	chevronBack,
 	chevronForward,
