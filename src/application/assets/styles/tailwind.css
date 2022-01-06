@@ -32,28 +32,8 @@
 		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow bg-new_gray min-h-full
 	}
 
-	.layout-page-chat {
-		@apply w-full  relative flex  flex-row
-	}
-
-	.layout-page-notab {
-		@apply w-full lg:w-[84%] lg:ml-[16%] lg:px-12 relative flex  mt-[14px] flex-row lg:mt-[93px]
-	}
-
-	.layout-page-nosidebars {
-		@apply flex mt-[14px] flex-row  lg:mt-[63px] flex-grow
-	}
-
 	.layout-body {
 		@apply lg:w-3/4 w-full h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] bg-new_gray
-	}
-
-	.layout-body-chat {
-		@apply lg:w-3/4 w-full grid-cols-12 grid
-	}
-
-	.layout-main {
-		@apply lg:w-[60%] !max-w-[60%] lg:p-0 pt-14 flex flex-col mx-auto my-0 w-full flex-grow
 	}
 
 	.layout-side-left {
@@ -64,29 +44,12 @@
 		@apply hidden lg:inline-block w-1/4 py-1 overflow-y-auto
 	}
 
-	.inactiveSlideTab {
-		@apply py-3 px-3 text-xs md:text-sm  font-semibold bg-light_gray text-icon_inactive rounded-xl focus:outline-none
-	}
-
-	.activeSlideTab {
-		@apply py-3 px-3 text-xs md:text-sm  font-semibold text-white bg-dark_gray rounded-xl focus:outline-none
-	}
-
 	.text-body {
 		@apply md:text-base text-xs
 	}
 
 	.heading {
 		@apply md:text-xl text-base
-	}
-
-
-	.cancelBtn {
-		@apply px-6 py-3 relative rounded-lg  font-bold bg-dark_gray
-	}
-
-	.actionBtn {
-		@apply px-6 relative font-bold py-3 rounded-lg bg-primary
 	}
 
 	.btn {
@@ -103,6 +66,6 @@
 	}
 
 	.blueTop {
-		@apply bg-primary w-full flex items-center min-h-[5.5rem] lg:min-h-[9.75rem] rounded-b-2xl md:rounded-none mb-4  justify-center
+		@apply bg-primary w-full flex items-center min-h-[5.5rem] lg:min-h-[9.75rem] rounded-b-2xl md:rounded-none mb-4 justify-center
 	}
 }

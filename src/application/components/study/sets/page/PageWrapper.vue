@@ -15,7 +15,7 @@ import Justified from '@app/layouts/Justified.vue'
 import { useSetById } from '@app/composable/study/sets'
 import { useRoute } from 'vue-router'
 import SetWrapper from '@app/components/study/sets/page/SetWrapper.vue'
- 
+
 export default defineComponent({
 	name: 'SetPageWrapper',
 	components: { Justified, SetWrapper },

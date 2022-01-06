@@ -1,5 +1,5 @@
 <template>
-	<IonSkeletonText v-if="loading" class="h-36 rounded-xl " animated/>
+	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl " />
 	<div v-else>
 		<template v-if="filtered.length === 0">
 			<EmptyState info="No users available." />
@@ -23,7 +23,7 @@ export default defineComponent({
 	name: 'SearchUsersList',
 	components: { UserListCard, IonSkeletonText },
 	props: {
-		users: { 
+		users: {
 			type: Array as PropType<UserEntity[]>,
 			required: true
 		},
@@ -34,7 +34,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const {loading}=	useSearch()
+		const { loading } = useSearch()
 		const filtered = computed(() => props.users.slice(0, props.sliced ? 6 : undefined))
 		return { filtered, loading }
 	}

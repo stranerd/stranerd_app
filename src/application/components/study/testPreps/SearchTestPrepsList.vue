@@ -1,5 +1,5 @@
 <template>
-	<IonSkeletonText v-if="loading" class="h-36 rounded-xl " animated/>
+	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl " />
 	<div v-else>
 		<template v-if="filtered.length === 0">
 			<EmptyState info="No testPreps available." />
@@ -34,11 +34,11 @@ export default defineComponent({
 			type: Boolean,
 			default: false,
 			required: false
-		},
+		}
 
 	},
 	setup (props) {
-		const {loading}=	useSearch()
+		const { loading } = useSearch()
 		const openMenu = (entity: TestPrepEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => groupedByInstitution(props.testPreps).value.slice(0, props.sliced ? 6 : undefined))
 		return { filtered, openMenu, loading }

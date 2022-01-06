@@ -13,9 +13,9 @@
 		<div
 			class="bg-white rounded-3xl h-full w-full sm:w-4/12 flex justify-between  items-center min-w-[20rem] mt-6 sm:mt-0 p-6">
 			<ion-text class="text-primary font-bold text-xl sm:text-lg">
-				Your nerd score 
+				Your nerd score
 			</ion-text>
-			<DonutChart :score="user.score" :size="96" :total="user.expectedScore" :percentage="percentage" />
+			<DonutChart :percentage="percentage" :score="user.score" :size="96" :total="user.expectedScore" />
 		</div>
 	</div>
 </template>
@@ -34,7 +34,7 @@ export default defineComponent({
 
 		const percentage = getPecentage(user.value.score, user.value.expectedScore)
 
-		return { user, isLoggedIn, percentage}
+		return { user, isLoggedIn, percentage }
 	}
 })
 </script>

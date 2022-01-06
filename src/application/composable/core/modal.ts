@@ -1,4 +1,4 @@
-import { Ref, Component as Vue } from 'vue'
+import { Component as Vue, Ref } from 'vue'
 import { modalController, popoverController } from '@ionic/vue'
 
 const capitalize = (text: string) => (text[0] ?? '').toUpperCase() + text.slice(1)
@@ -24,7 +24,7 @@ export const useModal = (stack: Ref<string[]>) => {
 					component: modals[id].component,
 					cssClass: cssClass,
 					breakpoints: [0.1, 0.5, 1],
-					initialBreakpoint:1
+					initialBreakpoint: 1
 
 				})
 			modals[id].modal?.present?.()
@@ -70,10 +70,10 @@ export const usePopover = (stack: Ref<string[]>) => {
 				.create({
 					component: popovers[id].component,
 					cssClass, event,
-					backdropDismiss:true,
-					dismissOnSelect:true,
-					mode:'md',
-					showBackdrop:true,
+					backdropDismiss: true,
+					dismissOnSelect: true,
+					mode: 'md',
+					showBackdrop: true
 				})
 			popovers[id].popover?.present?.()
 		}

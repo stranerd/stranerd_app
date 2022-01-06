@@ -30,7 +30,7 @@ export default {
 	computed: {
 		containerStyles () {
 			return {
-				transform: `rotate(${ this.startAngle }deg)`
+				transform: `rotate(${this.startAngle}deg)`
 			}
 		},
 		donutSections () {
@@ -49,9 +49,9 @@ export default {
 
 				const fillerStyles = {
 					backgroundColor: section.color || defaultColor,
-					transform: `rotate(${ degree }deg)`
+					transform: `rotate(${degree}deg)`
 				}
-				const sectionStyles = { transform: `rotate(${ offsetBy }deg)` }
+				const sectionStyles = { transform: `rotate(${offsetBy}deg)` }
 
 				degreesConsumed += section.degree
 				if (degreesConsumed === 180) offsetBy = 0

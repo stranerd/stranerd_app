@@ -9,11 +9,13 @@
 				{{ btnText }}
 			</router-link>
 
-			<ion-button v-else-if="btnText && onClick" class="py-3 px-7 border border-solid border-faded_gray text-gray font-bold text-base rounded-xl" @click="onClick(funcParams)">
+			<ion-button v-else-if="btnText && onClick"
+				class="py-3 px-7 border border-solid border-faded_gray text-gray font-bold text-base rounded-xl"
+				@click="onClick(funcParams)">
 				{{ btnText }}
 			</ion-button>
 		</slot>
-	
+
 	</div>
 </template>
 
