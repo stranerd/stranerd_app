@@ -2,7 +2,7 @@
 	<Justified>
 		<FlashCardForm :error="error" :factory="factory" :loading="loading" :submit="editFlashCard"
 			title="Edit a Flashcard set">
-			<template v-slot:buttonTitle>Edit</template>
+			<template v-slot:buttonTitle>Save</template>
 		</FlashCardForm>
 	</Justified>
 </template>
