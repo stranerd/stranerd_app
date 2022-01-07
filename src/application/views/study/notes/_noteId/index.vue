@@ -3,7 +3,7 @@
 		<div v-if="note">
 			<div class="blueTop ">
 				<ion-text class="heading lg:text-2xl font-bold text-white text-center ">
-					{{ note.title }}
+					{{ note.title }} 
 				</ion-text>
 			</div>
 			<div class="w-full pb-12 bg-light_gray p-4">
@@ -15,7 +15,7 @@
 				<div class="lg:w-8/12 max-w-[60rem] w-full px-4 mx-auto flex items-center justify-between">
 					<div class="flex">
 						<Avatar :id="note.userId" :size="28" :src="note.userBio.photo" class="mx-2" />
-						<ion-text class="text-icon_inactive"> by <b>{{ note.userBio.firstName }}</b></ion-text>
+						<ion-text class="text-icon_inactive"> by <b>{{ note.userBio.firstName }} </b></ion-text>
 					</div>
 					<div class="flex items-center">
 						<Share cssClass="text-icon_inactive text-xl cursor-pointer mx-2" />

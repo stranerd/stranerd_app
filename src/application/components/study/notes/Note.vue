@@ -3,7 +3,7 @@
 		:src="pdfData"
 		style="width:80%;margin:20px auto;">
 		<template v-slot:loading>
-			loading content here...
+			<pageLoading/>
 		</template>
 	</Pdf>
 </template>
