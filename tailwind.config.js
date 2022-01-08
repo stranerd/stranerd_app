@@ -38,7 +38,7 @@ module.exports = {
 				green: '#00D246'
 			},
 			fontFamily: {
-				'nuni': ['Nunito Sans', 'sans-serif']
+				'rale': ['Raleway', 'sans-serif']
 			}
 		}
 	},

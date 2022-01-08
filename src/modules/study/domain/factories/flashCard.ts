@@ -13,7 +13,7 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 			required: true,
 			rules: [
 				isArrayOfX((cur: any) => isString(cur?.question).valid && isString(cur?.answer).valid, 'questions'),
-				hasMoreThanX(0), hasLessThanX(26)
+				hasMoreThanX(0)
 			]
 		},
 		tags: {
