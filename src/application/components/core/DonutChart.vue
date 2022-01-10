@@ -38,7 +38,7 @@ export default defineComponent({
 			default: 0
 		},
 		percentage: {
-			required: true,
+			required: false,
 			type: Number,
 			default: 0
 		},

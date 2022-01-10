@@ -4,7 +4,7 @@
 		<ion-toolbar class="flex md:hidden bg-white px-4 items-center">
 			<div class="flex items-center justify-between">
 				<ion-icon :icon="chevronBack" class="text-[23px] text-main_dark" @click="$router.go(-1)" />
-				<ion-title class="text-base font-bold text-main_dark w-auto">
+				<ion-title class="text-base font-bold text-main_dark">
 					{{ $route.meta.displayName ?? '' }}
 				</ion-title>
 				<Avatar v-if="isLoggedIn" :size="24" :src="user?.avatar"

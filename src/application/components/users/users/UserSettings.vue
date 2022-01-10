@@ -1,6 +1,5 @@
 <template>
 	<div class="w-full px-4">
-
 		<div class="bg-primary h-24 -mx-4 hidden md:block" />
 
 		<div
@@ -15,19 +14,16 @@
 		</div>
 
 		<div
-			class=" custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl  mb-6">
+			class=" custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl mb-6">
 			<ion-text class="text-xl text-main_dark font-bold text-left w-full mt-2">
-				Usernames <span
-					class="font-normal text-sm">*Use your real names, they can only be changed once	</span>
+				Full names <span class="font-normal text-sm">*Use your real names, as they will be used to identify you throughout the platform</span>
 			</ion-text>
 			<div class="flex md:flex-row items-center justify-center flex-col w-full mt-2">
 				<div class="border border-faded_gray rounded-xl lg:w-1/2 md:mr-4 w-full mt-4">
-					<IonInput v-model="profileFactory.first" class="w-full font-medium"
-						placeholder="First name" />
+					<IonInput v-model="profileFactory.first" class="w-full font-medium" placeholder="First name" />
 				</div>
 				<div class="border border-faded_gray rounded-xl lg:w-1/2 w-full mt-4">
-					<IonInput v-model="profileFactory.last" class="w-full font-medium"
-						placeholder="Last name" />
+					<IonInput v-model="profileFactory.last" class="w-full font-medium" placeholder="Last name" />
 				</div>
 			</div>
 			<div class="w-full justify-start mt-2">
@@ -58,8 +54,6 @@
 				</ion-button>
 			</div>
 		</div>
-
-
 	</div>
 </template>
 
@@ -84,9 +78,7 @@ export default defineComponent({
 		// SelectSubject
 	},
 	setup () {
-		const openUploadModal = () => {
-			useProfileModal().openUploadImage()
-		}
+		const openUploadModal = () => useProfileModal().openUploadImage()
 		const { hasPassword, user } = useAuth()
 		const {
 			factory: profileFactory,
@@ -128,7 +120,7 @@ export default defineComponent({
 
 <style scoped>
 	.custom-shadow {
-		box-shadow: 0px 0px 25px rgba(77, 92, 111, 0.1);
+		box-shadow: 0 0 25px rgba(77, 92, 111, 0.1);
 	}
 
 	ion-button {
@@ -137,37 +129,11 @@ export default defineComponent({
 		height: 2.75rem;
 	}
 
-	ion-input {
+	ion-input, ion-textarea {
+		--placeholder-opacity: 1;
 		--placeholder-color: #8B9EB1;
 		--border-width: 1px !important;
 		--border-style: solid !important;
 		--border-color: #8B9EB1 !important;
-
 	}
-
-	ion-select {
-		/* Set a different placeholder color */
-		--placeholder-color: #8B9EB1;
-
-		/* Set full opacity on the placeholder */
-		--placeholder-opacity: 1;
-	}
-
-	ion-textarea {
-		/* Set a different placeholder color */
-		--placeholder-color: #8B9EB1;
-
-		/* Set full opacity on the placeholder */
-		--placeholder-opacity: 1;
-	}
-
-	ion-input {
-
-		/* Set a different placeholder color */
-		--placeholder-color: #8B9EB1;
-
-		/* Set full opacity on the placeholder */
-		--placeholder-opacity: 1;
-	}
-
 </style>
