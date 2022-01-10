@@ -3,7 +3,7 @@
 		<div class="w-full  h-full flex bg-white">
 			<div class="bg-primary w-7/12 lg:flex flex-col  items-center justify-center h-full hidden ">
 				<h1 class="text-5xl  text-white font-extrabold mb-12">Welcome back</h1>
-				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.svg">
+				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png">
 			</div>
 
 			<div class="flex flex-col items-center justify-center lg:w-5/12 w-full">
