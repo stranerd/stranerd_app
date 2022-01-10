@@ -84,13 +84,15 @@
 						</div>
 					</div>
 
-					<div class="flex w-full md:flex-row flex-col gap-4 h-80 md:h-auto" @click="editCard(index)">
+					<div class="flex w-full md:flex-row flex-col gap-4 md:h-auto" @click="editCard(index)">
 						<ion-textarea v-model="card.question"
-							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl h-40 md:w-1/2 md:mr-4 w-full"
-							placeholder="Front ( Questions or Words) " />
+							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl md:w-1/2 md:mr-4 w-full"
+							placeholder="Front ( Questions or Words) "
+							rows="5" />
 						<ion-textarea v-model="card.answer"
-							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl h-40 md:w-1/2 w-full"
-							placeholder="Back ( Answers or Definitions or Translations )" />
+							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl md:w-1/2 w-full"
+							placeholder="Back ( Answers or Definitions or Translations )"
+							rows="5" />
 					</div>
 				</ion-reorder>
 			</ion-reorder-group>

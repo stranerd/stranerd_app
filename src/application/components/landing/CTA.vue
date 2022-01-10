@@ -37,11 +37,11 @@
 			</div>
 
 			<div class="sm:hidden max-w-[49rem] h-60 w-full lg:mt-0 mt-12 ">
-				<img alt="" class="object-contain" src="@app/assets/images/auth/auth.svg">
+				<img alt="" class="object-contain" src="@app/assets/images/auth/auth.png">
 			</div>
 
 			<div class="md:w-6/12 max-w-[49rem] w-full lg:mt-0 mt-12 hidden sm:block">
-				<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/auth.svg">
+				<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/auth.png">
 			</div>
 			<!-- <div class="flex gap-4 lg:hidden mt-5">
 				<router-link to="#">

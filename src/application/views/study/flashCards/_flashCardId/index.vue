@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<!-- TODO: Break into sections -->
-		<div v-if="flashCard" class="blueTop">
+		<div v-if="flashCard" class="blueTop py-2">
 			<div class="flex items-center justify-between lg:w-8/12 w-full max-w-[60rem] mx-auto p-4">
 				<div>
 					<ion-text class="heading lg:text-xl font-bold text-white text-center">
@@ -15,12 +15,12 @@
 				</div>
 
 				<div class="flex items-center text-white font-bold">
-					<div class="hidden md:flex items-center mr-8" @click="cardMode = !cardMode">
+					<div class="flex items-center lg:mr-8 mr-2" @click="cardMode = !cardMode">
 						<ion-icon
 							:icon="!cardMode ? copy: list"
-							class="text-white text-xl cursor-pointer mr-2"
+							class="text-white text-xl cursor-pointer lg:mr-2  lg:mt-0"
 						/>
-						<ion-text>
+						<ion-text class="hidden md:flex">
 							{{ !cardMode ? 'Card mode' : 'List mode' }}
 						</ion-text>
 					</div>

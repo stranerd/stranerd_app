@@ -43,7 +43,7 @@
 				<div class="border border-faded_gray rounded-xl w-full mr-4">
 					<IonTextarea v-model="profileFactory.description"
 						class="bg-white border-0 focus:outline-none w-full"
-						placeholder="Write your question here and make sure it is explained in full detail."
+						placeholder="Tell us a little more about yourself"
 						rows="6" />
 				</div>
 			</div>
@@ -51,6 +51,33 @@
 				<ion-button class="btn-primary w-32" @click="updateProfile()">
 					Save
 					<IonSpinner v-if="profileLoading" name="lines-small" />
+				</ion-button>
+			</div>
+		</div>
+
+		<div
+			class="custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl mb-6">
+			<ion-text class="text-xl text-main_dark font-bold text-left w-full">
+				{{ hasPassword ? 'Update Password' : 'Add Password' }}
+			</ion-text>
+			<div class="border border-faded_gray rounded-xl w-full mt-4">
+				<IonInput v-if="hasPassword" v-model="passwordFactory.oldPassword" class="w-full font-medium"
+					placeholder="Confirm Old Password" />
+			</div>
+			<div class="flex md:flex-row gap-4 items-center justify-center flex-col w-full mt-4">
+				<div class="border border-faded_gray rounded-xl w-full">
+					<IonInput v-model="passwordFactory.password" class="w-full font-medium"
+						placeholder="Enter New Password" />
+				</div>
+				<div class="border border-faded_gray rounded-xl w-full">
+					<IonInput v-model="passwordFactory.cPassword" class="w-full font-medium"
+						placeholder="Confirm New Password" />
+				</div>
+			</div>
+			<div class="w-full justify-start mt-4">
+				<ion-button class="btn-primary" @click="updatePassword()">
+					Save Password
+					<IonSpinner v-if="passwordLoading" name="lines-small" />
 				</ion-button>
 			</div>
 		</div>

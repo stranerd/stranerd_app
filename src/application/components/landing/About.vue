@@ -7,7 +7,7 @@
 			</ion-text>
 
 			<div class="flex justify-between items-center w-full lg:flex-row flex-col gap-5">
-				<img alt="testprep image" class="" src="@app/assets/images/auth/test.png" />
+				<img alt="testprep image" class="lg:w-1/2" src="@app/assets/images/auth/test.png" />
 
 				<div
 					class="lg:px-24 px-5 lg:py-32 py-12 bg-green text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2  w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
@@ -39,13 +39,13 @@
 					</ion-text>
 				</div>
 
-				<img alt="testprep image" class="" src="@app/assets/images/auth/flash.png" />
+				<img alt="testprep image" class="lg:w-1/2" src="@app/assets/images/auth/flash.png" />
 			</div>
 
 
 			<div class="flex justify-between items-center w-full lg:flex-row flex-col mt-24 gap-5">
 
-				<img alt="testprep image" class="" src="@app/assets/images/auth/note.svg" />
+				<img alt="testprep image" class="lg:w-1/2" src="@app/assets/images/auth/note.png" />
 
 				<div
 					class="lg:px-24 px-5 lg:py-32 py-12 bg-pink text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2 w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
@@ -74,7 +74,7 @@
 					</ion-text>
 				</div>
 
-				<img alt="testprep image" class="" src="@app/assets/images/auth/question.svg" />
+				<img alt="testprep image" class="lg:w-1/2" src="@app/assets/images/auth/question.png" />
 			</div>
 
 
