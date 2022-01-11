@@ -1,6 +1,5 @@
 <template>
 	<Justified>
-		<!-- TODO: Break into sections -->
 		<div v-if="flashCard" class="blueTop py-2">
 			<div class="flex items-center justify-between lg:w-8/12 w-full max-w-[60rem] mx-auto p-4">
 				<div>

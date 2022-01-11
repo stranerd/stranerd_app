@@ -1,5 +1,4 @@
 <template>
-	<!-- fab placed to the bottom start -->
 	<ion-fab slot="fixed" class="lg:hidden active" horizontal="end" vertical="bottom">
 		<ion-fab-button :activated="active" :class="[active ? 'active':'', 'z-50 relative']" @click="active = !active">
 			<ion-icon :icon="add"></ion-icon>

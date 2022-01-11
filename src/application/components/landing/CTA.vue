@@ -19,7 +19,6 @@
 					</ion-button>
 				</router-link>
 
-
 				<!-- <ion-text class="text-2xl text-white mt-8 lg:block hidden">
 					or download the app instead
 				</ion-text> -->
@@ -31,8 +30,6 @@
 					<router-link to="#">
 						<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/appstore.svg">
 					</router-link>
-
-
 				</div> -->
 			</div>
 
@@ -51,8 +48,6 @@
 				<router-link to="#">
 					<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/appstore.svg">
 				</router-link>
-
-
 			</div> -->
 		</div>
 	</div>

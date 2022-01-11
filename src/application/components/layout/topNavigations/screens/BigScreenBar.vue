@@ -3,7 +3,7 @@
 		<div class="flex items-center">
 			<div class="w-[16%]">
 				<router-link class="flex items-center w-full justify-center" to="/dashboard">
-					<img class="w-40" src="@app/assets/images/logo/logo-dark.svg" />
+					<Logo :secondary="true" class="w-40" />
 				</router-link>
 			</div>
 			<div class="flex w-[84%] gap-10 px-12">

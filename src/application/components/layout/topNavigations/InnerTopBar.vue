@@ -25,7 +25,7 @@
 					<Avatar :size="24" :src="user?.avatar" />
 				</router-link>
 				<router-link class="flex items-center" to="/">
-					<img class="w-24" src="@app/assets/images/logo/logo-dark.svg" />
+					<Logo :secondary="true" class="w-24" />
 				</router-link>
 				<router-link class="flex items-center" to="/notifications">
 					<IonIcon :icon="notifications" class="text-xl text-main_dark" />

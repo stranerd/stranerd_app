@@ -1,22 +1,9 @@
 <template>
 	<Justified>
-		<!-- TODO: Break into sections -->
 		<div class="bg-primary w-full min-h-[150px] flex flex-col justify-center items-center pt-0 pb-1">
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
 				{{ video?.title }}
 			</ion-text>
-			<!-- <div class="flex items-center md:flex-row flex-col">
-				<div class="flex items-center mr-6">
-					<ShowRatings :rating="5" class="mr-3" />
-					<ion-text class="text-white font-semibold">
-						(14 reviews)
-					</ion-text>
-				</div>
-				<ion-text class="text-faded_gray font-semibold">
-					leave a rating
-				</ion-text>
-
-			</div> -->
 		</div>
 
 		<div

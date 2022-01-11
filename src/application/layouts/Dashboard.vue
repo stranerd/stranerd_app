@@ -13,7 +13,6 @@
 							<RightSidebar />
 						</div>
 					</div>
-					<!-- fab placed to the bottom start -->
 					<Fab />
 				</IonContent>
 				<BottomNav class="mt-auto" />

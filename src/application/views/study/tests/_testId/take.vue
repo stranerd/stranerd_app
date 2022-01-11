@@ -1,6 +1,5 @@
 <template>
 	<Justified :hideBottom="true" :hideFab="true">
-		<!-- TODO: Break into sections -->
 		<div class=" blueTop">
 			<div class="flex items-center">
 				<ion-text class="text-white font-semibold text-center text-xl">
