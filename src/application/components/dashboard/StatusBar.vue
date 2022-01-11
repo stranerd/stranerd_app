@@ -15,7 +15,8 @@
 			<ion-text class="text-primary font-bold text-xl sm:text-lg">
 				Your nerd score
 			</ion-text>
-			<DonutChart :percentage="percentage" :score="user.score" :size="96" :total="user.expectedScore" />
+			<DonutChart :bgColor="user.nerdScoreColor + '22'" :fgColor="user.nerdScoreColor" :score="user.score" :size="96"
+				:total="user.expectedScore" />
 		</div>
 	</div>
 </template>

@@ -17,7 +17,7 @@
 			<div
 				class="bg-white rounded-3xl w-full sm:w-4/12 flex justify-between gap-8 items-center min-w-[20rem]   mt-3 sm:mt-0 p-6 sm:mb-0 mb-5">
 				<ion-text class="text-primary font-bold text-xl sm:text-lg">Your nerd score</ion-text>
-				<DonutChart :score="user ? user.score: 0" :size="96" :total="user ? user.expectedScore : 100" />
+				<DonutChart :score="user.score" :size="96" :total="user.expectedScore" />
 			</div>
 		</div>
 		<div

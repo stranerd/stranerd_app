@@ -2,19 +2,33 @@
 	<div class="w-full px-4">
 		<div class="bg-primary h-24 -mx-4 hidden md:block" />
 
+		<PageLoading v-if="profileLoading" />
+		<PageLoading v-if="passwordLoading" />
+
 		<div
-			class=" custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl  mb-6 md:-mt-12 mt-6">
+			class="custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl  mb-6 md:-mt-12 mt-6">
 			<ion-text class="text-xl text-main_dark font-bold mt-2">
-				Profile picture
+				Profile Picture
 			</ion-text>
-			<Avatar :id="user.id" :size="90" :src="user.avatar" class="mt-3" color="#C7D6E3" />
-			<ion-button class="btn-primary mt-4" @click="openUploadModal()">
+			<img :src="imageLink || DEFAULT_PROFILE_IMAGE"
+				alt=""
+				class="mt-3 w-24 h-24 rounded-full"
+			>
+			<input
+				id="picture"
+				accept="image/*"
+				class="hidden"
+				name="file"
+				type="file"
+				@change.prevent="catchFiles"
+			>
+			<label class="bg-primary text-white py-3 px-6 rounded-xl font-bold mt-4" for="picture">
 				Upload a profile picture
-			</ion-button>
+			</label>
 		</div>
 
 		<div
-			class=" custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl mb-6">
+			class="custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl mb-6">
 			<ion-text class="text-xl text-main_dark font-bold text-left w-full mt-2">
 				Full names <span class="font-normal text-sm">*Use your real names, as they will be used to identify you throughout the platform</span>
 			</ion-text>
@@ -26,17 +40,7 @@
 					<IonInput v-model="profileFactory.last" class="w-full font-medium" placeholder="Last name" />
 				</div>
 			</div>
-			<div class="w-full justify-start mt-2">
-				<ion-button class="btn-primary w-32" @click="updateProfile()">
-					Save
-					<IonSpinner v-if="profileLoading" name="lines-small" />
-				</ion-button>
-			</div>
-		</div>
-
-		<div
-			class=" custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl mb-6">
-			<ion-text class="text-xl text-main_dark font-bold text-left w-full">
+			<ion-text class="text-xl text-main_dark font-bold text-left w-full mt-4">
 				About
 			</ion-text>
 			<div class="flex md:flex-row items-center justify-center flex-col w-full mt-2">
@@ -48,7 +52,7 @@
 				</div>
 			</div>
 			<div class="w-full justify-start mt-2">
-				<ion-button class="btn-primary w-32" @click="updateProfile()">
+				<ion-button class="btn-primary w-32" @click="updateProfile">
 					Save
 					<IonSpinner v-if="profileLoading" name="lines-small" />
 				</ion-button>
@@ -75,7 +79,7 @@
 				</div>
 			</div>
 			<div class="w-full justify-start mt-4">
-				<ion-button class="btn-primary" @click="updatePassword()">
+				<ion-button class="btn-primary" @click="updatePassword">
 					Save Password
 					<IonSpinner v-if="passwordLoading" name="lines-small" />
 				</ion-button>
@@ -92,7 +96,7 @@ import { useProfileUpdate, useTutorUpdate } from '@app/composable/auth/profile'
 import { useAuth } from '@app/composable/auth/auth'
 import { useFileInputs, useSubjectAsTags } from '@app/composable/core/forms'
 import { usePasswordUpdate } from '@app/composable/auth/passwords'
-import { useProfileModal } from '@app/composable/core/modals'
+import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
 
 export default defineComponent({
 	name: 'ProfileSettings',
@@ -105,7 +109,6 @@ export default defineComponent({
 		// SelectSubject
 	},
 	setup () {
-		const openUploadModal = () => useProfileModal().openUploadImage()
 		const { hasPassword, user } = useAuth()
 		const {
 			factory: profileFactory,
@@ -121,9 +124,10 @@ export default defineComponent({
 			updatePassword
 		} = usePasswordUpdate()
 		const imageLink = ref((profileFactory.value.avatar as any)?.link ?? '')
-		const { catchFiles } = useFileInputs((file) => {
+		const { catchFiles } = useFileInputs(async (file) => {
 			imageLink.value = window.URL.createObjectURL(file)
 			profileFactory.value.avatar = file
+			await updateProfile()
 		})
 		const removeImage = () => {
 			imageLink.value = ''
@@ -135,8 +139,7 @@ export default defineComponent({
 			(sTag: string) => tutorFactory.value.removeWeakerSubjects(sTag)
 		)
 		return {
-			openUploadModal,
-			user,
+			user, DEFAULT_PROFILE_IMAGE,
 			profileFactory, profileError, profileLoading, updateProfile, image, catchFiles, imageLink, removeImage,
 			tutorFactory, tutorError, tutorLoading, updateTutor, removeTag, sTag,
 			passwordFactory, passwordError, passwordLoading, updatePassword, hasPassword

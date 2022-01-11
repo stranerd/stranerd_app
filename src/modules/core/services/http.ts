@@ -21,9 +21,11 @@ export class NetworkError extends Error {
 export class HttpClient {
 	private readonly client: AxiosInstance
 	private readonly baseURL: string
+	private readonly headers: Record<string, string>
 
-	constructor (baseURL: string) {
+	constructor (baseURL: string, headers?: Record<string, string>) {
 		this.baseURL = baseURL
+		this.headers = headers ?? { 'content-type': 'application/json' }
 		this.client = axios.create({ baseURL })
 	}
 
@@ -73,7 +75,7 @@ export class HttpClient {
 	}
 
 	private async getHeaders () {
-		const headers = { 'content-type': 'application/json' } as Record<string, any>
+		const headers = this.headers
 		const isFromOurServer = Object.values(apiBases).find((base) => !!this.baseURL?.startsWith(base))
 		if (!isFromOurServer) return headers
 		const { accessToken, refreshToken } = await getTokens()
