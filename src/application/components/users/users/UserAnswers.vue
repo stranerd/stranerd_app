@@ -7,11 +7,7 @@
 		<template v-if="answers.length">
 			<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer" />
 		</template>
-		<EmptyState v-else
-			btnText="Explore Questions"
-			info="This user hasn't answered any questions yet."
-			route="/questions"
-		/>
+		<EmptyState v-else info="This user hasn't answered any questions yet." />
 	</div>
 </template>
 

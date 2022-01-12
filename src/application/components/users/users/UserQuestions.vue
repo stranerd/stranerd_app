@@ -9,11 +9,7 @@
 			</div>
 		</template>
 
-		<EmptyState v-else
-			btnText="Go and ask a Question"
-			info="This user hasn't asked any questions yet"
-			route="/questions"
-		/>
+		<EmptyState v-else info="This user hasn't asked any questions yet" />
 	</div>
 </template>
 
