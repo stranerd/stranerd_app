@@ -25,7 +25,7 @@ export const useModal = (stack: Ref<string[]>) => {
 	const open = async (id: string, cssClass: string) => {
 		// await close(id)
 		if (Object.keys(modals).includes(id)) {
-			if (modals[id].modal) return
+			if (modals[id].modal?.isOpen) return
 			const modal = await modalController
 				.create({
 					component: modals[id].component as any,
@@ -79,7 +79,7 @@ export const usePopover = (stack: Ref<string[]>) => {
 	const open = async (id: string, cssClass: string, event: Event) => {
 		// await close(id)
 		if (Object.keys(popovers).includes(id)) {
-			if (popovers[id].popover) return
+			if (popovers[id].popover?.isOpen) return
 			const popover = await popoverController
 				.create({
 					component: popovers[id].component as any,

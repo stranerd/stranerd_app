@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col mt-1 py-3 ">
+	<div class="flex flex-col mt-1 py-3">
 		<div class="bg-white rounded-xl p-6 flex flex-col mb-4">
 			<div class="flex flex-row items-center">
 				<Avatar :id="answer.userId" :size="30" :src="answer.avatar" class="mr-2" />
@@ -32,16 +32,18 @@
 					<IonIcon :icon="thumbsDown" class="text-[22px] text-icon_inactive cursor-pointer"
 						@click="() => voteAnswer(false)" />
 				</div>
-				<div class="flex flex-row items-center text-icon_inactive font-bold">
-					<template
+				<div class="flex flex-row items-center text-icon_inactive font-bold gap-4">
+					<span
 						v-if="isLoggedIn && question && !question.isAnswered && !answer.best && question.userId === id"
-						class="items-center flex justify-between cursor-pointer" @click.prevent="markBestAnswer">
+						class="items-center flex cursor-pointer" @click.prevent="markBestAnswer">
 						<span class="mr-1">Mark as best</span>
 						<IonIcon :icon="star" class="text-[20px]" />
-					</template>
-					<template v-if="answer.best">
-						<IonIcon :icon="star" class="text-[20px] text-star_yellow" />
-					</template>
+					</span>
+					<IonIcon v-if="answer.best" :icon="star" class="text-[20px] text-star_yellow" />
+					<span class="flex items-center" @click="showComments = !showComments">
+						<IonIcon :icon="showComments ? chevronDown : chevronUp" />
+						<span>{{ showComments ? 'Hide comments' : 'Show comments' }}</span>
+					</span>
 				</div>
 			</div>
 
@@ -53,44 +55,25 @@
 			</div>
 		</div>
 
-		<div v-for="comment in comments" :key="comment.hash" class="flex mt-2  items-center">
-			<Avatar :id="comment.userId" :size="24" :src="comment.avatar" class="mr-2 ml-4" />
-			<ion-text class="text-dark_gray">
-				<b>{{ comment.userBio.firstName }} : </b>
-				{{ comment.body }}
-			</ion-text>
-		</div>
-
+		<AnswerCommentsList v-if="showComments" :answerId="answer.id" />
 	</div>
-	<page-loading v-if="loading || commentLoading" />
+	<PageLoading v-if="loading || commentLoading" />
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue'
 import { IonIcon, IonTextarea } from '@ionic/vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
-import {
-	arrowBackOutline,
-	arrowRedo,
-	chevronDown,
-	chevronUp,
-	send,
-	shareSocial,
-	star,
-	thumbsDown,
-	thumbsUp
-} from 'ionicons/icons'
-
-import Avatar from '@app/components/core/Avatar.vue'
+import { chevronDown, chevronUp, send, star, thumbsDown, thumbsUp } from 'ionicons/icons'
 import PhotoList from '@app/components/core/PhotoList.vue'
 import { useAnswer } from '@app/composable/questions/answers'
-import PageLoading from '../../core/PageLoading.vue'
-import { useAnswerCommentList, useCreateAnswerComments } from '@app/composable/questions/answer-comments'
+import { useCreateAnswerComments } from '@app/composable/questions/answer-comments'
 import { useAuth } from '@app/composable/auth/auth'
+import AnswerCommentsList from '@app/components/questions/comments/AnswerCommentsList.vue'
 
 export default defineComponent({
 	name: 'AnswerListCard',
-	components: { IonTextarea, IonIcon, Avatar, PhotoList, PageLoading },
+	components: { IonTextarea, IonIcon, PhotoList, AnswerCommentsList },
 	props: {
 		answer: {
 			type: AnswerEntity as PropType<AnswerEntity>,
@@ -123,31 +106,17 @@ export default defineComponent({
 			createComment
 		} = useCreateAnswerComments(props.answer.id)
 
-		const { comments } = useAnswerCommentList(props.answer.id)
-
 		return {
-			comments,
-			id, isLoggedIn, user,
-			voteAnswer, loading,
+			id, isLoggedIn, user, voteAnswer, loading, error,
 			commentLoading, commentError,
 			commentFactory, createComment,
 			markBestAnswer,
-
-			arrowBackOutline,
-			arrowRedo,
-			shareSocial,
-			chevronDown,
-			thumbsDown,
-			thumbsUp,
-			star,
-			send,
-			chevronUp,
-			showExplanation
+			thumbsDown, thumbsUp, star, send, chevronUp, chevronDown,
+			showExplanation, showComments, showEditButton, showDeleteButton
 		}
 	}
 })
 </script>
-
 
 <style scoped>
 	ion-textarea {

@@ -15,9 +15,9 @@
 			<span>Report</span>
 		</IonButton>
 
-		<DisplayError :error="error" />
+		<span v-if="error" class="text-danger">{{ error }}</span>
+		<PageLoading v-if="loading" />
 	</form>
-	<PageLoading v-if="loading" />
 </template>
 
 <script lang="ts">
