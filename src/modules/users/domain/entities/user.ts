@@ -1,6 +1,6 @@
 import { BaseEntity, Media } from '@modules/core'
 import { appName } from '@utils/environment'
-import { capitalize, catchDivideByZero, formatNumber } from '@utils/commons'
+import { capitalize, catchDivideByZero, formatNumber, getPercentage } from '@utils/commons'
 import { getRankImage, RankTypes } from './rank'
 
 export enum RankingTimes {
@@ -225,7 +225,7 @@ export class UserEntity extends BaseEntity {
 	}
 
 	get scorePercentage () {
-		return 100 * this.score / this.expectedScore
+		return getPercentage(this.score, this.expectedScore)
 	}
 
 	get rankImage () {
