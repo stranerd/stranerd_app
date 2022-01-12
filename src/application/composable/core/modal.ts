@@ -12,7 +12,7 @@ export const useModal = (stack: Ref<string[]>) => {
 	const modals = {} as any
 
 	const close = (id: string) => {
-		modals[id].modal?.dismiss?.()
+		if (modals[id].modal.isOpen) modals[id].modal?.dismiss?.()
 		modals[id].modal = null
 	}
 
@@ -25,9 +25,8 @@ export const useModal = (stack: Ref<string[]>) => {
 					cssClass: cssClass,
 					breakpoints: [0.1, 0.5, 1],
 					initialBreakpoint: 1
-
 				})
-			modals[id].modal?.present?.()
+			if (!modals[id].modal.isOpen) modals[id].modal.present?.()
 		}
 	}
 
@@ -59,7 +58,7 @@ export const usePopover = (stack: Ref<string[]>) => {
 	const popovers = {} as any
 
 	const close = (id: string) => {
-		popovers[id].popover?.dismiss?.()
+		if (popovers[id].popover.isOpen) popovers[id].popover?.dismiss?.()
 		popovers[id].popover = null
 	}
 
@@ -75,7 +74,7 @@ export const usePopover = (stack: Ref<string[]>) => {
 					mode: 'md',
 					showBackdrop: true
 				})
-			popovers[id].popover?.present?.()
+			if (!popovers[id].popover.isOpen) popovers[id].popover?.present?.()
 		}
 	}
 
