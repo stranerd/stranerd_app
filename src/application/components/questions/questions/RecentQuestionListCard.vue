@@ -9,7 +9,7 @@
 			<span class="font-bold text-gray ml-auto">{{ formatTime(question.createdAt) }}</span>
 		</div>
 
-		<span class="text-main_dark leading-normal mb-auto editor-body" v-html="question.trimmedBody" />
+		<DisplayHtml :html="question.trimmedBody" class="text-main_dark leading-normal mb-auto" />
 
 		<div class="mt-4 flex items-center gap-2 flex-wrap">
 			<Tag v-for="tag in question.tags" :key="tag" :tag="tag" />
@@ -31,6 +31,7 @@ import Avatar from '@app/components/core/Avatar.vue'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { useReportModal } from '@app/composable/core/modals'
 import Tag from '@app/components/questions/tags/Tag.vue'
+import DisplayHtml from '@app/components/core/text/DisplayHtml.vue'
 
 export default defineComponent({
 	name: 'RecentQuestionListCard',
@@ -44,7 +45,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { Avatar, Tag },
+	components: { DisplayHtml, Avatar, Tag },
 	setup (props) {
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),

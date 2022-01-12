@@ -11,15 +11,14 @@
 				<ion-text class="text-gray font-bold mb-2  text-xs lg:text-base">
 					Main answer
 				</ion-text>
-				<span class="editor-body text-xs lg:text-base" v-html="answer.title" />
-
+				<DisplayHtml :html="answer.title" class="text-xs lg:text-base" />
 			</div>
 
 			<div v-if="answer.body" class="flex flex-col pb-4">
 				<ion-text class="text-gray font-bold mb-2  text-xs lg:text-base">
 					Explanation
 				</ion-text>
-				<span class="editor-body text-xs lg:text-base" v-html="answer.body" />
+				<DisplayHtml :html="answer.body" class="text-xs lg:text-base" />
 			</div>
 
 			<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" class="py-3" />
@@ -70,10 +69,11 @@ import { useAnswer } from '@app/composable/questions/answers'
 import { useCreateAnswerComments } from '@app/composable/questions/answer-comments'
 import { useAuth } from '@app/composable/auth/auth'
 import AnswerCommentsList from '@app/components/questions/comments/AnswerCommentsList.vue'
+import DisplayHtml from '@app/components/core/text/DisplayHtml.vue'
 
 export default defineComponent({
 	name: 'AnswerListCard',
-	components: { IonTextarea, IonIcon, PhotoList, AnswerCommentsList },
+	components: { DisplayHtml, IonTextarea, IonIcon, PhotoList, AnswerCommentsList },
 	props: {
 		answer: {
 			type: AnswerEntity as PropType<AnswerEntity>,

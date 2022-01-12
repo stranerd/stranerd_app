@@ -11,7 +11,9 @@
 			</div>
 		</div>
 
-		<IonText class="text-main_dark mb-8 w-full">{{ question.question }}</IonText>
+		<IonText class="text-main_dark mb-4 w-full">
+			<DisplayHtml :html="question.question" />
+		</IonText>
 
 		<div class="answers flex flex-col w-full">
 			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
@@ -26,7 +28,9 @@
 				<span v-else
 					class="label border-4 rounded-full border-light_gray h-8 w-8 text-base font-bold grid place-items-center capitalize">
 					{{ getAlphabet(optionIndex + 1) }}</span>
-				<IonText class="text-lg ml-5">{{ option }}</IonText>
+				<IonText class="text-lg ml-5">
+					<DisplayHtml :html="option" />
+				</IonText>
 			</div>
 		</div>
 

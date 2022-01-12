@@ -19,7 +19,7 @@
 			</div>
 
 
-			<span class="editor-body py-2 text-main_dark mb-3 lg:mb-5" v-html="question.body" />
+			<DisplayHtml :html="question.body" class="py-2 text-main_dark mb-3 lg:mb-5" />
 
 			<div class="flex justify-start items-center gap-4 mb-4">
 

@@ -6,14 +6,14 @@
 			<section
 				class="front h-96 flex items-center text-center justify-center custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
 				<h2>
-					<pre class="whitespace-pre-wrap break-all font-rale" v-html="flashCard.set[page].question" />
+					<DisplayHtml :html="flashCard.set[page].question" />
 				</h2>
 			</section>
 
 			<section
 				class="back h-96 flex items-center text-center justify-center custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
 				<h2 v-if="flipped">
-					<pre class="whitespace-pre-wrap break-all font-rale" v-html="flashCard.set[page].answer" />
+					<DisplayHtml :html="flashCard.set[page].answer" />
 				</h2>
 			</section>
 		</div>
