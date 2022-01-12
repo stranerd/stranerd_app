@@ -21,7 +21,7 @@
 					placeholder="Add related tags">
 				</IonInput>
 			</div>
-			<SelectSubject v-model:subject-id="factory.subjectId" :show-all="false" class="w-full bg-new_gray" />
+			<SelectSubject v-model:subjectId="factory.subjectId" :show-all="false" class="w-full bg-new_gray" />
 		</div>
 
 		<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">

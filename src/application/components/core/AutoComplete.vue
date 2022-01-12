@@ -34,11 +34,6 @@ export default defineComponent({
 	name: 'AutoComplete',
 	components: { IonInput },
 	props: {
-		icon: {
-			type: Boolean,
-			required: false,
-			default: false
-		},
 		suggestions: {
 			type: Array as PropType<{ search: string, value: string, title: string }[]>,
 			required: true
@@ -69,8 +64,8 @@ export default defineComponent({
 			}
 		})
 
-		const update = (value: string) => {
-			if (!open.value) {
+		const update = (value: string, openModal = false) => {
+			if (openModal && !open.value) {
 				open.value = true
 				current.value = 0
 			}
@@ -87,7 +82,9 @@ export default defineComponent({
 
 		const term = computed({
 			get: () => props.value,
-			set: update
+			set: (value: string) => {
+				update(value, value !== term.value)
+			}
 		})
 
 		const onEnter = () => {

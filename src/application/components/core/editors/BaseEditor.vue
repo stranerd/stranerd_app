@@ -87,6 +87,7 @@ export default defineComponent({
 <style lang="scss">
 	.quillWrapper {
 		background: $color-white;
+		color: $color-mainDark;
 		box-sizing: border-box;
 		position: relative;
 		display: flex;
