@@ -54,7 +54,7 @@
 				</div>
 			</div>
 		</div>
-		<PhotoList v-if="question.attachments" :photos="question.attachments" class="py-3" />
+		<PhotoList v-if="question.attachments.length" :photos="question.attachments" class="py-3" />
 
 		<ion-button v-if="showAnswerButton"
 			class="btn-primary w-full"

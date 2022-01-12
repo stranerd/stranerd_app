@@ -11,26 +11,33 @@
 			</div>
 		</div>
 
-		<IonText class="text-main_dark mb-4 w-full">
-			<DisplayHtml :html="question.question" />
-		</IonText>
+		<div class="mb-4">
+			<IonText class="text-main_dark mb-2 w-full">
+				<DisplayHtml :html="question.question" />
+			</IonText>
+			<PhotoList v-if="question.questionMedia.length" :photos="question.questionMedia" />
+		</div>
 
 		<div class="answers flex flex-col w-full">
 			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
-				class="flex w-full hover:bg-light_gray py-3"
+				class="w-full hover:bg-light_gray py-3"
 				@click="answer(question.id, optionIndex)">
-				<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
-					:icon="checkmarkCircle" color="primary" size="large" />
-				<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect" :icon="checkmarkCircle"
-					color="primary" size="large" />
-				<IonIcon v-else-if="optionIndex === test.answers[question.id] && isInCorrect" :icon="closeCircle"
-					color="danger" size="large" />
-				<span v-else
-					class="label border-4 rounded-full border-light_gray h-8 w-8 text-base font-bold grid place-items-center capitalize">
-					{{ getAlphabet(optionIndex + 1) }}</span>
-				<IonText class="text-lg ml-5">
-					<DisplayHtml :html="option" />
-				</IonText>
+				<div class="flex mb-2">
+					<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
+						:icon="checkmarkCircle" color="primary" size="large" />
+					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect" :icon="checkmarkCircle"
+						color="primary" size="large" />
+					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isInCorrect" :icon="closeCircle"
+						color="danger" size="large" />
+					<span v-else
+						class="label border-4 rounded-full border-light_gray h-8 w-8 text-base font-bold grid place-items-center capitalize">
+						{{ getAlphabet(optionIndex + 1) }}</span>
+					<IonText class="text-lg ml-5">
+						<DisplayHtml :html="option" />
+					</IonText>
+				</div>
+				<PhotoList v-if="question.data.optionsMedia[optionIndex]?.length"
+					:photos="question.data.optionsMedia[optionIndex]" />
 			</div>
 		</div>
 
@@ -48,9 +55,10 @@
 					show solution <IonIcon :icon="showExplanation ? chevronUpOutline : chevronDownOutline" />
 				</span>
 
-				<span v-if="showExplanation" class="">
-					{{ question.data.explanation }}
-				</span>
+				<div v-if="showExplanation">
+					<span class="block mb-2">{{ question.data.explanation }}</span>
+					<PhotoList v-if="question.data.explanationMedia.length" :photos="question.data.explanationMedia" />
+				</div>
 			</template>
 		</template>
 

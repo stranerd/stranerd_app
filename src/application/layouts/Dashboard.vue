@@ -40,6 +40,5 @@ export default defineComponent({
 		RightSidebar,
 		Fab
 	}
-
 })
 </script>
