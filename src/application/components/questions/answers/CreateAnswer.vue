@@ -5,15 +5,18 @@
 		</h2>
 
 		<div
-			class="lg:mt-9 mt-5 py-3 px-4 flex flex-row items-center bg-light_gray rounded-lg border border-faded_gray ">
-			<span class="text-main_dark font-bold">Main answer - </span>
+			class="lg:mt-9 mt-5 py-3 px-4 flex flex-row items-center bg-light_gray rounded-lg border border-faded_gray">
+			<span class="text-main_dark font-bold">Main answer -</span>
 			<ion-input v-model="factory.title" class="w-full px-2 ml-1 font-medium" placeholder="Keep it short!">
 			</ion-input>
 		</div>
 
-		<div class="lg:mt-9 mt-5 border border-faded_gray rounded-lg py-5 flex-col px-3">
+		<div class="lg:mt-9 mt-5 py-5 flex-col">
 			<span class="text-main_dark font-bold">Explanation - </span>
-			<AnswerEditor v-model:model="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')" />
+			<div class="border border-faded_gray rounded-lg">
+				<AnswerEditor v-model:model="factory.body" :error="factory.errors.body"
+					:valid="factory.isValid('body')" />
+			</div>
 		</div>
 
 		<div
@@ -28,7 +31,7 @@
 				type="file"
 				@change="catchAttachments" />
 			<ion-text class="mt-3 font-bold lg:text-base">
-				Add images to help with your question (Optional)
+				Add images to accompany your answer (Optional)
 			</ion-text>
 			<div v-if="factory.attachments.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
 				<span v-for="attachment in factory.attachments" :key="attachment.name">

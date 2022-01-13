@@ -28,7 +28,6 @@ export async function listenOnSocket<Model> (channel: string, listeners: Listene
 	// @ts-ignore
 	if (!socket || (!socket.auth.token && accessToken)) {
 		socket = io(getSocketBaseAndPath().domain, {
-			transports: ['polling', 'websocket'],
 			path: getSocketBaseAndPath().path,
 			auth: {
 				token: accessToken,

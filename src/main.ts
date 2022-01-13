@@ -16,6 +16,7 @@ import { ipAddressGetter } from '@app/plugins/ipAddressGetter'
 import { authClient } from '@app/plugins/authClient'
 import { allModals, allPopovers } from '@app/composable/core/modals'
 import { defineCustomElements } from '@ionic/pwa-elements/loader'
+import { showAddAnswer } from '@app/composable/questions/answers'
 
 const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken }
 const globalPlugins = [parseLoggedInUser, authClient, registerIonicComponent, registerComponents, ipAddressGetter]
@@ -30,6 +31,7 @@ const init = async () => {
 	router.beforeEach(async (to, from, next) => {
 		await Promise.all(allModals.map((modal) => modal().closeAll()))
 		await Promise.all(allPopovers.map((popover) => popover().closeAll()))
+		showAddAnswer.value = false
 
 		const middlewares = (to.meta.middlewares ?? []) as Middleware[]
 		let redirect = null
@@ -46,6 +48,7 @@ const init = async () => {
 	})
 	router.afterEach(() => {
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+
 	})
 
 	const app = createApp(App)
