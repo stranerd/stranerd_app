@@ -5,7 +5,7 @@
 			<div
 				class="bg-primary w-7/12 lg:flex flex-col  items-center justify-center h-full hidden  absolute bottom-0">
 				<h1 class="text-5xl  text-white font-extrabold mb-12">Studying has never been easier</h1>
-				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png">
+				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png ">
 			</div>
 
 
