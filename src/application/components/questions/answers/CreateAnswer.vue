@@ -10,6 +10,7 @@
 			<ion-input v-model="factory.title" class="w-full px-2 ml-1 font-medium" placeholder="Keep it short!">
 			</ion-input>
 		</div>
+		<DisplayError :error="factory.errors.title" />
 
 		<div class="lg:mt-9 mt-5 py-5 flex-col">
 			<span class="text-main_dark font-bold">Explanation - </span>
@@ -18,6 +19,7 @@
 					:valid="factory.isValid('body')" />
 			</div>
 		</div>
+		<DisplayError :error="factory.errors.body" />
 
 		<div
 			class="lg:mt-9 mt-5 rounded-xl  text-main_dark relative bg-light_gray border border-faded_gray flex flex-col h-32 justify-center items-center">
@@ -33,16 +35,17 @@
 			<ion-text class="mt-3 font-bold lg:text-base">
 				Add images to accompany your answer (Optional)
 			</ion-text>
-			<div v-if="factory.attachments.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
-				<span v-for="attachment in factory.attachments" :key="attachment.name">
-					<span
-						class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-						{{ attachment.name }}  <IonIcon :icon="close" class="ml-1 cursor-pointer"
-							@click="factory.removeAttachment(attachment)" />
-					</span>
-				</span>
-			</div>
 		</div>
+		<div v-if="factory.attachments.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
+			<span v-for="attachment in factory.attachments" :key="attachment.name">
+				<span
+					class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
+					{{ attachment.name }}  <IonIcon :icon="close" class="ml-1 cursor-pointer"
+						@click="factory.removeAttachment(attachment)" />
+				</span>
+			</span>
+		</div>
+		<DisplayError :error="factory.errors.attachments" />
 
 		<div class="flex w-full lg:mt-8 mt-5 items-center gap-6">
 			<ion-button class="w-1/2 btn-secondary " @click="showAddAnswer = false">
@@ -61,7 +64,6 @@ import { defineComponent } from 'vue'
 import { IonIcon, IonInput } from '@ionic/vue'
 import { close, image } from 'ionicons/icons'
 import { showAddAnswer, useCreateAnswer } from '@app/composable/questions/answers'
-import { useRoute } from 'vue-router'
 import { QuestionEntity } from '@modules/questions'
 import { useMultipleFileInputs } from '@app/composable/core/forms'
 import AnswerEditor from '@app/components/core/editors/AnswerEditor.vue'
@@ -73,7 +75,6 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const route = useRoute()
 		const {
 			factory,
 			error,
@@ -81,7 +82,6 @@ export default defineComponent({
 			answeringQuestion,
 			createAnswer
 		} = useCreateAnswer()
-		factory.value.questionId = Array.isArray(route.params.id) ? '' : route.params.id
 
 		const { catchMultipleFiles: catchAttachments } = useMultipleFileInputs(
 			(files: File[]) => files.map(factory.value.addAttachment)
