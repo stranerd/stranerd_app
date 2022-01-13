@@ -3,7 +3,7 @@
 		<div class="flex items-center">
 			<div class="w-[16%]">
 				<router-link class="flex items-center w-full justify-center" to="/dashboard">
-					<img class="w-40" src="@app/assets/images/logo/logo-dark.svg" />
+					<Logo :secondary="true" class="w-40" />
 				</router-link>
 			</div>
 			<div class="flex w-[84%] gap-10 px-12">
@@ -23,7 +23,7 @@
 							@click="openUserDashboardMenu"
 						>
 							<avatar :size="24" :src="user.avatar" />
-							<span class="text-base text-main_dark">
+							<span class="text-base text-main_dark truncate max-w-[150px]">
 								{{ user.fullName }}
 							</span>
 							<ion-icon :icon="chevronDown" class="text-xl text-main_dark"></ion-icon>

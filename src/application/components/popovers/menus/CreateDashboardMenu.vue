@@ -10,7 +10,7 @@
 		<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
 			to="/study/flashCards/create">
 			<div class="w-48 flex items-center gap-3">
-				<img alt="" class="w-6" src="@app/assets/images/icons/flashCardNav.svg">
+				<ion-icon :icon="flash" class="text-2xl" />
 				<ion-label class="font-bold">Create a flashcard</ion-label>
 			</div>
 		</router-link>
@@ -26,12 +26,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { folder, helpCircle } from 'ionicons/icons'
+import { flash, folder, helpCircle } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'CreateDashboardMenu',
 	setup () {
-		return { helpCircle, folder }
+		return { helpCircle, folder, flash }
 	}
 })
 </script>

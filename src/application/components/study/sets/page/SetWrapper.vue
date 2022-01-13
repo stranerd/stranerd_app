@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="blueTop flex-col  pt-5 md:pt-12">
-			<div class="flex w-full md:w-8/12 mx-auto px-4 text-white items-center">
+			<div class="flex w-full lg:w-8/12 mx-auto px-4 text-white items-center">
 				<IonIcon :icon="folder" class="text-6xl md:text-8xl" />
 				<div class="flex flex-col ml-2 md:ml-4">
 					<ion-text class="heading lg:text-2xl font-bold capitalize">{{ set.name }}</ion-text>
@@ -37,7 +37,7 @@
 				</router-link>
 			</div>
 		</div>
-		<div class="p-4 md:w-8/12 w-full mx-auto">
+		<div class="p-4 lg:w-8/12 w-full mx-auto">
 			<slot :flashCards="flashCards" :notes="notes" :set="set" :testPreps="testPreps" :videos="videos" />
 		</div>
 	</div>

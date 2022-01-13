@@ -2,7 +2,7 @@
 	<form class="mt-5" @submit.prevent="submit">
 		<div class="flex flex-col gap-4 mb-4">
 			<span
-				v-for="message in QuestionMessages"
+				v-for="message in AnswerMessages"
 				:key="message.id"
 				class="flex gap-0.5 items-center font-semibold"
 			>
@@ -15,20 +15,20 @@
 			<span>Report</span>
 		</IonButton>
 
-		<span v-if="error" class="text-danger">{{ error }}</span>
-		<PageLoading v-if="loading" />
+		<DisplayError :error="error" />
 	</form>
+	<PageLoading v-if="loading" />
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { ReportFactory } from '@modules/reports'
-import { QuestionMessages } from '@app/composable/reports/form'
+import { AnswerMessages } from '@app/composable/reports/form'
 import PageLoading from '../../core/PageLoading.vue'
 import { IonButton } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'QuestionReportForm',
+	name: 'AnswerReportForm',
 	components: { PageLoading, IonButton },
 	props: {
 		factory: {
@@ -49,7 +49,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { QuestionMessages }
+		return { AnswerMessages }
 	}
 })
 </script>

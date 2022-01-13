@@ -1,7 +1,6 @@
 <template>
 	<Justified :hideBottom="true" :hideFab="true">
-		<!-- TODO: Break into sections -->
-		<div class=" blueTop">
+		<div class="blueTop">
 			<div class="flex items-center">
 				<ion-text class="text-white font-semibold text-center text-xl">
 					{{ test?.name ?? '' }}
@@ -9,7 +8,7 @@
 			</div>
 		</div>
 
-		<TestBody v-if="test" :key="test.hash" :test="test" />
+		<TestBody v-if="test" :test="test" />
 
 		<PageLoading v-if="loading" />
 	</Justified>

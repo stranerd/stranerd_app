@@ -1,7 +1,7 @@
 <template>
 	<Donut
 		:auto-adjust-text-size="true"
-		:foreground="bgTint"
+		:foreground="bgColor"
 		:has-legend="false"
 		:sections="sections"
 		:size="size"
@@ -12,7 +12,7 @@
 		unit="px"
 		@section-click="onClick"
 	>
-		<span :style="`color:${mainColor} !important;`" class="score">
+		<span :style="`color:${fgColor} !important;`" class="score">
 			<slot>{{ formatNumber(score, 1) }}</slot>
 		</span>
 	</Donut>
@@ -33,11 +33,6 @@ export default defineComponent({
 			default: 168
 		},
 		score: {
-			required: true,
-			type: Number,
-			default: 0
-		},
-		percentage: {
 			required: true,
 			type: Number,
 			default: 0
@@ -70,11 +65,9 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const bgTint = props.percentage < 50 ? '#ff666640' : props.bgColor
-		const mainColor = props.percentage < 50 ? '#FF6666' : props.fgColor
-		const sections = computed(() => [{ value: props.score, color: mainColor }])
+		const sections = computed(() => [{ value: props.score, color: props.fgColor }])
 		const totalSections = computed(() => sections.value.map((s) => s.value).reduce((acc, v) => acc + v, 0))
-		return { sections, formatNumber, totalSections, bgTint, mainColor }
+		return { sections, formatNumber, totalSections }
 	}
 
 })

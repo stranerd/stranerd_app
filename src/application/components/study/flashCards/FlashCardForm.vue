@@ -16,10 +16,7 @@
 					show-cancel-button="never"
 				></ion-input>
 			</div>
-			<ion-text v-if="factory.errors.title"
-				class="text-xl text-delete_red font-bold text-center mb-8 grid place-items-center mx-auto">
-				{{ factory.errors.title }}
-			</ion-text>
+			<DisplayError :error="factory.errors.title" />
 			<div class="bg-white lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
 				<ion-text class="text-primary font-bold w-12">
 					TAGS
@@ -37,10 +34,7 @@
 					placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
 					show-cancel-button="never"></ion-input>
 			</div>
-			<ion-text v-if="factory.errors.tags"
-				class="text-xl text-delete_red font-bold text-center mb-8 grid place-items-center mx-auto">
-				{{ factory.errors.tags }}
-			</ion-text>
+			<DisplayError :error="factory.errors.tags" />
 
 
 			<div class="flex items-center w-full md:max-w-[25rem] max-w-[22rem] justify-center">
@@ -62,12 +56,7 @@
 					</ion-item>
 				</ion-radio-group>
 			</div>
-			<ion-text v-if="factory.errors.isPublic"
-				class="text-xl text-delete_red font-bold text-center mb-8 grid place-items-center mx-auto">
-				{{ factory.errors.isPublic }}
-			</ion-text>
-
-
+			<DisplayError :error="factory.errors.isPublic" />
 		</div>
 
 		<div class="lg:w-8/12 w-full px-4 mx-auto mt-8">
@@ -84,21 +73,19 @@
 						</div>
 					</div>
 
-					<div class="flex w-full md:flex-row flex-col gap-4 h-80 md:h-auto" @click="editCard(index)">
+					<div class="flex w-full md:flex-row flex-col gap-4 md:h-auto" @click="editCard(index)">
 						<ion-textarea v-model="card.question"
-							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl h-40 md:w-1/2 md:mr-4 w-full"
-							placeholder="Front ( Questions or Words) " />
+							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl md:w-1/2 md:mr-4 w-full"
+							placeholder="Front ( Questions or Words) "
+							rows="5" />
 						<ion-textarea v-model="card.answer"
-							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl h-40 md:w-1/2 w-full"
-							placeholder="Back ( Answers or Definitions or Translations )" />
+							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl md:w-1/2 w-full"
+							placeholder="Back ( Answers or Definitions or Translations )"
+							rows="5" />
 					</div>
 				</ion-reorder>
 			</ion-reorder-group>
-
-			<ion-text v-if="factory.errors.set"
-				class="text-xl text-delete_red font-bold text-center mb-8 grid place-items-center mx-auto">
-				{{ factory.errors.set }}
-			</ion-text>
+			<DisplayError :error="factory.errors.set" />
 
 			<div
 				class="w-full flex bg-white items-center p-8 rounded-xl text-lg text-icon_inactive justify-center font-bold my-4 cursor-pointer"

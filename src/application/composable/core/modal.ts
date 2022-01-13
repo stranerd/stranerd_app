@@ -9,25 +9,32 @@ function spreadModals<T> (type: string, modals: Record<string, T>) {
 }
 
 export const useModal = (stack: Ref<string[]>) => {
-	const modals = {} as any
+	const modals = {} as Record<string, {
+		modal: null | HTMLIonModalElement,
+		component: Vue
+	}>
 
-	const close = (id: string) => {
-		modals[id].modal?.dismiss?.()
-		modals[id].modal = null
+	const close = async (id: string) => {
+		const modal = modals[id].modal
+		if (modal) {
+			await modal.dismiss()
+			modals[id].modal = null
+		}
 	}
 
 	const open = async (id: string, cssClass: string) => {
-		close(id)
+		// await close(id)
 		if (Object.keys(modals).includes(id)) {
-			modals[id].modal = await modalController
+			if (modals[id].modal?.isOpen) return
+			const modal = await modalController
 				.create({
-					component: modals[id].component,
-					cssClass: cssClass,
+					component: modals[id].component as any,
+					cssClass,
 					breakpoints: [0.1, 0.5, 1],
 					initialBreakpoint: 1
-
 				})
-			modals[id].modal?.present?.()
+			await modal.present()
+			modals[id].modal = modal
 		}
 	}
 
@@ -56,26 +63,30 @@ export const useModal = (stack: Ref<string[]>) => {
 }
 
 export const usePopover = (stack: Ref<string[]>) => {
-	const popovers = {} as any
+	const popovers = {} as Record<string, {
+		popover: null | HTMLIonPopoverElement,
+		component: Vue
+	}>
 
-	const close = (id: string) => {
-		popovers[id].popover?.dismiss?.()
-		popovers[id].popover = null
+	const close = async (id: string) => {
+		const popover = popovers[id].popover
+		if (popover) {
+			await popover.dismiss()
+			popovers[id].popover = null
+		}
 	}
 
 	const open = async (id: string, cssClass: string, event: Event) => {
-		close(id)
+		// await close(id)
 		if (Object.keys(popovers).includes(id)) {
-			popovers[id].popover = await popoverController
+			if (popovers[id].popover?.isOpen) return
+			const popover = await popoverController
 				.create({
-					component: popovers[id].component,
-					cssClass, event,
-					backdropDismiss: true,
-					dismissOnSelect: true,
-					mode: 'md',
-					showBackdrop: true
+					component: popovers[id].component as any,
+					cssClass, event
 				})
-			popovers[id].popover?.present?.()
+			await popover.present()
+			popovers[id].popover = popover
 		}
 	}
 

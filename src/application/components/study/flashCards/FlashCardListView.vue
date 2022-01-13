@@ -7,10 +7,10 @@
 		<div v-for="(card, index) in flashCard.set" :key="index"
 			class="flex justify-between  w-full md:mt-6 mt-3 text-body">
 			<div class=" bg-white py-3 px-6 rounded-xl w-1/2 md:mr-6 mr-3">
-				<pre v-html="card.question" class="whitespace-pre-wrap break-all font-rale"/>
+				<DisplayHtml :html="card.question" />
 			</div>
 			<div class=" bg-white  py-3 px-6 rounded-xl w-1/2">
-				<pre v-html="card.answer" class="whitespace-pre-wrap break-all font-rale" />
+				<DisplayHtml :html="card.answer" />
 			</div>
 		</div>
 	</div>

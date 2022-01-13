@@ -9,20 +9,6 @@
 			</div>
 
 			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-1 border-new_gray">
-				<h1 class="text-base text-main_dark font-bold">Level</h1>
-				<p class="leading-relaxed text-main_dark text-base">
-					University - 1st year
-				</p>
-			</div>
-
-			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-1 border-new_gray">
-				<h1 class="text-base text-main_dark font-bold">School</h1>
-				<p class="leading-relaxed text-main_dark text-base">
-					Northwestern University
-				</p>
-			</div>
-
-			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-1 border-new_gray">
 				<h1 class="text-base text-main_dark font-bold">Best Subject</h1>
 				<Subject v-if="user.strongestSubject" :subject-id="user.strongestSubject"
 					class="text-main_dark text-base" />

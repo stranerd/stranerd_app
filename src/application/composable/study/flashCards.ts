@@ -25,13 +25,11 @@ const global = {
 	...useLoadingHandler()
 }
 
-const myGlobal = {
-	flashCards: ref([] as FlashCardEntity[]),
-	fetched: ref(false),
-	hasMore: ref(false),
-	...useErrorHandler(),
-	...useLoadingHandler()
-}
+const userGlobal = {} as Record<string, {
+	flashCards: Ref<FlashCardEntity[]>
+	fetched: Ref<boolean>,
+	hasMore: Ref<boolean>
+} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToFlashCardList = (flashCard: FlashCardEntity) => {
 	const index = global.flashCards.value.findIndex((q) => q.id === flashCard.id)
@@ -84,41 +82,56 @@ export const useFlashCardList = () => {
 	return { ...global, listener }
 }
 
-export const useMyFlashCards = () => {
-	const { id } = useAuth()
+export const useUserFlashCardList = (userId: string) => {
+	if (userGlobal[userId] === undefined) userGlobal[userId] = {
+		flashCards: ref([]),
+		fetched: ref(false),
+		hasMore: ref(false),
+		...useErrorHandler(),
+		...useLoadingHandler()
+	}
 
 	const fetchFlashCards = async () => {
-		await myGlobal.setError('')
+		await userGlobal[userId].setError('')
 		try {
-			await myGlobal.setLoading(true)
-			const flashCards = await GetUserFlashCards.call(id.value)
-			flashCards.results.forEach(pushToFlashCardList)
-			myGlobal.fetched.value = true
+			await userGlobal[userId].setLoading(true)
+			const flashCards = await GetUserFlashCards.call(userId)
+			userGlobal[userId].flashCards.value = flashCards.results
+			userGlobal[userId].fetched.value = true
 		} catch (error) {
-			await myGlobal.setError(error)
+			await userGlobal[userId].setError(error)
 		}
-		await myGlobal.setLoading(false)
+		await userGlobal[userId].setLoading(false)
 	}
+
 	const listener = useListener(async () => {
-		return await ListenToUserFlashCards.call(id.value, {
+		return await ListenToUserFlashCards.call(userId, {
 			created: async (entity) => {
-				unshiftToFlashCardList(entity)
+				const index = userGlobal[userId].flashCards.value.findIndex((c) => c.id === entity.id)
+				if (index === -1) userGlobal[userId].flashCards.value.push(entity)
+				else userGlobal[userId].flashCards.value.splice(index, 1, entity)
 			},
 			updated: async (entity) => {
-				unshiftToFlashCardList(entity)
+				const index = userGlobal[userId].flashCards.value.findIndex((c) => c.id === entity.id)
+				if (index === -1) userGlobal[userId].flashCards.value.push(entity)
+				else userGlobal[userId].flashCards.value.splice(index, 1, entity)
 			},
 			deleted: async (entity) => {
-				const index = myGlobal.flashCards.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) myGlobal.flashCards.value.splice(index, 1)
+				userGlobal[userId].flashCards.value = userGlobal[userId].flashCards.value.filter((c) => c.id !== entity.id)
 			}
 		})
 	})
 
 	onMounted(async () => {
-		if (!myGlobal.fetched.value && !myGlobal.loading.value) await fetchFlashCards()
+		if (!userGlobal[userId].fetched.value && !userGlobal[userId].loading.value) await fetchFlashCards()
 	})
 
-	return { ...myGlobal, listener }
+	return {
+		error: userGlobal[userId].error,
+		loading: userGlobal[userId].loading,
+		flashCards: userGlobal[userId].flashCards,
+		listener
+	}
 }
 
 export const useCreateFlashCard = () => {

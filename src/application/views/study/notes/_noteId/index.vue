@@ -3,13 +3,11 @@
 		<div v-if="note">
 			<div class="blueTop ">
 				<ion-text class="heading lg:text-2xl font-bold text-white text-center ">
-					{{ note.title }} 
+					{{ note.title }}
 				</ion-text>
 			</div>
-			<div class="w-full pb-12 bg-light_gray p-4">
-				<div class="lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-white">
-					<Note :note="note" />
-				</div>
+			<div class="lg:w-8/12 w-full mx-auto mt-8 p-4 mb-16 bg-white">
+				<Note :note="note" />
 			</div>
 			<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
 				<div class="lg:w-8/12 max-w-[60rem] w-full px-4 mx-auto flex items-center justify-between">

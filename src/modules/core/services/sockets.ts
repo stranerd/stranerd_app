@@ -26,9 +26,8 @@ type SocketReturn = { code: StatusCodes, message: string, channel: string }
 export async function listenOnSocket<Model> (channel: string, listeners: Listeners<Model>) {
 	const { accessToken } = await getTokens()
 	// @ts-ignore
-	if (!socket || (!socket.auth.token && accessToken)) {
+	if (!socket || (!socket.auth.token && accessToken) || (accessToken && socket.auth.token !== accessToken)) {
 		socket = io(getSocketBaseAndPath().domain, {
-			transports: ['polling', 'websocket'],
 			path: getSocketBaseAndPath().path,
 			auth: {
 				token: accessToken,

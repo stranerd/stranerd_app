@@ -1,5 +1,7 @@
 @import './global.scss';
 @import './ionic.scss';
+@import './tailwind.css';
+@import '~katex/dist/katex.min.css';
 
 .editor-body {
 	p {

@@ -12,7 +12,7 @@ export const uploadFile = async (path: string, file: File): Promise<Media> => {
 		const data = new FormData()
 		data.set('path', path)
 		data.set('file', file)
-		const utilsClient = new HttpClient(apiBases.UTILS)
+		const utilsClient = new HttpClient(apiBases.UTILS, { 'content-type': 'multipart/form-data' })
 		const media = await utilsClient.post<typeof data, Media>('/storage/file', data)
 		if (!media.link) media.link = apiBases.UTILS + media.path
 		return media
@@ -26,7 +26,7 @@ export const uploadFiles = async (path: string, files: File[]): Promise<Media[]>
 		const data = new FormData()
 		data.set('path', path)
 		files.forEach((file) => data.append('file', file))
-		const utilsClient = new HttpClient(apiBases.UTILS)
+		const utilsClient = new HttpClient(apiBases.UTILS, { 'content-type': 'multipart/form-data' })
 		const medias = await utilsClient.post<typeof data, Media[]>('/storage/files', data)
 		return medias.map((media) => {
 			if (!media.link) media.link = apiBases.UTILS + media.path

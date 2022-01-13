@@ -1,6 +1,5 @@
 <template>
 	<Justified>
-		<!-- TODO: Break into sections -->
 		<div v-if="flashCard" class="blueTop py-2">
 			<div class="flex items-center justify-between lg:w-8/12 w-full max-w-[60rem] mx-auto p-4">
 				<div>
@@ -14,7 +13,7 @@
 					</div>
 				</div>
 
-				<div class="flex items-center  text-white font-bold">
+				<div class="flex items-center text-white font-bold">
 					<div class="flex items-center lg:mr-8 mr-2" @click="cardMode = !cardMode">
 						<ion-icon
 							:icon="!cardMode ? copy: list"
@@ -79,5 +78,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-

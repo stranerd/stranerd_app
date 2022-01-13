@@ -2,11 +2,10 @@
 	<AutoComplete
 		:class="{'showAll': showAll}"
 		:default="def"
-		:icon="hasIcon"
 		:placeholder="placeholder"
 		:suggestions="subjects.filter((s) => !exclude.includes(s.id)).map((s) => ({ search: s.name, value: s.id, title: s.name }))"
 		:value="value"
-		class="w-full   rounded-xl text-main_dark"
+		class="w-full rounded-xl text-main_dark"
 		@update:value="update($event)"
 	/>
 </template>
@@ -20,11 +19,6 @@ export default defineComponent({
 	name: 'SelectSubject',
 	components: { AutoComplete },
 	props: {
-		hasIcon: {
-			type: Boolean,
-			required: false,
-			default: false
-		},
 		subjectId: {
 			type: String,
 			required: true

@@ -3,19 +3,17 @@
 		:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 ']">
 
 		<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full']" @click="flipped = !flipped">
-			<!--  front side  -->
 			<section
 				class="front h-96 flex items-center text-center justify-center custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
 				<h2>
-					<pre v-html="flashCard.set[page].question" class="whitespace-pre-wrap break-all font-rale" />
+					<DisplayHtml :html="flashCard.set[page].question" />
 				</h2>
 			</section>
 
-			<!--  back side  -->
 			<section
 				class="back h-96 flex items-center text-center justify-center custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
 				<h2 v-if="flipped">
-					<pre v-html="flashCard.set[page].answer" class="whitespace-pre-wrap break-all font-rale"/>
+					<DisplayHtml :html="flashCard.set[page].answer" />
 				</h2>
 			</section>
 		</div>

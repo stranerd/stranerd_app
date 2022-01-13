@@ -1,6 +1,6 @@
 import { BaseEntity, Media } from '@modules/core'
 import { appName } from '@utils/environment'
-import { capitalize, catchDivideByZero, formatNumber } from '@utils/commons'
+import { capitalize, catchDivideByZero, formatNumber, getPercentage } from '@utils/commons'
 import { getRankImage, RankTypes } from './rank'
 
 export enum RankingTimes {
@@ -224,6 +224,10 @@ export class UserEntity extends BaseEntity {
 		return 20 * days
 	}
 
+	get scorePercentage () {
+		return getPercentage(this.score, this.expectedScore)
+	}
+
 	get rankImage () {
 		return getRankImage(this.rank.id)
 	}
@@ -255,11 +259,10 @@ export class UserEntity extends BaseEntity {
 		return this.account.meta
 	}
 
-	get nerdScoreMessage () {
-		if (this.score / this.expectedScore > 0.75) return 'Your Nerd Score is high. Nice job.'
-		if (this.score / this.expectedScore > 0.5) return 'Your Nerd Score is ok but not there yet. Keep pushing.'
-		if (this.score / this.expectedScore > 0.25) return 'Your Nerd Score is not strong. You can do better.'
-		return 'Your Nerd Score is low. Try to bring it up.'
+	get nerdScoreColor () {
+		if (this.scorePercentage > 75) return '#00D246'
+		if (this.scorePercentage > 50) return '#546DD3'
+		return '#FF6666'
 	}
 
 	get isAdmin () {
