@@ -1,14 +1,32 @@
 <template>
 	<Justified>
 		<div class="blueTop">
-			<ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
-				<Institution :institutionId="institutionId" />
-			</ion-text>
-			<div class="flex items-center hidden">
-				<ion-text class="text-faded_gray font-semibold text-center">
-					Study exam questions and their solutions for tertiary level institutions in Nigeria.
-				</ion-text>
-			</div>
+			<!-- <ion-text class="heading lg:text-2xl font-bold text-white text-center my-2">
+				<Institution :institutionId="institutionId" /> yy
+			</ion-text> -->
+			<IonSelect v-model="courseId" class="capitalize mr-6" interface="action-sheet"
+				placeholder="Select the subject">
+				<IonSelectOption v-for="courseId in courses" :key="courseId" :value="courseId" class="capitalize">
+					<Course :courseId="courseId" />
+				</IonSelectOption>
+			</IonSelect>
+
+
+
+			<IonSelect v-model="year" class="capitalize mr-6" interface="action-sheet"
+				placeholder="Select the year">
+				<IonSelectOption v-for="year in years" :key="year" :value="year" class="capitalize">
+					<span>{{ year }}</span>
+				</IonSelectOption>
+			</IonSelect>
+
+			<IonSelect v-model="questionType" class="capitalize mr-6" interface="action-sheet"
+				placeholder="Select the question type">
+				<IonSelectOption v-for="questionType in questionTypes" :key="questionType" :value="questionType"
+					class="capitalize">
+					<span>{{ questionType }}</span>
+				</IonSelectOption>
+			</IonSelect>
 		</div>
 
 		<div class="md:w-8/12 lg:w-6/12 w-full px-4 mx-auto bg-white rounded-xl md:my-16 p-8 md:p-16 max-w-[600px]">
@@ -22,27 +40,9 @@
 					</ion-segment-button>
 				</ion-segment>
 
-				<IonSelect v-model="courseId" class="capitalize mb-8" interface="action-sheet"
-					placeholder="Select the subject">
-					<IonSelectOption v-for="courseId in courses" :key="courseId" :value="courseId" class="capitalize">
-						<Course :courseId="courseId" />
-					</IonSelectOption>
-				</IonSelect>
+			
 
-				<IonSelect v-model="year" class="capitalize mb-8" interface="action-sheet"
-					placeholder="Select the year">
-					<IonSelectOption v-for="year in years" :key="year" :value="year" class="capitalize">
-						<span>{{ year }}</span>
-					</IonSelectOption>
-				</IonSelect>
-
-				<IonSelect v-model="questionType" class="capitalize mb-8" interface="action-sheet"
-					placeholder="Select the question type">
-					<IonSelectOption v-for="questionType in questionTypes" :key="questionType" :value="questionType"
-						class="capitalize">
-						<span>{{ questionType }}</span>
-					</IonSelectOption>
-				</IonSelect>
+		
 
 				<IonButton :disabled="!prep" class="btn-primary" @click="startTest">
 					Start {{ testType === 'test' ? 'Test' : 'Studying' }}
@@ -57,7 +57,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
-import Institution from '@app/components/study/institutions/Institution.vue'
+// import Institution from '@app/components/study/institutions/Institution.vue'
 import Course from '@app/components/study/courses/Course.vue'
 import { useRoute } from 'vue-router'
 import { useTestPrepList } from '@app/composable/study/testPreps'
@@ -67,7 +67,7 @@ import { IonSegment, IonSegmentButton, IonSelect, IonSelectOption } from '@ionic
 export default defineComponent({
 	name: 'InstitutionPrepsPage',
 	displayName: 'Test Preps',
-	components: { Justified, Institution, Course, IonSelect, IonSelectOption, IonSegment, IonSegmentButton },
+	components: { Justified, Course, IonSelect, IonSelectOption, IonSegment, IonSegmentButton },
 	middlewares: ['isAuthenticated'],
 	setup () {
 		const route = useRoute()
