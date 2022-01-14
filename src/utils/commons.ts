@@ -2,6 +2,8 @@ import { Clipboard } from '@capacitor/clipboard'
 import { Share } from '@capacitor/share'
 import { Notify } from '@utils/dialog'
 
+export { extractTextFromHTML } from '@stranerd/validate'
+
 enum Numbers {
 	thousand = 10 ** 3,
 	million = 10 ** 6,
@@ -29,10 +31,6 @@ export const pluralize = (count: number, singular: string, plural: string) => co
 export const getRandomValue = () => Date.now() + Math.random().toString(36).substr(2)
 
 export const capitalize = (value: string) => value.trim().split(' ').map((c: string) => (c[0]?.toUpperCase() ?? '') + c.slice(1)).join(' ')
-
-export const extractTextFromHTML = (html: string) => html?.trim().replace(/<[^>]+>/g, '') ?? ''
-
-export const getStringCount = (text: string, occ: string) => (text.match(new RegExp(occ, 'gi')) ?? []).length
 
 export function groupBy<Type, Unique extends string | number> (array: Array<Type>, func: (item: Type) => Unique) {
 	const obj = array.reduce((acc, cur) => {
@@ -70,4 +68,4 @@ export const share = async ({ title, text, url }: { title: string, text: string,
 	})
 }
 
-export const getPercentage = (num: number, den: number) => den === 0 ? 0 : Math.round(num / den * 100)
+export const getPercentage = (num: number, den: number) => catchDivideByZero(num, den) * 100

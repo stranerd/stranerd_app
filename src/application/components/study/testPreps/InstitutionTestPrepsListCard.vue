@@ -1,34 +1,29 @@
 <template>
 	<div
-		class="m-0 w-full min-h-40 bg-white rounded-xl flex flex-col items-start justify-between md:gap-2 gap-[1rem] box-border p-6">
-		<ion-text class="font-bold text-main_dark heading">
-			<Institution :institutionId="institutionId" />
-		</ion-text>
-		<Tag
-			:tag="'2001-2022'"
-		/>
-		<div class="w-full flex items-center justify-between mt-3">
-			<!-- <router-link :to="`/study/preps/${institutionId}?type=test`" class="w-full">
-				<ion-button class="btn-primary w-full" size="small">Test</ion-button>
-			</router-link> -->
-			<router-link :to="`/study/preps/${institutionId}`" class="w-full">
-				<ion-button class="btn-outline text-primary  w-full" size="small">
-					Get started
-				</ion-button>
-			</router-link>
+		class="m-0 w-full h-48 bg-white rounded-xl flex flex-col items-start md:gap-2 gap-[1rem] box-border p-6">
+		<div class="w-full flex justify-between items-center">
+			<ion-text>
+				<Institution :institutionId="institutionId" class="font-bold text-main-dark" />
+			</ion-text>
+			<ion-icon :icon="arrowForward" class="text-3xl text-gray" />
 		</div>
+		<Tag :tag="yearGap" />
+
+		<router-link :to="`/study/preps/${institutionId}`" class="w-full mt-auto">
+			<ion-button class="btn-outline text-primary w-full">Get Started</ion-button>
+		</router-link>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import Institution from '@app/components/study/institutions/Institution.vue'
-import Tag from '../../questions/tags/Tag.vue'
+import { arrowForward } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'InstitutionTestPrepsListCard',
-	components: { Institution, Tag },
+	components: { Institution },
 	props: {
 		institutionId: {
 			type: String,
@@ -38,6 +33,16 @@ export default defineComponent({
 			type: Array as PropType<TestPrepEntity[]>,
 			required: true
 		}
+	},
+	setup (props) {
+		const startYear = computed(() => props.testPreps.map((prep) => prep.data.year)[0])
+		const endYear = computed(() => props.testPreps.map((prep) => prep.data.year).reverse()[0])
+		const yearGap = computed(() => {
+			if (startYear.value !== endYear.value) return `${startYear.value} - ${endYear.value}`
+			else return `${startYear.value}`
+		})
+
+		return { yearGap, arrowForward }
 	}
 })
 </script>

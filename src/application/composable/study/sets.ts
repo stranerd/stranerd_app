@@ -1,4 +1,4 @@
-import { computed, onUnmounted, onMounted, Ref, ref } from 'vue'
+import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import {
 	AddSet,
 	DeleteSetProp,
@@ -165,7 +165,7 @@ export const useMySets = () => {
 		await myGlobal[userId].listener.startListener()
 	})
 	onUnmounted(async () => {
-		await myGlobal[userId].listener.closeListener()
+		// await myGlobal[userId].listener.closeListener()
 	})
 
 	const rootSet = computed({
