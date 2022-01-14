@@ -19,7 +19,7 @@ import Justified from '@app/layouts/Justified.vue'
 import TestBody from '@app/components/study/tests/TestBody.vue'
 import { useTest } from '@app/composable/study/tests'
 import { useRoute } from 'vue-router'
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'TakeTest',
@@ -28,9 +28,7 @@ export default defineComponent({
 	middlewares: ['isAuthenticated'],
 	setup () {
 		const { testId } = useRoute().params
-		const { error, listener, loading, test } = useTest(testId as string)
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
+		const { error, loading, test } = useTest(testId as string)
 		return { error, loading, test }
 	}
 })

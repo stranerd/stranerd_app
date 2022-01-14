@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { useMySets } from '@app/composable/study/sets'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import RootSetView from '@app/components/study/sets/RootSetView.vue'
@@ -18,9 +18,7 @@ export default defineComponent({
 	middlewares: ['isAuthenticated'],
 	components: { DashboardLayout, RootSetView },
 	setup () {
-		const { rootSet, error, loading, listener } = useMySets()
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
+		const { rootSet, error, loading } = useMySets()
 		return { rootSet, error, loading }
 	}
 })

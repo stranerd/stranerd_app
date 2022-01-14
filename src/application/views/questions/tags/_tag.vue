@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import { useRoute } from 'vue-router'
 import { useTagQuestionList } from '@app/composable/questions/tag-questions'
@@ -26,9 +26,7 @@ export default defineComponent({
 	components: { Justified, QuestionListCard },
 	setup () {
 		const { tag } = useRoute().params
-		const { error, loading, questions, listener } = useTagQuestionList(tag as string)
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
+		const { error, loading, questions } = useTagQuestionList(tag as string)
 		return { tag, error, loading, questions }
 	}
 })

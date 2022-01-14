@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { SetEntity } from '@modules/study'
 import { useSet } from '@app/composable/study/sets'
 import { pluralize } from '@utils/commons'
@@ -59,9 +59,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { notes, flashCards, testPreps, videos, listener } = useSet(props.set)
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
+		const { notes, flashCards, testPreps, videos } = useSet(props.set)
 		return { folder, notes, flashCards, testPreps, videos, pluralize }
 	}
 })

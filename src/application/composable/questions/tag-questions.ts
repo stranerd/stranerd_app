@@ -1,4 +1,4 @@
-import { computed, onMounted, ref, Ref } from 'vue'
+import { computed, onUnmounted, onMounted, ref, Ref } from 'vue'
 import { GetTagQuestions, ListenToTagQuestions, QuestionEntity } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 
@@ -92,7 +92,11 @@ export const useTagQuestionList = (tag: string) => {
 
 	onMounted(async () => {
 		if (!global[tag].fetched.value && !global[tag].loading.value) await fetchQuestions()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
-	return { ...global[tag], listener, filteredQuestions, answeredChoices, fetchOlderQuestions: fetchQuestions }
+	return { ...global[tag], filteredQuestions, answeredChoices, fetchOlderQuestions: fetchQuestions }
 }

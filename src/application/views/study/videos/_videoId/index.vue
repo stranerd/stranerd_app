@@ -61,7 +61,7 @@
 import Justified from '@app/layouts/Justified.vue'
 import { add, bookmark, chevronBack, chevronForward, contract, pencil, play, scan, shareSocial } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 
 import { useRoute } from 'vue-router'
 import { useVideo } from '@app/composable/study/videos'
@@ -76,10 +76,7 @@ export default defineComponent({
 	},
 	setup () {
 		const { videoId } = useRoute().params
-		const { error, loading, video, listener } = useVideo(videoId as string)
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
-
+		const { error, loading, video } = useVideo(videoId as string)
 		return {
 			loading, video, play, add,
 			scan, chevronBack, chevronForward,

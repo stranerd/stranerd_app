@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useLeaderboardList } from '@app/composable/users/leaderboard'
 import { RankingTimes } from '@modules/users'
@@ -77,11 +77,8 @@ export default defineComponent({
 	},
 
 	setup (props) {
-		const { users, loading, hasNoAuthUser, listener } = useLeaderboardList(props.time)
+		const { users, loading, hasNoAuthUser } = useLeaderboardList(props.time)
 		const { user, id } = useAuth()
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
-
 		return { user, id, users, loading, hasNoAuthUser, formatNumber }
 	}
 })

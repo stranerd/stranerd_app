@@ -1,4 +1,4 @@
-import { onMounted, ref, Ref } from 'vue'
+import { onUnmounted, onMounted, ref, Ref } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { ChatMetaEntity, GetPersonalChatsMeta, ListenToPersonalChatsMeta } from '@modules/sessions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
@@ -73,6 +73,10 @@ export const useChatsList = () => {
 	onMounted(async () => {
 		if (!id.value) return
 		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchMeta()
+		await global[userId].listener.startListener()
+	})
+	onUnmounted(async () => {
+		await global[userId].listener.closeListener()
 	})
 	return { ...global[userId] }
 }

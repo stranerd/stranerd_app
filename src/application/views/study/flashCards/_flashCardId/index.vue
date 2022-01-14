@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import { copy, ellipsisVertical, list } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
@@ -64,16 +64,11 @@ export default defineComponent({
 	setup () {
 		const cardMode = ref(true)
 		const { flashCardId } = useRoute().params
-		const { flashCard, listener, error, loading } = useFlashCard(flashCardId as string)
+		const { flashCard, error, loading } = useFlashCard(flashCardId as string)
 		const openMenu = (event: Event) => openStudyEntityMenu(flashCard.value, {}, event)
-
-		onMounted(listener.startListener)
-		onUnmounted(listener.closeListener)
-
 		return {
 			openMenu, copy, list, cardMode,
 			flashCard, loading, ellipsisVertical
-
 		}
 	}
 })

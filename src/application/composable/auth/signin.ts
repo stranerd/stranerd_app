@@ -1,4 +1,4 @@
-import { Ref, ref } from 'vue'
+import { onMounted, Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import {
 	CompleteEmailVerification,
@@ -99,6 +99,7 @@ export const useCompleteEmailVerification = (token: string) => {
 		}
 		await setLoading(false)
 	}
+	onMounted(completeVerification)
 	return { loading, error, completeVerification }
 }
 
@@ -118,6 +119,7 @@ export const useEmailVerificationRequest = () => {
 		}
 		await setLoading(false)
 	}
+	onMounted(sendVerificationEmail)
 
 	return {
 		email: useAuth().auth.value?.email,

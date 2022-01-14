@@ -1,4 +1,4 @@
-import { onMounted, ref, Ref } from 'vue'
+import { onUnmounted, onMounted, ref, Ref } from 'vue'
 import {
 	AddComment,
 	CommentEntity,
@@ -54,13 +54,15 @@ export const useVideoCommentsList = (videoId: string) => {
 
 	onMounted(async () => {
 		if (!global[videoId].fetched.value && !global[videoId].loading.value) await fetchComments()
+		await listener.startListener()
 	})
-
+	onUnmounted(async () => {
+		await listener.closeListener()
+	})
 	return {
 		error: global[videoId].error,
 		loading: global[videoId].loading,
-		comments: global[videoId].comments,
-		listener
+		comments: global[videoId].comments
 	}
 }
 

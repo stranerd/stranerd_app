@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted } from 'vue'
+import { defineComponent } from 'vue'
 import { useAnswerCommentList } from '@app/composable/questions/answer-comments'
 import CommentsListCard from '@app/components/questions/comments/CommentsListCard.vue'
 
@@ -20,11 +20,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { comments, listener, loading, error } = useAnswerCommentList(props.answerId)
-
-		onMounted(listener.startListener)
-		onUnmounted(listener.closeListener)
-
+		const { comments, loading, error } = useAnswerCommentList(props.answerId)
 		return { comments, loading, error }
 	}
 })

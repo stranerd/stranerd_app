@@ -1,4 +1,4 @@
-import { computed, onMounted, Ref, ref } from 'vue'
+import { computed, onUnmounted, onMounted, Ref, ref } from 'vue'
 import {
 	AddVideo,
 	DeleteVideo,
@@ -65,12 +65,13 @@ export const useVideoList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchVideos()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
-	return {
-		...global, listener,
-		fetchOlderVideos: fetchVideos
-	}
+	return { ...global, fetchOlderVideos: fetchVideos }
 }
 
 export const useCreateVideo = () => {
@@ -196,7 +197,13 @@ export const useVideo = (videoId: string) => {
 		})
 	})
 
-	onMounted(fetchVideo)
+	onMounted(async () => {
+		await fetchVideo()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
+	})
 
-	return { error, loading, video, listener }
+	return { error, loading, video }
 }

@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, onUnmounted } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
 import { groupedByInstitution, useTestPrepList } from '@app/composable/study/testPreps'
@@ -27,11 +27,9 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { loading, error, listener, testPreps } = useTestPrepList()
+		const { loading, error, testPreps } = useTestPrepList()
 		const openMenu = (entity: TestPrepEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => groupedByInstitution(testPreps.value).value.slice(0, props.sliced ? 6 : undefined))
-		onMounted(listener.startListener)
-		onUnmounted(listener.closeListener)
 		return { filtered, openMenu, loading, error }
 	}
 })

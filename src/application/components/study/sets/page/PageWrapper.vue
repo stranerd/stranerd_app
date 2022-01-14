@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import { useSetById } from '@app/composable/study/sets'
 import { useRoute } from 'vue-router'
@@ -21,9 +21,7 @@ export default defineComponent({
 	components: { Justified, SetWrapper },
 	setup () {
 		const { setId } = useRoute().params
-		const { error, loading, set, listener } = useSetById(setId as string)
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
+		const { error, loading, set } = useSetById(setId as string)
 		return { error, loading, set }
 	}
 })

@@ -1,4 +1,4 @@
-import { computed, onMounted, reactive, ref, toRefs } from 'vue'
+import { computed, onUnmounted, onMounted, reactive, ref, toRefs } from 'vue'
 import { GetAllTutors, GetUsersByEmail, ListenToAllTutors, MakeTutor, RemoveTutor, UserEntity } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
@@ -76,9 +76,13 @@ export const useTutorsList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTutors()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
-	return { ...global, listener, filteredTutors, adminTutors }
+	return { ...global, filteredTutors, adminTutors }
 }
 
 export const useTutorRoles = () => {

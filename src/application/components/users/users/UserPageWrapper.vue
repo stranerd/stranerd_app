@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import PageLoading from '@app/components/core/PageLoading.vue'
 import Justified from '@app/layouts/Justified.vue'
 import { useUser } from '@app/composable/users/user'
@@ -74,9 +74,7 @@ export default defineComponent({
 	setup () {
 		const { id } = useAuth()
 		const { userId } = useRoute().params
-		const { user, loading, error, listener } = useUser(userId as string)
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
+		const { user, loading, error } = useUser(userId as string)
 		return { id, user, loading, error, formatNumber }
 	}
 })

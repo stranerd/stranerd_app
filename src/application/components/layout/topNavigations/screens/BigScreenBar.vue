@@ -8,7 +8,7 @@
 			</div>
 			<div class="flex w-[84%] gap-10 px-12">
 				<div class="w-3/4 flex-auto flex flex-row items-center">
-					<search-bar class="flex-grow " />
+					<SearchBar class="flex-grow" />
 				</div>
 				<div class="w-[25%] flex-auto flex">
 					<div class="flex flex-row items-center py-1 gap-8 justify-between">

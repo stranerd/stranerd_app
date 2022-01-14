@@ -85,7 +85,7 @@ Put flashcards, notes and test preps in the same folder."
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { SetEntity } from '@modules/study'
 import SetHeader from '@app/components/study/sets/SetHeader.vue'
 import SetStats from '@app/components/study/sets/SetStats.vue'
@@ -116,16 +116,9 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { id } = useAuth()
-		const { listener, loading, error, notes, videos, flashCards, testPreps } = useSet(props.set)
-		const { normalSets, loading: setLoading, error: setError, listener: mySetsListener } = useMySets()
-		onMounted(async () => {
-			await listener.startListener()
-			await mySetsListener.startListener()
-		})
-		onBeforeUnmount(async () => {
-			await listener.closeListener()
-			await mySetsListener.closeListener()
-		})
+		const { loading, error, notes, videos, flashCards, testPreps } = useSet(props.set)
+		const { normalSets, loading: setLoading, error: setError } = useMySets()
+
 		const sets = computed({
 			get: () => normalSets.value.slice(0, 6),
 			set: () => {

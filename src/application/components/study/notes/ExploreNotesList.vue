@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, onUnmounted } from 'vue'
+import { computed, defineComponent } from 'vue'
 import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 import { NoteEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
@@ -27,11 +27,9 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { loading, error, listener, notes, hasMore } = useNoteList()
+		const { loading, error, notes, hasMore } = useNoteList()
 		const openMenu = (entity: NoteEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => notes.value.slice(0, props.sliced ? 6 : undefined))
-		onMounted(listener.startListener)
-		onUnmounted(listener.closeListener)
 		return { filtered, openMenu, loading, error, hasMore }
 	}
 })

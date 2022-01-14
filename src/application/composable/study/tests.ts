@@ -1,4 +1,4 @@
-import { computed, onMounted, Ref, ref } from 'vue'
+import { computed, onUnmounted, onMounted, Ref, ref } from 'vue'
 import {
 	AddTest,
 	EndTest,
@@ -75,6 +75,10 @@ export const useTestList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTests()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
 	const unCompletedTests = computed({
@@ -84,10 +88,7 @@ export const useTestList = () => {
 		}
 	})
 
-	return {
-		...global, listener, unCompletedTests,
-		fetchOlderTests: fetchTests
-	}
+	return { ...global, unCompletedTests, fetchOlderTests: fetchTests }
 }
 
 export const useCreateTest = () => {
@@ -160,9 +161,15 @@ export const useTest = (testId: string) => {
 		})
 	})
 
-	onMounted(fetchTest)
+	onMounted(async () => {
+		await fetchTest()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
+	})
 
-	return { error, loading, test, listener }
+	return { error, loading, test }
 }
 
 export const useTestDetails = (test: TestEntity) => {

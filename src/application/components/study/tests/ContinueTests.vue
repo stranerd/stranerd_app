@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import ContinueTestCard from '@app/components/study/tests/ContinueTestCard.vue'
@@ -35,16 +35,13 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { unCompletedTests, listener, loading, error } = useTestList()
+		const { unCompletedTests, loading, error } = useTestList()
 
 		const tests = computed({
 			get: () => unCompletedTests.value.slice(0, props.sliced ? 6 : undefined),
 			set: () => {
 			}
 		})
-
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
 
 		return {
 			chevronForwardOutline, chevronBackOutline, ellipse,

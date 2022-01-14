@@ -1,4 +1,4 @@
-import { onMounted, ref, Ref } from 'vue'
+import { onUnmounted, onMounted, ref, Ref } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { GetReferrals, ListenToReferrals, ReferralEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
@@ -71,6 +71,10 @@ export const useReferralList = () => {
 	onMounted(async () => {
 		if (!id.value) return
 		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchReferrals()
+		await global[userId].listener.startListener()
+	})
+	onUnmounted(async () => {
+		await global[userId].listener.closeListener()
 	})
 
 	return { ...global[userId], fetchOlderReferrals: fetchReferrals }

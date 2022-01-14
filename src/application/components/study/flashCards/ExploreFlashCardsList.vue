@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, onUnmounted } from 'vue'
+import { computed, defineComponent } from 'vue'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import { FlashCardEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
@@ -27,11 +27,9 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { loading, error, listener, flashCards, hasMore } = useFlashCardList()
+		const { loading, error, flashCards, hasMore } = useFlashCardList()
 		const openMenu = (entity: FlashCardEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => flashCards.value.slice(0, props.sliced ? 6 : undefined))
-		onMounted(listener.startListener)
-		onUnmounted(listener.closeListener)
 		return { filtered, openMenu, loading, error, hasMore }
 	}
 })

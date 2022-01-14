@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { chevronBack } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
@@ -39,10 +39,7 @@ export default defineComponent({
 	},
 	setup () {
 		const { questionId } = useRoute().params
-		const { error, loading, question, listener } = useQuestion(questionId as string)
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
-
+		const { error, loading, question } = useQuestion(questionId as string)
 		return { chevronBack, error, loading, question }
 	}
 })

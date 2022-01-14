@@ -1,4 +1,4 @@
-import { computed, onMounted, Ref, ref } from 'vue'
+import { computed, onUnmounted, onMounted, Ref, ref } from 'vue'
 import { Router, useRouter } from 'vue-router'
 import {
 	AddQuestion,
@@ -115,10 +115,14 @@ export const useQuestionList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchQuestions()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
 	return {
-		...global, listener,
+		...global,
 		filteredQuestions, answeredChoices,
 		fetchOlderQuestions
 	}
@@ -193,9 +197,15 @@ export const useQuestion = (questionId: string) => {
 		})
 	})
 
-	onMounted(fetchQuestion)
+	onMounted(async () => {
+		await fetchQuestion()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
+	})
 
-	return { error, loading, question, listener }
+	return { error, loading, question }
 }
 
 let editingQuestion = null as QuestionEntity | null
