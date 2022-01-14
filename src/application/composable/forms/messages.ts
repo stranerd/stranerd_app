@@ -1,9 +1,9 @@
-import { ref } from 'vue'
+import { Ref, ref } from 'vue'
 import { AddMessage, MessageFactory } from '@modules/meta'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 
 export const useCreateMessage = () => {
-	const factory = ref(new MessageFactory())
+	const factory = ref(new MessageFactory()) as Ref<MessageFactory>
 	const { message, setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
@@ -15,7 +15,7 @@ export const useCreateMessage = () => {
 				await setLoading(true)
 				await AddMessage.call(factory.value)
 				factory.value.reset()
-				await await setMessage('Message sent successfully')
+				await setMessage('Message sent successfully')
 			} catch (error) {
 				await setError(error)
 			}

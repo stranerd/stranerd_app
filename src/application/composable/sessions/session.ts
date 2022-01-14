@@ -1,4 +1,4 @@
-import { computed, onMounted, ref, Ref, watch } from 'vue'
+import { computed, onUnmounted, onMounted, ref, Ref, watch } from 'vue'
 import { Router, useRouter } from 'vue-router'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { FindSession, GetSessions, ListenToSession, ListenToSessions, SessionEntity } from '@modules/sessions'
@@ -138,6 +138,10 @@ const useSession = (key: SessionKey, router: Router, callback: (key: SessionKey,
 
 	onMounted(async () => {
 		if (!global[key].fetched.value && !global[key].loading.value) await fetchSessions()
+		await global[key].listener.startListener()
+	})
+	onUnmounted(async () => {
+		await global[key].listener.closeListener()
 	})
 
 	watch(() => user.value?.session[key], () => {

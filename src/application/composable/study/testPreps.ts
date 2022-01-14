@@ -1,4 +1,4 @@
-import { computed, onMounted, Ref, ref } from 'vue'
+import { computed, onUnmounted, onMounted, Ref, ref } from 'vue'
 import {
 	AddTestPrep,
 	DeleteTestPrep,
@@ -65,12 +65,12 @@ export const useTestPrepList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTestPreps()
+		await listener.startListener()
 	})
-
-	return {
-		...global, listener,
-		fetchOlderTestPreps: fetchTestPreps
-	}
+	onUnmounted(async () => {
+		await listener.closeListener()
+	})
+	return { ...global, fetchOlderTestPreps: fetchTestPreps }
 }
 
 export const groupedByInstitution = (testPreps: TestPrepEntity[]) => computed({

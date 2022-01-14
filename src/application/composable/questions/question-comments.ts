@@ -1,4 +1,4 @@
-import { onMounted, ref, Ref } from 'vue'
+import { onUnmounted, onMounted, ref, Ref } from 'vue'
 import {
 	AddQuestionComment,
 	CommentEntity,
@@ -53,13 +53,16 @@ export const useQuestionCommentList = (questionId: string) => {
 
 	onMounted(async () => {
 		if (!global[questionId].fetched.value && !global[questionId].loading.value) await fetchComments()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
 	return {
 		error: global[questionId].error,
 		loading: global[questionId].loading,
-		comments: global[questionId].comments,
-		listener
+		comments: global[questionId].comments
 	}
 }
 

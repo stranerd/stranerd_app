@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted, PropType } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useLeaderboardList } from '@app/composable/users/leaderboard'
 import { RankingTimes } from '@modules/users'
@@ -46,12 +46,9 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { users: allUsers, loading, hasNoAuthUser, listener } = useLeaderboardList(props.time)
+		const { users: allUsers, loading, hasNoAuthUser } = useLeaderboardList(props.time)
 		const users = computed(() => allUsers.value.slice(0, 10))
 		const { user, id } = useAuth()
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
-
 		return { id, user, users, loading, hasNoAuthUser, formatNumber }
 	}
 })

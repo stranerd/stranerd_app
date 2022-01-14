@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
@@ -36,11 +36,8 @@ export default defineComponent({
 	setup () {
 		const {
 			filteredQuestions: questions, error, loading, hasMore,
-			answeredChoices, answered, subjectId, listener,
-			fetchOlderQuestions
+			answeredChoices, answered, subjectId, fetchOlderQuestions
 		} = useQuestionList()
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
 
 		return {
 			questions, error, loading, hasMore,

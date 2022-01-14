@@ -29,7 +29,7 @@
 import Justified from '@app/layouts/Justified.vue'
 import { add, bookmark, chevronDown, chevronUp, contract, pencil, remove, scan, shareSocial } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { useNote } from '@app/composable/study/notes'
 import Share from '@app/components/core/Share.vue'
@@ -41,16 +41,12 @@ export default defineComponent({
 	components: { Justified, Avatar, Note, Share },
 	setup () {
 		const { noteId } = useRoute().params
-		const { error, loading, note, listener } = useNote(noteId as string)
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
-
+		const { error, loading, note } = useNote(noteId as string)
 		return {
 			add, remove, scan, chevronDown, loading, note, error,
 			chevronUp, pencil, contract, bookmark, shareSocial
 		}
 	}
-
 })
 </script>
 

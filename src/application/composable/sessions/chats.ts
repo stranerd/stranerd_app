@@ -1,4 +1,4 @@
-import { computed, onMounted, ref, Ref } from 'vue'
+import { computed, onUnmounted, onMounted, ref, Ref } from 'vue'
 import { AddChat, ChatEntity, ChatFactory, GetChats, ListenToChats, MarkChatRead } from '@modules/sessions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
@@ -108,6 +108,10 @@ export const useChats = (userId: string) => {
 
 	onMounted(async () => {
 		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchChats()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
 	return {
@@ -119,7 +123,6 @@ export const useChats = (userId: string) => {
 		loading: global[userId].loading,
 		error: global[userId].error,
 		hasMore: global[userId].hasMore,
-		listener,
 		fetchOlderChats
 	}
 }

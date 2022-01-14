@@ -1,4 +1,4 @@
-import { computed, onMounted, Ref, ref } from 'vue'
+import { computed, onUnmounted, onMounted, Ref, ref } from 'vue'
 import {
 	AddNote,
 	DeleteNote,
@@ -65,12 +65,12 @@ export const useNoteList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchNotes()
+		await listener.startListener()
 	})
-
-	return {
-		...global, listener,
-		fetchOlderNotes: fetchNotes
-	}
+	onUnmounted(async () => {
+		await listener.closeListener()
+	})
+	return { ...global, fetchOlderNotes: fetchNotes }
 }
 
 export const useCreateNote = () => {
@@ -196,7 +196,13 @@ export const useNote = (noteId: string) => {
 		})
 	})
 
-	onMounted(fetchNote)
+	onMounted(async () => {
+		await fetchNote()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
+	})
 
-	return { error, loading, note, listener }
+	return { error, loading, note }
 }

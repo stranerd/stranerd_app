@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { useNotificationList } from '@app/composable/users/notifications'
 import Justified from '@app/layouts/Justified.vue'
 import NotificationCard from '@app/components/users/notifications/NotificationCard.vue'
@@ -63,13 +63,9 @@ export default defineComponent({
 			notifications,
 			error,
 			loading,
-			listener,
 			hasMore,
 			fetchOlderNotifications
 		} = useNotificationList(id.value)
-		onMounted(() => {
-			if (!listener.isRunning.value) listener.startListener()
-		})
 		return { notifications, error, loading, hasMore, fetchOlderNotifications, checkmarkDone }
 	}
 })

@@ -1,4 +1,4 @@
-import { onMounted, ref, Ref } from 'vue'
+import { onUnmounted, onMounted, ref, Ref } from 'vue'
 import { GetSimilarQuestions, ListenToSimilarQuestions, QuestionEntity } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 
@@ -48,12 +48,15 @@ export const useSimilarQuestionList = (question: QuestionEntity) => {
 
 	onMounted(async () => {
 		if (!global[question.id].fetched.value && !global[question.id].loading.value) await fetchQuestions()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
 	return {
 		error: global[question.id].error,
 		loading: global[question.id].loading,
-		questions: global[question.id].questions,
-		listener
+		questions: global[question.id].questions
 	}
 }

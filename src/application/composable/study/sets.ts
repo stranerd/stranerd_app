@@ -1,4 +1,4 @@
-import { computed, onMounted, Ref, ref } from 'vue'
+import { computed, onUnmounted, onMounted, Ref, ref } from 'vue'
 import {
 	AddSet,
 	DeleteSetProp,
@@ -106,9 +106,13 @@ export const useSetList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchSets()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
-	return { ...global, listener }
+	return { ...global }
 }
 
 export const useMySets = () => {
@@ -156,6 +160,13 @@ export const useMySets = () => {
 	}
 
 	if (!myGlobal[userId].fetched.value && !myGlobal[userId].loading.value) fetchSets().then()
+
+	onMounted(async () => {
+		await myGlobal[userId].listener.startListener()
+	})
+	onUnmounted(async () => {
+		await myGlobal[userId].listener.closeListener()
+	})
 
 	const rootSet = computed({
 		get: () => myGlobal[userId].sets.value.find((s) => s.isRoot) ?? null,
@@ -214,9 +225,15 @@ export const useSetById = (setId: string) => {
 		await setLoading(false)
 	}
 
-	onMounted(fetchSet)
+	onMounted(async () => {
+		await fetchSet()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
+	})
 
-	return { error, loading, set, listener }
+	return { error, loading, set }
 }
 
 export const useSet = (set: SetEntity) => {
@@ -315,6 +332,10 @@ export const useSet = (set: SetEntity) => {
 
 	onMounted(async () => {
 		if (!setGlobal[set.id].fetched.value && !setGlobal[set.id].loading.value) await fetchAllSetEntities()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
 	const notes = computed(() => setGlobal[set.id].notes.value.filter((note) => set.saved.notes.includes(note.id)))
@@ -323,8 +344,7 @@ export const useSet = (set: SetEntity) => {
 	const testPreps = computed(() => setGlobal[set.id].testPreps.value.filter((testPrep) => set.saved.testPreps.includes(testPrep.id)))
 
 	return {
-		...setGlobal[set.id],
-		listener, fetchAllSetEntities,
+		...setGlobal[set.id], fetchAllSetEntities,
 		notes, videos, flashCards, testPreps
 	}
 }
@@ -360,46 +380,6 @@ export const useSaveToSet = () => {
 	}
 
 	return { loading, error, saveToSet, removeFromSet }
-}
-
-export const useSaveFromASet = () => {
-	const { loading, setLoading } = useLoadingHandler()
-	const { error, setError } = useErrorHandler()
-
-	const setId = ref('')
-	const values = ref({
-		notes: [],
-		videos: [],
-		flashCards: [],
-		testPreps: []
-	} as Record<SaveKey, string[]>)
-
-	const addProp = (prop: SaveKey, id: string) => {
-		if (values.value[prop].includes(id)) return
-		values.value[prop].push(id)
-	}
-
-	const removeProp = (prop: SaveKey, id: string) => {
-		values.value[prop] = values.value[prop].filter((v) => v !== id)
-	}
-
-	const save = async () => {
-		const promises = Object.entries(values.value).map(async ([key, values]) => {
-			try {
-				await setLoading(true)
-				await SaveSetProp.call(setId.value, key as SaveKey, values)
-			} catch (e) {
-				await setError(e)
-			}
-			await setLoading(false)
-		})
-		await Promise.all(promises)
-	}
-
-	return {
-		loading, error, values, setId,
-		save, addProp, removeProp
-	}
 }
 
 export const useCreateSet = () => {

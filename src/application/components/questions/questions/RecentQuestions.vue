@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import QuestionListCard from '@app/components/questions/questions/RecentQuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
@@ -38,14 +38,12 @@ export default defineComponent({
 	name: 'RecentQuestions',
 	components: { QuestionListCard, EmptyState, IonBadge },
 	setup () {
-		const { questions: allQuestions, listener, loading, error } = useQuestionList()
+		const { questions: allQuestions, loading, error } = useQuestionList()
 		const questions = computed({
 			get: () => allQuestions.value.slice(0, 3),
 			set: () => {
 			}
 		})
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
 
 		return {
 			chevronForwardOutline, chevronBackOutline, ellipse,

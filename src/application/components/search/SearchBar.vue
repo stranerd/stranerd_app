@@ -30,6 +30,4 @@ export default defineComponent({
 		--icon-color: #8B9EB1;
 		--color: #8B9EB1;
 	}
-
-
 </style>

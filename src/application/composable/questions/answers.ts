@@ -1,4 +1,4 @@
-import { onMounted, ref, Ref } from 'vue'
+import { onUnmounted, onMounted, ref, Ref } from 'vue'
 import {
 	AddAnswer,
 	AnswerEntity,
@@ -61,13 +61,16 @@ export const useAnswerList = (questionId: string) => {
 
 	onMounted(async () => {
 		if (!global[questionId].fetched.value && !global[questionId].loading.value) await fetchAnswers()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
 	return {
 		error: global[questionId].error,
 		loading: global[questionId].loading,
-		answers: global[questionId].answers,
-		listener
+		answers: global[questionId].answers
 	}
 }
 

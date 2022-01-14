@@ -1,4 +1,4 @@
-import { computed, onMounted, ref, Ref } from 'vue'
+import { computed, onUnmounted, onMounted, ref, Ref } from 'vue'
 import { GetLeaderboard, RankingTimes, UserEntity } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
@@ -48,7 +48,11 @@ export const useLeaderboardList = (key: RankingTimes) => {
 
 	onMounted(async () => {
 		if (!global[key].fetched.value && !global[key].loading.value) await fetchUsers()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
-	return { ...global[key], listener, hasNoAuthUser }
+	return { ...global[key], hasNoAuthUser }
 }

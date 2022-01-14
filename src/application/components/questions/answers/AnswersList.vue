@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { openAnswerModal, useAnswerList } from '@app/composable/questions/answers'
 import { QuestionEntity } from '@modules/questions'
 import AnswersListCard from '@app/components/questions/answers/AnswersListCard.vue'
@@ -38,7 +38,7 @@ export default defineComponent({
 	components: { AnswersListCard, EmptyState },
 	setup (props) {
 		const { id } = useAuth()
-		const { answers, listener, error, loading } = useAnswerList(props.question.id)
+		const { answers, error, loading } = useAnswerList(props.question.id)
 
 		const showAnswerButton = computed({
 			get: () => props.question.userId !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
@@ -46,8 +46,6 @@ export default defineComponent({
 			}
 		})
 
-		onMounted(listener.startListener)
-		onBeforeUnmount(listener.closeListener)
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),
 			answers, error, loading, showAnswerButton

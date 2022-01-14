@@ -10,11 +10,9 @@
 						If an error occurred, click the button below to retry verification.
 					</span>
 					<div class="h-[65%]">
-						<form
-							@submit.prevent="completeVerification"
-						>
-							<ion-button :disabled="loading" class="w-full mb-4 uppercase" type="submit"> Retry
-								Verification
+						<form @submit.prevent="completeVerification">
+							<ion-button :disabled="loading" class="w-full mb-4 uppercase" type="submit">
+								Retry Verification
 								<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
 							</ion-button>
 						</form>
@@ -30,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { useCompleteEmailVerification } from '@app/composable/auth/signin'
 import { IonButton, IonContent, IonPage, IonSpinner } from '@ionic/vue'
 import { useRoute } from 'vue-router'
@@ -42,11 +40,8 @@ export default defineComponent({
 	setup () {
 		const { token } = useRoute().query
 		const { loading, error, completeVerification } = useCompleteEmailVerification(token as string)
-		onMounted(completeVerification)
-
 		return { loading, error, completeVerification }
 	}
-
 })
 </script>
 

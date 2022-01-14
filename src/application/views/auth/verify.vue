@@ -2,7 +2,6 @@
 	<ion-page>
 		<ion-content>
 			<div class="w-full mt-10 h-full flex flex-col items-center justify-start ">
-
 				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
 					<h1 class="lg:text-2xl text-xl text-main_dark font-bold mb-2 text-center">Verify Your Email
 						Address</h1>
@@ -11,9 +10,7 @@
 						If an error occurred or you didn't receive the email, click the button below to resend the email.
 					</span>
 					<div class="h-[65%]">
-						<form
-							@submit.prevent="sendVerificationEmail"
-						>
+						<form @submit.prevent="sendVerificationEmail">
 							<ion-button class="w-full mb-4 uppercase" type="submit">Resend Mail
 								<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
 							</ion-button>
@@ -27,11 +24,10 @@
 			</div>
 		</ion-content>
 	</ion-page>
-
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { useEmailVerificationRequest } from '@app/composable/auth/signin'
 import { IonButton, IonContent, IonPage, IonSpinner } from '@ionic/vue'
 
@@ -41,11 +37,8 @@ export default defineComponent({
 	middlewares: ['isAuthenticated'],
 	setup () {
 		const { email, loading, error, message, sendVerificationEmail } = useEmailVerificationRequest()
-		onMounted(sendVerificationEmail)
-
 		return { email, loading, error, message, sendVerificationEmail }
 	}
-
 })
 </script>
 

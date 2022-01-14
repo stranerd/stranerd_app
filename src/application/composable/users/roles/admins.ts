@@ -1,4 +1,4 @@
-import { computed, onMounted, reactive, ref, toRefs } from 'vue'
+import { computed, onUnmounted, onMounted, reactive, ref, toRefs } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { GetAllAdmins, GetUsersByEmail, ListenToAllAdmins, MakeAdmin, RemoveAdmin, UserEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
@@ -60,9 +60,13 @@ export const useAdminsList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchAdmins()
+		await listener.startListener()
+	})
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
-	return { ...global, listener, filteredAdmins }
+	return { ...global, filteredAdmins }
 }
 
 export const useAdminRoles = () => {
