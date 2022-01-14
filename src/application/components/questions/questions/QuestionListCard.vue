@@ -1,6 +1,6 @@
 <template>
 	<router-link
-		:class="`py-4 px-6 rounded-xl bg-white flex flex-col justify-between w-full text-xs md:text-sm relative cursor-pointer `"
+		:class="`p-4 rounded-xl bg-white flex flex-col justify-between w-full text-xs md:text-sm relative cursor-pointer `"
 		:to="`/questions/${question.id}`">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
