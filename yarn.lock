@@ -944,7 +944,7 @@
   resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.3.3.tgz#b09708e58fb942e2b5afe6081c7377d4785271aa"
   integrity sha512-YfLW8gh/b3ZifmhQPFS9ybAnPp4MutQWGFYiAVecRh3O5nJD/UgZAmUmqpSoWRAOWbNGLX4lhWUIs+cCf552fg==
 
-"@capacitor/android@^3.3.3":
+"@capacitor/android@^3.3.4":
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.3.4.tgz#ee6565f53d9e78368b9b2d50ee778b961f4d3729"
   integrity sha512-5eaiZr79Dm1MNBjszVBXx8Io8YH+/RyFS6ix6V2LaKC4xj4i24kBJug5AHV4UbBBr9e/+RsAE9sui+SlkB1jNg==
@@ -1008,7 +1008,7 @@
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.3.3.tgz#c5e3342187b35b2dcef13054461f9691f10351a0"
   integrity sha512-SQ35AaHUIJjjEX22wwdoN1sUZ3uMwG0HrZ0izMeBJBDE+vmNI78SP9wMqJxKuCaaX4oFKrxCtf/fQZGVTSxpCQ==
 
-"@capacitor/ios@^3.3.3":
+"@capacitor/ios@^3.3.4":
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.3.4.tgz#4ca47f205f439b18bea05bece46d311650de4e19"
   integrity sha512-dPr6j0JiV4BKCFyTNaZp/wgNgTfhwdSvMXXh3yoj99aiWWZLy8f1PxFO7S6N+GlhVOnH/I6cFpXd3dZZLGzsTA==
@@ -1018,7 +1018,7 @@
   resolved "https://registry.yarnpkg.com/@capacitor/keyboard/-/keyboard-1.2.0.tgz#bb3e8fa0cfb7c80338494b29a81158f893b000d3"
   integrity sha512-FgtMAdNRtVarSo0P99UnkM+WcKCmWevUSccBVRqoGYnJOXkvByY8UtZcDe4YI0/uTTA4TiQKt/epuGHHUTaVSw==
 
-"@capacitor/share@^1.0.7":
+"@capacitor/share@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@capacitor/share/-/share-1.1.0.tgz#077f25a3258d0497e04f6235ea5f8fc8444eb4fe"
   integrity sha512-Y+f7COX458N+MJbwuUAow9UDn2JZuj1F762byA6gN2CR1ooyNTpj8ZuhO97D5WiplI8nKWuybq5xAqZCnKevBA==
@@ -1043,7 +1043,7 @@
   resolved "https://registry.yarnpkg.com/@capacitor/toast/-/toast-1.0.6.tgz#186e6bca85765e73511e7f82de85e6134ba0f0ef"
   integrity sha512-GY6ZuiJx2gEBqP2syiQV+14PxXTA6BGyHRmtfgc7h8UKJ7U5QLTf5Z0L3aQfaP3XbsyJWWtjnBJ71R+RpHOoTg==
 
-"@commitlint/cli@^16.0.0":
+"@commitlint/cli@^16.0.2":
   version "16.0.2"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-16.0.2.tgz#393b03793fc59b93e5f4dd7dd535a6cc5a7413ca"
   integrity sha512-Jt7iaBjoLGC5Nq4dHPTvTYnqPGkElFPBtTXTvBpTgatZApczyjI2plE0oG4GYWPp1suHIS/VdVDOMpPZjGVusg==
@@ -1497,7 +1497,7 @@
     untildify "^4.0.0"
     wrap-ansi "^7.0.0"
 
-"@ionic/vue-router@^6.0.1":
+"@ionic/vue-router@^6.0.2":
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/@ionic/vue-router/-/vue-router-6.0.2.tgz#bf0471814749098d502f90f09056bb3ffffccb2b"
   integrity sha512-pCDL3J2qKWLDan1qotAXXvH26uAUYvbuM+xXTQ5XNZ5VPYJQdSIy+RXQ4d9SxZOQR074mcDhmkW22F4DFBPpCg==
@@ -3786,7 +3786,7 @@ core-js-compat@^3.18.0, core-js-compat@^3.19.1, core-js-compat@^3.6.5:
     browserslist "^4.19.1"
     semver "7.0.0"
 
-core-js@^3.20.1:
+core-js@^3.20.2:
   version "3.20.2"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.20.2.tgz#46468d8601eafc8b266bd2dd6bf9dee622779581"
   integrity sha512-nuqhq11DcOAbFBV4zCbKeGbKQsUDRqTX0oqx7AttUBuqe3h20ixsE039QHelbL6P4h+9kytVqyEtyZ6gsiwEYw==
@@ -6803,7 +6803,7 @@ jsprim@^1.2.2:
     json-schema "0.4.0"
     verror "1.10.0"
 
-katex@^0.15.1:
+katex@^0.15.2:
   version "0.15.2"
   resolved "https://registry.yarnpkg.com/katex/-/katex-0.15.2.tgz#c05ece41ab497597b17abca2cecde3e4c0127f9d"
   integrity sha512-FfZ/f6f8bQdLmJ3McXDNTkKenQkoXkItpW0I9bsG2wgb+8JAY5bwpXFtI8ZVrg5hc1wo1X/UIhdkVMpok46tEQ==
@@ -9789,7 +9789,7 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-socket.io-client@^4.4.0:
+socket.io-client@^4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/socket.io-client/-/socket.io-client-4.4.1.tgz#b6aa9448149d09b8d0b2bbf3d2fac310631fdec9"
   integrity sha512-N5C/L5fLNha5Ojd7Yeb/puKcPWWcoB/A09fEjjNsg91EDVr5twk/OEyO6VT9dlLSUNY85NpW6KBhVMvaLKQ3vQ==
@@ -10288,6 +10288,11 @@ svgo@^1.0.0:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+sweetalert2@^11.3.5:
+  version "11.3.5"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.3.5.tgz#8ba51a3c94506f5c5b60c773bf50aad6ccab04a4"
+  integrity sha512-0NlqxsMvoTpVrLD9bQN/aN2JleuaXLLiBDvG/kYWHzjeOmDp8Yn7AEOcUnyCHDf9jT7w7BeziSX8mnijg0mDJw==
 
 table@^5.2.3:
   version "5.4.6"
