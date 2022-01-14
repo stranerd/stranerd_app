@@ -1,16 +1,19 @@
 <template>
 	<div
 		class="m-0 w-full min-h-40 bg-white rounded-xl flex flex-col items-start justify-between md:gap-2 gap-[1rem] box-border p-6">
-		<ion-text class="font-bold text-main_dark">
+		<ion-text class="font-bold text-main_dark heading">
 			<Institution :institutionId="institutionId" />
 		</ion-text>
-		<div class="w-full flex items-center justify-between gap-3">
-			<router-link :to="`/study/preps/${institutionId}?type=test`" class="w-full">
+		<Tag
+			:tag="'2001-2022'"
+		/>
+		<div class="w-full flex items-center justify-between mt-3">
+			<!-- <router-link :to="`/study/preps/${institutionId}?type=test`" class="w-full">
 				<ion-button class="btn-primary w-full" size="small">Test</ion-button>
-			</router-link>
-			<router-link :to="`/study/preps/${institutionId}?type=study`" class="w-full">
+			</router-link> -->
+			<router-link :to="`/study/preps/${institutionId}`" class="w-full">
 				<ion-button class="btn-outline text-primary  w-full" size="small">
-					Solutions
+					Get started
 				</ion-button>
 			</router-link>
 		</div>
@@ -21,10 +24,11 @@
 import { defineComponent, PropType } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import Institution from '@app/components/study/institutions/Institution.vue'
+import Tag from '../../questions/tags/Tag.vue'
 
 export default defineComponent({
 	name: 'InstitutionTestPrepsListCard',
-	components: { Institution },
+	components: { Institution, Tag },
 	props: {
 		institutionId: {
 			type: String,
