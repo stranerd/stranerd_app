@@ -1,4 +1,4 @@
-import { computed, onUnmounted, onMounted, Ref, ref } from 'vue'
+import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import {
 	AddFlashCard,
 	DeleteFlashCard,
@@ -83,7 +83,7 @@ export const useFlashCardList = () => {
 		await listener.closeListener()
 	})
 
-	return { ...global }
+	return { ...global, fetchOlderFlashCards: fetchFlashCards }
 }
 
 export const useUserFlashCardList = (userId: string) => {

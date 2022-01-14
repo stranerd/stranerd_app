@@ -1,9 +1,12 @@
 <template>
 	<div>
 		<EmptyState v-if="filtered.length === 0" info="No videos found." />
-		<div v-else class="showcase">
+		<div class="showcase">
 			<VideoListCard v-for="video in filtered" :key="video.hash" :openMenu="(event) => openMenu(video, event)"
 				:video="video" />
+		</div>
+		<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
+			<a @click.prevent="fetchOlderVideos">Load More</a>
 		</div>
 		<PageLoading v-if="loading" />
 	</div>
@@ -27,10 +30,10 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { loading, error, videos, hasMore } = useVideoList()
+		const { loading, error, videos, hasMore, fetchOlderVideos } = useVideoList()
 		const openMenu = (entity: VideoEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => videos.value.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, openMenu, loading, error, hasMore }
+		return { filtered, openMenu, loading, error, hasMore, fetchOlderVideos }
 	}
 })
 </script>

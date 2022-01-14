@@ -20,9 +20,9 @@
 			</div>
 		</div>
 
-		<router-link
-			class="w-full"
-			to="/users/leaderboard">
+		<EmptyState v-if="!user && users.length === 0" info="No user has earned points this period." />
+
+		<router-link class="w-full" to="/users/leaderboard">
 			<ion-button class="btn-primary w-full">
 				Leaderboard
 			</ion-button>
