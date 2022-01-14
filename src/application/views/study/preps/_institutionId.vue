@@ -6,7 +6,7 @@
 					<ion-text class="heading lg:text-2xl font-bold text-white mx-auto text-center">
 						<Institution :institutionId="institutionId" />
 					</ion-text>
-					<div class="mx-auto w-full lg:w-8/12 showcase mt-4">
+					<div class="mx-auto w-full lg:w-7/12 showcase mt-4">
 						<IonSelect v-model="courseId" class="capitalize" interface="action-sheet"
 							placeholder="Select the subject">
 							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
@@ -36,7 +36,7 @@
 				</div>
 			</div>
 
-			<div class="p-4 lg:w-8/12 w-full mx-auto showcase">
+			<div class="p-4 lg:w-7/12 w-full mx-auto showcase">
 				<TestPrepListCard v-for="prep in preps" :key="prep.hash" :openMenu="openMenu" :testPrep="prep" />
 			</div>
 		</div>
