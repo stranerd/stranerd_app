@@ -4,7 +4,7 @@
 			<EmptyState btnText="Explore Notes"
 				info="You have not saved any notes yet. <br>
 Find the ones you need to study for your exams, tests or homeworks and save them now."
-				route="/search/notes"
+				route="/explore/notes"
 			/>
 		</template>
 		<template v-else>
