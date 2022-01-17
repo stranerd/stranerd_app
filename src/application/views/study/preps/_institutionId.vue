@@ -7,14 +7,20 @@
 						<Institution :institutionId="institutionId" />
 					</ion-text>
 					<div class="mx-auto w-full lg:w-7/12 showcase mt-4">
-						<IonSelect v-model="courseId" class="capitalize" interface="action-sheet"
-							placeholder="Select the subject">
-							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
-							<IonSelectOption v-for="courseId in courses" :key="courseId" :value="courseId"
-								class="capitalize">
-								<Course :courseId="courseId" />
-							</IonSelectOption>
-						</IonSelect>
+
+						<ion-item>
+							<ion-label class="text-main_dark font-bold text-body"> Subject</ion-label>
+							<IonSelect v-model="courseId" class="capitalize" interface="action-sheet"
+								placeholder="Select the subject">
+								<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
+								<IonSelectOption v-for="courseId in courses" :key="courseId" :value="courseId"
+									class="capitalize">
+									<Course :courseId="courseId" />
+								</IonSelectOption>
+							</IonSelect>
+						</ion-item>
+
+						
 
 						<IonSelect v-model="year" class="capitalize" interface="action-sheet"
 							placeholder="Select the year">
@@ -50,7 +56,7 @@ import Institution from '@app/components/study/institutions/Institution.vue'
 import Course from '@app/components/study/courses/Course.vue'
 import { useRoute } from 'vue-router'
 import { useTestPrepList } from '@app/composable/study/testPreps'
-import { IonSelect, IonSelectOption } from '@ionic/vue'
+import { IonSelect, IonSelectOption, IonItem, IonLabel } from '@ionic/vue'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import { TestPrepEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
@@ -58,7 +64,7 @@ import { openStudyEntityMenu } from '@app/composable/study/menus'
 export default defineComponent({
 	name: 'InstitutionPrepsPage',
 	displayName: 'Test Preps',
-	components: { Justified, Institution, Course, IonSelect, IonSelectOption, TestPrepListCard },
+	components: { Justified, Institution, Course, IonSelect, IonSelectOption, TestPrepListCard, IonItem, IonLabel },
 	middlewares: ['isAuthenticated'],
 	setup () {
 		const route = useRoute()
@@ -92,6 +98,15 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+	ion-item {
+		background: #fff;
+		border-radius: .75rem;
+		--border-radius: .75rem;
+		--padding-start: 1rem;
+		--padding-end: 0 !important;
+		--inner-padding-end: 0px;
+		
+	}
 	ion-select {
 		background: #fff;
 		border-radius: .75rem;
@@ -100,4 +115,9 @@ export default defineComponent({
 		--padding-top: 0.8rem;
 		--padding-bottom: 0.8rem;
 	}
+
+ion-select::part(icon) {
+
+  margin-left: 1rem;
+}
 </style>
