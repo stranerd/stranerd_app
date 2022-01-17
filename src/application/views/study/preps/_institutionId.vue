@@ -52,9 +52,16 @@
 				</div>
 			</div>
 
-			<div class="p-4 lg:w-7/12 w-full mx-auto showcase">
+			<div class="p-4 lg:w-7/12 w-full mx-auto showcase" v-if="preps.length">
 				<TestPrepListCard v-for="prep in preps" :key="prep.hash" :openMenu="openMenu" :testPrep="prep" />
 			</div>
+			<div class="p-4 lg:w-7/12 w-full mx-auto " v-else>
+				<EmptyState  
+					info="There is currently no test for the given <b>Subject/Year/Mode</b>"
+				/>
+			</div>
+
+		
 		</div>
 	</Justified>
 </template>
@@ -70,11 +77,12 @@ import { IonSelect, IonSelectOption, IonItem, IonLabel } from '@ionic/vue'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import { TestPrepEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
+import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
 	name: 'InstitutionPrepsPage',
 	displayName: 'Test Preps',
-	components: { Justified, Institution, Course, IonSelect, IonSelectOption, TestPrepListCard, IonItem, IonLabel },
+	components: { Justified, Institution, Course, IonSelect, IonSelectOption, TestPrepListCard, IonItem, IonLabel , EmptyState},
 	middlewares: ['isAuthenticated'],
 	setup () {
 		const route = useRoute()
