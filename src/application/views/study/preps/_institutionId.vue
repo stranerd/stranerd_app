@@ -9,7 +9,7 @@
 					<div class="mx-auto w-full lg:w-7/12 showcase mt-4">
 
 						<ion-item>
-							<ion-label class="text-main_dark font-bold text-body"> Subject</ion-label>
+							<ion-label class="!text-gray font-bold text-body"> Subject</ion-label>
 							<IonSelect v-model="courseId" class="capitalize" interface="action-sheet"
 								placeholder="Select the subject">
 								<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
@@ -20,24 +20,34 @@
 							</IonSelect>
 						</ion-item>
 
+						<ion-item>
+							<ion-label class="!text-gray font-bold text-body"> Year</ion-label>
+							<IonSelect v-model="year" class="capitalize" interface="action-sheet"
+								placeholder="Select the year">
+								<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
+								<IonSelectOption v-for="year in years" :key="year" :value="year" class="capitalize">
+									<span>{{ year }}</span>
+								</IonSelectOption>
+							</IonSelect>
+						</ion-item>
+
+						<ion-item>
+							<ion-label class="!text-gray font-bold text-body"> Mode</ion-label>
+							<IonSelect v-model="questionType" class="capitalize" interface="action-sheet"
+								placeholder="Select the question type">
+								<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
+								<IonSelectOption v-for="questionType in questionTypes" :key="questionType"
+									:value="questionType" class="capitalize">
+									<span>{{ questionType }}</span>
+								</IonSelectOption>
+							</IonSelect>
+						</ion-item>
+
 						
 
-						<IonSelect v-model="year" class="capitalize" interface="action-sheet"
-							placeholder="Select the year">
-							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
-							<IonSelectOption v-for="year in years" :key="year" :value="year" class="capitalize">
-								<span>{{ year }}</span>
-							</IonSelectOption>
-						</IonSelect>
+				
 
-						<IonSelect v-model="questionType" class="capitalize" interface="action-sheet"
-							placeholder="Select the question type">
-							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
-							<IonSelectOption v-for="questionType in questionTypes" :key="questionType"
-								:value="questionType" class="capitalize">
-								<span>{{ questionType }}</span>
-							</IonSelectOption>
-						</IonSelect>
+					
 					</div>
 				</div>
 			</div>
