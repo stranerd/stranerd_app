@@ -27,6 +27,7 @@ import {
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { useMenuPopover, useStudyModal } from '@app/composable/core/modals'
+import { Notify } from '@utils/dialog'
 
 type SaveKey = keyof SetEntity['saved']
 
@@ -357,6 +358,7 @@ export const useSaveToSet = () => {
 		try {
 			await setLoading(true)
 			await SaveSetProp.call(set.id, prop, [itemId])
+			await Notify({ title: 'Saved to set successfully' })
 			useMenuPopover().closeStudyEntityMenu()
 		} catch (e) {
 			await setError(e)
@@ -368,6 +370,7 @@ export const useSaveToSet = () => {
 		try {
 			await setLoading(true)
 			await DeleteSetProp.call(set.id, prop, [itemId])
+			await Notify({ title: 'Removed from set successfully' })
 			useMenuPopover().closeStudyEntityMenu()
 		} catch (e) {
 			await setError(e)

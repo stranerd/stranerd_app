@@ -9,7 +9,7 @@
 					</ion-text>
 					<ion-searchbar v-model.trim="searchTerm"
 						:debounce="700"
-						class="lg:w-7/12 w-11/12 p-0 mb-8 mt-5 lg:mt-0"
+						class="lg:w-7/12 w-11/12 mb-8 mt-5 lg:mt-0"
 						placeholder="Search for anything..."
 						showCancelButton="never"
 					/>
@@ -67,17 +67,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-searchbar {
-		--background: #fff !important;
-		--box-shadow: none !important;
-		--border-radius: .75rem;
-		border-radius: .75rem;
-		--icon-color: #8B9EB1;
-		--color: #8B9EB1;
-		--placeholder-color: #8B9EB1;
-	}
-
-
-</style>

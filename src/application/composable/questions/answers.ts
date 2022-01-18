@@ -1,4 +1,4 @@
-import { onUnmounted, onMounted, ref, Ref } from 'vue'
+import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import {
 	AddAnswer,
 	AnswerEntity,
@@ -135,9 +135,8 @@ export const useAnswer = (answer: AnswerEntity) => {
 		await setLoading(false)
 	}
 
-	const markBestAnswer = async (question: QuestionEntity | null) => {
-		if (!question || question.isAnswered) return
-		if (question.userId !== id.value) return
+	const markBestAnswer = async (question: QuestionEntity) => {
+		if (question.isAnswered || question.userId !== id.value || answer.best) return
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to mark this answer as the best',

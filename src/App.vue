@@ -1,6 +1,6 @@
 <template>
 	<IonApp>
-		<IonRouterOutlet />
+		<IonRouterOutlet :key="$route.fullPath" />
 	</IonApp>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-	<div class="flex justify-center flex-col lg:w-8/12 w-full mx-auto bg-white md:my-16 p-8 md:p-16">
+	<div class="flex justify-center flex-col lg:w-8/12 w-full mx-auto bg-white md:my-8 p-8 md:p-16">
 		<ion-segment v-model="tab" class="md:w-96 mb-12 mx-auto" mode="ios">
 			<ion-segment-button value="list">
 				<ion-label>All questions</ion-label>
@@ -146,15 +146,5 @@ export default defineComponent({
 
 	.ion-iten-transparent {
 		--background: transparent;
-	}
-
-	ion-searchbar {
-		--box-shadow: 'none';
-		--border-radius: 0.5rem;
-	}
-
-	.searchbar-input.sc-ion-searchbar-md {
-		padding-top: 12px;
-		padding-bottom: 12px;
 	}
 </style>

@@ -1,6 +1,7 @@
 import { Clipboard } from '@capacitor/clipboard'
 import { Share } from '@capacitor/share'
 import { Notify } from '@utils/dialog'
+import { isNumber } from '@stranerd/validate'
 
 export { extractTextFromHTML } from '@stranerd/validate'
 
@@ -16,7 +17,7 @@ enum Numbers {
 export const catchDivideByZero = (num: number, den: number) => den === 0 ? 0 : num / den
 
 export const formatNumber = (num: number, dp = 0) => {
-	num = Math.abs(num)
+	num = Math.abs(isNumber(num) ? num : 0)
 	const zerosOfDp = '.' + new Array(dp).fill('0').map((x) => x).join('')
 	if (num < Numbers.thousand) return num.toFixed(dp).replace(zerosOfDp, '')
 	else if (num < Numbers.million) return (num / Numbers.thousand).toFixed(1).replace('.0', '') + 'k'

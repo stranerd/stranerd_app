@@ -175,19 +175,9 @@ export default defineComponent({
 		--background: transparent;
 	}
 
-	ion-searchbar {
-		--box-shadow: 'none';
-		--border-radius: 0.5rem;
-	}
-
 	ion-label {
 		@media (max-width: 640px) {
 			font-size: 12px !important;
 		}
-	}
-
-	.searchbar-input.sc-ion-searchbar-md {
-		padding-top: 12px;
-		padding-bottom: 12px;
 	}
 </style>

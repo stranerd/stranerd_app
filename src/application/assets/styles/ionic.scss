@@ -185,6 +185,15 @@ ion-popover {
 	}
 }
 
+ion-searchbar {
+	--background: #fff !important;
+	--box-shadow: none !important;
+	--border-radius: .75rem !important;
+	--icon-color: #8B9EB1;
+	--color: $color-mainDark;
+	--placeholder-color: #8B9EB1;
+}
+
 .searchbar-search-icon.sc-ion-searchbar-md, .searchbar-cancel-button.sc-ion-searchbar-md {
 	position: absolute;
 	margin-top: 11px !important;
@@ -194,16 +203,11 @@ ion-popover {
 	}
 }
 
-ion-input {
+ion-input, ion-textarea {
 	--padding-start: 1rem !important;
 	--padding-end: 1rem !important;
+	--color: $color-mainDark;
 }
-
-ion-textarea {
-	--padding-start: 1rem !important;
-	--padding-end: 1rem !important;
-}
-
 
 .btn-secondary {
 	--background: #4D5C6F;
@@ -362,7 +366,6 @@ ion-input {
 	--border-radius: .75rem;
 	border-radius: .75rem;
 	--icon-color: #8B9EB1;
-	--color: #8B9EB1;
 	--padding-bottom: 4em;
 }
 
@@ -393,7 +396,7 @@ ion-segment-button {
 	--indicator-box-shadow: none;
 	--padding-top: 0.8rem;
 	--padding-bottom: 0.8rem;
-	color: #8B9EB1;
+	color: $color-mainDark;
 	font-weight: bold;
 }
 

@@ -20,14 +20,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-searchbar {
-		--background: #F2F3F5 !important;
-		--box-shadow: none !important;
-		--border-radius: .75rem;
-		border-radius: .75rem;
-		--icon-color: #8B9EB1;
-		--color: #8B9EB1;
-	}
-</style>

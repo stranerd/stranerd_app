@@ -2,8 +2,10 @@
 	<IonPage>
 		<HomeTopNavigation />
 		<IonContent>
-			<div class="!w-full h-full layout-body">
-				<slot />
+			<div class="layout-page !px-0">
+				<div class="layout-body !w-full">
+					<slot />
+				</div>
 			</div>
 		</IonContent>
 	</IonPage>

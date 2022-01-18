@@ -15,7 +15,7 @@
 			<IonText class="text-main_dark mb-2 w-full">
 				<DisplayHtml :html="question.question" />
 			</IonText>
-			<PhotoList v-if="question.questionMedia.length" :photos="question.questionMedia" />
+			<PhotoList v-if="question.questionMedia?.length" :photos="question.questionMedia" />
 		</div>
 
 		<div class="answers flex flex-col w-full">
@@ -50,14 +50,14 @@
 				Sorry, you're wrong. The answer is {{ getAlphabet(question.data.correctIndex + 1).toUpperCase() }}
 			</span>
 
-			<template v-if="question.data.explanation.length > 0 || question.data.explanationMedia.length > 0">
+			<template v-if="question.data.explanation?.length > 0 || question.data.explanationMedia?.length > 0">
 				<span class="text-primary flex items-center font-bold py-8" @click="showExplanation = !showExplanation">
 					show solution <IonIcon :icon="showExplanation ? chevronUpOutline : chevronDownOutline" />
 				</span>
 
 				<div v-if="showExplanation">
 					<span class="block mb-2">{{ question.data.explanation }}</span>
-					<PhotoList v-if="question.data.explanationMedia.length" :photos="question.data.explanationMedia" />
+					<PhotoList v-if="question.data.explanationMedia?.length" :photos="question.data.explanationMedia" />
 				</div>
 			</template>
 		</template>
@@ -169,15 +169,5 @@ export default defineComponent({
 
 	.ion-iten-transparent {
 		--background: transparent;
-	}
-
-	ion-searchbar {
-		--box-shadow: 'none';
-		--border-radius: 0.5rem;
-	}
-
-	.searchbar-input.sc-ion-searchbar-md {
-		padding-top: 12px;
-		padding-bottom: 12px;
 	}
 </style>

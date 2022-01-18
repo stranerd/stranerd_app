@@ -50,8 +50,7 @@ export const useSearch = () => {
 
 	const navigateToSearch = async () => {
 		const val = global.searchTerm.value.trim()
-		if (route.path.startsWith('/explore') && val) global.searchTerm.value = ''
-		else if (!route.path.startsWith('/search')) await router.push(`/search?search=${val}`)
+		if (!route.path.startsWith('/search')) await router.push(`/search?search=${val}`)
 	}
 
 	watch(() => global.searchTerm.value, async () => {
@@ -60,6 +59,8 @@ export const useSearch = () => {
 	})
 
 	onMounted(async () => {
+		const val = global.searchTerm.value.trim()
+		if (route.path.startsWith('/explore') && val) global.searchTerm.value = ''
 		if (!global.fetched.value && !global.loading.value) await search()
 	})
 

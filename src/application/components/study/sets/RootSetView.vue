@@ -94,7 +94,6 @@ import FlashCardsList from '@app/components/study/flashCards/SetFlashCardsList.v
 import NotesList from '@app/components/study/notes/SetNotesList.vue'
 import VideosList from '@app/components/study/videos/SetVideosList.vue'
 import { useMySets, useSet } from '@app/composable/study/sets'
-import { useAuth } from '@app/composable/auth/auth'
 import SetCard from '@app/components/study/sets/SetListCard.vue'
 
 export default defineComponent({
@@ -115,7 +114,6 @@ export default defineComponent({
 		SetCard
 	},
 	setup (props) {
-		const { id } = useAuth()
 		const { loading, error, notes, videos, flashCards, testPreps } = useSet(props.set)
 		const { normalSets, loading: setLoading, error: setError } = useMySets()
 
@@ -124,7 +122,7 @@ export default defineComponent({
 			set: () => {
 			}
 		})
-		return { id, loading, error, notes, videos, flashCards, testPreps, sets, setLoading, setError }
+		return { loading, error, notes, videos, flashCards, testPreps, sets, setLoading, setError }
 	}
 })
 </script>

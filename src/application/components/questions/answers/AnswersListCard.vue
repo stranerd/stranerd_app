@@ -34,7 +34,7 @@
 				<div class="flex flex-row items-center text-icon_inactive font-bold gap-4">
 					<span
 						v-if="isLoggedIn && question && !question.isAnswered && !answer.best && question.userId === id"
-						class="items-center flex cursor-pointer" @click.prevent="markBestAnswer">
+						class="items-center flex cursor-pointer" @click.prevent="markBestAnswer(question)">
 						<span class="mr-1">Mark as best</span>
 						<IonIcon :icon="star" class="text-[20px]" />
 					</span>

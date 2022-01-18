@@ -5,7 +5,9 @@
 			<ion-text>
 				<Institution :institutionId="institutionId" class="font-bold text-main-dark" />
 			</ion-text>
-			<ion-icon :icon="arrowForward" class="text-3xl text-gray" />
+			<router-link :to="`/study/preps/${institutionId}`">
+				<ion-icon :icon="arrowForward" class="text-3xl text-gray" />
+			</router-link>
 		</div>
 		<Tag :tag="yearGap" />
 
@@ -35,8 +37,8 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const startYear = computed(() => props.testPreps.map((prep) => prep.data.year)[0])
-		const endYear = computed(() => props.testPreps.map((prep) => prep.data.year).reverse()[0])
+		const startYear = computed(() => props.testPreps.map((prep) => prep.data.year).sort()[0])
+		const endYear = computed(() => props.testPreps.map((prep) => prep.data.year).sort().reverse()[0])
 		const yearGap = computed(() => {
 			if (startYear.value !== endYear.value) return `${startYear.value} - ${endYear.value}`
 			else return `${startYear.value}`
