@@ -6,39 +6,62 @@
 					<ion-text class="heading lg:text-2xl font-bold text-white mx-auto text-center">
 						<Institution :institutionId="institutionId" />
 					</ion-text>
-					<div class="mx-auto w-full lg:w-8/12 showcase mt-4">
-						<IonSelect v-model="courseId" class="capitalize" interface="action-sheet"
-							placeholder="Select the subject">
-							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
-							<IonSelectOption v-for="courseId in courses" :key="courseId" :value="courseId"
-								class="capitalize">
-								<Course :courseId="courseId" />
-							</IonSelectOption>
-						</IonSelect>
+					<div class="mx-auto w-full lg:w-7/12 showcase mt-4">
 
-						<IonSelect v-model="year" class="capitalize" interface="action-sheet"
-							placeholder="Select the year">
-							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
-							<IonSelectOption v-for="year in years" :key="year" :value="year" class="capitalize">
-								<span>{{ year }}</span>
-							</IonSelectOption>
-						</IonSelect>
+						<ion-item>
+							<ion-label class="!text-gray font-bold text-body"> Subject</ion-label>
+							<IonSelect v-model="courseId" class="capitalize" interface="action-sheet"
+								placeholder="Select the subject">
+								<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
+								<IonSelectOption v-for="courseId in courses" :key="courseId" :value="courseId"
+									class="capitalize">
+									<Course :courseId="courseId" />
+								</IonSelectOption>
+							</IonSelect>
+						</ion-item>
 
-						<IonSelect v-model="questionType" class="capitalize" interface="action-sheet"
-							placeholder="Select the question type">
-							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
-							<IonSelectOption v-for="questionType in questionTypes" :key="questionType"
-								:value="questionType" class="capitalize">
-								<span>{{ questionType }}</span>
-							</IonSelectOption>
-						</IonSelect>
+						<ion-item>
+							<ion-label class="!text-gray font-bold text-body"> Year</ion-label>
+							<IonSelect v-model="year" class="capitalize" interface="action-sheet"
+								placeholder="Select the year">
+								<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
+								<IonSelectOption v-for="year in years" :key="year" :value="year" class="capitalize">
+									<span>{{ year }}</span>
+								</IonSelectOption>
+							</IonSelect>
+						</ion-item>
+
+						<ion-item>
+							<ion-label class="!text-gray font-bold text-body"> Mode</ion-label>
+							<IonSelect v-model="questionType" class="capitalize" interface="action-sheet"
+								placeholder="Select the question type">
+								<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
+								<IonSelectOption v-for="questionType in questionTypes" :key="questionType"
+									:value="questionType" class="capitalize">
+									<span>{{ questionType }}</span>
+								</IonSelectOption>
+							</IonSelect>
+						</ion-item>
+
+						
+
+				
+
+					
 					</div>
 				</div>
 			</div>
 
-			<div class="p-4 lg:w-8/12 w-full mx-auto showcase">
+			<div class="p-4 lg:w-7/12 w-full mx-auto showcase" v-if="preps.length">
 				<TestPrepListCard v-for="prep in preps" :key="prep.hash" :openMenu="openMenu" :testPrep="prep" />
 			</div>
+			<div class="p-4 lg:w-7/12 w-full mx-auto " v-else>
+				<EmptyState  
+					info="There is currently no test for the given <b>Subject/Year/Mode</b>"
+				/>
+			</div>
+
+		
 		</div>
 	</Justified>
 </template>
@@ -50,15 +73,16 @@ import Institution from '@app/components/study/institutions/Institution.vue'
 import Course from '@app/components/study/courses/Course.vue'
 import { useRoute } from 'vue-router'
 import { useTestPrepList } from '@app/composable/study/testPreps'
-import { IonSelect, IonSelectOption } from '@ionic/vue'
+import { IonSelect, IonSelectOption, IonItem, IonLabel } from '@ionic/vue'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import { TestPrepEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
+import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
 	name: 'InstitutionPrepsPage',
 	displayName: 'Test Preps',
-	components: { Justified, Institution, Course, IonSelect, IonSelectOption, TestPrepListCard },
+	components: { Justified, Institution, Course, IonSelect, IonSelectOption, TestPrepListCard, IonItem, IonLabel , EmptyState},
 	middlewares: ['isAuthenticated'],
 	setup () {
 		const route = useRoute()
@@ -92,6 +116,15 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+	ion-item {
+		background: #fff;
+		border-radius: .75rem;
+		--border-radius: .75rem;
+		--padding-start: 1rem;
+		--padding-end: 0 !important;
+		--inner-padding-end: 0px;
+		
+	}
 	ion-select {
 		background: #fff;
 		border-radius: .75rem;
@@ -100,4 +133,9 @@ export default defineComponent({
 		--padding-top: 0.8rem;
 		--padding-bottom: 0.8rem;
 	}
+
+ion-select::part(icon) {
+
+  margin-left: 1rem;
+}
 </style>

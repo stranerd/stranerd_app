@@ -1,14 +1,14 @@
 <template>
 	<div
-		:class="[`m-0 w-full h-48 bg-white rounded-xl flex flex-col items-start justify-between gap-2 box-border p-4 text-main_dark`]">
+		:class="[`m-0 w-full h-44 bg-white rounded-xl flex flex-col items-start justify-between gap-2 box-border p-6 text-main_dark`]">
 		<div class="w-full justify-between items-center flex">
 			<ion-text class="font-bold text-xl">
 				<Institution :institutionId="testPrep.data.institutionId" />
 			</ion-text>
 			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl cursor-pointer" @click="openMenu" />
 		</div>
-		<IonText>
-			<Course :courseId="testPrep.data.courseId" />
+		<IonText class="text-gray font-bold">
+			<Course :courseId="testPrep.data.courseId"  />
 			({{ testPrep.data.year }})
 		</IonText>
 

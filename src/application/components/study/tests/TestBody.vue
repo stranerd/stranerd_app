@@ -18,7 +18,7 @@
 		<template v-if="tab === 'single'">
 			<TestQuestion :answer="updateAnswer" :question="questions[questionIndex]" :questionIndex="questionIndex"
 				:test="test" />
-			<div class="mt-16 flex justify-between items-center gap-4">
+			<div class="mt-6 mb-10 flex justify-between items-center gap-4">
 				<IonIcon :color="canGoBack ? 'grey' : 'light'" :icon="chevronBackCircle" size="large" @click="back" />
 				<span class="flex gap-2 items-center">
 					<span>Jump to</span>
