@@ -5,7 +5,8 @@
 			<VideoListCard v-for="video in filtered" :key="video.hash" :openMenu="(event) => openMenu(video, event)"
 				:video="video" />
 		</div>
-		<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
+		<div v-if="hasMore && !sliced"
+			class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
 			<a @click.prevent="fetchOlderVideos">Load More</a>
 		</div>
 		<PageLoading v-if="loading" />

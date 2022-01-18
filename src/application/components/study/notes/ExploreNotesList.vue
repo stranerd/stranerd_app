@@ -5,7 +5,8 @@
 			<NoteListCard v-for="note in filtered" :key="note.hash" :note="note"
 				:openMenu="(event) => openMenu(note, event)" />
 		</div>
-		<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
+		<div v-if="hasMore && !sliced"
+			class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
 			<a @click.prevent="fetchOlderNotes">Load More</a>
 		</div>
 		<PageLoading v-if="loading" />

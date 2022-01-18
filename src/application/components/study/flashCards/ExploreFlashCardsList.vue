@@ -5,7 +5,8 @@
 			<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard"
 				:openMenu="(event) => openMenu(flashCard, event)" />
 		</div>
-		<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
+		<div v-if="hasMore && !sliced"
+			class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
 			<a @click.prevent="fetchOlderFlashCards">Load More</a>
 		</div>
 		<PageLoading v-if="loading" />
