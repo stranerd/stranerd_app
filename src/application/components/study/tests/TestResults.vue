@@ -1,5 +1,6 @@
 <template>
-	<div class="flex items-center justify-center flex-col lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-new_gray">
+	<PageLoading v-if="loading" />
+	<div v-else class="flex items-center justify-center flex-col lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 bg-new_gray">
 		<ion-text class="text-4xl text-main_dark font-bold my-8 mb-16">{{ test.scoreText }}</ion-text>
 
 		<DonutChart :bgColor="test.passed ? '#00D24622' : '#FF666622'" :fgColor="test.passed ? '#00D246' : '#FF6666'"
@@ -28,8 +29,6 @@
 				Back to <b> My Study</b>
 			</router-link>
 		</div>
-
-		<PageLoading v-if="loading" />
 	</div>
 </template>
 

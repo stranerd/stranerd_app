@@ -1,4 +1,4 @@
-import { computed, onUnmounted, onMounted, Ref, ref } from 'vue'
+import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import {
 	AddTest,
 	EndTest,
@@ -195,7 +195,9 @@ export const useTestDetails = (test: TestEntity) => {
 	}
 
 	const endTest = async () => {
+		await testGlobal[test.id].setLoading(true)
 		if (!test.done) await EndTest.call(test.id)
+		await testGlobal[test.id].setLoading(false)
 	}
 
 	const updateAnswer = async (questionId: string, answer: number) => {

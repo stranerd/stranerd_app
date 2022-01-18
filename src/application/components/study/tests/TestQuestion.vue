@@ -15,7 +15,7 @@
 			<IonText class="text-main_dark mb-2 w-full">
 				<DisplayHtml :html="question.question" />
 			</IonText>
-			<PhotoList v-if="question.questionMedia?.length" :photos="question.questionMedia" />
+			<PhotoList v-if="question.questionMedia.length" :photos="question.questionMedia" />
 		</div>
 
 		<div class="answers flex flex-col w-full">
@@ -57,7 +57,7 @@
 
 				<div v-if="showExplanation">
 					<span class="block mb-2">{{ question.data.explanation }}</span>
-					<PhotoList v-if="question.data.explanationMedia?.length" :photos="question.data.explanationMedia" />
+					<PhotoList v-if="question.data.explanationMedia.length" :photos="question.data.explanationMedia" />
 				</div>
 			</template>
 		</template>
