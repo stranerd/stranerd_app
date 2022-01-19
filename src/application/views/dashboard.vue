@@ -12,7 +12,6 @@
 							<ion-text class="mr-3">Test Preps</ion-text>
 							<ion-badge class="uppercase">Latest</ion-badge>
 						</div>
-
 						<router-link class="text-primary text-body flex items-center font-bold" to="/explore/preps">
 							explore
 						</router-link>
@@ -26,7 +25,6 @@
 							<ion-text class="mr-3">Notes</ion-text>
 							<ion-badge class="uppercase">Latest</ion-badge>
 						</div>
-
 						<router-link class="text-primary text-body flex items-center font-bold" to="/explore/notes">
 							explore
 						</router-link>
@@ -39,7 +37,6 @@
 							<ion-text class="mr-3">Videos</ion-text>
 							<ion-badge class="uppercase">Latest</ion-badge>
 						</div>
-
 						<router-link class="text-primary text-body flex items-center font-bold" to="/explore/videos">
 							explore
 						</router-link>
@@ -52,13 +49,11 @@
 							<ion-text class="mr-3">FlashCards</ion-text>
 							<ion-badge class="uppercase">Latest</ion-badge>
 						</div>
-
 						<router-link class="text-primary text-body flex items-center font-bold"
 							to="/explore/flashCards">
 							explore
 						</router-link>
 					</div>
-
 					<FlashCardList :sliced="true" />
 				</div>
 			</div>

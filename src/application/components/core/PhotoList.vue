@@ -53,7 +53,7 @@ export default defineComponent({
 		bottom: 0;
 		display: flex;
 		flex-direction: column;
-		z-index: 100000000;
+		z-index: 100000;
 
 		@media (max-width: $max-width) {
 			padding: 0.5rem;
@@ -73,6 +73,12 @@ export default defineComponent({
 			margin: auto;
 			max-width: $max-width;
 			position: relative;
+
+			img {
+				max-width: 100vw;
+				max-height: 100vh;
+				object-fit: contain;
+			}
 
 			#close {
 				margin: 1rem;

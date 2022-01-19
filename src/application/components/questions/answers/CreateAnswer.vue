@@ -102,9 +102,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
 	ion-select {
-
 		/* Set a different placeholder color */
 		--placeholder-color: #8B9EB1;
 
@@ -113,7 +111,6 @@ export default defineComponent({
 	}
 
 	ion-input {
-
 		/* Set a different placeholder color */
 		--placeholder-color: #8B9EB1;
 

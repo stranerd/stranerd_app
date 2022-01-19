@@ -1,5 +1,5 @@
 <template>
-	<ion-fab slot="fixed" class="lg:hidden active" horizontal="end" vertical="bottom">
+	<ion-fab slot="fixed" class="lg:hidden" horizontal="end" vertical="bottom">
 		<ion-fab-button :activated="active" :class="{'active': active}" class="z-50 relative" @click="active = !active">
 			<ion-icon :icon="add"></ion-icon>
 		</ion-fab-button>
@@ -53,10 +53,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-	ion-fab {
-		--background: #546DD3;
-	}
-
 	.active {
 		--background: #FF6666;
 	}

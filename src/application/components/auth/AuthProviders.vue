@@ -5,7 +5,6 @@
 			<ion-icon :icon="logoGoogle" class="mr-4" size="100px" />
 			<span>Google</span>
 		</ion-button>
-
 		<page-loading v-if="loading" />
 	</div>
 </template>
@@ -53,30 +52,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 	ion-button {
 		--background: transparent !important;
-		--border-radius: .4rem;
 		--color: #4D5C6F;
-		--background-hover: white;
-		--padding-top: 1.4rem !important;
-		--padding-bottom: 1.4rem !important;
-		height: 3.5rem;
-		transition: all .5s ease-in-out;
 		--border-color: #8B9EB1;
 		--border-style: solid;
 		--border-width: 2px;
 		--box-shadow: none;
-
 	}
-
-	ion-button {
-		--background: #546DD3;
-		--border-radius: .75rem;
-		height: 3.5rem;
-		font-size: 24px;
-		font-weight: 700;
-		transition: all .5s ease-in-out;
-		max-width: 90vw !important;
-
-	}
-
-
 </style>

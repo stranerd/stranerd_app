@@ -16,7 +16,6 @@
 					</div>
 					<SearchTestPrepsList :sliced="true" :testPreps="testPreps" />
 				</div>
-
 				<div class="mb-12">
 					<div class="w-full flex justify-between mb-4">
 						<div class="heading font-bold text-main_dark flex items-center">
@@ -31,7 +30,6 @@
 					</div>
 					<SearchNotesList :notes="notes" :sliced="true" />
 				</div>
-
 				<div v-if="false" class="mb-12">
 					<div class="w-full flex justify-between mb-4">
 						<div class="heading font-bold text-main_dark flex items-center">
@@ -39,7 +37,6 @@
 								Videos
 							</ion-text>
 						</div>
-
 						<router-link :to="`/search/videos?search=${searchTerm}`"
 							class="text-primary text-body flex items-center font-bold">
 							<span>view all</span>
@@ -47,7 +44,6 @@
 					</div>
 					<SearchVideosList :sliced="true" :videos="videos" />
 				</div>
-
 				<div class="mb-12">
 					<div class="w-full flex justify-between mb-4">
 						<div class="heading font-bold text-main_dark flex items-center">

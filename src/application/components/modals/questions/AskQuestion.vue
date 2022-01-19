@@ -46,12 +46,10 @@ export default defineComponent({
 
 <style scoped>
 	ion-input {
-
 		/* Set a different placeholder color */
 		--placeholder-color: #8B9EB1;
 
 		/* Set full opacity on the placeholder */
 		--placeholder-opacity: 1;
 	}
-
 </style>

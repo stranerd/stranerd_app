@@ -9,7 +9,6 @@
 					<slot name="subtext" />
 				</span>
 			</div>
-
 			<slot>
 				<p>This is the default content of the modal</p>
 			</slot>
@@ -23,18 +22,12 @@ import { defineComponent, PropType } from 'vue'
 export default defineComponent({
 	name: 'Modal',
 	props: {
-
 		close: {
 			type: Function as PropType<() => void>,
 			required: false,
 			default: () => {
 			}
 		}
-
-	},
-	setup () {
-
-		return {}
 	}
 })
 </script>

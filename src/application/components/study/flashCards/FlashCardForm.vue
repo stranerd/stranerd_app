@@ -35,8 +35,6 @@
 					show-cancel-button="never"></ion-input>
 			</div>
 			<DisplayError :error="factory.errors.tags" />
-
-
 			<div class="flex items-center w-full md:max-w-[25rem] max-w-[22rem] justify-center">
 				<ion-radio-group v-model="factory.isPublic" class="flex w-full justify-center" mode="md">
 					<ion-list-header>

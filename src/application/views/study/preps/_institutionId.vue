@@ -42,26 +42,18 @@
 								</IonSelectOption>
 							</IonSelect>
 						</ion-item>
-
-						
-
-				
-
-					
 					</div>
 				</div>
 			</div>
 
-			<div class="p-4 lg:w-7/12 w-full mx-auto showcase" v-if="preps.length">
+			<div v-if="preps.length" class="p-4 lg:w-7/12 w-full mx-auto showcase">
 				<TestPrepListCard v-for="prep in preps" :key="prep.hash" :openMenu="openMenu" :testPrep="prep" />
 			</div>
-			<div class="p-4 lg:w-7/12 w-full mx-auto " v-else>
-				<EmptyState  
+			<div v-else class="p-4 lg:w-7/12 w-full mx-auto">
+				<EmptyState
 					info="There is currently no test for the given <b>Subject/Year/Mode</b>"
 				/>
 			</div>
-
-		
 		</div>
 	</Justified>
 </template>
@@ -73,7 +65,7 @@ import Institution from '@app/components/study/institutions/Institution.vue'
 import Course from '@app/components/study/courses/Course.vue'
 import { useRoute } from 'vue-router'
 import { useTestPrepList } from '@app/composable/study/testPreps'
-import { IonSelect, IonSelectOption, IonItem, IonLabel } from '@ionic/vue'
+import { IonItem, IonLabel, IonSelect, IonSelectOption } from '@ionic/vue'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import { TestPrepEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
@@ -82,7 +74,17 @@ import EmptyState from '@app/components/core/EmptyState.vue'
 export default defineComponent({
 	name: 'InstitutionPrepsPage',
 	displayName: 'Test Preps',
-	components: { Justified, Institution, Course, IonSelect, IonSelectOption, TestPrepListCard, IonItem, IonLabel , EmptyState},
+	components: {
+		Justified,
+		Institution,
+		Course,
+		IonSelect,
+		IonSelectOption,
+		TestPrepListCard,
+		IonItem,
+		IonLabel,
+		EmptyState
+	},
 	middlewares: ['isAuthenticated'],
 	setup () {
 		const route = useRoute()
@@ -123,8 +125,8 @@ export default defineComponent({
 		--padding-start: 1rem;
 		--padding-end: 0 !important;
 		--inner-padding-end: 0px;
-		
 	}
+
 	ion-select {
 		background: #fff;
 		border-radius: .75rem;
@@ -134,8 +136,7 @@ export default defineComponent({
 		--padding-bottom: 0.8rem;
 	}
 
-ion-select::part(icon) {
-
-  margin-left: 1rem;
-}
+	ion-select::part(icon) {
+		margin-left: 1rem;
+	}
 </style>
