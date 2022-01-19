@@ -4,15 +4,11 @@
 		<ion-text class="text-4xl text-main_dark font-bold my-8 mb-16">{{ test.scoreText }}</ion-text>
 
 		<DonutChart :bgColor="test.passed ? '#00D24622' : '#FF666622'" :fgColor="test.passed ? '#00D246' : '#FF6666'"
-			:score="test.score"
-			:size="320" :thickness="12"
-			:total="100" class="md:!block !hidden">
+			:percentage="test.score" :size="320" :thickness="12" class="md:!block !hidden">
 			{{ formatNumber(test.score, 1) }}%
 		</DonutChart>
 		<DonutChart :bgColor="test.passed ? '#00D24622' : '#FF666622'" :fgColor="test.passed ? '#00D246' : '#FF6666'"
-			:score="test.score"
-			:size="200" :thickness="12"
-			:total="100" class="!block md:!hidden">
+			:percentage="test.score" :size="200" :thickness="12" class="!block md:!hidden">
 			{{ formatNumber(test.score, 1) }}%
 		</DonutChart>
 

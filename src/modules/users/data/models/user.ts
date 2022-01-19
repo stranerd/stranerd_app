@@ -18,7 +18,6 @@ export interface UserFromModel extends UserToModel {
 	tutor: UserTutor
 	session: UserSession
 	dates: UserDates
-	rankProgress: number
 	rank: UserRank
 	nextRank: UserRank | null
 }

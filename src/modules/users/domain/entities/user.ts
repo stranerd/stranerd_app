@@ -89,7 +89,6 @@ type UserConstructorArgs = {
 	tutor: UserTutor
 	session: UserSession
 	dates: UserDates
-	rankProgress: number
 	rank: UserRank
 	nextRank: UserRank | null
 }
@@ -113,7 +112,6 @@ export class UserEntity extends BaseEntity {
 	public readonly tutor: UserTutor
 	public readonly session: UserSession
 	public readonly dates: UserDates
-	public readonly rankProgress: number
 	public readonly rank: UserRank
 	public readonly nextRank: UserRank | null
 
@@ -126,7 +124,6 @@ export class UserEntity extends BaseEntity {
 		             tutor,
 		             session,
 		             dates,
-		             rankProgress,
 		             rank,
 		             nextRank
 	             }: UserConstructorArgs) {
@@ -144,7 +141,6 @@ export class UserEntity extends BaseEntity {
 		this.tutor = tutor
 		this.session = session
 		this.dates = dates
-		this.rankProgress = rankProgress
 		this.rank = rank
 		this.nextRank = nextRank
 	}
@@ -219,9 +215,7 @@ export class UserEntity extends BaseEntity {
 	}
 
 	get expectedScore () {
-		const dayInMs = 1000 * 60 * 60 * 24
-		const days = Math.ceil((Date.now() - this.dates.createdAt) / dayInMs)
-		return 20 * days
+		return this.nextRank ? this.rank.score : this.account.score
 	}
 
 	get scorePercentage () {
@@ -260,9 +254,9 @@ export class UserEntity extends BaseEntity {
 	}
 
 	get nerdScoreColor () {
-		if (this.scorePercentage > 75) return '#00D246'
-		if (this.scorePercentage > 50) return '#546DD3'
-		return '#FF6666'
+		if (this.scorePercentage > 75) return { fg: '#00D246', bg: '#00D24622' }
+		if (this.scorePercentage > 50) return { fg: '#546DD3', bg: '#546DD322' }
+		return { fg: '#FF6666', bg: '#FF666622' }
 	}
 
 	get isAdmin () {

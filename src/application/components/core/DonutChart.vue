@@ -7,13 +7,13 @@
 		:size="size"
 		:start-angle="0"
 		:thickness="thickness"
-		:total="totalSections < total ? total : totalSections"
+		:total="totalSections < 100 ? 100 : totalSections"
 		background="#FFFFFF"
 		unit="px"
 		@section-click="onClick"
 	>
 		<span :style="`color:${fgColor} !important;`" class="score">
-			<slot>{{ formatNumber(score, 1) }}</slot>
+			<slot>{{ formatNumber(percentage, 1) }}</slot>
 		</span>
 	</Donut>
 </template>
@@ -32,12 +32,7 @@ export default defineComponent({
 			type: Number,
 			default: 168
 		},
-		score: {
-			required: true,
-			type: Number,
-			default: 0
-		},
-		total: {
+		percentage: {
 			required: true,
 			type: Number,
 			default: 0
@@ -65,7 +60,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const sections = computed(() => [{ value: props.score, color: props.fgColor }])
+		const sections = computed(() => [{ value: props.percentage, color: props.fgColor }])
 		const totalSections = computed(() => sections.value.map((s) => s.value).reduce((acc, v) => acc + v, 0))
 		return { sections, formatNumber, totalSections }
 	}

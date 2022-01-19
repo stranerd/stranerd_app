@@ -3,9 +3,9 @@ import { UserEntity } from '../../domain/entities/user'
 
 export class UserTransformer {
 	fromJSON (model: UserFromModel) {
-		const { id, bio, roles, account, status, tutor, session, dates, nextRank, rankProgress, rank } = model
+		const { id, bio, roles, account, status, tutor, session, dates, nextRank, rank } = model
 		return new UserEntity({
-			id, bio, roles, account, status, tutor, session, dates, rank, nextRank, rankProgress
+			id, bio, roles, account, status, tutor, session, dates, rank, nextRank
 		})
 	}
 
