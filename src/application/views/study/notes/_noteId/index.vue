@@ -49,18 +49,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	.footer-shadow {
-		box-shadow: 0px -5px 5px rgba(139, 158, 177, 0.05);
-	}
-
-	.custom-shadow {
-		box-shadow: 0px 0px 50px rgba(77, 92, 111, 0.1);
-		border-radius: 24px;
-	}
-
-	.ion-iten-transparent {
-		--background: transparent;
-	}
-</style>

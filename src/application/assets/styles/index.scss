@@ -2,3 +2,7 @@
 @import './ionic.scss';
 @import './tailwind.css';
 @import '~katex/dist/katex.min.css';
+
+.footer-shadow {
+	box-shadow: 0px -5px 5px rgba(139, 158, 177, 0.05);
+}
