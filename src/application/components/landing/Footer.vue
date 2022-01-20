@@ -21,6 +21,7 @@
 												Terms and Conditions
 											</a>
 										</li>
+									
 									</ul>
 								</div>
 							</div>
@@ -76,7 +77,9 @@
 									<h2 class="footer-title font-bold">Help</h2>
 									<ul class="footer-links-contain text-sm">
 										<li class="my-10">
-											<router-link class="font-light" to="">FAQs</router-link>
+											<a class="font-light" href="/legal/FAQs.pdf">
+												FAQs
+											</a>
 										</li>
 										<li class="my-10">
 											<a class="font-light" href="mailto:support@stranerd.com">Support</a>
