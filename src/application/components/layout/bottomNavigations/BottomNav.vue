@@ -45,10 +45,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-	/* .tabStyle {
-		@apply border-t-2 border-gray-300
-	} */
-
 	ion-toolbar {
 		--background: #FFFFFF;
 		--border-color: rgba(0, 0, 0, .4)
@@ -62,12 +58,7 @@ export default defineComponent({
 		--ripple-color: #546DD3;
 	}
 
-	/* ion-tab-bar {
-		--background: #F7F7FC;
-	} */
-
 	ion-icon {
 		font-size: 23px;
 	}
-
 </style>

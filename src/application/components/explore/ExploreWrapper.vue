@@ -2,19 +2,17 @@
 	<Justified>
 		<div>
 			<div class="blueTop flex-col items-center">
-
 				<div class="flex flex-col w-full justify-center items-center px-4">
 					<ion-text class="heading lg:text-2xl font-bold text-white text-center  mt-12 mb-3 hidden md:block">
 						Explore thousands of study materials
 					</ion-text>
 					<ion-searchbar v-model.trim="searchTerm"
-						:debounce="700"
+						:disabled="loading"
 						class="lg:w-7/12 w-11/12 mb-8 mt-5 lg:mt-0"
 						placeholder="Search for anything..."
 						showCancelButton="never"
 					/>
 				</div>
-
 				<div
 					class="mb-0.5 justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full lg:px-3 text-xs mx-auto text-faded_gray font-bold  whitespace-normal overflow-x-auto mt-auto">
 					<router-link :to="`/explore`"

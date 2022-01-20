@@ -18,7 +18,6 @@
 						Get Started Now
 					</ion-button>
 				</router-link>
-
 				<!-- <ion-text class="text-2xl text-white mt-8 lg:block hidden">
 					or download the app instead
 				</ion-text> -->
@@ -26,17 +25,14 @@
 					<router-link to="#">
 						<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/playstore.svg">
 					</router-link>
-
 					<router-link to="#">
 						<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/appstore.svg">
 					</router-link>
 				</div> -->
 			</div>
-
 			<div class="sm:hidden max-w-[49rem] h-60 w-full lg:mt-0 mt-12 ">
 				<img alt="" class="object-contain" src="@app/assets/images/auth/auth.png">
 			</div>
-
 			<div class="md:w-6/12 max-w-[49rem] w-full lg:mt-0 mt-12 hidden sm:block">
 				<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/auth.png">
 			</div>
@@ -62,8 +58,6 @@
 		@media screen and (max-width: 680px) {
 			--padding-top: 1.8rem !important;
 			--padding-bottom: 1.8rem !important;
-
 		}
-
 	}
 </style>

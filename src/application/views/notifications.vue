@@ -7,14 +7,12 @@
 						<h1 class="lg:text-2xl text-lg font-bold text-white">
 							Notifications
 						</h1>
-
 						<span class="text-white text-body flex items-end justify-center hidden">
 							Mark all as read
 							<ion-icon :icon="checkmarkDone" class="text-xl text-white"></ion-icon>
 						</span>
 					</div>
 				</div>
-
 				<div class="px-4 w-full ">
 					<div class="w-full max-w-4xl mx-auto bg-white p-6 rounded-xl lg:-mt-10 mt-6">
 						<EmptyState
@@ -30,7 +28,6 @@
 							class="px-4"
 						/>
 					</div>
-
 					<div v-if="hasMore" class="text-center py-2 text-18 text-primary-dark">
 						<a @click.prevent="fetchOlderNotifications">Load More</a>
 					</div>

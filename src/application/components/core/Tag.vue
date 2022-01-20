@@ -49,7 +49,6 @@ export default defineComponent({
 			'0', 'rgba(84, 181, 211, 0.1)', 'rgba(255, 168, 75, 0.1)', 'rgba(200, 100, 220, 0.1)',
 			'rgba(84, 109, 211, 0.1)', 'rgba(0, 210, 90, 0.1)'
 		]
-
 		const randomNumber = (Math.floor(Math.random() * 4) + 1)
 
 		return {

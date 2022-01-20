@@ -255,7 +255,7 @@ export class UserEntity extends BaseEntity {
 
 	get nerdScoreColor () {
 		if (this.scorePercentage > 75) return { fg: '#00D246', bg: '#00D24622' }
-		if (this.scorePercentage > 50) return { fg: '#546DD3', bg: '#546DD322' }
+		if (this.scorePercentage > 40) return { fg: '#546DD3', bg: '#546DD322' }
 		return { fg: '#FF6666', bg: '#FF666622' }
 	}
 

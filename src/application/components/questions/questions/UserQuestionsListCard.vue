@@ -7,18 +7,13 @@
 				<span class="font-bold text-main_dark lg:text-base text-xs"><Subject :subject-id="question.subjectId" /></span>
 			</div>
 			<div class="flex flex-row-reverse flex-grow">
-
-
-				<span class="font-bold text-icon_inactive lg:block hidden">	{{
-					formatNumber(question.answers.length)
-				}} {{ pluralize(question.answers.length, 'answer', 'answers') }}
+				<span class="font-bold text-icon_inactive lg:block hidden">
+					{{
+						formatNumber(question.answers.length)
+					}} {{ pluralize(question.answers.length, 'answer', 'answers') }}
 				</span>
-
-
 			</div>
 		</div>
-
-
 		<router-link :to="`/questions/${question.id}`" class="py-2 text-main_dark leading-normal lg:text-base text-xs">
 			{{ question.trimmedBody }}
 		</router-link>

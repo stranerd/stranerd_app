@@ -1,10 +1,9 @@
 <template>
 	<IonPage>
 		<HomeTopNavigation />
-		<IonContent>
+		<IonContent class="auth">
 			<div class="!w-full h-full layout-body">
 				<slot />
-
 			</div>
 		</IonContent>
 	</IonPage>
@@ -20,4 +19,27 @@ export default defineComponent({
 	components: { IonPage, IonContent, HomeTopNavigation }
 })
 </script>
+
+<style lang="scss" scoped>
+	.auth {
+		:deep(ion-input) {
+			--background: #F2F3F5 !important;
+			--padding-top: 1.2rem !important;
+			--padding-bottom: 1.2rem !important;
+			margin-bottom: 1.25rem;
+			width: 420px;
+			max-width: 90vw !important;
+		}
+
+		:deep(ion-button) {
+			--border-radius: .75rem;
+			--padding-top: 1.4rem !important;
+			--padding-bottom: 1.4rem !important;
+			height: 3.5rem;
+			font-size: 24px;
+			font-weight: 700;
+			max-width: 90vw !important;
+		}
+	}
+</style>
 

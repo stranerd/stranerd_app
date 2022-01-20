@@ -1,5 +1,5 @@
 <template>
-	<ion-loading :is-open="true" message="Please wait..." />
+	<ion-loading :is-open="true" message="Please wait..." style="z-index: 10000000000; position: fixed;" />
 </template>
 
 <script>

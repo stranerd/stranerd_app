@@ -8,8 +8,7 @@
 </template>
 
 <script lang="ts">
-import { add, bookmark, chevronDown, chevronUp, contract, pencil, remove, scan, shareSocial } from 'ionicons/icons'
-import { defineComponent, onMounted, ref } from 'vue'
+import { defineComponent, onMounted, PropType, ref } from 'vue'
 import { NoteEntity } from '@modules/study'
 //@ts-ignore
 import Pdfvuer from 'pdfvuer'
@@ -19,7 +18,7 @@ export default defineComponent({
 	components: { Pdf: Pdfvuer },
 	props: {
 		note: {
-			type: NoteEntity,
+			type: Object as PropType<NoteEntity>,
 			required: true
 		}
 	},
@@ -28,22 +27,16 @@ export default defineComponent({
 		const scale = ref('page-width')
 		const pdfData = ref(undefined)
 		const numPages = ref(0)
-		const pdfLoading = ref(true)
 
 		onMounted(async () => {
 			pdfData.value = Pdfvuer.createLoadingTask(props.note.media?.link ?? props.note.link)
 			// @ts-ignore
 			pdfData.value.then((pdf: any) => {
-				pdfLoading.value = false
 				numPages.value = pdf.numPages
 			})
 		})
 
-		return {
-			page, scale, numPages, pdfLoading, pdfData,
-			add, remove, scan, chevronDown,
-			chevronUp, pencil, contract, bookmark, shareSocial
-		}
+		return { page, scale, numPages, pdfData }
 	}
 })
 </script>

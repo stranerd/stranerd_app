@@ -118,10 +118,6 @@ export default defineComponent({
 
 	}
 
-	.footer-shadow {
-		box-shadow: 0px -5px 5px rgba(139, 158, 177, 0.05);
-	}
-
 	input[type="radio"]:checked + label {
 		@apply border-primary
 	}
@@ -133,18 +129,5 @@ export default defineComponent({
 		--padding-end: 1rem;
 		--padding-top: 0.8rem;
 		--padding-bottom: 0.8rem;
-	}
-
-	.custom-shadow {
-		box-shadow: 0px 0px 50px rgba(77, 92, 111, 0.1);
-		border-radius: 24px;
-		@media (max-width: 770px) {
-			box-shadow: none;
-			border-radius: 0;
-		}
-	}
-
-	.ion-iten-transparent {
-		--background: transparent;
 	}
 </style>

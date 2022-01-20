@@ -5,7 +5,6 @@
 				<h1 class="text-5xl  text-white font-extrabold mb-12">Welcome back</h1>
 				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png">
 			</div>
-
 			<div class="flex flex-col items-center justify-center lg:w-5/12 w-full">
 				<h1 class="md:text-5xl text-2xl  text-main_dark font-extrabold mb-12 text-center">Log in </h1>
 				<div class="h-[65%]">
@@ -29,35 +28,26 @@
 						</ion-button>
 					</form>
 					<div class="w-full flex justify-end items-center  text-main_dark">
-
-
 						<router-link class="text-primary text-body" to="/auth/forgot">
 							Forgot Password ?
 						</router-link>
 					</div>
-
 					<div class="flex justify-between px-5 items-center mt-8">
 						<div class="border-faded_gray border-b h-1 w-4/12" />
 						<span class="text-gray text-2xl">or use</span>
 						<div class="border-faded_gray border-b h-1 w-4/12" />
 					</div>
-
 					<AuthProviders />
-
 					<span class="text- w-full flex justify-center items-center text-icon_inactive mt-8">
 						Don’t have an account?
-
 						<router-link class="text-primary font-bold text-body ml-2" to="/auth/signup">
 							Sign Up
 						</router-link>
-
 					</span>
 				</div>
 			</div>
 		</div>
 	</Auth>
-
-
 </template>
 
 <script lang="ts">
@@ -73,46 +63,7 @@ export default defineComponent({
 	middlewares: ['isNotAuthenticated'],
 	setup () {
 		const { factory, loading, error, signin } = useEmailSignin()
-
 		return { factory, loading, error, signin }
 	}
-
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-checkbox {
-		--size: 20px;
-	}
-
-	ion-input {
-		--background: #F2F3F5 !important;
-		--padding-start: 1.8rem !important;
-		--padding-end: 1.5rem !important;
-		--padding-top: 1.2rem !important;
-		--padding-bottom: 1.2rem !important;
-		--color: $color-dark !important;
-		--placeholder-color: $color-dark !important;
-		border-radius: 10px;
-		margin-bottom: 1.25rem;
-		width: 420px;
-		max-width: 90vw !important;
-	}
-
-
-	ion-button {
-		--background: #546DD3;
-		--border-radius: .75rem;
-		--color: white;
-		--background-hover: white;
-		--padding-top: 1.4rem !important;
-		--padding-bottom: 1.4rem !important;
-		height: 3.5rem;
-		font-size: 24px;
-		font-weight: 700;
-		transition: all .5s ease-in-out;
-		max-width: 90vw !important;
-
-	}
-
-</style>

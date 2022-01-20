@@ -11,15 +11,17 @@
 									<h2 class="footer-title font-bold">Company</h2>
 									<ul class="footer-links-contain text-sm">
 										<li class="my-10">
-											<a class="font-light" href="/legal/privacy-policy.pdf">Privacy Policy</a>
+											<router-link class="font-light" to="/legal/privacy-policy">Privacy Policy
+											</router-link>
 										</li>
 										<li class="my-10">
-											<a class="font-light" href="/legal/terms-of-use.pdf">Terms of Service</a>
+											<router-link class="font-light" to="/legal/terms-of-use">Terms of Service
+											</router-link>
 										</li>
 										<li class="my-10">
-											<a class="font-light" href="/legal/terms-and-conditions.pdf">
+											<router-link class="font-light" to="/legal/terms-and-conditions">
 												Terms and Conditions
-											</a>
+											</router-link>
 										</li>
 									
 									</ul>
@@ -138,6 +140,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style scoped>
-</style>

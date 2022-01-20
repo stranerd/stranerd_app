@@ -18,8 +18,6 @@
 				</div>
 			</div>
 		</div>
-
-
 		<LeaderboardList :key="time" :time="time" class="max-w-4xl mx-auto" />
 	</div>
 </template>
@@ -38,7 +36,6 @@ export default defineComponent({
 	}
 })
 </script>
-
 
 <style lang="scss" scoped>
 	ion-select {

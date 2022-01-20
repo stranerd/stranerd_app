@@ -1,10 +1,7 @@
 <template>
 	<div
 		class="hidden lg:flex bg-white py-3 pl-3 w-[16%] h-full  left-0 top-0 flex-col z-30">
-
-
 		<div class="flex flex-col pl-8 mt-6">
-
 			<router-link v-for="{ path, icon, name } in [
 					{ name: 'home', path: '/dashboard', icon: home },
 					{ name: 'questions', path: '/questions', icon: helpCircle },
@@ -43,7 +40,6 @@ export default defineComponent({
 	}
 })
 </script>
-
 
 <style scoped>
 	.active-route-link::after,
