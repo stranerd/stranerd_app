@@ -1,7 +1,7 @@
 <template>
 	<AdminWrapper>
 		<div class="mb-12">
-			<div class="flex items-start w-full">
+			<div class="flex items-start w-full mb-8">
 				<ion-input class="bg-white border border-faded_gray !m-0 !p-0 w-full left-2" placeholder="Enter detail to make user an admin"/>
 				<ion-button class="btn-primary relative right-2 z-50 !m-0 !p-0">
 					Make Admin

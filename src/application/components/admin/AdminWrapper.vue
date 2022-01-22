@@ -38,7 +38,7 @@
 						exact-active-class="border-b-4 text-white border-white">
 						Test Questions
 					</router-link>
-					<router-link :to="`/admin/Notes`"
+					<router-link :to="`/admin/notes`"
 						class="py-2 lg:mr-12 mr-4 cursor-pointer"
 						exact-active-class="border-b-4 text-white border-white">
 						Notes
