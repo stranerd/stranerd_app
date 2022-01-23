@@ -14,9 +14,11 @@
 		"env:copy:app": "node bin/copy-env-app",
 		"cap:run": "yarn cap run",
 		"cap:sync": "yarn cap sync",
-		"build:android:debug": "yarn build && yarn cap:sync && cd android && ./gradlew assembleDebug && ./gradlew installDebug && cd ..",
-		"build:android:release": "yarn build && yarn cap:sync && cd android && ./gradlew bundleRelease && cd .. && yarn android:sign",
-		"android:sign": "jarsigner -keystore ./android/stranerd.keystore ./android/app/build/outputs/bundle/release/app-release.aab kevin@stranerd.com"
+		"android:debug:apk": "yarn build && yarn cap:sync && cd android && ./gradlew assembleDebug && ./gradlew installDebug && cd ..",
+		"android:release:apk": "yarn build && yarn cap:sync && cd android && ./gradlew assembleRelease && cd .. && yarn android:sign:apk",
+		"android:release:bundle": "yarn build && yarn cap:sync && cd android && ./gradlew bundleRelease && cd .. && yarn android:sign:bundle",
+		"android:sign:bundle": "apksigner sign --ks ./android/stranerd.keystore --ks-key-alias kevin@stranerd.com  --min-sdk-version 22 ./android/app/build/outputs/bundle/release/app-release.aab",
+		"android:sign:apk": "zipalign 4 ./android/app/build/outputs/apk/release/app-release-unsigned.apk ./android/app/build/outputs/apk/release/app-release.apk && apksigner sign --ks ./android/stranerd.keystore --ks-key-alias kevin@stranerd.com ./android/app/build/outputs/apk/release/app-release.apk"
 	},
 	"dependencies": {
 		"@capacitor-community/http": "^1.4.1",
@@ -45,7 +47,8 @@
 		"sweetalert2": "^11.3.5",
 		"vue": "^3.2.21",
 		"vue-router": "^4.0.12",
-		"vue3-editor": "^0.1.0-alpha.3"
+		"vue3-editor": "^0.1.0-alpha.3",
+		"vue3-google-oauth2": "^1.0.6"
 	},
 	"devDependencies": {
 		"@capacitor/cli": "3.3.3",
