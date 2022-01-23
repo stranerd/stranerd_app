@@ -1,5 +1,6 @@
 <template>
-	<div class="rounded-xl bg-white md:py-6 md:px-6 py-4 px-3 md:text-sm text-xs flex flex-col overflow-y-auto">
+	<div
+		class="rounded-xl bg-white md:py-6 md:px-6 py-4 px-3 md:text-sm text-xs flex flex-col overflow-y-auto h-full">
 		<div class="h-full overflow-y-auto">
 			<div class="flex flex-col gap-1 text-center justify-center items-center">
 				<h3 class="text-xl font-semibold text-main_dark mt-3">

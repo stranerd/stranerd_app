@@ -2,6 +2,7 @@ import { computed, onMounted, Ref, ref } from 'vue'
 import {
 	AddInstitution,
 	DeleteInstitution,
+	EditInstitution,
 	FindInstitution,
 	GetInstitutions,
 	InstitutionEntity,
@@ -9,6 +10,7 @@ import {
 } from '@modules/study'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
+import { useStudyModal } from '@app/composable/core/modals'
 
 const global = {
 	fetched: ref(false),
@@ -72,6 +74,7 @@ export const useCreateInstitution = () => {
 				const institution = await FindInstitution.call(id)
 				if (institution) pushToGlobalInstitutions(institution)
 				factory.value.reset()
+				useStudyModal().closeCreateInstitution()
 				await setMessage('Institution created successfully')
 			} catch (error) {
 				await setError(error)
@@ -81,6 +84,42 @@ export const useCreateInstitution = () => {
 	}
 
 	return { factory, loading, error, createInstitution }
+}
+
+let editingInstitution = null as InstitutionEntity | null
+export const getEditingInstitution = () => editingInstitution
+export const openInstitutionEditModal = async (institution: InstitutionEntity) => {
+	editingInstitution = institution
+	useStudyModal().openEditInstitution()
+}
+
+export const useEditInstitution = () => {
+	const factory = ref(new InstitutionFactory()) as Ref<InstitutionFactory>
+	const { error, setError } = useErrorHandler()
+	const { setMessage } = useSuccessHandler()
+	const { loading, setLoading } = useLoadingHandler()
+	if (editingInstitution) factory.value.loadEntity(editingInstitution)
+	else useStudyModal().closeEditInstitution()
+
+	const editInstitution = async () => {
+		await setError('')
+		if (factory.value.valid && !loading.value) {
+			await setLoading(true)
+			try {
+				await EditInstitution.call(editingInstitution!.id, factory.value)
+				const updatedInstitution = await FindInstitution.call(editingInstitution!.id)
+				if (updatedInstitution) pushToGlobalInstitutions(updatedInstitution)
+				factory.value.reset()
+				useStudyModal().closeEditInstitution()
+				await setMessage('Institution updated successfully')
+			} catch (error) {
+				await setError(error)
+			}
+			await setLoading(false)
+		} else factory.value.validateAll()
+	}
+
+	return { factory, loading, error, editInstitution }
 }
 
 export const useDeleteInstitution = (institution: InstitutionEntity) => {

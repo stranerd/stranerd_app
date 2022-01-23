@@ -1,0 +1,32 @@
+<template>
+	<Modal>
+		<template v-slot:title>
+			Create an institution body
+		</template>
+		<InstitutionForm
+			:error="error"
+			:factory="factory"
+			:loading="loading"
+			:submit="createInstitution"
+		>
+			<template v-slot:buttonText>
+				Create Institution
+			</template>
+		</InstitutionForm>
+	</Modal>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import InstitutionForm from '@app/components/study/institutions/InstitutionForm.vue'
+import { useCreateInstitution } from '@app/composable/study/institutions'
+
+export default defineComponent({
+	name: 'CreateInstitutionModal',
+	setup () {
+		const { factory, error, loading, createInstitution } = useCreateInstitution()
+		return { factory, error, loading, createInstitution }
+	},
+	components: { InstitutionForm }
+})
+</script>
