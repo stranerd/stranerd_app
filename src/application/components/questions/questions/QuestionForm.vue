@@ -51,7 +51,7 @@
 			</ion-button>
 			<ion-button :disabled="loading || !factory.valid"
 				class="w-1/2 btn-primary" type="submit">
-				Submit
+				<slot name="buttonText">Submit</slot>
 			</ion-button>
 		</div>
 

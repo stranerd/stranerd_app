@@ -1,5 +1,5 @@
 <template>
-	<div class="flex-column gap-1 gap-md-2">
+	<div class="flex-col gap-1 gap-md-2">
 		<ion-button v-if="Vue3GoogleOauth.isInit"
 			class="w-full font-bold capitalize text-base flex gap-9 justify-center items-center my-6"
 			@click="loginWithGoogle">

@@ -21,6 +21,7 @@ export default defineComponent({
 	name: 'AdminQuestionsSubjectsPage',
 	displayName: 'Administration',
 	components: { AdminWrapper, AdminSubjectsList, SubjectForm },
+	middlewares: ['isAdmin'],
 	setup () {
 		const { loading, createSubject, factory, error } = useCreateSubject()
 		return { loading, createSubject, factory, error }

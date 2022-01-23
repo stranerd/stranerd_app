@@ -102,27 +102,12 @@ export default defineComponent({
 </script>
 
 <style scoped>
-	ion-select {
-		/* Set a different placeholder color */
+	ion-input, ion-select {
 		--placeholder-color: #8B9EB1;
-
-		/* Set full opacity on the placeholder */
-		--placeholder-opacity: 1;
-	}
-
-	ion-input {
-		/* Set a different placeholder color */
-		--placeholder-color: #8B9EB1;
-
-		/* Set full opacity on the placeholder */
 		--placeholder-opacity: 1;
 	}
 
 	ion-icon {
 		font-size: 24px;
-	}
-
-	ion-input {
-		--placeholder-color: #8B9EB1;
 	}
 </style>

@@ -8,7 +8,7 @@
 			</ion-button>
 		</form>
 		<DisplayError :error="error" />
-		<div v-if="fetched" class="flex flex-column">
+		<div v-if="fetched">
 			<DisplayError v-if="users.length === 0" error="No user with such email exists" />
 			<AdminsListCard v-for="user in users" :key="user.hash" :user="user" class="mb-4" />
 			<hr class="my-0">

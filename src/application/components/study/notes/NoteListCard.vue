@@ -1,7 +1,7 @@
 <template>
 	<div :class="`m-0 w-full bg-white rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border p-4`">
 		<div class="w-full justify-between items-start flex">
-			<img v-if="note.preview" :src="note.preview.link"
+			<img :src="note.preview.link"
 				class="bg-faded_gray h-[5.375rem] w-[4.5rem] rounded-md object-cover" />
 			<div class="text-base text-main_dark font-bold text-left flex-col flex ml-4 flex-grow">
 				<ion-text>{{ note.title }}</ion-text>
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { calendar, ellipsisVertical, play } from 'ionicons/icons'
+import { ellipsisVertical } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
 import { NoteEntity } from '@modules/study'
@@ -35,7 +35,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { formatNumber, calendar, play, ellipsisVertical }
+		return { formatNumber, ellipsisVertical }
 	}
 })
 </script>
