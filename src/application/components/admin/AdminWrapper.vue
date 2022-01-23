@@ -1,7 +1,6 @@
 <template>
 	<Justified>
 		<div>
-
 			<div class="blueTop flex-col items-center">
 				<div class="sm:flex hidden w-full justify-center items-center px-4 mt-auto">
 					<ion-icon :icon="cog" class="text-3xl text-white"></ion-icon>
@@ -12,8 +11,8 @@
 				</div>
 
 				<div
-					class="mb-0.5 justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full lg:px-3 text-xs mx-auto text-faded_gray font-bold  whitespace-normal overflow-x-auto mt-auto">
-					<router-link :to="`/admin`"
+					class="mb-0.5 justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full lg:px-3 text-xs mx-auto text-faded_gray font-bold whitespace-normal overflow-x-auto mt-auto">
+					<router-link :to="`/admin/users/admins`"
 						class="py-2 lg:mr-12 mr-4 cursor-pointer"
 						exact-active-class="border-b-4 text-white border-white">
 						Admins
@@ -28,7 +27,7 @@
 						exact-active-class="border-b-4 text-white border-white">
 						Instituitions
 					</router-link>
-					<router-link  :to="`/admin/tests`"
+					<router-link :to="`/admin/tests`"
 						class="py-2 lg:mr-12 mr-4 cursor-pointer"
 						exact-active-class="border-b-4 text-white border-white">
 						Tests
@@ -49,23 +48,19 @@
 				<slot />
 			</div>
 		</div>
-		<PageLoading v-if="loading" />
 	</Justified>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
-import { useSearch } from '@app/composable/meta/search'
 import { cog } from 'ionicons/icons'
-
 
 export default defineComponent({
 	name: 'AdminWrapper',
 	components: { Justified },
 	setup () {
-		const { searchTerm, loading } = useSearch()
-		return { searchTerm, loading, cog }
+		return { cog }
 	}
 })
 </script>
