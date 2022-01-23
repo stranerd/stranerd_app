@@ -17,7 +17,7 @@
 						exact-active-class="border-b-4 text-white border-white">
 						Admins
 					</router-link>
-					<router-link :to="`/admin/subjects`"
+					<router-link :to="`/admin/questions/subjects`"
 						class="py-2 lg:mr-12 mr-4 cursor-pointer"
 						exact-active-class="border-b-4 text-white border-white">
 						Subjects

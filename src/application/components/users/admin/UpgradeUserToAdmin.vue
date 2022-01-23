@@ -1,10 +1,10 @@
 <template>
-	<div class="d-flex flex-column gap-1 mb-8">
+	<div>
 		<form class="flex justify-between mb-4" @submit.prevent="getUsersByEmail">
 			<ion-input v-model="email" class="bg-white border border-faded_gray !p-0 w-full"
 				placeholder="Enter user's email address" />
-			<ion-button class="btn-primary" type="submit">
-				Make Admin
+			<ion-button :disabled="loading || !email" class="btn-primary" type="submit">
+				Find Users
 			</ion-button>
 		</form>
 		<DisplayError :error="error" />
