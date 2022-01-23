@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-def vCode = (int)(new Date().getTime()/1000 - 1640995200)
+def vCode = (int)((new Date().getTime()/1000 - 1640995200)/100)
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
