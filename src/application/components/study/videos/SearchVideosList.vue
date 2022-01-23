@@ -1,16 +1,12 @@
 <template>
 	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl " />
 	<div v-else>
-		<template v-if="filtered.length === 0">
-			<EmptyState info="No videos available." />
-		</template>
-		<template v-else>
-			<div class="showcase">
-				<VideoListCard v-for="video in filtered" :key="video.hash"
-					:openMenu="(event:any) => openMenu(video, event)"
-					:video="video" />
-			</div>
-		</template>
+		<EmptyState v-if="!loading && filtered.length === 0" info="No videos available." />
+		<div class="showcase">
+			<VideoListCard v-for="video in filtered" :key="video.hash"
+				:openMenu="(event) => openMenu(video, event)"
+				:video="video" />
+		</div>
 	</div>
 </template>
 

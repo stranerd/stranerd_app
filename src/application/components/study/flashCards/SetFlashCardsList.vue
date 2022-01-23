@@ -1,29 +1,25 @@
 <template>
 	<div>
-		<template v-if="filtered.length === 0">
-			<EmptyState info="You have saved any flashcards yet. <br>
+		<EmptyState v-if="filtered.length === 0" info="You have saved any flashcards yet. <br>
 Create your own flashcards or explore the public and save ones you want."
-			>
-				<div class="flex items-center gap-5">
-					<router-link class="py-3 lg:px-7 px-4 bg-gray text-white font-bold lg:text-base text-xs rounded-xl"
-						to="/study/flashCards/create">
-						Create Flashcards
-					</router-link>
-					<router-link
-						class="py-3 lg:px-7 px-4  border border-solid border-faded_gray text-gray font-bold lg:text-base text-xs rounded-xl"
-						to="/search/flashCards">
-						Explore Flashcards
-					</router-link>
-				</div>
-
-			</EmptyState>
-		</template>
-		<template v-else>
-			<div class="showcase">
-				<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard"
-					:openMenu="(event:any) => openMenu(flashCard, event)" />
+		>
+			<div class="flex items-center gap-5">
+				<router-link class="py-3 lg:px-7 px-4 bg-gray text-white font-bold lg:text-base text-xs rounded-xl"
+					to="/study/flashCards/create">
+					Create Flashcards
+				</router-link>
+				<router-link
+					class="py-3 lg:px-7 px-4  border border-solid border-faded_gray text-gray font-bold lg:text-base text-xs rounded-xl"
+					to="/search/flashCards">
+					Explore Flashcards
+				</router-link>
 			</div>
-		</template>
+
+		</EmptyState>
+		<div class="showcase">
+			<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard"
+				:openMenu="(event) => openMenu(flashCard, event)" />
+		</div>
 	</div>
 </template>
 

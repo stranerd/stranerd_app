@@ -10,7 +10,7 @@
 			</router-link>
 		</div>
 
-		<EmptyState v-if="tests.length === 0" info="You have no uncompleted tests" />
+		<EmptyState v-if="!loading && !error && tests.length === 0" info="You have no uncompleted tests" />
 		<div v-else class="showcase">
 			<ContinueTestCard v-for="test in tests" :key="test.hash" :test="test" />
 		</div>

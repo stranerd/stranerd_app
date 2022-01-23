@@ -46,11 +46,11 @@
 				</div>
 			</div>
 
-			<div v-if="preps.length" class="p-4 lg:w-7/12 w-full mx-auto showcase">
+			<div class="p-4 lg:w-7/12 w-full mx-auto showcase">
 				<TestPrepListCard v-for="prep in preps" :key="prep.hash" :openMenu="openMenu" :testPrep="prep" />
 			</div>
-			<div v-else class="p-4 lg:w-7/12 w-full mx-auto">
-				<EmptyState
+			<div class="p-4 lg:w-7/12 w-full mx-auto">
+				<EmptyState v-if="!loading && !error && preps.length === 0"
 					info="There is currently no test for the given <b>Subject/Year/Mode</b>"
 				/>
 			</div>
@@ -91,7 +91,7 @@ export default defineComponent({
 		const { institutionId } = route.params
 		const openMenu = (entity: TestPrepEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 
-		const { testPreps } = useTestPrepList()
+		const { testPreps, loading, error } = useTestPrepList()
 		const institutionPreps = computed(() => testPreps.value.filter((prep) => prep.data.institutionId === institutionId))
 
 		const courseId = ref(null as string | null)
@@ -111,6 +111,7 @@ export default defineComponent({
 		}))
 
 		return {
+			loading, error,
 			institutionId, preps, courseId, courses, year, years, questionType, questionTypes, openMenu
 		}
 	}

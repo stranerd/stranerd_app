@@ -68,13 +68,13 @@
 						<span>view all</span>
 					</router-link>
 				</div>
-				<EmptyState v-if="sets.length === 0" btnText="Create a Study set"
+				<EmptyState v-if="!setLoading && !setError && sets.length === 0" btnText="Create a Study set"
 					info="You have not created any study sets yet. <br>
 Put flashcards, notes and test preps in the same folder."
 					route="/study/sets/create"
 				/>
 
-				<div v-else class="showcase">
+				<div class="showcase">
 					<SetCard v-for="set in sets" :key="set.hash" :set="set" />
 				</div>
 			</div>

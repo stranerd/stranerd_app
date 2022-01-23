@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<EmptyState v-if="filtered.length === 0" info="No flashCards found." />
+		<EmptyState v-if="!loading && !error && filtered.length === 0" info="No flashCards found." />
 		<div class="showcase">
 			<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard"
 				:openMenu="(event) => openMenu(flashCard, event)" />

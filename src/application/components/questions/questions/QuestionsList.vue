@@ -1,7 +1,7 @@
 <template>
 	<div class="text-xs md:text-sm ">
 		<div class="lg:mt-8 mt-4">
-			<EmptyState v-if="questions.length === 0" :btnText="'Ask a question'"
+			<EmptyState v-if="!loading && !error && questions.length === 0" :btnText="'Ask a question'"
 				:info="'No questions found! Start asking questions to help with homework and studying.'"
 				route="/questions/create"
 			/>

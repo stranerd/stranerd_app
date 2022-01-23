@@ -7,12 +7,10 @@ Find the ones you need to study for your exams, tests or homeworks and save them
 				route="/explore/notes"
 			/>
 		</template>
-		<template v-else>
-			<div class="showcase">
-				<NoteListCard v-for="note in filtered" :key="note.hash" :note="note"
-					:openMenu="(event:any) => openMenu(note, event)" />
-			</div>
-		</template>
+		<div class="showcase">
+			<NoteListCard v-for="note in filtered" :key="note.hash" :note="note"
+				:openMenu="(event) => openMenu(note, event)" />
+		</div>
 	</div>
 </template>
 

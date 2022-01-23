@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-column items-stretch">
 		<AdminsListCard v-for="admin in admins" :key="admin.hash" :user="admin" class="mb-4" />
-		<EmptyState v-if="admins.length === 0" info="No admins found apart from you" />
+		<EmptyState v-if="!loading && !error && admins.length === 0" info="No admins found apart from you" />
 		<PageLoading v-if="loading" />
 		<DisplayError :error="error" />
 	</div>

@@ -1,16 +1,11 @@
 <template>
 	<div>
-		<template v-if="filtered.length === 0">
-			<EmptyState info="You have not saved any videos yet. <br>
-Find the ones you need to study for your exams, tests or homeworks and save them now."
-				route="/search/videos" />
-		</template>
-		<template v-else>
-			<div class="showcase">
-				<VideoListCard v-for="video in filtered" :key="video.hash" :openMenu="(event) => openMenu(video, event)"
-					:video="video" />
-			</div>
-		</template>
+		<EmptyState v-if="filtered.length === 0" info="You have not saved any videos yet. <br>
+Find the ones you need to study for your exams, tests or homeworks and save them now." route="/search/videos" />
+		<div class="showcase">
+			<VideoListCard v-for="video in filtered" :key="video.hash" :openMenu="(event) => openMenu(video, event)"
+				:video="video" />
+		</div>
 	</div>
 </template>
 

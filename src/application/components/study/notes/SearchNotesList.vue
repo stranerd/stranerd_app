@@ -1,15 +1,11 @@
 <template>
 	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl " />
 	<div v-else>
-		<template v-if="filtered.length === 0">
-			<EmptyState info="No notes available." />
-		</template>
-		<template v-else>
-			<div class="showcase">
-				<NoteListCard v-for="note in filtered" :key="note.hash" :note="note"
-					:openMenu="(event:any) => openMenu(note, event)" />
-			</div>
-		</template>
+		<EmptyState v-if="!loading && filtered.length === 0" info="No notes available." />
+		<div class="showcase">
+			<NoteListCard v-for="note in filtered" :key="note.hash" :note="note"
+				:openMenu="(event) => openMenu(note, event)" />
+		</div>
 	</div>
 </template>
 
