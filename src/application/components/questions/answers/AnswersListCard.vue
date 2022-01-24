@@ -24,12 +24,19 @@
 			<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" class="py-3" />
 
 			<div class="flex flex-row items-center justify-between mt-5">
-				<div class="flex flex-row items-center text-primary font-bold">
-					<span class="mr-1">({{ answer.upVotes }})</span>
-					<IonIcon :icon="thumbsUp" class="text-[22px] mr-2 cursor-pointer" @click="() => voteAnswer(true)" />
-					<span class="mr-1 text-icon_inactive">({{ answer.downVotes }})</span>
-					<IonIcon :icon="thumbsDown" class="text-[22px] text-icon_inactive cursor-pointer"
-						@click="() => voteAnswer(false)" />
+				<div class="flex flex-row items-center font-bold ">
+					<div class="flex flex-row items-center" :class="[answer.upVotes ? 'text-primary':'text-icon_inactive']">
+						<span class="mr-1">({{ answer.upVotes }})</span>
+						<IonIcon :icon="thumbsUp" class="text-[22px] mr-2 cursor-pointer" @click="() => voteAnswer(true)" />
+					</div>
+				
+					<div class="flex flex-row items-center" :class="[answer.downVotes ? 'text-delete_red':'text-icon_inactive']">
+						<span class="mr-1 ">({{ answer.downVotes }})</span>
+						<IonIcon :icon="thumbsDown" class="text-[22px]  cursor-pointer"
+							@click="() => voteAnswer(false)" />
+
+					</div>
+				
 				</div>
 				<div class="flex flex-row items-center text-icon_inactive font-bold gap-4">
 					<span
