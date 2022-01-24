@@ -42,7 +42,9 @@ export const useInstitutionList = () => {
 		if (!global.fetched.value && !global.loading.value) await fetchInstitutions()
 	})
 
-	return { ...global }
+	const institutions = computed(() => global.institutions.value.sort((a, b) => a.name < b.name ? -1 : 1))
+
+	return { ...global, institutions }
 }
 
 export const useInstitution = (id: string) => {

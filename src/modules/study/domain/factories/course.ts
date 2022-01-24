@@ -20,7 +20,7 @@ export class CourseFactory extends BaseFactory<CourseEntity, CourseToModel, Cour
 	}
 
 	set name (value: string) {
-		this.set('name', value)
+		this.set('name', value.toLowerCase())
 	}
 
 	get institutionId () {

@@ -21,7 +21,7 @@ export class InstitutionFactory extends BaseFactory<InstitutionEntity, Instituti
 	}
 
 	set name (value: string) {
-		this.set('name', value)
+		this.set('name', value.toLowerCase())
 	}
 
 	get isGateway () {
