@@ -89,6 +89,9 @@
 										<li class="my-10">
 											<a class="font-light" href="https://stranerd.medium.com">Blog</a>
 										</li>
+										<li class="my-10">
+											<a class="font-light" href="mailto:support@stranerd.com">Contact</a>
+										</li>
 									</ul>
 								</div>
 							</div>
