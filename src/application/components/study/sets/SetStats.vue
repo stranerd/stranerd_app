@@ -6,7 +6,7 @@
 			<div class="flex">
 				<img alt="" class="w-6 mr-4" src="@app/assets/images/New/flashCard.png" />
 				<ion-text class="text-white text-2xl">
-					{{ set.saved.flashCards.length }}
+					{{ formatNumber(set.saved.flashCards.length) }}
 				</ion-text>
 			</div>
 		</div>
@@ -15,7 +15,7 @@
 			<div class="flex items-center gap-4">
 				<ion-icon :icon="reader" class="text-white text-2xl" />
 				<ion-text class="text-white text-2xl">
-					{{ set.saved.notes.length }}
+					{{ formatNumber(set.saved.notes.length) }}
 				</ion-text>
 			</div>
 		</div>
@@ -24,7 +24,7 @@
 			<div class="flex">
 				<img alt="" class="w-6 mr-4" src="@app/assets/images/New/testPrep.svg" />
 				<ion-text class="text-white text-2xl">
-					{{ set.saved.testPreps.length }}
+					{{ formatNumber(set.saved.testPreps.length) }}
 				</ion-text>
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 			<div class="flex items-center gap-4">
 				<ion-icon :icon="folder" class="text-white text-2xl" />
 				<ion-text class="text-white text-2xl">
-					{{ sets.length }}
+					{{ formatNumber(sets.length) }}
 				</ion-text>
 			</div>
 		</div>
@@ -44,6 +44,7 @@ import { folder, reader, videocam } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { SetEntity } from '@modules/study'
 import { useMySets } from '@app/composable/study/sets'
+import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'SetStats',
@@ -55,7 +56,7 @@ export default defineComponent({
 	},
 	setup () {
 		const { normalSets: sets } = useMySets()
-		return { reader, videocam, folder, sets }
+		return { reader, videocam, folder, sets, formatNumber }
 	}
 
 })

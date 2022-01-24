@@ -13,7 +13,7 @@
 		</DonutChart>
 
 		<ion-text class="text-main_dark my-4">
-			Correct answers - <b>{{ test.correctAnswers }}/{{ test.questions.length }} </b>
+			Correct answers - <b>{{ test.correctAnswers }}/{{ formatNumber(test.questions.length) }} </b>
 		</ion-text>
 
 		<div class="md:w-80 mt-20 mx-auto w-full px-4 flex items-center justify-between">

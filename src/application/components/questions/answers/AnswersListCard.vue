@@ -24,12 +24,21 @@
 			<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" class="py-3" />
 
 			<div class="flex flex-row items-center justify-between mt-5">
-				<div class="flex flex-row items-center text-primary font-bold">
-					<span class="mr-1">({{ answer.upVotes }})</span>
-					<IonIcon :icon="thumbsUp" class="text-[22px] mr-2 cursor-pointer" @click="() => voteAnswer(true)" />
-					<span class="mr-1 text-icon_inactive">({{ answer.downVotes }})</span>
-					<IonIcon :icon="thumbsDown" class="text-[22px] text-icon_inactive cursor-pointer"
-						@click="() => voteAnswer(false)" />
+				<div class="flex flex-row items-center font-bold">
+					<div
+						:class="[answer.votes.find((v) => v.vote === 1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
+						class="flex flex-row items-center mr-2">
+						<span class="mr-1">({{ formatNumber(answer.upVotes) }})</span>
+						<IonIcon :icon="thumbsUp" class="text-[22px] cursor-pointer"
+							@click="() => voteAnswer(true)" />
+					</div>
+					<div
+						:class="[answer.votes.find((v) => v.vote === -1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
+						class="flex flex-row items-center">
+						<span class="mr-1 ">({{ formatNumber(answer.downVotes) }})</span>
+						<IonIcon :icon="thumbsDown" class="text-[22px] cursor-pointer"
+							@click="() => voteAnswer(false)" />
+					</div>
 				</div>
 				<div class="flex flex-row items-center text-icon_inactive font-bold gap-4">
 					<span
@@ -70,6 +79,7 @@ import { useCreateAnswerComments } from '@app/composable/questions/answer-commen
 import { useAuth } from '@app/composable/auth/auth'
 import AnswerCommentsList from '@app/components/questions/comments/AnswerCommentsList.vue'
 import DisplayHtml from '@app/components/core/text/DisplayHtml.vue'
+import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'AnswerListCard',
@@ -110,7 +120,7 @@ export default defineComponent({
 			id, isLoggedIn, user, voteAnswer, loading, error,
 			commentLoading, commentError,
 			commentFactory, createComment,
-			markBestAnswer,
+			markBestAnswer, formatNumber,
 			thumbsDown, thumbsUp, star, send, chevronUp, chevronDown,
 			showExplanation, showComments, showEditButton, showDeleteButton
 		}
