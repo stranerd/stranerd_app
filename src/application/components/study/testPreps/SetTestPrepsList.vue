@@ -1,19 +1,15 @@
 <template>
 	<div>
-		<template v-if="filtered.length === 0">
-			<EmptyState btnText="Explore Test Preps"
-				info="You have not saved any test preps yet. <br>
+		<EmptyState v-if="filtered.length === 0" btnText="Explore Test Preps"
+			info="You have not saved any test preps yet. <br>
 Find the one you need to study for your exams and save them now."
-				route="/search/preps"
-			/>
-		</template>
-		<template v-else>
-			<div class="showcase">
-				<TestPrepListCard v-for="testPrep in filtered" :key="testPrep.hash"
-					:openMenu="(event:any) => openMenu(testPrep, event)"
-					:testPrep="testPrep" />
-			</div>
-		</template>
+			route="/search/preps"
+		/>
+		<div class="showcase">
+			<TestPrepListCard v-for="testPrep in filtered" :key="testPrep.hash"
+				:openMenu="(event:any) => openMenu(testPrep, event)"
+				:testPrep="testPrep" />
+		</div>
 	</div>
 </template>
 

@@ -33,7 +33,7 @@ export class NotificationEntity extends BaseEntity {
 			if (this.data.wallet) return '/wallet'
 			else return '/account'
 		} else if (this.action === 'roles') {
-			if (this.data.admin) return '/admin/users/admins'
+			if (this.data.user) return '/admin/users/admins'
 			if (this.data.tutor) return '/admin/users/tutors'
 		}
 		return '/dashboard'

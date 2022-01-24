@@ -1,5 +1,5 @@
 <template>
-	<div :id="answer.id" class="flex flex-col  py-3 mt-4">
+	<div :id="answer.id" class="flex flex-col py-3 mt-4">
 		<div class="p-6 rounded-xl bg-white flex flex-col w-full md:text-base text-xs relative cursor-pointer gap-6">
 			<div class="w-full flex flex-col gap-3">
 				<ion-text class="text-main_dark font-bold">

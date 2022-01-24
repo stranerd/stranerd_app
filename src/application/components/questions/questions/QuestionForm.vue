@@ -28,7 +28,7 @@
 			<span v-for="tag in factory.tags" :key="tag">
 				<span
 					class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-					{{ tag }}  <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
+					{{ tag }} <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
 				</span>
 			</span>
 		</div>
@@ -38,7 +38,7 @@
 			<span v-for="attachment in factory.attachments" :key="attachment.name" class="my-1">
 				<span
 					class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-					{{ attachment.name }}  <IonIcon :icon="close" class="ml-1 cursor-pointer"
+					{{ attachment.name }} <IonIcon :icon="close" class="ml-1 cursor-pointer"
 						@click="factory.removeAttachment(attachment)" />
 				</span>
 			</span>
@@ -51,7 +51,7 @@
 			</ion-button>
 			<ion-button :disabled="loading || !factory.valid"
 				class="w-1/2 btn-primary" type="submit">
-				Submit
+				<slot name="buttonText">Submit</slot>
 			</ion-button>
 		</div>
 

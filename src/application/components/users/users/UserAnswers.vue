@@ -4,10 +4,9 @@
 	</div>
 
 	<div v-else class="col-span-12 flex flex-col px-3 text-body">
-		<template v-if="answers.length">
-			<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer" />
-		</template>
-		<EmptyState v-else info="This user hasn't answered any questions yet." />
+		<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer" />
+		<EmptyState v-if="!loading && !error && answers.length === 0"
+			info="This user hasn't answered any questions yet." />
 	</div>
 </template>
 

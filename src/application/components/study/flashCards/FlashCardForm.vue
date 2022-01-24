@@ -1,16 +1,16 @@
 <template>
 	<div>
 		<div
-			class="bg-primary w-full  h-auto flex flex-col justify-between items-center md:pt-12 pt-4 pb-1 md:rounded-none rounded-b-xl">
+			class="bg-primary w-full h-auto flex flex-col justify-between items-center md:pt-12 pt-4 pb-1 md:rounded-none rounded-b-xl">
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-5 mb-6 hidden md:block">
 				{{ title }}
 			</ion-text>
-			<div class="bg-white  lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
+			<div class="bg-white lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
 				<ion-text class="text-primary font-bold w-12">
 					TITLE
 				</ion-text>
 				<ion-input v-model="factory.title"
-					class="max-w-[1054px]  !h-14 "
+					class="max-w-[1054px] !h-14 "
 					mode="md"
 					placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
 					show-cancel-button="never"
@@ -25,12 +25,12 @@
 					<span v-for="tag in factory.tags" :key="tag">
 						<span
 							class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-							{{ tag }}  <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
+							{{ tag }} <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
 						</span>
 					</span>
 				</div>
 				<ion-input v-model="tag"
-					class="max-w-[1054px]  !h-14 "
+					class="max-w-[1054px] !h-14 "
 					placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
 					show-cancel-button="never"></ion-input>
 			</div>

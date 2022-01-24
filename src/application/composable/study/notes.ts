@@ -1,4 +1,4 @@
-import { computed, onUnmounted, onMounted, Ref, ref } from 'vue'
+import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import {
 	AddNote,
 	DeleteNote,
@@ -12,6 +12,7 @@ import {
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
+import { Router } from 'vue-router'
 
 const global = {
 	notes: ref([] as NoteEntity[]),
@@ -99,8 +100,9 @@ export const useCreateNote = () => {
 
 let editingNote = null as NoteEntity | null
 export const getEditingNote = () => editingNote
-export const openNoteEditModal = (note: NoteEntity) => {
+export const openNoteEditModal = async (note: NoteEntity, router: Router) => {
 	editingNote = note
+	await router.push(`/admin/study/notes/${note.id}/edit`)
 }
 export const useEditNote = (noteId: string) => {
 	const { error, setError } = useErrorHandler()

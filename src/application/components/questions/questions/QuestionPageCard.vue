@@ -9,7 +9,7 @@
 				<div class="h-1 w-1 bg-icon_inactive rounded-full hidden lg:block" />
 				<Subject :subjectId="question.subjectId" class="font-semibold text-main_dark" />
 				<div class="flex flex-row-reverse flex-grow">
-					<IonIcon :icon="flag" class="text-[22px]  text-main_dark cursor-pointer"
+					<IonIcon :icon="flag" class="text-[22px] text-main_dark cursor-pointer"
 						@click="openReportQuestionModal" />
 					<share
 						:text="question.body"

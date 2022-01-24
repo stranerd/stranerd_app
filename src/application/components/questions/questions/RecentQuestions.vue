@@ -15,12 +15,12 @@
 			</router-link>
 		</div>
 
-		<EmptyState v-if="questions.length === 0"
+		<EmptyState v-if="!loading && !error && questions.length === 0"
 			btnText="Ask a question"
 			info="You have no recent questions! Start asking questions to help with homework and studying."
 			route="/questions"
 		/>
-		<div v-else class="showcase">
+		<div class="showcase">
 			<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
 		</div>
 	</div>

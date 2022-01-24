@@ -1,15 +1,11 @@
 <template>
 	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl " />
 	<div v-else>
-		<template v-if="filtered.length === 0">
-			<EmptyState info="No testPreps available." />
-		</template>
-		<template v-else>
-			<div class="showcase">
-				<InstitutionTestPrepsListCard v-for="group in filtered" :key="group.institutionId"
-					:institutionId="group.institutionId" :testPreps="group.preps" />
-			</div>
-		</template>
+		<EmptyState v-if="!loading && filtered.length === 0" info="No testPreps available." />
+		<div class="showcase">
+			<InstitutionTestPrepsListCard v-for="group in filtered" :key="group.institutionId"
+				:institutionId="group.institutionId" :testPreps="group.preps" />
+		</div>
 	</div>
 </template>
 

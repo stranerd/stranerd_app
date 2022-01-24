@@ -120,31 +120,19 @@ ion-popover {
 	--border-radius: 0.75rem !important;
 }
 
-.study-modal {
-	--background-color: #00000065;
-	--height: 28rem !important;
-	--width: 800px;
-	--border-radius: .75rem;
-	@media (max-width: 500px) {
-		--min-height: 300px;
-		--width: 100vw;
-		--border-radius: 0rem;
-	}
-}
-
 .sm-modal {
 	--background-color: #00000065;
 	--height: 28rem !important;
-	--width: 400px;
+	--width: 800px;
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
 		--min-height: 300px;
-		--width: 80vw;
-		--border-radius: 0.75rem;
+		--width: 100vw;
+		--border-radius: 0rem;
 	}
 }
 
-.question-modal {
+.lg-modal {
 	--background-color: #00000065;
 	--height: 39rem;
 	--width: 800px;
@@ -155,18 +143,6 @@ ion-popover {
 		--border-radius: 0rem;
 	}
 }
-
-.modal-class {
-	--background-color: #00000065;
-	--height: 39rem;
-	--width: 400px;
-	--border-radius: .75rem;
-	@media (max-width: 500px) {
-		--min-height: 300px;
-		--border-radius: 0rem;
-	}
-}
-
 
 .searchbar-clear-icon.sc-ion-searchbar-md {
 	@media (max-width: 1024px) {

@@ -10,7 +10,7 @@ import {
 	isString
 } from '@stranerd/validate'
 import { BaseFactory, Media } from '@modules/core'
-import { NoteEntity } from '../entities/note'
+import { NoteEntity } from '@modules/study'
 import { NoteToModel } from '../../data/models/note'
 
 type Content = File | Media
@@ -116,6 +116,8 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 		if (this.valid) {
 			if (this.media instanceof File) this.media = await this.uploadFile('notes', this.media)
 			if (this.preview instanceof File) this.preview = await this.uploadFile('note-previews', this.preview)
+			if (this.isHosted) this.link = null
+			else this.media = null
 			const { title, description, isHosted, link, media, tags, preview } = this.validValues
 			return { title, description, isHosted, link, media: media as Media | null, tags, preview: preview as Media }
 		} else {

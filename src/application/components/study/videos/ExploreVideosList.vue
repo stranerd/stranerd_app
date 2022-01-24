@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<EmptyState v-if="filtered.length === 0" info="No videos found." />
+		<EmptyState v-if="!loading && !error && filtered.length === 0" info="No videos found." />
 		<div class="showcase">
 			<VideoListCard v-for="video in filtered" :key="video.hash" :openMenu="(event) => openMenu(video, event)"
 				:video="video" />

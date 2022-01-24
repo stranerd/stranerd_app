@@ -1,14 +1,10 @@
 <template>
 	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl " />
 	<div v-else>
-		<template v-if="filtered.length === 0">
-			<EmptyState info="No users available." />
-		</template>
-		<template v-else>
-			<div class="showcase">
-				<UserListCard v-for="user in filtered" :key="user.hash" :user="user" />
-			</div>
-		</template>
+		<EmptyState v-if="!loading && filtered.length === 0" info="No users available." />
+		<div class="showcase">
+			<UserListCard v-for="user in filtered" :key="user.hash" :user="user" />
+		</div>
 	</div>
 </template>
 

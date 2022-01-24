@@ -1,6 +1,6 @@
 <template>
 	<span v-if="tag"
-		:class="[secondary ?'!text-white':'',`py-1 px-3 font-bold  rounded-3xl`]"
+		:class="[secondary ?'!text-white':'',`py-1 px-3 font-bold rounded-3xl`]"
 		:style="`color:${colors[index || randomNumber]}; background-color:${secondary? colors[index || randomNumber] : bgColors[index || randomNumber]}`"
 	>
 		<slot

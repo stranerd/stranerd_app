@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<EmptyState v-if="filtered.length === 0" info="No notes found." />
+		<EmptyState v-if="!loading && !error && filtered.length === 0" info="No notes found." />
 		<div class="showcase">
 			<NoteListCard v-for="note in filtered" :key="note.hash" :note="note"
 				:openMenu="(event) => openMenu(note, event)" />

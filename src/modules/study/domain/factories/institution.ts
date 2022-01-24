@@ -21,15 +21,7 @@ export class InstitutionFactory extends BaseFactory<InstitutionEntity, Instituti
 	}
 
 	set name (value: string) {
-		this.set('name', value)
-	}
-
-	get isSchool () {
-		return this.values.isSchool
-	}
-
-	set isSchool (value: boolean) {
-		this.set('isSchool', value)
+		this.set('name', value.toLowerCase())
 	}
 
 	get isGateway () {
@@ -38,11 +30,11 @@ export class InstitutionFactory extends BaseFactory<InstitutionEntity, Instituti
 
 	set isGateway (value: boolean) {
 		this.set('isGateway', value)
+		this.set('isSchool', !value)
 	}
 
 	loadEntity = (entity: InstitutionEntity) => {
 		this.name = entity.name
-		this.isSchool = entity.isSchool
 		this.isGateway = entity.isGateway
 	}
 

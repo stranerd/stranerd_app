@@ -20,7 +20,8 @@
 			</div>
 		</div>
 
-		<EmptyState v-if="!user && users.length === 0" info="No user has earned points this period." />
+		<EmptyState v-if="!loading && !error && !user && users.length === 0"
+			info="No user has earned points this period." />
 
 		<router-link class="w-full" to="/users/leaderboard">
 			<ion-button class="btn-primary w-full">
@@ -46,10 +47,10 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { users: allUsers, loading, hasNoAuthUser } = useLeaderboardList(props.time)
+		const { users: allUsers, loading, error, hasNoAuthUser } = useLeaderboardList(props.time)
 		const users = computed(() => allUsers.value.slice(0, 10))
 		const { user, id } = useAuth()
-		return { id, user, users, loading, hasNoAuthUser, formatNumber }
+		return { id, user, users, loading, error, hasNoAuthUser, formatNumber }
 	}
 })
 </script>

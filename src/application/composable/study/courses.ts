@@ -1,7 +1,16 @@
 import { computed, onMounted, Ref, ref } from 'vue'
-import { AddCourse, CourseEntity, CourseFactory, DeleteCourse, FindCourse, GetCourses } from '@modules/study'
+import {
+	AddCourse,
+	CourseEntity,
+	CourseFactory,
+	DeleteCourse,
+	EditCourse,
+	FindCourse,
+	GetCourses
+} from '@modules/study'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
+import { useStudyModal } from '@app/composable/core/modals'
 
 const global = {
 	fetched: ref(false),
@@ -33,7 +42,9 @@ export const useCourseList = () => {
 		if (!global.fetched.value && !global.loading.value) await fetchCourses()
 	})
 
-	return { ...global }
+	const courses = computed(() => global.courses.value.sort((a, b) => a.name < b.name ? -1 : 1))
+
+	return { ...global, courses }
 }
 
 export const getCoursesByInstitution = (institutionId: string) => computed({
@@ -57,11 +68,19 @@ export const useCourse = (id: string) => {
 	return { course }
 }
 
+let creatingInstitutionCourse = null as string | null
+export const getCreatingInstitutionCourse = () => creatingInstitutionCourse
+export const openCourseCreateModal = async (institutionId: string) => {
+	creatingInstitutionCourse = institutionId
+	useStudyModal().openCreateCourse()
+}
+
 export const useCreateCourse = () => {
 	const factory = ref(new CourseFactory()) as Ref<CourseFactory>
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
+	if (creatingInstitutionCourse) factory.value.institutionId = creatingInstitutionCourse
 
 	const createCourse = async () => {
 		await setError('')
@@ -72,6 +91,7 @@ export const useCreateCourse = () => {
 				const course = await FindCourse.call(id)
 				if (course) pushToGlobalCourses(course)
 				factory.value.reset()
+				useStudyModal().closeCreateCourse()
 				await setMessage('Course created successfully')
 			} catch (error) {
 				await setError(error)
@@ -83,12 +103,48 @@ export const useCreateCourse = () => {
 	return { factory, loading, error, createCourse }
 }
 
-export const useDeleteCourse = (course: CourseEntity) => {
+let editingCourse = null as CourseEntity | null
+export const getEditingCourse = () => editingCourse
+export const openCourseEditModal = async (course: CourseEntity) => {
+	editingCourse = course
+	useStudyModal().openEditCourse()
+}
+
+export const useEditCourse = () => {
+	const factory = ref(new CourseFactory()) as Ref<CourseFactory>
+	const { error, setError } = useErrorHandler()
+	const { setMessage } = useSuccessHandler()
+	const { loading, setLoading } = useLoadingHandler()
+	if (editingCourse) factory.value.loadEntity(editingCourse)
+	else useStudyModal().closeEditCourse()
+
+	const editCourse = async () => {
+		await setError('')
+		if (factory.value.valid && !loading.value) {
+			await setLoading(true)
+			try {
+				await EditCourse.call(editingCourse!.id, factory.value)
+				const updatedCourse = await FindCourse.call(editingCourse!.id)
+				if (updatedCourse) pushToGlobalCourses(updatedCourse)
+				factory.value.reset()
+				useStudyModal().closeEditCourse()
+				await setMessage('Course updated successfully')
+			} catch (error) {
+				await setError(error)
+			}
+			await setLoading(false)
+		} else factory.value.validateAll()
+	}
+
+	return { factory, loading, error, editCourse }
+}
+
+export const useDeleteCourse = () => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	const deleteCourse = async () => {
+	const deleteCourse = async (course: CourseEntity) => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to remove this course?',

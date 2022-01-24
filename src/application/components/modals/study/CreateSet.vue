@@ -12,7 +12,7 @@
 						TITLE
 					</ion-text>
 					<ion-input v-model="factory.name"
-						class="max-w-[1054px]  !h-14 text-left"
+						class="max-w-[1054px] !h-14 text-left"
 						placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
 						show-cancel-button="never"
 					></ion-input>
@@ -25,13 +25,13 @@
 						<span v-for="tag in factory.tags" :key="tag">
 							<span
 								class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-								{{ tag }}  <ion-icon :icon="close" class="ml-1 cursor-pointer text-white"
+								{{ tag }} <ion-icon :icon="close" class="ml-1 cursor-pointer text-white"
 									@click="removeTag(tag)" />
 							</span>
 						</span>
 					</div>
 					<ion-input v-model="tag"
-						class="max-w-[1054px]  !h-14 text-left"
+						class="max-w-[1054px] !h-14 text-left"
 						placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
 						show-cancel-button="never"></ion-input>
 				</div>
@@ -56,7 +56,7 @@
 				</div>
 			</div>
 
-			<div class="flex flex-row  mt-5  text-white gap-4">
+			<div class="flex flex-row mt-5 text-white gap-4">
 				<div class="w-1/2 flex flex-row justify-center items-center">
 					<ion-button class=" btn-secondary w-full"
 						@click="closeCreateSet">

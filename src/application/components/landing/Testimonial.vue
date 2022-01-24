@@ -13,7 +13,7 @@
 				</ion-text>
 
 				<div class="flex items-center justify-center lg:mt-16 mt-10">
-					<img :src="testimonies[tab].img" class="object-cover lg:h-10 lg:w-10 h-5 w-5 rounded-full">
+					<img v-if="testimonies[tab].img" :src="testimonies[tab].img" class="object-cover lg:h-10 lg:w-10 h-5 w-5 rounded-full">
 
 					<ion-text class="text-center font-bold text-xs lg:text-xl ml-4">
 						{{ testimonies[tab].author }}
@@ -45,7 +45,7 @@ export default defineComponent({
 				img: require('@app/assets/images/testimonials/eunice.jpeg')
 			},
 			{
-				text: 'I like how it\'s very well spelt-out what I have to do to advance in ranking.',
+				text: 'Aside the fact that their content on Instagram is super relatable and helpful, I posted a set of past questions I did not have the solutions to last semester and I got the solutions quickly.',
 				author: 'Emmanuel Bello',
 				img: require('@app/assets/images/testimonials/emmanuel.jpeg')
 			},
@@ -58,6 +58,11 @@ export default defineComponent({
 				text: 'I\'ve been impressed mostly! I really like the "coin system”',
 				author: 'Daniel Uwagwu',
 				img: require('@app/assets/images/testimonials/daniel.jpeg')
+			},
+			{
+				text: 'Stranerd has helped open my eyes to new approaches to learning and education. The best part is that I also get to meet other intellectuals and scholars.',
+				author: 'Oreoluwa Oyinlola',
+				// img: require('')
 			}
 		]
 		return {

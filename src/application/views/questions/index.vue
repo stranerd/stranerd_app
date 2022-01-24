@@ -1,6 +1,6 @@
 <template>
 	<DashboardLayout>
-		<div class="px-4 lg:pl-2  pt-2">
+		<div class="px-4 lg:pl-2 pt-2">
 			<QuestionHeader />
 			<QuestionsList />
 		</div>

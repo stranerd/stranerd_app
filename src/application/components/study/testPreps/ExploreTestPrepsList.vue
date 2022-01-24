@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<EmptyState v-if="filtered.length === 0" info="No testPreps found." />
-		<div v-else class="showcase">
+		<EmptyState v-if="!loading && !error && filtered.length === 0" info="No testPreps found." />
+		<div class="showcase">
 			<InstitutionTestPrepsListCard v-for="group in filtered" :key="group.institutionId"
 				:institutionId="group.institutionId" :testPreps="group.preps" />
 		</div>
