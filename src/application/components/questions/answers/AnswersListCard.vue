@@ -30,7 +30,7 @@
 						<IonIcon :icon="thumbsUp" class="text-[22px] mr-2 cursor-pointer" @click="() => voteAnswer(true)" />
 					</div>
 				
-					<div class="flex flex-row items-center" :class="[answer.downVotes ? 'text-delete_red':'text-icon_inactive']">
+					<div class="flex flex-row items-center" :class="[answer.downVotes ? 'text-primary':'text-icon_inactive']">
 						<span class="mr-1 ">({{ answer.downVotes }})</span>
 						<IonIcon :icon="thumbsDown" class="text-[22px]  cursor-pointer"
 							@click="() => voteAnswer(false)" />
