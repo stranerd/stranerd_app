@@ -6,7 +6,7 @@
 		<PageLoading v-if="passwordLoading" />
 
 		<div
-			class="custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl  mb-6 md:-mt-12 mt-6">
+			class="custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl mb-6 md:-mt-12 mt-6">
 			<ion-text class="text-xl text-main_dark font-bold mt-2">
 				Profile Picture
 			</ion-text>

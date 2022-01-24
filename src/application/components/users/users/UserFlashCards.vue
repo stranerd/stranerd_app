@@ -7,7 +7,7 @@
 			<FlashCardListCard :flashCard="flashCard" :openMenu="(event) => openMenu(flashCard, event)" />
 		</div>
 		<EmptyState v-if="!loading && !error && flashCards.length === 0"
-			info="This user hasn't created any flashCards yet" />
+			info="This user hasn't created any flashCards yet or they are marked private" />
 	</div>
 </template>
 

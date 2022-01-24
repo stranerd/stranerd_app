@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full flex flex-col bg-white mt-9 lg:p-12 p-5  lg:rounded-3xl rounded-xl">
+	<div class="w-full flex flex-col bg-white mt-9 lg:p-12 p-5 lg:rounded-3xl rounded-xl">
 		<h2 class="lg:text-xl text-base text-main_dark font-bold">
 			Give your answer
 		</h2>
@@ -22,7 +22,7 @@
 		<DisplayError :error="factory.errors.body" />
 
 		<div
-			class="lg:mt-9 mt-5 rounded-xl  text-main_dark relative bg-light_gray border border-faded_gray flex flex-col h-32 justify-center items-center">
+			class="lg:mt-9 mt-5 rounded-xl text-main_dark relative bg-light_gray border border-faded_gray flex flex-col h-32 justify-center items-center">
 			<IonIcon :icon="image" class="!text-3xl" />
 			<input
 				id="images" accept="image/x-png,image/jpeg,image/jpg"
@@ -40,7 +40,7 @@
 			<span v-for="attachment in factory.attachments" :key="attachment.name">
 				<span
 					class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-					{{ attachment.name }}  <IonIcon :icon="close" class="ml-1 cursor-pointer"
+					{{ attachment.name }} <IonIcon :icon="close" class="ml-1 cursor-pointer"
 						@click="factory.removeAttachment(attachment)" />
 				</span>
 			</span>
@@ -51,7 +51,7 @@
 			<ion-button class="w-1/2 btn-secondary " @click="showAddAnswer = false">
 				Cancel
 			</ion-button>
-			<ion-button class=" w-1/2  btn-primary"
+			<ion-button class=" w-1/2 btn-primary"
 				type="submit" @click="createAnswer">
 				Post answer
 			</ion-button>

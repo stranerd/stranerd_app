@@ -18,7 +18,7 @@
 					<ion-icon :icon="flash" class="text-lg"></ion-icon>
 				</ion-fab-button>
 				<ion-text
-					class="px-4 py-1 mr-1.5 w-max text-xs bg-purple rounded-xl  font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
+					class="px-4 py-1 mr-1.5 w-max text-xs bg-purple rounded-xl font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
 					Create a flashcard
 				</ion-text>
 			</router-link>

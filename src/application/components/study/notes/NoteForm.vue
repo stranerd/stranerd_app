@@ -19,7 +19,7 @@
 				<span v-for="tag in factory.tags" :key="tag">
 					<span
 						class="p-2 text-white bg-faded_gray rounded-xl flex items-center">
-						{{ tag }}  <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
+						{{ tag }} <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
 					</span>
 				</span>
 			</div>

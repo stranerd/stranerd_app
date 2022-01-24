@@ -8,14 +8,14 @@
 			</div>
 
 			<div class="flex flex-col py-4">
-				<ion-text class="text-gray font-bold mb-2  text-xs lg:text-base">
+				<ion-text class="text-gray font-bold mb-2 text-xs lg:text-base">
 					Main answer
 				</ion-text>
 				<DisplayHtml :html="answer.title" class="text-xs lg:text-base" />
 			</div>
 
 			<div v-if="answer.body" class="flex flex-col pb-4">
-				<ion-text class="text-gray font-bold mb-2  text-xs lg:text-base">
+				<ion-text class="text-gray font-bold mb-2 text-xs lg:text-base">
 					Explanation
 				</ion-text>
 				<DisplayHtml :html="answer.body" class="text-xs lg:text-base" />
@@ -46,9 +46,9 @@
 				</div>
 			</div>
 
-			<div class="mt-6 p-3  flex flex-row items-center border-faded_gray border rounded-xl">
+			<div class="mt-6 p-3 flex flex-row items-center border-faded_gray border rounded-xl">
 				<ion-textarea v-model="commentFactory.body" :autoGrow="true" :rows="1"
-					class="px-1  focus:outline-none placeholder-gray-400 mt-0 pt-0"
+					class="px-1 focus:outline-none placeholder-gray-400 mt-0 pt-0"
 					placeholder="Add comment" />
 				<IonIcon :icon="send" class="text-[22px] mr-2 text-primary cursor-pointer" @click="createComment" />
 			</div>

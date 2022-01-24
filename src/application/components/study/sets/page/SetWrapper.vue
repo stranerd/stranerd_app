@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="blueTop flex-col  pt-5 md:pt-12">
+		<div class="blueTop flex-col pt-5 md:pt-12">
 			<div class="flex w-full lg:w-8/12 mx-auto px-4 text-white items-center">
 				<IonIcon :icon="folder" class="text-6xl md:text-8xl" />
 				<div class="flex flex-col ml-2 md:ml-4">
@@ -9,7 +9,7 @@
 				</div>
 			</div>
 			<div
-				class="mb-0.5 mt-8 md:mt-12 justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full  lg:px-3 text-xs mx-auto text-faded_gray font-bold  whitespace-normal overflow-x-auto">
+				class="mb-0.5 mt-8 md:mt-12 justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full lg:px-3 text-xs mx-auto text-faded_gray font-bold whitespace-normal overflow-x-auto">
 				<router-link :to="`/study/sets/${set.id}/`"
 					class="py-2 mr-3 cursor-pointer"
 					exact-active-class="border-b-4 text-white border-white">
