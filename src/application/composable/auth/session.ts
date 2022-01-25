@@ -6,10 +6,11 @@ import { Router, useRoute, useRouter } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { storage } from '@utils/storage'
+import { setEmailVerificationEmail } from '@app/composable/auth/signin'
 
 export const createSession = async (afterAuth: AfterAuthUser, router: Router) => {
 	if (!afterAuth.user.isVerified) {
-		await useAuth().setAuthUser(afterAuth.user)
+		setEmailVerificationEmail(afterAuth.user.email)
 		return await router.push('/auth/verify')
 	}
 	await SessionSignin.call(afterAuth)

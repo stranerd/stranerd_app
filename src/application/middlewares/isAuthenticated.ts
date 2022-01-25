@@ -5,7 +5,11 @@ import { storage } from '@utils/storage'
 
 export const isAuthenticated = defineMiddleware(async ({ to }) => {
 	if (!useAuth().isLoggedIn.value) {
-		await storage.set(REDIRECT_SESSION_NAME, to.fullPath)
+		if (!to.fullPath.startsWith('/auth/')) await storage.set(REDIRECT_SESSION_NAME, to.fullPath)
 		return '/auth/signin'
+	}
+	if (!useAuth().isVerified.value) {
+		if (!to.fullPath.startsWith('/auth/')) await storage.set(REDIRECT_SESSION_NAME, to.fullPath)
+		return '/auth/verify'
 	}
 })
