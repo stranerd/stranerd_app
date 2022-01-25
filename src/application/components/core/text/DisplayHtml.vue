@@ -26,6 +26,7 @@ export default defineComponent({
 		word-wrap: break-word;
 		word-break: break-word;
 		overflow-wrap: break-word;
+		max-height: 20rem;
 
 		p {
 			margin-bottom: 0.25rem;
