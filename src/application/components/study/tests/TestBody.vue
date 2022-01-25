@@ -34,10 +34,10 @@
 		</template>
 
 		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white z-[10]">
-			<div class="lg:w-8/12  w-full px-4  mx-auto flex items-center justify-between">
+			<div class="lg:w-8/12 w-full px-4 mx-auto flex items-center justify-between">
 				<div>
 					<ion-text v-if="test.isOBJ" class="text-main_dark">
-						{{ test.answered }}/{{ questions.length }} answered
+						{{ test.answered }}/{{ formatNumber(questions.length) }} answered
 					</ion-text>
 				</div>
 
@@ -73,6 +73,7 @@ import { useCountdown } from '@app/composable/core/dates'
 import { getDigitalTime } from '@utils/dates'
 import { useStudyPopover } from '@app/composable/core/modals'
 import TestQuestion from '@app/components/study/tests/TestQuestion.vue'
+import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'TestBody',
@@ -101,7 +102,7 @@ export default defineComponent({
 		return {
 			error, loading, questions, openSubmitTest, updateAnswer,
 			countDown, tab, questionIndex, canGoBack, canGoForward, back, forward,
-			chevronForwardCircle, chevronBackCircle
+			chevronForwardCircle, chevronBackCircle, formatNumber
 		}
 	}
 })

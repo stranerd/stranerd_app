@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full relative bg-primary  h-screen flex justify-between items-center lg:py-32 py-10 ">
+	<div class="w-full relative bg-primary h-screen flex justify-between items-center lg:py-32 py-10 ">
 		<div class="flex flex-col lg:flex-row justify-center items-center mx-auto max-w-[120rem] w-full px-6">
 			<div
 				class="lg:w-6/12 w-full h-auto flex flex-col lg:items-start items-center lg:text-left text-center gap-3">
@@ -14,7 +14,7 @@
 				</ion-text>
 				<router-link class="w-full h-auto mx-auto lg:m-0" to="/dashboard">
 					<ion-button
-						class="btn-outline btn-outline-sm text-white lg:w-[22.5rem] w-[11.25rem] lg:h-[6rem] h-12 mx-auto lg:m-0  lg:text-2xl text-sm md:text-lg block">
+						class="btn-outline btn-outline-sm text-white lg:w-[22.5rem] w-[11.25rem] lg:h-[6rem] h-12 mx-auto lg:m-0 lg:text-2xl text-sm md:text-lg block">
 						Get Started Now
 					</ion-button>
 				</router-link>

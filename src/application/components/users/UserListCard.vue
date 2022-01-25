@@ -8,7 +8,7 @@
 			<div class="flex flex-col justify-start items-start">
 				<h2 class="lg:text-base text-xs font-bold mb-1">{{ user.fullName }}</h2>
 				<span
-					class="py-1 px-4 rounded-full  text-xs w-auto flex border-2 font-bold bg-primary text-white">
+					class="py-1 px-4 rounded-full text-xs w-auto flex border-2 font-bold bg-primary text-white">
 					{{ user.rank.id }}
 				</span>
 			</div>

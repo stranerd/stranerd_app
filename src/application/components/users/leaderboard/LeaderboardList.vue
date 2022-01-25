@@ -49,7 +49,8 @@
 				</div>
 			</div>
 
-			<EmptyState v-if="!user && users.length === 0" class="mt-4" info="No user has earned points this period." />
+			<EmptyState v-if="!loading && !error && !user && users.length === 0" class="mt-4"
+				info="No user has earned points this period." />
 		</div>
 	</div>
 </template>
@@ -75,9 +76,9 @@ export default defineComponent({
 	},
 
 	setup (props) {
-		const { users, loading, hasNoAuthUser } = useLeaderboardList(props.time)
+		const { users, error, loading, hasNoAuthUser } = useLeaderboardList(props.time)
 		const { user, id } = useAuth()
-		return { user, id, users, loading, hasNoAuthUser, formatNumber }
+		return { user, id, users, error, loading, hasNoAuthUser, formatNumber }
 	}
 })
 </script>

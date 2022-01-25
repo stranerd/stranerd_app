@@ -1,13 +1,13 @@
 <template>
 	<ion-header
-		:class="[show ?'fixed bg-white top-0 bottom-0 !text-white':'', 'w-full flex flex-col  z-10 bg-white text-primary nav-shadow']"
+		:class="[show ?'fixed bg-white top-0 bottom-0 !text-white':'', 'w-full flex flex-col z-10 bg-white text-primary nav-shadow']"
 		role="navigation">
 		<div class="md:px-16 p-4 hidden lg:flex items-center justify-between">
 			<router-link class="hidden lg:block" to="/">
 				<Logo :secondary="true" />
 			</router-link>
 			<div class="gap-8 flex-row lg:flex hidden items-center text-gray">
-				<router-link class="link-custom  px-4" to="/">
+				<router-link class="link-custom px-4" to="/">
 					Home
 				</router-link>
 				<router-link class="link-custom px-4" to="/questions">
@@ -62,7 +62,7 @@
 				Study
 			</router-link>
 
-			<router-link class="btn btn-custom  text-white bg-primary h-12 rounded-xl w-60 mx-auto"
+			<router-link class="btn btn-custom text-white bg-primary h-12 rounded-xl w-60 mx-auto"
 				to="/auth/signin">
 				Log In
 			</router-link>

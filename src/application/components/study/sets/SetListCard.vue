@@ -7,7 +7,7 @@
 
 		<ion-text class="text-sm text-main_dark font-bold w-full text-left">{{ set.name }}</ion-text>
 
-		<span>{{ set.allSaved.length }} {{ pluralize(set.allSaved.length, 'item', 'items') }}</span>
+		<span>{{ formatNumber(set.allSaved.length) }} {{ pluralize(set.allSaved.length, 'item', 'items') }}</span>
 	</router-link>
 </template>
 
@@ -15,7 +15,7 @@
 import { defineComponent } from 'vue'
 import { SetEntity } from '@modules/study'
 import { ellipsisVertical, folder } from 'ionicons/icons'
-import { pluralize } from '@utils/commons'
+import { formatNumber, pluralize } from '@utils/commons'
 
 export default defineComponent({
 	name: 'SetListCard',
@@ -30,7 +30,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { ellipsisVertical, folder, pluralize }
+		return { ellipsisVertical, folder, pluralize, formatNumber }
 	}
 })
 </script>

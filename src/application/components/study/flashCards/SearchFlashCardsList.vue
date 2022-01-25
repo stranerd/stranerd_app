@@ -1,15 +1,11 @@
 <template>
 	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl " />
 	<div v-else>
-		<template v-if="filtered.length === 0">
-			<EmptyState info="No flashCards available." />
-		</template>
-		<template v-else>
-			<div class="showcase">
-				<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard"
-					:openMenu="(event:any) => openMenu(flashCard, event)" />
-			</div>
-		</template>
+		<EmptyState v-if="!loading && filtered.length === 0" info="No flashCards available." />
+		<div class="showcase">
+			<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard"
+				:openMenu="(event) => openMenu(flashCard, event)" />
+		</div>
 	</div>
 </template>
 

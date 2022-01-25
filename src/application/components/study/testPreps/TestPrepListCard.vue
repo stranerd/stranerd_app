@@ -8,7 +8,7 @@
 			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl cursor-pointer" @click="openMenu" />
 		</div>
 		<IonText class="text-gray font-bold">
-			<Course :courseId="testPrep.data.courseId"  />
+			<Course :courseId="testPrep.data.courseId" />
 			({{ testPrep.data.year }})
 		</IonText>
 

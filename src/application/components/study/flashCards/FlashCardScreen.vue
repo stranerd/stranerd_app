@@ -31,7 +31,7 @@
 					@click="decrease"
 				/>
 				<ion-text class="mx-4 text-icon_inactive mr-5">
-					<b>{{ page + 1 }}</b> of <b>{{ flashCard.set.length }}</b>
+					<b>{{ page + 1 }}</b> of <b>{{ formatNumber(flashCard.set.length) }}</b>
 				</ion-text>
 				<ion-icon
 					:icon="chevronForward"
@@ -52,6 +52,7 @@
 import { defineComponent, ref } from 'vue'
 import { FlashCardEntity } from '@modules/study'
 import { add, chevronBack, chevronForward, contract, pause, play, scan } from 'ionicons/icons'
+import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'FlashCardScreen',
@@ -101,7 +102,7 @@ export default defineComponent({
 
 		return {
 			increase, decrease, playCard, pauseCard, page, flipped, isPlaying,
-			isFullscreen, toggleFullscreen, exit, enter,
+			isFullscreen, toggleFullscreen, exit, enter, formatNumber,
 			play, pause, add, scan, chevronBack, chevronForward, contract
 		}
 	}

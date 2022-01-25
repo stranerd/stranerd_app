@@ -1,4 +1,4 @@
-import { computed, onUnmounted, onMounted, reactive, ref, toRefs } from 'vue'
+import { computed, onMounted, onUnmounted, reactive, ref, toRefs } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { GetAllAdmins, GetUsersByEmail, ListenToAllAdmins, MakeAdmin, RemoveAdmin, UserEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
@@ -72,9 +72,9 @@ export const useAdminsList = () => {
 export const useAdminRoles = () => {
 	const state = reactive({
 		fetched: false,
-		email: '',
-		users: [] as UserEntity[]
+		email: ''
 	})
+	const users = ref([] as UserEntity[])
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
@@ -83,8 +83,7 @@ export const useAdminRoles = () => {
 		if (state.email) {
 			await setLoading(true)
 			try {
-				const users = await GetUsersByEmail.call(state.email.toLowerCase())
-				state.users = reactive(users.results)
+				users.value = (await GetUsersByEmail.call(state.email.toLowerCase())).results
 				state.fetched = true
 			} catch (error) {
 				await setError(error)
@@ -95,7 +94,7 @@ export const useAdminRoles = () => {
 
 	const reset = () => {
 		state.email = ''
-		state.users.length = 0
+		users.value.length = 0
 		state.fetched = false
 	}
 
@@ -141,7 +140,7 @@ export const useAdminRoles = () => {
 	}
 
 	return {
-		...toRefs(state), error, loading,
+		...toRefs(state), users, error, loading,
 		getUsersByEmail, adminUser, deAdminUser, reset
 	}
 }

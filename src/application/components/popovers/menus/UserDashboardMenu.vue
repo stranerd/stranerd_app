@@ -7,6 +7,13 @@
 				<ion-label class="font-bold">Profile</ion-label>
 			</div>
 		</router-link>
+		<router-link v-if="0 && isAdmin" class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
+			to="/admin/">
+			<div class="w-48 flex items-center gap-3">
+				<ion-icon :icon="cog" class="text-3xl"></ion-icon>
+				<ion-label class="font-bold">Admin</ion-label>
+			</div>
+		</router-link>
 		<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
 			to="/study">
 			<div class="w-48 flex items-center gap-3">
@@ -42,18 +49,18 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { library, logOut, person, podium, settings } from 'ionicons/icons'
+import { cog, library, logOut, person, podium, settings } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useSessionSignout } from '@app/composable/auth/session'
 
 export default defineComponent({
 	name: 'UserDashboardMenu',
 	setup () {
-		const { user } = useAuth()
+		const { user, isAdmin } = useAuth()
 		const { signout, loading } = useSessionSignout()
 		return {
-			library, logOut, person, podium, settings,
-			user, signout, loading
+			cog, library, logOut, person, podium, settings,
+			isAdmin, user, signout, loading
 		}
 	}
 })

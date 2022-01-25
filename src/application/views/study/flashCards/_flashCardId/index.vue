@@ -17,7 +17,7 @@
 					<div class="flex items-center lg:mr-8 mr-2" @click="cardMode = !cardMode">
 						<ion-icon
 							:icon="!cardMode ? copy: list"
-							class="text-white text-xl cursor-pointer lg:mr-2  lg:mt-0"
+							class="text-white text-xl cursor-pointer lg:mr-2 lg:mt-0"
 						/>
 						<ion-text class="hidden md:flex">
 							{{ !cardMode ? 'Card mode' : 'List mode' }}

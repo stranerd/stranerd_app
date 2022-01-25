@@ -3,13 +3,11 @@
 		<ion-progress-bar type="indeterminate"></ion-progress-bar>
 	</div>
 	<div v-else class="col-span-12 flex flex-col px-3 text-body">
-		<template v-if="flashCards.length">
-			<div v-for="flashCard in flashCards" :key="flashCard.hash" class="w-full md:px-2 md:py-3 mb-4 md:mb-0">
-				<FlashCardListCard :flashCard="flashCard" :openMenu="(event) => openMenu(flashCard, event)" />
-			</div>
-		</template>
-
-		<EmptyState v-else info="This user hasn't created any flashCards yet" />
+		<div v-for="flashCard in flashCards" :key="flashCard.hash" class="w-full md:px-2 md:py-3 mb-4 md:mb-0">
+			<FlashCardListCard :flashCard="flashCard" :openMenu="(event) => openMenu(flashCard, event)" />
+		</div>
+		<EmptyState v-if="!loading && !error && flashCards.length === 0"
+			info="This user hasn't created any flashCards yet or they are marked private" />
 	</div>
 </template>
 

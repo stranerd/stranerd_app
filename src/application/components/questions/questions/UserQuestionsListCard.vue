@@ -18,7 +18,7 @@
 			{{ question.trimmedBody }}
 		</router-link>
 
-		<div class="w-full flex flex-col lg:flex-row lg:justify-between lg:items-center  mt-2">
+		<div class="w-full flex flex-col lg:flex-row lg:justify-between lg:items-center mt-2">
 			<div class=" flex flex-row items-center flex-wrap gap-4">
 				<Tag v-for="(tag, index) in question.tags" :key="tag" :index="index +1" :tag="tag" />
 

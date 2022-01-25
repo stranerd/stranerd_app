@@ -20,7 +20,7 @@ const global = {
 	emailSignin: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
 	emailSignup: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
 	googleSignin: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
-	emailVerificationRequest: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
+	emailVerificationRequest: { email: ref(null as string | null), ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
 	emailVerificationComplete: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() }
 }
 
@@ -103,11 +103,14 @@ export const useCompleteEmailVerification = (token: string) => {
 	return { loading, error, completeVerification }
 }
 
+export const setEmailVerificationEmail = (email: string) => global.emailVerificationRequest.email.value = email
+export const getEmailVerificationEmail = () => global.emailVerificationRequest.email.value
+
 export const useEmailVerificationRequest = () => {
 	const { error, loading, message, setError, setLoading, setMessage } = global.emailVerificationRequest
 
 	const sendVerificationEmail = async () => {
-		const email = useAuth().auth.value?.email
+		const email = global.emailVerificationRequest.email.value
 		if (!email) return
 		await setError('')
 		await setLoading(true)

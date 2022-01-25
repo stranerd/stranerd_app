@@ -3,19 +3,18 @@
 		<h2 class="text-main_dark lg:text-xl text-base font-bold">
 			Answers <span class="text-gray">({{ question.answers.length }})</span>
 		</h2>
-		<template v-if="answers.length">
-			<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question" />
+		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question" />
+		<template v-if="answers.length === 0">
+			<EmptyState v-if="showAnswerButton"
+				:info="`No answers yet. <br/>Help ${question.userName} answer this question!`"
+				class="mt-4 text-xs lg:text-base"
+			/>
+
+			<EmptyState v-else
+				class="mt-4 text-xs lg:text-base"
+				info="No answers yet"
+			/>
 		</template>
-
-		<EmptyState v-else-if="showAnswerButton"
-			:info="`No answers yet. <br/>Help ${question.userName} answer this question!`"
-			class="mt-4 text-xs lg:text-base"
-		/>
-
-		<EmptyState v-else
-			class="mt-4 text-xs lg:text-base"
-			info="No answers yet"
-		/>
 	</div>
 </template>
 

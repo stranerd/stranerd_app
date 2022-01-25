@@ -1,7 +1,7 @@
 <template>
-	<ion-page class="auth">
-		<ion-content>
-			<div class="w-full mt-10 h-full flex flex-col items-center justify-start ">
+	<ion-page>
+		<ion-content class="auth">
+			<div class="w-full mt-10 h-full flex flex-col items-center justify-start">
 				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
 					<h1 class="lg:text-2xl text-xl text-main_dark font-bold mb-2 text-center">Verify Your Email
 						Address</h1>
@@ -28,13 +28,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useEmailVerificationRequest } from '@app/composable/auth/signin'
+import { getEmailVerificationEmail, useEmailVerificationRequest } from '@app/composable/auth/signin'
 import { IonButton, IonContent, IonPage, IonSpinner } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'EmailVerificationRequest',
 	components: { IonContent, IonPage, IonButton, IonSpinner },
-	middlewares: ['isAuthenticated'],
+	middlewares: [async () => {
+		if (!getEmailVerificationEmail()) return '/auth/signin'
+	}],
 	setup () {
 		const { email, loading, error, message, sendVerificationEmail } = useEmailVerificationRequest()
 		return { email, loading, error, message, sendVerificationEmail }

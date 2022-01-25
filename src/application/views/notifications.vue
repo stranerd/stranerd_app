@@ -16,7 +16,7 @@
 				<div class="px-4 w-full ">
 					<div class="w-full max-w-4xl mx-auto bg-white p-6 rounded-xl lg:-mt-10 mt-6">
 						<EmptyState
-							v-if="!notifications.length"
+							v-if="!loading && !error && !notifications.length"
 							btnText="Go To Home"
 							info="You have no notifications yet"
 							route="/dashboard"
@@ -57,11 +57,7 @@ export default defineComponent({
 	setup () {
 		const { id } = useAuth()
 		const {
-			notifications,
-			error,
-			loading,
-			hasMore,
-			fetchOlderNotifications
+			notifications, error, loading, hasMore, fetchOlderNotifications
 		} = useNotificationList(id.value)
 		return { notifications, error, loading, hasMore, fetchOlderNotifications, checkmarkDone }
 	}

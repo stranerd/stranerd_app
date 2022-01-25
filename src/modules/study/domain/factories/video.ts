@@ -116,6 +116,8 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		if (this.valid) {
 			if (this.media instanceof File) this.media = await this.uploadFile('videos', this.media)
 			if (this.preview instanceof File) this.preview = await this.uploadFile('video-previews', this.preview)
+			if (this.isHosted) this.link = null
+			else this.media = null
 			const { title, description, isHosted, link, media, tags, preview } = this.validValues
 			return { title, description, isHosted, link, media: media as Media | null, tags, preview: preview as Media }
 		} else {
