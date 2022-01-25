@@ -61,7 +61,7 @@ const init = async () => {
 	app
 		.use(router)
 		.use(IonicVue)
-		.use(GAuth, { clientId: googleClientId, scope: 'email', prompt: 'consent', fetch_basic_profile: false })
+		.use(GAuth, { clientId: googleClientId, scope: 'email', prompt: 'consent', fetch_basic_profile: true })
 
 	await router.isReady()
 
