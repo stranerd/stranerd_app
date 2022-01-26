@@ -11,7 +11,7 @@ import ExploreVideosList from '@app/components/study/videos/ExploreVideosList.vu
 
 export default defineComponent({
 	name: 'ExploreVideos',
-	displayName: 'Explore',
+	displayName: 'Explore Videos',
 	components: { ExploreWrapper, ExploreVideosList }
 })
 </script>

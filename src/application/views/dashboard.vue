@@ -76,6 +76,7 @@ import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'Dashboard',
+	displayName: 'Dashboard',
 	components: {
 		IonBadge,
 		DashboardLayout,

@@ -13,7 +13,7 @@ import SearchTestPrepsList from '@app/components/study/testPreps/SearchTestPreps
 
 export default defineComponent({
 	name: 'SearchPreps',
-	displayName: 'Search',
+	displayName: 'Search Preps',
 	components: { SearchWrapper, SearchTestPrepsList }
 })
 </script>

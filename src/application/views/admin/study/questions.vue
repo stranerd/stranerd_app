@@ -16,7 +16,7 @@ import AdminPastQuestionsList from '@app/components/study/pastQuestions/AdminPas
 
 export default defineComponent({
 	name: 'AdminStudyQuestions',
-	displayName: 'Administration',
+	displayName: 'Test Questions',
 	components: { AdminPastQuestionsList, AdminWrapper },
 	setup () {
 		return {}

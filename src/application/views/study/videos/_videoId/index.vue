@@ -68,7 +68,7 @@ import { useVideo } from '@app/composable/study/videos'
 
 export default defineComponent({
 	name: 'StudyVideosVideoId',
-	displayName: 'Videos',
+	displayName: 'Video',
 	components: {
 		Justified,
 		// ShowRatings,

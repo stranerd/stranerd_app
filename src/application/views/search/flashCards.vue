@@ -13,7 +13,7 @@ import SearchFlashCardsList from '@app/components/study/flashCards/SearchFlashCa
 
 export default defineComponent({
 	name: 'SearchFlashCards',
-	displayName: 'Search',
+	displayName: 'Search Flashcards',
 	components: { SearchWrapper, SearchFlashCardsList }
 })
 </script>

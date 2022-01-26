@@ -11,7 +11,7 @@ import ExploreFlashCardsList from '@app/components/study/flashCards/ExploreFlash
 
 export default defineComponent({
 	name: 'ExploreFlashCards',
-	displayName: 'Explore',
+	displayName: 'Explore Flashcards',
 	components: { ExploreWrapper, ExploreFlashCardsList }
 })
 </script>

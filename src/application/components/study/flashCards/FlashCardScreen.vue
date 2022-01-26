@@ -3,18 +3,14 @@
 		:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 ']">
 
 		<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full']" @click="flipped = !flipped">
-			<section
-				class="front min-h-[24rem] flex items-center text-center justify-center custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
-				<h2>
-					<DisplayHtml :html="flashCard.set[page].question" />
-				</h2>
+			<section v-if="!flipped"
+				class="front h-96 overflow-y-auto flex text-center custom-shadow w-full text-2xl p-4 max-w-[60rem] mx-auto bg-white">
+				<DisplayHtml :html="flashCard.set[page].question" class="w-full my-auto" />
 			</section>
 
-			<section
-				class="back min-h-[24rem] flex items-center text-center justify-center custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
-				<h2 v-if="flipped">
-					<DisplayHtml :html="flashCard.set[page].answer" />
-				</h2>
+			<section v-if="flipped"
+				class="back h-96 overflow-y-auto flex text-center custom-shadow w-full text-2xl p-4 max-w-[60rem] mx-auto bg-white">
+				<DisplayHtml :html="flashCard.set[page].answer" class="w-full my-auto" />
 			</section>
 		</div>
 
@@ -122,10 +118,6 @@ export default defineComponent({
 		display: flex;
 		justify-content: center;
 		align-items: center;
-	}
-
-	.divx > .back {
-		position: absolute;
 	}
 
 	.divx > .front, .divx > .back {

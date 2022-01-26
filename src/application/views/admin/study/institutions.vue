@@ -19,7 +19,7 @@ import { useStudyModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'AdminStudyInstitutions',
-	displayName: 'Administration',
+	displayName: 'Institutions',
 	components: { AdminWrapper, AdminInstitutionsList },
 	middlewares: ['isAdmin'],
 	setup () {

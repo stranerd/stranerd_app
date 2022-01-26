@@ -42,6 +42,7 @@ import { useQuestionModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'QuestionsCreate',
+	displayName: 'Create Question',
 	components: { DashboardLayout, QuestionForm },
 	middlewares: ['isAuthenticated', async ({ from }) => {
 		useQuestionModal().openCreateQuestion()

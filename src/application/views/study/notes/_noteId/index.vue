@@ -37,7 +37,7 @@ import Note from '@app/components/study/notes/Note.vue'
 
 export default defineComponent({
 	name: 'StudyNotesNoteId',
-	displayName: 'Notes',
+	displayName: 'Note',
 	components: { Justified, Avatar, Note, Share },
 	setup () {
 		const { noteId } = useRoute().params

@@ -33,6 +33,7 @@ import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'AuthCompleteVerification',
+	displayName: 'Complete Verification',
 	components: { IonContent, IonPage, IonButton, IonSpinner },
 	middlewares: ['hasQueryToken'],
 	setup () {

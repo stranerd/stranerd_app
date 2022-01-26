@@ -18,6 +18,7 @@ import { storage } from '@utils/storage'
 
 export default defineComponent({
 	name: 'Index',
+	displayName: 'Home',
 	components: { Onboarding, OnboardingLayout, HomeLayout, Landing },
 	middlewares: ['isNotAuthenticated', async () => {
 		if (isWeb) return

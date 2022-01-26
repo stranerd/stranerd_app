@@ -13,7 +13,7 @@ import SearchVideosList from '@app/components/study/videos/SearchVideosList.vue'
 
 export default defineComponent({
 	name: 'SearchVideos',
-	displayName: 'Search',
+	displayName: 'Search Videos',
 	components: { SearchWrapper, SearchVideosList }
 })
 </script>

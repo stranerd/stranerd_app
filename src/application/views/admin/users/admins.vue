@@ -15,7 +15,7 @@ import UpgradeUserToAdmin from '@app/components/users/admin/UpgradeUserToAdmin.v
 
 export default defineComponent({
 	name: 'AdminUsersAdmins',
-	displayName: 'Administration',
+	displayName: 'Adminis',
 	components: { AdminWrapper, AdminsList, UpgradeUserToAdmin },
 	middlewares: ['isAdmin']
 })

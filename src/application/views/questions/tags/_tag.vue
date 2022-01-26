@@ -23,6 +23,7 @@ import QuestionListCard from '@app/components/questions/questions/RecentQuestion
 
 export default defineComponent({
 	name: 'QuestionsTag',
+	displayName: 'Tag',
 	components: { Justified, QuestionListCard },
 	setup () {
 		const { tag } = useRoute().params

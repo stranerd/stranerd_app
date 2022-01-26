@@ -12,6 +12,7 @@ import { IonContent, IonPage } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'Auth404',
+	displayName: '404',
 	components: { IonContent, IonPage },
 	middlewares: [async () => '/auth/signin']
 })

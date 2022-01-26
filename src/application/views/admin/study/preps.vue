@@ -17,7 +17,7 @@ import { useStudyModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'AdminStudyPreps',
-	displayName: 'Administration',
+	displayName: 'Preps',
 	components: { AdminWrapper, AdminTestPrepsList },
 	middlewares: ['isAdmin'],
 	setup () {

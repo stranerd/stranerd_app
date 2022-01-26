@@ -11,7 +11,7 @@ import ExploreTestPrepsList from '@app/components/study/testPreps/ExploreTestPre
 
 export default defineComponent({
 	name: 'ExplorePreps',
-	displayName: 'Explore',
+	displayName: 'Explore Preps',
 	components: { ExploreWrapper, ExploreTestPrepsList }
 })
 </script>

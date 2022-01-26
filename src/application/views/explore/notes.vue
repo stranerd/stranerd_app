@@ -11,7 +11,7 @@ import ExploreNotesList from '@app/components/study/notes/ExploreNotesList.vue'
 
 export default defineComponent({
 	name: 'ExploreNotes',
-	displayName: 'Explore',
+	displayName: 'Explore Notes',
 	components: { ExploreWrapper, ExploreNotesList }
 })
 </script>

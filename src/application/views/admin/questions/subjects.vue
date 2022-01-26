@@ -19,7 +19,7 @@ import SubjectForm from '@app/components/questions/subjects/SubjectForm.vue'
 
 export default defineComponent({
 	name: 'AdminQuestionsSubjects',
-	displayName: 'Administration',
+	displayName: 'Subjects',
 	components: { AdminWrapper, AdminSubjectsList, SubjectForm },
 	middlewares: ['isAdmin'],
 	setup () {

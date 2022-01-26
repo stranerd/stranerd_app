@@ -15,6 +15,7 @@ import QuestionHeader from '@app/components/questions/questions/QuestionListHead
 
 export default defineComponent({
 	name: 'Questions',
+	displayName: 'Questions',
 	components: { QuestionsList, DashboardLayout, QuestionHeader }
 })
 </script>

@@ -35,6 +35,7 @@ import Auth from '@app/layouts/Auth.vue'
 
 export default defineComponent({
 	name: 'AuthForgot',
+	displayName: 'Forgot Password?',
 	components: { IonInput, IonButton, IonSpinner, Auth },
 	middlewares: ['isNotAuthenticated'],
 	setup () {

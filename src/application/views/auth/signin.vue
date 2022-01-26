@@ -59,6 +59,7 @@ import Auth from '@app/layouts/Auth.vue'
 
 export default defineComponent({
 	name: 'AuthSignin',
+	displayName: 'Signin',
 	components: { AuthProviders, IonSpinner, Auth },
 	middlewares: ['isNotAuthenticated'],
 	setup () {

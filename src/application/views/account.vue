@@ -8,6 +8,7 @@ import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'Account',
+	displayName: 'Account',
 	middlewares: ['isAuthenticated', async () => `/users/${useAuth().id.value}/`]
 })
 </script>

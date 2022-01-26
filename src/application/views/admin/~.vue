@@ -7,7 +7,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'Admin404',
-	displayName: 'Administration',
+	displayName: '404',
 	middlewares: [async () => '/admin/users/admins']
 })
 </script>

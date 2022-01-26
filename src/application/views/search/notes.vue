@@ -13,7 +13,7 @@ import SearchNotesList from '@app/components/study/notes/SearchNotesList.vue'
 
 export default defineComponent({
 	name: 'SearchNotes',
-	displayName: 'Search',
+	displayName: 'Search Notes',
 	components: { SearchWrapper, SearchNotesList }
 })
 </script>
