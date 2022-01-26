@@ -144,7 +144,7 @@ export const useCreateQuestion = () => {
 				await setMessage('Question submitted successfully')
 				const subject = factory.value.subjectId
 				factory.value.reset()
-				useQuestionModal().closeAskQuestion()
+				useQuestionModal().closeCreateQuestion()
 				await router.replace(`/questions/${questionId}`)
 			} catch (error) {
 				await setError(error)

@@ -3,9 +3,7 @@
 		<template v-slot:title>
 			Create Study Set
 		</template>
-		<div
-			class="rounded-xl bg-white md:py-6 md:px-6 py-4 px-3 md:text-sm text-xs flex flex-col lg:col-start-5 lg:col-end-9 md:col-start-3 md:col-end-11 col-span-12">
-
+		<div>
 			<div class="flex flex-col gap-1 text-center justify-center items-center">
 				<div class="bg-light_gray w-full rounded-md flex items-center px-4 mb-4">
 					<ion-text class="text-primary font-bold w-12">
@@ -85,6 +83,7 @@ import { useCreateSet } from '@app/composable/study/sets'
 import { useTags } from '@app/composable/core/forms'
 
 export default defineComponent({
+	name: 'CreateSetModal',
 	components: { IonRippleEffect, IonListHeader, IonRadio, IonItem, IonRadioGroup },
 	setup () {
 		const closeCreateSet = () => {

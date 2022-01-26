@@ -46,7 +46,7 @@
 		<DisplayError :error="factory.errors.attachments" />
 
 		<div class="flex w-full lg:mt-8 mt-5 items-center gap-6">
-			<ion-button class="w-1/2 btn-secondary" @click="closeAskQuestion()">
+			<ion-button class="w-1/2 btn-secondary" @click="closeModal">
 				Cancel
 			</ion-button>
 			<ion-button :disabled="loading || !factory.valid"
@@ -62,7 +62,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { IonIcon, IonInput } from '@ionic/vue'
-import { close, image } from 'ionicons/icons'
+import { image } from 'ionicons/icons'
 import { useMultipleFileInputs, useTags } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
@@ -96,8 +96,8 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const closeAskQuestion = () => {
-			useQuestionModal().closeAskQuestion()
+		const closeModal = () => {
+			useQuestionModal().closeAll()
 		}
 
 		const { tag, removeTag } = useTags(
@@ -110,7 +110,7 @@ export default defineComponent({
 		)
 
 		return {
-			image, close, closeAskQuestion,
+			image, close, closeModal,
 			tag, removeTag, catchAttachments
 		}
 	}

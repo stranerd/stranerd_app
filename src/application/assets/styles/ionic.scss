@@ -120,27 +120,30 @@ ion-popover {
 	--border-radius: 0.75rem !important;
 }
 
-.sm-modal {
+.modal-class {
 	--background-color: #00000065;
-	--height: 28rem !important;
+	--height: auto;
 	--width: 800px;
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
-		--min-height: 300px;
 		--width: 100vw;
 		--border-radius: 0rem;
 	}
-}
 
-.lg-modal {
-	--background-color: #00000065;
-	--height: 39rem;
-	--width: 800px;
-	--border-radius: .75rem;
-	@media (max-width: 500px) {
-		--min-height: 300px;
-		--width: 100vw;
-		--border-radius: 0rem;
+	&.bottom {
+		align-items: flex-end;
+	}
+
+
+	.ion-page {
+		position: relative;
+		display: block;
+		contain: content;
+
+		.inner-content {
+			max-height: 80vh;
+			overflow: auto;
+		}
 	}
 }
 
@@ -381,5 +384,5 @@ ion-segment-button {
 }
 
 ion-select::part(icon) {
-  content: url('../../assets/images/icons/down.svg');
+	content: url('../../assets/images/icons/down.svg');
 }

@@ -1,6 +1,5 @@
 <template>
-	<div
-		class="rounded-xl bg-white md:py-6 md:px-6 py-3 px-3 md:text-sm text-xs flex flex-col lg:col-start-5 lg:col-end-9 md:col-start-3 md:col-end-11 col-span-12">
+	<Modal>
 		<div class="py-1 text-center flex md:flex-row flex-col items-center font-semibold justify-center">
 			<span class="mr-2 text-main_dark ">You are requesting a session from</span>
 			<div class="flex flex-row items-center py-1">
@@ -84,7 +83,7 @@
 			</div>
 		</div>
 
-	</div>
+	</Modal>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'

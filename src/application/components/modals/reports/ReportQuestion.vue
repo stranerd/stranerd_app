@@ -4,10 +4,7 @@
 			Report Question
 		</template>
 		<template v-slot:subtext>
-			<span class="mb-4">
-				What is wrong with this Question
-			</span>
-
+			What is wrong with this Question
 		</template>
 		<ReportForm :error="error" :factory="factory" :loading="loading" :submit="createReport" class="mt-6" />
 	</Modal>

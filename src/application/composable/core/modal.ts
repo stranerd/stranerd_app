@@ -22,14 +22,14 @@ export const useModal = (stack: Ref<string[]>) => {
 		}
 	}
 
-	const open = async (id: string, cssClass: string) => {
+	const open = async (id: string) => {
 		// await close(id)
 		if (Object.keys(modals).includes(id)) {
 			if (modals[id].modal?.isOpen) return
 			const modal = await modalController
 				.create({
 					component: modals[id].component as any,
-					cssClass,
+					cssClass: 'modal-class',
 					breakpoints: [0.1, 0.5, 1],
 					initialBreakpoint: 1
 				})
@@ -38,7 +38,7 @@ export const useModal = (stack: Ref<string[]>) => {
 		}
 	}
 
-	function register<Key extends string> (type: string, modalObject: Record<Key, Vue>, css: string) {
+	function register<Key extends string> (type: string, modalObject: Record<Key, Vue>) {
 		Object.assign(modals, spreadModals(type, modalObject))
 
 		const helpers = Object.fromEntries(
@@ -46,7 +46,7 @@ export const useModal = (stack: Ref<string[]>) => {
 				.map((key) => capitalize(key))
 				.map((key) => {
 					return [
-						[`open${key}`, async () => open(merge(type, key), css)],
+						[`open${key}`, async () => open(merge(type, key))],
 						[`close${key}`, async () => close(merge(type, key))]
 					]
 				})
@@ -76,21 +76,21 @@ export const usePopover = (stack: Ref<string[]>) => {
 		}
 	}
 
-	const open = async (id: string, cssClass: string, event: Event) => {
+	const open = async (id: string, event: Event) => {
 		// await close(id)
 		if (Object.keys(popovers).includes(id)) {
 			if (popovers[id].popover?.isOpen) return
 			const popover = await popoverController
 				.create({
 					component: popovers[id].component as any,
-					cssClass, event
+					cssClass: 'popover-class', event
 				})
 			await popover.present()
 			popovers[id].popover = popover
 		}
 	}
 
-	function register<Key extends string> (type: string, popoverObject: Record<Key, Vue>, css: string) {
+	function register<Key extends string> (type: string, popoverObject: Record<Key, Vue>) {
 		Object.assign(popovers, spreadModals(type, popoverObject))
 
 		const helpers = Object.fromEntries(
@@ -98,7 +98,7 @@ export const usePopover = (stack: Ref<string[]>) => {
 				.map((key) => capitalize(key))
 				.map((key) => {
 					return [
-						[`open${key}`, async (event: Event) => open(merge(type, key), css, event)],
+						[`open${key}`, async (event: Event) => open(merge(type, key), event)],
 						[`close${key}`, async () => close(merge(type, key))]
 					]
 				})

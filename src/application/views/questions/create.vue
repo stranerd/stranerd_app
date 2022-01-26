@@ -44,7 +44,7 @@ export default defineComponent({
 	name: 'QuestionsCreate',
 	components: { DashboardLayout, QuestionForm },
 	middlewares: ['isAuthenticated', async ({ from }) => {
-		useQuestionModal().openAskQuestion()
+		useQuestionModal().openCreateQuestion()
 		const backPath = from?.fullPath ?? '/dashboard'
 		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
 	}],

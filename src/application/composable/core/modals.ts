@@ -1,13 +1,12 @@
 import { ref } from 'vue'
 import { useModal, usePopover } from '@app/composable/core/modal'
-import CreateSchedule from '@app/components/modals/sessions/CreateSchedule.vue'
 import CreateSession from '@app/components/modals/sessions/RequestSession.vue'
 import ReportUser from '@app/components/modals/reports/ReportUser.vue'
 import ReportQuestion from '@app/components/modals/reports/ReportQuestion.vue'
 import ReportAnswer from '@app/components/modals/reports/ReportAnswer.vue'
 import SubmitTest from '@app/components/popovers/study/SubmitTest.vue'
 import CreateSet from '@app/components/modals/study/CreateSet.vue'
-import AskQuestion from '@app/components/modals/questions/AskQuestion.vue'
+import CreateQuestion from '@app/components/modals/questions/CreateQuestion.vue'
 import CreateStudy from '@app/components/popovers/study/CreateStudy.vue'
 import CreateDashboardMenu from '@app/components/popovers/menus/CreateDashboardMenu.vue'
 import UserDashboardMenu from '@app/components/popovers/menus/UserDashboardMenu.vue'
@@ -20,15 +19,15 @@ import CreateTestPrep from '@app/components/modals/study/CreateTestPrep.vue'
 import EditTestPrep from '@app/components/modals/study/EditTestPrep.vue'
 
 export const modal = useModal(ref([]))
-const QuestionModal = modal.register('Question', { AskQuestion }, 'lg-modal')
-const SessionModal = modal.register('Session', { CreateSession, CreateSchedule, Ratings: CreateSession }, 'sm-modal')
-const ReportModal = modal.register('Report', { ReportUser, ReportQuestion, ReportAnswer }, 'sm-modal')
+const QuestionModal = modal.register('Question', { CreateQuestion })
+const SessionModal = modal.register('Session', { CreateSession, Ratings: CreateSession })
+const ReportModal = modal.register('Report', { ReportUser, ReportQuestion, ReportAnswer })
 const StudyModal = modal.register('Study', {
 	CreateSet,
 	CreateInstitution, EditInstitution,
 	CreateCourse, EditCourse,
 	CreateTestPrep, EditTestPrep
-}, 'sm-modal')
+})
 
 export const useQuestionModal = () => QuestionModal
 export const useSessionModal = () => SessionModal
@@ -37,12 +36,12 @@ export const useStudyModal = () => StudyModal
 export const allModals = [useQuestionModal, useSessionModal, useReportModal, useStudyModal]
 
 export const popover = usePopover(ref([]))
-const StudyPopover = popover.register('Study', { CreateStudy, SubmitTest }, 'popover-class')
+const StudyPopover = popover.register('Study', { CreateStudy, SubmitTest })
 const MenuPopover = popover.register('Menu', {
 	CreateDashboardMenu,
 	UserDashboardMenu,
 	StudyEntityMenu
-}, 'popover-class')
+})
 
 export const useStudyPopover = () => StudyPopover
 export const useMenuPopover = () => MenuPopover
