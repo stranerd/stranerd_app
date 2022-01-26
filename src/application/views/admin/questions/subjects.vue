@@ -18,7 +18,7 @@ import { useCreateSubject } from '@app/composable/questions/subjects'
 import SubjectForm from '@app/components/questions/subjects/SubjectForm.vue'
 
 export default defineComponent({
-	name: 'AdminQuestionsSubjectsPage',
+	name: 'AdminQuestionsSubjects',
 	displayName: 'Administration',
 	components: { AdminWrapper, AdminSubjectsList, SubjectForm },
 	middlewares: ['isAdmin'],

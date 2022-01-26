@@ -42,7 +42,7 @@
 			<DisplayError :error="factory.errors.preview" />
 		</div>
 
-		<div class="mb-12 flex items-center">
+		<div v-if="false" class="mb-12 flex items-center">
 			<IonToggle id="isHosted" v-model="factory.isHosted" />
 			<IonLabel for="isHosted">
 				{{

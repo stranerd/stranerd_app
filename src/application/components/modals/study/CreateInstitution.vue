@@ -1,7 +1,7 @@
 <template>
 	<Modal>
 		<template v-slot:title>
-			Create an institution body
+			Create an institution
 		</template>
 		<InstitutionForm
 			:error="error"

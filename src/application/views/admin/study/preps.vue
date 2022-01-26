@@ -1,12 +1,10 @@
 <template>
 	<AdminWrapper>
 		<div>
-			<div class="flex justify-end mb-8">
-				<ion-button class="btn-primary" @click="openCreateInstitution">
-					Add New Institution
-				</ion-button>
+			<div class="flex justify-end">
+				<ion-button class="btn-primary" @click="openCreateTestPrep">Add New Test</ion-button>
 			</div>
-			<AdminInstitutionsList />
+			<AdminTestPrepsList />
 		</div>
 	</AdminWrapper>
 </template>
@@ -14,18 +12,16 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
-import AdminInstitutionsList from '@app/components/study/institutions/AdminInstitutionsList.vue'
+import AdminTestPrepsList from '@app/components/study/testPreps/AdminTestPrepsList.vue'
 import { useStudyModal } from '@app/composable/core/modals'
 
 export default defineComponent({
-	name: 'AdminStudyInstitutions',
+	name: 'AdminStudyPreps',
 	displayName: 'Administration',
-	components: { AdminWrapper, AdminInstitutionsList },
+	components: { AdminWrapper, AdminTestPrepsList },
 	middlewares: ['isAdmin'],
 	setup () {
-		return {
-			openCreateInstitution: useStudyModal().openCreateInstitution
-		}
+		return { openCreateTestPrep: useStudyModal().openCreateTestPrep }
 	}
 })
 </script>

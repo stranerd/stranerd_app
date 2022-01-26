@@ -1,4 +1,4 @@
-import { computed, onUnmounted, onMounted, Ref, ref } from 'vue'
+import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import {
 	AddTestPrep,
 	DeleteTestPrep,
@@ -11,6 +11,7 @@ import {
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { groupBy } from '@utils/commons'
+import { useStudyModal } from '@app/composable/core/modals'
 
 export type InstitutionTestPreps = {
 	institutionId: string,
@@ -70,7 +71,7 @@ export const useTestPrepList = () => {
 	onUnmounted(async () => {
 		await listener.closeListener()
 	})
-	return { ...global, fetchOlderTestPreps: fetchTestPreps }
+	return { ...global }
 }
 
 export const groupedByInstitution = (testPreps: TestPrepEntity[]) => computed({
@@ -107,6 +108,7 @@ export const useCreateTestPrep = () => {
 				await setLoading(true)
 				await AddTestPrep.call(factory.value)
 				await setMessage('TestPrep submitted successfully')
+				useStudyModal().closeCreateTestPrep()
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -122,8 +124,9 @@ let editingTestPrep = null as TestPrepEntity | null
 export const getEditingTestPrep = () => editingTestPrep
 export const openTestPrepEditModal = (testPrep: TestPrepEntity) => {
 	editingTestPrep = testPrep
+	useStudyModal().openEditTestPrep()
 }
-export const useEditTestPrep = (testPrepId: string) => {
+export const useEditTestPrep = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
@@ -135,8 +138,9 @@ export const useEditTestPrep = (testPrepId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditTestPrep.call(testPrepId, factory.value)
+				await EditTestPrep.call(editingTestPrep!.id, factory.value)
 				await setMessage('TestPrep edited successfully')
+				useStudyModal().closeEditTestPrep()
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

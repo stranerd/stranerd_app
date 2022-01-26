@@ -16,7 +16,7 @@ import { useCreateNote } from '@app/composable/study/notes'
 import NoteForm from '@app/components/study/notes/NoteForm.vue'
 
 export default defineComponent({
-	name: 'AdminStudyNotesCreatePage',
+	name: 'AdminStudyNotesCreate',
 	displayName: 'Administration',
 	components: { AdminWrapper, NoteForm },
 	middlewares: ['isAdmin'],

@@ -2,9 +2,9 @@
 	<AdminWrapper>
 		<div>
 			<div class="flex justify-end mb-8">
-				<router-link class="bg-primary rounded-lg px-6 py-4 text-white font-bold"
+				<router-link class="bg-primary rounded-lg px-8 py-4 text-white font-bold"
 					to="/admin/study/notes/create">
-					Add A New Note
+					Add New Note
 				</router-link>
 			</div>
 
@@ -19,7 +19,7 @@ import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import AdminNotesList from '@app/components/study/notes/AdminNotesList.vue'
 
 export default defineComponent({
-	name: 'AdminStudyNotesIndexPage',
+	name: 'AdminStudyNotesIndex',
 	displayName: 'Administration',
 	components: { AdminWrapper, AdminNotesList },
 	middlewares: ['isAdmin']

@@ -119,6 +119,10 @@ export class TestPrepFactory extends BaseFactory<TestPrepEntity, TestPrepToModel
 		this.set('year', value)
 	}
 
+	get questionTypes () {
+		return Object.keys(PastQuestionType)
+	}
+
 	loadEntity = (entity: TestPrepEntity) => {
 		this.name = entity.name
 		this.questions = entity.questions

@@ -14,7 +14,7 @@ import AdminsList from '@app/components/users/admin/AdminsList.vue'
 import UpgradeUserToAdmin from '@app/components/users/admin/UpgradeUserToAdmin.vue'
 
 export default defineComponent({
-	name: 'AdminUserAdminsPage',
+	name: 'AdminUserAdmins',
 	displayName: 'Administration',
 	components: { AdminWrapper, AdminsList, UpgradeUserToAdmin },
 	middlewares: ['isAdmin']

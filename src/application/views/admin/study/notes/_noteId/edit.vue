@@ -17,7 +17,7 @@ import NoteForm from '@app/components/study/notes/NoteForm.vue'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
-	name: 'AdminStudyNotesNoteIdEditPage',
+	name: 'AdminStudyNotesNoteIdEdit',
 	displayName: 'Administration',
 	components: { AdminWrapper, NoteForm },
 	middlewares: ['isAdmin', async ({ to }) => {

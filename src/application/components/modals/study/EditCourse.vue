@@ -1,7 +1,7 @@
 <template>
 	<Modal>
 		<template v-slot:title>
-			Edit an course body
+			Edit a course
 		</template>
 		<CourseForm
 			:error="error"
