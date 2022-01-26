@@ -188,9 +188,20 @@ export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQue
 		return this.type === PastQuestionType.objective
 	}
 
-	addOption () {
+	get questionTypes () {
+		return Object.keys(PastQuestionType)
+	}
+
+	addOption = () => {
 		this.set('options', [...this.options, ''])
+		this.set('optionsMedia', [...this.optionsMedia, []])
 		this.optionIndex = this.options.length - 1
+	}
+
+	removeOption = (index: number) => {
+		this.set('options', this.options.filter((_, idx) => idx !== index))
+		this.set('optionsMedia', this.optionsMedia.filter((_, idx) => idx !== index))
+		if (this.correctIndex === index) this.set('correctIndex', 0)
 	}
 
 	addQuestionMedia = (value: Content) => this.set('questionMedia', [...this.values.questionMedia, value])

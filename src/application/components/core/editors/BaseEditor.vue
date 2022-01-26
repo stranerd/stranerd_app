@@ -5,18 +5,16 @@
 			:class="{'is-invalid': error, 'is-valid': valid }"
 			:editor-toolbar="toolbar"
 			:placeholder="placeholder"
-			use-custom-image-handler
-			@image-added="handleImageUpload"
 		/>
-		<span v-if="error" class="text-xs text-danger">{{ error }}</span>
+		<DisplayError :error="error" />
 	</span>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { UploaderService } from '@modules/core'
 // @ts-ignore
 import { VueEditor } from 'vue3-editor'
+import DisplayError from '@app/components/core/text/DisplayError.vue'
 /* const customToolBar = [
  [{ size: ['small', false, 'large', 'huge'] }],
  [{ header: [false,1,2,3,4,5,6] }],
@@ -33,17 +31,9 @@ import { VueEditor } from 'vue3-editor'
 
 export default defineComponent({
 	name: 'BaseEditor',
-	components: { VueEditor },
+	components: { DisplayError, VueEditor },
 	props: {
 		value: {
-			required: true,
-			type: String
-		},
-		toolbar: {
-			required: true,
-			type: Array
-		},
-		path: {
 			required: true,
 			type: String
 		},
@@ -69,16 +59,13 @@ export default defineComponent({
 		})
 		return {
 			comp,
-			handleImageUpload: async (file: File, editor: any, cursorLocation: any, resetUploader: any) => {
-				try {
-					const res = await UploaderService.single(props.path, file)
-					editor.insertEmbed(cursorLocation, 'image', res.link)
-					editor.setSelection(cursorLocation + 1, 'silent')
-					resetUploader()
-				} catch (e: unknown) {
-					e
-				}
-			}
+			toolbar: [
+				[{ header: [2, 3, 4, 5, false] }],
+				['bold', 'italic', 'underline', 'strike'],
+				[{ script: 'sub' }, { script: 'super' }],
+				['code-block'],
+				['clean']
+			]
 		}
 	}
 })

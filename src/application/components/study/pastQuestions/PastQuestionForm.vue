@@ -1,17 +1,52 @@
 <template>
 	<form @submit.prevent="submit">
 		<div class="mb-8">
-			<IonLabel>Name</IonLabel>
-			<IonInput v-model="factory.name" class="mb-2" placeholder="Enter PastQuestion Name" />
-			<DisplayError :error="factory.errors.name" />
+			<IonLabel>Question Type</IonLabel>
+			<IonSelect v-model="factory.type" class="capitalize" interface="action-sheet"
+				placeholder="Select the type of question">
+				<IonSelectOption v-for="questionType in factory.questionTypes" :key="questionType" :value="questionType"
+					class="capitalize">
+					{{ questionType }}
+				</IonSelectOption>
+			</IonSelect>
 		</div>
 
-		<div class="mb-8 flex items-center">
-			<IonToggle id="isGateway" v-model="factory.isGateway" />
-			<IonLabel for="isGateway">
-				{{ factory.isGateway ? 'Is a gateway body like JAMB, WAEC, SAT' : 'Is a tertiary pastQuestion' }}
-			</IonLabel>
+		<div class="mb-8">
+			<IonLabel>Question</IonLabel>
+			<IonTextarea v-model="factory.question" class="mb-2" placeholder="Enter Question" rows="3" />
+			<DisplayError :error="factory.errors.question" />
 		</div>
+
+		<template v-if="factory.isObjective">
+			<div class="mb-8 flex flex-col">
+				<IonRadioGroup v-model="factory.correctIndex" class="flex flex-col gap-4">
+					<div v-for="(_, index) in factory.options" :key="index" class="flex gap-4 justify-between">
+						<IonIcon :icon="trash" class="cursor-pointer text-xl text-delete_red"
+							@click="factory.removeOption(index)" />
+						<IonTextarea v-model="factory.options[index]"
+							:placeholder="`Enter Option ${getAlphabet(index + 1).toUpperCase()}`"
+							class="my-0 flex-grow-1" rows="3" />
+						<IonRadio :value="index" />
+					</div>
+				</IonRadioGroup>
+				<IonButton class="ml-auto rounded-xl mt-4 btn-primary" @click="factory.addOption">
+					<IonIcon :icon="add" class="mr-2" />
+					Add New Option
+				</IonButton>
+			</div>
+			<div class="mb-8">
+				<IonLabel>Explanation</IonLabel>
+				<IonTextarea v-model="factory.explanation" class="mb-2" placeholder="Enter Explanation" rows="3" />
+				<DisplayError :error="factory.errors.explanation" />
+			</div>
+		</template>
+		<template v-else>
+			<div class="mb-8">
+				<IonLabel>Answer</IonLabel>
+				<IonTextarea v-model="factory.answer" class="mb-2" placeholder="Enter Answer" rows="3" />
+				<DisplayError :error="factory.errors.answer" />
+			</div>
+		</template>
 
 		<div class="flex w-full mt-8 items-center gap-6">
 			<ion-button :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
@@ -26,11 +61,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { PastQuestionFactory } from '@modules/study'
-import { IonLabel, IonToggle } from '@ionic/vue'
+import { IonLabel, IonRadio, IonRadioGroup, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
+import { getAlphabet } from '@utils/commons'
+import { add, trash } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'PastQuestionForm',
-	components: { IonToggle, IonLabel },
+	components: { IonLabel, IonSelect, IonSelectOption, IonTextarea, IonRadio, IonRadioGroup },
 	props: {
 		factory: {
 			type: PastQuestionFactory,
@@ -48,12 +85,15 @@ export default defineComponent({
 			type: String,
 			required: true
 		}
+	},
+	setup () {
+		return { getAlphabet, add, trash }
 	}
 })
 </script>
 
 <style lang="scss" scoped>
-	ion-input, ion-textarea {
+	ion-input, ion-textarea, ion-select {
 		background-color: $color-newGray;
 		border-radius: 0.25rem !important;
 	}

@@ -15,11 +15,10 @@
 		<div class="lg:mt-9 mt-5 py-5 flex-col">
 			<span class="text-main_dark font-bold">Explanation - </span>
 			<div class="border border-faded_gray rounded-lg">
-				<AnswerEditor v-model:model="factory.body" :error="factory.errors.body"
-					:valid="factory.isValid('body')" />
+				<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
+					placeholder="Write out the detailed explanation of the answer you gave above. (Optional)" />
 			</div>
 		</div>
-		<DisplayError :error="factory.errors.body" />
 
 		<div
 			class="lg:mt-9 mt-5 rounded-xl text-main_dark relative bg-light_gray border border-faded_gray flex flex-col h-32 justify-center items-center">
@@ -66,7 +65,7 @@ import { close, image } from 'ionicons/icons'
 import { showAddAnswer, useCreateAnswer } from '@app/composable/questions/answers'
 import { QuestionEntity } from '@modules/questions'
 import { useMultipleFileInputs } from '@app/composable/core/forms'
-import AnswerEditor from '@app/components/core/editors/AnswerEditor.vue'
+import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 
 export default defineComponent({
 	props: {
@@ -74,6 +73,7 @@ export default defineComponent({
 			type: Object as () => QuestionEntity
 		}
 	},
+	components: { IonIcon, IonInput, BaseEditor },
 	setup () {
 		const {
 			factory,
@@ -92,11 +92,6 @@ export default defineComponent({
 			showAddAnswer,
 			factory, error, loading, answeringQuestion, createAnswer, catchAttachments
 		}
-	},
-	components: {
-		IonIcon,
-		IonInput,
-		AnswerEditor
 	}
 })
 </script>

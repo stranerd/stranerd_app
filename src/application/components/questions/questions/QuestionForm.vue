@@ -1,8 +1,8 @@
 <template>
 	<form @submit.prevent="submit">
-		<QuestionEditor v-model:model="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
-			class="lg:mt-3 px-1" />
-		<DisplayError :error="factory.errors.body" />
+		<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
+			class="lg:mt-3 px-1"
+			placeholder="Write your question here and make sure it is explained in full detail." />
 
 		<div class="flex items-center mt-5 gap-5 flex-col lg:flex-row">
 			<div class="flex items-center gap-5 w-full">
@@ -67,12 +67,12 @@ import { useMultipleFileInputs, useTags } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import { useQuestionModal } from '@app/composable/core/modals'
-import QuestionEditor from '@app/components/core/editors/QuestionEditor.vue'
+import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 
 export default defineComponent({
 	name: 'QuestionForm',
 	components: {
-		QuestionEditor,
+		BaseEditor,
 		IonIcon,
 		IonInput,
 		SelectSubject

@@ -42,7 +42,7 @@
 				</ion-select>
 			</div>
 			<IonButton :disabled="!filters.institution || !filters.course || !filters.year || !filters.questionType"
-				class="md:w-1/5 w-full"
+				class="md:w-1/5 w-full btn-primary"
 				@click="fetchPastQuestions">
 				Fetch Questions
 			</IonButton>
