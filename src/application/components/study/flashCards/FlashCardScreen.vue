@@ -4,14 +4,14 @@
 
 		<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full']" @click="flipped = !flipped">
 			<section
-				class="front h-96 flex items-center text-center justify-center custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
+				class="front min-h-[24rem] flex items-center text-center justify-center custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
 				<h2>
 					<DisplayHtml :html="flashCard.set[page].question" />
 				</h2>
 			</section>
 
 			<section
-				class="back h-96 flex items-center text-center justify-center custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
+				class="back min-h-[24rem] flex items-center text-center justify-center custom-shadow w-full text-3xl p-4 max-w-[60rem] mx-auto bg-white">
 				<h2 v-if="flipped">
 					<DisplayHtml :html="flashCard.set[page].answer" />
 				</h2>

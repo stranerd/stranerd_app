@@ -88,6 +88,9 @@
 										<li class="my-10">
 											<a class="font-light" href="https://stranerd.medium.com">Blog</a>
 										</li>
+										<li class="my-10">
+											<a class="font-light" href="mailto:support@stranerd.com">Contact</a>
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -95,20 +98,20 @@
 					</div>
 					<div class="flex flex-col sm:flex-row md:items-center justify-center">
 						<div class="flex gap-5 items-center justify-center md:justify-end my-10">
-							<a aria-label="instagram link" class="inline-block"
-								href="https://www.instagram.com/officialstranerd/">
+							<a aria-label="instagram link" class="inline-block" target="_blank"
+								href="https://www.instagram.com/stranerdapp/">
 								<ion-icon
 									:icon="logoInstagram"
 									class="text-3xl"
 								/>
 							</a>
-							<a aria-label="twitter link" class="inline-block" href="https://twitter.com/stranerds">
+							<a aria-label="twitter link" class="inline-block" target="_blank" href="https://twitter.com/stranerds">
 								<ion-icon
 									:icon="logoTwitter"
 									class="text-3xl"
 								/>
 							</a>
-							<a aria-label="facebook link" class="inline-block"
+							<a aria-label="facebook link" class="inline-block" target="_blank"
 								href="https://facebook.com/officialstranerd">
 								<ion-icon
 									:icon="logoFacebook"
