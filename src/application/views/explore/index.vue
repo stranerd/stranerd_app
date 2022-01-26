@@ -70,7 +70,7 @@ import ExploreVideosList from '@app/components/study/videos/ExploreVideosList.vu
 import ExploreFlashCardsList from '@app/components/study/flashCards/ExploreFlashCardsList.vue'
 
 export default defineComponent({
-	name: 'ExploreAll',
+	name: 'Explore',
 	displayName: 'Explore',
 	components: {
 		ExploreWrapper,

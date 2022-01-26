@@ -77,7 +77,7 @@ import SetVideosList from '@app/components/study/videos/SetVideosList.vue'
 import SetFlashCardsList from '@app/components/study/flashCards/SetFlashCardsList.vue'
 
 export default defineComponent({
-	name: 'SetPageIndex',
+	name: 'StudySetsSetId',
 	displayName: 'Study Set',
 	components: { PageWrapper, SetTestPrepsList, SetNotesList, SetVideosList, SetFlashCardsList }
 })

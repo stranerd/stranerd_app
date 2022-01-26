@@ -10,7 +10,7 @@ import ExploreWrapper from '@app/components/explore/ExploreWrapper.vue'
 import ExploreTestPrepsList from '@app/components/study/testPreps/ExploreTestPrepsList.vue'
 
 export default defineComponent({
-	name: 'ExploreTestPreps',
+	name: 'ExplorePreps',
 	displayName: 'Explore',
 	components: { ExploreWrapper, ExploreTestPrepsList }
 })

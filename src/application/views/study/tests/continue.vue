@@ -20,7 +20,7 @@ import Justified from '@app/layouts/Justified.vue'
 import ContinueStudy from '@app/components/study/tests/ContinueTests.vue'
 
 export default defineComponent({
-	name: 'TestsContinue',
+	name: 'StudyTestsContinue',
 	displayName: 'Continue Tests',
 	components: { Justified, ContinueStudy },
 	middlewares: ['isAuthenticated']

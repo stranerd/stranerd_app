@@ -80,6 +80,7 @@ import { useAuth } from '@app/composable/auth/auth'
 import { useMySets, useSaveToSet } from '@app/composable/study/sets'
 import { openFlashCardEditModal } from '@app/composable/study/flashCards'
 import { useRouter } from 'vue-router'
+import { openNoteEditModal } from '@root/application/composable/study/notes'
 
 export default defineComponent({
 	name: 'StudyEntityMenu',
@@ -108,6 +109,7 @@ export default defineComponent({
 
 		const editEntity = async () => {
 			if (type.value === 'flashCards') await openFlashCardEditModal(entity.value as any, router)
+			if (type.value === 'notes') await openNoteEditModal(entity.value as any, router)
 		}
 
 		return {

@@ -15,7 +15,7 @@ import { useAuth } from '@app/composable/auth/auth'
 import Justified from '@app/layouts/Justified.vue'
 
 export default defineComponent({
-	name: 'UserIdSettings',
+	name: 'UsersUserIdSettings',
 	displayName: 'Profile',
 	middlewares: ['isAuthenticated', async ({ to }) => {
 		const userId = to.params.userId

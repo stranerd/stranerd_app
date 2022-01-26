@@ -53,7 +53,7 @@ import FlashCardScreen from '@root/application/components/study/flashCards/Flash
 import FlashCardListView from '@root/application/components/study/flashCards/FlashCardListView.vue'
 
 export default defineComponent({
-	name: 'View Flashcard',
+	name: 'StudyFlashCardsFlashcardId',
 	displayName: 'Flashcard Set',
 	components: {
 		Justified,

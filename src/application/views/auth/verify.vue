@@ -32,7 +32,7 @@ import { getEmailVerificationEmail, useEmailVerificationRequest } from '@app/com
 import { IonButton, IonContent, IonPage, IonSpinner } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'EmailVerificationRequest',
+	name: 'AuthVerify',
 	components: { IonContent, IonPage, IonButton, IonSpinner },
 	middlewares: [async () => {
 		if (!getEmailVerificationEmail()) return '/auth/signin'

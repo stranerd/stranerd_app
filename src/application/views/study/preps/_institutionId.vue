@@ -71,7 +71,7 @@ import { openStudyEntityMenu } from '@app/composable/study/menus'
 import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
-	name: 'InstitutionPrepsPage',
+	name: 'StudyPrepsInstitutionId',
 	displayName: 'Test Preps',
 	components: {
 		Justified,

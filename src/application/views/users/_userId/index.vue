@@ -12,7 +12,7 @@ import UserBio from '@app/components/users/users/UserBio.vue'
 import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 
 export default defineComponent({
-	name: 'UserIdDashboard',
+	name: 'UsersUserId',
 	displayName: 'Profile',
 	components: { UserPageWrapper, UserBio }
 })

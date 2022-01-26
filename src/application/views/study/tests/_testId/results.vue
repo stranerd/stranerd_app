@@ -22,7 +22,7 @@ import { useRoute } from 'vue-router'
 import TestResults from '@app/components/study/tests/TestResults.vue'
 
 export default defineComponent({
-	name: 'TestResult',
+	name: 'StudyTestsTestIdResults',
 	displayName: 'Test',
 	components: { TestResults, Justified },
 	middlewares: ['isAuthenticated'],

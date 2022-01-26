@@ -102,7 +102,7 @@ let editingNote = null as NoteEntity | null
 export const getEditingNote = () => editingNote
 export const openNoteEditModal = async (note: NoteEntity, router: Router) => {
 	editingNote = note
-	await router.push(`/admin/study/notes/${note.id}/edit`)
+	await router.push(`/study/notes/${note.id}/edit`)
 }
 export const useEditNote = (noteId: string) => {
 	const { error, setError } = useErrorHandler()

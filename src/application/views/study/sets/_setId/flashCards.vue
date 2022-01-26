@@ -12,7 +12,7 @@ import PageWrapper from '@app/components/study/sets/page/PageWrapper.vue'
 import SetFlashCardsList from '@app/components/study/flashCards/SetFlashCardsList.vue'
 
 export default defineComponent({
-	name: 'SetPageFlashCards',
+	name: 'StudySetsSetIdFlashCards',
 	displayName: 'Study Set',
 	components: { PageWrapper, SetFlashCardsList }
 })

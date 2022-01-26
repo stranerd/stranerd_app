@@ -34,7 +34,7 @@ export class TestPrepEntity extends BaseEntity {
 	}
 
 	get userId () {
-		return ''
+		return 'admin'
 	}
 }
 

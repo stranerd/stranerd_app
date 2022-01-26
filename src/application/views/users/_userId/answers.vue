@@ -12,7 +12,7 @@ import UserAnswers from '@app/components/users/users/UserAnswers.vue'
 import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 
 export default defineComponent({
-	name: 'UserIdAnswers',
+	name: 'UsersUserIdAnswers',
 	displayName: 'Profile',
 	components: { UserPageWrapper, UserAnswers }
 })

@@ -11,7 +11,7 @@ import { defineComponent } from 'vue'
 import { IonContent, IonPage } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'UserId404',
+	name: 'UsersUserId404',
 	components: { IonContent, IonPage },
 	middlewares: [async ({ to }) => `/users/${to.params.id}/`]
 })

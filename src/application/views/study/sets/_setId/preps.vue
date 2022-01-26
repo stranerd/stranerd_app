@@ -12,7 +12,7 @@ import PageWrapper from '@app/components/study/sets/page/PageWrapper.vue'
 import SetTestPrepsList from '@app/components/study/testPreps/SetTestPrepsList.vue'
 
 export default defineComponent({
-	name: 'SetPageTestPreps',
+	name: 'StudySetsSetIdPreps',
 	displayName: 'Study Set',
 	components: { PageWrapper, SetTestPrepsList }
 })

@@ -12,7 +12,7 @@ import UserFlashCards from '@app/components/users/users/UserFlashCards.vue'
 import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 
 export default defineComponent({
-	name: 'UserIdFlashCards',
+	name: 'UsersUserIdFlashCards',
 	displayName: 'Profile',
 	components: { UserPageWrapper, UserFlashCards }
 })

@@ -12,7 +12,7 @@ import PageWrapper from '@app/components/study/sets/page/PageWrapper.vue'
 import SetVideosList from '@app/components/study/videos/SetVideosList.vue'
 
 export default defineComponent({
-	name: 'SetPageVideos',
+	name: 'StudySetsSetIdVideos',
 	displayName: 'Study Set',
 	components: { PageWrapper, SetVideosList }
 })

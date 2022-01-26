@@ -90,7 +90,7 @@ import SearchFlashCardsList from '@app/components/study/flashCards/SearchFlashCa
 import SearchUsersList from '@app/components/users/SearchUsersList.vue'
 
 export default defineComponent({
-	name: 'SearchAll',
+	name: 'Search',
 	displayName: 'Search',
 	components: {
 		SearchWrapper,

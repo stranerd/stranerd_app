@@ -12,7 +12,7 @@ import SearchWrapper from '@app/components/search/SearchWrapper.vue'
 import SearchUsersList from '@app/components/users/SearchUsersList.vue'
 
 export default defineComponent({
-	name: 'SearchUsers',
+	name: 'SearchNerds',
 	displayName: 'Search',
 	components: { SearchWrapper, SearchUsersList }
 })

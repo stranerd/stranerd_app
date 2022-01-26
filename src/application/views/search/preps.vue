@@ -12,7 +12,7 @@ import SearchWrapper from '@app/components/search/SearchWrapper.vue'
 import SearchTestPrepsList from '@app/components/study/testPreps/SearchTestPrepsList.vue'
 
 export default defineComponent({
-	name: 'SearchTestPreps',
+	name: 'SearchPreps',
 	displayName: 'Search',
 	components: { SearchWrapper, SearchTestPrepsList }
 })

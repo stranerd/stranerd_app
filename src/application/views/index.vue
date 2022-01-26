@@ -17,7 +17,7 @@ import { isWeb } from '@utils/constants'
 import { storage } from '@utils/storage'
 
 export default defineComponent({
-	name: 'IndexPage',
+	name: 'Index',
 	components: { Onboarding, OnboardingLayout, HomeLayout, Landing },
 	middlewares: ['isNotAuthenticated', async () => {
 		if (isWeb) return

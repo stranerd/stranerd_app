@@ -43,7 +43,7 @@ import { useRoute } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
-	name: 'QuestionIdEdit',
+	name: 'QuestionsQuestionIdEdit',
 	displayName: 'Edit Question',
 	components: { DashboardWithToolbarLayout, QuestionForm },
 	middlewares: ['isAuthenticated', async ({ to }) => {

@@ -19,7 +19,7 @@ import { defineComponent } from 'vue'
 import Note from '@app/components/study/notes/Note.vue'
 
 export default defineComponent({
-	name: 'FAQs',
+	name: 'LegalFAQs',
 	displayName: 'FAQs',
 	components: { Justified, Note }
 })

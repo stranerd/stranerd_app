@@ -12,7 +12,7 @@ import { IonContent, IonPage } from '@ionic/vue'
 import { useStudyModal } from '@app/composable/core/modals'
 
 export default defineComponent({
-	name: 'SetsCreatePage',
+	name: 'StudySetsCreate',
 	components: { IonContent, IonPage },
 	middlewares: ['isAuthenticated', async ({ from }) => {
 		useStudyModal().openCreateSet()

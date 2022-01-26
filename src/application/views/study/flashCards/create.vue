@@ -14,7 +14,7 @@ import FlashCardForm from '@app/components/study/flashCards/FlashCardForm.vue'
 import { useCreateFlashCard } from '@app/composable/study/flashCards'
 
 export default defineComponent({
-	name: 'Create Flashcard',
+	name: 'StudyFlashCardsCreate',
 	displayName: 'Create Flashcard',
 	components: { Justified, FlashCardForm },
 	middlewares: ['isAuthenticated'],

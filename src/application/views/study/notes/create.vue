@@ -16,10 +16,10 @@ import { useCreateNote } from '@app/composable/study/notes'
 import NoteForm from '@app/components/study/notes/NoteForm.vue'
 
 export default defineComponent({
-	name: 'AdminStudyNotesCreate',
-	displayName: 'Administration',
+	name: 'StudyNotesCreate',
+	displayName: 'Create Note',
 	components: { AdminWrapper, NoteForm },
-	middlewares: ['isAdmin'],
+	middlewares: ['isAuthenticated'],
 	setup () {
 		const { loading, error, factory, createNote } = useCreateNote()
 		return { loading, error, factory, createNote }

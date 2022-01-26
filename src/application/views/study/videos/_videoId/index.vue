@@ -67,7 +67,7 @@ import { useRoute } from 'vue-router'
 import { useVideo } from '@app/composable/study/videos'
 
 export default defineComponent({
-	name: 'view Video',
+	name: 'StudyVideosVideoId',
 	displayName: 'Videos',
 	components: {
 		Justified,

@@ -29,7 +29,7 @@ import QuestionPageCard from '@app/components/questions/questions/QuestionPageCa
 import AnswersList from '@app/components/questions/answers/AnswersList.vue'
 
 export default defineComponent({
-	name: 'QuestionIdPage',
+	name: 'QuestionsQuestionId',
 	displayName: 'Answers',
 	components: {
 		DashboardWithToolbarLayout,

@@ -16,7 +16,7 @@ import { useRoute } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
-	name: 'Edit Flashcard',
+	name: 'StudyFlashCardsFlashcardIdEdit',
 	displayName: 'Edit Flashcard',
 	components: { Justified, FlashCardForm },
 	middlewares: ['isAuthenticated', async ({ to }) => {

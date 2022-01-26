@@ -36,7 +36,7 @@ import Share from '@app/components/core/Share.vue'
 import Note from '@app/components/study/notes/Note.vue'
 
 export default defineComponent({
-	name: 'NotePage',
+	name: 'StudyNotesNoteId',
 	displayName: 'Notes',
 	components: { Justified, Avatar, Note, Share },
 	setup () {

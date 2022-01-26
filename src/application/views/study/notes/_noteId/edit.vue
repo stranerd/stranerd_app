@@ -15,15 +15,19 @@ import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import { getEditingNote, useEditNote } from '@app/composable/study/notes'
 import NoteForm from '@app/components/study/notes/NoteForm.vue'
 import { useRoute } from 'vue-router'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
-	name: 'AdminStudyNotesNoteIdEdit',
-	displayName: 'Administration',
+	name: 'StudyNotesNoteIdEdit',
+	displayName: 'Edit Note',
 	components: { AdminWrapper, NoteForm },
-	middlewares: ['isAdmin', async ({ to }) => {
+	middlewares: ['isAuthenticated', async ({ to }) => {
+		const { id } = useAuth()
 		const { noteId } = to.params
 		const note = getEditingNote()
-		if (!note || note.id !== noteId) return '/admin/study/notes/'
+		if (!note || note.id !== noteId) return '/study/notes/'
+		const canEdit = note.userId === id.value
+		if (!canEdit) return `/study/notes/${note.id}`
 	}],
 	setup () {
 		const route = useRoute()

@@ -12,7 +12,7 @@ import PageWrapper from '@app/components/study/sets/page/PageWrapper.vue'
 import SetNotesList from '@app/components/study/notes/SetNotesList.vue'
 
 export default defineComponent({
-	name: 'SetPageNotes',
+	name: 'StudySetsSetIdNotes',
 	displayName: 'Study Set',
 	components: { PageWrapper, SetNotesList }
 })

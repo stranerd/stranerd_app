@@ -22,7 +22,7 @@ import { useTagQuestionList } from '@app/composable/questions/tag-questions'
 import QuestionListCard from '@app/components/questions/questions/RecentQuestionListCard.vue'
 
 export default defineComponent({
-	name: 'TagPage',
+	name: 'QuestionsTag',
 	components: { Justified, QuestionListCard },
 	setup () {
 		const { tag } = useRoute().params

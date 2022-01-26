@@ -34,7 +34,7 @@ import { IonButton, IonInput, IonSpinner } from '@ionic/vue'
 import Auth from '@app/layouts/Auth.vue'
 
 export default defineComponent({
-	name: 'ForgotPassword',
+	name: 'AuthForgot',
 	components: { IonInput, IonButton, IonSpinner, Auth },
 	middlewares: ['isNotAuthenticated'],
 	setup () {

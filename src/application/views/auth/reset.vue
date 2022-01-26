@@ -45,7 +45,7 @@ import PageLoading from '@app/components/core/PageLoading.vue'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
-	name: 'ResetPassword',
+	name: 'AuthReset',
 	components: { IonContent, IonPage, IonInput, IonButton, IonSpinner, PageLoading },
 	middlewares: ['hasQueryToken'],
 	setup () {
