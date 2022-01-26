@@ -32,7 +32,7 @@
 						exact-active-class="border-b-4 text-white border-white">
 						Preps
 					</router-link>
-					<router-link :to="`/admin/testQuestions`"
+					<router-link :to="`/admin/study/questions`"
 						class="py-2 lg:mr-12 mr-4 cursor-pointer"
 						exact-active-class="border-b-4 text-white border-white">
 						Test Questions

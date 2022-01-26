@@ -1,4 +1,4 @@
-import { Conditions, Listeners, QueryParams } from '@modules/core'
+import { Listeners, QueryParams } from '@modules/core'
 import { IPastQuestionRepository } from '../../irepositories/ipastQuestion'
 import { PastQuestionEntity } from '../../entities/pastQuestion'
 
@@ -9,16 +9,28 @@ export class ListenToPastQuestionsUseCase {
 		this.repository = repository
 	}
 
-	async call (listener: Listeners<PastQuestionEntity>, date?: number) {
+	async call (listener: Listeners<PastQuestionEntity>, data: {
+		institutionId: string | null
+		courseId: string | null
+		year: number | null
+		questionType: string | null
+	}) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: 1 },
-			all: true
+			sort: { field: 'createdAt', order: -1 },
+			all: true,
+			where: []
 		}
-		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.gt, value: date }]
+		if (data.institutionId) conditions.where!.push({ field: 'institutionId', value: data.institutionId })
+		if (data.courseId) conditions.where!.push({ field: 'courseId', value: data.courseId })
+		if (data.year) conditions.where!.push({ field: 'year', value: data.year })
+		if (data.questionType) conditions.where!.push({ field: 'data.type', value: data.questionType })
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
-			if (date) return entity.createdAt > date
-			return true
+			const matches = [] as boolean[]
+			if (data.institutionId) matches.push(data.institutionId === entity.institutionId)
+			if (data.courseId) matches.push(data.courseId === entity.courseId)
+			if (data.year) matches.push(data.year === entity.year)
+			return matches.every((m) => m)
 		})
 	}
 }

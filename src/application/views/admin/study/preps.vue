@@ -1,7 +1,7 @@
 <template>
 	<AdminWrapper>
 		<div>
-			<div class="flex justify-end">
+			<div class="flex justify-end mb-8">
 				<ion-button class="btn-primary" @click="openCreateTestPrep">Add New Test</ion-button>
 			</div>
 			<AdminTestPrepsList />

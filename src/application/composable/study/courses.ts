@@ -147,7 +147,7 @@ export const useDeleteCourse = () => {
 	const deleteCourse = async (course: CourseEntity) => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to remove this course?',
+			title: 'Are you sure you want to delete this course?',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {

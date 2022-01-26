@@ -84,7 +84,7 @@ export const useDeleteSubject = (subject: SubjectEntity) => {
 	const deleteSubject = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to remove this subject?',
+			title: 'Are you sure you want  to delete this subject?',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {
