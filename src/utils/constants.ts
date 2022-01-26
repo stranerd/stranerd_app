@@ -12,3 +12,7 @@ export const DEFAULT_PROFILE_IMAGE = '/images/avatars/user_profile.svg'
 export const isWeb = Capacitor.getPlatform() === 'web'
 export const isIos = Capacitor.getPlatform() === 'ios'
 export const isAndroid = Capacitor.getPlatform() === 'android'
+
+const startYear = 1980
+const endYear = 2025
+export const years = new Array(1 + endYear - startYear).fill(0).map((_, idx) => startYear + idx)

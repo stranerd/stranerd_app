@@ -6,10 +6,12 @@ import {
 	FindPastQuestion,
 	GetPastQuestions,
 	PastQuestionEntity,
-	PastQuestionFactory
+	PastQuestionFactory,
+	PastQuestionType
 } from '@modules/study'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
+import { useStudyModal } from '@app/composable/core/modals'
 
 const global = {
 	fetched: ref(false),
@@ -17,7 +19,7 @@ const global = {
 		institution: null as string | null,
 		course: null as string | null,
 		year: null as number | null,
-		questionType: null as string | null
+		questionType: null as PastQuestionType | null
 	}),
 	pastQuestions: ref([] as PastQuestionEntity[]),
 	...useErrorHandler(),
@@ -37,7 +39,8 @@ const fetchPastQuestions = async () => {
 		global.pastQuestions.value = (await GetPastQuestions.call({
 			institutionId: global.filters.institution,
 			courseId: global.filters.course,
-			year: global.filters.year
+			year: global.filters.year,
+			questionType: global.filters.questionType
 		})).results
 		global.fetched.value = true
 	} catch (error) {
@@ -56,6 +59,11 @@ export const useCreatePastQuestion = () => {
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 
+	if (global.filters.institution) factory.value.institutionId = global.filters.institution
+	if (global.filters.course) factory.value.courseId = global.filters.course
+	if (global.filters.year) factory.value.year = global.filters.year
+	if (global.filters.questionType) factory.value.type = global.filters.questionType
+
 	const createPastQuestion = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
@@ -65,7 +73,7 @@ export const useCreatePastQuestion = () => {
 				const pastQuestion = await FindPastQuestion.call(id)
 				if (pastQuestion) pushToGlobalPastQuestions(pastQuestion)
 				factory.value.reset()
-				// useStudyModal().closeCreatePastQuestion()
+				useStudyModal().closeCreatePastQuestion()
 				await setMessage('PastQuestion created successfully')
 			} catch (error) {
 				await setError(error)
@@ -81,7 +89,7 @@ let editingPastQuestion = null as PastQuestionEntity | null
 export const getEditingPastQuestion = () => editingPastQuestion
 export const openPastQuestionEditModal = async (pastQuestion: PastQuestionEntity) => {
 	editingPastQuestion = pastQuestion
-	// useStudyModal().openEditPastQuestion()
+	useStudyModal().openEditPastQuestion()
 }
 
 export const useEditPastQuestion = () => {

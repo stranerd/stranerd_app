@@ -7,7 +7,7 @@
 				<ion-label class="font-bold">Profile</ion-label>
 			</div>
 		</router-link>
-		<router-link v-if="0 && isAdmin" class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
+		<router-link v-if="isAdmin" class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
 			to="/admin/">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="cog" class="text-3xl"></ion-icon>

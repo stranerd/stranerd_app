@@ -64,6 +64,7 @@ import { IonSelect, IonSelectOption } from '@ionic/vue'
 import { useInstitutionList } from '@app/composable/study/institutions'
 import { PastQuestionType } from '@modules/study'
 import { useCourseList } from '@app/composable/study/courses'
+import { years } from '@utils/constants'
 
 export default defineComponent({
 	name: 'AdminPastQuestionsList',
@@ -73,9 +74,6 @@ export default defineComponent({
 		const { institutions, loading: institutionLoading } = useInstitutionList()
 		const { courses: allCourses, loading: courseLoading } = useCourseList()
 		const courses = computed(() => new Set(allCourses.value.filter((c) => c.institutionId === filters.institution)))
-		const startYear = 1980
-		const endYear = 2025
-		const years = new Array(1 + endYear - startYear).fill(0).map((_, idx) => startYear + idx)
 		const questionTypes = Object.keys(PastQuestionType)
 
 		return {

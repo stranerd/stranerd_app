@@ -2,7 +2,7 @@
 	<AdminWrapper>
 		<div>
 			<div class="flex justify-end mb-8">
-				<ion-button class="btn-primary">Add New Question</ion-button>
+				<ion-button class="btn-primary" @click.prevent="openCreatePastQuestion">Add New Question</ion-button>
 			</div>
 			<AdminPastQuestionsList />
 		</div>
@@ -13,13 +13,16 @@
 import { defineComponent } from 'vue'
 import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import AdminPastQuestionsList from '@app/components/study/pastQuestions/AdminPastQuestionsList.vue'
+import { useStudyModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'AdminStudyQuestions',
 	displayName: 'Test Questions',
 	components: { AdminPastQuestionsList, AdminWrapper },
 	setup () {
-		return {}
+		return {
+			openCreatePastQuestion: useStudyModal().openCreatePastQuestion
+		}
 	}
 })
 </script>
