@@ -23,10 +23,10 @@ import { useCreateCourse } from '@app/composable/study/courses'
 
 export default defineComponent({
 	name: 'CreateCourseModal',
+	components: { CourseForm },
 	setup () {
 		const { factory, error, loading, createCourse } = useCreateCourse()
 		return { factory, error, loading, createCourse }
-	},
-	components: { CourseForm }
+	}
 })
 </script>

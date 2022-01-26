@@ -58,12 +58,5 @@ export default defineComponent({
 		const { normalSets: sets } = useMySets()
 		return { reader, videocam, folder, sets, formatNumber }
 	}
-
 })
 </script>
-
-<style scoped>
-	ion-popover::part(content) {
-		width: auto !important;
-	}
-</style>

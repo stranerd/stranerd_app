@@ -22,6 +22,7 @@ http://ionicframework.com/docs/theming/ */
 
 :root {
 	--ion-font-family: 'Raleway', sans-serif;
+
 	/** primary **/
 	--ion-color-primary: #546DD3;
 	--ion-color-primary-rgb: 56, 128, 255;
@@ -29,16 +30,17 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-primary-contrast-rgb: 255, 255, 255;
 	--ion-color-primary-shade: #3171e0;
 	--ion-color-primary-tint: #4c8dff;
+
 	/** orange **/
 	--ion-color-orange: #FFA84B;
-	--ion-color-orange-rgb: 56, 128, 255;
+	--ion-color-orange-rgb: 255, 168, 75;
 	--ion-color-orange-contrast: #ffffff;
 	--ion-color-orange-contrast-rgb: 255, 255, 255;
-	--ion-color-orange-shade: #FFA84B;
-	--ion-color-orange-tint: #FFA84B;
+	--ion-color-orange-shade: #FFC86B;
+	--ion-color-orange-tint: #DDA84B;
 
 	/** secondary **/
-	--ion-color-secondary: #00D25A;
+	--ion-color-secondary: #FFA84B;
 	--ion-color-secondary-rgb: 61, 194, 255;
 	--ion-color-secondary-contrast: #ffffff;
 	--ion-color-secondary-contrast-rgb: 255, 255, 255;
@@ -54,12 +56,20 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-tertiary-tint: #6370ff;
 
 	/** success **/
-	--ion-color-success: #FFA84B;
+	--ion-color-success: #00D25A;
 	--ion-color-success-rgb: 45, 211, 111;
 	--ion-color-success-contrast: #ffffff;
 	--ion-color-success-contrast-rgb: 255, 255, 255;
 	--ion-color-success-shade: #28ba62;
 	--ion-color-success-tint: #42d77d;
+
+	/** pink **/
+	--ion-color-pink: #FF6496;
+	--ion-color-pink-rgb: 45, 211, 111;
+	--ion-color-pink-contrast: #ffffff;
+	--ion-color-pink-contrast-rgb: 255, 255, 255;
+	--ion-color-pink-shade: #FF8896;
+	--ion-color-pink-tint: #EE6496;
 
 	/** warning **/
 	--ion-color-warning: #ffc409;
@@ -70,7 +80,7 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-warning-tint: #ffca22;
 
 	/** danger **/
-	--ion-color-danger: #eb445a;
+	--ion-color-danger: #FF6666;
 	--ion-color-danger-rgb: 235, 68, 90;
 	--ion-color-danger-contrast: #ffffff;
 	--ion-color-danger-contrast-rgb: 255, 255, 255;

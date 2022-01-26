@@ -23,10 +23,10 @@ import { useEditInstitution } from '@app/composable/study/institutions'
 
 export default defineComponent({
 	name: 'EditInstitutionModal',
+	components: { InstitutionForm },
 	setup () {
 		const { factory, error, loading, editInstitution } = useEditInstitution()
 		return { factory, error, loading, editInstitution }
-	},
-	components: { InstitutionForm }
+	}
 })
 </script>

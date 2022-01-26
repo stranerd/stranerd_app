@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { chevronDown, flash, folder } from 'ionicons/icons'
+import { chevronDown } from 'ionicons/icons'
 import { SetEntity } from '@modules/study'
 import { useStudyPopover } from '@app/composable/core/modals'
 
@@ -37,7 +37,7 @@ export default defineComponent({
 	},
 	setup () {
 		const openCreateStudy = useStudyPopover().openCreateStudy
-		return { chevronDown, openCreateStudy, folder, flash }
+		return { chevronDown, openCreateStudy }
 	}
 
 })

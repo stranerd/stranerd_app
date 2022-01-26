@@ -23,10 +23,10 @@ import { useCreateTestPrep } from '@app/composable/study/testPreps'
 
 export default defineComponent({
 	name: 'CreateTestPrepModal',
+	components: { TestPrepForm },
 	setup () {
 		const { factory, error, loading, createTestPrep } = useCreateTestPrep()
 		return { factory, error, loading, createTestPrep }
-	},
-	components: { TestPrepForm }
+	}
 })
 </script>

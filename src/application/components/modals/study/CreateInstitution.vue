@@ -23,10 +23,10 @@ import { useCreateInstitution } from '@app/composable/study/institutions'
 
 export default defineComponent({
 	name: 'CreateInstitutionModal',
+	components: { InstitutionForm },
 	setup () {
 		const { factory, error, loading, createInstitution } = useCreateInstitution()
 		return { factory, error, loading, createInstitution }
-	},
-	components: { InstitutionForm }
+	}
 })
 </script>

@@ -1,26 +1,25 @@
 <template>
-	<AdminWrapper>
-		<NoteForm :error="error" :factory="factory" :loading="loading" :submit="editNote"
-			class="p-8 bg-white rounded-xl">
+	<Justified>
+		<NoteForm :error="error" :factory="factory" :loading="loading" :submit="editNote" class="p-4 md:p-8 bg-white">
 			<template v-slot:buttonText>
 				Update Note
 			</template>
 		</NoteForm>
-	</AdminWrapper>
+	</Justified>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import { getEditingNote, useEditNote } from '@app/composable/study/notes'
 import NoteForm from '@app/components/study/notes/NoteForm.vue'
 import { useRoute } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
+import Justified from '@app/layouts/Justified.vue'
 
 export default defineComponent({
 	name: 'StudyNotesNoteIdEdit',
 	displayName: 'Edit Note',
-	components: { AdminWrapper, NoteForm },
+	components: { Justified, NoteForm },
 	middlewares: ['isAuthenticated', async ({ to }) => {
 		const { id } = useAuth()
 		const { noteId } = to.params

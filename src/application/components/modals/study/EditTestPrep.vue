@@ -23,10 +23,10 @@ import { useEditTestPrep } from '@app/composable/study/testPreps'
 
 export default defineComponent({
 	name: 'EditTestPrepModal',
+	components: { TestPrepForm },
 	setup () {
 		const { factory, error, loading, editTestPrep } = useEditTestPrep()
 		return { factory, error, loading, editTestPrep }
-	},
-	components: { TestPrepForm }
+	}
 })
 </script>

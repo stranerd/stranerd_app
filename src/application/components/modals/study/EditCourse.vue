@@ -23,10 +23,10 @@ import { useEditCourse } from '@app/composable/study/courses'
 
 export default defineComponent({
 	name: 'EditCourseModal',
+	components: { CourseForm },
 	setup () {
 		const { factory, error, loading, editCourse } = useEditCourse()
 		return { factory, error, loading, editCourse }
-	},
-	components: { CourseForm }
+	}
 })
 </script>

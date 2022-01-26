@@ -1,17 +1,21 @@
 <template>
-	<Popover class="flex flex-col">
-		<router-link class="flex items-center justify-start w-auto mb-4 cursor-pointer"
-			to="/study/flashCards/create">
+	<Popover class="flex flex-col gap-4">
+		<router-link class="flex items-center" to="/study/flashCards/create">
 			<ion-icon :icon="flash" alt="" class="text-2xl text-gray" />
 			<ion-text class="font-bold ml-4 text-lg text-gray">
-				Flashcard
+				Create Flashcard
 			</ion-text>
 		</router-link>
-		<router-link class="flex items-center justify-start w-auto cursor-pointer"
-			to="/study/sets/create">
+		<router-link class="flex items-center" to="/study/notes/create">
+			<ion-icon :icon="reader" alt="" class="text-2xl text-gray" />
+			<ion-text class="font-bold ml-4 text-lg text-gray">
+				Upload Note
+			</ion-text>
+		</router-link>
+		<router-link class="flex items-center" to="/study/sets/create">
 			<ion-icon :icon="folder" alt="" class="text-2xl text-gray" />
 			<ion-text class="font-bold ml-4 text-lg text-gray">
-				Study set
+				Create Study set
 			</ion-text>
 		</router-link>
 	</Popover>
@@ -19,12 +23,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { flash, folder } from 'ionicons/icons'
+import { flash, folder, reader } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'CreateStudy',
 	setup () {
-		return { flash, folder }
+		return { flash, folder, reader }
 	}
 })
 </script>
