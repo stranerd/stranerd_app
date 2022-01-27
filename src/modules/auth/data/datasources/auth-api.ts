@@ -1,5 +1,5 @@
 import { closeSocket, HttpClient } from '@modules/core'
-import { apiBases, domain } from '@utils/environment'
+import { apiBases, domain, googleClientId } from '@utils/environment'
 import { deleteTokens, saveTokens } from '@utils/tokens'
 import {
 	AfterAuthUser,
@@ -31,7 +31,8 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 
 	async signinWithGoogle (idToken: string, extras: AuthExtras) {
 		return await this.authClient.post<any, AfterAuthUser>('/identities/google', {
-			idToken, referrer: extras.referrer
+			idToken, referrer: extras.referrer,
+			clientId: googleClientId
 		})
 	}
 
