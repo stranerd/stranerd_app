@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="photos.length">
 		<div v-if="zoomed" class="zoomed">
 			<div class="under" @click="zoomed = false" />
 			<div class="inner">

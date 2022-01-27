@@ -23,6 +23,10 @@ export class PastQuestionEntity extends BaseEntity {
 		this.createdAt = data.createdAt
 		this.updatedAt = data.updatedAt
 	}
+
+	get isObjective () {
+		return this.data.type === PastQuestionType.objective
+	}
 }
 
 type PastQuestionConstructorArgs = {

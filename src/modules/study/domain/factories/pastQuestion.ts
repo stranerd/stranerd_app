@@ -45,7 +45,7 @@ export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQue
 		questionMedia: { required: true, rules: [isArrayOfX((com) => isImage(com).valid, 'images')] },
 		answer: {
 			required: false,
-			rules: [(val: string) => isRequiredIf(val, !this.isObjective), isString, isLongerThanX(0)]
+			rules: [(val: string) => isRequiredIf(val, !this.isObjective), isString]
 		},
 		answerMedia: {
 			required: false,
@@ -70,7 +70,7 @@ export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQue
 		},
 		explanation: {
 			required: false,
-			rules: [(val: string) => isRequiredIf(val, this.isObjective), isString, isLongerThanX(0)]
+			rules: [(val: string) => isRequiredIf(val, this.isObjective), isString]
 		},
 		explanationMedia: {
 			required: false,
@@ -79,8 +79,6 @@ export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQue
 	}
 
 	reserved = []
-
-	optionIndex = 0
 
 	constructor () {
 		super({
@@ -195,7 +193,6 @@ export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQue
 	addOption = () => {
 		this.set('options', [...this.options, ''])
 		this.set('optionsMedia', [...this.optionsMedia, []])
-		this.optionIndex = this.options.length - 1
 	}
 
 	removeOption = (index: number) => {

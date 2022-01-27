@@ -1,6 +1,39 @@
 <template>
 	<form @submit.prevent="submit">
 		<div class="mb-8">
+			<IonLabel>Institution</IonLabel>
+			<IonSelect v-model="factory.institutionId" class="capitalize" interface="action-sheet"
+				placeholder="Select the question's institution">
+				<IonSelectOption v-for="institution in institutions" :key="institution.hash" :value="institution.id"
+					class="capitalize">
+					{{ institution.name }}
+				</IonSelectOption>
+			</IonSelect>
+		</div>
+
+		<div class="mb-8">
+			<IonLabel>Course</IonLabel>
+			<IonSelect v-model="factory.courseId" class="capitalize" interface="action-sheet"
+				placeholder="Select the question's course">
+				<IonSelectOption v-for="course in courses" :key="course.hash" :value="course.id"
+					class="capitalize">
+					{{ course.name }}
+				</IonSelectOption>
+			</IonSelect>
+		</div>
+
+		<div class="mb-8">
+			<IonLabel>Year</IonLabel>
+			<IonSelect v-model="factory.year" class="capitalize" interface="action-sheet"
+				placeholder="Select the question's year">
+				<IonSelectOption v-for="year in years" :key="year" :value="year"
+					class="capitalize">
+					{{ year }}
+				</IonSelectOption>
+			</IonSelect>
+		</div>
+
+		<div class="mb-8">
 			<IonLabel>Question Type</IonLabel>
 			<IonSelect v-model="factory.type" class="capitalize" interface="action-sheet"
 				placeholder="Select the type of question">
@@ -55,15 +88,20 @@
 		</div>
 
 		<PageLoading v-if="loading" />
+		<PageLoading v-if="institutionLoading" />
+		<PageLoading v-if="courseLoading" />
 	</form>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { PastQuestionFactory } from '@modules/study'
 import { IonLabel, IonRadio, IonRadioGroup, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
 import { getAlphabet } from '@utils/commons'
 import { add, trash } from 'ionicons/icons'
+import { useInstitutionList } from '@app/composable/study/institutions'
+import { useCourseList } from '@app/composable/study/courses'
+import { years } from '@utils/constants'
 
 export default defineComponent({
 	name: 'PastQuestionForm',
@@ -86,8 +124,14 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup () {
-		return { getAlphabet, add, trash }
+	setup (props) {
+		const { institutions, loading: institutionLoading } = useInstitutionList()
+		const { courses: allCourses, loading: courseLoading } = useCourseList()
+		const courses = computed(() => new Set(allCourses.value.filter((c) => c.institutionId === props.factory.institutionId)))
+		return {
+			getAlphabet, add, trash,
+			institutions, courses, institutionLoading, courseLoading, years
+		}
 	}
 })
 </script>
