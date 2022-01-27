@@ -1,42 +1,43 @@
 <template>
 	<div class="flex-col gap-1 gap-md-2">
-		<ion-button v-if="Vue3GoogleOauth.isInit"
-			class="w-full font-bold capitalize text-base flex gap-9 justify-center items-center my-6"
+		<ion-button class="w-full font-bold capitalize text-base flex gap-9 justify-center items-center my-6"
 			@click="loginWithGoogle">
 			<ion-icon :icon="logoGoogle" class="mr-4" size="100px" />
 			<span>Google</span>
 		</ion-button>
-		<page-loading v-if="loading" />
+		<PageLoading v-if="loading" />
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, inject } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { useGoogleSignin } from '@app/composable/auth/signin'
 import { IonButton, IonIcon } from '@ionic/vue'
 import { logoGoogle } from 'ionicons/icons'
-import PageLoading from '../core/PageLoading.vue'
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth'
 
 export default defineComponent({
 	name: 'AuthProviders',
-	components: { IonButton, IonIcon, PageLoading },
+	components: { IonButton, IonIcon },
 	setup () {
 		const { loading, error, setError, signin } = useGoogleSignin()
-		const app = getCurrentInstance()
-		const Vue3GoogleOauth = inject('Vue3GoogleOauth')
 
 		const loginWithGoogle = async () => {
 			try {
-				const googleUser = await app!.appContext.config.globalProperties.$gAuth.signIn()
-				const token = googleUser.getAuthResponse().id_token
-				googleUser.disconnect()
+				const googleUser = await GoogleAuth.signIn()
+				const token = googleUser.authentication.idToken
+				await GoogleAuth.signOut()
 				await signin(token)
 			} catch (error: any) {
 				await setError(error.message ?? 'Error signing in with google')
 			}
 		}
 
-		return { loading, error, logoGoogle, loginWithGoogle, Vue3GoogleOauth }
+		onMounted(async () => {
+			await GoogleAuth.init()
+		})
+
+		return { loading, error, logoGoogle, loginWithGoogle }
 	}
 })
 </script>

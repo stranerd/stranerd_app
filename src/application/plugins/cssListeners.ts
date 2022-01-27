@@ -1,4 +1,5 @@
 import { definePlugin } from '@app/plugins/index'
+import { googleClientId } from '@utils/environment'
 
 export const cssListeners = definePlugin(async () => {
 	const hasNoGapSupport = () => {
@@ -19,4 +20,9 @@ export const cssListeners = definePlugin(async () => {
 	setTimeout(() => {
 		document.body.setAttribute('data-no-gap', hasNoGapSupport().toString())
 	}, 500)
+
+	const meta = document.createElement('meta')
+	meta.name = 'google-signin-client_id'
+	meta.content = googleClientId
+	document.head.appendChild(meta)
 })

@@ -6,8 +6,6 @@ import { IonicVue } from '@ionic/vue'
 import 'katex/dist/katex.min'
 import './application/assets/styles/index.scss'
 import { MiddlewareFunction } from '@app/middlewares/'
-//@ts-ignore
-import GAuth from 'vue3-google-oauth2'
 import { isAuthenticated } from '@app/middlewares/isAuthenticated'
 import { isNotAuthenticated } from '@app/middlewares/isNotAuthenticated'
 import { isAdmin } from '@app/middlewares/isAdmin'
@@ -19,7 +17,6 @@ import { authClient } from '@app/plugins/authClient'
 import { allModals, allPopovers } from '@app/composable/core/modals'
 import { defineCustomElements } from '@ionic/pwa-elements/loader'
 import { showAddAnswer } from '@app/composable/questions/answers'
-import { googleClientId } from '@utils/environment'
 import { cssListeners } from '@app/plugins/cssListeners'
 
 const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken }
@@ -62,7 +59,6 @@ const init = async () => {
 	app
 		.use(router)
 		.use(IonicVue)
-		.use(GAuth, { clientId: googleClientId, scope: 'email', prompt: 'consent', fetch_basic_profile: true })
 
 	await router.isReady()
 
