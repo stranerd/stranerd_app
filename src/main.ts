@@ -20,9 +20,10 @@ import { allModals, allPopovers } from '@app/composable/core/modals'
 import { defineCustomElements } from '@ionic/pwa-elements/loader'
 import { showAddAnswer } from '@app/composable/questions/answers'
 import { googleClientId } from '@utils/environment'
+import { cssListeners } from '@app/plugins/cssListeners'
 
 const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken }
-const globalPlugins = [parseLoggedInUser, authClient, registerIonicComponent, registerComponents, ipAddressGetter]
+const globalPlugins = [parseLoggedInUser, authClient, registerIonicComponent, registerComponents, ipAddressGetter, cssListeners]
 export type Middleware = MiddlewareFunction | keyof typeof globalMiddlewares
 
 const init = async () => {

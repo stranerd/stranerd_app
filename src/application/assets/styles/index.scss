@@ -7,3 +7,30 @@
 .footer-shadow {
 	box-shadow: 0px -5px 5px rgba(139, 158, 177, 0.05);
 }
+
+$spacers: (
+	0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14,
+	16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 72, 80, 96
+);
+$grid-breakpoints: (
+	'': 0,
+	'sm:': '640px',
+	'md:': '768px',
+	'lg:': '1280px',
+	'xl:': '1420px',
+	'2xl:': '1536px'
+);
+
+@each $key in $spacers {
+	@each $bp, $width in $grid-breakpoints {
+		body[data-no-gap='true'] .#{$bp}gap-#{$key} {
+			@media (min-width: $width) {
+				gap: 0 !important;
+
+				& > *:not(:only-child) {
+					margin: calc(#{$key}px) !important;
+				}
+			}
+		}
+	}
+}
