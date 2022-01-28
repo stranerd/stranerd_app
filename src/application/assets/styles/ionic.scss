@@ -179,7 +179,7 @@ ion-searchbar {
 	--box-shadow: none !important;
 	--border-radius: .75rem !important;
 	--icon-color: #8B9EB1;
-	--color: $color-mainDark;
+	color: $color-mainDark;
 	--placeholder-color: #8B9EB1;
 }
 
@@ -195,7 +195,7 @@ ion-searchbar {
 ion-input, ion-textarea {
 	--padding-start: 1rem !important;
 	--padding-end: 1rem !important;
-	--color: $color-mainDark;
+	color: $color-mainDark;
 }
 
 .btn-secondary {

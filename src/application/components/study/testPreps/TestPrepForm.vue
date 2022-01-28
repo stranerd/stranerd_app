@@ -1,13 +1,13 @@
 <template>
 	<form @submit.prevent="submit">
 		<div class="mb-8">
-			<IonLabel>Name</IonLabel>
+			<label>Name</label>
 			<IonInput v-model="factory.name" class="mb-2" placeholder="Enter Test Name" />
 			<DisplayError :error="factory.errors.name" />
 		</div>
 
 		<div class="mb-8">
-			<IonLabel>Institution</IonLabel>
+			<label>Institution</label>
 			<IonSelect v-model="factory.institutionId" class="capitalize" interface="action-sheet"
 				placeholder="Select the institution the prep belongs to">
 				<IonSelectOption v-for="institution in institutions" :key="institution.hash" :value="institution.id"
@@ -18,7 +18,7 @@
 		</div>
 
 		<div class="mb-8">
-			<IonLabel>Course</IonLabel>
+			<label>Course</label>
 			<IonSelect v-model="factory.courseId" class="capitalize" interface="action-sheet"
 				placeholder="Select the institution the prep belongs to">
 				<IonSelectOption v-for="course in courses" :key="course.hash" :value="course.id" class="capitalize">
@@ -28,7 +28,7 @@
 		</div>
 
 		<div class="mb-8">
-			<IonLabel>Mode</IonLabel>
+			<label>Mode</label>
 			<IonSelect v-model="factory.questionType" class="capitalize" interface="action-sheet"
 				placeholder="Select the questions mode">
 				<IonSelectOption v-for="questionType in factory.questionTypes" :key="questionType" :value="questionType"
@@ -39,19 +39,19 @@
 		</div>
 
 		<div class="mb-8">
-			<IonLabel>Year</IonLabel>
+			<label>Year</label>
 			<IonInput v-model.number="factory.year" class="mb-2" placeholder="Enter Test Year" />
 			<DisplayError :error="factory.errors.year" />
 		</div>
 
 		<div class="mb-8">
-			<IonLabel>Default Number of Questions</IonLabel>
+			<label>Default Number of Questions</label>
 			<IonInput v-model.number="factory.questions" class="mb-2" placeholder="Enter Length of Test Questions" />
 			<DisplayError :error="factory.errors.questions" />
 		</div>
 
 		<div class="mb-8">
-			<IonLabel>Default Time in Minutes</IonLabel>
+			<label>Default Time in Minutes</label>
 			<IonInput v-model.number="factory.time" class="mb-2" placeholder="Enter Time for Test" />
 			<DisplayError :error="factory.errors.time" />
 		</div>
@@ -69,13 +69,13 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { TestPrepFactory } from '@modules/study'
-import { IonLabel, IonSelect, IonSelectOption } from '@ionic/vue'
+import { IonSelect, IonSelectOption } from '@ionic/vue'
 import { useInstitutionList } from '@app/composable/study/institutions'
 import { useCourseList } from '@app/composable/study/courses'
 
 export default defineComponent({
 	name: 'TestPrepForm',
-	components: { IonSelect, IonSelectOption, IonLabel },
+	components: { IonSelect, IonSelectOption },
 	props: {
 		factory: {
 			type: TestPrepFactory,
@@ -109,7 +109,7 @@ export default defineComponent({
 		border-radius: 0.25rem !important;
 	}
 
-	ion-label {
+	label {
 		font-size: 1.2rem;
 		font-weight: 500;
 	}

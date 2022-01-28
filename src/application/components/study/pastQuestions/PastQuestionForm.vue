@@ -1,7 +1,7 @@
 <template>
 	<form @submit.prevent="submit">
 		<div class="mb-8">
-			<IonLabel>Institution</IonLabel>
+			<label>Institution</label>
 			<IonSelect v-model="factory.institutionId" class="capitalize" interface="action-sheet"
 				placeholder="Select the question's institution">
 				<IonSelectOption v-for="institution in institutions" :key="institution.hash" :value="institution.id"
@@ -12,7 +12,7 @@
 		</div>
 
 		<div class="mb-8">
-			<IonLabel>Course</IonLabel>
+			<label>Course</label>
 			<IonSelect v-model="factory.courseId" class="capitalize" interface="action-sheet"
 				placeholder="Select the question's course">
 				<IonSelectOption v-for="course in courses" :key="course.hash" :value="course.id"
@@ -23,7 +23,7 @@
 		</div>
 
 		<div class="mb-8">
-			<IonLabel>Year</IonLabel>
+			<label>Year</label>
 			<IonSelect v-model="factory.year" class="capitalize" interface="action-sheet"
 				placeholder="Select the question's year">
 				<IonSelectOption v-for="year in years" :key="year" :value="year"
@@ -34,7 +34,7 @@
 		</div>
 
 		<div class="mb-8">
-			<IonLabel>Question Type</IonLabel>
+			<label>Question Type</label>
 			<IonSelect v-model="factory.type" class="capitalize" interface="action-sheet"
 				placeholder="Select the type of question">
 				<IonSelectOption v-for="questionType in factory.questionTypes" :key="questionType" :value="questionType"
@@ -45,7 +45,7 @@
 		</div>
 
 		<div class="mb-8">
-			<IonLabel>Question</IonLabel>
+			<label>Question</label>
 			<IonTextarea v-model="factory.question" class="mb-2" placeholder="Enter Question" rows="3" />
 			<DisplayError :error="factory.errors.question" />
 		</div>
@@ -68,14 +68,14 @@
 				</IonButton>
 			</div>
 			<div class="mb-8">
-				<IonLabel>Explanation</IonLabel>
+				<label>Explanation</label>
 				<IonTextarea v-model="factory.explanation" class="mb-2" placeholder="Enter Explanation" rows="3" />
 				<DisplayError :error="factory.errors.explanation" />
 			</div>
 		</template>
 		<template v-else>
 			<div class="mb-8">
-				<IonLabel>Answer</IonLabel>
+				<label>Answer</label>
 				<IonTextarea v-model="factory.answer" class="mb-2" placeholder="Enter Answer" rows="3" />
 				<DisplayError :error="factory.errors.answer" />
 			</div>
@@ -96,7 +96,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { PastQuestionFactory } from '@modules/study'
-import { IonLabel, IonRadio, IonRadioGroup, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
+import { IonRadio, IonRadioGroup, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
 import { getAlphabet } from '@utils/commons'
 import { add, trash } from 'ionicons/icons'
 import { useInstitutionList } from '@app/composable/study/institutions'
@@ -105,7 +105,7 @@ import { years } from '@utils/constants'
 
 export default defineComponent({
 	name: 'PastQuestionForm',
-	components: { IonLabel, IonSelect, IonSelectOption, IonTextarea, IonRadio, IonRadioGroup },
+	components: { IonSelect, IonSelectOption, IonTextarea, IonRadio, IonRadioGroup },
 	props: {
 		factory: {
 			type: PastQuestionFactory,
@@ -142,7 +142,7 @@ export default defineComponent({
 		border-radius: 0.25rem !important;
 	}
 
-	ion-label {
+	label {
 		font-size: 1.2rem;
 		font-weight: 500;
 	}

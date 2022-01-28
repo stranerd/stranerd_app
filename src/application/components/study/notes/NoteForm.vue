@@ -1,19 +1,19 @@
 <template>
 	<form @submit.prevent="submit">
 		<div class="mb-12">
-			<IonLabel>Title</IonLabel>
+			<label>Title</label>
 			<IonInput v-model="factory.title" class="mb-2" placeholder="Enter Note Title" />
 			<DisplayError :error="factory.errors.title" />
 		</div>
 
 		<div class="mb-12">
-			<IonLabel>Description</IonLabel>
+			<label>Description</label>
 			<IonTextarea v-model="factory.description" class="mb-2" placeholder="Enter Note Description" rows="4" />
 			<DisplayError :error="factory.errors.description" />
 		</div>
 
 		<div class="mb-12">
-			<IonLabel>Tags</IonLabel>
+			<label>Tags</label>
 			<IonInput v-model="tag" class="mb-2" placeholder="Add related tags" />
 			<div v-if="factory.tags.length > 0" class="mb-2 flex flex-wrap gap-2">
 				<span v-for="tag in factory.tags" :key="tag">
@@ -30,10 +30,10 @@
 			<input
 				id="preview" accept="image/x-png,image/jpeg,image/jpg"
 				class="hidden" type="file" @change="catchPreview" />
-			<IonLabel class="cursor-pointer flex items-center gap-4 mb-2" for="preview">
+			<label class="cursor-pointer flex items-center gap-4 mb-2" for="preview">
 				<ion-icon :icon="image" class="!text-4xl text-gray" />
 				{{ factory.preview ? 'Change' : 'Add' }} Preview
-			</IonLabel>
+			</label>
 			<span class="p-2 rounded-xl flex items-center">
 				{{ factory.preview?.name ?? 'No Preview' }}
 				<IonIcon v-if="factory.preview" :icon="close" class="ml-2 cursor-pointer"
@@ -44,19 +44,19 @@
 
 		<div v-if="false" class="mb-12 flex items-center">
 			<IonToggle id="isHosted" v-model="factory.isHosted" />
-			<IonLabel for="isHosted">
+			<label for="isHosted">
 				{{
 					factory.isHosted ? 'Upload a document for the note' : 'Provide a link if the note is hosted elsewhere on the internet'
 				}}
-			</IonLabel>
+			</label>
 		</div>
 
 		<div v-if="factory.isHosted" class="mb-12">
 			<input id="note" class="hidden" type="file" @change="catchMedia" />
-			<IonLabel class="cursor-pointer flex items-center gap-4 mb-2" for="note">
+			<label class="cursor-pointer flex items-center gap-4 mb-2" for="note">
 				<ion-icon :icon="documentAttach" class="!text-4xl text-gray" />
 				{{ factory.preview ? 'Change' : 'Add' }} Document
-			</IonLabel>
+			</label>
 			<span class="p-2 rounded-xl flex items-center">
 				{{ factory.media?.name ?? 'No Media' }}
 				<IonIcon v-if="factory.media" :icon="close" class="ml-2 cursor-pointer" @click="factory.media = null" />
@@ -65,7 +65,7 @@
 		</div>
 
 		<div v-else class="mb-12">
-			<IonLabel>Link</IonLabel>
+			<label>Link</label>
 			<IonInput v-model="factory.link" class="mb-2" placeholder="Enter Link for the Note" type="url" />
 			<DisplayError :error="factory.errors.link" />
 		</div>
@@ -85,11 +85,11 @@ import { defineComponent } from 'vue'
 import { close, documentAttach, image } from 'ionicons/icons'
 import { useFileInputs, useTags } from '@app/composable/core/forms'
 import { NoteFactory } from '@modules/study'
-import { IonLabel, IonTextarea, IonToggle } from '@ionic/vue'
+import { IonTextarea, IonToggle } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'NoteForm',
-	components: { IonTextarea, IonToggle, IonLabel },
+	components: { IonTextarea, IonToggle },
 	props: {
 		factory: {
 			type: NoteFactory,
@@ -115,7 +115,7 @@ export default defineComponent({
 		)
 
 		const { catchFiles: catchMedia } = useFileInputs((file: File) => props.factory.media = file)
-		const { catchFiles: catchPreview } = useFileInputs((file: File) => props.factory.media = file)
+		const { catchFiles: catchPreview } = useFileInputs((file: File) => props.factory.preview = file)
 
 		return {
 			image, documentAttach, close, tag, removeTag, catchMedia, catchPreview
@@ -130,7 +130,7 @@ export default defineComponent({
 		border-radius: 0.25rem !important;
 	}
 
-	ion-label {
+	label {
 		font-size: 1.2rem;
 		font-weight: 500;
 	}

@@ -1,13 +1,13 @@
 <template>
 	<form @submit.prevent="submit">
 		<div class="mb-8">
-			<IonLabel>Name</IonLabel>
+			<label>Name</label>
 			<IonInput v-model="factory.name" class="mb-2" placeholder="Enter Course Name" />
 			<DisplayError :error="factory.errors.name" />
 		</div>
 
 		<div class="mb-8">
-			<IonLabel>Institution</IonLabel>
+			<label>Institution</label>
 			<IonSelect v-model="factory.institutionId" class="capitalize" interface="action-sheet"
 				placeholder="Select the institution the course belongs to">
 				<IonSelectOption v-for="institution in institutions" :key="institution.hash" :value="institution.id"
@@ -31,12 +31,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { CourseFactory } from '@modules/study'
-import { IonLabel, IonSelect, IonSelectOption } from '@ionic/vue'
+import { IonSelect, IonSelectOption } from '@ionic/vue'
 import { useInstitutionList } from '@app/composable/study/institutions'
 
 export default defineComponent({
 	name: 'CourseForm',
-	components: { IonSelect, IonSelectOption, IonLabel },
+	components: { IonSelect, IonSelectOption },
 	props: {
 		factory: {
 			type: CourseFactory,
@@ -68,7 +68,7 @@ export default defineComponent({
 		border-radius: 0.25rem !important;
 	}
 
-	ion-label {
+	label {
 		font-size: 1.2rem;
 		font-weight: 500;
 	}

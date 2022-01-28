@@ -1,16 +1,16 @@
 <template>
 	<form @submit.prevent="submit">
 		<div class="mb-8">
-			<IonLabel>Name</IonLabel>
+			<label>Name</label>
 			<IonInput v-model="factory.name" class="mb-2" placeholder="Enter Institution Name" />
 			<DisplayError :error="factory.errors.name" />
 		</div>
 
 		<div class="mb-8 flex items-center">
 			<IonToggle id="isGateway" v-model="factory.isGateway" />
-			<IonLabel for="isGateway">
+			<label for="isGateway">
 				{{ factory.isGateway ? 'Is a gateway body like JAMB, WAEC, SAT' : 'Is a tertiary institution' }}
-			</IonLabel>
+			</label>
 		</div>
 
 		<div class="flex w-full mt-8 items-center gap-6">
@@ -26,11 +26,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { InstitutionFactory } from '@modules/study'
-import { IonLabel, IonToggle } from '@ionic/vue'
+import { IonToggle } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'InstitutionForm',
-	components: { IonToggle, IonLabel },
+	components: { IonToggle },
 	props: {
 		factory: {
 			type: InstitutionFactory,
@@ -58,7 +58,7 @@ export default defineComponent({
 		border-radius: 0.25rem !important;
 	}
 
-	ion-label {
+	label {
 		font-size: 1.2rem;
 		font-weight: 500;
 	}

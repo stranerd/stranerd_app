@@ -1,10 +1,13 @@
 <template>
 	<Justified>
-		<NoteForm :error="error" :factory="factory" :loading="loading" :submit="createNote" class="p-4 md:p-8 bg-white">
-			<template v-slot:buttonText>
-				Add Note
-			</template>
-		</NoteForm>
+		<div class="p-4 lg:w-8/12 w-full mx-auto">
+			<NoteForm :error="error" :factory="factory" :loading="loading" :submit="createNote"
+				class="p-4 md:p-8 bg-white">
+				<template v-slot:buttonText>
+					Add Note
+				</template>
+			</NoteForm>
+		</div>
 	</Justified>
 </template>
 
