@@ -15,6 +15,7 @@ import { useGoogleSignin } from '@app/composable/auth/signin'
 import { IonButton, IonIcon } from '@ionic/vue'
 import { logoGoogle } from 'ionicons/icons'
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth'
+import { isWeb } from '@utils/constants'
 
 export default defineComponent({
 	name: 'AuthProviders',
@@ -34,7 +35,7 @@ export default defineComponent({
 		}
 
 		onMounted(async () => {
-			await GoogleAuth.init()
+			if (isWeb) await GoogleAuth.init()
 		})
 
 		return { loading, error, logoGoogle, loginWithGoogle }
