@@ -7,7 +7,6 @@
 						Explore thousands of study materials
 					</ion-text>
 					<ion-searchbar v-model.trim="searchTerm"
-						:disabled="loading"
 						class="lg:w-7/12 w-11/12 mb-8 mt-5 lg:mt-0"
 						placeholder="Search for anything..."
 						showCancelButton="never"
@@ -46,7 +45,6 @@
 				<slot />
 			</div>
 		</div>
-		<PageLoading v-if="loading" />
 	</Justified>
 </template>
 
@@ -60,8 +58,8 @@ export default defineComponent({
 	name: 'ExploreWrapper',
 	components: { Justified, IonSearchbar },
 	setup () {
-		const { searchTerm, loading } = useSearch()
-		return { searchTerm, loading }
+		const { searchTerm } = useSearch()
+		return { searchTerm }
 	}
 })
 </script>

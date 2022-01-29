@@ -1,6 +1,6 @@
 .auth {
 	ion-input {
-		--background: #fff !important;
+		--background-color: #fff !important;
 		--padding-start: 1.8rem !important;
 		--padding-end: 1.5rem !important;
 		--padding-top: .69rem !important;
@@ -10,12 +10,12 @@
 		border-radius: 10px;
 
 		@media screen and (max-width: 1024px) {
-			--background: #F7F7FC !important;
+			--background-color: #F7F7FC !important;
 		}
 	}
 
 	ion-button {
-		--background: #546DD3;
+		--background-color: #546DD3;
 		--border-radius: 0.5rem;
 		--color: white;
 		--background-hover: white;

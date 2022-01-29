@@ -22,6 +22,19 @@
 				<div class="mb-16">
 					<div class="w-full flex justify-between mb-4">
 						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text class="mr-3">FlashCards</ion-text>
+							<ion-badge class="uppercase">Latest</ion-badge>
+						</div>
+						<router-link class="text-primary text-body flex items-center font-bold"
+							to="/explore/flashCards">
+							explore
+						</router-link>
+					</div>
+					<FlashCardList :sliced="true" />
+				</div>
+				<div class="mb-16">
+					<div class="w-full flex justify-between mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
 							<ion-text class="mr-3">Notes</ion-text>
 							<ion-badge class="uppercase">Latest</ion-badge>
 						</div>
@@ -42,19 +55,6 @@
 						</router-link>
 					</div>
 					<VideosList :sliced="true" />
-				</div>
-				<div>
-					<div class="w-full flex justify-between mb-4">
-						<div class="heading font-bold text-main_dark flex items-center">
-							<ion-text class="mr-3">FlashCards</ion-text>
-							<ion-badge class="uppercase">Latest</ion-badge>
-						</div>
-						<router-link class="text-primary text-body flex items-center font-bold"
-							to="/explore/flashCards">
-							explore
-						</router-link>
-					</div>
-					<FlashCardList :sliced="true" />
 				</div>
 			</div>
 		</div>

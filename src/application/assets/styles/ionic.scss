@@ -123,7 +123,7 @@ ion-popover {
 }
 
 .ion-bg-white {
-	--background: white !important;
+	--background-color: white !important;
 }
 
 .ion-rounded-xl {
@@ -175,7 +175,7 @@ ion-popover {
 }
 
 ion-searchbar {
-	--background: $color-newGray !important;
+	--background-color: $color-newGray !important;
 	--box-shadow: none !important;
 	--border-radius: .75rem !important;
 	--icon-color: $color-iconInactive;
@@ -339,7 +339,7 @@ ion-toolbar {
 }
 
 ion-badge {
-	--background: $color-yellowStar !important;
+	background-color: $color-yellowStar !important;
 	--color: $color-dark !important;
 	--padding-top: 4px !important;
 }

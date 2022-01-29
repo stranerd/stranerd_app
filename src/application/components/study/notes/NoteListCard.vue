@@ -8,11 +8,17 @@
 			</div>
 			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl cursor-pointer" @click="openMenu" />
 		</div>
-		<router-link :to="`/study/notes/${note.id}`" class="mt-2">
-			<ion-button class="btn-outline text-primary w-full">
-				Start reading
-			</ion-button>
-		</router-link>
+		<div class="w-full flex items-center justify-between">
+			<div class="flex items-center">
+				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
+				<ion-text class="text-xs font-bold text-main_dark ml-2">{{ note.userBio.firstName }}</ion-text>
+			</div>
+			<router-link :to="`/study/notes/${note.id}`">
+				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]">
+					Read
+				</ion-button>
+			</router-link>
+		</div>
 	</div>
 </template>
 

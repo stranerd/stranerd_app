@@ -41,7 +41,7 @@
 				</div>
 			</template>
 		</template>
-		<span v-if="canEdit && type === 'flashCards'" class="my-4 flex gap-4 items-center" @click="editEntity">
+		<span v-if="canEdit" class="my-4 flex gap-4 items-center" @click="editEntity">
 			<ion-icon :icon="pencil" class="text-2xl" />
 			<ion-label class="font-bold">Edit</ion-label>
 		</span>
@@ -81,6 +81,7 @@ import { useMySets, useSaveToSet } from '@app/composable/study/sets'
 import { openFlashCardEditModal } from '@app/composable/study/flashCards'
 import { useRouter } from 'vue-router'
 import { openNoteEditModal } from '@root/application/composable/study/notes'
+import { openTestPrepEditModal } from '@app/composable/study/testPreps'
 
 export default defineComponent({
 	name: 'StudyEntityMenu',
@@ -110,6 +111,7 @@ export default defineComponent({
 		const editEntity = async () => {
 			if (type.value === 'flashCards') await openFlashCardEditModal(entity.value as any, router)
 			if (type.value === 'notes') await openNoteEditModal(entity.value as any, router)
+			if (type.value === 'testPreps') await openTestPrepEditModal(entity.value as any)
 		}
 
 		return {

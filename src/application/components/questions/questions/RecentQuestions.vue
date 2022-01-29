@@ -2,12 +2,8 @@
 	<div>
 		<div class="w-full flex justify-between mb-4">
 			<div class="heading font-bold text-main_dark flex items-center">
-				<ion-text class="mr-3">
-					Questions
-				</ion-text>
-				<ion-badge class="uppercase">
-					Latest
-				</ion-badge>
+				<ion-text class="mr-3">Questions</ion-text>
+				<ion-badge class="uppercase">Latest</ion-badge>
 			</div>
 
 			<router-link class="text-primary text-body flex items-center font-bold" to="/questions">
