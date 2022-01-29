@@ -160,10 +160,7 @@ export default defineComponent({
 	}
 
 	ion-input, ion-textarea {
-		--placeholder-opacity: 1;
-		--placeholder-color: #8B9EB1;
 		--border-width: 1px !important;
 		--border-style: solid !important;
-		--border-color: #8B9EB1 !important;
 	}
 </style>
