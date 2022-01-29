@@ -1,14 +1,14 @@
 <template>
 	<div
-		class="w-full rounded-xl bg-white flex flex-col items-center justify-center py-6 px-5 md:py-8 gap-3 text-center text-body text-main_dark">
-		<p :class="infoClass" v-html="info" />
+		class="w-full rounded-xl bg-white flex flex-col items-center justify-center p-4 md:py-8 gap-3 text-center text-body text-main_dark">
+		<p :class="infoClass" v-html="info" class="text-body"/>
 		<slot>
 			<router-link v-if="btnText && route" :class="btnTextClass" :to="route"
-				class="py-3 px-7 border border-solid border-faded_gray text-gray font-bold text-base rounded-xl">
+				class="py-3 px-7 border border-solid border-faded_gray text-gray font-bold  rounded-xl">
 				{{ btnText }}
 			</router-link>
 			<ion-button v-else-if="btnText && onClick"
-				class="py-3 px-7 border border-solid border-faded_gray text-gray font-bold text-base rounded-xl"
+				class="py-3 px-7 border border-solid border-faded_gray text-gray font-bold  rounded-xl"
 				@click="onClick(funcParams)">
 				{{ btnText }}
 			</ion-button>
