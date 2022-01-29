@@ -166,11 +166,11 @@ ion-popover {
 .searchbar-input {
 	padding-top: 1.05rem !important;
 	padding-bottom: 1.05rem !important;
-	font-size: 1rem;
+	font-size: 0.9rem !important;
 
 	@media (max-width: 640px) {
-		padding-top: 0.7rem !important;
-		padding-bottom: 0.7rem !important;
+		padding-top: 0.6rem !important;
+		padding-bottom: 0.5rem !important;
 	}
 }
 
@@ -188,7 +188,7 @@ ion-searchbar {
 	margin-top: 11px !important;
 
 	@media (max-width: 640px) {
-		margin-top: 7px !important;
+		margin-top: 4px !important;
 	}
 }
 
@@ -355,7 +355,7 @@ ion-input {
 	--border-radius: .75rem;
 	border-radius: .75rem;
 	--icon-color: #8B9EB1;
-	--padding-bottom: 4em;
+	--padding-bottom: 2.5rem;
 }
 
 ion-toolbar {

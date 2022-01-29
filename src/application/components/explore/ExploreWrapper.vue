@@ -8,7 +8,8 @@
 					</ion-text>
 					<ion-searchbar v-model.trim="searchTerm"
 						:disabled="loading"
-						class="lg:w-7/12 w-11/12 mb-8 mt-5 lg:mt-0"
+						mode="md"
+						class="lg:w-7/12 w-11/12 mb-3 mt-5 lg:mt-0"
 						placeholder="Search for anything..."
 						showCancelButton="never"
 					/>

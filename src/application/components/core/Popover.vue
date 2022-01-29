@@ -14,6 +14,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	.popover {
-		min-width: 15rem;
+		min-width: 12.3rem;
 	}
 </style>

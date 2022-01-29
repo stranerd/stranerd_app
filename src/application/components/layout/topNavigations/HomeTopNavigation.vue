@@ -37,18 +37,14 @@
 			class="lg:hidden bg-white px-4 border-0 h-12 flex items-center justify-center"
 		>
 			<div class="flex items-center justify-between">
-				<template v-if="showSearch">
-					<search-bar />
-				</template>
-				<template v-else>
-					<span class="cursor-pointer" @click="toggleMenu">
-						<ion-icon :icon="show ? close : menu" size="100px" />
-					</span>
-					<router-link class="flex items-center" to="/">
-						<Logo :secondary="!show" />
-					</router-link>
-				</template>
-				<IonIcon :icon="showSearch ? close : search" class="text-xl ml-4" @click="toggleSearch" />
+			
+				<span class="cursor-pointer" @click="toggleMenu">
+					<ion-icon :icon="show ? close : menu" size="100px" />
+				</span>
+				<router-link class="flex items-center" to="/">
+					<Logo :secondary="!show" />
+				</router-link>
+				<IonIcon :icon="search" class="text-xl ml-4" @click="navigateToSearch" />
 			</div>
 		</ion-toolbar>
 		<div v-if="show" class="grow-1 lg:hidden px-2 flex flex-col text-center mt-8 gap-6 bg-white text-main_dark">
@@ -81,6 +77,7 @@ import Logo from '@app/components/core/Logo.vue'
 import { IonHeader, IonIcon, IonToolbar } from '@ionic/vue'
 import SearchBar from '@app/components/search/SearchBar.vue'
 import { close, menu, search } from 'ionicons/icons'
+import { useSearch } from '@app/composable/meta/search'
 
 export default defineComponent({
 	components: { Logo, IonIcon, IonHeader, IonToolbar, SearchBar },
@@ -91,13 +88,11 @@ export default defineComponent({
 			show.value ? enableScroll() : disableScroll()
 			show.value = !show.value
 		}
-		const showSearch = ref(false)
-		const toggleSearch = () => {
-			showSearch.value = !showSearch.value
-		}
+		const { navigateToSearch } = useSearch()
+
 		return {
-			show, toggleMenu, showSearch,
-			toggleSearch, menu, close, search
+			show, toggleMenu,  navigateToSearch,
+			 menu, close, search
 		}
 	}
 })
