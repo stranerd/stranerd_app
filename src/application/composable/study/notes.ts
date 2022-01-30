@@ -12,7 +12,7 @@ import {
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { Router } from 'vue-router'
+import { Router, useRouter } from 'vue-router'
 
 const global = {
 	notes: ref([] as NoteEntity[]),
@@ -79,14 +79,16 @@ export const useCreateNote = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
+	const router = useRouter()
 
 	const createNote = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddNote.call(factory.value)
+				const noteId = await AddNote.call(factory.value)
 				await setMessage('Note submitted successfully')
+				await router.push(`/study/notes/${noteId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -108,6 +110,7 @@ export const useEditNote = (noteId: string) => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
+	const router = useRouter()
 	const factory = ref(new NoteFactory()) as Ref<NoteFactory>
 	if (editingNote) factory.value.loadEntity(editingNote)
 
@@ -117,7 +120,8 @@ export const useEditNote = (noteId: string) => {
 			try {
 				await setLoading(true)
 				await EditNote.call(noteId, factory.value)
-				await setMessage('Note edited successfully')
+				await setMessage('Note updated successfully')
+				await router.push(`/study/notes/${noteId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

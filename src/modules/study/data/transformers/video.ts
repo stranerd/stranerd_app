@@ -4,16 +4,17 @@ import { VideoEntity } from '../../domain/entities/video'
 export class VideoTransformer {
 	fromJSON (model: VideoFromModel) {
 		const {
-			id, userId, isHosted, media, description, preview,
+			id, userId, isHosted, media, description, preview, isPublic,
 			link, userBio, title, tags, createdAt, updatedAt
 		} = model
 		return new VideoEntity({
-			id, userId, isHosted, media, preview, description, link, userBio, title, tags, createdAt, updatedAt
+			id, userId, isHosted, media, preview, description, link, userBio, title, tags, createdAt, updatedAt, isPublic
 		})
 	}
 
 	toJSON (entity: VideoEntity): VideoToModel {
 		return {
+			isPublic: entity.isPublic,
 			isHosted: entity.isHosted,
 			media: entity.media,
 			preview: entity.preview,

@@ -206,12 +206,6 @@ ion-input, ion-textarea, ion-select {
 	--placeholder-opacity: 1;
 }
 
-
-ion-input {
-	--padding-bottom: 2.5rem;
-}
-
-
 .btn-secondary {
 	--background: $color-sub;
 	--color: $color-white;
@@ -324,12 +318,12 @@ ion-input {
 }
 
 .btn-white {
-	--background: $color-white;
+	--background: white;
 	--padding-top: 1.4rem;
 	--padding-bottom: 1.4rem;
 	--padding-start: 2rem;
 	--padding-end: 2rem;
-	--color: $color-primary !important;
+	color: $color-primary;
 	--box-shadow: none;
 	--border-radius: 0.5rem;
 	box-shadow: none;
@@ -339,34 +333,14 @@ ion-input {
 	letter-spacing: 0.02rem !important;
 
 	@media (max-width: 640px) {
-		--background: transparent;
 		--padding-top: 0.85rem;
 		--padding-bottom: 0.85rem;
 		--padding-start: 1.25rem;
 		--padding-end: 1.25rem;
-		--color: inherit !important;
 		--box-shadow: none;
 		--border-radius: 0.75rem;
 		box-shadow: none;
 		border-radius: 0.75rem;
-		font-weight: 700;
-		text-transform: capitalize !important;
-		letter-spacing: 0.02rem !important;
-	}
-}
-
-.btn-white-sm {
-	@media (max-width: 640px) {
-		--background: $color-white;
-		--padding-top: 1.25rem;
-		--padding-bottom: 1.25rem;
-		--padding-start: 1.25rem;
-		--padding-end: 1.25rem;
-		--color: $color-primary !important;
-		--box-shadow: none;
-		--border-radius: 0.5rem;
-		box-shadow: none;
-		border-radius: 0.5rem;
 		font-weight: 700;
 		text-transform: capitalize !important;
 		letter-spacing: 0.02rem !important;

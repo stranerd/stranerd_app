@@ -4,10 +4,10 @@ import {
 	isArrayOfX,
 	isBoolean,
 	isExtractedHTMLLongerThanX,
-	isFile,
 	isImage,
 	isRequiredIfX,
-	isString
+	isString,
+	isVideo
 } from '@stranerd/validate'
 import { BaseFactory, Media } from '@modules/core'
 import { VideoEntity } from '../entities/video'
@@ -15,7 +15,7 @@ import { VideoToModel } from '../../data/models/video'
 
 type Content = File | Media
 type Keys = {
-	title: string, description: string, tags: string[],
+	title: string, description: string, tags: string[], isPublic: boolean,
 	isHosted: boolean, media: Content | null, link: string | null, preview: Content | null
 }
 
@@ -27,16 +27,26 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 			required: true,
 			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings'), hasMoreThanX(0), hasLessThanX(4)]
 		},
+		isPublic: { required: false, rules: [isBoolean] },
 		isHosted: { required: false, rules: [isBoolean] },
 		link: { required: false, rules: [isRequiredIfX(!this.isHosted), isString] },
 		preview: { required: true, rules: [isImage] },
-		media: { required: false, rules: [isRequiredIfX(this.isHosted), isFile] }
+		media: { required: false, rules: [isRequiredIfX(this.isHosted), isVideo] }
 	}
 
 	reserved = []
 
 	constructor () {
-		super({ title: '', description: '', isHosted: true, tags: [], media: null, link: null, preview: null })
+		super({
+			title: '',
+			description: '',
+			isHosted: true,
+			tags: [],
+			media: null,
+			link: null,
+			preview: null,
+			isPublic: true
+		})
 	}
 
 	get title () {
@@ -53,6 +63,14 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 
 	set description (value: string) {
 		this.set('description', value)
+	}
+
+	get isPublic () {
+		return this.values.isPublic
+	}
+
+	set isPublic (value: boolean) {
+		this.set('isPublic', value)
 	}
 
 	get isHosted () {
@@ -105,6 +123,7 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 	loadEntity = (entity: VideoEntity) => {
 		this.title = entity.title
 		this.description = entity.description
+		this.isPublic = entity.isPublic
 		this.isHosted = entity.isHosted
 		this.link = entity.link
 		this.media = entity.media
@@ -118,8 +137,17 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 			if (this.preview instanceof File) this.preview = await this.uploadFile('video-previews', this.preview)
 			if (this.isHosted) this.link = null
 			else this.media = null
-			const { title, description, isHosted, link, media, tags, preview } = this.validValues
-			return { title, description, isHosted, link, media: media as Media | null, tags, preview: preview as Media }
+			const { title, description, isHosted, link, media, tags, preview, isPublic } = this.validValues
+			return {
+				title,
+				description,
+				isHosted,
+				link,
+				media: media as Media | null,
+				tags,
+				preview: preview as Media,
+				isPublic
+			}
 		} else {
 			throw new Error('Validation errors')
 		}

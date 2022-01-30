@@ -53,7 +53,7 @@
 			<ion-icon :icon="shareIcon" class="text-2xl" />
 			<ion-label class="font-bold">Share</ion-label>
 		</span>
-		<router-link v-if="entity?.userId !== id && type === 'flashCards'" :to="`/users/${entity?.userId ?? ''}`"
+		<router-link v-if="entity?.userId !== id && type !== 'testPreps'" :to="`/users/${entity?.userId ?? ''}`"
 			class="my-4 flex gap-4 items-center">
 			<ion-icon :icon="person" class="text-2xl" />
 			<ion-label class="font-bold">Go To Author</ion-label>

@@ -13,6 +13,7 @@ export interface NoteToModel {
 	title: string
 	description: string
 	tags: string[]
+	isPublic: boolean
 	isHosted: boolean
 	link: string | null
 	media: Media | null

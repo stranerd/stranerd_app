@@ -5,7 +5,7 @@
 			All questions
 		</ion-text>
 		<router-link to="/questions/create">
-			<ion-button class="btn-white btn-white-sm font-bold">
+			<ion-button class="btn-white font-bold">
 				Ask a question
 			</ion-button>
 		</router-link>

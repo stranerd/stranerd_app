@@ -6,8 +6,10 @@ import {
 	isExtractedHTMLLongerThanX,
 	isFile,
 	isImage,
+	isInvalid,
 	isRequiredIfX,
-	isString
+	isString,
+	isValid
 } from '@stranerd/validate'
 import { BaseFactory, Media } from '@modules/core'
 import { NoteEntity } from '@modules/study'
@@ -15,9 +17,11 @@ import { NoteToModel } from '../../data/models/note'
 
 type Content = File | Media
 type Keys = {
-	title: string, description: string, tags: string[],
+	title: string, description: string, tags: string[], isPublic: boolean,
 	isHosted: boolean, media: Content | null, link: string | null, preview: Content | null
 }
+
+const docFormats = ['application/pdf']
 
 export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 	readonly rules = {
@@ -27,16 +31,30 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 			required: true,
 			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings'), hasMoreThanX(0), hasLessThanX(4)]
 		},
+		isPublic: { required: false, rules: [isBoolean] },
 		isHosted: { required: false, rules: [isBoolean] },
 		link: { required: false, rules: [isRequiredIfX(!this.isHosted), isString] },
 		preview: { required: true, rules: [isImage] },
-		media: { required: false, rules: [isRequiredIfX(this.isHosted), isFile] }
+		media: {
+			required: false, rules: [isRequiredIfX(this.isHosted), isFile, (val: any) => {
+				return docFormats.includes(val.type) ? isValid() : isInvalid('only pdf files are allowed')
+			}]
+		}
 	}
 
 	reserved = []
 
 	constructor () {
-		super({ title: '', description: '', isHosted: true, tags: [], media: null, link: null, preview: null })
+		super({
+			title: '',
+			description: '',
+			isPublic: true,
+			isHosted: true,
+			tags: [],
+			media: null,
+			link: null,
+			preview: null
+		})
 	}
 
 	get title () {
@@ -63,6 +81,14 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 		this.set('isHosted', value)
 		if (value) this.link = null
 		else this.media = null
+	}
+
+	get isPublic () {
+		return this.values.isPublic
+	}
+
+	set isPublic (value: boolean) {
+		this.set('isPublic', value)
 	}
 
 	get tags () {
@@ -105,6 +131,7 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 	loadEntity = (entity: NoteEntity) => {
 		this.title = entity.title
 		this.description = entity.description
+		this.isPublic = entity.isPublic
 		this.isHosted = entity.isHosted
 		this.link = entity.link
 		this.media = entity.media
@@ -118,8 +145,17 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 			if (this.preview instanceof File) this.preview = await this.uploadFile('note-previews', this.preview)
 			if (this.isHosted) this.link = null
 			else this.media = null
-			const { title, description, isHosted, link, media, tags, preview } = this.validValues
-			return { title, description, isHosted, link, media: media as Media | null, tags, preview: preview as Media }
+			const { title, description, isHosted, link, media, tags, preview, isPublic } = this.validValues
+			return {
+				title,
+				description,
+				isHosted,
+				link,
+				media: media as Media | null,
+				tags,
+				preview: preview as Media,
+				isPublic
+			}
 		} else {
 			throw new Error('Validation errors')
 		}

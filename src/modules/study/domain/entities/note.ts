@@ -8,6 +8,7 @@ export class NoteEntity extends BaseEntity {
 	public readonly tags: string[]
 	public readonly userId: string
 	public readonly userBio: UserBio
+	public readonly isPublic: boolean
 	public readonly isHosted: boolean
 	public readonly link: string | null
 	public readonly media: Media | null
@@ -22,6 +23,7 @@ export class NoteEntity extends BaseEntity {
 		             tags,
 		             userId,
 		             userBio,
+		             isPublic,
 		             isHosted,
 		             link,
 		             media,
@@ -36,6 +38,7 @@ export class NoteEntity extends BaseEntity {
 		this.tags = tags
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
+		this.isPublic = isPublic
 		this.isHosted = isHosted
 		this.link = link
 		this.media = media
@@ -47,6 +50,7 @@ export class NoteEntity extends BaseEntity {
 
 type NoteConstructorArgs = {
 	id: string,
+	isPublic: boolean
 	isHosted: boolean
 	link: string | null
 	media: Media | null
