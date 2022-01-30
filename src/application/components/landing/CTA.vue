@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full relative bg-primary h-screen flex justify-between items-center lg:py-32 py-10 ">
+	<div class="w-full relative bg-primary  flex justify-between items-start lg:py-32 py-10 pb-20 ">
 		<div class="flex flex-col lg:flex-row justify-center items-center mx-auto max-w-[120rem] w-full px-6">
 			<div
 				class="lg:w-6/12 w-full h-auto flex flex-col lg:items-start items-center lg:text-left text-center gap-3">

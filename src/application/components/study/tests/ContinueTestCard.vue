@@ -1,6 +1,6 @@
 <template>
 	<router-link
-		:class="`m-0 min-w-[16.5rem] bg-white w-full rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border p-6`"
+		:class="`m-0 min-w-[16.5rem] bg-white w-full rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border p-4`"
 		:to="`/study/tests/${test.id}/take`">
 		<div class="flex flex-col items-center justify-between w-full mx-auto capitalize">
 			<div class="w-full flex justify-between items-center">
@@ -9,7 +9,7 @@
 						:institutionId="testPrep.data.institutionId" />
 					<span v-else>{{ test.name }}</span>
 				</ion-text>
-				<ion-icon :icon="arrowForward" class="text-3xl text-gray" />
+				<ion-icon :icon="arrowForward" class="text-2xl text-gray" />
 			</div>
 
 			<ion-text class="text-base text-left w-full text-gray">

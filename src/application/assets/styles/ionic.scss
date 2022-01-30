@@ -175,7 +175,7 @@ ion-popover {
 }
 
 ion-searchbar {
-	--background-color: $color-newGray !important;
+	--background-color: white !important;
 	--box-shadow: none !important;
 	--border-radius: .75rem !important;
 	--icon-color: $color-iconInactive;
@@ -402,3 +402,4 @@ ion-segment-button {
 ion-select::part(icon) {
 	content: url('../../assets/images/icons/down.svg');
 }
+

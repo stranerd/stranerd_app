@@ -2,11 +2,11 @@
 	<div :class="`m-0 w-full bg-white rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border p-4`">
 		<div class="w-full justify-between items-start flex">
 			<img :src="note.preview.link"
-				class="bg-faded_gray h-[5.375rem] w-[4.5rem] rounded-md object-cover" />
+				class="bg-faded_gray h-[4rem] w-[4rem] rounded-md object-cover" />
 			<div class="text-base text-main_dark font-bold text-left flex-col flex ml-4 flex-grow">
 				<ion-text>{{ note.title }}</ion-text>
 			</div>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl cursor-pointer" @click="openMenu" />
+			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl cursor-pointer" @click="openMenu" />
 		</div>
 		<div class="w-full flex items-center justify-between">
 			<div class="flex items-center">
@@ -14,7 +14,7 @@
 				<ion-text class="text-xs font-bold text-main_dark ml-2">{{ note.userBio.firstName }}</ion-text>
 			</div>
 			<router-link :to="`/study/notes/${note.id}`">
-				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]">
+				<ion-button  class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]">
 					Read
 				</ion-button>
 			</router-link>
