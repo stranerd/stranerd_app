@@ -166,11 +166,11 @@ ion-popover {
 .searchbar-input {
 	padding-top: 1.05rem !important;
 	padding-bottom: 1.05rem !important;
-	font-size: 1rem;
+	font-size: 0.9rem !important;
 
 	@media (max-width: 640px) {
-		padding-top: 0.7rem !important;
-		padding-bottom: 0.7rem !important;
+		padding-top: 0.6rem !important;
+		padding-bottom: 0.5rem !important;
 	}
 }
 
@@ -188,7 +188,7 @@ ion-searchbar {
 	margin-top: 11px !important;
 
 	@media (max-width: 640px) {
-		margin-top: 7px !important;
+		margin-top: 4px !important;
 	}
 }
 
@@ -205,6 +205,12 @@ ion-input, ion-textarea, ion-select {
 	--border-color: $color-iconInactive !important;
 	--placeholder-opacity: 1;
 }
+
+
+ion-input {
+	--padding-bottom: 2.5rem;
+}
+
 
 .btn-secondary {
 	--background: $color-sub;
@@ -247,6 +253,22 @@ ion-input, ion-textarea, ion-select {
 	font-weight: 700;
 	text-transform: capitalize !important;
 	letter-spacing: 0.02rem !important;
+
+	@media (max-width: 640px) {
+		--background: transparent;
+		--padding-top: 0.85rem;
+		--padding-bottom: 0.85rem;
+		--padding-start: 1.25rem;
+		--padding-end: 1.25rem;
+		--color: inherit !important;
+		--box-shadow: none;
+		--border-radius: 0.75rem;
+		box-shadow: none;
+		border-radius: 0.75rem;
+		font-weight: 700;
+		text-transform: capitalize !important;
+		letter-spacing: 0.02rem !important;
+	}
 }
 
 .btn-outline-sm {
@@ -283,6 +305,22 @@ ion-input, ion-textarea, ion-select {
 	font-weight: 700;
 	text-transform: capitalize !important;
 	letter-spacing: 0.02rem !important;
+
+	@media (max-width: 640px) {
+		--background: transparent;
+		--padding-top: 0.85rem;
+		--padding-bottom: 0.85rem;
+		--padding-start: 1.25rem;
+		--padding-end: 1.25rem;
+		--color: inherit !important;
+		--box-shadow: none;
+		--border-radius: 0.75rem;
+		box-shadow: none;
+		border-radius: 0.75rem;
+		font-weight: 700;
+		text-transform: capitalize !important;
+		letter-spacing: 0.02rem !important;
+	}
 }
 
 .btn-white {
@@ -299,6 +337,22 @@ ion-input, ion-textarea, ion-select {
 	font-weight: 700;
 	text-transform: capitalize !important;
 	letter-spacing: 0.02rem !important;
+
+	@media (max-width: 640px) {
+		--background: transparent;
+		--padding-top: 0.85rem;
+		--padding-bottom: 0.85rem;
+		--padding-start: 1.25rem;
+		--padding-end: 1.25rem;
+		--color: inherit !important;
+		--box-shadow: none;
+		--border-radius: 0.75rem;
+		box-shadow: none;
+		border-radius: 0.75rem;
+		font-weight: 700;
+		text-transform: capitalize !important;
+		letter-spacing: 0.02rem !important;
+	}
 }
 
 .btn-white-sm {
@@ -359,6 +413,11 @@ ion-segment-button {
 	--padding-bottom: 0.8rem;
 	color: $color-mainDark;
 	font-weight: bold;
+
+	@media (max-width: 640px) {
+		--padding-top: 0.5rem;
+		--padding-bottom: 0.5rem;
+	}
 }
 
 .segment-button-checked {

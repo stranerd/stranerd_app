@@ -7,7 +7,8 @@
 						Explore thousands of study materials
 					</ion-text>
 					<ion-searchbar v-model.trim="searchTerm"
-						class="lg:w-7/12 w-11/12 mb-8 mt-5 lg:mt-0"
+						class="lg:w-7/12 w-11/12 mb-3 mt-5 lg:mt-0"
+						mode="md"
 						placeholder="Search for anything..."
 						showCancelButton="never"
 					/>
