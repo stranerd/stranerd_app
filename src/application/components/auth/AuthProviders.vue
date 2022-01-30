@@ -30,7 +30,9 @@ export default defineComponent({
 				await GoogleAuth.signOut()
 				await signin(token)
 			} catch (error: any) {
-				await setError(error.message ?? 'Error signing in with google')
+				// eslint-disable-next-line no-console
+				console.log(error)
+				await setError('Error signing in with google')
 			}
 		}
 
