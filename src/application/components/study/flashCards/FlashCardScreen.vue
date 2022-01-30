@@ -3,13 +3,13 @@
 		:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 ']">
 
 		<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full']" @click="flipped = !flipped">
-			<section v-if="!flipped"
+			<section
 				class="front h-96 overflow-y-auto flex text-center custom-shadow w-full text-2xl p-4 max-w-[60rem] mx-auto bg-white">
 				<DisplayHtml :html="flashCard.set[page].question" class="w-full my-auto" />
 			</section>
 
-			<section v-if="flipped"
-				class="back h-96 overflow-y-auto flex text-center custom-shadow w-full text-2xl p-4 max-w-[60rem] mx-auto bg-white">
+			<section
+				class="back h-96 overflow-y-auto flex text-center custom-shadow w-full text-2xl p-4 max-w-[60rem] mx-auto bg-white absolute">
 				<DisplayHtml :html="flashCard.set[page].answer" class="w-full my-auto" />
 			</section>
 		</div>
