@@ -1,7 +1,7 @@
 <template>
 	<DashboardLayout>
 		<div>
-			<div v-if="isLoggedIn" class="md:px-4 md:pt-8 pb-24 md:pb-12">
+			<div v-if="isLoggedIn" class="md:px-4 md:pt-8 pb-20 md:pb-12">
 				<StatusBar />
 			</div>
 			<div class="p-4">

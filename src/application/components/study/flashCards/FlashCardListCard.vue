@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="m-0 h-[11rem] !w-full bg-white rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border justify-between p-4">
+		class="m-0 min-h-[7rem] !w-full bg-white rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border justify-between p-4">
 		<div class="w-full justify-between items-start flex">
 			<div class="flex flex-col items-start">
 				<ion-text class="font-bold text-base text-main_dark">{{ flashCard.title }}</ion-text>
@@ -15,7 +15,7 @@
 					</template>
 				</Tag>
 			</div>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl cursor-pointer" @click="openMenu" />
+			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl cursor-pointer" @click="openMenu" />
 		</div>
 
 		<div class="w-full flex items-center justify-between">
