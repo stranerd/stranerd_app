@@ -23,7 +23,7 @@
 							@click="openUserDashboardMenu"
 						>
 							<avatar :size="24" :src="user.avatar" />
-							<span class="text-base text-main_dark truncate max-w-[150px]">
+							<span class="text-base text-gray hover:text-main_dark truncate max-w-[150px]">
 								{{ user.fullName }}
 							</span>
 							<ion-icon :icon="chevronDown" class="text-xl text-main_dark"></ion-icon>
