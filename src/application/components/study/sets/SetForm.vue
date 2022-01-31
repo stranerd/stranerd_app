@@ -114,11 +114,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-input {
-		--placeholder-color: #8B9EB1;
-		--placeholder-opacity: 1;
-	}
-
 	ion-radio {
 		--color: #8B9EB1 !important;
 		--color-checked: #546DD3 !important;

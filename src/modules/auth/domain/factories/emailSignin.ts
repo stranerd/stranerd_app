@@ -7,7 +7,7 @@ type Keys = { email: string, password: string }
 export class EmailSigninFactory extends BaseFactory<null, AuthUser, Keys> {
 	readonly rules = {
 		email: { required: true, rules: [isEmail] },
-		password: { required: true, rules: [isString, isLongerThanX(5), isShorterThanX(17)] }
+		password: { required: true, rules: [isString, isLongerThanX(7), isShorterThanX(17)] }
 	}
 
 	reserved = []

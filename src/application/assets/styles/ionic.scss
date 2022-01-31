@@ -175,9 +175,11 @@ ion-popover {
 }
 
 ion-searchbar {
-	--background-color: $color-newGray !important;
+	--background: $color-newGray !important;
+	background: $color-newGray !important;
 	--box-shadow: none !important;
 	--border-radius: .75rem !important;
+	border-radius: .75rem !important;
 	--icon-color: $color-iconInactive;
 	--color: $color-mainDark;
 	--placeholder-color: $color-iconInactive;
@@ -196,6 +198,8 @@ ion-input, ion-textarea, ion-select {
 	--padding-start: 1rem !important;
 	--padding-end: 1rem !important;
 	--color: $color-mainDark !important;
+	color: $color-mainDark !important;
+	--background: $color-newGray !important;
 	background-color: $color-newGray !important;
 	--box-shadow: none;
 	--border-radius: .75rem;
