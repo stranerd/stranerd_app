@@ -46,7 +46,8 @@
 			</div>
 
 			<div class="p-4 lg:w-7/12 w-full mx-auto showcase">
-				<TestPrepListCard v-for="prep in preps" :key="prep.hash" :openMenu="openMenu" :testPrep="prep" />
+				<TestPrepListCard v-for="prep in preps" :key="prep.hash" :openMenu="(ev) => openMenu(prep, ev)"
+					:testPrep="prep" />
 			</div>
 			<div class="p-4 lg:w-7/12 w-full mx-auto">
 				<EmptyState v-if="!loading && !error && preps.length === 0"

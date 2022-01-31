@@ -30,7 +30,7 @@ export const openStudyEntityMenu = (entity: typeof global['entity']['value'], da
 export const useStudyMenuData = () => {
 	const type = global.type.value === 'testPreps' ? 'preps' : global.type.value
 	const shareLink = computed({
-		get: () => `/study/${type}/${global.entity.value?.id}`,
+		get: () => `/study/${type}/${global.entity.value instanceof TestPrepEntity ? global.entity.value.data.institutionId : global.entity.value?.id}`,
 		set: () => {
 		}
 	})

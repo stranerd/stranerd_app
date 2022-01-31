@@ -13,13 +13,13 @@
 				</span>
 			</template>
 
-			<template v-if="normalSets.filter((s) => !s.saved[type].includes(entity?.id)).length">
+			<template v-if="normalSets.filter((s) => !s.saved[type]?.includes(entity?.id)).length">
 				<span class="my-4 flex gap-4 items-center" @click="showAddToSet = !showAddToSet">
 					<ion-icon :icon="showAddToSet ? chevronUp : folder" class="text-2xl" />
 					<ion-label class="font-bold">Add To Study Set</ion-label>
 				</span>
 				<div v-if="showAddToSet" class="ml-6 mb-4">
-					<span v-for="set in normalSets.filter((s) => !s.saved[type].includes(entity?.id))" :key="set.hash"
+					<span v-for="set in normalSets.filter((s) => !s.saved[type]?.includes(entity?.id))" :key="set.hash"
 						class="mb-4 flex gap-4 items-center" @click="saveToSet(type, entity?.id, set)">
 						<ion-icon :icon="folder" class="text-xl" />
 						<ion-label class="font-bold">{{ set.name }}</ion-label>
@@ -27,13 +27,13 @@
 				</div>
 			</template>
 
-			<template v-if="normalSets.filter((s) => s.saved[type].includes(entity?.id)).length">
+			<template v-if="normalSets.filter((s) => s.saved[type]?.includes(entity?.id)).length">
 				<span class="my-4 flex gap-4 items-center" @click="showRemoveFromSet = !showRemoveFromSet">
 					<ion-icon :icon="showRemoveFromSet ? chevronUp : removeCircle" class="text-2xl" />
 					<ion-label class="font-bold">Remove From Study Set</ion-label>
 				</span>
 				<div v-if="showRemoveFromSet" class="ml-6 mb-4">
-					<span v-for="set in normalSets.filter((s) => s.saved[type].includes(entity?.id))" :key="set.hash"
+					<span v-for="set in normalSets.filter((s) => s.saved[type]?.includes(entity?.id))" :key="set.hash"
 						class="mb-4 flex gap-4 items-center" @click="removeFromSet(type, entity?.id, set)">
 						<ion-icon :icon="folder" class="text-xl" />
 						<ion-label class="font-bold">{{ set.name }}</ion-label>

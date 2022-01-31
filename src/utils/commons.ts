@@ -64,7 +64,7 @@ export const share = async ({ title, text, url }: { title: string, text: string,
 	}).catch(async () => {
 		await copyToClipboard(url)
 		await Notify({
-			title: 'Something went wrong somewhere. The link has been copied to your clipboard instead'
+			title: 'Your device doesnt support the share api. The link has been copied to your clipboard instead'
 		})
 	})
 }
