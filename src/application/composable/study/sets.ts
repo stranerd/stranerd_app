@@ -358,8 +358,8 @@ export const useSaveToSet = () => {
 		try {
 			await setLoading(true)
 			await SaveSetProp.call(set.id, prop, [itemId])
-			await Notify({ title: 'Saved to set successfully' })
 			useMenuPopover().closeStudyEntityMenu()
+			await Notify({ title: 'Saved to set successfully' })
 		} catch (e) {
 			await setError(e)
 		}
@@ -370,15 +370,15 @@ export const useSaveToSet = () => {
 		try {
 			await setLoading(true)
 			await DeleteSetProp.call(set.id, prop, [itemId])
-			await Notify({ title: 'Removed from set successfully' })
 			useMenuPopover().closeStudyEntityMenu()
+			await Notify({ title: 'Removed from set successfully' })
 		} catch (e) {
 			await setError(e)
 		}
 		await setLoading(false)
 		if (setGlobal[set.id]) {
 			//@ts-ignore
-			setGlobal[set.id][prop].value = setGlobal[set.id][prop].value.filter((item) => item.id === itemId)
+			setGlobal[set.id][prop].value = setGlobal[set.id][prop].value.filter((item) => item.id !== itemId)
 		}
 	}
 
