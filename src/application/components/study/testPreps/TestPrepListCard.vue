@@ -9,7 +9,7 @@
 		</div>
 		<IonText class="text-gray font-bold">
 			<Course :courseId="testPrep.data.courseId" />
-			({{ testPrep.data.year }})
+			({{ testPrep.data.questionType }} {{ testPrep.data.year }})
 		</IonText>
 
 		<div class="w-full flex items-center justify-between gap-3 mt-auto">

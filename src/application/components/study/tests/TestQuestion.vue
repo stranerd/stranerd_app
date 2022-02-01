@@ -18,7 +18,7 @@
 			<PhotoList v-if="question.questionMedia.length" :photos="question.questionMedia" />
 		</div>
 
-		<div class="answers flex flex-col w-full">
+		<div v-if="question.isObjective" class="answers flex flex-col w-full">
 			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
 				class="w-full hover:bg-light_gray py-3"
 				@click="answer(question.id, optionIndex)">
@@ -41,7 +41,7 @@
 			</div>
 		</div>
 
-		<template v-if="showAnswers">
+		<template v-if="showAnswers && question.isObjective">
 			<span v-if="isCorrect"
 				class="rounded-md text-white bg-[#00D246] p-2 px-4">
 				Nice, you are correct
@@ -56,11 +56,20 @@
 				</span>
 
 				<div v-if="showExplanation">
-					<span class="block mb-2">{{ question.data.explanation }}</span>
+					<IonText class="block mb-2">
+						<DisplayHtml :html="question.data.explanation" />
+					</IonText>
 					<PhotoList v-if="question.data.explanationMedia.length" :photos="question.data.explanationMedia" />
 				</div>
 			</template>
 		</template>
+
+		<div v-if="!question.isObjective">
+			<IonText class="block mb-2">
+				<DisplayHtml :html="question.data.answer" />
+			</IonText>
+			<PhotoList v-if="question.data.answerMedia.length" :photos="question.data.answerMedia" />
+		</div>
 
 		<span v-if="error" class="text-danger my-4">{{ error }}</span>
 
