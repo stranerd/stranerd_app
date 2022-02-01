@@ -361,7 +361,9 @@ ion-input, ion-textarea, ion-select {
 
 ion-popover::part(content) {
 	width: auto !important;
+	@media (max-width: 640px) {
 	margin-left: -1.2rem;
+	}
 }
 
 ion-toolbar {
