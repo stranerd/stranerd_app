@@ -1,23 +1,23 @@
 <template>
 	<Justified>
 		<div v-if="flashCard" class="blueTop py-2">
-			<div class="flex items-center justify-between lg:w-8/12 w-full max-w-[60rem] mx-auto p-4">
+			<div class="flex items-center md:justify-between justify-center lg:w-8/12 w-full max-w-[60rem] mx-auto p-4">
 				<div>
 					<ion-text class="heading lg:text-xl font-bold text-white text-center">
 						{{ flashCard.title }}
 					</ion-text>
-					<div class="flex items-center mt-2">
+					<div class="flex items-center md:justify-start justify-center  mt-2">
 						<Avatar :id="flashCard.userId" :size="28" :src="flashCard.userBio.photo" color="#C7D6E3" />
 						<ion-text class="text-white ml-2 text-base"> by <b>{{ flashCard.userBio.fullName }}</b>
 						</ion-text>
 					</div>
 				</div>
 
-				<div class="flex items-center text-white font-bold">
+				<div class="items-center text-white font-bold hidden md:flex">
 					<div class="flex items-center lg:mr-8 mr-2" @click="cardMode = !cardMode">
 						<ion-icon
 							:icon="!cardMode ? copy: list"
-							class="text-white text-xl cursor-pointer lg:mr-2 lg:mt-0"
+							class="text-white text-xl cursor-pointer md:mr-2 md:mt-0"
 						/>
 						<ion-text class="hidden md:flex">
 							{{ !cardMode ? 'Card mode' : 'List mode' }}
@@ -29,8 +29,36 @@
 						@click="openMenu"
 					/>
 				</div>
+			
 			</div>
+
+		
 		</div>
+
+		<div class="w-full bg-white flex items-center justify-between text-gray p-4 -mt-8 rounded-b-xl">
+			<div class="flex items-center lg:mr-8 mr-2" @click="cardMode = !cardMode">
+				<ion-icon
+					:icon="!cardMode ? copy: list"
+					class="text-gray text-xl cursor-pointer mr-3"
+				/>
+				<ion-text class=" font-medium ">
+					{{ !cardMode ? 'Card mode' : 'List mode' }}
+				</ion-text>
+			</div>
+			<div class="flex items-center lg:mr-8 mr-2">
+				<ion-text class=" font-medium ">
+					Options
+				</ion-text>
+				<ion-icon
+					:icon="ellipsisVertical"
+					class="text-gray text-xl cursor-pointer ml-3"
+					@click="openMenu"
+				/>
+			
+			</div>
+	
+		</div>
+
 
 		<template v-if="flashCard">
 			<FlashCardScreen v-if="cardMode" :flashCard="flashCard" />

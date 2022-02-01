@@ -1,26 +1,26 @@
 <template>
 	<Popover class="flex flex-col">
-		<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark" to="/study/flashCards/create">
+		<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark" to="/study/flashCards/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="flash" class="text-2xl" />
 				<ion-label class="font-bold">Create a flashcard</ion-label>
 			</div>
 		</router-link>
-		<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
+		<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
 			to="/study/notes/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="reader" class="text-2xl" />
 				<ion-label class="font-bold">Upload a note</ion-label>
 			</div>
 		</router-link>
-		<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
+		<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
 			to="/study/sets/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="folder" class="text-2xl" />
 				<ion-label class="font-bold">Create a study set</ion-label>
 			</div>
 		</router-link>
-		<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-main_dark"
+		<router-link class="py-2 my-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
 			to="/questions/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="helpCircle" class="text-3xl" />
