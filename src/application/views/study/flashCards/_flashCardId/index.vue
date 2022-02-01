@@ -35,7 +35,7 @@
 		
 		</div>
 
-		<div class="w-full bg-white flex items-center justify-between text-gray p-4 -mt-8 rounded-b-xl">
+		<div class="w-full bg-white flex md:hidden items-center justify-between text-gray p-4 -mt-8 rounded-b-xl">
 			<div class="flex items-center lg:mr-8 mr-2" @click="cardMode = !cardMode">
 				<ion-icon
 					:icon="!cardMode ? copy: list"
