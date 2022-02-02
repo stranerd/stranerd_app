@@ -1,6 +1,6 @@
 <template>
 	<div :id="question.id"
-		class="p-6 rounded-xl bg-white flex flex-col w-full text-xs md:text-sm relative cursor-pointer mt-4">
+		class="p-4 md:p-6 rounded-xl bg-white flex flex-col w-full text-xs md:text-sm relative cursor-pointer">
 		<ion-ripple-effect class="rounded-xl"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
 			<div class=" flex flex-row items-center">

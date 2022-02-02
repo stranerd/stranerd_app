@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="m-0 min-h-[7rem] !w-full bg-white rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border justify-between p-4">
+		class="m-0 min-h-[7rem] !w-full bg-white rounded-xl flex flex-col gap-4 box-border justify-between p-4">
 		<div class="w-full justify-between items-start flex">
 			<div class="flex flex-col items-start">
 				<ion-text class="font-bold text-base text-main_dark">{{ flashCard.title }}</ion-text>
