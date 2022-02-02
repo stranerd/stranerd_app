@@ -1,37 +1,38 @@
 <template>
-	<div id="screen"
-		:class="[isFullscreen ? 'flex items-center justify-center flex-col':'', 'lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16 ']">
+	<div id="screen" class="flex flex-col lg:w-8/12 w-full px-4 mx-auto py-8 gap-8">
+		<Swipe :key="page" :class="[isFullscreen ? 'flex-grow' : '']" @swipeLeft="increase" @swipeRight="increase">
+			<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full h-full']"
+				@click="flipped = !flipped">
+				<section
+					class="front min-h-[50vh] h-full overflow-y-auto flex text-center custom-shadow w-full text-2xl p-4 max-w-[72rem] mx-auto bg-white">
+					<DisplayHtml :html="flashCard.set[page].question" class="w-full my-auto" />
+				</section>
 
-		<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full']" @click="flipped = !flipped">
-			<section
-				class="front h-96 overflow-y-auto flex text-center custom-shadow w-full text-2xl p-4 max-w-[60rem] mx-auto bg-white">
-				<DisplayHtml :html="flashCard.set[page].question" class="w-full my-auto" />
-			</section>
+				<section
+					class="back min-h-[50vh] h-full overflow-y-auto flex text-center custom-shadow w-full text-2xl p-4 max-w-[72rem] mx-auto bg-white absolute">
+					<DisplayHtml :html="flashCard.set[page].answer" class="w-full my-auto" />
+				</section>
+			</div>
+		</Swipe>
 
-			<section
-				class="back h-96 overflow-y-auto flex text-center custom-shadow w-full text-2xl p-4 max-w-[60rem] mx-auto bg-white absolute">
-				<DisplayHtml :html="flashCard.set[page].answer" class="w-full my-auto" />
-			</section>
-		</div>
-
-		<div class="w-full flex items-center justify-between my-8 max-w-[30rem] mx-auto">
+		<div class="w-full flex items-center justify-between max-w-[30rem] mx-auto gap-4">
 			<ion-icon
 				:icon="isPlaying ? pause : play"
 				class="text-icon_inactive text-xl cursor-pointer"
 				@click="isPlaying ? pauseCard() : playCard()"
 			/>
-			<div class="flex items-center">
+			<div class="flex items-center gap-4">
 				<ion-icon
 					:icon="chevronBack"
 					class="text-icon_inactive text-xl cursor-pointer "
 					@click="decrease"
 				/>
-				<ion-text class="mx-4 text-icon_inactive mr-5">
+				<ion-text class="text-icon_inactive">
 					<b>{{ page + 1 }}</b> of <b>{{ formatNumber(flashCard.set.length) }}</b>
 				</ion-text>
 				<ion-icon
 					:icon="chevronForward"
-					class="text-icon_inactive text-xl cursor-pointer mr-5"
+					class="text-icon_inactive text-xl cursor-pointer"
 					@click="increase"
 				/>
 			</div>
@@ -112,7 +113,6 @@ export default defineComponent({
 	}
 
 	.divx {
-		background: #F2F3F5;
 		border-radius: 12px;
 		position: relative;
 		display: flex;
