@@ -1,12 +1,12 @@
 <template>
 	<DashboardLayout>
 		<div>
-			<div v-if="isLoggedIn" class="md:px-4 md:pt-8 pb-20 md:pb-12">
+			<div v-if="isLoggedIn" class="md:px-4 md:py-8 pb-12">
 				<StatusBar />
 			</div>
 			<div class="p-4">
-				<ContinueStudy v-if="isLoggedIn" :sliced="true" class="mb-16" />
-				<div class="mb-16">
+				<ContinueStudy v-if="isLoggedIn" :sliced="true" class="mb-8" />
+				<div class="mb-8">
 					<div class="w-full flex justify-between mb-4">
 						<div class="heading font-bold text-main_dark flex items-center">
 							<ion-text class="mr-3">Test Preps</ion-text>
@@ -18,8 +18,8 @@
 					</div>
 					<TestPrepList :sliced="true" />
 				</div>
-				<RecentQuestions class="mb-16" />
-				<div class="mb-16">
+				<RecentQuestions class="mb-8" />
+				<div class="mb-8">
 					<div class="w-full flex justify-between mb-4">
 						<div class="heading font-bold text-main_dark flex items-center">
 							<ion-text class="mr-3">FlashCards</ion-text>
@@ -32,7 +32,7 @@
 					</div>
 					<FlashCardList :sliced="true" />
 				</div>
-				<div class="mb-16">
+				<div class="mb-8">
 					<div class="w-full flex justify-between mb-4">
 						<div class="heading font-bold text-main_dark flex items-center">
 							<ion-text class="mr-3">Notes</ion-text>
@@ -44,7 +44,7 @@
 					</div>
 					<NotesList :sliced="true" />
 				</div>
-				<div v-if="false" class="mb-16">
+				<div v-if="false" class="mb-8">
 					<div class="w-full flex justify-between mb-4">
 						<div class="heading font-bold text-main_dark flex items-center">
 							<ion-text class="mr-3">Videos</ion-text>

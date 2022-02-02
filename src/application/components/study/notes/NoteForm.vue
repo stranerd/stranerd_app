@@ -39,7 +39,7 @@
 				class="hidden" type="file" @change="catchPreview" />
 			<label class="cursor-pointer flex items-center gap-4 mb-2" for="preview">
 				<ion-icon :icon="image" class="!text-4xl text-gray" />
-				{{ factory.preview ? 'Change' : 'Add' }} Preview
+				{{ factory.preview ? 'Change' : 'Add' }} Preview (optional)
 			</label>
 			<span class="p-2 rounded-xl flex items-center">
 				{{ factory.preview?.name ?? 'No Preview' }}

@@ -4,8 +4,6 @@ import { FlashCardEntity } from '../entities/flashCard'
 import { FlashCardToModel } from '../../data/models/flashCard'
 
 export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToModel, FlashCardToModel> {
-	index = 0
-
 	readonly rules = {
 		title: { required: true, rules: [isString, isLongerThanX(0)] },
 		isPublic: { required: true, rules: [isBoolean] },
@@ -48,39 +46,17 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 		return this.values.set
 	}
 
-	get question () {
-		return this.questions[this.index].question
-	}
-
-	set question (value: string) {
-		this.questions[this.index].question = value
-	}
-
-	get answer () {
-		return this.questions[this.index].answer
-	}
-
-	set answer (value: string) {
-		this.questions[this.index].answer = value
-	}
-
 	get tags () {
 		return this.values.tags
 	}
 
 	addQuestion () {
 		this.set('set', [...this.questions, { question: '', answer: '' }])
-		this.index = this.questions.length - 1
 	}
 
 	removeQuestion (index: number) {
 		if (this.questions.length === 1) return
 		this.questions.splice(index, 1)
-		this.index = 0
-	}
-
-	editQuestion (index: number) {
-		this.index = index
 	}
 
 	addTag = (value: string) => {

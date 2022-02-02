@@ -29,10 +29,6 @@
 					</div>
 					<div
 						class="flex lg:w-6/12 px-4 mx-auto mt-3 md:justify-center lg:justify-start lg:items-center gap-3 text-faded_gray font-bold whitespace-normal overflow-x-auto">
-						<router-link :to="`/users/${user.id}/`" class="pb-2 pr-3 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							About
-						</router-link>
 						<router-link :to="`/users/${user.id}/questions`"
 							class="pb-2 pr-3 cursor-pointer"
 							exact-active-class="border-b-4 text-white border-white">
@@ -47,6 +43,10 @@
 							class="pb-2 pr-3 cursor-pointer"
 							exact-active-class="border-b-4 text-white border-white">
 							FlashCards
+						</router-link>
+						<router-link :to="`/users/${user.id}/`" class="pb-2 pr-3 cursor-pointer"
+							exact-active-class="border-b-4 text-white border-white">
+							About
 						</router-link>
 					</div>
 				</div>

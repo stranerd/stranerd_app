@@ -33,7 +33,7 @@
 			</div>
 
 			<div v-if="user && hasNoAuthUser"
-				class="flex items-center mt-4 bg-white rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 px-4 bg-yellow_star ">
+				class="flex items-center mt-4 bg-white rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 px-4 bg-yellow_star">
 				<div class="lg:w-1/12 w-2/12">
 					<span> - </span>
 				</div>

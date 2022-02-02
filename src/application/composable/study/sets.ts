@@ -370,16 +370,14 @@ export const useSaveToSet = () => {
 		try {
 			await setLoading(true)
 			await DeleteSetProp.call(set.id, prop, [itemId])
+			//@ts-ignore
+			if (setGlobal[set.id]) setGlobal[set.id][prop].value = setGlobal[set.id][prop].value.filter((item) => item.id !== itemId)
 			useMenuPopover().closeStudyEntityMenu()
 			await Notify({ title: 'Removed from set successfully' })
 		} catch (e) {
 			await setError(e)
 		}
 		await setLoading(false)
-		if (setGlobal[set.id]) {
-			//@ts-ignore
-			setGlobal[set.id][prop].value = setGlobal[set.id][prop].value.filter((item) => item.id !== itemId)
-		}
 	}
 
 	return { loading, error, saveToSet, removeFromSet }
