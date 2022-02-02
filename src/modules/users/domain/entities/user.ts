@@ -211,7 +211,7 @@ export class UserEntity extends BaseEntity {
 	}
 
 	get score () {
-		return this.account.rankings.overall
+		return this.account.score
 	}
 
 	get expectedScore () {
