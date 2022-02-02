@@ -45,6 +45,21 @@
 							exact-active-class="border-b-4 text-white border-white">
 							FlashCards
 						</router-link>
+						<router-link :to="`/users/${user.id}/notes`"
+							class="pb-2 pr-3 cursor-pointer"
+							exact-active-class="border-b-4 text-white border-white">
+							Notes
+						</router-link>
+						<router-link :to="`/users/${user.id}/playlists`"
+							class="pb-2 pr-3 cursor-pointer"
+							exact-active-class="border-b-4 text-white border-white">
+							Playlist
+						</router-link>
+						<router-link :to="`/users/${user.id}/folders`"
+							class="pb-2 pr-3 cursor-pointer"
+							exact-active-class="border-b-4 text-white border-white">
+							Folders
+						</router-link>
 						<router-link :to="`/users/${user.id}/`" class="pb-2 pr-3 cursor-pointer"
 							exact-active-class="border-b-4 text-white border-white">
 							About
