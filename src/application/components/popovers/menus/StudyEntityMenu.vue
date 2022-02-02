@@ -1,24 +1,24 @@
 <template>
-	<Popover class="flex flex-col">
+	<Popover class="flex flex-col gap-8">
 		<template v-if="isLoggedIn">
 			<template v-if="rootSet">
-				<span v-if="rootSet.allSaved.includes(entity?.id)" class="my-4 flex gap-4 items-center"
+				<span v-if="rootSet.allSaved.includes(entity?.id)" class="flex gap-4 items-center"
 					@click="removeFromSet(type, entity?.id, rootSet)">
 					<ion-icon :icon="removeCircle" class="text-2xl" />
 					<ion-label class="font-bold">Remove From Your Library</ion-label>
 				</span>
-				<span v-else class="my-4 flex gap-4 items-center" @click="saveToSet(type, entity?.id, rootSet)">
+				<span v-else class="flex gap-4 items-center" @click="saveToSet(type, entity?.id, rootSet)">
 					<ion-icon :icon="library" class="text-2xl" />
 					<ion-label class="font-bold">Add To Your Library</ion-label>
 				</span>
 			</template>
 
 			<template v-if="normalSets.filter((s) => !s.saved[type]?.includes(entity?.id)).length">
-				<span class="my-4 flex gap-4 items-center" @click="showAddToSet = !showAddToSet">
+				<span class="flex gap-4 items-center" @click="showAddToSet = !showAddToSet">
 					<ion-icon :icon="showAddToSet ? chevronUp : folder" class="text-2xl" />
 					<ion-label class="font-bold">Add To Study Set</ion-label>
 				</span>
-				<div v-if="showAddToSet" class="ml-6 mb-4">
+				<div v-if="showAddToSet" class="ml-6">
 					<span v-for="set in normalSets.filter((s) => !s.saved[type]?.includes(entity?.id))" :key="set.hash"
 						class="mb-4 flex gap-4 items-center" @click="saveToSet(type, entity?.id, set)">
 						<ion-icon :icon="folder" class="text-xl" />
@@ -28,11 +28,11 @@
 			</template>
 
 			<template v-if="normalSets.filter((s) => s.saved[type]?.includes(entity?.id)).length">
-				<span class="my-4 flex gap-4 items-center" @click="showRemoveFromSet = !showRemoveFromSet">
+				<span class="flex gap-4 items-center" @click="showRemoveFromSet = !showRemoveFromSet">
 					<ion-icon :icon="showRemoveFromSet ? chevronUp : removeCircle" class="text-2xl" />
 					<ion-label class="font-bold">Remove From Study Set</ion-label>
 				</span>
-				<div v-if="showRemoveFromSet" class="ml-6 mb-4">
+				<div v-if="showRemoveFromSet" class="ml-6">
 					<span v-for="set in normalSets.filter((s) => s.saved[type]?.includes(entity?.id))" :key="set.hash"
 						class="mb-4 flex gap-4 items-center" @click="removeFromSet(type, entity?.id, set)">
 						<ion-icon :icon="folder" class="text-xl" />
@@ -41,20 +41,20 @@
 				</div>
 			</template>
 		</template>
-		<span v-if="canEdit" class="my-4 flex gap-4 items-center" @click="editEntity">
+		<span v-if="canEdit" class="flex gap-4 items-center" @click="editEntity">
 			<ion-icon :icon="pencil" class="text-2xl" />
 			<ion-label class="font-bold">Edit</ion-label>
 		</span>
-		<span v-if="showDelete" class="my-4 flex gap-4 items-center" @click="deleteEntity">
+		<span v-if="showDelete" class="flex gap-4 items-center" @click="deleteEntity">
 			<ion-icon :icon="trash" class="text-2xl" />
 			<ion-label class="font-bold">Delete</ion-label>
 		</span>
-		<span class="my-4 flex gap-4 items-center" @click="share">
+		<span class="flex gap-4 items-center" @click="share">
 			<ion-icon :icon="shareIcon" class="text-2xl" />
 			<ion-label class="font-bold">Share</ion-label>
 		</span>
 		<router-link v-if="entity?.userId !== id && type !== 'testPreps'" :to="`/users/${entity?.userId ?? ''}`"
-			class="my-4 flex gap-4 items-center">
+			class="flex gap-4 items-center">
 			<ion-icon :icon="person" class="text-2xl" />
 			<ion-label class="font-bold">Go To Author</ion-label>
 		</router-link>
