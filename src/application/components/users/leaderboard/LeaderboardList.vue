@@ -28,7 +28,7 @@
 					<Tag :secondary="true" :tag="person.rank.id" />
 				</div>
 				<div class="w-3/12 font-bold text-right text-primary">
-					<span>{{ formatNumber(person.account.rankings[time], 2) }}</span>
+					<span> {{ formatNumber(person.account.rankings[time], 2) }}</span>
 				</div>
 			</div>
 
@@ -45,7 +45,7 @@
 					<Tag :secondary="true" :tag="user.rank.id" />
 				</div>
 				<div class="w-3/12 text-right text-primary font-bold">
-					<span>{{ formatNumber(user.account.rankings[time], 2) }}</span>
+					<span> {{ formatNumber(user.account.rankings[time], 2) }}</span>
 				</div>
 			</div>
 
