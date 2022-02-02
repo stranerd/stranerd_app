@@ -25,7 +25,7 @@
 				<div class="w-8/12 flex items-center gap-2">
 					<avatar :id="person.id" :size="24" :src="person.avatar" />
 					<span>{{ person.bio.fullName }}</span>
-					<Tag :secondary="true" :tag="person.rank.id" />
+					<Tag :index="person.rank.level - 1" :secondary="true" :tag="person.rank.id" />
 				</div>
 				<div class="w-3/12 font-bold text-right text-primary">
 					<span>{{ formatNumber(person.account.rankings[time], 2) }}</span>
@@ -39,10 +39,8 @@
 				</div>
 				<div class="w-8/12 flex items-center gap-2">
 					<avatar :id="user?.id" :size="24" :src="user.avatar" />
-					<span>
-						{{ user.bio.fullName }}
-					</span>
-					<Tag :secondary="true" :tag="user.rank.id" />
+					<span>{{ user.bio.fullName }}</span>
+					<Tag :index="user.rank.level - 1" :secondary="true" :tag="user.rank.id" />
 				</div>
 				<div class="w-3/12 text-right text-primary font-bold">
 					<span>{{ formatNumber(user.account.rankings[time], 2) }}</span>
@@ -62,12 +60,11 @@ import { useLeaderboardList } from '@app/composable/users/leaderboard'
 import { RankingTimes } from '@modules/users'
 import Avatar from '@app/components/core/Avatar.vue'
 import PageLoading from '@app/components/core/PageLoading.vue'
-import Tag from '@app/components/core/Tag.vue'
 import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'LeaderboardList',
-	components: { Avatar, PageLoading, Tag },
+	components: { Avatar, PageLoading },
 	props: {
 		time: {
 			type: String as PropType<RankingTimes>,

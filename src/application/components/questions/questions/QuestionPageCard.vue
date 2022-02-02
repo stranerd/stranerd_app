@@ -19,7 +19,7 @@
 			</div>
 			<DisplayHtml :html="question.body" class="py-2 text-main_dark mb-3 lg:mb-5" />
 			<div class="flex justify-start items-center gap-4 mb-4">
-				<Tag v-for="tag in question.tags" :key="tag" :tag="tag" />
+				<QuestionTag v-for="(tag, index) in question.tags" :key="index" :index="index" :tag="tag" />
 			</div>
 			<div class="w-full flex flex-wrap items-center lg:justify-between">
 				<div class="lg:hidden flex items-center">
@@ -75,7 +75,7 @@ import { openQuestionEditModal, useDeleteQuestion } from '@app/composable/questi
 import { formatTime } from '@utils/dates'
 import { useRouter } from 'vue-router'
 import { useReportModal } from '@app/composable/core/modals'
-import Tag from '@app/components/questions/tags/Tag.vue'
+import QuestionTag from '@app/components/questions/tags/QuestionTag.vue'
 
 export default defineComponent({
 	name: 'QuestionPageCard',
@@ -86,7 +86,7 @@ export default defineComponent({
 		}
 	},
 	components: {
-		IonIcon, IonRippleEffect, Avatar, Subject, PhotoList, CreateAnswer, Tag
+		IonIcon, IonRippleEffect, Avatar, Subject, PhotoList, CreateAnswer, QuestionTag
 	},
 	setup (props) {
 		const { id } = useAuth()

@@ -20,8 +20,7 @@
 
 		<div class="w-full flex flex-col lg:flex-row lg:justify-between lg:items-center mt-2">
 			<div class=" flex flex-row items-center flex-wrap gap-4">
-				<Tag v-for="(tag, index) in question.tags" :key="tag" :index="index +1" :tag="tag" />
-
+				<QuestionTag v-for="(tag, index) in question.tags" :key="index" :index="index" :tag="tag" />
 			</div>
 
 			<div class=" flex flex-row items-center justify-between mt-3 lg:mt-0">
@@ -41,7 +40,7 @@ import { QuestionEntity } from '@modules/questions'
 import { formatNumber, pluralize } from '@utils/commons'
 import { formatTime } from '@utils/dates'
 import Subject from '../subjects/Subject.vue'
-import Tag from '../tags/Tag.vue'
+import QuestionTag from '../tags/QuestionTag.vue'
 
 export default defineComponent({
 	props: {
@@ -56,7 +55,7 @@ export default defineComponent({
 	components: {
 		IonRippleEffect,
 		Subject,
-		Tag
+		QuestionTag
 	}
 })
 </script>

@@ -12,7 +12,7 @@
 		<DisplayHtml :html="question.trimmedBody" class="text-main_dark leading-normal mb-auto" />
 
 		<div class="mt-4 flex items-center gap-2 flex-wrap">
-			<Tag v-for="tag in question.tags" :key="tag" :tag="tag" />
+			<QuestionTag v-for="(tag, index) in question.tags" :key="index" :index="index" :tag="tag" />
 		</div>
 
 		<span class="mt-4 text-gray font-bold">
@@ -30,7 +30,7 @@ import { pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { useReportModal } from '@app/composable/core/modals'
-import Tag from '@app/components/questions/tags/Tag.vue'
+import QuestionTag from '@app/components/questions/tags/QuestionTag.vue'
 import DisplayHtml from '@app/components/core/text/DisplayHtml.vue'
 
 export default defineComponent({
@@ -45,7 +45,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { DisplayHtml, Avatar, Tag },
+	components: { DisplayHtml, Avatar, QuestionTag },
 	setup (props) {
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),

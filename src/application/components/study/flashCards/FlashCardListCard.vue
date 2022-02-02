@@ -38,7 +38,6 @@ import { copy, ellipsisVertical, flash } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { FlashCardEntity } from '@modules/study'
-import Tag from '@app/components/core/Tag.vue'
 
 export default defineComponent({
 	name: 'FlashCardListCard',
@@ -62,6 +61,6 @@ export default defineComponent({
 			formatNumber, flash, pluralize
 		}
 	},
-	components: { Avatar, Tag }
+	components: { Avatar }
 })
 </script>

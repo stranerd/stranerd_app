@@ -23,7 +23,7 @@
 
 		<div class="w-full flex flex-col lg:flex-row lg:justify-between w-full">
 			<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">
-				<Tag v-for="tag in question.tags" :key="tag" :tag="tag" />
+				<QuestionTag v-for="(tag, index) in question.tags" :key="index" :index="index" :tag="tag" />
 			</div>
 
 			<div class="flex justify-between lg:justify-center items-center gap-4 text-gray">
@@ -51,7 +51,7 @@ import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { useReportModal } from '@app/composable/core/modals'
-import Tag from '../tags/Tag.vue'
+import QuestionTag from '../tags/QuestionTag.vue'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
@@ -66,7 +66,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { IonRippleEffect, Avatar, Subject, Tag },
+	components: { IonRippleEffect, Avatar, Subject, QuestionTag },
 	setup (props) {
 		const { id } = useAuth()
 		const showAnswerButton = computed({

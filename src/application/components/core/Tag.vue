@@ -1,15 +1,9 @@
 <template>
 	<span v-if="tag"
-		:class="[secondary ?'!text-white':'',`py-1 px-3 font-bold rounded-3xl`]"
-		:style="`color:${colors[index || randomNumber]}; background-color:${secondary? colors[index || randomNumber] : bgColors[index || randomNumber]}`"
+		:style="`color: rgb(${secondary ? '255, 255, 255' : color}); background-color: rgba(${color}, ${secondary ? 0.9 : 0.1});`"
+		class="py-1 px-3 font-bold lg:text-sm text-xs rounded-3xl"
 	>
-		<slot
-			:bgColors="bgColors"
-			:colors="colors"
-			:index="index"
-			:randomNumber="randomNumber"
-			:tag="tag"
-		>{{ tag }}</slot>
+		<slot :tag="tag">{{ tag }}</slot>
 	</span>
 </template>
 
@@ -33,27 +27,18 @@ export default defineComponent({
 			required: false
 		}
 	},
-	setup () {
+	setup (props) {
 		// The Colors below
-		// 0: non-active
-		// 1: Cyan
-		// 2: Orange
-		// 3: Purple
-		// 4: Blue
-		// 5: Green
-		const colors: Array<string> = [
-			'0', 'rgba(84, 181, 211, 1)', 'rgba(255, 168, 75, 1)', 'rgba(200, 100, 220, 1)',
-			'rgba(84, 109, 211, 1)', 'rgba(0, 210, 90, 1)'
-		]
-		const bgColors: Array<string> = [
-			'0', 'rgba(84, 181, 211, 0.1)', 'rgba(255, 168, 75, 0.1)', 'rgba(200, 100, 220, 0.1)',
-			'rgba(84, 109, 211, 0.1)', 'rgba(0, 210, 90, 0.1)'
-		]
-		const randomNumber = (Math.floor(Math.random() * 4) + 1)
+		// 1: Cyan #54B5D3
+		// 2. Pink #FF6496
+		// 3: Orange #FFA84B
+		// 4: Purple #C864DC
+		// 5: Green #00D25A
+		const colors = ['84, 181, 211', '255, 100, 150', '255, 168, 75', '200, 100, 220', '0, 210, 90']
+		const randomNumber = Math.floor(Math.random() * colors.length)
+		const color = colors[(props.index ?? randomNumber) % colors.length]
 
-		return {
-			colors, bgColors, randomNumber
-		}
+		return { colors, randomNumber, color }
 	}
 })
 </script>
