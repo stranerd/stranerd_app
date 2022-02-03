@@ -16,12 +16,15 @@ import { defineComponent } from 'vue'
 import { useCreateNote } from '@app/composable/study/notes'
 import NoteForm from '@app/components/study/notes/NoteForm.vue'
 import Justified from '@app/layouts/Justified.vue'
+import { setQuerySetId } from '@utils/query'
 
 export default defineComponent({
 	name: 'StudyNotesCreate',
 	displayName: 'Create Note',
 	components: { Justified, NoteForm },
-	middlewares: ['isAuthenticated'],
+	middlewares: ['isAuthenticated', async ({ from }) => {
+		setQuerySetId(from)
+	}],
 	setup () {
 		const { loading, error, factory, createNote } = useCreateNote()
 		return { loading, error, factory, createNote }

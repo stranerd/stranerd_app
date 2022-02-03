@@ -1,68 +1,62 @@
 <template>
-	<form @submit.prevent="submit">
-		<div class="flex flex-col gap-1 text-center justify-center items-center">
-			<div class="bg-light_gray w-full rounded-md flex items-center px-4 mb-4">
-				<ion-text class="text-primary font-bold w-12">
-					TITLE
-				</ion-text>
-				<ion-input v-model="factory.name"
-					class="max-w-[1054px] !h-14 text-left"
-					placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
-					show-cancel-button="never"
-				></ion-input>
-			</div>
-			<div class="bg-light_gray w-full rounded-md flex items-center px-4 mb-4">
-				<ion-text class="text-primary font-bold w-12 text-center">
-					TAGS
-				</ion-text>
-				<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
-					<span v-for="tag in factory.tags" :key="tag">
-						<span
-							class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-							{{ tag }} <ion-icon :icon="close" class="ml-1 cursor-pointer text-white"
-								@click="removeTag(tag)" />
-						</span>
+	<form class="flex flex-col gap-4 text-center justify-center items-center" @submit.prevent="submit">
+		<div class="bg-light_gray w-full rounded-md flex items-center px-4">
+			<ion-text class="text-primary font-bold w-12">
+				TITLE
+			</ion-text>
+			<ion-input v-model="factory.name"
+				class="max-w-[1054px] !h-14 text-left"
+				placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
+				show-cancel-button="never"
+			></ion-input>
+		</div>
+		<div class="bg-light_gray w-full rounded-md flex items-center px-4 hidden">
+			<ion-text class="text-primary font-bold w-12 text-center">
+				TAGS
+			</ion-text>
+			<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
+				<span v-for="tag in factory.tags" :key="tag">
+					<span
+						class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
+						{{ tag }} <ion-icon :icon="close" class="ml-1 cursor-pointer text-white"
+							@click="removeTag(tag)" />
 					</span>
-				</div>
-				<ion-input v-model="tag"
-					class="max-w-[1054px] !h-14 text-left"
-					placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
-					show-cancel-button="never"></ion-input>
+				</span>
 			</div>
-			<div class="flex items-center w-full max-w-[25rem] justify-center hidden">
-				<ion-radio-group v-model="factory.isPublic" class="flex w-full" mode="md">
-					<ion-list-header>
-						<ion-label class="text-icon_inactive font-bold text-base">
-							Set privacy:
-						</ion-label>
-					</ion-list-header>
+			<ion-input v-model="tag"
+				class="max-w-[1054px] !h-14 text-left"
+				placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
+				show-cancel-button="never"></ion-input>
+		</div>
+		<div class="flex items-center w-full max-w-[25rem] justify-center">
+			<ion-radio-group v-model="factory.isPublic" class="flex w-full" mode="md">
+				<ion-list-header>
+					<ion-label class="text-icon_inactive font-bold text-base">
+						Set privacy:
+					</ion-label>
+				</ion-list-header>
 
-					<ion-item class="w-full ion-item-transparent">
-						<ion-radio :value="true" class="ion-white"></ion-radio>
-						<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Public</ion-label>
-					</ion-item>
+				<ion-item class="w-full ion-item-transparent">
+					<ion-radio :value="true" class="ion-white"></ion-radio>
+					<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Public</ion-label>
+				</ion-item>
 
-					<ion-item class="w-full ion-item-transparent">
-						<ion-radio :value="false" class="ion-white"></ion-radio>
-						<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Private</ion-label>
-					</ion-item>
-				</ion-radio-group>
-			</div>
+				<ion-item class="w-full ion-item-transparent">
+					<ion-radio :value="false" class="ion-white"></ion-radio>
+					<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Private</ion-label>
+				</ion-item>
+			</ion-radio-group>
 		</div>
 
-		<div class="flex flex-row mt-5 text-white gap-4">
-			<div class="w-1/2 flex flex-row justify-center items-center">
-				<ion-button class="btn-secondary w-full" @click="closeModal">
-					Cancel
-					<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-				</ion-button>
-			</div>
-			<div class="w-1/2 flex flex-row justify-center items-center">
-				<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
-					<slot name="buttonText">Create Set</slot>
-					<ion-ripple-effect class="rounded-lg" />
-				</ion-button>
-			</div>
+		<div class="flex gap-4 w-full">
+			<ion-button class="btn-secondary flex-grow w-full" @click="closeModal">
+				Cancel
+				<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
+			</ion-button>
+			<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full flex-grow" type="submit">
+				<slot name="buttonText">Save Set</slot>
+				<ion-ripple-effect class="rounded-lg" />
+			</ion-button>
 		</div>
 		<PageLoading v-if="loading" />
 	</form>

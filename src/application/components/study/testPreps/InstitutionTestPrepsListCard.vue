@@ -1,18 +1,18 @@
 <template>
 	<div
-		class="m-0 w-full min-h-[11rem] bg-white rounded-xl flex flex-col items-start md:gap-2 gap-[0.7rem] box-border p-4">
+		class="m-0 w-full bg-white rounded-xl flex flex-col items-start gap-2 box-border p-4">
 		<div class="w-full flex justify-between items-center">
-			<ion-text>
-				<Institution :institutionId="institutionId" class="font-bold text-main-dark" />
+			<ion-text class="truncate">
+				<Institution :institutionId="institutionId" class="font-semibold text-main-dark" />
 			</ion-text>
 			<router-link :to="`/study/preps/${institutionId}`">
 				<ion-icon :icon="arrowForward" class="text-2xl text-gray" />
 			</router-link>
 		</div>
-		<Tag :tag="yearGap" />
+		<Tag :tag="yearGap" class="text-sm" />
 
 		<router-link :to="`/study/preps/${institutionId}`" class="w-full mt-auto">
-			<ion-button class="btn-outline text-primary w-full">Get Started</ion-button>
+			<ion-button class="btn-outline text-primary w-full" size="small">Get Started</ion-button>
 		</router-link>
 	</div>
 </template>

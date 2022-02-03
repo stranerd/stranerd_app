@@ -2,6 +2,7 @@ import { BaseFactory } from '@modules/core'
 import { isArrayOfX, isBoolean, isLongerThanX, isString } from '@stranerd/validate'
 import { SetEntity } from '../entities/set'
 import { SetToModel } from '../../data/models/set'
+import { getQuerySetId } from '@utils/query'
 
 export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
 	readonly rules = {
@@ -17,7 +18,7 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
 	reserved = []
 
 	constructor () {
-		super({ name: '', parent: null, isPublic: false, tags: [] })
+		super({ name: '', parent: getQuerySetId(), isPublic: false, tags: [] })
 	}
 
 	get name () {

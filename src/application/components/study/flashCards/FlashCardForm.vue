@@ -5,42 +5,43 @@
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center mb-2 hidden md:block">
 				{{ title }}
 			</ion-text>
-			<div class="lg:w-7/12 w-10/12">
-				<div class="bg-white rounded-md flex items-center px-4">
-					<ion-text class="text-primary font-bold w-12">
-						TITLE
-					</ion-text>
-					<ion-input v-model="factory.title"
-						class="max-w-[1054px] !h-14 "
-						mode="md"
-						placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
-						show-cancel-button="never"
-					></ion-input>
-				</div>
-				<DisplayError :error="factory.errors.title" />
-			</div>
-			<div class="lg-w-7/12 w-10/12">
-				<div class="bg-white rounded-md flex items-center px-4">
-					<ion-text class="text-primary font-bold w-12">
-						TAGS
-					</ion-text>
-					<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
-						<span v-for="tag in factory.tags" :key="tag">
-							<span
-								class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-								{{ tag }} <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
-							</span>
-						</span>
+			<div class="lg:w-8/12 w-full flex flex-col gap-4 px-4">
+				<div>
+					<div class="bg-white rounded-md flex items-center px-4">
+						<ion-text class="text-primary font-bold w-12">
+							TITLE
+						</ion-text>
+						<ion-input v-model="factory.title"
+							class="max-w-[1054px]"
+							mode="md"
+							placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
+							show-cancel-button="never"
+						></ion-input>
 					</div>
-					<ion-input v-model="tag"
-						class="max-w-[1054px] !h-14 "
-						placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
-						show-cancel-button="never"></ion-input>
+					<DisplayError :error="factory.errors.title" />
 				</div>
-				<DisplayError :error="factory.errors.tags" />
-			</div>
-			<div class="w-full max-w-[24rem]">
-				<div class="flex items-center justify-center">
+				<div>
+					<div class="bg-white rounded-md flex items-center px-4">
+						<ion-text class="text-primary font-bold w-12">
+							TAGS
+						</ion-text>
+						<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
+							<span v-for="tag in factory.tags" :key="tag">
+								<span
+									class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
+									{{ tag }} <ion-icon :icon="close" class="ml-1 cursor-pointer"
+										@click="removeTag(tag)" />
+								</span>
+							</span>
+						</div>
+						<ion-input v-model="tag"
+							class="max-w-[1054px] !h-14 "
+							placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
+							show-cancel-button="never"></ion-input>
+					</div>
+					<DisplayError :error="factory.errors.tags" />
+				</div>
+				<div class="w-full max-w-[28rem] mx-auto">
 					<ion-radio-group v-model="factory.isPublic" class="flex w-full justify-center" mode="md">
 						<ion-list-header>
 							<ion-label class="text-white font-bold text-xs md:text-base !m-0">Set privacy:</ion-label>
@@ -60,12 +61,12 @@
 							</ion-label>
 						</ion-item>
 					</ion-radio-group>
+					<DisplayError :error="factory.errors.isPublic" />
 				</div>
-				<DisplayError :error="factory.errors.isPublic" />
 			</div>
 		</div>
 
-		<div class="lg:w-8/12 w-full px-4 mx-auto mt-8 flex flex-col gap-4">
+		<div class="lg:w-8/12 w-full px-4 mx-auto mt-4 md:mt-8 flex flex-col gap-4">
 			<ion-reorder-group class="flex flex-col gap-4" disabled="true">
 				<ion-reorder v-for="(card, index) in factory.questions" :key="index"
 					class="flex flex-col bg-white p-4 rounded-xl">

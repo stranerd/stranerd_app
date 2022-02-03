@@ -1,10 +1,10 @@
 <template>
 	<Modal>
 		<template v-slot:title>
-			Create Study Set
+			Create Study Folder
 		</template>
 		<SetForm :error="error" :factory="factory" :loading="loading" :submit="createSet">
-			<template v-slot:buttonText>Create Set</template>
+			<template v-slot:buttonText>Create Folder</template>
 		</SetForm>
 	</Modal>
 </template>

@@ -1,5 +1,5 @@
 <template>
-	<Popover class="flex flex-col gap-8">
+	<Popover class="flex flex-col gap-4">
 		<template v-if="isLoggedIn">
 			<template v-if="rootSet">
 				<span v-if="rootSet.allSaved.includes(entity?.id)" class="flex gap-4 items-center"

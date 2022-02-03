@@ -19,13 +19,14 @@ import CreateTestPrep from '@app/components/modals/study/CreateTestPrep.vue'
 import EditTestPrep from '@app/components/modals/study/EditTestPrep.vue'
 import CreatePastQuestion from '@app/components/modals/study/CreatePastQuestion.vue'
 import EditPastQuestion from '@app/components/modals/study/EditPastQuestion.vue'
+import EditSet from '@app/components/modals/study/EditSet.vue'
 
 export const modal = useModal(ref([]))
 const QuestionModal = modal.register('Question', { CreateQuestion })
 const SessionModal = modal.register('Session', { CreateSession, Ratings: CreateSession })
 const ReportModal = modal.register('Report', { ReportUser, ReportQuestion, ReportAnswer })
 const StudyModal = modal.register('Study', {
-	CreateSet,
+	CreateSet, EditSet,
 	CreateInstitution, EditInstitution, CreateCourse, EditCourse,
 	CreateTestPrep, EditTestPrep, CreatePastQuestion, EditPastQuestion
 })

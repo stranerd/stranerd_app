@@ -1,29 +1,26 @@
 <template>
-	<router-link
-		:class="`m-0 min-w-[16.5rem] bg-white w-full rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border p-4`"
-		:to="`/study/tests/${test.id}/take`">
-		<div class="flex flex-col items-center justify-between w-full mx-auto capitalize">
-			<div class="w-full flex justify-between items-center">
-				<ion-text class="text-base text-left w-full text-main_dark font-bold">
-					<Institution v-if="testPrep && testPrep.isPastQuestionType"
-						:institutionId="testPrep.data.institutionId" />
-					<span v-else>{{ test.name }}</span>
-				</ion-text>
-				<ion-icon :icon="arrowForward" class="text-2xl text-gray" />
-			</div>
-
-			<ion-text class="text-base text-left w-full text-gray">
-				{{ test.isTimed ? 'Timed' : 'Study' }}
-				<span v-if="testPrep && testPrep.isPastQuestionType">
-					>
-					<Course :courseId="testPrep.data.courseId" />
-					{{ testPrep.data.questionType }}
-					({{ testPrep.data.year }})
-				</span>
+	<router-link :to="`/study/tests/${test.id}/take`"
+		class="m-0 bg-white w-full rounded-xl flex flex-col gap-2 box-border p-4">
+		<div class="w-full flex justify-between items-center">
+			<ion-text class="text-left w-full text-main_dark font-semibold">
+				<Institution v-if="testPrep && testPrep.isPastQuestionType"
+					:institutionId="testPrep.data.institutionId" />
+				<span v-else>{{ test.name }}</span>
 			</ion-text>
-
-			<ion-progress-bar :value="test.progress" class="mt-5" />
+			<ion-icon :icon="arrowForward" class="text-2xl text-gray" />
 		</div>
+
+		<ion-text class="text-sm text-left w-full text-gray">
+			{{ test.isTimed ? 'Timed' : 'Study' }}
+			<span v-if="testPrep && testPrep.isPastQuestionType">
+				>
+				<Course :courseId="testPrep.data.courseId" />
+				{{ testPrep.data.questionType }}
+				({{ testPrep.data.year }})
+			</span>
+		</ion-text>
+
+		<ion-progress-bar :value="test.progress" />
 	</router-link>
 </template>
 

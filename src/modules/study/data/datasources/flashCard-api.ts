@@ -2,6 +2,7 @@ import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from
 import { apiBases } from '@utils/environment'
 import { FlashCardFromModel, FlashCardToModel } from '../models/flashCard'
 import { FlashCardBaseDataSource } from './flashCard-base'
+import { getSetIdQuery } from '@utils/query'
 
 export class FlashCardApiDataSource implements FlashCardBaseDataSource {
 	private stranerdClient: HttpClient
@@ -11,7 +12,7 @@ export class FlashCardApiDataSource implements FlashCardBaseDataSource {
 	}
 
 	async create (data: FlashCardToModel) {
-		const flashCard = await this.stranerdClient.post<FlashCardToModel, FlashCardFromModel>('/', data)
+		const flashCard = await this.stranerdClient.post<FlashCardToModel, FlashCardFromModel>('/', { ...getSetIdQuery(), ...data })
 		return flashCard.id
 	}
 

@@ -2,6 +2,7 @@ import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from
 import { apiBases } from '@utils/environment'
 import { NoteFromModel, NoteToModel } from '../models/note'
 import { NoteBaseDataSource } from './note-base'
+import { getSetIdQuery } from '@utils/query'
 
 export class NoteApiDataSource implements NoteBaseDataSource {
 	private stranerdClient: HttpClient
@@ -11,7 +12,7 @@ export class NoteApiDataSource implements NoteBaseDataSource {
 	}
 
 	async create (data: NoteToModel) {
-		const note = await this.stranerdClient.post<NoteToModel, NoteFromModel>('/', data)
+		const note = await this.stranerdClient.post<NoteToModel, NoteFromModel>('/', { ...getSetIdQuery(), ...data })
 		return note.id
 	}
 

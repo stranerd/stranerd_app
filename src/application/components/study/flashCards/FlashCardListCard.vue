@@ -1,15 +1,12 @@
 <template>
-	<div
-		class="m-0 min-h-[7rem] !w-full bg-white rounded-xl flex flex-col gap-4 box-border justify-between p-4">
+	<div class="m-0 bg-white rounded-xl flex flex-col gap-2 box-border justify-between p-4">
 		<div class="w-full justify-between items-start flex">
 			<div class="flex flex-col items-start">
 				<ion-text class="font-bold text-base text-main_dark">{{ flashCard.title }}</ion-text>
-
-				<Tag :tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`"
-					class="mt-2">
+				<Tag :tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
 					<template v-slot="slotProps">
 						<span class="flex items-center">
-							<ion-icon :icon="copy" class="text-base mr-2" />
+							<ion-icon :icon="copy" class="text-base mr-1" />
 							<ion-text class="text-xs font-bold">{{ slotProps.tag }}</ion-text>
 						</span>
 					</template>
@@ -19,9 +16,9 @@
 		</div>
 
 		<div class="w-full flex items-center justify-between">
-			<div class="flex items-center">
+			<div class="flex items-center gap-2">
 				<Avatar :id="flashCard.userId" :size="24" :src="flashCard.userBio.photo" />
-				<ion-text class="text-xs font-bold text-main_dark ml-2">{{ flashCard.userBio.firstName }}</ion-text>
+				<ion-text class="text-xs font-bold text-main_dark">{{ flashCard.userBio.firstName }}</ion-text>
 			</div>
 			<router-link :to="`/study/flashCards/${flashCard.id}`">
 				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]" size="small">

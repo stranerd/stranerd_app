@@ -6,7 +6,7 @@
 					{{ note.title }}
 				</ion-text>
 			</div>
-			<div class="lg:w-8/12 w-full mx-auto mt-8 p-4 mb-16 bg-white">
+			<div class="lg:w-8/12 w-full mx-auto p-4 md:my-4 bg-white">
 				<Note :note="note" />
 			</div>
 			<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">

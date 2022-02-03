@@ -1,7 +1,9 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import {
 	AddSet,
+	DeleteSet,
 	DeleteSetProp,
+	EditSet,
 	FindSet,
 	FlashCardEntity,
 	GetFlashCardsInSet,
@@ -27,7 +29,7 @@ import {
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { useMenuPopover, useStudyModal } from '@app/composable/core/modals'
-import { Notify } from '@utils/dialog'
+import { Alert, Notify } from '@utils/dialog'
 
 type SaveKey = keyof SetEntity['saved']
 
@@ -373,3 +375,64 @@ export const useCreateSet = () => {
 
 	return { error, loading, factory, createSet }
 }
+
+let editingSet = null as SetEntity | null
+export const getEditingSet = () => editingSet
+export const openSetEditModal = (set: SetEntity) => {
+	editingSet = set
+	useStudyModal().openEditSet()
+}
+export const useEditSet = () => {
+	const { error, setError } = useErrorHandler()
+	const { loading, setLoading } = useLoadingHandler()
+	const { setMessage } = useSuccessHandler()
+	const factory = ref(new SetFactory()) as Ref<SetFactory>
+	if (editingSet) factory.value.loadEntity(editingSet)
+
+	const editSet = async () => {
+		await setError('')
+		if (factory.value.valid && !loading.value) {
+			try {
+				await setLoading(true)
+				await EditSet.call(editingSet!.id, factory.value)
+				await setMessage('Set updated successfully')
+				useStudyModal().closeEditSet()
+				factory.value.reset()
+			} catch (error) {
+				await setError(error)
+			}
+			await setLoading(false)
+		} else factory.value.validateAll()
+	}
+
+	return { error, loading, factory, editSet }
+}
+
+export const useDeleteSet = (setId: string) => {
+	const { loading, setLoading } = useLoadingHandler()
+	const { error, setError } = useErrorHandler()
+	const { setMessage } = useSuccessHandler()
+
+	const deleteSet = async () => {
+		await setError('')
+		const accepted = await Alert({
+			title: 'Are you sure you want to delete this set?',
+			confirmButtonText: 'Yes, delete'
+		})
+		if (accepted) {
+			await setLoading(true)
+			try {
+				await DeleteSet.call(setId)
+				global.sets.value = global.sets.value
+					.filter((q) => q.id !== setId)
+				await setMessage('Set deleted successfully')
+			} catch (error) {
+				await setError(error)
+			}
+			await setLoading(false)
+		}
+	}
+
+	return { loading, error, deleteSet }
+}
+
