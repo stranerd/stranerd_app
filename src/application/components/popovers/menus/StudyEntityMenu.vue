@@ -13,33 +13,33 @@
 				</span>
 			</template>
 
-			<template v-if="normalSets.filter((s) => !s.saved[type]?.includes(entity?.id)).length">
-				<span class="flex gap-4 items-center" @click="showAddToSet = !showAddToSet">
-					<ion-icon :icon="showAddToSet ? chevronUp : folder" class="text-2xl" />
-					<ion-label class="font-bold">Add To Study Set</ion-label>
-				</span>
-				<div v-if="showAddToSet" class="ml-6">
-					<span v-for="set in normalSets.filter((s) => !s.saved[type]?.includes(entity?.id))" :key="set.hash"
-						class="mb-4 flex gap-4 items-center" @click="saveToSet(type, entity?.id, set)">
-						<ion-icon :icon="folder" class="text-xl" />
-						<ion-label class="font-bold">{{ set.name }}</ion-label>
-					</span>
-				</div>
-			</template>
+			<!--			<template v-if="normalSets.filter((s) => !s.saved[type]?.includes(entity?.id)).length">
+							<span class="flex gap-4 items-center" @click="showAddToSet = !showAddToSet">
+								<ion-icon :icon="showAddToSet ? chevronUp : folder" class="text-2xl" />
+								<ion-label class="font-bold">Add To Study Set</ion-label>
+							</span>
+							<div v-if="showAddToSet" class="ml-6">
+								<span v-for="set in normalSets.filter((s) => !s.saved[type]?.includes(entity?.id))" :key="set.hash"
+									class="mb-4 flex gap-4 items-center" @click="saveToSet(type, entity?.id, set)">
+									<ion-icon :icon="folder" class="text-xl" />
+									<ion-label class="font-bold">{{ set.name }}</ion-label>
+								</span>
+							</div>
+						</template>
 
-			<template v-if="normalSets.filter((s) => s.saved[type]?.includes(entity?.id)).length">
-				<span class="flex gap-4 items-center" @click="showRemoveFromSet = !showRemoveFromSet">
-					<ion-icon :icon="showRemoveFromSet ? chevronUp : removeCircle" class="text-2xl" />
-					<ion-label class="font-bold">Remove From Study Set</ion-label>
-				</span>
-				<div v-if="showRemoveFromSet" class="ml-6">
-					<span v-for="set in normalSets.filter((s) => s.saved[type]?.includes(entity?.id))" :key="set.hash"
-						class="mb-4 flex gap-4 items-center" @click="removeFromSet(type, entity?.id, set)">
-						<ion-icon :icon="folder" class="text-xl" />
-						<ion-label class="font-bold">{{ set.name }}</ion-label>
-					</span>
-				</div>
-			</template>
+						<template v-if="normalSets.filter((s) => s.saved[type]?.includes(entity?.id)).length">
+							<span class="flex gap-4 items-center" @click="showRemoveFromSet = !showRemoveFromSet">
+								<ion-icon :icon="showRemoveFromSet ? chevronUp : removeCircle" class="text-2xl" />
+								<ion-label class="font-bold">Remove From Study Set</ion-label>
+							</span>
+							<div v-if="showRemoveFromSet" class="ml-6">
+								<span v-for="set in normalSets.filter((s) => s.saved[type]?.includes(entity?.id))" :key="set.hash"
+									class="mb-4 flex gap-4 items-center" @click="removeFromSet(type, entity?.id, set)">
+									<ion-icon :icon="folder" class="text-xl" />
+									<ion-label class="font-bold">{{ set.name }}</ion-label>
+								</span>
+							</div>
+						</template>-->
 		</template>
 		<span v-if="canEdit" class="flex gap-4 items-center" @click="editEntity">
 			<ion-icon :icon="pencil" class="text-2xl" />
@@ -77,7 +77,7 @@ import {
 	trash
 } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
-import { useMySets, useSaveToSet } from '@app/composable/study/sets'
+import { useSaveToSet, useUserRootSet } from '@app/composable/study/sets'
 import { openFlashCardEditModal } from '@app/composable/study/flashCards'
 import { useRouter } from 'vue-router'
 import { openNoteEditModal } from '@root/application/composable/study/notes'
@@ -97,7 +97,7 @@ export default defineComponent({
 		})
 		const { loading: deleteLoading, error: deleteError, deleteEntity } = useDeleteStudyEntity()
 
-		const { rootSet, normalSets } = useMySets()
+		const { rootSet } = useUserRootSet()
 		const { loading: setLoading, error: setError, saveToSet, removeFromSet } = useSaveToSet()
 		const showAddToSet = ref(false)
 		const showRemoveFromSet = ref(false)
@@ -119,7 +119,7 @@ export default defineComponent({
 			chevronUp, library, folder, shareIcon, pencil, person, trash, removeCircle,
 			share, id, isLoggedIn, isAdmin,
 			showDelete, deleteLoading, deleteError, deleteEntity, canEdit, editEntity,
-			rootSet, normalSets, setLoading, setError, saveToSet, removeFromSet, showAddToSet, showRemoveFromSet
+			rootSet, setLoading, setError, saveToSet, removeFromSet, showAddToSet, showRemoveFromSet
 		}
 	}
 })

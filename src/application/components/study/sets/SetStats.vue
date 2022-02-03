@@ -30,9 +30,9 @@
 		</div>
 		<div class="bg-orange w-full lg:h-24 h-[5.25rem] rounded-3xl grid place-items-center">
 			<div class="flex items-center gap-4">
-				<ion-icon :icon="folder" class="text-white text-2xl" />
+				<ion-icon :icon="videocam" class="text-white text-2xl" />
 				<ion-text class="text-white text-2xl">
-					{{ formatNumber(sets.length) }}
+					{{ formatNumber(set.saved.videos.length) }}
 				</ion-text>
 			</div>
 		</div>
@@ -43,7 +43,6 @@
 import { folder, reader, videocam } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { SetEntity } from '@modules/study'
-import { useMySets } from '@app/composable/study/sets'
 import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
@@ -55,8 +54,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const { normalSets: sets } = useMySets()
-		return { reader, videocam, folder, sets, formatNumber }
+		return { reader, videocam, folder, formatNumber }
 	}
 })
 </script>

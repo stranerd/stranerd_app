@@ -9,7 +9,6 @@ export interface SetFromModel extends SetToModel {
 		testPreps: string[]
 	}
 	tags: string[]
-	isRoot: boolean
 	userId: string
 	userBio: UserBio
 	createdAt: number
@@ -19,5 +18,6 @@ export interface SetFromModel extends SetToModel {
 export interface SetToModel {
 	name: string
 	isPublic: boolean
+	parent: string | null
 	tags: string[]
 }

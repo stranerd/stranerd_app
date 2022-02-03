@@ -60,32 +60,23 @@
 			<div class="mb-4 md:mb-8">
 				<div class="w-full flex justify-between mb-4">
 					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text>Study sets</ion-text>
+						<ion-text>Sets</ion-text>
 					</div>
 					<router-link
-						:to="`/study/sets`"
+						:to="`/study/sets/${set.id}/sets`"
 						class="text-primary text-body flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>
-				<EmptyState v-if="!setLoading && !setError && sets.length === 0" btnText="Create a Study set"
-					info="You have not created any study sets yet. <br>
-Put flashcards, notes and test preps in the same folder."
-					route="/study/sets/create"
-				/>
-
-				<div class="showcase">
-					<SetCard v-for="set in sets" :key="set.hash" :set="set" />
-				</div>
+				<SetsList :set="set" :sets="sets" :sliced="true" />
 			</div>
 		</div>
 		<PageLoading v-if="loading" />
-		<PageLoading v-if="setLoading" />
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { SetEntity } from '@modules/study'
 import SetHeader from '@app/components/study/sets/SetHeader.vue'
 import SetStats from '@app/components/study/sets/SetStats.vue'
@@ -93,8 +84,8 @@ import TestPrepsList from '@app/components/study/testPreps/SetTestPrepsList.vue'
 import FlashCardsList from '@app/components/study/flashCards/SetFlashCardsList.vue'
 import NotesList from '@app/components/study/notes/SetNotesList.vue'
 import VideosList from '@app/components/study/videos/SetVideosList.vue'
-import { useMySets, useSet } from '@app/composable/study/sets'
-import SetCard from '@app/components/study/sets/SetListCard.vue'
+import SetsList from '@app/components/study/sets/SetChildrenList.vue'
+import { useSet } from '@app/composable/study/sets'
 
 export default defineComponent({
 	name: 'SetView',
@@ -111,18 +102,11 @@ export default defineComponent({
 		FlashCardsList,
 		NotesList,
 		VideosList,
-		SetCard
+		SetsList
 	},
 	setup (props) {
-		const { loading, error, notes, videos, flashCards, testPreps } = useSet(props.set)
-		const { normalSets, loading: setLoading, error: setError } = useMySets()
-
-		const sets = computed({
-			get: () => normalSets.value.slice(0, 6),
-			set: () => {
-			}
-		})
-		return { loading, error, notes, videos, flashCards, testPreps, sets, setLoading, setError }
+		const { loading, error, notes, videos, flashCards, testPreps, sets } = useSet(props.set)
+		return { loading, error, notes, videos, flashCards, testPreps, sets }
 	}
 })
 </script>

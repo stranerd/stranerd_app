@@ -6,6 +6,7 @@ import { SetToModel } from '../../data/models/set'
 export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
 	readonly rules = {
 		name: { required: true, rules: [isString, isLongerThanX(0)] },
+		parent: { required: false, rules: [isString] },
 		isPublic: { required: true, rules: [isBoolean] },
 		tags: {
 			required: true,
@@ -16,7 +17,7 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
 	reserved = []
 
 	constructor () {
-		super({ name: '', isPublic: false, tags: [] })
+		super({ name: '', parent: null, isPublic: false, tags: [] })
 	}
 
 	get name () {
@@ -25,6 +26,14 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
 
 	set name (value: string) {
 		this.set('name', value)
+	}
+
+	get parent () {
+		return this.values.parent
+	}
+
+	set parent (value: string | null) {
+		this.set('parent', value)
 	}
 
 	get isPublic () {
@@ -54,8 +63,8 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
 
 	toModel = async () => {
 		if (this.valid) {
-			const { name, isPublic, tags } = this.validValues
-			return { name, isPublic, tags }
+			const { name, parent, isPublic, tags } = this.validValues
+			return { name, parent, isPublic, tags }
 		} else {
 			throw new Error('Validation errors')
 		}

@@ -48,6 +48,10 @@ import { PastQuestionData, PastQuestionEntity, PastQuestionType } from './domain
 import { PastQuestionFactory } from './domain/factories/pastQuestion'
 import { TestData, TestEntity, TestType } from './domain/entities/test'
 import { GetSetsUseCase } from './domain/usecases/sets/getSets'
+import { GetUserRootSetUseCase } from './domain/usecases/sets/getUserRootSet'
+import { ListenToUserRootSetUseCase } from './domain/usecases/sets/listenToUserRootSet'
+import { GetSetChildrenUseCase } from './domain/usecases/sets/getSetChildren'
+import { ListenToSetChildrenUseCase } from './domain/usecases/sets/listenToSetChildren'
 import { GetUserSetsUseCase } from './domain/usecases/sets/getUserSets'
 import { ListenToSetsUseCase } from './domain/usecases/sets/listenToSets'
 import { ListenToUserSetsUseCase } from './domain/usecases/sets/listenToUserSets'
@@ -163,6 +167,10 @@ const testRepository = new TestRepository(testDataSource, testTransformer)
 
 export const FindSet = new FindSetUseCase(setRepository)
 export const GetSets = new GetSetsUseCase(setRepository)
+export const GetUserRootSet = new GetUserRootSetUseCase(setRepository)
+export const ListenToUserRootSet = new ListenToUserRootSetUseCase(setRepository)
+export const GetSetChildren = new GetSetChildrenUseCase(setRepository)
+export const ListenToSetChildren = new ListenToSetChildrenUseCase(setRepository)
 export const GetUserSets = new GetUserSetsUseCase(setRepository)
 export const ListenToSets = new ListenToSetsUseCase(setRepository)
 export const ListenToUserSets = new ListenToUserSetsUseCase(setRepository)

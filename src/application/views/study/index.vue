@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useMySets } from '@app/composable/study/sets'
+import { useUserRootSet } from '@app/composable/study/sets'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import RootSetView from '@app/components/study/sets/RootSetView.vue'
 
@@ -19,7 +19,7 @@ export default defineComponent({
 	middlewares: ['isAuthenticated'],
 	components: { DashboardLayout, RootSetView },
 	setup () {
-		const { rootSet, error, loading } = useMySets()
+		const { rootSet, error, loading } = useUserRootSet()
 		return { rootSet, error, loading }
 	}
 })
