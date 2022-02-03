@@ -72,8 +72,13 @@
 		</div>
 
 		<div v-else class="mb-12">
-			<label>Link</label>
-			<IonInput v-model="factory.link" class="mb-2" placeholder="Enter Link for the Video" type="url" />
+			<label class="block">Link</label>
+			<IonText class="text-sm mt-1">All links must be videos hosted on YouTube</IonText>
+			<div class="flex mb-2">
+				<span class="bg-new_gray py-3 pl-4 pr-1 text-icon_inactive">{{ factory.youTubeUrl }}</span>
+				<IonInput id="link" v-model="factory.link" placeholder="Enter id of the youtube video"
+					type="url" />
+			</div>
 			<DisplayError :error="factory.errors.link" />
 		</div>
 
@@ -140,5 +145,9 @@ export default defineComponent({
 	label {
 		font-size: 1.2rem;
 		font-weight: 500;
+	}
+
+	#link {
+		--padding-start: 0 !important;
 	}
 </style>

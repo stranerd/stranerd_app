@@ -45,7 +45,7 @@
 					</div>
 					<SearchNotesList :notes="notes" :sliced="true" />
 				</div>
-				<div v-if="false" class="mb-12">
+				<div class="mb-12">
 					<div class="w-full flex justify-between mb-4">
 						<div class="heading font-bold text-main_dark flex items-center">
 							<ion-text class="mr-3">

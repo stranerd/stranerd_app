@@ -6,12 +6,12 @@
 		</ion-fab-button>
 		<ion-fab-list class="z-50" side="top">
 			<router-link class="relative" to="/study/sets/create">
-				<ion-fab-button color="secondary" size="small">
+				<ion-fab-button color="primary" size="small">
 					<ion-icon :icon="folder" class="text-lg"></ion-icon>
 				</ion-fab-button>
 				<ion-text
-					class="px-4 py-1 mr-1.5 w-max bg-orange rounded-xl text-xs font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
-					Create a study set
+					class="px-4 py-1 mr-1.5 w-max bg-primary rounded-xl text-xs font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
+					Create a study folder
 				</ion-text>
 			</router-link>
 			<router-link class="relative" to="/study/flashCards/create">
@@ -24,12 +24,21 @@
 				</ion-text>
 			</router-link>
 			<router-link class="relative" to="/study/notes/create">
-				<ion-fab-button color="primary" size="small">
+				<ion-fab-button color="pink" size="small">
 					<ion-icon :icon="reader" class="text-lg"></ion-icon>
 				</ion-fab-button>
 				<ion-text
-					class="px-4 py-1 mr-1.5 w-max text-xs bg-primary rounded-xl font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
+					class="px-4 py-1 mr-1.5 w-max text-xs bg-pink rounded-xl font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
 					Upload a note
+				</ion-text>
+			</router-link>
+			<router-link class="relative" to="/study/videos/create">
+				<ion-fab-button color="secondary" size="small">
+					<ion-icon :icon="videocamSharp" class="text-lg"></ion-icon>
+				</ion-fab-button>
+				<ion-text
+					class="px-4 py-1 mr-1.5 w-max text-xs bg-orange rounded-xl font-bold shadow-md text-white top-1/2 transform -translate-y-1/2 absolute right-full">
+					Upload a video
 				</ion-text>
 			</router-link>
 			<router-link class="relative" to="/questions/create">
@@ -48,14 +57,14 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { IonFab, IonFabButton, IonFabList, IonText } from '@ionic/vue'
-import { add, flash, folder, helpCircle, reader } from 'ionicons/icons'
+import { add, flash, folder, helpCircle, reader, videocamSharp } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'Fab',
 	components: { IonFab, IonFabButton, IonFabList, IonText },
 	setup () {
 		const active = ref(false)
-		return { active, add, helpCircle, flash, folder, reader }
+		return { active, add, helpCircle, flash, folder, reader, videocamSharp }
 	}
 })
 </script>

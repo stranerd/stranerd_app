@@ -30,7 +30,7 @@
 						exact-active-class="border-b-4 text-white border-white">
 						Notes
 					</router-link>
-					<router-link v-if="false" :to="`/explore/videos`"
+					<router-link :to="`/explore/videos`"
 						class="py-2 lg:mr-12 mr-4 cursor-pointer"
 						exact-active-class="border-b-4 text-white border-white">
 						Videos

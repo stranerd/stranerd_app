@@ -30,9 +30,12 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		isPublic: { required: false, rules: [isBoolean] },
 		isHosted: { required: false, rules: [isBoolean] },
 		link: { required: false, rules: [isRequiredIfX(!this.isHosted), isString] },
-		preview: { required: true, rules: [isImage] },
+		preview: { required: false, rules: [isImage] },
 		media: { required: false, rules: [isRequiredIfX(this.isHosted), isVideo] }
 	}
+
+	youTubeUrl = 'https://youtube.com/watch?v='
+	id = ''
 
 	reserved = []
 
@@ -94,6 +97,14 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 	set link (value: string | null) {
 		this.set('link', value)
 		if (value) this.isHosted = false
+	}
+
+	get videoId () {
+		return this.youTubeUrl + this.values.link
+	}
+
+	set videoId (value: string) {
+		this.set('link', this.youTubeUrl + value)
 	}
 
 	get media () {

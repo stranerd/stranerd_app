@@ -82,6 +82,7 @@ import { openFlashCardEditModal } from '@app/composable/study/flashCards'
 import { useRouter } from 'vue-router'
 import { openNoteEditModal } from '@root/application/composable/study/notes'
 import { openTestPrepEditModal } from '@app/composable/study/testPreps'
+import { openVideoEditModal } from '@app/composable/study/videos'
 
 export default defineComponent({
 	name: 'StudyEntityMenu',
@@ -90,11 +91,7 @@ export default defineComponent({
 		const router = useRouter()
 
 		const { entity, type, data, share } = useStudyMenuData()
-		const showDelete = computed(() => {
-			if (type.value === 'testPreps') return isAdmin.value
-			// @ts-ignore
-			return entity.value?.userId === id.value
-		})
+		const showDelete = computed(() => type.value === 'testPreps' ? isAdmin.value : entity.value?.userId === id.value)
 		const { loading: deleteLoading, error: deleteError, deleteEntity } = useDeleteStudyEntity()
 
 		const { rootSet } = useUserRootSet()
@@ -102,22 +99,18 @@ export default defineComponent({
 		const showAddToSet = ref(false)
 		const showRemoveFromSet = ref(false)
 
-		const canEdit = computed({
-			get: () => entity.value?.userId === id.value,
-			set: () => {
-			}
-		})
-
+		const canEdit = computed(() => type.value === 'testPreps' ? isAdmin.value : entity.value?.userId === id.value)
 		const editEntity = async () => {
 			if (type.value === 'flashCards') await openFlashCardEditModal(entity.value as any, router)
 			if (type.value === 'notes') await openNoteEditModal(entity.value as any, router)
+			if (type.value === 'videos') await openVideoEditModal(entity.value as any, router)
 			if (type.value === 'testPreps') await openTestPrepEditModal(entity.value as any)
 		}
 
 		return {
 			entity, type, data,
 			chevronUp, library, folder, shareIcon, pencil, person, trash, removeCircle,
-			share, id, isLoggedIn, isAdmin,
+			share, id, isLoggedIn,
 			showDelete, deleteLoading, deleteError, deleteEntity, canEdit, editEntity,
 			rootSet, setLoading, setError, saveToSet, removeFromSet, showAddToSet, showRemoveFromSet
 		}

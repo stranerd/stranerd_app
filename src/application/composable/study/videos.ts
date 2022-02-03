@@ -1,4 +1,4 @@
-import { computed, onUnmounted, onMounted, Ref, ref } from 'vue'
+import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import {
 	AddVideo,
 	DeleteVideo,
@@ -12,6 +12,7 @@ import {
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
+import { Router, useRouter } from 'vue-router'
 
 const global = {
 	videos: ref([] as VideoEntity[]),
@@ -70,7 +71,6 @@ export const useVideoList = () => {
 	onUnmounted(async () => {
 		await listener.closeListener()
 	})
-
 	return { ...global, fetchOlderVideos: fetchVideos }
 }
 
@@ -79,14 +79,16 @@ export const useCreateVideo = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
+	const router = useRouter()
 
 	const createVideo = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddVideo.call(factory.value)
+				const videoId = await AddVideo.call(factory.value)
 				await setMessage('Video submitted successfully')
+				await router.push(`/study/videos/${videoId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -100,13 +102,15 @@ export const useCreateVideo = () => {
 
 let editingVideo = null as VideoEntity | null
 export const getEditingVideo = () => editingVideo
-export const openVideoEditModal = (video: VideoEntity) => {
+export const openVideoEditModal = async (video: VideoEntity, router: Router) => {
 	editingVideo = video
+	await router.push(`/study/videos/${video.id}/edit`)
 }
 export const useEditVideo = (videoId: string) => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
+	const router = useRouter()
 	const factory = ref(new VideoFactory()) as Ref<VideoFactory>
 	if (editingVideo) factory.value.loadEntity(editingVideo)
 
@@ -116,7 +120,8 @@ export const useEditVideo = (videoId: string) => {
 			try {
 				await setLoading(true)
 				await EditVideo.call(videoId, factory.value)
-				await setMessage('Video edited successfully')
+				await setMessage('Video updated successfully')
+				await router.push(`/study/videos/${videoId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

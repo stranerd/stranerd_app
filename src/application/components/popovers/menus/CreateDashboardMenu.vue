@@ -15,10 +15,17 @@
 			</div>
 		</router-link>
 		<router-link class="py-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
+			to="/study/videos/create">
+			<div class="w-48 flex items-center gap-3">
+				<ion-icon :icon="videocamSharp" class="text-2xl" />
+				<ion-label class="font-bold">Upload a video</ion-label>
+			</div>
+		</router-link>
+		<router-link class="py-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
 			to="/study/sets/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="folder" class="text-2xl" />
-				<ion-label class="font-bold">Create a study set</ion-label>
+				<ion-label class="font-bold">Create a study folder</ion-label>
 			</div>
 		</router-link>
 		<router-link class="py-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
@@ -33,12 +40,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { flash, folder, helpCircle, reader } from 'ionicons/icons'
+import { flash, folder, helpCircle, reader, videocamSharp } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'CreateDashboardMenu',
 	setup () {
-		return { helpCircle, folder, flash, reader }
+		return { helpCircle, folder, flash, reader, videocamSharp }
 	}
 })
 </script>

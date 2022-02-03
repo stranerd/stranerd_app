@@ -112,6 +112,15 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-light-tint: #f5f6f9;
 }
 
+.ion-color-pink {
+	--ion-color-base: var(--ion-color-pink);
+	--ion-color-base-rgb: var(--ion-color-pink-rgb);
+	--ion-color-contrast: var(--ion-color-pink-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-pink-contrast-rgb);
+	--ion-color-contrast-shade: var(--ion-color-pink-shade);
+	--ion-color-contrast-tint: var(--ion-color-pink-tint);
+}
+
 ion-popover {
 	--box-shadow: none !important;
 }
