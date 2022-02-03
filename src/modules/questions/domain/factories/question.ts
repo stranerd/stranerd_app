@@ -1,6 +1,5 @@
 import {
 	hasLessThanX,
-	hasMoreThanX,
 	isArrayOfX,
 	isExtractedHTMLLongerThanX,
 	isImage,
@@ -23,7 +22,7 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 		subjectId: { required: true, rules: [isString, isLongerThanX(0)] },
 		tags: {
 			required: true,
-			rules: [isArrayOfX((com) => isString(com).valid, 'string'), hasMoreThanX(0), hasLessThanX(4)]
+			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings')]
 		}
 	}
 

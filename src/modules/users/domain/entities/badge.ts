@@ -3,7 +3,6 @@ import { RankTypes } from './rank'
 enum CountStreakBadges {
 	NewQuestion = 'NewQuestion',
 	NewAnswer = 'NewAnswer',
-	NewTag = 'NewTag',
 	NewAnswerComment = 'NewAnswerComment',
 	NewAnswerVote = 'NewAnswerVote',
 	GiveBestAnswer = 'GiveBestAnswer',

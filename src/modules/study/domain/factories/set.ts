@@ -1,5 +1,5 @@
 import { BaseFactory } from '@modules/core'
-import { hasLessThanX, hasMoreThanX, isArrayOfX, isBoolean, isLongerThanX, isString } from '@stranerd/validate'
+import { isArrayOfX, isBoolean, isLongerThanX, isString } from '@stranerd/validate'
 import { SetEntity } from '../entities/set'
 import { SetToModel } from '../../data/models/set'
 
@@ -10,7 +10,7 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
 		isPublic: { required: true, rules: [isBoolean] },
 		tags: {
 			required: true,
-			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings'), hasMoreThanX(0), hasLessThanX(4)]
+			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings')]
 		}
 	}
 

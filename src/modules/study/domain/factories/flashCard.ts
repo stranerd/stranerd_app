@@ -1,4 +1,4 @@
-import { hasLessThanX, hasMoreThanX, isArrayOfX, isBoolean, isLongerThanX, isString } from '@stranerd/validate'
+import { hasMoreThanX, isArrayOfX, isBoolean, isLongerThanX, isString } from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
 import { FlashCardEntity } from '../entities/flashCard'
 import { FlashCardToModel } from '../../data/models/flashCard'
@@ -16,7 +16,7 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 		},
 		tags: {
 			required: true,
-			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings'), hasMoreThanX(0), hasLessThanX(4)]
+			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings')]
 		}
 	}
 

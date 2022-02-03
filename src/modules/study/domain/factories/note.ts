@@ -1,6 +1,4 @@
 import {
-	hasLessThanX,
-	hasMoreThanX,
 	isArrayOfX,
 	isBoolean,
 	isExtractedHTMLLongerThanX,
@@ -29,7 +27,7 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 		description: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		tags: {
 			required: true,
-			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings'), hasMoreThanX(0), hasLessThanX(4)]
+			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings')]
 		},
 		isPublic: { required: false, rules: [isBoolean] },
 		isHosted: { required: false, rules: [isBoolean] },

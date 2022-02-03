@@ -69,7 +69,6 @@ export interface UserDates {
 }
 
 export interface UserTutor {
-	tags: Record<string, number>
 	strongestSubject: string | null
 	weakerSubjects: string[]
 }
@@ -201,13 +200,6 @@ export class UserEntity extends BaseEntity {
 		const subjects = [...this.tutor.weakerSubjects]
 		if (this.tutor.strongestSubject) subjects.push(this.tutor.strongestSubject)
 		return subjects
-	}
-
-	get tags () {
-		return Object.entries(this.tutor.tags)
-			.map(([key, val]) => ({ id: key, count: val }))
-			.sort((a, b) => a.count >= b.count ? -1 : 1)
-			.slice(0, 6)
 	}
 
 	get score () {
