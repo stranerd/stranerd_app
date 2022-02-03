@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<VideoForm :error="error" :factory="factory" :loading="loading" :submit="createFlashCard"
-			title="Create a Flashcard set">
+			title="Create a playlist">
 			<template v-slot:buttonTitle>Create</template>
 		</VideoForm>
 	</Justified>

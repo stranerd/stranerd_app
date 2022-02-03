@@ -5,36 +5,14 @@
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-5 mb-6 hidden md:block">
 				{{ title }}
 			</ion-text>
-			<div class="bg-white lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
-				<ion-text class="text-primary font-bold w-12">
-					TITLE
-				</ion-text>
-				<ion-input v-model="factory.title"
-					class="max-w-[1054px] !h-14 "
-					mode="md"
-					placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
-					show-cancel-button="never"
-				></ion-input>
-			</div>
+			<ion-input v-model="factory.title"
+				class="max-w-[1054px] !h-14 lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4"
+				mode="md"
+				placeholder="Name your playlist"
+				show-cancel-button="never"
+			></ion-input>
 			<DisplayError :error="factory.errors.title" />
-			<div class="bg-white lg:w-7/12 w-10/12 rounded-md flex items-center px-4 mb-4">
-				<ion-text class="text-primary font-bold w-12">
-					TAGS
-				</ion-text>
-				<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
-					<span v-for="tag in factory.tags" :key="tag">
-						<span
-							class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-							{{ tag }} <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
-						</span>
-					</span>
-				</div>
-				<ion-input v-model="tag"
-					class="max-w-[1054px] !h-14 "
-					placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
-					show-cancel-button="never"></ion-input>
-			</div>
-			<DisplayError :error="factory.errors.tags" />
+		
 			<div class="flex items-center w-full md:max-w-[25rem] max-w-[22rem] justify-center">
 				<ion-radio-group v-model="factory.isPublic" class="flex w-full justify-center" mode="md">
 					<ion-list-header>
@@ -57,36 +35,36 @@
 			<DisplayError :error="factory.errors.isPublic" />
 		</div>
 
-		<div class="lg:w-8/12 w-full px-4 mx-auto mt-8">
-			<ion-reorder-group disabled="true">
-				<ion-reorder v-for="(card, index) in factory.questions" :key="index"
-					class="flex flex-col bg-white p-4 rounded-xl mb-4">
-					<div class="flex w-full items-center justify-between">
-						<ion-text class="text-main_dark font-bold">Card {{ index + 1 }}</ion-text>
-						<div class="flex" @click="factory.removeQuestion(index)">
-							<ion-icon
-								:icon='trash'
-								class="text-main_dark"
-							/>
-						</div>
-					</div>
 
-					<div class="flex w-full md:flex-row flex-col gap-4 md:h-auto" @click="editCard(index)">
-						<ion-textarea v-model="card.question"
-							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl md:w-1/2 md:mr-4 w-full"
-							placeholder="Front ( Questions or Words) "
-							rows="5" />
-						<ion-textarea v-model="card.answer"
-							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl md:w-1/2 w-full"
-							placeholder="Back ( Answers or Definitions or Translations )"
-							rows="5" />
-					</div>
-				</ion-reorder>
-			</ion-reorder-group>
-			<DisplayError :error="factory.errors.set" />
+		<div class="lg:w-8/12 w-full px-4 mx-auto mt-8">
+			<div class="mx-auto w-full flex justify-center mb-3">
+				<ion-text class="heading font-bold text-main_dark text-center ">
+					Add Videos
+				</ion-text>
+			</div>
+	
+			<div class="bg-white w-full rounded-md flex items-center px-4 mb-4">
+				<ion-text class="text-primary font-bold w-12">
+					1
+				</ion-text>
+				<div class="border h-14 border-new_gray"/>
+				<ion-input v-model="factory.title"
+					class="max-w-[1054px] !h-14 "
+					mode="md"
+					placeholder="Enter title"
+					show-cancel-button="never"
+				></ion-input>
+				<div class="border h-14 border-new_gray"/>
+				<ion-input v-model="factory.title"
+					class="max-w-[1054px] !h-14  "
+					mode="md"
+					placeholder="Enter Youtube link to video"
+					show-cancel-button="never"
+				></ion-input>
+			</div>
 
 			<div
-				class="w-full flex bg-white items-center p-8 rounded-xl text-lg text-icon_inactive justify-center font-bold my-4 cursor-pointer"
+				class="w-full flex bg-white items-center px-8 py-5 rounded-xl text-lg text-gray justify-center font-bold my-4 cursor-pointer"
 				@click="factory.addQuestion"
 			>
 				<ion-icon
@@ -94,12 +72,15 @@
 					class="text-2xl"
 				/>
 				<ion-text>
-					ADD CARD
+					ADD 
 				</ion-text>
 			</div>
 
 			<div class="w-full flex justify-end mb-8">
-				<ion-button :disabled="loading || !factory.valid" class="btn-primary btn-lg !pr-0" @click="submit()">
+				<ion-button  class="btn-secondary btn-lg !pr-0 w-full mr-3 ">
+					Draft
+				</ion-button>
+				<ion-button :disabled="loading || !factory.valid" class="btn-primary btn-lg !pr-0 w-full" @click="submit()">
 					<slot name="buttonTitle">Submit</slot>
 				</ion-button>
 			</div>
@@ -117,9 +98,7 @@ import {
 	IonListHeader,
 	IonRadio,
 	IonRadioGroup,
-	IonReorder,
-	IonReorderGroup,
-	IonTextarea
+
 } from '@ionic/vue'
 import { add, close, trash } from 'ionicons/icons'
 import { useTags } from '@app/composable/core/forms'
@@ -152,7 +131,6 @@ export default defineComponent({
 	components: {
 		IonItem, IonLabel,
 		IonListHeader, IonRadio, IonRadioGroup,
-		IonTextarea, IonReorderGroup, IonReorder
 	},
 	setup (props) {
 		const { tag, removeTag } = useTags(
@@ -171,7 +149,15 @@ export default defineComponent({
 <style lang="scss" scoped>
 	.ion-item-transparent {
 		--background: transparent;
+      
 	}
+
+    ion-input{
+        --background: white !important;
+          --padding-top:1.2rem !important;
+        --padding-bottom:1.2rem !important;
+        --border-radius: 1rem !important
+    }
 
 	ion-label {
 		@media (max-width: 640px) {

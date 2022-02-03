@@ -200,8 +200,8 @@ ion-input, ion-textarea, ion-select {
 	--padding-end: 1rem !important;
 	--color: $color-mainDark !important;
 	color: $color-mainDark !important;
-	--background: $color-newGray !important;
-	background-color: $color-newGray !important;
+	--background: $color-newGray ;
+	background-color: $color-newGray ;
 	--box-shadow: none;
 	--border-radius: .75rem;
 	border-radius: .75rem;
@@ -212,7 +212,7 @@ ion-input, ion-textarea, ion-select {
 }
 
 .btn-secondary {
-	--background: $color-sub;
+	--background: $color-sub !important;
 	--color: $color-white;
 	--padding-top: 1.3rem;
 	--padding-bottom: 1.3rem;
