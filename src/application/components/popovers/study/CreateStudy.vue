@@ -12,10 +12,10 @@
 				Upload Note
 			</ion-text>
 		</router-link>
-		<router-link class="flex items-center" to="/study/sets/create">
+		<router-link class="flex items-center" to="/study/folders/create">
 			<ion-icon :icon="folder" alt="" class="text-2xl text-gray" />
 			<ion-text class="font-bold ml-4 text-lg text-gray">
-				Create Study set
+				Create Study Folder
 			</ion-text>
 		</router-link>
 	</Popover>

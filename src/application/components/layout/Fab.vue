@@ -5,7 +5,7 @@
 			<ion-icon :icon="add"></ion-icon>
 		</ion-fab-button>
 		<ion-fab-list class="z-50" side="top">
-			<router-link class="relative" to="/study/sets/create">
+			<router-link class="relative" to="/study/folders/create">
 				<ion-fab-button color="primary" size="small">
 					<ion-icon :icon="folder" class="text-lg"></ion-icon>
 				</ion-fab-button>

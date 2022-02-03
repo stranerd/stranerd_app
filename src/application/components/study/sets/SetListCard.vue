@@ -1,7 +1,7 @@
 <template>
 	<router-link
 		:class="`w-full bg-white rounded-xl flex flex-col gap-2 box-border p-4`"
-		:to="`/study/sets/${set.id}`"
+		:to="`/study/folders/${set.id}`"
 	>
 		<div class="flex items-center gap-4">
 			<ion-icon :icon="folder" class="text-dark_gray text-2xl" />

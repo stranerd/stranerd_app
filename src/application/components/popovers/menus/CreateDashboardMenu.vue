@@ -22,7 +22,7 @@
 			</div>
 		</router-link>
 		<router-link class="py-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
-			to="/study/sets/create">
+			to="/study/folders/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="folder" class="text-2xl" />
 				<ion-label class="font-bold">Create a study folder</ion-label>

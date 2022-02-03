@@ -10,7 +10,8 @@
 						<DoubleClick v-for="set in sets" :key="set.hash"
 							:class="{'highlighted': highlighted === set.id}"
 							class="w-full flex flex-col items-center"
-							@click="highlighted = set.id" @doubleClick="$router.push(`/study/sets/${set.id}`)">
+							@click="highlighted = set.id"
+							@doubleClick="$router.push(`/study/folders/${set.id}`)">
 							<ion-icon :icon="folderSharp" class="text-dark_gray text-6xl" />
 							<ion-text class="text-dark_gray w-full text-center break-words">{{ set.name }}</ion-text>
 							<ion-text class="text-sm">
@@ -79,8 +80,8 @@ import { formatNumber, pluralize } from '@utils/commons'
 import DoubleClick from '@app/components/core/gestures/DoubleClick.vue'
 
 export default defineComponent({
-	name: 'StudySetsSetIdIndex',
-	displayName: 'Study Set',
+	name: 'StudyFoldersSetId',
+	displayName: 'Study Folder',
 	components: { DoubleClick, PageWrapper },
 	setup () {
 		const highlighted = ref('')
