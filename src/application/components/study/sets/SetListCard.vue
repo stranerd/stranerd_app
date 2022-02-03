@@ -1,13 +1,16 @@
 <template>
 	<router-link
-		:class="`w-full ${colorClass} rounded-xl flex flex-col gap-[1rem] box-border p-4`"
+		:class="`w-full ${colorClass} rounded-xl flex flex-col gap-2 box-border p-4`"
 		:to="`/study/sets/${set.id}`"
 	>
-		<ion-icon :icon="folder" class="text-faded_gray text-3xl" />
+		<div class="flex items-center gap-4">
+			<ion-icon :icon="folder" class="text-dark_gray text-2xl" />
+			<ion-text class="text-dark_gray w-full">{{ set.name }}</ion-text>
+		</div>
 
-		<ion-text class="text-sm text-main_dark font-bold w-full text-left">{{ set.name }}</ion-text>
-
-		<span>{{ formatNumber(set.allSaved.length) }} {{ pluralize(set.allSaved.length, 'item', 'items') }}</span>
+		<span class="text-sm">{{ formatNumber(set.allSaved.length) }} {{
+			pluralize(set.allSaved.length, 'item', 'items')
+		}}</span>
 	</router-link>
 </template>
 

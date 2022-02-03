@@ -1,7 +1,9 @@
 <template>
 	<DashboardLayout>
-		<div>
-			<RootSetView v-if="rootSet" :key="rootSet.id" :set="rootSet" />
+		<div class="p-4">
+			<div class="showcase">
+				<SetListCard v-for="set in sets" :key="set.hash" :set="set" />
+			</div>
 			<PageLoading v-if="loading" />
 		</div>
 	</DashboardLayout>
@@ -11,16 +13,16 @@
 import { defineComponent } from 'vue'
 import { useUserRootSet } from '@app/composable/study/sets'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
-import RootSetView from '@app/components/study/sets/RootSetView.vue'
+import SetListCard from '@app/components/study/sets/SetListCard.vue'
 
 export default defineComponent({
 	name: 'Study',
 	displayName: 'Study',
 	middlewares: ['isAuthenticated'],
-	components: { DashboardLayout, RootSetView },
+	components: { DashboardLayout, SetListCard },
 	setup () {
-		const { rootSet, error, loading } = useUserRootSet()
-		return { rootSet, error, loading }
+		const { sets, error, loading } = useUserRootSet()
+		return { sets, error, loading }
 	}
 })
 </script>
