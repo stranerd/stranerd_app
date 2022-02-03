@@ -7,7 +7,7 @@ Find the one you need to study for your exams and save them now."
 		/>
 		<div class="showcase">
 			<TestPrepListCard v-for="testPrep in filtered" :key="testPrep.hash"
-				:openMenu="(event:any) => openMenu(testPrep, event)"
+				:openMenu="(event) => openMenu(testPrep, event)"
 				:testPrep="testPrep" />
 		</div>
 	</div>

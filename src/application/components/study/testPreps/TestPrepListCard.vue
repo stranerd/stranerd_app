@@ -1,27 +1,31 @@
 <template>
 	<div
-		:class="[`m-0 w-full h-44 bg-white rounded-xl flex flex-col items-start justify-between gap-2 box-border p-6 text-main_dark`]">
+		:class="[`m-0 w-full min-h-40 bg-white rounded-xl flex flex-col items-start justify-between gap-2 box-border px-6 py-4 text-main_dark`]">
 		<div class="w-full justify-between items-center flex">
-			<ion-text class="font-bold text-xl">
+			<ion-text class="font-bold">
 				<Institution :institutionId="testPrep.data.institutionId" />
 			</ion-text>
 			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl cursor-pointer" @click="openMenu" />
 		</div>
-		<IonText class="text-gray font-bold">
+		<IonText class="text-gray text-sm font-bold -mt-2">
 			<Course :courseId="testPrep.data.courseId" />
 			({{ testPrep.data.questionType }} {{ testPrep.data.year }})
 		</IonText>
 
-		<div class="w-full flex items-center justify-between gap-3 mt-auto">
-			<ion-button v-if="testPrep.canTest && !hideTest" class="btn-primary flex-grow font-bold w-full"
-				@click="createTest(testPrep, true)">
-				Test
-			</ion-button>
-			<ion-button v-if="testPrep.canStudy && !hideStudy"
-				class="btn-outline text-primary flex-grow font-bold w-full"
-				@click="createTest(testPrep, false)">
-				Solutions
-			</ion-button>
+		<div class="w-full flex items-center justify-end gap-3 mt-auto">
+			<span>
+				<ion-button v-if="testPrep.canTest && !hideTest" class="btn-primary" size="small"
+					@click="createTest(testPrep, true)">
+					Test
+				</ion-button>
+			</span>
+			<span>
+				<ion-button v-if="testPrep.canStudy && !hideStudy" class="btn-outline text-primary"
+					size="small"
+					@click="createTest(testPrep, false)">
+					Solutions
+				</ion-button>
+			</span>
 		</div>
 
 		<PageLoading v-if="loading" />

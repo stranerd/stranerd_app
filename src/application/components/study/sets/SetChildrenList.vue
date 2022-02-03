@@ -16,7 +16,7 @@ Create your own sets or explore the public and save ones you want."
 			</div>
 
 		</EmptyState>
-		<div class="showcase">
+		<div class="study-showcase">
 			<SetListCard v-for="set in filtered" :key="set.hash" :set="set" />
 		</div>
 	</div>

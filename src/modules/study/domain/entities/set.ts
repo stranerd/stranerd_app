@@ -7,6 +7,7 @@ export class SetEntity extends BaseEntity {
 	public readonly parent: string | null
 	public readonly isPublic: boolean
 	public readonly tags: string[]
+	public readonly children: string[]
 	public readonly userId: string
 	public readonly userBio: UserBio
 	public readonly saved: {
@@ -26,6 +27,7 @@ export class SetEntity extends BaseEntity {
 		             tags,
 		             userId,
 		             userBio,
+		             children,
 		             saved,
 		             createdAt,
 		             updatedAt
@@ -38,13 +40,14 @@ export class SetEntity extends BaseEntity {
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
 		this.name = !parent ? `${this.userBio.firstName}'s Study` : name
+		this.children = children
 		this.saved = saved
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
 	get allSaved () {
-		return Object.values(this.saved).flat(1)
+		return Object.values(this.saved).flat(1).concat(this.children)
 	}
 }
 
@@ -56,6 +59,7 @@ type SetConstructorArgs = {
 	userId: string
 	userBio: UserBio
 	tags: string[]
+	children: string[]
 	saved: {
 		notes: string[]
 		videos: string[]

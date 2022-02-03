@@ -1,7 +1,7 @@
 <template>
 	<ion-header class="headerShadow ion-no-border">
 		<!-- Small screens -->
-		<ion-toolbar class="flex md:hidden bg-white px-4 items-center">
+		<ion-toolbar class="flex md:hidden bg-white px-2 items-center">
 			<div class="flex items-center justify-between">
 				<ion-icon :icon="chevronBack" class="text-[23px] text-main_dark" @click="$router.go(-1)" />
 				<ion-title class="text-base font-bold text-main_dark">
@@ -17,7 +17,7 @@
 
 		<!-- medium screens -->
 		<ion-toolbar
-			class="hidden lg:hidden md:flex bg-white px-3 items-center border-0 z-50">
+			class="hidden lg:hidden md:flex bg-white px-2 items-center border-0 z-50">
 			<div class="flex items-center justify-between">
 				<Avatar v-if="isLoggedIn" :size="24" :src="user?.avatar"
 					@click="openUserDashboardMenu" />

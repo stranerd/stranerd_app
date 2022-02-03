@@ -10,7 +10,7 @@
 					<template v-slot="slotProps">
 						<span class="flex items-center">
 							<ion-icon :icon="copy" class="text-base mr-2" />
-							<ion-text class="text-sm font-bold">{{ slotProps.tag }}</ion-text>
+							<ion-text class="text-xs font-bold">{{ slotProps.tag }}</ion-text>
 						</span>
 					</template>
 				</Tag>
@@ -24,7 +24,7 @@
 				<ion-text class="text-xs font-bold text-main_dark ml-2">{{ flashCard.userBio.firstName }}</ion-text>
 			</div>
 			<router-link :to="`/study/flashCards/${flashCard.id}`">
-				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]">
+				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]" size="small">
 					Open
 				</ion-button>
 			</router-link>

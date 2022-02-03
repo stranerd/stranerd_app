@@ -308,7 +308,7 @@ export const useSet = (set: SetEntity) => {
 	const videos = computed(() => setGlobal[set.id].videos.value.filter((video) => set.saved.videos.includes(video.id)))
 	const flashCards = computed(() => setGlobal[set.id].flashCards.value.filter((flashCard) => set.saved.flashCards.includes(flashCard.id)))
 	const testPreps = computed(() => setGlobal[set.id].testPreps.value.filter((testPrep) => set.saved.testPreps.includes(testPrep.id)))
-	const sets = computed(() => setGlobal[set.id].sets.value.filter((s) => s.parent === set.id))
+	const sets = computed(() => setGlobal[set.id].sets.value.filter((s) => set.children.includes(s.id)))
 
 	return {
 		...setGlobal[set.id], fetchAllSetEntities,

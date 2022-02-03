@@ -8,6 +8,7 @@ export interface SetFromModel extends SetToModel {
 		flashCards: string[]
 		testPreps: string[]
 	}
+	children: string[]
 	tags: string[]
 	userId: string
 	userBio: UserBio

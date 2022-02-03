@@ -14,7 +14,7 @@
 				<ion-text class="text-xs font-bold text-main_dark ml-2">{{ note.userBio.firstName }}</ion-text>
 			</div>
 			<router-link :to="`/study/notes/${note.id}`">
-				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]">
+				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]" size="small">
 					Read
 				</ion-button>
 			</router-link>
