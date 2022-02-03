@@ -50,7 +50,8 @@
 		"sweetalert2": "^11.3.10",
 		"vue": "^3.2.21",
 		"vue-router": "^4.0.12",
-		"vue3-editor": "^0.1.0-alpha.3"
+		"vue3-editor": "^0.1.0-alpha.3",
+		"youtube-video-exists": "^0.1.2"
 	},
 	"devDependencies": {
 		"@capacitor/cli": "3.4.0",

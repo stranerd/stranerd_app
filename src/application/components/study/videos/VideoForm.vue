@@ -75,9 +75,8 @@
 			<label class="block">Link</label>
 			<IonText class="text-sm mt-1">All links must be videos hosted on YouTube</IonText>
 			<div class="flex mb-2">
-				<span class="bg-new_gray py-3 pl-4 pr-1 text-icon_inactive">{{ factory.youTubeUrl }}</span>
-				<IonInput id="link" v-model="factory.link" placeholder="Enter id of the youtube video"
-					type="url" />
+				<span class="bg-new_gray py-3 pl-4 pr-1 text-icon_inactive">{{ factory.service.url }}</span>
+				<IonInput id="link" v-model="factory.videoId" placeholder="Enter id of the youtube video" />
 			</div>
 			<DisplayError :error="factory.errors.link" />
 		</div>
