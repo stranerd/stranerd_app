@@ -40,7 +40,7 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		super({
 			title: '',
 			description: '',
-			isHosted: true,
+			isHosted: false,
 			tags: [],
 			media: null,
 			link: null,

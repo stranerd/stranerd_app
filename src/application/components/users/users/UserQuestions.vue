@@ -1,8 +1,8 @@
 <template>
-	<div v-if="loading" class="col-span-12 flex items-center justify-center w-full py-12 px-4">
+	<div v-if="loading" class="col-span-12 flex items-center justify-center w-full py-8">
 		<ion-progress-bar type="indeterminate"></ion-progress-bar>
 	</div>
-	<div v-else class="col-span-12 flex flex-col gap-4 text-body p-4">
+	<div v-else class="col-span-12 flex flex-col gap-4 text-body">
 		<UserQuestionsCard v-for="question in questions" :key="question.hash" :question="question" />
 		<EmptyState v-if="!loading && !error && questions.length === 0"
 			info="This user hasn't asked any questions yet" />

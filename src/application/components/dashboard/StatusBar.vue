@@ -16,7 +16,7 @@
 				Your nerd score
 			</ion-text>
 			<DonutChart :bgColor="user.nerdScoreColor.bg" :fgColor="user.nerdScoreColor.fg"
-				:percentage="user.scorePercentage" :size="75" />
+				:percentage="user.scorePercentage" :size="84" />
 		</div>
 	</div>
 </template>
