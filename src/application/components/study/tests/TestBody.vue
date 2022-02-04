@@ -54,7 +54,9 @@
 					<router-link v-if="test.done" :to="`/study/tests/${test.id}/results`">
 						<ion-button class="btn-primary btn-lgx">See Results</ion-button>
 					</router-link>
-					<ion-button v-else class="btn-primary btn-lgx" @click="openSubmitTest">Submit</ion-button>
+					<ion-button v-else class="btn-primary btn-lgx" @click="openSubmitTest">
+						{{ test.isTimed ? 'Submit' : 'End Study' }}
+					</ion-button>
 				</div>
 			</div>
 		</div>

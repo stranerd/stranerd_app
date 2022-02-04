@@ -1,6 +1,6 @@
 <template>
 	<Popover class="flex flex-col gap-4">
-		<template v-if="isLoggedIn">
+		<template v-if="type !== 'sets' && isLoggedIn">
 			<template v-if="rootSet">
 				<span v-if="rootSet.allSaved.includes(entity?.id)" class="flex gap-4 items-center"
 					@click="removeFromSet(type, entity?.id, rootSet)">
@@ -12,34 +12,47 @@
 					<ion-label class="font-bold">Add To Your Library</ion-label>
 				</span>
 			</template>
+		</template>
 
-			<!--			<template v-if="normalSets.filter((s) => !s.saved[type]?.includes(entity?.id)).length">
-							<span class="flex gap-4 items-center" @click="showAddToSet = !showAddToSet">
-								<ion-icon :icon="showAddToSet ? chevronUp : folder" class="text-2xl" />
-								<ion-label class="font-bold">Add To Study Set</ion-label>
+		<!--			<template v-if="normalSets.filter((s) => !s.saved[type]?.includes(entity?.id)).length">
+						<span class="flex gap-4 items-center" @click="showAddToSet = !showAddToSet">
+							<ion-icon :icon="showAddToSet ? chevronUp : folder" class="text-2xl" />
+							<ion-label class="font-bold">Add To Study Set</ion-label>
+						</span>
+						<div v-if="showAddToSet" class="ml-6">
+							<span v-for="set in normalSets.filter((s) => !s.saved[type]?.includes(entity?.id))" :key="set.hash"
+								class="mb-4 flex gap-4 items-center" @click="saveToSet(type, entity?.id, set)">
+								<ion-icon :icon="folder" class="text-xl" />
+								<ion-label class="font-bold">{{ set.name }}</ion-label>
 							</span>
-							<div v-if="showAddToSet" class="ml-6">
-								<span v-for="set in normalSets.filter((s) => !s.saved[type]?.includes(entity?.id))" :key="set.hash"
-									class="mb-4 flex gap-4 items-center" @click="saveToSet(type, entity?.id, set)">
-									<ion-icon :icon="folder" class="text-xl" />
-									<ion-label class="font-bold">{{ set.name }}</ion-label>
-								</span>
-							</div>
-						</template>
+						</div>
+					</template>
 
-						<template v-if="normalSets.filter((s) => s.saved[type]?.includes(entity?.id)).length">
-							<span class="flex gap-4 items-center" @click="showRemoveFromSet = !showRemoveFromSet">
-								<ion-icon :icon="showRemoveFromSet ? chevronUp : removeCircle" class="text-2xl" />
-								<ion-label class="font-bold">Remove From Study Set</ion-label>
+					<template v-if="normalSets.filter((s) => s.saved[type]?.includes(entity?.id)).length">
+						<span class="flex gap-4 items-center" @click="showRemoveFromSet = !showRemoveFromSet">
+							<ion-icon :icon="showRemoveFromSet ? chevronUp : removeCircle" class="text-2xl" />
+							<ion-label class="font-bold">Remove From Study Set</ion-label>
+						</span>
+						<div v-if="showRemoveFromSet" class="ml-6">
+							<span v-for="set in normalSets.filter((s) => s.saved[type]?.includes(entity?.id))" :key="set.hash"
+								class="mb-4 flex gap-4 items-center" @click="removeFromSet(type, entity?.id, set)">
+								<ion-icon :icon="folder" class="text-xl" />
+								<ion-label class="font-bold">{{ set.name }}</ion-label>
 							</span>
-							<div v-if="showRemoveFromSet" class="ml-6">
-								<span v-for="set in normalSets.filter((s) => s.saved[type]?.includes(entity?.id))" :key="set.hash"
-									class="mb-4 flex gap-4 items-center" @click="removeFromSet(type, entity?.id, set)">
-									<ion-icon :icon="folder" class="text-xl" />
-									<ion-label class="font-bold">{{ set.name }}</ion-label>
-								</span>
-							</div>
-						</template>-->
+						</div>
+					</template>-->
+
+		<template v-if="type !== 'sets'">
+			<template v-if="!data.set || data?.set?.userId !== id">
+				<!-- save to folder -->
+			</template>
+			<template v-else>
+				<span v-if="data.set.allSaved.includes(entity?.id)" class="flex gap-4 items-center"
+					@click="removeFromSet(type, entity?.id, data.set)">
+					<ion-icon :icon="removeCircle" class="text-2xl" />
+					<ion-label class="font-bold">Unsave In Folder</ion-label>
+				</span>
+			</template>
 		</template>
 		<span v-if="canEdit" class="flex gap-4 items-center" @click="editEntity">
 			<ion-icon :icon="pencil" class="text-2xl" />
@@ -64,7 +77,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useDeleteStudyEntity, useStudyMenuData } from '@app/composable/study/menus'
 import {
 	chevronUp,
@@ -77,7 +90,7 @@ import {
 	trash
 } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
-import { useSaveToSet, useUserRootSet } from '@app/composable/study/sets'
+import { openSetEditModal, useSaveToSet, useUserRootSet } from '@app/composable/study/sets'
 import { openFlashCardEditModal } from '@app/composable/study/flashCards'
 import { useRouter } from 'vue-router'
 import { openNoteEditModal } from '@root/application/composable/study/notes'
@@ -96,8 +109,6 @@ export default defineComponent({
 
 		const { rootSet } = useUserRootSet()
 		const { loading: setLoading, error: setError, saveToSet, removeFromSet } = useSaveToSet()
-		const showAddToSet = ref(false)
-		const showRemoveFromSet = ref(false)
 
 		const canEdit = computed(() => type.value === 'testPreps' ? isAdmin.value : entity.value?.userId === id.value)
 		const editEntity = async () => {
@@ -105,6 +116,7 @@ export default defineComponent({
 			if (type.value === 'notes') await openNoteEditModal(entity.value as any, router)
 			if (type.value === 'videos') await openVideoEditModal(entity.value as any, router)
 			if (type.value === 'testPreps') await openTestPrepEditModal(entity.value as any)
+			if (type.value === 'sets') await openSetEditModal(entity.value as any)
 		}
 
 		return {
@@ -112,7 +124,7 @@ export default defineComponent({
 			chevronUp, library, folder, shareIcon, pencil, person, trash, removeCircle,
 			share, id, isLoggedIn,
 			showDelete, deleteLoading, deleteError, deleteEntity, canEdit, editEntity,
-			rootSet, setLoading, setError, saveToSet, removeFromSet, showAddToSet, showRemoveFromSet
+			rootSet, setLoading, setError, saveToSet, removeFromSet
 		}
 	}
 })

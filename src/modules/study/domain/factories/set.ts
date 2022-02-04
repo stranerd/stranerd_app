@@ -59,6 +59,7 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
 	loadEntity = (entity: SetEntity) => {
 		this.name = entity.name
 		this.isPublic = entity.isPublic
+		this.parent = entity.parent
 		this.set('tags', entity.tags)
 	}
 

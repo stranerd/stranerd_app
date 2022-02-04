@@ -67,11 +67,6 @@
 		grid-gap: 1rem;
 	}
 
-	.study-showcase {
-		@apply grid xl:grid-cols-10 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 grid-cols-3;
-		grid-gap: 1rem;
-	}
-
 	.blueTop {
 		@apply bg-primary w-full flex items-center min-h-[5.5rem] lg:min-h-[9.75rem] rounded-b-2xl md:rounded-none mb-4 justify-center
 	}

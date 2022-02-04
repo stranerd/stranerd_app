@@ -44,10 +44,6 @@ export default defineComponent({
 	name: 'TestPrepListCard',
 	components: { Institution, Course },
 	props: {
-		colorClass: {
-			type: String,
-			default: 'bg-light_gray'
-		},
 		testPrep: {
 			type: TestPrepEntity,
 			required: true

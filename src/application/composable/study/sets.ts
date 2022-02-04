@@ -224,7 +224,9 @@ export const useSet = (set: SetEntity) => {
 		const listeners = await Promise.all([
 			ListenToNotesInSet.call(set.saved.notes, {
 				created: async (entity) => {
-					setGlobal[set.id].notes.value.push(entity)
+					const index = setGlobal[set.id].notes.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].notes.value.splice(index, 1, entity)
+					else setGlobal[set.id].notes.value.push(entity)
 				},
 				updated: async (entity) => {
 					const index = setGlobal[set.id].notes.value.findIndex((q) => q.id === entity.id)
@@ -238,7 +240,9 @@ export const useSet = (set: SetEntity) => {
 			}),
 			ListenToVideosInSet.call(set.saved.videos, {
 				created: async (entity) => {
-					setGlobal[set.id].videos.value.push(entity)
+					const index = setGlobal[set.id].videos.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].videos.value.splice(index, 1, entity)
+					else setGlobal[set.id].videos.value.push(entity)
 				},
 				updated: async (entity) => {
 					const index = setGlobal[set.id].videos.value.findIndex((q) => q.id === entity.id)
@@ -252,7 +256,9 @@ export const useSet = (set: SetEntity) => {
 			}),
 			ListenToFlashCardsInSet.call(set.saved.flashCards, {
 				created: async (entity) => {
-					setGlobal[set.id].flashCards.value.push(entity)
+					const index = setGlobal[set.id].flashCards.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].flashCards.value.splice(index, 1, entity)
+					else setGlobal[set.id].flashCards.value.push(entity)
 				},
 				updated: async (entity) => {
 					const index = setGlobal[set.id].flashCards.value.findIndex((q) => q.id === entity.id)
@@ -266,7 +272,9 @@ export const useSet = (set: SetEntity) => {
 			}),
 			ListenToTestPrepsInSet.call(set.saved.testPreps, {
 				created: async (entity) => {
-					setGlobal[set.id].testPreps.value.push(entity)
+					const index = setGlobal[set.id].testPreps.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].testPreps.value.splice(index, 1, entity)
+					else setGlobal[set.id].testPreps.value.push(entity)
 				},
 				updated: async (entity) => {
 					const index = setGlobal[set.id].testPreps.value.findIndex((q) => q.id === entity.id)
@@ -280,7 +288,9 @@ export const useSet = (set: SetEntity) => {
 			}),
 			ListenToSetChildren.call(set.id, {
 				created: async (entity) => {
-					setGlobal[set.id].sets.value.push(entity)
+					const index = setGlobal[set.id].sets.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].sets.value.splice(index, 1, entity)
+					else setGlobal[set.id].sets.value.push(entity)
 				},
 				updated: async (entity) => {
 					const index = setGlobal[set.id].sets.value.findIndex((q) => q.id === entity.id)
@@ -395,7 +405,7 @@ export const useEditSet = () => {
 			try {
 				await setLoading(true)
 				await EditSet.call(editingSet!.id, factory.value)
-				await setMessage('Set updated successfully')
+				await setMessage('Folder updated successfully')
 				useStudyModal().closeEditSet()
 				factory.value.reset()
 			} catch (error) {
@@ -416,7 +426,7 @@ export const useDeleteSet = (setId: string) => {
 	const deleteSet = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this set?',
+			title: 'Are you sure you want to delete this folder?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {
@@ -425,7 +435,7 @@ export const useDeleteSet = (setId: string) => {
 				await DeleteSet.call(setId)
 				global.sets.value = global.sets.value
 					.filter((q) => q.id !== setId)
-				await setMessage('Set deleted successfully')
+				await setMessage('Folder deleted successfully')
 			} catch (error) {
 				await setError(error)
 			}

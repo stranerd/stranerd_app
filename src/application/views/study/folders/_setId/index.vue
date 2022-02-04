@@ -6,65 +6,26 @@
 
 				<div v-if="sets.length">
 					<ion-text class="font-semibold block text-main_dark mb-2">Folders</ion-text>
-					<div class="study-showcase">
-						<DoubleClick v-for="set in sets" :key="set.hash"
-							:class="{'highlighted': highlighted === set.id}"
-							class="w-full flex flex-col items-center"
-							@click="highlighted = set.id"
-							@doubleClick="$router.push(`/study/folders/${set.id}`)">
-							<ion-icon :icon="folderSharp" class="text-dark_gray text-6xl" />
-							<ion-text class="text-dark_gray w-full text-center break-words">{{ set.name }}</ion-text>
-							<ion-text class="text-sm">
-								{{
-									formatNumber(set.allSaved.length)
-								}} {{ pluralize(set.allSaved.length, 'item', 'items') }}
-							</ion-text>
-						</DoubleClick>
+					<div class="showcase">
+						<SetListCard v-for="item in sets" :key="item.hash"
+							:openMenu="($ev) => openStudyEntityMenu(item, { set }, $ev)"
+							:set="item" />
 					</div>
 				</div>
 
 				<div v-if="testPreps.length + flashCards.length + notes.length + videos.length">
 					<ion-text class="font-semibold block text-main_dark mb-2">Others</ion-text>
-					<div class="study-showcase">
-						<DoubleClick v-for="testPrep in testPreps" :key="testPrep.hash"
-							:class="{'highlighted': highlighted === testPrep.id}"
-							class="w-full flex flex-col items-center"
-							@click="highlighted = testPrep.id">
-							<img alt="" class="w-16 mb-1" src="@app/assets/images/New/testPrep.svg" />
-							<ion-text class="text-sm text-dark_gray w-full text-center break-words capitalize">
-								{{ testPrep.name }}
-							</ion-text>
-						</DoubleClick>
-						<DoubleClick v-for="flashCard in flashCards" :key="flashCard.hash"
-							:class="{'highlighted': highlighted === flashCard.id}"
-							class="w-full flex flex-col items-center"
-							@click="highlighted = flashCard.id"
-							@doubleClick="$router.push(`/study/flashCards/${flashCard.id}`)">
-							<img alt="" class="w-16 mb-1" src="@app/assets/images/New/flashCard.png" />
-							<ion-text class="text-sm text-dark_gray w-full text-center break-words capitalize">
-								{{ flashCard.title }}
-							</ion-text>
-						</DoubleClick>
-						<DoubleClick v-for="note in notes" :key="note.hash"
-							:class="{'highlighted': highlighted === note.id}"
-							class="w-full flex flex-col items-center"
-							@click="highlighted = note.id"
-							@doubleClick="$router.push(`/study/notes/${note.id}`)">
-							<ion-icon :icon="reader" class="text-dark_gray text-6xl" />
-							<ion-text class="text-sm text-dark_gray w-full text-center break-words capitalize">
-								{{ note.title }}
-							</ion-text>
-						</DoubleClick>
-						<DoubleClick v-for="video in videos" :key="video.hash"
-							:class="{'highlighted': highlighted === video.id}"
-							class="w-full flex flex-col items-center"
-							@click="highlighted = video.id"
-							@doubleClick="$router.push(`/study/videos/${video.id}`)">
-							<ion-icon :icon="filmSharp" class="text-dark_gray text-6xl" />
-							<ion-text class="text-sm text-dark_gray w-full text-center break-words capitalize">
-								{{ video.title }}
-							</ion-text>
-						</DoubleClick>
+					<div class="showcase">
+						<TestPrepListCard v-for="testPrep in testPreps" :key="testPrep.hash"
+							:openMenu="($ev) => openStudyEntityMenu(testPrep, { set }, $ev)"
+							:testPrep="testPrep" />
+						<FlashCardListCard v-for="flashCard in flashCards" :key="flashCard.hash" :flashCard="flashCard"
+							:openMenu="($ev) => openStudyEntityMenu(flashCard, { set }, $ev)" />
+						<NoteListCard v-for="note in notes" :key="note.hash" :note="note"
+							:openMenu="($ev) => openStudyEntityMenu(note, { set }, $ev)" />
+						<VideoListCard v-for="video in videos" :key="video.hash"
+							:openMenu="($ev) => openStudyEntityMenu(video, { set }, $ev)"
+							:video="video" />
 					</div>
 				</div>
 			</div>
@@ -73,31 +34,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import PageWrapper from '@app/components/study/sets/page/PageWrapper.vue'
-import { filmSharp, folderSharp, reader } from 'ionicons/icons'
-import { formatNumber, pluralize } from '@utils/commons'
-import DoubleClick from '@app/components/core/gestures/DoubleClick.vue'
+import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
+import { openStudyEntityMenu } from '@app/composable/study/menus'
+import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
+import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
+import VideoListCard from '@app/components/study/videos/VideoListCard.vue'
+import SetListCard from '@app/components/study/sets/SetListCard.vue'
 
 export default defineComponent({
 	name: 'StudyFoldersSetId',
 	displayName: 'Study Folder',
-	components: { DoubleClick, PageWrapper },
+	components: { PageWrapper, TestPrepListCard, FlashCardListCard, NoteListCard, VideoListCard, SetListCard },
 	setup () {
-		const highlighted = ref('')
-		return { reader, folderSharp, filmSharp, formatNumber, pluralize, highlighted }
+		return { openStudyEntityMenu }
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	.highlighted {
-		ion-icon, img {
-			opacity: 0.5;
-		}
-
-		padding: 0.25rem;
-		background: rgba($color-primary, 0.2);
-		border-radius: 0.5rem;
-	}
-</style>

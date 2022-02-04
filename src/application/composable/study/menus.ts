@@ -7,9 +7,10 @@ import { useDeleteFlashCard } from '@app/composable/study/flashCards'
 import { useDeleteTestPrep } from '@app/composable/study/testPreps'
 import { useDeleteVideo } from '@app/composable/study/videos'
 import { useDeleteNote } from '@app/composable/study/notes'
+import { useDeleteSet } from '@app/composable/study/sets'
 
-type SetProp = keyof SetEntity['saved']
-type Entity = NoteEntity | VideoEntity | FlashCardEntity | TestPrepEntity
+type SetProp = keyof SetEntity['saved'] | 'sets'
+type Entity = NoteEntity | VideoEntity | FlashCardEntity | TestPrepEntity | SetEntity
 
 const global = {
 	type: ref(null as SetProp | null),
@@ -23,12 +24,15 @@ export const openStudyEntityMenu = (entity: typeof global['entity']['value'], da
 	else if (entity instanceof FlashCardEntity) global.type.value = 'flashCards'
 	else if (entity instanceof VideoEntity) global.type.value = 'videos'
 	else if (entity instanceof TestPrepEntity) global.type.value = 'testPreps'
+	else if (entity instanceof SetEntity) global.type.value = 'sets'
 	global.data.value = data
 	useMenuPopover().openStudyEntityMenu(event)
 }
 
 export const useStudyMenuData = () => {
-	const type = global.type.value === 'testPreps' ? 'preps' : global.type.value
+	const type = global.type.value === 'testPreps' ? 'preps' :
+		global.type.value === 'sets' ? 'folders' :
+			global.type.value
 	const shareLink = computed({
 		get: () => `/study/${type}/${global.entity.value instanceof TestPrepEntity ? global.entity.value.data.institutionId : global.entity.value?.id}`,
 		set: () => {
@@ -66,7 +70,8 @@ export const useDeleteStudyEntity = () => {
 		notes: useDeleteNote,
 		videos: useDeleteVideo,
 		flashCards: useDeleteFlashCard,
-		testPreps: useDeleteTestPrep
+		testPreps: useDeleteTestPrep,
+		sets: useDeleteSet
 	}
 	const returnValue = types[global.type.value ?? 'notes'](global.entity.value?.id ?? '')
 	const { loading, error } = returnValue
@@ -75,7 +80,8 @@ export const useDeleteStudyEntity = () => {
 			notes: 'Note',
 			videos: 'Video',
 			flashCards: 'FlashCard',
-			testPreps: 'TestPrep'
+			testPreps: 'TestPrep',
+			sets: 'Set'
 		}[global.type.value ?? 'notes']
 		// @ts-ignore
 		await returnValue?.[`delete${key}`]?.()

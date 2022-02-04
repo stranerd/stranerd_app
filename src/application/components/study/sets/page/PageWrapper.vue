@@ -1,6 +1,6 @@
 <template>
 	<Justified>
-		<SetWrapper v-if="set" :set="set">
+		<SetWrapper v-if="set" :key="set.hash" :set="set">
 			<template v-slot:default="{ flashCards, notes, testPreps, videos, set, sets }">
 				<slot :flashCards="flashCards" :notes="notes" :set="set" :sets="sets" :testPreps="testPreps"
 					:videos="videos" />
