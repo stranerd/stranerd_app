@@ -1,9 +1,16 @@
 <template>
 	<div class="m-0 w-full bg-white rounded-xl flex flex-col justify-between items-start gap-4 box-border p-4">
 		<div class="w-full justify-between items-start flex">
-			<ion-icon :icon="document" class="text-main_dark text-2xl cursor-pointer" />
-			<div class="text-base text-main_dark font-bold text-left flex-col flex ml-2 flex-grow">
+			<div class="text-base text-main_dark font-bold text-left items-start flex-col flex ml-2 gap-2 flex-grow">
 				<ion-text>{{ note.title }}</ion-text>
+				<Tag tag="Note" :index="1">
+					<template v-slot="slotProps">
+						<span class="flex items-center ">
+							<ion-icon :icon="document" class="text-base mr-1"  />
+							<ion-text class="text-xs font-bold">{{ slotProps.tag }}</ion-text>
+						</span>
+					</template>
+				</Tag>
 			</div>
 			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl cursor-pointer" @click="openMenu" />
 		</div>
