@@ -78,8 +78,10 @@ import { AddNoteUseCase } from './domain/usecases/notes/addNote'
 import { FindNoteUseCase } from './domain/usecases/notes/findNote'
 import { DeleteNoteUseCase } from './domain/usecases/notes/deleteNote'
 import { GetNotesInSetUseCase } from './domain/usecases/notes/getNotesInSet'
+import { GetUserNotesUseCase } from './domain/usecases/notes/getUserNotes'
 import { ListenToNoteUseCase } from './domain/usecases/notes/listenToNote'
 import { ListenToNotesUseCase } from './domain/usecases/notes/listenToNotes'
+import { ListenToUserNotesUseCase } from './domain/usecases/notes/listenToUserNotes'
 import { ListenToNotesInSetUseCase } from './domain/usecases/notes/listenToNotesInSet'
 import { EditNoteUseCase } from './domain/usecases/notes/editNote'
 import { GetNotesUseCase } from './domain/usecases/notes/getNotes'
@@ -88,9 +90,11 @@ import { FindVideoUseCase } from './domain/usecases/videos/findVideo'
 import { DeleteVideoUseCase } from './domain/usecases/videos/deleteVideo'
 import { ListenToVideoUseCase } from './domain/usecases/videos/listenToVideo'
 import { ListenToVideosUseCase } from './domain/usecases/videos/listenToVideos'
+import { ListenToUserVideosUseCase } from './domain/usecases/videos/listenToUserVideos'
 import { ListenToVideosInSetUseCase } from './domain/usecases/videos/listenToVideosInSet'
 import { EditVideoUseCase } from './domain/usecases/videos/editVideo'
 import { GetVideosUseCase } from './domain/usecases/videos/getVideos'
+import { GetUserVideosUseCase } from './domain/usecases/videos/getUserVideos'
 import { GetVideosInSetUseCase } from './domain/usecases/videos/getVideosInSet'
 import { EditFlashCardUseCase } from './domain/usecases/flashCards/editFlashCard'
 import { ListenToFlashCardUseCase } from './domain/usecases/flashCards/listenToFlashCard'
@@ -209,9 +213,11 @@ export const DeleteFlashCard = new DeleteFlashCardUseCase(flashCardRepository)
 
 export const FindNote = new FindNoteUseCase(noteRepository)
 export const GetNotes = new GetNotesUseCase(noteRepository)
+export const GetUserNotes = new GetUserNotesUseCase(noteRepository)
 export const GetNotesInSet = new GetNotesInSetUseCase(noteRepository)
 export const ListenToNote = new ListenToNoteUseCase(noteRepository)
 export const ListenToNotes = new ListenToNotesUseCase(noteRepository)
+export const ListenToUserNotes = new ListenToUserNotesUseCase(noteRepository)
 export const ListenToNotesInSet = new ListenToNotesInSetUseCase(noteRepository)
 export const AddNote = new AddNoteUseCase(noteRepository)
 export const EditNote = new EditNoteUseCase(noteRepository)
@@ -219,9 +225,11 @@ export const DeleteNote = new DeleteNoteUseCase(noteRepository)
 
 export const FindVideo = new FindVideoUseCase(videoRepository)
 export const GetVideos = new GetVideosUseCase(videoRepository)
+export const GetUserVideos = new GetUserVideosUseCase(videoRepository)
 export const GetVideosInSet = new GetVideosInSetUseCase(videoRepository)
 export const ListenToVideo = new ListenToVideoUseCase(videoRepository)
 export const ListenToVideos = new ListenToVideosUseCase(videoRepository)
+export const ListenToUserVideos = new ListenToUserVideosUseCase(videoRepository)
 export const ListenToVideosInSet = new ListenToVideosInSetUseCase(videoRepository)
 export const AddVideo = new AddVideoUseCase(videoRepository)
 export const EditVideo = new EditVideoUseCase(videoRepository)

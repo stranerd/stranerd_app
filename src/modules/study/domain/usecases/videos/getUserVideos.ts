@@ -1,11 +1,11 @@
 import { Conditions, QueryParams } from '@modules/core'
-import { IFlashCardRepository } from '../../irepositories/iflashCard'
+import { IVideoRepository } from '../../irepositories/ivideo'
 import { PAGINATION_LIMIT } from '@utils/constants'
 
-export class GetUserFlashCardsUseCase {
-	private repository: IFlashCardRepository
+export class GetUserVideosUseCase {
+	private repository: IVideoRepository
 
-	constructor (repository: IFlashCardRepository) {
+	constructor (repository: IVideoRepository) {
 		this.repository = repository
 	}
 

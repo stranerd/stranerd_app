@@ -1,16 +1,16 @@
 import { Conditions, Listeners, QueryParams } from '@modules/core'
-import { IFlashCardRepository } from '../../irepositories/iflashCard'
-import { FlashCardEntity } from '../../entities/flashCard'
+import { IVideoRepository } from '../../irepositories/ivideo'
+import { VideoEntity } from '../../entities/video'
 import { PAGINATION_LIMIT } from '@utils/constants'
 
-export class ListenToUserFlashCardsUseCase {
-	private repository: IFlashCardRepository
+export class ListenToUserVideosUseCase {
+	private repository: IVideoRepository
 
-	constructor (repository: IFlashCardRepository) {
+	constructor (repository: IVideoRepository) {
 		this.repository = repository
 	}
 
-	async call (userId: string, listener: Listeners<FlashCardEntity>, date?: number) {
+	async call (userId: string, listener: Listeners<VideoEntity>, date?: number) {
 		const conditions: QueryParams = {
 			sort: { field: 'createdAt', order: -1 },
 			limit: PAGINATION_LIMIT,

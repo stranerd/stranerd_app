@@ -1,11 +1,11 @@
 import { Conditions, QueryParams } from '@modules/core'
-import { IFlashCardRepository } from '../../irepositories/iflashCard'
+import { INoteRepository } from '../../irepositories/inote'
 import { PAGINATION_LIMIT } from '@utils/constants'
 
-export class GetUserFlashCardsUseCase {
-	private repository: IFlashCardRepository
+export class GetUserNotesUseCase {
+	private repository: INoteRepository
 
-	constructor (repository: IFlashCardRepository) {
+	constructor (repository: INoteRepository) {
 		this.repository = repository
 	}
 
