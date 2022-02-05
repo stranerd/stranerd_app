@@ -1,7 +1,22 @@
 <template>
 	<SearchWrapper>
-		<template v-slot:default="{ searchTerm, testPreps, notes, videos, flashCards, users }">
+		<template v-slot:default="{ searchTerm, testPreps, notes, videos, flashCards, sets, users }">
 			<div>
+				<div class="mb-12">
+					<div class="w-full flex justify-between mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text class="mr-3">
+								Nerds
+							</ion-text>
+						</div>
+
+						<router-link :to="`/search/nerds?search=${searchTerm}`"
+							class="text-primary text-body flex items-center font-bold">
+							<span>view all</span>
+						</router-link>
+					</div>
+					<SearchUsersList :sliced="true" :users="users" />
+				</div>
 				<div class="mb-12">
 					<div class="w-full flex justify-between mb-4">
 						<div class="heading font-bold text-main_dark flex items-center">
@@ -63,16 +78,16 @@
 					<div class="w-full flex justify-between mb-4">
 						<div class="heading font-bold text-main_dark flex items-center">
 							<ion-text class="mr-3">
-								Nerds
+								Folders
 							</ion-text>
 						</div>
 
-						<router-link :to="`/search/nerds?search=${searchTerm}`"
+						<router-link :to="`/search/folders?search=${searchTerm}`"
 							class="text-primary text-body flex items-center font-bold">
 							<span>view all</span>
 						</router-link>
 					</div>
-					<SearchUsersList :sliced="true" :users="users" />
+					<SearchSetsList :sets="sets" :sliced="true" />
 				</div>
 			</div>
 		</template>
@@ -86,6 +101,7 @@ import SearchTestPrepsList from '@app/components/study/testPreps/SearchTestPreps
 import SearchNotesList from '@app/components/study/notes/SearchNotesList.vue'
 import SearchVideosList from '@app/components/study/videos/SearchVideosList.vue'
 import SearchFlashCardsList from '@app/components/study/flashCards/SearchFlashCardsList.vue'
+import SearchSetsList from '@app/components/study/sets/SearchSetsList.vue'
 import SearchUsersList from '@app/components/users/SearchUsersList.vue'
 
 export default defineComponent({
@@ -97,6 +113,7 @@ export default defineComponent({
 		SearchNotesList,
 		SearchVideosList,
 		SearchFlashCardsList,
+		SearchSetsList,
 		SearchUsersList
 	}
 })

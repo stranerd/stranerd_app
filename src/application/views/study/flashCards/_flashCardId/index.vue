@@ -29,10 +29,8 @@
 						@click="openMenu"
 					/>
 				</div>
-			
-			</div>
 
-		
+			</div>
 		</div>
 
 		<div class="w-full bg-white flex md:hidden items-center justify-between text-gray p-4 -mt-8 rounded-b-xl">
@@ -54,11 +52,8 @@
 					class="text-gray text-xl cursor-pointer ml-3"
 					@click="openMenu"
 				/>
-			
 			</div>
-	
 		</div>
-
 
 		<template v-if="flashCard">
 			<FlashCardScreen v-if="cardMode" :flashCard="flashCard" />

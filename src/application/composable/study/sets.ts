@@ -120,9 +120,8 @@ export const useUserRootSet = (userId = useAuth().id.value) => {
 		await myGlobal[userId].setLoading(false)
 	}
 
-	if (!myGlobal[userId].fetched.value && !myGlobal[userId].loading.value) fetchSets().then()
-
 	onMounted(async () => {
+		if (!myGlobal[userId].fetched.value && !myGlobal[userId].loading.value) await fetchSets()
 		await myGlobal[userId].listener.startListener()
 	})
 	onUnmounted(async () => {
@@ -131,7 +130,7 @@ export const useUserRootSet = (userId = useAuth().id.value) => {
 
 	const rootSet = computed(() => myGlobal[userId].sets.value[0] ?? null)
 
-	return { ...myGlobal[userId], rootSet }
+	return { ...myGlobal[userId], rootSet, fetchSets }
 }
 
 export const useSetById = (setId: string) => {

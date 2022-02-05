@@ -25,7 +25,7 @@ const search = async () => {
 	const val = global.searchTerm.value.trim()
 	await global.setError('')
 	try {
-		await global.setLoading(true)
+		// await global.setLoading(true)
 		const res = await Search.call(val)
 		global.questions.value = res.questions.results
 		global.answers.value = res.answers.results

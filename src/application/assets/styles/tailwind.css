@@ -70,4 +70,8 @@
 	.blueTop {
 		@apply bg-primary w-full flex items-center min-h-[5.5rem] lg:min-h-[9.75rem] rounded-b-2xl md:rounded-none mb-4 justify-center
 	}
+
+	.nav-scroll {
+		@apply md:text-sm lg:text-base items-start md:justify-center flex gap-4 text-xs text-faded_gray font-semibold overflow-x-auto mt-auto mx-auto
+	}
 }

@@ -46,10 +46,6 @@ export class VideoEntity extends BaseEntity {
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
-
-	get videoId () {
-		return (this.link ?? '').split(':')[1] ?? ''
-	}
 }
 
 type VideoConstructorArgs = {

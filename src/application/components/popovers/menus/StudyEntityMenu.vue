@@ -2,7 +2,7 @@
 	<Popover class="flex flex-col gap-4">
 		<template v-if="isLoggedIn && type !== 'sets'">
 			<SaveToSet v-if="!data.set || data?.set?.userId !== id" :itemId="entity?.id"
-				:save="(set) => saveToSet(type, entity?.id, set)"
+				:root="true" :save="(set) => saveToSet(type, entity?.id, set)" :set="rootSet"
 				:unsave="(set) => removeFromSet(type, entity?.id, set)" />
 			<span v-else-if="data.set.allSaved.includes(entity?.id)" class="flex gap-4 items-center"
 				@click="removeFromSet(type, entity?.id, data.set)">
@@ -65,7 +65,7 @@ export default defineComponent({
 		const showDelete = computed(() => type.value === 'testPreps' ? isAdmin.value : entity.value?.userId === id.value)
 		const { loading: deleteLoading, error: deleteError, deleteEntity } = useDeleteStudyEntity()
 
-		const { sets } = useUserRootSet()
+		const { rootSet } = useUserRootSet()
 		const { loading: setLoading, error: setError, saveToSet, removeFromSet } = useSaveToSet()
 
 		const canEdit = computed(() => type.value === 'testPreps' ? isAdmin.value : entity.value?.userId === id.value)
@@ -84,7 +84,7 @@ export default defineComponent({
 			chevronUp, chevronDown, library, shareIcon, pencil, person, trash, removeCircle,
 			share, id, isLoggedIn,
 			showDelete, deleteLoading, deleteError, deleteEntity, canEdit, editEntity,
-			sets, setLoading, setError, saveToSet, removeFromSet, showAddToSet
+			rootSet, setLoading, setError, saveToSet, removeFromSet, showAddToSet
 		}
 	}
 })

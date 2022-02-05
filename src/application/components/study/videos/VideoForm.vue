@@ -19,7 +19,7 @@
 			</label>
 		</div>
 
-		<div class="mb-12">
+		<div v-if="false" class="mb-12">
 			<label>Tags</label>
 			<IonInput v-model="tag" class="mb-2" placeholder="Add related tags" />
 			<div v-if="factory.tags.length > 0" class="mb-2 flex flex-wrap gap-2">
@@ -33,7 +33,7 @@
 			<DisplayError :error="factory.errors.tags" />
 		</div>
 
-		<div class="mb-12">
+		<div v-if="false" class="mb-12">
 			<input
 				id="preview" accept="image/x-png,image/jpeg,image/jpg"
 				class="hidden" type="file" @change="catchPreview" />
@@ -73,11 +73,8 @@
 
 		<div v-else class="mb-12">
 			<label class="block">Link</label>
-			<IonText class="text-sm mt-1">
-				All links must be videos hosted on YouTube.<br>
-				Copy the id of the video from the url, eg {{ factory.service.url }}{videoId}
-			</IonText>
-			<IonInput v-model="factory.videoId" class="mb-2" placeholder="Enter id of the youtube video" />
+			<IonText class="text-sm mt-1">All links must be of videos hosted on YouTube</IonText>
+			<IonInput v-model="factory.link" class="mb-2" placeholder="Enter youtube video link" />
 			<DisplayError :error="factory.errors.link" />
 		</div>
 

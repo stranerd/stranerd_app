@@ -11,7 +11,7 @@
 		</div>
 
 		<div
-			class="bg-white rounded-3xl h-full w-full sm:w-4/12 flex justify-between items-center min-w-[20rem] mt-5 sm:mt-0 p-6">
+			class="bg-white rounded-3xl h-full w-full sm:w-4/12 flex justify-between items-center min-w-[20rem] mt-5 sm:mt-0 px-6 py-2">
 			<ion-text class="text-primary font-bold text-xl sm:text-lg">
 				Your nerd score
 			</ion-text>
