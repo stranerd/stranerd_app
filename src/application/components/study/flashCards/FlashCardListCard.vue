@@ -3,7 +3,7 @@
 		<div class="w-full justify-between items-start flex">
 			<div class="flex flex-col items-start">
 				<ion-text class="font-bold text-base text-main_dark">{{ flashCard.title }}</ion-text>
-				<Tag :tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
+				<Tag :index="0" :tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
 					<template v-slot="slotProps">
 						<span class="flex items-center">
 							<ion-icon :icon="copy" class="text-base mr-1" />
