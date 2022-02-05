@@ -7,6 +7,7 @@ export interface SetFromModel extends SetToModel {
 		videos: string[]
 		flashCards: string[]
 		testPreps: string[]
+		sets: string[]
 	}
 	children: string[]
 	tags: string[]

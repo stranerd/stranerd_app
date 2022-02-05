@@ -15,6 +15,7 @@ export class SetEntity extends BaseEntity {
 		videos: string[]
 		flashCards: string[]
 		testPreps: string[]
+		sets: string[]
 	}
 	public readonly createdAt: number
 	public readonly updatedAt: number
@@ -65,6 +66,7 @@ type SetConstructorArgs = {
 		videos: string[]
 		flashCards: string[]
 		testPreps: string[]
+		sets: string[]
 	}
 	createdAt: number
 	updatedAt: number

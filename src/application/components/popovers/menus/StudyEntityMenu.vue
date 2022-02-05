@@ -1,6 +1,6 @@
 <template>
 	<Popover class="flex flex-col gap-4">
-		<template v-if="isLoggedIn && type !== 'sets'">
+		<template v-if="isLoggedIn  && !(entity.userId === id && type === 'sets')">
 			<SaveToSet v-if="!data.set || data?.set?.userId !== id" :itemId="entity?.id"
 				:root="true" :save="(set) => saveToSet(type, entity?.id, set)" :set="rootSet"
 				:unsave="(set) => removeFromSet(type, entity?.id, set)" />
