@@ -1,7 +1,7 @@
 <template>
-	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl " />
+	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl" />
 	<div v-else>
-		<EmptyState v-if="!loading && filtered.length === 0" info="No testPreps available." />
+		<EmptyState v-if="fetched && !loading && filtered.length === 0" info="No results found." />
 		<div class="showcase">
 			<InstitutionTestPrepsListCard v-for="group in filtered" :key="group.institutionId"
 				:institutionId="group.institutionId" :testPreps="group.preps" />
@@ -34,10 +34,10 @@ export default defineComponent({
 
 	},
 	setup (props) {
-		const { loading } = useSearch()
+		const { loading, fetched } = useSearch()
 		const openMenu = (entity: TestPrepEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => groupedByInstitution(props.testPreps).value.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, openMenu, loading }
+		return { filtered, openMenu, loading, fetched }
 	}
 })
 </script>

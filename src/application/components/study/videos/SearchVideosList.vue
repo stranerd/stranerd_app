@@ -1,7 +1,7 @@
 <template>
-	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl " />
+	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl" />
 	<div v-else>
-		<EmptyState v-if="!loading && filtered.length === 0" info="No videos available." />
+		<EmptyState v-if="fetched && !loading && filtered.length === 0" info="No results found." />
 		<div class="showcase">
 			<VideoListCard v-for="video in filtered" :key="video.hash"
 				:openMenu="(event) => openMenu(video, event)"
@@ -33,10 +33,10 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { loading } = useSearch()
+		const { loading, fetched } = useSearch()
 		const openMenu = (entity: VideoEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => props.videos.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, openMenu, loading }
+		return { filtered, openMenu, loading, fetched }
 	}
 })
 </script>

@@ -7,12 +7,7 @@
 						<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-12 hidden md:block">
 							Explore thousands of study materials
 						</ion-text>
-						<ion-searchbar v-model.trim="searchTerm"
-							class="w-full my-4"
-							mode="md"
-							placeholder="Search for anything..."
-							showCancelButton="never"
-						/>
+						<Search class="my-4" />
 					</div>
 					<div class="nav-scroll">
 						<router-link :to="`/explore`"
@@ -53,15 +48,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
-import { useSearch } from '@app/composable/meta/search'
-import { IonSearchbar } from '@ionic/vue'
+import Search from '@app/components/search/Search.vue'
 
 export default defineComponent({
 	name: 'ExploreWrapper',
-	components: { Justified, IonSearchbar },
-	setup () {
-		const { searchTerm } = useSearch()
-		return { searchTerm }
-	}
+	components: { Justified, Search }
 })
 </script>

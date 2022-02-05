@@ -10,7 +10,7 @@
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-col items-center justify-center"
 					exact-active-class="!text-main_dark"
-					to="/explore">
+					to="/search">
 					<ion-icon :icon="search" class="w-6 md:w-14" />
 					<IonText>Search</IonText>
 				</router-link>

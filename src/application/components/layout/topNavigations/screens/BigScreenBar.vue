@@ -2,13 +2,13 @@
 	<ion-toolbar class="hidden lg:flex border-0 z-50 h-16">
 		<div class="flex items-center">
 			<div class="w-[16%]">
-				<router-link class="flex items-center w-full justify-center" to="/dashboard">
+				<router-link class="flex items-center w-full justify-center" to="/">
 					<Logo :secondary="true" class="w-40" />
 				</router-link>
 			</div>
 			<div class="flex w-[84%] gap-10 px-12">
 				<div class="w-3/4 flex-auto flex flex-row items-center">
-					<SearchBar class="flex-grow" />
+					<Search class="flex-grow" />
 				</div>
 				<div class="w-[25%] flex-auto flex">
 					<div class="flex flex-row items-center py-1 gap-8 justify-between">
@@ -42,13 +42,13 @@
 import { defineComponent } from 'vue'
 import { IonIcon, IonToolbar } from '@ionic/vue'
 import { addCircle, chevronDown, notifications } from 'ionicons/icons'
-import SearchBar from '@app/components/search/SearchBar.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useMenuPopover } from '@app/composable/core/modals'
+import Search from '@app/components/search/Search.vue'
 
 export default defineComponent({
 	name: 'BigScreenBar',
-	components: { IonIcon, SearchBar, IonToolbar },
+	components: { IonIcon, Search, IonToolbar },
 	setup () {
 		const openCreateDashboardMenu = useMenuPopover().openCreateDashboardMenu
 		const openUserDashboardMenu = useMenuPopover().openUserDashboardMenu
@@ -62,3 +62,10 @@ export default defineComponent({
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+	:deep(ion-searchbar) {
+		--background: $color-newGray !important;
+		background: $color-newGray !important;
+	}
+</style>

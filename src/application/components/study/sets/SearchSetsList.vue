@@ -1,7 +1,7 @@
 <template>
-	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl " />
+	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl" />
 	<div v-else>
-		<EmptyState v-if="!loading && filtered.length === 0" info="No folders available." />
+		<EmptyState v-if="fetched && !loading && filtered.length === 0" info="No results found." />
 		<div class="showcase">
 			<SetListCard v-for="set in filtered" :key="set.hash" :openMenu="(event) => openMenu(set, event)"
 				:set="set" />
@@ -32,10 +32,10 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { loading } = useSearch()
+		const { loading, fetched } = useSearch()
 		const openMenu = (entity: SetEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => props.sets.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, openMenu, loading }
+		return { filtered, openMenu, loading, fetched }
 	}
 })
 </script>
