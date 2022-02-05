@@ -14,9 +14,9 @@
 					<div class="flex flex-row items-center py-1 gap-8 justify-between">
 						<ion-icon :icon="addCircle" class="text-2xl text-main_dark"
 							@click="openCreateDashboardMenu" />
-						<router-link class=" flex flex-row items-center justify-center"
+						<router-link class="flex flex-row items-center justify-center"
 							to="/notifications">
-							<ion-icon :icon="notifications" class="text-2xl text-main_dark"></ion-icon>
+							<NotificationIcon :key="user.id" class="text-2xl text-main_dark" />
 						</router-link>
 						<div v-if="isLoggedIn"
 							class=" font-bold flex flex-row items-center justify-center gap-2 cursor-pointer"
@@ -40,15 +40,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonIcon, IonToolbar } from '@ionic/vue'
-import { addCircle, chevronDown, notifications } from 'ionicons/icons'
+import { IonToolbar } from '@ionic/vue'
+import { addCircle, chevronDown } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useMenuPopover } from '@app/composable/core/modals'
 import Search from '@app/components/search/Search.vue'
+import NotificationIcon from '@app/components/users/notifications/NotificationIcon.vue'
 
 export default defineComponent({
 	name: 'BigScreenBar',
-	components: { IonIcon, Search, IonToolbar },
+	components: { Search, IonToolbar, NotificationIcon },
 	setup () {
 		const openCreateDashboardMenu = useMenuPopover().openCreateDashboardMenu
 		const openUserDashboardMenu = useMenuPopover().openUserDashboardMenu
@@ -56,7 +57,7 @@ export default defineComponent({
 
 		return {
 			openCreateDashboardMenu, openUserDashboardMenu,
-			addCircle, chevronDown, notifications,
+			addCircle, chevronDown,
 			isLoggedIn, user, signout
 		}
 	}

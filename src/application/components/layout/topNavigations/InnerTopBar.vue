@@ -28,7 +28,7 @@
 					<Logo :secondary="true" class="w-24" />
 				</router-link>
 				<router-link class="flex items-center" to="/notifications">
-					<IonIcon :icon="notifications" class="text-xl text-main_dark" />
+					<NotificationIcon :key="user.id" class="text-xl text-main_dark" />
 				</router-link>
 			</div>
 		</ion-toolbar>
@@ -40,22 +40,23 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/vue'
-import { chevronBack, close, ellipsisVertical, notifications, search } from 'ionicons/icons'
+import { IonHeader, IonTitle, IonToolbar } from '@ionic/vue'
+import { chevronBack, close, ellipsisVertical, search } from 'ionicons/icons'
 import BigScreenBar from './screens/BigScreenBar.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useMenuPopover } from '@app/composable/core/modals'
+import NotificationIcon from '@app/components/users/notifications/NotificationIcon.vue'
 
 export default defineComponent({
 	name: 'InnerTopBar',
-	components: { IonIcon, IonHeader, IonToolbar, BigScreenBar, IonTitle },
+	components: { IonHeader, IonToolbar, BigScreenBar, IonTitle, NotificationIcon },
 	setup () {
 		const { isLoggedIn, user } = useAuth()
 		const openUserDashboardMenu = useMenuPopover().openUserDashboardMenu
 
 		return {
 			isLoggedIn, user, openUserDashboardMenu,
-			close, chevronBack, ellipsisVertical, search, notifications
+			close, chevronBack, ellipsisVertical, search
 		}
 	}
 })

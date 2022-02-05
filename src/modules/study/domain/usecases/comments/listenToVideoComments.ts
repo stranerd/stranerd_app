@@ -18,7 +18,7 @@ export class ListenToVideoCommentsUseCase {
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
-			if (date) return entity.createdAt > date
+			if (date) return entity.createdAt >= date
 			return true
 		})
 	}
