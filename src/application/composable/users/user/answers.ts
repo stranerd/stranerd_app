@@ -1,6 +1,6 @@
-import { onMounted, ref, Ref } from 'vue'
-import { AnswerEntity, GetUserAnswers } from '@modules/questions'
-import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
+import { onMounted, onUnmounted, ref, Ref } from 'vue'
+import { AnswerEntity, GetUserAnswers, ListenToUserAnswers } from '@modules/questions'
+import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 
 const global = {} as Record<string, {
 	answers: Ref<AnswerEntity[]>
@@ -15,7 +15,7 @@ const pushToAnswerList = (id: string, answer: AnswerEntity) => {
 }
 
 export const useUserAnswerList = (id: string) => {
-	if (!global[id]) global[id] = {
+	if (global[id] === undefined) global[id] = {
 		answers: ref([]),
 		fetched: ref(false),
 		hasMore: ref(false),
@@ -25,7 +25,6 @@ export const useUserAnswerList = (id: string) => {
 
 	const fetchAnswers = async () => {
 		await global[id].setError('')
-		if (!id) return
 		try {
 			await global[id].setLoading(true)
 			const lastDate = global[id].answers.value[global[id].answers.value.length - 1]?.createdAt
@@ -39,8 +38,31 @@ export const useUserAnswerList = (id: string) => {
 		await global[id].setLoading(false)
 	}
 
+	const listener = useListener(async () => {
+		return await ListenToUserAnswers.call(id, {
+			created: async (entity) => {
+				const index = global[id].answers.value.findIndex((c) => c.id === entity.id)
+				if (index === -1) global[id].answers.value.push(entity)
+				else global[id].answers.value.splice(index, 1, entity)
+			},
+			updated: async (entity) => {
+				const index = global[id].answers.value.findIndex((c) => c.id === entity.id)
+				if (index === -1) global[id].answers.value.push(entity)
+				else global[id].answers.value.splice(index, 1, entity)
+			},
+			deleted: async (entity) => {
+				global[id].answers.value = global[id].answers.value.filter((c) => c.id !== entity.id)
+			}
+		})
+	})
+
 	onMounted(async () => {
 		if (!global[id].fetched.value && !global[id].loading.value) await fetchAnswers()
+		await listener.startListener()
+	})
+
+	onUnmounted(async () => {
+		await listener.closeListener()
 	})
 
 	return { ...global[id], fetchOlderAnswers: fetchAnswers }

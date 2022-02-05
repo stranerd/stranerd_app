@@ -1,7 +1,6 @@
 import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { IFlashCardRepository } from '../../irepositories/iflashCard'
 import { FlashCardEntity } from '../../entities/flashCard'
-import { PAGINATION_LIMIT } from '@utils/constants'
 
 export class ListenToUserFlashCardsUseCase {
 	private repository: IFlashCardRepository
@@ -13,7 +12,7 @@ export class ListenToUserFlashCardsUseCase {
 	async call (userId: string, listener: Listeners<FlashCardEntity>, date?: number) {
 		const conditions: QueryParams = {
 			sort: { field: 'createdAt', order: -1 },
-			limit: PAGINATION_LIMIT,
+			all: true,
 			where: [{ field: 'userId', value: userId }]
 		}
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })

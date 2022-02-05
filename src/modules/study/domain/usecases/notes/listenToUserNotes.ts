@@ -1,7 +1,6 @@
 import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { INoteRepository } from '../../irepositories/inote'
 import { NoteEntity } from '../../entities/note'
-import { PAGINATION_LIMIT } from '@utils/constants'
 
 export class ListenToUserNotesUseCase {
 	private repository: INoteRepository
@@ -13,7 +12,7 @@ export class ListenToUserNotesUseCase {
 	async call (userId: string, listener: Listeners<NoteEntity>, date?: number) {
 		const conditions: QueryParams = {
 			sort: { field: 'createdAt', order: -1 },
-			limit: PAGINATION_LIMIT,
+			all: true,
 			where: [{ field: 'userId', value: userId }]
 		}
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })

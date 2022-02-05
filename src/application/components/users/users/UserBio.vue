@@ -3,16 +3,14 @@
 		<div class="flex flex-col gap-3 lg:p-8 p-6 bg-white rounded-xl">
 			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-1 border-new_gray">
 				<h1 class="text-base text-main_dark font-bold pt-4">Bio</h1>
-				<p class="leading-relaxed text-main_dark text-base">
-					{{ user.description || 'N/A' }}
-				</p>
+				<span class="text-main_dark text-base">{{ user.description || 'N/A' }}</span>
 			</div>
 
 			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-1 border-new_gray">
 				<h1 class="text-base text-main_dark font-bold">Best Subject</h1>
 				<Subject v-if="user.strongestSubject" :subject-id="user.strongestSubject"
 					class="text-main_dark text-base" />
-				<span v-else>N/A</span>
+				<span v-else class="text-main_dark text-base">N/A</span>
 			</div>
 
 			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-1 border-new_gray">
@@ -23,7 +21,7 @@
 						<span v-if="index < user.weakerSubjects.length - 1">,&nbsp;</span>
 					</span>
 				</div>
-				<span v-else>N/A</span>
+				<span v-else class="text-main_dark text-base">N/A</span>
 			</div>
 		</div>
 	</div>

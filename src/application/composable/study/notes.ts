@@ -61,7 +61,7 @@ export const useNoteList = () => {
 				const index = global.notes.value.findIndex((q) => q.id === entity.id)
 				if (index !== -1) global.notes.value.splice(index, 1)
 			}
-		}, lastDate ? lastDate - 1 : undefined)
+		}, lastDate)
 	})
 
 	onMounted(async () => {
@@ -71,15 +71,16 @@ export const useNoteList = () => {
 	onUnmounted(async () => {
 		await listener.closeListener()
 	})
+
 	return { ...global, fetchOlderNotes: fetchNotes }
 }
 
 export const useCreateNote = () => {
+	const router = useRouter()
 	const factory = ref(new NoteFactory()) as Ref<NoteFactory>
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
-	const router = useRouter()
 
 	const createNote = async () => {
 		await setError('')
@@ -88,7 +89,7 @@ export const useCreateNote = () => {
 				await setLoading(true)
 				const noteId = await AddNote.call(factory.value)
 				await setMessage('Note submitted successfully')
-				await router.push(`/study/notes/${noteId}`)
+				await router.replace(`/study/notes/${noteId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -107,10 +108,10 @@ export const openNoteEditModal = async (note: NoteEntity, router: Router) => {
 	await router.push(`/study/notes/${note.id}/edit`)
 }
 export const useEditNote = (noteId: string) => {
+	const router = useRouter()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
-	const router = useRouter()
 	const factory = ref(new NoteFactory()) as Ref<NoteFactory>
 	if (editingNote) factory.value.loadEntity(editingNote)
 
@@ -121,7 +122,7 @@ export const useEditNote = (noteId: string) => {
 				await setLoading(true)
 				await EditNote.call(noteId, factory.value)
 				await setMessage('Note updated successfully')
-				await router.push(`/study/notes/${noteId}`)
+				await router.replace(`/study/notes/${noteId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

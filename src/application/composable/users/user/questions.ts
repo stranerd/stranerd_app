@@ -1,31 +1,15 @@
-import { computed, onMounted, ref, Ref } from 'vue'
-import { GetUserQuestions, QuestionEntity } from '@modules/questions'
-import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
-
-enum Answered {
-	All,
-	BestAnswered,
-	Answered,
-	Unanswered
-}
-
-const answeredChoices = [
-	{ val: Answered.All, key: 'All' },
-	{ val: Answered.BestAnswered, key: 'Best Answered' },
-	{ val: Answered.Answered, key: 'Answered' },
-	{ val: Answered.Unanswered, key: 'Unanswered' }
-]
+import { onMounted, onUnmounted, ref, Ref } from 'vue'
+import { GetUserQuestions, ListenToUserQuestions, QuestionEntity } from '@modules/questions'
+import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 
 const global = {} as Record<string, {
 	questions: Ref<QuestionEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
-	subjectId: Ref<string>
-	answered: Ref<Answered>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToQuestionList = (id: string, question: QuestionEntity) => {
-	const index = global[id].questions.value.findIndex((q) => q.id === question.id)
+	const index = global[id].questions.value.findIndex((a) => a.id === question.id)
 	if (index !== -1) global[id].questions.value.splice(index, 1, question)
 	else global[id].questions.value.push(question)
 }
@@ -33,27 +17,11 @@ const pushToQuestionList = (id: string, question: QuestionEntity) => {
 export const useUserQuestionList = (id: string) => {
 	if (global[id] === undefined) global[id] = {
 		questions: ref([]),
-		subjectId: ref(''),
 		fetched: ref(false),
 		hasMore: ref(false),
-		answered: ref(answeredChoices[0].val),
 		...useErrorHandler(),
 		...useLoadingHandler()
 	}
-
-	const filteredQuestions = computed({
-		get: () => global[id].questions.value.filter((q) => {
-			if (global[id].subjectId.value && q.subjectId !== global[id].subjectId.value) return false
-			if (global[id].answered.value === Answered.Answered && q.answers.length === 0) return false
-			if (global[id].answered.value === Answered.Unanswered && q.answers.length > 0) return false
-			if (global[id].answered.value === Answered.BestAnswered && !q.isAnswered) return false
-			return true
-		}).sort((a, b) => {
-			return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1
-		}), set: (questions) => {
-			questions.map((q) => pushToQuestionList(id, q))
-		}
-	})
 
 	const fetchQuestions = async () => {
 		await global[id].setError('')
@@ -62,7 +30,7 @@ export const useUserQuestionList = (id: string) => {
 			const lastDate = global[id].questions.value[global[id].questions.value.length - 1]?.createdAt
 			const questions = await GetUserQuestions.call(id, lastDate)
 			global[id].hasMore.value = !!questions.pages.next
-			questions.results.forEach((q) => pushToQuestionList(id, q))
+			questions.results.forEach((a) => pushToQuestionList(id, a))
 			global[id].fetched.value = true
 		} catch (error) {
 			await global[id].setError(error)
@@ -70,9 +38,32 @@ export const useUserQuestionList = (id: string) => {
 		await global[id].setLoading(false)
 	}
 
-	onMounted(async () => {
-		if (!global[id].fetched.value && !global[id].loading.value) await fetchQuestions()
+	const listener = useListener(async () => {
+		return await ListenToUserQuestions.call(id, {
+			created: async (entity) => {
+				const index = global[id].questions.value.findIndex((c) => c.id === entity.id)
+				if (index === -1) global[id].questions.value.push(entity)
+				else global[id].questions.value.splice(index, 1, entity)
+			},
+			updated: async (entity) => {
+				const index = global[id].questions.value.findIndex((c) => c.id === entity.id)
+				if (index === -1) global[id].questions.value.push(entity)
+				else global[id].questions.value.splice(index, 1, entity)
+			},
+			deleted: async (entity) => {
+				global[id].questions.value = global[id].questions.value.filter((c) => c.id !== entity.id)
+			}
+		})
 	})
 
-	return { ...global[id], filteredQuestions, answeredChoices, fetchOlderQuestions: fetchQuestions }
+	onMounted(async () => {
+		if (!global[id].fetched.value && !global[id].loading.value) await fetchQuestions()
+		await listener.startListener()
+	})
+
+	onUnmounted(async () => {
+		await listener.closeListener()
+	})
+
+	return { ...global[id], fetchOlderQuestions: fetchQuestions }
 }

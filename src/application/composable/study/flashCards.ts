@@ -12,7 +12,6 @@ import {
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { useAuth } from '@app/composable/auth/auth'
 import { Router, useRouter } from 'vue-router'
 
 const global = {
@@ -35,14 +34,12 @@ const unshiftToFlashCardList = (flashCard: FlashCardEntity) => {
 }
 
 export const useFlashCardList = () => {
-	const { id } = useAuth()
-
 	const fetchFlashCards = async () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
 			const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
-			const flashCards = await GetFlashCards.call(id.value, lastDate)
+			const flashCards = await GetFlashCards.call(lastDate)
 			global.hasMore.value = !!flashCards.pages.next
 			flashCards.results.forEach(pushToFlashCardList)
 			global.fetched.value = true
@@ -53,7 +50,7 @@ export const useFlashCardList = () => {
 	}
 	const listener = useListener(async () => {
 		const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
-		return await ListenToFlashCards.call(id.value, {
+		return await ListenToFlashCards.call({
 			created: async (entity) => {
 				unshiftToFlashCardList(entity)
 			},
@@ -106,9 +103,9 @@ export const useCreateFlashCard = () => {
 
 let editingFlashCard = null as FlashCardEntity | null
 export const getEditingFlashCard = () => editingFlashCard
-export const openFlashCardEditModal = (flashCard: FlashCardEntity, router: Router) => {
+export const openFlashCardEditModal = async (flashCard: FlashCardEntity, router: Router) => {
 	editingFlashCard = flashCard
-	router.push(`/study/flashCards/${flashCard.id}/edit`)
+	await router.push(`/study/flashCards/${flashCard.id}/edit`)
 }
 export const useEditFlashCard = (flashCardId: string) => {
 	const router = useRouter()
@@ -124,7 +121,7 @@ export const useEditFlashCard = (flashCardId: string) => {
 			try {
 				await setLoading(true)
 				await EditFlashCard.call(flashCardId, factory.value)
-				await setMessage('FlashCard edited successfully')
+				await setMessage('FlashCard updated successfully')
 				await router.replace(`/study/flashCards/${flashCardId}`)
 				factory.value.reset()
 			} catch (error) {

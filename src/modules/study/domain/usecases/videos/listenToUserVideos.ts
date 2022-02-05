@@ -1,7 +1,6 @@
 import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { IVideoRepository } from '../../irepositories/ivideo'
 import { VideoEntity } from '../../entities/video'
-import { PAGINATION_LIMIT } from '@utils/constants'
 
 export class ListenToUserVideosUseCase {
 	private repository: IVideoRepository
@@ -13,7 +12,7 @@ export class ListenToUserVideosUseCase {
 	async call (userId: string, listener: Listeners<VideoEntity>, date?: number) {
 		const conditions: QueryParams = {
 			sort: { field: 'createdAt', order: -1 },
-			limit: PAGINATION_LIMIT,
+			all: true,
 			where: [{ field: 'userId', value: userId }]
 		}
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })

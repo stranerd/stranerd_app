@@ -16,7 +16,9 @@
 				Your nerd score
 			</ion-text>
 			<DonutChart :bgColor="user.nerdScoreColor.bg" :fgColor="user.nerdScoreColor.fg"
-				:percentage="user.scorePercentage" :size="84" />
+				:percentage="user.scorePercentage" :size="84">
+				{{ formatNumber(user.score, 1) }}
+			</DonutChart>
 		</div>
 	</div>
 </template>
@@ -25,13 +27,14 @@
 import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import DonutChart from '@app/components/core/DonutChart'
+import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'StatusBar',
 	components: { DonutChart },
 	setup () {
 		const { user, isLoggedIn } = useAuth()
-		return { user, isLoggedIn }
+		return { user, isLoggedIn, formatNumber }
 	}
 })
 </script>

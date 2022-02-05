@@ -4,6 +4,9 @@
 	</div>
 	<div v-else class="col-span-12 flex flex-col gap-4 text-body">
 		<UserQuestionsCard v-for="question in questions" :key="question.hash" :question="question" />
+		<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
+			<a @click.prevent="fetchOlderQuestions">Load More</a>
+		</div>
 		<EmptyState v-if="!loading && !error && questions.length === 0"
 			info="This user hasn't asked any questions yet" />
 	</div>
@@ -27,15 +30,8 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const {
-			filteredQuestions: questions, subjectId, error, loading, hasMore,
-			answered, answeredChoices, fetchOlderQuestions
-		} = useUserQuestionList(props.user.id)
-		return {
-			questions, error, loading, hasMore, subjectId,
-			answeredChoices, answered,
-			fetchOlderQuestions
-		}
+		const { questions, error, loading, hasMore, fetchOlderQuestions } = useUserQuestionList(props.user.id)
+		return { questions, error, loading, hasMore, fetchOlderQuestions }
 	}
 })
 </script>

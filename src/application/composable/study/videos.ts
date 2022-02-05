@@ -61,7 +61,7 @@ export const useVideoList = () => {
 				const index = global.videos.value.findIndex((q) => q.id === entity.id)
 				if (index !== -1) global.videos.value.splice(index, 1)
 			}
-		}, lastDate ? lastDate - 1 : undefined)
+		}, lastDate)
 	})
 
 	onMounted(async () => {
@@ -71,15 +71,16 @@ export const useVideoList = () => {
 	onUnmounted(async () => {
 		await listener.closeListener()
 	})
+
 	return { ...global, fetchOlderVideos: fetchVideos }
 }
 
 export const useCreateVideo = () => {
+	const router = useRouter()
 	const factory = ref(new VideoFactory()) as Ref<VideoFactory>
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
-	const router = useRouter()
 
 	const createVideo = async () => {
 		await setError('')
@@ -88,7 +89,7 @@ export const useCreateVideo = () => {
 				await setLoading(true)
 				const videoId = await AddVideo.call(factory.value)
 				await setMessage('Video submitted successfully')
-				await router.push(`/study/videos/${videoId}`)
+				await router.replace(`/study/videos/${videoId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -107,10 +108,10 @@ export const openVideoEditModal = async (video: VideoEntity, router: Router) => 
 	await router.push(`/study/videos/${video.id}/edit`)
 }
 export const useEditVideo = (videoId: string) => {
+	const router = useRouter()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
-	const router = useRouter()
 	const factory = ref(new VideoFactory()) as Ref<VideoFactory>
 	if (editingVideo) factory.value.loadEntity(editingVideo)
 
@@ -121,7 +122,7 @@ export const useEditVideo = (videoId: string) => {
 				await setLoading(true)
 				await EditVideo.call(videoId, factory.value)
 				await setMessage('Video updated successfully')
-				await router.push(`/study/videos/${videoId}`)
+				await router.replace(`/study/videos/${videoId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

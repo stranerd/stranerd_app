@@ -5,6 +5,9 @@
 
 	<div v-else class="col-span-12 gap-4 flex flex-col text-body">
 		<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer" />
+		<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
+			<a @click.prevent="fetchOlderAnswers">Load More</a>
+		</div>
 		<EmptyState v-if="!loading && !error && answers.length === 0"
 			info="This user hasn't answered any questions yet." />
 	</div>

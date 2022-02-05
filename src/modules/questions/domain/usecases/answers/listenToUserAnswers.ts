@@ -11,16 +11,16 @@ export class ListenToUserAnswersUseCase {
 
 	async call (userId: string, listener: Listeners<AnswerEntity>, date?: number) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: 1 },
-			where: [{ field: 'userId', value: userId }],
-			all: true
+			sort: { field: 'createdAt', order: -1 },
+			all: true,
+			where: [{ field: 'userId', value: userId }]
 		}
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
-			if (entity.userId !== userId) return false
-			if (date) return entity.createdAt > date
-			return true
+			const matches = [entity.userId === userId]
+			if (date) matches.push(entity.createdAt > date)
+			return matches.every((m) => m)
 		})
 	}
 }
