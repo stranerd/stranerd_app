@@ -337,7 +337,7 @@ export const useSaveToSet = () => {
 			await setLoading(true)
 			await SaveSetProp.call(set.id, prop, [itemId])
 			useMenuPopover().closeStudyEntityMenu()
-			await Notify({ title: 'Saved to set successfully' })
+			await Notify({ title: 'Saved to folder successfully' })
 		} catch (e) {
 			await setError(e)
 		}
@@ -351,7 +351,7 @@ export const useSaveToSet = () => {
 			//@ts-ignore
 			if (setGlobal[set.id]) setGlobal[set.id][prop].value = setGlobal[set.id][prop].value.filter((item) => item.id !== itemId)
 			useMenuPopover().closeStudyEntityMenu()
-			await Notify({ title: 'Removed from set successfully' })
+			await Notify({ title: 'Removed from folder successfully' })
 		} catch (e) {
 			await setError(e)
 		}

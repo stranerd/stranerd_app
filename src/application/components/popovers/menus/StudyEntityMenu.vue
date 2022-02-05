@@ -1,58 +1,14 @@
 <template>
 	<Popover class="flex flex-col gap-4">
-		<template v-if="type !== 'sets' && isLoggedIn">
-			<template v-if="rootSet">
-				<span v-if="rootSet.allSaved.includes(entity?.id)" class="flex gap-4 items-center"
-					@click="removeFromSet(type, entity?.id, rootSet)">
-					<ion-icon :icon="removeCircle" class="text-2xl" />
-					<ion-label class="font-bold">Remove From Your Library</ion-label>
-				</span>
-				<span v-else class="flex gap-4 items-center" @click="saveToSet(type, entity?.id, rootSet)">
-					<ion-icon :icon="library" class="text-2xl" />
-					<ion-label class="font-bold">Add To Your Library</ion-label>
-				</span>
-			</template>
-		</template>
-
-		<!--			<template v-if="normalSets.filter((s) => !s.saved[type]?.includes(entity?.id)).length">
-						<span class="flex gap-4 items-center" @click="showAddToSet = !showAddToSet">
-							<ion-icon :icon="showAddToSet ? chevronUp : folder" class="text-2xl" />
-							<ion-label class="font-bold">Add To Study Set</ion-label>
-						</span>
-						<div v-if="showAddToSet" class="ml-6">
-							<span v-for="set in normalSets.filter((s) => !s.saved[type]?.includes(entity?.id))" :key="set.hash"
-								class="mb-4 flex gap-4 items-center" @click="saveToSet(type, entity?.id, set)">
-								<ion-icon :icon="folder" class="text-xl" />
-								<ion-label class="font-bold">{{ set.name }}</ion-label>
-							</span>
-						</div>
-					</template>
-
-					<template v-if="normalSets.filter((s) => s.saved[type]?.includes(entity?.id)).length">
-						<span class="flex gap-4 items-center" @click="showRemoveFromSet = !showRemoveFromSet">
-							<ion-icon :icon="showRemoveFromSet ? chevronUp : removeCircle" class="text-2xl" />
-							<ion-label class="font-bold">Remove From Study Set</ion-label>
-						</span>
-						<div v-if="showRemoveFromSet" class="ml-6">
-							<span v-for="set in normalSets.filter((s) => s.saved[type]?.includes(entity?.id))" :key="set.hash"
-								class="mb-4 flex gap-4 items-center" @click="removeFromSet(type, entity?.id, set)">
-								<ion-icon :icon="folder" class="text-xl" />
-								<ion-label class="font-bold">{{ set.name }}</ion-label>
-							</span>
-						</div>
-					</template>-->
-
-		<template v-if="type !== 'sets'">
-			<template v-if="!data.set || data?.set?.userId !== id">
-				<!-- save to folder -->
-			</template>
-			<template v-else>
-				<span v-if="data.set.allSaved.includes(entity?.id)" class="flex gap-4 items-center"
-					@click="removeFromSet(type, entity?.id, data.set)">
-					<ion-icon :icon="removeCircle" class="text-2xl" />
-					<ion-label class="font-bold">Unsave In Folder</ion-label>
-				</span>
-			</template>
+		<template v-if="isLoggedIn && type !== 'sets'">
+			<SaveToSet v-if="!data.set || data?.set?.userId !== id" :itemId="entity?.id"
+				:save="(set) => saveToSet(type, entity?.id, set)"
+				:unsave="(set) => removeFromSet(type, entity?.id, set)" />
+			<span v-else-if="data.set.allSaved.includes(entity?.id)" class="flex gap-4 items-center"
+				@click="removeFromSet(type, entity?.id, data.set)">
+				<ion-icon :icon="removeCircle" class="text-2xl" />
+				<ion-label class="font-bold">Unsave In Folder</ion-label>
+			</span>
 		</template>
 		<span v-if="canEdit" class="flex gap-4 items-center" @click="editEntity">
 			<ion-icon :icon="pencil" class="text-2xl" />
@@ -77,11 +33,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useDeleteStudyEntity, useStudyMenuData } from '@app/composable/study/menus'
 import {
+	chevronDown,
 	chevronUp,
-	folder,
 	library,
 	pencil,
 	person,
@@ -96,9 +52,11 @@ import { useRouter } from 'vue-router'
 import { openNoteEditModal } from '@root/application/composable/study/notes'
 import { openTestPrepEditModal } from '@app/composable/study/testPreps'
 import { openVideoEditModal } from '@app/composable/study/videos'
+import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'StudyEntityMenu',
+	components: { SaveToSet },
 	setup () {
 		const { id, isLoggedIn, isAdmin } = useAuth()
 		const router = useRouter()
@@ -107,7 +65,7 @@ export default defineComponent({
 		const showDelete = computed(() => type.value === 'testPreps' ? isAdmin.value : entity.value?.userId === id.value)
 		const { loading: deleteLoading, error: deleteError, deleteEntity } = useDeleteStudyEntity()
 
-		const { rootSet } = useUserRootSet()
+		const { sets } = useUserRootSet()
 		const { loading: setLoading, error: setError, saveToSet, removeFromSet } = useSaveToSet()
 
 		const canEdit = computed(() => type.value === 'testPreps' ? isAdmin.value : entity.value?.userId === id.value)
@@ -119,12 +77,14 @@ export default defineComponent({
 			if (type.value === 'sets') await openSetEditModal(entity.value as any)
 		}
 
+		const showAddToSet = ref(false)
+
 		return {
 			entity, type, data,
-			chevronUp, library, folder, shareIcon, pencil, person, trash, removeCircle,
+			chevronUp, chevronDown, library, shareIcon, pencil, person, trash, removeCircle,
 			share, id, isLoggedIn,
 			showDelete, deleteLoading, deleteError, deleteEntity, canEdit, editEntity,
-			rootSet, setLoading, setError, saveToSet, removeFromSet
+			sets, setLoading, setError, saveToSet, removeFromSet, showAddToSet
 		}
 	}
 })
