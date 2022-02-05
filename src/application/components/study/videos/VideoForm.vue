@@ -73,11 +73,11 @@
 
 		<div v-else class="mb-12">
 			<label class="block">Link</label>
-			<IonText class="text-sm mt-1">All links must be videos hosted on YouTube</IonText>
-			<div class="flex mb-2">
-				<span class="bg-new_gray py-3 pl-4 pr-1 text-icon_inactive">{{ factory.service.url }}</span>
-				<IonInput id="link" v-model="factory.videoId" placeholder="Enter id of the youtube video" />
-			</div>
+			<IonText class="text-sm mt-1">
+				All links must be videos hosted on YouTube.<br>
+				Copy the id of the video from the url, eg {{ factory.service.url }}{videoId}
+			</IonText>
+			<IonInput v-model="factory.videoId" class="mb-2" placeholder="Enter id of the youtube video" />
 			<DisplayError :error="factory.errors.link" />
 		</div>
 
@@ -144,9 +144,5 @@ export default defineComponent({
 	label {
 		font-size: 1.2rem;
 		font-weight: 500;
-	}
-
-	#link {
-		--padding-start: 0 !important;
 	}
 </style>
