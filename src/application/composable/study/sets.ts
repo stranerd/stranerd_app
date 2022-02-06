@@ -35,13 +35,11 @@ import { Alert, Notify } from '@utils/dialog'
 
 type SaveKey = keyof SetEntity['saved']
 
-const global = {
-	sets: ref([] as SetEntity[]),
-	fetched: ref(false),
-	hasMore: ref(false),
-	...useErrorHandler(),
-	...useLoadingHandler()
-}
+const global = {} as Record<string, {
+	set: Ref<SetEntity | null>
+	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
+} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const myGlobal = {} as Record<string, {
 	sets: Ref<SetEntity[]>
@@ -58,16 +56,6 @@ const setGlobal = {} as Record<string, {
 	fetched: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-const pushToSetList = (set: SetEntity) => {
-	const index = global.sets.value.findIndex((q) => q.id === set.id)
-	if (index !== -1) global.sets.value.splice(index, 1, set)
-	else global.sets.value.push(set)
-}
-const unshiftToSetList = (set: SetEntity) => {
-	const index = global.sets.value.findIndex((q) => q.id === set.id)
-	if (index !== -1) global.sets.value.splice(index, 1, set)
-	else global.sets.value.unshift(set)
-}
 const pushToMyGlobalSetList = (userId: string, set: SetEntity) => {
 	const index = myGlobal[userId].sets.value.findIndex((q) => q.id === set.id)
 	if (index !== -1) myGlobal[userId].sets.value.splice(index, 1, set)
@@ -127,7 +115,7 @@ export const useUserRootSet = (userId = useAuth().id.value) => {
 		await myGlobal[userId].listener.startListener()
 	})
 	onUnmounted(async () => {
-		// await myGlobal[userId].listener.closeListener()
+		if (userId !== useAuth().id.value) await myGlobal[userId].listener.closeListener()
 	})
 
 	const rootSet = computed(() => myGlobal[userId].sets.value[0] ?? null)
@@ -136,56 +124,49 @@ export const useUserRootSet = (userId = useAuth().id.value) => {
 }
 
 export const useSetById = (setId: string) => {
-	const { error, setError } = useErrorHandler()
-	const { loading, setLoading } = useLoadingHandler()
-	const set = computed({
-		get: () => global.sets.value.find((q) => q.id === setId) ?? null,
-		set: (q) => {
-			if (q) pushToSetList(q)
-		}
-	})
-
-	const listener = useListener(async () => {
-		return ListenToSet.call(setId, {
-			created: async (entity) => {
-				pushToSetList(entity)
-			},
-			updated: async (entity) => {
-				pushToSetList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.sets.value.findIndex((q) => q.id === entity.id)
-				if (index > -1) global.sets.value.splice(index, 1)
-			}
+	if (global[setId] === undefined) {
+		const listener = useListener(async () => {
+			return ListenToSet.call(setId, {
+				created: async (entity) => {
+					global[setId].set.value = entity
+				},
+				updated: async (entity) => {
+					global[setId].set.value = entity
+				},
+				deleted: async () => {
+					global[setId].set.value = null
+				}
+			})
 		})
-	})
+		global[setId] = {
+			set: ref(null),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
+	}
 
 	const fetchSet = async () => {
-		await setError('')
+		await global[setId].setError('')
 		try {
-			await setLoading(true)
-			let set = global.sets.value.find((q) => q.id === setId) ?? null
-			if (set) {
-				await setLoading(false)
-				return
-			}
-			set = await FindSet.call(setId)
-			if (set) unshiftToSetList(set)
+			await global[setId].setLoading(true)
+			global[setId].set.value = await FindSet.call(setId)
 		} catch (error) {
-			await setError(error)
+			await global[setId].setError(error)
 		}
-		await setLoading(false)
+		await global[setId].setLoading(false)
 	}
 
 	onMounted(async () => {
-		await fetchSet()
-		await listener.startListener()
+		if (!global[setId].fetched.value && !global[setId].loading.value) await fetchSet()
+		await global[setId].listener.startListener()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await global[setId].listener.closeListener()
 	})
 
-	return { error, loading, set }
+	return { ...global[setId] }
 }
 
 export const useSet = (set: SetEntity) => {
@@ -450,8 +431,6 @@ export const useDeleteSet = (setId: string) => {
 			await setLoading(true)
 			try {
 				await DeleteSet.call(setId)
-				global.sets.value = global.sets.value
-					.filter((q) => q.id !== setId)
 				await setMessage('Folder deleted successfully')
 			} catch (error) {
 				await setError(error)

@@ -18,7 +18,7 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
 	reserved = []
 
 	constructor () {
-		super({ name: '', parent: getQuerySetId(), isPublic: false, tags: [] })
+		super({ name: '', parent: getQuerySetId(), isPublic: true, tags: [] })
 	}
 
 	get name () {
