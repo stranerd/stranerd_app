@@ -8,7 +8,7 @@
 				<ion-icon :icon="arrowForward" class="text-2xl text-gray" />
 			</router-link>
 		</div>
-		<Tag :tag="yearGap" class="text-sm" />
+		<Tag :index="0" :tag="yearGap" class="text-sm" />
 
 		<router-link :to="`/study/preps/${institutionId}`" class="w-full mt-auto">
 			<ion-button class="btn-outline text-primary w-full" size="small">Get Started</ion-button>

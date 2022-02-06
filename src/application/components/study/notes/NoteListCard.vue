@@ -2,8 +2,17 @@
 	<div
 		class="m-0 w-full bg-white rounded-xl flex flex-col justify-between items-start gap-4 box-border p-4 text-main_dark">
 		<div class="w-full justify-between items-start flex">
-			<ion-icon :icon="document" class="text-2xl" />
-			<ion-text class="font-semibold ml-2 flex-grow truncate">{{ note.title }}</ion-text>
+			<div class="text-base flex-col flex gap-2 items-start flex-grow">
+				<ion-text class="font-semibold truncate">{{ note.title }}</ion-text>
+				<Tag :index="1" tag="Note">
+					<template v-slot="slotProps">
+						<span class="flex items-center">
+							<ion-icon :icon="document" class="text-base mr-1" />
+							<ion-text class="text-xs">{{ slotProps.tag }}</ion-text>
+						</span>
+					</template>
+				</Tag>
+			</div>
 			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl" @click="openMenu" />
 		</div>
 		<div class="w-full flex items-center justify-between">
