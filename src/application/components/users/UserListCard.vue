@@ -1,6 +1,6 @@
 <template>
-	<router-link :class="`m-0 w-full bg-white rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border p-4`"
-		:to="`/users/${user.id}`">
+	<router-link :to="`/users/${user.id}`"
+		class="m-0 w-full bg-white rounded-xl flex flex-col md:gap-2 box-border p-4">
 		<div class="items-center flex">
 			<div class="relative border-white border-4 rounded-full grid place-items-center mr-4">
 				<Avatar :id="user.id" :size="67" :src="user.avatar" color="#C7D6E3" />

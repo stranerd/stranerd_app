@@ -4,7 +4,7 @@
 		<div class="w-8/12 flex items-center gap-2">
 			<ion-text>{{ subject.name }}</ion-text>
 		</div>
-		<a class="w-3/12 font-bold text-right text-delete_red" @click.prevent="deleteSubject">Delete</a>
+		<a class="w-3/12 font-bold text-right text-red" @click.prevent="deleteSubject">Delete</a>
 	</div>
 </template>
 

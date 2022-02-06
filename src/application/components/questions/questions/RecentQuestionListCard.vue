@@ -1,20 +1,20 @@
 <template>
 	<router-link :to="`/questions/${question.id}`"
-		class="p-4 rounded-xl bg-white flex flex-col gap-3 w-full text-xs md:text-sm">
+		class="p-4 rounded-xl bg-white flex flex-col gap-3 w-full text-xs md:text-sm text-main_dark">
 		<div class="flex flex-row items-center gap-2">
 			<avatar :id="question.userId" :size="28" :src="question.avatar" />
-			<span class="font-bold text-main_dark">{{ question.userBio.firstName }}</span>
+			<span>{{ question.userBio.firstName }}</span>
 
-			<span class="font-bold text-gray ml-auto">{{ formatTime(question.createdAt) }}</span>
+			<span class="font-medium text-gray ml-auto">{{ formatTime(question.createdAt) }}</span>
 		</div>
 
-		<DisplayHtml :html="question.trimmedBody" class="text-main_dark leading-normal" />
+		<DisplayHtml :html="question.trimmedBody" class="leading-normal" />
 
 		<div class="flex items-center gap-2 flex-wrap">
 			<QuestionTag v-for="(tag, index) in question.tags" :key="index" :index="index" :tag="tag" />
 		</div>
 
-		<span class="text-gray font-bold">
+		<span class="text-gray">
 			{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
 		</span>
 	</router-link>

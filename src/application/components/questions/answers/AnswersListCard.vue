@@ -4,7 +4,6 @@
 			<div class="flex flex-row items-center">
 				<Avatar :id="answer.userId" :size="30" :src="answer.avatar" class="mr-2" />
 				<span class="font-bold text-main_dark">{{ answer.userBio.fullName }}</span>
-
 			</div>
 
 			<div class="flex flex-col py-4">
@@ -47,7 +46,7 @@
 						<span class="mr-1">Mark as best</span>
 						<IonIcon :icon="star" class="text-[20px]" />
 					</span>
-					<IonIcon v-if="answer.best" :icon="star" class="text-[20px] text-star_yellow" />
+					<IonIcon v-if="answer.best" :icon="star" class="text-[20px] text-yellow_star" />
 					<span class="flex items-center" @click="showComments = !showComments">
 						<IonIcon :icon="showComments ? chevronDown : chevronUp" />
 						<span>{{ showComments ? 'Hide comments' : 'Show comments' }}</span>

@@ -1,6 +1,6 @@
 <template>
 	<span class="flex items-center">
-		<IonIcon :class="{'text-delete_red': hasUnread}" :icon="notifications" />
+		<IonIcon :class="{'text-red': hasUnread}" :icon="notifications" />
 	</span>
 </template>
 

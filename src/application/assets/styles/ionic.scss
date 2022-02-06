@@ -213,7 +213,7 @@ ion-input, ion-textarea, ion-select {
 }
 
 .btn-secondary {
-	--background: $color-sub !important;
+	--background: $color-darkGray !important;
 	--color: $color-white;
 	--padding-top: 0.75rem;
 	--padding-bottom: 0.75rem;
@@ -221,7 +221,7 @@ ion-input, ion-textarea, ion-select {
 	--padding-end: 1.5rem;
 	--border-width: 1px;
 	--border-style: solid;
-	--border-color: $color-sub;
+	--border-color: $color-darkGray;
 
 	@media (max-width: 640px) {
 		--padding-top: 0.5rem;
@@ -330,7 +330,7 @@ ion-toolbar {
 
 ion-badge {
 	background-color: $color-yellowStar !important;
-	--color: $color-dark !important;
+	--color: $color-mainDark !important;
 	--padding-top: 4px !important;
 }
 
@@ -365,3 +365,6 @@ ion-select::part(icon) {
 	content: url('../../assets/images/icons/down.svg');
 }
 
+ion-icon {
+	cursor: pointer;
+}

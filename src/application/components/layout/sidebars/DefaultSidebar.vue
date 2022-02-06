@@ -5,7 +5,7 @@
 			<router-link v-for="{ path, icon, name } in [
 					{ name: 'home', path: '/dashboard', icon: home },
 					{ name: 'questions', path: '/questions', icon: helpCircle },
-					{ name: 'Study', path: '/study', icon: library }
+					{ name: 'library', path: '/study', icon: library }
 				]" :key="path" :to="path"
 				class="flex flex-col rounded-l-full text-icon_inactive cursor-pointer text-sm hover:text-main_dark mb-2">
 				<div :class="{'text-main_dark bg-new_gray active-route-link relative' : $route.path === path }"
@@ -14,11 +14,10 @@
 					<span class="font-semibold capitalize">{{ name }}</span>
 				</div>
 			</router-link>
-
 		</div>
-
 	</div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { calendarClear, helpCircle, home, library, people } from 'ionicons/icons'

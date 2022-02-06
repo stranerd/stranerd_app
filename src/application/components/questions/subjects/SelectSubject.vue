@@ -55,7 +55,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 	.showAll :deep(input.form-control) {
 		background-color: inherit;
-		color: $color-sub;
+		color: $color-darkGray;
 
 		&::placeholder {
 			font-size: 1em !important;

@@ -10,7 +10,7 @@
 			<ion-icon :icon="arrowForward" class="text-2xl text-gray" />
 		</div>
 
-		<ion-text class="text-sm text-left w-full text-gray">
+		<ion-text class="text-sm text-left w-full text-gray mb-1 truncate">
 			{{ test.isTimed ? 'Timed' : 'Study' }}
 			<span v-if="testPrep && testPrep.isPastQuestionType">
 				>

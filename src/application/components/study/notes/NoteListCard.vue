@@ -1,19 +1,18 @@
 <template>
-	<div class="m-0 w-full bg-white rounded-xl flex flex-col justify-between items-start gap-4 box-border p-4">
+	<div
+		class="m-0 w-full bg-white rounded-xl flex flex-col justify-between items-start gap-4 box-border p-4 text-main_dark">
 		<div class="w-full justify-between items-start flex">
-			<ion-icon :icon="document" class="text-main_dark text-2xl cursor-pointer" />
-			<div class="text-base text-main_dark font-bold text-left flex-col flex ml-2 flex-grow">
-				<ion-text>{{ note.title }}</ion-text>
-			</div>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl cursor-pointer" @click="openMenu" />
+			<ion-icon :icon="document" class="text-2xl" />
+			<ion-text class="font-semibold ml-2 flex-grow truncate">{{ note.title }}</ion-text>
+			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl" @click="openMenu" />
 		</div>
 		<div class="w-full flex items-center justify-between">
-			<div class="flex items-center">
+			<div class="flex items-center gap-2">
 				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
-				<ion-text class="text-xs font-bold text-main_dark ml-2">{{ note.userBio.firstName }}</ion-text>
+				<ion-text class="text-xs">{{ note.userBio.firstName }}</ion-text>
 			</div>
 			<router-link :to="`/study/notes/${note.id}`">
-				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]" size="small">
+				<ion-button class="btn-outline text-primary w-full lg:min-w-[7.5rem]" size="small">
 					Read
 				</ion-button>
 			</router-link>

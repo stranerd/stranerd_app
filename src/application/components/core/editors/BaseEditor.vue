@@ -111,13 +111,13 @@ export default defineComponent({
 			}
 
 			.ql-formats + .ql-formats {
-				border-left: 1px solid $color-sub;
+				border-left: 1px solid $color-darkGray;
 			}
 		}
 	}
 
 	.ql-toolbar.ql-snow {
-		border: 1px solid $color-line !important;
+		border: 1px solid $color-lightGray !important;
 	}
 
 	.ql-container.ql-snow {
@@ -126,7 +126,7 @@ export default defineComponent({
 
 	.ql-editor {
 		background: $color-white;
-		border: 1px solid $color-line;
+		border: 1px solid $color-lightGray;
 		transition: border-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
 	}
 

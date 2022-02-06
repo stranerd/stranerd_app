@@ -1,7 +1,6 @@
 <template>
-	<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl" />
-	<div v-else>
-		<EmptyState v-if="fetched && !loading && filtered.length === 0" info="No results found." />
+	<div>
+		<EmptyState v-if="filtered.length === 0" info="No results found." />
 		<div class="showcase">
 			<UserListCard v-for="user in filtered" :key="user.hash" :user="user" />
 		</div>
@@ -12,12 +11,10 @@
 import { computed, defineComponent, PropType } from 'vue'
 import UserListCard from '@app/components/users/UserListCard.vue'
 import { UserEntity } from '@modules/users'
-import { IonSkeletonText } from '@ionic/vue'
-import { useSearch } from '@app/composable/meta/search'
 
 export default defineComponent({
 	name: 'SearchUsersList',
-	components: { UserListCard, IonSkeletonText },
+	components: { UserListCard },
 	props: {
 		users: {
 			type: Array as PropType<UserEntity[]>,
@@ -30,9 +27,8 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { loading, fetched } = useSearch()
 		const filtered = computed(() => props.users.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, loading, fetched }
+		return { filtered }
 	}
 })
 </script>
