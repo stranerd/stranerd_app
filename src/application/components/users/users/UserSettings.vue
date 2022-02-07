@@ -64,18 +64,18 @@
 			<ion-text class="text-xl text-main_dark font-bold text-left w-full">
 				{{ hasPassword ? 'Update Password' : 'Add Password' }}
 			</ion-text>
-			<div class="border border-faded_gray rounded-xl w-full mt-4">
-				<IonInput v-if="hasPassword" v-model="passwordFactory.oldPassword" class="w-full font-medium"
-					placeholder="Confirm Old Password" />
+			<div v-if="hasPassword" class="border border-faded_gray rounded-xl w-full mt-4">
+				<IonInput v-model="passwordFactory.oldPassword" class="w-full font-medium" placeholder="Confirm Old Password"
+					type="password" />
 			</div>
 			<div class="flex md:flex-row gap-4 items-center justify-center flex-col w-full mt-4">
 				<div class="border border-faded_gray rounded-xl w-full">
-					<IonInput v-model="passwordFactory.password" class="w-full font-medium"
-						placeholder="Enter New Password" />
+					<IonInput v-model="passwordFactory.password" class="w-full font-medium" placeholder="Enter New Password"
+						type="password" />
 				</div>
 				<div class="border border-faded_gray rounded-xl w-full">
-					<IonInput v-model="passwordFactory.cPassword" class="w-full font-medium"
-						placeholder="Confirm New Password" />
+					<IonInput v-model="passwordFactory.cPassword" class="w-full font-medium" placeholder="Confirm New Password"
+						type="password" />
 				</div>
 			</div>
 			<div class="w-full justify-start mt-4">
