@@ -11,7 +11,7 @@
 					<Logo :secondary="true" class="w-24" />
 				</router-link>
 				<router-link class="flex items-center" to="/notifications">
-					<NotificationIcon :key="user.id" class="text-xl text-main_dark" />
+					<NotificationIcon :key="user?.id" class="text-xl text-main_dark" />
 				</router-link>
 			</div>
 		</ion-toolbar>

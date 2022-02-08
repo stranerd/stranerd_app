@@ -7,7 +7,7 @@
 			<SlideFour v-if="tab === 3" />
 		</div>
 
-		<div class="flex items-center justify-between gap-4 px-4 my-10">
+		<div class="flex justify-between gap-4 px-4 my-10">
 			<ion-button v-if="tab > 0" class="btn-outline text-white w-full mx-auto max-w-[280px]" @click="tab--">
 				Back
 			</ion-button>
@@ -52,7 +52,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style scoped>
-
-</style>

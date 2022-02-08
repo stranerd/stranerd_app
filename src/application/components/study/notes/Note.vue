@@ -1,10 +1,13 @@
 <template>
-	<Pdf v-for="i in numPages" :id="i" :key="i" :annotation="true" :page="i" :resize="true" :scale="100"
-		:src="pdfData" style="margin: 10px auto;">
-		<template v-slot:loading>
-			<PageLoading />
-		</template>
-	</Pdf>
+	<div>
+		<Pdf v-for="i in numPages" :id="i" :key="i" :annotation="true" :page="i" :resize="true" :scale="100"
+			:src="pdfData" style="margin: 10px auto;">
+			<template v-slot:loading>
+				<PageLoading />
+			</template>
+		</Pdf>
+		<PageLoading v-if="loading" />
+	</div>
 </template>
 
 <script lang="ts">
@@ -27,16 +30,18 @@ export default defineComponent({
 		const scale = ref('page-width')
 		const pdfData = ref(undefined)
 		const numPages = ref(0)
+		const loading = ref(true)
 
 		onMounted(async () => {
 			pdfData.value = Pdfvuer.createLoadingTask(props.note.media?.link ?? props.note.link)
 			// @ts-ignore
 			pdfData.value.then((pdf: any) => {
 				numPages.value = pdf.numPages
+				loading.value = false
 			})
 		})
 
-		return { page, scale, numPages, pdfData }
+		return { page, scale, numPages, pdfData, loading }
 	}
 })
 </script>

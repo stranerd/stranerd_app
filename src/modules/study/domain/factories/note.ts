@@ -13,6 +13,7 @@ import { BaseFactory, Media } from '@modules/core'
 import { NoteEntity } from '@modules/study'
 import { NoteToModel } from '../../data/models/note'
 
+const MAX_DOC_SIZE = 25 * 1024 * 1024
 type Content = File | Media
 type Keys = {
 	title: string, description: string, tags: string[], isPublic: boolean,
@@ -34,9 +35,10 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 		link: { required: false, rules: [isRequiredIfX(!this.isHosted), isString] },
 		preview: { required: false, rules: [isImage] },
 		media: {
-			required: false, rules: [isRequiredIfX(this.isHosted), isFile, (val: any) => {
-				return docFormats.includes(val.type) ? isValid() : isInvalid('only pdf files are allowed')
-			}]
+			required: false, rules: [isRequiredIfX(this.isHosted), isFile,
+				(val: any) => docFormats.includes(val.type) ? isValid() : isInvalid('only pdf files are allowed'),
+				(val: any) => val?.size < MAX_DOC_SIZE ? isValid() : isInvalid('only files less than 25mb are allowed')
+			]
 		}
 	}
 
