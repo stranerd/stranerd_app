@@ -20,12 +20,12 @@
 							exact-active-class="border-b-4 text-white border-white">
 							Discussion
 						</router-link>
-						<router-link :to="`/classes/notes`"
+						<router-link :to="`/classes/preps`"
 							class="py-2 cursor-pointer min-w-[3.4rem]"
 							exact-active-class="border-b-4 text-white border-white">
 							Test Prep
 						</router-link>
-						<router-link :to="`/classes/videos`"
+						<router-link :to="`/classes/notes`"
 							class="py-2 cursor-pointer"
 							exact-active-class="border-b-4 text-white border-white">
 							Notes
@@ -35,17 +35,17 @@
 							exact-active-class="border-b-4 text-white border-white">
 							FlashCards
 						</router-link>
-						<router-link :to="`/classes/flashCards`"
+						<router-link :to="`/classes/videos`"
 							class="py-2 cursor-pointer"
 							exact-active-class="border-b-4 text-white border-white">
 							Playlist
 						</router-link>
-						<router-link :to="`/classes/flashCards`"
+						<router-link :to="`/classes/folders`"
 							class="py-2 cursor-pointer"
 							exact-active-class="border-b-4 text-white border-white">
 							Folders	
 						</router-link>
-						<router-link :to="`/classes/flashCards`"
+						<router-link :to="`/classes/participants`"
 							class="py-2 cursor-pointer"
 							exact-active-class="border-b-4 text-white border-white">
 							Participants	

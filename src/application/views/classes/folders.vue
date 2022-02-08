@@ -1,9 +1,7 @@
 <template>
 	<classWrapper>
-		<!-- <ExploreFlashCardsList /> -->
-
 		<h1>
-			classDiscussion
+			classFolders
 		</h1>
 	</classWrapper>
 </template>
@@ -13,7 +11,7 @@ import { defineComponent } from 'vue'
 import classWrapper from '@app/components/classes/ClassWrapper.vue'
 
 export default defineComponent({
-	name: 'classDiscussion',
+	name: 'classFolders',
 	displayName: 'Classes',
 	components: { classWrapper }
 })
