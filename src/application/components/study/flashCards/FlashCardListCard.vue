@@ -1,7 +1,7 @@
 <template>
 	<div class="m-0 bg-white rounded-xl flex flex-col gap-2 box-border justify-between p-4 text-main_dark">
 		<div class="w-full justify-between items-start flex">
-			<div class="flex flex-col items-start">
+			<div class="flex flex-col items-start truncate">
 				<ion-text class="font-semibold truncate">{{ flashCard.title }}</ion-text>
 				<Tag :index="3"
 					:tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">

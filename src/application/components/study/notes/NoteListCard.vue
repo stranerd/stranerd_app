@@ -2,7 +2,7 @@
 	<div
 		class="m-0 w-full bg-white rounded-xl flex flex-col justify-between items-start gap-4 box-border p-4 text-main_dark">
 		<div class="w-full justify-between items-start flex">
-			<div class="text-base flex-col flex gap-2 items-start flex-grow">
+			<div class="text-base flex-col flex gap-2 items-start flex-grow truncate">
 				<ion-text class="font-semibold truncate">{{ note.title }}</ion-text>
 				<Tag :index="1" tag="Note">
 					<template v-slot="slotProps">
