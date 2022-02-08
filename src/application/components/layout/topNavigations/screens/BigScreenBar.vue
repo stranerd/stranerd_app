@@ -16,7 +16,7 @@
 							@click="openCreateDashboardMenu" />
 						<router-link class="flex flex-row items-center justify-center"
 							to="/notifications">
-							<NotificationIcon :key="user.id" class="text-2xl text-main_dark" />
+							<NotificationIcon :key="user?.id" class="text-2xl text-main_dark" />
 						</router-link>
 						<div v-if="isLoggedIn"
 							class=" font-bold flex flex-row items-center justify-center gap-2 cursor-pointer"

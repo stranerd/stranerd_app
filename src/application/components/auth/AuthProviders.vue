@@ -15,7 +15,6 @@ import { useGoogleSignin } from '@app/composable/auth/signin'
 import { IonButton, IonIcon } from '@ionic/vue'
 import { logoGoogle } from 'ionicons/icons'
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth'
-import { isWeb } from '@utils/constants'
 
 export default defineComponent({
 	name: 'AuthProviders',
@@ -29,15 +28,18 @@ export default defineComponent({
 				const token = googleUser.authentication.idToken
 				await GoogleAuth.signOut()
 				await signin(token)
-			} catch (error: any) {
-				// eslint-disable-next-line no-console
-				console.log(error)
+			} catch (error) {
 				await setError('Error signing in with google')
 			}
 		}
 
 		onMounted(async () => {
-			if (isWeb) await GoogleAuth.init()
+			try {
+				GoogleAuth.init()
+			} catch (err) {
+				// eslint-disable-next-line no-console
+				console.log(err)
+			}
 		})
 
 		return { loading, error, logoGoogle, loginWithGoogle }
