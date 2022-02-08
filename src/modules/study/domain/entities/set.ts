@@ -15,6 +15,7 @@ export class SetEntity extends BaseEntity {
 		videos: string[]
 		flashCards: string[]
 		testPreps: string[]
+		sets: string[]
 	}
 	public readonly createdAt: number
 	public readonly updatedAt: number
@@ -39,7 +40,7 @@ export class SetEntity extends BaseEntity {
 		this.tags = tags
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
-		this.name = !parent ? `${this.userBio.firstName}'s Study` : name
+		this.name = !parent ? 'My Library' : name
 		this.children = children
 		this.saved = saved
 		this.createdAt = createdAt
@@ -65,6 +66,7 @@ type SetConstructorArgs = {
 		videos: string[]
 		flashCards: string[]
 		testPreps: string[]
+		sets: string[]
 	}
 	createdAt: number
 	updatedAt: number

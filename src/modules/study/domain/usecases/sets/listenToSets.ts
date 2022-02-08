@@ -20,7 +20,7 @@ export class ListenToSetsUseCase {
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
 			const matches = entity.isPublic
 			if (!matches) return false
-			if (date) return entity.createdAt > date
+			if (date) return entity.createdAt >= date
 			return matches
 		})
 	}

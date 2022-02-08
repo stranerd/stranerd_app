@@ -3,9 +3,9 @@
 		<div class="text-body h-full md:bg-new_gray">
 			<PageLoading v-if="loading" />
 			<template v-if="user">
-				<div class="bg-primary rounded-b-xl lg:rounded-none pt-4 px-4">
-					<div class="w-full md:w-10/12 lg:w-6/12 mx-auto flex flex-col gap-4">
-						<div class="text-body w-full flex gap-2 md:gap-4 items-center lg:justify-start">
+				<div class="blueTop pt-4 px-4">
+					<div class="w-full md:w-10/12 lg:w-6/12 mx-auto">
+						<div class="text-body w-full flex gap-2 md:gap-4 items-center lg:justify-start mb-4">
 							<div class="relative border-white border-4 rounded-full grid place-items-center">
 								<Avatar :id="user.id" :size="72" :src="user.avatar" class="md:hidden" color="#C7D6E3" />
 								<Avatar :id="user.id" :size="90" :src="user.avatar" class="hidden md:block"
@@ -16,7 +16,7 @@
 								<Tag :index="user.rank.level - 1" :secondary="true" :tag="user.rank.id" />
 							</div>
 						</div>
-						<div class="flex items-center gap-3 text-faded_gray font-semibold overflow-x-auto">
+						<div class="nav-scroll">
 							<router-link :to="`/users/${user.id}/questions`"
 								class="pb-2 cursor-pointer"
 								exact-active-class="border-b-4 text-white border-white">

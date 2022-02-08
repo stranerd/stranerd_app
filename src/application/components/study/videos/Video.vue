@@ -1,7 +1,7 @@
 <template>
 	<div class="flex">
 		<YouTube ref="youtube"
-			:src="video.videoId" class="mx-auto flex-grow"
+			:src="video.link" class="mx-auto flex-grow"
 			width="100%" @ready="onReady" />
 	</div>
 </template>

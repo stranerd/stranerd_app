@@ -16,7 +16,7 @@
 					<IonLabel>Edit Inst.</IonLabel>
 				</a>
 				<a class="flex items-center gap-1" @click.prevent="deleteInstitution">
-					<IonIcon :icon="trash" class="text-delete_red" />
+					<IonIcon :icon="trash" class="text-red" />
 					<IonLabel>Delete Inst.</IonLabel>
 				</a>
 			</IonItem>
@@ -27,7 +27,7 @@
 					<IonLabel>Edit</IonLabel>
 				</a>
 				<a class="flex items-center gap-2" @click.prevent="deleteCourse(course)">
-					<IonIcon :icon="trash" class="text-delete_red" />
+					<IonIcon :icon="trash" class="text-red" />
 					<IonLabel>Delete</IonLabel>
 				</a>
 			</IonItem>

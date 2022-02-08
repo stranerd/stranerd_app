@@ -18,7 +18,7 @@ export class ListenToChatsUseCase {
 
 		return await this.repository.listenToMany(path, conditions, listener, (entity) => {
 			if (!entity.path.includes(path[0]) || !entity.path.includes(path[1])) return false
-			if (date) return entity.createdAt > date
+			if (date) return entity.createdAt >= date
 			else return true
 		})
 	}

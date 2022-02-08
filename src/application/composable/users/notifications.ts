@@ -1,4 +1,4 @@
-import { onUnmounted, onMounted, ref, Ref } from 'vue'
+import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { GetNotifications, ListenToNotifications, MarkNotificationSeen, NotificationEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
@@ -22,7 +22,9 @@ const unshiftToNotificationList = (userId: string, notification: NotificationEnt
 	else global[userId].notifications.value.unshift(notification)
 }
 
-export const useNotificationList = (userId: string) => {
+export const useNotificationList = () => {
+	const { id } = useAuth()
+	const userId = id.value
 	if (global[userId] === undefined) {
 		const listener = useListener(async () => {
 			if (!userId) return () => {

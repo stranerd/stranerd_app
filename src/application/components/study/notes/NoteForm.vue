@@ -19,7 +19,7 @@
 			</label>
 		</div>
 
-		<div class="mb-12">
+		<div v-if="false" class="mb-12">
 			<label>Tags</label>
 			<IonInput v-model="tag" class="mb-2" placeholder="Add related tags" />
 			<div v-if="factory.tags.length > 0" class="mb-2 flex flex-wrap gap-2">
@@ -33,7 +33,7 @@
 			<DisplayError :error="factory.errors.tags" />
 		</div>
 
-		<div class="mb-12">
+		<div v-if="false" class="mb-12">
 			<input
 				id="preview" accept="image/x-png,image/jpeg,image/jpg"
 				class="hidden" type="file" @change="catchPreview" />

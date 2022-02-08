@@ -1,19 +1,17 @@
 <template>
-	<div class="text-xs md:text-sm ">
-		<div class="lg:mt-8 mt-4">
-			<EmptyState v-if="!loading && !error && questions.length === 0" :btnText="'Ask a question'"
-				:info="'No questions found! Start asking questions to help with homework and studying.'"
-				route="/questions/create"
-			/>
-			<div class="mt-6 col-span-6 flex flex-wrap gap-4">
-				<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
-			</div>
-			<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
-				<a @click.prevent="fetchOlderQuestions">Load More</a>
-			</div>
+	<div class="text-xs md:text-sm px-4">
+		<EmptyState v-if="!loading && !error && questions.length === 0" :btnText="'Ask a question'"
+			:info="'No questions found! Start asking questions to help with homework and studying.'"
+			route="/questions/create"
+		/>
+		<div class="col-span-6 flex flex-wrap gap-4">
+			<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
 		</div>
+		<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
+			<a @click.prevent="fetchOlderQuestions">Load More</a>
+		</div>
+		<page-loading v-if="loading" />
 	</div>
-	<page-loading v-if="loading" />
 </template>
 
 <script lang="ts">

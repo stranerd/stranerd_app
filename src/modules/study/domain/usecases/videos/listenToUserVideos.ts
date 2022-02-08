@@ -19,7 +19,7 @@ export class ListenToUserVideosUseCase {
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
 			const matches = [entity.userId === userId]
-			if (date) matches.push(entity.createdAt > date)
+			if (date) matches.push(entity.createdAt >= date)
 			return matches.every((m) => m)
 		})
 	}

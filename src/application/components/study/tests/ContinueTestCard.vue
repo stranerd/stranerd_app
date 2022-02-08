@@ -2,7 +2,7 @@
 	<router-link :to="`/study/tests/${test.id}/take`"
 		class="m-0 bg-white w-full rounded-xl flex flex-col gap-2 box-border p-4">
 		<div class="w-full flex justify-between items-center">
-			<ion-text class="text-left w-full text-main_dark font-semibold">
+			<ion-text class="text-left w-full text-main_dark font-semibold truncate capitalize">
 				<Institution v-if="testPrep && testPrep.isPastQuestionType"
 					:institutionId="testPrep.data.institutionId" />
 				<span v-else>{{ test.name }}</span>
@@ -10,7 +10,7 @@
 			<ion-icon :icon="arrowForward" class="text-2xl text-gray" />
 		</div>
 
-		<ion-text class="text-sm text-left w-full text-gray">
+		<ion-text class="text-sm text-left w-full text-gray mb-1 truncate">
 			{{ test.isTimed ? 'Timed' : 'Study' }}
 			<span v-if="testPrep && testPrep.isPastQuestionType">
 				>

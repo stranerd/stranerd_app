@@ -1,15 +1,14 @@
 <template>
-	<div
-		class="m-0 w-full bg-white rounded-xl flex flex-col items-start gap-2 box-border p-4">
+	<div class="m-0 w-full bg-white rounded-xl flex flex-col items-start gap-2 box-border p-4 text-main_dark">
 		<div class="w-full flex justify-between items-center">
 			<ion-text class="truncate">
-				<Institution :institutionId="institutionId" class="font-semibold text-main-dark" />
+				<Institution :institutionId="institutionId" class="font-semibold" />
 			</ion-text>
 			<router-link :to="`/study/preps/${institutionId}`">
 				<ion-icon :icon="arrowForward" class="text-2xl text-gray" />
 			</router-link>
 		</div>
-		<Tag :tag="yearGap" class="text-sm" />
+		<Tag :index="0" :tag="yearGap" class="text-sm" />
 
 		<router-link :to="`/study/preps/${institutionId}`" class="w-full mt-auto">
 			<ion-button class="btn-outline text-primary w-full" size="small">Get Started</ion-button>

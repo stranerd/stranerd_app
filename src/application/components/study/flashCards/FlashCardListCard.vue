@@ -1,27 +1,28 @@
 <template>
-	<div class="m-0 bg-white rounded-xl flex flex-col gap-2 box-border justify-between p-4">
+	<div class="m-0 bg-white rounded-xl flex flex-col gap-2 box-border justify-between p-4 text-main_dark">
 		<div class="w-full justify-between items-start flex">
 			<div class="flex flex-col items-start">
-				<ion-text class="font-bold text-base text-main_dark">{{ flashCard.title }}</ion-text>
-				<Tag :tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
+				<ion-text class="font-semibold truncate">{{ flashCard.title }}</ion-text>
+				<Tag :index="3"
+					:tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
 					<template v-slot="slotProps">
 						<span class="flex items-center">
-							<ion-icon :icon="copy" class="text-base mr-1" />
-							<ion-text class="text-xs font-bold">{{ slotProps.tag }}</ion-text>
+							<ion-icon :icon="copy" class="mr-1" />
+							<ion-text class="text-xs font-semibold">{{ slotProps.tag }}</ion-text>
 						</span>
 					</template>
 				</Tag>
 			</div>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl cursor-pointer" @click="openMenu" />
+			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl" @click="openMenu" />
 		</div>
 
 		<div class="w-full flex items-center justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="flashCard.userId" :size="24" :src="flashCard.userBio.photo" />
-				<ion-text class="text-xs font-bold text-main_dark">{{ flashCard.userBio.firstName }}</ion-text>
+				<ion-text class="text-xs">{{ flashCard.userBio.firstName }}</ion-text>
 			</div>
 			<router-link :to="`/study/flashCards/${flashCard.id}`">
-				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]" size="small">
+				<ion-button class="btn-outline text-primary w-full lg:min-w-[7.5rem]" size="small">
 					Open
 				</ion-button>
 			</router-link>

@@ -2,7 +2,7 @@
 	<ion-fab slot="fixed" class="lg:hidden" horizontal="end" vertical="bottom">
 		<ion-fab-button :activated="active" :color="active ? 'danger' : 'primary'" class="z-50 relative"
 			@click="active = !active">
-			<ion-icon :icon="add"></ion-icon>
+			<ion-icon :icon="add" />
 		</ion-fab-button>
 		<ion-fab-list class="z-50" side="top">
 			<router-link class="relative" to="/study/folders/create">

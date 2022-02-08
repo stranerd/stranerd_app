@@ -5,7 +5,7 @@
 			<avatar :id="user.id" :size="24" :src="user.avatar" color="#64778A" />
 			<span>{{ user.fullName }}</span>
 		</div>
-		<a v-if="user.isAdmin" class="w-3/12 font-bold text-right text-delete_red" @click.prevent="deAdminUser(user)">
+		<a v-if="user.isAdmin" class="w-3/12 font-bold text-right text-red" @click.prevent="deAdminUser(user)">
 			Remove
 		</a>
 		<a v-else class="w-3/12 font-bold text-right text-success" @click.prevent="adminUser(user)">

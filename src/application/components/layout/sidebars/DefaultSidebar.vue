@@ -15,11 +15,10 @@
 					<span class="font-semibold capitalize">{{ name }}</span>
 				</div>
 			</router-link>
-
 		</div>
-
 	</div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { calendarClear, helpCircle, home, library, people } from 'ionicons/icons'

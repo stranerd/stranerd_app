@@ -41,7 +41,7 @@
 		</div>
 		<div class="w-full font-bold text-right cursor-pointer">
 			<a class="text-orange mr-4" @click.prevent="openPastQuestionEditModal(pastQuestion)">Edit</a>
-			<a class="text-delete_red" @click.prevent="deletePastQuestion">Delete</a>
+			<a class="text-red" @click.prevent="deletePastQuestion">Delete</a>
 		</div>
 		<DisplayError :error="error" />
 		<PageLoading v-if="loading" />

@@ -1,19 +1,27 @@
 <template>
-	<div class="m-0 w-full bg-white rounded-xl flex flex-col justify-between items-start gap-4 box-border p-4">
+	<div
+		class="m-0 w-full bg-white rounded-xl flex flex-col justify-between items-start gap-4 box-border p-4 text-main_dark">
 		<div class="w-full justify-between items-start flex">
-			<ion-icon :icon="playCircle" class="text-main_dark text-2xl cursor-pointer" />
-			<div class="text-base text-main_dark font-bold text-left flex-col flex ml-2 flex-grow">
-				<ion-text>{{ video.title }}</ion-text>
+			<div class="text-base flex-col flex gap-2 items-start flex-grow">
+				<ion-text class="font-semibold truncate">{{ video.title }}</ion-text>
+				<Tag :index="2" tag="Video">
+					<template v-slot="slotProps">
+						<span class="flex items-center">
+							<ion-icon :icon="playCircle" class="text-base mr-1" />
+							<ion-text class="text-xs">{{ slotProps.tag }}</ion-text>
+						</span>
+					</template>
+				</Tag>
 			</div>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl cursor-pointer" @click="openMenu" />
+			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl" @click="openMenu" />
 		</div>
 		<div class="w-full flex items-center justify-between">
-			<div class="flex items-center">
+			<div class="flex items-center gap-2">
 				<Avatar :id="video.userId" :size="24" :src="video.userBio.photo" />
-				<ion-text class="text-xs font-bold text-main_dark ml-2">{{ video.userBio.firstName }}</ion-text>
+				<ion-text class="text-xs">{{ video.userBio.firstName }}</ion-text>
 			</div>
 			<router-link :to="`/study/videos/${video.id}`">
-				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]" size="small">
+				<ion-button class="btn-outline text-primary w-full lg:min-w-[7.5rem]" size="small">
 					Watch
 				</ion-button>
 			</router-link>
