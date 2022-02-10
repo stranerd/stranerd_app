@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+import AppComponent from './App.vue'
 import { routes } from '@app/router/routes'
 import { createRouter, createWebHistory } from '@ionic/vue-router'
 import { IonicVue } from '@ionic/vue'
@@ -18,6 +18,9 @@ import { allModals, allPopovers } from '@app/composable/core/modals'
 import { defineCustomElements } from '@ionic/pwa-elements/loader'
 import { showAddAnswer } from '@app/composable/questions/answers'
 import { cssListeners } from '@app/plugins/cssListeners'
+import { App } from '@capacitor/app'
+import { domain } from '@utils/environment'
+import { clearAllNotifications } from '@utils/push'
 
 const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken }
 const globalPlugins = [parseLoggedInUser, authClient, registerIonicComponent, registerComponents, ipAddressGetter, cssListeners]
@@ -51,7 +54,7 @@ const init = async () => {
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
 	})
 
-	const app = createApp(App)
+	const app = createApp(AppComponent)
 
 	for (const plugin of globalPlugins) await plugin({ app, router }).catch()
 
@@ -63,7 +66,14 @@ const init = async () => {
 
 	app.mount('#app')
 
+	App.addListener('appUrlOpen', async (event) => {
+		const path = event.url.split(domain).pop()
+		if (path) await router.push({ path })
+	})
+
 	await defineCustomElements(window)
+	
+	await clearAllNotifications()
 }
 
 init().then()

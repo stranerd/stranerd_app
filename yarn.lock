@@ -1012,6 +1012,11 @@
   resolved "https://registry.yarnpkg.com/@capacitor/keyboard/-/keyboard-1.2.1.tgz#ff5550aa4c0a3a7a4127e303bf4f0281fbe002cb"
   integrity sha512-wNBzVFQ5OSXJ+V4AaExG3KcpfWoDZYLi9DgxsOqEPx58TebWCWAaLvmbbtByQMkfTMElc3AKeHb1H5z8cVtl4A==
 
+"@capacitor/push-notifications@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@capacitor/push-notifications/-/push-notifications-1.0.9.tgz#8a8398cdbd17a06f1b3d003f60897bd6db7bd1fe"
+  integrity sha512-NaH+drTYjOGgFMHl/2Jn1/+2rlgomtwP2NfK20E0i7+QoRze1ArcSThJ4vSF0m7VkYBsH3MgbXkWfNSSPaYrtw==
+
 "@capacitor/share@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@capacitor/share/-/share-1.1.1.tgz#4959e62031d515a2edf7fd49f9a955fdcd617302"

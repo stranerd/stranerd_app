@@ -28,5 +28,8 @@
 			"serverClientId": "replace_with_google_client_id",
 			"forceCodeForRefreshToken": true
 		}
+	},
+	"server": {
+		"url": "http://192.168.208.203:8080"
 	}
 }
