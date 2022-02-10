@@ -3,10 +3,7 @@ const placeholder = 'replace_with_google_client_id'
 const { google_client_id } = require('../env.json')
 
 const files = [
-	'./android/app/src/main/res/values/strings.xml',
-	'./capacitor.config.json',
-	'./android/app/src/main/assets/capacitor.config.json',
-	'./ios/App/App/capacitor.config.json'
+	'./android/app/src/main/res/values/strings.xml'
 ]
 
 let type = process.argv[2]
