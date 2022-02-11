@@ -4,6 +4,8 @@ import { storage } from '@utils/storage'
 import { isWeb } from '@utils/constants'
 import { HttpClient } from '@modules/core'
 import { apiBases, appName } from '@utils/environment'
+import { NotificationEntity } from '@modules/users'
+import { router as routerPromise } from '@app/router'
 
 const STORAGE_KEY = 'user_device_token'
 
@@ -25,9 +27,11 @@ export const setupPush = async (userId: string) => {
 		alert('Push received: ' + JSON.stringify(notification))
 	})
 
-	await PushNotifications.addListener('pushNotificationActionPerformed', async (notification) => {
-		alert('Push action performed: ' + JSON.stringify(notification))
+	await PushNotifications.addListener('pushNotificationActionPerformed', async ({ notification }) => {
+		const router = await routerPromise
 		await clearAllNotifications()
+		const parsed = JSON.parse(notification.data.value) as NotificationData
+		if (parsed.type === 'notifications') await router.push(NotificationEntity.getLink(parsed.data.action, parsed.data.data))
 	})
 
 	const result = await PushNotifications.requestPermissions()
@@ -47,4 +51,12 @@ const registerDevice = async (token: string, subscribe: boolean) => {
 		token, app: appName
 	}).catch(() => false)
 	if (!res) throw new Error(`Failed to ${key} device`)
+}
+
+type NotificationData = {
+	type: 'notifications'
+	data: {
+		action: string
+		data: Record<string, any>
+	}
 }
