@@ -7,14 +7,14 @@ import { apiBases, appName } from '@utils/environment'
 
 const STORAGE_KEY = 'user_device_token'
 
-export const setupPush = async () => {
+export const setupPush = async (userId: string) => {
 	if (isWeb) return
 
 	await PushNotifications.addListener('registration', async ({ value: token }) => {
-		const savedToken = await storage.get(STORAGE_KEY)
-		if (savedToken == token) return
+		const savedToken = await storage.get(STORAGE_KEY) as { token: string, userId: string }
+		if (savedToken.userId === userId && savedToken.token == token) return
 		await registerDevice(token, true)
-		await storage.set(STORAGE_KEY, token)
+		await storage.set(STORAGE_KEY, { token, userId })
 	})
 
 	await PushNotifications.addListener('registrationError', async () => {

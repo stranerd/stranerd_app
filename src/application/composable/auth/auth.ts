@@ -84,7 +84,7 @@ export const useAuth = () => {
 
 	const signin = async (remembered: boolean) => {
 		await Promise.all([
-			setupPush(),
+			setupPush(id.value),
 			startProfileListener(),
 			useUserRootSet().listener.startListener()
 		])
