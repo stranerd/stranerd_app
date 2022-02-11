@@ -1,48 +1,44 @@
 <template>
 	<Auth>
-		<div class="w-full md:min-h-[102vh] min-h-[120vh] h-full flex bg-white">
+		<div class="w-full h-full flex bg-white">
 			<div
-				class="bg-primary w-7/12 lg:flex flex-col items-center justify-center h-full hidden absolute bottom-0">
+				class="bg-primary w-7/12 lg:flex flex-col items-center justify-center h-full hidden">
 				<h1 class="text-5xl text-white font-extrabold mb-12">Studying has never been easier</h1>
 				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png">
 			</div>
-			<div class="flex flex-col items-center justify-center lg:w-5/12 w-full ml-auto">
+			<div class="flex flex-col items-center justify-center lg:w-5/12 w-full h-full ml-auto">
 				<h1 class="md:text-5xl text-2xl text-main_dark font-extrabold mb-12 text-center">Sign up today</h1>
-				<div class="h-[65%]">
-					<form
-						@submit.prevent="signup"
-					>
-						<div class="mb-4">
+				<div>
+					<form class="flex flex-col gap-4" @submit.prevent="signup">
+						<div>
 							<ion-input v-model="factory.first" :size="24" placeholder="First Name"
 								position="floating"
 								type="text"></ion-input>
-							<span class="text-body text-red-500 font-semibold">{{ factory.errors.first }}</span>
+							<DisplayError :error="factory.errors.first" />
 						</div>
-						<div class="mb-4">
+						<div>
 							<ion-input v-model="factory.last" :size="24" placeholder="Last Name" position="floating"
 								type="text"></ion-input>
-							<span class="text-body text-red-500 font-semibold">{{ factory.errors.last }}</span>
+							<DisplayError :error="factory.errors.last" />
 						</div>
-						<div class="mb-4">
+						<div>
 							<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
-								position="floating"
-								type="email"></ion-input>
-							<span class="text-body text-red-500 font-semibold">{{ factory.errors.email }}</span>
+								position="floating" type="text" />
+							<DisplayError :error="factory.errors.email" />
 						</div>
-						<div class="mb-4">
+						<div>
 							<ion-input v-model="factory.password" :size="24" placeholder="Password"
 								position="floating"
 								type="password"></ion-input>
-							<span class="text-body text-red-500 font-semibold">{{ factory.errors.password }}</span>
+							<DisplayError :error="factory.errors.password" />
 						</div>
-						<div class="mb-4">
+						<div>
 							<ion-input v-model="factory.cPassword" :size="24" placeholder="Confirm Password"
 								position="floating"
 								type="password"></ion-input>
-							<span
-								class="text-body text-red-500 font-semibold">{{ factory.errors.cPassword }}</span>
+							<DisplayError :error="factory.errors.cPassword" />
 						</div>
-						<ion-button class="w-full mb-4 !capitalize" type="submit">Sign up
+						<ion-button class="w-full !capitalize" type="submit">Sign up
 							<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
 						</ion-button>
 					</form>

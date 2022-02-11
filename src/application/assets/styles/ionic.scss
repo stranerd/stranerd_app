@@ -158,6 +158,8 @@ ion-popover {
 		position: relative;
 		display: block;
 		contain: content;
+		overflow-y: auto;
+		max-height: 100vh;
 
 		.inner-content {
 			max-height: 80vh;
