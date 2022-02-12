@@ -8,7 +8,7 @@ export const isClient = () => true
 
 export const googleClientId = process.env.VUE_APP_API_GOOGLE_CLIENT_ID ?? ''
 
-const parseURL = (url: string) => isAndroid ? url.replace('localhost', '10.0.2.2') : url
+const parseURL = (url: string) => isAndroid ? url.replace('localhost', '192.168.43.189') : url
 
 const host = parseURL((process.env.VUE_APP_API_DOMAIN ?? '') + (isDev ? `:${process.env.VUE_APP_API_PORT}` : ''))
 export const domain = `http${!isDev ? 's' : ''}://${host}`

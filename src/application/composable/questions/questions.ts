@@ -229,9 +229,8 @@ export const useEditQuestion = () => {
 				await setLoading(true)
 				await EditQuestion.call(editingQuestion!.id, factory.value)
 				await setMessage('Question edited successfully')
-				const subject = factory.value.subjectId
-				factory.value.reset()
 				useQuestionModal().closeEditQuestion()
+				factory.value.reset()
 				await router.replace(`/questions/${editingQuestion!.id}`)
 			} catch (error) {
 				await setError(error)

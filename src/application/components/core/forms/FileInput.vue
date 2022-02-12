@@ -44,6 +44,7 @@ export default defineComponent({
 				const file = fileList[i]
 				files.push(new UploadedFile({
 					name: file.name,
+					path: file.webkitRelativePath,
 					type: file.type,
 					size: file.size,
 					data: file.slice(),
