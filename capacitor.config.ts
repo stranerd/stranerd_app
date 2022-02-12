@@ -9,7 +9,7 @@ export default {
 	plugins: {
 		SplashScreen: {
 			launchShowDuration: 0,
-			launchAutoHide: true,
+			launchAutoHide: false,
 			backgroundColor: '#ffffffff',
 			androidSplashResourceName: 'splash',
 			androidScaleType: 'CENTER_CROP',

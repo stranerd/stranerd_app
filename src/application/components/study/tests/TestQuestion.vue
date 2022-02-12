@@ -2,7 +2,7 @@
 	<div class="flex flex-col items-start w-full">
 		<PageLoading v-if="loading" />
 
-		<div class="flex item-center justify-between mb-8 mt-10 w-full">
+		<div class="flex item-center justify-between mb-2 w-full">
 			<ion-text class="text-main_dark font-bold md:text-2xl">
 				Question {{ questionIndex + 1 }}
 			</ion-text>
@@ -11,18 +11,18 @@
 			</div>
 		</div>
 
-		<div class="mb-4">
+		<div class="mb-2">
 			<IonText class="text-main_dark mb-2 w-full">
 				<DisplayHtml :html="question.question" />
 			</IonText>
 			<PhotoList v-if="question.questionMedia.length" :photos="question.questionMedia" />
 		</div>
 
-		<div v-if="question.isObjective" class="answers flex flex-col w-full">
+		<div v-if="question.isObjective" class="answers flex flex-col w-full gap-4">
 			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
-				class="w-full hover:bg-light_gray py-3"
+				class="w-full hover:bg-light_gray"
 				@click="answer(question.id, optionIndex)">
-				<div class="flex mb-2">
+				<div class="flex gap-2">
 					<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
 						:icon="checkmarkCircle" color="primary" size="large" />
 					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect" :icon="checkmarkCircle"
@@ -31,8 +31,8 @@
 						color="danger" size="large" />
 					<span v-else
 						class="label border-4 rounded-full border-light_gray h-8 w-8 text-base font-bold grid place-items-center capitalize">
-						{{ getAlphabet(optionIndex + 1) }}</span>
-					<IonText class="text-lg ml-5">
+						{{ getAlphabet(optionIndex + 1) }}.</span>
+					<IonText class="text-lg">
 						<DisplayHtml :html="option" />
 					</IonText>
 				</div>
@@ -72,8 +72,6 @@
 		</div>
 
 		<span v-if="error" class="text-danger my-4">{{ error }}</span>
-
-		<div v-if="showBorder" class="bg-light_gray rounded-lg w-full h-2 mt-12" />
 	</div>
 </template>
 
@@ -109,11 +107,6 @@ export default defineComponent({
 		answer: {
 			required: true,
 			type: Function
-		},
-		showBorder: {
-			type: Boolean,
-			required: false,
-			default: false
 		}
 	},
 	setup (props) {

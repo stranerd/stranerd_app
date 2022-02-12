@@ -1,9 +1,9 @@
-import axios, { AxiosInstance, Method } from 'axios'
+import axios, { AxiosError, AxiosInstance, AxiosResponse, Method } from 'axios'
 import { getTokens, saveTokens } from '@utils/tokens'
 import { apiBases } from '@utils/environment'
 import type { QueryParams, QueryResults } from '@utils/http'
 import { Conditions, StatusCodes } from '@utils/http'
-import { Http } from '@capacitor-community/http'
+import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
 
 export { StatusCodes, Conditions, QueryResults, QueryParams }
 
@@ -20,13 +20,18 @@ export class NetworkError extends Error {
 
 export class HttpClient {
 	private readonly client: AxiosInstance
-	private readonly baseURL: string
-	private readonly headers: Record<string, string>
 
-	constructor (baseURL: string, headers?: Record<string, string>) {
-		this.baseURL = baseURL
-		this.headers = headers ?? { 'content-type': 'application/json' }
+	constructor (baseURL: string) {
 		this.client = axios.create({ baseURL })
+		this.client.interceptors.request.use(async (config) => {
+			const isFromOurServer = Object.values(apiBases).find((base) => !!config.baseURL?.startsWith(base))
+			if (!isFromOurServer) return config
+			const { accessToken, refreshToken } = await getTokens()
+			config.headers = config.headers ?? {}
+			if (accessToken) config.headers['Access-Token'] = accessToken
+			if (refreshToken) config.headers['Refresh-Token'] = refreshToken
+			return config
+		}, (error) => Promise.reject(error))
 	}
 
 	async get<Body, ReturnValue> (url: string, body: Body): Promise<ReturnValue> {
@@ -45,42 +50,37 @@ export class HttpClient {
 		return this.makeRequest<Body, ReturnValue>(url, 'delete', body)
 	}
 
-	private async makeRequest<Body, ReturnValue> (url: string, method: Method, body: Body): Promise<ReturnValue> {
-		const newUrl = this.client.getUri({
-			url, method,
-			headers: await this.getHeaders(),
-			[method === 'get' ? 'params' : 'data']: body
-		})
-		const { data, status } = await Http.request({
-			method: method.toUpperCase(),
-			url: `${this.baseURL}${newUrl}`,
-			headers: await this.getHeaders(),
-			...(method === 'get' ? {} : { data: body })
-		})
-		if (status > 399) {
-			const isFromOurServer = Object.values(apiBases).find((base) => this.client.defaults.baseURL?.startsWith(base)) && Object.values(StatusCodes).includes(status)
-			if (!isFromOurServer) throw new Error(data.toString())
-			if (status !== StatusCodes.AccessTokenExpired) throw new NetworkError(status, data)
+	private async makeRequest<Body, ReturnValue> (url: string, method: Method, data: Body): Promise<ReturnValue> {
+		try {
+			const res = await this.client.request<Body, AxiosResponse<ReturnValue>>({
+				url, method, [method === 'get' ? 'params' : 'data']: data
+			})
+			return res.data
+		} catch (e) {
+			const error = e as unknown as AxiosError
+			if (!error.isAxiosError) throw error
+			if (!error.response) throw error
+			const status = error.response.status
+			const isFromOurServer = Object.values(apiBases).includes(this.client.defaults.baseURL!) && Object.values(StatusCodes).includes(status)
+			if (!isFromOurServer) throw error
+			if (status !== StatusCodes.AccessTokenExpired) throw new NetworkError(status, error.response.data)
 			const res = await this.getNewTokens()
 			if (res) return this.makeRequest(url, method, data)
+			else throw error
 		}
-		return data
 	}
 
 	private async getNewTokens () {
-		const { data, status } = await Http.post({ url: apiBases.AUTH + '/token', headers: await this.getHeaders() })
-		if (status > 399) throw new NetworkError(status, data)
-		await saveTokens(data)
-		return !!data
-	}
-
-	private async getHeaders () {
-		const headers = this.headers
-		const isFromOurServer = Object.values(apiBases).find((base) => !!this.baseURL?.startsWith(base))
-		if (!isFromOurServer) return headers
-		const { accessToken, refreshToken } = await getTokens()
-		if (accessToken) headers['Access-Token'] = accessToken
-		if (refreshToken) headers['Refresh-Token'] = refreshToken
-		return headers
+		try {
+			const { data } = await this.client.post<{}, AxiosResponse<AfterAuthUser>>('/token', {}, { baseURL: apiBases.AUTH })
+			await saveTokens(data)
+			return !!data
+		} catch (e) {
+			const error = e as unknown as AxiosError
+			if (!error.isAxiosError) throw error
+			if (!error.response) throw error
+			const status = error.response.status
+			throw new NetworkError(status, error.response.data)
+		}
 	}
 }

@@ -6,11 +6,11 @@ import {
 	isLongerThanX,
 	isString
 } from '@stranerd/validate'
-import { BaseFactory, Media } from '@modules/core'
+import { BaseFactory, Media, UploadedFile } from '@modules/core'
 import { AnswerEntity } from '../entities/answer'
 import { AnswerToModel } from '../../data/models/answer'
 
-type Content = File | Media
+type Content = UploadedFile | Media
 type Keys = {
 	title: string, body: string, questionId: string, attachments: Content[]
 }
@@ -70,7 +70,7 @@ export class AnswerFactory extends BaseFactory<AnswerEntity, AnswerToModel, Keys
 	toModel = async () => {
 		if (this.valid) {
 			const docs = await Promise.all(this.attachments.map(async (doc) => {
-				if (doc instanceof File) return await this.uploadFile('answers', doc)
+				if (doc instanceof UploadedFile) return await this.uploadFile('answers', doc)
 				return doc
 			}))
 			this.set('attachments', docs)

@@ -13,6 +13,7 @@ import { App } from '@capacitor/app'
 import { domain } from '@utils/environment'
 import { clearAllNotifications } from '@utils/push'
 import { router as setupRouter } from '@app/router'
+import { SplashScreen } from '@capacitor/splash-screen'
 
 const globalPlugins = [parseLoggedInUser, authClient, registerIonicComponent, registerComponents, ipAddressGetter, cssListeners]
 
@@ -29,6 +30,7 @@ const init = async () => {
 	await router.isReady()
 
 	app.mount('#app')
+	await SplashScreen.hide()
 
 	App.addListener('appUrlOpen', async (event) => {
 		const path = event.url.split(domain).pop()

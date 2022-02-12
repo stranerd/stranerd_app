@@ -9,12 +9,12 @@ import {
 	isString,
 	isValid
 } from '@stranerd/validate'
-import { BaseFactory, Media } from '@modules/core'
+import { BaseFactory, Media, UploadedFile } from '@modules/core'
 import { NoteEntity } from '@modules/study'
 import { NoteToModel } from '../../data/models/note'
 
 const MAX_DOC_SIZE = 25 * 1024 * 1024
-type Content = File | Media
+type Content = UploadedFile | Media
 type Keys = {
 	title: string, description: string, tags: string[], isPublic: boolean,
 	isHosted: boolean, media: Content | null, link: string | null, preview: Content | null
@@ -141,8 +141,8 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 
 	toModel = async () => {
 		if (this.valid) {
-			if (this.media instanceof File) this.media = await this.uploadFile('notes', this.media)
-			if (this.preview instanceof File) this.preview = await this.uploadFile('note-previews', this.preview)
+			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('notes', this.media)
+			if (this.preview instanceof UploadedFile) this.preview = await this.uploadFile('note-previews', this.preview)
 			if (this.isHosted) this.link = null
 			else this.media = null
 			const { title, description, isHosted, link, media, tags, preview, isPublic } = this.validValues

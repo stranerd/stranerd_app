@@ -1,6 +1,6 @@
 <template>
 	<div id="screen" class="flex flex-col lg:w-8/12 w-full px-4 mx-auto py-8 gap-8">
-		<Swipe :key="page" :class="[isFullscreen ? 'flex-grow' : '']" @swipeLeft="increase" @swipeRight="increase">
+		<Swipe :key="page" :class="[isFullscreen ? 'flex-grow' : '']" @swipeLeft="increase" @swipeRight="decrease">
 			<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full h-full']"
 				@click="flipped = !flipped">
 				<div class="front bg-white w-full max-w-[72rem]">

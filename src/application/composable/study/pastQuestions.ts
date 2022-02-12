@@ -98,7 +98,7 @@ export const useEditPastQuestion = () => {
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	if (editingPastQuestion) factory.value.loadEntity(editingPastQuestion)
-	// else useStudyModal().closeEditPastQuestion()
+	else useStudyModal().closeEditPastQuestion()
 
 	const editPastQuestion = async () => {
 		await setError('')
@@ -109,7 +109,7 @@ export const useEditPastQuestion = () => {
 				const updatedPastQuestion = await FindPastQuestion.call(editingPastQuestion!.id)
 				if (updatedPastQuestion) pushToGlobalPastQuestions(updatedPastQuestion)
 				factory.value.reset()
-				// useStudyModal().closeEditPastQuestion()
+				useStudyModal().closeEditPastQuestion()
 				await setMessage('PastQuestion updated successfully')
 			} catch (error) {
 				await setError(error)

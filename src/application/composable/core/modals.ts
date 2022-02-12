@@ -5,8 +5,8 @@ import ReportUser from '@app/components/modals/reports/ReportUser.vue'
 import ReportQuestion from '@app/components/modals/reports/ReportQuestion.vue'
 import ReportAnswer from '@app/components/modals/reports/ReportAnswer.vue'
 import SubmitTest from '@app/components/popovers/study/SubmitTest.vue'
-import CreateSet from '@app/components/modals/study/CreateSet.vue'
 import CreateQuestion from '@app/components/modals/questions/CreateQuestion.vue'
+import EditQuestion from '@app/components/modals/questions/EditQuestion.vue'
 import CreateStudy from '@app/components/popovers/study/CreateStudy.vue'
 import CreateDashboardMenu from '@app/components/popovers/menus/CreateDashboardMenu.vue'
 import UserDashboardMenu from '@app/components/popovers/menus/UserDashboardMenu.vue'
@@ -19,10 +19,11 @@ import CreateTestPrep from '@app/components/modals/study/CreateTestPrep.vue'
 import EditTestPrep from '@app/components/modals/study/EditTestPrep.vue'
 import CreatePastQuestion from '@app/components/modals/study/CreatePastQuestion.vue'
 import EditPastQuestion from '@app/components/modals/study/EditPastQuestion.vue'
+import CreateSet from '@app/components/modals/study/CreateSet.vue'
 import EditSet from '@app/components/modals/study/EditSet.vue'
 
 export const modal = useModal(ref([]))
-const QuestionModal = modal.register('Question', { CreateQuestion })
+const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion })
 const SessionModal = modal.register('Session', { CreateSession, Ratings: CreateSession })
 const ReportModal = modal.register('Report', { ReportUser, ReportQuestion, ReportAnswer })
 const StudyModal = modal.register('Study', {
