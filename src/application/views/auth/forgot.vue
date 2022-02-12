@@ -12,7 +12,7 @@
 								required type="text"></ion-input>
 							<span class="text-body text-red-500 font-semibold">{{ factory.errors.email }}</span>
 						</div>
-						<ion-button class="w-full mb-4" type="submit">RESET PASSWORD
+						<ion-button class="w-full mb-4" type="submit">Reset Password
 							<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
 						</ion-button>
 					</form>

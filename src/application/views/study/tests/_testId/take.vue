@@ -1,6 +1,6 @@
 <template>
 	<Justified :hideBottom="true" :hideFab="true">
-		<div class="blueTop">
+		<div class="blueTop !mb-0">
 			<div class="flex items-center">
 				<ion-text class="text-white font-semibold text-center text-xl">
 					{{ test?.name ?? '' }}

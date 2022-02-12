@@ -2,6 +2,7 @@
 	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}/`">
 		<img
 			v-if="source"
+			:onerror="`this.src = '${DEFAULT_PROFILE_IMAGE}'`"
 			:src="source"
 			:style="`width: ${size}px; height: ${size}px; border-radius: 10rem; object-fit: cover;`"
 			alt=""
@@ -26,6 +27,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import { Media } from '@modules/core'
+import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
 
 export default defineComponent({
 	name: 'Avatar',
@@ -56,7 +58,7 @@ export default defineComponent({
 			set: () => {
 			}
 		})
-		return { source }
+		return { source, DEFAULT_PROFILE_IMAGE }
 	}
 })
 </script>

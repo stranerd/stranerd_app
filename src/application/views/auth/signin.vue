@@ -5,8 +5,8 @@
 				<h1 class="text-5xl text-white font-extrabold mb-12">Welcome back</h1>
 				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png">
 			</div>
-			<div class="flex flex-col items-center justify-center lg:w-5/12 w-full">
-				<h1 class="md:text-5xl text-2xl text-main_dark font-extrabold mb-12 text-center">Log in</h1>
+			<div class="flex flex-col items-center justify-center lg:w-5/12 w-full p-4">
+				<h1 class="md:text-5xl text-2xl text-main_dark font-extrabold mb-8 text-center">Log in</h1>
 				<div class="h-[65%]">
 					<form class="flex flex-col gap-4" @submit.prevent="signin">
 						<div>

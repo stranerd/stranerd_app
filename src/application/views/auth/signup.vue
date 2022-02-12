@@ -6,8 +6,8 @@
 				<h1 class="text-5xl text-white font-extrabold mb-12">Studying has never been easier</h1>
 				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png">
 			</div>
-			<div class="flex flex-col items-center justify-center lg:w-5/12 w-full h-full ml-auto">
-				<h1 class="md:text-5xl text-2xl text-main_dark font-extrabold mb-12 text-center">Sign up today</h1>
+			<div class="flex flex-col items-center justify-center lg:w-5/12 w-full h-full ml-auto p-4">
+				<h1 class="md:text-5xl text-2xl text-main_dark font-extrabold mb-8 text-center">Sign up today</h1>
 				<div>
 					<form class="flex flex-col gap-4" @submit.prevent="signup">
 						<div>
@@ -50,7 +50,7 @@
 					<AuthProviders />
 					<span class="text- w-full flex justify-center items-center text-icon_inactive mt-8 mb-5">
 						Have an account?
-						<router-link class="text-primary font-bold text-body" to="/auth/signin">
+						<router-link class="text-primary font-bold text-body ml-2" to="/auth/signin">
 							Sign In
 						</router-link>
 					</span>

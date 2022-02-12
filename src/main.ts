@@ -18,6 +18,7 @@ import { allModals, allPopovers } from '@app/composable/core/modals'
 import { defineCustomElements } from '@ionic/pwa-elements/loader'
 import { showAddAnswer } from '@app/composable/questions/answers'
 import { cssListeners } from '@app/plugins/cssListeners'
+import { useRouteLoading } from '@app/composable/meta/routes'
 
 const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken }
 const globalPlugins = [parseLoggedInUser, authClient, registerIonicComponent, registerComponents, ipAddressGetter, cssListeners]
@@ -30,6 +31,8 @@ const init = async () => {
 	})
 
 	router.beforeEach(async (to, from, next) => {
+		const { setLoading } = useRouteLoading()
+		await setLoading(true)
 		await Promise.all(allModals.map((modal) => modal().closeAll()))
 		await Promise.all(allPopovers.map((popover) => popover().closeAll()))
 		showAddAnswer.value = false
@@ -46,6 +49,7 @@ const init = async () => {
 
 		if (redirect) next(redirect)
 		else next()
+		await setLoading(false)
 	})
 	router.afterEach(() => {
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })

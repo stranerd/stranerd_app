@@ -229,14 +229,14 @@ export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQue
 		this.set('questionMedia', entity.questionMedia)
 		this.type = entity.data.type
 		if (entity.data.type === PastQuestionType.objective) {
-			this.set('options', entity.data.options)
-			this.set('optionsMedia', entity.data.optionsMedia)
+			this.set('options', entity.data.options ?? [])
+			this.set('optionsMedia', entity.data.optionsMedia ?? [])
 			this.correctIndex = entity.data.correctIndex
-			this.explanation = entity.data.explanation
-			this.set('explanationMedia', entity.data.explanationMedia)
+			this.explanation = entity.data.explanation ?? ''
+			this.set('explanationMedia', entity.data.explanationMedia ?? [])
 		} else {
 			this.answer = entity.data.answer
-			this.set('answerMedia', entity.data.answerMedia)
+			this.set('answerMedia', entity.data.answerMedia ?? [])
 		}
 	}
 
