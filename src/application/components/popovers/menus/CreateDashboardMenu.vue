@@ -35,17 +35,24 @@
 				<ion-label class="font-bold">Ask a question</ion-label>
 			</div>
 		</router-link>
+		<router-link class="py-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
+			to="/classes/create">
+			<div class="w-48 flex items-center gap-3">
+				<ion-icon :icon="people" class="text-3xl" />
+				<ion-label class="font-bold">Create a class</ion-label>
+			</div>
+		</router-link>
 	</Popover>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { flash, folder, helpCircle, reader, videocamSharp } from 'ionicons/icons'
+import { flash, folder, helpCircle, reader, videocamSharp, people } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'CreateDashboardMenu',
 	setup () {
-		return { helpCircle, folder, flash, reader, videocamSharp }
+		return { helpCircle, folder, flash, reader, videocamSharp, people }
 	}
 })
 </script>

@@ -20,6 +20,7 @@ import EditTestPrep from '@app/components/modals/study/EditTestPrep.vue'
 import CreatePastQuestion from '@app/components/modals/study/CreatePastQuestion.vue'
 import EditPastQuestion from '@app/components/modals/study/EditPastQuestion.vue'
 import EditSet from '@app/components/modals/study/EditSet.vue'
+import CreateClass from '@app/components/modals/classes/CreateClass.vue'
 
 export const modal = useModal(ref([]))
 const QuestionModal = modal.register('Question', { CreateQuestion })
@@ -30,12 +31,14 @@ const StudyModal = modal.register('Study', {
 	CreateInstitution, EditInstitution, CreateCourse, EditCourse,
 	CreateTestPrep, EditTestPrep, CreatePastQuestion, EditPastQuestion
 })
+const ClassModal = modal.register('Class', { CreateClass })
 
 export const useQuestionModal = () => QuestionModal
 export const useSessionModal = () => SessionModal
 export const useReportModal = () => ReportModal
 export const useStudyModal = () => StudyModal
-export const allModals = [useQuestionModal, useSessionModal, useReportModal, useStudyModal]
+export const useClassModal = () => ClassModal
+export const allModals = [useQuestionModal, useSessionModal, useReportModal, useStudyModal, useClassModal]
 
 export const popover = usePopover(ref([]))
 const StudyPopover = popover.register('Study', { CreateStudy, SubmitTest })

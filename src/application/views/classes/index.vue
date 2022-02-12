@@ -2,11 +2,11 @@
 	<DashboardLayout>
 		<div class="px-4 lg:pl-2 pt-2">
 			<div
-				class="bg-primary h-24 rounded-b-3xl flex items-center justify-between sm:mt-4 -mt-4 -mx-4 sm:mx-0 !z-40 py-6 lg:px-9 px-5">
+				class="bg-primary h-24 rounded-b-3xl md:rounded-3xl flex items-center justify-between sm:mt-4 -mt-4 -mx-4 sm:mx-0 !z-40 py-6 lg:px-9 px-5">
 				<ion-text class="text-white leading-tight lg:text-3xl text-xl font-bold">
 					My classes
 				</ion-text>
-				<router-link to="#">
+				<router-link to="/classes/create">
 					<ion-button class="btn-white font-bold">
 						Create a class
 					</ion-button>
