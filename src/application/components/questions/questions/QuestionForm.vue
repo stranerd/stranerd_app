@@ -62,7 +62,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { IonIcon, IonInput } from '@ionic/vue'
-import { image } from 'ionicons/icons'
+import { close, image } from 'ionicons/icons'
 import { useMultipleFileInputs, useTags } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
