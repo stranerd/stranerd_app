@@ -14,17 +14,11 @@
 				alt=""
 				class="mt-3 w-24 h-24 rounded-full"
 			>
-			<input
-				id="picture"
-				accept="image/*"
-				class="hidden"
-				name="file"
-				type="file"
-				@change.prevent="catchFiles"
-			>
-			<label class="bg-primary text-white py-3 px-6 rounded-xl font-bold mt-4" for="picture">
-				Upload a profile picture
-			</label>
+			<FileInput accept="image/*" class="mt-4" @files="catchFiles">
+				<label class="bg-primary text-white py-3 px-6 rounded-xl font-bold">
+					Upload a profile picture
+				</label>
+			</FileInput>
 		</div>
 
 		<div
@@ -65,16 +59,19 @@
 				{{ hasPassword ? 'Update Password' : 'Add Password' }}
 			</ion-text>
 			<div v-if="hasPassword" class="border border-faded_gray rounded-xl w-full mt-4">
-				<IonInput v-model="passwordFactory.oldPassword" class="w-full font-medium" placeholder="Confirm Old Password"
+				<IonInput v-model="passwordFactory.oldPassword" class="w-full font-medium"
+					placeholder="Confirm Old Password"
 					type="password" />
 			</div>
 			<div class="flex md:flex-row gap-4 items-center justify-center flex-col w-full mt-4">
 				<div class="border border-faded_gray rounded-xl w-full">
-					<IonInput v-model="passwordFactory.password" class="w-full font-medium" placeholder="Enter New Password"
+					<IonInput v-model="passwordFactory.password" class="w-full font-medium"
+						placeholder="Enter New Password"
 						type="password" />
 				</div>
 				<div class="border border-faded_gray rounded-xl w-full">
-					<IonInput v-model="passwordFactory.cPassword" class="w-full font-medium" placeholder="Confirm New Password"
+					<IonInput v-model="passwordFactory.cPassword" class="w-full font-medium"
+						placeholder="Confirm New Password"
 						type="password" />
 				</div>
 			</div>
@@ -94,7 +91,7 @@ import { IonButton, IonInput, IonSpinner, IonTextarea } from '@ionic/vue'
 import { image } from 'ionicons/icons'
 import { useProfileUpdate, useTutorUpdate } from '@app/composable/auth/profile'
 import { useAuth } from '@app/composable/auth/auth'
-import { useFileInputs, useSubjectAsTags } from '@app/composable/core/forms'
+import { useFileInputCallback, useSubjectAsTags } from '@app/composable/core/forms'
 import { usePasswordUpdate } from '@app/composable/auth/passwords'
 import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
 
@@ -124,8 +121,8 @@ export default defineComponent({
 			updatePassword
 		} = usePasswordUpdate()
 		const imageLink = ref((profileFactory.value.avatar as any)?.link ?? '')
-		const { catchFiles } = useFileInputs(async (file) => {
-			imageLink.value = window.URL.createObjectURL(file)
+		const catchFiles = useFileInputCallback(async ([file]) => {
+			imageLink.value = window.URL.createObjectURL(file.data)
 			profileFactory.value.avatar = file
 			await updateProfile()
 		})

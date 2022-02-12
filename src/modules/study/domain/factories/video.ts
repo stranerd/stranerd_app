@@ -7,13 +7,13 @@ import {
 	isString,
 	isVideo
 } from '@stranerd/validate'
-import { BaseFactory, Media } from '@modules/core'
+import { BaseFactory, Media, UploadedFile } from '@modules/core'
 import { VideoEntity } from '../entities/video'
 import { VideoToModel } from '../../data/models/video'
 import { getVideoInfo } from 'youtube-video-exists'
 import getVideoId from 'get-video-id'
 
-type Content = File | Media
+type Content = UploadedFile | Media
 type Keys = {
 	title: string, description: string, tags: string[], isPublic: boolean,
 	isHosted: boolean, media: Content | null, link: string | null, preview: Content | null
@@ -143,8 +143,8 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 					if (info.private) throw new Error('the provided video is private')
 				}
 			}
-			if (this.media instanceof File) this.media = await this.uploadFile('videos', this.media)
-			if (this.preview instanceof File) this.preview = await this.uploadFile('video-previews', this.preview)
+			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('videos', this.media)
+			if (this.preview instanceof UploadedFile) this.preview = await this.uploadFile('video-previews', this.preview)
 			if (this.isHosted) this.link = null
 			else this.media = null
 			const { title, description, isHosted, link, media, tags, preview, isPublic } = this.validValues

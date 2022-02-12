@@ -6,17 +6,13 @@
 
 		<div class="flex items-center mt-5 gap-5 flex-col lg:flex-row">
 			<div class="flex items-center gap-5 w-full">
-				<input
-					id="images" accept="image/x-png,image/jpeg,image/jpg"
-					class="cursor-pointer lg:w-full h-full hidden"
-					multiple
-					name="images"
-					style="opacity:0; overflow:hidden; position:absolute;"
-					type="file"
-					@change="catchAttachments" />
-				<label class="cursor-pointer" for="images">
+				<FileInput
+					:multiple="true"
+					accept="image/x-png,image/jpeg,image/jpg"
+					@files="catchAttachments"
+				>
 					<ion-icon :icon="image" class="!text-4xl text-gray" />
-				</label>
+				</FileInput>
 				<IonInput v-model="tag" class="w-1/4 font-medium bg-new_gray text-main_dark px-3"
 					placeholder="Add related tags">
 				</IonInput>
@@ -63,7 +59,7 @@
 import { defineComponent, PropType } from 'vue'
 import { IonIcon, IonInput } from '@ionic/vue'
 import { close, image } from 'ionicons/icons'
-import { useMultipleFileInputs, useTags } from '@app/composable/core/forms'
+import { useFileInputCallback, useTags } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import { useQuestionModal } from '@app/composable/core/modals'
@@ -105,9 +101,9 @@ export default defineComponent({
 			(tag: string) => props.factory.removeTag(tag)
 		)
 
-		const { catchMultipleFiles: catchAttachments } = useMultipleFileInputs(
-			(files: File[]) => files.map(props.factory.addAttachment)
-		)
+		const catchAttachments = useFileInputCallback(async (files) => {
+			files.map(props.factory.addAttachment)
+		})
 
 		return {
 			image, close, closeModal,

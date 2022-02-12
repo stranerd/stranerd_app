@@ -1,9 +1,9 @@
-import { BaseFactory, Media } from '@modules/core'
+import { BaseFactory, Media, UploadedFile } from '@modules/core'
 import { isImage, isLongerThanX, isString } from '@stranerd/validate'
 import { UserEntity } from '@modules/users'
 import { ProfileUpdate } from '../entities/auth'
 
-type Content = File | Media | undefined
+type Content = UploadedFile | Media | undefined
 type Keys = { first: string, last: string, description: string, avatar: Content }
 
 export class ProfileUpdateFactory extends BaseFactory<UserEntity, ProfileUpdate, Keys> {
@@ -54,7 +54,7 @@ export class ProfileUpdateFactory extends BaseFactory<UserEntity, ProfileUpdate,
 
 	toModel = async () => {
 		if (this.valid) {
-			if (this.avatar instanceof File) this.avatar = await this.uploadFile('profiles', this.avatar)
+			if (this.avatar instanceof UploadedFile) this.avatar = await this.uploadFile('profiles', this.avatar)
 
 			const {
 				first,

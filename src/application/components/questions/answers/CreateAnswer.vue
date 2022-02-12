@@ -23,17 +23,15 @@
 		<div
 			class="lg:mt-9 mt-5 rounded-xl text-main_dark relative bg-light_gray border border-faded_gray flex flex-col h-32 justify-center items-center">
 			<IonIcon :icon="image" class="!text-3xl" />
-			<input
-				id="images" accept="image/x-png,image/jpeg,image/jpg"
-				class="cursor-pointer w-full h-full absolute"
-				multiple
-				name="images"
-				style="opacity:0; overflow:hidden; position:absolute;"
-				type="file"
-				@change="catchAttachments" />
-			<ion-text class="mt-3 font-bold lg:text-base">
-				Add images to accompany your answer (Optional)
-			</ion-text>
+			<FileInput
+				:multiple="true"
+				accept="image/x-png,image/jpeg,image/jpg"
+				class="mt-3"
+				@files="catchAttachments">
+				<ion-text class="font-bold lg:text-base">
+					Add images to accompany your answer (Optional)
+				</ion-text>
+			</FileInput>
 		</div>
 		<div v-if="factory.attachments.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
 			<span v-for="attachment in factory.attachments" :key="attachment.name">
@@ -64,7 +62,7 @@ import { IonIcon, IonInput } from '@ionic/vue'
 import { close, image } from 'ionicons/icons'
 import { showAddAnswer, useCreateAnswer } from '@app/composable/questions/answers'
 import { QuestionEntity } from '@modules/questions'
-import { useMultipleFileInputs } from '@app/composable/core/forms'
+import { useFileInputCallback } from '@app/composable/core/forms'
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 
 export default defineComponent({
@@ -83,9 +81,9 @@ export default defineComponent({
 			createAnswer
 		} = useCreateAnswer()
 
-		const { catchMultipleFiles: catchAttachments } = useMultipleFileInputs(
-			(files: File[]) => files.map(factory.value.addAttachment)
-		)
+		const catchAttachments = useFileInputCallback(async (files) => {
+			files.map(factory.value.addAttachment)
+		})
 
 		return {
 			image, close,
