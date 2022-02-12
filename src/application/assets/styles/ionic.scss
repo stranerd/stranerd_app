@@ -146,8 +146,9 @@ ion-popover {
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
 		--width: 100vw;
-		--border-radius: 0rem;
+		--border-radius: 0.75rem 0.75rem 0 0;
 	}
+
 
 	&.bottom {
 		align-items: flex-end;
