@@ -13,8 +13,8 @@ export const setupPush = async (userId: string) => {
 	if (isWeb) return
 
 	await PushNotifications.addListener('registration', async ({ value: token }) => {
-		const savedToken = await storage.get(STORAGE_KEY) as { token: string, userId: string }
-		if (savedToken.userId === userId && savedToken.token == token) return
+		const savedToken = await storage.get(STORAGE_KEY)
+		if (savedToken?.userId === userId && savedToken?.token == token) return
 		await registerDevice(token, true)
 		await storage.set(STORAGE_KEY, { token, userId })
 	})
@@ -23,15 +23,12 @@ export const setupPush = async (userId: string) => {
 		await Notify({ title: 'Failed to register for push notifications. Restart the app to retry' })
 	})
 
-	await PushNotifications.addListener('pushNotificationReceived', async (notification) => {
-		alert('Push received: ' + JSON.stringify(notification))
-	})
-
 	await PushNotifications.addListener('pushNotificationActionPerformed', async ({ notification }) => {
 		const router = await routerPromise
 		await clearAllNotifications()
 		const parsed = JSON.parse(notification.data.value) as NotificationData
 		if (parsed.type === 'notifications') await router.push(NotificationEntity.getLink(parsed.data.action, parsed.data.data))
+		else await router.push('/notifications')
 	})
 
 	const result = await PushNotifications.requestPermissions()
@@ -47,10 +44,17 @@ export const clearAllNotifications = async () => {
 const registerDevice = async (token: string, subscribe: boolean) => {
 	const key = subscribe ? 'subscribe' : 'unsubscribe'
 	const utilsClient = new HttpClient(apiBases.UTILS)
-	const res = await utilsClient.post<{ app: string, token: string }, boolean>(`/push/devices/${key}{`, {
+	const res = await utilsClient.post<{ app: string, token: string }, boolean>(`/push/devices/${key}`, {
 		token, app: appName
 	}).catch(() => false)
 	if (!res) throw new Error(`Failed to ${key} device`)
+}
+
+export const unregisterDeviceOnLogout = async () => {
+	const savedToken = await storage.get(STORAGE_KEY) as { token: string, userId: string }
+	if (!savedToken) return
+	await registerDevice(savedToken.token, false)
+	await storage.remove(STORAGE_KEY)
 }
 
 type NotificationData = {

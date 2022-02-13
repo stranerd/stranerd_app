@@ -1,4 +1,4 @@
-import { isAndroid } from '@utils/constants'
+import { isWeb } from '@utils/constants'
 
 export const appName = 'stranerd'
 export const isDev = process.env.VUE_APP_API_ENVIRONMENT === 'local'
@@ -8,7 +8,7 @@ export const isClient = () => true
 
 export const googleClientId = process.env.VUE_APP_API_GOOGLE_CLIENT_ID ?? ''
 
-const parseURL = (url: string) => isAndroid ? url.replace('localhost', '10.0.2.2') : url
+const parseURL = (url: string) => !isWeb ? url.replace('http://localhost', 'https://local.stranerd.ngrok.io') : url
 
 const host = parseURL((process.env.VUE_APP_API_DOMAIN ?? '') + (isDev ? `:${process.env.VUE_APP_API_PORT}` : ''))
 export const domain = `http${!isDev ? 's' : ''}://${host}`
