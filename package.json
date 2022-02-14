@@ -49,6 +49,7 @@
 		"core-js": "^3.21.0",
 		"get-video-id": "^3.5.3",
 		"katex": "^0.15.2",
+		"pdf-parse": "^1.1.1",
 		"pdfvuer": "^2.0.1",
 		"socket.io-client": "^4.4.1",
 		"sweetalert2": "^11.4.0",
