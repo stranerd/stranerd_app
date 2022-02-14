@@ -101,7 +101,6 @@ export const useNotificationList = () => {
 }
 
 export const useNotification = (notification: NotificationEntity) => {
-	const { id } = useAuth()
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const markNotificationSeen = async () => {
@@ -109,7 +108,7 @@ export const useNotification = (notification: NotificationEntity) => {
 		await setError('')
 		try {
 			await setLoading(true)
-			await MarkNotificationSeen.call(id.value!, notification.id, true)
+			await MarkNotificationSeen.call(notification.id, true)
 		} catch (e) {
 			await setError(e)
 		}

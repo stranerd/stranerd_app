@@ -4,7 +4,7 @@ import { storage } from '@utils/storage'
 import { isWeb } from '@utils/constants'
 import { HttpClient } from '@modules/core'
 import { apiBases, appName } from '@utils/environment'
-import { NotificationEntity } from '@modules/users'
+import { MarkNotificationSeen, NotificationEntity } from '@modules/users'
 import { router as routerPromise } from '@app/router'
 
 const STORAGE_KEY = 'user_device_token'
@@ -21,6 +21,11 @@ export const setupPush = async (userId: string) => {
 
 	await PushNotifications.addListener('registrationError', async () => {
 		await Notify({ title: 'Failed to register for push notifications. Restart the app to retry' })
+	})
+
+	await PushNotifications.addListener('pushNotificationReceived', async (notification) => {
+		const parsed = JSON.parse(notification.data.value) as NotificationData
+		if (parsed.type === 'notifications') await MarkNotificationSeen.call(parsed.data.id, true)
 	})
 
 	await PushNotifications.addListener('pushNotificationActionPerformed', async ({ notification }) => {
@@ -60,6 +65,7 @@ export const unregisterDeviceOnLogout = async () => {
 type NotificationData = {
 	type: 'notifications'
 	data: {
+		id: string
 		action: string
 		data: Record<string, any>
 	}
