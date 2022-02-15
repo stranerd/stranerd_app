@@ -31,7 +31,7 @@ export default defineComponent({
 		const content = ref('')
 		const options = {
 			path: `notes/${props.note.fileName}`,
-			directory: Directory.Documents
+			directory: Directory.Library
 		}
 
 		const download = async () => {
