@@ -29,8 +29,6 @@ export default defineComponent({
 		:deep(ion-input) {
 			--background: $color-newGray !important;
 			background: $color-newGray !important;
-			--padding-top: 1.2rem !important;
-			--padding-bottom: 1.2rem !important;
 			margin-bottom: 0;
 			width: 420px;
 			max-width: 90vw !important;

@@ -11,8 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, PropType, ref } from 'vue'
-import { NoteEntity } from '@modules/study'
+import { defineComponent, onMounted, ref } from 'vue'
 //@ts-ignore
 import Pdfvuer from 'pdfvuer'
 
@@ -20,8 +19,8 @@ export default defineComponent({
 	name: 'Note',
 	components: { Pdf: Pdfvuer },
 	props: {
-		note: {
-			type: Object as PropType<NoteEntity>,
+		link: {
+			type: String,
 			required: true
 		}
 	},
@@ -33,7 +32,7 @@ export default defineComponent({
 		const loading = ref(true)
 
 		onMounted(async () => {
-			pdfData.value = Pdfvuer.createLoadingTask(props.note.media?.link ?? props.note.link)
+			pdfData.value = Pdfvuer.createLoadingTask(props.link)
 			// @ts-ignore
 			pdfData.value.then((pdf: any) => {
 				numPages.value = pdf.numPages

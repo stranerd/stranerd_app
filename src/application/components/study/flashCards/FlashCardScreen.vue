@@ -70,7 +70,7 @@ export default defineComponent({
 		const page = ref(0)
 		let interval: any
 
-		const increase = async () => {
+		const increase = () => {
 			flipped.value = false
 			if (page.value + 1 === props.flashCard?.set.length) {
 				pauseCard()
