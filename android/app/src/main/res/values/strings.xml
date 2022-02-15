@@ -4,5 +4,4 @@
 	<string name="title_activity_main">stranerd</string>
 	<string name="package_name">com.stranerd.app</string>
 	<string name="custom_url_scheme">com.stranerd.app</string>
-	<string name="server_client_id">replace_with_google_client_id</string>
 </resources>
