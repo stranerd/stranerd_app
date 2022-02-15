@@ -23,19 +23,12 @@ export default {
 			useDialog: true
 		},
 		GoogleAuth: {
-			scopes: [
-				'profile',
-				'email'
-			],
+			scopes: ['profile', 'email'],
 			serverClientId: google_client_id,
 			forceCodeForRefreshToken: true
 		},
 		PushNotifications: {
-			presentationOptions: [
-				'badge',
-				'sound',
-				'alert'
-			]
+			presentationOptions: ['badge', 'sound', 'alert']
 		}
 	}
 }
