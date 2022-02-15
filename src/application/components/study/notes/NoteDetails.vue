@@ -1,10 +1,11 @@
 <template>
 	<div>
-		<p>Downloaded: {{ !!content }}</p>
-		<PageLoading v-if="loading" />
-		<button v-if="!content" @click="download">Download Note</button>
-		<button v-else @click="deleteFromDownloads">Delete From Downloads</button>
 		<Note v-if="content" :link="content" />
+		<IonSkeletonText v-else-if="loading" animated class="h-36 rounded-xl" />
+		<div v-else class="flex flex-col gap-2 items-center">
+			<p>The note needs to be downloaded before it can be viewed</p>
+			<IonButton class="btn-primary" size="small" @click="download">Download</IonButton>
+		</div>
 	</div>
 </template>
 
@@ -13,6 +14,8 @@ import { defineComponent, onMounted, PropType, ref } from 'vue'
 import { NoteEntity } from '@modules/study'
 import { Directory, Encoding, Filesystem } from '@capacitor/filesystem'
 import Note from '@app/components/core/media/Note.vue'
+import { blobToBase64 } from '@utils/commons'
+import { IonSkeletonText } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'NoteDetails',
@@ -22,21 +25,13 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { Note },
+	components: { Note, IonSkeletonText },
 	setup (props) {
 		const loading = ref(false)
 		const content = ref('')
 		const options = {
 			path: `notes/${props.note.fileName}`,
 			directory: Directory.Documents
-		}
-
-		const blobToBase64 = async (blob: Blob) => {
-			return new Promise((resolve: (res: string) => void, _) => {
-				const reader = new FileReader()
-				reader.onload = () => resolve(reader.result?.toString() ?? '')
-				reader.readAsDataURL(blob)
-			})
 		}
 
 		const download = async () => {
