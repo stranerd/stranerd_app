@@ -1,5 +1,5 @@
 import 'vue'
-import { Middleware } from '@root/main'
+import { Middleware } from '@app/router'
 
 declare module 'vue' {
 	export interface ComponentOptionsBase {

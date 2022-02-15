@@ -1,6 +1,7 @@
 import { Rule, Validator } from '@stranerd/validate'
 import { reactive } from 'vue'
 import { UploaderService } from '../../services/uploader'
+import { UploadedFile } from '@modules/core'
 
 export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 	errors: Record<keyof K, string>
@@ -62,11 +63,11 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 			})
 	}
 
-	async uploadFile (path: string, file: File) {
+	async uploadFile (path: string, file: UploadedFile) {
 		return await UploaderService.single(path, file)
 	}
 
-	async uploadFiles (path: string, files: File[]) {
+	async uploadFiles (path: string, files: UploadedFile[]) {
 		return await UploaderService.multiple(path, files)
 	}
 }

@@ -54,12 +54,13 @@
 				</div>
 			</div>
 
-			<div class="mt-6 p-3 flex flex-row items-center border-faded_gray border rounded-xl">
-				<ion-textarea v-model="commentFactory.body" :autoGrow="true" :rows="1"
+			<form class="mt-6 p-3 flex flex-row items-center border-faded_gray border rounded-xl"
+				@submit.prevent="createComment">
+				<ion-input v-model="commentFactory.body" :autoGrow="true" :rows="1"
 					class="px-1 focus:outline-none placeholder-gray-400 mt-0 pt-0"
 					placeholder="Add comment" />
 				<IonIcon :icon="send" class="text-[22px] mr-2 text-primary cursor-pointer" @click="createComment" />
-			</div>
+			</form>
 		</div>
 
 		<AnswerCommentsList v-if="showComments" :answerId="answer.id" />
@@ -69,10 +70,10 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue'
-import { IonIcon, IonTextarea } from '@ionic/vue'
+import { IonIcon } from '@ionic/vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
 import { chevronDown, chevronUp, send, star, thumbsDown, thumbsUp } from 'ionicons/icons'
-import PhotoList from '@app/components/core/PhotoList.vue'
+import PhotoList from '@app/components/core/media/PhotoList.vue'
 import { useAnswer } from '@app/composable/questions/answers'
 import { useCreateAnswerComments } from '@app/composable/questions/answer-comments'
 import { useAuth } from '@app/composable/auth/auth'
@@ -82,7 +83,7 @@ import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'AnswerListCard',
-	components: { DisplayHtml, IonTextarea, IonIcon, PhotoList, AnswerCommentsList },
+	components: { DisplayHtml, IonIcon, PhotoList, AnswerCommentsList },
 	props: {
 		answer: {
 			type: AnswerEntity as PropType<AnswerEntity>,

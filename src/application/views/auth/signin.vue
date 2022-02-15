@@ -5,25 +5,23 @@
 				<h1 class="text-5xl text-white font-extrabold mb-12">Welcome back</h1>
 				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png">
 			</div>
-			<div class="flex flex-col items-center justify-center lg:w-5/12 w-full">
-				<h1 class="md:text-5xl text-2xl text-main_dark font-extrabold mb-12 text-center">Log in </h1>
+			<div class="flex flex-col items-center justify-center lg:w-5/12 w-full p-4">
+				<h1 class="md:text-5xl text-2xl text-main_dark font-extrabold mb-8 text-center">Log in</h1>
 				<div class="h-[65%]">
-					<form
-						@submit.prevent="signin"
-					>
-						<div class="md:mb-6 mb-3">
+					<form class="flex flex-col gap-4" @submit.prevent="signin">
+						<div>
 							<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
 								position="floating"
-								type="email"></ion-input>
-							<span class="text-body text-red-500 font-semibold">{{ factory.errors.email }}</span>
+								type="text" />
+							<DisplayError :error="factory.errors.email" />
 						</div>
-						<div class="md:mb-6 mb-3">
+						<div>
 							<ion-input v-model="factory.password" :size="24" placeholder="Password"
 								position="floating"
 								type="password"></ion-input>
-							<span class="text-body text-red-500 font-semibold">{{ factory.errors.password }}</span>
+							<DisplayError :error="factory.errors.password" />
 						</div>
-						<ion-button :disabled="loading" class="w-full d:mb-6 mb-3 capitalize" type="submit">Login
+						<ion-button :disabled="loading" class="w-full capitalize" type="submit">Login
 							<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
 						</ion-button>
 					</form>

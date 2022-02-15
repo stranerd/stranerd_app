@@ -38,3 +38,5 @@ package-lock.json
 sw.*
 /env.json
 *env.json
+
+capacitor.config.json

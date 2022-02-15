@@ -70,3 +70,11 @@ export const share = async ({ title, text, url }: { title: string, text: string,
 }
 
 export const getPercentage = (num: number, den: number) => catchDivideByZero(num, den) * 100
+
+export const blobToBase64 = async (blob: Blob) => {
+	return new Promise((res: (res: string) => void, _) => {
+		const reader = new FileReader()
+		reader.onload = () => res(reader.result?.toString() ?? '')
+		reader.readAsDataURL(blob)
+	})
+}

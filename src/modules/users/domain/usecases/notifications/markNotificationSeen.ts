@@ -7,7 +7,7 @@ export class MarkNotificationSeenUseCase {
 		this.repository = repository
 	}
 
-	async call (userId: string, id: string, seen: boolean) {
-		return await this.repository.markSeen(userId, id, seen)
+	async call (id: string, seen: boolean) {
+		return await this.repository.markSeen(id, seen)
 	}
 }

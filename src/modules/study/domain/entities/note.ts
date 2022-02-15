@@ -46,6 +46,16 @@ export class NoteEntity extends BaseEntity {
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
+
+	get fileName () {
+		if (this.media) return this.media.name
+		const trimQuery = (this.link ?? '').split('?')[0] ?? ''
+		return trimQuery.split('/').pop() ?? this.title.replace(' ', '-').toLowerCase()
+	}
+
+	get fileLink () {
+		return this.media?.link ?? this.link!
+	}
 }
 
 type NoteConstructorArgs = {

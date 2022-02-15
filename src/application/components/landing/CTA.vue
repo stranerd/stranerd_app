@@ -18,17 +18,17 @@
 						Get Started Now
 					</ion-button>
 				</router-link>
-				<!-- <ion-text class="text-2xl text-white mt-8 lg:block hidden">
+				<ion-text class="text-2xl text-white mt-8 lg:block hidden">
 					or download the app instead
-				</ion-text> -->
-				<!-- <div class="lg:flex gap-4 hidden">
-					<router-link to="#">
+				</ion-text>
+				<div class="lg:flex gap-4 hidden">
+					<a href="https://play.google.com/store/apps/details?id=com.stranerd.app" target="_blank">
 						<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/playstore.svg">
-					</router-link>
-					<router-link to="#">
+					</a>
+					<!--<router-link to="#">
 						<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/appstore.svg">
-					</router-link>
-				</div> -->
+					</router-link> -->
+				</div>
 			</div>
 			<div class="sm:hidden max-w-[49rem] h-60 w-full lg:mt-0 mt-12 ">
 				<img alt="" class="object-contain" src="@app/assets/images/auth/auth.png">
@@ -36,15 +36,15 @@
 			<div class="md:w-6/12 max-w-[49rem] w-full lg:mt-0 mt-12 hidden sm:block">
 				<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/auth.png">
 			</div>
-			<!-- <div class="flex gap-4 lg:hidden mt-5">
-				<router-link to="#">
+			<div class="flex gap-4 lg:hidden mt-5">
+				<a href="https://play.google.com/store/apps/details?id=com.stranerd.app" target="_blank">
 					<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/playstore.svg">
-				</router-link>
+				</a>
 
-				<router-link to="#">
+				<!-- <router-link to="#">
 					<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/appstore.svg">
-				</router-link>
-			</div> -->
+				</router-link> -->
+			</div>
 		</div>
 	</div>
 </template>

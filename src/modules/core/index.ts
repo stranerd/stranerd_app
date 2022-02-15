@@ -1,5 +1,6 @@
 export type { Listeners } from './data/datasources/base'
 export type { Media } from './data/models/base'
+export { UploadedFile } from './data/models/base'
 
 export { BaseEntity } from './domain/entities/base'
 export { BaseFactory } from './domain/factories/base'

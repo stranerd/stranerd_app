@@ -1,8 +1,8 @@
 <template>
 	<ion-page>
 		<ion-content class="auth">
-			<div class="w-full mt-10 h-full flex flex-col items-center justify-start ">
-				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
+			<div class="w-full mt-10 h-full flex flex-col items-center justify-start py-20">
+				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray">
 					<h1 class="text-xl text-main_dark font-bold mb-2 ">Reset Password</h1>
 					<span class="text-body text-main_dark mb-4">To reset your password, type your new password below and reset</span>
 					<div class="h-[65%]">
@@ -27,10 +27,10 @@
 							</ion-button>
 						</form>
 					</div>
+					<router-link class="text-primary font-bold text-body mt-8" to="/auth/signin">
+						Back to Sign In
+					</router-link>
 				</div>
-				<router-link class="text-primary font-bold text-body mt-8" to="/auth/signin">
-					Back to Sign In
-				</router-link>
 			</div>
 			<page-loading v-if="loading" />
 		</ion-content>

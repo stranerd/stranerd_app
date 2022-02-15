@@ -1,0 +1,15 @@
+[
+	{
+		"relation": [
+			"delegate_permission/common.handle_all_urls"
+		],
+		"target": {
+			"namespace": "android_app",
+			"package_name": "com.stranerd.app",
+			"sha256_cert_fingerprints": [
+				"AC:DA:62:43:1B:BC:07:D4:0D:32:FE:C0:82:91:B6:DF:D6:14:E1:B0:DA:6A:02:5B:D8:EE:76:F1:03:90:7E:A1",
+				"C0:72:D8:FE:63:D0:5E:50:21:B3:53:5D:98:E1:7B:28:5C:9C:28:C9:F1:7B:7A:32:C8:41:4C:A4:3D:7A:6B:82"
+			]
+		}
+	}
+]

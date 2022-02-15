@@ -210,11 +210,11 @@ export const useQuestion = (questionId: string) => {
 
 let editingQuestion = null as QuestionEntity | null
 export const getEditingQuestion = () => editingQuestion
-export const openQuestionEditModal = (question: QuestionEntity, router: Router) => {
+export const openQuestionEditModal = async (question: QuestionEntity, router: Router) => {
 	editingQuestion = question
-	router.push(`/questions/${question.id}/edit`)
+	await router.push(`/questions/${question.id}/edit`)
 }
-export const useEditQuestion = (questionId: string) => {
+export const useEditQuestion = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
@@ -227,11 +227,11 @@ export const useEditQuestion = (questionId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditQuestion.call(questionId, factory.value)
+				await EditQuestion.call(editingQuestion!.id, factory.value)
 				await setMessage('Question edited successfully')
-				const subject = factory.value.subjectId
+				useQuestionModal().closeEditQuestion()
 				factory.value.reset()
-				await router.replace(`/questions/${questionId}`)
+				await router.replace(`/questions/${editingQuestion!.id}`)
 			} catch (error) {
 				await setError(error)
 			}
