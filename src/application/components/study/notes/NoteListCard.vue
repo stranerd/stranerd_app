@@ -57,7 +57,7 @@ export default defineComponent({
 		const downloaded = ref(false)
 		const options = {
 			path: `notes/${props.note.fileName}`,
-			directory: Directory.Documents
+			directory: Directory.Library
 		}
 
 		const download = async () => {
