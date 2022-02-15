@@ -19,8 +19,6 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GCLOUD_AUTH }}
         with:
           args: "secrets versions access latest --secret=Stranerd_Environment_Variables > env.json"
-      - name: Create .env File
-        run: npm run env:copy:app
       - name: Install Dependencies
         run: yarn
       - name: Build App

@@ -1032,10 +1032,10 @@
   resolved "https://registry.yarnpkg.com/@capacitor/toast/-/toast-1.0.8.tgz#290459f931d14888a7de72ec8a01cf99f5c65929"
   integrity sha512-wLSxvf+GVt5VvLUBeaI2FwW846pAF9qVPq2z97Z+xSJ/7PkebTAHR2eixJ3jJXRCpm9J1gWkRvljSvQup3/xaw==
 
-"@codetrix-studio/capacitor-google-auth@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@codetrix-studio/capacitor-google-auth/-/capacitor-google-auth-3.0.2.tgz#a095135311805bf1134bcf81a8246788008f3849"
-  integrity sha512-DsWwiBPkwWY/2F7JPq4mpNrKJYafpVZY+6Pq/ov5CeospRXJPauxEPHexo6uV6N5Yi6YIAwSBJqZhOZCdBURTg==
+"@codetrix-studio/capacitor-google-auth@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@codetrix-studio/capacitor-google-auth/-/capacitor-google-auth-3.1.0.tgz#929c034bd08ffee723c45e16f8c8ce0af5b755ef"
+  integrity sha512-UXEB9CwGGPKiixc/evWPOEDdKzfuZzEKBC78AFSRLOc0tpMdLSMdUOmzdtuVRXZXEgGtoyce7aTYDMWZ0JrBKA==
 
 "@commitlint/cli@^16.1.0":
   version "16.1.0"

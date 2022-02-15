@@ -15,6 +15,7 @@ import { useGoogleSignin } from '@app/composable/auth/signin'
 import { IonButton, IonIcon } from '@ionic/vue'
 import { logoGoogle } from 'ionicons/icons'
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth'
+import { googleClientId } from '@utils/environment'
 
 export default defineComponent({
 	name: 'AuthProviders',
@@ -35,7 +36,13 @@ export default defineComponent({
 
 		onMounted(async () => {
 			try {
-				GoogleAuth.init()
+				GoogleAuth.initialize({
+					clientId: googleClientId,
+					scopes: [
+						'profile',
+						'email'
+					]
+				})
 			} catch (err) {
 				// eslint-disable-next-line no-console
 				console.log(err)
