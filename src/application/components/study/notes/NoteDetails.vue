@@ -10,12 +10,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, PropType, ref } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { NoteEntity } from '@modules/study'
-import { Directory, Encoding, Filesystem } from '@capacitor/filesystem'
 import Note from '@app/components/core/media/Note.vue'
-import { blobToBase64 } from '@utils/commons'
 import { IonSkeletonText } from '@ionic/vue'
+import { useDownload } from '@app/composable/meta/media'
 
 export default defineComponent({
 	name: 'NoteDetails',
@@ -27,40 +26,14 @@ export default defineComponent({
 	},
 	components: { Note, IonSkeletonText },
 	setup (props) {
-		const loading = ref(false)
-		const content = ref('')
-		const options = {
-			path: `notes/${props.note.fileName}`,
-			directory: Directory.Library
-		}
-
-		const download = async () => {
-			loading.value = true
-			const data = await fetch(props.note.fileLink).then(async (r) => blobToBase64(await r.blob()))
-			await Filesystem.writeFile({
-				...options, recursive: true, data, encoding: Encoding.UTF8
-			}).catch(() => null)
-			const contents = await Filesystem.readFile({ ...options, encoding: Encoding.UTF8 })
-			content.value = contents.data
-			loading.value = false
-		}
-
-		const deleteFromDownloads = async () => {
-			loading.value = true
-			await Filesystem.deleteFile(options).catch(() => null)
-			content.value = ''
-			loading.value = false
-		}
-
-		onMounted(async () => {
-			loading.value = true
-			const contents = await Filesystem.readFile({ ...options, encoding: Encoding.UTF8 }).catch(() => null)
-			loading.value = false
-			if (!contents) return
-			content.value = contents.data
-		})
-
-		return { loading, content, download, deleteFromDownloads }
+		const {
+			loading,
+			content,
+			error,
+			download,
+			deleteFromDownloads
+		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
+		return { loading, content, error, download, deleteFromDownloads }
 	}
 })
 </script>
