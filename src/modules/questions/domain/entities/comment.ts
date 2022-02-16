@@ -1,5 +1,6 @@
 import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
 import { BaseEntity } from '@modules/core'
+import { appName } from '@utils/environment'
 
 export class CommentEntity extends BaseEntity {
 	public readonly id: string
@@ -41,6 +42,10 @@ export class CommentEntity extends BaseEntity {
 
 	get avatar () {
 		return this.userBio.photo
+	}
+
+	get isUserVerified () {
+		return this.userRoles[appName].isVerified
 	}
 }
 

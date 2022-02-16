@@ -2,6 +2,7 @@ import { Clipboard } from '@capacitor/clipboard'
 import { Share } from '@capacitor/share'
 import { Notify } from '@utils/dialog'
 import { isNumber } from '@stranerd/validate'
+import { isWeb } from '@utils/constants'
 
 export { extractTextFromHTML } from '@stranerd/validate'
 
@@ -70,3 +71,5 @@ export const share = async ({ title, text, url }: { title: string, text: string,
 }
 
 export const getPercentage = (num: number, den: number) => catchDivideByZero(num, den) * 100
+
+export const parseURL = (url: string) => !isWeb ? url.replace('http://localhost', 'https://local.stranerd.eu.ngrok.io') : url

@@ -53,7 +53,10 @@ export class HttpClient {
 	async download (url: string): Promise<string> {
 		try {
 			const response = await this.client.get(url, { responseType: 'arraybuffer' })
-			return 'data:*;base64,' + btoa(String.fromCharCode(...new Uint8Array(response.data)))
+			const type = response.headers['content-type']
+			const binary = new Uint8Array(response.data)
+				.reduce((acc, cur) => acc + String.fromCharCode(cur), '')
+			return `data:${type};base64,` + btoa(binary)
 		} catch (e: any) {
 			alert(e.message)
 			throw new Error('Error downloading file')

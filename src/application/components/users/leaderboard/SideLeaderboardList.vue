@@ -9,21 +9,21 @@
 				<span>{{ person.bio.fullName }}</span>
 				<IonIcon v-if="person.isVerified" :icon="checkmarkCircle" color="primary" />
 			</span>
-			<div class="flex flex-row-reverse items-center flex-grow">
-				<span class="text-primary font-bold text-lg">{{ formatNumber(person.account.rankings[time], 2) }}</span>
-			</div>
+			<span class="text-primary font-bold text-lg ml-auto">
+				{{ formatNumber(person.account.rankings[time], 2) }}
+			</span>
 		</router-link>
 
 		<router-link v-if="user && hasNoAuthUser" :to="`/users/${user.id}`"
 			class="py-3 px-3 rounded-lg flex w-full bg-yellow_star text-main_dark font-bold flex-row items-center">
 			<span class="font-bold mr-2 text-sm">-</span>
-			<span class="text-base font-normal">
+			<span class="text-base font-normal flex items-center gap-1">
 				<span>{{ user.bio.fullName }}</span>
 				<IonIcon v-if="user.isVerified" :icon="checkmarkCircle" color="primary" />
 			</span>
-			<div class="flex flex-row-reverse items-center flex-grow">
-				<span class="font-bold text-primary text-lg">{{ formatNumber(user.account.rankings[time], 2) }}</span>
-			</div>
+			<span class="font-bold text-primary text-lg ml-auto">
+				{{ formatNumber(user.account.rankings[time], 2) }}
+			</span>
 		</router-link>
 
 		<EmptyState v-if="!loading && !error && !user && users.length === 0"

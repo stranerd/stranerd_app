@@ -13,7 +13,10 @@
 				<div class="lg:w-8/12 max-w-[60rem] w-full px-4 mx-auto flex items-center justify-between">
 					<div class="flex">
 						<Avatar :id="video.userId" :size="28" :src="video.userBio.photo" class="mx-2" />
-						<ion-text class="text-icon_inactive"> by <b>{{ video.userBio.firstName }} </b></ion-text>
+						<ion-text class="text-icon_inactive flex items-center gap-1">
+							<span>by <b>{{ video.userBio.firstName }} </b></span>
+							<IonIcon v-if="video.isUserVerified" :icon="checkmarkCircle" color="primary" />
+						</ion-text>
 					</div>
 					<div class="flex items-center">
 						<Share cssClass="text-icon_inactive text-xl cursor-pointer mx-2" />
@@ -27,7 +30,18 @@
 
 <script lang="ts">
 import Justified from '@app/layouts/Justified.vue'
-import { add, bookmark, chevronDown, chevronUp, contract, pencil, remove, scan, shareSocial } from 'ionicons/icons'
+import {
+	add,
+	bookmark,
+	checkmarkCircle,
+	chevronDown,
+	chevronUp,
+	contract,
+	pencil,
+	remove,
+	scan,
+	shareSocial
+} from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
@@ -44,7 +58,7 @@ export default defineComponent({
 		const { error, loading, video } = useVideo(videoId as string)
 		return {
 			add, remove, scan, chevronDown, loading, video, error,
-			chevronUp, pencil, contract, bookmark, shareSocial
+			chevronUp, pencil, contract, bookmark, shareSocial, checkmarkCircle
 		}
 	}
 })

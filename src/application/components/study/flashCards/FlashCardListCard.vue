@@ -19,7 +19,10 @@
 		<div class="w-full flex items-center justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="flashCard.userId" :size="24" :src="flashCard.userBio.photo" />
-				<ion-text class="text-xs">{{ flashCard.userBio.firstName }}</ion-text>
+				<ion-text class="text-xs flex items-center gap-1">
+					<span>{{ flashCard.userBio.firstName }}</span>
+					<IonIcon v-if="flashCard.isUserVerified" :icon="checkmarkCircle" color="primary" />
+				</ion-text>
 			</div>
 			<router-link :to="`/study/flashCards/${flashCard.id}`">
 				<ion-button class="btn-outline text-primary w-full lg:min-w-[7.5rem]" size="small">
@@ -32,7 +35,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { copy, ellipsisVertical, flash } from 'ionicons/icons'
+import { checkmarkCircle, copy, ellipsisVertical, flash } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { FlashCardEntity } from '@modules/study'
@@ -55,8 +58,7 @@ export default defineComponent({
 	},
 	setup () {
 		return {
-			ellipsisVertical, copy,
-			formatNumber, flash, pluralize
+			ellipsisVertical, copy, checkmarkCircle, formatNumber, flash, pluralize
 		}
 	},
 	components: { Avatar }

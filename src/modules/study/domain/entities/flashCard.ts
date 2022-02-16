@@ -1,5 +1,6 @@
 import { BaseEntity } from '@modules/core'
 import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
+import { appName } from '@utils/environment'
 
 export class FlashCardEntity extends BaseEntity {
 	public readonly id: string
@@ -36,6 +37,10 @@ export class FlashCardEntity extends BaseEntity {
 		this.userRoles = userRoles
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
+	}
+
+	get isUserVerified () {
+		return this.userRoles[appName].isVerified
 	}
 }
 

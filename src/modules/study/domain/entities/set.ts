@@ -1,5 +1,6 @@
 import { BaseEntity } from '@modules/core'
 import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
+import { appName } from '@utils/environment'
 
 export class SetEntity extends BaseEntity {
 	public readonly id: string
@@ -52,6 +53,10 @@ export class SetEntity extends BaseEntity {
 
 	get allSaved () {
 		return Object.values(this.saved).flat(1).concat(this.children)
+	}
+
+	get isUserVerified () {
+		return this.userRoles[appName].isVerified
 	}
 }
 

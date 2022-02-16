@@ -3,7 +3,10 @@
 		<div class="bg-white rounded-xl p-6 flex flex-col mb-4">
 			<div class="flex flex-row items-center">
 				<Avatar :id="answer.userId" :size="30" :src="answer.avatar" class="mr-2" />
-				<span class="font-bold text-main_dark">{{ answer.userBio.fullName }}</span>
+				<span class="font-bold text-main_dark flex items-center gap-1">
+					<span>{{ answer.userBio.fullName }}</span>
+					<IonIcon v-if="answer.isUserVerified" :icon="checkmarkCircle" color="primary" />
+				</span>
 			</div>
 
 			<div class="flex flex-col py-4">
@@ -72,7 +75,7 @@
 import { computed, defineComponent, PropType, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
-import { chevronDown, chevronUp, send, star, thumbsDown, thumbsUp } from 'ionicons/icons'
+import { checkmarkCircle, chevronDown, chevronUp, send, star, thumbsDown, thumbsUp } from 'ionicons/icons'
 import PhotoList from '@app/components/core/media/PhotoList.vue'
 import { useAnswer } from '@app/composable/questions/answers'
 import { useCreateAnswerComments } from '@app/composable/questions/answer-comments'
@@ -121,7 +124,7 @@ export default defineComponent({
 			commentLoading, commentError,
 			commentFactory, createComment,
 			markBestAnswer, formatNumber,
-			thumbsDown, thumbsUp, star, send, chevronUp, chevronDown,
+			thumbsDown, thumbsUp, star, send, chevronUp, chevronDown, checkmarkCircle,
 			showExplanation, showComments, showEditButton, showDeleteButton
 		}
 	}

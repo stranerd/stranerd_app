@@ -1,6 +1,7 @@
 import { BaseEntity } from '@modules/core'
 import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
 import { ChatEntity } from './chat'
+import { appName } from '@utils/environment'
 
 export class ChatMetaEntity extends BaseEntity {
 	readonly id: string
@@ -42,6 +43,10 @@ export class ChatMetaEntity extends BaseEntity {
 
 	get fullName () {
 		return this.userBio.fullName
+	}
+
+	get isUserVerified () {
+		return this.userRoles[appName].isVerified
 	}
 }
 

@@ -13,7 +13,10 @@
 		<div class="w-full flex items-center justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="set.userId" :size="24" :src="set.userBio.photo" />
-				<ion-text class="text-xs font-bold text-main_dark">{{ set.userBio.firstName }}</ion-text>
+				<ion-text class="text-xs font-bold text-main_dark flex items-center gap-1">
+					<span>{{ set.userBio.firstName }}</span>
+					<IonIcon v-if="set.isUserVerified" :icon="checkmarkCircle" color="primary" />
+				</ion-text>
 			</div>
 			<router-link :to="`/study/folders/${set.id}`">
 				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]" size="small">
@@ -27,7 +30,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { SetEntity } from '@modules/study'
-import { ellipsisVertical, folder } from 'ionicons/icons'
+import { checkmarkCircle, ellipsisVertical, folder } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 
 export default defineComponent({
@@ -43,7 +46,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { ellipsisVertical, folder, pluralize, formatNumber }
+		return { ellipsisVertical, folder, pluralize, formatNumber, checkmarkCircle }
 	}
 })
 </script>

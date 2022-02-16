@@ -1,5 +1,6 @@
 import { BaseEntity, Media } from '@modules/core'
 import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
+import { appName } from '@utils/environment'
 
 export class ReportEntity extends BaseEntity {
 	readonly id: string
@@ -33,6 +34,10 @@ export class ReportEntity extends BaseEntity {
 		this.message = message
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
+	}
+
+	get isUserVerified () {
+		return this.reporterRoles[appName].isVerified
 	}
 }
 
