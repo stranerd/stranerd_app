@@ -16,10 +16,9 @@ import { ReviewRepository } from './data/repositories/review'
 import { ReferralRepository } from './data/repositories/referral'
 import { BadgeRepository } from './data/repositories/badge'
 import { FindUserUseCase } from './domain/usecases/users/findUser'
-import { MakeAdminUseCase } from './domain/usecases/roles/makeAdmin'
-import { RemoveAdminUseCase } from './domain/usecases/roles/removeAdmin'
-import { MakeTutorUseCase } from './domain/usecases/roles/makeTutor'
-import { RemoveTutorUseCase } from './domain/usecases/roles/removeTutor'
+import { ToggleAdminUseCase } from './domain/usecases/roles/toggleAdmin'
+import { ToggleTutorUseCase } from './domain/usecases/roles/toggleTutor'
+import { ToggleVerifiedUseCase } from './domain/usecases/roles/toggleVerified'
 import { GetUsersByEmailUseCase } from './domain/usecases/users/getUsersByEmail'
 import { GetLeaderboardUseCase } from './domain/usecases/users/getLeaderboard'
 import { GetAllAdminsUseCase } from './domain/usecases/users/getAllAdmins'
@@ -78,10 +77,9 @@ export const ListenToUser = new ListenToUserUseCase(userRepository)
 export const UpdateStreak = new UpdateStreakUseCase(userRepository)
 export const UpdateTutor = new UpdateTutorUseCase(userRepository)
 
-export const MakeAdmin = new MakeAdminUseCase(roleRepository)
-export const MakeTutor = new MakeTutorUseCase(roleRepository)
-export const RemoveAdmin = new RemoveAdminUseCase(roleRepository)
-export const RemoveTutor = new RemoveTutorUseCase(roleRepository)
+export const ToggleAdmin = new ToggleAdminUseCase(roleRepository)
+export const ToggleTutor = new ToggleTutorUseCase(roleRepository)
+export const ToggleVerified = new ToggleVerifiedUseCase(roleRepository)
 
 export const GetNotifications = new GetNotificationsUseCase(notificationRepository)
 export const ListenToNotifications = new ListenToNotificationsUseCase(notificationRepository)

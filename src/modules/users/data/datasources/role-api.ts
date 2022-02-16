@@ -26,4 +26,13 @@ export class RoleApiDataSource implements RoleBaseDataSource {
 			value: data.isTutor
 		})
 	}
+
+	async toggleVerified (data: { id: string, isVerified: boolean }) {
+		await this.authClient.post<any, boolean>('/user/roles', {
+			app: appName,
+			role: 'isVerified',
+			userId: data.id,
+			value: data.isVerified
+		})
+	}
 }

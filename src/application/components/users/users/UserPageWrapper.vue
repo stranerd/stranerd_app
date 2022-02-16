@@ -2,18 +2,26 @@
 	<Justified>
 		<div class="text-body h-full md:bg-new_gray">
 			<PageLoading v-if="loading" />
+			<PageLoading v-if="verifiedLoading" />
 			<template v-if="user">
 				<div class="blueTop pt-4 px-4">
 					<div class="w-full md:w-10/12 lg:w-6/12 mx-auto">
-						<div class="text-body w-full flex gap-2 md:gap-4 items-center lg:justify-start mb-4">
-							<div class="relative border-white border-4 rounded-full grid place-items-center">
+						<div class="text-body w-full flex gap-2 md:gap-4 items-center mb-4">
+							<div class="relative border-white border-4 rounded-full">
 								<Avatar :id="user.id" :size="72" :src="user.avatar" class="md:hidden" color="#C7D6E3" />
 								<Avatar :id="user.id" :size="90" :src="user.avatar" class="hidden md:block"
 									color="#C7D6E3" />
 							</div>
-							<div class="flex flex-col justify-start items-start">
-								<h2 class="lg:text-xl text-base font-bold text-white">{{ user.fullName }}</h2>
+							<div class="flex flex-col justify-start items-start gap-1">
+								<h2 class="lg:text-xl text-base font-bold text-white flex gap-1 items-center">
+									<span>{{ user.fullName }}</span>
+									<IonIcon v-if="user.isVerified" :icon="checkmarkCircle" color="white" />
+								</h2>
 								<Tag :index="user.rank.level - 1" :secondary="true" :tag="user.rank.id" />
+								<IonButton v-if="isAdmin && id !== user.id" class="btn-white" size="small"
+									@click="user.isVerified ? deVerifyUser(user) : verifyUser(user)">
+									{{ user.isVerified ? 'Make User Unverified' : 'Make User Verified' }}
+								</IonButton>
 							</div>
 						</div>
 						<div class="nav-scroll">
@@ -69,15 +77,21 @@ import Justified from '@app/layouts/Justified.vue'
 import { useUser } from '@app/composable/users/user'
 import { useRoute } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
+import { checkmarkCircle } from 'ionicons/icons'
+import { useVerifiedRoles } from '@app/composable/users/roles/verified'
 
 export default defineComponent({
 	name: 'UserPageWrapper',
 	components: { PageLoading, Justified },
 	setup () {
-		const { id } = useAuth()
+		const { id, isAdmin } = useAuth()
 		const { userId } = useRoute().params
 		const { user, loading, error } = useUser(userId as string)
-		return { id, user, loading, error }
+		const { loading: verifiedLoading, verifyUser, deVerifyUser } = useVerifiedRoles()
+		return {
+			id, isAdmin, user, loading, error, checkmarkCircle,
+			verifiedLoading, verifyUser, deVerifyUser
+		}
 	}
 })
 </script>

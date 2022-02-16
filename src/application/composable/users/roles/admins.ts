@@ -1,6 +1,6 @@
 import { computed, onMounted, onUnmounted, reactive, ref, toRefs } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { GetAllAdmins, GetUsersByEmail, ListenToAllAdmins, MakeAdmin, RemoveAdmin, UserEntity } from '@modules/users'
+import { GetAllAdmins, GetUsersByEmail, ListenToAllAdmins, ToggleAdmin, UserEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 
@@ -107,7 +107,7 @@ export const useAdminRoles = () => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await MakeAdmin.call(user.id)
+				await ToggleAdmin.call(user.id, true)
 				user.isAdmin = true
 				pushToAdminsList(user)
 				reset()
@@ -128,7 +128,7 @@ export const useAdminRoles = () => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await RemoveAdmin.call(user.id)
+				await ToggleAdmin.call(user.id, false)
 				global.admins.value = global.admins.value
 					.filter((u) => u.id !== user.id)
 				await setMessage('Successfully downgraded from admin')
