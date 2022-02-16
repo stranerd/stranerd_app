@@ -1,4 +1,4 @@
-import { generateDefaultBio, UserBio } from '@modules/users'
+import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
 import { BaseEntity } from '@modules/core'
 
 export class CommentEntity extends BaseEntity {
@@ -8,10 +8,21 @@ export class CommentEntity extends BaseEntity {
 	public readonly questionId?: string
 	public readonly userId: string
 	public readonly userBio: UserBio
+	public readonly userRoles: UserRoles
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
-	constructor ({ id, body, createdAt, userId, userBio, answerId, questionId, updatedAt }: CommentConstructorArgs) {
+	constructor ({
+		             id,
+		             body,
+		             createdAt,
+		             userId,
+		             userBio,
+		             userRoles,
+		             answerId,
+		             questionId,
+		             updatedAt
+	             }: CommentConstructorArgs) {
 		super()
 		this.id = id
 		this.body = body
@@ -19,6 +30,7 @@ export class CommentEntity extends BaseEntity {
 		this.answerId = answerId
 		this.questionId = questionId
 		this.userBio = generateDefaultBio(userBio)
+		this.userRoles = userRoles
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -39,6 +51,7 @@ type CommentConstructorArgs = {
 	answerId?: string
 	questionId?: string
 	userBio: UserBio
+	userRoles: UserRoles
 	createdAt: number
 	updatedAt: number
 }

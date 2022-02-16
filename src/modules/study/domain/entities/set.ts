@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, UserBio } from '@modules/users'
+import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
 
 export class SetEntity extends BaseEntity {
 	public readonly id: string
@@ -10,6 +10,7 @@ export class SetEntity extends BaseEntity {
 	public readonly children: string[]
 	public readonly userId: string
 	public readonly userBio: UserBio
+	public readonly userRoles: UserRoles
 	public readonly saved: {
 		notes: string[]
 		videos: string[]
@@ -28,6 +29,7 @@ export class SetEntity extends BaseEntity {
 		             tags,
 		             userId,
 		             userBio,
+		             userRoles,
 		             children,
 		             saved,
 		             createdAt,
@@ -40,6 +42,7 @@ export class SetEntity extends BaseEntity {
 		this.tags = tags
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
+		this.userRoles = userRoles
 		this.name = !parent ? 'My Library' : name
 		this.children = children
 		this.saved = saved
@@ -59,6 +62,7 @@ type SetConstructorArgs = {
 	isPublic: boolean
 	userId: string
 	userBio: UserBio
+	userRoles: UserRoles
 	tags: string[]
 	children: string[]
 	saved: {

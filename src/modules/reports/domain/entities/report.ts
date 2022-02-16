@@ -1,5 +1,5 @@
 import { BaseEntity, Media } from '@modules/core'
-import { generateDefaultBio, UserBio } from '@modules/users'
+import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
 
 export class ReportEntity extends BaseEntity {
 	readonly id: string
@@ -7,6 +7,7 @@ export class ReportEntity extends BaseEntity {
 	readonly reporterId: string
 	readonly reportedId: string
 	readonly reporterBio: UserBio
+	readonly reporterRoles: UserRoles
 	readonly message: string
 	readonly createdAt: number
 	readonly updatedAt: number
@@ -17,6 +18,7 @@ export class ReportEntity extends BaseEntity {
 		             reporterId,
 		             reportedId,
 		             reporterBio,
+		             reporterRoles,
 		             message,
 		             createdAt,
 		             updatedAt
@@ -27,6 +29,7 @@ export class ReportEntity extends BaseEntity {
 		this.reportedId = reportedId
 		this.reporterId = reporterId
 		this.reporterBio = generateDefaultBio(reporterBio)
+		this.reporterRoles = reporterRoles
 		this.message = message
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
@@ -39,6 +42,7 @@ type ReportConstructorArgs = {
 	reporterId: string
 	reportedId: string
 	reporterBio: UserBio
+	reporterRoles: UserRoles
 	message: string,
 	createdAt: number
 	updatedAt: number
@@ -53,7 +57,7 @@ export enum ReportType {
 
 export type UserReportType = {
 	type: ReportType.users,
-	reported: { bio: UserBio, userId: string }
+	reported: { userBio: UserBio, userRoles: UserRoles, userId: string }
 }
 
 export type QuestionReportType = {

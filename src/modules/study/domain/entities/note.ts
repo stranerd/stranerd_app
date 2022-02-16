@@ -1,5 +1,5 @@
 import { BaseEntity, Media } from '@modules/core'
-import { generateDefaultBio, UserBio } from '@modules/users'
+import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
 
 export class NoteEntity extends BaseEntity {
 	public readonly id: string
@@ -8,6 +8,7 @@ export class NoteEntity extends BaseEntity {
 	public readonly tags: string[]
 	public readonly userId: string
 	public readonly userBio: UserBio
+	public readonly userRoles: UserRoles
 	public readonly isPublic: boolean
 	public readonly isHosted: boolean
 	public readonly link: string | null
@@ -23,6 +24,7 @@ export class NoteEntity extends BaseEntity {
 		             tags,
 		             userId,
 		             userBio,
+		             userRoles,
 		             isPublic,
 		             isHosted,
 		             link,
@@ -38,6 +40,7 @@ export class NoteEntity extends BaseEntity {
 		this.tags = tags
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
+		this.userRoles = userRoles
 		this.isPublic = isPublic
 		this.isHosted = isHosted
 		this.link = link
@@ -67,6 +70,7 @@ type NoteConstructorArgs = {
 	preview: Media
 	userId: string
 	userBio: UserBio
+	userRoles: UserRoles
 	title: string
 	description: string
 	tags: string[]
