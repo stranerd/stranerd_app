@@ -23,6 +23,7 @@ export interface UserRoles {
 	[appName]: {
 		isAdmin: boolean
 		isTutor: boolean
+		isVerified: boolean
 	}
 }
 
@@ -132,7 +133,8 @@ export class UserEntity extends BaseEntity {
 		this.roles = {
 			[appName]: {
 				isAdmin: roles[appName]?.isAdmin ?? false,
-				isTutor: roles[appName]?.isTutor ?? false
+				isTutor: roles[appName]?.isTutor ?? false,
+				isVerified: roles[appName]?.isVerified ?? false
 			}
 		}
 		this.account = account
@@ -265,6 +267,14 @@ export class UserEntity extends BaseEntity {
 
 	set isTutor (isTutor) {
 		this.roles[appName].isTutor = isTutor
+	}
+
+	get isVerified () {
+		return this.roles[appName].isVerified
+	}
+
+	set isVerified (isVerified) {
+		this.roles[appName].isVerified = isVerified
 	}
 }
 

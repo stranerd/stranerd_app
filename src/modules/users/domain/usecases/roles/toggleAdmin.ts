@@ -1,13 +1,13 @@
 import { IRoleRepository } from '../../irepositories/irole'
 
-export class RemoveAdminUseCase {
+export class ToggleAdminUseCase {
 	private repository: IRoleRepository
 
 	constructor (repository: IRoleRepository) {
 		this.repository = repository
 	}
 
-	async call (id: string) {
-		return await this.repository.toggleAdmin(id, false)
+	async call (id: string, admin: boolean) {
+		return await this.repository.toggleAdmin(id, admin)
 	}
 }

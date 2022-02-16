@@ -3,7 +3,10 @@
 		class="flex items-center justify-between w-full bg-white rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 px-6">
 		<div class="w-8/12 flex items-center gap-2">
 			<avatar :id="user.id" :size="24" :src="user.avatar" color="#64778A" />
-			<span>{{ user.fullName }}</span>
+			<span class="flex items-center gap-1">
+				<span>{{ user.fullName }}</span>
+				<IonIcon v-if="user.isVerified" :icon="checkmarkCircle" color="primary" />
+			</span>
 		</div>
 		<a v-if="user.isAdmin" class="w-3/12 font-bold text-right text-red" @click.prevent="deAdminUser(user)">
 			Remove
@@ -19,6 +22,7 @@
 import { defineComponent } from 'vue'
 import { useAdminRoles } from '@app/composable/users/roles/admins'
 import { UserEntity } from '@modules/users'
+import { checkmarkCircle } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'AdminsListCard',
@@ -30,7 +34,7 @@ export default defineComponent({
 	},
 	setup () {
 		const { loading, error, deAdminUser, adminUser } = useAdminRoles()
-		return { loading, error, deAdminUser, adminUser }
+		return { loading, error, deAdminUser, adminUser, checkmarkCircle }
 	}
 })
 </script>

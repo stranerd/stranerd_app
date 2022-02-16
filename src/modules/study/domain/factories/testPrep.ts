@@ -1,5 +1,5 @@
 import { BaseFactory } from '@modules/core'
-import { arrayContainsX, isLongerThanX, isMoreThanX, isNumber, isRequiredIf, isString } from '@stranerd/validate'
+import { arrayContainsX, isLongerThanX, isMoreThanX, isNumber, isString } from '@stranerd/validate'
 import { PrepType, TestPrepEntity } from '../entities/testPrep'
 import { TestPrepToModel } from '../../data/models/testPrep'
 import { PastQuestionType } from '../entities/pastQuestion'
@@ -29,16 +29,16 @@ export class TestPrepFactory extends BaseFactory<TestPrepEntity, TestPrepToModel
 			rules: [arrayContainsX(Object.keys(PastQuestionType), (cur, val) => cur === val)]
 		},
 		courseId: {
-			required: false,
-			rules: [(val: string) => isRequiredIf(val, this.isPastQuestion), isString, isLongerThanX(0)]
+			required: () => this.isPastQuestion,
+			rules: [isString, isLongerThanX(0)]
 		},
 		institutionId: {
-			required: false,
-			rules: [(val: string) => isRequiredIf(val, this.isPastQuestion), isString, isLongerThanX(0)]
+			required: () => this.isPastQuestion,
+			rules: [isString, isLongerThanX(0)]
 		},
 		year: {
-			required: false,
-			rules: [(val: number) => isRequiredIf(val, this.isPastQuestion), isNumber, isMoreThanX(0)]
+			required: () => this.isPastQuestion,
+			rules: [isNumber, isMoreThanX(0)]
 		}
 	}
 
