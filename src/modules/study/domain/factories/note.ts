@@ -5,7 +5,6 @@ import {
 	isFile,
 	isImage,
 	isInvalid,
-	isRequiredIfX,
 	isString,
 	isValid
 } from '@stranerd/validate'
@@ -13,7 +12,6 @@ import { BaseFactory, Media, UploadedFile } from '@modules/core'
 import { NoteEntity } from '@modules/study'
 import { NoteToModel } from '../../data/models/note'
 
-const MAX_DOC_SIZE = 25 * 1024 * 1024
 type Content = UploadedFile | Media
 type Keys = {
 	title: string, description: string, tags: string[], isPublic: boolean,
@@ -30,14 +28,13 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 			required: true,
 			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings')]
 		},
-		isPublic: { required: false, rules: [isBoolean] },
-		isHosted: { required: false, rules: [isBoolean] },
-		link: { required: false, rules: [isRequiredIfX(!this.isHosted), isString] },
+		isPublic: { required: true, rules: [isBoolean] },
+		isHosted: { required: true, rules: [isBoolean] },
+		link: { required: () => !this.isHosted, rules: [isString] },
 		preview: { required: false, rules: [isImage] },
 		media: {
-			required: false, rules: [isRequiredIfX(this.isHosted), isFile,
-				(val: any) => docFormats.includes(val.type) ? isValid() : isInvalid('only pdf files are allowed'),
-				(val: any) => val?.size < MAX_DOC_SIZE ? isValid() : isInvalid('only files less than 25mb are allowed')
+			required: () => this.isHosted, rules: [isFile,
+				(val: any) => docFormats.includes(val?.type) ? isValid() : isInvalid('only pdf files are allowed')
 			]
 		}
 	}

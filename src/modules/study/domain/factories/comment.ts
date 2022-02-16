@@ -1,4 +1,4 @@
-import { arrayContainsX, isLongerThanX, isRequiredIfX, isString } from '@stranerd/validate'
+import { arrayContainsX, isLongerThanX, isString } from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
 import { CommentEntity, CommentType } from '../entities/comment'
 import { CommentToModel } from '../../data/models/comment'
@@ -13,7 +13,10 @@ export class CommentFactory extends BaseFactory<CommentEntity, CommentToModel, K
 	readonly rules = {
 		body: { required: true, rules: [isString, isLongerThanX(2)] },
 		type: { required: true, rules: [arrayContainsX(Object.values(CommentType), (cur, val) => cur === val)] },
-		videoId: { required: false, rules: [isRequiredIfX(this.isVideoType), isString, isLongerThanX(0)] }
+		videoId: {
+			required: () => this.isVideoType,
+			rules: [isString, isLongerThanX(0)]
+		}
 	}
 
 	reserved = ['type']

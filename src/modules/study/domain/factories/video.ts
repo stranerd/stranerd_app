@@ -1,12 +1,4 @@
-import {
-	isArrayOfX,
-	isBoolean,
-	isExtractedHTMLLongerThanX,
-	isImage,
-	isRequiredIfX,
-	isString,
-	isVideo
-} from '@stranerd/validate'
+import { isArrayOfX, isBoolean, isExtractedHTMLLongerThanX, isImage, isString, isVideo } from '@stranerd/validate'
 import { BaseFactory, Media, UploadedFile } from '@modules/core'
 import { VideoEntity } from '../entities/video'
 import { VideoToModel } from '../../data/models/video'
@@ -29,9 +21,9 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		},
 		isPublic: { required: false, rules: [isBoolean] },
 		isHosted: { required: false, rules: [isBoolean] },
-		link: { required: false, rules: [isRequiredIfX(!this.isHosted), isString] },
+		link: { required: () => !this.isHosted, rules: [isString] },
 		preview: { required: false, rules: [isImage] },
-		media: { required: false, rules: [isRequiredIfX(this.isHosted), isVideo] }
+		media: { required: () => this.isHosted, rules: [isVideo] }
 	}
 
 	reserved = []

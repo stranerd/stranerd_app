@@ -1516,10 +1516,10 @@
   resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.13.0.tgz#993fd74a5c7c8fe8af75848ca9df2211cd05b818"
   integrity sha512-EEKHOHgYpg3/iFUKMXTZJjUayRul7sXDwNw0OGgkEOe4t7JWiibDkzUHuruvpbqEydX+z1+ez5K2bMMY76c2wA==
 
-"@stranerd/validate@^1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@stranerd/validate/-/validate-1.7.0.tgz#7dbb944295413e447208196731832c4ba8acc0dc"
-  integrity sha512-InXWl7OioSQ1YOSdMrckoBHcJZtSO6pyKkd1LLB/DsabXZryRzWhTlkyPMgZ8RxtvcJAyZGJ7BOdkVaUHTuY8A==
+"@stranerd/validate@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@stranerd/validate/-/validate-2.0.0.tgz#7318d6356234f248085e997b5fc483f4d6014021"
+  integrity sha512-EfmJTKZxhaz6HNXFWOV94Fd/AtV/A1mAvq5WBTTh5/pJg2OauF4RzMRDs3uwR7t+IGtpO1JFHifU6qfZgGmXvg==
 
 "@tootallnate/once@1":
   version "1.1.2"

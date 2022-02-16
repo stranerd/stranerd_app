@@ -9,7 +9,6 @@ import {
 	isLongerThanX,
 	isMoreThanX,
 	isNumber,
-	isRequiredIf,
 	isString
 } from '@stranerd/validate'
 import { PastQuestionEntity, PastQuestionType } from '../entities/pastQuestion'
@@ -44,37 +43,34 @@ export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQue
 		question: { required: true, rules: [isString, isExtractedHTMLLongerThanX(0)] },
 		questionMedia: { required: true, rules: [isArrayOfX((com) => isImage(com).valid, 'images')] },
 		answer: {
-			required: false,
-			rules: [(val: string) => isRequiredIf(val, !this.isObjective), isString]
+			required: () => !this.isObjective,
+			rules: [isString]
 		},
 		answerMedia: {
-			required: false,
-			rules: [(val: string) => isRequiredIf(val, !this.isObjective), isArrayOfX((com) => isImage(com).valid, 'images')]
+			required: () => !this.isObjective,
+			rules: [isArrayOfX((com) => isImage(com).valid, 'images')]
 		},
 		options: {
-			required: true,
-			rules: [
-				(val: string) => isRequiredIf(val, this.isObjective), isArrayOfX((cur: any) => isString(cur).valid, 'questions'), hasMoreThanX(0)
-			]
+			required: () => this.isObjective,
+			rules: [isArrayOfX((cur: any) => isString(cur).valid, 'questions'), hasMoreThanX(0)]
 		},
 		optionsMedia: {
-			required: false,
+			required: () => this.isObjective,
 			rules: [
-				(val: string) => isRequiredIf(val, this.isObjective),
 				isArrayOfX((cur: any) => isArrayOf(cur, (com) => isImage(com).valid, 'images').valid, 'images')
 			]
 		},
 		correctIndex: {
-			required: false,
-			rules: [(val: string) => isRequiredIf(val, this.isObjective), isNumber]
+			required: () => this.isObjective,
+			rules: [isNumber]
 		},
 		explanation: {
-			required: false,
-			rules: [(val: string) => isRequiredIf(val, this.isObjective), isString]
+			required: () => this.isObjective,
+			rules: [isString]
 		},
 		explanationMedia: {
-			required: false,
-			rules: [(val: string) => isRequiredIf(val, this.isObjective), isArrayOfX((com) => isImage(com).valid, 'images')]
+			required: () => this.isObjective,
+			rules: [isArrayOfX((com) => isImage(com).valid, 'images')]
 		}
 	}
 
