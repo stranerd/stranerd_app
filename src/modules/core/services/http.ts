@@ -50,6 +50,16 @@ export class HttpClient {
 		return this.makeRequest<Body, ReturnValue>(url, 'delete', body)
 	}
 
+	async download (url: string): Promise<string> {
+		try {
+			const response = await this.client.get(url, { responseType: 'arraybuffer' })
+			return 'data:*;base64,' + btoa(String.fromCharCode(...new Uint8Array(response.data)))
+		} catch (e: any) {
+			alert(e.message)
+			throw new Error('Error downloading file')
+		}
+	}
+
 	private async makeRequest<Body, ReturnValue> (url: string, method: Method, data: Body): Promise<ReturnValue> {
 		try {
 			const res = await this.client.request<Body, AxiosResponse<ReturnValue>>({

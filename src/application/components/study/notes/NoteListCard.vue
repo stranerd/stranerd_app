@@ -20,7 +20,7 @@
 				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
 				<ion-text class="text-xs">{{ note.userBio.firstName }}</ion-text>
 			</div>
-			<router-link v-if="downloaded" :to="`/study/notes/${note.id}`">
+			<router-link v-if="content" :to="`/study/notes/${note.id}`">
 				<ion-button class="btn-outline text-primary w-full lg:min-w-[7.5rem]" size="small">
 					Read
 				</ion-button>
@@ -33,11 +33,10 @@
 
 <script lang="ts">
 import { document, download as downloadIcon, ellipsisVertical } from 'ionicons/icons'
-import { defineComponent, onMounted, ref } from 'vue'
-import { blobToBase64 } from '@utils/commons'
+import { defineComponent } from 'vue'
 import { NoteEntity } from '@modules/study'
-import { Directory, Encoding, Filesystem } from '@capacitor/filesystem'
 import { IonSpinner } from '@ionic/vue'
+import { useDownload } from '@app/composable/meta/media'
 
 export default defineComponent({
 	name: 'NoteListCard',
@@ -53,34 +52,17 @@ export default defineComponent({
 	},
 	components: { IonSpinner },
 	setup (props) {
-		const loading = ref(false)
-		const downloaded = ref(false)
-		const options = {
-			path: `notes/${props.note.fileName}`,
-			directory: Directory.Library
-		}
-
-		const download = async () => {
-			if (downloaded.value || loading.value) return
-			loading.value = true
-			const data = await fetch(props.note.fileLink).then(async (r) => blobToBase64(await r.blob()))
-			await Filesystem.writeFile({
-				...options, recursive: true, data, encoding: Encoding.UTF8
-			}).catch(() => null)
-			downloaded.value = true
-			loading.value = false
-		}
-
-		onMounted(async () => {
-			loading.value = true
-			const contents = await Filesystem.readFile({ ...options, encoding: Encoding.UTF8 }).catch(() => null)
-			if (contents?.data) downloaded.value = true
-			loading.value = false
-		})
+		const {
+			loading,
+			content,
+			error,
+			download,
+			deleteFromDownloads
+		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
 
 		return {
 			ellipsisVertical, document, downloadIcon,
-			download, loading, downloaded
+			download, loading, content, error, deleteFromDownloads
 		}
 	}
 })
