@@ -103,6 +103,14 @@ export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
 	return { firstName, lastName, fullName, email, description, photo }
 }
 
+export const generateDefaultRoles = (roles: Partial<UserRoles>): UserRoles => ({
+	[appName]: {
+		isAdmin: roles?.[appName]?.isAdmin ?? false,
+		isTutor: roles?.[appName]?.isTutor ?? false,
+		isVerified: roles?.[appName]?.isVerified ?? false
+	}
+})
+
 export class UserEntity extends BaseEntity {
 	public readonly id: string
 	public readonly bio: UserBio
@@ -130,13 +138,7 @@ export class UserEntity extends BaseEntity {
 		super()
 		this.id = id
 		this.bio = generateDefaultBio(bio)
-		this.roles = {
-			[appName]: {
-				isAdmin: roles[appName]?.isAdmin ?? false,
-				isTutor: roles[appName]?.isTutor ?? false,
-				isVerified: roles[appName]?.isVerified ?? false
-			}
-		}
+		this.roles = generateDefaultRoles(roles)
 		this.account = account
 		this.status = status
 		this.tutor = tutor

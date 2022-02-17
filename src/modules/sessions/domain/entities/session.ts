@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
+import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
 import { appName } from '@utils/environment'
 
 export class SessionEntity extends BaseEntity {
@@ -32,10 +32,10 @@ export class SessionEntity extends BaseEntity {
 		this.message = message
 		this.studentId = studentId
 		this.studentBio = generateDefaultBio(studentBio)
-		this.studentRoles = studentRoles
+		this.studentRoles = generateDefaultRoles(studentRoles)
 		this.tutorId = tutorId
 		this.tutorBio = generateDefaultBio(tutorBio)
-		this.tutorRoles = tutorRoles
+		this.tutorRoles = generateDefaultRoles(tutorRoles)
 		this.duration = duration
 		this.price = price
 		this.accepted = accepted ?? false

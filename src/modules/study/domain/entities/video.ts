@@ -1,5 +1,5 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
-import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
+import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
 import { appName } from '@utils/environment'
 
 export class VideoEntity extends BaseEntity {
@@ -41,7 +41,7 @@ export class VideoEntity extends BaseEntity {
 		this.tags = tags
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = userRoles
+		this.userRoles = generateDefaultRoles(userRoles)
 		this.isPublic = isPublic
 		this.isHosted = isHosted
 		this.link = link

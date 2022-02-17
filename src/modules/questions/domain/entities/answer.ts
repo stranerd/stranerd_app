@@ -1,4 +1,4 @@
-import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
+import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractTextFromHTML, trimToLength } from '@utils/commons'
 import { appName } from '@utils/environment'
@@ -31,7 +31,7 @@ export class AnswerEntity extends BaseEntity {
 		this.userId = userId
 		this.attachments = attachments.map(parseMedia) ?? []
 		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = userRoles
+		this.userRoles = generateDefaultRoles(userRoles)
 		this.best = best ?? false
 		this.votes = votes
 		this.commentsCount = commentsCount ?? 0
