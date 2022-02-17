@@ -25,6 +25,7 @@ export default {
 		GoogleAuth: {
 			scopes: ['profile', 'email'],
 			serverClientId: google_client_id,
+			clientId: google_client_id,
 			forceCodeForRefreshToken: true
 		},
 		PushNotifications: {
