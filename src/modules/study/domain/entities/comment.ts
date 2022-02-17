@@ -1,5 +1,6 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, UserBio } from '@modules/users'
+import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
+import { appName } from '@utils/environment'
 
 export class CommentEntity extends BaseEntity {
 	public readonly id: string
@@ -7,6 +8,7 @@ export class CommentEntity extends BaseEntity {
 	public readonly data: CommentData
 	public readonly userId: string
 	public readonly userBio: UserBio
+	public readonly userRoles: UserRoles
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -16,6 +18,7 @@ export class CommentEntity extends BaseEntity {
 		             data,
 		             userId,
 		             userBio,
+		             userRoles,
 		             createdAt,
 		             updatedAt
 	             }: CommentConstructorArgs) {
@@ -25,8 +28,13 @@ export class CommentEntity extends BaseEntity {
 		this.data = data
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
+		this.userRoles = userRoles
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
+	}
+
+	get isUserVerified () {
+		return this.userRoles[appName].isVerified
 	}
 }
 
@@ -36,6 +44,7 @@ type CommentConstructorArgs = {
 	data: CommentData
 	userId: string
 	userBio: UserBio
+	userRoles: UserRoles
 	createdAt: number
 	updatedAt: number
 }

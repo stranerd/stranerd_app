@@ -5,7 +5,7 @@ import { VideoToModel } from '../../data/models/video'
 import { getVideoInfo } from 'youtube-video-exists'
 import getVideoId from 'get-video-id'
 
-type Content = UploadedFile | Media
+type Content = UploadedFile | Media | null
 type Keys = {
 	title: string, description: string, tags: string[], isPublic: boolean,
 	isHosted: boolean, media: Content | null, link: string | null, preview: Content | null

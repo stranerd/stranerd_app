@@ -1,4 +1,4 @@
-import { BaseEntity, Media } from '@modules/core'
+import { BaseEntity, Media, parseMedia } from '@modules/core'
 
 export class PastQuestionEntity extends BaseEntity {
 	public readonly id: string
@@ -19,6 +19,10 @@ export class PastQuestionEntity extends BaseEntity {
 		this.courseId = data.courseId
 		this.question = data.question
 		this.questionMedia = data.questionMedia
+		if (data.data.type === PastQuestionType.objective) {
+			data.data.optionsMedia = data.data.optionsMedia.map((medias) => medias.map(parseMedia))
+			data.data.explanationMedia = data.data.explanationMedia.map(parseMedia)
+		} else data.data.answerMedia = data.data.answerMedia.map(parseMedia)
 		this.data = data.data
 		this.createdAt = data.createdAt
 		this.updatedAt = data.updatedAt
@@ -44,7 +48,8 @@ type PastQuestionConstructorArgs = {
 export enum PastQuestionType {
 	objective = 'objective',
 	theory = 'theory',
-	practical = 'practical'
+	practical = 'practical',
+	german = 'german',
 }
 
 export type PastQuestionData = {
@@ -60,6 +65,10 @@ export type PastQuestionData = {
 	answerMedia: Media[]
 } | {
 	type: PastQuestionType.practical
+	answer: string
+	answerMedia: Media[]
+} | {
+	type: PastQuestionType.german
 	answer: string
 	answerMedia: Media[]
 }

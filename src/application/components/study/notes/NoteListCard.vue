@@ -18,7 +18,10 @@
 		<div class="w-full flex items-center justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
-				<ion-text class="text-xs">{{ note.userBio.firstName }}</ion-text>
+				<ion-text class="text-xs flex items-center gap-1">
+					<span>{{ note.userBio.firstName }}</span>
+					<IonIcon v-if="note.isUserVerified" :icon="checkmarkCircle" color="primary" />
+				</ion-text>
 			</div>
 			<router-link v-if="content" :to="`/study/notes/${note.id}`">
 				<ion-button class="btn-outline text-primary w-full lg:min-w-[7.5rem]" size="small">
@@ -32,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { document, download as downloadIcon, ellipsisVertical } from 'ionicons/icons'
+import { checkmarkCircle, document, download as downloadIcon, ellipsisVertical } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { NoteEntity } from '@modules/study'
 import { IonSpinner } from '@ionic/vue'
@@ -61,7 +64,7 @@ export default defineComponent({
 		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
 
 		return {
-			ellipsisVertical, document, downloadIcon,
+			ellipsisVertical, document, downloadIcon, checkmarkCircle,
 			download, loading, content, error, deleteFromDownloads
 		}
 	}

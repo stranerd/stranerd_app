@@ -1,6 +1,7 @@
-import { generateDefaultBio, UserBio } from '@modules/users'
-import { BaseEntity, Media } from '@modules/core'
+import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
+import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractTextFromHTML, trimToLength } from '@utils/commons'
+import { appName } from '@utils/environment'
 
 export class AnswerEntity extends BaseEntity {
 	public readonly id: string
@@ -11,6 +12,7 @@ export class AnswerEntity extends BaseEntity {
 	public readonly attachments: Media[]
 	public readonly userId: string
 	public readonly userBio: UserBio
+	public readonly userRoles: UserRoles
 	public readonly votes: { userId: string, vote: 1 | -1 }[]
 	public readonly commentsCount: number
 	public readonly createdAt: number
@@ -18,7 +20,7 @@ export class AnswerEntity extends BaseEntity {
 
 	constructor ({
 		             id, title, body, questionId,
-		             createdAt, userId, userBio, attachments,
+		             createdAt, userId, userBio, userRoles, attachments,
 		             best, votes, commentsCount, updatedAt
 	             }: AnswerConstructorArgs) {
 		super()
@@ -27,8 +29,9 @@ export class AnswerEntity extends BaseEntity {
 		this.body = body
 		this.questionId = questionId
 		this.userId = userId
-		this.attachments = attachments ?? []
+		this.attachments = attachments.map(parseMedia) ?? []
 		this.userBio = generateDefaultBio(userBio)
+		this.userRoles = userRoles
 		this.best = best ?? false
 		this.votes = votes
 		this.commentsCount = commentsCount ?? 0
@@ -79,6 +82,10 @@ export class AnswerEntity extends BaseEntity {
 	get downVotes () {
 		return this.votes.filter((v) => v.vote === -1).length
 	}
+
+	get isUserVerified () {
+		return this.userRoles[appName].isVerified
+	}
 }
 
 type AnswerConstructorArgs = {
@@ -91,6 +98,7 @@ type AnswerConstructorArgs = {
 	updatedAt: number
 	userId: string
 	userBio: UserBio
+	userRoles: UserRoles
 	best: boolean
 	votes: { userId: string, vote: 1 | -1 }[]
 	commentsCount: number

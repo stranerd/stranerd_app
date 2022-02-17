@@ -23,8 +23,9 @@
 							@click="openUserDashboardMenu"
 						>
 							<avatar :size="24" :src="user.avatar" />
-							<span class="text-base text-main_dark truncate max-w-[150px]">
-								{{ user.fullName }}
+							<span class="text-base text-main_dark truncate max-w-[150px] flex items-center gap-1">
+								<span>{{ user.fullName }}</span>
+								<IonIcon v-if="user.isVerified" :icon="checkmarkCircle" color="primary" />
 							</span>
 							<ion-icon :icon="chevronDown" class="text-xl text-main_dark"></ion-icon>
 						</div>
@@ -41,7 +42,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonToolbar } from '@ionic/vue'
-import { addCircle, chevronDown } from 'ionicons/icons'
+import { addCircle, checkmarkCircle, chevronDown } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useMenuPopover } from '@app/composable/core/modals'
 import Search from '@app/components/search/Search.vue'
@@ -57,7 +58,7 @@ export default defineComponent({
 
 		return {
 			openCreateDashboardMenu, openUserDashboardMenu,
-			addCircle, chevronDown,
+			addCircle, chevronDown, checkmarkCircle,
 			isLoggedIn, user, signout
 		}
 	}

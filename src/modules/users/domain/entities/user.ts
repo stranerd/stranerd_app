@@ -1,4 +1,4 @@
-import { BaseEntity, Media } from '@modules/core'
+import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { appName } from '@utils/environment'
 import { capitalize, catchDivideByZero, formatNumber, getPercentage } from '@utils/commons'
 import { getRankImage, RankTypes } from './rank'
@@ -99,7 +99,7 @@ export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
 	const fullName = firstName + ' ' + lastName
 	const email = bio?.email ?? 'anon@ymous.com'
 	const description = bio?.description ?? ''
-	const photo = bio?.photo ?? null
+	const photo = bio?.photo ? parseMedia(bio.photo) : null
 	return { firstName, lastName, fullName, email, description, photo }
 }
 

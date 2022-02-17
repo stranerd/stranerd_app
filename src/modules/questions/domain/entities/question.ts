@@ -1,6 +1,7 @@
-import { generateDefaultBio, UserBio } from '@modules/users'
-import { BaseEntity, Media } from '@modules/core'
+import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
+import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractTextFromHTML, trimToLength } from '@utils/commons'
+import { appName } from '@utils/environment'
 
 type QuestionConstructorArgs = {
 	id: string
@@ -11,6 +12,7 @@ type QuestionConstructorArgs = {
 	subjectId: string
 	userId: string
 	userBio: UserBio
+	userRoles: UserRoles
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
 	commentsCount: number
@@ -26,6 +28,7 @@ export class QuestionEntity extends BaseEntity {
 	public readonly subjectId: string
 	public readonly userId: string
 	public readonly userBio: UserBio
+	public readonly userRoles: UserRoles
 	public readonly bestAnswers: string[]
 	public readonly answers: { id: string, userId: string }[]
 	public readonly commentsCount: number
@@ -35,7 +38,7 @@ export class QuestionEntity extends BaseEntity {
 
 	constructor ({
 		             id, body, subjectId, isAnswered,
-		             bestAnswers, createdAt, userId, userBio, attachments,
+		             bestAnswers, createdAt, userId, userBio, userRoles, attachments,
 		             answers, commentsCount, tags, updatedAt
 	             }: QuestionConstructorArgs) {
 		super()
@@ -43,10 +46,11 @@ export class QuestionEntity extends BaseEntity {
 		this.body = body
 		this.isAnswered = isAnswered
 		this.tags = tags
-		this.attachments = attachments ?? []
+		this.attachments = attachments.map(parseMedia) ?? []
 		this.subjectId = subjectId
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
+		this.userRoles = userRoles
 		this.bestAnswers = bestAnswers
 		this.answers = answers
 		this.commentsCount = commentsCount ?? 0
@@ -80,6 +84,10 @@ export class QuestionEntity extends BaseEntity {
 
 	get canBeDeleted () {
 		return !this.isModified
+	}
+
+	get isUserVerified () {
+		return this.userRoles[appName].isVerified
 	}
 }
 

@@ -1,10 +1,11 @@
 import { Media } from '@modules/core'
-import { UserBio } from '@modules/users'
+import { UserBio, UserRoles } from '@modules/users'
 
 export interface VideoFromModel extends VideoToModel {
 	id: string,
 	userId: string
 	userBio: UserBio
+	userRoles: UserRoles
 	createdAt: number
 	updatedAt: number
 }
@@ -17,5 +18,5 @@ export interface VideoToModel {
 	isHosted: boolean
 	link: string | null
 	media: Media | null
-	preview: Media
+	preview: Media | null
 }

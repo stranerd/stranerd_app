@@ -5,7 +5,10 @@
 			<IonRippleEffect class="rounded-lg" />
 			<div class="flex flex-row items-center gap-4">
 				<avatar :id="question.userId" :size="28" :src="question.avatar" class="hidden lg:block" />
-				<span class="font-bold text-main_dark hidden lg:block">{{ question.userBio.fullName }}</span>
+				<span class="font-bold text-main_dark hidden lg:flex gap-1 items-center">
+					<span>{{ question.userBio.fullName }}</span>
+					<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircle" color="primary" />
+				</span>
 				<div class="h-1 w-1 bg-icon_inactive rounded-full hidden lg:block" />
 				<Subject :subjectId="question.subjectId" class="font-semibold text-main_dark" />
 				<div class="flex flex-row-reverse flex-grow">
@@ -24,7 +27,10 @@
 			<div class="w-full flex flex-wrap items-center lg:justify-between">
 				<div class="lg:hidden flex items-center">
 					<avatar :id="question.userId" :size="20" :src="question.avatar" />
-					<span class="font-bold text-main_dark text-xs ml-2">{{ question.userBio.fullName }}</span>
+					<span class="font-bold text-main_dark text-xs ml-2 flex gap-1 items-center">
+						<span>{{ question.userBio.fullName }}</span>
+						<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircle" color="primary" />
+					</span>
 				</div>
 				<div class=" flex flex-row items-center ml-auto">
 					<span class="font-bold text-gray lg:mr-2">{{ formatTime(question.createdAt) }}</span>
@@ -62,7 +68,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { IonIcon, IonRippleEffect } from '@ionic/vue'
-import { flag, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
+import { checkmarkCircle, flag, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/Avatar.vue'
@@ -110,7 +116,7 @@ export default defineComponent({
 		const { loading, error, deleteQuestion } = useDeleteQuestion(props.question.id)
 
 		return {
-			shareSocial, flag, pencil, trashBinOutline,
+			shareSocial, flag, pencil, trashBinOutline, checkmarkCircle,
 			formatTime, pluralize,
 			showAnswerButton, showAddAnswer,
 			showEditButton, showDeleteButton,

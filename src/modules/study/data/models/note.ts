@@ -1,10 +1,11 @@
 import { Media } from '@modules/core'
-import { UserBio } from '@modules/users'
+import { UserBio, UserRoles } from '@modules/users'
 
 export interface NoteFromModel extends NoteToModel {
 	id: string
 	userId: string
 	userBio: UserBio
+	userRoles: UserRoles
 	createdAt: number
 	updatedAt: number
 }
@@ -17,5 +18,5 @@ export interface NoteToModel {
 	isHosted: boolean
 	link: string | null
 	media: Media | null
-	preview: Media
+	preview: Media | null
 }
