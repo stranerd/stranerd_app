@@ -1,18 +1,11 @@
-import {
-	isArrayOfX,
-	isBoolean,
-	isExtractedHTMLLongerThanX,
-	isImage,
-	isRequiredIfX,
-	isString,
-	isVideo
-} from '@stranerd/validate'
-import { BaseFactory, Media } from '@modules/core'
+import { isArrayOfX, isBoolean, isExtractedHTMLLongerThanX, isImage, isString, isVideo } from '@stranerd/validate'
+import { BaseFactory, Media, UploadedFile } from '@modules/core'
 import { VideoEntity } from '../entities/video'
 import { VideoToModel } from '../../data/models/video'
 import { getVideoInfo } from 'youtube-video-exists'
+import getVideoId from 'get-video-id'
 
-type Content = File | Media
+type Content = UploadedFile | Media | null
 type Keys = {
 	title: string, description: string, tags: string[], isPublic: boolean,
 	isHosted: boolean, media: Content | null, link: string | null, preview: Content | null
@@ -28,13 +21,10 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		},
 		isPublic: { required: false, rules: [isBoolean] },
 		isHosted: { required: false, rules: [isBoolean] },
-		link: { required: false, rules: [isRequiredIfX(!this.isHosted), isString] },
+		link: { required: () => !this.isHosted, rules: [isString] },
 		preview: { required: false, rules: [isImage] },
-		media: { required: false, rules: [isRequiredIfX(this.isHosted), isVideo] }
+		media: { required: () => this.isHosted, rules: [isVideo] }
 	}
-
-	service = this.services[0]
-	id = ''
 
 	reserved = []
 
@@ -98,21 +88,6 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		if (value) this.isHosted = false
 	}
 
-	get services () {
-		return [
-			{ name: 'Youtube', key: 'youtube', url: 'https://youtube.com/watch?v=' }
-		]
-	}
-
-	get videoId () {
-		return this.id
-	}
-
-	set videoId (value: string) {
-		this.id = value
-		this.set('link', `${this.service.key}:${value}`)
-	}
-
 	get media () {
 		return this.values.media
 	}
@@ -143,13 +118,6 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		this.isPublic = entity.isPublic
 		this.isHosted = entity.isHosted
 		this.link = entity.link
-		if (entity.link) {
-			const service = this.services.find((s) => entity.link?.startsWith(`${s.key}:`))
-			if (service) {
-				this.service = service
-				this.videoId = entity.link.split(':')[1]
-			}
-		}
 		this.media = entity.media
 		this.preview = entity.preview
 		this.set('tags', entity.tags)
@@ -157,15 +125,18 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 
 	toModel = async () => {
 		if (this.valid) {
-			if (!this.isHosted && this.link && this.service.name === this.services[0].name) {
-				const info = await getVideoInfo(this.link.split(':')[1]).catch(() => {
-					throw new Error('network error')
-				})
-				if (!info.existing) throw new Error('no video with the provided id was found')
-				if (info.private) throw new Error('the provided video is private')
+			if (!this.isHosted && this.link) {
+				const { service, id } = getVideoId(this.link)
+				if (service === 'youtube') {
+					const info = await getVideoInfo(id!).catch(() => {
+						throw new Error('unable to fetch video details')
+					})
+					if (!info.existing) throw new Error('no video with the provided id was found')
+					if (info.private) throw new Error('the provided video is private')
+				}
 			}
-			if (this.media instanceof File) this.media = await this.uploadFile('videos', this.media)
-			if (this.preview instanceof File) this.preview = await this.uploadFile('video-previews', this.preview)
+			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('videos', this.media)
+			if (this.preview instanceof UploadedFile) this.preview = await this.uploadFile('video-previews', this.preview)
 			if (this.isHosted) this.link = null
 			else this.media = null
 			const { title, description, isHosted, link, media, tags, preview, isPublic } = this.validValues

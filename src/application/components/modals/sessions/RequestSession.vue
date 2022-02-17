@@ -14,19 +14,6 @@
 				rows="5"></ion-textarea>
 		</div>
 
-		<div
-			class="mt-3 rounded-lg py-5 px-3 text-icon_inactive relative bg-light_gray flex flex-col justify-center items-center">
-			<ion-icon :icon="document" class="text-[22px]"></ion-icon>
-			<input
-				id="documents" class="cursor-pointer w-full h-full absolute"
-				name="documents"
-				style="opacity:0; overflow:hidden; position:absolute;"
-				type="file" />
-			<p class="mt-3">
-				Add images or documents <b>(Optional)</b>
-			</p>
-		</div>
-
 		<div class="mt-3 py-1 px-2 bg-light_gray rounded-lg flex flex-row">
 			<IonSelect class="w-full font-medium" interface="action-sheet" placeholder="Select the subject">
 				<IonSelectOption value="maths">Mathematics</IonSelectOption>

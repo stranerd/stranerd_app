@@ -6,7 +6,10 @@
 		<div class="flex flex-row items-center">
 			<div class="flex items-center">
 				<avatar :id="question.userId" :size="28" :src="question.avatar" class="mr-2 " />
-				<span class="font-bold text-main_dark hidden lg:block">{{ question.userBio.fullName }}</span>
+				<span class="font-bold text-main_dark hidden lg:flex items-center gap-1">
+					<span>{{ question.userBio.fullName }}</span>
+					<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircle" color="primary" />
+				</span>
 				<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 ml-2 hidden lg:block"></span>
 				<Subject :key="question.subjectId" :subjectId="question.subjectId" class="font-bold text-main_dark" />
 			</div>
@@ -43,7 +46,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { IonRippleEffect } from '@ionic/vue'
-import { arrowRedo, flag, image } from 'ionicons/icons'
+import { arrowRedo, checkmarkCircle, flag, image } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
@@ -78,7 +81,7 @@ export default defineComponent({
 			showAnswerButton,
 			openAnswerModal: () => openAnswerModal(props.question),
 			openReportQuestionModal: () => useReportModal().openReportQuestion(),
-			arrowRedo, flag, image,
+			arrowRedo, flag, image, checkmarkCircle,
 			formatTime, pluralize
 		}
 	}

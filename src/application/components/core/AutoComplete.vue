@@ -109,8 +109,8 @@ export default defineComponent({
 		--padding-end: 1.5rem !important;
 		--padding-top: .69rem !important;
 		--padding-bottom: .69rem !important;
-		--color: $color-dark !important;
-		--placeholder-color: $color-dark !important;
+		--color: $color-mainDark !important;
+		--placeholder-color: $color-mainDark !important;
 		border-radius: 10px;
 	}
 
@@ -130,12 +130,12 @@ export default defineComponent({
 		width: 100%;
 		top: 100%;
 		background: $color-white;
-		border: 1px solid $color-line;
+		border: 1px solid $color-lightGray;
 		border-radius: 0.25rem;
 
 		& > * {
 			padding: 0.5rem 1rem;
-			border-bottom: 1px solid $color-line;
+			border-bottom: 1px solid $color-lightGray;
 			text-transform: capitalize;
 		}
 

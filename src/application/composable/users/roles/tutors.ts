@@ -1,5 +1,5 @@
-import { computed, onUnmounted, onMounted, reactive, ref, toRefs } from 'vue'
-import { GetAllTutors, GetUsersByEmail, ListenToAllTutors, MakeTutor, RemoveTutor, UserEntity } from '@modules/users'
+import { computed, onMounted, onUnmounted, reactive, ref, toRefs } from 'vue'
+import { GetAllTutors, GetUsersByEmail, ListenToAllTutors, ToggleTutor, UserEntity } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
@@ -118,13 +118,13 @@ export const useTutorRoles = () => {
 	const tutorUser = async (user: UserEntity) => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to make this user a tutor?',
+			title: 'Are you sure you want to toggle this user a tutor?',
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await MakeTutor.call(user.id)
+				await ToggleTutor.call(user.id, true)
 				user.isTutor = true
 				pushToTutorsList(user)
 				reset()
@@ -145,7 +145,7 @@ export const useTutorRoles = () => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await RemoveTutor.call(user.id)
+				await ToggleTutor.call(user.id, false)
 				global.tutors.value = global.tutors.value
 					.filter((u) => u.id !== user.id)
 				await setMessage('Successfully downgraded from tutor')

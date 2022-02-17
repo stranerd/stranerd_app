@@ -1,11 +1,15 @@
 <template>
 	<IonPage>
 		<HomeTopNavigation />
-		<IonContent class="auth">
-			<div class="!w-full h-full layout-body">
-				<slot />
-			</div>
-		</IonContent>
+		<div class="layout">
+			<IonContent class="auth">
+				<div class="layout-page" style="padding: 0 !important;">
+					<div class="!w-full layout-body">
+						<slot />
+					</div>
+				</div>
+			</IonContent>
+		</div>
 	</IonPage>
 </template>
 
@@ -23,10 +27,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 	.auth {
 		:deep(ion-input) {
-			--background-color: #F2F3F5 !important;
-			--padding-top: 1.2rem !important;
-			--padding-bottom: 1.2rem !important;
-			margin-bottom: 1.25rem;
+			--background: $color-newGray !important;
+			background: $color-newGray !important;
+			margin-bottom: 0;
 			width: 420px;
 			max-width: 90vw !important;
 		}

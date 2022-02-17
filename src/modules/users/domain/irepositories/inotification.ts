@@ -6,5 +6,5 @@ export interface INotificationRepository {
 	get: (userId: string, query: QueryParams) => Promise<QueryResults<NotificationEntity>>
 	listenToOne: (userId: string, id: string, listener: Listeners<NotificationEntity>) => Promise<() => void>
 	listenToMany: (userId: string, query: QueryParams, listener: Listeners<NotificationEntity>, matches: (entity: NotificationEntity) => boolean) => Promise<() => void>
-	markSeen: (userId: string, id: string, seen: boolean) => Promise<boolean>,
+	markSeen: (id: string, seen: boolean) => Promise<boolean>,
 }

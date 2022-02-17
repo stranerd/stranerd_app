@@ -53,8 +53,10 @@ import { ListenToUserRootSetUseCase } from './domain/usecases/sets/listenToUserR
 import { GetSetChildrenUseCase } from './domain/usecases/sets/getSetChildren'
 import { ListenToSetChildrenUseCase } from './domain/usecases/sets/listenToSetChildren'
 import { GetUserSetsUseCase } from './domain/usecases/sets/getUserSets'
+import { GetSetsInSetUseCase } from './domain/usecases/sets/getSetsInSet'
 import { ListenToSetsUseCase } from './domain/usecases/sets/listenToSets'
 import { ListenToUserSetsUseCase } from './domain/usecases/sets/listenToUserSets'
+import { ListenToSetsInSetUseCase } from './domain/usecases/sets/listenToSetsInSet'
 import { FindSetUseCase } from './domain/usecases/sets/findSet'
 import { AddSetUseCase } from './domain/usecases/sets/addSet'
 import { EditSetUseCase } from './domain/usecases/sets/editSet'
@@ -172,9 +174,11 @@ const testRepository = new TestRepository(testDataSource, testTransformer)
 export const FindSet = new FindSetUseCase(setRepository)
 export const GetSets = new GetSetsUseCase(setRepository)
 export const GetUserRootSet = new GetUserRootSetUseCase(setRepository)
+export const GetSetsInSet = new GetSetsInSetUseCase(setRepository)
 export const ListenToUserRootSet = new ListenToUserRootSetUseCase(setRepository)
 export const GetSetChildren = new GetSetChildrenUseCase(setRepository)
 export const ListenToSetChildren = new ListenToSetChildrenUseCase(setRepository)
+export const ListenToSetsInSet = new ListenToSetsInSetUseCase(setRepository)
 export const GetUserSets = new GetUserSetsUseCase(setRepository)
 export const ListenToSets = new ListenToSetsUseCase(setRepository)
 export const ListenToUserSets = new ListenToUserSetsUseCase(setRepository)

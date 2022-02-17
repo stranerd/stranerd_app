@@ -8,7 +8,9 @@
 					</ion-text>
 					<div class="flex items-center md:justify-start justify-center  mt-2">
 						<Avatar :id="flashCard.userId" :size="28" :src="flashCard.userBio.photo" color="#C7D6E3" />
-						<ion-text class="text-white ml-2 text-base"> by <b>{{ flashCard.userBio.fullName }}</b>
+						<ion-text class="text-white ml-2 text-base flex gap-1 items-center">
+							<span>by <b>{{ flashCard.userBio.fullName }}</b></span>
+							<IonIcon v-if="flashCard.isUserVerified" :icon="checkmarkCircle" color="white" />
 						</ion-text>
 					</div>
 				</div>
@@ -29,10 +31,8 @@
 						@click="openMenu"
 					/>
 				</div>
-			
-			</div>
 
-		
+			</div>
 		</div>
 
 		<div class="w-full bg-white flex md:hidden items-center justify-between text-gray p-4 -mt-8 rounded-b-xl">
@@ -54,11 +54,8 @@
 					class="text-gray text-xl cursor-pointer ml-3"
 					@click="openMenu"
 				/>
-			
 			</div>
-	
 		</div>
-
 
 		<template v-if="flashCard">
 			<FlashCardScreen v-if="cardMode" :flashCard="flashCard" />
@@ -72,7 +69,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
-import { copy, ellipsisVertical, list } from 'ionicons/icons'
+import { checkmarkCircle, copy, ellipsisVertical, list } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { useFlashCard } from '@app/composable/study/flashCards'
 import { useRoute } from 'vue-router'
@@ -96,7 +93,7 @@ export default defineComponent({
 		const openMenu = (event: Event) => openStudyEntityMenu(flashCard.value, {}, event)
 		return {
 			openMenu, copy, list, cardMode,
-			flashCard, loading, ellipsisVertical
+			flashCard, loading, ellipsisVertical, checkmarkCircle
 		}
 	}
 })

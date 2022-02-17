@@ -3,9 +3,22 @@ import { SetEntity } from '../../domain/entities/set'
 
 export class SetTransformer {
 	fromJSON (model: SetFromModel) {
-		const { id, name, saved, children, userId, userBio, parent, isPublic, createdAt, updatedAt, tags } = model
+		const {
+			id,
+			name,
+			saved,
+			children,
+			userId,
+			userBio,
+			userRoles,
+			parent,
+			isPublic,
+			createdAt,
+			updatedAt,
+			tags
+		} = model
 		return new SetEntity({
-			id, name, saved, children, userId, userBio, parent, isPublic, createdAt, updatedAt, tags
+			id, name, saved, children, userId, userBio, userRoles, parent, isPublic, createdAt, updatedAt, tags
 		})
 	}
 

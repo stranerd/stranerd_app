@@ -1,9 +1,5 @@
 [
 	{
-		"pkg": "@capacitor-community/http",
-		"classpath": "com.getcapacitor.plugin.http.Http"
-	},
-	{
 		"pkg": "@capacitor/app",
 		"classpath": "com.capacitorjs.plugins.app.AppPlugin"
 	},
@@ -16,12 +12,20 @@
 		"classpath": "com.capacitorjs.plugins.dialog.DialogPlugin"
 	},
 	{
+		"pkg": "@capacitor/filesystem",
+		"classpath": "com.capacitorjs.plugins.filesystem.FilesystemPlugin"
+	},
+	{
 		"pkg": "@capacitor/haptics",
 		"classpath": "com.capacitorjs.plugins.haptics.HapticsPlugin"
 	},
 	{
 		"pkg": "@capacitor/keyboard",
 		"classpath": "com.capacitorjs.plugins.keyboard.KeyboardPlugin"
+	},
+	{
+		"pkg": "@capacitor/push-notifications",
+		"classpath": "com.capacitorjs.plugins.pushnotifications.PushNotificationsPlugin"
 	},
 	{
 		"pkg": "@capacitor/share",

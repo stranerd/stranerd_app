@@ -1,12 +1,15 @@
 <template>
-	<router-link :class="`m-0 w-full bg-white rounded-xl flex flex-col md:gap-2 gap-[1rem] box-border p-4`"
-		:to="`/users/${user.id}`">
+	<router-link :to="`/users/${user.id}`"
+		class="m-0 w-full bg-white rounded-xl flex flex-col md:gap-2 box-border p-4">
 		<div class="items-center flex">
 			<div class="relative border-white border-4 rounded-full grid place-items-center mr-4">
 				<Avatar :id="user.id" :size="67" :src="user.avatar" color="#C7D6E3" />
 			</div>
 			<div class="flex flex-col justify-start items-start">
-				<h2 class="lg:text-base text-xs font-bold mb-1">{{ user.fullName }}</h2>
+				<h2 class="lg:text-base text-xs font-bold mb-1 flex gap-1 items-center">
+					<span>{{ user.fullName }}</span>
+					<IonIcon v-if="user.isVerified" :icon="checkmarkCircle" color="primary" />
+				</h2>
 				<span
 					class="py-1 px-4 rounded-full text-xs w-auto flex border-2 font-bold bg-primary text-white">
 					{{ user.rank.id }}
@@ -31,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { chatboxEllipses, flash, helpCircle } from 'ionicons/icons'
+import { chatboxEllipses, checkmarkCircle, flash, helpCircle } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
 import { UserEntity } from '@modules/users'
@@ -45,7 +48,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { formatNumber, helpCircle, flash, chatboxEllipses }
+		return { formatNumber, helpCircle, flash, chatboxEllipses, checkmarkCircle }
 	}
 })
 </script>

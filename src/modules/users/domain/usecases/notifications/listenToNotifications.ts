@@ -18,7 +18,7 @@ export class ListenToNotificationsUseCase {
 
 		return await this.repository.listenToMany(userId, conditions, listener, (entity) => {
 			if (entity.userId !== userId) return false
-			if (date) return entity.createdAt > date
+			if (date) return entity.createdAt >= date
 			else return true
 		})
 	}

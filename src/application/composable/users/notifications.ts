@@ -1,4 +1,4 @@
-import { onUnmounted, onMounted, ref, Ref } from 'vue'
+import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { GetNotifications, ListenToNotifications, MarkNotificationSeen, NotificationEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
@@ -22,7 +22,9 @@ const unshiftToNotificationList = (userId: string, notification: NotificationEnt
 	else global[userId].notifications.value.unshift(notification)
 }
 
-export const useNotificationList = (userId: string) => {
+export const useNotificationList = () => {
+	const { id } = useAuth()
+	const userId = id.value
 	if (global[userId] === undefined) {
 		const listener = useListener(async () => {
 			if (!userId) return () => {
@@ -99,7 +101,6 @@ export const useNotificationList = (userId: string) => {
 }
 
 export const useNotification = (notification: NotificationEntity) => {
-	const { id } = useAuth()
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const markNotificationSeen = async () => {
@@ -107,7 +108,7 @@ export const useNotification = (notification: NotificationEntity) => {
 		await setError('')
 		try {
 			await setLoading(true)
-			await MarkNotificationSeen.call(id.value!, notification.id, true)
+			await MarkNotificationSeen.call(notification.id, true)
 		} catch (e) {
 			await setError(e)
 		}

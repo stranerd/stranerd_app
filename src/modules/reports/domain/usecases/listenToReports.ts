@@ -19,7 +19,7 @@ export class ListenToReportsUseCase {
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
 			if (entity.data.type !== type) return false
-			if (date) return entity.createdAt > date
+			if (date) return entity.createdAt >= date
 			return true
 		})
 	}

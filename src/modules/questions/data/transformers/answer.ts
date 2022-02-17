@@ -6,12 +6,12 @@ export class AnswerTransformer {
 		const {
 			id, title, body, questionId, attachments,
 			userId, best, commentsCount, createdAt, updatedAt,
-			userBio, votes
+			userBio, userRoles, votes
 		} = model
 		return new AnswerEntity({
 			id, title, body, questionId, attachments,
 			userId, best, commentsCount, createdAt, updatedAt,
-			userBio, votes
+			userBio, userRoles, votes
 		})
 	}
 

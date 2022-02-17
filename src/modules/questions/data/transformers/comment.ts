@@ -4,10 +4,10 @@ import { CommentEntity } from '../../domain/entities/comment'
 export class CommentTransformer {
 	fromJSON (model: CommentFromModel) {
 		const {
-			id, body, createdAt, userId, userBio, answerId, questionId, updatedAt
+			id, body, createdAt, userId, userBio, userRoles, answerId, questionId, updatedAt
 		} = model
 		return new CommentEntity({
-			id, body, createdAt, userId, userBio, answerId, questionId, updatedAt
+			id, body, createdAt, userId, userBio, userRoles, answerId, questionId, updatedAt
 		})
 	}
 

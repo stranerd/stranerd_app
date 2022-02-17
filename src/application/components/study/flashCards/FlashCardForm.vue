@@ -20,7 +20,7 @@
 					</div>
 					<DisplayError :error="factory.errors.title" />
 				</div>
-				<div>
+				<div v-if="false">
 					<div class="bg-white rounded-md flex items-center px-4">
 						<ion-text class="text-primary font-bold w-12">
 							TAGS

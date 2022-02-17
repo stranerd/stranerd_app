@@ -21,7 +21,11 @@ import { openStudyEntityMenu } from '@app/composable/study/menus'
 export default defineComponent({
 	name: 'Study',
 	displayName: 'Study',
-	middlewares: ['isAuthenticated'],
+	middlewares: ['isAuthenticated', async () => {
+		const { fetched, loading, rootSet, fetchSets } = useUserRootSet()
+		if (!fetched.value && !loading.value) await fetchSets()
+		if (rootSet.value) return `/study/folders/${rootSet.value.id}`
+	}],
 	components: { DashboardLayout, SetListCard },
 	setup () {
 		const openMenu = (entity: SetEntity, event: Event) => openStudyEntityMenu(entity, {}, event)

@@ -32,7 +32,7 @@ export class NotificationApiDataSource implements NotificationBaseDataSource {
 		return listener
 	}
 
-	async markSeen (_: string, id: string, seen: boolean) {
+	async markSeen (id: string, seen: boolean) {
 		return await this.stranerdClient.put<{ seen: boolean }, boolean>(`/${id}/seen`, { seen })
 	}
 }

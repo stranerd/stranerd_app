@@ -1,5 +1,6 @@
-import { BaseEntity, Media } from '@modules/core'
-import { generateDefaultBio, UserBio } from '@modules/users'
+import { BaseEntity, Media, parseMedia } from '@modules/core'
+import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { appName } from '@utils/environment'
 
 export class ReportEntity extends BaseEntity {
 	readonly id: string
@@ -7,6 +8,7 @@ export class ReportEntity extends BaseEntity {
 	readonly reporterId: string
 	readonly reportedId: string
 	readonly reporterBio: UserBio
+	readonly reporterRoles: UserRoles
 	readonly message: string
 	readonly createdAt: number
 	readonly updatedAt: number
@@ -17,19 +19,30 @@ export class ReportEntity extends BaseEntity {
 		             reporterId,
 		             reportedId,
 		             reporterBio,
+		             reporterRoles,
 		             message,
 		             createdAt,
 		             updatedAt
 	             }: ReportConstructorArgs) {
 		super()
 		this.id = id
+		if (data.type === ReportType.users) {
+			data.reported.userBio = generateDefaultBio(data.reported.userBio)
+			data.reported.userRoles = generateDefaultRoles(data.reported.userRoles)
+		}
+		if (data.type === ReportType.pastQuestions) data.reported.questionMedia = data.reported.questionMedia.map(parseMedia)
 		this.data = data
 		this.reportedId = reportedId
 		this.reporterId = reporterId
 		this.reporterBio = generateDefaultBio(reporterBio)
+		this.reporterRoles = generateDefaultRoles(reporterRoles)
 		this.message = message
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
+	}
+
+	get isUserVerified () {
+		return this.reporterRoles[appName].isVerified
 	}
 }
 
@@ -39,6 +52,7 @@ type ReportConstructorArgs = {
 	reporterId: string
 	reportedId: string
 	reporterBio: UserBio
+	reporterRoles: UserRoles
 	message: string,
 	createdAt: number
 	updatedAt: number
@@ -53,7 +67,7 @@ export enum ReportType {
 
 export type UserReportType = {
 	type: ReportType.users,
-	reported: { bio: UserBio, userId: string }
+	reported: { userBio: UserBio, userRoles: UserRoles, userId: string }
 }
 
 export type QuestionReportType = {

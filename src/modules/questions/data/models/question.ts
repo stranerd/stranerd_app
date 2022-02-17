@@ -1,10 +1,11 @@
-import { UserBio } from '@modules/users'
+import { UserBio, UserRoles } from '@modules/users'
 import { Media } from '@modules/core'
 
 export interface QuestionFromModel extends QuestionToModel {
 	id: string
 	userId: string
 	userBio: UserBio
+	userRoles: UserRoles
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
 	isAnswered: boolean

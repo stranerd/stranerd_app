@@ -1,4 +1,4 @@
-import { BaseEntity, Media } from '@modules/core'
+import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { appName } from '@utils/environment'
 import { capitalize, catchDivideByZero, formatNumber, getPercentage } from '@utils/commons'
 import { getRankImage, RankTypes } from './rank'
@@ -23,6 +23,7 @@ export interface UserRoles {
 	[appName]: {
 		isAdmin: boolean
 		isTutor: boolean
+		isVerified: boolean
 	}
 }
 
@@ -98,9 +99,17 @@ export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
 	const fullName = firstName + ' ' + lastName
 	const email = bio?.email ?? 'anon@ymous.com'
 	const description = bio?.description ?? ''
-	const photo = bio?.photo ?? null
+	const photo = bio?.photo ? parseMedia(bio.photo) : null
 	return { firstName, lastName, fullName, email, description, photo }
 }
+
+export const generateDefaultRoles = (roles: Partial<UserRoles>): UserRoles => ({
+	[appName]: {
+		isAdmin: roles?.[appName]?.isAdmin ?? false,
+		isTutor: roles?.[appName]?.isTutor ?? false,
+		isVerified: roles?.[appName]?.isVerified ?? false
+	}
+})
 
 export class UserEntity extends BaseEntity {
 	public readonly id: string
@@ -129,12 +138,7 @@ export class UserEntity extends BaseEntity {
 		super()
 		this.id = id
 		this.bio = generateDefaultBio(bio)
-		this.roles = {
-			[appName]: {
-				isAdmin: roles[appName]?.isAdmin ?? false,
-				isTutor: roles[appName]?.isTutor ?? false
-			}
-		}
+		this.roles = generateDefaultRoles(roles)
 		this.account = account
 		this.status = status
 		this.tutor = tutor
@@ -265,6 +269,14 @@ export class UserEntity extends BaseEntity {
 
 	set isTutor (isTutor) {
 		this.roles[appName].isTutor = isTutor
+	}
+
+	get isVerified () {
+		return this.roles[appName].isVerified
+	}
+
+	set isVerified (isVerified) {
+		this.roles[appName].isVerified = isVerified
 	}
 }
 

@@ -5,10 +5,23 @@ export class NoteTransformer {
 	fromJSON (model: NoteFromModel) {
 		const {
 			id, userId, isHosted, media, description, preview, isPublic,
-			link, userBio, title, tags, createdAt, updatedAt
+			link, userBio, userRoles, title, tags, createdAt, updatedAt
 		} = model
 		return new NoteEntity({
-			id, userId, description, isHosted, media, preview, link, userBio, title, tags, createdAt, updatedAt, isPublic
+			id,
+			userId,
+			description,
+			isHosted,
+			media,
+			preview,
+			link,
+			userBio,
+			userRoles,
+			title,
+			tags,
+			createdAt,
+			updatedAt,
+			isPublic
 		})
 	}
 

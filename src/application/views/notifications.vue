@@ -47,7 +47,6 @@ import { IonIcon } from '@ionic/vue'
 import { checkmarkDone } from 'ionicons/icons'
 import PageLoading from '@app/components/core/PageLoading.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
-import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'Notifications',
@@ -55,10 +54,9 @@ export default defineComponent({
 	middlewares: ['isAuthenticated'],
 	components: { NotificationCard, Justified, IonIcon, PageLoading, EmptyState },
 	setup () {
-		const { id } = useAuth()
 		const {
 			notifications, error, loading, hasMore, fetchOlderNotifications
-		} = useNotificationList(id.value)
+		} = useNotificationList()
 		return { notifications, error, loading, hasMore, fetchOlderNotifications, checkmarkDone }
 	}
 })

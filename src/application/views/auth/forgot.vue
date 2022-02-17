@@ -1,28 +1,26 @@
 <template>
 	<Auth>
-		<div class="w-full mt-10 h-full flex flex-col items-center justify-start bg-white">
-			<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray mt-20">
+		<div class="w-full h-full flex flex-col items-center justify-start bg-white py-20">
+			<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray">
 				<h1 class="text-xl text-main_dark font-bold mb-2 ">Forgot Password</h1>
 				<span class="text-body text-main_dark mb-4">Enter your email to reset your password</span>
 				<div class="h-[65%]">
-					<form
-						@submit.prevent="sendResetEmail"
-					>
+					<form @submit.prevent="sendResetEmail">
 						<div class="mb-4">
 							<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
 								position="floating"
-								required type="email"></ion-input>
+								required type="text"></ion-input>
 							<span class="text-body text-red-500 font-semibold">{{ factory.errors.email }}</span>
 						</div>
-						<ion-button class="w-full mb-4" type="submit">RESET PASSWORD
+						<ion-button class="w-full mb-4" type="submit">Reset Password
 							<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
 						</ion-button>
 					</form>
 				</div>
+				<router-link class="text-primary font-bold text-body mt-8" to="/auth/signin">
+					Back to Sign In
+				</router-link>
 			</div>
-			<router-link class="text-primary font-bold text-body mt-8" to="/auth/signin">
-				Back to Sign In
-			</router-link>
 		</div>
 	</Auth>
 </template>

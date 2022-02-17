@@ -1,13 +1,13 @@
 import { IRoleRepository } from '../../irepositories/irole'
 
-export class MakeTutorUseCase {
+export class ToggleTutorUseCase {
 	private repository: IRoleRepository
 
 	constructor (repository: IRoleRepository) {
 		this.repository = repository
 	}
 
-	async call (id: string) {
-		return await this.repository.toggleTutor(id, true)
+	async call (id: string, tutor: boolean) {
+		return await this.repository.toggleTutor(id, tutor)
 	}
 }

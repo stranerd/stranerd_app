@@ -19,7 +19,7 @@
 			</label>
 		</div>
 
-		<div class="mb-12">
+		<div v-if="false" class="mb-12">
 			<label>Tags</label>
 			<IonInput v-model="tag" class="mb-2" placeholder="Add related tags" />
 			<div v-if="factory.tags.length > 0" class="mb-2 flex flex-wrap gap-2">
@@ -33,14 +33,14 @@
 			<DisplayError :error="factory.errors.tags" />
 		</div>
 
-		<div class="mb-12">
-			<input
-				id="preview" accept="image/x-png,image/jpeg,image/jpg"
-				class="hidden" type="file" @change="catchPreview" />
-			<label class="cursor-pointer flex items-center gap-4 mb-2" for="preview">
-				<ion-icon :icon="image" class="!text-4xl text-gray" />
-				{{ factory.preview ? 'Change' : 'Add' }} Preview (optional)
-			</label>
+		<div v-if="false" class="mb-12">
+			<FileInput accept="image/x-png,image/jpeg,image/jpg"
+				class="mb-2" @files="catchPreview">
+				<label class="flex items-center gap-4">
+					<ion-icon :icon="image" class="!text-4xl text-gray" />
+					{{ factory.preview ? 'Change' : 'Add' }} Preview (optional)
+				</label>
+			</FileInput>
 			<span class="p-2 rounded-xl flex items-center">
 				{{ factory.preview?.name ?? 'No Preview' }}
 				<IonIcon v-if="factory.preview" :icon="close" class="ml-2 cursor-pointer"
@@ -59,11 +59,12 @@
 		</div>
 
 		<div v-if="factory.isHosted" class="mb-12">
-			<input id="video" class="hidden" type="file" @change="catchMedia" />
-			<label class="cursor-pointer flex items-center gap-4 mb-2" for="video">
-				<ion-icon :icon="documentAttach" class="!text-4xl text-gray" />
-				{{ factory.preview ? 'Change' : 'Add' }} Document
-			</label>
+			<FileInput class="mb-2" type="file" @files="catchMedia">
+				<label class="flex items-center gap-4">
+					<ion-icon :icon="documentAttach" class="!text-4xl text-gray" />
+					{{ factory.preview ? 'Change' : 'Add' }} Document
+				</label>
+			</FileInput>
 			<span class="p-2 rounded-xl flex items-center">
 				{{ factory.media?.name ?? 'No Media' }}
 				<IonIcon v-if="factory.media" :icon="close" class="ml-2 cursor-pointer" @click="factory.media = null" />
@@ -73,11 +74,8 @@
 
 		<div v-else class="mb-12">
 			<label class="block">Link</label>
-			<IonText class="text-sm mt-1">
-				All links must be videos hosted on YouTube.<br>
-				Copy the id of the video from the url, eg {{ factory.service.url }}{videoId}
-			</IonText>
-			<IonInput v-model="factory.videoId" class="mb-2" placeholder="Enter id of the youtube video" />
+			<IonText class="text-sm mt-1">All links must be of videos hosted on YouTube</IonText>
+			<IonInput v-model="factory.link" class="mb-2" placeholder="Enter youtube video link" />
 			<DisplayError :error="factory.errors.link" />
 		</div>
 
@@ -94,7 +92,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { close, documentAttach, image } from 'ionicons/icons'
-import { useFileInputs, useTags } from '@app/composable/core/forms'
+import { useFileInputCallback, useTags } from '@app/composable/core/forms'
 import { VideoFactory } from '@modules/study'
 import { IonTextarea, IonToggle } from '@ionic/vue'
 
@@ -125,8 +123,12 @@ export default defineComponent({
 			(tag: string) => props.factory.removeTag(tag)
 		)
 
-		const { catchFiles: catchMedia } = useFileInputs((file: File) => props.factory.media = file)
-		const { catchFiles: catchPreview } = useFileInputs((file: File) => props.factory.preview = file)
+		const catchMedia = useFileInputCallback(async ([file]) => {
+			props.factory.media = file
+		})
+		const catchPreview = useFileInputCallback(async ([file]) => {
+			props.factory.preview = file
+		})
 
 		return {
 			image, documentAttach, close, tag, removeTag, catchMedia, catchPreview

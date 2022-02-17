@@ -1,31 +1,45 @@
 <template>
-	<div class="m-0 w-full bg-white rounded-xl flex flex-col justify-between items-start gap-4 box-border p-4">
+	<div
+		class="m-0 w-full bg-white rounded-xl flex flex-col justify-between items-start gap-4 box-border p-4 text-main_dark">
 		<div class="w-full justify-between items-start flex">
-			<ion-icon :icon="document" class="text-main_dark text-2xl cursor-pointer" />
-			<div class="text-base text-main_dark font-bold text-left flex-col flex ml-2 flex-grow">
-				<ion-text>{{ note.title }}</ion-text>
+			<div class="text-base flex-col flex gap-2 items-start flex-grow truncate">
+				<ion-text class="font-semibold truncate">{{ note.title }}</ion-text>
+				<Tag :index="1" tag="Note">
+					<template v-slot="slotProps">
+						<span class="flex items-center">
+							<ion-icon :icon="document" class="text-base mr-1" />
+							<ion-text class="text-xs">{{ slotProps.tag }}</ion-text>
+						</span>
+					</template>
+				</Tag>
 			</div>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl cursor-pointer" @click="openMenu" />
+			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl" @click="openMenu" />
 		</div>
 		<div class="w-full flex items-center justify-between">
-			<div class="flex items-center">
+			<div class="flex items-center gap-2">
 				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
-				<ion-text class="text-xs font-bold text-main_dark ml-2">{{ note.userBio.firstName }}</ion-text>
+				<ion-text class="text-xs flex items-center gap-1">
+					<span>{{ note.userBio.firstName }}</span>
+					<IonIcon v-if="note.isUserVerified" :icon="checkmarkCircle" color="primary" />
+				</ion-text>
 			</div>
-			<router-link :to="`/study/notes/${note.id}`">
-				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]" size="small">
+			<router-link v-if="content" :to="`/study/notes/${note.id}`">
+				<ion-button class="btn-outline text-primary w-full lg:min-w-[7.5rem]" size="small">
 					Read
 				</ion-button>
 			</router-link>
+			<IonSpinner v-else-if="loading" color="primary" />
+			<IonIcon v-else :icon="downloadIcon" class="text-2xl" color="primary" @click="download" />
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { document, ellipsisVertical } from 'ionicons/icons'
+import { checkmarkCircle, document, download as downloadIcon, ellipsisVertical } from 'ionicons/icons'
 import { defineComponent } from 'vue'
-import { formatNumber } from '@utils/commons'
 import { NoteEntity } from '@modules/study'
+import { IonSpinner } from '@ionic/vue'
+import { useDownload } from '@app/composable/meta/media'
 
 export default defineComponent({
 	name: 'NoteListCard',
@@ -39,8 +53,20 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup () {
-		return { formatNumber, ellipsisVertical, document }
+	components: { IonSpinner },
+	setup (props) {
+		const {
+			loading,
+			content,
+			error,
+			download,
+			deleteFromDownloads
+		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
+
+		return {
+			ellipsisVertical, document, downloadIcon, checkmarkCircle,
+			download, loading, content, error, deleteFromDownloads
+		}
 	}
 })
 </script>

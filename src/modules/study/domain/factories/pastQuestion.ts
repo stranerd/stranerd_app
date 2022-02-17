@@ -1,4 +1,4 @@
-import { BaseFactory, Media } from '@modules/core'
+import { BaseFactory, Media, UploadedFile } from '@modules/core'
 import {
 	arrayContainsX,
 	hasMoreThanX,
@@ -9,13 +9,12 @@ import {
 	isLongerThanX,
 	isMoreThanX,
 	isNumber,
-	isRequiredIf,
 	isString
 } from '@stranerd/validate'
 import { PastQuestionEntity, PastQuestionType } from '../entities/pastQuestion'
 import { PastQuestionToModel } from '../../data/models/pastQuestion'
 
-type Content = File | Media
+type Content = UploadedFile | Media
 type Keys = {
 	institutionId: string,
 	courseId: string
@@ -44,37 +43,34 @@ export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQue
 		question: { required: true, rules: [isString, isExtractedHTMLLongerThanX(0)] },
 		questionMedia: { required: true, rules: [isArrayOfX((com) => isImage(com).valid, 'images')] },
 		answer: {
-			required: false,
-			rules: [(val: string) => isRequiredIf(val, !this.isObjective), isString]
+			required: () => !this.isObjective,
+			rules: [isString]
 		},
 		answerMedia: {
-			required: false,
-			rules: [(val: string) => isRequiredIf(val, !this.isObjective), isArrayOfX((com) => isImage(com).valid, 'images')]
+			required: () => !this.isObjective,
+			rules: [isArrayOfX((com) => isImage(com).valid, 'images')]
 		},
 		options: {
-			required: true,
-			rules: [
-				(val: string) => isRequiredIf(val, this.isObjective), isArrayOfX((cur: any) => isString(cur).valid, 'questions'), hasMoreThanX(0)
-			]
+			required: () => this.isObjective,
+			rules: [isArrayOfX((cur: any) => isString(cur).valid, 'questions'), hasMoreThanX(0)]
 		},
 		optionsMedia: {
-			required: false,
+			required: () => this.isObjective,
 			rules: [
-				(val: string) => isRequiredIf(val, this.isObjective),
 				isArrayOfX((cur: any) => isArrayOf(cur, (com) => isImage(com).valid, 'images').valid, 'images')
 			]
 		},
 		correctIndex: {
-			required: false,
-			rules: [(val: string) => isRequiredIf(val, this.isObjective), isNumber]
+			required: () => this.isObjective,
+			rules: [isNumber]
 		},
 		explanation: {
-			required: false,
-			rules: [(val: string) => isRequiredIf(val, this.isObjective), isString]
+			required: () => this.isObjective,
+			rules: [isString]
 		},
 		explanationMedia: {
-			required: false,
-			rules: [(val: string) => isRequiredIf(val, this.isObjective), isArrayOfX((com) => isImage(com).valid, 'images')]
+			required: () => this.isObjective,
+			rules: [isArrayOfX((com) => isImage(com).valid, 'images')]
 		}
 	}
 
@@ -229,21 +225,21 @@ export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQue
 		this.set('questionMedia', entity.questionMedia)
 		this.type = entity.data.type
 		if (entity.data.type === PastQuestionType.objective) {
-			this.set('options', entity.data.options)
-			this.set('optionsMedia', entity.data.optionsMedia)
+			this.set('options', entity.data.options ?? [])
+			this.set('optionsMedia', entity.data.optionsMedia ?? [])
 			this.correctIndex = entity.data.correctIndex
-			this.explanation = entity.data.explanation
-			this.set('explanationMedia', entity.data.explanationMedia)
+			this.explanation = entity.data.explanation ?? ''
+			this.set('explanationMedia', entity.data.explanationMedia ?? [])
 		} else {
 			this.answer = entity.data.answer
-			this.set('answerMedia', entity.data.answerMedia)
+			this.set('answerMedia', entity.data.answerMedia ?? [])
 		}
 	}
 
 	toModel = async () => {
 		if (this.valid) {
 			this.set('questionMedia', await Promise.all(this.questionMedia.map(async (doc) => {
-				if (doc instanceof File) return await this.uploadFile(`pastQuestions/${this.type}/questions`, doc)
+				if (doc instanceof UploadedFile) return await this.uploadFile(`pastQuestions/${this.type}/questions`, doc)
 				return doc
 			})))
 
@@ -251,18 +247,18 @@ export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQue
 				this.set('optionsMedia', await Promise.all(
 					this.optionsMedia.map(async (option) => {
 						option.map(async (doc) => {
-							if (doc instanceof File) return await this.uploadFile(`pastQuestions/${this.type}/options`, doc)
+							if (doc instanceof UploadedFile) return await this.uploadFile(`pastQuestions/${this.type}/options`, doc)
 							return doc
 						})
 					})
 				))
 				this.set('explanationMedia', await Promise.all(this.explanationMedia.map(async (doc) => {
-					if (doc instanceof File) return await this.uploadFile(`pastQuestions/${this.type}/explanations`, doc)
+					if (doc instanceof UploadedFile) return await this.uploadFile(`pastQuestions/${this.type}/explanations`, doc)
 					return doc
 				})))
 			} else {
 				this.set('answerMedia', await Promise.all(this.answerMedia.map(async (doc) => {
-					if (doc instanceof File) return await this.uploadFile(`pastQuestions/${this.type}/answers`, doc)
+					if (doc instanceof UploadedFile) return await this.uploadFile(`pastQuestions/${this.type}/answers`, doc)
 					return doc
 				})))
 			}

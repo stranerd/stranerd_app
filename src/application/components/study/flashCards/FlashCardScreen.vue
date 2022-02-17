@@ -1,17 +1,21 @@
 <template>
 	<div id="screen" class="flex flex-col lg:w-8/12 w-full px-4 mx-auto py-8 gap-8">
-		<Swipe :key="page" :class="[isFullscreen ? 'flex-grow' : '']" @swipeLeft="increase" @swipeRight="increase">
+		<Swipe :key="page" :class="[isFullscreen ? 'flex-grow' : '']" @swipeLeft="increase" @swipeRight="decrease">
 			<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full h-full']"
 				@click="flipped = !flipped">
-				<section
-					class="front min-h-[50vh] h-full overflow-y-auto flex text-center custom-shadow w-full text-2xl p-4 max-w-[72rem] mx-auto bg-white">
-					<DisplayHtml :html="flashCard.set[page].question" class="w-full my-auto" />
-				</section>
+				<div class="front bg-white w-full max-w-[72rem]">
+					<section v-if="!flipped"
+						class="h-[48vh] overflow-y-auto flex text-center custom-shadow text-2xl p-4 mx-auto">
+						<DisplayHtml :html="flashCard.set[page].question" class="w-full my-auto overflow-y-auto" />
+					</section>
+				</div>
 
-				<section
-					class="back min-h-[50vh] h-full overflow-y-auto flex text-center custom-shadow w-full text-2xl p-4 max-w-[72rem] mx-auto bg-white absolute">
-					<DisplayHtml :html="flashCard.set[page].answer" class="w-full my-auto" />
-				</section>
+				<div class="back bg-white w-full max-w-[72rem]">
+					<section v-if="flipped"
+						class="h-[48vh] overflow-y-auto flex text-center custom-shadow text-2xl p-4 mx-auto">
+						<DisplayHtml :html="flashCard.set[page].answer" class="w-full my-auto" />
+					</section>
+				</div>
 			</div>
 		</Swipe>
 
@@ -66,7 +70,7 @@ export default defineComponent({
 		const page = ref(0)
 		let interval: any
 
-		const increase = async () => {
+		const increase = () => {
 			flipped.value = false
 			if (page.value + 1 === props.flashCard?.set.length) {
 				pauseCard()
@@ -116,6 +120,7 @@ export default defineComponent({
 		border-radius: 12px;
 		position: relative;
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 	}

@@ -4,6 +4,7 @@ import { AuthDetails, AuthTypes, UserLocation } from '@modules/auth/domain/entit
 import { SessionSignout } from '@modules/auth'
 import { isClient } from '@utils/environment'
 import { useUserRootSet } from '@app/composable/study/sets'
+import { setupPush } from '@utils/push'
 
 const global = {
 	auth: ref(null as AuthDetails | null),
@@ -82,8 +83,11 @@ export const useAuth = () => {
 	}
 
 	const signin = async (remembered: boolean) => {
-		await startProfileListener()
-		await useUserRootSet().listener.startListener()
+		await Promise.all([
+			setupPush(id.value),
+			startProfileListener(),
+			useUserRootSet().listener.startListener()
+		])
 	}
 
 	const signout = async () => {

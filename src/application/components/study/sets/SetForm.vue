@@ -6,11 +6,11 @@
 			</ion-text>
 			<ion-input v-model="factory.name"
 				class="max-w-[1054px] !h-14 text-left"
-				placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
+				placeholder="Enter folder name”"
 				show-cancel-button="never"
 			></ion-input>
 		</div>
-		<div class="bg-light_gray w-full rounded-md flex items-center px-4 hidden">
+		<div v-if="false" class="bg-light_gray w-full rounded-md flex items-center px-4">
 			<ion-text class="text-primary font-bold w-12 text-center">
 				TAGS
 			</ion-text>

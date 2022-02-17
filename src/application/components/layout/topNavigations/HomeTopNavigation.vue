@@ -6,7 +6,7 @@
 			<router-link class="hidden lg:block" to="/">
 				<Logo :secondary="true" />
 			</router-link>
-			<div class="gap-8 flex-row lg:flex hidden items-center text-gray">
+			<div class="gap-8 lg:flex hidden items-center text-gray">
 				<router-link class="link-custom px-4" to="/">
 					Home
 				</router-link>
@@ -17,7 +17,7 @@
 					Study
 				</router-link>
 
-				<search-bar class="flex-grow w-full" />
+				<Search class="flex-grow min-w-[20rem]" />
 			</div>
 
 			<div class="gap-8 lg:flex hidden">
@@ -37,17 +37,18 @@
 			class="lg:hidden bg-white px-4 border-0 h-12 flex items-center justify-center"
 		>
 			<div class="flex items-center justify-between">
-			
+
 				<span class="cursor-pointer" @click="toggleMenu">
 					<ion-icon :icon="show ? close : menu" size="100px" />
 				</span>
 				<router-link class="flex items-center" to="/">
 					<Logo :secondary="!show" />
 				</router-link>
-				<IonIcon :icon="search" class="text-xl ml-4" @click="navigateToSearch" />
+				<IonIcon :icon="search" class="text-xl ml-4" @click="$router.push('/search')" />
 			</div>
 		</ion-toolbar>
-		<div v-if="show" class="grow-1 lg:hidden px-2 flex flex-col text-center mt-8 gap-6 bg-white text-main_dark">
+		<div v-if="show"
+			class="grow-1 lg:hidden px-2 flex flex-col text-center mt-8 gap-6 bg-white text-main_dark items-center">
 			<router-link class="smallScreenLink link-custom-sm" to="/">
 				Home
 			</router-link>
@@ -75,25 +76,20 @@ import { defineComponent, ref } from 'vue'
 import { disableScroll, enableScroll } from '@utils/html'
 import Logo from '@app/components/core/Logo.vue'
 import { IonHeader, IonIcon, IonToolbar } from '@ionic/vue'
-import SearchBar from '@app/components/search/SearchBar.vue'
 import { close, menu, search } from 'ionicons/icons'
-import { useSearch } from '@app/composable/meta/search'
+import Search from '@app/components/search/Search.vue'
 
 export default defineComponent({
-	components: { Logo, IonIcon, IonHeader, IonToolbar, SearchBar },
 	name: 'HomeTopNavigation',
+	components: { Logo, IonIcon, IonHeader, IonToolbar, Search },
 	setup () {
 		const show = ref(false)
 		const toggleMenu = () => {
 			show.value ? enableScroll() : disableScroll()
 			show.value = !show.value
 		}
-		const { navigateToSearch } = useSearch()
 
-		return {
-			show, toggleMenu,  navigateToSearch,
-			 menu, close, search
-		}
+		return { show, toggleMenu, menu, close, search }
 	}
 })
 </script>
@@ -111,5 +107,10 @@ export default defineComponent({
 
 	.nav-shadow {
 		box-shadow: 0 5px 10px rgba(84, 109, 211, 0.1);
+	}
+
+	:deep(ion-searchbar) {
+		--background: $color-newGray !important;
+		background: $color-newGray !important;
 	}
 </style>

@@ -1,13 +1,13 @@
 <template>
 	<div
-		:class="[`m-0 w-full min-h-40 bg-white rounded-xl flex flex-col items-start justify-between gap-2 box-border px-6 py-4 text-main_dark`]">
+		class="m-0 w-full min-h-40 bg-white rounded-xl flex flex-col items-start justify-between gap-2 box-border px-6 py-4 text-main_dark">
 		<div class="w-full justify-between items-center flex">
-			<ion-text class="font-bold">
+			<ion-text class="font-semibold truncate">
 				<Institution :institutionId="testPrep.data.institutionId" />
 			</ion-text>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl cursor-pointer" @click="openMenu" />
+			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl" @click="openMenu" />
 		</div>
-		<IonText class="text-gray text-sm font-bold -mt-2">
+		<IonText class="text-gray text-sm -mt-2 truncate">
 			<Course :courseId="testPrep.data.courseId" />
 			({{ testPrep.data.questionType }} {{ testPrep.data.year }})
 		</IonText>
