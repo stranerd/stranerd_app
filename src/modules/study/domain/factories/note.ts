@@ -12,7 +12,7 @@ import { BaseFactory, Media, UploadedFile } from '@modules/core'
 import { NoteEntity } from '@modules/study'
 import { NoteToModel } from '../../data/models/note'
 
-type Content = UploadedFile | Media
+type Content = UploadedFile | Media | null
 type Keys = {
 	title: string, description: string, tags: string[], isPublic: boolean,
 	isHosted: boolean, media: Content | null, link: string | null, preview: Content | null

@@ -1,3 +1,5 @@
+import { parseURL } from '@utils/commons'
+
 export interface Media {
 	name: string
 	type: string
@@ -5,6 +7,11 @@ export interface Media {
 	path: string
 	timestamp: number
 	link: string
+}
+
+export const parseMedia = (media: Media) => {
+	media.link = parseURL(media.link)
+	return media
 }
 
 export class UploadedFile {

@@ -18,5 +18,5 @@ export interface VideoToModel {
 	isHosted: boolean
 	link: string | null
 	media: Media | null
-	preview: Media
+	preview: Media | null
 }

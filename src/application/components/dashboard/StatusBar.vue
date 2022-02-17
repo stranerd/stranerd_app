@@ -27,7 +27,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
-import DonutChart from '@app/components/core/DonutChart'
+import DonutChart from '@app/components/core/DonutChart.vue'
 import { formatNumber } from '@utils/commons'
 import { checkmarkCircle } from 'ionicons/icons'
 

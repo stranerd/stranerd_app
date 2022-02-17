@@ -1,4 +1,4 @@
-import { BaseEntity, Media } from '@modules/core'
+import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
 import { appName } from '@utils/environment'
 
@@ -26,6 +26,8 @@ export class ReportEntity extends BaseEntity {
 	             }: ReportConstructorArgs) {
 		super()
 		this.id = id
+		if (data.type === ReportType.users) data.reported.userBio = generateDefaultBio(data.reported.userBio)
+		if (data.type === ReportType.pastQuestions) data.reported.questionMedia = data.reported.questionMedia.map(parseMedia)
 		this.data = data
 		this.reportedId = reportedId
 		this.reporterId = reporterId

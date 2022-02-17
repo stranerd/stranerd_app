@@ -1,4 +1,4 @@
-import { BaseEntity, Media } from '@modules/core'
+import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
 import { appName } from '@utils/environment'
 
@@ -14,7 +14,7 @@ export class NoteEntity extends BaseEntity {
 	public readonly isHosted: boolean
 	public readonly link: string | null
 	public readonly media: Media | null
-	public readonly preview: Media
+	public readonly preview: Media | null
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -45,8 +45,8 @@ export class NoteEntity extends BaseEntity {
 		this.isPublic = isPublic
 		this.isHosted = isHosted
 		this.link = link
-		this.media = media
-		this.preview = preview
+		this.media = media ? parseMedia(media) : null
+		this.preview = preview ? parseMedia(preview) : null
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -72,7 +72,7 @@ type NoteConstructorArgs = {
 	isHosted: boolean
 	link: string | null
 	media: Media | null
-	preview: Media
+	preview: Media | null
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
