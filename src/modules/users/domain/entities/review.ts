@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, UserBio, UserRoles } from './user'
+import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from './user'
 import { appName } from '@utils/environment'
 
 export class ReviewEntity extends BaseEntity {
@@ -31,7 +31,7 @@ export class ReviewEntity extends BaseEntity {
 		this.userId = userId
 		this.tutorId = tutorId
 		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = userRoles
+		this.userRoles = generateDefaultRoles(userRoles)
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}

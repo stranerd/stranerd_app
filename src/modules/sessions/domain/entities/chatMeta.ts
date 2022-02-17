@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
+import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
 import { ChatEntity } from './chat'
 import { appName } from '@utils/environment'
 
@@ -31,7 +31,7 @@ export class ChatMetaEntity extends BaseEntity {
 		this.ownerId = ownerId
 		this.unRead = unRead
 		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = userRoles
+		this.userRoles = generateDefaultRoles(userRoles)
 		this.last = last
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt

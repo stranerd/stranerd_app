@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, UserBio, UserRoles } from '@modules/users'
+import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
 import { appName } from '@utils/environment'
 
 export class CommentEntity extends BaseEntity {
@@ -28,7 +28,7 @@ export class CommentEntity extends BaseEntity {
 		this.data = data
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = userRoles
+		this.userRoles = generateDefaultRoles(userRoles)
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
