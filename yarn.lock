@@ -1313,12 +1313,12 @@
     tar "^6.0.1"
     tslib "^2.0.1"
 
-"@ionic/core@^6.0.7":
-  version "6.0.7"
-  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-6.0.7.tgz#413b44d222164f7715f19a503fc0dfc87393c452"
-  integrity sha512-Yl6itMcddfwfNNa6BjCxXxrIS+vPsrYSTfCmQwVfB4AiuZ5ZgE/jaZ9lMN7b0WIAy56bfX9etRlW+EjnK1znyQ==
+"@ionic/core@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-6.0.0.tgz#9c95513fc7fff79a0113f540da754b4a16910f99"
+  integrity sha512-3e5EJhDebK4pCiFREpNB95o2kBSAdhRb3eMsBDOCYWYuFlcZEOGOpiGx+kYF/klYVQnB45UXAmR8nCX1indmHQ==
   dependencies:
-    "@stencil/core" "~2.13.0"
+    "@stencil/core" "~2.11.0-0"
     ionicons "^6.0.0"
     tslib "^2.1.0"
 
@@ -1419,19 +1419,17 @@
     untildify "^4.0.0"
     wrap-ansi "^7.0.0"
 
-"@ionic/vue-router@^6.0.7":
-  version "6.0.7"
-  resolved "https://registry.yarnpkg.com/@ionic/vue-router/-/vue-router-6.0.7.tgz#83aef283fca1c74aa0f3b6f0ff06b3943d93f28d"
-  integrity sha512-pVp+dMADdMYdJDEINRQQNyV74xOIxRr4y1FuC58T4pREC1puQFeb1AsOAb7c5Cwg9xObnDjBw0FFw612FpsprA==
-  dependencies:
-    "@ionic/vue" "^6.0.7"
+"@ionic/vue-router@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@ionic/vue-router/-/vue-router-6.0.0.tgz#3fb59607c583645b441edec816b81c47047fa178"
+  integrity sha512-VtnJz1jAXlEzaXLJVtsZTifpTIR81msYAZJsAt1nkTTaAK0tJ6sITzfAs2a5lSM18l4TX2EEYXOcv3eihDoYvg==
 
-"@ionic/vue@^6.0.7":
-  version "6.0.7"
-  resolved "https://registry.yarnpkg.com/@ionic/vue/-/vue-6.0.7.tgz#dadddf0a7bfabfdbf57a7e12c1e2bb8119bb0008"
-  integrity sha512-4KZNI4HlMwDvJ9HFkit34pqNABlPIjvLy46AeS0OvwjD4C1dmj1pjqu2fHaLy/QSXmDfGv8uyes5biZJZ+b1Aw==
+"@ionic/vue@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@ionic/vue/-/vue-6.0.0.tgz#a7f4b83f39be5b9bca7a75fe47fbdc79a83aba69"
+  integrity sha512-xgSRnSaZReUcMt9SCopDI3y7QICKWbL09lcVOH+Mm7F374ZhS7uMyYyt62MCI2R98Ca95KTI2AA6hDm3YBCIRA==
   dependencies:
-    "@ionic/core" "^6.0.7"
+    "@ionic/core" "6.0.0"
     ionicons "^6.0.0"
 
 "@jridgewell/resolve-uri@^3.0.3":
@@ -1506,15 +1504,15 @@
   resolved "https://registry.yarnpkg.com/@soda/get-current-script/-/get-current-script-1.0.2.tgz#a53515db25d8038374381b73af20bb4f2e508d87"
   integrity sha512-T7VNNlYVM1SgQ+VsMYhnDkcGmWhQdL0bDyGm5TlQ3GBXnJscEClUUOKduWTmm2zCnvNLC1hc3JpuXjs/nFOc5w==
 
+"@stencil/core@~2.11.0-0":
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.11.0.tgz#8accc2791e2c34cce2d2aa8b40864dd40be4e10c"
+  integrity sha512-/IubCWhVXCguyMUp/3zGrg3c882+RJNg/zpiKfyfJL3kRCOwe+/MD8OoAXVGdd+xAohZKIi1Ik+EHFlsptsjLg==
+
 "@stencil/core@~2.12.0":
   version "2.12.1"
   resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.12.1.tgz#92364d3e57337b8d36dd9b70cfbed2833929f22d"
   integrity sha512-u24TZ+FEvjnZt5ZgIkLjLpUNsO6Ml3mUZqwmqk81w6RWWz75hgB5p4RFI5rvuErFeh2xvMIGo+pNdG24XUBz1A==
-
-"@stencil/core@~2.13.0":
-  version "2.13.0"
-  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.13.0.tgz#993fd74a5c7c8fe8af75848ca9df2211cd05b818"
-  integrity sha512-EEKHOHgYpg3/iFUKMXTZJjUayRul7sXDwNw0OGgkEOe4t7JWiibDkzUHuruvpbqEydX+z1+ez5K2bMMY76c2wA==
 
 "@stranerd/validate@^2.0.0":
   version "2.0.0"
