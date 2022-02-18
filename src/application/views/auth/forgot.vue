@@ -9,7 +9,7 @@
 						<div class="mb-4">
 							<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
 								position="floating"
-								required type="text"></ion-input>
+								required inputmode="email"></ion-input>
 							<span class="text-body text-red-500 font-semibold">{{ factory.errors.email }}</span>
 						</div>
 						<ion-button class="w-full mb-4" type="submit">Reset Password

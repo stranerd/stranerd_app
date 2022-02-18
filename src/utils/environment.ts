@@ -6,7 +6,14 @@ export const isDev = process.env.VUE_APP_API_ENVIRONMENT === 'local'
 export const isServer = () => false
 export const isClient = () => true
 
-export const googleClientId = process.env.VUE_APP_API_GOOGLE_CLIENT_ID ?? ''
+const googleClients = JSON.parse(process.env.VUE_APP_API_GOOGLE_CLIENT_IDS ?? '{}')
+export const googleClientIds = {
+	web: googleClients.web ?? '',
+	android: googleClients.android ?? '',
+	ios: googleClients.ios ?? ''
+}
+
+export const googleClientId = googleClientIds.web
 
 const host = parseURL((process.env.VUE_APP_API_DOMAIN ?? '') + (isDev ? `:${process.env.VUE_APP_API_PORT}` : ''))
 export const domain = `http${!isDev ? 's' : ''}://${host}`
