@@ -1,10 +1,5 @@
 <template>
 	<classWrapper>
-
-		<h1>
-			classParticipants
-		</h1>
-
 		<div>
 			<div class="bg-white p-6 rounded-xl mt-4" v-for="n in 3" :key="n">
 				<div class="flex items-center">
@@ -16,9 +11,6 @@
 						<tag :index="2" :secondary="true" tag="Comrade"/>
 					</div>
 				</div>
-
-		
-			
 			</div>
 		</div>
 	</classWrapper>
