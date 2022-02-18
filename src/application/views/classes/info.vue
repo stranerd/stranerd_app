@@ -7,8 +7,8 @@
 					<ion-text class="text-base text-main_dark">
 						Timmy Neutron
 					</ion-text>
-					<ion-text class="text-xs text-gray">
-						Tutor . 1 day ago  
+					<ion-text class="text-xs text-gray flex items-center">
+						Tutor <span class="dot"></span> 1 day ago  
 					</ion-text>
 				</div>
 			</div>
@@ -26,7 +26,7 @@ import { defineComponent } from 'vue'
 import classWrapper from '@app/components/classes/ClassWrapper.vue'
 
 export default defineComponent({
-	name: 'classAnnouncement',
+	name: 'classInfo',
 	displayName: 'Classes',
 	components: { classWrapper }
 })

@@ -11,8 +11,8 @@
 						<ion-text class="text-base text-main_dark">
 							General Discussion
 						</ion-text>
-						<ion-text class="text-xs text-gray">
-							by Timmy Neutron . 2 days ago . 44 messages 
+						<ion-text class="text-xs text-gray flex items-center ">
+							by Timmy Neutron <span class="dot"/> 2 days ago <span class="dot"/>  44 messages 
 						</ion-text>
 					</div>
 				</div>

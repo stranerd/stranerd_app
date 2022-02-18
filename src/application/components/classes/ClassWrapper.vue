@@ -10,7 +10,7 @@
 						</ion-text>
 					</div>
 					<div class="nav-scroll !item-start !justify-start  !mt-5">
-						<router-link :to="`/classes/announcement`"
+						<router-link :to="`/classes/info`"
 							class="py-2 cursor-pointer"
 							exact-active-class="border-b-4 text-white border-white">
 							Announcement
