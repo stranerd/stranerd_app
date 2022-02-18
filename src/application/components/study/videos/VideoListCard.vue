@@ -18,7 +18,10 @@
 		<div class="w-full flex items-center justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="video.userId" :size="24" :src="video.userBio.photo" />
-				<ion-text class="text-xs">{{ video.userBio.firstName }}</ion-text>
+				<ion-text class="text-xs flex items-center gap-1">
+					<span>{{ video.userBio.firstName }}</span>
+					<IonIcon v-if="video.isUserVerified" :icon="checkmarkCircle" color="primary" />
+				</ion-text>
 			</div>
 			<router-link :to="`/study/videos/${video.id}`">
 				<ion-button class="btn-outline text-primary w-full lg:min-w-[7.5rem]" size="small">
@@ -33,7 +36,7 @@
 import { defineComponent } from 'vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { VideoEntity } from '@modules/study'
-import { ellipsisVertical, playCircle } from 'ionicons/icons'
+import { checkmarkCircle, ellipsisVertical, playCircle } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'VideosListCard',
@@ -49,7 +52,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { ellipsisVertical, playCircle }
+		return { ellipsisVertical, playCircle, checkmarkCircle }
 	}
 })
 </script>

@@ -18,22 +18,28 @@
 		<div class="w-full flex items-center justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
-				<ion-text class="text-xs">{{ note.userBio.firstName }}</ion-text>
+				<ion-text class="text-xs flex items-center gap-1">
+					<span>{{ note.userBio.firstName }}</span>
+					<IonIcon v-if="note.isUserVerified" :icon="checkmarkCircle" color="primary" />
+				</ion-text>
 			</div>
-			<router-link :to="`/study/notes/${note.id}`">
+			<router-link v-if="content" :to="`/study/notes/${note.id}`">
 				<ion-button class="btn-outline text-primary w-full lg:min-w-[7.5rem]" size="small">
 					Read
 				</ion-button>
 			</router-link>
+			<IonSpinner v-else-if="loading" color="primary" />
+			<IonIcon v-else :icon="downloadIcon" class="text-2xl" color="primary" @click="download" />
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { document, ellipsisVertical } from 'ionicons/icons'
+import { checkmarkCircle, document, download as downloadIcon, ellipsisVertical } from 'ionicons/icons'
 import { defineComponent } from 'vue'
-import { formatNumber } from '@utils/commons'
 import { NoteEntity } from '@modules/study'
+import { IonSpinner } from '@ionic/vue'
+import { useDownload } from '@app/composable/meta/media'
 
 export default defineComponent({
 	name: 'NoteListCard',
@@ -47,8 +53,20 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup () {
-		return { formatNumber, ellipsisVertical, document }
+	components: { IonSpinner },
+	setup (props) {
+		const {
+			loading,
+			content,
+			error,
+			download,
+			deleteFromDownloads
+		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
+
+		return {
+			ellipsisVertical, document, downloadIcon, checkmarkCircle,
+			download, loading, content, error, deleteFromDownloads
+		}
 	}
 })
 </script>

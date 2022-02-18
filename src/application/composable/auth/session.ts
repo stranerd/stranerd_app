@@ -7,6 +7,7 @@ import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { storage } from '@utils/storage'
 import { setEmailVerificationEmail } from '@app/composable/auth/signin'
+import { unregisterDeviceOnLogout } from '@utils/push'
 
 export const createSession = async (afterAuth: AfterAuthUser, router: Router) => {
 	if (!afterAuth.user.isVerified) {
@@ -35,6 +36,7 @@ export const useSessionSignout = () => {
 		if (accepted) {
 			await setLoading(true)
 			try {
+				await unregisterDeviceOnLogout()
 				await useAuth().signout()
 			} catch (error) {
 				await setError(error)

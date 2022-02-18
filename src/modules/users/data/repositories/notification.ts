@@ -58,7 +58,7 @@ export class NotificationRepository implements INotificationRepository {
 		})
 	}
 
-	async markSeen (userId: string, id: string, seen: boolean) {
-		return await this.dataSource.markSeen(userId, id, seen)
+	async markSeen (id: string, seen: boolean) {
+		return await this.dataSource.markSeen(id, seen)
 	}
 }

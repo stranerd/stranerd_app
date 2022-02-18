@@ -3,9 +3,9 @@ import { ReviewEntity } from '../../domain/entities/review'
 
 export class ReviewTransformer {
 	fromJSON (model: ReviewFromModel) {
-		const { id, review, rating, tutorId, userId, userBio, createdAt, updatedAt } = model
+		const { id, review, rating, tutorId, userId, userBio, userRoles, createdAt, updatedAt } = model
 		return new ReviewEntity({
-			id, review, rating, tutorId, userId, userBio, createdAt, updatedAt
+			id, review, rating, tutorId, userId, userBio, userRoles, createdAt, updatedAt
 		})
 	}
 

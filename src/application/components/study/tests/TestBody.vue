@@ -1,6 +1,6 @@
 <template>
-	<div class="flex justify-center flex-col lg:w-8/12 w-full mx-auto bg-white md:my-8 p-8 md:p-16">
-		<ion-segment v-model="tab" class="md:w-96 mb-12 mx-auto" mode="ios">
+	<div class="flex flex-col lg:w-8/12 w-full mx-auto bg-white lg:my-8 p-4 pb-12 md:p-8 md:pb-16 lg:pb-20">
+		<ion-segment v-model="tab" class="md:w-96 mb-8 md:mb-12 mx-auto" mode="ios">
 			<ion-segment-button value="list">
 				<ion-label>All questions</ion-label>
 			</ion-segment-button>
@@ -9,11 +9,11 @@
 			</ion-segment-button>
 		</ion-segment>
 
-		<template v-if="tab === 'list'">
+		<div v-if="tab === 'list'" class="flex flex-col gap-8">
 			<TestQuestion v-for="(question, index) in questions" :key="question.hash" :answer="updateAnswer"
 				:question="question" :questionIndex="index"
-				:showBorder="index < questions.length - 1" :test="test" />
-		</template>
+				:test="test" />
+		</div>
 
 		<template v-if="tab === 'single'">
 			<TestQuestion :answer="updateAnswer" :question="questions[questionIndex]" :questionIndex="questionIndex"
@@ -51,10 +51,10 @@
 				</div>
 
 				<div>
-					<router-link v-if="test.done" :to="`/study/tests/${test.id}/results`">
+					<router-link v-if="test.done && test.isTimed" :to="`/study/tests/${test.id}/results`">
 						<ion-button class="btn-primary btn-lgx">See Results</ion-button>
 					</router-link>
-					<ion-button v-else class="btn-primary btn-lgx" @click="openSubmitTest">
+					<ion-button v-if="!test.done" class="btn-primary btn-lgx" @click="openSubmitTest">
 						{{ test.isTimed ? 'Submit' : 'End Study' }}
 					</ion-button>
 				</div>
@@ -76,6 +76,7 @@ import { getDigitalTime } from '@utils/dates'
 import { useStudyPopover } from '@app/composable/core/modals'
 import TestQuestion from '@app/components/study/tests/TestQuestion.vue'
 import { formatNumber } from '@utils/commons'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'TestBody',
@@ -87,6 +88,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
+		const router = useRouter()
 		const { error, tab, questionIndex, loading, questions, updateAnswer } = useTestDetails(props.test)
 		const canGoBack = computed(() => questionIndex.value > 0)
 		const canGoForward = computed(() => questionIndex.value < questions.value.length - 1)
@@ -100,7 +102,10 @@ export default defineComponent({
 			set: () => {
 			}
 		})
-		const openSubmitTest = useStudyPopover().openSubmitTest
+		const openSubmitTest = async () => {
+			if (props.test.isTimed) useStudyPopover().openSubmitTest()
+			else await router.push('/dashboard')
+		}
 		return {
 			error, loading, questions, openSubmitTest, updateAnswer,
 			countDown, tab, questionIndex, canGoBack, canGoForward, back, forward,

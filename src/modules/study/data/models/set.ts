@@ -1,4 +1,4 @@
-import { UserBio } from '@modules/users'
+import { UserBio, UserRoles } from '@modules/users'
 
 export interface SetFromModel extends SetToModel {
 	id: string
@@ -13,6 +13,7 @@ export interface SetFromModel extends SetToModel {
 	tags: string[]
 	userId: string
 	userBio: UserBio
+	userRoles: UserRoles
 	createdAt: number
 	updatedAt: number
 }

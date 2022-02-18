@@ -1,5 +1,6 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, UserBio } from '@modules/users'
+import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { appName } from '@utils/environment'
 
 export class FlashCardEntity extends BaseEntity {
 	public readonly id: string
@@ -9,6 +10,7 @@ export class FlashCardEntity extends BaseEntity {
 	public readonly tags: string[]
 	public readonly userId: string
 	public readonly userBio: UserBio
+	public readonly userRoles: UserRoles
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -20,6 +22,7 @@ export class FlashCardEntity extends BaseEntity {
 		             tags,
 		             userId,
 		             userBio,
+		             userRoles,
 		             createdAt,
 		             updatedAt
 	             }: FlashCardConstructorArgs) {
@@ -31,8 +34,13 @@ export class FlashCardEntity extends BaseEntity {
 		this.tags = tags
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
+		this.userRoles = generateDefaultRoles(userRoles)
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
+	}
+
+	get isUserVerified () {
+		return this.userRoles[appName].isVerified
 	}
 }
 
@@ -43,6 +51,7 @@ type FlashCardConstructorArgs = {
 	set: { question: string, answer: string }[]
 	userId: string
 	userBio: UserBio
+	userRoles: UserRoles
 	tags: string[]
 	createdAt: number
 	updatedAt: number

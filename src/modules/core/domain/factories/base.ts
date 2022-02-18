@@ -1,13 +1,14 @@
 import { Rule, Validator } from '@stranerd/validate'
 import { reactive } from 'vue'
 import { UploaderService } from '../../services/uploader'
+import { UploadedFile } from '@modules/core'
 
 export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 	errors: Record<keyof K, string>
 	abstract toModel: () => Promise<T>
 	abstract loadEntity: (entity: E) => void
 	abstract reserved: string[]
-	protected abstract readonly rules: Record<keyof K, { required: boolean, rules: Rule[] }>
+	protected abstract readonly rules: Record<keyof K, { required: boolean | (() => boolean), rules: Rule[] }>
 	protected readonly defaults: K
 	protected values: K
 	protected validValues: K
@@ -62,11 +63,11 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 			})
 	}
 
-	async uploadFile (path: string, file: File) {
+	async uploadFile (path: string, file: UploadedFile) {
 		return await UploaderService.single(path, file)
 	}
 
-	async uploadFiles (path: string, files: File[]) {
+	async uploadFiles (path: string, files: UploadedFile[]) {
 		return await UploaderService.multiple(path, files)
 	}
 }

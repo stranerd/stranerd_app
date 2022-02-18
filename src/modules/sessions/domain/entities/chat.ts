@@ -1,4 +1,4 @@
-import { BaseEntity, Media } from '@modules/core'
+import { BaseEntity, Media, parseMedia } from '@modules/core'
 
 export class ChatEntity extends BaseEntity {
 	readonly id: string
@@ -16,7 +16,7 @@ export class ChatEntity extends BaseEntity {
 		this.id = id
 		this.from = from
 		this.content = content
-		this.media = media
+		this.media = media ? parseMedia(media) : null
 		this.path = path
 		this.sessionId = sessionId
 		this.createdAt = createdAt

@@ -5,13 +5,14 @@ export class SessionTransformer {
 	fromJSON (model: SessionFromModel) {
 		const {
 			id, duration, price, message,
-			studentId, tutorId, studentBio, tutorBio,
+			studentId, tutorId, studentBio, tutorBio, studentRoles, tutorRoles,
 			accepted, done, cancelled,
 			createdAt, endedAt, startedAt, updatedAt
 		} = model
 		return new SessionEntity({
 			id, duration, price, message,
 			studentId, tutorId, studentBio, tutorBio,
+			studentRoles, tutorRoles,
 			accepted, done, cancelled,
 			createdAt, endedAt, startedAt, updatedAt
 		})

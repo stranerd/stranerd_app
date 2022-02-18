@@ -23,18 +23,22 @@ export class NotificationEntity extends BaseEntity {
 	}
 
 	get link () {
-		if (this.action === 'questions') return `/questions/${this.data.questionId}`
-		else if (this.action === 'answers') return `/questions/${this.data.questionId}#${this.data.answerId}`
-		else if (this.action === 'questionComments') return `/questions/${this.data.questionId}`
-		else if (this.action === 'answerComments') return `/questions/${this.data.questionId}#${this.data.answerId}`
-		else if (this.action === 'sessions') return `/sessions/${this.data.userId}`
-		else if (this.action === 'users') return `/users/${this.data.userId}`
-		else if (this.action === 'account') {
-			if (this.data.wallet) return '/wallet'
+		return NotificationEntity.getLink(this.action, this.data)
+	}
+
+	static getLink (action: string, data: Record<string, any>) {
+		if (action === 'questions') return `/questions/${data.questionId}`
+		else if (action === 'answers') return `/questions/${data.questionId}#${data.answerId}`
+		else if (action === 'questionComments') return `/questions/${data.questionId}`
+		else if (action === 'answerComments') return `/questions/${data.questionId}#${data.answerId}`
+		else if (action === 'sessions') return `/sessions/${data.userId}`
+		else if (action === 'users') return `/users/${data.userId}`
+		else if (action === 'account') {
+			if (data.wallet) return '/wallet'
 			else return '/account'
-		} else if (this.action === 'roles') {
-			if (this.data.user) return '/admin/users/admins'
-			if (this.data.tutor) return '/admin/users/tutors'
+		} else if (action === 'roles') {
+			if (data.user) return '/admin/users/admins'
+			if (data.tutor) return '/admin/users/tutors'
 		}
 		return '/dashboard'
 	}

@@ -149,6 +149,7 @@ ion-popover {
 		--border-radius: 0.75rem 0.75rem 0 0;
 	}
 
+
 	&.bottom {
 		align-items: flex-end;
 	}
@@ -158,6 +159,8 @@ ion-popover {
 		position: relative;
 		display: block;
 		contain: content;
+		overflow-y: auto;
+		max-height: 100vh;
 
 		.inner-content {
 			max-height: 80vh;

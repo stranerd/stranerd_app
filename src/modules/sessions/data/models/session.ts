@@ -1,11 +1,13 @@
-import { UserBio } from '@modules/users'
+import { UserBio, UserRoles } from '@modules/users'
 
 export interface SessionFromModel extends SessionToModel {
 	id: string
 	price: number
 	studentId: string
 	studentBio: UserBio
+	studentRoles: UserRoles
 	tutorBio: UserBio
+	tutorRoles: UserRoles
 	accepted: boolean | null
 	done: boolean
 	cancelled: { tutor: boolean, student: boolean }

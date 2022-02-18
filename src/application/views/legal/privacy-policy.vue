@@ -7,7 +7,7 @@
 				</ion-text>
 			</div>
 			<div class="lg:w-8/12 w-full mx-auto mt-8 p-4 mb-16 bg-white">
-				<Note :note="{ link: '/legal/privacy-policy.pdf' }" />
+				<Note link="/legal/privacy-policy.pdf" />
 			</div>
 		</div>
 	</Justified>
@@ -16,7 +16,7 @@
 <script lang="ts">
 import Justified from '@app/layouts/Justified.vue'
 import { defineComponent } from 'vue'
-import Note from '@app/components/study/notes/Note.vue'
+import Note from '@app/components/core/media/Note.vue'
 
 export default defineComponent({
 	name: 'LegalPrivacyPolicy',

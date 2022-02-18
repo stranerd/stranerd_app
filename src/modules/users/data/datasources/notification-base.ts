@@ -6,5 +6,5 @@ export interface NotificationBaseDataSource {
 	listenToMany: (user: string, query: QueryParams, listener: Listeners<NotificationFromModel>) => Promise<() => void>
 	listenToOne: (user: string, id: string, listener: Listeners<NotificationFromModel>) => Promise<() => void>
 	find: (user: string, id: string) => Promise<NotificationFromModel | null>
-	markSeen: (userId: string, id: string, seen: boolean) => Promise<boolean>
+	markSeen: (id: string, seen: boolean) => Promise<boolean>
 }

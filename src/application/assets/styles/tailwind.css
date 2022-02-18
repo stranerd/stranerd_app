@@ -35,7 +35,7 @@
 	}
 
 	.layout-body {
-		@apply lg:w-3/4 w-full h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] bg-new_gray
+		@apply lg:w-3/4 w-full min-h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] bg-new_gray
 	}
 
 	.layout-side-left {

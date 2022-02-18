@@ -47,7 +47,8 @@
 				<IonIcon :icon="search" class="text-xl ml-4" @click="$router.push('/search')" />
 			</div>
 		</ion-toolbar>
-		<div v-if="show" class="grow-1 lg:hidden px-2 flex flex-col text-center mt-8 gap-6 bg-white text-main_dark">
+		<div v-if="show"
+			class="grow-1 lg:hidden px-2 flex flex-col text-center mt-8 gap-6 bg-white text-main_dark items-center">
 			<router-link class="smallScreenLink link-custom-sm" to="/">
 				Home
 			</router-link>
