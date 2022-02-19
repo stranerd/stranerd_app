@@ -1313,12 +1313,12 @@
     tar "^6.0.1"
     tslib "^2.0.1"
 
-"@ionic/core@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-6.0.0.tgz#9c95513fc7fff79a0113f540da754b4a16910f99"
-  integrity sha512-3e5EJhDebK4pCiFREpNB95o2kBSAdhRb3eMsBDOCYWYuFlcZEOGOpiGx+kYF/klYVQnB45UXAmR8nCX1indmHQ==
+"@ionic/core@6.0.9-dev.1645109128.222168b":
+  version "6.0.9-dev.1645109128.222168b"
+  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-6.0.9-dev.1645109128.222168b.tgz#e17aa366c1f9d84c3ddc3861fa342016361f5057"
+  integrity sha512-8PvPX38yjc1x64F3pU4UgVxSMGvYPOMGtVKIsk0LXWEEpy9z2SRFu/otSpk7gY1Uie6TW+CKWxQODMnFOMRWKw==
   dependencies:
-    "@stencil/core" "~2.11.0-0"
+    "@stencil/core" "~2.13.0"
     ionicons "^6.0.0"
     tslib "^2.1.0"
 
@@ -1419,17 +1419,19 @@
     untildify "^4.0.0"
     wrap-ansi "^7.0.0"
 
-"@ionic/vue-router@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@ionic/vue-router/-/vue-router-6.0.0.tgz#3fb59607c583645b441edec816b81c47047fa178"
-  integrity sha512-VtnJz1jAXlEzaXLJVtsZTifpTIR81msYAZJsAt1nkTTaAK0tJ6sITzfAs2a5lSM18l4TX2EEYXOcv3eihDoYvg==
-
-"@ionic/vue@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@ionic/vue/-/vue-6.0.0.tgz#a7f4b83f39be5b9bca7a75fe47fbdc79a83aba69"
-  integrity sha512-xgSRnSaZReUcMt9SCopDI3y7QICKWbL09lcVOH+Mm7F374ZhS7uMyYyt62MCI2R98Ca95KTI2AA6hDm3YBCIRA==
+"@ionic/vue-router@6.0.9-dev.1645109128.222168b":
+  version "6.0.9-dev.1645109128.222168b"
+  resolved "https://registry.yarnpkg.com/@ionic/vue-router/-/vue-router-6.0.9-dev.1645109128.222168b.tgz#ded958cb5ee05e86123792e2c24007953db35010"
+  integrity sha512-JMziZnnumi2H0csYjRy9phTpdvDr8bjaywuPZBiYt6YdGAI+H3QYWSSyFGATK+LOrDFoiqrkrrETHHTnpNTNPQ==
   dependencies:
-    "@ionic/core" "6.0.0"
+    "@ionic/vue" "6.0.9-dev.1645109128.222168b"
+
+"@ionic/vue@6.0.9-dev.1645109128.222168b":
+  version "6.0.9-dev.1645109128.222168b"
+  resolved "https://registry.yarnpkg.com/@ionic/vue/-/vue-6.0.9-dev.1645109128.222168b.tgz#b41c8d61c6a94d77c236335198f026ccc9e676c4"
+  integrity sha512-al741LbBQbq4LCiwX1wxScKiYJYY06wCUm4pIgWOiXFVKK6TSiKRSJHvqx+g6b3/Ljrv3U1JMNqcWatKAuZBaA==
+  dependencies:
+    "@ionic/core" "6.0.9-dev.1645109128.222168b"
     ionicons "^6.0.0"
 
 "@jridgewell/resolve-uri@^3.0.3":
@@ -1504,15 +1506,15 @@
   resolved "https://registry.yarnpkg.com/@soda/get-current-script/-/get-current-script-1.0.2.tgz#a53515db25d8038374381b73af20bb4f2e508d87"
   integrity sha512-T7VNNlYVM1SgQ+VsMYhnDkcGmWhQdL0bDyGm5TlQ3GBXnJscEClUUOKduWTmm2zCnvNLC1hc3JpuXjs/nFOc5w==
 
-"@stencil/core@~2.11.0-0":
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.11.0.tgz#8accc2791e2c34cce2d2aa8b40864dd40be4e10c"
-  integrity sha512-/IubCWhVXCguyMUp/3zGrg3c882+RJNg/zpiKfyfJL3kRCOwe+/MD8OoAXVGdd+xAohZKIi1Ik+EHFlsptsjLg==
-
 "@stencil/core@~2.12.0":
   version "2.12.1"
   resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.12.1.tgz#92364d3e57337b8d36dd9b70cfbed2833929f22d"
   integrity sha512-u24TZ+FEvjnZt5ZgIkLjLpUNsO6Ml3mUZqwmqk81w6RWWz75hgB5p4RFI5rvuErFeh2xvMIGo+pNdG24XUBz1A==
+
+"@stencil/core@~2.13.0":
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.13.0.tgz#993fd74a5c7c8fe8af75848ca9df2211cd05b818"
+  integrity sha512-EEKHOHgYpg3/iFUKMXTZJjUayRul7sXDwNw0OGgkEOe4t7JWiibDkzUHuruvpbqEydX+z1+ez5K2bMMY76c2wA==
 
 "@stranerd/validate@^2.0.0":
   version "2.0.0"
@@ -1675,13 +1677,6 @@
   integrity sha512-O3MmRAk6ZuAKa9CHgg0Pr0+lUOqoMLpc9AS4R8ano2auvsg7IE8syF3Xh/NPr26TWklxYcqoEEFdzLLs1fV9PQ==
   dependencies:
     source-map "^0.6.1"
-
-"@types/vue2-editor@^2.6.1":
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/@types/vue2-editor/-/vue2-editor-2.6.1.tgz#b05617454924fb35ab6bdc69b5d507a2532b6439"
-  integrity sha512-jp3njY3U3z/ue6bNRH1nGZjne0K3PSnOwwunqAnjPHm/MLkdfxiQqlo1AnWfA/nQ9F++rIcGX3ZDYGFZrZzlLw==
-  dependencies:
-    vue "^2.0.0"
 
 "@types/webpack-dev-server@^3.11.0":
   version "3.11.6"
@@ -10904,11 +10899,6 @@ vue3-editor@^0.1.0-alpha.3:
   dependencies:
     core-js "^3.6.5"
     quill "^1.3.7"
-
-vue@^2.0.0:
-  version "2.6.14"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
-  integrity sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==
 
 vue@^3.2.30:
   version "3.2.30"
