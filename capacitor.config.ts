@@ -1,4 +1,4 @@
-import { google_client_ids } from './env.json'
+const { google_client_ids } = require('./env.json')
 
 export default {
 	appId: 'com.stranerd.app',
