@@ -17,7 +17,7 @@ const iosClientId = google_client_ids.ios
 const reversedIosClientId = iosClientId.split('.').reverse().join('.')
 let replaced = ''
 
-if (environment === 'reset') {
+if (type === 'reset') {
 	if (fs.existsSync(ANDROID_SOURCE)) fs.unlinkSync(ANDROID_SOURCE)
 	if (fs.existsSync(IOS_SOURCE)) fs.unlinkSync(IOS_SOURCE)
 	replaced = content.replaceAll(reversedIosClientId, placeholder)
