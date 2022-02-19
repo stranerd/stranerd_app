@@ -9,7 +9,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue'
 import { VideoEntity } from '@modules/study'
-import YouTube from 'vue3-youtube'
+import YouTube from './YouTube.vue'
 
 export default defineComponent({
 	name: 'Video',
