@@ -56,7 +56,6 @@
 		"vue": "^3.2.30",
 		"vue-router": "^4.0.12",
 		"vue3-editor": "^0.1.0-alpha.3",
-		"vue3-youtube": "^0.1.9",
 		"youtube-video-exists": "^0.1.2"
 	},
 	"devDependencies": {

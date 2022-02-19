@@ -10,7 +10,7 @@
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"sourceMap": true,
-		"allowJs":true,
+		"allowJs": true,
 		"baseUrl": ".",
 		"types": [
 			"webpack-env",
@@ -40,9 +40,6 @@
 	"include": [
 		"src"
 	],
-	  "files": [
-      "./src/types/vue3-pdfjs.d.ts"
-  ],
 	"exclude": [
 		"node_modules",
 		"build",
