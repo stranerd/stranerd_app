@@ -107,11 +107,11 @@ export default defineComponent({
 		--background: #F2F3F5 !important;
 		--padding-start: 1.8rem !important;
 		--padding-end: 1.5rem !important;
-		--padding-top: .69rem !important;
-		--padding-bottom: .69rem !important;
+		--padding-top: .75rem !important;
+		--padding-bottom: .75rem !important;
 		--color: $color-mainDark !important;
 		--placeholder-color: $color-mainDark !important;
-		border-radius: 10px;
+		border-radius: 12px;
 	}
 
 	.filter {

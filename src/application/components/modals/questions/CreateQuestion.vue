@@ -1,7 +1,7 @@
 <template>
 	<Modal>
 		<template v-slot:title>
-			Ask a question and get expert answers
+			Ask a question
 		</template>
 		<QuestionForm
 			:error="error"
@@ -10,7 +10,7 @@
 			:submit="createQuestion"
 		>
 			<template v-slot:buttonText>
-				Post Question
+				Send
 			</template>
 		</QuestionForm>
 	</Modal>
