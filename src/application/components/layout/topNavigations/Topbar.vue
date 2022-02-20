@@ -1,6 +1,6 @@
 <template>
-	<ion-header class="block ion-no-border z-40 inset-x-0 w-full top-0 lg:shadow-md">
-		<ion-toolbar class="lg:hidden bg-white px-2 border-0 h-12 md:h-auto flex items-center justify-center">
+	<ion-header class="block ion-no-border z-40 inset-x-0 w-full lg:shadow-md">
+		<ion-toolbar class="lg:hidden bg-white px-2 border-0 md:h-auto flex items-center justify-center">
 			<div class="flex items-center justify-between">
 				<Avatar v-if="isLoggedIn" :size="24" :src="user?.avatar"
 					@click="openUserDashboardMenu" />
