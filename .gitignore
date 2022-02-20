@@ -40,3 +40,4 @@ sw.*
 *env.json
 
 capacitor.config.json
+public/.well-known/assetlinks.json

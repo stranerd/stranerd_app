@@ -1,4 +1,4 @@
-package com.stranerd.app;
+package com.stranerd.app.dev;
 
 import com.getcapacitor.BridgeActivity;
 
