@@ -25,7 +25,7 @@
 			<div class="flex items-center">
 				<ion-segment v-model="answered" class="w-[92vw] lg:w-auto bg-new_gray" mode="ios">
 					<ion-segment-button v-for="choice in answeredChoices" :key="choice.key" :value="choice.val"
-						class="!px-3" @click="answered = choice.val">
+						class="!px-3 ion-segment-button" @click="answered = choice.val">
 						<ion-label>{{ choice.key }}</ion-label>
 					</ion-segment-button>
 				</ion-segment>

@@ -343,21 +343,40 @@ ion-segment {
 	font-weight: bold;
 }
 
-ion-segment-button {
+.ion-segment-button {
 	--background-checked: $color-darkGray;
 	--background-focused: $color-darkGray;
 	--indicator-color: $color-darkGray;
 	--indicator-box-shadow: none;
-	--padding-top: 0.8rem;
-	--padding-bottom: 0.8rem;
+	--padding-top: 0.5rem;
+	--padding-bottom: 0.5rem;
 	color: $color-mainDark;
 	font-weight: bold;
-
+  
 	@media (max-width: 640px) {
 		--padding-top: 0.5rem;
 		--padding-bottom: 0.5rem;
 	}
 }
+
+.isb{
+	--background: #fff !important;
+	--background-checked: #fff !important;
+	--border-color: #546DD3 !important;
+	--border-width: 3px !important;
+	--border-style: solid !important;
+	--background-checked: white !important;
+	--background-focused: white !important;
+	--indicator-color: white !important;
+		--indicator-box-shadow: none;
+	--padding-start: 0rem;
+	--padding-end: 0rem;
+	--padding-top: 0.6rem;
+	--padding-bottom: 0.6rem;
+	color: $color-mainDark;
+	font-weight: bold;
+}
+
 
 .segment-button-checked {
 	color: $color-white !important;

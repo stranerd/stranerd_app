@@ -1,5 +1,14 @@
 <template>
 	<classWrapper>
+		<ion-segment  class="w-full mb-8 md:mb-12 bg-white" mode="ios">
+			<ion-segment-button value="list" class="isb">
+				<ion-label>Info</ion-label>
+			</ion-segment-button>
+			<ion-segment-button value="single" class="isb">
+				<ion-label>Announcement</ion-label>
+			</ion-segment-button>
+		</ion-segment>
+				
 		<div class="bg-white p-6 rounded-xl mt-4" v-for="n in 3" :key="n">
 			<div class="flex items-center mb-4">
 				<Avatar  :size="48" src="#" />
@@ -23,11 +32,24 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { IonSegment, IonSegmentButton, IonLabel } from '@ionic/vue'
 import classWrapper from '@app/components/classes/ClassWrapper.vue'
 
 export default defineComponent({
 	name: 'classInfo',
 	displayName: 'Classes',
-	components: { classWrapper }
+	components: { classWrapper, IonSegment, IonSegmentButton, IonLabel }
 })
 </script>
+
+
+<style 	scoped>
+ion-segement{
+	--background: #fff !important;
+}
+
+	
+.segment-button-checked {
+	@apply !text-primary
+}
+</style>
