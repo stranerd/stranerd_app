@@ -1,7 +1,7 @@
 const { CapacitorProject } = require('@capacitor/project')
 const fs = require('fs')
 const envs = require('../env.json')
-const { asset_links, google_client_ids, package_name, app_name, environment } = envs
+const { asset_links, google_client_ids, package_name, app_name, environment, domain } = envs
 
 const getProject = async () => {
 	const project = new CapacitorProject({
@@ -15,7 +15,8 @@ const getProject = async () => {
 const setup = async () => {
 	const folder = './public/.well-known'
 	if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true })
-	fs.writeFileSync(`${folder}/assetlinks.json`, JSON.stringify(asset_links, null, 4))
+	fs.writeFileSync(`${folder}/assetlinks.json`, JSON.stringify(asset_links.android ?? {}, null, 4))
+	fs.writeFileSync(`${folder}/apple-app-site-association`, JSON.stringify(asset_links.ios ?? {}, null, 4))
 
 	const reversedIosClientId = google_client_ids.ios.split('.').reverse().join('.')
 
@@ -32,6 +33,10 @@ const setup = async () => {
 			await project.ios.setVersion(target.name, build.name, versionName)
 			await project.ios.setBuild(target.name, build.name, versionCode)
 			await project.ios.setBuildProperty(target.name, build.name, 'GOOGLE_CLIENT_ID', reversedIosClientId)
+			await project.ios.setBuildProperty(target.name, build.name, 'DOMAIN', domain)
+			await project.ios.addEntitlements(target.name, build.name, {
+				'com.apple.developer.associated-domains': [`applinks:${domain}`]
+			})
 		}))
 	}))
 

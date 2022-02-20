@@ -28,7 +28,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>$(GOOGLE_CLIENT_ID)</string>
-				<string>stranerd.com</string>
+				<string>${DOMAIN}</string>
 			</array>
 		</dict>
 	</array>
