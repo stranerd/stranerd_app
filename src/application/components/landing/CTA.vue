@@ -12,9 +12,9 @@
 				<ion-text class=" text-xs md:text-lg w-[15rem] lg:w-full lg:text-2xl text-white ">
 					With Test preps, Flashcards, Notes and Expert Answers.
 				</ion-text>
-				<router-link class="w-full h-auto mx-auto lg:m-0" to="/dashboard">
+				<router-link class="h-auto mx-auto lg:m-0" to="/dashboard">
 					<ion-button
-						class="btn-outline btn-outline-sm text-white lg:w-[22.5rem] w-[11.25rem] lg:h-[6rem] h-12 mx-auto lg:m-0 lg:text-2xl text-sm md:text-lg block">
+						class="btn-outline btn-outline-sm text-white mx-auto lg:m-0 lg:text-2xl text-sm md:text-lg block">
 						Get Started Now
 					</ion-button>
 				</router-link>
@@ -51,13 +51,8 @@
 
 <style lang="scss" scoped>
 	ion-button {
-		--padding-top: 2.125rem !important;
-		--padding-bottom: 2.125rem !important;
+		--padding-top: 1.5rem !important;
+		--padding-bottom: 1.5rem !important;
 		--border-width: 2px !important;
-
-		@media screen and (max-width: 680px) {
-			--padding-top: 1.8rem !important;
-			--padding-bottom: 1.8rem !important;
-		}
 	}
 </style>

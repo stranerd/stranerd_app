@@ -34,10 +34,9 @@
 		<ion-toolbar
 			:class="{'text-white': show}"
 			:style="`--background:${show ? '#546DD3' : 'white'}`"
-			class="lg:hidden bg-white px-4 border-0 h-12 flex items-center justify-center"
+			class="lg:hidden bg-white px-4 border-0 flex items-center justify-center"
 		>
 			<div class="flex items-center justify-between">
-
 				<span class="cursor-pointer" @click="toggleMenu">
 					<ion-icon :icon="show ? close : menu" size="100px" />
 				</span>
