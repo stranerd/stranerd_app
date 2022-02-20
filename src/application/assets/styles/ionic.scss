@@ -112,11 +112,6 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-light-tint: #f5f6f9;
 }
 
-ion-app {
-	margin-top: env(safe-area-inset-top);
-	margin-bottom: env(safe-area-inset-bottom);
-}
-
 .ion-color-pink {
 	--ion-color-base: var(--ion-color-pink);
 	--ion-color-base-rgb: var(--ion-color-pink-rgb);
