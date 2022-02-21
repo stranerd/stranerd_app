@@ -21,8 +21,8 @@ const setup = async () => {
 	const reversedIosClientId = google_client_ids.ios.split('.').reverse().join('.')
 
 	const project = await getProject()
-	
-	const versionCode = 0
+
+	const versionCode = 1
 	const versionName = '0.0.0'
 
 	const targets = project.ios.getTargets()
@@ -64,7 +64,7 @@ const version = async () => {
 	if (!versionName) return console.log('Provide a version please')
 
 	const project = await getProject()
-	
+
 	const targets = project.ios.getTargets()
 	await Promise.all(targets.map(async (target) => {
 		await Promise.all(target.buildConfigurations.map(async (build) => {
