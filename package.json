@@ -7,7 +7,7 @@
 		"serve": "vue-cli-service serve",
 		"preserve": "yarn bin:project:env",
 		"build": "vue-cli-service build",
-		"prebuild": "yarn bin:project:setup && yarn bin:project:env && rm -rf android/app/build",
+		"prebuild": "yarn bin:project:env && rm -rf android/app/build",
 		"postbuild": "yarn ionic cap sync",
 		"lint": "vue-cli-service lint",
 		"prepare": "husky install",

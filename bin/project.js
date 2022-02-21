@@ -52,6 +52,9 @@ const setup = async () => {
 	const ANDROID_CONFIG = `./bin/config/${environment}/google-services.json`
 	const IOS_CONFIG = `./bin/config/${environment}/GoogleService-Info.plist`
 
+	const args = process.argv.slice(3)
+	if (args.includes('--skip-apps')) return
+
 	if (fs.existsSync(ANDROID_CONFIG)) fs.createReadStream(ANDROID_CONFIG).pipe(fs.createWriteStream(ANDROID_SOURCE))
 	else return console.log('Provide a google-services.json file for your current environment')
 	if (fs.existsSync(IOS_CONFIG)) fs.createReadStream(IOS_CONFIG).pipe(fs.createWriteStream(IOS_SOURCE))
