@@ -1,20 +1,20 @@
 <template>
 	<form @submit.prevent="submit">
-		<SelectSubject v-model:subjectId="factory.subjectId" :show-all="false" class="w-full bg-new_gray"  />
+		<SelectSubject v-model:subjectId="factory.subjectId" :show-all="false" class="w-full bg-new_gray" />
 		<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
 			class="lg:mt-3 px-1"
 			placeholder="Write your question here." />
 
 		<!-- <div class="flex items-center mt-5 gap-5 flex-col lg:flex-row">
 			<div class="flex items-center gap-5 w-full">
-		
+
 				<IonInput v-model="tag" class="w-1/4 font-medium bg-new_gray text-main_dark px-3"
 					placeholder="Add related tags">
 				</IonInput>
 			</div>
-		
+
 		</div> -->
-		<!-- 
+		<!--
 		<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
 			<span v-for="tag in factory.tags" :key="tag">
 				<span
@@ -37,12 +37,11 @@
 		<DisplayError :error="factory.errors.attachments" />
 
 		<div class="flex w-full lg:mt-8 mt-5 items-center gap-6">
-	
 			<FileInput
 				:multiple="true"
 				accept="image/x-png,image/jpeg,image/jpg"
-				@files="catchAttachments"
 				class="w-1/2"
+				@files="catchAttachments"
 			>
 				<ion-button class=" btn-secondary w-full">
 					<ion-icon :icon="image" class="!text-2xl text-gray mr-4" />
@@ -61,12 +60,11 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { IonIcon, IonInput } from '@ionic/vue'
+import { IonIcon } from '@ionic/vue'
 import { close, image } from 'ionicons/icons'
 import { useFileInputCallback, useTags } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
-import { useQuestionModal } from '@app/composable/core/modals'
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 
 export default defineComponent({
@@ -95,10 +93,6 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const closeModal = () => {
-			useQuestionModal().closeAll()
-		}
-
 		const { tag, removeTag } = useTags(
 			(tag: string) => props.factory.addTag(tag),
 			(tag: string) => props.factory.removeTag(tag)
@@ -108,10 +102,7 @@ export default defineComponent({
 			files.map(props.factory.addAttachment)
 		})
 
-		return {
-			image, close, closeModal,
-			tag, removeTag, catchAttachments
-		}
+		return { image, close, tag, removeTag, catchAttachments }
 	}
 })
 </script>
