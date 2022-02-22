@@ -8,7 +8,7 @@ type ClassConstructorArgs = {
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
-	users: { admins: string[], members: string[], requests:string[] }[]
+	users: { admins: string[], members: string[], requests: string[] }[]
 	createdAt: number
 	updatedAt: number
 }
@@ -19,7 +19,7 @@ export class ClassEntity extends BaseEntity {
 	public readonly userId: string
 	public readonly userBio: UserBio
 	public readonly userRoles: UserRoles
-	public readonly users:{ admins: string[], members: string[], requests:string[] }[]
+	public readonly users: { admins: string[], members: string[], requests: string[] }[]
 	public readonly createdAt: number
 	public readonly updatedAt: number
 

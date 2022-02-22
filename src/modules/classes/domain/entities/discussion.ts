@@ -20,7 +20,7 @@ export class DiscussionEntity extends BaseEntity {
 		this.content = content
 		this.media = media ? parseMedia(media) : null
 		this.path = path
-        this.groupId = groupId
+		this.groupId = groupId
         		this.userBio = generateDefaultBio(userBio)
 		this.userRoles = generateDefaultRoles(userRoles)
 		this.createdAt = createdAt
