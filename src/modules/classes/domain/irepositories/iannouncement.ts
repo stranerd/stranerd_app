@@ -10,5 +10,4 @@ export interface IClassRepository {
 	find: (id: string) => Promise<AnnouncementEntity | null>
 	update: (id: string, data: AnnouncementFromModel) => Promise<void>
 	delete: (id: string) => Promise<void>
-	vote: (id: string, userId: string, vote: boolean) => Promise<void>
 }
