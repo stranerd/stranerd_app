@@ -6,7 +6,7 @@ import { DiscussionEntity } from '../entities/discussion'
 type Content = Media | UploadedFile | null
 type Keys = { content: string | null, to: string, groupId: string | null, media: Content | null }
 
-export class DIscussionFactory extends BaseFactory<DiscussionEntity, DiscussionToModel, Keys> {
+export class DiscussionFactory extends BaseFactory<DiscussionEntity, DiscussionToModel, Keys> {
 	readonly rules = {
 		content: { required: () => !this.media, rules: [isString, isLongerThanX(0)] },
 		to: { required: true, rules: [isString, isLongerThanX(0)] },
