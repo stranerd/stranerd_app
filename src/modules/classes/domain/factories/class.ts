@@ -16,36 +16,36 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 	readonly rules = {
 		name: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 	
-    }
+	}
     
     reserved = []
 
-	constructor () {
-		super({ name: '', })
-	}
+    constructor () {
+    	super({ name: '', })
+    }
 
-	get name () {
-		return this.values.name
-	}
+    get name () {
+    	return this.values.name
+    }
 
-	set name (value: string) {
-		this.set('name', value)
-	}
+    set name (value: string) {
+    	this.set('name', value)
+    }
 
 	loadEntity = (entity: ClassEntity) => {
 		this.name = entity.name
 	
-    }
+	}
     
     	toModel = async () => {
-		if (this.valid) {
+    		if (this.valid) {
 	
-			const { name } = this.validValues
-			return {name }
-		} else {
-			throw new Error('Validation errors')
-		}
-	}
+    			const { name } = this.validValues
+    			return {name }
+    		} else {
+    			throw new Error('Validation errors')
+    		}
+    	}
 
 
 }
