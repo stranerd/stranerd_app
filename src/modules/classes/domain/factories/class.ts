@@ -4,7 +4,7 @@ import {
 
 	isString
 } from '@stranerd/validate'
-import { BaseFactory, Media, UploadedFile } from '@modules/core'
+import { BaseFactory, } from '@modules/core'
 import { ClassEntity } from '../entities/class'
 import { ClassToModel } from '../../data/models/class'
 

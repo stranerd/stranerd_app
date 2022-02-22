@@ -1,17 +1,18 @@
 import { Media } from '@modules/core'
+import { UserBio, UserRoles } from '@modules/users'
+
 
 export interface DiscussionFromModel extends DiscussionToModel {
 	id: string
-	from: string
-	path: [string, string]
-	readAt: number | null,
 	createdAt: number
 	updatedAt: number
+	userId: string
+    userBio: UserBio
+    userRoles: UserRoles
 }
-
 export interface DiscussionToModel {
 	content: string | null
 	media: Media | null
-	groupId: string | null
+	groupId: string 
 	to: string
 }

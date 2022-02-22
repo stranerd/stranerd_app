@@ -8,7 +8,7 @@ export interface ClassFromModel extends ClassToModel {
 	userId: string
     userBio: UserBio
     userRoles: UserRoles
-    users: { admins: string[], members: string[], requests: string[] }[]
+    users: { admins: string[], members: string[], requests: string[] }
 	
 
 }
