@@ -1,6 +1,5 @@
-import { UserBio, UserRoles } from '@modules/users'
 
-export interface AnnouncementFromModel extends AnnouncementToModel {
+export interface GroupFromModel extends GroupToModel {
 	id: string
 	classId: string
 	createdAt: number
@@ -9,6 +8,6 @@ export interface AnnouncementFromModel extends AnnouncementToModel {
 
 }
 
-export interface AnnouncementToModel {
+export interface GroupToModel {
 	name: string
 }

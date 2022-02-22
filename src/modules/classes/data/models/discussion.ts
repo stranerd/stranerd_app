@@ -1,7 +1,7 @@
 import { UserBio, UserRoles } from '@modules/users'
 import { Media } from '@modules/core'
 
-export interface AnnouncementFromModel extends AnnouncementToModel {
+export interface DiscussionFromModel extends DiscussionToModel {
 	id: string,
 	from: string,
 	path: [string, string],
@@ -17,6 +17,6 @@ export interface AnnouncementFromModel extends AnnouncementToModel {
 
 }
 
-export interface AnnouncementToModel {
+export interface DiscussionToModel {
 	name: string
 }
