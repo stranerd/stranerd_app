@@ -2,7 +2,6 @@ import { UserBio, UserRoles } from '@modules/users'
 
 export interface AnnouncementFromModel extends AnnouncementToModel {
 	id: string
-	body: string
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
@@ -13,5 +12,5 @@ export interface AnnouncementFromModel extends AnnouncementToModel {
 }
 
 export interface AnnouncementToModel {
-	name: string
+	body: string
 }
