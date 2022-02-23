@@ -15,6 +15,9 @@ export class ListenToDiscussionUseCase {
 			all: true
 		}
 
-		return await this.repository.listenToOne(path,  listener)
+		return await this.repository.listenToMany(conditions, listener, (entity) => {
+			if (date) return entity.createdAt >= date
+			return true
+		})
 	}
 }

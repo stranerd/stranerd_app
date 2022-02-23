@@ -10,14 +10,10 @@ export class ListenToAnnouncementUseCase {
 	}
 
 	async call (path: string, listener: Listeners<AnnouncementEntity>, date?: number) {
-		const conditions: QueryParams = {
+	const conditions: QueryParams = {
 			sort: { field: 'createdAt', order: 1 },
 			all: true
 		}
-
-		return await this.repository.listenToMany(conditions, listener, (entity) => {
-			if (date) return entity.createdAt >= date
-			return true
-		})
+		return await this.repository.listenToOne(path,  listener)
 	}
 }
