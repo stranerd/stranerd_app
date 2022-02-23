@@ -11,7 +11,7 @@ export class ListenToGroupUseCase {
 	}
 
 	async call (path: string, listener: Listeners<GroupEntity>, date?: number) {
-			const conditions: QueryParams = {
+		const conditions: QueryParams = {
 			sort: { field: 'createdAt', order: 1 },
 			all: true
 		}

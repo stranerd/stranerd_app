@@ -1,4 +1,4 @@
- import { IGroupRepository } from '../../irepositories/igroup'
+import { IGroupRepository } from '../../irepositories/igroup'
 import { GroupFactory } from '../../factories/group'
 
 export class EditGroupUseCase {
