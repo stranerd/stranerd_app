@@ -1,7 +1,7 @@
- import { IDiscussionRepository } from '../../irepositories/idiscussion'
+import { IDiscussionRepository } from '../../irepositories/idiscussion'
 import { DiscussionFactory } from '../../factories/discussion'
 
-export class EditQuestionUseCase {
+export class EditDiscussionUseCase {
 	private repository: IDiscussionRepository
 
 	constructor (repository: IDiscussionRepository) {

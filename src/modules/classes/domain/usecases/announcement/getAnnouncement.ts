@@ -1,11 +1,11 @@
 import { Conditions, QueryParams } from '@modules/core'
 import { CHAT_PAGINATION_LIMIT } from '@utils/constants'
-import { IDiscussionRepository } from '../../irepositories/idiscussion'
+import { IAnnouncementRepository } from '../../irepositories/iannouncement'
 
-export class GetDiscussionUseCase {
-	private repository: IDiscussionRepository
+export class GetAnnouncementUseCase {
+	private repository: IAnnouncementRepository
 
-	constructor (repository: IDiscussionRepository) {
+	constructor (repository: IAnnouncementRepository) {
 		this.repository = repository
 	}
 

@@ -2,7 +2,7 @@ import {  Listeners, QueryParams } from '@modules/core'
 import { DiscussionEntity } from '../../entities/discussion'
 import { IDiscussionRepository } from '../../irepositories/idiscussion'
 
-export class ListenToChatsUseCase {
+export class ListenToDiscussionUseCase {
 	private repository: IDiscussionRepository
 
 	constructor (repository: IDiscussionRepository) {

@@ -1,6 +1,6 @@
 import { IDiscussionRepository } from '../../irepositories/idiscussion'
 
-export class DeleteQuestionUseCase {
+export class DeleteDiscussionUseCase {
 	private repository: IDiscussionRepository
 
 	constructor (repository: IDiscussionRepository) {
