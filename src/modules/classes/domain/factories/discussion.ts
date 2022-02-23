@@ -4,7 +4,7 @@ import { DiscussionToModel } from '../../data/models/discussion'
 import { DiscussionEntity } from '../entities/discussion'
 
 type Content = Media | UploadedFile | null
-type Keys = { content: string | null, to: string, groupId: string | null, media: Content | null }
+type Keys = { content: string | null, to: string, groupId: string, media: Content | null }
 
 export class DiscussionFactory extends BaseFactory<DiscussionEntity, DiscussionToModel, Keys> {
 	readonly rules = {
@@ -14,10 +14,10 @@ export class DiscussionFactory extends BaseFactory<DiscussionEntity, DiscussionT
 		media: { required: () => !this.content, rules: [isFile] }
 	}
 
-	reserved = ['to']
+	reserved = []
 
 	constructor () {
-		super({ content: null, to: '', media: null, groupId: null })
+		super({ content: null, to: '', media: null, groupId: '' })
 	}
 
 	get content () {
@@ -69,7 +69,6 @@ export class DiscussionFactory extends BaseFactory<DiscussionEntity, DiscussionT
 	loadEntity = (entity: DiscussionEntity) => {
 		this.content = entity.content
 		this.media = entity.media
-		this.to = entity.to
 		this.groupId = entity.groupId
 	}
 }
