@@ -14,5 +14,4 @@ export interface DiscussionToModel {
 	content: string | null
 	media: Media | null
 	groupId: string 
-	to: string
 }
