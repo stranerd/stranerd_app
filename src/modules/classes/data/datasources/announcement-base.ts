@@ -1,7 +1,7 @@
 import { Listeners, QueryParams, QueryResults } from '@modules/core'
 import { AnnouncementFromModel, AnnouncementToModel } from '../models/announcement'
 
-export interface AnswerBaseDataSource {
+export interface AnnouncementBaseDataSource {
 	create: (data: AnnouncementToModel) => Promise<string>
 	get: (query: QueryParams) => Promise<QueryResults<AnnouncementFromModel>>
 	listenToOne: (id: string, listener: Listeners<AnnouncementFromModel>) => Promise<() => void>
