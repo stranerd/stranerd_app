@@ -11,3 +11,4 @@ export interface AnnouncementBaseDataSource {
 	delete: (id: string) => Promise<void>
 	vote: (id: string, userId: string, vote: boolean) => Promise<void>
 }
+
