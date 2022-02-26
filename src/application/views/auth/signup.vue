@@ -23,7 +23,7 @@
 						</div>
 						<div>
 							<ion-input v-model="factory.email" :size="24" placeholder="Email Address"
-								position="floating" type="text" />
+								position="floating" inputmode="email" />
 							<DisplayError :error="factory.errors.email" />
 						</div>
 						<div>

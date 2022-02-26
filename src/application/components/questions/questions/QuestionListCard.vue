@@ -24,7 +24,7 @@
 
 		<DisplayHtml :html="question.trimmedBody" class="py-2 pb-1 text-main_dark leading-normal" />
 
-		<div class="w-full flex flex-col lg:flex-row lg:justify-between w-full">
+		<div class="w-full flex flex-col lg:flex-row lg:justify-between">
 			<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">
 				<QuestionTag v-for="(tag, index) in question.tags" :key="index" :index="index" :tag="tag" />
 			</div>
@@ -79,7 +79,7 @@ export default defineComponent({
 		})
 		return {
 			showAnswerButton,
-			openAnswerModal: () => openAnswerModal(props.question),
+			openAnswerModal,
 			openReportQuestionModal: () => useReportModal().openReportQuestion(),
 			arrowRedo, flag, image, checkmarkCircle,
 			formatTime, pluralize

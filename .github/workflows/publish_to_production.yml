@@ -21,6 +21,8 @@ jobs:
           args: "secrets versions access latest --secret=Stranerd_Environment_Variables > env.json"
       - name: Install Dependencies
         run: yarn
+      - name: Setup Project
+        run: yarn bin:project:setup --skip-apps
       - name: Build App
         run: yarn build
       - name: Deploy to GAE

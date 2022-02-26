@@ -1,14 +1,13 @@
-const { google_client_id } = require('./env.json')
+const { google_client_ids } = require('./env.json')
 
 export default {
 	appId: 'com.stranerd.app',
-	appName: 'stranerd',
+	appName: 'Stranerd',
 	webDir: 'dist',
 	bundledWebRuntime: false,
 	npmClient: 'yarn',
 	plugins: {
 		SplashScreen: {
-			launchShowDuration: 0,
 			launchAutoHide: false,
 			backgroundColor: '#ffffffff',
 			androidSplashResourceName: 'splash',
@@ -24,8 +23,9 @@ export default {
 		},
 		GoogleAuth: {
 			scopes: ['profile', 'email'],
-			serverClientId: google_client_id,
-			clientId: google_client_id,
+			serverClientId: google_client_ids.web,
+			androidClientId: google_client_ids.android,
+			iosClientId: google_client_ids.ios,
 			forceCodeForRefreshToken: true
 		},
 		PushNotifications: {

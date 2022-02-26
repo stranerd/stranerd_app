@@ -34,7 +34,7 @@ const init = async () => {
 
 	App.addListener('appUrlOpen', async (event) => {
 		const path = event.url.split(domain).pop()
-		if (path) await router.push(path)
+		await router.push(path ?? '/dashboard')
 	})
 
 	await defineCustomElements(window)
