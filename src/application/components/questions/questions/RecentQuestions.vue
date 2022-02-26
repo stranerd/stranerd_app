@@ -36,7 +36,7 @@ export default defineComponent({
 	setup () {
 		const { questions: allQuestions, loading, error } = useQuestionList()
 		const questions = computed({
-			get: () => allQuestions.value.slice(0, 3),
+			get: () => allQuestions.value.slice(0, 6),
 			set: () => {
 			}
 		})
