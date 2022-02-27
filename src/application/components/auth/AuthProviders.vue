@@ -30,7 +30,7 @@ export default defineComponent({
 				await GoogleAuth.signOut()
 				await signin(token)
 			} catch (error) {
-				await setError('Error signing in with google')
+				await setError(error ?? 'Error signing in with google')
 			}
 		}
 
@@ -38,14 +38,10 @@ export default defineComponent({
 			try {
 				GoogleAuth.initialize({
 					clientId: googleClientId,
-					scopes: [
-						'profile',
-						'email'
-					]
+					scopes: ['profile', 'email']
 				})
 			} catch (err) {
-				// eslint-disable-next-line no-console
-				console.log(err)
+				await setError(err)
 			}
 		})
 

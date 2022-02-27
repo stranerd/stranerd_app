@@ -24,7 +24,7 @@ export default {
 		GoogleAuth: {
 			scopes: ['profile', 'email'],
 			serverClientId: google_client_ids.web,
-			androidClientId: google_client_ids.android,
+			androidClientId: google_client_ids.web,
 			iosClientId: google_client_ids.ios,
 			forceCodeForRefreshToken: true
 		},
