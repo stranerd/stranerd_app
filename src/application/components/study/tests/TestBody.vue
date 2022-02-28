@@ -19,7 +19,7 @@
 			<TestQuestion :answer="updateAnswer" :question="questions[questionIndex]" :questionIndex="questionIndex"
 				:test="test" />
 			<div class="mt-6 mb-10 flex justify-between items-center gap-4">
-				<IonIcon :color="canGoBack ? 'grey' : 'light'" :icon="chevronBackCircle" size="large" @click="back" />
+				<IonIcon :color="canGoBack ? 'grey' : 'light'" :icon="chevronBackCircleOutline" size="large" @click="back" />
 				<span class="flex gap-2 items-center">
 					<span>Jump to</span>
 					<IonSelect v-model="questionIndex" interface="action-sheet">
@@ -28,7 +28,7 @@
 						</IonSelectOption>
 					</IonSelect>
 				</span>
-				<IonIcon :color="canGoForward ? 'grey' : 'light'" :icon="chevronForwardCircle" size="large"
+				<IonIcon :color="canGoForward ? 'grey' : 'light'" :icon="chevronForwardCircleOutline" size="large"
 					@click="forward" />
 			</div>
 		</template>
@@ -68,7 +68,7 @@
 <script lang="ts">
 import { IonSegment, IonSegmentButton, IonSelect, IonSelectOption } from '@ionic/vue'
 import { useTestDetails } from '@app/composable/study/tests'
-import { chevronBackCircle, chevronForwardCircle } from 'ionicons/icons'
+import { chevronBackCircleOutline, chevronForwardCircleOutline } from 'ionicons/icons'
 import { computed, defineComponent, onMounted, onUnmounted } from 'vue'
 import { TestEntity } from '@modules/study'
 import { useCountdown } from '@app/composable/core/dates'
@@ -109,7 +109,7 @@ export default defineComponent({
 		return {
 			error, loading, questions, openSubmitTest, updateAnswer,
 			countDown, tab, questionIndex, canGoBack, canGoForward, back, forward,
-			chevronForwardCircle, chevronBackCircle, formatNumber
+			chevronForwardCircleOutline, chevronBackCircleOutline, formatNumber
 		}
 	}
 })

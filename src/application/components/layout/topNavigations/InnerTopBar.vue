@@ -3,7 +3,7 @@
 		<!-- Small screens -->
 		<ion-toolbar class="flex md:hidden bg-white px-2 items-center">
 			<div class="flex items-center justify-between">
-				<ion-icon :icon="chevronBack" class="text-[23px] text-main_dark" @click="$router.go(-1)" />
+				<ion-icon :icon="chevronBackOutline" class="text-[23px] text-main_dark" @click="$router.go(-1)" />
 				<ion-title class="text-base font-bold text-main_dark">
 					{{ $route.meta.displayName ?? '' }}
 				</ion-title>
@@ -41,7 +41,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonHeader, IonTitle, IonToolbar } from '@ionic/vue'
-import { chevronBack, close, ellipsisVertical, search } from 'ionicons/icons'
+import { chevronBackOutline, close, ellipsisVertical, search } from 'ionicons/icons'
 import BigScreenBar from './screens/BigScreenBar.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useMenuPopover } from '@app/composable/core/modals'
@@ -56,7 +56,7 @@ export default defineComponent({
 
 		return {
 			isLoggedIn, user, openUserDashboardMenu,
-			close, chevronBack, ellipsisVertical, search
+			close, chevronBackOutline, ellipsisVertical, search
 		}
 	}
 })

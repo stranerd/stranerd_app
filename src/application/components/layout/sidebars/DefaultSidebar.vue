@@ -3,13 +3,13 @@
 		class="hidden lg:flex bg-white py-3 pl-3 w-[16%] h-full left-0 top-0 flex-col z-30">
 		<div class="flex flex-col pl-8 mt-6">
 			<router-link v-for="{ path, icon, name } in [
-					{ name: 'home', path: '/dashboard', icon: home },
-					{ name: 'questions', path: '/questions', icon: helpCircle },
-					{ name: 'library', path: '/study', icon: library }
+					{ name: 'home', path: '/dashboard', icon: homeOutline },
+					{ name: 'questions', path: '/questions', icon: helpCircleOutline },
+					{ name: 'library', path: '/study', icon: libraryOutline }
 				]" :key="path" :to="path"
-				class="flex flex-col rounded-l-full text-icon_inactive cursor-pointer text-sm hover:text-main_dark mb-2">
+				class="flex flex-col rounded-l-[1.125rem] text-icon_inactive cursor-pointer text-sm hover:text-main_dark mb-2">
 				<div :class="{'text-main_dark bg-new_gray active-route-link relative' : $route.path === path }"
-					class="py-5 flex flex-row px-4 items-center rounded-l-full">
+					class="py-3.5 flex flex-row px-4 items-center rounded-l-[1.125rem]">
 					<ion-icon :icon="icon" class="text-[23px] mr-4"></ion-icon>
 					<span class="font-semibold capitalize">{{ name }}</span>
 				</div>
@@ -20,22 +20,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { calendarClear, helpCircle, home, library, people } from 'ionicons/icons'
-import { useRoute } from 'vue-router'
+import { helpCircleOutline, homeOutline, libraryOutline } from 'ionicons/icons'
 import { IonIcon } from '@ionic/vue'
 
 export default defineComponent({
 	components: { IonIcon },
 	setup () {
-		const route = useRoute()
-		return {
-			library,
-			home,
-			helpCircle,
-			people,
-			route,
-			calendarClear
-		}
+		return { libraryOutline, homeOutline, helpCircleOutline }
 	}
 })
 </script>

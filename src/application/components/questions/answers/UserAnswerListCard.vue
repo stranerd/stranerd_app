@@ -14,7 +14,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { arrowBackOutline, arrowRedo, chevronDown, send, shareSocial, star, thumbsDown, thumbsUp } from 'ionicons/icons'
 import { AnswerEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 
@@ -28,9 +27,7 @@ export default defineComponent({
 	},
 	setup () {
 		return {
-			formatTime, arrowBackOutline, arrowRedo, shareSocial,
-			chevronDown, thumbsDown, thumbsUp, star,
-			send
+			formatTime
 		}
 	}
 })

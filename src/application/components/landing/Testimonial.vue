@@ -23,7 +23,7 @@
 
 			<div class="flex my-4 gap-2 justify-center">
 				<IonIcon v-for="(t, i) in testimonies.length" :key="t" :class="tab === i ? 'text-white' : 'text-gray'"
-					:icon="ellipse"
+					:icon="ellipseOutline"
 					class="border border-gray rounded-full" @click="tab = i" />
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { ellipse } from 'ionicons/icons'
+import { ellipseOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'Testimonials',
@@ -67,7 +67,7 @@ export default defineComponent({
 		]
 		return {
 			testimonies, tab,
-			ellipse
+			ellipseOutline
 		}
 	}
 })

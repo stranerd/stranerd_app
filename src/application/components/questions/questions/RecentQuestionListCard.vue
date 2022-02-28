@@ -5,7 +5,7 @@
 			<avatar :id="question.userId" :size="28" :src="question.avatar" />
 			<span class="flex items-center gap-1">
 				<span>{{ question.userBio.firstName }}</span>
-				<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircle" color="primary" />
+				<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
 			</span>
 
 			<span class="font-medium text-gray ml-auto">{{ formatTime(question.createdAt) }}</span>
@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { arrowRedo, checkmarkCircle, flag } from 'ionicons/icons'
+import { arrowRedoOutline, checkmarkCircleOutline, flagOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
@@ -48,7 +48,7 @@ export default defineComponent({
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),
 			openReportQuestionModal: () => useReportModal().openReportQuestion(),
-			arrowRedo, flag, checkmarkCircle,
+			arrowRedoOutline, flagOutline, checkmarkCircleOutline,
 			formatTime, pluralize
 		}
 	}

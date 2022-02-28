@@ -5,7 +5,7 @@
 			<ion-text class="font-semibold truncate">
 				<Institution :institutionId="testPrep.data.institutionId" />
 			</ion-text>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-2xl" @click="openMenu" />
+			<ion-icon :icon="ellipsisVerticalOutline" class="text-gray text-2xl" @click="openMenu" />
 		</div>
 		<IonText class="text-gray text-sm -mt-2 truncate">
 			<Course :courseId="testPrep.data.courseId" />
@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { calendar, ellipsisVertical, play } from 'ionicons/icons'
+import { calendarOutline, ellipsisVerticalOutline, playOutline } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import { useCreateTest } from '@app/composable/study/tests'
@@ -64,7 +64,7 @@ export default defineComponent({
 	setup () {
 		const { loading, error, createTest } = useCreateTest()
 		return {
-			ellipsisVertical, calendar, play,
+			ellipsisVerticalOutline, calendarOutline, playOutline,
 			loading, error, createTest
 		}
 	}

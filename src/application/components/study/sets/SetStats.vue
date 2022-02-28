@@ -13,7 +13,7 @@
 
 		<div class="bg-pink w-full lg:h-24 h-[5.25rem] rounded-3xl grid place-items-center">
 			<div class="flex items-center gap-4">
-				<ion-icon :icon="reader" class="text-white text-2xl" />
+				<ion-icon :icon="readerOutline" class="text-white text-2xl" />
 				<ion-text class="text-white text-2xl">
 					{{ formatNumber(set.saved.notes.length) }}
 				</ion-text>
@@ -30,7 +30,7 @@
 		</div>
 		<div class="bg-orange w-full lg:h-24 h-[5.25rem] rounded-3xl grid place-items-center">
 			<div class="flex items-center gap-4">
-				<ion-icon :icon="videocam" class="text-white text-2xl" />
+				<ion-icon :icon="videocamOutline" class="text-white text-2xl" />
 				<ion-text class="text-white text-2xl">
 					{{ formatNumber(set.saved.videos.length) }}
 				</ion-text>
@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { folder, reader, videocam } from 'ionicons/icons'
+import { readerOutline, videocamOutline } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { SetEntity } from '@modules/study'
 import { formatNumber } from '@utils/commons'
@@ -54,7 +54,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { reader, videocam, folder, formatNumber }
+		return { readerOutline, videocamOutline, formatNumber }
 	}
 })
 </script>

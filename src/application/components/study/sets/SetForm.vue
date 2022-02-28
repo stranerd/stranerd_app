@@ -18,7 +18,7 @@
 				<span v-for="tag in factory.tags" :key="tag">
 					<span
 						class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-						{{ tag }} <ion-icon :icon="close" class="ml-1 cursor-pointer text-white"
+						{{ tag }} <ion-icon :icon="closeOutline" class="ml-1 cursor-pointer text-white"
 							@click="removeTag(tag)" />
 					</span>
 				</span>
@@ -64,7 +64,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { close } from 'ionicons/icons'
+import { closeOutline } from 'ionicons/icons'
 import { useTags } from '@app/composable/core/forms'
 import { SetFactory } from '@modules/study'
 import { IonItem, IonLabel, IonListHeader, IonRadio, IonRadioGroup, IonRippleEffect } from '@ionic/vue'
@@ -101,7 +101,7 @@ export default defineComponent({
 		)
 
 		return {
-			close, tag, removeTag, closeModal
+			closeOutline, tag, removeTag, closeModal
 		}
 	}
 })

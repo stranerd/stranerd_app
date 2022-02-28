@@ -14,7 +14,7 @@
 			@click="openCreateStudy">
 			<div class="flex items-center cursor-pointer">
 				<ion-text class="text-primary mr-1 font-bold">Create</ion-text>
-				<ion-icon :icon='chevronDown' class="text-primary text-xl" />
+				<ion-icon :icon='chevronDownOutline' class="text-primary text-xl" />
 			</div>
 		</div>
 		<div v-else />
@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { chevronDown } from 'ionicons/icons'
+import { chevronDownOutline } from 'ionicons/icons'
 import { SetEntity } from '@modules/study'
 import { useStudyPopover } from '@app/composable/core/modals'
 
@@ -37,7 +37,7 @@ export default defineComponent({
 	},
 	setup () {
 		const openCreateStudy = useStudyPopover().openCreateStudy
-		return { chevronDown, openCreateStudy }
+		return { chevronDownOutline, openCreateStudy }
 	}
 
 })

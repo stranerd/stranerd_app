@@ -54,7 +54,7 @@
 			<div class="mb-8 flex flex-col">
 				<IonRadioGroup v-model="factory.correctIndex" class="flex flex-col gap-4">
 					<div v-for="(_, index) in factory.options" :key="index" class="flex gap-4 justify-between">
-						<IonIcon :icon="trash" class="cursor-pointer text-xl text-red"
+						<IonIcon :icon="trashOutline" class="cursor-pointer text-xl text-red"
 							@click="factory.removeOption(index)" />
 						<IonTextarea v-model="factory.options[index]"
 							:placeholder="`Enter Option ${getAlphabet(index + 1).toUpperCase()}`"
@@ -63,7 +63,7 @@
 					</div>
 				</IonRadioGroup>
 				<IonButton class="ml-auto rounded-xl mt-4 btn-primary" @click="factory.addOption">
-					<IonIcon :icon="add" class="mr-2" />
+					<IonIcon :icon="addOutline" class="mr-2" />
 					Add New Option
 				</IonButton>
 			</div>
@@ -98,7 +98,7 @@ import { computed, defineComponent } from 'vue'
 import { PastQuestionFactory } from '@modules/study'
 import { IonRadio, IonRadioGroup, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
 import { getAlphabet } from '@utils/commons'
-import { add, trash } from 'ionicons/icons'
+import { addOutline, trashOutline } from 'ionicons/icons'
 import { useInstitutionList } from '@app/composable/study/institutions'
 import { useCourseList } from '@app/composable/study/courses'
 import { years } from '@utils/constants'
@@ -129,7 +129,7 @@ export default defineComponent({
 		const { courses: allCourses, loading: courseLoading } = useCourseList()
 		const courses = computed(() => new Set(allCourses.value.filter((c) => c.institutionId === props.factory.institutionId)))
 		return {
-			getAlphabet, add, trash,
+			getAlphabet, addOutline, trashOutline,
 			institutions, courses, institutionLoading, courseLoading, years
 		}
 	}

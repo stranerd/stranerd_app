@@ -9,7 +9,7 @@
 						</h1>
 						<span class="text-white text-body flex items-end justify-center hidden">
 							Mark all as read
-							<ion-icon :icon="checkmarkDone" class="text-xl text-white"></ion-icon>
+							<ion-icon :icon="checkmarkDoneOutline" class="text-xl text-white"></ion-icon>
 						</span>
 					</div>
 				</div>
@@ -44,7 +44,7 @@ import { useNotificationList } from '@app/composable/users/notifications'
 import Justified from '@app/layouts/Justified.vue'
 import NotificationCard from '@app/components/users/notifications/NotificationCard.vue'
 import { IonIcon } from '@ionic/vue'
-import { checkmarkDone } from 'ionicons/icons'
+import { checkmarkDoneOutline } from 'ionicons/icons'
 import PageLoading from '@app/components/core/PageLoading.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
 
@@ -57,7 +57,7 @@ export default defineComponent({
 		const {
 			notifications, error, loading, hasMore, fetchOlderNotifications
 		} = useNotificationList()
-		return { notifications, error, loading, hasMore, fetchOlderNotifications, checkmarkDone }
+		return { notifications, error, loading, hasMore, fetchOlderNotifications, checkmarkDoneOutline }
 	}
 })
 </script>

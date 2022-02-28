@@ -8,26 +8,26 @@
 			<IonItem>
 				<IonLabel />
 				<a class="flex items-center gap-1 mr-4" @click.prevent="openCourseCreateModal(institution.id)">
-					<IonIcon :icon="add" class="text-green" />
+					<IonIcon :icon="addOutline" class="text-green" />
 					<IonLabel>Add Course</IonLabel>
 				</a>
 				<a class="flex items-center gap-1 mr-4" @click.prevent="openInstitutionEditModal(institution)">
-					<IonIcon :icon="pencil" class="text-orange" />
+					<IonIcon :icon="pencilOutline" class="text-orange" />
 					<IonLabel>Edit Inst.</IonLabel>
 				</a>
 				<a class="flex items-center gap-1" @click.prevent="deleteInstitution">
-					<IonIcon :icon="trash" class="text-red" />
+					<IonIcon :icon="trashOutline" class="text-red" />
 					<IonLabel>Delete Inst.</IonLabel>
 				</a>
 			</IonItem>
 			<IonItem v-for="course in institutionCourses" :key="course.hash">
 				<IonLabel class="capitalize">{{ course.name }}</IonLabel>
 				<a class="flex items-center gap-2 mr-4" @click.prevent="openCourseEditModal(course)">
-					<IonIcon :icon="pencil" class="text-orange" />
+					<IonIcon :icon="pencilOutline" class="text-orange" />
 					<IonLabel>Edit</IonLabel>
 				</a>
 				<a class="flex items-center gap-2" @click.prevent="deleteCourse(course)">
-					<IonIcon :icon="trash" class="text-red" />
+					<IonIcon :icon="trashOutline" class="text-red" />
 					<IonLabel>Delete</IonLabel>
 				</a>
 			</IonItem>
@@ -49,7 +49,7 @@ import {
 	useCourseList,
 	useDeleteCourse
 } from '@app/composable/study/courses'
-import { add, pencil, trash } from 'ionicons/icons'
+import { addOutline, pencilOutline, trashOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'AdminInstitutionListCard',
@@ -69,7 +69,7 @@ export default defineComponent({
 		return {
 			loading, error, deleteInstitution, institutionCourses, courseLoading,
 			openInstitutionEditModal,
-			add, pencil, trash, openCourseCreateModal, openCourseEditModal,
+			addOutline, pencilOutline, trashOutline, openCourseCreateModal, openCourseEditModal,
 			deleteCourseLoading, deleteCourse
 		}
 	}

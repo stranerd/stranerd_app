@@ -7,7 +7,7 @@
 					:institutionId="testPrep.data.institutionId" />
 				<span v-else>{{ test.name }}</span>
 			</ion-text>
-			<ion-icon :icon="arrowForward" class="text-2xl text-gray" />
+			<ion-icon :icon="arrowForwardOutline" class="text-2xl text-gray" />
 		</div>
 
 		<ion-text class="text-sm text-left w-full text-gray mb-1 truncate">
@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { arrowForward, calendar, play } from 'ionicons/icons'
+import { arrowForwardOutline, calendarOutline, playOutline } from 'ionicons/icons'
 import { IonProgressBar } from '@ionic/vue'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
@@ -45,7 +45,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { testPrep } = useTestPrep(props.test.prepId)
-		return { formatNumber, arrowForward, calendar, play, testPrep }
+		return { formatNumber, arrowForwardOutline, calendarOutline, playOutline, testPrep }
 	}
 })
 </script>

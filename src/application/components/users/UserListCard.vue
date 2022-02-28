@@ -8,7 +8,7 @@
 			<div class="flex flex-col justify-start items-start">
 				<h2 class="lg:text-base text-xs font-bold mb-1 flex gap-1 items-center">
 					<span>{{ user.fullName }}</span>
-					<IonIcon v-if="user.isVerified" :icon="checkmarkCircle" color="primary" />
+					<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
 				</h2>
 				<span
 					class="py-1 px-4 rounded-full text-xs w-auto flex border-2 font-bold bg-primary text-white">
@@ -18,15 +18,15 @@
 		</div>
 		<div class="lg:mt-8 mt-5 text-gray flex justify-between items-center font-bold">
 			<div class="bg-light_gray text-gray py-2 px-4 rounded-full flex gap-1 items-center text-body">
-				<IonIcon :icon="helpCircle" class="text-lg lg:text-3xl text-gray" />
+				<IonIcon :icon="helpCircleOutline" class="text-lg lg:text-3xl text-gray" />
 				<span>{{ formatNumber(user.meta.questions, 0) }}</span>
 			</div>
 			<div class="bg-light_gray py-2 px-4 rounded-full flex gap-1 items-center text-body">
-				<IonIcon :icon="chatboxEllipses" class="text-lg lg:text-3xl text-gray" />
+				<IonIcon :icon="chatboxEllipsesOutline" class="text-lg lg:text-3xl text-gray" />
 				<span>{{ formatNumber(user.meta.answers, 0) }}</span>
 			</div>
 			<div class="bg-light_gray py-2 px-4 rounded-full flex gap-1 items-center text-body">
-				<IonIcon :icon="flash" class="text-lg lg:text-3xl text-gray" />
+				<IonIcon :icon="flashOutline" class="text-lg lg:text-3xl text-gray" />
 				<span>{{ formatNumber(user.meta.flashCards, 0) }}</span>
 			</div>
 		</div>
@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { chatboxEllipses, checkmarkCircle, flash, helpCircle } from 'ionicons/icons'
+import { chatboxEllipsesOutline, checkmarkCircleOutline, flashOutline, helpCircleOutline } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
 import { UserEntity } from '@modules/users'
@@ -48,7 +48,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { formatNumber, helpCircle, flash, chatboxEllipses, checkmarkCircle }
+		return { formatNumber, helpCircleOutline, flashOutline, chatboxEllipsesOutline, checkmarkCircleOutline }
 	}
 })
 </script>

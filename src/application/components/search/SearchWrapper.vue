@@ -57,7 +57,7 @@
 				<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl" />
 				<div v-else-if="!fetched" class="flex flex-col gap-4 max-w-[500px] mx-auto">
 					<div v-for="r in recent" :key="r" class="flex items-center gap-4">
-						<IonIcon :icon="close" class="text-2xl" @click="clearFromRecent(r)" />
+						<IonIcon :icon="closeOutline" class="text-2xl" @click="clearFromRecent(r)" />
 						<IonText class="w-full text-xl truncate">{{ r }}</IonText>
 						<IonIcon :icon="arrowRedoOutline" class="text-2xl" @click="() => {searchTerm = r; search()}" />
 					</div>
@@ -76,7 +76,7 @@ import Justified from '@app/layouts/Justified.vue'
 import { useSearch } from '@app/composable/meta/search'
 import Search from '@app/components/search/Search.vue'
 import { IonSkeletonText } from '@ionic/vue'
-import { arrowRedoOutline, close } from 'ionicons/icons'
+import { arrowRedoOutline, closeOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'SearchWrapper',
@@ -84,7 +84,7 @@ export default defineComponent({
 	setup () {
 		return {
 			...useSearch(),
-			close, arrowRedoOutline
+			closeOutline, arrowRedoOutline
 		}
 	}
 })

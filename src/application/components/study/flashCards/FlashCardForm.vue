@@ -29,7 +29,7 @@
 							<span v-for="tag in factory.tags" :key="tag">
 								<span
 									class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-									{{ tag }} <ion-icon :icon="close" class="ml-1 cursor-pointer"
+									{{ tag }} <ion-icon :icon="closeOutline" class="ml-1 cursor-pointer"
 										@click="removeTag(tag)" />
 								</span>
 							</span>
@@ -73,7 +73,7 @@
 					<div class="flex w-full items-center justify-between">
 						<ion-text class="text-main_dark font-bold">Card {{ index + 1 }}</ion-text>
 						<div class="flex" @click="factory.removeQuestion(index)">
-							<ion-icon :icon='trash' class="text-main_dark" />
+							<ion-icon :icon='trashOutline' class="text-main_dark" />
 						</div>
 					</div>
 
@@ -95,7 +95,7 @@
 				class="w-full flex bg-white items-center p-8 rounded-xl text-lg text-icon_inactive justify-center font-bold cursor-pointer"
 				@click="factory.addQuestion"
 			>
-				<ion-icon :icon="add" class="text-2xl" />
+				<ion-icon :icon="addOutline" class="text-2xl" />
 				<ion-text>ADD CARD</ion-text>
 			</div>
 
@@ -122,7 +122,7 @@ import {
 	IonReorderGroup,
 	IonTextarea
 } from '@ionic/vue'
-import { add, close, trash } from 'ionicons/icons'
+import { addOutline, closeOutline, trashOutline } from 'ionicons/icons'
 import { useTags } from '@app/composable/core/forms'
 import { FlashCardFactory } from '@modules/study'
 
@@ -160,7 +160,7 @@ export default defineComponent({
 			(tag: string) => props.factory.addTag(tag),
 			(tag: string) => props.factory.removeTag(tag)
 		)
-		return { tag, removeTag, close, trash, add }
+		return { tag, removeTag, closeOutline, trashOutline, addOutline }
 	}
 })
 </script>

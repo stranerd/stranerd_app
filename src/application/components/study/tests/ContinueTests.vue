@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
+import { chevronBackOutline, chevronForwardOutline, ellipseOutline } from 'ionicons/icons'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import ContinueTestCard from '@app/components/study/tests/ContinueTestCard.vue'
 import { useTestList } from '@app/composable/study/tests'
@@ -44,7 +44,7 @@ export default defineComponent({
 		})
 
 		return {
-			chevronForwardOutline, chevronBackOutline, ellipse,
+			chevronForwardOutline, chevronBackOutline, ellipseOutline,
 			tests, loading, error
 		}
 	}

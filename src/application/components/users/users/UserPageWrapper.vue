@@ -15,7 +15,7 @@
 							<div class="flex flex-col justify-start items-start gap-1">
 								<h2 class="lg:text-xl text-base font-bold text-white flex gap-1 items-center">
 									<span>{{ user.fullName }}</span>
-									<IonIcon v-if="user.isVerified" :icon="checkmarkCircle" color="white" />
+									<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="white" />
 								</h2>
 								<Tag :index="user.rank.level - 1" :secondary="true" :tag="user.rank.id" />
 								<IonButton v-if="isAdmin && id !== user.id" class="btn-white" size="small"
@@ -77,7 +77,7 @@ import Justified from '@app/layouts/Justified.vue'
 import { useUser } from '@app/composable/users/users'
 import { useRoute } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
-import { checkmarkCircle } from 'ionicons/icons'
+import { checkmarkCircleOutline } from 'ionicons/icons'
 import { useVerifiedRoles } from '@app/composable/users/roles/verified'
 
 export default defineComponent({
@@ -89,7 +89,7 @@ export default defineComponent({
 		const { user, loading, error } = useUser(userId as string)
 		const { loading: verifiedLoading, verifyUser, deVerifyUser } = useVerifiedRoles()
 		return {
-			id, isAdmin, user, loading, error, checkmarkCircle,
+			id, isAdmin, user, loading, error, checkmarkCircleOutline,
 			verifiedLoading, verifyUser, deVerifyUser
 		}
 	}

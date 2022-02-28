@@ -26,7 +26,7 @@
 				<span v-for="tag in factory.tags" :key="tag">
 					<span
 						class="p-2 text-white bg-faded_gray rounded-xl flex items-center">
-						{{ tag }} <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
+						{{ tag }} <ion-icon :icon="closeOutline" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
 					</span>
 				</span>
 			</div>
@@ -45,13 +45,14 @@
 		<div v-if="factory.isHosted" class="mb-12">
 			<FileInput class="mb-2" type="file" @files="catchMedia">
 				<label class="flex items-center gap-4">
-					<ion-icon :icon="documentAttach" class="!text-4xl text-gray" />
+					<ion-icon :icon="documentAttachOutline" class="!text-4xl text-gray" />
 					{{ factory.media ? 'Change' : 'Add' }} Document
 				</label>
 			</FileInput>
 			<span class="p-2 rounded-xl flex items-center">
 				{{ factory.media?.name ?? 'No Media' }}
-				<IonIcon v-if="factory.media" :icon="close" class="ml-2 cursor-pointer" @click="factory.media = null" />
+				<IonIcon v-if="factory.media" :icon="closeOutline" class="ml-2 cursor-pointer"
+					@click="factory.media = null" />
 			</span>
 			<DisplayError :error="factory.errors.media" />
 		</div>
@@ -74,7 +75,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { close, documentAttach, image } from 'ionicons/icons'
+import { closeOutline, documentAttachOutline, image } from 'ionicons/icons'
 import { useFileInputCallback, useTags } from '@app/composable/core/forms'
 import { NoteFactory } from '@modules/study'
 import { IonTextarea, IonToggle } from '@ionic/vue'
@@ -111,7 +112,7 @@ export default defineComponent({
 		})
 
 		return {
-			image, documentAttach, close, tag, removeTag, catchMedia
+			image, documentAttachOutline, closeOutline, tag, removeTag, catchMedia
 		}
 	}
 })

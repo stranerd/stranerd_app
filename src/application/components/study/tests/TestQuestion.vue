@@ -7,7 +7,7 @@
 				Question {{ questionIndex + 1 }}
 			</ion-text>
 			<div class="flex items-center text-lg text-icon_inactive gap-4">
-				<IonIcon :icon="flag" @click="createReport(question)" />
+				<IonIcon :icon="flagOutline" @click="createReport(question)" />
 			</div>
 		</div>
 
@@ -24,10 +24,10 @@
 				@click="answer(question.id, optionIndex)">
 				<div class="flex gap-2">
 					<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
-						:icon="checkmarkCircle" color="primary" size="large" />
-					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect" :icon="checkmarkCircle"
+						:icon="checkmarkCircleOutline" color="primary" size="large" />
+					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect" :icon="checkmarkCircleOutline"
 						color="primary" size="large" />
-					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isInCorrect" :icon="closeCircle"
+					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isInCorrect" :icon="closeCircleOutline"
 						color="danger" size="large" />
 					<span v-else
 						class="label border-4 rounded-full border-light_gray h-8 w-8 text-base font-bold grid place-items-center capitalize">
@@ -78,12 +78,12 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import {
-	checkmarkCircle,
+	checkmarkCircleOutline,
 	chevronDownOutline,
 	chevronUpOutline,
-	closeCircle,
-	ellipsisVertical,
-	flag
+	closeCircleOutline,
+	ellipsisVerticalOutline,
+	flagOutline
 } from 'ionicons/icons'
 import { PastQuestionEntity, PastQuestionType, TestEntity, TestType } from '@modules/study'
 import { getAlphabet } from '@utils/commons'
@@ -127,10 +127,10 @@ export default defineComponent({
 			showAnswers,
 			chevronDownOutline,
 			chevronUpOutline,
-			flag,
-			ellipsisVertical,
-			checkmarkCircle,
-			closeCircle,
+			flagOutline,
+			ellipsisVerticalOutline,
+			checkmarkCircleOutline,
+			closeCircleOutline,
 			getAlphabet,
 			isCorrect,
 			isInCorrect,

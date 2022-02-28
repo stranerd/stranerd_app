@@ -7,7 +7,7 @@
 					{{ root ? `Save To ${set.name}` : `-  ${set.name}` }}
 				</IonText>
 				<IonIcon v-if="sets.length" :class="root ? 'text-2xl' : 'text-xl'"
-					:icon="showSets ? chevronUp : chevronDown"
+					:icon="showSets ? chevronUpOutline : chevronDownOutline"
 					@click="showSets = !showSets" />
 				<IonIcon :class="root ? 'text-2xl' : 'text-xl'"
 					:icon="set.allSaved.includes(itemId) ? bookmark : bookmarkOutline"
@@ -32,7 +32,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue'
 import { SetEntity } from '@modules/study'
-import { add, bookmark, bookmarkOutline, chevronDown, chevronUp } from 'ionicons/icons'
+import { add, bookmark, bookmarkOutline, chevronDownOutline, chevronUpOutline } from 'ionicons/icons'
 import { useSet, useUserRootSet } from '@app/composable/study/sets'
 
 export default defineComponent({
@@ -69,7 +69,7 @@ export default defineComponent({
 			else await props.save(props.set)
 		}
 		return {
-			add, chevronUp, chevronDown, bookmark, bookmarkOutline,
+			add, chevronUpOutline, chevronDownOutline, bookmark, bookmarkOutline,
 			showSets, loading, error, sets, saveItem
 		}
 	}

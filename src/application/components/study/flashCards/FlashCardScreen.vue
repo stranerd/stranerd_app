@@ -21,13 +21,13 @@
 
 		<div class="w-full flex items-center justify-between max-w-[30rem] mx-auto gap-4">
 			<ion-icon
-				:icon="isPlaying ? pause : play"
+				:icon="isPlaying ? pauseOutline : playOutline"
 				class="text-icon_inactive text-xl cursor-pointer"
 				@click="isPlaying ? pauseCard() : playCard()"
 			/>
 			<div class="flex items-center gap-4">
 				<ion-icon
-					:icon="chevronBack"
+					:icon="chevronBackOutline"
 					class="text-icon_inactive text-xl cursor-pointer "
 					@click="decrease"
 				/>
@@ -35,13 +35,13 @@
 					<b>{{ page + 1 }}</b> of <b>{{ formatNumber(flashCard.set.length) }}</b>
 				</ion-text>
 				<ion-icon
-					:icon="chevronForward"
+					:icon="chevronForwardOutline"
 					class="text-icon_inactive text-xl cursor-pointer"
 					@click="increase"
 				/>
 			</div>
 			<ion-icon
-				:icon="isFullscreen ? contract : scan"
+				:icon="isFullscreen ? contractOutline : scanOutline"
 				class="text-icon_inactive text-xl cursor-pointer"
 				@click="toggleFullscreen"
 			/>
@@ -52,7 +52,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { FlashCardEntity } from '@modules/study'
-import { add, chevronBack, chevronForward, contract, pause, play, scan } from 'ionicons/icons'
+import { addOutline, chevronBackOutline, chevronForwardOutline, contractOutline, pauseOutline, playOutline, scanOutline } from 'ionicons/icons'
 import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
@@ -104,7 +104,7 @@ export default defineComponent({
 		return {
 			increase, decrease, playCard, pauseCard, page, flipped, isPlaying,
 			isFullscreen, toggleFullscreen, exit, enter, formatNumber,
-			play, pause, add, scan, chevronBack, chevronForward, contract
+			playOutline, pauseOutline, addOutline, scanOutline, chevronBackOutline, chevronForwardOutline, contractOutline
 		}
 	}
 })

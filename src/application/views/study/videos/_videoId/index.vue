@@ -15,7 +15,7 @@
 						<Avatar :id="video.userId" :size="28" :src="video.userBio.photo" class="mx-2" />
 						<ion-text class="text-icon_inactive flex items-center gap-1">
 							<span>by <b>{{ video.userBio.firstName }} </b></span>
-							<IonIcon v-if="video.isUserVerified" :icon="checkmarkCircle" color="primary" />
+							<IonIcon v-if="video.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
 						</ion-text>
 					</div>
 					<div class="flex items-center">
@@ -33,7 +33,7 @@ import Justified from '@app/layouts/Justified.vue'
 import {
 	add,
 	bookmark,
-	checkmarkCircle,
+	checkmarkCircleOutline,
 	chevronDown,
 	chevronUp,
 	contract,
@@ -58,7 +58,7 @@ export default defineComponent({
 		const { error, loading, video } = useVideo(videoId as string)
 		return {
 			add, remove, scan, chevronDown, loading, video, error,
-			chevronUp, pencil, contract, bookmark, shareSocial, checkmarkCircle
+			chevronUp, pencil, contract, bookmark, shareSocial, checkmarkCircleOutline
 		}
 	}
 })
