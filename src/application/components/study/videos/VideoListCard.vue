@@ -7,20 +7,20 @@
 				<Tag :index="2" tag="Video">
 					<template v-slot="slotProps">
 						<span class="flex items-center">
-							<ion-icon :icon="playCircle" class="text-base mr-1" />
+							<ion-icon :icon="playCircleOutline" class="text-base mr-1" />
 							<ion-text class="text-xs">{{ slotProps.tag }}</ion-text>
 						</span>
 					</template>
 				</Tag>
 			</div>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl" @click="openMenu" />
+			<ion-icon :icon="ellipsisVerticalOutline" class="text-gray text-xl" @click="openMenu" />
 		</div>
 		<div class="w-full flex items-center justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="video.userId" :size="24" :src="video.userBio.photo" />
 				<ion-text class="text-xs flex items-center gap-1">
 					<span>{{ video.userBio.firstName }}</span>
-					<IonIcon v-if="video.isUserVerified" :icon="checkmarkCircle" color="primary" />
+					<IonIcon v-if="video.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
 				</ion-text>
 			</div>
 			<router-link :to="`/study/videos/${video.id}`">
@@ -36,7 +36,7 @@
 import { defineComponent } from 'vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { VideoEntity } from '@modules/study'
-import { checkmarkCircle, ellipsisVertical, playCircle } from 'ionicons/icons'
+import { checkmarkCircleOutline, ellipsisVerticalOutline, playCircleOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'VideosListCard',
@@ -52,7 +52,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { ellipsisVertical, playCircle, checkmarkCircle }
+		return { ellipsisVerticalOutline, playCircleOutline, checkmarkCircleOutline }
 	}
 })
 </script>

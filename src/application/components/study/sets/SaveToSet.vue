@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col gap-1 text-sm">
 		<span v-if="root" class="flex gap-2 items-center">
-			<IonIcon :icon="showSets ? chevronUp : chevronDown" class="text-2xl" @click="showSets = !showSets" />
+			<IonIcon :icon="showSets ? chevronUpOutline : chevronDownOutline" class="text-2xl" @click="showSets = !showSets" />
 			<IonText class="font-bold truncate w-full max-w-[10rem]" @click="showSets = !showSets">
 				Save To {{ set.name }}
 			</IonText>
@@ -10,7 +10,7 @@
 		</span>
 		<div v-else class="flex gap-2 items-center">
 			<IonText class="text-sm truncate w-full max-w-[10rem]">-&nbsp;&nbsp;{{ set.name }}</IonText>
-			<IonIcon v-if="sets.length" :icon="showSets ? chevronUp : chevronDown" class="text-xl"
+			<IonIcon v-if="sets.length" :icon="showSets ? chevronUpOutline : chevronDownOutline" class="text-xl"
 				@click="showSets = !showSets" />
 			<IonIcon :icon="set.allSaved.includes(itemId) ? bookmark : bookmarkOutline" class="text-xl"
 				@click="saveItem" />
@@ -25,7 +25,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue'
 import { SetEntity } from '@modules/study'
-import { bookmark, bookmarkOutline, chevronDown, chevronUp } from 'ionicons/icons'
+import { bookmark, bookmarkOutline, chevronDownOutline, chevronUpOutline } from 'ionicons/icons'
 import { useSet, useUserRootSet } from '@app/composable/study/sets'
 
 export default defineComponent({
@@ -62,7 +62,7 @@ export default defineComponent({
 			else await props.save(props.set)
 		}
 		return {
-			chevronUp, chevronDown, bookmark, bookmarkOutline,
+			chevronUpOutline, chevronDownOutline, bookmark, bookmarkOutline,
 			showSets, loading, error, sets, saveItem
 		}
 	}

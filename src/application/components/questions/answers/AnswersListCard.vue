@@ -5,7 +5,7 @@
 				<Avatar :id="answer.userId" :size="30" :src="answer.avatar" class="mr-2" />
 				<span class="font-bold text-main_dark flex items-center gap-1">
 					<span>{{ answer.userBio.fullName }}</span>
-					<IonIcon v-if="answer.isUserVerified" :icon="checkmarkCircle" color="primary" />
+					<IonIcon v-if="answer.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
 				</span>
 			</div>
 
@@ -31,14 +31,14 @@
 						:class="[answer.votes.find((v) => v.vote === 1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
 						class="flex flex-row items-center mr-2">
 						<span class="mr-1">({{ formatNumber(answer.upVotes) }})</span>
-						<IonIcon :icon="thumbsUp" class="text-[22px] cursor-pointer"
+						<IonIcon :icon="thumbsUpOutline" class="text-[22px] cursor-pointer"
 							@click="() => voteAnswer(true)" />
 					</div>
 					<div
 						:class="[answer.votes.find((v) => v.vote === -1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
 						class="flex flex-row items-center">
 						<span class="mr-1 ">({{ formatNumber(answer.downVotes) }})</span>
-						<IonIcon :icon="thumbsDown" class="text-[22px] cursor-pointer"
+						<IonIcon :icon="thumbsDownOutline" class="text-[22px] cursor-pointer"
 							@click="() => voteAnswer(false)" />
 					</div>
 				</div>
@@ -47,11 +47,11 @@
 						v-if="isLoggedIn && question && !question.isAnswered && !answer.best && question.userId === id"
 						class="items-center flex cursor-pointer" @click.prevent="markBestAnswer(question)">
 						<span class="mr-1">Mark as best</span>
-						<IonIcon :icon="star" class="text-[20px]" />
+						<IonIcon :icon="starOutline" class="text-[20px]" />
 					</span>
-					<IonIcon v-if="answer.best" :icon="star" class="text-[20px] text-yellow_star" />
+					<IonIcon v-if="answer.best" :icon="starOutline" class="text-[20px] text-yellow_star" />
 					<span class="flex items-center" @click="showComments = !showComments">
-						<IonIcon :icon="showComments ? chevronDown : chevronUp" />
+						<IonIcon :icon="showComments ? chevronDownOutline : chevronUpOutline" />
 						<span>{{ showComments ? 'Hide comments' : 'Show comments' }}</span>
 					</span>
 				</div>
@@ -62,7 +62,7 @@
 				<ion-input v-model="commentFactory.body" :autoGrow="true" :rows="1"
 					class="px-1 focus:outline-none placeholder-gray-400 mt-0 pt-0"
 					placeholder="Add comment" />
-				<IonIcon :icon="send" class="text-[22px] mr-2 text-primary cursor-pointer" @click="createComment" />
+				<IonIcon :icon="sendOutline" class="text-[22px] mr-2 text-primary cursor-pointer" @click="createComment" />
 			</form>
 		</div>
 
@@ -75,7 +75,7 @@
 import { computed, defineComponent, PropType, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
-import { checkmarkCircle, chevronDown, chevronUp, send, star, thumbsDown, thumbsUp } from 'ionicons/icons'
+import { checkmarkCircleOutline, chevronDownOutline, chevronUpOutline, sendOutline, starOutline, thumbsDownOutline, thumbsUpOutline } from 'ionicons/icons'
 import PhotoList from '@app/components/core/media/PhotoList.vue'
 import { useAnswer } from '@app/composable/questions/answers'
 import { useCreateAnswerComments } from '@app/composable/questions/answer-comments'
@@ -124,7 +124,7 @@ export default defineComponent({
 			commentLoading, commentError,
 			commentFactory, createComment,
 			markBestAnswer, formatNumber,
-			thumbsDown, thumbsUp, star, send, chevronUp, chevronDown, checkmarkCircle,
+			thumbsDownOutline, thumbsUpOutline, starOutline, sendOutline, chevronUpOutline, chevronDownOutline, checkmarkCircleOutline,
 			showExplanation, showComments, showEditButton, showDeleteButton
 		}
 	}

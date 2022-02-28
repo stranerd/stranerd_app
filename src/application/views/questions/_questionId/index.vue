@@ -4,7 +4,7 @@
 			<div
 				class="col-span-12 pb-3 px-1 flex-row items-center text-main_dark font-bold hidden lg:flex cursor-pointer"
 				@click="$router.go(-1)">
-				<IonIcon :icon="chevronBack" class="text-[25px] mr-2" />
+				<IonIcon :icon="chevronBackOutline" class="text-[25px] mr-2" />
 				<span>Back to All questions</span>
 			</div>
 			<div class="md:px-2 mb-4 text-xs md:text-sm">
@@ -21,7 +21,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { chevronBack } from 'ionicons/icons'
+import { chevronBackOutline } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
 import { useQuestion } from '@app/composable/questions/questions'
 import DashboardWithToolbarLayout from '@app/layouts/DashboardWithToolbar.vue'
@@ -40,7 +40,7 @@ export default defineComponent({
 	setup () {
 		const { questionId } = useRoute().params
 		const { error, loading, question } = useQuestion(questionId as string)
-		return { chevronBack, error, loading, question }
+		return { chevronBackOutline, error, loading, question }
 	}
 })
 </script>

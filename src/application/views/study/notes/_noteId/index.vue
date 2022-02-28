@@ -15,7 +15,7 @@
 						<Avatar :id="note.userId" :size="28" :src="note.userBio.photo" class="mx-2" />
 						<ion-text class="text-icon_inactive flex items-center gap-1">
 							<span>by <b>{{ note.userBio.firstName }}</b></span>
-							<IonIcon v-if="note.isUserVerified" :icon="checkmarkCircle" color="primary" />
+							<IonIcon v-if="note.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
 						</ion-text>
 					</div>
 					<div class="flex items-center">
@@ -33,7 +33,7 @@ import Justified from '@app/layouts/Justified.vue'
 import {
 	add,
 	bookmark,
-	checkmarkCircle,
+	checkmarkCircleOutline,
 	chevronDown,
 	chevronUp,
 	contract,
@@ -58,7 +58,7 @@ export default defineComponent({
 		const { error, loading, note } = useNote(noteId as string)
 		return {
 			add, remove, scan, chevronDown, loading, note, error,
-			chevronUp, pencil, contract, bookmark, shareSocial, checkmarkCircle
+			chevronUp, pencil, contract, bookmark, shareSocial, checkmarkCircleOutline
 		}
 	}
 })

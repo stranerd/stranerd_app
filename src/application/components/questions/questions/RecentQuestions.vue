@@ -24,7 +24,6 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import QuestionListCard from '@app/components/questions/questions/RecentQuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '@app/components/core/EmptyState.vue'
@@ -42,7 +41,7 @@ export default defineComponent({
 		})
 
 		return {
-			chevronForwardOutline, chevronBackOutline, ellipse,
+
 			questions, loading, error
 		}
 	}

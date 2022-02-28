@@ -10,7 +10,7 @@
 						<Avatar :id="flashCard.userId" :size="28" :src="flashCard.userBio.photo" color="#C7D6E3" />
 						<ion-text class="text-white ml-2 text-base flex gap-1 items-center">
 							<span>by <b>{{ flashCard.userBio.fullName }}</b></span>
-							<IonIcon v-if="flashCard.isUserVerified" :icon="checkmarkCircle" color="white" />
+							<IonIcon v-if="flashCard.isUserVerified" :icon="checkmarkCircleOutline" color="white" />
 						</ion-text>
 					</div>
 				</div>
@@ -18,7 +18,7 @@
 				<div class="items-center text-white font-bold hidden md:flex">
 					<div class="flex items-center lg:mr-8 mr-2" @click="cardMode = !cardMode">
 						<ion-icon
-							:icon="!cardMode ? copy: list"
+							:icon="!cardMode ? copyOutline: listOutline"
 							class="text-white text-xl cursor-pointer md:mr-2 md:mt-0"
 						/>
 						<ion-text class="hidden md:flex">
@@ -26,7 +26,7 @@
 						</ion-text>
 					</div>
 					<ion-icon
-						:icon="ellipsisVertical"
+						:icon="ellipsisVerticalOutline"
 						class="text-white text-xl cursor-pointer"
 						@click="openMenu"
 					/>
@@ -38,7 +38,7 @@
 		<div class="w-full bg-white flex md:hidden items-center justify-between text-gray p-4 -mt-8 rounded-b-xl">
 			<div class="flex items-center lg:mr-8 mr-2" @click="cardMode = !cardMode">
 				<ion-icon
-					:icon="!cardMode ? copy: list"
+					:icon="!cardMode ? copyOutline: listOutline"
 					class="text-gray text-xl cursor-pointer mr-3"
 				/>
 				<ion-text class=" font-medium ">
@@ -50,7 +50,7 @@
 					Options
 				</ion-text>
 				<ion-icon
-					:icon="ellipsisVertical"
+					:icon="ellipsisVerticalOutline"
 					class="text-gray text-xl cursor-pointer ml-3"
 					@click="openMenu"
 				/>
@@ -69,7 +69,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
-import { checkmarkCircle, copy, ellipsisVertical, list } from 'ionicons/icons'
+import { checkmarkCircleOutline, copyOutline, ellipsisVerticalOutline, listOutline } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { useFlashCard } from '@app/composable/study/flashCards'
 import { useRoute } from 'vue-router'
@@ -92,8 +92,8 @@ export default defineComponent({
 		const { flashCard, error, loading } = useFlashCard(flashCardId as string)
 		const openMenu = (event: Event) => openStudyEntityMenu(flashCard.value, {}, event)
 		return {
-			openMenu, copy, list, cardMode,
-			flashCard, loading, ellipsisVertical, checkmarkCircle
+			openMenu, copyOutline, listOutline, cardMode,
+			flashCard, loading, ellipsisVerticalOutline, checkmarkCircleOutline
 		}
 	}
 })

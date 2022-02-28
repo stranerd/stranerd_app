@@ -38,12 +38,12 @@
 		>
 			<div class="flex items-center justify-between">
 				<span class="cursor-pointer" @click="toggleMenu">
-					<ion-icon :icon="show ? close : menu" size="100px" />
+					<ion-icon :icon="show ? closeOutline : menuOutline" size="100px" />
 				</span>
 				<router-link class="flex items-center" to="/">
 					<Logo :secondary="!show" />
 				</router-link>
-				<IonIcon :icon="search" class="text-xl ml-4" @click="$router.push('/search')" />
+				<IonIcon :icon="searchOutline" class="text-xl ml-4" @click="$router.push('/searchOutline')" />
 			</div>
 		</ion-toolbar>
 		<div v-if="show"
@@ -75,7 +75,7 @@ import { defineComponent, ref } from 'vue'
 import { disableScroll, enableScroll } from '@utils/html'
 import Logo from '@app/components/core/Logo.vue'
 import { IonHeader, IonIcon, IonToolbar } from '@ionic/vue'
-import { close, menu, search } from 'ionicons/icons'
+import { closeOutline, menuOutline, searchOutline } from 'ionicons/icons'
 import Search from '@app/components/search/Search.vue'
 
 export default defineComponent({
@@ -88,7 +88,7 @@ export default defineComponent({
 			show.value = !show.value
 		}
 
-		return { show, toggleMenu, menu, close, search }
+		return { show, toggleMenu, menuOutline, closeOutline, searchOutline }
 	}
 })
 </script>

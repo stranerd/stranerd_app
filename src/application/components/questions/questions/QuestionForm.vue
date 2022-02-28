@@ -19,7 +19,7 @@
 			<span v-for="tag in factory.tags" :key="tag">
 				<span
 					class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-					{{ tag }} <ion-icon :icon="close" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
+					{{ tag }} <ion-icon :icon="closeOutline" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
 				</span>
 			</span>
 		</div>
@@ -29,7 +29,7 @@
 			<span v-for="attachment in factory.attachments" :key="attachment.name" class="my-1">
 				<span
 					class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-					{{ attachment.name }} <IonIcon :icon="close" class="ml-1 cursor-pointer"
+					{{ attachment.name }} <IonIcon :icon="closeOutline" class="ml-1 cursor-pointer"
 						@click="factory.removeAttachment(attachment)" />
 				</span>
 			</span>
@@ -61,7 +61,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { close, image } from 'ionicons/icons'
+import { closeOutline, image } from 'ionicons/icons'
 import { useFileInputCallback, useTags } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
@@ -102,7 +102,7 @@ export default defineComponent({
 			files.map(props.factory.addAttachment)
 		})
 
-		return { image, close, tag, removeTag, catchAttachments }
+		return { image, closeOutline, tag, removeTag, catchAttachments }
 	}
 })
 </script>

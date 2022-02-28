@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { chevronDown, chevronUp, flash, folder } from 'ionicons/icons'
+
 import { defineComponent } from 'vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
@@ -48,7 +48,7 @@ export default defineComponent({
 		const { answeredChoices, answered, subjectId } = useQuestionList()
 		return {
 			answeredChoices, answered, subjectId,
-			chevronDown, chevronUp, folder, flash
+
 		}
 	}
 })

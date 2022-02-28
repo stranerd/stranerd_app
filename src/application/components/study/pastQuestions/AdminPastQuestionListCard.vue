@@ -17,7 +17,7 @@
 							Option {{ getAlphabet(index + 1).toUpperCase() }}:
 							<DisplayHtml :html="option" />
 						</IonText>
-						<IonIcon :icon="pastQuestion.data.correctIndex === index ? checkmarkDone : null"
+						<IonIcon :icon="pastQuestion.data.correctIndex === index ? checkmarkDoneOutline : null"
 							class="text-xl text-green" />
 					</div>
 				</div>
@@ -53,7 +53,7 @@ import { defineComponent } from 'vue'
 import { PastQuestionEntity } from '@modules/study'
 import { openPastQuestionEditModal, useDeletePastQuestion } from '@app/composable/study/pastQuestions'
 import { getAlphabet } from '@utils/commons'
-import { checkmarkDone } from 'ionicons/icons'
+import { checkmarkDoneOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'AdminPastQuestionListCard',
@@ -65,7 +65,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { loading, error, deletePastQuestion } = useDeletePastQuestion(props.pastQuestion)
-		return { loading, error, deletePastQuestion, openPastQuestionEditModal, getAlphabet, checkmarkDone }
+		return { loading, error, deletePastQuestion, openPastQuestionEditModal, getAlphabet, checkmarkDoneOutline }
 	}
 })
 </script>

@@ -7,13 +7,13 @@
 					:tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
 					<template v-slot="slotProps">
 						<span class="flex items-center">
-							<ion-icon :icon="copy" class="mr-1" />
+							<ion-icon :icon="copyOutline" class="mr-1" />
 							<ion-text class="text-xs font-semibold">{{ slotProps.tag }}</ion-text>
 						</span>
 					</template>
 				</Tag>
 			</div>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl" @click="openMenu" />
+			<ion-icon :icon="ellipsisVerticalOutline" class="text-gray text-xl" @click="openMenu" />
 		</div>
 
 		<div class="w-full flex items-center justify-between">
@@ -21,7 +21,7 @@
 				<Avatar :id="flashCard.userId" :size="24" :src="flashCard.userBio.photo" />
 				<ion-text class="text-xs flex items-center gap-1">
 					<span>{{ flashCard.userBio.firstName }}</span>
-					<IonIcon v-if="flashCard.isUserVerified" :icon="checkmarkCircle" color="primary" />
+					<IonIcon v-if="flashCard.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
 				</ion-text>
 			</div>
 			<router-link :to="`/study/flashCards/${flashCard.id}`">
@@ -35,7 +35,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { checkmarkCircle, copy, ellipsisVertical, flash } from 'ionicons/icons'
+import { checkmarkCircleOutline, copyOutline, ellipsisVerticalOutline } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { FlashCardEntity } from '@modules/study'
@@ -58,7 +58,7 @@ export default defineComponent({
 	},
 	setup () {
 		return {
-			ellipsisVertical, copy, checkmarkCircle, formatNumber, flash, pluralize
+			ellipsisVerticalOutline, copyOutline, checkmarkCircleOutline, formatNumber, pluralize
 		}
 	},
 	components: { Avatar }

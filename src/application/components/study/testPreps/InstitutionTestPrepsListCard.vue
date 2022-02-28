@@ -5,7 +5,7 @@
 				<Institution :institutionId="institutionId" class="font-semibold" />
 			</ion-text>
 			<router-link :to="`/study/preps/${institutionId}`">
-				<ion-icon :icon="arrowForward" class="text-2xl text-gray" />
+				<ion-icon :icon="arrowForwardOutline" class="text-2xl text-gray" />
 			</router-link>
 		</div>
 		<Tag :index="0" :tag="yearGap" class="text-sm" />
@@ -20,7 +20,7 @@
 import { computed, defineComponent, PropType } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import Institution from '@app/components/study/institutions/Institution.vue'
-import { arrowForward } from 'ionicons/icons'
+import { arrowForwardOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'InstitutionTestPrepsListCard',
@@ -43,7 +43,7 @@ export default defineComponent({
 			else return `${startYear.value}`
 		})
 
-		return { yearGap, arrowForward }
+		return { yearGap, arrowForwardOutline }
 	}
 })
 </script>

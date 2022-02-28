@@ -6,16 +6,16 @@
 				:unsave="(set) => removeFromSet(type, entity?.id, set)" />
 			<span v-else-if="data.set.allSaved.includes(entity?.id)" class="flex gap-4 items-center"
 				@click="removeFromSet(type, entity?.id, data.set)">
-				<ion-icon :icon="removeCircle" class="text-2xl" />
+				<ion-icon :icon="removeCircleOutline" class="text-2xl" />
 				<ion-label class="font-bold">Unsave In Folder</ion-label>
 			</span>
 		</template>
 		<span v-if="canEdit" class="flex gap-4 items-center" @click="editEntity">
-			<ion-icon :icon="pencil" class="text-2xl" />
+			<ion-icon :icon="pencilOutline" class="text-2xl" />
 			<ion-label class="font-bold">Edit</ion-label>
 		</span>
 		<span v-if="showDelete" class="flex gap-4 items-center" @click="deleteEntity">
-			<ion-icon :icon="trash" class="text-2xl" />
+			<ion-icon :icon="trashOutline" class="text-2xl" />
 			<ion-label class="font-bold">Delete</ion-label>
 		</span>
 		<span class="flex gap-4 items-center" @click="share">
@@ -24,7 +24,7 @@
 		</span>
 		<router-link v-if="entity?.userId !== id && type !== 'testPreps'" :to="`/users/${entity?.userId ?? ''}`"
 			class="flex gap-4 items-center">
-			<ion-icon :icon="person" class="text-2xl" />
+			<ion-icon :icon="personOutline" class="text-2xl" />
 			<ion-label class="font-bold">Go To Author</ion-label>
 		</router-link>
 		<PageLoading v-if="deleteLoading" />
@@ -39,11 +39,11 @@ import {
 	chevronDown,
 	chevronUp,
 	library,
-	pencil,
-	person,
-	removeCircle,
-	shareSocial as shareIcon,
-	trash
+	pencilOutline,
+	personOutline,
+	removeCircleOutline,
+	shareSocialOutline as shareIcon,
+	trashOutline
 } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { openSetEditModal, useSaveToSet, useUserRootSet } from '@app/composable/study/sets'
@@ -81,7 +81,7 @@ export default defineComponent({
 
 		return {
 			entity, type, data,
-			chevronUp, chevronDown, library, shareIcon, pencil, person, trash, removeCircle,
+			chevronUp, chevronDown, library, shareIcon, pencilOutline, personOutline, trashOutline, removeCircleOutline,
 			share, id, isLoggedIn,
 			showDelete, deleteLoading, deleteError, deleteEntity, canEdit, editEntity,
 			rootSet, setLoading, setError, saveToSet, removeFromSet, showAddToSet

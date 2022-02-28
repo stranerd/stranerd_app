@@ -7,20 +7,20 @@
 				<Tag :index="1" tag="Note">
 					<template v-slot="slotProps">
 						<span class="flex items-center">
-							<ion-icon :icon="document" class="text-base mr-1" />
+							<ion-icon :icon="documentOutline" class="text-base mr-1" />
 							<ion-text class="text-xs">{{ slotProps.tag }}</ion-text>
 						</span>
 					</template>
 				</Tag>
 			</div>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl" @click="openMenu" />
+			<ion-icon :icon="ellipsisVerticalOutline" class="text-gray text-xl" @click="openMenu" />
 		</div>
 		<div class="w-full flex items-center justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
 				<ion-text class="text-xs flex items-center gap-1">
 					<span>{{ note.userBio.firstName }}</span>
-					<IonIcon v-if="note.isUserVerified" :icon="checkmarkCircle" color="primary" />
+					<IonIcon v-if="note.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
 				</ion-text>
 			</div>
 			<router-link v-if="content" :to="`/study/notes/${note.id}`">
@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { checkmarkCircle, document, download as downloadIcon, ellipsisVertical } from 'ionicons/icons'
+import { checkmarkCircleOutline, documentOutline, downloadOutline as downloadIcon, ellipsisVerticalOutline } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { NoteEntity } from '@modules/study'
 import { IonSpinner } from '@ionic/vue'
@@ -64,7 +64,7 @@ export default defineComponent({
 		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
 
 		return {
-			ellipsisVertical, document, downloadIcon, checkmarkCircle,
+			ellipsisVerticalOutline, documentOutline, downloadIcon, checkmarkCircleOutline,
 			download, loading, content, error, deleteFromDownloads
 		}
 	}

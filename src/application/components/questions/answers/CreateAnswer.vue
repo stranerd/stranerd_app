@@ -22,7 +22,7 @@
 
 		<div
 			class="lg:mt-9 mt-5 rounded-xl text-main_dark relative bg-light_gray border border-faded_gray flex flex-col h-32 justify-center items-center">
-			<IonIcon :icon="image" class="!text-3xl" />
+			<IonIcon :icon="imageOutline" class="!text-3xl" />
 			<FileInput
 				:multiple="true"
 				accept="image/x-png,image/jpeg,image/jpg"
@@ -37,7 +37,7 @@
 			<span v-for="attachment in factory.attachments" :key="attachment.name">
 				<span
 					class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-					{{ attachment.name }} <IonIcon :icon="close" class="ml-1 cursor-pointer"
+					{{ attachment.name }} <IonIcon :icon="closeOutline" class="ml-1 cursor-pointer"
 						@click="factory.removeAttachment(attachment)" />
 				</span>
 			</span>
@@ -59,7 +59,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonIcon, IonInput } from '@ionic/vue'
-import { close, image } from 'ionicons/icons'
+import { closeOutline, imageOutline } from 'ionicons/icons'
 import { showAddAnswer, useCreateAnswer } from '@app/composable/questions/answers'
 import { QuestionEntity } from '@modules/questions'
 import { useFileInputCallback } from '@app/composable/core/forms'
@@ -86,7 +86,7 @@ export default defineComponent({
 		})
 
 		return {
-			image, close,
+			imageOutline, closeOutline,
 			showAddAnswer,
 			factory, error, loading, answeringQuestion, createAnswer, catchAttachments
 		}
