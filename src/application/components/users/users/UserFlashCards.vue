@@ -14,7 +14,7 @@
 import { defineComponent } from 'vue'
 import { IonProgressBar } from '@ionic/vue'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
-import { useUserFlashCardList } from '@app/composable/users/user/flashCards'
+import { useUserFlashCardList } from '@app/composable/users/users/flashCards'
 import EmptyState from '../../core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 import { FlashCardEntity } from '@modules/study'

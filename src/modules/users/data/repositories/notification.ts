@@ -13,22 +13,22 @@ export class NotificationRepository implements INotificationRepository {
 		this.transformer = transformer
 	}
 
-	async find (userId: string, id: string) {
-		const model = await this.dataSource.find(userId, id)
+	async find (id: string) {
+		const model = await this.dataSource.find(id)
 		if (model) return this.transformer.fromJSON(model)
 		else return null
 	}
 
-	async get (userId: string, query: QueryParams) {
-		const models = await this.dataSource.get(userId, query)
+	async get (query: QueryParams) {
+		const models = await this.dataSource.get(query)
 		return {
 			...models,
 			results: models.results.map(this.transformer.fromJSON)
 		}
 	}
 
-	async listenToOne (userId: string, id: string, listener: Listeners<NotificationEntity>) {
-		return this.dataSource.listenToOne(userId, id, {
+	async listenToOne (id: string, listener: Listeners<NotificationEntity>) {
+		return this.dataSource.listenToOne(id, {
 			created: async (model) => {
 				await listener.created(this.transformer.fromJSON(model))
 			},
@@ -41,8 +41,8 @@ export class NotificationRepository implements INotificationRepository {
 		})
 	}
 
-	async listenToMany (userId: string, query: QueryParams, listener: Listeners<NotificationEntity>, matches: (entity: NotificationEntity) => boolean) {
-		return this.dataSource.listenToMany(userId, query, {
+	async listenToMany (query: QueryParams, listener: Listeners<NotificationEntity>, matches: (entity: NotificationEntity) => boolean) {
+		return this.dataSource.listenToMany(query, {
 			created: async (model) => {
 				const entity = this.transformer.fromJSON(model)
 				if (matches(entity)) await listener.created(entity)

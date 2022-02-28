@@ -9,7 +9,7 @@ export class GetChatsUseCase {
 		this.repository = repository
 	}
 
-	async call (path: [string, string], date?: number) {
+	async call (date?: number) {
 		const conditions: QueryParams = {
 			sort: [{ field: 'createdAt', desc: true }],
 			limit: CHAT_PAGINATION_LIMIT
@@ -17,6 +17,6 @@ export class GetChatsUseCase {
 
 		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.lt, value: date }]
 
-		return await this.repository.get(path, conditions)
+		return await this.repository.get(conditions)
 	}
 }

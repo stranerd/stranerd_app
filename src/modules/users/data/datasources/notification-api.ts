@@ -10,24 +10,24 @@ export class NotificationApiDataSource implements NotificationBaseDataSource {
 		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/users/notifications')
 	}
 
-	async find (_: string, id: string) {
+	async find (id: string) {
 		return await this.stranerdClient.get<{}, NotificationFromModel | null>(`/${id}`, {})
 	}
 
-	async get (_: string, query: QueryParams) {
+	async get (query: QueryParams) {
 		return await this.stranerdClient.get<QueryParams, QueryResults<NotificationFromModel>>('/', query)
 	}
 
-	async listenToOne (_: string, id: string, listeners: Listeners<NotificationFromModel>) {
+	async listenToOne (id: string, listeners: Listeners<NotificationFromModel>) {
 		const listener = listenOnSocket(`users/notifications/${id}`, listeners)
-		const model = await this.find(_, id)
+		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
-	async listenToMany (_: string, query: QueryParams, listeners: Listeners<NotificationFromModel>) {
+	async listenToMany (query: QueryParams, listeners: Listeners<NotificationFromModel>) {
 		const listener = listenOnSocket('users/notifications', listeners)
-		const models = await this.get(_, query)
+		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
 	}

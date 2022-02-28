@@ -29,7 +29,7 @@ export const useUserReviewList = (id: string) => {
 		try {
 			await global[id].setLoading(true)
 			const lastDate = global[id].reviews.value[global[id].reviews.value.length - 1]?.createdAt
-			const reviews = await GetReviews.call(id, lastDate)
+			const reviews = await GetReviews.call(lastDate)
 			global[id].hasMore.value = !!reviews.pages.next
 			reviews.results.forEach((a) => pushToReviewList(id, a))
 			global[id].fetched.value = true

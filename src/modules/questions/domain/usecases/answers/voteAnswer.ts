@@ -7,7 +7,7 @@ export class VoteAnswerUseCase {
 		this.repository = repository
 	}
 
-	async call (id: string, userId: string, vote: boolean) {
-		return this.repository.vote(id, userId, vote)
+	async call (id: string, vote: boolean) {
+		return this.repository.vote(id, vote)
 	}
 }

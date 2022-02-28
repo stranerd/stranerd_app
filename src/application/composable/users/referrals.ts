@@ -1,4 +1,4 @@
-import { onUnmounted, onMounted, ref, Ref } from 'vue'
+import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { GetReferrals, ListenToReferrals, ReferralEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
@@ -30,7 +30,7 @@ export const useReferralList = () => {
 			if (!id.value) return () => {
 			}
 			const lastDate = global[userId].referrals.value[global[userId].referrals.value.length - 1]?.createdAt
-			return ListenToReferrals.call(userId, {
+			return ListenToReferrals.call({
 				created: async (entity) => {
 					unshiftToReferralList(userId, entity)
 				},
@@ -59,7 +59,7 @@ export const useReferralList = () => {
 		await global[userId].setLoading(true)
 		try {
 			const lastDate = global[userId].referrals.value[global[userId].referrals.value.length - 1]?.createdAt
-			const referrals = await GetReferrals.call(userId, lastDate)
+			const referrals = await GetReferrals.call(lastDate)
 			global[userId].hasMore.value = !!referrals.pages.next
 			referrals.results.forEach((t) => pushToReferralList(userId, t))
 		} catch (e) {

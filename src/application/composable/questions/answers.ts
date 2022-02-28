@@ -128,7 +128,7 @@ export const useAnswer = (answer: AnswerEntity) => {
 		await setError('')
 		try {
 			await setLoading(true)
-			await VoteAnswer.call(answer.id, userId, vote)
+			await VoteAnswer.call(answer.id, vote)
 		} catch (error) {
 			await setError(error)
 		}

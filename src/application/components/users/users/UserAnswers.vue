@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import AnswerCard from '@app/components/questions/answers/UserAnswerListCard.vue'
-import { useUserAnswerList } from '@app/composable/users/user/answers'
+import { useUserAnswerList } from '@app/composable/users/users/answers'
 import { IonProgressBar } from '@ionic/vue'
 import EmptyState from '../../core/EmptyState.vue'
 import { UserEntity } from '@modules/users'

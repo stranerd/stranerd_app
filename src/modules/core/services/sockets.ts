@@ -48,9 +48,7 @@ export async function listenOnSocket<Model> (channel: string, listeners: Listene
 	})
 	return () => {
 		try {
-			socket?.emit('leave', { channel: finalChannel }, (_: SocketReturn) => {
-				return _
-			})
+			socket?.emit('leave', { channel: finalChannel }, (ret: SocketReturn) => ret)
 		} catch (e) {
 			return e
 		}

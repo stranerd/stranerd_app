@@ -16,7 +16,7 @@ export class ListenToChatsUseCase {
 		}
 		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.gt, value: date }]
 
-		return await this.repository.listenToMany(path, conditions, listener, (entity) => {
+		return await this.repository.listenToMany(conditions, listener, (entity) => {
 			if (!entity.path.includes(path[0]) || !entity.path.includes(path[1])) return false
 			if (date) return entity.createdAt >= date
 			else return true

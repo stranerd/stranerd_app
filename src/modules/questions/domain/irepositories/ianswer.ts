@@ -10,5 +10,5 @@ export interface IAnswerRepository {
 	find: (id: string) => Promise<AnswerEntity | null>
 	update: (id: string, data: AnswerToModel) => Promise<void>
 	delete: (id: string) => Promise<void>
-	vote: (id: string, userId: string, vote: boolean) => Promise<void>
+	vote: (id: string, vote: boolean) => Promise<void>
 }

@@ -56,7 +56,7 @@ export const useChats = (userId: string) => {
 		try {
 			await global[userId].setLoading(true)
 			const lastDate = global[userId].chats.value[0]?.createdAt
-			const c = await GetChats.call(path, lastDate)
+			const c = await GetChats.call(lastDate)
 			global[userId].hasMore.value = !!c.pages.next
 			c.results.map((c) => pushToChats(userId, c))
 			global[userId].fetched.value = true
@@ -123,8 +123,6 @@ export const useChats = (userId: string) => {
 }
 
 export const useCreateChat = (userId: string, sessionId?: string) => {
-	const { id } = useAuth()
-	const path = [id.value, userId] as [string, string]
 	const factory = ref(new ChatFactory()) as Ref<ChatFactory>
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
@@ -137,7 +135,7 @@ export const useCreateChat = (userId: string, sessionId?: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddChat.call(path, factory.value)
+				await AddChat.call(factory.value)
 				factory.value.reset()
 			} catch (e) {
 				await setError(e)
@@ -155,7 +153,7 @@ export const useCreateChat = (userId: string, sessionId?: string) => {
 				mediaFactory.to = userId
 				mediaFactory.media = file
 				try {
-					await AddChat.call(path, mediaFactory)
+					await AddChat.call(mediaFactory)
 				} catch (error) {
 					await setError(error)
 				}

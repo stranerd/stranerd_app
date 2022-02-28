@@ -14,7 +14,7 @@
 import { defineComponent } from 'vue'
 import { IonProgressBar } from '@ionic/vue'
 import VideoListCard from '@app/components/study/videos/VideoListCard.vue'
-import { useUserVideoList } from '@app/composable/users/user/videos'
+import { useUserVideoList } from '@app/composable/users/users/videos'
 import EmptyState from '../../core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 import { VideoEntity } from '@modules/study'

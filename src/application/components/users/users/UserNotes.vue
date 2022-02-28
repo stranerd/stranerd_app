@@ -14,7 +14,7 @@
 import { defineComponent } from 'vue'
 import { IonProgressBar } from '@ionic/vue'
 import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
-import { useUserNoteList } from '@app/composable/users/user/notes'
+import { useUserNoteList } from '@app/composable/users/users/notes'
 import EmptyState from '../../core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 import { NoteEntity } from '@modules/study'

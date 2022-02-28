@@ -8,6 +8,6 @@ export class MarkChatReadUseCase {
 	}
 
 	async call (path: [string, string], id: string) {
-		return await this.repository.markRead(path, id, path[1])
+		return await this.repository.markRead(id, path[1])
 	}
 }

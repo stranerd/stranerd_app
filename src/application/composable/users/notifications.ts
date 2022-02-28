@@ -30,7 +30,7 @@ export const useNotificationList = () => {
 			if (!userId) return () => {
 			}
 			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
-			return ListenToNotifications.call(userId, {
+			return ListenToNotifications.call({
 				created: async (entity) => {
 					unshiftToNotificationList(userId, entity)
 				},
@@ -59,7 +59,7 @@ export const useNotificationList = () => {
 		await global[userId].setLoading(true)
 		try {
 			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
-			const notifications = await GetNotifications.call(userId, lastDate)
+			const notifications = await GetNotifications.call(lastDate)
 			global[userId].hasMore.value = !!notifications.pages.next
 			notifications.results.forEach((t) => pushToNotificationList(userId, t))
 		} catch (e) {
@@ -74,7 +74,7 @@ export const useNotificationList = () => {
 			if (!userId) return () => {
 			}
 			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
-			return ListenToNotifications.call(userId, {
+			return ListenToNotifications.call({
 				created: async (entity) => {
 					unshiftToNotificationList(userId, entity)
 				},

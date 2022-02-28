@@ -74,7 +74,7 @@
 import { defineComponent } from 'vue'
 import PageLoading from '@app/components/core/PageLoading.vue'
 import Justified from '@app/layouts/Justified.vue'
-import { useUser } from '@app/composable/users/user'
+import { useUser } from '@app/composable/users/users'
 import { useRoute } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 import { checkmarkCircle } from 'ionicons/icons'
