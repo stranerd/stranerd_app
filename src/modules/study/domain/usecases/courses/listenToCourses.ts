@@ -11,7 +11,7 @@ export class ListenToCoursesUseCase {
 
 	async call (listener: Listeners<CourseEntity>) {
 		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt' }],
+			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
 

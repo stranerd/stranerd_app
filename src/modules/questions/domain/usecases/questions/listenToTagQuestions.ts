@@ -11,7 +11,7 @@ export class ListenToTagQuestionsUseCase {
 
 	async call (tag: string, listener: Listeners<QuestionEntity>, date?: number) {
 		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt' }],
+			sort: [{ field: 'createdAt', desc: true }],
 			where: [{ field: 'tags', value: tag }]
 		}
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })

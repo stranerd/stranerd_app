@@ -1,4 +1,4 @@
-import { computed, onUnmounted, onMounted, ref, Ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { GetTagQuestions, ListenToTagQuestions, QuestionEntity } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 
@@ -90,6 +90,25 @@ export const useTagQuestionList = (tag: string) => {
 		await global[tag].setLoading(false)
 	}
 
+	const fetchOlderQuestions = async () => {
+		await fetchQuestions()
+		await listener.resetListener(async () => {
+			const lastDate = global[tag].questions.value[global[tag].questions.value.length - 1]?.createdAt
+			return await ListenToTagQuestions.call(tag, {
+				created: async (entity) => {
+					unshiftToQuestionList(tag, entity)
+				},
+				updated: async (entity) => {
+					unshiftToQuestionList(tag, entity)
+				},
+				deleted: async (entity) => {
+					const index = global[tag].questions.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) global[tag].questions.value.splice(index, 1)
+				}
+			}, lastDate ? lastDate - 1 : undefined)
+		})
+	}
+
 	onMounted(async () => {
 		if (!global[tag].fetched.value && !global[tag].loading.value) await fetchQuestions()
 		await listener.startListener()
@@ -98,5 +117,5 @@ export const useTagQuestionList = (tag: string) => {
 		await listener.closeListener()
 	})
 
-	return { ...global[tag], filteredQuestions, answeredChoices, fetchOlderQuestions: fetchQuestions }
+	return { ...global[tag], filteredQuestions, answeredChoices, fetchOlderQuestions }
 }

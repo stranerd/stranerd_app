@@ -61,11 +61,6 @@ const pushToMyGlobalSetList = (userId: string, set: SetEntity) => {
 	if (index !== -1) myGlobal[userId].sets.value.splice(index, 1, set)
 	else myGlobal[userId].sets.value.push(set)
 }
-const unshiftToMyGlobalSetList = (userId: string, set: SetEntity) => {
-	const index = myGlobal[userId].sets.value.findIndex((q) => q.id === set.id)
-	if (index !== -1) myGlobal[userId].sets.value.splice(index, 1, set)
-	else myGlobal[userId].sets.value.unshift(set)
-}
 
 export const useUserRootSet = (userId = useAuth().id.value) => {
 	if (myGlobal[userId] === undefined) {
@@ -74,10 +69,10 @@ export const useUserRootSet = (userId = useAuth().id.value) => {
 			}
 			return await ListenToUserRootSet.call(userId, {
 				created: async (entity) => {
-					unshiftToMyGlobalSetList(userId, entity)
+					pushToMyGlobalSetList(userId, entity)
 				},
 				updated: async (entity) => {
-					unshiftToMyGlobalSetList(userId, entity)
+					pushToMyGlobalSetList(userId, entity)
 				},
 				deleted: async (entity) => {
 					const index = myGlobal[userId].sets.value.findIndex((q) => q.id === entity.id)

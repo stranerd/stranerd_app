@@ -42,12 +42,12 @@ export const useUserFlashCardList = (id: string) => {
 		return await ListenToUserFlashCards.call(id, {
 			created: async (entity) => {
 				const index = global[id].flashCards.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].flashCards.value.push(entity)
+				if (index === -1) global[id].flashCards.value.unshift(entity)
 				else global[id].flashCards.value.splice(index, 1, entity)
 			},
 			updated: async (entity) => {
 				const index = global[id].flashCards.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].flashCards.value.push(entity)
+				if (index === -1) global[id].flashCards.value.unshift(entity)
 				else global[id].flashCards.value.splice(index, 1, entity)
 			},
 			deleted: async (entity) => {

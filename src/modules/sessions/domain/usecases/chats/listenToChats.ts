@@ -11,7 +11,7 @@ export class ListenToChatsUseCase {
 
 	async call (path: [string, string], listener: Listeners<ChatEntity>, date?: number) {
 		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt' }],
+			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
 		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.gt, value: date }]

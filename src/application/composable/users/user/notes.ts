@@ -42,12 +42,12 @@ export const useUserNoteList = (id: string) => {
 		return await ListenToUserNotes.call(id, {
 			created: async (entity) => {
 				const index = global[id].notes.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].notes.value.push(entity)
+				if (index === -1) global[id].notes.value.unshift(entity)
 				else global[id].notes.value.splice(index, 1, entity)
 			},
 			updated: async (entity) => {
 				const index = global[id].notes.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].notes.value.push(entity)
+				if (index === -1) global[id].notes.value.unshift(entity)
 				else global[id].notes.value.splice(index, 1, entity)
 			},
 			deleted: async (entity) => {

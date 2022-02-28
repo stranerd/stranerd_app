@@ -1,4 +1,4 @@
-import { onUnmounted, onMounted, ref, Ref } from 'vue'
+import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import {
 	AddComment,
 	CommentEntity,
@@ -11,12 +11,20 @@ import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable
 
 const global = {} as Record<string, {
 	comments: Ref<CommentEntity[]>
+	hasMore: Ref<boolean>
 	fetched: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+
+const pushToGlobalList = (videoId: string, entity: CommentEntity) => {
+	const index = global[videoId].comments.value.findIndex((c) => c.id === entity.id)
+	if (index === -1) global[videoId].comments.value.push(entity)
+	else global[videoId].comments.value.splice(index, 1, entity)
+}
 
 export const useVideoCommentsList = (videoId: string) => {
 	if (global[videoId] === undefined) global[videoId] = {
 		comments: ref([]),
+		hasMore: ref(false),
 		fetched: ref(false),
 		...useErrorHandler(),
 		...useLoadingHandler()
@@ -26,7 +34,9 @@ export const useVideoCommentsList = (videoId: string) => {
 		await global[videoId].setError('')
 		try {
 			await global[videoId].setLoading(true)
-			global[videoId].comments.value = (await GetVideoComments.call(videoId)).results
+			const comments = await GetVideoComments.call(videoId)
+			comments.results.forEach((comment) => pushToGlobalList(videoId, comment))
+			global[videoId].hasMore.value = !!comments.pages.next
 			global[videoId].fetched.value = true
 		} catch (error) {
 			await global[videoId].setError(error)
@@ -38,12 +48,12 @@ export const useVideoCommentsList = (videoId: string) => {
 		return await ListenToVideoComments.call(videoId, {
 			created: async (entity) => {
 				const index = global[videoId].comments.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[videoId].comments.value.push(entity)
+				if (index === -1) global[videoId].comments.value.unshift(entity)
 				else global[videoId].comments.value.splice(index, 1, entity)
 			},
 			updated: async (entity) => {
 				const index = global[videoId].comments.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[videoId].comments.value.push(entity)
+				if (index === -1) global[videoId].comments.value.unshift(entity)
 				else global[videoId].comments.value.splice(index, 1, entity)
 			},
 			deleted: async (entity) => {

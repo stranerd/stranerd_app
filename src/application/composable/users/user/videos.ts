@@ -42,12 +42,12 @@ export const useUserVideoList = (id: string) => {
 		return await ListenToUserVideos.call(id, {
 			created: async (entity) => {
 				const index = global[id].videos.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].videos.value.push(entity)
+				if (index === -1) global[id].videos.value.unshift(entity)
 				else global[id].videos.value.splice(index, 1, entity)
 			},
 			updated: async (entity) => {
 				const index = global[id].videos.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].videos.value.push(entity)
+				if (index === -1) global[id].videos.value.unshift(entity)
 				else global[id].videos.value.splice(index, 1, entity)
 			},
 			deleted: async (entity) => {

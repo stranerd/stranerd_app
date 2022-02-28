@@ -66,7 +66,7 @@ export const useReportsList = () => {
 			const lastDate = global.reports.value[0]?.createdAt
 			const reports = await GetReports.call(ReportType.users, lastDate)
 			global.hasMore.value = !!reports.pages.next
-			reports.results.forEach(unshiftToReportList)
+			reports.results.forEach(pushToReportList)
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)

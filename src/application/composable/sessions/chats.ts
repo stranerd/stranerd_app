@@ -1,8 +1,9 @@
-import { computed, onUnmounted, onMounted, ref, Ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { AddChat, ChatEntity, ChatFactory, GetChats, ListenToChats, MarkChatRead } from '@modules/sessions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { getRandomValue } from '@utils/commons'
+import { Media } from '@modules/core'
 
 const global = {} as Record<string, {
 	chats: Ref<ChatEntity[]>
@@ -26,11 +27,13 @@ const orderChats = (chats: ChatEntity[]) => {
 		date1.getMonth() === date2.getMonth() &&
 		date1.getFullYear() === date2.getFullYear()
 	const res = [] as ChatEntity[][]
-	chats.forEach((chat, index) => {
-		const lastChat = chats[index - 1]
-		if (index === 0 || !isSameDay(new Date(chat.createdAt), new Date(lastChat.createdAt))) return res.push([chat])
-		else return res[res.length - 1].push(chat)
-	})
+	chats
+		.sort((a, b) => a.createdAt - b.createdAt < 0 ? -1 : 1)
+		.forEach((chat, index) => {
+			const lastChat = chats[index - 1]
+			if (index === 0 || !isSameDay(new Date(chat.createdAt), new Date(lastChat.createdAt))) return res.push([chat])
+			else return res[res.length - 1].push(chat)
+		})
 	return res.map((chats) => {
 		const date = chats[0].createdAt
 		return { chats, date, hash: getRandomValue() }
@@ -48,22 +51,14 @@ export const useChats = (userId: string) => {
 	}
 	const path = [id.value, userId] as [string, string]
 
-	const chats = computed({
-		// TODO: figure out if the sort is important cos it slows down initial request
-		get: () => global[userId].chats.value, /* .sort((a, b) => {
-		 return a.createdAt - b.createdAt < 0 ? -1 : 1
-		 }), */
-		set: (chats) => chats.map((c) => pushToChats(userId, c))
-	})
-
 	const fetchChats = async () => {
 		await global[userId].setError('')
 		try {
 			await global[userId].setLoading(true)
-			const lastDate = chats.value[0]?.createdAt
+			const lastDate = global[userId].chats.value[0]?.createdAt
 			const c = await GetChats.call(path, lastDate)
 			global[userId].hasMore.value = !!c.pages.next
-			c.results.map((c) => unshiftToChats(userId, c))
+			c.results.map((c) => pushToChats(userId, c))
 			global[userId].fetched.value = true
 		} catch (e) {
 			await global[userId].setError(e)
@@ -72,13 +67,13 @@ export const useChats = (userId: string) => {
 	}
 
 	const listener = useListener(async () => {
-		const lastDate = chats.value[0]?.createdAt
+		const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
 		return ListenToChats.call(path, {
 			created: async (entity) => {
-				pushToChats(userId, entity)
+				unshiftToChats(userId, entity)
 			},
 			updated: async (entity) => {
-				pushToChats(userId, entity)
+				unshiftToChats(userId, entity)
 			},
 			deleted: async (entity) => {
 				const index = global[userId].chats.value.findIndex((c) => c.id === entity.id)
@@ -90,7 +85,7 @@ export const useChats = (userId: string) => {
 	const fetchOlderChats = async () => {
 		await fetchChats()
 		await listener.resetListener(async () => {
-			const lastDate = chats.value[0]?.createdAt
+			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
 			return ListenToChats.call(path, {
 				created: async (entity) => {
 					pushToChats(userId, entity)
@@ -116,7 +111,7 @@ export const useChats = (userId: string) => {
 
 	return {
 		chats: computed({
-			get: () => orderChats(chats.value),
+			get: () => orderChats(global[userId].chats.value),
 			set: (sessions) => sessions.map((session) => session.chats.map((c) => pushToChats(userId, c)))
 		}),
 		fetched: global[userId].fetched,
@@ -152,7 +147,7 @@ export const useCreateChat = (userId: string, sessionId?: string) => {
 		}
 	}
 
-	const createMediaChat = async (files: File[]) => {
+	const createMediaChat = async (files: Media[]) => {
 		if (!loading.value) {
 			await setLoading(true)
 			const promises = files.map(async (file) => {

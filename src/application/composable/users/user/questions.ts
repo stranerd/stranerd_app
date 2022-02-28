@@ -42,12 +42,12 @@ export const useUserQuestionList = (id: string) => {
 		return await ListenToUserQuestions.call(id, {
 			created: async (entity) => {
 				const index = global[id].questions.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].questions.value.push(entity)
+				if (index === -1) global[id].questions.value.unshift(entity)
 				else global[id].questions.value.splice(index, 1, entity)
 			},
 			updated: async (entity) => {
 				const index = global[id].questions.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].questions.value.push(entity)
+				if (index === -1) global[id].questions.value.unshift(entity)
 				else global[id].questions.value.splice(index, 1, entity)
 			},
 			deleted: async (entity) => {

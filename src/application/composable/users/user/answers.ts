@@ -42,12 +42,12 @@ export const useUserAnswerList = (id: string) => {
 		return await ListenToUserAnswers.call(id, {
 			created: async (entity) => {
 				const index = global[id].answers.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].answers.value.push(entity)
+				if (index === -1) global[id].answers.value.unshift(entity)
 				else global[id].answers.value.splice(index, 1, entity)
 			},
 			updated: async (entity) => {
 				const index = global[id].answers.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].answers.value.push(entity)
+				if (index === -1) global[id].answers.value.unshift(entity)
 				else global[id].answers.value.splice(index, 1, entity)
 			},
 			deleted: async (entity) => {

@@ -11,7 +11,7 @@ export class ListenToTestsUseCase {
 
 	async call (listener: Listeners<TestEntity>) {
 		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt' }],
+			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
 

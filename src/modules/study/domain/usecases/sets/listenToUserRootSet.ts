@@ -15,7 +15,7 @@ export class ListenToUserRootSetUseCase {
 				field: 'data.type',
 				value: SetType.users
 			}],
-			sort: [{ field: 'createdAt', desc: true }],
+			sort: [{ field: 'createdAt' }],
 			all: true
 		}
 
