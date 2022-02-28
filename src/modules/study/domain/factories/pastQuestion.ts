@@ -239,7 +239,7 @@ export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQue
 	toModel = async () => {
 		if (this.valid) {
 			this.set('questionMedia', await Promise.all(this.questionMedia.map(async (doc) => {
-				if (doc instanceof UploadedFile) return await this.uploadFile(`pastQuestions/${this.type}/questions`, doc)
+				if (doc instanceof UploadedFile) return await this.uploadFile(`study/pastQuestions/${this.type}/questions`, doc)
 				return doc
 			})))
 
@@ -247,18 +247,18 @@ export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQue
 				this.set('optionsMedia', await Promise.all(
 					this.optionsMedia.map(async (option) => {
 						option.map(async (doc) => {
-							if (doc instanceof UploadedFile) return await this.uploadFile(`pastQuestions/${this.type}/options`, doc)
+							if (doc instanceof UploadedFile) return await this.uploadFile(`study/pastQuestions/${this.type}/options`, doc)
 							return doc
 						})
 					})
 				))
 				this.set('explanationMedia', await Promise.all(this.explanationMedia.map(async (doc) => {
-					if (doc instanceof UploadedFile) return await this.uploadFile(`pastQuestions/${this.type}/explanations`, doc)
+					if (doc instanceof UploadedFile) return await this.uploadFile(`study/pastQuestions/${this.type}/explanations`, doc)
 					return doc
 				})))
 			} else {
 				this.set('answerMedia', await Promise.all(this.answerMedia.map(async (doc) => {
-					if (doc instanceof UploadedFile) return await this.uploadFile(`pastQuestions/${this.type}/answers`, doc)
+					if (doc instanceof UploadedFile) return await this.uploadFile(`study/pastQuestions/${this.type}/answers`, doc)
 					return doc
 				})))
 			}

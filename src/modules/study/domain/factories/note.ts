@@ -138,8 +138,8 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 
 	toModel = async () => {
 		if (this.valid) {
-			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('notes', this.media)
-			if (this.preview instanceof UploadedFile) this.preview = await this.uploadFile('note-previews', this.preview)
+			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('study/notes', this.media)
+			if (this.preview instanceof UploadedFile) this.preview = await this.uploadFile('study/note-previews', this.preview)
 			if (this.isHosted) this.link = null
 			else this.media = null
 			const { title, description, isHosted, link, media, tags, preview, isPublic } = this.validValues

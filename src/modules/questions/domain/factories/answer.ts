@@ -70,7 +70,7 @@ export class AnswerFactory extends BaseFactory<AnswerEntity, AnswerToModel, Keys
 	toModel = async () => {
 		if (this.valid) {
 			const docs = await Promise.all(this.attachments.map(async (doc) => {
-				if (doc instanceof UploadedFile) return await this.uploadFile('answers', doc)
+				if (doc instanceof UploadedFile) return await this.uploadFile('questions/answers', doc)
 				return doc
 			}))
 			this.set('attachments', docs)

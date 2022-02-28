@@ -114,7 +114,7 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 	toModel = async () => {
 		if (this.valid) {
 			const docs = await Promise.all(this.attachments.map(async (doc) => {
-				if (doc instanceof UploadedFile) return await this.uploadFile('questions', doc)
+				if (doc instanceof UploadedFile) return await this.uploadFile('questions/questions', doc)
 				return doc
 			}))
 			this.set('attachments', docs)
