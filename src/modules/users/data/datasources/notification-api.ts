@@ -19,14 +19,14 @@ export class NotificationApiDataSource implements NotificationBaseDataSource {
 	}
 
 	async listenToOne (_: string, id: string, listeners: Listeners<NotificationFromModel>) {
-		const listener = listenOnSocket(`notifications/${id}`, listeners)
+		const listener = listenOnSocket(`users/notifications/${id}`, listeners)
 		const model = await this.find(_, id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (_: string, query: QueryParams, listeners: Listeners<NotificationFromModel>) {
-		const listener = listenOnSocket('notifications', listeners)
+		const listener = listenOnSocket('users/notifications', listeners)
 		const models = await this.get(_, query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

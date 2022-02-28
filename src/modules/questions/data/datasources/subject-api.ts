@@ -32,14 +32,14 @@ export class SubjectApiDataSource implements SubjectBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<SubjectFromModel>) {
-		const listener = listenOnSocket(`subjects/${id}`, listeners)
+		const listener = listenOnSocket(`questions/subjects/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<SubjectFromModel>) {
-		const listener = listenOnSocket('subjects', listeners)
+		const listener = listenOnSocket('questions/subjects', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

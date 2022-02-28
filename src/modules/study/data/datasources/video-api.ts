@@ -25,14 +25,14 @@ export class VideoApiDataSource implements VideoBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<VideoFromModel>) {
-		const listener = listenOnSocket(`videos/${id}`, listeners)
+		const listener = listenOnSocket(`study/videos/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<VideoFromModel>) {
-		const listener = listenOnSocket('videos', listeners)
+		const listener = listenOnSocket('study/videos', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

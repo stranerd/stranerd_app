@@ -24,14 +24,14 @@ export class ChatApiDataSource implements ChatBaseDataSource {
 	}
 
 	async listenToMany (_: [string, string], query: QueryParams, listeners: Listeners<ChatFromModel>) {
-		const listener = listenOnSocket('chats', listeners)
+		const listener = listenOnSocket('sessions/chats', listeners)
 		const models = await this.get(_, query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
 	}
 
 	async listenToOne (_: [string, string], id: string, listeners: Listeners<ChatFromModel>) {
-		const listener = listenOnSocket(`chats/${id}`, listeners)
+		const listener = listenOnSocket(`sessions/chats/${id}`, listeners)
 		const model = await this.find(_, id)
 		if (model) await listeners.updated(model)
 		return listener

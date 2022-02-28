@@ -116,9 +116,7 @@ export const useUserRootSet = (userId = useAuth().id.value) => {
 		if (userId !== useAuth().id.value) await myGlobal[userId].listener.closeListener()
 	})
 
-	const rootSet = computed(() => myGlobal[userId].sets.value[0] ?? null)
-
-	return { ...myGlobal[userId], rootSet, fetchSets }
+	return { ...myGlobal[userId], fetchSets }
 }
 
 export const useSetById = (setId: string) => {

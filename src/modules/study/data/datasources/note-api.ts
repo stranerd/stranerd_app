@@ -25,14 +25,14 @@ export class NoteApiDataSource implements NoteBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<NoteFromModel>) {
-		const listener = listenOnSocket(`notes/${id}`, listeners)
+		const listener = listenOnSocket(`study/notes/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<NoteFromModel>) {
-		const listener = listenOnSocket('notes', listeners)
+		const listener = listenOnSocket('study/notes', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

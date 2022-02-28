@@ -24,14 +24,14 @@ export class TestApiDataSource implements TestBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<TestFromModel>) {
-		const listener = listenOnSocket(`tests/${id}`, listeners)
+		const listener = listenOnSocket(`study/tests/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<TestFromModel>) {
-		const listener = listenOnSocket('tests', listeners)
+		const listener = listenOnSocket('study/tests', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

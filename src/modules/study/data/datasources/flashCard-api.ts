@@ -25,14 +25,14 @@ export class FlashCardApiDataSource implements FlashCardBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<FlashCardFromModel>) {
-		const listener = listenOnSocket(`flashCards/${id}`, listeners)
+		const listener = listenOnSocket(`study/flashCards/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<FlashCardFromModel>) {
-		const listener = listenOnSocket('flashCards', listeners)
+		const listener = listenOnSocket('study/flashCards', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

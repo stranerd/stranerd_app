@@ -24,14 +24,14 @@ export class PastQuestionApiDataSource implements PastQuestionBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<PastQuestionFromModel>) {
-		const listener = listenOnSocket(`pastQuestions/${id}`, listeners)
+		const listener = listenOnSocket(`study/pastQuestions/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<PastQuestionFromModel>) {
-		const listener = listenOnSocket('pastQuestions', listeners)
+		const listener = listenOnSocket('study/pastQuestions', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

@@ -24,14 +24,14 @@ export class InstitutionApiDataSource implements InstitutionBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<InstitutionFromModel>) {
-		const listener = listenOnSocket(`institutions/${id}`, listeners)
+		const listener = listenOnSocket(`study/institutions/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<InstitutionFromModel>) {
-		const listener = listenOnSocket('institutions', listeners)
+		const listener = listenOnSocket('study/institutions', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

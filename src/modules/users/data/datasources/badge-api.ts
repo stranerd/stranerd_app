@@ -15,7 +15,7 @@ export class BadgeApiDataSource implements BadgeBaseDataSource {
 	}
 
 	async listenToOne (_: string, id: string, listeners: Listeners<BadgeFromModel>) {
-		const listener = listenOnSocket(`badges/${id}`, listeners)
+		const listener = listenOnSocket(`users/badges/${id}`, listeners)
 		const model = await this.find(_)
 		if (model) await listeners.updated(model)
 		return listener
