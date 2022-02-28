@@ -12,7 +12,7 @@ export class ListenToQuestionCommentsUseCase {
 	async call (questionId: string, listener: Listeners<CommentEntity>) {
 		return await this.repository.listenToMany({
 			where: [{ field: 'questionId', value: questionId }],
-			sort: { field: 'createdAt', order: 1 },
+			sort: [{ field: 'createdAt' }],
 			all: true
 		}, listener, (entity) => entity.questionId === questionId)
 	}
@@ -28,7 +28,7 @@ export class ListenToAnswerCommentsUseCase {
 	async call (answerId: string, listener: Listeners<CommentEntity>) {
 		return await this.repository.listenToMany({
 			where: [{ field: 'answerId', value: answerId }],
-			sort: { field: 'createdAt', order: 1 },
+			sort: [{ field: 'createdAt' }],
 			all: true
 		}, listener, (entity) => entity.answerId === answerId)
 	}

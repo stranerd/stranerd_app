@@ -12,7 +12,7 @@ export class GetLeaderboardUseCase {
 	async call (type: RankingTimes) {
 		const conditions: QueryParams = {
 			where: [{ field: `account.rankings.${type}`, condition: Conditions.gt, value: 0 }],
-			sort: { field: `account.rankings.${type}`, order: -1 },
+			sort: [{ field: `account.rankings.${type}`, desc: true }],
 			limit: 50
 		}
 

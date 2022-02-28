@@ -12,7 +12,7 @@ export class ListenToVideoCommentsUseCase {
 	async call (videoId: string, listener: Listeners<CommentEntity>, date?: number) {
 		const conditions: QueryParams = {
 			where: [{ field: 'data.videoId', value: videoId }],
-			sort: { field: 'createdAt', order: 1 },
+			sort: [{ field: 'createdAt' }],
 			all: true
 		}
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })

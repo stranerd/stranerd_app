@@ -15,7 +15,7 @@ export class GetPastQuestionsUseCase {
 		questionType: string | null
 	}) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: -1 },
+			sort: [{ field: 'createdAt', desc: true }],
 			all: true,
 			where: []
 		}

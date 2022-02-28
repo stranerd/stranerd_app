@@ -11,7 +11,7 @@ export class GetTagQuestionsUseCase {
 
 	async call (tag: string, date?: number) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: -1 },
+			sort: [{ field: 'createdAt', desc: true }],
 			limit: PAGINATION_LIMIT,
 			where: [{ field: 'tags', value: tag }]
 		}

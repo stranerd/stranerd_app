@@ -22,7 +22,7 @@ export interface QueryParams {
 	where?: Where[]
 	auth?: Where[]
 	whereType?: 'and' | 'or'
-	sort?: { field: string, order?: 1 | -1 }
+	sort?: [{ field: string, desc?: boolean }]
 	limit?: number
 	all?: boolean
 	page?: number

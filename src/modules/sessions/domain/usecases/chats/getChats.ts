@@ -11,7 +11,7 @@ export class GetChatsUseCase {
 
 	async call (path: [string, string], date?: number) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: -1 },
+			sort: [{ field: 'createdAt', desc: true }],
 			limit: CHAT_PAGINATION_LIMIT
 		}
 

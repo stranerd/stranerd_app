@@ -11,7 +11,7 @@ export class ListenToInstitutionsUseCase {
 
 	async call (listener: Listeners<InstitutionEntity>) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: 1 },
+			sort: [{ field: 'createdAt' }],
 			all: true
 		}
 

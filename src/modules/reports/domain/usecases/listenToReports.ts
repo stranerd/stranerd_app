@@ -11,7 +11,7 @@ export class ListenToReportsUseCase {
 
 	async call (type: ReportType, listener: Listeners<ReportEntity>, date?: number) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: 1 },
+			sort: [{ field: 'createdAt' }],
 			where: [{ field: 'type', value: type }],
 			all: true
 		}

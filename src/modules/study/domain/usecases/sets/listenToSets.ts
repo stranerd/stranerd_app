@@ -12,7 +12,7 @@ export class ListenToSetsUseCase {
 	async call (listener: Listeners<SetEntity>, date?: number) {
 		const conditions: QueryParams = {
 			where: [{ field: 'isPublic', value: true }],
-			sort: { field: 'createdAt', order: -1 },
+			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })

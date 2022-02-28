@@ -11,7 +11,7 @@ export class ListenToFlashCardsUseCase {
 
 	async call (listener: Listeners<FlashCardEntity>, date?: number) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: 1 },
+			sort: [{ field: 'createdAt' }],
 			all: true
 		}
 		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.gt, value: date }]

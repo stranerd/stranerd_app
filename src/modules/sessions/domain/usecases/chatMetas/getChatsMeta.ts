@@ -10,7 +10,7 @@ export class GetChatsMetaUseCase {
 
 	async call () {
 		const conditions: QueryParams = {
-			sort: { field: 'last.createdAt', order: -1 },
+			sort: [{ field: 'last.createdAt', desc: true }],
 			all: true
 		}
 		return await this.repository.get(conditions)

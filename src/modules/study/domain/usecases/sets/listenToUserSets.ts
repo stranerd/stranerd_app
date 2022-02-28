@@ -12,7 +12,7 @@ export class ListenToUserSetsUseCase {
 	async call (userId: string, listener: Listeners<SetEntity>) {
 		const conditions: QueryParams = {
 			where: [{ field: 'userId', value: userId }],
-			sort: { field: 'createdAt', order: -1 },
+			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
 

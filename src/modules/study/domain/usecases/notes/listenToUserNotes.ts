@@ -11,7 +11,7 @@ export class ListenToUserNotesUseCase {
 
 	async call (userId: string, listener: Listeners<NoteEntity>, date?: number) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: -1 },
+			sort: [{ field: 'createdAt', desc: true }],
 			all: true,
 			where: [{ field: 'userId', value: userId }]
 		}

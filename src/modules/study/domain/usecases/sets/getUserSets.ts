@@ -11,7 +11,7 @@ export class GetUserSetsUseCase {
 	async call (userId: string) {
 		const conditions: QueryParams = {
 			where: [{ field: 'userId', value: userId }],
-			sort: { field: 'createdAt', order: -1 },
+			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
 

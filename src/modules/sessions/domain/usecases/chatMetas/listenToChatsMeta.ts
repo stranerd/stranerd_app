@@ -11,7 +11,7 @@ export class ListenToChatsMetaUseCase {
 
 	async call (listener: Listeners<ChatMetaEntity>) {
 		const conditions: QueryParams = {
-			sort: { field: 'last.createdAt', order: 1 },
+			sort: [{ field: 'last.createdAt' }],
 			all: true
 		}
 		return await this.repository.listenToMany(conditions, listener, (entity) => !!entity)
