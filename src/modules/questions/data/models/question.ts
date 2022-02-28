@@ -10,7 +10,6 @@ export interface QuestionFromModel extends QuestionToModel {
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
 	isAnswered: boolean
-	commentsCount: number
 	createdAt: number
 	updatedAt: number
 }

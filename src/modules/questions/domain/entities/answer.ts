@@ -14,14 +14,13 @@ export class AnswerEntity extends BaseEntity {
 	public readonly userBio: UserBio
 	public readonly userRoles: UserRoles
 	public readonly votes: { userId: string, vote: 1 | -1 }[]
-	public readonly commentsCount: number
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
 		             id, title, body, questionId,
 		             createdAt, userId, userBio, userRoles, attachments,
-		             best, votes, commentsCount, updatedAt
+		             best, votes, updatedAt
 	             }: AnswerConstructorArgs) {
 		super()
 		this.id = id
@@ -34,7 +33,6 @@ export class AnswerEntity extends BaseEntity {
 		this.userRoles = generateDefaultRoles(userRoles)
 		this.best = best ?? false
 		this.votes = votes
-		this.commentsCount = commentsCount ?? 0
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -64,7 +62,7 @@ export class AnswerEntity extends BaseEntity {
 	}
 
 	get isModified () {
-		return this.best || this.commentsCount > 0
+		return this.best
 	}
 
 	get canBeEdited () {
@@ -101,5 +99,4 @@ type AnswerConstructorArgs = {
 	userRoles: UserRoles
 	best: boolean
 	votes: { userId: string, vote: 1 | -1 }[]
-	commentsCount: number
 }

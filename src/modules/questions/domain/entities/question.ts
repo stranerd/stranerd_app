@@ -16,7 +16,6 @@ type QuestionConstructorArgs = {
 	userRoles: UserRoles
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
-	commentsCount: number
 	createdAt: number
 	updatedAt: number
 }
@@ -49,7 +48,6 @@ export class QuestionEntity extends BaseEntity {
 	public readonly userRoles: UserRoles
 	public readonly bestAnswers: string[]
 	public readonly answers: { id: string, userId: string }[]
-	public readonly commentsCount: number
 	public readonly isAnswered: boolean
 	public readonly createdAt: number
 	public readonly updatedAt: number
@@ -57,7 +55,7 @@ export class QuestionEntity extends BaseEntity {
 	constructor ({
 		             id, body, subjectId, isAnswered, data,
 		             bestAnswers, createdAt, userId, userBio, userRoles, attachments,
-		             answers, commentsCount, tags, updatedAt
+		             answers, tags, updatedAt
 	             }: QuestionConstructorArgs) {
 		super()
 		this.id = id
@@ -72,7 +70,6 @@ export class QuestionEntity extends BaseEntity {
 		this.userRoles = generateDefaultRoles(userRoles)
 		this.bestAnswers = bestAnswers
 		this.answers = answers
-		this.commentsCount = commentsCount ?? 0
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -94,7 +91,7 @@ export class QuestionEntity extends BaseEntity {
 	}
 
 	get isModified () {
-		return this.commentsCount > 0 || this.answers.length > 0
+		return this.answers.length > 0
 	}
 
 	get canBeEdited () {
