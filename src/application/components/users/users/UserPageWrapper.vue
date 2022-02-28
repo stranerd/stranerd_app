@@ -20,7 +20,7 @@
 								<Tag :index="user.rank.level - 1" :secondary="true" :tag="user.rank.id" />
 								<IonButton v-if="isAdmin && id !== user.id" class="btn-white" size="small"
 									@click="user.isVerified ? deVerifyUser(user) : verifyUser(user)">
-									{{ user.isVerified ? 'Make User Unverified' : 'Make User Verified' }}
+									{{ user.isVerified ? 'Mark User Unverified' : 'Mark User Verified' }}
 								</IonButton>
 							</div>
 						</div>
@@ -50,7 +50,7 @@
 								exact-active-class="border-b-4 text-white border-white">
 								Videos
 							</router-link>
-							<router-link v-if="false" :to="`/users/${user.id}/folders`"
+							<router-link :to="`/users/${user.id}/sets`"
 								class="pb-2 cursor-pointer"
 								exact-active-class="border-b-4 text-white border-white">
 								Folders

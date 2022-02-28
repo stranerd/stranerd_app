@@ -2,20 +2,25 @@
 	<div class="flex flex-col gap-1 text-sm">
 		<template v-if="set">
 			<span class="flex gap-2 items-center">
-				<IonIcon v-if="root && sets.length" :icon="showSets ? chevronUp : chevronDown" class="text-2xl"
-					@click="showSets = !showSets" />
-				<IonText :class="{'font-bold': root}" class="truncate w-full max-w-[10rem]"
+				<IonText :class="{'font-bold': root}" class="truncate w-full max-w-[15rem] flex-grow"
 					@click="showSets = !showSets">
 					{{ root ? `Save To ${set.name}` : `-  ${set.name}` }}
 				</IonText>
-				<IonIcon v-if="!root && sets.length" :icon="showSets ? chevronUp : chevronDown" class="text-xl"
+				<IonIcon v-if="sets.length" :class="root ? 'text-2xl' : 'text-xl'"
+					:icon="showSets ? chevronUp : chevronDown"
 					@click="showSets = !showSets" />
 				<IonIcon :class="root ? 'text-2xl' : 'text-xl'"
 					:icon="set.allSaved.includes(itemId) ? bookmark : bookmarkOutline"
 					@click="saveItem" />
 			</span>
 		</template>
-		<div v-if="showSets && sets.length" :class="{'ml-2': set}">
+		<span v-else-if="sets.length === 0" class="flex gap-2 items-center flex-col">
+			<span class="font-bold max-w-[15rem]">No folders created. Go create one before you can save items</span>
+			<router-link to="/study/sets/create">
+				<IonIcon :icon="add" class="text-3xl" />
+			</router-link>
+		</span>
+		<div v-if="showSets && sets.length" :class="{'ml-2': set}" class="flex flex-col gap-2">
 			<SaveToSet v-for="loopSet in sets" :key="loopSet.hash" :itemId="itemId"
 				:root="!set"
 				:save="(savingSet) => save(savingSet)" :set="loopSet"
@@ -27,7 +32,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue'
 import { SetEntity } from '@modules/study'
-import { bookmark, bookmarkOutline, chevronDown, chevronUp } from 'ionicons/icons'
+import { add, bookmark, bookmarkOutline, chevronDown, chevronUp } from 'ionicons/icons'
 import { useSet, useUserRootSet } from '@app/composable/study/sets'
 
 export default defineComponent({
@@ -64,7 +69,7 @@ export default defineComponent({
 			else await props.save(props.set)
 		}
 		return {
-			chevronUp, chevronDown, bookmark, bookmarkOutline,
+			add, chevronUp, chevronDown, bookmark, bookmarkOutline,
 			showSets, loading, error, sets, saveItem
 		}
 	}

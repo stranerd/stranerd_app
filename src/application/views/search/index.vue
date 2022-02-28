@@ -70,7 +70,7 @@
 						<ion-text>Folders</ion-text>
 					</div>
 
-					<router-link :to="`/search/folders?search=${searchTerm}`"
+					<router-link :to="`/search/sets?search=${searchTerm}`"
 						class="text-primary text-body flex items-center font-bold">
 						<span>view all</span>
 					</router-link>

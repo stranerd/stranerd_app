@@ -18,7 +18,7 @@
 					<IonIcon v-if="set.isUserVerified" :icon="checkmarkCircle" color="primary" />
 				</ion-text>
 			</div>
-			<router-link :to="`/study/folders/${set.id}`">
+			<router-link :to="`/study/sets/${set.id}`">
 				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]" size="small">
 					Open
 				</ion-button>

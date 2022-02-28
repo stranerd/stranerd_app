@@ -35,7 +35,7 @@
 							exact-active-class="border-b-4 text-white border-white">
 							FlashCards
 						</router-link>
-						<router-link :to="`/search/folders?search=${searchTerm}`"
+						<router-link :to="`/search/sets?search=${searchTerm}`"
 							class="py-2 cursor-pointer"
 							exact-active-class="border-b-4 text-white border-white">
 							Folders

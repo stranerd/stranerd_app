@@ -12,7 +12,7 @@ import UserSets from '@app/components/users/users/UserSets.vue'
 import UserPageWrapper from '@app/components/users/users/UserPageWrapper.vue'
 
 export default defineComponent({
-	name: 'UsersUserIdFolders',
+	name: 'UsersUserIdSets',
 	displayName: 'Profile',
 	components: { UserPageWrapper, UserSets }
 })

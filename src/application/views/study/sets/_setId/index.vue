@@ -44,7 +44,7 @@ import VideoListCard from '@app/components/study/videos/VideoListCard.vue'
 import SetListCard from '@app/components/study/sets/SetListCard.vue'
 
 export default defineComponent({
-	name: 'StudyFoldersSetId',
+	name: 'StudySetsSetId',
 	displayName: 'Study Folder',
 	components: { PageWrapper, TestPrepListCard, FlashCardListCard, NoteListCard, VideoListCard, SetListCard },
 	setup () {

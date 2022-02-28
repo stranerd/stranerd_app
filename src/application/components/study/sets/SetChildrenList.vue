@@ -5,7 +5,7 @@ Create your own sets or explore the public and save ones you want."
 		>
 			<div class="flex items-center gap-5">
 				<router-link class="py-3 lg:px-7 px-4 bg-gray text-white font-bold lg:text-base text-xs rounded-xl"
-					to="/study/folders/create">
+					to="/study/sets/create">
 					Create Sets
 				</router-link>
 				<router-link

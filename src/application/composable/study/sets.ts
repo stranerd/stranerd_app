@@ -362,7 +362,7 @@ export const useCreateSet = () => {
 			try {
 				await setLoading(true)
 				await AddSet.call(factory.value)
-				await setMessage('Set created successfully')
+				await setMessage('Folder created successfully')
 				useStudyModal().closeCreateSet()
 				factory.value.reset()
 			} catch (error) {
