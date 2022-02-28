@@ -68,8 +68,6 @@ const unshiftToMyGlobalSetList = (userId: string, set: SetEntity) => {
 }
 
 export const useUserRootSet = (userId = useAuth().id.value) => {
-	userId = userId ?? ''
-
 	if (myGlobal[userId] === undefined) {
 		const listener = useListener(async () => {
 			if (!userId) return () => {

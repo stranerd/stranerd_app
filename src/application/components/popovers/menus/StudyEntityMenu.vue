@@ -1,8 +1,8 @@
 <template>
 	<Popover class="flex flex-col gap-4">
-		<template v-if="isLoggedIn  && !(entity.userId === id && type === 'sets')">
-			<SaveToSet v-if="!data.set || data?.set?.userId !== id" :itemId="entity?.id"
-				:root="true" :save="(set) => saveToSet(type, entity?.id, set)" :set="rootSet"
+		<template v-if="isLoggedIn  && entity.userId !== id">
+			<SaveToSet v-if="!data.set || data?.set?.userId !== id" :itemId="entity?.id" :root="true"
+				:save="(set) => saveToSet(type, entity?.id, set)"
 				:unsave="(set) => removeFromSet(type, entity?.id, set)" />
 			<span v-else-if="data.set.allSaved.includes(entity?.id)" class="flex gap-4 items-center"
 				@click="removeFromSet(type, entity?.id, data.set)">
@@ -46,7 +46,7 @@ import {
 	trash
 } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
-import { openSetEditModal, useSaveToSet, useUserRootSet } from '@app/composable/study/sets'
+import { openSetEditModal, useSaveToSet } from '@app/composable/study/sets'
 import { openFlashCardEditModal } from '@app/composable/study/flashCards'
 import { useRouter } from 'vue-router'
 import { openNoteEditModal } from '@root/application/composable/study/notes'
@@ -65,7 +65,6 @@ export default defineComponent({
 		const showDelete = computed(() => type.value === 'testPreps' ? isAdmin.value : entity.value?.userId === id.value)
 		const { loading: deleteLoading, error: deleteError, deleteEntity } = useDeleteStudyEntity()
 
-		const { rootSet } = useUserRootSet()
 		const { loading: setLoading, error: setError, saveToSet, removeFromSet } = useSaveToSet()
 
 		const canEdit = computed(() => type.value === 'testPreps' ? isAdmin.value : entity.value?.userId === id.value)
@@ -84,7 +83,7 @@ export default defineComponent({
 			chevronUp, chevronDown, library, shareIcon, pencil, person, trash, removeCircle,
 			share, id, isLoggedIn,
 			showDelete, deleteLoading, deleteError, deleteEntity, canEdit, editEntity,
-			rootSet, setLoading, setError, saveToSet, removeFromSet, showAddToSet
+			setLoading, setError, saveToSet, removeFromSet, showAddToSet
 		}
 	}
 })

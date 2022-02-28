@@ -11,11 +11,11 @@ export class ListenToUserRootSetUseCase {
 
 	async call (userId: string, listener: Listeners<SetEntity>) {
 		const conditions: QueryParams = {
-			where: [{ field: 'parent', value: null }, { field: 'userId', value: userId }, {
+			where: [{ field: 'parent', value: '' }, { field: 'userId', value: userId }, {
 				field: 'data.type',
 				value: SetType.users
 			}],
-			sort: { field: 'createdAt', order: 1 },
+			sort: { field: 'createdAt', order: -1 },
 			all: true
 		}
 

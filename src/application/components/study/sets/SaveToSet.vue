@@ -1,23 +1,25 @@
 <template>
 	<div class="flex flex-col gap-1 text-sm">
-		<span v-if="root" class="flex gap-2 items-center">
-			<IonIcon :icon="showSets ? chevronUp : chevronDown" class="text-2xl" @click="showSets = !showSets" />
-			<IonText class="font-bold truncate w-full max-w-[10rem]" @click="showSets = !showSets">
-				Save To {{ set.name }}
-			</IonText>
-			<IonIcon :icon="set.allSaved.includes(itemId) ? bookmark : bookmarkOutline" class="text-2xl"
-				@click="saveItem" />
-		</span>
-		<div v-else class="flex gap-2 items-center">
-			<IonText class="text-sm truncate w-full max-w-[10rem]">-&nbsp;&nbsp;{{ set.name }}</IonText>
-			<IonIcon v-if="sets.length" :icon="showSets ? chevronUp : chevronDown" class="text-xl"
-				@click="showSets = !showSets" />
-			<IonIcon :icon="set.allSaved.includes(itemId) ? bookmark : bookmarkOutline" class="text-xl"
-				@click="saveItem" />
-		</div>
-		<div v-if="showSets && sets.length" class="ml-2">
-			<SaveToSet v-for="set in sets" :key="set.hash" :itemId="itemId" :save="(savingSet) => save(savingSet)"
-				:set="set" :unsave="(savingSet) => unsave(savingSet)" />
+		<template v-if="set">
+			<span class="flex gap-2 items-center">
+				<IonIcon v-if="root && sets.length" :icon="showSets ? chevronUp : chevronDown" class="text-2xl"
+					@click="showSets = !showSets" />
+				<IonText :class="{'font-bold': root}" class="truncate w-full max-w-[10rem]"
+					@click="showSets = !showSets">
+					{{ root ? `Save To ${set.name}` : `-  ${set.name}` }}
+				</IonText>
+				<IonIcon v-if="!root && sets.length" :icon="showSets ? chevronUp : chevronDown" class="text-xl"
+					@click="showSets = !showSets" />
+				<IonIcon :class="root ? 'text-2xl' : 'text-xl'"
+					:icon="set.allSaved.includes(itemId) ? bookmark : bookmarkOutline"
+					@click="saveItem" />
+			</span>
+		</template>
+		<div v-if="showSets && sets.length" :class="{'ml-2': set}">
+			<SaveToSet v-for="loopSet in sets" :key="loopSet.hash" :itemId="itemId"
+				:root="!set"
+				:save="(savingSet) => save(savingSet)" :set="loopSet"
+				:unsave="(savingSet) => unsave(savingSet)" />
 		</div>
 	</div>
 </template>
@@ -33,7 +35,7 @@ export default defineComponent({
 	props: {
 		set: {
 			type: SetEntity,
-			required: true
+			required: false
 		},
 		root: {
 			type: Boolean,
@@ -54,7 +56,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const showSets = ref(false)
+		const showSets = ref(!props.set)
 		const { loading, error, sets } = props.set ? useSet(props.set) : useUserRootSet()
 		const saveItem = async () => {
 			if (!props.set) return

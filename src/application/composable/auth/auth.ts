@@ -3,7 +3,6 @@ import { FindUser, ListenToUser, UpdateStreak, UserEntity } from '@modules/users
 import { AuthDetails, AuthTypes, UserLocation } from '@modules/auth/domain/entities/auth'
 import { SessionSignout } from '@modules/auth'
 import { isClient } from '@utils/environment'
-import { useUserRootSet } from '@app/composable/study/sets'
 import { setupPush } from '@utils/push'
 
 const global = {
@@ -85,8 +84,7 @@ export const useAuth = () => {
 	const signin = async (remembered: boolean) => {
 		await Promise.all([
 			setupPush(id.value),
-			startProfileListener(),
-			useUserRootSet().listener.startListener()
+			startProfileListener()
 		])
 	}
 

@@ -11,7 +11,7 @@ export class GetUserRootSetUseCase {
 
 	async call (userId: string) {
 		const conditions: QueryParams = {
-			where: [{ field: 'parent', value: null }, { field: 'userId', value: userId }, {
+			where: [{ field: 'parent', value: '' }, { field: 'userId', value: userId }, {
 				field: 'data.type',
 				value: SetType.users
 			}],
