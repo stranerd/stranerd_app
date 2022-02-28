@@ -1,6 +1,6 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { ISetRepository } from '../../irepositories/iset'
-import { SetEntity } from '@modules/study'
+import { SetEntity, SetType } from '../../entities/set'
 
 export class ListenToUserRootSetUseCase {
 	private repository: ISetRepository
@@ -11,13 +11,16 @@ export class ListenToUserRootSetUseCase {
 
 	async call (userId: string, listener: Listeners<SetEntity>) {
 		const conditions: QueryParams = {
-			where: [{ field: 'parent', value: null }, { field: 'userId', value: userId }],
+			where: [{ field: 'parent', value: null }, { field: 'userId', value: userId }, {
+				field: 'data.type',
+				value: SetType.users
+			}],
 			sort: { field: 'createdAt', order: 1 },
 			all: true
 		}
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
-			return entity.userId === userId && !entity.parent
+			return entity.userId === userId && !entity.parent && entity.data.type === SetType.users
 		})
 	}
 }

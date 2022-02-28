@@ -1,5 +1,6 @@
 import { UserBio, UserRoles } from '@modules/users'
 import { Media } from '@modules/core'
+import { QuestionData } from '../../domain/entities/question'
 
 export interface QuestionFromModel extends QuestionToModel {
 	id: string
@@ -19,4 +20,5 @@ export interface QuestionToModel {
 	tags: string[]
 	attachments: Media[]
 	subjectId: string
+	data: QuestionData
 }

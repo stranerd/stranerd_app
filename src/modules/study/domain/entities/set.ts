@@ -5,8 +5,9 @@ import { appName } from '@utils/environment'
 export class SetEntity extends BaseEntity {
 	public readonly id: string
 	public readonly name: string
-	public readonly parent: string | null
+	public readonly parent: string
 	public readonly isPublic: boolean
+	public readonly data: SetData
 	public readonly tags: string[]
 	public readonly children: string[]
 	public readonly userId: string
@@ -28,6 +29,7 @@ export class SetEntity extends BaseEntity {
 		             parent,
 		             isPublic,
 		             tags,
+		             data,
 		             userId,
 		             userBio,
 		             userRoles,
@@ -41,10 +43,11 @@ export class SetEntity extends BaseEntity {
 		this.parent = parent
 		this.isPublic = isPublic
 		this.tags = tags
+		this.data = data
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
 		this.userRoles = generateDefaultRoles(userRoles)
-		this.name = !parent ? 'My Library' : name
+		this.name = !name ? 'My Library' : name
 		this.children = children
 		this.saved = saved
 		this.createdAt = createdAt
@@ -60,10 +63,27 @@ export class SetEntity extends BaseEntity {
 	}
 }
 
+export enum SetType {
+	users = 'users',
+	classes = 'classes'
+}
+
+type UserType = {
+	type: SetType.users
+}
+
+type ClassType = {
+	type: SetType.classes
+	classId: string
+}
+
+export type SetData = UserType | ClassType
+
 type SetConstructorArgs = {
 	id: string
 	name: string
-	parent: string | null
+	parent: string
+	data: SetData
 	isPublic: boolean
 	userId: string
 	userBio: UserBio

@@ -1,4 +1,5 @@
 import {
+	arrayContainsX,
 	hasLessThanX,
 	isArrayOfX,
 	isExtractedHTMLLongerThanX,
@@ -7,12 +8,12 @@ import {
 	isString
 } from '@stranerd/validate'
 import { BaseFactory, Media, UploadedFile } from '@modules/core'
-import { QuestionEntity } from '../entities/question'
+import { QuestionEntity, QuestionType } from '../entities/question'
 import { QuestionToModel } from '../../data/models/question'
 
 type Content = UploadedFile | Media
 type Keys = {
-	body: string, subjectId: string, tags: string[], attachments: Content[]
+	body: string, subjectId: string, tags: string[], attachments: Content[], type: QuestionType, classId: string | null
 }
 
 export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel, Keys> {
@@ -23,13 +24,21 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 		tags: {
 			required: true,
 			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings')]
+		},
+		type: {
+			required: true,
+			rules: [arrayContainsX(Object.keys(QuestionType), (cur, val) => cur === val)]
+		},
+		classId: {
+			required: () => this.isClassType,
+			rules: [isString]
 		}
 	}
 
 	reserved = []
 
 	constructor () {
-		super({ body: '', subjectId: '', tags: [], attachments: [] })
+		super({ body: '', subjectId: '', tags: [], attachments: [], type: QuestionType.users, classId: null })
 	}
 
 	get body () {
@@ -48,6 +57,22 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 		this.set('subjectId', value)
 	}
 
+	get type () {
+		return this.values.type
+	}
+
+	set type (value: QuestionType) {
+		this.set('type', value)
+	}
+
+	get classId () {
+		return this.values.classId
+	}
+
+	set classId (value: string | null) {
+		this.set('classId', value)
+	}
+
 	get tags () {
 		return this.values.tags
 	}
@@ -56,7 +81,16 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 		return this.values.attachments
 	}
 
+	get isClassType () {
+		return this.type === QuestionType.classes
+	}
+
+	get isUsersType () {
+		return this.type === QuestionType.users
+	}
+
 	addAttachment = (value: Content) => this.set('attachments', [...this.values.attachments, value])
+
 	removeAttachment = (value: Content) => this.set('attachments', this.values.attachments.filter((doc) => doc.name !== value.name))
 
 	addTag = (value: string) => {
@@ -71,6 +105,10 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 		this.subjectId = entity.subjectId
 		this.set('tags', entity.tags)
 		this.set('attachments', entity.attachments)
+		this.type = entity.data.type
+		if (entity.data.type === QuestionType.classes) {
+			this.classId = entity.data.classId
+		}
 	}
 
 	toModel = async () => {
@@ -81,8 +119,13 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 			}))
 			this.set('attachments', docs)
 
-			const { attachments, body, tags, subjectId } = this.validValues
-			return { attachments: attachments as Media[], body, tags, subjectId }
+			const { attachments, body, tags, subjectId, type, classId } = this.validValues
+			return {
+				attachments: attachments as Media[], body, tags, subjectId,
+				data: this.isClassType ? {
+					type: type as any, classId
+				} : { type: type as any }
+			}
 		} else {
 			throw new Error('Validation errors')
 		}

@@ -7,6 +7,7 @@ export class SetTransformer {
 			id,
 			name,
 			saved,
+			data,
 			children,
 			userId,
 			userBio,
@@ -18,7 +19,7 @@ export class SetTransformer {
 			tags
 		} = model
 		return new SetEntity({
-			id, name, saved, children, userId, userBio, userRoles, parent, isPublic, createdAt, updatedAt, tags
+			id, name, saved, children, data, userId, userBio, userRoles, parent, isPublic, createdAt, updatedAt, tags
 		})
 	}
 
@@ -27,6 +28,7 @@ export class SetTransformer {
 			name: entity.name,
 			parent: entity.parent,
 			isPublic: entity.isPublic,
+			data: entity.data,
 			tags: entity.tags
 		}
 	}
