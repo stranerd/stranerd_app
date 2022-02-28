@@ -33,22 +33,6 @@
 			<DisplayError :error="factory.errors.tags" />
 		</div>
 
-		<div v-if="false" class="mb-12">
-			<FileInput accept="image/x-png,image/jpeg,image/jpg"
-				class="mb-2" @files="catchPreview">
-				<label class="flex items-center gap-4">
-					<ion-icon :icon="image" class="!text-4xl text-gray" />
-					{{ factory.preview ? 'Change' : 'Add' }} Preview (optional)
-				</label>
-			</FileInput>
-			<span class="p-2 rounded-xl flex items-center">
-				{{ factory.preview?.name ?? 'No Preview' }}
-				<IonIcon v-if="factory.preview" :icon="close" class="ml-2 cursor-pointer"
-					@click="factory.preview = null" />
-			</span>
-			<DisplayError :error="factory.errors.preview" />
-		</div>
-
 		<div v-if="false" class="mb-12 flex items-center gap-4">
 			<IonToggle id="isHosted" v-model="factory.isHosted" />
 			<label for="isHosted">
@@ -62,7 +46,7 @@
 			<FileInput class="mb-2" type="file" @files="catchMedia">
 				<label class="flex items-center gap-4">
 					<ion-icon :icon="documentAttach" class="!text-4xl text-gray" />
-					{{ factory.preview ? 'Change' : 'Add' }} Document
+					{{ factory.media ? 'Change' : 'Add' }} Document
 				</label>
 			</FileInput>
 			<span class="p-2 rounded-xl flex items-center">
@@ -125,12 +109,9 @@ export default defineComponent({
 		const catchMedia = useFileInputCallback(async ([file]) => {
 			props.factory.media = file
 		})
-		const catchPreview = useFileInputCallback(async ([file]) => {
-			props.factory.preview = file
-		})
 
 		return {
-			image, documentAttach, close, tag, removeTag, catchMedia, catchPreview
+			image, documentAttach, close, tag, removeTag, catchMedia
 		}
 	}
 })

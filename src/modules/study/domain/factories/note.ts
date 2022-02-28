@@ -3,7 +3,6 @@ import {
 	isBoolean,
 	isExtractedHTMLLongerThanX,
 	isFile,
-	isImage,
 	isInvalid,
 	isString,
 	isValid
@@ -15,7 +14,7 @@ import { NoteToModel } from '../../data/models/note'
 type Content = UploadedFile | Media | null
 type Keys = {
 	title: string, description: string, tags: string[], isPublic: boolean,
-	isHosted: boolean, media: Content | null, link: string | null, preview: Content | null
+	isHosted: boolean, media: Content | null, link: string | null
 }
 
 const docFormats = ['application/pdf']
@@ -31,7 +30,6 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 		isPublic: { required: true, rules: [isBoolean] },
 		isHosted: { required: true, rules: [isBoolean] },
 		link: { required: () => !this.isHosted, rules: [isString] },
-		preview: { required: false, rules: [isImage] },
 		media: {
 			required: () => this.isHosted, rules: [isFile,
 				(val: any) => docFormats.includes(val?.type) ? isValid() : isInvalid('only pdf files are allowed')
@@ -49,8 +47,7 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 			isHosted: true,
 			tags: [],
 			media: null,
-			link: null,
-			preview: null
+			link: null
 		})
 	}
 
@@ -110,14 +107,6 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 		if (value) this.isHosted = true
 	}
 
-	get preview () {
-		return this.values.preview!
-	}
-
-	set preview (value: Content) {
-		this.set('preview', value)
-	}
-
 	addTag = (value: string) => {
 		if (this.tags.find((t) => t === value.toLowerCase())) return
 		this.set('tags', [...this.tags, value.toLowerCase()])
@@ -132,17 +121,15 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 		this.isHosted = entity.isHosted
 		this.link = entity.link
 		this.media = entity.media
-		this.preview = entity.preview
 		this.set('tags', entity.tags)
 	}
 
 	toModel = async () => {
 		if (this.valid) {
 			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('study/notes', this.media)
-			if (this.preview instanceof UploadedFile) this.preview = await this.uploadFile('study/note-previews', this.preview)
 			if (this.isHosted) this.link = null
 			else this.media = null
-			const { title, description, isHosted, link, media, tags, preview, isPublic } = this.validValues
+			const { title, description, isHosted, link, media, tags, isPublic } = this.validValues
 			return {
 				title,
 				description,
@@ -150,7 +137,6 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 				link,
 				media: media as Media | null,
 				tags,
-				preview: preview as Media,
 				isPublic
 			}
 		} else {

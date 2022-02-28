@@ -14,7 +14,6 @@ export class VideoEntity extends BaseEntity {
 	public readonly isHosted: boolean
 	public readonly link: string | null
 	public readonly media: Media | null
-	public readonly preview: Media | null
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -30,7 +29,6 @@ export class VideoEntity extends BaseEntity {
 		             isHosted,
 		             link,
 		             media,
-		             preview,
 		             createdAt,
 		             updatedAt
 	             }: VideoConstructorArgs) {
@@ -46,7 +44,6 @@ export class VideoEntity extends BaseEntity {
 		this.isHosted = isHosted
 		this.link = link
 		this.media = media ? parseMedia(media) : null
-		this.preview = preview ? parseMedia(preview) : null
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -62,7 +59,6 @@ type VideoConstructorArgs = {
 	isHosted: boolean
 	link: string | null
 	media: Media | null
-	preview: Media | null
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles

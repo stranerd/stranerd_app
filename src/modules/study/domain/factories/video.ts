@@ -1,4 +1,4 @@
-import { isArrayOfX, isBoolean, isExtractedHTMLLongerThanX, isImage, isString, isVideo } from '@stranerd/validate'
+import { isArrayOfX, isBoolean, isExtractedHTMLLongerThanX, isString, isVideo } from '@stranerd/validate'
 import { BaseFactory, Media, UploadedFile } from '@modules/core'
 import { VideoEntity } from '../entities/video'
 import { VideoToModel } from '../../data/models/video'
@@ -8,7 +8,7 @@ import getVideoId from 'get-video-id'
 type Content = UploadedFile | Media | null
 type Keys = {
 	title: string, description: string, tags: string[], isPublic: boolean,
-	isHosted: boolean, media: Content | null, link: string | null, preview: Content | null
+	isHosted: boolean, media: Content | null, link: string | null
 }
 
 export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
@@ -22,7 +22,6 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		isPublic: { required: false, rules: [isBoolean] },
 		isHosted: { required: false, rules: [isBoolean] },
 		link: { required: () => !this.isHosted, rules: [isString] },
-		preview: { required: false, rules: [isImage] },
 		media: { required: () => this.isHosted, rules: [isVideo] }
 	}
 
@@ -36,7 +35,6 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 			tags: [],
 			media: null,
 			link: null,
-			preview: null,
 			isPublic: true
 		})
 	}
@@ -97,14 +95,6 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		if (value) this.isHosted = true
 	}
 
-	get preview () {
-		return this.values.preview!
-	}
-
-	set preview (value: Content) {
-		this.set('preview', value)
-	}
-
 	addTag = (value: string) => {
 		if (this.tags.find((t) => t === value.toLowerCase())) return
 		this.set('tags', [...this.tags, value.toLowerCase()])
@@ -119,7 +109,6 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		this.isHosted = entity.isHosted
 		this.link = entity.link
 		this.media = entity.media
-		this.preview = entity.preview
 		this.set('tags', entity.tags)
 	}
 
@@ -136,10 +125,9 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 				}
 			}
 			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('study/videos', this.media)
-			if (this.preview instanceof UploadedFile) this.preview = await this.uploadFile('study/video-previews', this.preview)
 			if (this.isHosted) this.link = null
 			else this.media = null
-			const { title, description, isHosted, link, media, tags, preview, isPublic } = this.validValues
+			const { title, description, isHosted, link, media, tags, isPublic } = this.validValues
 			return {
 				title,
 				description,
@@ -147,7 +135,6 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 				link,
 				media: media as Media | null,
 				tags,
-				preview: preview as Media,
 				isPublic
 			}
 		} else {

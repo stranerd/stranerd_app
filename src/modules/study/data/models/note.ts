@@ -18,5 +18,4 @@ export interface NoteToModel {
 	isHosted: boolean
 	link: string | null
 	media: Media | null
-	preview: Media | null
 }
