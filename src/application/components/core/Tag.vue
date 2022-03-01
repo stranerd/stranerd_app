@@ -1,7 +1,7 @@
 <template>
 	<span v-if="tag"
 		:style="`color: rgb(${secondary ? '255, 255, 255' : color}); background-color: rgba(${color}, ${secondary ? 0.9 : 0.1});`"
-		class="py-1 px-3 font-bold lg:text-sm text-xs rounded-3xl"
+		class="py-0.5 md:py-1 px-3 font-normal lg:text-sm text-xs rounded-lg"
 	>
 		<slot :tag="tag">{{ tag }}</slot>
 	</span>
