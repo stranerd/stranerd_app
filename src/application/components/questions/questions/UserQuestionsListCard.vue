@@ -18,17 +18,11 @@
 			{{ question.trimmedBody }}
 		</router-link>
 
-		<div class="w-full flex flex-col lg:flex-row lg:justify-between lg:items-center mt-2">
-			<div class=" flex flex-row items-center flex-wrap gap-4">
-				<QuestionTag v-for="(tag, index) in question.tags" :key="index" :index="index" :tag="tag" />
-			</div>
-
-			<div class=" flex flex-row items-center justify-between mt-3 lg:mt-0">
-				<span class="font-bold text-icon_inactive ">Posted: {{ formatTime(question.createdAt) }}</span>
-				<span class="font-bold text-icon_inactive lg:hidden">	{{
-					formatNumber(question.answers.length)
-				}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
-			</div>
+		<div class="mt-2 flex flex-row items-center justify-between mt-3 lg:mt-0">
+			<span class="font-bold text-icon_inactive ">Posted: {{ formatTime(question.createdAt) }}</span>
+			<span class="font-bold text-icon_inactive lg:hidden">	{{
+				formatNumber(question.answers.length)
+			}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
 		</div>
 	</div>
 </template>
@@ -40,7 +34,6 @@ import { QuestionEntity } from '@modules/questions'
 import { formatNumber, pluralize } from '@utils/commons'
 import { formatTime } from '@utils/dates'
 import Subject from '../subjects/Subject.vue'
-import QuestionTag from '../tags/QuestionTag.vue'
 
 export default defineComponent({
 	props: {
@@ -54,8 +47,7 @@ export default defineComponent({
 	},
 	components: {
 		IonRippleEffect,
-		Subject,
-		QuestionTag
+		Subject
 	}
 })
 </script>

@@ -8,7 +8,6 @@ export class SetEntity extends BaseEntity {
 	public readonly parent: string
 	public readonly isPublic: boolean
 	public readonly data: SetData
-	public readonly tags: string[]
 	public readonly children: string[]
 	public readonly userId: string
 	public readonly userBio: UserBio
@@ -28,7 +27,6 @@ export class SetEntity extends BaseEntity {
 		             name,
 		             parent,
 		             isPublic,
-		             tags,
 		             data,
 		             userId,
 		             userBio,
@@ -42,7 +40,6 @@ export class SetEntity extends BaseEntity {
 		this.id = id
 		this.parent = parent
 		this.isPublic = isPublic
-		this.tags = tags
 		this.data = data
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
@@ -88,7 +85,6 @@ type SetConstructorArgs = {
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
-	tags: string[]
 	children: string[]
 	saved: {
 		notes: string[]

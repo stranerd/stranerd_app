@@ -16,18 +16,14 @@ import { AddSubjectUseCase } from './domain/usecases/subjects/addSubject'
 import { FindSubjectUseCase } from './domain/usecases/subjects/findSubject'
 import { FindQuestionUseCase } from './domain/usecases/questions/findQuestion'
 import { GetQuestionsUseCase } from './domain/usecases/questions/getQuestions'
-import { GetSimilarQuestionsUseCase } from './domain/usecases/questions/getSimilarQuestions'
 import { GetUserQuestionsUseCase } from './domain/usecases/questions/getUserQuestions'
 import { ListenToUserQuestionsUseCase } from './domain/usecases/questions/listenToUserQuestions'
-import { GetTagQuestionsUseCase } from './domain/usecases/questions/getTagQuestions'
-import { ListenToTagQuestionsUseCase } from './domain/usecases/questions/listenToTagQuestions'
 import { AddQuestionUseCase } from './domain/usecases/questions/addQuestion'
 import { EditQuestionUseCase } from './domain/usecases/questions/editQuestion'
 import { DeleteQuestionUseCase } from './domain/usecases/questions/deleteQuestion'
 import { MarkBestAnswerUseCase } from './domain/usecases/questions/markBestAnswer'
 import { ListenToQuestionUseCase } from './domain/usecases/questions/listenToQuestion'
 import { ListenToQuestionsUseCase } from './domain/usecases/questions/listenToQuestions'
-import { ListenToSimilarQuestionsUseCase } from './domain/usecases/questions/listenToSimilarQuestions'
 import { GetAnswersUseCase } from './domain/usecases/answers/getAnswers'
 import { GetUserAnswersUseCase } from './domain/usecases/answers/getUserAnswers'
 import { ListenToUserAnswersUseCase } from './domain/usecases/answers/listenToUserAnswers'
@@ -74,14 +70,10 @@ export const AddSubject = new AddSubjectUseCase(subjectRepository)
 export const FindSubject = new FindSubjectUseCase(subjectRepository)
 
 export const GetQuestions = new GetQuestionsUseCase(questionRepository)
-export const GetSimilarQuestions = new GetSimilarQuestionsUseCase(questionRepository)
 export const GetUserQuestions = new GetUserQuestionsUseCase(questionRepository)
-export const GetTagQuestions = new GetTagQuestionsUseCase(questionRepository)
 export const ListenToQuestion = new ListenToQuestionUseCase(questionRepository)
 export const ListenToQuestions = new ListenToQuestionsUseCase(questionRepository)
 export const ListenToUserQuestions = new ListenToUserQuestionsUseCase(questionRepository)
-export const ListenToTagQuestions = new ListenToTagQuestionsUseCase(questionRepository)
-export const ListenToSimilarQuestions = new ListenToSimilarQuestionsUseCase(questionRepository)
 export const AddQuestion = new AddQuestionUseCase(questionRepository)
 export const EditQuestion = new EditQuestionUseCase(questionRepository)
 export const FindQuestion = new FindQuestionUseCase(questionRepository)

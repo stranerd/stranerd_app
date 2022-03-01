@@ -13,17 +13,13 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 				isArrayOfX((cur: any) => isString(cur?.question).valid && isString(cur?.answer).valid, 'questions'),
 				hasMoreThanX(0)
 			]
-		},
-		tags: {
-			required: true,
-			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings')]
 		}
 	}
 
 	reserved = []
 
 	constructor () {
-		super({ title: '', isPublic: true, set: [{ question: '', answer: '' }], tags: [] })
+		super({ title: '', isPublic: true, set: [{ question: '', answer: '' }] })
 	}
 
 	get title () {
@@ -46,10 +42,6 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 		return this.values.set
 	}
 
-	get tags () {
-		return this.values.tags
-	}
-
 	addQuestion () {
 		this.set('set', [...this.questions, { question: '', answer: '' }])
 	}
@@ -59,24 +51,16 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 		this.questions.splice(index, 1)
 	}
 
-	addTag = (value: string) => {
-		if (this.tags.find((t) => t === value.toLowerCase())) return
-		this.set('tags', [...this.tags, value.toLowerCase()])
-	}
-
-	removeTag = (value: string) => this.set('tags', this.tags.filter((tag) => tag !== value))
-
 	loadEntity = (entity: FlashCardEntity) => {
 		this.set('title', entity.title)
 		this.set('isPublic', entity.isPublic)
-		this.set('tags', entity.tags)
 		this.set('set', entity.set)
 	}
 
 	toModel = async () => {
 		if (this.valid) {
-			const { title, isPublic, set, tags } = this.validValues
-			return { title, isPublic, set, tags }
+			const { title, isPublic, set } = this.validValues
+			return { title, isPublic, set }
 		} else {
 			throw new Error('Validation errors')
 		}

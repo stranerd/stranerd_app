@@ -15,11 +15,10 @@ export class SetTransformer {
 			parent,
 			isPublic,
 			createdAt,
-			updatedAt,
-			tags
+			updatedAt
 		} = model
 		return new SetEntity({
-			id, name, saved, children, data, userId, userBio, userRoles, parent, isPublic, createdAt, updatedAt, tags
+			id, name, saved, children, data, userId, userBio, userRoles, parent, isPublic, createdAt, updatedAt
 		})
 	}
 
@@ -28,8 +27,7 @@ export class SetTransformer {
 			name: entity.name,
 			parent: entity.parent,
 			isPublic: entity.isPublic,
-			data: entity.data,
-			tags: entity.tags
+			data: entity.data
 		}
 	}
 }

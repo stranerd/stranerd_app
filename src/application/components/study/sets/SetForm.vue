@@ -10,24 +10,6 @@
 				show-cancel-button="never"
 			></ion-input>
 		</div>
-		<div v-if="false" class="bg-light_gray w-full rounded-md flex items-center px-4">
-			<ion-text class="text-primary font-bold w-12 text-center">
-				TAGS
-			</ion-text>
-			<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
-				<span v-for="tag in factory.tags" :key="tag">
-					<span
-						class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-						{{ tag }} <ion-icon :icon="closeOutline" class="ml-1 cursor-pointer text-white"
-							@click="removeTag(tag)" />
-					</span>
-				</span>
-			</div>
-			<ion-input v-model="tag"
-				class="max-w-[1054px] !h-14 text-left"
-				placeholder="Subjects, topics, school and related keywords (Comma-seperated for multiple tags)"
-				show-cancel-button="never"></ion-input>
-		</div>
 		<div class="flex items-center w-full max-w-[25rem] justify-center">
 			<ion-radio-group v-model="factory.isPublic" class="flex w-full" mode="md">
 				<ion-list-header>
@@ -65,7 +47,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { closeOutline } from 'ionicons/icons'
-import { useTags } from '@app/composable/core/forms'
 import { SetFactory } from '@modules/study'
 import { IonItem, IonLabel, IonListHeader, IonRadio, IonRadioGroup, IonRippleEffect } from '@ionic/vue'
 import { useStudyModal } from '@app/composable/core/modals'
@@ -91,17 +72,13 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup (props) {
+	setup () {
 		const closeModal = () => {
 			useStudyModal().closeAll()
 		}
-		const { tag, removeTag } = useTags(
-			(tag: string) => props.factory.addTag(tag),
-			(tag: string) => props.factory.removeTag(tag)
-		)
 
 		return {
-			closeOutline, tag, removeTag, closeModal
+			closeOutline, closeModal
 		}
 	}
 })

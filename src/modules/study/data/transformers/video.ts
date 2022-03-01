@@ -5,7 +5,7 @@ export class VideoTransformer {
 	fromJSON (model: VideoFromModel) {
 		const {
 			id, userId, isHosted, media, description, isPublic,
-			link, userBio, userRoles, title, tags, createdAt, updatedAt
+			link, userBio, userRoles, title, createdAt, updatedAt
 		} = model
 		return new VideoEntity({
 			id,
@@ -17,7 +17,6 @@ export class VideoTransformer {
 			userBio,
 			userRoles,
 			title,
-			tags,
 			createdAt,
 			updatedAt,
 			isPublic
@@ -31,8 +30,7 @@ export class VideoTransformer {
 			media: entity.media,
 			link: entity.link,
 			title: entity.title,
-			description: entity.description,
-			tags: entity.tags
+			description: entity.description
 		}
 	}
 }

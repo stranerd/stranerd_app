@@ -8,7 +8,6 @@ type QuestionConstructorArgs = {
 	body: string
 	isAnswered: boolean
 	data: QuestionData
-	tags: string[]
 	attachments: Media[]
 	subjectId: string
 	userId: string
@@ -39,7 +38,6 @@ export type QuestionData = UserType | ClassType
 export class QuestionEntity extends BaseEntity {
 	public readonly id: string
 	public readonly body: string
-	public readonly tags: string[]
 	public readonly data: QuestionData
 	public readonly attachments: Media[]
 	public readonly subjectId: string
@@ -55,13 +53,12 @@ export class QuestionEntity extends BaseEntity {
 	constructor ({
 		             id, body, subjectId, isAnswered, data,
 		             bestAnswers, createdAt, userId, userBio, userRoles, attachments,
-		             answers, tags, updatedAt
+		             answers, updatedAt
 	             }: QuestionConstructorArgs) {
 		super()
 		this.id = id
 		this.body = body
 		this.isAnswered = isAnswered
-		this.tags = tags
 		this.data = data
 		this.attachments = attachments.map(parseMedia) ?? []
 		this.subjectId = subjectId

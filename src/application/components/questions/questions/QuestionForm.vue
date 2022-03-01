@@ -5,26 +5,6 @@
 			class="lg:mt-3 px-1"
 			placeholder="Write your question here." />
 
-		<!-- <div class="flex items-center mt-5 gap-5 flex-col lg:flex-row">
-			<div class="flex items-center gap-5 w-full">
-
-				<IonInput v-model="tag" class="w-1/4 font-medium bg-new_gray text-main_dark px-3"
-					placeholder="Add related tags">
-				</IonInput>
-			</div>
-
-		</div> -->
-		<!--
-		<div v-if="factory.tags.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
-			<span v-for="tag in factory.tags" :key="tag">
-				<span
-					class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-					{{ tag }} <ion-icon :icon="closeOutline" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
-				</span>
-			</span>
-		</div>
-		<DisplayError :error="factory.errors.tags" /> -->
-
 		<div v-if="factory.attachments.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
 			<span v-for="attachment in factory.attachments" :key="attachment.name" class="my-1">
 				<span
@@ -62,7 +42,7 @@
 import { defineComponent, PropType } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { closeOutline, image } from 'ionicons/icons'
-import { useFileInputCallback, useTags } from '@app/composable/core/forms'
+import { useFileInputCallback } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
@@ -93,16 +73,11 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { tag, removeTag } = useTags(
-			(tag: string) => props.factory.addTag(tag),
-			(tag: string) => props.factory.removeTag(tag)
-		)
-
 		const catchAttachments = useFileInputCallback(async (files) => {
 			files.map(props.factory.addAttachment)
 		})
 
-		return { image, closeOutline, tag, removeTag, catchAttachments }
+		return { image, closeOutline, catchAttachments }
 	}
 })
 </script>

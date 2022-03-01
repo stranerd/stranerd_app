@@ -1,19 +1,11 @@
-import {
-	isArrayOfX,
-	isBoolean,
-	isExtractedHTMLLongerThanX,
-	isFile,
-	isInvalid,
-	isString,
-	isValid
-} from '@stranerd/validate'
+import { isBoolean, isExtractedHTMLLongerThanX, isFile, isInvalid, isString, isValid } from '@stranerd/validate'
 import { BaseFactory, Media, UploadedFile } from '@modules/core'
 import { NoteEntity } from '@modules/study'
 import { NoteToModel } from '../../data/models/note'
 
 type Content = UploadedFile | Media | null
 type Keys = {
-	title: string, description: string, tags: string[], isPublic: boolean,
+	title: string, description: string, isPublic: boolean,
 	isHosted: boolean, media: Content | null, link: string | null
 }
 
@@ -23,10 +15,6 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 	readonly rules = {
 		title: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		description: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
-		tags: {
-			required: true,
-			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings')]
-		},
 		isPublic: { required: true, rules: [isBoolean] },
 		isHosted: { required: true, rules: [isBoolean] },
 		link: { required: () => !this.isHosted, rules: [isString] },
@@ -45,7 +33,6 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 			description: '',
 			isPublic: true,
 			isHosted: true,
-			tags: [],
 			media: null,
 			link: null
 		})
@@ -85,10 +72,6 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 		this.set('isPublic', value)
 	}
 
-	get tags () {
-		return this.values.tags
-	}
-
 	get link () {
 		return this.values.link
 	}
@@ -107,13 +90,6 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 		if (value) this.isHosted = true
 	}
 
-	addTag = (value: string) => {
-		if (this.tags.find((t) => t === value.toLowerCase())) return
-		this.set('tags', [...this.tags, value.toLowerCase()])
-	}
-
-	removeTag = (value: string) => this.set('tags', this.tags.filter((tag) => tag !== value))
-
 	loadEntity = (entity: NoteEntity) => {
 		this.title = entity.title
 		this.description = entity.description
@@ -121,7 +97,6 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 		this.isHosted = entity.isHosted
 		this.link = entity.link
 		this.media = entity.media
-		this.set('tags', entity.tags)
 	}
 
 	toModel = async () => {
@@ -129,14 +104,13 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('study/notes', this.media)
 			if (this.isHosted) this.link = null
 			else this.media = null
-			const { title, description, isHosted, link, media, tags, isPublic } = this.validValues
+			const { title, description, isHosted, link, media, isPublic } = this.validValues
 			return {
 				title,
 				description,
 				isHosted,
 				link,
 				media: media as Media | null,
-				tags,
 				isPublic
 			}
 		} else {

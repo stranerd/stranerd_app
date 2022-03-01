@@ -11,7 +11,6 @@ export interface SetFromModel extends SetToModel {
 		sets: string[]
 	}
 	children: string[]
-	tags: string[]
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
@@ -23,6 +22,5 @@ export interface SetToModel {
 	name: string
 	isPublic: boolean
 	parent: string
-	tags: string[]
 	data: SetData
 }

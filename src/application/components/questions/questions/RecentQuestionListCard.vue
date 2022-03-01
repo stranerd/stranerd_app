@@ -13,10 +13,6 @@
 
 		<DisplayHtml :html="question.trimmedBody" class="leading-normal" />
 
-		<div class="flex items-center gap-2 flex-wrap">
-			<QuestionTag v-for="(tag, index) in question.tags" :key="index" :index="index" :tag="tag" />
-		</div>
-
 		<span class="text-gray">
 			{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
 		</span>
@@ -32,7 +28,6 @@ import { pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { useReportModal } from '@app/composable/core/modals'
-import QuestionTag from '@app/components/questions/tags/QuestionTag.vue'
 import DisplayHtml from '@app/components/core/text/DisplayHtml.vue'
 
 export default defineComponent({
@@ -43,7 +38,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { DisplayHtml, Avatar, QuestionTag },
+	components: { DisplayHtml, Avatar },
 	setup (props) {
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),

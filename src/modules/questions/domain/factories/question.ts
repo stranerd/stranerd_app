@@ -13,7 +13,7 @@ import { QuestionToModel } from '../../data/models/question'
 
 type Content = UploadedFile | Media
 type Keys = {
-	body: string, subjectId: string, tags: string[], attachments: Content[], type: QuestionType, classId: string | null
+	body: string, subjectId: string, attachments: Content[], type: QuestionType, classId: string | null
 }
 
 export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel, Keys> {
@@ -21,10 +21,6 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 		body: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		attachments: { required: true, rules: [isArrayOfX((com) => isImage(com).valid, 'images'), hasLessThanX(6)] },
 		subjectId: { required: true, rules: [isString, isLongerThanX(0)] },
-		tags: {
-			required: true,
-			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings')]
-		},
 		type: {
 			required: true,
 			rules: [arrayContainsX(Object.keys(QuestionType), (cur, val) => cur === val)]
@@ -38,7 +34,7 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 	reserved = []
 
 	constructor () {
-		super({ body: '', subjectId: '', tags: [], attachments: [], type: QuestionType.users, classId: null })
+		super({ body: '', subjectId: '', attachments: [], type: QuestionType.users, classId: null })
 	}
 
 	get body () {
@@ -73,10 +69,6 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 		this.set('classId', value)
 	}
 
-	get tags () {
-		return this.values.tags
-	}
-
 	get attachments () {
 		return this.values.attachments
 	}
@@ -93,17 +85,9 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 
 	removeAttachment = (value: Content) => this.set('attachments', this.values.attachments.filter((doc) => doc.name !== value.name))
 
-	addTag = (value: string) => {
-		if (this.tags.find((t) => t === value.toLowerCase())) return
-		this.set('tags', [...this.tags, value.toLowerCase()])
-	}
-
-	removeTag = (value: string) => this.set('tags', this.tags.filter((tag) => tag !== value))
-
 	loadEntity = (entity: QuestionEntity) => {
 		this.body = entity.body
 		this.subjectId = entity.subjectId
-		this.set('tags', entity.tags)
 		this.set('attachments', entity.attachments)
 		this.type = entity.data.type
 		if (entity.data.type === QuestionType.classes) {
@@ -119,9 +103,9 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 			}))
 			this.set('attachments', docs)
 
-			const { attachments, body, tags, subjectId, type, classId } = this.validValues
+			const { attachments, body, subjectId, type, classId } = this.validValues
 			return {
-				attachments: attachments as Media[], body, tags, subjectId,
+				attachments: attachments as Media[], body, subjectId,
 				data: this.isClassType ? {
 					type: type as any, classId
 				} : { type: type as any }

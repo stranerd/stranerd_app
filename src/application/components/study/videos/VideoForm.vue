@@ -19,20 +19,6 @@
 			</label>
 		</div>
 
-		<div v-if="false" class="mb-12">
-			<label>Tags</label>
-			<IonInput v-model="tag" class="mb-2" placeholder="Add related tags" />
-			<div v-if="factory.tags.length > 0" class="mb-2 flex flex-wrap gap-2">
-				<span v-for="tag in factory.tags" :key="tag">
-					<span
-						class="p-2 text-white bg-faded_gray rounded-xl flex items-center">
-						{{ tag }} <ion-icon :icon="closeOutline" class="ml-1 cursor-pointer" @click="removeTag(tag)" />
-					</span>
-				</span>
-			</div>
-			<DisplayError :error="factory.errors.tags" />
-		</div>
-
 		<div v-if="false" class="mb-12 flex items-center gap-4">
 			<IonToggle id="isHosted" v-model="factory.isHosted" />
 			<label for="isHosted">
@@ -77,7 +63,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { closeOutline, documentAttachOutline, image } from 'ionicons/icons'
-import { useFileInputCallback, useTags } from '@app/composable/core/forms'
+import { useFileInputCallback } from '@app/composable/core/forms'
 import { VideoFactory } from '@modules/study'
 import { IonTextarea, IonToggle } from '@ionic/vue'
 
@@ -103,17 +89,12 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { tag, removeTag } = useTags(
-			(tag: string) => props.factory.addTag(tag),
-			(tag: string) => props.factory.removeTag(tag)
-		)
-
 		const catchMedia = useFileInputCallback(async ([file]) => {
 			props.factory.media = file
 		})
 
 		return {
-			image, documentAttachOutline, closeOutline, tag, removeTag, catchMedia
+			image, documentAttachOutline, closeOutline, catchMedia
 		}
 	}
 })

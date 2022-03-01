@@ -24,20 +24,14 @@
 
 		<DisplayHtml :html="question.trimmedBody" class="py-2 pb-1 text-main_dark leading-normal" />
 
-		<div class="w-full flex flex-col lg:flex-row lg:justify-between">
-			<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">
-				<QuestionTag v-for="(tag, index) in question.tags" :key="index" :index="index" :tag="tag" />
-			</div>
-
-			<div class="flex justify-between lg:justify-center items-center gap-4 text-gray">
-				<span class="text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
-				<span v-if="question.attachments.length" class="font-italic">
-					<IonIcon :icon="image" /> IMG inside
-				</span>
-				<span class="text-main_dark">
-					{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
-				</span>
-			</div>
+		<div class="flex justify-between lg:justify-center items-center gap-4 text-gray">
+			<span class="text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
+			<span v-if="question.attachments.length" class="font-italic">
+				<IonIcon :icon="image" /> IMG inside
+			</span>
+			<span class="text-main_dark">
+				{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
+			</span>
 		</div>
 
 	</router-link>
@@ -54,7 +48,6 @@ import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { useReportModal } from '@app/composable/core/modals'
-import QuestionTag from '../tags/QuestionTag.vue'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
@@ -69,7 +62,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { IonRippleEffect, Avatar, Subject, QuestionTag },
+	components: { IonRippleEffect, Avatar, Subject },
 	setup (props) {
 		const { id } = useAuth()
 		const showAnswerButton = computed({

@@ -13,23 +13,6 @@ export const useFileInputCallback = (cb: (medias: UploadedFile[]) => Promise<voi
 }
 
 type callback = (tag: string) => void
-export const useTags = (addCb: callback, removeCb: callback) => {
-	const tag = ref('')
-	watch(() => tag.value, () => {
-		if (tag.value.includes(' ') || tag.value.includes(',')) {
-			tag.value
-				.toLowerCase()
-				.replaceAll(',', ' ')
-				.trim()
-				.split(' ')
-				.filter((tag) => !!tag)
-				.forEach(addCb)
-			tag.value = ''
-		}
-	})
-	const removeTag = (tag: string) => removeCb(tag.toLowerCase())
-	return { tag, removeTag }
-}
 export const useSubjectAsTags = (addCb: callback, removeCb: callback) => {
 	const sTag = ref('')
 	watch(() => sTag.value, () => {
