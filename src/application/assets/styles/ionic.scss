@@ -348,15 +348,10 @@ ion-segment-button {
 	--background-focused: $color-darkGray;
 	--indicator-color: $color-darkGray;
 	--indicator-box-shadow: none;
-	--padding-top: 0.8rem;
-	--padding-bottom: 0.8rem;
+	--padding-top: 0.5rem;
+	--padding-bottom: 0.5rem;
 	color: $color-mainDark;
 	font-weight: bold;
-
-	@media (max-width: 640px) {
-		--padding-top: 0.5rem;
-		--padding-bottom: 0.5rem;
-	}
 }
 
 .segment-button-checked {
@@ -370,4 +365,8 @@ ion-select::part(icon) {
 
 ion-icon {
 	cursor: pointer;
+}
+
+ion-item {
+	--inner-border-width: 0px !important
 }

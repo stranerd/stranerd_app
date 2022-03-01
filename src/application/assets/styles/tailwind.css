@@ -72,6 +72,10 @@
 	}
 
 	.nav-scroll {
-		@apply md:text-sm lg:text-base items-start md:justify-center flex gap-4 text-xs text-faded_gray font-semibold overflow-x-auto mt-auto mx-auto
+		@apply md:text-sm lg:text-base items-start md:justify-center flex gap-4 text-xs text-faded_gray font-semibold overflow-x-auto mt-auto
+	}
+
+	.dot {
+		@apply h-[5px] w-[5px] rounded-full bg-icon_inactive mx-2 lg:flex
 	}
 }
