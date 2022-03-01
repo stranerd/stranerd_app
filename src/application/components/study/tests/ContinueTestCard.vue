@@ -7,7 +7,7 @@
 					:institutionId="testPrep.data.institutionId" />
 				<span v-else>{{ test.name }}</span>
 			</ion-text>
-			<ion-icon :icon="arrowForwardOutline" class="text-2xl text-gray" />
+			<ion-icon :icon="arrowForwardOutline" class="text-2xl text-primary" />
 		</div>
 
 		<ion-text class="text-sm text-left w-full text-gray mb-1 truncate">
@@ -20,7 +20,7 @@
 			</span>
 		</ion-text>
 
-		<ion-progress-bar :value="test.progress" />
+		<ion-progress-bar :value="test.progress"  class="mt-6" />
 	</router-link>
 </template>
 
@@ -52,8 +52,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-progress-bar {
-		height: .55rem !important;
+		height: .5rem !important;
 		border-radius: 12px !important;
+		@media (max-width: 768px) {
+			height: .25rem !important;
+		}
+			
+		
 	}
 
 	ion-progress-bar::part(progress) {

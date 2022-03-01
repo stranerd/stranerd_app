@@ -17,11 +17,11 @@
 		<router-link v-if="user && hasNoAuthUser" :to="`/users/${user.id}`"
 			class="py-3 px-3 rounded-lg flex w-full bg-cyan text-main_dark font-bold flex-row items-center">
 			<span class="font-bold mr-2 text-sm">-</span>
-			<span class="text-base font-normal flex items-center gap-1"  :class="{'text-white !font-bold': person.id === id}">
+			<span class="text-base font-normal flex items-center gap-1"  :class="{'text-white !font-bold': user.id === id}">
 				<span>{{ user.bio.fullName }}</span>
 				<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
 			</span>
-			<span class="font-bold text-primary text-lg ml-auto"  :class="{'text-white !font-bold': person.id === id}">
+			<span class="font-bold text-primary text-lg ml-auto"  :class="{'text-white !font-bold': user.id === id}">
 				{{ formatNumber(user.account.rankings[time], 2) }}
 			</span>
 		</router-link>
