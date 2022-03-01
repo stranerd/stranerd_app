@@ -118,7 +118,7 @@
 									class="text-3xl"
 								/>
 							</a>
-							<a aria-label="facebook link" class="inline-block" target="_blank"
+							<a aria-label="facebook link" class="inline-block"  target="_blank"
 								href="https://www.linkedin.com/company/stranerd">
 								<ion-icon
 									:icon="logoLinkedin"
