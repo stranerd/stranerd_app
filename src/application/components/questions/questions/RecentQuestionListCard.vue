@@ -1,6 +1,6 @@
 <template>
 	<router-link :to="`/questions/${question.id}`"
-		class="p-4 rounded-xl bg-white flex flex-col gap-3 w-full text-xs md:text-sm text-main_dark">
+		class="card-padding rounded-xl bg-white flex flex-col w-full text-xs md:text-sm text-main_dark">
 
 		<DisplayHtml :html="question.trimmedBody" class="leading-normal" />
 		<div class="w-full flex justify-between items-center">

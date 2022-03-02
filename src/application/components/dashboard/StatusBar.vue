@@ -1,7 +1,7 @@
 <template>
 	<div v-if="isLoggedIn"
-		class="bg-white rounded-xl flex flex-col sm:flex-row justify-between sm:items-center py-4 px-6">
-		<div class="flex flex-col  w-full text-left">
+		class="bg-white border-bottom-line md:rounded-xl flex flex-col sm:flex-row justify-between sm:items-center py-4 px-4">
+		<div class="flex flex-col w-full text-left">
 			<ion-text class="text-main_dark sm:text-xl text-base font-bold">
 				Welcome home,
 			</ion-text>
@@ -10,8 +10,6 @@
 				<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="white" />
 			</ion-text>
 		</div>
-
-	
 	</div>
 </template>
 

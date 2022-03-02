@@ -1,12 +1,12 @@
 <template>
-	<div class="bg-white rounded-xl flex flex-col gap-6 box-border justify-between p-4 text-main_dark">
+	<div class="bg-white rounded-xl flex flex-col box-border justify-between card-padding text-main_dark">
 		<div class="w-full justify-between items-start flex">
 			<div class="flex flex-col items-start truncate">
 				<ion-text class="font-semibold truncate w-52">{{ flashCard.title }}</ion-text>
 
 			</div>
 			<router-link :to="`/study/flashCards/${flashCard.id}`">
-				<ion-icon :icon="arrowForwardCircleOutline" class="text-gray text-xl" />
+				<ion-icon :icon="arrowForwardCircleOutline" class="text-primary text-xl" />
 			</router-link>
 		</div>
 

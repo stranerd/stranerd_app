@@ -17,6 +17,7 @@
 			<ion-button v-if="showAnswerButton"
 				class="btn-outline text-primary btn-outline-sm ml-auto"
 				mode="md"
+				size="small"
 				@click="openAnswerModal(question)">
 				Answer
 			</ion-button>
@@ -24,7 +25,7 @@
 
 		<DisplayHtml :html="question.trimmedBody" class="py-2 pb-1 text-main_dark leading-normal" />
 
-		<div class="flex justify-between lg:justify-center items-center gap-4 text-gray">
+		<div class="flex justify-between items-center gap-4 text-gray">
 			<span class="text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 			<span v-if="question.attachments.length" class="font-italic">
 				<IonIcon :icon="image" /> IMG inside
@@ -33,7 +34,6 @@
 				{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
 			</span>
 		</div>
-
 	</router-link>
 </template>
 

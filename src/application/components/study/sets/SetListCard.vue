@@ -1,11 +1,9 @@
 <template>
 	<div class="bg-white rounded-xl flex flex-col gap-6 box-border justify-between p-4 text-main_dark">
-		<div class="w-full justify-between items-start flex">
-			<div class="flex flex-col items-start truncate">
-				<ion-text class="font-semibold truncate w-52">{{ set.name }}</ion-text>
-			</div>
+		<div class="w-full justify-between items-start flex gap-2">
+			<ion-text class="font-semibold truncate w-full">{{ set.name }}</ion-text>
 			<router-link :to="`/study/sets/${set.id}`">
-				<ion-icon :icon="arrowForwardCircleOutline" class="text-gray text-xl" />
+				<ion-icon :icon="arrowForwardCircleOutline" class="text-primary text-xl" />
 			</router-link>
 		</div>
 

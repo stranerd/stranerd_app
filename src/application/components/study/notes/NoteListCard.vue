@@ -1,15 +1,12 @@
 <template>
-	<div class="w-full bg-white rounded-xl flex flex-col justify-between gap-6 box-border p-4 text-main_dark">
-		<div class="w-full justify-between items-center flex">
-			<div class="text-base flex-col flex gap-2 items-start flex-grow truncate">
-				<ion-text class="font-semibold truncate w-48">{{ note.title }}</ion-text>
-
-			</div>
+	<div class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
+		<div class="w-full justify-between items-center flex gap-2">
+			<ion-text class="font-semibold truncate w-full">{{ note.title }}</ion-text>
 			<router-link v-if="content" :to="`/study/notes/${note.id}`">
-				<ion-icon :icon="arrowForwardCircleOutline" class="text-gray text-xl" />
+				<ion-icon :icon="arrowForwardCircleOutline" class="text-primary text-xl" />
 			</router-link>
 			<IonSpinner v-else-if="loading" color="primary" />
-			<IonIcon v-else :icon="downloadOutline" class="text-xl" @click="download" />
+			<IonIcon v-else :icon="downloadOutline" class="text-primary text-xl" @click="download" />
 		</div>
 
 		<div class="w-full flex items-center justify-between gap-2">

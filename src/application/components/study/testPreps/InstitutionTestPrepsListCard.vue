@@ -1,11 +1,12 @@
 <template>
-	<div class="w-full bg-white rounded-xl flex flex-col items-start gap-6 box-border p-4 text-main_dark">
-		<div class="w-full flex justify-between items-center">
-			<ion-text class="truncate">
+	<div
+		class="w-full bg-white rounded-xl flex flex-col items-start box-border card-padding text-main_dark">
+		<div class="w-full flex justify-between items-center gap-2">
+			<ion-text class="truncate w-full">
 				<Institution :institutionId="institutionId" class="font-semibold" />
 			</ion-text>
 			<router-link :to="`/study/preps/${institutionId}`">
-				<ion-icon :icon="arrowForwardCircleOutline" class="text-2xl text-gray" />
+				<ion-icon :icon="arrowForwardCircleOutline" class="text-xl text-primary" />
 			</router-link>
 		</div>
 

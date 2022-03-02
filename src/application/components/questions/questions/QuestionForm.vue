@@ -27,13 +27,14 @@
 				class="w-1/2"
 				@files="catchAttachments"
 			>
-				<ion-button class=" btn-secondary w-full">
-					<ion-icon :icon="image" class="!text-2xl text-gray mr-4" />
+				<ion-button class=" btn-secondary w-full text-primary">
+					<ion-icon :icon="imageOutline" class="!text-2xl text-primary mr-4" />
 					Add image
 				</ion-button>
 			</FileInput>
 			<ion-button :disabled="loading || !factory.valid"
 				class="w-1/2 btn-primary h-12" type="submit">
+				<ion-icon :icon="paperPlaneOutline" class="!text-2xl text-white mr-4" />
 				<slot name="buttonText">Submit</slot>
 			</ion-button>
 		</div>
@@ -45,7 +46,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { closeOutline, image } from 'ionicons/icons'
+import { closeOutline, imageOutline, paperPlaneOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
@@ -79,7 +80,7 @@ export default defineComponent({
 			files.map(props.factory.addAttachment)
 		})
 
-		return { image, closeOutline, catchAttachments }
+		return { imageOutline, paperPlaneOutline, closeOutline, catchAttachments }
 	}
 })
 </script>

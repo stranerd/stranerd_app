@@ -146,6 +146,7 @@ ion-popover {
 	--border-radius: .75rem;
 	@media (max-width: 500px) {
 		--width: 100vw;
+		--height: auto;
 		--border-radius: 0.75rem 0.75rem 0 0;
 	}
 
@@ -243,7 +244,7 @@ ion-input, ion-textarea, ion-select {
 	--color: $color-white;
 	--border-width: 1px;
 	--border-style: solid;
-	--border-color: $color-fadedGray;
+	--border-color: $color-primary;
 
 	@media (max-width: 640px) {
 		--background: transparent;
@@ -284,6 +285,7 @@ ion-button {
 	--padding-start: 1.5rem;
 	--padding-end: 1.5rem;
 	--color: $color-white;
+	--border-radius: 8px;
 	color: $color-white;
 
 	@media (max-width: 640px) {
@@ -293,6 +295,23 @@ ion-button {
 		--padding-start: 1.25rem;
 		--padding-end: 1.25rem;
 		--color: inherit !important;
+	}
+}
+
+.select-primary {
+	--background: transparent;
+	--padding-top: 0.75rem;
+	--padding-bottom: 0.75rem;
+	--padding-start: 1.25rem;
+	--padding-end: 1.25rem;
+	--color: inherit !important;
+	border-radius: 0;
+
+	@media (min-width: 640px) {
+		border-radius: 8px;
+		--color: $color-white;
+		color: $color-white;
+		background: $color-primary;
 	}
 }
 
@@ -370,4 +389,24 @@ ion-select::part(icon) {
 
 ion-icon {
 	cursor: pointer;
+}
+
+$border: 2px solid $color-newGray !important;
+
+.border-bottom-line {
+	@media (max-width: $md) {
+		border-bottom: $border;
+	}
+}
+
+.border-top-line {
+	@media (max-width: $md) {
+		border-bottom: $border;
+	}
+}
+
+.border-left-line {
+	@media (max-width: $md) {
+		border-left: $border;
+	}
 }

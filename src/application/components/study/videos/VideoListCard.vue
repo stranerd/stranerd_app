@@ -1,12 +1,9 @@
 <template>
-	<div class="w-full bg-white rounded-xl flex flex-col justify-between gap-6 box-border p-4 text-main_dark">
-		<div class="w-full justify-between items-start flex">
-			<div class="text-base flex-col flex gap-2 items-start flex-grow truncate">
-				<ion-text class="font-semibold truncate">{{ video.title }}</ion-text>
-
-			</div>
+	<div class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
+		<div class="w-full justify-between items-start flex gap-2">
+			<ion-text class="font-semibold truncate w-full">{{ video.title }}</ion-text>
 			<router-link :to="`/study/videos/${video.id}`">
-				<ion-icon :icon="arrowForwardCircleOutline" class="text-gray text-xl" />
+				<ion-icon :icon="arrowForwardCircleOutline" class="text-primary text-xl" />
 			</router-link>
 		</div>
 
