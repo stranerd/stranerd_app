@@ -21,7 +21,8 @@
 				<Avatar :id="set.userId" :size="24" :src="set.userBio.photo" />
 				<Share :link="set.shareLink" :title="set.name" cssClass="text-xl" text="Share this folder" />
 				<ion-icon v-if="0 && set.userId !== id" :icon="isSaved ? bookmark : bookmarkOutline"
-					class="text-xl" />
+					class="text-xl"
+					@click="openSaveModal(set)" />
 			</div>
 		</div>
 	</div>
@@ -34,6 +35,7 @@ import { arrowForwardCircleOutline, bookmark, bookmarkOutline, folderOutline } f
 import { formatNumber, pluralize } from '@utils/commons'
 import { useUserSetList } from '@app/composable/users/users/sets'
 import { useAuth } from '@app/composable/auth/auth'
+import { openSaveModal } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'SetListCard',
@@ -55,7 +57,8 @@ export default defineComponent({
 			pluralize,
 			formatNumber,
 			isSaved,
-			id
+			id,
+			openSaveModal
 		}
 	}
 })

@@ -27,7 +27,8 @@
 					</div>
 					<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
 						text="Share this flashcard" />
-					<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" />
+					<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl"
+						@click="openSaveModal(flashCard)" />
 				</div>
 			</div>
 		</div>
@@ -44,7 +45,7 @@
 			</div>
 			<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
 				text="Share this flashcard" />
-			<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" />
+			<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" @click="openSaveModal(flashCard)" />
 		</div>
 
 		<template v-if="flashCard">
@@ -73,6 +74,7 @@ import { useRoute } from 'vue-router'
 import FlashCardScreen from '@root/application/components/study/flashCards/FlashCardScreen.vue'
 import FlashCardListView from '@root/application/components/study/flashCards/FlashCardListView.vue'
 import { useUserSetList } from '@app/composable/users/users/sets'
+import { openSaveModal } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'StudyFlashCardsFlashcardId',
@@ -90,7 +92,7 @@ export default defineComponent({
 		const { sets } = useUserSetList()
 		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(flashCardId as string)))
 		return {
-			copyOutline, listOutline, cardMode, isSaved,
+			copyOutline, listOutline, cardMode, isSaved, openSaveModal,
 			flashCard, loading, error,
 			bookmark, bookmarkOutline, ellipsisVerticalOutline, checkmarkCircleOutline
 		}

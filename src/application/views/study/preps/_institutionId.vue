@@ -46,8 +46,7 @@
 			</div>
 
 			<div class="p-4 lg:w-7/12 w-full mx-auto showcase">
-				<TestPrepListCard v-for="prep in preps" :key="prep.hash" :openMenu="(ev) => openMenu(prep, ev)"
-					:testPrep="prep" />
+				<TestPrepListCard v-for="prep in preps" :key="prep.hash" :testPrep="prep" />
 			</div>
 			<div class="p-4 lg:w-7/12 w-full mx-auto">
 				<EmptyState v-if="!loading && !error && preps.length === 0"
@@ -67,8 +66,6 @@ import { useRoute } from 'vue-router'
 import { useTestPrepList } from '@app/composable/study/testPreps'
 import { IonItem, IonLabel, IonSelect, IonSelectOption } from '@ionic/vue'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
-import { TestPrepEntity } from '@modules/study'
-import { openStudyEntityMenu } from '@app/composable/study/menus'
 import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
@@ -89,8 +86,6 @@ export default defineComponent({
 	setup () {
 		const route = useRoute()
 		const { institutionId } = route.params
-		const openMenu = (entity: TestPrepEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
-
 		const { testPreps, loading, error } = useTestPrepList()
 		const institutionPreps = computed(() => testPreps.value.filter((prep) => prep.data.institutionId === institutionId))
 
@@ -112,7 +107,7 @@ export default defineComponent({
 
 		return {
 			loading, error,
-			institutionId, preps, courseId, courses, year, years, questionType, questionTypes, openMenu
+			institutionId, preps, courseId, courses, year, years, questionType, questionTypes
 		}
 	}
 })

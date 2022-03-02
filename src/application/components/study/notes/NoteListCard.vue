@@ -21,7 +21,7 @@
 			<div class="flex items-center text-gray gap-2">
 				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
 				<Share :link="note.shareLink" :text="note.description" :title="note.title" cssClass="text-xl" />
-				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" />
+				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" @click="openSaveModal(note)" />
 			</div>
 		</div>
 	</div>
@@ -42,6 +42,7 @@ import { NoteEntity } from '@modules/study'
 import { IonSpinner } from '@ionic/vue'
 import { useDownload } from '@app/composable/meta/media'
 import { useUserSetList } from '@app/composable/users/users/sets'
+import { openSaveModal } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'NoteListCard',
@@ -76,7 +77,8 @@ export default defineComponent({
 			content,
 			error,
 			deleteFromDownloads,
-			isSaved
+			isSaved,
+			openSaveModal
 		}
 	}
 })

@@ -24,7 +24,8 @@
 				<Avatar :id="flashCard.userId" :size="24" :src="flashCard.userBio.photo" />
 				<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
 					text="Share this flashcard" />
-				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" />
+				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl"
+					@click="openSaveModal(flashCard)" />
 			</div>
 		</div>
 	</div>
@@ -38,6 +39,7 @@ import Avatar from '@app/components/core/Avatar.vue'
 import { FlashCardEntity } from '@modules/study'
 import Share from '../../core/Share.vue'
 import { useUserSetList } from '@app/composable/users/users/sets'
+import { openSaveModal } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'FlashCardListCard',
@@ -51,7 +53,8 @@ export default defineComponent({
 		const { sets } = useUserSetList()
 		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(props.flashCard.id)))
 		return {
-			arrowForwardCircleOutline, copyOutline, bookmark, bookmarkOutline, formatNumber, pluralize, isSaved
+			arrowForwardCircleOutline, copyOutline, bookmark, bookmarkOutline, formatNumber, pluralize, isSaved,
+			openSaveModal
 		}
 	},
 	components: { Avatar, Share }

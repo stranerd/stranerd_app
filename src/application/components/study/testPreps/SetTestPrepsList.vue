@@ -6,9 +6,7 @@ Find the one you need to study for your exams and save them now."
 			route="/search/preps"
 		/>
 		<div class="showcase">
-			<TestPrepListCard v-for="testPrep in filtered" :key="testPrep.hash"
-				:openMenu="(event) => openMenu(testPrep, event)"
-				:testPrep="testPrep" />
+			<TestPrepListCard v-for="testPrep in filtered" :key="testPrep.hash" :testPrep="testPrep" />
 		</div>
 	</div>
 </template>
@@ -17,7 +15,6 @@ Find the one you need to study for your exams and save them now."
 import { computed, defineComponent, PropType } from 'vue'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import { SetEntity, TestPrepEntity } from '@modules/study'
-import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'SetTestPrepsList',
@@ -38,9 +35,8 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const openMenu = (entity: TestPrepEntity, event: Event) => openStudyEntityMenu(entity, { set: props.set }, event)
 		const filtered = computed(() => props.testPreps.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, openMenu }
+		return { filtered }
 	}
 })
 </script>

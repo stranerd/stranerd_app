@@ -25,7 +25,7 @@ import {
 	VideoEntity
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { useMenuPopover, useStudyModal } from '@app/composable/core/modals'
+import { useStudyModal } from '@app/composable/core/modals'
 import { Alert, Notify } from '@utils/dialog'
 
 type SaveKey = keyof SetEntity['saved']
@@ -243,7 +243,7 @@ export const useSaveToSet = () => {
 		try {
 			await setLoading(true)
 			await SaveSetProp.call(set.id, prop, [itemId])
-			useMenuPopover().closeStudyEntityMenu()
+			useStudyModal().closeSaveEntity()
 			await Notify({ title: 'Saved to folder successfully' })
 		} catch (e) {
 			await setError(e)
@@ -257,7 +257,7 @@ export const useSaveToSet = () => {
 			await DeleteSetProp.call(set.id, prop, [itemId])
 			//@ts-ignore
 			if (setGlobal[set.id]) setGlobal[set.id][prop].value = setGlobal[set.id][prop].value.filter((item) => item.id !== itemId)
-			useMenuPopover().closeStudyEntityMenu()
+			useStudyModal().closeSaveEntity()
 			await Notify({ title: 'Removed from folder successfully' })
 		} catch (e) {
 			await setError(e)

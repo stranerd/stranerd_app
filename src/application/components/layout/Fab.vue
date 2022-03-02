@@ -1,7 +1,6 @@
 <template>
 	<ion-fab slot="fixed" class="lg:hidden" horizontal="end" vertical="bottom">
-		<ion-fab-button :activated="active" :color="active ? 'danger' : 'primary'" class="z-50 relative"
-			@click="active = !active">
+		<ion-fab-button :activated="active" class="z-50 relative" color="primary">
 			<ion-icon :icon="addOutline" />
 		</ion-fab-button>
 		<ion-fab-list class="z-50" side="top">

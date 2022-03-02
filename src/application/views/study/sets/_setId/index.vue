@@ -14,9 +14,7 @@
 				<div v-if="testPreps.length + flashCards.length + notes.length + videos.length">
 					<ion-text class="font-semibold block text-main_dark mb-2">Others</ion-text>
 					<div class="showcase">
-						<TestPrepListCard v-for="testPrep in testPreps" :key="testPrep.hash"
-							:openMenu="($ev) => openStudyEntityMenu(testPrep, { set }, $ev)"
-							:testPrep="testPrep" />
+						<TestPrepListCard v-for="testPrep in testPreps" :key="testPrep.hash" :testPrep="testPrep" />
 						<FlashCardListCard v-for="flashCard in flashCards" :key="flashCard.hash"
 							:flashCard="flashCard" />
 						<NoteListCard v-for="note in notes" :key="note.hash" :note="note" />
@@ -32,7 +30,7 @@
 import { defineComponent } from 'vue'
 import PageWrapper from '@app/components/study/sets/page/PageWrapper.vue'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
-import { openStudyEntityMenu } from '@app/composable/study/menus'
+import { openSaveModal } from '@app/composable/study/menus'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 import VideoListCard from '@app/components/study/videos/VideoListCard.vue'
@@ -43,7 +41,7 @@ export default defineComponent({
 	displayName: 'Study Folder',
 	components: { PageWrapper, TestPrepListCard, FlashCardListCard, NoteListCard, VideoListCard, SetListCard },
 	setup () {
-		return { openStudyEntityMenu }
+		return { openStudyEntityMenu: openSaveModal }
 	}
 })
 </script>

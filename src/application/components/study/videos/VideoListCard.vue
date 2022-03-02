@@ -19,7 +19,7 @@
 			<div class="flex items-center text-gray gap-2">
 				<Avatar :id="video.userId" :size="24" :src="video.userBio.photo" />
 				<Share :link="video.shareLink" :text="video.description" :title="video.title" cssClass="text-xl" />
-				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" />
+				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" @click="openSaveModal(video)" />
 			</div>
 		</div>
 	</div>
@@ -37,6 +37,7 @@ import {
 	playCircleOutline
 } from 'ionicons/icons'
 import { useUserSetList } from '@app/composable/users/users/sets'
+import { openSaveModal } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'VideosListCard',
@@ -56,7 +57,8 @@ export default defineComponent({
 			arrowForwardCircleOutline,
 			bookmark,
 			bookmarkOutline,
-			isSaved
+			isSaved,
+			openSaveModal
 		}
 	}
 })
