@@ -108,7 +108,7 @@ export const useUserRootSet = (userId = useAuth().id.value) => {
 		await myGlobal[userId].listener.startListener()
 	})
 	onUnmounted(async () => {
-		if (userId !== useAuth().id.value) await myGlobal[userId].listener.closeListener()
+		await myGlobal[userId].listener.closeListener()
 	})
 
 	return { ...myGlobal[userId], fetchSets }

@@ -13,14 +13,14 @@ import { QuestionToModel } from '../../data/models/question'
 
 type Content = UploadedFile | Media
 type Keys = {
-	body: string, subjectId: string, attachments: Content[], type: QuestionType, classId: string | null
+	body: string, subject: string, attachments: Content[], type: QuestionType, classId: string | null
 }
 
 export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel, Keys> {
 	readonly rules = {
 		body: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		attachments: { required: true, rules: [isArrayOfX((com) => isImage(com).valid, 'images'), hasLessThanX(6)] },
-		subjectId: { required: true, rules: [isString, isLongerThanX(0)] },
+		subject: { required: true, rules: [isString, isLongerThanX(0)] },
 		type: {
 			required: true,
 			rules: [arrayContainsX(Object.keys(QuestionType), (cur, val) => cur === val)]
@@ -34,7 +34,7 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 	reserved = []
 
 	constructor () {
-		super({ body: '', subjectId: '', attachments: [], type: QuestionType.users, classId: null })
+		super({ body: '', subject: '', attachments: [], type: QuestionType.users, classId: null })
 	}
 
 	get body () {
@@ -45,12 +45,12 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 		this.set('body', value)
 	}
 
-	get subjectId () {
-		return this.values.subjectId
+	get subject () {
+		return this.values.subject
 	}
 
-	set subjectId (value: string) {
-		this.set('subjectId', value)
+	set subject (value: string) {
+		this.set('subject', value)
 	}
 
 	get type () {
@@ -87,7 +87,7 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 
 	loadEntity = (entity: QuestionEntity) => {
 		this.body = entity.body
-		this.subjectId = entity.subjectId
+		this.subject = entity.subject
 		this.set('attachments', entity.attachments)
 		this.type = entity.data.type
 		if (entity.data.type === QuestionType.classes) {
@@ -103,9 +103,9 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 			}))
 			this.set('attachments', docs)
 
-			const { attachments, body, subjectId, type, classId } = this.validValues
+			const { attachments, body, subject, type, classId } = this.validValues
 			return {
-				attachments: attachments as Media[], body, subjectId,
+				attachments: attachments as Media[], body, subject,
 				data: this.isClassType ? {
 					type: type as any, classId
 				} : { type: type as any }

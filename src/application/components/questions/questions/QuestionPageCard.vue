@@ -10,7 +10,7 @@
 					<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircle" color="primary" />
 				</span>
 				<div class="h-1 w-1 bg-icon_inactive rounded-full hidden lg:block" />
-				<Subject :subjectId="question.subjectId" class="font-semibold text-main_dark" />
+				<span class="font-semibold text-main_dark capitalize">{{ question.subject }}</span>
 				<div class="flex flex-row-reverse flex-grow">
 					<IonIcon :icon="flag" class="text-[22px] text-main_dark cursor-pointer"
 						@click="openReportQuestionModal" />
@@ -67,7 +67,6 @@ import { computed, defineComponent } from 'vue'
 import { IonIcon, IonRippleEffect } from '@ionic/vue'
 import { checkmarkCircle, flag, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
-import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import PhotoList from '@app/components/core/media/PhotoList.vue'
 import CreateAnswer from '@app/components/questions/answers/CreateAnswer.vue'
@@ -88,7 +87,7 @@ export default defineComponent({
 		}
 	},
 	components: {
-		IonIcon, IonRippleEffect, Avatar, Subject, PhotoList, CreateAnswer
+		IonIcon, IonRippleEffect, Avatar, PhotoList, CreateAnswer
 	},
 	setup (props) {
 		const { id } = useAuth()

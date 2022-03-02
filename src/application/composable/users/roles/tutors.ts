@@ -7,7 +7,6 @@ import { useAuth } from '@app/composable/auth/auth'
 const global = {
 	tutors: ref([] as UserEntity[]),
 	fetched: ref(false),
-	subjectId: ref(''),
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
@@ -34,11 +33,7 @@ export const useTutorsList = () => {
 	}
 	const filteredTutors = computed({
 		get: () => global.tutors.value
-			.sort((a, b) => a.score > b.score ? -1 : a.score === b.score ? 0 : 1)
-			.filter((tutor) => {
-				if (global.subjectId.value && !tutor.subjects.includes(global.subjectId.value)) return false
-				return true
-			}),
+			.sort((a, b) => a.score > b.score ? -1 : a.score === b.score ? 0 : 1),
 		set: (tutors) => {
 			tutors?.forEach?.((t) => {
 				const index = global.tutors.value.findIndex((x) => x.id === t.id)

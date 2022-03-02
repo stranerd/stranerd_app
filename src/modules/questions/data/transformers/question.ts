@@ -4,12 +4,12 @@ import { QuestionEntity } from '../../domain/entities/question'
 export class QuestionTransformer {
 	fromJSON (model: QuestionFromModel) {
 		const {
-			id, body, subjectId, isAnswered, data,
+			id, body, subject, isAnswered, data,
 			bestAnswers, createdAt, userId, userBio, userRoles, attachments,
 			answers, updatedAt
 		} = model
 		return new QuestionEntity({
-			id, body, subjectId, isAnswered, data,
+			id, body, subject, isAnswered, data,
 			bestAnswers, createdAt, userId, userBio, userRoles, attachments,
 			answers, updatedAt
 		})
@@ -20,7 +20,7 @@ export class QuestionTransformer {
 			body: entity.body,
 			data: entity.data,
 			attachments: entity.attachments,
-			subjectId: entity.subjectId
+			subject: entity.subject
 		}
 	}
 }

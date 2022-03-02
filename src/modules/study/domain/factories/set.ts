@@ -10,7 +10,7 @@ type Keys = {
 
 export class SetFactory extends BaseFactory<SetEntity, SetToModel, Keys> {
 	readonly rules = {
-		name: { required: true, rules: [isString, isLongerThanX(0)] },
+		name: { required: true, rules: [isString, isLongerThanX(2)] },
 		parent: { required: false, rules: [isString] },
 		type: {
 			required: true,

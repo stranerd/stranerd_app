@@ -1,19 +1,12 @@
-import { SubjectApiDataSource } from './data/datasources/subject-api'
 import { QuestionApiDataSource } from './data/datasources/question-api'
 import { AnswerApiDataSource } from './data/datasources/answer-api'
 import { CommentApiDataSource } from './data/datasources/comment-api'
-import { SubjectTransformer } from './data/transformers/subject'
 import { QuestionTransformer } from './data/transformers/question'
 import { AnswerTransformer } from './data/transformers/answer'
 import { CommentTransformer } from './data/transformers/comment'
-import { SubjectRepository } from './data/repositories/subject'
 import { QuestionRepository } from './data/repositories/question'
 import { AnswerRepository } from './data/repositories/answer'
 import { CommentRepository } from './data/repositories/comment'
-import { GetSubjectsUseCase } from './domain/usecases/subjects/getSubjects'
-import { DeleteSubjectUseCase } from './domain/usecases/subjects/deleteSubject'
-import { AddSubjectUseCase } from './domain/usecases/subjects/addSubject'
-import { FindSubjectUseCase } from './domain/usecases/subjects/findSubject'
 import { FindQuestionUseCase } from './domain/usecases/questions/findQuestion'
 import { GetQuestionsUseCase } from './domain/usecases/questions/getQuestions'
 import { GetUserQuestionsUseCase } from './domain/usecases/questions/getUserQuestions'
@@ -38,8 +31,6 @@ import {
 	ListenToAnswerCommentsUseCase,
 	ListenToQuestionCommentsUseCase
 } from './domain/usecases/comments/listenToComments'
-import { SubjectEntity } from './domain/entities/subject'
-import { SubjectFactory } from './domain/factories/subject'
 import { QuestionEntity } from './domain/entities/question'
 import { QuestionFactory } from './domain/factories/question'
 import { AnswerEntity } from './domain/entities/answer'
@@ -47,27 +38,19 @@ import { AnswerFactory } from './domain/factories/answer'
 import { CommentEntity } from './domain/entities/comment'
 import { CommentFactory } from './domain/factories/comment'
 
-const subjectDataSource = new SubjectApiDataSource()
 const questionDataSource = new QuestionApiDataSource()
 const answerDataSource = new AnswerApiDataSource()
 const questionCommentDataSource = new CommentApiDataSource('questionComments')
 const answerCommentDataSource = new CommentApiDataSource('answerComments')
 
-const subjectTransformer = new SubjectTransformer()
 const questionTransformer = new QuestionTransformer()
 const answerTransformer = new AnswerTransformer()
 const commentTransformer = new CommentTransformer()
 
-const subjectRepository = new SubjectRepository(subjectDataSource, subjectTransformer)
 const questionRepository = new QuestionRepository(questionDataSource, questionTransformer)
 const answerRepository = new AnswerRepository(answerDataSource, answerTransformer)
 const questionCommentRepository = new CommentRepository(questionCommentDataSource, commentTransformer)
 const answerCommentRepository = new CommentRepository(answerCommentDataSource, commentTransformer)
-
-export const GetSubjects = new GetSubjectsUseCase(subjectRepository)
-export const DeleteSubject = new DeleteSubjectUseCase(subjectRepository)
-export const AddSubject = new AddSubjectUseCase(subjectRepository)
-export const FindSubject = new FindSubjectUseCase(subjectRepository)
 
 export const GetQuestions = new GetQuestionsUseCase(questionRepository)
 export const GetUserQuestions = new GetUserQuestionsUseCase(questionRepository)
@@ -96,7 +79,6 @@ export const GetAnswerComments = new GetAnswerCommentsUseCase(answerCommentRepos
 export const ListenToQuestionComments = new ListenToQuestionCommentsUseCase(questionCommentRepository)
 export const ListenToAnswerComments = new ListenToAnswerCommentsUseCase(answerCommentRepository)
 
-export { SubjectEntity, SubjectFactory }
 export { QuestionEntity, QuestionFactory }
 export { AnswerEntity, AnswerFactory }
 export { CommentEntity, CommentFactory }

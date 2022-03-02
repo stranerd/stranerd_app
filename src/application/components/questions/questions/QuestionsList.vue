@@ -26,13 +26,11 @@ export default defineComponent({
 	components: { QuestionListCard, EmptyState, PageLoading },
 	setup () {
 		const {
-			filteredQuestions: questions, error, loading, hasMore,
-			answeredChoices, answered, subjectId, fetchOlderQuestions
+			filteredQuestions: questions, error, loading, hasMore, fetchOlderQuestions
 		} = useQuestionList()
 
 		return {
 			questions, error, loading, hasMore,
-			answeredChoices, answered, subjectId,
 			fetchOlderQuestions
 		}
 	}

@@ -1,6 +1,10 @@
 <template>
 	<form @submit.prevent="submit">
-		<SelectSubject v-model:subjectId="factory.subjectId" :show-all="false" class="w-full bg-new_gray" />
+		<IonInput
+			v-model="factory.subject"
+			class="w-full bg-new_gray"
+			placeholder="Select a Subject"
+		/>
 		<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
 			class="lg:mt-3 px-1"
 			placeholder="Write your question here." />
@@ -44,15 +48,13 @@ import { IonIcon } from '@ionic/vue'
 import { closeOutline, image } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
-import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 
 export default defineComponent({
 	name: 'QuestionForm',
 	components: {
 		BaseEditor,
-		IonIcon,
-		SelectSubject
+		IonIcon
 	},
 	props: {
 		factory: {

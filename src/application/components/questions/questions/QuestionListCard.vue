@@ -11,7 +11,7 @@
 					<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
 				</span>
 				<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 ml-2 hidden lg:block"></span>
-				<Subject :key="question.subjectId" :subjectId="question.subjectId" class="font-bold text-main_dark" />
+				<span class="font-bold text-main_dark capitalize">{{ question.subject }}</span>
 			</div>
 
 			<ion-button v-if="showAnswerButton"
@@ -44,7 +44,6 @@ import { arrowRedoOutline, checkmarkCircleOutline, flagOutline, image } from 'io
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
-import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { useReportModal } from '@app/composable/core/modals'
@@ -62,7 +61,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { IonRippleEffect, Avatar, Subject },
+	components: { IonRippleEffect, Avatar },
 	setup (props) {
 		const { id } = useAuth()
 		const showAnswerButton = computed({
