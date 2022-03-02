@@ -27,7 +27,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { rootSets: sets, error, loading } = useUserSetList(props.user.id)
+		const { sets, error, loading } = useUserSetList(props.user.id)
 		return { sets, error, loading }
 	}
 })

@@ -5,9 +5,7 @@ import { appName } from '@utils/environment'
 export class SetEntity extends BaseEntity {
 	public readonly id: string
 	public readonly name: string
-	public readonly parent: string
 	public readonly data: SetData
-	public readonly children: string[]
 	public readonly userId: string
 	public readonly userBio: UserBio
 	public readonly userRoles: UserRoles
@@ -24,32 +22,28 @@ export class SetEntity extends BaseEntity {
 	constructor ({
 		             id,
 		             name,
-		             parent,
 		             data,
 		             userId,
 		             userBio,
 		             userRoles,
-		             children,
 		             saved,
 		             createdAt,
 		             updatedAt
 	             }: SetConstructorArgs) {
 		super()
 		this.id = id
-		this.parent = parent
 		this.data = data
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
 		this.userRoles = generateDefaultRoles(userRoles)
 		this.name = !name ? 'My Library' : name
-		this.children = children
 		this.saved = saved
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
 	get allSaved () {
-		return Object.values(this.saved).flat(1).concat(this.children)
+		return Object.values(this.saved).flat(1)
 	}
 
 	get isUserVerified () {
@@ -80,12 +74,10 @@ export type SetData = UserType | ClassType
 type SetConstructorArgs = {
 	id: string
 	name: string
-	parent: string
 	data: SetData
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
-	children: string[]
 	saved: {
 		notes: string[]
 		videos: string[]

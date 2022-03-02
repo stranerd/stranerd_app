@@ -2,16 +2,14 @@ import { BaseFactory } from '@modules/core'
 import { arrayContainsX, isLongerThanX, isString } from '@stranerd/validate'
 import { SetEntity, SetType } from '../entities/set'
 import { SetToModel } from '../../data/models/set'
-import { getQuerySetId } from '@utils/query'
 
 type Keys = {
-	name: string, parent: string, type: SetType, classId: string | null
+	name: string, type: SetType, classId: string | null
 }
 
 export class SetFactory extends BaseFactory<SetEntity, SetToModel, Keys> {
 	readonly rules = {
 		name: { required: true, rules: [isString, isLongerThanX(2)] },
-		parent: { required: false, rules: [isString] },
 		type: {
 			required: true,
 			rules: [arrayContainsX(Object.keys(SetType), (cur, val) => cur === val)]
@@ -25,7 +23,7 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, Keys> {
 	reserved = []
 
 	constructor () {
-		super({ name: '', parent: getQuerySetId(), type: SetType.users, classId: null })
+		super({ name: '', type: SetType.users, classId: null })
 	}
 
 	get name () {
@@ -34,14 +32,6 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, Keys> {
 
 	set name (value: string) {
 		this.set('name', value)
-	}
-
-	get parent () {
-		return this.values.parent
-	}
-
-	set parent (value: string) {
-		this.set('parent', value)
 	}
 
 	get type () {
@@ -70,7 +60,6 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, Keys> {
 
 	loadEntity = (entity: SetEntity) => {
 		this.name = entity.name
-		this.parent = entity.parent
 		this.type = entity.data.type
 		if (entity.data.type === SetType.classes) {
 			this.classId = entity.data.classId
@@ -79,9 +68,9 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, Keys> {
 
 	toModel = async () => {
 		if (this.valid) {
-			const { name, parent, type, classId } = this.validValues
+			const { name, type, classId } = this.validValues
 			return {
-				name, parent,
+				name,
 				data: this.isClassType ? {
 					type: type as any, classId
 				} : { type: type as any }

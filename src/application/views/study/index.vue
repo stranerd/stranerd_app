@@ -23,7 +23,7 @@ export default defineComponent({
 	middlewares: ['isAuthenticated'],
 	components: { DashboardLayout, SetListCard },
 	setup () {
-		const { rootSets: sets, error, loading } = useUserSetList()
+		const { sets, error, loading } = useUserSetList()
 		return { sets, error, loading }
 	}
 })

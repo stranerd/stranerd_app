@@ -20,7 +20,7 @@
 			<div class="flex items-center text-gray gap-2">
 				<Avatar :id="set.userId" :size="24" :src="set.userBio.photo" />
 				<Share :link="set.shareLink" :title="set.name" cssClass="text-xl" text="Share this folder" />
-				<ion-icon v-if="set.parent && set.userId !== id" :icon="isSaved ? bookmark : bookmarkOutline"
+				<ion-icon v-if="0 && set.userId !== id" :icon="isSaved ? bookmark : bookmarkOutline"
 					class="text-xl" />
 			</div>
 		</div>

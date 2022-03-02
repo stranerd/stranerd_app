@@ -1,4 +1,4 @@
-import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
+import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { GetUserSets, ListenToUserSets, SetEntity } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
@@ -56,8 +56,6 @@ export const useUserSetList = (id: string = useAuth().id.value) => {
 		await global[id].setLoading(false)
 	}
 
-	const rootSets = computed(() => global[id].sets.value.filter((s) => !s.parent))
-
 	onMounted(async () => {
 		if (!global[id].fetched.value && !global[id].loading.value) await fetchSets()
 		await global[id].listener.startListener()
@@ -67,5 +65,5 @@ export const useUserSetList = (id: string = useAuth().id.value) => {
 		await global[id].listener.closeListener()
 	})
 
-	return { ...global[id], rootSets }
+	return { ...global[id] }
 }

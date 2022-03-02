@@ -33,7 +33,6 @@
 import { defineComponent, PropType, ref } from 'vue'
 import { SetEntity } from '@modules/study'
 import { add, bookmark, bookmarkOutline, chevronDownOutline, chevronUpOutline } from 'ionicons/icons'
-import { useSet } from '@app/composable/study/sets'
 import { useUserSetList } from '@app/composable/users/users/sets'
 
 export default defineComponent({
@@ -63,15 +62,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const showSets = ref(!props.set)
-		const { loading, error, sets } = (() => {
-			if (props.set) {
-				const { loading, error, children: sets } = useSet(props.set)
-				return { loading, error, sets }
-			} else {
-				const { loading, error, rootSets: sets } = useUserSetList()
-				return { loading, error, sets }
-			}
-		})()
+		const { loading, error, sets } = useUserSetList()
 		const saveItem = async () => {
 			if (!props.set) return
 			if (props.set.allSaved.includes(props.itemId)) await props.unsave(props.set)
