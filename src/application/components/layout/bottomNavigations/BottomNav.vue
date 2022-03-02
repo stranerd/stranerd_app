@@ -6,25 +6,25 @@
 					exact-active-class="!text-main_dark"
 					to="/dashboard">
 					<ion-icon :icon="homeOutline" class="w-6 md:w-14" />
-					<IonText>Home</IonText>
+					<!-- <IonText>Home</IonText> -->
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-col items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/search">
 					<ion-icon :icon="searchOutline" class="w-6 md:w-14" />
-					<IonText>Search</IonText>
+					<!-- <IonText>Search</IonText> -->
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-col items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/questions">
 					<ion-icon :icon="helpCircleOutline" class="w-6 md:w-14" />
-					<IonText>Questions</IonText>
+					<!-- <IonText>Questions</IonText> -->
 				</router-link>
 				<router-link class="col-span-1 text-faded_gray flex flex-col items-center justify-center"
 					exact-active-class="!text-main_dark"
 					to="/study">
 					<ion-icon :icon="bookOutline" class="w-6 md:w-14" />
-					<IonText>Library</IonText>
+					<!-- <IonText>Library</IonText> -->
 				</router-link>
 			</div>
 		</IonToolbar>

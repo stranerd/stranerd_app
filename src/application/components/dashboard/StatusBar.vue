@@ -1,6 +1,6 @@
 <template>
 	<div v-if="isLoggedIn"
-		class="bg-white rounded-xl flex flex-col sm:flex-row justify-between sm:items-center py-4 px-6">
+		class="bg-white border-b border-new_gray md:border-0 md:rounded-xl flex flex-col sm:flex-row justify-between sm:items-center py-4 px-6">
 		<div class="flex flex-col  w-full text-left">
 			<ion-text class="text-main_dark sm:text-xl text-base font-bold">
 				Welcome home,
