@@ -1,57 +1,69 @@
 <template>
 	<DashboardLayout>
-		<div class="p-4 flex flex-col gap-8">
-			<StatusBar v-if="isLoggedIn" class="" />
-			<ContinueStudy v-if="isLoggedIn" :sliced="true" class="" />
-			<div class="">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text class="mr-3">Test Preps</ion-text>
-						<ion-badge class="uppercase">Latest</ion-badge>
-					</div>
-					<router-link class="text-primary text-body flex items-center font-bold" to="/explore/preps">
-						explore
-					</router-link>
-				</div>
-				<TestPrepList :sliced="true" />
+		<div>
+			<div v-if="isLoggedIn" class="md:px-4 md:py-8 pb-12">
+				<StatusBar />
 			</div>
-			<RecentQuestions class="" />
-			<div class="">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text class="mr-3">FlashCards</ion-text>
-						<ion-badge class="uppercase">Latest</ion-badge>
+			<div class="p-4">
+				<ContinueStudy v-if="isLoggedIn" :sliced="true" class="mb-8" />
+				<div class="mb-8">
+					<div class="w-full flex justify-between mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text class="mr-3">Test Preps</ion-text>
+							<ion-text class="text-orange font-normal flex items-center text-body">
+								<div class="h-1 w-1 bg-orange mr-2 rounded-full"/>
+								Latest</ion-text>
+						</div>
+						<router-link class="text-primary text-body flex items-center font-normal" to="/explore/preps">
+							explore
+						</router-link>
 					</div>
-					<router-link class="text-primary text-body flex items-center font-bold"
-						to="/explore/flashCards">
-						explore
-					</router-link>
+					<TestPrepList :sliced="true" />
 				</div>
-				<FlashCardList :sliced="true" />
-			</div>
-			<div class="">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text class="mr-3">Notes</ion-text>
-						<ion-badge class="uppercase">Latest</ion-badge>
+				<RecentQuestions class="mb-8" />
+				<div class="mb-8">
+					<div class="w-full flex justify-between mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text class="mr-3">FlashCards</ion-text>
+							<ion-text class="text-orange font-normal flex items-center text-body">
+								<div class="h-1 w-1 bg-orange mr-2 rounded-full"/>
+								Latest</ion-text>
+						</div>
+						<router-link class="text-primary text-body flex items-center font-normal"
+							to="/explore/flashCards">
+							explore
+						</router-link>
 					</div>
-					<router-link class="text-primary text-body flex items-center font-bold" to="/explore/notes">
-						explore
-					</router-link>
+					<FlashCardList :sliced="true" />
 				</div>
-				<NotesList :sliced="true" />
-			</div>
-			<div class="">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text class="mr-3">Videos</ion-text>
-						<ion-badge class="uppercase">Latest</ion-badge>
+				<div class="mb-8">
+					<div class="w-full flex justify-between mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text class="mr-3">Notes</ion-text>
+							<ion-text class="text-orange font-normal flex items-center text-body">
+								<div class="h-1 w-1 bg-orange mr-2 rounded-full"/>
+								Latest</ion-text>
+						</div>
+						<router-link class="text-primary text-body flex items-center font-normal" to="/explore/notes">
+							explore
+						</router-link>
 					</div>
-					<router-link class="text-primary text-body flex items-center font-bold" to="/explore/videos">
-						explore
-					</router-link>
+					<NotesList :sliced="true" />
 				</div>
-				<VideosList :sliced="true" />
+				<div class="mb-8">
+					<div class="w-full flex justify-between mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text class="mr-3">Videos</ion-text>
+							<ion-text class="text-orange font-normal flex items-center text-body">
+								<div class="h-1 w-1 bg-orange mr-2 rounded-full"/>
+								Latest</ion-text>
+						</div>
+						<router-link class="text-primary text-body flex items-center font-normal" to="/explore/videos">
+							explore
+						</router-link>
+					</div>
+					<VideosList :sliced="true" />
+				</div>
 			</div>
 		</div>
 	</DashboardLayout>
@@ -68,13 +80,12 @@ import FlashCardList from '@app/components/study/flashCards/ExploreFlashCardsLis
 import RecentQuestions from '@app/components/questions/questions/RecentQuestions.vue'
 import ContinueStudy from '@app/components/study/tests/ContinueTests.vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { IonBadge } from '@ionic/vue'
+
 
 export default defineComponent({
 	name: 'Dashboard',
 	displayName: 'Dashboard',
 	components: {
-		IonBadge,
 		DashboardLayout,
 		RecentQuestions,
 		ContinueStudy,

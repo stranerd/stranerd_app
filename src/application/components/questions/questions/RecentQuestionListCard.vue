@@ -1,21 +1,19 @@
 <template>
 	<router-link :to="`/questions/${question.id}`"
 		class="p-4 rounded-xl bg-white flex flex-col gap-3 w-full text-xs md:text-sm text-main_dark">
-		<div class="flex flex-row items-center gap-2">
-			<avatar :id="question.userId" :size="28" :src="question.avatar" />
-			<span class="flex items-center gap-1">
-				<span>{{ question.userBio.firstName }}</span>
-				<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
-			</span>
-
-			<span class="font-medium text-gray ml-auto">{{ formatTime(question.createdAt) }}</span>
-		</div>
 
 		<DisplayHtml :html="question.trimmedBody" class="leading-normal" />
+		<div class="w-full flex justify-between items-center">
+			<div class="flex items-center font-bold">
+				<span class=" text-gray ml-auto">{{ formatTime(question.createdAt) }}</span>
+				<div class="h-1 w-1 bg-gray mx-2 rounded-full" />
+				<span class="text-gray">
+					{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
+				</span>
 
-		<span class="text-gray">
-			{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
-		</span>
+			</div>
+			<avatar :id="question.userId" :size="24" :src="question.avatar" class="ml-auto" />
+		</div>
 	</router-link>
 </template>
 

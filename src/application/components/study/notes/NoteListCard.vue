@@ -3,25 +3,8 @@
 		class="m-0 w-full bg-white rounded-xl flex flex-col justify-between items-start gap-4 box-border p-4 text-main_dark">
 		<div class="w-full justify-between items-start flex">
 			<div class="text-base flex-col flex gap-2 items-start flex-grow truncate">
-				<ion-text class="font-semibold truncate">{{ note.title }}</ion-text>
-				<Tag :index="1" tag="Note">
-					<template v-slot="slotProps">
-						<span class="flex items-center">
-							<ion-icon :icon="documentOutline" class="text-base mr-1" />
-							<ion-text class="text-xs">{{ slotProps.tag }}</ion-text>
-						</span>
-					</template>
-				</Tag>
-			</div>
-			<ion-icon :icon="ellipsisVerticalOutline" class="text-gray text-xl" @click="openMenu" />
-		</div>
-		<div class="w-full flex items-center justify-between">
-			<div class="flex items-center gap-2">
-				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
-				<ion-text class="text-xs flex items-center gap-1">
-					<span>{{ note.userBio.firstName }}</span>
-					<IonIcon v-if="note.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
-				</ion-text>
+				<ion-text class="font-semibold truncate w-48">{{ note.title }}</ion-text>
+		
 			</div>
 			<router-link v-if="content" :to="`/study/notes/${note.id}`">
 				<ion-button class="btn-outline text-primary w-full lg:min-w-[7.5rem]" size="small">
@@ -31,11 +14,30 @@
 			<IonSpinner v-else-if="loading" color="primary" />
 			<IonIcon v-else :icon="downloadIcon" class="text-2xl" color="primary" @click="download" />
 		</div>
+
+
+
+
+		<div class="w-full flex items-center justify-between mt-6">
+			<Tag :index="1" tag="Note">
+				<template v-slot="slotProps">
+					<span class="flex items-center">
+						<ion-icon :icon="documentOutline" class="text-base mr-1" />
+						<ion-text class="text-xs">{{ slotProps.tag }}</ion-text>
+					</span>
+				</template>
+			</Tag>
+			<div class="flex items-center text-gray">
+				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
+				<share cssClass="text-xl mx-3"/>
+				<ion-icon :icon="bookmarkOutline"  class="text-xl" />
+			</div>
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { checkmarkCircleOutline, documentOutline, downloadOutline as downloadIcon, ellipsisVerticalOutline } from 'ionicons/icons'
+import { checkmarkCircleOutline, documentOutline, bookmarkOutline, downloadOutline as downloadIcon, ellipsisVerticalOutline } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { NoteEntity } from '@modules/study'
 import { IonSpinner } from '@ionic/vue'
@@ -48,10 +50,7 @@ export default defineComponent({
 			type: NoteEntity,
 			required: true
 		},
-		openMenu: {
-			type: Function,
-			required: true
-		}
+
 	},
 	components: { IonSpinner },
 	setup (props) {
@@ -64,7 +63,7 @@ export default defineComponent({
 		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
 
 		return {
-			ellipsisVerticalOutline, documentOutline, downloadIcon, checkmarkCircleOutline,
+			ellipsisVerticalOutline, documentOutline, downloadIcon, checkmarkCircleOutline, bookmarkOutline,
 			download, loading, content, error, deleteFromDownloads
 		}
 	}

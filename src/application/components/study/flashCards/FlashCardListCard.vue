@@ -2,43 +2,41 @@
 	<div class="m-0 bg-white rounded-xl flex flex-col gap-2 box-border justify-between p-4 text-main_dark">
 		<div class="w-full justify-between items-start flex">
 			<div class="flex flex-col items-start truncate">
-				<ion-text class="font-semibold truncate">{{ flashCard.title }}</ion-text>
-				<Tag :index="3"
-					:tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
-					<template v-slot="slotProps">
-						<span class="flex items-center">
-							<ion-icon :icon="copyOutline" class="mr-1" />
-							<ion-text class="text-xs font-semibold">{{ slotProps.tag }}</ion-text>
-						</span>
-					</template>
-				</Tag>
-			</div>
-			<ion-icon :icon="ellipsisVerticalOutline" class="text-gray text-xl" @click="openMenu" />
-		</div>
-
-		<div class="w-full flex items-center justify-between">
-			<div class="flex items-center gap-2">
-				<Avatar :id="flashCard.userId" :size="24" :src="flashCard.userBio.photo" />
-				<ion-text class="text-xs flex items-center gap-1">
-					<span>{{ flashCard.userBio.firstName }}</span>
-					<IonIcon v-if="flashCard.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
-				</ion-text>
+				<ion-text class="font-semibold truncate w-52">{{ flashCard.title }}</ion-text>
+		
 			</div>
 			<router-link :to="`/study/flashCards/${flashCard.id}`">
-				<ion-button class="btn-outline text-primary w-full lg:min-w-[7.5rem]" size="small">
-					Open
-				</ion-button>
+				<ion-icon :icon="arrowForwardCircleOutline" class="text-gray text-xl"  />
 			</router-link>
 		</div>
+
+		<div class="w-full flex items-center justify-between mt-6">
+			<Tag :index="3"
+				:tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
+				<template v-slot="slotProps">
+					<span class="flex items-center">
+						<ion-icon :icon="copyOutline" class="mr-1" />
+						<ion-text class="text-xs font-semibold">{{ slotProps.tag }}</ion-text>
+					</span>
+				</template>
+			</Tag>
+			<div class="flex items-center text-gray">
+				<Avatar :id="flashCard.userId" :size="24" :src="flashCard.userBio.photo" />
+				<share cssClass="text-xl mx-3"/>
+				<ion-icon :icon="bookmarkOutline"  class="text-xl" />
+			</div>
+		</div>
+		
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { checkmarkCircleOutline, copyOutline, ellipsisVerticalOutline } from 'ionicons/icons'
+import { checkmarkCircleOutline, copyOutline, arrowForwardCircleOutline, bookmarkOutline } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { FlashCardEntity } from '@modules/study'
+import Share from '../../core/Share.vue'
 
 export default defineComponent({
 	name: 'FlashCardListCard',
@@ -51,16 +49,13 @@ export default defineComponent({
 			type: FlashCardEntity,
 			required: true
 		},
-		openMenu: {
-			type: Function,
-			required: true
-		}
+
 	},
 	setup () {
 		return {
-			ellipsisVerticalOutline, copyOutline, checkmarkCircleOutline, formatNumber, pluralize
+			arrowForwardCircleOutline, copyOutline, bookmarkOutline, formatNumber, pluralize
 		}
 	},
-	components: { Avatar }
+	components: { Avatar, Share }
 })
 </script>
