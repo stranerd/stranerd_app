@@ -2,9 +2,9 @@
 	<div>
 		<div v-if="sliced" class="w-full flex justify-between mb-4">
 			<span class="heading font-bold text-main_dark">
-				Recently Uncompleted Tests
+				Continue test preps
 			</span>
-			<router-link class="text-primary text-body flex items-center font-bold"
+			<router-link class="text-primary text-body flex items-center"
 				to="/study/tests/continue">
 				<span>view all</span>
 			</router-link>

@@ -1,61 +1,57 @@
 <template>
 	<DashboardLayout>
-		<div>
-			<div v-if="isLoggedIn" class="md:px-4 md:py-8 pb-12">
-				<StatusBar />
+		<div class="p-4 flex flex-col gap-8">
+			<StatusBar v-if="isLoggedIn" class="" />
+			<ContinueStudy v-if="isLoggedIn" :sliced="true" class="" />
+			<div class="">
+				<div class="w-full flex justify-between mb-4">
+					<div class="heading font-bold text-main_dark flex items-center">
+						<ion-text class="mr-3">Test Preps</ion-text>
+						<ion-badge class="uppercase">Latest</ion-badge>
+					</div>
+					<router-link class="text-primary text-body flex items-center font-bold" to="/explore/preps">
+						explore
+					</router-link>
+				</div>
+				<TestPrepList :sliced="true" />
 			</div>
-			<div class="p-4">
-				<ContinueStudy v-if="isLoggedIn" :sliced="true" class="mb-8" />
-				<div class="mb-8">
-					<div class="w-full flex justify-between mb-4">
-						<div class="heading font-bold text-main_dark flex items-center">
-							<ion-text class="mr-3">Test Preps</ion-text>
-							<ion-badge class="uppercase">Latest</ion-badge>
-						</div>
-						<router-link class="text-primary text-body flex items-center font-bold" to="/explore/preps">
-							explore
-						</router-link>
+			<RecentQuestions class="" />
+			<div class="">
+				<div class="w-full flex justify-between mb-4">
+					<div class="heading font-bold text-main_dark flex items-center">
+						<ion-text class="mr-3">FlashCards</ion-text>
+						<ion-badge class="uppercase">Latest</ion-badge>
 					</div>
-					<TestPrepList :sliced="true" />
+					<router-link class="text-primary text-body flex items-center font-bold"
+						to="/explore/flashCards">
+						explore
+					</router-link>
 				</div>
-				<RecentQuestions class="mb-8" />
-				<div class="mb-8">
-					<div class="w-full flex justify-between mb-4">
-						<div class="heading font-bold text-main_dark flex items-center">
-							<ion-text class="mr-3">FlashCards</ion-text>
-							<ion-badge class="uppercase">Latest</ion-badge>
-						</div>
-						<router-link class="text-primary text-body flex items-center font-bold"
-							to="/explore/flashCards">
-							explore
-						</router-link>
+				<FlashCardList :sliced="true" />
+			</div>
+			<div class="">
+				<div class="w-full flex justify-between mb-4">
+					<div class="heading font-bold text-main_dark flex items-center">
+						<ion-text class="mr-3">Notes</ion-text>
+						<ion-badge class="uppercase">Latest</ion-badge>
 					</div>
-					<FlashCardList :sliced="true" />
+					<router-link class="text-primary text-body flex items-center font-bold" to="/explore/notes">
+						explore
+					</router-link>
 				</div>
-				<div class="mb-8">
-					<div class="w-full flex justify-between mb-4">
-						<div class="heading font-bold text-main_dark flex items-center">
-							<ion-text class="mr-3">Notes</ion-text>
-							<ion-badge class="uppercase">Latest</ion-badge>
-						</div>
-						<router-link class="text-primary text-body flex items-center font-bold" to="/explore/notes">
-							explore
-						</router-link>
+				<NotesList :sliced="true" />
+			</div>
+			<div class="">
+				<div class="w-full flex justify-between mb-4">
+					<div class="heading font-bold text-main_dark flex items-center">
+						<ion-text class="mr-3">Videos</ion-text>
+						<ion-badge class="uppercase">Latest</ion-badge>
 					</div>
-					<NotesList :sliced="true" />
+					<router-link class="text-primary text-body flex items-center font-bold" to="/explore/videos">
+						explore
+					</router-link>
 				</div>
-				<div class="mb-8">
-					<div class="w-full flex justify-between mb-4">
-						<div class="heading font-bold text-main_dark flex items-center">
-							<ion-text class="mr-3">Videos</ion-text>
-							<ion-badge class="uppercase">Latest</ion-badge>
-						</div>
-						<router-link class="text-primary text-body flex items-center font-bold" to="/explore/videos">
-							explore
-						</router-link>
-					</div>
-					<VideosList :sliced="true" />
-				</div>
+				<VideosList :sliced="true" />
 			</div>
 		</div>
 	</DashboardLayout>

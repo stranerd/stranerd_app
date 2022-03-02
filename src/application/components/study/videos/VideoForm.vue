@@ -12,13 +12,6 @@
 			<DisplayError :error="factory.errors.description" />
 		</div>
 
-		<div class="mb-12 gap-4 flex items-center">
-			<IonToggle id="isGateway" v-model="factory.isPublic" />
-			<label for="isGateway">
-				{{ factory.isPublic ? 'Is public' : 'Is private' }}
-			</label>
-		</div>
-
 		<div v-if="false" class="mb-12 flex items-center gap-4">
 			<IonToggle id="isHosted" v-model="factory.isHosted" />
 			<label for="isHosted">

@@ -20,28 +20,6 @@
 					</div>
 					<DisplayError :error="factory.errors.title" />
 				</div>
-				<div class="w-full max-w-[28rem] mx-auto">
-					<ion-radio-group v-model="factory.isPublic" class="flex w-full justify-center" mode="md">
-						<ion-list-header>
-							<ion-label class="text-white font-bold text-xs md:text-base !m-0">Set privacy:</ion-label>
-						</ion-list-header>
-
-						<ion-item class="w-full ion-item-transparent">
-							<ion-radio :value="true" class="ion-white" mode="md" />
-							<ion-label class="text-white font-bold text-xs md:text-base ml-3 ion-white">
-								Public
-							</ion-label>
-						</ion-item>
-
-						<ion-item class="w-full ion-item-transparent">
-							<ion-radio :value="false" class="ion-white" mode="md" />
-							<ion-label class="text-white font-bold text-xs md:text-base ml-3 ion-white">
-								Private
-							</ion-label>
-						</ion-item>
-					</ion-radio-group>
-					<DisplayError :error="factory.errors.isPublic" />
-				</div>
 			</div>
 		</div>
 
@@ -91,16 +69,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import {
-	IonItem,
-	IonLabel,
-	IonListHeader,
-	IonRadio,
-	IonRadioGroup,
-	IonReorder,
-	IonReorderGroup,
-	IonTextarea
-} from '@ionic/vue'
+import { IonReorder, IonReorderGroup, IonTextarea } from '@ionic/vue'
 import { addOutline, closeOutline, trashOutline } from 'ionicons/icons'
 import { FlashCardFactory } from '@modules/study'
 
@@ -128,12 +97,8 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: {
-		IonItem, IonLabel,
-		IonListHeader, IonRadio, IonRadioGroup,
-		IonTextarea, IonReorderGroup, IonReorder
-	},
-	setup (props) {
+	components: { IonTextarea, IonReorderGroup, IonReorder },
+	setup () {
 		return { closeOutline, trashOutline, addOutline }
 	}
 })

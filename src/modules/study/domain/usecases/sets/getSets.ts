@@ -11,7 +11,6 @@ export class GetSetsUseCase {
 
 	async call (date?: number) {
 		const conditions: QueryParams = {
-			where: [{ field: 'isPublic', value: true }],
 			sort: [{ field: 'createdAt', desc: true }],
 			limit: PAGINATION_LIMIT
 		}

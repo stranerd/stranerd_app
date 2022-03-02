@@ -6,7 +6,6 @@ export class SetEntity extends BaseEntity {
 	public readonly id: string
 	public readonly name: string
 	public readonly parent: string
-	public readonly isPublic: boolean
 	public readonly data: SetData
 	public readonly children: string[]
 	public readonly userId: string
@@ -26,7 +25,6 @@ export class SetEntity extends BaseEntity {
 		             id,
 		             name,
 		             parent,
-		             isPublic,
 		             data,
 		             userId,
 		             userBio,
@@ -39,7 +37,6 @@ export class SetEntity extends BaseEntity {
 		super()
 		this.id = id
 		this.parent = parent
-		this.isPublic = isPublic
 		this.data = data
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
@@ -81,7 +78,6 @@ type SetConstructorArgs = {
 	name: string
 	parent: string
 	data: SetData
-	isPublic: boolean
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
