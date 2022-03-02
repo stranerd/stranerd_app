@@ -10,7 +10,6 @@
 				<span class="text-gray">
 					{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
 				</span>
-
 			</div>
 			<avatar :id="question.userId" :size="24" :src="question.avatar" class="ml-auto" />
 		</div>
