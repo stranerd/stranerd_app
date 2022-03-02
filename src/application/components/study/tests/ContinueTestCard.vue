@@ -20,7 +20,7 @@
 			</span>
 		</ion-text>
 
-		<ion-progress-bar :value="test.progress"  class="mt-6" />
+		<ion-progress-bar :value="test.progress" class="mt-4" />
 	</router-link>
 </template>
 
@@ -57,8 +57,8 @@ export default defineComponent({
 		@media (max-width: 768px) {
 			height: .25rem !important;
 		}
-			
-		
+
+
 	}
 
 	ion-progress-bar::part(progress) {

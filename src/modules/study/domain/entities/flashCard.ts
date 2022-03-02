@@ -5,7 +5,6 @@ import { appName } from '@utils/environment'
 export class FlashCardEntity extends BaseEntity {
 	public readonly id: string
 	public readonly title: string
-	public readonly isPublic: boolean
 	public readonly set: { question: string, answer: string }[]
 	public readonly userId: string
 	public readonly userBio: UserBio
@@ -16,7 +15,6 @@ export class FlashCardEntity extends BaseEntity {
 	constructor ({
 		             id,
 		             title,
-		             isPublic,
 		             set,
 		             userId,
 		             userBio,
@@ -27,7 +25,6 @@ export class FlashCardEntity extends BaseEntity {
 		super()
 		this.id = id
 		this.title = title
-		this.isPublic = isPublic
 		this.set = set
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
@@ -44,7 +41,6 @@ export class FlashCardEntity extends BaseEntity {
 type FlashCardConstructorArgs = {
 	id: string,
 	title: string,
-	isPublic: boolean
 	set: { question: string, answer: string }[]
 	userId: string
 	userBio: UserBio

@@ -10,25 +10,6 @@
 				show-cancel-button="never"
 			></ion-input>
 		</div>
-		<div class="flex items-center w-full max-w-[25rem] justify-center">
-			<ion-radio-group v-model="factory.isPublic" class="flex w-full" mode="md">
-				<ion-list-header>
-					<ion-label class="text-icon_inactive font-bold text-base">
-						Set privacy:
-					</ion-label>
-				</ion-list-header>
-
-				<ion-item class="w-full ion-item-transparent">
-					<ion-radio :value="true" class="ion-white"></ion-radio>
-					<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Public</ion-label>
-				</ion-item>
-
-				<ion-item class="w-full ion-item-transparent">
-					<ion-radio :value="false" class="ion-white"></ion-radio>
-					<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Private</ion-label>
-				</ion-item>
-			</ion-radio-group>
-		</div>
 
 		<div class="flex gap-4 w-full">
 			<ion-button class="btn-secondary flex-grow w-full" @click="closeModal">
@@ -48,12 +29,12 @@
 import { defineComponent } from 'vue'
 import { closeOutline } from 'ionicons/icons'
 import { SetFactory } from '@modules/study'
-import { IonItem, IonLabel, IonListHeader, IonRadio, IonRadioGroup, IonRippleEffect } from '@ionic/vue'
+import { IonRippleEffect } from '@ionic/vue'
 import { useStudyModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'SetForm',
-	components: { IonRippleEffect, IonListHeader, IonRadio, IonItem, IonRadioGroup, IonLabel },
+	components: { IonRippleEffect },
 	props: {
 		factory: {
 			type: SetFactory,
@@ -77,9 +58,7 @@ export default defineComponent({
 			useStudyModal().closeAll()
 		}
 
-		return {
-			closeOutline, closeModal
-		}
+		return { closeOutline, closeModal }
 	}
 })
 </script>

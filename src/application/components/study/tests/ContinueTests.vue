@@ -4,7 +4,7 @@
 			<span class="heading font-bold text-main_dark">
 				Continue test preps
 			</span>
-			<router-link class="text-primary text-body flex items-center "
+			<router-link class="text-primary text-body flex items-center"
 				to="/study/tests/continue">
 				<span>view all</span>
 			</router-link>

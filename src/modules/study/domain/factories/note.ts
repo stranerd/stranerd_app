@@ -5,7 +5,7 @@ import { NoteToModel } from '../../data/models/note'
 
 type Content = UploadedFile | Media | null
 type Keys = {
-	title: string, description: string, isPublic: boolean,
+	title: string, description: string,
 	isHosted: boolean, media: Content | null, link: string | null
 }
 
@@ -15,7 +15,6 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 	readonly rules = {
 		title: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		description: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
-		isPublic: { required: true, rules: [isBoolean] },
 		isHosted: { required: true, rules: [isBoolean] },
 		link: { required: () => !this.isHosted, rules: [isString] },
 		media: {
@@ -31,7 +30,6 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 		super({
 			title: '',
 			description: '',
-			isPublic: true,
 			isHosted: true,
 			media: null,
 			link: null
@@ -64,14 +62,6 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 		else this.media = null
 	}
 
-	get isPublic () {
-		return this.values.isPublic
-	}
-
-	set isPublic (value: boolean) {
-		this.set('isPublic', value)
-	}
-
 	get link () {
 		return this.values.link
 	}
@@ -93,7 +83,6 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 	loadEntity = (entity: NoteEntity) => {
 		this.title = entity.title
 		this.description = entity.description
-		this.isPublic = entity.isPublic
 		this.isHosted = entity.isHosted
 		this.link = entity.link
 		this.media = entity.media
@@ -104,14 +93,13 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('study/notes', this.media)
 			if (this.isHosted) this.link = null
 			else this.media = null
-			const { title, description, isHosted, link, media, isPublic } = this.validValues
+			const { title, description, isHosted, link, media } = this.validValues
 			return {
 				title,
 				description,
 				isHosted,
 				link,
-				media: media as Media | null,
-				isPublic
+				media: media as Media | null
 			}
 		} else {
 			throw new Error('Validation errors')
