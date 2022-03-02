@@ -89,9 +89,9 @@
 import { defineComponent, ref } from 'vue'
 import { IonButton, IonInput, IonSpinner, IonTextarea } from '@ionic/vue'
 import { image } from 'ionicons/icons'
-import { useProfileUpdate, useTutorUpdate } from '@app/composable/auth/profile'
+import { useProfileUpdate } from '@app/composable/auth/profile'
 import { useAuth } from '@app/composable/auth/auth'
-import { useFileInputCallback, useSubjectAsTags } from '@app/composable/core/forms'
+import { useFileInputCallback } from '@app/composable/core/forms'
 import { usePasswordUpdate } from '@app/composable/auth/passwords'
 import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
 
@@ -102,8 +102,6 @@ export default defineComponent({
 		IonSpinner,
 		IonButton,
 		IonInput
-		// Subject,
-		// SelectSubject
 	},
 	setup () {
 		const { hasPassword, user } = useAuth()
@@ -113,7 +111,6 @@ export default defineComponent({
 			loading: profileLoading,
 			updateProfile
 		} = useProfileUpdate()
-		const { factory: tutorFactory, error: tutorError, loading: tutorLoading, updateTutor } = useTutorUpdate()
 		const {
 			factory: passwordFactory,
 			error: passwordError,
@@ -131,14 +128,9 @@ export default defineComponent({
 			profileFactory.value.avatar = undefined
 		}
 
-		const { sTag, removeTag } = useSubjectAsTags(
-			(sTag: string) => tutorFactory.value.addWeakerSubjects(sTag),
-			(sTag: string) => tutorFactory.value.removeWeakerSubjects(sTag)
-		)
 		return {
 			user, DEFAULT_PROFILE_IMAGE,
 			profileFactory, profileError, profileLoading, updateProfile, image, catchFiles, imageLink, removeImage,
-			tutorFactory, tutorError, tutorLoading, updateTutor, removeTag, sTag,
 			passwordFactory, passwordError, passwordLoading, updatePassword, hasPassword
 		}
 	}
