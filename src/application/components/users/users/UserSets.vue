@@ -17,7 +17,7 @@ import EmptyState from '../../core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 import { SetEntity } from '@modules/study'
 import { openStudyEntityMenu } from '@app/composable/study/menus'
-import { useUserRootSet } from '@app/composable/study/sets'
+import { useUserSetList } from '@app/composable/users/users/sets'
 
 export default defineComponent({
 	name: 'ProfileSets',
@@ -29,7 +29,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { sets, error, loading } = useUserRootSet(props.user.id)
+		const { rootSets: sets, error, loading } = useUserSetList(props.user.id)
 		const openMenu = (entity: SetEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		return { sets, error, loading, openMenu }
 	}

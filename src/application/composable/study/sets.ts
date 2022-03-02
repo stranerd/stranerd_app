@@ -11,7 +11,6 @@ import {
 	GetSetChildren,
 	GetSetsInSet,
 	GetTestPrepsInSet,
-	GetUserRootSet,
 	GetVideosInSet,
 	ListenToFlashCardsInSet,
 	ListenToNotesInSet,
@@ -19,7 +18,6 @@ import {
 	ListenToSetChildren,
 	ListenToSetsInSet,
 	ListenToTestPrepsInSet,
-	ListenToUserRootSet,
 	ListenToVideosInSet,
 	NoteEntity,
 	SaveSetProp,
@@ -29,7 +27,6 @@ import {
 	VideoEntity
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { useAuth } from '@app/composable/auth/auth'
 import { useMenuPopover, useStudyModal } from '@app/composable/core/modals'
 import { Alert, Notify } from '@utils/dialog'
 
@@ -37,12 +34,6 @@ type SaveKey = keyof SetEntity['saved']
 
 const global = {} as Record<string, {
 	set: Ref<SetEntity | null>
-	fetched: Ref<boolean>
-	listener: ReturnType<typeof useListener>
-} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
-
-const myGlobal = {} as Record<string, {
-	sets: Ref<SetEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
@@ -55,64 +46,6 @@ const setGlobal = {} as Record<string, {
 	sets: Ref<SetEntity[]>
 	fetched: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
-
-const pushToMyGlobalSetList = (userId: string, set: SetEntity) => {
-	const index = myGlobal[userId].sets.value.findIndex((q) => q.id === set.id)
-	if (index !== -1) myGlobal[userId].sets.value.splice(index, 1, set)
-	else myGlobal[userId].sets.value.push(set)
-}
-
-export const useUserRootSet = (userId = useAuth().id.value) => {
-	if (myGlobal[userId] === undefined) {
-		const listener = useListener(async () => {
-			if (!userId) return () => {
-			}
-			return await ListenToUserRootSet.call(userId, {
-				created: async (entity) => {
-					pushToMyGlobalSetList(userId, entity)
-				},
-				updated: async (entity) => {
-					pushToMyGlobalSetList(userId, entity)
-				},
-				deleted: async (entity) => {
-					const index = myGlobal[userId].sets.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) myGlobal[userId].sets.value.splice(index, 1)
-				}
-			})
-		})
-		myGlobal[userId] = {
-			sets: ref([]),
-			fetched: ref(false),
-			listener,
-			...useErrorHandler(),
-			...useLoadingHandler()
-		}
-	}
-
-	const fetchSets = async () => {
-		await myGlobal[userId].setError('')
-		if (!userId) return
-		try {
-			await myGlobal[userId].setLoading(true)
-			const sets = await GetUserRootSet.call(userId)
-			sets.results.forEach((entity) => pushToMyGlobalSetList(userId, entity))
-			myGlobal[userId].fetched.value = true
-		} catch (error) {
-			await myGlobal[userId].setError(error)
-		}
-		await myGlobal[userId].setLoading(false)
-	}
-
-	onMounted(async () => {
-		if (!myGlobal[userId].fetched.value && !myGlobal[userId].loading.value) await fetchSets()
-		await myGlobal[userId].listener.startListener()
-	})
-	onUnmounted(async () => {
-		await myGlobal[userId].listener.closeListener()
-	})
-
-	return { ...myGlobal[userId], fetchSets }
-}
 
 export const useSetById = (setId: string) => {
 	if (global[setId] === undefined) {
@@ -310,10 +243,11 @@ export const useSet = (set: SetEntity) => {
 	const flashCards = computed(() => setGlobal[set.id].flashCards.value.filter((flashCard) => set.saved.flashCards.includes(flashCard.id)))
 	const testPreps = computed(() => setGlobal[set.id].testPreps.value.filter((testPrep) => set.saved.testPreps.includes(testPrep.id)))
 	const sets = computed(() => setGlobal[set.id].sets.value.filter((s) => set.saved.sets.includes(s.id) || set.children.includes(s.id)))
+	const children = computed(() => setGlobal[set.id].sets.value.filter((s) => set.children.includes(s.id)))
 
 	return {
 		...setGlobal[set.id], fetchAllSetEntities,
-		notes, videos, flashCards, testPreps, sets
+		notes, videos, flashCards, testPreps, sets, children
 	}
 }
 
