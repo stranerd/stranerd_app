@@ -21,6 +21,21 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
+const listener = useListener(async () => {
+	const lastDate = global.notes.value[global.notes.value.length - 1]?.createdAt
+	return await ListenToNotes.call({
+		created: async (entity) => {
+			unshiftToNoteList(entity)
+		},
+		updated: async (entity) => {
+			unshiftToNoteList(entity)
+		},
+		deleted: async (entity) => {
+			const index = global.notes.value.findIndex((q) => q.id === entity.id)
+			if (index !== -1) global.notes.value.splice(index, 1)
+		}
+	}, lastDate)
+})
 
 const pushToNoteList = (note: NoteEntity) => {
 	const index = global.notes.value.findIndex((q) => q.id === note.id)
@@ -48,21 +63,6 @@ export const useNoteList = () => {
 		}
 		await global.setLoading(false)
 	}
-	const listener = useListener(async () => {
-		const lastDate = global.notes.value[global.notes.value.length - 1]?.createdAt
-		return await ListenToNotes.call({
-			created: async (entity) => {
-				unshiftToNoteList(entity)
-			},
-			updated: async (entity) => {
-				unshiftToNoteList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.notes.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.notes.value.splice(index, 1)
-			}
-		}, lastDate)
-	})
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchNotes()

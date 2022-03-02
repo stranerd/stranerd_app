@@ -13,6 +13,7 @@ const global = {} as Record<string, {
 	comments: Ref<CommentEntity[]>
 	hasMore: Ref<boolean>
 	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToGlobalList = (videoId: string, entity: CommentEntity) => {
@@ -22,12 +23,32 @@ const pushToGlobalList = (videoId: string, entity: CommentEntity) => {
 }
 
 export const useVideoCommentsList = (videoId: string) => {
-	if (global[videoId] === undefined) global[videoId] = {
-		comments: ref([]),
-		hasMore: ref(false),
-		fetched: ref(false),
-		...useErrorHandler(),
-		...useLoadingHandler()
+	if (global[videoId] === undefined) {
+		const listener = useListener(async () => {
+			return await ListenToVideoComments.call(videoId, {
+				created: async (entity) => {
+					const index = global[videoId].comments.value.findIndex((c) => c.id === entity.id)
+					if (index === -1) global[videoId].comments.value.unshift(entity)
+					else global[videoId].comments.value.splice(index, 1, entity)
+				},
+				updated: async (entity) => {
+					const index = global[videoId].comments.value.findIndex((c) => c.id === entity.id)
+					if (index === -1) global[videoId].comments.value.unshift(entity)
+					else global[videoId].comments.value.splice(index, 1, entity)
+				},
+				deleted: async (entity) => {
+					global[videoId].comments.value = global[videoId].comments.value.filter((c) => c.id !== entity.id)
+				}
+			})
+		})
+		global[videoId] = {
+			comments: ref([]),
+			hasMore: ref(false),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
 	}
 
 	const fetchComments = async () => {
@@ -44,30 +65,12 @@ export const useVideoCommentsList = (videoId: string) => {
 		await global[videoId].setLoading(false)
 	}
 
-	const listener = useListener(async () => {
-		return await ListenToVideoComments.call(videoId, {
-			created: async (entity) => {
-				const index = global[videoId].comments.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[videoId].comments.value.unshift(entity)
-				else global[videoId].comments.value.splice(index, 1, entity)
-			},
-			updated: async (entity) => {
-				const index = global[videoId].comments.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[videoId].comments.value.unshift(entity)
-				else global[videoId].comments.value.splice(index, 1, entity)
-			},
-			deleted: async (entity) => {
-				global[videoId].comments.value = global[videoId].comments.value.filter((c) => c.id !== entity.id)
-			}
-		})
-	})
-
 	onMounted(async () => {
 		if (!global[videoId].fetched.value && !global[videoId].loading.value) await fetchComments()
-		await listener.startListener()
+		await global[videoId].listener.startListener()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await global[videoId].listener.closeListener()
 	})
 	return {
 		error: global[videoId].error,

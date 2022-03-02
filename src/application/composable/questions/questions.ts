@@ -38,6 +38,21 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
+const listener = useListener(async () => {
+	const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
+	return await ListenToQuestions.call({
+		created: async (entity) => {
+			unshiftToQuestionList(entity)
+		},
+		updated: async (entity) => {
+			unshiftToQuestionList(entity)
+		},
+		deleted: async (entity) => {
+			const index = global.questions.value.findIndex((q) => q.id === entity.id)
+			if (index !== -1) global.questions.value.splice(index, 1)
+		}
+	}, lastDate ? lastDate - 1 : undefined)
+})
 
 const pushToQuestionList = (question: QuestionEntity) => {
 	const index = global.questions.value.findIndex((q) => q.id === question.id)
@@ -65,21 +80,6 @@ export const useQuestionList = () => {
 		}
 		await global.setLoading(false)
 	}
-	const listener = useListener(async () => {
-		const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
-		return await ListenToQuestions.call({
-			created: async (entity) => {
-				unshiftToQuestionList(entity)
-			},
-			updated: async (entity) => {
-				unshiftToQuestionList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.questions.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.questions.value.splice(index, 1)
-			}
-		}, lastDate ? lastDate - 1 : undefined)
-	})
 	const filteredQuestions = computed({
 		get: () => global.questions.value.filter((q) => {
 			if (global.subject.value && q.subject !== global.subject.value) return false

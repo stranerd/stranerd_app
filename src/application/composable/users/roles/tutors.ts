@@ -10,6 +10,22 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
+const listener = useListener(async () => {
+	return await ListenToAllTutors.call({
+		created: async (entity) => {
+			const index = global.tutors.value.findIndex((t) => t.id === entity.id)
+			global.tutors.value.splice(index, 1, entity)
+		},
+		updated: async (entity) => {
+			const index = global.tutors.value.findIndex((t) => t.id === entity.id)
+			global.tutors.value.splice(index, 1, entity)
+		},
+		deleted: async (entity) => {
+			const index = global.tutors.value.findIndex((t) => t.id === entity.id)
+			global.tutors.value.splice(index, 1)
+		}
+	})
+})
 
 const pushToTutorsList = (tutor: UserEntity) => {
 	const index = global.tutors.value.findIndex((t) => t.id === tutor.id)
@@ -51,22 +67,6 @@ export const useTutorsList = () => {
 				else global.tutors.value.splice(index, 1, t)
 			})
 		}
-	})
-	const listener = useListener(async () => {
-		return await ListenToAllTutors.call({
-			created: async (entity) => {
-				const index = global.tutors.value.findIndex((t) => t.id === entity.id)
-				global.tutors.value.splice(index, 1, entity)
-			},
-			updated: async (entity) => {
-				const index = global.tutors.value.findIndex((t) => t.id === entity.id)
-				global.tutors.value.splice(index, 1, entity)
-			},
-			deleted: async (entity) => {
-				const index = global.tutors.value.findIndex((t) => t.id === entity.id)
-				global.tutors.value.splice(index, 1)
-			}
-		})
 	})
 
 	onMounted(async () => {

@@ -3,9 +3,7 @@ import { BaseFactory } from '@modules/core'
 import { CommentEntity } from '../entities/comment'
 import { CommentToModel } from '../../data/models/comment'
 
-type Keys = { body: string }
-
-export class CommentFactory extends BaseFactory<CommentEntity, Omit<CommentToModel, 'questionId' | 'answerId'>, Keys> {
+export class CommentFactory extends BaseFactory<CommentEntity, Omit<CommentToModel, 'answerId'>, Omit<CommentToModel, 'answerId'>> {
 	readonly rules = {
 		body: { required: true, rules: [isString, isLongerThanX(2)] }
 	}

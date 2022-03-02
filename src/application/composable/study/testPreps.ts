@@ -24,6 +24,20 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
+const listener = useListener(async () => {
+	return await ListenToTestPreps.call({
+		created: async (entity) => {
+			unshiftToTestPrepList(entity)
+		},
+		updated: async (entity) => {
+			unshiftToTestPrepList(entity)
+		},
+		deleted: async (entity) => {
+			const index = global.testPreps.value.findIndex((q) => q.id === entity.id)
+			if (index !== -1) global.testPreps.value.splice(index, 1)
+		}
+	})
+})
 
 const pushToTestPrepList = (testPrep: TestPrepEntity) => {
 	const index = global.testPreps.value.findIndex((q) => q.id === testPrep.id)
@@ -49,21 +63,6 @@ const fetchTestPreps = async () => {
 }
 
 export const useTestPrepList = () => {
-	const listener = useListener(async () => {
-		return await ListenToTestPreps.call({
-			created: async (entity) => {
-				unshiftToTestPrepList(entity)
-			},
-			updated: async (entity) => {
-				unshiftToTestPrepList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.testPreps.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.testPreps.value.splice(index, 1)
-			}
-		})
-	})
-
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTestPreps()
 		await listener.startListener()

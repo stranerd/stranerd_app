@@ -9,6 +9,7 @@ const global = {} as Record<string, {
 	chats: Ref<ChatEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
+	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToChats = (userId: string, chat: ChatEntity) => {
@@ -42,12 +43,30 @@ const orderChats = (chats: ChatEntity[]) => {
 
 export const useChats = (userId: string) => {
 	const { id } = useAuth()
-	if (global[userId] === undefined) global[userId] = {
-		chats: ref([]),
-		fetched: ref(false),
-		hasMore: ref(false),
-		...useErrorHandler(),
-		...useLoadingHandler()
+	if (global[userId] === undefined) {
+		const listener = useListener(async () => {
+			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
+			return ListenToChats.call(path, {
+				created: async (entity) => {
+					unshiftToChats(userId, entity)
+				},
+				updated: async (entity) => {
+					unshiftToChats(userId, entity)
+				},
+				deleted: async (entity) => {
+					const index = global[userId].chats.value.findIndex((c) => c.id === entity.id)
+					if (index !== -1) global[userId].chats.value.splice(index, 1)
+				}
+			}, lastDate)
+		})
+		global[userId] = {
+			chats: ref([]),
+			fetched: ref(false),
+			hasMore: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
 	}
 	const path = [id.value, userId] as [string, string]
 
@@ -66,25 +85,9 @@ export const useChats = (userId: string) => {
 		await global[userId].setLoading(false)
 	}
 
-	const listener = useListener(async () => {
-		const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
-		return ListenToChats.call(path, {
-			created: async (entity) => {
-				unshiftToChats(userId, entity)
-			},
-			updated: async (entity) => {
-				unshiftToChats(userId, entity)
-			},
-			deleted: async (entity) => {
-				const index = global[userId].chats.value.findIndex((c) => c.id === entity.id)
-				if (index !== -1) global[userId].chats.value.splice(index, 1)
-			}
-		}, lastDate)
-	})
-
 	const fetchOlderChats = async () => {
 		await fetchChats()
-		await listener.resetListener(async () => {
+		await global[userId].listener.resetListener(async () => {
 			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
 			return ListenToChats.call(path, {
 				created: async (entity) => {
@@ -103,10 +106,10 @@ export const useChats = (userId: string) => {
 
 	onMounted(async () => {
 		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchChats()
-		await listener.startListener()
+		await global[userId].listener.startListener()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await global[userId].listener.closeListener()
 	})
 
 	return {

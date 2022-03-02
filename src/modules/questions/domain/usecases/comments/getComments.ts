@@ -1,21 +1,5 @@
 import { ICommentRepository } from '../../irepositories/icomment'
 
-export class GetQuestionCommentsUseCase {
-	private repository: ICommentRepository
-
-	constructor (repository: ICommentRepository) {
-		this.repository = repository
-	}
-
-	async call (questionId: string) {
-		return await this.repository.get({
-			where: [{ field: 'questionId', value: questionId }],
-			sort: [{ field: 'createdAt' }],
-			all: true
-		})
-	}
-}
-
 export class GetAnswerCommentsUseCase {
 	private repository: ICommentRepository
 

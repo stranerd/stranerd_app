@@ -25,12 +25,9 @@ import { EditAnswerUseCase } from './domain/usecases/answers/editAnswer'
 import { DeleteAnswerUseCase } from './domain/usecases/answers/deleteAnswer'
 import { ListenToAnswersUseCase } from './domain/usecases/answers/listenToAnswers'
 import { VoteAnswerUseCase } from './domain/usecases/answers/voteAnswer'
-import { AddAnswerCommentUseCase, AddQuestionCommentUseCase } from './domain/usecases/comments/addComment'
-import { GetAnswerCommentsUseCase, GetQuestionCommentsUseCase } from './domain/usecases/comments/getComments'
-import {
-	ListenToAnswerCommentsUseCase,
-	ListenToQuestionCommentsUseCase
-} from './domain/usecases/comments/listenToComments'
+import { AddAnswerCommentUseCase } from './domain/usecases/comments/addComment'
+import { GetAnswerCommentsUseCase } from './domain/usecases/comments/getComments'
+import { ListenToAnswerCommentsUseCase } from './domain/usecases/comments/listenToComments'
 import { QuestionEntity } from './domain/entities/question'
 import { QuestionFactory } from './domain/factories/question'
 import { AnswerEntity } from './domain/entities/answer'
@@ -40,8 +37,7 @@ import { CommentFactory } from './domain/factories/comment'
 
 const questionDataSource = new QuestionApiDataSource()
 const answerDataSource = new AnswerApiDataSource()
-const questionCommentDataSource = new CommentApiDataSource('questionComments')
-const answerCommentDataSource = new CommentApiDataSource('answerComments')
+const commentDataSource = new CommentApiDataSource()
 
 const questionTransformer = new QuestionTransformer()
 const answerTransformer = new AnswerTransformer()
@@ -49,8 +45,7 @@ const commentTransformer = new CommentTransformer()
 
 const questionRepository = new QuestionRepository(questionDataSource, questionTransformer)
 const answerRepository = new AnswerRepository(answerDataSource, answerTransformer)
-const questionCommentRepository = new CommentRepository(questionCommentDataSource, commentTransformer)
-const answerCommentRepository = new CommentRepository(answerCommentDataSource, commentTransformer)
+const commentRepository = new CommentRepository(commentDataSource, commentTransformer)
 
 export const GetQuestions = new GetQuestionsUseCase(questionRepository)
 export const GetUserQuestions = new GetUserQuestionsUseCase(questionRepository)
@@ -72,12 +67,9 @@ export const EditAnswer = new EditAnswerUseCase(answerRepository)
 export const DeleteAnswer = new DeleteAnswerUseCase(answerRepository)
 export const VoteAnswer = new VoteAnswerUseCase(answerRepository)
 
-export const AddQuestionComment = new AddQuestionCommentUseCase(questionCommentRepository)
-export const AddAnswerComment = new AddAnswerCommentUseCase(answerCommentRepository)
-export const GetQuestionComments = new GetQuestionCommentsUseCase(questionCommentRepository)
-export const GetAnswerComments = new GetAnswerCommentsUseCase(answerCommentRepository)
-export const ListenToQuestionComments = new ListenToQuestionCommentsUseCase(questionCommentRepository)
-export const ListenToAnswerComments = new ListenToAnswerCommentsUseCase(answerCommentRepository)
+export const AddAnswerComment = new AddAnswerCommentUseCase(commentRepository)
+export const GetAnswerComments = new GetAnswerCommentsUseCase(commentRepository)
+export const ListenToAnswerComments = new ListenToAnswerCommentsUseCase(commentRepository)
 
 export { QuestionEntity, QuestionFactory }
 export { AnswerEntity, AnswerFactory }

@@ -21,6 +21,21 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
+const listener = useListener(async () => {
+	const lastDate = global.videos.value[global.videos.value.length - 1]?.createdAt
+	return await ListenToVideos.call({
+		created: async (entity) => {
+			unshiftToVideoList(entity)
+		},
+		updated: async (entity) => {
+			unshiftToVideoList(entity)
+		},
+		deleted: async (entity) => {
+			const index = global.videos.value.findIndex((q) => q.id === entity.id)
+			if (index !== -1) global.videos.value.splice(index, 1)
+		}
+	}, lastDate)
+})
 
 const pushToVideoList = (video: VideoEntity) => {
 	const index = global.videos.value.findIndex((q) => q.id === video.id)
@@ -48,21 +63,6 @@ export const useVideoList = () => {
 		}
 		await global.setLoading(false)
 	}
-	const listener = useListener(async () => {
-		const lastDate = global.videos.value[global.videos.value.length - 1]?.createdAt
-		return await ListenToVideos.call({
-			created: async (entity) => {
-				unshiftToVideoList(entity)
-			},
-			updated: async (entity) => {
-				unshiftToVideoList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.videos.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.videos.value.splice(index, 1)
-			}
-		}, lastDate)
-	})
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchVideos()
