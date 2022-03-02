@@ -1,5 +1,5 @@
 <template>
-	<span @click.prevent="shareInfo">
+	<span @click.prevent="shareInfo" class="leading-none">
 		<slot>
 			<ion-icon :class="cssClass" :icon='shareSocialOutline' />
 		</slot>

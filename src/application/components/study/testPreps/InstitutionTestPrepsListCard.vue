@@ -5,14 +5,17 @@
 				<Institution :institutionId="institutionId" class="font-semibold" />
 			</ion-text>
 			<router-link :to="`/study/preps/${institutionId}`">
-				<ion-icon :icon="arrowForwardOutline" class="text-2xl text-gray" />
+				<ion-icon :icon="arrowForwardCircleOutline" class="text-2xl text-gray" />
 			</router-link>
 		</div>
-		<Tag :index="0" :tag="yearGap" class="text-sm" />
 
-		<router-link :to="`/study/preps/${institutionId}`" class="w-full mt-auto">
-			<ion-button class="btn-outline text-primary w-full" size="small">Get Started</ion-button>
-		</router-link>
+		<div class="flex justify-between items-center w-full mt-4">
+			<Tag :index="0" :tag="yearGap" class="text-sm" />
+			<Share cssClass="text-lg"/>
+		</div>
+		
+
+		
 	</div>
 </template>
 
@@ -20,11 +23,12 @@
 import { computed, defineComponent, PropType } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import Institution from '@app/components/study/institutions/Institution.vue'
-import { arrowForwardOutline } from 'ionicons/icons'
+import { arrowForwardCircleOutline } from 'ionicons/icons'
+import Share from '../../core/Share.vue'
 
 export default defineComponent({
 	name: 'InstitutionTestPrepsListCard',
-	components: { Institution },
+	components: { Institution, Share },
 	props: {
 		institutionId: {
 			type: String,
@@ -43,7 +47,7 @@ export default defineComponent({
 			else return `${startYear.value}`
 		})
 
-		return { yearGap, arrowForwardOutline }
+		return { yearGap, arrowForwardCircleOutline }
 	}
 })
 </script>

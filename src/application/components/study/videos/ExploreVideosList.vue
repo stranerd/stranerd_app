@@ -2,7 +2,7 @@
 	<div>
 		<EmptyState v-if="!loading && !error && filtered.length === 0" info="No videos found." />
 		<div class="showcase">
-			<VideoListCard v-for="video in filtered" :key="video.hash" :openMenu="(event) => openMenu(video, event)"
+			<VideoListCard v-for="video in filtered" :key="video.hash" 
 				:video="video" />
 		</div>
 		<div v-if="hasMore && !sliced"
@@ -32,9 +32,8 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { loading, error, videos, hasMore, fetchOlderVideos } = useVideoList()
-		const openMenu = (entity: VideoEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => videos.value.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, openMenu, loading, error, hasMore, fetchOlderVideos }
+		return { filtered, loading, error, hasMore, fetchOlderVideos }
 	}
 })
 </script>
