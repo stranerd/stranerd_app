@@ -45,6 +45,10 @@ export class VideoEntity extends BaseEntity {
 	get isUserVerified () {
 		return this.userRoles[appName].isVerified
 	}
+
+	get shareLink () {
+		return `/study/videos/${this.id}`
+	}
 }
 
 type VideoConstructorArgs = {

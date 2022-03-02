@@ -1,37 +1,41 @@
 <template>
-	<div class="w-full bg-white rounded-xl flex flex-col gap-2 box-border p-4">
-		<div class="flex items-center gap-2">
-			<ion-icon :icon="folderOutline" class="text-dark_gray text-2xl" />
-			<ion-text class="text-dark_gray text-semibold w-full">{{ set.name }}</ion-text>
-			<ion-icon :icon="ellipsisVerticalOutline" class="text-dark_gray text-2xl" @click="openMenu" />
-		</div>
-
-		<span class="text-sm">{{ formatNumber(set.allSaved.length) }} {{
-			pluralize(set.allSaved.length, 'item', 'items')
-		}}</span>
-
-		<div class="w-full flex items-center justify-between">
-			<div class="flex items-center gap-2">
-				<Avatar :id="set.userId" :size="24" :src="set.userBio.photo" />
-				<ion-text class="text-xs font-bold text-main_dark flex items-center gap-1">
-					<span>{{ set.userBio.firstName }}</span>
-					<IonIcon v-if="set.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
-				</ion-text>
+	<div class="bg-white rounded-xl flex flex-col gap-6 box-border justify-between p-4 text-main_dark">
+		<div class="w-full justify-between items-start flex">
+			<div class="flex flex-col items-start truncate">
+				<ion-text class="font-semibold truncate w-52">{{ set.name }}</ion-text>
 			</div>
 			<router-link :to="`/study/sets/${set.id}`">
-				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]" size="small">
-					Open
-				</ion-button>
+				<ion-icon :icon="arrowForwardCircleOutline" class="text-gray text-xl" />
 			</router-link>
+		</div>
+
+		<div class="w-full flex items-center justify-between gap-2">
+			<Tag :index="4"
+				:tag="`${formatNumber(set.allSaved.length)} ${pluralize(set.allSaved.length, 'Item', 'Items')}`">
+				<template v-slot="slotProps">
+					<span class="flex items-center">
+						<ion-icon :icon="folderOutline" class="mr-1" />
+						<ion-text class="text-xs font-semibold">{{ slotProps.tag }}</ion-text>
+					</span>
+				</template>
+			</Tag>
+			<div class="flex items-center text-gray gap-2">
+				<Avatar :id="set.userId" :size="24" :src="set.userBio.photo" />
+				<Share :link="set.shareLink" :title="set.name" cssClass="text-xl" text="Share this folder" />
+				<ion-icon v-if="set.parent && set.userId !== id" :icon="isSaved ? bookmark : bookmarkOutline"
+					class="text-xl" />
+			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { SetEntity } from '@modules/study'
-import { checkmarkCircleOutline, ellipsisVerticalOutline, folderOutline } from 'ionicons/icons'
+import { arrowForwardCircleOutline, bookmark, bookmarkOutline, folderOutline } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
+import { useUserSetList } from '@app/composable/users/users/sets'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'SetListCard',
@@ -39,14 +43,22 @@ export default defineComponent({
 		set: {
 			type: SetEntity,
 			required: true
-		},
-		openMenu: {
-			type: Function,
-			required: true
 		}
 	},
-	setup () {
-		return { ellipsisVerticalOutline, folderOutline, pluralize, formatNumber, checkmarkCircleOutline }
+	setup (props) {
+		const { id } = useAuth()
+		const { sets } = useUserSetList()
+		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(props.set.id)))
+		return {
+			arrowForwardCircleOutline,
+			bookmark,
+			bookmarkOutline,
+			folderOutline,
+			pluralize,
+			formatNumber,
+			isSaved,
+			id
+		}
 	}
 })
 </script>

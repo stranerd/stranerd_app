@@ -55,6 +55,10 @@ export class SetEntity extends BaseEntity {
 	get isUserVerified () {
 		return this.userRoles[appName].isVerified
 	}
+
+	get shareLink () {
+		return `/study/sets/${this.id}`
+	}
 }
 
 export enum SetType {

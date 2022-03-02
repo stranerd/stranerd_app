@@ -30,20 +30,13 @@ export const openStudyEntityMenu = (entity: typeof global['entity']['value'], da
 }
 
 export const useStudyMenuData = () => {
-	const type = global.type.value === 'testPreps' ? 'preps' :
-		global.type.value === 'sets' ? 'folders' :
-			global.type.value
-	const shareLink = computed({
-		get: () => `/study/${type}/${global.entity.value instanceof TestPrepEntity ? global.entity.value.data.institutionId : global.entity.value?.id}`,
-		set: () => {
-		}
-	})
 	const title = computed({
 		get: () => {
 			if (global.entity.value instanceof NoteEntity) return global.entity.value.title
 			else if (global.entity.value instanceof FlashCardEntity) return global.entity.value.title
 			else if (global.entity.value instanceof VideoEntity) return global.entity.value.title
 			else if (global.entity.value instanceof TestPrepEntity) return global.entity.value.name
+			else if (global.entity.value instanceof SetEntity) return global.entity.value.name
 			else return ''
 		},
 		set: () => {
@@ -54,15 +47,11 @@ export const useStudyMenuData = () => {
 
 	const shareEntity = async () => {
 		useMenuPopover().closeStudyEntityMenu()
-		const url = domain + shareLink.value
-		await share({
-			url,
-			title: title.value,
-			text: ''
-		})
+		const url = domain + global.entity.value!.shareLink
+		await share({ url, title: title.value, text: '' })
 	}
 
-	return { ...global, shareLink, share: shareEntity }
+	return { ...global, share: shareEntity }
 }
 
 export const useDeleteStudyEntity = () => {

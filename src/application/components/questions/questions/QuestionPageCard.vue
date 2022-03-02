@@ -14,10 +14,10 @@
 				<div class="flex flex-row-reverse flex-grow">
 					<IonIcon :icon="flag" class="text-[22px] text-main_dark cursor-pointer"
 						@click="openReportQuestionModal" />
-					<share
-						:text="question.body"
-						:title="question.strippedBody"
-						cssClass="text-[22px] mr-2 text-main_dark" />
+					<Share
+						:text="question.strippedBody"
+						cssClass="text-[22px] mr-2 text-main_dark"
+						title="Share this question" />
 				</div>
 			</div>
 			<DisplayHtml :html="question.body" class="py-2 text-main_dark mb-3 lg:mb-5" />

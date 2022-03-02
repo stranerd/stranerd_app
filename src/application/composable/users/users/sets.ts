@@ -6,6 +6,7 @@ import { useAuth } from '@app/composable/auth/auth'
 const global = {} as Record<string, {
 	sets: Ref<SetEntity[]>
 	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const pushToSetList = (id: string, set: SetEntity) => {
@@ -15,11 +16,31 @@ const pushToSetList = (id: string, set: SetEntity) => {
 }
 
 export const useUserSetList = (id: string = useAuth().id.value) => {
-	if (global[id] === undefined) global[id] = {
-		sets: ref([]),
-		fetched: ref(false),
-		...useErrorHandler(),
-		...useLoadingHandler()
+	if (global[id] === undefined) {
+		const listener = useListener(async () => {
+			return await ListenToUserSets.call(id, {
+				created: async (entity) => {
+					const index = global[id].sets.value.findIndex((c) => c.id === entity.id)
+					if (index === -1) global[id].sets.value.unshift(entity)
+					else global[id].sets.value.splice(index, 1, entity)
+				},
+				updated: async (entity) => {
+					const index = global[id].sets.value.findIndex((c) => c.id === entity.id)
+					if (index === -1) global[id].sets.value.unshift(entity)
+					else global[id].sets.value.splice(index, 1, entity)
+				},
+				deleted: async (entity) => {
+					global[id].sets.value = global[id].sets.value.filter((c) => c.id !== entity.id)
+				}
+			})
+		})
+		global[id] = {
+			sets: ref([]),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
 	}
 
 	const fetchSets = async () => {
@@ -35,33 +56,15 @@ export const useUserSetList = (id: string = useAuth().id.value) => {
 		await global[id].setLoading(false)
 	}
 
-	const listener = useListener(async () => {
-		return await ListenToUserSets.call(id, {
-			created: async (entity) => {
-				const index = global[id].sets.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].sets.value.unshift(entity)
-				else global[id].sets.value.splice(index, 1, entity)
-			},
-			updated: async (entity) => {
-				const index = global[id].sets.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].sets.value.unshift(entity)
-				else global[id].sets.value.splice(index, 1, entity)
-			},
-			deleted: async (entity) => {
-				global[id].sets.value = global[id].sets.value.filter((c) => c.id !== entity.id)
-			}
-		})
-	})
-
 	const rootSets = computed(() => global[id].sets.value.filter((s) => !s.parent))
 
 	onMounted(async () => {
 		if (!global[id].fetched.value && !global[id].loading.value) await fetchSets()
-		await listener.startListener()
+		await global[id].listener.startListener()
 	})
 
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await global[id].listener.closeListener()
 	})
 
 	return { ...global[id], rootSets }

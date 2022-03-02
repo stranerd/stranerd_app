@@ -7,9 +7,7 @@
 				<div v-if="sets.length">
 					<ion-text class="font-semibold block text-main_dark mb-2">Folders</ion-text>
 					<div class="showcase">
-						<SetListCard v-for="item in sets" :key="item.hash"
-							:openMenu="($ev) => openStudyEntityMenu(item, { set }, $ev)"
-							:set="item" />
+						<SetListCard v-for="item in sets" :key="item.hash" :set="item" />
 					</div>
 				</div>
 
@@ -19,13 +17,10 @@
 						<TestPrepListCard v-for="testPrep in testPreps" :key="testPrep.hash"
 							:openMenu="($ev) => openStudyEntityMenu(testPrep, { set }, $ev)"
 							:testPrep="testPrep" />
-						<FlashCardListCard v-for="flashCard in flashCards" :key="flashCard.hash" :flashCard="flashCard"
-							:openMenu="($ev) => openStudyEntityMenu(flashCard, { set }, $ev)" />
-						<NoteListCard v-for="note in notes" :key="note.hash" :note="note"
-							:openMenu="($ev) => openStudyEntityMenu(note, { set }, $ev)" />
-						<VideoListCard v-for="video in videos" :key="video.hash"
-							:openMenu="($ev) => openStudyEntityMenu(video, { set }, $ev)"
-							:video="video" />
+						<FlashCardListCard v-for="flashCard in flashCards" :key="flashCard.hash"
+							:flashCard="flashCard" />
+						<NoteListCard v-for="note in notes" :key="note.hash" :note="note" />
+						<VideoListCard v-for="video in videos" :key="video.hash" :video="video" />
 					</div>
 				</div>
 			</div>

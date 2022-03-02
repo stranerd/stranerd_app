@@ -17,8 +17,7 @@ Create your own flashcards or explore the public and save ones you want."
 
 		</EmptyState>
 		<div class="showcase">
-			<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard"
-				:openMenu="(event) => openMenu(flashCard, event)" />
+			<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard" />
 		</div>
 	</div>
 </template>
@@ -27,7 +26,6 @@ Create your own flashcards or explore the public and save ones you want."
 import { computed, defineComponent, PropType } from 'vue'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import { FlashCardEntity, SetEntity } from '@modules/study'
-import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'SetFlashCardsList',
@@ -48,9 +46,8 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const openMenu = (entity: FlashCardEntity, event: Event) => openStudyEntityMenu(entity, { set: props.set }, event)
 		const filtered = computed(() => props.flashCards.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, openMenu }
+		return { filtered }
 	}
 })
 </script>

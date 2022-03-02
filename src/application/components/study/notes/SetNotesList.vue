@@ -8,8 +8,7 @@ Find the ones you need to study for your exams, tests or homeworks and save them
 			/>
 		</template>
 		<div class="showcase">
-			<NoteListCard v-for="note in filtered" :key="note.hash" :note="note"
-				:openMenu="(event) => openMenu(note, event)" />
+			<NoteListCard v-for="note in filtered" :key="note.hash" :note="note" />
 		</div>
 	</div>
 </template>
@@ -18,7 +17,6 @@ Find the ones you need to study for your exams, tests or homeworks and save them
 import { computed, defineComponent, PropType } from 'vue'
 import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 import { NoteEntity, SetEntity } from '@modules/study'
-import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'SetNotesList',
@@ -39,9 +37,8 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const openMenu = (entity: NoteEntity, event: Event) => openStudyEntityMenu(entity, { set: props.set }, event)
 		const filtered = computed(() => props.notes.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, openMenu }
+		return { filtered }
 	}
 })
 </script>

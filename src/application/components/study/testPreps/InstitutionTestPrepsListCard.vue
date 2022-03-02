@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full bg-white rounded-xl flex flex-col items-start gap-2 box-border p-4 text-main_dark">
+	<div class="w-full bg-white rounded-xl flex flex-col items-start gap-6 box-border p-4 text-main_dark">
 		<div class="w-full flex justify-between items-center">
 			<ion-text class="truncate">
 				<Institution :institutionId="institutionId" class="font-semibold" />
@@ -9,9 +9,11 @@
 			</router-link>
 		</div>
 
-		<div class="flex justify-between items-center w-full mt-4">
+		<div class="flex justify-between items-center w-full gap-2">
 			<Tag :index="0" :tag="yearGap" class="text-sm" />
-			<Share cssClass="text-lg" />
+			<Share :link="`/study/preps/${institutionId}`"
+				:title="`${institution ? institution.name : 'Institution'}'s preps`"
+				cssClass="text-lg" text="Share this institution preps" />
 		</div>
 	</div>
 </template>
@@ -21,11 +23,11 @@ import { computed, defineComponent, PropType } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import Institution from '@app/components/study/institutions/Institution.vue'
 import { arrowForwardCircleOutline } from 'ionicons/icons'
-import Share from '../../core/Share.vue'
+import { useInstitution } from '@app/composable/study/institutions'
 
 export default defineComponent({
 	name: 'InstitutionTestPrepsListCard',
-	components: { Institution, Share },
+	components: { Institution },
 	props: {
 		institutionId: {
 			type: String,
@@ -37,6 +39,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
+		const { institution } = useInstitution(props.institutionId)
 		const startYear = computed(() => props.testPreps.map((prep) => prep.data.year).sort()[0])
 		const endYear = computed(() => props.testPreps.map((prep) => prep.data.year).sort().reverse()[0])
 		const yearGap = computed(() => {
@@ -44,7 +47,7 @@ export default defineComponent({
 			else return `${startYear.value}`
 		})
 
-		return { yearGap, arrowForwardCircleOutline }
+		return { yearGap, arrowForwardCircleOutline, institution }
 	}
 })
 </script>

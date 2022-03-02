@@ -55,6 +55,10 @@ export class NoteEntity extends BaseEntity {
 	get isUserVerified () {
 		return this.userRoles[appName].isVerified
 	}
+
+	get shareLink () {
+		return `/study/notes/${this.id}`
+	}
 }
 
 type NoteConstructorArgs = {

@@ -15,7 +15,7 @@
 					</div>
 				</div>
 
-				<div class="items-center text-white font-bold hidden md:flex">
+				<div class="items-center text-white font-bold hidden md:flex gap-2">
 					<div class="flex items-center lg:mr-8 mr-2" @click="cardMode = !cardMode">
 						<ion-icon
 							:icon="!cardMode ? copyOutline: listOutline"
@@ -25,36 +25,26 @@
 							{{ !cardMode ? 'Card mode' : 'List mode' }}
 						</ion-text>
 					</div>
-					<ion-icon
-						:icon="ellipsisVerticalOutline"
-						class="text-white text-xl cursor-pointer"
-						@click="openMenu"
-					/>
+					<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
+						text="Share this flashcard" />
+					<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" />
 				</div>
-
 			</div>
 		</div>
 
-		<div class="w-full bg-white flex md:hidden items-center justify-between text-gray p-4 -mt-8 rounded-b-xl">
-			<div class="flex items-center lg:mr-8 mr-2" @click="cardMode = !cardMode">
+		<div class="w-full bg-white flex md:hidden items-center justify-between text-gray p-4 gap-2 rounded-b-xl">
+			<div class="flex items-center mr-auto" @click="cardMode = !cardMode">
 				<ion-icon
 					:icon="!cardMode ? copyOutline: listOutline"
 					class="text-gray text-xl cursor-pointer mr-3"
 				/>
-				<ion-text class=" font-medium ">
+				<ion-text class="font-medium">
 					{{ !cardMode ? 'Card mode' : 'List mode' }}
 				</ion-text>
 			</div>
-			<div class="flex items-center lg:mr-8 mr-2">
-				<ion-text class=" font-medium ">
-					Options
-				</ion-text>
-				<ion-icon
-					:icon="ellipsisVerticalOutline"
-					class="text-gray text-xl cursor-pointer ml-3"
-					@click="openMenu"
-				/>
-			</div>
+			<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
+				text="Share this flashcard" />
+			<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" />
 		</div>
 
 		<template v-if="flashCard">
@@ -67,15 +57,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
-import { checkmarkCircleOutline, copyOutline, ellipsisVerticalOutline, listOutline } from 'ionicons/icons'
+import {
+	bookmark,
+	bookmarkOutline,
+	checkmarkCircleOutline,
+	copyOutline,
+	ellipsisVerticalOutline,
+	listOutline
+} from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { useFlashCard } from '@app/composable/study/flashCards'
 import { useRoute } from 'vue-router'
-import { openStudyEntityMenu } from '@app/composable/study/menus'
 import FlashCardScreen from '@root/application/components/study/flashCards/FlashCardScreen.vue'
 import FlashCardListView from '@root/application/components/study/flashCards/FlashCardListView.vue'
+import { useUserSetList } from '@app/composable/users/users/sets'
 
 export default defineComponent({
 	name: 'StudyFlashCardsFlashcardId',
@@ -90,10 +87,12 @@ export default defineComponent({
 		const cardMode = ref(true)
 		const { flashCardId } = useRoute().params
 		const { flashCard, error, loading } = useFlashCard(flashCardId as string)
-		const openMenu = (event: Event) => openStudyEntityMenu(flashCard.value, {}, event)
+		const { sets } = useUserSetList()
+		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(flashCardId as string)))
 		return {
-			openMenu, copyOutline, listOutline, cardMode,
-			flashCard, loading, ellipsisVerticalOutline, checkmarkCircleOutline
+			copyOutline, listOutline, cardMode, isSaved,
+			flashCard, loading, error,
+			bookmark, bookmarkOutline, ellipsisVerticalOutline, checkmarkCircleOutline
 		}
 	}
 })

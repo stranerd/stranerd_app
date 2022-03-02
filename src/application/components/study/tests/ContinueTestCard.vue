@@ -1,5 +1,5 @@
 <template>
-	<router-link :to="`/study/tests/${test.id}/take`"
+	<div
 		class="m-0 bg-white w-full rounded-xl flex flex-col gap-2 box-border p-4">
 		<div class="w-full flex justify-between items-center">
 			<ion-text class="text-left w-full text-main_dark font-semibold truncate capitalize">
@@ -21,7 +21,7 @@
 		</ion-text>
 
 		<ion-progress-bar :value="test.progress" class="mt-4" />
-	</router-link>
+	</div>
 </template>
 
 <script lang="ts">

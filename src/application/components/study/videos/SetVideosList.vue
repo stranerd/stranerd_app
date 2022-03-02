@@ -3,8 +3,7 @@
 		<EmptyState v-if="filtered.length === 0" info="You have not saved any videos yet. <br>
 Find the ones you need to study for your exams, tests or homeworks and save them now." route="/search/videos" />
 		<div class="showcase">
-			<VideoListCard v-for="video in filtered" :key="video.hash" :openMenu="(event) => openMenu(video, event)"
-				:video="video" />
+			<VideoListCard v-for="video in filtered" :key="video.hash" :video="video" />
 		</div>
 	</div>
 </template>
@@ -13,7 +12,6 @@ Find the ones you need to study for your exams, tests or homeworks and save them
 import { computed, defineComponent, PropType } from 'vue'
 import VideoListCard from '@app/components/study/videos/VideoListCard.vue'
 import { SetEntity, VideoEntity } from '@modules/study'
-import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'SetVideosList',
@@ -34,9 +32,8 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const openMenu = (entity: VideoEntity, event: Event) => openStudyEntityMenu(entity, { set: props.set }, event)
 		const filtered = computed(() => props.videos.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, openMenu }
+		return { filtered }
 	}
 })
 </script>

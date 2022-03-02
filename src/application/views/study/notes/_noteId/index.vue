@@ -19,7 +19,8 @@
 						</ion-text>
 					</div>
 					<div class="flex items-center">
-						<Share cssClass="text-icon_inactive text-xl cursor-pointer mx-2" />
+						<Share :text="note.description" :title="note.title"
+							cssClass="text-icon_inactive text-xl cursor-pointer mx-2" />
 					</div>
 				</div>
 			</div>
