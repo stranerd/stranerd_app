@@ -1,36 +1,33 @@
 <template>
-	<div class="md:px-4 md:pt-4 pb-8">
+	<div class="md:px-4 md:pt-12 pb-8">
 		<div
-			class="bg-primary md:rounded-t-3xl flex items-center justify-between py-6 lg:px-9 px-5">
-			<ion-text class="text-white leading-tight lg:text-3xl text-xl font-bold">
+			class="bg-white md:rounded-xl flex items-center justify-between p-3">
+			<ion-text class="text-main_dark leading-tight lg:text-3xl text-xl font-bold ml-2">
 				All questions
 			</ion-text>
-			<router-link to="/questions/create">
-				<ion-button class="btn-white font-bold">
-					Ask a question
-				</ion-button>
-			</router-link>
+			<div class="flex items-center">
+				<SelectSubject v-model:subjectId="subjectId" :show-all="true" class="w-32 mr-4 font-bold h-11"
+					placeholder="Subject" />
+
+				<ion-select v-model="answered"
+					class="bg-new_gray !text-gray h-11 w-28 font-bold select-primary mr-4" interface="action-sheet"
+					placeholder="State">
+					<ion-select-option v-for="choice in answeredChoices" :key="choice.key"
+						:value="choice.val" @click="answered = choice.val" >
+						{{ choice.key}}
+					</ion-select-option>
+				</ion-select>
+
+				<router-link to="/questions/create">
+					<ion-button class="btn-primary font-bold">
+						Ask a question
+					</ion-button>
+				</router-link>
+			</div>
+	
 		</div>
 
-		<div
-			class="flex items-center flex-col lg:flex-row justify-between lg:gap-14 gap-4 bg-white p-3 md:rounded-b-2xl lg:py-3 py-4">
-			<div
-				class="rounded-xl text-sm  flex flex-row items-center gap-4 w-[92vw] lg:w-auto bg-new_gray">
-				<span class="bg-gray text-white px-4 py-2.5 rounded-lg font-bold w-44 grid place-items-center">
-					All Subjects
-				</span>
-				<SelectSubject v-model:subjectId="subjectId" :show-all="true" class="w-auto -ml-4"
-					placeholder="Search by subjects" />
-			</div>
-			<div class="flex items-center">
-				<ion-segment v-model="answered" class="w-[92vw] lg:w-auto bg-new_gray" mode="ios">
-					<ion-segment-button v-for="choice in answeredChoices" :key="choice.key" :value="choice.val"
-						class="!px-3" @click="answered = choice.val">
-						<ion-label>{{ choice.key }}</ion-label>
-					</ion-segment-button>
-				</ion-segment>
-			</div>
-		</div>
+		
 	</div>
 </template>
 
@@ -42,7 +39,7 @@ import { IonSegment, IonSegmentButton } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'QuestionListHeader',
-	components: { SelectSubject, IonSegment, IonSegmentButton },
+	components: { SelectSubject,  },
 	setup () {
 		const { answeredChoices, answered, subjectId } = useQuestionList()
 		return {
