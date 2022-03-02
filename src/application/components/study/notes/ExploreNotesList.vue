@@ -32,7 +32,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { loading, error, notes, hasMore, fetchOlderNotes } = useNoteList()
-		const filtered = computed(() => notes.value.slice(0, props.sliced ? 6 : undefined))
+		const filtered = computed(() => notes.value.slice(0, props.sliced ? 3 : undefined))
 		return { filtered, loading, error, hasMore, fetchOlderNotes }
 	}
 })

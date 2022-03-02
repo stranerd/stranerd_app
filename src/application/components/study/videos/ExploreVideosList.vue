@@ -32,7 +32,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { loading, error, videos, hasMore, fetchOlderVideos } = useVideoList()
-		const filtered = computed(() => videos.value.slice(0, props.sliced ? 6 : undefined))
+		const filtered = computed(() => videos.value.slice(0, props.sliced ? 3 : undefined))
 		return { filtered, loading, error, hasMore, fetchOlderVideos }
 	}
 })

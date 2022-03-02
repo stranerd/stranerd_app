@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between mb-4">
+		<div class="w-full flex justify-between mb-4 px-4 md:px-0">
 			<div class="heading font-bold text-main_dark flex items-center">
 				<ion-text class="mr-3">Questions</ion-text>
 				<ion-text class="text-orange font-normal flex items-center text-body">
@@ -37,7 +37,7 @@ export default defineComponent({
 	setup () {
 		const { questions: allQuestions, loading, error } = useQuestionList()
 		const questions = computed({
-			get: () => allQuestions.value.slice(0, 6),
+			get: () => allQuestions.value.slice(0, 3),
 			set: () => {
 			}
 		})

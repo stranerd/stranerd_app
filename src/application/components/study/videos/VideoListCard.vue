@@ -7,7 +7,7 @@
 			
 			</div>
 			<router-link :to="`/study/videos/${video.id}`">
-				<ion-icon :icon="arrowForwardCircleOutline" class="text-gray text-xl"  />
+				<ion-icon :icon="arrowForwardCircleOutline" class="text-primary text-xl"  />
 			</router-link>
 		</div>
 

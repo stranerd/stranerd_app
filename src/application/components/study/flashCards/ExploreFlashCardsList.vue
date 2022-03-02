@@ -33,7 +33,7 @@ export default defineComponent({
 	setup (props) {
 		const { loading, error, flashCards, hasMore, fetchOlderFlashCards } = useFlashCardList()
 
-		const filtered = computed(() => flashCards.value.slice(0, props.sliced ? 6 : undefined))
+		const filtered = computed(() => flashCards.value.slice(0, props.sliced ? 3 : undefined))
 		return { filtered, loading, error, hasMore, fetchOlderFlashCards }
 	}
 })

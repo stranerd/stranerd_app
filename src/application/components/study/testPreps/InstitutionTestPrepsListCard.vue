@@ -5,7 +5,7 @@
 				<Institution :institutionId="institutionId" class="font-semibold" />
 			</ion-text>
 			<router-link :to="`/study/preps/${institutionId}`">
-				<ion-icon :icon="arrowForwardCircleOutline" class="text-2xl text-gray" />
+				<ion-icon :icon="arrowForwardCircleOutline" class="text-2xl text-primary" />
 			</router-link>
 		</div>
 

@@ -31,11 +31,11 @@
 	}
 
 	.layout-page {
-		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow bg-new_gray min-h-full
+		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow md:bg-new_gray bg-white min-h-full
 	}
 
 	.layout-body {
-		@apply lg:w-3/4 w-full min-h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] bg-new_gray
+		@apply lg:w-3/4 w-full min-h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] md:bg-new_gray bg-white
 	}
 
 	.layout-side-left {

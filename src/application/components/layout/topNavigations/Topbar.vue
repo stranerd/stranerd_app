@@ -51,7 +51,8 @@ export default defineComponent({
 	setup () {
 		const { isLoggedIn, user } = useAuth()
 		const openUserDashboardMenu = useMenuPopover().openUserDashboardMenu
-		return { user, isLoggedIn, openUserDashboardMenu, addCircleOutline, searchOutline}
+		const openCreateDashboardMenu = useMenuPopover().openCreateDashboardMenu
+		return { user, isLoggedIn, openUserDashboardMenu,openCreateDashboardMenu, addCircleOutline, searchOutline}
 	}
 })
 </script>
