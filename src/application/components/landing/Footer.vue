@@ -118,6 +118,13 @@
 									class="text-3xl"
 								/>
 							</a>
+							<a aria-label="facebook link" class="inline-block"  target="_blank"
+								href="https://www.linkedin.com/company/stranerd">
+								<ion-icon
+									:icon="logoLinkedin"
+									class="text-3xl"
+								/>
+							</a>
 						</div>
 					</div>
 					<p class="w-full text-center my-10">
@@ -130,14 +137,14 @@
 </template>
 
 <script lang="ts">
-import { logoFacebook, logoInstagram, logoTwitter } from 'ionicons/icons'
+import { logoFacebook, logoInstagram, logoTwitter, logoLinkedin } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'Footer',
 	setup () {
 		return {
-			logoInstagram, logoTwitter, logoFacebook
+			logoInstagram, logoTwitter, logoFacebook, logoLinkedin
 		}
 	}
 })
