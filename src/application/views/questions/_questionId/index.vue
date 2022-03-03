@@ -7,7 +7,7 @@
 				<IonIcon :icon="chevronBackOutline" class="text-[25px] mr-2" />
 				<span>Back to All questions</span>
 			</div>
-			<div class="md:px-2 mb-4 text-xs md:text-sm">
+			<div class="md:px-2 mb-4">
 				<template v-if="question">
 					<QuestionPageCard :question="question" />
 					<AnswersList :question="question" class="mt-6" />

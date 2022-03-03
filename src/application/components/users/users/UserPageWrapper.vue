@@ -53,7 +53,7 @@
 							<router-link :to="`/users/${user.id}/sets`"
 								class="pb-2 cursor-pointer"
 								exact-active-class="border-b-4 text-white border-white">
-								Folders
+								Saved
 							</router-link>
 							<router-link :to="`/users/${user.id}/`" class="pb-2 cursor-pointer"
 								exact-active-class="border-b-4 text-white border-white">

@@ -28,16 +28,7 @@ type AlertArgs = ToastArgs & {
 }
 
 export const Alert = async (args: AlertArgs) => {
-	const { value } = isWeb ? await SweetAlert.fire<boolean>({
-		title: args.title,
-		text: args.title,
-		icon: 'info',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: args.confirmButtonText,
-		cancelButtonText: args.cancelButtonText ?? 'Cancel'
-	}) : await Dialog.confirm({
+	const { value } = await Dialog.confirm({
 		title: args.title,
 		message: args.title,
 		okButtonTitle: args.confirmButtonText,

@@ -1,4 +1,4 @@
-import { onUnmounted, onMounted, ref, Ref } from 'vue'
+import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import {
 	AddAnswerComment,
 	CommentEntity,
@@ -11,14 +11,35 @@ import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable
 const global = {} as Record<string, {
 	comments: Ref<CommentEntity[]>
 	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useAnswerCommentList = (answerId: string) => {
-	if (global[answerId] === undefined) global[answerId] = {
-		comments: ref([]),
-		fetched: ref(false),
-		...useErrorHandler(),
-		...useLoadingHandler()
+	if (global[answerId] === undefined) {
+		const listener = useListener(async () => {
+			return await ListenToAnswerComments.call(answerId, {
+				created: async (entity) => {
+					const index = global[answerId].comments.value.findIndex((c) => c.id === entity.id)
+					if (index === -1) global[answerId].comments.value.push(entity)
+					else global[answerId].comments.value.splice(index, 1, entity)
+				},
+				updated: async (entity) => {
+					const index = global[answerId].comments.value.findIndex((c) => c.id === entity.id)
+					if (index === -1) global[answerId].comments.value.push(entity)
+					else global[answerId].comments.value.splice(index, 1, entity)
+				},
+				deleted: async (entity) => {
+					global[answerId].comments.value = global[answerId].comments.value.filter((c) => c.id !== entity.id)
+				}
+			})
+		})
+		global[answerId] = {
+			comments: ref([]),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
 	}
 
 	const fetchComments = async () => {
@@ -33,30 +54,12 @@ export const useAnswerCommentList = (answerId: string) => {
 		await global[answerId].setLoading(false)
 	}
 
-	const listener = useListener(async () => {
-		return await ListenToAnswerComments.call(answerId, {
-			created: async (entity) => {
-				const index = global[answerId].comments.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[answerId].comments.value.push(entity)
-				else global[answerId].comments.value.splice(index, 1, entity)
-			},
-			updated: async (entity) => {
-				const index = global[answerId].comments.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[answerId].comments.value.push(entity)
-				else global[answerId].comments.value.splice(index, 1, entity)
-			},
-			deleted: async (entity) => {
-				global[answerId].comments.value = global[answerId].comments.value.filter((c) => c.id !== entity.id)
-			}
-		})
-	})
-
 	onMounted(async () => {
 		if (!global[answerId].fetched.value && !global[answerId].loading.value) await fetchComments()
-		await listener.startListener()
+		await global[answerId].listener.startListener()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await global[answerId].listener.closeListener()
 	})
 
 	return {

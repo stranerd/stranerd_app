@@ -9,7 +9,7 @@ type QuestionConstructorArgs = {
 	isAnswered: boolean
 	data: QuestionData
 	attachments: Media[]
-	subjectId: string
+	subject: string
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
@@ -40,7 +40,7 @@ export class QuestionEntity extends BaseEntity {
 	public readonly body: string
 	public readonly data: QuestionData
 	public readonly attachments: Media[]
-	public readonly subjectId: string
+	public readonly subject: string
 	public readonly userId: string
 	public readonly userBio: UserBio
 	public readonly userRoles: UserRoles
@@ -51,7 +51,7 @@ export class QuestionEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, body, subjectId, isAnswered, data,
+		             id, body, subject, isAnswered, data,
 		             bestAnswers, createdAt, userId, userBio, userRoles, attachments,
 		             answers, updatedAt
 	             }: QuestionConstructorArgs) {
@@ -61,7 +61,7 @@ export class QuestionEntity extends BaseEntity {
 		this.isAnswered = isAnswered
 		this.data = data
 		this.attachments = attachments.map(parseMedia) ?? []
-		this.subjectId = subjectId
+		this.subject = subject
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
 		this.userRoles = generateDefaultRoles(userRoles)

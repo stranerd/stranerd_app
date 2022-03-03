@@ -19,14 +19,35 @@ import { Router, useRouter } from 'vue-router'
 const global = {} as Record<string, {
 	answers: Ref<AnswerEntity[]>
 	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useAnswerList = (questionId: string) => {
-	if (global[questionId] === undefined) global[questionId] = {
-		answers: ref([]),
-		fetched: ref(false),
-		...useErrorHandler(),
-		...useLoadingHandler()
+	if (global[questionId] === undefined) {
+		const listener = useListener(async () => {
+			return await ListenToAnswers.call(questionId, {
+				created: async (entity) => {
+					const index = global[questionId].answers.value.findIndex((c) => c.id === entity.id)
+					if (index === -1) global[questionId].answers.value.push(entity)
+					else global[questionId].answers.value.splice(index, 1, entity)
+				},
+				updated: async (entity) => {
+					const index = global[questionId].answers.value.findIndex((c) => c.id === entity.id)
+					if (index === -1) global[questionId].answers.value.push(entity)
+					else global[questionId].answers.value.splice(index, 1, entity)
+				},
+				deleted: async (entity) => {
+					global[questionId].answers.value = global[questionId].answers.value.filter((c) => c.id !== entity.id)
+				}
+			})
+		})
+		global[questionId] = {
+			answers: ref([]),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
 	}
 
 	const fetchAnswers = async () => {
@@ -41,30 +62,12 @@ export const useAnswerList = (questionId: string) => {
 		await global[questionId].setLoading(false)
 	}
 
-	const listener = useListener(async () => {
-		return await ListenToAnswers.call(questionId, {
-			created: async (entity) => {
-				const index = global[questionId].answers.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[questionId].answers.value.push(entity)
-				else global[questionId].answers.value.splice(index, 1, entity)
-			},
-			updated: async (entity) => {
-				const index = global[questionId].answers.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[questionId].answers.value.push(entity)
-				else global[questionId].answers.value.splice(index, 1, entity)
-			},
-			deleted: async (entity) => {
-				global[questionId].answers.value = global[questionId].answers.value.filter((c) => c.id !== entity.id)
-			}
-		})
-	})
-
 	onMounted(async () => {
 		if (!global[questionId].fetched.value && !global[questionId].loading.value) await fetchAnswers()
-		await listener.startListener()
+		await global[questionId].listener.startListener()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await global[questionId].listener.closeListener()
 	})
 
 	return {

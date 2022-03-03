@@ -5,7 +5,6 @@ import {
 	FindTest,
 	GetTestQuestions,
 	GetTests,
-	ListenToTest,
 	ListenToTests,
 	PastQuestionEntity,
 	TestEntity,
@@ -25,6 +24,20 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
+const listener = useListener(async () => {
+	return await ListenToTests.call({
+		created: async (entity) => {
+			unshiftToTestList(entity)
+		},
+		updated: async (entity) => {
+			unshiftToTestList(entity)
+		},
+		deleted: async (entity) => {
+			const index = global.tests.value.findIndex((q) => q.id === entity.id)
+			if (index !== -1) global.tests.value.splice(index, 1)
+		}
+	})
+})
 
 const testGlobal = {} as Record<string, {
 	questions: Ref<PastQuestionEntity[]>
@@ -58,20 +71,6 @@ export const useTestList = () => {
 		}
 		await global.setLoading(false)
 	}
-	const listener = useListener(async () => {
-		return await ListenToTests.call({
-			created: async (entity) => {
-				unshiftToTestList(entity)
-			},
-			updated: async (entity) => {
-				unshiftToTestList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.tests.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.tests.value.splice(index, 1)
-			}
-		})
-	})
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTests()
@@ -146,20 +145,6 @@ export const useTest = (testId: string) => {
 		}
 		await setLoading(false)
 	}
-	const listener = useListener(async () => {
-		return await ListenToTest.call(testId, {
-			created: async (entity) => {
-				unshiftToTestList(entity)
-			},
-			updated: async (entity) => {
-				unshiftToTestList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.tests.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.tests.value.splice(index, 1)
-			}
-		})
-	})
 
 	onMounted(async () => {
 		await fetchTest()

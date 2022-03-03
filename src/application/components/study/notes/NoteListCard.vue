@@ -1,55 +1,54 @@
 <template>
-	<div
-		class="m-0 w-full bg-white rounded-xl flex flex-col justify-between items-start gap-4 box-border p-4 text-main_dark">
-		<div class="w-full justify-between items-start flex">
-			<div class="text-base flex-col flex gap-2 items-start flex-grow truncate">
-				<ion-text class="font-semibold truncate">{{ note.title }}</ion-text>
-				<Tag :index="1" tag="Note">
-					<template v-slot="slotProps">
-						<span class="flex items-center">
-							<ion-icon :icon="documentOutline" class="text-base mr-1" />
-							<ion-text class="text-xs">{{ slotProps.tag }}</ion-text>
-						</span>
-					</template>
-				</Tag>
-			</div>
-			<ion-icon :icon="ellipsisVerticalOutline" class="text-gray text-xl" @click="openMenu" />
-		</div>
-		<div class="w-full flex items-center justify-between">
-			<div class="flex items-center gap-2">
-				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
-				<ion-text class="text-xs flex items-center gap-1">
-					<span>{{ note.userBio.firstName }}</span>
-					<IonIcon v-if="note.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
-				</ion-text>
-			</div>
+	<div class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
+		<div class="w-full justify-between items-center flex gap-2">
+			<ion-text class="font-semibold truncate w-full">{{ note.title }}</ion-text>
 			<router-link v-if="content" :to="`/study/notes/${note.id}`">
-				<ion-button class="btn-outline text-primary w-full lg:min-w-[7.5rem]" size="small">
-					Read
-				</ion-button>
+				<ion-icon :icon="arrowForwardCircleOutline" class="text-primary text-xl" />
 			</router-link>
 			<IonSpinner v-else-if="loading" color="primary" />
-			<IonIcon v-else :icon="downloadIcon" class="text-2xl" color="primary" @click="download" />
+			<IonIcon v-else :icon="downloadOutline" class="text-primary text-xl" @click="download" />
+		</div>
+
+		<div class="w-full flex items-center justify-between gap-2">
+			<Tag tag="Note">
+				<template v-slot="slotProps">
+					<span class="flex items-center">
+						<ion-icon :icon="documentOutline" class="text-base mr-1" />
+						<ion-text class="text-xs">{{ slotProps.tag }}</ion-text>
+					</span>
+				</template>
+			</Tag>
+			<div class="flex items-center text-gray gap-2">
+				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
+				<Share :link="note.shareLink" :text="note.description" :title="note.title" cssClass="text-xl" />
+				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" @click="openSaveModal(note)" />
+			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { checkmarkCircleOutline, documentOutline, downloadOutline as downloadIcon, ellipsisVerticalOutline } from 'ionicons/icons'
-import { defineComponent } from 'vue'
+import {
+	arrowForwardCircleOutline,
+	bookmark,
+	bookmarkOutline,
+	checkmarkCircleOutline,
+	documentOutline,
+	downloadOutline,
+	ellipsisVerticalOutline
+} from 'ionicons/icons'
+import { computed, defineComponent } from 'vue'
 import { NoteEntity } from '@modules/study'
 import { IonSpinner } from '@ionic/vue'
 import { useDownload } from '@app/composable/meta/media'
+import { useUserSetList } from '@app/composable/users/users/sets'
+import { openSaveModal } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'NoteListCard',
 	props: {
 		note: {
 			type: NoteEntity,
-			required: true
-		},
-		openMenu: {
-			type: Function,
 			required: true
 		}
 	},
@@ -62,10 +61,24 @@ export default defineComponent({
 			download,
 			deleteFromDownloads
 		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
+		const { sets } = useUserSetList()
+		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(props.note.id)))
 
 		return {
-			ellipsisVerticalOutline, documentOutline, downloadIcon, checkmarkCircleOutline,
-			download, loading, content, error, deleteFromDownloads
+			arrowForwardCircleOutline,
+			ellipsisVerticalOutline,
+			documentOutline,
+			downloadOutline,
+			checkmarkCircleOutline,
+			bookmark,
+			bookmarkOutline,
+			download,
+			loading,
+			content,
+			error,
+			deleteFromDownloads,
+			isSaved,
+			openSaveModal
 		}
 	}
 })

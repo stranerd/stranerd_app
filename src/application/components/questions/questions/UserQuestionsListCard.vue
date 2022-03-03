@@ -1,10 +1,10 @@
 <template>
 	<div :id="question.id"
-		class="p-4 md:p-6 rounded-xl bg-white flex flex-col w-full text-xs md:text-sm relative cursor-pointer">
-		<ion-ripple-effect class="rounded-xl"></ion-ripple-effect>
+		class="p-4 md:p-6 rounded-xl bg-white flex flex-col w-full relative cursor-pointer">
+		<ion-ripple-effect class="rounded-xl" />
 		<div class="flex flex-row items-center">
 			<div class=" flex flex-row items-center">
-				<span class="font-bold text-main_dark lg:text-base text-xs"><Subject :subject-id="question.subjectId" /></span>
+				<span class="font-bold text-main_dark lg:text-base text-xs capitalize">{{ question.subject }}</span>
 			</div>
 			<div class="flex flex-row-reverse flex-grow">
 				<span class="font-bold text-icon_inactive lg:block hidden">
@@ -26,6 +26,7 @@
 		</div>
 	</div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonRippleEffect } from '@ionic/vue'
@@ -33,7 +34,6 @@ import { arrowRedo, flag } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatNumber, pluralize } from '@utils/commons'
 import { formatTime } from '@utils/dates'
-import Subject from '../subjects/Subject.vue'
 
 export default defineComponent({
 	props: {
@@ -42,12 +42,9 @@ export default defineComponent({
 			type: QuestionEntity
 		}
 	},
+	components: { IonRippleEffect },
 	setup () {
 		return { formatTime, formatNumber, pluralize, arrowRedo, flag }
-	},
-	components: {
-		IonRippleEffect,
-		Subject
 	}
 })
 </script>

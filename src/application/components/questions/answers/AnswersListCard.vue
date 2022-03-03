@@ -10,17 +10,17 @@
 			</div>
 
 			<div class="flex flex-col py-4">
-				<ion-text class="text-gray font-bold mb-2 text-xs lg:text-base">
+				<ion-text class="text-gray font-bold mb-2">
 					Main answer
 				</ion-text>
-				<DisplayHtml :html="answer.title" class="text-xs lg:text-base" />
+				<DisplayHtml :html="answer.title" />
 			</div>
 
 			<div v-if="answer.body" class="flex flex-col pb-4">
-				<ion-text class="text-gray font-bold mb-2 text-xs lg:text-base">
+				<ion-text class="text-gray font-bold mb-2">
 					Explanation
 				</ion-text>
-				<DisplayHtml :html="answer.body" class="text-xs lg:text-base" />
+				<DisplayHtml :html="answer.body" />
 			</div>
 
 			<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" class="py-3" />
@@ -62,7 +62,8 @@
 				<ion-input v-model="commentFactory.body" :autoGrow="true" :rows="1"
 					class="px-1 focus:outline-none placeholder-gray-400 mt-0 pt-0"
 					placeholder="Add comment" />
-				<IonIcon :icon="sendOutline" class="text-[22px] mr-2 text-primary cursor-pointer" @click="createComment" />
+				<IonIcon :icon="sendOutline" class="text-[22px] mr-2 text-primary cursor-pointer"
+					@click="createComment" />
 			</form>
 		</div>
 
@@ -75,7 +76,15 @@
 import { computed, defineComponent, PropType, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
-import { checkmarkCircleOutline, chevronDownOutline, chevronUpOutline, sendOutline, starOutline, thumbsDownOutline, thumbsUpOutline } from 'ionicons/icons'
+import {
+	checkmarkCircleOutline,
+	chevronDownOutline,
+	chevronUpOutline,
+	sendOutline,
+	starOutline,
+	thumbsDownOutline,
+	thumbsUpOutline
+} from 'ionicons/icons'
 import PhotoList from '@app/components/core/media/PhotoList.vue'
 import { useAnswer } from '@app/composable/questions/answers'
 import { useCreateAnswerComments } from '@app/composable/questions/answer-comments'
@@ -120,12 +129,29 @@ export default defineComponent({
 		} = useCreateAnswerComments(props.answer.id)
 
 		return {
-			id, isLoggedIn, user, voteAnswer, loading, error,
-			commentLoading, commentError,
-			commentFactory, createComment,
-			markBestAnswer, formatNumber,
-			thumbsDownOutline, thumbsUpOutline, starOutline, sendOutline, chevronUpOutline, chevronDownOutline, checkmarkCircleOutline,
-			showExplanation, showComments, showEditButton, showDeleteButton
+			id,
+			isLoggedIn,
+			user,
+			voteAnswer,
+			loading,
+			error,
+			commentLoading,
+			commentError,
+			commentFactory,
+			createComment,
+			markBestAnswer,
+			formatNumber,
+			thumbsDownOutline,
+			thumbsUpOutline,
+			starOutline,
+			sendOutline,
+			chevronUpOutline,
+			chevronDownOutline,
+			checkmarkCircleOutline,
+			showExplanation,
+			showComments,
+			showEditButton,
+			showDeleteButton
 		}
 	}
 })

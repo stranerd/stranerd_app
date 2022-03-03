@@ -21,6 +21,21 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
+const listener = useListener(async () => {
+	const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
+	return await ListenToFlashCards.call({
+		created: async (entity) => {
+			unshiftToFlashCardList(entity)
+		},
+		updated: async (entity) => {
+			unshiftToFlashCardList(entity)
+		},
+		deleted: async (entity) => {
+			const index = global.flashCards.value.findIndex((q) => q.id === entity.id)
+			if (index !== -1) global.flashCards.value.splice(index, 1)
+		}
+	}, lastDate)
+})
 
 const pushToFlashCardList = (flashCard: FlashCardEntity) => {
 	const index = global.flashCards.value.findIndex((q) => q.id === flashCard.id)
@@ -48,21 +63,6 @@ export const useFlashCardList = () => {
 		}
 		await global.setLoading(false)
 	}
-	const listener = useListener(async () => {
-		const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
-		return await ListenToFlashCards.call({
-			created: async (entity) => {
-				unshiftToFlashCardList(entity)
-			},
-			updated: async (entity) => {
-				unshiftToFlashCardList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.flashCards.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.flashCards.value.splice(index, 1)
-			}
-		}, lastDate)
-	})
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchFlashCards()

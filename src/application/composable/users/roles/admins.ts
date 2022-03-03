@@ -10,6 +10,22 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
+const listener = useListener(async () => {
+	return await ListenToAllAdmins.call({
+		created: async (entity) => {
+			const index = global.admins.value.findIndex((t) => t.id === entity.id)
+			global.admins.value.splice(index, 1, entity)
+		},
+		updated: async (entity) => {
+			const index = global.admins.value.findIndex((t) => t.id === entity.id)
+			global.admins.value.splice(index, 1, entity)
+		},
+		deleted: async (entity) => {
+			const index = global.admins.value.findIndex((t) => t.id === entity.id)
+			global.admins.value.splice(index, 1)
+		}
+	})
+})
 const { id } = useAuth()
 
 const pushToAdminsList = (admin: UserEntity) => {
@@ -40,22 +56,6 @@ export const useAdminsList = () => {
 		set: (admins) => {
 			admins.map(pushToAdminsList)
 		}
-	})
-	const listener = useListener(async () => {
-		return await ListenToAllAdmins.call({
-			created: async (entity) => {
-				const index = global.admins.value.findIndex((t) => t.id === entity.id)
-				global.admins.value.splice(index, 1, entity)
-			},
-			updated: async (entity) => {
-				const index = global.admins.value.findIndex((t) => t.id === entity.id)
-				global.admins.value.splice(index, 1, entity)
-			},
-			deleted: async (entity) => {
-				const index = global.admins.value.findIndex((t) => t.id === entity.id)
-				global.admins.value.splice(index, 1)
-			}
-		})
 	})
 
 	onMounted(async () => {

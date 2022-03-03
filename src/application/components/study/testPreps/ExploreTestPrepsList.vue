@@ -11,8 +11,6 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { TestPrepEntity } from '@modules/study'
-import { openStudyEntityMenu } from '@app/composable/study/menus'
 import { groupedByInstitution, useTestPrepList } from '@app/composable/study/testPreps'
 import InstitutionTestPrepsListCard from '@app/components/study/testPreps/InstitutionTestPrepsListCard.vue'
 
@@ -28,9 +26,8 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { loading, error, testPreps } = useTestPrepList()
-		const openMenu = (entity: TestPrepEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => groupedByInstitution(testPreps.value).value.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, openMenu, loading, error }
+		return { filtered, loading, error }
 	}
 })
 </script>

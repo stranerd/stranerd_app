@@ -1,5 +1,5 @@
 <template>
-	<span @click.prevent="shareInfo">
+	<span class="leading-none" @click.prevent="shareInfo">
 		<slot>
 			<ion-icon :class="cssClass" :icon='shareSocialOutline' />
 		</slot>
@@ -18,13 +18,11 @@ export default defineComponent({
 	props: {
 		title: {
 			type: String,
-			required: false,
-			default: 'Title'
+			required: true
 		},
 		text: {
 			type: String,
-			required: false,
-			default: 'Text'
+			required: true
 		},
 		link: {
 			type: String,

@@ -69,11 +69,6 @@ export interface UserDates {
 	deletedAt: number | null
 }
 
-export interface UserTutor {
-	strongestSubject: string | null
-	weakerSubjects: string[]
-}
-
 export interface UserRank {
 	id: RankTypes
 	score: number
@@ -86,7 +81,6 @@ type UserConstructorArgs = {
 	roles: UserRoles
 	account: UserAccount
 	status: UserStatus
-	tutor: UserTutor
 	session: UserSession
 	dates: UserDates
 	rank: UserRank
@@ -117,7 +111,6 @@ export class UserEntity extends BaseEntity {
 	public readonly roles: UserRoles
 	public readonly account: UserAccount
 	public readonly status: UserStatus
-	public readonly tutor: UserTutor
 	public readonly session: UserSession
 	public readonly dates: UserDates
 	public readonly rank: UserRank
@@ -129,7 +122,6 @@ export class UserEntity extends BaseEntity {
 		             roles,
 		             account,
 		             status,
-		             tutor,
 		             session,
 		             dates,
 		             rank,
@@ -141,7 +133,6 @@ export class UserEntity extends BaseEntity {
 		this.roles = generateDefaultRoles(roles)
 		this.account = account
 		this.status = status
-		this.tutor = tutor
 		this.session = session
 		this.dates = dates
 		this.rank = rank
@@ -190,20 +181,6 @@ export class UserEntity extends BaseEntity {
 
 	get orderRating () {
 		return Math.pow(this.account.ratings.total, this.averageRating)
-	}
-
-	get strongestSubject () {
-		return this.tutor.strongestSubject
-	}
-
-	get weakerSubjects () {
-		return this.tutor.weakerSubjects
-	}
-
-	get subjects () {
-		const subjects = [...this.tutor.weakerSubjects]
-		if (this.tutor.strongestSubject) subjects.push(this.tutor.strongestSubject)
-		return subjects
 	}
 
 	get score () {

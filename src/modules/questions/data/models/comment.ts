@@ -11,6 +11,5 @@ export interface CommentFromModel extends CommentToModel {
 
 export interface CommentToModel {
 	body: string
-	answerId?: string
-	questionId?: string
+	answerId: string
 }

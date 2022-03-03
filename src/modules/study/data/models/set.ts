@@ -10,7 +10,6 @@ export interface SetFromModel extends SetToModel {
 		testPreps: string[]
 		sets: string[]
 	}
-	children: string[]
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
@@ -20,6 +19,5 @@ export interface SetFromModel extends SetToModel {
 
 export interface SetToModel {
 	name: string
-	parent: string
 	data: SetData
 }

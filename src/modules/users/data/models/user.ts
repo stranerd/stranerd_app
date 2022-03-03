@@ -5,8 +5,7 @@ import {
 	UserRank,
 	UserRoles,
 	UserSession,
-	UserStatus,
-	UserTutor
+	UserStatus
 } from '../../domain/entities/user'
 
 export interface UserFromModel extends UserToModel {
@@ -15,7 +14,6 @@ export interface UserFromModel extends UserToModel {
 	roles: UserRoles
 	account: UserAccount
 	status: UserStatus
-	tutor: UserTutor
 	session: UserSession
 	dates: UserDates
 	rank: UserRank
@@ -23,8 +21,3 @@ export interface UserFromModel extends UserToModel {
 }
 
 export type UserToModel = {}
-
-export type TutorUpdate = {
-	strongestSubject: string,
-	weakerSubjects: string[]
-}

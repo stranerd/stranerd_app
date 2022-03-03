@@ -1,31 +1,33 @@
 <template>
-	<router-link :to="`/study/tests/${test.id}/take`"
-		class="m-0 bg-white w-full rounded-xl flex flex-col gap-2 box-border p-4">
-		<div class="w-full flex justify-between items-center">
-			<ion-text class="text-left w-full text-main_dark font-semibold truncate capitalize">
-				<Institution v-if="testPrep && testPrep.isPastQuestionType"
-					:institutionId="testPrep.data.institutionId" />
-				<span v-else>{{ test.name }}</span>
+	<div
+		class="bg-white w-full rounded-xl flex flex-col box-border card-padding">
+		<div>
+			<div class="w-full flex justify-between items-center gap-2">
+				<ion-text class="text-left w-full text-main_dark font-semibold truncate capitalize">
+					<Institution v-if="testPrep && testPrep.isPastQuestionType"
+						:institutionId="testPrep.data.institutionId" />
+					<span v-else>{{ test.name }}</span>
+				</ion-text>
+				<ion-icon :icon="arrowForwardCircleOutline" class="text-xl text-primary" />
+			</div>
+
+			<ion-text class="text-sm text-left w-full text-gray truncate">
+				{{ test.isTimed ? 'Timed' : 'Study' }}
+				<span v-if="testPrep && testPrep.isPastQuestionType">
+					>
+					<Course :courseId="testPrep.data.courseId" />
+					{{ testPrep.data.questionType }}
+					({{ testPrep.data.year }})
+				</span>
 			</ion-text>
-			<ion-icon :icon="arrowForwardOutline" class="text-2xl text-primary" />
 		</div>
 
-		<ion-text class="text-sm text-left w-full text-gray mb-1 truncate">
-			{{ test.isTimed ? 'Timed' : 'Study' }}
-			<span v-if="testPrep && testPrep.isPastQuestionType">
-				>
-				<Course :courseId="testPrep.data.courseId" />
-				{{ testPrep.data.questionType }}
-				({{ testPrep.data.year }})
-			</span>
-		</ion-text>
-
-		<ion-progress-bar :value="test.progress" class="mt-4" />
-	</router-link>
+		<ion-progress-bar :value="test.progress" />
+	</div>
 </template>
 
 <script lang="ts">
-import { arrowForwardOutline, calendarOutline, playOutline } from 'ionicons/icons'
+import { arrowForwardCircleOutline, calendarOutline, playOutline } from 'ionicons/icons'
 import { IonProgressBar } from '@ionic/vue'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
@@ -45,7 +47,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { testPrep } = useTestPrep(props.test.prepId)
-		return { formatNumber, arrowForwardOutline, calendarOutline, playOutline, testPrep }
+		return { formatNumber, arrowForwardCircleOutline, calendarOutline, playOutline, testPrep }
 	}
 })
 </script>

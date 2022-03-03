@@ -36,6 +36,10 @@ export class FlashCardEntity extends BaseEntity {
 	get isUserVerified () {
 		return this.userRoles[appName].isVerified
 	}
+
+	get shareLink () {
+		return `/study/flashCards/${this.id}`
+	}
 }
 
 type FlashCardConstructorArgs = {

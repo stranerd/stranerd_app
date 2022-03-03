@@ -1,27 +1,27 @@
 <template>
-	<Popover class="flex flex-col gap-4">
-		<router-link class="py-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
+	<Popover>
+		<router-link class="flex gap-2 items-center text-gray hover:text-main_dark"
 			to="/account">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="personOutline" class="text-2xl"></ion-icon>
 				<ion-label class="font-bold">Profile</ion-label>
 			</div>
 		</router-link>
-		<router-link v-if="isAdmin" class="py-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
+		<router-link v-if="isAdmin" class="flex gap-4 items-center text-gray hover:text-main_dark"
 			to="/admin/">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="cogOutline" class="text-3xl"></ion-icon>
 				<ion-label class="font-bold">Admin</ion-label>
 			</div>
 		</router-link>
-		<router-link class="py-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
+		<router-link class="flex gap-2 items-center text-gray hover:text-main_dark"
 			to="/study">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="libraryOutline" class="text-2xl"></ion-icon>
 				<ion-label class="font-bold">Study</ion-label>
 			</div>
 		</router-link>
-		<router-link class="py-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
+		<router-link class="flex gap-2 items-center text-gray hover:text-main_dark"
 			to="/users/leaderboard">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="podiumOutline" class="text-3xl"></ion-icon>
@@ -29,13 +29,13 @@
 			</div>
 		</router-link>
 		<router-link v-if="user" :to="`/users/${user.id}/settings`"
-			class="py-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark">
+			class="flex gap-2 items-center text-gray hover:text-main_dark">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="settingsOutline" class="text-3xl"></ion-icon>
 				<ion-label class="font-bold">Settings</ion-label>
 			</div>
 		</router-link>
-		<div class="py-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
+		<div v-if="user" class="flex gap-2 items-center text-gray hover:text-main_dark"
 			@click="signout()">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="logOutOutline" class="text-3xl"></ion-icon>

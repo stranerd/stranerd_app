@@ -36,6 +36,10 @@ export class TestPrepEntity extends BaseEntity {
 	get userId () {
 		return 'admin'
 	}
+
+	get shareLink () {
+		return `/study/preps/${this.data.institutionId}`
+	}
 }
 
 type TestPrepConstructorArgs = {

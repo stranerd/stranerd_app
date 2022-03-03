@@ -1,6 +1,5 @@
 import { Listeners, QueryParams, QueryResults } from '@modules/core'
 import { UserEntity } from '../entities/user'
-import { TutorUpdate } from '../../data/models/user'
 
 export interface IUserRepository {
 	find: (id: string) => Promise<UserEntity | null>,
@@ -8,5 +7,4 @@ export interface IUserRepository {
 	listenToOne: (id: string, listener: Listeners<UserEntity>) => Promise<() => void>
 	listenToMany: (query: QueryParams, listener: Listeners<UserEntity>, matches: (entity: UserEntity) => boolean) => Promise<() => void>
 	updateStreak: () => Promise<void>
-	updateTutor: (tutor: TutorUpdate) => Promise<void>
 }

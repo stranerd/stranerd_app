@@ -1,11 +1,10 @@
 <template>
 	<DashboardLayout>
-		<div class="p-4">
+		<div class="lg:w-8/12 w-full mx-auto md:px-4 py-4">
 			<EmptyState v-if="!loading && !error && sets.length === 0"
 				info="You have not created any folders yet. Click the plus button to create one now" />
 			<div class="showcase">
-				<SetListCard v-for="set in sets" :key="set.hash" :openMenu="(event) => openMenu(set, event)"
-					:set="set" />
+				<SetListCard v-for="set in sets" :key="set.hash" :set="set" />
 			</div>
 			<PageLoading v-if="loading" />
 		</div>
@@ -14,11 +13,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useUserRootSet } from '@app/composable/study/sets'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import SetListCard from '@app/components/study/sets/SetListCard.vue'
-import { SetEntity } from '@modules/study'
-import { openStudyEntityMenu } from '@app/composable/study/menus'
+import { useUserSetList } from '@app/composable/users/users/sets'
 
 export default defineComponent({
 	name: 'Study',
@@ -26,9 +23,8 @@ export default defineComponent({
 	middlewares: ['isAuthenticated'],
 	components: { DashboardLayout, SetListCard },
 	setup () {
-		const openMenu = (entity: SetEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
-		const { sets, error, loading } = useUserRootSet()
-		return { sets, error, loading, openMenu }
+		const { sets, error, loading } = useUserSetList()
+		return { sets, error, loading }
 	}
 })
 </script>

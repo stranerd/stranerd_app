@@ -8,6 +8,4 @@ export interface IDiscussionRepository {
 	listenToOne: (id: string, listener: Listeners<DiscussionEntity>) => Promise<() => void>
 	listenToMany: (query: QueryParams, listener: Listeners<DiscussionEntity>, matches: (entity: DiscussionEntity) => boolean) => Promise<() => void>
 	find: (id: string) => Promise<DiscussionEntity | null>
-	update: (id: string, data: DiscussionToModel) => Promise<void>
-	delete: (id: string) => Promise<void>
 }

@@ -1,6 +1,10 @@
 <template>
 	<form @submit.prevent="submit">
-		<SelectSubject v-model:subjectId="factory.subjectId" :show-all="false" class="w-full bg-new_gray" />
+		<IonInput
+			v-model="factory.subject"
+			class="w-full bg-new_gray"
+			placeholder="Select a Subject"
+		/>
 		<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
 			class="lg:mt-3 px-1"
 			placeholder="Write your question here." />
@@ -23,13 +27,14 @@
 				class="w-1/2"
 				@files="catchAttachments"
 			>
-				<ion-button class=" btn-secondary w-full">
-					<ion-icon :icon="image" class="!text-2xl text-gray mr-4" />
+				<ion-button class=" btn-secondary w-full text-primary">
+					<ion-icon :icon="imageOutline" class="!text-2xl text-primary mr-4" />
 					Add image
 				</ion-button>
 			</FileInput>
 			<ion-button :disabled="loading || !factory.valid"
 				class="w-1/2 btn-primary h-12" type="submit">
+				<ion-icon :icon="paperPlaneOutline" class="!text-2xl text-white mr-4" />
 				<slot name="buttonText">Submit</slot>
 			</ion-button>
 		</div>
@@ -41,18 +46,16 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { closeOutline, image } from 'ionicons/icons'
+import { closeOutline, imageOutline, paperPlaneOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
-import SelectSubject from '@app/components/questions/subjects/SelectSubject.vue'
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 
 export default defineComponent({
 	name: 'QuestionForm',
 	components: {
 		BaseEditor,
-		IonIcon,
-		SelectSubject
+		IonIcon
 	},
 	props: {
 		factory: {
@@ -77,7 +80,7 @@ export default defineComponent({
 			files.map(props.factory.addAttachment)
 		})
 
-		return { image, closeOutline, catchAttachments }
+		return { imageOutline, paperPlaneOutline, closeOutline, catchAttachments }
 	}
 })
 </script>

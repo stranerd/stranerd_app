@@ -1,12 +1,15 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between mb-4">
+		<div class="w-full flex justify-between mb-4 px-4 md:px-0">
 			<div class="heading font-bold text-main_dark flex items-center">
 				<ion-text class="mr-3">Questions</ion-text>
-				<ion-badge class="uppercase">Latest</ion-badge>
+				<ion-text class="text-orange font-normal flex items-center text-body">
+					<div class="h-1 w-1 bg-orange mr-2 rounded-full" />
+					Latest
+				</ion-text>
 			</div>
 
-			<router-link class="text-primary text-body flex items-center font-bold" to="/questions">
+			<router-link class="text-primary text-body flex items-center font-normal" to="/questions">
 				<span>explore</span>
 			</router-link>
 		</div>
@@ -27,15 +30,14 @@ import { computed, defineComponent } from 'vue'
 import QuestionListCard from '@app/components/questions/questions/RecentQuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '@app/components/core/EmptyState.vue'
-import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'RecentQuestions',
-	components: { QuestionListCard, EmptyState, IonBadge },
+	components: { QuestionListCard, EmptyState },
 	setup () {
 		const { questions: allQuestions, loading, error } = useQuestionList()
 		const questions = computed({
-			get: () => allQuestions.value.slice(0, 6),
+			get: () => allQuestions.value.slice(0, 3),
 			set: () => {
 			}
 		})
