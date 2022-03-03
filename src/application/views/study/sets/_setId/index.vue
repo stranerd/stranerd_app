@@ -12,7 +12,7 @@ import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import { useRoute } from 'vue-router'
 import { useSetById } from '@app/composable/study/sets'
-import SetWrapper from '@app/components/study/sets/page/SetWrapper.vue'
+import SetWrapper from '@app/components/study/sets/SetWrapper.vue'
 
 export default defineComponent({
 	name: 'StudySetsSetId',

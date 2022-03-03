@@ -7,7 +7,6 @@ import ReportAnswer from '@app/components/modals/reports/ReportAnswer.vue'
 import SubmitTest from '@app/components/popovers/study/SubmitTest.vue'
 import CreateQuestion from '@app/components/modals/questions/CreateQuestion.vue'
 import EditQuestion from '@app/components/modals/questions/EditQuestion.vue'
-import CreateStudy from '@app/components/popovers/study/CreateStudy.vue'
 import CreateDashboardMenu from '@app/components/popovers/menus/CreateDashboardMenu.vue'
 import UserDashboardMenu from '@app/components/popovers/menus/UserDashboardMenu.vue'
 import CreateInstitution from '@app/components/modals/study/CreateInstitution.vue'
@@ -39,7 +38,7 @@ export const useStudyModal = () => StudyModal
 export const allModals = [useQuestionModal, useSessionModal, useReportModal, useStudyModal]
 
 export const popover = usePopover(ref([]))
-const StudyPopover = popover.register('Study', { CreateStudy, SubmitTest })
+const StudyPopover = popover.register('Study', { SubmitTest })
 const MenuPopover = popover.register('Menu', { CreateDashboardMenu, UserDashboardMenu })
 
 export const useStudyPopover = () => StudyPopover
