@@ -1,38 +1,23 @@
 <template>
-	<div class="w-full flex flex-col bg-white mt-9 lg:p-12 p-5 lg:rounded-3xl rounded-xl">
-		<h2 class="lg:text-xl text-base text-main_dark font-bold">
-			Give your answer
-		</h2>
+	<div class="w-full flex flex-col bg-white mt-9 md:p-5   rounded-xl">
 
 		<div
-			class="lg:mt-9 mt-5 py-3 px-4 flex flex-row items-center bg-light_gray rounded-lg border border-faded_gray">
-			<span class="text-main_dark font-bold">Main answer -</span>
-			<ion-input v-model="factory.title" class="w-full px-2 ml-1 font-medium" placeholder="Keep it short!">
+			class="py-3 px-4 flex flex-col  rounded-lg border border-faded_gray mb-6">
+			<span class="text-main_dark font-bold">Answer</span>
+			<ion-input v-model="factory.title" class="w-full " placeholder="Write main answer here and keep it short">
 			</ion-input>
 		</div>
 		<DisplayError :error="factory.errors.title" />
 
-		<div class="lg:mt-9 mt-5 py-5 flex-col">
-			<span class="text-main_dark font-bold">Explanation - </span>
-			<div class="border border-faded_gray rounded-lg">
-				<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
-					placeholder="Write out the detailed explanation of the answer you gave above. (Optional)" />
-			</div>
+		<div class="py-3 px-4 flex flex-col  rounded-lg border border-faded_gray">
+			<span class="text-main_dark font-bold">Explanation (Optional)</span>
+
+			<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
+				placeholder="Write a detailed explanation for your answer here" class="px-0 mx-o" />
+
 		</div>
 
-		<div
-			class="lg:mt-9 mt-5 rounded-xl text-main_dark relative bg-light_gray border border-faded_gray flex flex-col h-32 justify-center items-center">
-			<IonIcon :icon="imageOutline" class="!text-3xl" />
-			<FileInput
-				:multiple="true"
-				accept="image/x-png,image/jpeg,image/jpg"
-				class="mt-3"
-				@files="catchAttachments">
-				<ion-text class="font-bold lg:text-base">
-					Add images to accompany your answer (Optional)
-				</ion-text>
-			</FileInput>
-		</div>
+	
 		<div v-if="factory.attachments.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
 			<span v-for="attachment in factory.attachments" :key="attachment.name">
 				<span
@@ -44,22 +29,35 @@
 		</div>
 		<DisplayError :error="factory.errors.attachments" />
 
+	
+
 		<div class="flex w-full lg:mt-8 mt-5 items-center gap-6">
-			<ion-button class="w-1/2 btn-secondary " @click="showAddAnswer = false">
-				Cancel
-			</ion-button>
-			<ion-button class=" w-1/2 btn-primary"
-				type="submit" @click="createAnswer">
-				Post answer
+			<FileInput
+				:multiple="true"
+				accept="image/x-png,image/jpeg,image/jpg"
+				class="w-1/2"
+				@files="catchAttachments"
+			>
+				<ion-button class=" btn-secondary w-full text-primary">
+					<ion-icon :icon="imageOutline" class="!text-2xl text-primary mr-4" />
+					Add image
+				</ion-button>
+			</FileInput>
+			<ion-button 
+				@click="createAnswer"
+				class="w-1/2 btn-primary h-12" type="submit">
+				<ion-icon :icon="paperPlaneOutline" class="!text-2xl text-white mr-4" />
+				<slot name="buttonText">Send</slot>
 			</ion-button>
 		</div>
+
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonIcon, IonInput } from '@ionic/vue'
-import { closeOutline, imageOutline } from 'ionicons/icons'
+import { closeOutline, imageOutline, paperPlaneOutline } from 'ionicons/icons'
 import { showAddAnswer, useCreateAnswer } from '@app/composable/questions/answers'
 import { QuestionEntity } from '@modules/questions'
 import { useFileInputCallback } from '@app/composable/core/forms'
@@ -87,7 +85,7 @@ export default defineComponent({
 
 		return {
 			imageOutline, closeOutline,
-			showAddAnswer,
+			showAddAnswer,paperPlaneOutline,
 			factory, error, loading, answeringQuestion, createAnswer, catchAttachments
 		}
 	}
@@ -98,6 +96,7 @@ export default defineComponent({
 	ion-input, ion-select {
 		--placeholder-color: #8B9EB1;
 		--placeholder-opacity: 1;
+		--padding-start: 0px !important;
 	}
 
 	ion-icon {
