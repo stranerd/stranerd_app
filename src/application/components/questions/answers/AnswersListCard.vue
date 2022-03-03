@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col mt-1 py-3">
-		<div class="bg-white rounded-xl p-6 flex flex-col mb-4">
+		<div class="bg-white rounded-xl md:p-6 flex flex-col mb-4">
 			<div class="flex flex-row items-center">
 				<Avatar :id="answer.userId" :size="30" :src="answer.avatar" class="mr-2" />
 				<span class="font-bold text-main_dark flex items-center gap-1">
@@ -62,7 +62,7 @@
 				<ion-input v-model="commentFactory.body" :autoGrow="true" :rows="1"
 					class="px-1 focus:outline-none placeholder-gray-400 mt-0 pt-0"
 					placeholder="Add comment" />
-				<IonIcon :icon="sendOutline" class="text-[22px] mr-2 text-primary cursor-pointer"
+				<IonIcon :icon="paperPlaneOutline" class="text-[22px] mr-2 text-primary cursor-pointer"
 					@click="createComment" />
 			</form>
 		</div>
@@ -80,7 +80,7 @@ import {
 	checkmarkCircleOutline,
 	chevronDownOutline,
 	chevronUpOutline,
-	sendOutline,
+	paperPlaneOutline,
 	starOutline,
 	thumbsDownOutline,
 	thumbsUpOutline
@@ -144,7 +144,7 @@ export default defineComponent({
 			thumbsDownOutline,
 			thumbsUpOutline,
 			starOutline,
-			sendOutline,
+			paperPlaneOutline,
 			chevronUpOutline,
 			chevronDownOutline,
 			checkmarkCircleOutline,
