@@ -16,7 +16,8 @@
 						{{ classInst.members.length }} {{ pluralize(classInst.members.length, 'member', 'members') }}
 					</IonText>
 				</div>
-				<div class="lg:rounded-b-xl flex items-center gap-2 nav-scroll px-2">
+				<div v-if="classInst.members.includes(id)"
+					class="lg:rounded-b-xl flex items-center gap-2 nav-scroll px-2 border-bottom-line">
 					<router-link v-if="false" :to="`/classes/${classInst.id}/info`"
 						class="py-2 cursor-pointer flex gap-2 w-full items-center justify-center text-gray"
 						exact-active-class="border-b-2 !text-primary border-primary">
@@ -54,10 +55,16 @@
 						<IonText class="hidden md:inline">Members</IonText>
 					</router-link>
 				</div>
+				<div v-else class="px-2">
+					<IonButton class="btn-primary w-full" @click="requestToJoinClass(!classInst.requests.includes(id))">
+						{{ classInst.requests.includes(id) ? 'Cancel Request' : 'Request To Join' }}
+					</IonButton>
+				</div>
 			</div>
 			<div class="px-4 lg:px-0 py-4">
-				<slot v-if="classInst.members.includes(id)" />
+				<slot v-if="classInst.members.includes(id)" :classInst="classInst" />
 			</div>
+			<PageLoading v-if="loading" />
 		</div>
 	</Justified>
 </template>
@@ -86,7 +93,7 @@ export default defineComponent({
 		const { id } = useAuth()
 		const route = useRoute()
 		const { classId } = route.params
-		const { loading, error, classInst } = useClass(classId as string)
+		const { loading, error, classInst, requestToJoinClass } = useClass(classId as string)
 		return {
 			chatboxEllipsesOutline,
 			informationCircleOutline,
@@ -99,7 +106,8 @@ export default defineComponent({
 			classInst,
 			formatTime,
 			pluralize,
-			id
+			id,
+			requestToJoinClass
 		}
 	}
 })

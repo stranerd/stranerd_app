@@ -1,20 +1,28 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import { Router, useRouter } from 'vue-router'
 import {
+	AcceptClassRequest,
 	AddClass,
+	AddClassMembers,
+	ChangeClassMemberRole,
 	ClassEntity,
 	ClassFactory,
+	ClassUsers,
 	DeleteClass,
 	FindClass,
 	GetMyClasses,
+	LeaveClass,
 	ListenToClass,
 	ListenToMyClasses,
+	RequestToJoinClass,
 	UpdateClass
 } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useClassModal } from '@app/composable/core/modals'
 import { useAuth } from '@app/composable/auth/auth'
+import { GetUsersInList, ListenToUsersInList, UserEntity } from '@modules/users'
+import { useRedirectToAuth } from '@app/composable/auth/session'
 
 const global = {
 	classes: ref([] as ClassEntity[]),
@@ -51,6 +59,12 @@ const unshiftToClassList = (classInst: ClassEntity) => {
 	else global.classes.value.unshift(classInst)
 }
 
+const classGlobal = {} as Record<string, {
+	users: Ref<UserEntity[]>
+	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
+} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+
 export const useClassList = () => {
 	const { id } = useAuth()
 	const fetchClasses = async () => {
@@ -77,6 +91,129 @@ export const useClassList = () => {
 	})
 
 	return { ...global, myClasses }
+}
+
+export const useClassMembersList = (classInst: ClassEntity) => {
+	const { id } = useAuth()
+
+	if (classGlobal[classInst.id] === undefined) {
+		// TODO: figure out why listener uses old values here and in useSet
+		const listener = useListener(async () => {
+			return ListenToUsersInList.call(classInst.membersAndRequests, {
+				created: async (entity) => {
+					const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1, entity)
+					else classGlobal[classInst.id].users.value.push(entity)
+				},
+				updated: async (entity) => {
+					const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1, entity)
+					else classGlobal[classInst.id].users.value.push(entity)
+				},
+				deleted: async (entity) => {
+					const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1)
+				}
+			})
+		})
+		classGlobal[classInst.id] = {
+			users: ref([]),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
+	}
+
+	const fetchUsers = async () => {
+		await classGlobal[classInst.id].setError('')
+		try {
+			await classGlobal[classInst.id].setLoading(true)
+			const users = await GetUsersInList.call(classInst.membersAndRequests)
+			users.forEach((user) => {
+				const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === user.id)
+				if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1, user)
+				else classGlobal[classInst.id].users.value.push(user)
+			})
+			classGlobal[classInst.id].fetched.value = true
+		} catch (error) {
+			await classGlobal[classInst.id].setError(error)
+		}
+		await classGlobal[classInst.id].setLoading(false)
+	}
+
+	const acceptRequest = async (userId: string, accept: boolean) => {
+		const accepted = await Alert({
+			title: `Are you sure you want to ${accept ? 'accept' : 'reject'} this user's request?`,
+			confirmButtonText: 'Yes!'
+		})
+		if (!accepted) return
+		if (!classInst.requests.includes(userId)) return await classGlobal[classInst.id].setError('The user didn\'t request to join the class')
+		await classGlobal[classInst.id].setError('')
+		await classGlobal[classInst.id].setLoading(true)
+		await AcceptClassRequest.call(classInst.id, userId, accept)
+			.catch(classGlobal[classInst.id].setError)
+		await classGlobal[classInst.id].setLoading(false)
+	}
+
+	const leaveClass = async () => {
+		const accepted = await Alert({
+			title: 'Are you sure you want to leave this class?',
+			confirmButtonText: 'Yes!'
+		})
+		if (!accepted) return
+		if (!classInst.members.includes(id.value)) return await classGlobal[classInst.id].setError('You are not a member of the class')
+		await classGlobal[classInst.id].setError('')
+		await classGlobal[classInst.id].setLoading(true)
+		await LeaveClass.call(classInst.id)
+			.catch(classGlobal[classInst.id].setError)
+		await classGlobal[classInst.id].setLoading(false)
+	}
+
+	const removeFromClass = async (userId: string) => {
+		const accepted = await Alert({
+			title: 'Are you sure you want to remove this user from the class?',
+			confirmButtonText: 'Yes!'
+		})
+		if (!accepted) return
+		if (!classInst.members.includes(userId)) return await classGlobal[classInst.id].setError('User is not a member of the class')
+		await classGlobal[classInst.id].setError('')
+		await classGlobal[classInst.id].setLoading(true)
+		await AddClassMembers.call(classInst.id, [userId], false)
+			.catch(classGlobal[classInst.id].setError)
+		await classGlobal[classInst.id].setLoading(false)
+	}
+
+	const changeRole = async (userId: string, role: ClassUsers, add: boolean) => {
+		const accepted = await Alert({
+			title: `Are you sure you want to ${add ? 'add' : 'remove'} this role to the user?`,
+			confirmButtonText: 'Yes!'
+		})
+		if (!accepted) return
+		await classGlobal[classInst.id].setError('')
+		await classGlobal[classInst.id].setLoading(true)
+		await ChangeClassMemberRole.call(classInst.id, userId, role, add)
+			.catch(classGlobal[classInst.id].setError)
+		await classGlobal[classInst.id].setLoading(false)
+	}
+
+	onMounted(async () => {
+		if (!classGlobal[classInst.id].fetched.value && !classGlobal[classInst.id].loading.value) await fetchUsers()
+		await classGlobal[classInst.id].listener.startListener()
+	})
+	onUnmounted(async () => {
+		await classGlobal[classInst.id].listener.closeListener()
+	})
+
+	const admins = computed(() => classGlobal[classInst.id].users.value.filter((user) => classInst.admins.includes(user.id)))
+	const tutors = computed(() => classGlobal[classInst.id].users.value.filter((user) => classInst.tutors.includes(user.id)))
+	const members = computed(() => classGlobal[classInst.id].users.value.filter((user) => classInst.participants.includes(user.id)))
+	const requests = computed(() => classGlobal[classInst.id].users.value.filter((user) => classInst.requests.includes(user.id)))
+
+	return {
+		...classGlobal[classInst.id], admins, tutors, members, requests,
+		acceptRequest, leaveClass, removeFromClass, changeRole
+	}
 }
 
 const factory = ref(new ClassFactory()) as Ref<ClassFactory>
@@ -109,6 +246,9 @@ export const useCreateClass = () => {
 export const useClass = (classId: string) => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
+	const { message, setMessage } = useSuccessHandler()
+	const { id } = useAuth()
+	const { redirect } = useRedirectToAuth()
 	const classInst = computed({
 		get: () => global.classes.value.find((q) => q.id === classId) ?? null,
 		set: (q) => {
@@ -147,6 +287,29 @@ export const useClass = (classId: string) => {
 		})
 	})
 
+	const requestToJoinClass = async (join: boolean) => {
+		if (!id.value) return await redirect()
+		const accepted = await Alert({
+			title: `Are you sure you want to ${join ? 'join this class' : 'cancel this request'}?`,
+			confirmButtonText: 'Yes!'
+		})
+		if (!accepted) return
+		const isInClass = classInst.value?.members.includes(id.value)
+		if (isInClass) return await setError('You are already a member of the class')
+		const hasRequested = classInst.value?.requests.includes(id.value)
+		if (hasRequested && join) return await setError('You have already requested to join the class')
+		if (!hasRequested && !join) return await setError('You haven\'t requested to join the class yet')
+		await setError('')
+		await setLoading(true)
+		try {
+			await RequestToJoinClass.call(classId, join)
+			await setMessage(join ? 'Request sent successfully!' : 'Request cancelled successfully!')
+		} catch (e) {
+			await setError(e)
+		}
+		await setLoading(false)
+	}
+
 	onMounted(async () => {
 		await fetchClass()
 		await listener.startListener()
@@ -155,7 +318,7 @@ export const useClass = (classId: string) => {
 		await listener.closeListener()
 	})
 
-	return { error, loading, classInst }
+	return { error, loading, message, classInst, requestToJoinClass }
 }
 
 let editingClass = null as ClassEntity | null

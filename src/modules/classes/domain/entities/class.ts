@@ -62,8 +62,24 @@ export class ClassEntity extends BaseEntity {
 		return null
 	}
 
+	get membersAndRequests () {
+		return this.users[ClassUsers.members].concat(this.requests)
+	}
+
 	get members () {
 		return this.users[ClassUsers.members]
+	}
+
+	get admins () {
+		return this.users[ClassUsers.admins]
+	}
+
+	get tutors () {
+		return this.users[ClassUsers.tutors]
+	}
+
+	get participants () {
+		return this.users[ClassUsers.members].filter((id) => !this.admins.includes(id) && !this.tutors.includes(id))
 	}
 }
 

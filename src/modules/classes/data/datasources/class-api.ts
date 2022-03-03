@@ -50,7 +50,7 @@ export class ClassApiDataSource implements ClassBaseDataSource {
 	}
 
 	async leaveClass (id: string) {
-		await this.stranerdClient.post<{}, boolean>(`/${id}/leave`, {})
+		await this.stranerdClient.put<{}, boolean>(`/${id}/leave`, {})
 	}
 
 	async acceptRequest (id: string, userId: string, accept: boolean) {

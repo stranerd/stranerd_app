@@ -83,7 +83,7 @@ export const DeleteClass = new DeleteClassUseCase(classRepository)
 export const RequestToJoinClass = new RequestClassUseCase(classRepository)
 export const LeaveClass = new LeaveClassUseCase(classRepository)
 export const AcceptClassRequest = new AcceptRequestUseCase(classRepository)
-export const AddClassMembersUseCase = new AddMembersUseCase(classRepository)
+export const AddClassMembers = new AddMembersUseCase(classRepository)
 export const ChangeClassMemberRole = new ChangeMemberRoleUseCase(classRepository)
 
 export const AddGroup = new AddGroupUseCase(groupRepository)
