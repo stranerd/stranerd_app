@@ -6,7 +6,7 @@
 				<ion-text class="font-semibold truncate w-full">
 					<Institution :institutionId="testPrep.data.institutionId" />
 				</ion-text>
-				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl"
+				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl text-gray"
 					@click="openSaveModal(testPrep)" />
 			</div>
 			<IonText class="text-gray text-sm truncate">

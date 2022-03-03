@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-white rounded-xl flex flex-col gap-6 box-border justify-between p-4 text-main_dark">
+	<div class="bg-white rounded-xl flex flex-col box-border justify-between card-padding text-main_dark">
 		<div class="w-full justify-between items-start flex gap-2">
 			<ion-text class="font-semibold truncate w-full">{{ set.name }}</ion-text>
 			<router-link :to="`/study/sets/${set.id}`">
@@ -8,12 +8,11 @@
 		</div>
 
 		<div class="w-full flex items-center justify-between gap-2">
-			<Tag :index="4"
-				:tag="`${formatNumber(set.allSaved.length)} ${pluralize(set.allSaved.length, 'Item', 'Items')}`">
+			<Tag :tag="`${formatNumber(set.allSaved.length)} ${pluralize(set.allSaved.length, 'Item', 'Items')}`">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
 						<ion-icon :icon="folderOutline" class="mr-1" />
-						<ion-text class="text-xs font-semibold">{{ slotProps.tag }}</ion-text>
+						<ion-text class="font-semibold">{{ slotProps.tag }}</ion-text>
 					</span>
 				</template>
 			</Tag>

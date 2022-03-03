@@ -1,5 +1,5 @@
 <template>
-	<div class="text-xs md:text-sm md:px-4 flex flex-col md:gap-4 md:py-8">
+	<div class="flex flex-col md:gap-4">
 		<div class="bg-white md:rounded-xl flex items-center justify-between gap-2 md:p-4">
 			<ion-text class="text-main_dark leading-tight lg:text-3xl text-xl font-bold hidden md:inline">
 				All questions

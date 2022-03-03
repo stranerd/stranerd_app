@@ -11,7 +11,7 @@
 		</div>
 
 		<div class="flex justify-between items-center w-full gap-2">
-			<Tag :index="0" :tag="yearGap" class="text-sm" />
+			<Tag :tag="yearGap" />
 			<Share :link="`/study/preps/${institutionId}`"
 				:title="`${institution ? institution.name : 'Institution'}'s preps`"
 				cssClass="text-lg" text="Share this institution preps" />

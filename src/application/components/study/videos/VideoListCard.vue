@@ -8,7 +8,7 @@
 		</div>
 
 		<div class="w-full flex items-center justify-between gap-2">
-			<Tag :index="2" tag="Video">
+			<Tag tag="Video">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
 						<ion-icon :icon="playCircleOutline" class="text-base mr-1" />

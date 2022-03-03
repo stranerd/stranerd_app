@@ -11,8 +11,7 @@
 		</div>
 
 		<div class="w-full flex items-center justify-between gap-2">
-			<Tag :index="3"
-				:tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
+			<Tag :tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
 						<ion-icon :icon="copyOutline" class="mr-1" />

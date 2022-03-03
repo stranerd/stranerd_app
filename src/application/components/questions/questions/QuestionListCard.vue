@@ -1,9 +1,9 @@
 <template>
 	<router-link
-		:class="`p-4 rounded-xl bg-white flex flex-col justify-between w-full text-xs md:text-sm relative cursor-pointer `"
+		:class="`rounded-xl bg-white flex flex-col card-padding justify-between w-full relative cursor-pointer`"
 		:to="`/questions/${question.id}`">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-		<div class="flex flex-row items-center">
+		<div class="flex flex-row items-center text-sm">
 			<div class="flex items-center">
 				<avatar :id="question.userId" :size="28" :src="question.avatar" class="mr-2 " />
 				<span class="font-bold text-main_dark hidden lg:flex items-center gap-1">
@@ -23,9 +23,9 @@
 			</ion-button>
 		</div>
 
-		<DisplayHtml :html="question.trimmedBody" class="py-2 pb-1 text-main_dark leading-normal" />
+		<DisplayHtml :html="question.trimmedBody" class="text-main_dark leading-normal" />
 
-		<div class="flex justify-between items-center gap-4 text-gray">
+		<div class="flex justify-between items-center gap-4 text-gray text-sm">
 			<span class="text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 			<span v-if="question.attachments.length" class="font-italic">
 				<IonIcon :icon="image" /> IMG inside

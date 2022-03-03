@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-white p-6 rounded-xl">
 		<div
-			class=" rounded-xl bg-white flex flex-col text-xs md:text-sm ">
+			class=" rounded-xl bg-white flex flex-col">
 			<IonRippleEffect class="rounded-lg" />
 			<div class="flex flex-row items-center gap-4">
 				<avatar :id="question.userId" :size="28" :src="question.avatar" class="hidden lg:block" />
