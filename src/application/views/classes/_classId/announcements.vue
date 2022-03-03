@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ClassWrapper from '@app/components/classes/ClassWrapper.vue'
+import ClassWrapper from '@app/components/classes/classes/ClassWrapper.vue'
 
 export default defineComponent({
 	name: 'ClassClassIdAnnouncements',

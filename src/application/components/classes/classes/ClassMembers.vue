@@ -24,7 +24,7 @@
 import { defineComponent } from 'vue'
 import { useClassMembersList } from '@app/composable/classes/classes'
 import { ClassEntity } from '@modules/classes'
-import ClassMember from '@app/components/classes/ClassMember.vue'
+import ClassMember from '@app/components/classes/classes/ClassMember.vue'
 
 export default defineComponent({
 	name: 'ClassMembers',

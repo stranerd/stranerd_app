@@ -8,8 +8,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ClassWrapper from '@app/components/classes/ClassWrapper.vue'
-import ClassMembers from '@app/components/classes/ClassMembers.vue'
+import ClassWrapper from '@app/components/classes/classes/ClassWrapper.vue'
+import ClassMembers from '@app/components/classes/classes/ClassMembers.vue'
 
 export default defineComponent({
 	name: 'ClassClassIdMembers',

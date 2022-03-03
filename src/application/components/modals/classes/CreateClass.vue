@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useCreateClass } from '@app/composable/classes/classes'
-import ClassForm from '@app/components/classes/ClassForm.vue'
+import ClassForm from '@app/components/classes/classes/ClassForm.vue'
 
 export default defineComponent({
 	name: 'CreateClassModal',
