@@ -5,7 +5,7 @@
 			<div class="flex items-center justify-between">
 				<ion-icon :icon="chevronBackOutline" class="text-[23px] text-main_dark" @click="$router.go(-1)" />
 				<ion-title class="text-base font-bold text-main_dark">
-					{{ $route.meta.displayName ?? '' }}
+					{{ $route.meta.displayName ?? 'Stranerd' }}
 				</ion-title>
 				<Avatar v-if="isLoggedIn" :size="24" :src="user?.avatar"
 					@click="openUserDashboardMenu" />

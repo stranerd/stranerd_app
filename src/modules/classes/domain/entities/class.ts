@@ -1,5 +1,5 @@
 import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
-import { BaseEntity, Media } from '@modules/core'
+import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { appName } from '@utils/environment'
 
 type ClassConstructorArgs = {
@@ -44,7 +44,7 @@ export class ClassEntity extends BaseEntity {
 		this.id = id
 		this.name = name
 		this.description = description
-		this.photo = photo
+		this.photo = photo ? parseMedia(photo) : null
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
 		this.userRoles = generateDefaultRoles(userRoles)
@@ -56,6 +56,10 @@ export class ClassEntity extends BaseEntity {
 
 	get isUserVerified () {
 		return this.userRoles[appName].isVerified
+	}
+
+	get avatar () {
+		return null
 	}
 }
 

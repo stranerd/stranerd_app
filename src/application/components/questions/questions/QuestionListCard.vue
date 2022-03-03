@@ -1,7 +1,7 @@
 <template>
 	<router-link
-		:class="`rounded-xl bg-white flex flex-col card-padding justify-between w-full relative cursor-pointer`"
-		:to="`/questions/${question.id}`">
+		:to="`/questions/${question.id}`"
+		class="rounded-xl bg-white flex flex-col card-padding justify-between w-full relative cursor-pointer">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center text-sm">
 			<div class="flex items-center">
@@ -52,10 +52,6 @@ import { useAuth } from '@app/composable/auth/auth'
 export default defineComponent({
 	name: 'QuestionListCard',
 	props: {
-		colorClass: {
-			type: String,
-			default: 'bg-white'
-		},
 		question: {
 			type: QuestionEntity,
 			required: true

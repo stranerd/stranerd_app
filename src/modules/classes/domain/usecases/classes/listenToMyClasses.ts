@@ -1,5 +1,5 @@
 import { Listeners, QueryParams } from '@modules/core'
-import { ClassEntity } from '../../entities/class'
+import { ClassEntity, ClassUsers } from '../../entities/class'
 import { IClassRepository } from '../../irepositories/iclass'
 
 export class ListenToMyClassesUseCase {
@@ -11,7 +11,8 @@ export class ListenToMyClassesUseCase {
 
 	async call (userId: string, listener: Listeners<ClassEntity>) {
 		const conditions: QueryParams = {
-			where: [{ field: 'users.members', value: userId }],
+			where: [{ field: `users.${ClassUsers.members}`, value: userId }, { field: 'requests', value: 'userId' }],
+			whereType: 'or',
 			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}

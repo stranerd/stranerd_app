@@ -41,6 +41,14 @@ import { GetDiscussionsUseCase } from './domain/usecases/discussions/getDiscussi
 import { FindDiscussionUseCase } from './domain/usecases/discussions/findDiscussion'
 import { ListenToDiscussionUseCase } from './domain/usecases/discussions/listenToDiscussion'
 import { ListenToDiscussionsUseCase } from './domain/usecases/discussions/listenToDiscussions'
+import { AnnouncementEntity } from './domain/entities/announcement'
+import { ClassEntity, ClassUsers } from './domain/entities/class'
+import { GroupEntity } from './domain/entities/group'
+import { DiscussionEntity } from './domain/entities/discussion'
+import { AnnouncementFactory } from './domain/factories/announcement'
+import { ClassFactory } from './domain/factories/class'
+import { GroupFactory } from './domain/factories/group'
+import { DiscussionFactory } from './domain/factories/discussion'
 
 const announcementDataSource = new AnnouncementApiDataSource()
 const classDataSource = new ClassApiDataSource()
@@ -66,7 +74,7 @@ export const UpdateAnnouncement = new UpdateAnnouncementUseCase(announcementRepo
 export const DeleteAnnouncement = new DeleteAnnouncementUseCase(announcementRepository)
 
 export const AddClass = new AddClassUseCase(classRepository)
-export const GetClasses = new GetMyClassesUseCase(classRepository)
+export const GetMyClasses = new GetMyClassesUseCase(classRepository)
 export const FindClass = new FindClassUseCase(classRepository)
 export const ListenToClass = new ListenToClassUseCase(classRepository)
 export const ListenToMyClasses = new ListenToMyClassesUseCase(classRepository)
@@ -91,3 +99,8 @@ export const GetDiscussions = new GetDiscussionsUseCase(discussionRepository)
 export const FindDiscussion = new FindDiscussionUseCase(discussionRepository)
 export const ListenToDiscussion = new ListenToDiscussionUseCase(discussionRepository)
 export const ListenToDiscussions = new ListenToDiscussionsUseCase(discussionRepository)
+
+export { AnnouncementEntity, AnnouncementFactory }
+export { ClassEntity, ClassFactory, ClassUsers }
+export { GroupEntity, GroupFactory }
+export { DiscussionEntity, DiscussionFactory }
