@@ -70,7 +70,15 @@ export default defineComponent({
 	components: { IonFab, IonFabButton, IonFabList, IonText },
 	setup () {
 		const active = ref(false)
-		return { active, addOutline, helpCircleOutline, flashOutline, folderOutline, readerOutline, videocamOutline }
+		return {
+			active,
+			addOutline,
+			helpCircleOutline,
+			flashOutline,
+			folderOutline,
+			readerOutline,
+			videocamOutline
+		}
 	}
 })
 </script>

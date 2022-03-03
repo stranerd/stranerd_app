@@ -1,7 +1,7 @@
 import { IAnnouncementRepository } from '../../irepositories/iannouncement'
 import { AnnouncementFactory } from '../../factories/announcement'
 
-export class EditAnnouncementUseCase {
+export class UpdateAnnouncementUseCase {
 	private repository: IAnnouncementRepository
 
 	constructor (repository: IAnnouncementRepository) {

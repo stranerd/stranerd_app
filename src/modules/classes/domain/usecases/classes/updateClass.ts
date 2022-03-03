@@ -1,7 +1,7 @@
 import { IClassRepository } from '../../irepositories/iclass'
 import { ClassFactory } from '../../factories/class'
 
-export class EditClassUseCase {
+export class UpdateClassUseCase {
 	private repository: IClassRepository
 
 	constructor (repository: IClassRepository) {

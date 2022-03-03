@@ -1,7 +1,7 @@
 import { IGroupRepository } from '../../irepositories/igroup'
 import { GroupFactory } from '../../factories/group'
 
-export class EditGroupUseCase {
+export class UpdateGroupUseCase {
 	private repository: IGroupRepository
 
 	constructor (repository: IGroupRepository) {

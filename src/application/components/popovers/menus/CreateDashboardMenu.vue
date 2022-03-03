@@ -35,7 +35,7 @@
 				<ion-label class="font-bold">Ask a question</ion-label>
 			</div>
 		</router-link>
-		<router-link class="py-2 mx-auto flex gap-4 items-center text-gray hover:text-main_dark"
+		<router-link class="flex gap-2 items-center text-gray hover:text-main_dark"
 			to="/classes/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="peopleOutline" class="text-3xl" />

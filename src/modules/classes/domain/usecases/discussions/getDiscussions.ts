@@ -2,16 +2,16 @@ import { Conditions, QueryParams } from '@modules/core'
 import { CHAT_PAGINATION_LIMIT } from '@utils/constants'
 import { IDiscussionRepository } from '../../irepositories/idiscussion'
 
-export class GetDiscussionUseCase {
+export class GetDiscussionsUseCase {
 	private repository: IDiscussionRepository
 
 	constructor (repository: IDiscussionRepository) {
 		this.repository = repository
 	}
 
-	async call (path: [string, string], date?: number) {
+	async call (groupId: string, date?: number) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: -1 },
+			sort: [{ field: 'createdAt', desc: true }],
 			limit: CHAT_PAGINATION_LIMIT
 		}
 

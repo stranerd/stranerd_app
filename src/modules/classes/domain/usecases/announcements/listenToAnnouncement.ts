@@ -1,4 +1,4 @@
-import {  Listeners, QueryParams } from '@modules/core'
+import { Listeners } from '@modules/core'
 import { AnnouncementEntity } from '../../entities/announcement'
 import { IAnnouncementRepository } from '../../irepositories/iannouncement'
 
@@ -9,11 +9,7 @@ export class ListenToAnnouncementUseCase {
 		this.repository = repository
 	}
 
-	async call (path: string, listener: Listeners<AnnouncementEntity>, date?: number) {
-		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: 1 },
-			all: true
-		}
-		return await this.repository.listenToOne(path,  listener)
+	async call (classId: string, listener: Listeners<AnnouncementEntity>) {
+		return await this.repository.listenToOne(classId, listener)
 	}
 }

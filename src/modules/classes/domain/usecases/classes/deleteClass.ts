@@ -11,4 +11,3 @@ export class DeleteClassUseCase {
 		return await this.repository.delete(id)
 	}
 }
-

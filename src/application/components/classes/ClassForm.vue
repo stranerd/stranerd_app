@@ -1,37 +1,37 @@
 <template>
 	<form class="flex flex-col gap-4 text-center justify-center items-center" @submit.prevent="submit">
-		<div class="bg-light_gray w-full rounded-md flex items-center px-4">
-			<ion-text class="text-primary font-bold w-12">
+		<div class="bg-light_gray w-full rounded-md flex items-center p-4">
+			<ion-text class="text-primary font-bold">
 				TITLE
 			</ion-text>
 			<ion-input v-model="factory.name"
-				class="max-w-[1054px] !h-14 text-left"
+				class="w-full text-left"
 				placeholder="Name the class"
 				show-cancel-button="never"
-			></ion-input>
+			/>
 		</div>
-		<div class="bg-light_gray w-full rounded-md flex items-center px-4">
-			<ion-text class="text-primary font-bold w-12">
+		<div class="bg-light_gray w-full rounded-md flex items-center p-4">
+			<ion-text class="text-primary font-bold">
 				DESC
 			</ion-text>
 			<ion-input v-model="factory.name"
-				class="max-w-[1054px] !h-14 text-left"
+				class="w-full text-left"
 				placeholder="Add a short description"
 				show-cancel-button="never"
-			></ion-input>
+			/>
 		</div>
 
-		<hr class="text-faded_gray w-full" />
-		<div class="flex flex-col w-full">
+		<hr class="text-faded_gray w-full hidden" />
+		<div class="flex flex-col w-full hidden">
 			<ion-item class="w-full ion-item-transparent">
-				<ion-checkbox :value="true" class="ion-white" name="admin"></ion-checkbox>
+				<ion-checkbox :value="true" class="ion-white" name="admin" />
 				<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">Only admin and tutors can add
 					study materials
 				</ion-label>
 			</ion-item>
 
-			<ion-item class="w-full ion-item-transparent ">
-				<ion-checkbox :value="false" class="ion-white" name="admin"></ion-checkbox>
+			<ion-item class="w-full ion-item-transparent">
+				<ion-checkbox :value="false" class="ion-white" name="admin" />
 				<ion-label class="text-icon_inactive font-bold text-base ml-3 ion-white">All participants can add study
 					materials
 				</ion-label>
@@ -80,6 +80,13 @@ export default defineComponent({
 <style lang="scss" scoped>
 	ion-label {
 		--color: #8B9EB1 !important;
+	}
+
+	ion-input {
+		--padding-top: 0;
+		--padding-bottom: 0;
+		--padding-right: 0;
+		--padding-left: 0;
 	}
 
 	ion-label {
