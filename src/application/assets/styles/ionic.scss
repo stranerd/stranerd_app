@@ -285,11 +285,12 @@ ion-button {
 	--padding-start: 1.5rem;
 	--padding-end: 1.5rem;
 	--color: $color-white;
-	--border-radius: 8px;
+	border-radius: 1rem;
 	color: $color-white;
 
 	@media (max-width: 640px) {
 		--background: transparent;
+		border-radius: 0.5rem;
 		--padding-top: 0.5rem;
 		--padding-bottom: 0.5rem;
 		--padding-start: 1.25rem;

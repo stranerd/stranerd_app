@@ -22,6 +22,8 @@ import EditSet from '@app/components/modals/study/EditSet.vue'
 import SaveEntity from '@app/components/modals/study/SaveEntity.vue'
 import CreateClass from '@app/components/modals/classes/CreateClass.vue'
 import EditClass from '@app/components/modals/classes/EditClass.vue'
+import CreateGroup from '@app/components/modals/classes/CreateGroup.vue'
+import EditGroup from '@app/components/modals/classes/EditGroup.vue'
 
 export const modal = useModal(ref([]))
 const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion })
@@ -32,7 +34,7 @@ const StudyModal = modal.register('Study', {
 	CreateInstitution, EditInstitution, CreateCourse, EditCourse,
 	CreateTestPrep, EditTestPrep, CreatePastQuestion, EditPastQuestion
 })
-const ClassModal = modal.register('Class', { CreateClass, EditClass })
+const ClassModal = modal.register('Class', { CreateClass, EditClass, CreateGroup, EditGroup })
 
 export const useQuestionModal = () => QuestionModal
 export const useSessionModal = () => SessionModal

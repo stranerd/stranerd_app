@@ -17,7 +17,7 @@
 					</IonText>
 				</div>
 				<div v-if="classInst.members.includes(id)"
-					class="lg:rounded-b-xl flex items-center gap-2 nav-scroll px-2 border-bottom-line">
+					class="lg:rounded-b-xl flex items-center gap-2 nav-scroll px-4 md:px-6 border-bottom-line">
 					<router-link v-if="false" :to="`/classes/${classInst.id}/info`"
 						class="py-2 cursor-pointer flex gap-2 w-full items-center justify-center text-gray"
 						exact-active-class="border-b-2 !text-primary border-primary">
@@ -30,7 +30,7 @@
 						<IonIcon :icon="megaphoneOutline" class="text-xl" />
 						<IonText class="hidden md:inline">Announcements</IonText>
 					</router-link>
-					<router-link :to="`/classes/${classInst.id}/discussions`"
+					<router-link :to="`/classes/${classInst.id}/groups`"
 						class="py-2 cursor-pointer flex gap-2 w-full items-center justify-center text-gray"
 						exact-active-class="border-b-2 !text-primary border-primary">
 						<IonIcon :icon="chatboxEllipsesOutline" class="text-xl" />

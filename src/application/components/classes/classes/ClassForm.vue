@@ -7,7 +7,7 @@
 		</div>
 		<div class="bg-light_gray w-full rounded-md flex items-center p-4">
 			<ion-text class="text-primary font-bold">
-				TITLE
+				NAME
 			</ion-text>
 			<ion-input v-model="factory.name"
 				class="w-full text-left"
@@ -111,4 +111,3 @@ export default defineComponent({
 		}
 	}
 </style>
-
