@@ -4,7 +4,8 @@
 			class=" rounded-xl bg-white flex flex-col">
 			<IonRippleEffect class="rounded-lg" />
 			<div class="flex flex-row items-center gap-4">
-				<avatar :id="question.userId" :size="28" :src="question.avatar" class="hidden lg:block" />
+				<avatar :id="question.userId" :name="question.userBio.firstName" :size="28" :src="question.avatar"
+					class="hidden lg:block" />
 				<span class="font-bold text-main_dark hidden lg:flex gap-1 items-center">
 					<span>{{ question.userBio.fullName }}</span>
 					<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircle" color="primary" />
@@ -23,7 +24,8 @@
 			<DisplayHtml :html="question.body" class="py-2 text-main_dark mb-3 lg:mb-5" />
 			<div class="w-full flex flex-wrap items-center lg:justify-between">
 				<div class="lg:hidden flex items-center">
-					<avatar :id="question.userId" :size="20" :src="question.avatar" />
+					<avatar :id="question.userId" :name="question.userBio.firstName" :size="20"
+						:src="question.avatar" />
 					<span class="font-bold text-main_dark text-xs ml-2 flex gap-1 items-center">
 						<span>{{ question.userBio.fullName }}</span>
 						<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircle" color="primary" />

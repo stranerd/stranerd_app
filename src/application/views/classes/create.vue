@@ -13,6 +13,7 @@ import { useClassModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'ClassesCreate',
+	displayName: 'Create Class',
 	components: { IonContent, IonPage },
 	middlewares: ['isAuthenticated', async ({ from }) => {
 		useClassModal().openCreateClass()

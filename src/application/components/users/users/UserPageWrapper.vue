@@ -8,8 +8,10 @@
 					<div class="w-full md:w-10/12 lg:w-6/12 mx-auto">
 						<div class="text-body w-full flex gap-2 md:gap-4 items-center mb-4">
 							<div class="relative border-white border-4 rounded-full">
-								<Avatar :id="user.id" :size="72" :src="user.avatar" class="md:hidden" color="#C7D6E3" />
-								<Avatar :id="user.id" :size="90" :src="user.avatar" class="hidden md:block"
+								<Avatar :id="user.id" :name="user.bio.firstName" :size="72" :src="user.avatar"
+									class="md:hidden" />
+								<Avatar :id="user.id" :name="user.bio.firstName" :size="90" :src="user.avatar"
+									class="hidden md:block"
 									color="#C7D6E3" />
 							</div>
 							<div class="flex flex-col justify-start items-start gap-1">

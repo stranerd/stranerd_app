@@ -1,5 +1,10 @@
 <template>
 	<form class="flex flex-col gap-4 text-center justify-center items-center" @submit.prevent="submit">
+		<div class="flex justify-content items-center">
+			<FileInput accept="image/*" @files="catchFiles">
+				<img :src="imageLink || DEFAULT_PROFILE_IMAGE" alt="" class="w-16 h-16 rounded-full">
+			</FileInput>
+		</div>
 		<div class="bg-light_gray w-full rounded-md flex items-center p-4">
 			<ion-text class="text-primary font-bold">
 				TITLE
@@ -14,7 +19,7 @@
 			<ion-text class="text-primary font-bold">
 				DESC
 			</ion-text>
-			<ion-input v-model="factory.name"
+			<ion-input v-model="factory.description"
 				class="w-full text-left"
 				placeholder="Add a short description"
 				show-cancel-button="never"
@@ -49,16 +54,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { SetFactory } from '@modules/study'
+import { defineComponent, ref } from 'vue'
+import { ClassFactory } from '@modules/classes'
 import { IonCheckbox, IonItem, IonLabel, IonRippleEffect } from '@ionic/vue'
+import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
+import { addOutline } from 'ionicons/icons'
+import { useFileInputCallback } from '@app/composable/core/forms'
 
 export default defineComponent({
 	name: 'ClassForm',
 	components: { IonRippleEffect, IonItem, IonLabel, IonCheckbox },
 	props: {
 		factory: {
-			type: SetFactory,
+			type: ClassFactory,
 			required: true
 		},
 		submit: {
@@ -73,6 +81,14 @@ export default defineComponent({
 			type: String,
 			required: true
 		}
+	},
+	setup (props) {
+		const imageLink = ref((props.factory.photo as any)?.link ?? '')
+		const catchFiles = useFileInputCallback(async ([file]) => {
+			imageLink.value = window.URL.createObjectURL(file.data)
+			props.factory.photo = file
+		})
+		return { imageLink, DEFAULT_PROFILE_IMAGE, addOutline, catchFiles }
 	}
 })
 </script>

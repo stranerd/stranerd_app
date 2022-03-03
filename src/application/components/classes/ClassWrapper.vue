@@ -1,35 +1,62 @@
 <template>
 	<Justified>
-		<div>
-			<div class="blueTop px-4">
-				<div class="w-full md:w-11/12 lg:w-8/12 flex flex-col justify-between h-full min-h-[9rem]">
-					<div class="flex items-center justify-start mt-14">
-						<ion-icon :icon="easel" class="text-3xl text-white mr-4"></ion-icon>
-						<ion-text class="heading lg:text-2xl font-bold text-white text-left 	">
-							CAZDEO - Mathematics
-						</ion-text>
-					</div>
-					<div class="nav-scroll !item-start !justify-start !mt-5">
-						<router-link :to="`/classes/info`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							Announcement
-						</router-link>
-						<router-link :to="`/classes/discussion`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							Discussion
-						</router-link>
-						<router-link :to="`/classes/participants`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							Participants
-						</router-link>
-					</div>
+		<div v-if="classInst" class="lg:w-8/12 w-full mx-auto lg:px-4 lg:py-4">
+			<div class="rounded-xl bg-white">
+				<div class="w-full bg-orange h-16 md:h-24 lg:md:h-32 lg:rounded-t-xl" />
+				<div class="px-4 md:px-6 -mt-10">
+					<Avatar :name="classInst.name" :size="72" :src="classInst.photo" />
+				</div>
+				<div class="px-4 md:px-6 pt-2 pb-4 flex flex-col gap-1">
+					<IonText class="text-main_dark md:text-[20px] capitalize font-semibold">
+						{{ classInst.name }}
+					</IonText>
+					<IonText class="text-sm">{{ classInst.description }}</IonText>
+					<IonText class="text-xs text-gray">Created {{ formatTime(classInst.createdAt) }}</IonText>
+					<IonText class="text-sm font-semibold text-gray">
+						{{ classInst.members.length }} {{ pluralize(classInst.members.length, 'member', 'members') }}
+					</IonText>
+				</div>
+				<div class="lg:rounded-b-xl flex items-center gap-2 nav-scroll px-2">
+					<router-link v-if="false" :to="`/classes/${classInst.id}/info`"
+						class="py-2 cursor-pointer flex gap-2 w-full items-center justify-center text-gray"
+						exact-active-class="border-b-2 !text-primary border-primary">
+						<IonIcon :icon="informationCircleOutline" class="text-xl" />
+						<IonText class="hidden md:inline">Info</IonText>
+					</router-link>
+					<router-link :to="`/classes/${classInst.id}/announcements`"
+						class="py-2 cursor-pointer flex gap-2 w-full items-center justify-center text-gray"
+						exact-active-class="border-b-2 !text-primary border-primary">
+						<IonIcon :icon="megaphoneOutline" class="text-xl" />
+						<IonText class="hidden md:inline">Announcements</IonText>
+					</router-link>
+					<router-link :to="`/classes/${classInst.id}/discussions`"
+						class="py-2 cursor-pointer flex gap-2 w-full items-center justify-center text-gray"
+						exact-active-class="border-b-2 !text-primary border-primary">
+						<IonIcon :icon="chatboxEllipsesOutline" class="text-xl" />
+						<IonText class="hidden md:inline">Discussions</IonText>
+					</router-link>
+					<router-link :to="`/classes/${classInst.id}/questions`"
+						class="py-2 cursor-pointer flex gap-2 w-full items-center justify-center text-gray"
+						exact-active-class="border-b-2 !text-primary border-primary">
+						<IonIcon :icon="helpCircleOutline" class="text-xl" />
+						<IonText class="hidden md:inline">Questions</IonText>
+					</router-link>
+					<router-link :to="`/classes/${classInst.id}/library`"
+						class="py-2 cursor-pointer flex gap-2 w-full items-center justify-center text-gray"
+						exact-active-class="border-b-2 !text-primary border-primary">
+						<IonIcon :icon="libraryOutline" class="text-xl" />
+						<IonText class="hidden md:inline">Library</IonText>
+					</router-link>
+					<router-link :to="`/classes/${classInst.id}/members`"
+						class="py-2 cursor-pointer flex gap-2 w-full items-center justify-center text-gray"
+						exact-active-class="border-b-2 !text-primary border-primary">
+						<IonIcon :icon="peopleOutline" class="text-xl" />
+						<IonText class="hidden md:inline">Members</IonText>
+					</router-link>
 				</div>
 			</div>
-			<div class="p-4 md:w-11/12 lg:w-8/12 w-full mx-auto">
-				<slot />
+			<div class="px-4 lg:px-0 py-4">
+				<slot v-if="classInst.members.includes(id)" />
 			</div>
 		</div>
 	</Justified>
@@ -38,13 +65,42 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
-import { easel } from 'ionicons/icons'
+import {
+	chatboxEllipsesOutline,
+	helpCircleOutline,
+	informationCircleOutline,
+	libraryOutline,
+	megaphoneOutline,
+	peopleOutline
+} from 'ionicons/icons'
+import { useRoute } from 'vue-router'
+import { useClass } from '@app/composable/classes/classes'
+import { formatTime } from '@utils/dates'
+import { pluralize } from '@utils/commons'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'ClassWrapper',
 	components: { Justified },
 	setup () {
-		return { easel }
-	},
+		const { id } = useAuth()
+		const route = useRoute()
+		const { classId } = route.params
+		const { loading, error, classInst } = useClass(classId as string)
+		return {
+			chatboxEllipsesOutline,
+			informationCircleOutline,
+			helpCircleOutline,
+			libraryOutline,
+			megaphoneOutline,
+			peopleOutline,
+			loading,
+			error,
+			classInst,
+			formatTime,
+			pluralize,
+			id
+		}
+	}
 })
 </script>

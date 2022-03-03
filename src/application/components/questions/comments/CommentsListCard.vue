@@ -1,6 +1,7 @@
 <template>
 	<div class="flex mt-2 items-center">
-		<Avatar :id="comment.userId" :size="24" :src="comment.avatar" class="mr-2 ml-4" />
+		<Avatar :id="comment.userId" :name="comment.userBio.firstName" :size="24" :src="comment.avatar"
+			class="mr-2 ml-4" />
 		<ion-text class="text-dark_gray">
 			<b class="flex gap-1 items-center">
 				<span>{{ comment.userBio.firstName }}</span>

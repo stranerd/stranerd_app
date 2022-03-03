@@ -12,7 +12,8 @@
 			<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
 				<div class="lg:w-8/12 max-w-[60rem] w-full px-4 mx-auto flex items-center justify-between">
 					<div class="flex">
-						<Avatar :id="note.userId" :size="28" :src="note.userBio.photo" class="mx-2" />
+						<Avatar :id="note.userId" :name="note.userBio.firstName" :size="28" :src="note.userBio.photo"
+							class="mx-2" />
 						<ion-text class="text-icon_inactive flex items-center gap-1">
 							<span>by <b>{{ note.userBio.firstName }}</b></span>
 							<IonIcon v-if="note.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />

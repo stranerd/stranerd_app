@@ -17,7 +17,7 @@
 				</template>
 			</Tag>
 			<div class="flex items-center text-gray gap-2">
-				<Avatar :id="video.userId" :size="24" :src="video.userBio.photo" />
+				<Avatar :id="video.userId" :name="video.userBio.firstName" :size="24" :src="video.userBio.photo" />
 				<Share :link="video.shareLink" :text="video.description" :title="video.title" cssClass="text-xl" />
 				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" @click="openSaveModal(video)" />
 			</div>

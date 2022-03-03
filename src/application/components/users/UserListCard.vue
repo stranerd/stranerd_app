@@ -3,7 +3,7 @@
 		class="m-0 w-full bg-white rounded-xl flex flex-col md:gap-2 box-border p-4">
 		<div class="items-center flex">
 			<div class="relative border-white border-4 rounded-full grid place-items-center mr-4">
-				<Avatar :id="user.id" :size="67" :src="user.avatar" color="#C7D6E3" />
+				<Avatar :id="user.id" :name="user.bio.firstName" :size="67" :src="user.avatar" />
 			</div>
 			<div class="flex flex-col justify-start items-start">
 				<h2 class="lg:text-base text-xs font-bold mb-1 flex gap-1 items-center">

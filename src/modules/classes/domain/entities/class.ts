@@ -61,5 +61,9 @@ export class ClassEntity extends BaseEntity {
 	get avatar () {
 		return null
 	}
+
+	get members () {
+		return this.users[ClassUsers.members]
+	}
 }
 

@@ -19,7 +19,7 @@
 				</template>
 			</Tag>
 			<div class="flex items-center text-gray gap-2">
-				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
+				<Avatar :id="note.userId" :name="note.userBio.firstName" :size="24" :src="note.userBio.photo" />
 				<Share :link="note.shareLink" :text="note.description" :title="note.title" cssClass="text-xl" />
 				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" @click="openSaveModal(note)" />
 			</div>

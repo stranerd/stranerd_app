@@ -18,7 +18,7 @@ export class ListenToMyClassesUseCase {
 		}
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
-			return entity.users.members.includes(userId)
+			return entity.users[ClassUsers.members].includes(userId)
 		})
 	}
 }

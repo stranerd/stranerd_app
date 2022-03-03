@@ -3,7 +3,7 @@
 		<template v-slot:title>
 			Create a class
 		</template>
-		<ClassForm :error="error" :factory="factory" :loading="loading" :submit="createSet">
+		<ClassForm :error="error" :factory="factory" :loading="loading" :submit="createClass">
 			<template v-slot:buttonText>Create Class</template>
 		</ClassForm>
 	</Modal>
@@ -11,15 +11,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useCreateSet } from '@app/composable/study/sets'
+import { useCreateClass } from '@app/composable/classes/classes'
 import ClassForm from '@app/components/classes/ClassForm.vue'
 
 export default defineComponent({
 	name: 'CreateClassModal',
 	components: { ClassForm },
 	setup () {
-		const { createSet, factory, error, loading } = useCreateSet()
-		return { error, loading, createSet, factory }
+		const { createClass, factory, error, loading } = useCreateClass()
+		return { error, loading, createClass, factory }
 	}
 })
 </script>

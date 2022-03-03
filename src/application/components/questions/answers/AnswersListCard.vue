@@ -2,7 +2,8 @@
 	<div class="flex flex-col mt-1 py-3">
 		<div class="bg-white rounded-xl p-6 flex flex-col mb-4">
 			<div class="flex flex-row items-center">
-				<Avatar :id="answer.userId" :size="30" :src="answer.avatar" class="mr-2" />
+				<Avatar :id="answer.userId" :name="answer.userBio.firstName" :size="30" :src="answer.avatar"
+					class="mr-2" />
 				<span class="font-bold text-main_dark flex items-center gap-1">
 					<span>{{ answer.userBio.fullName }}</span>
 					<IonIcon v-if="answer.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
