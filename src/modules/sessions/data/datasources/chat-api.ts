@@ -11,8 +11,7 @@ export class ChatApiDataSource implements ChatBaseDataSource {
 	}
 
 	async create (data: ChatToModel) {
-		const chat = await this.stranerdClient.post<ChatToModel, ChatFromModel>('/', data)
-		return chat.id
+		return await this.stranerdClient.post<ChatToModel, ChatFromModel>('/', data)
 	}
 
 	async find (id: string) {

@@ -24,9 +24,9 @@ export const useCreateSession = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const sessionId = await AddSession.call(factory.value)
+				const session = await AddSession.call(factory.value)
 				useSessionModal().closeCreateSession()
-				await router.push(`/chat/${newSessionTutorIdBio?.id}`)
+				await router.push(`/chat/${session.tutorId}`)
 				factory.value.reset()
 				await setMessage('Session request successful.')
 			} catch (error) {

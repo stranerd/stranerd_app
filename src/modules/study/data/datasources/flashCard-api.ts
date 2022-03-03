@@ -11,8 +11,7 @@ export class FlashCardApiDataSource implements FlashCardBaseDataSource {
 	}
 
 	async create (data: FlashCardToModel) {
-		const flashCard = await this.stranerdClient.post<FlashCardToModel, FlashCardFromModel>('/', data)
-		return flashCard.id
+		return await this.stranerdClient.post<FlashCardToModel, FlashCardFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -42,6 +41,6 @@ export class FlashCardApiDataSource implements FlashCardBaseDataSource {
 	}
 
 	async update (id: string, data: FlashCardToModel) {
-		await this.stranerdClient.put<FlashCardToModel, FlashCardFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<FlashCardToModel, FlashCardFromModel>(`/${id}`, data)
 	}
 }

@@ -11,8 +11,7 @@ export class SetApiDataSource implements SetBaseDataSource {
 	}
 
 	async create (data: SetToModel) {
-		const set = await this.stranerdClient.post<SetToModel, SetFromModel>('/', data)
-		return set.id
+		return await this.stranerdClient.post<SetToModel, SetFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -42,7 +41,7 @@ export class SetApiDataSource implements SetBaseDataSource {
 	}
 
 	async update (id: string, data: SetToModel) {
-		await this.stranerdClient.put<SetToModel, SetFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<SetToModel, SetFromModel>(`/${id}`, data)
 	}
 
 	async saveProp (setId: string, type: string, propIds: string[]) {

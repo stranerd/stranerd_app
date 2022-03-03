@@ -87,9 +87,9 @@ export const useCreateFlashCard = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const flashCardId = await AddFlashCard.call(factory.value)
+				const flashCard = await AddFlashCard.call(factory.value)
 				await setMessage('FlashCard submitted successfully')
-				await router.replace(`/study/flashCards/${flashCardId}`)
+				await router.replace(`/study/flashCards/${flashCard.id}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

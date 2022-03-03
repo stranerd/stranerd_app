@@ -140,11 +140,11 @@ export const useCreateQuestion = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const questionId = await AddQuestion.call(factory.value)
+				const question = await AddQuestion.call(factory.value)
 				await setMessage('Question submitted successfully')
 				factory.value.reset()
 				useQuestionModal().closeCreateQuestion()
-				await router.replace(`/questions/${questionId}`)
+				await router.replace(`/questions/${question.id}`)
 			} catch (error) {
 				await setError(error)
 			}

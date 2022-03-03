@@ -3,7 +3,6 @@ import {
 	AddPastQuestion,
 	DeletePastQuestion,
 	EditPastQuestion,
-	FindPastQuestion,
 	GetPastQuestions,
 	PastQuestionEntity,
 	PastQuestionFactory,
@@ -69,8 +68,7 @@ export const useCreatePastQuestion = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const id = await AddPastQuestion.call(factory.value)
-				const pastQuestion = await FindPastQuestion.call(id)
+				const pastQuestion = await AddPastQuestion.call(factory.value)
 				if (pastQuestion) pushToGlobalPastQuestions(pastQuestion)
 				factory.value.reset()
 				useStudyModal().closeCreatePastQuestion()
@@ -105,8 +103,7 @@ export const useEditPastQuestion = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				await EditPastQuestion.call(editingPastQuestion!.id, factory.value)
-				const updatedPastQuestion = await FindPastQuestion.call(editingPastQuestion!.id)
+				const updatedPastQuestion = await EditPastQuestion.call(editingPastQuestion!.id, factory.value)
 				if (updatedPastQuestion) pushToGlobalPastQuestions(updatedPastQuestion)
 				factory.value.reset()
 				useStudyModal().closeEditPastQuestion()

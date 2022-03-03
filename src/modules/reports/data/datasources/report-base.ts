@@ -2,7 +2,7 @@ import { Listeners, QueryParams, QueryResults } from '@modules/core'
 import { ReportFromModel, ReportToModel } from '../models/report'
 
 export interface ReportBaseDataSource {
-	create: (data: ReportToModel) => Promise<string>
+	create: (data: ReportToModel) => Promise<ReportFromModel>
 	get: (query: QueryParams) => Promise<QueryResults<ReportFromModel>>
 	find: (id: string) => Promise<ReportFromModel | null>
 	delete: (id: string) => Promise<void>

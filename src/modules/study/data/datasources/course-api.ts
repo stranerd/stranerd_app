@@ -11,8 +11,7 @@ export class CourseApiDataSource implements CourseBaseDataSource {
 	}
 
 	async create (data: CourseToModel) {
-		const course = await this.stranerdClient.post<CourseToModel, CourseFromModel>('/', data)
-		return course.id
+		return await this.stranerdClient.post<CourseToModel, CourseFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -42,6 +41,6 @@ export class CourseApiDataSource implements CourseBaseDataSource {
 	}
 
 	async update (id: string, data: CourseToModel) {
-		await this.stranerdClient.put<CourseToModel, CourseFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<CourseToModel, CourseFromModel>(`/${id}`, data)
 	}
 }

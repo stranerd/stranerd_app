@@ -3,7 +3,7 @@ import { ReviewToModel } from '../../data/models/review'
 import { ReviewEntity } from '../entities/review'
 
 export interface IReviewRepository {
-	create: (data: ReviewToModel) => Promise<string>
+	create: (data: ReviewToModel) => Promise<ReviewEntity>
 	get: (query: QueryParams) => Promise<QueryResults<ReviewEntity>>
 	listenToOne: (id: string, listener: Listeners<ReviewEntity>) => Promise<() => void>
 	listenToMany: (query: QueryParams, listener: Listeners<ReviewEntity>, matches: (entity: ReviewEntity) => boolean) => Promise<() => void>

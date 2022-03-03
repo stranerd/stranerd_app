@@ -2,7 +2,7 @@ import { Listeners, QueryParams, QueryResults } from '@modules/core'
 import { SessionFromModel, SessionToModel } from '../models/session'
 
 export interface SessionBaseDataSource {
-	create: (data: SessionToModel) => Promise<string>
+	create: (data: SessionToModel) => Promise<SessionFromModel>
 	accept: (id: string, accepted: boolean) => Promise<void>
 	cancel: (id: string) => Promise<void>
 	end: (id: string) => Promise<void>
