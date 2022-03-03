@@ -26,20 +26,32 @@
 			<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" class="py-3" />
 
 			<div class="flex flex-row items-center justify-between mt-5">
-				<div class="flex flex-row items-center font-bold">
+				<div class="flex flex-row items-center font-normal">
 					<div
 						:class="[answer.votes.find((v) => v.vote === 1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
 						class="flex flex-row items-center mr-2">
-						<span class="mr-1">({{ formatNumber(answer.upVotes) }})</span>
+						
 						<IonIcon :icon="thumbsUpOutline" class="text-[22px] cursor-pointer"
 							@click="() => voteAnswer(true)" />
+						<span class="ml-1">{{ formatNumber(answer.upVotes) }}</span>
 					</div>
+
 					<div
 						:class="[answer.votes.find((v) => v.vote === -1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
-						class="flex flex-row items-center">
-						<span class="mr-1 ">({{ formatNumber(answer.downVotes) }})</span>
+						class="flex flex-row items-center mr-2">
+					
 						<IonIcon :icon="thumbsDownOutline" class="text-[22px] cursor-pointer"
 							@click="() => voteAnswer(false)" />
+						<span class="ml-1 ">{{ formatNumber(answer.downVotes) }}</span>
+					</div>
+					
+					<div
+
+						class="flex flex-row items-center text-icon_inactive">
+					
+						<IonIcon :icon="chatbubbleOutline" class="text-[22px] cursor-pointer"
+							@click="() => voteAnswer(false)" />
+						<span class="ml-1 ">{{ formatNumber(answer.downVotes) }}</span>
 					</div>
 				</div>
 				<div class="flex flex-row items-center text-icon_inactive font-bold gap-4">
@@ -57,17 +69,19 @@
 				</div>
 			</div>
 
-			<form class="mt-6 p-3 flex flex-row items-center border-faded_gray border rounded-xl"
+			<form class="mt-6 px-2 flex flex-row items-center bg-new_gray  rounded-lg"
 				@submit.prevent="createComment">
 				<ion-input v-model="commentFactory.body" :autoGrow="true" :rows="1"
-					class="px-1 focus:outline-none placeholder-gray-400 mt-0 pt-0"
+					class="focus:outline-none placeholder-gray-400 mt-0 pt-0"
 					placeholder="Add comment" />
 				<IonIcon :icon="paperPlaneOutline" class="text-[22px] mr-2 text-primary cursor-pointer"
 					@click="createComment" />
 			</form>
+
+			<AnswerCommentsList v-if="showComments" :answerId="answer.id" class="mt-3" />
 		</div>
 
-		<AnswerCommentsList v-if="showComments" :answerId="answer.id" />
+	
 	</div>
 	<PageLoading v-if="loading || commentLoading" />
 </template>
@@ -83,7 +97,8 @@ import {
 	paperPlaneOutline,
 	starOutline,
 	thumbsDownOutline,
-	thumbsUpOutline
+	thumbsUpOutline,
+	chatbubbleOutline
 } from 'ionicons/icons'
 import PhotoList from '@app/components/core/media/PhotoList.vue'
 import { useAnswer } from '@app/composable/questions/answers'
@@ -129,7 +144,7 @@ export default defineComponent({
 		} = useCreateAnswerComments(props.answer.id)
 
 		return {
-			id,
+			id,chatbubbleOutline,
 			isLoggedIn,
 			user,
 			voteAnswer,

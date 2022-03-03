@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-white md:p-6 rounded-xl">
+	<div class="bg-white md:p-6 md:rounded-xl border-b border-new_gray pb-4">
 		<div
 			class=" rounded-xl bg-white flex flex-col">
 			<IonRippleEffect class="rounded-lg" />
