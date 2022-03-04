@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-if="sliced" class="w-full flex justify-between mb-4 px-4 md:px-0">
+		<div v-if="sliced" class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 			<span class="heading font-bold text-main_dark">
 				Continue test preps
 			</span>

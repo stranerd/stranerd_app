@@ -1,13 +1,14 @@
 <template>
-	<form class="flex flex-col gap-4 justify-center" @submit.prevent="submit">
+	<form class="flex flex-col md:flex-row md:items-end gap-2 justify-center" @submit.prevent="submit">
 		<ion-textarea v-model="factory.body"
 			class="w-full border border-new_gray"
-			placeholder="Announcement"
+			placeholder="Post an announcement"
 			rows="3"
 			show-cancel-button="never"
 		/>
 
-		<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full hidden" size="small" type="submit">
+		<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full md:w-auto" size="small"
+			type="submit">
 			<slot name="buttonText">Submit</slot>
 			<ion-ripple-effect class="rounded-lg" />
 		</ion-button>

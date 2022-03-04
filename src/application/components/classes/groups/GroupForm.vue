@@ -1,12 +1,13 @@
 <template>
-	<form class="flex flex-col gap-4 justify-center" @submit.prevent="submit">
+	<form class="flex flex-col md:flex-row md:items-center gap-2" @submit.prevent="submit">
 		<ion-input v-model="factory.name"
-			class="w-full border border-new_gray"
-			placeholder="New Group Name"
+			class="flex-grow w-full border border-new_gray"
+			placeholder="Enter a topic"
 			show-cancel-button="never"
 		/>
 
-		<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full hidden" size="small" type="submit">
+		<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full md:w-auto" size="small"
+			type="submit">
 			<slot name="buttonText">Submit</slot>
 			<ion-ripple-effect class="rounded-lg" />
 		</ion-button>

@@ -1,6 +1,6 @@
 <template>
-	<IonFooter class="!border-top-line ion-no-border">
-		<IonToolbar class="lg:hidden !bg-white">
+	<IonFooter class="ion-no-border">
+		<IonToolbar class="lg:hidden !bg-white border-top-line">
 			<div class="flex justify-around items-center text-sm">
 				<router-link class="col-span-1 text-faded_gray flex flex-col items-center justify-center"
 					exact-active-class="!text-main_dark"

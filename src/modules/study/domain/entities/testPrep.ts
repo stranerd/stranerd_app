@@ -40,6 +40,10 @@ export class TestPrepEntity extends BaseEntity {
 	get shareLink () {
 		return `/study/preps/${this.data.institutionId}`
 	}
+
+	search (search: string) {
+		return this.name.toLowerCase().includes(search.toLowerCase())
+	}
 }
 
 type TestPrepConstructorArgs = {

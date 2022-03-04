@@ -1,30 +1,42 @@
 <template>
 	<div class="flex flex-col gap-4">
-		<div v-if="requests.length" class="block md:gap-2">
-			<IonText>Requests</IonText>
-			<ClassMember v-for="request in requests" :key="request.hash" :classInst="classInst" :user="request" />
+		<div v-if="classInst.admins.includes(id)" class="px-4 md:px-0">
+			<IonSegment v-model="tab"
+				class="w-full bg-new_gray text-gray border border-new_gray border-xl md:border-white">
+				<IonSegmentButton class="w-full" value="members">Members</IonSegmentButton>
+				<IonSegmentButton class="w-full" value="requests">Requests</IonSegmentButton>
+			</IonSegment>
 		</div>
-		<div v-if="admins.length" class="block md:gap-2">
-			<IonText>Admins</IonText>
-			<ClassMember v-for="admin in admins" :key="admin.hash" :classInst="classInst" :user="admin" />
-		</div>
-		<div v-if="tutors.length" class="block md:gap-2">
-			<IonText>Tutors</IonText>
-			<ClassMember v-for="tutor in tutors" :key="tutor.hash" :classInst="classInst" :user="tutor" />
-		</div>
-		<div v-if="members.length" class="block md:gap-2">
-			<IonText>Others</IonText>
-			<ClassMember v-for="member in members" :key="member.hash" :classInst="classInst" :user="member" />
-		</div>
+		<template v-if="tab === 'members'">
+			<div v-if="admins.length" class="block md:gap-2">
+				<IonText>Admins</IonText>
+				<ClassMember v-for="admin in admins" :key="admin.hash" :classInst="classInst" :user="admin" />
+			</div>
+			<div v-if="tutors.length" class="block md:gap-2">
+				<IonText>Tutors</IonText>
+				<ClassMember v-for="tutor in tutors" :key="tutor.hash" :classInst="classInst" :user="tutor" />
+			</div>
+			<div v-if="members.length" class="block md:gap-2">
+				<IonText>Others</IonText>
+				<ClassMember v-for="member in members" :key="member.hash" :classInst="classInst" :user="member" />
+			</div>
+		</template>
+		<template v-if="tab === 'requests'">
+			<div class="block md:gap-2">
+				<ClassMember v-for="request in requests" :key="request.hash" :classInst="classInst" :user="request" />
+			</div>
+		</template>
 		<PageLoading v-if="loading" />
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useClassMembersList } from '@app/composable/classes/classes'
 import { ClassEntity } from '@modules/classes'
 import ClassMember from '@app/components/classes/classes/ClassMember.vue'
+import { IonSegment, IonSegmentButton } from '@ionic/vue'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'ClassMembers',
@@ -34,10 +46,12 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { ClassMember },
+	components: { ClassMember, IonSegment, IonSegmentButton },
 	setup (props) {
+		const { id } = useAuth()
+		const tab = ref('members')
 		const { loading, error, admins, tutors, members, requests } = useClassMembersList(props.classInst)
-		return { admins, tutors, members, loading, error, requests }
+		return { id, tab, admins, tutors, members, loading, error, requests }
 	}
 })
 </script>
@@ -51,6 +65,7 @@ export default defineComponent({
 		& > ion-text {
 			font-weight: 600;
 			padding: 0 1rem;
+			color: $color-mainDark;
 			@media (min-width: $md) {
 				padding: 0;
 			}
@@ -59,5 +74,27 @@ export default defineComponent({
 		@media (min-width: $md) {
 			background: inherit;
 		}
+	}
+
+	ion-segment {
+		border-radius: 0.5rem;
+	}
+
+	ion-segment-button {
+		--background-checked: $color-white;
+		--background-focused: $color-white;
+		--indicator-color: $color-white;
+		--padding-top: 0.75rem;
+		--padding-bottom: 0.75rem;
+		font-weight: bold;
+		border-radius: 0.5rem;
+		text-transform: capitalize;
+		max-width: unset;
+		color: $color-gray;
+	}
+
+	.segment-button-checked {
+		color: $color-gray !important;
+		background: $color-white;
 	}
 </style>

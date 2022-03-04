@@ -59,6 +59,10 @@ export class NoteEntity extends BaseEntity {
 	get shareLink () {
 		return `/study/notes/${this.id}`
 	}
+
+	search (search: string) {
+		return this.title.toLowerCase().includes(search.toLowerCase()) || this.title.toLowerCase().includes(search.toLowerCase())
+	}
 }
 
 type NoteConstructorArgs = {

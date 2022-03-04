@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col gap-2 md:gap-4">
+	<div class="showcase-flex">
 		<EmptyState v-if="!loading && !error && groups.length === 0"
 			info="This class has no groups yet!" />
 		<GroupForm v-if="classInst.admins.includes(id)"
@@ -10,7 +10,7 @@
 			class="bg-white px-4 md:py-4 rounded-xl"
 		>
 			<template v-slot:buttonText>
-				Create Group
+				Start new discussion
 			</template>
 		</GroupForm>
 		<GroupsListCard v-for="group in groups" :key="group.hash" :classInst="classInst" :group="group" />

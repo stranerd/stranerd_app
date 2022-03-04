@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col gap-2 md:gap-4">
+	<div class="showcase-flex">
 		<QuestionForm
 			:error="createError"
 			:factory="factory"

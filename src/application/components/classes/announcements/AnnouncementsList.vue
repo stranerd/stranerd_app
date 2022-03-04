@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col gap-2 md:gap-4">
+	<div class="showcase-flex">
 		<EmptyState v-if="!loading && !error && announcements.length === 0"
 			info="This class has no announcements yet!" />
 		<AnnouncementForm v-if="classInst.admins.includes(id)"
@@ -10,7 +10,7 @@
 			class="bg-white px-4 md:py-4 rounded-xl"
 		>
 			<template v-slot:buttonText>
-				Post Announcement
+				Post
 			</template>
 		</AnnouncementForm>
 		<AnnouncementsListCard v-for="announcement in announcements" :key="announcement.hash"

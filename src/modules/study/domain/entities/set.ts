@@ -53,6 +53,10 @@ export class SetEntity extends BaseEntity {
 	get shareLink () {
 		return `/study/sets/${this.id}`
 	}
+
+	search (search: string) {
+		return this.name.toLowerCase().includes(search.toLowerCase())
+	}
 }
 
 export enum SetType {
