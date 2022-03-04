@@ -1,5 +1,5 @@
 <template>
-	<ion-toolbar class="hidden lg:flex border-0 z-50 h-20">
+	<ion-toolbar class="hidden lg:flex border-0 h-20">
 		<div class="flex items-center">
 			<div class="w-[16%]">
 				<router-link class="flex items-center w-full justify-center" to="/">

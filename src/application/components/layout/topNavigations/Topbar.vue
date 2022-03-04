@@ -1,5 +1,5 @@
 <template>
-	<ion-header class="block ion-no-border z-40 inset-x-0 w-full lg:shadow-md">
+	<ion-header class="block ion-no-border inset-x-0 w-full lg:shadow-md z-10">
 		<ion-toolbar class="lg:hidden bg-white px-4 border-bottom-line md:h-auto flex items-center justify-center">
 			<div class="flex items-center justify-between">
 				<router-link to="/">

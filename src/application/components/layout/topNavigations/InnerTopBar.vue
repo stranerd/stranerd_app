@@ -1,5 +1,5 @@
 <template>
-	<ion-header class="headerShadow ion-no-border">
+	<ion-header class="headerShadow ion-no-border z-10">
 		<!-- Small screens -->
 		<ion-toolbar class="flex md:hidden bg-white px-2 items-center">
 			<div class="flex items-center justify-between">
@@ -17,7 +17,7 @@
 
 		<!-- medium screens -->
 		<ion-toolbar
-			class="hidden lg:hidden md:flex bg-white px-2 items-center border-0 z-50">
+			class="hidden lg:hidden md:flex bg-white px-2 items-center border-0">
 			<div class="flex items-center justify-between">
 				<Avatar v-if="isLoggedIn" :name="user?.bio.firstName" :size="24" :src="user?.avatar"
 					@click="openUserDashboardMenu" />

@@ -393,8 +393,6 @@ ion-item {
 	--inner-border-width: 0px !important;
 }
 
-$border: 2px solid $color-newGray !important;
-
 .border-bottom-line {
 	@media (max-width: $md) {
 		border-bottom: $border;
