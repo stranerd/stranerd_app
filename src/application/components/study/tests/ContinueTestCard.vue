@@ -8,7 +8,9 @@
 						:institutionId="testPrep.data.institutionId" />
 					<span v-else>{{ test.name }}</span>
 				</ion-text>
-				<ion-icon :icon="arrowForwardCircleOutline" class="text-xl text-primary" />
+				<router-link :to="`/study/tests/${test.id}`">
+					<ion-icon :icon="arrowForwardCircleOutline" class="text-xl text-primary" />
+				</router-link>
 			</div>
 
 			<ion-text class="text-sm text-left w-full text-gray truncate">

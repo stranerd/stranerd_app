@@ -16,7 +16,7 @@ export default defineComponent({
 	.popover {
 		min-width: 10rem;
 		@media (max-width: $md) {
-			position: fixed;
+			// position: fixed;
 			bottom: 0;
 			left: 0;
 			right: 0;
