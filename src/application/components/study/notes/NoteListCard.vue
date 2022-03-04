@@ -32,7 +32,6 @@ import {
 	arrowForwardCircleOutline,
 	bookmark,
 	bookmarkOutline,
-	checkmarkCircleOutline,
 	documentOutline,
 	downloadOutline,
 	ellipsisVerticalOutline
@@ -69,7 +68,6 @@ export default defineComponent({
 			ellipsisVerticalOutline,
 			documentOutline,
 			downloadOutline,
-			checkmarkCircleOutline,
 			bookmark,
 			bookmarkOutline,
 			download,

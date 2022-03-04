@@ -29,13 +29,7 @@
 import { computed, defineComponent } from 'vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { VideoEntity } from '@modules/study'
-import {
-	arrowForwardCircleOutline,
-	bookmark,
-	bookmarkOutline,
-	checkmarkCircleOutline,
-	playCircleOutline
-} from 'ionicons/icons'
+import { arrowForwardCircleOutline, bookmark, bookmarkOutline, playCircleOutline } from 'ionicons/icons'
 import { useUserSetList } from '@app/composable/users/users/sets'
 import { openSaveModal } from '@app/composable/study/menus'
 
@@ -53,7 +47,6 @@ export default defineComponent({
 		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(props.video.id)))
 		return {
 			playCircleOutline,
-			checkmarkCircleOutline,
 			arrowForwardCircleOutline,
 			bookmark,
 			bookmarkOutline,

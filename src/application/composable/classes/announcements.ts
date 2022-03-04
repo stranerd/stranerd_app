@@ -1,0 +1,177 @@
+import { onMounted, onUnmounted, ref, Ref } from 'vue'
+import {
+	AddAnnouncement,
+	AnnouncementEntity,
+	AnnouncementFactory,
+	ClassEntity,
+	DeleteAnnouncement,
+	GetAnnouncements,
+	ListenToAnnouncements,
+	UpdateAnnouncement
+} from '@modules/classes'
+import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { Alert } from '@utils/dialog'
+import { Router, useRouter } from 'vue-router'
+import { useClassModal } from '@app/composable/core/modals'
+
+const global = {} as Record<string, {
+	announcements: Ref<AnnouncementEntity[]>
+	fetched: Ref<boolean>
+	hasMore: Ref<boolean>
+	listener: ReturnType<typeof useListener>
+} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+
+export const useAnnouncementList = (classId: string) => {
+	if (global[classId] === undefined) {
+		const listener = useListener(async () => {
+			return await ListenToAnnouncements.call(classId, {
+				created: async (entity) => {
+					const index = global[classId].announcements.value.findIndex((c) => c.id === entity.id)
+					if (index === -1) global[classId].announcements.value.unshift(entity)
+					else global[classId].announcements.value.splice(index, 1, entity)
+				},
+				updated: async (entity) => {
+					const index = global[classId].announcements.value.findIndex((c) => c.id === entity.id)
+					if (index === -1) global[classId].announcements.value.unshift(entity)
+					else global[classId].announcements.value.splice(index, 1, entity)
+				},
+				deleted: async (entity) => {
+					global[classId].announcements.value = global[classId].announcements.value.filter((c) => c.id !== entity.id)
+				}
+			})
+		})
+		global[classId] = {
+			announcements: ref([]),
+			fetched: ref(false),
+			hasMore: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
+	}
+
+	const fetchAnnouncements = async () => {
+		await global[classId].setError('')
+		try {
+			await global[classId].setLoading(true)
+			const announcements = await GetAnnouncements.call(classId)
+			global[classId].announcements.value = announcements.results
+			global[classId].fetched.value = !!announcements.pages.next
+			global[classId].fetched.value = true
+		} catch (error) {
+			await global[classId].setError(error)
+		}
+		await global[classId].setLoading(false)
+	}
+
+	onMounted(async () => {
+		if (!global[classId].fetched.value && !global[classId].loading.value) await fetchAnnouncements()
+		await global[classId].listener.startListener()
+	})
+	onUnmounted(async () => {
+		await global[classId].listener.closeListener()
+	})
+
+	return { ...global[classId], fetchOlderAnnouncements: fetchAnnouncements }
+}
+
+let announcementClass = null as ClassEntity | null
+export const getAnnouncementClass = () => announcementClass
+export const openAnnouncementModal = async (classInst: ClassEntity, router: Router) => {
+	announcementClass = classInst
+	await router.push(`/classes/${classInst.id}/announcements/create`)
+}
+
+export const useCreateAnnouncement = () => {
+	const router = useRouter()
+	const factory = ref(new AnnouncementFactory()) as Ref<AnnouncementFactory>
+	const { loading, setLoading } = useLoadingHandler()
+	const { error, setError } = useErrorHandler()
+	const { setMessage } = useSuccessHandler()
+
+	if (!announcementClass) useClassModal().closeCreateAnnouncement()
+	factory.value.classId = announcementClass!.id
+
+	const createAnnouncement = async () => {
+		await setError('')
+		if (factory.value.valid && !loading.value) {
+			try {
+				await setLoading(true)
+				const announcement = await AddAnnouncement.call(factory.value)
+				await setMessage('Announcement posted successfully.')
+				factory.value.reset()
+				useClassModal().closeCreateAnnouncement()
+				await router.push(`/classes/${announcement.classId}/announcements/${announcement.id}`)
+			} catch (error) {
+				await setError(error)
+			}
+			await setLoading(false)
+		} else factory.value.validateAll()
+	}
+
+	return {
+		factory, error, loading, createAnnouncement
+	}
+}
+
+let editingAnnouncement = null as AnnouncementEntity | null
+export const getEditingAnnouncement = () => editingAnnouncement
+export const openAnnouncementEditModal = async (announcement: AnnouncementEntity, router: Router) => {
+	editingAnnouncement = announcement
+	await router.push(`/classes/${announcement.classId}/announcements/${announcement.id}/edit`)
+}
+export const useEditAnnouncement = () => {
+	const { error, setError } = useErrorHandler()
+	const { loading, setLoading } = useLoadingHandler()
+	const { setMessage } = useSuccessHandler()
+	const factory = ref(new AnnouncementFactory()) as Ref<AnnouncementFactory>
+	const router = useRouter()
+
+	if (editingAnnouncement) factory.value.loadEntity(editingAnnouncement)
+	else useClassModal().closeEditAnnouncement()
+
+	const editAnnouncement = async () => {
+		await setError('')
+		if (factory.value.valid && !loading.value) {
+			try {
+				await setLoading(true)
+				const announcement = await UpdateAnnouncement.call(editingAnnouncement!.id, factory.value)
+				await setMessage('Announcement edited successfully')
+				factory.value.reset()
+				useClassModal().closeEditAnnouncement()
+				await router.push(`/classes/${announcement.classId}/announcements/${announcement.id}`)
+			} catch (error) {
+				await setError(error)
+			}
+			await setLoading(false)
+		} else factory.value.validateAll()
+	}
+
+	return { error, loading, factory, editAnnouncement }
+}
+
+export const useDeleteAnnouncement = (announcementId: string) => {
+	const { loading, setLoading } = useLoadingHandler()
+	const { error, setError } = useErrorHandler()
+	const { setMessage } = useSuccessHandler()
+
+	const deleteAnnouncement = async () => {
+		await setError('')
+		const accepted = await Alert({
+			title: 'Are you sure you want to delete this announcement?',
+			confirmButtonText: 'Yes, delete'
+		})
+		if (accepted) {
+			await setLoading(true)
+			try {
+				await DeleteAnnouncement.call(announcementId)
+				await setMessage('Announcement deleted successfully')
+			} catch (error) {
+				await setError(error)
+			}
+			await setLoading(false)
+		}
+	}
+
+	return { loading, error, deleteAnnouncement }
+}

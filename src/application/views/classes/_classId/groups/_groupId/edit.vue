@@ -15,7 +15,7 @@ import { IonContent, IonPage } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ClassesClassIdGroupsGroupIdEdit',
-	displayName: 'Edit Group',
+	displayName: 'Edit Discussion Group',
 	components: { IonContent, IonPage },
 	middlewares: ['isAuthenticated', async ({ from, to }) => {
 		const { id } = useAuth()

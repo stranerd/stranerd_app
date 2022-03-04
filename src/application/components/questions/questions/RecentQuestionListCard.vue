@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { arrowRedoOutline, checkmarkCircleOutline, flagOutline } from 'ionicons/icons'
+import { arrowRedoOutline, flagOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
@@ -41,7 +41,7 @@ export default defineComponent({
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),
 			openReportQuestionModal: () => useReportModal().openReportQuestion(),
-			arrowRedoOutline, flagOutline, checkmarkCircleOutline,
+			arrowRedoOutline, flagOutline,
 			formatTime, pluralize
 		}
 	}

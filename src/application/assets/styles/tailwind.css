@@ -76,7 +76,7 @@
 	}
 
 	.dot {
-		@apply h-[5px] w-[5px] rounded-full bg-icon_inactive mx-2 lg:flex
+		@apply h-[5px] w-[5px] rounded-full bg-icon_inactive lg:flex
 	}
 
 	.card-padding {

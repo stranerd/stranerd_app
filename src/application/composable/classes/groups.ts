@@ -75,9 +75,10 @@ export const useGroupList = (classId: string) => {
 	}
 }
 
-let groupingClass = null as ClassEntity | null
+let groupClass = null as ClassEntity | null
+export const getGroupClass = () => groupClass
 export const openGroupModal = async (classInst: ClassEntity, router: Router) => {
-	groupingClass = classInst
+	groupClass = classInst
 	await router.push(`/classes/${classInst.id}/groups/create`)
 }
 
@@ -88,8 +89,8 @@ export const useCreateGroup = () => {
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	if (!groupingClass) useClassModal().closeCreateGroup()
-	factory.value.classId = groupingClass!.id
+	if (!groupClass) useClassModal().closeCreateGroup()
+	factory.value.classId = groupClass!.id
 
 	const createGroup = async () => {
 		await setError('')
@@ -109,8 +110,7 @@ export const useCreateGroup = () => {
 	}
 
 	return {
-		factory, error, loading, groupingClass,
-		createGroup
+		factory, error, loading, createGroup
 	}
 }
 
