@@ -1,10 +1,10 @@
 <template>
 	<DashboardLayout>
-		<div class="md:px-4 md:py-8 flex flex-col md:gap-2">
+		<div class="md:px-4 md:py-8 flex flex-col gap-4">
 			<StatusBar v-if="isLoggedIn" />
-			<ContinueStudy v-if="isLoggedIn" :sliced="true" class="border-bottom-line py-4" />
-			<div class="border-bottom-line py-4">
-				<div class="w-full flex justify-between mb-4 px-4 md:px-0">
+			<ContinueStudy v-if="isLoggedIn" :sliced="true" class="border-bottom-line" />
+			<div class="border-bottom-line">
+				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text class="mr-3">Test Preps</ion-text>
 						<ion-text class="text-orange font-normal flex items-center text-body">
@@ -18,9 +18,9 @@
 				</div>
 				<TestPrepList :sliced="true" />
 			</div>
-			<RecentQuestions class="border-bottom-line py-4" />
-			<div class="border-bottom-line py-4">
-				<div class="w-full flex justify-between mb-4 px-4 md:px-0">
+			<RecentQuestions class="border-bottom-line" />
+			<div class="border-bottom-line">
+				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text class="mr-3">FlashCards</ion-text>
 						<ion-text class="text-orange font-normal flex items-center text-body">
@@ -35,8 +35,8 @@
 				</div>
 				<FlashCardList :sliced="true" />
 			</div>
-			<div class="border-bottom-line py-4">
-				<div class="w-full flex justify-between mb-4 px-4 md:px-0">
+			<div class="border-bottom-line">
+				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text class="mr-3">Notes</ion-text>
 						<ion-text class="text-orange font-normal flex items-center text-body">
@@ -50,8 +50,8 @@
 				</div>
 				<NotesList :sliced="true" />
 			</div>
-			<div class="border-bottom-line py-4">
-				<div class="w-full flex justify-between mb-4 px-4 md:px-0">
+			<div class="border-bottom-line">
+				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text class="mr-3">Videos</ion-text>
 						<ion-text class="text-orange font-normal flex items-center text-body">

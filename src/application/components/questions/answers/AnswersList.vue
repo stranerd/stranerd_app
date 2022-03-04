@@ -1,6 +1,6 @@
 <template>
-	<div class="flex flex-col">
-		<h2 class="text-main_dark lg:text-xl text-base font-bold">
+	<div class="flex flex-col text-sm">
+		<h2 class="text-main_dark lg:text-xl text-base font-bold px-4 md:px-0">
 			Answers <span class="text-gray">({{ question.answers.length }})</span>
 		</h2>
 		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question" />
