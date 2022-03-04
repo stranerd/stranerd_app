@@ -1,19 +1,19 @@
 <template>
 	<div class="flex flex-col gap-4">
-		<div v-if="requests.length" class="block flex flex-col gap-2">
-			<IonText class="font-semibold">Requests</IonText>
+		<div v-if="requests.length" class="block md:gap-2">
+			<IonText>Requests</IonText>
 			<ClassMember v-for="request in requests" :key="request.hash" :classInst="classInst" :user="request" />
 		</div>
-		<div v-if="admins.length" class="block flex flex-col gap-2">
-			<IonText class="font-semibold">Admins</IonText>
+		<div v-if="admins.length" class="block md:gap-2">
+			<IonText>Admins</IonText>
 			<ClassMember v-for="admin in admins" :key="admin.hash" :classInst="classInst" :user="admin" />
 		</div>
-		<div v-if="tutors.length" class="block flex flex-col gap-2">
-			<IonText class="font-semibold">Tutors</IonText>
+		<div v-if="tutors.length" class="block md:gap-2">
+			<IonText>Tutors</IonText>
 			<ClassMember v-for="tutor in tutors" :key="tutor.hash" :classInst="classInst" :user="tutor" />
 		</div>
-		<div v-if="members.length" class="block flex flex-col gap-2">
-			<IonText class="font-semibold">Others</IonText>
+		<div v-if="members.length" class="block md:gap-2">
+			<IonText>Others</IonText>
 			<ClassMember v-for="member in members" :key="member.hash" :classInst="classInst" :user="member" />
 		</div>
 		<PageLoading v-if="loading" />
@@ -45,6 +45,16 @@ export default defineComponent({
 <style lang="scss" scoped>
 	.block {
 		background: $color-white;
+		display: flex;
+		flex-direction: column;
+
+		& > ion-text {
+			font-weight: 600;
+			padding: 0 1rem;
+			@media (min-width: $md) {
+				padding: 0;
+			}
+		}
 
 		@media (min-width: $md) {
 			background: inherit;

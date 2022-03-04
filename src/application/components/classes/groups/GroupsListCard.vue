@@ -1,6 +1,6 @@
 <template>
 	<router-link :to="`/classes/${group.classId}/groups/${group.id}`"
-		class="bg-white md:p-4 rounded-xl flex items-center gap-2">
+		class="bg-white rounded-xl flex items-center card-padding">
 		<IonIcon :icon="chatboxEllipsesOutline" class="text-gray text-4xl md:text-5xl" />
 		<div class="flex flex-col w-full">
 			<div class="flex gap-2 text-main_dark">

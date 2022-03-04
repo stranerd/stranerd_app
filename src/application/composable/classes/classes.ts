@@ -186,7 +186,7 @@ export const useClassMembersList = (classInst: ClassEntity) => {
 
 	const changeRole = async (userId: string, role: ClassUsers, add: boolean) => {
 		const accepted = await Alert({
-			title: `Are you sure you want to ${add ? 'add' : 'remove'} this role to the user?`,
+			title: `Are you sure you want to ${add ? 'add this role to' : 'remove this role from'} the user?`,
 			confirmButtonText: 'Yes!'
 		})
 		if (!accepted) return

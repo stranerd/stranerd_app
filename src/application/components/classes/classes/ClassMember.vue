@@ -1,9 +1,9 @@
 <template>
-	<div class="bg-white md:p-4 rounded-xl">
+	<div class="bg-white card-padding rounded-xl">
 		<div class="flex items-center gap-2">
 			<Avatar :name="user.bio.firstName" :size="48" :src="user.avatar" />
 			<div class="flex flex-col">
-				<IonText class="text-[18px] text-main_dark text-bold">
+				<IonText class="text-base md:text-[18px] text-main_dark text-bold">
 					{{ user.bio.fullName }}
 				</IonText>
 				<div class="flex gap-2 items-center">

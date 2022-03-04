@@ -128,11 +128,11 @@ export const useQuestionList = () => {
 	}
 }
 
-const factory = ref(new QuestionFactory()) as Ref<QuestionFactory>
 export const useCreateQuestion = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
+	const factory = ref(new QuestionFactory()) as Ref<QuestionFactory>
 	const router = useRouter()
 
 	const createQuestion = async () => {

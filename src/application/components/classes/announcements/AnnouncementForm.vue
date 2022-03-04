@@ -1,15 +1,13 @@
 <template>
-	<form class="flex flex-col gap-4 text-center justify-center items-center" @submit.prevent="submit">
-		<div class="bg-light_gray w-full rounded-md flex items-center p-4">
-			<ion-textarea v-model="factory.body"
-				class="w-full text-left"
-				placeholder="Announcement"
-				rows="3"
-				show-cancel-button="never"
-			/>
-		</div>
+	<form class="flex flex-col gap-4 justify-center" @submit.prevent="submit">
+		<ion-textarea v-model="factory.body"
+			class="w-full border border-new_gray"
+			placeholder="Announcement"
+			rows="3"
+			show-cancel-button="never"
+		/>
 
-		<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
+		<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full hidden" size="small" type="submit">
 			<slot name="buttonText">Submit</slot>
 			<ion-ripple-effect class="rounded-lg" />
 		</ion-button>
@@ -48,8 +46,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-textarea {
-		--padding-top: 0;
-		--padding-bottom: 0;
+		--padding-top: 0.75rem;
+		--padding-bottom: 0.75rem;
 		--padding-right: 0;
 		--padding-left: 0;
 	}

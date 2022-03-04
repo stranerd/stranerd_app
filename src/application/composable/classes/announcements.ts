@@ -90,7 +90,7 @@ export const useCreateAnnouncement = () => {
 	const { setMessage } = useSuccessHandler()
 
 	if (!announcementClass) useClassModal().closeCreateAnnouncement()
-	factory.value.classId = announcementClass!.id
+	else factory.value.classId = announcementClass!.id
 
 	const createAnnouncement = async () => {
 		await setError('')

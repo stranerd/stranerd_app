@@ -90,7 +90,7 @@ export const useCreateGroup = () => {
 	const { setMessage } = useSuccessHandler()
 
 	if (!groupClass) useClassModal().closeCreateGroup()
-	factory.value.classId = groupClass!.id
+	else factory.value.classId = groupClass!.id
 
 	const createGroup = async () => {
 		await setError('')

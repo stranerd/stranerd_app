@@ -270,12 +270,16 @@ ion-button.btn-outline-sm {
 ion-button {
 	height: 100%;
 	--box-shadow: none;
-	--border-radius: 0.75rem;
 	box-shadow: none;
-	border-radius: 0.75rem;
+	--border-radius: 0.5rem;
+	border-radius: 0.5rem;
 	font-weight: 700;
-	text-transform: capitalize !important;
-	letter-spacing: 0.02rem !important;
+	text-transform: capitalize;
+	letter-spacing: 0.02rem;
+	@media (min-width: $md) {
+		--border-radius: 1rem;
+		border-radius: 1rem;
+	}
 }
 
 .btn-primary {
@@ -285,12 +289,10 @@ ion-button {
 	--padding-start: 1.5rem;
 	--padding-end: 1.5rem;
 	--color: $color-white;
-	border-radius: 1rem;
 	color: $color-white;
 
 	@media (max-width: 640px) {
 		--background: transparent;
-		border-radius: 0.5rem;
 		--padding-top: 0.5rem;
 		--padding-bottom: 0.5rem;
 		--padding-start: 1.25rem;

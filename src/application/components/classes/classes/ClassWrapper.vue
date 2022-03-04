@@ -61,7 +61,7 @@
 					</IonButton>
 				</div>
 			</div>
-			<div class="px-4 lg:px-0 py-4">
+			<div class="md:px-4 lg:px-0 py-4">
 				<slot v-if="classInst.members.includes(id)" :classInst="classInst" />
 			</div>
 			<PageLoading v-if="loading" />
