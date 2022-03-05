@@ -11,6 +11,15 @@
 							<Avatar :id="user.id" :size="80" :src="user.avatar" class="md:hidden -mt-10" color="#C7D6E3" />
 							<Avatar :id="user.id" :size="96" :src="user.avatar" class="hidden md:block -mt-12"
 								color="#C7D6E3" />
+							<h2 class="lg:text-xl text-base font-bold text-main_dark flex gap-1 items-center mt-2">
+								<span>{{ user.fullName }}</span>
+								<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="white" />
+							</h2>
+							<Tag :index="user.rank.level - 1" :secondary="true" :tag="user.rank.id" class="self-start"  />
+							<IonButton v-if="isAdmin && id !== user.id" class="btn-white" size="small"
+								@click="user.isVerified ? deVerifyUser(user) : verifyUser(user)">
+								{{ user.isVerified ? 'Mark User Unverified' : 'Mark User Verified' }}
+							</IonButton>
 						</div>
 					</div>
 				</div>

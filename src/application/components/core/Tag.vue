@@ -1,7 +1,8 @@
 <template>
 	<span v-if="tag"
-		:style="`color: rgb(${secondary ? '255, 255, 255' : color}); background-color: rgba(${color}, ${secondary ? 0.9 : 0.075});`"
-		class="py-1 px-3 font-normal text-sm rounded-lg">
+		:style="`color: rgb(${secondary ? '255, 255, 255' : color}); background-color: rgba(${color}, ${secondary ? 0.9 : 0.1});`"
+		class="py-1 px-3 font-bold lg:text-sm text-xs rounded-3xl"
+	>
 		<slot :tag="tag">{{ tag }}</slot>
 	</span>
 </template>
@@ -18,8 +19,7 @@ export default defineComponent({
 		},
 		index: {
 			type: Number,
-			required: false,
-			default: 0
+			required: false
 		},
 		secondary: {
 			type: Boolean,
@@ -34,10 +34,11 @@ export default defineComponent({
 		// 3: Orange #FFA84B
 		// 4: Purple #C864DC
 		// 5: Green #00D25A
-		const colors = ['100, 119, 138', '84, 181, 211', '255, 100, 150', '255, 168, 75', '200, 100, 220', '0, 210, 90']
-		const color = colors[props.index % colors.length]
+		const colors = ['84, 181, 211', '255, 100, 150', '255, 168, 75', '200, 100, 220', '0, 210, 90']
+		const randomNumber = Math.floor(Math.random() * colors.length)
+		const color = colors[(props.index ?? randomNumber) % colors.length]
 
-		return { colors, color }
+		return { colors, randomNumber, color }
 	}
 })
 </script>
