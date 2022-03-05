@@ -1,12 +1,12 @@
 <template>
-	<div :id="question.id"
-		class="p-4 md:p-6 rounded-xl bg-white flex flex-col w-full relative cursor-pointer">
+	<router-link :id="question.id" :to="`/questions/${question.id}`"
+		class="card-padding rounded-xl bg-white flex flex-col w-full relative cursor-pointer">
 		<ion-ripple-effect class="rounded-xl" />
-		<div class="flex flex-row items-center">
-			<div class=" flex flex-row items-center">
+		<div class="flex items-center">
+			<div class="flex items-center">
 				<span class="font-bold text-main_dark lg:text-base text-xs capitalize">{{ question.subject }}</span>
 			</div>
-			<div class="flex flex-row-reverse flex-grow">
+			<div class="flex justify-end flex-grow">
 				<span class="font-bold text-icon_inactive lg:block hidden">
 					{{
 						formatNumber(question.answers.length)
@@ -14,17 +14,17 @@
 				</span>
 			</div>
 		</div>
-		<router-link :to="`/questions/${question.id}`" class="py-2 text-main_dark leading-normal lg:text-base text-xs">
+		<span class="text-main_dark leading-normal lg:text-base text-xs">
 			{{ question.trimmedBody }}
-		</router-link>
+		</span>
 
-		<div class="mt-2 flex flex-row items-center justify-between mt-3 lg:mt-0">
+		<div class="flex items-center justify-between">
 			<span class="font-bold text-icon_inactive ">Posted: {{ formatTime(question.createdAt) }}</span>
 			<span class="font-bold text-icon_inactive lg:hidden">	{{
 				formatNumber(question.answers.length)
 			}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
 		</div>
-	</div>
+	</router-link>
 </template>
 
 <script lang="ts">

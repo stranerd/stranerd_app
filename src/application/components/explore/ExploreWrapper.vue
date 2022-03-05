@@ -2,14 +2,14 @@
 	<Justified>
 		<div>
 			<div class="blueTop px-4">
-				<div class="w-full md:w-11/12 lg:w-8/12">
+				<div class="w-full lg:w-8/12">
 					<div class="flex flex-col justify-center items-center">
 						<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-12 hidden md:block">
 							Explore thousands of study materials
 						</ion-text>
 						<Search class="my-4" />
 					</div>
-					<div class="nav-scroll">
+					<div class="nav-scroll !text-new_gray">
 						<router-link :to="`/explore`"
 							class="py-2 cursor-pointer"
 							exact-active-class="border-b-4 text-white border-white">
@@ -38,7 +38,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="p-4 md:w-11/12 lg:w-8/12 w-full mx-auto">
+			<div class="md:px-4 lg:px-0 lg:w-8/12 w-full mx-auto">
 				<slot />
 			</div>
 		</div>

@@ -1,10 +1,8 @@
 <template>
-	<div class="col-span-12 flex flex-col text-body">
-		<div class="flex flex-col gap-3 lg:p-8 p-6 bg-white rounded-xl">
-			<div class="flex flex-col gap-2 text-icon_inactive pb-3 border-b-1 border-new_gray">
-				<h1 class="text-base text-main_dark font-bold pt-4">Bio</h1>
-				<span class="text-main_dark text-base">{{ user.description || 'N/A' }}</span>
-			</div>
+	<div class="col-span-12 flex flex-col text-body bg-white rounded-xl">
+		<div class="flex flex-col !gap-2 card-padding text-icon_inactive border-bottom-line">
+			<h1 class="text-base text-main_dark font-bold">Bio</h1>
+			<span class="text-main_dark text-sm">{{ user.description || 'N/A' }}</span>
 		</div>
 	</div>
 </template>
