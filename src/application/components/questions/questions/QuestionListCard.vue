@@ -26,10 +26,10 @@
 
 		<DisplayHtml :html="question.trimmedBody" class="text-main_dark leading-normal" />
 
-		<div class="flex justify-between items-center gap-4 text-gray text-sm">
+		<div class="flex justify-between items-center gap-4 text-gray text-sm font-bold">
 			<span class="text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
-			<span v-if="question.attachments.length" class="font-italic">
-				<IonIcon :icon="image" /> IMG inside
+			<span v-if="question.attachments.length" class="font-italic flex items-center">
+				<IonIcon :icon="imageOutline" class="mr-2" />  IMG inside
 			</span>
 			<span class="text-main_dark">
 				{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
@@ -41,7 +41,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { IonRippleEffect } from '@ionic/vue'
-import { arrowRedoOutline, checkmarkCircleOutline, flagOutline, image } from 'ionicons/icons'
+import { arrowRedoOutline, checkmarkCircleOutline, flagOutline, imageOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
@@ -70,7 +70,7 @@ export default defineComponent({
 			showAnswerButton,
 			openAnswerModal,
 			openReportQuestionModal: () => useReportModal().openReportQuestion(),
-			arrowRedoOutline, flagOutline, image, checkmarkCircleOutline,
+			arrowRedoOutline, flagOutline, imageOutline, checkmarkCircleOutline,
 			formatTime, pluralize
 		}
 	}

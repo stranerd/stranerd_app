@@ -7,7 +7,6 @@
 						{{ $route.meta.displayName ?? 'Stranerd' }}
 					</IonText>
 				</router-link>
-
 				<div class="flex items-center">
 
 					<ion-icon :icon="addCircleOutline" class="text-xl text-main_dark mr-6"

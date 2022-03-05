@@ -1,6 +1,5 @@
 <template>
-	<div
-		class="bg-white w-full rounded-xl flex flex-col box-border card-padding">
+	<div class="bg-white w-full rounded-xl flex flex-col box-border card-padding">
 		<div>
 			<div class="w-full flex justify-between items-center gap-2">
 				<ion-text class="text-left w-full text-main_dark font-semibold truncate capitalize">
