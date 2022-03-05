@@ -3,9 +3,11 @@ import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@m
 
 export class DiscussionEntity extends BaseEntity {
 	public readonly id: string
-	public readonly content: string | null
+	public readonly content: string
 	public readonly media: Media | null
+	public readonly links: string[]
 	public readonly groupId: string
+	public readonly classId: string
 	public readonly userId: string
 	public readonly userBio: UserBio
 	public readonly userRoles: UserRoles
@@ -16,7 +18,9 @@ export class DiscussionEntity extends BaseEntity {
 		             id,
 		             content,
 		             media,
+		             links,
 		             groupId,
+		             classId,
 		             userId,
 		             userBio,
 		             userRoles,
@@ -27,7 +31,9 @@ export class DiscussionEntity extends BaseEntity {
 		this.id = id
 		this.content = content
 		this.media = media ? parseMedia(media) : null
+		this.links = links
 		this.groupId = groupId
+		this.classId = classId
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
 		this.userRoles = generateDefaultRoles(userRoles)
@@ -45,12 +51,14 @@ export class DiscussionEntity extends BaseEntity {
 }
 
 type DiscussionConstructorArgs = {
-	id: string,
-	content: string | null,
-	media: Media | null,
+	id: string
+	content: string
+	media: Media | null
+	links: string[]
 	createdAt: number
 	updatedAt: number
 	groupId: string
+	classId: string
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
