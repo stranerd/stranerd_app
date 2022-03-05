@@ -271,14 +271,17 @@ ion-button {
 	height: 100%;
 	--box-shadow: none;
 	box-shadow: none;
-	border-radius: 0.4rem;
+	--border-radius: 0.5rem;
+	border-radius: 0.5rem;
 	font-weight: 700;
 	text-transform: capitalize;
 	letter-spacing: 0.02rem;
 	@media (min-width: $md) {
+		--border-radius: 0.625rem;
 		border-radius: 0.625rem;
 	}
 	@media (min-width: $lg) {
+		--border-radius: 0.75rem;
 		border-radius: 0.75rem;
 	}
 }
