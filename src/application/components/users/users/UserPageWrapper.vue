@@ -4,7 +4,17 @@
 			<PageLoading v-if="loading" />
 			<PageLoading v-if="verifiedLoading" />
 			<template v-if="user">
-				<div class="blueTop pt-4 px-4">
+				<div class="flex justify-center w-full">
+					<div class="flex flex-col w-full lg:w-7/12 rounded-xl pt-0 lg:pt-6">
+						<div class="bg-orange rounded-t-xl h-11 lg:h-32"/>
+						<div class="bg-white rounded-b-xl px-4 flex flex-col ">
+							<Avatar :id="user.id" :size="80" :src="user.avatar" class="md:hidden -mt-10" color="#C7D6E3" />
+							<Avatar :id="user.id" :size="96" :src="user.avatar" class="hidden md:block -mt-12"
+								color="#C7D6E3" />
+						</div>
+					</div>
+				</div>
+				<!-- <div class="blueTop pt-4 px-4">
 					<div class="w-full md:w-10/12 lg:w-6/12 mx-auto">
 						<div class="text-body w-full flex gap-2 md:gap-4 items-center mb-4">
 							<div class="relative border-white border-4 rounded-full">
@@ -61,8 +71,8 @@
 							</router-link>
 						</div>
 					</div>
-				</div>
-				<div class="w-full md:w-10/12 lg:w-6/12 mx-auto p-4 md:mt-8">
+				</div> -->
+				<div class="w-full md:w-10/12 lg:w-7/12 mx-auto md:mt-6">
 					<slot :user="user" />
 				</div>
 			</template>
