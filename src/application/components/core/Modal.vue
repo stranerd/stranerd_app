@@ -1,4 +1,4 @@
-<template>
+d<template>
 	<div class="rounded-3xl md:p-8 p-4 md:text-sm text-xs">
 		<div class="flex flex-col gap-1 text-center justify-center items-center mb-4">
 			<h3 class="text-xl font-semibold text-main_dark">
