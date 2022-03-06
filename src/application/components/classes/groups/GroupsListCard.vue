@@ -12,7 +12,8 @@
 				</IonText>
 			</div>
 			<IonText v-if="group.last" class="text-xs text-gray">
-				<span class="font-bold">{{ group.last.userBio.firstName }}</span>: {{ group.last.content }}
+				<span class="font-bold">{{ group.last.userId === id ? 'You' : group.last.userBio.firstName }}</span>:
+				{{ group.last.media ? 'Shared a file' : group.last.content }}
 			</IonText>
 		</div>
 	</router-link>
@@ -23,6 +24,7 @@ import { defineComponent } from 'vue'
 import { ClassEntity, GroupEntity } from '@modules/classes'
 import { chatboxEllipsesOutline } from 'ionicons/icons'
 import { formatTime } from '@utils/dates'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'GroupsListCard',
@@ -37,7 +39,8 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { chatboxEllipsesOutline, formatTime }
+		const { id } = useAuth()
+		return { chatboxEllipsesOutline, formatTime, id }
 	}
 })
 </script>

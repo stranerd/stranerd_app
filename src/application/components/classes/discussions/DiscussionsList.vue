@@ -2,7 +2,7 @@
 	<div class="flex flex-col">
 		<EmptyState v-if="discussions.length === 0" class="h-full flex items-center"
 			info="No messages found. Send a message now" />
-		<div v-else v-chat-scroll class="flex flex-col gap-3">
+		<div v-else v-chat-scroll class="flex flex-col gap-3 overflow-y-auto hide-scrollbar">
 			<span v-if="hasMore" class="w-full text-center text-xs lg:text-sm"
 				@click="fetchOlderDiscussions">Fetch Older Messages</span>
 			<div v-for="date in discussions" :key="date.hash" class="flex flex-col gap-2">

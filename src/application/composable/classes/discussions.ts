@@ -8,7 +8,6 @@ import {
 } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { getRandomValue } from '@utils/commons'
-import { Media } from '@modules/core'
 
 const global = {} as Record<string, {
 	discussions: Ref<DiscussionEntity[]>
@@ -124,20 +123,17 @@ export const useCreateDiscussion = (groupId: string) => {
 		}
 	}
 
-	const createMediaDiscussion = async (files: Media[]) => {
+	const createMediaDiscussion = async (factories: DiscussionFactory[]) => {
 		if (!loading.value) {
 			await setLoading(true)
-			const promises = files.map(async (file) => {
-				const mediaFactory = new DiscussionFactory()
+			await Promise.all(factories.map(async (mediaFactory) => {
 				mediaFactory.groupId = groupId
-				mediaFactory.media = file
 				try {
 					await AddDiscussion.call(mediaFactory)
 				} catch (error) {
 					await setError(error)
 				}
-			})
-			await Promise.all(promises)
+			}))
 			await setLoading(false)
 		}
 	}

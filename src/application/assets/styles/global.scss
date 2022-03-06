@@ -24,3 +24,11 @@ $color-orange: #FFA84B;
 $color-green: #00D246;
 
 $border: 2px solid $color-newGray !important;
+
+.hide-scrollbar {
+	-ms-overflow-style: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}

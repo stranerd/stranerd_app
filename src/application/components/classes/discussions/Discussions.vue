@@ -1,5 +1,5 @@
 <template>
-	<div class="block text-gray">
+	<div class="chat-block text-gray">
 		<div v-if="group && group.members.includes(id)" class="body">
 			<div class="flex items-center">
 				<IonIcon :icon="chatboxEllipsesOutline" class="text-4xl md:text-5xl" />
@@ -59,50 +59,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	.block {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 12000;
-		background: rgba($color-mainDark, 0.5);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-
-		@media (min-width: $lg) {
-			padding: 2rem 1rem;
-		}
-
-		.body {
-			background: $color-white;
-			width: 100%;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-
-			@media (min-width: $lg) {
-				border-radius: 0.5rem;
-				width: 80%;
-			}
-
-			& > * {
-				padding: 0.5rem 1rem;
-			}
-
-			.content {
-				flex-grow: 1;
-				border-top: $border;
-				border-bottom: $border;
-				overflow-y: auto;
-
-				&::-webkit-scrollbar {
-					display: none;
-				}
-			}
-		}
-	}
-</style>

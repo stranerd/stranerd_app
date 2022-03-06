@@ -3,7 +3,7 @@ import { AddChat, ChatEntity, ChatFactory, GetChats, ListenToChats, MarkChatRead
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { getRandomValue } from '@utils/commons'
-import { Media } from '@modules/core'
+import { UploadedFile } from '@modules/core'
 
 const global = {} as Record<string, {
 	chats: Ref<ChatEntity[]>
@@ -148,7 +148,7 @@ export const useCreateChat = (userId: string, sessionId?: string) => {
 		}
 	}
 
-	const createMediaChat = async (files: Media[]) => {
+	const createMediaChat = async (files: UploadedFile[]) => {
 		if (!loading.value) {
 			await setLoading(true)
 			const promises = files.map(async (file) => {

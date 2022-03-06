@@ -10,39 +10,52 @@ type Config = {
 }
 
 const scrollToBottom = (el: Element, smooth: boolean) => {
-	if (typeof el.scroll === 'function') el.scroll({ top: el.scrollHeight, behavior: smooth ? 'smooth' : 'auto' })
-	else el.scrollTop = el.scrollHeight
+	setTimeout(() => {
+		if (typeof el.scroll === 'function') el.scroll({ top: el.scrollHeight, behavior: smooth ? 'smooth' : 'auto' })
+		else el.scrollTop = el.scrollHeight
+	}, 1)
 }
 
-const defaultConfig: Config = { smooth: true, notSmoothOnInit: true, always: false, scrollonremoved: true }
+const defaultConfig: Config = {
+	enabled: true,
+	smooth: true,
+	notSmoothOnInit: true,
+	always: false,
+	scrollonremoved: true
+}
+
+let globalObserver = null as null | MutationObserver
 
 export const ChatScroll: ObjectDirective = {
-	created: (el, binding) => {
+	mounted: (el, binding) => {
 		let scrolled = false
+		const config: Config = { ...defaultConfig, ...binding.value }
+		scrollToBottom(el, config.notSmoothOnInit ? false : !!config.smooth)
 
 		el.addEventListener('scroll', () => {
 			scrolled = el.scrollTop + el.clientHeight + 1 < el.scrollHeight
 			if (scrolled && el.scrollTop === 0) el.dispatchEvent(new Event('v-chat-scroll-top-reached'))
 		})
 
-		new MutationObserver((e) => {
-			const config: Config = binding.value || defaultConfig
-			if (config.enabled === false) return
+		const observer = new MutationObserver((e) => {
+			if (!config.enabled) return
 			const pause = config.always === false && scrolled
 			const addedNodes = e[e.length - 1].addedNodes.length
 			const removedNodes = e[e.length - 1].removedNodes.length
 
-			if (config.scrollonremoved && (pause || addedNodes != 1 && removedNodes != 1)) return
-			else if (pause || addedNodes != 1) return
+			if (config.scrollonremoved) {
+				if (pause || addedNodes != 1 && removedNodes != 1) return
+			} else if (pause || addedNodes != 1) return
 
 			let smooth = !!config.smooth
 			const loadingRemoved = !addedNodes && removedNodes === 1
 			if (loadingRemoved && config.scrollonremoved && config.smoothonremoved) smooth = config.smoothonremoved
 			scrollToBottom(el, smooth)
-		}).observe(el, { childList: true, subtree: true })
+		})
+		globalObserver = observer
+		observer.observe(el, { childList: true, subtree: true })
 	},
-	mounted: (el, binding) => {
-		const config: Config = binding.value || defaultConfig
-		scrollToBottom(el, config.notSmoothOnInit ? false : !!config.smooth)
+	unmounted: () => {
+		globalObserver?.disconnect()
 	}
 }
