@@ -34,7 +34,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="md:px-4 lg:px-0 lg:w-8/12 w-full mx-auto">
+			<div class="md:py-4 lg:px-0 lg:w-8/12 w-full mx-auto">
 				<slot />
 			</div>
 		</div>

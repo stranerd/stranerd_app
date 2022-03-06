@@ -1,6 +1,6 @@
 <template>
 	<DashboardLayout>
-		<div class="md:px-4 md:py-4">
+		<div class="md:p-4">
 			<QuestionsList />
 		</div>
 	</DashboardLayout>

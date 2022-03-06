@@ -1,8 +1,8 @@
 <template>
 	<ExploreWrapper>
-		<div>
-			<div class="mb-12">
-				<div class="w-full flex justify-between mb-4">
+		<div class="flex flex-col gap-4 md:gap-6 py-4 md:py-0">
+			<div>
+				<div class="w-full flex justify-between p-4 md:p-0 md:mb-4">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text class="mr-3">
 							TestPreps
@@ -15,8 +15,8 @@
 				</div>
 				<ExploreTestPrepsList :sliced="true" />
 			</div>
-			<div class="mb-12">
-				<div class="w-full flex justify-between mb-4">
+			<div>
+				<div class="w-full flex justify-between p-4 md:p-0 md:mb-4">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text class="mr-3">
 							FlashCards
@@ -29,8 +29,8 @@
 				</div>
 				<ExploreFlashCardsList :sliced="true" />
 			</div>
-			<div class="mb-12">
-				<div class="w-full flex justify-between mb-4">
+			<div>
+				<div class="w-full flex justify-between p-4 md:p-0 md:mb-4">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text class="mr-3">
 							Notes
@@ -43,8 +43,8 @@
 				</div>
 				<ExploreNotesList :sliced="true" />
 			</div>
-			<div class="mb-12">
-				<div class="w-full flex justify-between mb-4">
+			<div>
+				<div class="w-full flex justify-between p-4 md:p-0 md:mb-4">
 					<div class="heading font-bold text-main_dark flex items-center">
 						<ion-text class="mr-3">
 							Videos

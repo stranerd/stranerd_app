@@ -1,6 +1,6 @@
 <template>
 	<DashboardLayout>
-		<div class="lg:w-8/12 w-full mx-auto md:px-4 md:py-4">
+		<div class="md:p-4">
 			<EmptyState v-if="!loading && !error && sets.length === 0"
 				info="You have not created any folders yet. Click the plus button to create one now" />
 			<div class="showcase">
