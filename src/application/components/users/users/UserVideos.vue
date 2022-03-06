@@ -2,7 +2,7 @@
 	<div v-if="loading" class="flex items-center justify-center w-full col-span-12 py-8">
 		<ion-progress-bar type="indeterminate"></ion-progress-bar>
 	</div>
-	<div v-else class="col-span-12 gap-4 flex flex-col text-body">
+	<div v-else class="col-span-12 md:gap-4 flex flex-col text-body">
 		<VideoListCard v-for="video in videos" :key="video.hash" :video="video" />
 		<EmptyState v-if="!loading && !error && videos.length === 0"
 			info="This user hasn't created any videos yet or they are marked private" />

@@ -2,8 +2,7 @@
 	<div v-if="loading" class="col-span-12 flex items-center justify-center w-full py-8">
 		<ion-progress-bar type="indeterminate"></ion-progress-bar>
 	</div>
-
-	<div v-else class="col-span-12 gap-4 flex flex-col text-body">
+	<div v-else class="col-span-12 flex flex-col text-body md:gap-4">
 		<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer" />
 		<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
 			<a @click.prevent="fetchOlderAnswers">Load More</a>
