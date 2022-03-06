@@ -20,7 +20,7 @@
 				</template>
 			</Tag>
 			<div class="flex items-center text-gray gap-2">
-				<Avatar :id="flashCard.userId" :name="flashCard.userBio.firstName" :size="24"
+				<Avatar :id="flashCard.userId" :name="flashCard.userBio.fullName" :size="24"
 					:src="flashCard.userBio.photo" />
 				<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
 					text="Share this flashcard" />

@@ -7,7 +7,7 @@
 				<ion-title class="text-base font-bold text-main_dark">
 					{{ $route.meta.displayName ?? 'Stranerd' }}
 				</ion-title>
-				<Avatar v-if="isLoggedIn" :name="user?.bio.firstName" :size="24" :src="user?.avatar"
+				<Avatar v-if="isLoggedIn" :name="user?.bio.fullName" :size="24" :src="user?.avatar"
 					@click="openUserDashboardMenu" />
 				<router-link v-else class="flex items-center" to="/account">
 					<Avatar :size="24" />
@@ -19,7 +19,7 @@
 		<ion-toolbar
 			class="hidden lg:hidden md:flex bg-white px-2 items-center border-bottom-line">
 			<div class="flex items-center justify-between">
-				<Avatar v-if="isLoggedIn" :name="user?.bio.firstName" :size="24" :src="user?.avatar"
+				<Avatar v-if="isLoggedIn" :name="user?.bio.fullName" :size="24" :src="user?.avatar"
 					@click="openUserDashboardMenu" />
 				<router-link v-else class="flex items-center" to="/account">
 					<Avatar :size="24" />

@@ -12,7 +12,7 @@
 			<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
 				<div class="lg:w-8/12 max-w-[60rem] w-full px-4 mx-auto flex items-center justify-between">
 					<div class="flex">
-						<Avatar :id="video.userId" :name="video.userBio.firstName" :size="28" :src="video.userBio.photo"
+						<Avatar :id="video.userId" :name="video.userBio.fullName" :size="28" :src="video.userBio.photo"
 							class="mx-2" />
 						<ion-text class="text-icon_inactive flex items-center gap-1">
 							<span>by <b>{{ video.userBio.firstName }} </b></span>

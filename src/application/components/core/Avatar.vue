@@ -9,8 +9,8 @@
 			class="!max-w-[1920px] rounded-full"
 		>
 		<span v-else-if="name" :style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
-			class="flex items-center justify-center uppercase bg-faded_gray text-main_dark rounded-full">
-			{{ name[0] }}
+			class="flex items-center justify-center uppercase bg-faded_gray text-main_dark font-semibold rounded-full">
+			<span>{{ name[0] }}</span>
 		</span>
 		<svg v-else :style="`width: ${size}px; height: ${size}px;`" fill="none" height="36" viewBox="0 0 36 36"
 			width="36"

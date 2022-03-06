@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-white card-padding rounded-xl">
 		<div class="flex items-center gap-2">
-			<Avatar :name="user.bio.firstName" :size="48" :src="user.avatar" />
+			<Avatar :name="user.bio.fullName" :size="48" :src="user.avatar" />
 			<div class="flex flex-col">
 				<IonText class="text-base md:text-[18px] text-main_dark text-bold">
 					{{ user.bio.fullName }}

@@ -17,7 +17,7 @@
 				</template>
 			</Tag>
 			<div class="flex items-center text-gray gap-2">
-				<Avatar :id="set.userId" :name="set.userBio.firstName" :size="24" :src="set.userBio.photo" />
+				<Avatar :id="set.userId" :name="set.userBio.fullName" :size="24" :src="set.userBio.photo" />
 				<Share :link="set.shareLink" :title="set.name" cssClass="text-xl" text="Share this folder" />
 				<ion-icon v-if="0 && set.userId !== id" :icon="isSaved ? bookmark : bookmarkOutline"
 					class="text-xl"

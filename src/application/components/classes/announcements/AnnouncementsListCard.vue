@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-white rounded-xl flex flex-col card-padding text-sm md:text-base">
 		<div class="flex gap-2 items-center">
-			<Avatar :id="announcement.userId" :name="announcement.userBio.firstName"
+			<Avatar :id="announcement.userId" :name="announcement.userBio.fullName"
 				:size="32" :src="announcement.userBio.photo" />
 			<IonText class="text-main_dark flex gap-1 items-center">
 				<span>{{ announcement.userBio.fullName }}</span>

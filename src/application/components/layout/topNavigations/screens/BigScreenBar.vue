@@ -22,7 +22,7 @@
 							class=" font-bold flex flex-row items-center justify-center gap-2 cursor-pointer"
 							@click="openUserDashboardMenu"
 						>
-							<avatar :name="user?.bio.firstName" :size="24" :src="user?.avatar" />
+							<avatar :name="user?.bio.fullName" :size="24" :src="user?.avatar" />
 							<span class="text-base text-main_dark truncate max-w-[150px] flex items-center gap-1">
 								<span>{{ user.fullName }}</span>
 								<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
