@@ -13,7 +13,7 @@ export class DiscussionFactory extends BaseFactory<DiscussionEntity, DiscussionT
 		media: { required: false, rules: [isFile] }
 	}
 
-	reserved = []
+	reserved = ['groupId']
 
 	constructor () {
 		super({ content: '', media: null, groupId: '' })

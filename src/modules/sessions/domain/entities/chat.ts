@@ -1,4 +1,5 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
+import { isImage } from '@stranerd/validate'
 
 export class ChatEntity extends BaseEntity {
 	readonly id: string
@@ -33,7 +34,7 @@ export class ChatEntity extends BaseEntity {
 	}
 
 	get isImage () {
-		return this.isMedia && this.media?.type.startsWith('image/')
+		return this.isMedia && isImage(this.media).valid
 	}
 
 	get to () {

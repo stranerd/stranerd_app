@@ -87,9 +87,8 @@ export const useQuestionList = () => {
 			if (global.answered.value === Answered.Unanswered && q.answers.length > 0) return false
 			if (global.answered.value === Answered.BestAnswered && !q.isAnswered) return false
 			return true
-		}).sort((a, b) => {
-			return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1
-		}), set: (questions) => {
+		}).sort((a, b) => b.createdAt - a.createdAt),
+		set: (questions) => {
 			questions.map(pushToQuestionList)
 		}
 	})

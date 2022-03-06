@@ -1,5 +1,6 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { isImage } from '@stranerd/validate'
 
 export class DiscussionEntity extends BaseEntity {
 	public readonly id: string
@@ -46,7 +47,7 @@ export class DiscussionEntity extends BaseEntity {
 	}
 
 	get isImage () {
-		return this.isMedia && this.media?.type.startsWith('image/')
+		return this.isMedia && isImage(this.media).valid
 	}
 }
 
