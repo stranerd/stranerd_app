@@ -12,6 +12,7 @@ import ClassesList from '@app/components/classes/classes/ClassesList.vue'
 export default defineComponent({
 	name: 'Classes',
 	displayName: 'Classes',
-	components: { DashboardLayout, ClassesList }
+	components: { DashboardLayout, ClassesList },
+	middlewares: ['isAuthenticated']
 })
 </script>
