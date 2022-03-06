@@ -1,6 +1,6 @@
 <template>
 	<DashboardLayout>
-		<div class="md:px-4 md:py-8 flex flex-col gap-4">
+		<div class="md:p-4 flex flex-col gap-4 md:gap-6">
 			<StatusBar v-if="isLoggedIn" />
 			<ContinueStudy v-if="isLoggedIn" :sliced="true" class="border-bottom-line" />
 			<div class="border-bottom-line">

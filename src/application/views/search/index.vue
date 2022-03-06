@@ -2,95 +2,97 @@
 	<SearchWrapper>
 		<template
 			v-slot:default="{ count, searchTerm, testPreps, notes, videos, flashCards, sets, questions, users }">
-			<div v-if="questions.length" class="mb-12">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text>Questions</ion-text>
-					</div>
+			<div class="flex flex-col gap-4 md:gap-6 py-4 md:py-0">
+				<div v-if="questions.length" class="border-bottom-line">
+					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text>Questions</ion-text>
+						</div>
 
-					<router-link :to="`/search/questions?search=${searchTerm}`"
-						class="text-primary text-body flex items-center font-bold">
-						<span>view all</span>
-					</router-link>
-				</div>
-				<SearchQuestionsList :questions="questions" :sliced="true" />
-			</div>
-			<div v-if="testPreps.length" class="mb-12">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text>TestPreps</ion-text>
+						<router-link :to="`/search/questions?search=${searchTerm}`"
+							class="text-primary text-body flex items-center font-bold">
+							<span>view all</span>
+						</router-link>
 					</div>
-					<router-link :to="`/search/preps?search=${searchTerm}`"
-						class="text-primary text-body flex items-center font-bold">
-						<span>view all</span>
-					</router-link>
+					<SearchQuestionsList :questions="questions" :sliced="true" />
 				</div>
-				<SearchTestPrepsList :sliced="true" :testPreps="testPreps" />
-			</div>
-			<div v-if="flashCards.length" class="mb-12">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text>FlashCards</ion-text>
+				<div v-if="testPreps.length" class="border-bottom-line">
+					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text>TestPreps</ion-text>
+						</div>
+						<router-link :to="`/search/preps?search=${searchTerm}`"
+							class="text-primary text-body flex items-center font-bold">
+							<span>view all</span>
+						</router-link>
 					</div>
+					<SearchTestPrepsList :sliced="true" :testPreps="testPreps" />
+				</div>
+				<div v-if="flashCards.length" class="border-bottom-line">
+					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text>FlashCards</ion-text>
+						</div>
 
-					<router-link :to="`/search/flashCards?search=${searchTerm}`"
-						class="text-primary text-body flex items-center font-bold">
-						<span>view all</span>
-					</router-link>
-				</div>
-				<SearchFlashCardsList :flashCards="flashCards" :sliced="true" />
-			</div>
-			<div v-if="notes.length" class="mb-12">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text>Notes</ion-text>
+						<router-link :to="`/search/flashCards?search=${searchTerm}`"
+							class="text-primary text-body flex items-center font-bold">
+							<span>view all</span>
+						</router-link>
 					</div>
-					<router-link :to="`/search/notes?search=${searchTerm}`"
-						class="text-primary text-body flex items-center font-bold">
-						<span>view all</span>
-					</router-link>
+					<SearchFlashCardsList :flashCards="flashCards" :sliced="true" />
 				</div>
-				<SearchNotesList :notes="notes" :sliced="true" />
-			</div>
-			<div v-if="videos.length" class="mb-12">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text>Videos</ion-text>
+				<div v-if="notes.length" class="border-bottom-line">
+					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text>Notes</ion-text>
+						</div>
+						<router-link :to="`/search/notes?search=${searchTerm}`"
+							class="text-primary text-body flex items-center font-bold">
+							<span>view all</span>
+						</router-link>
 					</div>
-					<router-link :to="`/search/videos?search=${searchTerm}`"
-						class="text-primary text-body flex items-center font-bold">
-						<span>view all</span>
-					</router-link>
+					<SearchNotesList :notes="notes" :sliced="true" />
 				</div>
-				<SearchVideosList :sliced="true" :videos="videos" />
-			</div>
-			<div v-if="sets.length" class="mb-12">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text>Folders</ion-text>
+				<div v-if="videos.length" class="border-bottom-line">
+					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text>Videos</ion-text>
+						</div>
+						<router-link :to="`/search/videos?search=${searchTerm}`"
+							class="text-primary text-body flex items-center font-bold">
+							<span>view all</span>
+						</router-link>
 					</div>
+					<SearchVideosList :sliced="true" :videos="videos" />
+				</div>
+				<div v-if="sets.length" class="border-bottom-line">
+					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text>Folders</ion-text>
+						</div>
 
-					<router-link :to="`/search/sets?search=${searchTerm}`"
-						class="text-primary text-body flex items-center font-bold">
-						<span>view all</span>
-					</router-link>
-				</div>
-				<SearchSetsList :sets="sets" :sliced="true" />
-			</div>
-			<div v-if="users.length" class="mb-12">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text>Nerds</ion-text>
+						<router-link :to="`/search/sets?search=${searchTerm}`"
+							class="text-primary text-body flex items-center font-bold">
+							<span>view all</span>
+						</router-link>
 					</div>
-
-					<router-link :to="`/search/nerds?search=${searchTerm}`"
-						class="text-primary text-body flex items-center font-bold">
-						<span>view all</span>
-					</router-link>
+					<SearchSetsList :sets="sets" :sliced="true" />
 				</div>
-				<SearchUsersList :sliced="true" :users="users" />
+				<div v-if="users.length" class="border-bottom-line">
+					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
+						<div class="heading font-bold text-main_dark flex items-center">
+							<ion-text>Nerds</ion-text>
+						</div>
+
+						<router-link :to="`/search/nerds?search=${searchTerm}`"
+							class="text-primary text-body flex items-center font-bold">
+							<span>view all</span>
+						</router-link>
+					</div>
+					<SearchUsersList :sliced="true" :users="users" />
+				</div>
+				<EmptyState v-if="!count" info="No results found." />
 			</div>
-			<EmptyState v-if="!count" info="No results found." />
 		</template>
 	</SearchWrapper>
 </template>

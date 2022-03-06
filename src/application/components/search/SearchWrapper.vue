@@ -11,51 +11,43 @@
 					</div>
 					<div class="nav-scroll !text-new_gray">
 						<router-link :to="`/search?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
+							exact-active-class="border-b-2 text-white border-white">
 							All
 						</router-link>
 						<router-link :to="`/search/preps?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
+							exact-active-class="border-b-2 text-white border-white">
 							TestPreps
 						</router-link>
 						<router-link :to="`/search/notes?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
+							exact-active-class="border-b-2 text-white border-white">
 							Notes
 						</router-link>
 						<router-link :to="`/search/videos?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
+							exact-active-class="border-b-2 text-white border-white">
 							Videos
 						</router-link>
 						<router-link :to="`/search/flashCards?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
+							exact-active-class="border-b-2 text-white border-white">
 							FlashCards
 						</router-link>
 						<router-link :to="`/search/sets?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
+							exact-active-class="border-b-2 text-white border-white">
 							Folders
 						</router-link>
 						<router-link :to="`/search/nerds?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
+							exact-active-class="border-b-2 text-white border-white">
 							Nerds
 						</router-link>
 						<router-link :to="`/search/questions?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
+							exact-active-class="border-b-2 text-white border-white">
 							Questions
 						</router-link>
 					</div>
 				</div>
 			</div>
-			<div class="md:px-4 lg:px-0 lg:w-8/12 w-full mx-auto">
+			<div class="md:p-4 lg:px-0 lg:w-8/12 w-full mx-auto">
 				<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl" />
-				<div v-else-if="!fetched" class="flex flex-col gap-4 max-w-[500px] mx-auto">
+				<div v-else-if="!fetched" class="flex flex-col gap-4 max-w-[500px] mx-auto p-4 md:p-0">
 					<div v-for="r in recent" :key="r" class="flex items-center gap-4">
 						<IonIcon :icon="closeOutline" class="text-2xl" @click="clearFromRecent(r)" />
 						<IonText class="w-full text-xl truncate">{{ r }}</IonText>
