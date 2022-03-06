@@ -11,28 +11,24 @@
 					</div>
 					<div class="nav-scroll !text-new_gray">
 						<router-link :to="`/explore`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
+							exact-active-class="border-b-2 text-white border-white">
 							All
 						</router-link>
 						<router-link :to="`/explore/preps`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
+							exact-active-class="border-b-2 text-white border-white">
 							TestPreps
 						</router-link>
 						<router-link :to="`/explore/notes`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
+							exact-active-class="border-b-2 text-white border-white">
 							Notes
 						</router-link>
 						<router-link :to="`/explore/videos`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
+							exact-active-class="border-b-2 text-white border-white">
 							Videos
 						</router-link>
 						<router-link :to="`/explore/flashCards`"
 							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
+							exact-active-class="border-b-2 text-white border-white">
 							FlashCards
 						</router-link>
 					</div>
