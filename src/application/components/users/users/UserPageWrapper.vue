@@ -16,11 +16,11 @@
 							<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="white" />
 						</h2>
 						<div class="flex items-start mb-1 gap-2">
-							<Tag :index="6" :tag="`${user.score} pts`" class="font-bold" />
+							<Tag :index="6" :tag="`${user.formattedScore} pts`" class="font-bold" />
 							<Tag :index="user.rank.level" :secondary="true" :tag="user.rank.id" class="font-bold" />
 						</div>
 
-						<IonButton v-if="isAdmin && id !== user.id" class="btn-white" size="small"
+						<IonButton v-if="isAdmin && id !== user.id" class="btn-primary w-full" size="small"
 							@click="user.isVerified ? deVerifyUser(user) : verifyUser(user)">
 							{{ user.isVerified ? 'Mark User Unverified' : 'Mark User Verified' }}
 						</IonButton>
