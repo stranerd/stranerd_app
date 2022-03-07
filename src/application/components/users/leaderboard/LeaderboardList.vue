@@ -2,9 +2,9 @@
 	<div class="flex flex-col items-center justify-content-center gap-1 gap-md-2">
 		<PageLoading v-if="loading" />
 
-		<div class="flex flex-col gap-0-5 w-full mt-6 md:mt-0 px-4">
+		<div class="flex flex-col gap-0-5 w-full mt-6 md:mt-0 ">
 			<div
-				class="flex rounded-xl bg-gray font-bold lg:text-base text-xs text-white py-4 px-4 text-dark">
+				class="flex lg:rounded-xl bg-gray font-bold lg:text-base text-xs text-white py-4 px-4 text-dark">
 				<div class="lg:w-1/12 w-2/12">
 					<span>Rank</span>
 				</div>
@@ -17,7 +17,7 @@
 
 			<router-link v-for="(person, index) in users" :key="person.hash" :class="{'bg-yellow_star': person.id === id}"
 				:to="`/users/${person.id}`"
-				class="flex items-center mt-4 bg-white rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 px-4"
+				class="flex items-center mt-4 bg-white lg:rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 px-4"
 			>
 				<div class="lg:w-1/12 w-2/12">
 					<span>{{ index + 1 }} </span>
@@ -36,7 +36,7 @@
 			</router-link>
 
 			<router-link v-if="user && hasNoAuthUser" :to="`/users/${user.id}`"
-				class="flex items-center mt-4 bg-white rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 px-4 bg-yellow_star">
+				class="flex items-center mt-4  lg:rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 px-4 bg-yellow_star">
 				<div class="lg:w-1/12 w-2/12">
 					<span> - </span>
 				</div>
