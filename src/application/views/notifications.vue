@@ -2,19 +2,20 @@
 	<Justified>
 		<div>
 			<div class="flex flex-col items-center">
-				<div class="w-full lg:block hidden pt-3 md:bg-primary md:py-6 md:pb-16 px-4">
-					<div class="md:flex justify-between items-center w-full hidden max-w-4xl mx-auto ">
-						<h1 class="lg:text-2xl text-lg font-bold text-white">
-							Notifications
-						</h1>
-						<span class="text-white text-body flex items-end justify-center hidden">
-							Mark all as read
-							<ion-icon :icon="checkmarkDoneOutline" class="text-xl text-white"></ion-icon>
-						</span>
-					</div>
-				</div>
+		
 				<div class="px-4 w-full ">
-					<div class="w-full max-w-4xl mx-auto bg-white p-6 rounded-xl lg:-mt-10 mt-6">
+					<div class="w-full lg:w-8/12 mx-auto bg-white py-6 rounded-xl md:mt-6">
+
+						<div class="md:flex justify-between items-center w-full hidden  mx-auto  border-b border-new_gray px-8 pb-3">
+							<h1 class="lg:text-2xl text-lg font-bold text-main_dark">
+								Notifications
+							</h1>
+							<span class="text-main_dark text-body hidden items-end justify-center">
+								Mark all as read
+								<ion-icon :icon="checkmarkDoneOutline" class="text-xl text-main_dark"></ion-icon>
+							</span>
+						</div>
+					
 						<EmptyState
 							v-if="!loading && !error && !notifications.length"
 							btnText="Go To Home"
@@ -25,7 +26,8 @@
 							v-for="notification in notifications"
 							:key="notification.hash"
 							:notification="notification"
-							class="px-4"
+							class="md:px-8"
+							
 						/>
 					</div>
 					<div v-if="hasMore" class="text-center py-2 text-18 text-primary-dark">

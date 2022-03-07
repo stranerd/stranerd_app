@@ -1,11 +1,11 @@
 <template>
-	<div class="bg-light_gray gap-0-5 text-dark w-full my-2 p-4 rounded-md" @click="markNotificationSeen">
+	<div class="bg-white gap-0-5 text-dark w-full my-2 py-4 rounded-md text-gray" @click="markNotificationSeen">
 		<router-link :class="{'font-bold': !notification.seen}" :to="notification.link">
-			<p class="text-body lg:text-base cursor-pointer">
+			<p class=" cursor-pointer">
 				{{ notification.body }}
 			</p>
 		</router-link>
-		<p class="text-icon_inactive">{{ formatTime(notification.createdAt) }}</p>
+		<p >{{ formatTime(notification.createdAt) }}</p>
 	</div>
 </template>
 
