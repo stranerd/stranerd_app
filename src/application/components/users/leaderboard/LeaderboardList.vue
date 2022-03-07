@@ -15,7 +15,7 @@
 				</div>
 			</div>
 
-			<router-link v-for="(person, index) in users" :key="person.hash" :class="{'bg-yellow_star': person.id === id}"
+			<router-link v-for="(person, index) in users" :key="person.hash" :class="{'bg-cyan !text-white': person.id === id}"
 				:to="`/users/${person.id}`"
 				class="flex items-center mt-4 bg-white lg:rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 px-4"
 			>
@@ -23,7 +23,7 @@
 					<span>{{ index + 1 }} </span>
 				</div>
 				<div class="w-8/12 flex items-center gap-2">
-					<avatar :id="person.id" :size="24" :src="person.avatar" />
+					<avatar :id="person.id" :size="24" :src="person.avatar" :color="person.id === id ?'#ffffff' :'#132740'" />
 					<span class="flex items-center gap-1">
 						<span>{{ person.bio.fullName }}</span>
 						<IonIcon v-if="person.isVerified" :icon="checkmarkCircleOutline" color="primary" />
@@ -36,13 +36,13 @@
 			</router-link>
 
 			<router-link v-if="user && hasNoAuthUser" :to="`/users/${user.id}`"
-				class="flex items-center mt-4  lg:rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 px-4 bg-yellow_star">
+				class="flex items-center mt-4  lg:rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 px-4 bg-cyan">
 				<div class="lg:w-1/12 w-2/12">
 					<span> - </span>
 				</div>
 				<div class="w-8/12 flex items-center gap-2">
-					<avatar :id="user?.id" :size="24" :src="user.avatar" />
-					<span class="flex items-center gap-1">
+					<avatar :id="user?.id" :size="24" :src="user.avatar" :color="user.id === id ?'#ffffff' :'#132740'" />
+					<span class="flex items-center gap-1" :class="{' !text-white': user.id === id}">
 						<span>{{ user.bio.fullName }}</span>
 						<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
 					</span>
