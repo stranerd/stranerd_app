@@ -60,6 +60,7 @@ const unshiftToClassList = (classInst: ClassEntity) => {
 }
 
 const classGlobal = {} as Record<string, {
+	hash: Ref<string>
 	users: Ref<UserEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
@@ -95,28 +96,29 @@ export const useClassList = () => {
 
 export const useClassMembersList = (classInst: ClassEntity) => {
 	const { id } = useAuth()
+	const listenerCallback = async () => {
+		return ListenToUsersInList.call(classInst.membersAndRequests, {
+			created: async (entity) => {
+				const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1, entity)
+				else classGlobal[classInst.id].users.value.push(entity)
+			},
+			updated: async (entity) => {
+				const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1, entity)
+				else classGlobal[classInst.id].users.value.push(entity)
+			},
+			deleted: async (entity) => {
+				const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1)
+			}
+		})
+	}
 
 	if (classGlobal[classInst.id] === undefined) {
-		// TODO: figure out why listener uses old values here and in useSet
-		const listener = useListener(async () => {
-			return ListenToUsersInList.call(classInst.membersAndRequests, {
-				created: async (entity) => {
-					const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1, entity)
-					else classGlobal[classInst.id].users.value.push(entity)
-				},
-				updated: async (entity) => {
-					const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1, entity)
-					else classGlobal[classInst.id].users.value.push(entity)
-				},
-				deleted: async (entity) => {
-					const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1)
-				}
-			})
-		})
+		const listener = useListener(listenerCallback)
 		classGlobal[classInst.id] = {
+			hash: ref(classInst.hash),
 			users: ref([]),
 			fetched: ref(false),
 			listener,
@@ -199,6 +201,10 @@ export const useClassMembersList = (classInst: ClassEntity) => {
 
 	onMounted(async () => {
 		if (!classGlobal[classInst.id].fetched.value && !classGlobal[classInst.id].loading.value) await fetchUsers()
+		if (classGlobal[classInst.id].hash.value !== classInst.hash) {
+			classGlobal[classInst.id].hash.value = classInst.hash
+			await classGlobal[classInst.id].listener.resetListener(listenerCallback)
+		}
 		await classGlobal[classInst.id].listener.startListener()
 	})
 	onUnmounted(async () => {

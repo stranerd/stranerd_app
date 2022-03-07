@@ -12,16 +12,6 @@
 				</div>
 			</div>
 			<span class="ml-auto flex gap-3 items-center">
-				<template v-if="classInst.members.includes(user.id)">
-					<IonIcon v-if="user.id === id && classInst.userId !== id"
-						:icon="exitOutline" class="cursor-pointer text-red text-2xl"
-						@click="leaveClass()" />
-				</template>
-				<template v-if="classInst.userId === id && user.id !== id">
-					<IonIcon :icon="classInst.admins.includes(user.id) ? person : personOutline"
-						class="cursor-pointer text-primary text-2xl"
-						@click="changeRole(user.id, ClassUsers.admins, !classInst.admins.includes(user.id))" />
-				</template>
 				<template v-if="classInst.admins.includes(id)">
 					<template v-if="classInst.requests.includes(user.id)">
 						<IonIcon :icon="checkmarkOutline" class="cursor-pointer text-green text-2xl"
@@ -29,10 +19,21 @@
 						<IonIcon :icon="closeOutline" class="cursor-pointer text-red text-2xl"
 							@click="acceptRequest(user.id, false)" />
 					</template>
-					<template v-else-if="classInst.userId !== user.id && user.id !== id">
-						<IonIcon :icon="personRemoveOutline" class="cursor-pointer text-red text-2xl"
+					<template v-if="classInst.members.includes(user.id)">
+						<IonIcon v-if="classInst.userId !== user.id && user.id !== id"
+							:icon="classInst.admins.includes(user.id) ? person : personOutline"
+							class="cursor-pointer text-primary text-2xl"
+							@click="changeRole(user.id, ClassUsers.admins, !classInst.admins.includes(user.id))" />
+						<IonIcon v-if="classInst.userId !== user.id && user.id !== id"
+							:icon="personRemoveOutline"
+							class="cursor-pointer text-red text-2xl"
 							@click="removeFromClass(user.id)" />
 					</template>
+				</template>
+				<template v-if="classInst.members.includes(user.id)">
+					<IonIcon v-if="user.id === id && classInst.userId !== id"
+						:icon="exitOutline" class="cursor-pointer text-red text-2xl"
+						@click="leaveClass()" />
 				</template>
 			</span>
 		</div>
