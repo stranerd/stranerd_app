@@ -4,7 +4,7 @@
 			:search-icon="searchOutline"
 			class="w-full"
 			mode="md"
-			placeholder="Search for anything..."
+			:placeholder="placeholder"
 			showCancelButton="never"
 			type="search"
 		/>
@@ -19,6 +19,12 @@ import { searchOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'Search',
+	props:{
+		placeholder: {
+			type: String,
+			default: 'Search for anything...'
+		}
+	},
 	components: { IonSearchbar },
 	setup () {
 		const { searchTerm, search } = useSearch()
