@@ -8,7 +8,7 @@
 				</IonText>
 				<div class="flex gap-2 items-center">
 					<Tag :index="user.rank.level" :secondary="true" :tag="user.rank.id" />
-					<Tag :tag="`${formatNumber(user.score, 1)} pt`" />
+					<Tag :tag="`${user.formattedScore} pt`" />
 				</div>
 			</div>
 			<span class="ml-auto flex gap-3 items-center">
@@ -29,7 +29,7 @@
 						<IonIcon :icon="closeOutline" class="cursor-pointer text-red text-2xl"
 							@click="acceptRequest(user.id, false)" />
 					</template>
-					<template v-else-if="classInst.userId !== user.id">
+					<template v-else-if="classInst.userId !== user.id && user.id !== id">
 						<IonIcon :icon="personRemoveOutline" class="cursor-pointer text-red text-2xl"
 							@click="removeFromClass(user.id)" />
 					</template>
@@ -45,7 +45,6 @@ import { useClassMembersList } from '@app/composable/classes/classes'
 import { useAuth } from '@app/composable/auth/auth'
 import { ClassEntity, ClassUsers } from '@modules/classes'
 import { UserEntity } from '@modules/users'
-import { formatNumber } from '@utils/commons'
 import { checkmarkOutline, closeOutline, exitOutline, person, personOutline, personRemoveOutline } from 'ionicons/icons'
 
 export default defineComponent({
@@ -68,7 +67,7 @@ export default defineComponent({
 		} = useClassMembersList(props.classInst)
 		return {
 			ClassUsers,
-			admins, tutors, members, loading, error, id, formatNumber,
+			admins, tutors, members, loading, error, id,
 			acceptRequest, leaveClass, removeFromClass, changeRole,
 			exitOutline, checkmarkOutline, closeOutline, personRemoveOutline, personOutline, person
 		}

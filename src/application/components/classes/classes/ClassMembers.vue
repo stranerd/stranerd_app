@@ -7,7 +7,12 @@
 				<IonSegmentButton class="w-full" value="requests">Requests</IonSegmentButton>
 			</IonSegment>
 		</div>
-		<template v-if="tab === 'members'">
+		<template v-if="tab === 'requests'">
+			<div class="block md:gap-2">
+				<ClassMember v-for="request in requests" :key="request.hash" :classInst="classInst" :user="request" />
+			</div>
+		</template>
+		<template v-else>
 			<div v-if="admins.length" class="block md:gap-2">
 				<IonText>Admins</IonText>
 				<ClassMember v-for="admin in admins" :key="admin.hash" :classInst="classInst" :user="admin" />
@@ -19,11 +24,6 @@
 			<div v-if="members.length" class="block md:gap-2">
 				<IonText>Others</IonText>
 				<ClassMember v-for="member in members" :key="member.hash" :classInst="classInst" :user="member" />
-			</div>
-		</template>
-		<template v-if="tab === 'requests'">
-			<div class="block md:gap-2">
-				<ClassMember v-for="request in requests" :key="request.hash" :classInst="classInst" :user="request" />
 			</div>
 		</template>
 		<PageLoading v-if="loading" />
