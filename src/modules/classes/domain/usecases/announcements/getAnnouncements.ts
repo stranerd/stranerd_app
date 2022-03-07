@@ -11,6 +11,7 @@ export class GetAnnouncementsUseCase {
 
 	async call (classId: string, date?: number) {
 		const conditions: QueryParams = {
+			where: [{ field: 'classId', value: classId }],
 			sort: [{ field: 'createdAt', desc: true }],
 			limit: PAGINATION_LIMIT
 		}

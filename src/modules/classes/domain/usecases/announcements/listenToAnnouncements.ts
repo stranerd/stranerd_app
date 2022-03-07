@@ -11,6 +11,7 @@ export class ListenToAnnouncementsUseCase {
 
 	async call (classId: string, listener: Listeners<AnnouncementEntity>, date?: number) {
 		const conditions: QueryParams = {
+			where: [{ field: 'classId', value: classId }],
 			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}

@@ -37,10 +37,12 @@ import { ListenToGroupsUseCase } from './domain/usecases/groups/listenToGroups'
 import { UpdateGroupUseCase } from './domain/usecases/groups/updateGroup'
 import { DeleteGroupUseCase } from './domain/usecases/groups/deleteGroup'
 import { AddDiscussionUseCase } from './domain/usecases/discussions/addDiscussion'
-import { GetDiscussionsUseCase } from './domain/usecases/discussions/getDiscussions'
+import { GetGroupDiscussionsUseCase } from './domain/usecases/discussions/getGroupDiscussions'
+import { GetClassDiscussionsUseCase } from './domain/usecases/discussions/getClassDiscussions'
 import { FindDiscussionUseCase } from './domain/usecases/discussions/findDiscussion'
 import { ListenToDiscussionUseCase } from './domain/usecases/discussions/listenToDiscussion'
-import { ListenToDiscussionsUseCase } from './domain/usecases/discussions/listenToDiscussions'
+import { ListenToGroupDiscussionsUseCase } from './domain/usecases/discussions/listenToGroupDiscussions'
+import { ListenToClassDiscussionsUseCase } from './domain/usecases/discussions/listenToClassDiscussions'
 import { AnnouncementEntity } from './domain/entities/announcement'
 import { ClassEntity, ClassUsers } from './domain/entities/class'
 import { GroupEntity } from './domain/entities/group'
@@ -95,10 +97,12 @@ export const UpdateGroup = new UpdateGroupUseCase(groupRepository)
 export const DeleteGroup = new DeleteGroupUseCase(groupRepository)
 
 export const AddDiscussion = new AddDiscussionUseCase(discussionRepository)
-export const GetDiscussions = new GetDiscussionsUseCase(discussionRepository)
+export const GetGroupDiscussions = new GetGroupDiscussionsUseCase(discussionRepository)
+export const GetClassDiscussions = new GetClassDiscussionsUseCase(discussionRepository)
 export const FindDiscussion = new FindDiscussionUseCase(discussionRepository)
 export const ListenToDiscussion = new ListenToDiscussionUseCase(discussionRepository)
-export const ListenToDiscussions = new ListenToDiscussionsUseCase(discussionRepository)
+export const ListenToGroupDiscussions = new ListenToGroupDiscussionsUseCase(discussionRepository)
+export const ListenToClassDiscussions = new ListenToClassDiscussionsUseCase(discussionRepository)
 
 export { AnnouncementEntity, AnnouncementFactory }
 export { ClassEntity, ClassFactory, ClassUsers }

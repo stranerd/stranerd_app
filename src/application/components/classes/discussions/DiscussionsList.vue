@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useDiscussions } from '@app/composable/classes/discussions'
+import { useGroupDiscussions } from '@app/composable/classes/discussions'
 import { formatTime } from '@utils/dates'
 import DiscussionsListCard from '@app/components/classes/discussions/DiscussionsListCard.vue'
 
@@ -31,7 +31,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { loading, error, hasMore, discussions, fetchOlderDiscussions } = useDiscussions(props.groupId)
+		const { loading, error, hasMore, discussions, fetchOlderDiscussions } = useGroupDiscussions(props.groupId)
 		return { loading, error, hasMore, discussions, fetchOlderDiscussions, formatTime }
 	}
 })

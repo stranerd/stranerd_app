@@ -9,7 +9,7 @@ export class ListenToGroupsUseCase {
 		this.repository = repository
 	}
 
-	async call (classId: string, listener: Listeners<GroupEntity>, date?: number) {
+	async call (classId: string, listener: Listeners<GroupEntity>) {
 		const conditions: QueryParams = {
 			where: [{ field: 'classId', value: classId }],
 			sort: [{ field: 'createdAt' }],
