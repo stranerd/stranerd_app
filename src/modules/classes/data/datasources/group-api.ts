@@ -11,8 +11,7 @@ export class GroupApiDataSource implements GroupBaseDataSource {
 	}
 
 	async create (data: GroupToModel) {
-		const group = await this.stranerdClient.post<GroupToModel, GroupFromModel>('/', data)
-		return group.id
+		return await this.stranerdClient.post<GroupToModel, GroupFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -42,6 +41,6 @@ export class GroupApiDataSource implements GroupBaseDataSource {
 	}
 
 	async update (id: string, data: GroupToModel) {
-		await this.stranerdClient.put<GroupToModel, GroupFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<GroupToModel, GroupFromModel>(`/${id}`, data)
 	}
 }

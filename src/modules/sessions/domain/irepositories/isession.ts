@@ -3,7 +3,7 @@ import { SessionToModel } from '../../data/models/session'
 import { SessionEntity } from '../entities/session'
 
 export interface ISessionRepository {
-	add: (data: SessionToModel) => Promise<string>,
+	add: (data: SessionToModel) => Promise<SessionEntity>,
 	get: (query: QueryParams) => Promise<QueryResults<SessionEntity>>
 	find: (id: string) => Promise<SessionEntity | null>
 	listenToOne: (id: string, listener: Listeners<SessionEntity>) => Promise<() => void>

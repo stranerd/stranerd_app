@@ -11,8 +11,7 @@ export class ReviewApiDataSource implements ReviewBaseDataSource {
 	}
 
 	async create (data: ReviewToModel) {
-		const review = await this.stranerdClient.post<ReviewToModel, ReviewFromModel>('/', data)
-		return review.id
+		return await this.stranerdClient.post<ReviewToModel, ReviewFromModel>('/', data)
 	}
 
 	async find (id: string) {

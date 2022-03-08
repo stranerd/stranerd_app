@@ -10,7 +10,9 @@ import { CommentRepository } from './data/repositories/comment'
 import { FindQuestionUseCase } from './domain/usecases/questions/findQuestion'
 import { GetQuestionsUseCase } from './domain/usecases/questions/getQuestions'
 import { GetUserQuestionsUseCase } from './domain/usecases/questions/getUserQuestions'
+import { GetClassQuestionsUseCase } from './domain/usecases/questions/getClassQuestions'
 import { ListenToUserQuestionsUseCase } from './domain/usecases/questions/listenToUserQuestions'
+import { ListenToClassQuestionsUseCase } from './domain/usecases/questions/listenToClassQuestions'
 import { AddQuestionUseCase } from './domain/usecases/questions/addQuestion'
 import { EditQuestionUseCase } from './domain/usecases/questions/editQuestion'
 import { DeleteQuestionUseCase } from './domain/usecases/questions/deleteQuestion'
@@ -28,7 +30,7 @@ import { VoteAnswerUseCase } from './domain/usecases/answers/voteAnswer'
 import { AddAnswerCommentUseCase } from './domain/usecases/comments/addComment'
 import { GetAnswerCommentsUseCase } from './domain/usecases/comments/getComments'
 import { ListenToAnswerCommentsUseCase } from './domain/usecases/comments/listenToComments'
-import { QuestionEntity } from './domain/entities/question'
+import { QuestionEntity, QuestionType } from './domain/entities/question'
 import { QuestionFactory } from './domain/factories/question'
 import { AnswerEntity } from './domain/entities/answer'
 import { AnswerFactory } from './domain/factories/answer'
@@ -49,9 +51,11 @@ const commentRepository = new CommentRepository(commentDataSource, commentTransf
 
 export const GetQuestions = new GetQuestionsUseCase(questionRepository)
 export const GetUserQuestions = new GetUserQuestionsUseCase(questionRepository)
+export const GetClassQuestions = new GetClassQuestionsUseCase(questionRepository)
 export const ListenToQuestion = new ListenToQuestionUseCase(questionRepository)
 export const ListenToQuestions = new ListenToQuestionsUseCase(questionRepository)
 export const ListenToUserQuestions = new ListenToUserQuestionsUseCase(questionRepository)
+export const ListenToClassQuestions = new ListenToClassQuestionsUseCase(questionRepository)
 export const AddQuestion = new AddQuestionUseCase(questionRepository)
 export const EditQuestion = new EditQuestionUseCase(questionRepository)
 export const FindQuestion = new FindQuestionUseCase(questionRepository)
@@ -71,6 +75,6 @@ export const AddAnswerComment = new AddAnswerCommentUseCase(commentRepository)
 export const GetAnswerComments = new GetAnswerCommentsUseCase(commentRepository)
 export const ListenToAnswerComments = new ListenToAnswerCommentsUseCase(commentRepository)
 
-export { QuestionEntity, QuestionFactory }
+export { QuestionEntity, QuestionType, QuestionFactory }
 export { AnswerEntity, AnswerFactory }
 export { CommentEntity, CommentFactory }

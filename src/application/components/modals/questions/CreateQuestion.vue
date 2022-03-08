@@ -10,7 +10,7 @@
 			:submit="createQuestion"
 		>
 			<template v-slot:buttonText>
-				Send
+				Post Question
 			</template>
 		</QuestionForm>
 	</Modal>

@@ -40,6 +40,10 @@ export class FlashCardEntity extends BaseEntity {
 	get shareLink () {
 		return `/study/flashCards/${this.id}`
 	}
+
+	search (search: string) {
+		return this.title.toLowerCase().includes(search.toLowerCase()) || JSON.stringify(this.set).toLowerCase().includes(search.toLowerCase())
+	}
 }
 
 type FlashCardConstructorArgs = {

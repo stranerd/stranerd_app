@@ -1,5 +1,5 @@
 <template>
-	<ion-toolbar class="hidden lg:flex border-0 z-50 h-20">
+	<ion-toolbar class="hidden lg:flex border-0 h-20">
 		<div class="flex items-center">
 			<div class="w-[16%]">
 				<router-link class="flex items-center w-full justify-center" to="/">
@@ -22,7 +22,7 @@
 							class=" font-bold flex flex-row items-center justify-center gap-2 cursor-pointer"
 							@click="openUserDashboardMenu"
 						>
-							<avatar :size="24" :src="user.avatar" />
+							<avatar :name="user?.bio.fullName" :size="24" :src="user?.avatar" />
 							<span class="text-base text-main_dark truncate max-w-[150px] flex items-center gap-1">
 								<span>{{ user.fullName }}</span>
 								<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />

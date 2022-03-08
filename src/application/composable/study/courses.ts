@@ -1,13 +1,5 @@
 import { computed, onMounted, Ref, ref } from 'vue'
-import {
-	AddCourse,
-	CourseEntity,
-	CourseFactory,
-	DeleteCourse,
-	EditCourse,
-	FindCourse,
-	GetCourses
-} from '@modules/study'
+import { AddCourse, CourseEntity, CourseFactory, DeleteCourse, EditCourse, GetCourses } from '@modules/study'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useStudyModal } from '@app/composable/core/modals'
@@ -87,8 +79,7 @@ export const useCreateCourse = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const id = await AddCourse.call(factory.value)
-				const course = await FindCourse.call(id)
+				const course = await AddCourse.call(factory.value)
 				if (course) pushToGlobalCourses(course)
 				factory.value.reset()
 				useStudyModal().closeCreateCourse()
@@ -123,8 +114,7 @@ export const useEditCourse = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				await EditCourse.call(editingCourse!.id, factory.value)
-				const updatedCourse = await FindCourse.call(editingCourse!.id)
+				const updatedCourse = await EditCourse.call(editingCourse!.id, factory.value)
 				if (updatedCourse) pushToGlobalCourses(updatedCourse)
 				factory.value.reset()
 				useStudyModal().closeEditCourse()

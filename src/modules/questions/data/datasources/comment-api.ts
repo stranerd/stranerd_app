@@ -11,8 +11,7 @@ export class CommentApiDataSource implements CommentBaseDataSource {
 	}
 
 	async create (data: CommentToModel) {
-		const comment = await this.stranerdClient.post<CommentToModel, CommentFromModel>('/', data)
-		return comment.id
+		return await this.stranerdClient.post<CommentToModel, CommentFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -24,7 +23,7 @@ export class CommentApiDataSource implements CommentBaseDataSource {
 	}
 
 	async update (id: string, data: CommentToModel) {
-		await this.stranerdClient.put<CommentToModel, CommentFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<CommentToModel, CommentFromModel>(`/${id}`, data)
 	}
 
 	async listenToOne (id: string, listeners: Listeners<CommentFromModel>) {

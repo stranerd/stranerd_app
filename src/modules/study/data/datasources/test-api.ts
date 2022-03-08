@@ -11,8 +11,7 @@ export class TestApiDataSource implements TestBaseDataSource {
 	}
 
 	async create (data: TestToModel) {
-		const test = await this.stranerdClient.post<TestToModel, TestFromModel>('/', data)
-		return test.id
+		return await this.stranerdClient.post<TestToModel, TestFromModel>('/', data)
 	}
 
 	async find (id: string) {

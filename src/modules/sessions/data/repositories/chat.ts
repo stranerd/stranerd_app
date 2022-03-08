@@ -15,7 +15,7 @@ export class ChatRepository implements IChatRepository {
 	}
 
 	async add (data: ChatToModel) {
-		return await this.dataSource.create(data)
+		return this.transformer.fromJSON(await this.dataSource.create(data))
 	}
 
 	async get (query: QueryParams) {

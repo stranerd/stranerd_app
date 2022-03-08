@@ -44,5 +44,17 @@ export class AnnouncementEntity extends BaseEntity {
 	get isUserVerified () {
 		return this.userRoles[appName].isVerified
 	}
+
+	get members () {
+		return this.users[ClassUsers.members]
+	}
+
+	get admins () {
+		return this.users[ClassUsers.admins]
+	}
+
+	get tutors () {
+		return this.users[ClassUsers.tutors]
+	}
 }
 

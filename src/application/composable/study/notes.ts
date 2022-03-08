@@ -87,9 +87,9 @@ export const useCreateNote = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const noteId = await AddNote.call(factory.value)
+				const note = await AddNote.call(factory.value)
 				await setMessage('Note submitted successfully')
-				await router.replace(`/study/notes/${noteId}`)
+				await router.replace(`/study/notes/${note.id}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

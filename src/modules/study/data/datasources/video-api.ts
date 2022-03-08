@@ -11,8 +11,7 @@ export class VideoApiDataSource implements VideoBaseDataSource {
 	}
 
 	async create (data: VideoToModel) {
-		const video = await this.stranerdClient.post<VideoToModel, VideoFromModel>('/', data)
-		return video.id
+		return await this.stranerdClient.post<VideoToModel, VideoFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -42,6 +41,6 @@ export class VideoApiDataSource implements VideoBaseDataSource {
 	}
 
 	async update (id: string, data: VideoToModel) {
-		await this.stranerdClient.put<VideoToModel, VideoFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<VideoToModel, VideoFromModel>(`/${id}`, data)
 	}
 }

@@ -87,9 +87,9 @@ export const useCreateVideo = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const videoId = await AddVideo.call(factory.value)
+				const video = await AddVideo.call(factory.value)
 				await setMessage('Video submitted successfully')
-				await router.replace(`/study/videos/${videoId}`)
+				await router.replace(`/study/videos/${video.id}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

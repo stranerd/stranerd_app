@@ -3,7 +3,7 @@ import { TestEntity } from '../entities/test'
 import { TestToModel } from '../../data/models/test'
 
 export interface ITestRepository {
-	add: (data: TestToModel) => Promise<string>
+	add: (data: TestToModel) => Promise<TestEntity>
 	get: (query: QueryParams) => Promise<QueryResults<TestEntity>>
 	listenToOne: (id: string, listener: Listeners<TestEntity>) => Promise<() => void>
 	listenToMany: (query: QueryParams, listener: Listeners<TestEntity>, matches: (entity: TestEntity) => boolean) => Promise<() => void>

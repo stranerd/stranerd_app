@@ -1,11 +1,8 @@
 <template>
 	<div>
-		<form class="flex justify-between mb-4" @submit.prevent="getUsersByEmail">
-			<ion-input v-model="email" class="bg-white border border-faded_gray !p-0 w-full"
+		<form class="flex justify-between items-center mb-4" @submit.prevent="getUsersByEmail">
+			<ion-input v-model="email" class="bg-white border border-faded_gray w-full"
 				placeholder="Enter user's email address" />
-			<ion-button :disabled="loading || !email" class="btn-primary" type="submit">
-				Find Users
-			</ion-button>
 		</form>
 		<DisplayError :error="error" />
 		<div v-if="fetched">
@@ -38,17 +35,11 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-	ion-button.btn-primary {
-		--padding-top: 1.7rem !important;
-		--padding-bottom: 1.7rem !important;
-		--border-radius: 0 0.75rem 0.75rem 0 !important;
-	}
-
+<style lang="scss" scoped>
 	ion-input {
-		--padding-top: 1rem !important;
-		--padding-bottom: 1rem !important;
-		border-bottom-right-radius: 0 !important;
-		border-top-right-radius: 0 !important;
+		--padding-top: 0.5rem !important;
+		--padding-bottom: 0.5rem !important;
+		--padding-left: 0 !important;
+		--padding-right: 0 !important;
 	}
 </style>

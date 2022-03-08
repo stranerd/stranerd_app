@@ -99,10 +99,10 @@ export const useCreateAnswer = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const answerId = await AddAnswer.call(factory.value)
+				const answer = await AddAnswer.call(factory.value)
 				await setMessage('Answer submitted successfully.')
 				factory.value.reset()
-				await router.replace(`/questions/${answeringQuestion?.id ?? ''}#${answerId}`)
+				await router.replace(`/questions/${answeringQuestion?.id ?? ''}#${answer.id}`)
 				showAddAnswer.value = false
 			} catch (error) {
 				await setError(error)

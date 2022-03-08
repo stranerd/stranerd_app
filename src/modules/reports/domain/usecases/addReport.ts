@@ -8,7 +8,7 @@ export class AddReportUseCase {
 		this.repository = repository
 	}
 
-	async call (factory: ReportFactory): Promise<string> {
+	async call (factory: ReportFactory) {
 		return await this.repository.add(await factory.toModel())
 	}
 }

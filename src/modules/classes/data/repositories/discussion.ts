@@ -54,7 +54,7 @@ export class DiscussionRepository implements IDiscussionRepository {
 	}
 
 	async add (data: DiscussionToModel) {
-		return await this.dataSource.create(data)
+		return this.transformer.fromJSON(await this.dataSource.create(data))
 	}
 
 	async find (id: string) {

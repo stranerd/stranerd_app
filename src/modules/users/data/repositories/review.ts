@@ -15,7 +15,7 @@ export class ReviewRepository implements IReviewRepository {
 	}
 
 	async create (data: ReviewToModel) {
-		return this.dataSource.create(data)
+		return this.transformer.fromJSON(await this.dataSource.create(data))
 	}
 
 	async get (query: QueryParams) {

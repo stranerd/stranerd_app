@@ -1,16 +1,15 @@
 <template>
-	<form @submit.prevent="submit">
+	<form class="flex flex-col gap-4" @submit.prevent="submit">
 		<IonInput
 			v-model="factory.subject"
-			class="w-full bg-new_gray"
-			placeholder="Select a Subject"
+			class="w-full bg-white border border-new_gray lg:hidden"
+			placeholder="What subject/course does your question fall under?"
 		/>
 		<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
-			class="lg:mt-3 px-1"
 			placeholder="Write your question here." />
 
-		<div v-if="factory.attachments.length > 0" class="py-2 flex flex-row flex-wrap gap-x-2">
-			<span v-for="attachment in factory.attachments" :key="attachment.name" class="my-1">
+		<div v-if="factory.attachments.length > 0" class="flex flex-row flex-wrap gap-2">
+			<span v-for="attachment in factory.attachments" :key="attachment.name">
 				<span
 					class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
 					{{ attachment.name }} <IonIcon :icon="closeOutline" class="ml-1 cursor-pointer"
@@ -20,21 +19,26 @@
 		</div>
 		<DisplayError :error="factory.errors.attachments" />
 
-		<div class="flex w-full lg:mt-8 mt-5 items-center gap-6">
+		<div class="flex items-center gap-4">
+			<IonInput
+				v-model="factory.subject"
+				class="w-full flex-grow bg-white border border-new_gray hidden lg:block"
+				placeholder="What subject/course does your question fall under?"
+			/>
 			<FileInput
 				:multiple="true"
 				accept="image/x-png,image/jpeg,image/jpg"
-				class="w-1/2"
+				class="w-full lg:w-auto"
 				@files="catchAttachments"
 			>
-				<ion-button class=" btn-secondary w-full text-primary">
-					<ion-icon :icon="imageOutline" class="!text-2xl text-primary mr-4" />
-					Add image
+				<ion-button class="btn-secondary w-full text-primary flex items-center" size="small">
+					<ion-icon :icon="imageOutline" class="!text-2xl text-primary mr-2" />
+					<span>Add image</span>
 				</ion-button>
 			</FileInput>
-			<ion-button :disabled="loading || !factory.valid"
-				class="w-1/2 btn-primary h-12" type="submit">
-				<ion-icon :icon="paperPlaneOutline" class="!text-2xl text-white mr-4" />
+			<ion-button :disabled="loading || !factory.valid" class="w-full lg:w-auto btn-primary flex items-center"
+				size="small" type="submit">
+				<ion-icon :icon="paperPlaneOutline" class="!text-2xl text-white mr-2" />
 				<slot name="buttonText">Submit</slot>
 			</ion-button>
 		</div>
@@ -79,18 +83,12 @@ export default defineComponent({
 		const catchAttachments = useFileInputCallback(async (files) => {
 			files.map(props.factory.addAttachment)
 		})
-
 		return { imageOutline, paperPlaneOutline, closeOutline, catchAttachments }
 	}
 })
 </script>
 
 <style scoped>
-	ion-select {
-		--placeholder-color: #8B9EB1;
-		--placeholder-opacity: 1;
-	}
-
 	ion-input {
 		--placeholder-color: #8B9EB1;
 		--placeholder-opacity: 1;

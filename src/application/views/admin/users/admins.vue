@@ -1,7 +1,7 @@
 <template>
 	<AdminWrapper>
 		<div>
-			<UpgradeUserToAdmin class="mb-8" />
+			<UpgradeUserToAdmin class="mb-4" />
 			<AdminsList />
 		</div>
 	</AdminWrapper>

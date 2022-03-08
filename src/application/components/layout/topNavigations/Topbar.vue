@@ -1,9 +1,11 @@
 <template>
-	<ion-header class="block ion-no-border z-40 inset-x-0 w-full lg:shadow-md">
+	<ion-header class="block ion-no-border inset-x-0 w-full lg:shadow-md z-10">
 		<ion-toolbar class="lg:hidden bg-white px-4 border-bottom-line md:h-auto flex items-center justify-center">
 			<div class="flex items-center justify-between">
-				<router-link class="flex items-center" to="/">
-					<Logo :secondary="true" class="w-24" />
+				<router-link to="/">
+					<IonText class="font-bold text-main_dark">
+						{{ $route.meta.displayName ?? 'Stranerd' }}
+					</IonText>
 				</router-link>
 				<div class="flex items-center">
 
@@ -17,10 +19,10 @@
 					<router-link class="flex items-center" to="/notifications">
 						<NotificationIcon :key="user?.id" class="text-xl text-main_dark mr-6" />
 					</router-link>
-					<Avatar v-if="isLoggedIn" :size="24" :src="user?.avatar"
+					<Avatar v-if="isLoggedIn" :name="user?.bio.fullName" :size="24" :src="user?.avatar"
 						@click="openUserDashboardMenu" />
 					<router-link v-else class="flex items-center" to="/account">
-						<Avatar :size="24" :src="user?.avatar" />
+						<Avatar :size="24" />
 					</router-link>
 				</div>
 			</div>

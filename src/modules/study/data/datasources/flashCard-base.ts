@@ -2,8 +2,8 @@ import { Listeners, QueryParams, QueryResults } from '@modules/core'
 import { FlashCardFromModel, FlashCardToModel } from '../models/flashCard'
 
 export interface FlashCardBaseDataSource {
-	create: (data: FlashCardToModel) => Promise<string>
-	update: (id: string, data: FlashCardToModel) => Promise<void>
+	create: (data: FlashCardToModel) => Promise<FlashCardFromModel>
+	update: (id: string, data: FlashCardToModel) => Promise<FlashCardFromModel>
 	get: (query: QueryParams) => Promise<QueryResults<FlashCardFromModel>>
 	listenToOne: (id: string, listener: Listeners<FlashCardFromModel>) => Promise<() => void>
 	listenToMany: (query: QueryParams, listener: Listeners<FlashCardFromModel>) => Promise<() => void>

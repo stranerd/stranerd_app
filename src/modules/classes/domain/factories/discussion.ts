@@ -4,26 +4,26 @@ import { DiscussionToModel } from '../../data/models/discussion'
 import { DiscussionEntity } from '../entities/discussion'
 
 type Content = UploadedFile | Media | null
-type Keys = { content: string | null, groupId: string, media: Content | null }
+type Keys = { content: string, groupId: string, media: Content | null }
 
 export class DiscussionFactory extends BaseFactory<DiscussionEntity, DiscussionToModel, Keys> {
 	readonly rules = {
-		content: { required: () => !this.media, rules: [isString, isLongerThanX(0)] },
-		groupId: { required: false, rules: [isString] },
-		media: { required: () => !this.content, rules: [isFile] }
+		content: { required: true, rules: [isString] },
+		groupId: { required: false, rules: [isString, isLongerThanX(0)] },
+		media: { required: false, rules: [isFile] }
 	}
 
-	reserved = []
+	reserved = ['groupId']
 
 	constructor () {
-		super({ content: null, media: null, groupId: '' })
+		super({ content: '', media: null, groupId: '' })
 	}
 
 	get content () {
 		return this.values.content
 	}
 
-	set content (value: string | null) {
+	set content (value: string) {
 		this.set('content', value)
 	}
 
@@ -39,7 +39,7 @@ export class DiscussionFactory extends BaseFactory<DiscussionEntity, DiscussionT
 		return this.values.groupId
 	}
 
-	set groupId (value: string | null) {
+	set groupId (value: string) {
 		this.set('groupId', value)
 	}
 

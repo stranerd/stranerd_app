@@ -11,8 +11,7 @@ export class InstitutionApiDataSource implements InstitutionBaseDataSource {
 	}
 
 	async create (data: InstitutionToModel) {
-		const institution = await this.stranerdClient.post<InstitutionToModel, InstitutionFromModel>('/', data)
-		return institution.id
+		return await this.stranerdClient.post<InstitutionToModel, InstitutionFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -42,6 +41,6 @@ export class InstitutionApiDataSource implements InstitutionBaseDataSource {
 	}
 
 	async update (id: string, data: InstitutionToModel) {
-		await this.stranerdClient.put<InstitutionToModel, InstitutionFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<InstitutionToModel, InstitutionFromModel>(`/${id}`, data)
 	}
 }

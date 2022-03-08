@@ -15,7 +15,7 @@ export class NotificationEntity extends BaseEntity {
 		this.id = id
 		this.body = body
 		this.action = action
-		this.data = data ?? {}
+		this.data = data
 		this.userId = userId
 		this.seen = seen
 		this.createdAt = createdAt
@@ -39,7 +39,7 @@ export class NotificationEntity extends BaseEntity {
 		} else if (action === 'roles') {
 			if (data.user) return '/admin/users/admins'
 			if (data.tutor) return '/admin/users/tutors'
-		}
+		} else if (action === 'announcements') return `/classes/${data.classId}/announcements#${data.announcementId}`
 		return '/dashboard'
 	}
 }
@@ -47,4 +47,25 @@ export class NotificationEntity extends BaseEntity {
 type NotificationConstructorArgs = {
 	id: string, body: string, action: string, userId: string, data: Record<string, any>
 	createdAt: number, seen: boolean, updatedAt: number
-}
+} & NotificationData
+
+type QuestionData = { action: 'questions', data: { questionId: string } }
+type AnswerData = { action: 'answers', data: { questionId: string, answerId: string } }
+type QuestionCommentData = { action: 'questionComments', data: { questionId: string, commentId: string } }
+type AnswerCommentData = { action: 'answerComments', data: { questionId: string, answerId: string, commentId: string } }
+type SessionData = { action: 'sessions', data: { userId: string, sessionId: string } }
+type UserData = { action: 'users', data: { userId: string } }
+type AccountData = { action: 'account', data: { profile?: true, wallet?: true } }
+type RoleData = { action: 'roles', data: { admin?: true, tutor?: true } }
+type AnnouncementData = { action: 'announcements', data: { classId: string, announcementId: string } }
+
+type NotificationData =
+	QuestionData
+	| AnswerData
+	| QuestionCommentData
+	| AnswerCommentData
+	| SessionData
+	| UserData
+	| AccountData
+	| RoleData
+	| AnnouncementData

@@ -11,10 +11,13 @@ export class ListenToChatsUseCase {
 
 	async call (path: [string, string], listener: Listeners<ChatEntity>, date?: number) {
 		const conditions: QueryParams = {
+			where: [{ field: 'path', condition: Conditions.in, value: path[0] },
+				{ field: 'path', condition: Conditions.in, value: path[1] }],
 			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
-		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.gt, value: date }]
+
+		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
 			if (!entity.path.includes(path[0]) || !entity.path.includes(path[1])) return false
