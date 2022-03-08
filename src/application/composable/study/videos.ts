@@ -89,7 +89,7 @@ export const useCreateVideo = () => {
 				await setLoading(true)
 				const videoId = await AddVideo.call(factory.value)
 				await setMessage('Video submitted successfully')
-				await router.replace(`/study/videos/${videoId}`)
+				await router.push(`/study/videos/${videoId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -122,7 +122,7 @@ export const useEditVideo = (videoId: string) => {
 				await setLoading(true)
 				await EditVideo.call(videoId, factory.value)
 				await setMessage('Video updated successfully')
-				await router.replace(`/study/videos/${videoId}`)
+				await router.push(`/study/videos/${videoId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

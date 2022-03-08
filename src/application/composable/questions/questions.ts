@@ -144,7 +144,7 @@ export const useCreateQuestion = () => {
 				await setMessage('Question submitted successfully')
 				factory.value.reset()
 				useQuestionModal().closeCreateQuestion()
-				await router.replace(`/questions/${questionId}`)
+				await router.push(`/questions/${questionId}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -230,7 +230,7 @@ export const useEditQuestion = () => {
 				await setMessage('Question edited successfully')
 				useQuestionModal().closeEditQuestion()
 				factory.value.reset()
-				await router.replace(`/questions/${editingQuestion!.id}`)
+				await router.push(`/questions/${editingQuestion!.id}`)
 			} catch (error) {
 				await setError(error)
 			}
