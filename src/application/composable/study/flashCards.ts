@@ -89,7 +89,7 @@ export const useCreateFlashCard = () => {
 				await setLoading(true)
 				const flashCard = await AddFlashCard.call(factory.value)
 				await setMessage('FlashCard submitted successfully')
-				await router.replace(`/study/flashCards/${flashCard.id}`)
+				await router.push(`/study/flashCards/${flashCard.id}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -122,7 +122,7 @@ export const useEditFlashCard = (flashCardId: string) => {
 				await setLoading(true)
 				await EditFlashCard.call(flashCardId, factory.value)
 				await setMessage('FlashCard updated successfully')
-				await router.replace(`/study/flashCards/${flashCardId}`)
+				await router.push(`/study/flashCards/${flashCardId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

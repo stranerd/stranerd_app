@@ -89,7 +89,7 @@ export const useCreateNote = () => {
 				await setLoading(true)
 				const note = await AddNote.call(factory.value)
 				await setMessage('Note submitted successfully')
-				await router.replace(`/study/notes/${note.id}`)
+				await router.push(`/study/notes/${note.id}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -122,7 +122,7 @@ export const useEditNote = (noteId: string) => {
 				await setLoading(true)
 				await EditNote.call(noteId, factory.value)
 				await setMessage('Note updated successfully')
-				await router.replace(`/study/notes/${noteId}`)
+				await router.push(`/study/notes/${noteId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

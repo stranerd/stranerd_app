@@ -91,7 +91,7 @@ export const useCreateAnswer = () => {
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	if (!answeringQuestion) router.replace('/questions')
+	if (!answeringQuestion) router.push('/questions')
 	factory.value.questionId = answeringQuestion!.id
 
 	const createAnswer = async () => {
@@ -102,7 +102,7 @@ export const useCreateAnswer = () => {
 				const answer = await AddAnswer.call(factory.value)
 				await setMessage('Answer submitted successfully.')
 				factory.value.reset()
-				await router.replace(`/questions/${answeringQuestion?.id ?? ''}#${answer.id}`)
+				await router.push(`/questions/${answer.questionId}`)
 				showAddAnswer.value = false
 			} catch (error) {
 				await setError(error)
@@ -181,10 +181,10 @@ export const useEditAnswer = (answerId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditAnswer.call(answerId, factory.value)
+				const answer = await EditAnswer.call(answerId, factory.value)
 				await setMessage('Answer edited successfully')
 				factory.value.reset()
-				await router.replace(`/questions/${editingQuestionAnswer?.question.id}#${answerId}`)
+				await router.push(`/questions/${answer.questionId}`)
 			} catch (error) {
 				await setError(error)
 			}
