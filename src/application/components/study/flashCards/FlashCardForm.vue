@@ -1,48 +1,56 @@
 <template>
 	<div>
-		<div
+
+		<div class="text-body md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
+			<div class="bg-white rounded-xl p-4 flex flex-col">
+				<div class="flex flex-col justify-start items-start">
+					<ion-text class="heading font-bold mb-2 hidden md:block">
+						Create a flashcard set
+					</ion-text>
+					<ion-input v-model="factory.title"
+						class="w-full"
+						mode="md"
+						placeholder="Enter a title "
+						show-cancel-button="never"
+					></ion-input>
+
+					<DisplayError :error="factory.errors.title" />
+
+				</div>
+			</div>
+		</div>
+		<!-- <div
 			class="bg-primary w-full h-auto flex flex-col justify-between items-center md:pt-12 pt-4 pb-1 md:rounded-none rounded-b-xl gap-4">
 			<ion-text class="heading lg:text-2xl font-bold text-white text-center mb-2 hidden md:block">
 				{{ title }}
 			</ion-text>
 			<div class="lg:w-8/12 w-full flex flex-col gap-4 px-4">
-				<div>
-					<div class="bg-white rounded-md flex items-center px-4">
-						<ion-text class="text-primary font-bold w-12">
-							TITLE
-						</ion-text>
-						<ion-input v-model="factory.title"
-							class="max-w-[1054px]"
-							mode="md"
-							placeholder="Enter a title with the format; “[subject] - [sub-topics covered] or [exam/test studying for]”"
-							show-cancel-button="never"
-						></ion-input>
-					</div>
-					<DisplayError :error="factory.errors.title" />
-				</div>
+			
 			</div>
-		</div>
+		</div> -->
 
-		<div class="lg:w-8/12 w-full px-4 mx-auto mt-4 md:mt-8 flex flex-col gap-4">
-			<ion-reorder-group class="flex flex-col gap-4" disabled="true">
+
+
+		<div class="lg:w-8/12 w-full  mx-auto mt-4  flex flex-col gap-4">
+			<ion-reorder-group class="flex flex-col gap-4 px-4 md:p-0" disabled="true">
 				<ion-reorder v-for="(card, index) in factory.questions" :key="index"
-					class="flex flex-col bg-white p-4 rounded-xl">
+					class="flex flex-col bg-white p-4 rounded-xl border border-new_gray ">
 					<div class="flex w-full items-center justify-between">
-						<ion-text class="text-main_dark font-bold">Card {{ index + 1 }}</ion-text>
+						<ion-text class="text-main_dark font-normal"> {{ index + 1 }}</ion-text>
 						<div class="flex" @click="factory.removeQuestion(index)">
-							<ion-icon :icon='trashOutline' class="text-main_dark" />
+							<ion-icon :icon='trashOutline' class="text-red" />
 						</div>
 					</div>
 
-					<div class="flex w-full md:flex-row flex-col gap-4 md:h-auto">
+					<div class="flex w-full md:flex-row flex-col md:gap-4 gap-1 md:h-auto">
 						<ion-textarea v-model="card.question"
-							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl w-full"
-							placeholder="Front (Questions or Words)"
-							rows="5" />
+							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl w-full h-16"
+							placeholder="Enter question or word"
+						/>
 						<ion-textarea v-model="card.answer"
 							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl w-full"
-							placeholder="Back (Answers or Definitions or Translations)"
-							rows="5" />
+							placeholder="Enter answer or definition"
+						/>
 					</div>
 				</ion-reorder>
 			</ion-reorder-group>
@@ -56,8 +64,8 @@
 				<ion-text>ADD CARD</ion-text>
 			</div>
 
-			<div class="w-full flex justify-end mb-8">
-				<ion-button :disabled="loading || !factory.valid" class="btn-primary btn-lg !pr-0" @click="submit">
+			<div class="w-full flex justify-end mb-8 px-4">
+				<ion-button :disabled="loading || !factory.valid" class="btn-primary btn-lg !pr-0 w-full md:w-auto" @click="submit()">
 					<slot name="buttonTitle">Submit</slot>
 				</ion-button>
 			</div>
@@ -105,8 +113,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+	ion-textarea{
+		height: 104px;
+	}
 	.ion-item-transparent {
 		--background: transparent;
+	}
+	ion-input{
+		--background: rgba(242, 243, 245, 1);
 	}
 
 	ion-label {

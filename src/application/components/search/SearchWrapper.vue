@@ -42,50 +42,7 @@
 					</router-link>
 				</div>
 			</div>
-			<!-- <div class="blueTop px-4">
-				<div class="lg:w-8/12 w-full">
-					<div class="flex flex-col justify-center items-center">
-						<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-12 hidden md:block">
-							Explore thousands of study materials
-						</ion-text>
-						<Search class="my-4" />
-					</div>
-					<div class="nav-scroll !text-new_gray">
-						<router-link :to="`/search?search=${searchTerm}`"
-							exact-active-class="border-b-2 text-white border-white">
-							All
-						</router-link>
-						<router-link :to="`/search/preps?search=${searchTerm}`"
-							exact-active-class="border-b-2 text-white border-white">
-							TestPreps
-						</router-link>
-						<router-link :to="`/search/notes?search=${searchTerm}`"
-							exact-active-class="border-b-2 text-white border-white">
-							Notes
-						</router-link>
-						<router-link :to="`/search/videos?search=${searchTerm}`"
-							exact-active-class="border-b-2 text-white border-white">
-							Videos
-						</router-link>
-						<router-link :to="`/search/flashCards?search=${searchTerm}`"
-							exact-active-class="border-b-2 text-white border-white">
-							FlashCards
-						</router-link>
-						<router-link :to="`/search/sets?search=${searchTerm}`"
-							exact-active-class="border-b-2 text-white border-white">
-							Folders
-						</router-link>
-						<router-link :to="`/search/nerds?search=${searchTerm}`"
-							exact-active-class="border-b-2 text-white border-white">
-							Nerds
-						</router-link>
-						<router-link :to="`/search/questions?search=${searchTerm}`"
-							exact-active-class="border-b-2 text-white border-white">
-							Questions
-						</router-link>
-					</div>
-				</div>
-			</div> -->
+		
 			<div class="md:mt-6 md:px-4 lg:px-0">
 				<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl" />
 				<div v-else-if="!fetched" class="flex flex-col gap-4 max-w-[500px] mx-auto p-4 md:p-0">

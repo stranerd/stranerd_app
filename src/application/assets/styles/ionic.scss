@@ -214,6 +214,10 @@ ion-input, ion-textarea, ion-select {
 	--placeholder-color: $color-iconInactive;
 	--border-color: $color-iconInactive !important;
 	--placeholder-opacity: 1;
+		@media (max-width: 640px) {
+		--border-radius: .5rem;
+	border-radius: .5rem;
+	}
 }
 
 .btn-secondary {
