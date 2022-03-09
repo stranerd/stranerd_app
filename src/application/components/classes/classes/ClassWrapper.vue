@@ -12,7 +12,7 @@
 							<IonText class="text-main_dark md:text-[20px] capitalize font-semibold">
 								{{ classInst.name }}
 							</IonText>
-							<Share :description="classInst.description" :link="`/classes/${classInst.id}`"
+							<Share :link="`/classes/${classInst.id}`" :text="classInst.description"
 								:title="`Share this class: ${classInst.name}`" />
 						</div>
 						<IonText class="text-sm">{{ classInst.description }}</IonText>

@@ -27,7 +27,13 @@
 						<IonIcon v-if="classInst.userId !== user.id && user.id !== id"
 							:icon="personRemoveOutline"
 							class="cursor-pointer text-red text-2xl"
-							@click="removeFromClass(user.id)" />
+							@click="addToClass(user.id, false)" />
+					</template>
+					<template v-else>
+						<IonIcon v-if="classInst.userId !== user.id && user.id !== id"
+							:icon="personAddOutline"
+							class="cursor-pointer text-primary text-2xl"
+							@click="addToClass(user.id, true)" />
 					</template>
 				</template>
 				<template v-if="classInst.members.includes(user.id)">
@@ -46,7 +52,15 @@ import { useClassMembersList } from '@app/composable/classes/classes'
 import { useAuth } from '@app/composable/auth/auth'
 import { ClassEntity, ClassUsers } from '@modules/classes'
 import { UserEntity } from '@modules/users'
-import { checkmarkOutline, closeOutline, exitOutline, person, personOutline, personRemoveOutline } from 'ionicons/icons'
+import {
+	checkmarkOutline,
+	closeOutline,
+	exitOutline,
+	person,
+	personAddOutline,
+	personOutline,
+	personRemoveOutline
+} from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'ClassMember',
@@ -64,13 +78,13 @@ export default defineComponent({
 		const { id } = useAuth()
 		const {
 			loading, error, admins, tutors, members,
-			acceptRequest, leaveClass, removeFromClass, changeRole
+			acceptRequest, leaveClass, addToClass, changeRole
 		} = useClassMembersList(props.classInst)
 		return {
 			ClassUsers,
 			admins, tutors, members, loading, error, id,
-			acceptRequest, leaveClass, removeFromClass, changeRole,
-			exitOutline, checkmarkOutline, closeOutline, personRemoveOutline, personOutline, person
+			acceptRequest, leaveClass, addToClass, changeRole,
+			exitOutline, checkmarkOutline, closeOutline, personRemoveOutline, personOutline, person, personAddOutline
 		}
 	}
 })

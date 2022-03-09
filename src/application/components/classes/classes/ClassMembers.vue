@@ -5,11 +5,22 @@
 				class="w-full bg-new_gray text-gray border border-new_gray border-xl md:border-white">
 				<IonSegmentButton class="w-full" value="members">Members</IonSegmentButton>
 				<IonSegmentButton class="w-full" value="requests">Requests</IonSegmentButton>
+				<IonSegmentButton class="w-full" value="invite">Invite</IonSegmentButton>
 			</IonSegment>
 		</div>
 		<template v-if="tab === 'requests'">
 			<div class="block md:gap-2">
 				<ClassMember v-for="request in requests" :key="request.hash" :classInst="classInst" :user="request" />
+			</div>
+		</template>
+		<template v-if="tab === 'invite'">
+			<div class="block md:gap-2">
+				<form class="px-4 md:px-0 flex gap-2 items-center" @submit.prevent="searchUsers">
+					<ion-input v-model="detail" class="bg-white border border-faded_gray w-full"
+						placeholder="Search users by name or email" />
+					<IonIcon :icon="trashOutline" class="text-red text-2xl" />
+				</form>
+				<ClassMember v-for="user in searchedUsers" :key="user.hash" :classInst="classInst" :user="user" />
 			</div>
 		</template>
 		<template v-else>
@@ -27,16 +38,19 @@
 			</div>
 		</template>
 		<PageLoading v-if="loading" />
+		<PageLoading v-if="searchLoading" />
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useClassMembersList } from '@app/composable/classes/classes'
 import { ClassEntity } from '@modules/classes'
 import ClassMember from '@app/components/classes/classes/ClassMember.vue'
 import { IonSegment, IonSegmentButton } from '@ionic/vue'
 import { useAuth } from '@app/composable/auth/auth'
+import { useSearchUsers } from '@app/composable/users'
+import { trashOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'ClassMembers',
@@ -51,7 +65,12 @@ export default defineComponent({
 		const { id } = useAuth()
 		const tab = ref('members')
 		const { loading, error, admins, tutors, members, requests } = useClassMembersList(props.classInst)
-		return { id, tab, admins, tutors, members, loading, error, requests }
+		const { loading: searchLoading, error: searchError, users, detail, searchUsers, reset } = useSearchUsers()
+		const searchedUsers = computed(() => users.value.filter((user) => !props.classInst.members.includes(user.id)))
+		return {
+			id, tab, admins, tutors, members, loading, error, requests,
+			searchLoading, searchError, searchedUsers, detail, searchUsers, reset, trashOutline
+		}
 	}
 })
 </script>

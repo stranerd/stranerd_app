@@ -1,6 +1,6 @@
-import { computed, onMounted, onUnmounted, reactive, ref, toRefs } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { GetAllAdmins, ListenToAllAdmins, SearchUsers, ToggleAdmin, UserEntity } from '@modules/users'
+import { GetAllAdmins, ListenToAllAdmins, ToggleAdmin, UserEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 
@@ -8,6 +8,7 @@ const global = {
 	admins: ref([] as UserEntity[]),
 	fetched: ref(false),
 	...useErrorHandler(),
+	...useSuccessHandler(),
 	...useLoadingHandler()
 }
 const listener = useListener(async () => {
@@ -58,6 +59,46 @@ export const useAdminsList = () => {
 		}
 	})
 
+	const adminUser = async (user: UserEntity) => {
+		await global.setError('')
+		const accepted = await Alert({
+			title: 'Are you sure you want to make this user an admin?',
+			confirmButtonText: 'Yes, continue'
+		})
+		if (accepted) {
+			await global.setLoading(true)
+			try {
+				await ToggleAdmin.call(user.id, true)
+				user.isAdmin = true
+				pushToAdminsList(user)
+				await global.setMessage('Successfully upgraded to admin')
+			} catch (error) {
+				await global.setError(error)
+			}
+			await global.setLoading(false)
+		}
+	}
+
+	const deAdminUser = async (user: UserEntity) => {
+		await global.setError('')
+		const accepted = await Alert({
+			title: 'Are you sure you want to de-admin this user?',
+			confirmButtonText: 'Yes, continue'
+		})
+		if (accepted) {
+			await global.setLoading(true)
+			try {
+				await ToggleAdmin.call(user.id, false)
+				global.admins.value = global.admins.value
+					.filter((u) => u.id !== user.id)
+				await global.setMessage('Successfully downgraded from admin')
+			} catch (error) {
+				await global.setError(error)
+			}
+			await global.setLoading(false)
+		}
+	}
+
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchAdmins()
 		await listener.startListener()
@@ -66,81 +107,5 @@ export const useAdminsList = () => {
 		await listener.closeListener()
 	})
 
-	return { ...global, filteredAdmins }
-}
-
-export const useAdminRoles = () => {
-	const state = reactive({
-		fetched: false,
-		detail: ''
-	})
-	const users = ref([] as UserEntity[])
-	const { error, setError } = useErrorHandler()
-	const { setMessage } = useSuccessHandler()
-	const { loading, setLoading } = useLoadingHandler()
-
-	const searchUsers = async () => {
-		if (state.detail) {
-			await setLoading(true)
-			try {
-				users.value = (await SearchUsers.call(state.detail.toLowerCase())).results
-				state.fetched = true
-			} catch (error) {
-				await setError(error)
-			}
-			await setLoading(false)
-		}
-	}
-
-	const reset = () => {
-		state.detail = ''
-		users.value.length = 0
-		state.fetched = false
-	}
-
-	const adminUser = async (user: UserEntity) => {
-		await setError('')
-		const accepted = await Alert({
-			title: 'Are you sure you want to make this user an admin?',
-			confirmButtonText: 'Yes, continue'
-		})
-		if (accepted) {
-			await setLoading(true)
-			try {
-				await ToggleAdmin.call(user.id, true)
-				user.isAdmin = true
-				pushToAdminsList(user)
-				reset()
-				await setMessage('Successfully upgraded to admin')
-			} catch (error) {
-				await setError(error)
-			}
-			await setLoading(false)
-		}
-	}
-
-	const deAdminUser = async (user: UserEntity) => {
-		await setError('')
-		const accepted = await Alert({
-			title: 'Are you sure you want to de-admin this user?',
-			confirmButtonText: 'Yes, continue'
-		})
-		if (accepted) {
-			await setLoading(true)
-			try {
-				await ToggleAdmin.call(user.id, false)
-				global.admins.value = global.admins.value
-					.filter((u) => u.id !== user.id)
-				await setMessage('Successfully downgraded from admin')
-			} catch (error) {
-				await setError(error)
-			}
-			await setLoading(false)
-		}
-	}
-
-	return {
-		...toRefs(state), users, error, loading,
-		searchUsers, adminUser, deAdminUser, reset
-	}
+	return { ...global, filteredAdmins, adminUser, deAdminUser }
 }

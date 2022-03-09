@@ -172,16 +172,15 @@ export const useClassMembersList = (classInst: ClassEntity) => {
 		await classGlobal[classInst.id].setLoading(false)
 	}
 
-	const removeFromClass = async (userId: string) => {
+	const addToClass = async (userId: string, add: boolean) => {
 		const accepted = await Alert({
-			title: 'Are you sure you want to remove this user from the class?',
+			title: `Are you sure you want to ${add ? 'add this user to' : 'remove this user from'} the class?`,
 			confirmButtonText: 'Yes!'
 		})
 		if (!accepted) return
-		if (!classInst.members.includes(userId)) return await classGlobal[classInst.id].setError('User is not a member of the class')
 		await classGlobal[classInst.id].setError('')
 		await classGlobal[classInst.id].setLoading(true)
-		await AddClassMembers.call(classInst.id, [userId], false)
+		await AddClassMembers.call(classInst.id, [userId], add)
 			.catch(classGlobal[classInst.id].setError)
 		await classGlobal[classInst.id].setLoading(false)
 	}
@@ -218,7 +217,7 @@ export const useClassMembersList = (classInst: ClassEntity) => {
 
 	return {
 		...classGlobal[classInst.id], admins, tutors, members, requests,
-		acceptRequest, leaveClass, removeFromClass, changeRole
+		acceptRequest, leaveClass, changeRole, addToClass
 	}
 }
 

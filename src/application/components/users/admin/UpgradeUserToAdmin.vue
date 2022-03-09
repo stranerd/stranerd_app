@@ -16,21 +16,17 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useAdminRoles } from '@app/composable/users/roles/admins'
 import AdminsListCard from '@app/components/users/admin/AdminsListCard.vue'
+import { useSearchUsers } from '@app/composable/users'
 
 export default defineComponent({
 	name: 'UpgradeUserToAdmin',
 	components: { AdminsListCard },
 	setup () {
 		const {
-			loading, fetched, detail, users, error,
-			searchUsers, adminUser, reset
-		} = useAdminRoles()
-		return {
-			loading, fetched, detail, users, error,
-			searchUsers, adminUser, reset
-		}
+			loading, fetched, detail, users, error, searchUsers, reset
+		} = useSearchUsers()
+		return { loading, fetched, detail, users, error, searchUsers, reset }
 	}
 })
 </script>
