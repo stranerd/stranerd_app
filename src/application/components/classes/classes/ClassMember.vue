@@ -19,7 +19,7 @@
 						<IonIcon :icon="closeOutline" class="cursor-pointer text-red text-2xl"
 							@click="acceptRequest(user.id, false)" />
 					</template>
-					<template v-if="classInst.members.includes(user.id)">
+					<template v-else-if="classInst.members.includes(user.id)">
 						<IonIcon v-if="classInst.userId !== user.id && user.id !== id"
 							:icon="classInst.admins.includes(user.id) ? person : personOutline"
 							class="cursor-pointer text-primary text-2xl"

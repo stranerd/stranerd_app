@@ -26,7 +26,7 @@ export interface QueryParams {
 	limit?: number
 	all?: boolean
 	page?: number
-	search?: string
+	search?: { value: string, fields: string[] }
 }
 
 export interface QueryResults<Model> {

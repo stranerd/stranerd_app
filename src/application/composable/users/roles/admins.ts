@@ -1,6 +1,6 @@
 import { computed, onMounted, onUnmounted, reactive, ref, toRefs } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { GetAllAdmins, GetUsersByEmail, ListenToAllAdmins, ToggleAdmin, UserEntity } from '@modules/users'
+import { GetAllAdmins, ListenToAllAdmins, SearchUsers, ToggleAdmin, UserEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 
@@ -72,18 +72,18 @@ export const useAdminsList = () => {
 export const useAdminRoles = () => {
 	const state = reactive({
 		fetched: false,
-		email: ''
+		detail: ''
 	})
 	const users = ref([] as UserEntity[])
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 
-	const getUsersByEmail = async () => {
-		if (state.email) {
+	const searchUsers = async () => {
+		if (state.detail) {
 			await setLoading(true)
 			try {
-				users.value = (await GetUsersByEmail.call(state.email.toLowerCase())).results
+				users.value = (await SearchUsers.call(state.detail.toLowerCase())).results
 				state.fetched = true
 			} catch (error) {
 				await setError(error)
@@ -93,7 +93,7 @@ export const useAdminRoles = () => {
 	}
 
 	const reset = () => {
-		state.email = ''
+		state.detail = ''
 		users.value.length = 0
 		state.fetched = false
 	}
@@ -141,6 +141,6 @@ export const useAdminRoles = () => {
 
 	return {
 		...toRefs(state), users, error, loading,
-		getUsersByEmail, adminUser, deAdminUser, reset
+		searchUsers, adminUser, deAdminUser, reset
 	}
 }

@@ -1,16 +1,16 @@
 import { IUserRepository } from '../../irepositories/iuser'
 
-export class GetUsersByEmailUseCase {
+export class SearchUsersUseCase {
 	private repository: IUserRepository
 
 	constructor (repository: IUserRepository) {
 		this.repository = repository
 	}
 
-	async call (email: string) {
+	async call (detail: string) {
 		return await this.repository.get({
-			where: [{ field: 'bio.email', value: email }],
-			all: true
+			all: true,
+			search: { value: detail, fields: ['bio.firstName', 'bio.lastName', 'bio.email'] }
 		})
 	}
 }

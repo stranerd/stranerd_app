@@ -1,5 +1,5 @@
 import { computed, onMounted, onUnmounted, reactive, ref, toRefs } from 'vue'
-import { GetAllTutors, GetUsersByEmail, ListenToAllTutors, ToggleTutor, UserEntity } from '@modules/users'
+import { GetAllTutors, ListenToAllTutors, SearchUsers, ToggleTutor, UserEntity } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
@@ -83,18 +83,18 @@ export const useTutorsList = () => {
 export const useTutorRoles = () => {
 	const state = reactive({
 		fetched: false,
-		email: '',
+		detail: '',
 		users: [] as UserEntity[]
 	})
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 
-	const getUsersByEmail = async () => {
-		if (state.email) {
+	const searchUsers = async () => {
+		if (state.detail) {
 			await setLoading(true)
 			try {
-				const users = await GetUsersByEmail.call(state.email.toLowerCase())
+				const users = await SearchUsers.call(state.detail.toLowerCase())
 				state.users = reactive(users.results)
 				state.fetched = true
 			} catch (error) {
@@ -105,7 +105,7 @@ export const useTutorRoles = () => {
 	}
 
 	const reset = () => {
-		state.email = ''
+		state.detail = ''
 		state.users.length = 0
 		state.fetched = false
 	}
@@ -153,6 +153,6 @@ export const useTutorRoles = () => {
 
 	return {
 		...toRefs(state), error, loading,
-		getUsersByEmail, tutorUser, deTutorUser, reset
+		searchUsers, tutorUser, deTutorUser, reset
 	}
 }

@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<form class="flex justify-between items-center mb-4" @submit.prevent="getUsersByEmail">
-			<ion-input v-model="email" class="bg-white border border-faded_gray w-full"
-				placeholder="Enter user's email address" />
+		<form class="flex justify-between items-center mb-4" @submit.prevent="searchUsers">
+			<ion-input v-model="detail" class="bg-white border border-faded_gray w-full"
+				placeholder="Search users by name or email" />
 		</form>
 		<DisplayError :error="error" />
 		<div v-if="fetched">
@@ -24,12 +24,12 @@ export default defineComponent({
 	components: { AdminsListCard },
 	setup () {
 		const {
-			loading, fetched, email, users, error,
-			getUsersByEmail, adminUser, reset
+			loading, fetched, detail, users, error,
+			searchUsers, adminUser, reset
 		} = useAdminRoles()
 		return {
-			loading, fetched, email, users, error,
-			getUsersByEmail, adminUser, reset
+			loading, fetched, detail, users, error,
+			searchUsers, adminUser, reset
 		}
 	}
 })
