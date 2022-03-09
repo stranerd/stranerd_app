@@ -3,7 +3,7 @@
 		<PageLoading v-if="loading" />
 		<div
 			class="flex lg:rounded-xl bg-gray text-white py-4 px-4">
-			<div class="lg:w-1/12 w-2/12">
+			<div class="md:w-1/12 w-2/12">
 				<span>Rank</span>
 			</div>
 			<div class="w-8/12" />
@@ -13,11 +13,11 @@
 		</div>
 
 		<router-link v-for="(person, index) in users" :key="person.hash"
-			:class="{'bg-cyan !text-white': person.id === id}"
+			:class="{'!bg-cyan !text-white': person.id === id}"
 			:to="`/users/${person.id}`"
 			class="flex items-center bg-white lg:rounded-xl text-main_dark p-4"
 		>
-			<div class="lg:w-1/12 w-2/12">
+			<div class="md:w-1/12 w-2/12">
 				<span>{{ index + 1 }} </span>
 			</div>
 			<div class="w-8/12 flex items-center gap-2">
@@ -35,7 +35,7 @@
 
 		<router-link v-if="user && hasNoAuthUser" :to="`/users/${user.id}`"
 			class="flex items-center lg:rounded-xl text-white p-4 bg-cyan">
-			<div class="lg:w-1/12 w-2/12">
+			<div class="md:w-1/12 w-2/12">
 				<span> - </span>
 			</div>
 			<div class="w-8/12 flex items-center gap-2">
