@@ -4,7 +4,7 @@
 			:search-icon="searchOutline"
 			class="w-full"
 			mode="md"
-			placeholder="Search for anything..."
+			placeholder="Search by subjects, topics and related keywords"
 			showCancelButton="never"
 			type="search"
 		/>

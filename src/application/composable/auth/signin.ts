@@ -94,7 +94,7 @@ export const useCompleteEmailVerification = (token: string) => {
 			await setError(error)
 			if (error instanceof NetworkError && error.statusCode === StatusCodes.InvalidToken) {
 				await setError('Invalid or expired token. Proceed to signin!')
-				await router.replace('/auth/signin')
+				await router.push('/auth/signin')
 			} else await setError(error)
 		}
 		await setLoading(false)
