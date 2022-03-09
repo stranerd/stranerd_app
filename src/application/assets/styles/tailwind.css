@@ -76,7 +76,7 @@
 	}
 
 	.blueTop {
-		@apply bg-primary w-full flex items-center min-h-[5.5rem] lg:min-h-[9.75rem] rounded-b-2xl md:rounded-none md:mb-4 justify-center
+		@apply bg-white w-full flex items-center min-h-[5.5rem]  rounded-b-2xl md:rounded-none md:mb-4 justify-center
 	}
 
 	.nav-scroll {
