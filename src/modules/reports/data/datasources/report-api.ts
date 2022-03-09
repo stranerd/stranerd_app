@@ -11,8 +11,7 @@ export class ReportApiDataSource implements ReportBaseDataSource {
 	}
 
 	async create (data: ReportToModel) {
-		const report = await this.stranerdClient.post<ReportToModel, ReportFromModel>('/', data)
-		return report.id
+		return await this.stranerdClient.post<ReportToModel, ReportFromModel>('/', data)
 	}
 
 	async find (id: string) {

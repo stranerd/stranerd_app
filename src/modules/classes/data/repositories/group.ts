@@ -54,7 +54,7 @@ export class GroupRepository implements IGroupRepository {
 	}
 
 	async add (data: GroupToModel) {
-		return await this.dataSource.create(data)
+		return this.transformer.fromJSON(await this.dataSource.create(data))
 	}
 
 	async find (id: string) {
@@ -63,7 +63,7 @@ export class GroupRepository implements IGroupRepository {
 	}
 
 	async update (id: string, data: GroupToModel) {
-		return this.dataSource.update(id, data)
+		return this.transformer.fromJSON(await this.dataSource.update(id, data))
 	}
 
 	async delete (id: string) {

@@ -49,6 +49,10 @@ export class VideoEntity extends BaseEntity {
 	get shareLink () {
 		return `/study/videos/${this.id}`
 	}
+
+	search (search: string) {
+		return this.title.toLowerCase().includes(search.toLowerCase()) || this.title.toLowerCase().includes(search.toLowerCase())
+	}
 }
 
 type VideoConstructorArgs = {

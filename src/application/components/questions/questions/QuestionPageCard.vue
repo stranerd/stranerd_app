@@ -12,7 +12,7 @@
 						@click="openReportQuestionModal" />
 				</div>
 			</div>
-			<DisplayHtml :html="question.body" class="text-main_dark" />
+			<DisplayHtml :html="question.body" class="text-main_dark text-base" />
 
 			<div class="flex items-center justify-between">
 				<div class="flex items-center gap-2">

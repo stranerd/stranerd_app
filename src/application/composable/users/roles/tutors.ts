@@ -49,7 +49,7 @@ export const useTutorsList = () => {
 	}
 	const filteredTutors = computed({
 		get: () => global.tutors.value
-			.sort((a, b) => a.score > b.score ? -1 : a.score === b.score ? 0 : 1),
+			.sort((a, b) => b.score - a.score),
 		set: (tutors) => {
 			tutors?.forEach?.((t) => {
 				const index = global.tutors.value.findIndex((x) => x.id === t.id)

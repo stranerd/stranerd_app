@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<div>
-			<div class="blueTop flex-col items-center">
+			<div class="blueTop !mb-0 flex-col items-center">
 				<div class="sm:flex hidden w-full justify-center items-center px-4 mt-auto">
 					<ion-icon :icon="cogOutline" class="text-3xl text-white"></ion-icon>
 					<ion-text class="text-white heading font-bold mx-4">

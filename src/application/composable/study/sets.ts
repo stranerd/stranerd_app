@@ -37,6 +37,7 @@ const global = {} as Record<string, {
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const setGlobal = {} as Record<string, {
+	hash: Ref<string>
 	notes: Ref<NoteEntity[]>
 	videos: Ref<VideoEntity[]>
 	flashCards: Ref<FlashCardEntity[]>
@@ -93,95 +94,97 @@ export const useSetById = (setId: string) => {
 }
 
 export const useSet = (set: SetEntity) => {
+	const listenerCallback = async () => {
+		const listeners = await Promise.all([
+			ListenToNotesInSet.call(set.saved.notes, {
+				created: async (entity) => {
+					const index = setGlobal[set.id].notes.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].notes.value.splice(index, 1, entity)
+					else setGlobal[set.id].notes.value.push(entity)
+				},
+				updated: async (entity) => {
+					const index = setGlobal[set.id].notes.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].notes.value.splice(index, 1, entity)
+					else setGlobal[set.id].notes.value.push(entity)
+				},
+				deleted: async (entity) => {
+					const index = setGlobal[set.id].notes.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].notes.value.splice(index, 1)
+				}
+			}),
+			ListenToVideosInSet.call(set.saved.videos, {
+				created: async (entity) => {
+					const index = setGlobal[set.id].videos.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].videos.value.splice(index, 1, entity)
+					else setGlobal[set.id].videos.value.push(entity)
+				},
+				updated: async (entity) => {
+					const index = setGlobal[set.id].videos.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].videos.value.splice(index, 1, entity)
+					else setGlobal[set.id].videos.value.push(entity)
+				},
+				deleted: async (entity) => {
+					const index = setGlobal[set.id].videos.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].videos.value.splice(index, 1)
+				}
+			}),
+			ListenToFlashCardsInSet.call(set.saved.flashCards, {
+				created: async (entity) => {
+					const index = setGlobal[set.id].flashCards.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].flashCards.value.splice(index, 1, entity)
+					else setGlobal[set.id].flashCards.value.push(entity)
+				},
+				updated: async (entity) => {
+					const index = setGlobal[set.id].flashCards.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].flashCards.value.splice(index, 1, entity)
+					else setGlobal[set.id].flashCards.value.push(entity)
+				},
+				deleted: async (entity) => {
+					const index = setGlobal[set.id].flashCards.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].flashCards.value.splice(index, 1)
+				}
+			}),
+			ListenToTestPrepsInSet.call(set.saved.testPreps, {
+				created: async (entity) => {
+					const index = setGlobal[set.id].testPreps.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].testPreps.value.splice(index, 1, entity)
+					else setGlobal[set.id].testPreps.value.push(entity)
+				},
+				updated: async (entity) => {
+					const index = setGlobal[set.id].testPreps.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].testPreps.value.splice(index, 1, entity)
+					else setGlobal[set.id].testPreps.value.push(entity)
+				},
+				deleted: async (entity) => {
+					const index = setGlobal[set.id].testPreps.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].testPreps.value.splice(index, 1)
+				}
+			}),
+			ListenToSetsInSet.call(set.saved.sets, {
+				created: async (entity) => {
+					const index = setGlobal[set.id].sets.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].sets.value.splice(index, 1, entity)
+					else setGlobal[set.id].sets.value.push(entity)
+				},
+				updated: async (entity) => {
+					const index = setGlobal[set.id].sets.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].sets.value.splice(index, 1, entity)
+					else setGlobal[set.id].sets.value.push(entity)
+				},
+				deleted: async (entity) => {
+					const index = setGlobal[set.id].sets.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].sets.value.splice(index, 1)
+				}
+			})
+		])
+		return async () => {
+			await Promise.all(listeners.map(((listener) => listener())))
+		}
+	}
 	if (setGlobal[set.id] === undefined) {
-		const listener = useListener(async () => {
-			const listeners = await Promise.all([
-				ListenToNotesInSet.call(set.saved.notes, {
-					created: async (entity) => {
-						const index = setGlobal[set.id].notes.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].notes.value.splice(index, 1, entity)
-						else setGlobal[set.id].notes.value.push(entity)
-					},
-					updated: async (entity) => {
-						const index = setGlobal[set.id].notes.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].notes.value.splice(index, 1, entity)
-						else setGlobal[set.id].notes.value.push(entity)
-					},
-					deleted: async (entity) => {
-						const index = setGlobal[set.id].notes.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].notes.value.splice(index, 1)
-					}
-				}),
-				ListenToVideosInSet.call(set.saved.videos, {
-					created: async (entity) => {
-						const index = setGlobal[set.id].videos.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].videos.value.splice(index, 1, entity)
-						else setGlobal[set.id].videos.value.push(entity)
-					},
-					updated: async (entity) => {
-						const index = setGlobal[set.id].videos.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].videos.value.splice(index, 1, entity)
-						else setGlobal[set.id].videos.value.push(entity)
-					},
-					deleted: async (entity) => {
-						const index = setGlobal[set.id].videos.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].videos.value.splice(index, 1)
-					}
-				}),
-				ListenToFlashCardsInSet.call(set.saved.flashCards, {
-					created: async (entity) => {
-						const index = setGlobal[set.id].flashCards.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].flashCards.value.splice(index, 1, entity)
-						else setGlobal[set.id].flashCards.value.push(entity)
-					},
-					updated: async (entity) => {
-						const index = setGlobal[set.id].flashCards.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].flashCards.value.splice(index, 1, entity)
-						else setGlobal[set.id].flashCards.value.push(entity)
-					},
-					deleted: async (entity) => {
-						const index = setGlobal[set.id].flashCards.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].flashCards.value.splice(index, 1)
-					}
-				}),
-				ListenToTestPrepsInSet.call(set.saved.testPreps, {
-					created: async (entity) => {
-						const index = setGlobal[set.id].testPreps.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].testPreps.value.splice(index, 1, entity)
-						else setGlobal[set.id].testPreps.value.push(entity)
-					},
-					updated: async (entity) => {
-						const index = setGlobal[set.id].testPreps.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].testPreps.value.splice(index, 1, entity)
-						else setGlobal[set.id].testPreps.value.push(entity)
-					},
-					deleted: async (entity) => {
-						const index = setGlobal[set.id].testPreps.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].testPreps.value.splice(index, 1)
-					}
-				}),
-				ListenToSetsInSet.call(set.saved.sets, {
-					created: async (entity) => {
-						const index = setGlobal[set.id].sets.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].sets.value.splice(index, 1, entity)
-						else setGlobal[set.id].sets.value.push(entity)
-					},
-					updated: async (entity) => {
-						const index = setGlobal[set.id].sets.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].sets.value.splice(index, 1, entity)
-						else setGlobal[set.id].sets.value.push(entity)
-					},
-					deleted: async (entity) => {
-						const index = setGlobal[set.id].sets.value.findIndex((q) => q.id === entity.id)
-						if (index !== -1) setGlobal[set.id].sets.value.splice(index, 1)
-					}
-				})
-			])
-			return async () => {
-				await Promise.all(listeners.map(((listener) => listener())))
-			}
-		})
+		const listener = useListener(listenerCallback)
 		setGlobal[set.id] = {
+			hash: ref(set.hash),
 			notes: ref([]),
 			videos: ref([]),
 			flashCards: ref([]),
@@ -217,6 +220,10 @@ export const useSet = (set: SetEntity) => {
 
 	onMounted(async () => {
 		if (!setGlobal[set.id].fetched.value && !setGlobal[set.id].loading.value) await fetchAllSetEntities()
+		if (setGlobal[set.id].hash.value !== set.hash) {
+			setGlobal[set.id].hash.value = set.hash
+			await setGlobal[set.id].listener.resetListener(listenerCallback)
+		}
 		await setGlobal[set.id].listener.startListener()
 	})
 	onUnmounted(async () => {

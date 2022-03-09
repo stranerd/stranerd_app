@@ -1,11 +1,12 @@
 <template>
 	<div
-		class="hidden lg:flex bg-white py-3 pl-3 w-[16%] h-full left-0 top-0 flex-col z-30">
+		class="hidden lg:flex bg-white py-3 pl-3 w-[16%] h-full left-0 top-0 flex-col">
 		<div class="flex flex-col pl-8 mt-6">
 			<router-link v-for="{ path, icon, name } in [
-					{ name: 'home', path: '/dashboard', icon: homeOutline },
-					{ name: 'questions', path: '/questions', icon: helpCircleOutline },
-					{ name: 'library', path: '/study', icon: libraryOutline }
+					{ name: 'Home', path: '/dashboard', icon: homeOutline },
+					{ name: 'Questions', path: '/questions', icon: helpCircleOutline },
+					{ name: 'Library', path: '/study', icon: libraryOutline },
+					{ name: 'Classes', path: '/classes', icon: peopleOutline }
 				]" :key="path" :to="path"
 				class="flex flex-col rounded-l-[1.125rem] text-icon_inactive cursor-pointer text-sm hover:text-main_dark mb-2">
 				<div :class="{'text-main_dark bg-new_gray active-route-link relative' : $route.path === path }"
@@ -20,13 +21,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { helpCircleOutline, homeOutline, libraryOutline } from 'ionicons/icons'
+import { helpCircleOutline, homeOutline, libraryOutline, peopleOutline } from 'ionicons/icons'
 import { IonIcon } from '@ionic/vue'
 
 export default defineComponent({
 	components: { IonIcon },
 	setup () {
-		return { libraryOutline, homeOutline, helpCircleOutline }
+		return { libraryOutline, homeOutline, helpCircleOutline, peopleOutline }
 	}
 })
 </script>

@@ -11,8 +11,7 @@ export class DiscussionApiDataSource implements DiscussionBaseDataSource {
 	}
 
 	async create (data: DiscussionToModel) {
-		const discussion = await this.stranerdClient.post<DiscussionToModel, DiscussionFromModel>('/', data)
-		return discussion.id
+		return await this.stranerdClient.post<DiscussionToModel, DiscussionFromModel>('/', data)
 	}
 
 	async find (id: string) {

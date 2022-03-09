@@ -23,8 +23,10 @@ import { GetUsersByEmailUseCase } from './domain/usecases/users/getUsersByEmail'
 import { GetLeaderboardUseCase } from './domain/usecases/users/getLeaderboard'
 import { GetAllAdminsUseCase } from './domain/usecases/users/getAllAdmins'
 import { GetAllTutorsUseCase } from './domain/usecases/users/getAllTutors'
+import { GetUsersInListUseCase } from './domain/usecases/users/getUsersInList'
 import { ListenToAllTutorsUseCase } from './domain/usecases/users/listenToAllTutors'
 import { ListenToAllAdminsUseCase } from './domain/usecases/users/listenToAllAdmins'
+import { ListenToUsersInListUseCase } from './domain/usecases/users/listenToUsersInList'
 import { ListenToUserUseCase } from './domain/usecases/users/listenToUser'
 import { UpdateStreakUseCase } from './domain/usecases/users/updateStreak'
 import { GetNotificationsUseCase } from './domain/usecases/notifications/getNotifications'
@@ -75,8 +77,10 @@ export const GetUsersByEmail = new GetUsersByEmailUseCase(userRepository)
 export const GetLeaderboard = new GetLeaderboardUseCase(userRepository)
 export const GetAllAdmins = new GetAllAdminsUseCase(userRepository)
 export const GetAllTutors = new GetAllTutorsUseCase(userRepository)
+export const GetUsersInList = new GetUsersInListUseCase(userRepository)
 export const ListenToAllTutors = new ListenToAllTutorsUseCase(userRepository)
 export const ListenToAllAdmins = new ListenToAllAdminsUseCase(userRepository)
+export const ListenToUsersInList = new ListenToUsersInListUseCase(userRepository)
 export const ListenToUser = new ListenToUserUseCase(userRepository)
 export const UpdateStreak = new UpdateStreakUseCase(userRepository)
 

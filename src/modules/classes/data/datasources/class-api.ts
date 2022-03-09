@@ -12,8 +12,7 @@ export class ClassApiDataSource implements ClassBaseDataSource {
 	}
 
 	async create (data: ClassToModel) {
-		const classInst = await this.stranerdClient.post<ClassToModel, ClassFromModel>('/', data)
-		return classInst.id
+		return await this.stranerdClient.post<ClassToModel, ClassFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -43,7 +42,7 @@ export class ClassApiDataSource implements ClassBaseDataSource {
 	}
 
 	async update (id: string, data: ClassToModel) {
-		await this.stranerdClient.put<ClassToModel, ClassFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<ClassToModel, ClassFromModel>(`/${id}`, data)
 	}
 
 	async requestClass (id: string, request: boolean) {
@@ -51,7 +50,7 @@ export class ClassApiDataSource implements ClassBaseDataSource {
 	}
 
 	async leaveClass (id: string) {
-		await this.stranerdClient.post<{}, boolean>(`/${id}/leave`, {})
+		await this.stranerdClient.put<{}, boolean>(`/${id}/leave`, {})
 	}
 
 	async acceptRequest (id: string, userId: string, accept: boolean) {

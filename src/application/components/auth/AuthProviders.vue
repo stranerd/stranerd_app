@@ -30,7 +30,7 @@ export default defineComponent({
 				await GoogleAuth.signOut()
 				await signin(token)
 			} catch (error) {
-				await setError(error ?? 'Error signing in with google')
+				await setError('Error signing in with google')
 			}
 		}
 

@@ -1,6 +1,6 @@
 <template>
 	<IonPage>
-		<InnerTopBar />
+		<InnerTopBar v-if="!hideTop" />
 		<IonContent>
 			<div class="layout-page !px-0">
 				<div class="layout-body !w-full">
@@ -23,6 +23,10 @@ import Fab from '@app/components/layout/Fab.vue'
 export default defineComponent({
 	name: 'JustifiedLayout',
 	props: {
+		hideTop: {
+			required: false,
+			default: false
+		},
 		hideFab: {
 			required: false,
 			default: false

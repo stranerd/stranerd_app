@@ -3,8 +3,8 @@ import { ClassFromModel, ClassToModel } from '../models/class'
 import { ClassUsers } from '@modules/classes/domain/entities/class'
 
 export interface ClassBaseDataSource {
-	create: (data: ClassToModel) => Promise<string>
-	update: (id: string, data: ClassToModel) => Promise<void>
+	create: (data: ClassToModel) => Promise<ClassFromModel>
+	update: (id: string, data: ClassToModel) => Promise<ClassFromModel>
 	get: (query: QueryParams) => Promise<QueryResults<ClassFromModel>>
 	listenToOne: (id: string, listener: Listeners<ClassFromModel>) => Promise<() => void>
 	listenToMany: (query: QueryParams, listener: Listeners<ClassFromModel>) => Promise<() => void>

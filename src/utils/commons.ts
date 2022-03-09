@@ -75,5 +75,5 @@ export const getPercentage = (num: number, den: number) => catchDivideByZero(num
 const localURL = 'http://localhost'
 const ngrokURL = 'https://local.stranerd.eu.ngrok.io'
 
-export const parseURL = (url: string) => !isWeb ? url.replace(localURL, ngrokURL) : url
+export const parseURL = (url: string) => url.replace(isWeb ? ngrokURL : localURL, isWeb ? localURL : ngrokURL)
 export const unParseURL = (url: string) => !isWeb ? url.replace(ngrokURL, localURL) : url

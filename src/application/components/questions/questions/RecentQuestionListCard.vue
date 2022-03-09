@@ -11,14 +11,15 @@
 					{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
 				</span>
 			</div>
-			<avatar :id="question.userId" :size="24" :src="question.avatar" class="ml-auto" />
+			<avatar :id="question.userId" :name="question.userBio.fullName" :size="24" :src="question.avatar"
+				class="ml-auto" />
 		</div>
 	</router-link>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { arrowRedoOutline, checkmarkCircleOutline, flagOutline } from 'ionicons/icons'
+import { arrowRedoOutline, flagOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
@@ -40,7 +41,7 @@ export default defineComponent({
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),
 			openReportQuestionModal: () => useReportModal().openReportQuestion(),
-			arrowRedoOutline, flagOutline, checkmarkCircleOutline,
+			arrowRedoOutline, flagOutline,
 			formatTime, pluralize
 		}
 	}

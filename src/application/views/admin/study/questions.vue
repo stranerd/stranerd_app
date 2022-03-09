@@ -1,8 +1,10 @@
 <template>
 	<AdminWrapper>
 		<div>
-			<div class="flex justify-end mb-8">
-				<ion-button class="btn-primary" @click.prevent="openCreatePastQuestion">Add New Question</ion-button>
+			<div class="flex justify-end mb-4">
+				<ion-button class="btn-primary" @click.prevent="openCreatePastQuestion">
+					Add New Question
+				</ion-button>
 			</div>
 			<AdminPastQuestionsList />
 		</div>
@@ -29,7 +31,9 @@ export default defineComponent({
 
 <style scoped>
 	ion-button {
-		--padding-top: 1.7rem !important;
-		--padding-bottom: 1.7rem !important;
+		--padding-top: 1rem !important;
+		--padding-bottom: 1rem !important;
+		--padding-start: 1rem !important;
+		--padding-end: 1rem !important;
 	}
 </style>

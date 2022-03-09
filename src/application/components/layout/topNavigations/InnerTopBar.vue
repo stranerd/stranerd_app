@@ -1,28 +1,28 @@
 <template>
-	<ion-header class="headerShadow ion-no-border">
+	<ion-header class="headerShadow ion-no-border z-10">
 		<!-- Small screens -->
 		<ion-toolbar class="flex md:hidden bg-white px-2 items-center border-bottom-line">
 			<div class="flex items-center justify-between">
 				<ion-icon :icon="chevronBackOutline" class="text-[23px] text-main_dark" @click="$router.go(-1)" />
 				<ion-title class="text-base font-bold text-main_dark">
-					{{ $route.meta.displayName ?? '' }}
+					{{ $route.meta.displayName ?? 'Stranerd' }}
 				</ion-title>
-				<Avatar v-if="isLoggedIn" :size="24" :src="user?.avatar"
+				<Avatar v-if="isLoggedIn" :name="user?.bio.fullName" :size="24" :src="user?.avatar"
 					@click="openUserDashboardMenu" />
 				<router-link v-else class="flex items-center" to="/account">
-					<Avatar :size="24" :src="user?.avatar" />
+					<Avatar :size="24" />
 				</router-link>
 			</div>
 		</ion-toolbar>
 
 		<!-- medium screens -->
 		<ion-toolbar
-			class="hidden lg:hidden md:flex bg-white px-2 items-center z-50 border-bottom-line">
+			class="hidden lg:hidden md:flex bg-white px-2 items-center border-bottom-line">
 			<div class="flex items-center justify-between">
-				<Avatar v-if="isLoggedIn" :size="24" :src="user?.avatar"
+				<Avatar v-if="isLoggedIn" :name="user?.bio.fullName" :size="24" :src="user?.avatar"
 					@click="openUserDashboardMenu" />
 				<router-link v-else class="flex items-center" to="/account">
-					<Avatar :size="24" :src="user?.avatar" />
+					<Avatar :size="24" />
 				</router-link>
 				<router-link class="flex items-center" to="/">
 					<Logo :secondary="true" class="w-24" />

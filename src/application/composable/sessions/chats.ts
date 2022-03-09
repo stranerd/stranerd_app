@@ -3,7 +3,7 @@ import { AddChat, ChatEntity, ChatFactory, GetChats, ListenToChats, MarkChatRead
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { getRandomValue } from '@utils/commons'
-import { Media } from '@modules/core'
+import { UploadedFile } from '@modules/core'
 
 const global = {} as Record<string, {
 	chats: Ref<ChatEntity[]>
@@ -29,7 +29,7 @@ const orderChats = (chats: ChatEntity[]) => {
 		date1.getFullYear() === date2.getFullYear()
 	const res = [] as ChatEntity[][]
 	chats
-		.sort((a, b) => a.createdAt - b.createdAt < 0 ? -1 : 1)
+		.sort((a, b) => a.createdAt - b.createdAt)
 		.forEach((chat, index) => {
 			const lastChat = chats[index - 1]
 			if (index === 0 || !isSameDay(new Date(chat.createdAt), new Date(lastChat.createdAt))) return res.push([chat])
@@ -43,6 +43,7 @@ const orderChats = (chats: ChatEntity[]) => {
 
 export const useChats = (userId: string) => {
 	const { id } = useAuth()
+	const path = [id.value, userId] as [string, string]
 	if (global[userId] === undefined) {
 		const listener = useListener(async () => {
 			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
@@ -68,14 +69,13 @@ export const useChats = (userId: string) => {
 			...useLoadingHandler()
 		}
 	}
-	const path = [id.value, userId] as [string, string]
 
 	const fetchChats = async () => {
 		await global[userId].setError('')
 		try {
 			await global[userId].setLoading(true)
-			const lastDate = global[userId].chats.value[0]?.createdAt
-			const c = await GetChats.call(lastDate)
+			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
+			const c = await GetChats.call(path, lastDate)
 			global[userId].hasMore.value = !!c.pages.next
 			c.results.map((c) => pushToChats(userId, c))
 			global[userId].fetched.value = true
@@ -148,7 +148,7 @@ export const useCreateChat = (userId: string, sessionId?: string) => {
 		}
 	}
 
-	const createMediaChat = async (files: Media[]) => {
+	const createMediaChat = async (files: UploadedFile[]) => {
 		if (!loading.value) {
 			await setLoading(true)
 			const promises = files.map(async (file) => {

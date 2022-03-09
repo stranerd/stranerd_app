@@ -6,7 +6,7 @@ export class NotificationTransformer {
 		const { id, userId, data, body, action, seen, createdAt, updatedAt } = model
 		return new NotificationEntity({
 			id, userId, data,
-			body, action, seen,
+			body, action: action as any, seen,
 			createdAt, updatedAt
 		})
 	}

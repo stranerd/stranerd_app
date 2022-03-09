@@ -1,7 +1,7 @@
 <template>
 	<AdminWrapper>
 		<div>
-			<div class="flex justify-end mb-8">
+			<div class="flex justify-end mb-4">
 				<ion-button class="btn-primary" @click="openCreateTestPrep">Add New Test</ion-button>
 			</div>
 			<AdminTestPrepsList />
@@ -28,9 +28,9 @@ export default defineComponent({
 
 <style scoped>
 	ion-button {
-		--padding-top: 1.6rem !important;
-		--padding-bottom: 1.6rem !important;
-		--padding-start: 2rem !important;
-		--padding-end: 2rem !important;
+		--padding-top: 1rem !important;
+		--padding-bottom: 1rem !important;
+		--padding-start: 1rem !important;
+		--padding-end: 1rem !important;
 	}
 </style>

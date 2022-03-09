@@ -11,8 +11,7 @@ export class AnnouncementApiDataSource implements AnnouncementBaseDataSource {
 	}
 
 	async create (data: AnnouncementToModel) {
-		const announcement = await this.stranerdClient.post<AnnouncementToModel, AnnouncementFromModel>('/', data)
-		return announcement.id
+		return await this.stranerdClient.post<AnnouncementToModel, AnnouncementFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -42,6 +41,6 @@ export class AnnouncementApiDataSource implements AnnouncementBaseDataSource {
 	}
 
 	async update (id: string, data: AnnouncementToModel) {
-		await this.stranerdClient.put<AnnouncementToModel, AnnouncementFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<AnnouncementToModel, AnnouncementFromModel>(`/${id}`, data)
 	}
 }

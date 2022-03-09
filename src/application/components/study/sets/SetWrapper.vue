@@ -10,9 +10,10 @@
 					</ion-text>
 				</div>
 			</div>
-			<div class="flex gap-2 items-center w-full md:w-auto">
+			<div class="flex gap-2 w-full md:w-auto">
+				<ion-input v-model="search" class="flex-grow md:w-auto bg-new_gray text-gray" placeholder="Search" />
 				<ion-select v-model="filter"
-					class="bg-new_gray !text-gray flex-grow w-full md:w-32 font-bold select-primary"
+					class="bg-new_gray !text-gray flex-grow md:w-auto font-bold select-primary"
 					interface="action-sheet"
 					placeholder="Filter">
 					<ion-select-option v-for="filter in filters" :key="filter" :value="filter" class="capitalize">
@@ -24,19 +25,20 @@
 		<EmptyState v-if="!set.allSaved.length" info="This folder is empty" />
 		<div v-if="set.allSaved.length" class="showcase">
 			<template v-if="false && ['All', 'Sets'].includes(filter)">
-				<SetListCard v-for="item in sets" :key="item.hash" :set="item" />
+				<SetListCard v-for="item in filteredSets" :key="item.hash" :set="item" />
 			</template>
 			<template v-if="['All', 'Test Preps'].includes(filter)">
-				<TestPrepListCard v-for="testPrep in testPreps" :key="testPrep.hash" :testPrep="testPrep" />
+				<TestPrepListCard v-for="testPrep in filteredTestPreps" :key="testPrep.hash" :testPrep="testPrep" />
 			</template>
 			<template v-if="['All', 'Flashcards'].includes(filter)">
-				<FlashCardListCard v-for="flashCard in flashCards" :key="flashCard.hash" :flashCard="flashCard" />
+				<FlashCardListCard v-for="flashCard in filteredFlashCards" :key="flashCard.hash"
+					:flashCard="flashCard" />
 			</template>
 			<template v-if="['All', 'Notes'].includes(filter)">
-				<NoteListCard v-for="note in notes" :key="note.hash" :note="note" />
+				<NoteListCard v-for="note in filteredNotes" :key="note.hash" :note="note" />
 			</template>
 			<template v-if="['All', 'Videos'].includes(filter)">
-				<VideoListCard v-for="video in videos" :key="video.hash" :video="video" />
+				<VideoListCard v-for="video in filteredVideos" :key="video.hash" :video="video" />
 			</template>
 		</div>
 		<PageLoading v-if="loading" />
@@ -44,7 +46,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { SetEntity } from '@modules/study'
 import { useSet } from '@app/composable/study/sets'
 import { pluralize } from '@utils/commons'
@@ -77,9 +79,15 @@ export default defineComponent({
 		const { loading, error, notes, flashCards, testPreps, videos, sets } = useSet(props.set)
 		const filters = ['All', 'Test Preps', 'Flashcards', 'Notes', 'Videos']
 		const filter = ref(filters[0])
+		const search = ref('')
+		const filteredSets = computed(() => sets.value.filter((set) => set.search(search.value)))
+		const filteredTestPreps = computed(() => testPreps.value.filter((prep) => prep.search(search.value)))
+		const filteredFlashCards = computed(() => flashCards.value.filter((flashCard) => flashCard.search(search.value)))
+		const filteredNotes = computed(() => notes.value.filter((note) => note.search(search.value)))
+		const filteredVideos = computed(() => videos.value.filter((video) => video.search(search.value)))
 		return {
 			loading, error, folderOpenOutline, notes, flashCards, testPreps, videos, pluralize, sets,
-			filter, filters
+			filter, filters, search, filteredSets, filteredTestPreps, filteredFlashCards, filteredNotes, filteredVideos
 		}
 	}
 })

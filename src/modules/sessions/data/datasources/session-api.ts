@@ -11,8 +11,7 @@ export class SessionApiDataSource implements SessionBaseDataSource {
 	}
 
 	async create (data: SessionToModel) {
-		const session = await this.stranerdClient.post<SessionToModel, SessionFromModel>('/', data)
-		return session.id
+		return await this.stranerdClient.post<SessionToModel, SessionFromModel>('/', data)
 	}
 
 	async find (id: string) {

@@ -54,7 +54,7 @@ export class TestPrepRepository implements ITestPrepRepository {
 	}
 
 	async add (data: TestPrepToModel) {
-		return await this.dataSource.create(data)
+		return this.transformer.fromJSON(await this.dataSource.create(data))
 	}
 
 	async find (id: string) {
@@ -63,7 +63,7 @@ export class TestPrepRepository implements ITestPrepRepository {
 	}
 
 	async update (id: string, data: TestPrepToModel) {
-		return this.dataSource.update(id, data)
+		return this.transformer.fromJSON(await this.dataSource.update(id, data))
 	}
 
 	async delete (id: string) {

@@ -11,8 +11,7 @@ export class NoteApiDataSource implements NoteBaseDataSource {
 	}
 
 	async create (data: NoteToModel) {
-		const note = await this.stranerdClient.post<NoteToModel, NoteFromModel>('/', data)
-		return note.id
+		return await this.stranerdClient.post<NoteToModel, NoteFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -42,6 +41,6 @@ export class NoteApiDataSource implements NoteBaseDataSource {
 	}
 
 	async update (id: string, data: NoteToModel) {
-		await this.stranerdClient.put<NoteToModel, NoteFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<NoteToModel, NoteFromModel>(`/${id}`, data)
 	}
 }

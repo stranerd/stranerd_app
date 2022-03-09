@@ -103,12 +103,12 @@ export const useCreateTest = () => {
 		if (!loading.value) {
 			try {
 				await setLoading(true)
-				const testId = await AddTest.call({
+				const test = await AddTest.call({
 					name: prep.name,
 					prepId: prep.id,
 					data: timed ? { type: TestType.timed, time: prep.time } : { type: TestType.unTimed }
 				})
-				await router.push(`/study/tests/${testId}/take`)
+				await router.push(`/study/tests/${test.id}/take`)
 			} catch (error) {
 				await setError(error)
 			}

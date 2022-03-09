@@ -2,7 +2,7 @@ import { Listeners, QueryParams, QueryResults } from '@modules/core'
 import { TestFromModel, TestToModel } from '../models/test'
 
 export interface TestBaseDataSource {
-	create: (data: TestToModel) => Promise<string>
+	create: (data: TestToModel) => Promise<TestFromModel>
 	updateAnswer: (id: string, questionId: string, answer: number | string) => Promise<void>
 	end: (id: string) => Promise<void>
 	get: (query: QueryParams) => Promise<QueryResults<TestFromModel>>

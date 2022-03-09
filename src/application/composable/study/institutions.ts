@@ -3,7 +3,6 @@ import {
 	AddInstitution,
 	DeleteInstitution,
 	EditInstitution,
-	FindInstitution,
 	GetInstitutions,
 	InstitutionEntity,
 	InstitutionFactory
@@ -72,8 +71,7 @@ export const useCreateInstitution = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const id = await AddInstitution.call(factory.value)
-				const institution = await FindInstitution.call(id)
+				const institution = await AddInstitution.call(factory.value)
 				if (institution) pushToGlobalInstitutions(institution)
 				factory.value.reset()
 				useStudyModal().closeCreateInstitution()
@@ -108,8 +106,7 @@ export const useEditInstitution = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				await EditInstitution.call(editingInstitution!.id, factory.value)
-				const updatedInstitution = await FindInstitution.call(editingInstitution!.id)
+				const updatedInstitution = await EditInstitution.call(editingInstitution!.id, factory.value)
 				if (updatedInstitution) pushToGlobalInstitutions(updatedInstitution)
 				factory.value.reset()
 				useStudyModal().closeEditInstitution()

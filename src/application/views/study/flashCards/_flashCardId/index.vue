@@ -7,7 +7,8 @@
 						{{ flashCard.title }}
 					</ion-text>
 					<div class="flex items-center md:justify-start justify-center  mt-2">
-						<Avatar :id="flashCard.userId" :size="28" :src="flashCard.userBio.photo" color="#C7D6E3" />
+						<Avatar :id="flashCard.userId" :name="flashCard.userBio.fullName" :size="28"
+							:src="flashCard.userBio.photo" />
 						<ion-text class="text-white ml-2 text-base flex gap-1 items-center">
 							<span>by <b>{{ flashCard.userBio.fullName }}</b></span>
 							<IonIcon v-if="flashCard.isUserVerified" :icon="checkmarkCircleOutline" color="white" />

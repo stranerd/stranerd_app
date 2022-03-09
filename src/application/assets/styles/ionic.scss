@@ -270,12 +270,20 @@ ion-button.btn-outline-sm {
 ion-button {
 	height: 100%;
 	--box-shadow: none;
-	--border-radius: 0.75rem;
 	box-shadow: none;
-	border-radius: 0.75rem;
+	--border-radius: 0.5rem;
+	border-radius: 0.5rem;
 	font-weight: 700;
-	text-transform: capitalize !important;
-	letter-spacing: 0.02rem !important;
+	text-transform: capitalize;
+	letter-spacing: 0.02rem;
+	@media (min-width: $md) {
+		--border-radius: 0.625rem;
+		border-radius: 0.625rem;
+	}
+	@media (min-width: $lg) {
+		--border-radius: 0.75rem;
+		border-radius: 0.75rem;
+	}
 }
 
 .btn-primary {
@@ -285,7 +293,6 @@ ion-button {
 	--padding-start: 1.5rem;
 	--padding-end: 1.5rem;
 	--color: $color-white;
-	--border-radius: 8px;
 	color: $color-white;
 
 	@media (max-width: 640px) {
@@ -366,15 +373,10 @@ ion-segment-button {
 	--background-focused: $color-darkGray;
 	--indicator-color: $color-darkGray;
 	--indicator-box-shadow: none;
-	--padding-top: 0.8rem;
-	--padding-bottom: 0.8rem;
+	--padding-top: 0.5rem;
+	--padding-bottom: 0.5rem;
 	color: $color-mainDark;
 	font-weight: bold;
-
-	@media (max-width: 640px) {
-		--padding-top: 0.5rem;
-		--padding-bottom: 0.5rem;
-	}
 }
 
 .segment-button-checked {
@@ -390,7 +392,9 @@ ion-icon {
 	cursor: pointer;
 }
 
-$border: 2px solid $color-newGray !important;
+ion-item {
+	--inner-border-width: 0px !important;
+}
 
 .border-bottom-line {
 	@media (max-width: $md) {
@@ -400,7 +404,7 @@ $border: 2px solid $color-newGray !important;
 
 .border-top-line {
 	@media (max-width: $md) {
-		border-bottom: $border;
+		border-top: $border;
 	}
 }
 

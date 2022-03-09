@@ -11,8 +11,7 @@ export class QuestionApiDataSource implements QuestionBaseDataSource {
 	}
 
 	async create (data: QuestionToModel) {
-		const question = await this.stranerdClient.post<QuestionToModel, QuestionFromModel>('/', data)
-		return question.id
+		return await this.stranerdClient.post<QuestionToModel, QuestionFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -46,6 +45,6 @@ export class QuestionApiDataSource implements QuestionBaseDataSource {
 	}
 
 	async update (id: string, data: QuestionToModel) {
-		await this.stranerdClient.put<QuestionToModel, QuestionFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<QuestionToModel, QuestionFromModel>(`/${id}`, data)
 	}
 }

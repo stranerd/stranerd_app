@@ -11,8 +11,7 @@ export class TestPrepApiDataSource implements TestPrepBaseDataSource {
 	}
 
 	async create (data: TestPrepToModel) {
-		const testPrep = await this.stranerdClient.post<TestPrepToModel, TestPrepFromModel>('/', data)
-		return testPrep.id
+		return await this.stranerdClient.post<TestPrepToModel, TestPrepFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -42,6 +41,6 @@ export class TestPrepApiDataSource implements TestPrepBaseDataSource {
 	}
 
 	async update (id: string, data: TestPrepToModel) {
-		await this.stranerdClient.put<TestPrepToModel, TestPrepFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<TestPrepToModel, TestPrepFromModel>(`/${id}`, data)
 	}
 }

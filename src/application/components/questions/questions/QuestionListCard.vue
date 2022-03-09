@@ -1,11 +1,12 @@
 <template>
 	<router-link
-		:class="`rounded-xl bg-white flex flex-col card-padding justify-between w-full relative cursor-pointer`"
-		:to="`/questions/${question.id}`">
+		:to="`/questions/${question.id}`"
+		class="rounded-xl bg-white flex flex-col card-padding justify-between w-full relative cursor-pointer">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center text-sm">
 			<div class="flex items-center">
-				<avatar :id="question.userId" :size="28" :src="question.avatar" class="mr-2 " />
+				<avatar :id="question.userId" :name="question.userBio.fullName" :size="28" :src="question.avatar"
+					class="mr-2 " />
 				<span class="font-bold text-main_dark hidden lg:flex items-center gap-1">
 					<span>{{ question.userBio.fullName }}</span>
 					<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
@@ -52,10 +53,6 @@ import { useAuth } from '@app/composable/auth/auth'
 export default defineComponent({
 	name: 'QuestionListCard',
 	props: {
-		colorClass: {
-			type: String,
-			default: 'bg-white'
-		},
 		question: {
 			type: QuestionEntity,
 			required: true

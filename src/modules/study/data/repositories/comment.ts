@@ -54,7 +54,7 @@ export class CommentRepository implements ICommentRepository {
 	}
 
 	async add (data: CommentToModel) {
-		return await this.dataSource.create(data)
+		return this.transformer.fromJSON(await this.dataSource.create(data))
 	}
 
 	async find (id: string) {
@@ -63,7 +63,7 @@ export class CommentRepository implements ICommentRepository {
 	}
 
 	async update (id: string, data: CommentToModel) {
-		return this.dataSource.update(id, data)
+		return this.transformer.fromJSON(await this.dataSource.update(id, data))
 	}
 
 	async delete (id: string) {

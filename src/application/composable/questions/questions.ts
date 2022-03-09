@@ -87,9 +87,8 @@ export const useQuestionList = () => {
 			if (global.answered.value === Answered.Unanswered && q.answers.length > 0) return false
 			if (global.answered.value === Answered.BestAnswered && !q.isAnswered) return false
 			return true
-		}).sort((a, b) => {
-			return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1
-		}), set: (questions) => {
+		}).sort((a, b) => b.createdAt - a.createdAt),
+		set: (questions) => {
 			questions.map(pushToQuestionList)
 		}
 	})
@@ -128,11 +127,11 @@ export const useQuestionList = () => {
 	}
 }
 
-const factory = ref(new QuestionFactory()) as Ref<QuestionFactory>
 export const useCreateQuestion = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
+	const factory = ref(new QuestionFactory()) as Ref<QuestionFactory>
 	const router = useRouter()
 
 	const createQuestion = async () => {
@@ -140,11 +139,11 @@ export const useCreateQuestion = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const questionId = await AddQuestion.call(factory.value)
+				const question = await AddQuestion.call(factory.value)
 				await setMessage('Question submitted successfully')
 				factory.value.reset()
 				useQuestionModal().closeCreateQuestion()
-				await router.replace(`/questions/${questionId}`)
+				await router.replace(`/questions/${question.id}`)
 			} catch (error) {
 				await setError(error)
 			}

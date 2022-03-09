@@ -3,9 +3,9 @@ import { DiscussionEntity } from '../../domain/entities/discussion'
 
 export class DiscussionTransformer {
 	fromJSON (model: DiscussionFromModel) {
-		const { id, content, media, groupId, userId, userBio, userRoles, createdAt, updatedAt } = model
+		const { id, content, media, links, groupId, classId, userId, userBio, userRoles, createdAt, updatedAt } = model
 		return new DiscussionEntity({
-			id, content, media, groupId, userId, userBio, userRoles, createdAt, updatedAt
+			id, content, media, links, groupId, classId, userId, userBio, userRoles, createdAt, updatedAt
 		})
 	}
 

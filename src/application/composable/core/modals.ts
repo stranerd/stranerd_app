@@ -20,6 +20,12 @@ import EditPastQuestion from '@app/components/modals/study/EditPastQuestion.vue'
 import CreateSet from '@app/components/modals/study/CreateSet.vue'
 import EditSet from '@app/components/modals/study/EditSet.vue'
 import SaveEntity from '@app/components/modals/study/SaveEntity.vue'
+import CreateClass from '@app/components/modals/classes/CreateClass.vue'
+import EditClass from '@app/components/modals/classes/EditClass.vue'
+import CreateGroup from '@app/components/modals/classes/CreateGroup.vue'
+import EditGroup from '@app/components/modals/classes/EditGroup.vue'
+import CreateAnnouncement from '@app/components/modals/classes/CreateAnnouncement.vue'
+import EditAnnouncement from '@app/components/modals/classes/EditAnnouncement.vue'
 
 export const modal = useModal(ref([]))
 const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion })
@@ -30,12 +36,21 @@ const StudyModal = modal.register('Study', {
 	CreateInstitution, EditInstitution, CreateCourse, EditCourse,
 	CreateTestPrep, EditTestPrep, CreatePastQuestion, EditPastQuestion
 })
+const ClassModal = modal.register('Class', {
+	CreateClass,
+	EditClass,
+	CreateGroup,
+	EditGroup,
+	CreateAnnouncement,
+	EditAnnouncement
+})
 
 export const useQuestionModal = () => QuestionModal
 export const useSessionModal = () => SessionModal
 export const useReportModal = () => ReportModal
 export const useStudyModal = () => StudyModal
-export const allModals = [useQuestionModal, useSessionModal, useReportModal, useStudyModal]
+export const useClassModal = () => ClassModal
+export const allModals = [useQuestionModal, useSessionModal, useReportModal, useStudyModal, useClassModal]
 
 export const popover = usePopover(ref([]))
 const StudyPopover = popover.register('Study', { SubmitTest })
