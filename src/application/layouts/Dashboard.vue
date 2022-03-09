@@ -1,11 +1,13 @@
 <template>
 	<IonPage>
 		<TopBar />
-		<div class="flex h-full">
-			<Sidebar />
+		<div class="flex h-full w-full">
 			<div class="layout">
 				<IonContent>
-					<div class="layout-page">
+					<div class="layout-page  w-full">
+						<div class="layout-side-left">
+							<Sidebar />
+						</div>
 						<div class="layout-body">
 							<slot />
 						</div>
