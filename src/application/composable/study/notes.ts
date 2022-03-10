@@ -107,8 +107,7 @@ export const openNoteEditModal = async (note: NoteEntity, router: Router) => {
 	editingNote = note
 	await router.push(`/study/notes/${note.id}/edit`)
 }
-export const useEditNote = (noteId: string) => {
-	const router = useRouter()
+export const useEditNote = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
@@ -120,9 +119,8 @@ export const useEditNote = (noteId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditNote.call(noteId, factory.value)
+				await EditNote.call(editingNote!.id, factory.value)
 				await setMessage('Note updated successfully')
-				await router.push(`/study/notes/${noteId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

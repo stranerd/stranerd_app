@@ -18,6 +18,8 @@ import EditTestPrep from '@app/components/modals/study/EditTestPrep.vue'
 import CreatePastQuestion from '@app/components/modals/study/CreatePastQuestion.vue'
 import EditPastQuestion from '@app/components/modals/study/EditPastQuestion.vue'
 import CreateSet from '@app/components/modals/study/CreateSet.vue'
+import CreateNote from '@app/components/modals/study/CreateNote.vue'
+import CreateVideo from '@app/components/modals/study/CreateVideo.vue'
 import EditSet from '@app/components/modals/study/EditSet.vue'
 import SaveEntity from '@app/components/modals/study/SaveEntity.vue'
 import CreateClass from '@app/components/modals/classes/CreateClass.vue'
@@ -26,23 +28,22 @@ import CreateGroup from '@app/components/modals/classes/CreateGroup.vue'
 import EditGroup from '@app/components/modals/classes/EditGroup.vue'
 import CreateAnnouncement from '@app/components/modals/classes/CreateAnnouncement.vue'
 import EditAnnouncement from '@app/components/modals/classes/EditAnnouncement.vue'
+import EditNote from '@app/components/modals/study/EditNote.vue'
+import EditVideo from '@app/components/modals/study/EditVideo.vue'
 
 export const modal = useModal(ref([]))
 const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion })
 const SessionModal = modal.register('Session', { CreateSession, Ratings: CreateSession })
 const ReportModal = modal.register('Report', { ReportUser, ReportQuestion, ReportAnswer })
 const StudyModal = modal.register('Study', {
-	CreateSet, EditSet, SaveEntity,
-	CreateInstitution, EditInstitution, CreateCourse, EditCourse,
-	CreateTestPrep, EditTestPrep, CreatePastQuestion, EditPastQuestion
+	CreateSet, EditSet, CreateNote, EditNote,
+	CreateVideo, EditVideo, CreateInstitution, EditInstitution,
+	CreateCourse, EditCourse, CreateTestPrep, EditTestPrep,
+	CreatePastQuestion, EditPastQuestion, SaveEntity
 })
 const ClassModal = modal.register('Class', {
-	CreateClass,
-	EditClass,
-	CreateGroup,
-	EditGroup,
-	CreateAnnouncement,
-	EditAnnouncement
+	CreateClass, EditClass, CreateGroup, EditGroup,
+	CreateAnnouncement, EditAnnouncement
 })
 
 export const useQuestionModal = () => QuestionModal

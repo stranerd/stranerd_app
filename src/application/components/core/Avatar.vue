@@ -10,20 +10,15 @@
 		>
 		<span v-else-if="name" :style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
 			class="flex items-center justify-center uppercase bg-faded_gray text-main_dark font-semibold rounded-full">
-			<span>{{ name[0] }}</span>
+			<span class="text-xl">{{ name[0] }}</span>
 		</span>
-		<svg v-else :style="`width: ${size}px; height: ${size}px;`" fill="none" height="36" viewBox="0 0 36 36"
-			width="36"
-			xmlns="http://www.w3.org/2000/svg">
-			<path d="M18 0C8.0749 0 0 8.0749 0 18C0 27.9251 8.0749 36 18 36C27.9251 36 36 27.9251 36 18C36 8.0749 27.9251 0
-18 0ZM13.654 10.1094C14.7505 8.94721 16.2935 8.30769 18 8.30769C19.7065 8.30769 21.2357 8.95154 22.3364 10.1198C23.4519
-11.3037 23.9945 12.8942 23.8664 14.6042C23.6103 18 20.9795 20.7692 18 20.7692C15.0205 20.7692 12.3845
-18 12.1336 14.6034C12.0063 12.8795 12.5481 11.2838 13.654 10.1094ZM18 33.2308C15.9668 33.2321 13.9539
-32.8252 12.0809 32.034C10.2079 31.2429 8.51279 30.0837 7.09615 28.6252C7.9075 27.4681 8.94129 26.4844
-10.1371 25.7313C12.343 24.3173 15.1347 23.5385 18 23.5385C20.8653 23.5385 23.657 24.3173 25.8603 25.7313C27.0571
-26.484 28.0918 27.4678 28.9038 28.6252C27.4873 30.0839 25.7923 31.2432 23.9192 32.0343C22.0462 32.8254 20.0333
- 33.2323 18 33.2308Z" fill="#C7D6E3" />
-		</svg>
+		<img
+			v-else
+			:src="DEFAULT_PROFILE_IMAGE"
+			:style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
+			alt=""
+			class="!max-w-[1920px] rounded-full"
+		>
 	</component>
 </template>
 

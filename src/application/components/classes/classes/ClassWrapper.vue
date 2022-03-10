@@ -5,7 +5,7 @@
 				<div class="w-full bg-orange h-16 md:h-24 lg:md:h-32 lg:rounded-t-xl" />
 				<div class="px-4 md:px-6 border-bottom-line">
 					<div class="-mt-10">
-						<Avatar :name="classInst.fullName" :size="80" :src="classInst.photo" />
+						<Avatar :name="classInst.name" :size="80" :src="classInst.photo" />
 					</div>
 					<div class="pt-2 pb-4 flex flex-col gap-1">
 						<div class="flex gap-1 items-center">

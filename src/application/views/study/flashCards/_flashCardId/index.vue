@@ -1,59 +1,36 @@
 <template>
 	<Justified>
-		<div v-if="flashCard" class="blueTop py-2">
-			<div class="flex items-center md:justify-between justify-center lg:w-8/12 w-full max-w-[60rem] mx-auto p-4">
-				<div>
-					<ion-text class="heading lg:text-xl font-bold text-white text-center">
+		<div v-if="flashCard">
+			<div class="blueTop py-4">
+				<div
+					class="flex flex-col md:flex-row md:justify-between justify-start items-start px-4 w-full lg:w-8/12 w-full mx-auto">
+					<ion-text class="heading lg:text-xl font-bold text-main_dark text-start">
 						{{ flashCard.title }}
 					</ion-text>
-					<div class="flex items-center md:justify-start justify-center  mt-2">
-						<Avatar :id="flashCard.userId" :name="flashCard.userBio.fullName" :size="28"
+					<div class="items-center text-gray font-normal flex gap-3">
+						<div class="flex items-center lg:mr-4 mr-2" @click="cardMode = !cardMode">
+							<ion-icon
+								:icon="!cardMode ? copyOutline: listOutline"
+								class="text-gray text-xl cursor-pointer mr-2 md:mt-0"
+							/>
+							<ion-text class=" flex">
+								{{ !cardMode ? 'Card mode' : 'List mode' }}
+							</ion-text>
+						</div>
+						<Avatar :id="flashCard.userId" :name="flashCard.userBio.fullName" :size="24"
 							:src="flashCard.userBio.photo" />
-						<ion-text class="text-white ml-2 text-base flex gap-1 items-center">
-							<span>by <b>{{ flashCard.userBio.fullName }}</b></span>
-							<IonIcon v-if="flashCard.isUserVerified" :icon="checkmarkCircleOutline" color="white" />
-						</ion-text>
+						<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
+							text="Share this flashcard" />
+						<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl"
+							@click="openSaveModal(flashCard)" />
 					</div>
 				</div>
-
-				<div class="items-center text-white font-bold hidden md:flex gap-2">
-					<div class="flex items-center lg:mr-8 mr-2" @click="cardMode = !cardMode">
-						<ion-icon
-							:icon="!cardMode ? copyOutline: listOutline"
-							class="text-white text-xl cursor-pointer md:mr-2 md:mt-0"
-						/>
-						<ion-text class="hidden md:flex">
-							{{ !cardMode ? 'Card mode' : 'List mode' }}
-						</ion-text>
-					</div>
-					<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
-						text="Share this flashcard" />
-					<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl"
-						@click="openSaveModal(flashCard)" />
-				</div>
+			</div>
+			<div class="flex flex-col lg:w-8/12 w-full mx-auto">
+				<FlashCardScreen v-if="cardMode" :flashCard="flashCard" />
+				<FlashCardListView v-else :flashCard="flashCard" />
 			</div>
 		</div>
-
-		<div class="w-full bg-white flex md:hidden items-center justify-between text-gray p-4 gap-2 rounded-b-xl">
-			<div class="flex items-center mr-auto" @click="cardMode = !cardMode">
-				<ion-icon
-					:icon="!cardMode ? copyOutline: listOutline"
-					class="text-gray text-xl cursor-pointer mr-3"
-				/>
-				<ion-text class="font-medium">
-					{{ !cardMode ? 'Card mode' : 'List mode' }}
-				</ion-text>
-			</div>
-			<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
-				text="Share this flashcard" />
-			<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" @click="openSaveModal(flashCard)" />
-		</div>
-
-		<template v-if="flashCard">
-			<FlashCardScreen v-if="cardMode" :flashCard="flashCard" />
-			<FlashCardListView v-else :flashCard="flashCard" />
-		</template>
-
 		<PageLoading v-if="loading" />
 	</Justified>
 </template>

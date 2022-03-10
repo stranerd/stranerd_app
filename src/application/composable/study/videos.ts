@@ -107,8 +107,7 @@ export const openVideoEditModal = async (video: VideoEntity, router: Router) => 
 	editingVideo = video
 	await router.push(`/study/videos/${video.id}/edit`)
 }
-export const useEditVideo = (videoId: string) => {
-	const router = useRouter()
+export const useEditVideo = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
@@ -120,9 +119,8 @@ export const useEditVideo = (videoId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditVideo.call(videoId, factory.value)
+				await EditVideo.call(editingVideo!.id, factory.value)
 				await setMessage('Video updated successfully')
-				await router.push(`/study/videos/${videoId}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

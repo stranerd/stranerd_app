@@ -3,11 +3,11 @@
 		<div>
 			<div class="blueTop !mb-0 flex-col items-center">
 				<div class="sm:flex hidden w-full justify-center items-center px-4 mt-auto">
-					<ion-icon :icon="cogOutline" class="text-3xl text-white"></ion-icon>
-					<ion-text class="text-white heading font-bold mx-4">
+					<ion-icon :icon="cogOutline" class="text-3xl text-main_dark"></ion-icon>
+					<ion-text class="text-main_dark heading font-bold mx-4">
 						Administration
 					</ion-text>
-					<ion-icon :icon="cogOutline" class="text-3xl text-white"></ion-icon>
+					<ion-icon :icon="cogOutline" class="text-3xl text-main_dark"></ion-icon>
 				</div>
 
 				<div

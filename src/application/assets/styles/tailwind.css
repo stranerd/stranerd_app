@@ -8,14 +8,12 @@
 	background: #7483bf4e; /* Optional: just make scrollbar invisible */
 }
 
-
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
 	background: #4e474788;
 	border-radius: 100px;
 	cursor: pointer;
 }
-
 
 @media screen and (max-width: 680px) {
 	::-webkit-scrollbar {
@@ -26,24 +24,28 @@
 }
 
 @layer utilities {
+	body {
+		@apply md:bg-new_gray
+	}
+
 	.layout {
 		@apply flex flex-col h-full flex-grow
 	}
 
 	.layout-page {
-		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow md:bg-new_gray bg-white min-h-full
+		@apply flex flex-row lg:gap-10 flex-grow md:bg-new_gray min-h-full
 	}
 
 	.layout-body {
-		@apply lg:w-3/4 w-full min-h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] md:bg-new_gray bg-white
+		@apply lg:w-7/12 w-full min-h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] md:bg-new_gray
 	}
 
 	.layout-side-left {
-		@apply hidden lg:flex bg-light_gray py-3 pl-3 fixed overflow-y-auto bottom-0 flex-col rounded-tr-3xl rounded-br-3xl
+		@apply hidden lg:inline-block w-2/12 py-1 overflow-y-auto
 	}
 
 	.layout-side-right {
-		@apply hidden lg:inline-block w-1/4 py-1 overflow-y-auto
+		@apply hidden lg:inline-block w-3/12 py-1 overflow-y-auto
 	}
 
 	.text-body {
@@ -71,7 +73,7 @@
 	}
 
 	.blueTop {
-		@apply bg-primary w-full flex items-center min-h-[5.5rem] lg:min-h-[9.75rem] rounded-b-2xl md:rounded-none md:mb-4 justify-center
+		@apply bg-white w-full flex items-center rounded-b-2xl md:rounded-none md:mb-4 justify-center
 	}
 
 	.nav-scroll {

@@ -60,8 +60,6 @@ export default defineComponent({
 		@media (max-width: 768px) {
 			height: .25rem !important;
 		}
-
-
 	}
 
 	ion-progress-bar::part(progress) {

@@ -1,29 +1,24 @@
 <template>
 	<Justified>
 		<div v-if="note">
-			<div class="blueTop ">
-				<ion-text class="heading lg:text-2xl font-bold text-white text-center ">
-					{{ note.title }}
-				</ion-text>
-			</div>
-			<div class="lg:w-8/12 w-full mx-auto p-4 md:my-4 bg-white">
-				<NoteDetails :note="note" />
-			</div>
-			<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white">
-				<div class="lg:w-8/12 max-w-[60rem] w-full px-4 mx-auto flex items-center justify-between">
-					<div class="flex">
-						<Avatar :id="note.userId" :name="note.userBio.fullName" :size="28" :src="note.userBio.photo"
-							class="mx-2" />
-						<ion-text class="text-icon_inactive flex items-center gap-1">
-							<span>by <b>{{ note.userBio.firstName }}</b></span>
-							<IonIcon v-if="note.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
-						</ion-text>
-					</div>
-					<div class="flex items-center">
-						<Share :text="note.description" :title="note.title"
-							cssClass="text-icon_inactive text-xl cursor-pointer mx-2" />
+			<div class="blueTop py-4">
+				<div
+					class="flex flex-col md:flex-row md:justify-between justify-start items-start px-4 w-full lg:w-8/12 w-full mx-auto">
+					<ion-text class="heading lg:text-xl font-bold text-main_dark text-start">
+						{{ note.title }}
+					</ion-text>
+					<div class="items-center text-gray font-normal flex gap-3">
+						<Avatar :id="note.userId" :name="note.userBio.fullName" :size="24"
+							:src="note.userBio.photo" />
+						<Share :link="note.shareLink" :title="note.title" cssClass="text-xl"
+							text="Share this note" />
+						<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl"
+							@click="openSaveModal(note)" />
 					</div>
 				</div>
+			</div>
+			<div class="bg-white w-full lg:w-8/12 w-full mx-auto">
+				<NoteDetails :note="note" />
 			</div>
 		</div>
 		<PageLoading v-if="loading" />
@@ -35,6 +30,7 @@ import Justified from '@app/layouts/Justified.vue'
 import {
 	add,
 	bookmark,
+	bookmarkOutline,
 	checkmarkCircleOutline,
 	chevronDown,
 	chevronUp,
@@ -45,11 +41,13 @@ import {
 	shareSocial
 } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { useNote } from '@app/composable/study/notes'
 import Share from '@app/components/core/Share.vue'
 import NoteDetails from '@app/components/study/notes/NoteDetails.vue'
+import { useUserSetList } from '@app/composable/users/users/sets'
+import { openSaveModal } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'StudyNotesNoteId',
@@ -58,9 +56,11 @@ export default defineComponent({
 	setup () {
 		const { noteId } = useRoute().params
 		const { error, loading, note } = useNote(noteId as string)
+		const { sets } = useUserSetList()
+		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(noteId as string)))
 		return {
-			add, remove, scan, chevronDown, loading, note, error,
-			chevronUp, pencil, contract, bookmark, shareSocial, checkmarkCircleOutline
+			add, remove, scan, chevronDown, loading, note, error, isSaved, openSaveModal,
+			chevronUp, pencil, contract, bookmark, shareSocial, checkmarkCircleOutline, bookmarkOutline
 		}
 	}
 })
