@@ -1,4 +1,4 @@
-import { QueryParams } from '@modules/core'
+import { QueryKeys, QueryParams } from '@modules/core'
 import { IClassRepository } from '../../irepositories/iclass'
 import { ClassUsers } from '../../entities/class'
 
@@ -12,7 +12,7 @@ export class GetMyClassesUseCase {
 	async call (userId: string) {
 		const conditions: QueryParams = {
 			where: [{ field: `users.${ClassUsers.members}`, value: userId }, { field: 'requests', value: 'userId' }],
-			whereType: 'or',
+			whereType: QueryKeys.or,
 			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
