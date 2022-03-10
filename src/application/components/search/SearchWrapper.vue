@@ -2,47 +2,18 @@
 	<Justified>
 		<div class="text-body h-full md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
 			<div class="bg-white rounded-xl px-4 pt-4 flex flex-col">
-				<div class="flex flex-col justify-center items-center">
-					<Search placeholder="Search by subjects, topics and related keywords" />
-				</div>
-
-				<div
-					class="nav-scroll mt-4">
-					<router-link :to="`/search?search=${searchTerm}`"
-					>
-						All
-					</router-link>
-					<router-link :to="`/search/preps?search=${searchTerm}`"
-					>
-						TestPreps
-					</router-link>
-					<router-link :to="`/search/notes?search=${searchTerm}`"
-					>
-						Notes
-					</router-link>
-					<router-link :to="`/search/videos?search=${searchTerm}`"
-					>
-						Videos
-					</router-link>
-					<router-link :to="`/search/flashCards?search=${searchTerm}`"
-					>
-						FlashCards
-					</router-link>
-					<router-link :to="`/search/sets?search=${searchTerm}`"
-					>
-						Folders
-					</router-link>
-					<router-link :to="`/search/nerds?search=${searchTerm}`"
-					>
-						Nerds
-					</router-link>
-					<router-link :to="`/search/questions?search=${searchTerm}`"
-					>
-						Questions
-					</router-link>
+				<Search />
+				<div class="nav-scroll mt-4">
+					<router-link :to="`/search?search=${searchTerm}`">All</router-link>
+					<router-link :to="`/search/preps?search=${searchTerm}`">TestPreps</router-link>
+					<router-link :to="`/search/notes?search=${searchTerm}`">Notes</router-link>
+					<router-link :to="`/search/videos?search=${searchTerm}`">Videos</router-link>
+					<router-link :to="`/search/flashCards?search=${searchTerm}`">FlashCards</router-link>
+					<router-link :to="`/search/sets?search=${searchTerm}`">Folders</router-link>
+					<router-link :to="`/search/nerds?search=${searchTerm}`">Nerds</router-link>
+					<router-link :to="`/search/questions?search=${searchTerm}`">Questions</router-link>
 				</div>
 			</div>
-		
 			<div class="md:mt-6 md:px-4 lg:px-0">
 				<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl" />
 				<div v-else-if="!fetched" class="flex flex-col gap-4 max-w-[500px] mx-auto p-4 md:p-0">
@@ -79,7 +50,6 @@ export default defineComponent({
 	}
 })
 </script>
-
 
 <style lang="scss" scoped>
 	:deep(ion-searchbar) {

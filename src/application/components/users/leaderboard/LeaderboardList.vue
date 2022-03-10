@@ -1,62 +1,58 @@
 <template>
-	<div class="flex flex-col items-center justify-content-center gap-1 gap-md-2">
+	<div class="flex flex-col lg:gap-4 w-full lg:text-base text-xs font-bold lg:py-4">
 		<PageLoading v-if="loading" />
-
-		<div class="flex flex-col gap-0-5 w-full mt-6 md:mt-0 ">
-			<div
-				class="flex lg:rounded-xl bg-gray font-bold lg:text-base text-xs text-white py-4 px-4 text-dark">
-				<div class="lg:w-1/12 w-2/12">
-					<span>Rank</span>
-				</div>
-				<div class="w-8/12">
-				</div>
-				<div class="w-3/12 text-right">
-					<span>Nerd Score</span>
-				</div>
+		<div
+			class="flex lg:rounded-xl bg-gray text-white py-4 px-4">
+			<div class="md:w-1/12 w-2/12">
+				<span>Rank</span>
 			</div>
-
-			<router-link v-for="(person, index) in users" :key="person.hash"
-				:class="{'bg-yellow_star': person.id === id}"
-				:to="`/users/${person.id}`"
-				class="flex items-center mt-4 bg-white lg:rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 px-4"
-			>
-				<div class="lg:w-1/12 w-2/12">
-					<span>{{ index + 1 }} </span>
-				</div>
-				<div class="w-8/12 flex items-center gap-2">
-					<avatar :id="person.id" :name="person.bio.fullName" :size="24" :src="person.avatar" />
-					<span class="flex items-center gap-1">
-						<span>{{ person.bio.fullName }}</span>
-						<IonIcon v-if="person.isVerified" :icon="checkmarkCircleOutline" color="primary" />
-					</span>
-					<Tag :index="person.rank.level - 1" :secondary="true" :tag="person.rank.id" />
-				</div>
-				<div class="w-3/12 font-bold text-right text-primary">
-					<span>{{ formatNumber(person.account.rankings[time], 2) }}</span>
-				</div>
-			</router-link>
-
-			<router-link v-if="user && hasNoAuthUser" :to="`/users/${user.id}`"
-				class="flex items-center mt-4  lg:rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 px-4 bg-cyan">
-				<div class="lg:w-1/12 w-2/12">
-					<span> - </span>
-				</div>
-				<div class="w-8/12 flex items-center gap-2">
-					<avatar :id="user?.id" :name="user.bio.fullName" :size="24" :src="user.avatar" />
-					<span class="flex items-center gap-1">
-						<span>{{ user.bio.fullName }}</span>
-						<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
-					</span>
-					<Tag :index="user.rank.level - 1" :secondary="true" :tag="user.rank.id" />
-				</div>
-				<div class="w-3/12 text-right text-primary font-bold">
-					<span>{{ formatNumber(user.account.rankings[time], 2) }}</span>
-				</div>
-			</router-link>
-
-			<EmptyState v-if="!loading && !error && !user && users.length === 0" class="mt-4"
-				info="No user has earned points this period." />
+			<div class="w-8/12" />
+			<div class="w-3/12 text-right">
+				<span>Nerd Score</span>
+			</div>
 		</div>
+
+		<router-link v-for="(person, index) in users" :key="person.hash"
+			:class="{'!bg-cyan !text-white': person.id === id}"
+			:to="`/users/${person.id}`"
+			class="flex items-center bg-white lg:rounded-xl text-main_dark p-4"
+		>
+			<div class="md:w-1/12 w-2/12">
+				<span>{{ index + 1 }} </span>
+			</div>
+			<div class="w-8/12 flex items-center gap-2">
+				<avatar :id="person.id" :name="person.bio.fullName" :size="24" :src="person.avatar" />
+				<span class="flex items-center gap-1">
+					<span>{{ person.bio.fullName }}</span>
+					<IonIcon v-if="person.isVerified" :icon="checkmarkCircleOutline" color="primary" />
+				</span>
+				<Tag :index="person.rank.level - 1" :secondary="true" :tag="person.rank.id" />
+			</div>
+			<div class="w-3/12 font-bold text-right">
+				<span>{{ formatNumber(person.account.rankings[time], 2) }}</span>
+			</div>
+		</router-link>
+
+		<router-link v-if="user && hasNoAuthUser" :to="`/users/${user.id}`"
+			class="flex items-center lg:rounded-xl text-white p-4 bg-cyan">
+			<div class="md:w-1/12 w-2/12">
+				<span> - </span>
+			</div>
+			<div class="w-8/12 flex items-center gap-2">
+				<avatar :id="user?.id" :name="user.bio.fullName" :size="24" :src="user.avatar" />
+				<span class="flex items-center gap-1">
+					<span>{{ user.bio.fullName }}</span>
+					<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
+				</span>
+				<Tag :index="user.rank.level - 1" :secondary="true" :tag="user.rank.id" />
+			</div>
+			<div class="w-3/12 text-right font-bold">
+				<span>{{ formatNumber(user.account.rankings[time], 2) }}</span>
+			</div>
+		</router-link>
+
+		<EmptyState v-if="!loading && !error && !user && users.length === 0"
+			info="No user has earned points this period." />
 	</div>
 </template>
 

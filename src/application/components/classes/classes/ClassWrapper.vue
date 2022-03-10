@@ -8,9 +8,13 @@
 						<Avatar :name="classInst.fullName" :size="80" :src="classInst.photo" />
 					</div>
 					<div class="pt-2 pb-4 flex flex-col gap-1">
-						<IonText class="text-main_dark md:text-[20px] capitalize font-semibold">
-							{{ classInst.name }}
-						</IonText>
+						<div class="flex gap-1 items-center">
+							<IonText class="text-main_dark md:text-[20px] capitalize font-semibold">
+								{{ classInst.name }}
+							</IonText>
+							<Share :link="`/classes/${classInst.id}`" :text="classInst.description"
+								:title="`Share this class: ${classInst.name}`" />
+						</div>
 						<IonText class="text-sm">{{ classInst.description }}</IonText>
 						<IonText class="text-xs text-gray">Created {{ formatTime(classInst.createdAt) }}</IonText>
 						<IonText class="text-sm font-semibold text-gray">

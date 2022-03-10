@@ -1,13 +1,13 @@
-import { computed, onMounted, onUnmounted, reactive, ref, toRefs } from 'vue'
-import { GetAllTutors, GetUsersByEmail, ListenToAllTutors, ToggleTutor, UserEntity } from '@modules/users'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { GetAllTutors, ListenToAllTutors, ToggleTutor, UserEntity } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { useAuth } from '@app/composable/auth/auth'
 
 const global = {
 	tutors: ref([] as UserEntity[]),
 	fetched: ref(false),
 	...useErrorHandler(),
+	...useSuccessHandler(),
 	...useLoadingHandler()
 }
 const listener = useListener(async () => {
@@ -34,7 +34,6 @@ const pushToTutorsList = (tutor: UserEntity) => {
 }
 
 export const useTutorsList = () => {
-	const { id } = useAuth()
 	const fetchTutors = async () => {
 		await global.setError('')
 		try {
@@ -58,16 +57,46 @@ export const useTutorsList = () => {
 			})
 		}
 	})
-	const adminTutors = computed({
-		get: () => global.tutors.value.filter((t) => t.id !== id.value),
-		set: (tutors) => {
-			tutors?.forEach?.((t) => {
-				const index = global.tutors.value.findIndex((x) => x.id === t.id)
-				if (index === -1) global.tutors.value.push(t)
-				else global.tutors.value.splice(index, 1, t)
-			})
+
+	const tutorUser = async (user: UserEntity) => {
+		await global.setError('')
+		const accepted = await Alert({
+			title: 'Are you sure you want to toggle this user a tutor?',
+			confirmButtonText: 'Yes, continue'
+		})
+		if (accepted) {
+			await global.setLoading(true)
+			try {
+				await ToggleTutor.call(user.id, true)
+				user.isTutor = true
+				pushToTutorsList(user)
+				await global.setMessage('Successfully upgraded to tutor')
+			} catch (error) {
+				await global.setError(error)
+			}
+			await global.setLoading(false)
 		}
-	})
+	}
+
+	const deTutorUser = async (user: UserEntity) => {
+		await global.setError('')
+		const accepted = await Alert({
+			title: 'Are you sure you want to de-tutor this user?',
+			confirmButtonText: 'Yes, continue'
+		})
+		if (accepted) {
+			await global.setLoading(true)
+			try {
+				await ToggleTutor.call(user.id, false)
+				global.tutors.value = global.tutors.value
+					.filter((u) => u.id !== user.id)
+				await global.setMessage('Successfully downgraded from tutor')
+			} catch (error) {
+				await global.setError(error)
+			}
+			await global.setLoading(false)
+		}
+	}
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTutors()
@@ -77,82 +106,5 @@ export const useTutorsList = () => {
 		await listener.closeListener()
 	})
 
-	return { ...global, filteredTutors, adminTutors }
-}
-
-export const useTutorRoles = () => {
-	const state = reactive({
-		fetched: false,
-		email: '',
-		users: [] as UserEntity[]
-	})
-	const { error, setError } = useErrorHandler()
-	const { setMessage } = useSuccessHandler()
-	const { loading, setLoading } = useLoadingHandler()
-
-	const getUsersByEmail = async () => {
-		if (state.email) {
-			await setLoading(true)
-			try {
-				const users = await GetUsersByEmail.call(state.email.toLowerCase())
-				state.users = reactive(users.results)
-				state.fetched = true
-			} catch (error) {
-				await setError(error)
-			}
-			await setLoading(false)
-		}
-	}
-
-	const reset = () => {
-		state.email = ''
-		state.users.length = 0
-		state.fetched = false
-	}
-
-	const tutorUser = async (user: UserEntity) => {
-		await setError('')
-		const accepted = await Alert({
-			title: 'Are you sure you want to toggle this user a tutor?',
-			confirmButtonText: 'Yes, continue'
-		})
-		if (accepted) {
-			await setLoading(true)
-			try {
-				await ToggleTutor.call(user.id, true)
-				user.isTutor = true
-				pushToTutorsList(user)
-				reset()
-				await setMessage('Successfully upgraded to tutor')
-			} catch (error) {
-				await setError(error)
-			}
-			await setLoading(false)
-		}
-	}
-
-	const deTutorUser = async (user: UserEntity) => {
-		await setError('')
-		const accepted = await Alert({
-			title: 'Are you sure you want to de-tutor this user?',
-			confirmButtonText: 'Yes, continue'
-		})
-		if (accepted) {
-			await setLoading(true)
-			try {
-				await ToggleTutor.call(user.id, false)
-				global.tutors.value = global.tutors.value
-					.filter((u) => u.id !== user.id)
-				await setMessage('Successfully downgraded from tutor')
-			} catch (error) {
-				await setError(error)
-			}
-			await setLoading(false)
-		}
-	}
-
-	return {
-		...toRefs(state), error, loading,
-		getUsersByEmail, tutorUser, deTutorUser, reset
-	}
+	return { ...global, filteredTutors, tutorUser, deTutorUser }
 }

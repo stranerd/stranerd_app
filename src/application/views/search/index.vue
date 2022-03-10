@@ -2,7 +2,7 @@
 	<SearchWrapper>
 		<template
 			v-slot:default="{ count, searchTerm, testPreps, notes, videos, flashCards, sets, questions, users }">
-			<div class="flex flex-col gap-4 md:gap-6 py-4 md:py-0">
+			<div class="py-4 md:py-0 flex flex-col gap-4 md:gap-6">
 				<div v-if="questions.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="heading font-bold text-main_dark flex items-center">

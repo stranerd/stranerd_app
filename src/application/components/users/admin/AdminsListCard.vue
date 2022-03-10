@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useAdminRoles } from '@app/composable/users/roles/admins'
+import { useAdminsList } from '@app/composable/users/roles/admins'
 import { UserEntity } from '@modules/users'
 import { checkmarkCircleOutline } from 'ionicons/icons'
 
@@ -33,7 +33,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const { loading, error, deAdminUser, adminUser } = useAdminRoles()
+		const { loading, error, deAdminUser, adminUser } = useAdminsList()
 		return { loading, error, deAdminUser, adminUser, checkmarkCircleOutline }
 	}
 })

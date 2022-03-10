@@ -19,7 +19,7 @@ import { FindUserUseCase } from './domain/usecases/users/findUser'
 import { ToggleAdminUseCase } from './domain/usecases/roles/toggleAdmin'
 import { ToggleTutorUseCase } from './domain/usecases/roles/toggleTutor'
 import { ToggleVerifiedUseCase } from './domain/usecases/roles/toggleVerified'
-import { GetUsersByEmailUseCase } from './domain/usecases/users/getUsersByEmail'
+import { SearchUsersUseCase } from './domain/usecases/users/searchUsers'
 import { GetLeaderboardUseCase } from './domain/usecases/users/getLeaderboard'
 import { GetAllAdminsUseCase } from './domain/usecases/users/getAllAdmins'
 import { GetAllTutorsUseCase } from './domain/usecases/users/getAllTutors'
@@ -73,7 +73,7 @@ const referralRepository = new ReferralRepository(referralDataSource, referralTr
 const badgeRepository = new BadgeRepository(badgeDataSource, badgeTransformer)
 
 export const FindUser = new FindUserUseCase(userRepository)
-export const GetUsersByEmail = new GetUsersByEmailUseCase(userRepository)
+export const SearchUsers = new SearchUsersUseCase(userRepository)
 export const GetLeaderboard = new GetLeaderboardUseCase(userRepository)
 export const GetAllAdmins = new GetAllAdminsUseCase(userRepository)
 export const GetAllTutors = new GetAllTutorsUseCase(userRepository)
