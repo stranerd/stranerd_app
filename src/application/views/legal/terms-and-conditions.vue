@@ -2,7 +2,7 @@
 	<Justified>
 		<div>
 			<div class="blueTop">
-				<ion-text class="heading lg:text-2xl font-bold text-white text-center">
+				<ion-text class="heading lg:text-2xl font-bold text-main_dark text-center">
 					Terms and Conditions
 				</ion-text>
 			</div>
