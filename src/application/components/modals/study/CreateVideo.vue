@@ -1,25 +1,28 @@
 <template>
 	<Modal>
 		<template v-slot:title>
-			Create Study Folder
+			Add a video
 		</template>
-		<SetForm :error="error" :factory="factory" :loading="loading" :submit="createSet">
-			<template v-slot:buttonText>Create Folder</template>
-		</SetForm>
+		<VideoForm :error="error" :factory="factory" :loading="loading" :submit="createVideo"
+			class="p-4 md:p-8 bg-white">
+			<template v-slot:buttonText>
+				Add Video
+			</template>
+		</VideoForm>
 	</Modal> 
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useCreateSet } from '@app/composable/study/sets'
-import SetForm from '@app/components/study/sets/SetForm.vue'
+import { useCreateVideo } from '@app/composable/study/videos'
+import VideoForm from '@app/components/study/videos/VideoForm.vue'
 
 export default defineComponent({
 	name: 'CreateSetModal',
-	components: { SetForm },
+	components: { VideoForm },
 	setup () {
-		const { createSet, factory, error, loading } = useCreateSet()
-		return { error, loading, createSet, factory }
+		const { createVideo, factory, error, loading } = useCreateVideo()
+		return { error, loading, createVideo, factory }
 	}
 })
 </script>

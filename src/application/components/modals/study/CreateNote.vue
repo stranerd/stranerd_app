@@ -3,23 +3,25 @@
 		<template v-slot:title>
 			Upload a note
 		</template>
-		<SetForm :error="error" :factory="factory" :loading="loading" :submit="createSet">
-			<template v-slot:buttonText>Create Folder</template>
-		</SetForm>
+		<NoteForm :error="error" :factory="factory" :loading="loading" :submit="createNote"
+			class="p-4 md:p-8 bg-white">
+			<template v-slot:buttonText>
+			</template>
+		</NoteForm>
 	</Modal> 
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useCreateSet } from '@app/composable/study/sets'
-import SetForm from '@app/components/study/sets/SetForm.vue'
+import { useCreateNote } from '@app/composable/study/notes'
+import NoteForm from '@app/components/study/notes/NoteForm.vue'
 
 export default defineComponent({
 	name: 'CreateSetModal',
-	components: { SetForm },
+	components: { NoteForm },
 	setup () {
-		const { createSet, factory, error, loading } = useCreateSet()
-		return { error, loading, createSet, factory }
+		const { createNote, factory, error, loading } = useCreateNote()
+		return { error, loading, createNote, factory }
 	}
 })
 </script>
