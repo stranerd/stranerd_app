@@ -1,7 +1,7 @@
 <template>
 	<Modal>
 		<template v-slot:title>
-			Create Study Folder
+			Upload a note
 		</template>
 		<SetForm :error="error" :factory="factory" :loading="loading" :submit="createSet">
 			<template v-slot:buttonText>Create Folder</template>
