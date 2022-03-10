@@ -1,4 +1,4 @@
-import { Conditions, QueryParams } from '@modules/core'
+import { Conditions, QueryKeys, QueryParams } from '@modules/core'
 import { CHAT_PAGINATION_LIMIT } from '@utils/constants'
 import { IDiscussionRepository } from '../../irepositories/idiscussion'
 
@@ -11,7 +11,15 @@ export class GetClassDiscussionsUseCase {
 
 	async call (classId: string) {
 		const conditions: QueryParams = {
-			where: [{ field: 'classId', value: classId }, { field: 'media', condition: Conditions.ne, value: null }],
+			where: [
+				{ field: 'classId', value: classId },
+				{
+					condition: QueryKeys.or, value: [
+						{ field: 'media', condition: Conditions.ne, value: null },
+						{ field: 'links', condition: Conditions.ne, value: [] }
+					]
+				}
+			],
 			sort: [{ field: 'createdAt', desc: true }],
 			limit: CHAT_PAGINATION_LIMIT
 		}

@@ -1,5 +1,5 @@
 import { IUserRepository } from '../../irepositories/iuser'
-import { Conditions } from '@utils/http'
+import { Conditions } from '@modules/core'
 
 export class GetUsersInListUseCase {
 	private repository: IUserRepository
