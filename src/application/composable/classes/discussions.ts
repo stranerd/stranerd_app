@@ -85,9 +85,9 @@ export const useGroupDiscussions = (groupId: string) => {
 		try {
 			await groupGlobal[groupId].setLoading(true)
 			const lastDate = groupGlobal[groupId].discussions.value[groupGlobal[groupId].discussions.value.length - 1]?.createdAt
-			const c = await GetGroupDiscussions.call(groupId, lastDate)
-			groupGlobal[groupId].hasMore.value = !!c.pages.next
-			c.results.map((c) => pushToDiscussions(groupId, c))
+			const discussions = await GetGroupDiscussions.call(groupId, lastDate)
+			groupGlobal[groupId].hasMore.value = !!discussions.pages.next
+			discussions.results.map((d) => pushToDiscussions(groupId, d))
 			groupGlobal[groupId].fetched.value = true
 		} catch (e) {
 			await groupGlobal[groupId].setError(e)
@@ -150,8 +150,8 @@ export const useClassDiscussions = (classId: string) => {
 		await classGlobal[classId].setError('')
 		try {
 			await classGlobal[classId].setLoading(true)
-			const c = await GetClassDiscussions.call(classId)
-			c.results.map((c) => pushToDiscussions(classId, c))
+			const discussions = await GetClassDiscussions.call(classId)
+			discussions.results.map((d) => pushToDiscussions(classId, d))
 			classGlobal[classId].fetched.value = true
 		} catch (e) {
 			await classGlobal[classId].setError(e)

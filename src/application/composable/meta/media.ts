@@ -1,7 +1,31 @@
-import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { onMounted, ref } from 'vue'
 import { Directory, Encoding, Filesystem } from '@capacitor/filesystem'
-import { HttpClient } from '@modules/core'
+import { HttpClient, Media } from '@modules/core'
+
+export const useDownloadableLink = (media: Media) => {
+	const { loading, setLoading } = useLoadingHandler()
+	const { error, setError } = useErrorHandler()
+	const { message, setMessage } = useSuccessHandler()
+	const download = async () => {
+		await setError('')
+		await setLoading(true)
+		try {
+			const data = await new HttpClient('').download(media?.link ?? '')
+			const a = document.createElement('a')
+			a.download = media?.name ?? ''
+			a.href = data
+			document.body.appendChild(a)
+			a.click()
+			a.remove()
+			await setMessage('Downloaded successfully!')
+		} catch (e) {
+			await setError(e)
+		}
+		await setLoading(false)
+	}
+	return { loading, error, message, download }
+}
 
 export const useDownload = (fileName: string, fileLink: string, type: string) => {
 	const { loading, setLoading } = useLoadingHandler()

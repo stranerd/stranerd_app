@@ -1,6 +1,7 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
-import { isImage } from '@stranerd/validate'
+import { isImage, isVideo } from '@stranerd/validate'
+import { formatNumber } from '@utils/commons'
 
 export class DiscussionEntity extends BaseEntity {
 	public readonly id: string
@@ -48,6 +49,26 @@ export class DiscussionEntity extends BaseEntity {
 
 	get isImage () {
 		return this.isMedia && isImage(this.media).valid
+	}
+
+	get isVideo () {
+		return this.isMedia && isVideo(this.media).valid
+	}
+
+	get isDocument () {
+		return this.isMedia && (!this.isImage && !this.isVideo)
+	}
+
+	get size () {
+		const size = this.media?.size ?? 0
+		const ranges = [{ val: -1, key: 'b' }, { val: 1024, key: 'kb' },
+			{ val: 1024 * 1024, key: 'mb' }, { val: 1024 * 1024 * 1024, key: 'gb' }]
+		const range = ranges.find(({ val }) => size >= val)
+		return `${formatNumber(size / (range?.val ?? -1))} ${range?.key ?? 'b'}`
+	}
+
+	search (search: string) {
+		return (this.media?.name ?? '').toLowerCase().includes(search.toLowerCase())
 	}
 }
 

@@ -33,9 +33,8 @@ import { DiscussionEntity } from '@modules/classes'
 import { useAuth } from '@app/composable/auth/auth'
 import { formatTimeAsDigits } from '@utils/dates'
 import { checkmarkCircleOutline, documentOutline, downloadOutline } from 'ionicons/icons'
-import { HttpClient } from '@modules/core'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { IonSpinner } from '@ionic/vue'
+import { useDownloadableLink } from '@app/composable/meta/media'
 
 export default defineComponent({
 	name: 'DiscussionsListCard',
@@ -48,26 +47,7 @@ export default defineComponent({
 	components: { IonSpinner },
 	setup (props) {
 		const { id } = useAuth()
-		const { loading, setLoading } = useLoadingHandler()
-		const { setError } = useErrorHandler()
-		const { setMessage } = useSuccessHandler()
-		const download = async () => {
-			await setError('')
-			await setLoading(true)
-			try {
-				const data = await new HttpClient('').download(props.discussion.media?.link ?? '')
-				const a = document.createElement('a')
-				a.download = props.discussion.media?.name ?? ''
-				a.href = data
-				document.body.appendChild(a)
-				a.click()
-				a.remove()
-				await setMessage('Downloaded successfully!')
-			} catch (e) {
-				await setError(e)
-			}
-			await setLoading(false)
-		}
+		const { loading, download } = useDownloadableLink(props.discussion.media!)
 		return { id, formatTimeAsDigits, checkmarkCircleOutline, documentOutline, downloadOutline, download, loading }
 	}
 })
