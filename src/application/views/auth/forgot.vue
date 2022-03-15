@@ -8,8 +8,8 @@
 					<form @submit.prevent="sendResetEmail">
 						<div class="mb-4">
 							<ion-input v-model.trim="factory.email" :size="24" inputmode="email"
-								placeholder="Email Address"
-								position="floating" required></ion-input>
+								placeholder="Email Address" position="floating"
+								required type="email" />
 							<span class="text-body text-red-500 font-semibold">{{ factory.errors.email }}</span>
 						</div>
 						<ion-button class="w-full mb-4" type="submit">Reset Password

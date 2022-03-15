@@ -11,8 +11,8 @@
 					<form class="flex flex-col gap-4" @submit.prevent="signin">
 						<div>
 							<ion-input v-model.trim="factory.email" :size="24" inputmode="email"
-								placeholder="Email Address"
-								position="floating" />
+								placeholder="Email Address" position="floating"
+								type="email" />
 							<DisplayError :error="factory.errors.email" />
 						</div>
 						<div>
