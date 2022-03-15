@@ -19,7 +19,8 @@
 			<TestQuestion :answer="updateAnswer" :question="questions[questionIndex]" :questionIndex="questionIndex"
 				:test="test" />
 			<div class="mt-6 mb-10 flex justify-between items-center gap-4">
-				<IonIcon :color="canGoBack ? 'grey' : 'light'" :icon="chevronBackCircleOutline" size="large" @click="back" />
+				<IonIcon :color="canGoBack ? 'grey' : 'light'" :icon="chevronBackCircleOutline" size="large"
+					@click="back" />
 				<span class="flex gap-2 items-center">
 					<span>Jump to</span>
 					<IonSelect v-model="questionIndex" interface="action-sheet">
@@ -73,10 +74,10 @@ import { computed, defineComponent, onMounted, onUnmounted } from 'vue'
 import { TestEntity } from '@modules/study'
 import { useCountdown } from '@app/composable/core/dates'
 import { getDigitalTime } from '@utils/dates'
-import { useStudyPopover } from '@app/composable/core/modals'
 import TestQuestion from '@app/components/study/tests/TestQuestion.vue'
 import { formatNumber } from '@utils/commons'
 import { useRouter } from 'vue-router'
+import { Alert } from '@utils/dialog'
 
 export default defineComponent({
 	name: 'TestBody',
@@ -89,7 +90,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const router = useRouter()
-		const { error, tab, questionIndex, loading, questions, updateAnswer } = useTestDetails(props.test)
+		const { error, tab, questionIndex, loading, questions, updateAnswer, endTest } = useTestDetails(props.test)
 		const canGoBack = computed(() => questionIndex.value > 0)
 		const canGoForward = computed(() => questionIndex.value < questions.value.length - 1)
 		const back = () => canGoBack.value && questionIndex.value--
@@ -103,7 +104,13 @@ export default defineComponent({
 			}
 		})
 		const openSubmitTest = async () => {
-			if (props.test.isTimed) useStudyPopover().openSubmitTest()
+			const res = await Alert({
+				title: 'Are you sure you want to submit?',
+				confirmButtonText: 'Submit'
+			})
+			if (!res) return
+			await endTest()
+			if (props.test.isTimed) await router.push(`/study/tests/${props.test.id}/results`)
 			else await router.push('/dashboard')
 		}
 		return {
