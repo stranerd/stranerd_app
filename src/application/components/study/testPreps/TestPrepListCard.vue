@@ -6,8 +6,7 @@
 				<ion-text class="font-semibold truncate w-full">
 					<Institution :institutionId="testPrep.data.institutionId" />
 				</ion-text>
-				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl text-gray"
-					@click="openSaveModal(testPrep)" />
+				<SaveToSet :entity="testPrep" />
 			</div>
 			<IonText class="text-gray text-sm truncate">
 				<Course :courseId="testPrep.data.courseId" />
@@ -32,32 +31,28 @@
 </template>
 
 <script lang="ts">
-import { bookmark, bookmarkOutline, calendarOutline, ellipsisVerticalOutline, playOutline } from 'ionicons/icons'
-import { computed, defineComponent } from 'vue'
+import { calendarOutline, ellipsisVerticalOutline, playOutline } from 'ionicons/icons'
+import { defineComponent } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import { useCreateTest } from '@app/composable/study/tests'
 import Institution from '@app/components/study/institutions/Institution.vue'
 import Course from '@app/components/study/courses/Course.vue'
-import { useUserSetList } from '@app/composable/users/users/sets'
-import { openSaveModal } from '@app/composable/study/menus'
+import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'TestPrepListCard',
-	components: { Institution, Course },
+	components: { Institution, Course, SaveToSet },
 	props: {
 		testPrep: {
 			type: TestPrepEntity,
 			required: true
 		}
 	},
-	setup (props) {
+	setup () {
 		const { loading, error, createTest } = useCreateTest()
-		const { sets } = useUserSetList()
-		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(props.testPrep.id)))
 		return {
-			ellipsisVerticalOutline, calendarOutline, playOutline, bookmark, bookmarkOutline,
-			loading, error, createTest,
-			isSaved, openSaveModal
+			ellipsisVerticalOutline, calendarOutline, playOutline,
+			loading, error, createTest
 		}
 	}
 })

@@ -16,38 +16,32 @@
 					:src="flashCard.userBio.photo" />
 				<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
 					text="Share this flashcard" />
-				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl"
-					@click="openSaveModal(flashCard)" />
+				<SaveToSet :entity="flashCard" />
 			</div>
 		</div>
 	</router-link>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { bookmark, bookmarkOutline, copyOutline } from 'ionicons/icons'
+import { defineComponent } from 'vue'
+import { copyOutline } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { FlashCardEntity } from '@modules/study'
 import Share from '../../core/Share.vue'
-import { useUserSetList } from '@app/composable/users/users/sets'
-import { openSaveModal } from '@app/composable/study/menus'
+import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'FlashCardListCard',
+	components: { Avatar, Share, SaveToSet },
 	props: {
 		flashCard: {
 			type: FlashCardEntity,
 			required: true
 		}
 	},
-	setup (props) {
-		const { sets } = useUserSetList()
-		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(props.flashCard.id)))
-		return {
-			copyOutline, bookmark, bookmarkOutline, formatNumber, pluralize, isSaved, openSaveModal
-		}
-	},
-	components: { Avatar, Share }
+	setup () {
+		return { copyOutline, formatNumber, pluralize }
+	}
 })
 </script>

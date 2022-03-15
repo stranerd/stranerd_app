@@ -12,8 +12,7 @@
 							:src="note.userBio.photo" />
 						<Share :link="note.shareLink" :title="note.title" cssClass="text-xl"
 							text="Share this note" />
-						<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl"
-							@click="openSaveModal(note)" />
+						<SaveToSet :entity="note" />
 					</div>
 				</div>
 			</div>
@@ -29,8 +28,6 @@
 import Justified from '@app/layouts/Justified.vue'
 import {
 	add,
-	bookmark,
-	bookmarkOutline,
 	checkmarkCircleOutline,
 	chevronDown,
 	chevronUp,
@@ -41,26 +38,23 @@ import {
 	shareSocial
 } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { useNote } from '@app/composable/study/notes'
 import Share from '@app/components/core/Share.vue'
 import NoteDetails from '@app/components/study/notes/NoteDetails.vue'
-import { useUserSetList } from '@app/composable/users/users/sets'
-import { openSaveModal } from '@app/composable/study/menus'
+import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'StudyNotesNoteId',
 	displayName: 'Note',
-	components: { Justified, Avatar, NoteDetails, Share },
+	components: { Justified, Avatar, NoteDetails, Share, SaveToSet },
 	setup () {
 		const { noteId } = useRoute().params
 		const { error, loading, note } = useNote(noteId as string)
-		const { sets } = useUserSetList()
-		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(noteId as string)))
 		return {
-			add, remove, scan, chevronDown, loading, note, error, isSaved, openSaveModal,
-			chevronUp, pencil, contract, bookmark, shareSocial, checkmarkCircleOutline, bookmarkOutline
+			add, remove, scan, chevronDown, loading, note, error,
+			chevronUp, pencil, contract, shareSocial, checkmarkCircleOutline
 		}
 	}
 })

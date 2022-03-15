@@ -19,20 +19,19 @@
 			<div class="flex items-center text-gray gap-2">
 				<Avatar :id="note.userId" :name="note.userBio.fullName" :size="24" :src="note.userBio.photo" />
 				<Share :link="note.shareLink" :text="note.description" :title="note.title" cssClass="text-xl" />
-				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" @click="openSaveModal(note)" />
+				<SaveToSet :entity="note" />
 			</div>
 		</div>
 	</component>
 </template>
 
 <script lang="ts">
-import { bookmark, bookmarkOutline, documentOutline, downloadOutline, ellipsisVerticalOutline } from 'ionicons/icons'
-import { computed, defineComponent } from 'vue'
+import { documentOutline, downloadOutline, ellipsisVerticalOutline } from 'ionicons/icons'
+import { defineComponent } from 'vue'
 import { NoteEntity } from '@modules/study'
 import { IonSpinner } from '@ionic/vue'
 import { useDownload } from '@app/composable/meta/media'
-import { useUserSetList } from '@app/composable/users/users/sets'
-import { openSaveModal } from '@app/composable/study/menus'
+import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'NoteListCard',
@@ -42,7 +41,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { IonSpinner },
+	components: { IonSpinner, SaveToSet },
 	setup (props) {
 		const {
 			loading,
@@ -51,22 +50,16 @@ export default defineComponent({
 			download,
 			deleteFromDownloads
 		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
-		const { sets } = useUserSetList()
-		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(props.note.id)))
 
 		return {
 			ellipsisVerticalOutline,
 			documentOutline,
 			downloadOutline,
-			bookmark,
-			bookmarkOutline,
 			download,
 			loading,
 			content,
 			error,
-			deleteFromDownloads,
-			isSaved,
-			openSaveModal
+			deleteFromDownloads
 		}
 	}
 })

@@ -12,8 +12,7 @@
 							:src="video.userBio.photo" />
 						<Share :link="video.shareLink" :title="video.title" cssClass="text-xl"
 							text="Share this video" />
-						<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl"
-							@click="openSaveModal(video)" />
+						<SaveToSet :entity="video" />
 					</div>
 				</div>
 			</div>
@@ -29,8 +28,6 @@
 import Justified from '@app/layouts/Justified.vue'
 import {
 	add,
-	bookmark,
-	bookmarkOutline,
 	checkmarkCircleOutline,
 	chevronDown,
 	chevronUp,
@@ -41,26 +38,23 @@ import {
 	shareSocial
 } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { useVideo } from '@app/composable/study/videos'
 import Share from '@app/components/core/Share.vue'
 import Video from '@app/components/study/videos/Video.vue'
-import { useUserSetList } from '@app/composable/users/users/sets'
-import { openSaveModal } from '@app/composable/study/menus'
+import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'StudyVideosVideoId',
 	displayName: 'Video',
-	components: { Justified, Avatar, Video, Share },
+	components: { Justified, Avatar, Video, Share, SaveToSet },
 	setup () {
 		const { videoId } = useRoute().params
 		const { error, loading, video } = useVideo(videoId as string)
-		const { sets } = useUserSetList()
-		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(videoId as string)))
 		return {
-			add, remove, scan, chevronDown, loading, video, error, isSaved, openSaveModal,
-			chevronUp, pencil, contract, bookmark, shareSocial, checkmarkCircleOutline, bookmarkOutline
+			add, remove, scan, chevronDown, loading, video, error,
+			chevronUp, pencil, contract, shareSocial, checkmarkCircleOutline
 		}
 	}
 })
