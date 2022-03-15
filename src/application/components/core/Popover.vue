@@ -1,5 +1,5 @@
 <template>
-	<div class="popover rounded-xl bg-white text-gray p-6 md:text-sm text-xs shadow-md flex flex-col gap-6">
+	<div class="popover rounded-xl bg-white text-gray md:text-sm text-xs shadow-md flex flex-col">
 		<slot />
 	</div>
 </template>
