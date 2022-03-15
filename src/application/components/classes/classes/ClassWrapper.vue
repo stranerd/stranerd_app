@@ -12,6 +12,8 @@
 							<IonText class="text-main_dark md:text-[20px] capitalize font-semibold">
 								{{ classInst.name }}
 							</IonText>
+							<IonIcon v-if="classInst.admins.includes(id)" :icon="pencilOutline"
+								@click="openClassEditModal(classInst, $router)" />
 							<Share :link="`/classes/${classInst.id}`" :text="classInst.description"
 								:title="`Share this class: ${classInst.name}`" />
 						</div>
@@ -72,10 +74,11 @@ import {
 	informationCircleOutline,
 	libraryOutline,
 	megaphoneOutline,
+	pencilOutline,
 	peopleOutline
 } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
-import { useClass } from '@app/composable/classes/classes'
+import { openClassEditModal, useClass } from '@app/composable/classes/classes'
 import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
@@ -94,6 +97,7 @@ export default defineComponent({
 			helpCircleOutline,
 			libraryOutline,
 			megaphoneOutline,
+			pencilOutline,
 			peopleOutline,
 			loading,
 			error,
@@ -101,7 +105,8 @@ export default defineComponent({
 			formatTime,
 			pluralize,
 			id,
-			requestToJoinClass
+			requestToJoinClass,
+			openClassEditModal
 		}
 	}
 })

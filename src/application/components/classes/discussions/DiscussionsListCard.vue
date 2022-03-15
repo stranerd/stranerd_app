@@ -21,7 +21,7 @@
 			</div>
 			<div class="flex gap-2 items-end">
 				<div class="flex-grow">{{ discussion.content }}</div>
-				<span class="text-sm">{{ formatTimeAsDigits(new Date(discussion.createdAt)) }}</span>
+				<span class="text-xs">{{ formatTimeAsDigits(new Date(discussion.createdAt)) }}</span>
 			</div>
 		</div>
 	</div>

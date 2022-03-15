@@ -1,29 +1,22 @@
 <template>
-	<div
+	<router-link :to="`/study/preps/${institutionId}`"
 		class="w-full bg-white rounded-xl flex flex-col items-start box-border card-padding text-main_dark">
-		<div class="w-full flex justify-between items-center gap-2">
-			<ion-text class="truncate w-full">
-				<Institution :institutionId="institutionId" class="font-semibold" />
-			</ion-text>
-			<router-link :to="`/study/preps/${institutionId}`">
-				<ion-icon :icon="arrowForwardCircleOutline" class="text-xl text-primary" />
-			</router-link>
-		</div>
-
+		<ion-text class="truncate w-full">
+			<Institution :institutionId="institutionId" class="font-semibold" />
+		</ion-text>
 		<div class="flex justify-between items-center w-full gap-2">
 			<Tag :tag="yearGap" />
 			<Share :link="`/study/preps/${institutionId}`"
 				:title="`${institution ? institution.name : 'Institution'}'s preps`"
 				cssClass="text-lg" text="Share this institution preps" />
 		</div>
-	</div>
+	</router-link>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import Institution from '@app/components/study/institutions/Institution.vue'
-import { arrowForwardCircleOutline } from 'ionicons/icons'
 import { useInstitution } from '@app/composable/study/institutions'
 
 export default defineComponent({
@@ -48,7 +41,7 @@ export default defineComponent({
 			else return `${startYear.value}`
 		})
 
-		return { yearGap, arrowForwardCircleOutline, institution }
+		return { yearGap, institution }
 	}
 })
 </script>

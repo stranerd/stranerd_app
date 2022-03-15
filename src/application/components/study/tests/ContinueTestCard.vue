@@ -1,17 +1,12 @@
 <template>
-	<div class="bg-white w-full rounded-xl flex flex-col box-border card-padding">
-		<div>
-			<div class="w-full flex justify-between items-center gap-2">
-				<ion-text class="text-left w-full text-main_dark font-semibold truncate capitalize">
-					<Institution v-if="testPrep && testPrep.isPastQuestionType"
-						:institutionId="testPrep.data.institutionId" />
-					<span v-else>{{ test.name }}</span>
-				</ion-text>
-				<router-link :to="`/study/tests/${test.id}`">
-					<ion-icon :icon="arrowForwardCircleOutline" class="text-xl text-primary" />
-				</router-link>
-			</div>
-
+	<router-link :to="`/study/tests/${test.id}`"
+		class="bg-white w-full rounded-xl flex flex-col box-border card-padding">
+		<div class="flex flex-col">
+			<ion-text class="text-left w-full text-main_dark font-semibold truncate capitalize">
+				<Institution v-if="testPrep && testPrep.isPastQuestionType"
+					:institutionId="testPrep.data.institutionId" />
+				<span v-else>{{ test.name }}</span>
+			</ion-text>
 			<ion-text class="text-sm text-left w-full text-gray truncate">
 				{{ test.isTimed ? 'Timed' : 'Study' }}
 				<span v-if="testPrep && testPrep.isPastQuestionType">
@@ -24,11 +19,11 @@
 		</div>
 
 		<ion-progress-bar :value="test.progress" />
-	</div>
+	</router-link>
 </template>
 
 <script lang="ts">
-import { arrowForwardCircleOutline, calendarOutline, playOutline } from 'ionicons/icons'
+import { calendarOutline, playOutline } from 'ionicons/icons'
 import { IonProgressBar } from '@ionic/vue'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
@@ -48,7 +43,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { testPrep } = useTestPrep(props.test.prepId)
-		return { formatNumber, arrowForwardCircleOutline, calendarOutline, playOutline, testPrep }
+		return { formatNumber, calendarOutline, playOutline, testPrep }
 	}
 })
 </script>

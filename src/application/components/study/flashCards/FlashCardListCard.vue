@@ -1,15 +1,7 @@
 <template>
-	<div class="bg-white rounded-xl flex flex-col box-border justify-between card-padding text-main_dark">
-		<div class="w-full justify-between items-start flex">
-			<div class="flex flex-col items-start truncate">
-				<ion-text class="font-semibold truncate w-52">{{ flashCard.title }}</ion-text>
-
-			</div>
-			<router-link :to="`/study/flashCards/${flashCard.id}`">
-				<ion-icon :icon="arrowForwardCircleOutline" class="text-primary text-xl" />
-			</router-link>
-		</div>
-
+	<router-link :to="`/study/flashCards/${flashCard.id}`"
+		class="bg-white rounded-xl flex flex-col box-border justify-between card-padding text-main_dark">
+		<ion-text class="font-semibold truncate w-full">{{ flashCard.title }}</ion-text>
 		<div class="w-full flex items-center justify-between gap-2">
 			<Tag :tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
 				<template v-slot="slotProps">
@@ -28,12 +20,12 @@
 					@click="openSaveModal(flashCard)" />
 			</div>
 		</div>
-	</div>
+	</router-link>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { arrowForwardCircleOutline, bookmark, bookmarkOutline, copyOutline } from 'ionicons/icons'
+import { bookmark, bookmarkOutline, copyOutline } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { FlashCardEntity } from '@modules/study'
@@ -53,8 +45,7 @@ export default defineComponent({
 		const { sets } = useUserSetList()
 		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(props.flashCard.id)))
 		return {
-			arrowForwardCircleOutline, copyOutline, bookmark, bookmarkOutline, formatNumber, pluralize, isSaved,
-			openSaveModal
+			copyOutline, bookmark, bookmarkOutline, formatNumber, pluralize, isSaved, openSaveModal
 		}
 	},
 	components: { Avatar, Share }
