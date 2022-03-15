@@ -1,17 +1,17 @@
 <template>
 	<div
-		class="hidden lg:flex py-3 bg-white h-full flex-col">
+		class="hidden lg:flex py-3   h-full flex-col z-30">
 		<div class="flex flex-col pl-8 mt-6">
 			<router-link v-for="{ path, icon, name, iconOutline } in [
 					{ name: 'Home', path: '/dashboard', icon: home, iconOutline:homeOutline },
 					{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
 					{ name: 'Library', path: '/study', icon: library, iconOutline:libraryOutline },
-					...(isProd ? [] : [{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }])
+					{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }
 				]" :key="path" :to="path"
-				class="flex flex-col text-icon_inactive cursor-pointer text-sm hover:text-main_dark mb-2">
-				<div :class="{'text-main_dark active-route-link relative bg-new_gray': $route.path === path }"
-					class="py-4 flex px-8 items-center rounded-tl-full rounded-bl-full">
-					<ion-icon :icon="$route.path === path ? icon : iconOutline " class="text-[23px] mr-4" />
+				class="flex flex-col rounded-xl text-icon_inactive cursor-pointer text-sm hover:text-main_dark mb-2">
+				<div :class="{'text-main_dark  active-route-link relative bg-[#13274015] ' : $route.path === path }"
+					class="py-3 flex flex-row px-3 items-center rounded-xl">
+					<ion-icon :icon="$route.path === path ? icon : iconOutline " class="text-[23px] mr-4"></ion-icon>
 					<span class="font-semibold capitalize">{{ name }}</span>
 				</div>
 			</router-link>
@@ -21,33 +21,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import {
-	helpCircle,
-	helpCircleOutline,
-	home,
-	homeOutline,
-	library,
-	libraryOutline,
-	people,
-	peopleOutline
-} from 'ionicons/icons'
+import { helpCircleOutline, homeOutline, libraryOutline, peopleOutline, library, home, helpCircle, people } from 'ionicons/icons'
 import { IonIcon } from '@ionic/vue'
-import { isProd } from '@utils/environment'
 
 export default defineComponent({
 	components: { IonIcon },
 	setup () {
-		return {
-			isProd,
-			libraryOutline,
-			homeOutline,
-			helpCircleOutline,
-			peopleOutline,
-			library,
-			home,
-			helpCircle,
-			people
-		}
+		return { libraryOutline, homeOutline, helpCircleOutline, peopleOutline, library, home, helpCircle, people }
 	}
 })
 </script>
+
+<style scoped>
+</style>
