@@ -1,6 +1,6 @@
 <template>
 	<IonPage>
-		<InnerTopBar v-if="!hideTop" />
+		<Topbar v-if="!hideTop" />
 		<IonContent>
 			<div class="layout-page !px-0">
 				<div class="layout-body !w-full">
@@ -15,7 +15,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonContent, IonPage } from '@ionic/vue'
-import InnerTopBar from '@app/components/layout/topNavigations/InnerTopBar.vue'
+import Topbar from '@app/components/layout/topNavigations/Topbar.vue'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 
 export default defineComponent({
@@ -30,6 +30,6 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: { InnerTopBar, IonPage, IonContent, BottomNav }
+	components: { Topbar, IonPage, IonContent, BottomNav }
 })
 </script>
