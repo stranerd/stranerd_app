@@ -2,7 +2,7 @@
 	<Justified>
 		<div v-if="classInst" class="lg:w-8/12 w-full mx-auto lg:p-4">
 			<div class="rounded-xl bg-white">
-				<div class="w-full bg-orange h-16 md:h-24 lg:md:h-32 lg:rounded-t-xl" />
+				<CoverAvatar :src="classInst.coverPhoto" class="h-16 md:h-24 lg:h-32 lg:rounded-t-xl" />
 				<div class="px-4 md:px-6 border-bottom-line">
 					<div class="-mt-10">
 						<Avatar :name="classInst.name" :size="80" :src="classInst.photo" />

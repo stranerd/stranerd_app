@@ -1,20 +1,13 @@
 <template>
 	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}/`">
-		<img
-			v-if="source"
-			:onerror="`this.src = '${DEFAULT_PROFILE_IMAGE}'`"
-			:src="source"
-			:style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
-			alt=""
-			class="!max-w-[1920px] rounded-full"
-		>
-		<span v-else-if="name" :style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
+		<span v-if="!source && name" :style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
 			class="flex items-center justify-center uppercase bg-gray text-white font-semibold rounded-full">
 			<span :style="`font-size: ${size/1.75}px;line-height: 1em`">{{ name[0] }}</span>
 		</span>
 		<img
 			v-else
-			:src="DEFAULT_PROFILE_IMAGE"
+			:onerror="`this.src = '${DEFAULT_PROFILE_PHOTO}'`"
+			:src="source || DEFAULT_PROFILE_PHOTO"
 			:style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
 			alt=""
 			class="!max-w-[1920px] rounded-full"
@@ -25,7 +18,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import { Media } from '@modules/core'
-import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
+import { DEFAULT_PROFILE_PHOTO } from '@utils/constants'
 
 export default defineComponent({
 	name: 'Avatar',
@@ -56,7 +49,7 @@ export default defineComponent({
 			set: () => {
 			}
 		})
-		return { source, DEFAULT_PROFILE_IMAGE }
+		return { source, DEFAULT_PROFILE_PHOTO }
 	}
 })
 </script>

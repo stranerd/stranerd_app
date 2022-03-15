@@ -18,7 +18,7 @@
 					<router-link class="flex items-center" to="/notifications">
 						<NotificationIcon :key="user?.id" class="text-xl text-main_dark mr-6" />
 					</router-link>
-					<Avatar v-if="isLoggedIn" :name="user?.bio.fullName" :size="24" :src="user?.avatar"
+					<Avatar v-if="isLoggedIn" :name="user?.bio.fullName" :size="24" :src="user?.bio.photo"
 						@click="openUserDashboardMenu" />
 					<router-link v-else class="flex items-center" to="/account">
 						<Avatar :size="24" />

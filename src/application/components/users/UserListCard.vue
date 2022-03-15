@@ -2,10 +2,10 @@
 	<router-link :to="`/users/${user.id}`"
 		class="w-full bg-white rounded-xl flex flex-col card-padding box-border">
 		<div class="items-start gap-2 flex">
-			<Avatar :id="user.id" :name="user.bio.fullName" :size="40" :src="user.avatar" />
+			<Avatar :id="user.id" :name="user.bio.fullName" :size="40" :src="user.bio.photo" />
 			<div class="flex flex-col justify-start items-start">
 				<h2 class="lg:text-base text-xs font-bold mb-1 flex gap-1 items-center">
-					<span>{{ user.fullName }}</span>
+					<span>{{ user.bio.fullName }}</span>
 					<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
 				</h2>
 				<span

@@ -1,8 +1,8 @@
 <template>
 	<router-link :to="`/classes/${classInst.id}`"
 		class="rounded-xl bg-white gap-2 p-4 flex items-center w-full">
-		<Avatar :name="classInst.fullName" :size="40" :src="classInst.photo" class="md:hidden" />
-		<Avatar :name="classInst.fullName" :size="48" :src="classInst.photo" class="hidden md:inline" />
+		<Avatar :name="classInst.name" :size="40" :src="classInst.photo" class="md:hidden" />
+		<Avatar :name="classInst.name" :size="48" :src="classInst.photo" class="hidden md:inline" />
 		<div class="flex flex-col font-bold">
 			<ion-text class="text-main_dark text-semibold capitalize">
 				{{ classInst.name }}

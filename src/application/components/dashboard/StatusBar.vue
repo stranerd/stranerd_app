@@ -6,7 +6,7 @@
 				Welcome home,
 			</ion-text>
 			<ion-text class="text-main_dark leading-normal text-2xl sm:text-3xl font-bold flex items-center gap-1">
-				<span>{{ user.fullName }}</span>
+				<span>{{ user.bio.fullName }}</span>
 				<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="white" />
 			</ion-text>
 		</div>

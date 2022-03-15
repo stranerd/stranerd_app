@@ -17,6 +17,7 @@ export interface UserBio {
 	email: string
 	description: string
 	photo: Media | null
+	coverPhoto: Media | null
 }
 
 export interface UserRoles {
@@ -94,7 +95,8 @@ export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
 	const email = bio?.email ?? 'anon@ymous.com'
 	const description = bio?.description ?? ''
 	const photo = bio?.photo ? parseMedia(bio.photo) : null
-	return { firstName, lastName, fullName, email, description, photo }
+	const coverPhoto = bio?.coverPhoto ? parseMedia(bio.coverPhoto) : null
+	return { firstName, lastName, fullName, email, description, photo, coverPhoto }
 }
 
 export const generateDefaultRoles = (roles: Partial<UserRoles>): UserRoles => ({
@@ -137,30 +139,6 @@ export class UserEntity extends BaseEntity {
 		this.dates = dates
 		this.rank = rank
 		this.nextRank = nextRank
-	}
-
-	get firstName () {
-		return this.bio.firstName
-	}
-
-	get lastName () {
-		return this.bio.lastName
-	}
-
-	get fullName () {
-		return this.bio.fullName!
-	}
-
-	get email () {
-		return this.bio.email
-	}
-
-	get avatar () {
-		return this.bio.photo
-	}
-
-	get description () {
-		return this.bio.description
 	}
 
 	get isOnline () {

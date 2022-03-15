@@ -1,7 +1,8 @@
 <template>
 	<div class="bg-white rounded-xl flex flex-col card-padding">
 		<div class="flex items-center">
-			<Avatar :id="answer.userId" :name="answer.userBio.fullName" :size="24" :src="answer.avatar" class="mr-2" />
+			<Avatar :id="answer.userId" :name="answer.userBio.fullName" :size="24" :src="answer.userBio.photo"
+				class="mr-2" />
 			<span class="font-semibold text-main_dark flex items-center gap-1">
 				<span>{{ answer.userBio.fullName }}</span>
 				<IonIcon v-if="answer.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />

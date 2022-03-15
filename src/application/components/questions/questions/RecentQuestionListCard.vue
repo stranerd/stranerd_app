@@ -11,7 +11,7 @@
 					{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
 				</span>
 			</div>
-			<avatar :id="question.userId" :name="question.userBio.fullName" :size="24" :src="question.avatar"
+			<avatar :id="question.userId" :name="question.userBio.fullName" :size="24" :src="question.userBio.photo"
 				class="ml-auto" />
 		</div>
 	</router-link>

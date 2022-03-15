@@ -21,7 +21,7 @@
 				<span>{{ index + 1 }} </span>
 			</div>
 			<div class="w-8/12 flex items-center gap-2">
-				<avatar :id="person.id" :name="person.bio.fullName" :size="24" :src="person.avatar" />
+				<avatar :id="person.id" :name="person.bio.fullName" :size="24" :src="person.bio.photo" />
 				<span class="flex items-center gap-1">
 					<span>{{ person.bio.fullName }}</span>
 					<IonIcon v-if="person.isVerified" :icon="checkmarkCircleOutline" color="primary" />
@@ -39,7 +39,7 @@
 				<span> - </span>
 			</div>
 			<div class="w-8/12 flex items-center gap-2">
-				<avatar :id="user?.id" :name="user.bio.fullName" :size="24" :src="user.avatar" />
+				<avatar :id="user?.id" :name="user.bio.fullName" :size="24" :src="user.bio.photo" />
 				<span class="flex items-center gap-1">
 					<span>{{ user.bio.fullName }}</span>
 					<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />

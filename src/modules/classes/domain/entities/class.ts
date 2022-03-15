@@ -7,6 +7,7 @@ type ClassConstructorArgs = {
 	name: string
 	description: string
 	photo: Media | null
+	coverPhoto: Media | null
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
@@ -27,6 +28,7 @@ export class ClassEntity extends BaseEntity {
 	public readonly name: string
 	public readonly description: string
 	public readonly photo: Media | null
+	public readonly coverPhoto: Media | null
 	public readonly userId: string
 	public readonly userBio: UserBio
 	public readonly userRoles: UserRoles
@@ -36,7 +38,7 @@ export class ClassEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, name, description, photo,
+		             id, name, description, photo, coverPhoto,
 		             createdAt, userId, userBio, userRoles,
 		             users, updatedAt, requests
 	             }: ClassConstructorArgs) {
@@ -45,6 +47,7 @@ export class ClassEntity extends BaseEntity {
 		this.name = name
 		this.description = description
 		this.photo = photo ? parseMedia(photo) : null
+		this.coverPhoto = coverPhoto ? parseMedia(coverPhoto) : null
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
 		this.userRoles = generateDefaultRoles(userRoles)
