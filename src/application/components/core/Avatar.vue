@@ -10,7 +10,7 @@
 		>
 		<span v-else-if="name" :style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
 			class="flex items-center justify-center uppercase bg-gray text-white font-semibold rounded-full">
-			<span :style="`font-size: ${size/1.5}px;line-height: 1em`">{{ name[0] }}</span>
+			<span :style="`font-size: ${size/1.75}px;line-height: 1em`">{{ name[0] }}</span>
 		</span>
 		<img
 			v-else

@@ -3,7 +3,7 @@
 		class="card-padding rounded-xl bg-white flex flex-col w-full text-main_dark">
 
 		<DisplayHtml :html="question.trimmedBody" class="leading-normal" />
-		<div class="w-full flex justify-between items-center">
+		<div class="w-full flex justify-between items-center mt-auto">
 			<div class="flex items-center font-bold">
 				<span class=" text-gray ml-auto">{{ formatTime(question.createdAt) }}</span>
 				<div class="h-1 w-1 bg-gray mx-2 rounded-full" />
