@@ -1,5 +1,5 @@
 <template>
-	<Justified :hideBottom="true" :hideFab="true" :hideTop="true">
+	<Justified :hideBottom="true" :hideTop="true">
 		<Discussions :classId="classId" :groupId="groupId" />
 	</Justified>
 </template>

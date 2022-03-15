@@ -15,7 +15,6 @@
 							<RightSidebar />
 						</div>
 					</div>
-					<Fab />
 				</IonContent>
 				<BottomNav class="mt-auto" />
 			</div>
@@ -30,7 +29,6 @@ import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 import Sidebar from '@app/components/layout/sidebars/DefaultSidebar.vue'
 import RightSidebar from '@app/components/layout/sidebars/RightSidebar.vue'
 import TopBar from '@app/components/layout/topNavigations/Topbar.vue'
-import Fab from '@app/components/layout/Fab.vue'
 
 export default defineComponent({
 	name: 'DashboardLayout',
@@ -39,8 +37,7 @@ export default defineComponent({
 		BottomNav,
 		Sidebar,
 		TopBar,
-		RightSidebar,
-		Fab
+		RightSidebar
 	}
 })
 </script>

@@ -13,7 +13,6 @@
 							<RightSidebar />
 						</div>
 					</div>
-					<Fab />
 				</IonContent>
 				<BottomNav class="mt-auto" />
 			</div>
@@ -27,7 +26,6 @@ import { IonContent, IonPage } from '@ionic/vue'
 import RightSidebar from '@app/components/layout/sidebars/RightSidebar.vue'
 import InnerTopBar from '@app/components/layout/topNavigations/InnerTopBar.vue'
 import Sidebar from '@app/components/layout/sidebars/DefaultSidebar.vue'
-import Fab from '@app/components/layout/Fab.vue'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 
 export default defineComponent({
@@ -38,7 +36,6 @@ export default defineComponent({
 		RightSidebar,
 		InnerTopBar,
 		Sidebar,
-		Fab,
 		BottomNav
 	}
 })

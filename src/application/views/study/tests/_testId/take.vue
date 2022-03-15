@@ -1,5 +1,5 @@
 <template>
-	<Justified :hideBottom="true" :hideFab="true">
+	<Justified :hideBottom="true">
 		<div class="blueTop !mb-0">
 			<div class="flex items-center">
 				<ion-text class="text-white font-semibold text-center text-xl">
