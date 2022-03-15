@@ -35,7 +35,7 @@
 				<ion-label class="font-bold">Ask a question</ion-label>
 			</div>
 		</router-link>
-		<router-link class="flex gap-2 items-center text-gray hover:text-main_dark"
+		<router-link v-if="!isProd" class="flex gap-2 items-center text-gray hover:text-main_dark"
 			to="/classes/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="peopleOutline" class="text-3xl" />
@@ -55,11 +55,12 @@ import {
 	readerOutline,
 	videocamOutline
 } from 'ionicons/icons'
+import { isProd } from '@utils/environment'
 
 export default defineComponent({
 	name: 'CreateDashboardMenu',
 	setup () {
-		return { helpCircleOutline, folderOutline, flashOutline, peopleOutline, readerOutline, videocamOutline }
+		return { isProd, helpCircleOutline, folderOutline, flashOutline, peopleOutline, readerOutline, videocamOutline }
 	}
 })
 </script>

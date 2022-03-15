@@ -7,7 +7,7 @@
 						{ name: 'Home', path: '/dashboard', icon: home, iconOutline:homeOutline },
 						{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
 						{ name: 'Library', path: '/study', icon: library, iconOutline:libraryOutline },
-						{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }
+						...(isProd ? [] : [{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }])
 					]" :key="path"
 					:to="path"
 					class="col-span-1 text-main_dark flex flex-col items-center justify-center">
@@ -34,11 +34,13 @@ import {
 	search,
 	searchOutline
 } from 'ionicons/icons'
+import { isProd } from '@utils/environment'
 
 export default defineComponent({
 	components: { IonFooter, IonIcon, IonToolbar },
 	setup () {
 		return {
+			isProd,
 			homeOutline,
 			libraryOutline,
 			helpCircleOutline,
