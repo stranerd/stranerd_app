@@ -34,7 +34,7 @@ export const ChatScroll: ObjectDirective = {
 
 		el.addEventListener('scroll', () => {
 			scrolled = el.scrollTop + el.clientHeight + 1 < el.scrollHeight
-			if (scrolled && el.scrollTop === 0) el.dispatchEvent(new Event('v-chat-scroll-top-reached'))
+			if (scrolled && el.scrollTop === 0) el.dispatchEvent(new Event('scroll-top'))
 		})
 
 		const observer = new MutationObserver((e) => {

@@ -30,18 +30,18 @@ export const formatNumber = (num: number, dp = 0) => {
 
 export const pluralize = (count: number, singular: string, plural: string) => count === 1 ? singular : plural
 
-export const getRandomValue = () => Date.now() + Math.random().toString(36).substr(2)
+export const getRandomValue = () => Date.now() + Math.random().toString(36)
 
 export const capitalize = (value: string) => value.trim().split(' ').map((c: string) => (c[0]?.toUpperCase() ?? '') + c.slice(1)).join(' ')
 
 export function groupBy<Type, Unique extends string | number> (array: Array<Type>, func: (item: Type) => Unique) {
-	const obj = array.reduce((acc, cur) => {
-		const item = func(cur)
-		acc[item] ||= []
-		acc[item].push(cur)
+	return array.reduce((acc, cur) => {
+		const key = func(cur)
+		const index = acc.findIndex((a) => a.key === key)
+		if (index === -1) acc.push({ key, values: [cur] })
+		else acc[index].values.push(cur)
 		return acc
-	}, {} as Record<Unique, Type[]>)
-	return Object.entries(obj).map(([key, values]) => ({ key, values })) as { key: Unique, values: Type[] }[]
+	}, [] as { key: Unique, values: Type[] }[])
 }
 
 export const trimToLength = (body: string, length: number) => {
@@ -77,3 +77,18 @@ const ngrokURL = 'https://local.stranerd.eu.ngrok.io'
 
 export const parseURL = (url: string) => url.replace(isWeb ? ngrokURL : localURL, isWeb ? localURL : ngrokURL)
 export const unParseURL = (url: string) => !isWeb ? url.replace(ngrokURL, localURL) : url
+
+export function addToArray<T> (array: T[], item: T, getKey: (a: T) => any, getComparer: (a: T) => number | string, asc = false) {
+	const existingIndex = array.findIndex((el) => getKey(el) === getKey(item))
+	const index = array.findIndex((el) => asc ? getComparer(el) >= getComparer(item) : getComparer(el) <= getComparer(item))
+	if (existingIndex !== -1 && existingIndex === index) return array
+	if (existingIndex !== -1 && existingIndex !== index) array.splice(existingIndex, 1)
+	if (index !== -1) array.splice(index, 0, item)
+	else if (array.length === 0) array.push(item)
+	else {
+		const existingIsGreater = getComparer(array[0]) >= getComparer(item)
+		if (existingIsGreater) asc ? array.unshift(item) : array.push(item)
+		else asc ? array.push(item) : array.unshift(item)
+	}
+	return array
+}

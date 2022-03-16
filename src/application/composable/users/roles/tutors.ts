@@ -1,7 +1,8 @@
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { GetAllTutors, ListenToAllTutors, ToggleTutor, UserEntity } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
+import { addToArray } from '@utils/commons'
 
 const global = {
 	tutors: ref([] as UserEntity[]),
@@ -13,12 +14,10 @@ const global = {
 const listener = useListener(async () => {
 	return await ListenToAllTutors.call({
 		created: async (entity) => {
-			const index = global.tutors.value.findIndex((t) => t.id === entity.id)
-			global.tutors.value.splice(index, 1, entity)
+			addToArray(global.tutors.value, entity, (e) => e.id, (e) => e.score)
 		},
 		updated: async (entity) => {
-			const index = global.tutors.value.findIndex((t) => t.id === entity.id)
-			global.tutors.value.splice(index, 1, entity)
+			addToArray(global.tutors.value, entity, (e) => e.id, (e) => e.score)
 		},
 		deleted: async (entity) => {
 			const index = global.tutors.value.findIndex((t) => t.id === entity.id)
@@ -27,36 +26,19 @@ const listener = useListener(async () => {
 	})
 })
 
-const pushToTutorsList = (tutor: UserEntity) => {
-	const index = global.tutors.value.findIndex((t) => t.id === tutor.id)
-	if (index !== -1) global.tutors.value.splice(index, 1, tutor)
-	else global.tutors.value.push(tutor)
-}
-
 export const useTutorsList = () => {
 	const fetchTutors = async () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
 			const tutors = await GetAllTutors.call()
-			global.tutors.value = tutors.results
+			tutors.results.forEach((t) => addToArray(global.tutors.value, t, (e) => e.id, (e) => e.score))
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)
 		}
 		await global.setLoading(false)
 	}
-	const filteredTutors = computed({
-		get: () => global.tutors.value
-			.sort((a, b) => b.score - a.score),
-		set: (tutors) => {
-			tutors?.forEach?.((t) => {
-				const index = global.tutors.value.findIndex((x) => x.id === t.id)
-				if (index === -1) global.tutors.value.push(t)
-				else global.tutors.value.splice(index, 1, t)
-			})
-		}
-	})
 
 	const tutorUser = async (user: UserEntity) => {
 		await global.setError('')
@@ -69,7 +51,7 @@ export const useTutorsList = () => {
 			try {
 				await ToggleTutor.call(user.id, true)
 				user.isTutor = true
-				pushToTutorsList(user)
+				addToArray(global.tutors.value, user, (e) => e.id, (e) => e.score)
 				await global.setMessage('Successfully upgraded to tutor')
 			} catch (error) {
 				await global.setError(error)
@@ -106,5 +88,5 @@ export const useTutorsList = () => {
 		await listener.closeListener()
 	})
 
-	return { ...global, filteredTutors, tutorUser, deTutorUser }
+	return { ...global, tutorUser, deTutorUser }
 }

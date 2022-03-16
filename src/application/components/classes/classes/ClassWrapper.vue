@@ -10,7 +10,7 @@
 						<div class="flex gap-1 mt-2">
 							<Share :link="`/classes/${classInst.id}`" :text="classInst.description"
 								:title="`Share this class: ${classInst.name}`"
-								class="py-1 px-2 border border-primary text-primary rounded-full text-sm flex justify-center items-center">
+								class="py-1 px-4 border border-primary text-primary rounded-full text-xs flex justify-center items-center">
 								Copy class link
 							</Share>
 						</div>

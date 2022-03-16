@@ -1,18 +1,13 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { GetUserVideos, ListenToUserVideos, VideoEntity } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
 	videos: Ref<VideoEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
-
-const pushToVideoList = (id: string, video: VideoEntity) => {
-	const index = global[id].videos.value.findIndex((q) => q.id === video.id)
-	if (index !== -1) global[id].videos.value.splice(index, 1, video)
-	else global[id].videos.value.push(video)
-}
 
 export const useUserVideoList = (id: string) => {
 	if (global[id] === undefined) global[id] = {
@@ -30,7 +25,7 @@ export const useUserVideoList = (id: string) => {
 			const lastDate = global[id].videos.value[global[id].videos.value.length - 1]?.createdAt
 			const videos = await GetUserVideos.call(id, lastDate)
 			global[id].hasMore.value = !!videos.pages.next
-			videos.results.forEach((q) => pushToVideoList(id, q))
+			videos.results.forEach((q) => addToArray(global[id].videos.value, q, (e) => e.id, (e) => e.createdAt))
 			global[id].fetched.value = true
 		} catch (error) {
 			await global[id].setError(error)
@@ -41,14 +36,10 @@ export const useUserVideoList = (id: string) => {
 	const listener = useListener(async () => {
 		return await ListenToUserVideos.call(id, {
 			created: async (entity) => {
-				const index = global[id].videos.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].videos.value.unshift(entity)
-				else global[id].videos.value.splice(index, 1, entity)
+				addToArray(global[id].videos.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				const index = global[id].videos.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].videos.value.unshift(entity)
-				else global[id].videos.value.splice(index, 1, entity)
+				addToArray(global[id].videos.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
 				global[id].videos.value = global[id].videos.value.filter((c) => c.id !== entity.id)

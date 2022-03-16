@@ -10,6 +10,7 @@ import {
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useStudyModal } from '@app/composable/core/modals'
+import { addToArray } from '@utils/commons'
 
 const global = {
 	fetched: ref(false),
@@ -18,17 +19,12 @@ const global = {
 	...useLoadingHandler()
 }
 
-const pushToGlobalInstitutions = (institution: InstitutionEntity) => {
-	const index = global.institutions.value.findIndex((s) => s.id === institution.id)
-	if (index !== -1) global.institutions.value.splice(index, 1, institution)
-	else global.institutions.value.push(institution)
-}
-
 const fetchInstitutions = async () => {
 	await global.setError('')
 	await global.setLoading(true)
 	try {
-		global.institutions.value = (await GetInstitutions.call()).results
+		const institutions = await GetInstitutions.call()
+		institutions.results.forEach((i) => addToArray(global.institutions.value, i, (e) => e.id, (e) => e.name, true))
 		global.fetched.value = true
 	} catch (error) {
 		await global.setError(error)
@@ -40,17 +36,14 @@ export const useInstitutionList = () => {
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchInstitutions()
 	})
-
-	const institutions = computed(() => global.institutions.value.sort((a, b) => a.name < b.name ? -1 : 1))
-
-	return { ...global, institutions }
+	return { ...global }
 }
 
 export const useInstitution = (id: string) => {
 	const institution = computed({
 		get: () => global.institutions.value.find((s) => s.id === id) ?? null,
-		set: (s) => {
-			if (s) pushToGlobalInstitutions(s)
+		set: (i) => {
+			if (i) addToArray(global.institutions.value, i, (e) => e.id, (e) => e.name, true)
 		}
 	})
 	onMounted(async () => {
@@ -72,7 +65,7 @@ export const useCreateInstitution = () => {
 			await setLoading(true)
 			try {
 				const institution = await AddInstitution.call(factory.value)
-				if (institution) pushToGlobalInstitutions(institution)
+				addToArray(global.institutions.value, institution, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useStudyModal().closeCreateInstitution()
 				await setMessage('Institution created successfully')
@@ -107,7 +100,7 @@ export const useEditInstitution = () => {
 			await setLoading(true)
 			try {
 				const updatedInstitution = await EditInstitution.call(editingInstitution!.id, factory.value)
-				if (updatedInstitution) pushToGlobalInstitutions(updatedInstitution)
+				addToArray(global.institutions.value, updatedInstitution, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useStudyModal().closeEditInstitution()
 				await setMessage('Institution updated successfully')

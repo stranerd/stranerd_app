@@ -1,18 +1,13 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { AnswerEntity, GetUserAnswers, ListenToUserAnswers } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
 	answers: Ref<AnswerEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
-
-const pushToAnswerList = (id: string, answer: AnswerEntity) => {
-	const index = global[id].answers.value.findIndex((a) => a.id === answer.id)
-	if (index !== -1) global[id].answers.value.splice(index, 1, answer)
-	else global[id].answers.value.push(answer)
-}
 
 export const useUserAnswerList = (id: string) => {
 	if (global[id] === undefined) global[id] = {
@@ -30,7 +25,7 @@ export const useUserAnswerList = (id: string) => {
 			const lastDate = global[id].answers.value[global[id].answers.value.length - 1]?.createdAt
 			const answers = await GetUserAnswers.call(id, lastDate)
 			global[id].hasMore.value = !!answers.pages.next
-			answers.results.forEach((a) => pushToAnswerList(id, a))
+			answers.results.forEach((a) => addToArray(global[id].answers.value, a, (e) => e.id, (e) => e.createdAt))
 			global[id].fetched.value = true
 		} catch (error) {
 			await global[id].setError(error)
@@ -41,14 +36,10 @@ export const useUserAnswerList = (id: string) => {
 	const listener = useListener(async () => {
 		return await ListenToUserAnswers.call(id, {
 			created: async (entity) => {
-				const index = global[id].answers.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].answers.value.unshift(entity)
-				else global[id].answers.value.splice(index, 1, entity)
+				addToArray(global[id].answers.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				const index = global[id].answers.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].answers.value.unshift(entity)
-				else global[id].answers.value.splice(index, 1, entity)
+				addToArray(global[id].answers.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
 				global[id].answers.value = global[id].answers.value.filter((c) => c.id !== entity.id)

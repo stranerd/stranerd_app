@@ -2,6 +2,7 @@ import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { GetReferrals, ListenToReferrals, ReferralEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
+import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
 	referrals: Ref<ReferralEntity[]>
@@ -9,18 +10,6 @@ const global = {} as Record<string, {
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
-
-const pushToReferralList = (userId: string, referral: ReferralEntity) => {
-	const index = global[userId].referrals.value.findIndex((t) => t.id === referral.id)
-	if (index !== -1) global[userId].referrals.value.splice(index, 1, referral)
-	else global[userId].referrals.value.push(referral)
-}
-
-const unshiftToReferralList = (userId: string, referral: ReferralEntity) => {
-	const index = global[userId].referrals.value.findIndex((t) => t.id === referral.id)
-	if (index !== -1) global[userId].referrals.value.splice(index, 1, referral)
-	else global[userId].referrals.value.unshift(referral)
-}
 
 export const useReferralList = () => {
 	const { id } = useAuth()
@@ -32,10 +21,10 @@ export const useReferralList = () => {
 			const lastDate = global[userId].referrals.value[global[userId].referrals.value.length - 1]?.createdAt
 			return ListenToReferrals.call({
 				created: async (entity) => {
-					unshiftToReferralList(userId, entity)
+					addToArray(global[userId].referrals.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				updated: async (entity) => {
-					unshiftToReferralList(userId, entity)
+					addToArray(global[userId].referrals.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				deleted: async (entity) => {
 					const index = global[userId].referrals.value.findIndex((t) => t.id === entity.id)
@@ -61,7 +50,7 @@ export const useReferralList = () => {
 			const lastDate = global[userId].referrals.value[global[userId].referrals.value.length - 1]?.createdAt
 			const referrals = await GetReferrals.call(lastDate)
 			global[userId].hasMore.value = !!referrals.pages.next
-			referrals.results.forEach((t) => pushToReferralList(userId, t))
+			referrals.results.forEach((t) => addToArray(global[userId].referrals.value, t, (e) => e.id, (e) => e.createdAt))
 		} catch (e) {
 			await global[userId].setError(e)
 		}

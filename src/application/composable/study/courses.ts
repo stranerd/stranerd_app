@@ -3,6 +3,7 @@ import { AddCourse, CourseEntity, CourseFactory, DeleteCourse, EditCourse, GetCo
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useStudyModal } from '@app/composable/core/modals'
+import { addToArray } from '@utils/commons'
 
 const global = {
 	fetched: ref(false),
@@ -11,17 +12,12 @@ const global = {
 	...useLoadingHandler()
 }
 
-const pushToGlobalCourses = (course: CourseEntity) => {
-	const index = global.courses.value.findIndex((s) => s.id === course.id)
-	if (index !== -1) global.courses.value.splice(index, 1, course)
-	else global.courses.value.push(course)
-}
-
 const fetchCourses = async () => {
 	await global.setError('')
 	await global.setLoading(true)
 	try {
-		global.courses.value = (await GetCourses.call()).results
+		const courses = await GetCourses.call()
+		courses.results.forEach((c) => addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true))
 		global.fetched.value = true
 	} catch (error) {
 		await global.setError(error)
@@ -33,24 +29,21 @@ export const useCourseList = () => {
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchCourses()
 	})
-
-	const courses = computed(() => global.courses.value.sort((a, b) => a.name < b.name ? -1 : 1))
-
-	return { ...global, courses }
+	return { ...global }
 }
 
 export const getCoursesByInstitution = (institutionId: string) => computed({
 	get: () => global.courses.value.filter((c) => c.institutionId === institutionId),
 	set: (courses) => {
-		courses.forEach(pushToGlobalCourses)
+		courses.forEach((c) => addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true))
 	}
 })
 
 export const useCourse = (id: string) => {
 	const course = computed({
 		get: () => global.courses.value.find((s) => s.id === id) ?? null,
-		set: (s) => {
-			if (s) pushToGlobalCourses(s)
+		set: (c) => {
+			if (c) addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true)
 		}
 	})
 	onMounted(async () => {
@@ -80,7 +73,7 @@ export const useCreateCourse = () => {
 			await setLoading(true)
 			try {
 				const course = await AddCourse.call(factory.value)
-				if (course) pushToGlobalCourses(course)
+				addToArray(global.courses.value, course, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useStudyModal().closeCreateCourse()
 				await setMessage('Course created successfully')
@@ -115,7 +108,7 @@ export const useEditCourse = () => {
 			await setLoading(true)
 			try {
 				const updatedCourse = await EditCourse.call(editingCourse!.id, factory.value)
-				if (updatedCourse) pushToGlobalCourses(updatedCourse)
+				addToArray(global.courses.value, updatedCourse, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useStudyModal().closeEditCourse()
 				await setMessage('Course updated successfully')

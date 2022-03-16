@@ -15,6 +15,7 @@ import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } fr
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
+import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
 	answers: Ref<AnswerEntity[]>
@@ -27,14 +28,10 @@ export const useAnswerList = (questionId: string) => {
 		const listener = useListener(async () => {
 			return await ListenToAnswers.call(questionId, {
 				created: async (entity) => {
-					const index = global[questionId].answers.value.findIndex((c) => c.id === entity.id)
-					if (index === -1) global[questionId].answers.value.push(entity)
-					else global[questionId].answers.value.splice(index, 1, entity)
+					addToArray(global[questionId].answers.value, entity, (e) => e.id, (e) => e.createdAt, true)
 				},
 				updated: async (entity) => {
-					const index = global[questionId].answers.value.findIndex((c) => c.id === entity.id)
-					if (index === -1) global[questionId].answers.value.push(entity)
-					else global[questionId].answers.value.splice(index, 1, entity)
+					addToArray(global[questionId].answers.value, entity, (e) => e.id, (e) => e.createdAt, true)
 				},
 				deleted: async (entity) => {
 					global[questionId].answers.value = global[questionId].answers.value.filter((c) => c.id !== entity.id)
@@ -54,7 +51,8 @@ export const useAnswerList = (questionId: string) => {
 		await global[questionId].setError('')
 		try {
 			await global[questionId].setLoading(true)
-			global[questionId].answers.value = (await GetAnswers.call(questionId)).results
+			const answers = await GetAnswers.call(questionId)
+			answers.results.forEach((a) => addToArray(global[questionId].answers.value, a, (e) => e.id, (e) => e.createdAt, true))
 			global[questionId].fetched.value = true
 		} catch (error) {
 			await global[questionId].setError(error)

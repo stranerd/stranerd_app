@@ -78,7 +78,7 @@
 			@submit.prevent="createTextDiscussion">
 			<IonIcon :icon="showFileUpload ? closeCircleOutline : addCircleOutline"
 				class="text-3xl md:text-5xl" @click="showFileUpload = !showFileUpload" />
-			<IonInput v-model="factory.content" class="flex-grow" placeholder="Send a message" />
+			<IonInput v-model="factory.content" class="flex-grow" placeholder="Send a message" required />
 			<IonButton :disabled="!factory.valid || loading" color="primary" shape="round"
 				size="small" type="submit">
 				<IonIcon slot="icon-only" :icon="paperPlaneOutline" />

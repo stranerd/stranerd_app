@@ -23,6 +23,7 @@ import { useClassModal } from '@app/composable/core/modals'
 import { useAuth } from '@app/composable/auth/auth'
 import { GetUsersInList, ListenToUsersInList, UserEntity } from '@modules/users'
 import { useRedirectToAuth } from '@app/composable/auth/session'
+import { addToArray } from '@utils/commons'
 
 const global = {
 	classes: ref([] as ClassEntity[]),
@@ -36,10 +37,10 @@ const listener = useListener(async () => {
 	}
 	return await ListenToMyClasses.call(id.value, {
 		created: async (entity) => {
-			unshiftToClassList(entity)
+			addToArray(global.classes.value, entity, (e) => e.id, (e) => e.name, true)
 		},
 		updated: async (entity) => {
-			unshiftToClassList(entity)
+			addToArray(global.classes.value, entity, (e) => e.id, (e) => e.name, true)
 		},
 		deleted: async (entity) => {
 			const index = global.classes.value.findIndex((q) => q.id === entity.id)
@@ -47,17 +48,6 @@ const listener = useListener(async () => {
 		}
 	})
 })
-
-const pushToClassList = (classInst: ClassEntity) => {
-	const index = global.classes.value.findIndex((q) => q.id === classInst.id)
-	if (index !== -1) global.classes.value.splice(index, 1, classInst)
-	else global.classes.value.push(classInst)
-}
-const unshiftToClassList = (classInst: ClassEntity) => {
-	const index = global.classes.value.findIndex((q) => q.id === classInst.id)
-	if (index !== -1) global.classes.value.splice(index, 1, classInst)
-	else global.classes.value.unshift(classInst)
-}
 
 const classGlobal = {} as Record<string, {
 	hash: Ref<string>
@@ -73,7 +63,7 @@ export const useClassList = () => {
 		try {
 			await global.setLoading(true)
 			const classes = await GetMyClasses.call(id.value)
-			classes.results.forEach(pushToClassList)
+			classes.results.forEach((c) => addToArray(global.classes.value, c, (e) => e.id, (e) => e.name, true))
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)
@@ -96,27 +86,22 @@ export const useClassList = () => {
 
 export const useClassMembersList = (classInst: ClassEntity) => {
 	const { id } = useAuth()
-	const listenerCallback = async () => {
-		return ListenToUsersInList.call(classInst.membersAndRequests, {
-			created: async (entity) => {
-				const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1, entity)
-				else classGlobal[classInst.id].users.value.push(entity)
-			},
-			updated: async (entity) => {
-				const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1, entity)
-				else classGlobal[classInst.id].users.value.push(entity)
-			},
-			deleted: async (entity) => {
-				const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1)
-			}
-		})
-	}
 
 	if (classGlobal[classInst.id] === undefined) {
-		const listener = useListener(listenerCallback)
+		const listener = useListener(async () => {
+			return ListenToUsersInList.call(classInst.membersAndRequests, {
+				created: async (entity) => {
+					addToArray(classGlobal[classInst.id].users.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
+				},
+				updated: async (entity) => {
+					addToArray(classGlobal[classInst.id].users.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
+				},
+				deleted: async (entity) => {
+					const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1)
+				}
+			})
+		})
 		classGlobal[classInst.id] = {
 			hash: ref(classInst.hash),
 			users: ref([]),
@@ -132,11 +117,7 @@ export const useClassMembersList = (classInst: ClassEntity) => {
 		try {
 			await classGlobal[classInst.id].setLoading(true)
 			const users = await GetUsersInList.call(classInst.membersAndRequests)
-			users.forEach((user) => {
-				const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === user.id)
-				if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1, user)
-				else classGlobal[classInst.id].users.value.push(user)
-			})
+			users.forEach((user) => addToArray(classGlobal[classInst.id].users.value, user, (e) => e.id, (e) => e.bio.fullName, true))
 			classGlobal[classInst.id].fetched.value = true
 		} catch (error) {
 			await classGlobal[classInst.id].setError(error)
@@ -202,7 +183,7 @@ export const useClassMembersList = (classInst: ClassEntity) => {
 		if (!classGlobal[classInst.id].fetched.value && !classGlobal[classInst.id].loading.value) await fetchUsers()
 		if (classGlobal[classInst.id].hash.value !== classInst.hash) {
 			classGlobal[classInst.id].hash.value = classInst.hash
-			await classGlobal[classInst.id].listener.resetListener(listenerCallback)
+			await classGlobal[classInst.id].listener.restartListener()
 		}
 		await classGlobal[classInst.id].listener.startListener()
 	})
@@ -257,7 +238,7 @@ export const useClass = (classId: string) => {
 	const classInst = computed({
 		get: () => global.classes.value.find((q) => q.id === classId) ?? null,
 		set: (q) => {
-			if (q) pushToClassList(q)
+			if (q) addToArray(global.classes.value, q, (e) => e.id, (e) => e.name, true)
 		}
 	})
 
@@ -271,7 +252,7 @@ export const useClass = (classId: string) => {
 				return
 			}
 			classInst = await FindClass.call(classId)
-			if (classInst) unshiftToClassList(classInst)
+			if (classInst) addToArray(global.classes.value, classInst, (e) => e.id, (e) => e.name, true)
 		} catch (error) {
 			await setError(error)
 		}
@@ -280,10 +261,10 @@ export const useClass = (classId: string) => {
 	const listener = useListener(async () => {
 		return await ListenToClass.call(classId, {
 			created: async (entity) => {
-				unshiftToClassList(entity)
+				addToArray(global.classes.value, entity, (e) => e.id, (e) => e.name, true)
 			},
 			updated: async (entity) => {
-				unshiftToClassList(entity)
+				addToArray(global.classes.value, entity, (e) => e.id, (e) => e.name, true)
 			},
 			deleted: async (entity) => {
 				const index = global.classes.value.findIndex((q) => q.id === entity.id)

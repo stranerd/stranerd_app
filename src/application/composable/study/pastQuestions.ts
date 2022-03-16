@@ -11,6 +11,7 @@ import {
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useStudyModal } from '@app/composable/core/modals'
+import { addToArray } from '@utils/commons'
 
 const global = {
 	fetched: ref(false),
@@ -25,22 +26,17 @@ const global = {
 	...useLoadingHandler()
 }
 
-const pushToGlobalPastQuestions = (pastQuestion: PastQuestionEntity) => {
-	const index = global.pastQuestions.value.findIndex((s) => s.id === pastQuestion.id)
-	if (index !== -1) global.pastQuestions.value.splice(index, 1, pastQuestion)
-	else global.pastQuestions.value.push(pastQuestion)
-}
-
 const fetchPastQuestions = async () => {
 	await global.setError('')
 	await global.setLoading(true)
 	try {
-		global.pastQuestions.value = (await GetPastQuestions.call({
+		const pastQuestions = await GetPastQuestions.call({
 			institutionId: global.filters.institution,
 			courseId: global.filters.course,
 			year: global.filters.year,
 			questionType: global.filters.questionType
-		})).results
+		})
+		global.pastQuestions.value = pastQuestions.results
 		global.fetched.value = true
 	} catch (error) {
 		await global.setError(error)
@@ -69,7 +65,7 @@ export const useCreatePastQuestion = () => {
 			await setLoading(true)
 			try {
 				const pastQuestion = await AddPastQuestion.call(factory.value)
-				if (pastQuestion) pushToGlobalPastQuestions(pastQuestion)
+				addToArray(global.pastQuestions.value, pastQuestion, (e) => e.id, (e) => e.createdAt)
 				factory.value.reset()
 				useStudyModal().closeCreatePastQuestion()
 				await setMessage('PastQuestion created successfully')
@@ -104,7 +100,7 @@ export const useEditPastQuestion = () => {
 			await setLoading(true)
 			try {
 				const updatedPastQuestion = await EditPastQuestion.call(editingPastQuestion!.id, factory.value)
-				if (updatedPastQuestion) pushToGlobalPastQuestions(updatedPastQuestion)
+				addToArray(global.pastQuestions.value, updatedPastQuestion, (e) => e.id, (e) => e.createdAt)
 				factory.value.reset()
 				useStudyModal().closeEditPastQuestion()
 				await setMessage('PastQuestion updated successfully')

@@ -7,6 +7,7 @@ import {
 	ListenToAnswerComments
 } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
 	comments: Ref<CommentEntity[]>
@@ -19,14 +20,10 @@ export const useAnswerCommentList = (answerId: string) => {
 		const listener = useListener(async () => {
 			return await ListenToAnswerComments.call(answerId, {
 				created: async (entity) => {
-					const index = global[answerId].comments.value.findIndex((c) => c.id === entity.id)
-					if (index === -1) global[answerId].comments.value.push(entity)
-					else global[answerId].comments.value.splice(index, 1, entity)
+					addToArray(global[answerId].comments.value, entity, (e) => e.id, (e) => e.createdAt, true)
 				},
 				updated: async (entity) => {
-					const index = global[answerId].comments.value.findIndex((c) => c.id === entity.id)
-					if (index === -1) global[answerId].comments.value.push(entity)
-					else global[answerId].comments.value.splice(index, 1, entity)
+					addToArray(global[answerId].comments.value, entity, (e) => e.id, (e) => e.createdAt, true)
 				},
 				deleted: async (entity) => {
 					global[answerId].comments.value = global[answerId].comments.value.filter((c) => c.id !== entity.id)
@@ -46,7 +43,8 @@ export const useAnswerCommentList = (answerId: string) => {
 		await global[answerId].setError('')
 		try {
 			await global[answerId].setLoading(true)
-			global[answerId].comments.value = (await GetAnswerComments.call(answerId)).results
+			const comments = await GetAnswerComments.call(answerId)
+			comments.results.forEach((c) => addToArray(global[answerId].comments.value, c, (e) => e.id, (e) => e.createdAt, true))
 			global[answerId].fetched.value = true
 		} catch (error) {
 			await global[answerId].setError(error)

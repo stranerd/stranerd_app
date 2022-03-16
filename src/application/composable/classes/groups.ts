@@ -14,6 +14,7 @@ import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { useClassModal } from '@app/composable/core/modals'
 import { storage } from '@utils/storage'
+import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
 	groups: Ref<GroupEntity[]>
@@ -33,14 +34,10 @@ export const useGroupList = (classId: string) => {
 		const listener = useListener(async () => {
 			return await ListenToGroups.call(classId, {
 				created: async (entity) => {
-					const index = global[classId].groups.value.findIndex((c) => c.id === entity.id)
-					if (index === -1) global[classId].groups.value.push(entity)
-					else global[classId].groups.value.splice(index, 1, entity)
+					addToArray(global[classId].groups.value, entity, (e) => e.id, (e) => e.last?.createdAt ?? 0)
 				},
 				updated: async (entity) => {
-					const index = global[classId].groups.value.findIndex((c) => c.id === entity.id)
-					if (index === -1) global[classId].groups.value.push(entity)
-					else global[classId].groups.value.splice(index, 1, entity)
+					addToArray(global[classId].groups.value, entity, (e) => e.id, (e) => e.last?.createdAt ?? 0)
 				},
 				deleted: async (entity) => {
 					global[classId].groups.value = global[classId].groups.value.filter((c) => c.id !== entity.id)
@@ -64,7 +61,8 @@ export const useGroupList = (classId: string) => {
 		await global[classId].setError('')
 		try {
 			await global[classId].setLoading(true)
-			global[classId].groups.value = (await GetGroups.call(classId)).results
+			const groups = await GetGroups.call(classId)
+			groups.results.forEach((g) => addToArray(global[classId].groups.value, g, (e) => e.id, (e) => e.last?.createdAt ?? 0))
 			global[classId].fetched.value = true
 		} catch (error) {
 			await global[classId].setError(error)

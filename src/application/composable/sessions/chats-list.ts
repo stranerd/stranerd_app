@@ -1,8 +1,9 @@
-import { onUnmounted, onMounted, ref, Ref } from 'vue'
+import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { ChatMetaEntity, GetPersonalChatsMeta, ListenToPersonalChatsMeta } from '@modules/sessions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { AudioSounds, useAudioPlayer } from '@app/composable/core/audios'
+import { addToArray } from '@utils/commons'
 
 const player = useAudioPlayer(AudioSounds.CHAT)
 
@@ -63,7 +64,7 @@ export const useChatsList = () => {
 		try {
 			await global[userId].setLoading(true)
 			const metas = await GetPersonalChatsMeta.call()
-			global[userId].meta.value = metas.results
+			metas.results.forEach((r) => addToArray(global[userId].meta.value, r, (e) => e.id, (e) => e.last.createdAt))
 			global[userId].fetched.value = true
 		} catch (e) {
 			await global[userId].setError(e)

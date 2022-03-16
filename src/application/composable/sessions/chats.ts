@@ -2,7 +2,7 @@ import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { AddChat, ChatEntity, ChatFactory, GetChats, ListenToChats, MarkChatRead } from '@modules/sessions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
-import { getRandomValue } from '@utils/commons'
+import { addToArray, groupBy } from '@utils/commons'
 import { UploadedFile } from '@modules/core'
 
 const global = {} as Record<string, {
@@ -12,32 +12,10 @@ const global = {} as Record<string, {
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-const pushToChats = (userId: string, chat: ChatEntity) => {
-	const index = global[userId].chats.value.findIndex((c) => c.id === chat.id)
-	if (index !== -1) global[userId].chats.value.splice(index, 1, chat)
-	else global[userId].chats.value.push(chat)
-}
-const unshiftToChats = (userId: string, chat: ChatEntity) => {
-	const index = global[userId].chats.value.findIndex((c) => c.id === chat.id)
-	if (index !== -1) global[userId].chats.value.splice(index, 1, chat)
-	else global[userId].chats.value.unshift(chat)
-}
-
 const orderChats = (chats: ChatEntity[]) => {
-	const isSameDay = (date1: Date, date2: Date) => date1.getDate() === date2.getDate() &&
-		date1.getMonth() === date2.getMonth() &&
-		date1.getFullYear() === date2.getFullYear()
-	const res = [] as ChatEntity[][]
-	chats
-		.sort((a, b) => a.createdAt - b.createdAt)
-		.forEach((chat, index) => {
-			const lastChat = chats[index - 1]
-			if (index === 0 || !isSameDay(new Date(chat.createdAt), new Date(lastChat.createdAt))) return res.push([chat])
-			else return res[res.length - 1].push(chat)
-		})
-	return res.map((chats) => {
-		const date = chats[0].createdAt
-		return { chats, date, hash: getRandomValue() }
+	return groupBy(chats.slice().reverse(), (c) => {
+		const createdAt = new Date(c.createdAt)
+		return new Date(createdAt.getFullYear(), createdAt.getMonth(), createdAt.getDate(), 0, 0, 0, 1).getTime()
 	})
 }
 
@@ -49,10 +27,10 @@ export const useChats = (userId: string) => {
 			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
 			return ListenToChats.call(path, {
 				created: async (entity) => {
-					unshiftToChats(userId, entity)
+					addToArray(global[userId].chats.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				updated: async (entity) => {
-					unshiftToChats(userId, entity)
+					addToArray(global[userId].chats.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				deleted: async (entity) => {
 					const index = global[userId].chats.value.findIndex((c) => c.id === entity.id)
@@ -77,7 +55,7 @@ export const useChats = (userId: string) => {
 			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
 			const c = await GetChats.call(path, lastDate)
 			global[userId].hasMore.value = !!c.pages.next
-			c.results.map((c) => pushToChats(userId, c))
+			c.results.map((c) => addToArray(global[userId].chats.value, c, (e) => e.id, (e) => e.createdAt))
 			global[userId].fetched.value = true
 		} catch (e) {
 			await global[userId].setError(e)
@@ -87,21 +65,7 @@ export const useChats = (userId: string) => {
 
 	const fetchOlderChats = async () => {
 		await fetchChats()
-		await global[userId].listener.resetListener(async () => {
-			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
-			return ListenToChats.call(path, {
-				created: async (entity) => {
-					pushToChats(userId, entity)
-				},
-				updated: async (entity) => {
-					pushToChats(userId, entity)
-				},
-				deleted: async (entity) => {
-					const index = global[userId].chats.value.findIndex((c) => c.id === entity.id)
-					if (index !== -1) global[userId].chats.value.splice(index, 1)
-				}
-			}, lastDate)
-		})
+		await global[userId].listener.restartListener()
 	}
 
 	onMounted(async () => {
@@ -115,7 +79,7 @@ export const useChats = (userId: string) => {
 	return {
 		chats: computed({
 			get: () => orderChats(global[userId].chats.value),
-			set: (sessions) => sessions.map((session) => session.chats.map((c) => pushToChats(userId, c)))
+			set: (sessions) => sessions.map((session) => session.values.map((c) => addToArray(global[userId].chats.value, c, (e) => e.id, (e) => e.createdAt)))
 		}),
 		fetched: global[userId].fetched,
 		loading: global[userId].loading,

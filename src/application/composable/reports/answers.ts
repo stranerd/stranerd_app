@@ -3,6 +3,7 @@ import { AddReport, DeleteReport, GetReports, ReportEntity, ReportFactory, Repor
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useReportModal } from '@app/composable/core/modals'
 import { Alert } from '@utils/dialog'
+import { addToArray } from '@utils/commons'
 
 let reportedEntity = null as string | null
 export const setReportedEntity = (answerId: string) => reportedEntity = answerId
@@ -46,18 +47,6 @@ const global = {
 	...useLoadingHandler()
 }
 
-const pushToReportList = (report: ReportEntity) => {
-	const index = global.reports.value.findIndex((r) => r.id === report.id)
-	if (index !== -1) global.reports.value.splice(index, 1, report)
-	else global.reports.value.push(report)
-}
-
-const unshiftToReportList = (report: ReportEntity) => {
-	const index = global.reports.value.findIndex((r) => r.id === report.id)
-	if (index !== -1) global.reports.value.splice(index, 1, report)
-	else global.reports.value.unshift(report)
-}
-
 export const useReportsList = () => {
 	const fetchReports = async () => {
 		await global.setError('')
@@ -66,7 +55,7 @@ export const useReportsList = () => {
 			const lastDate = global.reports.value[0]?.createdAt
 			const reports = await GetReports.call(ReportType.answers, lastDate)
 			global.hasMore.value = !!reports.pages.next
-			reports.results.forEach(pushToReportList)
+			reports.results.forEach((r) => addToArray(global.reports.value, r, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)

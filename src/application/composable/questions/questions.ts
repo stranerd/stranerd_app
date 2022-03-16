@@ -16,6 +16,7 @@ import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } fr
 import { Alert } from '@utils/dialog'
 import { useQuestionModal } from '@app/composable/core/modals'
 import { ClassEntity } from '@modules/classes'
+import { addToArray } from '@utils/commons'
 
 enum Answered {
 	All,
@@ -44,10 +45,10 @@ const listener = useListener(async () => {
 	const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
 	return await ListenToQuestions.call({
 		created: async (entity) => {
-			unshiftToQuestionList(entity)
+			addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
 		},
 		updated: async (entity) => {
-			unshiftToQuestionList(entity)
+			addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
 		},
 		deleted: async (entity) => {
 			const index = global.questions.value.findIndex((q) => q.id === entity.id)
@@ -55,17 +56,6 @@ const listener = useListener(async () => {
 		}
 	}, lastDate ? lastDate - 1 : undefined)
 })
-
-const pushToQuestionList = (question: QuestionEntity) => {
-	const index = global.questions.value.findIndex((q) => q.id === question.id)
-	if (index !== -1) global.questions.value.splice(index, 1, question)
-	else global.questions.value.push(question)
-}
-const unshiftToQuestionList = (question: QuestionEntity) => {
-	const index = global.questions.value.findIndex((q) => q.id === question.id)
-	if (index !== -1) global.questions.value.splice(index, 1, question)
-	else global.questions.value.unshift(question)
-}
 
 export const useQuestionList = () => {
 	const fetchQuestions = async () => {
@@ -75,7 +65,7 @@ export const useQuestionList = () => {
 			const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
 			const questions = await GetQuestions.call(lastDate)
 			global.hasMore.value = !!questions.pages.next
-			questions.results.forEach(pushToQuestionList)
+			questions.results.forEach((q) => addToArray(global.questions.value, q, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)
@@ -89,29 +79,15 @@ export const useQuestionList = () => {
 			if (global.answered.value === Answered.Unanswered && q.answers.length > 0) return false
 			if (global.answered.value === Answered.BestAnswered && !q.isAnswered) return false
 			return true
-		}).sort((a, b) => b.createdAt - a.createdAt),
+		}),
 		set: (questions) => {
-			questions.map(pushToQuestionList)
+			questions.map((q) => addToArray(global.questions.value, q, (e) => e.id, (e) => e.createdAt))
 		}
 	})
 
 	const fetchOlderQuestions = async () => {
 		await fetchQuestions()
-		await listener.resetListener(async () => {
-			const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
-			return await ListenToQuestions.call({
-				created: async (entity) => {
-					unshiftToQuestionList(entity)
-				},
-				updated: async (entity) => {
-					unshiftToQuestionList(entity)
-				},
-				deleted: async (entity) => {
-					const index = global.questions.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) global.questions.value.splice(index, 1)
-				}
-			}, lastDate ? lastDate - 1 : undefined)
-		})
+		await listener.restartListener()
 	}
 
 	onMounted(async () => {
@@ -173,7 +149,7 @@ export const useQuestion = (questionId: string) => {
 	const question = computed({
 		get: () => global.questions.value.find((q) => q.id === questionId) ?? null,
 		set: (q) => {
-			if (q) pushToQuestionList(q)
+			if (q) addToArray(global.questions.value, q, (e) => e.id, (e) => e.createdAt)
 		}
 	})
 
@@ -187,7 +163,7 @@ export const useQuestion = (questionId: string) => {
 				return
 			}
 			question = await FindQuestion.call(questionId)
-			if (question) unshiftToQuestionList(question)
+			if (question) addToArray(global.questions.value, question, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
 		}
@@ -196,10 +172,10 @@ export const useQuestion = (questionId: string) => {
 	const listener = useListener(async () => {
 		return await ListenToQuestion.call(questionId, {
 			created: async (entity) => {
-				unshiftToQuestionList(entity)
+				addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				unshiftToQuestionList(entity)
+				addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
 				const index = global.questions.value.findIndex((q) => q.id === entity.id)

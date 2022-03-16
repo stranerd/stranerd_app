@@ -9,7 +9,7 @@ import {
 	ListenToGroupDiscussions
 } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
-import { getRandomValue } from '@utils/commons'
+import { addToArray, groupBy } from '@utils/commons'
 import { storage } from '@utils/storage'
 import { getGroupReadStateKey, saveClassGroupsReadTime } from '@app/composable/classes/groups'
 
@@ -28,20 +28,9 @@ const classGlobal = {} as Record<string, {
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const orderDiscussions = (discussions: DiscussionEntity[]) => {
-	const isSameDay = (date1: Date, date2: Date) => date1.getDate() === date2.getDate() &&
-		date1.getMonth() === date2.getMonth() &&
-		date1.getFullYear() === date2.getFullYear()
-	const res = [] as DiscussionEntity[][]
-	discussions
-		.sort((a, b) => a.createdAt - b.createdAt)
-		.forEach((discussion, index) => {
-			const lastDiscussion = discussions[index - 1]
-			if (index === 0 || !isSameDay(new Date(discussion.createdAt), new Date(lastDiscussion.createdAt))) return res.push([discussion])
-			else return res[res.length - 1].push(discussion)
-		})
-	return res.map((discussions) => {
-		const date = discussions[0].createdAt
-		return { discussions, date, hash: getRandomValue() }
+	return groupBy(discussions.slice().reverse(), (d) => {
+		const createdAt = new Date(d.createdAt)
+		return new Date(createdAt.getFullYear(), createdAt.getMonth(), createdAt.getDate(), 0, 0, 0, 1).getTime()
 	})
 }
 
@@ -53,10 +42,10 @@ export const useGroupDiscussions = (groupId: string) => {
 			const lastDate = groupGlobal[groupId].discussions.value[0]?.createdAt
 			return ListenToGroupDiscussions.call(groupId, {
 				created: async (entity) => {
-					unshiftToDiscussions(groupId, entity)
+					addToArray(groupGlobal[groupId].discussions.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				updated: async (entity) => {
-					pushToDiscussions(groupId, entity)
+					addToArray(groupGlobal[groupId].discussions.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				deleted: async (entity) => {
 					const index = groupGlobal[groupId].discussions.value.findIndex((c) => c.id === entity.id)
@@ -75,25 +64,14 @@ export const useGroupDiscussions = (groupId: string) => {
 		}
 	}
 
-	const pushToDiscussions = (groupId: string, discussion: DiscussionEntity) => {
-		const index = groupGlobal[groupId].discussions.value.findIndex((c) => c.id === discussion.id)
-		if (index !== -1) groupGlobal[groupId].discussions.value.splice(index, 1, discussion)
-		else groupGlobal[groupId].discussions.value.push(discussion)
-	}
-	const unshiftToDiscussions = (groupId: string, discussion: DiscussionEntity) => {
-		const index = groupGlobal[groupId].discussions.value.findIndex((c) => c.id === discussion.id)
-		if (index !== -1) groupGlobal[groupId].discussions.value.splice(index, 1, discussion)
-		else groupGlobal[groupId].discussions.value.unshift(discussion)
-	}
-
 	const fetchDiscussions = async () => {
 		await groupGlobal[groupId].setError('')
 		try {
 			await groupGlobal[groupId].setLoading(true)
-			const lastDate = groupGlobal[groupId].discussions.value[groupGlobal[groupId].discussions.value.length - 1]?.createdAt
+			const lastDate = groupGlobal[groupId].discussions.value.slice(-1)[0]?.createdAt
 			const discussions = await GetGroupDiscussions.call(groupId, lastDate)
 			groupGlobal[groupId].hasMore.value = !!discussions.pages.next
-			discussions.results.map((d) => pushToDiscussions(groupId, d))
+			discussions.results.map((d) => addToArray(groupGlobal[groupId].discussions.value, d, (e) => e.id, (e) => e.createdAt))
 			groupGlobal[groupId].fetched.value = true
 		} catch (e) {
 			await groupGlobal[groupId].setError(e)
@@ -142,10 +120,10 @@ export const useClassDiscussions = (classId: string) => {
 		const listener = useListener(async () => {
 			return ListenToClassDiscussions.call(classId, {
 				created: async (entity) => {
-					unshiftToDiscussions(classId, entity)
+					addToArray(classGlobal[classId].discussions.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				updated: async (entity) => {
-					pushToDiscussions(classId, entity)
+					addToArray(classGlobal[classId].discussions.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				deleted: async (entity) => {
 					const index = classGlobal[classId].discussions.value.findIndex((c) => c.id === entity.id)
@@ -162,23 +140,12 @@ export const useClassDiscussions = (classId: string) => {
 		}
 	}
 
-	const pushToDiscussions = (classId: string, discussion: DiscussionEntity) => {
-		const index = classGlobal[classId].discussions.value.findIndex((c) => c.id === discussion.id)
-		if (index !== -1) classGlobal[classId].discussions.value.splice(index, 1, discussion)
-		else classGlobal[classId].discussions.value.push(discussion)
-	}
-	const unshiftToDiscussions = (classId: string, discussion: DiscussionEntity) => {
-		const index = classGlobal[classId].discussions.value.findIndex((c) => c.id === discussion.id)
-		if (index !== -1) classGlobal[classId].discussions.value.splice(index, 1, discussion)
-		else classGlobal[classId].discussions.value.unshift(discussion)
-	}
-
 	const fetchDiscussions = async () => {
 		await classGlobal[classId].setError('')
 		try {
 			await classGlobal[classId].setLoading(true)
 			const discussions = await GetClassDiscussions.call(classId)
-			discussions.results.map((d) => pushToDiscussions(classId, d))
+			discussions.results.map((d) => addToArray(classGlobal[classId].discussions.value, d, (e) => e.id, (e) => e.createdAt))
 			classGlobal[classId].fetched.value = true
 		} catch (e) {
 			await classGlobal[classId].setError(e)

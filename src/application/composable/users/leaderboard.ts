@@ -2,6 +2,7 @@ import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { GetLeaderboard, RankingTimes, UserEntity } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
+import { addToArray } from '@utils/commons'
 
 export const times = Object.values(RankingTimes)
 export const time = ref(RankingTimes.daily)
@@ -11,12 +12,6 @@ const global = {} as Record<RankingTimes, {
 	fetched: Ref<boolean>,
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
-
-const pushToUsersList = (key: RankingTimes, user: UserEntity) => {
-	const index = global[key].users.value.findIndex((t) => t.id === user.id)
-	if (index !== -1) global[key].users.value.splice(index, 1, user)
-	else global[key].users.value.push(user)
-}
 
 export const useLeaderboardList = (key: RankingTimes) => {
 	const { id } = useAuth()
@@ -37,7 +32,7 @@ export const useLeaderboardList = (key: RankingTimes) => {
 		try {
 			await global[key].setLoading(true)
 			const users = await GetLeaderboard.call(key)
-			users.results.forEach((user) => pushToUsersList(key, user))
+			users.results.forEach((user) => addToArray(global[key].users.value, user, (e) => e.id, (e) => e.account.rankings[key]))
 			global[key].fetched.value = true
 		} catch (error) {
 			await global[key].setError(error)

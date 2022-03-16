@@ -70,7 +70,7 @@
 import { IonSegment, IonSegmentButton, IonSelect, IonSelectOption } from '@ionic/vue'
 import { useTestDetails } from '@app/composable/study/tests'
 import { chevronBackCircleOutline, chevronForwardCircleOutline } from 'ionicons/icons'
-import { computed, defineComponent, onMounted, onUnmounted } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { TestEntity } from '@modules/study'
 import { useCountdown } from '@app/composable/core/dates'
 import { getDigitalTime } from '@utils/dates'
@@ -95,9 +95,7 @@ export default defineComponent({
 		const canGoForward = computed(() => questionIndex.value < questions.value.length - 1)
 		const back = () => canGoBack.value && questionIndex.value--
 		const forward = () => canGoForward.value && questionIndex.value++
-		const { diffInSec, startTimer: startCountdown, stopTimer: stopCountdown } = useCountdown(props.test.endedAt, {})
-		onMounted(startCountdown)
-		onUnmounted(stopCountdown)
+		const { diffInSec } = useCountdown(props.test.endedAt, {})
 		const countDown = computed({
 			get: () => getDigitalTime(diffInSec.value),
 			set: () => {

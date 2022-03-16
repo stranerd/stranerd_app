@@ -1,18 +1,13 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { FlashCardEntity, GetUserFlashCards, ListenToUserFlashCards } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
 	flashCards: Ref<FlashCardEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
-
-const pushToFlashCardList = (id: string, flashCard: FlashCardEntity) => {
-	const index = global[id].flashCards.value.findIndex((q) => q.id === flashCard.id)
-	if (index !== -1) global[id].flashCards.value.splice(index, 1, flashCard)
-	else global[id].flashCards.value.push(flashCard)
-}
 
 export const useUserFlashCardList = (id: string) => {
 	if (global[id] === undefined) global[id] = {
@@ -30,7 +25,7 @@ export const useUserFlashCardList = (id: string) => {
 			const lastDate = global[id].flashCards.value[global[id].flashCards.value.length - 1]?.createdAt
 			const flashCards = await GetUserFlashCards.call(id, lastDate)
 			global[id].hasMore.value = !!flashCards.pages.next
-			flashCards.results.forEach((q) => pushToFlashCardList(id, q))
+			flashCards.results.forEach((q) => addToArray(global[id].flashCards.value, q, (e) => e.id, (e) => e.createdAt))
 			global[id].fetched.value = true
 		} catch (error) {
 			await global[id].setError(error)
@@ -41,14 +36,10 @@ export const useUserFlashCardList = (id: string) => {
 	const listener = useListener(async () => {
 		return await ListenToUserFlashCards.call(id, {
 			created: async (entity) => {
-				const index = global[id].flashCards.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].flashCards.value.unshift(entity)
-				else global[id].flashCards.value.splice(index, 1, entity)
+				addToArray(global[id].flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				const index = global[id].flashCards.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].flashCards.value.unshift(entity)
-				else global[id].flashCards.value.splice(index, 1, entity)
+				addToArray(global[id].flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
 				global[id].flashCards.value = global[id].flashCards.value.filter((c) => c.id !== entity.id)

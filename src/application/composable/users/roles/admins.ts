@@ -3,6 +3,7 @@ import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } fr
 import { GetAllAdmins, ListenToAllAdmins, ToggleAdmin, UserEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
+import { addToArray } from '@utils/commons'
 
 const global = {
 	admins: ref([] as UserEntity[]),
@@ -14,12 +15,10 @@ const global = {
 const listener = useListener(async () => {
 	return await ListenToAllAdmins.call({
 		created: async (entity) => {
-			const index = global.admins.value.findIndex((t) => t.id === entity.id)
-			global.admins.value.splice(index, 1, entity)
+			addToArray(global.admins.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
 		},
 		updated: async (entity) => {
-			const index = global.admins.value.findIndex((t) => t.id === entity.id)
-			global.admins.value.splice(index, 1, entity)
+			addToArray(global.admins.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
 		},
 		deleted: async (entity) => {
 			const index = global.admins.value.findIndex((t) => t.id === entity.id)
@@ -29,19 +28,13 @@ const listener = useListener(async () => {
 })
 const { id } = useAuth()
 
-const pushToAdminsList = (admin: UserEntity) => {
-	const index = global.admins.value.findIndex((t) => t.id === admin.id)
-	if (index !== -1) global.admins.value.splice(index, 1, admin)
-	else global.admins.value.push(admin)
-}
-
 export const useAdminsList = () => {
 	const fetchAdmins = async () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
 			const admins = await GetAllAdmins.call()
-			admins.results.forEach(pushToAdminsList)
+			admins.results.forEach((a) => addToArray(global.admins.value, a, (e) => e.id, (e) => e.bio.fullName, true))
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)
@@ -55,7 +48,7 @@ export const useAdminsList = () => {
 			return matched
 		}),
 		set: (admins) => {
-			admins.map(pushToAdminsList)
+			admins.map((a) => addToArray(global.admins.value, a, (e) => e.id, (e) => e.bio.fullName, true))
 		}
 	})
 
@@ -70,7 +63,7 @@ export const useAdminsList = () => {
 			try {
 				await ToggleAdmin.call(user.id, true)
 				user.isAdmin = true
-				pushToAdminsList(user)
+				addToArray(global.admins.value, user, (e) => e.id, (e) => e.bio.fullName, true)
 				await global.setMessage('Successfully upgraded to admin')
 			} catch (error) {
 				await global.setError(error)

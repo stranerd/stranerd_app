@@ -2,6 +2,7 @@ import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { GetNotifications, ListenToNotifications, MarkNotificationSeen, NotificationEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
+import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
 	notifications: Ref<NotificationEntity[]>
@@ -9,18 +10,6 @@ const global = {} as Record<string, {
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
-
-const pushToNotificationList = (userId: string, notification: NotificationEntity) => {
-	const index = global[userId].notifications.value.findIndex((t) => t.id === notification.id)
-	if (index !== -1) global[userId].notifications.value.splice(index, 1, notification)
-	else global[userId].notifications.value.push(notification)
-}
-
-const unshiftToNotificationList = (userId: string, notification: NotificationEntity) => {
-	const index = global[userId].notifications.value.findIndex((t) => t.id === notification.id)
-	if (index !== -1) global[userId].notifications.value.splice(index, 1, notification)
-	else global[userId].notifications.value.unshift(notification)
-}
 
 export const useNotificationList = () => {
 	const { id } = useAuth()
@@ -32,10 +21,10 @@ export const useNotificationList = () => {
 			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
 			return ListenToNotifications.call({
 				created: async (entity) => {
-					unshiftToNotificationList(userId, entity)
+					addToArray(global[userId].notifications.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				updated: async (entity) => {
-					unshiftToNotificationList(userId, entity)
+					addToArray(global[userId].notifications.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				deleted: async (entity) => {
 					const index = global[userId].notifications.value.findIndex((t) => t.id === entity.id)
@@ -61,7 +50,7 @@ export const useNotificationList = () => {
 			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
 			const notifications = await GetNotifications.call(lastDate)
 			global[userId].hasMore.value = !!notifications.pages.next
-			notifications.results.forEach((t) => pushToNotificationList(userId, t))
+			notifications.results.forEach((t) => addToArray(global[userId].notifications.value, t, (e) => e.id, (e) => e.createdAt))
 		} catch (e) {
 			await global[userId].setError(e)
 		}
@@ -70,23 +59,7 @@ export const useNotificationList = () => {
 
 	const fetchOlderNotifications = async () => {
 		await fetchNotifications()
-		await global[userId].listener.resetListener(async () => {
-			if (!userId) return () => {
-			}
-			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
-			return ListenToNotifications.call({
-				created: async (entity) => {
-					unshiftToNotificationList(userId, entity)
-				},
-				updated: async (entity) => {
-					unshiftToNotificationList(userId, entity)
-				},
-				deleted: async (entity) => {
-					const index = global[userId].notifications.value.findIndex((t) => t.id === entity.id)
-					if (index !== -1) global[userId].notifications.value.splice(index, 1)
-				}
-			}, lastDate)
-		})
+		await global[userId].listener.restartListener()
 	}
 
 	onMounted(async () => {

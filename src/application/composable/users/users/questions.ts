@@ -1,18 +1,13 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { GetUserQuestions, ListenToUserQuestions, QuestionEntity } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
 	questions: Ref<QuestionEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
-
-const pushToQuestionList = (id: string, question: QuestionEntity) => {
-	const index = global[id].questions.value.findIndex((a) => a.id === question.id)
-	if (index !== -1) global[id].questions.value.splice(index, 1, question)
-	else global[id].questions.value.push(question)
-}
 
 export const useUserQuestionList = (id: string) => {
 	if (global[id] === undefined) global[id] = {
@@ -30,7 +25,7 @@ export const useUserQuestionList = (id: string) => {
 			const lastDate = global[id].questions.value[global[id].questions.value.length - 1]?.createdAt
 			const questions = await GetUserQuestions.call(id, lastDate)
 			global[id].hasMore.value = !!questions.pages.next
-			questions.results.forEach((a) => pushToQuestionList(id, a))
+			questions.results.forEach((a) => addToArray(global[id].questions.value, a, (e) => e.id, (e) => e.createdAt))
 			global[id].fetched.value = true
 		} catch (error) {
 			await global[id].setError(error)
@@ -41,14 +36,10 @@ export const useUserQuestionList = (id: string) => {
 	const listener = useListener(async () => {
 		return await ListenToUserQuestions.call(id, {
 			created: async (entity) => {
-				const index = global[id].questions.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].questions.value.unshift(entity)
-				else global[id].questions.value.splice(index, 1, entity)
+				addToArray(global[id].questions.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				const index = global[id].questions.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[id].questions.value.unshift(entity)
-				else global[id].questions.value.splice(index, 1, entity)
+				addToArray(global[id].questions.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
 				global[id].questions.value = global[id].questions.value.filter((c) => c.id !== entity.id)

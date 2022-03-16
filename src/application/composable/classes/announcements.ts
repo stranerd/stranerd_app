@@ -14,6 +14,7 @@ import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { useClassModal } from '@app/composable/core/modals'
 import { storage } from '@utils/storage'
+import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
 	announcements: Ref<AnnouncementEntity[]>
@@ -30,14 +31,10 @@ export const useAnnouncementList = (classId: string) => {
 		const listener = useListener(async () => {
 			return await ListenToAnnouncements.call(classId, {
 				created: async (entity) => {
-					const index = global[classId].announcements.value.findIndex((c) => c.id === entity.id)
-					if (index === -1) global[classId].announcements.value.unshift(entity)
-					else global[classId].announcements.value.splice(index, 1, entity)
+					addToArray(global[classId].announcements.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				updated: async (entity) => {
-					const index = global[classId].announcements.value.findIndex((c) => c.id === entity.id)
-					if (index === -1) global[classId].announcements.value.unshift(entity)
-					else global[classId].announcements.value.splice(index, 1, entity)
+					addToArray(global[classId].announcements.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				deleted: async (entity) => {
 					global[classId].announcements.value = global[classId].announcements.value.filter((c) => c.id !== entity.id)
@@ -63,7 +60,7 @@ export const useAnnouncementList = (classId: string) => {
 		try {
 			await global[classId].setLoading(true)
 			const announcements = await GetAnnouncements.call(classId)
-			global[classId].announcements.value = announcements.results
+			announcements.results.forEach((a) => addToArray(global[classId].announcements.value, a, (e) => e.id, (e) => e.createdAt))
 			global[classId].fetched.value = !!announcements.pages.next
 			global[classId].fetched.value = true
 		} catch (error) {

@@ -16,6 +16,7 @@ import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable
 import { useRouter } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 import { useRedirectToAuth } from '@app/composable/auth/session'
+import { addToArray } from '@utils/commons'
 
 const global = {
 	tests: ref([] as TestEntity[]),
@@ -27,10 +28,10 @@ const global = {
 const listener = useListener(async () => {
 	return await ListenToTests.call({
 		created: async (entity) => {
-			unshiftToTestList(entity)
+			addToArray(global.tests.value, entity, (e) => e.id, (e) => e.createdAt)
 		},
 		updated: async (entity) => {
-			unshiftToTestList(entity)
+			addToArray(global.tests.value, entity, (e) => e.id, (e) => e.createdAt)
 		},
 		deleted: async (entity) => {
 			const index = global.tests.value.findIndex((q) => q.id === entity.id)
@@ -46,17 +47,6 @@ const testGlobal = {} as Record<string, {
 	questionIndex: Ref<number>,
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-const pushToTestList = (test: TestEntity) => {
-	const index = global.tests.value.findIndex((q) => q.id === test.id)
-	if (index !== -1) global.tests.value.splice(index, 1, test)
-	else global.tests.value.push(test)
-}
-const unshiftToTestList = (test: TestEntity) => {
-	const index = global.tests.value.findIndex((q) => q.id === test.id)
-	if (index !== -1) global.tests.value.splice(index, 1, test)
-	else global.tests.value.unshift(test)
-}
-
 export const useTestList = () => {
 	const fetchTests = async () => {
 		await global.setError('')
@@ -64,7 +54,7 @@ export const useTestList = () => {
 			await global.setLoading(true)
 			const tests = await GetTests.call()
 			global.hasMore.value = !!tests.pages.next
-			tests.results.forEach(pushToTestList)
+			tests.results.forEach((t) => addToArray(global.tests.value, t, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)
@@ -83,7 +73,7 @@ export const useTestList = () => {
 	const unCompletedTests = computed({
 		get: () => global.tests.value.filter((test) => !test.done && test.progress !== 100),
 		set: (tests) => {
-			tests.forEach(pushToTestList)
+			tests.forEach((t) => addToArray(global.tests.value, t, (e) => e.id, (e) => e.createdAt))
 		}
 	})
 
@@ -125,7 +115,7 @@ export const useTest = (testId: string) => {
 	const test = computed({
 		get: () => global.tests.value.find((q) => q.id === testId) ?? null,
 		set: (q) => {
-			if (q) pushToTestList(q)
+			if (q) addToArray(global.tests.value, q, (e) => e.id, (e) => e.createdAt)
 		}
 	})
 
@@ -139,7 +129,7 @@ export const useTest = (testId: string) => {
 				return
 			}
 			test = await FindTest.call(testId)
-			if (test) unshiftToTestList(test)
+			if (test) addToArray(global.tests.value, test, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
 		}

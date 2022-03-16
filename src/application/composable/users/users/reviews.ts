@@ -1,18 +1,13 @@
 import { onMounted, ref, Ref } from 'vue'
 import { GetReviews, ReviewEntity } from '@modules/users'
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
+import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
 	reviews: Ref<ReviewEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
-
-const pushToReviewList = (id: string, review: ReviewEntity) => {
-	const index = global[id].reviews.value.findIndex((a) => a.id === review.id)
-	if (index !== -1) global[id].reviews.value.splice(index, 1, review)
-	else global[id].reviews.value.push(review)
-}
 
 export const useUserReviewList = (id: string) => {
 	if (!global[id]) global[id] = {
@@ -31,7 +26,7 @@ export const useUserReviewList = (id: string) => {
 			const lastDate = global[id].reviews.value[global[id].reviews.value.length - 1]?.createdAt
 			const reviews = await GetReviews.call(lastDate)
 			global[id].hasMore.value = !!reviews.pages.next
-			reviews.results.forEach((a) => pushToReviewList(id, a))
+			reviews.results.forEach((a) => addToArray(global[id].reviews.value, a, (e) => e.id, (e) => e.createdAt))
 			global[id].fetched.value = true
 		} catch (error) {
 			await global[id].setError(error)
