@@ -5,6 +5,7 @@
 			<router-link v-for="{ path, icon, name, iconOutline } in [
 					{ name: 'Home', path: '/dashboard', icon: home, iconOutline:homeOutline },
 					{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
+					{ name: 'TestPreps', path: '/testPreps', icon: receipt, iconOutline:receiptOutline },
 					{ name: 'Library', path: '/study', icon: library, iconOutline:libraryOutline },
 					{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }
 				]" :key="path" :to="path"
@@ -21,13 +22,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { helpCircleOutline, homeOutline, libraryOutline, peopleOutline, library, home, helpCircle, people } from 'ionicons/icons'
+import { helpCircleOutline, homeOutline, libraryOutline, peopleOutline, library, home, helpCircle, people, receipt, receiptOutline } from 'ionicons/icons'
 import { IonIcon } from '@ionic/vue'
 
 export default defineComponent({
 	components: { IonIcon },
 	setup () {
-		return { libraryOutline, homeOutline, helpCircleOutline, peopleOutline, library, home, helpCircle, people }
+		return { libraryOutline, homeOutline, helpCircleOutline, peopleOutline, library, home, helpCircle, people, receipt, receiptOutline }
 	}
 })
 </script>
