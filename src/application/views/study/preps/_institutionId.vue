@@ -2,11 +2,11 @@
 	<Justified>
 		<div>
 			<div class="text-body bg-white w-full lg:w-8/12 mx-auto lg:mt-6 rounded-xl">
-				<div class="flex-grow flex flex-col  p-4 md:px-6 ">
+				<div class="flex-grow flex flex-col  p-6 md:px-6 ">
 					<ion-text class="heading lg:text-2xl font-bold text-main_dark mx-auto text-center">
 						<Institution :institutionId="institutionId" />
 					</ion-text>
-					<div class="flex justify-between w-full lg:w-7/12 showcase mt-4">
+					<div class="flex justify-between w-full  showcase mt-4">
 						<ion-item >
 							<ion-label class="!text-gray font-bold text-body">Subject</ion-label>
 							<IonSelect v-model="courseId" class="capitalize" interface="action-sheet"

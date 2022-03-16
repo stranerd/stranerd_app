@@ -41,7 +41,7 @@ import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'TestPrepListCard',
-	components: { Institution, Course, SaveToSet },
+	components: { Institution, Course, SaveToSet, },
 	props: {
 		testPrep: {
 			type: TestPrepEntity,
