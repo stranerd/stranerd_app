@@ -89,7 +89,7 @@
 	}
 
 	.dot {
-		@apply h-[5px] w-[5px] rounded-full bg-icon_inactive lg:flex
+		@apply h-[5px] w-[5px] rounded-full
 	}
 
 	.card-padding {

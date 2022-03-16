@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref, Ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import {
 	AddAnnouncement,
 	AnnouncementEntity,
@@ -13,13 +13,17 @@ import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } fr
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { useClassModal } from '@app/composable/core/modals'
+import { storage } from '@utils/storage'
 
 const global = {} as Record<string, {
 	announcements: Ref<AnnouncementEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
 	listener: ReturnType<typeof useListener>
+	readTime: Ref<number>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+
+const getReadStateKey = (classId: string) => `classes-${classId}-announcements`
 
 export const useAnnouncementList = (classId: string) => {
 	if (global[classId] === undefined) {
@@ -44,11 +48,15 @@ export const useAnnouncementList = (classId: string) => {
 			announcements: ref([]),
 			fetched: ref(false),
 			hasMore: ref(false),
+			readTime: ref(0),
 			listener,
 			...useErrorHandler(),
 			...useLoadingHandler()
 		}
 	}
+
+	watch(() => global[classId].readTime.value, async () => await storage.set(getReadStateKey(classId), global[classId].readTime.value))
+	const unReadAnnouncements = computed(() => global[classId].announcements.value.filter((a) => a.createdAt > global[classId].readTime.value).length)
 
 	const fetchAnnouncements = async () => {
 		await global[classId].setError('')
@@ -66,13 +74,23 @@ export const useAnnouncementList = (classId: string) => {
 
 	onMounted(async () => {
 		if (!global[classId].fetched.value && !global[classId].loading.value) await fetchAnnouncements()
+		const lastRead = await storage.get(getReadStateKey(classId))
+		if (lastRead) global[classId].readTime.value = lastRead
 		await global[classId].listener.startListener()
 	})
 	onUnmounted(async () => {
 		await global[classId].listener.closeListener()
 	})
 
-	return { ...global[classId], fetchOlderAnnouncements: fetchAnnouncements }
+	return { ...global[classId], fetchOlderAnnouncements: fetchAnnouncements, unReadAnnouncements }
+}
+
+export const saveAnnouncementReadState = async (announcement: AnnouncementEntity) => {
+	const key = getReadStateKey(announcement.classId)
+	const lastRead = await storage.get(key)
+	if (lastRead >= announcement.createdAt) return
+	await storage.set(key, announcement.createdAt)
+	if (global[announcement.classId]) global[announcement.classId].readTime.value = announcement.createdAt
 }
 
 let announcementClass = null as ClassEntity | null

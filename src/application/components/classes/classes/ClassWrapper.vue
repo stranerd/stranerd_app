@@ -33,6 +33,7 @@
 						<router-link :to="`/classes/${classInst.id}/announcements`">
 							<IonIcon :icon="megaphoneOutline" class="text-xl" />
 							<IonText class="hidden md:inline">Announcements</IonText>
+							<span v-if="!!unReadAnnouncements" class="dot bg-primary" />
 						</router-link>
 						<router-link :to="`/classes/${classInst.id}/groups`">
 							<IonIcon :icon="chatboxEllipsesOutline" class="text-xl" />
@@ -82,6 +83,7 @@ import { openClassEditModal, useClass } from '@app/composable/classes/classes'
 import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
+import { useAnnouncementList } from '@app/composable/classes/announcements'
 
 export default defineComponent({
 	name: 'ClassWrapper',
@@ -91,22 +93,12 @@ export default defineComponent({
 		const route = useRoute()
 		const { classId } = route.params
 		const { loading, error, classInst, requestToJoinClass } = useClass(classId as string)
+		const { unReadAnnouncements } = useAnnouncementList(classId as string)
 		return {
-			chatboxEllipsesOutline,
-			informationCircleOutline,
-			helpCircleOutline,
-			libraryOutline,
-			megaphoneOutline,
-			pencilOutline,
-			peopleOutline,
-			loading,
-			error,
-			classInst,
-			formatTime,
-			pluralize,
-			id,
-			requestToJoinClass,
-			openClassEditModal
+			chatboxEllipsesOutline, informationCircleOutline, helpCircleOutline, libraryOutline,
+			megaphoneOutline, pencilOutline, peopleOutline,
+			loading, error, classInst, requestToJoinClass, unReadAnnouncements,
+			formatTime, pluralize, id, openClassEditModal
 		}
 	}
 })

@@ -7,7 +7,7 @@
 						{{ notification.body }}
 					</p>
 				</router-link>
-				<span v-if="!notification.seen" class="dot !bg-primary" />
+				<span v-if="!notification.seen" class="dot bg-primary" />
 			</div>
 			<p>{{ formatTime(notification.createdAt) }}</p>
 		</div>

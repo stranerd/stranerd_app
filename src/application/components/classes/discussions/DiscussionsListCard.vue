@@ -28,13 +28,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { DiscussionEntity } from '@modules/classes'
 import { useAuth } from '@app/composable/auth/auth'
 import { formatTimeAsDigits } from '@utils/dates'
 import { checkmarkCircleOutline, documentOutline, downloadOutline } from 'ionicons/icons'
 import { IonSpinner } from '@ionic/vue'
 import { useDownloadableLink } from '@app/composable/meta/media'
+import { saveDiscussionsReadState } from '@app/composable/classes/discussions'
 
 export default defineComponent({
 	name: 'DiscussionsListCard',
@@ -48,6 +49,9 @@ export default defineComponent({
 	setup (props) {
 		const { id } = useAuth()
 		const { loading, download } = useDownloadableLink(props.discussion.media!)
+		onMounted(async () => {
+			await saveDiscussionsReadState(props.discussion)
+		})
 		return { id, formatTimeAsDigits, checkmarkCircleOutline, documentOutline, downloadOutline, download, loading }
 	}
 })
