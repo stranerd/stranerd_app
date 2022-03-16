@@ -5,8 +5,11 @@
 			<IonSegmentButton class="w-full" value="testPrep">My test preps</IonSegmentButton>
 			<IonSegmentButton class="w-full" value="explore">Explore</IonSegmentButton>
 		</IonSegment>
-		<div class="md:p-4" v-if="stateMode == 'testPrep'">
+		<div class="md:mt-4" v-if="stateMode == 'testPrep'">
 			<ContinueTests/>
+		</div>
+		<div class="md:mt-4" v-if="stateMode == 'explore'">
+			<explore-test-preps-list/>
 		</div>
 	</DashboardLayout>
 </template>
@@ -16,11 +19,12 @@ import { defineComponent, ref } from 'vue'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import { IonSegment, IonSegmentButton } from '@ionic/vue'
 import ContinueTests from '@root/application/components/study/tests/ContinueTests.vue'
+import ExploreTestPrepsList from '@root/application/components/study/testPreps/ExploreTestPrepsList.vue'
 
 export default defineComponent({
 	name: 'TestPreps',
 	displayName: 'Questions',
-	components: {  DashboardLayout, ContinueTests, IonSegment, IonSegmentButton },
+	components: {  DashboardLayout, ContinueTests, IonSegment, IonSegmentButton, ExploreTestPrepsList },
 	setup(){ 
 		const stateMode = ref('testPrep')
 		return{

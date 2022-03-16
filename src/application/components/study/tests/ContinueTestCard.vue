@@ -2,11 +2,15 @@
 	<router-link :to="`/study/tests/${test.id}`"
 		class="bg-white w-full rounded-xl flex flex-col box-border card-padding">
 		<div class="flex flex-col">
-			<ion-text class="text-left w-full text-main_dark font-semibold truncate capitalize">
-				<Institution v-if="testPrep && testPrep.isPastQuestionType"
-					:institutionId="testPrep.data.institutionId" />
-				<span v-else>{{ test.name }}</span>
-			</ion-text>
+			<div class="flex just">
+				<ion-text class="text-left w-full text-main_dark font-semibold truncate capitalize">
+					<Institution v-if="testPrep && testPrep.isPastQuestionType"
+						:institutionId="testPrep.data.institutionId" />
+					<span v-else>{{ test.name }}</span>
+				</ion-text>
+				
+			</div>
+		
 			<ion-text class="text-sm text-left w-full text-gray truncate">
 				{{ test.isTimed ? 'Timed' : 'Study' }}
 				<span v-if="testPrep && testPrep.isPastQuestionType">

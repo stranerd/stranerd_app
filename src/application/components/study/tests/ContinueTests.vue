@@ -11,6 +11,7 @@
 		</div>
 
 		<EmptyState v-if="!loading && !error && tests.length === 0" info="You have no uncompleted tests" />
+		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl" />
 		<div v-else class="showcase">
 			<ContinueTestCard v-for="test in tests" :key="test.hash" :test="test" />
 		</div>
@@ -23,10 +24,11 @@ import { chevronBackOutline, chevronForwardOutline, ellipseOutline } from 'ionic
 import EmptyState from '@app/components/core/EmptyState.vue'
 import ContinueTestCard from '@app/components/study/tests/ContinueTestCard.vue'
 import { useTestList } from '@app/composable/study/tests'
+import { IonSkeletonText } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ContinueTests',
-	components: { EmptyState, ContinueTestCard },
+	components: { EmptyState, ContinueTestCard, IonSkeletonText },
 	props: {
 		sliced: {
 			type: Boolean,

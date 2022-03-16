@@ -3,7 +3,7 @@
 		class="bg-white rounded-xl flex flex-col box-border justify-between card-padding text-main_dark">
 		<ion-text class="font-semibold truncate w-full">{{ flashCard.title }}</ion-text>
 		<div class="w-full flex items-center justify-between gap-2">
-			<Tag :tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
+			<Tag :index="1" :tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
 						<ion-icon :icon="copyOutline" class="mr-1" />
