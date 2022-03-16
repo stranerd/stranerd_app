@@ -2,7 +2,7 @@
 	<DashboardLayout>
 		<div class="md:p-4 flex flex-col gap-4 md:gap-6">
 			<StatusBar v-if="isLoggedIn" />
-			<ContinueStudy v-if="isLoggedIn" :sliced="true" class="border-bottom-line" />
+			<!-- <ContinueStudy v-if="isLoggedIn" :sliced="true" class="border-bottom-line" /> -->
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 					<div class="heading font-bold text-main_dark flex items-center">
@@ -78,7 +78,7 @@ import NotesList from '@app/components/study/notes/ExploreNotesList.vue'
 import VideosList from '@app/components/study/videos/ExploreVideosList.vue'
 import FlashCardList from '@app/components/study/flashCards/ExploreFlashCardsList.vue'
 import RecentQuestions from '@app/components/questions/questions/RecentQuestions.vue'
-import ContinueStudy from '@app/components/study/tests/ContinueTests.vue'
+// import ContinueStudy from '@app/components/study/tests/ContinueTests.vue'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
@@ -87,7 +87,7 @@ export default defineComponent({
 	components: {
 		DashboardLayout,
 		RecentQuestions,
-		ContinueStudy,
+		// ContinueStudy,
 		TestPrepList,
 		NotesList,
 		VideosList,
