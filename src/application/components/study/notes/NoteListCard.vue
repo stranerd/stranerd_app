@@ -1,12 +1,10 @@
 <template>
-	<div class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
+	<component :is="content ? 'router-link' : 'span'" :to="`/study/notes/${note.id}`"
+		class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
 		<div class="w-full justify-between items-center flex gap-2">
 			<ion-text class="font-semibold truncate w-full">{{ note.title }}</ion-text>
-			<router-link v-if="content" :to="`/study/notes/${note.id}`">
-				<ion-icon :icon="arrowForwardCircleOutline" class="text-primary text-xl" />
-			</router-link>
-			<IonSpinner v-else-if="loading" color="primary" />
-			<IonIcon v-else :icon="downloadOutline" class="text-primary text-xl" @click="download" />
+			<IonSpinner v-if="loading" color="primary" />
+			<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-primary text-xl" @click="download" />
 		</div>
 
 		<div class="w-full flex items-center justify-between gap-2">
@@ -21,27 +19,19 @@
 			<div class="flex items-center text-gray gap-2">
 				<Avatar :id="note.userId" :name="note.userBio.fullName" :size="24" :src="note.userBio.photo" />
 				<Share :link="note.shareLink" :text="note.description" :title="note.title" cssClass="text-xl" />
-				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" @click="openSaveModal(note)" />
+				<SaveToSet :entity="note" />
 			</div>
 		</div>
-	</div>
+	</component>
 </template>
 
 <script lang="ts">
-import {
-	arrowForwardCircleOutline,
-	bookmark,
-	bookmarkOutline,
-	documentOutline,
-	downloadOutline,
-	ellipsisVerticalOutline
-} from 'ionicons/icons'
-import { computed, defineComponent } from 'vue'
+import { documentOutline, downloadOutline, ellipsisVerticalOutline } from 'ionicons/icons'
+import { defineComponent } from 'vue'
 import { NoteEntity } from '@modules/study'
 import { IonSpinner } from '@ionic/vue'
 import { useDownload } from '@app/composable/meta/media'
-import { useUserSetList } from '@app/composable/users/users/sets'
-import { openSaveModal } from '@app/composable/study/menus'
+import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'NoteListCard',
@@ -51,7 +41,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { IonSpinner },
+	components: { IonSpinner, SaveToSet },
 	setup (props) {
 		const {
 			loading,
@@ -60,23 +50,16 @@ export default defineComponent({
 			download,
 			deleteFromDownloads
 		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
-		const { sets } = useUserSetList()
-		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(props.note.id)))
 
 		return {
-			arrowForwardCircleOutline,
 			ellipsisVerticalOutline,
 			documentOutline,
 			downloadOutline,
-			bookmark,
-			bookmarkOutline,
 			download,
 			loading,
 			content,
 			error,
-			deleteFromDownloads,
-			isSaved,
-			openSaveModal
+			deleteFromDownloads
 		}
 	}
 })

@@ -1,14 +1,10 @@
 <template>
 	<Justified>
-		<div class="bg-primary w-full min-h-[130px] flex flex-col justify-center items-center pt-0 pb-1">
-			<div class="flex items-center">
-				<ion-text class="text-white font-semibold text-center text-xl">
-					Uncompleted Tests
-				</ion-text>
+		<div class="lg:w-8/12 w-full md:px-4 lg:px-0 md:py-4 mx-auto">
+			<div
+				class="hidden lg:flex card-padding items-center justify-center bg-white w-full rounded-xl box-border mb-4">
+				<h1 class="text-xl font-semibold">Uncompleted Tests</h1>
 			</div>
-		</div>
-
-		<div class="lg:w-8/12 w-full px-4 mx-auto mt-8">
 			<ContinueStudy />
 		</div>
 	</Justified>
@@ -21,7 +17,7 @@ import ContinueStudy from '@app/components/study/tests/ContinueTests.vue'
 
 export default defineComponent({
 	name: 'StudyTestsContinue',
-	displayName: 'Continue Tests',
+	displayName: 'Uncompleted Tests',
 	components: { Justified, ContinueStudy },
 	middlewares: ['isAuthenticated']
 })

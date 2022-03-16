@@ -17,4 +17,5 @@ export interface ClassToModel {
 	name: string
 	description: string
 	photo: Media | null
+	coverPhoto: Media | null
 }

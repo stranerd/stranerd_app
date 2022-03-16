@@ -36,10 +36,6 @@ export class ReviewEntity extends BaseEntity {
 		this.updatedAt = updatedAt
 	}
 
-	get avatar () {
-		return this.userBio.photo
-	}
-
 	get isUserVerified () {
 		return this.userRoles[appName].isVerified
 	}

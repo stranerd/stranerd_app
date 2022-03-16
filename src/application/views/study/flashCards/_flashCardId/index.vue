@@ -21,8 +21,7 @@
 							:src="flashCard.userBio.photo" />
 						<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
 							text="Share this flashcard" />
-						<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl"
-							@click="openSaveModal(flashCard)" />
+						<SaveToSet :entity="flashCard" />
 					</div>
 				</div>
 			</div>
@@ -36,23 +35,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
-import {
-	bookmark,
-	bookmarkOutline,
-	checkmarkCircleOutline,
-	copyOutline,
-	ellipsisVerticalOutline,
-	listOutline
-} from 'ionicons/icons'
+import { checkmarkCircleOutline, copyOutline, ellipsisVerticalOutline, listOutline } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { useFlashCard } from '@app/composable/study/flashCards'
 import { useRoute } from 'vue-router'
 import FlashCardScreen from '@root/application/components/study/flashCards/FlashCardScreen.vue'
 import FlashCardListView from '@root/application/components/study/flashCards/FlashCardListView.vue'
-import { useUserSetList } from '@app/composable/users/users/sets'
-import { openSaveModal } from '@app/composable/study/menus'
+import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'StudyFlashCardsFlashcardId',
@@ -61,18 +52,16 @@ export default defineComponent({
 		Justified,
 		Avatar,
 		FlashCardScreen,
-		FlashCardListView
+		FlashCardListView,
+		SaveToSet
 	},
 	setup () {
 		const cardMode = ref(true)
 		const { flashCardId } = useRoute().params
 		const { flashCard, error, loading } = useFlashCard(flashCardId as string)
-		const { sets } = useUserSetList()
-		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(flashCardId as string)))
 		return {
-			copyOutline, listOutline, cardMode, isSaved, openSaveModal,
-			flashCard, loading, error,
-			bookmark, bookmarkOutline, ellipsisVerticalOutline, checkmarkCircleOutline
+			copyOutline, listOutline, cardMode,
+			flashCard, loading, error, ellipsisVerticalOutline, checkmarkCircleOutline
 		}
 	}
 })

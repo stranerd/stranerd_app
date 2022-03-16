@@ -71,14 +71,6 @@ export class QuestionEntity extends BaseEntity {
 		this.updatedAt = updatedAt
 	}
 
-	get userName () {
-		return this.userBio.fullName!
-	}
-
-	get avatar () {
-		return this.userBio.photo
-	}
-
 	get trimmedBody () {
 		return trimToLength(this.strippedBody, 80)
 	}

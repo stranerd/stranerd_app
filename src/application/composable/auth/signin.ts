@@ -12,7 +12,6 @@ import {
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'
-import { useAuth } from '@app/composable/auth/auth'
 import { storage } from '@utils/storage'
 
 const global = {
@@ -125,7 +124,7 @@ export const useEmailVerificationRequest = () => {
 	onMounted(sendVerificationEmail)
 
 	return {
-		email: useAuth().auth.value?.email,
+		email: global.emailVerificationRequest.email,
 		loading, error, message,
 		sendVerificationEmail
 	}

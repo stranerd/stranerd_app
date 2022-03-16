@@ -7,7 +7,7 @@
 				<span>{{ announcement.userBio.fullName }}</span>
 				<IonIcon v-if="announcement.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
 			</IonText>
-			<span class="dot" />
+			<span class="dot bg-icon_inactive" />
 			<IonText class="text-gray">{{ formatTime(announcement.createdAt) }}</IonText>
 		</div>
 		<IonText class="text-main_dark">{{ announcement.body }}</IonText>
@@ -15,10 +15,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { AnnouncementEntity, ClassEntity } from '@modules/classes'
 import { formatTime } from '@utils/dates'
 import { checkmarkCircleOutline } from 'ionicons/icons'
+import { saveAnnouncementReadState } from '@app/composable/classes/announcements'
 
 export default defineComponent({
 	name: 'AnnouncementsListCard',
@@ -32,7 +33,10 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup () {
+	setup (props) {
+		onMounted(async () => {
+			await saveAnnouncementReadState(props.announcement)
+		})
 		return { formatTime, checkmarkCircleOutline }
 	}
 })

@@ -9,11 +9,13 @@ import {
 	ListenToQuestion,
 	ListenToQuestions,
 	QuestionEntity,
-	QuestionFactory
+	QuestionFactory,
+	QuestionType
 } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useQuestionModal } from '@app/composable/core/modals'
+import { ClassEntity } from '@modules/classes'
 
 enum Answered {
 	All,
@@ -127,12 +129,23 @@ export const useQuestionList = () => {
 	}
 }
 
+let questionClass = null as ClassEntity | null
+export const getQuestionClass = () => questionClass
+export const openQuestionModalFromClass = async (classInst: ClassEntity, router: Router) => {
+	questionClass = classInst
+	await router.push('/questions/create')
+}
+
 export const useCreateQuestion = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 	const factory = ref(new QuestionFactory()) as Ref<QuestionFactory>
 	const router = useRouter()
+	if (questionClass) {
+		factory.value.type = QuestionType.classes
+		factory.value.classId = questionClass.id
+	}
 
 	const createQuestion = async () => {
 		await setError('')

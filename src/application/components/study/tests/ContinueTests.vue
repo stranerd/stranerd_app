@@ -38,7 +38,7 @@ export default defineComponent({
 		const { unCompletedTests, loading, error } = useTestList()
 
 		const tests = computed({
-			get: () => unCompletedTests.value.slice(0, props.sliced ? 6 : undefined),
+			get: () => unCompletedTests.value.slice(0, props.sliced ? 3 : undefined),
 			set: () => {
 			}
 		})

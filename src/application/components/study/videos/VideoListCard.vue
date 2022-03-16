@@ -1,12 +1,7 @@
 <template>
-	<div class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
-		<div class="w-full justify-between items-start flex gap-2">
-			<ion-text class="font-semibold truncate w-full">{{ video.title }}</ion-text>
-			<router-link :to="`/study/videos/${video.id}`">
-				<ion-icon :icon="arrowForwardCircleOutline" class="text-primary text-xl" />
-			</router-link>
-		</div>
-
+	<router-link :to="`/study/videos/${video.id}`"
+		class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
+		<ion-text class="font-semibold truncate w-full">{{ video.title }}</ion-text>
 		<div class="w-full flex items-center justify-between gap-2">
 			<Tag tag="Video">
 				<template v-slot="slotProps">
@@ -19,40 +14,30 @@
 			<div class="flex items-center text-gray gap-2">
 				<Avatar :id="video.userId" :name="video.userBio.fullName" :size="24" :src="video.userBio.photo" />
 				<Share :link="video.shareLink" :text="video.description" :title="video.title" cssClass="text-xl" />
-				<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" @click="openSaveModal(video)" />
+				<SaveToSet :entity="video" />
 			</div>
 		</div>
-	</div>
+	</router-link>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { VideoEntity } from '@modules/study'
-import { arrowForwardCircleOutline, bookmark, bookmarkOutline, playCircleOutline } from 'ionicons/icons'
-import { useUserSetList } from '@app/composable/users/users/sets'
-import { openSaveModal } from '@app/composable/study/menus'
+import { playCircleOutline } from 'ionicons/icons'
+import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'VideosListCard',
-	components: { Avatar },
+	components: { Avatar, SaveToSet },
 	props: {
 		video: {
 			type: VideoEntity,
 			required: true
 		}
 	},
-	setup (props) {
-		const { sets } = useUserSetList()
-		const isSaved = computed(() => sets.value.some((set) => set.allSaved.includes(props.video.id)))
-		return {
-			playCircleOutline,
-			arrowForwardCircleOutline,
-			bookmark,
-			bookmarkOutline,
-			isSaved,
-			openSaveModal
-		}
+	setup () {
+		return { playCircleOutline }
 	}
 })
 </script>

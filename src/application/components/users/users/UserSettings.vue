@@ -10,11 +10,10 @@
 			<ion-text class="text-xl text-main_dark font-bold mt-2">
 				Profile Picture
 			</ion-text>
-			<img :src="imageLink || DEFAULT_PROFILE_IMAGE"
+			<img :src="photoLink || DEFAULT_PROFILE_PHOTO"
 				alt=""
-				class="mt-3 w-24 h-24 rounded-full"
-			>
-			<FileInput accept="image/*" class="mt-4" @files="catchFiles">
+				class="mt-3 w-24 h-24 rounded-full">
+			<FileInput accept="image/*" class="mt-4" @files="catchPhoto">
 				<label class="bg-primary text-white py-3 px-6 rounded-xl font-bold">
 					Upload a profile picture
 				</label>
@@ -93,7 +92,7 @@ import { useProfileUpdate } from '@app/composable/auth/profile'
 import { useAuth } from '@app/composable/auth/auth'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { usePasswordUpdate } from '@app/composable/auth/passwords'
-import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
+import { DEFAULT_PROFILE_PHOTO } from '@utils/constants'
 
 export default defineComponent({
 	name: 'ProfileSettings',
@@ -117,21 +116,46 @@ export default defineComponent({
 			loading: passwordLoading,
 			updatePassword
 		} = usePasswordUpdate()
-		const imageLink = ref((profileFactory.value.avatar as any)?.link ?? '')
-		const catchFiles = useFileInputCallback(async ([file]) => {
-			imageLink.value = window.URL.createObjectURL(file.data)
-			profileFactory.value.avatar = file
+		const photoLink = ref((profileFactory.value.photo as any)?.link ?? '')
+		const coverPhotoLink = ref((profileFactory.value.coverPhoto as any)?.link ?? '')
+		const catchPhoto = useFileInputCallback(async ([file]) => {
+			photoLink.value = window.URL.createObjectURL(file.data)
+			profileFactory.value.photo = file
 			await updateProfile()
 		})
-		const removeImage = () => {
-			imageLink.value = ''
-			profileFactory.value.avatar = undefined
+		const catchCoverPhoto = useFileInputCallback(async ([file]) => {
+			coverPhotoLink.value = window.URL.createObjectURL(file.data)
+			profileFactory.value.coverPhoto = file
+			await updateProfile()
+		})
+		const removePhoto = () => {
+			photoLink.value = ''
+			profileFactory.value.photo = null
+		}
+		const removeCoverPhoto = () => {
+			coverPhotoLink.value = ''
+			profileFactory.value.coverPhoto = null
 		}
 
 		return {
-			user, DEFAULT_PROFILE_IMAGE,
-			profileFactory, profileError, profileLoading, updateProfile, image, catchFiles, imageLink, removeImage,
-			passwordFactory, passwordError, passwordLoading, updatePassword, hasPassword
+			user,
+			DEFAULT_PROFILE_PHOTO,
+			profileFactory,
+			profileError,
+			profileLoading,
+			updateProfile,
+			image,
+			catchPhoto,
+			photoLink,
+			removePhoto,
+			passwordFactory,
+			passwordError,
+			passwordLoading,
+			updatePassword,
+			hasPassword,
+			coverPhotoLink,
+			catchCoverPhoto,
+			removeCoverPhoto
 		}
 	}
 })

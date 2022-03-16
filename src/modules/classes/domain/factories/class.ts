@@ -4,19 +4,20 @@ import { ClassEntity } from '../entities/class'
 import { ClassToModel } from '../../data/models/class'
 
 type Content = Media | UploadedFile | null
-type Keys = { name: string, description: string, photo: Content | null }
+type Keys = { name: string, description: string, photo: Content, coverPhoto: Content }
 
 export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 	readonly rules = {
 		name: { required: true, rules: [isString, isLongerThanX(2)] },
 		description: { required: true, rules: [isString, isLongerThanX(2)] },
-		photo: { required: false, rules: [isFile] }
+		photo: { required: false, rules: [isFile] },
+		coverPhoto: { required: false, rules: [isFile] }
 	}
 
 	reserved = []
 
 	constructor () {
-		super({ name: '', description: '', photo: null })
+		super({ name: '', description: '', photo: null, coverPhoto: null })
 	}
 
 	get name () {
@@ -43,17 +44,27 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 		this.set('photo', value)
 	}
 
+	get coverPhoto () {
+		return this.values.coverPhoto
+	}
+
+	set coverPhoto (value: Content) {
+		this.set('coverPhoto', value)
+	}
+
 	loadEntity = (entity: ClassEntity) => {
 		this.name = entity.name
 		this.description = entity.description
 		this.photo = entity.photo
+		this.coverPhoto = entity.coverPhoto
 	}
 
 	toModel = async () => {
 		if (this.valid) {
 			if (this.photo instanceof UploadedFile) this.photo = await this.uploadFile('classes/photos', this.photo)
-			const { name, description, photo } = this.validValues
-			return { name, description, photo: photo as Media ?? null }
+			if (this.coverPhoto instanceof UploadedFile) this.coverPhoto = await this.uploadFile('classes/coverPhotos', this.coverPhoto)
+			const { name, description, photo, coverPhoto } = this.validValues
+			return { name, description, photo: photo as Media, coverPhoto: coverPhoto as Media }
 		} else {
 			throw new Error('Validation errors')
 		}

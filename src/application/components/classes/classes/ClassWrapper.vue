@@ -2,7 +2,7 @@
 	<Justified>
 		<div v-if="classInst" class="lg:w-8/12 w-full mx-auto lg:p-4">
 			<div class="rounded-xl bg-white">
-				<div class="w-full bg-orange h-16 md:h-24 lg:md:h-32 lg:rounded-t-xl" />
+				<CoverAvatar :src="classInst.coverPhoto" class="h-16 md:h-24 lg:h-32 lg:rounded-t-xl" />
 				<div class="px-4 md:px-6 border-bottom-line">
 					<div class="-mt-10">
 						<Avatar :name="classInst.name" :size="80" :src="classInst.photo" />
@@ -12,6 +12,8 @@
 							<IonText class="text-main_dark md:text-[20px] capitalize font-semibold">
 								{{ classInst.name }}
 							</IonText>
+							<IonIcon v-if="classInst.admins.includes(id)" :icon="pencilOutline"
+								@click="openClassEditModal(classInst, $router)" />
 							<Share :link="`/classes/${classInst.id}`" :text="classInst.description"
 								:title="`Share this class: ${classInst.name}`" />
 						</div>
@@ -31,6 +33,7 @@
 						<router-link :to="`/classes/${classInst.id}/announcements`">
 							<IonIcon :icon="megaphoneOutline" class="text-xl" />
 							<IonText class="hidden md:inline">Announcements</IonText>
+							<span v-if="!!unReadAnnouncements" class="dot bg-primary" />
 						</router-link>
 						<router-link :to="`/classes/${classInst.id}/groups`">
 							<IonIcon :icon="chatboxEllipsesOutline" class="text-xl" />
@@ -72,13 +75,15 @@ import {
 	informationCircleOutline,
 	libraryOutline,
 	megaphoneOutline,
+	pencilOutline,
 	peopleOutline
 } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
-import { useClass } from '@app/composable/classes/classes'
+import { openClassEditModal, useClass } from '@app/composable/classes/classes'
 import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
+import { useAnnouncementList } from '@app/composable/classes/announcements'
 
 export default defineComponent({
 	name: 'ClassWrapper',
@@ -88,20 +93,12 @@ export default defineComponent({
 		const route = useRoute()
 		const { classId } = route.params
 		const { loading, error, classInst, requestToJoinClass } = useClass(classId as string)
+		const { unReadAnnouncements } = useAnnouncementList(classId as string)
 		return {
-			chatboxEllipsesOutline,
-			informationCircleOutline,
-			helpCircleOutline,
-			libraryOutline,
-			megaphoneOutline,
-			peopleOutline,
-			loading,
-			error,
-			classInst,
-			formatTime,
-			pluralize,
-			id,
-			requestToJoinClass
+			chatboxEllipsesOutline, informationCircleOutline, helpCircleOutline, libraryOutline,
+			megaphoneOutline, pencilOutline, peopleOutline,
+			loading, error, classInst, requestToJoinClass, unReadAnnouncements,
+			formatTime, pluralize, id, openClassEditModal
 		}
 	}
 })

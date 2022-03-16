@@ -20,7 +20,6 @@ export const useProfileUpdate = () => {
 				await setLoading(true)
 				await UpdateProfile.call(factory.value)
 				await setMessage('Profile updated successfully!')
-				factory.value.reset()
 			} catch (error) {
 				await setError(error)
 			}

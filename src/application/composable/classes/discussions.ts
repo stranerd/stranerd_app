@@ -1,4 +1,4 @@
-import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import {
 	AddDiscussion,
 	DiscussionEntity,
@@ -10,12 +10,14 @@ import {
 } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { getRandomValue } from '@utils/commons'
+import { storage } from '@utils/storage'
 
 const groupGlobal = {} as Record<string, {
 	discussions: Ref<DiscussionEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
 	listener: ReturnType<typeof useListener>
+	readTime: Ref<number>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 const classGlobal = {} as Record<string, {
@@ -42,6 +44,8 @@ const orderDiscussions = (discussions: DiscussionEntity[]) => {
 	})
 }
 
+const getReadStateKey = (groupId: string) => `classes-groups-${groupId}-discussions`
+
 export const useGroupDiscussions = (groupId: string) => {
 	if (groupGlobal[groupId] === undefined) {
 		const listener = useListener(async () => {
@@ -63,6 +67,7 @@ export const useGroupDiscussions = (groupId: string) => {
 			discussions: ref([]),
 			fetched: ref(false),
 			hasMore: ref(false),
+			readTime: ref(0),
 			listener,
 			...useErrorHandler(),
 			...useLoadingHandler()
@@ -95,8 +100,13 @@ export const useGroupDiscussions = (groupId: string) => {
 		await groupGlobal[groupId].setLoading(false)
 	}
 
+	watch(() => groupGlobal[groupId].readTime.value, async () => await storage.set(getReadStateKey(groupId), groupGlobal[groupId].readTime.value))
+	const unReadDiscussions = computed(() => groupGlobal[groupId].discussions.value.filter((d) => d.createdAt > groupGlobal[groupId].readTime.value).length)
+
 	onMounted(async () => {
 		if (!groupGlobal[groupId].fetched.value && !groupGlobal[groupId].loading.value) await fetchDiscussions()
+		const lastRead = await storage.get(getReadStateKey(groupId))
+		if (lastRead) groupGlobal[groupId].readTime.value = lastRead
 		await groupGlobal[groupId].listener.startListener()
 	})
 	onUnmounted(async () => {
@@ -106,8 +116,16 @@ export const useGroupDiscussions = (groupId: string) => {
 	return {
 		...groupGlobal[groupId],
 		discussions: computed(() => orderDiscussions(groupGlobal[groupId].discussions.value)),
-		fetchOlderDiscussions: fetchDiscussions
+		fetchOlderDiscussions: fetchDiscussions, unReadDiscussions
 	}
+}
+
+export const saveDiscussionsReadState = async (discussion: DiscussionEntity) => {
+	const key = getReadStateKey(discussion.groupId)
+	const lastRead = await storage.get(key)
+	if (lastRead >= discussion.createdAt) return
+	await storage.set(key, discussion.createdAt)
+	if (groupGlobal[discussion.groupId]) groupGlobal[discussion.groupId].readTime.value = discussion.createdAt
 }
 
 export const useClassDiscussions = (classId: string) => {

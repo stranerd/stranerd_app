@@ -5,7 +5,7 @@
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center text-sm">
 			<div class="flex items-center">
-				<avatar :id="question.userId" :name="question.userBio.fullName" :size="28" :src="question.avatar"
+				<avatar :id="question.userId" :name="question.userBio.fullName" :size="28" :src="question.userBio.photo"
 					class="mr-2 " />
 				<span class="font-bold text-main_dark hidden lg:flex items-center gap-1">
 					<span>{{ question.userBio.fullName }}</span>

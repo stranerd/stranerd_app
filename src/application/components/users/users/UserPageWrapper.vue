@@ -5,14 +5,14 @@
 			<PageLoading v-if="verifiedLoading" />
 			<template v-if="user">
 				<div class="flex flex-col w-full rounded-xl border-bottom-line">
-					<div class="bg-orange lg:rounded-t-xl h-11 md:h-32" />
+					<CoverAvatar :src="user.bio.coverPhoto" class="lg:rounded-t-xl h-11 md:h-32" />
 					<div class="bg-white rounded-b-xl px-4 flex flex-col">
-						<Avatar :id="user.id" :name="user.bio.fullName" :size="72" :src="user.avatar"
+						<Avatar :id="user.id" :name="user.bio.fullName" :size="72" :src="user.bio.photo"
 							class="md:hidden -mt-9" />
-						<Avatar :id="user.id" :name="user.bio.fullName" :size="96" :src="user.avatar"
+						<Avatar :id="user.id" :name="user.bio.fullName" :size="96" :src="user.bio.photo"
 							class="hidden md:inline -mt-12" />
 						<h2 class="md:text-xl text-base font-bold text-main_dark flex gap-1 items-center mt-4 mb-1">
-							<span>{{ user.fullName }}</span>
+							<span>{{ user.bio.fullName }}</span>
 							<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="white" />
 						</h2>
 						<div class="flex items-start mb-1 gap-2">
@@ -73,10 +73,11 @@ import { useAuth } from '@app/composable/auth/auth'
 import { formatTime } from '@utils/dates'
 import { checkmarkCircleOutline } from 'ionicons/icons'
 import { useVerifiedRoles } from '@app/composable/users/roles/verified'
+import CoverAvatar from '@app/components/core/CoverAvatar.vue'
 
 export default defineComponent({
 	name: 'UserPageWrapper',
-	components: { PageLoading, Justified },
+	components: { CoverAvatar, PageLoading, Justified },
 	setup () {
 		const { id, isAdmin } = useAuth()
 		const { userId } = useRoute().params

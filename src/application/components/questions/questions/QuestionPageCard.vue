@@ -16,7 +16,7 @@
 
 			<div class="flex items-center justify-between">
 				<div class="flex items-center gap-2">
-					<avatar :id="question.userId" :size="24" :src="question.avatar" />
+					<avatar :id="question.userId" :size="24" :src="question.userBio.photo" />
 					<span class="font-semibold text-main_dark flex gap-1 items-center">
 						<span>{{ question.userBio.fullName }}</span>
 						<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircle" color="primary" />

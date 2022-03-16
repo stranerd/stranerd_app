@@ -37,14 +37,6 @@ export class ChatMetaEntity extends BaseEntity {
 		this.updatedAt = updatedAt
 	}
 
-	get avatar () {
-		return this.userBio.photo
-	}
-
-	get fullName () {
-		return this.userBio.fullName
-	}
-
 	get isUserVerified () {
 		return this.userRoles[appName].isVerified
 	}

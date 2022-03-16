@@ -26,7 +26,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { loading, error, testPreps } = useTestPrepList()
-		const filtered = computed(() => groupedByInstitution(testPreps.value).value.slice(0, props.sliced ? 6 : undefined))
+		const filtered = computed(() => groupedByInstitution(testPreps.value).value.slice(0, props.sliced ? 3 : undefined))
 		return { filtered, loading, error }
 	}
 })

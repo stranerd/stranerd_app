@@ -11,10 +11,13 @@
 					{{ formatTime(group.last.createdAt) }}
 				</IonText>
 			</div>
-			<IonText v-if="group.last" class="text-xs text-gray">
-				<span class="font-bold">{{ group.last.userId === id ? 'You' : group.last.userBio.firstName }}</span>:
-				{{ group.last.media ? 'Shared a file' : group.last.content }}
-			</IonText>
+			<div v-if="group.last" class="flex gap-2 items-center">
+				<IonText class="text-xs text-gray w-full truncate">
+					<span class="font-bold">{{ group.last.userId === id ? 'You' : group.last.userBio.firstName }}</span>:
+					{{ group.last.media ? 'Shared a file' : group.last.content }}
+				</IonText>
+				<span v-if="!!unReadDiscussions" class="dot bg-primary" />
+			</div>
 		</div>
 	</router-link>
 </template>
@@ -25,6 +28,7 @@ import { ClassEntity, GroupEntity } from '@modules/classes'
 import { chatboxEllipsesOutline } from 'ionicons/icons'
 import { formatTime } from '@utils/dates'
 import { useAuth } from '@app/composable/auth/auth'
+import { useGroupDiscussions } from '@app/composable/classes/discussions'
 
 export default defineComponent({
 	name: 'GroupsListCard',
@@ -38,9 +42,10 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup () {
+	setup (props) {
 		const { id } = useAuth()
-		return { chatboxEllipsesOutline, formatTime, id }
+		const { unReadDiscussions } = useGroupDiscussions(props.group.id)
+		return { chatboxEllipsesOutline, formatTime, id, unReadDiscussions }
 	}
 })
 </script>

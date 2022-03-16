@@ -8,7 +8,19 @@
 				</ion-text>
 			</div>
 			<div class="flex gap-2 w-full md:w-auto">
-				<ion-input v-model="search" class="flex-grow md:w-auto bg-new_gray text-gray" placeholder="Search" />
+				<ion-input v-model="search" class="flex-grow md:w-auto bg-new_gray text-gray min-w-[100px]"
+					placeholder="Search" />
+				<ion-select v-model="group"
+					class="bg-new_gray !text-gray flex-grow md:w-auto font-bold select-primary"
+					interface="action-sheet"
+					placeholder="Groups">
+					<ion-select-option class="capitalize" value="">
+						All
+					</ion-select-option>
+					<ion-select-option v-for="group in groups" :key="group.hash" :value="group.id" class="capitalize">
+						{{ group.name }}
+					</ion-select-option>
+				</ion-select>
 				<ion-select v-model="filter"
 					class="bg-new_gray !text-gray flex-grow md:w-auto font-bold select-primary"
 					interface="action-sheet"
@@ -32,6 +44,7 @@ import ClassDiscussionCard from '@app/components/classes/classes/ClassDiscussion
 import { useClassDiscussions } from '@app/composable/classes/discussions'
 import { pluralize } from '@utils/commons'
 import { IonSelect, IonSelectOption } from '@ionic/vue'
+import { useGroupList } from '@app/composable/classes/groups'
 
 export default defineComponent({
 	name: 'ClassLibrary',
@@ -44,19 +57,22 @@ export default defineComponent({
 	components: { ClassDiscussionCard, IonSelect, IonSelectOption },
 	setup (props) {
 		const { loading, error, discussions } = useClassDiscussions(props.classInst.id)
+		const { groups } = useGroupList(props.classInst.id)
 		const filters = ['All', 'Images', 'Videos', 'Documents']
 		const filter = ref(filters[0])
+		const group = ref('')
 		const search = ref('')
 		const filteredDiscussions = computed(() => discussions.value.filter((d) => {
-			if (!d.search(search.value)) return false
-			if (filter.value === filters[1]) return d.isImage
-			if (filter.value === filters[2]) return d.isVideo
-			if (filter.value === filters[3]) return d.isDocument
-			return true
+			const matches = [d.search(search.value)] as boolean[]
+			if (group.value) matches.push(d.groupId === group.value)
+			if (filter.value === filters[1]) matches.push(d.isImage)
+			if (filter.value === filters[2]) matches.push(d.isVideo)
+			if (filter.value === filters[3]) matches.push(d.isDocument)
+			return matches.every((m) => m)
 		}))
 		return {
 			loading, error, discussions: filteredDiscussions, pluralize,
-			search, filter, filters
+			search, filter, filters, group, groups
 		}
 	}
 })

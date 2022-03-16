@@ -64,7 +64,7 @@ export class DiscussionEntity extends BaseEntity {
 		const ranges = [{ val: -1, key: 'b' }, { val: 1024, key: 'kb' },
 			{ val: 1024 * 1024, key: 'mb' }, { val: 1024 * 1024 * 1024, key: 'gb' }]
 		const range = ranges.find(({ val }) => size >= val)
-		return `${formatNumber(size / (range?.val ?? -1))} ${range?.key ?? 'b'}`
+		return `${formatNumber(size / (range?.val ?? -1))}${range?.key ?? 'b'}`
 	}
 
 	search (search: string) {

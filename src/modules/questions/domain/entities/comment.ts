@@ -33,14 +33,6 @@ export class CommentEntity extends BaseEntity {
 		this.updatedAt = updatedAt
 	}
 
-	get userName () {
-		return this.userBio.fullName
-	}
-
-	get avatar () {
-		return this.userBio.photo
-	}
-
 	get isUserVerified () {
 		return this.userRoles[appName].isVerified
 	}

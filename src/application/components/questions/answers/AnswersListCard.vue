@@ -1,7 +1,8 @@
 <template>
 	<div class="bg-white rounded-xl flex flex-col card-padding">
 		<div class="flex items-center">
-			<Avatar :id="answer.userId" :name="answer.userBio.fullName" :size="24" :src="answer.avatar" class="mr-2" />
+			<Avatar :id="answer.userId" :name="answer.userBio.fullName" :size="24" :src="answer.userBio.photo"
+				class="mr-2" />
 			<span class="font-semibold text-main_dark flex items-center gap-1">
 				<span>{{ answer.userBio.fullName }}</span>
 				<IonIcon v-if="answer.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
@@ -20,7 +21,7 @@
 
 		<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" />
 
-		<div class="flex items-center">
+		<div class="flex items-center gap-2 text-icon_inactive">
 			<div
 				:class="[answer.votes.find((v) => v.vote === 1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
 				class="flex flex-row items-center mr-2">
@@ -35,6 +36,11 @@
 					@click="() => voteAnswer(false)" />
 				<span class="ml-1 ">{{ formatNumber(answer.downVotes) }}</span>
 			</div>
+			<div class="flex items-center">
+				<IonIcon :icon="chatbubbleOutline" class="text-[22px] cursor-pointer"
+					@click="showComments = !showComments" />
+				<span class="ml-1">{{ formatNumber(comments.length) }}</span>
+			</div>
 			<span
 				v-if="isLoggedIn && question && !question.isAnswered && !answer.best && question.userId === id"
 				class="items-center flex cursor-pointer" @click.prevent="markBestAnswer(question)">
@@ -42,10 +48,6 @@
 				<IonIcon :icon="starOutline" class="text-[20px]" />
 			</span>
 			<IonIcon v-if="answer.best" :icon="starOutline" class="text-[20px] text-yellow_star" />
-			<div class="flex items-center text-icon_inactive">
-				<IonIcon :icon="chatbubbleOutline" class="text-[22px] cursor-pointer"
-					@click="showComments = !showComments" />
-			</div>
 		</div>
 
 		<form class="flex gap-2 pr-4 items-center bg-new_gray rounded-lg"
@@ -78,7 +80,7 @@ import {
 } from 'ionicons/icons'
 import PhotoList from '@app/components/core/media/PhotoList.vue'
 import { useAnswer } from '@app/composable/questions/answers'
-import { useCreateAnswerComments } from '@app/composable/questions/answer-comments'
+import { useAnswerCommentList, useCreateAnswerComments } from '@app/composable/questions/answer-comments'
 import { useAuth } from '@app/composable/auth/auth'
 import AnswerCommentsList from '@app/components/questions/comments/AnswerCommentsList.vue'
 import DisplayHtml from '@app/components/core/text/DisplayHtml.vue'
@@ -112,6 +114,7 @@ export default defineComponent({
 			}
 		})
 		const { error, loading, markBestAnswer, voteAnswer } = useAnswer(props.answer)
+		const { comments } = useAnswerCommentList(props.answer.id)
 		const {
 			loading: commentLoading,
 			error: commentError,
@@ -142,7 +145,8 @@ export default defineComponent({
 			showExplanation,
 			showComments,
 			showEditButton,
-			showDeleteButton
+			showDeleteButton,
+			comments
 		}
 	}
 })

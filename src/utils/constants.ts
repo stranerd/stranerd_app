@@ -7,7 +7,8 @@ export const REDIRECT_SESSION_NAME = 'redirect-to'
 export const PAGINATION_LIMIT = 10
 export const CHAT_PAGINATION_LIMIT = 20
 
-export const DEFAULT_PROFILE_IMAGE = '/images/avatars/user_profile.svg'
+export const DEFAULT_PROFILE_PHOTO = '/images/avatars/user_profile.svg'
+export const DEFAULT_PROFILE_BACKDROP = '/images/avatars/user_backdrop.svg'
 
 export const isWeb = Capacitor.getPlatform() === 'web'
 export const isIos = Capacitor.getPlatform() === 'ios'
