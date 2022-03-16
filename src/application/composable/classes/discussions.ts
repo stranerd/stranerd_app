@@ -11,6 +11,7 @@ import {
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { getRandomValue } from '@utils/commons'
 import { storage } from '@utils/storage'
+import { getGroupReadStateKey, saveClassGroupsReadTime } from '@app/composable/classes/groups'
 
 const groupGlobal = {} as Record<string, {
 	discussions: Ref<DiscussionEntity[]>
@@ -123,9 +124,17 @@ export const useGroupDiscussions = (groupId: string) => {
 export const saveDiscussionsReadState = async (discussion: DiscussionEntity) => {
 	const key = getReadStateKey(discussion.groupId)
 	const lastRead = await storage.get(key)
-	if (lastRead >= discussion.createdAt) return
-	await storage.set(key, discussion.createdAt)
-	if (groupGlobal[discussion.groupId]) groupGlobal[discussion.groupId].readTime.value = discussion.createdAt
+	if (lastRead < discussion.createdAt) {
+		await storage.set(key, discussion.createdAt)
+		if (groupGlobal[discussion.groupId]) groupGlobal[discussion.groupId].readTime.value = discussion.createdAt
+	}
+
+	const groupKey = getGroupReadStateKey(discussion.classId)
+	const groupLastRead = await storage.get(groupKey)
+	if (groupLastRead < discussion.createdAt) {
+		await storage.set(groupKey, discussion.createdAt)
+		saveClassGroupsReadTime(discussion.classId, discussion.createdAt)
+	}
 }
 
 export const useClassDiscussions = (classId: string) => {

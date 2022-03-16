@@ -1,11 +1,19 @@
 <template>
 	<Justified>
 		<div v-if="classInst" class="lg:w-8/12 w-full mx-auto lg:p-4">
-			<div class="rounded-xl bg-white">
+			<div class="rounded-xl bg-white relative">
 				<CoverAvatar :src="classInst.coverPhoto" class="h-16 md:h-24 lg:h-32 lg:rounded-t-xl" />
 				<div class="px-4 md:px-6 border-bottom-line">
-					<div class="-mt-10">
-						<Avatar :name="classInst.name" :size="80" :src="classInst.photo" />
+					<div class="flex justify-between gap-2">
+						<Avatar :name="classInst.name" :size="80" :src="classInst.photo"
+							class="relative top-[-40px] -mb-10" />
+						<div class="flex gap-1 mt-2">
+							<Share :link="`/classes/${classInst.id}`" :text="classInst.description"
+								:title="`Share this class: ${classInst.name}`"
+								class="py-1 px-2 border border-primary text-primary rounded-full text-sm flex justify-center items-center">
+								Copy class link
+							</Share>
+						</div>
 					</div>
 					<div class="pt-2 pb-4 flex flex-col gap-1">
 						<div class="flex gap-1 items-center">
@@ -14,8 +22,6 @@
 							</IonText>
 							<IonIcon v-if="classInst.admins.includes(id)" :icon="pencilOutline"
 								@click="openClassEditModal(classInst, $router)" />
-							<Share :link="`/classes/${classInst.id}`" :text="classInst.description"
-								:title="`Share this class: ${classInst.name}`" />
 						</div>
 						<IonText class="text-sm">{{ classInst.description }}</IonText>
 						<IonText class="text-xs text-gray">Created {{ formatTime(classInst.createdAt) }}</IonText>
@@ -38,6 +44,7 @@
 						<router-link :to="`/classes/${classInst.id}/groups`">
 							<IonIcon :icon="chatboxEllipsesOutline" class="text-xl" />
 							<IonText class="hidden md:inline">Discussions</IonText>
+							<span v-if="!!unReadGroups" class="dot bg-primary" />
 						</router-link>
 						<router-link :to="`/classes/${classInst.id}/questions`">
 							<IonIcon :icon="helpCircleOutline" class="text-xl" />
@@ -84,6 +91,7 @@ import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useAnnouncementList } from '@app/composable/classes/announcements'
+import { useGroupList } from '@app/composable/classes/groups'
 
 export default defineComponent({
 	name: 'ClassWrapper',
@@ -94,10 +102,11 @@ export default defineComponent({
 		const { classId } = route.params
 		const { loading, error, classInst, requestToJoinClass } = useClass(classId as string)
 		const { unReadAnnouncements } = useAnnouncementList(classId as string)
+		const { unReadGroups } = useGroupList(classId as string)
 		return {
 			chatboxEllipsesOutline, informationCircleOutline, helpCircleOutline, libraryOutline,
 			megaphoneOutline, pencilOutline, peopleOutline,
-			loading, error, classInst, requestToJoinClass, unReadAnnouncements,
+			loading, error, classInst, requestToJoinClass, unReadAnnouncements, unReadGroups,
 			formatTime, pluralize, id, openClassEditModal
 		}
 	}

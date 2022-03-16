@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref, Ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import {
 	AddGroup,
 	ClassEntity,
@@ -13,12 +13,20 @@ import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } fr
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { useClassModal } from '@app/composable/core/modals'
+import { storage } from '@utils/storage'
 
 const global = {} as Record<string, {
 	groups: Ref<GroupEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
+	readTime: Ref<number>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+
+export const getGroupReadStateKey = (classId: string) => `classes-${classId}-groups`
+
+export const saveClassGroupsReadTime = (classId: string, time: number) => {
+	if (global[classId]) global[classId].readTime.value = time
+}
 
 export const useGroupList = (classId: string) => {
 	if (global[classId] === undefined) {
@@ -42,11 +50,15 @@ export const useGroupList = (classId: string) => {
 		global[classId] = {
 			groups: ref([]),
 			fetched: ref(false),
+			readTime: ref(0),
 			listener,
 			...useErrorHandler(),
 			...useLoadingHandler()
 		}
 	}
+
+	watch(() => global[classId].readTime.value, async () => await storage.set(getGroupReadStateKey(classId), global[classId].readTime.value))
+	const unReadGroups = computed(() => global[classId].groups.value.filter((a) => (a.last?.createdAt ?? 0) > global[classId].readTime.value).length)
 
 	const fetchGroups = async () => {
 		await global[classId].setError('')
@@ -62,6 +74,8 @@ export const useGroupList = (classId: string) => {
 
 	onMounted(async () => {
 		if (!global[classId].fetched.value && !global[classId].loading.value) await fetchGroups()
+		const lastRead = await storage.get(getGroupReadStateKey(classId))
+		if (lastRead) global[classId].readTime.value = lastRead
 		await global[classId].listener.startListener()
 	})
 	onUnmounted(async () => {
@@ -71,7 +85,8 @@ export const useGroupList = (classId: string) => {
 	return {
 		error: global[classId].error,
 		loading: global[classId].loading,
-		groups: global[classId].groups
+		groups: global[classId].groups,
+		unReadGroups
 	}
 }
 
