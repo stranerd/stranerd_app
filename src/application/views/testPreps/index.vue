@@ -1,10 +1,13 @@
 <template>
 	<DashboardLayout>
-		<IonSegment v-model="stateMode"
-			class="w-full bg-new_gray text-gray border border-new_gray border-xl md:border-white mt-4">
-			<IonSegmentButton class="w-full" value="testPrep">My test preps</IonSegmentButton>
-			<IonSegmentButton class="w-full" value="explore">Explore</IonSegmentButton>
-		</IonSegment>
+		<div class="p-4 md:p-0 md:mt-4">
+			<IonSegment v-model="stateMode"
+				class="w-full bg-new_gray text-gray border border-new_gray border-xl md:border-white ">
+				<IonSegmentButton class="w-full" value="testPrep">My test preps</IonSegmentButton>
+				<IonSegmentButton class="w-full" value="explore">Explore</IonSegmentButton>
+			</IonSegment>
+		</div>
+	
 		<div class="md:mt-4" v-if="stateMode == 'testPrep'">
 			<ContinueTests/>
 		</div>
@@ -23,7 +26,7 @@ import ExploreTestPrepsList from '@root/application/components/study/testPreps/E
 
 export default defineComponent({
 	name: 'TestPreps',
-	displayName: 'Questions',
+	displayName: 'Preps',
 	components: {  DashboardLayout, ContinueTests, IonSegment, IonSegmentButton, ExploreTestPrepsList },
 	setup(){ 
 		const stateMode = ref('testPrep')
