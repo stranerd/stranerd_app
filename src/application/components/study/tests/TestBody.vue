@@ -1,21 +1,21 @@
 <template>
-	<div class="flex flex-col lg:w-8/12 w-full mx-auto bg-white lg:my-8 p-4 pb-12 md:p-8 md:pb-16 lg:pb-20">
-		<ion-segment v-model="tab" class="md:w-96 mb-8 md:mb-12 mx-auto" mode="ios">
+	<div class="flex flex-col lg:w-8/12 w-full mx-auto  lg:my-8 p-4 pb-12 md:p-8 md:pb-16 lg:pb-20">
+		<!-- <ion-segment v-model="tab" class="md:w-96 mb-8 md:mb-12 mx-auto" mode="ios">
 			<ion-segment-button value="list">
 				<ion-label>All questions</ion-label>
 			</ion-segment-button>
 			<ion-segment-button value="single">
 				<ion-label>Single question</ion-label>
 			</ion-segment-button>
-		</ion-segment>
+		</ion-segment> -->
 
 		<div v-if="tab === 'list'" class="flex flex-col gap-8">
 			<TestQuestion v-for="(question, index) in questions" :key="question.hash" :answer="updateAnswer"
-				:question="question" :questionIndex="index"
+				:question="question" :questionIndex="index" class="border-bottom-line pb-6 "
 				:test="test" />
 		</div>
 
-		<template v-if="tab === 'single'">
+		<!-- <template v-if="tab === 'single'">
 			<TestQuestion :answer="updateAnswer" :question="questions[questionIndex]" :questionIndex="questionIndex"
 				:test="test" />
 			<div class="mt-6 mb-10 flex justify-between items-center gap-4">
@@ -32,7 +32,7 @@
 				<IonIcon :color="canGoForward ? 'grey' : 'light'" :icon="chevronForwardCircleOutline" size="large"
 					@click="forward" />
 			</div>
-		</template>
+		</template> -->
 
 		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white z-[10]">
 			<div class="lg:w-8/12 w-full px-4 mx-auto flex items-center justify-between">
@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { IonSegment, IonSegmentButton, IonSelect, IonSelectOption } from '@ionic/vue'
+// import { IonSegment, IonSegmentButton, IonSelect, IonSelectOption } from '@ionic/vue'
 import { useTestDetails } from '@app/composable/study/tests'
 import { chevronBackCircleOutline, chevronForwardCircleOutline } from 'ionicons/icons'
 import { computed, defineComponent, onMounted, onUnmounted } from 'vue'
@@ -81,7 +81,9 @@ import { Alert } from '@utils/dialog'
 
 export default defineComponent({
 	name: 'TestBody',
-	components: { IonSegment, IonSegmentButton, TestQuestion, IonSelect, IonSelectOption },
+	components: { TestQuestion,
+		// IonSegment, IonSegmentButton,  IonSelect, IonSelectOption 
+	},
 	props: {
 		test: {
 			type: TestEntity,

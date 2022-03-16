@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col items-start w-full">
+	<div class="flex flex-col items-start w-full bg-white p-4 rounded-xl">
 		<PageLoading v-if="loading" />
 
 		<div class="flex item-center justify-between mb-2 w-full">
@@ -18,9 +18,9 @@
 			<PhotoList v-if="question.questionMedia.length" :photos="question.questionMedia" />
 		</div>
 
-		<div v-if="question.isObjective" class="answers flex flex-col w-full gap-4">
+		<div v-if="question.isObjective" class="answers flex flex-col w-full gap-2">
 			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
-				class="w-full hover:bg-light_gray"
+				class="w-full hover:bg-new_gray p-2 rounded-lg"
 				@click="answer(question.id, optionIndex)">
 				<div class="flex gap-2">
 					<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
