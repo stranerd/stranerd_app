@@ -1,9 +1,12 @@
 <template>
 	<Justified>
-		<div class="bg-primary w-full min-h-[130px] flex flex-col justify-center items-center pt-0 pb-1">
-			<div class="flex items-center">
-				<ion-text class="text-white font-semibold text-center text-xl">
-					{{ test?.name ?? '' }}
+		<div class="blueTop !mb-0">
+			<div class="flex items-center  md:justify-between justify-center  w-full lg:w-8/12 px-8 py-6 mx-auto text-xl border-bottom-line ">
+				<ion-text class="font-bold hidden md:block">
+					Result
+				</ion-text>
+				<ion-text class="text-main_dark  text-center ">
+					{{ title }}
 				</ion-text>
 			</div>
 		</div>
@@ -15,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import { useTest } from '@app/composable/study/tests'
 import { useRoute } from 'vue-router'
@@ -28,8 +31,11 @@ export default defineComponent({
 	middlewares: ['isAuthenticated'],
 	setup () {
 		const { testId } = useRoute().params
+		const title = computed(()=>{
+			return test.value?.name.split(' ').join('/') ?? ''
+		})
 		const { error, loading, test } = useTest(testId as string)
-		return { error, loading, test }
+		return { error, loading, test , title}
 	}
 })
 </script>

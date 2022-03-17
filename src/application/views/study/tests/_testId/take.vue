@@ -1,7 +1,7 @@
 <template>
 	<Justified :hideBottom="true">
 		<div class="blueTop !mb-0">
-			<div class="flex items-center  md:justify-between justify-center h-20 w-full lg:w-8/12 px-8 mx-auto text-xl border-bottom-line ">
+			<div class="flex items-center  md:justify-between justify-center  w-full lg:w-8/12 px-8 py-6 mx-auto text-xl border-bottom-line ">
 				<ion-text class="font-bold hidden md:block">
 					{{test?.isTimed? 'Test' : 'Study'}}
 				</ion-text>

@@ -7,6 +7,7 @@
 						{ name: 'Home', path: '/dashboard', icon: home, iconOutline:homeOutline },
 						{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
 						{ name: 'Library', path: '/study', icon: library, iconOutline:libraryOutline },
+						{ name: 'TestPreps', path: '/testPreps', icon: receipt, iconOutline:receiptOutline },
 						...(isProd ? [] : [{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }])
 					]" :key="path"
 					:to="path"
@@ -32,7 +33,9 @@ import {
 	people,
 	peopleOutline,
 	search,
-	searchOutline
+	searchOutline,
+	receipt,
+	receiptOutline
 } from 'ionicons/icons'
 import { isProd } from '@utils/environment'
 
@@ -50,7 +53,8 @@ export default defineComponent({
 			helpCircle,
 			home,
 			people,
-			search
+			search,	receipt,
+			receiptOutline
 		}
 	}
 })

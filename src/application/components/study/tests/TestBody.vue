@@ -33,8 +33,9 @@
 					@click="forward" />
 			</div>
 		</template> -->
-
+	
 		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white z-[10]">
+			<div :style="`width:${percentage}%`" class="bg-primary h-1  mt-8 transition-all absolute inset-x-0 lg:bottom-[6.3rem] bottom-[4.625rem]" />
 			<div class="lg:w-8/12 w-full px-4 mx-auto flex items-center justify-between">
 				<div>
 					<ion-text v-if="test.isOBJ" class="text-main_dark">
@@ -98,6 +99,8 @@ export default defineComponent({
 		const back = () => canGoBack.value && questionIndex.value--
 		const forward = () => canGoForward.value && questionIndex.value++
 		const { diffInSec, startTimer: startCountdown, stopTimer: stopCountdown } = useCountdown(props.test.endedAt, {})
+		const percentage = computed(() => Math.floor(((props.test.answered + 1) / questions.value.length) * 100))
+
 		onMounted(startCountdown)
 		onUnmounted(stopCountdown)
 		const countDown = computed({
@@ -116,7 +119,7 @@ export default defineComponent({
 			else await router.push('/dashboard')
 		}
 		return {
-			error, loading, questions, openSubmitTest, updateAnswer,
+			error, loading, questions, openSubmitTest, updateAnswer,percentage,
 			countDown, tab, questionIndex, canGoBack, canGoForward, back, forward,
 			chevronForwardCircleOutline, chevronBackCircleOutline, formatNumber
 		}
