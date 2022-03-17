@@ -1,9 +1,24 @@
 <template>
-	<form class="flex flex-col gap-4 text-center justify-center items-center" @submit.prevent="submit">
-		<div class="flex justify-center items-center">
-			<FileInput accept="image/*" @files="catchPhoto">
-				<img :src="photoLink || DEFAULT_PROFILE_PHOTO" alt="" class="w-16 h-16 rounded-full">
-			</FileInput>
+	<form class="flex flex-col gap-4 text-center justify-center" @submit.prevent="submit">
+		<div class="flex flex-col items-start">
+			<div class="w-full flex items-center relative">
+				<img :src="coverPhotoLink || DEFAULT_PROFILE_BACKDROP" alt=""
+					class="h-16 md:h-20 w-full" style="object-fit: cover;">
+				<FileInput accept="image/*"
+					class="rounded-full absolute right-0 mr-4 h-8 w-8 bg-gray text-white flex items-center justify-center"
+					@files="catchCoverPhoto">
+					<IonIcon :icon="pencilOutline" />
+				</FileInput>
+			</div>
+			<span
+				class="px-4 relative top-[-32px] md:top-[-40px] inline-flex items-center justify-center -mb-8 md:-mb-10">
+				<img :src="photoLink || DEFAULT_PROFILE_PHOTO" alt="" class="w-16 h-16 md:h-20 md:w-20 rounded-full">
+				<FileInput accept="image/*"
+					class="rounded-full absolute h-6 w-6 bg-gray text-white flex items-center justify-center"
+					@files="catchPhoto">
+					<IonIcon :icon="pencilOutline" />
+				</FileInput>
+			</span>
 		</div>
 		<ion-input v-model="factory.name"
 			class="w-full text-left bg-new_gray w-full rounded-md"
@@ -29,7 +44,7 @@ import { defineComponent, ref } from 'vue'
 import { ClassFactory } from '@modules/classes'
 import { IonRippleEffect } from '@ionic/vue'
 import { DEFAULT_PROFILE_BACKDROP, DEFAULT_PROFILE_PHOTO } from '@utils/constants'
-import { addOutline } from 'ionicons/icons'
+import { addOutline, pencilOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 
 export default defineComponent({
@@ -68,7 +83,7 @@ export default defineComponent({
 			photoLink,
 			DEFAULT_PROFILE_PHOTO,
 			DEFAULT_PROFILE_BACKDROP,
-			addOutline,
+			addOutline, pencilOutline,
 			catchPhoto,
 			coverPhotoLink,
 			catchCoverPhoto
