@@ -14,7 +14,7 @@
 		</div>
 		<EmptyState v-if="!loading && !error && classes.length === 0" info="You are not a member of any class!" />
 		<ClassListCard v-for="classInst in classes" :key="classInst" :classInst="classInst" />
-		<PageLoading v-if="loading" />
+		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
 	</div>
 </template>
 
@@ -22,10 +22,11 @@
 import { defineComponent } from 'vue'
 import ClassListCard from '@app/components/classes/classes/ClassListCard.vue'
 import { useClassList } from '@app/composable/classes/classes'
+import { IonSkeletonText } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ClassesList',
-	components: { ClassListCard },
+	components: { ClassListCard, IonSkeletonText },
 	setup () {
 		const { myClasses: classes, error, loading } = useClassList()
 		return { classes, error, loading }

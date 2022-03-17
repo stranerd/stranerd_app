@@ -19,6 +19,7 @@
 			info="You have no recent questions! Start asking questions to help with homework and studying."
 			route="/questions"
 		/>
+		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
 		<div class="showcase">
 			<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
 		</div>
@@ -30,10 +31,11 @@ import { computed, defineComponent } from 'vue'
 import QuestionListCard from '@app/components/questions/questions/RecentQuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '@app/components/core/EmptyState.vue'
+import { IonSkeletonText } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'RecentQuestions',
-	components: { QuestionListCard, EmptyState },
+	components: { QuestionListCard, EmptyState, IonSkeletonText },
 	setup () {
 		const { questions: allQuestions, loading, error } = useQuestionList()
 		const questions = computed({

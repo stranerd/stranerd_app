@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
 		<EmptyState v-if="!loading && !error && filtered.length === 0" info="No notes found." />
 		<div class="showcase">
 			<NoteListCard v-for="note in filtered" :key="note.hash" :note="note" />
@@ -8,7 +9,6 @@
 			class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
 			<a @click.prevent="fetchOlderNotes">Load More</a>
 		</div>
-		<PageLoading v-if="loading" />
 	</div>
 </template>
 
@@ -16,10 +16,11 @@
 import { computed, defineComponent } from 'vue'
 import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 import { useNoteList } from '@app/composable/study/notes'
+import { IonSkeletonText } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ExploreNotesList',
-	components: { NoteListCard },
+	components: { NoteListCard, IonSkeletonText },
 	props: {
 		sliced: {
 			type: Boolean,

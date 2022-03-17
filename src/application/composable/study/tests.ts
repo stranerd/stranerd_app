@@ -71,7 +71,7 @@ export const useTestList = () => {
 	})
 
 	const unCompletedTests = computed({
-		get: () => global.tests.value.filter((test) => !test.done && test.progress !== 100),
+		get: () => global.tests.value.filter((test) => !test.done),
 		set: (tests) => {
 			tests.forEach((t) => addToArray(global.tests.value, t, (e) => e.id, (e) => e.createdAt))
 		}

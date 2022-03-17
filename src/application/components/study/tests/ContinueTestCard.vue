@@ -1,16 +1,19 @@
 <template>
 	<router-link :to="`/study/tests/${test.id}`"
-		class="bg-white w-full rounded-xl flex flex-col box-border card-padding">
+		class="bg-white w-full rounded-xl flex flex-col box-border card-padding justify-between">
 		<div class="flex flex-col">
-			<ion-text class="text-left w-full text-main_dark font-semibold truncate capitalize">
-				<Institution v-if="testPrep && testPrep.isPastQuestionType"
-					:institutionId="testPrep.data.institutionId" />
-				<span v-else>{{ test.name }}</span>
-			</ion-text>
-			<ion-text class="text-sm text-left w-full text-gray truncate">
-				{{ test.isTimed ? 'Timed' : 'Study' }}
+			<div class="flex justify-between">
+				<ion-text class="text-left w-full text-main_dark font-semibold truncate capitalize">
+					<Institution v-if="testPrep && testPrep.isPastQuestionType"
+						:institutionId="testPrep.data.institutionId" />
+					<span v-else>{{ test.name }}</span>
+				</ion-text>
+
+				<Tag :index="3" :tag="test.isTimed ? 'Timed' : 'Study'" />
+			</div>
+
+			<ion-text class="text-sm text-left w-full text-gray truncate mt-2">
 				<span v-if="testPrep && testPrep.isPastQuestionType">
-					>
 					<Course :courseId="testPrep.data.courseId" />
 					{{ testPrep.data.questionType }}
 					({{ testPrep.data.year }})
@@ -31,10 +34,11 @@ import { TestEntity } from '@modules/study'
 import { useTestPrep } from '@app/composable/study/testPreps'
 import Institution from '@app/components/study/institutions/Institution.vue'
 import Course from '@app/components/study/courses/Course.vue'
+import Tag from '../../core/Tag.vue'
 
 export default defineComponent({
 	name: 'ContinueTestCard',
-	components: { IonProgressBar, Institution, Course },
+	components: { IonProgressBar, Institution, Course, Tag },
 	props: {
 		test: {
 			required: true,

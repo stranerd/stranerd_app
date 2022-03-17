@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
 		<EmptyState v-if="!loading && !error && filtered.length === 0" info="No flashCards found." />
 		<div class="showcase">
 			<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard" />
@@ -8,7 +9,6 @@
 			class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
 			<a @click.prevent="fetchOlderFlashCards">Load More</a>
 		</div>
-		<PageLoading v-if="loading" />
 	</div>
 </template>
 
@@ -16,10 +16,11 @@
 import { computed, defineComponent } from 'vue'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import { useFlashCardList } from '@app/composable/study/flashCards'
+import { IonSkeletonText } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ExploreFlashCardsList',
-	components: { FlashCardListCard },
+	components: { FlashCardListCard, IonSkeletonText },
 	props: {
 		sliced: {
 			type: Boolean,

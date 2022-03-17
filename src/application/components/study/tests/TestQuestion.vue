@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col items-start w-full">
+	<div class="flex flex-col items-start w-full bg-white md:rounded-xl border-bottom-line p-4">
 		<PageLoading v-if="loading" />
 
 		<div class="flex item-center justify-between mb-2 w-full">
@@ -18,21 +18,21 @@
 			<PhotoList v-if="question.questionMedia.length" :photos="question.questionMedia" />
 		</div>
 
-		<div v-if="question.isObjective" class="answers flex flex-col w-full gap-4">
+		<div v-if="question.isObjective" class="answers flex flex-col w-full">
 			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
-				class="w-full hover:bg-light_gray"
+				class="w-full hover:bg-new_gray rounded-lg py-4"
 				@click="answer(question.id, optionIndex)">
-				<div class="flex gap-2">
+				<div class="flex gap-2 text-base">
 					<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
-						:icon="checkmarkCircleOutline" color="primary" size="large" />
-					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect" :icon="checkmarkCircleOutline"
-						color="primary" size="large" />
-					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isInCorrect" :icon="closeCircleOutline"
+						:icon="radioButtonOn" color="primary" size="large" />
+					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect"
+						:icon="checkmarkCircleOutline"
+						color="success" size="large" />
+					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isInCorrect"
+						:icon="closeCircleOutline"
 						color="danger" size="large" />
-					<span v-else
-						class="label border-4 rounded-full border-light_gray h-8 w-8 text-base font-bold grid place-items-center capitalize">
-						{{ getAlphabet(optionIndex + 1) }}.</span>
-					<IonText class="text-lg">
+					<IonIcon v-else :icon="radioButtonOff" size="large" />
+					<IonText>
 						<DisplayHtml :html="option" />
 					</IonText>
 				</div>
@@ -83,7 +83,9 @@ import {
 	chevronUpOutline,
 	closeCircleOutline,
 	ellipsisVerticalOutline,
-	flagOutline
+	flagOutline,
+	radioButtonOff,
+	radioButtonOn
 } from 'ionicons/icons'
 import { PastQuestionEntity, PastQuestionType, TestEntity, TestType } from '@modules/study'
 import { getAlphabet } from '@utils/commons'
@@ -125,11 +127,13 @@ export default defineComponent({
 		const showExplanation = ref(false)
 		return {
 			showAnswers,
+			checkmarkCircleOutline,
+			radioButtonOff,
 			chevronDownOutline,
 			chevronUpOutline,
 			flagOutline,
 			ellipsisVerticalOutline,
-			checkmarkCircleOutline,
+			radioButtonOn,
 			closeCircleOutline,
 			getAlphabet,
 			isCorrect,
@@ -140,19 +144,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	.btn-lgx {
-		@media (min-width: 1042px) {
-			--padding-top: 1.5rem;
-			--padding-bottom: 1.5rem;
-			--padding-start: 4.5rem;
-			--padding-end: 4.5rem;
-		}
-
-	}
-
-	input[type="radio"]:checked + label {
-		@apply border-primary
-	}
-</style>

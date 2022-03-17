@@ -81,7 +81,10 @@ export const unParseURL = (url: string) => !isWeb ? url.replace(ngrokURL, localU
 export function addToArray<T> (array: T[], item: T, getKey: (a: T) => any, getComparer: (a: T) => number | string, asc = false) {
 	const existingIndex = array.findIndex((el) => getKey(el) === getKey(item))
 	const index = array.findIndex((el) => asc ? getComparer(el) >= getComparer(item) : getComparer(el) <= getComparer(item))
-	if (existingIndex !== -1 && existingIndex === index) return array
+	if (existingIndex !== -1 && existingIndex === index) {
+		array.splice(existingIndex, 1, item)
+		return array
+	}
 	if (existingIndex !== -1 && existingIndex !== index) array.splice(existingIndex, 1)
 	if (index !== -1) array.splice(index, 0, item)
 	else if (array.length === 0) array.push(item)

@@ -6,7 +6,7 @@
 			<div class="showcase">
 				<SetListCard v-for="set in sets" :key="set.hash" :set="set" />
 			</div>
-			<PageLoading v-if="loading" />
+			<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
 		</div>
 	</DashboardLayout>
 </template>
@@ -16,12 +16,13 @@ import { defineComponent } from 'vue'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import SetListCard from '@app/components/study/sets/SetListCard.vue'
 import { useUserSetList } from '@app/composable/users/users/sets'
+import { IonSkeletonText } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'Study',
 	displayName: 'Study',
 	middlewares: ['isAuthenticated'],
-	components: { DashboardLayout, SetListCard },
+	components: { DashboardLayout, SetListCard, IonSkeletonText },
 	setup () {
 		const { sets, error, loading } = useUserSetList()
 		return { sets, error, loading }
