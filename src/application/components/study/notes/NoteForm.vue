@@ -1,13 +1,13 @@
 <template>
 	<form @submit.prevent="submit">
-		<div>
-			<label>Title</label>
+		<div class="mb-4">
+			<!-- <label>Title</label> -->
 			<IonInput v-model="factory.title" class="max-w-[1054px] !h-12 text-left bg-new_gray" placeholder="Enter Note Title" />
 			<DisplayError :error="factory.errors.title" />
 		</div>
 
 		<div class="mb-4">
-			<label>Description</label>
+			<!-- <label>Description</label> -->
 			<IonInput v-model="factory.description" class="max-w-[1054px] !h-12 text-left bg-light_gray" placeholder="Add a short description" />
 			<DisplayError :error="factory.errors.description" />
 		</div>
