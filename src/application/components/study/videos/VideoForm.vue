@@ -1,7 +1,7 @@
 <template>
 	<form @submit.prevent="submit">
 		<div class="mb-12">
-			<label>Title</label>
+			<label>Title</label> 
 			<IonInput v-model="factory.title" class="mb-2" placeholder="Enter Video Title" />
 			<DisplayError :error="factory.errors.title" />
 		</div>
