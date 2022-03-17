@@ -63,7 +63,8 @@ import { openAnswerModal, showAddAnswer } from '@app/composable/questions/answer
 import { openQuestionEditModal, useDeleteQuestion } from '@app/composable/questions/questions'
 import { formatTime } from '@utils/dates'
 import { useRouter } from 'vue-router'
-import { useReportModal } from '@app/composable/core/modals'
+import { openCreateReportModal } from '@app/composable/reports/reports'
+import { ReportType } from '@modules/reports'
 
 export default defineComponent({
 	name: 'QuestionPageCard',
@@ -102,7 +103,7 @@ export default defineComponent({
 			showEditButton, showDeleteButton,
 			loading, error, deleteQuestion,
 			openAnswerModal: () => openAnswerModal(props.question),
-			openReportQuestionModal: () => useReportModal().openReportQuestion(),
+			openReportQuestionModal: () => openCreateReportModal(ReportType.questions, props.question.id),
 			openEditModal: () => openQuestionEditModal(props.question, router)
 		}
 	}

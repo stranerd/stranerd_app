@@ -25,7 +25,6 @@ import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openAnswerModal } from '@app/composable/questions/answers'
-import { useReportModal } from '@app/composable/core/modals'
 import DisplayHtml from '@app/components/core/text/DisplayHtml.vue'
 
 export default defineComponent({
@@ -40,7 +39,6 @@ export default defineComponent({
 	setup (props) {
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),
-			openReportQuestionModal: () => useReportModal().openReportQuestion(),
 			arrowRedoOutline, flagOutline,
 			formatTime, pluralize
 		}

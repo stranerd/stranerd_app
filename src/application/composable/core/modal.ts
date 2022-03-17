@@ -53,7 +53,7 @@ export const useModal = (stack: Ref<string[]>) => {
 				.reduce((acc, curr) => acc.concat(curr), [])
 		) as Record<`open${Capitalize<Key>}` | `close${Capitalize<Key>}`, () => void>
 
-		const closeAll = async () => Object.keys(modalObject)
+		const closeAll = () => Object.keys(modalObject)
 			.forEach((key) => helpers[`close${capitalize(key) as Capitalize<Key>}`]?.())
 
 		return { ...helpers, closeAll }

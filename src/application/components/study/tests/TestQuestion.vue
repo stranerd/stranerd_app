@@ -76,7 +76,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref } from 'vue'
 import {
 	checkmarkCircleOutline,
 	chevronDownOutline,
@@ -89,7 +89,8 @@ import {
 } from 'ionicons/icons'
 import { PastQuestionEntity, PastQuestionType, TestEntity, TestType } from '@modules/study'
 import { getAlphabet } from '@utils/commons'
-import { useCreateReport } from '@app/composable/reports/pastQuestions'
+import { useCreateReport } from '@app/composable/reports/reports'
+import { ReportType } from '@modules/reports'
 
 export default defineComponent({
 	name: 'TestQuestion',
@@ -119,12 +120,17 @@ export default defineComponent({
 			}
 			return props.test.done
 		})
-		const { loading, error, createReport } = useCreateReport()
+		const { factory, loading, error, createReport } = useCreateReport()
 		// @ts-ignore
 		const isCorrect = computed(() => showAnswers.value && props.test.answers[props.question.id] === props.question.data.correctIndex)
 		// @ts-ignore
 		const isInCorrect = computed(() => showAnswers.value && props.test.answers[props.question.id] !== props.question.data.correctIndex)
 		const showExplanation = ref(false)
+		onMounted(() => {
+			factory.value.type = ReportType.pastQuestions
+			factory.value.reportedId = props.question.id
+			factory.value.message = 'Flagged'
+		})
 		return {
 			showAnswers,
 			checkmarkCircleOutline,

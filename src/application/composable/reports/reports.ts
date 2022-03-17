@@ -5,17 +5,22 @@ import { useReportModal } from '@app/composable/core/modals'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 
-let reportedEntity = null as string | null
-export const setReportedEntity = (questionId: string) => reportedEntity = questionId
+let reportedEntity = null as { type: ReportType, reportedId: string } | null
+export const openCreateReportModal = (type: ReportType, reportedId: string) => {
+	reportedEntity = { type, reportedId }
+	useReportModal().openCreateReport()
+}
 
 export const useCreateReport = () => {
 	const factory = ref(new ReportFactory()) as Ref<ReportFactory>
 	const { message, setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
-
-	factory.value.type = ReportType.questions
-	factory.value.reportedId = reportedEntity!
+	if (!reportedEntity) useReportModal().closeCreateReport()
+	else {
+		factory.value.type = reportedEntity.type
+		factory.value.reportedId = reportedEntity.reportedId
+	}
 
 	const createReport = async () => {
 		await setError('')
@@ -23,9 +28,9 @@ export const useCreateReport = () => {
 			try {
 				await setLoading(true)
 				await AddReport.call(factory.value)
-				useReportModal().closeReportQuestion()
+				useReportModal().closeAll()
 				factory.value.reset()
-				await setMessage('Report sent successfully')
+				await setMessage('Reported successfully')
 			} catch (error) {
 				await setError(error)
 			}
@@ -53,7 +58,7 @@ export const useReportsList = () => {
 		try {
 			await global.setLoading(true)
 			const lastDate = global.reports.value[0]?.createdAt
-			const reports = await GetReports.call(ReportType.questions, lastDate)
+			const reports = await GetReports.call(lastDate)
 			global.hasMore.value = !!reports.pages.next
 			reports.results.forEach((r) => addToArray(global.reports.value, r, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true

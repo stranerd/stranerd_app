@@ -1,9 +1,7 @@
 import { ref } from 'vue'
 import { useModal, usePopover } from '@app/composable/core/modal'
 import CreateSession from '@app/components/modals/sessions/RequestSession.vue'
-import ReportUser from '@app/components/modals/reports/ReportUser.vue'
-import ReportQuestion from '@app/components/modals/reports/ReportQuestion.vue'
-import ReportAnswer from '@app/components/modals/reports/ReportAnswer.vue'
+import CreateReport from '@app/components/modals/reports/CreateReport.vue'
 import CreateQuestion from '@app/components/modals/questions/CreateQuestion.vue'
 import EditQuestion from '@app/components/modals/questions/EditQuestion.vue'
 import CreateDashboardMenu from '@app/components/popovers/menus/CreateDashboardMenu.vue'
@@ -33,7 +31,7 @@ import EditVideo from '@app/components/modals/study/EditVideo.vue'
 export const modal = useModal(ref([]))
 const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion })
 const SessionModal = modal.register('Session', { CreateSession, Ratings: CreateSession })
-const ReportModal = modal.register('Report', { ReportUser, ReportQuestion, ReportAnswer })
+const ReportModal = modal.register('Report', { CreateReport })
 const StudyModal = modal.register('Study', {
 	CreateSet, EditSet, CreateNote, EditNote,
 	CreateVideo, EditVideo, CreateInstitution, EditInstitution,

@@ -24,12 +24,9 @@
 import { defineComponent, PropType } from 'vue'
 import { ReportFactory } from '@modules/reports'
 import { AnswerMessages } from '@app/composable/reports/form'
-import PageLoading from '../../core/PageLoading.vue'
-import { IonButton } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'AnswerReportForm',
-	components: { PageLoading, IonButton },
 	props: {
 		factory: {
 			type: Object as PropType<ReportFactory>,

@@ -110,9 +110,9 @@ export const useEditFlashCard = (flashCardId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditFlashCard.call(flashCardId, factory.value)
+				const flashCard = await EditFlashCard.call(flashCardId, factory.value)
 				await setMessage('FlashCard updated successfully')
-				await router.push(`/study/flashCards/${flashCardId}`)
+				await router.push(`/study/flashCards/${flashCard.id}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

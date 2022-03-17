@@ -47,7 +47,6 @@ import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openAnswerModal } from '@app/composable/questions/answers'
-import { useReportModal } from '@app/composable/core/modals'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
@@ -67,11 +66,8 @@ export default defineComponent({
 			}
 		})
 		return {
-			showAnswerButton,
-			openAnswerModal,
-			openReportQuestionModal: () => useReportModal().openReportQuestion(),
-			arrowRedoOutline, flagOutline, imageOutline, checkmarkCircleOutline,
-			formatTime, pluralize
+			showAnswerButton, openAnswerModal, formatTime, pluralize,
+			arrowRedoOutline, flagOutline, imageOutline, checkmarkCircleOutline
 		}
 	}
 })

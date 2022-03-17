@@ -14,6 +14,7 @@ import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } fr
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { addToArray } from '@utils/commons'
+import { useStudyModal } from '@app/composable/core/modals'
 
 const global = {
 	videos: ref([] as VideoEntity[]),
@@ -79,6 +80,7 @@ export const useCreateVideo = () => {
 				await setLoading(true)
 				const video = await AddVideo.call(factory.value)
 				await setMessage('Video submitted successfully')
+				await useStudyModal().closeCreateVideo()
 				await router.push(`/study/videos/${video.id}`)
 				factory.value.reset()
 			} catch (error) {
@@ -111,6 +113,7 @@ export const useEditVideo = () => {
 			try {
 				await setLoading(true)
 				const video = await EditVideo.call(editingVideo!.id, factory.value)
+				await useStudyModal().closeEditVideo()
 				await setMessage('Video updated successfully')
 				factory.value.reset()
 				await router.push(`/study/videos/${video.id}`)

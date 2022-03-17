@@ -13,7 +13,7 @@
 				<ClassMember v-for="request in requests" :key="request.hash" :classInst="classInst" :user="request" />
 			</div>
 		</template>
-		<template v-if="tab === 'invite'">
+		<template v-else-if="tab === 'invite'">
 			<div class="block md:gap-2">
 				<form class="px-4 md:px-0 flex gap-2 items-center" @submit.prevent="searchUsers">
 					<ion-input v-model="detail" class="bg-white border border-faded_gray w-full"
