@@ -86,10 +86,10 @@ export const useGroupDiscussions = (groupId: string) => {
 		if (!groupGlobal[groupId].fetched.value && !groupGlobal[groupId].loading.value) await fetchDiscussions()
 		const lastRead = await storage.get(getReadStateKey(groupId))
 		if (lastRead) groupGlobal[groupId].readTime.value = lastRead
-		await groupGlobal[groupId].listener.startListener()
+		await groupGlobal[groupId].listener.start()
 	})
 	onUnmounted(async () => {
-		await groupGlobal[groupId].listener.closeListener()
+		await groupGlobal[groupId].listener.close()
 	})
 
 	return {
@@ -155,10 +155,10 @@ export const useClassDiscussions = (classId: string) => {
 
 	onMounted(async () => {
 		if (!classGlobal[classId].fetched.value && !classGlobal[classId].loading.value) await fetchDiscussions()
-		await classGlobal[classId].listener.startListener()
+		await classGlobal[classId].listener.start()
 	})
 	onUnmounted(async () => {
-		await classGlobal[classId].listener.closeListener()
+		await classGlobal[classId].listener.close()
 	})
 
 	return { ...classGlobal[classId] }

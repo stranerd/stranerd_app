@@ -49,11 +49,11 @@ export const useClassQuestionList = (classId: string) => {
 
 	onMounted(async () => {
 		if (!global[classId].fetched.value && !global[classId].loading.value) await fetchQuestions()
-		await listener.startListener()
+		await listener.start()
 	})
 
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { ...global[classId], fetchOlderQuestions: fetchQuestions }

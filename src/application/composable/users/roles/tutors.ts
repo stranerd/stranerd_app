@@ -82,10 +82,10 @@ export const useTutorsList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTutors()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { ...global, tutorUser, deTutorUser }

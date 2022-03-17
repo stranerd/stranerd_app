@@ -74,10 +74,10 @@ export const useChatsList = () => {
 	onMounted(async () => {
 		if (!id.value) return
 		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchMeta()
-		await global[userId].listener.startListener()
+		await global[userId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[userId].listener.closeListener()
+		await global[userId].listener.close()
 	})
 	return { ...global[userId] }
 }

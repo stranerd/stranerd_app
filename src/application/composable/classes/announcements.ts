@@ -73,10 +73,10 @@ export const useAnnouncementList = (classId: string) => {
 		if (!global[classId].fetched.value && !global[classId].loading.value) await fetchAnnouncements()
 		const lastRead = await storage.get(getReadStateKey(classId))
 		if (lastRead) global[classId].readTime.value = lastRead
-		await global[classId].listener.startListener()
+		await global[classId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[classId].listener.closeListener()
+		await global[classId].listener.close()
 	})
 
 	return { ...global[classId], fetchOlderAnnouncements: fetchAnnouncements, unReadAnnouncements }
@@ -151,7 +151,7 @@ export const useEditAnnouncement = () => {
 			try {
 				await setLoading(true)
 				const announcement = await UpdateAnnouncement.call(editingAnnouncement!.id, factory.value)
-				await setMessage('Announcement edited successfully')
+				await setMessage('Announcement updated successfully')
 				factory.value.reset()
 				useClassModal().closeEditAnnouncement()
 				await router.push(`/classes/${announcement.classId}/announcements/${announcement.id}`)

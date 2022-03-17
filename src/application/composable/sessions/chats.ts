@@ -65,15 +65,15 @@ export const useChats = (userId: string) => {
 
 	const fetchOlderChats = async () => {
 		await fetchChats()
-		await global[userId].listener.restartListener()
+		await global[userId].listener.restart()
 	}
 
 	onMounted(async () => {
 		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchChats()
-		await global[userId].listener.startListener()
+		await global[userId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[userId].listener.closeListener()
+		await global[userId].listener.close()
 	})
 
 	return {

@@ -56,10 +56,10 @@ export const useFlashCardList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchFlashCards()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { ...global, fetchOlderFlashCards: fetchFlashCards }
@@ -195,10 +195,10 @@ export const useFlashCard = (flashCardId: string) => {
 
 	onMounted(async () => {
 		await fetchFlashCard()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { error, loading, flashCard }

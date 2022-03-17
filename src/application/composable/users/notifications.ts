@@ -59,15 +59,15 @@ export const useNotificationList = () => {
 
 	const fetchOlderNotifications = async () => {
 		await fetchNotifications()
-		await global[userId].listener.restartListener()
+		await global[userId].listener.restart()
 	}
 
 	onMounted(async () => {
 		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchNotifications()
-		await global[userId].listener.startListener()
+		await global[userId].listener.start()
 	})
 	onUnmounted(async () => {
-		// await global[userId].listener.closeListener()
+		// await global[userId].listener.close()
 	})
 
 	return { ...global[userId], fetchOlderNotifications }

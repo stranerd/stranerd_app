@@ -49,11 +49,11 @@ export const useUserQuestionList = (id: string) => {
 
 	onMounted(async () => {
 		if (!global[id].fetched.value && !global[id].loading.value) await fetchQuestions()
-		await listener.startListener()
+		await listener.start()
 	})
 
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { ...global[id], fetchOlderQuestions: fetchQuestions }

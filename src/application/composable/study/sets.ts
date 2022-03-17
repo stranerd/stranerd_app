@@ -85,10 +85,10 @@ export const useSetById = (setId: string) => {
 
 	onMounted(async () => {
 		if (!global[setId].fetched.value && !global[setId].loading.value) await fetchSet()
-		await global[setId].listener.startListener()
+		await global[setId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[setId].listener.closeListener()
+		await global[setId].listener.close()
 	})
 
 	return { ...global[setId] }
@@ -202,12 +202,12 @@ export const useSet = (set: SetEntity) => {
 		if (!setGlobal[set.id].fetched.value && !setGlobal[set.id].loading.value) await fetchAllSetEntities()
 		if (setGlobal[set.id].hash.value !== set.hash) {
 			setGlobal[set.id].hash.value = set.hash
-			await setGlobal[set.id].listener.restartListener()
+			await setGlobal[set.id].listener.restart()
 		}
-		await setGlobal[set.id].listener.startListener()
+		await setGlobal[set.id].listener.start()
 	})
 	onUnmounted(async () => {
-		await setGlobal[set.id].listener.closeListener()
+		await setGlobal[set.id].listener.close()
 	})
 
 	const notes = computed(() => setGlobal[set.id].notes.value.filter((note) => set.saved.notes.includes(note.id)))

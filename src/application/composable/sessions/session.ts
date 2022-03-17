@@ -43,7 +43,7 @@ export const useCurrentSession = () => {
 				currentGlobal.previousSession.value = currentGlobal.currentSession.value
 				if (entity) currentGlobal.currentSession.value = entity
 			}
-			await currentGlobal.listener.resetListener(
+			await currentGlobal.listener.reset(
 				async () => id
 					? ListenToSession.call(id, {
 						created: listenerCallback,
@@ -134,14 +134,14 @@ const useSession = (key: SessionKey, router: Router, callback: (key: SessionKey,
 
 	onMounted(async () => {
 		if (!global[key].fetched.value && !global[key].loading.value) await fetchSessions()
-		await global[key].listener.startListener()
+		await global[key].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[key].listener.closeListener()
+		await global[key].listener.close()
 	})
 
 	watch(() => user.value?.session[key], () => {
-		if (user.value) global[key].listener.restartListener()
+		if (user.value) global[key].listener.restart()
 	})
 
 	return { ...global[key] }

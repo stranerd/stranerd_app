@@ -64,10 +64,10 @@ export const useTestList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTests()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	const unCompletedTests = computed({
@@ -138,10 +138,10 @@ export const useTest = (testId: string) => {
 
 	onMounted(async () => {
 		await fetchTest()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { error, loading, test }

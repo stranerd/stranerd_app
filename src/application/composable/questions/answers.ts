@@ -62,10 +62,10 @@ export const useAnswerList = (questionId: string) => {
 
 	onMounted(async () => {
 		if (!global[questionId].fetched.value && !global[questionId].loading.value) await fetchAnswers()
-		await global[questionId].listener.startListener()
+		await global[questionId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[questionId].listener.closeListener()
+		await global[questionId].listener.close()
 	})
 
 	return {
@@ -180,7 +180,7 @@ export const useEditAnswer = (answerId: string) => {
 			try {
 				await setLoading(true)
 				const answer = await EditAnswer.call(answerId, factory.value)
-				await setMessage('Answer edited successfully')
+				await setMessage('Answer updated successfully')
 				factory.value.reset()
 				await router.push(`/questions/${answer.questionId}`)
 			} catch (error) {

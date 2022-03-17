@@ -49,11 +49,11 @@ export const useUserSetList = (id: string = useAuth().id.value) => {
 
 	onMounted(async () => {
 		if (!global[id].fetched.value && !global[id].loading.value) await fetchSets()
-		await global[id].listener.startListener()
+		await global[id].listener.start()
 	})
 
 	onUnmounted(async () => {
-		await global[id].listener.closeListener()
+		await global[id].listener.close()
 	})
 
 	return { ...global[id] }

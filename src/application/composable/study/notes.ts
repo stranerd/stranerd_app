@@ -56,10 +56,10 @@ export const useNoteList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchNotes()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { ...global, fetchOlderNotes: fetchNotes }
@@ -98,6 +98,7 @@ export const openNoteEditModal = async (note: NoteEntity, router: Router) => {
 	await router.push(`/study/notes/${note.id}/edit`)
 }
 export const useEditNote = () => {
+	const router = useRouter()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
@@ -109,9 +110,10 @@ export const useEditNote = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditNote.call(editingNote!.id, factory.value)
+				const note = await EditNote.call(editingNote!.id, factory.value)
 				await setMessage('Note updated successfully')
 				factory.value.reset()
+				await router.push(`/study/notes/${note.id}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -193,10 +195,10 @@ export const useNote = (noteId: string) => {
 
 	onMounted(async () => {
 		await fetchNote()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { error, loading, note }

@@ -74,10 +74,10 @@ export const useGroupList = (classId: string) => {
 		if (!global[classId].fetched.value && !global[classId].loading.value) await fetchGroups()
 		const lastRead = await storage.get(getGroupReadStateKey(classId))
 		if (lastRead) global[classId].readTime.value = lastRead
-		await global[classId].listener.startListener()
+		await global[classId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[classId].listener.closeListener()
+		await global[classId].listener.close()
 	})
 
 	return {
@@ -149,7 +149,7 @@ export const useEditGroup = () => {
 			try {
 				await setLoading(true)
 				const group = await UpdateGroup.call(editingGroup!.id, factory.value)
-				await setMessage('Group edited successfully')
+				await setMessage('Group updated successfully')
 				factory.value.reset()
 				useClassModal().closeEditGroup()
 				await router.push(`/classes/${group.classId}/groups/${group.id}`)

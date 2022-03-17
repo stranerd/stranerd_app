@@ -56,10 +56,10 @@ export const useVideoList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchVideos()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { ...global, fetchOlderVideos: fetchVideos }
@@ -98,6 +98,7 @@ export const openVideoEditModal = async (video: VideoEntity, router: Router) => 
 	await router.push(`/study/videos/${video.id}/edit`)
 }
 export const useEditVideo = () => {
+	const router = useRouter()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
@@ -109,9 +110,10 @@ export const useEditVideo = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditVideo.call(editingVideo!.id, factory.value)
+				const video = await EditVideo.call(editingVideo!.id, factory.value)
 				await setMessage('Video updated successfully')
 				factory.value.reset()
+				await router.push(`/study/videos/${video.id}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -193,10 +195,10 @@ export const useVideo = (videoId: string) => {
 
 	onMounted(async () => {
 		await fetchVideo()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { error, loading, video }

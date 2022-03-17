@@ -87,15 +87,15 @@ export const useQuestionList = () => {
 
 	const fetchOlderQuestions = async () => {
 		await fetchQuestions()
-		await listener.restartListener()
+		await listener.restart()
 	}
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchQuestions()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return {
@@ -186,10 +186,10 @@ export const useQuestion = (questionId: string) => {
 
 	onMounted(async () => {
 		await fetchQuestion()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { error, loading, question }
@@ -215,7 +215,7 @@ export const useEditQuestion = () => {
 			try {
 				await setLoading(true)
 				const question = await EditQuestion.call(editingQuestion!.id, factory.value)
-				await setMessage('Question edited successfully')
+				await setMessage('Question updated successfully')
 				useQuestionModal().closeEditQuestion()
 				factory.value.reset()
 				await router.push(`/questions/${question.id}`)

@@ -49,11 +49,11 @@ export const useUserVideoList = (id: string) => {
 
 	onMounted(async () => {
 		if (!global[id].fetched.value && !global[id].loading.value) await fetchVideos()
-		await listener.startListener()
+		await listener.start()
 	})
 
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { ...global[id], fetchOlderVideos: fetchVideos }

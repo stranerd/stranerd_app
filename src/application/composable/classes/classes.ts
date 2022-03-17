@@ -75,10 +75,10 @@ export const useClassList = () => {
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchClasses()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { ...global, myClasses }
@@ -183,12 +183,12 @@ export const useClassMembersList = (classInst: ClassEntity) => {
 		if (!classGlobal[classInst.id].fetched.value && !classGlobal[classInst.id].loading.value) await fetchUsers()
 		if (classGlobal[classInst.id].hash.value !== classInst.hash) {
 			classGlobal[classInst.id].hash.value = classInst.hash
-			await classGlobal[classInst.id].listener.restartListener()
+			await classGlobal[classInst.id].listener.restart()
 		}
-		await classGlobal[classInst.id].listener.startListener()
+		await classGlobal[classInst.id].listener.start()
 	})
 	onUnmounted(async () => {
-		await classGlobal[classInst.id].listener.closeListener()
+		await classGlobal[classInst.id].listener.close()
 	})
 
 	const admins = computed(() => classGlobal[classInst.id].users.value.filter((user) => classInst.admins.includes(user.id)))
@@ -298,10 +298,10 @@ export const useClass = (classId: string) => {
 
 	onMounted(async () => {
 		await fetchClass()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { error, loading, message, classInst, requestToJoinClass }
@@ -327,8 +327,8 @@ export const useEditClass = () => {
 			try {
 				await setLoading(true)
 				await UpdateClass.call(editingClass!.id, factory.value)
-				await setMessage('Class edited successfully')
-				// useClassModal().closeEditClass()
+				await setMessage('Class updated successfully')
+				useClassModal().closeEditClass()
 				factory.value.reset()
 				await router.replace(`/classes/${editingClass!.id}`)
 			} catch (error) {

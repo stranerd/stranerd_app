@@ -55,10 +55,10 @@ const fetchTestPreps = async () => {
 export const useTestPrepList = () => {
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTestPreps()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 	return { ...global }
 }
@@ -128,7 +128,7 @@ export const useEditTestPrep = () => {
 			try {
 				await setLoading(true)
 				await EditTestPrep.call(editingTestPrep!.id, factory.value)
-				await setMessage('TestPrep edited successfully')
+				await setMessage('TestPrep updated successfully')
 				useStudyModal().closeEditTestPrep()
 				factory.value.reset()
 			} catch (error) {

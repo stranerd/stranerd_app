@@ -54,10 +54,10 @@ export const useAnswerCommentList = (answerId: string) => {
 
 	onMounted(async () => {
 		if (!global[answerId].fetched.value && !global[answerId].loading.value) await fetchComments()
-		await global[answerId].listener.startListener()
+		await global[answerId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[answerId].listener.closeListener()
+		await global[answerId].listener.close()
 	})
 
 	return {

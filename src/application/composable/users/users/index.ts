@@ -49,10 +49,10 @@ export const useUser = (userId: string) => {
 
 	onMounted(async () => {
 		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchUser()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return {

@@ -47,10 +47,10 @@ export const useLeaderboardList = (key: RankingTimes) => {
 
 	onMounted(async () => {
 		if (!global[key].fetched.value && !global[key].loading.value) await fetchUsers()
-		await global[key].listener.startListener()
+		await global[key].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[key].listener.closeListener()
+		await global[key].listener.close()
 	})
 
 	return { ...global[key], hasNoAuthUser }
