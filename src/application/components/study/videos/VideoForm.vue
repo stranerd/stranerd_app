@@ -38,7 +38,7 @@
 
 		<div v-else class="mb-12">
 			<label class="block">Link</label>
-			<IonText class="text-sm mt-1">All links must be of videos hosted on YouTube</IonText>
+			<IonText class="text-sub mt-1">All links must be of videos hosted on YouTube</IonText>
 			<IonInput v-model="factory.link" class="mb-2" placeholder="Enter youtube video link" />
 			<DisplayError :error="factory.errors.link" />
 		</div>

@@ -1,6 +1,6 @@
 <template>
 	<Justified>
-		<div class="text-body h-full md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
+		<div class="h-full md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
 			<PageLoading v-if="loading" />
 			<PageLoading v-if="verifiedLoading" />
 			<template v-if="user">
@@ -11,7 +11,7 @@
 							class="md:hidden -mt-9" />
 						<Avatar :id="user.id" :name="user.bio.fullName" :size="96" :src="user.bio.photo"
 							class="hidden md:inline -mt-12" />
-						<h2 class="md:text-xl text-base font-bold text-main_dark flex gap-1 items-center mt-4 mb-1">
+						<h2 class="text-heading font-bold text-main_dark flex gap-1 items-center mt-4 mb-1">
 							<span>{{ user.bio.fullName }}</span>
 							<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="white" />
 						</h2>
@@ -24,10 +24,10 @@
 							@click="user.isVerified ? deVerifyUser(user) : verifyUser(user)">
 							{{ user.isVerified ? 'Mark User Unverified' : 'Mark User Verified' }}
 						</IonButton>
-						<span v-if="user.description" class="text-main_dark text-sm md:text-base">{{
+						<span v-if="user.description" class="text-main_dark">{{
 							user.description
 						}}</span>
-						<span class="text-gray text-xs">Nerd since {{ formatTime(user.dates.createdAt) }}</span>
+						<span class="text-gray text-sub">Nerd since {{ formatTime(user.dates.createdAt) }}</span>
 
 						<div
 							class="nav-scroll mt-4">

@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="flex flex-col lg:flex-row items-center justify-between gap-4 bg-white rounded-xl font-bold lg:text-base text-xs text-main_dark py-4 px-6">
+		class="flex flex-col lg:flex-row items-center justify-between gap-4 bg-white rounded-xl font-bold text-sub text-main_dark py-4 px-6">
 		<div class="w-full">
 			<ion-text class="capitalize">{{ testPrep.name }}</ion-text>
 		</div>

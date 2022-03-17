@@ -3,7 +3,7 @@
 		<div class="md:p-4 lg:py-8">
 			<div class="w-full lg:w-8/12 mx-auto bg-white rounded-xl md:py-4 lg:px-4">
 				<div class="hidden md:flex card-padding">
-					<h1 class="lg:text-2xl text-lg font-bold text-main_dark">
+					<h1 class="text-heading font-bold text-main_dark">
 						Notifications
 					</h1>
 				</div>

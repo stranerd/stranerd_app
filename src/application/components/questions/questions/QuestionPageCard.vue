@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col md:gap-4">
-		<div class="bg-white card-padding md:rounded-xl border-b border-new_gray text-sm flex flex-col">
+		<div class="bg-white card-padding md:rounded-xl border-b border-new_gray flex flex-col">
 			<div class="flex items-center gap-4">
 				<span class="font-semibold text-main_dark capitalize">{{ question.subject }}</span>
 				<div class="flex flex-grow items-center justify-end gap-2">
@@ -12,7 +12,7 @@
 						@click="openReportQuestionModal" />
 				</div>
 			</div>
-			<DisplayHtml :html="question.body" class="text-main_dark text-base" />
+			<DisplayHtml :html="question.body" class="text-main_dark" />
 
 			<div class="flex items-center justify-between">
 				<div class="flex items-center gap-2">

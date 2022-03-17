@@ -8,11 +8,11 @@
 		</div>
 
 		<div class="w-full flex items-center justify-between gap-2">
-			<Tag tag="Note" :index="2">
+			<Tag :index="2" tag="Note">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
 						<ion-icon :icon="documentOutline" class="text-base mr-1" />
-						<ion-text class="text-xs">{{ slotProps.tag }}</ion-text>
+						<ion-text class="text-sub">{{ slotProps.tag }}</ion-text>
 					</span>
 				</template>
 			</Tag>

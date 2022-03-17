@@ -7,7 +7,7 @@
 			<ion-text class="text-main_dark text-semibold capitalize">
 				{{ classInst.name }}
 			</ion-text>
-			<ion-text class="text-xs text-gray">
+			<ion-text class="text-sub text-gray">
 				{{ classInst.members.length }} {{ pluralize(classInst.members.length, 'member', 'members') }}
 			</ion-text>
 		</div>

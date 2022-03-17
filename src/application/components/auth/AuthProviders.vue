@@ -1,6 +1,6 @@
 <template>
 	<div class="flex-col gap-1 gap-md-2">
-		<ion-button class="w-full font-bold capitalize text-base flex gap-9 justify-center items-center my-6"
+		<ion-button class="w-full font-bold capitalize flex gap-9 justify-center items-center my-6"
 			@click="loginWithGoogle">
 			<ion-icon :icon="logoGoogle" class="mr-4" size="100px" />
 			<span>Google</span>

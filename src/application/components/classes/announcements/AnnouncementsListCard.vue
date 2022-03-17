@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-white rounded-xl flex flex-col card-padding text-sm md:text-base">
+	<div class="bg-white rounded-xl flex flex-col card-padding">
 		<div class="flex gap-2 items-center">
 			<Avatar :id="announcement.userId" :name="announcement.userBio.fullName"
 				:size="32" :src="announcement.userBio.photo" />

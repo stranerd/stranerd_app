@@ -1,11 +1,11 @@
 <template>
 	<div id="screen" class="md:px-4">
-		<ion-text class="text-main text-main_dark font-bold heading px-4 md:px-0 hidden md:block">
+		<ion-text class="text-main_dark font-bold text-heading px-4 md:px-0 hidden md:block">
 			All cards info <span class="text-gray">({{ formatNumber(flashCard.set.length) }})</span>
 		</ion-text>
 
 		<div v-for="(card, index) in flashCard.set" :key="index"
-			class="flex justify-between w-full md:mt-4 text-body">
+			class="flex justify-between w-full md:mt-4">
 			<div class="bg-white md:py-3 md:px-6 rounded-xl w-full flex border-top-line">
 				<DisplayHtml :html="card.question" class="w-1/2 md:p-0 p-4  border-bottom-line" />
 

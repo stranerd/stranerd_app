@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-white card-padding rounded-lg text-gray text-sm md:text-base" @click="markNotificationSeen">
+	<div class="bg-white card-padding rounded-lg text-gray" @click="markNotificationSeen">
 		<div>
 			<div class="flex justify-between gap-2 items-baseline">
 				<router-link :class="{'font-bold': !notification.seen}" :to="notification.link" class="flex-grow">
@@ -9,7 +9,7 @@
 				</router-link>
 				<span v-if="!notification.seen" class="dot bg-primary" />
 			</div>
-			<p>{{ formatTime(notification.createdAt) }}</p>
+			<p class="text-sub">{{ formatTime(notification.createdAt) }}</p>
 		</div>
 	</div>
 </template>

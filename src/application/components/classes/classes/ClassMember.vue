@@ -3,7 +3,7 @@
 		<div class="flex items-center gap-2">
 			<Avatar :name="user.bio.fullName" :size="48" :src="user.bio.photo" />
 			<div class="flex flex-col">
-				<IonText class="text-base md:text-[18px] text-main_dark text-bold">
+				<IonText class="text-main_dark text-bold">
 					{{ user.bio.fullName }}
 				</IonText>
 				<div class="flex gap-2 items-center">

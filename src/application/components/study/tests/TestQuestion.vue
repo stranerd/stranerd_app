@@ -22,7 +22,7 @@
 			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
 				class="w-full hover:bg-new_gray rounded-lg py-4"
 				@click="answer(question.id, optionIndex)">
-				<div class="flex gap-2 text-base">
+				<div class="flex gap-2">
 					<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
 						:icon="radioButtonOn" color="primary" size="large" />
 					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect"

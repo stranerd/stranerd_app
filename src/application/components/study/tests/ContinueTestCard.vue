@@ -12,7 +12,7 @@
 				<Tag :index="3" :tag="test.isTimed ? 'Timed' : 'Study'" />
 			</div>
 
-			<ion-text class="text-sm text-left w-full text-gray truncate mt-2">
+			<ion-text class="text-left w-full text-gray truncate mt-2">
 				<span v-if="testPrep && testPrep.isPastQuestionType">
 					<Course :courseId="testPrep.data.courseId" />
 					{{ testPrep.data.questionType }}

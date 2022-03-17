@@ -4,10 +4,10 @@
 			info="No messages found. Send a message now" />
 		<div v-else v-chat-scroll class="flex flex-col gap-3 overflow-y-auto hide-scrollbar"
 			@scroll-top="() => hasMore && fetchOlderDiscussions">
-			<span v-if="hasMore" class="w-full text-center text-xs lg:text-sm"
+			<span v-if="hasMore" class="w-full text-center text-sub"
 				@click="fetchOlderDiscussions">Fetch Older Messages</span>
 			<div v-for="date in discussions" :key="date.key" class="flex flex-col gap-2">
-				<span class="w-full text-center text-xs lg:text-sm">{{ formatTime(date.key, true) }}</span>
+				<span class="w-full text-center text-sub">{{ formatTime(date.key, true) }}</span>
 				<DiscussionsListCard v-for="discussion in date.values" :key="discussion.hash"
 					:discussion="discussion" />
 			</div>

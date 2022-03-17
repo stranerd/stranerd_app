@@ -74,7 +74,7 @@
 				</div>
 			</div>
 		</div>
-		<form class="flex items-center md:gap-2 text-sm lg:text-base"
+		<form class="flex items-center md:gap-2"
 			@submit.prevent="createTextDiscussion">
 			<IonIcon :icon="showFileUpload ? closeCircleOutline : addCircleOutline"
 				class="text-3xl md:text-5xl" @click="showFileUpload = !showFileUpload" />

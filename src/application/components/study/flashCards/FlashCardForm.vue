@@ -1,10 +1,9 @@
 <template>
 	<div>
-
-		<div class="text-body md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
+		<div class="md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
 			<div class="bg-white rounded-xl p-4 flex flex-col">
 				<div class="flex flex-col justify-start items-start">
-					<ion-text class="heading font-bold mb-2 hidden md:block">
+					<ion-text class="text-heading font-bold mb-2 hidden md:block">
 						Create a flashcard set
 					</ion-text>
 					<ion-input v-model="factory.title"

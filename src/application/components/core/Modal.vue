@@ -1,7 +1,7 @@
 <template>
-	<div class="rounded-3xl md:p-8 p-4 md:text-sm text-xs">
+	<div class="rounded-3xl md:p-8 p-4 text-sub">
 		<div class="flex flex-col gap-2 text-center justify-center items-center mb-4">
-			<h3 class="text-xl font-semibold text-main_dark">
+			<h3 class="text-heading font-semibold text-main_dark">
 				<slot name="title">Title</slot>
 			</h3>
 			<slot name="subtext" />

@@ -1,6 +1,6 @@
 <template>
 	<div :class="{'justify-end': discussion.userId === id}"
-		class="flex gap-1 items-end text-main_dark text-sm lg:text-base w-full">
+		class="flex gap-1 items-end text-main_dark w-full">
 		<Avatar v-if="discussion.userId !== id" :id="discussion.userId" :name="discussion.userBio.fullName"
 			:size="24" :src="discussion.userBio.photo" />
 		<div :class="discussion.userId === id ? 'bg-new_gray rounded-bl-xl' : 'bg-[#1997DE1A] rounded-br-xl'"
@@ -21,7 +21,7 @@
 			</div>
 			<div class="flex gap-2 items-end">
 				<div class="flex-grow">{{ discussion.content }}</div>
-				<span class="text-xs">{{ formatTimeAsDigits(new Date(discussion.createdAt)) }}</span>
+				<span class="text-sub">{{ formatTimeAsDigits(new Date(discussion.createdAt)) }}</span>
 			</div>
 		</div>
 	</div>

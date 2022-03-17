@@ -8,7 +8,7 @@
 				</ion-text>
 				<SaveToSet :entity="testPrep" />
 			</div>
-			<IonText class="text-gray text-sm truncate">
+			<IonText class="text-gray truncate">
 				<Course :courseId="testPrep.data.courseId" />
 				({{ testPrep.data.questionType }} {{ testPrep.data.year }})
 			</IonText>

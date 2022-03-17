@@ -13,15 +13,13 @@
 		<div v-if="value && open" class="suggestions">
 			<a
 				v-for="(suggestion, i) in matches"
-				:key="suggestion.value"
-				:class="{'isActive': current === i}"
+				:key="suggestion.value" :class="{'isActive': current === i}"
+				class="lowercase"
 				@click="select(suggestion.search)"
 			>
 				<span>{{ suggestion.title }}</span>
 			</a>
-			<a v-if="matches.length === 0" class="text-lowercase">
-				<span class="text-capitalize">No</span> option matches '{{ value }}'
-			</a>
+			<a v-if="matches.length === 0">No option matches '{{ value.toLowerCase() }}'</a>
 		</div>
 	</div>
 </template>
@@ -136,7 +134,6 @@ export default defineComponent({
 		& > * {
 			padding: 0.5rem 1rem;
 			border-bottom: 1px solid $color-lightGray;
-			text-transform: capitalize;
 		}
 
 		.isActive {

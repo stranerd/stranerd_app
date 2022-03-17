@@ -1,5 +1,5 @@
 <template>
-	<ion-text v-if="error" class="text-xs text-red">
+	<ion-text v-if="error" class="text-sub text-red">
 		{{ error }}
 	</ion-text>
 </template>

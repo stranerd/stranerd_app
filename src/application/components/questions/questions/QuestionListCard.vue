@@ -3,7 +3,7 @@
 		:to="`/questions/${question.id}`"
 		class="rounded-xl bg-white flex flex-col card-padding justify-between w-full relative cursor-pointer">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
-		<div class="flex flex-row items-center text-sm">
+		<div class="flex flex-row items-center">
 			<div class="flex items-center">
 				<avatar :id="question.userId" :name="question.userBio.fullName" :size="28" :src="question.userBio.photo"
 					class="mr-2 " />
@@ -26,7 +26,7 @@
 
 		<DisplayHtml :html="question.trimmedBody" class="text-main_dark leading-normal" />
 
-		<div class="flex justify-between items-center gap-4 text-gray text-sm font-bold">
+		<div class="flex justify-between items-center gap-4 text-gray font-bold">
 			<span class="text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 			<span v-if="question.attachments.length" class="font-italic flex items-center">
 				<IonIcon :icon="imageOutline" class="mr-2" />  IMG inside

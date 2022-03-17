@@ -26,7 +26,7 @@
 						</ion-button>
 					</form>
 					<div class="w-full flex justify-end items-center text-main_dark">
-						<router-link class="text-primary text-body" to="/auth/forgot">
+						<router-link class="text-primary" to="/auth/forgot">
 							Forgot Password ?
 						</router-link>
 					</div>
@@ -38,7 +38,7 @@
 					<AuthProviders />
 					<span class="text- w-full flex justify-center items-center text-icon_inactive mt-8">
 						Don’t have an account?
-						<router-link class="text-primary font-bold text-body ml-2" to="/auth/signup">
+						<router-link class="text-primary font-bold ml-2" to="/auth/signup">
 							Sign Up
 						</router-link>
 					</span>

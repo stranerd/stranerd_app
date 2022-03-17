@@ -1,13 +1,13 @@
 <template>
 	<Justified>
 		<div class="lg:w-8/12 w-full mx-auto md:p-4 lg:p-0">
-			<div class="text-body bg-white lg:mt-6 rounded-xl flex flex-col p-4 md:p-6 gap-4">
-				<ion-text class="heading lg:text-2xl font-bold text-main_dark mx-auto text-center">
+			<div class="bg-white lg:mt-6 rounded-xl flex flex-col p-4 md:p-6 gap-4">
+				<ion-text class="text-heading font-bold text-main_dark mx-auto text-center">
 					<Institution :institutionId="institutionId" />
 				</ion-text>
 				<div class="showcase gap-4">
 					<ion-item>
-						<ion-label class="!text-gray font-bold text-body">Subject</ion-label>
+						<ion-label class="!text-gray font-bold">Subject</ion-label>
 						<IonSelect v-model="courseId" class="capitalize" interface="action-sheet"
 							placeholder="Select the subject">
 							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
@@ -19,7 +19,7 @@
 					</ion-item>
 
 					<ion-item>
-						<ion-label class="!text-gray font-bold text-body">Year</ion-label>
+						<ion-label class="!text-gray font-bold">Year</ion-label>
 						<IonSelect v-model.number="year" class="capitalize" interface="action-sheet"
 							placeholder="Select the year">
 							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
@@ -30,7 +30,7 @@
 					</ion-item>
 
 					<ion-item>
-						<ion-label class="!text-gray font-bold text-body">Mode</ion-label>
+						<ion-label class="!text-gray font-bold">Mode</ion-label>
 						<IonSelect v-model="questionType" class="capitalize" interface="action-sheet"
 							placeholder="Select the question type">
 							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>

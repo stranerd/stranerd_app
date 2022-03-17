@@ -2,7 +2,7 @@
 	<Justified>
 		<div>
 			<div class="blueTop py-4">
-				<ion-text class="heading lg:text-2xl font-bold text-white text-center">
+				<ion-text class="text-heading font-bold text-white text-center">
 					Terms of Use
 				</ion-text>
 			</div>

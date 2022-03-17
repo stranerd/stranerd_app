@@ -4,8 +4,8 @@
 			<div class="flex items-center gap-2">
 				<IonIcon :icon="folderOpenOutline" class="text-6xl" />
 				<div class="flex flex-col">
-					<ion-text class="heading lg:text-2xl font-semibold capitalize">{{ set.name }}</ion-text>
-					<ion-text class="text-sm">{{ set.allSaved.length }}
+					<ion-text class="text-heading font-semibold capitalize">{{ set.name }}</ion-text>
+					<ion-text class="text-sub">{{ set.allSaved.length }}
 						{{ pluralize(set.allSaved.length, 'item', 'items') }}
 					</ion-text>
 				</div>

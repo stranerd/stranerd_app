@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col lg:gap-4 w-full lg:text-base text-xs font-bold lg:py-4">
+	<div class="flex flex-col lg:gap-4 w-full text-sub font-bold lg:py-4">
 		<PageLoading v-if="loading" />
 		<div
 			class="flex lg:rounded-xl bg-gray text-white py-4 px-4">

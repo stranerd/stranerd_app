@@ -5,14 +5,14 @@
 			<RecentQuestions class="border-bottom-line" />
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text class="mr-3">FlashCards</ion-text>
-						<ion-text class="text-orange font-normal flex items-center text-body">
+					<div class="text-main_dark flex items-center">
+						<ion-text class="text-heading font-bold mr-3">FlashCards</ion-text>
+						<ion-text class="text-orange flex items-center">
 							<div class="h-1 w-1 bg-orange mr-2 rounded-full" />
 							Latest
 						</ion-text>
 					</div>
-					<router-link class="text-primary text-body flex items-center font-normal"
+					<router-link class="text-primary flex items-center font-normal"
 						to="/explore/flashCards">
 						explore
 					</router-link>
@@ -21,14 +21,14 @@
 			</div>
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text class="mr-3">Notes</ion-text>
-						<ion-text class="text-orange font-normal flex items-center text-body">
+					<div class="text-main_dark flex items-center">
+						<ion-text class="text-heading font-bold mr-3">Notes</ion-text>
+						<ion-text class="text-orange flex items-center">
 							<div class="h-1 w-1 bg-orange mr-2 rounded-full" />
 							Latest
 						</ion-text>
 					</div>
-					<router-link class="text-primary text-body flex items-center font-normal" to="/explore/notes">
+					<router-link class="text-primary flex items-center font-normal" to="/explore/notes">
 						explore
 					</router-link>
 				</div>
@@ -36,14 +36,14 @@
 			</div>
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text class="mr-3">Videos</ion-text>
-						<ion-text class="text-orange font-normal flex items-center text-body">
+					<div class="text-main_dark flex items-center">
+						<ion-text class="text-heading font-bold mr-3">Videos</ion-text>
+						<ion-text class="text-orange flex items-center">
 							<div class="h-1 w-1 bg-orange mr-2 rounded-full" />
 							Latest
 						</ion-text>
 					</div>
-					<router-link class="text-primary text-body flex items-center font-normal" to="/explore/videos">
+					<router-link class="text-primary flex items-center font-normal" to="/explore/videos">
 						explore
 					</router-link>
 				</div>

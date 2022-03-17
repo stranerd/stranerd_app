@@ -1,6 +1,6 @@
 <template>
 	<Justified>
-		<div class="text-body h-full md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
+		<div class="h-full md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
 			<div class="bg-white rounded-xl px-4 pt-4 flex flex-col">
 				<Search />
 				<div class="nav-scroll mt-4">
@@ -19,7 +19,7 @@
 				<div v-else-if="!fetched" class="flex flex-col gap-4 max-w-[500px] mx-auto p-4 md:p-0">
 					<div v-for="r in recent" :key="r" class="flex items-center gap-4">
 						<IonIcon :icon="closeOutline" class="text-2xl" @click="clearFromRecent(r)" />
-						<IonText class="w-full text-xl truncate">{{ r }}</IonText>
+						<IonText class="w-full text-heading truncate">{{ r }}</IonText>
 						<IonIcon :icon="arrowRedoOutline" class="text-2xl" @click="() => {searchTerm = r; search()}" />
 					</div>
 				</div>

@@ -9,7 +9,7 @@
 					{ name: 'Library', path: '/study', icon: library, iconOutline:libraryOutline },
 					...(isProd ? [] : [{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }])
 				]" :key="path" :to="path"
-				class="flex py-6 px-8 items-center rounded-l-full text-sm hover:text-main_dark font-bold"
+				class="flex py-6 px-8 items-center rounded-l-full text-sub hover:text-main_dark font-bold"
 				exact-active-class="text-main_dark bg-new_gray !py-4">
 				<ion-icon :icon="$route.path === path ? icon : iconOutline " class="text-[23px] mr-4" />
 				<span class="capitalize">{{ name }}</span>

@@ -3,7 +3,7 @@
 	<ion-text class="text-xl text-main_dark font-bold">
 		Notes
 	</ion-text>
-	<ion-text class="text-base text-main_dark max-w-[80vw] text-center">
+	<ion-text class="text-main_dark max-w-[80vw] text-center">
 		Read beautiful and concise notes that cover every important aspects in topics under different subjects.
 	</ion-text>
 </template>

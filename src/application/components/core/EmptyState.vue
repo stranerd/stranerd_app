@@ -1,7 +1,7 @@
 <template>
 	<div
-		class="w-full rounded-xl bg-white flex flex-col items-center justify-center p-4 md:py-8 gap-3 text-center text-body text-main_dark">
-		<p class="text-body" v-html="info" />
+		class="w-full rounded-xl bg-white flex flex-col items-center justify-center p-4 md:py-8 gap-3 text-center text-main_dark">
+		<p v-html="info" />
 		<slot>
 			<router-link v-if="btnText && route" :class="btnTextClass" :to="route"
 				class="py-3 px-7 border border-solid border-faded_gray text-gray font-bold rounded-xl">

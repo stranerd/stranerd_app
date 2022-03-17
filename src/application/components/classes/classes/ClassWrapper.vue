@@ -10,22 +10,22 @@
 						<div class="flex gap-1 mt-2">
 							<Share :link="`/classes/${classInst.id}`" :text="classInst.description"
 								:title="`Share this class: ${classInst.name}`"
-								class="py-1 px-4 border border-primary text-primary rounded-full text-xs flex justify-center items-center">
+								class="py-1 px-4 border border-primary text-primary rounded-full text-sub flex justify-center items-center">
 								Copy class link
 							</Share>
 						</div>
 					</div>
 					<div class="pt-2 pb-4 flex flex-col gap-1">
 						<div class="flex gap-1 items-center">
-							<IonText class="text-main_dark md:text-[20px] capitalize font-semibold">
+							<IonText class="text-main_dark text-heading capitalize font-semibold">
 								{{ classInst.name }}
 							</IonText>
 							<IonIcon v-if="classInst.admins.includes(id)" :icon="pencilOutline"
 								@click="openClassEditModal(classInst, $router)" />
 						</div>
-						<IonText class="text-sm">{{ classInst.description }}</IonText>
-						<IonText class="text-xs text-gray">Created {{ formatTime(classInst.createdAt) }}</IonText>
-						<IonText class="text-sm font-semibold text-gray">
+						<IonText>{{ classInst.description }}</IonText>
+						<IonText class="text-sub text-gray">Created {{ formatTime(classInst.createdAt) }}</IonText>
+						<IonText class="text-sub font-semibold text-gray">
 							{{ classInst.members.length }} {{
 								pluralize(classInst.members.length, 'member', 'members')
 							}}

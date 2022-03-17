@@ -7,7 +7,7 @@
 
 		<div
 			class="custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl mb-6 md:-mt-12 mt-6">
-			<ion-text class="text-xl text-main_dark font-bold mt-2">
+			<ion-text class="text-heading text-main_dark font-bold mt-2">
 				Profile Picture
 			</ion-text>
 			<img :src="photoLink || DEFAULT_PROFILE_PHOTO"
@@ -22,8 +22,9 @@
 
 		<div
 			class="custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl mb-6">
-			<ion-text class="text-xl text-main_dark font-bold text-left w-full mt-2">
-				Full names <span class="font-normal text-sm">*Use your real names, as they will be used to identify you throughout the platform</span>
+			<ion-text class="text-main_dark text-left w-full mt-2">
+				<span class="text-heading font-bold">Full names</span> *Use your real names, as they will be used to
+				identify you throughout the platform
 			</ion-text>
 			<div class="flex md:flex-row items-center justify-center flex-col w-full mt-2">
 				<div class="border border-faded_gray rounded-xl lg:w-1/2 md:mr-4 w-full mt-4">
@@ -33,11 +34,11 @@
 					<IonInput v-model="profileFactory.last" class="w-full font-medium" placeholder="Last name" />
 				</div>
 			</div>
-			<ion-text class="text-xl text-main_dark font-bold text-left w-full mt-4">
+			<ion-text class="text-heading text-main_dark font-bold text-left w-full mt-4">
 				About
 			</ion-text>
 			<div class="flex md:flex-row items-center justify-center flex-col w-full mt-2">
-				<div class="border border-faded_gray rounded-xl w-full mr-4">
+				<div class="border border-faded_gray rounded-xl w-full">
 					<IonTextarea v-model="profileFactory.description"
 						class="bg-white border-0 focus:outline-none w-full"
 						placeholder="Tell us a little more about yourself"
@@ -54,7 +55,7 @@
 
 		<div
 			class="custom-shadow bg-white lg:w-7/12 p-6 mx-auto flex flex-col items-center justify-center rounded-xl mb-6">
-			<ion-text class="text-xl text-main_dark font-bold text-left w-full">
+			<ion-text class="text-heading text-main_dark font-bold text-left w-full">
 				{{ hasPassword ? 'Update Password' : 'Add Password' }}
 			</ion-text>
 			<div v-if="hasPassword" class="border border-faded_gray rounded-xl w-full mt-4">

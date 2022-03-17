@@ -1,6 +1,6 @@
 <template>
 	<router-link :id="answer.id" :to="`/questions/${answer.questionId}#${answer.id}`"
-		class="card-padding rounded-xl bg-white flex flex-col w-full md:text-base text-xs relative cursor-pointer">
+		class="card-padding rounded-xl bg-white flex flex-col w-full text-sub relative cursor-pointer">
 		<ion-text class="text-main_dark font-bold">
 			Answer <span class="text-gray">({{ formatTime(answer.createdAt) }})</span>
 		</ion-text>

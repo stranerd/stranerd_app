@@ -4,15 +4,15 @@
 		<IonIcon :icon="chatboxEllipsesOutline" class="text-gray text-4xl md:text-5xl" />
 		<div class="flex flex-col w-full">
 			<div class="flex gap-2 text-main_dark">
-				<IonText class="text-base font-semibold w-full truncate capitalize">
+				<IonText class="font-semibold w-full truncate capitalize">
 					{{ group.name }}
 				</IonText>
-				<IonText v-if="group.last" class="text-xs">
+				<IonText v-if="group.last" class="text-sub">
 					{{ formatTime(group.last.createdAt) }}
 				</IonText>
 			</div>
 			<div v-if="group.last" class="flex gap-2 items-center">
-				<IonText class="text-xs text-gray w-full truncate">
+				<IonText class="text-sub text-gray w-full truncate">
 					<span class="font-bold">{{ group.last.userId === id ? 'You' : group.last.userBio.firstName }}</span>:
 					{{ group.last.media ? 'Shared a file' : group.last.content }}
 				</IonText>

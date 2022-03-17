@@ -10,24 +10,24 @@
 				<div class="w-3/4 flex-auto flex flex-row items-center">
 					<Search class="flex-grow" />
 				</div>
-				<div class="w-[25%] flex-auto flex">
+				<div class="w-[25%] flex-auto flex text-main_dark">
 					<div class="flex flex-row items-center py-1 gap-8 justify-between">
-						<ion-icon :icon="addCircleOutline" class="text-2xl text-main_dark"
+						<ion-icon :icon="addCircleOutline" class="text-2xl"
 							@click="openCreateDashboardMenu" />
-						<router-link class="flex flex-row items-center justify-center"
+						<router-link class="flex items-center justify-center"
 							to="/notifications">
-							<NotificationIcon :key="user?.id" class="text-2xl text-main_dark" />
+							<NotificationIcon :key="user?.id" class="text-2xl" />
 						</router-link>
 						<div v-if="isLoggedIn"
-							class=" font-bold flex flex-row items-center justify-center gap-2 cursor-pointer"
+							class="font-bold flex items-center justify-center gap-2 cursor-pointer"
 							@click="openUserDashboardMenu"
 						>
 							<avatar :name="user?.bio.fullName" :size="24" :src="user?.bio.photo" />
-							<span class="text-base text-main_dark truncate max-w-[150px] flex items-center gap-1">
+							<span class="truncate max-w-[150px] flex items-center gap-1">
 								<span>{{ user.bio.fullName }}</span>
 								<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
 							</span>
-							<ion-icon :icon="chevronDownOutline" class="text-xl text-main_dark"></ion-icon>
+							<ion-icon :icon="chevronDownOutline" class="text-xl"></ion-icon>
 						</div>
 						<router-link v-else to="/auth/signin">
 							<avatar :size="24" />

@@ -1,5 +1,5 @@
 <template>
-	<IonApp>
+	<IonApp class="text-body">
 		<IonRouterOutlet :key="$route.fullPath" />
 		<PageLoading v-if="loading" />
 	</IonApp>

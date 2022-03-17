@@ -4,7 +4,7 @@
 			<div class="blueTop py-4">
 				<div
 					class="flex flex-col md:flex-row md:justify-between justify-start items-start px-4 w-full lg:w-8/12 w-full mx-auto">
-					<ion-text class="heading lg:text-xl font-bold text-main_dark text-start">
+					<ion-text class="text-heading font-bold text-main_dark text-start">
 						{{ flashCard.title }}
 					</ion-text>
 					<div class="items-center text-gray font-normal flex gap-3">

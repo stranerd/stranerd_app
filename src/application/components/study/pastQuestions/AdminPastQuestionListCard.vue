@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="flex flex-col lg:flex-row items-end justify-between gap-4 bg-white rounded-xl font-bold lg:text-base text-xs text-main_dark p-4">
+		class="flex flex-col lg:flex-row items-end justify-between gap-4 bg-white rounded-xl font-bold text-sub text-main_dark p-4">
 		<div class="w-full flex flex-col gap-4">
 			<div>
 				<IonText class="text-main_dark mb-2 w-full">

@@ -5,7 +5,7 @@
 				<IonIcon :icon="chatboxEllipsesOutline" class="text-4xl md:text-5xl" />
 				<div class="ml-2 flex flex-col">
 					<IonText class="text-main_dark font-semibold">{{ group.name }}</IonText>
-					<IonText class="text-xs">
+					<IonText class="text-sub">
 						Created {{ formatTime(group.createdAt) }} by <span
 							class="text-primary">{{ group.userBio.fullName }}</span>
 					</IonText>

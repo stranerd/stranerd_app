@@ -5,7 +5,7 @@
 			class="text-4xl text-gray" />
 		<div class="flex flex-col mr-auto">
 			<IonText class="font-semibold text-main_dark">{{ discussion.media.name }}</IonText>
-			<span class="text-xs">{{ discussion.size }}</span>
+			<span class="text-sub">{{ discussion.size }}</span>
 		</div>
 		<IonSpinner v-if="loading" class="text-2xl" color="primary" />
 		<IonIcon v-else :icon="downloadOutline" class="text-2xl" color="primary" @click="download" />

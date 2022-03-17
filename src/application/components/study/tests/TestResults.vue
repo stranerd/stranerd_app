@@ -2,7 +2,7 @@
 	<PageLoading v-if="loading" />
 	<div v-else
 		class="flex items-center justify-center flex-col md:my-8 px-4 py-8 bg-white rounded-xl gap-4">
-		<ion-text class="heading text-main_dark font-bold">{{ test.scoreText }}</ion-text>
+		<ion-text class="text-heading text-main_dark font-bold">{{ test.scoreText }}</ion-text>
 
 		<DonutChart :bgColor="test.passed ? '#00D24622' : '#FF666622'" :fgColor="test.passed ? '#00D246' : '#FF6666'"
 			:percentage="test.score" :size="200" :thickness="12">

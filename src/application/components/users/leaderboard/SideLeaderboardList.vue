@@ -1,27 +1,27 @@
 <template>
-	<div class="flex flex-col items-center text-sm text-main_dark gap-2">
+	<div class="flex flex-col items-center text-main_dark gap-2">
 		<router-link v-for="(person, index) in users" :key="person.id" :class="{'!bg-cyan': person.id === id}"
 			:to="`/users/${person.id}`"
-			class="py-3 px-3 rounded-xl flex w-full flex-row items-center bg-white"
+			class="py-3 px-3 rounded-xl flex w-full items-center bg-white"
 		>
-			<span class="font-bold text-sm mr-2"  :class="{'text-white !font-bold': person.id === id}">{{ index + 1 }}</span>
-			<span class="text-base font-normal flex items-center gap-1" :class="{'text-white !font-bold': person.id === id}">
+			<span :class="{'text-white !font-bold': person.id === id}" class="font-bold mr-2">{{ index + 1 }}</span>
+			<span :class="{'text-white !font-bold': person.id === id}" class="flex items-center gap-1">
 				<span>{{ person.bio.fullName }}</span>
 				<IonIcon v-if="person.isVerified" :icon="checkmarkCircleOutline" color="primary" />
 			</span>
-			<span class="text-primary font-bold text-lg ml-auto"  :class="{'text-white !font-bold': person.id === id}">
+			<span :class="{'text-white': person.id === id}" class="text-primary font-bold ml-auto">
 				{{ formatNumber(person.account.rankings[time], 2) }}
 			</span>
 		</router-link>
 
 		<router-link v-if="user && hasNoAuthUser" :to="`/users/${user.id}`"
-			class="py-3 px-3 rounded-lg flex w-full bg-cyan text-main_dark font-bold flex-row items-center">
-			<span class="font-bold mr-2 text-sm">-</span>
-			<span class="text-base font-normal flex items-center gap-1"  :class="{'text-white !font-bold': user.id === id}">
+			class="py-3 px-3 rounded-lg flex w-full bg-cyan text-white font-bold flex-row items-center">
+			<span class="font-bold mr-2">-</span>
+			<span class="flex items-center gap-1">
 				<span>{{ user.bio.fullName }}</span>
 				<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
 			</span>
-			<span class="font-bold text-primary text-lg ml-auto"  :class="{'text-white !font-bold': user.id === id}">
+			<span class="font-bold text-primary ml-auto">
 				{{ formatNumber(user.account.rankings[time], 2) }}
 			</span>
 		</router-link>

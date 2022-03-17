@@ -1,7 +1,7 @@
 <template>
 	<div class="showcase-flex">
 		<div class="bg-white hidden md:flex rounded-xl items-center justify-between gap-2 p-4">
-			<ion-text class="text-main_dark leading-tight text-xl font-bold">
+			<ion-text class="text-main_dark leading-tight text-heading font-bold">
 				My Classes
 			</ion-text>
 			<div class="flex items-center gap-4 w-full md:w-auto border-bottom-line">
