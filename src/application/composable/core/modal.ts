@@ -33,7 +33,6 @@ export const useModal = (stack: Ref<string[]>) => {
 
 	const open = async (id: string) => {
 		// await close(id)
-		console.log()
 
 		if (Object.keys(modals).includes(id)) {
 			if (modals[id].modal?.isOpen) return
