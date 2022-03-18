@@ -20,14 +20,14 @@
 			<ion-reorder-group class="flex flex-col gap-4 px-4 md:p-0" disabled="true">
 				<ion-reorder v-for="(card, index) in factory.questions" :key="index"
 					class="flex flex-col bg-white p-4 rounded-xl border border-new_gray ">
-					<div class="flex w-full items-center justify-between">
+					<div class="flex w-full items-center justify-between mb-1">
 						<ion-text class="text-main_dark font-normal"> {{ index + 1 }}</ion-text>
 						<div class="flex" @click="factory.removeQuestion(index)">
 							<ion-icon :icon='trashOutline' class="text-red" />
 						</div>
 					</div>
 
-					<div class="flex w-full md:flex-row flex-col md:gap-4 gap-1 md:h-auto">
+					<div class="flex w-full md:flex-row flex-col md:gap-4 gap-1">
 						<ion-textarea v-model="card.question"
 							class="ion-bg-white border border-faded_gray ion-rounded-xl rounded-xl w-full h-16"
 							placeholder="Enter question or word"
@@ -42,7 +42,7 @@
 			<DisplayError :error="factory.errors.set" />
 
 			<div
-				class="w-full flex bg-white items-center p-8 rounded-xl text-lg text-icon_inactive justify-center font-bold cursor-pointer"
+				class="w-full flex bg-white items-center p-4 rounded-xl text-lg text-icon_inactive justify-center font-bold cursor-pointer"
 				@click="factory.addQuestion"
 			>
 				<ion-icon :icon="addOutline" class="text-2xl" />

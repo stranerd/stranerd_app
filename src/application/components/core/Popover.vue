@@ -5,10 +5,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
-	name: 'Popover'
+	name: 'Popover',
+	props: {
+		close: {
+			type: Function as PropType<() => void>,
+			required: false,
+			default: () => {
+			}
+		}
+	}
 })
 </script>
 

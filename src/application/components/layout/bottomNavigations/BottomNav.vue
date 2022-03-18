@@ -1,6 +1,6 @@
 <template>
 	<IonFooter class="ion-no-border">
-		<IonToolbar class="lg:hidden !bg-white border-top-line">
+		<IonToolbar class="lg:hidden bg-white border-top-line">
 			<div class="flex justify-around items-center text-sub">
 				<router-link
 					v-for="{ path, icon, name, iconOutline } in [
@@ -11,7 +11,7 @@
 						...(isProd ? [] : [{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }])
 					]" :key="path"
 					:to="path"
-					class="col-span-1 text-main_dark flex flex-col items-center justify-center">
+					class="col-span-1 flex flex-col items-center justify-center">
 					<ion-icon :icon="$route.path === path ? icon : iconOutline " class="w-6 md:w-14" />
 					<IonText class="hidden md:inline">{{ name }}</IonText>
 				</router-link>
@@ -52,11 +52,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-	ion-toolbar {
-		--background: #FFFFFF;
-		--border-color: rgba(0, 0, 0, .4)
-	}
-
 	ion-tab-button {
 		--color-selected: #546DD3;
 		--padding-top: 1px;

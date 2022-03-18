@@ -25,6 +25,7 @@ export const useModal = (stack: Ref<string[]>) => {
 			if (modals[id].modal?.isOpen) return
 			const modal = await modalController.create({
 				component: modals[id].component as any,
+				componentProps: { close: () => close(id) },
 				cssClass: 'modal-class',
 				breakpoints: isPlatform('desktop') ? undefined : [0.1, 0.5, 1],
 				initialBreakpoint: 1
@@ -75,6 +76,7 @@ export const usePopover = (stack: Ref<string[]>) => {
 			if (popovers[id].popover?.isOpen) return
 			const popover = await popoverController.create({
 				component: popovers[id].component as any,
+				componentProps: { close: () => close(id) },
 				cssClass: 'popover-class',
 				event
 			})

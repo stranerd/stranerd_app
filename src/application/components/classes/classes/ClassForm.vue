@@ -11,7 +11,7 @@
 				</FileInput>
 			</div>
 			<span
-				class="px-4 relative top-[-32px] md:top-[-40px] inline-flex items-center justify-center -mb-8 md:-mb-10">
+				class="modal-padding-x relative top-[-32px] md:top-[-40px] inline-flex items-center justify-center -mb-8 md:-mb-10">
 				<img :src="photoLink || DEFAULT_PROFILE_PHOTO" alt="" class="w-16 h-16 md:h-20 md:w-20 rounded-full">
 				<FileInput accept="image/*"
 					class="rounded-full absolute h-6 w-6 bg-gray text-white flex items-center justify-center"
@@ -20,22 +20,24 @@
 				</FileInput>
 			</span>
 		</div>
-		<ion-input v-model="factory.name"
-			class="w-full text-left bg-new_gray w-full rounded-md"
-			placeholder="Add a title"
-			show-cancel-button="never"
-		/>
-		<ion-input v-model="factory.description"
-			class="w-full text-left bg-new_gray w-full rounded-md"
-			placeholder="Add a short description"
-			show-cancel-button="never"
-		/>
+		<div class="flex flex-col gap-4 modal-padding-x">
+			<ion-input v-model="factory.name"
+				class="w-full text-left bg-new_gray w-full rounded-md"
+				placeholder="Add a title"
+				show-cancel-button="never"
+			/>
+			<ion-input v-model="factory.description"
+				class="w-full text-left bg-new_gray w-full rounded-md"
+				placeholder="Add a short description"
+				show-cancel-button="never"
+			/>
 
-		<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
-			<slot name="buttonText">Submit</slot>
-			<ion-ripple-effect class="rounded-lg" />
-		</ion-button>
-		<PageLoading v-if="loading" />
+			<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
+				<slot name="buttonText">Submit</slot>
+				<ion-ripple-effect class="rounded-lg" />
+			</ion-button>
+			<PageLoading v-if="loading" />
+		</div>
 	</form>
 </template>
 
