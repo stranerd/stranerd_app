@@ -1,14 +1,13 @@
 <template>
 	<form @submit.prevent="submit">
-		<div class="mb-12">
-			<label>Title</label>
-			<IonInput v-model="factory.title" class="mb-2" placeholder="Enter Video Title" />
+		<div class="mb-4">
+			<IonInput v-model="factory.title" class="!h-12 text-left bg-new_gray" placeholder="Enter Video Title" />
 			<DisplayError :error="factory.errors.title" />
 		</div>
 
-		<div class="mb-12">
-			<label>Description</label>
-			<IonTextarea v-model="factory.description" class="mb-2" placeholder="Enter Video Description" rows="4" />
+		<div class="mb-4">
+			<IonInput v-model="factory.description" class="!h-12 text-left bg-new_gray"
+				placeholder="Add a short description" />
 			<DisplayError :error="factory.errors.description" />
 		</div>
 
@@ -36,18 +35,16 @@
 			<DisplayError :error="factory.errors.media" />
 		</div>
 
-		<div v-else class="mb-12">
-			<label class="block">Link</label>
-			<IonText class="text-sub mt-1">All links must be of videos hosted on YouTube</IonText>
-			<IonInput v-model="factory.link" class="mb-2" placeholder="Enter youtube video link" />
+		<div v-else class="mb-4">
+			<IonInput v-model="factory.link" class="!h-12 text-left bg-new_gray" inputmode="url"
+				placeholder="Enter youtube video link"
+				type="url" />
 			<DisplayError :error="factory.errors.link" />
 		</div>
 
-		<div class="flex w-full mt-8 items-center gap-6">
-			<ion-button :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
-				<slot name="buttonText">Submit</slot>
-			</ion-button>
-		</div>
+		<ion-button :disabled="loading || !factory.valid" class="w-full btn-primary md:!h-12" type="submit">
+			<slot name="buttonText">Submit</slot>
+		</ion-button>
 
 		<PageLoading v-if="loading" />
 	</form>
@@ -58,11 +55,11 @@ import { defineComponent } from 'vue'
 import { closeOutline, documentAttachOutline, image } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { VideoFactory } from '@modules/study'
-import { IonTextarea, IonToggle } from '@ionic/vue'
+import { IonToggle } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'VideoForm',
-	components: { IonTextarea, IonToggle },
+	components: { IonToggle },
 	props: {
 		factory: {
 			type: VideoFactory,
@@ -95,8 +92,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-input, ion-textarea {
-		background-color: $color-newGray;
-		border-radius: 0.25rem !important;
+		border-radius: 0.5rem !important;
 	}
 
 	label {
