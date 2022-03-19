@@ -22,12 +22,12 @@
 		</div>
 		<div class="flex flex-col gap-4 modal-padding-x">
 			<ion-input v-model="factory.name"
-				class="w-full text-left bg-new_gray w-full rounded-md"
+				class="w-full text-left bg-new_gray  rounded-md"
 				placeholder="Add a title"
 				show-cancel-button="never"
 			/>
 			<ion-input v-model="factory.description"
-				class="w-full text-left bg-new_gray w-full rounded-md"
+				class="w-full text-left bg-new_gray rounded-md"
 				placeholder="Add a short description"
 				show-cancel-button="never"
 			/>

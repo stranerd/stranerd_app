@@ -41,7 +41,7 @@ module.exports = {
 		'no-use-before-define': 'off',
 		indent: ['error', 'tab', { SwitchCase: 1 }],
 		'no-mixed-spaces-and-tabs': ['off', 'smart-tabs'],
-		semi: ['error', 'never'],
+		semi: ['off', 'never'],
 		quotes: ['error', 'single'],
 		'prefer-const': ['error'],
 		'arrow-parens': ['error', 'always'],
