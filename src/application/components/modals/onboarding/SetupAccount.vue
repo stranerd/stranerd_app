@@ -3,7 +3,7 @@
 		<template v-slot:title>
 			Set up your account
 		</template>
-		<component :is="UniversityModal" :error="error" :factory="factory" :loading="loading" :submit="createClass">
+		<component :is="SetupAccountForm" :error="error" :factory="factory" :loading="loading" :submit="createClass">
 			<template v-slot:buttonText>Next</template>
 		</component>
 	
@@ -14,8 +14,9 @@
 import { defineComponent } from 'vue'
 import { useCreateClass } from '@app/composable/classes/classes'
 import SetupAccountForm from '@app/components/onboarding/setup/SetupAccountForm.vue'
-import AcademicLevel from '@app/components/onboarding/setup/AcademicLevel.vue'
-import UniversityModal from '@app/components/onboarding/setup/UniversityStudentForm.vue'
+import AcademicLevelForm from '@app/components/onboarding/setup/AcademicLevel.vue'
+import UniversityModalForm from '@app/components/onboarding/setup/UniversityStudentForm.vue'
+import PreUniversityModalForm from '@app/components/onboarding/setup/PreUniStudentForm.vue'
 
 
 export default defineComponent({
@@ -23,7 +24,7 @@ export default defineComponent({
 	components: { SetupAccountForm },
 	setup () {
 		const { createClass, factory, error, loading } = useCreateClass()
-		return { error, loading, createClass, factory, SetupAccountForm, AcademicLevel, UniversityModal }
+		return { error, loading, createClass, factory, SetupAccountForm, AcademicLevelForm, UniversityModalForm, PreUniversityModalForm }
 	}
 })
 </script>

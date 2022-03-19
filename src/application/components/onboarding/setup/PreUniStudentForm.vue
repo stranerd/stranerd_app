@@ -2,11 +2,11 @@
 	<form class="flex flex-col gap-4 text-center justify-center" @submit.prevent="submit">
 		<div class="flex flex-col gap-4 modal-padding-x">
 			<div class="flex flex-col items-start">
-				<ion-label class="font-bold mb-4">What university are you in?</ion-label>
+				<ion-label class="font-bold mb-4">What exam(s) are you studying for?</ion-label>
 				<ion-select v-model="answered"
 					class="bg-white md:bg-new_gray !text-gray flex-grow w-full text-left font-bold select-primary"
 					interface="action-sheet"
-					placeholder="Select university">
+					placeholder="Select exam(s)">
 					<ion-select-option v-for="choice in 5" :key="choice"
 						:value="choice" @click="answered = choice">
 						{{ choice }}
@@ -14,31 +14,7 @@
 				</ion-select>
 			</div>
 
-			<div class="flex flex-col items-start mt-4">
-				<ion-label class="font-bold mb-4">What faculty are you in?</ion-label>
-				<ion-select v-model="answered"
-					class="bg-white md:bg-new_gray !text-gray flex-grow w-full text-left font-bold select-primary"
-					interface="action-sheet"
-					placeholder="Select faculty">
-					<ion-select-option v-for="choice in 5" :key="choice"
-						:value="choice" @click="answered = choice">
-						{{ choice }}
-					</ion-select-option>
-				</ion-select>
-			</div>
-
-			<div class="flex flex-col items-start mt-4">
-				<ion-label class="font-bold mb-4">What department are you in?</ion-label>
-				<ion-select v-model="answered"
-					class="bg-white md:bg-new_gray !text-gray flex-grow w-full text-left font-bold select-primary"
-					interface="action-sheet"
-					placeholder="Select department">
-					<ion-select-option v-for="choice in 5" :key="choice"
-						:value="choice" @click="answered = choice">
-						{{ choice }}
-					</ion-select-option>
-				</ion-select>
-			</div>
+	
 
 			<div class="flex w-full justify-end gap-4">
 				<ion-button  class="btn-outline text-primary w-[7.5rem]" type="submit">
