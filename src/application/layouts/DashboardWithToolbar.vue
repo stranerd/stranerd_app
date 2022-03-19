@@ -2,10 +2,12 @@
 	<IonPage>
 		<Topbar />
 		<div class="flex h-full">
-			<Sidebar />
 			<div class="layout">
 				<IonContent>
 					<div class="layout-page">
+						<div class="layout-side-left">
+							<Sidebar />
+						</div>
 						<div class="layout-body">
 							<slot />
 						</div>
@@ -18,7 +20,7 @@
 			</div>
 		</div>
 	</IonPage>
-</template>
+</template> 
 
 <script lang="ts">
 import { defineComponent } from 'vue'

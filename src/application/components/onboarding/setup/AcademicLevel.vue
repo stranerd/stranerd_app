@@ -1,41 +1,35 @@
 <template>
 	<form class="flex flex-col gap-4 text-center justify-center" @submit.prevent="submit">
-		<div class="flex flex-col items-start">
-			<div class="w-full flex items-center relative">
-				<img :src="coverPhotoLink || DEFAULT_PROFILE_BACKDROP" alt=""
-					class="h-16 md:h-20 w-full" style="object-fit: cover;">
-				<FileInput accept="image/*"
-					class="rounded-full absolute right-0 mr-4 h-8 w-8 bg-gray text-white flex items-center justify-center"
-					@files="catchCoverPhoto">
-					<IonIcon :icon="pencilOutline" />
-				</FileInput>
-			</div>
-			<span
-				class="modal-padding-x relative top-[-32px] md:top-[-40px] inline-flex items-center justify-center -mb-8 md:-mb-10">
-				<img :src="photoLink || DEFAULT_PROFILE_PHOTO" alt="" class="w-16 h-16 md:h-20 md:w-20 rounded-full">
-				<FileInput accept="image/*"
-					class="rounded-full absolute right-10 bottom-2 h-6 w-6 bg-gray text-white flex items-center justify-center"
-					@files="catchPhoto">
-					<IonIcon :icon="pencilOutline" />
-				</FileInput>
-			</span>
-		</div>
 		<div class="flex flex-col gap-4 modal-padding-x">
-			<ion-input v-model="factory.name"
-				class="w-full text-left bg-new_gray  rounded-md"
-				placeholder="Add a title"
-				show-cancel-button="never"
-			/>
-			<ion-input v-model="factory.description"
-				class="w-full text-left bg-new_gray rounded-md"
-				placeholder="Add a short description"
-				show-cancel-button="never"
-			/>
+			<ion-radio-group value="ss" class="flex flex-col items-start">
+				<ion-label class="font-bold mb-4">Choose your academic level *</ion-label>
 
-			<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
-				<slot name="buttonText">Submit</slot>
-				<ion-ripple-effect class="rounded-lg" />
-			</ion-button>
+				<div class="flex items-center mt-4">
+					<ion-radio  value="ss" class="mr-4"></ion-radio>
+					<ion-label class="!text-gray">Secondary school</ion-label>
+				</div>			
+				<div class="flex items-center mt-4">
+					<ion-radio  value="ssl" class="mr-4"></ion-radio>
+					<ion-label class="!text-gray">Secondary school leaver</ion-label>
+				</div>			
+				<div class="flex items-center mt-4">
+					<ion-radio  value="uni" class="mr-4"></ion-radio>
+					<ion-label class="!text-gray">University</ion-label>
+				</div>			
+			</ion-radio-group>
+
+
+			<div class="flex w-full justify-between gap-4 mt-4">
+				<ion-button  class="btn-outline text-primary w-[7.5rem]" type="submit">
+					Back
+					<ion-ripple-effect class="rounded-lg" />
+				</ion-button>
+				<ion-button :disabled="loading || !factory.valid" class="btn-primary w-[7.5rem]" type="submit">
+					<slot name="buttonText">Submit</slot>
+					<ion-ripple-effect class="rounded-lg" />
+				</ion-button>
+			</div>
+	
 			<PageLoading v-if="loading" />
 		</div>
 	</form>
@@ -44,14 +38,18 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { ClassFactory } from '@modules/classes'
-import { IonRippleEffect } from '@ionic/vue'
 import { DEFAULT_PROFILE_BACKDROP, DEFAULT_PROFILE_PHOTO } from '@utils/constants'
 import { addOutline, pencilOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
+import { 
+	IonRadio, 
+	IonRippleEffect,    
+	IonRadioGroup
+} from '@ionic/vue';
 
 export default defineComponent({
-	name: 'ClassForm',
-	components: { IonRippleEffect },
+	name: 'SetupAccountForm',
+	components: { IonRippleEffect, IonRadioGroup, IonRadio },
 	props: {
 		factory: {
 			type: ClassFactory,
@@ -96,7 +94,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-label {
-		--color: #8B9EB1 !important;
+		--color: #132740 !important;
+		color: #132740 !important;
 	}
 
 	ion-label {

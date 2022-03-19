@@ -21,21 +21,42 @@
 			</span>
 		</div>
 		<div class="flex flex-col gap-4 modal-padding-x">
-			<ion-input v-model="factory.name"
-				class="w-full text-left bg-new_gray  rounded-md"
-				placeholder="Add a title"
-				show-cancel-button="never"
-			/>
-			<ion-input v-model="factory.description"
-				class="w-full text-left bg-new_gray rounded-md"
-				placeholder="Add a short description"
-				show-cancel-button="never"
-			/>
+			<div class="flex flex-col items-start">
+				<ion-label class="font-bold mb-4 ">Name</ion-label>
+				<div class="flex w-full justify-between">
+					<ion-input v-model="factory.name"
+						class="w-1/2 mr-4 text-left bg-transparent border border-faded_gray  rounded-md "
+						placeholder="First name"
+					/>
+					<ion-input v-model="factory.name"
+						class="w-1/2  text-left bg-transparent border border-faded_gray  rounded-md "
+						placeholder="Last name"
+					/>
+				</div>
+			
+			</div>
 
-			<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
-				<slot name="buttonText">Submit</slot>
-				<ion-ripple-effect class="rounded-lg" />
-			</ion-button>
+			<div class="flex flex-col items-start">
+				<ion-label class="font-bold mb-4">Bio</ion-label>
+				<ion-input v-model="factory.description"
+					class="w-full text-left bg-transparent border border-faded_gray rounded-md"
+					placeholder="Short description on your profile"
+					show-cancel-button="never"
+				/>
+			</div>
+
+
+			<div class="flex w-full justify-end gap-4">
+				<ion-button  class="btn-outline text-primary w-[7.5rem]" type="submit">
+					Skip
+					<ion-ripple-effect class="rounded-lg" />
+				</ion-button>
+				<ion-button :disabled="loading || !factory.valid" class="btn-primary w-[7.5rem]" type="submit">
+					<slot name="buttonText">Submit</slot>
+					<ion-ripple-effect class="rounded-lg" />
+				</ion-button>
+			</div>
+	
 			<PageLoading v-if="loading" />
 		</div>
 	</form>
@@ -50,7 +71,7 @@ import { addOutline, pencilOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 
 export default defineComponent({
-	name: 'ClassForm',
+	name: 'SetupAccountForm',
 	components: { IonRippleEffect },
 	props: {
 		factory: {
@@ -96,7 +117,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-label {
-		--color: #8B9EB1 !important;
+		--color: #132740 !important;
+		color: #132740 !important;
 	}
 
 	ion-label {

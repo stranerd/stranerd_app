@@ -1,5 +1,5 @@
-import { IonButton, IonContent, IonIcon, IonInput, IonLabel, IonPage, IonText } from '@ionic/vue'
-import { definePlugin } from '@app/plugins/index'
+import { definePlugin } from '@app/plugins/index';
+import { IonButton, IonContent, IonIcon, IonInput, IonLabel, IonPage, IonText } from '@ionic/vue';
 
 export const registerIonicComponent = definePlugin(async ({ app }) => {
 	app.component('IonPage', IonPage)
