@@ -18,8 +18,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import CourseForm from '@app/components/study/courses/CourseForm.vue'
-import { useEditCourse } from '@app/composable/study/courses'
+import CourseForm from '@app/components/school/courses/CourseForm.vue'
+import { useEditCourse } from '@app/composable/school/courses'
 
 export default defineComponent({
 	name: 'EditCourseModal',

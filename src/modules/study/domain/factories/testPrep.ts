@@ -2,7 +2,7 @@ import { BaseFactory } from '@modules/core'
 import { arrayContainsX, isLongerThanX, isMoreThanX, isNumber, isString } from '@stranerd/validate'
 import { PrepType, TestPrepEntity } from '../entities/testPrep'
 import { TestPrepToModel } from '../../data/models/testPrep'
-import { PastQuestionType } from '../entities/pastQuestion'
+import { PastQuestionType } from '@modules/school'
 
 type Keys = {
 	name: string

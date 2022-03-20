@@ -32,8 +32,8 @@ import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
 import { TestEntity } from '@modules/study'
 import { useTestPrep } from '@app/composable/study/testPreps'
-import Institution from '@app/components/study/institutions/Institution.vue'
-import Course from '@app/components/study/courses/Course.vue'
+import Institution from '@app/components/school/institutions/Institution.vue'
+import Course from '@app/components/school/courses/Course.vue'
 import Tag from '../../core/Tag.vue'
 
 export default defineComponent({

@@ -87,7 +87,8 @@ import {
 	radioButtonOff,
 	radioButtonOn
 } from 'ionicons/icons'
-import { PastQuestionEntity, PastQuestionType, TestEntity, TestType } from '@modules/study'
+import { TestEntity, TestType } from '@modules/study'
+import { PastQuestionEntity, PastQuestionType } from '@modules/school'
 import { getAlphabet } from '@utils/commons'
 import { useCreateReport } from '@app/composable/reports/reports'
 import { ReportType } from '@modules/reports'

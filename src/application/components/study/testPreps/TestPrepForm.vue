@@ -70,8 +70,8 @@
 import { computed, defineComponent } from 'vue'
 import { TestPrepFactory } from '@modules/study'
 import { IonSelect, IonSelectOption } from '@ionic/vue'
-import { useInstitutionList } from '@app/composable/study/institutions'
-import { useCourseList } from '@app/composable/study/courses'
+import { useInstitutionList } from '@app/composable/school/institutions'
+import { useCourseList } from '@app/composable/school/courses'
 
 export default defineComponent({
 	name: 'TestPrepForm',

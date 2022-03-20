@@ -56,8 +56,8 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
-import Institution from '@app/components/study/institutions/Institution.vue'
-import Course from '@app/components/study/courses/Course.vue'
+import Institution from '@app/components/school/institutions/Institution.vue'
+import Course from '@app/components/school/courses/Course.vue'
 import { useRoute } from 'vue-router'
 import { useTestPrepList } from '@app/composable/study/testPreps'
 import { IonItem, IonLabel, IonSelect, IonSelectOption } from '@ionic/vue'
