@@ -54,7 +54,6 @@ export const useFaculty = (id: string) => {
 }
 
 let creatingInstitutionFaculty = null as string | null
-export const getCreatingInstitutionFaculty = () => creatingInstitutionFaculty
 export const openFacultyCreateModal = async (institutionId: string) => {
 	creatingInstitutionFaculty = institutionId
 	useSchoolModal().openCreateFaculty()
@@ -88,7 +87,6 @@ export const useCreateFaculty = () => {
 }
 
 let editingFaculty = null as FacultyEntity | null
-export const getEditingFaculty = () => editingFaculty
 export const openFacultyEditModal = async (faculty: FacultyEntity) => {
 	editingFaculty = faculty
 	useSchoolModal().openEditFaculty()

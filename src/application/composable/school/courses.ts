@@ -53,10 +53,9 @@ export const useCourse = (id: string) => {
 	return { course }
 }
 
-let creatingInstitutionCourse = null as string | null
-export const getCreatingInstitutionCourse = () => creatingInstitutionCourse
-export const openCourseCreateModal = async (institutionId: string) => {
-	creatingInstitutionCourse = institutionId
+let creatingCourseEntity = null as { institutionId: string, departmentId: string | null } | null
+export const openCourseCreateModal = async (institutionId: string, departmentId: string | null) => {
+	creatingCourseEntity = { institutionId, departmentId }
 	useSchoolModal().openCreateCourse()
 }
 
@@ -65,7 +64,10 @@ export const useCreateCourse = () => {
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
-	if (creatingInstitutionCourse) factory.value.institutionId = creatingInstitutionCourse
+	if (creatingCourseEntity) {
+		factory.value.institutionId = creatingCourseEntity.institutionId
+		factory.value.departmentId = creatingCourseEntity.departmentId
+	} else useSchoolModal().closeCreateCourse()
 
 	const createCourse = async () => {
 		await setError('')
@@ -88,7 +90,6 @@ export const useCreateCourse = () => {
 }
 
 let editingCourse = null as CourseEntity | null
-export const getEditingCourse = () => editingCourse
 export const openCourseEditModal = async (course: CourseEntity) => {
 	editingCourse = course
 	useSchoolModal().openEditCourse()

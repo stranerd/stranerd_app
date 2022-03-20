@@ -80,7 +80,6 @@ export const useCreateInstitution = () => {
 }
 
 let editingInstitution = null as InstitutionEntity | null
-export const getEditingInstitution = () => editingInstitution
 export const openInstitutionEditModal = async (institution: InstitutionEntity) => {
 	editingInstitution = institution
 	useSchoolModal().openEditInstitution()

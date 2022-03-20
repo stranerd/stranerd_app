@@ -80,7 +80,6 @@ export const useCreatePastQuestion = () => {
 }
 
 let editingPastQuestion = null as PastQuestionEntity | null
-export const getEditingPastQuestion = () => editingPastQuestion
 export const openPastQuestionEditModal = async (pastQuestion: PastQuestionEntity) => {
 	editingPastQuestion = pastQuestion
 	useSchoolModal().openEditPastQuestion()

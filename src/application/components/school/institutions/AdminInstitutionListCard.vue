@@ -7,7 +7,7 @@
 		<IonList slot="content">
 			<IonItem>
 				<IonLabel />
-				<a class="flex items-center gap-1 mr-4" @click.prevent="openCourseCreateModal(institution.id)">
+				<a class="flex items-center gap-1 mr-4" @click.prevent="openCourseCreateModal(institution.id, null)">
 					<IonIcon :icon="addOutline" class="text-green" />
 					<IonLabel>Add Course</IonLabel>
 				</a>
