@@ -15,7 +15,7 @@
 import { defineComponent } from 'vue'
 import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import AdminInstitutionsList from '@app/components/school/institutions/AdminInstitutionsList.vue'
-import { useStudyModal } from '@app/composable/core/modals'
+import { useSchoolModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'AdminStudyInstitutions',
@@ -24,7 +24,7 @@ export default defineComponent({
 	middlewares: ['isAdmin'],
 	setup () {
 		return {
-			openCreateInstitution: useStudyModal().openCreateInstitution
+			openCreateInstitution: useSchoolModal().openCreateInstitution
 		}
 	}
 })

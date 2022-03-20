@@ -10,7 +10,7 @@ import {
 } from '@modules/school'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { useStudyModal } from '@app/composable/core/modals'
+import { useSchoolModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
 
 const global = {
@@ -67,7 +67,7 @@ export const useCreatePastQuestion = () => {
 				const pastQuestion = await AddPastQuestion.call(factory.value)
 				addToArray(global.pastQuestions.value, pastQuestion, (e) => e.id, (e) => e.createdAt)
 				factory.value.reset()
-				useStudyModal().closeCreatePastQuestion()
+				useSchoolModal().closeCreatePastQuestion()
 				await setMessage('PastQuestion created successfully')
 			} catch (error) {
 				await setError(error)
@@ -83,7 +83,7 @@ let editingPastQuestion = null as PastQuestionEntity | null
 export const getEditingPastQuestion = () => editingPastQuestion
 export const openPastQuestionEditModal = async (pastQuestion: PastQuestionEntity) => {
 	editingPastQuestion = pastQuestion
-	useStudyModal().openEditPastQuestion()
+	useSchoolModal().openEditPastQuestion()
 }
 
 export const useEditPastQuestion = () => {
@@ -92,7 +92,7 @@ export const useEditPastQuestion = () => {
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	if (editingPastQuestion) factory.value.loadEntity(editingPastQuestion)
-	else useStudyModal().closeEditPastQuestion()
+	else useSchoolModal().closeEditPastQuestion()
 
 	const editPastQuestion = async () => {
 		await setError('')
@@ -102,7 +102,7 @@ export const useEditPastQuestion = () => {
 				const updatedPastQuestion = await EditPastQuestion.call(editingPastQuestion!.id, factory.value)
 				addToArray(global.pastQuestions.value, updatedPastQuestion, (e) => e.id, (e) => e.createdAt)
 				factory.value.reset()
-				useStudyModal().closeEditPastQuestion()
+				useSchoolModal().closeEditPastQuestion()
 				await setMessage('PastQuestion updated successfully')
 			} catch (error) {
 				await setError(error)

@@ -2,7 +2,7 @@ import { computed, onMounted, Ref, ref } from 'vue'
 import { AddCourse, CourseEntity, CourseFactory, DeleteCourse, EditCourse, GetCourses } from '@modules/school'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { useStudyModal } from '@app/composable/core/modals'
+import { useSchoolModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
 
 const global = {
@@ -57,7 +57,7 @@ let creatingInstitutionCourse = null as string | null
 export const getCreatingInstitutionCourse = () => creatingInstitutionCourse
 export const openCourseCreateModal = async (institutionId: string) => {
 	creatingInstitutionCourse = institutionId
-	useStudyModal().openCreateCourse()
+	useSchoolModal().openCreateCourse()
 }
 
 export const useCreateCourse = () => {
@@ -75,7 +75,7 @@ export const useCreateCourse = () => {
 				const course = await AddCourse.call(factory.value)
 				addToArray(global.courses.value, course, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
-				useStudyModal().closeCreateCourse()
+				useSchoolModal().closeCreateCourse()
 				await setMessage('Course created successfully')
 			} catch (error) {
 				await setError(error)
@@ -91,7 +91,7 @@ let editingCourse = null as CourseEntity | null
 export const getEditingCourse = () => editingCourse
 export const openCourseEditModal = async (course: CourseEntity) => {
 	editingCourse = course
-	useStudyModal().openEditCourse()
+	useSchoolModal().openEditCourse()
 }
 
 export const useEditCourse = () => {
@@ -100,7 +100,7 @@ export const useEditCourse = () => {
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	if (editingCourse) factory.value.loadEntity(editingCourse)
-	else useStudyModal().closeEditCourse()
+	else useSchoolModal().closeEditCourse()
 
 	const editCourse = async () => {
 		await setError('')
@@ -110,7 +110,7 @@ export const useEditCourse = () => {
 				const updatedCourse = await EditCourse.call(editingCourse!.id, factory.value)
 				addToArray(global.courses.value, updatedCourse, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
-				useStudyModal().closeEditCourse()
+				useSchoolModal().closeEditCourse()
 				await setMessage('Course updated successfully')
 			} catch (error) {
 				await setError(error)

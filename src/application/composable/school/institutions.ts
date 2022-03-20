@@ -9,7 +9,7 @@ import {
 } from '@modules/school'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { useStudyModal } from '@app/composable/core/modals'
+import { useSchoolModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
 
 const global = {
@@ -67,7 +67,7 @@ export const useCreateInstitution = () => {
 				const institution = await AddInstitution.call(factory.value)
 				addToArray(global.institutions.value, institution, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
-				useStudyModal().closeCreateInstitution()
+				useSchoolModal().closeCreateInstitution()
 				await setMessage('Institution created successfully')
 			} catch (error) {
 				await setError(error)
@@ -83,7 +83,7 @@ let editingInstitution = null as InstitutionEntity | null
 export const getEditingInstitution = () => editingInstitution
 export const openInstitutionEditModal = async (institution: InstitutionEntity) => {
 	editingInstitution = institution
-	useStudyModal().openEditInstitution()
+	useSchoolModal().openEditInstitution()
 }
 
 export const useEditInstitution = () => {
@@ -92,7 +92,7 @@ export const useEditInstitution = () => {
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	if (editingInstitution) factory.value.loadEntity(editingInstitution)
-	else useStudyModal().closeEditInstitution()
+	else useSchoolModal().closeEditInstitution()
 
 	const editInstitution = async () => {
 		await setError('')
@@ -102,7 +102,7 @@ export const useEditInstitution = () => {
 				const updatedInstitution = await EditInstitution.call(editingInstitution!.id, factory.value)
 				addToArray(global.institutions.value, updatedInstitution, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
-				useStudyModal().closeEditInstitution()
+				useSchoolModal().closeEditInstitution()
 				await setMessage('Institution updated successfully')
 			} catch (error) {
 				await setError(error)

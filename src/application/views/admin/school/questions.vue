@@ -15,7 +15,7 @@
 import { defineComponent } from 'vue'
 import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import AdminPastQuestionsList from '@app/components/school/pastQuestions/AdminPastQuestionsList.vue'
-import { useStudyModal } from '@app/composable/core/modals'
+import { useSchoolModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'AdminStudyQuestions',
@@ -23,7 +23,7 @@ export default defineComponent({
 	components: { AdminPastQuestionsList, AdminWrapper },
 	setup () {
 		return {
-			openCreatePastQuestion: useStudyModal().openCreatePastQuestion
+			openCreatePastQuestion: useSchoolModal().openCreatePastQuestion
 		}
 	}
 })
