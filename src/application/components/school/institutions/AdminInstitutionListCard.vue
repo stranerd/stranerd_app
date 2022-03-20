@@ -40,15 +40,15 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { InstitutionEntity } from '@modules/study'
-import { openInstitutionEditModal, useDeleteInstitution } from '@app/composable/study/institutions'
+import { InstitutionEntity } from '@modules/school'
+import { openInstitutionEditModal, useDeleteInstitution } from '@app/composable/school/institutions'
 import { IonAccordion, IonItem, IonLabel, IonList } from '@ionic/vue'
 import {
 	openCourseCreateModal,
 	openCourseEditModal,
 	useCourseList,
 	useDeleteCourse
-} from '@app/composable/study/courses'
+} from '@app/composable/school/courses'
 import { addOutline, pencilOutline, trashOutline } from 'ionicons/icons'
 
 export default defineComponent({

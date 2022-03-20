@@ -58,12 +58,12 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import PastQuestionListCard from '@app/components/study/pastQuestions/AdminPastQuestionListCard.vue'
-import { usePastQuestionList } from '@app/composable/study/pastQuestions'
+import PastQuestionListCard from '@app/components/school/pastQuestions/AdminPastQuestionListCard.vue'
+import { usePastQuestionList } from '@app/composable/school/pastQuestions'
 import { IonSelect, IonSelectOption } from '@ionic/vue'
-import { useInstitutionList } from '@app/composable/study/institutions'
-import { PastQuestionType } from '@modules/study'
-import { useCourseList } from '@app/composable/study/courses'
+import { useInstitutionList } from '@app/composable/school/institutions'
+import { PastQuestionType } from '@modules/school'
+import { useCourseList } from '@app/composable/school/courses'
 import { years } from '@utils/constants'
 
 export default defineComponent({

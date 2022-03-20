@@ -18,8 +18,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import InstitutionForm from '@app/components/study/institutions/InstitutionForm.vue'
-import { useEditInstitution } from '@app/composable/study/institutions'
+import InstitutionForm from '@app/components/school/institutions/InstitutionForm.vue'
+import { useEditInstitution } from '@app/composable/school/institutions'
 
 export default defineComponent({
 	name: 'EditInstitutionModal',

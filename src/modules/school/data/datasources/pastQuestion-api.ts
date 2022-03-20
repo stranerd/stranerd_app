@@ -7,7 +7,7 @@ export class PastQuestionApiDataSource implements PastQuestionBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/pastQuestions')
+		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/school/pastQuestions')
 	}
 
 	async create (data: PastQuestionToModel) {
@@ -23,14 +23,14 @@ export class PastQuestionApiDataSource implements PastQuestionBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<PastQuestionFromModel>) {
-		const listener = listenOnSocket(`study/pastQuestions/${id}`, listeners)
+		const listener = listenOnSocket(`school/pastQuestions/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<PastQuestionFromModel>) {
-		const listener = listenOnSocket('study/pastQuestions', listeners)
+		const listener = listenOnSocket('school/pastQuestions', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

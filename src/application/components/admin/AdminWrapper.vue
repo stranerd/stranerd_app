@@ -17,7 +17,7 @@
 						exact-active-class="border-b-4 text-white border-white">
 						Admins
 					</router-link>
-					<router-link :to="`/admin/study/institutions`"
+					<router-link :to="`/admin/school/institutions`"
 						class="py-2 lg:mr-12 mr-4 cursor-pointer"
 						exact-active-class="border-b-4 text-white border-white">
 						Institutions
@@ -27,7 +27,7 @@
 						exact-active-class="border-b-4 text-white border-white">
 						Preps
 					</router-link>
-					<router-link :to="`/admin/study/questions`"
+					<router-link :to="`/admin/school/questions`"
 						class="py-2 lg:mr-12 mr-4 cursor-pointer"
 						exact-active-class="border-b-4 text-white border-white">
 						Test Questions

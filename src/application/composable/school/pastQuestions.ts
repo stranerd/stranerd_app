@@ -7,7 +7,7 @@ import {
 	PastQuestionEntity,
 	PastQuestionFactory,
 	PastQuestionType
-} from '@modules/study'
+} from '@modules/school'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useStudyModal } from '@app/composable/core/modals'

@@ -57,8 +57,8 @@ import TestPrepListCard from '@app/components/study/testPreps/AdminTestPrepListC
 import { useTestPrepList } from '@app/composable/study/testPreps'
 import { IonSelect, IonSelectOption } from '@ionic/vue'
 import { groupBy } from '@utils/commons'
-import Institution from '@app/components/study/institutions/Institution.vue'
-import Course from '@app/components/study/courses/Course.vue'
+import Institution from '@app/components/school/institutions/Institution.vue'
+import Course from '@app/components/school/courses/Course.vue'
 
 export default defineComponent({
 	name: 'AdminTestPrepsList',

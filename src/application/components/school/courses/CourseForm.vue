@@ -30,9 +30,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { CourseFactory } from '@modules/study'
+import { CourseFactory } from '@modules/school'
 import { IonSelect, IonSelectOption } from '@ionic/vue'
-import { useInstitutionList } from '@app/composable/study/institutions'
+import { useInstitutionList } from '@app/composable/school/institutions'
 
 export default defineComponent({
 	name: 'CourseForm',

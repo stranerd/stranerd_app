@@ -6,14 +6,13 @@ import { InstitutionToModel } from '../../data/models/institution'
 export class InstitutionFactory extends BaseFactory<InstitutionEntity, InstitutionToModel, InstitutionToModel> {
 	readonly rules = {
 		name: { required: true, rules: [isString, isLongerThanX(0)] },
-		isSchool: { required: true, rules: [isBoolean] },
 		isGateway: { required: true, rules: [isBoolean] }
 	}
 
 	reserved = []
 
 	constructor () {
-		super({ name: '', isSchool: false, isGateway: false })
+		super({ name: '', isGateway: false })
 	}
 
 	get name () {
@@ -30,7 +29,6 @@ export class InstitutionFactory extends BaseFactory<InstitutionEntity, Instituti
 
 	set isGateway (value: boolean) {
 		this.set('isGateway', value)
-		this.set('isSchool', !value)
 	}
 
 	loadEntity = (entity: InstitutionEntity) => {
@@ -40,8 +38,8 @@ export class InstitutionFactory extends BaseFactory<InstitutionEntity, Instituti
 
 	toModel = async () => {
 		if (this.valid) {
-			const { name, isSchool, isGateway } = this.validValues
-			return { name, isSchool, isGateway }
+			const { name, isGateway } = this.validValues
+			return { name, isGateway }
 		} else {
 			throw new Error('Validation errors')
 		}

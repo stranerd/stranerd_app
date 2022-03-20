@@ -7,7 +7,7 @@ export class CourseApiDataSource implements CourseBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/courses')
+		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/school/courses')
 	}
 
 	async create (data: CourseToModel) {
@@ -23,14 +23,14 @@ export class CourseApiDataSource implements CourseBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<CourseFromModel>) {
-		const listener = listenOnSocket(`study/courses/${id}`, listeners)
+		const listener = listenOnSocket(`school/courses/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<CourseFromModel>) {
-		const listener = listenOnSocket('study/courses', listeners)
+		const listener = listenOnSocket('school/courses', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

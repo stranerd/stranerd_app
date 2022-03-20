@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { PastQuestionType } from './pastQuestion'
+import { PastQuestionType } from '@modules/school'
 
 export class TestPrepEntity extends BaseEntity {
 	public readonly id: string

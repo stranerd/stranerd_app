@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { InstitutionFactory } from '@modules/study'
+import { InstitutionFactory } from '@modules/school'
 import { IonToggle } from '@ionic/vue'
 
 export default defineComponent({

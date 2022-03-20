@@ -14,7 +14,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
-import AdminInstitutionsList from '@app/components/study/institutions/AdminInstitutionsList.vue'
+import AdminInstitutionsList from '@app/components/school/institutions/AdminInstitutionsList.vue'
 import { useStudyModal } from '@app/composable/core/modals'
 
 export default defineComponent({

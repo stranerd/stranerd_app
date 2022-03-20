@@ -95,12 +95,12 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { PastQuestionFactory } from '@modules/study'
+import { PastQuestionFactory } from '@modules/school'
 import { IonRadio, IonRadioGroup, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
 import { getAlphabet } from '@utils/commons'
 import { addOutline, trashOutline } from 'ionicons/icons'
-import { useInstitutionList } from '@app/composable/study/institutions'
-import { useCourseList } from '@app/composable/study/courses'
+import { useInstitutionList } from '@app/composable/school/institutions'
+import { useCourseList } from '@app/composable/school/courses'
 import { years } from '@utils/constants'
 
 export default defineComponent({

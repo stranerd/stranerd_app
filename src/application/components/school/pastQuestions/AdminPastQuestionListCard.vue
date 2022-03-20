@@ -50,8 +50,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { PastQuestionEntity } from '@modules/study'
-import { openPastQuestionEditModal, useDeletePastQuestion } from '@app/composable/study/pastQuestions'
+import { PastQuestionEntity } from '@modules/school'
+import { openPastQuestionEditModal, useDeletePastQuestion } from '@app/composable/school/pastQuestions'
 import { getAlphabet } from '@utils/commons'
 import { checkmarkDoneOutline } from 'ionicons/icons'
 

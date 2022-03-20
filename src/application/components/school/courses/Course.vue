@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useCourse } from '@app/composable/study/courses'
+import { useCourse } from '@app/composable/school/courses'
 
 export default defineComponent({
 	name: 'Course',

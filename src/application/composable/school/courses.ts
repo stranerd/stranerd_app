@@ -1,5 +1,5 @@
 import { computed, onMounted, Ref, ref } from 'vue'
-import { AddCourse, CourseEntity, CourseFactory, DeleteCourse, EditCourse, GetCourses } from '@modules/study'
+import { AddCourse, CourseEntity, CourseFactory, DeleteCourse, EditCourse, GetCourses } from '@modules/school'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useStudyModal } from '@app/composable/core/modals'

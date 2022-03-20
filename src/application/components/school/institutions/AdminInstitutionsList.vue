@@ -11,8 +11,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import InstitutionListCard from '@app/components/study/institutions/AdminInstitutionListCard.vue'
-import { useInstitutionList } from '@app/composable/study/institutions'
+import InstitutionListCard from '@app/components/school/institutions/AdminInstitutionListCard.vue'
+import { useInstitutionList } from '@app/composable/school/institutions'
 import { IonAccordionGroup } from '@ionic/vue'
 
 export default defineComponent({

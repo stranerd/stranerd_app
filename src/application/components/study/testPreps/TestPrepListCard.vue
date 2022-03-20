@@ -35,8 +35,8 @@ import { calendarOutline, ellipsisVerticalOutline, playOutline } from 'ionicons/
 import { defineComponent } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import { useCreateTest } from '@app/composable/study/tests'
-import Institution from '@app/components/study/institutions/Institution.vue'
-import Course from '@app/components/study/courses/Course.vue'
+import Institution from '@app/components/school/institutions/Institution.vue'
+import Course from '@app/components/school/courses/Course.vue'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
