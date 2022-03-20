@@ -1,6 +1,6 @@
 import { BaseEntity } from '@modules/core'
 import { catchDivideByZero } from '@utils/commons'
-import { PastQuestionType } from './pastQuestion'
+import { PastQuestionType } from '@modules/school'
 
 export class TestEntity extends BaseEntity {
 	public readonly id: string

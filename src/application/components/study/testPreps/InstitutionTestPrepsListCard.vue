@@ -5,7 +5,7 @@
 			<Institution :institutionId="institutionId" class="font-semibold" />
 		</ion-text>
 		<div class="flex justify-between items-center w-full gap-2">
-			<Tag :tag="yearGap" :index="3" />
+			<Tag :index="3" :tag="yearGap" />
 			<Share :link="`/study/preps/${institutionId}`"
 				:title="`${institution ? institution.name : 'Institution'}'s preps`"
 				cssClass="text-lg" text="Share this institution preps" />
@@ -16,8 +16,8 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import { TestPrepEntity } from '@modules/study'
-import Institution from '@app/components/study/institutions/Institution.vue'
-import { useInstitution } from '@app/composable/study/institutions'
+import Institution from '@app/components/school/institutions/Institution.vue'
+import { useInstitution } from '@app/composable/school/institutions'
 
 export default defineComponent({
 	name: 'InstitutionTestPrepsListCard',

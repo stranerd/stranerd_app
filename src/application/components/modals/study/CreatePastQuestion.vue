@@ -18,8 +18,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import PastQuestionForm from '@app/components/study/pastQuestions/PastQuestionForm.vue'
-import { useCreatePastQuestion } from '@app/composable/study/pastQuestions'
+import PastQuestionForm from '@app/components/school/pastQuestions/PastQuestionForm.vue'
+import { useCreatePastQuestion } from '@app/composable/school/pastQuestions'
 
 export default defineComponent({
 	name: 'CreatePastQuestionModal',

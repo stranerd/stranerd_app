@@ -40,21 +40,8 @@ const SessionModal = modal.register('Session', {
 })
 const ReportModal = modal.register('Report', { CreateReport })
 const StudyModal = modal.register('Study', {
-	CreateSet,
-	EditSet,
-	CreateNote,
-	EditNote,
-	CreateVideo,
-	EditVideo,
-	CreateInstitution,
-	EditInstitution,
-	CreateCourse,
-	EditCourse,
-	CreateTestPrep,
-	EditTestPrep,
-	CreatePastQuestion,
-	EditPastQuestion,
-	SaveEntity,
+	CreateSet, EditSet, CreateNote, EditNote, SaveEntity,
+	CreateVideo, EditVideo, CreateTestPrep, EditTestPrep
 })
 const ClassModal = modal.register('Class', {
 	CreateClass,
@@ -67,21 +54,19 @@ const ClassModal = modal.register('Class', {
 const OnboardingModal = modal.register('Onboarding', {
 	SetupAccount,
 })
+const SchoolModal = modal.register('School', {
+	CreateInstitution, EditInstitution, CreateFaculty: CreateInstitution, EditFaculty: EditInstitution,
+	CreatePastQuestion, EditPastQuestion, CreateCourse, EditCourse,
+	CreateDepartment: CreateInstitution, EditDepartment: EditInstitution
+})
 
 export const useQuestionModal = () => QuestionModal
 export const useSessionModal = () => SessionModal
 export const useReportModal = () => ReportModal
 export const useStudyModal = () => StudyModal
 export const useClassModal = () => ClassModal
-export const useOnboardingModal = () => OnboardingModal
-export const allModals = [
-	useQuestionModal,
-	useSessionModal,
-	useReportModal,
-	useStudyModal,
-	useClassModal,
-	useOnboardingModal,
-]
+export const useSchoolModal = () => SchoolModal
+export const allModals = [useQuestionModal, useSessionModal, useReportModal, useStudyModal, useClassModal, useSchoolModal]
 
 export const popover = usePopover(ref([]))
 const MenuPopover = popover.register('Menu', {

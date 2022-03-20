@@ -1,37 +1,24 @@
 import { SetApiDataSource } from './data/datasources/set-api'
-import { CourseApiDataSource } from './data/datasources/course-api'
-import { InstitutionApiDataSource } from './data/datasources/institution-api'
 import { FlashCardApiDataSource } from './data/datasources/flashCard-api'
 import { NoteApiDataSource } from './data/datasources/note-api'
 import { VideoApiDataSource } from './data/datasources/video-api'
 import { CommentApiDataSource } from './data/datasources/comment-api'
-import { PastQuestionApiDataSource } from './data/datasources/pastQuestion-api'
 import { TestPrepApiDataSource } from './data/datasources/testPrep-api'
 import { TestApiDataSource } from './data/datasources/test-api'
 import { SetTransformer } from './data/transformers/set'
-import { CourseTransformer } from './data/transformers/course'
-import { InstitutionTransformer } from './data/transformers/institution'
 import { FlashCardTransformer } from './data/transformers/flashCard'
 import { NoteTransformer } from './data/transformers/note'
 import { TestTransformer } from './data/transformers/test'
 import { VideoTransformer } from './data/transformers/video'
 import { TestPrepTransformer } from './data/transformers/testPrep'
 import { CommentTransformer } from './data/transformers/comment'
-import { PastQuestionTransformer } from './data/transformers/pastQuestion'
 import { SetRepository } from './data/repositories/set'
-import { CourseRepository } from './data/repositories/course'
-import { InstitutionRepository } from './data/repositories/institution'
 import { FlashCardRepository } from './data/repositories/flashCard'
 import { NoteRepository } from './data/repositories/note'
 import { VideoRepository } from './data/repositories/video'
 import { CommentRepository } from './data/repositories/comment'
-import { PastQuestionRepository } from './data/repositories/pastQuestion'
 import { TestPrepRepository } from './data/repositories/testPrep'
 import { TestRepository } from './data/repositories/test'
-import { CourseEntity } from './domain/entities/course'
-import { CourseFactory } from './domain/factories/course'
-import { InstitutionEntity } from './domain/entities/institution'
-import { InstitutionFactory } from './domain/factories/institution'
 import { FlashCardEntity } from './domain/entities/flashCard'
 import { FlashCardFactory } from './domain/factories/flashCard'
 import { NoteEntity } from './domain/entities/note'
@@ -44,8 +31,6 @@ import { CommentData, CommentEntity, CommentType } from './domain/entities/comme
 import { CommentFactory } from './domain/factories/comment'
 import { PrepData, PrepType, TestPrepEntity } from './domain/entities/testPrep'
 import { TestPrepFactory } from './domain/factories/testPrep'
-import { PastQuestionData, PastQuestionEntity, PastQuestionType } from './domain/entities/pastQuestion'
-import { PastQuestionFactory } from './domain/factories/pastQuestion'
 import { TestData, TestEntity, TestType } from './domain/entities/test'
 import { GetSetsUseCase } from './domain/usecases/sets/getSets'
 import { GetUserSetsUseCase } from './domain/usecases/sets/getUserSets'
@@ -60,18 +45,6 @@ import { DeleteSetUseCase } from './domain/usecases/sets/deleteSet'
 import { ListenToSetUseCase } from './domain/usecases/sets/listenToSet'
 import { SaveSetPropUseCase } from './domain/usecases/sets/saveSetProp'
 import { DeleteSetPropUseCase } from './domain/usecases/sets/deleteSetProp'
-import { GetCoursesUseCase } from './domain/usecases/courses/getCourses'
-import { ListenToCoursesUseCase } from './domain/usecases/courses/listenToCourses'
-import { FindCourseUseCase } from './domain/usecases/courses/findCourse'
-import { AddCourseUseCase } from './domain/usecases/courses/addCourse'
-import { EditCourseUseCase } from './domain/usecases/courses/editCourse'
-import { DeleteCourseUseCase } from './domain/usecases/courses/deleteCourse'
-import { AddInstitutionUseCase } from './domain/usecases/institutions/addInstitution'
-import { DeleteInstitutionUseCase } from './domain/usecases/institutions/deleteInstitution'
-import { GetInstitutionsUseCase } from './domain/usecases/institutions/getInstitutions'
-import { ListenToInstitutionsUseCase } from './domain/usecases/institutions/listenToInstitutions'
-import { EditInstitutionUseCase } from './domain/usecases/institutions/editInstitution'
-import { FindInstitutionUseCase } from './domain/usecases/institutions/findInstitution'
 import { AddNoteUseCase } from './domain/usecases/notes/addNote'
 import { FindNoteUseCase } from './domain/usecases/notes/findNote'
 import { DeleteNoteUseCase } from './domain/usecases/notes/deleteNote'
@@ -111,13 +84,6 @@ import { ListenToVideoCommentsUseCase } from './domain/usecases/comments/listenT
 import { GetVideoCommentsUseCase } from './domain/usecases/comments/getVideoComments'
 import { AddCommentUseCase } from './domain/usecases/comments/addComment'
 import { EditCommentUseCase } from './domain/usecases/comments/editComment'
-import { GetPastQuestionsUseCase } from './domain/usecases/pastQuestions/getPastQuestions'
-import { ListenToPastQuestionsUseCase } from './domain/usecases/pastQuestions/listenToPastQuestions'
-import { FindPastQuestionUseCase } from './domain/usecases/pastQuestions/findPastQuestion'
-import { AddPastQuestionUseCase } from './domain/usecases/pastQuestions/addPastQuestion'
-import { EditPastQuestionUseCase } from './domain/usecases/pastQuestions/editPastQuestion'
-import { DeletePastQuestionUseCase } from './domain/usecases/pastQuestions/deletePastQuestion'
-import { GetTestQuestionsUseCase } from './domain/usecases/pastQuestions/getTestQuestions'
 import { GetTestPrepsUseCase } from './domain/usecases/testPreps/getTestPreps'
 import { GetTestPrepsInSetUseCase } from './domain/usecases/testPreps/getTestPrepsInSet'
 import { ListenToTestPrepsUseCase } from './domain/usecases/testPreps/listenToTestPreps'
@@ -135,35 +101,26 @@ import { EndTestUseCase } from './domain/usecases/tests/endTest'
 import { UpdateTestAnswerUseCase } from './domain/usecases/tests/updateTestAnswer'
 
 const setDataSource = new SetApiDataSource()
-const courseDataSource = new CourseApiDataSource()
-const institutionDataSource = new InstitutionApiDataSource()
 const flashCardDataSource = new FlashCardApiDataSource()
 const noteDataSource = new NoteApiDataSource()
 const videoDataSource = new VideoApiDataSource()
 const commentDataSource = new CommentApiDataSource()
-const pastQuestionDataSource = new PastQuestionApiDataSource()
 const testPrepDataSource = new TestPrepApiDataSource()
 const testDataSource = new TestApiDataSource()
 
 const setTransformer = new SetTransformer()
-const courseTransformer = new CourseTransformer()
-const institutionTransformer = new InstitutionTransformer()
 const flashCardTransformer = new FlashCardTransformer()
 const noteTransformer = new NoteTransformer()
 const videoTransformer = new VideoTransformer()
 const commentTransformer = new CommentTransformer()
-const pastQuestionTransformer = new PastQuestionTransformer()
 const testPrepTransformer = new TestPrepTransformer()
 const testTransformer = new TestTransformer()
 
 const setRepository = new SetRepository(setDataSource, setTransformer)
-const courseRepository = new CourseRepository(courseDataSource, courseTransformer)
-const institutionRepository = new InstitutionRepository(institutionDataSource, institutionTransformer)
 const flashCardRepository = new FlashCardRepository(flashCardDataSource, flashCardTransformer)
 const noteRepository = new NoteRepository(noteDataSource, noteTransformer)
 const videoRepository = new VideoRepository(videoDataSource, videoTransformer)
 const commentRepository = new CommentRepository(commentDataSource, commentTransformer)
-const pastQuestionRepository = new PastQuestionRepository(pastQuestionDataSource, pastQuestionTransformer)
 const testPrepRepository = new TestPrepRepository(testPrepDataSource, testPrepTransformer)
 const testRepository = new TestRepository(testDataSource, testTransformer)
 
@@ -180,20 +137,6 @@ export const DeleteSet = new DeleteSetUseCase(setRepository)
 export const ListenToSet = new ListenToSetUseCase(setRepository)
 export const SaveSetProp = new SaveSetPropUseCase(setRepository)
 export const DeleteSetProp = new DeleteSetPropUseCase(setRepository)
-
-export const FindCourse = new FindCourseUseCase(courseRepository)
-export const GetCourses = new GetCoursesUseCase(courseRepository)
-export const ListenToCourses = new ListenToCoursesUseCase(courseRepository)
-export const AddCourse = new AddCourseUseCase(courseRepository)
-export const EditCourse = new EditCourseUseCase(courseRepository)
-export const DeleteCourse = new DeleteCourseUseCase(courseRepository)
-
-export const FindInstitution = new FindInstitutionUseCase(institutionRepository)
-export const GetInstitutions = new GetInstitutionsUseCase(institutionRepository)
-export const ListenToInstitutions = new ListenToInstitutionsUseCase(institutionRepository)
-export const AddInstitution = new AddInstitutionUseCase(institutionRepository)
-export const EditInstitution = new EditInstitutionUseCase(institutionRepository)
-export const DeleteInstitution = new DeleteInstitutionUseCase(institutionRepository)
 
 export const FindFlashCard = new FindFlashCardUseCase(flashCardRepository)
 export const GetFlashCards = new GetFlashCardsUseCase(flashCardRepository)
@@ -238,14 +181,6 @@ export const AddComment = new AddCommentUseCase(commentRepository)
 export const EditComment = new EditCommentUseCase(commentRepository)
 export const DeleteComment = new DeleteCommentUseCase(commentRepository)
 
-export const FindPastQuestion = new FindPastQuestionUseCase(pastQuestionRepository)
-export const GetPastQuestions = new GetPastQuestionsUseCase(pastQuestionRepository)
-export const ListenToPastQuestions = new ListenToPastQuestionsUseCase(pastQuestionRepository)
-export const AddPastQuestion = new AddPastQuestionUseCase(pastQuestionRepository)
-export const EditPastQuestion = new EditPastQuestionUseCase(pastQuestionRepository)
-export const DeletePastQuestion = new DeletePastQuestionUseCase(pastQuestionRepository)
-export const GetTestQuestions = new GetTestQuestionsUseCase(pastQuestionRepository)
-
 export const FindTestPrep = new FindTestPrepUseCase(testPrepRepository)
 export const GetTestPreps = new GetTestPrepsUseCase(testPrepRepository)
 export const GetTestPrepsInSet = new GetTestPrepsInSetUseCase(testPrepRepository)
@@ -264,13 +199,10 @@ export const EndTest = new EndTestUseCase(testRepository)
 export const UpdateTestAnswer = new UpdateTestAnswerUseCase(testRepository)
 
 export { SetEntity, SetFactory }
-export { CourseEntity, CourseFactory }
-export { InstitutionEntity, InstitutionFactory }
 export { FlashCardEntity, FlashCardFactory }
 export { NoteEntity, NoteFactory }
 export { VideoEntity, VideoFactory }
 export { CommentEntity, CommentFactory }
-export { PastQuestionFactory, PastQuestionEntity }
 export { TestPrepFactory, TestPrepEntity }
 export { TestEntity }
 
@@ -280,5 +212,3 @@ export { PrepType } from './domain/entities/testPrep'
 export type { PrepData } from './domain/entities/testPrep'
 export { TestType } from './domain/entities/test'
 export type { TestData } from './domain/entities/test'
-export { PastQuestionType } from './domain/entities/pastQuestion'
-export type { PastQuestionData } from './domain/entities/pastQuestion'
