@@ -42,7 +42,8 @@ const ClassModal = modal.register('Class', {
 })
 const SchoolModal = modal.register('School', {
 	CreateInstitution, EditInstitution, CreateFaculty: CreateInstitution, EditFaculty: EditInstitution,
-	CreatePastQuestion, EditPastQuestion, CreateCourse, EditCourse
+	CreatePastQuestion, EditPastQuestion, CreateCourse, EditCourse,
+	CreateDepartment: CreateInstitution, EditDepartment: EditInstitution
 })
 
 export const useQuestionModal = () => QuestionModal
