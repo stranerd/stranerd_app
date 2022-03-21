@@ -2,7 +2,7 @@
 	<form @submit.prevent="submit">
 		<div class="mb-8">
 			<label>Name</label>
-			<IonInput v-model="factory.name" class="mb-2" placeholder="Enter Course Name" />
+			<IonInput v-model="factory.name" class="mb-2" placeholder="Enter Faculty Name" />
 			<DisplayError :error="factory.errors.name" />
 		</div>
 
@@ -18,13 +18,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { CourseFactory } from '@modules/school'
+import { FacultyFactory } from '@modules/school'
 
 export default defineComponent({
-	name: 'CourseForm',
+	name: 'FacultyForm',
 	props: {
 		factory: {
-			type: CourseFactory,
+			type: FacultyFactory,
 			required: true
 		},
 		submit: {

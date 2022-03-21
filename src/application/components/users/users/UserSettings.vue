@@ -48,8 +48,8 @@
 				</div>
 			</div>
 			<div class="px-4 md:px-6 flex">
-				<ion-button :disabled="profileLoading" class="btn-primary w-32" @click="updateProfile">
-					Save
+				<ion-button :disabled="profileLoading" class="btn-primary w-40" @click="updateProfile">
+					Save Profile
 					<IonSpinner v-if="profileLoading" name="lines-small" />
 				</ion-button>
 			</div>
@@ -143,6 +143,11 @@
 					</ion-select-option>
 				</ion-select>
 			</div>
+
+			<ion-button :disabled="schoolLoading" class="btn-primary w-40" @click="updateSchool">
+				Save School
+				<IonSpinner v-if="schoolLoading" name="lines-small" />
+			</ion-button>
 		</div>
 	</div>
 </template>

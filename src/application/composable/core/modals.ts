@@ -23,6 +23,10 @@ import CreateAnnouncement from '@app/components/modals/classes/CreateAnnouncemen
 import EditAnnouncement from '@app/components/modals/classes/EditAnnouncement.vue'
 import CreateInstitution from '@app/components/modals/school/CreateInstitution.vue'
 import EditInstitution from '@app/components/modals/school/EditInstitution.vue'
+import CreateFaculty from '@app/components/modals/school/CreateFaculty.vue'
+import EditFaculty from '@app/components/modals/school/EditFaculty.vue'
+import CreateDepartment from '@app/components/modals/school/CreateDepartment.vue'
+import EditDepartment from '@app/components/modals/school/EditDepartment.vue'
 import CreateCourse from '@app/components/modals/school/CreateCourse.vue'
 import EditCourse from '@app/components/modals/school/EditCourse.vue'
 import CreatePastQuestion from '@app/components/modals/school/CreatePastQuestion.vue'
@@ -45,9 +49,8 @@ const OnboardingModal = modal.register('Onboarding', {
 	SetupAccount
 })
 const SchoolModal = modal.register('School', {
-	CreateInstitution, EditInstitution, CreateFaculty: CreateInstitution, EditFaculty: EditInstitution,
-	CreatePastQuestion, EditPastQuestion, CreateCourse, EditCourse,
-	CreateDepartment: CreateInstitution, EditDepartment: EditInstitution
+	CreateInstitution, EditInstitution, CreateFaculty, EditFaculty, CreateDepartment, EditDepartment,
+	CreatePastQuestion, EditPastQuestion, CreateCourse, EditCourse
 })
 
 export const useQuestionModal = () => QuestionModal

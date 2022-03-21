@@ -120,12 +120,12 @@ export const useEditFaculty = () => {
 	return { factory, loading, error, editFaculty }
 }
 
-export const useDeleteFaculty = () => {
+export const useDeleteFaculty = (faculty: FacultyEntity) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	const deleteFaculty = async (faculty: FacultyEntity) => {
+	const deleteFaculty = async () => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this faculty?',

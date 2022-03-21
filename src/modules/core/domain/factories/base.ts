@@ -56,7 +56,7 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 		const reserved = (this.reserved ?? []).concat(['userId', 'user', 'userBio'])
 		Object.keys(this.defaults)
 			.filter((key) => !reserved.includes(key))
-			.forEach(this.resetProp)
+			.forEach((key) => this.resetProp(key))
 	}
 
 	async uploadFile (path: string, file: UploadedFile) {

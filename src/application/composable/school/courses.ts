@@ -123,12 +123,12 @@ export const useEditCourse = () => {
 	return { factory, loading, error, editCourse }
 }
 
-export const useDeleteCourse = () => {
+export const useDeleteCourse = (course: CourseEntity) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	const deleteCourse = async (course: CourseEntity) => {
+	const deleteCourse = async () => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this course?',

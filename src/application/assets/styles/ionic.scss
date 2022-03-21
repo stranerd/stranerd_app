@@ -140,14 +140,12 @@ ion-popover {
 }
 
 .modal-class {
-	--background: transparent;
+	--background: white;
 	--height: auto;
-	--width: 800px;
-	--border-radius: .75rem;
-	@media (max-width: 500px) {
-		--width: 100vw;
-		--height: auto;
-		--border-radius: 0.75rem 0.75rem 0 0;
+	--width: 100vw;
+	--border-radius: 1.5rem 1.5rem 0 0;
+	@media (min-width: $md) {
+		--width: 800px;
 	}
 
 

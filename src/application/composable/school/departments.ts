@@ -127,12 +127,12 @@ export const useEditDepartment = () => {
 	return { factory, loading, error, editDepartment }
 }
 
-export const useDeleteDepartment = () => {
+export const useDeleteDepartment = (department: DepartmentEntity) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	const deleteDepartment = async (department: DepartmentEntity) => {
+	const deleteDepartment = async () => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this department?',
