@@ -9,6 +9,7 @@ import { AnswerRepository } from './data/repositories/answer'
 import { CommentRepository } from './data/repositories/comment'
 import { FindQuestionUseCase } from './domain/usecases/questions/findQuestion'
 import { GetQuestionsUseCase } from './domain/usecases/questions/getQuestions'
+import { SearchQuestionsUseCase } from './domain/usecases/questions/searchQuestions'
 import { GetUserQuestionsUseCase } from './domain/usecases/questions/getUserQuestions'
 import { GetClassQuestionsUseCase } from './domain/usecases/questions/getClassQuestions'
 import { ListenToUserQuestionsUseCase } from './domain/usecases/questions/listenToUserQuestions'
@@ -50,6 +51,7 @@ const answerRepository = new AnswerRepository(answerDataSource, answerTransforme
 const commentRepository = new CommentRepository(commentDataSource, commentTransformer)
 
 export const GetQuestions = new GetQuestionsUseCase(questionRepository)
+export const SearchQuestions = new SearchQuestionsUseCase(questionRepository)
 export const GetUserQuestions = new GetUserQuestionsUseCase(questionRepository)
 export const GetClassQuestions = new GetClassQuestionsUseCase(questionRepository)
 export const ListenToQuestion = new ListenToQuestionUseCase(questionRepository)

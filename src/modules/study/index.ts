@@ -33,6 +33,7 @@ import { PrepData, PrepType, TestPrepEntity } from './domain/entities/testPrep'
 import { TestPrepFactory } from './domain/factories/testPrep'
 import { TestData, TestEntity, TestType } from './domain/entities/test'
 import { GetSetsUseCase } from './domain/usecases/sets/getSets'
+import { SearchSetsUseCase } from './domain/usecases/sets/searchSets'
 import { GetUserSetsUseCase } from './domain/usecases/sets/getUserSets'
 import { GetSetsInSetUseCase } from './domain/usecases/sets/getSetsInSet'
 import { ListenToSetsUseCase } from './domain/usecases/sets/listenToSets'
@@ -56,6 +57,7 @@ import { ListenToUserNotesUseCase } from './domain/usecases/notes/listenToUserNo
 import { ListenToNotesInSetUseCase } from './domain/usecases/notes/listenToNotesInSet'
 import { EditNoteUseCase } from './domain/usecases/notes/editNote'
 import { GetNotesUseCase } from './domain/usecases/notes/getNotes'
+import { SearchNotesUseCase } from './domain/usecases/notes/searchNotes'
 import { AddVideoUseCase } from './domain/usecases/videos/addVideo'
 import { FindVideoUseCase } from './domain/usecases/videos/findVideo'
 import { DeleteVideoUseCase } from './domain/usecases/videos/deleteVideo'
@@ -65,6 +67,7 @@ import { ListenToUserVideosUseCase } from './domain/usecases/videos/listenToUser
 import { ListenToVideosInSetUseCase } from './domain/usecases/videos/listenToVideosInSet'
 import { EditVideoUseCase } from './domain/usecases/videos/editVideo'
 import { GetVideosUseCase } from './domain/usecases/videos/getVideos'
+import { SearchVideosUseCase } from './domain/usecases/videos/searchVideos'
 import { GetUserVideosUseCase } from './domain/usecases/videos/getUserVideos'
 import { GetVideosInSetUseCase } from './domain/usecases/videos/getVideosInSet'
 import { EditFlashCardUseCase } from './domain/usecases/flashCards/editFlashCard'
@@ -74,6 +77,7 @@ import { ListenToUserFlashCardsUseCase } from './domain/usecases/flashCards/list
 import { ListenToFlashCardsInSetUseCase } from './domain/usecases/flashCards/listenToFlashCardsInSet'
 import { AddFlashCardUseCase } from './domain/usecases/flashCards/addFlashCard'
 import { GetFlashCardsUseCase } from './domain/usecases/flashCards/getFlashCards'
+import { SearchFlashCardsUseCase } from './domain/usecases/flashCards/searchFlashCards'
 import { GetUserFlashCardsUseCase } from './domain/usecases/flashCards/getUserFlashCards'
 import { FindFlashCardUseCase } from './domain/usecases/flashCards/findFlashCard'
 import { GetFlashCardsInSetUseCase } from './domain/usecases/flashCards/getFlashCardsInSet'
@@ -85,6 +89,7 @@ import { GetVideoCommentsUseCase } from './domain/usecases/comments/getVideoComm
 import { AddCommentUseCase } from './domain/usecases/comments/addComment'
 import { EditCommentUseCase } from './domain/usecases/comments/editComment'
 import { GetTestPrepsUseCase } from './domain/usecases/testPreps/getTestPreps'
+import { SearchTestPrepsUseCase } from './domain/usecases/testPreps/searchTestPreps'
 import { GetTestPrepsInSetUseCase } from './domain/usecases/testPreps/getTestPrepsInSet'
 import { ListenToTestPrepsUseCase } from './domain/usecases/testPreps/listenToTestPreps'
 import { ListenToTestPrepsInSetUseCase } from './domain/usecases/testPreps/listenToTestPrepsInSet'
@@ -126,6 +131,7 @@ const testRepository = new TestRepository(testDataSource, testTransformer)
 
 export const FindSet = new FindSetUseCase(setRepository)
 export const GetSets = new GetSetsUseCase(setRepository)
+export const SearchSets = new SearchSetsUseCase(setRepository)
 export const GetSetsInSet = new GetSetsInSetUseCase(setRepository)
 export const ListenToSetsInSet = new ListenToSetsInSetUseCase(setRepository)
 export const GetUserSets = new GetUserSetsUseCase(setRepository)
@@ -140,6 +146,7 @@ export const DeleteSetProp = new DeleteSetPropUseCase(setRepository)
 
 export const FindFlashCard = new FindFlashCardUseCase(flashCardRepository)
 export const GetFlashCards = new GetFlashCardsUseCase(flashCardRepository)
+export const SearchFlashCards = new SearchFlashCardsUseCase(flashCardRepository)
 export const GetUserFlashCards = new GetUserFlashCardsUseCase(flashCardRepository)
 export const GetFlashCardsInSet = new GetFlashCardsInSetUseCase(flashCardRepository)
 export const ListenToFlashCard = new ListenToFlashCardUseCase(flashCardRepository)
@@ -152,6 +159,7 @@ export const DeleteFlashCard = new DeleteFlashCardUseCase(flashCardRepository)
 
 export const FindNote = new FindNoteUseCase(noteRepository)
 export const GetNotes = new GetNotesUseCase(noteRepository)
+export const SearchNotes = new SearchNotesUseCase(noteRepository)
 export const GetUserNotes = new GetUserNotesUseCase(noteRepository)
 export const GetNotesInSet = new GetNotesInSetUseCase(noteRepository)
 export const ListenToNote = new ListenToNoteUseCase(noteRepository)
@@ -164,6 +172,7 @@ export const DeleteNote = new DeleteNoteUseCase(noteRepository)
 
 export const FindVideo = new FindVideoUseCase(videoRepository)
 export const GetVideos = new GetVideosUseCase(videoRepository)
+export const SearchVideos = new SearchVideosUseCase(videoRepository)
 export const GetUserVideos = new GetUserVideosUseCase(videoRepository)
 export const GetVideosInSet = new GetVideosInSetUseCase(videoRepository)
 export const ListenToVideo = new ListenToVideoUseCase(videoRepository)
@@ -183,6 +192,7 @@ export const DeleteComment = new DeleteCommentUseCase(commentRepository)
 
 export const FindTestPrep = new FindTestPrepUseCase(testPrepRepository)
 export const GetTestPreps = new GetTestPrepsUseCase(testPrepRepository)
+export const SearchTestPreps = new SearchTestPrepsUseCase(testPrepRepository)
 export const GetTestPrepsInSet = new GetTestPrepsInSetUseCase(testPrepRepository)
 export const ListenToTestPreps = new ListenToTestPrepsUseCase(testPrepRepository)
 export const ListenToTestPrepsInSet = new ListenToTestPrepsInSetUseCase(testPrepRepository)
