@@ -37,8 +37,8 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 			rules: []
 		}
 	}
-
 	reserved = ['type']
+	insts = [] as string[]
 
 	constructor () {
 		super({
@@ -85,6 +85,23 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 		return this.values.exams
 	}
 
+	set exams (exams: { institutionId: string, courseIds: string[], startDate: number, endDate: number }[]) {
+		this.set('exams', exams)
+	}
+
+	get institutions () {
+		return this.insts
+	}
+
+	set institutions (institutionIds: string[]) {
+		const now = Date.now()
+		this.set('exams', institutionIds.map((institutionId) => {
+			return { institutionId, courseIds: [], startDate: now, endDate: now }
+		}))
+		this.insts.length = 0
+		this.insts.push(...this.exams.map((e) => e.institutionId))
+	}
+
 	get isCollegeType () {
 		return this.type === UserSchoolType.college
 	}
@@ -95,47 +112,6 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 
 	get isSecondaryType () {
 		return this.type === UserSchoolType.secondary
-	}
-
-	addInstitutionToExams (institutionId: string) {
-		const index = this.exams.findIndex((e) => e.institutionId === institutionId)
-		if (index > -1) return
-		const now = Date.now()
-		this.exams.push({ institutionId, courseIds: [], startDate: now, endDate: now })
-	}
-
-	removeInstitutionFromExams (institutionId: string) {
-		const index = this.exams.findIndex((e) => e.institutionId === institutionId)
-		if (index === -1) return
-		this.exams.splice(index, 1)
-	}
-
-	addCourseToExams (institutionId: string, courseId: string) {
-		const index = this.exams.findIndex((e) => e.institutionId === institutionId)
-		if (index === -1) return
-		const courseIndex = this.exams[index].courseIds.findIndex((c) => courseId)
-		if (courseIndex > -1) return
-		this.exams[index].courseIds.push(courseId)
-	}
-
-	removeCourseFromExams (institutionId: string, courseId: string) {
-		const index = this.exams.findIndex((e) => e.institutionId === institutionId)
-		if (index === -1) return
-		const courseIndex = this.exams[index].courseIds.findIndex((c) => courseId)
-		if (courseIndex === -1) return
-		this.exams[index].courseIds.splice(courseIndex, 1)
-	}
-
-	setExamStartDate (institutionId: string, date: number) {
-		const index = this.exams.findIndex((e) => e.institutionId === institutionId)
-		if (index === -1) return
-		this.exams[index].startDate = date
-	}
-
-	setExamEndDate (institutionId: string, date: number) {
-		const index = this.exams.findIndex((e) => e.institutionId === institutionId)
-		if (index === -1) return
-		this.exams[index].endDate = date
 	}
 
 	loadEntity = (entity: UserEntity) => {
