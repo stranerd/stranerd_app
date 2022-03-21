@@ -7,8 +7,7 @@
 			</div>
 			<div class="flex flex-col items-start">
 				<div class="w-full flex items-center relative">
-					<img :src="coverPhotoLink || DEFAULT_PROFILE_BACKDROP" alt=""
-						class="h-16 md:h-20 w-full" style="object-fit: cover;">
+					<CoverAvatar :src="profileFactory.coverPhoto" class="h-16 md:h-20 w-full" />
 					<FileInput accept="image/*"
 						class="rounded-full absolute right-0 mr-4 h-8 w-8 bg-gray text-white flex items-center justify-center"
 						@files="catchCoverPhoto">
@@ -17,10 +16,12 @@
 				</div>
 				<span
 					class="px-4 md:px-6 relative top-[-32px] md:top-[-40px] inline-flex items-center justify-center -mb-8 md:-mb-10">
-					<img :src="photoLink || DEFAULT_PROFILE_PHOTO" alt=""
-						class="w-16 h-16 md:h-20 md:w-20 rounded-full">
+					<Avatar :name="profileFactory.name" :size="64" :src="profileFactory.photo"
+						class="md:hidden" />
+					<Avatar :name="profileFactory.name" :size="80" :src="profileFactory.photo"
+						class="hidden md:inline" />
 					<FileInput accept="image/*"
-						class="rounded-full absolute h-6 w-6 bg-gray text-white flex items-center justify-center"
+						class="rounded-full absolute h-6 w-6 right-[15%] bottom-0 bg-gray text-white flex items-center justify-center"
 						@files="catchPhoto">
 						<IonIcon :icon="pencilOutline" />
 					</FileInput>
@@ -204,7 +205,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
 import {
 	IonButton,
 	IonInput,
@@ -215,12 +216,11 @@ import {
 	IonSpinner,
 	IonTextarea
 } from '@ionic/vue'
-import { image, pencilOutline } from 'ionicons/icons'
+import { pencilOutline } from 'ionicons/icons'
 import { useProfileUpdate, useUserSchoolUpdate } from '@app/composable/auth/profile'
 import { useAuth } from '@app/composable/auth/auth'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { usePasswordUpdate } from '@app/composable/auth/passwords'
-import { DEFAULT_PROFILE_BACKDROP, DEFAULT_PROFILE_PHOTO } from '@utils/constants'
 import { UserSchoolType } from '@modules/users'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useFacultyList } from '@app/composable/school/faculties'
@@ -245,26 +245,14 @@ export default defineComponent({
 		const {
 			factory: schoolFactory, error: schoolError, loading: schoolLoading, updateSchool
 		} = useUserSchoolUpdate()
-		const photoLink = ref((profileFactory.value.photo as any)?.link ?? '')
-		const coverPhotoLink = ref((profileFactory.value.coverPhoto as any)?.link ?? '')
 		const catchPhoto = useFileInputCallback(async ([file]) => {
-			photoLink.value = window.URL.createObjectURL(file.data)
 			profileFactory.value.photo = file
 			await updateProfile()
 		})
 		const catchCoverPhoto = useFileInputCallback(async ([file]) => {
-			coverPhotoLink.value = window.URL.createObjectURL(file.data)
 			profileFactory.value.coverPhoto = file
 			await updateProfile()
 		})
-		const removePhoto = () => {
-			photoLink.value = ''
-			profileFactory.value.photo = null
-		}
-		const removeCoverPhoto = () => {
-			coverPhotoLink.value = ''
-			profileFactory.value.coverPhoto = null
-		}
 
 		const { schools, gatewayExams } = useInstitutionList()
 		const { courses } = useCourseList()
@@ -274,13 +262,10 @@ export default defineComponent({
 		const filteredDepartments = computed(() => departments.value.filter((d) => d.facultyId === schoolFactory.value.facultyId))
 
 		return {
-			user,
-			DEFAULT_PROFILE_PHOTO, DEFAULT_PROFILE_BACKDROP, pencilOutline,
-			profileFactory, profileError, profileLoading, updateProfile,
-			image, catchPhoto, photoLink, removePhoto, console,
-			passwordFactory, passwordError, passwordLoading, updatePassword,
+			user, pencilOutline,
+			profileFactory, profileError, profileLoading, updateProfile, catchPhoto, catchCoverPhoto,
+			hasPassword, passwordFactory, passwordError, passwordLoading, updatePassword,
 			schoolFactory, schoolError, schoolLoading, updateSchool, UserSchoolType,
-			hasPassword, coverPhotoLink, catchCoverPhoto, removeCoverPhoto,
 			schools, gatewayExams, filteredFaculties, filteredDepartments, courses
 		}
 	}

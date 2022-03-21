@@ -2,8 +2,7 @@
 	<form class="flex flex-col gap-4 text-center justify-center" @submit.prevent="submit">
 		<div class="flex flex-col items-start">
 			<div class="w-full flex items-center relative">
-				<img :src="coverPhotoLink || DEFAULT_PROFILE_BACKDROP" alt=""
-					class="h-16 md:h-20 w-full" style="object-fit: cover;">
+				<CoverAvatar :src="factory.coverPhoto" class="h-20 md:h-20" />
 				<FileInput accept="image/*"
 					class="rounded-full absolute right-0 mr-4 h-8 w-8 bg-gray text-white flex items-center justify-center"
 					@files="catchCoverPhoto">
@@ -12,9 +11,11 @@
 			</div>
 			<span
 				class="modal-padding-x relative top-[-32px] md:top-[-40px] inline-flex items-center justify-center -mb-8 md:-mb-10">
-				<img :src="photoLink || DEFAULT_PROFILE_PHOTO" alt="" class="w-16 h-16 md:h-20 md:w-20 rounded-full">
+				<Avatar :name="factory.name" :size="64" :src="factory.photo" class="md:hidden" />
+				<Avatar :name="factory.name" :size="80" :src="factory.photo"
+					class="hidden md:inline" />
 				<FileInput accept="image/*"
-					class="rounded-full absolute h-6 w-6 bg-gray text-white flex items-center justify-center"
+					class="rounded-full absolute h-6 w-6 right-[15%] bottom-0 bg-gray text-white flex items-center justify-center"
 					@files="catchPhoto">
 					<IonIcon :icon="pencilOutline" />
 				</FileInput>
@@ -42,11 +43,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { ClassFactory } from '@modules/classes'
 import { IonRippleEffect } from '@ionic/vue'
-import { DEFAULT_PROFILE_BACKDROP, DEFAULT_PROFILE_PHOTO } from '@utils/constants'
-import { addOutline, pencilOutline } from 'ionicons/icons'
+import { pencilOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 
 export default defineComponent({
@@ -71,25 +71,13 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const photoLink = ref((props.factory.photo as any)?.link ?? '')
-		const coverPhotoLink = ref((props.factory.coverPhoto as any)?.link ?? '')
 		const catchPhoto = useFileInputCallback(async ([file]) => {
-			photoLink.value = window.URL.createObjectURL(file.data)
 			props.factory.photo = file
 		})
 		const catchCoverPhoto = useFileInputCallback(async ([file]) => {
-			coverPhotoLink.value = window.URL.createObjectURL(file.data)
 			props.factory.coverPhoto = file
 		})
-		return {
-			photoLink,
-			DEFAULT_PROFILE_PHOTO,
-			DEFAULT_PROFILE_BACKDROP,
-			addOutline, pencilOutline,
-			catchPhoto,
-			coverPhotoLink,
-			catchCoverPhoto
-		}
+		return { pencilOutline, catchPhoto, catchCoverPhoto }
 	}
 })
 </script>

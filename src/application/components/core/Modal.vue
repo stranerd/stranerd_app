@@ -1,6 +1,6 @@
 <template>
 	<div class="py-8">
-		<div class="mb-6 modal-padding-x">
+		<div class="mb-4 modal-padding-x">
 			<div class="flex justify-between text-main_dark">
 				<h3 class="text-heading2" style="font-weight: 500;">
 					<slot name="title">Title</slot>

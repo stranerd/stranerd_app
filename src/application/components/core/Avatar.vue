@@ -1,5 +1,6 @@
 <template>
-	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}/`">
+	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}/`" class="rounded-full border border-white"
+		style="border-width: 2px;">
 		<span v-if="!source && name" :style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
 			class="flex items-center justify-center uppercase bg-gray text-white font-semibold rounded-full">
 			<span :style="`font-size: ${size/1.75}px;line-height: 1em`">{{ name[0] }}</span>
@@ -17,7 +18,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { Media } from '@modules/core'
+import { Media, UploadedFile } from '@modules/core'
 import { DEFAULT_PROFILE_PHOTO } from '@utils/constants'
 
 export default defineComponent({
@@ -28,9 +29,9 @@ export default defineComponent({
 			default: ''
 		},
 		src: {
-			type: Object as PropType<Media | null>,
+			type: Object as PropType<Media | UploadedFile | null>,
 			default: null,
-			validator: (p: any) => p === null || p === undefined || typeof p.link === 'string'
+			validator: (p: any) => p === null || p === undefined || typeof p.link === 'string' || typeof p.url === 'string'
 		},
 		name: {
 			type: String,

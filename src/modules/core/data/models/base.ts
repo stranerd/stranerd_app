@@ -38,6 +38,10 @@ export class UploadedFile {
 		this.ref = ref
 	}
 
+	get link () {
+		return window.URL.createObjectURL(this.data)
+	}
+
 	static async convertBase64ToBlob (b64: string) {
 		const byteCharacters = atob(b64)
 		const byteNumbers = new Array(byteCharacters.length)

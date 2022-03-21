@@ -10,14 +10,14 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { Media } from '@modules/core'
+import { Media, UploadedFile } from '@modules/core'
 import { DEFAULT_PROFILE_BACKDROP } from '@utils/constants'
 
 export default defineComponent({
 	name: 'CoverAvatar',
 	props: {
 		src: {
-			type: Object as PropType<Media | null>,
+			type: Object as PropType<Media | UploadedFile | null>,
 			default: null,
 			validator: (p: any) => p === null || p === undefined || typeof p.link === 'string'
 		}
