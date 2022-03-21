@@ -60,6 +60,8 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 
 	set institutionId (value: string) {
 		this.set('institutionId', value)
+		this.resetProp('facultyId')
+		this.resetProp('departmentId')
 	}
 
 	get facultyId () {
@@ -68,6 +70,7 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 
 	set facultyId (value: string) {
 		this.set('facultyId', value)
+		this.resetProp('departmentId')
 	}
 
 	get departmentId () {

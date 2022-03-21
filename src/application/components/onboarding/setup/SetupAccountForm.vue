@@ -14,28 +14,49 @@
 				class="modal-padding-x relative top-[-32px] md:top-[-40px] inline-flex items-center justify-center -mb-8 md:-mb-10">
 				<img :src="photoLink || DEFAULT_PROFILE_PHOTO" alt="" class="w-16 h-16 md:h-20 md:w-20 rounded-full">
 				<FileInput accept="image/*"
-					class="rounded-full absolute h-6 w-6 bg-gray text-white flex items-center justify-center"
+					class="rounded-full absolute right-10 bottom-2 h-6 w-6 bg-gray text-white flex items-center justify-center"
 					@files="catchPhoto">
 					<IonIcon :icon="pencilOutline" />
 				</FileInput>
 			</span>
 		</div>
 		<div class="flex flex-col gap-4 modal-padding-x">
-			<ion-input v-model="factory.name"
-				class="w-full text-left bg-new_gray rounded-md"
-				placeholder="Add a title"
-				show-cancel-button="never"
-			/>
-			<ion-input v-model="factory.description"
-				class="w-full text-left bg-new_gray rounded-md"
-				placeholder="Add a short description"
-				show-cancel-button="never"
-			/>
+			<div class="flex flex-col items-start">
+				<ion-label class="font-bold mb-4 ">Name</ion-label>
+				<div class="flex w-full justify-between">
+					<ion-input v-model="factory.name"
+						class="w-1/2 mr-4 text-left bg-transparent border border-faded_gray  rounded-md "
+						placeholder="First name"
+					/>
+					<ion-input v-model="factory.name"
+						class="w-1/2  text-left bg-transparent border border-faded_gray  rounded-md "
+						placeholder="Last name"
+					/>
+				</div>
+			
+			</div>
 
-			<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
-				<slot name="buttonText">Submit</slot>
-				<ion-ripple-effect class="rounded-lg" />
-			</ion-button>
+			<div class="flex flex-col items-start">
+				<ion-label class="font-bold mb-4">Bio</ion-label>
+				<ion-input v-model="factory.description"
+					class="w-full text-left bg-transparent border border-faded_gray rounded-md"
+					placeholder="Short description on your profile"
+					show-cancel-button="never"
+				/>
+			</div>
+
+
+			<div class="flex w-full justify-end gap-4">
+				<ion-button  class="btn-outline text-primary w-[7.5rem]" type="submit">
+					Skip
+					<ion-ripple-effect class="rounded-lg" />
+				</ion-button>
+				<ion-button :disabled="loading || !factory.valid" class="btn-primary w-[7.5rem]" type="submit">
+					<slot name="buttonText">Submit</slot>
+					<ion-ripple-effect class="rounded-lg" />
+				</ion-button>
+			</div>
+	
 			<PageLoading v-if="loading" />
 		</div>
 	</form>
@@ -50,7 +71,7 @@ import { addOutline, pencilOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 
 export default defineComponent({
-	name: 'ClassForm',
+	name: 'SetupAccountForm',
 	components: { IonRippleEffect },
 	props: {
 		factory: {
@@ -96,7 +117,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-label {
-		--color: #8B9EB1 !important;
+		--color: #132740 !important;
+		color: #132740 !important;
 	}
 
 	ion-label {

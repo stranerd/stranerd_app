@@ -33,10 +33,12 @@ const fetchInstitutions = async () => {
 }
 
 export const useInstitutionList = () => {
+	const schools = computed(() => global.institutions.value.filter((i) => !i.isGateway))
+	const gatewayExams = computed(() => global.institutions.value.filter((i) => i.isGateway))
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchInstitutions()
 	})
-	return { ...global }
+	return { ...global, schools, gatewayExams }
 }
 
 export const useInstitution = (id: string) => {

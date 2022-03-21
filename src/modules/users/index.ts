@@ -78,7 +78,7 @@ export const ListenToAllAdmins = new ListenToAllAdminsUseCase(userRepository)
 export const ListenToUsersInList = new ListenToUsersInListUseCase(userRepository)
 export const ListenToUser = new ListenToUserUseCase(userRepository)
 export const UpdateStreak = new UpdateStreakUseCase(userRepository)
-export const UpdateSchool = new UpdateSchoolUseCase(userRepository)
+export const UpdateUserSchool = new UpdateSchoolUseCase(userRepository)
 
 export const ToggleAdmin = new ToggleAdminUseCase(roleRepository)
 export const ToggleTutor = new ToggleTutorUseCase(roleRepository)

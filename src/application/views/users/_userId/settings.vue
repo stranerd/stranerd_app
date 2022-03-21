@@ -1,11 +1,7 @@
 <template>
 	<Justified>
-
-		<template v-slot:default="{ user }">
-			<UserSettings :user="user" />
-		</template>
+		<UserSettings class="w-full lg:w-8/12 mx-auto lg:my-6 md:p-4 lg:p-0" />
 	</Justified>
-
 </template>
 
 <script lang="ts">
@@ -17,11 +13,11 @@ import Justified from '@app/layouts/Justified.vue'
 export default defineComponent({
 	name: 'UsersUserIdSettings',
 	displayName: 'Profile',
+	components: { UserSettings, Justified },
 	middlewares: ['isAuthenticated', async ({ to }) => {
 		const userId = to.params.userId
 		const authId = useAuth().id.value
 		if (userId !== authId) return `/users/${userId}/`
-	}],
-	components: { UserSettings, Justified }
+	}]
 })
 </script>
