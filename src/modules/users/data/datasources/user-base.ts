@@ -1,5 +1,6 @@
 import { Listeners, QueryParams, QueryResults } from '@modules/core'
 import { UserFromModel } from '../models/user'
+import { UserSchoolData } from '../../domain/types'
 
 export interface UserBaseDataSource {
 	find: (id: string) => Promise<UserFromModel | null>
@@ -7,4 +8,5 @@ export interface UserBaseDataSource {
 	listenToOne: (id: string, listener: Listeners<UserFromModel>) => Promise<() => void>
 	listenToMany: (query: QueryParams, listener: Listeners<UserFromModel>) => Promise<() => void>
 	updateStreak: () => Promise<void>
+	updateSchool: (school: UserSchoolData) => Promise<void>
 }

@@ -29,6 +29,7 @@ import { ListenToAllAdminsUseCase } from './domain/usecases/users/listenToAllAdm
 import { ListenToUsersInListUseCase } from './domain/usecases/users/listenToUsersInList'
 import { ListenToUserUseCase } from './domain/usecases/users/listenToUser'
 import { UpdateStreakUseCase } from './domain/usecases/users/updateStreak'
+import { UpdateSchoolUseCase } from './domain/usecases/users/updateSchool'
 import { GetNotificationsUseCase } from './domain/usecases/notifications/getNotifications'
 import { ListenToNotificationsUseCase } from './domain/usecases/notifications/listenToNotifications'
 import { MarkNotificationSeenUseCase } from './domain/usecases/notifications/markNotificationSeen'
@@ -44,7 +45,7 @@ import { NotificationEntity } from './domain/entities/notification'
 import { ReviewEntity } from './domain/entities/review'
 import { ReferralEntity } from './domain/entities/referral'
 import { BadgeEntity } from './domain/entities/badge'
-import { RankingTimes, UserBio, UserRoles } from './domain/types'
+import { RankingTimes, UserBio, UserRoles, UserSchoolType } from './domain/types'
 
 const userDataSource = new UserApiDataSource()
 const roleDataSource = new RoleApiDataSource()
@@ -77,6 +78,7 @@ export const ListenToAllAdmins = new ListenToAllAdminsUseCase(userRepository)
 export const ListenToUsersInList = new ListenToUsersInListUseCase(userRepository)
 export const ListenToUser = new ListenToUserUseCase(userRepository)
 export const UpdateStreak = new UpdateStreakUseCase(userRepository)
+export const UpdateSchool = new UpdateSchoolUseCase(userRepository)
 
 export const ToggleAdmin = new ToggleAdminUseCase(roleRepository)
 export const ToggleTutor = new ToggleTutorUseCase(roleRepository)
@@ -107,3 +109,4 @@ export {
 	BadgeEntity
 }
 export type { UserBio, UserRoles }
+export { UserSchoolType }
