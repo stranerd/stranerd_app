@@ -1,4 +1,4 @@
-import { UserBio, UserRoles } from '../../domain/entities/user'
+import { UserBio, UserRoles } from '../../domain/types'
 
 export interface ReviewFromModel extends ReviewToModel {
 	id: string

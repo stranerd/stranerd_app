@@ -1,6 +1,7 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from './user'
+import { generateDefaultBio, generateDefaultRoles } from './user'
 import { appName } from '@utils/environment'
+import { UserBio, UserRoles } from '../types'
 
 export class ReviewEntity extends BaseEntity {
 	public readonly id: string

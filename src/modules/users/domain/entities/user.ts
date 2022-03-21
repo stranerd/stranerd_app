@@ -1,80 +1,8 @@
-import { BaseEntity, Media, parseMedia } from '@modules/core'
+import { BaseEntity, parseMedia } from '@modules/core'
 import { appName } from '@utils/environment'
 import { capitalize, catchDivideByZero, formatNumber, getPercentage } from '@utils/commons'
-import { getRankImage, RankTypes } from './rank'
-
-export enum RankingTimes {
-	daily = 'daily',
-	weekly = 'weekly',
-	monthly = 'monthly',
-	overall = 'overall'
-}
-
-export interface UserBio {
-	firstName: string
-	lastName: string
-	fullName: string
-	email: string
-	description: string
-	photo: Media | null
-	coverPhoto: Media | null
-}
-
-export interface UserRoles {
-	[appName]: {
-		isAdmin: boolean
-		isTutor: boolean
-		isVerified: boolean
-	}
-}
-
-export interface UserAccount {
-	score: number
-	meta: {
-		questions: number
-		answers: number
-		bestAnswers: number
-		answerComments: number
-		sessions: number
-		tutorSessions: number
-		flashCards: number
-		sets: number
-	}
-	streak: {
-		count: number
-		longestStreak: number
-		lastEvaluatedAt: number
-	}
-	ratings: {
-		total: number
-		count: number
-	}
-	referrals: Record<string, boolean>
-	rankings: Record<RankingTimes, number>
-}
-
-export interface UserStatus {
-	connections: string[]
-	lastUpdatedAt: number
-}
-
-export interface UserSession {
-	currentSessions: string[]
-	currentTutorSessions: string[]
-	requests: string[]
-	lobby: string[]
-}
-
-export interface UserDates {
-	createdAt: number
-	deletedAt: number | null
-}
-
-export interface UserRank {
-	id: RankTypes
-	score: number
-	level: number
-}
+import { getRankImage } from './rank'
+import { UserAccount, UserBio, UserDates, UserRank, UserRoles, UserSchoolData, UserSession, UserStatus } from '../types'
 
 type UserConstructorArgs = {
 	id: string
@@ -86,6 +14,7 @@ type UserConstructorArgs = {
 	dates: UserDates
 	rank: UserRank
 	nextRank: UserRank | null
+	school: UserSchoolData | null
 }
 
 export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
@@ -117,6 +46,7 @@ export class UserEntity extends BaseEntity {
 	public readonly dates: UserDates
 	public readonly rank: UserRank
 	public readonly nextRank: UserRank | null
+	public readonly school: UserSchoolData | null
 
 	constructor ({
 		             id,
@@ -127,6 +57,7 @@ export class UserEntity extends BaseEntity {
 		             session,
 		             dates,
 		             rank,
+		             school,
 		             nextRank
 	             }: UserConstructorArgs) {
 		super()
@@ -139,6 +70,7 @@ export class UserEntity extends BaseEntity {
 		this.dates = dates
 		this.rank = rank
 		this.nextRank = nextRank
+		this.school = school
 	}
 
 	get isOnline () {

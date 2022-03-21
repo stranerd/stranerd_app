@@ -1,6 +1,6 @@
 import { Conditions, QueryParams } from '@modules/core'
 import { IUserRepository } from '../../irepositories/iuser'
-import { RankingTimes } from '@modules/users/domain/entities/user'
+import { RankingTimes } from '../../types'
 
 export class GetLeaderboardUseCase {
 	private repository: IUserRepository

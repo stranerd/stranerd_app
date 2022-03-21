@@ -4,9 +4,10 @@ import {
 	UserDates,
 	UserRank,
 	UserRoles,
+	UserSchoolData,
 	UserSession,
 	UserStatus
-} from '../../domain/entities/user'
+} from '../../domain/types'
 
 export interface UserFromModel extends UserToModel {
 	id: string
@@ -18,6 +19,7 @@ export interface UserFromModel extends UserToModel {
 	dates: UserDates
 	rank: UserRank
 	nextRank: UserRank | null
+	school: UserSchoolData | null
 }
 
 export type UserToModel = {}
