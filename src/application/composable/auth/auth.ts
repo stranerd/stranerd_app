@@ -66,7 +66,7 @@ export const useAuth = () => {
 		global.auth.value = details
 		if (details?.id) {
 			global.user.value = await FindUser.call(details.id)
-			if (!global.user.value?.school) useUserModal().openSettings()
+			if (!global.user.value?.school) setTimeout(useUserModal().openSettings, 1000)
 		} else global.user.value = null
 	}
 
