@@ -27,9 +27,9 @@ export const useErrorHandler = () => {
 
 export const useSuccessHandler = () => {
 	const successState = ref('')
-	const setMessage = async (message: string) => {
+	const setMessage = async (message: string, skipAlert = false) => {
 		successState.value = message
-		if (isClient() && successState.value) Notify({
+		if (isClient() && successState.value && !skipAlert) Notify({
 			title: successState.value
 		})
 	}

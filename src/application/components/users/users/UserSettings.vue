@@ -6,25 +6,11 @@
 				<ion-text class="text-main_dark font-bold">Edit profile</ion-text>
 			</div>
 			<div class="flex flex-col items-start">
-				<div class="w-full flex items-center relative">
-					<CoverAvatar :src="profileFactory.coverPhoto" class="h-16 md:h-20 w-full" />
-					<FileInput accept="image/*"
-						class="rounded-full absolute right-0 mr-4 h-8 w-8 bg-gray text-white flex items-center justify-center"
-						@files="catchCoverPhoto">
-						<IonIcon :icon="pencilOutline" />
-					</FileInput>
-				</div>
-				<span
-					class="px-4 md:px-6 relative top-[-32px] md:top-[-40px] inline-flex items-center justify-center -mb-8 md:-mb-10">
-					<Avatar :name="profileFactory.name" :size="64" :src="profileFactory.photo"
-						class="md:hidden" />
-					<Avatar :name="profileFactory.name" :size="80" :src="profileFactory.photo"
-						class="hidden md:inline" />
-					<FileInput accept="image/*"
-						class="rounded-full absolute h-6 w-6 right-[15%] bottom-0 bg-gray text-white flex items-center justify-center"
-						@files="catchPhoto">
-						<IonIcon :icon="pencilOutline" />
-					</FileInput>
+				<CoverAvatar :editable="true" :src="profileFactory.coverPhoto" class="h-20"
+					@photo="(p) => { profileFactory.coverPhoto = p; updateProfile() }" />
+				<span class="modal-padding-x relative top-[-40px] inline-flex items-center justify-center -mb-10">
+					<Avatar :editable="true" :name="profileFactory.name" :size="80"
+						:src="profileFactory.photo" @photo="(p) => { profileFactory.photo = p; updateProfile() }" />
 				</span>
 			</div>
 			<div class="px-4 md:px-6">
@@ -216,10 +202,8 @@ import {
 	IonSpinner,
 	IonTextarea
 } from '@ionic/vue'
-import { pencilOutline } from 'ionicons/icons'
 import { useProfileUpdate, useUserSchoolUpdate } from '@app/composable/auth/profile'
 import { useAuth } from '@app/composable/auth/auth'
-import { useFileInputCallback } from '@app/composable/core/forms'
 import { usePasswordUpdate } from '@app/composable/auth/passwords'
 import { UserSchoolType } from '@modules/users'
 import { useInstitutionList } from '@app/composable/school/institutions'
@@ -235,7 +219,7 @@ export default defineComponent({
 		IonSpinner, IonButton, IonInput, IonSelect, IonSelectOption
 	},
 	setup () {
-		const { hasPassword, user } = useAuth()
+		const { hasPassword } = useAuth()
 		const {
 			factory: profileFactory, error: profileError, loading: profileLoading, updateProfile
 		} = useProfileUpdate()
@@ -245,14 +229,6 @@ export default defineComponent({
 		const {
 			factory: schoolFactory, error: schoolError, loading: schoolLoading, updateSchool
 		} = useUserSchoolUpdate()
-		const catchPhoto = useFileInputCallback(async ([file]) => {
-			profileFactory.value.photo = file
-			await updateProfile()
-		})
-		const catchCoverPhoto = useFileInputCallback(async ([file]) => {
-			profileFactory.value.coverPhoto = file
-			await updateProfile()
-		})
 
 		const { schools, gatewayExams } = useInstitutionList()
 		const { courses } = useCourseList()
@@ -262,8 +238,7 @@ export default defineComponent({
 		const filteredDepartments = computed(() => departments.value.filter((d) => d.facultyId === schoolFactory.value.facultyId))
 
 		return {
-			user, pencilOutline,
-			profileFactory, profileError, profileLoading, updateProfile, catchPhoto, catchCoverPhoto,
+			profileFactory, profileError, profileLoading, updateProfile,
 			hasPassword, passwordFactory, passwordError, passwordLoading, updatePassword,
 			schoolFactory, schoolError, schoolLoading, updateSchool, UserSchoolType,
 			schools, gatewayExams, filteredFaculties, filteredDepartments, courses

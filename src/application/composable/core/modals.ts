@@ -31,7 +31,7 @@ import CreateCourse from '@app/components/modals/school/CreateCourse.vue'
 import EditCourse from '@app/components/modals/school/EditCourse.vue'
 import CreatePastQuestion from '@app/components/modals/school/CreatePastQuestion.vue'
 import EditPastQuestion from '@app/components/modals/school/EditPastQuestion.vue'
-import SetupAccount from '@app/components/modals/onboarding/SetupAccount.vue'
+import Settings from '@app/components/modals/users/Settings.vue'
 
 export const modal = useModal(ref([]))
 const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion })
@@ -45,13 +45,11 @@ const ClassModal = modal.register('Class', {
 	CreateClass, EditClass, CreateGroup, EditGroup,
 	CreateAnnouncement, EditAnnouncement
 })
-const OnboardingModal = modal.register('Onboarding', {
-	SetupAccount
-})
 const SchoolModal = modal.register('School', {
 	CreateInstitution, EditInstitution, CreateFaculty, EditFaculty, CreateDepartment, EditDepartment,
 	CreatePastQuestion, EditPastQuestion, CreateCourse, EditCourse
 })
+const UserModal = modal.register('Onboarding', { Settings })
 
 export const useQuestionModal = () => QuestionModal
 export const useSessionModal = () => SessionModal
@@ -59,7 +57,8 @@ export const useReportModal = () => ReportModal
 export const useStudyModal = () => StudyModal
 export const useClassModal = () => ClassModal
 export const useSchoolModal = () => SchoolModal
-export const allModals = [useQuestionModal, useSessionModal, useReportModal, useStudyModal, useClassModal, useSchoolModal]
+export const useUserModal = () => UserModal
+export const allModals = [useQuestionModal, useSessionModal, useReportModal, useStudyModal, useClassModal, useSchoolModal, useUserModal]
 
 export const popover = usePopover(ref([]))
 const MenuPopover = popover.register('Menu', { CreateDashboardMenu, UserDashboardMenu })

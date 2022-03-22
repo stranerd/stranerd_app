@@ -1,5 +1,5 @@
 <template>
-	<div class="py-8">
+	<div class="py-8 modal-content">
 		<div class="mb-4 modal-padding-x">
 			<div class="flex justify-between text-main_dark">
 				<h3 class="text-heading2" style="font-weight: 500;">

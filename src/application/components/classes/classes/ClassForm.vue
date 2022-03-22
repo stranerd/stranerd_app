@@ -1,24 +1,11 @@
 <template>
 	<form class="flex flex-col gap-4 text-center justify-center" @submit.prevent="submit">
 		<div class="flex flex-col items-start">
-			<div class="w-full flex items-center relative">
-				<CoverAvatar :src="factory.coverPhoto" class="h-20 md:h-20" />
-				<FileInput accept="image/*"
-					class="rounded-full absolute right-0 mr-4 h-8 w-8 bg-gray text-white flex items-center justify-center"
-					@files="catchCoverPhoto">
-					<IonIcon :icon="pencilOutline" />
-				</FileInput>
-			</div>
-			<span
-				class="modal-padding-x relative top-[-32px] md:top-[-40px] inline-flex items-center justify-center -mb-8 md:-mb-10">
-				<Avatar :name="factory.name" :size="64" :src="factory.photo" class="md:hidden" />
-				<Avatar :name="factory.name" :size="80" :src="factory.photo"
-					class="hidden md:inline" />
-				<FileInput accept="image/*"
-					class="rounded-full absolute h-6 w-6 right-[15%] bottom-0 bg-gray text-white flex items-center justify-center"
-					@files="catchPhoto">
-					<IonIcon :icon="pencilOutline" />
-				</FileInput>
+			<CoverAvatar :editable="true" :src="factory.coverPhoto" class="h-20"
+				@photo="(p) => factory.coverPhoto = p" />
+			<span class="modal-padding-x relative top-[-40px] inline-flex items-center justify-center -mb-10">
+				<Avatar :editable="true" :name="factory.name" :size="80"
+					:src="factory.photo" @photo="(p) => factory.photo = p" />
 			</span>
 		</div>
 		<div class="flex flex-col gap-4 modal-padding-x">
@@ -46,8 +33,6 @@
 import { defineComponent } from 'vue'
 import { ClassFactory } from '@modules/classes'
 import { IonRippleEffect } from '@ionic/vue'
-import { pencilOutline } from 'ionicons/icons'
-import { useFileInputCallback } from '@app/composable/core/forms'
 
 export default defineComponent({
 	name: 'ClassForm',
@@ -69,15 +54,6 @@ export default defineComponent({
 			type: String,
 			required: true
 		}
-	},
-	setup (props) {
-		const catchPhoto = useFileInputCallback(async ([file]) => {
-			props.factory.photo = file
-		})
-		const catchCoverPhoto = useFileInputCallback(async ([file]) => {
-			props.factory.coverPhoto = file
-		})
-		return { pencilOutline, catchPhoto, catchCoverPhoto }
 	}
 })
 </script>

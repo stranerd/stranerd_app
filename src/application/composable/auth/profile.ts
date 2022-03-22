@@ -21,7 +21,7 @@ export const useProfileUpdate = () => {
 			try {
 				await setLoading(true)
 				await UpdateProfile.call(factory.value)
-				await setMessage('Profile updated successfully!')
+				await setMessage('Profile updated successfully!', true)
 			} catch (error) {
 				await setError(error)
 			}

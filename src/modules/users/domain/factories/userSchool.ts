@@ -121,7 +121,10 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 			this.institutionId = entity.school.institutionId
 			this.facultyId = entity.school.facultyId
 			this.departmentId = entity.school.departmentId
-		} else this.set('exams', entity.school.exams)
+		} else {
+			this.set('exams', entity.school.exams)
+			this.insts = entity.school.exams.map((e) => e.institutionId)
+		}
 	}
 
 	toModel = async () => {

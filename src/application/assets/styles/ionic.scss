@@ -143,7 +143,6 @@ ion-popover {
 	--background: white;
 	--height: auto;
 	--width: 100vw;
-	--border-radius: 1.5rem 1.5rem 0 0;
 	@media (min-width: $md) {
 		--width: 800px;
 	}
@@ -160,7 +159,8 @@ ion-popover {
 		overflow-y: auto;
 		max-height: 100vh;
 
-		.inner-content {
+		.modal-content {
+			border-radius: 1.5rem 1.5rem 0 0;
 			max-height: 80vh;
 			overflow: auto;
 		}
@@ -219,7 +219,9 @@ ion-input, ion-textarea, ion-select {
 
 .btn-secondary {
 	--background: $color-darkGray !important;
+	background: $color-darkGray !important;
 	--color: $color-white;
+	color: $color-white;
 	--padding-top: 0.75rem;
 	--padding-bottom: 0.75rem;
 	--padding-start: 1.5rem;

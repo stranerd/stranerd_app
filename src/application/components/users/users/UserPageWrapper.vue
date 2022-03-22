@@ -5,12 +5,13 @@
 			<PageLoading v-if="verifiedLoading" />
 			<template v-if="user">
 				<div class="flex flex-col w-full rounded-xl border-bottom-line">
-					<CoverAvatar :src="user.bio.coverPhoto" class="lg:rounded-t-xl h-11 md:h-32" />
+					<div class="flex flex-col items-start">
+						<CoverAvatar :src="user.bio.coverPhoto" class="h-20" />
+						<span class="px-4 relative top-[-40px] inline-flex items-center justify-center -mb-10">
+							<Avatar :name="user.bio.fullName" :size="80" :src="user.bio.photo" />
+						</span>
+					</div>
 					<div class="bg-white rounded-b-xl px-4 flex flex-col">
-						<Avatar :id="user.id" :name="user.bio.fullName" :size="72" :src="user.bio.photo"
-							class="md:hidden -mt-9" />
-						<Avatar :id="user.id" :name="user.bio.fullName" :size="96" :src="user.bio.photo"
-							class="hidden md:inline -mt-12" />
 						<h2 class="text-heading font-bold text-main_dark flex gap-1 items-center mt-4 mb-1">
 							<span>{{ user.bio.fullName }}</span>
 							<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="white" />
