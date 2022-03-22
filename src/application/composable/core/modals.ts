@@ -58,7 +58,7 @@ export const useStudyModal = () => StudyModal
 export const useClassModal = () => ClassModal
 export const useSchoolModal = () => SchoolModal
 export const useUserModal = () => UserModal
-export const allModals = [useQuestionModal, useSessionModal, useReportModal, useStudyModal, useClassModal, useSchoolModal, useUserModal]
+export const allModals = [useQuestionModal, useSessionModal, useReportModal, useStudyModal, useClassModal, useSchoolModal]
 
 export const popover = usePopover(ref([]))
 const MenuPopover = popover.register('Menu', { CreateDashboardMenu, UserDashboardMenu })
