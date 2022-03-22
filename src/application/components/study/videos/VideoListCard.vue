@@ -1,8 +1,8 @@
 <template>
 	<router-link :to="`/study/videos/${video.id}`"
 		class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
-		<ion-text class="font-semibold truncate w-full">{{ video.title }}</ion-text>
-		<div class="w-full flex items-center justify-between gap-2">
+		<ion-text class="font-500 truncate w-full">{{ video.title }}</ion-text>
+		<div class="w-full flex items-center justify-between gap-2 text-sub">
 			<Tag :index="4" tag="Video">
 				<template v-slot="slotProps">
 					<span class="flex items-center">

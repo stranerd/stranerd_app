@@ -1,7 +1,7 @@
 <template>
 	<Modal>
 		<template v-slot:title>
-			Save {{ type }} to
+			Save to
 		</template>
 		<div class="flex flex-col gap-4 mx-auto text-gray">
 			<router-link class="hidden ml-auto flex gap-1 items-center" to="/study/sets/create">

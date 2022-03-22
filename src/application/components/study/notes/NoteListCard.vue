@@ -2,12 +2,12 @@
 	<component :is="content ? 'router-link' : 'span'" :to="`/study/notes/${note.id}`"
 		class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
 		<div class="w-full justify-between items-center flex gap-2">
-			<ion-text class="font-semibold truncate w-full">{{ note.title }}</ion-text>
+			<ion-text class="font-500 truncate w-full">{{ note.title }}</ion-text>
 			<IonSpinner v-if="loading" color="primary" />
 			<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-primary text-xl" @click="download" />
 		</div>
 
-		<div class="w-full flex items-center justify-between gap-2">
+		<div class="w-full flex items-center justify-between gap-2 text-sub">
 			<Tag :index="2" tag="Note">
 				<template v-slot="slotProps">
 					<span class="flex items-center">

@@ -3,7 +3,7 @@
 		class="w-full min-h-40 bg-white rounded-xl flex flex-col justify-between box-border !gap-2 card-padding text-main_dark">
 		<div>
 			<div class="flex justify-between gap-2">
-				<ion-text class="font-semibold truncate w-full">
+				<ion-text class="font-500 truncate w-full">
 					<Institution :institutionId="testPrep.data.institutionId" />
 				</ion-text>
 				<SaveToSet :entity="testPrep" />

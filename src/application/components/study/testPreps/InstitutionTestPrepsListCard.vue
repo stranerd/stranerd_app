@@ -2,9 +2,9 @@
 	<router-link :to="`/study/preps/${institutionId}`"
 		class="w-full bg-white rounded-xl flex flex-col items-start box-border card-padding text-main_dark">
 		<ion-text class="truncate w-full">
-			<Institution :institutionId="institutionId" class="font-semibold" />
+			<Institution :institutionId="institutionId" class="font-500" />
 		</ion-text>
-		<div class="flex justify-between items-center w-full gap-2">
+		<div class="flex justify-between items-center w-full gap-2 text-sub">
 			<Tag :index="3" :tag="yearGap" />
 			<Share :link="`/study/preps/${institutionId}`"
 				:title="`${institution ? institution.name : 'Institution'}'s preps`"

@@ -1,13 +1,12 @@
 <template>
 	<router-link :to="`/questions/${question.id}`"
-		class="card-padding rounded-xl bg-white flex flex-col w-full text-main_dark">
-
-		<DisplayHtml :html="question.trimmedBody" class="leading-normal" />
-		<div class="w-full flex justify-between items-center mt-auto">
-			<div class="flex items-center font-bold">
-				<span class=" text-gray ml-auto">{{ formatTime(question.createdAt) }}</span>
+		class="card-padding rounded-xl bg-white flex flex-col w-full">
+		<DisplayHtml :html="question.trimmedBody" class="text-main_dark leading-normal font-500" />
+		<div class="w-full flex justify-between items-center mt-auto text-sub text-main_dark">
+			<div class="flex items-center">
+				<span class="ml-auto">{{ formatTime(question.createdAt) }}</span>
 				<div class="h-1 w-1 bg-gray mx-2 rounded-full" />
-				<span class="text-gray">
+				<span>
 					{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
 				</span>
 			</div>

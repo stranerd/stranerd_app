@@ -4,15 +4,15 @@
 		class="rounded-xl bg-white flex flex-col card-padding justify-between w-full relative cursor-pointer">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
-			<div class="flex items-center">
+			<div class="flex items-center text-sub">
 				<avatar :id="question.userId" :name="question.userBio.fullName" :size="28" :src="question.userBio.photo"
 					class="mr-2 " />
-				<span class="font-bold text-main_dark hidden lg:flex items-center gap-1">
+				<span class="text-main_dark hidden md:flex items-center gap-1">
 					<span>{{ question.userBio.fullName }}</span>
 					<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
 				</span>
-				<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 ml-2 hidden lg:block"></span>
-				<span class="font-bold text-main_dark capitalize">{{ question.subject }}</span>
+				<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 ml-2 hidden md:block" />
+				<span class="text-main_dark capitalize">{{ question.subject }}</span>
 			</div>
 
 			<ion-button v-if="showAnswerButton"
@@ -24,14 +24,14 @@
 			</ion-button>
 		</div>
 
-		<DisplayHtml :html="question.trimmedBody" class="text-main_dark leading-normal" />
+		<DisplayHtml :html="question.trimmedBody" class="text-main_dark leading-normal font-500" />
 
-		<div class="flex justify-between items-center gap-4 text-gray font-bold">
-			<span class="text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
+		<div class="flex justify-between items-center gap-4 text-main_dark text-sub">
+			<span class="lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 			<span v-if="question.attachments.length" class="font-italic flex items-center">
 				<IonIcon :icon="imageOutline" class="mr-2" />  IMG inside
 			</span>
-			<span class="text-main_dark">
+			<span>
 				{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
 			</span>
 		</div>

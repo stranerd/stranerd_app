@@ -1,8 +1,8 @@
 <template>
 	<router-link :to="`/study/flashCards/${flashCard.id}`"
 		class="bg-white rounded-xl flex flex-col box-border justify-between card-padding text-main_dark">
-		<ion-text class="font-semibold truncate w-full">{{ flashCard.title }}</ion-text>
-		<div class="w-full flex items-center justify-between gap-2">
+		<ion-text class="font-500 truncate w-full">{{ flashCard.title }}</ion-text>
+		<div class="w-full flex items-center justify-between gap-2 text-sub">
 			<Tag :index="1"
 				:tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
 				<template v-slot="slotProps">
