@@ -54,7 +54,6 @@ export class HttpClient {
 				.reduce((acc, cur) => acc + String.fromCharCode(cur), '')
 			return `data:${type};base64,` + btoa(binary)
 		} catch (e: any) {
-			alert(e.message)
 			throw new Error('Error downloading file')
 		}
 	}

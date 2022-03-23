@@ -7,7 +7,6 @@ import { isNotAuthenticated } from '@app/middlewares/isNotAuthenticated'
 import { isAdmin } from '@app/middlewares/isAdmin'
 import { hasQueryToken } from '@app/middlewares/hasQueryToken'
 import { MiddlewareFunction } from '@app/middlewares'
-import { useRouteLoading } from '@app/composable/meta/routes'
 
 export const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken }
 export type Middleware = MiddlewareFunction | keyof typeof globalMiddlewares
@@ -19,13 +18,11 @@ export const setupRouter = async () => {
 	})
 
 	router.beforeEach(async (to, from, next) => {
-		const { setLoading } = useRouteLoading()
-		await setLoading(true)
 		await Promise.all(allModals.map((modal) => modal().closeAll()))
 		await Promise.all(allPopovers.map((popover) => popover().closeAll()))
 		showAddAnswer.value = false
 
-		const middlewares = (to.meta.middlewares ?? []) as Middleware[]
+		const middlewares = to.meta.middlewares ?? []
 		let redirect = null
 		for (const middleware of middlewares) {
 			const callback = typeof middleware === 'string' ? globalMiddlewares[middleware] : middleware
@@ -35,9 +32,7 @@ export const setupRouter = async () => {
 			break
 		}
 
-		if (redirect) next(redirect)
-		else next()
-		await setLoading(false)
+		redirect ? next(redirect) : next()
 	})
 	router.afterEach(() => {
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
