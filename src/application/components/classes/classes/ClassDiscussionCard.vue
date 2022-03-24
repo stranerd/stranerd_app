@@ -16,7 +16,7 @@
 import { defineComponent } from 'vue'
 import { DiscussionEntity } from '@modules/classes'
 import { documentOutline, downloadOutline, imageOutline, playCircleOutline } from 'ionicons/icons'
-import { useDownloadableLink } from '@app/composable/meta/media'
+import { useDownload } from '@app/composable/meta/media'
 import { IonSpinner } from '@ionic/vue'
 
 export default defineComponent({
@@ -29,7 +29,10 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { loading, download } = useDownloadableLink(props.discussion.media!)
+		const {
+			loading,
+			downloadWeb: download
+		} = useDownload(props.discussion.media?.name ?? '', props.discussion.media?.link ?? '', 'discussions')
 		return {
 			imageOutline, playCircleOutline, documentOutline, downloadOutline,
 			loading, download

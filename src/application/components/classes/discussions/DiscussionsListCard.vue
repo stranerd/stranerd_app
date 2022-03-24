@@ -34,7 +34,7 @@ import { useAuth } from '@app/composable/auth/auth'
 import { formatTimeAsDigits } from '@utils/dates'
 import { checkmarkCircleOutline, documentOutline, downloadOutline } from 'ionicons/icons'
 import { IonSpinner } from '@ionic/vue'
-import { useDownloadableLink } from '@app/composable/meta/media'
+import { useDownload } from '@app/composable/meta/media'
 import { saveDiscussionsReadState } from '@app/composable/classes/discussions'
 
 export default defineComponent({
@@ -48,7 +48,10 @@ export default defineComponent({
 	components: { IonSpinner },
 	setup (props) {
 		const { id } = useAuth()
-		const { loading, download } = useDownloadableLink(props.discussion.media!)
+		const {
+			loading,
+			downloadWeb: download
+		} = useDownload(props.discussion.media?.name ?? '', props.discussion.media?.link ?? '', 'discussions')
 		onMounted(async () => {
 			await saveDiscussionsReadState(props.discussion)
 		})

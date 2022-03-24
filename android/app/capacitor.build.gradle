@@ -22,7 +22,8 @@ dependencies {
     implementation project(':capacitor-storage')
     implementation project(':capacitor-toast')
     implementation project(':codetrix-studio-capacitor-google-auth')
-
+    implementation project(':capacitor-blob-writer')
+    implementation "com.android.support:support-v4:27.+"
 }
 
 
