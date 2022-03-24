@@ -31,7 +31,7 @@ export const useDownload = (fileName: string, fileLink: string, type: string) =>
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const content = ref('')
-	const base64Content = computed(() => !content.value ? '' : `data;base64, ${btoa(content.value)}`)
+	const base64Content = computed(() => !content.value ? '' : `data:;base64,${btoa(content.value)}`)
 	const options = {
 		path: `downloads/${type}/${fileName}`,
 		encoding: Encoding.UTF8,
