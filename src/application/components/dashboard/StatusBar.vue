@@ -3,10 +3,10 @@
 		class="bg-white border-bottom-line md:rounded-xl flex flex-col sm:flex-row justify-between sm:items-center py-4 px-4 md:px-5 md:py-6">
 		<div class="flex flex-col text-left">
 			<ion-text class="text-main_dark text-heading font-bold">
-				<span>{{ user.bio.firstName }}</span>! welcome back 
+				<span>{{ user?.bio.firstName }}</span>! welcome back 
 			</ion-text>
 
-			<ion-text class="text-gray  ">
+			<ion-text class="text-gray  text-body">
 				Your performance has been great, keep it up.
 			</ion-text>
 		</div>
