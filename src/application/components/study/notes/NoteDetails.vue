@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Note v-if="content" :link="content" />
+		<Note v-if="base64Content" :link="base64Content" />
 		<IonSkeletonText v-else-if="loading" animated class="h-36 rounded-xl" />
 		<div v-else class="flex flex-col gap-2 items-center">
 			<p>The note needs to be downloaded before it can be viewed</p>
@@ -28,12 +28,12 @@ export default defineComponent({
 	setup (props) {
 		const {
 			loading,
-			content,
+			base64Content,
 			error,
 			download,
 			deleteFromDownloads
 		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
-		return { loading, content, error, download, deleteFromDownloads }
+		return { loading, base64Content, error, download, deleteFromDownloads }
 	}
 })
 </script>

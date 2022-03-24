@@ -1,5 +1,5 @@
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { Directory, Encoding, Filesystem } from '@capacitor/filesystem'
 import { HttpClient, Media } from '@modules/core'
 
@@ -31,8 +31,10 @@ export const useDownload = (fileName: string, fileLink: string, type: string) =>
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const content = ref('')
+	const base64Content = computed(() => !content.value ? '' : `data;base64, ${btoa(content.value)}`)
 	const options = {
-		path: `${type}/${fileName}`,
+		path: `downloads/${type}/${fileName}`,
+		encoding: Encoding.UTF8,
 		directory: Directory.Library
 	}
 
@@ -43,9 +45,9 @@ export const useDownload = (fileName: string, fileLink: string, type: string) =>
 			const data = await new HttpClient('').download(fileLink)
 			if (!data) return loading.value = false
 			await Filesystem.writeFile({
-				...options, recursive: true, data, encoding: Encoding.UTF8
+				...options, recursive: true, data
 			})
-			const contents = await Filesystem.readFile({ ...options, encoding: Encoding.UTF8 })
+			const contents = await Filesystem.readFile({ ...options })
 			content.value = contents.data
 		} catch (e) {
 			await setError(e)
@@ -62,10 +64,10 @@ export const useDownload = (fileName: string, fileLink: string, type: string) =>
 
 	onMounted(async () => {
 		loading.value = true
-		const contents = await Filesystem.readFile({ ...options, encoding: Encoding.UTF8 }).catch(() => null)
+		const contents = await Filesystem.readFile({ ...options }).catch(() => null)
 		if (contents?.data) content.value = contents.data
 		loading.value = false
 	})
 
-	return { error, loading, content, download, deleteFromDownloads }
+	return { error, loading, content, download, deleteFromDownloads, base64Content }
 }
