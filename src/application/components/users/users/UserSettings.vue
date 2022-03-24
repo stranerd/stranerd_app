@@ -9,7 +9,7 @@
 				<CoverAvatar :editable="true" :src="profileFactory.coverPhoto" class="h-20"
 					@photo="(p) => { profileFactory.coverPhoto = p; updateProfile() }" />
 				<span class="modal-padding-x relative top-[-40px] inline-flex items-center justify-center -mb-10">
-					<Avatar :editable="true" :name="profileFactory.name" :size="80"
+					<Avatar :editable="true" :name="profileFactory.first" :size="80"
 						:src="profileFactory.photo" @photo="(p) => { profileFactory.photo = p; updateProfile() }" />
 				</span>
 			</div>

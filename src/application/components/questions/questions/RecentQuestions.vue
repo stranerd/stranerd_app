@@ -19,7 +19,7 @@
 			info="You have no recent questions! Start asking questions to help with homework and studying."
 			route="/questions"
 		/>
-		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
+		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl mx-4" />
 		<div class="showcase">
 			<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
 		</div>

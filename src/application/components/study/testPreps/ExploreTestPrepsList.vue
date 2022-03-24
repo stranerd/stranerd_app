@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
+		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl mx-4" />
 		<EmptyState v-if="!loading && !error && filtered.length === 0" info="No testPreps found." />
 		<div class="showcase">
 			<InstitutionTestPrepsListCard v-for="group in filtered" :key="group.institutionId"
