@@ -1,12 +1,12 @@
 <template>
 	<Justified>
 		<div>
-			<div class="blueTop">
-				<ion-text class="heading lg:text-2xl font-bold text-white text-center">
+			<div class="blueTop py-4">
+				<ion-text class="text-heading font-bold text-main_dark text-center">
 					Privacy Policy
 				</ion-text>
 			</div>
-			<div class="lg:w-8/12 w-full mx-auto mt-8 p-4 mb-16 bg-white">
+			<div class="lg:w-8/12 w-full mx-auto bg-white">
 				<Note link="/legal/privacy-policy.pdf" />
 			</div>
 		</div>

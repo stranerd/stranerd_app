@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { PastQuestionType } from './pastQuestion'
+import { PastQuestionType } from '@modules/school'
 
 export class TestPrepEntity extends BaseEntity {
 	public readonly id: string
@@ -35,6 +35,14 @@ export class TestPrepEntity extends BaseEntity {
 
 	get userId () {
 		return 'admin'
+	}
+
+	get shareLink () {
+		return `/study/preps/${this.data.institutionId}`
+	}
+
+	search (search: string) {
+		return this.name.toLowerCase().includes(search.toLowerCase())
 	}
 }
 

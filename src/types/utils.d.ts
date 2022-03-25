@@ -8,5 +8,3 @@ declare type DeepRequired<T> = Required<T extends Require ? T : {
 declare type DeepNullable<T> = T extends Nullable ? T : undefined | {
 	[K in keyof T]: DeepNullable<T[K]>
 }
-
-

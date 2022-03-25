@@ -31,8 +31,9 @@ export const setupPush = async (userId: string) => {
 	await PushNotifications.addListener('pushNotificationActionPerformed', async ({ notification }) => {
 		const router = await routerPromise
 		await clearAllNotifications()
-		const parsed = JSON.parse(notification.data.value) as NotificationData
-		if (parsed.type === 'notifications') await router.push(NotificationEntity.getLink(parsed.data.action, parsed.data.data))
+		const parsed = JSON.parse(notification.data.value) as PushValue
+		if (parsed.type === 'notifications') await router.push(NotificationEntity.getLink(parsed.data as any))
+		if (parsed.type === 'classes-discussions') await router.push(`/classes/${parsed.data.classId}/groups/${parsed.data.groupId}`)
 		else await router.push('/notifications')
 	})
 
@@ -70,3 +71,14 @@ type NotificationData = {
 		data: Record<string, any>
 	}
 }
+
+type ClassDiscussionData = {
+	type: 'classes-discussions'
+	data: {
+		id: string
+		classId: string
+		groupId: string
+	}
+}
+
+type PushValue = NotificationData | ClassDiscussionData

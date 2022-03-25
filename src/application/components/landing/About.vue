@@ -38,7 +38,7 @@
 				<img alt="testprep image" class="lg:w-1/2" src="@app/assets/images/auth/note.png" />
 				<div
 					class="lg:px-24 px-5 lg:py-32 py-12 bg-pink text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2 w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
-					<ion-icon :icon="reader" class=" lg:text-[3.75rem] text-[2.75rem] text-white" />
+					<ion-icon :icon="readerOutline" class=" lg:text-[3.75rem] text-[2.75rem] text-white" />
 					<ion-text class="font-extrabold lg:text-3xl text-xl">
 						Notes
 					</ion-text>
@@ -51,7 +51,7 @@
 			<div class="flex justify-between items-center w-full lg:flex-row flex-col-reverse mt-24 gap-5">
 				<div
 					class="lg:px-24 px-5 lg:py-32 py-12 bg-cyan text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2 w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
-					<ion-icon :icon="chatboxEllipses" class=" lg:text-[3.75rem] text-[2.75rem] text-white" />
+					<ion-icon :icon="chatboxEllipsesOutline" class=" lg:text-[3.75rem] text-[2.75rem] text-white" />
 					<ion-text class="font-extrabold lg:text-3xl text-xl">
 						Expert Answers
 					</ion-text>
@@ -68,14 +68,14 @@
 </template>
 
 <script lang="ts">
-import { chatboxEllipses, reader } from 'ionicons/icons'
+import { chatboxEllipsesOutline, readerOutline } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'About',
 	setup () {
 		return {
-			reader, chatboxEllipses
+			readerOutline, chatboxEllipsesOutline
 		}
 	}
 })

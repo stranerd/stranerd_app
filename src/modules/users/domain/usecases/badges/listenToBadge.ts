@@ -9,7 +9,7 @@ export class ListenToBadgeUseCase {
 		this.repository = repository
 	}
 
-	async call (userId: string, id: string, listener: Listeners<BadgeEntity>) {
-		return await this.repository.listenToOne(userId, id, listener)
+	async call (id: string, listener: Listeners<BadgeEntity>) {
+		return await this.repository.listenToOne(id, listener)
 	}
 }

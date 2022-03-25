@@ -5,16 +5,13 @@ import { CommentBaseDataSource } from './comment-base'
 
 export class CommentApiDataSource implements CommentBaseDataSource {
 	private readonly stranerdClient: HttpClient
-	private readonly path: string
 
-	constructor (path: string) {
-		this.path = path
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + `/questions/${path}`)
+	constructor () {
+		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/questions/answerComments')
 	}
 
 	async create (data: CommentToModel) {
-		const comment = await this.stranerdClient.post<CommentToModel, CommentFromModel>('/', data)
-		return comment.id
+		return await this.stranerdClient.post<CommentToModel, CommentFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -26,18 +23,18 @@ export class CommentApiDataSource implements CommentBaseDataSource {
 	}
 
 	async update (id: string, data: CommentToModel) {
-		await this.stranerdClient.put<CommentToModel, CommentFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<CommentToModel, CommentFromModel>(`/${id}`, data)
 	}
 
 	async listenToOne (id: string, listeners: Listeners<CommentFromModel>) {
-		const listener = listenOnSocket(`${this.path}/${id}`, listeners)
+		const listener = listenOnSocket(`questions/answerComments/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<CommentFromModel>) {
-		const listener = listenOnSocket(`${this.path}`, listeners)
+		const listener = listenOnSocket('questions/answerComments', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

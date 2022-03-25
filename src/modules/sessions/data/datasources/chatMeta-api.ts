@@ -19,14 +19,14 @@ export class ChatMetaApiDataSource implements ChatMetaBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<ChatMetaFromModel>) {
-		const listener = listenOnSocket(`chatMetas/${id}`, listeners)
+		const listener = listenOnSocket(`sessions/chatMetas/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<ChatMetaFromModel>) {
-		const listener = listenOnSocket('chatMetas', listeners)
+		const listener = listenOnSocket('sessions/chatMetas', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

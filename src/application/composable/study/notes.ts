@@ -13,6 +13,7 @@ import {
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
+import { addToArray } from '@utils/commons'
 
 const global = {
 	notes: ref([] as NoteEntity[]),
@@ -21,17 +22,21 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
-
-const pushToNoteList = (note: NoteEntity) => {
-	const index = global.notes.value.findIndex((q) => q.id === note.id)
-	if (index !== -1) global.notes.value.splice(index, 1, note)
-	else global.notes.value.push(note)
-}
-const unshiftToNoteList = (note: NoteEntity) => {
-	const index = global.notes.value.findIndex((q) => q.id === note.id)
-	if (index !== -1) global.notes.value.splice(index, 1, note)
-	else global.notes.value.unshift(note)
-}
+const listener = useListener(async () => {
+	const lastDate = global.notes.value[global.notes.value.length - 1]?.createdAt
+	return await ListenToNotes.call({
+		created: async (entity) => {
+			addToArray(global.notes.value, entity, (e) => e.id, (e) => e.createdAt)
+		},
+		updated: async (entity) => {
+			addToArray(global.notes.value, entity, (e) => e.id, (e) => e.createdAt)
+		},
+		deleted: async (entity) => {
+			const index = global.notes.value.findIndex((q) => q.id === entity.id)
+			if (index !== -1) global.notes.value.splice(index, 1)
+		}
+	}, lastDate)
+})
 
 export const useNoteList = () => {
 	const fetchNotes = async () => {
@@ -41,35 +46,20 @@ export const useNoteList = () => {
 			const lastDate = global.notes.value[global.notes.value.length - 1]?.createdAt
 			const notes = await GetNotes.call(lastDate)
 			global.hasMore.value = !!notes.pages.next
-			notes.results.forEach(pushToNoteList)
+			notes.results.forEach((n) => addToArray(global.notes.value, n, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)
 		}
 		await global.setLoading(false)
 	}
-	const listener = useListener(async () => {
-		const lastDate = global.notes.value[global.notes.value.length - 1]?.createdAt
-		return await ListenToNotes.call({
-			created: async (entity) => {
-				unshiftToNoteList(entity)
-			},
-			updated: async (entity) => {
-				unshiftToNoteList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.notes.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.notes.value.splice(index, 1)
-			}
-		}, lastDate)
-	})
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchNotes()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { ...global, fetchOlderNotes: fetchNotes }
@@ -87,9 +77,9 @@ export const useCreateNote = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const noteId = await AddNote.call(factory.value)
+				const note = await AddNote.call(factory.value)
 				await setMessage('Note submitted successfully')
-				await router.replace(`/study/notes/${noteId}`)
+				await router.push(`/study/notes/${note.id}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -107,7 +97,7 @@ export const openNoteEditModal = async (note: NoteEntity, router: Router) => {
 	editingNote = note
 	await router.push(`/study/notes/${note.id}/edit`)
 }
-export const useEditNote = (noteId: string) => {
+export const useEditNote = () => {
 	const router = useRouter()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
@@ -120,10 +110,10 @@ export const useEditNote = (noteId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditNote.call(noteId, factory.value)
+				const note = await EditNote.call(editingNote!.id, factory.value)
 				await setMessage('Note updated successfully')
-				await router.replace(`/study/notes/${noteId}`)
 				factory.value.reset()
+				await router.push(`/study/notes/${note.id}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -168,7 +158,7 @@ export const useNote = (noteId: string) => {
 	const note = computed({
 		get: () => global.notes.value.find((q) => q.id === noteId) ?? null,
 		set: (q) => {
-			if (q) pushToNoteList(q)
+			if (q) addToArray(global.notes.value, q, (e) => e.id, (e) => e.createdAt)
 		}
 	})
 
@@ -182,7 +172,7 @@ export const useNote = (noteId: string) => {
 				return
 			}
 			note = await FindNote.call(noteId)
-			if (note) unshiftToNoteList(note)
+			if (note) addToArray(global.notes.value, note, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
 		}
@@ -191,10 +181,10 @@ export const useNote = (noteId: string) => {
 	const listener = useListener(async () => {
 		return await ListenToNote.call(noteId, {
 			created: async (entity) => {
-				unshiftToNoteList(entity)
+				addToArray(global.notes.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				unshiftToNoteList(entity)
+				addToArray(global.notes.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
 				const index = global.notes.value.findIndex((q) => q.id === entity.id)
@@ -205,10 +195,10 @@ export const useNote = (noteId: string) => {
 
 	onMounted(async () => {
 		await fetchNote()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { error, loading, note }

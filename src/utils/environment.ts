@@ -3,6 +3,7 @@ import { isAndroid, isIos } from '@utils/constants'
 
 export const appName = 'stranerd'
 export const isDev = process.env.VUE_APP_API_ENVIRONMENT === 'local'
+export const isProd = process.env.VUE_APP_API_ENVIRONMENT === 'production'
 
 export const isServer = () => false
 export const isClient = () => true
@@ -16,8 +17,8 @@ export const googleClientIds = {
 
 export const googleClientId = isIos ? googleClientIds.ios : isAndroid ? googleClientIds.android : googleClientIds.web
 
-const host = parseURL((process.env.VUE_APP_API_DOMAIN ?? '') + (isDev ? `:${process.env.VUE_APP_API_PORT}` : ''))
-export const domain = `http${!isDev ? 's' : ''}://${host}`
+const host = (process.env.VUE_APP_API_DOMAIN ?? '') + (isDev ? `:${process.env.VUE_APP_API_PORT}` : '')
+export const domain = parseURL(`http${!isDev ? 's' : ''}://${host}`)
 
 const apis = JSON.parse(process.env.VUE_APP_API_API_BASES ?? '{}')
 export const apiBases = {

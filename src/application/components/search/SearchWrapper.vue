@@ -1,64 +1,25 @@
 <template>
 	<Justified>
-		<div>
-			<div class="blueTop px-4">
-				<div class="md:w-11/12 lg:w-8/12 w-full">
-					<div class="flex flex-col justify-center items-center">
-						<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-12 hidden md:block">
-							Explore thousands of study materials
-						</ion-text>
-						<Search class="my-4" />
-					</div>
-					<div class="nav-scroll">
-						<router-link :to="`/search?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							All
-						</router-link>
-						<router-link :to="`/search/preps?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							TestPreps
-						</router-link>
-						<router-link :to="`/search/notes?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							Notes
-						</router-link>
-						<router-link :to="`/search/videos?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							Videos
-						</router-link>
-						<router-link :to="`/search/flashCards?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							FlashCards
-						</router-link>
-						<router-link :to="`/search/folders?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							Folders
-						</router-link>
-						<router-link :to="`/search/nerds?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							Nerds
-						</router-link>
-						<router-link :to="`/search/questions?search=${searchTerm}`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							Questions
-						</router-link>
-					</div>
+		<div class="h-full md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
+			<div class="bg-white rounded-xl px-4 pt-4 flex flex-col">
+				<Search />
+				<div class="nav-scroll mt-4">
+					<router-link :to="`/search?search=${searchTerm}`">All</router-link>
+					<router-link :to="`/search/preps?search=${searchTerm}`">TestPreps</router-link>
+					<router-link :to="`/search/notes?search=${searchTerm}`">Notes</router-link>
+					<router-link :to="`/search/videos?search=${searchTerm}`">Videos</router-link>
+					<router-link :to="`/search/flashCards?search=${searchTerm}`">FlashCards</router-link>
+					<router-link :to="`/search/sets?search=${searchTerm}`">Folders</router-link>
+					<router-link :to="`/search/nerds?search=${searchTerm}`">Nerds</router-link>
+					<router-link :to="`/search/questions?search=${searchTerm}`">Questions</router-link>
 				</div>
 			</div>
-			<div class="p-4 md:w-11/12 lg:w-8/12 w-full mx-auto">
+			<div class="md:mt-6 md:px-4 lg:px-0">
 				<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl" />
-				<div v-else-if="!fetched" class="flex flex-col gap-4 max-w-[500px] mx-auto">
+				<div v-else-if="!fetched" class="flex flex-col gap-4 max-w-[500px] mx-auto p-4 md:p-0">
 					<div v-for="r in recent" :key="r" class="flex items-center gap-4">
-						<IonIcon :icon="close" class="text-2xl" @click="clearFromRecent(r)" />
-						<IonText class="w-full text-xl truncate">{{ r }}</IonText>
+						<IonIcon :icon="closeOutline" class="text-2xl" @click="clearFromRecent(r)" />
+						<IonText class="w-full text-heading truncate">{{ r }}</IonText>
 						<IonIcon :icon="arrowRedoOutline" class="text-2xl" @click="() => {searchTerm = r; search()}" />
 					</div>
 				</div>
@@ -76,7 +37,7 @@ import Justified from '@app/layouts/Justified.vue'
 import { useSearch } from '@app/composable/meta/search'
 import Search from '@app/components/search/Search.vue'
 import { IonSkeletonText } from '@ionic/vue'
-import { arrowRedoOutline, close } from 'ionicons/icons'
+import { arrowRedoOutline, closeOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'SearchWrapper',
@@ -84,8 +45,15 @@ export default defineComponent({
 	setup () {
 		return {
 			...useSearch(),
-			close, arrowRedoOutline
+			closeOutline, arrowRedoOutline
 		}
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+	:deep(ion-searchbar) {
+		--background: $color-newGray !important;
+		background: $color-newGray !important;
+	}
+</style>

@@ -1,51 +1,29 @@
 <template>
 	<div>
-		<div v-if="sliced" class="w-full flex justify-between mb-4">
-			<span class="heading font-bold text-main_dark">
-				Recently Uncompleted Tests
-			</span>
-			<router-link class="text-primary text-body flex items-center font-bold"
-				to="/study/tests/continue">
-				<span>view all</span>
-			</router-link>
-		</div>
-
-		<EmptyState v-if="!loading && !error && tests.length === 0" info="You have no uncompleted tests" />
+		<EmptyState v-if="!loading && !error && unCompletedTests.length === 0" info="You have no uncompleted tests" />
+		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl mx-4" />
 		<div v-else class="showcase">
-			<ContinueTestCard v-for="test in tests" :key="test.hash" :test="test" />
+			<ContinueTestCard v-for="test in unCompletedTests" :key="test.hash" :test="test" />
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
+import { defineComponent } from 'vue'
+import { chevronBackOutline, chevronForwardOutline, ellipseOutline } from 'ionicons/icons'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import ContinueTestCard from '@app/components/study/tests/ContinueTestCard.vue'
 import { useTestList } from '@app/composable/study/tests'
+import { IonSkeletonText } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ContinueTests',
-	components: { EmptyState, ContinueTestCard },
-	props: {
-		sliced: {
-			type: Boolean,
-			default: false,
-			required: false
-		}
-	},
+	components: { EmptyState, ContinueTestCard, IonSkeletonText },
 	setup (props) {
 		const { unCompletedTests, loading, error } = useTestList()
-
-		const tests = computed({
-			get: () => unCompletedTests.value.slice(0, props.sliced ? 6 : undefined),
-			set: () => {
-			}
-		})
-
 		return {
-			chevronForwardOutline, chevronBackOutline, ellipse,
-			tests, loading, error
+			chevronForwardOutline, chevronBackOutline, ellipseOutline,
+			unCompletedTests, loading, error
 		}
 	}
 })

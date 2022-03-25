@@ -1,57 +1,57 @@
 <template>
 	<ExploreWrapper>
-		<div>
-			<div class="mb-12">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text class="mr-3">
+		<div class="py-4 md:py-0 flex flex-col gap-4 md:gap-6">
+			<div class="border-bottom-line">
+				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
+					<div class="text-main_dark flex items-center">
+						<ion-text class="mr-3 text-heading font-bold">
 							TestPreps
 						</ion-text>
 					</div>
 					<router-link :to="`/explore/preps`"
-						class="text-primary text-body flex items-center font-bold">
+						class="text-primary flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>
 				<ExploreTestPrepsList :sliced="true" />
 			</div>
-			<div class="mb-12">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text class="mr-3">
+			<div class="border-bottom-line">
+				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
+					<div class="text-main_dark flex items-center">
+						<ion-text class="mr-3 font-bold text-heading">
 							FlashCards
 						</ion-text>
 					</div>
 					<router-link :to="`/explore/flashCards`"
-						class="text-primary text-body flex items-center font-bold">
+						class="text-primary flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>
 				<ExploreFlashCardsList :sliced="true" />
 			</div>
-			<div class="mb-12">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text class="mr-3">
+			<div class="border-bottom-line">
+				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
+					<div class="text-main_dark flex items-center">
+						<ion-text class="text-heading font-bold mr-3">
 							Notes
 						</ion-text>
 					</div>
 					<router-link :to="`/explore/notes`"
-						class="text-primary text-body flex items-center font-bold">
+						class="text-primary flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>
 				<ExploreNotesList :sliced="true" />
 			</div>
-			<div class="mb-12">
-				<div class="w-full flex justify-between mb-4">
-					<div class="heading font-bold text-main_dark flex items-center">
-						<ion-text class="mr-3">
+			<div class="border-bottom-line">
+				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
+					<div class="text-main_dark flex items-center">
+						<ion-text class="text-heading font-bold mr-3">
 							Videos
 						</ion-text>
 					</div>
 					<router-link :to="`/explore/videos`"
-						class="text-primary text-body flex items-center font-bold">
+						class="text-primary flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>

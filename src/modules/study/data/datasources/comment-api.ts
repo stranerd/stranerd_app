@@ -11,8 +11,7 @@ export class CommentApiDataSource implements CommentBaseDataSource {
 	}
 
 	async create (data: CommentToModel) {
-		const comment = await this.stranerdClient.post<CommentToModel, CommentFromModel>('/', data)
-		return comment.id
+		return await this.stranerdClient.post<CommentToModel, CommentFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -24,14 +23,14 @@ export class CommentApiDataSource implements CommentBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<CommentFromModel>) {
-		const listener = listenOnSocket(`studyComments/${id}`, listeners)
+		const listener = listenOnSocket(`study/comments/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<CommentFromModel>) {
-		const listener = listenOnSocket('studyComments', listeners)
+		const listener = listenOnSocket('study/comments', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
@@ -42,6 +41,6 @@ export class CommentApiDataSource implements CommentBaseDataSource {
 	}
 
 	async update (id: string, data: CommentToModel) {
-		await this.stranerdClient.put<CommentToModel, CommentFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<CommentToModel, CommentFromModel>(`/${id}`, data)
 	}
 }

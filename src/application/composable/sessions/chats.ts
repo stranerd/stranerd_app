@@ -1,102 +1,36 @@
-import { computed, onUnmounted, onMounted, ref, Ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { AddChat, ChatEntity, ChatFactory, GetChats, ListenToChats, MarkChatRead } from '@modules/sessions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
-import { getRandomValue } from '@utils/commons'
+import { addToArray, groupBy } from '@utils/commons'
+import { UploadedFile } from '@modules/core'
 
 const global = {} as Record<string, {
 	chats: Ref<ChatEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
+	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-const pushToChats = (userId: string, chat: ChatEntity) => {
-	const index = global[userId].chats.value.findIndex((c) => c.id === chat.id)
-	if (index !== -1) global[userId].chats.value.splice(index, 1, chat)
-	else global[userId].chats.value.push(chat)
-}
-const unshiftToChats = (userId: string, chat: ChatEntity) => {
-	const index = global[userId].chats.value.findIndex((c) => c.id === chat.id)
-	if (index !== -1) global[userId].chats.value.splice(index, 1, chat)
-	else global[userId].chats.value.unshift(chat)
-}
-
 const orderChats = (chats: ChatEntity[]) => {
-	const isSameDay = (date1: Date, date2: Date) => date1.getDate() === date2.getDate() &&
-		date1.getMonth() === date2.getMonth() &&
-		date1.getFullYear() === date2.getFullYear()
-	const res = [] as ChatEntity[][]
-	chats.forEach((chat, index) => {
-		const lastChat = chats[index - 1]
-		if (index === 0 || !isSameDay(new Date(chat.createdAt), new Date(lastChat.createdAt))) return res.push([chat])
-		else return res[res.length - 1].push(chat)
-	})
-	return res.map((chats) => {
-		const date = chats[0].createdAt
-		return { chats, date, hash: getRandomValue() }
+	return groupBy(chats.slice().reverse(), (c) => {
+		const createdAt = new Date(c.createdAt)
+		return new Date(createdAt.getFullYear(), createdAt.getMonth(), createdAt.getDate(), 0, 0, 0, 1).getTime()
 	})
 }
 
 export const useChats = (userId: string) => {
 	const { id } = useAuth()
-	if (global[userId] === undefined) global[userId] = {
-		chats: ref([]),
-		fetched: ref(false),
-		hasMore: ref(false),
-		...useErrorHandler(),
-		...useLoadingHandler()
-	}
 	const path = [id.value, userId] as [string, string]
-
-	const chats = computed({
-		// TODO: figure out if the sort is important cos it slows down initial request
-		get: () => global[userId].chats.value, /* .sort((a, b) => {
-		 return a.createdAt - b.createdAt < 0 ? -1 : 1
-		 }), */
-		set: (chats) => chats.map((c) => pushToChats(userId, c))
-	})
-
-	const fetchChats = async () => {
-		await global[userId].setError('')
-		try {
-			await global[userId].setLoading(true)
-			const lastDate = chats.value[0]?.createdAt
-			const c = await GetChats.call(path, lastDate)
-			global[userId].hasMore.value = !!c.pages.next
-			c.results.map((c) => unshiftToChats(userId, c))
-			global[userId].fetched.value = true
-		} catch (e) {
-			await global[userId].setError(e)
-		}
-		await global[userId].setLoading(false)
-	}
-
-	const listener = useListener(async () => {
-		const lastDate = chats.value[0]?.createdAt
-		return ListenToChats.call(path, {
-			created: async (entity) => {
-				pushToChats(userId, entity)
-			},
-			updated: async (entity) => {
-				pushToChats(userId, entity)
-			},
-			deleted: async (entity) => {
-				const index = global[userId].chats.value.findIndex((c) => c.id === entity.id)
-				if (index !== -1) global[userId].chats.value.splice(index, 1)
-			}
-		}, lastDate)
-	})
-
-	const fetchOlderChats = async () => {
-		await fetchChats()
-		await listener.resetListener(async () => {
-			const lastDate = chats.value[0]?.createdAt
+	if (global[userId] === undefined) {
+		const listener = useListener(async () => {
+			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
 			return ListenToChats.call(path, {
 				created: async (entity) => {
-					pushToChats(userId, entity)
+					addToArray(global[userId].chats.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				updated: async (entity) => {
-					pushToChats(userId, entity)
+					addToArray(global[userId].chats.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				deleted: async (entity) => {
 					const index = global[userId].chats.value.findIndex((c) => c.id === entity.id)
@@ -104,20 +38,48 @@ export const useChats = (userId: string) => {
 				}
 			}, lastDate)
 		})
+		global[userId] = {
+			chats: ref([]),
+			fetched: ref(false),
+			hasMore: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
+	}
+
+	const fetchChats = async () => {
+		await global[userId].setError('')
+		try {
+			await global[userId].setLoading(true)
+			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
+			const c = await GetChats.call(path, lastDate)
+			global[userId].hasMore.value = !!c.pages.next
+			c.results.map((c) => addToArray(global[userId].chats.value, c, (e) => e.id, (e) => e.createdAt))
+			global[userId].fetched.value = true
+		} catch (e) {
+			await global[userId].setError(e)
+		}
+		await global[userId].setLoading(false)
+	}
+
+	const fetchOlderChats = async () => {
+		await fetchChats()
+		await global[userId].listener.restart()
 	}
 
 	onMounted(async () => {
 		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchChats()
-		await listener.startListener()
+		await global[userId].listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await global[userId].listener.close()
 	})
 
 	return {
 		chats: computed({
-			get: () => orderChats(chats.value),
-			set: (sessions) => sessions.map((session) => session.chats.map((c) => pushToChats(userId, c)))
+			get: () => orderChats(global[userId].chats.value),
+			set: (sessions) => sessions.map((session) => session.values.map((c) => addToArray(global[userId].chats.value, c, (e) => e.id, (e) => e.createdAt)))
 		}),
 		fetched: global[userId].fetched,
 		loading: global[userId].loading,
@@ -128,8 +90,6 @@ export const useChats = (userId: string) => {
 }
 
 export const useCreateChat = (userId: string, sessionId?: string) => {
-	const { id } = useAuth()
-	const path = [id.value, userId] as [string, string]
 	const factory = ref(new ChatFactory()) as Ref<ChatFactory>
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
@@ -142,7 +102,7 @@ export const useCreateChat = (userId: string, sessionId?: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddChat.call(path, factory.value)
+				await AddChat.call(factory.value)
 				factory.value.reset()
 			} catch (e) {
 				await setError(e)
@@ -152,7 +112,7 @@ export const useCreateChat = (userId: string, sessionId?: string) => {
 		}
 	}
 
-	const createMediaChat = async (files: File[]) => {
+	const createMediaChat = async (files: UploadedFile[]) => {
 		if (!loading.value) {
 			await setLoading(true)
 			const promises = files.map(async (file) => {
@@ -160,7 +120,7 @@ export const useCreateChat = (userId: string, sessionId?: string) => {
 				mediaFactory.to = userId
 				mediaFactory.media = file
 				try {
-					await AddChat.call(path, mediaFactory)
+					await AddChat.call(mediaFactory)
 				} catch (error) {
 					await setError(error)
 				}

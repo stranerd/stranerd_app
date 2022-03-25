@@ -1,10 +1,20 @@
 import { computed, onMounted, ref } from 'vue'
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
-import { Search } from '@modules/meta'
-import { AnswerEntity, QuestionEntity } from '@modules/questions'
-import { UserEntity } from '@modules/users'
+import { AnswerEntity, QuestionEntity, SearchQuestions } from '@modules/questions'
+import { SearchUsers, UserEntity } from '@modules/users'
 import { useRoute, useRouter } from 'vue-router'
-import { FlashCardEntity, NoteEntity, SetEntity, TestPrepEntity, VideoEntity } from '@modules/study'
+import {
+	FlashCardEntity,
+	NoteEntity,
+	SearchFlashCards,
+	SearchNotes,
+	SearchSets,
+	SearchTestPreps,
+	SearchVideos,
+	SetEntity,
+	TestPrepEntity,
+	VideoEntity
+} from '@modules/study'
 import { storage } from '@utils/storage'
 
 const global = {
@@ -67,11 +77,18 @@ export const useSearch = () => {
 			await global.setError('')
 			try {
 				await global.setLoading(true)
-				const res = await Search.call(val)
-				Object.keys(global.res).forEach((key) => {
-					//@ts-ignore
-					global.res[key].value = res[key].results
-				})
+				const searchObj = {
+					questions: SearchQuestions, users: SearchUsers,
+					flashCards: SearchFlashCards, sets: SearchSets, testPreps: SearchTestPreps,
+					notes: SearchNotes, videos: SearchVideos
+				}
+				await Promise.all(
+					Object.entries(searchObj).map(async ([key, useCase]) => {
+						const { results } = await useCase.call(val)
+						//@ts-ignore
+						global.res[key].value = results
+					})
+				)
 				global.fetched.value = true
 				await saveSearch(val)
 			} catch (e) {

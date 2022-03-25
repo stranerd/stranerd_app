@@ -9,6 +9,20 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
+"@awesome-cordova-plugins/core@^5.40.0":
+  version "5.40.0"
+  resolved "https://registry.yarnpkg.com/@awesome-cordova-plugins/core/-/core-5.40.0.tgz#aa07eef57f50acc9da2e0d538bf5858e262348dd"
+  integrity sha512-tk5QlnXfSE2Zu3mJVC3f11Guu5iqnLtNkvvClNHjz/e4FsJEmprfXWCv/QImWs5fLsismHcn31LKYBfWIhOv9g==
+  dependencies:
+    "@types/cordova" latest
+
+"@awesome-cordova-plugins/file-opener@^5.40.0":
+  version "5.40.0"
+  resolved "https://registry.yarnpkg.com/@awesome-cordova-plugins/file-opener/-/file-opener-5.40.0.tgz#054bcd57435e55170ce27d2afd3d1a3698966695"
+  integrity sha512-NIoPvkIhAcHAqP2WSxZUuTlcB8AAi/KWin7SlLAtj214cuFDZht/iuEgeHSBoCx7XGmGmxZFMiKD14NF3kM9LQ==
+  dependencies:
+    "@types/cordova" latest
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.16.7", "@babel/code-frame@^7.8.3":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.16.7.tgz#44416b6bd7624b998f5b1af5d470856c40138789"
@@ -1389,10 +1403,10 @@
     tar "^6.0.1"
     tslib "^2.0.1"
 
-"@ionic/core@6.0.9-dev.1645109128.222168b":
-  version "6.0.9-dev.1645109128.222168b"
-  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-6.0.9-dev.1645109128.222168b.tgz#e17aa366c1f9d84c3ddc3861fa342016361f5057"
-  integrity sha512-8PvPX38yjc1x64F3pU4UgVxSMGvYPOMGtVKIsk0LXWEEpy9z2SRFu/otSpk7gY1Uie6TW+CKWxQODMnFOMRWKw==
+"@ionic/core@^6.0.9":
+  version "6.0.9"
+  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-6.0.9.tgz#efd3c54c6bd21d77b31cddf12fc8a84cbbe83ae7"
+  integrity sha512-F5osKZbeVJnFbe+xqxGtFP9dMJfge5XyKJY6p3Ic+ZZ9rP5RiQw2j8RTbO4jRvFnpxEaltmXQzF3eXtmU3yybg==
   dependencies:
     "@stencil/core" "~2.13.0"
     ionicons "^6.0.0"
@@ -1495,19 +1509,19 @@
     untildify "^4.0.0"
     wrap-ansi "^7.0.0"
 
-"@ionic/vue-router@6.0.9-dev.1645109128.222168b":
-  version "6.0.9-dev.1645109128.222168b"
-  resolved "https://registry.yarnpkg.com/@ionic/vue-router/-/vue-router-6.0.9-dev.1645109128.222168b.tgz#ded958cb5ee05e86123792e2c24007953db35010"
-  integrity sha512-JMziZnnumi2H0csYjRy9phTpdvDr8bjaywuPZBiYt6YdGAI+H3QYWSSyFGATK+LOrDFoiqrkrrETHHTnpNTNPQ==
+"@ionic/vue-router@^6.0.9":
+  version "6.0.9"
+  resolved "https://registry.yarnpkg.com/@ionic/vue-router/-/vue-router-6.0.9.tgz#47660214759edbd8ae38eb3bdcdbaadf03661187"
+  integrity sha512-vgLseq3rDfjEbrvcX5pwY8mJAstAq6Wbl87IcHXv2Zf+NMfKHEx392PoWad82/us/MZ0F8ZKgyouKJ8Ak7xEQw==
   dependencies:
-    "@ionic/vue" "6.0.9-dev.1645109128.222168b"
+    "@ionic/vue" "^6.0.9"
 
-"@ionic/vue@6.0.9-dev.1645109128.222168b":
-  version "6.0.9-dev.1645109128.222168b"
-  resolved "https://registry.yarnpkg.com/@ionic/vue/-/vue-6.0.9-dev.1645109128.222168b.tgz#b41c8d61c6a94d77c236335198f026ccc9e676c4"
-  integrity sha512-al741LbBQbq4LCiwX1wxScKiYJYY06wCUm4pIgWOiXFVKK6TSiKRSJHvqx+g6b3/Ljrv3U1JMNqcWatKAuZBaA==
+"@ionic/vue@^6.0.9":
+  version "6.0.9"
+  resolved "https://registry.yarnpkg.com/@ionic/vue/-/vue-6.0.9.tgz#6bc369b5be3537f4930e2cf52a173c63b1e663d0"
+  integrity sha512-aez7h5mFAzzbYz5Cqf5f/iQW/VaIs96mUh1J35NGGK6GoXfjt2h3xTlFYQXKMXiPuyQkxFhM8lYwoDfYK6Ekgw==
   dependencies:
-    "@ionic/core" "6.0.9-dev.1645109128.222168b"
+    "@ionic/core" "^6.0.9"
     ionicons "^6.0.0"
 
 "@jridgewell/resolve-uri@^3.0.3":
@@ -1703,6 +1717,11 @@
   integrity sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==
   dependencies:
     "@types/node" "*"
+
+"@types/cordova@latest":
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/@types/cordova/-/cordova-0.0.34.tgz#ea7addf74ecec3d7629827a0c39e2c9addc73d04"
+  integrity sha1-6nrd907Ow9dimCegw54smt3HPQQ=
 
 "@types/estree@*":
   version "0.0.51"
@@ -3542,6 +3561,11 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001286:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001307.tgz#27a67f13ebc4aa9c977e6b8256a11d5eafb30f27"
   integrity sha512-+MXEMczJ4FuxJAUp0jvAl6Df0NI/OfW1RWEE61eSmzS7hw6lz4IKutbhbXendwq8BljfFuHtu26VWsg4afQ7Ng==
 
+capacitor-blob-writer@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/capacitor-blob-writer/-/capacitor-blob-writer-1.0.4.tgz#d2aec40d0e733d97b5fa72d92c347189207090f3"
+  integrity sha512-HLN9qHGXprnMacjFV50KSHFuk2e+Q6QHxSIsNNbVwxh3/8cEzA6bAwFdJthLocYSYjPENMC6o54hwxFWN3CiSQ==
+
 case-sensitive-paths-webpack-plugin@^2.3.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-2.4.0.tgz#db64066c6422eed2e08cc14b986ca43796dbc6d4"
@@ -4204,6 +4228,11 @@ copy-webpack-plugin@^5.1.1:
     schema-utils "^1.0.0"
     serialize-javascript "^4.0.0"
     webpack-log "^2.0.0"
+
+cordova-plugin-file-opener2@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-file-opener2/-/cordova-plugin-file-opener2-3.0.5.tgz#3bf481a724bcec9cfa2257a71915309df5ea5b4d"
+  integrity sha512-tjLHDamH5+y0bJZYVe2967L1S4R8tL4Y0rJUzJGoxsyiw3FUlrJNS199POOpzZZ6Xhlntn9a2o7+84r1dMN21A==
 
 cordova-res@^0.15.4:
   version "0.15.4"
@@ -7364,6 +7393,11 @@ javascript-stringify@^2.0.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/javascript-stringify/-/javascript-stringify-2.1.0.tgz#27c76539be14d8bd128219a2d731b09337904e79"
   integrity sha512-JVAfqNPTvNq3sB/VHQJAFxN/sPgKnsKrCwyRt15zwNCdrMMJDdcEOdubuy+DuJYYdm0ox1J4uzEuYKkN+9yhVg==
+
+jetifier@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/jetifier/-/jetifier-2.0.0.tgz#699391367ca1fe7bc4da5f8bf691eb117758e4cb"
+  integrity sha512-J4Au9KuT74te+PCCCHKgAjyLlEa+2VyIAEPNCdE5aNkAJ6FAJcAqcdzEkSnzNksIa9NkGmC4tPiClk2e7tCJuQ==
 
 js-base64@^2.1.8:
   version "2.6.4"

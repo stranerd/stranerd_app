@@ -9,13 +9,13 @@ export class GetReferralsUseCase {
 		this.repository = repository
 	}
 
-	async call (userId: string, date?: number) {
+	async call (date?: number) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: -1 },
+			sort: [{ field: 'createdAt', desc: true }],
 			limit: PAGINATION_LIMIT,
 			all: true
 		}
 		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.lt, value: date }]
-		return await this.repository.get(userId, conditions)
+		return await this.repository.get(conditions)
 	}
 }

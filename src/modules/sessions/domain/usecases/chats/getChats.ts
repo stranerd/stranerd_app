@@ -11,12 +11,14 @@ export class GetChatsUseCase {
 
 	async call (path: [string, string], date?: number) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: -1 },
+			where: [{ field: 'path', condition: Conditions.in, value: path[0] },
+				{ field: 'path', condition: Conditions.in, value: path[1] }],
+			sort: [{ field: 'createdAt', desc: true }],
 			limit: CHAT_PAGINATION_LIMIT
 		}
 
-		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.lt, value: date }]
+		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
 
-		return await this.repository.get(path, conditions)
+		return await this.repository.get(conditions)
 	}
 }

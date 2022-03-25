@@ -1,4 +1,4 @@
-import { isArrayOfX, isBoolean, isExtractedHTMLLongerThanX, isImage, isString, isVideo } from '@stranerd/validate'
+import { isBoolean, isExtractedHTMLLongerThanX, isString, isVideo } from '@stranerd/validate'
 import { BaseFactory, Media, UploadedFile } from '@modules/core'
 import { VideoEntity } from '../entities/video'
 import { VideoToModel } from '../../data/models/video'
@@ -7,22 +7,16 @@ import getVideoId from 'get-video-id'
 
 type Content = UploadedFile | Media | null
 type Keys = {
-	title: string, description: string, tags: string[], isPublic: boolean,
-	isHosted: boolean, media: Content | null, link: string | null, preview: Content | null
+	title: string, description: string,
+	isHosted: boolean, media: Content | null, link: string | null
 }
 
 export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 	readonly rules = {
 		title: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		description: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
-		tags: {
-			required: true,
-			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings')]
-		},
-		isPublic: { required: false, rules: [isBoolean] },
 		isHosted: { required: false, rules: [isBoolean] },
 		link: { required: () => !this.isHosted, rules: [isString] },
-		preview: { required: false, rules: [isImage] },
 		media: { required: () => this.isHosted, rules: [isVideo] }
 	}
 
@@ -33,11 +27,8 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 			title: '',
 			description: '',
 			isHosted: false,
-			tags: [],
 			media: null,
-			link: null,
-			preview: null,
-			isPublic: true
+			link: null
 		})
 	}
 
@@ -57,14 +48,6 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		this.set('description', value)
 	}
 
-	get isPublic () {
-		return this.values.isPublic
-	}
-
-	set isPublic (value: boolean) {
-		this.set('isPublic', value)
-	}
-
 	get isHosted () {
 		return this.values.isHosted
 	}
@@ -73,10 +56,6 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		this.set('isHosted', value)
 		if (value) this.link = null
 		else this.media = null
-	}
-
-	get tags () {
-		return this.values.tags
 	}
 
 	get link () {
@@ -97,30 +76,12 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		if (value) this.isHosted = true
 	}
 
-	get preview () {
-		return this.values.preview!
-	}
-
-	set preview (value: Content) {
-		this.set('preview', value)
-	}
-
-	addTag = (value: string) => {
-		if (this.tags.find((t) => t === value.toLowerCase())) return
-		this.set('tags', [...this.tags, value.toLowerCase()])
-	}
-
-	removeTag = (value: string) => this.set('tags', this.tags.filter((tag) => tag !== value))
-
 	loadEntity = (entity: VideoEntity) => {
 		this.title = entity.title
 		this.description = entity.description
-		this.isPublic = entity.isPublic
 		this.isHosted = entity.isHosted
 		this.link = entity.link
 		this.media = entity.media
-		this.preview = entity.preview
-		this.set('tags', entity.tags)
 	}
 
 	toModel = async () => {
@@ -135,20 +96,16 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 					if (info.private) throw new Error('the provided video is private')
 				}
 			}
-			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('videos', this.media)
-			if (this.preview instanceof UploadedFile) this.preview = await this.uploadFile('video-previews', this.preview)
+			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('study/videos', this.media)
 			if (this.isHosted) this.link = null
 			else this.media = null
-			const { title, description, isHosted, link, media, tags, preview, isPublic } = this.validValues
+			const { title, description, isHosted, link, media } = this.validValues
 			return {
 				title,
 				description,
 				isHosted,
 				link,
-				media: media as Media | null,
-				tags,
-				preview: preview as Media,
-				isPublic
+				media: media as Media | null
 			}
 		} else {
 			throw new Error('Validation errors')

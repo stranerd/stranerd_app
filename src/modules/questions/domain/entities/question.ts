@@ -7,63 +7,68 @@ type QuestionConstructorArgs = {
 	id: string
 	body: string
 	isAnswered: boolean
-	tags: string[]
+	data: QuestionData
 	attachments: Media[]
-	subjectId: string
+	subject: string
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
-	commentsCount: number
 	createdAt: number
 	updatedAt: number
 }
 
+export enum QuestionType {
+	users = 'users',
+	classes = 'classes'
+}
+
+type UserType = {
+	type: QuestionType.users
+}
+
+type ClassType = {
+	type: QuestionType.classes
+	classId: string
+}
+
+export type QuestionData = UserType | ClassType
+
 export class QuestionEntity extends BaseEntity {
 	public readonly id: string
 	public readonly body: string
-	public readonly tags: string[]
+	public readonly data: QuestionData
 	public readonly attachments: Media[]
-	public readonly subjectId: string
+	public readonly subject: string
 	public readonly userId: string
 	public readonly userBio: UserBio
 	public readonly userRoles: UserRoles
 	public readonly bestAnswers: string[]
 	public readonly answers: { id: string, userId: string }[]
-	public readonly commentsCount: number
 	public readonly isAnswered: boolean
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, body, subjectId, isAnswered,
+		             id, body, subject, isAnswered, data,
 		             bestAnswers, createdAt, userId, userBio, userRoles, attachments,
-		             answers, commentsCount, tags, updatedAt
+		             answers, updatedAt
 	             }: QuestionConstructorArgs) {
 		super()
 		this.id = id
 		this.body = body
 		this.isAnswered = isAnswered
-		this.tags = tags
+		this.data = data
 		this.attachments = attachments.map(parseMedia) ?? []
-		this.subjectId = subjectId
+		this.subject = subject
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
 		this.userRoles = generateDefaultRoles(userRoles)
 		this.bestAnswers = bestAnswers
 		this.answers = answers
-		this.commentsCount = commentsCount ?? 0
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
-	}
-
-	get userName () {
-		return this.userBio.fullName!
-	}
-
-	get avatar () {
-		return this.userBio.photo
 	}
 
 	get trimmedBody () {
@@ -75,7 +80,7 @@ export class QuestionEntity extends BaseEntity {
 	}
 
 	get isModified () {
-		return this.commentsCount > 0 || this.answers.length > 0
+		return this.answers.length > 0
 	}
 
 	get canBeEdited () {

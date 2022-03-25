@@ -1,16 +1,17 @@
 <template>
-	<div id="screen" class="lg:w-8/12 w-full px-4 mx-auto mt-8 mb-16">
-		<ion-text class="text-main text-main_dark font-bold heading">
+	<div id="screen" class="md:px-4">
+		<ion-text class="text-main_dark font-bold text-heading px-4 md:px-0 hidden md:block">
 			All cards info <span class="text-gray">({{ formatNumber(flashCard.set.length) }})</span>
 		</ion-text>
 
 		<div v-for="(card, index) in flashCard.set" :key="index"
-			class="flex justify-between w-full md:mt-6 mt-3 text-body">
-			<div class="bg-white py-3 px-6 rounded-xl w-1/2 md:mr-6 mr-3">
-				<DisplayHtml :html="card.question" />
-			</div>
-			<div class="bg-white py-3 px-6 rounded-xl w-1/2">
-				<DisplayHtml :html="card.answer" />
+			class="flex justify-between w-full md:mt-4">
+			<div class="bg-white md:py-3 md:px-6 rounded-xl w-full flex border-top-line">
+				<DisplayHtml :html="card.question" class="w-1/2 md:p-0 p-4  border-bottom-line" />
+
+				<div class="h-auto bg-line w-[1px] md:-my-3 " />
+
+				<DisplayHtml :html="card.answer" class="w-1/2 md:pl-4 p-4  border-bottom-line " />
 			</div>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { getTimeFormatted, TIMES } from '@utils/dates'
 
 const startInterval = (dif: number, caller: (time: number) => void) => {
@@ -74,6 +74,9 @@ export const useCountdown = (timeInMs: number, triggers: Record<number, () => vo
 		interval = startInterval(1, (time: number) => diffInSec.value -= time)
 	}
 	const stopTimer = () => clearInterval(interval)
+
+	onMounted(startTimer)
+	onUnmounted(stopTimer)
 
 	return { time, startTimer, stopTimer, diffInSec }
 }

@@ -8,14 +8,12 @@
 	background: #7483bf4e; /* Optional: just make scrollbar invisible */
 }
 
-
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
 	background: #4e474788;
 	border-radius: 100px;
 	cursor: pointer;
 }
-
 
 @media screen and (max-width: 680px) {
 	::-webkit-scrollbar {
@@ -26,32 +24,52 @@
 }
 
 @layer utilities {
+	body {
+		@apply md:bg-new_gray
+	}
+
+	.modal-padding-x {
+		@apply md:px-8 px-4
+	}
+
 	.layout {
 		@apply flex flex-col h-full flex-grow
 	}
 
 	.layout-page {
-		@apply lg:px-12 flex flex-row lg:gap-10 flex-grow bg-new_gray min-h-full
+		@apply flex flex-row lg:gap-10 flex-grow md:bg-new_gray min-h-full
 	}
 
 	.layout-body {
-		@apply lg:w-3/4 w-full min-h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] bg-new_gray
+		@apply lg:w-7/12 w-full min-h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] md:bg-new_gray
 	}
 
 	.layout-side-left {
-		@apply hidden lg:flex bg-light_gray py-3 pl-3 fixed overflow-y-auto bottom-0 flex-col rounded-tr-3xl rounded-br-3xl
+		@apply hidden lg:inline-block w-2/12 py-1 overflow-y-auto
 	}
 
 	.layout-side-right {
-		@apply hidden lg:inline-block w-1/4 py-1 overflow-y-auto
+		@apply hidden lg:inline-block w-3/12 py-1 overflow-y-auto
+	}
+
+	.text-sub {
+		@apply md:text-sm text-xs
 	}
 
 	.text-body {
-		@apply md:text-base text-xs
+		@apply md:text-base text-sm
 	}
 
-	.heading {
+	.text-heading {
 		@apply md:text-xl text-base
+	}
+
+	.text-heading2 {
+		@apply md:text-2xl text-xl
+	}
+
+	.text-heading3 {
+		@apply md:text-3xl text-2xl
 	}
 
 	.btn {
@@ -59,19 +77,38 @@
 	}
 
 	.headerShadow {
-		box-shadow: 0 0 15px 5px rgba(139, 158, 177, 0.1);
+		box-shadow: 0 0 15px 5px rgba(139, 158, 177, 0.1)
 	}
 
 	.showcase {
-		@apply grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1;
-		grid-gap: 1rem;
+		@apply grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 md:gap-4
+	}
+
+	.showcase-flex {
+		@apply flex flex-col md:gap-4;
 	}
 
 	.blueTop {
-		@apply bg-primary w-full flex items-center min-h-[5.5rem] lg:min-h-[9.75rem] rounded-b-2xl md:rounded-none mb-4 justify-center
+		@apply bg-white w-full flex items-center rounded-b-2xl md:rounded-none md:mb-4 justify-center
 	}
 
 	.nav-scroll {
-		@apply md:text-sm lg:text-base items-start md:justify-center flex gap-4 text-xs text-faded_gray font-semibold overflow-x-auto mt-auto mx-auto
+		@apply text-gray text-sub items-center md:justify-between flex gap-2 font-semibold overflow-x-auto
+	}
+
+	.nav-scroll > * {
+		@apply w-full p-2 cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap
+	}
+
+	.nav-scroll > *.router-link-exact-active {
+		@apply border-b-2 text-primary border-primary
+	}
+
+	.dot {
+		@apply h-[5px] w-[5px] rounded-full
+	}
+
+	.card-padding {
+		@apply p-4 gap-2 md:gap-4
 	}
 }

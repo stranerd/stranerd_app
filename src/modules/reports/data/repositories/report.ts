@@ -15,7 +15,7 @@ export class ReportRepository implements IReportRepository {
 	}
 
 	async add (data: ReportToModel) {
-		return await this.dataSource.create(data)
+		return this.transformer.fromJSON(await this.dataSource.create(data))
 	}
 
 	async find (id: string) {

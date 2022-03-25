@@ -54,7 +54,7 @@ export class AnswerRepository implements IAnswerRepository {
 	}
 
 	async add (data: AnswerToModel) {
-		return await this.dataSource.create(data)
+		return this.transformer.fromJSON(await this.dataSource.create(data))
 	}
 
 	async find (id: string) {
@@ -63,14 +63,14 @@ export class AnswerRepository implements IAnswerRepository {
 	}
 
 	async update (id: string, data: AnswerToModel) {
-		return await this.dataSource.update(id, data)
+		return this.transformer.fromJSON(await this.dataSource.update(id, data))
 	}
 
 	async delete (id: string) {
 		return await this.dataSource.delete(id)
 	}
 
-	async vote (id: string, userId: string, vote: boolean) {
-		return await this.dataSource.vote(id, userId, vote)
+	async vote (id: string, vote: boolean) {
+		return await this.dataSource.vote(id, vote)
 	}
 }

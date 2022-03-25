@@ -11,7 +11,5 @@ export interface FlashCardFromModel extends FlashCardToModel {
 
 export interface FlashCardToModel {
 	title: string
-	isPublic: boolean
 	set: { question: string, answer: string }[]
-	tags: string[]
 }

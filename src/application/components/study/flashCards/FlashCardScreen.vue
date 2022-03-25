@@ -1,16 +1,16 @@
 <template>
-	<div id="screen" class="flex flex-col lg:w-8/12 w-full px-4 mx-auto py-8 gap-8">
+	<div id="screen" class="px-4">
 		<Swipe :key="page" :class="[isFullscreen ? 'flex-grow' : '']" @swipeLeft="increase" @swipeRight="decrease">
 			<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full h-full']"
 				@click="flipped = !flipped">
-				<div class="front bg-white w-full max-w-[72rem]">
+				<div class="front bg-white w-full">
 					<section v-if="!flipped"
 						class="h-[48vh] overflow-y-auto flex text-center custom-shadow text-2xl p-4 mx-auto">
 						<DisplayHtml :html="flashCard.set[page].question" class="w-full my-auto overflow-y-auto" />
 					</section>
 				</div>
 
-				<div class="back bg-white w-full max-w-[72rem]">
+				<div class="back bg-white w-full">
 					<section v-if="flipped"
 						class="h-[48vh] overflow-y-auto flex text-center custom-shadow text-2xl p-4 mx-auto">
 						<DisplayHtml :html="flashCard.set[page].answer" class="w-full my-auto" />
@@ -19,29 +19,32 @@
 			</div>
 		</Swipe>
 
-		<div class="w-full flex items-center justify-between max-w-[30rem] mx-auto gap-4">
+		<div :style="`width:${percentage}%`" class="bg-primary h-1  mt-8 transition-all " />
+		<div class="w-full flex items-center justify-between rounded-b-xl mx-auto gap-4 bg-white p-6">
+
 			<ion-icon
-				:icon="isPlaying ? pause : play"
+				:icon="isPlaying ? pauseOutline : playOutline"
 				class="text-icon_inactive text-xl cursor-pointer"
 				@click="isPlaying ? pauseCard() : playCard()"
 			/>
 			<div class="flex items-center gap-4">
 				<ion-icon
-					:icon="chevronBack"
+					:icon="chevronBackOutline"
 					class="text-icon_inactive text-xl cursor-pointer "
 					@click="decrease"
 				/>
+
 				<ion-text class="text-icon_inactive">
 					<b>{{ page + 1 }}</b> of <b>{{ formatNumber(flashCard.set.length) }}</b>
 				</ion-text>
 				<ion-icon
-					:icon="chevronForward"
+					:icon="chevronForwardOutline"
 					class="text-icon_inactive text-xl cursor-pointer"
 					@click="increase"
 				/>
 			</div>
 			<ion-icon
-				:icon="isFullscreen ? contract : scan"
+				:icon="isFullscreen ? contractOutline : scanOutline"
 				class="text-icon_inactive text-xl cursor-pointer"
 				@click="toggleFullscreen"
 			/>
@@ -50,9 +53,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { FlashCardEntity } from '@modules/study'
-import { add, chevronBack, chevronForward, contract, pause, play, scan } from 'ionicons/icons'
+import {
+	addOutline,
+	chevronBackOutline,
+	chevronForwardOutline,
+	contractOutline,
+	pauseOutline,
+	playOutline,
+	scanOutline
+} from 'ionicons/icons'
 import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
@@ -64,10 +75,12 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
+
 		const isFullscreen = ref(false)
 		const flipped = ref(false)
 		const isPlaying = ref(false)
 		const page = ref(0)
+		const percentage = computed(() => Math.floor(((page.value + 1) / props.flashCard.set.length) * 100))
 		let interval: any
 
 		const increase = () => {
@@ -102,9 +115,26 @@ export default defineComponent({
 		}
 
 		return {
-			increase, decrease, playCard, pauseCard, page, flipped, isPlaying,
-			isFullscreen, toggleFullscreen, exit, enter, formatNumber,
-			play, pause, add, scan, chevronBack, chevronForward, contract
+			increase,
+			decrease,
+			playCard,
+			pauseCard,
+			page,
+			flipped,
+			isPlaying,
+			percentage,
+			isFullscreen,
+			toggleFullscreen,
+			exit,
+			enter,
+			formatNumber,
+			playOutline,
+			pauseOutline,
+			addOutline,
+			scanOutline,
+			chevronBackOutline,
+			chevronForwardOutline,
+			contractOutline
 		}
 	}
 })
@@ -113,7 +143,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 	.custom-shadow {
 		box-shadow: 0px 0px 50px rgba(77, 92, 111, 0.1);
-		border-radius: 24px;
+		border-radius: 12px;
 	}
 
 	.divx {
@@ -127,6 +157,7 @@ export default defineComponent({
 
 	.divx > .front, .divx > .back {
 		text-align: center;
+		border-radius: 12px;
 		transition-duration: 0.7s;
 		transition-property: transform, opacity;
 	}

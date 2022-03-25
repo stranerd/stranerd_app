@@ -11,7 +11,7 @@ export class GetNotesUseCase {
 
 	async call (date?: number) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: -1 },
+			sort: [{ field: 'createdAt', desc: true }],
 			limit: PAGINATION_LIMIT
 		}
 		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.lt, value: date }]

@@ -1,7 +1,7 @@
 <template>
 	<AdminWrapper>
 		<div>
-			<UpgradeUserToAdmin class="mb-8" />
+			<UpgradeUserToAdmin class="mb-4" />
 			<AdminsList />
 		</div>
 	</AdminWrapper>
@@ -15,7 +15,7 @@ import UpgradeUserToAdmin from '@app/components/users/admin/UpgradeUserToAdmin.v
 
 export default defineComponent({
 	name: 'AdminUsersAdmins',
-	displayName: 'Adminis',
+	displayName: 'Admins',
 	components: { AdminWrapper, AdminsList, UpgradeUserToAdmin },
 	middlewares: ['isAdmin']
 })

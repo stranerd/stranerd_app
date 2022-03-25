@@ -19,15 +19,17 @@ import { FindUserUseCase } from './domain/usecases/users/findUser'
 import { ToggleAdminUseCase } from './domain/usecases/roles/toggleAdmin'
 import { ToggleTutorUseCase } from './domain/usecases/roles/toggleTutor'
 import { ToggleVerifiedUseCase } from './domain/usecases/roles/toggleVerified'
-import { GetUsersByEmailUseCase } from './domain/usecases/users/getUsersByEmail'
+import { SearchUsersUseCase } from './domain/usecases/users/searchUsers'
 import { GetLeaderboardUseCase } from './domain/usecases/users/getLeaderboard'
 import { GetAllAdminsUseCase } from './domain/usecases/users/getAllAdmins'
 import { GetAllTutorsUseCase } from './domain/usecases/users/getAllTutors'
+import { GetUsersInListUseCase } from './domain/usecases/users/getUsersInList'
 import { ListenToAllTutorsUseCase } from './domain/usecases/users/listenToAllTutors'
 import { ListenToAllAdminsUseCase } from './domain/usecases/users/listenToAllAdmins'
+import { ListenToUsersInListUseCase } from './domain/usecases/users/listenToUsersInList'
 import { ListenToUserUseCase } from './domain/usecases/users/listenToUser'
 import { UpdateStreakUseCase } from './domain/usecases/users/updateStreak'
-import { UpdateTutorUseCase } from './domain/usecases/users/updateTutor'
+import { UpdateSchoolUseCase } from './domain/usecases/users/updateSchool'
 import { GetNotificationsUseCase } from './domain/usecases/notifications/getNotifications'
 import { ListenToNotificationsUseCase } from './domain/usecases/notifications/listenToNotifications'
 import { MarkNotificationSeenUseCase } from './domain/usecases/notifications/markNotificationSeen'
@@ -38,20 +40,12 @@ import { GetReferralsUseCase } from './domain/usecases/referrals/getReferrals'
 import { ListenToReferralsUseCase } from './domain/usecases/referrals/listenToReferrals'
 import { GetBadgeUseCase } from './domain/usecases/badges/getBadge'
 import { ListenToBadgeUseCase } from './domain/usecases/badges/listenToBadge'
-import {
-	generateDefaultBio,
-	generateDefaultRoles,
-	RankingTimes,
-	UserBio,
-	UserEntity,
-	UserRoles
-} from './domain/entities/user'
+import { generateDefaultBio, generateDefaultRoles, UserEntity } from './domain/entities/user'
 import { NotificationEntity } from './domain/entities/notification'
 import { ReviewEntity } from './domain/entities/review'
 import { ReferralEntity } from './domain/entities/referral'
 import { BadgeEntity } from './domain/entities/badge'
-
-export { TutorUpdateFactory } from '../users/domain/factories/tutorUpdate'
+import { RankingTimes, UserBio, UserRoles, UserSchoolType } from './domain/types'
 
 const userDataSource = new UserApiDataSource()
 const roleDataSource = new RoleApiDataSource()
@@ -74,15 +68,17 @@ const referralRepository = new ReferralRepository(referralDataSource, referralTr
 const badgeRepository = new BadgeRepository(badgeDataSource, badgeTransformer)
 
 export const FindUser = new FindUserUseCase(userRepository)
-export const GetUsersByEmail = new GetUsersByEmailUseCase(userRepository)
+export const SearchUsers = new SearchUsersUseCase(userRepository)
 export const GetLeaderboard = new GetLeaderboardUseCase(userRepository)
 export const GetAllAdmins = new GetAllAdminsUseCase(userRepository)
 export const GetAllTutors = new GetAllTutorsUseCase(userRepository)
+export const GetUsersInList = new GetUsersInListUseCase(userRepository)
 export const ListenToAllTutors = new ListenToAllTutorsUseCase(userRepository)
 export const ListenToAllAdmins = new ListenToAllAdminsUseCase(userRepository)
+export const ListenToUsersInList = new ListenToUsersInListUseCase(userRepository)
 export const ListenToUser = new ListenToUserUseCase(userRepository)
 export const UpdateStreak = new UpdateStreakUseCase(userRepository)
-export const UpdateTutor = new UpdateTutorUseCase(userRepository)
+export const UpdateUserSchool = new UpdateSchoolUseCase(userRepository)
 
 export const ToggleAdmin = new ToggleAdminUseCase(roleRepository)
 export const ToggleTutor = new ToggleTutorUseCase(roleRepository)
@@ -113,3 +109,4 @@ export {
 	BadgeEntity
 }
 export type { UserBio, UserRoles }
+export { UserSchoolType }

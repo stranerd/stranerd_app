@@ -9,11 +9,14 @@ import {
 	ListenToQuestion,
 	ListenToQuestions,
 	QuestionEntity,
-	QuestionFactory
+	QuestionFactory,
+	QuestionType
 } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useQuestionModal } from '@app/composable/core/modals'
+import { ClassEntity } from '@modules/classes'
+import { addToArray } from '@utils/commons'
 
 enum Answered {
 	All,
@@ -31,24 +34,28 @@ const answeredChoices = [
 ]
 const global = {
 	questions: ref([] as QuestionEntity[]),
-	subjectId: ref(''),
+	subject: ref(''),
 	answered: ref(answeredChoices[0].val),
 	fetched: ref(false),
 	hasMore: ref(false),
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
-
-const pushToQuestionList = (question: QuestionEntity) => {
-	const index = global.questions.value.findIndex((q) => q.id === question.id)
-	if (index !== -1) global.questions.value.splice(index, 1, question)
-	else global.questions.value.push(question)
-}
-const unshiftToQuestionList = (question: QuestionEntity) => {
-	const index = global.questions.value.findIndex((q) => q.id === question.id)
-	if (index !== -1) global.questions.value.splice(index, 1, question)
-	else global.questions.value.unshift(question)
-}
+const listener = useListener(async () => {
+	const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
+	return await ListenToQuestions.call({
+		created: async (entity) => {
+			addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
+		},
+		updated: async (entity) => {
+			addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
+		},
+		deleted: async (entity) => {
+			const index = global.questions.value.findIndex((q) => q.id === entity.id)
+			if (index !== -1) global.questions.value.splice(index, 1)
+		}
+	}, lastDate ? lastDate - 1 : undefined)
+})
 
 export const useQuestionList = () => {
 	const fetchQuestions = async () => {
@@ -58,67 +65,37 @@ export const useQuestionList = () => {
 			const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
 			const questions = await GetQuestions.call(lastDate)
 			global.hasMore.value = !!questions.pages.next
-			questions.results.forEach(pushToQuestionList)
+			questions.results.forEach((q) => addToArray(global.questions.value, q, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)
 		}
 		await global.setLoading(false)
 	}
-	const listener = useListener(async () => {
-		const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
-		return await ListenToQuestions.call({
-			created: async (entity) => {
-				unshiftToQuestionList(entity)
-			},
-			updated: async (entity) => {
-				unshiftToQuestionList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.questions.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.questions.value.splice(index, 1)
-			}
-		}, lastDate ? lastDate - 1 : undefined)
-	})
 	const filteredQuestions = computed({
 		get: () => global.questions.value.filter((q) => {
-			if (global.subjectId.value && q.subjectId !== global.subjectId.value) return false
+			if (global.subject.value && q.subject !== global.subject.value) return false
 			if (global.answered.value === Answered.Answered && q.answers.length === 0) return false
 			if (global.answered.value === Answered.Unanswered && q.answers.length > 0) return false
 			if (global.answered.value === Answered.BestAnswered && !q.isAnswered) return false
 			return true
-		}).sort((a, b) => {
-			return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1
-		}), set: (questions) => {
-			questions.map(pushToQuestionList)
+		}),
+		set: (questions) => {
+			questions.map((q) => addToArray(global.questions.value, q, (e) => e.id, (e) => e.createdAt))
 		}
 	})
 
 	const fetchOlderQuestions = async () => {
 		await fetchQuestions()
-		await listener.resetListener(async () => {
-			const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
-			return await ListenToQuestions.call({
-				created: async (entity) => {
-					unshiftToQuestionList(entity)
-				},
-				updated: async (entity) => {
-					unshiftToQuestionList(entity)
-				},
-				deleted: async (entity) => {
-					const index = global.questions.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) global.questions.value.splice(index, 1)
-				}
-			}, lastDate ? lastDate - 1 : undefined)
-		})
+		await listener.restart()
 	}
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchQuestions()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return {
@@ -128,24 +105,34 @@ export const useQuestionList = () => {
 	}
 }
 
-const factory = ref(new QuestionFactory()) as Ref<QuestionFactory>
+let questionClass = null as ClassEntity | null
+export const getQuestionClass = () => questionClass
+export const openQuestionModalFromClass = async (classInst: ClassEntity, router: Router) => {
+	questionClass = classInst
+	await router.push('/questions/create')
+}
+
 export const useCreateQuestion = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
+	const factory = ref(new QuestionFactory()) as Ref<QuestionFactory>
 	const router = useRouter()
+	if (questionClass) {
+		factory.value.type = QuestionType.classes
+		factory.value.classId = questionClass.id
+	}
 
 	const createQuestion = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const questionId = await AddQuestion.call(factory.value)
+				const question = await AddQuestion.call(factory.value)
 				await setMessage('Question submitted successfully')
-				const subject = factory.value.subjectId
 				factory.value.reset()
 				useQuestionModal().closeCreateQuestion()
-				await router.replace(`/questions/${questionId}`)
+				await router.push(`/questions/${question.id}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -162,7 +149,7 @@ export const useQuestion = (questionId: string) => {
 	const question = computed({
 		get: () => global.questions.value.find((q) => q.id === questionId) ?? null,
 		set: (q) => {
-			if (q) pushToQuestionList(q)
+			if (q) addToArray(global.questions.value, q, (e) => e.id, (e) => e.createdAt)
 		}
 	})
 
@@ -176,7 +163,7 @@ export const useQuestion = (questionId: string) => {
 				return
 			}
 			question = await FindQuestion.call(questionId)
-			if (question) unshiftToQuestionList(question)
+			if (question) addToArray(global.questions.value, question, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
 		}
@@ -185,10 +172,10 @@ export const useQuestion = (questionId: string) => {
 	const listener = useListener(async () => {
 		return await ListenToQuestion.call(questionId, {
 			created: async (entity) => {
-				unshiftToQuestionList(entity)
+				addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				unshiftToQuestionList(entity)
+				addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
 				const index = global.questions.value.findIndex((q) => q.id === entity.id)
@@ -199,10 +186,10 @@ export const useQuestion = (questionId: string) => {
 
 	onMounted(async () => {
 		await fetchQuestion()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { error, loading, question }
@@ -227,11 +214,11 @@ export const useEditQuestion = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditQuestion.call(editingQuestion!.id, factory.value)
-				await setMessage('Question edited successfully')
+				const question = await EditQuestion.call(editingQuestion!.id, factory.value)
+				await setMessage('Question updated successfully')
 				useQuestionModal().closeEditQuestion()
 				factory.value.reset()
-				await router.replace(`/questions/${editingQuestion!.id}`)
+				await router.push(`/questions/${question.id}`)
 			} catch (error) {
 				await setError(error)
 			}

@@ -13,14 +13,14 @@ export class BadgeRepository implements IBadgeRepository {
 		this.transformer = transformer
 	}
 
-	async find (userId: string) {
-		const model = await this.dataSource.find(userId)
+	async get () {
+		const model = await this.dataSource.get()
 		if (model) return this.transformer.fromJSON(model)
 		else return null
 	}
 
-	async listenToOne (userId: string, id: string, listener: Listeners<BadgeEntity>) {
-		return this.dataSource.listenToOne(userId, id, {
+	async listenToOne (id: string, listener: Listeners<BadgeEntity>) {
+		return this.dataSource.listenToOne(id, {
 			created: async (model) => {
 				await listener.created(this.transformer.fromJSON(model))
 			},

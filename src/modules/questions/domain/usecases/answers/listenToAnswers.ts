@@ -12,7 +12,7 @@ export class ListenToAnswersUseCase {
 	async call (questionId: string, listener: Listeners<AnswerEntity>) {
 		return await this.repository.listenToMany({
 			where: [{ field: 'questionId', value: questionId }],
-			sort: { field: 'createdAt' },
+			sort: [{ field: 'createdAt' }],
 			all: true
 		}, listener, (entity) => entity.questionId === questionId)
 	}

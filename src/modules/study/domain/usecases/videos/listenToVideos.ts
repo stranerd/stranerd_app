@@ -11,7 +11,7 @@ export class ListenToVideosUseCase {
 
 	async call (listener: Listeners<VideoEntity>, date?: number) {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: 1 },
+			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
 		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.gt, value: date }]

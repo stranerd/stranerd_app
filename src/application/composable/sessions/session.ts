@@ -1,4 +1,4 @@
-import { computed, onUnmounted, onMounted, ref, Ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import { Router, useRouter } from 'vue-router'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { FindSession, GetSessions, ListenToSession, ListenToSessions, SessionEntity } from '@modules/sessions'
@@ -6,6 +6,7 @@ import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { setOtherParticipantId } from '@app/composable/sessions/sessions'
 import { useSessionModal } from '@app/composable/core/modals'
+import { addToArray } from '@utils/commons'
 
 const currentGlobal = {
 	previousSession: ref(null as SessionEntity | null),
@@ -42,7 +43,7 @@ export const useCurrentSession = () => {
 				currentGlobal.previousSession.value = currentGlobal.currentSession.value
 				if (entity) currentGlobal.currentSession.value = entity
 			}
-			await currentGlobal.listener.resetListener(
+			await currentGlobal.listener.reset(
 				async () => id
 					? ListenToSession.call(id, {
 						created: listenerCallback,
@@ -85,39 +86,34 @@ export const useCurrentSession = () => {
 
 const useSession = (key: SessionKey, router: Router, callback: (key: SessionKey, sessions: SessionEntity[], id: string, router: Router) => void) => {
 	const { user, id } = useAuth()
-	const listenerCb = async () => {
-		const sessionIds = user.value?.session?.[key] ?? []
-		if (sessionIds.length === 0) {
-			global[key].sessions.value = []
-			return () => {
-			}
-		}
-		return ListenToSessions.call(sessionIds, {
-			created: async (entity) => {
-				const index = global[key].sessions.value.findIndex((e) => e.id === entity.id)
-				if (index > -1) global[key].sessions.value.splice(index, 1, entity)
-				else global[key].sessions.value.push(entity)
-				callback(key, global[key].sessions.value, id.value!, router)
-			},
-			updated: async (entity) => {
-				const index = global[key].sessions.value.findIndex((e) => e.id === entity.id)
-				if (index > -1) global[key].sessions.value.splice(index, 1, entity)
-				else global[key].sessions.value.push(entity)
-				callback(key, global[key].sessions.value, id.value!, router)
-			},
-			deleted: async (entity) => {
-				global[key].sessions.value = global[key].sessions.value.filter((e) => e.id !== entity.id)
-				callback(key, global[key].sessions.value, id.value!, router)
-			}
-		})
-	}
 
 	if (global[key] === undefined) global[key] = {
 		sessions: ref([]),
 		fetched: ref(false),
 		...useErrorHandler(),
 		...useLoadingHandler(),
-		listener: useListener(listenerCb)
+		listener: useListener(async () => {
+			const sessionIds = user.value?.session?.[key] ?? []
+			if (sessionIds.length === 0) {
+				global[key].sessions.value = []
+				return () => {
+				}
+			}
+			return ListenToSessions.call(sessionIds, {
+				created: async (entity) => {
+					addToArray(global[key].sessions.value, entity, (e) => e.id, (e) => e.createdAt)
+					callback(key, global[key].sessions.value, id.value!, router)
+				},
+				updated: async (entity) => {
+					addToArray(global[key].sessions.value, entity, (e) => e.id, (e) => e.createdAt)
+					callback(key, global[key].sessions.value, id.value!, router)
+				},
+				deleted: async (entity) => {
+					global[key].sessions.value = global[key].sessions.value.filter((e) => e.id !== entity.id)
+					callback(key, global[key].sessions.value, id.value!, router)
+				}
+			})
+		})
 	}
 
 	const fetchSessions = async () => {
@@ -138,14 +134,14 @@ const useSession = (key: SessionKey, router: Router, callback: (key: SessionKey,
 
 	onMounted(async () => {
 		if (!global[key].fetched.value && !global[key].loading.value) await fetchSessions()
-		await global[key].listener.startListener()
+		await global[key].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[key].listener.closeListener()
+		await global[key].listener.close()
 	})
 
 	watch(() => user.value?.session[key], () => {
-		if (user.value) global[key].listener.resetListener(listenerCb)
+		if (user.value) global[key].listener.restart()
 	})
 
 	return { ...global[key] }

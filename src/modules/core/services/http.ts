@@ -1,11 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, Method } from 'axios'
 import { getTokens, saveTokens } from '@utils/tokens'
 import { apiBases } from '@utils/environment'
-import type { QueryParams, QueryResults } from '@utils/http'
-import { Conditions, StatusCodes } from '@utils/http'
 import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
-
-export { StatusCodes, Conditions, QueryResults, QueryParams }
 
 export class NetworkError extends Error {
 	readonly statusCode: StatusCodes
@@ -50,15 +46,17 @@ export class HttpClient {
 		return this.makeRequest<Body, ReturnValue>(url, 'delete', body)
 	}
 
-	async download (url: string): Promise<string> {
+	async download (url: string) {
 		try {
-			const response = await this.client.get(url, { responseType: 'arraybuffer' })
-			const type = response.headers['content-type']
-			const binary = new Uint8Array(response.data)
-				.reduce((acc, cur) => acc + String.fromCharCode(cur), '')
-			return `data:${type};base64,` + btoa(binary)
+			const { data: blob } = await this.client.get(url, { responseType: 'blob' })
+			const base64: string = await new Promise((res, rej) => {
+				const reader = new FileReader
+				reader.onerror = rej
+				reader.onload = () => res(reader.result as string)
+				reader.readAsDataURL(blob)
+			})
+			return { blob, base64 }
 		} catch (e: any) {
-			alert(e.message)
 			throw new Error('Error downloading file')
 		}
 	}
@@ -96,4 +94,56 @@ export class HttpClient {
 			throw new NetworkError(status, error.response.data)
 		}
 	}
+}
+
+export enum StatusCodes {
+	Ok = 200,
+	BadRequest = 400,
+	NotAuthenticated = 401,
+	NotAuthorized = 403,
+	NotFound = 404,
+	ValidationError = 422,
+	EmailNotVerified = 460,
+	AccessTokenExpired = 461,
+	RefreshTokenMisused = 462,
+	InvalidToken = 463
+}
+
+export enum QueryKeys { and = 'and', or = 'or' }
+
+export enum Conditions {
+	lt = 'lt', lte = 'lte', gt = 'gt', gte = 'gte',
+	eq = 'eq', ne = 'ne', in = 'in', nin = 'nin'
+}
+
+type Where = { field: string, value: any, condition?: Conditions }
+type WhereBlock = { condition: QueryKeys, value: (Where | WhereBlock)[] }
+type WhereClause = Where | WhereBlock
+
+export interface QueryParams {
+	where?: WhereClause[]
+	auth?: WhereClause[]
+	whereType?: QueryKeys
+	authType?: QueryKeys
+	sort?: [{ field: string, desc?: boolean }]
+	limit?: number
+	all?: boolean
+	page?: number
+	search?: { value: string, fields: string[] }
+}
+
+export interface QueryResults<Model> {
+	pages: {
+		start: number,
+		last: number,
+		previous: number | null,
+		next: number | null,
+		current: number,
+	},
+	docs: {
+		limit: number,
+		total: number,
+		count: number
+	},
+	results: Model[]
 }

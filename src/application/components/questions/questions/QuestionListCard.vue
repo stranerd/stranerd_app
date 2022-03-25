@@ -1,75 +1,63 @@
 <template>
 	<router-link
-		:class="`p-4 rounded-xl bg-white flex flex-col justify-between w-full text-xs md:text-sm relative cursor-pointer `"
-		:to="`/questions/${question.id}`">
+		:to="`/questions/${question.id}`"
+		class="rounded-xl bg-white flex flex-col card-padding justify-between w-full relative cursor-pointer">
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
-			<div class="flex items-center">
-				<avatar :id="question.userId" :size="28" :src="question.avatar" class="mr-2 " />
-				<span class="font-bold text-main_dark hidden lg:flex items-center gap-1">
+			<div class="flex items-center text-sub">
+				<avatar :id="question.userId" :name="question.userBio.fullName" :size="28" :src="question.userBio.photo"
+					class="mr-2 " />
+				<span class="text-main_dark hidden md:flex items-center gap-1">
 					<span>{{ question.userBio.fullName }}</span>
-					<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircle" color="primary" />
+					<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
 				</span>
-				<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 ml-2 hidden lg:block"></span>
-				<Subject :key="question.subjectId" :subjectId="question.subjectId" class="font-bold text-main_dark" />
+				<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 ml-2 hidden md:block" />
+				<span class="text-main_dark capitalize">{{ question.subject }}</span>
 			</div>
 
 			<ion-button v-if="showAnswerButton"
 				class="btn-outline text-primary btn-outline-sm ml-auto"
 				mode="md"
+				size="small"
 				@click="openAnswerModal(question)">
 				Answer
 			</ion-button>
 		</div>
 
-		<DisplayHtml :html="question.trimmedBody" class="py-2 pb-1 text-main_dark leading-normal" />
+		<DisplayHtml :html="question.trimmedBody" class="text-main_dark leading-normal font-500" />
 
-		<div class="w-full flex flex-col lg:flex-row lg:justify-between">
-			<div class="mt-2 mb-2 flex flex-row items-center gap-y-2 gap-x-2 flex-wrap">
-				<QuestionTag v-for="(tag, index) in question.tags" :key="index" :index="index" :tag="tag" />
-			</div>
-
-			<div class="flex justify-between lg:justify-center items-center gap-4 text-gray">
-				<span class="text-main_dark lg:mr-2">{{ formatTime(question.createdAt) }}</span>
-				<span v-if="question.attachments.length" class="font-italic">
-					<IonIcon :icon="image" /> IMG inside
-				</span>
-				<span class="text-main_dark">
-					{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
-				</span>
-			</div>
+		<div class="flex justify-between items-center gap-4 text-main_dark text-sub">
+			<span class="lg:mr-2">{{ formatTime(question.createdAt) }}</span>
+			<span v-if="question.attachments.length" class="font-italic flex items-center">
+				<IonIcon :icon="imageOutline" class="mr-2" />  IMG inside
+			</span>
+			<span>
+				{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
+			</span>
 		</div>
-
 	</router-link>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { IonRippleEffect } from '@ionic/vue'
-import { arrowRedo, checkmarkCircle, flag, image } from 'ionicons/icons'
+import { arrowRedoOutline, checkmarkCircleOutline, flagOutline, imageOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
-import Subject from '@app/components/questions/subjects/Subject.vue'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openAnswerModal } from '@app/composable/questions/answers'
-import { useReportModal } from '@app/composable/core/modals'
-import QuestionTag from '../tags/QuestionTag.vue'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'QuestionListCard',
 	props: {
-		colorClass: {
-			type: String,
-			default: 'bg-white'
-		},
 		question: {
 			type: QuestionEntity,
 			required: true
 		}
 	},
-	components: { IonRippleEffect, Avatar, Subject, QuestionTag },
+	components: { IonRippleEffect, Avatar },
 	setup (props) {
 		const { id } = useAuth()
 		const showAnswerButton = computed({
@@ -78,11 +66,8 @@ export default defineComponent({
 			}
 		})
 		return {
-			showAnswerButton,
-			openAnswerModal,
-			openReportQuestionModal: () => useReportModal().openReportQuestion(),
-			arrowRedo, flag, image, checkmarkCircle,
-			formatTime, pluralize
+			showAnswerButton, openAnswerModal, formatTime, pluralize,
+			arrowRedoOutline, flagOutline, imageOutline, checkmarkCircleOutline
 		}
 	}
 })

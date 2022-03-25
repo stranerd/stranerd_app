@@ -3,7 +3,7 @@
 	<ion-text class="text-xl text-main_dark font-bold">
 		Flashcards
 	</ion-text>
-	<ion-text class="text-base text-main_dark max-w-[80vw] text-center">
+	<ion-text class="text-main_dark max-w-[80vw] text-center">
 		Memorize answers to questions on the back of cards. Scientifically proven to help students get better
 		grades
 	</ion-text>

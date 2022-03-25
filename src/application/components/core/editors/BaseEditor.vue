@@ -74,7 +74,6 @@ export default defineComponent({
 <style lang="scss">
 	.quillWrapper {
 		background: $color-white;
-		border: 1px solid $color-newGray;
 		border-radius: 0.75rem;
 		color: $color-mainDark;
 		box-sizing: border-box;
@@ -82,9 +81,11 @@ export default defineComponent({
 		display: flex;
 		flex-direction: column;
 		font-family: inherit !important;
+		font-size: inherit !important;
 
 		.ql-container {
 			font-family: inherit !important;
+			font-size: inherit !important;
 		}
 
 		.ql-toolbar {
@@ -93,11 +94,12 @@ export default defineComponent({
 			overflow-x: auto;
 			overflow-y: hidden;
 			font-family: inherit !important;
-			padding: 4px 0 !important;
+			font-size: inherit !important;
+			// padding: 4px 0 !important;
 
 			.ql-formats {
 				display: flex;
-				padding: 8px;
+				// padding: 8px;
 				margin: 0 !important;
 
 				.ql-expanded {
@@ -131,28 +133,28 @@ export default defineComponent({
 		border: 1px solid $color-newGray;
 		border-radius: 0.75rem;
 		transition: border-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+		font-family: inherit !important;
+		font-size: inherit !important;
 	}
 
 	.ql-editor:focus {
 		outline: 0;
-		border-radius: 6px;
-		border: 1px solid #86b7fe;
-		box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+		// border: 0px solid #86b7fe;
+		// box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 	}
 
 	.is-valid .ql-editor:focus {
-		border: 1px solid $color-green;
-		box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+		//border: 0px solid $color-green;
+		// box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
 	}
 
 	.is-invalid .ql-editor:focus {
-		border: 1px solid $color-red;
-		box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+		//border: 0px solid $color-red;
+		// box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
 	}
 
 	.ql-editor.ql-blank::before {
 		color: inherit;
 		opacity: 0.5;
-		font-size: 1em;
 	}
 </style>

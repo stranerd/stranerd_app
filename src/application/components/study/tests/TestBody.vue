@@ -1,40 +1,13 @@
 <template>
-	<div class="flex flex-col lg:w-8/12 w-full mx-auto bg-white lg:my-8 p-4 pb-12 md:p-8 md:pb-16 lg:pb-20">
-		<ion-segment v-model="tab" class="md:w-96 mb-8 md:mb-12 mx-auto" mode="ios">
-			<ion-segment-button value="list">
-				<ion-label>All questions</ion-label>
-			</ion-segment-button>
-			<ion-segment-button value="single">
-				<ion-label>Single question</ion-label>
-			</ion-segment-button>
-		</ion-segment>
-
-		<div v-if="tab === 'list'" class="flex flex-col gap-8">
+	<div class="flex flex-col lg:my-8 md:p-4 lg:p-0 pb-[68px] md:pb-[82px] lg:pb-[88px]">
+		<div v-if="tab === 'list'" class="flex flex-col md:gap-8">
 			<TestQuestion v-for="(question, index) in questions" :key="question.hash" :answer="updateAnswer"
-				:question="question" :questionIndex="index"
-				:test="test" />
+				:question="question" :questionIndex="index" :test="test" />
 		</div>
 
-		<template v-if="tab === 'single'">
-			<TestQuestion :answer="updateAnswer" :question="questions[questionIndex]" :questionIndex="questionIndex"
-				:test="test" />
-			<div class="mt-6 mb-10 flex justify-between items-center gap-4">
-				<IonIcon :color="canGoBack ? 'grey' : 'light'" :icon="chevronBackCircle" size="large" @click="back" />
-				<span class="flex gap-2 items-center">
-					<span>Jump to</span>
-					<IonSelect v-model="questionIndex" interface="action-sheet">
-						<IonSelectOption v-for="num in questions.length" :key="num" :value="num - 1">
-							{{ num }}
-						</IonSelectOption>
-					</IonSelect>
-				</span>
-				<IonIcon :color="canGoForward ? 'grey' : 'light'" :icon="chevronForwardCircle" size="large"
-					@click="forward" />
-			</div>
-		</template>
-
-		<div class="footer-shadow py-4 fixed bottom-0 inset-x-0 bg-white z-[10]">
-			<div class="lg:w-8/12 w-full px-4 mx-auto flex items-center justify-between">
+		<div class="footer-shadow fixed bottom-0 inset-x-0 bg-white z-[10]">
+			<div :style="`width:${test.progress * 100}%`" class="bg-primary h-1" />
+			<div class="lg:w-8/12 w-full px-4 mx-auto flex items-center justify-between py-2">
 				<div>
 					<ion-text v-if="test.isOBJ" class="text-main_dark">
 						{{ test.answered }}/{{ formatNumber(questions.length) }} answered
@@ -66,21 +39,19 @@
 </template>
 
 <script lang="ts">
-import { IonSegment, IonSegmentButton, IonSelect, IonSelectOption } from '@ionic/vue'
 import { useTestDetails } from '@app/composable/study/tests'
-import { chevronBackCircle, chevronForwardCircle } from 'ionicons/icons'
-import { computed, defineComponent, onMounted, onUnmounted } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { TestEntity } from '@modules/study'
 import { useCountdown } from '@app/composable/core/dates'
 import { getDigitalTime } from '@utils/dates'
-import { useStudyPopover } from '@app/composable/core/modals'
 import TestQuestion from '@app/components/study/tests/TestQuestion.vue'
 import { formatNumber } from '@utils/commons'
 import { useRouter } from 'vue-router'
+import { Alert } from '@utils/dialog'
 
 export default defineComponent({
 	name: 'TestBody',
-	components: { IonSegment, IonSegmentButton, TestQuestion, IonSelect, IonSelectOption },
+	components: { TestQuestion },
 	props: {
 		test: {
 			type: TestEntity,
@@ -89,27 +60,26 @@ export default defineComponent({
 	},
 	setup (props) {
 		const router = useRouter()
-		const { error, tab, questionIndex, loading, questions, updateAnswer } = useTestDetails(props.test)
-		const canGoBack = computed(() => questionIndex.value > 0)
-		const canGoForward = computed(() => questionIndex.value < questions.value.length - 1)
-		const back = () => canGoBack.value && questionIndex.value--
-		const forward = () => canGoForward.value && questionIndex.value++
-		const { diffInSec, startTimer: startCountdown, stopTimer: stopCountdown } = useCountdown(props.test.endedAt, {})
-		onMounted(startCountdown)
-		onUnmounted(stopCountdown)
+		const { error, tab, questionIndex, loading, questions, updateAnswer, endTest } = useTestDetails(props.test)
+		const { diffInSec } = useCountdown(props.test.endedAt, {})
 		const countDown = computed({
 			get: () => getDigitalTime(diffInSec.value),
 			set: () => {
 			}
 		})
 		const openSubmitTest = async () => {
-			if (props.test.isTimed) useStudyPopover().openSubmitTest()
+			const res = await Alert({
+				title: 'Are you sure you want to submit?',
+				confirmButtonText: 'Submit'
+			})
+			if (!res) return
+			await endTest()
+			if (props.test.isTimed) await router.push(`/study/tests/${props.test.id}/results`)
 			else await router.push('/dashboard')
 		}
 		return {
 			error, loading, questions, openSubmitTest, updateAnswer,
-			countDown, tab, questionIndex, canGoBack, canGoForward, back, forward,
-			chevronForwardCircle, chevronBackCircle, formatNumber
+			countDown, tab, questionIndex, formatNumber
 		}
 	}
 })
@@ -117,17 +87,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	.btn-lgx {
-		@media (min-width: 1042px) {
-			--padding-top: 1.5rem;
-			--padding-bottom: 1.5rem;
-			--padding-start: 4.5rem;
-			--padding-end: 4.5rem;
+		@media (min-width: $lg) {
+			--padding-top: 1.25rem;
+			--padding-bottom: 1.25rem;
+			--padding-start: 3rem;
+			--padding-end: 3rem;
 		}
-
-	}
-
-	input[type="radio"]:checked + label {
-		@apply border-primary
 	}
 
 	ion-select {

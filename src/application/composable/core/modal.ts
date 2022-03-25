@@ -1,5 +1,5 @@
 import { Component as Vue, Ref } from 'vue'
-import { modalController, popoverController } from '@ionic/vue'
+import { isPlatform, modalController, popoverController } from '@ionic/vue'
 
 const capitalize = (text: string) => (text[0] ?? '').toUpperCase() + text.slice(1)
 const merge = (type: string, key: string) => type + key
@@ -9,10 +9,7 @@ function spreadModals<T> (type: string, modals: Record<string, T>) {
 }
 
 export const useModal = (stack: Ref<string[]>) => {
-	const modals = {} as Record<string, {
-		modal: null | HTMLIonModalElement,
-		component: Vue
-	}>
+	const modals = {} as Record<string, { modal: null | HTMLIonModalElement, component: Vue }>
 
 	const close = async (id: string) => {
 		const modal = modals[id].modal
@@ -26,13 +23,13 @@ export const useModal = (stack: Ref<string[]>) => {
 		// await close(id)
 		if (Object.keys(modals).includes(id)) {
 			if (modals[id].modal?.isOpen) return
-			const modal = await modalController
-				.create({
-					component: modals[id].component as any,
-					cssClass: 'modal-class',
-					breakpoints: [0.1, 0.5, 1],
-					initialBreakpoint: 1
-				})
+			const modal = await modalController.create({
+				component: modals[id].component as any,
+				componentProps: { close: () => close(id) },
+				cssClass: 'modal-class',
+				breakpoints: isPlatform('desktop') ? undefined : [0.1, 0.5, 1],
+				initialBreakpoint: 1
+			})
 			await modal.present()
 			modals[id].modal = modal
 		}
@@ -53,7 +50,7 @@ export const useModal = (stack: Ref<string[]>) => {
 				.reduce((acc, curr) => acc.concat(curr), [])
 		) as Record<`open${Capitalize<Key>}` | `close${Capitalize<Key>}`, () => void>
 
-		const closeAll = async () => Object.keys(modalObject)
+		const closeAll = () => Object.keys(modalObject)
 			.forEach((key) => helpers[`close${capitalize(key) as Capitalize<Key>}`]?.())
 
 		return { ...helpers, closeAll }
@@ -63,10 +60,7 @@ export const useModal = (stack: Ref<string[]>) => {
 }
 
 export const usePopover = (stack: Ref<string[]>) => {
-	const popovers = {} as Record<string, {
-		popover: null | HTMLIonPopoverElement,
-		component: Vue
-	}>
+	const popovers = {} as Record<string, { popover: null | HTMLIonPopoverElement, component: Vue }>
 
 	const close = async (id: string) => {
 		const popover = popovers[id].popover
@@ -80,11 +74,12 @@ export const usePopover = (stack: Ref<string[]>) => {
 		// await close(id)
 		if (Object.keys(popovers).includes(id)) {
 			if (popovers[id].popover?.isOpen) return
-			const popover = await popoverController
-				.create({
-					component: popovers[id].component as any,
-					cssClass: 'popover-class', event
-				})
+			const popover = await popoverController.create({
+				component: popovers[id].component as any,
+				componentProps: { close: () => close(id) },
+				cssClass: 'popover-class',
+				event
+			})
 			await popover.present()
 			popovers[id].popover = popover
 		}

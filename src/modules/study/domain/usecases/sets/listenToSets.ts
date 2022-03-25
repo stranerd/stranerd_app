@@ -11,17 +11,14 @@ export class ListenToSetsUseCase {
 
 	async call (listener: Listeners<SetEntity>, date?: number) {
 		const conditions: QueryParams = {
-			where: [{ field: 'isPublic', value: true }],
-			sort: { field: 'createdAt', order: -1 },
+			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
-			const matches = entity.isPublic
-			if (!matches) return false
 			if (date) return entity.createdAt >= date
-			return matches
+			return true
 		})
 	}
 }

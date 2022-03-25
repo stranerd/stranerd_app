@@ -1,11 +1,16 @@
 <template>
-	<div class="bg-light_gray gap-0-5 text-dark w-full my-2 p-4 rounded-md" @click="markNotificationSeen">
-		<router-link :class="{'font-bold': !notification.seen}" :to="notification.link">
-			<p class="text-body lg:text-base cursor-pointer">
-				{{ notification.body }}
-			</p>
-		</router-link>
-		<p class="text-icon_inactive">{{ formatTime(notification.createdAt) }}</p>
+	<div class="bg-white card-padding rounded-lg text-gray" @click="markNotificationSeen">
+		<div>
+			<div class="flex justify-between gap-2 items-baseline">
+				<router-link :class="{'font-bold': !notification.seen}" :to="notification.link" class="flex-grow">
+					<p class=" cursor-pointer">
+						{{ notification.body }}
+					</p>
+				</router-link>
+				<span v-if="!notification.seen" class="dot bg-primary" />
+			</div>
+			<p class="text-sub">{{ formatTime(notification.createdAt) }}</p>
+		</div>
 	</div>
 </template>
 

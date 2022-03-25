@@ -1,4 +1,5 @@
 import { UserBio, UserRoles } from '@modules/users'
+import { SetData } from '../../domain/entities/set'
 
 export interface SetFromModel extends SetToModel {
 	id: string
@@ -9,8 +10,6 @@ export interface SetFromModel extends SetToModel {
 		testPreps: string[]
 		sets: string[]
 	}
-	children: string[]
-	tags: string[]
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
@@ -20,7 +19,5 @@ export interface SetFromModel extends SetToModel {
 
 export interface SetToModel {
 	name: string
-	isPublic: boolean
-	parent: string | null
-	tags: string[]
+	data: SetData
 }

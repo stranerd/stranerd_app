@@ -3,7 +3,7 @@ import { IUserRepository } from '../../domain/irepositories/iuser'
 import { UserBaseDataSource } from '../datasources/user-base'
 import { UserTransformer } from '../transformers/user'
 import { UserEntity } from '../../domain/entities/user'
-import { TutorUpdate } from '../models/user'
+import { UserSchoolData } from '../../domain/types'
 
 export class UserRepository implements IUserRepository {
 	private dataSource: UserBaseDataSource
@@ -63,7 +63,7 @@ export class UserRepository implements IUserRepository {
 		return this.dataSource.updateStreak()
 	}
 
-	async updateTutor (tutor: TutorUpdate) {
-		return this.dataSource.updateTutor(tutor)
+	async updateSchool (school: UserSchoolData) {
+		return this.dataSource.updateSchool(school)
 	}
 }

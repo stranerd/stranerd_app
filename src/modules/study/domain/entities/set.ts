@@ -5,10 +5,7 @@ import { appName } from '@utils/environment'
 export class SetEntity extends BaseEntity {
 	public readonly id: string
 	public readonly name: string
-	public readonly parent: string | null
-	public readonly isPublic: boolean
-	public readonly tags: string[]
-	public readonly children: string[]
+	public readonly data: SetData
 	public readonly userId: string
 	public readonly userBio: UserBio
 	public readonly userRoles: UserRoles
@@ -25,51 +22,66 @@ export class SetEntity extends BaseEntity {
 	constructor ({
 		             id,
 		             name,
-		             parent,
-		             isPublic,
-		             tags,
+		             data,
 		             userId,
 		             userBio,
 		             userRoles,
-		             children,
 		             saved,
 		             createdAt,
 		             updatedAt
 	             }: SetConstructorArgs) {
 		super()
 		this.id = id
-		this.parent = parent
-		this.isPublic = isPublic
-		this.tags = tags
+		this.data = data
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
 		this.userRoles = generateDefaultRoles(userRoles)
-		this.name = !parent ? 'My Library' : name
-		this.children = children
+		this.name = !name ? 'My Library' : name
 		this.saved = saved
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
 	get allSaved () {
-		return Object.values(this.saved).flat(1).concat(this.children)
+		return Object.values(this.saved).flat(1)
 	}
 
 	get isUserVerified () {
 		return this.userRoles[appName].isVerified
 	}
+
+	get shareLink () {
+		return `/study/sets/${this.id}`
+	}
+
+	search (search: string) {
+		return this.name.toLowerCase().includes(search.toLowerCase())
+	}
 }
+
+export enum SetType {
+	users = 'users',
+	classes = 'classes'
+}
+
+type UserType = {
+	type: SetType.users
+}
+
+type ClassType = {
+	type: SetType.classes
+	classId: string
+}
+
+export type SetData = UserType | ClassType
 
 type SetConstructorArgs = {
 	id: string
 	name: string
-	parent: string | null
-	isPublic: boolean
+	data: SetData
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
-	tags: string[]
-	children: string[]
 	saved: {
 		notes: string[]
 		videos: string[]

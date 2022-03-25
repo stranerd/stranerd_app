@@ -2,7 +2,6 @@ import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from
 import { apiBases } from '@utils/environment'
 import { VideoFromModel, VideoToModel } from '../models/video'
 import { VideoBaseDataSource } from './video-base'
-import { getSetIdQuery } from '@utils/query'
 
 export class VideoApiDataSource implements VideoBaseDataSource {
 	private stranerdClient: HttpClient
@@ -12,8 +11,7 @@ export class VideoApiDataSource implements VideoBaseDataSource {
 	}
 
 	async create (data: VideoToModel) {
-		const video = await this.stranerdClient.post<VideoToModel, VideoFromModel>('/', { ...getSetIdQuery(), ...data })
-		return video.id
+		return await this.stranerdClient.post<VideoToModel, VideoFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -25,14 +23,14 @@ export class VideoApiDataSource implements VideoBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<VideoFromModel>) {
-		const listener = listenOnSocket(`videos/${id}`, listeners)
+		const listener = listenOnSocket(`study/videos/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<VideoFromModel>) {
-		const listener = listenOnSocket('videos', listeners)
+		const listener = listenOnSocket('study/videos', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
@@ -43,6 +41,6 @@ export class VideoApiDataSource implements VideoBaseDataSource {
 	}
 
 	async update (id: string, data: VideoToModel) {
-		await this.stranerdClient.put<VideoToModel, VideoFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<VideoToModel, VideoFromModel>(`/${id}`, data)
 	}
 }

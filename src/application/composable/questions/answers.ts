@@ -15,25 +15,44 @@ import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } fr
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
+import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
 	answers: Ref<AnswerEntity[]>
 	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useAnswerList = (questionId: string) => {
-	if (global[questionId] === undefined) global[questionId] = {
-		answers: ref([]),
-		fetched: ref(false),
-		...useErrorHandler(),
-		...useLoadingHandler()
+	if (global[questionId] === undefined) {
+		const listener = useListener(async () => {
+			return await ListenToAnswers.call(questionId, {
+				created: async (entity) => {
+					addToArray(global[questionId].answers.value, entity, (e) => e.id, (e) => e.createdAt, true)
+				},
+				updated: async (entity) => {
+					addToArray(global[questionId].answers.value, entity, (e) => e.id, (e) => e.createdAt, true)
+				},
+				deleted: async (entity) => {
+					global[questionId].answers.value = global[questionId].answers.value.filter((c) => c.id !== entity.id)
+				}
+			})
+		})
+		global[questionId] = {
+			answers: ref([]),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
 	}
 
 	const fetchAnswers = async () => {
 		await global[questionId].setError('')
 		try {
 			await global[questionId].setLoading(true)
-			global[questionId].answers.value = (await GetAnswers.call(questionId)).results
+			const answers = await GetAnswers.call(questionId)
+			answers.results.forEach((a) => addToArray(global[questionId].answers.value, a, (e) => e.id, (e) => e.createdAt, true))
 			global[questionId].fetched.value = true
 		} catch (error) {
 			await global[questionId].setError(error)
@@ -41,30 +60,12 @@ export const useAnswerList = (questionId: string) => {
 		await global[questionId].setLoading(false)
 	}
 
-	const listener = useListener(async () => {
-		return await ListenToAnswers.call(questionId, {
-			created: async (entity) => {
-				const index = global[questionId].answers.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[questionId].answers.value.push(entity)
-				else global[questionId].answers.value.splice(index, 1, entity)
-			},
-			updated: async (entity) => {
-				const index = global[questionId].answers.value.findIndex((c) => c.id === entity.id)
-				if (index === -1) global[questionId].answers.value.push(entity)
-				else global[questionId].answers.value.splice(index, 1, entity)
-			},
-			deleted: async (entity) => {
-				global[questionId].answers.value = global[questionId].answers.value.filter((c) => c.id !== entity.id)
-			}
-		})
-	})
-
 	onMounted(async () => {
 		if (!global[questionId].fetched.value && !global[questionId].loading.value) await fetchAnswers()
-		await listener.startListener()
+		await global[questionId].listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await global[questionId].listener.close()
 	})
 
 	return {
@@ -88,7 +89,7 @@ export const useCreateAnswer = () => {
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	if (!answeringQuestion) router.replace('/questions')
+	if (!answeringQuestion) router.push('/questions')
 	factory.value.questionId = answeringQuestion!.id
 
 	const createAnswer = async () => {
@@ -96,10 +97,10 @@ export const useCreateAnswer = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const answerId = await AddAnswer.call(factory.value)
+				const answer = await AddAnswer.call(factory.value)
 				await setMessage('Answer submitted successfully.')
 				factory.value.reset()
-				await router.replace(`/questions/${answeringQuestion?.id ?? ''}#${answerId}`)
+				await router.push(`/questions/${answer.questionId}`)
 				showAddAnswer.value = false
 			} catch (error) {
 				await setError(error)
@@ -128,7 +129,7 @@ export const useAnswer = (answer: AnswerEntity) => {
 		await setError('')
 		try {
 			await setLoading(true)
-			await VoteAnswer.call(answer.id, userId, vote)
+			await VoteAnswer.call(answer.id, vote)
 		} catch (error) {
 			await setError(error)
 		}
@@ -178,10 +179,10 @@ export const useEditAnswer = (answerId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditAnswer.call(answerId, factory.value)
-				await setMessage('Answer edited successfully')
+				const answer = await EditAnswer.call(answerId, factory.value)
+				await setMessage('Answer updated successfully')
 				factory.value.reset()
-				await router.replace(`/questions/${editingQuestionAnswer?.question.id}#${answerId}`)
+				await router.push(`/questions/${answer.questionId}`)
 			} catch (error) {
 				await setError(error)
 			}

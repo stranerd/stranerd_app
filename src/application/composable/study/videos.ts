@@ -13,6 +13,8 @@ import {
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
+import { addToArray } from '@utils/commons'
+import { useStudyModal } from '@app/composable/core/modals'
 
 const global = {
 	videos: ref([] as VideoEntity[]),
@@ -21,17 +23,21 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
-
-const pushToVideoList = (video: VideoEntity) => {
-	const index = global.videos.value.findIndex((q) => q.id === video.id)
-	if (index !== -1) global.videos.value.splice(index, 1, video)
-	else global.videos.value.push(video)
-}
-const unshiftToVideoList = (video: VideoEntity) => {
-	const index = global.videos.value.findIndex((q) => q.id === video.id)
-	if (index !== -1) global.videos.value.splice(index, 1, video)
-	else global.videos.value.unshift(video)
-}
+const listener = useListener(async () => {
+	const lastDate = global.videos.value[global.videos.value.length - 1]?.createdAt
+	return await ListenToVideos.call({
+		created: async (entity) => {
+			addToArray(global.videos.value, entity, (e) => e.id, (e) => e.createdAt)
+		},
+		updated: async (entity) => {
+			addToArray(global.videos.value, entity, (e) => e.id, (e) => e.createdAt)
+		},
+		deleted: async (entity) => {
+			const index = global.videos.value.findIndex((q) => q.id === entity.id)
+			if (index !== -1) global.videos.value.splice(index, 1)
+		}
+	}, lastDate)
+})
 
 export const useVideoList = () => {
 	const fetchVideos = async () => {
@@ -41,35 +47,20 @@ export const useVideoList = () => {
 			const lastDate = global.videos.value[global.videos.value.length - 1]?.createdAt
 			const videos = await GetVideos.call(lastDate)
 			global.hasMore.value = !!videos.pages.next
-			videos.results.forEach(pushToVideoList)
+			videos.results.forEach((v) => addToArray(global.videos.value, v, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)
 		}
 		await global.setLoading(false)
 	}
-	const listener = useListener(async () => {
-		const lastDate = global.videos.value[global.videos.value.length - 1]?.createdAt
-		return await ListenToVideos.call({
-			created: async (entity) => {
-				unshiftToVideoList(entity)
-			},
-			updated: async (entity) => {
-				unshiftToVideoList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.videos.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.videos.value.splice(index, 1)
-			}
-		}, lastDate)
-	})
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchVideos()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { ...global, fetchOlderVideos: fetchVideos }
@@ -87,9 +78,10 @@ export const useCreateVideo = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const videoId = await AddVideo.call(factory.value)
+				const video = await AddVideo.call(factory.value)
 				await setMessage('Video submitted successfully')
-				await router.replace(`/study/videos/${videoId}`)
+				await useStudyModal().closeCreateVideo()
+				await router.push(`/study/videos/${video.id}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -107,7 +99,7 @@ export const openVideoEditModal = async (video: VideoEntity, router: Router) => 
 	editingVideo = video
 	await router.push(`/study/videos/${video.id}/edit`)
 }
-export const useEditVideo = (videoId: string) => {
+export const useEditVideo = () => {
 	const router = useRouter()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
@@ -120,10 +112,11 @@ export const useEditVideo = (videoId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditVideo.call(videoId, factory.value)
+				const video = await EditVideo.call(editingVideo!.id, factory.value)
+				await useStudyModal().closeEditVideo()
 				await setMessage('Video updated successfully')
-				await router.replace(`/study/videos/${videoId}`)
 				factory.value.reset()
+				await router.push(`/study/videos/${video.id}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -168,7 +161,7 @@ export const useVideo = (videoId: string) => {
 	const video = computed({
 		get: () => global.videos.value.find((q) => q.id === videoId) ?? null,
 		set: (q) => {
-			if (q) pushToVideoList(q)
+			if (q) addToArray(global.videos.value, q, (e) => e.id, (e) => e.createdAt)
 		}
 	})
 
@@ -182,7 +175,7 @@ export const useVideo = (videoId: string) => {
 				return
 			}
 			video = await FindVideo.call(videoId)
-			if (video) unshiftToVideoList(video)
+			if (video) addToArray(global.videos.value, video, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
 		}
@@ -191,10 +184,10 @@ export const useVideo = (videoId: string) => {
 	const listener = useListener(async () => {
 		return await ListenToVideo.call(videoId, {
 			created: async (entity) => {
-				unshiftToVideoList(entity)
+				addToArray(global.videos.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				unshiftToVideoList(entity)
+				addToArray(global.videos.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
 				const index = global.videos.value.findIndex((q) => q.id === entity.id)
@@ -205,10 +198,10 @@ export const useVideo = (videoId: string) => {
 
 	onMounted(async () => {
 		await fetchVideo()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { error, loading, video }

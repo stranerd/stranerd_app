@@ -39,7 +39,6 @@ export async function listenOnSocket<Model> (channel: string, listeners: Listene
 	let finalChannel = ''
 	socket.emit('join', { channel }, (res: SocketReturn) => {
 		finalChannel = res.channel
-		// eslint-disable-next-line no-console
 		if (res.code !== StatusCodes.Ok) return
 		socket?.on(finalChannel, async (data: { channel: string, type: EmitTypes, data: Model }) => {
 			if (finalChannel !== data.channel) return
@@ -48,9 +47,7 @@ export async function listenOnSocket<Model> (channel: string, listeners: Listene
 	})
 	return () => {
 		try {
-			socket?.emit('leave', { channel: finalChannel }, (_: SocketReturn) => {
-				return _
-			})
+			socket?.emit('leave', { channel: finalChannel }, (ret: SocketReturn) => ret)
 		} catch (e) {
 			return e
 		}

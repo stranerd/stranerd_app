@@ -1,84 +1,8 @@
-import { BaseEntity, Media, parseMedia } from '@modules/core'
+import { BaseEntity, parseMedia } from '@modules/core'
 import { appName } from '@utils/environment'
 import { capitalize, catchDivideByZero, formatNumber, getPercentage } from '@utils/commons'
-import { getRankImage, RankTypes } from './rank'
-
-export enum RankingTimes {
-	daily = 'daily',
-	weekly = 'weekly',
-	monthly = 'monthly',
-	overall = 'overall'
-}
-
-export interface UserBio {
-	firstName: string
-	lastName: string
-	fullName: string
-	email: string
-	description: string
-	photo: Media | null
-}
-
-export interface UserRoles {
-	[appName]: {
-		isAdmin: boolean
-		isTutor: boolean
-		isVerified: boolean
-	}
-}
-
-export interface UserAccount {
-	score: number
-	meta: {
-		questions: number
-		answers: number
-		bestAnswers: number
-		answerComments: number
-		sessions: number
-		tutorSessions: number
-		flashCards: number
-		sets: number
-	}
-	streak: {
-		count: number
-		longestStreak: number
-		lastEvaluatedAt: number
-	}
-	ratings: {
-		total: number
-		count: number
-	}
-	referrals: Record<string, boolean>
-	rankings: Record<RankingTimes, number>
-}
-
-export interface UserStatus {
-	connections: string[]
-	lastUpdatedAt: number
-}
-
-export interface UserSession {
-	currentSessions: string[]
-	currentTutorSessions: string[]
-	requests: string[]
-	lobby: string[]
-}
-
-export interface UserDates {
-	createdAt: number
-	deletedAt: number | null
-}
-
-export interface UserTutor {
-	strongestSubject: string | null
-	weakerSubjects: string[]
-}
-
-export interface UserRank {
-	id: RankTypes
-	score: number
-	level: number
-}
+import { getRankImage } from './rank'
+import { UserAccount, UserBio, UserDates, UserRank, UserRoles, UserSchoolData, UserSession, UserStatus } from '../types'
 
 type UserConstructorArgs = {
 	id: string
@@ -86,11 +10,11 @@ type UserConstructorArgs = {
 	roles: UserRoles
 	account: UserAccount
 	status: UserStatus
-	tutor: UserTutor
 	session: UserSession
 	dates: UserDates
 	rank: UserRank
 	nextRank: UserRank | null
+	school: UserSchoolData | null
 }
 
 export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
@@ -100,7 +24,8 @@ export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
 	const email = bio?.email ?? 'anon@ymous.com'
 	const description = bio?.description ?? ''
 	const photo = bio?.photo ? parseMedia(bio.photo) : null
-	return { firstName, lastName, fullName, email, description, photo }
+	const coverPhoto = bio?.coverPhoto ? parseMedia(bio.coverPhoto) : null
+	return { firstName, lastName, fullName, email, description, photo, coverPhoto }
 }
 
 export const generateDefaultRoles = (roles: Partial<UserRoles>): UserRoles => ({
@@ -117,11 +42,11 @@ export class UserEntity extends BaseEntity {
 	public readonly roles: UserRoles
 	public readonly account: UserAccount
 	public readonly status: UserStatus
-	public readonly tutor: UserTutor
 	public readonly session: UserSession
 	public readonly dates: UserDates
 	public readonly rank: UserRank
 	public readonly nextRank: UserRank | null
+	public readonly school: UserSchoolData | null
 
 	constructor ({
 		             id,
@@ -129,10 +54,10 @@ export class UserEntity extends BaseEntity {
 		             roles,
 		             account,
 		             status,
-		             tutor,
 		             session,
 		             dates,
 		             rank,
+		             school,
 		             nextRank
 	             }: UserConstructorArgs) {
 		super()
@@ -141,35 +66,11 @@ export class UserEntity extends BaseEntity {
 		this.roles = generateDefaultRoles(roles)
 		this.account = account
 		this.status = status
-		this.tutor = tutor
 		this.session = session
 		this.dates = dates
 		this.rank = rank
 		this.nextRank = nextRank
-	}
-
-	get firstName () {
-		return this.bio.firstName
-	}
-
-	get lastName () {
-		return this.bio.lastName
-	}
-
-	get fullName () {
-		return this.bio.fullName!
-	}
-
-	get email () {
-		return this.bio.email
-	}
-
-	get avatar () {
-		return this.bio.photo
-	}
-
-	get description () {
-		return this.bio.description
+		this.school = school
 	}
 
 	get isOnline () {
@@ -190,20 +91,6 @@ export class UserEntity extends BaseEntity {
 
 	get orderRating () {
 		return Math.pow(this.account.ratings.total, this.averageRating)
-	}
-
-	get strongestSubject () {
-		return this.tutor.strongestSubject
-	}
-
-	get weakerSubjects () {
-		return this.tutor.weakerSubjects
-	}
-
-	get subjects () {
-		const subjects = [...this.tutor.weakerSubjects]
-		if (this.tutor.strongestSubject) subjects.push(this.tutor.strongestSubject)
-		return subjects
 	}
 
 	get score () {

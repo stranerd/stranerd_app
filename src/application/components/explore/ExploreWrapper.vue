@@ -1,44 +1,18 @@
 <template>
 	<Justified>
-		<div>
-			<div class="blueTop px-4">
-				<div class="w-full md:w-11/12 lg:w-8/12">
-					<div class="flex flex-col justify-center items-center">
-						<ion-text class="heading lg:text-2xl font-bold text-white text-center mt-12 hidden md:block">
-							Explore thousands of study materials
-						</ion-text>
-						<Search class="my-4" />
-					</div>
-					<div class="nav-scroll">
-						<router-link :to="`/explore`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							All
-						</router-link>
-						<router-link :to="`/explore/preps`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							TestPreps
-						</router-link>
-						<router-link :to="`/explore/notes`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							Notes
-						</router-link>
-						<router-link :to="`/explore/videos`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							Videos
-						</router-link>
-						<router-link :to="`/explore/flashCards`"
-							class="py-2 cursor-pointer"
-							exact-active-class="border-b-4 text-white border-white">
-							FlashCards
-						</router-link>
-					</div>
+		<div class="h-full md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
+			<div class="bg-white rounded-xl px-4 pt-4 flex flex-col">
+				<Search />
+				<div class="nav-scroll mt-4">
+					<router-link :to="`/explore`">All</router-link>
+					<router-link :to="`/explore/preps`">TestPreps</router-link>
+					<router-link :to="`/explore/notes`">Notes</router-link>
+					<router-link :to="`/explore/videos`">Videos</router-link>
+					<router-link :to="`/explore/flashCards`">FlashCards</router-link>
 				</div>
 			</div>
-			<div class="p-4 md:w-11/12 lg:w-8/12 w-full mx-auto">
+
+			<div class="md:mt-6 md:px-4 lg:px-0">
 				<slot />
 			</div>
 		</div>
@@ -52,6 +26,16 @@ import Search from '@app/components/search/Search.vue'
 
 export default defineComponent({
 	name: 'ExploreWrapper',
-	components: { Justified, Search }
+	components: {
+		Justified,
+		Search
+	}
 })
 </script>
+
+<style lang="scss" scoped>
+	:deep(ion-searchbar) {
+		--background: $color-newGray !important;
+		background: $color-newGray !important;
+	}
+</style>

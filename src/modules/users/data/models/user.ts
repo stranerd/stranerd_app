@@ -4,10 +4,10 @@ import {
 	UserDates,
 	UserRank,
 	UserRoles,
+	UserSchoolData,
 	UserSession,
-	UserStatus,
-	UserTutor
-} from '../../domain/entities/user'
+	UserStatus
+} from '../../domain/types'
 
 export interface UserFromModel extends UserToModel {
 	id: string
@@ -15,16 +15,11 @@ export interface UserFromModel extends UserToModel {
 	roles: UserRoles
 	account: UserAccount
 	status: UserStatus
-	tutor: UserTutor
 	session: UserSession
 	dates: UserDates
 	rank: UserRank
 	nextRank: UserRank | null
+	school: UserSchoolData | null
 }
 
 export type UserToModel = {}
-
-export type TutorUpdate = {
-	strongestSubject: string,
-	weakerSubjects: string[]
-}

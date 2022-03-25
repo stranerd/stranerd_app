@@ -11,8 +11,7 @@ export class SetApiDataSource implements SetBaseDataSource {
 	}
 
 	async create (data: SetToModel) {
-		const set = await this.stranerdClient.post<SetToModel, SetFromModel>('/', data)
-		return set.id
+		return await this.stranerdClient.post<SetToModel, SetFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -24,14 +23,14 @@ export class SetApiDataSource implements SetBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<SetFromModel>) {
-		const listener = listenOnSocket(`sets/${id}`, listeners)
+		const listener = listenOnSocket(`study/sets/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<SetFromModel>) {
-		const listener = listenOnSocket('sets', listeners)
+		const listener = listenOnSocket('study/sets', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
@@ -42,7 +41,7 @@ export class SetApiDataSource implements SetBaseDataSource {
 	}
 
 	async update (id: string, data: SetToModel) {
-		await this.stranerdClient.put<SetToModel, SetFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<SetToModel, SetFromModel>(`/${id}`, data)
 	}
 
 	async saveProp (setId: string, type: string, propIds: string[]) {

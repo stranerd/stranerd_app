@@ -56,11 +56,7 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 		const reserved = (this.reserved ?? []).concat(['userId', 'user', 'userBio'])
 		Object.keys(this.defaults)
 			.filter((key) => !reserved.includes(key))
-			.forEach((key: keyof K) => {
-				this.values[key] = this.defaults[key]
-				this.validValues[key] = this.defaults[key]
-				this.errors[key] = ''
-			})
+			.forEach((key) => this.resetProp(key))
 	}
 
 	async uploadFile (path: string, file: UploadedFile) {
@@ -69,5 +65,11 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 
 	async uploadFiles (path: string, files: UploadedFile[]) {
 		return await UploaderService.multiple(path, files)
+	}
+
+	resetProp (property: keyof K) {
+		this.values[property] = this.defaults[property]
+		this.validValues[property] = this.defaults[property]
+		this.errors[property] = ''
 	}
 }

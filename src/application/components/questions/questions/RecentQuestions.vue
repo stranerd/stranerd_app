@@ -1,12 +1,15 @@
 <template>
 	<div>
-		<div class="w-full flex justify-between mb-4">
-			<div class="heading font-bold text-main_dark flex items-center">
-				<ion-text class="mr-3">Questions</ion-text>
-				<ion-badge class="uppercase">Latest</ion-badge>
+		<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
+			<div class="text-main_dark flex items-center">
+				<ion-text class="text-heading font-bold mr-3">Questions</ion-text>
+				<ion-text class="text-orange flex items-center">
+					<div class="h-1 w-1 bg-orange mr-2 rounded-full" />
+					Latest
+				</ion-text>
 			</div>
 
-			<router-link class="text-primary text-body flex items-center font-bold" to="/questions">
+			<router-link class="text-primary flex items-center font-normal" to="/questions">
 				<span>explore</span>
 			</router-link>
 		</div>
@@ -16,6 +19,7 @@
 			info="You have no recent questions! Start asking questions to help with homework and studying."
 			route="/questions"
 		/>
+		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl mx-4" />
 		<div class="showcase">
 			<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
 		</div>
@@ -24,25 +28,23 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { chevronBackOutline, chevronForwardOutline, ellipse } from 'ionicons/icons'
 import QuestionListCard from '@app/components/questions/questions/RecentQuestionListCard.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import EmptyState from '@app/components/core/EmptyState.vue'
-import { IonBadge } from '@ionic/vue'
+import { IonSkeletonText } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'RecentQuestions',
-	components: { QuestionListCard, EmptyState, IonBadge },
+	components: { QuestionListCard, EmptyState, IonSkeletonText },
 	setup () {
 		const { questions: allQuestions, loading, error } = useQuestionList()
 		const questions = computed({
-			get: () => allQuestions.value.slice(0, 6),
+			get: () => allQuestions.value.slice(0, 3),
 			set: () => {
 			}
 		})
 
 		return {
-			chevronForwardOutline, chevronBackOutline, ellipse,
 			questions, loading, error
 		}
 	}

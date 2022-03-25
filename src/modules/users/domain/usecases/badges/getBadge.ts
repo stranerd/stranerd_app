@@ -7,7 +7,7 @@ export class GetBadgeUseCase {
 		this.repository = repository
 	}
 
-	async call (userId: string) {
-		return await this.repository.find(userId)
+	async call () {
+		return await this.repository.get()
 	}
 }

@@ -10,7 +10,7 @@ export class GetTestPrepsUseCase {
 
 	async call () {
 		const conditions: QueryParams = {
-			sort: { field: 'createdAt', order: -1 },
+			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
 

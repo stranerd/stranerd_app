@@ -1,21 +1,25 @@
 <template>
-	<div class="rounded-3xl md:p-8 p-4 md:text-sm text-xs">
-		<div class="flex flex-col gap-1 text-center justify-center items-center mb-4">
-			<h3 class="text-xl font-semibold text-main_dark">
-				<slot name="title">Title</slot>
-			</h3>
-			<span class="text-icon_inactive mt-2">
-				<slot name="subtext" />
-			</span>
+	<div class="py-8 modal-content">
+		<div class="mb-4 modal-padding-x">
+			<div class="flex justify-between text-main_dark">
+				<h3 class="text-heading2" style="font-weight: 500;">
+					<slot name="title">Title</slot>
+				</h3>
+				<IonIcon v-if="close" :icon="closeOutline" class="text-2xl" @click="close" />
+			</div>
+			<slot name="subtext" />
 		</div>
-		<slot>
-			<p>This is the default content of the modal</p>
-		</slot>
+		<div :class="{'modal-padding-x': !noPaddingX}">
+			<slot>
+				<p>This is the default content of the modal</p>
+			</slot>
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
+import { closeOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'Modal',
@@ -25,7 +29,15 @@ export default defineComponent({
 			required: false,
 			default: () => {
 			}
+		},
+		noPaddingX: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
+	},
+	setup () {
+		return { closeOutline }
 	}
 })
 </script>

@@ -10,7 +10,6 @@ export interface AnswerFromModel extends AnswerToModel {
 	userRoles: UserRoles
 	best: boolean
 	votes: { userId: string, vote: 1 | -1 }[]
-	commentsCount: number
 }
 
 export interface AnswerToModel {

@@ -1,13 +1,33 @@
 <template>
-	<div class="rounded-xl bg-white text-gray p-4 md:p-6 md:text-sm text-xs shadow-md min-w-[12rem]">
+	<div class="popover rounded-xl bg-white text-gray text-sub shadow-md flex flex-col">
 		<slot />
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
-	name: 'Popover'
+	name: 'Popover',
+	props: {
+		close: {
+			type: Function as PropType<() => void>,
+			required: false,
+			default: () => {
+			}
+		}
+	}
 })
 </script>
+
+<style lang="scss" scoped>
+	.popover {
+		min-width: 10rem;
+		@media (max-width: $md) {
+			// position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+	}
+</style>

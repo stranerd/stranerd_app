@@ -1,11 +1,8 @@
 <template>
 	<div>
-		<form class="flex justify-between mb-4" @submit.prevent="getUsersByEmail">
-			<ion-input v-model="email" class="bg-white border border-faded_gray !p-0 w-full"
-				placeholder="Enter user's email address" />
-			<ion-button :disabled="loading || !email" class="btn-primary" type="submit">
-				Find Users
-			</ion-button>
+		<form class="flex justify-between items-center mb-4" @submit.prevent="searchUsers">
+			<ion-input v-model="detail" class="bg-white border border-faded_gray w-full"
+				placeholder="Search users by name or email" />
 		</form>
 		<DisplayError :error="error" />
 		<div v-if="fetched">
@@ -19,36 +16,26 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useAdminRoles } from '@app/composable/users/roles/admins'
 import AdminsListCard from '@app/components/users/admin/AdminsListCard.vue'
+import { useSearchUsers } from '@app/composable/users'
 
 export default defineComponent({
 	name: 'UpgradeUserToAdmin',
 	components: { AdminsListCard },
 	setup () {
 		const {
-			loading, fetched, email, users, error,
-			getUsersByEmail, adminUser, reset
-		} = useAdminRoles()
-		return {
-			loading, fetched, email, users, error,
-			getUsersByEmail, adminUser, reset
-		}
+			loading, fetched, detail, users, error, searchUsers, reset
+		} = useSearchUsers()
+		return { loading, fetched, detail, users, error, searchUsers, reset }
 	}
 })
 </script>
 
-<style scoped>
-	ion-button.btn-primary {
-		--padding-top: 1.7rem !important;
-		--padding-bottom: 1.7rem !important;
-		--border-radius: 0 0.75rem 0.75rem 0 !important;
-	}
-
+<style lang="scss" scoped>
 	ion-input {
-		--padding-top: 1rem !important;
-		--padding-bottom: 1rem !important;
-		border-bottom-right-radius: 0 !important;
-		border-top-right-radius: 0 !important;
+		--padding-top: 0.5rem !important;
+		--padding-bottom: 0.5rem !important;
+		--padding-left: 0 !important;
+		--padding-right: 0 !important;
 	}
 </style>

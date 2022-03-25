@@ -27,9 +27,9 @@ export const useErrorHandler = () => {
 
 export const useSuccessHandler = () => {
 	const successState = ref('')
-	const setMessage = async (message: string) => {
+	const setMessage = async (message: string, skipAlert = false) => {
 		successState.value = message
-		if (isClient() && successState.value) Notify({
+		if (isClient() && successState.value && !skipAlert) Notify({
 			title: successState.value
 		})
 	}
@@ -42,31 +42,36 @@ export const useLoadingHandler = () => {
 	return { loading: loadingState, setLoading }
 }
 
-export const useListener = (start: () => Promise<() => void>) => {
+export const useListener = (startFn: () => Promise<() => void>) => {
 	let listener = null as null | (() => void)
 	const isRunning = ref(false)
 	const watchers = ref(0)
 
-	const closeListener = async () => {
+	const close = async () => {
 		watchers.value--
 		if (watchers.value > 0) return
 		listener?.()
 		isRunning.value = false
 	}
 
-	const startListener = async () => {
+	const start = async () => {
 		watchers.value++
 		if (watchers.value > 1) return
-		listener = await start()
+		listener = await startFn()
 		isRunning.value = true
 	}
 
-	const resetListener = async (reset: () => Promise<() => void>) => {
-		start = reset
+	const reset = async (reset: () => Promise<() => void>) => {
+		startFn = reset
+		await restart()
+	}
+
+	const restart = async () => {
 		if (isRunning.value) {
-			await closeListener()
-			await startListener()
+			await close()
+			await start()
 		}
 	}
-	return { startListener, closeListener, resetListener, isRunning }
+
+	return { start, close, reset, restart, isRunning }
 }

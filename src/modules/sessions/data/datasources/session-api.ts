@@ -11,8 +11,7 @@ export class SessionApiDataSource implements SessionBaseDataSource {
 	}
 
 	async create (data: SessionToModel) {
-		const session = await this.stranerdClient.post<SessionToModel, SessionFromModel>('/', data)
-		return session.id
+		return await this.stranerdClient.post<SessionToModel, SessionFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -24,14 +23,14 @@ export class SessionApiDataSource implements SessionBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<SessionFromModel>) {
-		const listener = listenOnSocket(`sessions/${id}`, listeners)
+		const listener = listenOnSocket(`sessions/sessions/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<SessionFromModel>) {
-		const listener = listenOnSocket('sessions', listeners)
+		const listener = listenOnSocket('sessions/sessions', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

@@ -3,9 +3,9 @@
 		<ion-content class="auth">
 			<div class="w-full mt-10 h-full flex flex-col items-center justify-start py-20">
 				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray">
-					<h1 class="lg:text-2xl text-xl text-main_dark font-bold mb-2 text-center">Verify Your Email
+					<h1 class="text-heading2 text-main_dark font-bold mb-2 text-center">Verify Your Email
 						Address</h1>
-					<span class="text-body text-main_dark mb-4 text-center max-w-lg">
+					<span class="text-main_dark mb-4 text-center max-w-lg">
 						An email was just sent to <b>{{ email }}</b>. Follow the link to verify your account.
 						If an error occurred or you didn't receive the email, click the button below to resend the email.
 					</span>
@@ -16,7 +16,7 @@
 							</ion-button>
 						</form>
 					</div>
-					<router-link class="text-primary font-bold text-body mt-8" to="/auth/signin">
+					<router-link class="text-primary font-bold mt-8" to="/auth/signin">
 						Back to Sign In
 					</router-link>
 				</div>

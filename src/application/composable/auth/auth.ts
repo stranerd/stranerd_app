@@ -3,8 +3,9 @@ import { FindUser, ListenToUser, UpdateStreak, UserEntity } from '@modules/users
 import { AuthDetails, AuthTypes, UserLocation } from '@modules/auth/domain/entities/auth'
 import { SessionSignout } from '@modules/auth'
 import { isClient } from '@utils/environment'
-import { useUserRootSet } from '@app/composable/study/sets'
 import { setupPush } from '@utils/push'
+import { useUserModal } from '@app/composable/core/modals'
+import { storage } from '@utils/storage'
 
 const global = {
 	auth: ref(null as AuthDetails | null),
@@ -64,8 +65,12 @@ export const useAuth = () => {
 	const setAuthUser = async (details: AuthDetails | null) => {
 		if (global.listener) global.listener()
 		global.auth.value = details
-		if (details?.id) global.user.value = await FindUser.call(details.id)
-		else global.user.value = null
+		if (details?.id) {
+			global.user.value = await FindUser.call(details.id)
+			if (!global.user.value?.school) setTimeout(async () => {
+				if (!(await getSchoolState())) useUserModal().openSettings()
+			}, 5000)
+		} else global.user.value = null
 	}
 
 	const startProfileListener = async () => {
@@ -85,8 +90,7 @@ export const useAuth = () => {
 	const signin = async (remembered: boolean) => {
 		await Promise.all([
 			setupPush(id.value),
-			startProfileListener(),
-			useUserRootSet().listener.startListener()
+			startProfileListener()
 		])
 	}
 
@@ -113,3 +117,7 @@ export const useAuth = () => {
 		getLocalAmount, getLocalCurrency, getLocalCurrencySymbol
 	}
 }
+
+const SCHOOL_STATE_KEY = 'onboarding_school_state_key'
+const getSchoolState = async () => storage.get(SCHOOL_STATE_KEY)
+export const saveSchoolState = async () => storage.set(SCHOOL_STATE_KEY, 1)

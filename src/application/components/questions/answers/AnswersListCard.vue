@@ -1,70 +1,63 @@
 <template>
-	<div class="flex flex-col mt-1 py-3">
-		<div class="bg-white rounded-xl p-6 flex flex-col mb-4">
-			<div class="flex flex-row items-center">
-				<Avatar :id="answer.userId" :size="30" :src="answer.avatar" class="mr-2" />
-				<span class="font-bold text-main_dark flex items-center gap-1">
-					<span>{{ answer.userBio.fullName }}</span>
-					<IonIcon v-if="answer.isUserVerified" :icon="checkmarkCircle" color="primary" />
-				</span>
-			</div>
-
-			<div class="flex flex-col py-4">
-				<ion-text class="text-gray font-bold mb-2 text-xs lg:text-base">
-					Main answer
-				</ion-text>
-				<DisplayHtml :html="answer.title" class="text-xs lg:text-base" />
-			</div>
-
-			<div v-if="answer.body" class="flex flex-col pb-4">
-				<ion-text class="text-gray font-bold mb-2 text-xs lg:text-base">
-					Explanation
-				</ion-text>
-				<DisplayHtml :html="answer.body" class="text-xs lg:text-base" />
-			</div>
-
-			<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" class="py-3" />
-
-			<div class="flex flex-row items-center justify-between mt-5">
-				<div class="flex flex-row items-center font-bold">
-					<div
-						:class="[answer.votes.find((v) => v.vote === 1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
-						class="flex flex-row items-center mr-2">
-						<span class="mr-1">({{ formatNumber(answer.upVotes) }})</span>
-						<IonIcon :icon="thumbsUp" class="text-[22px] cursor-pointer"
-							@click="() => voteAnswer(true)" />
-					</div>
-					<div
-						:class="[answer.votes.find((v) => v.vote === -1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
-						class="flex flex-row items-center">
-						<span class="mr-1 ">({{ formatNumber(answer.downVotes) }})</span>
-						<IonIcon :icon="thumbsDown" class="text-[22px] cursor-pointer"
-							@click="() => voteAnswer(false)" />
-					</div>
-				</div>
-				<div class="flex flex-row items-center text-icon_inactive font-bold gap-4">
-					<span
-						v-if="isLoggedIn && question && !question.isAnswered && !answer.best && question.userId === id"
-						class="items-center flex cursor-pointer" @click.prevent="markBestAnswer(question)">
-						<span class="mr-1">Mark as best</span>
-						<IonIcon :icon="star" class="text-[20px]" />
-					</span>
-					<IonIcon v-if="answer.best" :icon="star" class="text-[20px] text-yellow_star" />
-					<span class="flex items-center" @click="showComments = !showComments">
-						<IonIcon :icon="showComments ? chevronDown : chevronUp" />
-						<span>{{ showComments ? 'Hide comments' : 'Show comments' }}</span>
-					</span>
-				</div>
-			</div>
-
-			<form class="mt-6 p-3 flex flex-row items-center border-faded_gray border rounded-xl"
-				@submit.prevent="createComment">
-				<ion-input v-model="commentFactory.body" :autoGrow="true" :rows="1"
-					class="px-1 focus:outline-none placeholder-gray-400 mt-0 pt-0"
-					placeholder="Add comment" />
-				<IonIcon :icon="send" class="text-[22px] mr-2 text-primary cursor-pointer" @click="createComment" />
-			</form>
+	<div class="bg-white rounded-xl flex flex-col card-padding">
+		<div class="flex items-center">
+			<Avatar :id="answer.userId" :name="answer.userBio.fullName" :size="24" :src="answer.userBio.photo"
+				class="mr-2" />
+			<span class="font-semibold text-main_dark flex items-center gap-1">
+				<span>{{ answer.userBio.fullName }}</span>
+				<IonIcon v-if="answer.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
+			</span>
 		</div>
+
+		<div class="flex flex-col">
+			<ion-text class="text-gray font-semibold">Answer</ion-text>
+			<DisplayHtml :html="answer.title" />
+		</div>
+
+		<div v-if="answer.body" class="flex flex-col">
+			<ion-text class="text-gray font-semibold">Explanation</ion-text>
+			<DisplayHtml :html="answer.body" />
+		</div>
+
+		<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" />
+
+		<div class="flex items-center gap-2 text-icon_inactive">
+			<div
+				:class="[answer.votes.find((v) => v.vote === 1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
+				class="flex flex-row items-center mr-2">
+				<IonIcon :icon="thumbsUpOutline" class="text-[22px] cursor-pointer"
+					@click="() => voteAnswer(true)" />
+				<span class="ml-1">{{ formatNumber(answer.upVotes) }}</span>
+			</div>
+			<div
+				:class="[answer.votes.find((v) => v.vote === -1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
+				class="flex flex-row items-center mr-2">
+				<IonIcon :icon="thumbsDownOutline" class="text-[22px] cursor-pointer"
+					@click="() => voteAnswer(false)" />
+				<span class="ml-1 ">{{ formatNumber(answer.downVotes) }}</span>
+			</div>
+			<div class="flex items-center">
+				<IonIcon :icon="chatbubbleOutline" class="text-[22px] cursor-pointer"
+					@click="showComments = !showComments" />
+				<span class="ml-1">{{ formatNumber(comments.length) }}</span>
+			</div>
+			<span
+				v-if="isLoggedIn && question && !question.isAnswered && !answer.best && question.userId === id"
+				class="items-center flex cursor-pointer" @click.prevent="markBestAnswer(question)">
+				<span class="mr-1">Mark as best</span>
+				<IonIcon :icon="starOutline" class="text-[20px]" />
+			</span>
+			<IonIcon v-if="answer.best" :icon="starOutline" class="text-[20px] text-yellow_star" />
+		</div>
+
+		<form class="flex gap-2 pr-4 items-center bg-new_gray rounded-lg"
+			@submit.prevent="createComment">
+			<ion-input v-model="commentFactory.body" :autoGrow="true" :rows="1"
+				class="focus:outline-none placeholder-gray-400 mt-0 pt-0"
+				placeholder="Add comment" />
+			<IonIcon :icon="paperPlaneOutline" class="text-[22px] text-primary cursor-pointer"
+				@click="createComment" />
+		</form>
 
 		<AnswerCommentsList v-if="showComments" :answerId="answer.id" />
 	</div>
@@ -75,10 +68,19 @@
 import { computed, defineComponent, PropType, ref } from 'vue'
 import { IonIcon } from '@ionic/vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
-import { checkmarkCircle, chevronDown, chevronUp, send, star, thumbsDown, thumbsUp } from 'ionicons/icons'
+import {
+	chatbubbleOutline,
+	checkmarkCircleOutline,
+	chevronDownOutline,
+	chevronUpOutline,
+	paperPlaneOutline,
+	starOutline,
+	thumbsDownOutline,
+	thumbsUpOutline
+} from 'ionicons/icons'
 import PhotoList from '@app/components/core/media/PhotoList.vue'
 import { useAnswer } from '@app/composable/questions/answers'
-import { useCreateAnswerComments } from '@app/composable/questions/answer-comments'
+import { useAnswerCommentList, useCreateAnswerComments } from '@app/composable/questions/answer-comments'
 import { useAuth } from '@app/composable/auth/auth'
 import AnswerCommentsList from '@app/components/questions/comments/AnswerCommentsList.vue'
 import DisplayHtml from '@app/components/core/text/DisplayHtml.vue'
@@ -112,6 +114,7 @@ export default defineComponent({
 			}
 		})
 		const { error, loading, markBestAnswer, voteAnswer } = useAnswer(props.answer)
+		const { comments } = useAnswerCommentList(props.answer.id)
 		const {
 			loading: commentLoading,
 			error: commentError,
@@ -120,12 +123,30 @@ export default defineComponent({
 		} = useCreateAnswerComments(props.answer.id)
 
 		return {
-			id, isLoggedIn, user, voteAnswer, loading, error,
-			commentLoading, commentError,
-			commentFactory, createComment,
-			markBestAnswer, formatNumber,
-			thumbsDown, thumbsUp, star, send, chevronUp, chevronDown, checkmarkCircle,
-			showExplanation, showComments, showEditButton, showDeleteButton
+			id, chatbubbleOutline,
+			isLoggedIn,
+			user,
+			voteAnswer,
+			loading,
+			error,
+			commentLoading,
+			commentError,
+			commentFactory,
+			createComment,
+			markBestAnswer,
+			formatNumber,
+			thumbsDownOutline,
+			thumbsUpOutline,
+			starOutline,
+			paperPlaneOutline,
+			chevronUpOutline,
+			chevronDownOutline,
+			checkmarkCircleOutline,
+			showExplanation,
+			showComments,
+			showEditButton,
+			showDeleteButton,
+			comments
 		}
 	}
 })

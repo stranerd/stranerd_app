@@ -1,61 +1,53 @@
 <template>
 	<DashboardLayout>
-		<div>
-			<div v-if="isLoggedIn" class="md:px-4 md:py-8 pb-12">
-				<StatusBar />
+		<div class="md:p-4 flex flex-col gap-4 md:gap-6">
+			<StatusBar v-if="isLoggedIn" />
+			<RecentQuestions class="border-bottom-line" />
+			<div class="border-bottom-line">
+				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
+					<div class="text-main_dark flex items-center">
+						<ion-text class="text-heading font-bold mr-3">FlashCards</ion-text>
+						<ion-text class="text-orange flex items-center">
+							<div class="h-1 w-1 bg-orange mr-2 rounded-full" />
+							Latest
+						</ion-text>
+					</div>
+					<router-link class="text-primary flex items-center font-normal"
+						to="/explore/flashCards">
+						explore
+					</router-link>
+				</div>
+				<FlashCardList :sliced="true" />
 			</div>
-			<div class="p-4">
-				<ContinueStudy v-if="isLoggedIn" :sliced="true" class="mb-8" />
-				<div class="mb-8">
-					<div class="w-full flex justify-between mb-4">
-						<div class="heading font-bold text-main_dark flex items-center">
-							<ion-text class="mr-3">Test Preps</ion-text>
-							<ion-badge class="uppercase">Latest</ion-badge>
-						</div>
-						<router-link class="text-primary text-body flex items-center font-bold" to="/explore/preps">
-							explore
-						</router-link>
+			<div class="border-bottom-line">
+				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
+					<div class="text-main_dark flex items-center">
+						<ion-text class="text-heading font-bold mr-3">Notes</ion-text>
+						<ion-text class="text-orange flex items-center">
+							<div class="h-1 w-1 bg-orange mr-2 rounded-full" />
+							Latest
+						</ion-text>
 					</div>
-					<TestPrepList :sliced="true" />
+					<router-link class="text-primary flex items-center font-normal" to="/explore/notes">
+						explore
+					</router-link>
 				</div>
-				<RecentQuestions class="mb-8" />
-				<div class="mb-8">
-					<div class="w-full flex justify-between mb-4">
-						<div class="heading font-bold text-main_dark flex items-center">
-							<ion-text class="mr-3">FlashCards</ion-text>
-							<ion-badge class="uppercase">Latest</ion-badge>
-						</div>
-						<router-link class="text-primary text-body flex items-center font-bold"
-							to="/explore/flashCards">
-							explore
-						</router-link>
+				<NotesList :sliced="true" />
+			</div>
+			<div class="border-bottom-line">
+				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
+					<div class="text-main_dark flex items-center">
+						<ion-text class="text-heading font-bold mr-3">Videos</ion-text>
+						<ion-text class="text-orange flex items-center">
+							<div class="h-1 w-1 bg-orange mr-2 rounded-full" />
+							Latest
+						</ion-text>
 					</div>
-					<FlashCardList :sliced="true" />
+					<router-link class="text-primary flex items-center font-normal" to="/explore/videos">
+						explore
+					</router-link>
 				</div>
-				<div class="mb-8">
-					<div class="w-full flex justify-between mb-4">
-						<div class="heading font-bold text-main_dark flex items-center">
-							<ion-text class="mr-3">Notes</ion-text>
-							<ion-badge class="uppercase">Latest</ion-badge>
-						</div>
-						<router-link class="text-primary text-body flex items-center font-bold" to="/explore/notes">
-							explore
-						</router-link>
-					</div>
-					<NotesList :sliced="true" />
-				</div>
-				<div class="mb-8">
-					<div class="w-full flex justify-between mb-4">
-						<div class="heading font-bold text-main_dark flex items-center">
-							<ion-text class="mr-3">Videos</ion-text>
-							<ion-badge class="uppercase">Latest</ion-badge>
-						</div>
-						<router-link class="text-primary text-body flex items-center font-bold" to="/explore/videos">
-							explore
-						</router-link>
-					</div>
-					<VideosList :sliced="true" />
-				</div>
+				<VideosList :sliced="true" />
 			</div>
 		</div>
 	</DashboardLayout>
@@ -65,24 +57,18 @@
 import { defineComponent } from 'vue'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import StatusBar from '@app/components/dashboard/StatusBar.vue'
-import TestPrepList from '@app/components/study/testPreps/ExploreTestPrepsList.vue'
 import NotesList from '@app/components/study/notes/ExploreNotesList.vue'
 import VideosList from '@app/components/study/videos/ExploreVideosList.vue'
 import FlashCardList from '@app/components/study/flashCards/ExploreFlashCardsList.vue'
 import RecentQuestions from '@app/components/questions/questions/RecentQuestions.vue'
-import ContinueStudy from '@app/components/study/tests/ContinueTests.vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { IonBadge } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'Dashboard',
 	displayName: 'Dashboard',
 	components: {
-		IonBadge,
 		DashboardLayout,
 		RecentQuestions,
-		ContinueStudy,
-		TestPrepList,
 		NotesList,
 		VideosList,
 		FlashCardList,

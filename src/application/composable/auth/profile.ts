@@ -2,7 +2,8 @@ import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/comp
 import { Ref, ref, watch } from 'vue'
 import { ProfileUpdateFactory, UpdateProfile } from '@modules/auth'
 import { useAuth } from '@app/composable/auth/auth'
-import { TutorUpdateFactory, UpdateTutor } from '@modules/users'
+import { UserSchoolFactory } from '@modules/users/domain/factories/userSchool'
+import { UpdateUserSchool } from '@modules/users'
 
 export const useProfileUpdate = () => {
 	const factory = ref(new ProfileUpdateFactory()) as Ref<ProfileUpdateFactory>
@@ -12,7 +13,7 @@ export const useProfileUpdate = () => {
 	const { user } = useAuth()
 
 	if (user.value) factory.value.loadEntity(user.value)
-	watch(() => user.value?.hash, () => user.value ? factory.value.loadEntity(user.value) : null)
+	watch(() => user.value?.hash, () => user.value && factory.value.loadEntity(user.value))
 
 	const updateProfile = async () => {
 		await setError('')
@@ -20,8 +21,7 @@ export const useProfileUpdate = () => {
 			try {
 				await setLoading(true)
 				await UpdateProfile.call(factory.value)
-				await setMessage('Profile updated successfully!')
-				factory.value.reset()
+				await setMessage('Profile updated successfully!', true)
 			} catch (error) {
 				await setError(error)
 			}
@@ -32,24 +32,23 @@ export const useProfileUpdate = () => {
 	return { error, loading, factory, updateProfile }
 }
 
-export const useTutorUpdate = () => {
-	const factory = ref(new TutorUpdateFactory()) as Ref<TutorUpdateFactory>
+export const useUserSchoolUpdate = () => {
+	const factory = ref(new UserSchoolFactory()) as Ref<UserSchoolFactory>
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 	const { user } = useAuth()
 
 	if (user.value) factory.value.loadEntity(user.value)
-	watch(() => user.value?.hash, () => user.value ? factory.value.loadEntity(user.value) : null)
+	watch(() => user.value?.hash, () => user.value && factory.value.loadEntity(user.value))
 
-	const updateTutor = async () => {
+	const updateSchool = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await UpdateTutor.call(factory.value)
+				await UpdateUserSchool.call(factory.value)
 				await setMessage('Updated successfully!')
-				factory.value.reset()
 			} catch (error) {
 				await setError(error)
 			}
@@ -57,5 +56,5 @@ export const useTutorUpdate = () => {
 		} else factory.value.validateAll()
 	}
 
-	return { error, loading, factory, updateTutor }
+	return { error, loading, factory, updateSchool }
 }

@@ -1,33 +1,33 @@
 <template>
-	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}/`">
+	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}/`"
+		class="rounded-full border border-white relative"
+		style="border-width: 2px;">
+		<span v-if="!source && name" :style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
+			class="flex items-center justify-center uppercase bg-gray text-white font-semibold rounded-full">
+			<span :style="`font-size: ${size/1.75}px;line-height: 1em`">{{ name[0] }}</span>
+		</span>
 		<img
-			v-if="source"
-			:onerror="`this.src = '${DEFAULT_PROFILE_IMAGE}'`"
-			:src="source"
-			:style="`width: ${size}px; height: ${size}px; border-radius: 10rem; object-fit: cover;`"
+			v-else
+			:onerror="`this.src = '${DEFAULT_PROFILE_PHOTO}'`"
+			:src="source || DEFAULT_PROFILE_PHOTO"
+			:style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
 			alt=""
-			class="!max-w-[1920px]"
+			class="!max-w-[1920px] rounded-full"
 		>
-		<template v-else>
-			<svg :style="`width: ${size}px; height: ${size}px;`" fill="none" height="36" viewBox="0 0 36 36" width="36"
-				xmlns="http://www.w3.org/2000/svg">
-				<path :fill="color" d="M18 0C8.0749 0 0 8.0749 0 18C0 27.9251 8.0749 36 18 36C27.9251 36 36 27.9251 36 18C36 8.0749 27.9251 0
-18 0ZM13.654 10.1094C14.7505 8.94721 16.2935 8.30769 18 8.30769C19.7065 8.30769 21.2357 8.95154 22.3364 10.1198C23.4519
- 11.3037 23.9945 12.8942 23.8664 14.6042C23.6103 18 20.9795 20.7692 18 20.7692C15.0205 20.7692 12.3845
- 18 12.1336 14.6034C12.0063 12.8795 12.5481 11.2838 13.654 10.1094ZM18 33.2308C15.9668 33.2321 13.9539
- 32.8252 12.0809 32.034C10.2079 31.2429 8.51279 30.0837 7.09615 28.6252C7.9075 27.4681 8.94129 26.4844
-  10.1371 25.7313C12.343 24.3173 15.1347 23.5385 18 23.5385C20.8653 23.5385 23.657 24.3173 25.8603 25.7313C27.0571
-  26.484 28.0918 27.4678 28.9038 28.6252C27.4873 30.0839 25.7923 31.2432 23.9192 32.0343C22.0462 32.8254 20.0333
-	 33.2323 18 33.2308Z" />
-			</svg>
-		</template>
+		<FileInput v-if="editable" accept="image/*"
+			class="rounded-full absolute h-6 w-6 right-0 bottom-0 bg-gray text-white flex items-center justify-center"
+			@files="catchPhoto">
+			<IonIcon :icon="pencilOutline" />
+		</FileInput>
 	</component>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { Media } from '@modules/core'
-import { DEFAULT_PROFILE_IMAGE } from '@utils/constants'
+import { Media, UploadedFile } from '@modules/core'
+import { DEFAULT_PROFILE_PHOTO } from '@utils/constants'
+import { pencilOutline } from 'ionicons/icons'
+import { useFileInputCallback } from '@app/composable/core/forms'
 
 export default defineComponent({
 	name: 'Avatar',
@@ -37,28 +37,34 @@ export default defineComponent({
 			default: ''
 		},
 		src: {
-			type: Object as PropType<Media | null>,
+			type: Object as PropType<Media | UploadedFile | null>,
 			default: null,
-			validator: (p: any) => p === null || p === undefined || typeof p.link === 'string'
+			validator: (p: any) => p === null || p === undefined || typeof p.link === 'string' || typeof p.url === 'string'
+		},
+		name: {
+			type: String,
+			required: false,
+			default: ''
 		},
 		size: {
 			required: false,
 			type: Number,
 			default: 40
 		},
-		color: {
+		editable: {
+			type: Boolean,
 			required: false,
-			type: String,
-			default: '#132740'
+			default: false
 		}
 	},
-	setup (props) {
+	setup (props, { emit }) {
 		const source = computed({
 			get: () => typeof props.src?.link === 'string' ? props.src.link : false,
 			set: () => {
 			}
 		})
-		return { source, DEFAULT_PROFILE_IMAGE }
+		const catchPhoto = useFileInputCallback(async ([file]) => emit('photo', file))
+		return { source, DEFAULT_PROFILE_PHOTO, pencilOutline, catchPhoto }
 	}
 })
 </script>

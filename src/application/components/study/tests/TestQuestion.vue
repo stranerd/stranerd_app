@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col items-start w-full">
+	<div class="flex flex-col items-start w-full bg-white md:rounded-xl border-bottom-line p-4">
 		<PageLoading v-if="loading" />
 
 		<div class="flex item-center justify-between mb-2 w-full">
@@ -7,7 +7,7 @@
 				Question {{ questionIndex + 1 }}
 			</ion-text>
 			<div class="flex items-center text-lg text-icon_inactive gap-4">
-				<IonIcon :icon="flag" @click="createReport(question)" />
+				<IonIcon :icon="flagOutline" @click="createReport(question)" />
 			</div>
 		</div>
 
@@ -18,21 +18,21 @@
 			<PhotoList v-if="question.questionMedia.length" :photos="question.questionMedia" />
 		</div>
 
-		<div v-if="question.isObjective" class="answers flex flex-col w-full gap-4">
+		<div v-if="question.isObjective" class="answers flex flex-col w-full">
 			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
-				class="w-full hover:bg-light_gray"
+				class="w-full hover:bg-new_gray rounded-lg py-4"
 				@click="answer(question.id, optionIndex)">
-				<div class="flex gap-2">
+				<div class="flex gap-2 items-center">
 					<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
-						:icon="checkmarkCircle" color="primary" size="large" />
-					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect" :icon="checkmarkCircle"
-						color="primary" size="large" />
-					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isInCorrect" :icon="closeCircle"
+						:icon="radioButtonOn" color="primary" size="large" />
+					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect"
+						:icon="checkmarkCircleOutline"
+						color="success" size="large" />
+					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isInCorrect"
+						:icon="closeCircleOutline"
 						color="danger" size="large" />
-					<span v-else
-						class="label border-4 rounded-full border-light_gray h-8 w-8 text-base font-bold grid place-items-center capitalize">
-						{{ getAlphabet(optionIndex + 1) }}.</span>
-					<IonText class="text-lg">
+					<IonIcon v-else :icon="radioButtonOff" size="large" />
+					<IonText>
 						<DisplayHtml :html="option" />
 					</IonText>
 				</div>
@@ -76,18 +76,22 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref } from 'vue'
 import {
-	checkmarkCircle,
+	checkmarkCircleOutline,
 	chevronDownOutline,
 	chevronUpOutline,
-	closeCircle,
-	ellipsisVertical,
-	flag
+	closeCircleOutline,
+	ellipsisVerticalOutline,
+	flagOutline,
+	radioButtonOff,
+	radioButtonOn
 } from 'ionicons/icons'
-import { PastQuestionEntity, PastQuestionType, TestEntity, TestType } from '@modules/study'
+import { TestEntity, TestType } from '@modules/study'
+import { PastQuestionEntity, PastQuestionType } from '@modules/school'
 import { getAlphabet } from '@utils/commons'
-import { useCreateReport } from '@app/composable/reports/pastQuestions'
+import { useCreateReport } from '@app/composable/reports/reports'
+import { ReportType } from '@modules/reports'
 
 export default defineComponent({
 	name: 'TestQuestion',
@@ -117,20 +121,27 @@ export default defineComponent({
 			}
 			return props.test.done
 		})
-		const { loading, error, createReport } = useCreateReport()
+		const { factory, loading, error, createReport } = useCreateReport()
 		// @ts-ignore
 		const isCorrect = computed(() => showAnswers.value && props.test.answers[props.question.id] === props.question.data.correctIndex)
 		// @ts-ignore
 		const isInCorrect = computed(() => showAnswers.value && props.test.answers[props.question.id] !== props.question.data.correctIndex)
 		const showExplanation = ref(false)
+		onMounted(() => {
+			factory.value.type = ReportType.pastQuestions
+			factory.value.reportedId = props.question.id
+			factory.value.message = 'Flagged'
+		})
 		return {
 			showAnswers,
+			checkmarkCircleOutline,
+			radioButtonOff,
 			chevronDownOutline,
 			chevronUpOutline,
-			flag,
-			ellipsisVertical,
-			checkmarkCircle,
-			closeCircle,
+			flagOutline,
+			ellipsisVerticalOutline,
+			radioButtonOn,
+			closeCircleOutline,
 			getAlphabet,
 			isCorrect,
 			isInCorrect,
@@ -140,19 +151,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	.btn-lgx {
-		@media (min-width: 1042px) {
-			--padding-top: 1.5rem;
-			--padding-bottom: 1.5rem;
-			--padding-start: 4.5rem;
-			--padding-end: 4.5rem;
-		}
-
-	}
-
-	input[type="radio"]:checked + label {
-		@apply border-primary
-	}
-</style>

@@ -13,16 +13,16 @@ export class ReferralRepository implements IReferralRepository {
 		this.transformer = transformer
 	}
 
-	async get (userId: string, query: QueryParams) {
-		const models = await this.dataSource.get(userId, query)
+	async get (query: QueryParams) {
+		const models = await this.dataSource.get(query)
 		return {
 			...models,
 			results: models.results.map(this.transformer.fromJSON)
 		}
 	}
 
-	async listenToOne (userId: string, id: string, listener: Listeners<ReferralEntity>) {
-		return this.dataSource.listenToOne(userId, id, {
+	async listenToOne (id: string, listener: Listeners<ReferralEntity>) {
+		return this.dataSource.listenToOne(id, {
 			created: async (model) => {
 				await listener.created(this.transformer.fromJSON(model))
 			},
@@ -35,8 +35,8 @@ export class ReferralRepository implements IReferralRepository {
 		})
 	}
 
-	async listenToMany (userId: string, query: QueryParams, listener: Listeners<ReferralEntity>, matches: (entity: ReferralEntity) => boolean) {
-		return this.dataSource.listenToMany(userId, query, {
+	async listenToMany (query: QueryParams, listener: Listeners<ReferralEntity>, matches: (entity: ReferralEntity) => boolean) {
+		return this.dataSource.listenToMany(query, {
 			created: async (model) => {
 				const entity = this.transformer.fromJSON(model)
 				if (matches(entity)) await listener.created(entity)

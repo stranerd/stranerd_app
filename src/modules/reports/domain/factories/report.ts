@@ -17,7 +17,7 @@ export class ReportFactory extends BaseFactory<ReportEntity, ReportToModel, Keys
 		message: { required: true, rules: [isString, isLongerThanX(0)] }
 	}
 
-	reserved = []
+	reserved = ['type', 'reportedId', 'message']
 
 	constructor () {
 		super({ reportedId: '', type: ReportType.users, message: '' })
@@ -45,6 +45,18 @@ export class ReportFactory extends BaseFactory<ReportEntity, ReportToModel, Keys
 
 	set reportedId (value: string) {
 		this.set('reportedId', value)
+	}
+
+	get isQuestionsType () {
+		return this.type === ReportType.questions
+	}
+
+	get isAnswersType () {
+		return this.type === ReportType.answers
+	}
+
+	get isUsersType () {
+		return this.type === ReportType.users
 	}
 
 	public toModel = async () => {

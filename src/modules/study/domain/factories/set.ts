@@ -1,24 +1,29 @@
 import { BaseFactory } from '@modules/core'
-import { isArrayOfX, isBoolean, isLongerThanX, isString } from '@stranerd/validate'
-import { SetEntity } from '../entities/set'
+import { arrayContainsX, isLongerThanX, isString } from '@stranerd/validate'
+import { SetEntity, SetType } from '../entities/set'
 import { SetToModel } from '../../data/models/set'
-import { getQuerySetId } from '@utils/query'
 
-export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
+type Keys = {
+	name: string, type: SetType, classId: string | null
+}
+
+export class SetFactory extends BaseFactory<SetEntity, SetToModel, Keys> {
 	readonly rules = {
-		name: { required: true, rules: [isString, isLongerThanX(0)] },
-		parent: { required: false, rules: [isString] },
-		isPublic: { required: true, rules: [isBoolean] },
-		tags: {
+		name: { required: true, rules: [isString, isLongerThanX(2)] },
+		type: {
 			required: true,
-			rules: [isArrayOfX((cur) => isString(cur).valid, 'strings')]
+			rules: [arrayContainsX(Object.keys(SetType), (cur, val) => cur === val)]
+		},
+		classId: {
+			required: () => this.isClassType,
+			rules: [isString]
 		}
 	}
 
 	reserved = []
 
 	constructor () {
-		super({ name: '', parent: getQuerySetId(), isPublic: true, tags: [] })
+		super({ name: '', type: SetType.users, classId: null })
 	}
 
 	get name () {
@@ -29,44 +34,47 @@ export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
 		this.set('name', value)
 	}
 
-	get parent () {
-		return this.values.parent
+	get type () {
+		return this.values.type
 	}
 
-	set parent (value: string | null) {
-		this.set('parent', value)
+	set type (value: SetType) {
+		this.set('type', value)
 	}
 
-	get isPublic () {
-		return this.values.isPublic
+	get classId () {
+		return this.values.classId
 	}
 
-	set isPublic (value: boolean) {
-		this.set('isPublic', value)
+	set classId (value: string | null) {
+		this.set('classId', value)
 	}
 
-	get tags () {
-		return this.values.tags
+	get isClassType () {
+		return this.type === SetType.classes
 	}
 
-	addTag = (value: string) => {
-		if (this.tags.find((t) => t === value.toLowerCase())) return
-		this.set('tags', [...this.tags, value.toLowerCase()])
+	get isUsersType () {
+		return this.type === SetType.users
 	}
-
-	removeTag = (value: string) => this.set('tags', this.tags.filter((tag) => tag !== value))
 
 	loadEntity = (entity: SetEntity) => {
 		this.name = entity.name
-		this.isPublic = entity.isPublic
-		this.parent = entity.parent
-		this.set('tags', entity.tags)
+		this.type = entity.data.type
+		if (entity.data.type === SetType.classes) {
+			this.classId = entity.data.classId
+		}
 	}
 
 	toModel = async () => {
 		if (this.valid) {
-			const { name, parent, isPublic, tags } = this.validValues
-			return { name, parent, isPublic, tags }
+			const { name, type, classId } = this.validValues
+			return {
+				name,
+				data: this.isClassType ? {
+					type: type as any, classId
+				} : { type: type as any }
+			}
 		} else {
 			throw new Error('Validation errors')
 		}

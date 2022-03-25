@@ -1,12 +1,13 @@
 <template>
 	<div class="flex mt-2 items-center">
-		<Avatar :id="comment.userId" :size="24" :src="comment.avatar" class="mr-2 ml-4" />
+		<Avatar :id="comment.userId" :name="comment.userBio.fullName" :size="24" :src="comment.userBio.photo"
+			class="mr-2 " />
 		<ion-text class="text-dark_gray">
 			<b class="flex gap-1 items-center">
 				<span>{{ comment.userBio.firstName }}</span>
 				<IonIcon v-if="comment.isUserVerified" :icon="checkmarkCircle" color="primary" />
 			</b>
-			<b>:</b>
+			<b class="mx-1"> - </b>
 			{{ comment.body }}
 		</ion-text>
 	</div>

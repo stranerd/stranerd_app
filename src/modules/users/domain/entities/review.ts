@@ -1,6 +1,7 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from './user'
+import { generateDefaultBio, generateDefaultRoles } from './user'
 import { appName } from '@utils/environment'
+import { UserBio, UserRoles } from '../types'
 
 export class ReviewEntity extends BaseEntity {
 	public readonly id: string
@@ -34,10 +35,6 @@ export class ReviewEntity extends BaseEntity {
 		this.userRoles = generateDefaultRoles(userRoles)
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
-	}
-
-	get avatar () {
-		return this.userBio.photo
 	}
 
 	get isUserVerified () {

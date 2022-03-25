@@ -13,6 +13,7 @@ import {
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
+import { addToArray } from '@utils/commons'
 
 const global = {
 	flashCards: ref([] as FlashCardEntity[]),
@@ -21,17 +22,21 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
-
-const pushToFlashCardList = (flashCard: FlashCardEntity) => {
-	const index = global.flashCards.value.findIndex((q) => q.id === flashCard.id)
-	if (index !== -1) global.flashCards.value.splice(index, 1, flashCard)
-	else global.flashCards.value.push(flashCard)
-}
-const unshiftToFlashCardList = (flashCard: FlashCardEntity) => {
-	const index = global.flashCards.value.findIndex((q) => q.id === flashCard.id)
-	if (index !== -1) global.flashCards.value.splice(index, 1, flashCard)
-	else global.flashCards.value.unshift(flashCard)
-}
+const listener = useListener(async () => {
+	const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
+	return await ListenToFlashCards.call({
+		created: async (entity) => {
+			addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
+		},
+		updated: async (entity) => {
+			addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
+		},
+		deleted: async (entity) => {
+			const index = global.flashCards.value.findIndex((q) => q.id === entity.id)
+			if (index !== -1) global.flashCards.value.splice(index, 1)
+		}
+	}, lastDate)
+})
 
 export const useFlashCardList = () => {
 	const fetchFlashCards = async () => {
@@ -41,35 +46,20 @@ export const useFlashCardList = () => {
 			const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
 			const flashCards = await GetFlashCards.call(lastDate)
 			global.hasMore.value = !!flashCards.pages.next
-			flashCards.results.forEach(pushToFlashCardList)
+			flashCards.results.forEach((f) => addToArray(global.flashCards.value, f, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)
 		}
 		await global.setLoading(false)
 	}
-	const listener = useListener(async () => {
-		const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
-		return await ListenToFlashCards.call({
-			created: async (entity) => {
-				unshiftToFlashCardList(entity)
-			},
-			updated: async (entity) => {
-				unshiftToFlashCardList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.flashCards.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.flashCards.value.splice(index, 1)
-			}
-		}, lastDate)
-	})
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchFlashCards()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { ...global, fetchOlderFlashCards: fetchFlashCards }
@@ -87,9 +77,9 @@ export const useCreateFlashCard = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const flashCardId = await AddFlashCard.call(factory.value)
+				const flashCard = await AddFlashCard.call(factory.value)
 				await setMessage('FlashCard submitted successfully')
-				await router.replace(`/study/flashCards/${flashCardId}`)
+				await router.push(`/study/flashCards/${flashCard.id}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -120,9 +110,9 @@ export const useEditFlashCard = (flashCardId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditFlashCard.call(flashCardId, factory.value)
+				const flashCard = await EditFlashCard.call(flashCardId, factory.value)
 				await setMessage('FlashCard updated successfully')
-				await router.replace(`/study/flashCards/${flashCardId}`)
+				await router.push(`/study/flashCards/${flashCard.id}`)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -168,7 +158,7 @@ export const useFlashCard = (flashCardId: string) => {
 	const flashCard = computed({
 		get: () => global.flashCards.value.find((q) => q.id === flashCardId) ?? null,
 		set: (q) => {
-			if (q) pushToFlashCardList(q)
+			if (q) addToArray(global.flashCards.value, q, (e) => e.id, (e) => e.createdAt)
 		}
 	})
 
@@ -182,7 +172,7 @@ export const useFlashCard = (flashCardId: string) => {
 				return
 			}
 			flashCard = await FindFlashCard.call(flashCardId)
-			if (flashCard) unshiftToFlashCardList(flashCard)
+			if (flashCard) addToArray(global.flashCards.value, flashCard, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
 		}
@@ -191,10 +181,10 @@ export const useFlashCard = (flashCardId: string) => {
 	const listener = useListener(async () => {
 		return await ListenToFlashCard.call(flashCardId, {
 			created: async (entity) => {
-				unshiftToFlashCardList(entity)
+				addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				unshiftToFlashCardList(entity)
+				addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
 				const index = global.flashCards.value.findIndex((q) => q.id === entity.id)
@@ -205,10 +195,10 @@ export const useFlashCard = (flashCardId: string) => {
 
 	onMounted(async () => {
 		await fetchFlashCard()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { error, loading, flashCard }

@@ -1,30 +1,19 @@
 <template>
 	<IonFooter class="ion-no-border">
-		<IonToolbar class="lg:hidden !bg-white">
-			<div class="flex justify-around items-center text-sm">
-				<router-link class="col-span-1 text-faded_gray flex flex-col items-center justify-center"
-					exact-active-class="!text-main_dark"
-					to="/dashboard">
-					<ion-icon :icon="home" class="w-6 md:w-14" />
-					<IonText>Home</IonText>
-				</router-link>
-				<router-link class="col-span-1 text-faded_gray flex flex-col items-center justify-center"
-					exact-active-class="!text-main_dark"
-					to="/search">
-					<ion-icon :icon="search" class="w-6 md:w-14" />
-					<IonText>Search</IonText>
-				</router-link>
-				<router-link class="col-span-1 text-faded_gray flex flex-col items-center justify-center"
-					exact-active-class="!text-main_dark"
-					to="/questions">
-					<ion-icon :icon="helpCircle" class="w-6 md:w-14" />
-					<IonText>Questions</IonText>
-				</router-link>
-				<router-link class="col-span-1 text-faded_gray flex flex-col items-center justify-center"
-					exact-active-class="!text-main_dark"
-					to="/study">
-					<ion-icon :icon="book" class="w-6 md:w-14" />
-					<IonText>Library</IonText>
+		<IonToolbar class="lg:hidden bg-white border-top-line">
+			<div class="flex justify-around items-center text-sub text-main_dark">
+				<router-link
+					v-for="{ path, icon, name, iconOutline } in [
+						{ name: 'Home', path: '/dashboard', icon: home, iconOutline:homeOutline },
+						{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
+						{ name: 'Library', path: '/study', icon: library, iconOutline:libraryOutline },
+						{ name: 'TestPreps', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
+						...(isProd ? [] : [{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }])
+					]" :key="path"
+					:to="path"
+					class="col-span-1 flex flex-col items-center justify-center">
+					<ion-icon :icon="$route.path === path ? icon : iconOutline " class="w-6 md:w-14" />
+					<IonText class="hidden md:inline">{{ name }}</IonText>
 				</router-link>
 			</div>
 		</IonToolbar>
@@ -34,26 +23,35 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonFooter, IonIcon, IonToolbar } from '@ionic/vue'
-import { add, book, calendarClear, chatbubble, helpCircle, home, people, search } from 'ionicons/icons'
+import {
+	helpCircle,
+	helpCircleOutline,
+	home,
+	homeOutline,
+	library,
+	libraryOutline,
+	people,
+	peopleOutline,
+	receipt,
+	receiptOutline,
+	search,
+	searchOutline
+} from 'ionicons/icons'
+import { isProd } from '@utils/environment'
 
 export default defineComponent({
 	components: { IonFooter, IonIcon, IonToolbar },
 	setup () {
 		return {
-			home, book, helpCircle,
-			people, search, chatbubble, add,
-			calendarClear
+			isProd,
+			homeOutline, libraryOutline, helpCircleOutline, peopleOutline, searchOutline, receiptOutline,
+			library, helpCircle, home, people, search, receipt
 		}
 	}
 })
 </script>
 
 <style scoped>
-	ion-toolbar {
-		--background: #FFFFFF;
-		--border-color: rgba(0, 0, 0, .4)
-	}
-
 	ion-tab-button {
 		--color-selected: #546DD3;
 		--padding-top: 1px;

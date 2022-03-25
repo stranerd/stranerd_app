@@ -14,25 +14,25 @@ export class ChatRepository implements IChatRepository {
 		this.transformer = transformer
 	}
 
-	async add (path: [string, string], data: ChatToModel) {
-		return await this.dataSource.create(path, data)
+	async add (data: ChatToModel) {
+		return this.transformer.fromJSON(await this.dataSource.create(data))
 	}
 
-	async get (path: [string, string], query: QueryParams) {
-		const models = await this.dataSource.get(path, query)
+	async get (query: QueryParams) {
+		const models = await this.dataSource.get(query)
 		return {
 			...models,
 			results: models.results.map(this.transformer.fromJSON)
 		}
 	}
 
-	async find (path: [string, string], id: string) {
-		const model = await this.dataSource.find(path, id)
+	async find (id: string) {
+		const model = await this.dataSource.find(id)
 		return model ? this.transformer.fromJSON(model) : model
 	}
 
-	async listenToOne (path: [string, string], id: string, listener: Listeners<ChatEntity>) {
-		return this.dataSource.listenToOne(path, id, {
+	async listenToOne (id: string, listener: Listeners<ChatEntity>) {
+		return this.dataSource.listenToOne(id, {
 			created: async (model) => {
 				await listener.created(this.transformer.fromJSON(model))
 			},
@@ -45,8 +45,8 @@ export class ChatRepository implements IChatRepository {
 		})
 	}
 
-	async listenToMany (path: [string, string], query: QueryParams, listener: Listeners<ChatEntity>, matches: (entity: ChatEntity) => boolean) {
-		return this.dataSource.listenToMany(path, query, {
+	async listenToMany (query: QueryParams, listener: Listeners<ChatEntity>, matches: (entity: ChatEntity) => boolean) {
+		return this.dataSource.listenToMany(query, {
 			created: async (model) => {
 				const entity = this.transformer.fromJSON(model)
 				if (matches(entity)) await listener.created(entity)
@@ -62,7 +62,7 @@ export class ChatRepository implements IChatRepository {
 		})
 	}
 
-	async markRead (path: [string, string], chatId: string, to: string) {
-		await this.dataSource.markRead(path, chatId, to)
+	async markRead (chatId: string, to: string) {
+		await this.dataSource.markRead(chatId, to)
 	}
 }

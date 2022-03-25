@@ -54,7 +54,7 @@ export class ChatFactory extends BaseFactory<ChatEntity, ChatToModel, Keys> {
 
 	toModel = async () => {
 		if (this.valid) {
-			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('chats', this.media)
+			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('sessions/chats', this.media)
 
 			const { to, content, media, sessionId } = this.validValues
 			return {

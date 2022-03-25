@@ -1,52 +1,45 @@
 <template>
-	<div class="w-full bg-white rounded-xl flex flex-col gap-2 box-border p-4">
-		<div class="flex items-center gap-2">
-			<ion-icon :icon="folder" class="text-dark_gray text-2xl" />
-			<ion-text class="text-dark_gray text-semibold w-full">{{ set.name }}</ion-text>
-			<ion-icon :icon="ellipsisVertical" class="text-dark_gray text-2xl" @click="openMenu" />
-		</div>
-
-		<span class="text-sm">{{ formatNumber(set.allSaved.length) }} {{
-			pluralize(set.allSaved.length, 'item', 'items')
-		}}</span>
-
-		<div class="w-full flex items-center justify-between">
-			<div class="flex items-center gap-2">
-				<Avatar :id="set.userId" :size="24" :src="set.userBio.photo" />
-				<ion-text class="text-xs font-bold text-main_dark flex items-center gap-1">
-					<span>{{ set.userBio.firstName }}</span>
-					<IonIcon v-if="set.isUserVerified" :icon="checkmarkCircle" color="primary" />
-				</ion-text>
+	<router-link :to="`/study/sets/${set.id}`"
+		class="bg-white rounded-xl flex flex-col box-border justify-between card-padding text-main_dark">
+		<ion-text class="font-500 truncate w-full">{{ set.name }}</ion-text>
+		<div class="w-full flex items-center justify-between gap-2 text-sub">
+			<Tag :tag="`${formatNumber(set.allSaved.length)} ${pluralize(set.allSaved.length, 'Item', 'Items')}`">
+				<template v-slot="slotProps">
+					<span class="flex items-center">
+						<ion-icon :icon="folderOutline" class="mr-1" />
+						<ion-text class="font-semibold">{{ slotProps.tag }}</ion-text>
+					</span>
+				</template>
+			</Tag>
+			<div class="flex items-center text-gray gap-2">
+				<Avatar :id="set.userId" :name="set.userBio.fullName" :size="24" :src="set.userBio.photo" />
+				<Share :link="set.shareLink" :title="set.name" cssClass="text-xl" text="Share this folder" />
+				<SaveToSet v-if="0 && set.userId !== id" :entity="set" />
 			</div>
-			<router-link :to="`/study/folders/${set.id}`">
-				<ion-button class="btn-outline text-primary font-bold w-full lg:min-w-[7.5rem]" size="small">
-					Open
-				</ion-button>
-			</router-link>
 		</div>
-	</div>
+	</router-link>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { SetEntity } from '@modules/study'
-import { checkmarkCircle, ellipsisVertical, folder } from 'ionicons/icons'
+import { folderOutline } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
+import { useAuth } from '@app/composable/auth/auth'
+import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'SetListCard',
+	components: { SaveToSet },
 	props: {
 		set: {
 			type: SetEntity,
 			required: true
-		},
-		openMenu: {
-			type: Function,
-			required: true
 		}
 	},
 	setup () {
-		return { ellipsisVertical, folder, pluralize, formatNumber, checkmarkCircle }
+		const { id } = useAuth()
+		return { folderOutline, pluralize, formatNumber, id }
 	}
 })
 </script>

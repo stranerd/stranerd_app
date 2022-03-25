@@ -1,45 +1,37 @@
 <template>
-	<div
-		class="m-0 w-full bg-white rounded-xl flex flex-col justify-between items-start gap-4 box-border p-4 text-main_dark">
-		<div class="w-full justify-between items-start flex">
-			<div class="text-base flex-col flex gap-2 items-start flex-grow truncate">
-				<ion-text class="font-semibold truncate">{{ note.title }}</ion-text>
-				<Tag :index="1" tag="Note">
-					<template v-slot="slotProps">
-						<span class="flex items-center">
-							<ion-icon :icon="document" class="text-base mr-1" />
-							<ion-text class="text-xs">{{ slotProps.tag }}</ion-text>
-						</span>
-					</template>
-				</Tag>
-			</div>
-			<ion-icon :icon="ellipsisVertical" class="text-gray text-xl" @click="openMenu" />
+	<component :is="content ? 'router-link' : 'span'" :to="`/study/notes/${note.id}`"
+		class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
+		<div class="w-full justify-between items-center flex gap-2">
+			<ion-text class="font-500 truncate w-full">{{ note.title }}</ion-text>
+			<IonSpinner v-if="loading" color="primary" />
+			<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-primary text-xl" @click="download" />
 		</div>
-		<div class="w-full flex items-center justify-between">
-			<div class="flex items-center gap-2">
-				<Avatar :id="note.userId" :size="24" :src="note.userBio.photo" />
-				<ion-text class="text-xs flex items-center gap-1">
-					<span>{{ note.userBio.firstName }}</span>
-					<IonIcon v-if="note.isUserVerified" :icon="checkmarkCircle" color="primary" />
-				</ion-text>
+
+		<div class="w-full flex items-center justify-between gap-2 text-sub">
+			<Tag :index="2" tag="Note">
+				<template v-slot="slotProps">
+					<span class="flex items-center">
+						<ion-icon :icon="documentOutline" class="text-base mr-1" />
+						<ion-text class="text-sub">{{ slotProps.tag }}</ion-text>
+					</span>
+				</template>
+			</Tag>
+			<div class="flex items-center text-gray gap-2">
+				<Avatar :id="note.userId" :name="note.userBio.fullName" :size="24" :src="note.userBio.photo" />
+				<Share :link="note.shareLink" :text="note.description" :title="note.title" cssClass="text-xl" />
+				<SaveToSet :entity="note" />
 			</div>
-			<router-link v-if="content" :to="`/study/notes/${note.id}`">
-				<ion-button class="btn-outline text-primary w-full lg:min-w-[7.5rem]" size="small">
-					Read
-				</ion-button>
-			</router-link>
-			<IonSpinner v-else-if="loading" color="primary" />
-			<IonIcon v-else :icon="downloadIcon" class="text-2xl" color="primary" @click="download" />
 		</div>
-	</div>
+	</component>
 </template>
 
 <script lang="ts">
-import { checkmarkCircle, document, download as downloadIcon, ellipsisVertical } from 'ionicons/icons'
+import { documentOutline, downloadOutline, ellipsisVerticalOutline } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { NoteEntity } from '@modules/study'
 import { IonSpinner } from '@ionic/vue'
 import { useDownload } from '@app/composable/meta/media'
+import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'NoteListCard',
@@ -47,13 +39,9 @@ export default defineComponent({
 		note: {
 			type: NoteEntity,
 			required: true
-		},
-		openMenu: {
-			type: Function,
-			required: true
 		}
 	},
-	components: { IonSpinner },
+	components: { IonSpinner, SaveToSet },
 	setup (props) {
 		const {
 			loading,
@@ -64,8 +52,14 @@ export default defineComponent({
 		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
 
 		return {
-			ellipsisVertical, document, downloadIcon, checkmarkCircle,
-			download, loading, content, error, deleteFromDownloads
+			ellipsisVerticalOutline,
+			documentOutline,
+			downloadOutline,
+			download,
+			loading,
+			content,
+			error,
+			deleteFromDownloads
 		}
 	}
 })

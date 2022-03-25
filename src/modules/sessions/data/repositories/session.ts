@@ -15,7 +15,7 @@ export class SessionRepository implements ISessionRepository {
 	}
 
 	async add (data: SessionToModel) {
-		return await this.dataSource.create(data)
+		return this.transformer.fromJSON(await this.dataSource.create(data))
 	}
 
 	async get (query: QueryParams) {

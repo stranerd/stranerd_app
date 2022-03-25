@@ -1,29 +1,25 @@
 <template>
-	<div v-if="loading" class="flex items-center justify-center w-full col-span-12 pt-12 px-5">
+	<div v-if="loading" class="flex items-center justify-center w-full col-span-12 py-8">
 		<ion-progress-bar type="indeterminate"></ion-progress-bar>
 	</div>
-	<div v-else class="col-span-12 flex flex-col px-3 text-body">
-		<div v-for="flashCard in flashCards" :key="flashCard.hash" class="w-full md:px-2 md:py-3 mb-4 md:mb-0">
-			<FlashCardListCard :flashCard="flashCard" :openMenu="(event) => openMenu(flashCard, event)" />
-		</div>
-		<EmptyState v-if="!loading && !error && flashCards.length === 0"
-			info="This user hasn't created any flashCards yet or they are marked private" />
+	<div v-else class="col-span-12 md:gap-4 flex flex-col">
+		<SetListCard v-for="set in sets" :key="set.hash" :set="set" />
+		<EmptyState v-if="!loading && !error && sets.length === 0"
+			info="This user hasn't created any folders yet or they are marked private" />
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonProgressBar } from '@ionic/vue'
-import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
-import { useUserFlashCardList } from '@app/composable/users/user/flashCards'
+import SetListCard from '@app/components/study/sets/SetListCard.vue'
 import EmptyState from '../../core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
-import { FlashCardEntity } from '@modules/study'
-import { openStudyEntityMenu } from '@app/composable/study/menus'
+import { useUserSetList } from '@app/composable/users/users/sets'
 
 export default defineComponent({
-	name: 'ProfileFolders',
-	components: { FlashCardListCard, IonProgressBar, EmptyState },
+	name: 'ProfileSets',
+	components: { SetListCard, IonProgressBar, EmptyState },
 	props: {
 		user: {
 			type: UserEntity,
@@ -31,9 +27,8 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { flashCards, error, loading } = useUserFlashCardList(props.user.id)
-		const openMenu = (entity: FlashCardEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
-		return { flashCards, error, loading, openMenu }
+		const { sets, error, loading } = useUserSetList(props.user.id)
+		return { sets, error, loading }
 	}
 })
 </script>

@@ -1,8 +1,6 @@
 <template>
 	<Justified>
-		<div>
-			<Leaderboard class="" />
-		</div>
+		<Leaderboard />
 	</Justified>
 </template>
 

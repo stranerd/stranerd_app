@@ -11,8 +11,7 @@ export class TestPrepApiDataSource implements TestPrepBaseDataSource {
 	}
 
 	async create (data: TestPrepToModel) {
-		const testPrep = await this.stranerdClient.post<TestPrepToModel, TestPrepFromModel>('/', data)
-		return testPrep.id
+		return await this.stranerdClient.post<TestPrepToModel, TestPrepFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -24,14 +23,14 @@ export class TestPrepApiDataSource implements TestPrepBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<TestPrepFromModel>) {
-		const listener = listenOnSocket(`testPreps/${id}`, listeners)
+		const listener = listenOnSocket(`study/testPreps/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<TestPrepFromModel>) {
-		const listener = listenOnSocket('testPreps', listeners)
+		const listener = listenOnSocket('study/testPreps', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
@@ -42,6 +41,6 @@ export class TestPrepApiDataSource implements TestPrepBaseDataSource {
 	}
 
 	async update (id: string, data: TestPrepToModel) {
-		await this.stranerdClient.put<TestPrepToModel, TestPrepFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<TestPrepToModel, TestPrepFromModel>(`/${id}`, data)
 	}
 }

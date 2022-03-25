@@ -1,7 +1,8 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
 import { apiBases } from '@utils/environment'
 import { UserBaseDataSource } from '../datasources/user-base'
-import { TutorUpdate, UserFromModel } from '../models/user'
+import { UserFromModel } from '../models/user'
+import { UserSchoolData } from '../../domain/types'
 
 export class UserApiDataSource implements UserBaseDataSource {
 	private stranerdClient: HttpClient
@@ -19,14 +20,14 @@ export class UserApiDataSource implements UserBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<UserFromModel>) {
-		const listener = listenOnSocket(`users/${id}`, listeners)
+		const listener = listenOnSocket(`users/users/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<UserFromModel>) {
-		const listener = listenOnSocket('users', listeners)
+		const listener = listenOnSocket('users/users', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
@@ -37,7 +38,7 @@ export class UserApiDataSource implements UserBaseDataSource {
 		await this.stranerdClient.post<{}, Streak>('/streak', {})
 	}
 
-	async updateTutor (tutor: TutorUpdate) {
-		await this.stranerdClient.post<TutorUpdate, any>('/subjects', tutor)
+	async updateSchool (school: UserSchoolData) {
+		await this.stranerdClient.put<UserSchoolData, boolean>('/school', school)
 	}
 }

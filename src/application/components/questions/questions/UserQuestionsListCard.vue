@@ -1,12 +1,12 @@
 <template>
-	<div :id="question.id"
-		class="p-4 md:p-6 rounded-xl bg-white flex flex-col w-full text-xs md:text-sm relative cursor-pointer">
-		<ion-ripple-effect class="rounded-xl"></ion-ripple-effect>
-		<div class="flex flex-row items-center">
-			<div class=" flex flex-row items-center">
-				<span class="font-bold text-main_dark lg:text-base text-xs"><Subject :subject-id="question.subjectId" /></span>
+	<router-link :id="question.id" :to="`/questions/${question.id}`"
+		class="card-padding rounded-xl bg-white flex flex-col w-full relative cursor-pointer">
+		<ion-ripple-effect class="rounded-xl" />
+		<div class="flex items-center">
+			<div class="flex items-center">
+				<span class="font-bold text-main_dark text-sub capitalize">{{ question.subject }}</span>
 			</div>
-			<div class="flex flex-row-reverse flex-grow">
+			<div class="flex justify-end flex-grow">
 				<span class="font-bold text-icon_inactive lg:block hidden">
 					{{
 						formatNumber(question.answers.length)
@@ -14,24 +14,19 @@
 				</span>
 			</div>
 		</div>
-		<router-link :to="`/questions/${question.id}`" class="py-2 text-main_dark leading-normal lg:text-base text-xs">
+		<span class="text-main_dark leading-normal text-sub">
 			{{ question.trimmedBody }}
-		</router-link>
+		</span>
 
-		<div class="w-full flex flex-col lg:flex-row lg:justify-between lg:items-center mt-2">
-			<div class=" flex flex-row items-center flex-wrap gap-4">
-				<QuestionTag v-for="(tag, index) in question.tags" :key="index" :index="index" :tag="tag" />
-			</div>
-
-			<div class=" flex flex-row items-center justify-between mt-3 lg:mt-0">
-				<span class="font-bold text-icon_inactive ">Posted: {{ formatTime(question.createdAt) }}</span>
-				<span class="font-bold text-icon_inactive lg:hidden">	{{
-					formatNumber(question.answers.length)
-				}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
-			</div>
+		<div class="flex items-center justify-between">
+			<span class="font-bold text-icon_inactive ">Posted: {{ formatTime(question.createdAt) }}</span>
+			<span class="font-bold text-icon_inactive lg:hidden">	{{
+				formatNumber(question.answers.length)
+			}} {{ pluralize(question.answers.length, 'answer', 'answers') }}</span>
 		</div>
-	</div>
+	</router-link>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonRippleEffect } from '@ionic/vue'
@@ -39,8 +34,6 @@ import { arrowRedo, flag } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatNumber, pluralize } from '@utils/commons'
 import { formatTime } from '@utils/dates'
-import Subject from '../subjects/Subject.vue'
-import QuestionTag from '../tags/QuestionTag.vue'
 
 export default defineComponent({
 	props: {
@@ -49,13 +42,9 @@ export default defineComponent({
 			type: QuestionEntity
 		}
 	},
+	components: { IonRippleEffect },
 	setup () {
 		return { formatTime, formatNumber, pluralize, arrowRedo, flag }
-	},
-	components: {
-		IonRippleEffect,
-		Subject,
-		QuestionTag
 	}
 })
 </script>

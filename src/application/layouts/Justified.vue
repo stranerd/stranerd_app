@@ -1,13 +1,12 @@
 <template>
 	<IonPage>
-		<InnerTopBar />
+		<Topbar v-if="!hideTop" />
 		<IonContent>
 			<div class="layout-page !px-0">
 				<div class="layout-body !w-full">
 					<slot />
 				</div>
 			</div>
-			<Fab v-if="!hideFab" />
 		</IonContent>
 		<BottomNav v-if="!hideBottom" class="mt-auto" />
 	</IonPage>
@@ -16,14 +15,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonContent, IonPage } from '@ionic/vue'
-import InnerTopBar from '@app/components/layout/topNavigations/InnerTopBar.vue'
+import Topbar from '@app/components/layout/topNavigations/Topbar.vue'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
-import Fab from '@app/components/layout/Fab.vue'
 
 export default defineComponent({
 	name: 'JustifiedLayout',
 	props: {
-		hideFab: {
+		hideTop: {
 			required: false,
 			default: false
 		},
@@ -32,6 +30,6 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: { InnerTopBar, IonPage, IonContent, BottomNav, Fab }
+	components: { Topbar, IonPage, IonContent, BottomNav }
 })
 </script>

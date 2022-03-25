@@ -3,20 +3,19 @@ import {
 	AddTest,
 	EndTest,
 	FindTest,
-	GetTestQuestions,
 	GetTests,
-	ListenToTest,
 	ListenToTests,
-	PastQuestionEntity,
 	TestEntity,
 	TestPrepEntity,
 	TestType,
 	UpdateTestAnswer
 } from '@modules/study'
+import { GetTestQuestions, PastQuestionEntity } from '@modules/school'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useRouter } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 import { useRedirectToAuth } from '@app/composable/auth/session'
+import { addToArray } from '@utils/commons'
 
 const global = {
 	tests: ref([] as TestEntity[]),
@@ -25,6 +24,20 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
+const listener = useListener(async () => {
+	return await ListenToTests.call({
+		created: async (entity) => {
+			addToArray(global.tests.value, entity, (e) => e.id, (e) => e.createdAt)
+		},
+		updated: async (entity) => {
+			addToArray(global.tests.value, entity, (e) => e.id, (e) => e.createdAt)
+		},
+		deleted: async (entity) => {
+			const index = global.tests.value.findIndex((q) => q.id === entity.id)
+			if (index !== -1) global.tests.value.splice(index, 1)
+		}
+	})
+})
 
 const testGlobal = {} as Record<string, {
 	questions: Ref<PastQuestionEntity[]>
@@ -33,17 +46,6 @@ const testGlobal = {} as Record<string, {
 	questionIndex: Ref<number>,
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-const pushToTestList = (test: TestEntity) => {
-	const index = global.tests.value.findIndex((q) => q.id === test.id)
-	if (index !== -1) global.tests.value.splice(index, 1, test)
-	else global.tests.value.push(test)
-}
-const unshiftToTestList = (test: TestEntity) => {
-	const index = global.tests.value.findIndex((q) => q.id === test.id)
-	if (index !== -1) global.tests.value.splice(index, 1, test)
-	else global.tests.value.unshift(test)
-}
-
 export const useTestList = () => {
 	const fetchTests = async () => {
 		await global.setError('')
@@ -51,40 +53,26 @@ export const useTestList = () => {
 			await global.setLoading(true)
 			const tests = await GetTests.call()
 			global.hasMore.value = !!tests.pages.next
-			tests.results.forEach(pushToTestList)
+			tests.results.forEach((t) => addToArray(global.tests.value, t, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)
 		}
 		await global.setLoading(false)
 	}
-	const listener = useListener(async () => {
-		return await ListenToTests.call({
-			created: async (entity) => {
-				unshiftToTestList(entity)
-			},
-			updated: async (entity) => {
-				unshiftToTestList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.tests.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.tests.value.splice(index, 1)
-			}
-		})
-	})
 
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTests()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	const unCompletedTests = computed({
-		get: () => global.tests.value.filter((test) => !test.done && test.progress !== 100),
+		get: () => global.tests.value.filter((test) => !test.done),
 		set: (tests) => {
-			tests.forEach(pushToTestList)
+			tests.forEach((t) => addToArray(global.tests.value, t, (e) => e.id, (e) => e.createdAt))
 		}
 	})
 
@@ -104,12 +92,12 @@ export const useCreateTest = () => {
 		if (!loading.value) {
 			try {
 				await setLoading(true)
-				const testId = await AddTest.call({
+				const test = await AddTest.call({
 					name: prep.name,
 					prepId: prep.id,
 					data: timed ? { type: TestType.timed, time: prep.time } : { type: TestType.unTimed }
 				})
-				await router.push(`/study/tests/${testId}/take`)
+				await router.push(`/study/tests/${test.id}/take`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -126,7 +114,7 @@ export const useTest = (testId: string) => {
 	const test = computed({
 		get: () => global.tests.value.find((q) => q.id === testId) ?? null,
 		set: (q) => {
-			if (q) pushToTestList(q)
+			if (q) addToArray(global.tests.value, q, (e) => e.id, (e) => e.createdAt)
 		}
 	})
 
@@ -140,33 +128,19 @@ export const useTest = (testId: string) => {
 				return
 			}
 			test = await FindTest.call(testId)
-			if (test) unshiftToTestList(test)
+			if (test) addToArray(global.tests.value, test, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
 		}
 		await setLoading(false)
 	}
-	const listener = useListener(async () => {
-		return await ListenToTest.call(testId, {
-			created: async (entity) => {
-				unshiftToTestList(entity)
-			},
-			updated: async (entity) => {
-				unshiftToTestList(entity)
-			},
-			deleted: async (entity) => {
-				const index = global.tests.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.tests.value.splice(index, 1)
-			}
-		})
-	})
 
 	onMounted(async () => {
 		await fetchTest()
-		await listener.startListener()
+		await listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.closeListener()
+		await listener.close()
 	})
 
 	return { error, loading, test }

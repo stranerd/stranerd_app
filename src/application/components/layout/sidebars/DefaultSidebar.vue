@@ -1,18 +1,18 @@
 <template>
 	<div
-		class="hidden lg:flex bg-white py-3 pl-3 w-[16%] h-full left-0 top-0 flex-col z-30">
-		<div class="flex flex-col pl-8 mt-6">
-			<router-link v-for="{ path, icon, name } in [
-					{ name: 'home', path: '/dashboard', icon: home },
-					{ name: 'questions', path: '/questions', icon: helpCircle },
-					{ name: 'library', path: '/study', icon: library }
+		class="hidden lg:flex py-3 bg-white h-full flex-col text-icon_inactive">
+		<div class="flex flex-col pl-8 py-6">
+			<router-link v-for="{ path, icon, name, iconOutline } in [
+					{ name: 'Home', path: '/dashboard', icon: home, iconOutline:homeOutline },
+					{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
+					{ name: 'TestPreps', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
+					{ name: 'Library', path: '/study', icon: library, iconOutline:libraryOutline },
+					...(isProd ? [] : [{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }])
 				]" :key="path" :to="path"
-				class="flex flex-col rounded-l-full text-icon_inactive cursor-pointer text-sm hover:text-main_dark mb-2">
-				<div :class="{'text-main_dark bg-new_gray active-route-link relative' : $route.path === path }"
-					class="py-5 flex flex-row px-4 items-center rounded-l-full">
-					<ion-icon :icon="icon" class="text-[23px] mr-4"></ion-icon>
-					<span class="font-semibold capitalize">{{ name }}</span>
-				</div>
+				class="flex py-6 px-8 items-center rounded-l-full text-sub hover:text-main_dark font-bold"
+				exact-active-class="text-main_dark bg-new_gray !py-4">
+				<ion-icon :icon="$route.path === path ? icon : iconOutline " class="text-[23px] mr-4" />
+				<span class="capitalize">{{ name }}</span>
 			</router-link>
 		</div>
 	</div>
@@ -20,46 +20,29 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { calendarClear, helpCircle, home, library, people } from 'ionicons/icons'
-import { useRoute } from 'vue-router'
+import {
+	helpCircle,
+	helpCircleOutline,
+	home,
+	homeOutline,
+	library,
+	libraryOutline,
+	people,
+	peopleOutline,
+	receipt,
+	receiptOutline
+} from 'ionicons/icons'
 import { IonIcon } from '@ionic/vue'
+import { isProd } from '@utils/environment'
 
 export default defineComponent({
 	components: { IonIcon },
 	setup () {
-		const route = useRoute()
 		return {
-			library,
-			home,
-			helpCircle,
-			people,
-			route,
-			calendarClear
+			isProd,
+			libraryOutline, homeOutline, helpCircleOutline, peopleOutline, receiptOutline,
+			library, home, helpCircle, people, receipt
 		}
 	}
 })
 </script>
-
-<style scoped>
-	.active-route-link::after,
-	.active-route-link::before {
-		content: "";
-		position: absolute;
-		background-color: transparent;
-		height: 3rem;
-		width: 1.5rem;
-		right: 0;
-	}
-
-	.active-route-link::before {
-		bottom: -50px;
-		border-top-right-radius: 1.5rem;
-		box-shadow: 0 -1.5rem 0 0 #F2F3F5;
-	}
-
-	.active-route-link::after {
-		top: -3rem;
-		border-bottom-right-radius: 1.5rem;
-		box-shadow: 0 1.5rem 0 0 #F2F3F5;
-	}
-</style>

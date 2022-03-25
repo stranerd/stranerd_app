@@ -1,5 +1,5 @@
 <template>
-	<ion-toolbar class="hidden lg:flex border-0 z-50 h-16">
+	<ion-toolbar class="hidden lg:flex border-0 h-20">
 		<div class="flex items-center">
 			<div class="w-[16%]">
 				<router-link class="flex items-center w-full justify-center" to="/">
@@ -10,24 +10,24 @@
 				<div class="w-3/4 flex-auto flex flex-row items-center">
 					<Search class="flex-grow" />
 				</div>
-				<div class="w-[25%] flex-auto flex">
+				<div class="w-[25%] flex-auto flex text-main_dark">
 					<div class="flex flex-row items-center py-1 gap-8 justify-between">
-						<ion-icon :icon="addCircle" class="text-2xl text-main_dark"
+						<ion-icon :icon="addCircleOutline" class="text-2xl"
 							@click="openCreateDashboardMenu" />
-						<router-link class="flex flex-row items-center justify-center"
+						<router-link class="flex items-center justify-center"
 							to="/notifications">
-							<NotificationIcon :key="user?.id" class="text-2xl text-main_dark" />
+							<NotificationIcon :key="user?.id" class="text-2xl" />
 						</router-link>
 						<div v-if="isLoggedIn"
-							class=" font-bold flex flex-row items-center justify-center gap-2 cursor-pointer"
+							class="font-bold flex items-center justify-center gap-2 cursor-pointer"
 							@click="openUserDashboardMenu"
 						>
-							<avatar :size="24" :src="user.avatar" />
-							<span class="text-base text-main_dark truncate max-w-[150px] flex items-center gap-1">
-								<span>{{ user.fullName }}</span>
-								<IonIcon v-if="user.isVerified" :icon="checkmarkCircle" color="primary" />
+							<avatar :name="user?.bio.fullName" :size="24" :src="user?.bio.photo" />
+							<span class="truncate max-w-[150px] flex items-center gap-1">
+								<span>{{ user.bio.fullName }}</span>
+								<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
 							</span>
-							<ion-icon :icon="chevronDown" class="text-xl text-main_dark"></ion-icon>
+							<ion-icon :icon="chevronDownOutline" class="text-xl"></ion-icon>
 						</div>
 						<router-link v-else to="/auth/signin">
 							<avatar :size="24" />
@@ -42,7 +42,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonToolbar } from '@ionic/vue'
-import { addCircle, checkmarkCircle, chevronDown } from 'ionicons/icons'
+import { addCircleOutline, checkmarkCircleOutline, chevronDownOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useMenuPopover } from '@app/composable/core/modals'
 import Search from '@app/components/search/Search.vue'
@@ -58,7 +58,7 @@ export default defineComponent({
 
 		return {
 			openCreateDashboardMenu, openUserDashboardMenu,
-			addCircle, chevronDown, checkmarkCircle,
+			addCircleOutline, chevronDownOutline, checkmarkCircleOutline,
 			isLoggedIn, user, signout
 		}
 	}

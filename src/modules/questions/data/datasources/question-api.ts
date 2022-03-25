@@ -11,8 +11,7 @@ export class QuestionApiDataSource implements QuestionBaseDataSource {
 	}
 
 	async create (data: QuestionToModel) {
-		const question = await this.stranerdClient.post<QuestionToModel, QuestionFromModel>('/', data)
-		return question.id
+		return await this.stranerdClient.post<QuestionToModel, QuestionFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -24,14 +23,14 @@ export class QuestionApiDataSource implements QuestionBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<QuestionFromModel>) {
-		const listener = listenOnSocket(`questions/${id}`, listeners)
+		const listener = listenOnSocket(`questions/questions/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<QuestionFromModel>) {
-		const listener = listenOnSocket('questions', listeners)
+		const listener = listenOnSocket('questions/questions', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
@@ -46,6 +45,6 @@ export class QuestionApiDataSource implements QuestionBaseDataSource {
 	}
 
 	async update (id: string, data: QuestionToModel) {
-		await this.stranerdClient.put<QuestionToModel, QuestionFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<QuestionToModel, QuestionFromModel>(`/${id}`, data)
 	}
 }

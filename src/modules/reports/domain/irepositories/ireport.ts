@@ -3,7 +3,7 @@ import { ReportEntity } from '../entities/report'
 import { ReportToModel } from '../../data/models/report'
 
 export interface IReportRepository {
-	add: (data: ReportToModel) => Promise<string>,
+	add: (data: ReportToModel) => Promise<ReportEntity>,
 	find: (id: string) => Promise<ReportEntity | null>
 	get: (query: QueryParams) => Promise<QueryResults<ReportEntity>>
 	listenToOne: (id: string, listener: Listeners<ReportEntity>) => Promise<() => void>

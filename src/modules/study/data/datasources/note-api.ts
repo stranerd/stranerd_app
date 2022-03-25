@@ -2,7 +2,6 @@ import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from
 import { apiBases } from '@utils/environment'
 import { NoteFromModel, NoteToModel } from '../models/note'
 import { NoteBaseDataSource } from './note-base'
-import { getSetIdQuery } from '@utils/query'
 
 export class NoteApiDataSource implements NoteBaseDataSource {
 	private stranerdClient: HttpClient
@@ -12,8 +11,7 @@ export class NoteApiDataSource implements NoteBaseDataSource {
 	}
 
 	async create (data: NoteToModel) {
-		const note = await this.stranerdClient.post<NoteToModel, NoteFromModel>('/', { ...getSetIdQuery(), ...data })
-		return note.id
+		return await this.stranerdClient.post<NoteToModel, NoteFromModel>('/', data)
 	}
 
 	async find (id: string) {
@@ -25,14 +23,14 @@ export class NoteApiDataSource implements NoteBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<NoteFromModel>) {
-		const listener = listenOnSocket(`notes/${id}`, listeners)
+		const listener = listenOnSocket(`study/notes/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<NoteFromModel>) {
-		const listener = listenOnSocket('notes', listeners)
+		const listener = listenOnSocket('study/notes', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
@@ -43,6 +41,6 @@ export class NoteApiDataSource implements NoteBaseDataSource {
 	}
 
 	async update (id: string, data: NoteToModel) {
-		await this.stranerdClient.put<NoteToModel, NoteFromModel>(`/${id}`, data)
+		return await this.stranerdClient.put<NoteToModel, NoteFromModel>(`/${id}`, data)
 	}
 }

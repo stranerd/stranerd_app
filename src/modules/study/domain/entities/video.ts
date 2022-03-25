@@ -6,15 +6,12 @@ export class VideoEntity extends BaseEntity {
 	public readonly id: string
 	public readonly title: string
 	public readonly description: string
-	public readonly tags: string[]
 	public readonly userId: string
 	public readonly userBio: UserBio
 	public readonly userRoles: UserRoles
-	public readonly isPublic: boolean
 	public readonly isHosted: boolean
 	public readonly link: string | null
 	public readonly media: Media | null
-	public readonly preview: Media | null
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -22,15 +19,12 @@ export class VideoEntity extends BaseEntity {
 		             id,
 		             title,
 		             description,
-		             tags,
 		             userId,
 		             userBio,
 		             userRoles,
-		             isPublic,
 		             isHosted,
 		             link,
 		             media,
-		             preview,
 		             createdAt,
 		             updatedAt
 	             }: VideoConstructorArgs) {
@@ -38,15 +32,12 @@ export class VideoEntity extends BaseEntity {
 		this.id = id
 		this.title = title
 		this.description = description
-		this.tags = tags
 		this.userId = userId
 		this.userBio = generateDefaultBio(userBio)
 		this.userRoles = generateDefaultRoles(userRoles)
-		this.isPublic = isPublic
 		this.isHosted = isHosted
 		this.link = link
 		this.media = media ? parseMedia(media) : null
-		this.preview = preview ? parseMedia(preview) : null
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -54,21 +45,26 @@ export class VideoEntity extends BaseEntity {
 	get isUserVerified () {
 		return this.userRoles[appName].isVerified
 	}
+
+	get shareLink () {
+		return `/study/videos/${this.id}`
+	}
+
+	search (search: string) {
+		return this.title.toLowerCase().includes(search.toLowerCase()) || this.title.toLowerCase().includes(search.toLowerCase())
+	}
 }
 
 type VideoConstructorArgs = {
 	id: string,
-	isPublic: boolean
 	isHosted: boolean
 	link: string | null
 	media: Media | null
-	preview: Media | null
 	userId: string
 	userBio: UserBio
 	userRoles: UserRoles
 	title: string
 	description: string
-	tags: string[]
 	createdAt: number
 	updatedAt: number
 }

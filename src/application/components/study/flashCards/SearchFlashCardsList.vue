@@ -2,8 +2,7 @@
 	<div>
 		<EmptyState v-if="filtered.length === 0" info="No results found." />
 		<div class="showcase">
-			<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard"
-				:openMenu="(event) => openMenu(flashCard, event)" />
+			<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard" />
 		</div>
 	</div>
 </template>
@@ -12,7 +11,6 @@
 import { computed, defineComponent, PropType } from 'vue'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import { FlashCardEntity } from '@modules/study'
-import { openStudyEntityMenu } from '@app/composable/study/menus'
 
 export default defineComponent({
 	name: 'SearchFlashCardsList',
@@ -29,9 +27,8 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const openMenu = (entity: FlashCardEntity, event: Event) => openStudyEntityMenu(entity, {}, event)
 		const filtered = computed(() => props.flashCards.slice(0, props.sliced ? 6 : undefined))
-		return { filtered, openMenu }
+		return { filtered }
 	}
 })
 </script>

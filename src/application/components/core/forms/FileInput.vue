@@ -34,7 +34,7 @@ export default defineComponent({
 	setup (props, { emit }) {
 		const fileInput = ref(null as HTMLInputElement | null)
 		const openFileSelect = async () => {
-			if (fileInput.value) fileInput.value.value = ''
+			if (fileInput.value) fileInput.value.value = null as any
 			fileInput.value?.click()
 		}
 		const handler = async (e: Event) => {

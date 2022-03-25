@@ -4,10 +4,10 @@ module.exports = {
 	mode: 'jit',
 	theme: {
 		screens: {
-			'sm': '640px',
-			'md': '768px',
-			'lg': '1280px',
-			'xl': '1420px',
+			sm: '640px',
+			md: '768px',
+			lg: '1280px',
+			xl: '1420px',
 			'2xl': '1536px'
 		},
 		extend: {
@@ -19,6 +19,7 @@ module.exports = {
 				cyan: '#54B5D3',
 				gray: '#64778A',
 				red: '#FF6666',
+				line: '#EBECEE',
 				pink: '#FF6496',
 				yellow_star: '#FFD11C',
 				light_gray: '#FCFCFC',
@@ -32,7 +33,7 @@ module.exports = {
 				green: '#00D246'
 			},
 			fontFamily: {
-				'rale': ['Raleway', 'sans-serif']
+				rale: ['Raleway', 'sans-serif']
 			}
 		}
 	},

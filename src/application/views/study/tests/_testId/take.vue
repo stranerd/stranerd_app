@@ -1,15 +1,19 @@
 <template>
-	<Justified :hideBottom="true" :hideFab="true">
-		<div class="blueTop !mb-0">
-			<div class="flex items-center">
-				<ion-text class="text-white font-semibold text-center text-xl">
-					{{ test?.name ?? '' }}
-				</ion-text>
+	<Justified :hideBottom="true">
+		<div v-if="test">
+			<div class="blueTop !mb-0">
+				<div
+					class="flex items-center md:justify-between justify-center w-full lg:w-8/12 p-4 mx-auto text-lg border-bottom-line">
+					<ion-text class="font-bold hidden md:block capitalize">
+						{{ test.isTimed ? 'Test' : 'Study' }}
+					</ion-text>
+					<ion-text class="text-main_dark text-center capitalize">
+						{{ test.name }}
+					</ion-text>
+				</div>
 			</div>
+			<TestBody v-if="test" :test="test" class="lg:w-8/12 w-full mx-auto" />
 		</div>
-
-		<TestBody v-if="test" :test="test" />
-
 		<PageLoading v-if="loading" />
 	</Justified>
 </template>

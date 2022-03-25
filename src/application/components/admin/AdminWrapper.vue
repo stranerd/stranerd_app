@@ -1,45 +1,22 @@
 <template>
 	<Justified>
 		<div>
-			<div class="blueTop flex-col items-center">
-				<div class="sm:flex hidden w-full justify-center items-center px-4 mt-auto">
-					<ion-icon :icon="cog" class="text-3xl text-white"></ion-icon>
-					<ion-text class="text-white heading font-bold mx-4">
-						Administration
-					</ion-text>
-					<ion-icon :icon="cog" class="text-3xl text-white"></ion-icon>
+			<div class="bg-white md:px-4 lg:px-0">
+				<div class="sm:flex hidden p-4 w-full justify-center items-center text-main_dark gap-4">
+					<ion-icon :icon="cogOutline" class="text-3xl" />
+					<ion-text class="text-main_dark text-heading font-bold">Administration</ion-text>
+					<ion-icon :icon="cogOutline" class="text-3xl" />
 				</div>
-
-				<div
-					class="mb-0.5 justify-center md:text-sm lg:text-base lg:items-center flex flex-row lg:w-7/12 w-full lg:px-3 text-xs mx-auto text-faded_gray font-bold whitespace-normal overflow-x-auto mt-auto">
-					<router-link :to="`/admin/users/admins`"
-						class="py-2 lg:mr-12 mr-4 cursor-pointer"
-						exact-active-class="border-b-4 text-white border-white">
-						Admins
-					</router-link>
-					<router-link :to="`/admin/questions/subjects`"
-						class="py-2 lg:mr-12 mr-4 cursor-pointer"
-						exact-active-class="border-b-4 text-white border-white">
-						Subjects
-					</router-link>
-					<router-link :to="`/admin/study/institutions`"
-						class="py-2 lg:mr-12 mr-4 cursor-pointer"
-						exact-active-class="border-b-4 text-white border-white">
-						Institutions
-					</router-link>
-					<router-link :to="`/admin/study/preps`"
-						class="py-2 lg:mr-12 mr-4 cursor-pointer"
-						exact-active-class="border-b-4 text-white border-white">
-						Preps
-					</router-link>
-					<router-link :to="`/admin/study/questions`"
-						class="py-2 lg:mr-12 mr-4 cursor-pointer"
-						exact-active-class="border-b-4 text-white border-white">
-						Test Questions
-					</router-link>
+				<div class="w-full lg:w-8/12 mx-auto">
+					<div class="nav-scroll">
+						<router-link to="/admin/users/admins">Admins</router-link>
+						<router-link to="/admin/school/institutions">Institutions</router-link>
+						<router-link to="/admin/study/preps">Preps</router-link>
+						<router-link to="/admin/school/questions">Test Questions</router-link>
+					</div>
 				</div>
 			</div>
-			<div class="p-4 lg:w-8/12 w-full mx-auto">
+			<div class="py-4 md:px-4 lg:px-0 lg:w-8/12 w-full mx-auto">
 				<slot />
 			</div>
 		</div>
@@ -49,13 +26,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
-import { cog } from 'ionicons/icons'
+import { cogOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'AdminWrapper',
 	components: { Justified },
 	setup () {
-		return { cog }
+		return { cogOutline }
 	}
 })
 </script>
