@@ -9,23 +9,31 @@
 	
 		<IonSkeletonText v-if="false" animated class="h-28 rounded-xl px-4" />
 		<div class="flex bg-white rounded-xl flex-col md:px-8 md:py-4 2xl:p-8 p-4">
-			<ion-text class="text-heading2 text-main_dark font-bold">
-				25%
-			</ion-text>
-			<IonProgressBar value="25" class="mt-4"/>
-			<ion-text class="mt-4 text-gray">Finish all tests preps and study plans to complete. </ion-text>
+			<div class=" flex flex-col header text-gray font-bold w-full justify-between flex-wrap">
+			
+				<div class="w-1">
+					<span class="md:w-1/4 w-1/2"> Title</span>
+					<span class="md:w-1/4 w-1/2"> Type</span>
+				</div>
+
+				<div class="w-1">
+					<span class="md:w-1/4 w-1/2"> Title</span>
+					<span class="md:w-1/4 w-1/2"> Title</span>
+				</div>
+		
+			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { IonSkeletonText, IonProgressBar } from '@ionic/vue'
+import { IonSkeletonText } from '@ionic/vue'
 import {  checkmarkCircleOutline, receiptOutline, timeOutline, schoolOutline } from 'ionicons/icons'
 
 export default defineComponent({
-	name: 'ProgressView',
-	components: {  IonSkeletonText, IonProgressBar },
+	name: 'HistoryView',
+	components: {  IonSkeletonText },
 	setup () {
 		return {checkmarkCircleOutline,  receiptOutline, timeOutline, schoolOutline}
 	}
@@ -33,16 +41,4 @@ export default defineComponent({
 </script>
 
 
-<style lang="scss" scoped>
-	ion-progress-bar {
-		height: .5rem !important;
-		border-radius: 12px !important;
-		@media (max-width: 768px) {
-			height: .25rem !important;
-		}
-	}
 
-	ion-progress-bar::part(progress) {
-		border-radius: 120px !important;
-	}
-</style>
