@@ -3,7 +3,7 @@
 		<div class="md:p-4 flex flex-col gap-4 md:gap-6 ">
 			<StatusBar v-if="isLoggedIn" />
 			<ExamTab active="test"/>
-			<ActivityView class="border-bottom-line"/>
+			<ExamDetails class="border-bottom-line"/>
 			<StudyMaterial class="border-bottom-line"/>
 			<QnA class=""/>
 		
@@ -18,10 +18,10 @@ import { defineComponent } from 'vue'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import StatusBar from '@app/components/dashboard/StatusBar.vue'
 import { useAuth } from '@app/composable/auth/auth'
-import ActivityView from '../components/dashboard/ActivityView.vue'
 import StudyMaterial from '../components/dashboard/StudyMaterial.vue'
 import QnA from '../components/dashboard/QnA.vue'
 import ExamTab from '../components/dashboard/ExamTab.vue'
+import ExamDetails from '../components/dashboard/ExamDetails.vue'
 
 export default defineComponent({
 	name: 'Dashboard',
@@ -29,10 +29,10 @@ export default defineComponent({
 	components: {
 		DashboardLayout,
 		StatusBar,
-		ActivityView,
 		StudyMaterial,
 		QnA,
-		ExamTab
+		ExamTab,
+		ExamDetails
 	},
 	setup () {
 		const { isLoggedIn } = useAuth()

@@ -9,10 +9,10 @@
 	
 		<IonSkeletonText v-if="false" animated class="h-28 rounded-xl px-4" />
 		<div class="showcase2">
-			<dashboard-card :icon="documentOutline" title="34" subtitle="Notes uploaded" iconClass="text-pink text-heading2" />
-			<dashboard-card :icon="copyOutline" title="50" subtitle="Flashcards created" iconClass="text-purple text-heading2" />
-			<dashboard-card :icon="playCircleOutline" title="20" subtitle="Videos added" iconClass="text-orange text-heading2" />
-			<dashboard-card :icon="folderOutline" title="13" subtitle="Folders created" iconClass="text-blue text-heading2" />
+			<dashboard-card :icon="receiptOutline" title="UTME" subtitle="Exam" iconClass="text-blue text-heading2" />
+			<dashboard-card :icon="calendarOutline" title="6 May 2022" subtitle="Exam date" iconClass="text-green text-heading2" />
+			<dashboard-card :icon="timeOutline" title="62 days" subtitle="Time left to study" iconClass="text-pink text-heading2" />
+			<dashboard-card :icon="discOutline" title="320" subtitle="Target score" iconClass="text-purple text-heading2" />
 		</div>
 	</div>
 </template>
@@ -20,14 +20,14 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { IonSkeletonText } from '@ionic/vue'
-import {  copyOutline, documentOutline, playCircleOutline, folderOutline } from 'ionicons/icons'
+import {  calendarOutline, receiptOutline, timeOutline, discOutline } from 'ionicons/icons'
 import DashboardCard from './DashboardCard.vue'
 
 export default defineComponent({
 	name: 'ActivityView',
 	components: {  IonSkeletonText, DashboardCard },
 	setup () {
-		return {copyOutline,  documentOutline, playCircleOutline, folderOutline}
+		return {calendarOutline,  receiptOutline, timeOutline, discOutline}
 	}
 })
 </script>
