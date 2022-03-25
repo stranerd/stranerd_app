@@ -4,6 +4,7 @@ import { Directory, Filesystem } from '@capacitor/filesystem'
 import writeFile from 'capacitor-blob-writer'
 import { FileOpener } from '@awesome-cordova-plugins/file-opener'
 import { HttpClient } from '@modules/core'
+import { isWeb } from '@utils/constants'
 
 const getBase64 = (binary: string) => `data:;base64,${binary}`
 
@@ -51,6 +52,7 @@ export const useDownload = (fileName: string, fileLink: string, type: string) =>
 	}
 
 	const openFile = async () => {
+		if (isWeb) return
 		const stat = await Filesystem.getUri(options)
 		await FileOpener.open(stat.uri, '')
 	}

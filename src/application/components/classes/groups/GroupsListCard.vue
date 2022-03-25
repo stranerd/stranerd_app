@@ -7,7 +7,7 @@
 				<IonText class="font-semibold w-full truncate capitalize">
 					{{ group.name }}
 				</IonText>
-				<IonText v-if="group.last" class="text-sub">
+				<IonText v-if="group.last" class="text-sub whitespace-nowrap">
 					{{ formatTime(group.last.createdAt) }}
 				</IonText>
 			</div>
