@@ -2,7 +2,7 @@
 	<div>
 		<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 			<div class="text-main_dark flex items-center">
-				<ion-text class="text-base font-bold mr-3">Progress</ion-text>
+				<ion-text class="text-base font-bold mr-3">History</ion-text>
 			</div>		
 		</div>
 

@@ -8,7 +8,7 @@
 
 	
 		<IonSkeletonText v-if="false" animated class="h-28 rounded-xl px-4" />
-		<div>
+		<div class="showcase2">
 			<dashboard-card :icon="receiptOutline" title="48" subtitle="Test taken" iconClass="text-blue text-heading2" />
 			<dashboard-card :icon="checkmarkCircleOutline" title="36/48" subtitle="Test passed" iconClass="text-green text-heading2" />
 			<dashboard-card :icon="timeOutline" title="24m (per test)" subtitle="Average pace" iconClass="text-pink text-heading2" />
