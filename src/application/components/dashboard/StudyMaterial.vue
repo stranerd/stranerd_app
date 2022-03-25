@@ -24,7 +24,7 @@ import {  copyOutline, documentOutline, playCircleOutline, folderOutline } from 
 import DashboardCard from './DashboardCard.vue'
 
 export default defineComponent({
-	name: 'ActivityView',
+	name: 'StudyMaterial',
 	components: {  IonSkeletonText, DashboardCard },
 	setup () {
 		return {copyOutline,  documentOutline, playCircleOutline, folderOutline}

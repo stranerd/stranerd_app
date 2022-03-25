@@ -23,7 +23,7 @@ import { readerOutline, helpCircleOutline } from 'ionicons/icons'
 import DashboardCard from './DashboardCard.vue'
 
 export default defineComponent({
-	name: 'ActivityView',
+	name: 'QnA',
 	components: {  IonSkeletonText, DashboardCard },
 	setup () {
 		return {helpCircleOutline, readerOutline}
