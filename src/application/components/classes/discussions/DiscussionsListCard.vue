@@ -9,14 +9,15 @@
 				<span>{{ discussion.userBio.fullName }}</span>
 				<IonIcon v-if="discussion.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
 			</span>
-			<div v-if="discussion.isMedia" class="flex flex-col">
+			<div v-if="discussion.isMedia" class="flex flex-col" @click="openFile">
 				<img v-if="discussion.isImage" :src="discussion.media.link" alt="" class="w-full rounded-t-xl">
 				<div :class="{'rounded-t-xl': !discussion.isImage}"
 					class="bg-white flex gap-2 items-center p-3 rounded-b-xl">
 					<IonIcon :icon="documentOutline" class="text-2xl" />
 					<IonText class="flex-grow truncate">{{ discussion.media.name }}</IonText>
 					<IonSpinner v-if="loading" class="text-2xl" color="primary" />
-					<IonIcon v-else :icon="downloadOutline" class="text-2xl" color="primary" @click="download" />
+					<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-2xl" color="primary"
+						@click="download" />
 				</div>
 			</div>
 			<div class="flex gap-2 items-end">
@@ -34,8 +35,9 @@ import { useAuth } from '@app/composable/auth/auth'
 import { formatTimeAsDigits } from '@utils/dates'
 import { checkmarkCircleOutline, documentOutline, downloadOutline } from 'ionicons/icons'
 import { IonSpinner } from '@ionic/vue'
-import { useDownloadableLink } from '@app/composable/meta/media'
+import { useDownload } from '@app/composable/meta/media'
 import { saveDiscussionsReadState } from '@app/composable/classes/discussions'
+import { isWeb } from '@utils/constants'
 
 export default defineComponent({
 	name: 'DiscussionsListCard',
@@ -48,11 +50,18 @@ export default defineComponent({
 	components: { IonSpinner },
 	setup (props) {
 		const { id } = useAuth()
-		const { loading, download } = useDownloadableLink(props.discussion.media!)
+		const {
+			content, loading, openFile, downloadWeb, download: downloadApp
+		} = useDownload(props.discussion.media?.name ?? '', props.discussion.media?.link ?? '', 'discussions')
+		const download = isWeb ? downloadWeb : downloadApp
 		onMounted(async () => {
 			await saveDiscussionsReadState(props.discussion)
 		})
-		return { id, formatTimeAsDigits, checkmarkCircleOutline, documentOutline, downloadOutline, download, loading }
+		return {
+			id, formatTimeAsDigits, isWeb,
+			checkmarkCircleOutline, documentOutline, downloadOutline,
+			content, download, openFile, loading
+		}
 	}
 })
 </script>

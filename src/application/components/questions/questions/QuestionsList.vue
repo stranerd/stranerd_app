@@ -22,7 +22,7 @@
 				</router-link>
 			</div>
 		</div>
-		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
+		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl mx-4" />
 		<EmptyState v-if="!loading && !error && questions.length === 0" :btnText="'Ask a question'"
 			:info="'No questions found! Start asking questions to help with homework and studying.'"
 			route="/questions/create"

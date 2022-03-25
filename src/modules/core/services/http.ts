@@ -46,13 +46,16 @@ export class HttpClient {
 		return this.makeRequest<Body, ReturnValue>(url, 'delete', body)
 	}
 
-	async download (url: string): Promise<string> {
+	async download (url: string) {
 		try {
-			const response = await this.client.get(url, { responseType: 'arraybuffer' })
-			const type = response.headers['content-type']
-			const binary = new Uint8Array(response.data)
-				.reduce((acc, cur) => acc + String.fromCharCode(cur), '')
-			return `data:${type};base64,` + btoa(binary)
+			const { data: blob } = await this.client.get(url, { responseType: 'blob' })
+			const base64: string = await new Promise((res, rej) => {
+				const reader = new FileReader
+				reader.onerror = rej
+				reader.onload = () => res(reader.result as string)
+				reader.readAsDataURL(blob)
+			})
+			return { blob, base64 }
 		} catch (e: any) {
 			throw new Error('Error downloading file')
 		}

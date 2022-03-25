@@ -9,6 +9,20 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
+"@awesome-cordova-plugins/core@^5.40.0":
+  version "5.40.0"
+  resolved "https://registry.yarnpkg.com/@awesome-cordova-plugins/core/-/core-5.40.0.tgz#aa07eef57f50acc9da2e0d538bf5858e262348dd"
+  integrity sha512-tk5QlnXfSE2Zu3mJVC3f11Guu5iqnLtNkvvClNHjz/e4FsJEmprfXWCv/QImWs5fLsismHcn31LKYBfWIhOv9g==
+  dependencies:
+    "@types/cordova" latest
+
+"@awesome-cordova-plugins/file-opener@^5.40.0":
+  version "5.40.0"
+  resolved "https://registry.yarnpkg.com/@awesome-cordova-plugins/file-opener/-/file-opener-5.40.0.tgz#054bcd57435e55170ce27d2afd3d1a3698966695"
+  integrity sha512-NIoPvkIhAcHAqP2WSxZUuTlcB8AAi/KWin7SlLAtj214cuFDZht/iuEgeHSBoCx7XGmGmxZFMiKD14NF3kM9LQ==
+  dependencies:
+    "@types/cordova" latest
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.16.7", "@babel/code-frame@^7.8.3":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.16.7.tgz#44416b6bd7624b998f5b1af5d470856c40138789"
@@ -1703,6 +1717,11 @@
   integrity sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==
   dependencies:
     "@types/node" "*"
+
+"@types/cordova@latest":
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/@types/cordova/-/cordova-0.0.34.tgz#ea7addf74ecec3d7629827a0c39e2c9addc73d04"
+  integrity sha1-6nrd907Ow9dimCegw54smt3HPQQ=
 
 "@types/estree@*":
   version "0.0.51"
@@ -3542,6 +3561,11 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001286:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001307.tgz#27a67f13ebc4aa9c977e6b8256a11d5eafb30f27"
   integrity sha512-+MXEMczJ4FuxJAUp0jvAl6Df0NI/OfW1RWEE61eSmzS7hw6lz4IKutbhbXendwq8BljfFuHtu26VWsg4afQ7Ng==
 
+capacitor-blob-writer@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/capacitor-blob-writer/-/capacitor-blob-writer-1.0.4.tgz#d2aec40d0e733d97b5fa72d92c347189207090f3"
+  integrity sha512-HLN9qHGXprnMacjFV50KSHFuk2e+Q6QHxSIsNNbVwxh3/8cEzA6bAwFdJthLocYSYjPENMC6o54hwxFWN3CiSQ==
+
 case-sensitive-paths-webpack-plugin@^2.3.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-2.4.0.tgz#db64066c6422eed2e08cc14b986ca43796dbc6d4"
@@ -4204,6 +4228,11 @@ copy-webpack-plugin@^5.1.1:
     schema-utils "^1.0.0"
     serialize-javascript "^4.0.0"
     webpack-log "^2.0.0"
+
+cordova-plugin-file-opener2@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-file-opener2/-/cordova-plugin-file-opener2-3.0.5.tgz#3bf481a724bcec9cfa2257a71915309df5ea5b4d"
+  integrity sha512-tjLHDamH5+y0bJZYVe2967L1S4R8tL4Y0rJUzJGoxsyiw3FUlrJNS199POOpzZZ6Xhlntn9a2o7+84r1dMN21A==
 
 cordova-res@^0.15.4:
   version "0.15.4"
@@ -7364,6 +7393,11 @@ javascript-stringify@^2.0.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/javascript-stringify/-/javascript-stringify-2.1.0.tgz#27c76539be14d8bd128219a2d731b09337904e79"
   integrity sha512-JVAfqNPTvNq3sB/VHQJAFxN/sPgKnsKrCwyRt15zwNCdrMMJDdcEOdubuy+DuJYYdm0ox1J4uzEuYKkN+9yhVg==
+
+jetifier@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/jetifier/-/jetifier-2.0.0.tgz#699391367ca1fe7bc4da5f8bf691eb117758e4cb"
+  integrity sha512-J4Au9KuT74te+PCCCHKgAjyLlEa+2VyIAEPNCdE5aNkAJ6FAJcAqcdzEkSnzNksIa9NkGmC4tPiClk2e7tCJuQ==
 
 js-base64@^2.1.8:
   version "2.6.4"

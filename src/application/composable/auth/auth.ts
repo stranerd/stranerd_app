@@ -5,6 +5,7 @@ import { SessionSignout } from '@modules/auth'
 import { isClient } from '@utils/environment'
 import { setupPush } from '@utils/push'
 import { useUserModal } from '@app/composable/core/modals'
+import { storage } from '@utils/storage'
 
 const global = {
 	auth: ref(null as AuthDetails | null),
@@ -66,7 +67,9 @@ export const useAuth = () => {
 		global.auth.value = details
 		if (details?.id) {
 			global.user.value = await FindUser.call(details.id)
-			if (!global.user.value?.school) setTimeout(useUserModal().openSettings, 1000)
+			if (!global.user.value?.school) setTimeout(async () => {
+				if (!(await getSchoolState())) useUserModal().openSettings()
+			}, 5000)
 		} else global.user.value = null
 	}
 
@@ -114,3 +117,7 @@ export const useAuth = () => {
 		getLocalAmount, getLocalCurrency, getLocalCurrencySymbol
 	}
 }
+
+const SCHOOL_STATE_KEY = 'onboarding_school_state_key'
+const getSchoolState = async () => storage.get(SCHOOL_STATE_KEY)
+export const saveSchoolState = async () => storage.set(SCHOOL_STATE_KEY, 1)
