@@ -11,9 +11,6 @@
 		<div class="showcase2">
 			<dashboard-card :icon="rocketOutline" title="16 days" subtitle="Longest streak" />
 			<dashboard-card :icon="timeOutline" title="46m" subtitle="Daily average time spent" iconClass="text-pink text-heading2" />
-		
-		
-			<!-- <QuestionListCard v-for="question in questions" :key="question.hash" :question="question" /> -->
 		</div>
 	</div>
 </template>
