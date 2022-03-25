@@ -73,6 +73,8 @@ export interface UserAccount {
 		tutorSessions: number
 		flashCards: number
 		sets: number
+		notes: number
+		videos: number
 	}
 	streak: {
 		count: number

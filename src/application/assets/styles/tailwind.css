@@ -83,6 +83,9 @@
 	.showcase {
 		@apply grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 md:gap-4
 	}
+	.showcase2 {
+		@apply grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 md:gap-4
+	}
 
 	.showcase-flex {
 		@apply flex flex-col md:gap-4;
