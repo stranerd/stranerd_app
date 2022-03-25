@@ -8,20 +8,29 @@
 
 	
 		<IonSkeletonText v-if="false" animated class="h-28 rounded-xl px-4" />
-		<div class="flex bg-white rounded-xl flex-col md:px-8 md:py-4 2xl:p-8 p-4">
-			<div class=" flex flex-col header text-gray font-bold w-full justify-between flex-wrap">
-			
-				<div class="w-1">
-					<span class="md:w-1/4 w-1/2"> Title</span>
-					<span class="md:w-1/4 w-1/2"> Type</span>
+		<div class="flex bg-white rounded-xl flex-col ">
+			<div class="header flex flex-col md:flex-row text-body text-gray font-bold w-full justify-between flex-wrap border-b border-new_gray md:px-8 md:py-4 2xl:p-8 p-4">
+				<div class="w-1/2 flex justify-between">
+					<span class="min-w-[12.5rem]"> Title</span>
+					<span class="min-w-[12.5rem]"> Type</span>
 				</div>
-
-				<div class="w-1">
-					<span class="md:w-1/4 w-1/2"> Title</span>
-					<span class="md:w-1/4 w-1/2"> Title</span>
+				<div class="w-1/2 flex justify-between">
+					<span class="min-w-[12.5rem]"> Status</span>
+					<span class="min-w-[12.5rem]"> Date</span>
 				</div>
-		
 			</div>
+			<div v-for="n in 5" :key="n" class="header flex flex-col md:flex-row text-body text-gray justify-between flex-wrap border-b border-new_gray md:px-8 md:py-4 2xl:p-8 p-4">
+				<div class="w-1/2 flex justify-between">
+					<span class="min-w-[12.5rem]"> UTME - Mathematics</span>
+					<span class="min-w-[12.5rem]"> Test</span>
+				</div>
+				<div class="w-1/2 flex justify-between">
+					<span class="min-w-[12.5rem] text-green"> 98%</span>
+					<span class="min-w-[12.5rem]"> 16/02/2022</span>
+				</div>
+			</div>
+
+	
 		</div>
 	</div>
 </template>
