@@ -1,5 +1,5 @@
 <template>
-	<PageLoading v-if="loading" />
+	<PageLoading v-if="loading || createLoading" />
 	<div v-else
 		class="flex items-center justify-center flex-col md:my-8 px-4 py-8 bg-white rounded-xl gap-4">
 		<ion-text class="text-heading text-main_dark font-bold">{{ test.scoreText }}</ion-text>
@@ -17,13 +17,9 @@
 			<router-link :to="`/study/tests/${test.id}/take`" class="text-primary cursor-pointer">
 				<ion-button class="btn-outline">Solutions</ion-button>
 			</router-link>
-			<!--  TODO: Add retry test functionality -->
-			<router-link class="text-primary cursor-pointer" to="#">
-				<ion-button class="btn-primary">
-					Retry
-				</ion-button>
-			</router-link>
-			<!--  TODO: Add link to preps home page -->
+			<ion-button v-if="prep" class="btn-primary" @click="createTest(prep, test.isTimed)">
+				Retry
+			</ion-button>
 			<router-link class="text-primary cursor-pointer" to="/study/preps/">
 				<ion-button class="btn-secondary">
 					Home
@@ -34,12 +30,13 @@
 </template>
 
 <script lang="ts">
-import { useTestDetails } from '@app/composable/study/tests'
-import { defineComponent, onMounted } from 'vue'
+import { useCreateTest, useTestDetails } from '@app/composable/study/tests'
+import { computed, defineComponent, onMounted } from 'vue'
 import { TestEntity } from '@modules/study'
 import DonutChart from '@app/components/core/DonutChart.vue'
 import { formatNumber } from '@utils/commons'
 import { useRouter } from 'vue-router'
+import { useTestPrepList } from '@app/composable/study/testPreps'
 
 export default defineComponent({
 	name: 'TestResults',
@@ -53,11 +50,14 @@ export default defineComponent({
 	setup (props) {
 		const router = useRouter()
 		const { error, loading, questions, endTest } = useTestDetails(props.test)
+		const { testPreps } = useTestPrepList()
+		const prep = computed(() => testPreps.value.find((p) => p.id === props.test.prepId))
+		const { createTest, loading: createLoading } = useCreateTest()
 		onMounted(async () => {
 			await endTest()
 			if (!props.test.isTimed) await router.replace(`/study/tests/${props.test.id}/take`)
 		})
-		return { error, loading, questions, formatNumber }
+		return { error, loading, questions, formatNumber, createTest, createLoading, prep }
 	}
 })
 </script>

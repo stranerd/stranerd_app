@@ -22,7 +22,7 @@
 					<ion-text class="text-gray">Current streak</ion-text>
 				</div>
 			</div>
-			<div class="flex items-center w-full md:w-auto">
+			<div v-if="0" class="flex items-center w-full md:w-auto">
 				<IonIcon :icon="hourglassOutline"
 					class="md:text-2xl text-xl text-primary p-3 bg-[#2c4cca1a] rounded-full mr-3" />
 				<div class="flex flex-col">

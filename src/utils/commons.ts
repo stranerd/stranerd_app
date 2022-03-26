@@ -28,7 +28,7 @@ export const formatNumber = (num: number, dp = 0) => {
 	else return num.toFixed(0)
 }
 
-export const pluralize = (count: number, singular: string, plural: string) => count === 1 ? singular : plural
+export const pluralize = (count: number, singular: string, plural: string) => Math.round(count) === 1 ? singular : plural
 
 export const getRandomValue = () => Date.now() + Math.random().toString(36)
 

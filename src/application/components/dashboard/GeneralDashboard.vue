@@ -10,10 +10,7 @@
 			<div class="showcase2">
 				<DashboardCard :icon="rocketOutline"
 					:title="`${formatNumber(user?.account.streak.longestStreak)} ${pluralize(user?.account.streak.longestStreak, 'day', 'days')}`"
-					iconClass="text-orange"
-					subtitle="Longest streak" />
-				<DashboardCard :icon="timeOutline" iconClass="text-pink" subtitle="Daily average time spent"
-					title="46m" />
+					iconClass="text-orange" subtitle="Longest streak" />
 			</div>
 		</div>
 		<div class="border-bottom-line">

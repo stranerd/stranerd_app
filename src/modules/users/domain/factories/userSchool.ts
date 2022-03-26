@@ -33,7 +33,7 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 			rules: [isString, isLongerThanX(0)]
 		},
 		exams: {
-			required: () => this.isCollegeType,
+			required: () => !this.isCollegeType,
 			rules: []
 		}
 	}
@@ -94,10 +94,12 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 	}
 
 	set institutions (institutionIds: string[]) {
-		const now = Date.now()
-		this.set('exams', institutionIds.map((institutionId) => {
-			return { institutionId, courseIds: [], startDate: now, endDate: now }
-		}))
+		this.set('exams', institutionIds.map((institutionId) => ({
+			institutionId,
+			courseIds: [],
+			startDate: null,
+			endDate: null
+		})))
 		this.insts.length = 0
 		this.insts.push(...this.exams.map((e) => e.institutionId))
 	}

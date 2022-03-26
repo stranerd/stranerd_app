@@ -2,7 +2,17 @@ import { BaseEntity, parseMedia } from '@modules/core'
 import { appName } from '@utils/environment'
 import { capitalize, catchDivideByZero, formatNumber, getPercentage } from '@utils/commons'
 import { getRankImage } from './rank'
-import { UserAccount, UserBio, UserDates, UserRank, UserRoles, UserSchoolData, UserSession, UserStatus } from '../types'
+import {
+	UserAccount,
+	UserBio,
+	UserDates,
+	UserRank,
+	UserRoles,
+	UserSchoolData,
+	UserSchoolType,
+	UserSession,
+	UserStatus
+} from '../types'
 
 type UserConstructorArgs = {
 	id: string
@@ -164,6 +174,10 @@ export class UserEntity extends BaseEntity {
 
 	set isVerified (isVerified) {
 		this.roles[appName].isVerified = isVerified
+	}
+
+	get isAspirant () {
+		return [UserSchoolType.aspirant, UserSchoolType.secondary].includes(this.school?.type!)
 	}
 }
 
