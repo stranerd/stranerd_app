@@ -9,7 +9,7 @@
 
 			<div class="showcase2">
 				<DashboardCard :icon="rocketOutline"
-					:title="`${formatNumber(user?.account.streak.longestStreak)} ${pluralize(user?.account.streak.longestStreak, 'day', 'days')}`"
+					:title="`${user ? formatNumber(user?.account.streak.longestStreak) : 'N/A'} ${pluralize(user?.account.streak.longestStreak, 'day', 'days')}`"
 					iconClass="text-orange" subtitle="Longest streak" />
 			</div>
 		</div>
@@ -23,19 +23,16 @@
 			<div class="showcase2">
 				<DashboardCard :icon="documentOutline"
 					:subtitle="`${pluralize(user?.meta.notes, 'Note', 'Notes')} uploaded`"
-					:title="formatNumber(user?.meta.notes)"
-					iconClass="text-pink" />
+					:title="user ? formatNumber(user?.meta.notes) : 'N/A'" iconClass="text-pink" />
 				<DashboardCard :icon="copyOutline"
 					:subtitle="`${pluralize(user?.meta.flashCards, 'Flashcard', 'Flashcards')} created`"
-					:title="formatNumber(user?.meta.flashCards)"
-					iconClass="text-purple" />
+					:title="user? formatNumber(user?.meta.flashCards) : 'N/A'" iconClass="text-purple" />
 				<DashboardCard :icon="playCircleOutline"
 					:subtitle="`${pluralize(user?.meta.videos, 'Video', 'Videos')} added`"
-					:title="formatNumber(user?.meta.videos)" iconClass="text-orange" />
+					:title="user ? formatNumber(user?.meta.videos) : 'N/A'" iconClass="text-orange" />
 				<DashboardCard :icon="folderOutline"
 					:subtitle="`${pluralize(user?.meta.sets, 'Folder', 'Folders')} created`"
-					:title="formatNumber(user?.meta.sets)"
-					iconClass="text-blue" />
+					:title="user ? formatNumber(user?.meta.sets) : 'N/A'" iconClass="text-blue" />
 			</div>
 		</div>
 		<div>
@@ -46,9 +43,9 @@
 			</div>
 
 			<div class="showcase2">
-				<DashboardCard :icon="helpCircleOutline" :title="formatNumber(user?.meta.questions)"
+				<DashboardCard :icon="helpCircleOutline" :title="user ? formatNumber(user?.meta.questions) : 'N/A'"
 					iconClass="text-green" subtitle="Questions asked" />
-				<DashboardCard :icon="readerOutline" :title="formatNumber(user?.meta.answers)"
+				<DashboardCard :icon="readerOutline" :title="user ? formatNumber(user?.meta.answers) : 'N/A'"
 					iconClass="text-blue" subtitle="Questions answered" />
 			</div>
 		</div>

@@ -6,6 +6,10 @@
 				<AspirantDashboard v-if="user?.isAspirant" />
 				<GeneralDashboard v-else />
 			</template>
+			<template v-else>
+				<StatusBar />
+				<GeneralDashboard />
+			</template>
 		</div>
 	</DashboardLayout>
 </template>

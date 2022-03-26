@@ -3,10 +3,10 @@
 		class="bg-white border-bottom-line md:rounded-xl flex flex-col sm:flex-row justify-between sm:items-center">
 		<div class="flex flex-col text-left p-4 md:p-6">
 			<ion-text class="text-main_dark text-heading font-bold">
-				<span>{{ user?.bio.firstName }}</span>! welcome back
+				{{ user ? `${user.bio.firstName}! Welcome back` : 'Hello there' }}
 			</ion-text>
 			<ion-text class="text-gray">
-				Your performance has been great, keep it up.
+				{{ user ? 'Your performance has been great, keep it up.' : 'You are not logged in.' }}
 			</ion-text>
 		</div>
 
@@ -16,7 +16,7 @@
 				<div class="flex flex-col">
 					<ion-text class="text-main_dark font-semibold">
 						{{
-							`${formatNumber(user?.account.streak.count)} ${pluralize(user?.account.streak.count, 'day', 'days')}`
+							user ? `${formatNumber(user.account.streak.count)} ${pluralize(user.account.streak.count, 'day', 'days')}` : 'N/A'
 						}}
 					</ion-text>
 					<ion-text class="text-gray">Current streak</ion-text>
