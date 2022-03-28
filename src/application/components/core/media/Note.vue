@@ -3,10 +3,10 @@
 		<Pdf v-for="i in numPages" :id="i" :key="i" :annotation="true" :page="i" :resize="true" :scale="100"
 			:src="pdfData" style="margin: 10px auto;">
 			<template v-slot:loading>
-				<PageLoading />
+				<IonSkeletonText animated class="h-28 rounded-xl px-4" />
 			</template>
 		</Pdf>
-		<PageLoading v-if="loading" />
+		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
 	</div>
 </template>
 
@@ -14,10 +14,11 @@
 import { defineComponent, onMounted, ref } from 'vue'
 //@ts-ignore
 import Pdfvuer from 'pdfvuer'
+import { IonSkeletonText } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'Note',
-	components: { Pdf: Pdfvuer },
+	components: { Pdf: Pdfvuer, IonSkeletonText },
 	props: {
 		link: {
 			type: String,

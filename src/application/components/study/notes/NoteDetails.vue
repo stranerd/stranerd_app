@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Note v-if="content" :link="content" />
-		<IonSkeletonText v-else-if="loading" animated class="h-36 rounded-xl" />
+		<IonSkeletonText v-else-if="loading" animated class="h-28 rounded-xl px-4" />
 		<div v-else class="flex flex-col gap-2 items-center">
 			<p>The note needs to be downloaded before it can be viewed</p>
 			<IonButton class="btn-primary" size="small" @click="download">Download</IonButton>

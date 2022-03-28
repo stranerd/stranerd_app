@@ -1,5 +1,5 @@
 <template>
-	<div v-if="loading" class="col-span-12 flex items-center justify-center w-full py-8">
+	<div v-if="loading" class="col-span-12 flex items-center justify-center w-full py-8 px-4">
 		<ion-progress-bar type="indeterminate"></ion-progress-bar>
 	</div>
 	<div v-else class="col-span-12 flex flex-col md:gap-4">

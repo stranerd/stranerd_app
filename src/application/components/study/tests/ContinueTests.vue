@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<EmptyState v-if="!loading && !error && unCompletedTests.length === 0" info="You have no uncompleted tests" />
-		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl mx-4" />
+		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
 		<div v-else class="showcase">
 			<ContinueTestCard v-for="test in unCompletedTests" :key="test.hash" :test="test" />
 		</div>

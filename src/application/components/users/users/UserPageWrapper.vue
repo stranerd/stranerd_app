@@ -4,14 +4,21 @@
 			<PageLoading v-if="loading" />
 			<PageLoading v-if="verifiedLoading" />
 			<template v-if="user">
-				<div class="flex flex-col w-full rounded-xl border-bottom-line">
-					<div class="flex flex-col items-start">
+				<div class="flex flex-col w-full rounded-xl border-bottom-line bg-white">
+					<div class="flex flex-col">
 						<CoverAvatar :src="user.bio.coverPhoto" class="h-20" />
-						<span class="px-4 relative top-[-40px] inline-flex items-center justify-center -mb-10">
-							<Avatar :name="user.bio.fullName" :size="80" :src="user.bio.photo" />
-						</span>
+						<div class="px-4 flex justify-between gap-2">
+							<Avatar :name="user.bio.fullName" :size="80" :src="user.bio.photo"
+								class="relative top-[-40px] -mb-10" />
+							<div v-if="user.id === id" class="flex gap-1 mt-2">
+								<router-link :to="`/users/${user.id}/settings`"
+									class="py-1 px-4 border border-primary text-primary rounded-full text-sub flex justify-center items-center">
+									Edit Profile
+								</router-link>
+							</div>
+						</div>
 					</div>
-					<div class="bg-white rounded-b-xl px-4 flex flex-col">
+					<div class="rounded-b-xl px-4 flex flex-col">
 						<h2 class="text-heading font-bold text-main_dark flex gap-1 items-center mt-4 mb-1">
 							<span>{{ user.bio.fullName }}</span>
 							<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="white" />

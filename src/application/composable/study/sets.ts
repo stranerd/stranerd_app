@@ -28,6 +28,7 @@ import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } fr
 import { useStudyModal } from '@app/composable/core/modals'
 import { Alert, Notify } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
+import { Router } from 'vue-router'
 
 type SaveKey = keyof SetEntity['saved']
 
@@ -282,9 +283,9 @@ export const useCreateSet = () => {
 
 let editingSet = null as SetEntity | null
 export const getEditingSet = () => editingSet
-export const openSetEditModal = (set: SetEntity) => {
+export const openSetEditModal = async (set: SetEntity, router: Router) => {
 	editingSet = set
-	useStudyModal().openEditSet()
+	await router.push(`/study/sets/${set.id}/edit`)
 }
 export const useEditSet = () => {
 	const { error, setError } = useErrorHandler()

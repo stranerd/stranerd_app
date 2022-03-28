@@ -6,7 +6,7 @@
 			<div class="showcase">
 				<SetListCard v-for="set in sets" :key="set.hash" :set="set" />
 			</div>
-			<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl mx-4" />
+			<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
 		</div>
 	</DashboardLayout>
 </template>

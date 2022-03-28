@@ -11,10 +11,16 @@
 					</span>
 				</template>
 			</Tag>
-			<div class="flex items-center text-gray gap-2">
-				<Avatar :id="set.userId" :name="set.userBio.fullName" :size="24" :src="set.userBio.photo" />
-				<Share :link="set.shareLink" :title="set.name" cssClass="text-xl" text="Share this folder" />
-				<SaveToSet v-if="0 && set.userId !== id" :entity="set" />
+			<div class="flex items-center text-gray gap-3">
+				<template v-if="edit && set.userId === id">
+					<span class="text-primary font-bold" @click.prevent="openSetEditModal(set)">Edit</span>
+					<span class="text-red font-bold" @click.prevent="deleteSet">Delete</span>
+				</template>
+				<template v-else>
+					<Avatar :id="set.userId" :name="set.userBio.fullName" :size="24" :src="set.userBio.photo" />
+					<Share :link="set.shareLink" :title="set.name" cssClass="text-xl" text="Share this folder" />
+					<SaveToSet v-if="0 && set.userId !== id" :entity="set" />
+				</template>
 			</div>
 		</div>
 	</router-link>
@@ -27,6 +33,7 @@ import { folderOutline } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
+import { openSetEditModal, useDeleteSet } from '@app/composable/study/sets'
 
 export default defineComponent({
 	name: 'SetListCard',
@@ -35,11 +42,20 @@ export default defineComponent({
 		set: {
 			type: SetEntity,
 			required: true
+		},
+		edit: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
-	setup () {
+	setup (props) {
 		const { id } = useAuth()
-		return { folderOutline, pluralize, formatNumber, id }
+		const { deleteSet, loading } = useDeleteSet(props.set.id)
+		return {
+			folderOutline, pluralize, formatNumber, id,
+			openSetEditModal, deleteSet, loading
+		}
 	}
 })
 </script>

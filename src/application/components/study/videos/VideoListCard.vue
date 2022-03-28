@@ -11,10 +11,16 @@
 					</span>
 				</template>
 			</Tag>
-			<div class="flex items-center text-gray gap-2">
-				<Avatar :id="video.userId" :name="video.userBio.fullName" :size="24" :src="video.userBio.photo" />
-				<Share :link="video.shareLink" :text="video.description" :title="video.title" cssClass="text-xl" />
-				<SaveToSet :entity="video" />
+			<div class="flex items-center text-gray gap-3">
+				<template v-if="edit && video.userId === id">
+					<span class="text-primary font-bold" @click.prevent="openVideoEditModal(video, $router)">Edit</span>
+					<span class="text-red font-bold" @click.prevent="deleteVideo">Delete</span>
+				</template>
+				<template v-else>
+					<Avatar :id="video.userId" :name="video.userBio.fullName" :size="24" :src="video.userBio.photo" />
+					<Share :link="video.shareLink" :text="video.description" :title="video.title" cssClass="text-xl" />
+					<SaveToSet :entity="video" />
+				</template>
 			</div>
 		</div>
 	</router-link>
@@ -26,6 +32,8 @@ import Avatar from '@app/components/core/Avatar.vue'
 import { VideoEntity } from '@modules/study'
 import { playCircleOutline } from 'ionicons/icons'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
+import { useAuth } from '@app/composable/auth/auth'
+import { openVideoEditModal, useDeleteVideo } from '@app/composable/study/videos'
 
 export default defineComponent({
 	name: 'VideosListCard',
@@ -34,10 +42,20 @@ export default defineComponent({
 		video: {
 			type: VideoEntity,
 			required: true
+		},
+		edit: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
-	setup () {
-		return { playCircleOutline }
+	setup (props) {
+		const { id } = useAuth()
+		const { deleteVideo, loading } = useDeleteVideo(props.video.id)
+		return {
+			playCircleOutline, id,
+			deleteVideo, loading, openVideoEditModal
+		}
 	}
 })
 </script>

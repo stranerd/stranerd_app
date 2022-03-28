@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<EmptyState v-if="!loading && !error && filtered.length === 0" info="No videos found." />
-		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl mx-4" />
+		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
 		<div class="showcase">
 			<VideoListCard v-for="video in filtered" :key="video.hash" :video="video" />
 		</div>

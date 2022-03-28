@@ -2,19 +2,19 @@
 	<Justified>
 		<div v-if="classInst" class="lg:w-8/12 w-full mx-auto lg:p-4">
 			<div class="rounded-xl bg-white relative">
-				<CoverAvatar :src="classInst.coverPhoto" class="h-20 lg:rounded-t-xl" />
-				<div class="px-4 md:px-6 border-bottom-line">
-					<div class="flex justify-between gap-2">
-						<Avatar :name="classInst.name" :size="80" :src="classInst.photo"
-							class="relative top-[-40px] -mb-10" />
-						<div class="flex gap-1 mt-2">
-							<Share :link="`/classes/${classInst.id}`" :text="classInst.description"
-								:title="`Share this class: ${classInst.name}`"
-								class="py-1 px-4 border border-primary text-primary rounded-full text-sub flex justify-center items-center">
-								Copy class link
-							</Share>
-						</div>
+				<CoverAvatar :src="classInst.coverPhoto" class="h-20" />
+				<div class="px-4 md:px-6 flex justify-between gap-2">
+					<Avatar :name="classInst.name" :size="80" :src="classInst.photo"
+						class="relative top-[-40px] -mb-10" />
+					<div class="flex gap-1 mt-2">
+						<Share :link="`/classes/${classInst.id}`" :text="classInst.description"
+							:title="`Share this class: ${classInst.name}`"
+							class="py-1 px-4 border border-primary text-primary rounded-full text-sub flex justify-center items-center">
+							Copy class link
+						</Share>
 					</div>
+				</div>
+				<div class="px-4 md:px-6 border-bottom-line">
 					<div class="pt-2 pb-4 flex flex-col gap-1">
 						<div class="flex gap-1 items-center">
 							<IonText class="text-main_dark text-heading capitalize font-semibold">

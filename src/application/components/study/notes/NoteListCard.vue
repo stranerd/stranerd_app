@@ -16,12 +16,19 @@
 					</span>
 				</template>
 			</Tag>
-			<div class="flex items-center text-gray gap-2">
-				<Avatar :id="note.userId" :name="note.userBio.fullName" :size="24" :src="note.userBio.photo" />
-				<Share :link="note.shareLink" :text="note.description" :title="note.title" cssClass="text-xl" />
-				<SaveToSet :entity="note" />
+			<div class="flex items-center text-gray gap-3">
+				<template v-if="edit && note.userId === id">
+					<span class="text-primary font-bold" @click.prevent="openNoteEditModal(note, $router)">Edit</span>
+					<span class="text-red font-bold" @click.prevent="deleteNote">Delete</span>
+				</template>
+				<template v-else>
+					<Avatar :id="note.userId" :name="note.userBio.fullName" :size="24" :src="note.userBio.photo" />
+					<Share :link="note.shareLink" :text="note.description" :title="note.title" cssClass="text-xl" />
+					<SaveToSet :entity="note" />
+				</template>
 			</div>
 		</div>
+		<PageLoading v-if="deleteLoading" />
 	</component>
 </template>
 
@@ -32,6 +39,8 @@ import { NoteEntity } from '@modules/study'
 import { IonSpinner } from '@ionic/vue'
 import { useDownload } from '@app/composable/meta/media'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
+import { openNoteEditModal, useDeleteNote } from '@app/composable/study/notes'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'NoteListCard',
@@ -39,10 +48,16 @@ export default defineComponent({
 		note: {
 			type: NoteEntity,
 			required: true
+		},
+		edit: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
 	components: { IonSpinner, SaveToSet },
 	setup (props) {
+		const { id } = useAuth()
 		const {
 			loading,
 			content,
@@ -50,6 +65,7 @@ export default defineComponent({
 			download,
 			deleteFromDownloads
 		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
+		const { deleteNote, loading: deleteLoading } = useDeleteNote(props.note.id)
 
 		return {
 			ellipsisVerticalOutline,
@@ -59,7 +75,8 @@ export default defineComponent({
 			loading,
 			content,
 			error,
-			deleteFromDownloads
+			deleteFromDownloads,
+			id, deleteNote, deleteLoading, openNoteEditModal
 		}
 	}
 })

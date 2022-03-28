@@ -15,7 +15,7 @@
 				</div>
 			</div>
 			<div class="md:mt-6 md:px-4 lg:px-0">
-				<IonSkeletonText v-if="loading" animated class="h-36 rounded-xl" />
+				<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
 				<div v-else-if="!fetched" class="flex flex-col gap-4 max-w-[500px] mx-auto p-4 md:p-0">
 					<div v-for="r in recent" :key="r" class="flex items-center gap-4">
 						<IonIcon :icon="closeOutline" class="text-2xl" @click="clearFromRecent(r)" />

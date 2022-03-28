@@ -12,13 +12,20 @@
 					</span>
 				</template>
 			</Tag>
-			<div class="flex items-center text-gray gap-2">
-				<Avatar :id="flashCard.userId" :name="flashCard.userBio.fullName" :size="24"
-					:src="flashCard.userBio.photo" />
-				<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
-					text="Share this flashcard" />
-				<SaveToSet :entity="flashCard" />
+			<div class="flex items-center text-gray gap-3">
+				<template v-if="edit && flashCard.userId === id">
+					<span class="text-primary font-bold" @click.prevent="openFlashCardEditModal(flashCard, $router)">Edit</span>
+					<span class="text-red font-bold" @click.prevent="deleteFlashCard">Delete</span>
+				</template>
+				<template v-else>
+					<Avatar :id="flashCard.userId" :name="flashCard.userBio.fullName" :size="24"
+						:src="flashCard.userBio.photo" />
+					<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
+						text="Share this flashcard" />
+					<SaveToSet :entity="flashCard" />
+				</template>
 			</div>
+			<PageLoading v-if="loading" />
 		</div>
 	</router-link>
 </template>
@@ -31,6 +38,8 @@ import Avatar from '@app/components/core/Avatar.vue'
 import { FlashCardEntity } from '@modules/study'
 import Share from '../../core/Share.vue'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
+import { useAuth } from '@app/composable/auth/auth'
+import { openFlashCardEditModal, useDeleteFlashCard } from '@app/composable/study/flashCards'
 
 export default defineComponent({
 	name: 'FlashCardListCard',
@@ -39,10 +48,20 @@ export default defineComponent({
 		flashCard: {
 			type: FlashCardEntity,
 			required: true
+		},
+		edit: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
-	setup () {
-		return { copyOutline, formatNumber, pluralize }
+	setup (props) {
+		const { id } = useAuth()
+		const { deleteFlashCard, loading } = useDeleteFlashCard(props.flashCard.id)
+		return {
+			copyOutline, formatNumber, pluralize, id,
+			openFlashCardEditModal, deleteFlashCard, loading
+		}
 	}
 })
 </script>
