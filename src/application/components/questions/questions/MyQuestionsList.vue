@@ -1,20 +1,10 @@
 <template>
 	<div class="showcase-flex">
-		<div class="bg-white md:rounded-xl flex items-center justify-between gap-2 md:p-4 border-bottom-line">
+		<div class="bg-white md:rounded-xl flex items-center justify-between gap-2 md:p-4 border-bottom-line pb-4">
 			<ion-text class="text-main_dark leading-tight text-heading font-bold hidden md:inline">
-				All questions
+				My questions
 			</ion-text>
 			<div class="flex items-center gap-4 w-full md:w-auto">
-				<ion-select v-model="answered"
-					class="bg-white md:bg-new_gray !text-gray flex-grow w-full md:w-32 font-bold select-primary"
-					interface="action-sheet"
-					placeholder="State">
-					<ion-select-option v-for="choice in answeredChoices" :key="choice.key"
-						:value="choice.val" @click="answered = choice.val">
-						{{ choice.key }}
-					</ion-select-option>
-				</ion-select>
-
 				<router-link class="hidden md:inline" to="/questions/create">
 					<ion-button class="btn-primary font-bold">
 						Ask a question
@@ -37,24 +27,17 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useQuestionList } from '@app/composable/questions/questions'
 import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
-import EmptyState from '@app/components/core/EmptyState.vue'
-import { IonSelect, IonSelectOption, IonSkeletonText } from '@ionic/vue'
+import { IonSkeletonText } from '@ionic/vue'
+import { useUserQuestionList } from '@app/composable/users/users/questions'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
-	name: 'QuestionsList',
-	components: { QuestionListCard, EmptyState, IonSelect, IonSelectOption, IonSkeletonText },
+	name: 'MyQuestionsList',
+	components: { QuestionListCard, IonSkeletonText },
 	setup () {
-		const {
-			filteredQuestions: questions, error, loading, hasMore, fetchOlderQuestions,
-			answeredChoices, answered, subject
-		} = useQuestionList()
-
-		return {
-			questions, error, loading, hasMore,
-			fetchOlderQuestions, answeredChoices, answered, subject
-		}
+		const { questions, error, loading, hasMore, fetchOlderQuestions } = useUserQuestionList(useAuth().id.value)
+		return { questions, error, loading, hasMore, fetchOlderQuestions }
 	}
 })
 </script>

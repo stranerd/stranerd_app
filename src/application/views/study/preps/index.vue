@@ -30,9 +30,7 @@ export default defineComponent({
 	components: { DashboardLayout, ContinueTests, IonSegment, IonSegmentButton, ExploreTestPrepsList },
 	setup () {
 		const tab = ref('tests')
-		return {
-			tab
-		}
+		return { tab }
 	}
 })
 </script>

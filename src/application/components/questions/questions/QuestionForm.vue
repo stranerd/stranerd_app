@@ -3,7 +3,7 @@
 		<IonInput
 			v-model="factory.subject"
 			class="w-full bg-white border border-new_gray lg:hidden"
-			placeholder="What subject/course does your question fall under?"
+			placeholder="Associated subject/course?"
 		/>
 		<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
 			placeholder="Write your question here." />
@@ -23,7 +23,7 @@
 			<IonInput
 				v-model="factory.subject"
 				class="w-full flex-grow bg-white border border-new_gray hidden lg:block"
-				placeholder="What subject/course does your question fall under?"
+				placeholder="Associated subject/course?"
 			/>
 			<FileInput
 				:multiple="true"
