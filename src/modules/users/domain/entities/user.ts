@@ -1,6 +1,6 @@
 import { BaseEntity, parseMedia } from '@modules/core'
 import { appName } from '@utils/environment'
-import { capitalize, catchDivideByZero, formatNumber, getPercentage } from '@utils/commons'
+import { capitalize, catchDivideByZero, formatNumber } from '@utils/commons'
 import { getRankImage } from './rank'
 import {
 	UserAccount,
@@ -107,14 +107,6 @@ export class UserEntity extends BaseEntity {
 		return this.account.score
 	}
 
-	get expectedScore () {
-		return this.nextRank ? this.rank.score : this.account.score
-	}
-
-	get scorePercentage () {
-		return getPercentage(this.score, this.expectedScore)
-	}
-
 	get rankImage () {
 		return getRankImage(this.rank.id)
 	}
@@ -146,10 +138,11 @@ export class UserEntity extends BaseEntity {
 		return this.account.meta
 	}
 
-	get nerdScoreColor () {
-		if (this.scorePercentage > 75) return { fg: '#00D246', bg: '#00D24622' }
-		if (this.scorePercentage > 40) return { fg: '#546DD3', bg: '#546DD322' }
-		return { fg: '#FF6666', bg: '#FF666622' }
+	get nerdScoreMessage () {
+		if (this.account.rankings.daily > 10) return 'Your performance has been excellent today. Keep it up.'
+		if (this.account.rankings.daily > 5) return 'You are on a streak today. Keep it rolling!'
+		if (this.account.rankings.daily > 2) return 'Keep doing what you are doing!'
+		return 'Time to pick up on your performance.'
 	}
 
 	get isAdmin () {

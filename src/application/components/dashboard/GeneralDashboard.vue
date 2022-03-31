@@ -9,6 +9,9 @@
 
 			<div class="showcase2">
 				<DashboardCard :icon="rocketOutline"
+					:title="`${user ? formatNumber(user?.account.streak.count) : 'N/A'} ${pluralize(user?.account.streak.count, 'day', 'days')}`"
+					iconClass="text-orange" subtitle="Current streak" />
+				<DashboardCard :icon="rocketOutline"
 					:title="`${user ? formatNumber(user?.account.streak.longestStreak) : 'N/A'} ${pluralize(user?.account.streak.longestStreak, 'day', 'days')}`"
 					iconClass="text-orange" subtitle="Longest streak" />
 			</div>
