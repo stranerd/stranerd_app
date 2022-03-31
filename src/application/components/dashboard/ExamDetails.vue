@@ -66,10 +66,15 @@
 						<span class="min-w-[5rem]">Date</span>
 					</div>
 				</div>
-				<router-link v-for="test in institutionTests" :key="test.hash" :to="`/study/tests/${test.id}`"
+				<router-link
+					v-for="test in institutionTests.slice(historyTab * historyDivisor, (historyTab + 1) * historyDivisor)"
+					:key="test.hash" :to="`/study/tests/${test.id}`"
 					class="header flex flex-col md:flex-row text-body text-gray justify-between border-b border-new_gray md:px-8 p-4">
 					<div class="flex-grow flex justify-between">
-						<span class="w-full truncate">{{ test.name }}</span>
+						<span class="w-full truncate">
+							{{ institutionTests.findIndex((t) => t.id === test.id) + 1 }}.
+							{{ test.name }}
+						</span>
 						<span class="min-w-[5rem]">Test</span>
 					</div>
 					<div class="w-full md:w-auto flex justify-between">
@@ -79,13 +84,18 @@
 						<span class="min-w-[5rem]">{{ formatTime(test.createdAt) }}</span>
 					</div>
 				</router-link>
+				<div v-if="Math.ceil(institutionTests.length / historyDivisor) > 1"
+					class="flex p-4 items-center justify-center gap-4" style="overflow-x: auto">
+					<a v-for="i in Math.ceil(institutionTests.length / historyDivisor)" :key="i"
+						@click="historyTab = i - 1">{{ i }}</a>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+import { computed, defineComponent, PropType, ref } from 'vue'
 import {
 	calendarOutline,
 	checkmarkCircleOutline,
@@ -113,6 +123,8 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { institution } = useInstitution(props.exam.institutionId)
+		const historyTab = ref(0)
+		const historyDivisor = 20
 		const daysLeft = computed(() => {
 			let days = (props.exam.startDate - Date.now()) / (1000 * 60 * 60 * 24)
 			if (days < 0) days = 0
@@ -129,6 +141,7 @@ export default defineComponent({
 			return catchDivideByZero(values.reduce((acc, cur) => acc + cur, 0), values.length)
 		})
 		return {
+			historyTab, historyDivisor,
 			institution,
 			formatTime,
 			daysLeft,
