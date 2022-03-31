@@ -1,8 +1,8 @@
 <template>
 	<div class="relative w-full flex items-center">
 		<img
-			:onerror="`this.src = '${DEFAULT_PROFILE_BACKDROP}'`"
-			:src="source || DEFAULT_PROFILE_BACKDROP"
+			:onerror="`this.src = '${defaultCover}'`"
+			:src="source || defaultCover"
 			:style="`object-fit: cover;`"
 			alt=""
 			class="w-full h-full"
@@ -18,7 +18,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import { Media, UploadedFile } from '@modules/core'
-import { DEFAULT_PROFILE_BACKDROP } from '@utils/constants'
+import { DEFAULT_PROFILE_BACKDROP, DEFAULT_PROFILE_BACKDROP_EDIT } from '@utils/constants'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { pencilOutline } from 'ionicons/icons'
 
@@ -43,7 +43,8 @@ export default defineComponent({
 			}
 		})
 		const catchPhoto = useFileInputCallback(async ([file]) => emit('photo', file))
-		return { pencilOutline, source, DEFAULT_PROFILE_BACKDROP, catchPhoto }
+		const defaultCover = computed(() => props.editable ? DEFAULT_PROFILE_BACKDROP_EDIT : DEFAULT_PROFILE_BACKDROP)
+		return { pencilOutline, source, defaultCover, catchPhoto }
 	}
 })
 </script>

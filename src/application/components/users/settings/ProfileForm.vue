@@ -33,11 +33,6 @@
 			</div>
 
 			<div class="flex w-full justify-end gap-2 items-center">
-				<ion-button class="btn-outline text-primary w-24" size="small" type="button"
-					@click.prevent="next">
-					Skip
-					<ion-ripple-effect class="rounded-lg" />
-				</ion-button>
 				<ion-button :disabled="loading || !factory.valid" class="btn-primary w-24" size="small"
 					type="submit">
 					Next

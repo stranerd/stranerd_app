@@ -13,7 +13,7 @@
 					:to="path"
 					class="col-span-1 flex flex-col items-center justify-center">
 					<ion-icon :icon="$route.path === path ? icon : iconOutline " class="w-6 md:w-14" />
-					<IonText class="hidden md:inline">{{ name }}</IonText>
+					<IonText>{{ name }}</IonText>
 				</router-link>
 			</div>
 		</IonToolbar>

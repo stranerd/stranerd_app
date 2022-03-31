@@ -16,13 +16,9 @@
 				<ion-label>University</ion-label>
 			</div>
 		</ion-radio-group>
-		<div class="flex w-full gap-2 items-center">
+		<div class="flex w-full gap-2 items-center justify-between">
 			<ion-button class="btn-secondary w-24" size="small" type="button" @click.prevent="back">
 				Back
-				<ion-ripple-effect class="rounded-lg" />
-			</ion-button>
-			<ion-button class="ml-auto btn-outline text-primary w-24" size="small" type="button" @click.prevent="next">
-				Skip
 				<ion-ripple-effect class="rounded-lg" />
 			</ion-button>
 			<ion-button class="btn-primary w-24" size="small" type="button" @click="tab = 1">
@@ -73,14 +69,9 @@
 				</ion-select>
 			</div>
 
-			<div class="flex w-full gap-2 items-center">
+			<div class="flex w-full gap-2 items-center justify-between">
 				<ion-button class="btn-secondary w-24" size="small" type="button" @click.prevent="back">
 					Back
-					<ion-ripple-effect class="rounded-lg" />
-				</ion-button>
-				<ion-button class="ml-auto btn-outline text-primary w-24" size="small" type="button"
-					@click.prevent="next">
-					Skip
 					<ion-ripple-effect class="rounded-lg" />
 				</ion-button>
 				<ion-button class="btn-primary w-24" size="small" type="submit">
@@ -106,11 +97,6 @@
 			<div class="flex w-full justify-between gap-2 items-center">
 				<ion-button class="btn-secondary w-24" size="small" type="button" @click.prevent="back">
 					Back
-					<ion-ripple-effect class="rounded-lg" />
-				</ion-button>
-				<ion-button class="ml-auto btn-outline text-primary w-24" size="small" type="button"
-					@click.prevent="next">
-					Skip
 					<ion-ripple-effect class="rounded-lg" />
 				</ion-button>
 				<ion-button class="btn-primary w-24" size="small" type="button" @click.prevent="tab = 2">
@@ -151,11 +137,6 @@
 		<div class="flex w-full justify-between gap-2 items-center">
 			<ion-button class="btn-secondary w-24" size="small" type="button" @click.prevent="back">
 				Back
-				<ion-ripple-effect class="rounded-lg" />
-			</ion-button>
-			<ion-button class="ml-auto btn-outline text-primary w-24" size="small" type="button"
-				@click.prevent="next">
-				Skip
 				<ion-ripple-effect class="rounded-lg" />
 			</ion-button>
 			<ion-button class="btn-primary w-24" size="small" type="submit">

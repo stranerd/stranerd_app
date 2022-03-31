@@ -320,12 +320,6 @@ ion-button {
 	--padding-end: 1.25rem;
 	--color: inherit !important;
 	border-radius: 8px;
-
-	@media (min-width: 640px) {
-		--color: $color-white;
-		color: $color-white;
-		background: $color-primary;
-	}
 }
 
 .btn-white {
