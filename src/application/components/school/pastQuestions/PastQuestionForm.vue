@@ -58,7 +58,7 @@
 							@click="factory.removeOption(index)" />
 						<IonTextarea v-model="factory.options[index]"
 							:placeholder="`Enter Option ${getAlphabet(index + 1).toUpperCase()}`"
-							class="my-0 flex-grow-1" rows="3" />
+							class="my-0 flex-grow" rows="3" />
 						<IonRadio :value="index" />
 					</div>
 				</IonRadioGroup>
