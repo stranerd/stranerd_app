@@ -102,13 +102,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-input {
-		--background: #F2F3F5 !important;
+		--background: #{$color-newGray} !important;
 		--padding-start: 1.8rem !important;
 		--padding-end: 1.5rem !important;
 		--padding-top: .75rem !important;
 		--padding-bottom: .75rem !important;
-		--color: $color-mainDark !important;
-		--placeholder-color: $color-mainDark !important;
+		--color: #{$color-mainDark} !important;
+		--placeholder-color: #{$color-mainDark} !important;
 		border-radius: 12px;
 	}
 

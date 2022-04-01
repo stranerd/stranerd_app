@@ -52,14 +52,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-	ion-tab-button {
-		--color-selected: #546DD3;
-		--padding-top: 1px;
-		--padding-bottom: 1px;
-		--color: #808e9c;
-		--ripple-color: #546DD3;
-	}
-
 	ion-icon {
 		font-size: 23px;
 	}

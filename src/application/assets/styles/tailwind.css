@@ -80,9 +80,14 @@
 		box-shadow: 0 0 15px 5px rgba(139, 158, 177, 0.1)
 	}
 
+	.footer-shadow {
+		box-shadow: 0 -5px 5px rgba(139, 158, 177, 0.05)
+	}
+
 	.showcase {
 		@apply grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 md:gap-4
 	}
+
 	.showcase2 {
 		@apply grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 md:gap-4
 	}

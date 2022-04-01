@@ -107,9 +107,4 @@ export default defineComponent({
 	.nav-shadow {
 		box-shadow: 0 5px 10px rgba(84, 109, 211, 0.1);
 	}
-
-	:deep(ion-searchbar) {
-		--background: $color-newGray !important;
-		background: $color-newGray !important;
-	}
 </style>

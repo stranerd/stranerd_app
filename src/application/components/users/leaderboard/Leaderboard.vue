@@ -36,10 +36,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-select {
-		--placeholder-color: #8B9EB1;
+		--placeholder-color: #{$color-iconInactive};
 		--placeholder-opacity: 1;
 		background-color: #fff !important;
-		--color: #8B9EB1;
+		--color: #{$color-iconInactive};
 		--padding-end: 1rem;
 		--padding-top: 0.5rem !important;
 		--padding-bottom: 0.5rem !important;

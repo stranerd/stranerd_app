@@ -43,9 +43,9 @@ export default defineComponent({
 	}
 
 	ion-segment-button {
-		--background-checked: $color-white;
-		--background-focused: $color-white;
-		--indicator-color: $color-white;
+		--background-checked: #{$color-white};
+		--background-focused: #{$color-white};
+		--indicator-color: #{$color-white};
 		--padding-top: 0.75rem;
 		--padding-bottom: 0.75rem;
 		font-weight: bold;

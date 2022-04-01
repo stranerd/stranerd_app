@@ -53,8 +53,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 	ion-button {
 		--background: transparent !important;
-		--color: #4D5C6F;
-		--border-color: #8B9EB1;
+		--color: #{$color-darkGray};
+		--border-color: #{$color-iconInactive};
 		--border-style: solid;
 		--border-width: 2px;
 		--box-shadow: none;

@@ -32,10 +32,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	:deep(ion-searchbar) {
-		--background: $color-newGray !important;
-		background: $color-newGray !important;
-	}
-</style>

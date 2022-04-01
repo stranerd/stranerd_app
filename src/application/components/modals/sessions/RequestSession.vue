@@ -97,24 +97,3 @@ export default defineComponent({
 	components: { IonTextarea, IonSelectOption, IonSelect, IonIcon }
 })
 </script>
-<style scoped>
-	ion-textarea {
-		--placeholder-color: #8B9EB1;
-	}
-
-	ion-select {
-		/* Set a different placeholder color */
-		--placeholder-color: #8B9EB1;
-
-		/* Set full opacity on the placeholder */
-		--placeholder-opacity: 1;
-	}
-
-	ion-input {
-		/* Set a different placeholder color */
-		--placeholder-color: #8B9EB1;
-
-		/* Set full opacity on the placeholder */
-		--placeholder-opacity: 1;
-	}
-</style>

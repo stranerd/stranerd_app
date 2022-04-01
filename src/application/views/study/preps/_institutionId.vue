@@ -112,8 +112,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 	ion-item {
 		width: 100%;
-		--background: $color-newGray !important;
-		background: $color-newGray !important;
+		--background: #{$color-newGray} !important;
 		border-radius: .5rem;
 
 		--border-radius: .5rem;
@@ -123,8 +122,7 @@ export default defineComponent({
 	}
 
 	ion-select {
-		--background: $color-newGray !important;
-		background: $color-newGray !important;
+		--background: #{$color-newGray} !important;
 		border-radius: .75rem;
 		--padding-start: 1rem;
 		--padding-end: 1rem;

@@ -60,7 +60,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-label {
-		--color: #8B9EB1 !important;
+		--color: #{$color-iconInactive} !important;
 	}
 
 	ion-label {

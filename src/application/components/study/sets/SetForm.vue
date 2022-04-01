@@ -65,12 +65,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-radio {
-		--color: #8B9EB1 !important;
-		--color-checked: #546DD3 !important;
+		--color: #{$color-iconInactive} !important;
+		--color-checked: #{$color-primary} !important;
 	}
 
 	ion-label {
-		--color: #8B9EB1 !important;
+		--color: #{$color-iconInactive} !important;
 	}
 
 	ion-label {

@@ -108,7 +108,7 @@ export default defineComponent({
 	}
 
 	ion-input {
-		--background: rgba(242, 243, 245, 1);
+		--background: #{$color-newGray};
 	}
 
 	ion-label {

@@ -55,12 +55,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-toolbar {
-		--background: #FFFFFF;
+		--background: #{$color-white};
 		--box-shadow: none;
 	}
 
 	ion-header {
-		--background: #FFFFFF;
+		--background: #{$color-white};
 		--box-shadow: none;
 	}
 </style>

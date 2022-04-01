@@ -88,9 +88,9 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	ion-input {
-		--placeholder-color: #8B9EB1;
+		--placeholder-color: #{$color-iconInactive};
 		--placeholder-opacity: 1;
 		--padding-start: 24px;
 		--padding-end: 24px;

@@ -204,8 +204,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-label {
-		--color: $color-mainDark !important;
-		color: $color-mainDark !important;
+		--color: #{$color-mainDark} !important;
 		@media (max-width: 640px) {
 			font-size: 12px !important;
 		}

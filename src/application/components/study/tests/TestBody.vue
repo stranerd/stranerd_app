@@ -96,8 +96,7 @@ export default defineComponent({
 	}
 
 	ion-select {
-		--background: #F7F7FC;
-		background: #F7F7FC;
+		--background: #{$color-lightGray};
 		--padding-start: 1rem;
 		--padding-end: 1rem;
 		--padding-top: 0.8rem;

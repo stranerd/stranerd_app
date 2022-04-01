@@ -27,8 +27,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 	.auth {
 		:deep(ion-input) {
-			--background: $color-newGray !important;
-			background: $color-newGray !important;
 			margin-bottom: 0;
 			width: 420px;
 			max-width: 90vw !important;

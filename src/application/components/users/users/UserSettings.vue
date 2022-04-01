@@ -249,7 +249,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-button {
-		--background: #546DD3;
+		--background: #{$color-primary};
 		--box-shadow: none;
 		height: 2.75rem;
 	}
