@@ -15,7 +15,7 @@ export class DiscussionApiDataSource implements DiscussionBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, DiscussionFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, DiscussionFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {

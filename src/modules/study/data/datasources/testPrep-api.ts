@@ -15,7 +15,7 @@ export class TestPrepApiDataSource implements TestPrepBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, TestPrepFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, TestPrepFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class TestPrepApiDataSource implements TestPrepBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: TestPrepToModel) {

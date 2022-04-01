@@ -39,7 +39,7 @@ export default defineComponent({
 		},
 		onClick: {
 			required: false,
-			type: Function as PropType<() => {}>,
+			type: Function as PropType<() => void>,
 			default: () => {
 			}
 		},

@@ -11,7 +11,7 @@ export class ReferralApiDataSource implements ReferralBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, ReferralFromModel | null>(`/${id}`, {})
+		return await this.stranerdClient.get<any, ReferralFromModel | null>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {

@@ -15,7 +15,7 @@ export class QuestionApiDataSource implements QuestionBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, QuestionFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, QuestionFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class QuestionApiDataSource implements QuestionBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async markBestAnswer (questionId: string, answerId: string) {

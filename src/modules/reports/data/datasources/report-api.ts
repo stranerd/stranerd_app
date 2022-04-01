@@ -15,7 +15,7 @@ export class ReportApiDataSource implements ReportBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, ReportFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, ReportFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -23,7 +23,7 @@ export class ReportApiDataSource implements ReportBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async listenToOne (id: string, listeners: Listeners<ReportFromModel>) {

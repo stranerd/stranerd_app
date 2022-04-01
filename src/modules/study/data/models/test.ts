@@ -1,5 +1,5 @@
 import { TestData } from '../../domain/entities/test'
-import { PastQuestionType } from '../../domain/entities/pastQuestion'
+import { PastQuestionType } from '@modules/school'
 
 export interface TestFromModel extends Omit<TestToModel, 'type'> {
 	id: string

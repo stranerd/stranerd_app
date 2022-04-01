@@ -84,7 +84,7 @@ const YouTube = defineComponent({
 	mounted () {
 		if (!window.onYouTubeIframeAPIReadyResolvers) window.onYouTubeIframeAPIReadyResolvers = []
 		if (!window.onYouTubeIframeAPIReady) window.onYouTubeIframeAPIReady = () => {
-			window.onYouTubeIframeAPIReadyResolvers?.forEach((resolver: Function) => {
+			window.onYouTubeIframeAPIReadyResolvers?.forEach((resolver: () => void) => {
 				resolver()
 			})
 		}

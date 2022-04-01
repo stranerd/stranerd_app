@@ -7,7 +7,7 @@ export const ipAddressGetter = definePlugin(async () => {
 	return
 
 	const geopluginApiSite = 'https://ssl.geoplugin.net/json.gp?k=5c113cbeb772aab6'
-	const res = await new HttpClient('').get<{}, any>(geopluginApiSite, {}).catch(() => null)
+	const res = await new HttpClient('').get<any, any>(geopluginApiSite, {}).catch(() => null)
 	if (!res) return
 
 	const {

@@ -15,7 +15,7 @@ export class CommentApiDataSource implements CommentBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, CommentFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, CommentFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {

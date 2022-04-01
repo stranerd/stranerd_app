@@ -15,7 +15,7 @@ export class ReviewApiDataSource implements ReviewBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, ReviewFromModel | null>(`/${id}`, {})
+		return await this.stranerdClient.get<any, ReviewFromModel | null>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {

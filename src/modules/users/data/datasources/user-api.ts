@@ -12,7 +12,7 @@ export class UserApiDataSource implements UserBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, UserFromModel | null>(`/${id}`, {})
+		return await this.stranerdClient.get<any, UserFromModel | null>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -35,7 +35,7 @@ export class UserApiDataSource implements UserBaseDataSource {
 
 	async updateStreak () {
 		type Streak = { skip: boolean, increase: boolean, reset: boolean, streak: number }
-		await this.stranerdClient.post<{}, Streak>('/streak', {})
+		await this.stranerdClient.post<any, Streak>('/streak', {})
 	}
 
 	async updateSchool (school: UserSchoolData) {

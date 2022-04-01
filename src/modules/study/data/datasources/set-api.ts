@@ -15,7 +15,7 @@ export class SetApiDataSource implements SetBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, SetFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, SetFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class SetApiDataSource implements SetBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: SetToModel) {

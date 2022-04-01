@@ -15,7 +15,7 @@ export class TestApiDataSource implements TestBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, TestFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, TestFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class TestApiDataSource implements TestBaseDataSource {
 	}
 
 	async end (id: string) {
-		await this.stranerdClient.put<{}, boolean>(`/${id}/end`, {})
+		await this.stranerdClient.put<any, boolean>(`/${id}/end`, {})
 	}
 
 	async updateAnswer (id: string, questionId: string, answer: number | string) {

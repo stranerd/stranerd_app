@@ -15,7 +15,7 @@ export class PastQuestionApiDataSource implements PastQuestionBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, PastQuestionFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, PastQuestionFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class PastQuestionApiDataSource implements PastQuestionBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: PastQuestionToModel) {

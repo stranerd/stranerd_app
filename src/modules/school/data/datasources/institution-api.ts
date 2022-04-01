@@ -15,7 +15,7 @@ export class InstitutionApiDataSource implements InstitutionBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, InstitutionFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, InstitutionFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class InstitutionApiDataSource implements InstitutionBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: InstitutionToModel) {

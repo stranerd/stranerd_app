@@ -11,7 +11,7 @@ export class ChatMetaApiDataSource implements ChatMetaBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, ChatMetaFromModel | null>(`/${id}`, {})
+		return await this.stranerdClient.get<any, ChatMetaFromModel | null>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {

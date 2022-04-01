@@ -15,7 +15,7 @@ export class AnswerApiDataSource implements AnswerBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, AnswerFromModel>(`/answers/${id}`, {})
+		return await this.stranerdClient.get<any, AnswerFromModel>(`/answers/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -41,7 +41,7 @@ export class AnswerApiDataSource implements AnswerBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/answers/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/answers/${id}`, {})
 	}
 
 	async vote (id: string, vote: boolean) {

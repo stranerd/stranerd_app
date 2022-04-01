@@ -22,4 +22,4 @@ export interface UserFromModel extends UserToModel {
 	school: UserSchoolData | null
 }
 
-export type UserToModel = {}
+export type UserToModel = Record<string, unknown>

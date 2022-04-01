@@ -15,7 +15,7 @@ export class FlashCardApiDataSource implements FlashCardBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, FlashCardFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, FlashCardFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class FlashCardApiDataSource implements FlashCardBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: FlashCardToModel) {

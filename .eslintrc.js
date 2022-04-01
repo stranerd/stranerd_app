@@ -10,7 +10,8 @@ module.exports = {
 		'@vue/typescript/recommended'
 	],
 	parserOptions: {
-		ecmaVersion: 2020
+		ecmaVersion: 2020,
+		parser: '@typescript-eslint/parser'
 	},
 	rules: {
 		'no-console': 'warn',
@@ -18,7 +19,7 @@ module.exports = {
 		'vue/no-deprecated-slot-attribute': 'off',
 		'@typescript-eslint/no-unused-vars': 'off',
 		'@typescript-eslint/no-non-null-assertion': 'off',
-		'@typescript-eslint/ban-ts-ignore': 'off',
+		'@typescript-eslint/ban-ts-comment': 'off',
 		'@typescript-eslint/no-var-requires': 'off',
 		'@typescript-eslint/interface-name-prefix': 'off',
 		'no-empty-function': 'off',
@@ -54,6 +55,7 @@ module.exports = {
 			alignAttributesVertically: true,
 			ignores: []
 		}],
+		'vue/multi-word-component-names': 'off',
 		'vue/no-mutating-props': 'off',
 		'object-property-newline': 'off',
 		'require-atomic-updates': 'off',

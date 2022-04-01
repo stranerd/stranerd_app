@@ -15,7 +15,7 @@ export class GroupApiDataSource implements GroupBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, GroupFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, GroupFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class GroupApiDataSource implements GroupBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: GroupToModel) {

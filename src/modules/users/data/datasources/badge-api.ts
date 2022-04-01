@@ -11,7 +11,7 @@ export class BadgeApiDataSource implements BadgeBaseDataSource {
 	}
 
 	async get () {
-		return await this.stranerdClient.get<{}, BadgeFromModel | null>('/', {})
+		return await this.stranerdClient.get<any, BadgeFromModel | null>('/', {})
 	}
 
 	async listenToOne (id: string, listeners: Listeners<BadgeFromModel>) {

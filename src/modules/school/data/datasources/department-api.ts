@@ -15,7 +15,7 @@ export class DepartmentApiDataSource implements DepartmentBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, DepartmentFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, DepartmentFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class DepartmentApiDataSource implements DepartmentBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: DepartmentToModel) {

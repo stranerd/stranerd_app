@@ -24,7 +24,7 @@ $grid-breakpoints: (
 
 @each $key in $spacers {
 	@each $bp, $width in $grid-breakpoints {
-		body[data-no-gap='true'] .#{$bp}gap-#{$key} {
+		body[data-no-gap='true'] *[class*="#{$bp}gap-#{$key}"] {
 			@media (min-width: $width) {
 				gap: 0 !important;
 

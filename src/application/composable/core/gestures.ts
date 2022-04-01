@@ -1,7 +1,7 @@
 import { onMounted, ref } from 'vue'
 import { createGesture } from '@ionic/vue'
 
-export const wrapperAsync = async (callback: Function) => {
+export const wrapperAsync = async (callback: () => Promise<void>) => {
 	try {
 		await callback()
 	} catch (e) {

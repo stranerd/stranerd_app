@@ -15,7 +15,7 @@ export class CommentApiDataSource implements CommentBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, CommentFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, CommentFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class CommentApiDataSource implements CommentBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: CommentToModel) {

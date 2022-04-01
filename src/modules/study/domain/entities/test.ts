@@ -59,7 +59,7 @@ export class TestEntity extends BaseEntity {
 	}
 
 	get endedAt () {
-		//@ts-ignore
+		// @ts-ignore
 		return this.createdAt + (this.data.time ?? 0) * 60 * 1000
 	}
 

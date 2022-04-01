@@ -15,7 +15,7 @@ export class SessionApiDataSource implements SessionBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, SessionFromModel | null>(`/${id}`, {})
+		return await this.stranerdClient.get<any, SessionFromModel | null>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -41,10 +41,10 @@ export class SessionApiDataSource implements SessionBaseDataSource {
 	}
 
 	async cancel (id: string) {
-		await this.stranerdClient.put<{}, boolean>(`/${id}/cancel`, {})
+		await this.stranerdClient.put<any, boolean>(`/${id}/cancel`, {})
 	}
 
 	async end (id: string) {
-		await this.stranerdClient.put<{}, boolean>(`/${id}/end`, {})
+		await this.stranerdClient.put<any, boolean>(`/${id}/end`, {})
 	}
 }

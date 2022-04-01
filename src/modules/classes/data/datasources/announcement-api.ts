@@ -15,7 +15,7 @@ export class AnnouncementApiDataSource implements AnnouncementBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, AnnouncementFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, AnnouncementFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class AnnouncementApiDataSource implements AnnouncementBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: AnnouncementToModel) {

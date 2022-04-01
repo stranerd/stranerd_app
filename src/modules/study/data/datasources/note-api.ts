@@ -15,7 +15,7 @@ export class NoteApiDataSource implements NoteBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, NoteFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, NoteFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class NoteApiDataSource implements NoteBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: NoteToModel) {

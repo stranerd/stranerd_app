@@ -15,7 +15,7 @@ export class VideoApiDataSource implements VideoBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, VideoFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, VideoFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class VideoApiDataSource implements VideoBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: VideoToModel) {

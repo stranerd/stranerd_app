@@ -15,7 +15,7 @@ export class ChatApiDataSource implements ChatBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, ChatFromModel | null>(`/${id}`, {})
+		return await this.stranerdClient.get<any, ChatFromModel | null>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {

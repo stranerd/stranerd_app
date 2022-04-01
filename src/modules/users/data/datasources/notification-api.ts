@@ -11,7 +11,7 @@ export class NotificationApiDataSource implements NotificationBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, NotificationFromModel | null>(`/${id}`, {})
+		return await this.stranerdClient.get<any, NotificationFromModel | null>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
