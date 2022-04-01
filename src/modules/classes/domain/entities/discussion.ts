@@ -1,13 +1,13 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
-import { isImage, isVideo } from '@stranerd/validate'
+import { extractUrls, isImage, isVideo } from '@stranerd/validate'
 import { formatNumber } from '@utils/commons'
 
 export class DiscussionEntity extends BaseEntity {
 	public readonly id: string
 	public readonly content: string
 	public readonly media: Media | null
-	public readonly links: string[]
+	public readonly links: { original: string, normalized: string }[]
 	public readonly groupId: string
 	public readonly classId: string
 	public readonly userId: string
@@ -67,6 +67,14 @@ export class DiscussionEntity extends BaseEntity {
 		return `${formatNumber(size / (range?.val ?? -1))}${range?.key ?? 'b'}`
 	}
 
+	get formattedContent () {
+		let content = this.content
+		extractUrls(content).forEach(({ original, normalized }) => {
+			content = content.replaceAll(original, `<a href="${normalized}" target="_blank" style="text-decoration: underline; color: #027eb5;">${original}</a>`)
+		})
+		return content
+	}
+
 	search (search: string) {
 		return (this.media?.name ?? '').toLowerCase().includes(search.toLowerCase())
 	}
@@ -76,7 +84,7 @@ type DiscussionConstructorArgs = {
 	id: string
 	content: string
 	media: Media | null
-	links: string[]
+	links: { original: string, normalized: string }[]
 	createdAt: number
 	updatedAt: number
 	groupId: string

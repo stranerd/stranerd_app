@@ -9,7 +9,7 @@
 					<span v-else>{{ test.name }}</span>
 				</ion-text>
 
-				<Tag :index="3" :tag="test.isTimed ? 'Timed' : 'Study'" />
+				<Tag :index="5" :tag="test.isTimed ? 'Timed' : 'Study'" />
 			</div>
 
 			<ion-text class="text-left w-full text-gray text-sub truncate">

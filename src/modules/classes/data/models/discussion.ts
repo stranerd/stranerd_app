@@ -3,7 +3,7 @@ import { UserBio, UserRoles } from '@modules/users'
 
 export interface DiscussionFromModel extends DiscussionToModel {
 	id: string
-	links: string[]
+	links: { original: string, normalized: string }[]
 	createdAt: number
 	updatedAt: number
 	classId: string

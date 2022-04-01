@@ -1658,10 +1658,12 @@
   resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.13.0.tgz#993fd74a5c7c8fe8af75848ca9df2211cd05b818"
   integrity sha512-EEKHOHgYpg3/iFUKMXTZJjUayRul7sXDwNw0OGgkEOe4t7JWiibDkzUHuruvpbqEydX+z1+ez5K2bMMY76c2wA==
 
-"@stranerd/validate@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@stranerd/validate/-/validate-2.0.0.tgz#7318d6356234f248085e997b5fc483f4d6014021"
-  integrity sha512-EfmJTKZxhaz6HNXFWOV94Fd/AtV/A1mAvq5WBTTh5/pJg2OauF4RzMRDs3uwR7t+IGtpO1JFHifU6qfZgGmXvg==
+"@stranerd/validate@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@stranerd/validate/-/validate-2.2.0.tgz#da57e534b6afaf1e695511302cf6f2a3e850cb2f"
+  integrity sha512-oqGrxllDVB0yDckuIN6STkYCeTzNbThTx/LgBwBU+HzzsOOPdNxBWIaH0MjU6jruZygr4Vfpzr/vkf7oFRxnLQ==
+  dependencies:
+    url-regex-safe "^3.0.0"
 
 "@szmarczak/http-timer@^1.1.2":
   version "1.1.2"
@@ -6953,6 +6955,11 @@ ionicons@^6.0.0:
   dependencies:
     "@stencil/core" "~2.12.0"
 
+ip-regex@4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/ip-regex/-/ip-regex-4.3.0.tgz#687275ab0f57fa76978ff8f4dddc8a23d5990db5"
+  integrity sha512-B9ZWJxHHOHUhUjCPrMpLD4xEq35bUTClHM1S6CBU5ixQnkZmwipwgc96vAd7AAGM9TGHvJR+Uss+/Ak6UphK+Q==
+
 ip-regex@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/ip-regex/-/ip-regex-2.1.0.tgz#fa78bf5d2e6913c911ce9f819ee5146bb6d844e9"
@@ -11542,6 +11549,11 @@ timsort@^0.3.0:
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
+tlds@^1.228.0:
+  version "1.230.0"
+  resolved "https://registry.yarnpkg.com/tlds/-/tlds-1.230.0.tgz#9c836528c4062e565b3b58bfaef83d99e09c113d"
+  integrity sha512-QFuY6JBWZt2bZXlapjqsojul5dv9xfo7Uc8wTUlctJOuF+BS/ICni2f4x7MFiT7muUVmcKC1LvGnU4GWhYO0PQ==
+
 tmp@^0.0.33:
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
@@ -12015,6 +12027,14 @@ url-parse@^1.4.3, url-parse@^1.5.3:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
+
+url-regex-safe@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/url-regex-safe/-/url-regex-safe-3.0.0.tgz#102a38f74a1a731973fa42690c6a56656fddff12"
+  integrity sha512-+2U40NrcmtWFVjuxXVt9bGRw6c7/MgkGKN9xIfPrT/2RX0LTkkae6CCEDp93xqUN0UKm/rr821QnHd2dHQmN3A==
+  dependencies:
+    ip-regex "4.3.0"
+    tlds "^1.228.0"
 
 url@^0.11.0:
   version "0.11.0"

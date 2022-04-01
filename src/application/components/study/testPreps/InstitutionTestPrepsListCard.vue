@@ -5,7 +5,7 @@
 			<Institution :institutionId="institutionId" class="font-500" />
 		</ion-text>
 		<div class="flex justify-between items-center w-full gap-2 text-sub">
-			<Tag :index="3" :tag="yearGap" />
+			<Tag :index="5" :tag="yearGap" />
 			<Share :link="`/study/preps/${institutionId}`"
 				:title="`${institution ? institution.name : 'Institution'}'s preps`"
 				cssClass="text-lg" text="Share this institution preps" />
