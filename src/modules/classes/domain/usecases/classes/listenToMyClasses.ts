@@ -11,7 +11,7 @@ export class ListenToMyClassesUseCase {
 
 	async call (userId: string, listener: Listeners<ClassEntity>) {
 		const conditions: QueryParams = {
-			where: [{ field: `users.${ClassUsers.members}`, value: userId }, { field: 'requests', value: 'userId' }],
+			where: [{ field: `users.${ClassUsers.members}`, value: userId }, { field: 'requests', value: userId }],
 			whereType: QueryKeys.or,
 			sort: [{ field: 'createdAt', desc: true }],
 			all: true

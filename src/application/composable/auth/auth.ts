@@ -34,7 +34,7 @@ export const useAuth = () => {
 		get: () => !!id.value && !!global.user.value, set: () => {
 		}
 	})
-	const isVerified = computed({
+	const isEmailVerified = computed({
 		get: () => !!global.auth.value?.isVerified, set: () => {
 		}
 	})
@@ -112,7 +112,7 @@ export const useAuth = () => {
 
 	return {
 		id, bio, user: global.user, auth: global.auth, location: global.location,
-		isLoggedIn, isVerified, isAdmin, isTutor, currentSessionId, hasPassword,
+		isLoggedIn, isEmailVerified, isAdmin, isTutor, currentSessionId, hasPassword,
 		setAuthUser, setUserLocation, signin, signout,
 		getLocalAmount, getLocalCurrency, getLocalCurrencySymbol
 	}

@@ -15,7 +15,7 @@ export const useSearchUsers = () => {
 		if (state.detail) {
 			await setLoading(true)
 			try {
-				users.value = (await SearchUsers.call(state.detail.toLowerCase())).results
+				users.value = await SearchUsers.call(state.detail.toLowerCase())
 				state.fetched = true
 			} catch (error) {
 				await setError(error)

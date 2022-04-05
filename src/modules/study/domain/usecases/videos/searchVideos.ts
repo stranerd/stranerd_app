@@ -1,4 +1,6 @@
 import { IVideoRepository } from '../../irepositories/ivideo'
+import { QueryParams } from '@modules/core'
+import { SEARCH_PAGINATION_LIMIT } from '@utils/constants'
 
 export class SearchVideosUseCase {
 	private repository: IVideoRepository
@@ -8,9 +10,13 @@ export class SearchVideosUseCase {
 	}
 
 	async call (detail: string) {
-		return await this.repository.get({
+		const query: QueryParams = detail ? {
 			all: true,
 			search: { value: detail, fields: ['title', 'description'] }
-		})
+		} : {
+			limit: SEARCH_PAGINATION_LIMIT,
+			sort: [{ field: 'createdAt', desc: true }]
+		}
+		return (await this.repository.get(query)).results
 	}
 }

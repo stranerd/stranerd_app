@@ -24,7 +24,7 @@ import AspirantDashboard from '@app/components/dashboard/AspirantDashboard.vue'
 
 export default defineComponent({
 	name: 'Dashboard',
-	displayName: 'Dashboard',
+	displayName: 'Stranerd',
 	components: { GeneralDashboard, AspirantDashboard, DashboardLayout, StatusBar },
 	setup () {
 		const { isLoggedIn, user } = useAuth()

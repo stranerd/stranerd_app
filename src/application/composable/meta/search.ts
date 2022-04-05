@@ -84,9 +84,8 @@ export const useSearch = () => {
 				}
 				await Promise.all(
 					Object.entries(searchObj).map(async ([key, useCase]) => {
-						const { results } = await useCase.call(val)
 						//@ts-ignore
-						global.res[key].value = results
+						global.res[key].value = await useCase.call(val)
 					})
 				)
 				global.fetched.value = true

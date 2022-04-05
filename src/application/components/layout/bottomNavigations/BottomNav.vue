@@ -1,6 +1,6 @@
 <template>
-	<IonFooter class="ion-no-border">
-		<IonToolbar class="lg:hidden bg-white border-top-line">
+	<IonFooter class="ion-no-border border-top-line">
+		<IonToolbar class="lg:hidden pt-0.5">
 			<div class="flex justify-around items-center text-sub text-main_dark">
 				<router-link
 					v-for="{ path, icon, name, iconOutline } in [
@@ -51,8 +51,12 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	ion-icon {
 		font-size: 23px;
+	}
+
+	ion-toolbar {
+		--background: #{$color-white};
 	}
 </style>

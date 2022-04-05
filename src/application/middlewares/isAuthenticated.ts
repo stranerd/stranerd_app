@@ -8,7 +8,7 @@ export const isAuthenticated = defineMiddleware(async ({ to }) => {
 		if (!to.fullPath.startsWith('/auth/')) await storage.set(REDIRECT_SESSION_NAME, to.fullPath)
 		return '/auth/signin'
 	}
-	if (!useAuth().isVerified.value) {
+	if (!useAuth().isEmailVerified.value) {
 		if (!to.fullPath.startsWith('/auth/')) await storage.set(REDIRECT_SESSION_NAME, to.fullPath)
 		return '/auth/verify'
 	}

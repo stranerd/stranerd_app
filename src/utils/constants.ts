@@ -6,6 +6,7 @@ export const REDIRECT_SESSION_NAME = 'redirect-to'
 
 export const PAGINATION_LIMIT = 10
 export const CHAT_PAGINATION_LIMIT = 20
+export const SEARCH_PAGINATION_LIMIT = 50
 
 export const DEFAULT_PROFILE_PHOTO = '/images/avatars/user_profile.svg'
 export const DEFAULT_PROFILE_BACKDROP = '/images/avatars/user_backdrop.svg'

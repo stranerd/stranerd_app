@@ -29,6 +29,7 @@ import { LeaveClassUseCase } from './domain/usecases/classes/leaveClass'
 import { AcceptRequestUseCase } from './domain/usecases/classes/acceptRequest'
 import { AddMembersUseCase } from './domain/usecases/classes/addMembers'
 import { ChangeMemberRoleUseCase } from './domain/usecases/classes/changeMemberRole'
+import { SearchClassesUseCase } from './domain/usecases/classes/searchClasses'
 import { AddGroupUseCase } from './domain/usecases/groups/addGroup'
 import { GetGroupsUseCase } from './domain/usecases/groups/getGroups'
 import { FindGroupUseCase } from './domain/usecases/groups/findGroup'
@@ -87,6 +88,7 @@ export const LeaveClass = new LeaveClassUseCase(classRepository)
 export const AcceptClassRequest = new AcceptRequestUseCase(classRepository)
 export const AddClassMembers = new AddMembersUseCase(classRepository)
 export const ChangeClassMemberRole = new ChangeMemberRoleUseCase(classRepository)
+export const SearchClasses = new SearchClassesUseCase(classRepository)
 
 export const AddGroup = new AddGroupUseCase(groupRepository)
 export const GetGroups = new GetGroupsUseCase(groupRepository)

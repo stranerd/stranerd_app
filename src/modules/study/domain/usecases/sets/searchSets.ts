@@ -1,4 +1,6 @@
 import { ISetRepository } from '../../irepositories/iset'
+import { QueryParams } from '@modules/core'
+import { SEARCH_PAGINATION_LIMIT } from '@utils/constants'
 
 export class SearchSetsUseCase {
 	private repository: ISetRepository
@@ -8,9 +10,13 @@ export class SearchSetsUseCase {
 	}
 
 	async call (detail: string) {
-		return await this.repository.get({
+		const query: QueryParams = detail ? {
 			all: true,
 			search: { value: detail, fields: ['name'] }
-		})
+		} : {
+			limit: SEARCH_PAGINATION_LIMIT,
+			sort: [{ field: 'createdAt', desc: true }]
+		}
+		return (await this.repository.get(query)).results
 	}
 }

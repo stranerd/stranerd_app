@@ -292,13 +292,6 @@ ion-button {
 	--padding-start: 1.5rem;
 	--padding-end: 1.5rem;
 	--color: #{$color-white};
-
-	@media (max-width: 640px) {
-		--padding-top: 0.65rem;
-		--padding-bottom: 0.65rem;
-		--padding-start: 1.25rem;
-		--padding-end: 1.25rem;
-	}
 }
 
 .select-primary {
