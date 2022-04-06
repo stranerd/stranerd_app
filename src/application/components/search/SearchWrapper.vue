@@ -15,7 +15,7 @@
 				</div>
 			</div>
 			<div class="md:mt-6 md:px-4 lg:px-0">
-				<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
+				<BlockLoading v-if="loading" />
 				<div v-else-if="!fetched" class="flex flex-col gap-4 max-w-[500px] mx-auto p-4 md:p-0">
 					<div v-for="r in recent" :key="r" class="flex items-center gap-4">
 						<IonIcon :icon="closeOutline" class="text-2xl" @click="clearFromRecent(r)" />
@@ -36,12 +36,11 @@ import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import { useSearch } from '@app/composable/meta/search'
 import Search from '@app/components/search/Search.vue'
-import { IonSkeletonText } from '@ionic/vue'
 import { arrowRedoOutline, closeOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'SearchWrapper',
-	components: { Justified, Search, IonSkeletonText },
+	components: { Justified, Search },
 	setup () {
 		return {
 			...useSearch(),

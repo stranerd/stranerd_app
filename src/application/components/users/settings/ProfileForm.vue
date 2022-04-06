@@ -36,7 +36,7 @@
 				<ion-button :disabled="loading || !factory.valid" class="btn-primary w-24" size="small"
 					type="submit">
 					Next
-					<IonSpinner v-if="loading" name="lines-small" />
+					<SpinLoading v-if="loading" />
 					<ion-ripple-effect class="rounded-lg" />
 				</ion-button>
 			</div>
@@ -46,7 +46,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonRippleEffect, IonSpinner, IonTextarea } from '@ionic/vue'
+import { IonRippleEffect, IonTextarea } from '@ionic/vue'
 import { useProfileUpdate } from '@app/composable/auth/profile'
 
 export default defineComponent({
@@ -57,7 +57,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { IonRippleEffect, IonTextarea, IonSpinner },
+	components: { IonRippleEffect, IonTextarea },
 	setup (props) {
 		const { factory, loading, error, updateProfile } = useProfileUpdate()
 		const submit = async () => {

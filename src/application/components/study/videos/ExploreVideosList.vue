@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<EmptyState v-if="!loading && !error && filtered.length === 0" info="No videos found." />
-		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
+		<BlockLoading v-if="loading" />
 		<div class="showcase">
 			<VideoListCard v-for="video in filtered" :key="video.hash" :video="video" />
 		</div>
@@ -16,11 +16,10 @@
 import { computed, defineComponent } from 'vue'
 import VideoListCard from '@app/components/study/videos/VideoListCard.vue'
 import { useVideoList } from '@app/composable/study/videos'
-import { IonSkeletonText } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ExploreVideosList',
-	components: { VideoListCard, IonSkeletonText },
+	components: { VideoListCard },
 	props: {
 		sliced: {
 			type: Boolean,

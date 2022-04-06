@@ -3,7 +3,7 @@
 		<div class="lg:w-8/12 w-full mx-auto md:p-4 lg:py-8 flex flex-col md:gap-4 max-w-[1000px]">
 			<a v-for="item in [
 					{ name: 'Email', icon: mailOutline, route: 'mailto:support@stranerd.com' },
-					{ name: 'Whatsapp', icon: logoWhatsapp, route: 'https://wa.me/+234' },
+					{ name: 'Whatsapp', icon: logoWhatsapp, route: 'https://wa.me/+2348074502158' },
 					{ name: 'Twitter', icon: logoTwitter, route: 'https://twitter.com/stranerds' },
 					{ name: 'Instagram', icon: logoInstagram, route: 'https://www.instagram.com/stranerdapp' }
 				]" :key="item.route" :href="item.route"

@@ -22,7 +22,7 @@
 							<DisplayError :error="factory.errors.password" />
 						</div>
 						<ion-button :disabled="loading" class="w-full capitalize" type="submit">Login
-							<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
+							<BlockLoading v-if="loading" />
 						</ion-button>
 					</form>
 					<div class="w-full flex justify-end items-center text-main_dark">
@@ -51,14 +51,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useEmailSignin } from '@app/composable/auth/signin'
-import { IonSpinner } from '@ionic/vue'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
 import Auth from '@app/layouts/Auth.vue'
 
 export default defineComponent({
 	name: 'AuthSignin',
 	displayName: 'Signin',
-	components: { AuthProviders, IonSpinner, Auth },
+	components: { AuthProviders, Auth },
 	middlewares: ['isNotAuthenticated'],
 	setup () {
 		const { factory, loading, error, signin } = useEmailSignin()

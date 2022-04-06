@@ -25,7 +25,7 @@
 				</div>
 				<ion-button :disabled="loading" class="btn-primary w-40" type="submit">
 					Save Password
-					<IonSpinner v-if="loading" name="lines-small" />
+					<SpinLoading v-if="loading" />
 				</ion-button>
 			</form>
 		</div>
@@ -35,14 +35,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
-import { IonSpinner } from '@ionic/vue'
 import { usePasswordUpdate } from '@app/composable/auth/passwords'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'SettingsSecurity',
 	displayName: 'Security',
-	components: { Justified, IonSpinner },
+	components: { Justified },
 	middlewares: ['isAuthenticated'],
 	setup () {
 		const { hasPassword } = useAuth()

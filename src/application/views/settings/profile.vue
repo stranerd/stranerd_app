@@ -41,7 +41,7 @@
 				<div class="px-4 md:px-6 flex">
 					<ion-button :disabled="loading" class="btn-primary w-40" type="submit">
 						Save Profile
-						<IonSpinner v-if="loading" name="lines-small" />
+						<SpinLoading v-if="loading" />
 					</ion-button>
 				</div>
 			</form>
@@ -53,12 +53,12 @@
 import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import { useProfileUpdate } from '@app/composable/auth/profile'
-import { IonSpinner, IonTextarea } from '@ionic/vue'
+import { IonTextarea } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'SettingsProfile',
 	displayName: 'Edit Profile',
-	components: { Justified, IonSpinner, IonTextarea },
+	components: { Justified, IonTextarea },
 	middlewares: ['isAuthenticated'],
 	setup () {
 		const { factory, error, loading, updateProfile } = useProfileUpdate()
@@ -77,9 +77,5 @@ export default defineComponent({
 	ion-input, ion-textarea {
 		--border-width: 1px !important;
 		--border-style: solid !important;
-	}
-
-	ion-select, ion-radio-group {
-		color: $color-gray !important;
 	}
 </style>

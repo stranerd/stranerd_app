@@ -2,23 +2,25 @@
 	<Justified>
 		<form class="lg:w-8/12 w-full mx-auto md:p-4 lg:py-8 max-w-[800px] flex flex-col md:gap-4"
 			@submit.prevent="updateSchool">
-			<div class="border-bottom-line bg-white p-4 md:p-6 flex flex-col md:rounded-xl gap-4">
-				<ion-radio-group v-model="factory.type" class="flex flex-col items-start gap-4">
-					<ion-label class="font-bold">Choose your academic level *</ion-label>
-					<div class="flex items-center gap-4">
-						<ion-radio :value="UserSchoolType.secondary" />
+			<IonList class="border-bottom-line bg-white md:rounded-xl text-sub">
+				<ion-radio-group v-model="factory.type" class="flex flex-col items-start" required>
+					<IonListHeader>
+						<ion-label class="font-bold">Choose your academic level *</ion-label>
+					</IonListHeader>
+					<IonItem class="flex items-center gap-4">
+						<ion-radio slot="start" :value="UserSchoolType.secondary" />
 						<ion-label>Secondary school</ion-label>
-					</div>
-					<div class="flex items-center gap-4">
-						<ion-radio :value="UserSchoolType.aspirant" />
+					</IonItem>
+					<IonItem class="flex items-center gap-4">
+						<ion-radio slot="start" :value="UserSchoolType.aspirant" />
 						<ion-label>Secondary school leaver</ion-label>
-					</div>
-					<div class="flex items-center gap-4">
-						<ion-radio :value="UserSchoolType.college" />
+					</IonItem>
+					<IonItem class="flex items-center gap-4">
+						<ion-radio slot="start" :value="UserSchoolType.college" />
 						<ion-label>University</ion-label>
-					</div>
+					</IonItem>
 				</ion-radio-group>
-			</div>
+			</IonList>
 
 			<div v-if="factory.isCollegeType"
 				class="border-bottom-line bg-white p-4 md:p-6 flex flex-col md:rounded-xl gap-4">
@@ -28,8 +30,8 @@
 					<ion-label>What university are you in?</ion-label>
 					<ion-select v-model="factory.institutionId"
 						class="bg-new_gray w-full capitalize"
-						interface="action-sheet"
-						placeholder="Select university">
+						interface="action-sheet" placeholder="Select university"
+						required>
 						<ion-select-option v-for="school in schools" :key="school.hash" :value="school.id"
 							class="capitalize">
 							{{ school.name }}
@@ -41,8 +43,8 @@
 					<ion-label>What faculty are you in?</ion-label>
 					<ion-select v-model="factory.facultyId"
 						class="bg-new_gray w-full capitalize"
-						interface="action-sheet"
-						placeholder="Select faculty">
+						interface="action-sheet" placeholder="Select faculty"
+						required>
 						<ion-select-option v-for="faculty in filteredFaculties" :key="faculty.hash" :value="faculty.id"
 							class="capitalize">
 							{{ faculty.name }}
@@ -54,8 +56,8 @@
 					<ion-label>What department are you in?</ion-label>
 					<ion-select v-model="factory.departmentId"
 						class="bg-new_gray w-full capitalize"
-						interface="action-sheet"
-						placeholder="Select department">
+						interface="action-sheet" placeholder="Select department"
+						required>
 						<ion-select-option v-for="department in filteredDepartments" :key="department.hash"
 							:value="department.id"
 							class="capitalize">
@@ -66,7 +68,7 @@
 
 				<ion-button :disabled="loading" class="btn-primary w-40" type="submit">
 					Save School
-					<IonSpinner v-if="loading" name="lines-small" />
+					<SpinLoading v-if="loading" />
 				</ion-button>
 			</div>
 
@@ -74,9 +76,9 @@
 				<div class="border-bottom-line bg-white p-4 md:p-6 flex flex-col md:rounded-xl gap-4">
 					<IonLabel class="font-semibold">What exam(s) are you studying for?</IonLabel>
 					<ion-select v-model="factory.institutions"
-						:multiple="true"
-						class="bg-new_gray w-full capitalize"
-						interface="alert" placeholder="Select exams">
+						:multiple="true" class="bg-new_gray w-full capitalize"
+						interface="alert"
+						placeholder="Select exams" required>
 						<ion-select-option v-for="exam in gatewayExams" :key="exam.hash" :value="exam.id"
 							class="capitalize">
 							{{ exam.name }}
@@ -90,9 +92,9 @@
 						<Institution :institutionId="exam.institutionId" />
 						subject combination
 					</IonLabel>
-					<ion-select v-model="exam.courseIds" :multiple="true"
-						class="bg-new_gray w-full capitalize"
-						interface="alert" placeholder="Select subjects">
+					<ion-select v-model="exam.courseIds" :multiple="true" class="bg-new_gray w-full capitalize"
+						interface="alert"
+						placeholder="Select subjects" required>
 						<ion-select-option
 							v-for="course in courses.filter((c) => c.institutionId === exam.institutionId)"
 							:key="course.hash" :value="course.id" class="capitalize">
@@ -114,7 +116,7 @@
 					<ion-button v-if="index === factory.exams.length - 1" :disabled="loading"
 						class="btn-primary w-40" type="submit">
 						Save School
-						<IonSpinner v-if="loading" name="lines-small" />
+						<SpinLoading v-if="loading" />
 					</ion-button>
 				</div>
 			</template>
@@ -126,7 +128,17 @@
 import { computed, defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import { useUserSchoolUpdate } from '@app/composable/auth/profile'
-import { IonButton, IonInput, IonRadio, IonRadioGroup, IonSelect, IonSelectOption, IonSpinner } from '@ionic/vue'
+import {
+	IonButton,
+	IonInput,
+	IonItem,
+	IonList,
+	IonListHeader,
+	IonRadio,
+	IonRadioGroup,
+	IonSelect,
+	IonSelectOption
+} from '@ionic/vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
@@ -138,8 +150,8 @@ export default defineComponent({
 	name: 'SettingsAccount',
 	displayName: 'Account setup',
 	components: {
-		Justified, IonRadio, IonRadioGroup, Institution,
-		IonSpinner, IonButton, IonInput, IonSelect, IonSelectOption
+		Justified, IonRadio, IonRadioGroup, Institution, IonList, IonListHeader,
+		IonButton, IonInput, IonSelect, IonSelectOption, IonItem
 	},
 	middlewares: ['isAuthenticated'],
 	setup () {

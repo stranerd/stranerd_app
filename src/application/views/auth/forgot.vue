@@ -13,7 +13,7 @@
 							<DisplayError :error="factory.errors.email" />
 						</div>
 						<ion-button class="w-full mb-4" type="submit">Reset Password
-							<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
+							<BlockLoading v-if="loading" />
 						</ion-button>
 					</form>
 				</div>
@@ -28,13 +28,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { usePasswordResetRequest } from '@app/composable/auth/passwords'
-import { IonButton, IonInput, IonSpinner } from '@ionic/vue'
+import { IonButton, IonInput } from '@ionic/vue'
 import Auth from '@app/layouts/Auth.vue'
 
 export default defineComponent({
 	name: 'AuthForgot',
 	displayName: 'Forgot Password?',
-	components: { IonInput, IonButton, IonSpinner, Auth },
+	components: { IonInput, IonButton, Auth },
 	middlewares: ['isNotAuthenticated'],
 	setup () {
 		const { factory, loading, error, sendResetEmail, message } = usePasswordResetRequest()

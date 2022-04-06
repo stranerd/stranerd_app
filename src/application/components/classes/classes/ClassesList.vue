@@ -9,7 +9,7 @@
 		</div>
 		<EmptyState v-if="!loading && !error && classes.length === 0" info="You are not a member of any class!" />
 		<ClassListCard v-for="classInst in classes" :key="classInst" :classInst="classInst" />
-		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
+		<BlockLoading v-if="loading" />
 	</div>
 </template>
 
@@ -17,12 +17,11 @@
 import { defineComponent } from 'vue'
 import ClassListCard from '@app/components/classes/classes/ClassListCard.vue'
 import { useUserClassList } from '@app/composable/users/users/classes'
-import { IonSkeletonText } from '@ionic/vue'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'ClassesList',
-	components: { ClassListCard, IonSkeletonText },
+	components: { ClassListCard },
 	setup () {
 		const { user } = useAuth()
 		const { classes, error, loading } = useUserClassList()

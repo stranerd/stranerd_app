@@ -62,13 +62,12 @@ import { useAuth } from '@app/composable/auth/auth'
 import { useLeaderboardList } from '@app/composable/users/leaderboard'
 import { RankingTimes } from '@modules/users'
 import Avatar from '@app/components/core/Avatar.vue'
-import PageLoading from '@app/components/core/PageLoading.vue'
 import { formatNumber } from '@utils/commons'
 import { checkmarkCircleOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'LeaderboardList',
-	components: { Avatar, PageLoading },
+	components: { Avatar },
 	props: {
 		time: {
 			type: String as PropType<RankingTimes>,

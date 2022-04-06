@@ -3,7 +3,7 @@
 		class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
 		<div class="w-full justify-between items-center flex gap-2">
 			<ion-text class="font-500 truncate w-full">{{ note.title }}</ion-text>
-			<IonSpinner v-if="loading" color="primary" />
+			<BlockLoading v-if="loading" />
 			<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-primary text-xl" @click="download" />
 		</div>
 
@@ -36,7 +36,6 @@
 import { documentOutline, downloadOutline, ellipsisVerticalOutline } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { NoteEntity } from '@modules/study'
-import { IonSpinner } from '@ionic/vue'
 import { useDownload } from '@app/composable/meta/media'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 import { openNoteEditModal, useDeleteNote } from '@app/composable/study/notes'
@@ -55,7 +54,7 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: { IonSpinner, SaveToSet },
+	components: { SaveToSet },
 	setup (props) {
 		const { id } = useAuth()
 		const {

@@ -22,7 +22,7 @@
 								<DisplayError :error="factory.errors.cPassword" />
 							</div>
 							<ion-button class="w-full mb-4" type="submit">Reset Password
-								<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
+								<BlockLoading v-if="loading" />
 							</ion-button>
 						</form>
 					</div>
@@ -39,14 +39,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { usePasswordReset } from '@app/composable/auth/passwords'
-import { IonButton, IonContent, IonInput, IonPage, IonSpinner } from '@ionic/vue'
-import PageLoading from '@app/components/core/PageLoading.vue'
+import { IonButton, IonContent, IonInput, IonPage } from '@ionic/vue'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'AuthReset',
 	displayName: 'Reset Password',
-	components: { IonContent, IonPage, IonInput, IonButton, IonSpinner, PageLoading },
+	components: { IonContent, IonPage, IonInput, IonButton },
 	middlewares: ['hasQueryToken'],
 	setup () {
 		const { token } = useRoute().query

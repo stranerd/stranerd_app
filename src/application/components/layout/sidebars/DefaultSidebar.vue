@@ -5,7 +5,7 @@
 			<router-link v-for="{ path, icon, name, iconOutline } in [
 					{ name: 'Home', path: '/dashboard', icon: home, iconOutline:homeOutline },
 					{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
-					{ name: 'TestPreps', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
+					{ name: 'Tests', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
 					{ name: 'Library', path: '/study', icon: library, iconOutline:libraryOutline },
 					...(isProd ? [] : [{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }])
 				]" :key="path" :to="path"

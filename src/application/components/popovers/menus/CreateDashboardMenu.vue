@@ -35,7 +35,7 @@
 				<ion-label class="font-bold">Ask a question</ion-label>
 			</div>
 		</router-link>
-		<router-link v-if="!isProd"
+		<router-link v-if="!isProd && user?.isVerified"
 			class="flex gap-2 items-center text-gray hover:text-main_dark border-bottom-line card-padding"
 			to="/classes/create">
 			<div class="w-48 flex items-center gap-3">
@@ -57,11 +57,16 @@ import {
 	videocamOutline
 } from 'ionicons/icons'
 import { isProd } from '@utils/environment'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'CreateDashboardMenu',
 	setup () {
-		return { isProd, helpCircleOutline, folderOutline, flashOutline, peopleOutline, readerOutline, videocamOutline }
+		const { user } = useAuth()
+		return {
+			user, isProd,
+			helpCircleOutline, folderOutline, flashOutline, peopleOutline, readerOutline, videocamOutline
+		}
 	}
 })
 </script>

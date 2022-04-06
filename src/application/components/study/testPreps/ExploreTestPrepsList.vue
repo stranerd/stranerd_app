@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
+		<BlockLoading v-if="loading" />
 		<EmptyState v-if="!loading && !error && filtered.length === 0" info="No testPreps found." />
 		<div class="showcase">
 			<InstitutionTestPrepsListCard v-for="group in filtered" :key="group.institutionId"
@@ -13,11 +13,10 @@
 import { computed, defineComponent } from 'vue'
 import { groupedByInstitution, useTestPrepList } from '@app/composable/study/testPreps'
 import InstitutionTestPrepsListCard from '@app/components/study/testPreps/InstitutionTestPrepsListCard.vue'
-import { IonSkeletonText } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ExploreTestPrepsList',
-	components: { InstitutionTestPrepsListCard, IonSkeletonText },
+	components: { InstitutionTestPrepsListCard },
 	props: {
 		sliced: {
 			type: Boolean,

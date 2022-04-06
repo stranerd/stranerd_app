@@ -1,21 +1,25 @@
 <template>
 	<PageLoading v-if="loading" />
 	<div v-if="tab === 0" class="flex flex-col gap-4 modal-padding-x">
-		<ion-radio-group v-model="factory.type" class="flex flex-col items-start gap-4" required>
-			<ion-label class="font-bold">Choose your academic level *</ion-label>
-			<div class="flex items-center gap-4">
-				<ion-radio :value="UserSchoolType.secondary" />
-				<ion-label>Secondary school</ion-label>
-			</div>
-			<div class="flex items-center gap-4">
-				<ion-radio :value="UserSchoolType.aspirant" />
-				<ion-label>Secondary school leaver</ion-label>
-			</div>
-			<div class="flex items-center gap-4">
-				<ion-radio :value="UserSchoolType.college" />
-				<ion-label>University</ion-label>
-			</div>
-		</ion-radio-group>
+		<IonList class="text-sub">
+			<ion-radio-group v-model="factory.type" class="flex flex-col items-start" required>
+				<IonListHeader>
+					<ion-label class="font-bold">Choose your academic level *</ion-label>
+				</IonListHeader>
+				<IonItem class="flex items-center gap-4">
+					<ion-radio slot="start" :value="UserSchoolType.secondary" />
+					<ion-label>Secondary school</ion-label>
+				</IonItem>
+				<IonItem class="flex items-center gap-4">
+					<ion-radio slot="start" :value="UserSchoolType.aspirant" />
+					<ion-label>Secondary school leaver</ion-label>
+				</IonItem>
+				<IonItem class="flex items-center gap-4">
+					<ion-radio slot="start" :value="UserSchoolType.college" />
+					<ion-label>University</ion-label>
+				</IonItem>
+			</ion-radio-group>
+		</IonList>
 		<div class="flex w-full gap-2 items-center justify-between">
 			<ion-button class="btn-secondary w-24" size="small" type="button" @click.prevent="back">
 				Back
@@ -76,7 +80,7 @@
 				</ion-button>
 				<ion-button class="btn-primary w-24" size="small" type="submit">
 					Done
-					<IonSpinner v-if="loading" name="lines-small" />
+					<SpinLoading v-if="loading" />
 					<ion-ripple-effect class="rounded-lg" />
 				</ion-button>
 			</div>
@@ -141,7 +145,7 @@
 			</ion-button>
 			<ion-button class="btn-primary w-24" size="small" type="submit">
 				Done
-				<IonSpinner v-if="loading" name="lines-small" />
+				<SpinLoading v-if="loading" />
 				<ion-ripple-effect class="rounded-lg" />
 			</ion-button>
 		</div>
@@ -152,7 +156,17 @@
 import { computed, defineComponent, ref } from 'vue'
 import { useUserSchoolUpdate } from '@app/composable/auth/profile'
 import { UserSchoolType } from '@modules/users'
-import { IonLabel, IonRadio, IonRadioGroup, IonRippleEffect, IonSelect, IonSelectOption, IonSpinner } from '@ionic/vue'
+import {
+	IonItem,
+	IonLabel,
+	IonList,
+	IonListHeader,
+	IonRadio,
+	IonRadioGroup,
+	IonRippleEffect,
+	IonSelect,
+	IonSelectOption
+} from '@ionic/vue'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
 import { useFacultyList } from '@app/composable/school/faculties'
@@ -162,14 +176,9 @@ import Institution from '@app/components/school/institutions/Institution.vue'
 export default defineComponent({
 	name: 'SchoolForm',
 	components: {
-		IonRadioGroup,
-		IonRippleEffect,
-		IonRadio,
-		IonSelect,
-		IonSelectOption,
-		IonLabel,
-		Institution,
-		IonSpinner
+		IonRadioGroup, IonRippleEffect, IonRadio, IonSelect, IonSelectOption,
+		IonLabel, IonList, IonListHeader, IonItem,
+		Institution
 	},
 	props: {
 		next: {

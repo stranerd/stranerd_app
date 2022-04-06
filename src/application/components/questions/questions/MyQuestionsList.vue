@@ -12,7 +12,7 @@
 				</router-link>
 			</div>
 		</div>
-		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
+		<BlockLoading v-if="loading" />
 		<EmptyState v-if="!loading && !error && questions.length === 0" :btnText="'Ask a question'"
 			:info="'No questions found! Start asking questions to help with homework and studying.'"
 			route="/questions/create"
@@ -28,13 +28,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
-import { IonSkeletonText } from '@ionic/vue'
 import { useUserQuestionList } from '@app/composable/users/users/questions'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'MyQuestionsList',
-	components: { QuestionListCard, IonSkeletonText },
+	components: { QuestionListCard },
 	setup () {
 		const { questions, error, loading, hasMore, fetchOlderQuestions } = useUserQuestionList(useAuth().id.value)
 		return { questions, error, loading, hasMore, fetchOlderQuestions }

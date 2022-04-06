@@ -40,7 +40,7 @@
 							<DisplayError :error="factory.errors.cPassword" />
 						</div>
 						<ion-button class="w-full !capitalize" type="submit">Sign up
-							<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
+							<BlockLoading v-if="loading" />
 						</ion-button>
 					</form>
 					<div class="flex justify-between px-5 items-center mt-8">
@@ -64,14 +64,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useEmailSignup } from '@app/composable/auth/signin'
-import { IonButton, IonInput, IonSpinner } from '@ionic/vue'
+import { IonButton, IonInput } from '@ionic/vue'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
 import Auth from '@app/layouts/Auth.vue'
 
 export default defineComponent({
 	name: 'AuthSignup',
 	displayName: 'Signup',
-	components: { IonInput, IonButton, AuthProviders, IonSpinner, Auth },
+	components: { IonInput, IonButton, AuthProviders, Auth },
 	middlewares: ['isNotAuthenticated'],
 	setup () {
 		const { factory, loading, error, signup } = useEmailSignup()

@@ -12,7 +12,7 @@
 						<form @submit.prevent="completeVerification">
 							<ion-button :disabled="loading" class="w-full mb-4 uppercase" type="submit">
 								Retry Verification
-								<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
+								<BlockLoading v-if="loading" />
 							</ion-button>
 						</form>
 					</div>
@@ -28,13 +28,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useCompleteEmailVerification } from '@app/composable/auth/signin'
-import { IonButton, IonContent, IonPage, IonSpinner } from '@ionic/vue'
+import { IonButton, IonContent, IonPage } from '@ionic/vue'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'AuthCompleteVerification',
 	displayName: 'Complete Verification',
-	components: { IonContent, IonPage, IonButton, IonSpinner },
+	components: { IonContent, IonPage, IonButton },
 	middlewares: ['hasQueryToken'],
 	setup () {
 		const { token } = useRoute().query

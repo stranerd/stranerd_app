@@ -8,7 +8,7 @@
 		<div class="grid grid-cols-1 lg:grid-cols-2 md:gap-4">
 			<ClassListCard v-for="classInst in classes" :key="classInst" :classInst="classInst" />
 		</div>
-		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl px-4" />
+		<BlockLoading v-if="loading" />
 	</div>
 </template>
 
@@ -16,11 +16,11 @@
 import { defineComponent } from 'vue'
 import ClassListCard from '@app/components/classes/classes/ExploreClassListCard.vue'
 import { useClassList } from '@app/composable/classes/classes'
-import { IonSearchbar, IonSkeletonText } from '@ionic/vue'
+import { IonSearchbar } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ExploreClassesList',
-	components: { ClassListCard, IonSkeletonText, IonSearchbar },
+	components: { ClassListCard, IonSearchbar },
 	setup () {
 		const { classes, error, loading, searchTerm, fetchClasses } = useClassList()
 		return { classes, error, loading, searchTerm, fetchClasses }

@@ -32,14 +32,13 @@ import { defineComponent } from 'vue'
 import { useNotificationList } from '@app/composable/users/notifications'
 import Justified from '@app/layouts/Justified.vue'
 import NotificationCard from '@app/components/users/notifications/NotificationCard.vue'
-import PageLoading from '@app/components/core/PageLoading.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
 
 export default defineComponent({
 	name: 'Notifications',
 	displayName: 'Notifications',
 	middlewares: ['isAuthenticated'],
-	components: { NotificationCard, Justified, PageLoading, EmptyState },
+	components: { NotificationCard, Justified, EmptyState },
 	setup () {
 		const {
 			notifications, error, loading, hasMore, fetchOlderNotifications

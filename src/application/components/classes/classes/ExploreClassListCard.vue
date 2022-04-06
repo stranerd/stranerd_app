@@ -12,7 +12,7 @@
 				</ion-text>
 			</div>
 			<div v-if="!classInst.members.includes(id)" class="ml-auto">
-				<IonSpinner v-if="loading" />
+				<BlockLoading v-if="loading" />
 				<IonButton v-else class="btn-primary" style="--padding-top:0;--padding-bottom: 0;"
 					@click="requestToJoinClass(!classInst.requests.includes(id))">
 					{{ classInst.requests.includes(id) ? 'Cancel Request' : 'Join' }}
@@ -28,12 +28,10 @@ import { defineComponent } from 'vue'
 import { ClassEntity } from '@modules/classes'
 import { pluralize } from '@utils/commons'
 import { useClassMembersList } from '@app/composable/classes/classes'
-import { IonSpinner } from '@ionic/vue'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'ExploreClassListCard',
-	components: { IonSpinner },
 	props: {
 		classInst: {
 			type: ClassEntity,

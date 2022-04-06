@@ -15,7 +15,7 @@
 					class="bg-white flex gap-2 items-center p-3 rounded-b-xl">
 					<IonIcon :icon="documentOutline" class="text-2xl" />
 					<IonText class="flex-grow truncate">{{ discussion.media.name }}</IonText>
-					<IonSpinner v-if="loading" class="text-2xl" color="primary" />
+					<SpinLoading v-if="loading" class="text-2xl" />
 					<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-2xl" color="primary"
 						@click="download" />
 				</div>
@@ -36,7 +36,6 @@ import { DiscussionEntity } from '@modules/classes'
 import { useAuth } from '@app/composable/auth/auth'
 import { formatTimeAsDigits } from '@utils/dates'
 import { checkmarkCircleOutline, documentOutline, downloadOutline } from 'ionicons/icons'
-import { IonSpinner } from '@ionic/vue'
 import { useDownload } from '@app/composable/meta/media'
 import { saveDiscussionsReadState } from '@app/composable/classes/discussions'
 import { isWeb } from '@utils/constants'
@@ -49,7 +48,6 @@ export default defineComponent({
 			type: DiscussionEntity
 		}
 	},
-	components: { IonSpinner },
 	setup (props) {
 		const { id } = useAuth()
 		const {

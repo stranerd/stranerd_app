@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Note v-if="content" :link="content" />
-		<IonSkeletonText v-else-if="loading" animated class="h-28 rounded-xl px-4" />
+		<BlockLoading v-else-if="loading" />
 		<div v-else class="flex flex-col gap-2 items-center">
 			<p>The note needs to be downloaded before it can be viewed</p>
 			<IonButton class="btn-primary" size="small" @click="download">Download</IonButton>
@@ -13,7 +13,6 @@
 import { defineComponent, PropType } from 'vue'
 import { NoteEntity } from '@modules/study'
 import Note from '@app/components/core/media/Note.vue'
-import { IonSkeletonText } from '@ionic/vue'
 import { useDownload } from '@app/composable/meta/media'
 
 export default defineComponent({
@@ -24,7 +23,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { Note, IonSkeletonText },
+	components: { Note },
 	setup (props) {
 		const {
 			loading,
