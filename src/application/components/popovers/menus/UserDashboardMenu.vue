@@ -7,7 +7,7 @@
 				<ion-label class="font-bold">Profile</ion-label>
 			</div>
 		</router-link>
-		<router-link v-if="isAdmin"
+		<router-link v-if="user?.isAdmin"
 			class="flex gap-4 items-center text-gray hover:text-main_dark border-bottom-line card-padding"
 			to="/admin/">
 			<div class="w-48 flex items-center gap-3">
@@ -29,8 +29,9 @@
 				<ion-label class="font-bold">LeaderBoard</ion-label>
 			</div>
 		</router-link>
-		<router-link v-if="user" :to="`/users/${user.id}/settings`"
-			class="flex gap-2 items-center text-gray hover:text-main_dark border-bottom-line card-padding">
+		<router-link v-if="user"
+			class="flex gap-2 items-center text-gray hover:text-main_dark border-bottom-line card-padding"
+			to="/settings">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="settingsOutline" class="text-3xl"></ion-icon>
 				<ion-label class="font-bold">Settings</ion-label>
@@ -64,11 +65,11 @@ import { useSessionSignout } from '@app/composable/auth/session'
 export default defineComponent({
 	name: 'UserDashboardMenu',
 	setup () {
-		const { user, isAdmin } = useAuth()
+		const { user } = useAuth()
 		const { signout, loading } = useSessionSignout()
 		return {
 			cogOutline, libraryOutline, logOutOutline, personOutline, podiumOutline, settingsOutline,
-			isAdmin, user, signout, loading
+			user, signout, loading
 		}
 	}
 })

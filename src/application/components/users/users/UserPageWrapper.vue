@@ -11,8 +11,8 @@
 							<Avatar :name="user.bio.fullName" :size="80" :src="user.bio.photo"
 								class="relative top-[-40px] -mb-10" />
 							<div v-if="user.id === id" class="flex gap-1 mt-2">
-								<router-link :to="`/users/${user.id}/settings`"
-									class="py-1 px-4 border border-primary text-primary rounded-full text-sub flex justify-center items-center">
+								<router-link class="py-1 px-4 border border-primary text-primary rounded-full text-sub flex justify-center items-center"
+									to="/settings/profile">
 									Edit Profile
 								</router-link>
 							</div>

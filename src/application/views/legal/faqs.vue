@@ -1,14 +1,7 @@
 <template>
 	<Justified>
-		<div>
-			<div class="blueTop py-4">
-				<ion-text class="text-heading font-bold text-main_dark text-center">
-					FAQs
-				</ion-text>
-			</div>
-			<div class="lg:w-8/12 w-full mx-auto bg-white">
-				<Note link="/legal/FAQs.pdf" />
-			</div>
+		<div class="lg:w-8/12 w-full mx-auto bg-white lg:my-8 md:rounded-xl max-w-[1000px]">
+			<Note link="/legal/FAQs.pdf" />
 		</div>
 	</Justified>
 </template>

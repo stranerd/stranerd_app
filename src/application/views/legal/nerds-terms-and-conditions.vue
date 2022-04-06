@@ -1,14 +1,7 @@
 <template>
 	<Justified>
-		<div>
-			<div class="blueTop py-4">
-				<ion-text class="text-heading font-bold text-main_dark text-center">
-					Nerds Terms and Conditions
-				</ion-text>
-			</div>
-			<div class="lg:w-8/12 w-full mx-auto bg-white">
-				<Note link="/legal/nerds-terms-and-conditions.pdf" />
-			</div>
+		<div class="lg:w-8/12 w-full mx-auto bg-white lg:my-8 md:rounded-xl max-w-[1000px]">
+			<Note link="/legal/nerds-terms-and-conditions.pdf" />
 		</div>
 	</Justified>
 </template>
