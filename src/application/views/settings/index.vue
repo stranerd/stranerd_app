@@ -4,7 +4,7 @@
 			<router-link v-for="item in [
 					{ name: 'Edit Profile', icon: personOutline, route: '/settings/profile' },
 					{ name: 'Account Setup', icon: settingsOutline, route: '/settings/account' },
-					{ name: 'Manage Notifications', icon: notificationsOutline, route: '/notifications' },
+					// { name: 'Manage Notifications', icon: notificationsOutline, route: '/notifications' },
 					{ name: 'Security', icon: shieldCheckmarkOutline, route: '/settings/security' },
 					{ name: 'About', icon: informationCircleOutline, route: '/settings/about' },
 					{ name: 'Contact Us', icon: mailOutline, route: '/settings/contact' },

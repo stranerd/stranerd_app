@@ -52,7 +52,7 @@
 
 		<form class="flex gap-2 pr-4 items-center bg-new_gray rounded-lg"
 			@submit.prevent="createComment">
-			<ion-input v-model="commentFactory.body" :autoGrow="true" :rows="1"
+			<ion-input v-model="commentFactory.body" :autoGrow="true"
 				class="focus:outline-none placeholder-gray-400 mt-0 pt-0"
 				placeholder="Add comment" />
 			<IonIcon :icon="paperPlaneOutline" class="text-[22px] text-primary cursor-pointer"
