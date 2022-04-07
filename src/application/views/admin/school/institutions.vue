@@ -23,9 +23,7 @@ export default defineComponent({
 	components: { AdminWrapper, AdminInstitutionsList },
 	middlewares: ['isAdmin'],
 	setup () {
-		return {
-			openCreateInstitution: useSchoolModal().openCreateInstitution
-		}
+		return { openCreateInstitution: useSchoolModal().openCreateInstitution }
 	}
 })
 </script>

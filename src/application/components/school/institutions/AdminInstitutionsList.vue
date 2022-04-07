@@ -15,13 +15,19 @@ import { defineComponent } from 'vue'
 import InstitutionListCard from '@app/components/school/institutions/AdminInstitutionListCard.vue'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { IonAccordionGroup } from '@ionic/vue'
+import { useCourseList } from '@app/composable/school/courses'
+import { useFacultyList } from '@app/composable/school/faculties'
+import { useDepartmentList } from '@app/composable/school/departments'
 
 export default defineComponent({
 	name: 'AdminInstitutionsList',
 	components: { InstitutionListCard, IonAccordionGroup },
 	setup () {
 		const { loading, error, institutions, schools, gatewayExams: exams } = useInstitutionList()
-		return { loading, error, institutions, schools, exams }
+		const { courses } = useCourseList()
+		const { faculties } = useFacultyList()
+		const { departments } = useDepartmentList()
+		return { loading, error, institutions, schools, exams, courses, faculties, departments }
 	}
 })
 </script>
