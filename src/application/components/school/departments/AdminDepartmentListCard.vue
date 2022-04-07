@@ -24,7 +24,6 @@
 			<AdminCourseListCard v-for="course in departmentCourses" :key="course.hash" :course="course" />
 		</IonList>
 		<PageLoading v-if="loading" />
-		<PageLoading v-if="courseLoading" />
 	</IonAccordion>
 </template>
 
@@ -48,12 +47,12 @@ export default defineComponent({
 	components: { IonAccordion, IonList, IonItem, IonLabel, AdminCourseListCard },
 	setup (props) {
 		const { loading, error, deleteDepartment } = useDeleteDepartment(props.department)
-		const { courses, loading: courseLoading } = useCourseList()
+		const { courses } = useCourseList(true)
 		const departmentCourses = computed(() => courses.value
 			.filter((course) => course.departmentId === props.department.id))
 		return {
 			loading, error, deleteDepartment, openCourseCreateModal,
-			openDepartmentEditModal, departmentCourses, courseLoading,
+			openDepartmentEditModal, departmentCourses,
 			addOutline, pencilOutline, trashOutline
 		}
 	}

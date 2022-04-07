@@ -41,7 +41,7 @@ import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'SettingsContact',
-	displayName: 'Contact Use',
+	displayName: 'Contact Us',
 	components: { Justified, IonTextarea },
 	setup () {
 		const { user } = useAuth()

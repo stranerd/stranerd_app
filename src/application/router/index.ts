@@ -4,11 +4,12 @@ import { allModals, allPopovers } from '@app/composable/core/modals'
 import { showAddAnswer } from '@app/composable/questions/answers'
 import { isAuthenticated } from '@app/middlewares/isAuthenticated'
 import { isNotAuthenticated } from '@app/middlewares/isNotAuthenticated'
+import { isAccountVerified } from '@app/middlewares/isAccountVerified'
 import { isAdmin } from '@app/middlewares/isAdmin'
 import { hasQueryToken } from '@app/middlewares/hasQueryToken'
 import { MiddlewareFunction } from '@app/middlewares'
 
-export const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken }
+export const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken, isAccountVerified }
 export type Middleware = MiddlewareFunction | keyof typeof globalMiddlewares
 
 export const setupRouter = async () => {

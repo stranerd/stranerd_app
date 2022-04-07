@@ -39,8 +39,6 @@
 			</IonAccordionGroup>
 		</IonList>
 		<PageLoading v-if="loading" />
-		<PageLoading v-if="courseLoading" />
-		<PageLoading v-if="facultyLoading" />
 	</IonAccordion>
 </template>
 
@@ -74,15 +72,14 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { loading, error, deleteInstitution } = useDeleteInstitution(props.institution)
-		const { courses, loading: courseLoading } = useCourseList()
-		const { faculties, loading: facultyLoading } = useFacultyList()
+		const { courses } = useCourseList(true)
+		const { faculties } = useFacultyList(true)
 		const institutionFaculties = computed(() => faculties.value
 			.filter((faculty) => faculty.institutionId === props.institution.id))
 		const institutionCourses = computed(() => courses.value
 			.filter((course) => course.institutionId === props.institution.id && course.facultyId === null))
 		return {
-			loading, error, deleteInstitution, institutionCourses, courseLoading,
-			institutionFaculties, facultyLoading,
+			loading, error, deleteInstitution, institutionCourses, institutionFaculties,
 			addOutline, pencilOutline, trashOutline,
 			openInstitutionEditModal, openCourseCreateModal, openFacultyCreateModal
 		}

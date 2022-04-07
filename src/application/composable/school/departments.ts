@@ -32,8 +32,9 @@ const fetchDepartments = async () => {
 	await global.setLoading(false)
 }
 
-export const useDepartmentList = () => {
+export const useDepartmentList = (skipHooks = false) => {
 	onMounted(async () => {
+		if (skipHooks) return
 		if (!global.fetched.value && !global.loading.value) await fetchDepartments()
 	})
 	return { ...global }

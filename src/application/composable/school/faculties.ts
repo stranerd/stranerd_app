@@ -25,8 +25,9 @@ const fetchFaculties = async () => {
 	await global.setLoading(false)
 }
 
-export const useFacultyList = () => {
+export const useFacultyList = (skipHooks = false) => {
 	onMounted(async () => {
+		if (skipHooks) return
 		if (!global.fetched.value && !global.loading.value) await fetchFaculties()
 	})
 	return { ...global }

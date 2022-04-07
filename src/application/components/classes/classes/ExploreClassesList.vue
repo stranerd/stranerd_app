@@ -6,7 +6,8 @@
 		</form>
 		<EmptyState v-if="!loading && !error && classes.length === 0" info="No classes found" />
 		<div class="grid grid-cols-1 lg:grid-cols-2 md:gap-4">
-			<ClassListCard v-for="classInst in classes" :key="classInst" :classInst="classInst" />
+			<ClassListCard v-for="classInst in classes" :key="classInst" :classInst="classInst"
+				class="border-bottom-line" />
 		</div>
 		<BlockLoading v-if="loading" />
 	</div>

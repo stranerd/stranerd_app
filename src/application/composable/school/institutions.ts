@@ -32,10 +32,11 @@ const fetchInstitutions = async () => {
 	await global.setLoading(false)
 }
 
-export const useInstitutionList = () => {
+export const useInstitutionList = (skipHooks = false) => {
 	const schools = computed(() => global.institutions.value.filter((i) => !i.isGateway))
 	const gatewayExams = computed(() => global.institutions.value.filter((i) => i.isGateway))
 	onMounted(async () => {
+		if (skipHooks) return
 		if (!global.fetched.value && !global.loading.value) await fetchInstitutions()
 	})
 	return { ...global, schools, gatewayExams }

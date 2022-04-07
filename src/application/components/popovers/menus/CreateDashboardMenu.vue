@@ -35,7 +35,7 @@
 				<ion-label class="font-bold">Ask a question</ion-label>
 			</div>
 		</router-link>
-		<router-link v-if="!isProd && user?.isVerified"
+		<router-link v-if="user?.isVerified"
 			class="flex gap-2 items-center text-gray hover:text-main_dark border-bottom-line card-padding"
 			to="/classes/create">
 			<div class="w-48 flex items-center gap-3">
@@ -56,7 +56,6 @@ import {
 	readerOutline,
 	videocamOutline
 } from 'ionicons/icons'
-import { isProd } from '@utils/environment'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
@@ -64,8 +63,7 @@ export default defineComponent({
 	setup () {
 		const { user } = useAuth()
 		return {
-			user, isProd,
-			helpCircleOutline, folderOutline, flashOutline, peopleOutline, readerOutline, videocamOutline
+			user, helpCircleOutline, folderOutline, flashOutline, peopleOutline, readerOutline, videocamOutline
 		}
 	}
 })

@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="flex items-center justify-between w-full bg-white rounded-xl font-bold text-sub text-main_dark py-4 md:px-4">
+		class="flex items-center justify-between w-full bg-white rounded-xl font-bold text-sub text-main_dark p-4">
 		<div class="w-8/12 flex items-center gap-2">
 			<avatar :id="user.id" :name="user.bio.fullName" :size="24" :src="user.bio.photo" />
 			<span class="flex items-center gap-1">

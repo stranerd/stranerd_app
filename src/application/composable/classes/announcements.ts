@@ -61,7 +61,7 @@ export const useAnnouncementList = (classId: string) => {
 			await global[classId].setLoading(true)
 			const announcements = await GetAnnouncements.call(classId)
 			announcements.results.forEach((a) => addToArray(global[classId].announcements.value, a, (e) => e.id, (e) => e.createdAt))
-			global[classId].fetched.value = !!announcements.pages.next
+			global[classId].hasMore.value = !!announcements.pages.next
 			global[classId].fetched.value = true
 		} catch (error) {
 			await global[classId].setError(error)

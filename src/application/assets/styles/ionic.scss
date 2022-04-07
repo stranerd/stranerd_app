@@ -193,10 +193,14 @@ ion-searchbar {
 	--icon-color: #{$color-iconInactive} !important;
 	--color: #{$color-mainDark} !important;
 	--placeholder-color: #{$color-iconInactive} !important;
-	background: $color-newGray !important;
 	padding: 0 0.75rem !important;
 	height: 48px !important;
 	border-radius: .75rem !important;
+	border: 1px solid $color-newGray;
+	@media (min-width: $md) {
+		background: $color-newGray !important;
+		border: none;
+	}
 }
 
 ion-input, ion-textarea, ion-select {

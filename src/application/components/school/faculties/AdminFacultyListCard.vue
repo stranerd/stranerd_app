@@ -26,7 +26,6 @@
 			</IonAccordionGroup>
 		</IonList>
 		<PageLoading v-if="loading" />
-		<PageLoading v-if="departmentLoading" />
 	</IonAccordion>
 </template>
 
@@ -50,12 +49,12 @@ export default defineComponent({
 	components: { AdminDepartmentListCard, IonAccordionGroup, IonAccordion, IonList, IonItem, IonLabel },
 	setup (props) {
 		const { loading, error, deleteFaculty } = useDeleteFaculty(props.faculty)
-		const { departments, loading: departmentLoading } = useDepartmentList()
+		const { departments } = useDepartmentList(true)
 		const facultyDepartments = computed(() => departments.value
 			.filter((department) => department.facultyId === props.faculty.id))
 		return {
 			loading, error, deleteFaculty, openDepartmentCreateModal,
-			openFacultyEditModal, facultyDepartments, departmentLoading,
+			openFacultyEditModal, facultyDepartments,
 			addOutline, pencilOutline, trashOutline
 		}
 	}

@@ -7,6 +7,9 @@
 			<InstitutionListCard v-for="institution in schools" :key="institution.hash" :institution="institution" />
 		</IonAccordionGroup>
 		<PageLoading v-if="loading" />
+		<PageLoading v-if="facultyLoading" />
+		<PageLoading v-if="departmentLoading" />
+		<PageLoading v-if="courseLoading" />
 	</div>
 </template>
 
@@ -24,10 +27,13 @@ export default defineComponent({
 	components: { InstitutionListCard, IonAccordionGroup },
 	setup () {
 		const { loading, error, institutions, schools, gatewayExams: exams } = useInstitutionList()
-		const { courses } = useCourseList()
-		const { faculties } = useFacultyList()
-		const { departments } = useDepartmentList()
-		return { loading, error, institutions, schools, exams, courses, faculties, departments }
+		const { faculties, loading: facultyLoading } = useFacultyList()
+		const { departments, loading: departmentLoading } = useDepartmentList()
+		const { courses, loading: courseLoading } = useCourseList()
+		return {
+			loading, error, institutions, schools, exams, courses, faculties, departments,
+			facultyLoading, departmentLoading, courseLoading
+		}
 	}
 })
 </script>

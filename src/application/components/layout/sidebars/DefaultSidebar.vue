@@ -7,7 +7,7 @@
 					{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
 					{ name: 'Tests', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
 					{ name: 'Library', path: '/study', icon: library, iconOutline:libraryOutline },
-					...(isProd ? [] : [{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }])
+					{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }
 				]" :key="path" :to="path"
 				class="flex py-6 px-8 items-center rounded-l-full text-sub hover:text-main_dark font-bold"
 				exact-active-class="text-main_dark bg-new_gray !py-4">
@@ -33,13 +33,11 @@ import {
 	receiptOutline
 } from 'ionicons/icons'
 import { IonIcon } from '@ionic/vue'
-import { isProd } from '@utils/environment'
 
 export default defineComponent({
 	components: { IonIcon },
 	setup () {
 		return {
-			isProd,
 			libraryOutline, homeOutline, helpCircleOutline, peopleOutline, receiptOutline,
 			library, home, helpCircle, people, receipt
 		}

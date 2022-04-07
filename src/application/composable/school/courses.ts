@@ -25,8 +25,9 @@ const fetchCourses = async () => {
 	await global.setLoading(false)
 }
 
-export const useCourseList = () => {
+export const useCourseList = (skipHooks = false) => {
 	onMounted(async () => {
+		if (skipHooks) return
 		if (!global.fetched.value && !global.loading.value) await fetchCourses()
 	})
 	return { ...global }
