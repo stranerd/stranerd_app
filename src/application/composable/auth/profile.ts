@@ -15,13 +15,13 @@ export const useProfileUpdate = () => {
 	if (user.value) factory.value.loadEntity(user.value)
 	watch(() => user.value?.hash, () => user.value && factory.value.loadEntity(user.value))
 
-	const updateProfile = async () => {
+	const updateProfile = async (skipAlert = false) => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
 				await UpdateProfile.call(factory.value)
-				await setMessage('Profile updated successfully!', true)
+				await setMessage('Profile updated successfully!', skipAlert)
 			} catch (error) {
 				await setError(error)
 			}

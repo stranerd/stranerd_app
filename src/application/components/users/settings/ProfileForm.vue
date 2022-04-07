@@ -2,10 +2,10 @@
 	<form class="flex flex-col gap-4 justify-center" @submit.prevent="submit">
 		<div class="flex flex-col items-start">
 			<CoverAvatar :editable="true" :src="factory.coverPhoto" class="h-20"
-				@photo="(p) => { factory.coverPhoto = p; updateProfile() }" />
+				@photo="(p) => { factory.coverPhoto = p; updateProfile(true) }" />
 			<span class="modal-padding-x relative top-[-40px] inline-flex items-center justify-center -mb-10">
 				<Avatar :editable="true" :name="factory.first" :size="80"
-					:src="factory.photo" @photo="(p) => { factory.photo = p; updateProfile() }" />
+					:src="factory.photo" @photo="(p) => { factory.photo = p; updateProfile(true) }" />
 			</span>
 		</div>
 		<div class="flex flex-col gap-4 modal-padding-x">

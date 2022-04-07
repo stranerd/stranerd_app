@@ -172,5 +172,9 @@ export class UserEntity extends BaseEntity {
 	get isAspirant () {
 		return this.school ? [UserSchoolType.aspirant, UserSchoolType.secondary].includes(this.school?.type) : false
 	}
+
+	get isCollege () {
+		return UserSchoolType.college === this.school?.type
+	}
 }
 
