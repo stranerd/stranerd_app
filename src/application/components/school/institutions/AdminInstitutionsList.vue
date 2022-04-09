@@ -26,10 +26,10 @@ export default defineComponent({
 	name: 'AdminInstitutionsList',
 	components: { InstitutionListCard, IonAccordionGroup },
 	setup () {
-		const { loading, error, institutions, schools, gatewayExams: exams } = useInstitutionList()
-		const { faculties, loading: facultyLoading } = useFacultyList()
-		const { departments, loading: departmentLoading } = useDepartmentList()
 		const { courses, loading: courseLoading } = useCourseList()
+		const { departments, loading: departmentLoading } = useDepartmentList()
+		const { faculties, loading: facultyLoading } = useFacultyList()
+		const { loading, error, institutions, schools, gatewayExams: exams } = useInstitutionList()
 		return {
 			loading, error, institutions, schools, exams, courses, faculties, departments,
 			facultyLoading, departmentLoading, courseLoading
