@@ -68,7 +68,7 @@ export const useAuth = () => {
 		if (details?.id) {
 			global.user.value = await FindUser.call(details.id)
 			if (!global.user.value?.school) setTimeout(async () => {
-				if (!(await getSchoolState())) useUserModal().openSettings()
+				if ((await getSchoolState()) !== id.value) useUserModal().openSettings()
 			}, 5000)
 		} else global.user.value = null
 	}
@@ -118,6 +118,6 @@ export const useAuth = () => {
 	}
 }
 
-const SCHOOL_STATE_KEY = 'onboarding_school_state_key'
+const SCHOOL_STATE_KEY = 'onboarding_school_show_key'
 const getSchoolState = async () => storage.get(SCHOOL_STATE_KEY)
-export const saveSchoolState = async () => storage.set(SCHOOL_STATE_KEY, 1)
+export const saveSchoolState = async () => storage.set(SCHOOL_STATE_KEY, useAuth().id.value)
