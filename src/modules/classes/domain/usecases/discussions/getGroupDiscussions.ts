@@ -9,7 +9,7 @@ export class GetGroupDiscussionsUseCase {
 		this.repository = repository
 	}
 
-	async call (groupId: string, date?: number) {
+	async call (classId: string, groupId: string, date?: number) {
 		const conditions: QueryParams = {
 			where: [{ field: 'groupId', value: groupId }],
 			sort: [{ field: 'createdAt', desc: true }],
@@ -18,6 +18,6 @@ export class GetGroupDiscussionsUseCase {
 
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
 
-		return await this.repository.get(conditions)
+		return await this.repository.get(classId, conditions)
 	}
 }

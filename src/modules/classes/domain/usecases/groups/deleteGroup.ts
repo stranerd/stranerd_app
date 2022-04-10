@@ -7,7 +7,7 @@ export class DeleteGroupUseCase {
 		this.repository = repository
 	}
 
-	async call (id: string) {
-		return await this.repository.delete(id)
+	async call (classId: string, id: string) {
+		return await this.repository.delete(classId, id)
 	}
 }

@@ -9,6 +9,7 @@ export class UpdateGroupUseCase {
 	}
 
 	async call (id: string, factory: GroupFactory) {
-		return await this.repository.update(id, await factory.toModel())
+		const data = await factory.toModel()
+		return await this.repository.update(data.classId, id, data)
 	}
 }

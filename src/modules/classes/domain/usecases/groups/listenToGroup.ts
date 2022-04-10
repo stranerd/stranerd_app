@@ -9,7 +9,7 @@ export class ListenToGroupUseCase {
 		this.repository = repository
 	}
 
-	async call (groupId: string, listener: Listeners<GroupEntity>) {
-		return await this.repository.listenToOne(groupId, listener)
+	async call (classId: string, groupId: string, listener: Listeners<GroupEntity>) {
+		return await this.repository.listenToOne(classId, groupId, listener)
 	}
 }

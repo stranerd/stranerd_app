@@ -14,16 +14,16 @@ export class DiscussionRepository implements IDiscussionRepository {
 		this.transformer = transformer
 	}
 
-	async get (query: QueryParams) {
-		const models = await this.dataSource.get(query)
+	async get (classId: string, query: QueryParams) {
+		const models = await this.dataSource.get(classId, query)
 		return {
 			...models,
 			results: models.results.map(this.transformer.fromJSON)
 		}
 	}
 
-	async listenToOne (id: string, listener: Listeners<DiscussionEntity>) {
-		return this.dataSource.listenToOne(id, {
+	async listenToOne (classId: string, id: string, listener: Listeners<DiscussionEntity>) {
+		return this.dataSource.listenToOne(classId, id, {
 			created: async (model) => {
 				await listener.created(this.transformer.fromJSON(model))
 			},
@@ -36,8 +36,8 @@ export class DiscussionRepository implements IDiscussionRepository {
 		})
 	}
 
-	async listenToMany (query: QueryParams, listener: Listeners<DiscussionEntity>, matches: (entity: DiscussionEntity) => boolean) {
-		return this.dataSource.listenToMany(query, {
+	async listenToMany (classId: string, query: QueryParams, listener: Listeners<DiscussionEntity>, matches: (entity: DiscussionEntity) => boolean) {
+		return this.dataSource.listenToMany(classId, query, {
 			created: async (model) => {
 				const entity = this.transformer.fromJSON(model)
 				if (matches(entity)) await listener.created(entity)
@@ -53,12 +53,12 @@ export class DiscussionRepository implements IDiscussionRepository {
 		})
 	}
 
-	async add (data: DiscussionToModel) {
-		return this.transformer.fromJSON(await this.dataSource.create(data))
+	async add (classId: string, data: DiscussionToModel) {
+		return this.transformer.fromJSON(await this.dataSource.create(classId, data))
 	}
 
-	async find (id: string) {
-		const model = await this.dataSource.find(id)
+	async find (classId: string, id: string) {
+		const model = await this.dataSource.find(classId, id)
 		return model ? this.transformer.fromJSON(model) : null
 	}
 }

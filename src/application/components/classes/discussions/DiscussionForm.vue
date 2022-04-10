@@ -110,6 +110,10 @@ import { getRandomValue } from '@utils/commons'
 export default defineComponent({
 	name: 'DiscussionForm',
 	props: {
+		classId: {
+			required: true,
+			type: String
+		},
 		groupId: {
 			required: true,
 			type: String
@@ -121,7 +125,7 @@ export default defineComponent({
 		const fileIndex = ref(0)
 		const {
 			loading, error, factory, createTextDiscussion, createMediaDiscussion
-		} = useCreateDiscussion(props.groupId)
+		} = useCreateDiscussion(props.classId, props.groupId)
 		const fileData = ref([] as { data: string, factory: DiscussionFactory, hash: string }[])
 		const catchFiles = useFileInputCallback(async (files) => {
 			fileData.value = files.map((file) => {

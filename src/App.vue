@@ -1,6 +1,6 @@
 <template>
 	<IonApp class="text-body">
-		<IonRouterOutlet />
+		<IonRouterOutlet :animated="false" />
 	</IonApp>
 </template>
 

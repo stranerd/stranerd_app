@@ -10,11 +10,10 @@ export class GetGroupsUseCase {
 
 	async call (classId: string) {
 		const conditions: QueryParams = {
-			where: [{ field: 'classId', value: classId }],
 			sort: [{ field: 'createdAt' }],
 			all: true
 		}
 
-		return await this.repository.get(conditions)
+		return await this.repository.get(classId, conditions)
 	}
 }

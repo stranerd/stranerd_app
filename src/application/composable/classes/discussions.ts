@@ -36,11 +36,11 @@ const orderDiscussions = (discussions: DiscussionEntity[]) => {
 
 const getReadStateKey = (groupId: string) => `classes-groups-${groupId}-discussions`
 
-export const useGroupDiscussions = (groupId: string) => {
+export const useGroupDiscussions = (classId: string, groupId: string) => {
 	if (groupGlobal[groupId] === undefined) {
 		const listener = useListener(async () => {
 			const lastDate = groupGlobal[groupId].discussions.value[0]?.createdAt
-			return ListenToGroupDiscussions.call(groupId, {
+			return ListenToGroupDiscussions.call(classId, groupId, {
 				created: async (entity) => {
 					addToArray(groupGlobal[groupId].discussions.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
@@ -69,7 +69,7 @@ export const useGroupDiscussions = (groupId: string) => {
 		try {
 			await groupGlobal[groupId].setLoading(true)
 			const lastDate = groupGlobal[groupId].discussions.value.slice(-1)[0]?.createdAt
-			const discussions = await GetGroupDiscussions.call(groupId, lastDate)
+			const discussions = await GetGroupDiscussions.call(classId, groupId, lastDate)
 			groupGlobal[groupId].hasMore.value = !!discussions.pages.next
 			discussions.results.map((d) => addToArray(groupGlobal[groupId].discussions.value, d, (e) => e.id, (e) => e.createdAt))
 			groupGlobal[groupId].fetched.value = true
@@ -164,7 +164,7 @@ export const useClassDiscussions = (classId: string) => {
 	return { ...classGlobal[classId] }
 }
 
-export const useCreateDiscussion = (groupId: string) => {
+export const useCreateDiscussion = (classId: string, groupId: string) => {
 	const factory = ref(new DiscussionFactory()) as Ref<DiscussionFactory>
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
@@ -175,7 +175,7 @@ export const useCreateDiscussion = (groupId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddDiscussion.call(factory.value)
+				await AddDiscussion.call(classId, factory.value)
 				factory.value.reset()
 			} catch (e) {
 				await setError(e)
@@ -191,7 +191,7 @@ export const useCreateDiscussion = (groupId: string) => {
 			await Promise.all(factories.map(async (mediaFactory) => {
 				mediaFactory.groupId = groupId
 				try {
-					await AddDiscussion.call(mediaFactory)
+					await AddDiscussion.call(classId, mediaFactory)
 				} catch (error) {
 					await setError(error)
 				}

@@ -9,7 +9,7 @@ export class ListenToAnnouncementUseCase {
 		this.repository = repository
 	}
 
-	async call (classId: string, listener: Listeners<AnnouncementEntity>) {
-		return await this.repository.listenToOne(classId, listener)
+	async call (classId: string, id: string, listener: Listeners<AnnouncementEntity>) {
+		return await this.repository.listenToOne(classId, id, listener)
 	}
 }

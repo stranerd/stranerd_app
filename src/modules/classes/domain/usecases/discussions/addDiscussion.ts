@@ -8,7 +8,8 @@ export class AddDiscussionUseCase {
 		this.repository = repository
 	}
 
-	async call (factory: DiscussionFactory) {
-		return await this.repository.add(await factory.toModel())
+	async call (classId: string, factory: DiscussionFactory) {
+		const data = await factory.toModel()
+		return await this.repository.add(classId, data)
 	}
 }

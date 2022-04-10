@@ -9,6 +9,7 @@ export class UpdateAnnouncementUseCase {
 	}
 
 	async call (id: string, factory: AnnouncementFactory) {
-		return await this.repository.update(id, await factory.toModel())
+		const data = await factory.toModel()
+		return await this.repository.update(data.classId, id, data)
 	}
 }

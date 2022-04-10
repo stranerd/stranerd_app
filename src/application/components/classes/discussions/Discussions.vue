@@ -14,8 +14,8 @@
 					<IonIcon :icon="closeOutline" class="text-2xl" />
 				</router-link>
 			</div>
-			<DiscussionsList :groupId="groupId" class="content" />
-			<DiscussionForm :groupId="groupId" />
+			<DiscussionsList :classId="classId" :groupId="groupId" class="content" />
+			<DiscussionForm :classId="classId" :groupId="groupId" />
 		</div>
 		<div v-else class="body justify-center">
 			<EmptyState :route="`/classes/${classId}/groups`"

@@ -165,7 +165,7 @@ export const useEditAnnouncement = () => {
 	return { error, loading, factory, editAnnouncement }
 }
 
-export const useDeleteAnnouncement = (announcementId: string) => {
+export const useDeleteAnnouncement = (classId: string, announcementId: string) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -179,7 +179,7 @@ export const useDeleteAnnouncement = (announcementId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteAnnouncement.call(announcementId)
+				await DeleteAnnouncement.call(classId, announcementId)
 				await setMessage('Announcement deleted successfully')
 			} catch (error) {
 				await setError(error)

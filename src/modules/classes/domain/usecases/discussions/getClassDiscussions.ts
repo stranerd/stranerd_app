@@ -11,14 +11,11 @@ export class GetClassDiscussionsUseCase {
 
 	async call (classId: string) {
 		const conditions: QueryParams = {
-			where: [
-				{ field: 'classId', value: classId },
-				{ field: 'media', condition: Conditions.ne, value: null }
-			],
+			where: [{ field: 'media', condition: Conditions.ne, value: null }],
 			sort: [{ field: 'createdAt', desc: true }],
 			limit: CHAT_PAGINATION_LIMIT
 		}
 
-		return await this.repository.get(conditions)
+		return await this.repository.get(classId, conditions)
 	}
 }

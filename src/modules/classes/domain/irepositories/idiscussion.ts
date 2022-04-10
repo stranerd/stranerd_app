@@ -3,9 +3,9 @@ import { DiscussionToModel } from '../../data/models/discussion'
 import { DiscussionEntity } from '../entities/discussion'
 
 export interface IDiscussionRepository {
-	add: (data: DiscussionToModel) => Promise<DiscussionEntity>
-	get: (query: QueryParams) => Promise<QueryResults<DiscussionEntity>>
-	listenToOne: (id: string, listener: Listeners<DiscussionEntity>) => Promise<() => void>
-	listenToMany: (query: QueryParams, listener: Listeners<DiscussionEntity>, matches: (entity: DiscussionEntity) => boolean) => Promise<() => void>
-	find: (id: string) => Promise<DiscussionEntity | null>
+	add: (classId: string, data: DiscussionToModel) => Promise<DiscussionEntity>
+	get: (classId: string, query: QueryParams) => Promise<QueryResults<DiscussionEntity>>
+	listenToOne: (classId: string, id: string, listener: Listeners<DiscussionEntity>) => Promise<() => void>
+	listenToMany: (classId: string, query: QueryParams, listener: Listeners<DiscussionEntity>, matches: (entity: DiscussionEntity) => boolean) => Promise<() => void>
+	find: (classId: string, id: string) => Promise<DiscussionEntity | null>
 }

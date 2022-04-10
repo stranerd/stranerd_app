@@ -44,7 +44,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { id } = useAuth()
-		const { unReadDiscussions } = useGroupDiscussions(props.group.id)
+		const { unReadDiscussions } = useGroupDiscussions(props.classInst.id, props.group.id)
 		return { chatboxEllipsesOutline, formatTime, id, unReadDiscussions }
 	}
 })

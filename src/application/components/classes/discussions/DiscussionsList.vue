@@ -26,13 +26,23 @@ export default defineComponent({
 	name: 'DiscussionsList',
 	components: { DiscussionsListCard },
 	props: {
+		classId: {
+			required: true,
+			type: String
+		},
 		groupId: {
 			required: true,
 			type: String
 		}
 	},
 	setup (props) {
-		const { loading, error, hasMore, discussions, fetchOlderDiscussions } = useGroupDiscussions(props.groupId)
+		const {
+			loading,
+			error,
+			hasMore,
+			discussions,
+			fetchOlderDiscussions
+		} = useGroupDiscussions(props.classId, props.groupId)
 		return { loading, error, hasMore, discussions, fetchOlderDiscussions, formatTime }
 	}
 })

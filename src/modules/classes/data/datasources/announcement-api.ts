@@ -10,37 +10,37 @@ export class AnnouncementApiDataSource implements AnnouncementBaseDataSource {
 		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/classes/announcements')
 	}
 
-	async create (data: AnnouncementToModel) {
-		return await this.stranerdClient.post<AnnouncementToModel, AnnouncementFromModel>('/', data)
+	async create (classId: string, data: AnnouncementToModel) {
+		return await this.stranerdClient.post<AnnouncementToModel, AnnouncementFromModel>(`/${classId}`, data)
 	}
 
-	async find (id: string) {
-		return await this.stranerdClient.get<any, AnnouncementFromModel>(`/${id}`, {})
+	async find (classId: string, id: string) {
+		return await this.stranerdClient.get<any, AnnouncementFromModel>(`/${classId}/${id}`, {})
 	}
 
-	async get (query: QueryParams) {
-		return await this.stranerdClient.get<QueryParams, QueryResults<AnnouncementFromModel>>('/', query)
+	async get (classId: string, query: QueryParams) {
+		return await this.stranerdClient.get<QueryParams, QueryResults<AnnouncementFromModel>>(`/${classId}`, query)
 	}
 
-	async listenToOne (id: string, listeners: Listeners<AnnouncementFromModel>) {
-		const listener = listenOnSocket(`classes/announcements/${id}`, listeners)
-		const model = await this.find(id)
+	async listenToOne (classId: string, id: string, listeners: Listeners<AnnouncementFromModel>) {
+		const listener = listenOnSocket(`classes/announcements/${classId}/${id}`, listeners)
+		const model = await this.find(classId, id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
-	async listenToMany (query: QueryParams, listeners: Listeners<AnnouncementFromModel>) {
-		const listener = listenOnSocket('classes/announcements', listeners)
-		const models = await this.get(query)
+	async listenToMany (classId: string, query: QueryParams, listeners: Listeners<AnnouncementFromModel>) {
+		const listener = listenOnSocket(`classes/announcements/${classId}`, listeners)
+		const models = await this.get(classId, query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
 	}
 
-	async delete (id: string) {
-		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
+	async delete (classId: string, id: string) {
+		await this.stranerdClient.delete<any, boolean>(`/${classId}/${id}`, {})
 	}
 
-	async update (id: string, data: AnnouncementToModel) {
-		return await this.stranerdClient.put<AnnouncementToModel, AnnouncementFromModel>(`/${id}`, data)
+	async update (classId: string, id: string, data: AnnouncementToModel) {
+		return await this.stranerdClient.put<AnnouncementToModel, AnnouncementFromModel>(`/${classId}/${id}`, data)
 	}
 }

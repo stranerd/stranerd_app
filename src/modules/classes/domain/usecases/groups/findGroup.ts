@@ -1,5 +1,5 @@
 import { IGroupRepository } from '../../irepositories/igroup'
- 
+
 export class FindGroupUseCase {
 	private repository: IGroupRepository
 
@@ -7,7 +7,7 @@ export class FindGroupUseCase {
 		this.repository = repository
 	}
 
-	async call (id: string) {
-		return await this.repository.find(id)
+	async call (classId: string, id: string) {
+		return await this.repository.find(classId, id)
 	}
 }

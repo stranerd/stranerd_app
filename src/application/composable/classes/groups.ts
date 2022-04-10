@@ -163,7 +163,7 @@ export const useEditGroup = () => {
 	return { error, loading, factory, editGroup }
 }
 
-export const useDeleteGroup = (groupId: string) => {
+export const useDeleteGroup = (classId: string, groupId: string) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -177,7 +177,7 @@ export const useDeleteGroup = (groupId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteGroup.call(groupId)
+				await DeleteGroup.call(classId, groupId)
 				await setMessage('Group deleted successfully')
 			} catch (error) {
 				await setError(error)

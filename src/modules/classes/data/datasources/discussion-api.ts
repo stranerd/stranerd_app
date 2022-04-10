@@ -10,28 +10,28 @@ export class DiscussionApiDataSource implements DiscussionBaseDataSource {
 		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/classes/discussions')
 	}
 
-	async create (data: DiscussionToModel) {
-		return await this.stranerdClient.post<DiscussionToModel, DiscussionFromModel>('/', data)
+	async create (classId: string, data: DiscussionToModel) {
+		return await this.stranerdClient.post<DiscussionToModel, DiscussionFromModel>(`/${classId}`, data)
 	}
 
-	async find (id: string) {
-		return await this.stranerdClient.get<any, DiscussionFromModel>(`/${id}`, {})
+	async find (classId: string, id: string) {
+		return await this.stranerdClient.get<any, DiscussionFromModel>(`/${classId}/${id}`, {})
 	}
 
-	async get (query: QueryParams) {
-		return await this.stranerdClient.get<QueryParams, QueryResults<DiscussionFromModel>>('/', query)
+	async get (classId: string, query: QueryParams) {
+		return await this.stranerdClient.get<QueryParams, QueryResults<DiscussionFromModel>>(`/${classId}`, query)
 	}
 
-	async listenToOne (id: string, listeners: Listeners<DiscussionFromModel>) {
-		const listener = listenOnSocket(`classes/discussions/${id}`, listeners)
-		const model = await this.find(id)
+	async listenToOne (classId: string, id: string, listeners: Listeners<DiscussionFromModel>) {
+		const listener = listenOnSocket(`classes/discussions/${classId}/${id}`, listeners)
+		const model = await this.find(classId, id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
-	async listenToMany (query: QueryParams, listeners: Listeners<DiscussionFromModel>) {
-		const listener = listenOnSocket('classes/discussions', listeners)
-		const models = await this.get(query)
+	async listenToMany (classId: string, query: QueryParams, listeners: Listeners<DiscussionFromModel>) {
+		const listener = listenOnSocket(`classes/discussions/${classId}`, listeners)
+		const models = await this.get(classId, query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
 	}

@@ -11,12 +11,11 @@ export class ListenToGroupsUseCase {
 
 	async call (classId: string, listener: Listeners<GroupEntity>) {
 		const conditions: QueryParams = {
-			where: [{ field: 'classId', value: classId }],
 			sort: [{ field: 'createdAt' }],
 			all: true
 		}
 
-		return await this.repository.listenToMany(conditions, listener, (entity) => {
+		return await this.repository.listenToMany(classId, conditions, listener, (entity) => {
 			return entity.classId === classId
 		})
 	}

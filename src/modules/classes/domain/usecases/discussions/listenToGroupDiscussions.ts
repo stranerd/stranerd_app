@@ -9,7 +9,7 @@ export class ListenToGroupDiscussionsUseCase {
 		this.repository = repository
 	}
 
-	async call (groupId: string, listener: Listeners<DiscussionEntity>, date?: number) {
+	async call (classId: string, groupId: string, listener: Listeners<DiscussionEntity>, date?: number) {
 		const conditions: QueryParams = {
 			where: [{ field: 'groupId', value: groupId }],
 			sort: [{ field: 'createdAt', desc: true }],
@@ -17,7 +17,7 @@ export class ListenToGroupDiscussionsUseCase {
 		}
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })
 
-		return await this.repository.listenToMany(conditions, listener, (entity) => {
+		return await this.repository.listenToMany(classId, conditions, listener, (entity) => {
 			if (entity.groupId !== groupId) return false
 			if (date) return entity.createdAt >= date
 			return true
