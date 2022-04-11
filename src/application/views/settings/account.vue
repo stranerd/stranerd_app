@@ -5,7 +5,7 @@
 			<IonList class="border-bottom-line bg-white md:rounded-xl text-sub">
 				<ion-radio-group v-model="factory.type" class="flex flex-col items-start" required>
 					<IonListHeader>
-						<ion-label class="font-bold">Choose your academic level *</ion-label>
+						<ion-label class="font-bold text-heading">Choose your academic level *</ion-label>
 					</IonListHeader>
 					<IonItem class="flex items-center gap-4">
 						<ion-radio slot="start" :value="UserSchoolType.secondary" />

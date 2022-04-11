@@ -1,5 +1,12 @@
 <template>
 	<div class="flex flex-col gap-4 md:gap-6">
+		<div v-if="user && !user.school"
+			class="border-bottom-line flex justify-between items-center md:bg-white p-4 md:rounded-xl md:pt-4 pt-0">
+			<span class="font-semibold">Complete your account set up</span>
+			<router-link to="/settings/account">
+				<IonIcon :icon="arrowForwardOutline" class="text-heading" />
+			</router-link>
+		</div>
 		<div class="border-bottom-line">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 				<div class="text-main_dark flex items-center">
@@ -58,6 +65,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import {
+	arrowForwardOutline,
 	copyOutline,
 	documentOutline,
 	folderOutline,
@@ -77,7 +85,7 @@ export default defineComponent({
 	setup () {
 		const { user } = useAuth()
 		return {
-			rocketOutline, timeOutline, helpCircleOutline, readerOutline,
+			arrowForwardOutline, rocketOutline, timeOutline, helpCircleOutline, readerOutline,
 			copyOutline, documentOutline, playCircleOutline, folderOutline,
 			user, formatNumber, pluralize
 		}
