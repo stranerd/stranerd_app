@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { ClassEntity } from '@modules/classes'
 import { useAnnouncementList, useCreateAnnouncement } from '@app/composable/classes/announcements'
 import AnnouncementsListCard from '@app/components/classes/announcements/AnnouncementsListCard.vue'
@@ -49,10 +49,12 @@ export default defineComponent({
 			hasMore,
 			fetchOlderAnnouncements
 		} = useAnnouncementList(props.classInst.id)
-		const { factory, error: createError, loading: createLoading, createAnnouncement } = useCreateAnnouncement()
-		onMounted(() => {
-			factory.value.classId = props.classInst.id
-		})
+		const {
+			factory,
+			error: createError,
+			loading: createLoading,
+			createAnnouncement
+		} = useCreateAnnouncement(props.classInst)
 		return {
 			id, loading, error, announcements, hasMore, fetchOlderAnnouncements,
 			factory, createError, createLoading, createAnnouncement

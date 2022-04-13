@@ -95,7 +95,7 @@ export const openGroupModal = async (classInst: ClassEntity, router: Router) => 
 	await router.push(`/classes/${classInst.id}/groups/create`)
 }
 
-export const useCreateGroup = () => {
+export const useCreateGroup = (groupClass: ClassEntity) => {
 	const router = useRouter()
 	const factory = ref(new GroupFactory()) as Ref<GroupFactory>
 	const { loading, setLoading } = useLoadingHandler()

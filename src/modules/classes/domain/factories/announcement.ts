@@ -9,7 +9,7 @@ export class AnnouncementFactory extends BaseFactory<AnnouncementEntity, Announc
 		classId: { required: true, rules: [isString] }
 	}
 
-	reserved = []
+	reserved = ['classId']
 
 	constructor () {
 		super({ body: '', classId: '' })

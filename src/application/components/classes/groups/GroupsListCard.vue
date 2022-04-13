@@ -19,16 +19,21 @@
 				<span v-if="!!unReadDiscussions" class="dot bg-primary" />
 			</div>
 		</div>
+		<span v-if="classInst.admins.includes(id)" class="rounded-full p-1"
+			@click.prevent="openGroupEditModal(group, $router)">
+			<IonIcon :icon="pencilOutline" class="text-gray text-heading2" />
+		</span>
 	</router-link>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { ClassEntity, GroupEntity } from '@modules/classes'
-import { chatboxEllipsesOutline } from 'ionicons/icons'
+import { chatboxEllipsesOutline, pencilOutline } from 'ionicons/icons'
 import { formatTime } from '@utils/dates'
 import { useAuth } from '@app/composable/auth/auth'
 import { useGroupDiscussions } from '@app/composable/classes/discussions'
+import { openGroupEditModal } from '@app/composable/classes/groups'
 
 export default defineComponent({
 	name: 'GroupsListCard',
@@ -45,7 +50,7 @@ export default defineComponent({
 	setup (props) {
 		const { id } = useAuth()
 		const { unReadDiscussions } = useGroupDiscussions(props.classInst.id, props.group.id)
-		return { chatboxEllipsesOutline, formatTime, id, unReadDiscussions }
+		return { chatboxEllipsesOutline, pencilOutline, formatTime, id, unReadDiscussions, openGroupEditModal }
 	}
 })
 </script>

@@ -97,7 +97,7 @@ export const openAnnouncementModal = async (classInst: ClassEntity, router: Rout
 	await router.push(`/classes/${classInst.id}/announcements/create`)
 }
 
-export const useCreateAnnouncement = () => {
+export const useCreateAnnouncement = (announcementClass: ClassEntity) => {
 	const router = useRouter()
 	const factory = ref(new AnnouncementFactory()) as Ref<AnnouncementFactory>
 	const { loading, setLoading } = useLoadingHandler()

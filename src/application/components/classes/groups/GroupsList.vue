@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { ClassEntity } from '@modules/classes'
 import { useCreateGroup, useGroupList } from '@app/composable/classes/groups'
 import GroupsListCard from '@app/components/classes/groups/GroupsListCard.vue'
@@ -38,10 +38,7 @@ export default defineComponent({
 	setup (props) {
 		const { id } = useAuth()
 		const { loading, error, groups } = useGroupList(props.classInst.id)
-		const { factory, error: createError, loading: createLoading, createGroup } = useCreateGroup()
-		onMounted(() => {
-			factory.value.classId = props.classInst.id
-		})
+		const { factory, error: createError, loading: createLoading, createGroup } = useCreateGroup(props.classInst)
 		return {
 			id, loading, error, groups,
 			factory, createError, createLoading, createGroup
