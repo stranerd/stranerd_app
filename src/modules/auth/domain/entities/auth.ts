@@ -1,4 +1,5 @@
 import { UserBio } from '@modules/users'
+import { Media } from '@modules/core'
 
 export type AuthUser = {
 	email: string
@@ -10,6 +11,9 @@ export type NewUser = {
 	lastName: string
 	email: string
 	password: string
+	description: string
+	photo: Media | null
+	coverPhoto: Media | null
 }
 
 export type UserLocation = {
@@ -52,6 +56,7 @@ export type AuthDetails = {
 	id: string
 	firstName: string
 	lastName: string
+	fullName: string
 	email: string
 	isVerified: boolean
 	roles: Record<string, Record<string, boolean>>

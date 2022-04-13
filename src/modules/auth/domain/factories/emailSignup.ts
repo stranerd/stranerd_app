@@ -1,14 +1,17 @@
-import { BaseFactory } from '@modules/core'
-import { isEmail, isLongerThanX, isShallowEqualTo, isShorterThanX, isString } from '@stranerd/validate'
-import { AuthUser } from '../entities/auth'
+import { BaseFactory, Media, UploadedFile } from '@modules/core'
+import { isEmail, isImage, isLongerThanX, isShallowEqualTo, isShorterThanX, isString } from '@stranerd/validate'
+import { NewUser } from '../entities/auth'
 
-type Keys = { first: string, last: string, email: string, password: string, cPassword: string }
+type Content = UploadedFile | Media | null
 
-export class EmailSignupFactory extends BaseFactory<null, AuthUser, Keys> {
+export class EmailSignupFactory extends BaseFactory<null, NewUser, NewUser & { cPassword: string, photo: Content, coverPhoto: Content }> {
 	readonly rules = {
-		first: { required: true, rules: [isString, isLongerThanX(2)] },
-		last: { required: true, rules: [isString, isLongerThanX(2)] },
+		firstName: { required: true, rules: [isString, isLongerThanX(2)] },
+		lastName: { required: true, rules: [isString, isLongerThanX(2)] },
+		description: { required: true, rules: [isString] },
 		email: { required: true, rules: [isString, isEmail] },
+		photo: { required: false, rules: [isImage] },
+		coverPhoto: { required: false, rules: [isImage] },
 		password: { required: true, rules: [isString, isLongerThanX(7), isShorterThanX(17)] },
 		cPassword: {
 			required: true,
@@ -19,23 +22,50 @@ export class EmailSignupFactory extends BaseFactory<null, AuthUser, Keys> {
 	reserved = []
 
 	constructor () {
-		super({ first: '', last: '', email: '', password: '', cPassword: '' })
+		super({
+			firstName: '', lastName: '', email: '', password: '', cPassword: '',
+			description: '', photo: null, coverPhoto: null
+		})
 	}
 
-	get first () {
-		return this.values.first
+	get firstName () {
+		return this.values.firstName
 	}
 
-	set first (value: string) {
-		this.set('first', value)
+	set firstName (value: string) {
+		this.set('firstName', value)
 	}
 
-	get last () {
-		return this.values.last
+	get lastName () {
+		return this.values.lastName
 	}
 
-	set last (value: string) {
-		this.set('last', value)
+	set lastName (value: string) {
+		this.set('lastName', value)
+	}
+
+	get description () {
+		return this.values.description
+	}
+
+	set description (value: string) {
+		this.set('description', value)
+	}
+
+	get photo () {
+		return this.values.photo
+	}
+
+	set photo (value: Content) {
+		this.set('photo', value)
+	}
+
+	get coverPhoto () {
+		return this.values.coverPhoto
+	}
+
+	set coverPhoto (value: Content) {
+		this.set('coverPhoto', value)
 	}
 
 	get email () {
@@ -65,8 +95,10 @@ export class EmailSignupFactory extends BaseFactory<null, AuthUser, Keys> {
 
 	toModel = async () => {
 		if (this.valid) {
-			const { first, last, email, password } = this.validValues
-			return { firstName: first, lastName: last, email, password }
+			if (this.photo instanceof UploadedFile) this.photo = await this.uploadFile('profiles', this.photo)
+			if (this.coverPhoto instanceof UploadedFile) this.coverPhoto = await this.uploadFile('cover-profiles', this.coverPhoto)
+			const { firstName, lastName, email, password, description, photo, coverPhoto } = this.validValues
+			return { firstName, lastName, email, password, description, photo, coverPhoto }
 		} else throw new Error('Validation errors')
 	}
 

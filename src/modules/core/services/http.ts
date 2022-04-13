@@ -103,7 +103,7 @@ export enum StatusCodes {
 	NotAuthorized = 403,
 	NotFound = 404,
 	ValidationError = 422,
-	EmailNotVerified = 460,
+	AccountNotVerified = 460,
 	AccessTokenExpired = 461,
 	RefreshTokenMisused = 462,
 	InvalidToken = 463

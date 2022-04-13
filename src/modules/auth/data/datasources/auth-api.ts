@@ -36,10 +36,9 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 		})
 	}
 
-	async signupWithEmail ({ email, password, firstName, lastName }: NewUser, extras: AuthExtras) {
+	async signupWithEmail (user: NewUser, extras: AuthExtras) {
 		return await this.authClient.post<any, AfterAuthUser>('/emails/signup', {
-			email, password, firstName, lastName,
-			description: '', photo: null,
+			...user,
 			referrer: extras.referrer
 		})
 	}

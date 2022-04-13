@@ -17,10 +17,10 @@
 			<div class="block md:gap-2">
 				<form class="px-4 md:px-0 flex gap-2 items-center" @submit.prevent="searchUsers">
 					<ion-input v-model="detail" class="bg-white border border-faded_gray w-full"
-						placeholder="Search users by name or email" />
+						placeholder="Search users by firstname, lastname or email" />
 					<IonIcon :icon="trashOutline" class="text-red text-2xl" />
 				</form>
-				<ClassMember v-for="user in searchedUsers" :key="user.hash" :classInst="classInst" :user="user" />
+				<ClassMember v-for="user in users" :key="user.hash" :classInst="classInst" :user="user" />
 			</div>
 		</template>
 		<template v-else>
@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useClassMembersList } from '@app/composable/classes/classes'
 import { ClassEntity } from '@modules/classes'
 import ClassMember from '@app/components/classes/classes/ClassMember.vue'
@@ -66,10 +66,9 @@ export default defineComponent({
 		const tab = ref('members')
 		const { loading, error, admins, tutors, members, requests } = useClassMembersList(props.classInst)
 		const { loading: searchLoading, error: searchError, users, detail, searchUsers, reset } = useSearchUsers()
-		const searchedUsers = computed(() => users.value.filter((user) => !props.classInst.members.includes(user.id)))
 		return {
 			id, tab, admins, tutors, members, loading, error, requests,
-			searchLoading, searchError, searchedUsers, detail, searchUsers, reset, trashOutline
+			searchLoading, searchError, users, detail, searchUsers, reset, trashOutline
 		}
 	}
 })

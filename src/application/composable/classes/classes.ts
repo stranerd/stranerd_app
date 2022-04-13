@@ -62,22 +62,23 @@ export const useClassList = () => {
 export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) => {
 	const { id } = useAuth()
 	const { redirect } = useRedirectToAuth()
+	const listenerFn = async () => {
+		return ListenToUsersInList.call(classInst.membersAndRequests, {
+			created: async (entity) => {
+				addToArray(classGlobal[classInst.id].users.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
+			},
+			updated: async (entity) => {
+				addToArray(classGlobal[classInst.id].users.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
+			},
+			deleted: async (entity) => {
+				const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1)
+			}
+		})
+	}
 
 	if (classGlobal[classInst.id] === undefined) {
-		const listener = useListener(async () => {
-			return ListenToUsersInList.call(classInst.membersAndRequests, {
-				created: async (entity) => {
-					addToArray(classGlobal[classInst.id].users.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
-				},
-				updated: async (entity) => {
-					addToArray(classGlobal[classInst.id].users.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
-				},
-				deleted: async (entity) => {
-					const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1)
-				}
-			})
-		})
+		const listener = useListener(listenerFn)
 		classGlobal[classInst.id] = {
 			hash: ref(classInst.hash),
 			users: ref([]),
@@ -184,7 +185,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 		if (!classGlobal[classInst.id].fetched.value && !classGlobal[classInst.id].loading.value) await fetchUsers()
 		if (classGlobal[classInst.id].hash.value !== classInst.hash) {
 			classGlobal[classInst.id].hash.value = classInst.hash
-			await classGlobal[classInst.id].listener.restart()
+			await classGlobal[classInst.id].listener.reset(listenerFn)
 		}
 		await classGlobal[classInst.id].listener.start()
 	})

@@ -30,7 +30,7 @@ type UserConstructorArgs = {
 export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
 	const firstName = capitalize(bio?.firstName ?? 'Anon')
 	const lastName = capitalize(bio?.lastName ?? 'Ymous')
-	const fullName = firstName + ' ' + lastName
+	const fullName = capitalize(bio?.fullName ?? (firstName + ' ' + lastName))
 	const email = bio?.email ?? 'anon@ymous.com'
 	const description = bio?.description ?? ''
 	const photo = bio?.photo ? parseMedia(bio.photo) : null

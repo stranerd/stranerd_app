@@ -2,7 +2,7 @@
 	<Justified>
 		<div class="lg:w-8/12 w-full mx-auto md:p-4 lg:py-8 max-w-[800px]">
 			<form class="border-bottom-line flex flex-col md:rounded-xl bg-white py-4 md:py-6 gap-4"
-				@submit.prevent="updateProfile">
+				@submit.prevent="updateProfile()">
 				<div class="px-4 md:px-6">
 					<ion-text class="text-main_dark font-bold">Edit profile</ion-text>
 				</div>

@@ -11,15 +11,15 @@
 				<div>
 					<form class="flex flex-col gap-4" @submit.prevent="signup">
 						<div>
-							<ion-input v-model="factory.first" :size="24" placeholder="First Name"
+							<ion-input v-model="factory.firstName" :size="24" placeholder="First Name"
 								position="floating"
 								type="text"></ion-input>
-							<DisplayError :error="factory.errors.first" />
+							<DisplayError :error="factory.errors.firstName" />
 						</div>
 						<div>
-							<ion-input v-model="factory.last" :size="24" placeholder="Last Name" position="floating"
+							<ion-input v-model="factory.lastName" :size="24" placeholder="Last Name" position="floating"
 								type="text"></ion-input>
-							<DisplayError :error="factory.errors.last" />
+							<DisplayError :error="factory.errors.lastName" />
 						</div>
 						<div>
 							<ion-input v-model.trim="factory.email" :size="24" inputmode="email"
