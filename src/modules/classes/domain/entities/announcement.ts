@@ -1,6 +1,5 @@
 import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
 import { BaseEntity } from '@modules/core'
-import { appName } from '@utils/environment'
 import { ClassUsers } from './class'
 
 type AnnouncementConstructorArgs = {
@@ -42,7 +41,7 @@ export class AnnouncementEntity extends BaseEntity {
 	}
 
 	get isUserVerified () {
-		return this.userRoles[appName].isVerified
+		return this.userRoles.isVerified
 	}
 
 	get members () {

@@ -1,6 +1,5 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
-import { appName } from '@utils/environment'
 
 export class VideoEntity extends BaseEntity {
 	public readonly id: string
@@ -43,7 +42,7 @@ export class VideoEntity extends BaseEntity {
 	}
 
 	get isUserVerified () {
-		return this.userRoles[appName].isVerified
+		return this.userRoles.isVerified
 	}
 
 	get shareLink () {

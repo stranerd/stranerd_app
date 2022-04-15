@@ -1,5 +1,4 @@
 import { RankTypes } from '@modules/users/domain/entities/rank'
-import { appName } from '@utils/environment'
 import { Media } from '@modules/core'
 
 export enum UserSchoolType {
@@ -55,11 +54,9 @@ export interface UserBio {
 }
 
 export interface UserRoles {
-	[appName]: {
-		isAdmin: boolean
-		isTutor: boolean
-		isVerified: boolean
-	}
+	isStranerdAdmin: boolean
+	isStranerdTutor: boolean
+	isVerified: boolean
 }
 
 export interface UserAccount {

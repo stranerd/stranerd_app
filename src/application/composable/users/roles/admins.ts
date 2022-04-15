@@ -1,9 +1,10 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { GetAllAdmins, ListenToAllAdmins, ToggleAdmin, UserEntity } from '@modules/users'
+import { GetAllAdmins, ListenToAllAdmins, UserEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
+import { UpdateRole } from '@modules/auth'
 
 const global = {
 	admins: ref([] as UserEntity[]),
@@ -26,9 +27,9 @@ const listener = useListener(async () => {
 		}
 	})
 })
-const { id } = useAuth()
 
 export const useAdminsList = () => {
+	const { id } = useAuth()
 	const fetchAdmins = async () => {
 		await global.setError('')
 		try {
@@ -61,7 +62,7 @@ export const useAdminsList = () => {
 		if (accepted) {
 			await global.setLoading(true)
 			try {
-				await ToggleAdmin.call(user.id, true)
+				await UpdateRole.call(user.id, 'isStranerdAdmin', true)
 				user.isAdmin = true
 				addToArray(global.admins.value, user, (e) => e.id, (e) => e.bio.fullName, true)
 				await global.setMessage('Successfully upgraded to admin')
@@ -81,7 +82,7 @@ export const useAdminsList = () => {
 		if (accepted) {
 			await global.setLoading(true)
 			try {
-				await ToggleAdmin.call(user.id, false)
+				await UpdateRole.call(user.id, 'isStranerdAdmin', false)
 				global.admins.value = global.admins.value
 					.filter((u) => u.id !== user.id)
 				await global.setMessage('Successfully downgraded from admin')

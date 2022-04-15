@@ -87,4 +87,12 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 		await deleteTokens()
 		await closeSocket()
 	}
+
+	async updateRole (data: { id: string, value: boolean, role: string }) {
+		return await this.authClient.post<any, boolean>('/user/roles', {
+			role: data.role,
+			userId: data.id,
+			value: data.value
+		})
+	}
 }

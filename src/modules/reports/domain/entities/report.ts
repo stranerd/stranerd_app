@@ -1,6 +1,5 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
-import { appName } from '@utils/environment'
 
 export class ReportEntity extends BaseEntity {
 	readonly id: string
@@ -42,7 +41,7 @@ export class ReportEntity extends BaseEntity {
 	}
 
 	get isUserVerified () {
-		return this.reporterRoles[appName].isVerified
+		return this.reporterRoles.isVerified
 	}
 }
 

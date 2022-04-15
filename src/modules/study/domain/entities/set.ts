@@ -1,6 +1,5 @@
 import { BaseEntity } from '@modules/core'
 import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
-import { appName } from '@utils/environment'
 
 export class SetEntity extends BaseEntity {
 	public readonly id: string
@@ -47,7 +46,7 @@ export class SetEntity extends BaseEntity {
 	}
 
 	get isUserVerified () {
-		return this.userRoles[appName].isVerified
+		return this.userRoles.isVerified
 	}
 
 	get shareLink () {

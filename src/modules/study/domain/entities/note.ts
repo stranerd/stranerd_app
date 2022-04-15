@@ -1,6 +1,5 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
-import { appName } from '@utils/environment'
 
 export class NoteEntity extends BaseEntity {
 	public readonly id: string
@@ -53,7 +52,7 @@ export class NoteEntity extends BaseEntity {
 	}
 
 	get isUserVerified () {
-		return this.userRoles[appName].isVerified
+		return this.userRoles.isVerified
 	}
 
 	get shareLink () {

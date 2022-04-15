@@ -56,4 +56,8 @@ export class AuthRepository implements IAuthRepository {
 	async signout () {
 		return await this.dataSource.signout()
 	}
+
+	async updateRole (data: { id: string, value: boolean, role: string }) {
+		return await this.dataSource.updateRole(data)
+	}
 }

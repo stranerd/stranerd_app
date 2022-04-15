@@ -1,7 +1,6 @@
 import { parseURL } from '@utils/commons'
 import { isAndroid, isIos } from '@utils/constants'
 
-export const appName = 'stranerd'
 export const isDev = process.env.VUE_APP_API_ENVIRONMENT === 'local'
 
 export const isServer = () => false

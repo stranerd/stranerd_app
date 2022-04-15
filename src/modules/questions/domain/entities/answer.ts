@@ -1,7 +1,6 @@
 import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractTextFromHTML, trimToLength } from '@utils/commons'
-import { appName } from '@utils/environment'
 
 export class AnswerEntity extends BaseEntity {
 	public readonly id: string
@@ -74,7 +73,7 @@ export class AnswerEntity extends BaseEntity {
 	}
 
 	get isUserVerified () {
-		return this.userRoles[appName].isVerified
+		return this.userRoles.isVerified
 	}
 }
 

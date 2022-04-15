@@ -1,6 +1,7 @@
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { ToggleVerified, UserEntity } from '@modules/users'
+import { UserEntity } from '@modules/users'
 import { Alert } from '@utils/dialog'
+import { UpdateRole } from '@modules/auth'
 
 export const useVerifiedRoles = () => {
 	const { error, setError } = useErrorHandler()
@@ -16,7 +17,7 @@ export const useVerifiedRoles = () => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await ToggleVerified.call(user.id, true)
+				await UpdateRole.call(user.id, 'isVerified', true)
 				user.isVerified = true
 				await setMessage('Successfully upgraded to verified')
 			} catch (error) {
@@ -35,7 +36,7 @@ export const useVerifiedRoles = () => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await ToggleVerified.call(user.id, false)
+				await UpdateRole.call(user.id, 'isVerified', false)
 				await setMessage('Successfully downgraded from verified')
 			} catch (error) {
 				await setError(error)

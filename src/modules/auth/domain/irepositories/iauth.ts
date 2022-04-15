@@ -13,4 +13,5 @@ export interface IAuthRepository {
 	updatePassword: (password: PasswordUpdate) => Promise<void>
 	session: (afterAuth: AfterAuthUser) => Promise<AuthDetails>
 	signout: () => Promise<void>
+	updateRole: (data: { id: string, value: boolean, role: string }) => Promise<boolean>
 }

@@ -1,8 +1,9 @@
 import { onMounted, onUnmounted, ref } from 'vue'
-import { GetAllTutors, ListenToAllTutors, ToggleTutor, UserEntity } from '@modules/users'
+import { GetAllTutors, ListenToAllTutors, UserEntity } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
+import { UpdateRole } from '@modules/auth'
 
 const global = {
 	tutors: ref([] as UserEntity[]),
@@ -49,7 +50,7 @@ export const useTutorsList = () => {
 		if (accepted) {
 			await global.setLoading(true)
 			try {
-				await ToggleTutor.call(user.id, true)
+				await UpdateRole.call(user.id, 'isStranerdTutor', true)
 				user.isTutor = true
 				addToArray(global.tutors.value, user, (e) => e.id, (e) => e.score)
 				await global.setMessage('Successfully upgraded to tutor')
@@ -69,7 +70,7 @@ export const useTutorsList = () => {
 		if (accepted) {
 			await global.setLoading(true)
 			try {
-				await ToggleTutor.call(user.id, false)
+				await UpdateRole.call(user.id, 'isStranerdTutor', false)
 				global.tutors.value = global.tutors.value
 					.filter((u) => u.id !== user.id)
 				await global.setMessage('Successfully downgraded from tutor')

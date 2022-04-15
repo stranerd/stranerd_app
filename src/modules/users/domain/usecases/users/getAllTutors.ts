@@ -1,4 +1,3 @@
-import { appName } from '@utils/environment'
 import { IUserRepository } from '../../irepositories/iuser'
 
 export class GetAllTutorsUseCase {
@@ -10,7 +9,7 @@ export class GetAllTutorsUseCase {
 
 	async call () {
 		return await this.repository.get({
-			where: [{ field: `roles.${appName}.isTutor`, value: true }],
+			where: [{ field: 'roles.isStranerdTutor', value: true }],
 			all: true
 		})
 	}

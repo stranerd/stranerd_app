@@ -1,6 +1,5 @@
 import { BaseEntity } from '@modules/core'
 import { generateDefaultBio, generateDefaultRoles } from './user'
-import { appName } from '@utils/environment'
 import { UserBio, UserRoles } from '../types'
 
 export class ReviewEntity extends BaseEntity {
@@ -38,7 +37,7 @@ export class ReviewEntity extends BaseEntity {
 	}
 
 	get isUserVerified () {
-		return this.userRoles[appName].isVerified
+		return this.userRoles.isVerified
 	}
 }
 

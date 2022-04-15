@@ -1,6 +1,5 @@
 import { BaseEntity } from '@modules/core'
 import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
-import { appName } from '@utils/environment'
 
 export class SessionEntity extends BaseEntity {
 	readonly id: string
@@ -56,11 +55,11 @@ export class SessionEntity extends BaseEntity {
 	}
 
 	get isStudentVerified () {
-		return this.studentRoles[appName].isVerified
+		return this.studentRoles.isVerified
 	}
 
 	get isTutorVerified () {
-		return this.tutorRoles[appName].isVerified
+		return this.tutorRoles.isVerified
 	}
 }
 

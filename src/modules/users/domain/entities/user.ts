@@ -1,5 +1,4 @@
 import { BaseEntity, parseMedia } from '@modules/core'
-import { appName } from '@utils/environment'
 import { capitalize, catchDivideByZero, formatNumber } from '@utils/commons'
 import { getRankImage } from './rank'
 import {
@@ -39,11 +38,9 @@ export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
 }
 
 export const generateDefaultRoles = (roles: Partial<UserRoles>): UserRoles => ({
-	[appName]: {
-		isAdmin: roles?.[appName]?.isAdmin ?? false,
-		isTutor: roles?.[appName]?.isTutor ?? false,
-		isVerified: roles?.[appName]?.isVerified ?? false
-	}
+	isStranerdAdmin: roles?.isStranerdAdmin ?? false,
+	isStranerdTutor: roles?.isStranerdTutor ?? false,
+	isVerified: roles?.isVerified ?? false
 })
 
 export class UserEntity extends BaseEntity {
@@ -146,27 +143,27 @@ export class UserEntity extends BaseEntity {
 	}
 
 	get isAdmin () {
-		return this.roles[appName].isAdmin
+		return this.roles.isStranerdAdmin
 	}
 
 	set isAdmin (isAdmin) {
-		this.roles[appName].isAdmin = isAdmin
+		this.roles.isStranerdAdmin = isAdmin
 	}
 
 	get isTutor () {
-		return this.roles[appName].isTutor
+		return this.roles.isStranerdTutor
 	}
 
 	set isTutor (isTutor) {
-		this.roles[appName].isTutor = isTutor
+		this.roles.isStranerdTutor = isTutor
 	}
 
 	get isVerified () {
-		return this.roles[appName].isVerified
+		return this.roles.isVerified
 	}
 
 	set isVerified (isVerified) {
-		this.roles[appName].isVerified = isVerified
+		this.roles.isVerified = isVerified
 	}
 
 	get isAspirant () {

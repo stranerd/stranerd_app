@@ -1,5 +1,4 @@
 import { Listeners } from '@modules/core'
-import { appName } from '@utils/environment'
 import { IUserRepository } from '../../irepositories/iuser'
 import { UserEntity } from '../../entities/user'
 
@@ -12,8 +11,8 @@ export class ListenToAllTutorsUseCase {
 
 	async call (listener: Listeners<UserEntity>) {
 		return await this.repository.listenToMany({
-			where: [{ field: `roles.${appName}.isTutor`, value: true }],
+			where: [{ field: 'roles.isStranerdTutor', value: true }],
 			all: true
-		}, listener, (entity) => entity.roles[appName].isTutor)
+		}, listener, (entity) => entity.isTutor)
 	}
 }

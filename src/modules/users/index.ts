@@ -1,5 +1,4 @@
 import { UserApiDataSource } from './data/datasources/user-api'
-import { RoleApiDataSource } from './data/datasources/role-api'
 import { NotificationApiDataSource } from './data/datasources/notification-api'
 import { ReviewApiDataSource } from './data/datasources/review-api'
 import { ReferralApiDataSource } from './data/datasources/referral-api'
@@ -10,15 +9,11 @@ import { ReviewTransformer } from './data/transformers/review'
 import { ReferralTransformer } from './data/transformers/referral'
 import { BadgeTransformer } from './data/transformers/badge'
 import { UserRepository } from './data/repositories/user'
-import { RoleRepository } from './data/repositories/role'
 import { NotificationRepository } from './data/repositories/notification'
 import { ReviewRepository } from './data/repositories/review'
 import { ReferralRepository } from './data/repositories/referral'
 import { BadgeRepository } from './data/repositories/badge'
 import { FindUserUseCase } from './domain/usecases/users/findUser'
-import { ToggleAdminUseCase } from './domain/usecases/roles/toggleAdmin'
-import { ToggleTutorUseCase } from './domain/usecases/roles/toggleTutor'
-import { ToggleVerifiedUseCase } from './domain/usecases/roles/toggleVerified'
 import { SearchUsersUseCase } from './domain/usecases/users/searchUsers'
 import { GetLeaderboardUseCase } from './domain/usecases/users/getLeaderboard'
 import { GetAllAdminsUseCase } from './domain/usecases/users/getAllAdmins'
@@ -48,7 +43,6 @@ import { BadgeEntity } from './domain/entities/badge'
 import { RankingTimes, UserBio, UserRoles, UserSchoolType } from './domain/types'
 
 const userDataSource = new UserApiDataSource()
-const roleDataSource = new RoleApiDataSource()
 const notificationDataSource = new NotificationApiDataSource()
 const reviewDataSource = new ReviewApiDataSource()
 const referralDataSource = new ReferralApiDataSource()
@@ -61,7 +55,6 @@ const referralTransformer = new ReferralTransformer()
 const badgeTransformer = new BadgeTransformer()
 
 const userRepository = new UserRepository(userDataSource, userTransformer)
-const roleRepository = new RoleRepository(roleDataSource)
 const notificationRepository = new NotificationRepository(notificationDataSource, notificationTransformer)
 const reviewRepository = new ReviewRepository(reviewDataSource, reviewTransformer)
 const referralRepository = new ReferralRepository(referralDataSource, referralTransformer)
@@ -79,10 +72,6 @@ export const ListenToUsersInList = new ListenToUsersInListUseCase(userRepository
 export const ListenToUser = new ListenToUserUseCase(userRepository)
 export const UpdateStreak = new UpdateStreakUseCase(userRepository)
 export const UpdateUserSchool = new UpdateSchoolUseCase(userRepository)
-
-export const ToggleAdmin = new ToggleAdminUseCase(roleRepository)
-export const ToggleTutor = new ToggleTutorUseCase(roleRepository)
-export const ToggleVerified = new ToggleVerifiedUseCase(roleRepository)
 
 export const GetNotifications = new GetNotificationsUseCase(notificationRepository)
 export const ListenToNotifications = new ListenToNotificationsUseCase(notificationRepository)
