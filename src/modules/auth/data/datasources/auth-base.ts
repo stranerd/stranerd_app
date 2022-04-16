@@ -10,7 +10,7 @@ import {
 export interface AuthBaseDataSource {
 	getAuthUser: () => Promise<AuthDetails | null>
 	signinWithEmail: (email: string, password: string, extras: AuthExtras) => Promise<AfterAuthUser>
-	signinWithGoogle: (idToken: string, extras: AuthExtras) => Promise<AfterAuthUser>
+	signinWithGoogle: (data: { accessToken: string, idToken: string }, extras: AuthExtras) => Promise<AfterAuthUser>
 	signupWithEmail: (data: NewUser, extras: AuthExtras) => Promise<AfterAuthUser>
 	sendVerificationEmail: (email: string) => Promise<void>
 	completeEmailVerification: (token: string) => Promise<AfterAuthUser>

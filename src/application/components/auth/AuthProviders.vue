@@ -26,9 +26,10 @@ export default defineComponent({
 		const loginWithGoogle = async () => {
 			try {
 				const googleUser = await GoogleAuth.signIn()
-				const token = googleUser.authentication.idToken
+				const accessToken = googleUser.authentication.accessToken
+				const idToken = googleUser.authentication.idToken
 				await GoogleAuth.signOut()
-				await signin(token)
+				await signin({ idToken, accessToken })
 			} catch (error) {
 				await setError('Error signing in with google')
 			}

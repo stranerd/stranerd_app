@@ -133,12 +133,12 @@ export const useEmailVerificationRequest = () => {
 export const useGoogleSignin = () => {
 	const router = useRouter()
 	const { error, loading, setError, setLoading } = global.emailVerificationRequest
-	const signin = async (idToken: string) => {
+	const signin = async (data: { accessToken: string, idToken: string }) => {
 		await setError('')
 		if (!loading.value) {
 			await setLoading(true)
 			try {
-				const user = await SigninWithGoogle.call(idToken, {
+				const user = await SigninWithGoogle.call(data, {
 					referrer: await getReferrerId()
 				})
 				await createSession(user, router)
