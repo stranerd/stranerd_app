@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { CommentFromModel, CommentToModel } from '../models/comment'
 import { CommentBaseDataSource } from './comment-base'
 
@@ -7,7 +7,7 @@ export class CommentApiDataSource implements CommentBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/comments')
+		this.stranerdClient = new HttpClient(apiBase + '/study/comments')
 	}
 
 	async create (data: CommentToModel) {

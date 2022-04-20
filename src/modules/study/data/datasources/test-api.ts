@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { TestFromModel, TestToModel } from '../models/test'
 import { TestBaseDataSource } from './test-base'
 
@@ -7,7 +7,7 @@ export class TestApiDataSource implements TestBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/tests')
+		this.stranerdClient = new HttpClient(apiBase + '/study/tests')
 	}
 
 	async create (data: TestToModel) {

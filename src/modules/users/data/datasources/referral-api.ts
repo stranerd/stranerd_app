@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { ReferralFromModel } from '../models/referral'
 import { ReferralBaseDataSource } from './referral-base'
 
@@ -7,7 +7,7 @@ export class ReferralApiDataSource implements ReferralBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/users/referrals')
+		this.stranerdClient = new HttpClient(apiBase + '/users/referrals')
 	}
 
 	async find (id: string) {

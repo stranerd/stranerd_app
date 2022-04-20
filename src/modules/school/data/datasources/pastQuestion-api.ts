@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { PastQuestionFromModel, PastQuestionToModel } from '../models/pastQuestion'
 import { PastQuestionBaseDataSource } from './pastQuestion-base'
 
@@ -7,7 +7,7 @@ export class PastQuestionApiDataSource implements PastQuestionBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/school/pastQuestions')
+		this.stranerdClient = new HttpClient(apiBase + '/school/pastQuestions')
 	}
 
 	async create (data: PastQuestionToModel) {

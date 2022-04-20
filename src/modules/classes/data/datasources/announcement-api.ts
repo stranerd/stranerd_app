@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { AnnouncementFromModel, AnnouncementToModel } from '../models/announcement'
 import { AnnouncementBaseDataSource } from './announcement-base'
 
@@ -7,7 +7,7 @@ export class AnnouncementApiDataSource implements AnnouncementBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/classes/announcements')
+		this.stranerdClient = new HttpClient(apiBase + '/classes/announcements')
 	}
 
 	async create (classId: string, data: AnnouncementToModel) {

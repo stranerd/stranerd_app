@@ -1,5 +1,5 @@
 import { closeSocket, HttpClient } from '@modules/core'
-import { apiBases, domain } from '@utils/environment'
+import { apiBase, domain } from '@utils/environment'
 import { deleteTokens, saveTokens } from '@utils/tokens'
 import {
 	AfterAuthUser,
@@ -15,7 +15,7 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 	private authClient: HttpClient
 
 	constructor () {
-		this.authClient = new HttpClient(apiBases.AUTH)
+		this.authClient = new HttpClient(apiBase + '/auth')
 	}
 
 	async getAuthUser () {

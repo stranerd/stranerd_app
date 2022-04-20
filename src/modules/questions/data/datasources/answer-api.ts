@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { AnswerFromModel, AnswerToModel } from '../models/answer'
 import { AnswerBaseDataSource } from './answer-base'
 
@@ -7,19 +7,19 @@ export class AnswerApiDataSource implements AnswerBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/questions')
+		this.stranerdClient = new HttpClient(apiBase + '/questions/answers')
 	}
 
 	async create (data: AnswerToModel) {
-		return await this.stranerdClient.post<AnswerToModel, AnswerFromModel>('/answers', data)
+		return await this.stranerdClient.post<AnswerToModel, AnswerFromModel>('/', data)
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<any, AnswerFromModel>(`/answers/${id}`, {})
+		return await this.stranerdClient.get<any, AnswerFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
-		return await this.stranerdClient.get<QueryParams, QueryResults<AnswerFromModel>>('/answers', query)
+		return await this.stranerdClient.get<QueryParams, QueryResults<AnswerFromModel>>('/', query)
 	}
 
 	async listenToOne (id: string, listeners: Listeners<AnswerFromModel>) {
@@ -37,14 +37,14 @@ export class AnswerApiDataSource implements AnswerBaseDataSource {
 	}
 
 	async update (id: string, data: AnswerToModel) {
-		return await this.stranerdClient.put<AnswerToModel, AnswerFromModel>(`/answers/${id}`, data)
+		return await this.stranerdClient.put<AnswerToModel, AnswerFromModel>(`/${id}`, data)
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<any, boolean>(`/answers/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async vote (id: string, vote: boolean) {
-		await this.stranerdClient.post<any, Record<string, any>>(`/answerUpvotes/${id}/vote`, { vote })
+		await this.stranerdClient.post<any, Record<string, any>>(`/${id}/vote`, { vote })
 	}
 }

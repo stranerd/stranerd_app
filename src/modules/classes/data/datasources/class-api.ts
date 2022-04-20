@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { ClassFromModel, ClassToModel } from '../models/class'
 import { ClassBaseDataSource } from './class-base'
 import { ClassUsers } from '@modules/classes/domain/entities/class'
@@ -8,7 +8,7 @@ export class ClassApiDataSource implements ClassBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/classes/classes')
+		this.stranerdClient = new HttpClient(apiBase + '/classes/classes')
 	}
 
 	async create (data: ClassToModel) {

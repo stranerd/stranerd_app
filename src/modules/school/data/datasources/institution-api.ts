@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { InstitutionFromModel, InstitutionToModel } from '../models/institution'
 import { InstitutionBaseDataSource } from './institution-base'
 
@@ -7,7 +7,7 @@ export class InstitutionApiDataSource implements InstitutionBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/school/institutions')
+		this.stranerdClient = new HttpClient(apiBase + '/school/institutions')
 	}
 
 	async create (data: InstitutionToModel) {

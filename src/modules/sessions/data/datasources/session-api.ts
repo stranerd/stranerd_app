@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '../../../core'
-import { apiBases } from '../../../../utils/environment'
+import { apiBase } from '../../../../utils/environment'
 import { SessionFromModel, SessionToModel } from '../models/session'
 import { SessionBaseDataSource } from './session-base'
 
@@ -7,7 +7,7 @@ export class SessionApiDataSource implements SessionBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/sessions/sessions')
+		this.stranerdClient = new HttpClient(apiBase + '/sessions/sessions')
 	}
 
 	async create (data: SessionToModel) {

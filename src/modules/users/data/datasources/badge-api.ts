@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { BadgeFromModel } from '../models/badge'
 import { BadgeBaseDataSource } from './badge-base'
 
@@ -7,7 +7,7 @@ export class BadgeApiDataSource implements BadgeBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/users/badges')
+		this.stranerdClient = new HttpClient(apiBase + '/users/badges')
 	}
 
 	async get () {

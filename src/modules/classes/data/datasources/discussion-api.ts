@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { DiscussionFromModel, DiscussionToModel } from '../models/discussion'
 import { DiscussionBaseDataSource } from './discussion-base'
 
@@ -7,7 +7,7 @@ export class DiscussionApiDataSource implements DiscussionBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/classes/discussions')
+		this.stranerdClient = new HttpClient(apiBase + '/classes/discussions')
 	}
 
 	async create (classId: string, data: DiscussionToModel) {

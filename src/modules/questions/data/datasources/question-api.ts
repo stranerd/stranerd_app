@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { QuestionFromModel, QuestionToModel } from '../models/question'
 import { QuestionBaseDataSource } from './question-base'
 
@@ -7,7 +7,7 @@ export class QuestionApiDataSource implements QuestionBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/questions/questions')
+		this.stranerdClient = new HttpClient(apiBase + '/questions/questions')
 	}
 
 	async create (data: QuestionToModel) {

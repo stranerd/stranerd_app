@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { NoteFromModel, NoteToModel } from '../models/note'
 import { NoteBaseDataSource } from './note-base'
 
@@ -7,7 +7,7 @@ export class NoteApiDataSource implements NoteBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/notes')
+		this.stranerdClient = new HttpClient(apiBase + '/study/notes')
 	}
 
 	async create (data: NoteToModel) {

@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { SetFromModel, SetToModel } from '../models/set'
 import { SetBaseDataSource } from './set-base'
 
@@ -7,7 +7,7 @@ export class SetApiDataSource implements SetBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/sets')
+		this.stranerdClient = new HttpClient(apiBase + '/study/sets')
 	}
 
 	async create (data: SetToModel) {

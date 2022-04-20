@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { GroupFromModel, GroupToModel } from '../models/group'
 import { GroupBaseDataSource } from './group-base'
 
@@ -7,7 +7,7 @@ export class GroupApiDataSource implements GroupBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/classes/groups')
+		this.stranerdClient = new HttpClient(apiBase + '/classes/groups')
 	}
 
 	async create (classId: string, data: GroupToModel) {

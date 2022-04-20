@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { ChatMetaFromModel } from '../models/chatMeta'
 import { ChatMetaBaseDataSource } from './chatMeta-base'
 
@@ -7,7 +7,7 @@ export class ChatMetaApiDataSource implements ChatMetaBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/sessions/chatMetas')
+		this.stranerdClient = new HttpClient(apiBase + '/sessions/chatMetas')
 	}
 
 	async find (id: string) {

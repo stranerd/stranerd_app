@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { VideoFromModel, VideoToModel } from '../models/video'
 import { VideoBaseDataSource } from './video-base'
 
@@ -7,7 +7,7 @@ export class VideoApiDataSource implements VideoBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/videos')
+		this.stranerdClient = new HttpClient(apiBase + '/study/videos')
 	}
 
 	async create (data: VideoToModel) {

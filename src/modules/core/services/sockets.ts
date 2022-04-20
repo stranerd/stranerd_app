@@ -1,12 +1,11 @@
 import io, { Socket } from 'socket.io-client'
 import { getTokens } from '@utils/tokens'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { Listeners, StatusCodes } from '@modules/core'
 
 let socket = null as Socket<any, any> | null
 const getSocketBaseAndPath = () => {
-	const stranerdBase = apiBases.STRANERD
-	const splitOnDoubleSlash = stranerdBase.split('//')
+	const splitOnDoubleSlash = apiBase.split('//')
 	const http = splitOnDoubleSlash[0]
 	const minusHttp = splitOnDoubleSlash[1]
 	const minusDomain = [null, ...minusHttp.split('/').slice(1), null].join('/')

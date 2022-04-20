@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { UserBaseDataSource } from '../datasources/user-base'
 import { UserFromModel } from '../models/user'
 import { UserSchoolData } from '../../domain/types'
@@ -8,7 +8,7 @@ export class UserApiDataSource implements UserBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/users/users')
+		this.stranerdClient = new HttpClient(apiBase + '/users/users')
 	}
 
 	async find (id: string) {

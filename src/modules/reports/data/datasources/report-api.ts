@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { ReportFromModel, ReportToModel } from '../models/report'
 import { ReportBaseDataSource } from './report-base'
 
@@ -7,7 +7,7 @@ export class ReportApiDataSource implements ReportBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/reports/reports')
+		this.stranerdClient = new HttpClient(apiBase + '/reports/reports')
 	}
 
 	async create (data: ReportToModel) {

@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, Method } from 'axios'
 import { getTokens, saveTokens } from '@utils/tokens'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
 
 export class NetworkError extends Error {
@@ -17,10 +17,10 @@ export class NetworkError extends Error {
 export class HttpClient {
 	private readonly client: AxiosInstance
 
-	constructor (baseURL: string) {
+	constructor (baseURL = apiBase) {
 		this.client = axios.create({ baseURL })
 		this.client.interceptors.request.use(async (config) => {
-			const isFromOurServer = Object.values(apiBases).find((base) => !!config.baseURL?.startsWith(base))
+			const isFromOurServer = this.client.defaults.baseURL?.startsWith(apiBase)
 			if (!isFromOurServer) return config
 			const { accessToken, refreshToken } = await getTokens()
 			config.headers = config.headers ?? {}
@@ -72,7 +72,7 @@ export class HttpClient {
 			if (!error.isAxiosError) throw error
 			if (!error.response) throw error
 			const status = error.response.status
-			const isFromOurServer = Object.values(apiBases).find((base) => this.client.defaults.baseURL?.startsWith(base)) && Object.values(StatusCodes).includes(status)
+			const isFromOurServer = this.client.defaults.baseURL?.startsWith(apiBase) && Object.values(StatusCodes).includes(status)
 			if (!isFromOurServer) throw error
 			if (status !== StatusCodes.AccessTokenExpired) throw new NetworkError(status, error.response.data)
 			const res = await this.getNewTokens()
@@ -83,7 +83,7 @@ export class HttpClient {
 
 	private async getNewTokens () {
 		try {
-			const { data } = await this.client.post<any, AxiosResponse<AfterAuthUser>>('/token', {}, { baseURL: apiBases.AUTH })
+			const { data } = await this.client.post<any, AxiosResponse<AfterAuthUser>>('/auth/token', {}, { baseURL: apiBase })
 			await saveTokens(data)
 			return !!data
 		} catch (e) {

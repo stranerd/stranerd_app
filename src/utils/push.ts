@@ -3,7 +3,6 @@ import { Notify } from '@utils/dialog'
 import { storage } from '@utils/storage'
 import { isWeb } from '@utils/constants'
 import { HttpClient } from '@modules/core'
-import { apiBases } from '@utils/environment'
 import { MarkNotificationSeen, NotificationEntity } from '@modules/users'
 import { router as routerPromise } from '@app/router'
 
@@ -49,7 +48,7 @@ export const clearAllNotifications = async () => {
 
 const registerDevice = async (token: string, subscribe: boolean) => {
 	const key = subscribe ? 'subscribe' : 'unsubscribe'
-	const utilsClient = new HttpClient(apiBases.UTILS)
+	const utilsClient = new HttpClient()
 	const res = await utilsClient.post<{ token: string }, boolean>(`/push/devices/${key}`, { token }).catch(() => false)
 	if (!res) throw new Error(`Failed to ${key} device`)
 }
