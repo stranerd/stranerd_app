@@ -3,7 +3,7 @@
 		<ion-progress-bar type="indeterminate"></ion-progress-bar>
 	</div>
 	<div v-else class="col-span-12 md:gap-4 flex flex-col">
-		<div v-if="user.id === id" class="px-4 md:px-0">
+		<div v-if="user.id === id && videos.length > 0" class="px-4 md:px-0">
 			<IonButton class="w-full md:w-auto btn-primary" @click="editMode = !editMode">
 				{{ editMode ? 'Done' : 'Edit' }}
 			</IonButton>
