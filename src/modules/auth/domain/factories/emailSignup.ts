@@ -95,8 +95,6 @@ export class EmailSignupFactory extends BaseFactory<null, NewUser, NewUser & { c
 
 	toModel = async () => {
 		if (this.valid) {
-			if (this.photo instanceof UploadedFile) this.photo = await this.uploadFile('profiles', this.photo)
-			if (this.coverPhoto instanceof UploadedFile) this.coverPhoto = await this.uploadFile('cover-profiles', this.coverPhoto)
 			const { firstName, lastName, email, password, description, photo, coverPhoto } = this.validValues
 			return { firstName, lastName, email, password, description, photo, coverPhoto }
 		} else throw new Error('Validation errors')

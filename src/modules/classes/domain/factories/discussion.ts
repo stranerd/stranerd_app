@@ -45,7 +45,6 @@ export class DiscussionFactory extends BaseFactory<DiscussionEntity, DiscussionT
 
 	toModel = async () => {
 		if (this.valid) {
-			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('classes/discussions', this.media)
 			const { content, media, groupId } = this.validValues
 			return { content, groupId, media: media as Media ?? null }
 		} else {

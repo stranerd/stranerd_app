@@ -10,7 +10,7 @@ export interface ChatFromModel extends ChatToModel {
 }
 
 export interface ChatToModel {
-	content: string | null
+	content: string
 	media: Media | null
 	sessionId: string | null
 	to: string

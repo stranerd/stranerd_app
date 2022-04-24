@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse, Method } from 'axios'
 import { getTokens, saveTokens } from '@utils/tokens'
 import { apiBase } from '@utils/environment'
 import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
+import { UploadedFile } from '@modules/core'
 
 export class NetworkError extends Error {
 	readonly statusCode: StatusCodes
@@ -63,8 +64,14 @@ export class HttpClient {
 
 	private async makeRequest<Body, ReturnValue> (url: string, method: Method, data: Body): Promise<ReturnValue> {
 		try {
+			const isGet = method === 'get'
+			if (!isGet) {
+				const formData = new FormData()
+				Object.entries(data).forEach(([key, val]) => formData.append(key, val instanceof UploadedFile ? val.ref : JSON.stringify(val)))
+				data = formData as any
+			}
 			const res = await this.client.request<Body, AxiosResponse<ReturnValue>>({
-				url, method, [method === 'get' ? 'params' : 'data']: data
+				url, method, [isGet ? 'params' : 'data']: data
 			})
 			return res.data
 		} catch (e) {

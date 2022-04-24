@@ -4,20 +4,20 @@ import { ChatToModel } from '../../data/models/chat'
 import { ChatEntity } from '../entities/chat'
 
 type Content = Media | UploadedFile | null
-type Keys = { content: string | null, to: string, sessionId: string | null, media: Content | null }
+type Keys = { content: string, to: string, sessionId: string | null, media: Content | null }
 
 export class ChatFactory extends BaseFactory<ChatEntity, ChatToModel, Keys> {
 	readonly rules = {
-		content: { required: () => !this.media, rules: [isString, isLongerThanX(0)] },
+		content: { required: false, rules: [isString, isLongerThanX(0)] },
 		to: { required: true, rules: [isString, isLongerThanX(0)] },
 		sessionId: { required: false, rules: [isString, isLongerThanX(0)] },
-		media: { required: () => !this.content, rules: [isFile] }
+		media: { required: true, rules: [isFile] }
 	}
 
 	reserved = ['to']
 
 	constructor () {
-		super({ content: null, to: '', media: null, sessionId: null })
+		super({ content: '', to: '', media: null, sessionId: null })
 	}
 
 	get content () {
@@ -54,8 +54,6 @@ export class ChatFactory extends BaseFactory<ChatEntity, ChatToModel, Keys> {
 
 	toModel = async () => {
 		if (this.valid) {
-			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('sessions/chats', this.media)
-
 			const { to, content, media, sessionId } = this.validValues
 			return {
 				to, content, sessionId,

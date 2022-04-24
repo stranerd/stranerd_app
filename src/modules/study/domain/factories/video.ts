@@ -96,7 +96,6 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 					if (info.private) throw new Error('the provided video is private')
 				}
 			}
-			if (this.media instanceof UploadedFile) this.media = await this.uploadFile('study/videos', this.media)
 			if (this.isHosted) this.link = null
 			else this.media = null
 			const { title, description, isHosted, link, media } = this.validValues

@@ -61,8 +61,6 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 
 	toModel = async () => {
 		if (this.valid) {
-			if (this.photo instanceof UploadedFile) this.photo = await this.uploadFile('classes/photos', this.photo)
-			if (this.coverPhoto instanceof UploadedFile) this.coverPhoto = await this.uploadFile('classes/coverPhotos', this.coverPhoto)
 			const { name, description, photo, coverPhoto } = this.validValues
 			return { name, description, photo: photo as Media, coverPhoto: coverPhoto as Media }
 		} else {

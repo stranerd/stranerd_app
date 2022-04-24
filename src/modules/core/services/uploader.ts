@@ -1,11 +1,6 @@
 import { Media, UploadedFile } from '../data/models/base'
 import { HttpClient } from './http'
 
-export const UploaderService = {
-	single: async (path: string, file: UploadedFile): Promise<Media> => await uploadFile(path, file),
-	multiple: async (path: string, files: UploadedFile[]): Promise<Media[]> => await uploadFiles(path, files)
-}
-
 export const uploadFile = async (path: string, file: UploadedFile): Promise<Media> => {
 	try {
 		const data = new FormData()
@@ -26,4 +21,9 @@ export const uploadFiles = async (path: string, files: UploadedFile[]): Promise<
 	} catch {
 		throw new Error('Error uploading files')
 	}
+}
+
+export const UploaderService = {
+	single: uploadFile,
+	multiple: uploadFiles
 }

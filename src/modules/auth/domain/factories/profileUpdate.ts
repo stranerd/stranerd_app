@@ -63,12 +63,7 @@ export class ProfileUpdateFactory extends BaseFactory<UserEntity, ProfileUpdate,
 
 	toModel = async () => {
 		if (this.valid) {
-			if (this.photo instanceof UploadedFile) this.photo = await this.uploadFile('profiles', this.photo)
-			if (this.coverPhoto instanceof UploadedFile) this.coverPhoto = await this.uploadFile('cover-profiles', this.coverPhoto)
-
-			const {
-				first, last, description, photo, coverPhoto
-			} = this.validValues
+			const { first, last, description, photo, coverPhoto } = this.validValues
 			return {
 				firstName: first, lastName: last, description,
 				photo: (photo ?? null) as Media,

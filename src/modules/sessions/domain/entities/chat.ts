@@ -4,7 +4,7 @@ import { isImage } from '@stranerd/validate'
 export class ChatEntity extends BaseEntity {
 	readonly id: string
 	readonly from: string
-	readonly content: string | null
+	readonly content: string
 	readonly media: Media | null
 	readonly path: [string, string]
 	readonly sessionId: string | null
@@ -46,7 +46,7 @@ type ChatConstructorArgs = {
 	id: string,
 	from: string,
 	path: [string, string],
-	content: string | null,
+	content: string,
 	media: Media | null,
 	createdAt: number
 	updatedAt: number
