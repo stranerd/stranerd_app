@@ -8,8 +8,9 @@ export class GetDepartmentsUseCase {
 		this.repository = repository
 	}
 
-	async call () {
+	async call (facultyId: string) {
 		const conditions: QueryParams = {
+			where: [{ field: 'facultyId', value: facultyId }],
 			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}

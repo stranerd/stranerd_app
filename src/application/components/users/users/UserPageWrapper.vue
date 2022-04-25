@@ -35,7 +35,8 @@
 						</IonButton>
 						<span v-if="user.isCollege" class="text-sub text-gray">
 							<Institution :institutionId="user.school.institutionId" /> - <Department
-								:departmentId="user.school.departmentId" />
+								:departmentId="user.school.departmentId"
+								:facultyid="user.school.facultyId" />
 						</span>
 						<span v-else-if="user.isAspirant" class="text-gray text-sub">
 							<IonIcon :icon="receiptOutline" class="mr-2 text-cyan text-heading" />

@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, onMounted } from 'vue'
 import { FacultyEntity } from '@modules/school'
 import { openFacultyEditModal, useDeleteFaculty } from '@app/composable/school/faculties'
 import { IonAccordion, IonAccordionGroup, IonItem, IonLabel, IonList } from '@ionic/vue'
@@ -49,9 +49,12 @@ export default defineComponent({
 	components: { AdminDepartmentListCard, IonAccordionGroup, IonAccordion, IonList, IonItem, IonLabel },
 	setup (props) {
 		const { loading, error, deleteFaculty } = useDeleteFaculty(props.faculty)
-		const { departments } = useDepartmentList(true)
+		const { departments, fetchDepartments } = useDepartmentList()
 		const facultyDepartments = computed(() => departments.value
 			.filter((department) => department.facultyId === props.faculty.id))
+		onMounted(async () => {
+			await fetchDepartments(props.faculty.id)
+		})
 		return {
 			loading, error, deleteFaculty, openDepartmentCreateModal,
 			openFacultyEditModal, facultyDepartments,

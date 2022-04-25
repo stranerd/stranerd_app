@@ -160,13 +160,18 @@ export default defineComponent({
 		const { schools, gatewayExams } = useInstitutionList()
 		const { courses } = useCourseList()
 		const { faculties, fetchFaculties } = useFacultyList()
-		const { departments } = useDepartmentList()
+		const { departments, fetchDepartments } = useDepartmentList()
 		const filteredFaculties = computed(() => faculties.value.filter((f) => f.institutionId === factory.value.institutionId))
 		const filteredDepartments = computed(() => departments.value.filter((d) => d.facultyId === factory.value.facultyId))
 
 		watch(() => factory.value.institutionId, async () => {
 			factory.value.resetProp('facultyId')
 			if (factory.value.institutionId) await fetchFaculties(factory.value.institutionId)
+		})
+
+		watch(() => factory.value.facultyId, async () => {
+			factory.value.resetProp('departmentId')
+			if (factory.value.facultyId) await fetchDepartments(factory.value.facultyId)
 		})
 
 		return {

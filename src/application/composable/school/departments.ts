@@ -15,32 +15,31 @@ import { addToArray } from '@utils/commons'
 const global = {
 	fetched: ref(false),
 	departments: ref([] as DepartmentEntity[]),
+	faculties: {} as Record<string, boolean>,
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
 
-const fetchDepartments = async () => {
+const fetchDepartments = async (facultyId: string) => {
+	if (global.faculties[facultyId]) return
 	await global.setError('')
 	await global.setLoading(true)
 	try {
-		const departments = await GetDepartments.call()
+		const departments = await GetDepartments.call(facultyId)
 		departments.results.forEach((c) => addToArray(global.departments.value, c, (e) => e.id, (e) => e.name, true))
 		global.fetched.value = true
+		global.faculties[facultyId] = true
 	} catch (error) {
 		await global.setError(error)
 	}
 	await global.setLoading(false)
 }
 
-export const useDepartmentList = (skipHooks = false) => {
-	onMounted(async () => {
-		if (skipHooks) return
-		if (!global.fetched.value && !global.loading.value) await fetchDepartments()
-	})
-	return { ...global }
+export const useDepartmentList = () => {
+	return { ...global, fetchDepartments }
 }
 
-export const useDepartment = (id: string) => {
+export const useDepartment = (facultyId: string, id: string) => {
 	const department = computed({
 		get: () => global.departments.value.find((s) => s.id === id) ?? null,
 		set: (c) => {
@@ -48,7 +47,7 @@ export const useDepartment = (id: string) => {
 		}
 	})
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchDepartments()
+		if (!global.fetched.value && !global.loading.value) await fetchDepartments(facultyId)
 	})
 
 	return { department }
