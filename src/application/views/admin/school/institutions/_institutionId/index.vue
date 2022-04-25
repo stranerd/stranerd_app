@@ -22,7 +22,8 @@
 					<IonLabel>Delete Inst.</IonLabel>
 				</a>
 			</div>
-			<AdminFacultiesList :institutionId="institution.id" />
+			<AdminGeneralCoursesList :institutionId="institution.id" class="mb-4" />
+			<AdminFacultiesList v-if="!institution.isGateway" :institutionId="institution.id" />
 		</div>
 	</AdminWrapper>
 </template>
@@ -31,6 +32,7 @@
 import { defineComponent } from 'vue'
 import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import AdminFacultiesList from '@app/components/school/faculties/AdminFacultiesList.vue'
+import AdminGeneralCoursesList from '@app/components/school/courses/AdminGeneralCoursesList.vue'
 import { useRoute } from 'vue-router'
 import { openInstitutionEditModal, useDeleteInstitution, useInstitution } from '@app/composable/school/institutions'
 import { addOutline, pencilOutline, trashOutline } from 'ionicons/icons'
@@ -40,7 +42,7 @@ import { openCourseCreateModal } from '@app/composable/school/courses'
 export default defineComponent({
 	name: 'AdminStudyInstitutionsInstitutionId',
 	displayName: 'Institution',
-	components: { AdminWrapper, AdminFacultiesList },
+	components: { AdminWrapper, AdminFacultiesList, AdminGeneralCoursesList },
 	middlewares: ['isAdmin'],
 	setup () {
 		const route = useRoute()

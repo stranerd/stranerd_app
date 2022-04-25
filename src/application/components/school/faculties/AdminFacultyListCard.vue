@@ -1,7 +1,7 @@
 <template>
 	<router-link :to="`/admin/school/institutions/${faculty.institutionId}/faculties/${faculty.id}`"
 		class="bg-white p-4">
-		<span class="uppercase text-[20px]">{{ faculty.name }}</span>
+		<span class="uppercase">{{ faculty.name }}</span>
 	</router-link>
 </template>
 

@@ -32,8 +32,8 @@ import { addOutline, pencilOutline, trashOutline } from 'ionicons/icons'
 import { openDepartmentCreateModal } from '@app/composable/school/departments'
 
 export default defineComponent({
-	name: 'AdminStudyDepartments',
-	displayName: 'Departments',
+	name: 'AdminStudyInstitutionsInstitutionIdFacultiesFacultyId',
+	displayName: 'Faculty',
 	components: { AdminWrapper, AdminDepartmentsList },
 	middlewares: ['isAdmin'],
 	setup () {

@@ -40,7 +40,7 @@ export const useFaculty = (institutionId: string, id: string) => {
 		}
 	})
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchFaculties(institutionId)
+		if (!global.institutions[institutionId]) await fetchFaculties(institutionId)
 	})
 
 	return { faculty }
@@ -113,7 +113,7 @@ export const useEditFaculty = () => {
 	return { factory, loading, error, editFaculty }
 }
 
-export const useDeleteFaculty = (faculty: FacultyEntity) => {
+export const useDeleteFaculty = (facultyId: string) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -127,9 +127,9 @@ export const useDeleteFaculty = (faculty: FacultyEntity) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteFaculty.call(faculty.id)
+				await DeleteFaculty.call(facultyId)
 				global.faculties.value = global.faculties.value
-					.filter((s) => s.id !== faculty.id)
+					.filter((s) => s.id !== facultyId)
 				await setMessage('Faculty deleted successfully')
 			} catch (error) {
 				await setError(error)

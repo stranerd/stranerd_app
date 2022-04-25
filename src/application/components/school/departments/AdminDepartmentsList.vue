@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { computed, defineComponent, onMounted } from 'vue'
 import DepartmentListCard from '@app/components/school/departments/AdminDepartmentListCard.vue'
 import { useDepartmentList } from '@app/composable/school/departments'
 
@@ -23,10 +23,11 @@ export default defineComponent({
 	},
 	components: { DepartmentListCard },
 	setup (props) {
-		const { loading, error, departments, fetchDepartments } = useDepartmentList()
+		const { loading, error, departments: allDepartments, fetchDepartments } = useDepartmentList()
 		onMounted(async () => {
 			await fetchDepartments(props.facultyId)
 		})
+		const departments = computed(() => allDepartments.value.filter((d) => d.facultyId === props.facultyId))
 		return { loading, error, departments }
 	}
 })

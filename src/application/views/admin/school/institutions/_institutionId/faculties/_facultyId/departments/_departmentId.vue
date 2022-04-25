@@ -1,0 +1,60 @@
+<template>
+	<AdminWrapper>
+		<div v-if="department">
+			<div class="flex mb-4 bg-white p-4">
+				<span class="text-heading mr-auto uppercase">{{ department.name }}</span>
+				<a class="flex items-center gap-1 mr-4 text-sub"
+					@click.prevent="openCourseCreateModal(department.institutionId, department.id)">
+					<IonIcon :icon="addOutline" class="text-green" />
+					<IonLabel>Add Course</IonLabel>
+				</a>
+				<a class="flex items-center gap-1 mr-4 text-sub" @click.prevent="openDepartmentEditModal(department)">
+					<IonIcon :icon="pencilOutline" class="text-orange" />
+					<IonLabel>Edit Department</IonLabel>
+				</a>
+				<a class="flex items-center gap-1 text-sub" @click.prevent="deleteDepartment">
+					<IonIcon :icon="trashOutline" class="text-red" />
+					<IonLabel>Delete Department</IonLabel>
+				</a>
+			</div>
+			<AdminCoursesList :departmentId="department.id" />
+		</div>
+	</AdminWrapper>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
+import AdminCoursesList from '@app/components/school/courses/AdminCoursesList.vue'
+import { useRoute } from 'vue-router'
+import { openDepartmentEditModal, useDeleteDepartment, useDepartment } from '@app/composable/school/departments'
+import { addOutline, pencilOutline, trashOutline } from 'ionicons/icons'
+import { openCourseCreateModal } from '@app/composable/school/courses'
+
+export default defineComponent({
+	name: 'AdminStudyInstitutionsInstitutionIdDepartmentsDepartmentIdDepartmentsDepartmentId',
+	displayName: 'Department',
+	components: { AdminWrapper, AdminCoursesList },
+	middlewares: ['isAdmin'],
+	setup () {
+		const route = useRoute()
+		const { departmentId, institutionId } = route.params
+		const { loading, deleteDepartment } = useDeleteDepartment(departmentId as string)
+		const { department } = useDepartment(institutionId as string, departmentId as string)
+		return {
+			addOutline, pencilOutline, trashOutline,
+			department, loading, deleteDepartment,
+			openDepartmentEditModal, openCourseCreateModal
+		}
+	}
+})
+</script>
+
+<style scoped>
+	ion-button {
+		--padding-top: 1rem !important;
+		--padding-bottom: 1rem !important;
+		--padding-start: 1rem !important;
+		--padding-end: 1rem !important;
+	}
+</style>

@@ -24,6 +24,7 @@ import { FacultyEntity } from './domain/entities/faculty'
 import { DepartmentFactory } from './domain/factories/department'
 import { DepartmentEntity } from './domain/entities/department'
 import { GetCoursesUseCase } from './domain/usecases/courses/getCourses'
+import { GetGeneralCoursesUseCase } from './domain/usecases/courses/getGeneralCourses'
 import { ListenToCoursesUseCase } from './domain/usecases/courses/listenToCourses'
 import { FindCourseUseCase } from './domain/usecases/courses/findCourse'
 import { AddCourseUseCase } from './domain/usecases/courses/addCourse'
@@ -75,6 +76,7 @@ const departmentRepository = new DepartmentRepository(departmentDataSource, depa
 
 export const FindCourse = new FindCourseUseCase(courseRepository)
 export const GetCourses = new GetCoursesUseCase(courseRepository)
+export const GetGeneralCourses = new GetGeneralCoursesUseCase(courseRepository)
 export const ListenToCourses = new ListenToCoursesUseCase(courseRepository)
 export const AddCourse = new AddCourseUseCase(courseRepository)
 export const EditCourse = new EditCourseUseCase(courseRepository)

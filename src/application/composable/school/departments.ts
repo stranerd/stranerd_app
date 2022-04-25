@@ -47,7 +47,7 @@ export const useDepartment = (facultyId: string, id: string) => {
 		}
 	})
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchDepartments(facultyId)
+		if (!global.faculties[facultyId]) await fetchDepartments(facultyId)
 	})
 
 	return { department }
@@ -120,7 +120,7 @@ export const useEditDepartment = () => {
 	return { factory, loading, error, editDepartment }
 }
 
-export const useDeleteDepartment = (department: DepartmentEntity) => {
+export const useDeleteDepartment = (departmentId: string) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -134,9 +134,9 @@ export const useDeleteDepartment = (department: DepartmentEntity) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteDepartment.call(department.id)
+				await DeleteDepartment.call(departmentId)
 				global.departments.value = global.departments.value
-					.filter((s) => s.id !== department.id)
+					.filter((s) => s.id !== departmentId)
 				await setMessage('Department deleted successfully')
 			} catch (error) {
 				await setError(error)

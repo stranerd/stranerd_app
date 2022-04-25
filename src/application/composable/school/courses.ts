@@ -1,5 +1,14 @@
 import { computed, onMounted, Ref, ref } from 'vue'
-import { AddCourse, CourseEntity, CourseFactory, DeleteCourse, EditCourse, GetCourses } from '@modules/school'
+import {
+	AddCourse,
+	CourseEntity,
+	CourseFactory,
+	DeleteCourse,
+	EditCourse,
+	FindCourse,
+	GetCourses,
+	GetGeneralCourses
+} from '@modules/school'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
@@ -8,37 +17,45 @@ import { addToArray } from '@utils/commons'
 const global = {
 	fetched: ref(false),
 	courses: ref([] as CourseEntity[]),
+	departments: {} as Record<string, boolean>,
+	institutions: {} as Record<string, boolean>,
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
 
-const fetchCourses = async () => {
+const fetchCourses = async (departmentId: string) => {
+	if (global.departments[departmentId]) return
 	await global.setError('')
 	await global.setLoading(true)
 	try {
-		const courses = await GetCourses.call()
+		const courses = await GetCourses.call(departmentId)
 		courses.results.forEach((c) => addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true))
 		global.fetched.value = true
+		global.departments[departmentId] = true
 	} catch (error) {
 		await global.setError(error)
 	}
 	await global.setLoading(false)
 }
 
-export const useCourseList = (skipHooks = false) => {
-	onMounted(async () => {
-		if (skipHooks) return
-		if (!global.fetched.value && !global.loading.value) await fetchCourses()
-	})
-	return { ...global }
+const fetchGeneralCourses = async (institutionId: string) => {
+	if (global.institutions[institutionId]) return
+	await global.setError('')
+	await global.setLoading(true)
+	try {
+		const courses = await GetGeneralCourses.call(institutionId)
+		courses.results.forEach((c) => addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true))
+		global.fetched.value = true
+		global.institutions[institutionId] = true
+	} catch (error) {
+		await global.setError(error)
+	}
+	await global.setLoading(false)
 }
 
-export const getCoursesByInstitution = (institutionId: string) => computed({
-	get: () => global.courses.value.filter((c) => c.institutionId === institutionId),
-	set: (courses) => {
-		courses.forEach((c) => addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true))
-	}
-})
+export const useCourseList = () => {
+	return { ...global, fetchCourses, fetchGeneralCourses }
+}
 
 export const useCourse = (id: string) => {
 	const course = computed({
@@ -48,7 +65,10 @@ export const useCourse = (id: string) => {
 		}
 	})
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchCourses()
+		if (!course.value) {
+			const c = await FindCourse.call(id)
+			if (c) addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true)
+		}
 	})
 
 	return { course }
@@ -124,7 +144,7 @@ export const useEditCourse = () => {
 	return { factory, loading, error, editCourse }
 }
 
-export const useDeleteCourse = (course: CourseEntity) => {
+export const useDeleteCourse = (courseId: string) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -138,9 +158,9 @@ export const useDeleteCourse = (course: CourseEntity) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteCourse.call(course.id)
+				await DeleteCourse.call(courseId)
 				global.courses.value = global.courses.value
-					.filter((s) => s.id !== course.id)
+					.filter((s) => s.id !== courseId)
 				await setMessage('Course deleted successfully')
 			} catch (error) {
 				await setError(error)
