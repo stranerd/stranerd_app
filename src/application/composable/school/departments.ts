@@ -40,13 +40,6 @@ export const useDepartmentList = (skipHooks = false) => {
 	return { ...global }
 }
 
-export const getDepartmentsByFaculty = (facultyId: string) => computed({
-	get: () => global.departments.value.filter((c) => c.facultyId === facultyId),
-	set: (departments) => {
-		departments.forEach((c) => addToArray(global.departments.value, c, (e) => e.id, (e) => e.name, true))
-	}
-})
-
 export const useDepartment = (id: string) => {
 	const department = computed({
 		get: () => global.departments.value.find((s) => s.id === id) ?? null,

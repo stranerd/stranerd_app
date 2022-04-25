@@ -153,7 +153,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import { useUserSchoolUpdate } from '@app/composable/auth/profile'
 import { UserSchoolType } from '@modules/users'
 import {
@@ -199,10 +199,16 @@ export default defineComponent({
 		}
 		const { schools, gatewayExams } = useInstitutionList()
 		const { courses } = useCourseList()
-		const { faculties } = useFacultyList()
+		const { faculties, fetchFaculties } = useFacultyList()
 		const { departments } = useDepartmentList()
 		const filteredFaculties = computed(() => faculties.value.filter((f) => f.institutionId === factory.value.institutionId))
 		const filteredDepartments = computed(() => departments.value.filter((d) => d.facultyId === factory.value.facultyId))
+
+		watch(() => factory.value.institutionId, async () => {
+			factory.value.resetProp('facultyId')
+			if (factory.value.institutionId) await fetchFaculties(factory.value.institutionId)
+		})
+
 		return {
 			tab, factory, loading, error, updateSchool, submit, UserSchoolType,
 			schools, gatewayExams, courses, filteredFaculties, filteredDepartments

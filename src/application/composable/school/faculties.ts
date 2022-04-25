@@ -8,39 +8,31 @@ import { useSchoolModal } from '@app/composable/core/modals'
 const global = {
 	fetched: ref(false),
 	faculties: ref([] as FacultyEntity[]),
+	institutions: {} as Record<string, boolean>,
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
 
-const fetchFaculties = async () => {
+const fetchFaculties = async (institutionId: string) => {
+	if (global.institutions[institutionId]) return
 	await global.setError('')
 	await global.setLoading(true)
 	try {
-		const faculties = await GetFaculties.call()
+		const faculties = await GetFaculties.call(institutionId)
 		faculties.results.forEach((c) => addToArray(global.faculties.value, c, (e) => e.id, (e) => e.name, true))
 		global.fetched.value = true
+		global.institutions[institutionId] = true
 	} catch (error) {
 		await global.setError(error)
 	}
 	await global.setLoading(false)
 }
 
-export const useFacultyList = (skipHooks = false) => {
-	onMounted(async () => {
-		if (skipHooks) return
-		if (!global.fetched.value && !global.loading.value) await fetchFaculties()
-	})
-	return { ...global }
+export const useFacultyList = () => {
+	return { ...global, fetchFaculties }
 }
 
-export const getFacultiesByInstitution = (institutionId: string) => computed({
-	get: () => global.faculties.value.filter((c) => c.institutionId === institutionId),
-	set: (faculties) => {
-		faculties.forEach((c) => addToArray(global.faculties.value, c, (e) => e.id, (e) => e.name, true))
-	}
-})
-
-export const useFaculty = (id: string) => {
+export const useFaculty = (institutionId: string, id: string) => {
 	const faculty = computed({
 		get: () => global.faculties.value.find((s) => s.id === id) ?? null,
 		set: (c) => {
@@ -48,7 +40,7 @@ export const useFaculty = (id: string) => {
 		}
 	})
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchFaculties()
+		if (!global.fetched.value && !global.loading.value) await fetchFaculties(institutionId)
 	})
 
 	return { faculty }

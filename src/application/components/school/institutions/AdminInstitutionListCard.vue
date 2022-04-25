@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, onMounted } from 'vue'
 import { InstitutionEntity } from '@modules/school'
 import { openInstitutionEditModal, useDeleteInstitution } from '@app/composable/school/institutions'
 import { IonAccordion, IonAccordionGroup, IonItem, IonLabel, IonList } from '@ionic/vue'
@@ -73,11 +73,14 @@ export default defineComponent({
 	setup (props) {
 		const { loading, error, deleteInstitution } = useDeleteInstitution(props.institution)
 		const { courses } = useCourseList(true)
-		const { faculties } = useFacultyList(true)
+		const { faculties, fetchFaculties } = useFacultyList()
 		const institutionFaculties = computed(() => faculties.value
 			.filter((faculty) => faculty.institutionId === props.institution.id))
 		const institutionCourses = computed(() => courses.value
 			.filter((course) => course.institutionId === props.institution.id && course.facultyId === null))
+		onMounted(async () => {
+			await fetchFaculties(props.institution.id)
+		})
 		return {
 			loading, error, deleteInstitution, institutionCourses, institutionFaculties,
 			addOutline, pencilOutline, trashOutline,
