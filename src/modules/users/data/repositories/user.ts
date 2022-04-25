@@ -59,10 +59,6 @@ export class UserRepository implements IUserRepository {
 		})
 	}
 
-	async updateStreak () {
-		return this.dataSource.updateStreak()
-	}
-
 	async updateSchool (school: UserSchoolData) {
 		return this.dataSource.updateSchool(school)
 	}

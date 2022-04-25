@@ -7,6 +7,5 @@ export interface UserBaseDataSource {
 	get: (query: QueryParams) => Promise<QueryResults<UserFromModel>>
 	listenToOne: (id: string, listener: Listeners<UserFromModel>) => Promise<() => void>
 	listenToMany: (query: QueryParams, listener: Listeners<UserFromModel>) => Promise<() => void>
-	updateStreak: () => Promise<void>
 	updateSchool: (school: UserSchoolData) => Promise<void>
 }

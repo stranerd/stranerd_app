@@ -7,6 +7,5 @@ export interface IUserRepository {
 	get: (query: QueryParams) => Promise<QueryResults<UserEntity>>
 	listenToOne: (id: string, listener: Listeners<UserEntity>) => Promise<() => void>
 	listenToMany: (query: QueryParams, listener: Listeners<UserEntity>, matches: (entity: UserEntity) => boolean) => Promise<() => void>
-	updateStreak: () => Promise<void>
 	updateSchool: (school: UserSchoolData) => Promise<void>
 }

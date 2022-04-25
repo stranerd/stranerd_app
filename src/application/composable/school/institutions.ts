@@ -116,7 +116,7 @@ export const useEditInstitution = () => {
 	return { factory, loading, error, editInstitution }
 }
 
-export const useDeleteInstitution = (institution: InstitutionEntity) => {
+export const useDeleteInstitution = (institutionId: string) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -130,9 +130,9 @@ export const useDeleteInstitution = (institution: InstitutionEntity) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteInstitution.call(institution.id)
+				await DeleteInstitution.call(institutionId)
 				global.institutions.value = global.institutions.value
-					.filter((s) => s.id !== institution.id)
+					.filter((s) => s.id !== institutionId)
 				await setMessage('Institution deleted successfully')
 			} catch (error) {
 				await setError(error)

@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue'
-import { FindUser, ListenToUser, UpdateStreak, UserEntity } from '@modules/users'
+import { FindUser, ListenToUser, UserEntity } from '@modules/users'
 import { AuthDetails, AuthTypes, UserLocation } from '@modules/auth/domain/entities/auth'
 import { SessionSignout } from '@modules/auth'
 import { isClient } from '@utils/environment'
@@ -82,8 +82,6 @@ export const useAuth = () => {
 		}
 		if (id) {
 			global.listener = await ListenToUser.call(id, { created: setUser, updated: setUser, deleted: setUser })
-			await UpdateStreak.call().catch(() => {
-			})
 		}
 	}
 

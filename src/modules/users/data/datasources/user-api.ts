@@ -33,11 +33,6 @@ export class UserApiDataSource implements UserBaseDataSource {
 		return listener
 	}
 
-	async updateStreak () {
-		type Streak = { skip: boolean, increase: boolean, reset: boolean, streak: number }
-		await this.stranerdClient.post<any, Streak>('/streak', {})
-	}
-
 	async updateSchool (school: UserSchoolData) {
 		await this.stranerdClient.put<UserSchoolData, boolean>('/school', school)
 	}

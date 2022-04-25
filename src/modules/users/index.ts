@@ -23,7 +23,6 @@ import { ListenToAllTutorsUseCase } from './domain/usecases/users/listenToAllTut
 import { ListenToAllAdminsUseCase } from './domain/usecases/users/listenToAllAdmins'
 import { ListenToUsersInListUseCase } from './domain/usecases/users/listenToUsersInList'
 import { ListenToUserUseCase } from './domain/usecases/users/listenToUser'
-import { UpdateStreakUseCase } from './domain/usecases/users/updateStreak'
 import { UpdateSchoolUseCase } from './domain/usecases/users/updateSchool'
 import { GetNotificationsUseCase } from './domain/usecases/notifications/getNotifications'
 import { ListenToNotificationsUseCase } from './domain/usecases/notifications/listenToNotifications'
@@ -70,7 +69,6 @@ export const ListenToAllTutors = new ListenToAllTutorsUseCase(userRepository)
 export const ListenToAllAdmins = new ListenToAllAdminsUseCase(userRepository)
 export const ListenToUsersInList = new ListenToUsersInListUseCase(userRepository)
 export const ListenToUser = new ListenToUserUseCase(userRepository)
-export const UpdateStreak = new UpdateStreakUseCase(userRepository)
 export const UpdateUserSchool = new UpdateSchoolUseCase(userRepository)
 
 export const GetNotifications = new GetNotificationsUseCase(notificationRepository)
