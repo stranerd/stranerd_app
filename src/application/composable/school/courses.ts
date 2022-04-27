@@ -7,12 +7,12 @@ import {
 	EditCourse,
 	FindCourse,
 	GetCourses,
-	GetGeneralCourses
+	GetInstitutionCourses
 } from '@modules/school'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
-import { addToArray } from '@utils/commons'
+import { addToArray, groupBy } from '@utils/commons'
 
 const global = {
 	fetched: ref(false),
@@ -39,13 +39,31 @@ const fetchCourses = async (departmentId: string) => {
 }
 
 const fetchGeneralCourses = async (institutionId: string) => {
+	const key = `${institutionId}-general`
+	if (global.institutions[key]) return
+	await global.setError('')
+	await global.setLoading(true)
+	try {
+		const courses = await GetInstitutionCourses.call(institutionId, true)
+		courses.results.forEach((c) => addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true))
+		global.fetched.value = true
+		global.institutions[key] = true
+	} catch (error) {
+		await global.setError(error)
+	}
+	await global.setLoading(false)
+}
+
+const fetchInstitutionCourses = async (institutionId: string) => {
 	if (global.institutions[institutionId]) return
 	await global.setError('')
 	await global.setLoading(true)
 	try {
-		const courses = await GetGeneralCourses.call(institutionId)
+		const courses = await GetInstitutionCourses.call(institutionId, false)
 		courses.results.forEach((c) => addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true))
 		global.fetched.value = true
+		global.institutions[institutionId] = true
+		groupBy(courses.results, (c) => c.departmentId ?? 'general').forEach(({ key }) => global.departments[key] = true)
 		global.institutions[institutionId] = true
 	} catch (error) {
 		await global.setError(error)
@@ -54,7 +72,7 @@ const fetchGeneralCourses = async (institutionId: string) => {
 }
 
 export const useCourseList = () => {
-	return { ...global, fetchCourses, fetchGeneralCourses }
+	return { ...global, fetchCourses, fetchGeneralCourses, fetchInstitutionCourses }
 }
 
 export const useCourse = (id: string) => {

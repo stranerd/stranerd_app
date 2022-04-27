@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, watch } from 'vue'
 import PastQuestionListCard from '@app/components/school/pastQuestions/AdminPastQuestionListCard.vue'
 import { usePastQuestionList } from '@app/composable/school/pastQuestions'
 import { IonSelect, IonSelectOption } from '@ionic/vue'
@@ -72,9 +72,13 @@ export default defineComponent({
 	setup () {
 		const { loading, fetched, error, pastQuestions, filters, fetchPastQuestions } = usePastQuestionList()
 		const { institutions, loading: institutionLoading } = useInstitutionList()
-		const { courses: allCourses, loading: courseLoading } = useCourseList()
+		const { courses: allCourses, loading: courseLoading, fetchInstitutionCourses } = useCourseList()
 		const courses = computed(() => new Set(allCourses.value.filter((c) => c.institutionId === filters.institution)))
 		const questionTypes = Object.keys(PastQuestionType)
+
+		watch(() => filters.institution, async () => {
+			if (filters.institution) await fetchInstitutionCourses(filters.institution)
+		})
 
 		return {
 			loading, institutionLoading, courseLoading, error, pastQuestions, filters, fetched,
