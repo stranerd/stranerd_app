@@ -24,7 +24,7 @@
 				<avatar :id="person.id" :name="person.bio.fullName" :size="24" :src="person.bio.photo" />
 				<span class="flex items-center gap-1">
 					<span>{{ person.bio.fullName }}</span>
-					<IonIcon v-if="person.isVerified" :icon="checkmarkCircleOutline" color="primary" />
+					<Verified :verified="person.isVerified" />
 				</span>
 				<Tag :index="person.rank.level - 1" :secondary="true" :tag="person.rank.id" />
 			</div>
@@ -42,7 +42,7 @@
 				<avatar :id="user?.id" :name="user.bio.fullName" :size="24" :src="user.bio.photo" />
 				<span class="flex items-center gap-1">
 					<span>{{ user.bio.fullName }}</span>
-					<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
+					<Verified :verified="user.isVerified" />
 				</span>
 				<Tag :index="user.rank.level - 1" :secondary="true" :tag="user.rank.id" />
 			</div>
@@ -63,7 +63,6 @@ import { useLeaderboardList } from '@app/composable/users/leaderboard'
 import { RankingTimes } from '@modules/users'
 import Avatar from '@app/components/core/Avatar.vue'
 import { formatNumber } from '@utils/commons'
-import { checkmarkCircleOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'LeaderboardList',
@@ -78,7 +77,7 @@ export default defineComponent({
 	setup (props) {
 		const { users, error, loading, hasNoAuthUser } = useLeaderboardList(props.time)
 		const { user, id } = useAuth()
-		return { user, id, users, error, loading, hasNoAuthUser, formatNumber, checkmarkCircleOutline }
+		return { user, id, users, error, loading, hasNoAuthUser, formatNumber }
 	}
 })
 </script>

@@ -30,7 +30,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { loading, deleteCourse } = useDeleteCourse(props.course)
+		const { loading, deleteCourse } = useDeleteCourse(props.course.id)
 		return {
 			loading, deleteCourse, openCourseEditModal,
 			trashOutline, pencilOutline

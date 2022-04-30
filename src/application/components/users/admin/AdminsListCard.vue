@@ -5,7 +5,7 @@
 			<avatar :id="user.id" :name="user.bio.fullName" :size="24" :src="user.bio.photo" />
 			<span class="flex items-center gap-1">
 				<span>{{ user.bio.fullName }}</span>
-				<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
+				<Verified :verified="user.isVerified" />
 			</span>
 		</div>
 		<a v-if="user.isAdmin" class="w-3/12 font-bold text-right text-red" @click.prevent="deAdminUser(user)">
@@ -22,7 +22,6 @@
 import { defineComponent } from 'vue'
 import { useAdminsList } from '@app/composable/users/roles/admins'
 import { UserEntity } from '@modules/users'
-import { checkmarkCircleOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'AdminsListCard',
@@ -34,7 +33,7 @@ export default defineComponent({
 	},
 	setup () {
 		const { loading, error, deAdminUser, adminUser } = useAdminsList()
-		return { loading, error, deAdminUser, adminUser, checkmarkCircleOutline }
+		return { loading, error, deAdminUser, adminUser }
 	}
 })
 </script>

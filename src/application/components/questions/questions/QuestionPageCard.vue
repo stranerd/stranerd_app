@@ -19,7 +19,7 @@
 					<avatar :id="question.userId" :size="24" :src="question.userBio.photo" />
 					<span class="font-semibold text-main_dark flex gap-1 items-center">
 						<span>{{ question.userBio.fullName }}</span>
-						<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircle" color="primary" />
+						<Verified :verified="question.isUserVerified" />
 					</span>
 				</div>
 				<div class="flex items-center gap-2">
@@ -52,7 +52,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { IonIcon } from '@ionic/vue'
-import { checkmarkCircle, flagOutline, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
+import { flagOutline, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import Avatar from '@app/components/core/Avatar.vue'
 import PhotoList from '@app/components/core/media/PhotoList.vue'
@@ -97,7 +97,7 @@ export default defineComponent({
 		const { loading, error, deleteQuestion } = useDeleteQuestion(props.question.id)
 
 		return {
-			shareSocial, flagOutline, pencil, trashBinOutline, checkmarkCircle,
+			shareSocial, flagOutline, pencil, trashBinOutline,
 			formatTime, pluralize,
 			showAnswerButton, showAddAnswer,
 			showEditButton, showDeleteButton,

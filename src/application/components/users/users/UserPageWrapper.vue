@@ -22,7 +22,7 @@
 					<div class="rounded-b-xl px-4 flex flex-col gap-1 md:gap-2 mt-2">
 						<h2 class="text-heading font-bold text-main_dark flex gap-1 items-center">
 							<span>{{ user.bio.fullName }}</span>
-							<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="white" />
+							<Verified :verified="user.isVerified" />
 						</h2>
 						<div class="flex items-start gap-2">
 							<Tag :index="6" :tag="`${user.formattedScore} pts`" class="font-bold" />
@@ -89,7 +89,7 @@ import { useUser } from '@app/composable/users/users'
 import { useRoute } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 import { formatTime } from '@utils/dates'
-import { checkmarkCircleOutline, receiptOutline } from 'ionicons/icons'
+import { receiptOutline } from 'ionicons/icons'
 import { useVerifiedRoles } from '@app/composable/users/roles/verified'
 import CoverAvatar from '@app/components/core/CoverAvatar.vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
@@ -104,7 +104,7 @@ export default defineComponent({
 		const { user, loading, error } = useUser(userId as string)
 		const { loading: verifiedLoading, verifyUser, deVerifyUser } = useVerifiedRoles()
 		return {
-			id, isAdmin, user, loading, error, checkmarkCircleOutline, receiptOutline,
+			id, isAdmin, user, loading, error, receiptOutline,
 			verifiedLoading, verifyUser, deVerifyUser, formatTime
 		}
 	}

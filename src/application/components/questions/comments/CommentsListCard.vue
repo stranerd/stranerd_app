@@ -5,7 +5,7 @@
 		<ion-text class="text-dark_gray">
 			<b class="flex gap-1 items-center">
 				<span>{{ comment.userBio.firstName }}</span>
-				<IonIcon v-if="comment.isUserVerified" :icon="checkmarkCircle" color="primary" />
+				<Verified :verified="comment.isUserVerified" />
 			</b>
 			<b class="mx-1"> - </b>
 			{{ comment.body }}
@@ -16,7 +16,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { CommentEntity } from '@modules/questions'
-import { checkmarkCircle } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'CommentsListCard',
@@ -25,9 +24,6 @@ export default defineComponent({
 			type: CommentEntity,
 			required: true
 		}
-	},
-	setup () {
-		return { checkmarkCircle }
 	}
 })
 </script>

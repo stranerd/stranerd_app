@@ -9,7 +9,7 @@
 					class="mr-2 " />
 				<span class="text-main_dark hidden md:flex items-center gap-1">
 					<span>{{ question.userBio.fullName }}</span>
-					<IonIcon v-if="question.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
+					<Verified :verified="question.isUserVerified" />
 				</span>
 				<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 ml-2 hidden md:block" />
 				<span class="text-main_dark capitalize">{{ question.subject }}</span>
@@ -41,7 +41,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { IonRippleEffect } from '@ionic/vue'
-import { arrowRedoOutline, checkmarkCircleOutline, flagOutline, imageOutline } from 'ionicons/icons'
+import { arrowRedoOutline, flagOutline, imageOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
@@ -67,7 +67,7 @@ export default defineComponent({
 		})
 		return {
 			showAnswerButton, openAnswerModal, formatTime, pluralize,
-			arrowRedoOutline, flagOutline, imageOutline, checkmarkCircleOutline
+			arrowRedoOutline, flagOutline, imageOutline
 		}
 	}
 })

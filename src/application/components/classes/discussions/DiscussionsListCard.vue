@@ -7,7 +7,7 @@
 			class="py-[6px] px-3 min-w-[25%] max-w-[70%] lg:max-w-[55%] rounded-t-xl flex flex-col gap-1">
 			<span v-if="discussion.userId !== id" class="flex gap-1 items-center text-gray font-semibold">
 				<span>{{ discussion.userBio.fullName }}</span>
-				<IonIcon v-if="discussion.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
+				<Verified :verified="discussion.userRoles.isVerified" />
 			</span>
 			<div v-if="discussion.isMedia" class="flex flex-col" @click="openFile">
 				<img v-if="discussion.isImage" :src="discussion.media.link" alt="" class="w-full rounded-t-xl">
@@ -35,7 +35,7 @@ import { defineComponent, onMounted } from 'vue'
 import { DiscussionEntity } from '@modules/classes'
 import { useAuth } from '@app/composable/auth/auth'
 import { formatTimeAsDigits } from '@utils/dates'
-import { checkmarkCircleOutline, documentOutline, downloadOutline } from 'ionicons/icons'
+import { documentOutline, downloadOutline } from 'ionicons/icons'
 import { useDownload } from '@app/composable/meta/media'
 import { saveDiscussionsReadState } from '@app/composable/classes/discussions'
 import { isWeb } from '@utils/constants'
@@ -59,7 +59,7 @@ export default defineComponent({
 		})
 		return {
 			id, formatTimeAsDigits, isWeb,
-			checkmarkCircleOutline, documentOutline, downloadOutline,
+			documentOutline, downloadOutline,
 			content, download, openFile, loading
 		}
 	}

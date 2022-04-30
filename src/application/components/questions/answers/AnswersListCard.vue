@@ -5,7 +5,7 @@
 				class="mr-2" />
 			<span class="font-semibold text-main_dark flex items-center gap-1">
 				<span>{{ answer.userBio.fullName }}</span>
-				<IonIcon v-if="answer.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
+				<Verified :verified="answer.isUserVerified" />
 			</span>
 		</div>
 
@@ -70,7 +70,6 @@ import { IonIcon } from '@ionic/vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
 import {
 	chatbubbleOutline,
-	checkmarkCircleOutline,
 	chevronDownOutline,
 	chevronUpOutline,
 	paperPlaneOutline,
@@ -141,7 +140,6 @@ export default defineComponent({
 			paperPlaneOutline,
 			chevronUpOutline,
 			chevronDownOutline,
-			checkmarkCircleOutline,
 			showExplanation,
 			showComments,
 			showEditButton,

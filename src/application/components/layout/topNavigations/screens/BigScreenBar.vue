@@ -25,7 +25,7 @@
 							<avatar :name="user?.bio.fullName" :size="24" :src="user?.bio.photo" />
 							<span class="truncate max-w-[150px] flex items-center gap-1">
 								<span>{{ user.bio.fullName }}</span>
-								<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
+								<Verified :verified="user.isVerified" />
 							</span>
 							<ion-icon :icon="chevronDownOutline" class="text-xl"></ion-icon>
 						</div>
@@ -42,7 +42,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonToolbar } from '@ionic/vue'
-import { addCircleOutline, checkmarkCircleOutline, chevronDownOutline } from 'ionicons/icons'
+import { addCircleOutline, chevronDownOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useMenuPopover } from '@app/composable/core/modals'
 import Search from '@app/components/search/Search.vue'
@@ -58,7 +58,7 @@ export default defineComponent({
 
 		return {
 			openCreateDashboardMenu, openUserDashboardMenu,
-			addCircleOutline, chevronDownOutline, checkmarkCircleOutline,
+			addCircleOutline, chevronDownOutline,
 			isLoggedIn, user, signout
 		}
 	}

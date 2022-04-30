@@ -7,7 +7,7 @@
 			<span :class="{'text-white !font-bold': person.id === id}" class="font-bold mr-2">{{ index + 1 }}</span>
 			<span :class="{'text-white !font-bold': person.id === id}" class="flex items-center gap-1">
 				<span>{{ person.bio.fullName }}</span>
-				<IonIcon v-if="person.isVerified" :icon="checkmarkCircleOutline" color="primary" />
+				<Verified :verified="person.isVerified" />
 			</span>
 			<span :class="{'text-white': person.id === id}" class="text-primary font-bold ml-auto">
 				{{ formatNumber(person.account.rankings[time], 2) }}
@@ -19,7 +19,7 @@
 			<span class="font-bold mr-2">-</span>
 			<span class="flex items-center gap-1">
 				<span>{{ user.bio.fullName }}</span>
-				<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
+				<Verified :verified="user.isVerified" />
 			</span>
 			<span class="font-bold text-primary ml-auto">
 				{{ formatNumber(user.account.rankings[time], 2) }}
@@ -43,7 +43,6 @@ import { useAuth } from '@app/composable/auth/auth'
 import { useLeaderboardList } from '@app/composable/users/leaderboard'
 import { RankingTimes } from '@modules/users'
 import { formatNumber } from '@utils/commons'
-import { checkmarkCircleOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'SideLeaderboardList',
@@ -57,7 +56,7 @@ export default defineComponent({
 		const { users: allUsers, loading, error, hasNoAuthUser } = useLeaderboardList(props.time)
 		const users = computed(() => allUsers.value.slice(0, 10))
 		const { user, id } = useAuth()
-		return { id, user, users, loading, error, hasNoAuthUser, formatNumber, checkmarkCircleOutline }
+		return { id, user, users, loading, error, hasNoAuthUser, formatNumber }
 	}
 })
 </script>

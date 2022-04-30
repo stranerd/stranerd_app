@@ -6,7 +6,7 @@
 			<div class="flex flex-col justify-start items-start">
 				<h2 class="text-sub font-bold mb-1 flex gap-1 items-center">
 					<span>{{ user.bio.fullName }}</span>
-					<IonIcon v-if="user.isVerified" :icon="checkmarkCircleOutline" color="primary" />
+					<Verified :verified="user.isVerified" />
 				</h2>
 				<span
 					class="py-1 px-4 rounded-full text-sub w-auto flex border-2 font-bold bg-primary text-white">
@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { chatboxEllipsesOutline, checkmarkCircleOutline, flashOutline, helpCircleOutline } from 'ionicons/icons'
+import { chatboxEllipsesOutline, flashOutline, helpCircleOutline } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
 import { UserEntity } from '@modules/users'
@@ -46,7 +46,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { formatNumber, helpCircleOutline, flashOutline, chatboxEllipsesOutline, checkmarkCircleOutline }
+		return { formatNumber, helpCircleOutline, flashOutline, chatboxEllipsesOutline }
 	}
 })
 </script>

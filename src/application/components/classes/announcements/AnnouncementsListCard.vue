@@ -5,7 +5,7 @@
 				:size="32" :src="announcement.userBio.photo" />
 			<IonText class="text-main_dark flex gap-1 items-center">
 				<span>{{ announcement.userBio.fullName }}</span>
-				<IonIcon v-if="announcement.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
+				<Verified :verified="announcement.isUserVerified" />
 			</IonText>
 			<span class="dot bg-icon_inactive" />
 			<IonText class="text-gray">{{ formatTime(announcement.createdAt) }}</IonText>
@@ -18,7 +18,6 @@
 import { defineComponent, onMounted } from 'vue'
 import { AnnouncementEntity, ClassEntity } from '@modules/classes'
 import { formatTime } from '@utils/dates'
-import { checkmarkCircleOutline } from 'ionicons/icons'
 import { saveAnnouncementReadState } from '@app/composable/classes/announcements'
 
 export default defineComponent({
@@ -37,7 +36,7 @@ export default defineComponent({
 		onMounted(async () => {
 			await saveAnnouncementReadState(props.announcement)
 		})
-		return { formatTime, checkmarkCircleOutline }
+		return { formatTime }
 	}
 })
 </script>
