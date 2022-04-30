@@ -1,9 +1,11 @@
 <template>
 	<router-link :to="`/classes/${group.classId}/groups/${group.id}`"
-		class="bg-white rounded-xl flex items-center card-padding">
-		<IonIcon :icon="chatboxEllipsesOutline" class="text-gray text-4xl md:text-5xl" />
-		<div class="flex flex-col w-full">
-			<div class="flex gap-2 text-main_dark">
+		class="bg-white rounded-xl flex items-center card-padding leading-none">
+		<span>
+			<IonIcon :icon="chatboxEllipsesOutline" class="text-gray text-4xl md:text-5xl" />
+		</span>
+		<div class="flex flex-col w-full truncate">
+			<div class="flex gap-2 text-main_dark items-center">
 				<IonText class="font-semibold w-full truncate capitalize">
 					{{ group.name }}
 				</IonText>
@@ -19,21 +21,29 @@
 				<span v-if="!!unReadDiscussions" class="dot bg-primary" />
 			</div>
 		</div>
-		<span v-if="classInst.admins.includes(id)" class="rounded-full p-1"
-			@click.prevent="openGroupEditModal(group, $router)">
-			<IonIcon :icon="pencilOutline" class="text-gray text-heading2" />
+		<span v-if="group.admins.includes(id)" class="rounded-full p-1" @click.prevent="showMenu">
+			<IonIcon :icon="ellipsisVerticalOutline" class="text-gray text-heading" />
 		</span>
+		<PageLoading v-if="loading" />
 	</router-link>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { ClassEntity, GroupEntity } from '@modules/classes'
-import { chatboxEllipsesOutline, pencilOutline } from 'ionicons/icons'
+import {
+	chatboxEllipsesOutline,
+	closeOutline,
+	ellipsisVerticalOutline,
+	pencilOutline,
+	trashOutline
+} from 'ionicons/icons'
 import { formatTime } from '@utils/dates'
 import { useAuth } from '@app/composable/auth/auth'
 import { useGroupDiscussions } from '@app/composable/classes/discussions'
-import { openGroupEditModal } from '@app/composable/classes/groups'
+import { openGroupEditModal, useDeleteGroup } from '@app/composable/classes/groups'
+import { actionSheetController } from '@ionic/vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'GroupsListCard',
@@ -49,8 +59,29 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { id } = useAuth()
+		const router = useRouter()
+		const { loading, deleteGroup } = useDeleteGroup(props.group.classId, props.group.id)
 		const { unReadDiscussions } = useGroupDiscussions(props.classInst.id, props.group.id)
-		return { chatboxEllipsesOutline, pencilOutline, formatTime, id, unReadDiscussions, openGroupEditModal }
+		const showMenu = async () => {
+			const actionSheet = await actionSheetController
+				.create({
+					buttons: [
+						{
+							text: 'Rename discussion',
+							icon: pencilOutline,
+							handler: () => openGroupEditModal(props.group, router)
+						},
+						{ text: 'Delete discussion', role: 'destructive', icon: trashOutline, handler: deleteGroup },
+						{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
+					]
+				})
+			await actionSheet.present()
+		}
+		return {
+			chatboxEllipsesOutline, pencilOutline, trashOutline, ellipsisVerticalOutline,
+			formatTime, id, unReadDiscussions, openGroupEditModal,
+			loading, deleteGroup, showMenu
+		}
 	}
 })
 </script>

@@ -10,12 +10,16 @@
 		<BlockLoading v-if="loading" class="text-2xl" />
 		<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-2xl" color="primary" @click="download" />
 	</div>
+	<div v-if="discussion.links.length > 0" class="bg-white card-padding flex rounded-xl items-center">
+		<IonIcon :icon="linkOutline" class="text-4xl text-gray" />
+		<span class="font-semibold text-main_dark" v-html="discussion.formattedContent" />
+	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { DiscussionEntity } from '@modules/classes'
-import { documentOutline, downloadOutline, imageOutline, playCircleOutline } from 'ionicons/icons'
+import { documentOutline, downloadOutline, imageOutline, linkOutline, playCircleOutline } from 'ionicons/icons'
 import { useDownload } from '@app/composable/meta/media'
 import { isWeb } from '@utils/constants'
 
@@ -33,7 +37,7 @@ export default defineComponent({
 		} = useDownload(props.discussion.media?.name ?? '', props.discussion.media?.link ?? '', 'discussions')
 		const download = isWeb ? downloadWeb : downloadApp
 		return {
-			imageOutline, playCircleOutline, documentOutline, downloadOutline,
+			imageOutline, playCircleOutline, documentOutline, downloadOutline, linkOutline,
 			loading, download, openFile, content
 		}
 	}

@@ -2,7 +2,7 @@
 	<form class="flex flex-col md:flex-row md:items-center gap-2" @submit.prevent="submit">
 		<ion-input v-model="factory.name"
 			class="flex-grow w-full border border-new_gray"
-			placeholder="Enter a topic"
+			placeholder="Enter discussion name"
 			show-cancel-button="never"
 		/>
 

@@ -2,7 +2,7 @@
 	<div>
 		<form class="bg-white p-4 md:mb-4 md:rounded-xl" @submit.prevent="fetchClasses">
 			<IonSearchbar v-model.trim="searchTerm" class="w-full" mode="md"
-				placeholder="Search for a class" showCancelButton="never" type="search" />
+				placeholder="Search for classes" showCancelButton="never" type="search" />
 		</form>
 		<EmptyState v-if="!loading && !error && classes.length === 0" info="No classes found" />
 		<div class="grid grid-cols-1 lg:grid-cols-2 md:gap-4">

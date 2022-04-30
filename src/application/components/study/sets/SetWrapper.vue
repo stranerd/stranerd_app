@@ -11,7 +11,8 @@
 				</div>
 			</div>
 			<div class="flex gap-2 w-full md:w-auto">
-				<ion-input v-model="search" class="flex-grow md:w-auto bg-new_gray text-gray" placeholder="Search" />
+				<ion-input v-model="search" class="flex-grow md:w-auto bg-new_gray text-gray"
+					placeholder="Search for items" />
 				<ion-select v-model="filter"
 					class="bg-new_gray !text-gray flex-grow md:w-auto font-bold select-primary"
 					interface="action-sheet"

@@ -120,7 +120,7 @@ export enum QueryKeys { and = 'and', or = 'or' }
 
 export enum Conditions {
 	lt = 'lt', lte = 'lte', gt = 'gt', gte = 'gte',
-	eq = 'eq', ne = 'ne', in = 'in', nin = 'nin'
+	eq = 'eq', ne = 'ne', in = 'in', nin = 'nin', exists = 'exists'
 }
 
 type Where = { field: string, value: any, condition?: Conditions }

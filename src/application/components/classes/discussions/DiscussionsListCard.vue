@@ -21,10 +21,10 @@
 				</div>
 			</div>
 			<div class="flex gap-2 items-end">
-				<div class="flex-grow">
+				<div class="flex-grow leading-none">
 					<span v-html="discussion.formattedContent" />
 				</div>
-				<span class="text-sub">{{ formatTimeAsDigits(new Date(discussion.createdAt)) }}</span>
+				<span class="text-sub2 leading-none">{{ formatTimeAsDigits(new Date(discussion.createdAt)) }}</span>
 			</div>
 		</div>
 	</div>

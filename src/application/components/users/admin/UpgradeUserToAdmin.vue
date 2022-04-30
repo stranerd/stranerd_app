@@ -2,7 +2,7 @@
 	<div>
 		<form class="flex justify-between items-center mb-4 px-4 md:px-0" @submit.prevent="searchUsers">
 			<ion-input v-model="detail" class="bg-white border border-faded_gray w-full"
-				placeholder="Search users by firstname, lastname or email" />
+				placeholder="Search users" />
 		</form>
 		<DisplayError :error="error" />
 		<div v-if="fetched">

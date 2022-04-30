@@ -32,7 +32,7 @@ module.exports = {
 				green: '#00D246'
 			},
 			fontFamily: {
-				rale: ['Raleway', 'sans-serif']
+				rale: ['DM Sans', 'sans-serif']
 			}
 		}
 	},
