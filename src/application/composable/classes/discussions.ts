@@ -166,39 +166,37 @@ export const useClassDiscussions = (classId: string) => {
 
 export const useCreateDiscussion = (classId: string, groupId: string) => {
 	const factory = ref(new DiscussionFactory()) as Ref<DiscussionFactory>
+	const loadingCounter = ref(0)
 	const { error, setError } = useErrorHandler()
-	const { loading, setLoading } = useLoadingHandler()
 	factory.value.groupId = groupId
 
 	const createTextDiscussion = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.value.valid && !loadingCounter.value) {
+			loadingCounter.value++
 			try {
-				await setLoading(true)
 				await AddDiscussion.call(classId, factory.value)
 				factory.value.reset()
 			} catch (e) {
 				await setError(e)
 			}
+			loadingCounter.value--
 			factory.value.reset()
-			await setLoading(false)
 		}
 	}
 
 	const createMediaDiscussion = async (factories: DiscussionFactory[]) => {
-		if (!loading.value) {
-			await setLoading(true)
-			await Promise.all(factories.map(async (mediaFactory) => {
-				mediaFactory.groupId = groupId
-				try {
-					await AddDiscussion.call(classId, mediaFactory)
-				} catch (error) {
-					await setError(error)
-				}
-			}))
-			await setLoading(false)
-		}
+		if (!loadingCounter.value) await Promise.all(factories.map(async (mediaFactory) => {
+			mediaFactory.groupId = groupId
+			loadingCounter.value++
+			try {
+				await AddDiscussion.call(classId, mediaFactory)
+			} catch (error) {
+				await setError(error)
+			}
+			loadingCounter.value--
+		}))
 	}
 
-	return { factory, error, loading, createTextDiscussion, createMediaDiscussion }
+	return { factory, error, loadingCounter, createTextDiscussion, createMediaDiscussion }
 }

@@ -1,5 +1,8 @@
 <template>
 	<div class="relative">
+		<span v-if="loadingCounter" class="loading-counter">
+			{{ loadingCounter }} {{ pluralize(loadingCounter, 'message', 'messages') }} sending
+		</span>
 		<div v-if="showFileUpload" class="absolute top-0 flex flex-col gap-4 py-2" style="transform: translateY(-100%)">
 			<FileInput :multiple="true" accept="image/*" @files="catchFiles">
 				<div class="flex gap-2 items-center">
@@ -40,6 +43,7 @@
 					<video v-else-if="fileData[fileIndex].factory.media.type.includes('video')"
 						:src="fileData[fileIndex].data" class="object-cover" controls />
 					<IonIcon v-else :icon="documentOutline" class="text-8xl" />
+					<span>{{ fileData[fileIndex].factory.media.name }}</span>
 				</div>
 				<div v-if="fileData.length" class="flex gap-4 w-full items-center md:max-w-[80%] mx-auto">
 					<IonIcon :icon="chevronBackOutline" class="text-4xl"
@@ -66,7 +70,8 @@
 						</div>
 					</FileInput>
 					<div class="ml-auto">
-						<IonButton v-if="fileData.length" :disabled="loading" color="primary" shape="round" size="small"
+						<IonButton v-if="fileData.length" :disabled="loadingCounter" color="primary" shape="round"
+							size="small"
 							@click="uploadFiles">
 							<IonIcon slot="icon-only" :icon="paperPlaneOutline" />
 						</IonButton>
@@ -79,11 +84,10 @@
 			<IonIcon :icon="showFileUpload ? closeCircleOutline : addCircleOutline"
 				class="text-3xl md:text-5xl" @click="showFileUpload = !showFileUpload" />
 			<IonInput v-model="factory.content" class="flex-grow" placeholder="Send a message" required />
-			<IonButton :disabled="!factory.valid || loading" color="primary" shape="round"
+			<IonButton :disabled="!factory.valid || loadingCounter" color="primary" shape="round"
 				size="small" type="submit">
 				<IonIcon slot="icon-only" :icon="paperPlaneOutline" />
 			</IonButton>
-			<PageLoading v-if="loading" />
 		</form>
 	</div>
 </template>
@@ -105,7 +109,7 @@ import {
 } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { DiscussionFactory } from '@modules/classes'
-import { getRandomValue } from '@utils/commons'
+import { getRandomValue, pluralize } from '@utils/commons'
 
 export default defineComponent({
 	name: 'DiscussionForm',
@@ -124,7 +128,7 @@ export default defineComponent({
 		const showFileCaption = ref(false)
 		const fileIndex = ref(0)
 		const {
-			loading, error, factory, createTextDiscussion, createMediaDiscussion
+			loadingCounter, error, factory, createTextDiscussion, createMediaDiscussion
 		} = useCreateDiscussion(props.classId, props.groupId)
 		const fileData = ref([] as { data: string, factory: DiscussionFactory, hash: string }[])
 		const catchFiles = useFileInputCallback(async (files) => {
@@ -149,11 +153,11 @@ export default defineComponent({
 			if (fileIndex.value !== 0) fileIndex.value--
 		}
 		const uploadFiles = async () => {
-			await createMediaDiscussion(fileData.value.map((f) => f.factory) as DiscussionFactory[])
 			showFileCaption.value = false
+			await createMediaDiscussion(fileData.value.map((f) => f.factory) as DiscussionFactory[])
 		}
 		return {
-			loading, error, factory, createTextDiscussion, uploadFiles,
+			loadingCounter, error, factory, createTextDiscussion, uploadFiles, pluralize,
 			addCircleOutline, closeOutline, paperPlaneOutline, closeCircleOutline, imageOutline,
 			documentOutline, videocamOutline, addOutline, chevronForwardOutline, chevronBackOutline,
 			showFileUpload, catchFiles, catchMoreFiles, fileData, showFileCaption, fileIndex, remove
@@ -176,5 +180,15 @@ export default defineComponent({
 			--padding-top: 0.6rem !important;
 			--padding-bottom: 0.6rem !important;
 		}
+	}
+
+	.loading-counter {
+		position: fixed;
+		right: 1rem;
+		top: 1rem;
+		padding: 0.5rem 0.75rem;
+		border-radius: 0.75rem;
+		background: $color-white;
+		border: 1px solid rgba($color-gray, 0.5);
 	}
 </style>

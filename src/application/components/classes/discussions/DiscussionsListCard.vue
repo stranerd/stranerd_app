@@ -14,7 +14,7 @@
 				<div :class="{'rounded-t-xl': !discussion.isImage}"
 					class="bg-white flex gap-2 items-center p-3 rounded-b-xl">
 					<IonIcon :icon="documentOutline" class="text-2xl" />
-					<IonText class="flex-grow truncate">{{ discussion.media.name }}</IonText>
+					<IonText class="w-full truncate">{{ discussion.media.name }}</IonText>
 					<SpinLoading v-if="loading" class="text-2xl" />
 					<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-2xl" color="primary"
 						@click="download" />
