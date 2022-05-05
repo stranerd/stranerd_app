@@ -34,7 +34,7 @@ import { GetReferralsUseCase } from './domain/usecases/referrals/getReferrals'
 import { ListenToReferralsUseCase } from './domain/usecases/referrals/listenToReferrals'
 import { GetBadgeUseCase } from './domain/usecases/badges/getBadge'
 import { ListenToBadgeUseCase } from './domain/usecases/badges/listenToBadge'
-import { generateDefaultBio, generateDefaultRoles, UserEntity } from './domain/entities/user'
+import { generateDefaultBio, generateDefaultRoles, generateEmbeddedUser, UserEntity } from './domain/entities/user'
 import { NotificationEntity } from './domain/entities/notification'
 import { ReviewEntity } from './domain/entities/review'
 import { ReferralEntity } from './domain/entities/referral'
@@ -90,6 +90,7 @@ export {
 	RankingTimes,
 	generateDefaultBio,
 	generateDefaultRoles,
+	generateEmbeddedUser,
 	NotificationEntity,
 	ReviewEntity,
 	ReferralEntity,

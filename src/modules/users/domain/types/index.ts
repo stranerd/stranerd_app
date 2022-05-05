@@ -59,6 +59,12 @@ export interface UserRoles {
 	isVerified: boolean
 }
 
+export type EmbeddedUser = {
+	id: string
+	bio: UserBio
+	roles: UserRoles
+}
+
 export interface UserAccount {
 	score: number
 	meta: {

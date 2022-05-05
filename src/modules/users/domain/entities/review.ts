@@ -1,15 +1,13 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, generateDefaultRoles } from './user'
-import { UserBio, UserRoles } from '../types'
+import { generateEmbeddedUser } from './user'
+import { EmbeddedUser } from '../types'
 
 export class ReviewEntity extends BaseEntity {
 	public readonly id: string
 	public readonly review: string
 	public readonly rating: number
 	public readonly tutorId: string
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
+	public readonly user: EmbeddedUser
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -19,29 +17,25 @@ export class ReviewEntity extends BaseEntity {
 		             rating,
 		             createdAt,
 		             tutorId,
-		             userId,
-		             userBio,
-		             userRoles,
+		             user,
 		             updatedAt
 	             }: ReviewConstructorArgs) {
 		super()
 		this.id = id
 		this.review = review
 		this.rating = rating
-		this.userId = userId
+		this.user = generateEmbeddedUser(user)
 		this.tutorId = tutorId
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
 	get isUserVerified () {
-		return this.userRoles.isVerified
+		return this.user.roles.isVerified
 	}
 }
 
 type ReviewConstructorArgs = {
 	id: string, review: string, rating: number, tutorId: string
-	createdAt: number, userId: string, userBio: UserBio, userRoles: UserRoles, updatedAt: number
+	createdAt: number, user: EmbeddedUser, updatedAt: number
 }

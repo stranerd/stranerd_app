@@ -2,6 +2,7 @@ import { BaseEntity, parseMedia } from '@modules/core'
 import { capitalize, catchDivideByZero, formatNumber } from '@utils/commons'
 import { getRankImage } from './rank'
 import {
+	EmbeddedUser,
 	UserAccount,
 	UserBio,
 	UserDates,
@@ -41,6 +42,12 @@ export const generateDefaultRoles = (roles: Partial<UserRoles>): UserRoles => ({
 	isStranerdAdmin: roles?.isStranerdAdmin ?? false,
 	isStranerdTutor: roles?.isStranerdTutor ?? false,
 	isVerified: roles?.isVerified ?? false
+})
+
+export const generateEmbeddedUser = (user: EmbeddedUser): EmbeddedUser => ({
+	...user,
+	bio: generateDefaultBio(user.bio),
+	roles: generateDefaultRoles(user.roles)
 })
 
 export class UserEntity extends BaseEntity {
