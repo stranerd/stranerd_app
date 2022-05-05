@@ -1,15 +1,11 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 
 export class SessionEntity extends BaseEntity {
 	readonly id: string
 	readonly message: string
-	readonly studentId: string
-	readonly studentBio: UserBio
-	readonly studentRoles: UserRoles
-	readonly tutorId: string
-	readonly tutorBio: UserBio
-	readonly tutorRoles: UserRoles
+	readonly student: EmbeddedUser
+	readonly tutor: EmbeddedUser
 	readonly duration: number
 	readonly price: number
 	readonly accepted: boolean
@@ -21,20 +17,15 @@ export class SessionEntity extends BaseEntity {
 	readonly endedAt: number | null
 
 	constructor ({
-		             id, duration, price, message,
-		             studentId, tutorId, studentBio, tutorBio, studentRoles, tutorRoles,
+		             id, duration, price, message, student, tutor,
 		             accepted, done, createdAt, cancelled, endedAt,
 		             updatedAt, startedAt
 	             }: SessionConstructorArgs) {
 		super()
 		this.id = id
 		this.message = message
-		this.studentId = studentId
-		this.studentBio = generateDefaultBio(studentBio)
-		this.studentRoles = generateDefaultRoles(studentRoles)
-		this.tutorId = tutorId
-		this.tutorBio = generateDefaultBio(tutorBio)
-		this.tutorRoles = generateDefaultRoles(tutorRoles)
+		this.student = generateEmbeddedUser(student)
+		this.tutor = generateEmbeddedUser(tutor)
 		this.duration = duration
 		this.price = price
 		this.accepted = accepted ?? false
@@ -47,26 +38,25 @@ export class SessionEntity extends BaseEntity {
 	}
 
 	get studentAvatar () {
-		return this.studentBio.photo
+		return this.student.bio.photo
 	}
 
 	get tutorAvatar () {
-		return this.tutorBio.photo
+		return this.tutor.bio.photo
 	}
 
 	get isStudentVerified () {
-		return this.studentRoles.isVerified
+		return this.student.roles.isVerified
 	}
 
 	get isTutorVerified () {
-		return this.tutorRoles.isVerified
+		return this.tutor.roles.isVerified
 	}
 }
 
 type SessionConstructorArgs = {
 	id: string, duration: number, price: number, message: string,
-	studentId: string, tutorId: string, studentBio: UserBio, tutorBio: UserBio,
-	studentRoles: UserRoles, tutorRoles: UserRoles,
+	student: EmbeddedUser, tutor: EmbeddedUser,
 	accepted: boolean | null, done: boolean,
 	cancelled: { tutor: boolean, student: boolean },
 	createdAt: number,

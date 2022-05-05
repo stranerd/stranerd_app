@@ -1,13 +1,10 @@
-import { UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 
-export interface SessionFromModel extends SessionToModel {
+export interface SessionFromModel extends Omit<SessionToModel, 'tutorId'> {
 	id: string
 	price: number
-	studentId: string
-	studentBio: UserBio
-	studentRoles: UserRoles
-	tutorBio: UserBio
-	tutorRoles: UserRoles
+	student: EmbeddedUser
+	tutor: EmbeddedUser
 	accepted: boolean | null
 	done: boolean
 	cancelled: { tutor: boolean, student: boolean }

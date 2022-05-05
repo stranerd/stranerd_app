@@ -30,13 +30,13 @@ export const useCurrentSession = () => {
 			const session = await FindSession.call(id)
 			currentGlobal.currentSession.value = session
 			if (session) {
-				const id = userId === session.tutorId ? session.studentId : session.tutorId
+				const id = userId === session.tutor.id ? session.student.id : session.tutor.id
 				await router.push(`/sessions/${id}`)
 			}
 			const listenerCallback = async (entity: SessionEntity) => {
 				const oldDone = currentGlobal.currentSession.value?.done ?? false
 				if (!oldDone && entity?.done) {
-					const id = userId === entity.tutorId ? entity.studentId : entity.tutorId
+					const id = userId === entity.tutor.id ? entity.student.id : entity.tutor.id
 					setOtherParticipantId(id)
 					useSessionModal().openRatings()
 				}
@@ -75,7 +75,7 @@ export const useCurrentSession = () => {
 		get: () => {
 			const session = currentGlobal.currentSession.value
 			if (!session) return null
-			return session.studentId === id.value ? session.tutorId : session.studentId
+			return session.student.id === id.value ? session.tutor.id : session.student.id
 		},
 		set: () => {
 		}
@@ -153,9 +153,9 @@ const callback = (key: SessionKey, sessions: SessionEntity[], userId: string, ro
 			const index = global[key].sessions.value.findIndex((s) => s.id === session.id)
 			return index === -1
 		}) // * check if the session has been fetched before
-		.filter((session) => session.tutorId === userId)
+		.filter((session) => session.tutor.id === userId)
 		.forEach(async (session) => {
-			const route = `/sessions/${session.studentId}`
+			const route = `/sessions/${session.student.id}`
 			if (!router || router.currentRoute.value.path === route) return
 			const res = await Alert({
 				title: 'New session request',
@@ -174,13 +174,13 @@ export const useLobbySessions = (router: Router) => useSession('lobby', router, 
 type SessionKey = 'requests' | 'lobby'
 
 export const isRequestingSessionWith = (userId: string) => computed({
-	get: () => global.requests?.sessions?.value?.find((s) => s.tutorId === userId) ?? null,
+	get: () => global.requests?.sessions?.value?.find((s) => s.tutor.id === userId) ?? null,
 	set: () => {
 	}
 })
 
 export const hasRequestedSessionWith = (userId: string) => computed({
-	get: () => global.lobby?.sessions?.value?.find((s) => s.studentId === userId) ?? null,
+	get: () => global.lobby?.sessions?.value?.find((s) => s.student.id === userId) ?? null,
 	set: () => {
 	}
 })

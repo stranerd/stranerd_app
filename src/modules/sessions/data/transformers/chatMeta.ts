@@ -4,17 +4,11 @@ import { ChatTransformer } from './chat'
 
 export class ChatMetaTransformer {
 	fromJSON (model: ChatMetaFromModel) {
-		const { id, userBio, userId, userRoles, ownerId, last, unRead, createdAt, updatedAt } = model
+		const { id, user, ownerId, last, unRead, createdAt, updatedAt } = model
 		return new ChatMetaEntity({
-			id,
-			userBio,
-			userId,
-			userRoles,
-			ownerId,
+			id, user, ownerId,
 			last: new ChatTransformer().fromJSON(last),
-			unRead,
-			createdAt,
-			updatedAt
+			unRead, createdAt, updatedAt
 		})
 	}
 }
