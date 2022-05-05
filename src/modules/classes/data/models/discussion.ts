@@ -1,5 +1,5 @@
 import { Media } from '@modules/core'
-import { UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 
 export interface DiscussionFromModel extends DiscussionToModel {
 	id: string
@@ -7,9 +7,7 @@ export interface DiscussionFromModel extends DiscussionToModel {
 	createdAt: number
 	updatedAt: number
 	classId: string
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 }
 
 export interface DiscussionToModel {

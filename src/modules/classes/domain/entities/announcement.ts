@@ -1,4 +1,4 @@
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity } from '@modules/core'
 import { ClassUsers } from './class'
 
@@ -7,9 +7,7 @@ type AnnouncementConstructorArgs = {
 	body: string
 	classId: string
 	users: Record<ClassUsers, string[]>
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	createdAt: number
 	updatedAt: number
 }
@@ -19,29 +17,25 @@ export class AnnouncementEntity extends BaseEntity {
 	public readonly body: string
 	public readonly users: Record<ClassUsers, string[]>
 	public readonly classId: string
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
+	public readonly user: EmbeddedUser
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, body, createdAt, users, classId, userId, userBio, userRoles, updatedAt
+		             id, body, createdAt, users, classId, user, updatedAt
 	             }: AnnouncementConstructorArgs) {
 		super()
 		this.id = id
 		this.body = body
 		this.users = users
 		this.classId = classId
-		this.userId = userId
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
+		this.user = generateEmbeddedUser(user)
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
 	get isUserVerified () {
-		return this.userRoles.isVerified
+		return this.user.roles.isVerified
 	}
 
 	get members () {

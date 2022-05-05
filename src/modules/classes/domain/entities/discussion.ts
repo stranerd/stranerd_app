@@ -1,5 +1,5 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { extractUrls, isImage, isVideo } from '@stranerd/validate'
 import { formatNumber } from '@utils/commons'
 
@@ -10,9 +10,7 @@ export class DiscussionEntity extends BaseEntity {
 	public readonly links: { original: string, normalized: string }[]
 	public readonly groupId: string
 	public readonly classId: string
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
+	public readonly user: EmbeddedUser
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -23,9 +21,7 @@ export class DiscussionEntity extends BaseEntity {
 		             links,
 		             groupId,
 		             classId,
-		             userId,
-		             userBio,
-		             userRoles,
+		             user,
 		             createdAt,
 		             updatedAt
 	             }: DiscussionConstructorArgs) {
@@ -36,9 +32,7 @@ export class DiscussionEntity extends BaseEntity {
 		this.links = links
 		this.groupId = groupId
 		this.classId = classId
-		this.userId = userId
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
+		this.user = generateEmbeddedUser(user)
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -89,7 +83,5 @@ type DiscussionConstructorArgs = {
 	updatedAt: number
 	groupId: string
 	classId: string
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 }

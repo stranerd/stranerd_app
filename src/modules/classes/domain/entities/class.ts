@@ -1,4 +1,4 @@
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 
 type ClassConstructorArgs = {
@@ -7,9 +7,7 @@ type ClassConstructorArgs = {
 	description: string
 	photo: Media | null
 	coverPhoto: Media | null
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	users: Record<ClassUsers, string[]>
 	requests: string[]
 	createdAt: number
@@ -28,9 +26,7 @@ export class ClassEntity extends BaseEntity {
 	public readonly description: string
 	public readonly photo: Media | null
 	public readonly coverPhoto: Media | null
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
+	public readonly user: EmbeddedUser
 	public readonly users: Record<ClassUsers, string[]>
 	public readonly requests: string[]
 	public readonly createdAt: number
@@ -38,7 +34,7 @@ export class ClassEntity extends BaseEntity {
 
 	constructor ({
 		             id, name, description, photo, coverPhoto,
-		             createdAt, userId, userBio, userRoles,
+		             createdAt, user,
 		             users, updatedAt, requests
 	             }: ClassConstructorArgs) {
 		super()
@@ -47,9 +43,7 @@ export class ClassEntity extends BaseEntity {
 		this.description = description
 		this.photo = photo ? parseMedia(photo) : null
 		this.coverPhoto = coverPhoto ? parseMedia(coverPhoto) : null
-		this.userId = userId
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
+		this.user = generateEmbeddedUser(user)
 		this.users = users
 		this.requests = requests
 		this.createdAt = createdAt
@@ -57,7 +51,7 @@ export class ClassEntity extends BaseEntity {
 	}
 
 	get isUserVerified () {
-		return this.userRoles.isVerified
+		return this.user.roles.isVerified
 	}
 
 	get avatar () {

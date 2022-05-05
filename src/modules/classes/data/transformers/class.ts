@@ -5,13 +5,11 @@ export class ClassTransformer {
 	fromJSON (model: ClassFromModel) {
 		const {
 			id, name, description, photo, coverPhoto,
-			createdAt, userId, userBio, userRoles,
-			users, requests, updatedAt
+			createdAt, user, users, requests, updatedAt
 		} = model
 		return new ClassEntity({
 			id, name, description, photo, coverPhoto,
-			createdAt, userId, userBio, userRoles,
-			users, requests, updatedAt
+			createdAt, user, users, requests, updatedAt
 		})
 	}
 

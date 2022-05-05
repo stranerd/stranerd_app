@@ -1,11 +1,9 @@
-import { UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 import { ClassUsers } from '../../domain/entities/class'
 
 export interface AnnouncementFromModel extends AnnouncementToModel {
 	id: string
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	users: Record<ClassUsers, string[]>
 	createdAt: number
 	updatedAt: number
