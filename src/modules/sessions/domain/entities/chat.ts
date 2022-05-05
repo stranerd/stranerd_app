@@ -4,21 +4,21 @@ import { isImage } from '@stranerd/validate'
 export class ChatEntity extends BaseEntity {
 	readonly id: string
 	readonly from: string
+	readonly to: string
 	readonly content: string
 	readonly media: Media | null
-	readonly path: [string, string]
 	readonly sessionId: string | null
 	readonly createdAt: number
 	readonly updatedAt: number
 	readonly readAt: number | null
 
-	constructor ({ id, from, content, media, path, sessionId, createdAt, updatedAt, readAt }: ChatConstructorArgs) {
+	constructor ({ id, from, to, content, media, sessionId, createdAt, updatedAt, readAt }: ChatConstructorArgs) {
 		super()
 		this.id = id
 		this.from = from
+		this.to = to
 		this.content = content
 		this.media = media ? parseMedia(media) : null
-		this.path = path
 		this.sessionId = sessionId
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
@@ -36,16 +36,12 @@ export class ChatEntity extends BaseEntity {
 	get isImage () {
 		return this.isMedia && isImage(this.media).valid
 	}
-
-	get to () {
-		return this.path.find((id) => id !== this.from) ?? ''
-	}
 }
 
 type ChatConstructorArgs = {
 	id: string,
 	from: string,
-	path: [string, string],
+	to: string,
 	content: string,
 	media: Media | null,
 	createdAt: number

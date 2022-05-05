@@ -3,7 +3,6 @@ import { Media } from '@modules/core'
 export interface ChatFromModel extends ChatToModel {
 	id: string
 	from: string
-	path: [string, string]
 	readAt: number | null,
 	createdAt: number
 	updatedAt: number

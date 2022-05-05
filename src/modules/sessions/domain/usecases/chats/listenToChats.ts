@@ -11,8 +11,8 @@ export class ListenToChatsUseCase {
 
 	async call (path: [string, string], listener: Listeners<ChatEntity>, date?: number) {
 		const conditions: QueryParams = {
-			where: [{ field: 'path', condition: Conditions.in, value: path[0] },
-				{ field: 'path', condition: Conditions.in, value: path[1] }],
+			where: [{ field: 'from', condition: Conditions.in, value: path },
+				{ field: 'to', condition: Conditions.in, value: path }],
 			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
@@ -20,7 +20,7 @@ export class ListenToChatsUseCase {
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
-			if (!entity.path.includes(path[0]) || !entity.path.includes(path[1])) return false
+			if (!path.includes(entity.from) || !path.includes(entity.to)) return false
 			if (date) return entity.createdAt >= date
 			else return true
 		})
