@@ -1,13 +1,11 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 
 export class ReportEntity extends BaseEntity {
 	readonly id: string
 	readonly data: ReportData
-	readonly reporterId: string
+	readonly user: EmbeddedUser
 	readonly reportedId: string
-	readonly reporterBio: UserBio
-	readonly reporterRoles: UserRoles
 	readonly message: string
 	readonly createdAt: number
 	readonly updatedAt: number
@@ -15,43 +13,35 @@ export class ReportEntity extends BaseEntity {
 	constructor ({
 		             id,
 		             data,
-		             reporterId,
+		             user,
 		             reportedId,
-		             reporterBio,
-		             reporterRoles,
 		             message,
 		             createdAt,
 		             updatedAt
 	             }: ReportConstructorArgs) {
 		super()
 		this.id = id
-		if (data.type === ReportType.users) {
-			data.reported.userBio = generateDefaultBio(data.reported.userBio)
-			data.reported.userRoles = generateDefaultRoles(data.reported.userRoles)
-		}
+		if (data.type === ReportType.users) data.reported = generateEmbeddedUser(data.reported)
+		else if (data.type === ReportType.questions || data.type === ReportType.answers) data.reported.user = generateEmbeddedUser(data.reported.user)
 		if (data.type === ReportType.pastQuestions) data.reported.questionMedia = data.reported.questionMedia.map(parseMedia)
 		this.data = data
 		this.reportedId = reportedId
-		this.reporterId = reporterId
-		this.reporterBio = generateDefaultBio(reporterBio)
-		this.reporterRoles = generateDefaultRoles(reporterRoles)
+		this.user = generateEmbeddedUser(user)
 		this.message = message
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
 	get isUserVerified () {
-		return this.reporterRoles.isVerified
+		return this.user.roles.isVerified
 	}
 }
 
 type ReportConstructorArgs = {
 	id: string
 	data: ReportData
-	reporterId: string
+	user: EmbeddedUser
 	reportedId: string
-	reporterBio: UserBio
-	reporterRoles: UserRoles
 	message: string,
 	createdAt: number
 	updatedAt: number
@@ -66,17 +56,17 @@ export enum ReportType {
 
 export type UserReportType = {
 	type: ReportType.users,
-	reported: { userBio: UserBio, userRoles: UserRoles, userId: string }
+	reported: EmbeddedUser
 }
 
 export type QuestionReportType = {
 	type: ReportType.questions,
-	reported: { body: string, userId: string }
+	reported: { body: string, user: EmbeddedUser }
 }
 
 export type AnswerReportType = {
 	type: ReportType.answers,
-	reported: { title: string, body: string, questionId: string, userId: string }
+	reported: { title: string, body: string, questionId: string, user: EmbeddedUser }
 }
 
 export type PastQuestionReportType = {

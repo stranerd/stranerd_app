@@ -3,11 +3,9 @@ import { ReportEntity } from '../../domain/entities/report'
 
 export class ReportTransformer {
 	fromJSON (model: ReportFromModel) {
-		const { id, data, reporterId, reportedId, reporterBio, reporterRoles, message, createdAt, updatedAt } = model
+		const { id, data, user, reportedId, message, createdAt, updatedAt } = model
 		return new ReportEntity({
-			id, data,
-			reporterId, reportedId, reporterBio, reporterRoles, message,
-			createdAt, updatedAt
+			id, data, user, reportedId, message, createdAt, updatedAt
 		})
 	}
 
