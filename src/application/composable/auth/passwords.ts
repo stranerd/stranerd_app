@@ -1,13 +1,6 @@
 import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import {
-	PasswordResetFactory,
-	PasswordResetRequestFactory,
-	PasswordUpdateFactory,
-	ResetPassword,
-	SendPasswordResetEmail,
-	UpdatePassword
-} from '@modules/auth'
+import { AuthUseCases, PasswordResetFactory, PasswordResetRequestFactory, PasswordUpdateFactory } from '@modules/auth'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'
@@ -22,7 +15,7 @@ export const usePasswordResetRequest = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				await SendPasswordResetEmail.call(factory.value)
+				await AuthUseCases.sendPasswordResetEmail(factory.value)
 				factory.value.reset()
 				await setMessage('Proceed to your email to continue')
 			} catch (error) {
@@ -45,7 +38,7 @@ export const usePasswordReset = (token: string) => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const user = await ResetPassword.call(token, factory.value)
+				const user = await AuthUseCases.resetPassword(token, factory.value)
 				await setMessage('Password reset successfully!')
 				await createSession(user, router)
 			} catch (error) {
@@ -71,7 +64,7 @@ export const usePasswordUpdate = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await UpdatePassword.call(factory.value)
+				await AuthUseCases.updatePassword(factory.value)
 				await setMessage('Password updated successfully!')
 				factory.value.reset()
 			} catch (error) {

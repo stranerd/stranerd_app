@@ -1,5 +1,5 @@
 import { Ref, ref, watch } from 'vue'
-import { AddMessage, MessageFactory } from '@modules/meta'
+import { MessageFactory, MessagesUseCases } from '@modules/meta'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 
@@ -29,7 +29,7 @@ export const useCreateMessage = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddMessage.call(factory.value)
+				await MessagesUseCases.add(factory.value)
 				factory.value.reset()
 				await setMessage('Message sent successfully')
 			} catch (error) {

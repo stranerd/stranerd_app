@@ -4,7 +4,7 @@ import { GetAllAdmins, ListenToAllAdmins, UserEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
-import { UpdateRole } from '@modules/auth'
+import { AuthUseCases } from '@modules/auth'
 
 const global = {
 	admins: ref([] as UserEntity[]),
@@ -62,7 +62,7 @@ export const useAdminsList = () => {
 		if (accepted) {
 			await global.setLoading(true)
 			try {
-				await UpdateRole.call(user.id, 'isStranerdAdmin', true)
+				await AuthUseCases.updateRole(user.id, 'isStranerdAdmin', true)
 				user.isAdmin = true
 				addToArray(global.admins.value, user, (e) => e.id, (e) => e.bio.fullName, true)
 				await global.setMessage('Successfully upgraded to admin')
@@ -82,7 +82,7 @@ export const useAdminsList = () => {
 		if (accepted) {
 			await global.setLoading(true)
 			try {
-				await UpdateRole.call(user.id, 'isStranerdAdmin', false)
+				await AuthUseCases.updateRole(user.id, 'isStranerdAdmin', false)
 				global.admins.value = global.admins.value
 					.filter((u) => u.id !== user.id)
 				await global.setMessage('Successfully downgraded from admin')

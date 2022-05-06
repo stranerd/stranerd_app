@@ -1,6 +1,6 @@
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Ref, ref, watch } from 'vue'
-import { ProfileUpdateFactory, UpdateProfile } from '@modules/auth'
+import { AuthUseCases, ProfileUpdateFactory } from '@modules/auth'
 import { useAuth } from '@app/composable/auth/auth'
 import { UserSchoolFactory } from '@modules/users/domain/factories/userSchool'
 import { UpdateUserSchool } from '@modules/users'
@@ -20,7 +20,7 @@ export const useProfileUpdate = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await UpdateProfile.call(factory.value)
+				await AuthUseCases.updateProfile(factory.value)
 				await setMessage('Profile updated successfully!', skipAlert)
 			} catch (error) {
 				await setError(error)

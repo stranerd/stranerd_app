@@ -1,13 +1,9 @@
 import { onMounted, Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import {
-	CompleteEmailVerification,
 	EmailSigninFactory,
 	EmailSignupFactory,
-	SendVerificationEmail,
-	SigninWithEmail,
-	SigninWithGoogle,
-	SignupWithEmail
+	AuthUseCases
 } from '@modules/auth'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { createSession } from '@app/composable/auth/session'
@@ -43,7 +39,7 @@ export const useEmailSignin = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const user = await SigninWithEmail.call(factory.value, {
+				const user = await AuthUseCases.signinWithEmail(factory.value, {
 					referrer: await getReferrerId()
 				})
 				await createSession(user, router)
@@ -66,7 +62,7 @@ export const useEmailSignup = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const user = await SignupWithEmail.call(factory.value, {
+				const user = await AuthUseCases.signupWithEmail(factory.value, {
 					referrer: await getReferrerId()
 				})
 				await createSession(user, router)
@@ -87,7 +83,7 @@ export const useCompleteEmailVerification = (token: string) => {
 		await setError('')
 		await setLoading(true)
 		try {
-			const user = await CompleteEmailVerification.call(token)
+			const user = await AuthUseCases.completeEmailVerification(token)
 			await createSession(user, router)
 		} catch (error) {
 			await setError(error)
@@ -114,7 +110,7 @@ export const useEmailVerificationRequest = () => {
 		await setError('')
 		await setLoading(true)
 		try {
-			await SendVerificationEmail.call(email)
+			await AuthUseCases.sendVerificationEmail(email)
 			await setMessage(`A verification email was just sent to ${email}. Proceed to your email to complete your verification.`)
 		} catch (error) {
 			await setError(error)
@@ -138,7 +134,7 @@ export const useGoogleSignin = () => {
 		if (!loading.value) {
 			await setLoading(true)
 			try {
-				const user = await SigninWithGoogle.call(data, {
+				const user = await AuthUseCases.signinWithGoogle(data, {
 					referrer: await getReferrerId()
 				})
 				await createSession(user, router)

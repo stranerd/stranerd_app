@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
 import { FindUser, ListenToUser, UserEntity } from '@modules/users'
 import { AuthDetails, AuthTypes, UserLocation } from '@modules/auth/domain/entities/auth'
-import { SessionSignout } from '@modules/auth'
+import { AuthUseCases } from '@modules/auth'
 import { isClient } from '@utils/environment'
 import { setupPush } from '@utils/push'
 import { useUserModal } from '@app/composable/core/modals'
@@ -93,7 +93,7 @@ export const useAuth = () => {
 	}
 
 	const signout = async () => {
-		await SessionSignout.call()
+		await AuthUseCases.sessionSignout()
 		await setAuthUser(null)
 		if (isClient()) window.location.assign('/auth/signin')
 	}

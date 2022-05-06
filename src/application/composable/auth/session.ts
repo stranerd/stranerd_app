@@ -1,4 +1,4 @@
-import { SessionSignin } from '@modules/auth'
+import { AuthUseCases } from '@modules/auth'
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { REDIRECT_SESSION_NAME } from '@utils/constants'
 import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
@@ -14,7 +14,7 @@ export const createSession = async (afterAuth: AfterAuthUser, router: Router) =>
 		setEmailVerificationEmail(afterAuth.user.email)
 		return await router.push('/auth/verify')
 	}
-	await SessionSignin.call(afterAuth)
+	await AuthUseCases.sessionSignin(afterAuth)
 	const { setAuthUser, signin } = useAuth()
 	await setAuthUser(afterAuth.user)
 	await signin(false)
