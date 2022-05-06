@@ -16,7 +16,7 @@ export default defineComponent({
 		const { noteId } = to.params
 		const note = getEditingNote()
 		if (!note || note.id !== noteId) return '/study/notes/'
-		const canEdit = note.userId === id.value
+		const canEdit = note.user.id === id.value
 		if (!canEdit) return `/study/notes/${note.id}`
 		useStudyModal().openEditNote()
 		const backPath = from?.fullPath ?? '/dashboard'

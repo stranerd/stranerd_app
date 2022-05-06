@@ -1,11 +1,9 @@
 import { Media } from '@modules/core'
-import { UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 
 export interface VideoFromModel extends VideoToModel {
 	id: string,
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	createdAt: number
 	updatedAt: number
 }

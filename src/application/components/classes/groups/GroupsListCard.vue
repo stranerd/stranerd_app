@@ -15,7 +15,9 @@
 			</div>
 			<div v-if="group.last" class="flex gap-2 items-center">
 				<IonText class="text-sub text-gray w-full truncate">
-					<span class="font-bold">{{ group.last.userId === id ? 'You' : group.last.userBio.firstName }}</span>:
+					<span class="font-bold">{{
+						group.last.user.id === id ? 'You' : group.last.user.bio.firstName
+					}}</span>:
 					{{ group.last.media ? 'Shared a file' : group.last.content }}
 				</IonText>
 				<span v-if="!!unReadDiscussions" class="dot bg-primary" />

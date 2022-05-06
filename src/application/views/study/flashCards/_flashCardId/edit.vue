@@ -24,7 +24,7 @@ export default defineComponent({
 		const { flashCardId = '' } = to.params
 		const flashCard = getEditingFlashCard()
 		if (!flashCard || flashCard.id !== flashCardId) return `/study/flashCards/${flashCardId}`
-		const canEdit = flashCard.userId === id.value
+		const canEdit = flashCard.user.id === id.value
 		if (!canEdit) return `/study/flashCards/${flashCard.id}`
 	}],
 	setup () {

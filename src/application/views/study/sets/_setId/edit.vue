@@ -22,7 +22,7 @@ export default defineComponent({
 		const { setId = '' } = to.params
 		const set = getEditingSet()
 		if (!set || set.id !== setId) return `/study/sets/${setId}`
-		const canEdit = set.userId === id.value
+		const canEdit = set.user.id === id.value
 		if (!canEdit) return `/study/sets/${set.id}`
 		useStudyModal().openEditSet()
 		const backPath = from?.fullPath ?? '/dashboard'

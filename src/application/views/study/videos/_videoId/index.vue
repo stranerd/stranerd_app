@@ -8,8 +8,8 @@
 						{{ video.title }}
 					</ion-text>
 					<div class="items-center text-gray font-normal  flex gap-3 mt-4 md:mt-0">
-						<Avatar :id="video.userId" :name="video.userBio.fullName" :size="24"
-							:src="video.userBio.photo" />
+						<Avatar :id="video.user.id" :name="video.user.bio.fullName" :size="24"
+							:src="video.user.bio.photo" />
 						<Share :link="video.shareLink" :title="video.title" cssClass="text-xl"
 							text="Share this video" />
 						<SaveToSet :entity="video" />

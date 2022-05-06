@@ -17,8 +17,8 @@
 								{{ !cardMode ? 'Card mode' : 'List mode' }}
 							</ion-text>
 						</div>
-						<Avatar :id="flashCard.userId" :name="flashCard.userBio.fullName" :size="24"
-							:src="flashCard.userBio.photo" />
+						<Avatar :id="flashCard.user.id" :name="flashCard.user.bio.fullName" :size="24"
+							:src="flashCard.user.bio.photo" />
 						<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
 							text="Share this flashcard" />
 						<SaveToSet :entity="flashCard" />

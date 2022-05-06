@@ -12,12 +12,13 @@
 				</template>
 			</Tag>
 			<div class="flex items-center text-gray gap-3">
-				<template v-if="edit && video.userId === id">
+				<template v-if="edit && video.user.id === id">
 					<span class="text-primary font-bold" @click.prevent="openVideoEditModal(video, $router)">Edit</span>
 					<span class="text-red font-bold" @click.prevent="deleteVideo">Delete</span>
 				</template>
 				<template v-else>
-					<Avatar :id="video.userId" :name="video.userBio.fullName" :size="24" :src="video.userBio.photo" />
+					<Avatar :id="video.user.id" :name="video.user.bio.fullName" :size="24"
+						:src="video.user.bio.photo" />
 					<Share :link="video.shareLink" :text="video.description" :title="video.title" cssClass="text-xl" />
 					<SaveToSet :entity="video" />
 				</template>

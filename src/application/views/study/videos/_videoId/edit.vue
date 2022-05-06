@@ -16,7 +16,7 @@ export default defineComponent({
 		const { videoId } = to.params
 		const video = getEditingVideo()
 		if (!video || video.id !== videoId) return '/study/videos/'
-		const canEdit = video.userId === id.value
+		const canEdit = video.user.id === id.value
 		if (!canEdit) return `/study/videos/${video.id}`
 		useStudyModal().openEditVideo()
 		const backPath = from?.fullPath ?? '/dashboard'

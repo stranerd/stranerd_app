@@ -13,13 +13,13 @@
 				</template>
 			</Tag>
 			<div class="flex items-center text-gray gap-3">
-				<template v-if="edit && flashCard.userId === id">
+				<template v-if="edit && flashCard.user.id === id">
 					<span class="text-primary font-bold" @click.prevent="openFlashCardEditModal(flashCard, $router)">Edit</span>
 					<span class="text-red font-bold" @click.prevent="deleteFlashCard">Delete</span>
 				</template>
 				<template v-else>
-					<Avatar :id="flashCard.userId" :name="flashCard.userBio.fullName" :size="24"
-						:src="flashCard.userBio.photo" />
+					<Avatar :id="flashCard.user.id" :name="flashCard.user.bio.fullName" :size="24"
+						:src="flashCard.user.bio.photo" />
 					<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
 						text="Share this flashcard" />
 					<SaveToSet :entity="flashCard" />

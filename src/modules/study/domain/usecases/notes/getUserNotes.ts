@@ -13,7 +13,7 @@ export class GetUserNotesUseCase {
 		const conditions: QueryParams = {
 			sort: [{ field: 'createdAt', desc: true }],
 			limit: PAGINATION_LIMIT,
-			where: [{ field: 'userId', value: userId }]
+			where: [{ field: 'user.id', value: userId }]
 		}
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
 

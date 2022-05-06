@@ -1,13 +1,11 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 
 export class FlashCardEntity extends BaseEntity {
 	public readonly id: string
 	public readonly title: string
 	public readonly set: { question: string, answer: string }[]
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
+	public readonly user: EmbeddedUser
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -15,9 +13,7 @@ export class FlashCardEntity extends BaseEntity {
 		             id,
 		             title,
 		             set,
-		             userId,
-		             userBio,
-		             userRoles,
+		             user,
 		             createdAt,
 		             updatedAt
 	             }: FlashCardConstructorArgs) {
@@ -25,15 +21,13 @@ export class FlashCardEntity extends BaseEntity {
 		this.id = id
 		this.title = title
 		this.set = set
-		this.userId = userId
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
+		this.user = generateEmbeddedUser(user)
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
 	get isUserVerified () {
-		return this.userRoles.isVerified
+		return this.user.roles.isVerified
 	}
 
 	get shareLink () {
@@ -49,9 +43,7 @@ type FlashCardConstructorArgs = {
 	id: string,
 	title: string,
 	set: { question: string, answer: string }[]
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	createdAt: number
 	updatedAt: number
 }

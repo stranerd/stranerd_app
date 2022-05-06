@@ -1,13 +1,10 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 
 export class SetEntity extends BaseEntity {
 	public readonly id: string
 	public readonly name: string
-	public readonly data: SetData
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
+	public readonly user: EmbeddedUser
 	public readonly saved: {
 		notes: string[]
 		videos: string[]
@@ -21,20 +18,14 @@ export class SetEntity extends BaseEntity {
 	constructor ({
 		             id,
 		             name,
-		             data,
-		             userId,
-		             userBio,
-		             userRoles,
+		             user,
 		             saved,
 		             createdAt,
 		             updatedAt
 	             }: SetConstructorArgs) {
 		super()
 		this.id = id
-		this.data = data
-		this.userId = userId
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
+		this.user = generateEmbeddedUser(user)
 		this.name = !name ? 'My Library' : name
 		this.saved = saved
 		this.createdAt = createdAt
@@ -46,7 +37,7 @@ export class SetEntity extends BaseEntity {
 	}
 
 	get isUserVerified () {
-		return this.userRoles.isVerified
+		return this.user.roles.isVerified
 	}
 
 	get shareLink () {
@@ -58,29 +49,10 @@ export class SetEntity extends BaseEntity {
 	}
 }
 
-export enum SetType {
-	users = 'users',
-	classes = 'classes'
-}
-
-type UserType = {
-	type: SetType.users
-}
-
-type ClassType = {
-	type: SetType.classes
-	classId: string
-}
-
-export type SetData = UserType | ClassType
-
 type SetConstructorArgs = {
 	id: string
 	name: string
-	data: SetData
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	saved: {
 		notes: string[]
 		videos: string[]

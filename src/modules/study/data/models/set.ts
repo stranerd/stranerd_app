@@ -1,5 +1,4 @@
-import { UserBio, UserRoles } from '@modules/users'
-import { SetData } from '../../domain/entities/set'
+import { EmbeddedUser } from '@modules/users'
 
 export interface SetFromModel extends SetToModel {
 	id: string
@@ -10,14 +9,11 @@ export interface SetFromModel extends SetToModel {
 		testPreps: string[]
 		sets: string[]
 	}
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	createdAt: number
 	updatedAt: number
 }
 
 export interface SetToModel {
 	name: string
-	data: SetData
 }

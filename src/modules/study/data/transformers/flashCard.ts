@@ -3,9 +3,9 @@ import { FlashCardEntity } from '../../domain/entities/flashCard'
 
 export class FlashCardTransformer {
 	fromJSON (model: FlashCardFromModel) {
-		const { id, title, set, userId, userBio, userRoles, createdAt, updatedAt } = model
+		const { id, title, set, user, createdAt, updatedAt } = model
 		return new FlashCardEntity({
-			id, title, set, userId, userBio, userRoles, createdAt, updatedAt
+			id, title, set, user, createdAt, updatedAt
 		})
 	}
 

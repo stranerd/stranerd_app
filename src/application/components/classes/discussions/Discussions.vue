@@ -7,7 +7,7 @@
 					<IonText class="text-main_dark font-semibold">{{ group.name }}</IonText>
 					<IonText class="text-sub">
 						Created {{ formatTime(group.createdAt) }} by <span
-							class="text-primary">{{ group.userBio.fullName }}</span>
+							class="text-primary">{{ group.user.bio.fullName }}</span>
 					</IonText>
 				</div>
 				<router-link :to="`/classes/${classId}/groups`" class="ml-auto flex">

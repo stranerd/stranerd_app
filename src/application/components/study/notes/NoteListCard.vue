@@ -17,12 +17,12 @@
 				</template>
 			</Tag>
 			<div class="flex items-center text-gray gap-3">
-				<template v-if="edit && note.userId === id">
+				<template v-if="edit && note.user.id === id">
 					<span class="text-primary font-bold" @click.prevent="openNoteEditModal(note, $router)">Edit</span>
 					<span class="text-red font-bold" @click.prevent="deleteNote">Delete</span>
 				</template>
 				<template v-else>
-					<Avatar :id="note.userId" :name="note.userBio.fullName" :size="24" :src="note.userBio.photo" />
+					<Avatar :id="note.user.id" :name="note.user.bio.fullName" :size="24" :src="note.user.bio.photo" />
 					<Share :link="note.shareLink" :text="note.description" :title="note.title" cssClass="text-xl" />
 					<SaveToSet :entity="note" />
 				</template>

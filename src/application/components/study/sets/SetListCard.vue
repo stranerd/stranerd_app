@@ -12,14 +12,14 @@
 				</template>
 			</Tag>
 			<div class="flex items-center text-gray gap-3">
-				<template v-if="edit && set.userId === id">
-					<span class="text-primary font-bold" @click.prevent="openSetEditModal(set)">Edit</span>
+				<template v-if="edit && set.user.id === id">
+					<span class="text-primary font-bold" @click.prevent="openSetEditModal(set, $router)">Edit</span>
 					<span class="text-red font-bold" @click.prevent="deleteSet">Delete</span>
 				</template>
 				<template v-else>
-					<Avatar :id="set.userId" :name="set.userBio.fullName" :size="24" :src="set.userBio.photo" />
+					<Avatar :id="set.user.id" :name="set.user.bio.fullName" :size="24" :src="set.user.bio.photo" />
 					<Share :link="set.shareLink" :title="set.name" cssClass="text-xl" text="Share this folder" />
-					<SaveToSet v-if="0 && set.userId !== id" :entity="set" />
+					<SaveToSet v-if="0 && set.user.id !== id" :entity="set" />
 				</template>
 			</div>
 		</div>

@@ -8,8 +8,8 @@
 						{{ note.title }}
 					</ion-text>
 					<div class="items-center text-gray font-normal flex gap-3">
-						<Avatar :id="note.userId" :name="note.userBio.fullName" :size="24"
-							:src="note.userBio.photo" />
+						<Avatar :id="note.user.id" :name="note.user.bio.fullName" :size="24"
+							:src="note.user.bio.photo" />
 						<Share :link="note.shareLink" :title="note.title" cssClass="text-xl"
 							text="Share this note" />
 						<SaveToSet :entity="note" />

@@ -21,24 +21,24 @@
 							@click="acceptRequest(user.id, false)" />
 					</template>
 					<template v-else-if="classInst.members.includes(user.id)">
-						<IonIcon v-if="classInst.userId !== user.id && user.id !== id"
+						<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
 							:icon="classInst.admins.includes(user.id) ? person : personOutline"
 							class="cursor-pointer text-primary text-2xl"
 							@click="changeRole(user.id, ClassUsers.admins, !classInst.admins.includes(user.id))" />
-						<IonIcon v-if="classInst.userId !== user.id && user.id !== id"
+						<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
 							:icon="personRemoveOutline"
 							class="cursor-pointer text-red text-2xl"
 							@click="addToClass(user.id, false)" />
 					</template>
 					<template v-else>
-						<IonIcon v-if="classInst.userId !== user.id && user.id !== id"
+						<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
 							:icon="personAddOutline"
 							class="cursor-pointer text-primary text-2xl"
 							@click="addToClass(user.id, true)" />
 					</template>
 				</template>
 				<template v-if="classInst.members.includes(user.id)">
-					<IonIcon v-if="user.id === id && classInst.userId !== id"
+					<IonIcon v-if="user.id === id && classInst.user.id !== id"
 						:icon="exitOutline" class="cursor-pointer text-red text-2xl"
 						@click="leaveClass()" />
 				</template>

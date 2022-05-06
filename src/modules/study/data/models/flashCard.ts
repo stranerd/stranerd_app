@@ -1,10 +1,8 @@
-import { UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 
 export interface FlashCardFromModel extends FlashCardToModel {
 	id: string,
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	createdAt: number
 	updatedAt: number
 }

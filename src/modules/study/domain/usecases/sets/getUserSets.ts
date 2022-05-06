@@ -1,6 +1,5 @@
 import { QueryParams } from '@modules/core'
 import { ISetRepository } from '../../irepositories/iset'
-import { SetType } from '../../entities/set'
 
 export class GetUserSetsUseCase {
 	private repository: ISetRepository
@@ -11,7 +10,7 @@ export class GetUserSetsUseCase {
 
 	async call (userId: string) {
 		const conditions: QueryParams = {
-			where: [{ field: 'userId', value: userId }, { field: 'data.type', value: SetType.users }],
+			where: [{ field: 'user.id', value: userId }],
 			sort: [{ field: 'createdAt' }],
 			all: true
 		}

@@ -4,18 +4,16 @@ import { NoteEntity } from '../../domain/entities/note'
 export class NoteTransformer {
 	fromJSON (model: NoteFromModel) {
 		const {
-			id, userId, isHosted, media, description,
-			link, userBio, userRoles, title, createdAt, updatedAt
+			id, user, isHosted, media, description,
+			link, title, createdAt, updatedAt
 		} = model
 		return new NoteEntity({
 			id,
-			userId,
+			user,
 			description,
 			isHosted,
 			media,
 			link,
-			userBio,
-			userRoles,
 			title,
 			createdAt,
 			updatedAt
