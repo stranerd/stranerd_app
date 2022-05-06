@@ -1,12 +1,10 @@
-import { UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 import { Media } from '@modules/core'
 import { QuestionData } from '../../domain/entities/question'
 
 export interface QuestionFromModel extends QuestionToModel {
 	id: string
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
 	isAnswered: boolean

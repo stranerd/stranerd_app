@@ -137,7 +137,7 @@ export const useAnswer = (answer: AnswerEntity) => {
 	}
 
 	const markBestAnswer = async (question: QuestionEntity) => {
-		if (question.isAnswered || question.userId !== id.value || answer.best) return
+		if (question.isAnswered || question.user.id !== id.value || answer.best) return
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to mark this answer as the best',

@@ -1,4 +1,4 @@
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractTextFromHTML, trimToLength } from '@utils/commons'
 
@@ -9,16 +9,14 @@ export class AnswerEntity extends BaseEntity {
 	public readonly best: boolean
 	public readonly questionId: string
 	public readonly attachments: Media[]
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
+	public readonly user: EmbeddedUser
 	public readonly votes: { userId: string, vote: 1 | -1 }[]
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
 		             id, title, body, questionId,
-		             createdAt, userId, userBio, userRoles, attachments,
+		             createdAt, user, attachments,
 		             best, votes, updatedAt
 	             }: AnswerConstructorArgs) {
 		super()
@@ -26,10 +24,8 @@ export class AnswerEntity extends BaseEntity {
 		this.title = title
 		this.body = body
 		this.questionId = questionId
-		this.userId = userId
+		this.user = generateEmbeddedUser(user)
 		this.attachments = attachments.map(parseMedia) ?? []
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
 		this.best = best ?? false
 		this.votes = votes
 		this.createdAt = createdAt
@@ -73,7 +69,7 @@ export class AnswerEntity extends BaseEntity {
 	}
 
 	get isUserVerified () {
-		return this.userRoles.isVerified
+		return this.user.roles.isVerified
 	}
 }
 
@@ -85,9 +81,7 @@ type AnswerConstructorArgs = {
 	attachments: Media[]
 	createdAt: number
 	updatedAt: number
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	best: boolean
 	votes: { userId: string, vote: 1 | -1 }[]
 }

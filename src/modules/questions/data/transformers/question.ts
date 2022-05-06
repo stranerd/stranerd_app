@@ -5,12 +5,12 @@ export class QuestionTransformer {
 	fromJSON (model: QuestionFromModel) {
 		const {
 			id, body, subject, isAnswered, data,
-			bestAnswers, createdAt, userId, userBio, userRoles, attachments,
+			bestAnswers, createdAt, user, attachments,
 			answers, updatedAt
 		} = model
 		return new QuestionEntity({
 			id, body, subject, isAnswered, data,
-			bestAnswers, createdAt, userId, userBio, userRoles, attachments,
+			bestAnswers, createdAt, user, attachments,
 			answers, updatedAt
 		})
 	}

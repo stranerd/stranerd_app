@@ -16,7 +16,7 @@ export default defineComponent({
 		const { questionId = '' } = to.params
 		const question = getEditingQuestion()
 		if (!question || question.id !== questionId) return `/questions/${questionId}`
-		const canEdit = question.userId === id.value && question.canBeEdited
+		const canEdit = question.user.id === id.value && question.canBeEdited
 		if (!canEdit) return `/questions/${question.id}`
 		useQuestionModal().openEditQuestion()
 		const backPath = from?.fullPath ?? '/dashboard'

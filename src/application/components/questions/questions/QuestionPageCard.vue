@@ -16,9 +16,9 @@
 
 			<div class="flex items-center justify-between">
 				<div class="flex items-center gap-2">
-					<avatar :id="question.userId" :size="24" :src="question.userBio.photo" />
+					<avatar :id="question.user.id" :size="24" :src="question.user.bio.photo" />
 					<span class="font-semibold text-main_dark flex gap-1 items-center">
-						<span>{{ question.userBio.fullName }}</span>
+						<span>{{ question.user.bio.fullName }}</span>
 						<Verified :verified="question.isUserVerified" />
 					</span>
 				</div>
@@ -80,17 +80,17 @@ export default defineComponent({
 		const router = useRouter()
 
 		const showAnswerButton = computed({
-			get: () => props.question.userId !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
+			get: () => props.question.user.id !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
 			set: () => {
 			}
 		})
 		const showEditButton = computed({
-			get: () => props.question.userId === id.value && props.question.canBeEdited,
+			get: () => props.question.user.id === id.value && props.question.canBeEdited,
 			set: () => {
 			}
 		})
 		const showDeleteButton = computed({
-			get: () => props.question.userId === id.value && props.question.canBeDeleted,
+			get: () => props.question.user.id === id.value && props.question.canBeDeleted,
 			set: () => {
 			}
 		})

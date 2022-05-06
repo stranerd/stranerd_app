@@ -1,10 +1,10 @@
 <template>
 	<div class="flex mt-2 items-center">
-		<Avatar :id="comment.userId" :name="comment.userBio.fullName" :size="24" :src="comment.userBio.photo"
+		<Avatar :id="comment.user.id" :name="comment.user.bio.fullName" :size="24" :src="comment.user.bio.photo"
 			class="mr-2 " />
 		<ion-text class="text-dark_gray">
 			<b class="flex gap-1 items-center">
-				<span>{{ comment.userBio.firstName }}</span>
+				<span>{{ comment.user.bio.firstName }}</span>
 				<Verified :verified="comment.isUserVerified" />
 			</b>
 			<b class="mx-1"> - </b>

@@ -5,10 +5,11 @@
 		<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 		<div class="flex flex-row items-center">
 			<div class="flex items-center text-sub">
-				<avatar :id="question.userId" :name="question.userBio.fullName" :size="28" :src="question.userBio.photo"
+				<avatar :id="question.user.id" :name="question.user.bio.fullName" :size="28"
+					:src="question.user.bio.photo"
 					class="mr-2 " />
 				<span class="text-main_dark hidden md:flex items-center gap-1">
-					<span>{{ question.userBio.fullName }}</span>
+					<span>{{ question.user.bio.fullName }}</span>
 					<Verified :verified="question.isUserVerified" />
 				</span>
 				<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 ml-2 hidden md:block" />
@@ -61,7 +62,7 @@ export default defineComponent({
 	setup (props) {
 		const { id } = useAuth()
 		const showAnswerButton = computed({
-			get: () => props.question.userId !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
+			get: () => props.question.user.id !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
 			set: () => {
 			}
 		})

@@ -1,10 +1,10 @@
 <template>
 	<div class="bg-white rounded-xl flex flex-col card-padding">
 		<div class="flex items-center">
-			<Avatar :id="answer.userId" :name="answer.userBio.fullName" :size="24" :src="answer.userBio.photo"
+			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="24" :src="answer.user.bio.photo"
 				class="mr-2" />
 			<span class="font-semibold text-main_dark flex items-center gap-1">
-				<span>{{ answer.userBio.fullName }}</span>
+				<span>{{ answer.user.bio.fullName }}</span>
 				<Verified :verified="answer.isUserVerified" />
 			</span>
 		</div>
@@ -42,7 +42,7 @@
 				<span class="ml-1">{{ formatNumber(comments.length) }}</span>
 			</div>
 			<span
-				v-if="isLoggedIn && question && !question.isAnswered && !answer.best && question.userId === id"
+				v-if="isLoggedIn && question && !question.isAnswered && !answer.best && question.user.id === id"
 				class="items-center flex cursor-pointer" @click.prevent="markBestAnswer(question)">
 				<span class="mr-1">Mark as best</span>
 				<IonIcon :icon="starOutline" class="text-[20px]" />
@@ -103,12 +103,12 @@ export default defineComponent({
 		const showExplanation = ref(false)
 		const { id, isLoggedIn, user } = useAuth()
 		const showEditButton = computed({
-			get: () => props.answer.userId === id.value && props.answer.canBeEdited,
+			get: () => props.answer.user.id === id.value && props.answer.canBeEdited,
 			set: () => {
 			}
 		})
 		const showDeleteButton = computed({
-			get: () => props.answer.userId === id.value && props.answer.canBeDeleted,
+			get: () => props.answer.user.id === id.value && props.answer.canBeDeleted,
 			set: () => {
 			}
 		})

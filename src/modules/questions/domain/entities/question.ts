@@ -1,4 +1,4 @@
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractTextFromHTML, trimToLength } from '@utils/commons'
 
@@ -9,9 +9,7 @@ type QuestionConstructorArgs = {
 	data: QuestionData
 	attachments: Media[]
 	subject: string
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
 	createdAt: number
@@ -40,9 +38,7 @@ export class QuestionEntity extends BaseEntity {
 	public readonly data: QuestionData
 	public readonly attachments: Media[]
 	public readonly subject: string
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
+	public readonly user: EmbeddedUser
 	public readonly bestAnswers: string[]
 	public readonly answers: { id: string, userId: string }[]
 	public readonly isAnswered: boolean
@@ -51,7 +47,7 @@ export class QuestionEntity extends BaseEntity {
 
 	constructor ({
 		             id, body, subject, isAnswered, data,
-		             bestAnswers, createdAt, userId, userBio, userRoles, attachments,
+		             bestAnswers, createdAt, user, attachments,
 		             answers, updatedAt
 	             }: QuestionConstructorArgs) {
 		super()
@@ -61,9 +57,7 @@ export class QuestionEntity extends BaseEntity {
 		this.data = data
 		this.attachments = attachments.map(parseMedia) ?? []
 		this.subject = subject
-		this.userId = userId
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
+		this.user = generateEmbeddedUser(user)
 		this.bestAnswers = bestAnswers
 		this.answers = answers
 		this.createdAt = createdAt
@@ -91,7 +85,7 @@ export class QuestionEntity extends BaseEntity {
 	}
 
 	get isUserVerified () {
-		return this.userRoles.isVerified
+		return this.user.roles.isVerified
 	}
 }
 

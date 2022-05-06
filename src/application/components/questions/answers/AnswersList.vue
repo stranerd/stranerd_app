@@ -6,7 +6,7 @@
 		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question" />
 		<template v-if="answers.length === 0">
 			<EmptyState v-if="showAnswerButton"
-				:info="`No answers yet. <br/>Help ${question.userName} answer this question!`"
+				:info="`No answers yet. <br/>Help ${question.user.bio.fullName} answer this question!`"
 				class="mt-4 text-sub"
 			/>
 
@@ -40,7 +40,7 @@ export default defineComponent({
 		const { answers, error, loading } = useAnswerList(props.question.id)
 
 		const showAnswerButton = computed({
-			get: () => props.question.userId !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
+			get: () => props.question.user.id !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
 			set: () => {
 			}
 		})
