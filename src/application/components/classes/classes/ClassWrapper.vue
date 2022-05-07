@@ -32,7 +32,7 @@
 						</IonText>
 					</div>
 					<div v-if="classInst.members.includes(id)" class="lg:rounded-b-xl nav-scroll">
-						<router-link v-if="false" :to="`/classes/${classInst.id}/info`">
+						<router-link :to="`/classes/${classInst.id}/`">
 							<IonIcon :icon="informationCircleOutline" class="text-xl" />
 							<IonText class="hidden md:inline">Info</IonText>
 						</router-link>
