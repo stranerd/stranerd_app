@@ -1,6 +1,6 @@
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity } from '@modules/core'
-import { ClassUsers } from './class'
+import { ClassUsers } from '../types'
 
 type AnnouncementConstructorArgs = {
 	id: string

@@ -1,7 +1,7 @@
 import { BaseEntity } from '@modules/core'
-import { ClassUsers } from './class'
 import { DiscussionEntity } from './discussion'
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
+import { ClassUsers } from '@modules/classes/domain/types'
 
 type GroupConstructorArgs = {
 	id: string

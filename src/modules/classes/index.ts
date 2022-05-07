@@ -15,13 +15,16 @@ import { ClassesUseCase } from './domain/usecases/classes'
 import { GroupsUseCase } from './domain/usecases/groups'
 import { DiscussionsUseCase } from './domain/usecases/discussions'
 import { AnnouncementEntity } from './domain/entities/announcement'
-import { ClassEntity, ClassUsers } from './domain/entities/class'
+import { ClassEntity } from './domain/entities/class'
 import { GroupEntity } from './domain/entities/group'
 import { DiscussionEntity } from './domain/entities/discussion'
+import { EventEntity } from './domain/entities/event'
 import { AnnouncementFactory } from './domain/factories/announcement'
 import { ClassFactory } from './domain/factories/class'
 import { GroupFactory } from './domain/factories/group'
 import { DiscussionFactory } from './domain/factories/discussion'
+import { EventFactory } from './domain/factories/event'
+import { ClassUsers } from './domain/types'
 
 const announcementDataSource = new AnnouncementApiDataSource()
 const classDataSource = new ClassApiDataSource()
@@ -47,3 +50,4 @@ export { AnnouncementEntity, AnnouncementFactory }
 export { ClassEntity, ClassFactory, ClassUsers }
 export { GroupEntity, GroupFactory }
 export { DiscussionEntity, DiscussionFactory }
+export { EventEntity, EventFactory }

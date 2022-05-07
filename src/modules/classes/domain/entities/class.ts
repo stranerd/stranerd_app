@@ -1,5 +1,6 @@
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
+import { ClassUsers } from '../types'
 
 type ClassConstructorArgs = {
 	id: string
@@ -13,12 +14,6 @@ type ClassConstructorArgs = {
 	courses: string[]
 	createdAt: number
 	updatedAt: number
-}
-
-export enum ClassUsers {
-	admins = 'admins',
-	tutors = 'tutors',
-	members = 'members'
 }
 
 export class ClassEntity extends BaseEntity {

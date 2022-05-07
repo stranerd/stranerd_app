@@ -1,5 +1,5 @@
 import { EmbeddedUser } from '@modules/users'
-import { ClassUsers } from '../../domain/entities/class'
+import { ClassUsers } from '../../domain/types'
 
 export interface AnnouncementFromModel extends AnnouncementToModel {
 	id: string
