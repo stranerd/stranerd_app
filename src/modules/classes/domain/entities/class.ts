@@ -10,6 +10,7 @@ type ClassConstructorArgs = {
 	user: EmbeddedUser
 	users: Record<ClassUsers, string[]>
 	requests: string[]
+	courses: string[]
 	createdAt: number
 	updatedAt: number
 }
@@ -29,12 +30,13 @@ export class ClassEntity extends BaseEntity {
 	public readonly user: EmbeddedUser
 	public readonly users: Record<ClassUsers, string[]>
 	public readonly requests: string[]
+	public readonly courses: string[]
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
 		             id, name, description, photo, coverPhoto,
-		             createdAt, user,
+		             createdAt, user, courses,
 		             users, updatedAt, requests
 	             }: ClassConstructorArgs) {
 		super()
@@ -46,6 +48,7 @@ export class ClassEntity extends BaseEntity {
 		this.user = generateEmbeddedUser(user)
 		this.users = users
 		this.requests = requests
+		this.courses = courses
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}

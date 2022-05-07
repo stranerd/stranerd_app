@@ -14,6 +14,7 @@ export interface ClassFromModel extends ClassToModel {
 export interface ClassToModel {
 	name: string
 	description: string
+	courses: string[]
 	photo: Media | null
 	coverPhoto: Media | null
 }

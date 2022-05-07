@@ -12,7 +12,7 @@
 			:src="source || DEFAULT_PROFILE_PHOTO"
 			:style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
 			alt=""
-			class="!max-w-[1920px] rounded-full"
+			class="!max-w-[1920px] rounded-full bg-white"
 		>
 		<FileInput v-if="editable" accept="image/*"
 			class="rounded-full absolute h-6 w-6 right-0 bottom-0 bg-gray text-white flex items-center justify-center"

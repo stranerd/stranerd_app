@@ -4,11 +4,11 @@ import { ClassEntity } from '../../domain/entities/class'
 export class ClassTransformer {
 	fromJSON (model: ClassFromModel) {
 		const {
-			id, name, description, photo, coverPhoto,
+			id, name, description, photo, coverPhoto, courses,
 			createdAt, user, users, requests, updatedAt
 		} = model
 		return new ClassEntity({
-			id, name, description, photo, coverPhoto,
+			id, name, description, photo, coverPhoto, courses,
 			createdAt, user, users, requests, updatedAt
 		})
 	}
@@ -17,6 +17,7 @@ export class ClassTransformer {
 		return {
 			name: entity.name,
 			description: entity.description,
+			courses: entity.courses,
 			photo: entity.photo,
 			coverPhoto: entity.coverPhoto
 		}

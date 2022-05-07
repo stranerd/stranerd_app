@@ -221,42 +221,35 @@ ion-input, ion-textarea, ion-select {
 	}
 }
 
-.btn-secondary {
-	--background: #{$color-darkGray} !important;
-	--color: #{$color-white};
-	--padding-top: 0.75rem;
-	--padding-bottom: 0.75rem;
-	--padding-start: 1.5rem;
-	--padding-end: 1.5rem;
-	--border-width: 1px;
-	--border-style: solid;
-	--border-color: #{$color-darkGray};
-
-	@media (max-width: 640px) {
-		--padding-top: 0.5rem;
-		--padding-bottom: 0.5rem;
-		--padding-start: 1rem;
-		--padding-end: 1rem;
+.btn-padding {
+	--padding-top: 0.5rem;
+	--padding-bottom: 0.5rem;
+	--padding-start: 1rem;
+	--padding-end: 1rem;
+	@media (min-width: $md) {
+		--padding-top: 0.75rem;
+		--padding-bottom: 0.75rem;
+		--padding-start: 1.5rem;
+		--padding-end: 1.5rem;
 	}
 }
 
+.btn-secondary {
+	@extend .btn-padding;
+	--background: #{$color-darkGray} !important;
+	--color: #{$color-white};
+	--border-width: 1px;
+	--border-style: solid;
+	--border-color: #{$color-darkGray};
+}
+
 .btn-outline {
+	@extend .btn-padding;
 	--background: transparent;
-	--padding-top: 0.75rem;
-	--padding-bottom: 0.75rem;
-	--padding-start: 1.5rem;
-	--padding-end: 1.5rem;
 	--color: inherit;
 	--border-width: 1px;
 	--border-style: solid;
 	--border-color: $color-primary;
-
-	@media (max-width: 640px) {
-		--padding-top: 0.5rem;
-		--padding-bottom: 0.5rem;
-		--padding-start: 1.25rem;
-		--padding-end: 1.25rem;
-	}
 }
 
 ion-button.btn-outline-sm {
@@ -290,11 +283,8 @@ ion-button {
 }
 
 .btn-primary {
+	@extend .btn-padding;
 	--background: #{$color-primary};
-	--padding-top: 0.75rem;
-	--padding-bottom: 0.75rem;
-	--padding-start: 1.5rem;
-	--padding-end: 1.5rem;
 	--color: #{$color-white};
 }
 
@@ -309,19 +299,9 @@ ion-button {
 }
 
 .btn-white {
+	@extend .btn-padding;
 	--background: white;
-	--padding-top: 0.75rem;
-	--padding-bottom: 0.75rem;
-	--padding-start: 1.5rem;
-	--padding-end: 1.5rem;
 	--color: #{$color-primary};
-
-	@media (max-width: 640px) {
-		--padding-top: 0.5rem;
-		--padding-bottom: 0.5rem;
-		--padding-start: 1.25rem;
-		--padding-end: 1.25rem;
-	}
 }
 
 .btn-lg {
