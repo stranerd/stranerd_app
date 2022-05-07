@@ -1,7 +1,7 @@
 import { computed, onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import { Router, useRouter } from 'vue-router'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
-import { FindSession, GetSessions, ListenToSession, ListenToSessions, SessionEntity } from '@modules/sessions'
+import { SessionEntity, SessionsUseCases } from '@modules/sessions'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { setOtherParticipantId } from '@app/composable/sessions/sessions'
@@ -27,7 +27,7 @@ export const useCurrentSession = () => {
 
 	const fetchSession = async (userId: string, id: string | null) => {
 		if (id && currentGlobal.currentSession.value?.id !== id) {
-			const session = await FindSession.call(id)
+			const session = await SessionsUseCases.find(id)
 			currentGlobal.currentSession.value = session
 			if (session) {
 				const id = userId === session.tutor.id ? session.student.id : session.tutor.id
@@ -45,7 +45,7 @@ export const useCurrentSession = () => {
 			}
 			await currentGlobal.listener.reset(
 				async () => id
-					? ListenToSession.call(id, {
+					? SessionsUseCases.listenToOne(id, {
 						created: listenerCallback,
 						updated: listenerCallback,
 						deleted: async () => {
@@ -99,7 +99,7 @@ const useSession = (key: SessionKey, router: Router, callback: (key: SessionKey,
 				return () => {
 				}
 			}
-			return ListenToSessions.call(sessionIds, {
+			return SessionsUseCases.listenInList(sessionIds, {
 				created: async (entity) => {
 					addToArray(global[key].sessions.value, entity, (e) => e.id, (e) => e.createdAt)
 					callback(key, global[key].sessions.value, id.value!, router)
@@ -122,7 +122,7 @@ const useSession = (key: SessionKey, router: Router, callback: (key: SessionKey,
 		if (sessionIds.length === 0) return global[key].sessions.value = []
 		try {
 			await global[key].setLoading(true)
-			const sessions = await GetSessions.call(sessionIds)
+			const sessions = await SessionsUseCases.getInList(sessionIds)
 			callback(key, sessions.results, id.value!, router)
 			global[key].sessions.value = sessions.results
 			global[key].fetched.value = true
@@ -140,8 +140,8 @@ const useSession = (key: SessionKey, router: Router, callback: (key: SessionKey,
 		await global[key].listener.close()
 	})
 
-	watch(() => user.value?.session[key], () => {
-		if (user.value) global[key].listener.restart()
+	watch(() => user.value?.session[key], async () => {
+		if (user.value) await global[key].listener.restart()
 	})
 
 	return { ...global[key] }

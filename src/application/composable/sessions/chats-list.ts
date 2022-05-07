@@ -1,6 +1,6 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { ChatMetaEntity, GetPersonalChatsMeta, ListenToPersonalChatsMeta } from '@modules/sessions'
+import { ChatMetaEntity, ChatMetasUseCases } from '@modules/sessions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { AudioSounds, useAudioPlayer } from '@app/composable/core/audios'
 import { addToArray } from '@utils/commons'
@@ -20,7 +20,7 @@ export const useChatsList = () => {
 		const listener = useListener(async () => {
 			if (!id.value) return () => {
 			}
-			return ListenToPersonalChatsMeta.call({
+			return ChatMetasUseCases.listen({
 				created: async (entity) => {
 					const index = global[userId].meta.value.findIndex((m) => m.id === entity.id)
 					if (index === -1) {
@@ -63,7 +63,7 @@ export const useChatsList = () => {
 		await global[userId].setError('')
 		try {
 			await global[userId].setLoading(true)
-			const metas = await GetPersonalChatsMeta.call()
+			const metas = await ChatMetasUseCases.get()
 			metas.results.forEach((r) => addToArray(global[userId].meta.value, r, (e) => e.id, (e) => e.last.createdAt))
 			global[userId].fetched.value = true
 		} catch (e) {

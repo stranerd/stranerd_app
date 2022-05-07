@@ -1,5 +1,5 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
-import { AddChat, ChatEntity, ChatFactory, GetChats, ListenToChats, MarkChatRead } from '@modules/sessions'
+import { ChatEntity, ChatFactory, ChatsUseCases } from '@modules/sessions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { addToArray, groupBy } from '@utils/commons'
@@ -25,7 +25,7 @@ export const useChats = (userId: string) => {
 	if (global[userId] === undefined) {
 		const listener = useListener(async () => {
 			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
-			return ListenToChats.call(path, {
+			return ChatsUseCases.listen(path, {
 				created: async (entity) => {
 					addToArray(global[userId].chats.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
@@ -53,7 +53,7 @@ export const useChats = (userId: string) => {
 		try {
 			await global[userId].setLoading(true)
 			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
-			const c = await GetChats.call(path, lastDate)
+			const c = await ChatsUseCases.get(path, lastDate)
 			global[userId].hasMore.value = !!c.pages.next
 			c.results.map((c) => addToArray(global[userId].chats.value, c, (e) => e.id, (e) => e.createdAt))
 			global[userId].fetched.value = true
@@ -102,7 +102,7 @@ export const useCreateChat = (userId: string, sessionId?: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddChat.call(factory.value)
+				await ChatsUseCases.add(factory.value)
 				factory.value.reset()
 			} catch (e) {
 				await setError(e)
@@ -120,7 +120,7 @@ export const useCreateChat = (userId: string, sessionId?: string) => {
 				mediaFactory.to = userId
 				mediaFactory.media = file
 				try {
-					await AddChat.call(mediaFactory)
+					await ChatsUseCases.add(mediaFactory)
 				} catch (error) {
 					await setError(error)
 				}
@@ -138,7 +138,7 @@ export const useChat = (chat: ChatEntity, userId: string) => {
 	const path = [id.value, userId] as [string, string]
 
 	const markChatRead = async () => {
-		await MarkChatRead.call(path, chat.id)
+		await ChatsUseCases.markRead(path, chat.id)
 	}
 
 	return { markChatRead }

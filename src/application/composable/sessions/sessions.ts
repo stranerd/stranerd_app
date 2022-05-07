@@ -1,6 +1,6 @@
 import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { AddSession, BeginSession, CancelSession, EndSession, SessionFactory } from '@modules/sessions'
+import { SessionFactory, SessionsUseCases } from '@modules/sessions'
 import { CreateReview, UserBio } from '@modules/users'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useSessionModal } from '@app/composable/core/modals'
@@ -24,7 +24,7 @@ export const useCreateSession = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const session = await AddSession.call(factory.value)
+				const session = await SessionsUseCases.add(factory.value)
 				useSessionModal().closeCreateSession()
 				await router.push(`/chat/${session.tutor.id}`)
 				factory.value.reset()
@@ -56,7 +56,7 @@ export const useSession = (sessionId: string) => {
 		if (accepted) {
 			try {
 				await setLoading(true)
-				if (sessionId) await CancelSession.call(sessionId)
+				if (sessionId) await SessionsUseCases.cancel(sessionId)
 			} catch (error) {
 				await setError(error)
 			}
@@ -74,7 +74,7 @@ export const useSession = (sessionId: string) => {
 		if (accepted) {
 			try {
 				await setLoading(true)
-				if (sessionId) await EndSession.call(sessionId)
+				if (sessionId) await SessionsUseCases.end(sessionId)
 			} catch (error) {
 				await setError(error)
 			}
@@ -92,7 +92,7 @@ export const useSession = (sessionId: string) => {
 		if (accepted) {
 			try {
 				await setLoading(true)
-				if (sessionId) await BeginSession.call(sessionId, true)
+				if (sessionId) await SessionsUseCases.accept(sessionId, true)
 			} catch (error) {
 				await setError(error)
 			}
@@ -110,7 +110,7 @@ export const useSession = (sessionId: string) => {
 		if (accepted) {
 			try {
 				await setLoading(true)
-				if (sessionId) await BeginSession.call(sessionId, false)
+				if (sessionId) await SessionsUseCases.accept(sessionId, false)
 			} catch (error) {
 				await setError(error)
 			}
