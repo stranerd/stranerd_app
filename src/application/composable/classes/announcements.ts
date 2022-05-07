@@ -1,14 +1,5 @@
 import { computed, onMounted, onUnmounted, ref, Ref, watch } from 'vue'
-import {
-	AddAnnouncement,
-	AnnouncementEntity,
-	AnnouncementFactory,
-	ClassEntity,
-	DeleteAnnouncement,
-	GetAnnouncements,
-	ListenToAnnouncements,
-	UpdateAnnouncement
-} from '@modules/classes'
+import { AnnouncementEntity, AnnouncementFactory, AnnouncementsUseCases, ClassEntity } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
@@ -29,7 +20,7 @@ const getReadStateKey = (classId: string) => `classes-${classId}-announcements`
 export const useAnnouncementList = (classId: string) => {
 	if (global[classId] === undefined) {
 		const listener = useListener(async () => {
-			return await ListenToAnnouncements.call(classId, {
+			return await AnnouncementsUseCases.listenToClassAnnouncements(classId, {
 				created: async (entity) => {
 					addToArray(global[classId].announcements.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
@@ -59,7 +50,7 @@ export const useAnnouncementList = (classId: string) => {
 		await global[classId].setError('')
 		try {
 			await global[classId].setLoading(true)
-			const announcements = await GetAnnouncements.call(classId)
+			const announcements = await AnnouncementsUseCases.getClassAnnouncements(classId)
 			announcements.results.forEach((a) => addToArray(global[classId].announcements.value, a, (e) => e.id, (e) => e.createdAt))
 			global[classId].hasMore.value = !!announcements.pages.next
 			global[classId].fetched.value = true
@@ -112,7 +103,7 @@ export const useCreateAnnouncement = (announcementClass: ClassEntity) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const announcement = await AddAnnouncement.call(factory.value)
+				const announcement = await AnnouncementsUseCases.add(factory.value)
 				await setMessage('Announcement posted successfully.')
 				factory.value.reset()
 				useClassModal().closeCreateAnnouncement()
@@ -150,7 +141,7 @@ export const useEditAnnouncement = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const announcement = await UpdateAnnouncement.call(editingAnnouncement!.id, factory.value)
+				const announcement = await AnnouncementsUseCases.update(editingAnnouncement!.id, factory.value)
 				await setMessage('Announcement updated successfully')
 				factory.value.reset()
 				useClassModal().closeEditAnnouncement()
@@ -179,7 +170,7 @@ export const useDeleteAnnouncement = (classId: string, announcementId: string) =
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteAnnouncement.call(classId, announcementId)
+				await AnnouncementsUseCases.delete(classId, announcementId)
 				await setMessage('Announcement deleted successfully')
 			} catch (error) {
 				await setError(error)

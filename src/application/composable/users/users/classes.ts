@@ -1,5 +1,5 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
-import { ClassEntity, GetMyClasses, ListenToMyClasses } from '@modules/classes'
+import { ClassEntity, ClassesUseCases } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
@@ -23,7 +23,7 @@ export const useUserClassList = (id = useAuth().id.value) => {
 		await global[id].setError('')
 		try {
 			await global[id].setLoading(true)
-			const classes = await GetMyClasses.call(id)
+			const classes = await ClassesUseCases.getMyClasses(id)
 			classes.results.forEach((c) => addToArray(global[id].classes.value, c, (e) => e.id, (e) => e.name, true))
 			global[id].fetched.value = true
 		} catch (error) {
@@ -33,7 +33,7 @@ export const useUserClassList = (id = useAuth().id.value) => {
 	}
 
 	const listener = useListener(async () => {
-		return await ListenToMyClasses.call(id, {
+		return await ClassesUseCases.listenToMyClasses(id, {
 			created: async (entity) => {
 				addToArray(global[id].classes.value, entity, (e) => e.id, (e) => e.name, true)
 			},

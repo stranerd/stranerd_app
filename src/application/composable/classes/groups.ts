@@ -1,14 +1,5 @@
 import { computed, onMounted, onUnmounted, ref, Ref, watch } from 'vue'
-import {
-	AddGroup,
-	ClassEntity,
-	DeleteGroup,
-	GetGroups,
-	GroupEntity,
-	GroupFactory,
-	ListenToGroups,
-	UpdateGroup
-} from '@modules/classes'
+import { ClassEntity, GroupEntity, GroupFactory, GroupsUseCases } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
@@ -32,7 +23,7 @@ export const saveClassGroupsReadTime = (classId: string, time: number) => {
 export const useGroupList = (classId: string) => {
 	if (global[classId] === undefined) {
 		const listener = useListener(async () => {
-			return await ListenToGroups.call(classId, {
+			return await GroupsUseCases.listenToClassGroups(classId, {
 				created: async (entity) => {
 					addToArray(global[classId].groups.value, entity, (e) => e.id, (e) => e.last?.createdAt ?? 0)
 				},
@@ -61,7 +52,7 @@ export const useGroupList = (classId: string) => {
 		await global[classId].setError('')
 		try {
 			await global[classId].setLoading(true)
-			const groups = await GetGroups.call(classId)
+			const groups = await GroupsUseCases.getClassGroups(classId)
 			groups.results.forEach((g) => addToArray(global[classId].groups.value, g, (e) => e.id, (e) => e.last?.createdAt ?? 0))
 			global[classId].fetched.value = true
 		} catch (error) {
@@ -110,7 +101,7 @@ export const useCreateGroup = (groupClass: ClassEntity) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const group = await AddGroup.call(factory.value)
+				const group = await GroupsUseCases.add(factory.value)
 				await setMessage('Group created successfully.')
 				factory.value.reset()
 				useClassModal().closeCreateGroup()
@@ -148,7 +139,7 @@ export const useEditGroup = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const group = await UpdateGroup.call(editingGroup!.id, factory.value)
+				const group = await GroupsUseCases.update(editingGroup!.id, factory.value)
 				await setMessage('Group updated successfully')
 				factory.value.reset()
 				useClassModal().closeEditGroup()
@@ -177,7 +168,7 @@ export const useDeleteGroup = (classId: string, groupId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteGroup.call(classId, groupId)
+				await GroupsUseCases.delete(classId, groupId)
 				await setMessage('Group deleted successfully')
 			} catch (error) {
 				await setError(error)

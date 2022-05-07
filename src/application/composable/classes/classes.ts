@@ -1,21 +1,6 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import { Router, useRouter } from 'vue-router'
-import {
-	AcceptClassRequest,
-	AddClass,
-	AddClassMembers,
-	ChangeClassMemberRole,
-	ClassEntity,
-	ClassFactory,
-	ClassUsers,
-	DeleteClass,
-	FindClass,
-	LeaveClass,
-	ListenToClass,
-	RequestToJoinClass,
-	SearchClasses,
-	UpdateClass
-} from '@modules/classes'
+import { ClassEntity, ClassesUseCases, ClassFactory, ClassUsers } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useClassModal } from '@app/composable/core/modals'
@@ -44,7 +29,7 @@ export const useClassList = () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			global.classes.value = await SearchClasses.call(global.searchTerm.value)
+			global.classes.value = await ClassesUseCases.search(global.searchTerm.value)
 			global.fetched.value = true
 		} catch (error) {
 			await global.setError(error)
@@ -118,7 +103,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 		await classGlobal[classInst.id].setError('')
 		await classGlobal[classInst.id].setLoading(true)
 		try {
-			await RequestToJoinClass.call(classInst.id, join)
+			await ClassesUseCases.requestClass(classInst.id, join)
 			await classGlobal[classInst.id].setMessage(join ? 'Request sent successfully!' : 'Request cancelled successfully!')
 		} catch (e) {
 			await classGlobal[classInst.id].setError(e)
@@ -135,7 +120,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 		if (!classInst.requests.includes(userId)) return await classGlobal[classInst.id].setError('The user didn\'t request to join the class')
 		await classGlobal[classInst.id].setError('')
 		await classGlobal[classInst.id].setLoading(true)
-		await AcceptClassRequest.call(classInst.id, userId, accept)
+		await ClassesUseCases.acceptRequest(classInst.id, userId, accept)
 			.catch(classGlobal[classInst.id].setError)
 		await classGlobal[classInst.id].setLoading(false)
 	}
@@ -149,7 +134,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 		if (!classInst.members.includes(id.value)) return await classGlobal[classInst.id].setError('You are not a member of the class')
 		await classGlobal[classInst.id].setError('')
 		await classGlobal[classInst.id].setLoading(true)
-		await LeaveClass.call(classInst.id)
+		await ClassesUseCases.leaveClass(classInst.id)
 			.catch(classGlobal[classInst.id].setError)
 		await classGlobal[classInst.id].setLoading(false)
 	}
@@ -162,7 +147,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 		if (!accepted) return
 		await classGlobal[classInst.id].setError('')
 		await classGlobal[classInst.id].setLoading(true)
-		await AddClassMembers.call(classInst.id, [userId], add)
+		await ClassesUseCases.addMembers(classInst.id, [userId], add)
 			.catch(classGlobal[classInst.id].setError)
 		await classGlobal[classInst.id].setLoading(false)
 	}
@@ -175,7 +160,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 		if (!accepted) return
 		await classGlobal[classInst.id].setError('')
 		await classGlobal[classInst.id].setLoading(true)
-		await ChangeClassMemberRole.call(classInst.id, userId, role, add)
+		await ClassesUseCases.changeMemberRole(classInst.id, userId, role, add)
 			.catch(classGlobal[classInst.id].setError)
 		await classGlobal[classInst.id].setLoading(false)
 	}
@@ -217,7 +202,7 @@ export const useCreateClass = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const classInst = await AddClass.call(factory.value)
+				const classInst = await ClassesUseCases.add(factory.value)
 				await setMessage('Class submitted successfully')
 				factory.value.reset()
 				useClassModal().closeCreateClass()
@@ -254,7 +239,7 @@ export const useClass = (classId: string) => {
 				await setLoading(false)
 				return
 			}
-			classInst = await FindClass.call(classId)
+			classInst = await ClassesUseCases.find(classId)
 			if (classInst) addToArray(global.classes.value, classInst, (e) => e.id, (e) => e.name, true)
 		} catch (error) {
 			await setError(error)
@@ -262,7 +247,7 @@ export const useClass = (classId: string) => {
 		await setLoading(false)
 	}
 	const listener = useListener(async () => {
-		return await ListenToClass.call(classId, {
+		return await ClassesUseCases.listenToOne(classId, {
 			created: async (entity) => {
 				addToArray(global.classes.value, entity, (e) => e.id, (e) => e.name, true)
 			},
@@ -291,7 +276,7 @@ export const useClass = (classId: string) => {
 		await setError('')
 		await setLoading(true)
 		try {
-			await RequestToJoinClass.call(classId, join)
+			await ClassesUseCases.requestClass(classId, join)
 			await setMessage(join ? 'Request sent successfully!' : 'Request cancelled successfully!')
 		} catch (e) {
 			await setError(e)
@@ -329,7 +314,7 @@ export const useEditClass = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await UpdateClass.call(editingClass!.id, factory.value)
+				await ClassesUseCases.update(editingClass!.id, factory.value)
 				await setMessage('Class updated successfully')
 				useClassModal().closeEditClass()
 				factory.value.reset()
@@ -359,7 +344,7 @@ export const useDeleteClass = (classId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteClass.call(classId)
+				await ClassesUseCases.delete(classId)
 				global.classes.value = global.classes.value
 					.filter((q) => q.id !== classId)
 				await setMessage('Class deleted successfully')

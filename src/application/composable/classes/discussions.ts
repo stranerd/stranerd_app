@@ -1,13 +1,5 @@
 import { computed, onMounted, onUnmounted, ref, Ref, watch } from 'vue'
-import {
-	AddDiscussion,
-	DiscussionEntity,
-	DiscussionFactory,
-	GetClassDiscussions,
-	GetGroupDiscussions,
-	ListenToClassDiscussions,
-	ListenToGroupDiscussions
-} from '@modules/classes'
+import { DiscussionEntity, DiscussionFactory, DiscussionsUseCases } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray, groupBy } from '@utils/commons'
 import { storage } from '@utils/storage'
@@ -40,7 +32,7 @@ export const useGroupDiscussions = (classId: string, groupId: string) => {
 	if (groupGlobal[groupId] === undefined) {
 		const listener = useListener(async () => {
 			const lastDate = groupGlobal[groupId].discussions.value[0]?.createdAt
-			return ListenToGroupDiscussions.call(classId, groupId, {
+			return DiscussionsUseCases.listenToGroupDiscussions(classId, groupId, {
 				created: async (entity) => {
 					addToArray(groupGlobal[groupId].discussions.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
@@ -69,7 +61,7 @@ export const useGroupDiscussions = (classId: string, groupId: string) => {
 		try {
 			await groupGlobal[groupId].setLoading(true)
 			const lastDate = groupGlobal[groupId].discussions.value.slice(-1)[0]?.createdAt
-			const discussions = await GetGroupDiscussions.call(classId, groupId, lastDate)
+			const discussions = await DiscussionsUseCases.getGroupDiscussions(classId, groupId, lastDate)
 			groupGlobal[groupId].hasMore.value = !!discussions.pages.next
 			discussions.results.map((d) => addToArray(groupGlobal[groupId].discussions.value, d, (e) => e.id, (e) => e.createdAt))
 			groupGlobal[groupId].fetched.value = true
@@ -118,7 +110,7 @@ export const saveDiscussionsReadState = async (discussion: DiscussionEntity) => 
 export const useClassDiscussions = (classId: string) => {
 	if (classGlobal[classId] === undefined) {
 		const listener = useListener(async () => {
-			return ListenToClassDiscussions.call(classId, {
+			return DiscussionsUseCases.listenToClassLibrary(classId, {
 				created: async (entity) => {
 					addToArray(classGlobal[classId].discussions.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
@@ -144,7 +136,7 @@ export const useClassDiscussions = (classId: string) => {
 		await classGlobal[classId].setError('')
 		try {
 			await classGlobal[classId].setLoading(true)
-			const discussions = await GetClassDiscussions.call(classId)
+			const discussions = await DiscussionsUseCases.getClassLibrary(classId)
 			discussions.results.map((d) => addToArray(classGlobal[classId].discussions.value, d, (e) => e.id, (e) => e.createdAt))
 			classGlobal[classId].fetched.value = true
 		} catch (e) {
@@ -175,7 +167,7 @@ export const useCreateDiscussion = (classId: string, groupId: string) => {
 		if (factory.value.valid && !loadingCounter.value) {
 			loadingCounter.value++
 			try {
-				await AddDiscussion.call(classId, factory.value)
+				await DiscussionsUseCases.add(classId, factory.value)
 				factory.value.reset()
 			} catch (e) {
 				await setError(e)
@@ -190,7 +182,7 @@ export const useCreateDiscussion = (classId: string, groupId: string) => {
 			mediaFactory.groupId = groupId
 			loadingCounter.value++
 			try {
-				await AddDiscussion.call(classId, mediaFactory)
+				await DiscussionsUseCases.add(classId, mediaFactory)
 			} catch (error) {
 				await setError(error)
 			}
