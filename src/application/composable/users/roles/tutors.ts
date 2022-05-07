@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted, ref } from 'vue'
-import { GetAllTutors, ListenToAllTutors, UserEntity } from '@modules/users'
+import { UserEntity, UsersUseCases } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
@@ -13,7 +13,7 @@ const global = {
 	...useLoadingHandler()
 }
 const listener = useListener(async () => {
-	return await ListenToAllTutors.call({
+	return await UsersUseCases.listenToAllTutors({
 		created: async (entity) => {
 			addToArray(global.tutors.value, entity, (e) => e.id, (e) => e.score)
 		},
@@ -32,7 +32,7 @@ export const useTutorsList = () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const tutors = await GetAllTutors.call()
+			const tutors = await UsersUseCases.getAllTutors()
 			tutors.results.forEach((t) => addToArray(global.tutors.value, t, (e) => e.id, (e) => e.score))
 			global.fetched.value = true
 		} catch (error) {

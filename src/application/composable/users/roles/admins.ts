@@ -1,6 +1,6 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { GetAllAdmins, ListenToAllAdmins, UserEntity } from '@modules/users'
+import { UserEntity, UsersUseCases } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
@@ -14,7 +14,7 @@ const global = {
 	...useLoadingHandler()
 }
 const listener = useListener(async () => {
-	return await ListenToAllAdmins.call({
+	return await UsersUseCases.listenToAllAdmins({
 		created: async (entity) => {
 			addToArray(global.admins.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
 		},
@@ -34,7 +34,7 @@ export const useAdminsList = () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const admins = await GetAllAdmins.call()
+			const admins = await UsersUseCases.getAllAdmins()
 			admins.results.forEach((a) => addToArray(global.admins.value, a, (e) => e.id, (e) => e.bio.fullName, true))
 			global.fetched.value = true
 		} catch (error) {

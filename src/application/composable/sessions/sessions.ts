@@ -1,7 +1,7 @@
 import { Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { SessionFactory, SessionsUseCases } from '@modules/sessions'
-import { CreateReview, UserBio } from '@modules/users'
+import { ReviewsUseCases, UserBio } from '@modules/users'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useSessionModal } from '@app/composable/core/modals'
 import { Alert } from '@utils/dialog'
@@ -138,7 +138,7 @@ export const useRateSession = () => {
 			await setError('')
 			await setLoading(true)
 			try {
-				await CreateReview.call({
+				await ReviewsUseCases.add({
 					tutorId: otherParticipantId,
 					rating: rating.value,
 					review: review.value

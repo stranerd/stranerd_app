@@ -1,7 +1,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { AnswerEntity, QuestionEntity, QuestionsUseCases } from '@modules/questions'
-import { SearchUsers, UserEntity } from '@modules/users'
+import { UserEntity, UsersUseCases } from '@modules/users'
 import { useRoute, useRouter } from 'vue-router'
 import {
 	FlashCardEntity,
@@ -78,7 +78,7 @@ export const useSearch = () => {
 			try {
 				await global.setLoading(true)
 				const searchObj = {
-					questions: QuestionsUseCases.search, users: SearchUsers.call,
+					questions: QuestionsUseCases.search, users: UsersUseCases.search,
 					flashCards: SearchFlashCards.call, sets: SearchSets.call, testPreps: SearchTestPreps.call,
 					notes: SearchNotes.call, videos: SearchVideos.call
 				}

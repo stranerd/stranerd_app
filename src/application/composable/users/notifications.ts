@@ -1,6 +1,6 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
-import { GetNotifications, ListenToNotifications, MarkNotificationSeen, NotificationEntity } from '@modules/users'
+import { NotificationEntity, NotificationsUseCases } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { addToArray } from '@utils/commons'
 
@@ -19,7 +19,7 @@ export const useNotificationList = () => {
 			if (!userId) return () => {
 			}
 			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
-			return ListenToNotifications.call({
+			return NotificationsUseCases.listen({
 				created: async (entity) => {
 					addToArray(global[userId].notifications.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
@@ -48,7 +48,7 @@ export const useNotificationList = () => {
 		await global[userId].setLoading(true)
 		try {
 			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
-			const notifications = await GetNotifications.call(lastDate)
+			const notifications = await NotificationsUseCases.get(lastDate)
 			global[userId].hasMore.value = !!notifications.pages.next
 			notifications.results.forEach((t) => addToArray(global[userId].notifications.value, t, (e) => e.id, (e) => e.createdAt))
 		} catch (e) {
@@ -81,7 +81,7 @@ export const useNotification = (notification: NotificationEntity) => {
 		await setError('')
 		try {
 			await setLoading(true)
-			await MarkNotificationSeen.call(notification.id, true)
+			await NotificationsUseCases.markSeen(notification.id, true)
 		} catch (e) {
 			await setError(e)
 		}

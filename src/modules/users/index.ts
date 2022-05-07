@@ -13,27 +13,11 @@ import { NotificationRepository } from './data/repositories/notification'
 import { ReviewRepository } from './data/repositories/review'
 import { ReferralRepository } from './data/repositories/referral'
 import { BadgeRepository } from './data/repositories/badge'
-import { FindUserUseCase } from './domain/usecases/users/findUser'
-import { SearchUsersUseCase } from './domain/usecases/users/searchUsers'
-import { GetLeaderboardUseCase } from './domain/usecases/users/getLeaderboard'
-import { GetAllAdminsUseCase } from './domain/usecases/users/getAllAdmins'
-import { GetAllTutorsUseCase } from './domain/usecases/users/getAllTutors'
-import { GetUsersInListUseCase } from './domain/usecases/users/getUsersInList'
-import { ListenToAllTutorsUseCase } from './domain/usecases/users/listenToAllTutors'
-import { ListenToAllAdminsUseCase } from './domain/usecases/users/listenToAllAdmins'
-import { ListenToUsersInListUseCase } from './domain/usecases/users/listenToUsersInList'
-import { ListenToUserUseCase } from './domain/usecases/users/listenToUser'
-import { UpdateSchoolUseCase } from './domain/usecases/users/updateSchool'
-import { GetNotificationsUseCase } from './domain/usecases/notifications/getNotifications'
-import { ListenToNotificationsUseCase } from './domain/usecases/notifications/listenToNotifications'
-import { MarkNotificationSeenUseCase } from './domain/usecases/notifications/markNotificationSeen'
-import { GetReviewsUseCase } from './domain/usecases/reviews/getReviews'
-import { ListenToReviewsUseCase } from './domain/usecases/reviews/listenToReviews'
-import { CreateReviewUseCase } from './domain/usecases/reviews/createReview'
-import { GetReferralsUseCase } from './domain/usecases/referrals/getReferrals'
-import { ListenToReferralsUseCase } from './domain/usecases/referrals/listenToReferrals'
-import { GetBadgeUseCase } from './domain/usecases/badges/getBadge'
-import { ListenToBadgeUseCase } from './domain/usecases/badges/listenToBadge'
+import { UsersUseCase } from './domain/usecases/users'
+import { NotificationsUseCase } from './domain/usecases/notifications'
+import { ReviewsUseCase } from './domain/usecases/reviews'
+import { ReferralsUseCase } from './domain/usecases/referrals'
+import { BadgesUseCase } from './domain/usecases/badges'
 import { generateDefaultBio, generateDefaultRoles, generateEmbeddedUser, UserEntity } from './domain/entities/user'
 import { NotificationEntity } from './domain/entities/notification'
 import { ReviewEntity } from './domain/entities/review'
@@ -59,31 +43,11 @@ const reviewRepository = new ReviewRepository(reviewDataSource, reviewTransforme
 const referralRepository = new ReferralRepository(referralDataSource, referralTransformer)
 const badgeRepository = new BadgeRepository(badgeDataSource, badgeTransformer)
 
-export const FindUser = new FindUserUseCase(userRepository)
-export const SearchUsers = new SearchUsersUseCase(userRepository)
-export const GetLeaderboard = new GetLeaderboardUseCase(userRepository)
-export const GetAllAdmins = new GetAllAdminsUseCase(userRepository)
-export const GetAllTutors = new GetAllTutorsUseCase(userRepository)
-export const GetUsersInList = new GetUsersInListUseCase(userRepository)
-export const ListenToAllTutors = new ListenToAllTutorsUseCase(userRepository)
-export const ListenToAllAdmins = new ListenToAllAdminsUseCase(userRepository)
-export const ListenToUsersInList = new ListenToUsersInListUseCase(userRepository)
-export const ListenToUser = new ListenToUserUseCase(userRepository)
-export const UpdateUserSchool = new UpdateSchoolUseCase(userRepository)
-
-export const GetNotifications = new GetNotificationsUseCase(notificationRepository)
-export const ListenToNotifications = new ListenToNotificationsUseCase(notificationRepository)
-export const MarkNotificationSeen = new MarkNotificationSeenUseCase(notificationRepository)
-
-export const CreateReview = new CreateReviewUseCase(reviewRepository)
-export const GetReviews = new GetReviewsUseCase(reviewRepository)
-export const ListenToReviews = new ListenToReviewsUseCase(reviewRepository)
-
-export const GetReferrals = new GetReferralsUseCase(referralRepository)
-export const ListenToReferrals = new ListenToReferralsUseCase(referralRepository)
-
-export const GetBadge = new GetBadgeUseCase(badgeRepository)
-export const ListenToBadge = new ListenToBadgeUseCase(badgeRepository)
+export const UsersUseCases = new UsersUseCase(userRepository)
+export const NotificationsUseCases = new NotificationsUseCase(notificationRepository)
+export const ReviewsUseCases = new ReviewsUseCase(reviewRepository)
+export const ReferralsUseCases = new ReferralsUseCase(referralRepository)
+export const BadgesUseCases = new BadgesUseCase(badgeRepository)
 
 export {
 	UserEntity,

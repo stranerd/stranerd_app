@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue'
-import { FindUser, ListenToUser, UserEntity } from '@modules/users'
+import { UserEntity, UsersUseCases } from '@modules/users'
 import { AuthDetails, AuthTypes, UserLocation } from '@modules/auth/domain/entities/auth'
 import { AuthUseCases } from '@modules/auth'
 import { isClient } from '@utils/environment'
@@ -66,7 +66,7 @@ export const useAuth = () => {
 		if (global.listener) global.listener()
 		global.auth.value = details
 		if (details?.id) {
-			global.user.value = await FindUser.call(details.id)
+			global.user.value = await UsersUseCases.find(details.id)
 			if (global.auth.value?.isVerified && !global.user.value?.school) setTimeout(async () => {
 				if ((await getSchoolState()) !== id.value) useUserModal().openSettings()
 			}, 5000)
@@ -81,7 +81,11 @@ export const useAuth = () => {
 			global.user.value = user
 		}
 		if (id) {
-			global.listener = await ListenToUser.call(id, { created: setUser, updated: setUser, deleted: setUser })
+			global.listener = await UsersUseCases.listenToOne(id, {
+				created: setUser,
+				updated: setUser,
+				deleted: setUser
+			})
 		}
 	}
 

@@ -5,7 +5,7 @@ import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } fr
 import { Alert } from '@utils/dialog'
 import { useClassModal } from '@app/composable/core/modals'
 import { useAuth } from '@app/composable/auth/auth'
-import { GetUsersInList, ListenToUsersInList, UserEntity } from '@modules/users'
+import { UserEntity, UsersUseCases } from '@modules/users'
 import { useRedirectToAuth } from '@app/composable/auth/session'
 import { addToArray } from '@utils/commons'
 
@@ -48,7 +48,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 	const { id } = useAuth()
 	const { redirect } = useRedirectToAuth()
 	const listenerFn = async () => {
-		return ListenToUsersInList.call(classInst.membersAndRequests, {
+		return UsersUseCases.listenToUsersInList(classInst.membersAndRequests, {
 			created: async (entity) => {
 				addToArray(classGlobal[classInst.id].users.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
 			},
@@ -79,7 +79,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 		await classGlobal[classInst.id].setError('')
 		try {
 			await classGlobal[classInst.id].setLoading(true)
-			const users = await GetUsersInList.call(classInst.membersAndRequests)
+			const users = await UsersUseCases.getUsersInList(classInst.membersAndRequests)
 			users.forEach((user) => addToArray(classGlobal[classInst.id].users.value, user, (e) => e.id, (e) => e.bio.fullName, true))
 			classGlobal[classInst.id].fetched.value = true
 		} catch (error) {

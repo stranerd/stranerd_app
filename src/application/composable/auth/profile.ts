@@ -3,7 +3,7 @@ import { Ref, ref, watch } from 'vue'
 import { AuthUseCases, ProfileUpdateFactory } from '@modules/auth'
 import { useAuth } from '@app/composable/auth/auth'
 import { UserSchoolFactory } from '@modules/users/domain/factories/userSchool'
-import { UpdateUserSchool } from '@modules/users'
+import { UsersUseCases } from '@modules/users'
 
 export const useProfileUpdate = () => {
 	const factory = ref(new ProfileUpdateFactory()) as Ref<ProfileUpdateFactory>
@@ -47,7 +47,7 @@ export const useUserSchoolUpdate = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await UpdateUserSchool.call(factory.value)
+				await UsersUseCases.updateSchool(factory.value)
 				await setMessage('Updated successfully!')
 			} catch (error) {
 				await setError(error)

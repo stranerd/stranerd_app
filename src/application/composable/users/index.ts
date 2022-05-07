@@ -1,5 +1,5 @@
 import { reactive, ref, toRefs } from 'vue'
-import { SearchUsers, UserEntity } from '@modules/users'
+import { UserEntity, UsersUseCases } from '@modules/users'
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 
 export const useSearchUsers = () => {
@@ -15,7 +15,7 @@ export const useSearchUsers = () => {
 		if (state.detail) {
 			await setLoading(true)
 			try {
-				users.value = await SearchUsers.call(state.detail.toLowerCase())
+				users.value = await UsersUseCases.search(state.detail.toLowerCase())
 				state.fetched = true
 			} catch (error) {
 				await setError(error)
