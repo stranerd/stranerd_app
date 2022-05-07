@@ -1,12 +1,5 @@
 import { computed, onMounted, Ref, ref } from 'vue'
-import {
-	AddDepartment,
-	DeleteDepartment,
-	DepartmentEntity,
-	DepartmentFactory,
-	EditDepartment,
-	GetDepartments
-} from '@modules/school'
+import { DepartmentEntity, DepartmentFactory, DepartmentsUseCases } from '@modules/school'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
@@ -25,7 +18,7 @@ const fetchDepartments = async (facultyId: string) => {
 	await global.setError('')
 	await global.setLoading(true)
 	try {
-		const departments = await GetDepartments.call(facultyId)
+		const departments = await DepartmentsUseCases.getFacultyDepartments(facultyId)
 		departments.results.forEach((c) => addToArray(global.departments.value, c, (e) => e.id, (e) => e.name, true))
 		global.fetched.value = true
 		global.faculties[facultyId] = true
@@ -71,7 +64,7 @@ export const useCreateDepartment = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const department = await AddDepartment.call(factory.value)
+				const department = await DepartmentsUseCases.add(factory.value)
 				addToArray(global.departments.value, department, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeCreateDepartment()
@@ -105,7 +98,7 @@ export const useEditDepartment = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const updatedDepartment = await EditDepartment.call(editingDepartment!.id, factory.value)
+				const updatedDepartment = await DepartmentsUseCases.update(editingDepartment!.id, factory.value)
 				addToArray(global.departments.value, updatedDepartment, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeEditDepartment()
@@ -134,7 +127,7 @@ export const useDeleteDepartment = (departmentId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteDepartment.call(departmentId)
+				await DepartmentsUseCases.delete(departmentId)
 				global.departments.value = global.departments.value
 					.filter((s) => s.id !== departmentId)
 				await setMessage('Department deleted successfully')

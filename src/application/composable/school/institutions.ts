@@ -1,12 +1,5 @@
 import { computed, onMounted, Ref, ref } from 'vue'
-import {
-	AddInstitution,
-	DeleteInstitution,
-	EditInstitution,
-	GetInstitutions,
-	InstitutionEntity,
-	InstitutionFactory
-} from '@modules/school'
+import { InstitutionEntity, InstitutionFactory, InstitutionsUseCases } from '@modules/school'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
@@ -23,7 +16,7 @@ const fetchInstitutions = async () => {
 	await global.setError('')
 	await global.setLoading(true)
 	try {
-		const institutions = await GetInstitutions.call()
+		const institutions = await InstitutionsUseCases.get()
 		institutions.results.forEach((i) => addToArray(global.institutions.value, i, (e) => e.id, (e) => e.name, true))
 		global.fetched.value = true
 	} catch (error) {
@@ -67,7 +60,7 @@ export const useCreateInstitution = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const institution = await AddInstitution.call(factory.value)
+				const institution = await InstitutionsUseCases.add(factory.value)
 				addToArray(global.institutions.value, institution, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeCreateInstitution()
@@ -101,7 +94,7 @@ export const useEditInstitution = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const updatedInstitution = await EditInstitution.call(editingInstitution!.id, factory.value)
+				const updatedInstitution = await InstitutionsUseCases.update(editingInstitution!.id, factory.value)
 				addToArray(global.institutions.value, updatedInstitution, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeEditInstitution()
@@ -130,7 +123,7 @@ export const useDeleteInstitution = (institutionId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteInstitution.call(institutionId)
+				await InstitutionsUseCases.delete(institutionId)
 				global.institutions.value = global.institutions.value
 					.filter((s) => s.id !== institutionId)
 				await setMessage('Institution deleted successfully')

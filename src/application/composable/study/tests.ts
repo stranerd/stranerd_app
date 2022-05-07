@@ -10,7 +10,7 @@ import {
 	TestType,
 	UpdateTestAnswer
 } from '@modules/study'
-import { GetTestQuestions, PastQuestionEntity } from '@modules/school'
+import { PastQuestionEntity, PastQuestionsUseCases } from '@modules/school'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useRouter } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
@@ -160,7 +160,7 @@ export const useTestDetails = (test: TestEntity) => {
 		await testGlobal[test.id].setError('')
 		try {
 			await testGlobal[test.id].setLoading(true)
-			testGlobal[test.id].questions.value = await GetTestQuestions.call(test.questions)
+			testGlobal[test.id].questions.value = await PastQuestionsUseCases.getQuestionsInList(test.questions)
 			testGlobal[test.id].fetched.value = true
 		} catch (error) {
 			await testGlobal[test.id].setError(error)

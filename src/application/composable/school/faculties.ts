@@ -1,5 +1,5 @@
 import { computed, onMounted, Ref, ref } from 'vue'
-import { AddFaculty, DeleteFaculty, EditFaculty, FacultyEntity, FacultyFactory, GetFaculties } from '@modules/school'
+import { FacultiesUseCases, FacultyEntity, FacultyFactory } from '@modules/school'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
@@ -18,7 +18,7 @@ const fetchFaculties = async (institutionId: string) => {
 	await global.setError('')
 	await global.setLoading(true)
 	try {
-		const faculties = await GetFaculties.call(institutionId)
+		const faculties = await FacultiesUseCases.getInstitutionFaculties(institutionId)
 		faculties.results.forEach((c) => addToArray(global.faculties.value, c, (e) => e.id, (e) => e.name, true))
 		global.fetched.value = true
 		global.institutions[institutionId] = true
@@ -64,7 +64,7 @@ export const useCreateFaculty = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const faculty = await AddFaculty.call(factory.value)
+				const faculty = await FacultiesUseCases.add(factory.value)
 				addToArray(global.faculties.value, faculty, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeCreateFaculty()
@@ -98,7 +98,7 @@ export const useEditFaculty = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const updatedFaculty = await EditFaculty.call(editingFaculty!.id, factory.value)
+				const updatedFaculty = await FacultiesUseCases.update(editingFaculty!.id, factory.value)
 				addToArray(global.faculties.value, updatedFaculty, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeEditFaculty()
@@ -127,7 +127,7 @@ export const useDeleteFaculty = (facultyId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteFaculty.call(facultyId)
+				await FacultiesUseCases.delete(facultyId)
 				global.faculties.value = global.faculties.value
 					.filter((s) => s.id !== facultyId)
 				await setMessage('Faculty deleted successfully')
