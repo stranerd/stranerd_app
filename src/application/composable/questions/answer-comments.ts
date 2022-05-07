@@ -1,11 +1,5 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
-import {
-	AddAnswerComment,
-	CommentEntity,
-	CommentFactory,
-	GetAnswerComments,
-	ListenToAnswerComments
-} from '@modules/questions'
+import { AnswerCommentsUseCases, CommentEntity, CommentFactory } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 
@@ -18,7 +12,7 @@ const global = {} as Record<string, {
 export const useAnswerCommentList = (answerId: string) => {
 	if (global[answerId] === undefined) {
 		const listener = useListener(async () => {
-			return await ListenToAnswerComments.call(answerId, {
+			return await AnswerCommentsUseCases.listen(answerId, {
 				created: async (entity) => {
 					addToArray(global[answerId].comments.value, entity, (e) => e.id, (e) => e.createdAt, true)
 				},
@@ -43,7 +37,7 @@ export const useAnswerCommentList = (answerId: string) => {
 		await global[answerId].setError('')
 		try {
 			await global[answerId].setLoading(true)
-			const comments = await GetAnswerComments.call(answerId)
+			const comments = await AnswerCommentsUseCases.get(answerId)
 			comments.results.forEach((c) => addToArray(global[answerId].comments.value, c, (e) => e.id, (e) => e.createdAt, true))
 			global[answerId].fetched.value = true
 		} catch (error) {
@@ -77,7 +71,7 @@ export const useCreateAnswerComments = (answerId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddAnswerComment.call(answerId, factory.value)
+				await AnswerCommentsUseCases.add(answerId, factory.value)
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)

@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
-import { GetClassQuestions, ListenToClassQuestions, QuestionEntity } from '@modules/questions'
+import { QuestionEntity, QuestionsUseCases } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 
@@ -23,7 +23,7 @@ export const useClassQuestionList = (classId: string) => {
 		try {
 			await global[classId].setLoading(true)
 			const lastDate = global[classId].questions.value[global[classId].questions.value.length - 1]?.createdAt
-			const questions = await GetClassQuestions.call(classId, lastDate)
+			const questions = await QuestionsUseCases.getClassQuestions(classId, lastDate)
 			global[classId].hasMore.value = !!questions.pages.next
 			questions.results.forEach((q) => addToArray(global[classId].questions.value, q, (e) => e.id, (e) => e.createdAt))
 			global[classId].fetched.value = true
@@ -34,7 +34,7 @@ export const useClassQuestionList = (classId: string) => {
 	}
 
 	const listener = useListener(async () => {
-		return await ListenToClassQuestions.call(classId, {
+		return await QuestionsUseCases.listenToClassQuestions(classId, {
 			created: async (entity) => {
 				addToArray(global[classId].questions.value, entity, (e) => e.id, (e) => e.createdAt)
 			},

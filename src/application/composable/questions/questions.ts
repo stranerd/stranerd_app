@@ -1,17 +1,6 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import { Router, useRouter } from 'vue-router'
-import {
-	AddQuestion,
-	DeleteQuestion,
-	EditQuestion,
-	FindQuestion,
-	GetQuestions,
-	ListenToQuestion,
-	ListenToQuestions,
-	QuestionEntity,
-	QuestionFactory,
-	QuestionType
-} from '@modules/questions'
+import { QuestionEntity, QuestionFactory, QuestionsUseCases, QuestionType } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useQuestionModal } from '@app/composable/core/modals'
@@ -43,7 +32,7 @@ const global = {
 }
 const listener = useListener(async () => {
 	const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
-	return await ListenToQuestions.call({
+	return await QuestionsUseCases.listen({
 		created: async (entity) => {
 			addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
 		},
@@ -63,7 +52,7 @@ export const useQuestionList = () => {
 		try {
 			await global.setLoading(true)
 			const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
-			const questions = await GetQuestions.call(lastDate)
+			const questions = await QuestionsUseCases.get(lastDate)
 			global.hasMore.value = !!questions.pages.next
 			questions.results.forEach((q) => addToArray(global.questions.value, q, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
@@ -128,7 +117,7 @@ export const useCreateQuestion = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const question = await AddQuestion.call(factory.value)
+				const question = await QuestionsUseCases.add(factory.value)
 				await setMessage('Question submitted successfully')
 				factory.value.reset()
 				useQuestionModal().closeCreateQuestion()
@@ -162,7 +151,7 @@ export const useQuestion = (questionId: string) => {
 				await setLoading(false)
 				return
 			}
-			question = await FindQuestion.call(questionId)
+			question = await QuestionsUseCases.find(questionId)
 			if (question) addToArray(global.questions.value, question, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
@@ -170,7 +159,7 @@ export const useQuestion = (questionId: string) => {
 		await setLoading(false)
 	}
 	const listener = useListener(async () => {
-		return await ListenToQuestion.call(questionId, {
+		return await QuestionsUseCases.listenToOne(questionId, {
 			created: async (entity) => {
 				addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
@@ -214,7 +203,7 @@ export const useEditQuestion = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const question = await EditQuestion.call(editingQuestion!.id, factory.value)
+				const question = await QuestionsUseCases.update(editingQuestion!.id, factory.value)
 				await setMessage('Question updated successfully')
 				useQuestionModal().closeEditQuestion()
 				factory.value.reset()
@@ -244,7 +233,7 @@ export const useDeleteQuestion = (questionId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteQuestion.call(questionId)
+				await QuestionsUseCases.delete(questionId)
 				global.questions.value = global.questions.value
 					.filter((q) => q.id !== questionId)
 				await setMessage('Question deleted successfully')

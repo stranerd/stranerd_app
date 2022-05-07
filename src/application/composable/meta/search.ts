@@ -1,6 +1,6 @@
 import { computed, onMounted, ref } from 'vue'
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
-import { AnswerEntity, QuestionEntity, SearchQuestions } from '@modules/questions'
+import { AnswerEntity, QuestionEntity, QuestionsUseCases } from '@modules/questions'
 import { SearchUsers, UserEntity } from '@modules/users'
 import { useRoute, useRouter } from 'vue-router'
 import {
@@ -78,14 +78,14 @@ export const useSearch = () => {
 			try {
 				await global.setLoading(true)
 				const searchObj = {
-					questions: SearchQuestions, users: SearchUsers,
-					flashCards: SearchFlashCards, sets: SearchSets, testPreps: SearchTestPreps,
-					notes: SearchNotes, videos: SearchVideos
+					questions: QuestionsUseCases.search, users: SearchUsers.call,
+					flashCards: SearchFlashCards.call, sets: SearchSets.call, testPreps: SearchTestPreps.call,
+					notes: SearchNotes.call, videos: SearchVideos.call
 				}
 				await Promise.all(
 					Object.entries(searchObj).map(async ([key, useCase]) => {
 						//@ts-ignore
-						global.res[key].value = await useCase.call(val)
+						global.res[key].value = await useCase(val)
 					})
 				)
 				global.fetched.value = true
