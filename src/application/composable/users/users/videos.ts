@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
-import { GetUserVideos, ListenToUserVideos, VideoEntity } from '@modules/study'
+import { VideoEntity, VideosUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 
@@ -23,7 +23,7 @@ export const useUserVideoList = (id: string) => {
 		try {
 			await global[id].setLoading(true)
 			const lastDate = global[id].videos.value[global[id].videos.value.length - 1]?.createdAt
-			const videos = await GetUserVideos.call(id, lastDate)
+			const videos = await VideosUseCases.getUserVideos(id, lastDate)
 			global[id].hasMore.value = !!videos.pages.next
 			videos.results.forEach((q) => addToArray(global[id].videos.value, q, (e) => e.id, (e) => e.createdAt))
 			global[id].fetched.value = true
@@ -34,7 +34,7 @@ export const useUserVideoList = (id: string) => {
 	}
 
 	const listener = useListener(async () => {
-		return await ListenToUserVideos.call(id, {
+		return await VideosUseCases.listenToUserVideos(id, {
 			created: async (entity) => {
 				addToArray(global[id].videos.value, entity, (e) => e.id, (e) => e.createdAt)
 			},

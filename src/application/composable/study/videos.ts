@@ -1,15 +1,5 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
-import {
-	AddVideo,
-	DeleteVideo,
-	EditVideo,
-	FindVideo,
-	GetVideos,
-	ListenToVideo,
-	ListenToVideos,
-	VideoEntity,
-	VideoFactory
-} from '@modules/study'
+import { VideoEntity, VideoFactory, VideosUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
@@ -25,7 +15,7 @@ const global = {
 }
 const listener = useListener(async () => {
 	const lastDate = global.videos.value[global.videos.value.length - 1]?.createdAt
-	return await ListenToVideos.call({
+	return await VideosUseCases.listen({
 		created: async (entity) => {
 			addToArray(global.videos.value, entity, (e) => e.id, (e) => e.createdAt)
 		},
@@ -45,7 +35,7 @@ export const useVideoList = () => {
 		try {
 			await global.setLoading(true)
 			const lastDate = global.videos.value[global.videos.value.length - 1]?.createdAt
-			const videos = await GetVideos.call(lastDate)
+			const videos = await VideosUseCases.get(lastDate)
 			global.hasMore.value = !!videos.pages.next
 			videos.results.forEach((v) => addToArray(global.videos.value, v, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
@@ -78,7 +68,7 @@ export const useCreateVideo = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const video = await AddVideo.call(factory.value)
+				const video = await VideosUseCases.add(factory.value)
 				await setMessage('Video submitted successfully')
 				await useStudyModal().closeCreateVideo()
 				await router.push(`/study/videos/${video.id}`)
@@ -112,7 +102,7 @@ export const useEditVideo = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const video = await EditVideo.call(editingVideo!.id, factory.value)
+				const video = await VideosUseCases.update(editingVideo!.id, factory.value)
 				await useStudyModal().closeEditVideo()
 				await setMessage('Video updated successfully')
 				factory.value.reset()
@@ -141,7 +131,7 @@ export const useDeleteVideo = (videoId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteVideo.call(videoId)
+				await VideosUseCases.delete(videoId)
 				global.videos.value = global.videos.value
 					.filter((q) => q.id !== videoId)
 				await setMessage('Video deleted successfully')
@@ -174,7 +164,7 @@ export const useVideo = (videoId: string) => {
 				await setLoading(false)
 				return
 			}
-			video = await FindVideo.call(videoId)
+			video = await VideosUseCases.find(videoId)
 			if (video) addToArray(global.videos.value, video, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
@@ -182,7 +172,7 @@ export const useVideo = (videoId: string) => {
 		await setLoading(false)
 	}
 	const listener = useListener(async () => {
-		return await ListenToVideo.call(videoId, {
+		return await VideosUseCases.listenToOne(videoId, {
 			created: async (entity) => {
 				addToArray(global.videos.value, entity, (e) => e.id, (e) => e.createdAt)
 			},

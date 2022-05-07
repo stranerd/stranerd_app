@@ -1,15 +1,5 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
-import {
-	AddTest,
-	EndTest,
-	FindTest,
-	GetTests,
-	ListenToTests,
-	TestEntity,
-	TestPrepEntity,
-	TestType,
-	UpdateTestAnswer
-} from '@modules/study'
+import { TestEntity, TestPrepEntity, TestsUseCases, TestType } from '@modules/study'
 import { PastQuestionEntity, PastQuestionsUseCases } from '@modules/school'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useRouter } from 'vue-router'
@@ -25,7 +15,7 @@ const global = {
 	...useLoadingHandler()
 }
 const listener = useListener(async () => {
-	return await ListenToTests.call({
+	return await TestsUseCases.listen({
 		created: async (entity) => {
 			addToArray(global.tests.value, entity, (e) => e.id, (e) => e.createdAt)
 		},
@@ -51,7 +41,7 @@ export const useTestList = () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const tests = await GetTests.call()
+			const tests = await TestsUseCases.get()
 			global.hasMore.value = !!tests.pages.next
 			tests.results.forEach((t) => addToArray(global.tests.value, t, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
@@ -92,7 +82,7 @@ export const useCreateTest = () => {
 		if (!loading.value) {
 			try {
 				await setLoading(true)
-				const test = await AddTest.call({
+				const test = await TestsUseCases.add({
 					name: prep.name,
 					prepId: prep.id,
 					data: timed ? { type: TestType.timed, time: prep.time } : { type: TestType.unTimed }
@@ -127,7 +117,7 @@ export const useTest = (testId: string) => {
 				await setLoading(false)
 				return
 			}
-			test = await FindTest.call(testId)
+			test = await TestsUseCases.find(testId)
 			if (test) addToArray(global.tests.value, test, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
@@ -170,7 +160,7 @@ export const useTestDetails = (test: TestEntity) => {
 
 	const endTest = async () => {
 		await testGlobal[test.id].setLoading(true)
-		if (!test.done) await EndTest.call(test.id)
+		if (!test.done) await TestsUseCases.end(test.id)
 		await testGlobal[test.id].setLoading(false)
 	}
 
@@ -179,7 +169,7 @@ export const useTestDetails = (test: TestEntity) => {
 		if (test.done) return
 		try {
 			await testGlobal[test.id].setLoading(true)
-			await UpdateTestAnswer.call(test.id, questionId, answer)
+			await TestsUseCases.updateAnswer(test.id, questionId, answer)
 		} catch (error) {
 			await testGlobal[test.id].setError(error)
 		}

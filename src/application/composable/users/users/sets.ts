@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
-import { GetUserSets, ListenToUserSets, SetEntity } from '@modules/study'
+import { SetEntity, SetsUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { addToArray } from '@utils/commons'
@@ -13,7 +13,7 @@ const global = {} as Record<string, {
 export const useUserSetList = (id: string = useAuth().id.value) => {
 	if (global[id] === undefined) {
 		const listener = useListener(async () => {
-			return await ListenToUserSets.call(id, {
+			return await SetsUseCases.listenToUserSets(id, {
 				created: async (entity) => {
 					addToArray(global[id].sets.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
@@ -38,7 +38,7 @@ export const useUserSetList = (id: string = useAuth().id.value) => {
 		await global[id].setError('')
 		try {
 			await global[id].setLoading(true)
-			const sets = await GetUserSets.call(id)
+			const sets = await SetsUseCases.getUserSets(id)
 			sets.results.forEach((a) => addToArray(global[id].sets.value, a, (e) => e.id, (e) => e.createdAt))
 			global[id].fetched.value = true
 		} catch (error) {

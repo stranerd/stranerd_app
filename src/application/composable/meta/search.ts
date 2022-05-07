@@ -5,15 +5,15 @@ import { UserEntity, UsersUseCases } from '@modules/users'
 import { useRoute, useRouter } from 'vue-router'
 import {
 	FlashCardEntity,
+	FlashCardsUseCases,
 	NoteEntity,
-	SearchFlashCards,
-	SearchNotes,
-	SearchSets,
-	SearchTestPreps,
-	SearchVideos,
+	NotesUseCases,
 	SetEntity,
+	SetsUseCases,
 	TestPrepEntity,
-	VideoEntity
+	TestPrepsUseCases,
+	VideoEntity,
+	VideosUseCases
 } from '@modules/study'
 import { storage } from '@utils/storage'
 
@@ -78,9 +78,13 @@ export const useSearch = () => {
 			try {
 				await global.setLoading(true)
 				const searchObj = {
-					questions: QuestionsUseCases.search, users: UsersUseCases.search,
-					flashCards: SearchFlashCards.call, sets: SearchSets.call, testPreps: SearchTestPreps.call,
-					notes: SearchNotes.call, videos: SearchVideos.call
+					questions: QuestionsUseCases.search,
+					users: UsersUseCases.search,
+					flashCards: FlashCardsUseCases.search,
+					sets: SetsUseCases.search,
+					testPreps: TestPrepsUseCases.search,
+					notes: NotesUseCases.search,
+					videos: VideosUseCases.search
 				}
 				await Promise.all(
 					Object.entries(searchObj).map(async ([key, useCase]) => {

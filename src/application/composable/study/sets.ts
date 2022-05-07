@@ -1,28 +1,16 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import {
-	AddSet,
-	DeleteSet,
-	DeleteSetProp,
-	EditSet,
-	FindSet,
 	FlashCardEntity,
-	GetFlashCardsInSet,
-	GetNotesInSet,
-	GetSetsInSet,
-	GetTestPrepsInSet,
-	GetVideosInSet,
-	ListenToFlashCardsInSet,
-	ListenToNotesInSet,
-	ListenToSet,
-	ListenToSetsInSet,
-	ListenToTestPrepsInSet,
-	ListenToVideosInSet,
+	FlashCardsUseCases,
 	NoteEntity,
-	SaveSetProp,
+	NotesUseCases,
 	SetEntity,
 	SetFactory,
+	SetsUseCases,
 	TestPrepEntity,
-	VideoEntity
+	TestPrepsUseCases,
+	VideoEntity,
+	VideosUseCases
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useStudyModal } from '@app/composable/core/modals'
@@ -52,7 +40,7 @@ const setGlobal = {} as Record<string, {
 export const useSetById = (setId: string) => {
 	if (global[setId] === undefined) {
 		const listener = useListener(async () => {
-			return ListenToSet.call(setId, {
+			return SetsUseCases.listenToOne(setId, {
 				created: async (entity) => {
 					global[setId].set.value = entity
 				},
@@ -77,7 +65,7 @@ export const useSetById = (setId: string) => {
 		await global[setId].setError('')
 		try {
 			await global[setId].setLoading(true)
-			global[setId].set.value = await FindSet.call(setId)
+			global[setId].set.value = await SetsUseCases.find(setId)
 		} catch (error) {
 			await global[setId].setError(error)
 		}
@@ -98,7 +86,7 @@ export const useSetById = (setId: string) => {
 export const useSet = (set: SetEntity) => {
 	const listenerFn = async () => {
 		const listeners = await Promise.all([
-			ListenToNotesInSet.call(set.saved.notes, {
+			NotesUseCases.listenInList(set.saved.notes, {
 				created: async (entity) => {
 					addToArray(setGlobal[set.id].notes.value, entity, (e) => e.id, (e) => e.title)
 				},
@@ -110,7 +98,7 @@ export const useSet = (set: SetEntity) => {
 					if (index !== -1) setGlobal[set.id].notes.value.splice(index, 1)
 				}
 			}),
-			ListenToVideosInSet.call(set.saved.videos, {
+			VideosUseCases.listenInList(set.saved.videos, {
 				created: async (entity) => {
 					addToArray(setGlobal[set.id].videos.value, entity, (e) => e.id, (e) => e.title)
 				},
@@ -122,7 +110,7 @@ export const useSet = (set: SetEntity) => {
 					if (index !== -1) setGlobal[set.id].videos.value.splice(index, 1)
 				}
 			}),
-			ListenToFlashCardsInSet.call(set.saved.flashCards, {
+			FlashCardsUseCases.listenInList(set.saved.flashCards, {
 				created: async (entity) => {
 					addToArray(setGlobal[set.id].flashCards.value, entity, (e) => e.id, (e) => e.title)
 				},
@@ -134,7 +122,7 @@ export const useSet = (set: SetEntity) => {
 					if (index !== -1) setGlobal[set.id].flashCards.value.splice(index, 1)
 				}
 			}),
-			ListenToTestPrepsInSet.call(set.saved.testPreps, {
+			TestPrepsUseCases.listenInList(set.saved.testPreps, {
 				created: async (entity) => {
 					addToArray(setGlobal[set.id].testPreps.value, entity, (e) => e.id, (e) => e.name)
 				},
@@ -146,7 +134,7 @@ export const useSet = (set: SetEntity) => {
 					if (index !== -1) setGlobal[set.id].testPreps.value.splice(index, 1)
 				}
 			}),
-			ListenToSetsInSet.call(set.saved.sets, {
+			SetsUseCases.listenInList(set.saved.sets, {
 				created: async (entity) => {
 					addToArray(setGlobal[set.id].sets.value, entity, (e) => e.id, (e) => e.name)
 				},
@@ -184,9 +172,9 @@ export const useSet = (set: SetEntity) => {
 		try {
 			await setGlobal[set.id].setLoading(true)
 			const [notes, videos, flashCards, testPreps, sets] = await Promise.all([
-				GetNotesInSet.call(set.saved.notes), GetVideosInSet.call(set.saved.videos),
-				GetFlashCardsInSet.call(set.saved.flashCards), GetTestPrepsInSet.call(set.saved.testPreps),
-				GetSetsInSet.call(set.saved.sets)
+				NotesUseCases.getInList(set.saved.notes), VideosUseCases.getInList(set.saved.videos),
+				FlashCardsUseCases.getInList(set.saved.flashCards), TestPrepsUseCases.getInList(set.saved.testPreps),
+				SetsUseCases.getInList(set.saved.sets)
 			])
 			setGlobal[set.id].notes.value = notes.results
 			setGlobal[set.id].videos.value = videos.results
@@ -231,7 +219,7 @@ export const useSaveToSet = () => {
 	const saveToSet = async (prop: SaveKey, itemId: string, set: SetEntity) => {
 		try {
 			await setLoading(true)
-			await SaveSetProp.call(set.id, prop, [itemId])
+			await SetsUseCases.saveProp(set.id, prop, [itemId])
 			useStudyModal().closeSaveEntity()
 			await Notify({ title: 'Saved to folder successfully' })
 		} catch (e) {
@@ -243,7 +231,7 @@ export const useSaveToSet = () => {
 	const removeFromSet = async (prop: SaveKey, itemId: string, set: SetEntity) => {
 		try {
 			await setLoading(true)
-			await DeleteSetProp.call(set.id, prop, [itemId])
+			await SetsUseCases.deleteProp(set.id, prop, [itemId])
 			//@ts-ignore
 			if (setGlobal[set.id]) setGlobal[set.id][prop].value = setGlobal[set.id][prop].value.filter((item) => item.id !== itemId)
 			useStudyModal().closeSaveEntity()
@@ -268,7 +256,7 @@ export const useCreateSet = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddSet.call(factory.value)
+				await SetsUseCases.add(factory.value)
 				await setMessage('Folder created successfully')
 				useStudyModal().closeCreateSet()
 				factory.value.reset()
@@ -300,7 +288,7 @@ export const useEditSet = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditSet.call(editingSet!.id, factory.value)
+				await SetsUseCases.update(editingSet!.id, factory.value)
 				await setMessage('Folder updated successfully')
 				useStudyModal().closeEditSet()
 				factory.value.reset()
@@ -328,7 +316,7 @@ export const useDeleteSet = (setId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteSet.call(setId)
+				await SetsUseCases.delete(setId)
 				await setMessage('Folder deleted successfully')
 			} catch (error) {
 				await setError(error)

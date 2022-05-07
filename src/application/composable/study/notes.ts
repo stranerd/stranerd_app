@@ -1,15 +1,5 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
-import {
-	AddNote,
-	DeleteNote,
-	EditNote,
-	FindNote,
-	GetNotes,
-	ListenToNote,
-	ListenToNotes,
-	NoteEntity,
-	NoteFactory
-} from '@modules/study'
+import { NoteEntity, NoteFactory, NotesUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
@@ -24,7 +14,7 @@ const global = {
 }
 const listener = useListener(async () => {
 	const lastDate = global.notes.value[global.notes.value.length - 1]?.createdAt
-	return await ListenToNotes.call({
+	return await NotesUseCases.listen({
 		created: async (entity) => {
 			addToArray(global.notes.value, entity, (e) => e.id, (e) => e.createdAt)
 		},
@@ -44,7 +34,7 @@ export const useNoteList = () => {
 		try {
 			await global.setLoading(true)
 			const lastDate = global.notes.value[global.notes.value.length - 1]?.createdAt
-			const notes = await GetNotes.call(lastDate)
+			const notes = await NotesUseCases.get(lastDate)
 			global.hasMore.value = !!notes.pages.next
 			notes.results.forEach((n) => addToArray(global.notes.value, n, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
@@ -77,7 +67,7 @@ export const useCreateNote = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const note = await AddNote.call(factory.value)
+				const note = await NotesUseCases.add(factory.value)
 				await setMessage('Note submitted successfully')
 				await router.push(`/study/notes/${note.id}`)
 				factory.value.reset()
@@ -110,7 +100,7 @@ export const useEditNote = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const note = await EditNote.call(editingNote!.id, factory.value)
+				const note = await NotesUseCases.update(editingNote!.id, factory.value)
 				await setMessage('Note updated successfully')
 				factory.value.reset()
 				await router.push(`/study/notes/${note.id}`)
@@ -138,7 +128,7 @@ export const useDeleteNote = (noteId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteNote.call(noteId)
+				await NotesUseCases.delete(noteId)
 				global.notes.value = global.notes.value
 					.filter((q) => q.id !== noteId)
 				await setMessage('Note deleted successfully')
@@ -171,7 +161,7 @@ export const useNote = (noteId: string) => {
 				await setLoading(false)
 				return
 			}
-			note = await FindNote.call(noteId)
+			note = await NotesUseCases.find(noteId)
 			if (note) addToArray(global.notes.value, note, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
@@ -179,7 +169,7 @@ export const useNote = (noteId: string) => {
 		await setLoading(false)
 	}
 	const listener = useListener(async () => {
-		return await ListenToNote.call(noteId, {
+		return await NotesUseCases.listenToOne(noteId, {
 			created: async (entity) => {
 				addToArray(global.notes.value, entity, (e) => e.id, (e) => e.createdAt)
 			},

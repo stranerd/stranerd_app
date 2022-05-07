@@ -1,13 +1,5 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
-import {
-	AddTestPrep,
-	DeleteTestPrep,
-	EditTestPrep,
-	GetTestPreps,
-	ListenToTestPreps,
-	TestPrepEntity,
-	TestPrepFactory
-} from '@modules/study'
+import { TestPrepEntity, TestPrepFactory, TestPrepsUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { addToArray, groupBy } from '@utils/commons'
@@ -25,7 +17,7 @@ const global = {
 	...useLoadingHandler()
 }
 const listener = useListener(async () => {
-	return await ListenToTestPreps.call({
+	return await TestPrepsUseCases.listen({
 		created: async (entity) => {
 			addToArray(global.testPreps.value, entity, (e) => e.id, (e) => e.createdAt)
 		},
@@ -43,7 +35,7 @@ const fetchTestPreps = async () => {
 	await global.setError('')
 	try {
 		await global.setLoading(true)
-		const testPreps = await GetTestPreps.call()
+		const testPreps = await TestPrepsUseCases.get()
 		testPreps.results.forEach((t) => addToArray(global.testPreps.value, t, (e) => e.id, (e) => e.createdAt))
 		global.fetched.value = true
 	} catch (error) {
@@ -95,7 +87,7 @@ export const useCreateTestPrep = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddTestPrep.call(factory.value)
+				await TestPrepsUseCases.add(factory.value)
 				await setMessage('TestPrep submitted successfully')
 				useStudyModal().closeCreateTestPrep()
 				factory.value.reset()
@@ -127,7 +119,7 @@ export const useEditTestPrep = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditTestPrep.call(editingTestPrep!.id, factory.value)
+				await TestPrepsUseCases.update(editingTestPrep!.id, factory.value)
 				await setMessage('TestPrep updated successfully')
 				useStudyModal().closeEditTestPrep()
 				factory.value.reset()
@@ -155,7 +147,7 @@ export const useDeleteTestPrep = (testPrepId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteTestPrep.call(testPrepId)
+				await TestPrepsUseCases.delete(testPrepId)
 				global.testPreps.value = global.testPreps.value
 					.filter((q) => q.id !== testPrepId)
 				await setMessage('TestPrep deleted successfully')

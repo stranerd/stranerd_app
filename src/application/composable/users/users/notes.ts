@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
-import { GetUserNotes, ListenToUserNotes, NoteEntity } from '@modules/study'
+import { NoteEntity, NotesUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 
@@ -23,7 +23,7 @@ export const useUserNoteList = (id: string) => {
 		try {
 			await global[id].setLoading(true)
 			const lastDate = global[id].notes.value[global[id].notes.value.length - 1]?.createdAt
-			const notes = await GetUserNotes.call(id, lastDate)
+			const notes = await NotesUseCases.getUserNotes(id, lastDate)
 			global[id].hasMore.value = !!notes.pages.next
 			notes.results.forEach((q) => addToArray(global[id].notes.value, q, (e) => e.id, (e) => e.createdAt))
 			global[id].fetched.value = true
@@ -34,7 +34,7 @@ export const useUserNoteList = (id: string) => {
 	}
 
 	const listener = useListener(async () => {
-		return await ListenToUserNotes.call(id, {
+		return await NotesUseCases.listenToUserNotes(id, {
 			created: async (entity) => {
 				addToArray(global[id].notes.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
