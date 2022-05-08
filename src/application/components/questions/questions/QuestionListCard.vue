@@ -17,9 +17,8 @@
 			</div>
 
 			<ion-button v-if="showAnswerButton"
-				class="btn-outline border-primary text-primary btn-outline-sm ml-auto"
+				class="btn-outline border-primary text-primary btn-outline-sm ml-auto btn-sm"
 				mode="md"
-				size="small"
 				@click="openAnswerModal(question)">
 				Answer
 			</ion-button>

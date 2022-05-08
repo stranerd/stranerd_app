@@ -29,7 +29,7 @@
 							<Tag :index="user.rank.level" :secondary="true" :tag="user.rank.id" class="font-bold" />
 						</div>
 
-						<IonButton v-if="isAdmin && id !== user.id" class="btn-primary w-full" size="small"
+						<IonButton v-if="isAdmin && id !== user.id" class="btn-primary w-full btn-sm"
 							@click="user.isVerified ? deVerifyUser(user) : verifyUser(user)">
 							{{ user.isVerified ? 'Mark User Unverified' : 'Mark User Verified' }}
 						</IonButton>

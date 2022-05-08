@@ -135,7 +135,8 @@ export default defineComponent({
 		}
 		const updateEvent = async () => {
 			if (!editingEvent.value) return
-			await editEvent(editingEvent.value, editFactory.value)
+			const passed = await editEvent(editingEvent.value, editFactory.value)
+			if (!passed) return
 			tab.value = 0
 		}
 		return {

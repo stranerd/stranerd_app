@@ -102,6 +102,7 @@ export const useEditEvent = () => {
 	const { setMessage } = useSuccessHandler()
 
 	const editEvent = async (event: EventEntity, factory: EventFactory) => {
+		let passed = false
 		await setError('')
 		if (factory.valid && !loading.value) {
 			try {
@@ -109,11 +110,13 @@ export const useEditEvent = () => {
 				await EventsUseCases.update(event.id, factory)
 				await setMessage('Event updated successfully')
 				factory.reset()
+				passed = true
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
 		} else factory.validateAll()
+		return passed
 	}
 
 	return { error, loading, editEvent }
