@@ -21,7 +21,8 @@
 			</ion-radio-group>
 		</IonList>
 		<div class="flex w-full gap-2 items-center justify-between">
-			<ion-button class="btn-secondary w-24" size="small" type="button" @click.prevent="back">
+			<ion-button class="btn-outline border-primary text-primary w-24" size="small" type="button"
+				@click.prevent="back">
 				Back
 				<ion-ripple-effect class="rounded-lg" />
 			</ion-button>
@@ -74,7 +75,8 @@
 			</div>
 
 			<div class="flex w-full gap-2 items-center justify-between">
-				<ion-button class="btn-secondary w-24" size="small" type="button" @click.prevent="back">
+				<ion-button class="btn-outline border-primary text-primary w-24" size="small" type="button"
+					@click.prevent="back">
 					Back
 					<ion-ripple-effect class="rounded-lg" />
 				</ion-button>
@@ -99,7 +101,8 @@
 				</ion-select>
 			</div>
 			<div class="flex w-full justify-between gap-2 items-center">
-				<ion-button class="btn-secondary w-24" size="small" type="button" @click.prevent="back">
+				<ion-button class="btn-outline border-primary text-primary w-24" size="small" type="button"
+					@click.prevent="back">
 					Back
 					<ion-ripple-effect class="rounded-lg" />
 				</ion-button>
@@ -139,7 +142,8 @@
 			</div>
 		</div>
 		<div class="flex w-full justify-between gap-2 items-center">
-			<ion-button class="btn-secondary w-24" size="small" type="button" @click.prevent="back">
+			<ion-button class="btn-outline border-primary text-primary w-24" size="small" type="button"
+				@click.prevent="back">
 				Back
 				<ion-ripple-effect class="rounded-lg" />
 			</ion-button>

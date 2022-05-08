@@ -31,7 +31,7 @@
 				class="w-full lg:w-auto"
 				@files="catchAttachments"
 			>
-				<ion-button class="btn-secondary w-full text-primary flex items-center" size="small">
+				<ion-button class="btn-outline w-full flex items-center" size="small">
 					<ion-icon :icon="imageOutline" class="!text-2xl text-primary mr-2" />
 					<span>Add image</span>
 				</ion-button>

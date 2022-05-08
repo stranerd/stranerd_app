@@ -8,14 +8,14 @@
 		</div>
 
 		<div class="flex justify-between gap-4 px-4 my-10">
-			<ion-button v-if="tab > 0" class="btn-outline text-white w-full mx-auto max-w-[280px]" @click="tab--">
+			<ion-button v-if="tab > 0" class="btn-outline w-full mx-auto max-w-[280px]" @click="tab--">
 				Back
 			</ion-button>
-			<ion-button v-if="tab < 3" class="btn-outline text-white w-full mx-auto max-w-[280px]" @click="tab++">
+			<ion-button v-if="tab < 3" class="btn-outline w-full mx-auto max-w-[280px]" @click="tab++">
 				Next
 			</ion-button>
 			<router-link class="mx-auto w-full mx-auto max-w-[280px]" to="/auth/signin">
-				<ion-button v-if="tab !== tabs" class="btn-outline text-white w-full">
+				<ion-button v-if="tab !== tabs" class="btn-outline w-full">
 					Skip
 				</ion-button>
 				<ion-button v-else class="btn-white text-main_dark font-bold w-full">

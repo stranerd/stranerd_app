@@ -14,7 +14,7 @@
 				</ion-text>
 				<router-link class="h-auto mx-auto lg:m-0" to="/dashboard">
 					<ion-button
-						class="btn-outline btn-outline-sm text-white mx-auto lg:m-0 lg:text-2xl text-sm md:text-lg block">
+						class="btn-outline btn-outline-sm mx-auto lg:m-0 lg:text-2xl text-sm md:text-lg block">
 						Get Started Now
 					</ion-button>
 				</router-link>

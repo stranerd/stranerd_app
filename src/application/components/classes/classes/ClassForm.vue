@@ -45,7 +45,7 @@
 			</div>
 
 			<div class="flex justify-between gap-4">
-				<ion-button class="btn-secondary" @click="tab = 0">Previous</ion-button>
+				<ion-button class="btn-outline border-primary text-primary" @click="tab = 0">Previous</ion-button>
 				<ion-button :disabled="loading || !factory.valid" class="btn-primary" @click.prevent="submit">
 					<slot name="buttonText">Submit</slot>
 					<ion-ripple-effect class="rounded-lg" />

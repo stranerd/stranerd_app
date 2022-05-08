@@ -15,13 +15,13 @@
 
 		<div class="mt-4 mx-auto w-full px-4 flex gap-2 items-center justify-between md:justify-center">
 			<router-link :to="`/study/tests/${test.id}/take`" class="text-primary cursor-pointer">
-				<ion-button class="btn-outline">Solutions</ion-button>
+				<ion-button class="btn-outline border-primary text-primary">Solutions</ion-button>
 			</router-link>
 			<ion-button v-if="prep" class="btn-primary" @click="createTest(prep, test.isTimed)">
 				Retry
 			</ion-button>
 			<router-link class="text-primary cursor-pointer" to="/study/preps/">
-				<ion-button class="btn-secondary">
+				<ion-button class="btn-outline">
 					Home
 				</ion-button>
 			</router-link>

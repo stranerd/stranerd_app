@@ -2,8 +2,8 @@ import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { ClassEntity, EventEntity, EventFactory, EventsUseCases, EventType } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { useClassModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
+import { useClassModal } from '@app/composable/core/modals'
 
 const global = {} as Record<string, {
 	events: Ref<EventEntity[]>
@@ -16,10 +16,10 @@ export const useTimetable = (classId: string) => {
 		const listener = useListener(async () => {
 			return await EventsUseCases.listenToClassTimetable(classId, {
 				created: async (entity) => {
-					addToArray(global[classId].events.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(global[classId].events.value, entity, (e) => e.id, (e) => e.startOrder)
 				},
 				updated: async (entity) => {
-					addToArray(global[classId].events.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(global[classId].events.value, entity, (e) => e.id, (e) => e.startOrder)
 				},
 				deleted: async (entity) => {
 					global[classId].events.value = global[classId].events.value.filter((c) => c.id !== entity.id)
@@ -40,7 +40,7 @@ export const useTimetable = (classId: string) => {
 		try {
 			await global[classId].setLoading(true)
 			const events = await EventsUseCases.getClassTimetable(classId)
-			events.results.forEach((g) => addToArray(global[classId].events.value, g, (e) => e.id, (e) => e.createdAt))
+			events.results.forEach((g) => addToArray(global[classId].events.value, g, (e) => e.id, (e) => e.startOrder))
 			global[classId].fetched.value = true
 		} catch (error) {
 			await global[classId].setError(error)
@@ -64,16 +64,16 @@ export const useTimetable = (classId: string) => {
 }
 
 let eventClass = null as ClassEntity | null
-export const getEventClass = () => eventClass
-export const openEventModal = async (classInst: ClassEntity) => {
+export const openTimetableModal = async (classInst: ClassEntity) => {
 	eventClass = classInst
-	useClassModal().openCreateTimetable()
+	useClassModal().openTimetable()
 }
 
-export const useCreateEvent = (eventClass: ClassEntity) => {
+export const useCreateEvent = () => {
 	const factory = ref(new EventFactory()) as Ref<EventFactory>
 	factory.value.type = EventType.timetable
-	factory.value.classId = eventClass.id
+	if (!eventClass) useClassModal().closeTimetable()
+	else factory.value.classId = eventClass.id
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -86,7 +86,6 @@ export const useCreateEvent = (eventClass: ClassEntity) => {
 				await EventsUseCases.add(factory.value)
 				await setMessage('Event created successfully.')
 				factory.value.reset()
-				useClassModal().closeCreateTimetable()
 			} catch (error) {
 				await setError(error)
 			}
@@ -94,52 +93,38 @@ export const useCreateEvent = (eventClass: ClassEntity) => {
 		} else factory.value.validateAll()
 	}
 
-	return {
-		factory, error, loading, createEvent
-	}
+	return { factory, error, loading, createEvent, eventClass }
 }
 
-let editingEvent = null as EventEntity | null
-export const getEditingEvent = () => editingEvent
-export const openEventEditModal = async (event: EventEntity) => {
-	editingEvent = event
-	useClassModal().openEditTimetable()
-}
 export const useEditEvent = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
-	const factory = ref(new EventFactory()) as Ref<EventFactory>
-	factory.value.type = EventType.timetable
 
-	if (editingEvent) factory.value.loadEntity(editingEvent)
-	else useClassModal().closeEditTimetable()
-
-	const editEvent = async () => {
+	const editEvent = async (event: EventEntity, factory: EventFactory) => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EventsUseCases.update(editingEvent!.id, factory.value)
+				await EventsUseCases.update(event.id, factory)
 				await setMessage('Event updated successfully')
-				factory.value.reset()
-				useClassModal().closeEditTimetable()
+				factory.reset()
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
-	return { error, loading, factory, editEvent }
+	return { error, loading, editEvent }
 }
 
-export const useDeleteEvent = (classId: string, eventId: string) => {
+export const useDeleteEvent = () => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	const deleteEvent = async () => {
+	const deleteEvent = async (event: EventEntity) => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this event?',
@@ -148,7 +133,7 @@ export const useDeleteEvent = (classId: string, eventId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await EventsUseCases.delete(classId, eventId)
+				await EventsUseCases.delete(event.classId, event.id)
 				await setMessage('Event deleted successfully')
 			} catch (error) {
 				await setError(error)

@@ -22,7 +22,7 @@
 
 		<div v-if="factory.isHosted">
 			<FileInput type="file" @files="catchMedia">
-				<ion-button class="flex items-center btn-outline text-primary">
+				<ion-button class="flex items-center btn-outline border-primary text-primary">
 					<ion-icon :icon="documentOutline" class="!text-xl text-primary mr-2" />
 					{{ factory.media ? 'Change' : 'Add' }} Document
 				</ion-button>

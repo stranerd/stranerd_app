@@ -234,44 +234,17 @@ ion-input, ion-textarea, ion-select {
 	}
 }
 
-.btn-secondary {
-	@extend .btn-padding;
-	--background: #{$color-darkGray} !important;
-	--color: #{$color-white};
-	--border-width: 1px;
-	--border-style: solid;
-	--border-color: #{$color-darkGray};
-}
-
-.btn-outline {
-	@extend .btn-padding;
-	--background: transparent;
-	--color: inherit;
-	--border-width: 1px;
-	--border-style: solid;
-	--border-color: $color-primary;
-}
-
-ion-button.btn-outline-sm {
-	@media (max-width: 640px) {
-		--background: transparent;
-		--padding-top: 0.5rem;
-		--padding-bottom: 0.5rem;
-		--padding-start: 1.25rem;
-		--padding-end: 1.25rem;
-		--color: inherit !important;
-	}
-}
-
 ion-button {
 	height: 100%;
 	--box-shadow: none;
 	box-shadow: none;
 	--border-radius: 0.5rem;
 	border-radius: 0.5rem;
-	font-weight: 700;
+	font-weight: 500;
+	line-height: 1em;
 	text-transform: capitalize;
 	letter-spacing: 0.02rem;
+	margin: 0;
 	@media (min-width: $md) {
 		--border-radius: 0.625rem;
 		border-radius: 0.625rem;
@@ -286,6 +259,49 @@ ion-button {
 	@extend .btn-padding;
 	--background: #{$color-primary};
 	--color: #{$color-white};
+	--border-width: 1px;
+	--border-style: solid;
+	--border-color: $color-primary;
+}
+
+.btn-outline {
+	@extend .btn-padding;
+	--background: transparent;
+	--color: $color-gray;
+	--border-width: 1px;
+	--border-style: solid;
+	--border-color: $color-gray;
+}
+
+.btn-sm {
+	font-size: 12px;
+}
+
+ion-button.btn-outline-sm {
+	@media (max-width: 640px) {
+		--background: transparent;
+		--padding-top: 0.5rem;
+		--padding-bottom: 0.5rem;
+		--padding-start: 1.25rem;
+		--padding-end: 1.25rem;
+		--color: inherit !important;
+	}
+}
+
+.btn-white {
+	@extend .btn-padding;
+	--background: $color-white;
+	--color: #{$color-primary};
+	--border-width: 1px;
+	--border-style: solid;
+	--border-color: $color-white;
+}
+
+.btn-lg {
+	--padding-top: 1.25rem;
+	--padding-bottom: 1.25rem;
+	--padding-start: 4.5rem;
+	--padding-end: 4.5rem;
 }
 
 .select-primary {
@@ -298,18 +314,6 @@ ion-button {
 	border-radius: 8px;
 }
 
-.btn-white {
-	@extend .btn-padding;
-	--background: white;
-	--color: #{$color-primary};
-}
-
-.btn-lg {
-	--padding-top: 1.25rem;
-	--padding-bottom: 1.25rem;
-	--padding-start: 4.5rem;
-	--padding-end: 4.5rem;
-}
 
 ion-popover::part(content) {
 	width: auto !important;

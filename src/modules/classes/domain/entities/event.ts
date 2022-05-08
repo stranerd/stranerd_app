@@ -1,5 +1,5 @@
 import { EmbeddedUser } from '@modules/users'
-import { ClassUsers, EventDataType } from '../types'
+import { ClassUsers, EventDataType, EventType } from '../types'
 import { BaseEntity } from '@modules/core'
 
 export class EventEntity extends BaseEntity {
@@ -31,6 +31,17 @@ export class EventEntity extends BaseEntity {
 		this.users = users
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
+	}
+
+	get startDay () {
+		if (this.data.type !== EventType.timetable) return -1
+		return this.data.start.day
+	}
+
+	get startOrder () {
+		if (this.data.type !== EventType.timetable) return ''
+		const { day, hour, minute } = this.data.start
+		return `${day.toString()}${hour.toString().padStart(2, '0')}${minute.toString().padStart(2, '0')}`
 	}
 
 	getAllUsers () {
