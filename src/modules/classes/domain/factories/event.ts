@@ -105,7 +105,8 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 	}
 
 	set startTime (value: string) {
-		const [hour, minute] = value.split(':').map(parseInt)
+		const [hour, minute] = value.split(':').map((x) => parseInt(x))
+		if (!isNumber(hour).valid || !isNumber(minute).valid) return
 		this.start = { ...this.start, hour, minute }
 	}
 
@@ -114,7 +115,8 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 	}
 
 	set endTime (value: string) {
-		const [hour, minute] = value.split(':').map(parseInt)
+		const [hour, minute] = value.split(':').map((x) => parseInt(x))
+		if (!isNumber(hour).valid || !isNumber(minute).valid) return
 		this.end = { ...this.end, hour, minute }
 	}
 

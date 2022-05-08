@@ -16,7 +16,7 @@
 		<div class="flex flex-col md:gap-4">
 			<div v-for="event in timetable" :key="event.hash"
 				class="card-padding bg-white rounded-xl flex gap-1 items-center">
-				<span class="bg-new_gray text-gray py-1 px-2 rounded-lg">
+				<span class="bg-new_gray text-gray py-1 px-2 rounded-lg text-sub">
 					{{
 						event.data.start.hour.toString().padStart(2, '0')
 					}}:{{ event.data.start.minute.toString().padStart(2, '0') }}

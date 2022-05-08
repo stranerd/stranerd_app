@@ -41,7 +41,7 @@ export class EventEntity extends BaseEntity {
 	get startOrder () {
 		if (this.data.type !== EventType.timetable) return ''
 		const { day, hour, minute } = this.data.start
-		return `${day.toString()}${hour.toString().padStart(2, '0')}${minute.toString().padStart(2, '0')}`
+		return `${day.toString()}${hour.toString().padStart(2, '0')}${minute.toString().padStart(2, '0')}${this.createdAt}`
 	}
 
 	getAllUsers () {

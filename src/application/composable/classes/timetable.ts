@@ -16,10 +16,10 @@ export const useTimetable = (classId: string) => {
 		const listener = useListener(async () => {
 			return await EventsUseCases.listenToClassTimetable(classId, {
 				created: async (entity) => {
-					addToArray(global[classId].events.value, entity, (e) => e.id, (e) => e.startOrder)
+					addToArray(global[classId].events.value, entity, (e) => e.id, (e) => e.startOrder, true)
 				},
 				updated: async (entity) => {
-					addToArray(global[classId].events.value, entity, (e) => e.id, (e) => e.startOrder)
+					addToArray(global[classId].events.value, entity, (e) => e.id, (e) => e.startOrder, true)
 				},
 				deleted: async (entity) => {
 					global[classId].events.value = global[classId].events.value.filter((c) => c.id !== entity.id)
@@ -40,7 +40,7 @@ export const useTimetable = (classId: string) => {
 		try {
 			await global[classId].setLoading(true)
 			const events = await EventsUseCases.getClassTimetable(classId)
-			events.results.forEach((g) => addToArray(global[classId].events.value, g, (e) => e.id, (e) => e.startOrder))
+			events.results.forEach((g) => addToArray(global[classId].events.value, g, (e) => e.id, (e) => e.startOrder, true))
 			global[classId].fetched.value = true
 		} catch (error) {
 			await global[classId].setError(error)
