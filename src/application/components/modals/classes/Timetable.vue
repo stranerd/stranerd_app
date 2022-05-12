@@ -55,7 +55,6 @@
 						type="submit">
 						Add
 					</IonButton>
-					<IonButton class="btn-primary w-full" @click="closeModal">Done</IonButton>
 				</div>
 			</form>
 			<div v-if="tab === 1" class="flex flex-col gap-4">
@@ -95,7 +94,6 @@
 <script lang="ts">
 import { computed, defineComponent, Ref, ref } from 'vue'
 import { useCreateEvent, useDeleteEvent, useEditEvent, useTimetable } from '@app/composable/classes/timetable'
-import { useClassModal } from '@app/composable/core/modals'
 import { EventEntity, EventFactory, EventType } from '@modules/classes'
 import { pencilOutline, trashOutline } from 'ionicons/icons'
 import { IonSelect, IonSelectOption } from '@ionic/vue'
@@ -122,7 +120,6 @@ export default defineComponent({
 			createFactory.value.startDay = createFactory.value.endDay = day
 			editFactory.value.startDay = editFactory.value.endDay = day
 		}
-		const closeModal = () => useClassModal().closeTimetable()
 		const { loading: listLoading, error: listError, events } = useTimetable(eventClass?.id ?? '')
 		const { loading: deleteLoading, error: deleteError, deleteEvent } = useDeleteEvent()
 		const timetable = computed(() => events.value
@@ -142,7 +139,7 @@ export default defineComponent({
 		return {
 			createError, createLoading, createEvent, createFactory, eventClass,
 			tab, editError, editLoading, updateEvent, editFactory, enterEdit, pencilOutline,
-			activeDay, days, chooseDay, closeModal,
+			activeDay, days, chooseDay,
 			listLoading, listError, timetable, editingEvent,
 			trashOutline, deleteEvent, deleteLoading, deleteError
 		}
