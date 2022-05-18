@@ -3,7 +3,7 @@
 		<template v-slot:title>
 			Create a class
 		</template>
-		<ClassForm :error="error" :factory="factory" :loading="loading" :submit="createClass">
+		<ClassForm :error="error" :factory="factory" :loading="loading" :showSchool="true" :submit="createClass">
 			<template v-slot:buttonText>Create Class</template>
 		</ClassForm>
 	</Modal>

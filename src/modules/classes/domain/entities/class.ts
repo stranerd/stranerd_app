@@ -5,6 +5,11 @@ import { ClassUsers } from '../types'
 type ClassConstructorArgs = {
 	id: string
 	name: string
+	school: {
+		institutionId: string
+		facultyId: string
+		departmentId: string
+	}
 	description: string
 	photo: Media | null
 	coverPhoto: Media | null
@@ -19,6 +24,11 @@ type ClassConstructorArgs = {
 export class ClassEntity extends BaseEntity {
 	public readonly id: string
 	public readonly name: string
+	public readonly school: {
+		institutionId: string
+		facultyId: string
+		departmentId: string
+	}
 	public readonly description: string
 	public readonly photo: Media | null
 	public readonly coverPhoto: Media | null
@@ -30,13 +40,14 @@ export class ClassEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, name, description, photo, coverPhoto,
+		             id, name, school, description, photo, coverPhoto,
 		             createdAt, user, courses,
 		             users, updatedAt, requests
 	             }: ClassConstructorArgs) {
 		super()
 		this.id = id
 		this.name = name
+		this.school = school
 		this.description = description
 		this.photo = photo ? parseMedia(photo) : null
 		this.coverPhoto = coverPhoto ? parseMedia(coverPhoto) : null
@@ -50,10 +61,6 @@ export class ClassEntity extends BaseEntity {
 
 	get isUserVerified () {
 		return this.user.roles.isVerified
-	}
-
-	get avatar () {
-		return null
 	}
 
 	get membersAndRequests () {

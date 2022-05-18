@@ -202,7 +202,7 @@ export default defineComponent({
 			props.next()
 		}
 		const { schools, gatewayExams } = useInstitutionList()
-		const { courses } = useCourseList()
+		const { courses, fetchGeneralCourses } = useCourseList()
 		const { faculties, fetchFaculties } = useFacultyList()
 		const { departments, fetchDepartments } = useDepartmentList()
 		const filteredFaculties = computed(() => faculties.value.filter((f) => f.institutionId === factory.value.institutionId))
@@ -210,7 +210,10 @@ export default defineComponent({
 
 		watch(() => factory.value.institutionId, async () => {
 			factory.value.resetProp('facultyId')
-			if (factory.value.institutionId) await fetchFaculties(factory.value.institutionId)
+			if (factory.value.institutionId) {
+				await fetchFaculties(factory.value.institutionId)
+				await fetchGeneralCourses(factory.value.institutionId)
+			}
 		})
 
 		watch(() => factory.value.facultyId, async () => {

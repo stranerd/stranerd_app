@@ -12,29 +12,34 @@
 					{{ day.name }}
 				</a>
 			</div>
-			<form v-if="tab === 0" class="flex flex-col gap-4" @submit.prevent="createEvent">
-				<IonSelect v-if="eventClass" v-model="createFactory.title" class="capitalize bg-new_gray"
+			<div class="flex flex-col gap-4">
+				<IonSelect v-if="eventClass" v-model="factory.title" class="capitalize bg-new_gray"
 					interface="action-sheet" placeholder="Select Course">
 					<IonSelectOption v-for="course in eventClass.courses" :key="course" class="capitalize">
 						{{ course }}
 					</IonSelectOption>
 				</IonSelect>
-				<IonInput v-else v-model="createFactory.title" class="w-full border border-new_gray"
+				<IonInput v-else v-model="factory.title" class="w-full border bg-new_gray border-new_gray"
 					placeholder="Enter course"
 					required
 					show-cancel-button="never"
 				/>
+				<IonInput v-model="factory.lecturer" class="w-full border bg-new_gray border-new_gray"
+					placeholder="Enter lecturer name"
+					required
+					show-cancel-button="never"
+				/>
 				<div class="flex gap-4 items-center">
-					<IonInput :value="createFactory.startTime"
+					<IonInput :value="factory.startTime"
 						class="w-full bg-new_gray" placeholder="Select start date" required
 						type="time"
-						@change="(e) => createFactory.startTime = e.target.value" />
-					<IonInput :min="createFactory.startTime" :value="createFactory.endTime"
+						@change="(e) => factory.startTime = e.target.value" />
+					<IonInput :min="factory.startTime" :value="factory.endTime"
 						class="w-full bg-new_gray" placeholder="Select end date" required
 						type="time"
-						@change="(e) => createFactory.endTime = e.target.value" />
+						@change="(e) => factory.endTime = e.target.value" />
 				</div>
-				<div class="flex flex-col gap-2">
+				<div v-if="tab === 0" class="flex flex-col gap-2">
 					<div v-for="event in timetable" :key="event.hash" class="flex gap-1 items-center">
 						<span class="bg-new_gray text-gray py-1 px-2 rounded-lg text-sub">
 							{{
@@ -51,40 +56,19 @@
 					</div>
 				</div>
 				<div class="flex gap-4 items-center">
-					<IonButton :disabled="createLoading || !createFactory.valid" class="btn-outline w-full"
-						type="submit">
-						Add
-					</IonButton>
-				</div>
-			</form>
-			<div v-if="tab === 1" class="flex flex-col gap-4">
-				<IonSelect v-if="eventClass" v-model="editFactory.title" class="capitalize bg-new_gray"
-					interface="action-sheet" placeholder="Select Course">
-					<IonSelectOption v-for="course in eventClass.courses" :key="course" class="capitalize">
-						{{ course }}
-					</IonSelectOption>
-				</IonSelect>
-				<IonInput v-else v-model="editFactory.title" class="w-full border border-new_gray"
-					placeholder="Enter course"
-					required
-					show-cancel-button="never"
-				/>
-				<div class="flex gap-4 items-center">
-					<IonInput :value="editFactory.startTime"
-						class="w-full bg-new_gray" placeholder="Select start date" required
-						type="time"
-						@change="(e) => editFactory.startTime = e.target.value" />
-					<IonInput :min="editFactory.startTime" :value="editFactory.endTime"
-						class="w-full bg-new_gray" placeholder="Select end date" required
-						type="time"
-						@change="(e) => editFactory.endTime = e.target.value" />
-				</div>
-				<div class="flex gap-4 items-center">
-					<IonButton class="btn-outline w-full" @click="tab = 0">Back</IonButton>
-					<IonButton :disabled="editLoading || !editFactory.valid" class="btn-primary w-full"
-						@click="updateEvent">
-						Save
-					</IonButton>
+					<template v-if="tab === 0">
+						<IonButton :disabled="loading || !factory.valid" class="btn-outline w-full"
+							@click="createEvent">
+							Add
+						</IonButton>
+					</template>
+					<template v-else-if="tab === 1">
+						<IonButton class="btn-outline w-full" @click="tab = 0">Back</IonButton>
+						<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full"
+							@click="updateEvent">
+							Save
+						</IonButton>
+					</template>
 				</div>
 			</div>
 		</div>
@@ -136,10 +120,12 @@ export default defineComponent({
 			if (!passed) return
 			tab.value = 0
 		}
+		const factory = computed(() => tab.value === 0 ? createFactory.value : editFactory.value)
+		const loading = computed(() => tab.value === 0 ? createLoading.value : editLoading.value)
 		return {
-			createError, createLoading, createEvent, createFactory, eventClass,
-			tab, editError, editLoading, updateEvent, editFactory, enterEdit, pencilOutline,
-			activeDay, days, chooseDay,
+			createError, createEvent, eventClass,
+			tab, editError, updateEvent, enterEdit, pencilOutline,
+			activeDay, days, chooseDay, factory, loading,
 			listLoading, listError, timetable, editingEvent,
 			trashOutline, deleteEvent, deleteLoading, deleteError
 		}

@@ -21,6 +21,49 @@
 					show-cancel-button="never"
 				/>
 
+				<template v-if="showSchool">
+					<div class="flex flex-col items-start gap-1">
+						<ion-label>What school is the class in?</ion-label>
+						<ion-select v-model="factory.institutionId"
+							class="bg-new_gray w-full capitalize"
+							interface="action-sheet" placeholder="Select university"
+							required>
+							<ion-select-option v-for="school in schools" :key="school.hash" :value="school.id"
+								class="capitalize">
+								{{ school.name }}
+							</ion-select-option>
+						</ion-select>
+					</div>
+
+					<div class="flex flex-col items-start gap-1">
+						<ion-label>What faculty is the class in?</ion-label>
+						<ion-select v-model="factory.facultyId"
+							class="bg-new_gray w-full capitalize"
+							interface="action-sheet" placeholder="Select faculty"
+							required>
+							<ion-select-option v-for="faculty in filteredFaculties" :key="faculty.hash"
+								:value="faculty.id"
+								class="capitalize">
+								{{ faculty.name }}
+							</ion-select-option>
+						</ion-select>
+					</div>
+
+					<div class="flex flex-col items-start gap-1">
+						<ion-label>What department is the class in?</ion-label>
+						<ion-select v-model="factory.departmentId"
+							class="bg-new_gray w-full capitalize"
+							interface="action-sheet" placeholder="Select department"
+							required>
+							<ion-select-option v-for="department in filteredDepartments" :key="department.hash"
+								:value="department.id"
+								class="capitalize">
+								{{ department.name }}
+							</ion-select-option>
+						</ion-select>
+					</div>
+				</template>
+
 				<ion-button class="btn-primary ml-auto" @click="tab = 1">Next</ion-button>
 			</div>
 		</template>
@@ -57,14 +100,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import { ClassFactory } from '@modules/classes'
-import { IonRippleEffect } from '@ionic/vue'
+import { IonLabel, IonRippleEffect, IonSelect, IonSelectOption } from '@ionic/vue'
 import { closeOutline } from 'ionicons/icons'
+import { useInstitutionList } from '@app/composable/school/institutions'
+import { useFacultyList } from '@app/composable/school/faculties'
+import { useDepartmentList } from '@app/composable/school/departments'
 
 export default defineComponent({
 	name: 'ClassForm',
-	components: { IonRippleEffect },
+	components: { IonRippleEffect, IonSelect, IonSelectOption, IonLabel },
 	props: {
 		factory: {
 			type: ClassFactory,
@@ -81,6 +127,11 @@ export default defineComponent({
 		error: {
 			type: String,
 			required: true
+		},
+		showSchool: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
 	setup (props) {
@@ -91,7 +142,25 @@ export default defineComponent({
 			props.factory.addCourse(course.value)
 			course.value = ''
 		}
-		return { tab, course, addCourse, closeOutline }
+		const { schools } = useInstitutionList()
+		const { faculties, fetchFaculties } = useFacultyList()
+		const { departments, fetchDepartments } = useDepartmentList()
+		const filteredFaculties = computed(() => faculties.value.filter((f) => f.institutionId === props.factory.institutionId))
+		const filteredDepartments = computed(() => departments.value.filter((d) => d.facultyId === props.factory.facultyId))
+
+		watch(() => props.factory.institutionId, async () => {
+			props.factory.resetProp('facultyId')
+			if (props.factory.institutionId) await fetchFaculties(props.factory.institutionId)
+		})
+
+		watch(() => props.factory.facultyId, async () => {
+			props.factory.resetProp('departmentId')
+			if (props.factory.facultyId) await fetchDepartments(props.factory.facultyId)
+		})
+		return {
+			tab, course, addCourse, closeOutline,
+			schools, filteredFaculties, filteredDepartments
+		}
 	}
 })
 </script>

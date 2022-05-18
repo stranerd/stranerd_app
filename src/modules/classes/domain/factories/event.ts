@@ -14,7 +14,7 @@ import { Cron, EventDataType, EventType } from '../types'
 
 type Keys = {
 	title: string, classId: string, type: EventType,
-	scheduledAt: number, start: Cron, end: Cron
+	scheduledAt: number, start: Cron, end: Cron, lecturer: string
 }
 
 const isCronValid = (val: any) => {
@@ -31,7 +31,8 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 		type: { required: true, rules: [isString] },
 		scheduledAt: { required: () => this.isOneOffType, rules: [isNumber] },
 		start: { required: () => this.isTimetableType, rules: [isCronValid] },
-		end: { required: () => this.isTimetableType, rules: [isCronValid] }
+		end: { required: () => this.isTimetableType, rules: [isCronValid] },
+		lecturer: { required: () => this.isTimetableType, rules: [isString, isLongerThanX(0)] }
 	}
 
 	reserved = ['classId', 'type']
@@ -41,7 +42,7 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 		const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
 		const start: Cron = { day: 1, hour: 8, minute: 0, tz }
 		const end: Cron = { day: 1, hour: 10, minute: 0, tz }
-		super({ title: '', classId: '', type: EventType.timetable, scheduledAt: Date.now(), start, end })
+		super({ title: '', classId: '', type: EventType.timetable, scheduledAt: Date.now(), start, end, lecturer: '' })
 	}
 
 	get title () {
@@ -128,6 +129,14 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 		this.set('end', value)
 	}
 
+	get lecturer () {
+		return this.values.lecturer
+	}
+
+	set lecturer (value: string) {
+		this.set('lecturer', value)
+	}
+
 	get scheduledAt () {
 		return this.values.scheduledAt
 	}
@@ -141,6 +150,7 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 		this.classId = entity.classId
 		this.type = entity.data.type
 		if (entity.data.type === EventType.timetable) {
+			this.lecturer = entity.data.lecturer
 			this.start = entity.data.start
 			this.end = entity.data.end
 		} else this.scheduledAt = entity.data.scheduledAt
@@ -148,10 +158,10 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 
 	toModel = async () => {
 		if (this.valid) {
-			const { title, classId, type, start, end, scheduledAt } = this.validValues
+			const { title, classId, type, start, end, scheduledAt, lecturer } = this.validValues
 			return {
 				title, classId,
-				data: (this.isTimetableType ? { type, start, end } : { type, scheduledAt }) as EventDataType
+				data: (this.isTimetableType ? { type, start, end, lecturer } : { type, scheduledAt }) as EventDataType
 			}
 		} else {
 			throw new Error('Validation errors')

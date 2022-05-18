@@ -13,6 +13,7 @@ type EventTimetableType = {
 	type: EventType.timetable
 	start: Cron
 	end: Cron
+	lecturer: string
 }
 type EventOneOffType = {
 	type: EventType.oneOff
