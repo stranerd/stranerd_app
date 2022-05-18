@@ -78,18 +78,14 @@ export const useSearch = () => {
 			try {
 				await global.setLoading(true)
 				const searchObj = {
-					questions: QuestionsUseCases.search,
-					users: UsersUseCases.search,
-					flashCards: FlashCardsUseCases.search,
-					sets: SetsUseCases.search,
-					testPreps: TestPrepsUseCases.search,
-					notes: NotesUseCases.search,
-					videos: VideosUseCases.search
+					questions: QuestionsUseCases, users: UsersUseCases,
+					flashCards: FlashCardsUseCases, sets: SetsUseCases,
+					testPreps: TestPrepsUseCases, notes: NotesUseCases, videos: VideosUseCases
 				}
 				await Promise.all(
 					Object.entries(searchObj).map(async ([key, useCase]) => {
 						//@ts-ignore
-						global.res[key].value = await useCase(val)
+						global.res[key].value = await useCase.search(val)
 					})
 				)
 				global.fetched.value = true
