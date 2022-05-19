@@ -40,7 +40,7 @@
 							<DisplayError :error="factory.errors.cPassword" />
 						</div>
 						<ion-button class="w-full !capitalize" type="submit">Sign up
-							<BlockLoading v-if="loading" />
+							<ion-spinner v-if="loading" />
 						</ion-button>
 					</form>
 					<div class="flex justify-between px-5 items-center mt-8">

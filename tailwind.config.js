@@ -1,5 +1,6 @@
 module.exports = {
 	content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+	darkMode: 'Media',
 	theme: {
 		screens: {
 			sm: '640px',
@@ -11,7 +12,7 @@ module.exports = {
 		extend: {
 			colors: {
 				// Build your palette here
-				primary: '#546DD3',
+				primary: '#162565',
 				white: '#FEFEFE',
 				black: '#111B25',
 				blue: '#1997DE',

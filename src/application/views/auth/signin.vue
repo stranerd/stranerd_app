@@ -1,6 +1,6 @@
 <template>
 	<Auth>
-		<div class="w-full h-full flex bg-white">
+		<div class="w-full h-full flex bg-white ">
 			<div class="bg-primary w-7/12 lg:flex flex-col items-center justify-center h-full hidden ">
 				<h1 class="text-5xl text-white font-extrabold mb-12">Welcome back</h1>
 				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png">
@@ -22,7 +22,7 @@
 							<DisplayError :error="factory.errors.password" />
 						</div>
 						<ion-button :disabled="loading" class="w-full capitalize" type="submit">Login
-							<BlockLoading v-if="loading" />
+							<ion-spinner v-if="loading" />
 						</ion-button>
 					</form>
 					<div class="w-full flex justify-end items-center text-main_dark">
@@ -53,11 +53,12 @@ import { defineComponent } from 'vue'
 import { useEmailSignin } from '@app/composable/auth/signin'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
 import Auth from '@app/layouts/Auth.vue'
+import { IonSpinner } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'AuthSignin',
-	displayName: 'Signin',
-	components: { AuthProviders, Auth },
+	displayName: 'Login',
+	components: { AuthProviders, Auth, IonSpinner },
 	middlewares: ['isNotAuthenticated'],
 	setup () {
 		const { factory, loading, error, signin } = useEmailSignin()
