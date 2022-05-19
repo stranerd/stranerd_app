@@ -28,17 +28,16 @@ export default defineComponent({
 	.auth {
 		:deep(ion-input) {
 			margin-bottom: 0;
-			width: 420px;
 			max-width: 90vw !important;
+			background: $color-lightGray;
 		}
 
 		:deep(ion-button) {
-			--border-radius: .75rem;
+			--border-radius: .5rem;
 			--padding-top: 1.4rem !important;
 			--padding-bottom: 1.4rem !important;
-			height: 3.5rem;
-			font-size: 24px;
-			font-weight: 700;
+			height: 36px;
+			font-weight: 400;
 			max-width: 90vw !important;
 		}
 	}
