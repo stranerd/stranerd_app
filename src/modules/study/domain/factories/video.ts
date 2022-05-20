@@ -15,7 +15,7 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 	readonly rules = {
 		title: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		description: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
-		isHosted: { required: false, rules: [isBoolean] },
+		isHosted: { required: true, rules: [isBoolean] },
 		link: { required: () => !this.isHosted, rules: [isString] },
 		media: { required: () => this.isHosted, rules: [isVideo] }
 	}

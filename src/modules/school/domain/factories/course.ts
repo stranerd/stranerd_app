@@ -7,7 +7,7 @@ export class CourseFactory extends BaseFactory<CourseEntity, CourseToModel, Cour
 	readonly rules = {
 		name: { required: true, rules: [isString, isLongerThanX(0)] },
 		institutionId: { required: true, rules: [isString, isLongerThanX(0)] },
-		departmentId: { required: false, rules: [isString, isLongerThanX(0)] }
+		departmentId: { required: true, nullable: true, rules: [isString, isLongerThanX(0)] }
 	}
 
 	reserved = []

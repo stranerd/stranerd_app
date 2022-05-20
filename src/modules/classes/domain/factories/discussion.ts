@@ -9,8 +9,8 @@ type Keys = { content: string, groupId: string, media: Content | null }
 export class DiscussionFactory extends BaseFactory<DiscussionEntity, DiscussionToModel, Keys> {
 	readonly rules = {
 		content: { required: true, rules: [isString] },
-		groupId: { required: false, rules: [isString, isLongerThanX(0)] },
-		media: { required: false, rules: [isFile] }
+		groupId: { required: true, rules: [isString, isLongerThanX(0)] },
+		media: { required: true, nullable: true, rules: [isFile] }
 	}
 
 	reserved = ['groupId']
