@@ -12,4 +12,5 @@ export interface AnnouncementFromModel extends AnnouncementToModel {
 export interface AnnouncementToModel {
 	body: string
 	classId: string
+	reminder: number | null
 }

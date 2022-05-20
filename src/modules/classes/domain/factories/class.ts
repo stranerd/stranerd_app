@@ -21,8 +21,8 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 			required: true,
 			rules: [isArrayOfX((cur) => isString(cur).valid && isLongerThan(cur as any, 0).valid, 'strings')]
 		},
-		photo: { required: false, rules: [isFile] },
-		coverPhoto: { required: false, rules: [isFile] }
+		photo: { required: true, nullable: true, rules: [isFile] },
+		coverPhoto: { required: true, nullable: true, rules: [isFile] }
 	}
 
 	reserved = []

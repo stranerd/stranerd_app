@@ -3,7 +3,9 @@ import { BaseFactory } from '@modules/core'
 import { AnnouncementEntity } from '../entities/announcement'
 import { AnnouncementToModel } from '../../data/models/announcement'
 
-export class AnnouncementFactory extends BaseFactory<AnnouncementEntity, AnnouncementToModel, AnnouncementToModel> {
+type Keys = { body: string, classId: string }
+
+export class AnnouncementFactory extends BaseFactory<AnnouncementEntity, AnnouncementToModel, Keys> {
 	readonly rules = {
 		body: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		classId: { required: true, rules: [isString] }
@@ -39,7 +41,7 @@ export class AnnouncementFactory extends BaseFactory<AnnouncementEntity, Announc
 	toModel = async () => {
 		if (this.valid) {
 			const { body, classId } = this.validValues
-			return { body, classId }
+			return { body, classId, reminder: null }
 		} else {
 			throw new Error('Validation errors')
 		}
