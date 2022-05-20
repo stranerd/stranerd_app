@@ -196,9 +196,7 @@ ion-popover {
 ion-searchbar {
 	--background: transparent !important;
 	--box-shadow: none !important;
-	--icon-color: #{$color-iconInactive} !important;
-	--color: #{$color-mainDark} !important;
-	--placeholder-color: #{$color-iconInactive} !important;
+	--placeholder-color: #{$color-secondaryText} !important;
 	padding: 0 0.75rem !important;
 	height: 48px !important;
 	border-radius: .75rem !important;
@@ -216,13 +214,30 @@ ion-input, ion-textarea, ion-select {
 	--box-shadow: none;
 	--border-radius: .75rem;
 	border-radius: .75rem;
-	--icon-color: #{$color-iconInactive} !important;
+	--icon-color: transparent !important;
 	--placeholder-color: #{$color-secondaryText} !important;
 	--placeholder-opacity: 1;
 	@media (max-width: 640px) {
 		--border-radius: .5rem;
 		border-radius: .5rem;
 	}
+	flex-grow: 0 !important;
+	outline: 1px solid transparent;
+
+	&:focus-within {
+		--icon-color: #{$color-primaryBg} !important;
+		outline-color: $color-primaryBg;
+	}
+}
+
+ion-input.valid, ion-textarea.valid, ion-select.valid {
+	--icon-color: #{$color-success} !important;
+	outline-color: $color-success;
+}
+
+ion-input.invalid, ion-textarea.invalid, ion-select.invalid {
+	--icon-color: #{$color-danger} !important;
+	outline-color: $color-danger;
 }
 
 .btn-padding {

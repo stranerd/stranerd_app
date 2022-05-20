@@ -38,6 +38,7 @@ module.exports = {
 		],
 		'@typescript-eslint/no-use-before-define': 'off',
 		'no-tabs': 'off',
+		'vue/no-reserved-component-names': 'off',
 		'no-var': 'error',
 		'no-use-before-define': 'off',
 		indent: ['error', 'tab', { SwitchCase: 1 }],

@@ -2,7 +2,7 @@
 	<div class="flex-col gap-4">
 		<ion-button class="btn-outline w-full font-bold capitalize flex justify-center items-center"
 			@click="loginWithGoogle">
-			<ion-icon :icon="logoGoogle" class="mr-4" size="100px" />
+			<ion-icon :icon="logoGoogle" class="mr-2" size="100px" />
 			<span>Google</span>
 		</ion-button>
 		<PageLoading v-if="loading" />

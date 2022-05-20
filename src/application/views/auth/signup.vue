@@ -11,38 +11,43 @@
 					<div class="flex w-full gap-4">
 						<div class="flex flex-col w-1/2">
 							<ion-label class="font-bold text-sm mb-2">First Name</ion-label>
-							<ion-input v-model="factory.firstName" :size="24" placeholder="First Name"
-								position="floating"
-								type="text"></ion-input>
+							<ion-input v-model="factory.firstName"
+								:class="{'valid': factory.isValid('firstName'), 'invalid': factory.errors.firstName}"
+								:size="24"
+								placeholder="First Name" position="floating" type="text" />
 							<DisplayError :error="factory.errors.firstName" />
 						</div>
 						<div class="flex flex-col w-1/2">
 							<ion-label class="font-bold text-sm mb-2">Last Name</ion-label>
-							<ion-input v-model="factory.lastName" :size="24" placeholder="Last Name"
-								position="floating"
-								type="text"></ion-input>
+							<ion-input v-model="factory.lastName"
+								:class="{'valid': factory.isValid('lastName'), 'invalid': factory.errors.lastName}"
+								:size="24"
+								placeholder="Last Name" position="floating" type="text" />
 							<DisplayError :error="factory.errors.lastName" />
 						</div>
 					</div>
 					<div class="flex flex-col">
 						<ion-label class="font-bold text-sm mb-2">Email</ion-label>
-						<ion-input v-model.trim="factory.email" :size="24" inputmode="email"
-							placeholder="Email Address"
-							position="floating" type="email" />
+						<ion-input v-model.trim="factory.email"
+							:class="{'valid': factory.isValid('email'), 'invalid': factory.errors.email}"
+							:size="24"
+							inputmode="email" placeholder="Email Address" position="floating" type="email" />
 						<DisplayError :error="factory.errors.email" />
 					</div>
 					<div class="flex flex-col">
 						<ion-label class="font-bold text-sm mb-2">Password</ion-label>
-						<ion-input v-model="factory.password" :size="24" placeholder="Password"
-							position="floating"
-							type="password"></ion-input>
+						<ion-input v-model="factory.password"
+							:class="{'valid': factory.isValid('password'), 'invalid': factory.errors.password}"
+							:size="24"
+							placeholder="Password" position="floating" type="password" />
 						<DisplayError :error="factory.errors.password" />
 					</div>
 					<div class="flex flex-col">
 						<ion-label class="font-bold text-sm mb-2">Confirm Password</ion-label>
-						<ion-input v-model="factory.cPassword" :size="24" placeholder="Confirm Password"
-							position="floating"
-							type="password"></ion-input>
+						<ion-input v-model="factory.cPassword"
+							:class="{'valid': factory.isValid('cPassword'), 'invalid': factory.errors.cPassword}"
+							:size="24"
+							placeholder="Confirm Password" position="floating" type="password" />
 						<DisplayError :error="factory.errors.cPassword" />
 					</div>
 					<ion-button :disabled="loading" class="w-full btn-primary" type="submit">

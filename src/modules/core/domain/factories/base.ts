@@ -35,7 +35,7 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 
 		this.values[property] = value
 		this.validValues[property] = check.isValid ? value : this.defaults[property]
-		this.errors[property] = check.message ?? ''
+		this.errors[property] = this.defaults[property] === value ? '' : check.message
 
 		return check.isValid
 	}
@@ -52,7 +52,7 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 			required: this.rules[property].required,
 			nullable: this.rules[property].nullable
 		})
-		return { isValid, message: errors.find((e) => !!e) ?? null }
+		return { isValid, message: errors.find((e) => !!e) ?? '' }
 	}
 
 	reset () {
