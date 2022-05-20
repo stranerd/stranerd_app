@@ -25,7 +25,7 @@
 
 @layer utilities {
 	body {
-		@apply md:bg-new_gray
+		@apply text-body bg-bodyBg text-bodyText
 	}
 
 	.modal-padding-x {
@@ -37,11 +37,11 @@
 	}
 
 	.layout-page {
-		@apply flex flex-row lg:gap-10 flex-grow md:bg-new_gray min-h-full
+		@apply flex flex-row lg:gap-10 flex-grow min-h-full
 	}
 
 	.layout-body {
-		@apply lg:w-7/12 w-full min-h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] md:bg-new_gray
+		@apply lg:w-7/12 w-full min-h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw]
 	}
 
 	.layout-side-left {

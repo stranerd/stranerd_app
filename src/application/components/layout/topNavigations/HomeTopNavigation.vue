@@ -1,7 +1,5 @@
 <template>
-	<ion-header
-		:class="[show ?'fixed bg-white top-0 bottom-0 !text-white':'', 'w-full flex flex-col z-10 bg-white text-primary nav-shadow']"
-		role="navigation">
+	<ion-header class="w-full flex flex-col z-10 nav-shadow" role="navigation">
 		<div class="md:px-16 p-4 hidden lg:flex items-center justify-between">
 			<router-link class="hidden lg:block" to="/">
 				<Logo :secondary="true" />
@@ -19,7 +17,6 @@
 
 				<Search class="flex-grow min-w-[20rem]" />
 			</div>
-
 			<div class="gap-8 lg:flex hidden">
 				<router-link class="btn border border-faded_gray text-primary !px-10 rounded-xl" to="/auth/signup">
 					Sign Up
@@ -31,75 +28,34 @@
 			</div>
 		</div>
 
-		<ion-toolbar
-			:class="{'text-white': show}"
-			:style="`--background:${show ? '#546DD3' : 'white'}`"
-			class="lg:hidden bg-white px-4 border-0 flex items-center justify-center"
-		>
-			<div class="flex items-center justify-between">
-				<span class="cursor-pointer" @click="toggleMenu">
-					<ion-icon :icon="show ? closeOutline : menuOutline" size="100px" />
-				</span>
-				<router-link class="flex items-center" to="/">
-					<Logo :secondary="!show" />
-				</router-link>
-				<IonIcon :icon="searchOutline" class="text-xl ml-4" @click="$router.push('/search')" />
+		<ion-toolbar class="lg:hidden px-4 border-0 h-12 flex items-center justify-center">
+			<div class="flex items-center justify-center font-bold text-base">
+				<span>{{ $route.meta.displayName ?? 'Stranerd' }}</span>
 			</div>
 		</ion-toolbar>
-		<div v-if="show"
-			class="grow-1 lg:hidden px-2 flex flex-col text-center mt-8 gap-6 bg-white text-main_dark items-center">
-			<router-link class="smallScreenLink link-custom-sm" to="/">
-				Home
-			</router-link>
-			<router-link class=" smallScreenLink link-custom-sm" to="/questions">
-				Questions
-			</router-link>
-			<router-link class=" smallScreenLink link-custom-sm" to="/study">
-				Study
-			</router-link>
-
-			<router-link class="btn btn-custom text-white bg-primary h-12 rounded-xl w-60 mx-auto"
-				to="/auth/signin">
-				Log In
-			</router-link>
-			<router-link class="btn border border-faded_gray text-primary h-12 rounded-xl w-60 mx-auto"
-				to="/auth/signup">
-				Sign Up
-			</router-link>
-		</div>
 	</ion-header>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { disableScroll, enableScroll } from '@utils/html'
+import { defineComponent } from 'vue'
 import Logo from '@app/components/core/Logo.vue'
-import { IonHeader, IonIcon, IonToolbar } from '@ionic/vue'
-import { closeOutline, menuOutline, searchOutline } from 'ionicons/icons'
+import { IonHeader, IonToolbar } from '@ionic/vue'
 import Search from '@app/components/search/Search.vue'
 
 export default defineComponent({
 	name: 'HomeTopNavigation',
-	components: { Logo, IonIcon, IonHeader, IonToolbar, Search },
-	setup () {
-		const show = ref(false)
-		const toggleMenu = () => {
-			show.value ? enableScroll() : disableScroll()
-			show.value = !show.value
-		}
+	components: { Logo, IonHeader, IonToolbar, Search }
 
-		return { show, toggleMenu, menuOutline, closeOutline, searchOutline }
-	}
 })
 </script>
 
 <style lang="scss" scoped>
-	.link-custom {
-		font-weight: 700;
-		font-size: 16px;
+	ion-toolbar {
+		--background: #{$color-headerBg};
+		--color: #{$color-headerText};
 	}
 
-	.link-custom-sm {
+	.link-custom {
 		font-weight: 700;
 		font-size: 16px;
 	}

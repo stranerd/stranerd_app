@@ -21,10 +21,12 @@ http://ionicframework.com/docs/theming/ */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 
 :root {
+	--ion-text-color: $color-bodyText;
+	--ion-background-color: $color-bodyBg;
 	--ion-font-family: 'DM Sans', sans-serif;
 
 	/** primary **/
-	--ion-color-primary: #546DD3;
+	--ion-color-primary: #162565;
 	--ion-color-primary-rgb: 56, 128, 255;
 	--ion-color-primary-contrast: #ffffff;
 	--ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -162,10 +164,14 @@ ion-popover {
 		contain: content;
 		overflow-y: auto;
 		max-height: 100vh;
+		width: 100vw;
+		@media (min-width: $md) {
+			width: auto;
+		}
 
 		.modal-content {
-			border-radius: 1.5rem 1.5rem 0 0;
-			max-height: 80vh;
+			// border-radius: 1.5rem 1.5rem 0 0;
+			// max-height:auto;
 			overflow: auto;
 		}
 	}
@@ -206,14 +212,12 @@ ion-searchbar {
 ion-input, ion-textarea, ion-select {
 	--padding-start: 1rem !important;
 	--padding-end: 1rem !important;
-	--color: #{$color-mainDark} !important;
-	--background: #{$color-lightGray} !important;
+	--background: #{$color-itemBg} !important;
 	--box-shadow: none;
 	--border-radius: .75rem;
 	border-radius: .75rem;
 	--icon-color: #{$color-iconInactive} !important;
-	--placeholder-color: #{$color-iconInactive} !important;
-	--border-color: #{$color-iconInactive} !important;
+	--placeholder-color: #{$color-secondaryText} !important;
 	--placeholder-opacity: 1;
 	@media (max-width: 640px) {
 		--border-radius: .5rem;
@@ -235,7 +239,6 @@ ion-input, ion-textarea, ion-select {
 }
 
 ion-button {
-	height: 100%;
 	--box-shadow: none;
 	box-shadow: none;
 	--border-radius: 0.5rem;
@@ -257,20 +260,20 @@ ion-button {
 
 .btn-primary {
 	@extend .btn-padding;
-	--background: #{$color-primary};
-	--color: #{$color-white};
+	--background: #{$color-primaryBg};
+	--color: #{$color-primaryText};
 	--border-width: 1px;
 	--border-style: solid;
-	--border-color: $color-primary;
+	--border-color: $color-primaryBg;
 }
 
 .btn-outline {
 	@extend .btn-padding;
 	--background: transparent;
-	--color: $color-gray;
+	--color: #{$color-primaryBg};
 	--border-width: 1px;
 	--border-style: solid;
-	--border-color: $color-gray;
+	--border-color: #{$color-primaryBg};
 }
 
 .btn-sm {

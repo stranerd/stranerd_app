@@ -1,6 +1,6 @@
 <template>
-	<div class="flex-col gap-1 gap-md-2">
-		<ion-button class="w-full font-bold capitalize flex gap-9 justify-center items-center my-6"
+	<div class="flex-col gap-4">
+		<ion-button class="btn-outline w-full font-bold capitalize flex justify-center items-center"
 			@click="loginWithGoogle">
 			<ion-icon :icon="logoGoogle" class="mr-4" size="100px" />
 			<span>Google</span>
@@ -50,14 +50,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-button {
-		--background: transparent !important;
-		--color: #{$color-darkGray};
-		--border-color: #{$color-iconInactive};
-		--border-style: solid;
-		--border-width: 2px;
-		--box-shadow: none;
-	}
-</style>

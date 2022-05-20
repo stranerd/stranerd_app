@@ -1,61 +1,65 @@
 <template>
 	<Auth>
-		<div class="w-full h-full flex bg-white">
-			<div
-				class="bg-primary w-7/12 lg:flex flex-col items-center justify-center h-full hidden">
-				<h1 class="text-5xl text-white font-extrabold mb-12">Studying has never been easier</h1>
+		<div class="w-full h-full flex">
+			<div class="w-7/12 lg:flex flex-col items-center justify-center h-full hidden">
+				<h1 class="text-5xl font-extrabold mb-12">Studying has never been easier</h1>
 				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png">
 			</div>
-			<div class="flex flex-col items-center justify-center lg:w-5/12 w-full h-full ml-auto p-4">
-				<h1 class="md:text-5xl text-2xl text-main_dark font-extrabold mb-8 text-center">Sign up today</h1>
-				<div>
-					<form class="flex flex-col gap-4" @submit.prevent="signup">
-						<div>
+			<div class="flex flex-col items-center mt-6 md:justify-center lg:w-5/12 w-full p-4">
+				<h1 class="md:block text-5xl hidden font-extrabold mb-8 text-center">Sign up today</h1>
+				<form class="flex flex-col gap-4" @submit.prevent="signup">
+					<div class="flex w-full gap-4">
+						<div class="flex flex-col w-1/2">
+							<ion-label class="font-bold text-sm mb-2">First Name</ion-label>
 							<ion-input v-model="factory.firstName" :size="24" placeholder="First Name"
 								position="floating"
 								type="text"></ion-input>
 							<DisplayError :error="factory.errors.firstName" />
 						</div>
-						<div>
-							<ion-input v-model="factory.lastName" :size="24" placeholder="Last Name" position="floating"
+						<div class="flex flex-col w-1/2">
+							<ion-label class="font-bold text-sm mb-2">Last Name</ion-label>
+							<ion-input v-model="factory.lastName" :size="24" placeholder="Last Name"
+								position="floating"
 								type="text"></ion-input>
 							<DisplayError :error="factory.errors.lastName" />
 						</div>
-						<div>
-							<ion-input v-model.trim="factory.email" :size="24" inputmode="email"
-								placeholder="Email Address"
-								position="floating" type="email" />
-							<DisplayError :error="factory.errors.email" />
-						</div>
-						<div>
-							<ion-input v-model="factory.password" :size="24" placeholder="Password"
-								position="floating"
-								type="password"></ion-input>
-							<DisplayError :error="factory.errors.password" />
-						</div>
-						<div>
-							<ion-input v-model="factory.cPassword" :size="24" placeholder="Confirm Password"
-								position="floating"
-								type="password"></ion-input>
-							<DisplayError :error="factory.errors.cPassword" />
-						</div>
-						<ion-button class="w-full !capitalize" type="submit">Sign up
-							<BlockLoading v-if="loading" />
-						</ion-button>
-					</form>
-					<div class="flex justify-between px-5 items-center mt-8">
-						<div class="border-faded_gray border-b h-1 w-4/12" />
-						<span class="font-nuni text-faded_gray">or use</span>
-						<div class="border-faded_gray border-b h-1 w-4/12" />
+					</div>
+					<div class="flex flex-col">
+						<ion-label class="font-bold text-sm mb-2">Email</ion-label>
+						<ion-input v-model.trim="factory.email" :size="24" inputmode="email"
+							placeholder="Email Address"
+							position="floating" type="email" />
+						<DisplayError :error="factory.errors.email" />
+					</div>
+					<div class="flex flex-col">
+						<ion-label class="font-bold text-sm mb-2">Password</ion-label>
+						<ion-input v-model="factory.password" :size="24" placeholder="Password"
+							position="floating"
+							type="password"></ion-input>
+						<DisplayError :error="factory.errors.password" />
+					</div>
+					<div class="flex flex-col">
+						<ion-label class="font-bold text-sm mb-2">Confirm Password</ion-label>
+						<ion-input v-model="factory.cPassword" :size="24" placeholder="Confirm Password"
+							position="floating"
+							type="password"></ion-input>
+						<DisplayError :error="factory.errors.cPassword" />
+					</div>
+					<ion-button :disabled="loading" class="w-full btn-primary" type="submit">
+						<SpinLoading v-if="loading" />
+						<span v-else>Sign up</span>
+					</ion-button>
+					<div class="flex justify-center items-center my-2">
+						<span>Or</span>
 					</div>
 					<AuthProviders />
-					<span class="text- w-full flex justify-center items-center text-icon_inactive mt-8 mb-5">
+					<span class="w-full flex justify-center items-center my-2 text-secondaryText">
 						Have an account?
-						<router-link class="text-primary font-bold ml-2" to="/auth/signin">
+						<router-link class="text-primaryBg font-bold ml-2" to="/auth/signin">
 							Sign In
 						</router-link>
 					</span>
-				</div>
+				</form>
 			</div>
 		</div>
 	</Auth>
@@ -64,14 +68,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useEmailSignup } from '@app/composable/auth/signin'
-import { IonButton, IonInput } from '@ionic/vue'
+import { IonButton, IonInput, IonLabel } from '@ionic/vue'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
 import Auth from '@app/layouts/Auth.vue'
 
 export default defineComponent({
 	name: 'AuthSignup',
-	displayName: 'Signup',
-	components: { IonInput, IonButton, AuthProviders, Auth },
+	displayName: 'Create account',
+	components: { IonInput, IonButton, AuthProviders, Auth, IonLabel },
 	middlewares: ['isNotAuthenticated'],
 	setup () {
 		const { factory, loading, error, signup } = useEmailSignup()

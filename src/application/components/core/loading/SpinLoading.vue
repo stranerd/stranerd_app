@@ -1,5 +1,5 @@
 <template>
-	<IonSpinner class="text-primary" name="lines" />
+	<IonSpinner />
 </template>
 
 <script lang="ts">

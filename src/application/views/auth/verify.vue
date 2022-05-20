@@ -1,6 +1,6 @@
 <template>
 	<ion-page>
-		<ion-content class="auth">
+		<ion-content>
 			<div class="w-full mt-10 h-full flex flex-col items-center justify-start py-20">
 				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray">
 					<h1 class="text-heading2 text-main_dark font-bold mb-2 text-center">Verify Your Email
