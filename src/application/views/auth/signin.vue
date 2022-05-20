@@ -7,9 +7,9 @@
 			</div>
 			<div class="flex flex-col items-center mt-6 md:justify-center lg:w-5/12 w-full p-4">
 				<h1 class="md:block text-5xl hidden text-main_dark font-extrabold mb-8 text-center">Log in</h1>
-				<div class="h-[65%]">
+				<div class="h-[65%] w-full md:w-[70%]">
 					<form class="flex flex-col gap-4" @submit.prevent="signin">
-						<div class="flex flex-col">
+						<div class="flex flex-col w-full">
 							<ion-label class="font-bold text-sm text-main_dark mb-2">Email</ion-label>
 							<ion-input v-model.trim="factory.email" :size="24" inputmode="email" 
 								placeholder="Email Address" position="floating"
@@ -35,7 +35,7 @@
 					</div>
 					<div class="flex justify-between px-5 items-center my-4">
 						<div class="border-faded_gray border-b h-1 w-4/12" />
-						<span class="text-gray">or use</span>
+						<span class="text-primary">or use</span>
 						<div class="border-faded_gray border-b h-1 w-4/12" />
 					</div>
 					<AuthProviders />

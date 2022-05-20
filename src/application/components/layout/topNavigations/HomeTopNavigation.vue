@@ -32,7 +32,7 @@
 		</div>
 
 		<ion-toolbar
-			class="lg:hidden toolbar px-4 border-0  h-12 flex items-center justify-center"
+			class="lg:hidden toolbar text-primary px-4 border-0  h-12 flex items-center justify-center"
 		>
 			<div class="flex items-center justify-center text-white font-bold text-base">
 				<span>{{ $route.meta.displayName ?? 'Stranerd' }}</span>
@@ -80,9 +80,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .toolbar{
 	--background:#162565;
-	@media (min-width: $md){
-		--background:#fff
-	}
 }
 	.link-custom {
 		font-weight: 700;

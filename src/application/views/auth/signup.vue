@@ -58,7 +58,7 @@
 						<div class="border-faded_gray border-b h-1 w-4/12" />
 					</div>
 					<AuthProviders />
-					<span class="text- w-full flex justify-center items-center text-icon_inactive mt-8 mb-5">
+					<span class="text- w-full flex justify-center items-center text-primary mt-8 mb-5">
 						Already have an account?
 						<router-link class="text-primary font-bold ml-2" to="/auth/signin">
 							Sign In

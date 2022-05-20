@@ -30,6 +30,7 @@ export default defineComponent({
 			margin-bottom: 0;
 			max-width: 90vw !important;
 			background: $color-lightGray;
+			width: 100% !important;
 		}
 
 		:deep(ion-button) {
