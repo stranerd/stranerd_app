@@ -18,6 +18,7 @@ type EventTimetableType = {
 type EventOneOffType = {
 	type: EventType.oneOff
 	scheduledAt: number
+	announcementId: string | null
 }
 
 export type EventDataType = EventTimetableType | EventOneOffType

@@ -13,7 +13,7 @@ import { EventToModel } from '../../data/models/event'
 import { Cron, EventDataType, EventType } from '../types'
 
 type Keys = {
-	title: string, classId: string, type: EventType,
+	title: string, classId: string, type: EventType, announcementId: string | null
 	scheduledAt: number, start: Cron, end: Cron, lecturer: string
 }
 
@@ -30,6 +30,7 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 		classId: { required: true, rules: [isString] },
 		type: { required: true, rules: [isString] },
 		scheduledAt: { required: () => this.isOneOffType, rules: [isNumber] },
+		announcementId: { required: () => this.isOneOffType, rules: [isString] },
 		start: { required: () => this.isTimetableType, rules: [isCronValid] },
 		end: { required: () => this.isTimetableType, rules: [isCronValid] },
 		lecturer: { required: () => this.isTimetableType, rules: [isString, isLongerThanX(0)] }
@@ -42,7 +43,16 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 		const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
 		const start: Cron = { day: 1, hour: 8, minute: 0, tz }
 		const end: Cron = { day: 1, hour: 10, minute: 0, tz }
-		super({ title: '', classId: '', type: EventType.timetable, scheduledAt: Date.now(), start, end, lecturer: '' })
+		super({
+			title: '',
+			classId: '',
+			type: EventType.timetable,
+			scheduledAt: Date.now(),
+			announcementId: null,
+			start,
+			end,
+			lecturer: ''
+		})
 	}
 
 	get title () {
@@ -137,6 +147,14 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 		this.set('lecturer', value)
 	}
 
+	get announcementId () {
+		return this.values.announcementId
+	}
+
+	set announcementId (value: string | null) {
+		this.set('announcementId', value)
+	}
+
 	get scheduledAt () {
 		return this.values.scheduledAt
 	}
@@ -153,15 +171,22 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 			this.lecturer = entity.data.lecturer
 			this.start = entity.data.start
 			this.end = entity.data.end
-		} else this.scheduledAt = entity.data.scheduledAt
+		} else {
+			this.scheduledAt = entity.data.scheduledAt
+			this.announcementId = entity.data.announcementId
+		}
 	}
 
 	toModel = async () => {
 		if (this.valid) {
-			const { title, classId, type, start, end, scheduledAt, lecturer } = this.validValues
+			const { title, classId, type, start, end, scheduledAt, announcementId, lecturer } = this.validValues
 			return {
 				title, classId,
-				data: (this.isTimetableType ? { type, start, end, lecturer } : { type, scheduledAt }) as EventDataType
+				data: (this.isTimetableType ? { type, start, end, lecturer } : {
+					type,
+					scheduledAt,
+					announcementId
+				}) as EventDataType
 			}
 		} else {
 			throw new Error('Validation errors')
