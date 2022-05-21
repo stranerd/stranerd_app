@@ -42,14 +42,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { usePasswordReset } from '@app/composable/auth/passwords'
-import { IonButton, IonInput } from '@ionic/vue'
 import Auth from '@app/layouts/Auth.vue'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'AuthReset',
 	displayName: 'Reset Password',
-	components: { Auth, IonInput, IonButton },
+	components: { Auth },
 	middlewares: ['hasQueryToken'],
 	setup () {
 		const { token } = useRoute().query

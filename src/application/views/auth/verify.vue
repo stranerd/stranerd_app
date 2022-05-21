@@ -28,12 +28,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { getEmailVerificationEmail, useEmailVerificationRequest } from '@app/composable/auth/signin'
-import { IonButton, IonContent, IonPage } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'AuthVerify',
 	displayName: 'Verify Email',
-	components: { IonContent, IonPage, IonButton },
+	components: {},
 	middlewares: [async () => {
 		if (!getEmailVerificationEmail()) return '/auth/signin'
 	}],

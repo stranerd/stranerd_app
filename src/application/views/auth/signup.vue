@@ -73,14 +73,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useEmailSignup } from '@app/composable/auth/signin'
-import { IonButton, IonInput, IonLabel } from '@ionic/vue'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
 import Auth from '@app/layouts/Auth.vue'
 
 export default defineComponent({
 	name: 'AuthSignup',
 	displayName: 'Create account',
-	components: { IonInput, IonButton, AuthProviders, Auth, IonLabel },
+	components: { AuthProviders, Auth },
 	middlewares: ['isNotAuthenticated'],
 	setup () {
 		const { factory, loading, error, signup } = useEmailSignup()

@@ -52,12 +52,11 @@ import { defineComponent } from 'vue'
 import { useEmailSignin } from '@app/composable/auth/signin'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
 import Auth from '@app/layouts/Auth.vue'
-import { IonLabel } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'AuthSignin',
 	displayName: 'Login',
-	components: { AuthProviders, Auth, IonLabel },
+	components: { AuthProviders, Auth },
 	middlewares: ['isNotAuthenticated'],
 	setup () {
 		const { factory, loading, error, signin } = useEmailSignin()
