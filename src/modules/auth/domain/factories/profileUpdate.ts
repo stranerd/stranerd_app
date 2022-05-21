@@ -11,8 +11,8 @@ export class ProfileUpdateFactory extends BaseFactory<UserEntity, ProfileUpdate,
 		first: { required: true, rules: [isString, isLongerThanX(0)] },
 		last: { required: true, rules: [isString, isLongerThanX(0)] },
 		description: { required: true, rules: [isString] },
-		photo: { required: false, rules: [isImage] },
-		coverPhoto: { required: false, rules: [isImage] }
+		photo: { required: true, nullable: true, rules: [isImage] },
+		coverPhoto: { required: true, nullable: true, rules: [isImage] }
 	}
 
 	reserved = []

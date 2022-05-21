@@ -10,8 +10,8 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 	readonly rules = {
 		name: { required: true, rules: [isString, isLongerThanX(2)] },
 		description: { required: true, rules: [isString, isLongerThanX(2)] },
-		photo: { required: false, rules: [isFile] },
-		coverPhoto: { required: false, rules: [isFile] }
+		photo: { required: true, nullable: true, rules: [isFile] },
+		coverPhoto: { required: true, nullable: true, rules: [isFile] }
 	}
 
 	reserved = []

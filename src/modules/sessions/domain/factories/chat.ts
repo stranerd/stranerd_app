@@ -8,10 +8,10 @@ type Keys = { content: string, to: string, sessionId: string | null, media: Cont
 
 export class ChatFactory extends BaseFactory<ChatEntity, ChatToModel, Keys> {
 	readonly rules = {
-		content: { required: false, rules: [isString, isLongerThanX(0)] },
+		content: { required: true, rules: [isString] },
 		to: { required: true, rules: [isString, isLongerThanX(0)] },
-		sessionId: { required: false, rules: [isString, isLongerThanX(0)] },
-		media: { required: true, rules: [isFile] }
+		sessionId: { required: true, nullable: true, rules: [isString, isLongerThanX(0)] },
+		media: { required: true, nullable: true, rules: [isFile] }
 	}
 
 	reserved = ['to']

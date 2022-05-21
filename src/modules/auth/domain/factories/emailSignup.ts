@@ -10,8 +10,8 @@ export class EmailSignupFactory extends BaseFactory<null, NewUser, NewUser & { c
 		lastName: { required: true, rules: [isString, isLongerThanX(2)] },
 		description: { required: true, rules: [isString] },
 		email: { required: true, rules: [isString, isEmail] },
-		photo: { required: false, rules: [isImage] },
-		coverPhoto: { required: false, rules: [isImage] },
+		photo: { required: true, nullable: true, rules: [isImage] },
+		coverPhoto: { required: true, nullable: true, rules: [isImage] },
 		password: { required: true, rules: [isString, isLongerThanX(7), isShorterThanX(17)] },
 		cPassword: {
 			required: true,
