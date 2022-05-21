@@ -3,8 +3,7 @@
 		<h2 class="text-main_dark text-heading font-bold px-4 md:px-0">
 			Answers <span class="text-gray">({{ question.answers.length }})</span>
 		</h2>
-		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question"
-			:voted="votes[answer.id] ?? 0" />
+		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question" />
 		<template v-if="answers.length === 0">
 			<EmptyState v-if="showAnswerButton"
 				:info="`No answers yet. <br/>Help ${question.user.bio.fullName} answer this question!`"
@@ -38,7 +37,7 @@ export default defineComponent({
 	components: { AnswersListCard, EmptyState },
 	setup (props) {
 		const { id } = useAuth()
-		const { answers, error, loading, votes } = useAnswerList(props.question.id)
+		const { answers, error, loading } = useAnswerList(props.question.id)
 
 		const showAnswerButton = computed({
 			get: () => props.question.user.id !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
@@ -48,7 +47,7 @@ export default defineComponent({
 
 		return {
 			openAnswerModal: () => openAnswerModal(props.question),
-			answers, error, loading, showAnswerButton, votes
+			answers, error, loading, showAnswerButton
 		}
 	}
 })

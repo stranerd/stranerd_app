@@ -23,14 +23,14 @@
 
 		<div class="flex items-center gap-2 text-icon_inactive">
 			<div
-				:class="[voted === 1 ? 'text-primary':'text-icon_inactive']"
+				:class="[answer.votes.find((v) => v.vote === 1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
 				class="flex flex-row items-center mr-2">
 				<IonIcon :icon="thumbsUpOutline" class="text-[22px] cursor-pointer"
 					@click="() => voteAnswer(true)" />
 				<span class="ml-1">{{ formatNumber(answer.upVotes) }}</span>
 			</div>
 			<div
-				:class="[voted === -1 ? 'text-primary':'text-icon_inactive']"
+				:class="[answer.votes.find((v) => v.vote === -1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
 				class="flex flex-row items-center mr-2">
 				<IonIcon :icon="thumbsDownOutline" class="text-[22px] cursor-pointer"
 					@click="() => voteAnswer(false)" />
@@ -96,11 +96,6 @@ export default defineComponent({
 		question: {
 			required: true,
 			type: Object as PropType<QuestionEntity>
-		},
-		voted: {
-			type: Number,
-			default: 0,
-			required: false
 		}
 	},
 	setup (props) {
