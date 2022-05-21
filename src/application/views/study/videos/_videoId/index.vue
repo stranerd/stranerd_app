@@ -42,7 +42,7 @@ import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { useVideo } from '@app/composable/study/videos'
 import Share from '@app/components/core/Share.vue'
-import StudyVideo from '@app/components/study/videos/Video.vue'
+import StudyVideo from '@app/components/study/videos/StudyVideo.vue'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({

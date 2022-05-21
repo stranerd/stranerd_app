@@ -135,5 +135,4 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 			throw new Error('Validation errors')
 		}
 	}
-
 }
