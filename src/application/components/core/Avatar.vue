@@ -1,10 +1,9 @@
 <template>
 	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}/`"
-		class="rounded-full border border-white relative"
-		style="border-width: 2px;">
-		<span v-if="!source && name" :style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
-			class="flex items-center justify-center uppercase bg-gray text-white font-semibold rounded-full">
-			<span :style="`font-size: ${size/1.75}px;line-height: 1em`">{{ name[0] }}</span>
+		class="rounded-full relative">
+		<span v-if="name" :style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
+			class="flex items-center justify-center uppercase bg-secondaryText text-primaryText font-semibold rounded-full">
+			<span :style="`font-size: ${size/2}px;line-height: 1em`">{{ name[0] }}</span>
 		</span>
 		<img
 			v-else
@@ -12,10 +11,10 @@
 			:src="source || DEFAULT_PROFILE_PHOTO"
 			:style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
 			alt=""
-			class="!max-w-[1920px] rounded-full bg-white"
+			class="!max-w-[1920px] rounded-full bg-secondaryText"
 		>
 		<FileInput v-if="editable" accept="image/*"
-			class="rounded-full absolute h-6 w-6 -right-1 bottom-0 bg-primary border text-white flex items-center justify-center"
+			class="rounded-full absolute h-6 w-6 -right-1 bottom-0 bg-primaryBg border border-primaryText text-primaryText flex items-center justify-center"
 			@files="catchPhoto">
 			<IonIcon :icon="cameraOutline" />
 		</FileInput>
