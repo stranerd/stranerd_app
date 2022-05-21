@@ -11,13 +11,14 @@ export class AnswerEntity extends BaseEntity {
 	public readonly attachments: Media[]
 	public readonly user: EmbeddedUser
 	public readonly votes: { userId: string, vote: 1 | -1 }[]
+	public readonly voted?: 0 | -1 | 1
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
 		             id, title, body, questionId,
 		             createdAt, user, attachments,
-		             best, votes, updatedAt
+		             best, votes, voted, updatedAt
 	             }: AnswerConstructorArgs) {
 		super()
 		this.id = id
@@ -27,9 +28,10 @@ export class AnswerEntity extends BaseEntity {
 		this.user = generateEmbeddedUser(user)
 		this.attachments = attachments.map(parseMedia) ?? []
 		this.best = best ?? false
-		this.votes = votes
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
+		this.votes = votes
+		this.voted = voted
 	}
 
 	get trimmedTitle () {
@@ -84,4 +86,5 @@ type AnswerConstructorArgs = {
 	user: EmbeddedUser
 	best: boolean
 	votes: { userId: string, vote: 1 | -1 }[]
+	voted?: 0 | -1 | 1
 }

@@ -12,7 +12,7 @@ import { VideoEntity } from '@modules/study'
 import YouTube from './YouTube.vue'
 
 export default defineComponent({
-	name: 'Video',
+	name: 'StudyVideo',
 	components: { YouTube },
 	props: {
 		video: {

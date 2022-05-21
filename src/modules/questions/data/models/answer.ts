@@ -8,6 +8,7 @@ export interface AnswerFromModel extends AnswerToModel {
 	user: EmbeddedUser
 	best: boolean
 	votes: { userId: string, vote: 1 | -1 }[]
+	voted?: 0 | -1 | 1
 }
 
 export interface AnswerToModel {

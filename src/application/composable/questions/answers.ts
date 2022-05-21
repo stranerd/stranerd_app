@@ -9,6 +9,7 @@ import { addToArray } from '@utils/commons'
 const global = {} as Record<string, {
 	answers: Ref<AnswerEntity[]>
 	fetched: Ref<boolean>
+	votes: Ref<Record<string, 0 | -1 | 1>>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
@@ -18,18 +19,22 @@ export const useAnswerList = (questionId: string) => {
 			return await AnswersUseCases.listenToQuestionAnswers(questionId, {
 				created: async (entity) => {
 					addToArray(global[questionId].answers.value, entity, (e) => e.id, (e) => e.createdAt, true)
+					if (entity.voted !== undefined) global[questionId].votes.value[entity.id] = entity.voted
 				},
 				updated: async (entity) => {
 					addToArray(global[questionId].answers.value, entity, (e) => e.id, (e) => e.createdAt, true)
+					if (entity.voted !== undefined) global[questionId].votes.value[entity.id] = entity.voted
 				},
 				deleted: async (entity) => {
 					global[questionId].answers.value = global[questionId].answers.value.filter((c) => c.id !== entity.id)
+					delete global[questionId].votes.value[entity.id]
 				}
 			})
 		})
 		global[questionId] = {
 			answers: ref([]),
 			fetched: ref(false),
+			votes: ref({}),
 			listener,
 			...useErrorHandler(),
 			...useLoadingHandler()
@@ -41,7 +46,10 @@ export const useAnswerList = (questionId: string) => {
 		try {
 			await global[questionId].setLoading(true)
 			const answers = await AnswersUseCases.getQuestionAnswers(questionId)
-			answers.results.forEach((a) => addToArray(global[questionId].answers.value, a, (e) => e.id, (e) => e.createdAt, true))
+			answers.results.forEach((a) => {
+				addToArray(global[questionId].answers.value, a, (e) => e.id, (e) => e.createdAt, true)
+				if (a.voted !== undefined) global[questionId].votes.value[a.id] = a.voted
+			})
 			global[questionId].fetched.value = true
 		} catch (error) {
 			await global[questionId].setError(error)
@@ -60,6 +68,7 @@ export const useAnswerList = (questionId: string) => {
 	return {
 		error: global[questionId].error,
 		loading: global[questionId].loading,
+		votes: global[questionId].votes,
 		answers: global[questionId].answers
 	}
 }
@@ -112,6 +121,7 @@ export const useAnswer = (answer: AnswerEntity) => {
 	const voteAnswer = async (vote: boolean) => {
 		const userId = useAuth().id.value
 		if (!userId) return
+		if (global[answer.questionId]) global[answer.questionId].votes.value[answer.id] = vote ? 1 : -1
 		const voted = answer.votes.find((v) => v.userId === userId)
 		if (vote && voted?.vote === 1) return
 		if (!vote && voted?.vote === -1) return

@@ -75,7 +75,7 @@ export class HttpClient {
 			})
 			return res.data
 		} catch (e) {
-			const error = e as unknown as AxiosError
+			const error = e as unknown as AxiosError<any>
 			if (!error.isAxiosError) throw error
 			if (!error.response) throw error
 			const status = error.response.status
@@ -94,7 +94,7 @@ export class HttpClient {
 			await saveTokens(data)
 			return !!data
 		} catch (e) {
-			const error = e as unknown as AxiosError
+			const error = e as unknown as AxiosError<any>
 			if (!error.isAxiosError) throw error
 			if (!error.response) throw error
 			const status = error.response.status

@@ -17,7 +17,7 @@
 				</div>
 			</div>
 			<div class="bg-white w-full lg:w-8/12 w-full mx-auto">
-				<Video :video="video" />
+				<StudyVideo :video="video" />
 			</div>
 		</div>
 		<PageLoading v-if="loading" />
@@ -42,13 +42,13 @@ import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { useVideo } from '@app/composable/study/videos'
 import Share from '@app/components/core/Share.vue'
-import Video from '@app/components/study/videos/Video.vue'
+import StudyVideo from '@app/components/study/videos/StudyVideo.vue'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'StudyVideosVideoId',
 	displayName: 'Video',
-	components: { Justified, Avatar, Video, Share, SaveToSet },
+	components: { Justified, Avatar, StudyVideo, Share, SaveToSet },
 	setup () {
 		const { videoId } = useRoute().params
 		const { error, loading, video } = useVideo(videoId as string)
