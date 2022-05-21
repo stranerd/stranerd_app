@@ -233,11 +233,23 @@ ion-input, ion-textarea, ion-select {
 ion-input.valid, ion-textarea.valid, ion-select.valid {
 	--icon-color: #{$color-success} !important;
 	outline-color: $color-success;
+
+	&::after {
+		content: '\02713';
+		margin: 0.5em 1em 0.5em 0;
+		color: $color-success;
+	}
 }
 
 ion-input.invalid, ion-textarea.invalid, ion-select.invalid {
 	--icon-color: #{$color-danger} !important;
 	outline-color: $color-danger;
+
+	&::after {
+		content: '\024D8';
+		margin: 0.5em 1em 0.5em 0;
+		color: $color-danger;
+	}
 }
 
 .btn-padding {
