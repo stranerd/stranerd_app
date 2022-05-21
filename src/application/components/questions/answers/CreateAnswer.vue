@@ -30,7 +30,7 @@
 				class="w-1/2"
 				@files="catchAttachments"
 			>
-				<ion-button class=" btn-secondary w-full text-primary">
+				<ion-button class="btn-outline w-full">
 					<ion-icon :icon="imageOutline" class="!text-2xl text-primary mr-4" />
 					Add image
 				</ion-button>

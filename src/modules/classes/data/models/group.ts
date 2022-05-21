@@ -1,6 +1,6 @@
-import { ClassUsers } from '../../domain/entities/class'
 import { DiscussionFromModel } from './discussion'
 import { EmbeddedUser } from '@modules/users'
+import { ClassUsers } from '../../domain/types'
 
 export interface GroupFromModel extends GroupToModel {
 	id: string

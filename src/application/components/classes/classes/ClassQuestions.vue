@@ -1,7 +1,7 @@
 <template>
 	<div class="showcase-flex">
-		<div class="flex justify-end">
-			<ion-button class="btn-primary" size="small" @click="openQuestionModalFromClass(classInst, $router)">
+		<div class="flex justify-end !py-0 card-padding">
+			<ion-button class="btn-primary btn-sm" @click="openQuestionModalFromClass(classInst, $router)">
 				Ask a Question
 			</ion-button>
 		</div>

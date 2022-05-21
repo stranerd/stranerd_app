@@ -21,11 +21,12 @@
 			</ion-radio-group>
 		</IonList>
 		<div class="flex w-full gap-2 items-center justify-between">
-			<ion-button class="btn-secondary w-24" size="small" type="button" @click.prevent="back">
+			<ion-button class="btn-outline border-primary text-primary w-24 btn-sm" type="button"
+				@click.prevent="back">
 				Back
 				<ion-ripple-effect class="rounded-lg" />
 			</ion-button>
-			<ion-button class="btn-primary w-24" size="small" type="button" @click="tab = 1">
+			<ion-button class="btn-primary w-24 btn-sm" type="button" @click="tab = 1">
 				Next
 				<ion-ripple-effect class="rounded-lg" />
 			</ion-button>
@@ -74,11 +75,12 @@
 			</div>
 
 			<div class="flex w-full gap-2 items-center justify-between">
-				<ion-button class="btn-secondary w-24" size="small" type="button" @click.prevent="back">
+				<ion-button class="btn-outline border-primary text-primary w-24 btn-sm" type="button"
+					@click.prevent="back">
 					Back
 					<ion-ripple-effect class="rounded-lg" />
 				</ion-button>
-				<ion-button class="btn-primary w-24" size="small" type="submit">
+				<ion-button class="btn-primary w-24 btn-sm" type="submit">
 					Done
 					<SpinLoading v-if="loading" />
 					<ion-ripple-effect class="rounded-lg" />
@@ -99,11 +101,12 @@
 				</ion-select>
 			</div>
 			<div class="flex w-full justify-between gap-2 items-center">
-				<ion-button class="btn-secondary w-24" size="small" type="button" @click.prevent="back">
+				<ion-button class="btn-outline border-primary text-primary w-24 btn-sm" type="button"
+					@click.prevent="back">
 					Back
 					<ion-ripple-effect class="rounded-lg" />
 				</ion-button>
-				<ion-button class="btn-primary w-24" size="small" type="button" @click.prevent="tab = 2">
+				<ion-button class="btn-primary w-24 btn-sm" type="button" @click.prevent="tab = 2">
 					Next
 					<ion-ripple-effect class="rounded-lg" />
 				</ion-button>
@@ -139,11 +142,12 @@
 			</div>
 		</div>
 		<div class="flex w-full justify-between gap-2 items-center">
-			<ion-button class="btn-secondary w-24" size="small" type="button" @click.prevent="back">
+			<ion-button class="btn-outline border-primary text-primary w-24 btn-sm" type="button"
+				@click.prevent="back">
 				Back
 				<ion-ripple-effect class="rounded-lg" />
 			</ion-button>
-			<ion-button class="btn-primary w-24" size="small" type="submit">
+			<ion-button class="btn-primary w-24 btn-sm" type="submit">
 				Done
 				<SpinLoading v-if="loading" />
 				<ion-ripple-effect class="rounded-lg" />
@@ -198,7 +202,7 @@ export default defineComponent({
 			props.next()
 		}
 		const { schools, gatewayExams } = useInstitutionList()
-		const { courses } = useCourseList()
+		const { courses, fetchGeneralCourses } = useCourseList()
 		const { faculties, fetchFaculties } = useFacultyList()
 		const { departments, fetchDepartments } = useDepartmentList()
 		const filteredFaculties = computed(() => faculties.value.filter((f) => f.institutionId === factory.value.institutionId))
@@ -206,7 +210,10 @@ export default defineComponent({
 
 		watch(() => factory.value.institutionId, async () => {
 			factory.value.resetProp('facultyId')
-			if (factory.value.institutionId) await fetchFaculties(factory.value.institutionId)
+			if (factory.value.institutionId) {
+				await fetchFaculties(factory.value.institutionId)
+				await fetchGeneralCourses(factory.value.institutionId)
+			}
 		})
 
 		watch(() => factory.value.facultyId, async () => {

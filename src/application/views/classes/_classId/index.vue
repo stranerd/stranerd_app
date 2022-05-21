@@ -1,16 +1,19 @@
 <template>
 	<ClassWrapper>
-		<h1>Info Tab</h1>
+		<template v-slot="{ classInst }">
+			<TimetableList :classInst="classInst" />
+		</template>
 	</ClassWrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ClassWrapper from '@app/components/classes/classes/ClassWrapper.vue'
+import TimetableList from '@app/components/classes/timetable/TimetableList.vue'
 
 export default defineComponent({
-	name: 'ClassClassIdInfo',
+	name: 'ClassClassId',
 	displayName: 'Class',
-	components: { ClassWrapper }
+	components: { ClassWrapper, TimetableList }
 })
 </script>

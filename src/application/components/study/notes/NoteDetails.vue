@@ -4,7 +4,7 @@
 		<BlockLoading v-else-if="loading" />
 		<div v-else class="flex flex-col gap-2 items-center">
 			<p>The note needs to be downloaded before it can be viewed</p>
-			<IonButton class="btn-primary" size="small" @click="download">Download</IonButton>
+			<IonButton class="btn-primary btn-sm" @click="download">Download</IonButton>
 		</div>
 	</div>
 </template>

@@ -1,6 +1,6 @@
 import { Listeners, QueryParams, QueryResults } from '@modules/core'
 import { ClassFromModel, ClassToModel } from '../models/class'
-import { ClassUsers } from '@modules/classes/domain/entities/class'
+import { ClassUsers } from '../../domain/types'
 
 export interface ClassBaseDataSource {
 	create: (data: ClassToModel) => Promise<ClassFromModel>

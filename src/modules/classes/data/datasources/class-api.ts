@@ -2,7 +2,7 @@ import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from
 import { apiBase } from '@utils/environment'
 import { ClassFromModel, ClassToModel } from '../models/class'
 import { ClassBaseDataSource } from './class-base'
-import { ClassUsers } from '@modules/classes/domain/entities/class'
+import { ClassUsers } from '../../domain/types'
 
 export class ClassApiDataSource implements ClassBaseDataSource {
 	private stranerdClient: HttpClient

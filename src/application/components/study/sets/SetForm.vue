@@ -12,7 +12,7 @@
 		</div>
 
 		<div class="flex gap-4 w-full">
-			<ion-button class="btn-secondary flex-grow w-full" @click="closeModal">
+			<ion-button class="btn-outline flex-grow w-full" @click="closeModal">
 				Cancel
 				<ion-ripple-effect class="rounded-lg"></ion-ripple-effect>
 			</ion-button>

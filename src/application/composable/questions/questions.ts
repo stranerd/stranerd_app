@@ -110,6 +110,7 @@ export const useCreateQuestion = () => {
 	if (questionClass) {
 		factory.value.type = QuestionType.classes
 		factory.value.classId = questionClass.id
+		questionClass = null
 	}
 
 	const createQuestion = async () => {

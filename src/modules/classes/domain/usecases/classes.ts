@@ -1,8 +1,9 @@
 import { IClassRepository } from '../irepositories/iclass'
 import { ClassFactory } from '../factories/class'
-import { ClassEntity, ClassUsers } from '../entities/class'
+import { ClassEntity } from '../entities/class'
 import { Listeners, QueryKeys, QueryParams } from '@modules/core'
 import { SEARCH_PAGINATION_LIMIT } from '@utils/constants'
+import { ClassUsers } from '../types'
 
 export class ClassesUseCase {
 	private repository: IClassRepository

@@ -1,61 +1,66 @@
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
+import { ClassUsers } from '../types'
 
 type ClassConstructorArgs = {
 	id: string
 	name: string
+	school: {
+		institutionId: string
+		facultyId: string
+		departmentId: string
+	}
 	description: string
 	photo: Media | null
 	coverPhoto: Media | null
 	user: EmbeddedUser
 	users: Record<ClassUsers, string[]>
 	requests: string[]
+	courses: string[]
 	createdAt: number
 	updatedAt: number
-}
-
-export enum ClassUsers {
-	admins = 'admins',
-	tutors = 'tutors',
-	members = 'members'
 }
 
 export class ClassEntity extends BaseEntity {
 	public readonly id: string
 	public readonly name: string
+	public readonly school: {
+		institutionId: string
+		facultyId: string
+		departmentId: string
+	}
 	public readonly description: string
 	public readonly photo: Media | null
 	public readonly coverPhoto: Media | null
 	public readonly user: EmbeddedUser
 	public readonly users: Record<ClassUsers, string[]>
 	public readonly requests: string[]
+	public readonly courses: string[]
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, name, description, photo, coverPhoto,
-		             createdAt, user,
+		             id, name, school, description, photo, coverPhoto,
+		             createdAt, user, courses,
 		             users, updatedAt, requests
 	             }: ClassConstructorArgs) {
 		super()
 		this.id = id
 		this.name = name
+		this.school = school
 		this.description = description
 		this.photo = photo ? parseMedia(photo) : null
 		this.coverPhoto = coverPhoto ? parseMedia(coverPhoto) : null
 		this.user = generateEmbeddedUser(user)
 		this.users = users
 		this.requests = requests
+		this.courses = courses
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
 	get isUserVerified () {
 		return this.user.roles.isVerified
-	}
-
-	get avatar () {
-		return null
 	}
 
 	get membersAndRequests () {

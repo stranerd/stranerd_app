@@ -33,7 +33,7 @@
 			</div>
 
 			<div class="flex w-full justify-end gap-2 items-center">
-				<ion-button :disabled="loading || !factory.valid" class="btn-primary w-24" size="small"
+				<ion-button :disabled="loading || !factory.valid" class="btn-primary w-24 btn-sm"
 					type="submit">
 					Next
 					<SpinLoading v-if="loading" />

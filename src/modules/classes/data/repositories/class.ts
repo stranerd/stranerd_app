@@ -1,9 +1,10 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IClassRepository } from '../../domain/irepositories/iclass'
-import { ClassEntity, ClassUsers } from '../../domain/entities/class'
+import { ClassEntity } from '../../domain/entities/class'
 import { ClassBaseDataSource } from '../datasources/class-base'
 import { ClassTransformer } from '../transformers/class'
 import { ClassToModel } from '../models/class'
+import { ClassUsers } from '../../domain/types'
 
 export class ClassRepository implements IClassRepository {
 	private dataSource: ClassBaseDataSource
