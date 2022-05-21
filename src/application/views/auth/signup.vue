@@ -50,15 +50,15 @@
 							placeholder="Confirm Password" position="floating" type="password" />
 						<DisplayError :error="factory.errors.cPassword" />
 					</div>
-					<ion-button :disabled="loading" class="w-full btn-primary" type="submit">
+					<ion-button :disabled="loading || !factory.valid" class="w-full btn-primary mt-2" type="submit">
 						<SpinLoading v-if="loading" />
 						<span v-else>Sign up</span>
 					</ion-button>
-					<div class="flex justify-center items-center my-2">
+					<div class="flex justify-center items-center">
 						<span>Or</span>
 					</div>
 					<AuthProviders />
-					<span class="w-full flex justify-center items-center my-2 text-secondaryText">
+					<span class="w-full flex justify-center items-center mt-2 text-secondaryText">
 						Have an account?
 						<router-link class="text-primaryBg font-bold ml-2" to="/auth/signin">
 							Sign In

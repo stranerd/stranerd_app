@@ -1,7 +1,7 @@
 <template>
 	<Auth>
 		<div class="w-full h-full flex">
-			<div class="w-7/12 lg:flex flex-col items-center justify-center h-full hidden ">
+			<div class="w-7/12 lg:flex flex-col items-center justify-center h-full hidden">
 				<h1 class="text-5xl font-extrabold mb-12">Welcome back</h1>
 				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png">
 			</div>
@@ -24,17 +24,18 @@
 							placeholder="Password" position="floating" type="password" />
 						<DisplayError :error="factory.errors.password" />
 					</div>
-					<ion-button :disabled="loading" class="w-full text-sm btn-primary" type="submit">
+					<ion-button :disabled="loading || !factory.valid" class="w-full text-sm btn-primary mt-2"
+						type="submit">
 						<SpinLoading v-if="loading" />
 						<span v-else>Login</span>
 					</ion-button>
-					<div class="w-full flex justify-center items-center my-2">
+					<div class="w-full flex justify-center items-center">
 						<router-link class="text-primaryBg" to="/auth/forgot">
 							Forgot Password?
 						</router-link>
 					</div>
 					<AuthProviders />
-					<span class="w-full flex justify-center items-center text-secondaryText my-2">
+					<span class="w-full flex justify-center items-center text-secondaryText mt-2">
 						Don’t have an account?
 						<router-link class="text-primaryBg font-bold ml-1" to="/auth/signup">
 							Create account

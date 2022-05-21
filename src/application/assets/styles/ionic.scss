@@ -288,6 +288,7 @@ ion-button {
 .btn-primary {
 	@extend .btn-padding;
 	--background: #{$color-primaryBg};
+	--background-hover: #{$color-primaryHover};
 	--color: #{$color-primaryText};
 	--border-width: 1px;
 	--border-style: solid;
@@ -297,6 +298,7 @@ ion-button {
 .btn-outline {
 	@extend .btn-padding;
 	--background: transparent;
+	--background-hover: #{$color-outlineHover};
 	--color: #{$color-primaryBg};
 	--border-width: 1px;
 	--border-style: solid;
