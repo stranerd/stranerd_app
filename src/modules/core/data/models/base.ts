@@ -6,6 +6,7 @@ export interface Media {
 	size: number
 	path: string
 	timestamp: number
+	duration: number
 	link: string
 }
 

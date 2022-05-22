@@ -7,6 +7,7 @@ export interface GroupFromModel extends GroupToModel {
 	user: EmbeddedUser
 	users: Record<ClassUsers, string[]>
 	last: DiscussionFromModel | null
+	readAt: Record<string, number>
 	createdAt: number
 	updatedAt: number
 }

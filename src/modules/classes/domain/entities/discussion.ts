@@ -11,6 +11,7 @@ export class DiscussionEntity extends BaseEntity {
 	public readonly groupId: string
 	public readonly classId: string
 	public readonly user: EmbeddedUser
+	public readonly readAt: Record<string, number>
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -22,6 +23,7 @@ export class DiscussionEntity extends BaseEntity {
 		             groupId,
 		             classId,
 		             user,
+		             readAt,
 		             createdAt,
 		             updatedAt
 	             }: DiscussionConstructorArgs) {
@@ -33,6 +35,7 @@ export class DiscussionEntity extends BaseEntity {
 		this.groupId = groupId
 		this.classId = classId
 		this.user = generateEmbeddedUser(user)
+		this.readAt = readAt
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -79,6 +82,7 @@ type DiscussionConstructorArgs = {
 	content: string
 	media: Media | null
 	links: { original: string, normalized: string }[]
+	readAt: Record<string, number>
 	createdAt: number
 	updatedAt: number
 	groupId: string
