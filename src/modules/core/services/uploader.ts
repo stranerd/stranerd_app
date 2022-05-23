@@ -3,21 +3,15 @@ import { HttpClient } from './http'
 
 export const uploadFile = async (path: string, file: UploadedFile): Promise<Media> => {
 	try {
-		const data = new FormData()
-		data.append('path', path)
-		data.append('file', file.ref)
-		return await new HttpClient().post<any, Media>('/storage/file', data)
+		return await new HttpClient().post<any, Media>('/storage/file', { path, file })
 	} catch (err: any) {
 		throw new Error('Error uploading file')
 	}
 }
 
-export const uploadFiles = async (path: string, files: UploadedFile[]): Promise<Media[]> => {
+export const uploadFiles = async (path: string, file: UploadedFile[]): Promise<Media[]> => {
 	try {
-		const data = new FormData()
-		data.append('path', path)
-		files.forEach((file) => data.append('file', file.ref))
-		return await new HttpClient().post<any, Media[]>('/storage/files', data)
+		return await new HttpClient().post<any, Media[]>('/storage/files', { path, file })
 	} catch {
 		throw new Error('Error uploading files')
 	}

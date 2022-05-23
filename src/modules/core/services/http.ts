@@ -67,7 +67,11 @@ export class HttpClient {
 			const isGet = method === 'get'
 			if (!isGet) {
 				const formData = new FormData()
-				Object.entries(data).forEach(([key, val]) => formData.append(key, val instanceof UploadedFile ? val.ref : JSON.stringify(val)))
+				Object.entries(data).forEach(([key, val]) => {
+					if (val instanceof UploadedFile) formData.append(key, val.ref)
+					else if (Array.isArray(val) && val[0] instanceof UploadedFile) val.forEach((file) => formData.append(key, file))
+					else formData.append(key, JSON.stringify(val))
+				})
 				data = formData as any
 			}
 			const res = await this.client.request<Body, AxiosResponse<ReturnValue>>({
