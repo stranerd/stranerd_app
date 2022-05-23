@@ -9,4 +9,5 @@ export interface EventBaseDataSource {
 	listenToMany: (classId: string, query: QueryParams, listener: Listeners<EventFromModel>) => Promise<() => void>
 	find: (classId: string, id: string) => Promise<EventFromModel | null>
 	delete: (classId: string, id: string) => Promise<void>
+	markRead: (classId: string) => Promise<boolean>
 }

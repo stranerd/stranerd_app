@@ -6,6 +6,7 @@ export interface EventFromModel extends EventToModel {
 	id: string
 	user: EmbeddedUser
 	users: Record<ClassUsers, string[]>
+	readAt: Record<string, number>
 	createdAt: number
 	updatedAt: number
 }

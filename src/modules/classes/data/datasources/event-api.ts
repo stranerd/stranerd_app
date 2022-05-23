@@ -43,4 +43,8 @@ export class EventApiDataSource implements EventBaseDataSource {
 	async update (classId: string, id: string, data: EventToModel) {
 		return await this.stranerdClient.put<EventToModel, EventFromModel>(`/${classId}/${id}`, data)
 	}
+
+	async markRead (classId: string) {
+		return await this.stranerdClient.post<any, boolean>(`/${classId}`, {})
+	}
 }

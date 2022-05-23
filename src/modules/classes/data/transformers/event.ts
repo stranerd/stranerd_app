@@ -3,9 +3,9 @@ import { EventEntity } from '../../domain/entities/event'
 
 export class EventTransformer {
 	fromJSON (model: EventFromModel) {
-		const { id, title, data, user, users, createdAt, classId, updatedAt } = model
+		const { id, title, data, user, users, createdAt, classId, readAt, updatedAt } = model
 		return new EventEntity({
-			id, title, data, user, users, classId, createdAt, updatedAt
+			id, title, data, user, users, classId, readAt, createdAt, updatedAt
 		})
 	}
 
