@@ -7,7 +7,7 @@
 					<ion-text class="font-bold hidden md:block capitalize">
 						Results
 					</ion-text>
-					<ion-text class="text-main_dark text-center capitalize">
+					<ion-text class="text-secondaryText text-center capitalize">
 						{{ test.name }}
 					</ion-text>
 				</div>

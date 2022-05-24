@@ -8,12 +8,12 @@
 				<avatar :id="question.user.id" :name="question.user.bio.fullName" :size="28"
 					:src="question.user.bio.photo"
 					class="mr-2 " />
-				<span class="text-main_dark hidden md:flex items-center gap-1">
+				<span class="text-secondaryText hidden md:flex items-center gap-1">
 					<span>{{ question.user.bio.fullName }}</span>
 					<Verified :verified="question.isUserVerified" />
 				</span>
 				<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 ml-2 hidden md:block" />
-				<span class="text-main_dark capitalize">{{ question.subject }}</span>
+				<span class="text-secondaryText capitalize">{{ question.subject }}</span>
 			</div>
 
 			<ion-button v-if="showAnswerButton"
@@ -24,9 +24,9 @@
 			</ion-button>
 		</div>
 
-		<DisplayHtml :html="question.trimmedBody" class="text-main_dark leading-normal font-500" />
+		<DisplayHtml :html="question.trimmedBody" class="text-secondaryText leading-normal font-500" />
 
-		<div class="flex justify-between items-center gap-4 text-main_dark text-sub">
+		<div class="flex justify-between items-center gap-4 text-secondaryText text-sub">
 			<span class="lg:mr-2">{{ formatTime(question.createdAt) }}</span>
 			<span v-if="question.attachments.length" class="font-italic flex items-center">
 				<IonIcon :icon="imageOutline" class="mr-2" />  IMG inside

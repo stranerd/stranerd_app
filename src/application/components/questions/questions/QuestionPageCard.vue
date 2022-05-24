@@ -2,22 +2,22 @@
 	<div class="flex flex-col md:gap-4">
 		<div class="bg-white card-padding md:rounded-xl border-b border-new_gray flex flex-col">
 			<div class="flex items-center gap-4">
-				<span class="font-semibold text-main_dark capitalize">{{ question.subject }}</span>
+				<span class="font-semibold text-secondaryText capitalize">{{ question.subject }}</span>
 				<div class="flex flex-grow items-center justify-end gap-2">
 					<Share
 						:text="question.strippedBody"
-						cssClass="text-[22px] mr-2 text-main_dark"
+						cssClass="text-[22px] mr-2 text-secondaryText"
 						title="Share this question" />
-					<IonIcon :icon="flagOutline" class="text-[22px] text-main_dark cursor-pointer"
+					<IonIcon :icon="flagOutline" class="text-[22px] text-secondaryText cursor-pointer"
 						@click="openReportQuestionModal" />
 				</div>
 			</div>
-			<DisplayHtml :html="question.body" class="text-main_dark" />
+			<DisplayHtml :html="question.body" class="text-secondaryText" />
 
 			<div class="flex items-center justify-between">
 				<div class="flex items-center gap-2">
 					<avatar :id="question.user.id" :size="24" :src="question.user.bio.photo" />
-					<span class="font-semibold text-main_dark flex gap-1 items-center">
+					<span class="font-semibold text-secondaryText flex gap-1 items-center">
 						<span>{{ question.user.bio.fullName }}</span>
 						<Verified :verified="question.isUserVerified" />
 					</span>

@@ -3,7 +3,7 @@
 		<div class="py-4 md:py-0 flex flex-col gap-4 md:gap-6">
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-					<div class="text-main_dark flex items-center">
+					<div class="text-secondaryText flex items-center">
 						<ion-text class="mr-3 text-heading font-bold">
 							TestPreps
 						</ion-text>
@@ -17,7 +17,7 @@
 			</div>
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-					<div class="text-main_dark flex items-center">
+					<div class="text-secondaryText flex items-center">
 						<ion-text class="mr-3 font-bold text-heading">
 							FlashCards
 						</ion-text>
@@ -31,7 +31,7 @@
 			</div>
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-					<div class="text-main_dark flex items-center">
+					<div class="text-secondaryText flex items-center">
 						<ion-text class="text-heading font-bold mr-3">
 							Notes
 						</ion-text>
@@ -45,7 +45,7 @@
 			</div>
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-					<div class="text-main_dark flex items-center">
+					<div class="text-secondaryText flex items-center">
 						<ion-text class="text-heading font-bold mr-3">
 							Videos
 						</ion-text>

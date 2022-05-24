@@ -3,7 +3,7 @@
 		<ion-toolbar class="lg:hidden bg-headerBg px-4 border-bottom-line md:h-auto min-h-[3rem] flex items-center justify-center">
 		
 			<div class="flex items-center justify-center">
-				<!-- TODO: Only show back button if there is a previous page -->
+				<!-- TODO: Only show back button if there is a previous page & it's not the homePage -->
 				<ion-icon v-if="true" :icon="arrowBackOutline" class="text-xl text-headerText absolute left-0" @click="$router.go(-1)" />
 				<router-link to="/">
 					<IonText class="font-bold text-headerText text-heading">
@@ -49,8 +49,6 @@ export default defineComponent({
 	name: 'Topbar',
 	components: { IonHeader, IonToolbar, BigScreenBar, NotificationIcon },
 	setup () {
-		
-		console.log(useRouter())
 		const { isLoggedIn, user } = useAuth()
 		const openUserDashboardMenu = useMenuPopover().openUserDashboardMenu
 		const openCreateDashboardMenu = useMenuPopover().openCreateDashboardMenu

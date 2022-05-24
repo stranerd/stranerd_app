@@ -20,7 +20,7 @@
 						</div>
 					</div>
 					<div class="rounded-b-xl px-4 flex flex-col gap-1 md:gap-2 mt-2">
-						<h2 class="text-heading font-bold text-main_dark flex gap-1 items-center">
+						<h2 class="text-heading font-bold text-secondaryText flex gap-1 items-center">
 							<span>{{ user.bio.fullName }}</span>
 							<Verified :verified="user.isVerified" />
 						</h2>

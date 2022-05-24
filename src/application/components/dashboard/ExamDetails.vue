@@ -2,7 +2,7 @@
 	<div v-if="institution" class="flex flex-col gap-4 md:gap-6">
 		<div class="border-bottom-line">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-				<div class="text-main_dark flex items-center">
+				<div class="text-secondaryText flex items-center">
 					<ion-text class="text-base font-bold">Details</ion-text>
 				</div>
 			</div>
@@ -19,12 +19,12 @@
 		</div>
 		<div class="border-bottom-line">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-				<div class="text-main_dark flex items-center">
+				<div class="text-secondaryText flex items-center">
 					<ion-text class="text-base font-bold">Progress</ion-text>
 				</div>
 			</div>
 			<div class="flex bg-white rounded-xl flex-col p-4 md:p-8 gap-4">
-				<ion-text class="text-heading2 text-main_dark font-bold">
+				<ion-text class="text-heading2 text-secondaryText font-bold">
 					{{ formatNumber(progress * 100) }}%
 				</ion-text>
 				<IonProgressBar :value="progress" />
@@ -33,7 +33,7 @@
 		</div>
 		<div class="border-bottom-line">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-				<div class="text-main_dark flex items-center">
+				<div class="text-secondaryText flex items-center">
 					<ion-text class="text-base font-bold">Tests</ion-text>
 				</div>
 			</div>
@@ -50,7 +50,7 @@
 		</div>
 		<div v-if="institutionTests.length">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-				<div class="text-main_dark flex items-center">
+				<div class="text-secondaryText flex items-center">
 					<ion-text class="text-base font-bold">History</ion-text>
 				</div>
 			</div>

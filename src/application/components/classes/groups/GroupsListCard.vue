@@ -5,7 +5,7 @@
 			<IonIcon :icon="chatboxEllipsesOutline" class="text-gray text-4xl md:text-5xl" />
 		</span>
 		<div class="flex flex-col w-full truncate">
-			<div class="flex gap-2 text-main_dark items-center">
+			<div class="flex gap-2 text-secondaryText items-center">
 				<IonText class="font-semibold w-full truncate capitalize">
 					{{ group.name }}
 				</IonText>

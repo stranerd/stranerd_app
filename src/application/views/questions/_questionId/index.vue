@@ -2,7 +2,7 @@
 	<DashboardWithToolbarLayout>
 		<div class="w-full lg:mt-8 md:p-4 lg:p-0">
 			<div
-				class="col-span-12 !gap-2 card-padding flex-row items-center text-main_dark  hidden lg:flex cursor-pointer"
+				class="col-span-12 !gap-2 card-padding flex-row items-center text-secondaryText  hidden lg:flex cursor-pointer"
 				@click="$router.go(-1)">
 				<IonIcon :icon="chevronBackCircleOutline" class="text-[25px] mr-2" />
 				<span>Back to all questions</span>

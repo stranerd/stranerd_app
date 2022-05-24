@@ -1,6 +1,6 @@
 <template>
 	<router-link :to="`/study/preps/${institutionId}`"
-		class="w-full bg-white rounded-xl flex flex-col items-start box-border card-padding text-main_dark">
+		class="w-full bg-white rounded-xl flex flex-col items-start box-border card-padding text-secondaryText">
 		<ion-text class="truncate w-full">
 			<Institution :institutionId="institutionId" class="font-500" />
 		</ion-text>

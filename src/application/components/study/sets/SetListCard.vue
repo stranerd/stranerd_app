@@ -1,6 +1,6 @@
 <template>
 	<router-link :to="`/study/sets/${set.id}`"
-		class="bg-white rounded-xl flex flex-col box-border justify-between card-padding text-main_dark">
+		class="bg-white rounded-xl flex flex-col box-border justify-between card-padding text-secondaryText">
 		<ion-text class="font-500 truncate w-full">{{ set.name }}</ion-text>
 		<div class="w-full flex items-center justify-between gap-2 text-sub">
 			<Tag :tag="`${formatNumber(set.allSaved.length)} ${pluralize(set.allSaved.length, 'Item', 'Items')}`">

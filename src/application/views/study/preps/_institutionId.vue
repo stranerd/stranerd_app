@@ -2,7 +2,7 @@
 	<Justified>
 		<div class="lg:w-8/12 w-full mx-auto md:p-4 lg:p-0">
 			<div class="bg-white lg:mt-6 rounded-xl flex flex-col p-4 md:p-6 gap-4">
-				<ion-text class="text-heading font-bold text-main_dark mx-auto text-center">
+				<ion-text class="text-heading font-bold text-secondaryText mx-auto text-center">
 					<Institution :institutionId="institutionId" />
 				</ion-text>
 				<div class="showcase gap-4">

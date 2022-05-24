@@ -1,8 +1,8 @@
 <template>
-	<div class="bg-white rounded-xl p-4 md:p-6 flex flex-col items-start gap-2 md:gap-3">
+	<div class="bg-bodyBg p-4 md:p-6 flex flex-col items-start gap-2 md:gap-3">
 		<IonIcon :class="iconClass" :icon="icon" class="text-heading2" />
-		<ion-text class="font-bold text-main_dark text-heading leading-none">{{ title }}</ion-text>
-		<ion-text class="text-gray leading-none">{{ subtitle }}</ion-text>
+		<ion-text class="font-bold text-bodyText text-heading leading-none">{{ title }}</ion-text>
+		<ion-text class="text-secondaryText leading-none">{{ subtitle }}</ion-text>
 	</div>
 </template>
 

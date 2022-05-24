@@ -2,9 +2,9 @@
 	<Justified>
 		<div>
 			<div class="bg-white md:px-4 lg:px-0">
-				<div class="sm:flex hidden p-4 w-full justify-center items-center text-main_dark gap-4">
+				<div class="sm:flex hidden p-4 w-full justify-center items-center text-secondaryText gap-4">
 					<ion-icon :icon="cogOutline" class="text-3xl" />
-					<ion-text class="text-main_dark text-heading font-bold">Administration</ion-text>
+					<ion-text class="text-secondaryText text-heading font-bold">Administration</ion-text>
 					<ion-icon :icon="cogOutline" class="text-3xl" />
 				</div>
 				<div class="w-full lg:w-8/12 mx-auto">

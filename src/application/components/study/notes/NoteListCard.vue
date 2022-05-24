@@ -1,6 +1,6 @@
 <template>
 	<component :is="content ? 'router-link' : 'span'" :to="`/study/notes/${note.id}`"
-		class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
+		class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-secondaryText">
 		<div class="w-full justify-between items-center flex gap-2">
 			<ion-text class="font-500 truncate w-full">{{ note.title }}</ion-text>
 			<BlockLoading v-if="loading" />

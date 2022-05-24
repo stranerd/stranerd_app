@@ -1,8 +1,8 @@
 <template>
 	<router-link :to="`/questions/${question.id}`"
 		class="card-padding rounded-xl bg-white flex flex-col w-full">
-		<DisplayHtml :html="question.trimmedBody" class="text-main_dark leading-normal font-500" />
-		<div class="w-full flex justify-between items-center mt-auto text-sub text-main_dark">
+		<DisplayHtml :html="question.trimmedBody" class="text-secondaryText leading-normal font-500" />
+		<div class="w-full flex justify-between items-center mt-auto text-sub text-secondaryText">
 			<div class="flex items-center">
 				<span class="ml-auto">{{ formatTime(question.createdAt) }}</span>
 				<div class="h-1 w-1 bg-gray mx-2 rounded-full" />

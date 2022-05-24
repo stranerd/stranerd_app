@@ -10,7 +10,7 @@
 				<div class="w-3/4 flex-auto flex flex-row items-center">
 					<Search class="flex-grow" />
 				</div>
-				<div class="w-[25%] flex-auto flex text-main_dark">
+				<div class="w-[25%] flex-auto flex text-secondaryText">
 					<div class="flex flex-row items-center py-1 gap-8 justify-between">
 						<ion-icon :icon="addCircleOutline" class="text-2xl"
 							@click="openCreateDashboardMenu" />

@@ -4,14 +4,14 @@
 			<div class="flex gap-2 items-center">
 				<Avatar :id="announcement.user.id" :name="announcement.user.bio.fullName"
 					:size="32" :src="announcement.user.bio.photo" />
-				<IonText class="text-main_dark flex gap-1 items-center">
+				<IonText class="text-secondaryText flex gap-1 items-center">
 					<span>{{ announcement.user.bio.fullName }}</span>
 					<Verified :verified="announcement.isUserVerified" />
 				</IonText>
 				<span class="dot bg-icon_inactive" />
 				<IonText class="text-gray">{{ formatTime(announcement.createdAt) }}</IonText>
 			</div>
-			<IonText class="text-main_dark">{{ announcement.body }}</IonText>
+			<IonText class="text-secondaryText">{{ announcement.body }}</IonText>
 		</div>
 		<span v-if="announcement.admins.includes(id)" class="p-1" @click.prevent="showMenu">
 			<IonIcon :icon="ellipsisVerticalOutline" class="text-heading2" />

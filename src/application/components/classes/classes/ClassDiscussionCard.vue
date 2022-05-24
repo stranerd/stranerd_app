@@ -6,7 +6,7 @@
 				class="text-4xl text-gray" />
 		</span>
 		<div class="flex flex-col mr-auto">
-			<IonText class="font-semibold text-main_dark">{{ discussion.media.name }}</IonText>
+			<IonText class="font-semibold text-secondaryText">{{ discussion.media.name }}</IonText>
 			<span class="text-sub">{{ discussion.size }}</span>
 		</div>
 		<BlockLoading v-if="loading" class="text-2xl" />
@@ -16,7 +16,7 @@
 	</div>
 	<div v-if="discussion.links.length > 0" class="bg-white card-padding flex rounded-xl items-center">
 		<IonIcon :icon="linkOutline" class="text-4xl text-gray" />
-		<span class="font-semibold text-main_dark" v-html="discussion.formattedContent" />
+		<span class="font-semibold text-secondaryText" v-html="discussion.formattedContent" />
 	</div>
 </template>
 
