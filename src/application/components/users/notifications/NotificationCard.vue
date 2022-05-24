@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-white card-padding rounded-lg text-gray" @click="markNotificationSeen">
+	<div class="bg-bodyBg card-padding text-bodyText" @click="markNotificationSeen">
 		<div>
 			<div class="flex justify-between gap-2 items-baseline">
 				<router-link :class="{'font-bold': !notification.seen}" :to="notification.link" class="flex-grow">
