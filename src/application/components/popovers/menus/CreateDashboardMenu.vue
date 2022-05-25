@@ -1,34 +1,34 @@
 <template>
 	<Popover>
-		<router-link class="flex gap-2 items-center text-gray hover:text-main_dark border-bottom-line card-padding"
+		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
 			to="/study/flashCards/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="flashOutline" class="text-2xl" />
 				<ion-label class="font-bold">Create a flashcard</ion-label>
 			</div>
 		</router-link>
-		<router-link class="flex gap-2 items-center text-gray hover:text-main_dark border-bottom-line card-padding"
+		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
 			to="/study/notes/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="readerOutline" class="text-2xl" />
 				<ion-label class="font-bold">Upload a note</ion-label>
 			</div>
 		</router-link>
-		<router-link class="flex gap-2 items-center text-gray hover:text-main_dark border-bottom-line card-padding"
+		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
 			to="/study/videos/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="videocamOutline" class="text-2xl" />
 				<ion-label class="font-bold">Upload a video</ion-label>
 			</div>
 		</router-link>
-		<router-link class="flex gap-2 items-center text-gray hover:text-main_dark border-bottom-line card-padding"
+		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
 			to="/study/sets/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="folderOutline" class="text-2xl" />
 				<ion-label class="font-bold">Create a study folder</ion-label>
 			</div>
 		</router-link>
-		<router-link class="flex gap-2 items-center text-gray hover:text-main_dark border-bottom-line card-padding"
+		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
 			to="/questions/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="helpCircleOutline" class="text-3xl" />
@@ -36,7 +36,7 @@
 			</div>
 		</router-link>
 		<router-link v-if="user?.isVerified"
-			class="flex gap-2 items-center text-gray hover:text-main_dark border-bottom-line card-padding"
+			class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
 			to="/classes/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="peopleOutline" class="text-3xl" />

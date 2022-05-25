@@ -5,7 +5,7 @@
 			<div class="py-4 md:py-0 flex flex-col gap-4 md:gap-6">
 				<div v-if="questions.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
+						<div class="text-secondaryText flex items-center">
 							<ion-text class="text-heading font-bold">Questions</ion-text>
 						</div>
 
@@ -18,7 +18,7 @@
 				</div>
 				<div v-if="testPreps.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
+						<div class="text-secondaryText flex items-center">
 							<ion-text class="text-heading font-bold">TestPreps</ion-text>
 						</div>
 						<router-link :to="`/search/preps?search=${searchTerm}`"
@@ -30,7 +30,7 @@
 				</div>
 				<div v-if="flashCards.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
+						<div class="text-secondaryText flex items-center">
 							<ion-text class="text-heading font-bold">FlashCards</ion-text>
 						</div>
 
@@ -43,7 +43,7 @@
 				</div>
 				<div v-if="notes.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
+						<div class="text-secondaryText flex items-center">
 							<ion-text class="text-heading font-bold">Notes</ion-text>
 						</div>
 						<router-link :to="`/search/notes?search=${searchTerm}`"
@@ -55,7 +55,7 @@
 				</div>
 				<div v-if="videos.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
+						<div class="text-secondaryText flex items-center">
 							<ion-text class="text-heading font-bold">Videos</ion-text>
 						</div>
 						<router-link :to="`/search/videos?search=${searchTerm}`"
@@ -67,7 +67,7 @@
 				</div>
 				<div v-if="sets.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
+						<div class="text-secondaryText flex items-center">
 							<ion-text class="text-heading font-bold">Folders</ion-text>
 						</div>
 
@@ -80,7 +80,7 @@
 				</div>
 				<div v-if="users.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
+						<div class="text-secondaryText flex items-center">
 							<ion-text class="text-heading font-bold">Nerds</ion-text>
 						</div>
 

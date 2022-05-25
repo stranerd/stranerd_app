@@ -21,7 +21,7 @@
 				<ion-reorder v-for="(card, index) in factory.questions" :key="index"
 					class="flex flex-col bg-white p-4 rounded-xl border border-new_gray ">
 					<div class="flex w-full items-center justify-between mb-1">
-						<ion-text class="text-main_dark font-normal"> {{ index + 1 }}</ion-text>
+						<ion-text class="text-secondaryText font-normal"> {{ index + 1 }}</ion-text>
 						<div class="flex" @click="factory.removeQuestion(index)">
 							<ion-icon :icon='trashOutline' class="text-red" />
 						</div>

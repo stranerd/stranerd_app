@@ -3,7 +3,7 @@
 		<div class="text-center container px-3 mx-auto lg:mt-48 mt-20 ">
 			<div class="flex flex-col justify-center items-center lg:gap-6 gap-3">
 				<img alt="testprep image" src="@app/assets/images/auth/join.svg" />
-				<ion-text class="font-extrabold mx-auto text-center lg:text-5xl text-base text-main_dark ">
+				<ion-text class="font-extrabold mx-auto text-center lg:text-5xl text-base text-secondaryText ">
 					Journey through school with Stranerd
 				</ion-text>
 				<ion-text class="lg:text-[32px] text-xs">

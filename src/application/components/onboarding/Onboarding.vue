@@ -18,7 +18,7 @@
 				<ion-button v-if="tab !== tabs" class="btn-outline w-full">
 					Skip
 				</ion-button>
-				<ion-button v-else class="btn-white text-main_dark font-bold w-full">
+				<ion-button v-else class="btn-white text-secondaryText font-bold w-full">
 					Get Started
 				</ion-button>
 			</router-link>

@@ -3,7 +3,7 @@
 		<div class="flex items-center">
 			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="24" :src="answer.user.bio.photo"
 				class="mr-2" />
-			<span class="font-semibold text-main_dark flex items-center gap-1">
+			<span class="font-semibold text-secondaryText flex items-center gap-1">
 				<span>{{ answer.user.bio.fullName }}</span>
 				<Verified :verified="answer.isUserVerified" />
 			</span>

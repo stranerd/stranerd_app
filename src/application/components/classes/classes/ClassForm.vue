@@ -81,7 +81,7 @@
 			<div class="flex flex-col gap-1" style="min-height: 178px;">
 				<div v-for="(course, index) in factory.courses" :key="index + course"
 					class="flex gap-4 items-center justify-between">
-					<span class="truncate flex-grow text-main_dark">{{ course }}</span>
+					<span class="truncate flex-grow text-secondaryText">{{ course }}</span>
 					<IonIcon :icon="closeOutline" class="text-red text-heading2"
 						@click="factory.removeCourse(course)" />
 				</div>

@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col items-center text-main_dark gap-2">
+	<div class="flex flex-col items-center text-secondaryText gap-2">
 		<router-link v-for="(person, index) in users" :key="person.id" :class="{'!bg-cyan': person.id === id}"
 			:to="`/users/${person.id}`"
 			class="py-3 px-3 rounded-xl flex w-full items-center bg-white"

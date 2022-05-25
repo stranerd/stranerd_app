@@ -4,7 +4,7 @@
 			<form class="border-bottom-line flex flex-col md:rounded-xl bg-white py-4 md:py-6 gap-4"
 				@submit.prevent="updateProfile()">
 				<div class="px-4 md:px-6">
-					<ion-text class="text-main_dark font-bold">Edit profile</ion-text>
+					<ion-text class="text-secondaryText font-bold">Edit profile</ion-text>
 				</div>
 				<div class="flex flex-col items-start">
 					<CoverAvatar :editable="true" :src="factory.coverPhoto" class="h-20"
@@ -15,7 +15,7 @@
 					</span>
 				</div>
 				<div class="px-4 md:px-6">
-					<ion-text class="text-heading text-main_dark font-bold text-left mb-1">Name</ion-text>
+					<ion-text class="text-heading text-secondaryText font-bold text-left mb-1">Name</ion-text>
 					<div class="flex items-center justify-center gap-2 md:gap-4 w-full">
 						<div class="rounded-lg w-1/2">
 							<IonInput v-model="factory.first" class="font-medium border border-faded_gray "
@@ -28,7 +28,7 @@
 					</div>
 				</div>
 				<div class="px-4 md:px-6">
-					<ion-text class="text-heading text-main_dark font-bold text-left mb-1">Bio</ion-text>
+					<ion-text class="text-heading text-secondaryText font-bold text-left mb-1">Bio</ion-text>
 					<div class="flex md:flex-row items-center justify-center flex-col w-full">
 						<div class="rounded-lg w-full">
 							<IonTextarea v-model="factory.description"

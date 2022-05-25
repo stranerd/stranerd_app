@@ -1,7 +1,7 @@
 <template>
 	<div class="md:px-8 px-4 py-10 bg-white flex flex-col">
 		<ion-text
-			class="font-extrabold mx-auto lg:mt-48 lg:mb-24 mt-20 mb-12 text-center lg:text-5xl text-base text-main_dark ">
+			class="font-extrabold mx-auto lg:mt-48 lg:mb-24 mt-20 mb-12 text-center lg:text-5xl text-base text-secondaryText ">
 			Made for students, loved by students
 		</ion-text>
 		<div class="container mx-auto">

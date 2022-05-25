@@ -3,7 +3,7 @@
 		class="bg-white w-full rounded-xl flex flex-col box-border card-padding justify-between">
 		<div class="flex flex-col">
 			<div class="flex justify-between">
-				<ion-text class="text-left w-full text-main_dark font-500 truncate capitalize">
+				<ion-text class="text-left w-full text-secondaryText font-500 truncate capitalize">
 					<Institution v-if="testPrep && testPrep.isPastQuestionType"
 						:institutionId="testPrep.data.institutionId" />
 					<span v-else>{{ test.name }}</span>

@@ -9,7 +9,7 @@
 			<div :style="`width:${test.progress * 100}%`" class="bg-primary h-1" />
 			<div class="lg:w-8/12 w-full px-4 mx-auto flex items-center justify-between py-2">
 				<div>
-					<ion-text v-if="test.isOBJ" class="text-main_dark">
+					<ion-text v-if="test.isOBJ" class="text-secondaryText">
 						{{ test.answered }}/{{ formatNumber(questions.length) }} answered
 					</ion-text>
 				</div>

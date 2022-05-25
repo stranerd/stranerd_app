@@ -1,8 +1,8 @@
 <template>
-	<div class="bg-white rounded-xl p-4 md:p-6 flex flex-col items-start gap-2 md:gap-3">
+	<div class="p-4 md:p-6 flex flex-col items-start gap-2">
 		<IonIcon :class="iconClass" :icon="icon" class="text-heading2" />
-		<ion-text class="font-bold text-main_dark text-heading leading-none">{{ title }}</ion-text>
-		<ion-text class="text-gray leading-none">{{ subtitle }}</ion-text>
+		<ion-text class="font-bold text-heading leading-none">{{ title }}</ion-text>
+		<ion-text class="text-secondaryText leading-none">{{ subtitle }}</ion-text>
 	</div>
 </template>
 
@@ -27,7 +27,7 @@ export default defineComponent({
 		iconClass: {
 			type: String,
 			required: false,
-			default: 'text-orange'
+			default: 'text-info'
 		}
 	}
 })

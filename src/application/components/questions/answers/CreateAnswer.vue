@@ -1,13 +1,13 @@
 <template>
 	<div class="w-full flex flex-col bg-white md:p-4 rounded-xl md:gap-4">
 		<div class="p-4 flex flex-col rounded-lg md:border md:border-faded_gray border-bottom-line gap-1">
-			<span class="text-main_dark font-bold">Answer</span>
+			<span class="text-secondaryText font-bold">Answer</span>
 			<ion-input v-model="factory.title" class="w-full" placeholder="Write main answer here and keep it short" />
 			<DisplayError :error="factory.errors.title" />
 		</div>
 
 		<div class="p-4 flex flex-col rounded-lg md:border md:border-faded_gray border-bottom-line gap-1">
-			<span class="text-main_dark font-bold">Explanation (Optional)</span>
+			<span class="text-secondaryText font-bold">Explanation (Optional)</span>
 			<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
 				placeholder="Write a detailed explanation for your answer here" />
 		</div>

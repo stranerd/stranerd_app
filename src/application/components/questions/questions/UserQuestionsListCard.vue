@@ -4,7 +4,7 @@
 		<ion-ripple-effect class="rounded-xl" />
 		<div class="flex items-center">
 			<div class="flex items-center">
-				<span class="font-bold text-main_dark text-sub capitalize">{{ question.subject }}</span>
+				<span class="font-bold text-secondaryText text-sub capitalize">{{ question.subject }}</span>
 			</div>
 			<div class="flex justify-end flex-grow">
 				<span class="font-bold text-icon_inactive lg:block hidden">
@@ -14,7 +14,7 @@
 				</span>
 			</div>
 		</div>
-		<span class="text-main_dark leading-normal text-sub">
+		<span class="text-secondaryText leading-normal text-sub">
 			{{ question.trimmedBody }}
 		</span>
 

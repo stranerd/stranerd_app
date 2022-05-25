@@ -1,7 +1,7 @@
 <template>
 	<Modal>
 		<div class="py-1 text-center flex md:flex-row flex-col items-center font-semibold justify-center">
-			<span class="mr-2 text-main_dark ">You are requesting a session from</span>
+			<span class="mr-2 text-secondaryText ">You are requesting a session from</span>
 			<div class="flex flex-row items-center py-1">
 				<img class="inline h-4 mr-2" src="@app/assets/images/icons/person-circle.svg" />
 				<span class="mr-2 text-primary">{{ newSessionTutorIdBio?.user.fullName ?? '' }}</span>
@@ -26,7 +26,7 @@
 		</div>
 
 		<div class="mt-3 py-2 px-2 flex md:flex-row flex-col md:items-center">
-			<span class="mr-2 font-semibold text-main_dark">Schedule start:</span>
+			<span class="mr-2 font-semibold text-secondaryText">Schedule start:</span>
 			<div class="flex flex-row items-center gap-3 mt-2 md:mt-0">
 				<div class="flex flex-row items-center ">
 					<ion-icon :icon="ellipse" class="text-lg mr-1 text-primary"></ion-icon>

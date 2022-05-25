@@ -2,7 +2,7 @@
 	<DashboardLayout>
 		<div class="md:p-4 flex flex-col gap-4 md:gap-6">
 			<template v-if="isLoggedIn">
-				<StatusBar />
+				<!-- <StatusBar /> -->
 				<AspirantDashboard v-if="user?.isAspirant" />
 				<GeneralDashboard v-else />
 			</template>
@@ -24,7 +24,7 @@ import AspirantDashboard from '@app/components/dashboard/AspirantDashboard.vue'
 
 export default defineComponent({
 	name: 'Dashboard',
-	displayName: 'Stranerd',
+	displayName: 'Dashboard',
 	components: { GeneralDashboard, AspirantDashboard, DashboardLayout, StatusBar },
 	setup () {
 		const { isLoggedIn, user } = useAuth()

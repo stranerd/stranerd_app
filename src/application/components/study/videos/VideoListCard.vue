@@ -1,6 +1,6 @@
 <template>
 	<router-link :to="`/study/videos/${video.id}`"
-		class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
+		class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-secondaryText">
 		<ion-text class="font-500 truncate w-full">{{ video.title }}</ion-text>
 		<div class="w-full flex items-center justify-between gap-2 text-sub">
 			<Tag :index="4" tag="Video">

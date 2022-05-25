@@ -1,6 +1,6 @@
 <template>
 	<div :class="{'justify-end': discussion.user.id === id}"
-		class="flex gap-1 items-end text-main_dark w-full">
+		class="flex gap-1 items-end text-secondaryText w-full">
 		<Avatar v-if="discussion.user.id !== id" :id="discussion.user.id" :name="discussion.user.bio.fullName"
 			:size="24" :src="discussion.user.bio.photo" />
 		<div :class="discussion.user.id === id ? 'bg-new_gray rounded-bl-xl' : 'bg-[#1997DE1A] rounded-br-xl'"

@@ -1,6 +1,6 @@
 <template>
 	<div id="screen" class="md:px-4">
-		<ion-text class="text-main_dark font-bold text-heading px-4 md:px-0 hidden md:block">
+		<ion-text class="text-secondaryText font-bold text-heading px-4 md:px-0 hidden md:block">
 			All cards info <span class="text-gray">({{ formatNumber(flashCard.set.length) }})</span>
 		</ion-text>
 

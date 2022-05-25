@@ -17,7 +17,7 @@
 				<div class="px-4 md:px-6 border-bottom-line">
 					<div class="pt-2 pb-4 flex flex-col gap-1">
 						<div class="flex gap-1 items-center">
-							<IonText class="text-main_dark text-heading capitalize font-semibold">
+							<IonText class="text-secondaryText text-heading capitalize font-semibold">
 								{{ classInst.name }}
 							</IonText>
 							<IonIcon v-if="classInst.admins.includes(id)" :icon="pencilOutline"

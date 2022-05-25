@@ -1,7 +1,7 @@
 <template>
 	<div class="w-full md:px-8 px-4 bg-white">
 		<div class="container mx-auto flex flex-col max-w-7xl">
-			<ion-text class="font-extrabold mx-auto lg:my-48 my-20 text-center lg:text-5xl text-base text-main_dark ">
+			<ion-text class="font-extrabold mx-auto lg:my-48 my-20 text-center lg:text-5xl text-base text-secondaryText ">
 				We make learning easy, convenient and accessible.
 			</ion-text>
 			<div class="flex justify-between items-center w-full lg:flex-row flex-col gap-5">
