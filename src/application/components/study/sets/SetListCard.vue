@@ -1,8 +1,8 @@
 <template>
 	<router-link :to="`/study/sets/${set.id}`"
-		class="bg-white rounded-xl flex flex-col box-border justify-between card-padding text-secondaryText">
+		class="flex flex-col justify-between card-padding">
 		<ion-text class="font-500 truncate w-full">{{ set.name }}</ion-text>
-		<div class="w-full flex items-center justify-between gap-2 text-sub">
+		<div class="w-full flex items-center justify-between gap-2 text-sub text-secondaryText">
 			<Tag :tag="`${formatNumber(set.allSaved.length)} ${pluralize(set.allSaved.length, 'Item', 'Items')}`">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
@@ -11,16 +11,10 @@
 					</span>
 				</template>
 			</Tag>
-			<div class="flex items-center text-gray gap-3">
-				<template v-if="edit && set.user.id === id">
-					<span class="text-primary font-bold" @click.prevent="openSetEditModal(set, $router)">Edit</span>
-					<span class="text-red font-bold" @click.prevent="deleteSet">Delete</span>
-				</template>
-				<template v-else>
-					<Avatar :id="set.user.id" :name="set.user.bio.fullName" :size="24" :src="set.user.bio.photo" />
-					<Share :link="set.shareLink" :title="set.name" cssClass="text-xl" text="Share this folder" />
-					<SaveToSet v-if="0 && set.user.id !== id" :entity="set" />
-				</template>
+			<div class="flex items-center gap-3">
+				<Avatar :id="set.user.id" :name="set.user.bio.fullName" :size="24" :src="set.user.bio.photo" />
+				<Share :link="set.shareLink" :title="set.name" cssClass="text-xl" text="Share this folder" />
+				<SaveToSet v-if="0 && set.user.id !== id" :entity="set" />
 			</div>
 		</div>
 	</router-link>
@@ -33,7 +27,6 @@ import { folderOutline } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
-import { openSetEditModal, useDeleteSet } from '@app/composable/study/sets'
 
 export default defineComponent({
 	name: 'SetListCard',
@@ -42,19 +35,12 @@ export default defineComponent({
 		set: {
 			type: SetEntity,
 			required: true
-		},
-		edit: {
-			type: Boolean,
-			required: false,
-			default: false
 		}
 	},
-	setup (props) {
+	setup () {
 		const { id } = useAuth()
-		const { deleteSet, loading } = useDeleteSet(props.set.id)
 		return {
-			folderOutline, pluralize, formatNumber, id,
-			openSetEditModal, deleteSet, loading
+			folderOutline, pluralize, formatNumber, id
 		}
 	}
 })

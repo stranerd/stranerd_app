@@ -3,7 +3,7 @@
 		class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-secondaryText">
 		<ion-text class="font-500 truncate w-full">{{ video.title }}</ion-text>
 		<div class="w-full flex items-center justify-between gap-2 text-sub">
-			<Tag :index="4" tag="Video">
+			<Tag tag="Video">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
 						<ion-icon :icon="playCircleOutline" class="text-base mr-1" />

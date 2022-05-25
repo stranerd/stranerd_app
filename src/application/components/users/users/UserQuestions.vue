@@ -1,10 +1,9 @@
 <template>
-	<div v-if="loading" class="col-span-12 flex items-center justify-center w-full py-8 px-4">
-		<ion-progress-bar type="indeterminate"></ion-progress-bar>
-	</div>
-	<div v-else class="col-span-12 flex flex-col md:gap-4">
-		<UserQuestionsCard v-for="question in questions" :key="question.hash" :question="question" />
-		<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
+	<BlockLoading v-if="loading" />
+	<div v-else class="flex flex-col">
+		<UserQuestionsCard v-for="question in questions" :key="question.hash" :question="question"
+			class="border-bottom-line" />
+		<div v-if="hasMore" class="text-center py-8 text-info font-semibold">
 			<a @click.prevent="fetchOlderQuestions">Load More</a>
 		</div>
 		<EmptyState v-if="!loading && !error && questions.length === 0"
@@ -14,15 +13,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonProgressBar } from '@ionic/vue'
 import UserQuestionsCard from '@app/components/questions/questions/UserQuestionsListCard.vue'
 import { useUserQuestionList } from '@app/composable/users/users/questions'
-import EmptyState from '../../core/EmptyState.vue'
+import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({
 	name: 'ProfileQuestions',
-	components: { UserQuestionsCard, IonProgressBar, EmptyState },
+	components: { UserQuestionsCard, EmptyState },
 	props: {
 		user: {
 			type: UserEntity,

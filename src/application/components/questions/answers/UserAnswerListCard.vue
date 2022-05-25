@@ -1,10 +1,11 @@
 <template>
 	<router-link :id="answer.id" :to="`/questions/${answer.questionId}#${answer.id}`"
-		class="card-padding rounded-xl bg-white flex flex-col w-full text-sub relative cursor-pointer">
-		<ion-text class="text-secondaryText font-bold">
-			Answer <span class="text-gray">({{ formatTime(answer.createdAt) }})</span>
-		</ion-text>
+		class="card-padding flex flex-col">
 		<span>{{ answer.trimmedTitle }}</span>
+		<div class="flex items-center justify-between text-secondaryText text-sub gap-2">
+			<span class="mr-auto">{{ formatTime(answer.createdAt) }}</span>
+			<IonIcon v-if="answer.attachments.length" :icon="imageOutline" class="text-heading" />
+		</div>
 	</router-link>
 </template>
 
@@ -12,6 +13,8 @@
 import { defineComponent } from 'vue'
 import { AnswerEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
+import { formatNumber } from '@utils/commons'
+import { ellipse, imageOutline, readerOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'UserAnswerListCard',
@@ -22,9 +25,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return {
-			formatTime
-		}
+		return { formatTime, formatNumber, readerOutline, ellipse, imageOutline }
 	}
 })
 </script>

@@ -26,7 +26,7 @@
 					<span>{{ person.bio.fullName }}</span>
 					<Verified :verified="person.isVerified" />
 				</span>
-				<Tag :index="person.rank.level - 1" :secondary="true" :tag="person.rank.id" />
+				<Tag :tag="person.rank.id" />
 			</div>
 			<div class="w-3/12 font-bold text-right">
 				<span>{{ formatNumber(person.account.rankings[time], 2) }}</span>
@@ -44,7 +44,7 @@
 					<span>{{ user.bio.fullName }}</span>
 					<Verified :verified="user.isVerified" />
 				</span>
-				<Tag :index="user.rank.level - 1" :secondary="true" :tag="user.rank.id" />
+				<Tag :tag="user.rank.id" />
 			</div>
 			<div class="w-3/12 text-right font-bold">
 				<span>{{ formatNumber(user.account.rankings[time], 2) }}</span>

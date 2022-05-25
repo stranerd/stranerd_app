@@ -8,7 +8,7 @@
 						{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
 						{ name: 'Discussions', path: '/study', icon: chatbubbles, iconOutline:chatbubblesOutline },
 						{ name: 'Tests', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
-						{ name: 'Home', path: '/dashboard', icon: person, iconOutline:personOutline },
+						...(isLoggedIn ? [{ name: 'Account', path: `/account`, icon: person, iconOutline: personOutline }] : [])
 					]" :key="path" :to="path"
 					class="col-span-1 flex flex-col items-center justify-center">
 					<ion-icon :icon="$route.path === path ? icon : iconOutline" class="w-6 md:w-14" />
@@ -35,13 +35,16 @@ import {
 	search,
 	searchOutline
 } from 'ionicons/icons'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	components: { IonFooter, IonIcon, IonToolbar },
 	setup () {
+		const { isLoggedIn } = useAuth()
 		return {
-			personOutline, chatbubblesOutline, helpCircleOutline, peopleOutline, searchOutline, receiptOutline,
-			chatbubbles, helpCircle, person, people, search, receipt
+			isLoggedIn,
+			personOutline, person, chatbubblesOutline, chatbubbles, receiptOutline, receipt,
+			helpCircleOutline, helpCircle, peopleOutline, people, searchOutline, search
 		}
 	}
 })

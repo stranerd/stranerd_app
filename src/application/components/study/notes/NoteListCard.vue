@@ -8,7 +8,7 @@
 		</div>
 
 		<div class="w-full flex items-center justify-between gap-2 text-sub">
-			<Tag :index="2" tag="Note">
+			<Tag tag="Note">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
 						<ion-icon :icon="documentOutline" class="text-base mr-1" />

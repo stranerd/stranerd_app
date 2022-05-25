@@ -1,5 +1,6 @@
 <template>
-	<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" @click.prevent="openSaveModal(entity)" />
+	<ion-icon :class="{ 'text-primaryBg': isSaved }" :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl"
+		@click.prevent="openSaveModal(entity)" />
 </template>
 
 <script lang="ts">

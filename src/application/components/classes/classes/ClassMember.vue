@@ -8,7 +8,7 @@
 					<Verified :verified="user.roles.isVerified" />
 				</IonText>
 				<div class="flex gap-2 items-center">
-					<Tag :index="user.rank.level" :secondary="true" :tag="user.rank.id" />
+					<Tag :tag="user.rank.id" />
 					<Tag :tag="`${user.formattedScore} pt`" />
 				</div>
 			</div>

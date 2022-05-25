@@ -36,15 +36,15 @@
 			</div>
 		</div>
 
-		<div>
+		<div class="border-bottom-line py-2">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 				<ion-text class="font-bold">Study materials</ion-text>
 			</div>
 
 			<div class="showcase2">
 				<DashboardCard :icon="documentOutline"
-					:subtitle="`${pluralize(user?.meta.files, 'File', 'Files')} uploaded`"
-					:title="user ? formatNumber(user?.meta.files) : 'N/A'" />
+					:subtitle="`${pluralize(user?.meta.documents, 'Document', 'Documents')} uploaded`"
+					:title="user ? formatNumber(user?.meta.documents) : 'N/A'" />
 				<DashboardCard :icon="flashOutline"
 					:subtitle="`${pluralize(user?.meta.flashCards, 'Flashcard', 'Flashcards')} created`"
 					:title="user? formatNumber(user?.meta.flashCards) : 'N/A'" />
@@ -53,11 +53,26 @@
 					:title="user ? formatNumber(user?.meta.sets) : 'N/A'" />
 			</div>
 		</div>
+
+		<div class="py-2">
+			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
+				<ion-text class="font-bold">Tests</ion-text>
+			</div>
+
+			<div class="showcase2">
+				<DashboardCard :icon="receiptOutline" :title="formatNumber(timedTests.length)" subtitle="Tests taken" />
+				<DashboardCard :icon="checkmarkCircleOutline"
+					:title="`${formatNumber(passed.length)}/${formatNumber(timedTests.length)}`"
+					subtitle="Tests passed" />
+				<DashboardCard :icon="schoolOutline" :title="`${formatNumber(averageScore, 2)}%`"
+					subtitle="Average grade" />
+			</div>
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import {
 	arrowForwardOutline,
 	checkmarkCircleOutline,
@@ -69,21 +84,30 @@ import {
 	helpCircleOutline,
 	playCircleOutline,
 	readerOutline,
+	receiptOutline,
 	rocketOutline,
+	schoolOutline,
 	timeOutline
 } from 'ionicons/icons'
 import DashboardCard from './DashboardCard.vue'
-import { formatNumber, pluralize } from '@utils/commons'
+import { catchDivideByZero, formatNumber, pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
+import { useTestList } from '@app/composable/study/tests'
 
 export default defineComponent({
 	name: 'GeneralDashboard',
 	components: { DashboardCard },
 	setup () {
 		const { user } = useAuth()
+		const { tests } = useTestList()
+		const timedTests = computed(() => tests.value.filter((test) => test.isTimed))
+		const passed = computed(() => timedTests.value.filter((test) => test.passed))
+		const averageScore = computed(() => catchDivideByZero(timedTests.value.reduce((acc, cur) => acc + cur.score, 0), timedTests.value.length))
 		return {
 			arrowForwardOutline, rocketOutline, timeOutline, helpCircleOutline, readerOutline,
 			copyOutline, documentOutline, playCircleOutline, folderOutline, checkmarkCircleOutline,
+			receiptOutline, schoolOutline,
+			timedTests, passed, averageScore,
 			user, formatNumber, pluralize, flameOutline, flashOutline
 		}
 	}

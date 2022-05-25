@@ -1,0 +1,23 @@
+<template>
+	<Justified>
+		<UserAnswers :user="user" />
+	</Justified>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useAuth } from '@app/composable/auth/auth'
+import Justified from '@app/layouts/Justified.vue'
+import UserAnswers from '@app/components/users/users/UserAnswers.vue'
+
+export default defineComponent({
+	name: 'AccountAnswers',
+	components: { Justified, UserAnswers },
+	displayName: 'Answers',
+	middlewares: ['isAuthenticated'],
+	setup () {
+		const { user } = useAuth()
+		return { user }
+	}
+})
+</script>

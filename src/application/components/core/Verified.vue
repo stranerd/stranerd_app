@@ -1,9 +1,10 @@
 <template>
-	<img v-if="verified" alt="" src="/images/avatars/verified.png" style="width: 1.35em; aspect-ratio: 1/1;">
+	<IonIcon v-if="verified" :icon="checkmarkCircle" class="text-primaryBg" style="font-size: 1.35em;" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { checkmarkCircle } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'Verified',
@@ -13,6 +14,9 @@ export default defineComponent({
 			required: false,
 			default: false
 		}
+	},
+	setup () {
+		return { checkmarkCircle }
 	}
 })
 </script>
