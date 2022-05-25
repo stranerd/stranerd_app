@@ -1,60 +1,31 @@
 <template>
 	<DashboardLayout>
-		<div class="py-4 lg:py-8 md:px-4 lg:px-0">
-			<div class="px-4 md:p-0">
-				<IonSegment v-model="tab"
-					class="w-full bg-new_gray text-gray border border-new_gray border-xl md:border-white">
-					<IonSegmentButton class="w-full" value="tests">My Tests</IonSegmentButton>
-					<IonSegmentButton class="w-full" value="institutions">Explore</IonSegmentButton>
-				</IonSegment>
-			</div>
+		<div>
+			<router-link class="border-bottom-line p-4 flex items-center gap-4"
+				to="/study/preps/start">
+				<IonIcon :icon="addOutline" class="text-xl" />
+				<ion-text>Add test prep</ion-text>
+			</router-link>
 
-			<div class="md:mt-4">
-				<ContinueTests v-if="tab === 'tests'" />
-				<ExploreTestPrepsList v-if="tab === 'institutions'" />
-			</div>
+			<ContinueTests />
 		</div>
 	</DashboardLayout>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
-import { IonSegment, IonSegmentButton } from '@ionic/vue'
+import { addOutline } from 'ionicons/icons'
 import ContinueTests from '@root/application/components/study/tests/ContinueTests.vue'
-import ExploreTestPrepsList from '@root/application/components/study/testPreps/ExploreTestPrepsList.vue'
 
 export default defineComponent({
 	name: 'StudyPreps',
-	displayName: 'Preps',
-	components: { DashboardLayout, ContinueTests, IonSegment, IonSegmentButton, ExploreTestPrepsList },
+	displayName: 'Test preps',
+	components: { DashboardLayout, ContinueTests },
 	setup () {
-		const tab = ref('tests')
-		return { tab }
+		return { addOutline }
 	}
 })
 </script>
 
-<style lang="scss" scoped>
-	ion-segment {
-		border-radius: 0.5rem;
-	}
 
-	ion-segment-button {
-		--background-checked: #{$color-white};
-		--background-focused: #{$color-white};
-		--indicator-color: #{$color-white};
-		--padding-top: 0.75rem;
-		--padding-bottom: 0.75rem;
-		font-weight: bold;
-		border-radius: 0.5rem;
-		text-transform: capitalize;
-		max-width: unset;
-		color: $color-gray;
-	}
-
-	.segment-button-checked {
-		color: $color-gray !important;
-		background: $color-white;
-	}
-</style>

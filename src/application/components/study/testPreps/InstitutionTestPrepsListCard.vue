@@ -1,14 +1,12 @@
 <template>
 	<router-link :to="`/study/preps/${institutionId}`"
-		class="w-full bg-white rounded-xl flex flex-col items-start box-border card-padding text-secondaryText">
-		<ion-text class="truncate w-full">
+		class="w-full border-bottom-line flex items-start box-border card-padding !py-6">
+		<ion-text class="truncate flex-grow">
 			<Institution :institutionId="institutionId" class="font-500" />
 		</ion-text>
-		<div class="flex justify-between items-center w-full gap-2 text-sub">
-			<Tag :index="5" :tag="yearGap" />
-			<Share :link="`/study/preps/${institutionId}`"
-				:title="`${institution ? institution.name : 'Institution'}'s preps`"
-				cssClass="text-lg" text="Share this institution preps" />
+		<div class="flex justify-between items-center gap-2 text-sub">
+			<Tag :tag="yearGap" class="w-full" />
+			<IonIcon :icon="arrowForwardOutline" class="text-xl ml-auto" />
 		</div>
 	</router-link>
 </template>
@@ -18,6 +16,7 @@ import { computed, defineComponent, PropType } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import { useInstitution } from '@app/composable/school/institutions'
+import { arrowForwardOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'InstitutionTestPrepsListCard',
@@ -41,7 +40,7 @@ export default defineComponent({
 			else return `${startYear.value}`
 		})
 
-		return { yearGap, institution }
+		return { yearGap, institution, arrowForwardOutline }
 	}
 })
 </script>
