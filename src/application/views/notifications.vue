@@ -1,9 +1,9 @@
 <template>
 	<Justified>
 		<div class="md:p-4 lg:py-8">
-			<div class="w-full lg:w-8/12 mx-auto bg-white rounded-xl md:py-4 lg:px-4">
+			<div class="w-full lg:w-8/12 mx-auto md:py-4 lg:px-4">
 				<div class="hidden md:flex card-padding">
-					<h1 class="text-heading font-bold text-main_dark">
+					<h1 class="text-heading font-bold">
 						Notifications
 					</h1>
 				</div>
@@ -18,7 +18,7 @@
 					:key="notification.hash"
 					:notification="notification"
 				/>
-				<div v-if="hasMore" class="text-center py-2 text-18 text-primary-dark">
+				<div v-if="hasMore" class="text-center py-2 text-18">
 					<a @click.prevent="fetchOlderNotifications">Load More</a>
 				</div>
 				<PageLoading v-if="loading" />

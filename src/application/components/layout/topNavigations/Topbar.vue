@@ -1,29 +1,17 @@
 <template>
 	<ion-header class="block ion-no-border inset-x-0 w-full lg:shadow-md z-10">
-		<ion-toolbar class="lg:hidden bg-white px-4 border-bottom-line md:h-auto flex items-center justify-center">
+		<ion-toolbar class="lg:hidden px-4 border-bottom-line md:h-auto min-h-[3rem] flex items-center justify-center">
 			<div class="flex items-center justify-between">
+				<div>
+					<!-- TODO: Only show back button if there is a previous page -->
+					<ion-icon v-if="true" :icon="arrowBackOutline" class="text-xl" @click="$router.go(-1)" />
+				</div>
 				<router-link to="/">
-					<IonText class="font-semibold text-main_dark text-heading">
+					<IonText class="font-bold text-heading">
 						{{ $route.meta.displayName ?? 'Stranerd' }}
 					</IonText>
 				</router-link>
-				<div class="flex items-center">
-					<ion-icon :icon="addCircleOutline" class="text-xl text-main_dark mr-6"
-						@click="openCreateDashboardMenu" />
-					<router-link class="flex items-center"
-						exact-active-class="!text-main_dark"
-						to="/search">
-						<ion-icon :icon="searchOutline" class="text-xl text-main_dark mr-6" />
-					</router-link>
-					<router-link class="flex items-center" to="/notifications">
-						<NotificationIcon :key="user?.id" class="text-xl text-main_dark mr-6" />
-					</router-link>
-					<Avatar v-if="isLoggedIn" :name="user?.bio.fullName" :size="24" :src="user?.bio.photo"
-						@click="openUserDashboardMenu" />
-					<router-link v-else class="flex items-center" to="/account">
-						<Avatar :size="24" />
-					</router-link>
-				</div>
+				<div />
 			</div>
 		</ion-toolbar>
 
@@ -36,31 +24,28 @@
 import { defineComponent } from 'vue'
 import { IonHeader, IonToolbar } from '@ionic/vue'
 import BigScreenBar from './screens/BigScreenBar.vue'
-import { addCircleOutline, searchOutline } from 'ionicons/icons'
-import { useAuth } from '@app/composable/auth/auth'
-import { useMenuPopover } from '@app/composable/core/modals'
+import { arrowBackOutline } from 'ionicons/icons'
 import NotificationIcon from '@app/components/users/notifications/NotificationIcon.vue'
 
 export default defineComponent({
 	name: 'Topbar',
 	components: { IonHeader, IonToolbar, BigScreenBar, NotificationIcon },
 	setup () {
-		const { isLoggedIn, user } = useAuth()
-		const openUserDashboardMenu = useMenuPopover().openUserDashboardMenu
-		const openCreateDashboardMenu = useMenuPopover().openCreateDashboardMenu
-		return { user, isLoggedIn, openUserDashboardMenu, openCreateDashboardMenu, addCircleOutline, searchOutline }
+		return { arrowBackOutline }
 	}
 })
 </script>
 
 <style lang="scss" scoped>
 	ion-toolbar {
-		--background: #{$color-white};
+		--background: #{$color-headerBg};
+		--color: #{$color-headerText};
 		--box-shadow: none;
 	}
 
 	ion-header {
-		--background: #{$color-white};
+		--background: #{$color-headerBg};
+		--color: #{$color-headerText};
 		--box-shadow: none;
 	}
 </style>
