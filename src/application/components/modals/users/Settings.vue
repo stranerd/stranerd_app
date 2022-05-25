@@ -1,5 +1,5 @@
 <template>
-	<Modal :noPaddingX="true">
+	<Modal :noPaddingX="true" class="h-screen md:h-auto pb-4" >
 		<template v-slot:title>
 			Set up your account
 		</template>
