@@ -1,10 +1,10 @@
 <template>
 	<PageLoading v-if="loading" />
-	<div v-if="tab === 0" class="flex flex-col gap-4  w-full">
+	<div v-if="tab === 0" class="flex flex-col gap-4 modal-padding-x">
 		<IonList class="text-sub">
 			<ion-radio-group v-model="factory.type" class="flex flex-col items-start" required>
 				<IonListHeader>
-					<ion-label class="font-bold text-heading">Choose your academic level</ion-label>
+					<ion-label class="font-bold text-heading">Choose your academic level *</ion-label>
 				</IonListHeader>
 				<IonItem class="flex items-center gap-4">
 					<ion-radio slot="start" :value="UserSchoolType.secondary" />
@@ -20,7 +20,7 @@
 				</IonItem>
 			</ion-radio-group>
 		</IonList>
-		<div class="flex w-full gap-2 items-center justify-between px-4">
+		<div class="flex w-full gap-2 items-center justify-between">
 			<ion-button class="btn-outline border-primary text-primary w-24 btn-sm" type="button"
 				@click.prevent="back">
 				Back
@@ -74,15 +74,15 @@
 				</ion-select>
 			</div>
 
-			<div class="flex w-full gap-2 items-center justify-between px-4">
+			<div class="flex w-full gap-2 items-center justify-between">
 				<ion-button class="btn-outline border-primary text-primary w-24 btn-sm" type="button"
 					@click.prevent="back">
 					Back
 					<ion-ripple-effect class="rounded-lg" />
 				</ion-button>
 				<ion-button class="btn-primary w-24 btn-sm" type="submit">
-					<span v-if="!loading">Done</span>
-					<SpinLoading v-else />
+					Done
+					<SpinLoading v-if="loading" />
 					<ion-ripple-effect class="rounded-lg" />
 				</ion-button>
 			</div>
@@ -100,7 +100,7 @@
 					</ion-select-option>
 				</ion-select>
 			</div>
-			<div class="flex w-full justify-between gap-2 items-center px-4">
+			<div class="flex w-full justify-between gap-2 items-center">
 				<ion-button class="btn-outline border-primary text-primary w-24 btn-sm" type="button"
 					@click.prevent="back">
 					Back
@@ -141,15 +141,15 @@
 					@change="(e) => exam.endDate = new Date(e.target.value).getTime()" />
 			</div>
 		</div>
-		<div class="flex w-full justify-between gap-2 items-center px-4">
+		<div class="flex w-full justify-between gap-2 items-center">
 			<ion-button class="btn-outline border-primary text-primary w-24 btn-sm" type="button"
 				@click.prevent="back">
 				Back
 				<ion-ripple-effect class="rounded-lg" />
 			</ion-button>
 			<ion-button class="btn-primary w-24 btn-sm" type="submit">
-				<span v-if="!loading">Done</span>
-				<SpinLoading v-else />
+				Done
+				<SpinLoading v-if="loading" />
 				<ion-ripple-effect class="rounded-lg" />
 			</ion-button>
 		</div>

@@ -15,9 +15,9 @@
 			class="!max-w-[1920px] rounded-full bg-white"
 		>
 		<FileInput v-if="editable" accept="image/*"
-			class="rounded-full absolute h-6 w-6 -right-1 bottom-0 bg-primary border text-white flex items-center justify-center"
+			class="rounded-full absolute h-6 w-6 right-0 bottom-0 bg-gray text-white flex items-center justify-center"
 			@files="catchPhoto">
-			<IonIcon :icon="cameraOutline" />
+			<IonIcon :icon="pencilOutline" />
 		</FileInput>
 	</component>
 </template>
@@ -26,7 +26,7 @@
 import { computed, defineComponent, PropType } from 'vue'
 import { Media, UploadedFile } from '@modules/core'
 import { DEFAULT_PROFILE_PHOTO } from '@utils/constants'
-import { cameraOutline } from 'ionicons/icons'
+import { pencilOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 
 export default defineComponent({
@@ -64,7 +64,7 @@ export default defineComponent({
 			}
 		})
 		const catchPhoto = useFileInputCallback(async ([file]) => emit('photo', file))
-		return { source, DEFAULT_PROFILE_PHOTO, cameraOutline, catchPhoto }
+		return { source, DEFAULT_PROFILE_PHOTO, pencilOutline, catchPhoto }
 	}
 })
 </script>

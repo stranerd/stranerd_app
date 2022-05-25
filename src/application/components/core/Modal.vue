@@ -1,11 +1,11 @@
 <template>
-	<div class=" modal-content">
-		<div class="mb-4 modal-padding-x bg-primary py-2.5">
-			<div class="flex justify-center items-center text-white">
-				<h3 class="text-base font-bold " >
+	<div class="py-8 modal-content">
+		<div class="mb-4 modal-padding-x">
+			<div class="flex justify-between text-main_dark">
+				<h3 class="text-heading2" style="font-weight: 500;">
 					<slot name="title">Title</slot>
 				</h3>
-				<IonIcon v-if="close" :icon="closeOutline" class="text-2xl absolute right-2" @click="close" />
+				<IonIcon v-if="close" :icon="closeOutline" class="text-2xl" @click="close" />
 			</div>
 			<slot name="subtext" />
 		</div>

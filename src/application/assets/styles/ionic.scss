@@ -24,7 +24,7 @@ http://ionicframework.com/docs/theming/ */
 	--ion-font-family: 'DM Sans', sans-serif;
 
 	/** primary **/
-	--ion-color-primary: #162565;
+	--ion-color-primary: #546DD3;
 	--ion-color-primary-rgb: 56, 128, 255;
 	--ion-color-primary-contrast: #ffffff;
 	--ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -162,14 +162,10 @@ ion-popover {
 		contain: content;
 		overflow-y: auto;
 		max-height: 100vh;
-		width: 100vw;
-		@media (min-width: $md) {
-		width: auto;
-	}
 
 		.modal-content {
-			// border-radius: 1.5rem 1.5rem 0 0;
-			// max-height:auto;
+			border-radius: 1.5rem 1.5rem 0 0;
+			max-height: 80vh;
 			overflow: auto;
 		}
 	}
