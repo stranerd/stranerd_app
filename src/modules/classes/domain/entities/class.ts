@@ -12,7 +12,6 @@ type ClassConstructorArgs = {
 	}
 	description: string
 	photo: Media | null
-	coverPhoto: Media | null
 	user: EmbeddedUser
 	users: Record<ClassUsers, string[]>
 	requests: string[]
@@ -31,7 +30,6 @@ export class ClassEntity extends BaseEntity {
 	}
 	public readonly description: string
 	public readonly photo: Media | null
-	public readonly coverPhoto: Media | null
 	public readonly user: EmbeddedUser
 	public readonly users: Record<ClassUsers, string[]>
 	public readonly requests: string[]
@@ -40,7 +38,7 @@ export class ClassEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, name, school, description, photo, coverPhoto,
+		             id, name, school, description, photo,
 		             createdAt, user, courses,
 		             users, updatedAt, requests
 	             }: ClassConstructorArgs) {
@@ -50,7 +48,6 @@ export class ClassEntity extends BaseEntity {
 		this.school = school
 		this.description = description
 		this.photo = photo ? parseMedia(photo) : null
-		this.coverPhoto = coverPhoto ? parseMedia(coverPhoto) : null
 		this.user = generateEmbeddedUser(user)
 		this.users = users
 		this.requests = requests

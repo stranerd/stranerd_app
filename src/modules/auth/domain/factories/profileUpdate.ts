@@ -4,21 +4,20 @@ import { UserEntity } from '@modules/users'
 import { ProfileUpdate } from '../entities/auth'
 
 type Content = UploadedFile | Media | null
-type Keys = { first: string, last: string, description: string, photo: Content, coverPhoto: Content }
+type Keys = { first: string, last: string, description: string, photo: Content }
 
 export class ProfileUpdateFactory extends BaseFactory<UserEntity, ProfileUpdate, Keys> {
 	readonly rules = {
 		first: { required: true, rules: [isString, isLongerThanX(0)] },
 		last: { required: true, rules: [isString, isLongerThanX(0)] },
 		description: { required: true, rules: [isString] },
-		photo: { required: true, nullable: true, rules: [isImage] },
-		coverPhoto: { required: true, nullable: true, rules: [isImage] }
+		photo: { required: true, nullable: true, rules: [isImage] }
 	}
 
 	reserved = []
 
 	constructor () {
-		super({ first: '', last: '', description: '', photo: null, coverPhoto: null })
+		super({ first: '', last: '', description: '', photo: null })
 	}
 
 	get first () {
@@ -53,21 +52,12 @@ export class ProfileUpdateFactory extends BaseFactory<UserEntity, ProfileUpdate,
 		this.set('photo', photo)
 	}
 
-	get coverPhoto () {
-		return this.values.coverPhoto!
-	}
-
-	set coverPhoto (coverPhoto: Content) {
-		this.set('coverPhoto', coverPhoto)
-	}
-
 	toModel = async () => {
 		if (this.valid) {
-			const { first, last, description, photo, coverPhoto } = this.validValues
+			const { first, last, description, photo } = this.validValues
 			return {
 				firstName: first, lastName: last, description,
-				photo: (photo ?? null) as Media,
-				coverPhoto: (coverPhoto ?? null) as Media
+				photo: (photo ?? null) as Media
 			}
 		} else throw new Error('Validation errors')
 	}
@@ -77,6 +67,5 @@ export class ProfileUpdateFactory extends BaseFactory<UserEntity, ProfileUpdate,
 		this.last = entity.bio.lastName
 		this.description = entity.bio.description
 		this.photo = entity.bio.photo
-		this.coverPhoto = entity.bio.coverPhoto
 	}
 }

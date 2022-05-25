@@ -21,5 +21,4 @@ export interface ClassToModel {
 	description: string
 	courses: string[]
 	photo: Media | null
-	coverPhoto: Media | null
 }

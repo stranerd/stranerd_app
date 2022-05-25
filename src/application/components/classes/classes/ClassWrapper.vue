@@ -2,7 +2,6 @@
 	<Justified>
 		<div v-if="classInst" class="lg:w-8/12 w-full mx-auto lg:p-4">
 			<div class="rounded-xl bg-white relative">
-				<CoverAvatar :src="classInst.coverPhoto" class="h-20" />
 				<div class="px-4 md:px-6 flex justify-between gap-2">
 					<Avatar :name="classInst.name" :size="80" :src="classInst.photo"
 						class="relative top-[-40px] -mb-10" />

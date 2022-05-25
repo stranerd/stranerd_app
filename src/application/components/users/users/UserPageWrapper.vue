@@ -6,7 +6,6 @@
 			<template v-if="user">
 				<div class="flex flex-col w-full rounded-xl border-bottom-line bg-white">
 					<div class="flex flex-col">
-						<CoverAvatar :src="user.bio.coverPhoto" class="h-20" />
 						<div class="px-4 flex justify-between gap-2">
 							<Avatar :name="user.bio.fullName" :size="80" :src="user.bio.photo"
 								class="relative top-[-40px] -mb-10" />
@@ -91,13 +90,12 @@ import { useAuth } from '@app/composable/auth/auth'
 import { formatTime } from '@utils/dates'
 import { receiptOutline } from 'ionicons/icons'
 import { useVerifiedRoles } from '@app/composable/users/roles/verified'
-import CoverAvatar from '@app/components/core/CoverAvatar.vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import Department from '@app/components/school/departments/Department.vue'
 
 export default defineComponent({
 	name: 'UserPageWrapper',
-	components: { CoverAvatar, Justified, Department, Institution },
+	components: { Justified, Department, Institution },
 	setup () {
 		const { id, isAdmin } = useAuth()
 		const { userId } = useRoute().params

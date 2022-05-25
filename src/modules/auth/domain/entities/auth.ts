@@ -13,7 +13,6 @@ export type NewUser = {
 	password: string
 	description: string
 	photo: Media | null
-	coverPhoto: Media | null
 }
 
 export type UserLocation = {

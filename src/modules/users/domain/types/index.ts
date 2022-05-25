@@ -50,7 +50,6 @@ export interface UserBio {
 	email: string
 	description: string
 	photo: Media | null
-	coverPhoto: Media | null
 }
 
 export interface UserRoles {

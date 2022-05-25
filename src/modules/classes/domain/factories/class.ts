@@ -5,8 +5,7 @@ import { ClassToModel } from '../../data/models/class'
 
 type Content = Media | UploadedFile | null
 type Keys = {
-	name: string, description: string, courses: string[],
-	photo: Content, coverPhoto: Content,
+	name: string, description: string, courses: string[], photo: Content,
 	departmentId: string, facultyId: string, institutionId: string
 }
 
@@ -21,16 +20,14 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 			required: true,
 			rules: [isArrayOfX((cur) => isString(cur).valid && isLongerThan(cur as any, 0).valid, 'strings')]
 		},
-		photo: { required: true, nullable: true, rules: [isFile] },
-		coverPhoto: { required: true, nullable: true, rules: [isFile] }
+		photo: { required: true, nullable: true, rules: [isFile] }
 	}
 
 	reserved = []
 
 	constructor () {
 		super({
-			name: '', description: '', courses: [],
-			photo: null, coverPhoto: null,
+			name: '', description: '', courses: [], photo: null,
 			departmentId: '', facultyId: '', institutionId: ''
 		})
 	}
@@ -65,14 +62,6 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 
 	set photo (value: Content) {
 		this.set('photo', value)
-	}
-
-	get coverPhoto () {
-		return this.values.coverPhoto
-	}
-
-	set coverPhoto (value: Content) {
-		this.set('coverPhoto', value)
 	}
 
 	get departmentId () {
@@ -111,7 +100,6 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 		this.description = entity.description
 		this.courses = entity.courses
 		this.photo = entity.photo
-		this.coverPhoto = entity.coverPhoto
 	}
 
 	toModel = async () => {
@@ -123,12 +111,10 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 				departmentId,
 				description,
 				courses,
-				photo,
-				coverPhoto
+				photo
 			} = this.validValues
 			return {
-				name, description, courses,
-				photo: photo as Media, coverPhoto: coverPhoto as Media,
+				name, description, courses, photo: photo as Media,
 				school: { institutionId, facultyId, departmentId }
 			}
 		} else {

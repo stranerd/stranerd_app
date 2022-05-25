@@ -4,14 +4,13 @@ import { NewUser } from '../entities/auth'
 
 type Content = UploadedFile | Media | null
 
-export class EmailSignupFactory extends BaseFactory<null, NewUser, NewUser & { cPassword: string, photo: Content, coverPhoto: Content }> {
+export class EmailSignupFactory extends BaseFactory<null, NewUser, NewUser & { cPassword: string, photo: Content }> {
 	readonly rules = {
 		firstName: { required: true, rules: [isString, isLongerThanX(2)] },
 		lastName: { required: true, rules: [isString, isLongerThanX(2)] },
 		description: { required: true, rules: [isString] },
 		email: { required: true, rules: [isString, isEmail] },
 		photo: { required: true, nullable: true, rules: [isImage] },
-		coverPhoto: { required: true, nullable: true, rules: [isImage] },
 		password: { required: true, rules: [isString, isLongerThanX(7), isShorterThanX(17)] },
 		cPassword: {
 			required: true,
@@ -24,7 +23,7 @@ export class EmailSignupFactory extends BaseFactory<null, NewUser, NewUser & { c
 	constructor () {
 		super({
 			firstName: '', lastName: '', email: '', password: '', cPassword: '',
-			description: '', photo: null, coverPhoto: null
+			description: '', photo: null
 		})
 	}
 
@@ -60,14 +59,6 @@ export class EmailSignupFactory extends BaseFactory<null, NewUser, NewUser & { c
 		this.set('photo', value)
 	}
 
-	get coverPhoto () {
-		return this.values.coverPhoto
-	}
-
-	set coverPhoto (value: Content) {
-		this.set('coverPhoto', value)
-	}
-
 	get email () {
 		return this.values.email
 	}
@@ -95,8 +86,8 @@ export class EmailSignupFactory extends BaseFactory<null, NewUser, NewUser & { c
 
 	toModel = async () => {
 		if (this.valid) {
-			const { firstName, lastName, email, password, description, photo, coverPhoto } = this.validValues
-			return { firstName, lastName, email, password, description, photo, coverPhoto }
+			const { firstName, lastName, email, password, description, photo } = this.validValues
+			return { firstName, lastName, email, password, description, photo }
 		} else throw new Error('Validation errors')
 	}
 

@@ -34,8 +34,7 @@ export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
 	const email = bio?.email ?? 'anon@ymous.com'
 	const description = bio?.description ?? ''
 	const photo = bio?.photo ? parseMedia(bio.photo) : null
-	const coverPhoto = bio?.coverPhoto ? parseMedia(bio.coverPhoto) : null
-	return { firstName, lastName, fullName, email, description, photo, coverPhoto }
+	return { firstName, lastName, fullName, email, description, photo }
 }
 
 export const generateDefaultRoles = (roles: Partial<UserRoles>): UserRoles => ({
