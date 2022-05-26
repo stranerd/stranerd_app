@@ -1,49 +1,44 @@
 <template>
 	<Justified>
-		<div class="lg:w-8/12 w-full mx-auto md:p-4 lg:py-8 max-w-[800px]">
-			<form class="border-bottom-line flex flex-col md:rounded-xl bg-white py-4 md:py-6 gap-4"
-				@submit.prevent="updateProfile()">
-				<div class="px-4 md:px-6">
-					<ion-text class="text-secondaryText font-bold">Edit profile</ion-text>
-				</div>
-				<div class="flex flex-col items-start">
-					<span class="modal-padding-x relative top-[-40px] inline-flex items-center justify-center -mb-10">
-						<Avatar :editable="true" :name="factory.first" :size="80"
-							:src="factory.photo" @photo="(p) => { factory.photo = p; updateProfile(true) }" />
-					</span>
-				</div>
-				<div class="px-4 md:px-6">
-					<ion-text class="text-heading text-secondaryText font-bold text-left mb-1">Name</ion-text>
-					<div class="flex items-center justify-center gap-2 md:gap-4 w-full">
-						<div class="rounded-lg w-1/2">
-							<IonInput v-model="factory.first" class="font-medium border border-faded_gray "
-								placeholder="First name" />
-						</div>
-						<div class="rounded-lg w-1/2">
-							<IonInput v-model="factory.last" class="border border-faded_gray font-medium"
-								placeholder="Last name" />
-						</div>
+		<form class="flex flex-col gap-6 justify-center p-4" @submit.prevent="updateProfile">
+			<Avatar :editable="true" :name="factory.first" :size="64"
+				:src="factory.photo" @photo="(p) => { factory.photo = p; updateProfile(true) }" />
+			<div class="flex flex-col items-start">
+				<div class="flex w-full gap-4">
+					<div class="flex flex-col w-1/2">
+						<IonLabel class="font-bold text-sm mb-2">First Name</IonLabel>
+						<IonInput v-model="factory.first"
+							:class="{'valid': factory.isValid('first'), 'invalid': factory.errors.first}"
+							:size="24"
+							placeholder="First Name"
+							position="floating" type="text" />
+						<DisplayError :error="factory.errors.first" />
+					</div>
+					<div class="flex flex-col w-1/2">
+						<IonLabel class="font-bold text-sm mb-2">Last Name</IonLabel>
+						<IonInput v-model="factory.last"
+							:class="{'valid': factory.isValid('last'), 'invalid': factory.errors.last}"
+							:size="24" placeholder="Last Name"
+							position="floating"
+							type="text" />
+						<DisplayError :error="factory.errors.last" />
 					</div>
 				</div>
-				<div class="px-4 md:px-6">
-					<ion-text class="text-heading text-secondaryText font-bold text-left mb-1">Bio</ion-text>
-					<div class="flex md:flex-row items-center justify-center flex-col w-full">
-						<div class="rounded-lg w-full">
-							<IonTextarea v-model="factory.description"
-								class="border border-faded_gray focus:outline-none w-full"
-								placeholder="Tell us a little more about yourself"
-								rows="6" />
-						</div>
-					</div>
-				</div>
-				<div class="px-4 md:px-6 flex">
-					<ion-button :disabled="loading" class="btn-primary w-40" type="submit">
-						Save Profile
-						<SpinLoading v-if="loading" />
-					</ion-button>
-				</div>
-			</form>
-		</div>
+			</div>
+
+			<div class="flex flex-col items-start">
+				<IonLabel class="font-bold text-sm mb-2">Bio</IonLabel>
+				<IonTextarea v-model="factory.description"
+					:class="{'valid': factory.isValid('description'), 'invalid': factory.errors.description}"
+					placeholder="Short description on your profile"
+					rows="3" show-cancel-button="never" />
+			</div>
+
+			<IonButton :disabled="loading || !factory.valid" class="w-full btn-primary" type="submit">
+				<SpinLoading v-if="loading" />
+				<span v-else>Submit</span>
+			</IonButton>
+		</form>
 	</Justified>
 </template>
 
@@ -64,16 +59,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-button {
-		--background: #{$color-primary};
-		--box-shadow: none;
-		height: 2.75rem;
-	}
-
-	ion-input, ion-textarea {
-		--border-width: 1px !important;
-		--border-style: solid !important;
-	}
-</style>

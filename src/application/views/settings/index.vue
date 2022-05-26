@@ -1,18 +1,22 @@
 <template>
 	<Justified>
-		<div class="lg:w-8/12 w-full mx-auto md:p-4 lg:py-8 flex flex-col md:gap-4 max-w-[1000px]">
+		<div class="flex flex-col py-4 text-secondaryText">
 			<router-link v-for="item in [
 					{ name: 'Edit Profile', icon: personOutline, route: '/settings/profile' },
-					{ name: 'Account Setup', icon: settingsOutline, route: '/settings/account' },
-					// { name: 'Manage Notifications', icon: notificationsOutline, route: '/notifications' },
+					{ name: 'Edit School', icon: schoolOutline, route: '/settings/school' },
 					{ name: 'Security', icon: shieldCheckmarkOutline, route: '/settings/security' },
-					{ name: 'About', icon: informationCircleOutline, route: '/settings/about' },
 					{ name: 'Contact Us', icon: mailOutline, route: '/settings/contact' },
+					{ name: 'About', icon: informationCircleOutline, route: '/settings/about' },
 				]" :key="item.route" :to="item.route"
-				class="md:rounded-xl md:bg-white p-4 border-bottom-line flex gap-4 items-center">
-				<IonIcon :icon="item.icon" class="text-2xl text-gray" />
-				<span class="font-semibold">{{ item.name }}</span>
+				class="p-4 flex items-center gap-4">
+				<IonIcon :icon="item.icon" class="text-heading2" />
+				<span>{{ item.name }}</span>
 			</router-link>
+			<a class="border-top-line mt-2 px-4 py-6 flex items-center text-danger gap-4" @click.prevent="signout">
+				<IonIcon :icon="logOutOutline" class="text-heading2" />
+				<span>Sign out</span>
+			</a>
+			<PageLoading v-if="loading" />
 		</div>
 	</Justified>
 </template>
@@ -22,12 +26,14 @@ import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import {
 	informationCircleOutline,
+	logOutOutline,
 	mailOutline,
 	notificationsOutline,
 	personOutline,
-	settingsOutline,
+	schoolOutline,
 	shieldCheckmarkOutline
 } from 'ionicons/icons'
+import { useSessionSignout } from '@app/composable/auth/session'
 
 export default defineComponent({
 	name: 'Settings',
@@ -35,13 +41,11 @@ export default defineComponent({
 	components: { Justified },
 	middlewares: ['isAuthenticated'],
 	setup () {
+		const { signout, loading } = useSessionSignout()
 		return {
-			personOutline,
-			settingsOutline,
-			notificationsOutline,
-			shieldCheckmarkOutline,
-			informationCircleOutline,
-			mailOutline
+			signout, loading,
+			personOutline, schoolOutline, notificationsOutline, shieldCheckmarkOutline,
+			informationCircleOutline, mailOutline, logOutOutline
 		}
 	}
 })

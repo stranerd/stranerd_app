@@ -1,8 +1,7 @@
 <template>
 	<Justified>
-		<div class="lg:w-8/12 w-full mx-auto md:p-4 lg:py-8 flex flex-col md:gap-4 max-w-[1000px]">
-			<form class="md:rounded-xl md:bg-white p-4 border-bottom-line flex flex-col gap-4"
-				@submit.prevent="createMessage">
+		<div class="flex flex-col">
+			<form class="p-4 border-bottom-line flex flex-col gap-4" @submit.prevent="createMessage">
 				<template v-if="!user">
 					<div class="flex gap-4 flex-col md:flex-row">
 						<IonInput v-model="factory.firstName" placeholder="Your first name" required />
@@ -22,10 +21,10 @@
 					{ name: 'Twitter', icon: logoTwitter, route: 'https://twitter.com/stranerds' },
 					{ name: 'Instagram', icon: logoInstagram, route: 'https://www.instagram.com/stranerdapp' }
 				]" :key="item.route" :href="item.route"
-				class="md:rounded-xl md:bg-white p-4 border-bottom-line flex gap-4 items-center text-primary"
+				class="px-4 py-6 border-bottom-line flex gap-4 items-center text-primaryBg"
 				target="_blank">
 				<IonIcon :icon="item.icon" class="text-2xl" />
-				<span class="font-semibold">{{ item.name }}</span>
+				<span>{{ item.name }}</span>
 			</a>
 		</div>
 	</Justified>

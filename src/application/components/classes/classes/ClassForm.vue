@@ -2,12 +2,12 @@
 	<form class="flex flex-col gap-4 justify-center" @submit.prevent="null">
 		<template v-if="tab === 0">
 			<div class="flex flex-col items-start">
-				<span class="modal-padding-x relative top-[-40px] inline-flex items-center justify-center -mb-10">
+				<span class="relative top-[-40px] inline-flex items-center justify-center -mb-10">
 					<Avatar :editable="true" :name="factory.name" :size="80"
 						:src="factory.photo" @photo="(p) => factory.photo = p" />
 				</span>
 			</div>
-			<div class="flex flex-col gap-4 modal-padding-x">
+			<div class="flex flex-col gap-4">
 				<ion-input v-model="factory.name"
 					class="w-full bg-new_gray rounded-md"
 					placeholder="Add a title"
@@ -65,7 +65,7 @@
 				<ion-button class="btn-primary ml-auto" @click="tab = 1">Next</ion-button>
 			</div>
 		</template>
-		<div v-else-if="tab === 1" class="flex flex-col gap-4 modal-padding-x">
+		<div v-else-if="tab === 1" class="flex flex-col gap-4">
 			<div class="flex gap-4 items-center justify-between">
 				<ion-input v-model="course"
 					class="w-full bg-new_gray rounded-md"

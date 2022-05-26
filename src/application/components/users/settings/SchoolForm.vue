@@ -2,10 +2,10 @@
 	<PageLoading v-if="loading" />
 	<div v-if="tab === 0" class="flex flex-col gap-4 w-full">
 		<IonList class="text-sub">
+			<IonListHeader>
+				<ion-label class="font-bold text-heading">Choose your academic level</ion-label>
+			</IonListHeader>
 			<ion-radio-group v-model="factory.type" class="flex flex-col items-start" required>
-				<IonListHeader>
-					<ion-label class="font-bold text-heading">Choose your academic level</ion-label>
-				</IonListHeader>
 				<IonItem class="flex items-center gap-4">
 					<ion-radio slot="start" :value="UserSchoolType.secondary" />
 					<ion-label>Secondary school</ion-label>
@@ -20,7 +20,7 @@
 				</IonItem>
 			</ion-radio-group>
 		</IonList>
-		<div class="flex w-full gap-2 items-center justify-between px-4">
+		<div class="flex w-full gap-2 items-center justify-between">
 			<ion-button class="btn-outline w-24 btn-sm" type="button"
 				@click.prevent="back">
 				Back
@@ -32,7 +32,7 @@
 			</ion-button>
 		</div>
 	</div>
-	<form v-if="tab === 1" class="flex flex-col gap-4 modal-padding-x" @submit.prevent="submit">
+	<form v-if="tab === 1" class="flex flex-col gap-4" @submit.prevent="submit">
 		<template v-if="factory.isCollegeType">
 			<div class="flex flex-col items-start gap-2">
 				<ion-label>What university are you in?</ion-label>
@@ -111,7 +111,7 @@
 			</div>
 		</template>
 	</form>
-	<form v-if="tab === 2" class="flex flex-col gap-4 modal-padding-x" @submit.prevent="submit">
+	<form v-if="tab === 2" class="flex flex-col gap-4" @submit.prevent="submit">
 		<div v-for="exam in factory.exams" :key="exam.institutionId"
 			class="flex flex-col gap-2">
 			<IonLabel class="font-semibold">
@@ -237,5 +237,10 @@ export default defineComponent({
 	ion-list-header {
 		--color: inherit;
 		--color-checked: #{$color-primaryBg};
+		padding-left: 0 !important;
+
+		ion-label {
+			margin-top: 0 !important;
+		}
 	}
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<span class="uppercase">
+	<span :class="{ '!uppercase': institution?.isGateway }" class="capitalize">
 		<slot :institution="institution">
 			{{ institution?.name ?? '' }}
 		</slot>

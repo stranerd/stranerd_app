@@ -28,10 +28,6 @@
 		@apply text-body bg-bodyBg text-bodyText
 	}
 
-	.modal-padding-x {
-		@apply md:px-8 px-4
-	}
-
 	.layout {
 		@apply flex flex-col h-full flex-grow
 	}

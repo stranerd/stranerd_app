@@ -3,7 +3,7 @@
 		<div v-if="user && !user.school"
 			class="border-bottom-line flex justify-between items-center md:bg-white p-4 md:rounded-xl md:pt-4 pt-0">
 			<span class="font-semibold">Complete your account set up</span>
-			<router-link to="/settings/account">
+			<router-link to="/settings/school">
 				<IonIcon :icon="arrowForwardOutline" class="text-heading" />
 			</router-link>
 		</div>

@@ -4,7 +4,7 @@
 			<div class="flex flex-col border-bottom-line gap-4 p-4">
 				<div class="flex items-center gap-4">
 					<Avatar :name="user.bio.fullName" :size="64" :src="user.bio.photo" />
-					<div class="flex flex-col gap-2">
+					<div class="flex flex-col gap-1">
 						<IonText class="text-heading font-bold flex gap-1 items-center">
 							<span>{{ user.bio.fullName }}</span>
 							<Verified :verified="user.isVerified" />
@@ -17,9 +17,9 @@
 						</template>
 					</div>
 				</div>
-				<IonText v-if="user.bio.description" class="text-sub">{{ user.bio.description }}</IonText>
+				<IonText v-if="user.bio.description">{{ user.bio.description }}</IonText>
 			</div>
-			<div class="flex flex-col gap-6 px-4 py-8 text-sub text-secondaryText">
+			<div class="flex flex-col gap-6 px-4 py-8 text-secondaryText">
 				<router-link class="flex gap-3 items-center" to="/account/stats">
 					<IonIcon :icon="gridOutline" class="text-heading" />
 					<span>Stats</span>
@@ -44,7 +44,7 @@
 					<IonIcon :icon="bookmarkOutline" class="text-heading" />
 					<span>Saved</span>
 				</router-link>
-				<router-link class="flex gap-3 items-center" to="/account/settings">
+				<router-link class="flex gap-3 items-center" to="/settings">
 					<IonIcon :icon="settingsOutline" class="text-heading" />
 					<span>Settings</span>
 				</router-link>

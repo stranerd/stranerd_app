@@ -1,8 +1,6 @@
 <template>
 	<Justified>
-		<div class="lg:w-8/12 w-full mx-auto bg-white lg:my-8 md:rounded-xl max-w-[1000px]">
-			<Note link="/legal/privacy-policy.pdf" />
-		</div>
+		<Note link="/legal/privacy-policy.pdf" />
 	</Justified>
 </template>
 

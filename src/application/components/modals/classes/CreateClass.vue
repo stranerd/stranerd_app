@@ -1,5 +1,5 @@
 <template>
-	<Modal :noPaddingX="true">
+	<Modal>
 		<template v-slot:title>
 			Create a class
 		</template>
