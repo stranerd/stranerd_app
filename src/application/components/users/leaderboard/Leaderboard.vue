@@ -1,5 +1,5 @@
 <template>
-	<div class="h-full md:bg-new_gray bg-white w-full lg:w-8/12 mx-auto lg:mt-6">
+	<div class="h-full md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
 		<div class="bg-white md:rounded-xl flex items-center justify-between gap-2 md:px-4 lg:p-4">
 			<ion-text class="text-secondaryText leading-tight text-heading font-bold hidden md:inline">
 				Leaderboard

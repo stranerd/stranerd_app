@@ -34,7 +34,7 @@
 		</div>
 
 		<div class="flex w-full justify-end gap-2 items-center">
-			<ion-button :disabled="loading || !factory.valid" class="btn-primary w-24 btn-sm" type="submit">
+			<ion-button :disabled="loading || !factory.valid" class="btn-primary w-24" type="submit">
 				<SpinLoading v-if="loading" />
 				<span v-else>Next</span>
 				<ion-ripple-effect class="rounded-lg" />

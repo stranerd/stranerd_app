@@ -13,7 +13,7 @@
 			</div>
 			<div v-if="!classInst.members.includes(id)" class="ml-auto">
 				<BlockLoading v-if="loading" />
-				<IonButton v-else class="btn-primary btn-sm"
+				<IonButton v-else class="btn-primary"
 					@click="requestToJoinClass(!classInst.requests.includes(id))">
 					{{ classInst.requests.includes(id) ? 'Cancel Request' : 'Join' }}
 				</IonButton>

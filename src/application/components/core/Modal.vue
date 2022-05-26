@@ -1,6 +1,6 @@
 <template>
 	<div class="modal-content">
-		<div class="mb-4 bg-headerBg text-headerText py-3">
+		<div class="bg-headerBg text-headerText py-4">
 			<div class="flex justify-center items-center">
 				<span class="text-heading font-bold">
 					<slot name="title">Title</slot>
@@ -9,7 +9,7 @@
 			</div>
 			<slot name="subtext" />
 		</div>
-		<div class="px-4 md:px-8">
+		<div class="px-4 md:px-8 py-4 md:py-8">
 			<slot>
 				<p>This is the default content of the modal</p>
 			</slot>

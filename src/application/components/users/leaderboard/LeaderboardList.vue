@@ -15,7 +15,7 @@
 		<router-link v-for="(person, index) in users" :key="person.hash"
 			:class="{'!bg-cyan !text-white': person.id === id}"
 			:to="`/users/${person.id}`"
-			class="flex items-center bg-white lg:rounded-xl text-secondaryText p-4"
+			class="flex items-center text-secondaryText p-4"
 		>
 			<div class="md:w-1/12 w-2/12">
 				<span>{{ index + 1 }} </span>

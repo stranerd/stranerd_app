@@ -6,7 +6,7 @@
 		<div class="flex flex-col md:flex-row gap-4 items-center justify-center w-full mb-8">
 			<div class="md:w-1/4 w-full">
 				<ion-select v-model="filters.institution"
-					class="bg-white border border-faded_gray rounded-xl capitalize" interface="action-sheet"
+					class="capitalize" interface="action-sheet"
 					placeholder="Institution">
 					<ion-select-option :value="null">All</ion-select-option>
 					<ion-select-option v-for="institution in institutions" :key="institution" :value="institution"
@@ -16,7 +16,7 @@
 				</ion-select>
 			</div>
 			<div class="md:w-1/4 w-full">
-				<ion-select v-model="filters.course" class="bg-white border border-faded_gray rounded-xl capitalize"
+				<ion-select v-model="filters.course" class="capitalize"
 					interface="action-sheet" placeholder="Course">
 					<ion-select-option :value="null">All</ion-select-option>
 					<ion-select-option v-for="course in courses" :key="course" :value="course" class="capitalize">
@@ -25,7 +25,7 @@
 				</ion-select>
 			</div>
 			<div class="md:w-1/4 w-full">
-				<ion-select v-model.number="filters.year" class="bg-white border border-faded_gray rounded-xl"
+				<ion-select v-model.number="filters.year"
 					interface="action-sheet" placeholder="Year">
 					<ion-select-option :value="null">All</ion-select-option>
 					<ion-select-option v-for="year in years" :key="year" :value="year">
@@ -35,7 +35,7 @@
 			</div>
 			<div class="md:w-1/4 w-full">
 				<ion-select v-model="filters.questionType"
-					class="bg-white border border-faded_gray rounded-xl capitalize" interface="action-sheet"
+					class="capitalize" interface="action-sheet"
 					placeholder="Mode">
 					<ion-select-option :value="null">All</ion-select-option>
 					<ion-select-option v-for="questionType in questionTypes" :key="questionType" :value="questionType"

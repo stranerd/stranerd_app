@@ -50,7 +50,7 @@
 			</div>
 
 			<div class="w-full flex justify-end mb-8 px-4">
-				<ion-button :disabled="loading || !factory.valid" class="btn-primary btn-lg !pr-0 w-full md:w-auto"
+				<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full md:w-auto"
 					@click="submit()">
 					<slot name="buttonTitle">Submit</slot>
 				</ion-button>

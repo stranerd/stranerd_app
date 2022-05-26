@@ -4,6 +4,8 @@ import CreateSession from '@app/components/modals/sessions/RequestSession.vue'
 import CreateReport from '@app/components/modals/reports/CreateReport.vue'
 import CreateQuestion from '@app/components/modals/questions/CreateQuestion.vue'
 import EditQuestion from '@app/components/modals/questions/EditQuestion.vue'
+import CreateTag from '@app/components/modals/questions/CreateTag.vue'
+import EditTag from '@app/components/modals/questions/EditTag.vue'
 import CreateDashboardMenu from '@app/components/popovers/menus/CreateDashboardMenu.vue'
 import UserDashboardMenu from '@app/components/popovers/menus/UserDashboardMenu.vue'
 import CreateTestPrep from '@app/components/modals/study/CreateTestPrep.vue'
@@ -33,7 +35,7 @@ import EditPastQuestion from '@app/components/modals/school/EditPastQuestion.vue
 import Settings from '@app/components/modals/users/Settings.vue'
 
 export const modal = useModal(ref([]))
-const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion })
+const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion, CreateTag, EditTag })
 const SessionModal = modal.register('Session', { CreateSession, Ratings: CreateSession })
 const ReportModal = modal.register('Report', { CreateReport })
 const StudyModal = modal.register('Study', {

@@ -25,9 +25,9 @@
 
 				<div>
 					<router-link v-if="test.done && test.isTimed" :to="`/study/tests/${test.id}/results`">
-						<ion-button class="btn-primary btn-lgx">See Results</ion-button>
+						<ion-button class="btn-outline">See Results</ion-button>
 					</router-link>
-					<ion-button v-if="!test.done" class="btn-primary btn-lgx" @click="openSubmitTest">
+					<ion-button v-if="!test.done" class="btn-primary" @click="openSubmitTest">
 						{{ test.isTimed ? 'Submit' : 'End Study' }}
 					</ion-button>
 				</div>
@@ -84,22 +84,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	.btn-lgx {
-		@media (min-width: $lg) {
-			--padding-top: 1.25rem;
-			--padding-bottom: 1.25rem;
-			--padding-start: 3rem;
-			--padding-end: 3rem;
-		}
-	}
-
-	ion-select {
-		--background: #{$color-lightGray};
-		--padding-start: 1rem;
-		--padding-end: 1rem;
-		--padding-top: 0.8rem;
-		--padding-bottom: 0.8rem;
-	}
-</style>

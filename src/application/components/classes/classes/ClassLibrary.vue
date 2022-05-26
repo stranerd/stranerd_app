@@ -11,7 +11,7 @@
 				<ion-input v-model="search" class="flex-grow md:w-auto bg-new_gray text-gray min-w-[100px]"
 					placeholder="Search" />
 				<ion-select v-model="group"
-					class="bg-new_gray !text-gray flex-grow md:w-auto font-bold select-primary"
+					class="bg-new_gray !text-gray flex-grow md:w-auto font-bold"
 					interface="action-sheet"
 					placeholder="Groups">
 					<ion-select-option class="capitalize" value="">
@@ -22,7 +22,7 @@
 					</ion-select-option>
 				</ion-select>
 				<ion-select v-model="filter"
-					class="bg-new_gray !text-gray flex-grow md:w-auto font-bold select-primary"
+					class="bg-new_gray !text-gray flex-grow md:w-auto font-bold"
 					interface="action-sheet"
 					placeholder="Filter">
 					<ion-select-option v-for="filter in filters" :key="filter" :value="filter" class="capitalize">

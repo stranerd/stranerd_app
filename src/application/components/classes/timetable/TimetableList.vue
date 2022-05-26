@@ -1,7 +1,7 @@
 <template>
 	<div class="showcase-flex">
 		<div class="flex justify-end px-4 md:px-0">
-			<ion-button class="btn-primary btn-sm" @click="openTimetableModal(classInst)">
+			<ion-button class="btn-primary" @click="openTimetableModal(classInst)">
 				Setup Timetable
 			</ion-button>
 		</div>

@@ -15,11 +15,11 @@
 		</div>
 
 		<div class="w-full flex items-center justify-end gap-2">
-			<ion-button v-if="testPrep.canTest" class="btn-primary btn-sm"
+			<ion-button v-if="testPrep.canTest" class="btn-primary"
 				@click="createTest(testPrep, true)">
 				Test
 			</ion-button>
-			<ion-button v-if="testPrep.canStudy" class="btn-outline btn-sm"
+			<ion-button v-if="testPrep.canStudy" class="btn-outline"
 				@click="createTest(testPrep, false)">
 				Solutions
 			</ion-button>

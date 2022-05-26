@@ -8,7 +8,8 @@
 						{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
 						{ name: 'Discussions', path: '/study', icon: chatbubbles, iconOutline:chatbubblesOutline },
 						{ name: 'Tests', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
-						...(isLoggedIn ? [{ name: 'Account', path: `/account`, icon: person, iconOutline: personOutline }] : [])
+						...(isLoggedIn ? [{ name: 'Account', path: `/account`, icon: person, iconOutline: personOutline }] : []),
+						...(isAdmin ? [{ name: 'Admin', path: `/admin`, icon: statsChart, iconOutline: statsChartOutline }] : [])
 					]" :key="path" :to="path"
 					class="col-span-1 flex flex-col items-center justify-center">
 					<ion-icon :icon="$route.path === path ? icon : iconOutline" class="w-6 md:w-14" />
@@ -33,18 +34,20 @@ import {
 	receipt,
 	receiptOutline,
 	search,
-	searchOutline
+	searchOutline,
+	statsChart,
+	statsChartOutline
 } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	components: { IonFooter, IonIcon, IonToolbar },
 	setup () {
-		const { isLoggedIn } = useAuth()
+		const { isLoggedIn, isAdmin } = useAuth()
 		return {
-			isLoggedIn,
+			isLoggedIn, isAdmin,
 			personOutline, person, chatbubblesOutline, chatbubbles, receiptOutline, receipt,
-			helpCircleOutline, helpCircle, peopleOutline, people, searchOutline, search
+			helpCircleOutline, helpCircle, peopleOutline, people, searchOutline, search, statsChartOutline, statsChart
 		}
 	}
 })

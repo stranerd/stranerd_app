@@ -101,7 +101,7 @@
 	}
 
 	.nav-scroll {
-		@apply text-gray text-sub items-center md:justify-between flex gap-2 font-semibold overflow-x-auto
+		@apply text-secondaryText text-sub items-center md:justify-between flex gap-2 font-semibold overflow-x-auto
 	}
 
 	.nav-scroll > * {
@@ -109,7 +109,7 @@
 	}
 
 	.nav-scroll > *.router-link-exact-active {
-		@apply border-b-2 text-primary border-primary
+		@apply border-b-2 text-primaryBg border-primaryBg
 	}
 
 	.dot {

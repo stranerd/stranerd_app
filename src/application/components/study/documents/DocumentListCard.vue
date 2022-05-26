@@ -1,6 +1,6 @@
 <template>
 	<router-link :to="`/study/documents/${document.id}`"
-		class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-secondaryText">
+		class="flex flex-col justify-between card-padding">
 		<ion-text class="font-500 truncate w-full">{{ document.title }}</ion-text>
 		<div class="w-full flex items-center justify-between gap-2 text-sub">
 			<Tag tag="Document">

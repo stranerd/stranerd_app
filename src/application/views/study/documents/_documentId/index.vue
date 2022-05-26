@@ -16,7 +16,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="bg-white w-full lg:w-8/12 w-full mx-auto">
+			<div class="w-full lg:w-8/12 w-full mx-auto">
 				<DocumentDetails :document="document" />
 			</div>
 		</div>

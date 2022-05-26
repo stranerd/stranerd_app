@@ -6,7 +6,7 @@
 			show-cancel-button="never"
 		/>
 
-		<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full md:w-auto btn-sm"
+		<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full md:w-auto"
 			type="submit">
 			<slot name="buttonText">Submit</slot>
 			<ion-ripple-effect class="rounded-lg" />

@@ -115,7 +115,6 @@ ion-input, ion-textarea, ion-select {
 		--border-radius: .5rem;
 		border-radius: .5rem;
 	}
-	flex-grow: 0 !important;
 	outline: 1px solid transparent;
 
 	&:focus-within {
@@ -179,9 +178,11 @@ ion-button {
 	text-transform: capitalize;
 	letter-spacing: 0.02rem;
 	margin: 0;
+	font-size: 12px;
 	@media (min-width: $md) {
 		--border-radius: 0.625rem;
 		border-radius: 0.625rem;
+		font-size: 14px;
 	}
 	@media (min-width: $lg) {
 		--border-radius: 0.75rem;
@@ -209,21 +210,6 @@ ion-button {
 	--border-color: #{$color-primaryBg};
 }
 
-.btn-sm {
-	font-size: 12px;
-}
-
-ion-button.btn-outline-sm {
-	@media (max-width: 640px) {
-		--background: transparent;
-		--padding-top: 0.5rem;
-		--padding-bottom: 0.5rem;
-		--padding-start: 1.25rem;
-		--padding-end: 1.25rem;
-		--color: inherit !important;
-	}
-}
-
 .btn-white {
 	@extend .btn-padding;
 	--background: $color-white;
@@ -232,24 +218,6 @@ ion-button.btn-outline-sm {
 	--border-style: solid;
 	--border-color: $color-white;
 }
-
-.btn-lg {
-	--padding-top: 1.25rem;
-	--padding-bottom: 1.25rem;
-	--padding-start: 4.5rem;
-	--padding-end: 4.5rem;
-}
-
-.select-primary {
-	--background: transparent;
-	--padding-top: 0.75rem;
-	--padding-bottom: 0.75rem;
-	--padding-start: 1.25rem;
-	--padding-end: 1.25rem;
-	--color: inherit !important;
-	border-radius: 8px;
-}
-
 
 ion-popover::part(content) {
 	width: auto !important;

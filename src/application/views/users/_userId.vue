@@ -36,7 +36,7 @@
 						<span>{{ formatNumber(user.meta.flashCards) }}</span>
 					</span>
 				</div>
-				<IonButton v-if="isAdmin && id !== user.id" class="btn-primary w-full btn-sm"
+				<IonButton v-if="isAdmin && id !== user.id" class="btn-primary w-full"
 					@click="user.isVerified ? deVerifyUser(user) : verifyUser(user)">
 					{{ user.isVerified ? 'Mark User Unverified' : 'Mark User Verified' }}
 				</IonButton>

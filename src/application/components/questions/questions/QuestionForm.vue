@@ -31,13 +31,13 @@
 				class="w-full lg:w-auto"
 				@files="catchAttachments"
 			>
-				<ion-button class="btn-outline w-full flex items-center btn-sm">
+				<ion-button class="btn-outline w-full flex items-center">
 					<ion-icon :icon="imageOutline" class="!text-2xl text-primary mr-2" />
 					<span>Add image</span>
 				</ion-button>
 			</FileInput>
 			<ion-button :disabled="loading || !factory.valid"
-				class="w-full lg:w-auto btn-primary flex items-center btn-sm" type="submit">
+				class="w-full lg:w-auto btn-primary flex items-center" type="submit">
 				<ion-icon :icon="paperPlaneOutline" class="!text-2xl text-white mr-2" />
 				<slot name="buttonText">Submit</slot>
 			</ion-button>

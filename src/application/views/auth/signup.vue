@@ -13,7 +13,7 @@
 							<ion-label class="font-bold text-sm mb-2">First Name</ion-label>
 							<ion-input v-model="factory.firstName"
 								:class="{'valid': factory.isValid('firstName'), 'invalid': factory.errors.firstName}"
-								:size="24"
+								:size="24" class="flex-grow-0"
 								placeholder="First Name" position="floating" type="text" />
 							<DisplayError :error="factory.errors.firstName" />
 						</div>
@@ -21,7 +21,7 @@
 							<ion-label class="font-bold text-sm mb-2">Last Name</ion-label>
 							<ion-input v-model="factory.lastName"
 								:class="{'valid': factory.isValid('lastName'), 'invalid': factory.errors.lastName}"
-								:size="24"
+								:size="24" class="flex-grow-0"
 								placeholder="Last Name" position="floating" type="text" />
 							<DisplayError :error="factory.errors.lastName" />
 						</div>

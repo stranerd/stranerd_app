@@ -1,7 +1,7 @@
 <template>
 	<AdminWrapper>
 		<div v-if="faculty">
-			<div class="flex mb-4 bg-white p-4">
+			<div class="flex mb-4 p-4">
 				<span class="text-heading mr-auto uppercase">{{ faculty.name }}</span>
 				<a class="flex items-center gap-1 mr-4 text-sub"
 					@click.prevent="openDepartmentCreateModal(faculty.id)">
