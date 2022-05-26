@@ -1,17 +1,20 @@
 import { BaseEntity } from '@modules/core'
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 
+export enum SetSaved {
+	notes = 'notes',
+	documents = 'documents',
+	videos = 'videos',
+	flashCards = 'flashCards',
+	testPreps = 'testPreps',
+	sets = 'sets'
+}
+
 export class SetEntity extends BaseEntity {
 	public readonly id: string
 	public readonly name: string
 	public readonly user: EmbeddedUser
-	public readonly saved: {
-		notes: string[]
-		videos: string[]
-		flashCards: string[]
-		testPreps: string[]
-		sets: string[]
-	}
+	public readonly saved: Record<SetSaved, string[]>
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -53,13 +56,7 @@ type SetConstructorArgs = {
 	id: string
 	name: string
 	user: EmbeddedUser
-	saved: {
-		notes: string[]
-		videos: string[]
-		flashCards: string[]
-		testPreps: string[]
-		sets: string[]
-	}
+	saved: Record<SetSaved, string[]>
 	createdAt: number
 	updatedAt: number
 }

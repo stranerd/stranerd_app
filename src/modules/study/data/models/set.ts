@@ -1,14 +1,9 @@
 import { EmbeddedUser } from '@modules/users'
+import { SetSaved } from '../../domain/entities/set'
 
 export interface SetFromModel extends SetToModel {
 	id: string
-	saved: {
-		notes: string[]
-		videos: string[]
-		flashCards: string[]
-		testPreps: string[]
-		sets: string[]
-	}
+	saved: Record<SetSaved, string[]>
 	user: EmbeddedUser
 	createdAt: number
 	updatedAt: number

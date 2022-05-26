@@ -1,13 +1,13 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 
-export class NoteEntity extends BaseEntity {
+export class DocumentEntity extends BaseEntity {
 	public readonly id: string
 	public readonly title: string
-	public readonly description: string
+	public readonly content: string
 	public readonly user: EmbeddedUser
-	public readonly isHosted: boolean
-	public readonly link: string | null
+	public readonly isPrivate: boolean
+	public readonly links: { original: string, normalized: string }[]
 	public readonly media: Media | null
 	public readonly createdAt: number
 	public readonly updatedAt: number
@@ -15,34 +15,24 @@ export class NoteEntity extends BaseEntity {
 	constructor ({
 		             id,
 		             title,
-		             description,
+		             content,
 		             user,
-		             isHosted,
-		             link,
+		             isPrivate,
+		             links,
 		             media,
 		             createdAt,
 		             updatedAt
-	             }: NoteConstructorArgs) {
+	             }: DocumentConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title
-		this.description = description
+		this.content = content
 		this.user = generateEmbeddedUser(user)
-		this.isHosted = isHosted
-		this.link = link
+		this.isPrivate = isPrivate
+		this.links = links
 		this.media = media ? parseMedia(media) : null
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
-	}
-
-	get fileName () {
-		if (this.media) return this.media.name
-		const trimQuery = (this.link ?? '').split('?')[0] ?? ''
-		return trimQuery.split('/').pop() ?? this.title.replace(' ', '-').toLowerCase()
-	}
-
-	get fileLink () {
-		return this.media?.link ?? this.link!
 	}
 
 	get isUserVerified () {
@@ -50,22 +40,22 @@ export class NoteEntity extends BaseEntity {
 	}
 
 	get shareLink () {
-		return `/study/notes/${this.id}`
+		return `/study/documents/${this.id}`
 	}
 
 	search (search: string) {
-		return this.title.toLowerCase().includes(search.toLowerCase())
+		return this.title.toLowerCase().includes(search.toLowerCase()) || this.content.toLowerCase().includes(search.toLowerCase())
 	}
 }
 
-type NoteConstructorArgs = {
+type DocumentConstructorArgs = {
 	id: string,
-	isHosted: boolean
-	link: string | null
+	isPrivate: boolean
+	links: { original: string, normalized: string }[]
 	media: Media | null
 	user: EmbeddedUser
 	title: string
-	description: string
+	content: string
 	createdAt: number
 	updatedAt: number
 }

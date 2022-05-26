@@ -1,11 +1,14 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import {
+	DocumentEntity,
+	DocumentsUseCases,
 	FlashCardEntity,
 	FlashCardsUseCases,
 	NoteEntity,
 	NotesUseCases,
 	SetEntity,
 	SetFactory,
+	SetSaved,
 	SetsUseCases,
 	TestPrepEntity,
 	TestPrepsUseCases,
@@ -18,8 +21,6 @@ import { Alert, Notify } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 import { Router } from 'vue-router'
 
-type SaveKey = keyof SetEntity['saved']
-
 const global = {} as Record<string, {
 	set: Ref<SetEntity | null>
 	fetched: Ref<boolean>
@@ -29,6 +30,7 @@ const global = {} as Record<string, {
 const setGlobal = {} as Record<string, {
 	hash: Ref<string>
 	notes: Ref<NoteEntity[]>
+	documents: Ref<DocumentEntity[]>
 	videos: Ref<VideoEntity[]>
 	flashCards: Ref<FlashCardEntity[]>
 	testPreps: Ref<TestPrepEntity[]>
@@ -98,6 +100,18 @@ export const useSet = (set: SetEntity) => {
 					if (index !== -1) setGlobal[set.id].notes.value.splice(index, 1)
 				}
 			}),
+			DocumentsUseCases.listenInList(set.saved.documents, {
+				created: async (entity) => {
+					addToArray(setGlobal[set.id].documents.value, entity, (e) => e.id, (e) => e.title)
+				},
+				updated: async (entity) => {
+					addToArray(setGlobal[set.id].documents.value, entity, (e) => e.id, (e) => e.title)
+				},
+				deleted: async (entity) => {
+					const index = setGlobal[set.id].documents.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].documents.value.splice(index, 1)
+				}
+			}),
 			VideosUseCases.listenInList(set.saved.videos, {
 				created: async (entity) => {
 					addToArray(setGlobal[set.id].videos.value, entity, (e) => e.id, (e) => e.title)
@@ -156,6 +170,7 @@ export const useSet = (set: SetEntity) => {
 		setGlobal[set.id] = {
 			hash: ref(set.hash),
 			notes: ref([]),
+			documents: ref([]),
 			videos: ref([]),
 			flashCards: ref([]),
 			testPreps: ref([]),
@@ -171,12 +186,13 @@ export const useSet = (set: SetEntity) => {
 		await setGlobal[set.id].setError('')
 		try {
 			await setGlobal[set.id].setLoading(true)
-			const [notes, videos, flashCards, testPreps, sets] = await Promise.all([
-				NotesUseCases.getInList(set.saved.notes), VideosUseCases.getInList(set.saved.videos),
-				FlashCardsUseCases.getInList(set.saved.flashCards), TestPrepsUseCases.getInList(set.saved.testPreps),
-				SetsUseCases.getInList(set.saved.sets)
+			const [notes, documents, videos, flashCards, testPreps, sets] = await Promise.all([
+				NotesUseCases.getInList(set.saved.notes), DocumentsUseCases.getInList(set.saved.documents),
+				VideosUseCases.getInList(set.saved.videos), FlashCardsUseCases.getInList(set.saved.flashCards),
+				TestPrepsUseCases.getInList(set.saved.testPreps), SetsUseCases.getInList(set.saved.sets)
 			])
 			setGlobal[set.id].notes.value = notes.results
+			setGlobal[set.id].documents.value = documents.results
 			setGlobal[set.id].videos.value = videos.results
 			setGlobal[set.id].flashCards.value = flashCards.results
 			setGlobal[set.id].testPreps.value = testPreps.results
@@ -201,6 +217,7 @@ export const useSet = (set: SetEntity) => {
 	})
 
 	const notes = computed(() => setGlobal[set.id].notes.value.filter((note) => set.saved.notes.includes(note.id)))
+	const documents = computed(() => setGlobal[set.id].documents.value.filter((document) => set.saved.documents.includes(document.id)))
 	const videos = computed(() => setGlobal[set.id].videos.value.filter((video) => set.saved.videos.includes(video.id)))
 	const flashCards = computed(() => setGlobal[set.id].flashCards.value.filter((flashCard) => set.saved.flashCards.includes(flashCard.id)))
 	const testPreps = computed(() => setGlobal[set.id].testPreps.value.filter((testPrep) => set.saved.testPreps.includes(testPrep.id)))
@@ -208,7 +225,7 @@ export const useSet = (set: SetEntity) => {
 
 	return {
 		...setGlobal[set.id], fetchAllSetEntities,
-		notes, videos, flashCards, testPreps, sets
+		notes, documents, videos, flashCards, testPreps, sets
 	}
 }
 
@@ -216,7 +233,7 @@ export const useSaveToSet = () => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 
-	const saveToSet = async (prop: SaveKey, itemId: string, set: SetEntity) => {
+	const saveToSet = async (prop: SetSaved, itemId: string, set: SetEntity) => {
 		try {
 			await setLoading(true)
 			await SetsUseCases.saveProp(set.id, prop, [itemId])
@@ -228,7 +245,7 @@ export const useSaveToSet = () => {
 		await setLoading(false)
 	}
 
-	const removeFromSet = async (prop: SaveKey, itemId: string, set: SetEntity) => {
+	const removeFromSet = async (prop: SetSaved, itemId: string, set: SetEntity) => {
 		try {
 			await setLoading(true)
 			await SetsUseCases.deleteProp(set.id, prop, [itemId])

@@ -44,7 +44,7 @@ export class VideoEntity extends BaseEntity {
 	}
 
 	search (search: string) {
-		return this.title.toLowerCase().includes(search.toLowerCase()) || this.title.toLowerCase().includes(search.toLowerCase())
+		return this.title.toLowerCase().includes(search.toLowerCase())
 	}
 }
 

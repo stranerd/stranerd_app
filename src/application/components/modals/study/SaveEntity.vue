@@ -15,7 +15,7 @@
 				<IonIcon :icon="folderOutline" class="text-2xl" />
 				<IonText class="w-full truncate font-semibold text-lg">{{ set.name }}</IonText>
 				<IonIcon :icon="set.allSaved.includes(entity.id) ? bookmark : bookmarkOutline" class="text-2xl"
-					@click="set.allSaved.includes(entity.id) ? removeFromSet(`${type}s`, entity.id, set) : saveToSet(`${type}s`, entity.id, set)"
+					@click="set.allSaved.includes(entity.id) ? removeFromSet(type, entity.id, set) : saveToSet(type, entity.id, set)"
 				/>
 			</div>
 		</div>
