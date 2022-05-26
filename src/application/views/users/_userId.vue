@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<div v-if="user">
-			<div class="flex flex-col border-bottom-line gap-4 p-4">
+			<div class="flex flex-col border-bottom-line gap-6 px-4 py-6">
 				<div class="flex items-center gap-4">
 					<Avatar :name="user.bio.fullName" :size="64" :src="user.bio.photo" />
 					<div class="flex flex-col gap-2">
@@ -18,7 +18,7 @@
 					</div>
 				</div>
 				<IonText v-if="user.bio.description" class="text-sub">{{ user.bio.description }}</IonText>
-				<div class="flex items-center gap-16 text-sub text-secondaryText mt-2">
+				<div class="flex items-center justify-around gap-4 text-sub text-secondaryText">
 					<span class="flex items-center gap-2">
 						<IonIcon :icon="helpCircleOutline" class="text-heading" />
 						<span>{{ formatNumber(user.meta.questions) }}</span>
@@ -41,7 +41,7 @@
 					{{ user.isVerified ? 'Mark User Unverified' : 'Mark User Verified' }}
 				</IonButton>
 			</div>
-			<div class="flex flex-col gap-4 py-4">
+			<div class="flex flex-col gap-4 py-6">
 				<div class="flex items-center justify-between px-4 text-sub">
 					<span v-for="(path, idx) in ['questions', 'answers', 'flashCards', 'documents']" :key="path"
 						:class="{ 'bg-primaryBg !text-primaryText': path === tab, 'rounded-l-full': idx ===0, 'rounded-r-full': idx === 3 }"

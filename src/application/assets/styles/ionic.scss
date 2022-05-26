@@ -84,20 +84,20 @@ ion-popover {
 
 .searchbar-input {
 	padding: 0 !important;
+	font-size: inherit !important;
 }
 
 ion-searchbar {
 	--background: transparent !important;
+	background: #{$color-itemBg} !important;
 	--box-shadow: none !important;
-	--placeholder-color: #{$color-secondaryText} !important;
-	padding: 0 0.75rem !important;
-	height: 48px !important;
+	padding: 0 0.25rem !important;
+	height: 44px !important;
 	border-radius: .75rem !important;
-	border: 1px solid $color-newGray;
-	@media (min-width: $md) {
-		background: $color-newGray !important;
-		border: none;
-	}
+	--placeholder-color: #{$color-secondaryText} !important;
+	--cancel-button-color: inherit !important;
+	--clear-button-color: inherit !important;
+	--icon-color: inherit !important;
 }
 
 ion-input, ion-textarea, ion-select {

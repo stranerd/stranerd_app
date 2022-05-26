@@ -4,6 +4,8 @@ import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { PAGINATION_LIMIT, SEARCH_PAGINATION_LIMIT } from '@utils/constants'
 import { FlashCardEntity } from '../entities/flashCard'
 
+const searchFields = ['title', 'set']
+
 export class FlashCardsUseCase {
 	private repository: IFlashCardRepository
 
@@ -101,10 +103,18 @@ export class FlashCardsUseCase {
 	async search (detail: string) {
 		const query: QueryParams = detail ? {
 			all: true,
-			search: { value: detail, fields: ['title', 'set'] }
+			search: { value: detail, fields: searchFields }
 		} : {
 			limit: SEARCH_PAGINATION_LIMIT,
 			sort: [{ field: 'createdAt', desc: true }]
+		}
+		return (await this.repository.get(query)).results
+	}
+
+	async searchUserFlashCards (userId: string, search: string) {
+		const query = {
+			where: [{ field: 'user.id', value: userId }],
+			all: true, search: { value: search, fields: searchFields }
 		}
 		return (await this.repository.get(query)).results
 	}

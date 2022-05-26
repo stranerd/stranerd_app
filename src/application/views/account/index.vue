@@ -1,7 +1,7 @@
 <template>
 	<Justified>
 		<div v-if="user">
-			<div class="flex flex-col border-bottom-line gap-4 p-4">
+			<div class="flex flex-col border-bottom-line gap-6 px-4 py-6">
 				<div class="flex items-center gap-4">
 					<Avatar :name="user.bio.fullName" :size="64" :src="user.bio.photo" />
 					<div class="flex flex-col gap-1">

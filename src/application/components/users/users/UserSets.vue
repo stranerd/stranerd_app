@@ -1,7 +1,11 @@
 <template>
 	<BlockLoading v-if="loading" />
 	<div v-else class="flex flex-col">
-		<SetListCard v-for="set in sets" :key="set.hash" :set="set" class="border-bottom-line" />
+		<form class="p-4" @submit.prevent="search">
+			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
+		</form>
+		<SetListCard v-for="set in (searchMode ? searchResults : sets)" :key="set.hash" :set="set"
+			class="border-bottom-line" />
 		<EmptyState v-if="!loading && !error && sets.length === 0"
 			info="This user hasn't created any folders yet." />
 	</div>
@@ -13,10 +17,11 @@ import SetListCard from '@app/components/study/sets/SetListCard.vue'
 import { useUserSetList } from '@app/composable/users/users/sets'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
+import { IonSearchbar } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ProfileSets',
-	components: { SetListCard, EmptyState },
+	components: { SetListCard, EmptyState, IonSearchbar },
 	props: {
 		user: {
 			type: UserEntity,
@@ -24,8 +29,14 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { sets, error, loading } = useUserSetList(props.user.id)
-		return { sets, error, loading }
+		const {
+			sets, error, loading,
+			searchMode, searchResults, searchValue, search
+		} = useUserSetList(props.user.id)
+		return {
+			sets, error, loading,
+			searchMode, searchResults, searchValue, search
+		}
 	}
 })
 </script>

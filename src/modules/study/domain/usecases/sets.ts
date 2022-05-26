@@ -5,6 +5,8 @@ import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { PAGINATION_LIMIT, SEARCH_PAGINATION_LIMIT } from '@utils/constants'
 import { SetEntity } from '../entities/set'
 
+const searchFields = ['name']
+
 export class SetsUseCase {
 	private repository: ISetRepository
 
@@ -106,10 +108,18 @@ export class SetsUseCase {
 	async search (detail: string) {
 		const query: QueryParams = detail ? {
 			all: true,
-			search: { value: detail, fields: ['name'] }
+			search: { value: detail, fields: searchFields }
 		} : {
 			limit: SEARCH_PAGINATION_LIMIT,
 			sort: [{ field: 'createdAt', desc: true }]
+		}
+		return (await this.repository.get(query)).results
+	}
+
+	async searchUserSets (userId: string, search: string) {
+		const query = {
+			where: [{ field: 'user.id', value: userId }],
+			all: true, search: { value: search, fields: searchFields }
 		}
 		return (await this.repository.get(query)).results
 	}

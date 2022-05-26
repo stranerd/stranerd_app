@@ -4,6 +4,8 @@ import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { PAGINATION_LIMIT, SEARCH_PAGINATION_LIMIT } from '@utils/constants'
 import { QuestionEntity } from '../entities/question'
 
+const searchFields = ['body']
+
 export class QuestionsUseCase {
 	private repository: IQuestionRepository
 
@@ -87,10 +89,18 @@ export class QuestionsUseCase {
 	async search (detail: string) {
 		const query: QueryParams = detail ? {
 			all: true,
-			search: { value: detail, fields: ['body'] }
+			search: { value: detail, fields: searchFields }
 		} : {
 			limit: SEARCH_PAGINATION_LIMIT,
 			sort: [{ field: 'createdAt', desc: true }]
+		}
+		return (await this.repository.get(query)).results
+	}
+
+	async searchUserQuestions (userId: string, search: string) {
+		const query = {
+			where: [{ field: 'user.id', value: userId }],
+			all: true, search: { value: search, fields: searchFields }
 		}
 		return (await this.repository.get(query)).results
 	}

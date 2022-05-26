@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref, Ref } from 'vue'
+import { onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import { DocumentEntity, DocumentsUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
@@ -7,6 +7,9 @@ const global = {} as Record<string, {
 	documents: Ref<DocumentEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
+	searchMode: Ref<boolean>
+	searchValue: Ref<string>
+	searchResults: Ref<DocumentEntity[]>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useUserDocumentList = (id: string) => {
@@ -14,6 +17,9 @@ export const useUserDocumentList = (id: string) => {
 		documents: ref([]),
 		fetched: ref(false),
 		hasMore: ref(false),
+		searchMode: ref(false),
+		searchResults: ref([]),
+		searchValue: ref(''),
 		...useErrorHandler(),
 		...useLoadingHandler()
 	}
@@ -56,5 +62,24 @@ export const useUserDocumentList = (id: string) => {
 		await listener.close()
 	})
 
-	return { ...global[id], fetchOlderDocuments: fetchDocuments }
+	const search = async () => {
+		const searchValue = global[id].searchValue.value
+		if (!searchValue) return
+		global[id].searchMode.value = true
+		await global[id].setError('')
+		try {
+			await global[id].setLoading(true)
+			global[id].searchResults.value = await DocumentsUseCases.searchUserDocuments(id, searchValue)
+			global[id].fetched.value = true
+		} catch (error) {
+			await global[id].setError(error)
+		}
+		await global[id].setLoading(false)
+	}
+
+	watch(() => global[id].searchValue.value, () => {
+		if (!global[id].searchValue.value) global[id].searchMode.value = false
+	})
+
+	return { ...global[id], fetchOlderDocuments: fetchDocuments, search }
 }

@@ -4,6 +4,8 @@ import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { PAGINATION_LIMIT } from '@utils/constants'
 import { AnswerEntity } from '../entities/answer'
 
+const searchFields = ['title', 'body']
+
 export class AnswersUseCase {
 	private repository: IAnswerRepository
 
@@ -44,6 +46,14 @@ export class AnswersUseCase {
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
 
 		return await this.repository.get(conditions)
+	}
+
+	async searchUserAnswers (userId: string, search: string) {
+		const query = {
+			where: [{ field: 'user.id', value: userId }],
+			all: true, search: { value: search, fields: searchFields }
+		}
+		return (await this.repository.get(query)).results
 	}
 
 	async listenToQuestionAnswers (questionId: string, listener: Listeners<AnswerEntity>) {

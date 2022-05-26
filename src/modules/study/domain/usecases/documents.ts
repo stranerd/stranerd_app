@@ -4,6 +4,8 @@ import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { PAGINATION_LIMIT, SEARCH_PAGINATION_LIMIT } from '@utils/constants'
 import { DocumentEntity } from '../entities/document'
 
+const searchFields = ['title', 'content']
+
 export class DocumentsUseCase {
 	private repository: IDocumentRepository
 
@@ -101,10 +103,18 @@ export class DocumentsUseCase {
 	async search (detail: string) {
 		const query: QueryParams = detail ? {
 			all: true,
-			search: { value: detail, fields: ['title', 'description'] }
+			search: { value: detail, fields: searchFields }
 		} : {
 			limit: SEARCH_PAGINATION_LIMIT,
 			sort: [{ field: 'createdAt', desc: true }]
+		}
+		return (await this.repository.get(query)).results
+	}
+
+	async searchUserDocuments (userId: string, search: string) {
+		const query = {
+			where: [{ field: 'user.id', value: userId }],
+			all: true, search: { value: search, fields: searchFields }
 		}
 		return (await this.repository.get(query)).results
 	}

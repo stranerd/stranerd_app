@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref, Ref } from 'vue'
+import { onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import { SetEntity, SetsUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
@@ -8,6 +8,9 @@ const global = {} as Record<string, {
 	sets: Ref<SetEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
+	searchMode: Ref<boolean>
+	searchValue: Ref<string>
+	searchResults: Ref<SetEntity[]>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useUserSetList = (id: string = useAuth().id.value) => {
@@ -29,6 +32,9 @@ export const useUserSetList = (id: string = useAuth().id.value) => {
 			sets: ref([]),
 			fetched: ref(false),
 			listener,
+			searchMode: ref(false),
+			searchResults: ref([]),
+			searchValue: ref(''),
 			...useErrorHandler(),
 			...useLoadingHandler()
 		}
@@ -56,5 +62,24 @@ export const useUserSetList = (id: string = useAuth().id.value) => {
 		await global[id].listener.close()
 	})
 
-	return { ...global[id] }
+	const search = async () => {
+		const searchValue = global[id].searchValue.value
+		if (!searchValue) return
+		global[id].searchMode.value = true
+		await global[id].setError('')
+		try {
+			await global[id].setLoading(true)
+			global[id].searchResults.value = await SetsUseCases.searchUserSets(id, searchValue)
+			global[id].fetched.value = true
+		} catch (error) {
+			await global[id].setError(error)
+		}
+		await global[id].setLoading(false)
+	}
+
+	watch(() => global[id].searchValue.value, () => {
+		if (!global[id].searchValue.value) global[id].searchMode.value = false
+	})
+
+	return { ...global[id], search }
 }
