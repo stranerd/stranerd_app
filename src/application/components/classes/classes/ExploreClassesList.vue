@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<form class="bg-white p-4 md:mb-4 md:rounded-xl" @submit.prevent="fetchClasses">
+		<form class="p-4" @submit.prevent="fetchClasses">
 			<IonSearchbar v-model.trim="searchTerm" class="w-full" mode="md"
 				placeholder="Search for classes" showCancelButton="never" type="search" />
 		</form>

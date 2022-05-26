@@ -8,17 +8,10 @@
 			</div>
 		</router-link>
 		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
-			to="/study/notes/create">
+			to="/study/documents/create">
 			<div class="w-48 flex items-center gap-3">
 				<ion-icon :icon="readerOutline" class="text-2xl" />
-				<ion-label class="font-bold">Upload a note</ion-label>
-			</div>
-		</router-link>
-		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
-			to="/study/videos/create">
-			<div class="w-48 flex items-center gap-3">
-				<ion-icon :icon="videocamOutline" class="text-2xl" />
-				<ion-label class="font-bold">Upload a video</ion-label>
+				<ion-label class="font-bold">Upload a document</ion-label>
 			</div>
 		</router-link>
 		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
@@ -48,14 +41,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import {
-	flashOutline,
-	folderOutline,
-	helpCircleOutline,
-	peopleOutline,
-	readerOutline,
-	videocamOutline
-} from 'ionicons/icons'
+import { flashOutline, folderOutline, helpCircleOutline, peopleOutline, readerOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
@@ -63,7 +49,7 @@ export default defineComponent({
 	setup () {
 		const { user } = useAuth()
 		return {
-			user, helpCircleOutline, folderOutline, flashOutline, peopleOutline, readerOutline, videocamOutline
+			user, helpCircleOutline, folderOutline, flashOutline, peopleOutline, readerOutline
 		}
 	}
 })

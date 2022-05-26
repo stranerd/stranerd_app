@@ -10,10 +10,8 @@ import CreateTestPrep from '@app/components/modals/study/CreateTestPrep.vue'
 import EditTestPrep from '@app/components/modals/study/EditTestPrep.vue'
 import CreateSet from '@app/components/modals/study/CreateSet.vue'
 import EditSet from '@app/components/modals/study/EditSet.vue'
-import CreateNote from '@app/components/modals/study/CreateNote.vue'
-import EditNote from '@app/components/modals/study/EditNote.vue'
-import CreateVideo from '@app/components/modals/study/CreateVideo.vue'
-import EditVideo from '@app/components/modals/study/EditVideo.vue'
+import CreateDocument from '@app/components/modals/study/CreateDocument.vue'
+import EditDocument from '@app/components/modals/study/EditDocument.vue'
 import SaveEntity from '@app/components/modals/study/SaveEntity.vue'
 import CreateClass from '@app/components/modals/classes/CreateClass.vue'
 import EditClass from '@app/components/modals/classes/EditClass.vue'
@@ -39,8 +37,7 @@ const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion 
 const SessionModal = modal.register('Session', { CreateSession, Ratings: CreateSession })
 const ReportModal = modal.register('Report', { CreateReport })
 const StudyModal = modal.register('Study', {
-	CreateSet, EditSet, CreateNote, EditNote, SaveEntity,
-	CreateVideo, EditVideo, CreateTestPrep, EditTestPrep
+	CreateSet, EditSet, SaveEntity, CreateTestPrep, EditTestPrep, CreateDocument, EditDocument
 })
 const ClassModal = modal.register('Class', {
 	CreateClass, EditClass, CreateGroup, EditGroup,

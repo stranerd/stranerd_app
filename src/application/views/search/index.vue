@@ -1,7 +1,7 @@
 <template>
 	<SearchWrapper>
 		<template
-			v-slot:default="{ count, searchTerm, testPreps, notes, videos, flashCards, sets, questions, users }">
+			v-slot:default="{ count, searchTerm, testPreps, documents, flashCards, sets, questions, users }">
 			<div class="py-4 md:py-0 flex flex-col gap-4 md:gap-6">
 				<div v-if="questions.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
@@ -41,29 +41,17 @@
 					</div>
 					<SearchFlashCardsList :flashCards="flashCards" :sliced="true" />
 				</div>
-				<div v-if="notes.length" class="border-bottom-line">
+				<div v-if="documents.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="text-secondaryText flex items-center">
-							<ion-text class="text-heading font-bold">Notes</ion-text>
+							<ion-text class="text-heading font-bold">Documents</ion-text>
 						</div>
-						<router-link :to="`/search/notes?search=${searchTerm}`"
+						<router-link :to="`/search/documents?search=${searchTerm}`"
 							class="text-primary flex items-center font-bold">
 							<span>view all</span>
 						</router-link>
 					</div>
-					<SearchNotesList :notes="notes" :sliced="true" />
-				</div>
-				<div v-if="videos.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-secondaryText flex items-center">
-							<ion-text class="text-heading font-bold">Videos</ion-text>
-						</div>
-						<router-link :to="`/search/videos?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
-							<span>view all</span>
-						</router-link>
-					</div>
-					<SearchVideosList :sliced="true" :videos="videos" />
+					<SearchDocumentsList :documents="documents" :sliced="true" />
 				</div>
 				<div v-if="sets.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
@@ -101,8 +89,7 @@
 import { defineComponent } from 'vue'
 import SearchWrapper from '@app/components/search/SearchWrapper.vue'
 import SearchTestPrepsList from '@app/components/study/testPreps/SearchTestPrepsList.vue'
-import SearchNotesList from '@app/components/study/notes/SearchNotesList.vue'
-import SearchVideosList from '@app/components/study/videos/SearchVideosList.vue'
+import SearchDocumentsList from '@app/components/study/documents/SearchDocumentsList.vue'
 import SearchFlashCardsList from '@app/components/study/flashCards/SearchFlashCardsList.vue'
 import SearchSetsList from '@app/components/study/sets/SearchSetsList.vue'
 import SearchQuestionsList from '@app/components/questions/questions/SearchQuestionsList.vue'
@@ -114,8 +101,7 @@ export default defineComponent({
 	components: {
 		SearchWrapper,
 		SearchTestPrepsList,
-		SearchNotesList,
-		SearchVideosList,
+		SearchDocumentsList,
 		SearchFlashCardsList,
 		SearchSetsList,
 		SearchUsersList,

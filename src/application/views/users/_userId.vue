@@ -53,6 +53,7 @@
 				<UserQuestions v-if="tab === 'questions'" :user="user" />
 				<UserAnswers v-if="tab === 'answers'" :user="user" />
 				<UserFlashCards v-if="tab === 'flashCards'" :user="user" />
+				<UserDocuments v-if="tab === 'documents'" :user="user" />
 			</div>
 		</div>
 	</Justified>
@@ -72,10 +73,11 @@ import { formatNumber } from '@utils/commons'
 import UserQuestions from '@app/components/users/users/UserQuestions.vue'
 import UserAnswers from '@app/components/users/users/UserAnswers.vue'
 import UserFlashCards from '@app/components/users/users/UserFlashCards.vue'
+import UserDocuments from '@app/components/users/users/UserDocuments.vue'
 
 export default defineComponent({
 	name: 'UsersUserId',
-	components: { Justified, Department, Institution, UserQuestions, UserAnswers, UserFlashCards },
+	components: { Justified, Department, Institution, UserQuestions, UserAnswers, UserFlashCards, UserDocuments },
 	displayName: 'Profile',
 	middlewares: [async ({ to }) => {
 		const { id } = useAuth()

@@ -1,26 +1,15 @@
 <template>
 	<div class="showcase-flex">
-		<div class="bg-white md:rounded-xl flex items-center justify-between gap-2 md:p-4 border-bottom-line">
-			<ion-text class="text-secondaryText leading-tight text-heading font-bold hidden md:inline">
-				All questions
-			</ion-text>
-			<div class="flex items-center gap-4 w-full md:w-auto">
-				<ion-select v-model="answered"
-					class="bg-white md:bg-new_gray !text-gray flex-grow w-full md:w-32 font-bold select-primary"
-					interface="action-sheet"
-					placeholder="State">
-					<ion-select-option v-for="choice in answeredChoices" :key="choice.key"
-						:value="choice.val" @click="answered = choice.val">
-						{{ choice.key }}
-					</ion-select-option>
-				</ion-select>
-
-				<router-link class="hidden md:inline" to="/questions/create">
-					<ion-button class="btn-primary font-bold">
-						Ask a question
-					</ion-button>
-				</router-link>
-			</div>
+		<div class="px-4">
+			<ion-select v-model="answered"
+				class="w-full"
+				interface="action-sheet"
+				placeholder="State">
+				<ion-select-option v-for="choice in answeredChoices" :key="choice.key"
+					:value="choice.val" @click="answered = choice.val">
+					{{ choice.key }}
+				</ion-select-option>
+			</ion-select>
 		</div>
 		<BlockLoading v-if="loading" />
 		<EmptyState v-if="!loading && !error && questions.length === 0" :btnText="'Ask a question'"

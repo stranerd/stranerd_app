@@ -8,7 +8,8 @@
 			</router-link>
 		</div>
 		<EmptyState v-if="!loading && !error && classes.length === 0" info="You are not a member of any class!" />
-		<ClassListCard v-for="classInst in classes" :key="classInst" :classInst="classInst" />
+		<ClassListCard v-for="classInst in classes" :key="classInst" :classInst="classInst"
+			class="border-bottom-line" />
 		<BlockLoading v-if="loading" />
 	</div>
 </template>

@@ -18,7 +18,7 @@ import { useTestList } from '@app/composable/study/tests'
 export default defineComponent({
 	name: 'ContinueTests',
 	components: { EmptyState, ContinueTestCard },
-	setup (props) {
+	setup () {
 		const { unCompletedTests, loading, error } = useTestList()
 		return {
 			chevronForwardOutline, chevronBackOutline, ellipseOutline,

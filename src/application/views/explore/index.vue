@@ -33,29 +33,15 @@
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 					<div class="text-secondaryText flex items-center">
 						<ion-text class="text-heading font-bold mr-3">
-							Notes
+							Documents
 						</ion-text>
 					</div>
-					<router-link :to="`/explore/notes`"
+					<router-link :to="`/explore/documents`"
 						class="text-primary flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>
-				<ExploreNotesList :sliced="true" />
-			</div>
-			<div class="border-bottom-line">
-				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-					<div class="text-secondaryText flex items-center">
-						<ion-text class="text-heading font-bold mr-3">
-							Videos
-						</ion-text>
-					</div>
-					<router-link :to="`/explore/videos`"
-						class="text-primary flex items-center font-bold">
-						<span>view all</span>
-					</router-link>
-				</div>
-				<ExploreVideosList :sliced="true" />
+				<ExploreDocumentsList :sliced="true" />
 			</div>
 		</div>
 	</ExploreWrapper>
@@ -65,8 +51,7 @@
 import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/explore/ExploreWrapper.vue'
 import ExploreTestPrepsList from '@app/components/study/testPreps/ExploreTestPrepsList.vue'
-import ExploreNotesList from '@app/components/study/notes/ExploreNotesList.vue'
-import ExploreVideosList from '@app/components/study/videos/ExploreVideosList.vue'
+import ExploreDocumentsList from '@app/components/study/documents/ExploreDocumentsList.vue'
 import ExploreFlashCardsList from '@app/components/study/flashCards/ExploreFlashCardsList.vue'
 
 export default defineComponent({
@@ -75,8 +60,7 @@ export default defineComponent({
 	components: {
 		ExploreWrapper,
 		ExploreTestPrepsList,
-		ExploreNotesList,
-		ExploreVideosList,
+		ExploreDocumentsList,
 		ExploreFlashCardsList
 	}
 })

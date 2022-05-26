@@ -1,17 +1,17 @@
 <template>
 	<Justified>
-		<Note link="/legal/terms-and-conditions.pdf" />
+		<PdfReader link="/legal/terms-and-conditions.pdf" />
 	</Justified>
 </template>
 
 <script lang="ts">
-import Justified from '@app/layouts/Justified.vue'
 import { defineComponent } from 'vue'
-import Note from '@app/components/core/media/Note.vue'
+import Justified from '@app/layouts/Justified.vue'
+import PdfReader from '@app/components/core/media/PdfReader.vue'
 
 export default defineComponent({
 	name: 'LegalTermsAndConditions',
 	displayName: 'Terms and Conditions',
-	components: { Justified, Note }
+	components: { Justified, PdfReader }
 })
 </script>

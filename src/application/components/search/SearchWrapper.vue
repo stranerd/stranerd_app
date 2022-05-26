@@ -6,8 +6,7 @@
 				<div class="nav-scroll mt-4">
 					<router-link :to="`/search?search=${searchTerm}`">All</router-link>
 					<router-link :to="`/search/preps?search=${searchTerm}`">TestPreps</router-link>
-					<router-link :to="`/search/notes?search=${searchTerm}`">Notes</router-link>
-					<router-link :to="`/search/videos?search=${searchTerm}`">Videos</router-link>
+					<router-link :to="`/search/documents?search=${searchTerm}`">Documents</router-link>
 					<router-link :to="`/search/flashCards?search=${searchTerm}`">FlashCards</router-link>
 					<router-link :to="`/search/sets?search=${searchTerm}`">Folders</router-link>
 					<router-link :to="`/search/nerds?search=${searchTerm}`">Nerds</router-link>
@@ -23,9 +22,9 @@
 						<IonIcon :icon="arrowRedoOutline" class="text-2xl" @click="() => {searchTerm = r; search()}" />
 					</div>
 				</div>
-				<slot v-else :answers="answers" :count="count" :fetched="fetched" :flashCards="flashCards"
-					:notes="notes" :questions="questions" :searchTerm="searchTerm"
-					:sets="sets" :testPreps="testPreps" :users="users" :videos="videos" />
+				<slot v-else :answers="answers" :count="count" :documents="documents" :fetched="fetched"
+					:flashCards="flashCards" :questions="questions" :searchTerm="searchTerm"
+					:sets="sets" :testPreps="testPreps" :users="users" />
 			</div>
 		</div>
 	</Justified>

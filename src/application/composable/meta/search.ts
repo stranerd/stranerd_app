@@ -4,16 +4,14 @@ import { AnswerEntity, QuestionEntity, QuestionsUseCases } from '@modules/questi
 import { UserEntity, UsersUseCases } from '@modules/users'
 import { useRoute, useRouter } from 'vue-router'
 import {
+	DocumentEntity,
+	DocumentsUseCases,
 	FlashCardEntity,
 	FlashCardsUseCases,
-	NoteEntity,
-	NotesUseCases,
 	SetEntity,
 	SetsUseCases,
 	TestPrepEntity,
-	TestPrepsUseCases,
-	VideoEntity,
-	VideosUseCases
+	TestPrepsUseCases
 } from '@modules/study'
 import { storage } from '@utils/storage'
 
@@ -24,8 +22,7 @@ const global = {
 		questions: ref([] as QuestionEntity[]),
 		answers: ref([] as AnswerEntity[]),
 		users: ref([] as UserEntity[]),
-		videos: ref([] as VideoEntity[]),
-		notes: ref([] as NoteEntity[]),
+		documents: ref([] as DocumentEntity[]),
 		flashCards: ref([] as FlashCardEntity[]),
 		testPreps: ref([] as TestPrepEntity[]),
 		sets: ref([] as SetEntity[])
@@ -80,7 +77,7 @@ export const useSearch = () => {
 				const searchObj = {
 					questions: QuestionsUseCases, users: UsersUseCases,
 					flashCards: FlashCardsUseCases, sets: SetsUseCases,
-					testPreps: TestPrepsUseCases, notes: NotesUseCases, videos: VideosUseCases
+					testPreps: TestPrepsUseCases, documents: DocumentsUseCases
 				}
 				await Promise.all(
 					Object.entries(searchObj).map(async ([key, useCase]) => {

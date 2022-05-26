@@ -1,7 +1,7 @@
 <template>
 	<DashboardLayout>
 		<div class="py-4 lg:py-8 md:px-4 lg:px-0">
-			<div v-if="isLoggedIn" class="px-4 md:px-0">
+			<div v-if="isLoggedIn" class="px-4 md:px-0 mb-4">
 				<IonSegment v-model="tab"
 					class="w-full bg-new_gray text-gray border border-new_gray border-xl md:border-white">
 					<IonSegmentButton class="w-full" value="all">All Questions</IonSegmentButton>
@@ -9,7 +9,7 @@
 				</IonSegment>
 			</div>
 
-			<div class="md:mt-4">
+			<div>
 				<MyQuestionsList v-if="tab === 'mine'" />
 				<QuestionsList v-else />
 			</div>

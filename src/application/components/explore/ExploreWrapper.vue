@@ -6,8 +6,7 @@
 				<div class="nav-scroll mt-4">
 					<router-link :to="`/explore`">All</router-link>
 					<router-link :to="`/explore/preps`">TestPreps</router-link>
-					<router-link :to="`/explore/notes`">Notes</router-link>
-					<router-link :to="`/explore/videos`">Videos</router-link>
+					<router-link :to="`/explore/documents`">Documents</router-link>
 					<router-link :to="`/explore/flashCards`">FlashCards</router-link>
 				</div>
 			</div>

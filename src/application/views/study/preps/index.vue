@@ -4,7 +4,7 @@
 			<router-link class="border-bottom-line p-4 flex items-center gap-4"
 				to="/study/preps/start">
 				<IonIcon :icon="addOutline" class="text-xl" />
-				<ion-text>Add test prep</ion-text>
+				<ion-text>Take test/Study solutions</ion-text>
 			</router-link>
 
 			<ContinueTests />
@@ -27,5 +27,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-

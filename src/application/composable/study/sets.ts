@@ -4,16 +4,12 @@ import {
 	DocumentsUseCases,
 	FlashCardEntity,
 	FlashCardsUseCases,
-	NoteEntity,
-	NotesUseCases,
 	SetEntity,
 	SetFactory,
 	SetSaved,
 	SetsUseCases,
 	TestPrepEntity,
-	TestPrepsUseCases,
-	VideoEntity,
-	VideosUseCases
+	TestPrepsUseCases
 } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useStudyModal } from '@app/composable/core/modals'
@@ -29,12 +25,11 @@ const global = {} as Record<string, {
 
 const setGlobal = {} as Record<string, {
 	hash: Ref<string>
-	notes: Ref<NoteEntity[]>
-	documents: Ref<DocumentEntity[]>
-	videos: Ref<VideoEntity[]>
-	flashCards: Ref<FlashCardEntity[]>
-	testPreps: Ref<TestPrepEntity[]>
-	sets: Ref<SetEntity[]>
+	saved: {
+		documents: Ref<DocumentEntity[]>
+		flashCards: Ref<FlashCardEntity[]>
+		testPreps: Ref<TestPrepEntity[]>
+	}
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
@@ -88,76 +83,40 @@ export const useSetById = (setId: string) => {
 export const useSet = (set: SetEntity) => {
 	const listenerFn = async () => {
 		const listeners = await Promise.all([
-			NotesUseCases.listenInList(set.saved.notes, {
-				created: async (entity) => {
-					addToArray(setGlobal[set.id].notes.value, entity, (e) => e.id, (e) => e.title)
-				},
-				updated: async (entity) => {
-					addToArray(setGlobal[set.id].notes.value, entity, (e) => e.id, (e) => e.title)
-				},
-				deleted: async (entity) => {
-					const index = setGlobal[set.id].notes.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) setGlobal[set.id].notes.value.splice(index, 1)
-				}
-			}),
 			DocumentsUseCases.listenInList(set.saved.documents, {
 				created: async (entity) => {
-					addToArray(setGlobal[set.id].documents.value, entity, (e) => e.id, (e) => e.title)
+					addToArray(setGlobal[set.id].saved.documents.value, entity, (e) => e.id, (e) => e.title)
 				},
 				updated: async (entity) => {
-					addToArray(setGlobal[set.id].documents.value, entity, (e) => e.id, (e) => e.title)
+					addToArray(setGlobal[set.id].saved.documents.value, entity, (e) => e.id, (e) => e.title)
 				},
 				deleted: async (entity) => {
-					const index = setGlobal[set.id].documents.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) setGlobal[set.id].documents.value.splice(index, 1)
-				}
-			}),
-			VideosUseCases.listenInList(set.saved.videos, {
-				created: async (entity) => {
-					addToArray(setGlobal[set.id].videos.value, entity, (e) => e.id, (e) => e.title)
-				},
-				updated: async (entity) => {
-					addToArray(setGlobal[set.id].videos.value, entity, (e) => e.id, (e) => e.title)
-				},
-				deleted: async (entity) => {
-					const index = setGlobal[set.id].videos.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) setGlobal[set.id].videos.value.splice(index, 1)
+					const index = setGlobal[set.id].saved.documents.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].saved.documents.value.splice(index, 1)
 				}
 			}),
 			FlashCardsUseCases.listenInList(set.saved.flashCards, {
 				created: async (entity) => {
-					addToArray(setGlobal[set.id].flashCards.value, entity, (e) => e.id, (e) => e.title)
+					addToArray(setGlobal[set.id].saved.flashCards.value, entity, (e) => e.id, (e) => e.title)
 				},
 				updated: async (entity) => {
-					addToArray(setGlobal[set.id].flashCards.value, entity, (e) => e.id, (e) => e.title)
+					addToArray(setGlobal[set.id].saved.flashCards.value, entity, (e) => e.id, (e) => e.title)
 				},
 				deleted: async (entity) => {
-					const index = setGlobal[set.id].flashCards.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) setGlobal[set.id].flashCards.value.splice(index, 1)
+					const index = setGlobal[set.id].saved.flashCards.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].saved.flashCards.value.splice(index, 1)
 				}
 			}),
 			TestPrepsUseCases.listenInList(set.saved.testPreps, {
 				created: async (entity) => {
-					addToArray(setGlobal[set.id].testPreps.value, entity, (e) => e.id, (e) => e.name)
+					addToArray(setGlobal[set.id].saved.testPreps.value, entity, (e) => e.id, (e) => e.name)
 				},
 				updated: async (entity) => {
-					addToArray(setGlobal[set.id].testPreps.value, entity, (e) => e.id, (e) => e.name)
+					addToArray(setGlobal[set.id].saved.testPreps.value, entity, (e) => e.id, (e) => e.name)
 				},
 				deleted: async (entity) => {
-					const index = setGlobal[set.id].testPreps.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) setGlobal[set.id].testPreps.value.splice(index, 1)
-				}
-			}),
-			SetsUseCases.listenInList(set.saved.sets, {
-				created: async (entity) => {
-					addToArray(setGlobal[set.id].sets.value, entity, (e) => e.id, (e) => e.name)
-				},
-				updated: async (entity) => {
-					addToArray(setGlobal[set.id].sets.value, entity, (e) => e.id, (e) => e.name)
-				},
-				deleted: async (entity) => {
-					const index = setGlobal[set.id].sets.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) setGlobal[set.id].sets.value.splice(index, 1)
+					const index = setGlobal[set.id].saved.testPreps.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].saved.testPreps.value.splice(index, 1)
 				}
 			})
 		])
@@ -169,12 +128,11 @@ export const useSet = (set: SetEntity) => {
 		const listener = useListener(listenerFn)
 		setGlobal[set.id] = {
 			hash: ref(set.hash),
-			notes: ref([]),
-			documents: ref([]),
-			videos: ref([]),
-			flashCards: ref([]),
-			testPreps: ref([]),
-			sets: ref([]),
+			saved: {
+				documents: ref([]),
+				flashCards: ref([]),
+				testPreps: ref([])
+			},
 			fetched: ref(false),
 			listener,
 			...useErrorHandler(),
@@ -186,17 +144,12 @@ export const useSet = (set: SetEntity) => {
 		await setGlobal[set.id].setError('')
 		try {
 			await setGlobal[set.id].setLoading(true)
-			const [notes, documents, videos, flashCards, testPreps, sets] = await Promise.all([
-				NotesUseCases.getInList(set.saved.notes), DocumentsUseCases.getInList(set.saved.documents),
-				VideosUseCases.getInList(set.saved.videos), FlashCardsUseCases.getInList(set.saved.flashCards),
-				TestPrepsUseCases.getInList(set.saved.testPreps), SetsUseCases.getInList(set.saved.sets)
+			const [documents, flashCards, testPreps] = await Promise.all([
+				DocumentsUseCases.getInList(set.saved.documents), FlashCardsUseCases.getInList(set.saved.flashCards), TestPrepsUseCases.getInList(set.saved.testPreps)
 			])
-			setGlobal[set.id].notes.value = notes.results
-			setGlobal[set.id].documents.value = documents.results
-			setGlobal[set.id].videos.value = videos.results
-			setGlobal[set.id].flashCards.value = flashCards.results
-			setGlobal[set.id].testPreps.value = testPreps.results
-			setGlobal[set.id].sets.value = sets.results
+			setGlobal[set.id].saved.documents.value = documents.results
+			setGlobal[set.id].saved.flashCards.value = flashCards.results
+			setGlobal[set.id].saved.testPreps.value = testPreps.results
 			setGlobal[set.id].fetched.value = true
 		} catch (error) {
 			await setGlobal[set.id].setError(error)
@@ -216,16 +169,13 @@ export const useSet = (set: SetEntity) => {
 		await setGlobal[set.id].listener.close()
 	})
 
-	const notes = computed(() => setGlobal[set.id].notes.value.filter((note) => set.saved.notes.includes(note.id)))
-	const documents = computed(() => setGlobal[set.id].documents.value.filter((document) => set.saved.documents.includes(document.id)))
-	const videos = computed(() => setGlobal[set.id].videos.value.filter((video) => set.saved.videos.includes(video.id)))
-	const flashCards = computed(() => setGlobal[set.id].flashCards.value.filter((flashCard) => set.saved.flashCards.includes(flashCard.id)))
-	const testPreps = computed(() => setGlobal[set.id].testPreps.value.filter((testPrep) => set.saved.testPreps.includes(testPrep.id)))
-	const sets = computed(() => setGlobal[set.id].sets.value.filter((s) => set.saved.sets.includes(s.id)))
+	const documents = computed(() => setGlobal[set.id].saved.documents.value.filter((document) => set.saved.documents.includes(document.id)))
+	const flashCards = computed(() => setGlobal[set.id].saved.flashCards.value.filter((flashCard) => set.saved.flashCards.includes(flashCard.id)))
+	const testPreps = computed(() => setGlobal[set.id].saved.testPreps.value.filter((testPrep) => set.saved.testPreps.includes(testPrep.id)))
 
 	return {
 		...setGlobal[set.id], fetchAllSetEntities,
-		notes, documents, videos, flashCards, testPreps, sets
+		documents, flashCards, testPreps
 	}
 }
 

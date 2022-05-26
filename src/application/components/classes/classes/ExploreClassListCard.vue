@@ -1,5 +1,5 @@
 <template>
-	<router-link :to="`/classes/${classInst.id}`" class="rounded-xl bg-white gap-2 p-4 flex flex-col w-full">
+	<router-link :to="`/classes/${classInst.id}`" class="gap-2 p-4 flex flex-col">
 		<div class="flex gap-2 items-center">
 			<Avatar :name="classInst.name" :size="40" :src="classInst.photo" class="md:hidden" />
 			<Avatar :name="classInst.name" :size="48" :src="classInst.photo" class="hidden md:inline" />

@@ -2,12 +2,9 @@ import { BaseEntity } from '@modules/core'
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 
 export enum SetSaved {
-	notes = 'notes',
 	documents = 'documents',
-	videos = 'videos',
 	flashCards = 'flashCards',
-	testPreps = 'testPreps',
-	sets = 'sets'
+	testPreps = 'testPreps'
 }
 
 export class SetEntity extends BaseEntity {
@@ -45,10 +42,6 @@ export class SetEntity extends BaseEntity {
 
 	get shareLink () {
 		return `/study/sets/${this.id}`
-	}
-
-	search (search: string) {
-		return this.name.toLowerCase().includes(search.toLowerCase())
 	}
 }
 

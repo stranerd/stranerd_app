@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="w-full min-h-40 bg-white rounded-xl flex flex-col justify-between box-border !gap-2 card-padding text-secondaryText">
+		class="min-h-40 flex flex-col justify-between !gap-2 card-padding">
 		<div>
 			<div class="flex justify-between gap-2">
 				<ion-text class="font-500 truncate w-full">
@@ -8,7 +8,7 @@
 				</ion-text>
 				<SaveToSet :entity="testPrep" />
 			</div>
-			<IonText class="text-gray truncate">
+			<IonText class="truncate">
 				<Course :courseId="testPrep.data.courseId" />
 				({{ testPrep.data.questionType }} {{ testPrep.data.year }})
 			</IonText>
@@ -19,7 +19,7 @@
 				@click="createTest(testPrep, true)">
 				Test
 			</ion-button>
-			<ion-button v-if="testPrep.canStudy" class="btn-outline text-primary btn-sm"
+			<ion-button v-if="testPrep.canStudy" class="btn-outline btn-sm"
 				@click="createTest(testPrep, false)">
 				Solutions
 			</ion-button>
