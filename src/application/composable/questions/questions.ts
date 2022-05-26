@@ -1,10 +1,9 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import { Router, useRouter } from 'vue-router'
-import { QuestionEntity, QuestionFactory, QuestionsUseCases, QuestionType } from '@modules/questions'
+import { QuestionEntity, QuestionFactory, QuestionsUseCases } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useQuestionModal } from '@app/composable/core/modals'
-import { ClassEntity } from '@modules/classes'
 import { addToArray } from '@utils/commons'
 
 enum Answered {
@@ -23,7 +22,7 @@ const answeredChoices = [
 ]
 const global = {
 	questions: ref([] as QuestionEntity[]),
-	subject: ref(''),
+	tagId: ref(''),
 	answered: ref(answeredChoices[0].val),
 	fetched: ref(false),
 	hasMore: ref(false),
@@ -63,7 +62,7 @@ export const useQuestionList = () => {
 	}
 	const filteredQuestions = computed({
 		get: () => global.questions.value.filter((q) => {
-			if (global.subject.value && q.subject !== global.subject.value) return false
+			if (global.tagId.value && q.tagId !== global.tagId.value) return false
 			if (global.answered.value === Answered.Answered && q.answers.length === 0) return false
 			if (global.answered.value === Answered.Unanswered && q.answers.length > 0) return false
 			if (global.answered.value === Answered.BestAnswered && !q.isAnswered) return false
@@ -94,24 +93,12 @@ export const useQuestionList = () => {
 	}
 }
 
-let questionClass = null as ClassEntity | null
-export const getQuestionClass = () => questionClass
-export const openQuestionModalFromClass = async (classInst: ClassEntity, router: Router) => {
-	questionClass = classInst
-	await router.push('/questions/create')
-}
-
 export const useCreateQuestion = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 	const factory = ref(new QuestionFactory()) as Ref<QuestionFactory>
 	const router = useRouter()
-	if (questionClass) {
-		factory.value.type = QuestionType.classes
-		factory.value.classId = questionClass.id
-		questionClass = null
-	}
 
 	const createQuestion = async () => {
 		await setError('')

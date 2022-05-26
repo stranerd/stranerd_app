@@ -7,6 +7,7 @@ export interface AnswerFromModel extends AnswerToModel {
 	updatedAt: number
 	user: EmbeddedUser
 	best: boolean
+	tagId: string
 	votes: { userId: string, vote: 1 | -1 }[]
 }
 

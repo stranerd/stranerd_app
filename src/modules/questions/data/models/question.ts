@@ -1,6 +1,5 @@
 import { EmbeddedUser } from '@modules/users'
 import { Media } from '@modules/core'
-import { QuestionData } from '../../domain/entities/question'
 
 export interface QuestionFromModel extends QuestionToModel {
 	id: string
@@ -15,6 +14,5 @@ export interface QuestionFromModel extends QuestionToModel {
 export interface QuestionToModel {
 	body: string
 	attachments: Media[]
-	subject: string
-	data: QuestionData
+	tagId: string
 }

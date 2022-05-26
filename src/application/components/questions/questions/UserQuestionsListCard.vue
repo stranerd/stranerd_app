@@ -2,7 +2,7 @@
 	<router-link :id="question.id" :to="`/questions/${question.id}`" class="card-padding flex flex-col">
 		<span>{{ question.trimmedBody }}</span>
 		<div class="flex items-center justify-between text-secondaryText text-sub gap-2">
-			<span class="capitalize">{{ question.subject }}</span>
+			<span class="capitalize">{{ question.tagId }}</span>
 			<IonIcon :icon="ellipse" class="text-[6px]" />
 			<span class="mr-auto">{{ formatTime(question.createdAt) }}</span>
 			<IonIcon v-if="question.attachments.length" :icon="imageOutline" class="text-heading" />

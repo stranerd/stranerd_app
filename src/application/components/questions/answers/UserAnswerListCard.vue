@@ -3,6 +3,8 @@
 		class="card-padding flex flex-col">
 		<span>{{ answer.trimmedTitle }}</span>
 		<div class="flex items-center justify-between text-secondaryText text-sub gap-2">
+			<span class="capitalize">{{ answer.tagId }}</span>
+			<IonIcon :icon="ellipse" class="text-[6px]" />
 			<span class="mr-auto">{{ formatTime(answer.createdAt) }}</span>
 			<IonIcon v-if="answer.attachments.length" :icon="imageOutline" class="text-heading" />
 		</div>

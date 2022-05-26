@@ -4,11 +4,11 @@ import { AnswerEntity } from '../../domain/entities/answer'
 export class AnswerTransformer {
 	fromJSON (model: AnswerFromModel) {
 		const {
-			id, title, body, questionId, attachments,
+			id, title, body, questionId, tagId, attachments,
 			user, best, createdAt, updatedAt, votes
 		} = model
 		return new AnswerEntity({
-			id, title, body, questionId, attachments,
+			id, title, body, questionId, tagId, attachments,
 			user, best, createdAt, updatedAt, votes
 		})
 	}

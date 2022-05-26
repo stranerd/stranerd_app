@@ -6,9 +6,8 @@ type QuestionConstructorArgs = {
 	id: string
 	body: string
 	isAnswered: boolean
-	data: QuestionData
 	attachments: Media[]
-	subject: string
+	tagId: string
 	user: EmbeddedUser
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
@@ -16,28 +15,11 @@ type QuestionConstructorArgs = {
 	updatedAt: number
 }
 
-export enum QuestionType {
-	users = 'users',
-	classes = 'classes'
-}
-
-type UserType = {
-	type: QuestionType.users
-}
-
-type ClassType = {
-	type: QuestionType.classes
-	classId: string
-}
-
-export type QuestionData = UserType | ClassType
-
 export class QuestionEntity extends BaseEntity {
 	public readonly id: string
 	public readonly body: string
-	public readonly data: QuestionData
 	public readonly attachments: Media[]
-	public readonly subject: string
+	public readonly tagId: string
 	public readonly user: EmbeddedUser
 	public readonly bestAnswers: string[]
 	public readonly answers: { id: string, userId: string }[]
@@ -46,7 +28,7 @@ export class QuestionEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, body, subject, isAnswered, data,
+		             id, body, tagId, isAnswered,
 		             bestAnswers, createdAt, user, attachments,
 		             answers, updatedAt
 	             }: QuestionConstructorArgs) {
@@ -54,9 +36,8 @@ export class QuestionEntity extends BaseEntity {
 		this.id = id
 		this.body = body
 		this.isAnswered = isAnswered
-		this.data = data
-		this.attachments = attachments.map(parseMedia) ?? []
-		this.subject = subject
+		this.tagId = tagId
+		this.attachments = attachments.map(parseMedia)
 		this.user = generateEmbeddedUser(user)
 		this.bestAnswers = bestAnswers
 		this.answers = answers

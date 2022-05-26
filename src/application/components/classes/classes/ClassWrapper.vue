@@ -45,10 +45,6 @@
 							<IonText class="hidden md:inline">Discussions</IonText>
 							<span v-if="!!unReadGroups" class="dot bg-primary" />
 						</router-link>
-						<router-link :to="`/classes/${classInst.id}/questions`">
-							<IonIcon :icon="helpCircleOutline" class="text-xl" />
-							<IonText class="hidden md:inline">Questions</IonText>
-						</router-link>
 						<router-link :to="`/classes/${classInst.id}/library`">
 							<IonIcon :icon="libraryOutline" class="text-xl" />
 							<IonText class="hidden md:inline">Library</IonText>
@@ -77,7 +73,6 @@ import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import {
 	chatboxEllipsesOutline,
-	helpCircleOutline,
 	informationCircleOutline,
 	libraryOutline,
 	megaphoneOutline,
@@ -103,7 +98,7 @@ export default defineComponent({
 		const { unReadAnnouncements } = useAnnouncementList(classId as string)
 		const { unReadGroups } = useGroupList(classId as string)
 		return {
-			chatboxEllipsesOutline, informationCircleOutline, helpCircleOutline, libraryOutline,
+			chatboxEllipsesOutline, informationCircleOutline, libraryOutline,
 			megaphoneOutline, pencilOutline, peopleOutline,
 			loading, error, classInst, requestToJoinClass, unReadAnnouncements, unReadGroups,
 			formatTime, pluralize, id, openClassEditModal

@@ -11,11 +11,8 @@ import { AnswerEntity } from '../entities/answer'
 import { AnswerToModel } from '../../data/models/answer'
 
 type Content = UploadedFile | Media
-type Keys = {
-	title: string, body: string, questionId: string, attachments: Content[]
-}
 
-export class AnswerFactory extends BaseFactory<AnswerEntity, AnswerToModel, Keys> {
+export class AnswerFactory extends BaseFactory<AnswerEntity, AnswerToModel, AnswerToModel & { attachments: Content[] }> {
 	readonly rules = {
 		title: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		attachments: { required: true, rules: [isArrayOfX((com) => isImage(com).valid, 'images'), hasLessThanX(6)] },

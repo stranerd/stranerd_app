@@ -14,7 +14,7 @@ import { QuestionsUseCase } from './domain/usecases/questions'
 import { AnswersUseCase } from './domain/usecases/answers'
 import { AnswerCommentsUseCase } from './domain/usecases/answerComments'
 import { TagsUseCase } from './domain/usecases/tags'
-import { QuestionEntity, QuestionType } from './domain/entities/question'
+import { QuestionEntity } from './domain/entities/question'
 import { QuestionFactory } from './domain/factories/question'
 import { AnswerEntity } from './domain/entities/answer'
 import { AnswerFactory } from './domain/factories/answer'
@@ -43,7 +43,7 @@ export const AnswersUseCases = new AnswersUseCase(answerRepository)
 export const AnswerCommentsUseCases = new AnswerCommentsUseCase(commentRepository)
 export const TagsUseCases = new TagsUseCase(tagRepository)
 
-export { QuestionEntity, QuestionType, QuestionFactory }
+export { QuestionEntity, QuestionFactory }
 export { AnswerEntity, AnswerFactory }
 export { CommentEntity, CommentFactory }
 export { TagEntity, TagFactory }
