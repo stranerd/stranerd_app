@@ -10,4 +10,5 @@ export interface IEventRepository {
 	find: (classId: string, id: string) => Promise<EventEntity | null>
 	update: (classId: string, id: string, data: EventToModel) => Promise<EventEntity>
 	delete: (classId: string, id: string) => Promise<void>
+	markRead: (classId: string) => Promise<boolean>
 }

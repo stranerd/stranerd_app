@@ -35,4 +35,8 @@ export class DiscussionApiDataSource implements DiscussionBaseDataSource {
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
 	}
+
+	async markRead (classId: string, groupId: string) {
+		return await this.stranerdClient.post<any, boolean>(`/${classId}/${groupId}`, {})
+	}
 }

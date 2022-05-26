@@ -10,4 +10,5 @@ export interface IAnnouncementRepository {
 	find: (classId: string, id: string) => Promise<AnnouncementEntity | null>
 	update: (classId: string, id: string, data: AnnouncementToModel) => Promise<AnnouncementEntity>
 	delete: (classId: string, id: string) => Promise<void>
+	markRead: (classId: string) => Promise<boolean>
 }

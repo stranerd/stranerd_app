@@ -4,11 +4,11 @@ import { DiscussionTransformer } from './discussion'
 
 export class GroupTransformer {
 	fromJSON (model: GroupFromModel) {
-		const { id, name, last, user, users, createdAt, classId, updatedAt } = model
+		const { id, name, last, user, users, readAt, createdAt, classId, updatedAt } = model
 		return new GroupEntity({
 			id, name, user, users, classId,
 			last: last ? new DiscussionTransformer().fromJSON(last) : null,
-			createdAt, updatedAt
+			readAt, createdAt, updatedAt
 		})
 	}
 

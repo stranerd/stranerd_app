@@ -5,6 +5,7 @@ export interface AnnouncementFromModel extends AnnouncementToModel {
 	id: string
 	user: EmbeddedUser
 	users: Record<ClassUsers, string[]>
+	readAt: Record<string, number>
 	createdAt: number
 	updatedAt: number
 }

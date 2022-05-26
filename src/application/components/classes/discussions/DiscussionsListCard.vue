@@ -31,13 +31,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { DiscussionEntity } from '@modules/classes'
 import { useAuth } from '@app/composable/auth/auth'
 import { formatTimeAsDigits } from '@utils/dates'
 import { documentOutline, downloadOutline } from 'ionicons/icons'
 import { useDownload } from '@app/composable/meta/media'
-import { saveDiscussionsReadState } from '@app/composable/classes/discussions'
 import { isWeb } from '@utils/constants'
 
 export default defineComponent({
@@ -54,9 +53,6 @@ export default defineComponent({
 			content, loading, openFile, downloadWeb, download: downloadApp
 		} = useDownload(props.discussion.media?.name ?? '', props.discussion.media?.link ?? '', 'discussions')
 		const download = isWeb ? downloadWeb : downloadApp
-		onMounted(async () => {
-			await saveDiscussionsReadState(props.discussion)
-		})
 		return {
 			id, formatTimeAsDigits, isWeb,
 			documentOutline, downloadOutline,

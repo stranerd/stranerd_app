@@ -21,14 +21,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { AnnouncementEntity, ClassEntity } from '@modules/classes'
 import { formatTime } from '@utils/dates'
-import { saveAnnouncementReadState, useDeleteAnnouncement } from '@app/composable/classes/announcements'
+import { useDeleteAnnouncement } from '@app/composable/classes/announcements'
 import { closeOutline, ellipsisVerticalOutline, trashOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { actionSheetController } from '@ionic/vue'
-import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'AnnouncementsListCard',
@@ -44,7 +43,6 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { id } = useAuth()
-		const router = useRouter()
 		const { loading, deleteAnnouncement } = useDeleteAnnouncement(props.announcement.classId, props.announcement.id)
 		const showMenu = async () => {
 			const actionSheet = await actionSheetController
@@ -62,9 +60,6 @@ export default defineComponent({
 				})
 			await actionSheet.present()
 		}
-		onMounted(async () => {
-			await saveAnnouncementReadState(props.announcement)
-		})
 		return { id, formatTime, ellipsisVerticalOutline, loading, showMenu }
 	}
 })

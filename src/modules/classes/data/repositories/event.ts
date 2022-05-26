@@ -69,4 +69,8 @@ export class EventRepository implements IEventRepository {
 	async delete (classId: string, id: string) {
 		return this.dataSource.delete(classId, id)
 	}
+
+	async markRead (classId: string) {
+		return this.dataSource.markRead(classId)
+	}
 }

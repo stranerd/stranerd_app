@@ -9,4 +9,5 @@ export interface AnnouncementBaseDataSource {
 	listenToMany: (classId: string, query: QueryParams, listener: Listeners<AnnouncementFromModel>) => Promise<() => void>
 	find: (classId: string, id: string) => Promise<AnnouncementFromModel | null>
 	delete: (classId: string, id: string) => Promise<void>
+	markRead: (classId: string) => Promise<boolean>
 }

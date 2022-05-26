@@ -61,4 +61,8 @@ export class DiscussionRepository implements IDiscussionRepository {
 		const model = await this.dataSource.find(classId, id)
 		return model ? this.transformer.fromJSON(model) : null
 	}
+
+	async markRead (classId: string, groupId: string) {
+		return this.dataSource.markRead(classId, groupId)
+	}
 }

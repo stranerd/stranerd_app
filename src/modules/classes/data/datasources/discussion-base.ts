@@ -7,4 +7,5 @@ export interface DiscussionBaseDataSource {
 	listenToOne: (classId: string, id: string, listener: Listeners<DiscussionFromModel>) => Promise<() => void>
 	listenToMany: (classId: string, query: QueryParams, listener: Listeners<DiscussionFromModel>) => Promise<() => void>
 	find: (classId: string, id: string) => Promise<DiscussionFromModel | null>
+	markRead: (classId: string, groupId: string) => Promise<boolean>
 }

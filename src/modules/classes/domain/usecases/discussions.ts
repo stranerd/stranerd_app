@@ -82,4 +82,8 @@ export class DiscussionsUseCase {
 			return true
 		})
 	}
+
+	async markRead (classId: string, groupId: string) {
+		return this.repository.markRead(classId, groupId)
+	}
 }

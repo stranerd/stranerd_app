@@ -9,6 +9,7 @@ export class EventEntity extends BaseEntity {
 	public readonly user: EmbeddedUser
 	public readonly data: EventDataType
 	public readonly users: Record<ClassUsers, string[]>
+	public readonly readAt: Record<string, number>
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -19,6 +20,7 @@ export class EventEntity extends BaseEntity {
 		             user,
 		             data,
 		             users,
+		             readAt,
 		             createdAt,
 		             updatedAt
 	             }: EventConstructorArgs) {
@@ -29,6 +31,7 @@ export class EventEntity extends BaseEntity {
 		this.data = data
 		this.classId = classId
 		this.users = users
+		this.readAt = readAt
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -56,6 +59,7 @@ type EventConstructorArgs = {
 	users: Record<ClassUsers, string[]>
 	data: EventDataType
 	classId: string
+	readAt: Record<string, number>
 	createdAt: number
 	updatedAt: number
 }

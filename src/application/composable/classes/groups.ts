@@ -1,26 +1,20 @@
-import { computed, onMounted, onUnmounted, ref, Ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { ClassEntity, GroupEntity, GroupFactory, GroupsUseCases } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { useClassModal } from '@app/composable/core/modals'
-import { storage } from '@utils/storage'
 import { addToArray } from '@utils/commons'
+import { useAuth } from '@app/composable/auth/auth'
 
 const global = {} as Record<string, {
 	groups: Ref<GroupEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
-	readTime: Ref<number>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-export const getGroupReadStateKey = (classId: string) => `classes-${classId}-groups`
-
-export const saveClassGroupsReadTime = (classId: string, time: number) => {
-	if (global[classId]) global[classId].readTime.value = time
-}
-
 export const useGroupList = (classId: string) => {
+	const { id } = useAuth()
 	if (global[classId] === undefined) {
 		const listener = useListener(async () => {
 			return await GroupsUseCases.listenToClassGroups(classId, {
@@ -38,15 +32,13 @@ export const useGroupList = (classId: string) => {
 		global[classId] = {
 			groups: ref([]),
 			fetched: ref(false),
-			readTime: ref(0),
 			listener,
 			...useErrorHandler(),
 			...useLoadingHandler()
 		}
 	}
 
-	watch(() => global[classId].readTime.value, async () => await storage.set(getGroupReadStateKey(classId), global[classId].readTime.value))
-	const unReadGroups = computed(() => global[classId].groups.value.filter((a) => (a.last?.createdAt ?? 0) > global[classId].readTime.value).length)
+	const unReadGroups = computed(() => global[classId].groups.value.filter((a) => (a.readAt[id.value] ?? 0) < (a.last?.createdAt ?? 0)).length)
 
 	const fetchGroups = async () => {
 		await global[classId].setError('')
@@ -63,8 +55,6 @@ export const useGroupList = (classId: string) => {
 
 	onMounted(async () => {
 		if (!global[classId].fetched.value && !global[classId].loading.value) await fetchGroups()
-		const lastRead = await storage.get(getGroupReadStateKey(classId))
-		if (lastRead) global[classId].readTime.value = lastRead
 		await global[classId].listener.start()
 	})
 	onUnmounted(async () => {

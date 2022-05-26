@@ -9,6 +9,7 @@ type AnnouncementConstructorArgs = {
 	reminder: number | null
 	users: Record<ClassUsers, string[]>
 	user: EmbeddedUser
+	readAt: Record<string, number>
 	createdAt: number
 	updatedAt: number
 }
@@ -20,11 +21,12 @@ export class AnnouncementEntity extends BaseEntity {
 	public readonly classId: string
 	public readonly reminder: number | null
 	public readonly user: EmbeddedUser
+	public readonly readAt: Record<string, number>
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, body, createdAt, users, classId, reminder, user, updatedAt
+		             id, body, createdAt, users, classId, reminder, user, readAt, updatedAt
 	             }: AnnouncementConstructorArgs) {
 		super()
 		this.id = id
@@ -33,6 +35,7 @@ export class AnnouncementEntity extends BaseEntity {
 		this.classId = classId
 		this.reminder = reminder
 		this.user = generateEmbeddedUser(user)
+		this.readAt = readAt
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}

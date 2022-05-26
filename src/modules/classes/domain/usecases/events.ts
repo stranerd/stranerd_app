@@ -80,4 +80,8 @@ export class EventsUseCase {
 		const data = await factory.toModel()
 		return await this.repository.update(data.classId, id, data)
 	}
+
+	async markRead (classId: string) {
+		return this.repository.markRead(classId)
+	}
 }
