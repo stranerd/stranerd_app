@@ -2,7 +2,7 @@
 	<div class="chat-block text-gray">
 		<div v-if="group && group.members.includes(id)" class="body">
 			<div class="flex items-center">
-				<IonIcon :icon="chatboxEllipsesOutline" class="text-4xl md:text-5xl" />
+				<IonIcon :icon="chatboxEllipsesOutline" class="text-heading5" />
 				<div class="ml-2 flex flex-col">
 					<IonText class="text-secondaryText font-semibold">{{ group.name }}</IonText>
 					<IonText class="text-sub">
@@ -11,7 +11,7 @@
 					</IonText>
 				</div>
 				<router-link :to="`/classes/${classId}/groups`" class="ml-auto flex">
-					<IonIcon :icon="closeOutline" class="text-2xl" />
+					<IonIcon :icon="closeOutline" class="text-heading3" />
 				</router-link>
 			</div>
 			<DiscussionsList :classId="classId" :groupId="groupId" class="content" />

@@ -3,7 +3,7 @@
 		<PageLoading v-if="loading" />
 
 		<div class="flex item-center justify-between mb-2 w-full">
-			<ion-text class="text-secondaryText font-bold md:text-2xl">
+			<ion-text class="text-secondaryText font-bold text-heading">
 				Question {{ questionIndex + 1 }}
 			</ion-text>
 			<div class="flex items-center text-lg text-icon_inactive gap-4">

@@ -2,7 +2,7 @@
 	<router-link :to="`/classes/${group.classId}/groups/${group.id}`"
 		class="bg-white rounded-xl flex items-center card-padding leading-none">
 		<span>
-			<IonIcon :icon="chatboxEllipsesOutline" class="text-gray text-4xl md:text-5xl" />
+			<IonIcon :icon="chatboxEllipsesOutline" class="text-gray text-heading5" />
 		</span>
 		<div class="flex flex-col w-full truncate">
 			<div class="flex gap-2 text-secondaryText items-center">

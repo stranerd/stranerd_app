@@ -31,14 +31,14 @@
 				@files="catchAttachments"
 			>
 				<ion-button class="btn-outline w-full">
-					<ion-icon :icon="imageOutline" class="!text-2xl text-primary mr-4" />
+					<ion-icon :icon="imageOutline" class="text-heading3 text-primary mr-4" />
 					Add image
 				</ion-button>
 			</FileInput>
 			<ion-button
 				class="w-1/2 btn-primary h-12"
 				type="submit" @click="createAnswer">
-				<ion-icon :icon="paperPlaneOutline" class="!text-2xl text-white mr-4" />
+				<ion-icon :icon="paperPlaneOutline" class="text-heading3 text-white mr-4" />
 				<slot name="buttonText">Send</slot>
 			</ion-button>
 		</div>

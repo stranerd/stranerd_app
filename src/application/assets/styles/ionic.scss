@@ -128,6 +128,14 @@ ion-input, ion-textarea, ion-select {
 	color: $color-bodyText !important;
 }
 
+.action-sheet-button {
+	font-size: inherit !important;
+}
+
+.action-sheet-icon {
+	font-size: 1.5em !important;
+}
+
 ion-alert, ion-popover, ion-action-sheet {
 	--background: #{$color-bodyBg} !important;
 	--color: #{$color-bodyText} !important;

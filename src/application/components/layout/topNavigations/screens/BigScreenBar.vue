@@ -12,11 +12,11 @@
 				</div>
 				<div class="w-[25%] flex-auto flex text-secondaryText">
 					<div class="flex flex-row items-center py-1 gap-8 justify-between">
-						<ion-icon :icon="addCircleOutline" class="text-2xl"
+						<ion-icon :icon="addCircleOutline" class="text-heading3"
 							@click="openCreateDashboardMenu" />
 						<router-link class="flex items-center justify-center"
 							to="/notifications">
-							<NotificationIcon :key="user?.id" class="text-2xl" />
+							<NotificationIcon :key="user?.id" class="text-heading3" />
 						</router-link>
 						<div v-if="isLoggedIn"
 							class="font-bold flex items-center justify-center gap-2 cursor-pointer"
@@ -27,7 +27,7 @@
 								<span>{{ user.bio.fullName }}</span>
 								<Verified :verified="user.isVerified" />
 							</span>
-							<ion-icon :icon="chevronDownOutline" class="text-xl"></ion-icon>
+							<ion-icon :icon="chevronDownOutline" class="text-heading2" />
 						</div>
 						<router-link v-else to="/auth/signin">
 							<avatar :size="24" />

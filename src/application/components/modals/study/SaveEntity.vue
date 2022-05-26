@@ -3,18 +3,18 @@
 		<template v-slot:title>
 			Save to
 		</template>
-		<div class="flex flex-col gap-4 mx-auto text-gray">
-			<router-link class="hidden ml-auto flex gap-1 items-center" to="/study/sets/create">
-				<IonIcon :icon="add" class="text-3xl" />
-				Create Folder
+		<div class="flex flex-col">
+			<router-link class="ml-auto flex gap-1 items-center" to="/study/sets/create">
+				<IonIcon :icon="add" class="text-heading3" />
+				<span>Create Folder</span>
 			</router-link>
-			<div v-if="sets.length === 0" class="text-center text-lg">
+			<div v-if="sets.length === 0" class="text-center text-heading">
 				No folders created. Go create one before you can save items
 			</div>
-			<div v-for="set in sets" :key="set.hash" class="flex justify-between gap-2 items-center">
-				<IonIcon :icon="folderOutline" class="text-2xl" />
-				<IonText class="w-full truncate font-semibold text-lg">{{ set.name }}</IonText>
-				<IonIcon :icon="set.allSaved.includes(entity.id) ? bookmark : bookmarkOutline" class="text-2xl"
+			<div v-for="set in sets" :key="set.hash" class="flex gap-2 items-center border-bottom-line py-4">
+				<IonIcon :icon="folderOutline" class="text-heading3" />
+				<IonText class="w-full truncate font-semibold text-heading">{{ set.name }}</IonText>
+				<IonIcon :icon="set.allSaved.includes(entity.id) ? bookmark : bookmarkOutline" class="text-heading3"
 					@click="set.allSaved.includes(entity.id) ? removeFromSet(type, entity.id, set) : saveToSet(type, entity.id, set)"
 				/>
 			</div>

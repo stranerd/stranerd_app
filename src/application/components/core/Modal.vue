@@ -5,7 +5,7 @@
 				<span class="text-heading font-bold">
 					<slot name="title">Title</slot>
 				</span>
-				<IonIcon v-if="close" :icon="closeOutline" class="text-2xl absolute right-2" @click="close" />
+				<IonIcon v-if="close" :icon="closeOutline" class="text-heading3 absolute right-2" @click="close" />
 			</div>
 			<slot name="subtext" />
 		</div>

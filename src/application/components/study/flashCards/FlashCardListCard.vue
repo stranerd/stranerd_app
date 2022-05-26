@@ -15,11 +15,15 @@
 				</template>
 			</Tag>
 			<div class="flex items-center gap-3">
-				<Avatar :id="flashCard.user.id" :name="flashCard.user.bio.fullName" :size="24"
+				<Avatar v-if="flashCard.user.id !== id" :id="flashCard.user.id" :name="flashCard.user.bio.fullName"
+					:size="24"
 					:src="flashCard.user.bio.photo" />
-				<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
+				<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-heading2"
 					text="Share this flashcard" />
 				<SaveToSet :entity="flashCard" />
+				<SpinLoading v-if="loading" class="text-heading2" />
+				<IonIcon v-if="flashCard.user.id === id" :icon="settingsOutline" class="text-heading2"
+					@click.prevent="showMenu" />
 			</div>
 		</div>
 	</router-link>
@@ -27,12 +31,23 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { arrowForwardOutline, copyOutline } from 'ionicons/icons'
+import {
+	arrowForwardOutline,
+	closeOutline,
+	copyOutline,
+	pencilOutline,
+	settingsOutline,
+	trashOutline
+} from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { FlashCardEntity } from '@modules/study'
 import Share from '@app/components/core/Share.vue'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
+import { useAuth } from '@app/composable/auth/auth'
+import { actionSheetController } from '@ionic/vue'
+import { openFlashCardEditModal, useDeleteFlashCard } from '@app/composable/study/flashCards'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'FlashCardListCard',
@@ -43,9 +58,26 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup () {
+	setup (props) {
+		const { id } = useAuth()
+		const { deleteFlashCard, loading } = useDeleteFlashCard(props.flashCard.id)
+		const router = useRouter()
+		const showMenu = async () => {
+			const actionSheet = await actionSheetController.create({
+				buttons: [
+					{
+						text: 'Edit flashCard', icon: pencilOutline,
+						handler: () => openFlashCardEditModal(props.flashCard, router)
+					},
+					{ text: 'Delete flashCard', role: 'destructive', icon: trashOutline, handler: deleteFlashCard },
+					{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
+				]
+			})
+			await actionSheet.present()
+		}
 		return {
-			copyOutline, arrowForwardOutline, formatNumber, pluralize
+			id, settingsOutline, copyOutline, arrowForwardOutline,
+			formatNumber, pluralize, loading, showMenu
 		}
 	}
 })

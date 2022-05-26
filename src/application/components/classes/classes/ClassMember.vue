@@ -12,34 +12,34 @@
 					<Tag :tag="`${user.formattedScore} pt`" />
 				</div>
 			</div>
-			<span class="ml-auto flex gap-3 items-center">
+			<span class="ml-auto flex gap-3 items-center text-heading3">
 				<template v-if="classInst.admins.includes(id)">
 					<template v-if="classInst.requests.includes(user.id)">
-						<IonIcon :icon="checkmarkOutline" class="cursor-pointer text-green text-2xl"
+						<IonIcon :icon="checkmarkOutline" class="cursor-pointer text-green"
 							@click="acceptRequest(user.id, true)" />
-						<IonIcon :icon="closeOutline" class="cursor-pointer text-red text-2xl"
+						<IonIcon :icon="closeOutline" class="cursor-pointer text-red"
 							@click="acceptRequest(user.id, false)" />
 					</template>
 					<template v-else-if="classInst.members.includes(user.id)">
 						<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
 							:icon="classInst.admins.includes(user.id) ? person : personOutline"
-							class="cursor-pointer text-primary text-2xl"
+							class="cursor-pointer text-primary"
 							@click="changeRole(user.id, ClassUsers.admins, !classInst.admins.includes(user.id))" />
 						<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
 							:icon="personRemoveOutline"
-							class="cursor-pointer text-red text-2xl"
+							class="cursor-pointer text-red"
 							@click="addToClass(user.id, false)" />
 					</template>
 					<template v-else>
 						<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
 							:icon="personAddOutline"
-							class="cursor-pointer text-primary text-2xl"
+							class="cursor-pointer text-primary"
 							@click="addToClass(user.id, true)" />
 					</template>
 				</template>
 				<template v-if="classInst.members.includes(user.id)">
 					<IonIcon v-if="user.id === id && classInst.user.id !== id"
-						:icon="exitOutline" class="cursor-pointer text-red text-2xl"
+						:icon="exitOutline" class="cursor-pointer text-red"
 						@click="leaveClass()" />
 				</template>
 			</span>

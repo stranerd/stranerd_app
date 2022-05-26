@@ -11,7 +11,7 @@
 						<div class="flex items-center lg:mr-4 mr-2" @click="cardMode = !cardMode">
 							<ion-icon
 								:icon="!cardMode ? copyOutline: listOutline"
-								class="text-gray text-xl cursor-pointer mr-2 md:mt-0"
+								class="text-gray text-heading2 cursor-pointer mr-2 md:mt-0"
 							/>
 							<ion-text class=" flex">
 								{{ !cardMode ? 'Card mode' : 'List mode' }}
@@ -19,7 +19,7 @@
 						</div>
 						<Avatar :id="flashCard.user.id" :name="flashCard.user.bio.fullName" :size="24"
 							:src="flashCard.user.bio.photo" />
-						<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-xl"
+						<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-heading2"
 							text="Share this flashcard" />
 						<SaveToSet :entity="flashCard" />
 					</div>

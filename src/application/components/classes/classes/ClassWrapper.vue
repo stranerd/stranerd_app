@@ -32,25 +32,25 @@
 					</div>
 					<div v-if="classInst.members.includes(id)" class="lg:rounded-b-xl nav-scroll">
 						<router-link :to="`/classes/${classInst.id}/`">
-							<IonIcon :icon="informationCircleOutline" class="text-xl" />
+							<IonIcon :icon="informationCircleOutline" class="text-heading2" />
 							<IonText class="hidden md:inline">Info</IonText>
 						</router-link>
 						<router-link :to="`/classes/${classInst.id}/announcements`">
-							<IonIcon :icon="megaphoneOutline" class="text-xl" />
+							<IonIcon :icon="megaphoneOutline" class="text-heading2" />
 							<IonText class="hidden md:inline">Announcements</IonText>
 							<span v-if="!!unReadAnnouncements" class="dot bg-primary" />
 						</router-link>
 						<router-link :to="`/classes/${classInst.id}/groups`">
-							<IonIcon :icon="chatboxEllipsesOutline" class="text-xl" />
+							<IonIcon :icon="chatboxEllipsesOutline" class="text-heading2" />
 							<IonText class="hidden md:inline">Discussions</IonText>
 							<span v-if="!!unReadGroups" class="dot bg-primary" />
 						</router-link>
 						<router-link :to="`/classes/${classInst.id}/library`">
-							<IonIcon :icon="libraryOutline" class="text-xl" />
+							<IonIcon :icon="libraryOutline" class="text-heading2" />
 							<IonText class="hidden md:inline">Library</IonText>
 						</router-link>
 						<router-link :to="`/classes/${classInst.id}/members`">
-							<IonIcon :icon="peopleOutline" class="text-xl" />
+							<IonIcon :icon="peopleOutline" class="text-heading2" />
 							<IonText class="hidden md:inline">Members</IonText>
 						</router-link>
 					</div>

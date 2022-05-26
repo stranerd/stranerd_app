@@ -7,7 +7,7 @@
 			<FileInput :multiple="true" accept="image/*" @files="catchFiles">
 				<div class="flex gap-2 items-center">
 					<span class="rounded-full p-2 h-10 w-10 bg-new_gray">
-						<IonIcon :icon="imageOutline" class="text-2xl" />
+						<IonIcon :icon="imageOutline" class="text-heading3" />
 					</span>
 					<IonText class="bg-new_gray py-1 px-4 rounded-full">Photos</IonText>
 				</div>
@@ -15,7 +15,7 @@
 			<FileInput :multiple="true" accept="*" @files="catchFiles">
 				<div class="flex gap-2 items-center">
 					<span class="rounded-full p-2 h-10 w-10 bg-new_gray">
-						<IonIcon :icon="documentOutline" class="text-2xl" />
+						<IonIcon :icon="documentOutline" class="text-heading3" />
 					</span>
 					<IonText class="bg-new_gray py-1 px-4 rounded-full">Documents</IonText>
 				</div>
@@ -23,7 +23,7 @@
 			<FileInput :multiple="true" accept="video/*" @files="catchFiles">
 				<div class="flex gap-2 items-center">
 					<span class="rounded-full p-2 h-10 w-10 bg-new_gray">
-						<IonIcon :icon="videocamOutline" class="text-2xl" />
+						<IonIcon :icon="videocamOutline" class="text-heading3" />
 					</span>
 					<IonText class="bg-new_gray py-1 px-4 rounded-full">Videos</IonText>
 				</div>
@@ -32,7 +32,7 @@
 		<div v-if="showFileCaption" class="chat-block">
 			<div class="body">
 				<div class="flex items-center">
-					<IonIcon :icon="closeOutline" class="text-3xl" @click="showFileCaption = false" />
+					<IonIcon :icon="closeOutline" class="text-heading4" @click="showFileCaption = false" />
 					<span v-if="fileData.length" class="text-red ml-auto" @click="remove">
 						Remove File
 					</span>
@@ -46,12 +46,12 @@
 					<span>{{ fileData[fileIndex].factory.media.name }}</span>
 				</div>
 				<div v-if="fileData.length" class="flex gap-4 w-full items-center md:max-w-[80%] mx-auto">
-					<IonIcon :icon="chevronBackOutline" class="text-4xl"
+					<IonIcon :icon="chevronBackOutline" class="text-heading5"
 						@click="fileIndex === 0 ? fileIndex : fileIndex--" />
 					<IonInput v-model="fileData[fileIndex].factory.content" class="border border-new_gray"
 						placeholder="Add a caption" />
 					<IonIcon :icon="chevronForwardOutline"
-						class="text-4xl"
+						class="text-heading5"
 						@click="fileIndex === fileData.length - 1 ? fileIndex : fileIndex++" />
 				</div>
 				<div class="flex items-center gap-2 md:gap-4 overflow-x-auto mt-auto">
@@ -60,13 +60,13 @@
 						@click="fileIndex = index">
 						<img v-if="file.factory.media.type.includes('image')" :src="file.data" />
 						<IonIcon v-else-if="file.factory.media.type.includes('video')" :icon="videocamOutline"
-							class="text-4xl" />
-						<IonIcon v-else :icon="documentOutline" class="text-4xl" />
+							class="text-heading5" />
+						<IonIcon v-else :icon="documentOutline" class="text-heading5" />
 					</div>
 					<FileInput :multiple="true" accept="*" @files="catchMoreFiles">
 						<div
 							class="rounded-xl flex items-center justify-center cursor-pointer w-12 h-12 md:w-24 md:h-24 border border-new_gray">
-							<IonIcon :icon="addOutline" class="text-4xl" />
+							<IonIcon :icon="addOutline" class="text-heading5" />
 						</div>
 					</FileInput>
 					<div class="ml-auto">
@@ -82,7 +82,7 @@
 		<form class="flex items-center md:gap-2"
 			@submit.prevent="createTextDiscussion">
 			<IonIcon :icon="showFileUpload ? closeCircleOutline : addCircleOutline"
-				class="text-3xl md:text-5xl" @click="showFileUpload = !showFileUpload" />
+				class="text-heading4" @click="showFileUpload = !showFileUpload" />
 			<IonInput v-model="factory.content" class="flex-grow" placeholder="Send a message" required />
 			<IonButton :disabled="!factory.valid || loadingCounter" color="primary" shape="round"
 				size="small" type="submit">

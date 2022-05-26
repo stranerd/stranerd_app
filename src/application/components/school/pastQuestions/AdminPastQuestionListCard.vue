@@ -18,7 +18,7 @@
 							<DisplayHtml :html="option" />
 						</IonText>
 						<IonIcon :icon="pastQuestion.data.correctIndex === index ? checkmarkDoneOutline : null"
-							class="text-xl text-green" />
+							class="text-heading2 text-green" />
 					</div>
 				</div>
 				<div>

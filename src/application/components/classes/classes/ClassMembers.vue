@@ -18,7 +18,7 @@
 				<form class="px-4 md:px-0 flex gap-2 items-center" @submit.prevent="searchUsers">
 					<ion-input v-model="detail" class="bg-white border border-faded_gray w-full"
 						placeholder="Search for users" />
-					<IonIcon :icon="trashOutline" class="text-red text-2xl" />
+					<IonIcon :icon="trashOutline" class="text-red text-heading3" />
 				</form>
 				<ClassMember v-for="user in users" :key="user.hash" :classInst="classInst" :user="user" />
 			</div>

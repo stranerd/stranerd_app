@@ -5,14 +5,14 @@
 				@click="flipped = !flipped">
 				<div class="front bg-white w-full">
 					<section v-if="!flipped"
-						class="h-[48vh] overflow-y-auto flex text-center custom-shadow text-2xl p-4 mx-auto">
+						class="h-[48vh] overflow-y-auto flex text-center custom-shadow text-heading3 p-4 mx-auto">
 						<DisplayHtml :html="flashCard.set[page].question" class="w-full my-auto overflow-y-auto" />
 					</section>
 				</div>
 
 				<div class="back bg-white w-full">
 					<section v-if="flipped"
-						class="h-[48vh] overflow-y-auto flex text-center custom-shadow text-2xl p-4 mx-auto">
+						class="h-[48vh] overflow-y-auto flex text-center custom-shadow text-heading3 p-4 mx-auto">
 						<DisplayHtml :html="flashCard.set[page].answer" class="w-full my-auto" />
 					</section>
 				</div>
@@ -24,13 +24,13 @@
 
 			<ion-icon
 				:icon="isPlaying ? pauseOutline : playOutline"
-				class="text-icon_inactive text-xl cursor-pointer"
+				class="text-icon_inactive text-heading2 cursor-pointer"
 				@click="isPlaying ? pauseCard() : playCard()"
 			/>
 			<div class="flex items-center gap-4">
 				<ion-icon
 					:icon="chevronBackOutline"
-					class="text-icon_inactive text-xl cursor-pointer "
+					class="text-icon_inactive text-heading2 cursor-pointer "
 					@click="decrease"
 				/>
 
@@ -39,13 +39,13 @@
 				</ion-text>
 				<ion-icon
 					:icon="chevronForwardOutline"
-					class="text-icon_inactive text-xl cursor-pointer"
+					class="text-icon_inactive text-heading2 cursor-pointer"
 					@click="increase"
 				/>
 			</div>
 			<ion-icon
 				:icon="isFullscreen ? contractOutline : scanOutline"
-				class="text-icon_inactive text-xl cursor-pointer"
+				class="text-icon_inactive text-heading2 cursor-pointer"
 				@click="toggleFullscreen"
 			/>
 		</div>

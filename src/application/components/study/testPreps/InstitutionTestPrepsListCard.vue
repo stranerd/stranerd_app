@@ -6,7 +6,7 @@
 		</ion-text>
 		<div class="flex justify-between items-center gap-2 text-sub">
 			<Tag :tag="yearGap" class="w-full" />
-			<IonIcon :icon="arrowForwardOutline" class="text-xl ml-auto" />
+			<IonIcon :icon="arrowForwardOutline" class="text-heading2 ml-auto" />
 		</div>
 	</router-link>
 </template>

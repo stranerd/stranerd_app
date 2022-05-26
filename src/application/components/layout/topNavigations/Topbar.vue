@@ -4,7 +4,7 @@
 			<div class="flex items-center justify-between">
 				<div>
 					<!-- TODO: Only show back button if there is a previous page & it's not the homePage -->
-					<ion-icon v-if="true" :icon="arrowBackOutline" class="text-xl" @click="$router.go(-1)" />
+					<ion-icon v-if="true" :icon="arrowBackOutline" class="text-heading2" @click="$router.go(-1)" />
 				</div>
 				<router-link to="/">
 					<IonText class="font-bold text-heading">

@@ -45,7 +45,7 @@
 				class="w-full flex bg-white items-center p-4 rounded-xl text-lg text-icon_inactive justify-center font-bold cursor-pointer"
 				@click="factory.addQuestion"
 			>
-				<ion-icon :icon="addOutline" class="text-2xl" />
+				<ion-icon :icon="addOutline" class="text-heading3" />
 				<ion-text>ADD CARD</ion-text>
 			</div>
 

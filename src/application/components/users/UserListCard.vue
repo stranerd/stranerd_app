@@ -16,15 +16,15 @@
 		</div>
 		<div class="text-gray flex justify-between items-center font-bold">
 			<div class="bg-light_gray rounded-full flex gap-1 items-center">
-				<IonIcon :icon="helpCircleOutline" class="text-lg lg:text-3xl text-gray" />
+				<IonIcon :icon="helpCircleOutline" class="text-heading2 text-gray" />
 				<span>{{ formatNumber(user.meta.questions, 0) }}</span>
 			</div>
 			<div class="bg-light_gray rounded-full flex gap-1 items-center">
-				<IonIcon :icon="chatboxEllipsesOutline" class="text-lg lg:text-3xl text-gray" />
+				<IonIcon :icon="chatboxEllipsesOutline" class="text-heading2 text-gray" />
 				<span>{{ formatNumber(user.meta.answers, 0) }}</span>
 			</div>
 			<div class="bg-light_gray rounded-full flex gap-1 items-center">
-				<IonIcon :icon="flashOutline" class="text-lg lg:text-3xl text-gray" />
+				<IonIcon :icon="flashOutline" class="text-heading2 text-gray" />
 				<span>{{ formatNumber(user.meta.flashCards, 0) }}</span>
 			</div>
 		</div>

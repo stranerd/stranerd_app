@@ -13,10 +13,10 @@
 				<img v-if="discussion.isImage" :src="discussion.media.link" alt="" class="w-full rounded-t-xl">
 				<div :class="{'rounded-t-xl': !discussion.isImage}"
 					class="bg-white flex gap-2 items-center p-3 rounded-b-xl">
-					<IonIcon :icon="documentOutline" class="text-2xl" />
+					<IonIcon :icon="documentOutline" class="text-heading3" />
 					<IonText class="w-full truncate">{{ discussion.media.name }}</IonText>
-					<SpinLoading v-if="loading" class="text-2xl" />
-					<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-2xl" color="primary"
+					<SpinLoading v-if="loading" class="text-heading3" />
+					<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-heading3" color="primary"
 						@click="download" />
 				</div>
 			</div>
