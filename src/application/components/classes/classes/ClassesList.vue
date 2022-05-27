@@ -1,7 +1,8 @@
 <template>
 	<div class="showcase-flex">
-		<form class="px-2 py-4 border-bottom-line" @submit.prevent="search">
-			<IonSearchbar v-model.trim="searchValue" placeholder="Find a class" type="search" />
+		<form class="p-2 border-bottom-line" @submit.prevent="search">
+			<IonSearchbar v-model.trim="searchValue" class="!bg-[transparent]" placeholder="Find a class"
+				type="search" />
 		</form>
 		<BlockLoading v-if="loading" />
 		<template v-else-if="searchMode">
@@ -43,9 +44,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-searchbar {
-		background: transparent !important;
-	}
-</style>

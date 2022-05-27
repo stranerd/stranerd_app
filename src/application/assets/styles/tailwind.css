@@ -125,6 +125,10 @@
 	}
 
 	.card-padding {
-		@apply px-4 py-6 gap-2 md:gap-4
+		@apply p-4 gap-2 md:gap-4
+	}
+
+	[class*="-line"].card-padding {
+		@apply py-6;
 	}
 }

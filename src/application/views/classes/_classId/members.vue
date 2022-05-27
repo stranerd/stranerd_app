@@ -13,7 +13,7 @@ import ClassMembers from '@app/components/classes/classes/ClassMembers.vue'
 
 export default defineComponent({
 	name: 'ClassClassIdMembers',
-	displayName: 'Class',
+	displayName: 'Classmates',
 	components: { ClassWrapper, ClassMembers }
 })
 </script>

@@ -1,44 +1,19 @@
 <template>
-	<div class="flex flex-col gap-4">
-		<div v-if="classInst.admins.includes(id)" class="px-4 md:px-0">
-			<IonSegment v-model="tab"
-				class="w-full bg-new_gray text-gray border border-new_gray border-xl md:border-white">
-				<IonSegmentButton class="w-full" value="members">Members</IonSegmentButton>
-				<IonSegmentButton class="w-full" value="requests">Requests</IonSegmentButton>
-				<IonSegmentButton class="w-full" value="invite">Invite</IonSegmentButton>
-			</IonSegment>
-		</div>
-		<template v-if="tab === 'requests'">
-			<div class="block md:gap-2">
-				<ClassMember v-for="request in requests" :key="request.hash" :classInst="classInst" :user="request" />
+	<div class="flex flex-col">
+		<BlockLoading v-if="loading" />
+		<div v-for="({ name, users }, index) in [
+			{ name: 'Admin', users: admins },
+			{ name: 'Members', users: members },
+			...(classInst.admins.includes(id) ? [{ name: 'Requests', users: requests }] : [])
+		]" :key="name" class="flex flex-col py-2 border-bottom-line">
+			<div class="flex gap-4 items-center p-4" @click="show[index] = !show[index]">
+				<IonText class="font-bold capitalize truncate w-full">{{ name }}</IonText>
+				<IonIcon :icon="show[index] ? chevronDownOutline : chevronUpOutline" class="text-heading2" />
 			</div>
-		</template>
-		<template v-else-if="tab === 'invite'">
-			<div class="block md:gap-2">
-				<form class="px-4 md:px-0 flex gap-2 items-center" @submit.prevent="searchUsers">
-					<ion-input v-model="detail" class="bg-white border border-faded_gray w-full"
-						placeholder="Search for users" />
-					<IonIcon :icon="trashOutline" class="text-red text-heading3" />
-				</form>
+			<div v-if="show[index]" class="flex flex-col">
 				<ClassMember v-for="user in users" :key="user.hash" :classInst="classInst" :user="user" />
 			</div>
-		</template>
-		<template v-else>
-			<div v-if="admins.length" class="block md:gap-2">
-				<IonText>Admins</IonText>
-				<ClassMember v-for="admin in admins" :key="admin.hash" :classInst="classInst" :user="admin" />
-			</div>
-			<div v-if="tutors.length" class="block md:gap-2">
-				<IonText>Tutors</IonText>
-				<ClassMember v-for="tutor in tutors" :key="tutor.hash" :classInst="classInst" :user="tutor" />
-			</div>
-			<div v-if="members.length" class="block md:gap-2">
-				<IonText>Others</IonText>
-				<ClassMember v-for="member in members" :key="member.hash" :classInst="classInst" :user="member" />
-			</div>
-		</template>
-		<PageLoading v-if="loading" />
-		<PageLoading v-if="searchLoading" />
+		</div>
 	</div>
 </template>
 
@@ -47,10 +22,8 @@ import { defineComponent, ref } from 'vue'
 import { useClassMembersList } from '@app/composable/classes/classes'
 import { ClassEntity } from '@modules/classes'
 import ClassMember from '@app/components/classes/classes/ClassMember.vue'
-import { IonSegment, IonSegmentButton } from '@ionic/vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { useSearchUsers } from '@app/composable/users'
-import { trashOutline } from 'ionicons/icons'
+import { chevronDownOutline, chevronUpOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'ClassMembers',
@@ -60,59 +33,15 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { ClassMember, IonSegment, IonSegmentButton },
+	components: { ClassMember },
 	setup (props) {
 		const { id } = useAuth()
-		const tab = ref('members')
+		const show = ref([])
 		const { loading, error, admins, tutors, members, requests } = useClassMembersList(props.classInst)
-		const { loading: searchLoading, error: searchError, users, detail, searchUsers, reset } = useSearchUsers()
 		return {
-			id, tab, admins, tutors, members, loading, error, requests,
-			searchLoading, searchError, users, detail, searchUsers, reset, trashOutline
+			id, show, admins, tutors, members, loading, error, requests,
+			chevronDownOutline, chevronUpOutline
 		}
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	.block {
-		background: $color-white;
-		display: flex;
-		flex-direction: column;
-
-		& > ion-text {
-			font-weight: 600;
-			padding: 0 1rem;
-			color: $color-mainDark;
-			@media (min-width: $md) {
-				padding: 0;
-			}
-		}
-
-		@media (min-width: $md) {
-			background: inherit;
-		}
-	}
-
-	ion-segment {
-		border-radius: 0.5rem;
-	}
-
-	ion-segment-button {
-		--background-checked: #{$color-white};
-		--background-focused: #{$color-white};
-		--indicator-color: #{$color-white};
-		--padding-top: 0.75rem;
-		--padding-bottom: 0.75rem;
-		font-weight: bold;
-		border-radius: 0.5rem;
-		text-transform: capitalize;
-		max-width: unset;
-		color: $color-gray;
-	}
-
-	.segment-button-checked {
-		color: $color-gray !important;
-		background: $color-white;
-	}
-</style>

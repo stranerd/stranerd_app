@@ -1,23 +1,44 @@
 <template>
-	<router-link :to="`/classes/${classInst.id}`"
-		class="card-padding flex items-center w-full">
-		<Avatar :name="classInst.name" :size="40" :src="classInst.photo" class="md:hidden" />
-		<Avatar :name="classInst.name" :size="48" :src="classInst.photo" class="hidden md:inline" />
-		<div class="flex flex-col">
-			<ion-text class="text-secondaryText font-500 capitalize">
-				{{ classInst.name }}
-			</ion-text>
-			<ion-text class="text-sub text-gray">
-				{{ classInst.members.length }} {{ pluralize(classInst.members.length, 'member', 'members') }}
-			</ion-text>
+	<div class="!gap-4 card-padding flex flex-col">
+		<div class="flex gap-4 items-center" @click="show = !show">
+			<Avatar :name="classInst.name" :size="36" :src="classInst.photo" />
+			<IonText class="font-bold capitalize truncate w-full">{{ classInst.name }}</IonText>
+			<IonIcon :icon="show ? chevronDownOutline : chevronUpOutline" class="text-heading2" />
 		</div>
-	</router-link>
+		<div v-if="show" class="flex flex-col gap-2 text-secondaryText px-2">
+			<router-link v-for="{ name, path, icon } in [
+					{ name: 'Announcements', path: 'announcements', icon: megaphoneOutline },
+					{ name: 'Events', path: 'events', icon: calendarOutline },
+					{ name: 'Timetable', path: 'timetable', icon: calendarClearOutline },
+					{ name: 'Scheme of Work', path: 'scheme', icon: listOutline },
+					{ name: 'Discussions', path: 'groups', icon: chatbubblesOutline },
+					{ name: 'Classmates', path: 'members', icon: peopleOutline },
+					{ name: 'Library', path: 'library', icon: libraryOutline },
+					{ name: 'About', path: '', icon: informationCircleOutline }
+				]" :key="path" :to="`/classes/${classInst.id}/${path}`"
+				class="flex gap-4 items-center py-2">
+				<IonIcon :icon="icon" class="text-heading2" />
+				<IonText>{{ name }}</IonText>
+			</router-link>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { ClassEntity } from '@modules/classes'
-import { pluralize } from '@utils/commons'
+import {
+	calendarClearOutline,
+	calendarOutline,
+	chatbubblesOutline,
+	chevronDownOutline,
+	chevronUpOutline,
+	informationCircleOutline,
+	libraryOutline,
+	listOutline,
+	megaphoneOutline,
+	peopleOutline
+} from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'ClassListCard',
@@ -28,7 +49,12 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { pluralize }
+		const show = ref(false)
+		return {
+			show, chevronDownOutline, chevronUpOutline,
+			chatbubblesOutline, informationCircleOutline, libraryOutline,
+			megaphoneOutline, peopleOutline, listOutline, calendarOutline, calendarClearOutline
+		}
 	}
 })
 </script>

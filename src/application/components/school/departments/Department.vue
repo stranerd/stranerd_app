@@ -1,7 +1,7 @@
 <template>
 	<span class="capitalize">
 		<slot :department="department">
-			{{ department?.name ?? '' }}
+			{{ department?.name ?? 'Department' }}
 		</slot>
 	</span>
 </template>

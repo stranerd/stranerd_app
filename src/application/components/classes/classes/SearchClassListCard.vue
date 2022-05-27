@@ -1,25 +1,28 @@
 <template>
-	<router-link :to="`/classes/${classInst.id}`" class="gap-2 p-4 flex flex-col">
+	<router-link :to="`/classes/${classInst.id}`" class="!gap-4 card-padding flex flex-col">
 		<div class="flex gap-2 items-center">
-			<Avatar :name="classInst.name" :size="40" :src="classInst.photo" class="md:hidden" />
-			<Avatar :name="classInst.name" :size="48" :src="classInst.photo" class="hidden md:inline" />
-			<div class="flex flex-col">
-				<ion-text class="text-secondaryText font-500 capitalize">
-					{{ classInst.name }}
-				</ion-text>
-				<ion-text class="text-sub text-gray">
-					{{ classInst.members.length }} {{ pluralize(classInst.members.length, 'member', 'members') }}
-				</ion-text>
+			<Avatar :name="classInst.name" :size="36" :src="classInst.photo" />
+			<div class="flex flex-col gap-1 w-full">
+				<IonText class="font-bold capitalize leading-none">{{ classInst.name }}</IonText>
+				<span class="flex items-center gap-1 text-sub text-secondaryText leading-none">
+					<Institution :institutionId="classInst.school.institutionId" />
+					<IonIcon :icon="ellipse" class="text-[4px]" />
+					<Department :departmentId="classInst.school.departmentId" :facultyId="classInst.school.facultyId" />
+				</span>
 			</div>
-			<div v-if="!classInst.members.includes(id)" class="ml-auto">
-				<BlockLoading v-if="loading" />
-				<IonButton v-else class="btn-primary"
-					@click="requestToJoinClass(!classInst.requests.includes(id))">
-					{{ classInst.requests.includes(id) ? 'Cancel Request' : 'Join' }}
-				</IonButton>
-			</div>
+			<IonButton v-if="!classInst.members.includes(id)" :disabled="loading" class="btn-primary"
+				style="--border-radius: 10rem;"
+				@click="requestToJoinClass(!classInst.requests.includes(id))">
+				<SpinLoading v-if="loading" />
+				<span v-else>Join</span>
+			</IonButton>
 		</div>
-		<span>{{ classInst.description }}</span>
+		<IonText class="text-secondaryText">{{ classInst.description }}</IonText>
+		<IonButton v-if="classInst.requests.includes(id)" class="btn-outline"
+			@click="requestToJoinClass(!classInst.requests.includes(id))">
+			<SpinLoading v-if="loading" />
+			<span v-else>Cancel Request</span>
+		</IonButton>
 	</router-link>
 </template>
 
@@ -29,9 +32,14 @@ import { ClassEntity } from '@modules/classes'
 import { pluralize } from '@utils/commons'
 import { useClassMembersList } from '@app/composable/classes/classes'
 import { useAuth } from '@app/composable/auth/auth'
+import { ellipse } from 'ionicons/icons'
+import Institution from '@app/components/school/institutions/Institution.vue'
+import Department from '@app/components/school/departments/Department.vue'
+import SpinLoading from '@app/components/core/loading/SpinLoading.vue'
 
 export default defineComponent({
 	name: 'SearchClassListCard',
+	components: { SpinLoading, Institution, Department },
 	props: {
 		classInst: {
 			type: ClassEntity,
@@ -41,7 +49,7 @@ export default defineComponent({
 	setup (props) {
 		const { id } = useAuth()
 		const { loading, requestToJoinClass } = useClassMembersList(props.classInst, true)
-		return { id, pluralize, loading, requestToJoinClass }
+		return { id, pluralize, loading, requestToJoinClass, ellipse }
 	}
 })
 </script>
