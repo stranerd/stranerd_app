@@ -2,8 +2,9 @@ import { IUserRepository } from '../irepositories/iuser'
 import { RankingTimes } from '../types'
 import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { UserEntity } from '../entities/user'
-import { SEARCH_PAGINATION_LIMIT } from '@utils/constants'
 import { UserSchoolFactory } from '../factories/userSchool'
+
+const searchFields = ['bio.firstName', 'bio.lastName', 'bio.email']
 
 export class UsersUseCase {
 	private repository: IUserRepository
@@ -73,12 +74,8 @@ export class UsersUseCase {
 	}
 
 	async search (detail: string) {
-		const query: QueryParams = detail ? {
-			all: true,
-			search: { value: detail, fields: ['bio.firstName', 'bio.lastName', 'bio.email'] }
-		} : {
-			limit: SEARCH_PAGINATION_LIMIT,
-			sort: [{ field: 'createdAt', desc: true }]
+		const query: QueryParams = {
+			all: true, search: { value: detail, fields: searchFields }
 		}
 		return (await this.repository.get(query)).results
 	}

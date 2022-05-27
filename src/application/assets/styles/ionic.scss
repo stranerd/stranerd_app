@@ -75,11 +75,16 @@ ion-popover {
 	flex-direction: row-reverse !important;
 	align-items: center;
 	font-size: 0.9rem !important;
-}
 
-.searchbar-search-icon, .searchbar-cancel-button {
-	position: static !important;
-	margin: 0 0.5rem !important;
+	.searchbar-search-icon {
+		position: static !important;
+		margin: 0 1rem 0 0.5rem !important;
+	}
+
+	.searchbar-cancel-button {
+		position: static !important;
+		margin: 0 0.5rem 0 1rem !important;
+	}
 }
 
 .searchbar-input {
@@ -94,7 +99,7 @@ ion-searchbar {
 	padding: 0 0.25rem !important;
 	height: 44px !important;
 	border-radius: .75rem !important;
-	--placeholder-color: #{$color-secondaryText} !important;
+	--placeholder-color: inherit !important;
 	--cancel-button-color: inherit !important;
 	--clear-button-color: inherit !important;
 	--icon-color: inherit !important;

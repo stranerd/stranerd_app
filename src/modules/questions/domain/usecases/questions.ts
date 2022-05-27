@@ -1,7 +1,7 @@
 import { IQuestionRepository } from '../irepositories/iquestion'
 import { QuestionFactory } from '../factories/question'
 import { Conditions, Listeners, QueryParams } from '@modules/core'
-import { PAGINATION_LIMIT, SEARCH_PAGINATION_LIMIT } from '@utils/constants'
+import { PAGINATION_LIMIT } from '@utils/constants'
 import { QuestionEntity } from '../entities/question'
 
 const searchFields = ['body']
@@ -87,12 +87,8 @@ export class QuestionsUseCase {
 	}
 
 	async search (detail: string) {
-		const query: QueryParams = detail ? {
-			all: true,
-			search: { value: detail, fields: searchFields }
-		} : {
-			limit: SEARCH_PAGINATION_LIMIT,
-			sort: [{ field: 'createdAt', desc: true }]
+		const query: QueryParams = {
+			all: true, search: { value: detail, fields: searchFields }
 		}
 		return (await this.repository.get(query)).results
 	}

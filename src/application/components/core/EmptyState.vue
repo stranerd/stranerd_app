@@ -1,6 +1,6 @@
 <template>
 	<div class="w-full flex flex-col items-center justify-center p-4 md:py-8 gap-3 text-center">
-		<p v-html="info" />
+		<p class="w-full" v-html="info" />
 		<slot>
 			<router-link v-if="btnText && route" :class="btnTextClass" :to="route"
 				class="py-3 px-7 border border-bodyText font-bold rounded-xl">

@@ -1,8 +1,10 @@
 import { ITestPrepRepository } from '../irepositories/itestPrep'
 import { TestPrepFactory } from '../factories/testPrep'
 import { Conditions, Listeners, QueryParams } from '@modules/core'
-import { PAGINATION_LIMIT, SEARCH_PAGINATION_LIMIT } from '@utils/constants'
+import { PAGINATION_LIMIT } from '@utils/constants'
 import { TestPrepEntity } from '../entities/testPrep'
+
+const searchFields = ['name']
 
 export class TestPrepsUseCase {
 	private repository: ITestPrepRepository
@@ -73,12 +75,8 @@ export class TestPrepsUseCase {
 	}
 
 	async search (detail: string) {
-		const query: QueryParams = detail ? {
-			all: true,
-			search: { value: detail, fields: ['name'] }
-		} : {
-			limit: SEARCH_PAGINATION_LIMIT,
-			sort: [{ field: 'createdAt', desc: true }]
+		const query: QueryParams = {
+			all: true, search: { value: detail, fields: searchFields }
 		}
 		return (await this.repository.get(query)).results
 	}

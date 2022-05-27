@@ -1,16 +1,23 @@
 <template>
 	<div class="showcase-flex">
-		<div v-if="user?.isVerified" class="flex items-center justify-end px-4 pt-4 md:p-0">
-			<router-link class="w-full md:w-auto" to="/classes/create">
-				<ion-button class="btn-primary font-bold w-full">
-					Create a class
-				</ion-button>
-			</router-link>
-		</div>
-		<EmptyState v-if="!loading && !error && classes.length === 0" info="You are not a member of any class!" />
-		<ClassListCard v-for="classInst in classes" :key="classInst" :classInst="classInst"
-			class="border-bottom-line" />
+		<form class="px-2 py-4 border-bottom-line" @submit.prevent="search">
+			<IonSearchbar v-model.trim="searchValue" placeholder="Find a class" type="search" />
+		</form>
 		<BlockLoading v-if="loading" />
+		<template v-else-if="searchMode">
+			<div v-if="searchResults.length === 0" class="p-4">
+				<EmptyState class="bg-itemBg p-4 rounded-xl !text-left"
+					info="If you cannot find your class, contact your class rep to create it." />
+			</div>
+			<SearchClassListCard v-for="classInst in searchResults" :key="classInst.hash" :classInst="classInst"
+				class="border-bottom-line" />
+		</template>
+		<template v-else>
+			<EmptyState v-if="!loading && !error && classes.length === 0" class="!text-left border-bottom-line py-6"
+				info="You are not in a class!" />
+			<ClassListCard v-for="classInst in classes" :key="classInst.hash" :classInst="classInst"
+				class="border-bottom-line" />
+		</template>
 	</div>
 </template>
 
@@ -18,15 +25,27 @@
 import { defineComponent } from 'vue'
 import ClassListCard from '@app/components/classes/classes/ClassListCard.vue'
 import { useUserClassList } from '@app/composable/users/users/classes'
-import { useAuth } from '@app/composable/auth/auth'
+import { IonSearchbar } from '@ionic/vue'
+import SearchClassListCard from '@app/components/classes/classes/SearchClassListCard.vue'
 
 export default defineComponent({
 	name: 'ClassesList',
-	components: { ClassListCard },
+	components: { ClassListCard, IonSearchbar, SearchClassListCard },
 	setup () {
-		const { user } = useAuth()
-		const { classes, error, loading } = useUserClassList()
-		return { user, classes, error, loading }
+		const {
+			classes, error, loading,
+			searchMode, searchValue, searchResults, search
+		} = useUserClassList()
+		return {
+			classes, error, loading,
+			searchMode, searchValue, searchResults, search
+		}
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+	ion-searchbar {
+		background: transparent !important;
+	}
+</style>

@@ -1,7 +1,7 @@
 import { IDocumentRepository } from '../irepositories/idocument'
 import { DocumentFactory } from '../factories/document'
 import { Conditions, Listeners, QueryParams } from '@modules/core'
-import { PAGINATION_LIMIT, SEARCH_PAGINATION_LIMIT } from '@utils/constants'
+import { PAGINATION_LIMIT } from '@utils/constants'
 import { DocumentEntity } from '../entities/document'
 
 const searchFields = ['title', 'content']
@@ -101,12 +101,8 @@ export class DocumentsUseCase {
 	}
 
 	async search (detail: string) {
-		const query: QueryParams = detail ? {
-			all: true,
-			search: { value: detail, fields: searchFields }
-		} : {
-			limit: SEARCH_PAGINATION_LIMIT,
-			sort: [{ field: 'createdAt', desc: true }]
+		const query: QueryParams = {
+			all: true, search: { value: detail, fields: searchFields }
 		}
 		return (await this.repository.get(query)).results
 	}

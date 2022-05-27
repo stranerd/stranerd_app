@@ -31,7 +31,7 @@ import { useClassMembersList } from '@app/composable/classes/classes'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
-	name: 'ExploreClassListCard',
+	name: 'SearchClassListCard',
 	props: {
 		classInst: {
 			type: ClassEntity,

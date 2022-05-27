@@ -125,6 +125,6 @@
 	}
 
 	.card-padding {
-		@apply p-4 gap-2 md:gap-4
+		@apply px-4 py-6 gap-2 md:gap-4
 	}
 }

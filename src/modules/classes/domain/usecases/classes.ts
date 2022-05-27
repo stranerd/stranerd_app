@@ -2,8 +2,9 @@ import { IClassRepository } from '../irepositories/iclass'
 import { ClassFactory } from '../factories/class'
 import { ClassEntity } from '../entities/class'
 import { Listeners, QueryKeys, QueryParams } from '@modules/core'
-import { SEARCH_PAGINATION_LIMIT } from '@utils/constants'
 import { ClassUsers } from '../types'
+
+const searchFields = ['name', 'description']
 
 export class ClassesUseCase {
 	private repository: IClassRepository
@@ -26,6 +27,10 @@ export class ClassesUseCase {
 
 	async changeMemberRole (id: string, userId: string, role: ClassUsers, add: boolean) {
 		return await this.repository.changeMemberRole(id, userId, role, add)
+	}
+
+	async update (id: string, factory: ClassFactory) {
+		return await this.repository.update(id, await factory.toModel())
 	}
 
 	async delete (id: string) {
@@ -73,18 +78,10 @@ export class ClassesUseCase {
 	}
 
 	async search (detail: string) {
-		const query: QueryParams = detail ? {
-			all: true,
-			search: { value: detail, fields: ['name', 'description'] }
-		} : {
-			limit: SEARCH_PAGINATION_LIMIT,
-			sort: [{ field: 'createdAt', desc: true }]
+		const query: QueryParams = {
+			all: true, search: { value: detail, fields: searchFields }
 		}
 
 		return (await this.repository.get(query)).results
-	}
-
-	async update (id: string, factory: ClassFactory) {
-		return await this.repository.update(id, await factory.toModel())
 	}
 }

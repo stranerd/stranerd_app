@@ -1,7 +1,7 @@
 import { IFlashCardRepository } from '../irepositories/iflashCard'
 import { FlashCardFactory } from '../factories/flashCard'
 import { Conditions, Listeners, QueryParams } from '@modules/core'
-import { PAGINATION_LIMIT, SEARCH_PAGINATION_LIMIT } from '@utils/constants'
+import { PAGINATION_LIMIT } from '@utils/constants'
 import { FlashCardEntity } from '../entities/flashCard'
 
 const searchFields = ['title', 'set']
@@ -101,12 +101,8 @@ export class FlashCardsUseCase {
 	}
 
 	async search (detail: string) {
-		const query: QueryParams = detail ? {
-			all: true,
-			search: { value: detail, fields: searchFields }
-		} : {
-			limit: SEARCH_PAGINATION_LIMIT,
-			sort: [{ field: 'createdAt', desc: true }]
+		const query: QueryParams = {
+			all: true, search: { value: detail, fields: searchFields }
 		}
 		return (await this.repository.get(query)).results
 	}
