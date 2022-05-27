@@ -1,14 +1,9 @@
 <template>
-	<IonPage>
-		<IonContent>
-			<h1>Create Announcement</h1>
-		</IonContent>
-	</IonPage>
+	<div />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonContent, IonPage } from '@ionic/vue'
 import { useClassModal } from '@app/composable/core/modals'
 import { getAnnouncementClass } from '@app/composable/classes/announcements'
 import { useAuth } from '@app/composable/auth/auth'
@@ -16,7 +11,6 @@ import { useAuth } from '@app/composable/auth/auth'
 export default defineComponent({
 	name: 'ClassesClassIdAnnouncementsCreate',
 	displayName: 'Post Announcement',
-	components: { IonContent, IonPage },
 	middlewares: ['isAuthenticated', async ({ from }) => {
 		const { id } = useAuth()
 		const classInst = getAnnouncementClass()

@@ -11,7 +11,7 @@ import { useStudyModal } from '@app/composable/core/modals'
 export default defineComponent({
 	name: 'StudyDocumentsDocumentIdEdit',
 	displayName: 'Edit Document',
-	middlewares: ['isAuthenticated', async ({ to, from }) => {
+	middlewares: ['isAuthenticated', async ({ from, to }) => {
 		const { id } = useAuth()
 		const { documentId } = to.params
 		const document = getEditingDocument()
