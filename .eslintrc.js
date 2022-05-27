@@ -2,7 +2,7 @@ module.exports = {
 	root: true,
 	env: {
 		browser: true,
-		node: true
+		es2021: true
 	},
 	extends: [
 		'plugin:vue/vue3-essential',
@@ -10,7 +10,7 @@ module.exports = {
 		'@vue/typescript/recommended'
 	],
 	parserOptions: {
-		ecmaVersion: 2020,
+		ecmaVersion: 2021,
 		parser: '@typescript-eslint/parser'
 	},
 	rules: {
