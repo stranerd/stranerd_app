@@ -37,12 +37,12 @@ export default defineComponent({
 	setup () {
 		const {
 			filteredQuestions: questions, error, loading, hasMore, fetchOlderQuestions,
-			answeredChoices, answered, subject
+			answeredChoices, answered, 
 		} = useQuestionList()
 
 		return {
 			questions, error, loading, hasMore,
-			fetchOlderQuestions, answeredChoices, answered, subject
+			fetchOlderQuestions, answeredChoices, answered,
 		}
 	}
 })

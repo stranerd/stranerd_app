@@ -1,26 +1,26 @@
 <template>
-	<div class="flex flex-col items-start w-full bg-white md:rounded-xl border-bottom-line p-4">
+	<div class="flex flex-col items-start w-full bg-bodyBg text-bodyText md:rounded-xl border-bottom-line p-4">
 		<PageLoading v-if="loading" />
 
 		<div class="flex item-center justify-between mb-2 w-full">
 			<ion-text class="text-secondaryText font-bold text-heading">
-				Question {{ questionIndex + 1 }}
+				{{ questionIndex + 1 }} / {{total}}
 			</ion-text>
-			<div class="flex items-center text-lg text-icon_inactive gap-4">
+			<div class="flex items-center text-lg text-itemBg gap-4">
 				<IonIcon :icon="flagOutline" @click="createReport(question)" />
 			</div>
 		</div>
 
 		<div class="mb-2">
 			<IonText class="text-secondaryText mb-2 w-full">
-				<DisplayHtml :html="question.question" />
+				<DisplayHtml :html="question.question" class="!text-bodyText"/>
 			</IonText>
 			<PhotoList v-if="question.questionMedia.length" :photos="question.questionMedia" />
 		</div>
 
-		<div v-if="question.isObjective" class="answers flex flex-col w-full">
+		<div v-if="question.isObjective" class=" flex flex-col w-full">
 			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
-				class="w-full hover:bg-new_gray rounded-lg py-4"
+				class="w-full py-4"
 				@click="answer(question.id, optionIndex)">
 				<div class="flex gap-2 items-center">
 					<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
@@ -43,10 +43,10 @@
 
 		<template v-if="showAnswers && question.isObjective">
 			<span v-if="isCorrect"
-				class="rounded-md text-white bg-[#00D246] p-2 px-4">
+				class="rounded-md text-bodyText bg-[#00D246] p-2 px-4">
 				Nice, you are correct
 			</span>
-			<span v-if="isInCorrect" class="rounded-md text-white bg-[#FF6666] p-2 px-4">
+			<span v-if="isInCorrect" class="rounded-md text-bodyText bg-[#FF6666] p-2 px-4">
 				Sorry, you're wrong. The answer is {{ getAlphabet(question.data.correctIndex + 1).toUpperCase() }}
 			</span>
 
@@ -96,6 +96,10 @@ import { ReportType } from '@modules/reports'
 export default defineComponent({
 	name: 'TestQuestion',
 	props: {
+		total: {
+			type: Number,
+			required: true
+		},
 		test: {
 			type: TestEntity,
 			required: true

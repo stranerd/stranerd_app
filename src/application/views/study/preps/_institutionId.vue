@@ -2,53 +2,66 @@
 	<Justified>
 		<div class="lg:w-8/12 w-full mx-auto md:p-4 lg:p-0">
 			<div class="lg:mt-6 rounded-xl flex flex-col p-4 md:p-6 gap-4">
-				<ion-text class="text-heading font-bold text-secondaryText mx-auto text-center">
-					<Institution :institutionId="institutionId" />
-				</ion-text>
 				<div class="showcase gap-4">
-					<ion-item>
-						<ion-label class="!text-gray font-bold">Subject</ion-label>
+					<div class="flex flex-col">
+						<ion-label class="font-bold text-sm mb-2">Subject</ion-label>
 						<IonSelect v-model="courseId" class="capitalize" interface="action-sheet"
 							placeholder="Select the subject">
-							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
+							<IonSelectOption :value="null" class="capitalize">Select subject</IonSelectOption>
 							<IonSelectOption v-for="courseId in courses" :key="courseId" :value="courseId"
 								class="capitalize">
 								<Course :courseId="courseId" />
 							</IonSelectOption>
 						</IonSelect>
-					</ion-item>
-
-					<ion-item>
-						<ion-label class="!text-gray font-bold">Year</ion-label>
+					</div>
+			
+					<div class="flex flex-col">
+						<ion-label class="font-bold text-sm mb-2">Year</ion-label>
 						<IonSelect v-model.number="year" class="capitalize" interface="action-sheet"
 							placeholder="Select the year">
-							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
+							<IonSelectOption :value="null" class="capitalize">Select year</IonSelectOption>
 							<IonSelectOption v-for="year in years" :key="year" :value="year" class="capitalize">
 								<span>{{ year }}</span>
 							</IonSelectOption>
 						</IonSelect>
-					</ion-item>
-
-					<ion-item>
-						<ion-label class="!text-gray font-bold">Mode</ion-label>
+					</div>
+			
+					<div class="flex flex-col">
+						<ion-label class="font-bold text-sm mb-2">Mode</ion-label>
 						<IonSelect v-model="questionType" class="capitalize" interface="action-sheet"
 							placeholder="Select the question type">
-							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
+							<IonSelectOption :value="null" class="capitalize">Select Mode</IonSelectOption>
 							<IonSelectOption v-for="questionType in questionTypes" :key="questionType"
 								:value="questionType" class="capitalize">
 								<span>{{ questionType }}</span>
 							</IonSelectOption>
 						</IonSelect>
-					</ion-item>
+					</div>
+
+					<div class="flex flex-col">
+						<ion-label class="font-bold text-sm mb-2">Type</ion-label>
+						<IonSelect v-model="examType" class="capitalize" interface="action-sheet"
+							placeholder="Select the question type">
+							<IonSelectOption :value="null" class="capitalize">Select Type</IonSelectOption>
+							<IonSelectOption v-for="examType in examTypes" :key="examType.name"
+								:value="examType.value" class="capitalize">
+								<span>{{ examType.name }}</span>
+							</IonSelectOption>
+						</IonSelect>
+					</div>
+					<div class="flex flex-col">
+						<ion-button  class="w-full text-sm btn-primary mt-2" :disabled="testLoading"
+							@click="createTest(preps[0], examType)"
+							type="submit">
+							<SpinLoading v-if="testLoading" />
+							<span v-else>Add</span>
+						
+						</ion-button>
+					</div>
+				
 				</div>
 			</div>
 
-			<div class="md:py-6 showcase">
-				<TestPrepListCard v-for="prep in preps" :key="prep.hash" :testPrep="prep" />
-			</div>
-			<EmptyState v-if="!loading && !error && preps.length === 0"
-				class="p-4" info="There is currently no test for the given <b>Subject/Year/Mode</b>"
-			/>
 		</div>
 	</Justified>
 </template>
@@ -56,20 +69,20 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
-import Institution from '@app/components/school/institutions/Institution.vue'
 import Course from '@app/components/school/courses/Course.vue'
 import { useRoute } from 'vue-router'
 import { useTestPrepList } from '@app/composable/study/testPreps'
 import { IonItem, IonLabel, IonSelect, IonSelectOption } from '@ionic/vue'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
+import { useCreateTest } from '@app/composable/study/tests'
 
 export default defineComponent({
 	name: 'StudyPrepsInstitutionId',
+	// TODO: displayName would have to be dynamic
 	displayName: 'Preps',
 	components: {
 		Justified,
-		Institution,
 		Course,
 		IonSelect,
 		IonSelectOption,
@@ -80,14 +93,17 @@ export default defineComponent({
 	},
 	middlewares: ['isAuthenticated'],
 	setup () {
+		const { loading:testLoading, error:testError, createTest } = useCreateTest()
 		const route = useRoute()
-		const { institutionId } = route.params
+		const { institutionId } = route.params 
 		const { testPreps, loading, error } = useTestPrepList()
 		const institutionPreps = computed(() => testPreps.value.filter((prep) => prep.data.institutionId === institutionId))
 
 		const courseId = ref(null as string | null)
 		const year = ref(null as number | null)
 		const questionType = ref(null as string | null)
+		const examType = ref(null as string | null)
+		const examTypes = [{name:'Test', value:true}, {name:'Solution', value:false}]
 
 		const courses = computed(() => Array.from(new Set(institutionPreps.value.map((prep) => prep.data.courseId))).sort())
 		const years = computed(() => Array.from(new Set(institutionPreps.value.map((prep) => prep.data.year))).sort())
@@ -102,7 +118,7 @@ export default defineComponent({
 		}))
 
 		return {
-			loading, error,
+			loading, error,testLoading, testError, examTypes,examType, createTest,
 			institutionId, preps, courseId, courses, year, years, questionType, questionTypes
 		}
 	}
@@ -110,16 +126,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-item {
-		width: 100%;
-		--background: #{$color-newGray} !important;
-		border-radius: .5rem;
 
-		--border-radius: .5rem;
-		--padding-start: 1rem;
-		--padding-end: 0 !important;
-		--inner-padding-end: 0px;
-	}
 
 	ion-select {
 		--background: #{$color-newGray} !important;

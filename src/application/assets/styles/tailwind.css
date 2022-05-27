@@ -105,7 +105,7 @@
 	}
 
 	.blueTop {
-		@apply bg-white w-full flex items-center rounded-b-2xl md:rounded-none md:mb-4 justify-center
+		@apply bg-bodyBg text-bodyText w-full flex items-center md:mb-4 justify-center
 	}
 
 	.nav-scroll {

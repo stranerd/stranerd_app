@@ -1,7 +1,7 @@
 <template>
 	<PageLoading v-if="loading || createLoading" />
 	<div v-else
-		class="flex items-center justify-center flex-col md:my-8 px-4 py-8 bg-white rounded-xl gap-4">
+		class="flex items-center justify-center flex-col md:my-8 px-4 py-8 bg-bodyBg border-bottom-line gap-4">
 		<ion-text class="text-heading text-secondaryText font-bold">{{ test.scoreText }}</ion-text>
 
 		<DonutChart :bgColor="test.passed ? '#00D24622' : '#FF666622'" :fgColor="test.passed ? '#00D246' : '#FF6666'"
@@ -14,17 +14,13 @@
 		</ion-text>
 
 		<div class="mt-4 mx-auto w-full px-4 flex gap-2 items-center justify-between md:justify-center">
-			<router-link :to="`/study/tests/${test.id}/take`" class="text-primary cursor-pointer">
-				<ion-button class="btn-outline border-primary text-primary">Solutions</ion-button>
+			<router-link :to="`/study/tests/${test.id}/take`" class="w-1/2">
+				<ion-button class="btn-outline border-bodyBg text-bodyText w-full h-9">Solutions</ion-button>
 			</router-link>
-			<ion-button v-if="prep" class="btn-primary" @click="createTest(prep, test.isTimed)">
+			<ion-button v-if="prep" class="btn-primary w-1/2 h-9" @click="createTest(prep, test.isTimed)">
 				Retry
 			</ion-button>
-			<router-link class="text-primary cursor-pointer" to="/study/preps/">
-				<ion-button class="btn-outline">
-					Home
-				</ion-button>
-			</router-link>
+			
 		</div>
 	</div>
 </template>

@@ -1,16 +1,16 @@
 <template>
 	<div class="flex flex-col lg:my-8 md:p-4 lg:p-0 pb-[68px] md:pb-[82px] lg:pb-[88px]">
 		<div v-if="tab === 'list'" class="flex flex-col md:gap-8">
-			<TestQuestion v-for="(question, index) in questions" :key="question.hash" :answer="updateAnswer"
+			<TestQuestion v-for="(question, index) in questions" :key="question.hash" :total="questions.length" :answer="updateAnswer"
 				:question="question" :questionIndex="index" :test="test" />
 		</div>
 
-		<div class="footer-shadow fixed bottom-0 inset-x-0 bg-white z-[10]">
-			<div :style="`width:${test.progress * 100}%`" class="bg-primary h-1" />
+		<div class="footer-shadow fixed bottom-0 inset-x-0 bg-bodyBg z-[10]">
+			<div :style="`width:${test.progress * 100}%`" class="h-1" />
 			<div class="lg:w-8/12 w-full px-4 mx-auto flex items-center justify-between py-2">
 				<div>
-					<ion-text v-if="test.isOBJ" class="text-secondaryText">
-						{{ test.answered }}/{{ formatNumber(questions.length) }} answered
+					<ion-text v-if="test.isOBJ" class="font-bold text-secondaryText border-itemBg rounded-lg border px-4 py-2">
+						{{ test.answered }}/{{ formatNumber(questions.length) }}
 					</ion-text>
 				</div>
 

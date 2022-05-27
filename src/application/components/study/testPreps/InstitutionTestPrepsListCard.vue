@@ -3,9 +3,10 @@
 		class="w-full border-bottom-line flex items-start box-border card-padding !py-6">
 		<ion-text class="truncate flex-grow">
 			<Institution :institutionId="institutionId" class="font-500" />
+			<Tag :tag="yearGap" class="w-full ml-4" />
 		</ion-text>
 		<div class="flex justify-between items-center gap-2 text-sub">
-			<Tag :tag="yearGap" class="w-full" />
+			
 			<IonIcon :icon="arrowForwardOutline" class="text-heading2 ml-auto" />
 		</div>
 	</router-link>
