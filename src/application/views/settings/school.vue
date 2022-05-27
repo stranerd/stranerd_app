@@ -180,6 +180,11 @@ export default defineComponent({
 		})
 		onMounted(async () => {
 			await Promise.all(factory.value.exams.map(async (exam) => fetchGeneralCourses(exam.institutionId)))
+			if (factory.value.institutionId) {
+				await fetchFaculties(factory.value.institutionId)
+				await fetchGeneralCourses(factory.value.institutionId)
+			}
+			if (factory.value.facultyId) await fetchDepartments(factory.value.facultyId)
 		})
 
 		return {

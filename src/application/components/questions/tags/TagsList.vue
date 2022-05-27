@@ -14,14 +14,14 @@
 						<span class="flex w-full gap-6 justify-end text-heading2">
 							<IonIcon :icon="addOutline" class="text-success" @click="openCreateTagModal(parent.id)" />
 							<IonIcon :icon="pencilOutline" class="text-warning" @click="openTagEditModal(parent)" />
-							<IonIcon :icon="trashOutline" class="text-danger" @click="deleteTag(parent)" />
+							<IonIcon :icon="trashBinOutline" class="text-danger" @click="deleteTag(parent)" />
 						</span>
 					</IonItem>
 					<IonItem v-for="tag in children" :key="tag.hash" class="text-sub">
 						<IonLabel class="w-full">{{ tag.title }}</IonLabel>
 						<span class="flex gap-4 justify-end text-heading">
 							<IonIcon :icon="pencilOutline" class="text-warning" @click="openTagEditModal(tag)" />
-							<IonIcon :icon="trashOutline" class="text-danger" @click="deleteTag(tag)" />
+							<IonIcon :icon="trashBinOutline" class="text-danger" @click="deleteTag(tag)" />
 						</span>
 					</IonItem>
 					<IonItem v-if="!children.length" class="text-sub">
@@ -39,7 +39,7 @@ import { openCreateTagModal, openTagEditModal, useDeleteTag, useTagList } from '
 import EmptyState from '@app/components/core/EmptyState.vue'
 import { IonAccordion, IonAccordionGroup, IonItem, IonList } from '@ionic/vue'
 import { groupBy } from '@utils/commons'
-import { addOutline, pencilOutline, trashOutline } from 'ionicons/icons'
+import { addOutline, pencilOutline, trashBinOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'TagsList',
@@ -57,7 +57,7 @@ export default defineComponent({
 		return {
 			groups, error, loading, openCreateTagModal, openTagEditModal,
 			deleteTag, deleteLoading, deleteError,
-			addOutline, pencilOutline, trashOutline
+			addOutline, pencilOutline, trashBinOutline
 		}
 	}
 })

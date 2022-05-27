@@ -13,7 +13,7 @@
 					<IonLabel>Edit Department</IonLabel>
 				</a>
 				<a class="flex items-center gap-1 text-sub" @click.prevent="deleteDepartment">
-					<IonIcon :icon="trashOutline" class="text-red" />
+					<IonIcon :icon="trashBinOutline" class="text-red" />
 					<IonLabel>Delete Department</IonLabel>
 				</a>
 			</div>
@@ -28,7 +28,7 @@ import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import AdminCoursesList from '@app/components/school/courses/AdminCoursesList.vue'
 import { useRoute } from 'vue-router'
 import { openDepartmentEditModal, useDeleteDepartment, useDepartment } from '@app/composable/school/departments'
-import { addOutline, pencilOutline, trashOutline } from 'ionicons/icons'
+import { addOutline, pencilOutline, trashBinOutline } from 'ionicons/icons'
 import { openCourseCreateModal } from '@app/composable/school/courses'
 
 export default defineComponent({
@@ -42,7 +42,7 @@ export default defineComponent({
 		const { loading, deleteDepartment } = useDeleteDepartment(departmentId as string)
 		const { department } = useDepartment(institutionId as string, departmentId as string)
 		return {
-			addOutline, pencilOutline, trashOutline,
+			addOutline, pencilOutline, trashBinOutline,
 			department, loading, deleteDepartment,
 			openDepartmentEditModal, openCourseCreateModal
 		}

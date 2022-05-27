@@ -38,7 +38,7 @@ import {
 	closeOutline,
 	ellipsisVerticalOutline,
 	pencilOutline,
-	trashOutline
+	trashBinOutline
 } from 'ionicons/icons'
 import { formatTime } from '@utils/dates'
 import { useAuth } from '@app/composable/auth/auth'
@@ -73,14 +73,14 @@ export default defineComponent({
 							icon: pencilOutline,
 							handler: () => openGroupEditModal(props.group, router)
 						},
-						{ text: 'Delete discussion', role: 'destructive', icon: trashOutline, handler: deleteGroup },
+						{ text: 'Delete discussion', role: 'destructive', icon: trashBinOutline, handler: deleteGroup },
 						{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
 					]
 				})
 			await actionSheet.present()
 		}
 		return {
-			chatboxEllipsesOutline, pencilOutline, trashOutline, ellipsisVerticalOutline,
+			chatboxEllipsesOutline, pencilOutline, trashBinOutline, ellipsisVerticalOutline,
 			formatTime, id, unReadDiscussions, openGroupEditModal,
 			loading, deleteGroup, showMenu
 		}

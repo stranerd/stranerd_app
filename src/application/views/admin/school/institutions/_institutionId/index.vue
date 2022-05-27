@@ -18,7 +18,7 @@
 					<IonLabel>Edit Inst.</IonLabel>
 				</a>
 				<a class="flex items-center gap-1 text-sub" @click.prevent="deleteInstitution">
-					<IonIcon :icon="trashOutline" class="text-red" />
+					<IonIcon :icon="trashBinOutline" class="text-red" />
 					<IonLabel>Delete Inst.</IonLabel>
 				</a>
 			</div>
@@ -35,7 +35,7 @@ import AdminFacultiesList from '@app/components/school/faculties/AdminFacultiesL
 import AdminGeneralCoursesList from '@app/components/school/courses/AdminGeneralCoursesList.vue'
 import { useRoute } from 'vue-router'
 import { openInstitutionEditModal, useDeleteInstitution, useInstitution } from '@app/composable/school/institutions'
-import { addOutline, pencilOutline, trashOutline } from 'ionicons/icons'
+import { addOutline, pencilOutline, trashBinOutline } from 'ionicons/icons'
 import { openFacultyCreateModal } from '@app/composable/school/faculties'
 import { openCourseCreateModal } from '@app/composable/school/courses'
 
@@ -50,7 +50,7 @@ export default defineComponent({
 		const { loading, deleteInstitution } = useDeleteInstitution(institutionId as string)
 		const { institution } = useInstitution(institutionId as string)
 		return {
-			addOutline, pencilOutline, trashOutline,
+			addOutline, pencilOutline, trashBinOutline,
 			institution, loading, deleteInstitution,
 			openInstitutionEditModal, openCourseCreateModal, openFacultyCreateModal
 		}
