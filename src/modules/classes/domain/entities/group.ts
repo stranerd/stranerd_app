@@ -52,5 +52,11 @@ export class GroupEntity extends BaseEntity {
 	get tutors () {
 		return this.users[ClassUsers.tutors]
 	}
+
+	search (search: string) {
+		const val = [this.name.toLowerCase().includes(search.toLowerCase())]
+		if (this.last) val.push(this.last.search(search))
+		return val.some((v) => v)
+	}
 }
 

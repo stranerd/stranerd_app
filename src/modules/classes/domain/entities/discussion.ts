@@ -73,7 +73,11 @@ export class DiscussionEntity extends BaseEntity {
 	}
 
 	search (search: string) {
-		return (this.media?.name ?? '').toLowerCase().includes(search.toLowerCase())
+		const val = [
+			this.content.toLowerCase().includes(search.toLowerCase()),
+			(this.media?.name ?? '').toLowerCase().includes(search.toLowerCase())
+		]
+		return val.some((v) => v)
 	}
 }
 

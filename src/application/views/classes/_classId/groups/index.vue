@@ -8,6 +8,6 @@ import { defineComponent } from 'vue'
 export default defineComponent({
 	name: 'ClassesClassIdGroups',
 	displayName: 'Groups',
-	middlewares: [async ({ to }) => `/discussions?classId=${to.params.classId}`]
+	middlewares: [async ({ to }) => `/messages?classId=${to.params.classId}`]
 })
 </script>
