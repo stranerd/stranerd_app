@@ -13,7 +13,7 @@ import AnnouncementsList from '@app/components/classes/announcements/Announcemen
 
 export default defineComponent({
 	name: 'ClassesClassIdAnnouncements',
-	displayName: 'Class',
+	displayName: 'Announcements',
 	components: { AnnouncementsList, ClassWrapper }
 })
 </script>

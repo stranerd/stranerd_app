@@ -1,5 +1,5 @@
 <template>
-	<ClassWrapper>
+	<ClassWrapper :hideTitle="true">
 		<template v-slot="{ classInst }">
 			<ClassMembers :key="classInst.hash" :classInst="classInst" />
 		</template>

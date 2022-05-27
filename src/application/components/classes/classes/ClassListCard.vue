@@ -3,7 +3,7 @@
 		<div class="flex gap-4 items-center" @click="show = !show">
 			<Avatar :name="classInst.name" :size="36" :src="classInst.photo" />
 			<IonText class="font-bold capitalize truncate w-full">{{ classInst.name }}</IonText>
-			<IonIcon :icon="show ? chevronDownOutline : chevronUpOutline" class="text-heading2" />
+			<IonIcon :icon="show ? chevronUpOutline : chevronDownOutline" class="text-heading2" />
 		</div>
 		<div v-if="show" class="flex flex-col gap-2 text-secondaryText px-2">
 			<router-link v-for="{ name, path, icon } in [

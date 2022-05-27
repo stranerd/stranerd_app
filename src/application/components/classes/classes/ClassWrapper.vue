@@ -1,7 +1,11 @@
 <template>
 	<Justified>
-		<div>
+		<div class="flex flex-col">
 			<BlockLoading v-if="loading" />
+			<div v-if="classInst && !hideTitle" class="flex items-center gap-4 border-bottom-line p-4">
+				<Avatar :name="classInst.name" :size="24" :src="classInst.photo" />
+				<IonText class="font-bold capitalize w-full truncate">{{ classInst.name }}</IonText>
+			</div>
 			<slot v-if="classInst && classInst.members.includes(id)" :classInst="classInst" />
 		</div>
 	</Justified>
@@ -17,6 +21,13 @@ import { useAuth } from '@app/composable/auth/auth'
 export default defineComponent({
 	name: 'ClassWrapper',
 	components: { Justified },
+	props: {
+		hideTitle: {
+			type: Boolean,
+			required: false,
+			default: false
+		}
+	},
 	setup () {
 		const { id } = useAuth()
 		const route = useRoute()

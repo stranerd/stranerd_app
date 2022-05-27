@@ -1,6 +1,5 @@
 import { ref } from 'vue'
 import { useModal, usePopover } from '@app/composable/core/modal'
-import CreateSession from '@app/components/modals/sessions/RequestSession.vue'
 import CreateReport from '@app/components/modals/reports/CreateReport.vue'
 import CreateQuestion from '@app/components/modals/questions/CreateQuestion.vue'
 import EditQuestion from '@app/components/modals/questions/EditQuestion.vue'
@@ -36,7 +35,7 @@ import Settings from '@app/components/modals/users/Settings.vue'
 
 export const modal = useModal(ref([]))
 const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion, CreateTag, EditTag })
-const SessionModal = modal.register('Session', { CreateSession, Ratings: CreateSession })
+const SessionModal = modal.register('Session', { CreateSession: CreateReport, Ratings: CreateReport })
 const ReportModal = modal.register('Report', { CreateReport })
 const StudyModal = modal.register('Study', {
 	CreateSet, EditSet, SaveEntity, CreateTestPrep, EditTestPrep, CreateDocument, EditDocument

@@ -3,7 +3,7 @@
 		<span>{{ question.trimmedBody }}</span>
 		<div class="flex items-center justify-between text-secondaryText text-sub gap-2">
 			<Tag :tagId="question.tagId" />
-			<IonIcon :icon="ellipse" class="text-[6px]" />
+			<IonIcon :icon="ellipse" class="dot" />
 			<span class="mr-auto">{{ formatTime(question.createdAt) }}</span>
 			<IonIcon v-if="question.attachments.length" :icon="imageOutline" class="text-heading" />
 			<span class="flex gap-1 items-center">

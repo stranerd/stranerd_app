@@ -3,10 +3,10 @@
 		<div class="flex gap-2 items-center">
 			<Avatar :name="classInst.name" :size="36" :src="classInst.photo" />
 			<div class="flex flex-col gap-1 w-full">
-				<IonText class="font-bold capitalize leading-none">{{ classInst.name }}</IonText>
+				<IonText class="font-bold capitalize leading-none w-full truncate">{{ classInst.name }}</IonText>
 				<span class="flex items-center gap-1 text-sub text-secondaryText leading-none">
 					<Institution :institutionId="classInst.school.institutionId" />
-					<IonIcon :icon="ellipse" class="text-[4px]" />
+					<IonIcon :icon="ellipse" class="dot" />
 					<Department :departmentId="classInst.school.departmentId" :facultyId="classInst.school.facultyId" />
 				</span>
 			</div>

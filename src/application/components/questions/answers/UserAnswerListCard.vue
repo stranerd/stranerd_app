@@ -4,7 +4,7 @@
 		<span>{{ answer.trimmedTitle }}</span>
 		<div class="flex items-center justify-between text-secondaryText text-sub gap-2">
 			<Tag :tagId="answer.tagId" />
-			<IonIcon :icon="ellipse" class="text-[6px]" />
+			<IonIcon :icon="ellipse" class="dot" />
 			<span class="mr-auto">{{ formatTime(answer.createdAt) }}</span>
 			<IonIcon v-if="answer.attachments.length" :icon="imageOutline" class="text-heading" />
 		</div>

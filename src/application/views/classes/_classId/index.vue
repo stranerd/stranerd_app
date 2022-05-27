@@ -1,5 +1,5 @@
 <template>
-	<ClassWrapper>
+	<ClassWrapper :hideTitle="true">
 		<template v-slot="{ classInst }">
 			<div class="!gap-4 card-padding flex flex-col">
 				<div class="flex gap-4 items-start">

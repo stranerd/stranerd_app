@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full flex flex-col items-center justify-center p-4 md:py-8 gap-3 text-center">
+	<div class="w-full flex flex-col items-center justify-center p-4 md:py-8 gap-3">
 		<p class="w-full" v-html="info" />
 		<slot>
 			<router-link v-if="btnText && route" :class="btnTextClass" :to="route"

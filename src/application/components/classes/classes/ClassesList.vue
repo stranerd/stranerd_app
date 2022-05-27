@@ -7,14 +7,14 @@
 		<BlockLoading v-if="loading" />
 		<template v-else-if="searchMode">
 			<div v-if="searchResults.length === 0" class="p-4">
-				<EmptyState class="bg-itemBg p-4 rounded-xl !text-left"
+				<EmptyState class="bg-itemBg p-4 rounded-xl"
 					info="If you cannot find your class, contact your class rep to create it." />
 			</div>
 			<SearchClassListCard v-for="classInst in searchResults" :key="classInst.hash" :classInst="classInst"
 				class="border-bottom-line" />
 		</template>
 		<template v-else>
-			<EmptyState v-if="!loading && !error && classes.length === 0" class="!text-left border-bottom-line py-6"
+			<EmptyState v-if="!loading && !error && classes.length === 0" class="border-bottom-line py-6"
 				info="You are not in a class!" />
 			<ClassListCard v-for="classInst in classes" :key="classInst.hash" :classInst="classInst"
 				class="border-bottom-line" />
