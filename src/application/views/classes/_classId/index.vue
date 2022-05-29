@@ -18,7 +18,8 @@
 				<div v-if="classInst.admins.includes(id)" class="flex flex-col card-padding text-secondaryText">
 					<component :is="click ? 'a' : 'router-link'" v-for="{ name, icon, path, click } in [
 							{ name: 'Edit Class Info', icon: createOutline, click: () => openClassEditModal(classInst, $router) },
-							{ name: 'Courses List', icon: listOutline, click: () => openClassEditModal(classInst, $router, true) }
+							{ name: 'Courses List', icon: listOutline, click: () => openClassEditModal(classInst, $router, true) },
+							{ name: 'Manage Storage', icon: folderOutline, click: () => openClassEditModal(classInst, $router, true) },
 						]" :key="name" :to="`/classes/${classInst.id}/${path}`" class="flex gap-4 items-center py-2"
 						@click="() => click ? click() : null">
 						<IonIcon :icon="icon" class="text-heading2" />
@@ -36,7 +37,7 @@ import ClassWrapper from '@app/components/classes/classes/ClassWrapper.vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import Department from '@app/components/school/departments/Department.vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { createOutline, listOutline } from 'ionicons/icons'
+import { createOutline, listOutline, folderOutline } from 'ionicons/icons'
 import { openClassEditModal } from '@app/composable/classes/classes'
 
 export default defineComponent({
@@ -45,7 +46,7 @@ export default defineComponent({
 	components: { ClassWrapper, Institution, Department },
 	setup () {
 		const { id } = useAuth()
-		return { id, openClassEditModal, createOutline, listOutline }
+		return { id, openClassEditModal, createOutline, listOutline, folderOutline }
 	}
 })
 </script>

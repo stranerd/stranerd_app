@@ -45,7 +45,7 @@ import { openTimetableModal, useTimetable } from '@app/composable/classes/timeta
 import { arrowForwardOutline, timeOutline, createOutline, trashBinOutline } from 'ionicons/icons'
 
 export default defineComponent({
-	name: 'TimetableList',
+	name: 'SchemeList',
 	props: {
 		classInst: {
 			type: ClassEntity,
