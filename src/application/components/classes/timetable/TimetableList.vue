@@ -27,10 +27,10 @@
 					{{
 						event.data.end.hour.toString().padStart(2, '0')
 					}}:{{ event.data.end.minute.toString().padStart(2, '0') }}
-					<sapn class="ml-auto">
+					<span class="ml-auto">
 						<IonIcon :icon="createOutline" class="text-heading2 mr-5 " />
 						<IonIcon :icon="trashBinOutline" class="text-heading2 text-danger " />
-					</sapn>
+					</span>
 				</ion-text>
 			</div>
 		
