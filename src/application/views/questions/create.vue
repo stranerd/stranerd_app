@@ -9,7 +9,6 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'QuestionsCreate',
-	displayName: 'Create Question',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from }) => {
 		useQuestionModal().openCreateQuestion()
 		const backPath = from?.fullPath ?? '/dashboard'

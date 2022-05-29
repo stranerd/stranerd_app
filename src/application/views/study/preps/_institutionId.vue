@@ -63,10 +63,10 @@ import { useTestPrepList } from '@app/composable/study/testPreps'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudyPrepsInstitutionId',
-	displayName: 'Preps',
 	components: {
 		Justified,
 		Institution,
@@ -76,6 +76,7 @@ export default defineComponent({
 	},
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
+		useRouteMeta('Preps')
 		const route = useRoute()
 		const { institutionId } = route.params
 		const { testPreps, loading, error } = useTestPrepList()

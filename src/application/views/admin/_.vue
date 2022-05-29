@@ -8,7 +8,6 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'Admin404',
-	displayName: '404',
 	beforeRouteEnter: generateMiddlewares([async () => '/admin/users/admins'])
 })
 </script>

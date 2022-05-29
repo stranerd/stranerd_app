@@ -8,7 +8,6 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesClassIdGroups',
-	displayName: 'Groups',
 	beforeRouteEnter: generateMiddlewares([async ({ to }) => `/messages?classId=${to.params.classId}`])
 })
 </script>

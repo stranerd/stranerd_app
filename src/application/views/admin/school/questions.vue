@@ -16,12 +16,13 @@ import { defineComponent } from 'vue'
 import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import AdminPastQuestionsList from '@app/components/school/pastQuestions/AdminPastQuestionsList.vue'
 import { useSchoolModal } from '@app/composable/core/modals'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AdminStudyQuestions',
-	displayName: 'Test Questions',
 	components: { AdminPastQuestionsList, AdminWrapper },
 	setup () {
+		useRouteMeta('Test Questions')
 		return {
 			openCreatePastQuestion: useSchoolModal().openCreatePastQuestion
 		}

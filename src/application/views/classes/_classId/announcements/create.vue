@@ -11,7 +11,6 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesClassIdAnnouncementsCreate',
-	displayName: 'Post Announcement',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from }) => {
 		const { id } = useAuth()
 		const classInst = getAnnouncementClass()

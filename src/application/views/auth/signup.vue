@@ -76,13 +76,14 @@ import { useEmailSignup } from '@app/composable/auth/signin'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
 import Auth from '@app/layouts/Auth.vue'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AuthSignup',
-	displayName: 'Create account',
 	components: { AuthProviders, Auth },
 	beforeRouteEnter: generateMiddlewares(['isNotAuthenticated']),
 	setup () {
+		useRouteMeta('Create account')
 		const { factory, loading, error, signup } = useEmailSignup()
 		return { factory, loading, error, signup }
 	}

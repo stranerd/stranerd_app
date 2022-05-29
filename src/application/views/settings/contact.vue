@@ -36,12 +36,13 @@ import Justified from '@app/layouts/Justified.vue'
 import { logoInstagram, logoTwitter, logoWhatsapp, mailOutline, paperPlaneOutline } from 'ionicons/icons'
 import { useCreateMessage } from '@app/composable/forms/messages'
 import { useAuth } from '@app/composable/auth/auth'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'SettingsContact',
-	displayName: 'Contact Us',
 	components: { Justified },
 	setup () {
+		useRouteMeta('Contact Us')
 		const { user } = useAuth()
 		const { factory, loading, error, createMessage } = useCreateMessage()
 		return {

@@ -94,10 +94,10 @@ import SearchFlashCardsList from '@app/components/study/flashCards/SearchFlashCa
 import SearchSetsList from '@app/components/study/sets/SearchSetsList.vue'
 import SearchQuestionsList from '@app/components/questions/questions/SearchQuestionsList.vue'
 import SearchUsersList from '@app/components/users/SearchUsersList.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'Search',
-	displayName: 'Search',
 	components: {
 		SearchWrapper,
 		SearchTestPrepsList,
@@ -106,6 +106,9 @@ export default defineComponent({
 		SearchSetsList,
 		SearchUsersList,
 		SearchQuestionsList
+	},
+	setup () {
+		useRouteMeta('Search')
 	}
 })
 </script>

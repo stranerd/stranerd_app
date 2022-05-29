@@ -9,7 +9,6 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'StudyDocumentsCreate',
-	displayName: 'Create Document',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from }) => {
 		useStudyModal().openCreateDocument()
 		const backPath = from?.fullPath ?? '/dashboard'

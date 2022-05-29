@@ -29,13 +29,14 @@ import Justified from '@app/layouts/Justified.vue'
 import { usePasswordUpdate } from '@app/composable/auth/passwords'
 import { useAuth } from '@app/composable/auth/auth'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'SettingsSecurity',
-	displayName: 'Security',
 	components: { Justified },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
+		useRouteMeta('Security')
 		const { hasPassword } = useAuth()
 		const { factory, error, loading, updatePassword } = usePasswordUpdate()
 		return { hasPassword, factory, error, loading, updatePassword }

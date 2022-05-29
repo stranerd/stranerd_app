@@ -11,7 +11,6 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesClassIdGroupsCreate',
-	displayName: 'Create Discussion Group',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from }) => {
 		const { id } = useAuth()
 		const classInst = getGroupClass()

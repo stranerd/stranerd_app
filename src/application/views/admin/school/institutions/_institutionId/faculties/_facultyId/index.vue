@@ -31,13 +31,14 @@ import { openFacultyEditModal, useDeleteFaculty, useFaculty } from '@app/composa
 import { addOutline, pencilOutline, trashBinOutline } from 'ionicons/icons'
 import { openDepartmentCreateModal } from '@app/composable/school/departments'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AdminStudyInstitutionsInstitutionIdFacultiesFacultyId',
-	displayName: 'Faculty',
 	components: { AdminWrapper, AdminDepartmentsList },
 	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
+		useRouteMeta('Faculty')
 		const route = useRoute()
 		const { facultyId, institutionId } = route.params
 		const { loading, deleteFaculty } = useDeleteFaculty(facultyId as string)

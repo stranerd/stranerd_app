@@ -34,13 +34,14 @@ import Justified from '@app/layouts/Justified.vue'
 import NotificationCard from '@app/components/users/notifications/NotificationCard.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'Notifications',
-	displayName: 'Notifications',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	components: { NotificationCard, Justified, EmptyState },
 	setup () {
+		useRouteMeta('Notifications')
 		const {
 			notifications, error, loading, hasMore, fetchOlderNotifications
 		} = useNotificationList()

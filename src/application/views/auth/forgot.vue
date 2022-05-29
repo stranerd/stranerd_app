@@ -38,13 +38,14 @@ import { defineComponent } from 'vue'
 import { usePasswordResetRequest } from '@app/composable/auth/passwords'
 import Auth from '@app/layouts/Auth.vue'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AuthForgot',
-	displayName: 'Forgot Password?',
 	components: { Auth },
 	beforeRouteEnter: generateMiddlewares(['isNotAuthenticated']),
 	setup () {
+		useRouteMeta('Forgot Password?')
 		const { factory, loading, error, sendResetEmail, message } = usePasswordResetRequest()
 		return { factory, loading, error, sendResetEmail, message }
 	}

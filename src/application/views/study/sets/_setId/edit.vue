@@ -11,7 +11,6 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'StudySetsSetIdEdit',
-	displayName: 'Edit Folder',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
 		const { id } = useAuth()
 		const { setId = '' } = to.params

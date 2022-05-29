@@ -6,7 +6,7 @@
 				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png">
 			</div>
 			<div class="flex flex-col items-center mt-6 md:justify-center lg:w-5/12 w-full p-4">
-				<h1 class="md:block text-5xl hidden font-extrabold mb-8 text-center">Log in</h1>
+				<h1 class="md:block text-5xl hidden font-extrabold mb-8 text-center">Sign in</h1>
 				<form class="h-[65%] w-full md:w-[70%] flex flex-col gap-4" @submit.prevent="signin">
 					<div class="flex flex-col w-full">
 						<IonLabel class="font-bold text-sm mb-2">Email</IonLabel>
@@ -27,7 +27,7 @@
 					<IonButton :disabled="loading || !factory.valid" class="w-full text-sm btn-primary mt-2"
 						type="submit">
 						<SpinLoading v-if="loading" />
-						<span v-else>Login</span>
+						<span v-else>Signin</span>
 					</IonButton>
 					<div class="w-full flex justify-center items-center">
 						<router-link class="text-primaryBg" to="/auth/forgot">
@@ -53,13 +53,14 @@ import { useEmailSignin } from '@app/composable/auth/signin'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
 import Auth from '@app/layouts/Auth.vue'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AuthSignin',
-	displayName: 'Login',
 	components: { AuthProviders, Auth },
 	beforeRouteEnter: generateMiddlewares(['isNotAuthenticated']),
 	setup () {
+		useRouteMeta('Signin')
 		const { factory, loading, error, signin } = useEmailSignin()
 		return { factory, loading, error, signin }
 	}

@@ -17,13 +17,14 @@ import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import AdminInstitutionsList from '@app/components/school/institutions/AdminInstitutionsList.vue'
 import { useSchoolModal } from '@app/composable/core/modals'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AdminStudyInstitutions',
-	displayName: 'Institutions',
 	components: { AdminWrapper, AdminInstitutionsList },
 	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
+		useRouteMeta('Institutions')
 		return { openCreateInstitution: useSchoolModal().openCreateInstitution }
 	}
 })

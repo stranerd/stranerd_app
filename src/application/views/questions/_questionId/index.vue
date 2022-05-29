@@ -26,16 +26,17 @@ import { useQuestion } from '@app/composable/questions/questions'
 import DashboardWithToolbarLayout from '@app/layouts/DashboardWithToolbar.vue'
 import QuestionPageCard from '@app/components/questions/questions/QuestionPageCard.vue'
 import AnswersList from '@app/components/questions/answers/AnswersList.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'QuestionsQuestionId',
-	displayName: 'Answers',
 	components: {
 		DashboardWithToolbarLayout,
 		QuestionPageCard,
 		AnswersList
 	},
 	setup () {
+		useRouteMeta('Answers')
 		const { questionId } = useRoute().params
 		const { error, loading, question } = useQuestion(questionId as string)
 		return { chevronBackCircleOutline, error, loading, question }

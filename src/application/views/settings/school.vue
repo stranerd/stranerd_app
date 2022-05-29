@@ -133,13 +133,14 @@ import { useFacultyList } from '@app/composable/school/faculties'
 import { useDepartmentList } from '@app/composable/school/departments'
 import { UserSchoolType } from '@modules/users'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'SettingsSchool',
-	displayName: 'Edit School',
 	components: { Institution },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
+		useRouteMeta('Edit School')
 		const { factory, error, loading, updateSchool } = useUserSchoolUpdate()
 
 		const { schools, gatewayExams } = useInstitutionList()

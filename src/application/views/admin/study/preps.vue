@@ -15,13 +15,14 @@ import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import AdminTestPrepsList from '@app/components/study/testPreps/AdminTestPrepsList.vue'
 import { useStudyModal } from '@app/composable/core/modals'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AdminStudyPreps',
-	displayName: 'Preps',
 	components: { AdminWrapper, AdminTestPrepsList },
 	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
+		useRouteMeta('Preps')
 		return { openCreateTestPrep: useStudyModal().openCreateTestPrep }
 	}
 })

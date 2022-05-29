@@ -53,15 +53,18 @@ import ExploreWrapper from '@app/components/explore/ExploreWrapper.vue'
 import ExploreTestPrepsList from '@app/components/study/testPreps/ExploreTestPrepsList.vue'
 import ExploreDocumentsList from '@app/components/study/documents/ExploreDocumentsList.vue'
 import ExploreFlashCardsList from '@app/components/study/flashCards/ExploreFlashCardsList.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'Explore',
-	displayName: 'Explore',
 	components: {
 		ExploreWrapper,
 		ExploreTestPrepsList,
 		ExploreDocumentsList,
 		ExploreFlashCardsList
+	},
+	setup () {
+		useRouteMeta('Explore')
 	}
 })
 </script>

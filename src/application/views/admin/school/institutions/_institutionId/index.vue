@@ -39,13 +39,14 @@ import { addOutline, pencilOutline, trashBinOutline } from 'ionicons/icons'
 import { openFacultyCreateModal } from '@app/composable/school/faculties'
 import { openCourseCreateModal } from '@app/composable/school/courses'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AdminStudyInstitutionsInstitutionId',
-	displayName: 'Institution',
 	components: { AdminWrapper, AdminFacultiesList, AdminGeneralCoursesList },
 	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
+		useRouteMeta('Institution')
 		const route = useRoute()
 		const { institutionId } = route.params
 		const { loading, deleteInstitution } = useDeleteInstitution(institutionId as string)

@@ -8,7 +8,6 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'Auth404',
-	displayName: '404',
 	beforeRouteEnter: generateMiddlewares([async () => '/auth/signin'])
 })
 </script>

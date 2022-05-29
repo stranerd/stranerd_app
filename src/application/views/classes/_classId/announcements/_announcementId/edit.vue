@@ -11,7 +11,6 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesClassIdAnnouncementsAnnouncementIdEdit',
-	displayName: 'Edit Announcement',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
 		const { id } = useAuth()
 		const { classId = '', announcementId = '' } = to.params

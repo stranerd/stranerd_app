@@ -44,10 +44,10 @@ import { useRoute } from 'vue-router'
 import FlashCardScreen from '@root/application/components/study/flashCards/FlashCardScreen.vue'
 import FlashCardListView from '@root/application/components/study/flashCards/FlashCardListView.vue'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudyFlashCardsFlashcardId',
-	displayName: 'Flashcard Set',
 	components: {
 		Justified,
 		Avatar,
@@ -56,6 +56,7 @@ export default defineComponent({
 		SaveToSet
 	},
 	setup () {
+		useRouteMeta('Flashcard Set')
 		const cardMode = ref(true)
 		const { flashCardId } = useRoute().params
 		const { flashCard, error, loading } = useFlashCard(flashCardId as string)

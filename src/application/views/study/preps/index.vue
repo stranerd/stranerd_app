@@ -17,12 +17,13 @@ import { defineComponent } from 'vue'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import { addOutline } from 'ionicons/icons'
 import ContinueTests from '@root/application/components/study/tests/ContinueTests.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudyPreps',
-	displayName: 'Test preps',
 	components: { DashboardLayout, ContinueTests },
 	setup () {
+		useRouteMeta('Test preps')
 		return { addOutline }
 	}
 })

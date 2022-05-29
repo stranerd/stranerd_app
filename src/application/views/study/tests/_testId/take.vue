@@ -25,13 +25,14 @@ import { useTest } from '@app/composable/study/tests'
 import { useRoute } from 'vue-router'
 import { defineComponent } from 'vue'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudyTestsTestIdTake',
-	displayName: 'Test',
 	components: { Justified, TestBody },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
+		useRouteMeta('Test')
 		const { testId } = useRoute().params
 		const { error, loading, test } = useTest(testId as string)
 		return { error, loading, test }

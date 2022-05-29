@@ -47,13 +47,14 @@ import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import { useProfileUpdate } from '@app/composable/auth/profile'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'SettingsProfile',
-	displayName: 'Edit Profile',
 	components: { Justified },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
+		useRouteMeta('Edit Profile')
 		const { factory, error, loading, updateProfile } = useProfileUpdate()
 		return { factory, error, loading, updateProfile }
 	}

@@ -10,13 +10,14 @@ import { useAuth } from '@app/composable/auth/auth'
 import Justified from '@app/layouts/Justified.vue'
 import GeneralDashboard from '@app/components/dashboard/GeneralDashboard.vue'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AccountStats',
 	components: { Justified, GeneralDashboard },
-	displayName: 'Stats',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
+		useRouteMeta('Stats')
 		const { user } = useAuth()
 		return { user }
 	}

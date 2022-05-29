@@ -44,12 +44,13 @@ import { useDocument } from '@app/composable/study/documents'
 import Share from '@app/components/core/Share.vue'
 import DocumentDetails from '@app/components/study/documents/DocumentDetails.vue'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudyDocumentsDocumentId',
-	displayName: 'Document',
 	components: { Justified, Avatar, DocumentDetails, Share, SaveToSet },
 	setup () {
+		useRouteMeta('Document')
 		const { documentId } = useRoute().params
 		const { error, loading, document } = useDocument(documentId as string)
 		return {
