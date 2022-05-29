@@ -1,7 +1,7 @@
 <template>
 	<ClassWrapper>
 		<div class="flex flex-col gap-6 mt-6">
-			<div class="flex flex-col">
+			<!-- <div class="flex flex-col">
 				<ion-label class="font-bold text-sm mb-2 px-4">Day</ion-label>
 				<div class="flex items-center gap-2 w-full overflow-x-auto px-4">
 					<a v-for="day in days" :key="day.day"
@@ -11,7 +11,7 @@
 						{{ day.name }}
 					</a>
 				</div>
-			</div>
+			</div> -->
 		
 			<div class="flex flex-col gap-6 px-4">
 				<div class="flex flex-col">
@@ -30,9 +30,9 @@
 				</div>
                 
 				<div class="flex flex-col">
-					<ion-label class="font-bold text-sm mb-2">Lecturer</ion-label>
-					<IonInput v-model="factory.lecturer" class="w-full border bg-new_gray border-new_gray"
-						placeholder="Enter lecturer name"
+					<ion-label class="font-bold text-sm mb-2">Topic</ion-label>
+					<IonInput v-model="factory.topic" class="w-full border bg-new_gray border-new_gray"
+						placeholder="Enter Topic "
 						required
 						show-cancel-button="never"
 					/>
@@ -41,17 +41,17 @@
 				<div class="flex gap-4 items-center">
 					<div class="flex flex-col w-full">
 						<ion-label class="font-bold text-sm mb-2">Start time</ion-label>
-						<IonInput :value="factory.startTime"
+						<IonInput :value="factory.startDate"
 							class="w-full bg-new_gray" placeholder="Select start date" required
-							type="time"
-							@change="(e) => factory.startTime = e.target.value" />
+							type="date"
+							@change="(e) => factory.startDate = e.target.value" />
 					</div>
 					<div class="flex flex-col w-full">
 						<ion-label class="font-bold text-sm mb-2">End time</ion-label>
-						<IonInput :min="factory.startTime" :value="factory.endTime"
+						<IonInput :min="factory.endDate" :value="factory.endTime"
 							class="w-full bg-new_gray" placeholder="Select end date" required
-							type="time"
-							@change="(e) => factory.endTime = e.target.value" />
+							type="date"
+							@change="(e) => factory.endDate = e.target.value" />
 					</div>
 				</div>
 				<div v-if="tab === 0" class="flex flex-col gap-2">
@@ -101,7 +101,7 @@ import { IonSelect, IonSelectOption } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ClassClassIdCreateScheme',
-	displayName: 'Set up Scheme',
+	displayName: 'Set up scheme of work',
 	components: { ClassWrapper,IonSelect, IonSelectOption },
     	setup () {
 		const {

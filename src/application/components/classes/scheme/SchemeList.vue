@@ -16,9 +16,8 @@
 		<div class="flex flex-col gap-4 px-4">
 			<div v-for="event in timetable" :key="event.hash" class="flex flex-col min-h-[96px] rounded-lg bg-itemBg text-bodyText border-l-8 border-primaryBg p-4">
 				<ion-text class="font-bold ">{{ event.title }}</ion-text>
-				<ion-text class="mt-3">{{ event.name }}</ion-text>
 				<ion-text class="mt-3 flex">
-					<IonIcon :icon="timeOutline" class="text-heading2 mr-2 " />
+					<IonIcon :icon="calendarClearOutline" class="text-heading2 mr-2 " />
 					{{
 						event.data.start.hour.toString().padStart(2, '0')
 					}}:{{ event.data.start.minute.toString().padStart(2, '0') }}
@@ -42,7 +41,7 @@
 import { computed, defineComponent, ref } from 'vue'
 import { ClassEntity, EventType } from '@modules/classes'
 import { openTimetableModal, useTimetable } from '@app/composable/classes/timetable'
-import { arrowForwardOutline, timeOutline, createOutline, trashBinOutline } from 'ionicons/icons'
+import { arrowForwardOutline, calendarClearOutline, createOutline, trashBinOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'SchemeList',
@@ -63,7 +62,7 @@ export default defineComponent({
 		const timetable = computed(() => events.value
 			.filter((e) => e.data.type === EventType.timetable && e.data.start.day === activeDay.value))
 		return {
-			loading, error, openTimetableModal,timeOutline, createOutline,
+			loading, error, openTimetableModal,calendarClearOutline, createOutline,
 			activeDay, days, timetable, arrowForwardOutline, trashBinOutline
 		}
 	}
