@@ -10,10 +10,13 @@
 import { defineComponent } from 'vue'
 import SearchWrapper from '@app/components/search/SearchWrapper.vue'
 import SearchQuestionsList from '@app/components/questions/questions/SearchQuestionsList.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'SearchQuestions',
-	displayName: 'Search Questions',
-	components: { SearchWrapper, SearchQuestionsList }
+	components: { SearchWrapper, SearchQuestionsList },
+	setup () {
+		useRouteMeta('Search Questions')
+	}
 })
 </script>

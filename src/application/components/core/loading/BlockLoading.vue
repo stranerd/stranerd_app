@@ -6,10 +6,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonSkeletonText } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'BlockLoading',
-	components: { IonSkeletonText }
+	name: 'BlockLoading'
 })
 </script>

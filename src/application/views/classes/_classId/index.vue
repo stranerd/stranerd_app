@@ -38,12 +38,13 @@ import Department from '@app/components/school/departments/Department.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { createOutline, listOutline } from 'ionicons/icons'
 import { openClassEditModal } from '@app/composable/classes/classes'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'ClassClassId',
-	displayName: 'About',
 	components: { ClassWrapper, Institution, Department },
 	setup () {
+		useRouteMeta('About')
 		const { id } = useAuth()
 		return { id, openClassEditModal, createOutline, listOutline }
 	}

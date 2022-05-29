@@ -55,7 +55,6 @@ import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.v
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import DocumentListCard from '@app/components/study/documents/DocumentListCard.vue'
 import SetListCard from '@app/components/study/sets/SetListCard.vue'
-import { IonSelect, IonSelectOption } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'SetView',
@@ -66,8 +65,6 @@ export default defineComponent({
 		}
 	},
 	components: {
-		IonSelect,
-		IonSelectOption,
 		TestPrepListCard,
 		FlashCardListCard,
 		DocumentListCard,

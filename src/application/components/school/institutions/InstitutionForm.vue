@@ -14,9 +14,9 @@
 		</div>
 
 		<div class="flex w-full mt-8 items-center gap-6">
-			<ion-button :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
+			<IonButton :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
 				<slot name="buttonText">Submit</slot>
-			</ion-button>
+			</IonButton>
 		</div>
 
 		<PageLoading v-if="loading" />
@@ -26,11 +26,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { InstitutionFactory } from '@modules/school'
-import { IonToggle } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'InstitutionForm',
-	components: { IonToggle },
 	props: {
 		factory: {
 			type: InstitutionFactory,

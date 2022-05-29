@@ -10,10 +10,13 @@
 import { defineComponent } from 'vue'
 import ClassWrapper from '@app/components/classes/classes/ClassWrapper.vue'
 import ClassMembers from '@app/components/classes/classes/ClassMembers.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'ClassClassIdMembers',
-	displayName: 'Classmates',
-	components: { ClassWrapper, ClassMembers }
+	components: { ClassWrapper, ClassMembers },
+	setup () {
+		useRouteMeta('Classmates')
+	}
 })
 </script>

@@ -10,10 +10,13 @@
 import { defineComponent } from 'vue'
 import SearchWrapper from '@app/components/search/SearchWrapper.vue'
 import SearchFlashCardsList from '@app/components/study/flashCards/SearchFlashCardsList.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'SearchFlashCards',
-	displayName: 'Search Flashcards',
-	components: { SearchWrapper, SearchFlashCardsList }
+	components: { SearchWrapper, SearchFlashCardsList },
+	setup () {
+		useRouteMeta('Search Flashcards')
+	}
 })
 </script>

@@ -68,13 +68,15 @@ import {
 	readerOutline,
 	settingsOutline
 } from 'ionicons/icons'
+import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'Account',
 	components: { Justified, Department, Institution },
-	displayName: 'Account',
-	middlewares: ['isAuthenticated'],
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
+		useRouteMeta('Account')
 		const { id, isAdmin, user } = useAuth()
 		return {
 			id, isAdmin, user,

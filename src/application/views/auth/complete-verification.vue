@@ -11,10 +11,10 @@
 					<span class="text-secondaryText text-center">
 						If an error occurred, click the button below to retry verification.
 					</span>
-					<ion-button :disabled="loading" class="w-full text-sm btn-primary mt-2" type="submit">
+					<IonButton :disabled="loading" class="w-full text-sm btn-primary mt-2" type="submit">
 						<SpinLoading v-if="loading" />
 						<span v-else>Retry Verification</span>
-					</ion-button>
+					</IonButton>
 					<div class="w-full flex justify-center items-center">
 						<router-link class="text-primaryBg" to="/auth/signin">
 							Back to Sign In
@@ -31,13 +31,15 @@ import { defineComponent } from 'vue'
 import { useCompleteEmailVerification } from '@app/composable/auth/signin'
 import { useRoute } from 'vue-router'
 import Auth from '@app/layouts/Auth.vue'
+import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AuthCompleteVerification',
-	displayName: 'Complete Verification',
 	components: { Auth },
-	middlewares: ['hasQueryToken'],
+	beforeRouteEnter: generateMiddlewares(['hasQueryToken']),
 	setup () {
+		useRouteMeta('Complete Verification')
 		const { token } = useRoute().query
 		const { loading, error, completeVerification } = useCompleteEmailVerification(token as string)
 		return { loading, error, completeVerification }

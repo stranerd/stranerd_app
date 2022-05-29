@@ -1,13 +1,11 @@
 <template>
 	<router-link :to="`/study/preps/${institutionId}`"
-		class="w-full border-bottom-line flex items-start box-border card-padding !py-6">
-		<ion-text class="truncate flex-grow">
+		class="w-full border-bottom-line flex items-start box-border card-padding">
+		<IonText class="truncate">
 			<Institution :institutionId="institutionId" class="font-500" />
-		</ion-text>
-		<div class="flex justify-between items-center gap-2 text-sub">
-			<Tag :tag="yearGap" class="w-full" />
-			<IonIcon :icon="arrowForwardOutline" class="text-heading2 ml-auto" />
-		</div>
+		</IonText>
+		<Tag :tag="yearGap" />
+		<IonIcon :icon="arrowForwardOutline" class="text-heading2 ml-auto" />
 	</router-link>
 </template>
 

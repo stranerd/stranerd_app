@@ -20,24 +20,23 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonIcon } from '@ionic/vue'
 import { chevronBackCircleOutline } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
 import { useQuestion } from '@app/composable/questions/questions'
 import DashboardWithToolbarLayout from '@app/layouts/DashboardWithToolbar.vue'
 import QuestionPageCard from '@app/components/questions/questions/QuestionPageCard.vue'
 import AnswersList from '@app/components/questions/answers/AnswersList.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'QuestionsQuestionId',
-	displayName: 'Answers',
 	components: {
 		DashboardWithToolbarLayout,
-		IonIcon,
 		QuestionPageCard,
 		AnswersList
 	},
 	setup () {
+		useRouteMeta('Answers')
 		const { questionId } = useRoute().params
 		const { error, loading, question } = useQuestion(questionId as string)
 		return { chevronBackCircleOutline, error, loading, question }

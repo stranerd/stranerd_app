@@ -7,11 +7,11 @@ import { defineComponent } from 'vue'
 import { useClassModal } from '@app/composable/core/modals'
 import { getAnnouncementClass } from '@app/composable/classes/announcements'
 import { useAuth } from '@app/composable/auth/auth'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesClassIdAnnouncementsCreate',
-	displayName: 'Post Announcement',
-	middlewares: ['isAuthenticated', async ({ from }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from }) => {
 		const { id } = useAuth()
 		const classInst = getAnnouncementClass()
 		if (!classInst) return '/classes/'
@@ -19,6 +19,6 @@ export default defineComponent({
 		useClassModal().openCreateAnnouncement()
 		const backPath = from?.fullPath ?? '/dashboard'
 		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
-	}]
+	}])
 })
 </script>

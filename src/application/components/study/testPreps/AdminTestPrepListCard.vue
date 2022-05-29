@@ -2,7 +2,7 @@
 	<div
 		class="flex flex-col lg:flex-row items-center justify-between gap-4 bg-white rounded-xl font-bold text-sub text-secondaryText py-4 px-6">
 		<div class="w-full">
-			<ion-text class="capitalize">{{ testPrep.name }}</ion-text>
+			<IonText class="capitalize">{{ testPrep.name }}</IonText>
 		</div>
 		<div class="w-full font-bold text-right cursor-pointer">
 			<a class="text-orange mr-4" @click.prevent="openTestPrepEditModal(testPrep)">Edit</a>

@@ -6,7 +6,7 @@
 				<div v-if="questions.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="text-secondaryText flex items-center">
-							<ion-text class="text-heading font-bold">Questions</ion-text>
+							<IonText class="text-heading font-bold">Questions</IonText>
 						</div>
 
 						<router-link :to="`/search/questions?search=${searchTerm}`"
@@ -19,7 +19,7 @@
 				<div v-if="testPreps.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="text-secondaryText flex items-center">
-							<ion-text class="text-heading font-bold">TestPreps</ion-text>
+							<IonText class="text-heading font-bold">TestPreps</IonText>
 						</div>
 						<router-link :to="`/search/preps?search=${searchTerm}`"
 							class="text-primary flex items-center font-bold">
@@ -31,7 +31,7 @@
 				<div v-if="flashCards.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="text-secondaryText flex items-center">
-							<ion-text class="text-heading font-bold">FlashCards</ion-text>
+							<IonText class="text-heading font-bold">FlashCards</IonText>
 						</div>
 
 						<router-link :to="`/search/flashCards?search=${searchTerm}`"
@@ -44,7 +44,7 @@
 				<div v-if="documents.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="text-secondaryText flex items-center">
-							<ion-text class="text-heading font-bold">Documents</ion-text>
+							<IonText class="text-heading font-bold">Documents</IonText>
 						</div>
 						<router-link :to="`/search/documents?search=${searchTerm}`"
 							class="text-primary flex items-center font-bold">
@@ -56,7 +56,7 @@
 				<div v-if="sets.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="text-secondaryText flex items-center">
-							<ion-text class="text-heading font-bold">Folders</ion-text>
+							<IonText class="text-heading font-bold">Folders</IonText>
 						</div>
 
 						<router-link :to="`/search/sets?search=${searchTerm}`"
@@ -69,7 +69,7 @@
 				<div v-if="users.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="text-secondaryText flex items-center">
-							<ion-text class="text-heading font-bold">Nerds</ion-text>
+							<IonText class="text-heading font-bold">Nerds</IonText>
 						</div>
 
 						<router-link :to="`/search/nerds?search=${searchTerm}`"
@@ -94,10 +94,10 @@ import SearchFlashCardsList from '@app/components/study/flashCards/SearchFlashCa
 import SearchSetsList from '@app/components/study/sets/SearchSetsList.vue'
 import SearchQuestionsList from '@app/components/questions/questions/SearchQuestionsList.vue'
 import SearchUsersList from '@app/components/users/SearchUsersList.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'Search',
-	displayName: 'Search',
 	components: {
 		SearchWrapper,
 		SearchTestPrepsList,
@@ -106,6 +106,9 @@ export default defineComponent({
 		SearchSetsList,
 		SearchUsersList,
 		SearchQuestionsList
+	},
+	setup () {
+		useRouteMeta('Search')
 	}
 })
 </script>

@@ -16,10 +16,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'SettingsAbout',
-	displayName: 'About',
-	components: { Justified }
+	components: { Justified },
+	setup () {
+		useRouteMeta('About')
+	}
 })
 </script>

@@ -57,9 +57,9 @@
 		</div>
 
 		<div class="flex w-full mt-8 items-center gap-6">
-			<ion-button :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
+			<IonButton :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
 				<slot name="buttonText">Submit</slot>
-			</ion-button>
+			</IonButton>
 		</div>
 
 		<PageLoading v-if="loading" />
@@ -69,13 +69,11 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { TestPrepFactory } from '@modules/study'
-import { IonSelect, IonSelectOption } from '@ionic/vue'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
 
 export default defineComponent({
 	name: 'TestPrepForm',
-	components: { IonSelect, IonSelectOption },
 	props: {
 		factory: {
 			type: TestPrepFactory,

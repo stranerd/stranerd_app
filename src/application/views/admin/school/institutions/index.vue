@@ -2,9 +2,9 @@
 	<AdminWrapper>
 		<div>
 			<div class="flex justify-end mb-4">
-				<ion-button class="btn-primary" @click="openCreateInstitution">
+				<IonButton class="btn-primary" @click="openCreateInstitution">
 					Add New Institution
-				</ion-button>
+				</IonButton>
 			</div>
 			<AdminInstitutionsList />
 		</div>
@@ -16,13 +16,15 @@ import { defineComponent } from 'vue'
 import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import AdminInstitutionsList from '@app/components/school/institutions/AdminInstitutionsList.vue'
 import { useSchoolModal } from '@app/composable/core/modals'
+import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AdminStudyInstitutions',
-	displayName: 'Institutions',
 	components: { AdminWrapper, AdminInstitutionsList },
-	middlewares: ['isAdmin'],
+	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
+		useRouteMeta('Institutions')
 		return { openCreateInstitution: useSchoolModal().openCreateInstitution }
 	}
 })

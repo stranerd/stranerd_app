@@ -21,7 +21,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonFooter, IonIcon, IonToolbar } from '@ionic/vue'
 import {
 	chatbubbles,
 	chatbubblesOutline,
@@ -41,7 +40,6 @@ import {
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
-	components: { IonFooter, IonIcon, IonToolbar },
 	setup () {
 		const { isLoggedIn, isAdmin } = useAuth()
 		return {

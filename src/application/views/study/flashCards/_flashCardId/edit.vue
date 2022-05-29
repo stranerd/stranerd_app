@@ -14,20 +14,22 @@ import FlashCardForm from '@app/components/study/flashCards/FlashCardForm.vue'
 import { getEditingFlashCard, useEditFlashCard } from '@app/composable/study/flashCards'
 import { useRoute } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
+import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudyFlashCardsFlashcardIdEdit',
-	displayName: 'Edit Flashcard',
 	components: { Justified, FlashCardForm },
-	middlewares: ['isAuthenticated', async ({ to }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ to }) => {
 		const { id } = useAuth()
 		const { flashCardId = '' } = to.params
 		const flashCard = getEditingFlashCard()
 		if (!flashCard || flashCard.id !== flashCardId) return `/study/flashCards/${flashCardId}`
 		const canEdit = flashCard.user.id === id.value
 		if (!canEdit) return `/study/flashCards/${flashCard.id}`
-	}],
+	}]),
 	setup () {
+		useRouteMeta('Edit Flashcard')
 		const { flashCardId } = useRoute().params
 		const { editFlashCard, factory, error, loading } = useEditFlashCard(flashCardId as string)
 		return { loading, error, editFlashCard, factory }

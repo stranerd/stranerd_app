@@ -17,11 +17,10 @@ import SetListCard from '@app/components/study/sets/SetListCard.vue'
 import { useUserSetList } from '@app/composable/users/users/sets'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
-import { IonSearchbar } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ProfileSets',
-	components: { SetListCard, EmptyState, IonSearchbar },
+	components: { SetListCard, EmptyState },
 	props: {
 		user: {
 			type: UserEntity,

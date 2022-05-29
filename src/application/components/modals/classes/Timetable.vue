@@ -80,11 +80,9 @@ import { computed, defineComponent, Ref, ref } from 'vue'
 import { useCreateEvent, useDeleteEvent, useEditEvent, useTimetable } from '@app/composable/classes/timetable'
 import { EventEntity, EventFactory, EventType } from '@modules/classes'
 import { pencilOutline, trashBinOutline } from 'ionicons/icons'
-import { IonSelect, IonSelectOption } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'TimetableModal',
-	components: { IonSelect, IonSelectOption },
 	setup () {
 		const {
 			createEvent, eventClass, factory: createFactory, error: createError, loading: createLoading

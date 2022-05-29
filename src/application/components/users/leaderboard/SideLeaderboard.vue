@@ -16,13 +16,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonSelect, IonSelectOption } from '@ionic/vue'
 import SideLeaderboardList from '@app/components/users/leaderboard/SideLeaderboardList.vue'
 import { time, times } from '@app/composable/users/leaderboard'
 
 export default defineComponent({
 	name: 'SideLeaderboard',
-	components: { SideLeaderboardList, IonSelect, IonSelectOption },
+	components: { SideLeaderboardList },
 	setup () {
 		return { times, time }
 	}

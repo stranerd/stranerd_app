@@ -8,10 +8,13 @@
 import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import Leaderboard from '@app/components/users/leaderboard/Leaderboard.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'UsersLeaderboard',
-	displayName: 'LeaderBoard',
-	components: { Justified, Leaderboard }
+	components: { Justified, Leaderboard },
+	setup () {
+		useRouteMeta('LeaderBoard')
+	}
 })
 </script>

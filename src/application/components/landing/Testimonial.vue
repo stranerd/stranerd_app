@@ -1,29 +1,30 @@
 <template>
 	<div class="md:px-8 px-4 py-10 bg-white flex flex-col">
-		<ion-text
+		<IonText
 			class="font-extrabold mx-auto lg:mt-48 lg:mb-24 mt-20 mb-12 text-center lg:text-5xl text-base text-secondaryText ">
 			Made for students, loved by students
-		</ion-text>
+		</IonText>
 		<div class="container mx-auto">
 			<div
 				class="bg-primary p-5 lg:p-[3.25rem] lg:rounded-[3rem] rounded-3xl text-white max-w-[99rem] lg:h-[21rem] h-[18rem] flex flex-col justify-center">
 				<img alt="" class="object-contain h-9" src="@app/assets/images/New/comment.svg">
-				<ion-text class="text-center font-bold text-xs lg:text-2xl mt-6">
+				<IonText class="text-center font-bold text-xs lg:text-2xl mt-6">
 					{{ testimonies[tab].text }}
-				</ion-text>
+				</IonText>
 
 				<div class="flex items-center justify-center lg:mt-16 mt-10">
 					<img v-if="testimonies[tab].img" :src="testimonies[tab].img"
 						class="object-cover lg:h-10 lg:w-10 h-5 w-5 rounded-full">
 
-					<ion-text class="text-center font-bold text-xs lg:text-xl ml-4">
+					<IonText class="text-center font-bold text-xs lg:text-xl ml-4">
 						{{ testimonies[tab].author }}
-					</ion-text>
+					</IonText>
 				</div>
 			</div>
 
 			<div class="flex my-4 gap-2 justify-center">
-				<IonIcon v-for="(t, i) in testimonies.length" :key="t" :class="tab === i ? 'text-white' : 'text-gray'"
+				<IonIcon v-for="(t, i) in testimonies.length" :key="t"
+					:class="tab === i ? 'text-white' : 'text-gray'"
 					:icon="ellipseOutline"
 					class="border border-gray rounded-full" @click="tab = i" />
 			</div>

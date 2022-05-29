@@ -1,6 +1,6 @@
 <template>
 	<div class="flex no-wrap justify-end">
-		<ion-icon
+		<IonIcon
 			v-for="index in 5"
 			:key="'comment'+ index"
 			:class="[index <= rating - 1 ? 'text-yellow_star' : 'text-icon_inactive', 'h-4 text-heading3 text-[18px]']"
@@ -11,12 +11,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonIcon } from '@ionic/vue'
 import { chevronBackOutline, ellipse, starSharp } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'ShowRatings',
-	components: { IonIcon },
 	props: {
 		rating: {
 			type: Number,

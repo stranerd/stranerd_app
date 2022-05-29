@@ -10,22 +10,13 @@
 				placeholder="Add a short description" />
 			<DisplayError :error="factory.errors.description" />
 		</div>
-
-		<div v-if="false" class="mb-12 flex items-center gap-4">
-			<IonToggle id="isHosted" v-model="factory.isHosted" />
-			<label for="isHosted">
-				{{
-					factory.isHosted ? 'Upload a document for the document' : 'Provide a link if the document is hosted elsewhere on the internet'
-				}}
-			</label>
-		</div>
-
+ 
 		<div v-if="factory.isHosted">
 			<FileInput type="file" @files="catchMedia">
-				<ion-button class="flex items-center btn-outline border-primary text-primary">
-					<ion-icon :icon="documentOutline" class="text-heading2 text-primary mr-2" />
+				<IonButton class="flex items-center btn-outline border-primary text-primary">
+					<IonIcon :icon="documentOutline" class="text-heading2 text-primary mr-2" />
 					{{ factory.media ? 'Change' : 'Add' }} Document
-				</ion-button>
+				</IonButton>
 			</FileInput>
 			<span v-if="factory.media" class="p-2 rounded-xl flex items-center text-primary">
 				{{ factory.media.name }}
@@ -41,9 +32,9 @@
 			<DisplayError :error="factory.errors.link" />
 		</div>
 
-		<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full md:!h-12" type="submit">
+		<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full md:!h-12" type="submit">
 			<slot name="buttonText">Submit</slot>
-		</ion-button>
+		</IonButton>
 
 		<PageLoading v-if="loading" />
 	</form>
@@ -54,11 +45,9 @@ import { defineComponent } from 'vue'
 import { closeOutline, documentOutline, image } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { DocumentFactory } from '@modules/study'
-import { IonToggle } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'DocumentForm',
-	components: { IonToggle },
 	props: {
 		factory: {
 			type: DocumentFactory,

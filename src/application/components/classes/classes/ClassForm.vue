@@ -69,7 +69,6 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, watch } from 'vue'
 import { ClassFactory } from '@modules/classes'
-import { IonLabel, IonSelect, IonSelectOption } from '@ionic/vue'
 import { closeOutline } from 'ionicons/icons'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useFacultyList } from '@app/composable/school/faculties'
@@ -77,7 +76,6 @@ import { useDepartmentList } from '@app/composable/school/departments'
 
 export default defineComponent({
 	name: 'ClassForm',
-	components: { IonSelect, IonSelectOption, IonLabel },
 	props: {
 		factory: {
 			type: ClassFactory,

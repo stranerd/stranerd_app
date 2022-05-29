@@ -30,9 +30,9 @@
 			info="No user has earned points this period." />
 
 		<router-link class="w-full" to="/users/leaderboard">
-			<ion-button class="btn-primary py-2 w-full">
+			<IonButton class="btn-primary py-2 w-full">
 				Leaderboard
-			</ion-button>
+			</IonButton>
 		</router-link>
 	</div>
 </template>

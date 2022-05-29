@@ -15,11 +15,11 @@
 				<span class="text-secondaryText capitalize">{{ question.subject }}</span>
 			</div>
 
-			<ion-button v-if="showAnswerButton"
+			<IonButton v-if="showAnswerButton"
 				class="btn-outline ml-auto"
 				@click="openAnswerModal(question)">
 				Answer
-			</ion-button>
+			</IonButton>
 		</div>
 
 		<DisplayHtml :html="question.trimmedBody" class="leading-normal font-500" />

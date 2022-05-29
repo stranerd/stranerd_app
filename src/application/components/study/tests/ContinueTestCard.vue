@@ -3,30 +3,29 @@
 		class="w-full flex flex-col card-padding justify-between">
 		<div class="flex flex-col">
 			<div class="flex justify-between">
-				<ion-text class="text-left w-full font-500 truncate capitalize">
+				<IonText class="text-left w-full font-500 truncate capitalize">
 					<Institution v-if="testPrep && testPrep.isPastQuestionType"
 						:institutionId="testPrep.data.institutionId" />
 					<span v-else>{{ test.name }}</span>
-				</ion-text>
+				</IonText>
 				<Tag :tag="test.isTimed ? 'Timed' : 'Study'" />
 			</div>
 
-			<ion-text class="text-left w-full text-sub truncate">
+			<IonText class="text-left w-full text-sub truncate">
 				<span v-if="testPrep && testPrep.isPastQuestionType">
 					<Course :courseId="testPrep.data.courseId" />
 					{{ testPrep.data.questionType }}
 					({{ testPrep.data.year }})
 				</span>
-			</ion-text>
+			</IonText>
 		</div>
 
-		<ion-progress-bar :value="test.progress" />
+		<IonProgressBar :value="test.progress" />
 	</router-link>
 </template>
 
 <script lang="ts">
 import { calendarOutline, playOutline } from 'ionicons/icons'
-import { IonProgressBar } from '@ionic/vue'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
 import { TestEntity } from '@modules/study'
@@ -37,7 +36,7 @@ import Tag from '../../core/Tag.vue'
 
 export default defineComponent({
 	name: 'ContinueTestCard',
-	components: { IonProgressBar, Institution, Course, Tag },
+	components: { Institution, Course, Tag },
 	props: {
 		test: {
 			required: true,

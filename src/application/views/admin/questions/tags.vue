@@ -8,11 +8,15 @@
 import { defineComponent } from 'vue'
 import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import TagsList from '@app/components/questions/tags/TagsList.vue'
+import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AdminQuestionsTags',
-	displayName: 'Question Tags',
 	components: { AdminWrapper, TagsList },
-	middlewares: ['isAdmin']
+	beforeRouteEnter: generateMiddlewares(['isAdmin']),
+	setup () {
+		useRouteMeta('Question Tags')
+	}
 })
 </script>

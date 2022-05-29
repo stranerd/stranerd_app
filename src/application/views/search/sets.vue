@@ -10,10 +10,13 @@
 import { defineComponent } from 'vue'
 import SearchWrapper from '@app/components/search/SearchWrapper.vue'
 import SearchSetsList from '@app/components/study/sets/SearchSetsList.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'SearchSets',
-	displayName: 'Search Folders',
-	components: { SearchWrapper, SearchSetsList }
+	components: { SearchWrapper, SearchSetsList },
+	setup () {
+		useRouteMeta('Search Folders')
+	}
 })
 </script>

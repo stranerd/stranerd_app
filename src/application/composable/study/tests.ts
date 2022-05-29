@@ -32,8 +32,6 @@ const listener = useListener(async () => {
 const testGlobal = {} as Record<string, {
 	questions: Ref<PastQuestionEntity[]>
 	fetched: Ref<boolean>,
-	tab: Ref<'list' | 'single'>,
-	questionIndex: Ref<number>,
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useTestList = () => {
@@ -140,8 +138,6 @@ export const useTestDetails = (test: TestEntity) => {
 	if (testGlobal[test.id] === undefined) testGlobal[test.id] = {
 		questions: ref([]),
 		fetched: ref(false),
-		tab: ref('list'),
-		questionIndex: ref(0),
 		...useErrorHandler(),
 		...useLoadingHandler()
 	}

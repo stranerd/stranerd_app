@@ -10,10 +10,13 @@
 import { defineComponent } from 'vue'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import ExploreTestPrepsList from '@app/components/study/testPreps/ExploreTestPrepsList.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudyPrepsStart',
-	displayName: 'Choose exam',
-	components: { DashboardLayout, ExploreTestPrepsList }
+	components: { DashboardLayout, ExploreTestPrepsList },
+	setup () {
+		useRouteMeta('Choose Exam')
+	}
 })
 </script>
