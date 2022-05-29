@@ -12,7 +12,7 @@ import { cssListeners } from '@app/plugins/cssListeners'
 import { App } from '@capacitor/app'
 import { domain } from '@utils/environment'
 import { clearAllNotifications } from '@utils/push'
-import { router as setupRouter } from '@app/router'
+import { router } from '@app/router'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { ChatScroll } from '@app/directives/chat-scroll'
 
@@ -20,7 +20,6 @@ const globalPlugins = [parseLoggedInUser, authClient, registerIonicComponent, re
 
 const init = async () => {
 	const app = createApp(AppComponent)
-	const router = await setupRouter
 
 	for (const plugin of globalPlugins) await plugin({ app, router }).catch()
 

@@ -52,12 +52,13 @@ import { defineComponent } from 'vue'
 import { useEmailSignin } from '@app/composable/auth/signin'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
 import Auth from '@app/layouts/Auth.vue'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'AuthSignin',
 	displayName: 'Login',
 	components: { AuthProviders, Auth },
-	middlewares: ['isNotAuthenticated'],
+	beforeRouteEnter: generateMiddlewares(['isNotAuthenticated']),
 	setup () {
 		const { factory, loading, error, signin } = useEmailSignin()
 		return { factory, loading, error, signin }

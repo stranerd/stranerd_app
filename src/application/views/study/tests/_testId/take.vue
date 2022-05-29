@@ -24,12 +24,13 @@ import TestBody from '@app/components/study/tests/TestBody.vue'
 import { useTest } from '@app/composable/study/tests'
 import { useRoute } from 'vue-router'
 import { defineComponent } from 'vue'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'StudyTestsTestIdTake',
 	displayName: 'Test',
 	components: { Justified, TestBody },
-	middlewares: ['isAuthenticated'],
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		const { testId } = useRoute().params
 		const { error, loading, test } = useTest(testId as string)

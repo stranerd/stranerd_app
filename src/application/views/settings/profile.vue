@@ -47,12 +47,13 @@ import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import { useProfileUpdate } from '@app/composable/auth/profile'
 import { IonTextarea } from '@ionic/vue'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'SettingsProfile',
 	displayName: 'Edit Profile',
 	components: { Justified, IonTextarea },
-	middlewares: ['isAuthenticated'],
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		const { factory, error, loading, updateProfile } = useProfileUpdate()
 		return { factory, error, loading, updateProfile }

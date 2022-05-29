@@ -7,11 +7,12 @@ import { defineComponent } from 'vue'
 import { getEditingQuestion } from '@app/composable/questions/questions'
 import { useAuth } from '@app/composable/auth/auth'
 import { useQuestionModal } from '@app/composable/core/modals'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'QuestionsQuestionIdEdit',
 	displayName: 'Edit Question',
-	middlewares: ['isAuthenticated', async ({ from, to }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
 		const { id } = useAuth()
 		const { questionId = '' } = to.params
 		const question = getEditingQuestion()
@@ -21,6 +22,6 @@ export default defineComponent({
 		useQuestionModal().openEditQuestion()
 		const backPath = from?.fullPath ?? '/dashboard'
 		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
-	}]
+	}])
 })
 </script>

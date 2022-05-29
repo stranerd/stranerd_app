@@ -4,10 +4,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
-	name: 'Admin404',
+	name: 'Auth404',
 	displayName: '404',
-	middlewares: [async () => '/admin/users/admins']
+	beforeRouteEnter: generateMiddlewares([async () => '/auth/signin'])
 })
 </script>

@@ -4,10 +4,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesClassIdGroups',
 	displayName: 'Groups',
-	middlewares: [async ({ to }) => `/messages?classId=${to.params.classId}`]
+	beforeRouteEnter: generateMiddlewares([async ({ to }) => `/messages?classId=${to.params.classId}`])
 })
 </script>

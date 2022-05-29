@@ -28,12 +28,13 @@ import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import { usePasswordUpdate } from '@app/composable/auth/passwords'
 import { useAuth } from '@app/composable/auth/auth'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'SettingsSecurity',
 	displayName: 'Security',
 	components: { Justified },
-	middlewares: ['isAuthenticated'],
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		const { hasPassword } = useAuth()
 		const { factory, error, loading, updatePassword } = usePasswordUpdate()

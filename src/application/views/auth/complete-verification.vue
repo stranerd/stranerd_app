@@ -31,12 +31,13 @@ import { defineComponent } from 'vue'
 import { useCompleteEmailVerification } from '@app/composable/auth/signin'
 import { useRoute } from 'vue-router'
 import Auth from '@app/layouts/Auth.vue'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'AuthCompleteVerification',
 	displayName: 'Complete Verification',
 	components: { Auth },
-	middlewares: ['hasQueryToken'],
+	beforeRouteEnter: generateMiddlewares(['hasQueryToken']),
 	setup () {
 		const { token } = useRoute().query
 		const { loading, error, completeVerification } = useCompleteEmailVerification(token as string)

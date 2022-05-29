@@ -7,11 +7,12 @@ import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useClassModal } from '@app/composable/core/modals'
 import { getEditingAnnouncement } from '@app/composable/classes/announcements'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesClassIdAnnouncementsAnnouncementIdEdit',
 	displayName: 'Edit Announcement',
-	middlewares: ['isAuthenticated', async ({ from, to }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
 		const { id } = useAuth()
 		const { classId = '', announcementId = '' } = to.params
 		const announcement = getEditingAnnouncement()
@@ -21,6 +22,6 @@ export default defineComponent({
 		useClassModal().openEditAnnouncement()
 		const backPath = from?.fullPath ?? '/dashboard'
 		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
-	}]
+	}])
 })
 </script>

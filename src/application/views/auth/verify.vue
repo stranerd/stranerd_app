@@ -31,14 +31,15 @@
 import { defineComponent } from 'vue'
 import { getEmailVerificationEmail, useEmailVerificationRequest } from '@app/composable/auth/signin'
 import Auth from '@app/layouts/Auth.vue'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'AuthVerify',
 	displayName: 'Verify Email',
 	components: { Auth },
-	middlewares: [async () => {
+	beforeRouteEnter: generateMiddlewares([async () => {
 		if (!getEmailVerificationEmail()) return '/auth/signin'
-	}],
+	}]),
 	setup () {
 		const { email, loading, error, message, sendVerificationEmail } = useEmailVerificationRequest()
 		return { email, loading, error, message, sendVerificationEmail }

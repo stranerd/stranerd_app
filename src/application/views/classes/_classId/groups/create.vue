@@ -7,11 +7,12 @@ import { defineComponent } from 'vue'
 import { useClassModal } from '@app/composable/core/modals'
 import { getGroupClass } from '@app/composable/classes/groups'
 import { useAuth } from '@app/composable/auth/auth'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesClassIdGroupsCreate',
 	displayName: 'Create Discussion Group',
-	middlewares: ['isAuthenticated', async ({ from }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from }) => {
 		const { id } = useAuth()
 		const classInst = getGroupClass()
 		if (!classInst) return '/classes/'
@@ -19,6 +20,6 @@ export default defineComponent({
 		useClassModal().openCreateGroup()
 		const backPath = from?.fullPath ?? '/dashboard'
 		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
-	}]
+	}])
 })
 </script>

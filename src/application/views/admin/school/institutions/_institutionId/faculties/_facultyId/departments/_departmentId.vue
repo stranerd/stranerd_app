@@ -30,12 +30,13 @@ import { useRoute } from 'vue-router'
 import { openDepartmentEditModal, useDeleteDepartment, useDepartment } from '@app/composable/school/departments'
 import { addOutline, pencilOutline, trashBinOutline } from 'ionicons/icons'
 import { openCourseCreateModal } from '@app/composable/school/courses'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'AdminStudyInstitutionsInstitutionIdDepartmentsDepartmentIdDepartmentsDepartmentId',
 	displayName: 'Department',
 	components: { AdminWrapper, AdminCoursesList },
-	middlewares: ['isAdmin'],
+	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
 		const route = useRoute()
 		const { departmentId, institutionId } = route.params

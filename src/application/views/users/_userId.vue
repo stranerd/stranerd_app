@@ -74,14 +74,15 @@ import UserQuestions from '@app/components/users/users/UserQuestions.vue'
 import UserAnswers from '@app/components/users/users/UserAnswers.vue'
 import UserFlashCards from '@app/components/users/users/UserFlashCards.vue'
 import UserDocuments from '@app/components/users/users/UserDocuments.vue'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'UsersUserId',
 	components: { Justified, Department, Institution, UserQuestions, UserAnswers, UserFlashCards, UserDocuments },
 	displayName: 'Profile',
-	middlewares: [async ({ to }) => {
+	beforeRouteEnter: generateMiddlewares([async ({ to }) => {
 		if (to.params.userId === useAuth().id.value) return '/account'
-	}],
+	}]),
 	setup () {
 		const { id, isAdmin } = useAuth()
 		const { userId } = useRoute().params

@@ -143,6 +143,7 @@ import { useCourseList } from '@app/composable/school/courses'
 import { useFacultyList } from '@app/composable/school/faculties'
 import { useDepartmentList } from '@app/composable/school/departments'
 import { UserSchoolType } from '@modules/users'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'SettingsSchool',
@@ -151,7 +152,7 @@ export default defineComponent({
 		Justified, IonRadio, IonRadioGroup, Institution, IonList, IonListHeader,
 		IonButton, IonInput, IonSelect, IonSelectOption, IonItem
 	},
-	middlewares: ['isAuthenticated'],
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		const { factory, error, loading, updateSchool } = useUserSchoolUpdate()
 

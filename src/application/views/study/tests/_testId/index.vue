@@ -4,9 +4,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'StudyTestsTestId',
-	middlewares: ['isAuthenticated', async ({ to }) => `/study/tests/${to.params.testId}/take`]
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ to }) => `/study/tests/${to.params.testId}/take`])
 })
 </script>

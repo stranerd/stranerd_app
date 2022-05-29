@@ -44,12 +44,13 @@ import { defineComponent } from 'vue'
 import { usePasswordReset } from '@app/composable/auth/passwords'
 import Auth from '@app/layouts/Auth.vue'
 import { useRoute } from 'vue-router'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'AuthReset',
 	displayName: 'Reset Password',
 	components: { Auth },
-	middlewares: ['hasQueryToken'],
+	beforeRouteEnter: generateMiddlewares(['hasQueryToken']),
 	setup () {
 		const { token } = useRoute().query
 		const { factory, loading, resetPassword, error, message } = usePasswordReset(token as string)

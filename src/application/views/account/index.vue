@@ -68,12 +68,13 @@ import {
 	readerOutline,
 	settingsOutline
 } from 'ionicons/icons'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'Account',
 	components: { Justified, Department, Institution },
 	displayName: 'Account',
-	middlewares: ['isAuthenticated'],
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		const { id, isAdmin, user } = useAuth()
 		return {

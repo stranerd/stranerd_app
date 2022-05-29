@@ -63,6 +63,7 @@ import { useTestPrepList } from '@app/composable/study/testPreps'
 import { IonItem, IonLabel, IonSelect, IonSelectOption } from '@ionic/vue'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'StudyPrepsInstitutionId',
@@ -78,7 +79,7 @@ export default defineComponent({
 		IonLabel,
 		EmptyState
 	},
-	middlewares: ['isAuthenticated'],
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		const route = useRoute()
 		const { institutionId } = route.params

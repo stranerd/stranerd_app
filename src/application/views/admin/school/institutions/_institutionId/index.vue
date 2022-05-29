@@ -38,12 +38,13 @@ import { openInstitutionEditModal, useDeleteInstitution, useInstitution } from '
 import { addOutline, pencilOutline, trashBinOutline } from 'ionicons/icons'
 import { openFacultyCreateModal } from '@app/composable/school/faculties'
 import { openCourseCreateModal } from '@app/composable/school/courses'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'AdminStudyInstitutionsInstitutionId',
 	displayName: 'Institution',
 	components: { AdminWrapper, AdminFacultiesList, AdminGeneralCoursesList },
-	middlewares: ['isAdmin'],
+	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
 		const route = useRoute()
 		const { institutionId } = route.params
