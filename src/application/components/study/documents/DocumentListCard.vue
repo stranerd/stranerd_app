@@ -36,7 +36,7 @@ import {
 	documentOutline,
 	pencilOutline,
 	settingsOutline,
-	trashOutline
+	trashBinOutline
 } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { DocumentEntity } from '@modules/study'
@@ -71,7 +71,7 @@ export default defineComponent({
 						text: 'Edit document', icon: pencilOutline,
 						handler: () => openDocumentEditModal(props.document, router)
 					},
-					{ text: 'Delete document', role: 'destructive', icon: trashOutline, handler: deleteDocument },
+					{ text: 'Delete document', role: 'destructive', icon: trashBinOutline, handler: deleteDocument },
 					{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
 				]
 			})

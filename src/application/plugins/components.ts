@@ -13,17 +13,13 @@ export const registerIonicComponent = definePlugin(async ({ app }) => {
 
 export const registerComponents = definePlugin(async ({ app }) => {
 	const contexts = [
-		require.context('../components/core', true, /\.vue$/),
-		require.context('../layouts/', true, /\.vue$/)
+		...Object.entries(import.meta.glob('../components/core/**/*.vue')),
+		...Object.entries(import.meta.glob('../layouts/**/*.vue'))
 	]
 
-	contexts.forEach((context) => {
-		context.keys().map(async (fileName) => {
-			const componentConfig = context(fileName)
-
-			const componentName = fileName.split('/').pop()?.replace(/\.\w+$/, '') ?? ''
-
-			app.component(componentName, componentConfig.default || componentConfig)
-		})
-	})
+	await Promise.all(contexts.map(async ([key, importFn]) => {
+		const componentName = key.split('/').pop()?.replace(/\.\w+$/, '') ?? ''
+		const componentConfig = await importFn()
+		app.component(componentName, componentConfig.default || componentConfig)
+	}))
 })

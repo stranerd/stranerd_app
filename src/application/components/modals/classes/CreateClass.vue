@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal class="h-screen md:h-auto">
 		<template v-slot:title>
 			Create a class
 		</template>

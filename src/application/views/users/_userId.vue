@@ -80,8 +80,7 @@ export default defineComponent({
 	components: { Justified, Department, Institution, UserQuestions, UserAnswers, UserFlashCards, UserDocuments },
 	displayName: 'Profile',
 	middlewares: [async ({ to }) => {
-		const { id } = useAuth()
-		if (to.params.userId === id.value) return '/account'
+		if (to.params.userId === useAuth().id.value) return '/account'
 	}],
 	setup () {
 		const { id, isAdmin } = useAuth()

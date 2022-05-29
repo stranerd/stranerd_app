@@ -37,7 +37,7 @@ import {
 	copyOutline,
 	pencilOutline,
 	settingsOutline,
-	trashOutline
+	trashBinOutline
 } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import Avatar from '@app/components/core/Avatar.vue'
@@ -69,7 +69,7 @@ export default defineComponent({
 						text: 'Edit flashCard', icon: pencilOutline,
 						handler: () => openFlashCardEditModal(props.flashCard, router)
 					},
-					{ text: 'Delete flashCard', role: 'destructive', icon: trashOutline, handler: deleteFlashCard },
+					{ text: 'Delete flashCard', role: 'destructive', icon: trashBinOutline, handler: deleteFlashCard },
 					{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
 				]
 			})

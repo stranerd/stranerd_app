@@ -13,7 +13,8 @@
 				</ion-text>
 
 				<div class="flex items-center justify-center lg:mt-16 mt-10">
-					<img v-if="testimonies[tab].img" :src="testimonies[tab].img" class="object-cover lg:h-10 lg:w-10 h-5 w-5 rounded-full">
+					<img v-if="testimonies[tab].img" :src="testimonies[tab].img"
+						class="object-cover lg:h-10 lg:w-10 h-5 w-5 rounded-full">
 
 					<ion-text class="text-center font-bold text-xs lg:text-xl ml-4">
 						{{ testimonies[tab].author }}
@@ -41,28 +42,23 @@ export default defineComponent({
 		const testimonies = [
 			{
 				text: 'I’d say, for someone like me who has difficulty concentrating on stuff, you made navigation very easy. User interface, beautiful and easy to navigate. Cool and simple colors that do not confuse or hurt the eyes. And yay, I got my answer faster than I expected. I loved it.',
-				author: 'Eunice Apo',
-				img: require('@app/assets/images/testimonials/eunice.jpeg')
+				author: 'Eunice Apo'
 			},
 			{
 				text: 'Aside the fact that their content on Instagram is super relatable and helpful, I posted a set of past questions I did not have the solutions to last semester and I got the solutions quickly.',
-				author: 'Emmanuel Bello',
-				img: require('@app/assets/images/testimonials/emmanuel.jpeg')
+				author: 'Emmanuel Bello'
 			},
 			{
 				text: 'It\'s very user friendly, and as someone mentioned earlier, the color palette of the website is easy on the eyes.',
-				author: 'Laureen Abayomi',
-				img: require('@app/assets/images/testimonials/laureen.jpeg')
+				author: 'Laureen Abayomi'
 			},
 			{
 				text: 'I\'ve been impressed mostly! I really like the "coin system”',
-				author: 'Daniel Uwagwu',
-				img: require('@app/assets/images/testimonials/daniel.jpeg')
+				author: 'Daniel Uwagwu'
 			},
 			{
 				text: 'Stranerd has helped open my eyes to new approaches to learning and education. The best part is that I also get to meet other intellectuals and scholars.',
-				author: 'Oreoluwa Oyinlola',
-				// img: require('')
+				author: 'Oreoluwa Oyinlola'
 			}
 		]
 		return {

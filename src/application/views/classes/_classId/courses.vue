@@ -9,8 +9,8 @@ import { useClassModal } from '@app/composable/core/modals'
 import { getEditingClass } from '@app/composable/classes/classes'
 
 export default defineComponent({
-	name: 'ClassesClassIdEdit',
-	displayName: 'Edit class info',
+	name: 'ClassesClassIdCourses',
+	displayName: 'Courses list',
 	middlewares: ['isAuthenticated', async ({ from, to }) => {
 		const { id } = useAuth()
 		const { classId = '' } = to.params
@@ -18,7 +18,7 @@ export default defineComponent({
 		if (!classInst || classInst.id !== classId) return `/classes/${classId}`
 		const canEdit = classInst.admins.includes(id.value)
 		if (!canEdit) return `/classes/${classInst.id}`
-		useClassModal().openEditClass()
+		useClassModal().openEditClassCourses()
 		const backPath = from?.fullPath ?? '/dashboard'
 		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
 	}]

@@ -1,10 +1,12 @@
 <template>
-	<Modal>
+	<Modal class="h-screen md:h-auto">
 		<template v-slot:title>
-			Edit Class
+			Edit class info
 		</template>
-		<ClassForm :error="error" :factory="factory" :loading="loading" :submit="editClass">
-			<template v-slot:buttonText>Update class</template>
+		<ClassForm :disabled="{ departmentId: true, facultyId: true, institutionId: true }" :error="error"
+			:factory="factory"
+			:loading="loading" :submit="editClass">
+			<template v-slot:buttonText>Save</template>
 		</ClassForm>
 	</Modal>
 </template>

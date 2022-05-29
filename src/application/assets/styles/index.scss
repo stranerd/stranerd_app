@@ -2,7 +2,7 @@
 @import './ionic.scss';
 @import './tailwind.css';
 @import './layout.scss';
-@import '~katex/dist/katex.min.css';
+@import 'katex/dist/katex.min.css';
 
 :root {
 	--clr-primaryBg: #162565;
@@ -22,25 +22,25 @@
 	--clr-warning: #FFA84B;
 }
 
-// @media (prefers-color-scheme: dark) {
-// 	:root {
-// 		--clr-primaryBg: #FFFFFF;
-// 		--clr-primaryText: #1E2230;
-// 		--clr-primaryHover: #F1EAEA;
-// 		--clr-bodyBg: #1E2230;
-// 		--clr-bodyText: #FFFFFF;
-// 		--clr-headerBg: #05090D;
-// 		--clr-headerText: #FFFFFF;
-// 		--clr-itemBg: #494C58;
-// 		--clr-secondaryText: #F1F3F7;
-// 		--clr-disabled: #C5C9D9;
-// 		--clr-outlineHover: #181C27;
-// 		--clr-success: #0FDC64;
-// 		--clr-danger: #FF3232;
-// 		--clr-info: #218FDF;
-// 		--clr-warning: #FFA84B;
-// 	}
-// }
+@media (prefers-color-scheme: dark) {
+	:root {
+		--clr-primaryBg: #FFFFFF;
+		--clr-primaryText: #1E2230;
+		--clr-primaryHover: #F1EAEA;
+		--clr-bodyBg: #1E2230;
+		--clr-bodyText: #FFFFFF;
+		--clr-headerBg: #05090D;
+		--clr-headerText: #FFFFFF;
+		--clr-itemBg: #494C58;
+		--clr-secondaryText: #F1F3F7;
+		--clr-disabled: #313142;
+		--clr-outlineHover: #181C27;
+		--clr-success: #0FDC64;
+		--clr-danger: #FF3232;
+		--clr-info: #218FDF;
+		--clr-warning: #FFA84B;
+	}
+}
 
 $spacers: (
 	0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14,

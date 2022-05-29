@@ -52,7 +52,7 @@
 						</span>
 						<span class="text-dark truncate mr-auto">{{ event.title }}</span>
 						<IonIcon :icon="pencilOutline" class="text-orange text-heading2" @click="enterEdit(event)" />
-						<IonIcon :icon="trashOutline" class="text-red text-heading2" @click="deleteEvent(event)" />
+						<IonIcon :icon="trashBinOutline" class="text-red text-heading2" @click="deleteEvent(event)" />
 					</div>
 				</div>
 				<div class="flex gap-4 items-center">
@@ -79,7 +79,7 @@
 import { computed, defineComponent, Ref, ref } from 'vue'
 import { useCreateEvent, useDeleteEvent, useEditEvent, useTimetable } from '@app/composable/classes/timetable'
 import { EventEntity, EventFactory, EventType } from '@modules/classes'
-import { pencilOutline, trashOutline } from 'ionicons/icons'
+import { pencilOutline, trashBinOutline } from 'ionicons/icons'
 import { IonSelect, IonSelectOption } from '@ionic/vue'
 
 export default defineComponent({
@@ -127,7 +127,7 @@ export default defineComponent({
 			tab, editError, updateEvent, enterEdit, pencilOutline,
 			activeDay, days, chooseDay, factory, loading,
 			listLoading, listError, timetable, editingEvent,
-			trashOutline, deleteEvent, deleteLoading, deleteError
+			trashBinOutline, deleteEvent, deleteLoading, deleteError
 		}
 	}
 })

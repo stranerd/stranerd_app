@@ -297,9 +297,9 @@ export const useClass = (classId: string) => {
 
 let editingClass = null as ClassEntity | null
 export const getEditingClass = () => editingClass
-export const openClassEditModal = async (classInst: ClassEntity, router: Router) => {
+export const openClassEditModal = async (classInst: ClassEntity, router: Router, openCourses = false) => {
 	editingClass = classInst
-	await router.push(`/classes/${classInst.id}/edit`)
+	await router.push(`/classes/${classInst.id}/${openCourses ? 'courses' : 'edit'}`)
 }
 export const useEditClass = () => {
 	const { error, setError } = useErrorHandler()
@@ -317,6 +317,7 @@ export const useEditClass = () => {
 				await ClassesUseCases.update(editingClass!.id, factory.value)
 				await setMessage('Class updated successfully')
 				useClassModal().closeEditClass()
+				useClassModal().closeEditClassCourses()
 				factory.value.reset()
 				await router.replace(`/classes/${editingClass!.id}`)
 			} catch (error) {

@@ -23,7 +23,7 @@
 					<div class="flex w-full items-center justify-between mb-1">
 						<ion-text class="text-secondaryText font-normal"> {{ index + 1 }}</ion-text>
 						<div class="flex" @click="factory.removeQuestion(index)">
-							<ion-icon :icon='trashOutline' class="text-red" />
+							<ion-icon :icon='trashBinOutline' class="text-red" />
 						</div>
 					</div>
 
@@ -64,7 +64,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { IonReorder, IonReorderGroup, IonTextarea } from '@ionic/vue'
-import { addOutline, closeOutline, trashOutline } from 'ionicons/icons'
+import { addOutline, closeOutline, trashBinOutline } from 'ionicons/icons'
 import { FlashCardFactory } from '@modules/study'
 
 export default defineComponent({
@@ -93,7 +93,7 @@ export default defineComponent({
 	},
 	components: { IonTextarea, IonReorderGroup, IonReorder },
 	setup () {
-		return { closeOutline, trashOutline, addOutline }
+		return { closeOutline, trashBinOutline, addOutline }
 	}
 })
 </script>

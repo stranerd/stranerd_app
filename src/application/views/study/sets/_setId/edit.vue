@@ -1,9 +1,5 @@
 <template>
-	<IonPage>
-		<IonContent>
-			<h1>Edit Set</h1>
-		</IonContent>
-	</IonPage>
+	<div />
 </template>
 
 <script lang="ts">
@@ -11,12 +7,10 @@ import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useStudyModal } from '@app/composable/core/modals'
 import { getEditingSet } from '@app/composable/study/sets'
-import { IonContent, IonPage } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'StudySetsSetIdEdit',
 	displayName: 'Edit Folder',
-	components: { IonContent, IonPage },
 	middlewares: ['isAuthenticated', async ({ from, to }) => {
 		const { id } = useAuth()
 		const { setId = '' } = to.params

@@ -54,7 +54,7 @@
 			<div class="mb-8 flex flex-col">
 				<IonRadioGroup v-model="factory.correctIndex" class="flex flex-col gap-4">
 					<div v-for="(_, index) in factory.options" :key="index" class="flex gap-4 justify-between">
-						<IonIcon :icon="trashOutline" class="cursor-pointer text-heading2 text-red"
+						<IonIcon :icon="trashBinOutline" class="cursor-pointer text-heading2 text-red"
 							@click="factory.removeOption(index)" />
 						<IonTextarea v-model="factory.options[index]"
 							:placeholder="`Enter Option ${getAlphabet(index + 1).toUpperCase()}`"
@@ -98,7 +98,7 @@ import { computed, defineComponent } from 'vue'
 import { PastQuestionFactory } from '@modules/school'
 import { IonRadio, IonRadioGroup, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
 import { getAlphabet } from '@utils/commons'
-import { addOutline, trashOutline } from 'ionicons/icons'
+import { addOutline, trashBinOutline } from 'ionicons/icons'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
 import { years } from '@utils/constants'
@@ -129,7 +129,7 @@ export default defineComponent({
 		const { courses: allCourses, loading: courseLoading } = useCourseList()
 		const courses = computed(() => new Set(allCourses.value.filter((c) => c.institutionId === props.factory.institutionId)))
 		return {
-			getAlphabet, addOutline, trashOutline,
+			getAlphabet, addOutline, trashBinOutline,
 			institutions, courses, institutionLoading, courseLoading, years
 		}
 	}

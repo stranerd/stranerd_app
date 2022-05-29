@@ -35,7 +35,7 @@ import {
 	folderOutline,
 	pencilOutline,
 	settingsOutline,
-	trashOutline
+	trashBinOutline
 } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
@@ -62,7 +62,7 @@ export default defineComponent({
 						text: 'Edit folder', icon: pencilOutline,
 						handler: () => openSetEditModal(props.set, router)
 					},
-					{ text: 'Delete folder', role: 'destructive', icon: trashOutline, handler: deleteSet },
+					{ text: 'Delete folder', role: 'destructive', icon: trashBinOutline, handler: deleteSet },
 					{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
 				]
 			})

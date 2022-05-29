@@ -13,7 +13,7 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 	protected values: K
 	protected validValues: K
 
-	protected constructor(keys: K) {
+	protected constructor (keys: K) {
 		this.defaults = reactive({ ...keys })
 		this.values = reactive({ ...keys })
 		this.validValues = reactive({ ...keys })
@@ -24,13 +24,13 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 			}, reactive({}) as Record<keyof K, string>)
 	}
 
-	get valid() {
+	get valid () {
 		return Object.keys(this.defaults)
 			.map((key) => this.isValid(key))
 			.every((valid) => valid)
 	}
 
-	set(property: keyof K, value: any) {
+	set (property: keyof K, value: any) {
 		const check = this.checkValidity(property, value)
 
 		this.values[property] = value
@@ -42,12 +42,12 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 
 	isValid = (property: keyof K) => this.checkValidity(property, this.validValues[property]).isValid
 
-	validateAll() {
+	validateAll () {
 		Object.keys(this.defaults)
 			.forEach((key) => this.set(key, this.values[key]))
 	}
 
-	checkValidity(property: keyof K, value: any) {
+	checkValidity (property: keyof K, value: any) {
 		const { isValid, errors } = Validator.single(value, this.rules[property].rules, {
 			required: this.rules[property].required,
 			nullable: this.rules[property].nullable
@@ -55,22 +55,22 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 		return { isValid, message: errors.find((e) => !!e) ?? '' }
 	}
 
-	reset() {
+	reset () {
 		const reserved = (this.reserved ?? []).concat(['userId', 'user', 'userBio'])
 		Object.keys(this.defaults)
 			.filter((key) => !reserved.includes(key))
 			.forEach((key) => this.resetProp(key))
 	}
 
-	async uploadFile(path: string, file: UploadedFile) {
+	async uploadFile (path: string, file: UploadedFile) {
 		return await UploaderService.single(path, file)
 	}
 
-	async uploadFiles(path: string, files: UploadedFile[]) {
+	async uploadFiles (path: string, files: UploadedFile[]) {
 		return await UploaderService.multiple(path, files)
 	}
 
-	resetProp(property: keyof K) {
+	resetProp (property: keyof K) {
 		this.values[property] = this.defaults[property]
 		this.validValues[property] = this.defaults[property]
 		this.errors[property] = ''
