@@ -2,9 +2,9 @@
 	<AdminWrapper>
 		<div>
 			<div class="flex justify-end mb-4">
-				<ion-button class="btn-primary" @click="openCreateInstitution">
+				<IonButton class="btn-primary" @click="openCreateInstitution">
 					Add New Institution
-				</ion-button>
+				</IonButton>
 			</div>
 			<AdminInstitutionsList />
 		</div>

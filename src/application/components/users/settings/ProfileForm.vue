@@ -5,8 +5,8 @@
 		<div class="flex flex-col items-start">
 			<div class="flex w-full gap-4">
 				<div class="flex flex-col w-1/2">
-					<ion-label class="font-bold text-sm mb-2">First Name</ion-label>
-					<ion-input v-model="factory.first"
+					<IonLabel class="font-bold text-sm mb-2">First Name</IonLabel>
+					<IonInput v-model="factory.first"
 						:class="{'valid': factory.isValid('first'), 'invalid': factory.errors.first}"
 						:size="24"
 						placeholder="First Name"
@@ -14,8 +14,8 @@
 					<DisplayError :error="factory.errors.first" />
 				</div>
 				<div class="flex flex-col w-1/2">
-					<ion-label class="font-bold text-sm mb-2">Last Name</ion-label>
-					<ion-input v-model="factory.last"
+					<IonLabel class="font-bold text-sm mb-2">Last Name</IonLabel>
+					<IonInput v-model="factory.last"
 						:class="{'valid': factory.isValid('last'), 'invalid': factory.errors.last}"
 						:size="24" placeholder="Last Name"
 						position="floating"
@@ -26,26 +26,25 @@
 		</div>
 
 		<div class="flex flex-col items-start">
-			<ion-label class="font-bold text-sm mb-2">Bio</ion-label>
-			<ion-textarea v-model="factory.description"
+			<IonLabel class="font-bold text-sm mb-2">Bio</IonLabel>
+			<IonTextarea v-model="factory.description"
 				:class="{'valid': factory.isValid('description'), 'invalid': factory.errors.description}"
 				placeholder="Short description on your profile"
 				rows="3" show-cancel-button="never" />
 		</div>
 
 		<div class="flex w-full justify-end gap-2 items-center">
-			<ion-button :disabled="loading || !factory.valid" class="btn-primary w-24" type="submit">
+			<IonButton :disabled="loading || !factory.valid" class="btn-primary w-24" type="submit">
 				<SpinLoading v-if="loading" />
 				<span v-else>Next</span>
-				<ion-ripple-effect class="rounded-lg" />
-			</ion-button>
+				<IonRippleEffect class="rounded-lg" />
+			</IonButton>
 		</div>
 	</form>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonRippleEffect, IonTextarea } from '@ionic/vue'
 import { useProfileUpdate } from '@app/composable/auth/profile'
 
 export default defineComponent({
@@ -56,7 +55,6 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { IonRippleEffect, IonTextarea },
 	setup (props) {
 		const { factory, loading, error, updateProfile } = useProfileUpdate()
 		const submit = async () => {

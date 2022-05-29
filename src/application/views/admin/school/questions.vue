@@ -2,9 +2,9 @@
 	<AdminWrapper>
 		<div>
 			<div class="flex justify-end mb-4">
-				<ion-button class="btn-primary" @click.prevent="openCreatePastQuestion">
+				<IonButton class="btn-primary" @click.prevent="openCreatePastQuestion">
 					Add New Question
-				</ion-button>
+				</IonButton>
 			</div>
 			<AdminPastQuestionsList />
 		</div>

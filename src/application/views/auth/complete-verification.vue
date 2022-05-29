@@ -11,10 +11,10 @@
 					<span class="text-secondaryText text-center">
 						If an error occurred, click the button below to retry verification.
 					</span>
-					<ion-button :disabled="loading" class="w-full text-sm btn-primary mt-2" type="submit">
+					<IonButton :disabled="loading" class="w-full text-sm btn-primary mt-2" type="submit">
 						<SpinLoading v-if="loading" />
 						<span v-else>Retry Verification</span>
-					</ion-button>
+					</IonButton>
 					<div class="w-full flex justify-center items-center">
 						<router-link class="text-primaryBg" to="/auth/signin">
 							Back to Sign In

@@ -2,15 +2,15 @@
 	<router-link :to="`/study/documents/${document.id}`"
 		class="flex flex-col justify-between card-padding">
 		<div class="flex gap-4 items-center">
-			<ion-text class="font-500 truncate w-full">{{ document.title }}</ion-text>
-			<ion-icon :icon="arrowForwardOutline" class="text-heading2" />
+			<IonText class="font-500 truncate w-full">{{ document.title }}</IonText>
+			<IonIcon :icon="arrowForwardOutline" class="text-heading2" />
 		</div>
 		<div class="w-full flex items-center justify-between gap-2 text-sub">
 			<Tag tag="Document">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
-						<ion-icon :icon="documentOutline" class="text-base mr-1" />
-						<ion-text class="text-sub">{{ slotProps.tag }}</ion-text>
+						<IonIcon :icon="documentOutline" class="text-base mr-1" />
+						<IonText class="text-sub">{{ slotProps.tag }}</IonText>
 					</span>
 				</template>
 			</Tag>

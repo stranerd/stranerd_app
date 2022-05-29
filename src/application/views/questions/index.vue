@@ -22,13 +22,12 @@ import { defineComponent, ref } from 'vue'
 import DashboardLayout from '@app/layouts/Dashboard.vue'
 import QuestionsList from '@app/components/questions/questions/QuestionsList.vue'
 import MyQuestionsList from '@app/components/questions/questions/MyQuestionsList.vue'
-import { IonSegment, IonSegmentButton } from '@ionic/vue'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'Questions',
 	displayName: 'Questions',
-	components: { QuestionsList, MyQuestionsList, DashboardLayout, IonSegment, IonSegmentButton },
+	components: { QuestionsList, MyQuestionsList, DashboardLayout },
 	setup () {
 		const tab = ref('all')
 		const { isLoggedIn } = useAuth()

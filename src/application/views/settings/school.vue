@@ -65,10 +65,10 @@
 					</IonSelect>
 				</div>
 
-				<ion-button :disabled="loading || !factory.valid" class="!w-full btn-primary" type="submit">
+				<IonButton :disabled="loading || !factory.valid" class="!w-full btn-primary" type="submit">
 					<SpinLoading v-if="loading" />
 					<span v-else>Save School</span>
-				</ion-button>
+				</IonButton>
 			</div>
 
 			<template v-else>
@@ -126,17 +126,6 @@
 import { computed, defineComponent, onMounted, watch } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import { useUserSchoolUpdate } from '@app/composable/auth/profile'
-import {
-	IonButton,
-	IonInput,
-	IonItem,
-	IonList,
-	IonListHeader,
-	IonRadio,
-	IonRadioGroup,
-	IonSelect,
-	IonSelectOption
-} from '@ionic/vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
@@ -148,10 +137,7 @@ import { generateMiddlewares } from '@app/middlewares'
 export default defineComponent({
 	name: 'SettingsSchool',
 	displayName: 'Edit School',
-	components: {
-		Justified, IonRadio, IonRadioGroup, Institution, IonList, IonListHeader,
-		IonButton, IonInput, IonSelect, IonSelectOption, IonItem
-	},
+	components: { Institution },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		const { factory, error, loading, updateSchool } = useUserSchoolUpdate()

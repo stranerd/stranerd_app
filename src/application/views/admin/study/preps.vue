@@ -2,7 +2,7 @@
 	<AdminWrapper>
 		<div>
 			<div class="flex justify-end mb-4">
-				<ion-button class="btn-primary" @click="openCreateTestPrep">Add New Test</ion-button>
+				<IonButton class="btn-primary" @click="openCreateTestPrep">Add New Test</IonButton>
 			</div>
 			<AdminTestPrepsList />
 		</div>

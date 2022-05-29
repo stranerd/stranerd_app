@@ -1,5 +1,5 @@
 <template>
-	<ion-toolbar class="hidden lg:flex border-0 h-20">
+	<IonToolbar class="hidden lg:flex border-0 h-20">
 		<div class="flex items-center">
 			<div class="w-[16%]">
 				<router-link class="flex items-center w-full justify-center" to="/">
@@ -12,7 +12,7 @@
 				</div>
 				<div class="w-[25%] flex-auto flex text-secondaryText">
 					<div class="flex flex-row items-center py-1 gap-8 justify-between">
-						<ion-icon :icon="addCircleOutline" class="text-heading3"
+						<IonIcon :icon="addCircleOutline" class="text-heading3"
 							@click="openCreateDashboardMenu" />
 						<router-link class="flex items-center justify-center"
 							to="/notifications">
@@ -27,7 +27,7 @@
 								<span>{{ user.bio.fullName }}</span>
 								<Verified :verified="user.isVerified" />
 							</span>
-							<ion-icon :icon="chevronDownOutline" class="text-heading2" />
+							<IonIcon :icon="chevronDownOutline" class="text-heading2" />
 						</div>
 						<router-link v-else to="/auth/signin">
 							<avatar :size="24" />
@@ -36,12 +36,11 @@
 				</div>
 			</div>
 		</div>
-	</ion-toolbar>
+	</IonToolbar>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonToolbar } from '@ionic/vue'
 import { addCircleOutline, chevronDownOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useMenuPopover } from '@app/composable/core/modals'
@@ -50,7 +49,7 @@ import NotificationIcon from '@app/components/users/notifications/NotificationIc
 
 export default defineComponent({
 	name: 'BigScreenBar',
-	components: { Search, IonToolbar, NotificationIcon },
+	components: { Search, NotificationIcon },
 	setup () {
 		const openCreateDashboardMenu = useMenuPopover().openCreateDashboardMenu
 		const openUserDashboardMenu = useMenuPopover().openUserDashboardMenu

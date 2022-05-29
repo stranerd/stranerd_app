@@ -1,9 +1,9 @@
 <template>
 	<Justified>
 		<form class="p-4 flex flex-col gap-4" @submit.prevent="updatePassword">
-			<ion-text class="text-heading font-semibold">
+			<IonText class="text-heading font-semibold">
 				{{ hasPassword ? 'Update Password' : 'Add Password' }}
-			</ion-text>
+			</IonText>
 			<IonInput v-if="hasPassword" v-model="factory.oldPassword" class="w-full font-medium"
 				placeholder="Confirm Old Password"
 				type="password" />
@@ -15,10 +15,10 @@
 					placeholder="Confirm New Password"
 					type="password" />
 			</div>
-			<ion-button :disabled="loading" class="w-full btn-primary" type="submit">
+			<IonButton :disabled="loading" class="w-full btn-primary" type="submit">
 				<SpinLoading v-if="loading" />
 				<span v-else>Save Password</span>
-			</ion-button>
+			</IonButton>
 		</form>
 	</Justified>
 </template>

@@ -6,10 +6,10 @@
 				class="py-3 px-7 border border-bodyText font-bold rounded-xl">
 				{{ btnText }}
 			</router-link>
-			<ion-button v-else-if="btnText && onClick"
+			<IonButton v-else-if="btnText && onClick"
 				class="py-3 px-7 border border-bodyText font-bold rounded-xl">
 				{{ btnText }}
-			</ion-button>
+			</IonButton>
 		</slot>
 	</div>
 </template>

@@ -3,9 +3,9 @@
 		<PageLoading v-if="loading" />
 
 		<div class="flex item-center justify-between mb-2 w-full">
-			<ion-text class="text-secondaryText font-bold text-heading">
+			<IonText class="text-secondaryText font-bold text-heading">
 				Question {{ questionIndex + 1 }}
-			</ion-text>
+			</IonText>
 			<div class="flex items-center text-lg text-icon_inactive gap-4">
 				<IonIcon :icon="flagOutline" @click="createReport(question)" />
 			</div>

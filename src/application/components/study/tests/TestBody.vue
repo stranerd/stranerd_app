@@ -9,27 +9,27 @@
 			<div :style="`width:${test.progress * 100}%`" class="bg-primary h-1" />
 			<div class="lg:w-8/12 w-full px-4 mx-auto flex items-center justify-between py-2">
 				<div>
-					<ion-text v-if="test.isOBJ" class="text-secondaryText">
+					<IonText v-if="test.isOBJ" class="text-secondaryText">
 						{{ test.answered }}/{{ formatNumber(questions.length) }} answered
-					</ion-text>
+					</IonText>
 				</div>
 
 				<div>
 					<template v-if="test.isTimed && !test.done">
 						<div class="h-2 w-2 bg-red-500 rounded-full mr-4" />
-						<ion-text class="text-icon_inactive">
+						<IonText class="text-icon_inactive">
 							{{ countDown }}
-						</ion-text>
+						</IonText>
 					</template>
 				</div>
 
 				<div>
 					<router-link v-if="test.done && test.isTimed" :to="`/study/tests/${test.id}/results`">
-						<ion-button class="btn-outline">See Results</ion-button>
+						<IonButton class="btn-outline">See Results</IonButton>
 					</router-link>
-					<ion-button v-if="!test.done" class="btn-primary" @click="openSubmitTest">
+					<IonButton v-if="!test.done" class="btn-primary" @click="openSubmitTest">
 						{{ test.isTimed ? 'Submit' : 'End Study' }}
-					</ion-button>
+					</IonButton>
 				</div>
 			</div>
 		</div>

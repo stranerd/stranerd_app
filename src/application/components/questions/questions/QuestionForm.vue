@@ -31,16 +31,16 @@
 				class="w-full lg:w-auto"
 				@files="catchAttachments"
 			>
-				<ion-button class="btn-outline w-full flex items-center">
-					<ion-icon :icon="imageOutline" class="text-heading3 text-primary mr-2" />
+				<IonButton class="btn-outline w-full flex items-center">
+					<IonIcon :icon="imageOutline" class="text-heading3 text-primary mr-2" />
 					<span>Add image</span>
-				</ion-button>
+				</IonButton>
 			</FileInput>
-			<ion-button :disabled="loading || !factory.valid"
+			<IonButton :disabled="loading || !factory.valid"
 				class="w-full lg:w-auto btn-primary flex items-center" type="submit">
-				<ion-icon :icon="paperPlaneOutline" class="text-heading3 text-white mr-2" />
+				<IonIcon :icon="paperPlaneOutline" class="text-heading3 text-white mr-2" />
 				<slot name="buttonText">Submit</slot>
-			</ion-button>
+			</IonButton>
 		</div>
 
 		<PageLoading v-if="loading" />
@@ -49,7 +49,6 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { IonIcon } from '@ionic/vue'
 import { closeOutline, imageOutline, paperPlaneOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
@@ -57,10 +56,7 @@ import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 
 export default defineComponent({
 	name: 'QuestionForm',
-	components: {
-		BaseEditor,
-		IonIcon
-	},
+	components: { BaseEditor },
 	props: {
 		factory: {
 			type: Object as PropType<QuestionFactory>,

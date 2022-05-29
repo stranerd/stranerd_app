@@ -34,14 +34,13 @@
 import { defineComponent } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import { logoInstagram, logoTwitter, logoWhatsapp, mailOutline, paperPlaneOutline } from 'ionicons/icons'
-import { IonTextarea } from '@ionic/vue'
 import { useCreateMessage } from '@app/composable/forms/messages'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'SettingsContact',
 	displayName: 'Contact Us',
-	components: { Justified, IonTextarea },
+	components: { Justified },
 	setup () {
 		const { user } = useAuth()
 		const { factory, loading, error, createMessage } = useCreateMessage()

@@ -17,11 +17,10 @@
 import { defineComponent, ref } from 'vue'
 import { useUserClassList } from '@app/composable/users/users/classes'
 import ClassesGroupsList from '@app/components/classes/groups/ClassesGroupsList.vue'
-import { IonSearchbar } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'MessagesList',
-	components: { ClassesGroupsList, IonSearchbar },
+	components: { ClassesGroupsList },
 	setup () {
 		const searchTerm = ref('')
 		const { classes, error, loading } = useUserClassList()

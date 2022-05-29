@@ -1,9 +1,9 @@
 <template>
 	<div class="h-full md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
 		<div class="bg-white md:rounded-xl flex items-center justify-between gap-2 md:px-4 lg:p-4">
-			<ion-text class="text-secondaryText leading-tight text-heading font-bold hidden md:inline">
+			<IonText class="text-secondaryText leading-tight text-heading font-bold hidden md:inline">
 				Leaderboard
-			</ion-text>
+			</IonText>
 			<div class="w-full md:w-auto border-bottom-line">
 				<IonSelect v-model="time"
 					class="md:w-[138px] md:bg-new_gray p-4 w-full text-sub placeholder-[#8B9EB1] font-bold capitalize"
@@ -21,13 +21,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonSelect, IonSelectOption } from '@ionic/vue'
 import LeaderboardList from '@app/components/users/leaderboard/LeaderboardList.vue'
 import { time, times } from '@app/composable/users/leaderboard'
 
 export default defineComponent({
 	name: 'Leaderboard',
-	components: { LeaderboardList, IonSelect, IonSelectOption },
+	components: { LeaderboardList },
 	setup () {
 		return { times, time }
 	}

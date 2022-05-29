@@ -5,41 +5,41 @@
 		</div>
 		<div class="flex flex-col md:flex-row gap-4 items-center justify-center w-full mb-8">
 			<div class="md:w-1/5 w-full">
-				<ion-select v-model="filters.institution"
+				<IonSelect v-model="filters.institution"
 					class="capitalize" interface="action-sheet"
 					placeholder="Institution">
-					<ion-select-option v-for="institution in institutions" :key="institution.hash"
+					<IonSelectOption v-for="institution in institutions" :key="institution.hash"
 						:value="institution.id" class="capitalize">
 						{{ institution.name }}
-					</ion-select-option>
-				</ion-select>
+					</IonSelectOption>
+				</IonSelect>
 			</div>
 			<div class="md:w-1/5 w-full">
-				<ion-select v-model="filters.course" class="capitalize"
+				<IonSelect v-model="filters.course" class="capitalize"
 					interface="action-sheet" placeholder="Course">
-					<ion-select-option v-for="course in courses" :key="course.hash" :value="course.id"
+					<IonSelectOption v-for="course in courses" :key="course.hash" :value="course.id"
 						class="capitalize">
 						{{ course.name }}
-					</ion-select-option>
-				</ion-select>
+					</IonSelectOption>
+				</IonSelect>
 			</div>
 			<div class="md:w-1/5 w-full">
-				<ion-select v-model.number="filters.year" class="rounded-xl"
+				<IonSelect v-model.number="filters.year" class="rounded-xl"
 					interface="action-sheet" placeholder="Year">
-					<ion-select-option v-for="year in years" :key="year" :value="year">
+					<IonSelectOption v-for="year in years" :key="year" :value="year">
 						{{ year }}
-					</ion-select-option>
-				</ion-select>
+					</IonSelectOption>
+				</IonSelect>
 			</div>
 			<div class="md:w-1/5 w-full">
-				<ion-select v-model="filters.questionType"
+				<IonSelect v-model="filters.questionType"
 					class="capitalize" interface="action-sheet"
 					placeholder="Mode">
-					<ion-select-option v-for="questionType in questionTypes" :key="questionType" :value="questionType"
+					<IonSelectOption v-for="questionType in questionTypes" :key="questionType" :value="questionType"
 						class="capitalize">
 						{{ questionType }}
-					</ion-select-option>
-				</ion-select>
+					</IonSelectOption>
+				</IonSelect>
 			</div>
 			<IonButton :disabled="!filters.institution || !filters.course || !filters.year || !filters.questionType"
 				class="md:w-1/5 w-full btn-primary"
@@ -60,7 +60,6 @@
 import { computed, defineComponent, watch } from 'vue'
 import PastQuestionListCard from '@app/components/school/pastQuestions/AdminPastQuestionListCard.vue'
 import { usePastQuestionList } from '@app/composable/school/pastQuestions'
-import { IonSelect, IonSelectOption } from '@ionic/vue'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { PastQuestionType } from '@modules/school'
 import { useCourseList } from '@app/composable/school/courses'
@@ -68,7 +67,7 @@ import { years } from '@utils/constants'
 
 export default defineComponent({
 	name: 'AdminPastQuestionsList',
-	components: { PastQuestionListCard, IonSelect, IonSelectOption },
+	components: { PastQuestionListCard },
 	setup () {
 		const { loading, fetched, error, pastQuestions, filters, fetchPastQuestions } = usePastQuestionList()
 		const { institutions, loading: institutionLoading } = useInstitutionList()

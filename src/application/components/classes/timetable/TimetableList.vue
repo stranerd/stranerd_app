@@ -1,9 +1,9 @@
 <template>
 	<div class="showcase-flex">
 		<div class="flex justify-end px-4 md:px-0">
-			<ion-button class="btn-primary" @click="openTimetableModal(classInst)">
+			<IonButton class="btn-primary" @click="openTimetableModal(classInst)">
 				Setup Timetable
-			</ion-button>
+			</IonButton>
 		</div>
 		<div class="flex items-center gap-2 w-full overflow-x-auto p-4 md:p-0">
 			<a v-for="day in days" :key="day.day"

@@ -4,9 +4,9 @@
 			<div class="blueTop py-4">
 				<div
 					class="flex flex-col md:flex-row md:justify-between justify-start items-start px-4 w-full lg:w-8/12 w-full mx-auto">
-					<ion-text class="text-heading font-bold text-secondaryText text-start">
+					<IonText class="text-heading font-bold text-secondaryText text-start">
 						{{ document.title }}
-					</ion-text>
+					</IonText>
 					<div class="items-center text-gray font-normal flex gap-3">
 						<Avatar :id="document.user.id" :name="document.user.bio.fullName" :size="24"
 							:src="document.user.bio.photo" />

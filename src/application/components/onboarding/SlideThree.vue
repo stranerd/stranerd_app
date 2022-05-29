@@ -1,11 +1,11 @@
 <template>
-	<ion-icon :icon="reader" class=" text-5xl text-pink" />
-	<ion-text class="text-xl text-secondaryText font-bold">
+	<IonIcon :icon="reader" class=" text-5xl text-pink" />
+	<IonText class="text-xl text-secondaryText font-bold">
 		Notes
-	</ion-text>
-	<ion-text class="text-secondaryText max-w-[80vw] text-center">
+	</IonText>
+	<IonText class="text-secondaryText max-w-[80vw] text-center">
 		Read beautiful and concise notes that cover every important aspects in topics under different subjects.
-	</ion-text>
+	</IonText>
 </template>
 
 <script lang="ts">

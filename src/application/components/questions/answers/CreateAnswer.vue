@@ -2,7 +2,7 @@
 	<div class="w-full flex flex-col bg-white md:p-4 rounded-xl md:gap-4">
 		<div class="p-4 flex flex-col rounded-lg md:border md:border-faded_gray border-bottom-line gap-1">
 			<span class="text-secondaryText font-bold">Answer</span>
-			<ion-input v-model="factory.title" class="w-full" placeholder="Write main answer here and keep it short" />
+			<IonInput v-model="factory.title" class="w-full" placeholder="Write main answer here and keep it short" />
 			<DisplayError :error="factory.errors.title" />
 		</div>
 
@@ -30,24 +30,23 @@
 				class="w-1/2"
 				@files="catchAttachments"
 			>
-				<ion-button class="btn-outline w-full">
-					<ion-icon :icon="imageOutline" class="text-heading3 text-primary mr-4" />
+				<IonButton class="btn-outline w-full">
+					<IonIcon :icon="imageOutline" class="text-heading3 text-primary mr-4" />
 					Add image
-				</ion-button>
+				</IonButton>
 			</FileInput>
-			<ion-button
+			<IonButton
 				class="w-1/2 btn-primary h-12"
 				type="submit" @click="createAnswer">
-				<ion-icon :icon="paperPlaneOutline" class="text-heading3 text-white mr-4" />
+				<IonIcon :icon="paperPlaneOutline" class="text-heading3 text-white mr-4" />
 				<slot name="buttonText">Send</slot>
-			</ion-button>
+			</IonButton>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonIcon, IonInput } from '@ionic/vue'
 import { closeOutline, imageOutline, paperPlaneOutline } from 'ionicons/icons'
 import { showAddAnswer, useCreateAnswer } from '@app/composable/questions/answers'
 import { QuestionEntity } from '@modules/questions'
@@ -60,7 +59,7 @@ export default defineComponent({
 			type: Object as () => QuestionEntity
 		}
 	},
-	components: { IonIcon, IonInput, BaseEditor },
+	components: { BaseEditor },
 	setup () {
 		const {
 			factory,

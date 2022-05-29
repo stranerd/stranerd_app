@@ -4,7 +4,7 @@
 			<router-link class="border-bottom-line p-4 flex items-center gap-4"
 				to="/study/preps/start">
 				<IonIcon :icon="addOutline" class="text-heading2" />
-				<ion-text>Take test/Study solutions</ion-text>
+				<IonText>Take test/Study solutions</IonText>
 			</router-link>
 
 			<ContinueTests />

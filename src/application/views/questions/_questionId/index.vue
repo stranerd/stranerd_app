@@ -20,7 +20,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonIcon } from '@ionic/vue'
 import { chevronBackCircleOutline } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
 import { useQuestion } from '@app/composable/questions/questions'
@@ -33,7 +32,6 @@ export default defineComponent({
 	displayName: 'Answers',
 	components: {
 		DashboardWithToolbarLayout,
-		IonIcon,
 		QuestionPageCard,
 		AnswersList
 	},

@@ -82,9 +82,9 @@
 		</template>
 
 		<div class="flex w-full mt-8 items-center gap-6">
-			<ion-button :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
+			<IonButton :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
 				<slot name="buttonText">Submit</slot>
-			</ion-button>
+			</IonButton>
 		</div>
 
 		<PageLoading v-if="loading" />
@@ -96,7 +96,6 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { PastQuestionFactory } from '@modules/school'
-import { IonRadio, IonRadioGroup, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
 import { getAlphabet } from '@utils/commons'
 import { addOutline, trashBinOutline } from 'ionicons/icons'
 import { useInstitutionList } from '@app/composable/school/institutions'
@@ -105,7 +104,6 @@ import { years } from '@utils/constants'
 
 export default defineComponent({
 	name: 'PastQuestionForm',
-	components: { IonSelect, IonSelectOption, IonTextarea, IonRadio, IonRadioGroup },
 	props: {
 		factory: {
 			type: PastQuestionFactory,

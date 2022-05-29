@@ -36,14 +36,11 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { openCreateTagModal, openTagEditModal, useDeleteTag, useTagList } from '@app/composable/questions/tags'
-import EmptyState from '@app/components/core/EmptyState.vue'
-import { IonAccordion, IonAccordionGroup, IonItem, IonList } from '@ionic/vue'
 import { groupBy } from '@utils/commons'
 import { addOutline, pencilOutline, trashBinOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'TagsList',
-	components: { EmptyState, IonAccordion, IonAccordionGroup, IonItem, IonList },
 	setup () {
 		const { tags, error, loading } = useTagList()
 		const { deleteTag, loading: deleteLoading, error: deleteError } = useDeleteTag()

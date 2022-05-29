@@ -2,15 +2,15 @@
 	<router-link :to="`/study/flashCards/${flashCard.id}`"
 		class="flex flex-col justify-between card-padding">
 		<div class="flex gap-4 items-center">
-			<ion-text class="font-500 truncate w-full">{{ flashCard.title }}</ion-text>
-			<ion-icon :icon="arrowForwardOutline" class="text-heading2" />
+			<IonText class="font-500 truncate w-full">{{ flashCard.title }}</IonText>
+			<IonIcon :icon="arrowForwardOutline" class="text-heading2" />
 		</div>
 		<div class="w-full flex items-center justify-between gap-2 text-sub text-secondaryText">
 			<Tag :tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
-						<ion-icon :icon="copyOutline" class="mr-1" />
-						<ion-text>{{ slotProps.tag }}</ion-text>
+						<IonIcon :icon="copyOutline" class="mr-1" />
+						<IonText>{{ slotProps.tag }}</IonText>
 					</span>
 				</template>
 			</Tag>

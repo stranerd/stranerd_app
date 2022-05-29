@@ -22,28 +22,28 @@
 		<div :style="`width:${percentage}%`" class="bg-primary h-1  mt-8 transition-all " />
 		<div class="w-full flex items-center justify-between rounded-b-xl mx-auto gap-4 bg-white p-6">
 
-			<ion-icon
+			<IonIcon
 				:icon="isPlaying ? pauseOutline : playOutline"
 				class="text-icon_inactive text-heading2 cursor-pointer"
 				@click="isPlaying ? pauseCard() : playCard()"
 			/>
 			<div class="flex items-center gap-4">
-				<ion-icon
+				<IonIcon
 					:icon="chevronBackOutline"
 					class="text-icon_inactive text-heading2 cursor-pointer "
 					@click="decrease"
 				/>
 
-				<ion-text class="text-icon_inactive">
+				<IonText class="text-icon_inactive">
 					<b>{{ page + 1 }}</b> of <b>{{ formatNumber(flashCard.set.length) }}</b>
-				</ion-text>
-				<ion-icon
+				</IonText>
+				<IonIcon
 					:icon="chevronForwardOutline"
 					class="text-icon_inactive text-heading2 cursor-pointer"
 					@click="increase"
 				/>
 			</div>
-			<ion-icon
+			<IonIcon
 				:icon="isFullscreen ? contractOutline : scanOutline"
 				class="text-icon_inactive text-heading2 cursor-pointer"
 				@click="toggleFullscreen"

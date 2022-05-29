@@ -2,12 +2,12 @@
 	<Justified>
 		<div class="lg:w-8/12 w-full mx-auto md:p-4 lg:p-0">
 			<div class="lg:mt-6 rounded-xl flex flex-col p-4 md:p-6 gap-4">
-				<ion-text class="text-heading font-bold text-secondaryText mx-auto text-center">
+				<IonText class="text-heading font-bold text-secondaryText mx-auto text-center">
 					<Institution :institutionId="institutionId" />
-				</ion-text>
+				</IonText>
 				<div class="showcase gap-4">
-					<ion-item>
-						<ion-label class="!text-gray font-bold">Subject</ion-label>
+					<IonItem>
+						<IonLabel class="!text-gray font-bold">Subject</IonLabel>
 						<IonSelect v-model="courseId" class="capitalize" interface="action-sheet"
 							placeholder="Select the subject">
 							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
@@ -16,10 +16,10 @@
 								<Course :courseId="courseId" />
 							</IonSelectOption>
 						</IonSelect>
-					</ion-item>
+					</IonItem>
 
-					<ion-item>
-						<ion-label class="!text-gray font-bold">Year</ion-label>
+					<IonItem>
+						<IonLabel class="!text-gray font-bold">Year</IonLabel>
 						<IonSelect v-model.number="year" class="capitalize" interface="action-sheet"
 							placeholder="Select the year">
 							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
@@ -27,10 +27,10 @@
 								<span>{{ year }}</span>
 							</IonSelectOption>
 						</IonSelect>
-					</ion-item>
+					</IonItem>
 
-					<ion-item>
-						<ion-label class="!text-gray font-bold">Mode</ion-label>
+					<IonItem>
+						<IonLabel class="!text-gray font-bold">Mode</IonLabel>
 						<IonSelect v-model="questionType" class="capitalize" interface="action-sheet"
 							placeholder="Select the question type">
 							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
@@ -39,7 +39,7 @@
 								<span>{{ questionType }}</span>
 							</IonSelectOption>
 						</IonSelect>
-					</ion-item>
+					</IonItem>
 				</div>
 			</div>
 
@@ -60,7 +60,6 @@ import Institution from '@app/components/school/institutions/Institution.vue'
 import Course from '@app/components/school/courses/Course.vue'
 import { useRoute } from 'vue-router'
 import { useTestPrepList } from '@app/composable/study/testPreps'
-import { IonItem, IonLabel, IonSelect, IonSelectOption } from '@ionic/vue'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import { generateMiddlewares } from '@app/middlewares'
@@ -72,11 +71,7 @@ export default defineComponent({
 		Justified,
 		Institution,
 		Course,
-		IonSelect,
-		IonSelectOption,
 		TestPrepListCard,
-		IonItem,
-		IonLabel,
 		EmptyState
 	},
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),

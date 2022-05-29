@@ -3,9 +3,9 @@
 		class="min-h-40 flex flex-col justify-between !gap-2 card-padding">
 		<div>
 			<div class="flex justify-between gap-2">
-				<ion-text class="font-500 truncate w-full">
+				<IonText class="font-500 truncate w-full">
 					<Institution :institutionId="testPrep.data.institutionId" />
-				</ion-text>
+				</IonText>
 				<SaveToSet :entity="testPrep" />
 			</div>
 			<IonText class="truncate">
@@ -15,14 +15,14 @@
 		</div>
 
 		<div class="w-full flex items-center justify-end gap-2">
-			<ion-button v-if="testPrep.canTest" class="btn-primary"
+			<IonButton v-if="testPrep.canTest" class="btn-primary"
 				@click="createTest(testPrep, true)">
 				Test
-			</ion-button>
-			<ion-button v-if="testPrep.canStudy" class="btn-outline"
+			</IonButton>
+			<IonButton v-if="testPrep.canStudy" class="btn-outline"
 				@click="createTest(testPrep, false)">
 				Solutions
-			</ion-button>
+			</IonButton>
 		</div>
 
 		<PageLoading v-if="loading" />

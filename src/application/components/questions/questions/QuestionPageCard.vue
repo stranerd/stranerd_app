@@ -23,27 +23,27 @@
 					</span>
 				</div>
 				<div class="flex items-center gap-2">
-					<ion-text v-if="showEditButton" class="text-primary cursor-pointer"
+					<IonText v-if="showEditButton" class="text-primary cursor-pointer"
 						@click="openEditModal">Edit
-					</ion-text>
-					<ion-text v-if="showDeleteButton" class="text-red cursor-pointer"
+					</IonText>
+					<IonText v-if="showDeleteButton" class="text-red cursor-pointer"
 						@click="deleteQuestion">Delete
-					</ion-text>
+					</IonText>
 					<span class="text-gray">{{ formatTime(question.createdAt) }}</span>
 				</div>
 			</div>
 			<PhotoList v-if="question.attachments.length" :photos="question.attachments" class="py-3" />
 
-			<ion-button v-if="showAnswerButton && !showAddAnswer"
+			<IonButton v-if="showAnswerButton && !showAddAnswer"
 				class="btn-primary w-full"
 				@click="openAnswerModal(question)">
 				<span class="mr-2">Add your answer</span>
-			</ion-button>
-			<ion-button v-if="showAnswerButton && showAddAnswer"
+			</IonButton>
+			<IonButton v-if="showAnswerButton && showAddAnswer"
 				class="btn-primary w-full"
 				@click="showAddAnswer = false">
 				<span class="mr-2">Close answer form</span>
-			</ion-button>
+			</IonButton>
 		</div>
 		<CreateAnswer v-if="!question.isAnswered && showAddAnswer" :question="question" />
 	</div>
@@ -51,7 +51,6 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { IonIcon } from '@ionic/vue'
 import { flagOutline, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import Avatar from '@app/components/core/Avatar.vue'
@@ -74,7 +73,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { IonIcon, Avatar, PhotoList, CreateAnswer },
+	components: { Avatar, PhotoList, CreateAnswer },
 	setup (props) {
 		const { id } = useAuth()
 		const router = useRouter()

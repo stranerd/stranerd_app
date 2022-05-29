@@ -3,7 +3,7 @@
 		<div class="border-bottom-line">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 				<div class="text-secondaryText flex items-center">
-					<ion-text class="text-base font-bold">Details</ion-text>
+					<IonText class="text-base font-bold">Details</IonText>
 				</div>
 			</div>
 
@@ -20,21 +20,21 @@
 		<div class="border-bottom-line">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 				<div class="text-secondaryText flex items-center">
-					<ion-text class="text-base font-bold">Progress</ion-text>
+					<IonText class="text-base font-bold">Progress</IonText>
 				</div>
 			</div>
 			<div class="flex bg-white rounded-xl flex-col p-4 md:p-8 gap-4">
-				<ion-text class="text-heading2 text-secondaryText font-bold">
+				<IonText class="text-heading2 text-secondaryText font-bold">
 					{{ formatNumber(progress * 100) }}%
-				</ion-text>
+				</IonText>
 				<IonProgressBar :value="progress" />
-				<ion-text class="text-gray">Finish all tests preps to complete.</ion-text>
+				<IonText class="text-gray">Finish all tests preps to complete.</IonText>
 			</div>
 		</div>
 		<div class="border-bottom-line">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 				<div class="text-secondaryText flex items-center">
-					<ion-text class="text-base font-bold">Tests</ion-text>
+					<IonText class="text-base font-bold">Tests</IonText>
 				</div>
 			</div>
 
@@ -51,7 +51,7 @@
 		<div v-if="institutionTests.length">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 				<div class="text-secondaryText flex items-center">
-					<ion-text class="text-base font-bold">History</ion-text>
+					<IonText class="text-base font-bold">History</IonText>
 				</div>
 			</div>
 			<div class="flex bg-white rounded-xl flex-col">
@@ -105,7 +105,6 @@ import {
 	timeOutline
 } from 'ionicons/icons'
 import DashboardCard from '@app/components/dashboard/DashboardCard.vue'
-import { IonProgressBar } from '@ionic/vue'
 import { useInstitution } from '@app/composable/school/institutions'
 import { formatTime } from '@utils/dates'
 import { catchDivideByZero, formatNumber, pluralize } from '@utils/commons'
@@ -114,7 +113,7 @@ import { useTestPrepList } from '@app/composable/study/testPreps'
 
 export default defineComponent({
 	name: 'ExamDetails',
-	components: { DashboardCard, IonProgressBar },
+	components: { DashboardCard },
 	props: {
 		exam: {
 			type: Object as PropType<{ institutionId: string, courseIds: string[], startDate: number, endDate: number }>,

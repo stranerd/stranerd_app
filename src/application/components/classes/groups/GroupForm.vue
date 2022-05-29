@@ -1,16 +1,16 @@
 <template>
 	<form class="flex flex-col md:flex-row md:items-center gap-2" @submit.prevent="submit">
-		<ion-input v-model="factory.name"
+		<IonInput v-model="factory.name"
 			class="flex-grow w-full border border-new_gray"
 			placeholder="Enter discussion name"
 			show-cancel-button="never"
 		/>
 
-		<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full md:w-auto"
+		<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full md:w-auto"
 			type="submit">
 			<slot name="buttonText">Submit</slot>
-			<ion-ripple-effect class="rounded-lg" />
-		</ion-button>
+			<IonRippleEffect class="rounded-lg" />
+		</IonButton>
 		<PageLoading v-if="loading" />
 	</form>
 </template>
@@ -18,11 +18,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { GroupFactory } from '@modules/classes'
-import { IonRippleEffect } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'GroupForm',
-	components: { IonRippleEffect },
 	props: {
 		factory: {
 			type: GroupFactory,

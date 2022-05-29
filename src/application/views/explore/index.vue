@@ -4,9 +4,9 @@
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 					<div class="text-secondaryText flex items-center">
-						<ion-text class="mr-3 text-heading font-bold">
+						<IonText class="mr-3 text-heading font-bold">
 							TestPreps
-						</ion-text>
+						</IonText>
 					</div>
 					<router-link :to="`/explore/preps`"
 						class="text-primary flex items-center font-bold">
@@ -18,9 +18,9 @@
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 					<div class="text-secondaryText flex items-center">
-						<ion-text class="mr-3 font-bold text-heading">
+						<IonText class="mr-3 font-bold text-heading">
 							FlashCards
-						</ion-text>
+						</IonText>
 					</div>
 					<router-link :to="`/explore/flashCards`"
 						class="text-primary flex items-center font-bold">
@@ -32,9 +32,9 @@
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 					<div class="text-secondaryText flex items-center">
-						<ion-text class="text-heading font-bold mr-3">
+						<IonText class="text-heading font-bold mr-3">
 							Documents
-						</ion-text>
+						</IonText>
 					</div>
 					<router-link :to="`/explore/documents`"
 						class="text-primary flex items-center font-bold">

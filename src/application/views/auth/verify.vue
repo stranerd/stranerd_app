@@ -12,10 +12,10 @@
 						An email was just sent to <b>{{ email }}</b>. Follow the link to verify your account.
 						If an error occurred or you didn't receive the email, click the button below to resend the email.
 					</span>
-					<ion-button :disabled="loading" class="w-full text-sm btn-primary mt-2" type="submit">
+					<IonButton :disabled="loading" class="w-full text-sm btn-primary mt-2" type="submit">
 						<SpinLoading v-if="loading" />
 						<span v-else>Resend Mail</span>
-					</ion-button>
+					</IonButton>
 					<div class="w-full flex justify-center items-center">
 						<router-link class="text-primaryBg" to="/auth/signin">
 							Back to Sign In
