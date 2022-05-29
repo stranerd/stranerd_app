@@ -9,7 +9,7 @@
 						{ name: 'Discussions', path: '/messages', icon: chatbubbles, iconOutline:chatbubblesOutline },
 						{ name: 'Tests', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
 						...(isLoggedIn ? [{ name: 'Account', path: `/account`, icon: person, iconOutline: personOutline }] : []),
-						...(isAdmin ? [{ name: 'Admin', path: `/admin/`, icon: statsChart, iconOutline: statsChartOutline }] : [])
+						...(isAdmin ? [{ name: 'Admin', path: `/admin`, icon: statsChart, iconOutline: statsChartOutline }] : [])
 					]" :key="path" :class="{'text-secondaryText': $route.path !== path}" :to="path"
 					class="col-span-1 flex flex-col items-center justify-center">
 					<IonIcon :icon="$route.path === path ? icon : iconOutline" class="w-6 md:w-14" />

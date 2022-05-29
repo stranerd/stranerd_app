@@ -77,9 +77,9 @@ export const useListener = (startFn: () => Promise<() => void>) => {
 	return { start, close, reset, restart, isRunning }
 }
 
-export function useRouteMeta (displayName: string | ComputedRef<string>) {
+export function useRouteMeta (routeName: string | ComputedRef<string>) {
 	type Meta = Record<string, any>
-	const name = typeof displayName === 'string' ? computed(() => displayName) : displayName
+	const name = typeof routeName === 'string' ? computed(() => routeName) : routeName
 
 	const route = useRoute()
 	const setMeta = (data: Partial<Meta>) => {
@@ -88,14 +88,14 @@ export function useRouteMeta (displayName: string | ComputedRef<string>) {
 		})
 	}
 
-	setMeta({ displayName: name.value })
+	setMeta({ routeName: name.value })
 	const meta = computed({
 		get: () => (route.meta ?? {}) as Meta,
 		set: setMeta
 	})
 
 	watch(() => name.value, () => {
-		setMeta({ displayName: name.value })
+		setMeta({ routeName: name.value })
 	})
 	return { meta }
 }

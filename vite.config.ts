@@ -9,7 +9,13 @@ export default defineConfig({
 		vue(),
 		Pages({
 			dirs: 'src/application/views',
-			routeStyle: 'nuxt'
+			routeStyle: 'nuxt',
+			extendRoute: (route: any) => {
+				const path = route.path.split('/')
+				const lastIndex = path.length - 1
+				if (path[lastIndex] && path[lastIndex].includes(':')) path[lastIndex] = path[lastIndex] + '/'
+				return { ...route, path: path.join('/') }
+			}
 		}),
 		Components({
 			dirs: ['src/application/components/core', 'src/application/layouts'],

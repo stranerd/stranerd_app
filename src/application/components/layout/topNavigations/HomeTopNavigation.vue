@@ -30,7 +30,7 @@
 
 		<IonToolbar class="lg:hidden px-4 border-0 h-12 flex items-center justify-center">
 			<div class="flex items-center justify-center font-bold text-base">
-				<span>{{ $route.meta.displayName ?? 'Stranerd' }}</span>
+				<span>{{ $route.meta.routeName ?? 'Stranerd' }}</span>
 			</div>
 		</IonToolbar>
 	</IonHeader>

@@ -8,7 +8,7 @@
 				</div>
 				<router-link to="/">
 					<IonText class="font-bold text-heading">
-						{{ $route.meta.displayName ?? 'Stranerd' }}
+						{{ $route.meta.routeName ?? 'Stranerd' }}
 					</IonText>
 				</router-link>
 				<div />
