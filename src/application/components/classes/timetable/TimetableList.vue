@@ -14,13 +14,12 @@
 				{{ day.name }} 
 			</a>
 		</div>
-		<div class="flex flex-col md:gap-4 px-4">
-			<div class="flex flex-col min-h-[96px] rounded-lg border-l-8 border-primaryBg">
-				<ion-text>{{ event.title }}</ion-text>
-			</div>
-			<!-- <div v-for="event in timetable" :key="event.hash"
-				class="card-padding bg-white rounded-xl flex gap-1 items-center">
-				<span class="bg-new_gray text-gray py-1 px-2 rounded-lg text-sub">
+		<div class="flex flex-col gap-4 px-4">
+			<div v-for="event in timetable" :key="event.hash" class="flex flex-col min-h-[96px] rounded-lg bg-itemBg text-bodyText border-l-8 border-primaryBg p-4">
+				<ion-text class="font-bold ">{{ event.title }}</ion-text>
+				<ion-text class="mt-3">{{ event.name }}</ion-text>
+				<ion-text class="mt-3 flex">
+					<IonIcon :icon="timeOutline" class="text-heading2 mr-2 " />
 					{{
 						event.data.start.hour.toString().padStart(2, '0')
 					}}:{{ event.data.start.minute.toString().padStart(2, '0') }}
@@ -28,9 +27,13 @@
 					{{
 						event.data.end.hour.toString().padStart(2, '0')
 					}}:{{ event.data.end.minute.toString().padStart(2, '0') }}
-				</span>
-				<span class="text-dark">{{ event.title }}</span>
-			</div> -->
+					<sapn class="ml-auto">
+						<IonIcon :icon="createOutline" class="text-heading2 mr-5 " />
+						<IonIcon :icon="trashBinOutline" class="text-heading2 text-danger " />
+					</sapn>
+				</ion-text>
+			</div>
+		
 		</div>
 		<PageLoading v-if="loading" />
 	</div>
@@ -40,7 +43,7 @@
 import { computed, defineComponent, ref } from 'vue'
 import { ClassEntity, EventType } from '@modules/classes'
 import { openTimetableModal, useTimetable } from '@app/composable/classes/timetable'
-import { arrowForwardOutline } from 'ionicons/icons'
+import { arrowForwardOutline, timeOutline, createOutline, trashBinOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'TimetableList',
@@ -61,8 +64,8 @@ export default defineComponent({
 		const timetable = computed(() => events.value
 			.filter((e) => e.data.type === EventType.timetable && e.data.start.day === activeDay.value))
 		return {
-			loading, error, openTimetableModal,
-			activeDay, days, timetable, arrowForwardOutline
+			loading, error, openTimetableModal,timeOutline, createOutline,
+			activeDay, days, timetable, arrowForwardOutline, trashBinOutline
 		}
 	}
 })
