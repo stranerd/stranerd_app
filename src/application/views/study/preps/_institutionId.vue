@@ -1,60 +1,64 @@
 <template>
 	<Justified>
-		<div class="lg:w-8/12 w-full mx-auto md:p-4 lg:p-0">
-			<div class="lg:mt-6 rounded-xl flex flex-col p-4 md:p-6 gap-4">
-				<IonText class="text-heading font-bold text-secondaryText mx-auto text-center">
-					<Institution :institutionId="institutionId" />
-				</IonText>
-				<div class="showcase gap-4">
-					<IonItem>
-						<IonLabel class="!text-gray font-bold">Subject</IonLabel>
-						<IonSelect v-model="courseId" class="capitalize" interface="action-sheet"
-							placeholder="Select the subject">
-							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
-							<IonSelectOption v-for="courseId in courses" :key="courseId" :value="courseId"
-								class="capitalize">
-								<Course :courseId="courseId" />
-							</IonSelectOption>
-						</IonSelect>
-					</IonItem>
-
-					<IonItem>
-						<IonLabel class="!text-gray font-bold">Year</IonLabel>
-						<IonSelect v-model.number="year" class="capitalize" interface="action-sheet"
-							placeholder="Select the year">
-							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
-							<IonSelectOption v-for="year in years" :key="year" :value="year" class="capitalize">
-								<span>{{ year }}</span>
-							</IonSelectOption>
-						</IonSelect>
-					</IonItem>
-
-					<IonItem>
-						<IonLabel class="!text-gray font-bold">Mode</IonLabel>
-						<IonSelect v-model="questionType" class="capitalize" interface="action-sheet"
-							placeholder="Select the question type">
-							<IonSelectOption :value="null" class="capitalize">All</IonSelectOption>
-							<IonSelectOption v-for="questionType in questionTypes" :key="questionType"
-								:value="questionType" class="capitalize">
-								<span>{{ questionType }}</span>
-							</IonSelectOption>
-						</IonSelect>
-					</IonItem>
-				</div>
+		<div class="flex flex-col p-4 gap-6">
+			<div class="flex flex-col gap-2">
+				<IonLabel class="font-bold">Subject</IonLabel>
+				<IonSelect v-model="courseId" class="capitalize" interface="action-sheet"
+					placeholder="Select subject">
+					<IonSelectOption :value="null" class="capitalize">Select subject</IonSelectOption>
+					<IonSelectOption v-for="courseId in courses" :key="courseId" :value="courseId"
+						class="capitalize">
+						<Course :courseId="courseId" />
+					</IonSelectOption>
+				</IonSelect>
 			</div>
 
-			<div class="md:py-6 showcase">
-				<TestPrepListCard v-for="prep in preps" :key="prep.hash" :testPrep="prep" />
+			<div class="flex flex-col gap-2">
+				<IonLabel class="font-bold">Year</IonLabel>
+				<IonSelect v-model.number="year" :disabled="!courseId" class="capitalize"
+					interface="action-sheet" placeholder="Select year">
+					<IonSelectOption :value="null" class="capitalize">Select year</IonSelectOption>
+					<IonSelectOption v-for="year in years" :key="year" :value="year" class="capitalize">
+						<span>{{ year }}</span>
+					</IonSelectOption>
+				</IonSelect>
 			</div>
-			<EmptyState v-if="!loading && !error && preps.length === 0"
-				class="p-4" info="There is currently no test for the given <b>Subject/Year/Mode</b>"
-			/>
+
+			<div class="flex flex-col gap-2">
+				<IonLabel class="font-bold">Mode</IonLabel>
+				<IonSelect v-model="questionType" :disabled="!year" class="capitalize"
+					interface="action-sheet" placeholder="Select the question type">
+					<IonSelectOption :value="null" class="capitalize">Select Mode</IonSelectOption>
+					<IonSelectOption v-for="questionType in questionTypes" :key="questionType"
+						:value="questionType" class="capitalize">
+						<span>{{ questionType }}</span>
+					</IonSelectOption>
+				</IonSelect>
+			</div>
+
+			<div class="flex flex-col gap-2">
+				<IonLabel class="font-bold">Type</IonLabel>
+				<IonSelect v-model="testType" :disabled="!questionType" class="capitalize"
+					interface="action-sheet" placeholder="Select the question type">
+					<IonSelectOption :value="null" class="capitalize">Select Type</IonSelectOption>
+					<IonSelectOption v-for="testType in testTypes" :key="testType.name"
+						:value="testType.value" class="capitalize">
+						<span>{{ testType.name }}</span>
+					</IonSelectOption>
+				</IonSelect>
+			</div>
+
+			<IonButton :disabled="testLoading || preps.length === 0" class="w-full btn-primary"
+				@click="createTest(preps[0], testType)">
+				<SpinLoading v-if="testLoading" />
+				<span v-else>Start</span>
+			</IonButton>
 		</div>
 	</Justified>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import Justified from '@app/layouts/Justified.vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import Course from '@app/components/school/courses/Course.vue'
@@ -64,6 +68,7 @@ import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.v
 import EmptyState from '@app/components/core/EmptyState.vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
+import { useCreateTest } from '@app/composable/study/tests'
 
 export default defineComponent({
 	name: 'StudyPrepsInstitutionId',
@@ -77,6 +82,7 @@ export default defineComponent({
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Preps')
+		const { loading: testLoading, error: testError, createTest } = useCreateTest()
 		const route = useRoute()
 		const { institutionId } = route.params
 		const { testPreps, loading, error } = useTestPrepList()
@@ -85,49 +91,30 @@ export default defineComponent({
 		const courseId = ref(null as string | null)
 		const year = ref(null as number | null)
 		const questionType = ref(null as string | null)
+		const testType = ref(null as boolean | null)
+		const testTypes = [{ name: 'Test', value: true }, { name: 'Solutions', value: false }]
 
 		const courses = computed(() => Array.from(new Set(institutionPreps.value.map((prep) => prep.data.courseId))).sort())
-		const years = computed(() => Array.from(new Set(institutionPreps.value.map((prep) => prep.data.year))).sort())
-		const questionTypes = computed(() => Array.from(new Set(institutionPreps.value.map((prep) => prep.data.questionType))))
+		const years = computed(() => Array.from(new Set(institutionPreps.value.filter((prep) => prep.data.courseId === courseId.value).map((prep) => prep.data.year))).sort())
+		const questionTypes = computed(() => Array.from(new Set(institutionPreps.value.filter((prep) => prep.data.courseId === courseId.value && prep.data.year === year.value).map((prep) => prep.data.questionType))))
+
+		watch(() => courseId.value, () => year.value = null)
+		watch(() => year.value, () => questionType.value = null)
+		watch(() => questionType.value, () => testType.value = null)
 
 		const preps = computed(() => institutionPreps.value.filter((prep) => {
 			const matches = [] as boolean[]
-			if (courseId.value) matches.push(prep.data.courseId === courseId.value)
-			if (year.value) matches.push(prep.data.year === year.value)
-			if (questionType.value) matches.push(prep.data.questionType === questionType.value)
+			matches.push(prep.data.courseId === courseId.value)
+			matches.push(prep.data.year === year.value)
+			matches.push(prep.data.questionType === questionType.value)
+			matches.push(testType.value !== null)
 			return matches.every((match) => match)
 		}))
 
 		return {
-			loading, error,
+			loading, error, testLoading, testError, testTypes, testType, createTest,
 			institutionId, preps, courseId, courses, year, years, questionType, questionTypes
 		}
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-item {
-		width: 100%;
-		--background: #{$color-newGray} !important;
-		border-radius: .5rem;
-
-		--border-radius: .5rem;
-		--padding-start: 1rem;
-		--padding-end: 0 !important;
-		--inner-padding-end: 0px;
-	}
-
-	ion-select {
-		--background: #{$color-newGray} !important;
-		border-radius: .75rem;
-		--padding-start: 1rem;
-		--padding-end: 1rem;
-		--padding-top: 0.8rem;
-		--padding-bottom: 0.8rem;
-	}
-
-	ion-select::part(icon) {
-		margin-left: 1rem;
-	}
-</style>

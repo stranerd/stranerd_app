@@ -1,8 +1,8 @@
 <template>
-	<PageLoading v-if="loading || createLoading" />
+	<BlockLoading v-if="loading || createLoading" />
 	<div v-else
-		class="flex items-center justify-center flex-col md:my-8 px-4 py-8 bg-white rounded-xl gap-4">
-		<IonText class="text-heading text-secondaryText font-bold">{{ test.scoreText }}</IonText>
+		class="flex items-center justify-center flex-col p-4 border-bottom-line gap-4">
+		<IonText class="text-heading font-bold">{{ test.scoreText }}</IonText>
 
 		<DonutChart :bgColor="test.passed ? '#00D24622' : '#FF666622'"
 			:fgColor="test.passed ? '#00D246' : '#FF6666'"
@@ -15,17 +15,12 @@
 		</IonText>
 
 		<div class="mt-4 mx-auto w-full px-4 flex gap-2 items-center justify-between md:justify-center">
-			<router-link :to="`/study/tests/${test.id}/take`" class="text-primary cursor-pointer">
-				<IonButton class="btn-outline border-primary text-primary">Solutions</IonButton>
+			<router-link :to="`/study/tests/${test.id}/take`" class="w-1/2">
+				<IonButton class="btn-outline w-full h-9">Solutions</IonButton>
 			</router-link>
-			<IonButton v-if="prep" class="btn-primary" @click="createTest(prep, test.isTimed)">
+			<IonButton v-if="prep" class="btn-primary w-1/2 h-9" @click="createTest(prep, test.isTimed)">
 				Retry
 			</IonButton>
-			<router-link class="text-primary cursor-pointer" to="/study/preps/">
-				<IonButton class="btn-outline">
-					Home
-				</IonButton>
-			</router-link>
 		</div>
 	</div>
 </template>

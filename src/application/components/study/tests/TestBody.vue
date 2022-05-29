@@ -1,25 +1,25 @@
 <template>
-	<div class="flex flex-col lg:my-8 md:p-4 lg:p-0 pb-[68px] md:pb-[82px] lg:pb-[88px]">
-		<div v-if="tab === 'list'" class="flex flex-col md:gap-8">
-			<TestQuestion v-for="(question, index) in questions" :key="question.hash" :answer="updateAnswer"
-				:question="question" :questionIndex="index" :test="test" />
-		</div>
+	<div class="flex flex-col">
+		<BlockLoading v-if="loading" />
 
-		<div class="footer-shadow fixed bottom-0 inset-x-0 bg-white z-[10]">
-			<div :style="`width:${test.progress * 100}%`" class="bg-primary h-1" />
-			<div class="lg:w-8/12 w-full px-4 mx-auto flex items-center justify-between py-2">
+		<TestQuestion v-for="(question, index) in questions" :key="question.hash" :answer="updateAnswer"
+			:question="question" :questionIndex="index" :test="test" :total="questions.length" />
+
+		<div class="pb-[50px]" />
+
+		<div class="footer-shadow fixed bottom-0 inset-x-0 bg-bodyBg z-[10] text-secondaryText text-sub">
+			<div :style="`width:${test.progress * 100}%`" class="h-1" />
+			<div class="w-full px-4 mx-auto flex items-center justify-between py-2">
 				<div>
-					<IonText v-if="test.isOBJ" class="text-secondaryText">
-						{{ test.answered }}/{{ formatNumber(questions.length) }} answered
+					<IonText v-if="test.isOBJ" class="font-bold">
+						{{ test.answered }}/{{ formatNumber(questions.length) }}
 					</IonText>
 				</div>
 
 				<div>
 					<template v-if="test.isTimed && !test.done">
-						<div class="h-2 w-2 bg-red-500 rounded-full mr-4" />
-						<IonText class="text-icon_inactive">
-							{{ countDown }}
-						</IonText>
+						<div class="h-2 w-2 bg-danger rounded-full mr-4" />
+						<IonText>{{ countDown }}</IonText>
 					</template>
 				</div>
 
@@ -33,8 +33,6 @@
 				</div>
 			</div>
 		</div>
-
-		<PageLoading v-if="loading" />
 	</div>
 </template>
 
@@ -60,7 +58,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const router = useRouter()
-		const { error, tab, questionIndex, loading, questions, updateAnswer, endTest } = useTestDetails(props.test)
+		const { error, loading, questions, updateAnswer, endTest } = useTestDetails(props.test)
 		const { diffInSec } = useCountdown(props.test.endedAt, {})
 		const countDown = computed({
 			get: () => getDigitalTime(diffInSec.value),
@@ -79,7 +77,7 @@ export default defineComponent({
 		}
 		return {
 			error, loading, questions, openSubmitTest, updateAnswer,
-			countDown, tab, questionIndex, formatNumber
+			countDown, formatNumber
 		}
 	}
 })
