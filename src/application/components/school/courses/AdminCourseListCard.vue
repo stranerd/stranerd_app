@@ -17,12 +17,10 @@
 import { defineComponent } from 'vue'
 import { CourseEntity } from '@modules/school'
 import { openCourseEditModal, useDeleteCourse } from '@app/composable/school/courses'
-import { IonItem, IonLabel } from '@ionic/vue'
 import { pencilOutline, trashBinOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'AdminCourseListCard',
-	components: { IonItem, IonLabel },
 	props: {
 		course: {
 			type: CourseEntity,

@@ -7,11 +7,11 @@ import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useClassModal } from '@app/composable/core/modals'
 import { getEditingGroup } from '@app/composable/classes/groups'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesClassIdGroupsGroupIdEdit',
-	displayName: 'Edit Discussion Group',
-	middlewares: ['isAuthenticated', async ({ from, to }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
 		const { id } = useAuth()
 		const { classId = '', groupId = '' } = to.params
 		const group = getEditingGroup()
@@ -21,6 +21,6 @@ export default defineComponent({
 		useClassModal().openEditGroup()
 		const backPath = from?.fullPath ?? '/dashboard'
 		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
-	}]
+	}])
 })
 </script>

@@ -98,30 +98,33 @@
 					</div>
 					<div class="flex flex-col sm:flex-row md:items-center justify-center">
 						<div class="flex gap-5 items-center justify-center md:justify-end my-10">
-							<a aria-label="instagram link" class="inline-block" href="https://www.instagram.com/stranerdapp/"
+							<a aria-label="instagram link" class="inline-block"
+								href="https://www.instagram.com/stranerdapp/"
 								target="_blank">
-								<ion-icon
+								<IonIcon
 									:icon="logoInstagram"
 									class="text-3xl"
 								/>
 							</a>
 							<a aria-label="twitter link" class="inline-block" href="https://twitter.com/stranerds"
 								target="_blank">
-								<ion-icon
+								<IonIcon
 									:icon="logoTwitter"
 									class="text-3xl"
 								/>
 							</a>
-							<a aria-label="facebook link" class="inline-block" href="https://facebook.com/officialstranerd"
+							<a aria-label="facebook link" class="inline-block"
+								href="https://facebook.com/officialstranerd"
 								target="_blank">
-								<ion-icon
+								<IonIcon
 									:icon="logoFacebook"
 									class="text-3xl"
 								/>
 							</a>
-							<a aria-label="facebook link" class="inline-block" href="https://www.linkedin.com/company/stranerd"
+							<a aria-label="facebook link" class="inline-block"
+								href="https://www.linkedin.com/company/stranerd"
 								target="_blank">
-								<ion-icon
+								<IonIcon
 									:icon="logoLinkedin"
 									class="text-3xl"
 								/>

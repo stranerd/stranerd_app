@@ -8,10 +8,13 @@
 import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/explore/ExploreWrapper.vue'
 import ExploreTestPrepsList from '@app/components/study/testPreps/ExploreTestPrepsList.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'ExplorePreps',
-	displayName: 'Explore Preps',
-	components: { ExploreWrapper, ExploreTestPrepsList }
+	components: { ExploreWrapper, ExploreTestPrepsList },
+	setup () {
+		useRouteMeta('Explore Preps')
+	}
 })
 </script>

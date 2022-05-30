@@ -10,12 +10,12 @@
 		</div>
 
 		<div class="flex flex-col">
-			<ion-text class="text-gray font-semibold">Answer</ion-text>
+			<IonText class="text-gray font-semibold">Answer</IonText>
 			<DisplayHtml :html="answer.title" />
 		</div>
 
 		<div v-if="answer.body" class="flex flex-col">
-			<ion-text class="text-gray font-semibold">Explanation</ion-text>
+			<IonText class="text-gray font-semibold">Explanation</IonText>
 			<DisplayHtml :html="answer.body" />
 		</div>
 
@@ -52,7 +52,7 @@
 
 		<form class="flex gap-2 pr-4 items-center bg-new_gray rounded-lg"
 			@submit.prevent="createComment">
-			<ion-input v-model="commentFactory.body" :autoGrow="true"
+			<IonInput v-model="commentFactory.body" :autoGrow="true"
 				class="focus:outline-none placeholder-gray-400 mt-0 pt-0"
 				placeholder="Add comment" />
 			<IonIcon :icon="paperPlaneOutline" class="text-[22px] text-primary cursor-pointer"
@@ -66,7 +66,6 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue'
-import { IonIcon } from '@ionic/vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
 import {
 	chatbubbleOutline,
@@ -87,7 +86,7 @@ import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'AnswerListCard',
-	components: { DisplayHtml, IonIcon, PhotoList, AnswerCommentsList },
+	components: { DisplayHtml, PhotoList, AnswerCommentsList },
 	props: {
 		answer: {
 			type: AnswerEntity as PropType<AnswerEntity>,

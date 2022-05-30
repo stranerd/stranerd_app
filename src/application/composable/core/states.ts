@@ -1,9 +1,10 @@
-import { ref } from 'vue'
+import { computed, ComputedRef, ref, watch } from 'vue'
 import { Notify } from '@utils/dialog'
 import { isClient } from '@utils/environment'
 import { NetworkError, StatusCodes } from '@modules/core'
 import { capitalize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
+import { useRoute } from 'vue-router'
 
 export const useErrorHandler = () => {
 	const errorState = ref('')
@@ -74,4 +75,27 @@ export const useListener = (startFn: () => Promise<() => void>) => {
 	}
 
 	return { start, close, reset, restart, isRunning }
+}
+
+export function useRouteMeta (routeName: string | ComputedRef<string>) {
+	type Meta = Record<string, any>
+	const name = typeof routeName === 'string' ? computed(() => routeName) : routeName
+
+	const route = useRoute()
+	const setMeta = (data: Partial<Meta>) => {
+		Object.entries(data).forEach(([key, value]) => {
+			route.meta[key] = value
+		})
+	}
+
+	setMeta({ routeName: name.value })
+	const meta = computed({
+		get: () => (route.meta ?? {}) as Meta,
+		set: setMeta
+	})
+
+	watch(() => name.value, () => {
+		setMeta({ routeName: name.value })
+	})
+	return { meta }
 }

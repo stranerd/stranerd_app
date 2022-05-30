@@ -20,11 +20,10 @@ import UserQuestionsCard from '@app/components/questions/questions/UserQuestions
 import { useUserQuestionList } from '@app/composable/users/users/questions'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
-import { IonSearchbar } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'ProfileQuestions',
-	components: { UserQuestionsCard, EmptyState, IonSearchbar },
+	components: { UserQuestionsCard, EmptyState },
 	props: {
 		user: {
 			type: UserEntity,

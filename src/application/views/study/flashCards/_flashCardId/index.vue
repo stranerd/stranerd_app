@@ -4,18 +4,18 @@
 			<div class="blueTop py-4">
 				<div
 					class="flex flex-col md:flex-row md:justify-between justify-start items-start px-4 w-full lg:w-8/12 w-full mx-auto">
-					<ion-text class="text-heading font-bold text-secondaryText text-start">
+					<IonText class="text-heading font-bold text-secondaryText text-start">
 						{{ flashCard.title }}
-					</ion-text>
+					</IonText>
 					<div class="items-center text-gray font-normal flex gap-3">
 						<div class="flex items-center lg:mr-4 mr-2" @click="cardMode = !cardMode">
-							<ion-icon
+							<IonIcon
 								:icon="!cardMode ? copyOutline: listOutline"
 								class="text-gray text-heading2 cursor-pointer mr-2 md:mt-0"
 							/>
-							<ion-text class=" flex">
+							<IonText class=" flex">
 								{{ !cardMode ? 'Card mode' : 'List mode' }}
-							</ion-text>
+							</IonText>
 						</div>
 						<Avatar :id="flashCard.user.id" :name="flashCard.user.bio.fullName" :size="24"
 							:src="flashCard.user.bio.photo" />
@@ -44,10 +44,10 @@ import { useRoute } from 'vue-router'
 import FlashCardScreen from '@root/application/components/study/flashCards/FlashCardScreen.vue'
 import FlashCardListView from '@root/application/components/study/flashCards/FlashCardListView.vue'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudyFlashCardsFlashcardId',
-	displayName: 'Flashcard Set',
 	components: {
 		Justified,
 		Avatar,
@@ -56,6 +56,7 @@ export default defineComponent({
 		SaveToSet
 	},
 	setup () {
+		useRouteMeta('Flashcard Set')
 		const cardMode = ref(true)
 		const { flashCardId } = useRoute().params
 		const { flashCard, error, loading } = useFlashCard(flashCardId as string)

@@ -21,12 +21,13 @@ import StatusBar from '@app/components/dashboard/StatusBar.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import GeneralDashboard from '@app/components/dashboard/GeneralDashboard.vue'
 import AspirantDashboard from '@app/components/dashboard/AspirantDashboard.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'Dashboard',
-	displayName: 'Dashboard',
 	components: { GeneralDashboard, AspirantDashboard, DashboardLayout, StatusBar },
 	setup () {
+		useRouteMeta('Dashboard')
 		const { isLoggedIn, user } = useAuth()
 		return { isLoggedIn, user }
 	}

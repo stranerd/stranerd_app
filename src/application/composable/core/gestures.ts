@@ -10,7 +10,7 @@ export const wrapperAsync = async (callback: () => Promise<void>) => {
 }
 
 export const useSwipeGesture = (data: { onRight: () => Promise<void>, onLeft: () => Promise<void> }) => {
-	const element = ref(null as HTMLElement | null)
+	const element = ref(null as any)
 
 	onMounted(async () => {
 		if (!element.value) return
@@ -47,7 +47,7 @@ export const useSwipeGesture = (data: { onRight: () => Promise<void>, onLeft: ()
 }
 
 export const useDoubleClickGesture = (data: { onDoubleClick: () => Promise<void> }) => {
-	const element = ref(null as HTMLElement | null)
+	const element = ref(null as any)
 	let lastOnStart = 0
 	const DOUBLE_CLICK_THRESHOLD = 500
 

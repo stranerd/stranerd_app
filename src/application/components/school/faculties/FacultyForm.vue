@@ -7,9 +7,9 @@
 		</div>
 
 		<div class="flex w-full mt-8 items-center gap-6">
-			<ion-button :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
+			<IonButton :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
 				<slot name="buttonText">Submit</slot>
-			</ion-button>
+			</IonButton>
 		</div>
 
 		<PageLoading v-if="loading" />

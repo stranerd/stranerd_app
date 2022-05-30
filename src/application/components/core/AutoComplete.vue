@@ -26,11 +26,9 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue'
-import { IonInput } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'AutoComplete',
-	components: { IonInput },
 	props: {
 		suggestions: {
 			type: Array as PropType<{ search: string, value: string, title: string }[]>,

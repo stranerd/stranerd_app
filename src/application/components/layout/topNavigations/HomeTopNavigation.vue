@@ -1,5 +1,5 @@
 <template>
-	<ion-header class="w-full flex flex-col z-10 nav-shadow" role="navigation">
+	<IonHeader class="w-full flex flex-col z-10 nav-shadow" role="navigation">
 		<div class="md:px-16 p-4 hidden lg:flex items-center justify-between">
 			<router-link class="hidden lg:block" to="/">
 				<Logo :secondary="true" />
@@ -28,23 +28,22 @@
 			</div>
 		</div>
 
-		<ion-toolbar class="lg:hidden px-4 border-0 h-12 flex items-center justify-center">
+		<IonToolbar class="lg:hidden px-4 border-0 h-12 flex items-center justify-center">
 			<div class="flex items-center justify-center font-bold text-base">
-				<span>{{ $route.meta.displayName ?? 'Stranerd' }}</span>
+				<span>{{ $route.meta.routeName ?? 'Stranerd' }}</span>
 			</div>
-		</ion-toolbar>
-	</ion-header>
+		</IonToolbar>
+	</IonHeader>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Logo from '@app/components/core/Logo.vue'
-import { IonHeader, IonToolbar } from '@ionic/vue'
 import Search from '@app/components/search/Search.vue'
 
 export default defineComponent({
 	name: 'HomeTopNavigation',
-	components: { Logo, IonHeader, IonToolbar, Search }
+	components: { Logo, Search }
 
 })
 </script>

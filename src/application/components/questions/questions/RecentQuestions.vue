@@ -2,11 +2,11 @@
 	<div>
 		<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 			<div class="text-secondaryText flex items-center">
-				<ion-text class="text-heading font-bold mr-3">Questions</ion-text>
-				<ion-text class="text-orange flex items-center">
+				<IonText class="text-heading font-bold mr-3">Questions</IonText>
+				<IonText class="text-orange flex items-center">
 					<div class="h-1 w-1 bg-orange mr-2 rounded-full" />
 					Latest
-				</ion-text>
+				</IonText>
 			</div>
 
 			<router-link class="text-primary flex items-center font-normal" to="/questions">

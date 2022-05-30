@@ -14,7 +14,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonContent, IonPage } from '@ionic/vue'
 import Topbar from '@app/components/layout/topNavigations/Topbar.vue'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 
@@ -30,6 +29,6 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: { Topbar, IonPage, IonContent, BottomNav }
+	components: { Topbar, BottomNav }
 })
 </script>

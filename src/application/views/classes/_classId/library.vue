@@ -10,10 +10,13 @@
 import { defineComponent } from 'vue'
 import ClassWrapper from '@app/components/classes/classes/ClassWrapper.vue'
 import ClassLibrary from '@app/components/classes/classes/ClassLibrary.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'ClassClassIdLibrary',
-	displayName: 'Class',
-	components: { ClassWrapper, ClassLibrary }
+	components: { ClassWrapper, ClassLibrary },
+	setup () {
+		useRouteMeta('Library')
+	}
 })
 </script>

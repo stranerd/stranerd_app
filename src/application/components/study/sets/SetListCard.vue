@@ -2,15 +2,15 @@
 	<router-link :to="`/study/sets/${set.id}`"
 		class="flex flex-col justify-between card-padding">
 		<div class="flex gap-4 items-center">
-			<ion-text class="font-500 truncate w-full">{{ set.name }}</ion-text>
-			<ion-icon :icon="arrowForwardOutline" class="text-heading2" />
+			<IonText class="font-500 truncate w-full">{{ set.name }}</IonText>
+			<IonIcon :icon="arrowForwardOutline" class="text-heading2" />
 		</div>
 		<div class="w-full flex items-center justify-between gap-2 text-sub text-secondaryText">
 			<Tag :tag="`${formatNumber(set.allSaved.length)} ${pluralize(set.allSaved.length, 'Item', 'Items')}`">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
-						<ion-icon :icon="folderOutline" class="mr-1" />
-						<ion-text class="font-semibold">{{ slotProps.tag }}</ion-text>
+						<IonIcon :icon="folderOutline" class="mr-1" />
+						<IonText class="font-semibold">{{ slotProps.tag }}</IonText>
 					</span>
 				</template>
 			</Tag>

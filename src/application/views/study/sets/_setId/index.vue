@@ -13,12 +13,13 @@ import Justified from '@app/layouts/Justified.vue'
 import { useRoute } from 'vue-router'
 import { useSetById } from '@app/composable/study/sets'
 import SetView from '@app/components/study/sets/SetView.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudySetsSetId',
-	displayName: 'Folder',
 	components: { Justified, SetView },
 	setup () {
+		useRouteMeta('Folder')
 		const { setId } = useRoute().params
 		const { error, loading, set } = useSetById(setId as string)
 		return { error, loading, set }

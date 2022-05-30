@@ -26,12 +26,11 @@
 import { defineComponent } from 'vue'
 import ClassListCard from '@app/components/classes/classes/ClassListCard.vue'
 import { useUserClassList } from '@app/composable/users/users/classes'
-import { IonSearchbar } from '@ionic/vue'
 import SearchClassListCard from '@app/components/classes/classes/SearchClassListCard.vue'
 
 export default defineComponent({
 	name: 'ClassesList',
-	components: { ClassListCard, IonSearchbar, SearchClassListCard },
+	components: { ClassListCard, SearchClassListCard },
 	setup () {
 		const {
 			classes, error, loading,

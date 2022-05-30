@@ -7,11 +7,11 @@ import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useStudyModal } from '@app/composable/core/modals'
 import { getEditingSet } from '@app/composable/study/sets'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'StudySetsSetIdEdit',
-	displayName: 'Edit Folder',
-	middlewares: ['isAuthenticated', async ({ from, to }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
 		const { id } = useAuth()
 		const { setId = '' } = to.params
 		const set = getEditingSet()
@@ -21,6 +21,6 @@ export default defineComponent({
 		useStudyModal().openEditSet()
 		const backPath = from?.fullPath ?? '/dashboard'
 		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
-	}]
+	}])
 })
 </script>

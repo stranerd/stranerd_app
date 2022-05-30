@@ -12,10 +12,10 @@
 						An email was just sent to <b>{{ email }}</b>. Follow the link to verify your account.
 						If an error occurred or you didn't receive the email, click the button below to resend the email.
 					</span>
-					<ion-button :disabled="loading" class="w-full text-sm btn-primary mt-2" type="submit">
+					<IonButton :disabled="loading" class="w-full text-sm btn-primary mt-2" type="submit">
 						<SpinLoading v-if="loading" />
 						<span v-else>Resend Mail</span>
-					</ion-button>
+					</IonButton>
 					<div class="w-full flex justify-center items-center">
 						<router-link class="text-primaryBg" to="/auth/signin">
 							Back to Sign In
@@ -31,15 +31,17 @@
 import { defineComponent } from 'vue'
 import { getEmailVerificationEmail, useEmailVerificationRequest } from '@app/composable/auth/signin'
 import Auth from '@app/layouts/Auth.vue'
+import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AuthVerify',
-	displayName: 'Verify Email',
 	components: { Auth },
-	middlewares: [async () => {
+	beforeRouteEnter: generateMiddlewares([async () => {
 		if (!getEmailVerificationEmail()) return '/auth/signin'
-	}],
+	}]),
 	setup () {
+		useRouteMeta('Verify Email')
 		const { email, loading, error, message, sendVerificationEmail } = useEmailVerificationRequest()
 		return { email, loading, error, message, sendVerificationEmail }
 	}

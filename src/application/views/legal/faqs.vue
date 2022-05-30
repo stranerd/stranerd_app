@@ -8,10 +8,13 @@
 import Justified from '@app/layouts/Justified.vue'
 import { defineComponent } from 'vue'
 import PdfReader from '@app/components/core/media/PdfReader.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'LegalFAQs',
-	displayName: 'FAQs',
-	components: { Justified, PdfReader }
+	components: { Justified, PdfReader },
+	setup () {
+		useRouteMeta('FAQs')
+	}
 })
 </script>

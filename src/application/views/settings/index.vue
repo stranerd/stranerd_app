@@ -34,13 +34,15 @@ import {
 	shieldCheckmarkOutline
 } from 'ionicons/icons'
 import { useSessionSignout } from '@app/composable/auth/session'
+import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'Settings',
-	displayName: 'Settings',
 	components: { Justified },
-	middlewares: ['isAuthenticated'],
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
+		useRouteMeta('Settings')
 		const { signout, loading } = useSessionSignout()
 		return {
 			signout, loading,

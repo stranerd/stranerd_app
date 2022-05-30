@@ -8,10 +8,13 @@
 import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/explore/ExploreWrapper.vue'
 import ExploreDocumentsList from '@app/components/study/documents/ExploreDocumentsList.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'ExploreDocuments',
-	displayName: 'Explore Documents',
-	components: { ExploreWrapper, ExploreDocumentsList }
+	components: { ExploreWrapper, ExploreDocumentsList },
+	setup () {
+		useRouteMeta('Explore Documents')
+	}
 })
 </script>
