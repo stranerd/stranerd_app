@@ -4,6 +4,7 @@ import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } fr
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 import { useClassModal } from '@app/composable/core/modals'
+import { Router, useRouter } from 'vue-router'
 
 const global = {} as Record<string, {
 	events: Ref<EventEntity[]>
@@ -64,28 +65,34 @@ export const useTimetable = (classId: string) => {
 }
 
 let eventClass = null as ClassEntity | null
-export const openTimetableModal = async (classInst: ClassEntity) => {
+export const getCreateEventClass = () => eventClass
+export const openCreateTimetableModal = async (classInst: ClassEntity, router: Router) => {
 	eventClass = classInst
-	useClassModal().openTimetable()
+	await router.push(`/classes/${classInst.id}/timetable/create`)
 }
 
 export const useCreateEvent = () => {
+	const router = useRouter()
 	const factory = ref(new EventFactory()) as Ref<EventFactory>
 	factory.value.type = EventType.timetable
-	if (!eventClass) useClassModal().closeTimetable()
-	else factory.value.classId = eventClass.id
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
+
+	if (!eventClass) useClassModal().closeCreateTimetable()
+	else factory.value.classId = eventClass.id
 
 	const createEvent = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EventsUseCases.add(factory.value)
+				const event = await EventsUseCases.add(factory.value)
 				await setMessage('Event created successfully.')
+				useClassModal().closeCreateTimetable()
 				factory.value.reset()
+				const day = event.data.type === EventType.timetable ? event.data.start.day : 1
+				await router.push(`/classes/${event.classId}/timetable?day=${day}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -96,30 +103,43 @@ export const useCreateEvent = () => {
 	return { factory, error, loading, createEvent, eventClass }
 }
 
+let editingEvent = null as { classInst: ClassEntity, event: EventEntity } | null
+export const getEditEvent = () => editingEvent
+export const openEditTimetableModal = async (editEventInfo: { classInst: ClassEntity, event: EventEntity }, router: Router) => {
+	editingEvent = editEventInfo
+	await router.push(`/classes/${editEventInfo.event.classId}/timetable/${editEventInfo.event.id}/edit`)
+}
+
 export const useEditEvent = () => {
+	const router = useRouter()
+	const factory = ref(new EventFactory()) as Ref<EventFactory>
+	factory.value.type = EventType.timetable
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 
-	const editEvent = async (event: EventEntity, factory: EventFactory) => {
-		let passed = false
+	if (editingEvent) factory.value.loadEntity(editingEvent.event)
+	else useClassModal().closeEditTimetable()
+
+	const editEvent = async () => {
 		await setError('')
-		if (factory.valid && !loading.value) {
+		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EventsUseCases.update(event.id, factory)
+				const event = await EventsUseCases.update(editingEvent!.event.id, factory.value)
 				await setMessage('Event updated successfully')
-				factory.reset()
-				passed = true
+				useClassModal().closeEditTimetable()
+				factory.value.reset()
+				const day = event.data.type === EventType.timetable ? event.data.start.day : 1
+				await router.push(`/classes/${event.classId}/timetable?day=${day}`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.validateAll()
-		return passed
+		} else factory.value.validateAll()
 	}
 
-	return { error, loading, editEvent }
+	return { error, loading, factory, editEvent, eventClass: editingEvent!.classInst }
 }
 
 export const useDeleteEvent = () => {

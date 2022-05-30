@@ -1,6 +1,7 @@
 <template>
 	<div class="showcase-flex">
-		<div class="flex justify-between items-center p-4 border-bottom-line" @click="openTimetableModal(classInst)">
+		<div class="flex justify-between items-center p-4 border-bottom-line"
+			@click="openCreateTimetableModal(classInst, $router)">
 			<IonText>Set up timetable</IonText>
 			<IonIcon :icon="arrowForwardOutline" class="text-heading2" />
 		</div>
@@ -29,6 +30,13 @@
 							event.data.end.hour.toString().padStart(2, '0')
 						}}:{{ event.data.end.minute.toString().padStart(2, '0') }}
 					</IonText>
+					<template v-if="classInst.admins.includes(id)">
+						<IonIcon :icon="createOutline" class="text-warning text-heading2 ml-auto"
+							@click="openEditTimetableModal({ event, classInst }, $router)" />
+						<SpinLoading v-if="deleteLoading" />
+						<IonIcon v-else :icon="trashBinOutline" class="text-danger text-heading2"
+							@click="deleteEvent(event)" />
+					</template>
 				</div>
 			</div>
 		</div>
@@ -38,8 +46,15 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import { ClassEntity, EventType } from '@modules/classes'
-import { openTimetableModal, useTimetable } from '@app/composable/classes/timetable'
-import { arrowForwardOutline, timeOutline } from 'ionicons/icons'
+import {
+	openCreateTimetableModal,
+	openEditTimetableModal,
+	useDeleteEvent,
+	useTimetable
+} from '@app/composable/classes/timetable'
+import { arrowForwardOutline, createOutline, timeOutline, trashBinOutline } from 'ionicons/icons'
+import { useRoute } from 'vue-router'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'TimetableList',
@@ -50,18 +65,24 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { loading, error, events } = useTimetable(props.classInst.id)
-		const activeDay = ref(1)
+		const { id } = useAuth()
+		const route = useRoute()
+		const { day: dayStr } = route.query
+		const day = parseInt(dayStr as string)
+		const activeDay = ref(day >= 0 && day < 7 ? day : 1)
 		const days = [
 			{ day: 1, name: 'Monday' }, { day: 2, name: 'Tuesday' }, { day: 3, name: 'Wednesday' },
 			{ day: 4, name: 'Thursday' }, { day: 5, name: 'Friday' }, { day: 6, name: 'Saturday' },
 			{ day: 0, name: 'Sunday' }
 		]
+		const { loading, error, events } = useTimetable(props.classInst.id)
 		const timetable = computed(() => events.value
 			.filter((e) => e.data.type === EventType.timetable && e.data.start.day === activeDay.value))
+		const { loading: deleteLoading, error: deleteError, deleteEvent } = useDeleteEvent()
 		return {
-			loading, error, openTimetableModal, timeOutline,
-			activeDay, days, timetable, arrowForwardOutline
+			loading, error, openCreateTimetableModal, openEditTimetableModal, timeOutline,
+			activeDay, days, timetable, arrowForwardOutline, trashBinOutline, createOutline,
+			id, deleteLoading, deleteError, deleteEvent
 		}
 	}
 })

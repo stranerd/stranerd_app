@@ -47,6 +47,18 @@ export class EventEntity extends BaseEntity {
 		return `${day.toString()}${hour.toString().padStart(2, '0')}${minute.toString().padStart(2, '0')}${this.createdAt}`
 	}
 
+	get members () {
+		return this.users[ClassUsers.members]
+	}
+
+	get admins () {
+		return this.users[ClassUsers.admins]
+	}
+
+	get tutors () {
+		return this.users[ClassUsers.tutors]
+	}
+
 	getAllUsers () {
 		return Array.from(new Set(Object.values(this.users).flat()))
 	}
