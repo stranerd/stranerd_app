@@ -10,7 +10,7 @@
 					<IonInput v-model="factory.email" placeholder="Your email address" required />
 				</template>
 				<IonTextarea v-model="factory.message" placeholder="Tell us how we can help" required rows="3" />
-				<IonButton class="btn-primary" type="submit">
+				<IonButton class="btn-primary h-9" type="submit">
 					<IonIcon slot="start" :icon="paperPlaneOutline" />
 					Send
 				</IonButton>
