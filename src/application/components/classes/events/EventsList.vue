@@ -1,7 +1,7 @@
 <template>
 	<div class="showcase-flex">
 		<router-link to="#" class="flex justify-between items-center px-4 md:px-0 py-4 border-bottom-line" >
-			<ion-text>Set up Events</ion-text>
+			<IonText>Set up Events</IonText>
 			<IonIcon :icon="arrowForwardOutline" class="text-heading2 text-bodyText" />
 		</router-link>
 
@@ -15,12 +15,12 @@
 		</div> 
 		<div class="flex flex-col gap-4 px-4">
 			<div v-for="event in timetable" :key="event.hash" class="flex flex-col min-h-[96px] rounded-lg bg-itemBg text-bodyText border-l-8 border-primaryBg p-4">
-				<ion-text class="font-bold ">{{ event.title }}</ion-text>
-				<ion-text class="mt-3 flex">
+				<IonText class="font-bold ">{{ event.title }}</IonText>
+				<IonText class="mt-3 flex">
 					<IonIcon :icon="timeOutline" class="text-heading2 mr-2 " />
 					2 May
-				</ion-text>
-				<ion-text class="mt-3 flex">
+				</IonText>
+				<IonText class="mt-3 flex">
 					<IonIcon :icon="calendarClearOutline" class="text-heading2 mr-2 " />
 					{{
 						event.data.start.hour.toString().padStart(2, '0')
@@ -33,7 +33,7 @@
 						<IonIcon :icon="createOutline" class="text-heading2 mr-5 " />
 						<IonIcon :icon="trashBinOutline" class="text-heading2 text-danger " />
 					</span>
-				</ion-text>
+				</IonText>
 			</div>
 		
 		</div>
