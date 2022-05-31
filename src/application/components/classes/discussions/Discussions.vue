@@ -1,18 +1,19 @@
 <template>
-	<div class="chat-block text-gray">
+	<div class="chat-block text-bodyText">
 		<div v-if="group && group.members.includes(id)" class="body">
-			<div class="flex items-center">
-				<IonIcon :icon="chatboxEllipsesOutline" class="text-heading5" />
+			<div class="flex items-center bg-headerBg text-headerText">
+				<router-link :to="`/classes/${classId}/groups`" class="mr-4 flex">
+					<IonIcon :icon="arrowBackOutline" class="text-heading2" />
+				</router-link>
+				<avatar :name="group.name" :size="36"  />
 				<div class="ml-2 flex flex-col">
-					<IonText class="text-secondaryText font-semibold">{{ group.name }}</IonText>
+					<IonText class="font-semibold">{{ group.name }}</IonText>
 					<IonText class="text-sub">
 						Created {{ formatTime(group.createdAt) }} by <span
-							class="text-primary">{{ group.user.bio.fullName }}</span>
+							class="">{{ group.user.bio.fullName }}</span>
 					</IonText>
 				</div>
-				<router-link :to="`/classes/${classId}/groups`" class="ml-auto flex">
-					<IonIcon :icon="closeOutline" class="text-heading3" />
-				</router-link>
+
 			</div>
 			<DiscussionsList :classId="classId" :groupId="groupId" class="content" />
 			<DiscussionForm :classId="classId" :groupId="groupId" />
@@ -28,16 +29,17 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { chatboxEllipsesOutline, closeOutline } from 'ionicons/icons'
+import { chatboxEllipsesOutline, arrowBackOutline } from 'ionicons/icons'
 import { useGroupList } from '@app/composable/classes/groups'
 import { formatTime } from '@utils/dates'
 import { useAuth } from '@app/composable/auth/auth'
 import DiscussionForm from '@app/components/classes/discussions/DiscussionForm.vue'
 import DiscussionsList from '@app/components/classes/discussions/DiscussionsList.vue'
+import Avatar from '../../core/Avatar.vue'
 
 export default defineComponent({
 	name: 'Discussions',
-	components: { DiscussionForm, DiscussionsList },
+	components: { DiscussionForm, DiscussionsList, Avatar },
 	props: {
 		classId: {
 			required: true,
@@ -53,7 +55,7 @@ export default defineComponent({
 		const { loading, error, groups } = useGroupList(props.classId)
 		const group = computed(() => groups.value.find((group) => group.id === props.groupId) ?? null)
 		return {
-			closeOutline, chatboxEllipsesOutline, formatTime,
+			arrowBackOutline, chatboxEllipsesOutline, formatTime,
 			loading, error, group, id
 		}
 	}
