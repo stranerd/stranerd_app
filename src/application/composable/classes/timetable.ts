@@ -142,12 +142,12 @@ export const useEditEvent = () => {
 	return { error, loading, factory, editEvent, eventClass: editingEvent!.classInst }
 }
 
-export const useDeleteEvent = () => {
+export const useDeleteEvent = (classId: string, eventId: string) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	const deleteEvent = async (event: EventEntity) => {
+	const deleteEvent = async () => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this event?',
@@ -156,7 +156,7 @@ export const useDeleteEvent = () => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await EventsUseCases.delete(event.classId, event.id)
+				await EventsUseCases.delete(classId, eventId)
 				await setMessage('Event deleted successfully')
 			} catch (error) {
 				await setError(error)

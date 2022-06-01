@@ -13,51 +13,25 @@
 				{{ day.name }}
 			</a>
 		</div>
-		<BlockLoading v-if="loading" />
 		<div class="flex flex-col gap-4 px-4">
-			<div v-for="event in timetable" :key="event.hash"
-				class="flex flex-col rounded-lg bg-itemBg border-l-8 border-primaryBg p-4 gap-2">
-				<IonText class="font-bold">{{ event.title }}</IonText>
-				<IonText v-if="event.data.lecturer">{{ event.data.lecturer }}</IonText>
-				<div class="flex gap-2 items-center text-secondaryText">
-					<IonIcon :icon="timeOutline" class="text-heading2" />
-					<IonText>
-						{{
-							event.data.start.hour.toString().padStart(2, '0')
-						}}:{{ event.data.start.minute.toString().padStart(2, '0') }}
-						-
-						{{
-							event.data.end.hour.toString().padStart(2, '0')
-						}}:{{ event.data.end.minute.toString().padStart(2, '0') }}
-					</IonText>
-					<template v-if="classInst.admins.includes(id)">
-						<IonIcon :icon="createOutline" class="text-warning text-heading2 ml-auto"
-							@click="openEditTimetableModal({ event, classInst }, $router)" />
-						<SpinLoading v-if="deleteLoading" />
-						<IonIcon v-else :icon="trashBinOutline" class="text-danger text-heading2"
-							@click="deleteEvent(event)" />
-					</template>
-				</div>
-			</div>
+			<EmptyState v-if="!loading && !error && timetable.length === 0" info="No timetable" />
+			<TimetableListCard v-for="event in timetable" :key="event.hash" :classInst="classInst" :event="event" />
 		</div>
+		<BlockLoading v-if="loading" />
 	</div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import { ClassEntity, EventType } from '@modules/classes'
-import {
-	openCreateTimetableModal,
-	openEditTimetableModal,
-	useDeleteEvent,
-	useTimetable
-} from '@app/composable/classes/timetable'
-import { arrowForwardOutline, createOutline, timeOutline, trashBinOutline } from 'ionicons/icons'
+import { openCreateTimetableModal, useTimetable } from '@app/composable/classes/timetable'
+import { arrowForwardOutline } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
-import { useAuth } from '@app/composable/auth/auth'
+import TimetableListCard from '@app/components/classes/timetable/TimetableListCard.vue'
 
 export default defineComponent({
 	name: 'TimetableList',
+	components: { TimetableListCard },
 	props: {
 		classInst: {
 			type: ClassEntity,
@@ -65,7 +39,6 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { id } = useAuth()
 		const route = useRoute()
 		const { day: dayStr } = route.query
 		const day = parseInt(dayStr as string)
@@ -78,11 +51,9 @@ export default defineComponent({
 		const { loading, error, events } = useTimetable(props.classInst.id)
 		const timetable = computed(() => events.value
 			.filter((e) => e.data.type === EventType.timetable && e.data.start.day === activeDay.value))
-		const { loading: deleteLoading, error: deleteError, deleteEvent } = useDeleteEvent()
 		return {
-			loading, error, openCreateTimetableModal, openEditTimetableModal, timeOutline,
-			activeDay, days, timetable, arrowForwardOutline, trashBinOutline, createOutline,
-			id, deleteLoading, deleteError, deleteEvent
+			loading, error, openCreateTimetableModal,
+			activeDay, days, timetable, arrowForwardOutline
 		}
 	}
 })

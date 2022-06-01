@@ -11,6 +11,7 @@
 				placeholder="Name your class"
 				show-cancel-button="never"
 			/>
+			<DisplayError :error="factory.errors.name" />
 		</div>
 
 		<div class="flex flex-col gap-2">
@@ -21,6 +22,7 @@
 				placeholder="Add a short description"
 				show-cancel-button="never"
 			/>
+			<DisplayError :error="factory.errors.description" />
 		</div>
 
 		<div class="flex flex-col gap-2">
@@ -33,6 +35,7 @@
 					{{ school.name }}
 				</IonSelectOption>
 			</IonSelect>
+			<DisplayError :error="factory.errors.institutionId" />
 		</div>
 
 		<div class="flex flex-col gap-2">
@@ -45,6 +48,7 @@
 					{{ faculty.name }}
 				</IonSelectOption>
 			</IonSelect>
+			<DisplayError :error="factory.errors.facultyId" />
 		</div>
 
 		<div class="flex flex-col gap-2">
@@ -57,6 +61,7 @@
 					{{ department.name }}
 				</IonSelectOption>
 			</IonSelect>
+			<DisplayError :error="factory.errors.departmentId" />
 		</div>
 
 		<IonButton :disabled="loading || !factory.valid" class="w-full btn-primary" type="submit">

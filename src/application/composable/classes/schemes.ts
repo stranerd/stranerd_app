@@ -1,8 +1,8 @@
-import { onMounted, onUnmounted, ref, Ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { ClassEntity, SchemeEntity, SchemeFactory, SchemesUseCases } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { addToArray } from '@utils/commons'
+import { addToArray, groupBy } from '@utils/commons'
 import { useClassModal } from '@app/composable/core/modals'
 import { Router, useRouter } from 'vue-router'
 
@@ -58,9 +58,8 @@ export const useSchemesList = (classId: string) => {
 	})
 
 	return {
-		error: global[classId].error,
-		loading: global[classId].loading,
-		schemes: global[classId].schemes
+		...global[classId],
+		schemes: computed(() => groupBy(global[classId].schemes.value, (scheme) => scheme.title))
 	}
 }
 
@@ -68,7 +67,7 @@ let schemeClass = null as ClassEntity | null
 export const getCreateSchemeClass = () => schemeClass
 export const openCreateSchemeModal = async (classInst: ClassEntity, router: Router) => {
 	schemeClass = classInst
-	await router.push(`/classes/${classInst.id}/scheme/create`)
+	await router.push(`/classes/${classInst.id}/schemes/create`)
 }
 
 export const useCreateScheme = () => {
@@ -90,7 +89,7 @@ export const useCreateScheme = () => {
 				await setMessage('Scheme created successfully.')
 				useClassModal().closeCreateScheme()
 				factory.value.reset()
-				await router.push(`/classes/${scheme.classId}/scheme`)
+				await router.push(`/classes/${scheme.classId}/schemes`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -105,7 +104,7 @@ let editingScheme = null as { classInst: ClassEntity, scheme: SchemeEntity } | n
 export const getEditScheme = () => editingScheme
 export const openEditSchemeModal = async (editSchemeInfo: { classInst: ClassEntity, scheme: SchemeEntity }, router: Router) => {
 	editingScheme = editSchemeInfo
-	await router.push(`/classes/${editSchemeInfo.scheme.classId}/scheme/${editSchemeInfo.scheme.id}/edit`)
+	await router.push(`/classes/${editSchemeInfo.scheme.classId}/schemes/${editSchemeInfo.scheme.id}/edit`)
 }
 
 export const useEditScheme = () => {
@@ -127,7 +126,7 @@ export const useEditScheme = () => {
 				await setMessage('Scheme updated successfully')
 				useClassModal().closeEditScheme()
 				factory.value.reset()
-				await router.push(`/classes/${scheme.classId}/scheme`)
+				await router.push(`/classes/${scheme.classId}/schemes`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -138,12 +137,12 @@ export const useEditScheme = () => {
 	return { error, loading, factory, editScheme, schemeClass: editingScheme!.classInst }
 }
 
-export const useDeleteScheme = () => {
+export const useDeleteScheme = (classId: string, schemeId: string) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	const deleteScheme = async (scheme: SchemeEntity) => {
+	const deleteScheme = async () => {
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to delete this scheme?',
@@ -152,7 +151,7 @@ export const useDeleteScheme = () => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await SchemesUseCases.delete(scheme.classId, scheme.id)
+				await SchemesUseCases.delete(classId, schemeId)
 				await setMessage('Scheme deleted successfully')
 			} catch (error) {
 				await setError(error)

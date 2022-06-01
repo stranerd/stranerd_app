@@ -3,7 +3,8 @@
 		<template v-slot:title>
 			Edit Timetable
 		</template>
-		<TimetableForm :classInst="eventClass" :error="error" :factory="factory" :loading="loading" :submit="editEvent">
+		<TimetableForm :classInst="eventClass" :disabled="{ title: true }" :error="error" :factory="factory" :loading="loading"
+			:submit="editEvent">
 			<template v-slot:buttonText>Save</template>
 		</TimetableForm>
 	</Modal>

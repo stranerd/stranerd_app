@@ -10,7 +10,7 @@ import { generateMiddlewares } from '@app/middlewares'
 import { getEditScheme } from '@app/composable/classes/schemes'
 
 export default defineComponent({
-	name: 'ClassesClassIdSchemeSchemeIdEdit',
+	name: 'ClassesClassIdSchemesSchemeIdEdit',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
 		const { id } = useAuth()
 		const { classId = '', schemeId = '' } = to.params

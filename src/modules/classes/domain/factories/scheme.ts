@@ -12,7 +12,7 @@ export class SchemeFactory extends BaseFactory<SchemeEntity, SchemeToModel, Sche
 		classId: { required: true, rules: [isString] }
 	}
 
-	reserved = ['classId', 'type']
+	reserved = ['classId']
 
 	constructor () {
 		super({ title: '', classId: '', topic: '', start: 0, end: 0 })

@@ -23,6 +23,8 @@ import CreateAnnouncement from '@app/components/modals/classes/CreateAnnouncemen
 import EditAnnouncement from '@app/components/modals/classes/EditAnnouncement.vue'
 import CreateTimetable from '@app/components/modals/classes/CreateTimetable.vue'
 import EditTimetable from '@app/components/modals/classes/EditTimetable.vue'
+import CreateScheme from '@app/components/modals/classes/CreateScheme.vue'
+import EditScheme from '@app/components/modals/classes/EditScheme.vue'
 import CreateInstitution from '@app/components/modals/school/CreateInstitution.vue'
 import EditInstitution from '@app/components/modals/school/EditInstitution.vue'
 import CreateFaculty from '@app/components/modals/school/CreateFaculty.vue'
@@ -45,7 +47,7 @@ const StudyModal = modal.register('Study', {
 const ClassModal = modal.register('Class', {
 	CreateClass, EditClass, EditClassCourses, CreateGroup, EditGroup,
 	CreateAnnouncement, EditAnnouncement, CreateTimetable, EditTimetable,
-	CreateScheme: CreateTimetable, EditScheme: CreateTimetable
+	CreateScheme, EditScheme
 })
 const SchoolModal = modal.register('School', {
 	CreateInstitution, EditInstitution, CreateFaculty, EditFaculty, CreateDepartment, EditDepartment,

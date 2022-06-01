@@ -11,44 +11,43 @@
 
 		<div class="flex flex-col gap-2">
 			<IonLabel class="font-bold">Course</IonLabel>
-			<IonSelect v-if="classInst" v-model="factory.title" class="capitalize"
-				interface="action-sheet" placeholder="Select Course">
+			<IonSelect v-model="factory.title" :disabled="disabled.title" class="capitalize"
+				interface="action-sheet" placeholder="Select course">
 				<IonSelectOption v-for="course in classInst.courses" :key="course" class="capitalize">
 					{{ course }}
 				</IonSelectOption>
 			</IonSelect>
-			<IonInput v-else v-model="factory.title"
-				:class="{'valid': factory.isValid('title'), 'invalid': factory.errors.title}"
-				placeholder="Enter course title"
-				required
-				show-cancel-button="never"
-			/>
+			<DisplayError :error="factory.errors.title" />
 		</div>
 
 		<div class="flex flex-col gap-2">
 			<IonLabel class="font-bold">Lecturer</IonLabel>
 			<IonInput v-model="factory.lecturer"
 				:class="{'valid': factory.isValid('lecturer'), 'invalid': factory.errors.lecturer}"
+				:disabled="disabled.lecturer"
 				placeholder="Enter lecturer name"
 				required
 				show-cancel-button="never"
 			/>
+			<DisplayError :error="factory.errors.lecturer" />
 		</div>
 
 		<div class="flex gap-4 items-center">
 			<div class="flex flex-col gap-2 w-full">
 				<IonLabel class="font-bold">Starts At</IonLabel>
-				<IonInput :value="factory.startTime"
+				<IonInput :disabled="disabled.startTime" :value="factory.startTime"
 					class="w-full" placeholder="Select start time" required
 					type="time"
 					@change="(e) => factory.startTime = e.target.value" />
+				<DisplayError :error="factory.errors.start" />
 			</div>
 			<div class="flex flex-col gap-2 w-full">
 				<IonLabel class="font-bold">Ends At</IonLabel>
-				<IonInput :value="factory.endTime"
+				<IonInput :disabled="disabled.endTime" :value="factory.endTime"
 					class="w-full" placeholder="Select end time" required
 					type="time"
 					@change="(e) => factory.endTime = e.target.value" />
+				<DisplayError :error="factory.errors.end" />
 			</div>
 		</div>
 
@@ -85,6 +84,11 @@ export default defineComponent({
 		error: {
 			type: String,
 			required: true
+		},
+		disabled: {
+			type: Object,
+			required: false,
+			default: () => ({})
 		}
 	},
 	setup (props) {
@@ -96,6 +100,7 @@ export default defineComponent({
 		]
 		const chooseDay = (day: number) => {
 			activeDay.value = day
+			if (props.disabled['day']) return
 			props.factory.startDay = props.factory.endDay = day
 		}
 		return { activeDay, days, chooseDay }

@@ -10,7 +10,7 @@ import { generateMiddlewares } from '@app/middlewares'
 import { getCreateSchemeClass } from '@app/composable/classes/schemes'
 
 export default defineComponent({
-	name: 'ClassesClassIdSchemeCreate',
+	name: 'ClassesClassIdSchemesCreate',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from }) => {
 		const { id } = useAuth()
 		const classInst = getCreateSchemeClass()
