@@ -16,8 +16,8 @@ export class VideoFactory extends BaseFactory<VideoEntity, VideoToModel, Keys> {
 		title: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		description: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		isHosted: { required: true, rules: [isBoolean] },
-		link: { required: () => !this.isHosted, rules: [isString] },
-		media: { required: () => this.isHosted, rules: [isVideo] }
+		link: { required: () => !this.isHosted, nullable: true, rules: [isString] },
+		media: { required: () => this.isHosted, nullable: true, rules: [isVideo] }
 	}
 
 	reserved = []

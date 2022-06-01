@@ -29,15 +29,15 @@ export class TestPrepFactory extends BaseFactory<TestPrepEntity, TestPrepToModel
 			rules: [arrayContainsX(Object.keys(PastQuestionType), (cur, val) => cur === val)]
 		},
 		courseId: {
-			required: () => this.isPastQuestion,
+			required: () => this.isPastQuestion, nullable: true,
 			rules: [isString, isLongerThanX(0)]
 		},
 		institutionId: {
-			required: () => this.isPastQuestion,
+			required: () => this.isPastQuestion, nullable: true,
 			rules: [isString, isLongerThanX(0)]
 		},
 		year: {
-			required: () => this.isPastQuestion,
+			required: () => this.isPastQuestion, nullable: true,
 			rules: [isNumber, isMoreThanX(0)]
 		}
 	}

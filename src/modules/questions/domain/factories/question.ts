@@ -26,7 +26,7 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 			rules: [arrayContainsX(Object.keys(QuestionType), (cur, val) => cur === val)]
 		},
 		classId: {
-			required: () => this.isClassType,
+			required: () => this.isClassType, nullable: true,
 			rules: [isString]
 		}
 	}

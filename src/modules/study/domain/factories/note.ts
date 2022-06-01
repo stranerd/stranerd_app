@@ -16,9 +16,9 @@ export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, Keys> {
 		title: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		description: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		isHosted: { required: true, rules: [isBoolean] },
-		link: { required: () => !this.isHosted, rules: [isString] },
+		link: { required: () => !this.isHosted, nullable: true, rules: [isString] },
 		media: {
-			required: () => this.isHosted, rules: [isFile,
+			required: () => this.isHosted, nullable: true, rules: [isFile,
 				(val: any) => docFormats.includes(val?.type) ? isValid() : isInvalid('only pdf files are allowed')
 			]
 		}
