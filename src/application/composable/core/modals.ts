@@ -44,7 +44,8 @@ const StudyModal = modal.register('Study', {
 })
 const ClassModal = modal.register('Class', {
 	CreateClass, EditClass, EditClassCourses, CreateGroup, EditGroup,
-	CreateAnnouncement, EditAnnouncement, CreateTimetable, EditTimetable
+	CreateAnnouncement, EditAnnouncement, CreateTimetable, EditTimetable,
+	CreateScheme: CreateTimetable, EditScheme: CreateTimetable
 })
 const SchoolModal = modal.register('School', {
 	CreateInstitution, EditInstitution, CreateFaculty, EditFaculty, CreateDepartment, EditDepartment,
