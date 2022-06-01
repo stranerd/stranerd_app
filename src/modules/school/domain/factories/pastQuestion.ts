@@ -43,33 +43,33 @@ export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQue
 		question: { required: true, rules: [isString, isExtractedHTMLLongerThanX(0)] },
 		questionMedia: { required: true, rules: [isArrayOfX((com) => isImage(com).valid, 'images')] },
 		answer: {
-			required: () => !this.isObjective,
+			required: () => !this.isObjective, nullable: true,
 			rules: [isString]
 		},
 		answerMedia: {
-			required: () => !this.isObjective,
+			required: () => !this.isObjective, nullable: true,
 			rules: [isArrayOfX((com) => isImage(com).valid, 'images')]
 		},
 		options: {
-			required: () => this.isObjective,
+			required: () => this.isObjective, nullable: true,
 			rules: [isArrayOfX((cur: any) => isString(cur).valid, 'questions'), hasMoreThanX(0)]
 		},
 		optionsMedia: {
-			required: () => this.isObjective,
+			required: () => this.isObjective, nullable: true,
 			rules: [
 				isArrayOfX((cur: any) => isArrayOf(cur, (com) => isImage(com).valid, 'images').valid, 'images')
 			]
 		},
 		correctIndex: {
-			required: () => this.isObjective,
+			required: () => this.isObjective, nullable: true,
 			rules: [isNumber]
 		},
 		explanation: {
-			required: () => this.isObjective,
+			required: () => this.isObjective, nullable: true,
 			rules: [isString]
 		},
 		explanationMedia: {
-			required: () => this.isObjective,
+			required: () => this.isObjective, nullable: true,
 			rules: [isArrayOfX((com) => isImage(com).valid, 'images')]
 		}
 	}
