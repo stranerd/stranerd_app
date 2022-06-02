@@ -155,7 +155,7 @@ export const useCreateDiscussion = (classId: string, groupId: string) => {
 	}
 
 	const createMediaDiscussion = async (factories: DiscussionFactory[]) => {
-		if (!loadingCounter.value) await Promise.all(factories.map(async (mediaFactory) => {
+		await Promise.all(factories.map(async (mediaFactory) => {
 			mediaFactory.groupId = groupId
 			loadingCounter.value++
 			try {

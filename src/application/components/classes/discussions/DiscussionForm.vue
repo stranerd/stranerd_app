@@ -3,41 +3,29 @@
 		<span v-if="loadingCounter" class="loading-counter">
 			{{ loadingCounter }} {{ pluralize(loadingCounter, 'message', 'messages') }} sending
 		</span>
-		<div v-if="showFileUpload" class="absolute top-0 flex flex-col gap-4 py-2" style="transform: translateY(-100%)">
-			<FileInput :multiple="true" accept="image/*" @files="catchFiles">
+		<div v-if="showFileUpload" class="absolute flex flex-col gap-4 py-4"
+			style="transform: translateY(calc(-100% - 1rem))">
+			<FileInput v-for="{ icon, label, accept } in [
+				{ icon: imageOutline, label: 'Photos', accept: 'image/*' },
+				{ icon: documentOutline, label: 'Documents', accept: '*' },
+				{ icon: videocamOutline, label: 'Videos', accept: 'video/*' },
+			]" :key="label" :accept="accept" :multiple="true" @files="catchFiles">
 				<div class="flex gap-2 items-center">
-					<span class="rounded-full p-2 h-10 w-10 bg-new_gray">
-						<IonIcon :icon="imageOutline" class="text-heading3" />
+					<span
+						class="rounded-full p-2 h-8 w-8 bg-primaryBg text-primaryText flex justify-center items-center">
+						<IonIcon :icon="icon" class="text-heading" />
 					</span>
-					<IonText class="bg-new_gray py-1 px-4 rounded-full">Photos</IonText>
-				</div>
-			</FileInput>
-			<FileInput :multiple="true" accept="*" @files="catchFiles">
-				<div class="flex gap-2 items-center">
-					<span class="rounded-full p-2 h-10 w-10 bg-new_gray">
-						<IonIcon :icon="documentOutline" class="text-heading3" />
-					</span>
-					<IonText class="bg-new_gray py-1 px-4 rounded-full">Documents</IonText>
-				</div>
-			</FileInput>
-			<FileInput :multiple="true" accept="video/*" @files="catchFiles">
-				<div class="flex gap-2 items-center">
-					<span class="rounded-full p-2 h-10 w-10 bg-new_gray">
-						<IonIcon :icon="videocamOutline" class="text-heading3" />
-					</span>
-					<IonText class="bg-new_gray py-1 px-4 rounded-full">Videos</IonText>
+					<IonText class="bg-itemBg text-secondaryText py-1 px-4 rounded-full">{{ label }}</IonText>
 				</div>
 			</FileInput>
 		</div>
 		<div v-if="showFileCaption" class="chat-block">
 			<div class="body">
-				<div class="flex items-center">
-					<IonIcon :icon="closeOutline" class="text-heading4" @click="showFileCaption = false" />
-					<span v-if="fileData.length" class="text-red ml-auto" @click="remove">
-						Remove File
-					</span>
+				<div class="flex items-center justify-between">
+					<IonIcon :icon="closeOutline" class="text-heading3" @click="showFileCaption = false" />
+					<IonIcon :icon="trashBinOutline" class="text-heading3 text-danger" @click="remove" />
 				</div>
-				<div v-if="fileData[fileIndex]" class="content flex flex-col items-center justify-center gap-2">
+				<div class="content flex flex-col items-center justify-center gap-2">
 					<img v-if="fileData[fileIndex].factory.media.type.includes('image')" :src="fileData[fileIndex].data"
 						class="object-cover" />
 					<video v-else-if="fileData[fileIndex].factory.media.type.includes('video')"
@@ -45,47 +33,39 @@
 					<IonIcon v-else :icon="documentOutline" class="text-8xl" />
 					<span>{{ fileData[fileIndex].factory.media.name }}</span>
 				</div>
-				<div v-if="fileData.length" class="flex gap-4 w-full items-center md:max-w-[80%] mx-auto">
-					<IonIcon :icon="chevronBackOutline" class="text-heading5"
-						@click="fileIndex === 0 ? fileIndex : fileIndex--" />
-					<IonInput v-model="fileData[fileIndex].factory.content" class="border border-new_gray"
-						placeholder="Add a caption" />
-					<IonIcon :icon="chevronForwardOutline"
-						class="text-heading5"
-						@click="fileIndex === fileData.length - 1 ? fileIndex : fileIndex++" />
-				</div>
-				<div class="flex items-center gap-2 md:gap-4 overflow-x-auto mt-auto">
-					<div v-for="(file, index) in fileData" :key="file.hash"
-						class="rounded-xl flex items-center justify-center cursor-pointer w-12 h-12 md:w-24 md:h-24 border border-new_gray"
-						@click="fileIndex = index">
-						<img v-if="file.factory.media.type.includes('image')" :src="file.data" />
-						<IonIcon v-else-if="file.factory.media.type.includes('video')" :icon="videocamOutline"
-							class="text-heading5" />
-						<IonIcon v-else :icon="documentOutline" class="text-heading5" />
+				<div>
+					<div class="mb-4">
+						<IonInput v-model="fileData[fileIndex].factory.content" placeholder="Add a caption" />
 					</div>
-					<FileInput :multiple="true" accept="*" @files="catchMoreFiles">
-						<div
-							class="rounded-xl flex items-center justify-center cursor-pointer w-12 h-12 md:w-24 md:h-24 border border-new_gray">
-							<IonIcon :icon="addOutline" class="text-heading5" />
+					<div class="flex items-center gap-2 overflow-x-auto text-secondaryText">
+						<div v-for="(file, index) in fileData" :key="file.hash"
+							class="rounded-xl flex cursor-pointer w-12 h-12 border border-itemBg"
+							style="flex-shrink: 0;"
+							@click="fileIndex = index">
+							<img v-if="file.factory.media.type.includes('image')" :src="file.data"
+								class="h-full w-full" />
+							<IonIcon v-else-if="file.factory.media.type.includes('video')" :icon="videocamOutline"
+								class="text-heading5" />
+							<IonIcon v-else :icon="documentOutline" class="text-heading5" />
 						</div>
-					</FileInput>
-					<div class="ml-auto">
-						<IonButton v-if="fileData.length" :disabled="loadingCounter" color="primary" shape="round"
-							size="small"
-							@click="uploadFiles">
+						<FileInput :multiple="true" accept="*" @files="catchMoreFiles">
+							<div
+								class="rounded-xl flex items-center justify-center cursor-pointer w-12 h-12 border border-itemBg">
+								<IonIcon :icon="addOutline" class="text-heading5" />
+							</div>
+						</FileInput>
+						<IonButton :disabled="loadingCounter" class="btn-primary ml-auto" @click="uploadFiles">
 							<IonIcon slot="icon-only" :icon="paperPlaneOutline" />
 						</IonButton>
 					</div>
 				</div>
 			</div>
 		</div>
-		<form class="flex items-center md:gap-2"
-			@submit.prevent="createTextDiscussion">
+		<form class="flex items-center gap-2" @submit.prevent="createTextDiscussion">
 			<IonIcon :icon="showFileUpload ? closeCircleOutline : addCircleOutline"
-				class="text-heading4" @click="showFileUpload = !showFileUpload" />
-			<IonInput v-model="factory.content" class="flex-grow" placeholder="Send a message" required />
-			<IonButton :disabled="!factory.valid || loadingCounter" color="primary" shape="round"
-				size="small" type="submit">
+				class="text-heading3" @click="showFileUpload = !showFileUpload" />
+			<IonInput v-model="factory.content" class="flex-grow rounded-full h-8" placeholder="Write here" required />
+			<IonButton :disabled="!factory.valid || loadingCounter" class="btn-primary" type="submit">
 				<IonIcon slot="icon-only" :icon="paperPlaneOutline" />
 			</IonButton>
 		</form>
@@ -105,6 +85,7 @@ import {
 	documentOutline,
 	imageOutline,
 	paperPlaneOutline,
+	trashBinOutline,
 	videocamOutline
 } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
@@ -149,6 +130,7 @@ export default defineComponent({
 			}))
 		})
 		const remove = () => {
+			if (fileData.value.length === 1) showFileCaption.value = false
 			fileData.value.splice(fileIndex.value, 1)
 			if (fileIndex.value !== 0) fileIndex.value--
 		}
@@ -158,7 +140,7 @@ export default defineComponent({
 		}
 		return {
 			loadingCounter, error, factory, createTextDiscussion, uploadFiles, pluralize,
-			addCircleOutline, closeOutline, paperPlaneOutline, closeCircleOutline, imageOutline,
+			addCircleOutline, closeOutline, paperPlaneOutline, closeCircleOutline, trashBinOutline, imageOutline,
 			documentOutline, videocamOutline, addOutline, chevronForwardOutline, chevronBackOutline,
 			showFileUpload, catchFiles, catchMoreFiles, fileData, showFileCaption, fileIndex, remove
 		}
@@ -168,6 +150,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-button {
+		height: 32px;
+		width: 32px;
 		--padding-start: 0.4rem !important;
 		--padding-end: 0.4rem !important;
 		--padding-top: 0.4rem !important;
@@ -188,7 +172,7 @@ export default defineComponent({
 		top: 1rem;
 		padding: 0.5rem 0.75rem;
 		border-radius: 0.75rem;
-		background: $color-white;
-		border: 1px solid rgba($color-gray, 0.5);
+		background: $color-bodyBg;
+		border: 1px solid $color-itemBg;
 	}
 </style>

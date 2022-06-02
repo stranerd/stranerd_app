@@ -1,18 +1,20 @@
 <template>
-	<div :class="{'justify-end': discussion.user.id === id}"
-		class="flex gap-1 items-end text-secondaryText w-full">
-		<Avatar v-if="discussion.user.id !== id" :id="discussion.user.id" :name="discussion.user.bio.fullName"
-			:size="24" :src="discussion.user.bio.photo" />
-		<div :class="discussion.user.id === id ? 'bg-new_gray rounded-bl-xl' : 'bg-[#1997DE1A] rounded-br-xl'"
-			class="py-[6px] px-3 min-w-[25%] max-w-[70%] lg:max-w-[55%] rounded-t-xl flex flex-col gap-1">
-			<span v-if="discussion.user.id !== id" class="flex gap-1 items-center text-gray font-semibold">
-				<span>{{ discussion.user.bio.fullName }}</span>
+	<div 
+		class="flex gap-1 items-center text-secondaryText w-full">
+		<Avatar  :id="discussion.user.id" :name="discussion.user.bio.fullName" class="self-center"
+			:size="36" :src="discussion.user.bio.photo" />
+		<div
+			class="py-2 px-3 min-w-[25%] max-w-[70%] lg:max-w-[55%] rounded-t-xl flex flex-col gap-1">
+			<span class="flex gap-1 items-center ">
+				<span class="font-bold text-[15px]" :class="discussion.user.id !== id ? 'text-bodyText ' : 'text-info'">{{ discussion.user.id !== id ? discussion.user.bio.fullName : "You" }}</span>
 				<Verified :verified="discussion.user.roles.isVerified" />
+				<div class="dot bg-secondaryText"></div>
+				<span class="text-[10px]  leading-none text-secondaryText">{{ formatTimeAsDigits(new Date(discussion.createdAt)) }}</span>
 			</span>
 			<div v-if="discussion.isMedia" class="flex flex-col" @click="openFile">
 				<img v-if="discussion.isImage" :src="discussion.media.link" alt="" class="w-full rounded-t-xl">
 				<div :class="{'rounded-t-xl': !discussion.isImage}"
-					class="bg-white flex gap-2 items-center p-3 rounded-b-xl">
+					class="bg-bodyBg flex gap-2 items-center p-3 rounded-b-xl">
 					<IonIcon :icon="documentOutline" class="text-heading3" />
 					<IonText class="w-full truncate">{{ discussion.media.name }}</IonText>
 					<SpinLoading v-if="loading" class="text-heading3" />
@@ -21,10 +23,10 @@
 				</div>
 			</div>
 			<div class="flex gap-2 items-end">
-				<div class="flex-grow leading-none">
+				<div class="flex-grow leading-none text-[15px]">
 					<span v-html="discussion.formattedContent" />
 				</div>
-				<span class="text-sub2 leading-none">{{ formatTimeAsDigits(new Date(discussion.createdAt)) }}</span>
+				
 			</div>
 		</div>
 	</div>

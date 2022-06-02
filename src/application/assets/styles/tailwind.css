@@ -121,7 +121,7 @@
 	}
 
 	.dot {
-		@apply h-[5px] w-[5px] text-[6px] rounded-full
+		@apply h-[3px] w-[3px] text-[6px] rounded-full
 	}
 
 	.card-padding {
