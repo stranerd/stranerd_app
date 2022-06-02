@@ -9,7 +9,7 @@
 				<h1 class="md:block text-5xl hidden font-extrabold mb-8 text-center">Forgot Password?</h1>
 				<form class="h-[65%] w-full md:w-[70%] flex flex-col gap-4" @submit.prevent="resetPassword">
 					<div class="flex flex-col">
-						<IonLabel class="font-bold text-sm mb-2">Email</IonLabel>
+						<IonLabel class="font-bold mb-2">Email</IonLabel>
 						<div class="flex gap-2 items-center">
 							<IonInput v-model.trim="factory.email"
 								:class="{'valid': factory.isValid('email'), 'invalid': factory.errors.email}"
@@ -25,7 +25,7 @@
 					</div>
 					<template v-if="sent">
 						<div class="flex flex-col">
-							<IonLabel class="font-bold text-sm mb-2">Password</IonLabel>
+							<IonLabel class="font-bold mb-2">Password</IonLabel>
 							<IonInput v-model="factory.password"
 								:class="{'valid': factory.isValid('password'), 'invalid': factory.errors.password}"
 								:size="24"
@@ -33,7 +33,7 @@
 							<DisplayError :error="factory.errors.password" />
 						</div>
 						<div class="flex flex-col">
-							<IonLabel class="font-bold text-sm mb-2">Confirm Password</IonLabel>
+							<IonLabel class="font-bold mb-2">Confirm Password</IonLabel>
 							<IonInput v-model="factory.cPassword"
 								:class="{'valid': factory.isValid('cPassword'), 'invalid': factory.errors.cPassword}"
 								:size="24"
@@ -46,7 +46,7 @@
 								position="floating" />
 						</div>
 						<IonButton :disabled="loading || !factory.valid"
-							class="w-full text-sm btn-primary mt-2" type="submit">
+							class="w-full btn-primary mt-2" type="submit">
 							<SpinLoading v-if="loading" />
 							<span v-else>Reset</span>
 						</IonButton>
@@ -75,7 +75,7 @@ export default defineComponent({
 	components: { Auth },
 	beforeRouteEnter: generateMiddlewares(['isNotAuthenticated']),
 	setup () {
-		useRouteMeta('Reset Password?')
+		useRouteMeta('Reset Password')
 		const {
 			factory, loading, error, message, sent, sendResetEmail, resetPassword
 		} = usePasswordReset()

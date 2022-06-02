@@ -16,7 +16,7 @@
 						<SpinLoading v-if="loading" />
 						<span>Did not receive OTP? Resend?</span>
 					</p>
-					<IonButton :disabled="completeLoading || !token" class="w-full text-sm btn-primary mt-2"
+					<IonButton :disabled="completeLoading || !token" class="w-full btn-primary mt-2"
 						type="submit">
 						<SpinLoading v-if="completeLoading" />
 						<span v-else>Resend Mail</span>

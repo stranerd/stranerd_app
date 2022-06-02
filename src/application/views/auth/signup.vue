@@ -10,7 +10,7 @@
 				<form class="flex flex-col gap-4" @submit.prevent="signup">
 					<div class="flex w-full gap-4">
 						<div class="flex flex-col w-1/2">
-							<IonLabel class="font-bold text-sm mb-2">First Name</IonLabel>
+							<IonLabel class="font-bold mb-2">First Name</IonLabel>
 							<IonInput v-model="factory.firstName"
 								:class="{'valid': factory.isValid('firstName'), 'invalid': factory.errors.firstName}"
 								:size="24" class="flex-grow-0"
@@ -18,7 +18,7 @@
 							<DisplayError :error="factory.errors.firstName" />
 						</div>
 						<div class="flex flex-col w-1/2">
-							<IonLabel class="font-bold text-sm mb-2">Last Name</IonLabel>
+							<IonLabel class="font-bold mb-2">Last Name</IonLabel>
 							<IonInput v-model="factory.lastName"
 								:class="{'valid': factory.isValid('lastName'), 'invalid': factory.errors.lastName}"
 								:size="24" class="flex-grow-0"
@@ -27,7 +27,7 @@
 						</div>
 					</div>
 					<div class="flex flex-col">
-						<IonLabel class="font-bold text-sm mb-2">Email</IonLabel>
+						<IonLabel class="font-bold mb-2">Email</IonLabel>
 						<IonInput v-model.trim="factory.email"
 							:class="{'valid': factory.isValid('email'), 'invalid': factory.errors.email}"
 							:size="24"
@@ -35,7 +35,7 @@
 						<DisplayError :error="factory.errors.email" />
 					</div>
 					<div class="flex flex-col">
-						<IonLabel class="font-bold text-sm mb-2">Password</IonLabel>
+						<IonLabel class="font-bold mb-2">Password</IonLabel>
 						<IonInput v-model="factory.password"
 							:class="{'valid': factory.isValid('password'), 'invalid': factory.errors.password}"
 							:size="24"
@@ -43,7 +43,7 @@
 						<DisplayError :error="factory.errors.password" />
 					</div>
 					<div class="flex flex-col">
-						<IonLabel class="font-bold text-sm mb-2">Confirm Password</IonLabel>
+						<IonLabel class="font-bold mb-2">Confirm Password</IonLabel>
 						<IonInput v-model="factory.cPassword"
 							:class="{'valid': factory.isValid('cPassword'), 'invalid': factory.errors.cPassword}"
 							:size="24"
