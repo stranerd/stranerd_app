@@ -21,19 +21,19 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 		body: { required: true, rules: [isString, isLongerThanX(2)] },
 		type: { required: true, rules: [arrayContainsX(Object.values(UserSchoolType), (cur, val) => cur === val)] },
 		institutionId: {
-			required: () => this.isCollegeType,
+			required: () => this.isCollegeType, nullable: true,
 			rules: [isString, isLongerThanX(0)]
 		},
 		facultyId: {
-			required: () => this.isCollegeType,
+			required: () => this.isCollegeType, nullable: true,
 			rules: [isString, isLongerThanX(0)]
 		},
 		departmentId: {
-			required: () => this.isCollegeType,
+			required: () => this.isCollegeType, nullable: true,
 			rules: [isString, isLongerThanX(0)]
 		},
 		exams: {
-			required: () => !this.isCollegeType,
+			required: () => !this.isCollegeType, nullable: true,
 			rules: []
 		}
 	}
