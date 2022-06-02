@@ -7,7 +7,7 @@
 				<avatar :id="question.user.id" :name="question.user.bio.fullName" :size="28"
 					:src="question.user.bio.photo"
 					class="mr-2 " />
-				<span class="hidden md:flex items-center gap-1">
+				<span class="flex items-center gap-1 text-bodyText font-bold">
 					<span>{{ question.user.bio.fullName }}</span>
 					<Verified :verified="question.isUserVerified" />
 				</span>
@@ -16,7 +16,7 @@
 			</div>
 
 			<IonButton v-if="showAnswerButton"
-				class="btn-outline ml-auto"
+				class="btn-primary ml-auto questionBtn"
 				@click="openAnswerModal(question)">
 				Answer
 			</IonButton>
@@ -26,19 +26,23 @@
 
 		<div class="flex justify-between items-center gap-4 text-secondaryText text-sub">
 			<span class="lg:mr-2">{{ formatTime(question.createdAt) }}</span>
-			<span v-if="question.attachments.length" class="font-italic flex items-center">
-				<IonIcon :icon="imageOutline" class="mr-2" />  IMG inside
-			</span>
-			<span>
-				{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
-			</span>
+
+			<div class="flex items-center">
+				<span v-if="question.attachments.length" class="font-italic flex items-center">
+					<IonIcon :icon="imageOutline" class="mr-3 text-heading2" /> 
+				</span>
+				<span class="flex gap-1 items-center">
+					<span>{{ question.answers.length }}</span>
+					<IonIcon :icon="readerOutline" class="text-heading2" />
+				</span>
+			</div>
 		</div>
 	</router-link>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { arrowRedoOutline, flagOutline, imageOutline } from 'ionicons/icons'
+import { arrowRedoOutline, flagOutline, imageOutline, readerOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { pluralize } from '@utils/commons'
@@ -62,8 +66,18 @@ export default defineComponent({
 		})
 		return {
 			showAnswerButton, openAnswerModal, formatTime, pluralize,
-			arrowRedoOutline, flagOutline, imageOutline
+			arrowRedoOutline, flagOutline, imageOutline, readerOutline
 		}
 	}
 })
 </script>
+
+<style scoped>
+.questionBtn{
+    --border-radius: 32px;
+    --padding-start: 15px;
+    --padding-end: 15px;
+    --padding-top: 5px;
+    --padding-bottom: 5px;
+}
+</style>
