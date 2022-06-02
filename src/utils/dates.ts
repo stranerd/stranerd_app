@@ -6,13 +6,13 @@ export enum TIMES {
 	year = 60 * 60 * 24 * 30 * 12
 }
 
-export const getTwoDigits = (digit: number): string => (digit < 10 ? '0' : '') + digit
+export const getTwoDigits = (digit: number): string => digit.toString().padStart(2, '0')
 export const formatTimeAsDigits = (date: Date) => {
 	const hour = getTwoDigits(date.getHours())
 	const minute = getTwoDigits(date.getMinutes())
 	return `${hour}:${minute}`
 }
-const formatDateAsDigits = (date: Date, showYear = true) => {
+export const formatDateAsDigits = (date: Date, showYear = true) => {
 	const year = date.getFullYear()
 	const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'][date.getMonth()]
 	const day = getTwoDigits(date.getDate())

@@ -3,11 +3,11 @@
 		<IonText class="font-bold">{{ event.title }}</IonText>
 		<IonText v-if="event.data.scheduledAt" class="flex items-center gap-1">
 			<IonIcon :icon="calendarClearOutline" class="text-heading2" />
-			<span>{{ event.data.scheduledAt }}</span>
+			<span>{{ formatDateAsDigits(new Date(event.data.scheduledAt), false) }}</span>
 		</IonText>
 		<div class="flex gap-2 items-center text-secondaryText">
 			<IonIcon :icon="timeOutline" class="text-heading2" />
-			<IonText>{{ event.data.scheduledAt }}</IonText>
+			<IonText>{{ formatTimeAsDigits(new Date(event.data.scheduledAt)) }}</IonText>
 			<span v-if="classInst.admins.includes(id)" class="ml-auto">
 				<SpinLoading v-if="loading" />
 				<IonIcon v-else :icon="trashBinOutline" class="text-danger text-heading2"
@@ -23,6 +23,7 @@ import { ClassEntity, EventEntity } from '@modules/classes'
 import { calendarClearOutline, timeOutline, trashBinOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useDeleteEvent } from '@app/composable/classes/timetable'
+import { formatDateAsDigits, formatTimeAsDigits } from '@utils/dates'
 
 export default defineComponent({
 	name: 'EventListCard',
@@ -40,7 +41,7 @@ export default defineComponent({
 		const { id } = useAuth()
 		const { loading, error, deleteEvent } = useDeleteEvent(props.event.classId, props.event.id)
 		return {
-			id, loading, error, deleteEvent,
+			id, loading, error, deleteEvent, formatDateAsDigits, formatTimeAsDigits,
 			timeOutline, calendarClearOutline, trashBinOutline
 		}
 	}
