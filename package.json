@@ -7,7 +7,7 @@
 		"postinstall": "yarn jetify",
 		"serve": "vite",
 		"preserve": "yarn bin:project:env",
-		"build": "vue-tsc --noEmit && vite build",
+		"build": "vite build",
 		"prebuild": "yarn bin:project:env && rm -rf android/app/build",
 		"postbuild": "cap sync",
 		"lint": "eslint --ext .js,.vue --fix src",

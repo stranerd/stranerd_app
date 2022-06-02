@@ -1,5 +1,5 @@
 import { closeSocket, HttpClient } from '@modules/core'
-import { apiBase, domain } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { deleteTokens, saveTokens } from '@utils/tokens'
 import {
 	AfterAuthUser,
@@ -43,10 +43,7 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 	}
 
 	async sendVerificationEmail (email: string) {
-		const redirectUrl = domain + '/auth/complete-verification'
-		await this.authClient.post<any, boolean>('/emails/verify/mail', {
-			email, redirectUrl
-		})
+		await this.authClient.post<any, boolean>('/emails/verify/mail', { email })
 	}
 
 	async completeEmailVerification (token: string) {
@@ -56,10 +53,7 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 	}
 
 	async sendPasswordResetEmail (email: string) {
-		const redirectUrl = domain + '/auth/reset'
-		await this.authClient.post<any, boolean>('/passwords/reset/mail', {
-			email, redirectUrl
-		})
+		await this.authClient.post<any, boolean>('/passwords/reset/mail', { email })
 	}
 
 	async resetPassword (token: string, password: string) {
