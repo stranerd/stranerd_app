@@ -1,8 +1,8 @@
 <template>
 	<div class="flex flex-col md:gap-4">
-		<div class="bg-white card-padding md:rounded-xl border-b border-new_gray flex flex-col">
+		<div class="bg-bodyBg card-padding md:rounded-xl border-b border-itemBg flex flex-col">
 			<div class="flex items-center gap-4">
-				<span class="font-semibold text-secondaryText capitalize">{{ question.subject }}</span>
+				<span class="font-semibold text-bodyText capitalize">{{ question.subject }}</span>
 				<div class="flex flex-grow items-center justify-end gap-2">
 					<Share
 						:text="question.strippedBody"
@@ -23,24 +23,24 @@
 					</span>
 				</div>
 				<div class="flex items-center gap-2">
-					<IonText v-if="showEditButton" class="text-primary cursor-pointer"
+					<IonText v-if="showEditButton" class="text-primaryText cursor-pointer"
 						@click="openEditModal">Edit
 					</IonText>
-					<IonText v-if="showDeleteButton" class="text-red cursor-pointer"
+					<IonText v-if="showDeleteButton" class="text-danger cursor-pointer"
 						@click="deleteQuestion">Delete
 					</IonText>
-					<span class="text-gray">{{ formatTime(question.createdAt) }}</span>
+					<span class="text-secondaryText">{{ formatTime(question.createdAt) }}</span>
 				</div>
 			</div>
 			<PhotoList v-if="question.attachments.length" :photos="question.attachments" class="py-3" />
 
 			<IonButton v-if="showAnswerButton && !showAddAnswer"
-				class="btn-primary w-full"
+				class="btn-primary w-full mt-2"
 				@click="openAnswerModal(question)">
 				<span class="mr-2">Add your answer</span>
 			</IonButton>
 			<IonButton v-if="showAnswerButton && showAddAnswer"
-				class="btn-primary w-full"
+				class="btn-primary w-full mt-2"
 				@click="showAddAnswer = false">
 				<span class="mr-2">Close answer form</span>
 			</IonButton>

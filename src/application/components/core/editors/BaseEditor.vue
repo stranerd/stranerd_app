@@ -74,7 +74,7 @@ export default defineComponent({
 <style lang="scss">
 	.quillWrapper {
 		background: $color-white;
-		border-radius: 0.75rem;
+		border-radius: 0.5rem;
 		color: $color-mainDark;
 		box-sizing: border-box;
 		position: relative;
@@ -131,7 +131,7 @@ export default defineComponent({
 	.ql-editor {
 		background: $color-white;
 		border: 1px solid $color-newGray;
-		border-radius: 0.75rem;
+		border-radius: 0.5rem;
 		transition: border-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
 		font-family: inherit !important;
 		font-size: inherit !important;
