@@ -1,6 +1,6 @@
 <template>
 	<div class="!gap-4 card-padding flex flex-col">
-		<div class="flex gap-4 items-center" @click="show = !show">
+		<div class="flex gap-4 items-center cursor-pointer" @click="show = !show">
 			<Avatar :name="classInst.name" :size="36" :src="classInst.photo" />
 			<IonText class="font-bold capitalize truncate w-full">{{ classInst.name }}</IonText>
 			<IonIcon :icon="show ? chevronUpOutline : chevronDownOutline" class="text-heading2" />
@@ -10,7 +10,7 @@
 					{ name: 'Announcements', path: 'announcements', icon: megaphoneOutline },
 					{ name: 'Events', path: 'events', icon: calendarOutline },
 					{ name: 'Timetable', path: 'timetable', icon: calendarClearOutline },
-					{ name: 'Scheme of Work', path: 'scheme', icon: listOutline },
+					{ name: 'Scheme of Work', path: 'schemes', icon: listOutline },
 					{ name: 'Discussions', path: 'groups', icon: chatbubblesOutline },
 					{ name: 'Classmates', path: 'members', icon: peopleOutline },
 					{ name: 'Library', path: 'library', icon: libraryOutline },

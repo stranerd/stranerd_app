@@ -1,10 +1,6 @@
 import { onMounted, Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import {
-	EmailSigninFactory,
-	EmailSignupFactory,
-	AuthUseCases
-} from '@modules/auth'
+import { AuthUseCases, EmailSigninFactory, EmailSignupFactory } from '@modules/auth'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'
@@ -76,14 +72,15 @@ export const useEmailSignup = () => {
 	return { factory, loading, error, signup }
 }
 
-export const useCompleteEmailVerification = (token: string) => {
+export const useCompleteEmailVerification = () => {
 	const router = useRouter()
+	const token = ref('')
 	const { error, loading, setError, setLoading } = global.emailVerificationComplete
 	const completeVerification = async () => {
 		await setError('')
 		await setLoading(true)
 		try {
-			const user = await AuthUseCases.completeEmailVerification(token)
+			const user = await AuthUseCases.completeEmailVerification(token.value)
 			await createSession(user, router)
 		} catch (error) {
 			await setError(error)
@@ -94,8 +91,7 @@ export const useCompleteEmailVerification = (token: string) => {
 		}
 		await setLoading(false)
 	}
-	onMounted(completeVerification)
-	return { loading, error, completeVerification }
+	return { token, loading, error, completeVerification }
 }
 
 export const setEmailVerificationEmail = (email: string) => global.emailVerificationRequest.email.value = email
@@ -121,8 +117,7 @@ export const useEmailVerificationRequest = () => {
 
 	return {
 		email: global.emailVerificationRequest.email,
-		loading, error, message,
-		sendVerificationEmail
+		loading, error, message, sendVerificationEmail
 	}
 }
 

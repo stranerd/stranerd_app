@@ -7,9 +7,6 @@ type MiddlewareFunction = (d: { to: RouteLocationNormalized, from: RouteLocation
 
 export const defineMiddleware = (middleware: MiddlewareFunction) => middleware
 
-export const hasQueryToken = defineMiddleware(async ({ to }) => {
-	if (!to.query.token) return '/auth/signin'
-})
 export const isAccountVerified = defineMiddleware(async () => {
 	if (!useAuth().user.value?.isVerified) return '/dashboard'
 })
@@ -30,7 +27,7 @@ export const isAuthenticated = defineMiddleware(async ({ to }) => {
 	}
 })
 
-const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, hasQueryToken, isAccountVerified }
+const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, isAccountVerified }
 type Middleware = MiddlewareFunction | keyof typeof globalMiddlewares
 
 export const generateMiddlewares = (middlewares: Middleware[]) => async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {

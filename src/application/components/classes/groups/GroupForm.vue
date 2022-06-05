@@ -1,17 +1,13 @@
 <template>
-	<form class="flex flex-col md:flex-row md:items-center gap-2" @submit.prevent="submit">
-		<IonInput v-model="factory.name"
-			class="flex-grow w-full border border-new_gray"
-			placeholder="Enter discussion name"
-			show-cancel-button="never"
-		/>
+	<form class="flex flex-col gap-6" @submit.prevent="submit">
+		<div class="flex flex-col">
+			<IonInput v-model="factory.name" placeholder="Enter title" show-cancel-button="never" />
+		</div>
 
-		<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full md:w-auto"
-			type="submit">
-			<slot name="buttonText">Submit</slot>
-			<IonRippleEffect class="rounded-lg" />
+		<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
+			<SpinLoading v-if="loading" />
+			<slot v-else name="buttonText">Submit</slot>
 		</IonButton>
-		<PageLoading v-if="loading" />
 	</form>
 </template>
 
@@ -41,12 +37,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-input {
-		--padding-top: 0.75rem;
-		--padding-bottom: 0.75rem;
-		--padding-right: 0;
-		--padding-left: 0;
-	}
-</style>

@@ -1,6 +1,5 @@
 import { IAuthRepository } from '../irepositories/iauth'
 import { PasswordResetFactory } from '../factories/passwordReset'
-import { PasswordResetRequestFactory } from '../factories/passwordResetRequest'
 import { AfterAuthUser, AuthExtras } from '../entities/auth'
 import { EmailSigninFactory } from '../factories/emailSignin'
 import { EmailSignupFactory } from '../factories/emailSignup'
@@ -23,13 +22,12 @@ export class AuthUseCase {
 		return await this.repository.getAuthUser()
 	}
 
-	async resetPassword (token: string, factory: PasswordResetFactory) {
-		const { password } = await factory.toModel()
+	async resetPassword (factory: PasswordResetFactory) {
+		const { token, password } = await factory.toModel()
 		return await this.repository.resetPassword(token, password)
 	}
 
-	async sendPasswordResetEmail (factory: PasswordResetRequestFactory) {
-		const { email } = await factory.toModel()
+	async sendPasswordResetEmail (email: string) {
 		return await this.repository.sendPasswordResetEmail(email)
 	}
 

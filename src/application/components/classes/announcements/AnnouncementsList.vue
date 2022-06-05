@@ -8,7 +8,7 @@
 		<div v-if="hasMore" class="text-center py-4 text-primaryBg w-full font-semibold cursor-pointer">
 			<a @click.prevent="fetchOlderAnnouncements">Load More</a>
 		</div>
-		<PageLoading v-if="loading" />
+		<BlockLoading v-if="loading" />
 	</div>
 </template>
 
@@ -18,6 +18,7 @@ import { ClassEntity } from '@modules/classes'
 import { useAnnouncementList } from '@app/composable/classes/announcements'
 import AnnouncementsListCard from '@app/components/classes/announcements/AnnouncementsListCard.vue'
 import AnnouncementForm from '@app/components/classes/announcements/AnnouncementForm.vue'
+import BlockLoading from '@app/components/core/loading/BlockLoading.vue'
 
 export default defineComponent({
 	name: 'AnnouncementsList',
@@ -27,7 +28,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { AnnouncementsListCard, AnnouncementForm },
+	components: { BlockLoading, AnnouncementsListCard, AnnouncementForm },
 	setup (props) {
 		const {
 			loading,

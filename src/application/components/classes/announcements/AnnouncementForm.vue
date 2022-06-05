@@ -1,10 +1,8 @@
 <template>
-	<form class="flex flex-col md:flex-row md:items-center gap-2 justify-center" @submit.prevent="submit">
-		<IonInput v-model="factory.body"
-			class="w-full border border-new_gray"
-			placeholder="Post an announcement"
-			show-cancel-button="never"
-		/>
+	<form class="flex flex-col gap-6" @submit.prevent="submit">
+		<IonTextarea v-model="factory.body"
+			:class="{'valid': factory.isValid('body'), 'invalid': factory.errors.body}"
+			placeholder="Write announcement" row="3" />
 
 		<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full md:w-auto" type="submit">
 			<slot name="buttonText">Submit</slot>
@@ -40,12 +38,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-textarea, ion-input {
-		--padding-top: 0.75rem;
-		--padding-bottom: 0.75rem;
-		--padding-right: 0;
-		--padding-left: 0;
-	}
-</style>

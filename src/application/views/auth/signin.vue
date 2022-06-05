@@ -9,7 +9,7 @@
 				<h1 class="md:block text-5xl hidden font-extrabold mb-8 text-center">Sign in</h1>
 				<form class="h-[65%] w-full md:w-[70%] flex flex-col gap-4" @submit.prevent="signin">
 					<div class="flex flex-col w-full">
-						<IonLabel class="font-bold text-sm mb-2">Email</IonLabel>
+						<IonLabel class="font-bold mb-2">Email</IonLabel>
 						<IonInput v-model.trim="factory.email"
 							:class="{'valid': factory.isValid('email'), 'invalid': factory.errors.email}"
 							:size="24"
@@ -17,14 +17,14 @@
 						<DisplayError :error="factory.errors.email" />
 					</div>
 					<div class="flex flex-col">
-						<IonLabel class="font-bold text-sm mb-2">Password</IonLabel>
+						<IonLabel class="font-bold mb-2">Password</IonLabel>
 						<IonInput v-model="factory.password"
 							:class="{'valid': factory.isValid('password'), 'invalid': factory.errors.password}"
 							:size="24"
 							placeholder="Password" position="floating" type="password" />
 						<DisplayError :error="factory.errors.password" />
 					</div>
-					<IonButton :disabled="loading || !factory.valid" class="w-full text-sm btn-primary mt-2"
+					<IonButton :disabled="loading || !factory.valid" class="w-full btn-primary mt-2"
 						type="submit">
 						<SpinLoading v-if="loading" />
 						<span v-else>Signin</span>

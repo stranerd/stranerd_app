@@ -2,7 +2,7 @@
 	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}/`"
 		class="rounded-full relative self-start">
 		<span v-if="!src && name" :style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
-			class="flex items-center justify-center uppercase bg-secondaryText border border-headerText text-primaryText font-semibold rounded-full">
+			class="flex items-center justify-center uppercase bg-secondaryText text-primaryText font-semibold rounded-full">
 			<span :style="`font-size: ${size/2}px;line-height: 1em`">{{ name[0] }}</span>
 		</span>
 		<img

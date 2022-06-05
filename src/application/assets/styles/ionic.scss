@@ -99,11 +99,10 @@ ion-searchbar {
 	padding: 0 0.25rem !important;
 	height: 44px !important;
 	border-radius: 0.5rem !important;
-	--placeholder-color: #{$color-bodyText} !important;
-	--color: #{$color-bodyText} !important;
+	--placeholder-color: inherit !important;
 	--cancel-button-color: inherit !important;
-	--clear-button-color: #{$color-bodyText} !important;
-	--icon-color: #{$color-bodyText} !important;
+	--clear-button-color: inherit !important;
+	--icon-color: inherit !important;
 }
 
 ion-input, ion-textarea, ion-select {
