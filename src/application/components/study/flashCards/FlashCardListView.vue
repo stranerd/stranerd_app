@@ -6,10 +6,10 @@
 
 		<div v-for="(card, index) in flashCard.set" :key="index"
 			class="flex justify-between w-full md:mt-4">
-			<div class="bg-white md:py-3 md:px-6 rounded-xl w-full flex border-top-line">
+			<div class="bg-bodyBg md:py-3 md:px-6 w-full flex border-top-line">
 				<DisplayHtml :html="card.question" class="w-1/2 md:p-0 p-4  border-bottom-line" />
 
-				<div class="h-auto bg-line w-[1px] md:-my-3 " />
+				<div class="h-auto bg-itemBg w-[1px] md:-my-3 " />
 
 				<DisplayHtml :html="card.answer" class="w-1/2 md:pl-4 p-4  border-bottom-line " />
 			</div>

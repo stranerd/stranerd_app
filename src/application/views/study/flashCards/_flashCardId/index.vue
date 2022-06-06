@@ -13,11 +13,11 @@
 							:src="flashCard.user.bio.photo" />
 					</div>
 				
-					<div class="flex justify-between items-center text-gray font-normal w-full gap-3 px-4 py-2 mt-4">
+					<div class="flex justify-between items-center text-gray font-normal w-full gap-3 px-4 py-2 mt-4 text-secondaryText ">
 						<div class="flex items-center lg:mr-4 mr-2" @click="cardMode = !cardMode">
 							<IonIcon
 								:icon="!cardMode ? copyOutline: listOutline"
-								class="text-gray text-heading2 cursor-pointer mr-2 md:mt-0"
+								class="text-secondaryText text-heading2 cursor-pointer mr-2 md:mt-0"
 							/>
 							<IonText class=" flex">
 								{{ !cardMode ? 'Card mode' : 'List mode' }}
