@@ -3,14 +3,14 @@
 		<Swipe :key="page" :class="[isFullscreen ? 'flex-grow' : '']" @swipeLeft="increase" @swipeRight="decrease">
 			<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full h-full']"
 				@click="flipped = !flipped">
-				<div class="front bg-white w-full">
+				<div class="front bg-bodyBg w-full">
 					<section v-if="!flipped"
 						class="h-[48vh] overflow-y-auto flex text-center custom-shadow text-heading3 p-4 mx-auto">
 						<DisplayHtml :html="flashCard.set[page].question" class="w-full my-auto overflow-y-auto" />
 					</section>
 				</div>
 
-				<div class="back bg-white w-full">
+				<div class="back bg-bodyBg w-full">
 					<section v-if="flipped"
 						class="h-[48vh] overflow-y-auto flex text-center custom-shadow text-heading3 p-4 mx-auto">
 						<DisplayHtml :html="flashCard.set[page].answer" class="w-full my-auto" />
@@ -19,8 +19,8 @@
 			</div>
 		</Swipe>
 
-		<div :style="`width:${percentage}%`" class="bg-primary h-1  mt-8 transition-all " />
-		<div class="w-full flex items-center justify-between rounded-b-xl mx-auto gap-4 bg-white p-6">
+		<div :style="`width:${percentage}%`" class="bg-primaryBg h-1 transition-all absolute inset-x-0 z-10 bottom-[64px]" />
+		<div class="w-full flex items-center absolute inset-x-0 bottom-0 justify-between  mx-auto gap-4 bg-primaryText p-6">
 
 			<IonIcon
 				:icon="isPlaying ? pauseOutline : playOutline"

@@ -1,13 +1,19 @@
 <template>
-	<Justified>
+	<Justified :hideBottom="true">
 		<div v-if="flashCard">
 			<div class="blueTop py-4">
 				<div
-					class="flex flex-col md:flex-row md:justify-between justify-start items-start px-4 w-full lg:w-8/12 w-full mx-auto">
-					<IonText class="text-heading font-bold text-secondaryText text-start">
-						{{ flashCard.title }}
-					</IonText>
-					<div class="items-center text-gray font-normal flex gap-3">
+					class="flex flex-col md:flex-row md:justify-between justify-start items-start w-full lg:w-8/12 mx-auto">
+					<div class="border-bottom-line w-full flex py-2 pb-4 px-4 justify-between">
+						<IonText class="text-heading font-bold text-secondaryText text-start ">
+							{{ flashCard.title }}
+						</IonText>
+
+						<Avatar :id="flashCard.user.id" :name="flashCard.user.bio.fullName" :size="24"
+							:src="flashCard.user.bio.photo" />
+					</div>
+				
+					<div class="flex justify-between items-center text-gray font-normal w-full gap-3 px-4 py-2 mt-4">
 						<div class="flex items-center lg:mr-4 mr-2" @click="cardMode = !cardMode">
 							<IonIcon
 								:icon="!cardMode ? copyOutline: listOutline"
@@ -17,11 +23,13 @@
 								{{ !cardMode ? 'Card mode' : 'List mode' }}
 							</IonText>
 						</div>
-						<Avatar :id="flashCard.user.id" :name="flashCard.user.bio.fullName" :size="24"
-							:src="flashCard.user.bio.photo" />
-						<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-heading2"
-							text="Share this flashcard" />
-						<SaveToSet :entity="flashCard" />
+
+						<div class="flex items-center gap-5">
+							<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-heading2"
+								text="Share this flashcard" />
+							<SaveToSet :entity="flashCard" />
+						</div>
+				
 					</div>
 				</div>
 			</div>
