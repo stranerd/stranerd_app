@@ -15,6 +15,7 @@ export default defineComponent({
 	props: {
 		tagId: {
 			type: String,
+			default: '',
 			required: true
 		}
 	},

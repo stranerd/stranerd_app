@@ -3,9 +3,7 @@
 		<div class="flex flex-col gap-4 px-4">
 			<EmptyState v-if="!loading && !error && events.length === 0" info="No events" />
 			<EventsListCard v-for="event in events" :key="event.hash" :classInst="classInst" :event="event" />
-			<div v-if="hasMore" class="text-center py-4 text-primaryBg w-full font-semibold cursor-pointer">
-				<a @click.prevent="fetchOlderEvents">Load More</a>
-			</div>
+			<LoadMore v-if="hasMore" :load="fetchOlderEvents" />
 		</div>
 		<BlockLoading v-if="loading" />
 	</div>

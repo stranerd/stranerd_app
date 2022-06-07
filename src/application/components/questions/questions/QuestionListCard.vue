@@ -1,36 +1,31 @@
 <template>
-	<router-link
-		:to="`/questions/${question.id}`"
-		class="flex flex-col card-padding justify-between">
-		<div class="flex items-center text-secondaryText text-sub">
-			<div class="flex items-center">
-				<avatar :id="question.user.id" :name="question.user.bio.fullName" :size="28"
-					:src="question.user.bio.photo"
-					class="mr-2 " />
-				<span class="hidden md:flex items-center gap-1">
+	<router-link :to="`/questions/${question.id}`" class="flex flex-col card-padding">
+		<div class="flex items-center text-secondaryText text-sub justify-between">
+			<div class="flex items-center gap-2">
+				<Avatar :id="question.user.id" :name="question.user.bio.fullName" :size="24"
+					:src="question.user.bio.photo" />
+				<span class="flex items-center gap-1 font-bold">
 					<span>{{ question.user.bio.fullName }}</span>
 					<Verified :verified="question.isUserVerified" />
 				</span>
-				<span class="h-[5px] w-[5px] rounded-full bg-icon_inactive mr-3 ml-2 hidden md:block" />
-				<span class="text-secondaryText capitalize">{{ question.subject }}</span>
 			</div>
-
 			<IonButton v-if="showAnswerButton"
-				class="btn-outline ml-auto"
+				class="btn-primary" style="--border-radius: 10rem;"
 				@click="openAnswerModal(question)">
 				Answer
 			</IonButton>
 		</div>
 
-		<DisplayHtml :html="question.trimmedBody" class="leading-normal font-500" />
+		<DisplayHtml :html="question.trimmedBody" class="pl-8" />
 
-		<div class="flex justify-between items-center gap-4 text-secondaryText text-sub">
-			<span class="lg:mr-2">{{ formatTime(question.createdAt) }}</span>
-			<span v-if="question.attachments.length" class="font-italic flex items-center">
-				<IonIcon :icon="imageOutline" class="mr-2" />  IMG inside
-			</span>
-			<span>
-				{{ question.answers.length }} {{ pluralize(question.answers.length, 'answer', 'answers') }}
+		<div class="flex justify-between items-center gap-2 text-secondaryText text-sub pl-8">
+			<QuestionTag :tagId="question.tagId" />
+			<IonIcon :icon="ellipse" class="dot" />
+			<span class="mr-auto">{{ formatTime(question.createdAt) }}</span>
+			<IonIcon v-if="question.attachments.length" :icon="imageOutline" class="text-heading" />
+			<span class="flex gap-1 items-center">
+				<span>{{ formatNumber(question.answers.length) }}</span>
+				<IonIcon :icon="readerOutline" class="text-heading" />
 			</span>
 		</div>
 	</router-link>
@@ -38,15 +33,17 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { arrowRedoOutline, flagOutline, imageOutline } from 'ionicons/icons'
+import { arrowRedoOutline, ellipse, flagOutline, imageOutline, readerOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
-import { pluralize } from '@utils/commons'
+import { formatNumber, pluralize } from '@utils/commons'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { useAuth } from '@app/composable/auth/auth'
+import QuestionTag from '@app/components/questions/tags/Tag.vue'
 
 export default defineComponent({
 	name: 'QuestionListCard',
+	components: { QuestionTag },
 	props: {
 		question: {
 			type: QuestionEntity,
@@ -61,8 +58,8 @@ export default defineComponent({
 			}
 		})
 		return {
-			showAnswerButton, openAnswerModal, formatTime, pluralize,
-			arrowRedoOutline, flagOutline, imageOutline
+			showAnswerButton, openAnswerModal, formatTime, formatNumber, pluralize,
+			arrowRedoOutline, flagOutline, imageOutline, readerOutline, ellipse
 		}
 	}
 })

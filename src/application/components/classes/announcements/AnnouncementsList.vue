@@ -5,9 +5,7 @@
 		<AnnouncementsListCard v-for="announcement in announcements" :key="announcement.hash"
 			:announcement="announcement"
 			:classInst="classInst" />
-		<div v-if="hasMore" class="text-center py-4 text-primaryBg w-full font-semibold cursor-pointer">
-			<a @click.prevent="fetchOlderAnnouncements">Load More</a>
-		</div>
+		<LoadMore v-if="hasMore" :load="fetchOlderAnnouncements" />
 		<BlockLoading v-if="loading" />
 	</div>
 </template>

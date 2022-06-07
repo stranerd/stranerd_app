@@ -3,7 +3,7 @@
 		class="card-padding flex flex-col">
 		<span>{{ answer.trimmedTitle }}</span>
 		<div class="flex items-center justify-between text-secondaryText text-sub gap-2">
-			<Tag :tagId="answer.tagId" />
+			<QuestionTag :tagId="answer.tagId" />
 			<IonIcon :icon="ellipse" class="dot" />
 			<span class="mr-auto">{{ formatTime(answer.createdAt) }}</span>
 			<IonIcon v-if="answer.attachments.length" :icon="imageOutline" class="text-heading" />
@@ -17,11 +17,11 @@ import { AnswerEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { formatNumber } from '@utils/commons'
 import { ellipse, imageOutline, readerOutline } from 'ionicons/icons'
-import Tag from '@app/components/questions/tags/Tag.vue'
+import QuestionTag from '@app/components/questions/tags/Tag.vue'
 
 export default defineComponent({
 	name: 'UserAnswerListCard',
-	components: { Tag },
+	components: { QuestionTag },
 	props: {
 		answer: {
 			required: true,

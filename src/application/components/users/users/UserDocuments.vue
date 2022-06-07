@@ -1,13 +1,14 @@
 <template>
-	<BlockLoading v-if="loading" />
-	<div v-else class="flex flex-col">
+	<div class="flex flex-col">
 		<form class="p-4" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 		</form>
 		<DocumentListCard v-for="document in (searchMode ? searchResults : documents)" :key="document.hash"
 			:document="document" class="border-bottom-line" />
-		<EmptyState v-if="!loading && !error && documents.length === 0"
+		<EmptyState v-if="!loading && !error && documents.length === 0" class="border-bottom-line"
 			info="This user hasn't created any documents yet" />
+		<LoadMore v-if="hasMore" :load="fetchOlderDocuments" />
+		<BlockLoading v-if="loading" />
 	</div>
 </template>
 

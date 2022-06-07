@@ -1,6 +1,15 @@
 <template>
 	<div class="showcase-flex">
-		<div class="px-4">
+		<div class="flex gap-[1px]">
+			<IonSelect v-model="answered"
+				class="w-full"
+				interface="action-sheet"
+				placeholder="State">
+				<IonSelectOption v-for="choice in answeredChoices" :key="choice.key"
+					:value="choice.val" @click="answered = choice.val">
+					{{ choice.key }}
+				</IonSelectOption>
+			</IonSelect>
 			<IonSelect v-model="answered"
 				class="w-full"
 				interface="action-sheet"
@@ -11,16 +20,12 @@
 				</IonSelectOption>
 			</IonSelect>
 		</div>
-		<BlockLoading v-if="loading" />
-		<EmptyState v-if="!loading && !error && questions.length === 0" :btnText="'Ask a question'"
-			:info="'No questions found! Start asking questions to help with homework and studying.'"
-			route="/questions/create"
-		/>
+		<EmptyState v-if="!loading && !error && questions.length === 0" class="border-bottom-line"
+			info="There are no questions available." />
 		<QuestionListCard v-for="question in questions" :key="question.hash" :question="question"
 			class="border-bottom-line" />
-		<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
-			<a @click.prevent="fetchOlderQuestions">Load More</a>
-		</div>
+		<LoadMore v-if="hasMore" :load="fetchOlderQuestions" />
+		<BlockLoading v-if="loading" />
 	</div>
 </template>
 
@@ -36,13 +41,20 @@ export default defineComponent({
 	setup () {
 		const {
 			filteredQuestions: questions, error, loading, hasMore, fetchOlderQuestions,
-			answeredChoices, answered, 
+			answeredChoices, answered
 		} = useQuestionList()
 
 		return {
 			questions, error, loading, hasMore,
-			fetchOlderQuestions, answeredChoices, answered,
+			fetchOlderQuestions, answeredChoices, answered
 		}
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+	ion-select {
+		border-radius: 0;
+	}
+</style>
+

@@ -111,7 +111,6 @@ ion-input, ion-textarea, ion-select {
 	--background: #{$color-itemBg} !important;
 	background: #{$color-itemBg} !important;
 	--box-shadow: none;
-	--border-radius: .75rem;
 	border-radius: .75rem;
 	--icon-color: transparent !important;
 	--placeholder-color: #{$color-secondaryText} !important;
@@ -169,8 +168,8 @@ ion-input.invalid::after {
 }
 
 .btn-padding {
-	--padding-top: 0.6rem;
-	--padding-bottom: 0.6rem;
+	--padding-top: 0.5rem;
+	--padding-bottom: 0.5rem;
 	--padding-start: 1rem;
 	--padding-end: 1rem;
 	@media (min-width: $md) {

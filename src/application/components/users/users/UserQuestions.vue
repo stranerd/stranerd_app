@@ -1,16 +1,14 @@
 <template>
-	<BlockLoading v-if="loading" />
-	<div v-else class="flex flex-col">
+	<div class="flex flex-col">
 		<form class="p-4" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 		</form>
 		<UserQuestionsCard v-for="question in (searchMode ? searchResults : questions)" :key="question.hash"
 			:question="question" class="border-bottom-line" />
-		<div v-if="hasMore" class="text-center py-8 text-info font-semibold">
-			<a @click.prevent="fetchOlderQuestions">Load More</a>
-		</div>
-		<EmptyState v-if="!loading && !error && questions.length === 0"
+		<LoadMore v-if="hasMore" :load="fetchOlderQuestions" />
+		<EmptyState v-if="!loading && !error && questions.length === 0" class="border-bottom-line"
 			info="This user hasn't asked any questions yet" />
+		<BlockLoading v-if="loading" />
 	</div>
 </template>
 

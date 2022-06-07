@@ -1,12 +1,12 @@
 <template>
-	<div class="w-full flex flex-col bg-white md:p-4 rounded-xl md:gap-4">
-		<div class="p-4 flex flex-col rounded-lg md:border md:border-faded_gray border-bottom-line gap-1">
+	<div class="w-full flex flex-col md:p-4 rounded-xl md:gap-4">
+		<div class="p-4 flex flex-col rounded-lg md:border md:border-itemBg gap-1">
 			<span class="text-secondaryText font-bold">Answer</span>
 			<IonInput v-model="factory.title" class="w-full" placeholder="Write main answer here and keep it short" />
 			<DisplayError :error="factory.errors.title" />
 		</div>
 
-		<div class="p-4 flex flex-col rounded-lg md:border md:border-faded_gray border-bottom-line gap-1">
+		<div class="p-4 flex flex-col rounded-lg md:border md:border-itemBg gap-1">
 			<span class="text-secondaryText font-bold">Explanation (Optional)</span>
 			<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
 				placeholder="Write a detailed explanation for your answer here" />
@@ -15,7 +15,7 @@
 		<div v-if="factory.attachments.length > 0" class="flex flex-wrap gap-2 p-4 md:p-0">
 			<span v-for="attachment in factory.attachments" :key="attachment.name">
 				<span
-					class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
+					class="py-1 px-2 font-bold text-bodyText bg-itemBg rounded-xl flex flex-row items-center">
 					{{ attachment.name }} <IonIcon :icon="closeOutline" class="ml-1 cursor-pointer"
 						@click="factory.removeAttachment(attachment)" />
 				</span>
@@ -30,16 +30,16 @@
 				class="w-1/2"
 				@files="catchAttachments"
 			>
-				<IonButton class="btn-outline w-full">
-					<IonIcon :icon="imageOutline" class="text-heading3 text-primary mr-4" />
+				<IonButton class="btn-outline w-full h-8">
+					<IonIcon :icon="imageOutline" class="!text-base text-primaryBg mr-4" />
 					Add image
 				</IonButton>
 			</FileInput>
 			<IonButton
-				class="w-1/2 btn-primary h-12"
+				class="w-1/2 btn-primary h-9"
 				type="submit" @click="createAnswer">
-				<IonIcon :icon="paperPlaneOutline" class="text-heading3 text-white mr-4" />
-				<slot name="buttonText">Send</slot>
+				<IonIcon :icon="paperPlaneOutline" class="!text-base text-primaryText mr-4" />
+				<slot name="buttonText">Answer</slot>
 			</IonButton>
 		</div>
 	</div>
@@ -83,20 +83,20 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-input {
-		--placeholder-color: #{$color-iconInactive};
-		--placeholder-opacity: 1;
-		--padding-start: 0 !important;
-		--padding-end: 0 !important;
-		--padding-top: 0 !important;
-		--padding-bottom: 0 !important;
-	}
+	// ion-input {
+	// 	--placeholder-color: #{$color-iconInactive};
+	// 	--placeholder-opacity: 1;
+	// 	--padding-start: 0 !important;
+	// 	--padding-end: 0 !important;
+	// 	--padding-top: 0 !important;
+	// 	--padding-bottom: 0 !important;
+	// }
 
 	ion-icon {
 		font-size: 24px;
 	}
 
 	:deep(.ql-editor) {
-		padding: 0 !important;
+		padding: 1rem !important;
 	}
 </style>

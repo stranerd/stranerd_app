@@ -1,48 +1,45 @@
 <template>
 	<div class="flex flex-col md:gap-4">
-		<div class="bg-white card-padding md:rounded-xl border-b border-new_gray flex flex-col">
-			<div class="flex items-center gap-4">
-				<span class="font-semibold text-secondaryText capitalize">{{ question.subject }}</span>
-				<div class="flex flex-grow items-center justify-end gap-2">
+		<div class="bg-bodyBg !gap-4 card-padding flex flex-col border-bottom-line">
+			<div class="flex items-center gap-4 text-secondaryText text-sub justify-between">
+				<QuestionTag :tagId="question.tagId" class="font-bold" />
+				<div class="flex flex-grow items-center justify-end gap-4 text-heading2">
 					<Share
 						:text="question.strippedBody"
-						cssClass="text-[22px] mr-2 text-secondaryText"
 						title="Share this question" />
-					<IonIcon :icon="flagOutline" class="text-[22px] text-secondaryText cursor-pointer"
+					<IonIcon :icon="flagOutline" class="cursor-pointer"
 						@click="openReportQuestionModal" />
 				</div>
 			</div>
-			<DisplayHtml :html="question.body" class="text-secondaryText" />
 
-			<div class="flex items-center justify-between">
+			<DisplayHtml :html="question.body" />
+
+			<div class="flex items-center justify-between gap-4 text-secondaryText text-sub">
 				<div class="flex items-center gap-2">
-					<avatar :id="question.user.id" :size="24" :src="question.user.bio.photo" />
+					<Avatar :id="question.user.id" :size="24" :src="question.user.bio.photo" />
 					<span class="font-semibold text-secondaryText flex gap-1 items-center">
 						<span>{{ question.user.bio.fullName }}</span>
 						<Verified :verified="question.isUserVerified" />
 					</span>
 				</div>
-				<div class="flex items-center gap-2">
-					<IonText v-if="showEditButton" class="text-primary cursor-pointer"
-						@click="openEditModal">Edit
-					</IonText>
-					<IonText v-if="showDeleteButton" class="text-red cursor-pointer"
-						@click="deleteQuestion">Delete
-					</IonText>
-					<span class="text-gray">{{ formatTime(question.createdAt) }}</span>
+				<div class="flex items-center gap-4">
+					<IonIcon v-if="showEditButton" :icon="createOutline" class="text-primaryText"
+						@click="openEditModal" />
+					<IonIcon v-if="showDeleteButton" :icon="trashBinOutline" class="text-danger"
+						@click="deleteQuestion" />
+					<span>{{ formatTime(question.createdAt) }}</span>
 				</div>
 			</div>
+
 			<PhotoList v-if="question.attachments.length" :photos="question.attachments" class="py-3" />
 
 			<IonButton v-if="showAnswerButton && !showAddAnswer"
-				class="btn-primary w-full"
-				@click="openAnswerModal(question)">
-				<span class="mr-2">Add your answer</span>
+				class="btn-primary w-full" @click="openAnswerModal(question)">
+				Add your answer
 			</IonButton>
 			<IonButton v-if="showAnswerButton && showAddAnswer"
-				class="btn-primary w-full"
-				@click="showAddAnswer = false">
-				<span class="mr-2">Close answer form</span>
+				class="btn-primary w-full" @click="showAddAnswer = false">
+				Close answer form
 			</IonButton>
 		</div>
 		<CreateAnswer v-if="!question.isAnswered && showAddAnswer" :question="question" />
@@ -51,11 +48,10 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { flagOutline, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
+import { createOutline, flagOutline, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
-import Avatar from '@app/components/core/Avatar.vue'
-import PhotoList from '@app/components/core/media/PhotoList.vue'
 import CreateAnswer from '@app/components/questions/answers/CreateAnswer.vue'
+import QuestionTag from '@app/components/questions/tags/Tag.vue'
 import { pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
 import { openAnswerModal, showAddAnswer } from '@app/composable/questions/answers'
@@ -73,7 +69,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { Avatar, PhotoList, CreateAnswer },
+	components: { CreateAnswer, QuestionTag },
 	setup (props) {
 		const { id } = useAuth()
 		const router = useRouter()
@@ -96,7 +92,7 @@ export default defineComponent({
 		const { loading, error, deleteQuestion } = useDeleteQuestion(props.question.id)
 
 		return {
-			shareSocial, flagOutline, pencil, trashBinOutline,
+			shareSocial, flagOutline, pencil, trashBinOutline, createOutline,
 			formatTime, pluralize,
 			showAnswerButton, showAddAnswer,
 			showEditButton, showDeleteButton,

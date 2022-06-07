@@ -1,6 +1,5 @@
 <template>
 	<div class="flex flex-col">
-		<BlockLoading v-if="loading" />
 		<div v-for="({ name, users }, index) in [
 			{ name: 'Admin', users: admins },
 			{ name: 'Members', users: members },
@@ -14,6 +13,7 @@
 				<ClassMember v-for="user in users" :key="user.hash" :classInst="classInst" :user="user" />
 			</div>
 		</div>
+		<BlockLoading v-if="loading" />
 	</div>
 </template>
 

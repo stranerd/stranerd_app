@@ -4,8 +4,7 @@
 			<IonSearchbar v-model.trim="searchValue" class="!bg-[transparent]" placeholder="Find a class"
 				type="search" />
 		</form>
-		<BlockLoading v-if="loading" />
-		<template v-else-if="searchMode">
+		<template v-if="searchMode">
 			<div v-if="searchResults.length === 0" class="p-4">
 				<EmptyState class="bg-itemBg p-4 rounded-xl"
 					info="If you cannot find your class, contact your class rep to create it." />
@@ -19,6 +18,7 @@
 			<ClassListCard v-for="classInst in classes" :key="classInst.hash" :classInst="classInst"
 				class="border-bottom-line" />
 		</template>
+		<BlockLoading v-if="loading" />
 	</div>
 </template>
 

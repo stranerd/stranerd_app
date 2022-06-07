@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-white rounded-xl flex flex-col card-padding">
+	<div class="rounded-xl flex flex-col card-padding">
 		<div class="flex items-center">
 			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="24" :src="answer.user.bio.photo"
 				class="mr-2" />
