@@ -1,23 +1,27 @@
 <template>
 	<Justified>
 		<div v-if="user">
-			<div class="flex flex-col border-bottom-line gap-6 px-4 py-6">
+			<div class="flex flex-col border-bottom-line gap-4 px-4 py-6">
 				<div class="flex items-center gap-4">
 					<Avatar :name="user.bio.fullName" :size="64" :src="user.bio.photo" />
 					<div class="flex flex-col gap-1">
-						<IonText class="text-heading font-bold flex gap-1 items-center">
-							<span>{{ user.bio.fullName }}</span>
-							<Verified :verified="user.isVerified" />
-						</IonText>
-						<template v-if="user.isCollege">
-							<Institution :institutionId="user.school.institutionId"
-								class="text-secondaryText text-sub font-bold" />
-							<Department :departmentId="user.school.departmentId" :facultyId="user.school.facultyId"
-								class="text-secondaryText text-sub" />
-						</template>
+						hello
 					</div>
 				</div>
-				<IonText v-if="user.bio.description">{{ user.bio.description }}</IonText>
+				<div class="flex flex-col text-secondaryText gap-1">
+					<IonText class="text-heading font-bold flex gap-1 items-center">
+						<span>{{ user.bio.fullName }}</span>
+						<Verified :verified="user.isVerified" />
+					</IonText>
+					<template v-if="user.isCollege">
+						<Institution :institutionId="user.school.institutionId"
+							class="text-secondaryText text-sub font-bold" />
+						<Department :departmentId="user.school.departmentId" :facultyId="user.school.facultyId"
+							class="text-secondaryText text-sub" />
+					</template>
+					<IonText v-if="user.bio.description" class="mt-4">{{ user.bio.description }}</IonText>
+				</div>
+			
 			</div>
 			<div class="flex flex-col gap-6 px-4 py-8 text-secondaryText">
 				<router-link class="flex gap-3 items-center" to="/account/stats">
