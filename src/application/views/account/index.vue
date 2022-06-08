@@ -4,8 +4,25 @@
 			<div class="flex flex-col border-bottom-line gap-4 px-4 py-6">
 				<div class="flex items-center gap-4">
 					<Avatar :name="user.bio.fullName" :size="64" :src="user.bio.photo" />
-					<div class="flex flex-col gap-1">
-						hello
+					<div class="flex items-center justify-between w-full ml-6">
+						<div class="flex items-center text-secondaryText gap-2">
+							<IonIcon :icon="podiumOutline" class="text-heading3" />
+							<IonText class="text-heading flex-col flex">
+								<span class="text-sm">37</span>  <span class="text-xs">Points</span>
+							</IonText>
+						</div>
+						<div class="flex items-center text-secondaryText gap-2">
+							<IonIcon :icon="linkOutline" class="text-heading3" />
+							<IonText class="text-heading flex-col flex">
+								<span class="text-sm">16</span>  <span class="text-xs">Connects</span>
+							</IonText>
+						</div>
+						<div class="flex items-center text-secondaryText gap-2">
+							<IonIcon :icon="checkmarkCircleOutline" class="text-heading3" />
+							<IonText class="text-heading flex-col flex">
+								<span class="text-sm">43</span>  <span class="text-xs">Best ans</span>
+							</IonText>
+						</div>
 					</div>
 				</div>
 				<div class="flex flex-col text-secondaryText gap-1">
@@ -21,8 +38,14 @@
 					</template>
 					<IonText v-if="user.bio.description" class="mt-4">{{ user.bio.description }}</IonText>
 				</div>
-			
 			</div>
+
+			<div class="border-bottom-line py-6 px-4 flex items-center">
+				<IonIcon :icon="helpCircleOutline	" class="text-heading mr-2.5" />
+				<ionText>You have 5 questions to ask</ionText>
+				<IonIcon :icon="cartOutline" class="text-heading ml-auto" />
+			</div>
+
 			<div class="flex flex-col gap-6 px-4 py-8 text-secondaryText">
 				<router-link class="flex gap-3 items-center" to="/account/stats">
 					<IonIcon :icon="gridOutline" class="text-heading" />
@@ -64,13 +87,10 @@ import Justified from '@app/layouts/Justified.vue'
 import Department from '@app/components/school/departments/Department.vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import {
-	bookmarkOutline,
-	documentTextOutline,
-	flashOutline,
-	gridOutline,
-	helpCircleOutline,
-	readerOutline,
-	settingsOutline
+	bookmarkOutline, documentTextOutline, flashOutline, gridOutline,
+	helpCircleOutline, readerOutline, settingsOutline, cartOutline,
+	podiumOutline, linkOutline, checkmarkCircleOutline
+	
 } from 'ionicons/icons'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
@@ -85,7 +105,8 @@ export default defineComponent({
 		return {
 			id, isAdmin, user,
 			gridOutline, helpCircleOutline, readerOutline, flashOutline,
-			documentTextOutline, bookmarkOutline, settingsOutline
+			documentTextOutline, bookmarkOutline, settingsOutline, cartOutline,
+			podiumOutline, linkOutline, checkmarkCircleOutline
 		}
 	}
 })
