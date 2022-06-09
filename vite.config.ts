@@ -23,7 +23,10 @@ export default defineConfig({
 			types: [{ from: 'vue-router', names: ['RouterLink', 'RouterView'] }],
 			resolvers: [
 				(componentName) => {
-					if (componentName.startsWith('Ion')) return { name: componentName, from: '@ionic/vue' }
+					if (componentName.toLowerCase().startsWith('ion')) return {
+						name: componentName,
+						from: '@ionic/vue'
+					}
 				}
 			]
 		})
