@@ -76,6 +76,7 @@ export interface UserAccount {
 		flashCards: number
 		sets: number
 		documents: number
+		connects: number
 	}
 	streak: {
 		count: number

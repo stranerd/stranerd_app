@@ -2,30 +2,33 @@
 	<Justified>
 		<div v-if="user">
 			<div class="flex flex-col border-bottom-line gap-4 px-4 py-6">
-				<div class="flex items-center gap-4">
+				<div class="flex items-center gap-6">
 					<Avatar :name="user.bio.fullName" :size="64" :src="user.bio.photo" />
-					<div class="flex items-center justify-between w-full ml-6">
-						<div class="flex items-center text-secondaryText gap-2">
-							<IonIcon :icon="podiumOutline" class="text-heading3" />
-							<IonText class="text-heading flex-col flex">
-								<span class="text-sm">37</span>  <span class="text-xs">Points</span>
+					<div class="flex items-center justify-between w-full text-secondaryText">
+						<div class="flex items-center gap-2">
+							<IonIcon :icon="podiumOutline" class="text-heading2" />
+							<IonText class="flex-col flex">
+								<span class="text-heading">{{ formatNumber(user.score, 1) }}</span>
+								<span class="text-sub">Points</span>
 							</IonText>
 						</div>
-						<div class="flex items-center text-secondaryText gap-2">
-							<IonIcon :icon="linkOutline" class="text-heading3" />
-							<IonText class="text-heading flex-col flex">
-								<span class="text-sm">16</span>  <span class="text-xs">Connects</span>
+						<div class="flex items-center gap-2">
+							<IonIcon :icon="linkOutline" class="text-heading2" />
+							<IonText class="flex-col flex">
+								<span class="text-heading">{{ formatNumber(user.meta.connects) }}</span>
+								<span class="text-sub">Connects</span>
 							</IonText>
 						</div>
-						<div class="flex items-center text-secondaryText gap-2">
-							<IonIcon :icon="checkmarkCircleOutline" class="text-heading3" />
-							<IonText class="text-heading flex-col flex">
-								<span class="text-sm">43</span>  <span class="text-xs">Best ans</span>
+						<div class="flex items-center gap-2">
+							<IonIcon :icon="checkmarkCircleOutline" class="text-heading2" />
+							<IonText class="flex-col flex">
+								<span class="text-heading">{{ formatNumber(user.meta.bestAnswers) }}</span>
+								<span class="text-sub">Best ans</span>
 							</IonText>
 						</div>
 					</div>
 				</div>
-				<div class="flex flex-col text-secondaryText gap-1">
+				<div class="flex flex-col gap-1">
 					<IonText class="text-heading font-bold flex gap-1 items-center">
 						<span>{{ user.bio.fullName }}</span>
 						<Verified :verified="user.isVerified" />
@@ -40,40 +43,24 @@
 				</div>
 			</div>
 
-			<div class="border-bottom-line py-6 px-4 flex items-center">
-				<IonIcon :icon="helpCircleOutline	" class="text-heading mr-2.5" />
-				<ionText>You have 5 questions to ask</ionText>
+			<div v-if="0" class="border-bottom-line py-6 px-4 flex items-center gap-2">
+				<IonIcon :icon="helpCircleOutline" class="text-heading" />
+				<IonText>You have 5 questions to ask</IonText>
 				<IonIcon :icon="cartOutline" class="text-heading ml-auto" />
 			</div>
 
 			<div class="flex flex-col gap-6 px-4 py-8 text-secondaryText">
-				<router-link class="flex gap-3 items-center" to="/account/stats">
-					<IonIcon :icon="gridOutline" class="text-heading" />
-					<span>Stats</span>
-				</router-link>
-				<router-link class="flex gap-3 items-center" to="/account/questions">
-					<IonIcon :icon="helpCircleOutline" class="text-heading" />
-					<span>Questions</span>
-				</router-link>
-				<router-link class="flex gap-3 items-center" to="/account/answers">
-					<IonIcon :icon="readerOutline" class="text-heading" />
-					<span>Answers</span>
-				</router-link>
-				<router-link class="flex gap-3 items-center" to="/account/flashCards">
-					<IonIcon :icon="flashOutline" class="text-heading" />
-					<span>Flashcards</span>
-				</router-link>
-				<router-link class="flex gap-3 items-center" to="/account/documents">
-					<IonIcon :icon="documentTextOutline" class="text-heading" />
-					<span>Documents</span>
-				</router-link>
-				<router-link class="flex gap-3 items-center" to="/account/sets">
-					<IonIcon :icon="bookmarkOutline" class="text-heading" />
-					<span>Saved</span>
-				</router-link>
-				<router-link class="flex gap-3 items-center" to="/settings">
-					<IonIcon :icon="settingsOutline" class="text-heading" />
-					<span>Settings</span>
+				<router-link v-for="{ label, route, icon } in [
+					{ label: 'Stats', route: '/account/stats', icon: gridOutline },
+					{ label: 'Questions', route: '/account/questions', icon: helpCircleOutline },
+					{ label: 'Answers', route: '/account/answers', icon: readerOutline },
+					{ label: 'Flashcards', route: '/account/flashCards', icon: flashOutline },
+					{ label: 'Documents', route: '/account/documents', icon: documentTextOutline },
+					{ label: 'Saved', route: '/account/sets', icon: bookmarkOutline },
+					{ label: 'Settings', route: '/settings', icon: settingsOutline },
+				]" :key="route" :to="route" class="flex gap-3 items-center">
+					<IonIcon :icon="icon" class="text-heading" />
+					<span>{{ label }}</span>
 				</router-link>
 			</div>
 		</div>
@@ -87,13 +74,21 @@ import Justified from '@app/layouts/Justified.vue'
 import Department from '@app/components/school/departments/Department.vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import {
-	bookmarkOutline, documentTextOutline, flashOutline, gridOutline,
-	helpCircleOutline, readerOutline, settingsOutline, cartOutline,
-	podiumOutline, linkOutline, checkmarkCircleOutline
-	
+	bookmarkOutline,
+	cartOutline,
+	checkmarkCircleOutline,
+	documentTextOutline,
+	flashOutline,
+	gridOutline,
+	helpCircleOutline,
+	linkOutline,
+	podiumOutline,
+	readerOutline,
+	settingsOutline
 } from 'ionicons/icons'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
+import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'Account',
@@ -103,7 +98,7 @@ export default defineComponent({
 		useRouteMeta('Account')
 		const { id, isAdmin, user } = useAuth()
 		return {
-			id, isAdmin, user,
+			id, isAdmin, user, formatNumber,
 			gridOutline, helpCircleOutline, readerOutline, flashOutline,
 			documentTextOutline, bookmarkOutline, settingsOutline, cartOutline,
 			podiumOutline, linkOutline, checkmarkCircleOutline
