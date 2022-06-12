@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col">
-		<h2 class="text-secondaryText text-heading font-bold px-4 md:px-0">
-			Answers <span class="text-gray">({{ question.answers.length }})</span>
+		<h2 class="text-secondaryText text-heading font-bold px-4 md:px-0 flex items-center">
+			Answers <span class="text-primaryText bg-primaryBg text-[9px] rounded-full ml-auto h-5 w-5 flex items-center justify-center">{{ question.answers.length }}</span>
 		</h2>
 		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question" />
 		<template v-if="answers.length === 0">

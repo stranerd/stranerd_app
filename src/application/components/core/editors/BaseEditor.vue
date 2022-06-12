@@ -73,7 +73,7 @@ export default defineComponent({
 
 <style lang="scss">
 	.quillWrapper {
-		background: $color-itemBg;
+		background: $color-bodyBg;
 		border-radius: 0.5rem;
 		color: $color-bodyText;
 		box-sizing: border-box;
@@ -82,6 +82,7 @@ export default defineComponent({
 		flex-direction: column;
 		font-family: inherit !important;
 		font-size: inherit !important;
+		height: 100%;
 
 		.ql-container {
 			font-family: inherit !important;
@@ -129,12 +130,13 @@ export default defineComponent({
 	}
 
 	.ql-editor {
-		background: $color-itemBg;
-		// border: 1px solid red;
+		background: $color-bodyBg;
+		border: 1px solid  $color-itemBg;
 		border-radius: 0.5rem;
 		transition: border-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
 		font-family: inherit !important;
 		font-size: inherit !important;
+		
 	}
 
 	.ql-editor:focus {

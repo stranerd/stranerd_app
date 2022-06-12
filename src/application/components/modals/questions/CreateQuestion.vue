@@ -1,7 +1,7 @@
 <template>
 	<Modal>
 		<template v-slot:title>
-			Ask a question
+			Ask a question 
 		</template>
 		<QuestionForm
 			:error="error"
