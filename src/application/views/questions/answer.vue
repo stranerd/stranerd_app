@@ -1,11 +1,11 @@
 <template>
 	<JustifiedLayout :hideBottom="true">
-
+		<div class="flex flex-col p-4">
+			<span class="text-secondaryText font-bold mb-4">Mathematics</span>
+			<IonText>In a class of 50 students, 40 students offered Physics and 30 offered Biology. How many offered both Physics and Biology?</IonText>
+		</div>
 		<form class="flex flex-col gap-4 h-screen overflow-hidden p-4" @submit.prevent="submit">
-			<div class="flex flex-col">
-				<span class="text-secondaryText font-bold">Mathematics</span>
-				<IonText>In a class of 50 students, 40 students offered Physics and 30 offered Biology. How many offered both Physics and Biology?</IonText>
-			</div>
+		
 			<BaseEditor class="h-5/6" v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
 				placeholder="Answer here" />
 
@@ -58,7 +58,7 @@ import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 import { closeOutline, imageOutline, paperPlaneOutline } from 'ionicons/icons'
 
 export default defineComponent({
-	name: 'Ask a question',
+	name: 'Question',
 	components: { JustifiedLayout, QuestionForm, BaseEditor },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 
