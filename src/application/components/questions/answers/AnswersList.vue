@@ -1,20 +1,14 @@
 <template>
 	<div class="flex flex-col">
-		<h2 class="text-secondaryText text-heading font-bold px-4 md:px-0">
-			Answers <span class="text-gray">({{ question.answers.length }})</span>
+		<h2 v-if="answers.length" class="text-heading font-bold px-4 flex items-center">
+			<span>Answers</span>
+			<span
+				class="text-primaryText bg-primaryBg text-sub rounded-full ml-auto h-5 w-5 flex items-center justify-center">
+				{{ question.answers.length }}
+			</span>
 		</h2>
 		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question" />
-		<template v-if="answers.length === 0">
-			<EmptyState v-if="showAnswerButton"
-				:info="`No answers yet. <br/>Help ${question.user.bio.fullName} answer this question!`"
-				class="mt-4 text-sub"
-			/>
-
-			<EmptyState v-else
-				class="mt-4 text-sub"
-				info="No answers yet"
-			/>
-		</template>
+		<EmptyState v-if="answers.length === 0" info="No answers yet" />
 	</div>
 </template>
 

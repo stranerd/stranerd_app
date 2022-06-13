@@ -5,11 +5,11 @@ export class AnswerTransformer {
 	fromJSON (model: AnswerFromModel) {
 		const {
 			id, title, body, questionId, tagId, attachments,
-			user, best, createdAt, updatedAt, votes
+			user, best, createdAt, updatedAt, votes, comments
 		} = model
 		return new AnswerEntity({
 			id, title, body, questionId, tagId, attachments,
-			user, best, createdAt, updatedAt, votes
+			user, best, createdAt, updatedAt, votes, comments
 		})
 	}
 

@@ -12,12 +12,13 @@ export class AnswerEntity extends BaseEntity {
 	public readonly attachments: Media[]
 	public readonly user: EmbeddedUser
 	public readonly votes: { userId: string, vote: 1 | -1 }[]
+	public readonly comments: number
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
 		             id, title, body, questionId, tagId,
-		             createdAt, user, attachments,
+		             createdAt, user, attachments, comments,
 		             best, votes, updatedAt
 	             }: AnswerConstructorArgs) {
 		super()
@@ -30,6 +31,7 @@ export class AnswerEntity extends BaseEntity {
 		this.attachments = attachments.map(parseMedia) ?? []
 		this.best = best ?? false
 		this.votes = votes
+		this.comments = comments
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -87,4 +89,5 @@ type AnswerConstructorArgs = {
 	user: EmbeddedUser
 	best: boolean
 	votes: { userId: string, vote: 1 | -1 }[]
+	comments: number
 }

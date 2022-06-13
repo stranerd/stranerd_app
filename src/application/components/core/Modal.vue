@@ -1,6 +1,6 @@
 <template>
 	<div class="modal-content">
-		<div class="bg-headerBg text-headerText py-4">
+		<div class="bg-headerBg text-headerText py-4 text-center">
 			<div class="flex justify-center items-center">
 				<span class="text-heading font-bold">
 					<slot name="title">Title</slot>

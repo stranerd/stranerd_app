@@ -77,7 +77,7 @@ export const useListener = (startFn: () => Promise<() => void>) => {
 	return { start, close, reset, restart, isRunning }
 }
 
-export function useRouteMeta (routeName: string | ComputedRef<string>) {
+export const useRouteMeta = (routeName: string | ComputedRef<string>) => {
 	type Meta = Record<string, any>
 	const name = typeof routeName === 'string' ? computed(() => routeName) : routeName
 

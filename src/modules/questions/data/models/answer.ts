@@ -9,6 +9,7 @@ export interface AnswerFromModel extends AnswerToModel {
 	best: boolean
 	tagId: string
 	votes: { userId: string, vote: 1 | -1 }[]
+	comments: number
 }
 
 export interface AnswerToModel {

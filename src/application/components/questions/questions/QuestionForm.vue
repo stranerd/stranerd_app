@@ -1,44 +1,42 @@
 <template>
 	<form class="flex flex-col gap-4" @submit.prevent="submit">
 		<IonInput
-			v-model="factory.subject"
-			class="w-full bg-white border border-new_gray lg:hidden"
+			v-model="factory.tagId"
+			class="h-9 flex-none"
 			placeholder="Associated subject/course?"
 		/>
+
 		<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
+			class="flex-grow"
 			placeholder="Write your question here." />
 
-		<div v-if="factory.attachments.length > 0" class="flex flex-row flex-wrap gap-2">
-			<span v-for="attachment in factory.attachments" :key="attachment.name">
-				<span
-					class="py-1 px-2 font-bold text-white bg-faded_gray rounded-xl flex flex-row items-center">
-					{{ attachment.name }} <IonIcon :icon="closeOutline" class="ml-1 cursor-pointer"
-						@click="factory.removeAttachment(attachment)" />
+		<div v-if="factory.attachments.length > 0">
+			<div class="flex flex-row flex-wrap gap-2">
+				<span v-for="attachment in factory.attachments" :key="attachment.name">
+					<span
+						class="py-1 px-2 font-bold text-primaryText bg-primaryBg rounded flex flex-row items-center">
+						{{ attachment.name }} <IonIcon :icon="closeOutline" class="ml-1 cursor-pointer"
+							@click="factory.removeAttachment(attachment)" />
+					</span>
 				</span>
-			</span>
+			</div>
+			<DisplayError :error="factory.errors.attachments" />
 		</div>
-		<DisplayError :error="factory.errors.attachments" />
 
-		<div class="flex items-center gap-4">
-			<IonInput
-				v-model="factory.subject"
-				class="w-full flex-grow bg-white border border-new_gray hidden lg:block"
-				placeholder="Associated subject/course?"
-			/>
+		<div class="flex w-full items-center gap-6">
 			<FileInput
 				:multiple="true"
 				accept="image/x-png,image/jpeg,image/jpg"
-				class="w-full lg:w-auto"
+				class="w-full"
 				@files="catchAttachments"
 			>
-				<IonButton class="btn-outline w-full flex items-center">
-					<IonIcon :icon="imageOutline" class="text-heading3 text-primary mr-2" />
-					<span>Add image</span>
+				<IonButton class="btn-outline w-full">
+					<IonIcon :icon="imageOutline" class="mr-4" />
+					Add image
 				</IonButton>
 			</FileInput>
-			<IonButton :disabled="loading || !factory.valid"
-				class="w-full lg:w-auto btn-primary flex items-center" type="submit">
-				<IonIcon :icon="paperPlaneOutline" class="text-heading3 text-white mr-2" />
+			<IonButton :disabled="loading || !factory.valid" class="w-full btn-primary" type="submit">
+				<IonIcon :icon="paperPlaneOutline" class="mr-4" />
 				<slot name="buttonText">Submit</slot>
 			</IonButton>
 		</div>
@@ -83,18 +81,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-input {
-		--placeholder-color: #{$color-iconInactive};
-		--placeholder-opacity: 1;
-		--padding-start: 24px;
-		--padding-end: 24px;
-		--padding-top: 12px;
-		--padding-bottom: 12px;
-	}
-
-	ion-icon {
-		font-size: 22px;
-	}
-</style>
