@@ -6,13 +6,13 @@
 		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question" />
 		<template v-if="answers.length === 0">
 			<EmptyState v-if="showAnswerButton"
-				:info="`No answers yet. <br/>Help ${question.user.bio.fullName} answer this question!`"
+				:info="`There are no answers yet. <br/>Help ${question.user.bio.fullName} answer this question!`"
 				class="mt-4 text-sub"
 			/>
 
 			<EmptyState v-else
 				class="mt-4 text-sub"
-				info="No answers yet"
+				info="There are no answers yet."
 			/>
 		</template>
 	</div>

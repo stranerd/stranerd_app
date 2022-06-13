@@ -1,15 +1,15 @@
 <template>
 	<div class="w-full flex flex-col md:p-4 rounded-xl md:gap-4">
-		<div class="p-4 flex flex-col rounded-lg md:border md:border-itemBg gap-1">
+		<!-- <div class="p-4 flex flex-col rounded-lg md:border md:border-itemBg gap-1">
 			<span class="text-secondaryText font-bold">Answer</span>
 			<IonInput v-model="factory.title" class="w-full" placeholder="Write main answer here and keep it short" />
 			<DisplayError :error="factory.errors.title" />
-		</div>
+		</div> -->
 
 		<div class="p-4 flex flex-col rounded-lg md:border md:border-itemBg gap-1">
-			<span class="text-secondaryText font-bold">Explanation (Optional)</span>
+			<span class="text-secondaryText font-bold">Answer</span>
 			<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
-				placeholder="Write a detailed explanation for your answer here" />
+				placeholder="Answer here" />
 		</div>
 
 		<div v-if="factory.attachments.length > 0" class="flex flex-wrap gap-2 p-4 md:p-0">
