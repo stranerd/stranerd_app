@@ -1,53 +1,70 @@
 <template>
 	<Justified>
 		<div v-if="user">
-			<div class="flex flex-col border-bottom-line gap-6 px-4 py-6">
-				<div class="flex items-center gap-4">
+			<div class="flex flex-col gap-6 px-4 py-6">
+				<div class="flex items-center gap-6">
 					<Avatar :name="user.bio.fullName" :size="64" :src="user.bio.photo" />
-					<div class="flex flex-col gap-2">
-						<IonText class="text-heading font-bold flex gap-1 items-center">
-							<span>{{ user.bio.fullName }}</span>
-							<Verified :verified="user.isVerified" />
-						</IonText>
-						<template v-if="user.isCollege">
-							<Institution :institutionId="user.school.institutionId"
-								class="text-secondaryText text-sub font-bold" />
-							<Department :departmentId="user.school.departmentId" :facultyId="user.school.facultyId"
-								class="text-secondaryText text-sub" />
-						</template>
+					<div class="flex items-center justify-between w-full text-secondaryText">
+						<div class="flex items-center gap-2">
+							<IonIcon :icon="podiumOutline" class="text-heading2" />
+							<IonText class="flex-col flex">
+								<span class="text-heading">{{ formatNumber(user.score, 1) }}</span>
+								<span class="text-sub">Points</span>
+							</IonText>
+						</div>
+						<div class="flex items-center gap-2">
+							<IonIcon :icon="linkOutline" class="text-heading2" />
+							<IonText class="flex-col flex">
+								<span class="text-heading">{{ formatNumber(user.meta.connects) }}</span>
+								<span class="text-sub">Connects</span>
+							</IonText>
+						</div>
+						<div class="flex items-center gap-2">
+							<IonIcon :icon="checkmarkCircleOutline" class="text-heading2" />
+							<IonText class="flex-col flex">
+								<span class="text-heading">{{ formatNumber(user.meta.bestAnswers) }}</span>
+								<span class="text-sub">Best ans</span>
+							</IonText>
+						</div>
 					</div>
 				</div>
-				<IonText v-if="user.bio.description" class="text-sub">{{ user.bio.description }}</IonText>
-				<div class="flex items-center justify-around gap-4 text-sub text-secondaryText">
-					<span class="flex items-center gap-2">
-						<IonIcon :icon="helpCircleOutline" class="text-heading" />
-						<span>{{ formatNumber(user.meta.questions) }}</span>
-					</span>
-					<span class="flex items-center gap-2">
-						<IonIcon :icon="readerOutline" class="text-heading" />
-						<span>{{ formatNumber(user.meta.answers) }}</span>
-					</span>
-					<span class="flex items-center gap-2">
-						<IonIcon :icon="checkmarkCircleOutline" class="text-heading" />
-						<span>{{ formatNumber(user.meta.bestAnswers) }}</span>
-					</span>
-					<span class="flex items-center gap-2">
-						<IonIcon :icon="flashOutline" class="text-heading" />
-						<span>{{ formatNumber(user.meta.flashCards) }}</span>
-					</span>
+				<div class="flex flex-col gap-1">
+					<IonText class="text-heading font-bold flex gap-1 items-center">
+						<span>{{ user.bio.fullName }}</span>
+						<Verified :verified="user.isVerified" />
+					</IonText>
+					<template v-if="user.isCollege">
+						<Institution :institutionId="user.school.institutionId"
+							class="text-secondaryText text-sub font-bold" />
+						<Department :departmentId="user.school.departmentId" :facultyId="user.school.facultyId"
+							class="text-secondaryText text-sub" />
+					</template>
+					<IonText v-if="user.bio.description" class="mt-4">{{ user.bio.description }}</IonText>
 				</div>
+
+				<IonButton class="btn-primary w-full">
+					<IonIcon :icon="linkOutline" class="text-heading3 mr-2" />
+					Connect
+				</IonButton>
+
 				<IonButton v-if="isAdmin && id !== user.id" class="btn-primary w-full"
 					@click="user.isVerified ? deVerifyUser(user) : verifyUser(user)">
 					{{ user.isVerified ? 'Mark User Unverified' : 'Mark User Verified' }}
 				</IonButton>
 			</div>
 			<div class="flex flex-col gap-4 py-6">
-				<div class="flex items-center justify-between px-4 text-sub">
-					<span v-for="(path, idx) in ['questions', 'answers', 'flashCards', 'documents']" :key="path"
-						:class="{ 'bg-primaryBg !text-primaryText': path === tab, 'rounded-l-full': idx ===0, 'rounded-r-full': idx === 3 }"
-						class="border border-primaryBg text-primaryBg py-1 px-3 capitalize w-full text-center"
-						@click="tab = path">
-						{{ path }}
+				<div class="flex items-center justify-between">
+					<span v-for="path in [
+							{ name: 'questions', icon: helpCircleOutline },
+							{ name: 'answers', icon: checkmarkCircleOutline },
+							{ name: 'flashCards', icon: flashOutline },
+							{ name: 'documents', icon: readerOutline }
+						]" :key="path.name"
+						:class="{ 'border-b-2 !text-primaryBg !border-primaryBg': path.name === tab}"
+						class="border-b border-itemBg text-secondaryText p-4 capitalize w-full flex justify-center items-center gap-2"
+						@click="tab = path.name">
+						<IonIcon :icon="path.icon" class="text-heading" />
+						<span>{{ formatNumber(user.meta[path.name]) }}</span>
 					</span>
 				</div>
 				<UserQuestions v-if="tab === 'questions'" :user="user" />
@@ -68,7 +85,14 @@ import Institution from '@app/components/school/institutions/Institution.vue'
 import { useRoute } from 'vue-router'
 import { useUser } from '@app/composable/users/users'
 import { useVerifiedRoles } from '@app/composable/users/roles/verified'
-import { checkmarkCircleOutline, flashOutline, helpCircleOutline, readerOutline } from 'ionicons/icons'
+import {
+	checkmarkCircleOutline,
+	flashOutline,
+	helpCircleOutline,
+	linkOutline,
+	podiumOutline,
+	readerOutline
+} from 'ionicons/icons'
 import { formatNumber } from '@utils/commons'
 import UserQuestions from '@app/components/users/users/UserQuestions.vue'
 import UserAnswers from '@app/components/users/users/UserAnswers.vue'
@@ -92,7 +116,7 @@ export default defineComponent({
 		const tab = ref('questions')
 		return {
 			id, isAdmin, user, loading, error, formatNumber,
-			verifiedLoading, verifyUser, deVerifyUser, tab,
+			verifiedLoading, verifyUser, deVerifyUser, tab, podiumOutline, linkOutline,
 			helpCircleOutline, readerOutline, checkmarkCircleOutline, flashOutline
 		}
 	}
