@@ -29,29 +29,25 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
-const listener = useListener(async () => {
-	const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
-	return await QuestionsUseCases.listen({
-		created: async (entity) => {
-			addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		updated: async (entity) => {
-			addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		deleted: async (entity) => {
-			const index = global.questions.value.findIndex((q) => q.id === entity.id)
-			if (index !== -1) global.questions.value.splice(index, 1)
-		}
-	}, lastDate ? lastDate - 1 : undefined)
-})
+const listener = useListener(async () => await QuestionsUseCases.listen({
+	created: async (entity) => {
+		addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
+	},
+	updated: async (entity) => {
+		addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
+	},
+	deleted: async (entity) => {
+		const index = global.questions.value.findIndex((q) => q.id === entity.id)
+		if (index !== -1) global.questions.value.splice(index, 1)
+	}
+}, global.questions.value.at(-1)?.createdAt))
 
 export const useQuestionList = () => {
 	const fetchQuestions = async () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
-			const questions = await QuestionsUseCases.get(lastDate)
+			const questions = await QuestionsUseCases.get(global.questions.value.at(-1)?.createdAt)
 			global.hasMore.value = !!questions.pages.next
 			questions.results.forEach((q) => addToArray(global.questions.value, q, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true

@@ -1,28 +1,17 @@
 <template>
 	<Justified>
-		<div class="md:p-4 lg:py-8">
-			<div class="w-full lg:w-8/12 mx-auto md:py-4 lg:px-4">
-				<div class="hidden md:flex card-padding">
-					<h1 class="text-heading font-bold">
-						Notifications
-					</h1>
-				</div>
-				<EmptyState
-					v-if="!loading && !error && !notifications.length"
-					btnText="Go Home"
-					info="You have no notifications yet"
-					route="/dashboard"
-				/>
-				<NotificationCard
-					v-for="notification in notifications"
-					:key="notification.hash"
-					:notification="notification"
-				/>
-				<div v-if="hasMore" class="text-center py-2 text-18">
-					<a @click.prevent="fetchOlderNotifications">Load More</a>
-				</div>
-				<PageLoading v-if="loading" />
-			</div>
+		<div class="showcase-flex">
+			<EmptyState
+				v-if="!loading && !error && !notifications.length"
+				info="You have no notifications yet"
+			/>
+			<NotificationsListCard
+				v-for="notification in notifications"
+				:key="notification.hash" :notification="notification"
+				class="border-bottom-line"
+			/>
+			<BlockLoading v-if="loading" />
+			<LoadMore v-if="hasMore" :load="fetchOlderNotifications" />
 		</div>
 	</Justified>
 </template>
@@ -31,7 +20,7 @@
 import { defineComponent } from 'vue'
 import { useNotificationList } from '@app/composable/users/notifications'
 import Justified from '@app/layouts/Justified.vue'
-import NotificationCard from '@app/components/users/notifications/NotificationCard.vue'
+import NotificationsListCard from '@app/components/users/notifications/NotificationsListCard.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
@@ -39,12 +28,10 @@ import { useRouteMeta } from '@app/composable/core/states'
 export default defineComponent({
 	name: 'Notifications',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
-	components: { NotificationCard, Justified, EmptyState },
+	components: { NotificationsListCard, Justified, EmptyState },
 	setup () {
 		useRouteMeta('Notifications')
-		const {
-			notifications, error, loading, hasMore, fetchOlderNotifications
-		} = useNotificationList()
+		const { notifications, error, loading, hasMore, fetchOlderNotifications } = useNotificationList()
 		return { notifications, error, loading, hasMore, fetchOlderNotifications }
 	}
 })

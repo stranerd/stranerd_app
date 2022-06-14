@@ -53,6 +53,7 @@ export const useDownload = (fileName: string, fileLink: string, type: string) =>
 
 	const openFile = async () => {
 		if (isWeb) return
+		if (!content.value) await download()
 		const stat = await Filesystem.getUri(options)
 		await FileOpener.open(stat.uri, '')
 	}
@@ -65,10 +66,10 @@ export const useDownload = (fileName: string, fileLink: string, type: string) =>
 	}
 
 	onMounted(async () => {
-		loading.value = true
+		await setLoading(true)
 		const contents = await Filesystem.readFile(options).catch(() => null)
 		if (contents?.data) content.value = getBase64(contents.data)
-		loading.value = false
+		await setLoading(false)
 	})
 
 	return {

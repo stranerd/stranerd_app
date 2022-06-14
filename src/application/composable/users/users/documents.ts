@@ -28,8 +28,7 @@ export const useUserDocumentList = (id: string) => {
 		await global[id].setError('')
 		try {
 			await global[id].setLoading(true)
-			const lastDate = global[id].documents.value[global[id].documents.value.length - 1]?.createdAt
-			const documents = await DocumentsUseCases.getUserDocuments(id, lastDate)
+			const documents = await DocumentsUseCases.getUserDocuments(id, global[id].documents.value.at(-1)?.createdAt)
 			global[id].hasMore.value = !!documents.pages.next
 			documents.results.forEach((q) => addToArray(global[id].documents.value, q, (e) => e.id, (e) => e.createdAt))
 			global[id].fetched.value = true
@@ -50,7 +49,7 @@ export const useUserDocumentList = (id: string) => {
 			deleted: async (entity) => {
 				global[id].documents.value = global[id].documents.value.filter((c) => c.id !== entity.id)
 			}
-		})
+		}, global[id].documents.value.at(-1)?.createdAt)
 	})
 
 	onMounted(async () => {

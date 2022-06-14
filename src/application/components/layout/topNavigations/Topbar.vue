@@ -11,7 +11,12 @@
 						{{ $route.meta.routeName ?? 'Stranerd' }}
 					</IonText>
 				</router-link>
-				<div />
+				<div class="flex gap-4 items-center">
+					<router-link to="/search">
+						<IonIcon :icon="searchOutline" class="text-heading2" />
+					</router-link>
+					<NotificationIcon />
+				</div>
 			</div>
 		</IonToolbar>
 
@@ -23,14 +28,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import BigScreenBar from './screens/BigScreenBar.vue'
-import { arrowBackOutline } from 'ionicons/icons'
+import { arrowBackOutline, searchOutline } from 'ionicons/icons'
 import NotificationIcon from '@app/components/users/notifications/NotificationIcon.vue'
 
 export default defineComponent({
 	name: 'Topbar',
 	components: { BigScreenBar, NotificationIcon },
 	setup () {
-		return { arrowBackOutline }
+		return { arrowBackOutline, searchOutline }
 	}
 })
 </script>

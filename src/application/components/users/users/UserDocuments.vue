@@ -3,12 +3,12 @@
 		<form class="p-4" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 		</form>
-		<DocumentListCard v-for="document in (searchMode ? searchResults : documents)" :key="document.hash"
-			:document="document" class="border-bottom-line" />
 		<EmptyState v-if="!loading && !error && documents.length === 0" class="border-bottom-line"
 			info="This user hasn't created any documents yet" />
-		<LoadMore v-if="hasMore" :load="fetchOlderDocuments" />
+		<DocumentListCard v-for="document in (searchMode ? searchResults : documents)" :key="document.hash"
+			:document="document" class="border-bottom-line" />
 		<BlockLoading v-if="loading" />
+		<LoadMore v-if="hasMore" :load="fetchOlderDocuments" />
 	</div>
 </template>
 

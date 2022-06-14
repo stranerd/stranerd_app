@@ -1,16 +1,9 @@
 <template>
-	<div class="card-padding" @click="markNotificationSeen">
-		<div>
-			<div class="flex justify-between gap-2 items-baseline">
-				<router-link :class="{'font-bold': !notification.seen}" :to="notification.link" class="flex-grow">
-					<p class=" cursor-pointer">
-						{{ notification.body }}
-					</p>
-				</router-link>
-				<span v-if="!notification.seen" class="dot bg-primary" />
-			</div>
-			<p class="text-sub">{{ formatTime(notification.createdAt) }}</p>
-		</div>
+	<div class="flex flex-col card-padding" @click="markNotificationSeen">
+		<router-link :class="notification.seen ? 'text-secondaryText' : 'font-bold'" :to="notification.link">
+			{{ notification.body }}
+		</router-link>
+		<p class="text-sub">{{ formatTime(notification.createdAt) }}</p>
 	</div>
 </template>
 

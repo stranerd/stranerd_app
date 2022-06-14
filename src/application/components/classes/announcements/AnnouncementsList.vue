@@ -5,8 +5,8 @@
 		<AnnouncementsListCard v-for="announcement in announcements" :key="announcement.hash"
 			:announcement="announcement"
 			:classInst="classInst" />
-		<LoadMore v-if="hasMore" :load="fetchOlderAnnouncements" />
 		<BlockLoading v-if="loading" />
+		<LoadMore v-if="hasMore" :load="fetchOlderAnnouncements" />
 	</div>
 </template>
 

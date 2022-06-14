@@ -1,33 +1,33 @@
 <template>
-	<div 
-		class="flex gap-1 items-center text-secondaryText w-full">
-		<Avatar  :id="discussion.user.id" :name="discussion.user.bio.fullName" class="self-center"
-			:size="36" :src="discussion.user.bio.photo" />
-		<div
-			class="py-2 px-3 min-w-[25%] max-w-[70%] lg:max-w-[55%] rounded-t-xl flex flex-col gap-1">
-			<span class="flex gap-1 items-center ">
-				<span class="font-bold text-[15px]" :class="discussion.user.id !== id ? 'text-bodyText ' : 'text-info'">{{ discussion.user.id !== id ? discussion.user.bio.fullName : "You" }}</span>
+	<div
+		class="flex gap-4 items-center w-full text-sub">
+		<Avatar :id="discussion.user.id" :name="discussion.user.bio.fullName" :size="24"
+			:src="discussion.user.bio.photo" />
+		<div class="min-w-[25%] max-w-[70%] lg:max-w-[55%] rounded-t-xl flex flex-col gap-1">
+			<span class="flex gap-1 items-center">
+				<span :class="{ 'text-info': discussion.user.id === id }" class="font-bold">
+					{{ discussion.user.id !== id ? discussion.user.bio.fullName : 'You' }}</span>
 				<Verified :verified="discussion.user.roles.isVerified" />
-				<div class="dot bg-secondaryText"></div>
-				<span class="text-[10px]  leading-none text-secondaryText">{{ formatTimeAsDigits(new Date(discussion.createdAt)) }}</span>
+				<IonIcon :icon="ellipse" class="dot" />
+				<span class="text-[0.9em] leading-none text-secondaryText">
+					{{ formatTimeAsDigits(new Date(discussion.createdAt)) }}
+				</span>
 			</span>
 			<div v-if="discussion.isMedia" class="flex flex-col" @click="openFile">
 				<img v-if="discussion.isImage" :src="discussion.media.link" alt="" class="w-full rounded-t-xl">
 				<div :class="{'rounded-t-xl': !discussion.isImage}"
-					class="bg-bodyBg flex gap-2 items-center p-3 rounded-b-xl">
-					<IonIcon :icon="documentOutline" class="text-heading3" />
+					class="bg-itemBg flex gap-2 items-center p-2 rounded-b-xl">
+					<span>
+						<IonIcon :icon="documentOutline" class="text-heading2" />
+					</span>
 					<IonText class="w-full truncate">{{ discussion.media.name }}</IonText>
-					<SpinLoading v-if="loading" class="text-heading3" />
-					<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-heading3" color="primary"
-						@click="download" />
+					<span>
+						<SpinLoading v-if="loading" />
+						<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-heading2" @click="download" />
+					</span>
 				</div>
 			</div>
-			<div class="flex gap-2 items-end">
-				<div class="flex-grow leading-none text-[15px]">
-					<span v-html="discussion.formattedContent" />
-				</div>
-				
-			</div>
+			<span class="leading-none" v-html="discussion.formattedContent" />
 		</div>
 	</div>
 </template>
@@ -37,7 +37,7 @@ import { defineComponent } from 'vue'
 import { DiscussionEntity } from '@modules/classes'
 import { useAuth } from '@app/composable/auth/auth'
 import { formatTimeAsDigits } from '@utils/dates'
-import { documentOutline, downloadOutline } from 'ionicons/icons'
+import { documentOutline, downloadOutline, ellipse } from 'ionicons/icons'
 import { useDownload } from '@app/composable/meta/media'
 import { isWeb } from '@utils/constants'
 
@@ -57,7 +57,7 @@ export default defineComponent({
 		const download = isWeb ? downloadWeb : downloadApp
 		return {
 			id, formatTimeAsDigits, isWeb,
-			documentOutline, downloadOutline,
+			documentOutline, downloadOutline, ellipse,
 			content, download, openFile, loading
 		}
 	}

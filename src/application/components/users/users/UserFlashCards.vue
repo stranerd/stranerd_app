@@ -3,12 +3,12 @@
 		<form class="p-4" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 		</form>
-		<FlashCardListCard v-for="flashCard in (searchMode ? searchResults : flashCards)" :key="flashCard.hash"
-			:flashCard="flashCard" class="border-bottom-line" />
 		<EmptyState v-if="!loading && !error && flashCards.length === 0" class="border-bottom-line"
 			info="This user hasn't created any flashCards yet" />
-		<LoadMore v-if="hasMore" :load="fetchOlderFlashCards" />
+		<FlashCardListCard v-for="flashCard in (searchMode ? searchResults : flashCards)" :key="flashCard.hash"
+			:flashCard="flashCard" class="border-bottom-line" />
 		<BlockLoading v-if="loading" />
+		<LoadMore v-if="hasMore" :load="fetchOlderFlashCards" />
 	</div>
 </template>
 

@@ -24,8 +24,8 @@
 			info="There are no questions available." />
 		<QuestionListCard v-for="question in questions" :key="question.hash" :question="question"
 			class="border-bottom-line" />
-		<LoadMore v-if="hasMore" :load="fetchOlderQuestions" />
 		<BlockLoading v-if="loading" />
+		<LoadMore v-if="hasMore" :load="fetchOlderQuestions" />
 	</div>
 </template>
 

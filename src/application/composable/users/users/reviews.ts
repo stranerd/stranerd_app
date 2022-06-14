@@ -23,8 +23,7 @@ export const useUserReviewList = (id: string) => {
 		if (!id) return
 		try {
 			await global[id].setLoading(true)
-			const lastDate = global[id].reviews.value[global[id].reviews.value.length - 1]?.createdAt
-			const reviews = await ReviewsUseCases.get(lastDate)
+			const reviews = await ReviewsUseCases.get(global[id].reviews.value.at(-1)?.createdAt)
 			global[id].hasMore.value = !!reviews.pages.next
 			reviews.results.forEach((a) => addToArray(global[id].reviews.value, a, (e) => e.id, (e) => e.createdAt))
 			global[id].fetched.value = true

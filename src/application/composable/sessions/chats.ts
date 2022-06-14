@@ -23,21 +23,18 @@ export const useChats = (userId: string) => {
 	const { id } = useAuth()
 	const path = [id.value, userId] as [string, string]
 	if (global[userId] === undefined) {
-		const listener = useListener(async () => {
-			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
-			return ChatsUseCases.listen(path, {
-				created: async (entity) => {
-					addToArray(global[userId].chats.value, entity, (e) => e.id, (e) => e.createdAt)
-				},
-				updated: async (entity) => {
-					addToArray(global[userId].chats.value, entity, (e) => e.id, (e) => e.createdAt)
-				},
-				deleted: async (entity) => {
-					const index = global[userId].chats.value.findIndex((c) => c.id === entity.id)
-					if (index !== -1) global[userId].chats.value.splice(index, 1)
-				}
-			}, lastDate)
-		})
+		const listener = useListener(async () => await ChatsUseCases.listen(path, {
+			created: async (entity) => {
+				addToArray(global[userId].chats.value, entity, (e) => e.id, (e) => e.createdAt)
+			},
+			updated: async (entity) => {
+				addToArray(global[userId].chats.value, entity, (e) => e.id, (e) => e.createdAt)
+			},
+			deleted: async (entity) => {
+				const index = global[userId].chats.value.findIndex((c) => c.id === entity.id)
+				if (index !== -1) global[userId].chats.value.splice(index, 1)
+			}
+		}, global[userId].chats.value.at(-1)?.createdAt))
 		global[userId] = {
 			chats: ref([]),
 			fetched: ref(false),
@@ -52,8 +49,7 @@ export const useChats = (userId: string) => {
 		await global[userId].setError('')
 		try {
 			await global[userId].setLoading(true)
-			const lastDate = global[userId].chats.value[global[userId].chats.value.length - 1]?.createdAt
-			const c = await ChatsUseCases.get(path, lastDate)
+			const c = await ChatsUseCases.get(path, global[userId].chats.value.at(-1)?.createdAt)
 			global[userId].hasMore.value = !!c.pages.next
 			c.results.map((c) => addToArray(global[userId].chats.value, c, (e) => e.id, (e) => e.createdAt))
 			global[userId].fetched.value = true

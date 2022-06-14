@@ -18,7 +18,6 @@ export const useNotificationList = () => {
 		const listener = useListener(async () => {
 			if (!userId) return () => {
 			}
-			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
 			return NotificationsUseCases.listen({
 				created: async (entity) => {
 					addToArray(global[userId].notifications.value, entity, (e) => e.id, (e) => e.createdAt)
@@ -30,7 +29,7 @@ export const useNotificationList = () => {
 					const index = global[userId].notifications.value.findIndex((t) => t.id === entity.id)
 					if (index !== -1) global[userId].notifications.value.splice(index, 1)
 				}
-			}, lastDate)
+			}, global[userId].notifications.value.at(-1)?.createdAt)
 		})
 		global[userId] = {
 			notifications: ref([]),
@@ -47,10 +46,10 @@ export const useNotificationList = () => {
 		await global[userId].setError('')
 		await global[userId].setLoading(true)
 		try {
-			const lastDate = global[userId].notifications.value[global[userId].notifications.value.length - 1]?.createdAt
-			const notifications = await NotificationsUseCases.get(lastDate)
+			const notifications = await NotificationsUseCases.get(global[userId].notifications.value.at(-1)?.createdAt)
 			global[userId].hasMore.value = !!notifications.pages.next
 			notifications.results.forEach((t) => addToArray(global[userId].notifications.value, t, (e) => e.id, (e) => e.createdAt))
+			global[userId].fetched.value = true
 		} catch (e) {
 			await global[userId].setError(e)
 		}

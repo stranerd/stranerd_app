@@ -28,8 +28,7 @@ export const useUserFlashCardList = (id: string) => {
 		await global[id].setError('')
 		try {
 			await global[id].setLoading(true)
-			const lastDate = global[id].flashCards.value[global[id].flashCards.value.length - 1]?.createdAt
-			const flashCards = await FlashCardsUseCases.getUserFlashCards(id, lastDate)
+			const flashCards = await FlashCardsUseCases.getUserFlashCards(id, global[id].flashCards.value.at(-1)?.createdAt)
 			global[id].hasMore.value = !!flashCards.pages.next
 			flashCards.results.forEach((q) => addToArray(global[id].flashCards.value, q, (e) => e.id, (e) => e.createdAt))
 			global[id].fetched.value = true
@@ -50,7 +49,7 @@ export const useUserFlashCardList = (id: string) => {
 			deleted: async (entity) => {
 				global[id].flashCards.value = global[id].flashCards.value.filter((c) => c.id !== entity.id)
 			}
-		})
+		}, global[id].flashCards.value.at(-1)?.createdAt)
 	})
 
 	onMounted(async () => {

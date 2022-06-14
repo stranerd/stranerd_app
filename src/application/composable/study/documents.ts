@@ -12,29 +12,25 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
-const listener = useListener(async () => {
-	const lastDate = global.documents.value[global.documents.value.length - 1]?.createdAt
-	return await DocumentsUseCases.listen({
-		created: async (entity) => {
-			addToArray(global.documents.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		updated: async (entity) => {
-			addToArray(global.documents.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		deleted: async (entity) => {
-			const index = global.documents.value.findIndex((q) => q.id === entity.id)
-			if (index !== -1) global.documents.value.splice(index, 1)
-		}
-	}, lastDate)
-})
+const listener = useListener(async () => await DocumentsUseCases.listen({
+	created: async (entity) => {
+		addToArray(global.documents.value, entity, (e) => e.id, (e) => e.createdAt)
+	},
+	updated: async (entity) => {
+		addToArray(global.documents.value, entity, (e) => e.id, (e) => e.createdAt)
+	},
+	deleted: async (entity) => {
+		const index = global.documents.value.findIndex((q) => q.id === entity.id)
+		if (index !== -1) global.documents.value.splice(index, 1)
+	}
+}, global.documents.value.at(-1)?.createdAt))
 
 export const useDocumentList = () => {
 	const fetchDocuments = async () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const lastDate = global.documents.value[global.documents.value.length - 1]?.createdAt
-			const documents = await DocumentsUseCases.get(lastDate)
+			const documents = await DocumentsUseCases.get(global.documents.value.at(-1)?.createdAt)
 			global.hasMore.value = !!documents.pages.next
 			documents.results.forEach((n) => addToArray(global.documents.value, n, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true

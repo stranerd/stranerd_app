@@ -12,29 +12,25 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
-const listener = useListener(async () => {
-	const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
-	return await FlashCardsUseCases.listen({
-		created: async (entity) => {
-			addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		updated: async (entity) => {
-			addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		deleted: async (entity) => {
-			const index = global.flashCards.value.findIndex((q) => q.id === entity.id)
-			if (index !== -1) global.flashCards.value.splice(index, 1)
-		}
-	}, lastDate)
-})
+const listener = useListener(async () => await FlashCardsUseCases.listen({
+	created: async (entity) => {
+		addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
+	},
+	updated: async (entity) => {
+		addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
+	},
+	deleted: async (entity) => {
+		const index = global.flashCards.value.findIndex((q) => q.id === entity.id)
+		if (index !== -1) global.flashCards.value.splice(index, 1)
+	}
+}, global.flashCards.value.at(-1)?.createdAt))
 
 export const useFlashCardList = () => {
 	const fetchFlashCards = async () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
-			const flashCards = await FlashCardsUseCases.get(lastDate)
+			const flashCards = await FlashCardsUseCases.get(global.flashCards.value.at(-1)?.createdAt)
 			global.hasMore.value = !!flashCards.pages.next
 			flashCards.results.forEach((f) => addToArray(global.flashCards.value, f, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true

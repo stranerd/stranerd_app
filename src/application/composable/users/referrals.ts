@@ -18,7 +18,6 @@ export const useReferralList = () => {
 		const listener = useListener(async () => {
 			if (!id.value) return () => {
 			}
-			const lastDate = global[userId].referrals.value[global[userId].referrals.value.length - 1]?.createdAt
 			return ReferralsUseCases.listen({
 				created: async (entity) => {
 					addToArray(global[userId].referrals.value, entity, (e) => e.id, (e) => e.createdAt)
@@ -30,7 +29,7 @@ export const useReferralList = () => {
 					const index = global[userId].referrals.value.findIndex((t) => t.id === entity.id)
 					if (index !== -1) global[userId].referrals.value.splice(index, 1)
 				}
-			}, lastDate)
+			}, global[userId].referrals.value.at(-1)?.createdAt)
 		})
 		global[userId] = {
 			referrals: ref([]),
@@ -47,8 +46,7 @@ export const useReferralList = () => {
 		await global[userId].setError('')
 		await global[userId].setLoading(true)
 		try {
-			const lastDate = global[userId].referrals.value[global[userId].referrals.value.length - 1]?.createdAt
-			const referrals = await ReferralsUseCases.get(lastDate)
+			const referrals = await ReferralsUseCases.get(global[userId].referrals.value.at(-1)?.createdAt)
 			global[userId].hasMore.value = !!referrals.pages.next
 			referrals.results.forEach((t) => addToArray(global[userId].referrals.value, t, (e) => e.id, (e) => e.createdAt))
 		} catch (e) {

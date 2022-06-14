@@ -1,11 +1,9 @@
 <template>
-	<div class="showcase-flex">
-		<div class="flex flex-col gap-4 px-4">
-			<EmptyState v-if="!loading && !error && events.length === 0" info="No events" />
-			<EventsListCard v-for="event in events" :key="event.hash" :classInst="classInst" :event="event" />
-			<LoadMore v-if="hasMore" :load="fetchOlderEvents" />
-		</div>
+	<div class="showcase-flex gap-4 px-4">
+		<EmptyState v-if="!loading && !error && events.length === 0" info="No events" />
+		<EventsListCard v-for="event in events" :key="event.hash" :classInst="classInst" :event="event" />
 		<BlockLoading v-if="loading" />
+		<LoadMore v-if="hasMore" :load="fetchOlderEvents" />
 	</div>
 </template>
 

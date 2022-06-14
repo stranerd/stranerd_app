@@ -3,12 +3,12 @@
 		<form class="p-4" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 		</form>
-		<UserQuestionsCard v-for="question in (searchMode ? searchResults : questions)" :key="question.hash"
-			:question="question" class="border-bottom-line" />
-		<LoadMore v-if="hasMore" :load="fetchOlderQuestions" />
 		<EmptyState v-if="!loading && !error && questions.length === 0" class="border-bottom-line"
 			info="This user hasn't asked any questions yet" />
+		<UserQuestionsCard v-for="question in (searchMode ? searchResults : questions)" :key="question.hash"
+			:question="question" class="border-bottom-line" />
 		<BlockLoading v-if="loading" />
+		<LoadMore v-if="hasMore" :load="fetchOlderQuestions" />
 	</div>
 </template>
 

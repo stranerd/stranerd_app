@@ -28,8 +28,7 @@ export const useUserAnswerList = (id: string) => {
 		await global[id].setError('')
 		try {
 			await global[id].setLoading(true)
-			const lastDate = global[id].answers.value[global[id].answers.value.length - 1]?.createdAt
-			const answers = await AnswersUseCases.getUserAnswers(id, lastDate)
+			const answers = await AnswersUseCases.getUserAnswers(id, global[id].answers.value.at(-1)?.createdAt)
 			global[id].hasMore.value = !!answers.pages.next
 			answers.results.forEach((a) => addToArray(global[id].answers.value, a, (e) => e.id, (e) => e.createdAt))
 			global[id].fetched.value = true
@@ -50,7 +49,7 @@ export const useUserAnswerList = (id: string) => {
 			deleted: async (entity) => {
 				global[id].answers.value = global[id].answers.value.filter((c) => c.id !== entity.id)
 			}
-		})
+		}, global[id].answers.value.at(-1)?.createdAt)
 	})
 
 	onMounted(async () => {
