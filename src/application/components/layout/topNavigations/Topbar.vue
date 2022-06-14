@@ -2,15 +2,12 @@
 	<IonHeader class="block ion-no-border inset-x-0 w-full lg:shadow-md z-10">
 		<IonToolbar class="lg:hidden px-4 border-bottom-line md:h-auto min-h-[3rem] flex items-center justify-center">
 			<div class="flex items-center justify-between">
-				<div>
-					<!-- TODO: Only show back button if there is a previous page & it's not the homePage -->
-					<IonIcon v-if="true" :icon="arrowBackOutline" class="text-heading2" @click="$router.go(-1)" />
-				</div>
-				<router-link to="/">
-					<IonText class="font-bold text-heading">
-						{{ $route.meta.routeName ?? 'Stranerd' }}
-					</IonText>
+				<router-link v-if="$route.meta.back" :to="$route.meta.back">
+					<IonIcon :icon="arrowBackOutline" class="text-heading2" />
 				</router-link>
+				<IonText class="font-bold text-heading">
+					{{ $route.meta.routeName ?? 'Stranerd' }}
+				</IonText>
 				<div class="flex gap-4 items-center">
 					<router-link to="/search">
 						<IonIcon :icon="searchOutline" class="text-heading2" />

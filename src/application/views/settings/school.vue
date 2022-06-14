@@ -124,7 +124,6 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, watch } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
 import { useUserSchoolUpdate } from '@app/composable/auth/profile'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import { useInstitutionList } from '@app/composable/school/institutions'
@@ -140,7 +139,7 @@ export default defineComponent({
 	components: { Institution },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Edit School')
+		useRouteMeta('Edit School', { back: '/settings' })
 		const { factory, error, loading, updateSchool } = useUserSchoolUpdate()
 
 		const { schools, gatewayExams } = useInstitutionList()

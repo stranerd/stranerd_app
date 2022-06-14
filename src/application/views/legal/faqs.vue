@@ -14,7 +14,7 @@ export default defineComponent({
 	name: 'LegalFAQs',
 	components: { Justified, PdfReader },
 	setup () {
-		useRouteMeta('FAQs')
+		useRouteMeta('FAQs', {})
 	}
 })
 </script>

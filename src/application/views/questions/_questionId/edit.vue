@@ -8,6 +8,8 @@ import { getEditingQuestion } from '@app/composable/questions/questions'
 import { useAuth } from '@app/composable/auth/auth'
 import { useQuestionModal } from '@app/composable/core/modals'
 import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'QuestionsQuestionIdEdit',
@@ -21,6 +23,10 @@ export default defineComponent({
 		useQuestionModal().openEditQuestion()
 		const backPath = from?.fullPath ?? '/dashboard'
 		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
-	}])
+	}]),
+	setup () {
+		const { questionId } = useRoute().params
+		useRouteMeta('Edit Question', { back: `/questions/${questionId}` })
+	}
 })
 </script>

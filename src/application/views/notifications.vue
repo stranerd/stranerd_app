@@ -30,7 +30,7 @@ export default defineComponent({
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	components: { NotificationsListCard, Justified, EmptyState },
 	setup () {
-		useRouteMeta('Notifications')
+		useRouteMeta('Notifications', {})
 		const { notifications, error, loading, hasMore, fetchOlderNotifications } = useNotificationList()
 		return { notifications, error, loading, hasMore, fetchOlderNotifications }
 	}

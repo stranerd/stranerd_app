@@ -54,7 +54,7 @@ export default defineComponent({
 	components: { Justified },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Edit Profile')
+		useRouteMeta('Edit Profile', { back: '/settings' })
 		const { factory, error, loading, updateProfile } = useProfileUpdate()
 		return { factory, error, loading, updateProfile }
 	}

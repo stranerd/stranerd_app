@@ -28,8 +28,8 @@ export default defineComponent({
 		AnswersList
 	},
 	setup () {
-		useRouteMeta('Question')
 		const { questionId } = useRoute().params
+		useRouteMeta('Question', { back: '/questions' })
 		const { error, loading, question } = useQuestion(questionId as string)
 		return { error, loading, question }
 	}

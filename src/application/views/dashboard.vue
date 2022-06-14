@@ -27,7 +27,7 @@ export default defineComponent({
 	name: 'Dashboard',
 	components: { GeneralDashboard, AspirantDashboard, DashboardLayout, StatusBar },
 	setup () {
-		useRouteMeta('Dashboard')
+		useRouteMeta('Dashboard', {})
 		const { isLoggedIn, user } = useAuth()
 		return { isLoggedIn, user }
 	}

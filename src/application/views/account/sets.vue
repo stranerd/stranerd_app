@@ -17,7 +17,7 @@ export default defineComponent({
 	components: { Justified, UserSets },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Saved')
+		useRouteMeta('Saved', { back: '/account' })
 		const { user } = useAuth()
 		return { user }
 	}

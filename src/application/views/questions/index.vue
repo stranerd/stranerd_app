@@ -14,7 +14,7 @@ export default defineComponent({
 	name: 'Questions',
 	components: { QuestionsList, DashboardLayout },
 	setup () {
-		useRouteMeta('Questions')
+		useRouteMeta('Questions', {})
 	}
 })
 </script>

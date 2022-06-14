@@ -14,7 +14,7 @@ export default defineComponent({
 	name: 'LegalPrivacyPolicy',
 	components: { Justified, PdfReader },
 	setup () {
-		useRouteMeta('Privacy Policy')
+		useRouteMeta('Privacy Policy', {})
 	}
 })
 </script>

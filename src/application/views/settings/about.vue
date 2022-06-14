@@ -22,7 +22,7 @@ export default defineComponent({
 	name: 'SettingsAbout',
 	components: { Justified },
 	setup () {
-		useRouteMeta('About')
+		useRouteMeta('About', { back: '/settings' })
 	}
 })
 </script>

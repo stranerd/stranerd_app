@@ -36,7 +36,7 @@ export default defineComponent({
 	components: { Justified },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Security')
+		useRouteMeta('Security', { back: '/settings' })
 		const { hasPassword } = useAuth()
 		const { factory, error, loading, updatePassword } = usePasswordUpdate()
 		return { hasPassword, factory, error, loading, updatePassword }

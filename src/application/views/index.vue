@@ -28,7 +28,7 @@ export default defineComponent({
 		else await storage.set('onboarding-done', true)
 	}]),
 	setup () {
-		useRouteMeta('Home')
+		useRouteMeta('Home', {})
 		return { isWeb }
 	}
 })

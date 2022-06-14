@@ -17,7 +17,7 @@ export default defineComponent({
 	components: { Justified, UserFlashCards },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Flashcards')
+		useRouteMeta('Flashcards', { back: '/account' })
 		const { user } = useAuth()
 		return { user }
 	}

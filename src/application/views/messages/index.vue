@@ -16,7 +16,7 @@ export default defineComponent({
 	components: { Justified, MessagesList },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Discussions')
+		useRouteMeta('Discussions', {})
 	}
 })
 </script>

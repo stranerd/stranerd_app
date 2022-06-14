@@ -14,7 +14,7 @@ export default defineComponent({
 	name: 'UsersLeaderboard',
 	components: { Justified, Leaderboard },
 	setup () {
-		useRouteMeta('LeaderBoard')
+		useRouteMeta('LeaderBoard', {})
 	}
 })
 </script>

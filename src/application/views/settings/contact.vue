@@ -42,7 +42,7 @@ export default defineComponent({
 	name: 'SettingsContact',
 	components: { Justified },
 	setup () {
-		useRouteMeta('Contact Us')
+		useRouteMeta('Contact Us', { back: '/settings' })
 		const { user } = useAuth()
 		const { factory, loading, error, createMessage } = useCreateMessage()
 		return {

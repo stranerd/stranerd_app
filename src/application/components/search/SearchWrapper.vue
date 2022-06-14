@@ -1,7 +1,7 @@
 <template>
 	<Justified>
-		<div class="h-full md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
-			<div class="bg-white rounded-xl px-4 pt-4 flex flex-col">
+		<div class="h-full w-full lg:w-8/12 mx-auto lg:mt-6">
+			<div class="rounded-xl px-4 pt-4 flex flex-col">
 				<Search />
 				<div class="nav-scroll mt-4">
 					<router-link :to="`/search?search=${searchTerm}`">All</router-link>

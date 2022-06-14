@@ -18,10 +18,12 @@ import DashboardLayout from '@app/layouts/Dashboard.vue'
 import { addOutline } from 'ionicons/icons'
 import ContinueTests from '@root/application/components/study/tests/ContinueTests.vue'
 import { useRouteMeta } from '@app/composable/core/states'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'StudyPreps',
 	components: { DashboardLayout, ContinueTests },
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Test preps')
 		return { addOutline }

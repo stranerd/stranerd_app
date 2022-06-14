@@ -17,7 +17,7 @@ export default defineComponent({
 	components: { Justified, UserDocuments },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Documents')
+		useRouteMeta('Documents', { back: '/account' })
 		const { user } = useAuth()
 		return { user }
 	}

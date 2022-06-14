@@ -95,7 +95,7 @@ export default defineComponent({
 	components: { Justified, Department, Institution },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Account')
+		useRouteMeta('Profile', {})
 		const { id, isAdmin, user } = useAuth()
 		return {
 			id, isAdmin, user, formatNumber,

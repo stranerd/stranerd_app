@@ -77,8 +77,11 @@ export const useListener = (startFn: () => Promise<() => void>) => {
 	return { start, close, reset, restart, isRunning }
 }
 
-export const useRouteMeta = (routeName: string | ComputedRef<string>) => {
-	type Meta = Record<string, any>
+type MetaKeys = 'routeName' | 'back'
+type Meta = Record<MetaKeys, any>
+type MetaObj = Partial<Omit<Meta, 'routeName'>>
+
+export const useRouteMeta = (routeName: string | ComputedRef<string>, metaObj: MetaObj = {}) => {
 	const name = typeof routeName === 'string' ? computed(() => routeName) : routeName
 
 	const route = useRoute()
@@ -88,7 +91,7 @@ export const useRouteMeta = (routeName: string | ComputedRef<string>) => {
 		})
 	}
 
-	setMeta({ routeName: name.value })
+	setMeta({ ...metaObj, routeName: name.value })
 	const meta = computed({
 		get: () => (route.meta ?? {}) as Meta,
 		set: setMeta
