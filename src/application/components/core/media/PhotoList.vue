@@ -4,14 +4,14 @@
 			<div class="under" @click="zoomed = false" />
 			<div class="inner">
 				<span id="close" @click="zoomed = false">
-					<IonIcon :icon="close" class="text-white text-[28px]" />
+					<IonIcon :icon="close" class="text-heading3" />
 				</span>
 				<img :src="photos[index].link" alt="" class="w-full">
 			</div>
 		</div>
 		<div class="scroller flex gap-2">
 			<img v-for="(photo, index) in photos" :key="photo.link" :src="photo.link" alt=""
-				class="rounded-lg border-[1px] border-faded_gray bg-light_gray h-24 w-24"
+				class="rounded-lg h-20 w-20"
 				@click="enterZoom(index)">
 		</div>
 	</div>
@@ -45,7 +45,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 	$max-width: 800px;
 	.zoomed {
-		background: #11111111;
 		position: fixed;
 		left: 0;
 		right: 0;
@@ -60,6 +59,8 @@ export default defineComponent({
 		}
 
 		.under {
+			background: $color-bodyBg;
+			opacity: 0.8;
 			width: 100%;
 			height: 100%;
 			position: absolute;
@@ -68,7 +69,6 @@ export default defineComponent({
 		}
 
 		.inner {
-			background: $color-white;
 			width: 100%;
 			margin: auto;
 			max-width: $max-width;
@@ -86,10 +86,12 @@ export default defineComponent({
 				right: 0;
 				top: 0;
 				z-index: 1;
-				background: $color-black;
+				background: $color-primaryBg;
+				color: $color-primaryText;
 				border-radius: 10rem;
-				border: 1px solid white;
 				padding: 0.5rem;
+				width: 2.5rem;
+				height: 2.5rem;
 			}
 		}
 	}

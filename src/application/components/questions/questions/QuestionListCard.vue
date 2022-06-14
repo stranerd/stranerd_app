@@ -11,7 +11,7 @@
 			</div>
 			<IonButton v-if="showAnswerButton"
 				class="btn-primary" style="--border-radius: 10rem;"
-				@click="openAnswerModal(question)">
+				@click.prevent="openAnswerModal(question, $router)">
 				Answer
 			</IonButton>
 		</div>

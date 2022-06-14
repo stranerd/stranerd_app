@@ -65,10 +65,10 @@ export const useAnswerList = (questionId: string) => {
 }
 
 let answeringQuestion = null as QuestionEntity | null
-export const showAddAnswer = ref(false)
-export const openAnswerModal = (question: QuestionEntity) => {
+export const getAnsweringQuestion = () => answeringQuestion
+export const openAnswerModal = async (question: QuestionEntity, router: Router) => {
 	answeringQuestion = question
-	showAddAnswer.value = true
+	await router.push(`/questions/${question.id}/answers/create`)
 }
 
 export const useCreateAnswer = () => {
@@ -79,7 +79,7 @@ export const useCreateAnswer = () => {
 	const { setMessage } = useSuccessHandler()
 
 	if (!answeringQuestion) router.push('/questions')
-	factory.value.questionId = answeringQuestion!.id
+	else factory.value.questionId = answeringQuestion!.id
 
 	const createAnswer = async () => {
 		await setError('')
@@ -90,7 +90,6 @@ export const useCreateAnswer = () => {
 				await setMessage('Answer submitted successfully.')
 				factory.value.reset()
 				await router.push(`/questions/${answer.questionId}`)
-				showAddAnswer.value = false
 			} catch (error) {
 				await setError(error)
 			}

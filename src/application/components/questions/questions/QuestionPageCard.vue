@@ -1,48 +1,38 @@
 <template>
-	<div class="flex flex-col md:gap-4">
-		<div class="bg-bodyBg !gap-4 card-padding flex flex-col border-bottom-line">
-			<div class="flex items-center gap-4 text-secondaryText text-sub justify-between">
-				<QuestionTag :tagId="question.tagId" class="font-bold" />
-				<div class="flex flex-grow items-center justify-end gap-4 text-heading2">
-					<Share
-						:text="question.strippedBody"
-						title="Share this question" />
-					<IonIcon :icon="flagOutline" class="cursor-pointer"
-						@click="openReportQuestionModal" />
-				</div>
+	<div class="!gap-4 card-padding flex flex-col border-bottom-line">
+		<div class="flex items-center gap-4 text-secondaryText text-sub justify-between">
+			<QuestionTag :tagId="question.tagId" class="font-bold" />
+			<div class="flex flex-grow items-center justify-end gap-4 text-heading2">
+				<Share :text="question.strippedBody" title="Share this question" />
+				<IonIcon :icon="flagOutline" @click="openReportQuestionModal" />
 			</div>
-
-			<DisplayHtml :html="question.body" />
-
-			<div class="flex items-center justify-between gap-4 text-secondaryText text-sub">
-				<div class="flex items-center gap-2">
-					<Avatar :id="question.user.id" :size="24" :src="question.user.bio.photo" />
-					<span class="font-semibold text-secondaryText flex gap-1 items-center">
-						<span>{{ question.user.bio.fullName }}</span>
-						<Verified :verified="question.isUserVerified" />
-					</span>
-				</div>
-				<div class="flex items-center gap-4">
-					<IonIcon v-if="showEditButton" :icon="createOutline" class="text-primaryText"
-						@click="openEditModal" />
-					<IonIcon v-if="showDeleteButton" :icon="trashBinOutline" class="text-danger"
-						@click="deleteQuestion" />
-					<span>{{ formatTime(question.createdAt) }}</span>
-				</div>
-			</div>
-
-			<PhotoList v-if="question.attachments.length" :photos="question.attachments" class="py-3" />
-
-			<IonButton v-if="showAnswerButton && !showAddAnswer"
-				class="btn-primary w-full" @click="openAnswerModal(question)">
-				Add your answer
-			</IonButton>
-			<IonButton v-if="showAnswerButton && showAddAnswer"
-				class="btn-primary w-full" @click="showAddAnswer = false">
-				Close answer form
-			</IonButton>
 		</div>
-		<CreateAnswer v-if="!question.isAnswered && showAddAnswer" :question="question" />
+
+		<DisplayHtml :html="question.body" />
+
+		<div class="flex items-center justify-between gap-4 text-secondaryText text-sub">
+			<div class="flex items-center gap-2">
+				<Avatar :id="question.user.id" :size="24" :src="question.user.bio.photo" />
+				<span class="font-semibold text-secondaryText flex gap-1 items-center">
+					<span>{{ question.user.bio.fullName }}</span>
+					<Verified :verified="question.isUserVerified" />
+				</span>
+			</div>
+			<div class="flex items-center gap-4">
+				<IonIcon v-if="showEditButton" :icon="createOutline" class="text-primaryText"
+					@click="openEditModal" />
+				<IonIcon v-if="showDeleteButton" :icon="trashBinOutline" class="text-danger"
+					@click="deleteQuestion" />
+				<span>{{ formatTime(question.createdAt) }}</span>
+			</div>
+		</div>
+
+		<PhotoList v-if="question.attachments.length" :photos="question.attachments" class="py-3" />
+
+		<IonButton v-if="showAnswerButton"
+			class="btn-primary w-full" @click="openAnswerModal(question, $router)">
+			Add your answer
+		</IonButton>
 	</div>
 </template>
 
@@ -50,11 +40,10 @@
 import { computed, defineComponent } from 'vue'
 import { createOutline, flagOutline, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
-import CreateAnswer from '@app/components/questions/answers/CreateAnswer.vue'
 import QuestionTag from '@app/components/questions/tags/Tag.vue'
 import { pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
-import { openAnswerModal, showAddAnswer } from '@app/composable/questions/answers'
+import { openAnswerModal } from '@app/composable/questions/answers'
 import { openQuestionEditModal, useDeleteQuestion } from '@app/composable/questions/questions'
 import { formatTime } from '@utils/dates'
 import { useRouter } from 'vue-router'
@@ -69,7 +58,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { CreateAnswer, QuestionTag },
+	components: { QuestionTag },
 	setup (props) {
 		const { id } = useAuth()
 		const router = useRouter()
@@ -94,10 +83,9 @@ export default defineComponent({
 		return {
 			shareSocial, flagOutline, pencil, trashBinOutline, createOutline,
 			formatTime, pluralize,
-			showAnswerButton, showAddAnswer,
+			showAnswerButton, openAnswerModal,
 			showEditButton, showDeleteButton,
 			loading, error, deleteQuestion,
-			openAnswerModal: () => openAnswerModal(props.question),
 			openReportQuestionModal: () => openCreateReportModal(ReportType.questions, props.question.id),
 			openEditModal: () => openQuestionEditModal(props.question, router)
 		}

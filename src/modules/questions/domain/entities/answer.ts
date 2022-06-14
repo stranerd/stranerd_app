@@ -4,7 +4,6 @@ import { extractTextFromHTML, trimToLength } from '@utils/commons'
 
 export class AnswerEntity extends BaseEntity {
 	public readonly id: string
-	public readonly title: string
 	public readonly body: string
 	public readonly best: boolean
 	public readonly questionId: string
@@ -17,13 +16,12 @@ export class AnswerEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, title, body, questionId, tagId,
+		             id, body, questionId, tagId,
 		             createdAt, user, attachments, comments,
 		             best, votes, updatedAt
 	             }: AnswerConstructorArgs) {
 		super()
 		this.id = id
-		this.title = title
 		this.body = body
 		this.questionId = questionId
 		this.tagId = tagId
@@ -36,16 +34,8 @@ export class AnswerEntity extends BaseEntity {
 		this.updatedAt = updatedAt
 	}
 
-	get trimmedTitle () {
-		return trimToLength(this.strippedTitle, 200)
-	}
-
 	get trimmedBody () {
 		return trimToLength(this.strippedBody, 200)
-	}
-
-	get strippedTitle () {
-		return extractTextFromHTML(this.title)
 	}
 
 	get strippedBody () {
@@ -79,7 +69,6 @@ export class AnswerEntity extends BaseEntity {
 
 type AnswerConstructorArgs = {
 	id: string
-	title: string
 	body: string
 	questionId: string
 	tagId: string

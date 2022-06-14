@@ -4,7 +4,7 @@ import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { PAGINATION_LIMIT } from '@utils/constants'
 import { AnswerEntity } from '../entities/answer'
 
-const searchFields = ['title', 'body']
+const searchFields = ['body']
 
 export class AnswersUseCase {
 	private repository: IAnswerRepository

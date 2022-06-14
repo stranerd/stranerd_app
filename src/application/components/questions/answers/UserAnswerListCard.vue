@@ -1,7 +1,7 @@
 <template>
 	<router-link :id="answer.id" :to="`/questions/${answer.questionId}#${answer.id}`"
 		class="card-padding flex flex-col">
-		<span>{{ answer.trimmedTitle }}</span>
+		<span>{{ answer.trimmedBody }}</span>
 		<div class="flex items-center justify-between text-secondaryText text-sub gap-2">
 			<QuestionTag :tagId="answer.tagId" />
 			<IonIcon :icon="ellipse" class="dot" />

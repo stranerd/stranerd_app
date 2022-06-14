@@ -13,7 +13,6 @@ export interface AnswerFromModel extends AnswerToModel {
 }
 
 export interface AnswerToModel {
-	title: string
 	body: string
 	questionId: string
 	attachments: Media[]

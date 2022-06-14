@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col">
-		<h2 v-if="answers.length" class="text-heading font-bold px-4 flex items-center">
+		<h2 v-if="answers.length" class="text-heading font-bold p-4 flex items-center">
 			<span>Answers</span>
 			<span
 				class="text-primaryText bg-primaryBg text-sub rounded-full ml-auto h-5 w-5 flex items-center justify-center">

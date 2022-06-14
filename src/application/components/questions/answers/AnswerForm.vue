@@ -1,14 +1,13 @@
 <template>
 	<form class="flex flex-col gap-4" @submit.prevent="submit">
-		<IonInput
-			v-model="factory.tagId"
-			class="h-9 flex-none"
-			placeholder="Associated subject/course?"
-		/>
+		<div class="flex flex-col gap-4">
+			<QuestionTag :tagId="question.tagId" class="text-secondaryText font-bold" />
+			<DisplayHtml :html="question.body" />
+		</div>
 
 		<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
 			class="flex-grow"
-			placeholder="Write your question here." />
+			placeholder="Answer here" />
 
 		<div v-if="factory.attachments.length > 0">
 			<div class="flex flex-row flex-wrap gap-2 text-sub">
@@ -49,15 +48,16 @@
 import { defineComponent, PropType } from 'vue'
 import { closeOutline, imageOutline, paperPlaneOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
-import { QuestionFactory } from '@modules/questions'
+import { AnswerFactory, QuestionEntity } from '@modules/questions'
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
+import QuestionTag from '@app/components/questions/tags/Tag.vue'
 
 export default defineComponent({
-	name: 'QuestionForm',
-	components: { BaseEditor },
+	name: 'AnswerForm',
+	components: { BaseEditor, QuestionTag },
 	props: {
 		factory: {
-			type: Object as PropType<QuestionFactory>,
+			type: Object as PropType<AnswerFactory>,
 			required: true
 		},
 		submit: {
@@ -70,6 +70,10 @@ export default defineComponent({
 		},
 		error: {
 			type: String,
+			required: true
+		},
+		question: {
+			type: QuestionEntity,
 			required: true
 		}
 	},

@@ -1,11 +1,12 @@
 <template>
 	<DashboardWithToolbarLayout>
-		<div class="flex flex-col gap-4">
-			<template v-if="question">
+		<div class="flex flex-col">
+			<BlockLoading v-if="loading" />
+			<template v-else-if="question">
 				<QuestionPageCard :question="question" class="border-bottom-line" />
 				<AnswersList :question="question" />
 			</template>
-			<p v-else>Question Not Found</p>
+			<EmptyState v-else info="Question Not Found" />
 		</div>
 	</DashboardWithToolbarLayout>
 </template>
