@@ -15,16 +15,16 @@ export class LikeRepository implements ILikeRepository {
 		this.transformer = transformer
 	}
 
-	async get (entity: InteractionEntity, query: QueryParams) {
-		const models = await this.dataSource.get(entity, query)
+	async get (query: QueryParams) {
+		const models = await this.dataSource.get(query)
 		return {
 			...models,
 			results: models.results.map(this.transformer.fromJSON)
 		}
 	}
 
-	async listenToOne (entity: InteractionEntity, id: string, listener: Listeners<LikeEntity>) {
-		return this.dataSource.listenToOne(entity, id, {
+	async listenToOne (id: string, listener: Listeners<LikeEntity>) {
+		return this.dataSource.listenToOne(id, {
 			created: async (model) => {
 				await listener.created(this.transformer.fromJSON(model))
 			},
@@ -37,8 +37,8 @@ export class LikeRepository implements ILikeRepository {
 		})
 	}
 
-	async listenToMany (entity: InteractionEntity,  query: QueryParams, listener: Listeners<LikeEntity>, matches: (entity: LikeEntity) => boolean) {
-		return this.dataSource.listenToMany(entity, query, {
+	async listenToMany (query: QueryParams, listener: Listeners<LikeEntity>, matches: (entity: LikeEntity) => boolean) {
+		return this.dataSource.listenToMany(query, {
 			created: async (model) => {
 				const entity = this.transformer.fromJSON(model)
 				if (matches(entity)) await listener.created(entity)
@@ -58,8 +58,8 @@ export class LikeRepository implements ILikeRepository {
 		return this.transformer.fromJSON(await this.dataSource.create(data))
 	}
 
-	async find (entity: InteractionEntity,  id: string) {
-		const model = await this.dataSource.find(entity, id)
+	async find (id: string) {
+		const model = await this.dataSource.find(id)
 		return model ? this.transformer.fromJSON(model) : null
 	}
 }

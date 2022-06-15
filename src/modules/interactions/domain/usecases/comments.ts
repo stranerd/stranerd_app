@@ -25,29 +25,31 @@ export class CommentsUseCase {
 		return await this.repository.update(id, { ...data, entity })
 	}
 
-	async find (entity: InteractionEntity, id: string) {
-		return await this.repository.find(entity, id)
+	async find (id: string) {
+		return await this.repository.find(id)
 	}
 
 	async get (entity: InteractionEntity) {
 		const conditions: QueryParams = {
+			where: [{ field: 'entity.id', value: entity.id }, { field: 'entity.type', value: entity.type }],
 			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
 
-		return await this.repository.get(entity, conditions)
+		return await this.repository.get(conditions)
 	}
 
-	async listenToOne (entity: InteractionEntity, id: string, listener: Listeners<CommentEntity>) {
-		return await this.repository.listenToOne(entity, id, listener)
+	async listenToOne (id: string, listener: Listeners<CommentEntity>) {
+		return await this.repository.listenToOne(id, listener)
 	}
 
 	async listen (entity: InteractionEntity, listener: Listeners<CommentEntity>) {
 		const conditions: QueryParams = {
+			where: [{ field: 'entity.id', value: entity.id }, { field: 'entity.type', value: entity.type }],
 			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
 
-		return await this.repository.listenToMany(entity, conditions, listener, (entity) => !!entity)
+		return await this.repository.listenToMany(conditions, listener, (e) => e.entity.id === entity.id && e.entity.type === entity.type)
 	}
 }

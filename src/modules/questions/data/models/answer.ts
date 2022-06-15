@@ -1,5 +1,6 @@
 import { EmbeddedUser } from '@modules/users'
 import { Media } from '@modules/core'
+import { AnswerMeta } from '../../domain/types'
 
 export interface AnswerFromModel extends AnswerToModel {
 	id: string
@@ -8,8 +9,7 @@ export interface AnswerFromModel extends AnswerToModel {
 	user: EmbeddedUser
 	best: boolean
 	tagId: string
-	votes: { userId: string, vote: 1 | -1 }[]
-	comments: number
+	meta: AnswerMeta
 }
 
 export interface AnswerToModel {

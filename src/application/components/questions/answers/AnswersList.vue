@@ -7,7 +7,8 @@
 				<span>{{ formatNumber(question.answers.length) }}</span>
 			</span>
 		</h2>
-		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question" />
+		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :like="likes[answer.id]"
+			:question="question" />
 		<EmptyState v-if="answers.length === 0" info="No answers yet" />
 	</div>
 </template>
@@ -29,8 +30,8 @@ export default defineComponent({
 	},
 	components: { AnswersListCard },
 	setup (props) {
-		const { answers, error, loading } = useAnswerList(props.question.id)
-		return { answers, error, loading, formatNumber }
+		const { answers, likes, error, loading } = useAnswerList(props.question.id)
+		return { answers, likes, error, loading, formatNumber }
 	}
 })
 </script>

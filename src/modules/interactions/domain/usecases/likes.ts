@@ -1,7 +1,7 @@
 import { ILikeRepository } from '../irepositories/ilike'
-import { Listeners, QueryParams } from '@modules/core'
+import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { LikeEntity } from '../entities/like'
-import { InteractionEntity } from '../types'
+import { InteractionEntities, InteractionEntity } from '../types'
 
 export class LikesUseCase {
 	private repository: ILikeRepository
@@ -14,29 +14,24 @@ export class LikesUseCase {
 		return await this.repository.add({ entity, value })
 	}
 
-	async find (entity: InteractionEntity, id: string) {
-		return await this.repository.find(entity, id)
+	async find (id: string) {
+		return await this.repository.find(id)
 	}
 
-	async get (entity: InteractionEntity) {
+	async getInList (userId: string, entityIds: string[], type: InteractionEntities) {
 		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt', desc: true }],
+			where: [
+				{ field: 'user.id', value: userId },
+				{ field: 'entity.type', value: type },
+				{ field: 'entity.id', value: entityIds, condition: Conditions.in }
+			],
 			all: true
 		}
 
-		return await this.repository.get(entity, conditions)
+		return await this.repository.get(conditions)
 	}
 
-	async listenToOne (entity: InteractionEntity, id: string, listener: Listeners<LikeEntity>) {
-		return await this.repository.listenToOne(entity, id, listener)
-	}
-
-	async listen (entity: InteractionEntity, listener: Listeners<LikeEntity>) {
-		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt', desc: true }],
-			all: true
-		}
-
-		return await this.repository.listenToMany(entity, conditions, listener, (entity) => !!entity)
+	async listenToOne (id: string, listener: Listeners<LikeEntity>) {
+		return await this.repository.listenToOne(id, listener)
 	}
 }

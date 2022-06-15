@@ -5,14 +5,24 @@ import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { addToArray } from '@utils/commons'
+import { InteractionEntities, LikeEntity, LikesUseCases } from '@modules/interactions'
 
 const global = {} as Record<string, {
 	answers: Ref<AnswerEntity[]>
 	fetched: Ref<boolean>
+	likes: Ref<Record<string, LikeEntity>>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
+const getLikesOfAnswers = async (userId: string, questionId: string, answerIds: string[]) => {
+	const { results: likes } = await LikesUseCases.getInList(userId, answerIds, InteractionEntities.answers)
+	likes.forEach((like) => {
+		global[questionId].likes.value[like.entity.id] = like
+	})
+}
+
 export const useAnswerList = (questionId: string) => {
+	const { id } = useAuth()
 	if (global[questionId] === undefined) {
 		const listener = useListener(async () => {
 			return await AnswersUseCases.listenToQuestionAnswers(questionId, {
@@ -29,6 +39,7 @@ export const useAnswerList = (questionId: string) => {
 		})
 		global[questionId] = {
 			answers: ref([]),
+			likes: ref({}),
 			fetched: ref(false),
 			listener,
 			...useErrorHandler(),
@@ -42,6 +53,7 @@ export const useAnswerList = (questionId: string) => {
 			await global[questionId].setLoading(true)
 			const answers = await AnswersUseCases.getQuestionAnswers(questionId)
 			answers.results.forEach((a) => addToArray(global[questionId].answers.value, a, (e) => e.id, (e) => e.createdAt, true))
+			await getLikesOfAnswers(id.value, questionId, answers.results.map((a) => a.id))
 			global[questionId].fetched.value = true
 		} catch (error) {
 			await global[questionId].setError(error)
@@ -60,7 +72,8 @@ export const useAnswerList = (questionId: string) => {
 	return {
 		error: global[questionId].error,
 		loading: global[questionId].loading,
-		answers: global[questionId].answers
+		answers: global[questionId].answers,
+		likes: global[questionId].likes
 	}
 }
 
@@ -108,16 +121,16 @@ export const useAnswer = (answer: AnswerEntity) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 
-	const voteAnswer = async (vote: boolean) => {
+	const likeAnswer = async (value: boolean) => {
 		const userId = useAuth().id.value
 		if (!userId) return
-		const voted = answer.votes.find((v) => v.userId === userId)
-		if (vote && voted?.vote === 1) return
-		if (!vote && voted?.vote === -1) return
+		const liked = global[answer.questionId].likes.value[answer.id]
+		if (liked && liked.value === value) return
 		await setError('')
 		try {
 			await setLoading(true)
-			await AnswersUseCases.vote(answer.id, vote)
+			const like = await LikesUseCases.add({ id: answer.id, type: InteractionEntities.answers }, value)
+			global[answer.questionId].likes.value[like.entity.id] = like
 		} catch (error) {
 			await setError(error)
 		}
@@ -143,7 +156,7 @@ export const useAnswer = (answer: AnswerEntity) => {
 	}
 
 	return {
-		loading, error, markBestAnswer, voteAnswer
+		loading, error, markBestAnswer, likeAnswer
 	}
 }
 

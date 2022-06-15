@@ -7,8 +7,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useAnswerCommentList } from '@app/composable/questions/answer-comments'
 import CommentsListCard from '@app/components/questions/comments/CommentsListCard.vue'
+import { useCommentsList } from '@app/composable/interactions/comments'
+import { InteractionEntities } from '@modules/interactions'
 
 export default defineComponent({
 	name: 'AnswerCommentsList',
@@ -20,7 +21,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { comments, loading, error } = useAnswerCommentList(props.answerId)
+		const { comments, loading, error } = useCommentsList(props.answerId, InteractionEntities.answers)
 		return { comments, loading, error }
 	}
 })

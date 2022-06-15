@@ -25,10 +25,6 @@ export class AnswersUseCase {
 		return await this.repository.update(id, await factory.toModel())
 	}
 
-	async vote (id: string, vote: boolean) {
-		return this.repository.vote(id, vote)
-	}
-
 	async getQuestionAnswers (questionId: string) {
 		return await this.repository.get({
 			where: [{ field: 'questionId', value: questionId }],

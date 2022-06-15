@@ -1,6 +1,7 @@
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractTextFromHTML, trimToLength } from '@utils/commons'
+import { AnswerMeta } from '../types'
 
 export class AnswerEntity extends BaseEntity {
 	public readonly id: string
@@ -10,15 +11,14 @@ export class AnswerEntity extends BaseEntity {
 	public readonly tagId: string
 	public readonly attachments: Media[]
 	public readonly user: EmbeddedUser
-	public readonly votes: { userId: string, vote: 1 | -1 }[]
-	public readonly comments: number
+	public readonly meta: AnswerMeta
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
 		             id, body, questionId, tagId,
-		             createdAt, user, attachments, comments,
-		             best, votes, updatedAt
+		             createdAt, user, attachments, meta,
+		             best, updatedAt
 	             }: AnswerConstructorArgs) {
 		super()
 		this.id = id
@@ -26,10 +26,9 @@ export class AnswerEntity extends BaseEntity {
 		this.questionId = questionId
 		this.tagId = tagId
 		this.user = generateEmbeddedUser(user)
-		this.attachments = attachments.map(parseMedia) ?? []
-		this.best = best ?? false
-		this.votes = votes
-		this.comments = comments
+		this.attachments = attachments.map(parseMedia)
+		this.best = best
+		this.meta = meta
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -54,14 +53,6 @@ export class AnswerEntity extends BaseEntity {
 		return !this.isModified
 	}
 
-	get upVotes () {
-		return this.votes.filter((v) => v.vote === 1).length
-	}
-
-	get downVotes () {
-		return this.votes.filter((v) => v.vote === -1).length
-	}
-
 	get isUserVerified () {
 		return this.user.roles.isVerified
 	}
@@ -77,6 +68,5 @@ type AnswerConstructorArgs = {
 	updatedAt: number
 	user: EmbeddedUser
 	best: boolean
-	votes: { userId: string, vote: 1 | -1 }[]
-	comments: number
+	meta: AnswerMeta
 }

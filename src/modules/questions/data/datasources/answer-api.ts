@@ -43,8 +43,4 @@ export class AnswerApiDataSource implements AnswerBaseDataSource {
 	async delete (id: string) {
 		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
-
-	async vote (id: string, vote: boolean) {
-		await this.stranerdClient.post<any, Record<string, any>>(`/${id}/vote`, { vote })
-	}
 }

@@ -19,21 +19,20 @@
 		<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" class="pl-7" />
 
 		<div class="flex items-center gap-6 text-secondaryText text-sub pl-7">
-			<div :class="{ 'text-primaryBg': answer.votes.find((v) => v.vote === 1 && v.userId === id) }"
-				class="flex items-center gap-1">
-				<IonIcon :icon="thumbsUpOutline" class="text-heading2" @click="() => voteAnswer(true)" />
-				<span>{{ formatNumber(answer.upVotes) }}</span>
-			</div>
-			<div
-				:class="{ 'text-primaryBg': answer.votes.find((v) => v.vote === -1 && v.userId === id) }"
-				class="flex items-center gap-1">
-				<IonIcon :icon="thumbsDownOutline" class="text-heading2" @click="() => voteAnswer(false)" />
-				<span>{{ formatNumber(answer.downVotes) }}</span>
+			<div class="flex items-center gap-1">
+				<IonIcon :icon="like && like.value ? thumbsUp : thumbsUpOutline" class="text-heading2"
+					@click="() => likeAnswer(true)" />
+				<span>{{ formatNumber(answer.meta.likes) }}</span>
 			</div>
 			<div class="flex items-center gap-1">
-				<IonIcon :icon="chatbubbleOutline" class="text-heading2" />
-				<span>{{ formatNumber(answer.comments) }}</span>
+				<IonIcon :icon="like && !like.value ? thumbsDown : thumbsDownOutline" class="text-heading2"
+					@click="() => likeAnswer(false)" />
+				<span>{{ formatNumber(answer.meta.dislikes) }}</span>
 			</div>
+			<router-link :to="`/questions/${question.id}/answers/${answer.id}`" class="flex items-center gap-1">
+				<IonIcon :icon="chatbubbleOutline" class="text-heading2" />
+				<span>{{ formatNumber(answer.meta.comments) }}</span>
+			</router-link>
 			<div class="flex-grow" />
 			<span v-if="showMarkBest" class="flex items-center gap-1" @click.prevent="markBestAnswer(question)">
 				<span>Mark as best</span>
@@ -45,37 +44,44 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
 import {
 	chatbubbleOutline,
 	checkmarkCircleOutline,
 	ellipse,
 	flagOutline,
+	thumbsDown,
 	thumbsDownOutline,
+	thumbsUp,
 	thumbsUpOutline
 } from 'ionicons/icons'
 import PhotoList from '@app/components/core/media/PhotoList.vue'
 import { useAnswer } from '@app/composable/questions/answers'
 import { useAuth } from '@app/composable/auth/auth'
-import AnswerCommentsList from '@app/components/questions/comments/AnswerCommentsList.vue'
 import DisplayHtml from '@app/components/core/text/DisplayHtml.vue'
 import { openCreateReportModal } from '@app/composable/reports/reports'
 import { formatNumber } from '@utils/commons'
 import { ReportType } from '@modules/reports'
 import { formatTime } from '@utils/dates'
+import { LikeEntity } from '@modules/interactions'
 
 export default defineComponent({
 	name: 'AnswerListCard',
-	components: { DisplayHtml, PhotoList, AnswerCommentsList },
+	components: { DisplayHtml, PhotoList },
 	props: {
 		answer: {
-			type: AnswerEntity as PropType<AnswerEntity>,
+			type: AnswerEntity,
 			required: true
 		},
+		like: {
+			type: LikeEntity,
+			required: false,
+			default: null
+		},
 		question: {
-			required: true,
-			type: Object as PropType<QuestionEntity>
+			type: QuestionEntity,
+			required: true
 		}
 	},
 	setup (props) {
@@ -95,13 +101,27 @@ export default defineComponent({
 			set: () => {
 			}
 		})
-		const { error, loading, markBestAnswer, voteAnswer } = useAnswer(props.answer)
+		const { error, loading, markBestAnswer, likeAnswer } = useAnswer(props.answer)
 
 		return {
-			id, formatNumber, formatTime,
-			loading, error, markBestAnswer, voteAnswer,
-			chatbubbleOutline, ellipse, flagOutline, thumbsDownOutline, thumbsUpOutline, checkmarkCircleOutline,
-			showEditButton, showDeleteButton, showMarkBest,
+			id,
+			formatNumber,
+			formatTime,
+			loading,
+			error,
+			markBestAnswer,
+			likeAnswer,
+			chatbubbleOutline,
+			ellipse,
+			flagOutline,
+			thumbsDown,
+			thumbsDownOutline,
+			thumbsUp,
+			thumbsUpOutline,
+			checkmarkCircleOutline,
+			showEditButton,
+			showDeleteButton,
+			showMarkBest,
 			openReportAnswerModal: () => openCreateReportModal(ReportType.answers, props.answer.id)
 		}
 	}

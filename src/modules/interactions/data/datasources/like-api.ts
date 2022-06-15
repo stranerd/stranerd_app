@@ -2,7 +2,6 @@ import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from
 import { apiBase } from '@utils/environment'
 import { LikeFromModel, LikeToModel } from '../models/like'
 import { LikeBaseDataSource } from './like-base'
-import { InteractionEntity } from '../../domain/types'
 
 export class LikeApiDataSource implements LikeBaseDataSource {
 	private stranerdClient: HttpClient
@@ -15,24 +14,24 @@ export class LikeApiDataSource implements LikeBaseDataSource {
 		return await this.stranerdClient.post<LikeToModel, LikeFromModel>('/', data)
 	}
 
-	async find (entity: InteractionEntity, id: string) {
-		return await this.stranerdClient.get<any, LikeFromModel>(`/${entity.type}/${entity.id}/${id}`, {})
+	async find (id: string) {
+		return await this.stranerdClient.get<any, LikeFromModel>(`/${id}`, {})
 	}
 
-	async get (entity: InteractionEntity, query: QueryParams) {
-		return await this.stranerdClient.get<QueryParams, QueryResults<LikeFromModel>>(`/${entity.type}/${entity.id}/`, query)
+	async get (query: QueryParams) {
+		return await this.stranerdClient.get<QueryParams, QueryResults<LikeFromModel>>('/', query)
 	}
 
-	async listenToOne (entity: InteractionEntity, id: string, listeners: Listeners<LikeFromModel>) {
-		const listener = listenOnSocket(`interactions/likes/${entity.type}/${entity.id}/${id}`, listeners)
-		const model = await this.find(entity, id)
+	async listenToOne (id: string, listeners: Listeners<LikeFromModel>) {
+		const listener = listenOnSocket(`interactions/likes/${id}`, listeners)
+		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
-	async listenToMany (entity: InteractionEntity, query: QueryParams, listeners: Listeners<LikeFromModel>) {
-		const listener = listenOnSocket(`interactions/likes/${entity.type}/${entity.id}`, listeners)
-		const models = await this.get(entity, query)
+	async listenToMany (query: QueryParams, listeners: Listeners<LikeFromModel>) {
+		const listener = listenOnSocket('interactions/likes', listeners)
+		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
 	}

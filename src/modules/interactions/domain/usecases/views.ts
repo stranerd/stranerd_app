@@ -1,5 +1,5 @@
 import { IViewRepository } from '../irepositories/iview'
-import { Listeners, QueryParams } from '@modules/core'
+import { Listeners } from '@modules/core'
 import { ViewEntity } from '../entities/view'
 import { InteractionEntity } from '../types'
 
@@ -14,29 +14,11 @@ export class ViewsUseCase {
 		return await this.repository.add({ entity })
 	}
 
-	async find (entity: InteractionEntity, id: string) {
-		return await this.repository.find(entity, id)
+	async find (id: string) {
+		return await this.repository.find(id)
 	}
 
-	async get (entity: InteractionEntity) {
-		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt', desc: true }],
-			all: true
-		}
-
-		return await this.repository.get(entity, conditions)
-	}
-
-	async listenToOne (entity: InteractionEntity, id: string, listener: Listeners<ViewEntity>) {
-		return await this.repository.listenToOne(entity, id, listener)
-	}
-
-	async listen (entity: InteractionEntity, listener: Listeners<ViewEntity>) {
-		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt', desc: true }],
-			all: true
-		}
-
-		return await this.repository.listenToMany(entity, conditions, listener, (entity) => !!entity)
+	async listenToOne (id: string, listener: Listeners<ViewEntity>) {
+		return await this.repository.listenToOne(id, listener)
 	}
 }

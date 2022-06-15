@@ -2,7 +2,6 @@ import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from
 import { apiBase } from '@utils/environment'
 import { CommentFromModel, CommentToModel } from '../models/comment'
 import { CommentBaseDataSource } from './comment-base'
-import { InteractionEntity } from '../../domain/types'
 
 export class CommentApiDataSource implements CommentBaseDataSource {
 	private stranerdClient: HttpClient
@@ -15,24 +14,24 @@ export class CommentApiDataSource implements CommentBaseDataSource {
 		return await this.stranerdClient.post<CommentToModel, CommentFromModel>('/', data)
 	}
 
-	async find (entity: InteractionEntity, id: string) {
-		return await this.stranerdClient.get<any, CommentFromModel>(`/${entity.type}/${entity.id}/${id}`, {})
+	async find (id: string) {
+		return await this.stranerdClient.get<any, CommentFromModel>(`/${id}`, {})
 	}
 
-	async get (entity: InteractionEntity, query: QueryParams) {
-		return await this.stranerdClient.get<QueryParams, QueryResults<CommentFromModel>>(`/${entity.type}/${entity.id}/`, query)
+	async get (query: QueryParams) {
+		return await this.stranerdClient.get<QueryParams, QueryResults<CommentFromModel>>('/', query)
 	}
 
-	async listenToOne (entity: InteractionEntity, id: string, listeners: Listeners<CommentFromModel>) {
-		const listener = listenOnSocket(`interactions/comments/${entity.type}/${entity.id}/${id}`, listeners)
-		const model = await this.find(entity, id)
+	async listenToOne (id: string, listeners: Listeners<CommentFromModel>) {
+		const listener = listenOnSocket(`interactions/comments/${id}`, listeners)
+		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
-	async listenToMany (entity: InteractionEntity, query: QueryParams, listeners: Listeners<CommentFromModel>) {
-		const listener = listenOnSocket(`interactions/comments/${entity.type}/${entity.id}`, listeners)
-		const models = await this.get(entity, query)
+	async listenToMany (query: QueryParams, listeners: Listeners<CommentFromModel>) {
+		const listener = listenOnSocket('interactions/comments', listeners)
+		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener
 	}
