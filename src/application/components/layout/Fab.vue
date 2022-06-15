@@ -1,6 +1,6 @@
 <template>
-	<IonFab slot="fixed" horizontal="end" vertical="bottom">
-		<IonFabButton color="primary">
+	<IonFab slot="fixed" class="bottom-[4rem] right-[1rem]" horizontal="end" vertical="bottom">
+		<IonFabButton color="primary" @click="openModal">
 			<IonIcon :icon="addOutline" />
 		</IonFabButton>
 	</IonFab>
@@ -9,11 +9,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { addOutline } from 'ionicons/icons'
+import { useUserModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'Fab',
 	setup () {
-		return { addOutline }
+		const openModal = () => useUserModal().openFabMenu()
+		return { addOutline, openModal }
 	}
 })
 </script>

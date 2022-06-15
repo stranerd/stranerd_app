@@ -14,9 +14,8 @@
 					<div class="flex flex-row items-center py-1 gap-8 justify-between">
 						<IonIcon :icon="addCircleOutline" class="text-heading3"
 							@click="openCreateDashboardMenu" />
-						<router-link class="flex items-center justify-center"
-							to="/notifications">
-							<NotificationIcon :key="user?.id" class="text-heading3" />
+						<router-link to="/notifications">
+							<NotificationIcon :key="user?.id" />
 						</router-link>
 						<div v-if="isLoggedIn"
 							class="font-bold flex items-center justify-center gap-2 cursor-pointer"

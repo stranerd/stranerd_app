@@ -50,9 +50,6 @@ module.exports = {
 				purple: '#C864DC',
 				orange: '#FFA84B',
 				green: '#00D246'
-			},
-			fontFamily: {
-				rale: ['DM Sans', 'sans-serif']
 			}
 		}
 	},
