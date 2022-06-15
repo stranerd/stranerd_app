@@ -7,7 +7,7 @@
 		</div>
 		<div class="flex flex-col">
 			<EmptyState v-if="!loading && !error && schemes.length === 0" info="No scheme of work" />
-			<div v-for="{ key: course, values: schemes } in schemes" :key="course"
+			<div v-for="{ key: course, values } in schemes" :key="course"
 				class="flex flex-col border-bottom-line p-4 gap-4">
 				<div class="py-2 flex justify-between items-center cursor-pointer"
 					@click="show[course] = !show[course]">
@@ -15,7 +15,7 @@
 					<IonIcon :icon="show[course] ? chevronUpOutline : chevronDownOutline" class="text-heading2" />
 				</div>
 				<template v-if="show[course]">
-					<SchemesListCard v-for="scheme in schemes" :key="scheme.hash" :classInst="classInst"
+					<SchemesListCard v-for="scheme in values" :key="scheme.hash" :classInst="classInst"
 						:scheme="scheme" />
 				</template>
 			</div>

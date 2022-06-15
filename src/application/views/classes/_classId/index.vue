@@ -16,14 +16,14 @@
 					<IonText class="text-secondaryText">{{ classInst.description }}</IonText>
 				</div>
 				<div v-if="classInst.admins.includes(id)" class="flex flex-col card-padding text-secondaryText">
-					<component :is="click ? 'a' : 'router-link'" v-for="{ name, icon, path, click } in [
+					<a v-for="{ name, icon, click } in [
 							{ name: 'Edit Class Info', icon: createOutline, click: () => openClassEditModal(classInst, $router) },
 							{ name: 'Courses List', icon: listOutline, click: () => openClassEditModal(classInst, $router, true) }
-						]" :key="name" :to="`/classes/${classInst.id}/${path}`" class="flex gap-4 items-center py-2"
-						@click="() => click ? click() : null">
+						]" :key="name" class="flex gap-4 items-center py-2"
+						@click="click">
 						<IonIcon :icon="icon" class="text-heading2" />
 						<IonText>{{ name }}</IonText>
-					</component>
+					</a>
 				</div>
 			</div>
 		</template>

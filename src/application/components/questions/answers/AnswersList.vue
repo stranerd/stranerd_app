@@ -2,9 +2,9 @@
 	<div class="flex flex-col">
 		<h2 v-if="answers.length" class="text-heading font-bold p-4 flex items-center">
 			<span>Answers</span>
-			<span
-				class="text-primaryText bg-primaryBg text-sub rounded-full ml-auto h-5 w-5 flex items-center justify-center">
-				{{ question.answers.length }}
+			<span :style="`width: ${question.answers.length.toString().length + 2}ch;`"
+				class="text-primaryText bg-primaryBg text-sub rounded-full ml-auto aspect-square flex items-center justify-center">
+				<span>{{ formatNumber(question.answers.length) }}</span>
 			</span>
 		</h2>
 		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question" />
@@ -13,12 +13,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { openAnswerModal, useAnswerList } from '@app/composable/questions/answers'
+import { defineComponent } from 'vue'
+import { useAnswerList } from '@app/composable/questions/answers'
 import { QuestionEntity } from '@modules/questions'
 import AnswersListCard from '@app/components/questions/answers/AnswersListCard.vue'
-import EmptyState from '../../core/EmptyState.vue'
-import { useAuth } from '@app/composable/auth/auth'
+import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'AnswersList',
@@ -28,21 +27,10 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { AnswersListCard, EmptyState },
+	components: { AnswersListCard },
 	setup (props) {
-		const { id } = useAuth()
 		const { answers, error, loading } = useAnswerList(props.question.id)
-
-		const showAnswerButton = computed({
-			get: () => props.question.user.id !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
-			set: () => {
-			}
-		})
-
-		return {
-			openAnswerModal: () => openAnswerModal(props.question),
-			answers, error, loading, showAnswerButton
-		}
+		return { answers, error, loading, formatNumber }
 	}
 })
 </script>

@@ -44,14 +44,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { useProfileUpdate } from '@app/composable/auth/profile'
 
 export default defineComponent({
 	name: 'ProfileForm',
 	props: {
 		next: {
-			type: Function,
+			type: Function as PropType<() => any>,
 			required: true
 		}
 	},

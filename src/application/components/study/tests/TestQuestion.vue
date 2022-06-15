@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from 'vue'
+import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
 import {
 	checkmarkCircleOutline,
 	chevronDownOutline,
@@ -103,8 +103,8 @@ export default defineComponent({
 			required: true
 		},
 		answer: {
-			required: true,
-			type: Function
+			type: Function as PropType<(id: string, idx: number) => Promise<void>>,
+			required: true
 		}
 	},
 	setup (props) {

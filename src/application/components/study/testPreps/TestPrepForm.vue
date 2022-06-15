@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 import { TestPrepFactory } from '@modules/study'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
@@ -80,7 +80,7 @@ export default defineComponent({
 			required: true
 		},
 		submit: {
-			type: Function,
+			type: Function as PropType<() => Promise<void>>,
 			required: true
 		},
 		loading: {

@@ -154,7 +154,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, watch } from 'vue'
+import { computed, defineComponent, onMounted, PropType, ref, watch } from 'vue'
 import { useUserSchoolUpdate } from '@app/composable/auth/profile'
 import { UserSchoolType } from '@modules/users'
 import { useInstitutionList } from '@app/composable/school/institutions'
@@ -168,11 +168,11 @@ export default defineComponent({
 	components: { Institution },
 	props: {
 		next: {
-			type: Function,
+			type: Function as PropType<() => any>,
 			required: true
 		},
 		back: {
-			type: Function,
+			type: Function as PropType<() => any>,
 			required: true
 		}
 	},

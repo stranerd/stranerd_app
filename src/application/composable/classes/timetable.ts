@@ -100,7 +100,7 @@ export const useCreateEvent = () => {
 		} else factory.value.validateAll()
 	}
 
-	return { factory, error, loading, createEvent, eventClass }
+	return { factory, error, loading, createEvent, eventClass: eventClass! }
 }
 
 let editingEvent = null as { classInst: ClassEntity, event: EventEntity } | null

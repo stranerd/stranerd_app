@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { AnnouncementFactory } from '@modules/classes'
 
 export default defineComponent({
@@ -24,7 +24,7 @@ export default defineComponent({
 			required: true
 		},
 		submit: {
-			type: Function,
+			type: Function as PropType<() => Promise<void>>,
 			required: true
 		},
 		loading: {

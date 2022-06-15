@@ -97,7 +97,7 @@ export const useCreateScheme = () => {
 		} else factory.value.validateAll()
 	}
 
-	return { factory, error, loading, createScheme, schemeClass }
+	return { factory, error, loading, createScheme, schemeClass: schemeClass! }
 }
 
 let editingScheme = null as { classInst: ClassEntity, scheme: SchemeEntity } | null

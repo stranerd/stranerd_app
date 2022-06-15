@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, PropType, ref } from 'vue'
 import { ClassEntity, EventFactory } from '@modules/classes'
 
 export default defineComponent({
@@ -74,7 +74,7 @@ export default defineComponent({
 			required: true
 		},
 		submit: {
-			type: Function,
+			type: Function as PropType<() => Promise<void>>,
 			required: true
 		},
 		loading: {

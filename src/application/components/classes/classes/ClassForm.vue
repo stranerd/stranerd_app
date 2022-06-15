@@ -72,7 +72,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, watch } from 'vue'
+import { computed, defineComponent, onMounted, PropType, watch } from 'vue'
 import { ClassFactory } from '@modules/classes'
 import { closeOutline } from 'ionicons/icons'
 import { useInstitutionList } from '@app/composable/school/institutions'
@@ -87,7 +87,7 @@ export default defineComponent({
 			required: true
 		},
 		submit: {
-			type: Function,
+			type: Function as PropType<() => Promise<void>>,
 			required: true
 		},
 		loading: {

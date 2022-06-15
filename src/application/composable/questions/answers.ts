@@ -98,7 +98,7 @@ export const useCreateAnswer = () => {
 	}
 
 	return {
-		factory, error, loading, answeringQuestion,
+		factory, error, loading, answeringQuestion: answeringQuestion!,
 		createAnswer
 	}
 }

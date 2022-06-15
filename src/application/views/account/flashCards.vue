@@ -1,6 +1,6 @@
 <template>
 	<Justified>
-		<UserFlashCards :user="user" />
+		<UserFlashCards v-if="user" :user="user" />
 	</Justified>
 </template>
 

@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { addOutline, closeOutline, trashBinOutline } from 'ionicons/icons'
 import { FlashCardFactory } from '@modules/study'
 
@@ -45,7 +45,7 @@ export default defineComponent({
 			required: true
 		},
 		submit: {
-			type: Function,
+			type: Function as PropType<() => Promise<void>>,
 			required: true
 		},
 		loading: {

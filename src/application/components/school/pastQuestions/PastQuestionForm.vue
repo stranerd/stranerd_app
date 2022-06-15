@@ -94,7 +94,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 import { PastQuestionFactory } from '@modules/school'
 import { getAlphabet } from '@utils/commons'
 import { addOutline, trashBinOutline } from 'ionicons/icons'
@@ -110,7 +110,7 @@ export default defineComponent({
 			required: true
 		},
 		submit: {
-			type: Function,
+			type: Function as PropType<() => Promise<void>>,
 			required: true
 		},
 		loading: {

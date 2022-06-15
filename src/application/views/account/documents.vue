@@ -1,6 +1,6 @@
 <template>
 	<Justified>
-		<UserDocuments :user="user" />
+		<UserDocuments v-if="user" :user="user" />
 	</Justified>
 </template>
 
