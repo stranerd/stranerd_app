@@ -14,6 +14,12 @@ const global = {} as Record<string, {
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
+const answerGlobal = {} as Record<string, {
+	answer: Ref<AnswerEntity | null>
+	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
+} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+
 const getLikesOfAnswers = async (userId: string, questionId: string, answerIds: string[]) => {
 	const { results: likes } = await LikesUseCases.getInList(userId, answerIds, InteractionEntities.answers)
 	likes.forEach((like) => {
@@ -158,6 +164,49 @@ export const useAnswer = (answer: AnswerEntity) => {
 	return {
 		loading, error, markBestAnswer, likeAnswer
 	}
+}
+
+export const useAnswerById = (answerId: string) => {
+	const fetchAnswer = async () => {
+		await answerGlobal[answerId].setError('')
+		try {
+			await answerGlobal[answerId].setLoading(true)
+			answerGlobal[answerId].answer.value = await AnswersUseCases.find(answerId)
+		} catch (error) {
+			await answerGlobal[answerId].setError(error)
+		}
+		await answerGlobal[answerId].setLoading(false)
+	}
+
+	if (answerGlobal[answerId] === undefined) {
+		const listener = useListener(async () => {
+			const setAnswer = async (entity: AnswerEntity) => {
+				answerGlobal[answerId].answer.value = entity
+			}
+			return await AnswersUseCases.listenToOne(answerId, {
+				created: setAnswer,
+				updated: setAnswer,
+				deleted: setAnswer
+			})
+		})
+		answerGlobal[answerId] = {
+			answer: ref(null),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
+	}
+
+	onMounted(async () => {
+		if (!answerGlobal[answerId].fetched.value && !answerGlobal[answerId].loading.value) await fetchAnswer()
+		await answerGlobal[answerId].listener.start()
+	})
+	onUnmounted(async () => {
+		await answerGlobal[answerId].listener.close()
+	})
+
+	return { ...answerGlobal[answerId] }
 }
 
 let editingQuestionAnswer = null as { answer: AnswerEntity, question: QuestionEntity } | null

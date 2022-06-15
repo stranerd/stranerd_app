@@ -5,7 +5,7 @@ import { CommentToModel } from '../../data/models/comment'
 
 export class CommentFactory extends BaseFactory<CommentEntity, Omit<CommentToModel, 'entity'>, Omit<CommentToModel, 'entity'>> {
 	readonly rules = {
-		body: { required: true, rules: [isString, isLongerThanX(2)] }
+		body: { required: true, rules: [isString, isLongerThanX(0)] }
 	}
 
 	reserved = []

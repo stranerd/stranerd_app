@@ -61,7 +61,7 @@ export const useCommentsList = (id: string, type: InteractionEntities) => {
 	}
 }
 
-export const useCreateComments = (id: string, type: InteractionEntities) => {
+export const useCreateComment = (id: string, type: InteractionEntities) => {
 	const factory = ref(new CommentFactory()) as Ref<CommentFactory>
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()

@@ -1,5 +1,5 @@
 <template>
-	<div class="!gap-4 card-padding flex flex-col border-bottom-line">
+	<div class="!gap-4 card-padding flex flex-col">
 		<div class="flex items-center gap-4 text-secondaryText text-sub justify-between">
 			<QuestionTag :tagId="question.tagId" class="font-bold" />
 			<div class="flex flex-grow items-center justify-end gap-4 text-heading2">

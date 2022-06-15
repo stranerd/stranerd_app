@@ -1,5 +1,5 @@
 <template>
-	<IonIcon v-if="verified" :icon="checkmarkCircle" class="text-primaryBg" style="font-size: 1.3em;" />
+	<IonIcon v-if="verified" :icon="checkmarkCircle" class="text-primaryBg" style="font-size: 1.2em;" />
 </template>
 
 <script lang="ts">

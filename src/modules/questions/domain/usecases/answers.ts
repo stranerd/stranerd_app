@@ -21,6 +21,10 @@ export class AnswersUseCase {
 		return await this.repository.delete(id)
 	}
 
+	async find (id: string) {
+		return await this.repository.find(id)
+	}
+
 	async update (id: string, factory: AnswerFactory) {
 		return await this.repository.update(id, await factory.toModel())
 	}
@@ -73,5 +77,9 @@ export class AnswersUseCase {
 			if (date) matches.push(entity.createdAt >= date)
 			return matches.every((m) => m)
 		})
+	}
+
+	async listenToOne (answerId: string, listener: Listeners<AnswerEntity>) {
+		return await this.repository.listenToOne(answerId, listener)
 	}
 }

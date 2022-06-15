@@ -21,6 +21,10 @@ export class CommentEntity extends BaseEntity {
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
+
+	get isUserVerified () {
+		return this.user.roles.isVerified
+	}
 }
 
 type CommentConstructorArgs = {
