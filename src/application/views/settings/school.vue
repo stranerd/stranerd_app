@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<form class="flex flex-col" @submit.prevent="updateSchool">
 			<IonList class="border-bottom-line md:rounded-xl text-sub p-4">
 				<IonListHeader>
@@ -119,7 +119,7 @@
 				</div>
 			</template>
 		</form>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">

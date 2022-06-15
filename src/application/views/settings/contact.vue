@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<div class="flex flex-col">
 			<form class="p-4 border-bottom-line flex flex-col gap-4" @submit.prevent="createMessage">
 				<template v-if="!user">
@@ -27,12 +27,11 @@
 				<span>{{ item.name }}</span>
 			</a>
 		</div>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
 import { logoInstagram, logoTwitter, logoWhatsapp, mailOutline, paperPlaneOutline } from 'ionicons/icons'
 import { useCreateMessage } from '@app/composable/forms/messages'
 import { useAuth } from '@app/composable/auth/auth'
@@ -40,7 +39,6 @@ import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'SettingsContact',
-	components: { Justified },
 	setup () {
 		useRouteMeta('Contact Us', { back: '/settings' })
 		const { user } = useAuth()

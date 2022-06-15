@@ -1,5 +1,5 @@
 <template>
-	<Justified :hideBottom="true">
+	<DefaultLayout :hideBottom="true">
 		<div v-if="flashCard">
 			<div class="flex flex-col">
 				<div class="border-bottom-line w-full flex p-4 gap-4 justify-between">
@@ -38,12 +38,11 @@
 			</div>
 		</div>
 		<PageLoading v-if="loading" />
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
 import { copyOutline, createOutline, listOutline, trashBinOutline } from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { openFlashCardEditModal, useDeleteFlashCard, useFlashCard } from '@app/composable/study/flashCards'
@@ -57,7 +56,6 @@ import { useAuth } from '@app/composable/auth/auth'
 export default defineComponent({
 	name: 'StudyFlashCardsFlashcardId',
 	components: {
-		Justified,
 		Avatar,
 		FlashCardScreen,
 		FlashCardListView,

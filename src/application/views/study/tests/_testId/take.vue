@@ -1,5 +1,5 @@
 <template>
-	<Justified :hideBottom="true">
+	<DefaultLayout :hideBottom="true">
 		<div v-if="test">
 			<div class="blueTop !mb-0">
 				<div
@@ -15,21 +15,20 @@
 			<TestBody v-if="test" :test="test" class="lg:w-8/12 w-full mx-auto" />
 		</div>
 		<PageLoading v-if="loading" />
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
-import Justified from '@app/layouts/Justified.vue'
+import { defineComponent } from 'vue'
 import TestBody from '@app/components/study/tests/TestBody.vue'
 import { useTest } from '@app/composable/study/tests'
 import { useRoute } from 'vue-router'
-import { defineComponent } from 'vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudyTestsTestIdTake',
-	components: { Justified, TestBody },
+	components: { TestBody },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Test')

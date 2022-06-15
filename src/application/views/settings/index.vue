@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<div class="flex flex-col py-4 text-secondaryText">
 			<router-link v-for="item in [
 					{ name: 'Edit Profile', icon: personOutline, route: '/settings/profile' },
@@ -18,12 +18,11 @@
 			</a>
 			<PageLoading v-if="loading" />
 		</div>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
 import {
 	informationCircleOutline,
 	logOutOutline,
@@ -39,7 +38,6 @@ import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'Settings',
-	components: { Justified },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Settings', {})

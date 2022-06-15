@@ -3,7 +3,8 @@
 		<template v-slot:title>
 			Edit Scheme
 		</template>
-		<SchemeForm :classInst="schemeClass" :disabled="{ title: true }" :error="error" :factory="factory" :loading="loading"
+		<SchemeForm :classInst="schemeClass" :disabled="{ title: true }" :error="error" :factory="factory"
+			:loading="loading"
 			:submit="editScheme">
 			<template v-slot:buttonText>Save</template>
 		</SchemeForm>

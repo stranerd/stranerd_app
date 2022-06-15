@@ -1,5 +1,5 @@
 <template>
-	<Auth>
+	<AuthLayout>
 		<div class="w-full h-full flex">
 			<div class="w-7/12 lg:flex flex-col items-center justify-center h-full hidden">
 				<h1 class="text-5xl font-extrabold mb-12">Welcome back</h1>
@@ -44,20 +44,19 @@
 				</form>
 			</div>
 		</div>
-	</Auth>
+	</AuthLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useEmailSignin } from '@app/composable/auth/signin'
 import AuthProviders from '@app/components/auth/AuthProviders.vue'
-import Auth from '@app/layouts/Auth.vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AuthSignin',
-	components: { AuthProviders, Auth },
+	components: { AuthProviders },
 	beforeRouteEnter: generateMiddlewares(['isNotAuthenticated']),
 	setup () {
 		useRouteMeta('Signin')

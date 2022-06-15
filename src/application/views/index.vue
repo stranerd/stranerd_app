@@ -10,8 +10,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Onboarding from '@app/components/onboarding/Onboarding.vue'
-import OnboardingLayout from '@app/layouts/Onboarding.vue'
-import HomeLayout from '@app/layouts/Home.vue'
 import Landing from '@app/components/landing/Landing.vue'
 import { isWeb } from '@utils/constants'
 import { storage } from '@utils/storage'
@@ -20,7 +18,7 @@ import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'Index',
-	components: { Onboarding, OnboardingLayout, HomeLayout, Landing },
+	components: { Onboarding, Landing },
 	beforeRouteEnter: generateMiddlewares(['isNotAuthenticated', async () => {
 		if (isWeb) return
 		const isOnboardingDone = await storage.get('onboarding-done')

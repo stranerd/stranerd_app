@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<div class="h-full w-full lg:w-8/12 mx-auto lg:mt-6">
 			<div class="rounded-xl px-4 pt-4 flex flex-col">
 				<Search />
@@ -28,19 +28,18 @@
 					:sets="sets" :testPreps="testPreps" :users="users" />
 			</div>
 		</div>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
 import { useSearch } from '@app/composable/meta/search'
 import Search from '@app/components/search/Search.vue'
 import { arrowRedoOutline, closeOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'SearchWrapper',
-	components: { Justified, Search },
+	components: { Search },
 	setup () {
 		return {
 			...useSearch(),

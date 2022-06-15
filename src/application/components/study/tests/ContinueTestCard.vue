@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { calendarOutline, playOutline } from 'ionicons/icons'
+import { calendarOutline } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { formatNumber } from '@utils/commons'
 import { TestEntity } from '@modules/study'
@@ -45,7 +45,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { testPrep } = useTestPrep(props.test.prepId)
-		return { formatNumber, calendarOutline, playOutline, testPrep }
+		return { formatNumber, calendarOutline, testPrep }
 	}
 })
 </script>

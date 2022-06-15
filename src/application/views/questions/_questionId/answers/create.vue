@@ -1,5 +1,5 @@
 <template>
-	<JustifiedLayout :hideBottom="true">
+	<DefaultLayout :hideBottom="true">
 		<AnswerForm
 			:error="error"
 			:factory="factory"
@@ -12,14 +12,13 @@
 				Answer
 			</template>
 		</AnswerForm>
-	</JustifiedLayout>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { generateMiddlewares } from '@app/middlewares'
 import AnswerForm from '@app/components/questions/answers/AnswerForm.vue'
-import JustifiedLayout from '@app/layouts/Justified.vue'
 import { getAnsweringQuestion, useCreateAnswer } from '@app/composable/questions/answers'
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 import { useRouteMeta } from '@app/composable/core/states'
@@ -28,7 +27,7 @@ import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'QuestionsQuestionIdAnswer',
-	components: { JustifiedLayout, AnswerForm, BaseEditor },
+	components: { AnswerForm, BaseEditor },
 	beforeRouteEnter: generateMiddlewares([
 		'isAuthenticated',
 		async ({ to }) => {

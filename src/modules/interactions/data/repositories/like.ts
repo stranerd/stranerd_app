@@ -4,7 +4,6 @@ import { LikeEntity } from '../../domain/entities/like'
 import { LikeBaseDataSource } from '../datasources/like-base'
 import { LikeTransformer } from '../transformers/like'
 import { LikeToModel } from '../models/like'
-import { InteractionEntity } from '../../domain/types'
 
 export class LikeRepository implements ILikeRepository {
 	private dataSource: LikeBaseDataSource

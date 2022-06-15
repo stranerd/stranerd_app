@@ -16,7 +16,7 @@ import { defineComponent } from 'vue'
 import HomeTopNavigation from '../components/layout/topNavigations/HomeTopNavigation.vue'
 
 export default defineComponent({
-	name: 'JustifiedLayout',
+	name: 'HomeLayout',
 	components: { HomeTopNavigation }
 })
 </script>

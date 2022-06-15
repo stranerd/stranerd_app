@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<div class="h-full md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
 			<div class="bg-white rounded-xl px-4 pt-4 flex flex-col">
 				<Search />
@@ -15,19 +15,15 @@
 				<slot />
 			</div>
 		</div>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
 import Search from '@app/components/search/Search.vue'
 
 export default defineComponent({
 	name: 'ExploreWrapper',
-	components: {
-		Justified,
-		Search
-	}
+	components: { Search }
 })
 </script>

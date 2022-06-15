@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<form class="p-4 flex flex-col gap-4" @submit.prevent="updatePassword">
 			<IonText class="text-heading font-semibold">
 				{{ hasPassword ? 'Update Password' : 'Add Password' }}
@@ -20,12 +20,11 @@
 				<span v-else>Save Password</span>
 			</IonButton>
 		</form>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
 import { usePasswordUpdate } from '@app/composable/auth/passwords'
 import { useAuth } from '@app/composable/auth/auth'
 import { generateMiddlewares } from '@app/middlewares'
@@ -33,7 +32,6 @@ import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'SettingsSecurity',
-	components: { Justified },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Security', { back: '/settings' })

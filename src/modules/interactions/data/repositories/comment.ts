@@ -4,7 +4,6 @@ import { CommentEntity } from '../../domain/entities/comment'
 import { CommentBaseDataSource } from '../datasources/comment-base'
 import { CommentTransformer } from '../transformers/comment'
 import { CommentToModel } from '../models/comment'
-import { InteractionEntity } from '../../domain/types'
 
 export class CommentRepository implements ICommentRepository {
 	private dataSource: CommentBaseDataSource

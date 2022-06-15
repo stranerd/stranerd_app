@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<div v-if="user">
 			<div class="flex flex-col gap-6 px-4 py-6">
 				<div class="flex items-center gap-6">
@@ -73,13 +73,12 @@
 				<UserDocuments v-if="tab === 'documents'" :user="user" />
 			</div>
 		</div>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
-import Justified from '@app/layouts/Justified.vue'
 import Department from '@app/components/school/departments/Department.vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import { useRoute } from 'vue-router'
@@ -103,7 +102,7 @@ import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'UsersUserId',
-	components: { Justified, Department, Institution, UserQuestions, UserAnswers, UserFlashCards, UserDocuments },
+	components: { Department, Institution, UserQuestions, UserAnswers, UserFlashCards, UserDocuments },
 	beforeRouteEnter: generateMiddlewares([async ({ to }) => {
 		if (to.params.userId === useAuth().id.value) return '/account'
 	}]),

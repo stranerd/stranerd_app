@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<div class="flex flex-col p-4 gap-6">
 			<div class="flex flex-col gap-2">
 				<IonLabel class="font-bold">Subject</IonLabel>
@@ -54,13 +54,11 @@
 				<span v-else>Start</span>
 			</IonButton>
 		</div>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
-import Institution from '@app/components/school/institutions/Institution.vue'
 import Course from '@app/components/school/courses/Course.vue'
 import { useRoute } from 'vue-router'
 import { useTestPrepList } from '@app/composable/study/testPreps'
@@ -73,8 +71,6 @@ import { useCreateTest } from '@app/composable/study/tests'
 export default defineComponent({
 	name: 'StudyPrepsInstitutionId',
 	components: {
-		Justified,
-		Institution,
 		Course,
 		TestPrepListCard,
 		EmptyState

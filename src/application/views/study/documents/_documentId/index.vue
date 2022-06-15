@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<div v-if="document">
 			<div class="blueTop py-4">
 				<div
@@ -21,11 +21,10 @@
 			</div>
 		</div>
 		<PageLoading v-if="loading" />
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
-import Justified from '@app/layouts/Justified.vue'
 import {
 	add,
 	checkmarkCircleOutline,
@@ -48,7 +47,7 @@ import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudyDocumentsDocumentId',
-	components: { Justified, Avatar, DocumentDetails, Share, SaveToSet },
+	components: { Avatar, DocumentDetails, Share, SaveToSet },
 	setup () {
 		useRouteMeta('Document')
 		const { documentId } = useRoute().params

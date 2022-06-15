@@ -1,15 +1,14 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<FlashCardForm :error="error" :factory="factory" :loading="loading" :submit="editFlashCard"
 			title="Edit a Flashcard set">
 			<template v-slot:buttonTitle>Save</template>
 		</FlashCardForm>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
 import FlashCardForm from '@app/components/study/flashCards/FlashCardForm.vue'
 import { getEditingFlashCard, useEditFlashCard } from '@app/composable/study/flashCards'
 import { useRoute } from 'vue-router'
@@ -19,7 +18,7 @@ import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudyFlashCardsFlashcardIdEdit',
-	components: { Justified, FlashCardForm },
+	components: { FlashCardForm },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ to }) => {
 		const { id } = useAuth()
 		const { flashCardId = '' } = to.params

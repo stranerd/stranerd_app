@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<div class="flex flex-col">
 			<router-link v-for="item in [
 					{ name: 'Privacy policy', route: '/legal/privacy-policy' },
@@ -10,17 +10,15 @@
 			</router-link>
 			<span class="p-4">© 2022 Stranerd LLC</span>
 		</div>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'SettingsAbout',
-	components: { Justified },
 	setup () {
 		useRouteMeta('About', { back: '/settings' })
 	}

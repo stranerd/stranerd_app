@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<div class="showcase-flex">
 			<EmptyState
 				v-if="!loading && !error && !notifications.length"
@@ -13,13 +13,12 @@
 			<BlockLoading v-if="loading" />
 			<LoadMore v-if="hasMore" :load="fetchOlderNotifications" />
 		</div>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useNotificationList } from '@app/composable/users/notifications'
-import Justified from '@app/layouts/Justified.vue'
 import NotificationsListCard from '@app/components/users/notifications/NotificationsListCard.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import { generateMiddlewares } from '@app/middlewares'
@@ -28,7 +27,7 @@ import { useRouteMeta } from '@app/composable/core/states'
 export default defineComponent({
 	name: 'Notifications',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
-	components: { NotificationsListCard, Justified, EmptyState },
+	components: { NotificationsListCard, EmptyState },
 	setup () {
 		useRouteMeta('Notifications', {})
 		const { notifications, error, loading, hasMore, fetchOlderNotifications } = useNotificationList()

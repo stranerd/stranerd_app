@@ -1,20 +1,19 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<UserQuestions v-if="user" :user="user" />
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
-import Justified from '@app/layouts/Justified.vue'
 import UserQuestions from '@app/components/users/users/UserQuestions.vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AccountQuestions',
-	components: { Justified, UserQuestions },
+	components: { UserQuestions },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Questions', { back: '/account' })

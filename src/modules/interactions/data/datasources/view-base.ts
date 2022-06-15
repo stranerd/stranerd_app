@@ -1,6 +1,5 @@
 import { Listeners, QueryParams, QueryResults } from '@modules/core'
 import { ViewFromModel, ViewToModel } from '../models/view'
-import { InteractionEntity } from '../../domain/types'
 
 export interface ViewBaseDataSource {
 	create: (data: ViewToModel) => Promise<ViewFromModel>

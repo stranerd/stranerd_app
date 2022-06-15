@@ -1,5 +1,5 @@
 <template>
-	<Auth>
+	<AuthLayout>
 		<div class="w-full h-full flex">
 			<div class="w-7/12 lg:flex flex-col items-center justify-center h-full hidden">
 				<h1 class="text-5xl font-extrabold mb-12">Welcome back</h1>
@@ -59,20 +59,18 @@
 				</form>
 			</div>
 		</div>
-	</Auth>
+	</AuthLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { usePasswordReset } from '@app/composable/auth/passwords'
-import Auth from '@app/layouts/Auth.vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 import { checkmarkOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'AuthForgot',
-	components: { Auth },
 	beforeRouteEnter: generateMiddlewares(['isNotAuthenticated']),
 	setup () {
 		useRouteMeta('Reset Password')

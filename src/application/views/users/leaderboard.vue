@@ -1,18 +1,17 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<Leaderboard />
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
 import Leaderboard from '@app/components/users/leaderboard/Leaderboard.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'UsersLeaderboard',
-	components: { Justified, Leaderboard },
+	components: { Leaderboard },
 	setup () {
 		useRouteMeta('LeaderBoard', {})
 	}

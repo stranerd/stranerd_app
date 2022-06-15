@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { calendarOutline, ellipsisVerticalOutline, playOutline } from 'ionicons/icons'
+import { calendarOutline, ellipsisVerticalOutline } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import { useCreateTest } from '@app/composable/study/tests'
@@ -50,7 +50,7 @@ export default defineComponent({
 	setup () {
 		const { loading, error, createTest } = useCreateTest()
 		return {
-			ellipsisVerticalOutline, calendarOutline, playOutline,
+			ellipsisVerticalOutline, calendarOutline,
 			loading, error, createTest
 		}
 	}

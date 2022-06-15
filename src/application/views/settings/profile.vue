@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<form class="flex flex-col gap-6 justify-center p-4" @submit.prevent="updateProfile">
 			<Avatar :editable="true" :name="factory.first" :size="64"
 				:src="factory.photo" @photo="(p) => { factory.photo = p; updateProfile(true) }" />
@@ -39,19 +39,17 @@
 				<span v-else>Submit</span>
 			</IonButton>
 		</form>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
 import { useProfileUpdate } from '@app/composable/auth/profile'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'SettingsProfile',
-	components: { Justified },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Edit Profile', { back: '/settings' })

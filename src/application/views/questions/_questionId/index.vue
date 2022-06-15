@@ -1,5 +1,5 @@
 <template>
-	<DashboardWithToolbarLayout>
+	<DefaultLayout>
 		<div class="flex flex-col">
 			<BlockLoading v-if="loading" />
 			<template v-else-if="question">
@@ -8,25 +8,20 @@
 			</template>
 			<EmptyState v-else info="Question Not Found" />
 		</div>
-	</DashboardWithToolbarLayout>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { useQuestion } from '@app/composable/questions/questions'
-import DashboardWithToolbarLayout from '@app/layouts/DashboardWithToolbar.vue'
 import QuestionPageCard from '@app/components/questions/questions/QuestionPageCard.vue'
 import AnswersList from '@app/components/questions/answers/AnswersList.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'QuestionsQuestionId',
-	components: {
-		DashboardWithToolbarLayout,
-		QuestionPageCard,
-		AnswersList
-	},
+	components: { QuestionPageCard, AnswersList },
 	setup () {
 		const { questionId } = useRoute().params
 		useRouteMeta('Question', { back: '/questions' })

@@ -1,5 +1,5 @@
 <template>
-	<Auth>
+	<AuthLayout>
 		<div class="w-full h-full flex">
 			<div class="w-7/12 lg:flex flex-col items-center justify-center h-full hidden">
 				<h1 class="text-5xl font-extrabold mb-12">Verify Email Address</h1>
@@ -29,7 +29,7 @@
 				</form>
 			</div>
 		</div>
-	</Auth>
+	</AuthLayout>
 </template>
 
 <script lang="ts">
@@ -39,13 +39,11 @@ import {
 	useCompleteEmailVerification,
 	useEmailVerificationRequest
 } from '@app/composable/auth/signin'
-import Auth from '@app/layouts/Auth.vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AuthVerify',
-	components: { Auth },
 	beforeRouteEnter: generateMiddlewares([async () => {
 		if (!getEmailVerificationEmail()) return '/auth/signin'
 	}]),

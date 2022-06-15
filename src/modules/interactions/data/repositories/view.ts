@@ -4,7 +4,6 @@ import { ViewEntity } from '../../domain/entities/view'
 import { ViewBaseDataSource } from '../datasources/view-base'
 import { ViewTransformer } from '../transformers/view'
 import { ViewToModel } from '../models/view'
-import { InteractionEntity } from '../../domain/types'
 
 export class ViewRepository implements IViewRepository {
 	private dataSource: ViewBaseDataSource

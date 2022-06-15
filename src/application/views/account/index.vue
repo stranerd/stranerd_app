@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<div v-if="user">
 			<div class="flex flex-col border-bottom-line gap-4 px-4 py-6">
 				<div class="flex items-center gap-6">
@@ -64,13 +64,12 @@
 				</router-link>
 			</div>
 		</div>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
-import Justified from '@app/layouts/Justified.vue'
 import Department from '@app/components/school/departments/Department.vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import {
@@ -92,7 +91,7 @@ import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'Account',
-	components: { Justified, Department, Institution },
+	components: { Department, Institution },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Profile', {})

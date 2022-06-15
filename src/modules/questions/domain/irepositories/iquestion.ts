@@ -1,6 +1,6 @@
 import { Listeners, QueryParams, QueryResults } from '@modules/core'
 import { QuestionEntity } from '../entities/question'
-import { QuestionFromModel, QuestionToModel } from '../../data/models/question'
+import { QuestionToModel } from '../../data/models/question'
 
 export interface IQuestionRepository {
 	add: (data: QuestionToModel) => Promise<QuestionEntity>

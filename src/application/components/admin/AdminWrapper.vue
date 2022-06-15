@@ -1,5 +1,5 @@
 <template>
-	<Justified>
+	<DefaultLayout>
 		<div>
 			<div class="nav-scroll">
 				<router-link to="/admin/users/admins">Admins</router-link>
@@ -12,17 +12,15 @@
 				<slot />
 			</div>
 		</div>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
 import { cogOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'AdminWrapper',
-	components: { Justified },
 	setup () {
 		return { cogOutline }
 	}

@@ -3,7 +3,8 @@
 		<template v-slot:title>
 			Set up Timetable
 		</template>
-		<TimetableForm :classInst="eventClass" :error="error" :factory="factory" :loading="loading" :submit="createEvent">
+		<TimetableForm :classInst="eventClass" :error="error" :factory="factory" :loading="loading"
+			:submit="createEvent">
 			<template v-slot:buttonText>Add</template>
 		</TimetableForm>
 	</Modal>

@@ -8,6 +8,7 @@
 				</div>
 			</div>
 		</IonContent>
+		<Fab />
 		<BottomNav v-if="!hideBottom" class="mt-auto" />
 	</IonPage>
 </template>
@@ -16,9 +17,10 @@
 import { defineComponent } from 'vue'
 import Topbar from '@app/components/layout/topNavigations/Topbar.vue'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
+import Fab from '@app/components/layout/Fab.vue'
 
 export default defineComponent({
-	name: 'JustifiedLayout',
+	name: 'DefaultLayout',
 	props: {
 		hideTop: {
 			required: false,
@@ -29,6 +31,6 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: { Topbar, BottomNav }
+	components: { Topbar, BottomNav, Fab }
 })
 </script>
