@@ -4,7 +4,7 @@
 			<div class="flex justify-around items-center text-sub">
 				<router-link
 					v-for="{ path, icon, iconOutline } in [
-						{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline },
+						{ name: 'Classes', path: '/classes', icon: home, iconOutline:homeOutline },
 						{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
 						{ name: 'Discussions', path: '/messages', icon: chatbubbles, iconOutline:chatbubblesOutline },
 						{ name: 'Tests', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
@@ -26,8 +26,8 @@ import {
 	chatbubblesOutline,
 	helpCircle,
 	helpCircleOutline,
-	people,
-	peopleOutline,
+	home,
+	homeOutline,
 	person,
 	personOutline,
 	receipt,
@@ -45,7 +45,7 @@ export default defineComponent({
 		return {
 			isLoggedIn, isAdmin,
 			personOutline, person, chatbubblesOutline, chatbubbles, receiptOutline, receipt,
-			helpCircleOutline, helpCircle, peopleOutline, people, searchOutline, search, statsChartOutline, statsChart
+			helpCircleOutline, helpCircle, homeOutline, home, searchOutline, search, statsChartOutline, statsChart
 		}
 	}
 })

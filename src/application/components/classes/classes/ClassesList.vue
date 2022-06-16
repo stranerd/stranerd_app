@@ -1,9 +1,17 @@
 <template>
 	<div class="showcase-flex">
-		<form class="p-2 border-bottom-line" @submit.prevent="search">
-			<IonSearchbar v-model.trim="searchValue" class="!bg-[transparent]" placeholder="Find a class"
-				type="search" />
-		</form>
+		<div class="px-4 py-6 flex items-center border-bottom-line">
+			<IonIcon :icon="linkOutline" class="text-heading2"/>
+			<IonText class="ml-3 text-heading">Stranerd Connect</IonText>
+		</div>
+		<div class="px-4 py-6 flex items-center justify-between border-bottom-line">
+			<IonText class=" text-heading font-bold">Recent</IonText>
+			<IonIcon :icon="chevronDownOutline" class="text-heading"/>
+		</div>
+		<div class="px-4 py-6 flex items-center justify-between border-bottom-line">
+			<IonText class=" text-heading font-bold">Direct messages</IonText>
+			<IonIcon :icon="chevronDownOutline" class="text-heading"/>
+		</div>
 		<template v-if="searchMode">
 			<div v-if="searchResults.length === 0" class="p-4">
 				<EmptyState class="bg-itemBg p-4 rounded-xl"
@@ -27,7 +35,7 @@ import { defineComponent } from 'vue'
 import ClassListCard from '@app/components/classes/classes/ClassListCard.vue'
 import { useUserClassList } from '@app/composable/users/users/classes'
 import SearchClassListCard from '@app/components/classes/classes/SearchClassListCard.vue'
-
+import {linkOutline, chevronDownOutline} from 'ionicons/icons'
 export default defineComponent({
 	name: 'ClassesList',
 	components: { ClassListCard, SearchClassListCard },
@@ -37,7 +45,7 @@ export default defineComponent({
 			searchMode, searchValue, searchResults, search
 		} = useUserClassList()
 		return {
-			classes, error, loading,
+			classes, error, loading, linkOutline, chevronDownOutline,
 			searchMode, searchValue, searchResults, search
 		}
 	}
