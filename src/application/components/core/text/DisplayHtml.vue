@@ -1,5 +1,5 @@
 <template>
-	<pre class="font-rale body" v-html="value" />
+	<pre class="body" v-html="value" />
 </template>
 
 <script lang="ts">
@@ -22,6 +22,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	.body {
+		font-family: inherit;
 		white-space: pre-wrap;
 		word-wrap: break-word;
 		word-break: break-word;
