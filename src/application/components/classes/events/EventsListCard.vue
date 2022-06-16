@@ -1,5 +1,5 @@
 <template>
-	<div :key="event.hash" class="flex flex-col rounded-lg bg-itemBg border-l-8 border-primaryBg p-4 gap-2">
+	<div v-if="isEventOneOff(event)" class="flex flex-col rounded-lg bg-itemBg border-l-8 border-primaryBg p-4 gap-2">
 		<IonText class="font-bold">{{ event.title }}</IonText>
 		<IonText v-if="event.data.scheduledAt" class="flex items-center gap-1">
 			<IonIcon :icon="calendarClearOutline" class="text-heading2" />
@@ -11,7 +11,7 @@
 			<span v-if="classInst.admins.includes(id)" class="ml-auto">
 				<SpinLoading v-if="loading" />
 				<IonIcon v-else :icon="trashBinOutline" class="text-danger text-heading2"
-					@click="deleteEvent(event)" />
+					@click="deleteEvent" />
 			</span>
 		</div>
 	</div>
@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { ClassEntity, EventEntity } from '@modules/classes'
+import { ClassEntity, EventEntity, isEventOneOff } from '@modules/classes'
 import { calendarClearOutline, timeOutline, trashBinOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { useDeleteEvent } from '@app/composable/classes/timetable'
@@ -42,7 +42,7 @@ export default defineComponent({
 		const { loading, error, deleteEvent } = useDeleteEvent(props.event.classId, props.event.id)
 		return {
 			id, loading, error, deleteEvent, formatDateAsDigits, formatTimeAsDigits,
-			timeOutline, calendarClearOutline, trashBinOutline
+			timeOutline, calendarClearOutline, trashBinOutline, isEventOneOff
 		}
 	}
 })

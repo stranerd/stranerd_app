@@ -1,5 +1,5 @@
 import { Media } from '@modules/core'
-import { PastQuestionData } from '../../domain/entities/pastQuestion'
+import { PastQuestionData } from '../../domain/types'
 
 export interface PastQuestionFromModel extends PastQuestionToModel {
 	id: string

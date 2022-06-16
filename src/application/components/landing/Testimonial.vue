@@ -13,9 +13,6 @@
 				</IonText>
 
 				<div class="flex items-center justify-center lg:mt-16 mt-10">
-					<img v-if="testimonies[tab].img" :src="testimonies[tab].img"
-						class="object-cover lg:h-10 lg:w-10 h-5 w-5 rounded-full">
-
 					<IonText class="text-center font-bold text-xs lg:text-xl ml-4">
 						{{ testimonies[tab].author }}
 					</IonText>

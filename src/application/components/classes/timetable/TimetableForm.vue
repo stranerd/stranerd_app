@@ -32,21 +32,17 @@
 			<DisplayError :error="factory.errors.lecturer" />
 		</div>
 
-		<div class="flex gap-4 items-center">
+		<div class="flex gap-4">
 			<div class="flex flex-col gap-2 w-full">
 				<IonLabel class="font-bold">Starts At</IonLabel>
-				<IonInput :disabled="disabled.startTime" :value="factory.startTime"
-					class="w-full" placeholder="Select start time" required
-					type="time"
-					@change="(e) => factory.startTime = e.target.value" />
+				<IonInput v-model="factory.startTime" :disabled="disabled.startTime"
+					class="w-full flex-grow-0" placeholder="Select start time" required type="time" />
 				<DisplayError :error="factory.errors.start" />
 			</div>
 			<div class="flex flex-col gap-2 w-full">
 				<IonLabel class="font-bold">Ends At</IonLabel>
-				<IonInput :disabled="disabled.endTime" :value="factory.endTime"
-					class="w-full" placeholder="Select end time" required
-					type="time"
-					@change="(e) => factory.endTime = e.target.value" />
+				<IonInput v-model="factory.endTime" :disabled="disabled.endTime"
+					class="w-full flex-grow-0" placeholder="Select end time" required type="time" />
 				<DisplayError :error="factory.errors.end" />
 			</div>
 		</div>

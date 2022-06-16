@@ -1,7 +1,7 @@
 import { IPastQuestionRepository } from '../irepositories/ipastQuestion'
 import { PastQuestionFactory } from '../factories/pastQuestion'
 import { Conditions, QueryParams } from '@modules/core'
-import { PastQuestionType } from '../entities/pastQuestion'
+import { PastQuestionType } from '../types'
 
 export class PastQuestionsUseCase {
 	private repository: IPastQuestionRepository

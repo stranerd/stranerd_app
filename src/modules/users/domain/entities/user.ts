@@ -9,7 +9,6 @@ import {
 	UserRank,
 	UserRoles,
 	UserSchoolData,
-	UserSchoolType,
 	UserSession,
 	UserStatus
 } from '../types'
@@ -170,14 +169,6 @@ export class UserEntity extends BaseEntity {
 
 	set isVerified (isVerified) {
 		this.roles.isVerified = isVerified
-	}
-
-	get isAspirant () {
-		return this.school ? [UserSchoolType.aspirant, UserSchoolType.secondary].includes(this.school?.type) : false
-	}
-
-	get isCollege () {
-		return UserSchoolType.college === this.school?.type
 	}
 }
 

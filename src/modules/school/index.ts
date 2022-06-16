@@ -59,5 +59,4 @@ export { PastQuestionFactory, PastQuestionEntity }
 export { FacultyFactory, FacultyEntity }
 export { DepartmentFactory, DepartmentEntity }
 
-export { PastQuestionType } from './domain/entities/pastQuestion'
-export type { PastQuestionData } from './domain/entities/pastQuestion'
+export { PastQuestionType, isPastQuestionObj, isPastQuestionNotObj } from './domain/types'

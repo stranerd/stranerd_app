@@ -34,7 +34,7 @@ import { GroupFactory } from './domain/factories/group'
 import { DiscussionFactory } from './domain/factories/discussion'
 import { EventFactory } from './domain/factories/event'
 import { SchemeFactory } from './domain/factories/scheme'
-import { ClassUsers, EventType } from './domain/types'
+import { ClassUsers, EventType, isEventOneOff, isEventTimetable } from './domain/types'
 
 const announcementDataSource = new AnnouncementApiDataSource()
 const classDataSource = new ClassApiDataSource()
@@ -70,3 +70,4 @@ export { GroupEntity, GroupFactory }
 export { DiscussionEntity, DiscussionFactory }
 export { EventEntity, EventFactory, EventType }
 export { SchemeEntity, SchemeFactory }
+export { isEventTimetable, isEventOneOff }

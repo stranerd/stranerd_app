@@ -1,7 +1,6 @@
 <template>
 	<form class="flex flex-col gap-6 justify-center" @submit.prevent="submit">
-		<Avatar :editable="true" :name="factory.name" :size="80"
-			:src="factory.photo" @photo="(p) => factory.photo = p" />
+		<Avatar :editable="true" :name="factory.name" :size="80" :src="factory.photo" @photo="savePhoto" />
 
 		<div class="flex flex-col gap-2">
 			<IonLabel>Title</IonLabel>
@@ -78,6 +77,7 @@ import { closeOutline } from 'ionicons/icons'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useFacultyList } from '@app/composable/school/faculties'
 import { useDepartmentList } from '@app/composable/school/departments'
+import { UploadedFile } from '@modules/core'
 
 export default defineComponent({
 	name: 'ClassForm',
@@ -126,8 +126,12 @@ export default defineComponent({
 			if (props.factory.facultyId) await fetchDepartments(props.factory.facultyId)
 		})
 
+		const savePhoto = async (p: UploadedFile) => {
+			props.factory.photo = p
+		}
+
 		return {
-			closeOutline,
+			closeOutline, savePhoto,
 			schools, filteredFaculties, filteredDepartments
 		}
 	}

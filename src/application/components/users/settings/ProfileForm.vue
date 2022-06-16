@@ -1,7 +1,6 @@
 <template>
 	<form class="flex flex-col gap-4 justify-center" @submit.prevent="submit">
-		<Avatar :editable="true" :name="factory.first" :size="64"
-			:src="factory.photo" @photo="(p) => { factory.photo = p; updateProfile(true) }" />
+		<Avatar :editable="true" :name="factory.first" :size="64" :src="factory.photo" @photo="savePhoto" />
 		<div class="flex flex-col items-start">
 			<div class="flex w-full gap-4">
 				<div class="flex flex-col w-1/2">
@@ -46,6 +45,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { useProfileUpdate } from '@app/composable/auth/profile'
+import { UploadedFile } from '@modules/core'
 
 export default defineComponent({
 	name: 'ProfileForm',
@@ -57,11 +57,15 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { factory, loading, error, updateProfile } = useProfileUpdate()
+		const savePhoto = async (p: UploadedFile) => {
+			factory.value.photo = p
+			await updateProfile(true)
+		}
 		const submit = async () => {
 			await updateProfile()
 			props.next()
 		}
-		return { factory, loading, error, updateProfile, submit }
+		return { factory, loading, error, updateProfile, submit, savePhoto }
 	}
 })
 </script>

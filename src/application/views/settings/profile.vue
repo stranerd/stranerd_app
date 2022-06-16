@@ -1,8 +1,7 @@
 <template>
 	<DefaultLayout>
-		<form class="flex flex-col gap-6 justify-center p-4" @submit.prevent="updateProfile">
-			<Avatar :editable="true" :name="factory.first" :size="64"
-				:src="factory.photo" @photo="(p) => { factory.photo = p; updateProfile(true) }" />
+		<form class="flex flex-col gap-6 justify-center p-4" @submit.prevent="updateProfile()">
+			<Avatar :editable="true" :name="factory.first" :size="64" :src="factory.photo" @photo="savePhoto" />
 			<div class="flex flex-col items-start">
 				<div class="flex w-full gap-4">
 					<div class="flex flex-col w-1/2">
@@ -47,6 +46,7 @@ import { defineComponent } from 'vue'
 import { useProfileUpdate } from '@app/composable/auth/profile'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
+import { UploadedFile } from '@modules/core'
 
 export default defineComponent({
 	name: 'SettingsProfile',
@@ -54,7 +54,11 @@ export default defineComponent({
 	setup () {
 		useRouteMeta('Edit Profile', { back: '/settings' })
 		const { factory, error, loading, updateProfile } = useProfileUpdate()
-		return { factory, error, loading, updateProfile }
+		const savePhoto = async (p: UploadedFile) => {
+			factory.value.photo = p
+			await updateProfile(true)
+		}
+		return { factory, error, loading, updateProfile, savePhoto }
 	}
 })
 </script>

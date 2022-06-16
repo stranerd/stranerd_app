@@ -13,7 +13,7 @@
 			<PhotoList v-if="question.questionMedia.length" :photos="question.questionMedia" />
 		</div>
 
-		<div v-if="question.isObjective" class=" flex flex-col w-full">
+		<div v-if="isPastQuestionObj(question)" class=" flex flex-col w-full">
 			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
 				class="w-full py-4" @click="answer(question.id, optionIndex)">
 				<div class="flex gap-2 items-center">
@@ -33,7 +33,7 @@
 			</div>
 		</div>
 
-		<template v-if="showAnswers && question.isObjective">
+		<template v-if="showAnswers && isPastQuestionObj(question)">
 			<span v-if="isCorrect" class="rounded-md bg-success py-2 px-4">
 				Nice, you are correct
 			</span>
@@ -41,7 +41,7 @@
 				Sorry, you're wrong. The answer is {{ getAlphabet(question.data.correctIndex + 1).toUpperCase() }}
 			</span>
 
-			<template v-if="question.data.explanation?.length > 0 || question.data.explanationMedia?.length > 0">
+			<template v-if="question.data.explanation.length > 0 || question.data.explanationMedia.length > 0">
 				<span class="text-primaryBg flex items-center font-bold py-8 gap-2"
 					@click="showExplanation = !showExplanation">
 					<span>{{ showExplanation ? 'hide' : 'show' }} solution</span>
@@ -57,7 +57,7 @@
 			</template>
 		</template>
 
-		<div v-if="!question.isObjective">
+		<div v-if="isPastQuestionNotObj(question)">
 			<IonText class="block mb-2">
 				<DisplayHtml :html="question.data.answer" />
 			</IonText>
@@ -78,7 +78,7 @@ import {
 	radioButtonOn
 } from 'ionicons/icons'
 import { TestEntity, TestType } from '@modules/study'
-import { PastQuestionEntity, PastQuestionType } from '@modules/school'
+import { isPastQuestionNotObj, isPastQuestionObj, PastQuestionEntity, PastQuestionType } from '@modules/school'
 import { getAlphabet } from '@utils/commons'
 import { useCreateReport } from '@app/composable/reports/reports'
 import { ReportType } from '@modules/reports'
@@ -127,19 +127,10 @@ export default defineComponent({
 			factory.value.message = 'Flagged'
 		})
 		return {
-			showAnswers,
-			checkmarkCircleOutline,
-			radioButtonOff,
-			chevronDownOutline,
-			chevronUpOutline,
-			flagOutline,
-			radioButtonOn,
-			closeCircleOutline,
-			getAlphabet,
-			isCorrect,
-			isInCorrect,
-			showExplanation,
-			loading, error, createReport
+			checkmarkCircleOutline, radioButtonOff, chevronDownOutline,
+			chevronUpOutline, flagOutline, radioButtonOn, closeCircleOutline,
+			showAnswers, isCorrect, isInCorrect, showExplanation,
+			getAlphabet, loading, error, createReport, isPastQuestionObj, isPastQuestionNotObj
 		}
 	}
 })

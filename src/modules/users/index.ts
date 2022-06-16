@@ -23,7 +23,15 @@ import { NotificationEntity } from './domain/entities/notification'
 import { ReviewEntity } from './domain/entities/review'
 import { ReferralEntity } from './domain/entities/referral'
 import { BadgeEntity } from './domain/entities/badge'
-import { EmbeddedUser, RankingTimes, UserBio, UserRoles, UserSchoolType } from './domain/types'
+import {
+	EmbeddedUser,
+	isUserAspirant,
+	isUserCollege,
+	RankingTimes,
+	UserBio,
+	UserRoles,
+	UserSchoolType
+} from './domain/types'
 
 const userDataSource = new UserApiDataSource()
 const notificationDataSource = new NotificationApiDataSource()
@@ -61,4 +69,4 @@ export {
 	BadgeEntity
 }
 export type { UserBio, UserRoles, EmbeddedUser }
-export { UserSchoolType }
+export { UserSchoolType, isUserCollege, isUserAspirant }

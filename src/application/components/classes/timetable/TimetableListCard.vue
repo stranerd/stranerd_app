@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col rounded-lg bg-itemBg border-l-8 border-primaryBg p-4 gap-2">
+	<div v-if="isEventTimetable(event)" class="flex flex-col rounded-lg bg-itemBg border-l-8 border-primaryBg p-4 gap-2">
 		<IonText class="font-bold">{{ event.title }}</IonText>
 		<IonText v-if="event.data.lecturer">{{ event.data.lecturer }}</IonText>
 		<div class="flex gap-2 items-center text-secondaryText">
@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { ClassEntity, EventEntity } from '@modules/classes'
+import { ClassEntity, EventEntity, isEventTimetable } from '@modules/classes'
 import { openEditTimetableModal, useDeleteEvent } from '@app/composable/classes/timetable'
 import { createOutline, timeOutline, trashBinOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
@@ -47,7 +47,7 @@ export default defineComponent({
 		const { loading, error, deleteEvent } = useDeleteEvent(props.event.classId, props.event.id)
 		return {
 			id, deleteEvent, loading, error, openEditTimetableModal, timeOutline,
-			trashBinOutline, createOutline
+			trashBinOutline, createOutline, isEventTimetable
 		}
 	}
 })

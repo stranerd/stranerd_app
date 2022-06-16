@@ -33,7 +33,7 @@
 						<span>{{ user.bio.fullName }}</span>
 						<Verified :verified="user.isVerified" />
 					</IonText>
-					<template v-if="user.isCollege">
+					<template v-if="isUserCollege(user)">
 						<Institution :institutionId="user.school.institutionId"
 							class="text-secondaryText text-sub font-bold" />
 						<Department :departmentId="user.school.departmentId" :facultyId="user.school.facultyId"
@@ -99,6 +99,7 @@ import UserFlashCards from '@app/components/users/users/UserFlashCards.vue'
 import UserDocuments from '@app/components/users/users/UserDocuments.vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
+import { isUserCollege } from '@modules/users'
 
 export default defineComponent({
 	name: 'UsersUserId',
@@ -114,7 +115,7 @@ export default defineComponent({
 		const { loading: verifiedLoading, verifyUser, deVerifyUser } = useVerifiedRoles()
 		const tab = ref('questions')
 		return {
-			id, isAdmin, user, loading, error, formatNumber,
+			id, isAdmin, user, loading, error, formatNumber, isUserCollege,
 			verifiedLoading, verifyUser, deVerifyUser, tab, podiumOutline, linkOutline,
 			helpCircleOutline, readerOutline, checkmarkCircleOutline, flashOutline
 		}

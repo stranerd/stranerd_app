@@ -42,9 +42,9 @@
 							class="rounded-xl flex cursor-pointer w-12 h-12 border border-itemBg"
 							style="flex-shrink: 0;"
 							@click="fileIndex = index">
-							<img v-if="file.factory.media.type.includes('image')" :src="file.data"
+							<img v-if="file.factory.media?.type.includes('image')" :src="file.data"
 								class="h-full w-full" />
-							<IonIcon v-else-if="file.factory.media.type.includes('video')" :icon="videocamOutline"
+							<IonIcon v-else-if="file.factory.media?.type.includes('video')" :icon="videocamOutline"
 								class="text-heading5" />
 							<IonIcon v-else :icon="documentOutline" class="text-heading5" />
 						</div>

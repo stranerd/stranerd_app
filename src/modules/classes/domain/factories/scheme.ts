@@ -15,7 +15,7 @@ export class SchemeFactory extends BaseFactory<SchemeEntity, SchemeToModel, Sche
 	reserved = ['classId']
 
 	constructor () {
-		super({ title: '', classId: '', topic: '', start: 0, end: 0 })
+		super({ title: '', classId: '', topic: '', start: Date.now(), end: Date.now() })
 	}
 
 	get title () {
@@ -56,6 +56,22 @@ export class SchemeFactory extends BaseFactory<SchemeEntity, SchemeToModel, Sche
 
 	set end (value: number) {
 		this.set('end', value)
+	}
+
+	get startTime () {
+		return new Date(this.start).toISOString().substring(0, 10)
+	}
+
+	set startTime (value: string) {
+		this.start = new Date(value).getTime()
+	}
+
+	get endTime () {
+		return new Date(this.end).toISOString().substring(0, 10)
+	}
+
+	set endTime (value: string) {
+		this.end = new Date(value).getTime()
 	}
 
 	loadEntity = (entity: SchemeEntity) => {

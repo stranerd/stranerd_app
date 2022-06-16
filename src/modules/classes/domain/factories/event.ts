@@ -10,7 +10,7 @@ import {
 import { BaseFactory } from '@modules/core'
 import { EventEntity } from '../entities/event'
 import { EventToModel } from '../../data/models/event'
-import { Cron, EventDataType, EventType } from '../types'
+import { Cron, EventDataType, EventType, getCronOrder } from '../types'
 
 type Keys = {
 	title: string, classId: string, type: EventType, announcementId: string | null
@@ -24,6 +24,8 @@ const isCronValid = (val: any) => {
 	return [isDayValid, isHourValid, isMinuteValid].every((e) => e) ? isValid() : isInvalid('not a valid cron object')
 }
 
+const isCronMore = (val: any, start: any) => getCronOrder(val) >= getCronOrder(start) ? isValid() : isInvalid('must be after start')
+
 export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 	readonly rules = {
 		title: { required: true, rules: [isString, isLongerThanX(0)] },
@@ -32,7 +34,10 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 		scheduledAt: { required: () => this.isOneOffType, nullable: true, rules: [isNumber] },
 		announcementId: { required: () => this.isOneOffType, nullable: true, rules: [isString] },
 		start: { required: () => this.isTimetableType, nullable: true, rules: [isCronValid] },
-		end: { required: () => this.isTimetableType, nullable: true, rules: [isCronValid] },
+		end: {
+			required: () => this.isTimetableType, nullable: true,
+			rules: [isCronValid, (val: any) => isCronMore(val, this.start)]
+		},
 		lecturer: { required: () => this.isTimetableType, nullable: true, rules: [isString, isLongerThanX(0)] }
 	}
 

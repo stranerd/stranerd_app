@@ -19,7 +19,7 @@ export default defineComponent({
 		useRouteMeta('Group')
 		const route = useRoute()
 		const { classId, groupId } = route.params
-		return { classId, groupId }
+		return { classId: classId as string, groupId: groupId as string }
 	}
 })
 </script>

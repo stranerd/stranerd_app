@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col gap-4 md:gap-6 mt-6">
+	<div class="flex flex-col gap-4 md:gap-6">
 		<div v-if="user && !user.school"
 			class="border-bottom-line flex justify-between items-center md:bg-white p-4 md:rounded-xl md:pt-4 pt-0">
 			<span class="font-semibold">Complete your account set up</span>

@@ -23,26 +23,22 @@
 			<DisplayError :error="factory.errors.topic" />
 		</div>
 
-		<div class="flex gap-4 items-center">
+		<div class="flex gap-4">
 			<div class="flex flex-col gap-2 w-full">
 				<IonLabel class="font-bold">Start date</IonLabel>
-				<IonInput :class="{'valid': factory.isValid('start'), 'invalid': factory.errors.start}"
+				<IonInput v-model="factory.startTime"
+					:class="{'valid': factory.isValid('start'), 'invalid': factory.errors.start}"
 					:disabled="disabled.start"
-					:value="new Date(factory.start).toISOString().substring(0, 10)" class="w-full"
-					placeholder="Select start date"
-					required type="date"
-					@change="(e) => factory.start = new Date(e.target.value).getTime()" />
+					class="w-full flex-grow-0" placeholder="Select start date" required type="date" />
 				<DisplayError :error="factory.errors.start" />
 			</div>
 			<div class="flex flex-col gap-2 w-full">
 				<IonLabel class="font-bold">End date</IonLabel>
-				<IonInput :class="{'valid': factory.isValid('end'), 'invalid': factory.errors.end}"
+				<IonInput v-model="factory.endTime"
+					:class="{'valid': factory.isValid('end'), 'invalid': factory.errors.end}"
 					:disabled="disabled.end"
-					:min="new Date(factory.start).toISOString().substring(0, 10)"
-					:value="new Date(factory.end).toISOString().substring(0, 10)" class="w-full"
-					placeholder="Select end date"
-					required type="date"
-					@change="(e) => factory.end = new Date(e.target.value).getTime()" />
+					:min="factory.startTime" class="w-full flex-grow-0" placeholder="Select end date" required
+					type="date" />
 				<DisplayError :error="factory.errors.end" />
 			</div>
 		</div>

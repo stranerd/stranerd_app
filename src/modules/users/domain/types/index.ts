@@ -1,5 +1,6 @@
-import { RankTypes } from '@modules/users/domain/entities/rank'
+import { RankTypes } from '../entities/rank'
 import { Media } from '@modules/core'
+import { UserEntity } from '../entities/user'
 
 export enum UserSchoolType {
 	'secondary' = 'secondary',
@@ -113,3 +114,7 @@ export interface UserRank {
 	score: number
 	level: number
 }
+
+export const isUserCollege = (user: UserEntity): user is Omit<UserEntity, 'school'> & { school: CollegeType } => user.school?.type === UserSchoolType.college
+
+export const isUserAspirant = (user: UserEntity): user is Omit<UserEntity, 'school'> & { school: AspirantType } => !!user.school && user.school.type !== UserSchoolType.college

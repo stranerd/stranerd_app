@@ -1,5 +1,5 @@
 <template>
-	<div class="chat-block text-bodyText">
+	<div class="chat-block">
 		<div v-if="group && group.members.includes(id)" class="body">
 			<div class="flex items-center bg-headerBg text-headerText px-4 gap-4">
 				<router-link :to="`/classes/${classId}/groups`">

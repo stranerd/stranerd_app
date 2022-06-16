@@ -33,7 +33,7 @@
 						<span>{{ user.bio.fullName }}</span>
 						<Verified :verified="user.isVerified" />
 					</IonText>
-					<template v-if="user.isCollege">
+					<template v-if="isUserCollege(user)">
 						<Institution :institutionId="user.school.institutionId"
 							class="text-secondaryText text-sub font-bold" />
 						<Department :departmentId="user.school.departmentId" :facultyId="user.school.facultyId"
@@ -88,6 +88,7 @@ import {
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 import { formatNumber } from '@utils/commons'
+import { isUserCollege } from '@modules/users'
 
 export default defineComponent({
 	name: 'Account',
@@ -97,7 +98,7 @@ export default defineComponent({
 		useRouteMeta('Profile', {})
 		const { id, isAdmin, user } = useAuth()
 		return {
-			id, isAdmin, user, formatNumber,
+			id, isAdmin, user, formatNumber, isUserCollege,
 			gridOutline, helpCircleOutline, readerOutline, flashOutline,
 			documentTextOutline, bookmarkOutline, settingsOutline, cartOutline,
 			podiumOutline, linkOutline, checkmarkCircleOutline
