@@ -1,6 +1,6 @@
 <template>
 	<div class="showcase-flex">
-		<form class="p-2 border-bottom-line" @submit.prevent="search">
+		<form v-if="!hideSearch" class="p-2 border-bottom-line" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" class="!bg-[transparent]" placeholder="Find a class"
 				type="search" />
 		</form>
@@ -30,6 +30,13 @@ import SearchClassListCard from '@app/components/classes/classes/SearchClassList
 
 export default defineComponent({
 	name: 'ClassesList',
+	props: {
+		hideSearch: {
+			type: Boolean,
+			required: false,
+			default: false
+		}
+	},
 	components: { ClassListCard, SearchClassListCard },
 	setup () {
 		const {
