@@ -10,8 +10,7 @@
 					<div class="items-center text-gray font-normal flex gap-3">
 						<Avatar :id="document.user.id" :name="document.user.bio.fullName" :size="24"
 							:src="document.user.bio.photo" />
-						<Share :link="document.shareLink" :title="document.title" cssClass="text-2xl"
-							text="Share this document" />
+						<Share :link="document.shareLink" :title="document.title" text="Share this document" />
 						<SaveToSet :entity="document" />
 					</div>
 				</div>

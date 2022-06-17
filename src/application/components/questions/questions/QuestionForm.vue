@@ -15,7 +15,7 @@
 				<span v-for="attachment in factory.attachments" :key="attachment.name">
 					<span
 						class="py-1 px-2 font-bold text-primaryText bg-primaryBg rounded flex flex-row items-center">
-						{{ attachment.name }} <IonIcon :icon="closeOutline" class="ml-1 cursor-pointer"
+						{{ attachment.name }} <IonIcon :icon="closeOutline" class="ml-1"
 							@click="factory.removeAttachment(attachment)" />
 					</span>
 				</span>

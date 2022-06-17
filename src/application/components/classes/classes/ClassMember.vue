@@ -6,35 +6,32 @@
 				<span>{{ user.bio.fullName }}</span>
 				<Verified :verified="user.roles.isVerified" />
 			</IonText>
-			<span class="ml-auto flex gap-3 items-center text-2xl">
+			<span class="ml-auto flex gap-3 items-center">
 				<template v-if="classInst.admins.includes(id)">
 					<template v-if="classInst.requests.includes(user.id)">
-						<IonIcon :icon="checkmarkOutline" class="cursor-pointer text-success"
+						<IonIcon :icon="checkmarkOutline" class="text-success"
 							@click="acceptRequest(user.id, true)" />
-						<IonIcon :icon="closeOutline" class="cursor-pointer text-danger"
+						<IonIcon :icon="closeOutline" class="text-danger"
 							@click="acceptRequest(user.id, false)" />
 					</template>
 					<template v-else-if="classInst.members.includes(user.id)">
 						<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
 							:icon="classInst.admins.includes(user.id) ? person : personOutline"
-							class="cursor-pointer text-primaryBg"
+							class="text-primaryBg"
 							@click="changeRole(user.id, ClassUsers.admins, !classInst.admins.includes(user.id))" />
 						<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
-							:icon="personRemoveOutline"
-							class="cursor-pointer text-danger"
+							:icon="personRemoveOutline" class="text-danger"
 							@click="addToClass(user.id, false)" />
 					</template>
 					<template v-else>
 						<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
-							:icon="personAddOutline"
-							class="cursor-pointer text-primaryBg"
+							:icon="personAddOutline" class="text-primaryBg"
 							@click="addToClass(user.id, true)" />
 					</template>
 				</template>
 				<template v-if="classInst.members.includes(user.id)">
 					<IonIcon v-if="user.id === id && classInst.user.id !== id"
-						:icon="exitOutline" class="cursor-pointer text-danger"
-						@click="leaveClass()" />
+						:icon="exitOutline" class="text-danger" @click="leaveClass()" />
 				</template>
 			</span>
 		</div>

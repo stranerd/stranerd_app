@@ -54,7 +54,7 @@
 			<div class="mb-8 flex flex-col">
 				<IonRadioGroup v-model="factory.correctIndex" class="flex flex-col gap-4">
 					<div v-for="(_, index) in factory.options" :key="index" class="flex gap-4 justify-between">
-						<IonIcon :icon="trashBinOutline" class="cursor-pointer text-2xl text-red"
+						<IonIcon :icon="trashBinOutline" class="text-red"
 							@click="factory.removeOption(index)" />
 						<IonTextarea v-model="factory.options[index]"
 							:placeholder="`Enter Option ${getAlphabet(index + 1).toUpperCase()}`"

@@ -21,7 +21,7 @@
 							{ name: 'Courses List', icon: listOutline, click: () => openClassEditModal(classInst, $router, true) }
 						]" :key="name" class="flex gap-4 items-center py-2"
 						@click="click">
-						<IonIcon :icon="icon" class="text-2xl" />
+						<IonIcon :icon="icon" />
 						<IonText>{{ name }}</IonText>
 					</a>
 				</div>

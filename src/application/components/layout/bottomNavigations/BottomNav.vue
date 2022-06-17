@@ -12,7 +12,7 @@
 						...(isAdmin ? [{ name: 'Admin', path: `/admin`, icon: statsChart, iconOutline: statsChartOutline }] : [])
 					]" :key="path" :class="{'text-secondaryText': $route.path !== path}" :to="path"
 					class="col-span-1 flex flex-col items-center justify-center">
-					<IonIcon :icon="$route.path === path ? icon : iconOutline" class="w-6 md:w-14" />
+					<IonIcon :icon="$route.path === path ? icon : iconOutline" class="text-2xl" />
 				</router-link>
 			</div>
 		</IonToolbar>
@@ -52,10 +52,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-icon {
-		font-size: 23px;
-	}
-
 	ion-toolbar {
 		--background: #{$color-bodyBg};
 		--color: #{$color-bodyText};

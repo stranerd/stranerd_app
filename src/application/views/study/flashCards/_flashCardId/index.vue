@@ -9,25 +9,20 @@
 				</div>
 				<div class="flex justify-between items-center gap-4 p-4 text-secondaryText">
 					<div class="flex items-center" @click="cardMode = !cardMode">
-						<IonIcon
-							:icon="!cardMode ? copyOutline: listOutline"
-							class="text-secondaryText text-2xl cursor-pointer mr-2 md:mt-0"
-						/>
-						<IonText class=" flex">
+						<IonIcon :icon="!cardMode ? copyOutline: listOutline" class="text-secondaryText mr-2 md:mt-0" />
+						<IonText class="flex">
 							{{ !cardMode ? 'Card mode' : 'List mode' }}
 						</IonText>
 					</div>
 
 					<div class="flex items-center gap-4">
-						<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-2xl"
-							text="Share this flashcard" />
+						<Share :link="flashCard.shareLink" :title="flashCard.title" text="Share this flashcard" />
 						<SaveToSet :entity="flashCard" />
 						<template v-if="flashCard.user.id === id">
-							<IonIcon :icon="createOutline" class="text-primaryBg text-2xl"
+							<IonIcon :icon="createOutline" class="text-primaryBg"
 								@click="openFlashCardEditModal(flashCard, $router)" />
 							<SpinLoading v-if="deleteLoading" />
-							<IonIcon v-else :icon="trashBinOutline" class="text-danger text-2xl"
-								@click="deleteFlashCard" />
+							<IonIcon v-else :icon="trashBinOutline" class="text-danger" @click="deleteFlashCard" />
 						</template>
 					</div>
 				</div>

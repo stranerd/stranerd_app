@@ -3,7 +3,7 @@
 		<div v-if="group && group.members.includes(id)" class="body">
 			<div class="flex items-center bg-headerBg text-headerText px-4 gap-4">
 				<router-link :to="`/classes/${classId}/groups`">
-					<IonIcon :icon="arrowBackOutline" class="text-2xl" />
+					<IonIcon :icon="arrowBackOutline" />
 				</router-link>
 				<Avatar :name="group.name" :size="36" />
 				<div class="flex flex-col flex-grow truncate">
@@ -13,7 +13,7 @@
 					</IonText>
 				</div>
 				<span v-if="group.admins.includes(id)">
-					<IonIcon :icon="createOutline" class="text-2xl" @click="openGroupEditModal(group, $router)" />
+					<IonIcon :icon="createOutline" @click="openGroupEditModal(group, $router)" />
 				</span>
 			</div>
 			<DiscussionsList :classId="classId" :groupId="groupId" class="content" />

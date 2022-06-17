@@ -6,21 +6,21 @@
 					<Avatar :name="user.bio.fullName" :size="64" :src="user.bio.photo" />
 					<div class="flex items-center justify-between w-full text-secondaryText">
 						<div class="flex items-center gap-2">
-							<IonIcon :icon="podiumOutline" class="text-2xl" />
+							<IonIcon :icon="podiumOutline" />
 							<IonText class="flex-col flex">
 								<span class="text-xl">{{ formatNumber(user.score, 1) }}</span>
 								<span class="text-sm">Points</span>
 							</IonText>
 						</div>
 						<div class="flex items-center gap-2">
-							<IonIcon :icon="linkOutline" class="text-2xl" />
+							<IonIcon :icon="linkOutline" />
 							<IonText class="flex-col flex">
 								<span class="text-xl">{{ formatNumber(user.meta.connects) }}</span>
 								<span class="text-sm">Connects</span>
 							</IonText>
 						</div>
 						<div class="flex items-center gap-2">
-							<IonIcon :icon="checkmarkCircleOutline" class="text-2xl" />
+							<IonIcon :icon="checkmarkCircleOutline" />
 							<IonText class="flex-col flex">
 								<span class="text-xl">{{ formatNumber(user.meta.bestAnswers) }}</span>
 								<span class="text-sm">Best ans</span>
@@ -44,9 +44,9 @@
 			</div>
 
 			<div v-if="0" class="border-bottom-line py-6 px-4 flex items-center gap-2">
-				<IonIcon :icon="helpCircleOutline" class="text-xl" />
+				<IonIcon :icon="helpCircleOutline" />
 				<IonText>You have 5 questions to ask</IonText>
-				<IonIcon :icon="cartOutline" class="text-xl ml-auto" />
+				<IonIcon :icon="cartOutline" class="ml-auto" />
 			</div>
 
 			<div class="flex flex-col gap-6 px-4 py-8 text-secondaryText">
@@ -59,7 +59,7 @@
 					{ label: 'Saved', route: '/account/sets', icon: bookmarkOutline },
 					{ label: 'Settings', route: '/settings', icon: settingsOutline },
 				]" :key="route" :to="route" class="flex gap-3 items-center">
-					<IonIcon :icon="icon" class="text-xl" />
+					<IonIcon :icon="icon" />
 					<span>{{ label }}</span>
 				</router-link>
 			</div>

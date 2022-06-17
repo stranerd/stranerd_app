@@ -3,7 +3,7 @@
 		class="flex flex-col justify-between card-padding">
 		<div class="flex gap-4 items-center">
 			<IonText class="font-500 truncate w-full">{{ document.title }}</IonText>
-			<IonIcon :icon="arrowForwardOutline" class="text-2xl" />
+			<IonIcon :icon="arrowForwardOutline" />
 		</div>
 		<div class="w-full flex items-center justify-between gap-2 text-sm">
 			<Tag tag="Document">
@@ -18,12 +18,10 @@
 				<Avatar v-if="document.user.id !== id" :id="document.user.id" :name="document.user.bio.fullName"
 					:size="24"
 					:src="document.user.bio.photo" />
-				<Share :link="document.shareLink" :text="document.content" :title="document.title"
-					cssClass="text-2xl" />
+				<Share :link="document.shareLink" :text="document.content" :title="document.title" />
 				<SaveToSet :entity="document" />
-				<SpinLoading v-if="loading" class="text-2xl" />
-				<IonIcon v-if="document.user.id === id" :icon="settingsOutline" class="text-2xl"
-					@click.prevent="showMenu" />
+				<SpinLoading v-if="loading" />
+				<IonIcon v-if="document.user.id === id" :icon="settingsOutline" @click.prevent="showMenu" />
 			</div>
 		</div>
 	</router-link>

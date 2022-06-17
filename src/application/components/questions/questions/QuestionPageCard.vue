@@ -2,7 +2,7 @@
 	<div class="!gap-4 card-padding flex flex-col">
 		<div class="flex items-center gap-4 text-secondaryText text-sm justify-between">
 			<QuestionTag :tagId="question.tagId" class="font-bold" />
-			<div class="flex flex-grow items-center justify-end gap-4 text-2xl">
+			<div class="flex flex-grow items-center justify-end gap-4">
 				<Share :text="question.strippedBody" title="Share this question" />
 				<IonIcon :icon="flagOutline" @click="openReportQuestionModal" />
 			</div>

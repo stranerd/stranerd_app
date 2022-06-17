@@ -6,7 +6,7 @@
 			<QuestionTag :tagId="answer.tagId" />
 			<IonIcon :icon="ellipse" class="dot" />
 			<span class="mr-auto">{{ formatTime(answer.createdAt) }}</span>
-			<IonIcon v-if="answer.attachments.length" :icon="imageOutline" class="text-xl" />
+			<IonIcon v-if="answer.attachments.length" :icon="imageOutline" />
 		</div>
 	</router-link>
 </template>

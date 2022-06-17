@@ -3,14 +3,14 @@
 		<IonToolbar class="lg:hidden px-4 border-bottom-line md:h-auto min-h-[3rem] flex items-center justify-center">
 			<div class="flex items-center justify-between">
 				<router-link v-if="$route.meta.back" :to="$route.meta.back">
-					<IonIcon :icon="arrowBackOutline" class="text-2xl" />
+					<IonIcon :icon="arrowBackOutline" />
 				</router-link>
 				<IonText class="font-bold text-xl">
 					{{ $route.meta.routeName ?? 'Stranerd' }}
 				</IonText>
 				<div class="flex gap-4 items-center">
 					<router-link to="/search">
-						<IonIcon :icon="searchOutline" class="text-2xl" />
+						<IonIcon :icon="searchOutline" />
 					</router-link>
 					<NotificationIcon />
 				</div>

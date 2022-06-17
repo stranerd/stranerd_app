@@ -9,11 +9,11 @@
 					{ name: 'About', icon: informationCircleOutline, route: '/settings/about' },
 				]" :key="item.route" :to="item.route"
 				class="p-4 flex items-center gap-4">
-				<IonIcon :icon="item.icon" class="text-2xl" />
+				<IonIcon :icon="item.icon" />
 				<span>{{ item.name }}</span>
 			</router-link>
 			<a class="border-top-line mt-2 px-4 py-6 flex items-center text-danger gap-4" @click.prevent="signout">
-				<IonIcon :icon="logOutOutline" class="text-2xl" />
+				<IonIcon :icon="logOutOutline" />
 				<span>Sign out</span>
 			</a>
 			<PageLoading v-if="loading" />

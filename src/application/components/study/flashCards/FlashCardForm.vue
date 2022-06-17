@@ -7,8 +7,7 @@
 					class="flex flex-col p-4 gap-2 rounded-lg border border-itemBg">
 					<div class="flex w-full items-center justify-between">
 						<IonText class="text-secondaryText">{{ index + 1 }}</IonText>
-						<IonIcon :icon='trashBinOutline' class="text-danger text-xl"
-							@click="factory.removeQuestion(index)" />
+						<IonIcon :icon='trashBinOutline' class="text-danger" @click="factory.removeQuestion(index)" />
 					</div>
 					<IonInput v-model="card.question" placeholder="Enter question or word" />
 					<IonInput v-model="card.answer" placeholder="Enter answer or definition" />
@@ -19,7 +18,7 @@
 			<div
 				class="flex items-center border border-itemBg p-2 rounded-lg justify-center font-bold cursor-pointer"
 				@click="factory.addQuestion">
-				<IonIcon :icon="addOutline" class="text-xl" />
+				<IonIcon :icon="addOutline" />
 				<IonText>ADD CARD</IonText>
 			</div>
 

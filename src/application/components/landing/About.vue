@@ -11,7 +11,7 @@
 					class="lg:px-24 px-5 lg:py-32 py-12 bg-green text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2 w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
 					<img alt="testprep image" class="lg:w-[3.75rem] w-[2.75rem]"
 						src="@app/assets/images/New/testPrep.svg" />
-					<IonText class="font-extrabold lg:text-3xl text-xl">
+					<IonText class="font-extrabold text-xl">
 						Test Prep
 					</IonText>
 					<IonText class="lg:text-xl text-base text-center">
@@ -40,7 +40,7 @@
 				<img alt="testprep image" class="lg:w-1/2" src="@app/assets/images/auth/note.png" />
 				<div
 					class="lg:px-24 px-5 lg:py-32 py-12 bg-pink text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2 w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
-					<IonIcon :icon="readerOutline" class=" lg:text-[3.75rem] text-[2.75rem] text-white" />
+					<IonIcon :icon="readerOutline" class="text-white" />
 					<IonText class="font-extrabold lg:text-3xl text-xl">
 						Notes
 					</IonText>
@@ -54,7 +54,7 @@
 			<div class="flex justify-between items-center w-full lg:flex-row flex-col-reverse mt-24 gap-5">
 				<div
 					class="lg:px-24 px-5 lg:py-32 py-12 bg-cyan text-white lg:rounded-[3rem] rounded-3xl lg:w-1/2 w-full flex flex-col max-w-[37.5rem] justify-center items-center lg:gap-6 gap-3">
-					<IonIcon :icon="chatboxEllipsesOutline" class=" lg:text-[3.75rem] text-[2.75rem] text-white" />
+					<IonIcon :icon="chatboxEllipsesOutline" class="text-white" />
 					<IonText class="font-extrabold lg:text-3xl text-xl">
 						Expert Answers
 					</IonText>

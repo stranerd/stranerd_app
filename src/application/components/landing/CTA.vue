@@ -18,7 +18,7 @@
 						Get Started Now
 					</IonButton>
 				</router-link>
-				<IonText class="text-2xl text-white mt-8 lg:block hidden">
+				<IonText class="text-white mt-8 lg:block hidden">
 					or download the app instead
 				</IonText>
 				<div class="lg:flex gap-4 hidden">

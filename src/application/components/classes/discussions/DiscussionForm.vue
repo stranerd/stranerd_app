@@ -13,7 +13,7 @@
 				<div class="flex gap-2 items-center">
 					<span
 						class="rounded-full p-2 h-8 w-8 bg-primaryBg text-primaryText flex justify-center items-center">
-						<IonIcon :icon="icon" class="text-xl" />
+						<IonIcon :icon="icon" />
 					</span>
 					<IonText class="bg-itemBg text-secondaryText py-1 px-4 rounded-full">{{ label }}</IonText>
 				</div>
@@ -22,15 +22,15 @@
 		<div v-if="showFileCaption" class="chat-block">
 			<div class="body">
 				<div class="flex items-center justify-between">
-					<IonIcon :icon="closeOutline" class="text-3xl" @click="showFileCaption = false" />
-					<IonIcon :icon="trashBinOutline" class="text-3xl text-danger" @click="remove" />
+					<IonIcon :icon="closeOutline" @click="showFileCaption = false" />
+					<IonIcon :icon="trashBinOutline" class="text-danger" @click="remove" />
 				</div>
 				<div class="content flex flex-col items-center justify-center gap-2">
 					<img v-if="fileData[fileIndex].factory.media.type.includes('image')" :src="fileData[fileIndex].data"
 						class="object-cover" />
 					<video v-else-if="fileData[fileIndex].factory.media.type.includes('video')"
 						:src="fileData[fileIndex].data" class="object-cover" controls />
-					<IonIcon v-else :icon="documentOutline" class="text-8xl" />
+					<IonIcon v-else :icon="documentOutline" class="text-4xl" />
 					<span>{{ fileData[fileIndex].factory.media.name }}</span>
 				</div>
 				<div>
@@ -39,19 +39,18 @@
 					</div>
 					<div class="flex items-center gap-2 overflow-x-auto text-secondaryText">
 						<div v-for="(file, index) in fileData" :key="file.hash"
-							class="rounded-xl flex cursor-pointer w-12 h-12 border border-itemBg"
+							class="rounded-xl flex cursor-pointer w-12 h-12 border border-itemBg text-2xl"
 							style="flex-shrink: 0;"
 							@click="fileIndex = index">
 							<img v-if="file.factory.media?.type.includes('image')" :src="file.data"
 								class="h-full w-full" />
-							<IonIcon v-else-if="file.factory.media?.type.includes('video')" :icon="videocamOutline"
-								class="text-5xl" />
-							<IonIcon v-else :icon="documentOutline" class="text-5xl" />
+							<IonIcon v-else-if="file.factory.media?.type.includes('video')" :icon="videocamOutline" />
+							<IonIcon v-else :icon="documentOutline" />
 						</div>
 						<FileInput :multiple="true" accept="*" @files="catchMoreFiles">
 							<div
 								class="rounded-xl flex items-center justify-center cursor-pointer w-12 h-12 border border-itemBg">
-								<IonIcon :icon="addOutline" class="text-5xl" />
+								<IonIcon :icon="addOutline" />
 							</div>
 						</FileInput>
 						<IonButton :disabled="loadingCounter" class="btn-primary ml-auto" @click="uploadFiles">
@@ -63,7 +62,7 @@
 		</div>
 		<form class="flex items-center gap-2" @submit.prevent="createTextDiscussion">
 			<IonIcon :icon="showFileUpload ? closeCircleOutline : addCircleOutline"
-				class="text-3xl" @click="showFileUpload = !showFileUpload" />
+				@click="showFileUpload = !showFileUpload" />
 			<IonInput v-model="factory.content" class="flex-grow rounded-full h-8" placeholder="Write here" required />
 			<IonButton :disabled="!factory.valid || loadingCounter" class="btn-primary" type="submit">
 				<IonIcon slot="icon-only" :icon="paperPlaneOutline" />

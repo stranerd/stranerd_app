@@ -24,31 +24,15 @@
 		</div>
 		<div
 			class="w-full flex items-center absolute inset-x-0 bottom-0 justify-between mx-auto gap-4 text-secondaryText p-6">
-			<IonIcon
-				:icon="isPlaying ? pauseOutline : playOutline"
-				class="text-2xl cursor-pointer"
-				@click="isPlaying ? pauseCard() : playCard()"
-			/>
+			<IonIcon :icon="isPlaying ? pauseOutline : playOutline" @click="isPlaying ? pauseCard() : playCard()" />
 			<div class="flex items-center gap-4">
-				<IonIcon
-					:icon="chevronBackOutline"
-					class="text-2xl cursor-pointer"
-					@click="decrease"
-				/>
+				<IonIcon :icon="chevronBackOutline" @click="decrease" />
 				<IonText>
 					<b>{{ page + 1 }}</b> of <b>{{ formatNumber(flashCard.set.length) }}</b>
 				</IonText>
-				<IonIcon
-					:icon="chevronForwardOutline"
-					class="text-2xl cursor-pointer"
-					@click="increase"
-				/>
+				<IonIcon :icon="chevronForwardOutline" @click="increase" />
 			</div>
-			<IonIcon
-				:icon="isFullscreen ? contractOutline : scanOutline"
-				class="text-2xl cursor-pointer"
-				@click="toggleFullscreen"
-			/>
+			<IonIcon :icon="isFullscreen ? contractOutline : scanOutline" @click="toggleFullscreen" />
 		</div>
 	</div>
 </template>

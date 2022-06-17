@@ -3,7 +3,7 @@
 		class="flex flex-col justify-between card-padding">
 		<div class="flex gap-4 items-center">
 			<IonText class="font-500 truncate w-full">{{ set.name }}</IonText>
-			<IonIcon :icon="arrowForwardOutline" class="text-2xl" />
+			<IonIcon :icon="arrowForwardOutline" />
 		</div>
 		<div class="w-full flex items-center justify-between gap-2 text-sm text-secondaryText">
 			<Tag :tag="`${formatNumber(set.allSaved.length)} ${pluralize(set.allSaved.length, 'Item', 'Items')}`">
@@ -17,10 +17,9 @@
 			<div class="flex items-center gap-3">
 				<Avatar v-if="set.user.id !== id" :id="set.user.id" :name="set.user.bio.fullName" :size="24"
 					:src="set.user.bio.photo" />
-				<Share :link="set.shareLink" :title="set.name" cssClass="text-2xl" text="Share this folder" />
-				<SpinLoading v-if="loading" class="text-2xl" />
-				<IonIcon v-if="set.user.id === id" :icon="settingsOutline" class="text-2xl"
-					@click.prevent="showMenu" />
+				<Share :link="set.shareLink" :title="set.name" text="Share this folder" />
+				<SpinLoading v-if="loading" />
+				<IonIcon v-if="set.user.id === id" :icon="settingsOutline" @click.prevent="showMenu" />
 			</div>
 		</div>
 	</router-link>

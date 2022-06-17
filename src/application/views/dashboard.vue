@@ -1,17 +1,17 @@
 <template>
 	<DefaultLayout>
 		<div>
-			<div class="px-4 py-6 flex items-center border-bottom-line">
-				<IonIcon :icon="linkOutline" class="text-2xl" />
-				<IonText class="ml-3 text-xl">Stranerd Connect</IonText>
+			<div class="card-padding flex items-center border-bottom-line">
+				<IonIcon :icon="linkOutline" />
+				<IonText class="ml-3">Stranerd Connect</IonText>
 			</div>
-			<div class="px-4 py-6 flex items-center justify-between border-bottom-line">
-				<IonText class=" text-xl font-bold">Recent</IonText>
-				<IonIcon :icon="chevronDownOutline" class="text-xl" />
+			<div class="card-padding flex items-center justify-between border-bottom-line">
+				<IonText class="font-bold">Recent</IonText>
+				<IonIcon :icon="chevronDownOutline" />
 			</div>
-			<div class="px-4 py-6 flex items-center justify-between border-bottom-line">
-				<IonText class=" text-xl font-bold">Direct messages</IonText>
-				<IonIcon :icon="chevronDownOutline" class="text-xl" />
+			<div class="card-padding flex items-center justify-between border-bottom-line">
+				<IonText class="font-bold">Direct messages</IonText>
+				<IonIcon :icon="chevronDownOutline" />
 			</div>
 			<ClassesList :hideSearch="true" />
 		</div>
@@ -23,12 +23,14 @@ import { defineComponent } from 'vue'
 import { useRouteMeta } from '@app/composable/core/states'
 import ClassesList from '@app/components/classes/classes/ClassesList.vue'
 import { chevronDownOutline, linkOutline } from 'ionicons/icons'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'Dashboard',
 	components: { ClassesList },
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Dashboard', {})
+		useRouteMeta('Home', {})
 		return { linkOutline, chevronDownOutline }
 	}
 })

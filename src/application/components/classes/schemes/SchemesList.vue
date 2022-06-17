@@ -3,7 +3,7 @@
 		<div class="flex justify-between items-center p-4 border-bottom-line"
 			@click="openCreateSchemeModal(classInst, $router)">
 			<IonText>Set up scheme of work</IonText>
-			<IonIcon :icon="arrowForwardOutline" class="text-2xl" />
+			<IonIcon :icon="arrowForwardOutline" />
 		</div>
 		<div class="flex flex-col">
 			<EmptyState v-if="!loading && !error && schemes.length === 0" info="No scheme of work" />
@@ -12,7 +12,7 @@
 				<div class="py-2 flex justify-between items-center cursor-pointer"
 					@click="show[course] = !show[course]">
 					<IonText class="font-bold capitalize">{{ course }}</IonText>
-					<IonIcon :icon="show[course] ? chevronUpOutline : chevronDownOutline" class="text-2xl" />
+					<IonIcon :icon="show[course] ? chevronUpOutline : chevronDownOutline" />
 				</div>
 				<template v-if="show[course]">
 					<SchemesListCard v-for="scheme in values" :key="scheme.hash" :classInst="classInst"

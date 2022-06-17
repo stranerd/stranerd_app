@@ -8,7 +8,7 @@
 			</span>
 			<IonIcon :icon="ellipse" class="dot" />
 			<span>{{ formatTime(answer.createdAt) }}</span>
-			<div class="flex flex-grow items-center justify-end gap-4 text-2xl text-secondaryText">
+			<div class="flex flex-grow items-center justify-end gap-4 text-secondaryText">
 				<Share :text="answer.strippedBody" title="Share this answer" />
 				<IonIcon :icon="flagOutline" @click="openReportAnswerModal" />
 			</div>
@@ -20,25 +20,24 @@
 
 		<div class="flex items-center gap-6 text-secondaryText text-sm pl-7">
 			<div class="flex items-center gap-1">
-				<IonIcon :icon="like && like.value ? thumbsUp : thumbsUpOutline" class="text-2xl"
-					@click="() => likeAnswer(true)" />
+				<IonIcon :icon="like && like.value ? thumbsUp : thumbsUpOutline" @click="() => likeAnswer(true)" />
 				<span>{{ formatNumber(answer.meta.likes) }}</span>
 			</div>
 			<div class="flex items-center gap-1">
-				<IonIcon :icon="like && !like.value ? thumbsDown : thumbsDownOutline" class="text-2xl"
+				<IonIcon :icon="like && !like.value ? thumbsDown : thumbsDownOutline"
 					@click="() => likeAnswer(false)" />
 				<span>{{ formatNumber(answer.meta.dislikes) }}</span>
 			</div>
 			<router-link :to="`/questions/${question.id}/answers/${answer.id}`" class="flex items-center gap-1">
-				<IonIcon :icon="chatbubbleOutline" class="text-2xl" />
+				<IonIcon :icon="chatbubbleOutline" />
 				<span>{{ formatNumber(answer.meta.comments) }}</span>
 			</router-link>
 			<div class="flex-grow" />
 			<span v-if="showMarkBest" class="flex items-center gap-1" @click.prevent="markBestAnswer(question)">
 				<span>Mark as best</span>
-				<IonIcon :icon="checkmarkCircleOutline" class="text-2xl" />
+				<IonIcon :icon="checkmarkCircleOutline" />
 			</span>
-			<IonIcon v-if="answer.best" :icon="checkmarkCircleOutline" class="text-2xl text-success" />
+			<IonIcon v-if="answer.best" :icon="checkmarkCircleOutline" class="text-success" />
 		</div>
 	</div>
 </template>

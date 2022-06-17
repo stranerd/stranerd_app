@@ -17,10 +17,9 @@
 				<BlockLoading v-if="loading" />
 				<div v-else-if="!fetched" class="flex flex-col gap-4 max-w-[500px] mx-auto p-4 md:p-0">
 					<div v-for="r in recent" :key="r" class="flex items-center gap-4">
-						<IonIcon :icon="closeOutline" class="text-3xl" @click="clearFromRecent(r)" />
+						<IonIcon :icon="closeOutline" @click="clearFromRecent(r)" />
 						<IonText class="w-full text-xl truncate">{{ r }}</IonText>
-						<IonIcon :icon="arrowRedoOutline" class="text-3xl"
-							@click="() => {searchTerm = r; search()}" />
+						<IonIcon :icon="arrowRedoOutline" @click="() => {searchTerm = r; search()}" />
 					</div>
 				</div>
 				<slot v-else :answers="answers" :count="count" :documents="documents" :fetched="fetched"

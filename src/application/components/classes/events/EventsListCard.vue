@@ -2,16 +2,15 @@
 	<div v-if="isEventOneOff(event)" class="flex flex-col rounded-lg bg-itemBg border-l-8 border-primaryBg p-4 gap-2">
 		<IonText class="font-bold">{{ event.title }}</IonText>
 		<IonText v-if="event.data.scheduledAt" class="flex items-center gap-1">
-			<IonIcon :icon="calendarClearOutline" class="text-2xl" />
+			<IonIcon :icon="calendarClearOutline" />
 			<span>{{ formatDateAsDigits(new Date(event.data.scheduledAt), false) }}</span>
 		</IonText>
 		<div class="flex gap-2 items-center text-secondaryText">
-			<IonIcon :icon="timeOutline" class="text-2xl" />
+			<IonIcon :icon="timeOutline" />
 			<IonText>{{ formatTimeAsDigits(new Date(event.data.scheduledAt)) }}</IonText>
 			<span v-if="classInst.admins.includes(id)" class="ml-auto">
 				<SpinLoading v-if="loading" />
-				<IonIcon v-else :icon="trashBinOutline" class="text-danger text-2xl"
-					@click="deleteEvent" />
+				<IonIcon v-else :icon="trashBinOutline" class="text-danger" @click="deleteEvent" />
 			</span>
 		</div>
 	</div>

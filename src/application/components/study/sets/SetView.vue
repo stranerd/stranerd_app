@@ -2,7 +2,7 @@
 	<div class="flex flex-col gap-4 py-4">
 		<div class="flex flex-col justify-between gap-2 px-4">
 			<div class="flex items-center gap-2">
-				<IonIcon :icon="folderOpenOutline" class="text-6xl" />
+				<IonIcon :icon="folderOpenOutline" class="text-3xl" />
 				<div class="flex flex-col">
 					<IonText class="text-xl font-semibold capitalize">{{ set.name }}</IonText>
 					<IonText class="text-sm">{{ set.allSaved.length }}

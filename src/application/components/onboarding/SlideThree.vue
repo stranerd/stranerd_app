@@ -1,5 +1,5 @@
 <template>
-	<IonIcon :icon="reader" class=" text-5xl text-pink" />
+	<IonIcon :icon="reader" class="text-pink" />
 	<IonText class="text-xl text-secondaryText font-bold">
 		Notes
 	</IonText>

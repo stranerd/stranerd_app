@@ -5,16 +5,16 @@
 		</template>
 		<div class="flex flex-col">
 			<router-link class="ml-auto flex gap-1 items-center" to="/study/sets/create">
-				<IonIcon :icon="add" class="text-3xl" />
+				<IonIcon :icon="add" />
 				<span>Create Folder</span>
 			</router-link>
 			<div v-if="sets.length === 0" class="text-center text-xl">
 				No folders created. Go create one before you can save items
 			</div>
-			<div v-for="set in sets" :key="set.hash" class="flex gap-2 items-center border-bottom-line py-4">
-				<IonIcon :icon="folderOutline" class="text-3xl" />
-				<IonText class="w-full truncate font-semibold text-xl">{{ set.name }}</IonText>
-				<IonIcon :icon="set.allSaved.includes(entity.id) ? bookmark : bookmarkOutline" class="text-3xl"
+			<div v-for="set in sets" :key="set.hash" class="flex gap-2 items-center border-bottom-line py-4 text-xl">
+				<IonIcon :icon="folderOutline" />
+				<IonText class="w-full truncate font-semibold">{{ set.name }}</IonText>
+				<IonIcon :icon="set.allSaved.includes(entity.id) ? bookmark : bookmarkOutline"
 					@click="set.allSaved.includes(entity.id) ? removeFromSet(type, entity.id, set) : saveToSet(type, entity.id, set)"
 				/>
 			</div>

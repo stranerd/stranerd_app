@@ -101,33 +101,21 @@
 							<a aria-label="instagram link" class="inline-block"
 								href="https://www.instagram.com/stranerdapp/"
 								target="_blank">
-								<IonIcon
-									:icon="logoInstagram"
-									class="text-3xl"
-								/>
+								<IonIcon :icon="logoInstagram" />
 							</a>
 							<a aria-label="twitter link" class="inline-block" href="https://twitter.com/stranerds"
 								target="_blank">
-								<IonIcon
-									:icon="logoTwitter"
-									class="text-3xl"
-								/>
+								<IonIcon :icon="logoTwitter" />
 							</a>
 							<a aria-label="facebook link" class="inline-block"
 								href="https://facebook.com/officialstranerd"
 								target="_blank">
-								<IonIcon
-									:icon="logoFacebook"
-									class="text-3xl"
-								/>
+								<IonIcon :icon="logoFacebook" />
 							</a>
 							<a aria-label="facebook link" class="inline-block"
 								href="https://www.linkedin.com/company/stranerd"
 								target="_blank">
-								<IonIcon
-									:icon="logoLinkedin"
-									class="text-3xl"
-								/>
+								<IonIcon :icon="logoLinkedin" />
 							</a>
 						</div>
 					</div>

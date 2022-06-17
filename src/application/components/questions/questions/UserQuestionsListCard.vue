@@ -5,9 +5,9 @@
 			<QuestionTag :tagId="question.tagId" />
 			<IonIcon :icon="ellipse" class="dot" />
 			<span class="mr-auto">{{ formatTime(question.createdAt) }}</span>
-			<IonIcon v-if="question.attachments.length" :icon="imageOutline" class="text-xl" />
+			<IonIcon v-if="question.attachments.length" :icon="imageOutline" />
 			<span class="flex gap-1 items-center">
-				<IonIcon :icon="readerOutline" class="text-xl" />
+				<IonIcon :icon="readerOutline" />
 				<span>{{ formatNumber(question.answers.length) }}</span>
 			</span>
 		</div>

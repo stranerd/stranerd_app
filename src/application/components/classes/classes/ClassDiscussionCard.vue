@@ -9,9 +9,9 @@
 			<IonText class="font-semibold text-secondaryText">{{ discussion.media.name }}</IonText>
 			<span class="text-sm">{{ discussion.size }}</span>
 		</div>
-		<SpinLoading v-if="loading" class="text-3xl" />
+		<SpinLoading v-if="loading" />
 		<span v-else-if="!content">
-			<IonIcon :icon="downloadOutline" class="text-3xl" color="primary" @click="download" />
+			<IonIcon :icon="downloadOutline" color="primary" @click="download" />
 		</span>
 	</div>
 	<div v-if="discussion.links.length > 0" class="bg-white card-padding flex rounded-xl items-center">

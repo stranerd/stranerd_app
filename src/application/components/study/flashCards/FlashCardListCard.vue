@@ -3,7 +3,7 @@
 		class="flex flex-col justify-between card-padding">
 		<div class="flex gap-4 items-center">
 			<IonText class="font-500 truncate w-full">{{ flashCard.title }}</IonText>
-			<IonIcon :icon="arrowForwardOutline" class="text-2xl" />
+			<IonIcon :icon="arrowForwardOutline" />
 		</div>
 		<div class="w-full flex items-center justify-between gap-2 text-sm text-secondaryText">
 			<Tag :tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
@@ -18,12 +18,10 @@
 				<Avatar v-if="flashCard.user.id !== id" :id="flashCard.user.id" :name="flashCard.user.bio.fullName"
 					:size="24"
 					:src="flashCard.user.bio.photo" />
-				<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-2xl"
-					text="Share this flashcard" />
+				<Share :link="flashCard.shareLink" :title="flashCard.title" text="Share this flashcard" />
 				<SaveToSet :entity="flashCard" />
-				<SpinLoading v-if="loading" class="text-2xl" />
-				<IonIcon v-if="flashCard.user.id === id" :icon="settingsOutline" class="text-2xl"
-					@click.prevent="showMenu" />
+				<SpinLoading v-if="loading" />
+				<IonIcon v-if="flashCard.user.id === id" :icon="settingsOutline" @click.prevent="showMenu" />
 			</div>
 		</div>
 	</router-link>
