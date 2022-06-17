@@ -11,7 +11,7 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesClassIdAnnouncementsAnnouncementIdEdit',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ to, goBackToNonAuth }) => {
 		const { id } = useAuth()
 		const { classId = '', announcementId = '' } = to.params
 		const announcement = getEditingAnnouncement()
@@ -19,8 +19,7 @@ export default defineComponent({
 		const canEdit = announcement.admins.includes(id.value)
 		if (!canEdit) return `/classes/${classId}/announcements/${announcement.id}`
 		useClassModal().openEditAnnouncement()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
+		return goBackToNonAuth()
 	}])
 })
 </script>

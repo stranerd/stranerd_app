@@ -10,7 +10,7 @@
 		"build": "vite build",
 		"prebuild": "yarn bin:project:env && rm -rf android/app/build",
 		"postbuild": "cap sync",
-		"lint": "eslint --ext .js,.vue --fix src",
+		"lint": "eslint --ext .js,.vue --fix src && vue-tsc --noEmit",
 		"prepare": "husky install",
 		"ionic:serve": "yarn serve",
 		"prerun:android": "rm -rf android/app/build",

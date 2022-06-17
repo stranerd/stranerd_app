@@ -12,7 +12,7 @@ import { EventType } from '@modules/classes'
 
 export default defineComponent({
 	name: 'ClassesClassIdTimetableTimetableIdEdit',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth, to }) => {
 		const { id } = useAuth()
 		const { classId = '', timetableId = '' } = to.params
 		const info = getEditEvent()
@@ -21,8 +21,7 @@ export default defineComponent({
 		const day = info.event.data.type === EventType.timetable ? info.event.data.start.day : 1
 		if (!canEdit) return `/classes/${classId}/timetable?day=${day}`
 		useClassModal().openEditTimetable()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
+		return goBackToNonAuth()
 	}])
 })
 </script>

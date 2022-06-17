@@ -13,7 +13,7 @@ import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'QuestionsQuestionIdEdit',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ to, goBackToNonAuth }) => {
 		const { id } = useAuth()
 		const { questionId = '' } = to.params
 		const question = getEditingQuestion()
@@ -21,8 +21,7 @@ export default defineComponent({
 		const canEdit = question.user.id === id.value && question.canBeEdited
 		if (!canEdit) return `/questions/${question.id}`
 		useQuestionModal().openEditQuestion()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
+		return goBackToNonAuth()
 	}]),
 	setup () {
 		const { questionId } = useRoute().params

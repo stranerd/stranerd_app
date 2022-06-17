@@ -9,10 +9,9 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'StudySetsCreate',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth }) => {
 		useStudyModal().openCreateSet()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
+		return goBackToNonAuth()
 	}])
 })
 </script>

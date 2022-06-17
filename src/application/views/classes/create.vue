@@ -9,10 +9,9 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesCreate',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', 'isAccountVerified', async ({ from }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', 'isAccountVerified', async ({ goBackToNonAuth }) => {
 		useClassModal().openCreateClass()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
+		return goBackToNonAuth()
 	}])
 })
 </script>

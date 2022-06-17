@@ -11,14 +11,13 @@ import { getCreateEventClass } from '@app/composable/classes/timetable'
 
 export default defineComponent({
 	name: 'ClassesClassIdTimetableCreate',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth }) => {
 		const { id } = useAuth()
 		const classInst = getCreateEventClass()
 		if (!classInst) return '/classes/'
 		if (!classInst.admins.includes(id.value)) return `/classes/${classInst.id}/timetable`
 		useClassModal().openCreateTimetable()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
+		return goBackToNonAuth()
 	}])
 })
 </script>

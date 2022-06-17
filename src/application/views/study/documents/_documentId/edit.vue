@@ -11,7 +11,7 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'StudyDocumentsDocumentIdEdit',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth, to }) => {
 		const { id } = useAuth()
 		const { documentId } = to.params
 		const document = getEditingDocument()
@@ -19,8 +19,7 @@ export default defineComponent({
 		const canEdit = document.user.id === id.value
 		if (!canEdit) return `/study/documents/${document.id}`
 		useStudyModal().openEditDocument()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
+		return goBackToNonAuth()
 	}])
 })
 </script>

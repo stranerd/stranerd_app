@@ -11,7 +11,7 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesClassIdGroupsGroupIdEdit',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth, to }) => {
 		const { id } = useAuth()
 		const { classId = '', groupId = '' } = to.params
 		const group = getEditingGroup()
@@ -19,8 +19,7 @@ export default defineComponent({
 		const canEdit = group.admins.includes(id.value)
 		if (!canEdit) return `/classes/${classId}/groups/${group.id}`
 		useClassModal().openEditGroup()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
+		return goBackToNonAuth()
 	}])
 })
 </script>

@@ -11,7 +11,7 @@ import { getEditScheme } from '@app/composable/classes/schemes'
 
 export default defineComponent({
 	name: 'ClassesClassIdSchemesSchemeIdEdit',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth, to }) => {
 		const { id } = useAuth()
 		const { classId = '', schemeId = '' } = to.params
 		const info = getEditScheme()
@@ -19,8 +19,7 @@ export default defineComponent({
 		const canEdit = info.scheme.admins.includes(id.value)
 		if (!canEdit) return `/classes/${classId}/scheme`
 		useClassModal().openEditScheme()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
+		return goBackToNonAuth()
 	}])
 })
 </script>

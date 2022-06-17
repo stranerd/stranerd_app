@@ -11,7 +11,7 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'StudySetsSetIdEdit',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth, to }) => {
 		const { id } = useAuth()
 		const { setId = '' } = to.params
 		const set = getEditingSet()
@@ -19,8 +19,7 @@ export default defineComponent({
 		const canEdit = set.user.id === id.value
 		if (!canEdit) return `/study/sets/${set.id}`
 		useStudyModal().openEditSet()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
+		return goBackToNonAuth()
 	}])
 })
 </script>

@@ -11,14 +11,13 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesClassIdAnnouncementsCreate',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth }) => {
 		const { id } = useAuth()
 		const classInst = getAnnouncementClass()
 		if (!classInst) return '/classes/'
 		if (!classInst.admins.includes(id.value)) return `/classes/${classInst.id}/announcements`
 		useClassModal().openCreateAnnouncement()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
+		return goBackToNonAuth()
 	}])
 })
 </script>

@@ -11,14 +11,13 @@ import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'ClassesClassIdGroupsCreate',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from }) => {
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth }) => {
 		const { id } = useAuth()
 		const classInst = getGroupClass()
 		if (!classInst) return '/classes/'
 		if (!classInst.admins.includes(id.value)) return `/classes/${classInst.id}/groups`
 		useClassModal().openCreateGroup()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
+		return goBackToNonAuth()
 	}])
 })
 </script>

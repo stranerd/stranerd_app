@@ -1,9 +1,15 @@
-import { RouteLocationNormalized } from 'vue-router'
+import { NavigationGuardWithThis, RouteLocationNormalized } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 import { storage } from '@utils/storage'
 import { REDIRECT_SESSION_NAME } from '@utils/constants'
 
-type MiddlewareFunction = (d: { to: RouteLocationNormalized, from: RouteLocationNormalized }) => Promise<string | void>
+type MiddleWareArgs = {
+	to: RouteLocationNormalized,
+	from: RouteLocationNormalized,
+	goBackToNonAuth: () => string
+}
+
+type MiddlewareFunction = (d: MiddleWareArgs) => Promise<string | void>
 
 export const defineMiddleware = (middleware: MiddlewareFunction) => middleware
 
@@ -30,15 +36,18 @@ export const isAuthenticated = defineMiddleware(async ({ to }) => {
 const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, isAccountVerified }
 type Middleware = MiddlewareFunction | keyof typeof globalMiddlewares
 
-export const generateMiddlewares = (middlewares: Middleware[]) => async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
+export const generateMiddlewares = (middlewares: Middleware[]): NavigationGuardWithThis<undefined> => async (to, from) => {
 	let redirect = null
 	for (const middleware of middlewares) {
 		const callback = typeof middleware === 'string' ? globalMiddlewares[middleware] : middleware
-		const path = await callback?.({ to, from }).catch(() => null)
+		const goBackToNonAuth = () => {
+			const backPath = from?.fullPath ?? '/dashboard'
+			return backPath.startsWith('/auth/') ? '/dashboard' : backPath
+		}
+		const path = await callback?.({ to, from, goBackToNonAuth }).catch(() => null)
 		if (!path) continue
 		redirect = path
 		break
 	}
-
-	if (redirect) return redirect
+	if (redirect) return redirect === from?.fullPath ? false : redirect
 }
