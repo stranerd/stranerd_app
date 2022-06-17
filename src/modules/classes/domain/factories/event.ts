@@ -31,14 +31,14 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 		title: { required: true, rules: [isString, isLongerThanX(0)] },
 		classId: { required: true, rules: [isString] },
 		type: { required: true, rules: [isString] },
-		scheduledAt: { required: () => this.isOneOffType, nullable: true, rules: [isNumber] },
+		scheduledAt: { required: () => this.isOneOffType, rules: [isNumber] },
 		announcementId: { required: () => this.isOneOffType, nullable: true, rules: [isString] },
-		start: { required: () => this.isTimetableType, nullable: true, rules: [isCronValid] },
+		start: { required: () => this.isTimetableType, rules: [isCronValid] },
 		end: {
-			required: () => this.isTimetableType, nullable: true,
+			required: () => this.isTimetableType,
 			rules: [isCronValid, (val: any) => isCronMore(val, this.start)]
 		},
-		lecturer: { required: () => this.isTimetableType, nullable: true, rules: [isString, isLongerThanX(0)] }
+		lecturer: { required: () => this.isTimetableType, rules: [isString, isLongerThanX(0)] }
 	}
 
 	reserved = ['classId', 'type']

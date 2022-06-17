@@ -30,11 +30,11 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 			.every((valid) => valid)
 	}
 
-	set (property: keyof K, value: any) {
+	set (property: keyof K, value: any, ignoreRules = false) {
 		const check = this.checkValidity(property, value)
 
 		this.values[property] = value
-		this.validValues[property] = check.isValid ? value : this.defaults[property]
+		this.validValues[property] = check.isValid || ignoreRules ? value : this.defaults[property]
 		this.errors[property] = this.defaults[property] === value ? '' : check.message
 
 		return check.isValid

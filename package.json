@@ -48,7 +48,7 @@
 		"@ionic/pwa-elements": "^3.1.1",
 		"@ionic/vue": "^6.1.6",
 		"@ionic/vue-router": "^6.1.6",
-		"@stranerd/validate": "^3.3.0",
+		"@stranerd/validate": "^3.3.1",
 		"axios": "^0.27.2",
 		"capacitor-blob-writer": "1.0.4",
 		"cordova-plugin-file-opener2": "^3.0.5",

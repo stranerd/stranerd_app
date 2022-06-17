@@ -91,7 +91,8 @@
 						<Institution :institutionId="exam.institutionId" />
 						subject combination
 					</IonLabel>
-					<IonSelect v-model="exam.courseIds" :multiple="true" class="w-full capitalize"
+					<IonSelect v-model="factory.getInstitution(exam.institutionId).courseIds" :multiple="true"
+						class="w-full capitalize"
 						interface="alert" placeholder="Select subjects" required>
 						<IonSelectOption
 							v-for="course in courses.filter((c) => c.institutionId === exam.institutionId)"
@@ -100,16 +101,13 @@
 						</IonSelectOption>
 					</IonSelect>
 					<div class="flex flex-col md:flex-row gap-4">
-						<IonInput :min="new Date().toISOString().substring(0, 10)"
-							:value="new Date(exam.startDate).toISOString().substring(0, 10)"
+						<IonInput v-model="factory.getInstitution(exam.institutionId).startTime"
 							class="w-full" placeholder="Select start date" required
-							type="date"
-							@change="(e) => exam.startDate = new Date(e.target.value).getTime()" />
-						<IonInput :min="new Date(exam.startDate).toISOString().substring(0, 10)"
-							:value="new Date(exam.endDate).toISOString().substring(0, 10)"
+							type="date" />
+						<IonInput v-model="factory.getInstitution(exam.institutionId).endTime"
+							:min="factory.getInstitution(exam.institutionId).startTime"
 							class="w-full" placeholder="Select end date" required
-							type="date"
-							@change="(e) => exam.endDate = new Date(e.target.value).getTime()" />
+							type="date" />
 					</div>
 					<IonButton v-if="index === factory.exams.length - 1" :disabled="loading || !factory.valid"
 						class="!w-full btn-primary" type="submit">

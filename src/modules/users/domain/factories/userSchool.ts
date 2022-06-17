@@ -1,19 +1,30 @@
-import { arrayContainsX, isLongerThanX, isString } from '@stranerd/validate'
+import {
+	arrayContainsX,
+	hasMoreThan,
+	isArrayOf,
+	isArrayOfX,
+	isLongerThanX,
+	isMoreThanOrEqualTo,
+	isNumber,
+	isString
+} from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
 import { UserSchoolData, UserSchoolType } from '../types'
 import { UserEntity } from '../entities/user'
+
+type Exam = {
+	institutionId: string
+	courseIds: string[]
+	startDate: number
+	endDate: number
+}
 
 type Keys = {
 	type: UserSchoolType
 	institutionId: string
 	facultyId: string
 	departmentId: string
-	exams: {
-		institutionId: string
-		courseIds: string[]
-		startDate: number
-		endDate: number
-	}[]
+	exams: Exam[]
 }
 
 export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, Keys> {
@@ -21,20 +32,30 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 		body: { required: true, rules: [isString, isLongerThanX(2)] },
 		type: { required: true, rules: [arrayContainsX(Object.values(UserSchoolType), (cur, val) => cur === val)] },
 		institutionId: {
-			required: () => this.isCollegeType, nullable: true,
+			required: () => this.isCollegeType,
 			rules: [isString, isLongerThanX(0)]
 		},
 		facultyId: {
-			required: () => this.isCollegeType, nullable: true,
+			required: () => this.isCollegeType,
 			rules: [isString, isLongerThanX(0)]
 		},
 		departmentId: {
-			required: () => this.isCollegeType, nullable: true,
+			required: () => this.isCollegeType,
 			rules: [isString, isLongerThanX(0)]
 		},
 		exams: {
-			required: () => !this.isCollegeType, nullable: true,
-			rules: []
+			required: () => !this.isCollegeType,
+			rules: [isArrayOfX((value: Exam) => {
+				const isInstitutionIdValid = isString(value.institutionId).valid
+				const isCourseIdsValid = isArrayOf(value.courseIds, (cur) => isString(cur).valid, 'strings').valid &&
+					hasMoreThan(value.courseIds, 0).valid
+				const isStartValid = isNumber(value.startDate).valid
+				const isEndValid = isNumber(value.endDate).valid && isMoreThanOrEqualTo(value.endDate, value.startDate).valid
+				return [
+					isInstitutionIdValid, isCourseIdsValid,
+					isStartValid, isEndValid
+				].every((v) => v)
+			}, 'exams')]
 		}
 	}
 	reserved = ['type']
@@ -85,8 +106,8 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 		return this.values.exams
 	}
 
-	set exams (exams: { institutionId: string, courseIds: string[], startDate: number, endDate: number }[]) {
-		this.set('exams', exams)
+	set exams (exams: Exam[]) {
+		this.set('exams', exams, true)
 	}
 
 	get institutions () {
@@ -95,10 +116,10 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 
 	set institutions (institutionIds: string[]) {
 		const now = Date.now()
-		this.set('exams', institutionIds.map((institutionId) => ({
+		this.exams = institutionIds.map((institutionId) => ({
 			institutionId, courseIds: [], startDate: now, endDate: now,
 			...(this.exams.find((e) => e.institutionId === institutionId) ?? {})
-		})))
+		}))
 		this.insts.length = 0
 		this.insts.push(...this.exams.map((e) => e.institutionId))
 	}
@@ -113,6 +134,39 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 
 	get isSecondaryType () {
 		return this.type === UserSchoolType.secondary
+	}
+
+	getInstitution (institutionId: string) {
+		// eslint-disable-next-line @typescript-eslint/no-this-alias
+		const classThis = this
+		const obj = this.exams.find((e) => e.institutionId === institutionId)!
+		return {
+			...obj,
+			get courseIds () {
+				return obj.courseIds
+			},
+			set courseIds (value: string[]) {
+				obj.courseIds = value
+				// eslint-disable-next-line no-self-assign
+				classThis.exams = classThis.exams
+			},
+			get startTime () {
+				return new Date(obj.startDate).toISOString().substring(0, 10)
+			},
+			set startTime (value: string) {
+				obj.startDate = new Date(value).getTime()
+				// eslint-disable-next-line no-self-assign
+				classThis.exams = classThis.exams
+			},
+			get endTime () {
+				return new Date(obj.endDate).toISOString().substring(0, 10)
+			},
+			set endTime (value: string) {
+				obj.endDate = new Date(value).getTime()
+				// eslint-disable-next-line no-self-assign
+				classThis.exams = classThis.exams
+			}
+		}
 	}
 
 	loadEntity = (entity: UserEntity) => {

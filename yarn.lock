@@ -693,10 +693,10 @@
   resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.12.1.tgz#92364d3e57337b8d36dd9b70cfbed2833929f22d"
   integrity sha512-u24TZ+FEvjnZt5ZgIkLjLpUNsO6Ml3mUZqwmqk81w6RWWz75hgB5p4RFI5rvuErFeh2xvMIGo+pNdG24XUBz1A==
 
-"@stranerd/validate@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@stranerd/validate/-/validate-3.3.0.tgz#0d43befc0f80cbd7d69e2903be6aa242870e6df1"
-  integrity sha512-yI8vTZtmqfKMCWGUL2GABXzRzb8KRqfUsMYLb5Bj3EZh+mGOVUYRygyE74mpZQnKsOczgkwxFXJlrpoFjY78Rw==
+"@stranerd/validate@^3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@stranerd/validate/-/validate-3.3.1.tgz#5801ccae781ca5ccd658664347de52c80b8b7565"
+  integrity sha512-+Q7zMu2+Q0DYE99FsbG7mOBR43dQTzduOKdQimrSMUjihvMChJkRs6dYTNopo4cLTpXhPUWHDIyb6NhsIPFnSQ==
   dependencies:
     url-regex-safe "^3.0.0"
 
