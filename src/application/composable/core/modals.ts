@@ -1,5 +1,4 @@
-import { ref } from 'vue'
-import { useModal, usePopover } from '@app/composable/core/modal'
+import { modal, popover } from '@app/composable/core/modal'
 import CreateReport from '@app/components/modals/reports/CreateReport.vue'
 import CreateQuestion from '@app/components/modals/questions/CreateQuestion.vue'
 import EditQuestion from '@app/components/modals/questions/EditQuestion.vue'
@@ -38,7 +37,6 @@ import EditPastQuestion from '@app/components/modals/school/EditPastQuestion.vue
 import Settings from '@app/components/modals/users/Settings.vue'
 import FabMenu from '@app/components/modals/users/FabMenu.vue'
 
-export const modal = useModal(ref([]))
 const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion, CreateTag, EditTag })
 const SessionModal = modal.register('Session', { CreateSession: CreateReport, Ratings: CreateReport })
 const ReportModal = modal.register('Report', { CreateReport })
@@ -65,7 +63,6 @@ export const useSchoolModal = () => SchoolModal
 export const useUserModal = () => UserModal
 export const allModals = [useQuestionModal, useSessionModal, useReportModal, useStudyModal, useClassModal, useSchoolModal, useUserModal]
 
-export const popover = usePopover(ref([]))
 const MenuPopover = popover.register('Menu', { CreateDashboardMenu, UserDashboardMenu })
 
 export const useMenuPopover = () => MenuPopover

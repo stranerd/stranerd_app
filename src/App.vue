@@ -1,6 +1,7 @@
 <template>
 	<IonApp>
 		<IonRouterOutlet :animated="false" />
+		<Modals />
 	</IonApp>
 </template>
 
