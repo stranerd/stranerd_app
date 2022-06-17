@@ -3,14 +3,14 @@
 		class="flex flex-col justify-between card-padding">
 		<div class="flex gap-4 items-center">
 			<IonText class="font-500 truncate w-full">{{ document.title }}</IonText>
-			<IonIcon :icon="arrowForwardOutline" class="text-heading2" />
+			<IonIcon :icon="arrowForwardOutline" class="text-2xl" />
 		</div>
-		<div class="w-full flex items-center justify-between gap-2 text-sub">
+		<div class="w-full flex items-center justify-between gap-2 text-sm">
 			<Tag tag="Document">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
 						<IonIcon :icon="documentOutline" class="text-base mr-1" />
-						<IonText class="text-sub">{{ slotProps.tag }}</IonText>
+						<IonText class="text-sm">{{ slotProps.tag }}</IonText>
 					</span>
 				</template>
 			</Tag>
@@ -19,10 +19,10 @@
 					:size="24"
 					:src="document.user.bio.photo" />
 				<Share :link="document.shareLink" :text="document.content" :title="document.title"
-					cssClass="text-heading2" />
+					cssClass="text-2xl" />
 				<SaveToSet :entity="document" />
-				<SpinLoading v-if="loading" class="text-heading2" />
-				<IonIcon v-if="document.user.id === id" :icon="settingsOutline" class="text-heading2"
+				<SpinLoading v-if="loading" class="text-2xl" />
+				<IonIcon v-if="document.user.id === id" :icon="settingsOutline" class="text-2xl"
 					@click.prevent="showMenu" />
 			</div>
 		</div>

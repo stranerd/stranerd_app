@@ -7,7 +7,7 @@
 
 		<div class="pb-[50px]" />
 
-		<div class="footer-shadow fixed bottom-0 inset-x-0 bg-bodyBg z-[10] text-secondaryText text-sub">
+		<div class="footer-shadow fixed bottom-0 inset-x-0 bg-bodyBg z-[10] text-secondaryText text-sm">
 			<div :style="`width:${test.progress * 100}%`" class="h-1" />
 			<div class="w-full px-4 mx-auto flex items-center justify-between py-2">
 				<div>

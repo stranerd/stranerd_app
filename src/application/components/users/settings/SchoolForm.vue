@@ -1,9 +1,9 @@
 <template>
 	<PageLoading v-if="loading" />
 	<div v-if="tab === 0" class="flex flex-col gap-4 w-full">
-		<IonList class="text-sub">
+		<IonList class="text-sm">
 			<IonListHeader>
-				<IonLabel class="font-bold text-heading">Choose your academic level</IonLabel>
+				<IonLabel class="font-bold text-xl">Choose your academic level</IonLabel>
 			</IonListHeader>
 			<IonRadioGroup v-model="factory.type" class="flex flex-col items-start" required>
 				<IonItem class="flex items-center gap-4">

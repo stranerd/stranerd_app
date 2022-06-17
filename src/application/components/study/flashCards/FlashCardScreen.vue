@@ -1,7 +1,7 @@
 <template>
 	<div id="screen" class="px-4">
 		<Swipe :key="page" :class="[isFullscreen ? 'flex-grow' : '']" @swipeLeft="increase" @swipeRight="decrease">
-			<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full h-full text-heading']"
+			<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full h-full text-xl']"
 				@click="flipped = !flipped">
 				<div class="front w-full">
 					<section v-if="!flipped"
@@ -26,13 +26,13 @@
 			class="w-full flex items-center absolute inset-x-0 bottom-0 justify-between mx-auto gap-4 text-secondaryText p-6">
 			<IonIcon
 				:icon="isPlaying ? pauseOutline : playOutline"
-				class="text-heading2 cursor-pointer"
+				class="text-2xl cursor-pointer"
 				@click="isPlaying ? pauseCard() : playCard()"
 			/>
 			<div class="flex items-center gap-4">
 				<IonIcon
 					:icon="chevronBackOutline"
-					class="text-heading2 cursor-pointer"
+					class="text-2xl cursor-pointer"
 					@click="decrease"
 				/>
 				<IonText>
@@ -40,13 +40,13 @@
 				</IonText>
 				<IonIcon
 					:icon="chevronForwardOutline"
-					class="text-heading2 cursor-pointer"
+					class="text-2xl cursor-pointer"
 					@click="increase"
 				/>
 			</div>
 			<IonIcon
 				:icon="isFullscreen ? contractOutline : scanOutline"
-				class="text-heading2 cursor-pointer"
+				class="text-2xl cursor-pointer"
 				@click="toggleFullscreen"
 			/>
 		</div>

@@ -5,7 +5,7 @@
 			<Institution :institutionId="institutionId" class="font-500" />
 		</IonText>
 		<Tag :tag="yearGap" />
-		<IonIcon :icon="arrowForwardOutline" class="text-heading2 ml-auto" />
+		<IonIcon :icon="arrowForwardOutline" class="text-2xl ml-auto" />
 	</router-link>
 </template>
 

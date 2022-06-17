@@ -2,16 +2,16 @@
 	<div class="flex flex-col rounded-lg bg-itemBg border-l-8 border-primaryBg p-4 gap-4">
 		<IonText class="font-bold">{{ scheme.topic }}</IonText>
 		<div class="flex gap-2 items-center text-secondaryText">
-			<IonIcon :icon="calendarClearOutline" class="text-heading2" />
+			<IonIcon :icon="calendarClearOutline" class="text-2xl" />
 			<IonText>
 				{{ formatDateAsDigits(new Date(scheme.start), false) }} -
 				{{ formatDateAsDigits(new Date(scheme.end), false) }}
 			</IonText>
 			<span v-if="classInst.admins.includes(id)" class="ml-auto flex items-center gap-2">
-				<IonIcon :icon="createOutline" class="text-warning text-heading2"
+				<IonIcon :icon="createOutline" class="text-warning text-2xl"
 					@click="openEditSchemeModal({ scheme, classInst }, $router)" />
 				<SpinLoading v-if="loading" />
-				<IonIcon v-else :icon="trashBinOutline" class="text-danger text-heading2"
+				<IonIcon v-else :icon="trashBinOutline" class="text-danger text-2xl"
 					@click="deleteScheme(scheme)" />
 			</span>
 		</div>

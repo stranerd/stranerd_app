@@ -6,7 +6,7 @@
 					<div class="flex gap-4 items-start">
 						<Avatar :name="classInst.name" :size="64" :src="classInst.photo" />
 						<div class="flex flex-col w-full">
-							<IonText class="font-bold capitalize text-heading">{{ classInst.name }}</IonText>
+							<IonText class="font-bold capitalize text-xl">{{ classInst.name }}</IonText>
 							<Institution :institutionId="classInst.school.institutionId"
 								class="text-secondaryText font-semibold" />
 							<Department :departmentId="classInst.school.departmentId"
@@ -21,7 +21,7 @@
 							{ name: 'Courses List', icon: listOutline, click: () => openClassEditModal(classInst, $router, true) }
 						]" :key="name" class="flex gap-4 items-center py-2"
 						@click="click">
-						<IonIcon :icon="icon" class="text-heading2" />
+						<IonIcon :icon="icon" class="text-2xl" />
 						<IonText>{{ name }}</IonText>
 					</a>
 				</div>

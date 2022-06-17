@@ -9,13 +9,13 @@
 					class="flex-grow" placeholder="Enter course"
 					@keydown.enter.prevent="addCourse" />
 				<IonButton class="btn-primary" @click="addCourse">
-					<IonIcon slot="icon-only" :icon="addOutline" class="text-heading" />
+					<IonIcon slot="icon-only" :icon="addOutline" class="text-xl" />
 				</IonButton>
 			</div>
 			<div v-for="(course, index) in factory.courses" :key="index + course"
 				class="flex gap-4 items-center justify-between">
 				<span class="truncate flex-grow">{{ course }}</span>
-				<IonIcon :icon="trashBinOutline" class="text-danger text-heading2"
+				<IonIcon :icon="trashBinOutline" class="text-danger text-2xl"
 					@click="factory.removeCourse(course)" />
 			</div>
 			<IonButton :disabled="loading || !factory.valid" class="w-full btn-primary" @click.prevent="editClass">

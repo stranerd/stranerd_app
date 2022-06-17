@@ -1,7 +1,7 @@
 <template>
 	<DefaultLayout>
 		<form class="p-4 flex flex-col gap-4" @submit.prevent="updatePassword">
-			<IonText class="text-heading font-semibold">
+			<IonText class="text-xl font-semibold">
 				{{ hasPassword ? 'Update Password' : 'Add Password' }}
 			</IonText>
 			<IonInput v-if="hasPassword" v-model="factory.oldPassword" class="w-full font-medium"

@@ -1,8 +1,8 @@
 <template>
 	<div class="!gap-4 card-padding flex flex-col">
-		<div class="flex items-center gap-4 text-secondaryText text-sub justify-between">
+		<div class="flex items-center gap-4 text-secondaryText text-sm justify-between">
 			<QuestionTag :tagId="question.tagId" class="font-bold" />
-			<div class="flex flex-grow items-center justify-end gap-4 text-heading2">
+			<div class="flex flex-grow items-center justify-end gap-4 text-2xl">
 				<Share :text="question.strippedBody" title="Share this question" />
 				<IonIcon :icon="flagOutline" @click="openReportQuestionModal" />
 			</div>
@@ -10,7 +10,7 @@
 
 		<DisplayHtml :html="question.body" />
 
-		<div class="flex items-center justify-between gap-4 text-secondaryText text-sub">
+		<div class="flex items-center justify-between gap-4 text-secondaryText text-sm">
 			<div class="flex items-center gap-2">
 				<Avatar :id="question.user.id" :size="24" :src="question.user.bio.photo" />
 				<span class="font-semibold text-secondaryText flex gap-1 items-center">

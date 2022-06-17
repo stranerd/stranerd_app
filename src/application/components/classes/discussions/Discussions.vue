@@ -3,17 +3,17 @@
 		<div v-if="group && group.members.includes(id)" class="body">
 			<div class="flex items-center bg-headerBg text-headerText px-4 gap-4">
 				<router-link :to="`/classes/${classId}/groups`">
-					<IonIcon :icon="arrowBackOutline" class="text-heading2" />
+					<IonIcon :icon="arrowBackOutline" class="text-2xl" />
 				</router-link>
 				<Avatar :name="group.name" :size="36" />
 				<div class="flex flex-col flex-grow truncate">
 					<IonText class="font-semibold">{{ group.name }}</IonText>
-					<IonText class="text-sub">
+					<IonText class="text-sm">
 						Created {{ formatTime(group.createdAt) }} by <span>{{ group.user.bio.fullName }}</span>
 					</IonText>
 				</div>
 				<span v-if="group.admins.includes(id)">
-					<IonIcon :icon="createOutline" class="text-heading2" @click="openGroupEditModal(group, $router)" />
+					<IonIcon :icon="createOutline" class="text-2xl" @click="openGroupEditModal(group, $router)" />
 				</span>
 			</div>
 			<DiscussionsList :classId="classId" :groupId="groupId" class="content" />

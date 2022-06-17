@@ -2,7 +2,7 @@
 	<BlockLoading v-if="loading || createLoading" />
 	<div v-else
 		class="flex items-center justify-center flex-col p-4 border-bottom-line gap-4">
-		<IonText class="text-heading font-bold">{{ test.scoreText }}</IonText>
+		<IonText class="text-xl font-bold">{{ test.scoreText }}</IonText>
 
 		<DonutChart :bgColor="test.passed ? '#00D24622' : '#FF666622'"
 			:fgColor="test.passed ? '#00D246' : '#FF6666'"

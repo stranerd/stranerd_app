@@ -7,7 +7,7 @@
 			</div>
 			<div class="flex flex-col items-center mt-6 md:justify-center lg:w-5/12 w-full p-4">
 				<form class="h-[65%] w-full md:w-[70%] flex flex-col gap-4" @submit.prevent="completeVerification">
-					<span class="text-heading2 font-bold text-center">Verify Your Email Address</span>
+					<span class="text-2xl font-bold text-center">Verify Your Email Address</span>
 					<div class="flex flex-col">
 						<IonLabel class="font-bold mb-2">OTP</IonLabel>
 						<IonInput v-model="token" :size="24" placeholder="Enter OTP" position="floating" />

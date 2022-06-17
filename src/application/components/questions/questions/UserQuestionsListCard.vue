@@ -1,13 +1,13 @@
 <template>
 	<router-link :id="question.id" :to="`/questions/${question.id}`" class="card-padding flex flex-col">
 		<span>{{ question.trimmedBody }}</span>
-		<div class="flex items-center justify-between text-secondaryText text-sub gap-2">
+		<div class="flex items-center justify-between text-secondaryText text-sm gap-2">
 			<QuestionTag :tagId="question.tagId" />
 			<IonIcon :icon="ellipse" class="dot" />
 			<span class="mr-auto">{{ formatTime(question.createdAt) }}</span>
-			<IonIcon v-if="question.attachments.length" :icon="imageOutline" class="text-heading" />
+			<IonIcon v-if="question.attachments.length" :icon="imageOutline" class="text-xl" />
 			<span class="flex gap-1 items-center">
-				<IonIcon :icon="readerOutline" class="text-heading" />
+				<IonIcon :icon="readerOutline" class="text-xl" />
 				<span>{{ formatNumber(question.answers.length) }}</span>
 			</span>
 		</div>

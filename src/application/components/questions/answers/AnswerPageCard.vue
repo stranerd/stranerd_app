@@ -1,16 +1,16 @@
 <template>
 	<div class="!gap-4 card-padding flex flex-col">
-		<div class="flex items-center gap-4 text-secondaryText text-sub justify-between">
+		<div class="flex items-center gap-4 text-secondaryText text-sm justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="answer.user.id" :size="24" :src="answer.user.bio.photo" />
-				<span class="font-semibold text-body flex gap-1 items-center">
+				<span class="font-semibold flex gap-1 items-center">
 					<span>{{ answer.user.bio.fullName }}</span>
 					<Verified :verified="answer.isUserVerified" />
 				</span>
 				<IonIcon :icon="ellipse" class="dot" />
 				<span>{{ formatTime(answer.createdAt) }}</span>
 			</div>
-			<div class="flex items-center justify-end gap-4 text-heading2">
+			<div class="flex items-center justify-end gap-4 text-2xl">
 				<Share :text="answer.strippedBody" title="Share this answer" />
 				<IonIcon :icon="flagOutline" @click="openReportAnswerModal" />
 			</div>

@@ -1,5 +1,5 @@
 <template>
-	<div class="flex items-center justify-between w-full font-bold text-sub p-4">
+	<div class="flex items-center justify-between w-full font-bold text-sm p-4">
 		<div class="w-8/12 flex items-center gap-2">
 			<avatar :id="user.id" :name="user.bio.fullName" :size="24" :src="user.bio.photo" />
 			<span class="flex items-center gap-1">

@@ -2,16 +2,16 @@
 	<DefaultLayout>
 		<div>
 			<div class="px-4 py-6 flex items-center border-bottom-line">
-				<IonIcon :icon="linkOutline" class="text-heading2" />
-				<IonText class="ml-3 text-heading">Stranerd Connect</IonText>
+				<IonIcon :icon="linkOutline" class="text-2xl" />
+				<IonText class="ml-3 text-xl">Stranerd Connect</IonText>
 			</div>
 			<div class="px-4 py-6 flex items-center justify-between border-bottom-line">
-				<IonText class=" text-heading font-bold">Recent</IonText>
-				<IonIcon :icon="chevronDownOutline" class="text-heading" />
+				<IonText class=" text-xl font-bold">Recent</IonText>
+				<IonIcon :icon="chevronDownOutline" class="text-xl" />
 			</div>
 			<div class="px-4 py-6 flex items-center justify-between border-bottom-line">
-				<IonText class=" text-heading font-bold">Direct messages</IonText>
-				<IonIcon :icon="chevronDownOutline" class="text-heading" />
+				<IonText class=" text-xl font-bold">Direct messages</IonText>
+				<IonIcon :icon="chevronDownOutline" class="text-xl" />
 			</div>
 			<ClassesList :hideSearch="true" />
 		</div>

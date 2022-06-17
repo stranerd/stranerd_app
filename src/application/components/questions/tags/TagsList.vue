@@ -11,20 +11,20 @@
 				</IonItem>
 				<IonList slot="content" class="ml-4">
 					<IonItem>
-						<span class="flex w-full gap-6 justify-end text-heading2">
+						<span class="flex w-full gap-6 justify-end text-2xl">
 							<IonIcon :icon="addOutline" class="text-success" @click="openCreateTagModal(parent.id)" />
 							<IonIcon :icon="pencilOutline" class="text-warning" @click="openTagEditModal(parent)" />
 							<IonIcon :icon="trashBinOutline" class="text-danger" @click="deleteTag(parent)" />
 						</span>
 					</IonItem>
-					<IonItem v-for="tag in children" :key="tag.hash" class="text-sub">
+					<IonItem v-for="tag in children" :key="tag.hash" class="text-sm">
 						<IonLabel class="w-full">{{ tag.title }}</IonLabel>
-						<span class="flex gap-4 justify-end text-heading">
+						<span class="flex gap-4 justify-end text-xl">
 							<IonIcon :icon="pencilOutline" class="text-warning" @click="openTagEditModal(tag)" />
 							<IonIcon :icon="trashBinOutline" class="text-danger" @click="deleteTag(tag)" />
 						</span>
 					</IonItem>
-					<IonItem v-if="!children.length" class="text-sub">
+					<IonItem v-if="!children.length" class="text-sm">
 						<IonLabel>No children for this tag</IonLabel>
 					</IonItem>
 				</IonList>

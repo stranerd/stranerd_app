@@ -1,7 +1,7 @@
 <template>
 	<div class="p-4 md:p-6 flex flex-col items-start gap-2">
-		<IonIcon :class="iconClass" :icon="icon" class="text-heading2 -ml-1" />
-		<IonText class="font-bold text-heading leading-none">{{ title }}</IonText>
+		<IonIcon :class="iconClass" :icon="icon" class="text-2xl -ml-1" />
+		<IonText class="font-bold text-xl leading-none">{{ title }}</IonText>
 		<IonText class="text-secondaryText leading-none">{{ subtitle }}</IonText>
 	</div>
 </template>

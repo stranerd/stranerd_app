@@ -4,13 +4,13 @@
 			<div class="blueTop py-4">
 				<div
 					class="flex flex-col md:flex-row md:justify-between justify-start items-start px-4 w-full lg:w-8/12 w-full mx-auto">
-					<IonText class="text-heading font-bold text-secondaryText text-start">
+					<IonText class="text-xl font-bold text-secondaryText text-start">
 						{{ document.title }}
 					</IonText>
 					<div class="items-center text-gray font-normal flex gap-3">
 						<Avatar :id="document.user.id" :name="document.user.bio.fullName" :size="24"
 							:src="document.user.bio.photo" />
-						<Share :link="document.shareLink" :title="document.title" cssClass="text-heading2"
+						<Share :link="document.shareLink" :title="document.title" cssClass="text-2xl"
 							text="Share this document" />
 						<SaveToSet :entity="document" />
 					</div>

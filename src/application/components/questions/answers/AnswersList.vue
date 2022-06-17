@@ -1,9 +1,9 @@
 <template>
 	<div class="flex flex-col">
-		<h2 v-if="answers.length" class="text-heading font-bold p-4 flex items-center">
+		<h2 v-if="answers.length" class="text-xl font-bold p-4 flex items-center">
 			<span>Answers</span>
 			<span :style="`width: ${question.answers.length.toString().length + 2}ch;`"
-				class="text-primaryText bg-primaryBg text-sub rounded-full ml-auto aspect-square flex items-center justify-center">
+				class="text-primaryText bg-primaryBg text-sm rounded-full ml-auto aspect-square flex items-center justify-center">
 				<span>{{ formatNumber(question.answers.length) }}</span>
 			</span>
 		</h2>

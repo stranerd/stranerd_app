@@ -2,17 +2,17 @@
 	<AdminWrapper>
 		<div v-if="faculty">
 			<div class="flex mb-4 p-4">
-				<span class="text-heading mr-auto uppercase">{{ faculty.name }}</span>
-				<a class="flex items-center gap-1 mr-4 text-sub"
+				<span class="text-xl mr-auto uppercase">{{ faculty.name }}</span>
+				<a class="flex items-center gap-1 mr-4 text-sm"
 					@click.prevent="openDepartmentCreateModal(faculty.id)">
 					<IonIcon :icon="addOutline" class="text-green" />
 					<IonLabel>Add Department</IonLabel>
 				</a>
-				<a class="flex items-center gap-1 mr-4 text-sub" @click.prevent="openFacultyEditModal(faculty)">
+				<a class="flex items-center gap-1 mr-4 text-sm" @click.prevent="openFacultyEditModal(faculty)">
 					<IonIcon :icon="pencilOutline" class="text-orange" />
 					<IonLabel>Edit Faculty</IonLabel>
 				</a>
-				<a class="flex items-center gap-1 text-sub" @click.prevent="deleteFaculty">
+				<a class="flex items-center gap-1 text-sm" @click.prevent="deleteFaculty">
 					<IonIcon :icon="trashBinOutline" class="text-red" />
 					<IonLabel>Delete Faculty</IonLabel>
 				</a>

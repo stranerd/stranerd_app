@@ -1,12 +1,12 @@
 <template>
 	<div class="h-full md:bg-new_gray w-full lg:w-8/12 mx-auto lg:mt-6">
 		<div class="bg-white md:rounded-xl flex items-center justify-between gap-2 md:px-4 lg:p-4">
-			<IonText class="text-secondaryText leading-tight text-heading font-bold hidden md:inline">
+			<IonText class="text-secondaryText leading-tight text-xl font-bold hidden md:inline">
 				Leaderboard
 			</IonText>
 			<div class="w-full md:w-auto border-bottom-line">
 				<IonSelect v-model="time"
-					class="md:w-[138px] md:bg-new_gray p-4 w-full text-sub placeholder-[#8B9EB1] font-bold capitalize"
+					class="md:w-[138px] md:bg-new_gray p-4 w-full text-sm placeholder-[#8B9EB1] font-bold capitalize"
 					interface="action-sheet"
 					placeholder="Daily">
 					<IonSelectOption v-for="time in times" :key="time" :value="time" class="capitalize">

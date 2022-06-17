@@ -1,5 +1,5 @@
 <template>
-	<span v-if="tag" class="py-[3px] px-3 text-sub rounded-2xl bg-itemBg text-secondaryText text-center">
+	<span v-if="tag" class="py-[3px] px-3 text-sm rounded-2xl bg-itemBg text-secondaryText text-center">
 		<slot :tag="tag">{{ tag }}</slot>
 	</span>
 </template>

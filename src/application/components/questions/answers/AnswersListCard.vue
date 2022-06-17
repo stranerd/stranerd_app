@@ -1,6 +1,6 @@
 <template>
 	<div class="rounded-xl flex flex-col !gap-4 card-padding">
-		<div class="flex items-center gap-2 text-sub">
+		<div class="flex items-center gap-2 text-sm">
 			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="20" :src="answer.user.bio.photo" />
 			<span class="font-bold flex items-center gap-1">
 				<span>{{ answer.user.bio.fullName }}</span>
@@ -8,7 +8,7 @@
 			</span>
 			<IonIcon :icon="ellipse" class="dot" />
 			<span>{{ formatTime(answer.createdAt) }}</span>
-			<div class="flex flex-grow items-center justify-end gap-4 text-heading2 text-secondaryText">
+			<div class="flex flex-grow items-center justify-end gap-4 text-2xl text-secondaryText">
 				<Share :text="answer.strippedBody" title="Share this answer" />
 				<IonIcon :icon="flagOutline" @click="openReportAnswerModal" />
 			</div>
@@ -18,27 +18,27 @@
 
 		<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" class="pl-7" />
 
-		<div class="flex items-center gap-6 text-secondaryText text-sub pl-7">
+		<div class="flex items-center gap-6 text-secondaryText text-sm pl-7">
 			<div class="flex items-center gap-1">
-				<IonIcon :icon="like && like.value ? thumbsUp : thumbsUpOutline" class="text-heading2"
+				<IonIcon :icon="like && like.value ? thumbsUp : thumbsUpOutline" class="text-2xl"
 					@click="() => likeAnswer(true)" />
 				<span>{{ formatNumber(answer.meta.likes) }}</span>
 			</div>
 			<div class="flex items-center gap-1">
-				<IonIcon :icon="like && !like.value ? thumbsDown : thumbsDownOutline" class="text-heading2"
+				<IonIcon :icon="like && !like.value ? thumbsDown : thumbsDownOutline" class="text-2xl"
 					@click="() => likeAnswer(false)" />
 				<span>{{ formatNumber(answer.meta.dislikes) }}</span>
 			</div>
 			<router-link :to="`/questions/${question.id}/answers/${answer.id}`" class="flex items-center gap-1">
-				<IonIcon :icon="chatbubbleOutline" class="text-heading2" />
+				<IonIcon :icon="chatbubbleOutline" class="text-2xl" />
 				<span>{{ formatNumber(answer.meta.comments) }}</span>
 			</router-link>
 			<div class="flex-grow" />
 			<span v-if="showMarkBest" class="flex items-center gap-1" @click.prevent="markBestAnswer(question)">
 				<span>Mark as best</span>
-				<IonIcon :icon="checkmarkCircleOutline" class="text-heading2" />
+				<IonIcon :icon="checkmarkCircleOutline" class="text-2xl" />
 			</span>
-			<IonIcon v-if="answer.best" :icon="checkmarkCircleOutline" class="text-heading2 text-success" />
+			<IonIcon v-if="answer.best" :icon="checkmarkCircleOutline" class="text-2xl text-success" />
 		</div>
 	</div>
 </template>

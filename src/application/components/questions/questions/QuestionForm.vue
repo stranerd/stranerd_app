@@ -11,7 +11,7 @@
 			placeholder="Write your question here." />
 
 		<div v-if="factory.attachments.length > 0">
-			<div class="flex flex-row flex-wrap gap-2 text-sub">
+			<div class="flex flex-row flex-wrap gap-2 text-sm">
 				<span v-for="attachment in factory.attachments" :key="attachment.name">
 					<span
 						class="py-1 px-2 font-bold text-primaryText bg-primaryBg rounded flex flex-row items-center">

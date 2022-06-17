@@ -4,7 +4,7 @@
 			<Avatar :name="classInst.name" :size="36" :src="classInst.photo" />
 			<div class="flex flex-col gap-1 w-full">
 				<IonText class="font-bold capitalize leading-none w-full truncate">{{ classInst.name }}</IonText>
-				<span class="flex items-center gap-1 text-sub text-secondaryText leading-none">
+				<span class="flex items-center gap-1 text-sm text-secondaryText leading-none">
 					<Institution :institutionId="classInst.school.institutionId" />
 					<IonIcon :icon="ellipse" class="dot" />
 					<Department :departmentId="classInst.school.departmentId" :facultyId="classInst.school.facultyId" />

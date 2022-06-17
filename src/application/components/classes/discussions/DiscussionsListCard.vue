@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="flex gap-4 items-center w-full text-sub">
+		class="flex gap-4 items-center w-full text-sm">
 		<Avatar :id="discussion.user.id" :name="discussion.user.bio.fullName" :size="24"
 			:src="discussion.user.bio.photo" />
 		<div class="min-w-[25%] max-w-[70%] lg:max-w-[55%] rounded-t-xl flex flex-col gap-1">
@@ -18,12 +18,12 @@
 				<div :class="{'rounded-t-xl': !discussion.isImage}"
 					class="bg-itemBg flex gap-2 items-center p-2 rounded-b-xl">
 					<span>
-						<IonIcon :icon="documentOutline" class="text-heading2" />
+						<IonIcon :icon="documentOutline" class="text-2xl" />
 					</span>
 					<IonText class="w-full truncate">{{ discussion.media.name }}</IonText>
 					<span>
 						<SpinLoading v-if="loading" />
-						<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-heading2" @click="download" />
+						<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-2xl" @click="download" />
 					</span>
 				</div>
 			</div>

@@ -5,7 +5,7 @@
 		<div v-chat-scroll class="flex flex-col gap-3 overflow-y-auto hide-scrollbar"
 			@scroll-top="() => hasMore && fetchOlderDiscussions()">
 			<div v-for="date in discussions" :key="date.key" class="flex flex-col gap-2">
-				<span class="w-full text-center text-sub">{{ formatTime(date.key, true) }}</span>
+				<span class="w-full text-center text-sm">{{ formatTime(date.key, true) }}</span>
 				<DiscussionsListCard v-for="discussion in date.values" :key="discussion.hash"
 					:discussion="discussion" />
 			</div>

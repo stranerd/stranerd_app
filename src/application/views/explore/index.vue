@@ -4,7 +4,7 @@
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 					<div class="text-secondaryText flex items-center">
-						<IonText class="mr-3 text-heading font-bold">
+						<IonText class="mr-3 text-xl font-bold">
 							TestPreps
 						</IonText>
 					</div>
@@ -18,7 +18,7 @@
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 					<div class="text-secondaryText flex items-center">
-						<IonText class="mr-3 font-bold text-heading">
+						<IonText class="mr-3 font-bold text-xl">
 							FlashCards
 						</IonText>
 					</div>
@@ -32,7 +32,7 @@
 			<div class="border-bottom-line">
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 					<div class="text-secondaryText flex items-center">
-						<IonText class="text-heading font-bold mr-3">
+						<IonText class="text-xl font-bold mr-3">
 							Documents
 						</IonText>
 					</div>

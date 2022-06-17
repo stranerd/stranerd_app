@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="mb-4">
-			<IonText class="text-secondaryText text-center text-heading font-bold w-full">Tests</IonText>
+			<IonText class="text-secondaryText text-center text-xl font-bold w-full">Tests</IonText>
 		</div>
 		<div class="flex flex-col md:flex-row gap-4 items-center justify-center w-full mb-8">
 			<div class="md:w-1/5 w-full">

@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col text-secondaryText gap-3">
 		<div class="flex flex-row justify-start items-center">
-			<IonSelect v-model="time" class="capitalize text-secondaryText text-heading font-bold ion-left-0"
+			<IonSelect v-model="time" class="capitalize text-secondaryText text-xl font-bold ion-left-0"
 				interface="action-sheet"
 				placeholder="Daily">
 				<IonSelectOption v-for="time in times" :key="time" :value="time" class="capitalize">

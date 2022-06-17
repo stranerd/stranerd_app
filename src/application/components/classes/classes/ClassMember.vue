@@ -6,7 +6,7 @@
 				<span>{{ user.bio.fullName }}</span>
 				<Verified :verified="user.roles.isVerified" />
 			</IonText>
-			<span class="ml-auto flex gap-3 items-center text-heading2">
+			<span class="ml-auto flex gap-3 items-center text-2xl">
 				<template v-if="classInst.admins.includes(id)">
 					<template v-if="classInst.requests.includes(user.id)">
 						<IonIcon :icon="checkmarkOutline" class="cursor-pointer text-success"

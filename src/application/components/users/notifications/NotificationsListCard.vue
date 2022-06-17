@@ -3,7 +3,7 @@
 		<router-link :class="notification.seen ? 'text-secondaryText' : 'font-bold'" :to="notification.link">
 			{{ notification.body }}
 		</router-link>
-		<p class="text-sub">{{ formatTime(notification.createdAt) }}</p>
+		<p class="text-sm">{{ formatTime(notification.createdAt) }}</p>
 	</div>
 </template>
 

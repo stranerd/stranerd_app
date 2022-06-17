@@ -2,7 +2,7 @@
 	<div class="!gap-4 card-padding flex flex-col">
 		<div class="flex gap-4 items-center" @click="show = !show">
 			<IonText class="font-bold capitalize truncate w-full">{{ classInst.name }}</IonText>
-			<IonIcon :icon="show ? chevronUpOutline : chevronDownOutline" class="text-heading2" />
+			<IonIcon :icon="show ? chevronUpOutline : chevronDownOutline" class="text-2xl" />
 		</div>
 		<div v-if="show" class="flex flex-col">
 			<EmptyState v-if="!loading && !error && groups.length === 0" class="py-2 text-secondaryText"

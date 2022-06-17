@@ -1,6 +1,6 @@
 <template>
 	<router-link :to="`/questions/${question.id}`" class="flex flex-col card-padding">
-		<div class="flex items-center text-secondaryText text-sub justify-between">
+		<div class="flex items-center text-secondaryText text-sm justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="question.user.id" :name="question.user.bio.fullName" :size="24"
 					:src="question.user.bio.photo" />
@@ -18,14 +18,14 @@
 
 		<DisplayHtml :html="question.trimmedBody" class="pl-8" />
 
-		<div class="flex justify-between items-center gap-2 text-secondaryText text-sub pl-8">
+		<div class="flex justify-between items-center gap-2 text-secondaryText text-sm pl-8">
 			<QuestionTag :tagId="question.tagId" />
 			<IonIcon :icon="ellipse" class="dot" />
 			<span class="mr-auto">{{ formatTime(question.createdAt) }}</span>
-			<IonIcon v-if="question.attachments.length" :icon="imageOutline" class="text-heading" />
+			<IonIcon v-if="question.attachments.length" :icon="imageOutline" class="text-xl" />
 			<span class="flex gap-1 items-center">
 				<span>{{ formatNumber(question.answers.length) }}</span>
-				<IonIcon :icon="readerOutline" class="text-heading" />
+				<IonIcon :icon="readerOutline" class="text-xl" />
 			</span>
 		</div>
 	</router-link>

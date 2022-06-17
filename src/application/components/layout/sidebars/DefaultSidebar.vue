@@ -9,7 +9,7 @@
 					{ name: 'Library', path: '/study', icon: library, iconOutline:libraryOutline },
 					{ name: 'Classes', path: '/classes', icon: people, iconOutline:peopleOutline }
 				]" :key="path" :to="path"
-				class="flex py-6 px-8 items-center rounded-l-full text-sub hover:text-secondaryText font-bold"
+				class="flex py-6 px-8 items-center rounded-l-full text-sm hover:text-secondaryText font-bold"
 				exact-active-class="text-secondaryText bg-new_gray !py-4">
 				<IonIcon :icon="$route.path === path ? icon : iconOutline " class="text-[23px] mr-4" />
 				<span class="capitalize">{{ name }}</span>

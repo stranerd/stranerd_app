@@ -9,7 +9,7 @@
 				{ name: 'Start a discussion', path: '/classes/groups/create', icon: chatbubblesOutline },
 				{ name: 'Write a note', path: '/study/documents/create', icon: documentOutline },
 			]" :key="path" :to="path" class="flex items-center gap-4 py-4">
-				<IonIcon :icon="icon" class="text-heading2" />
+				<IonIcon :icon="icon" class="text-2xl" />
 				<span>{{ name }}</span>
 			</router-link>
 		</div>

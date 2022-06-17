@@ -2,11 +2,11 @@
 	<router-link :id="answer.id" :to="`/questions/${answer.questionId}#${answer.id}`"
 		class="card-padding flex flex-col">
 		<span>{{ answer.trimmedBody }}</span>
-		<div class="flex items-center justify-between text-secondaryText text-sub gap-2">
+		<div class="flex items-center justify-between text-secondaryText text-sm gap-2">
 			<QuestionTag :tagId="answer.tagId" />
 			<IonIcon :icon="ellipse" class="dot" />
 			<span class="mr-auto">{{ formatTime(answer.createdAt) }}</span>
-			<IonIcon v-if="answer.attachments.length" :icon="imageOutline" class="text-heading" />
+			<IonIcon v-if="answer.attachments.length" :icon="imageOutline" class="text-xl" />
 		</div>
 	</router-link>
 </template>

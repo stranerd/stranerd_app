@@ -4,7 +4,7 @@
 			<div class="under" @click="zoomed = false" />
 			<div class="inner">
 				<span id="close" @click="zoomed = false">
-					<IonIcon :icon="close" class="text-heading3" />
+					<IonIcon :icon="close" class="text-3xl" />
 				</span>
 				<img :src="photos[index].link" alt="" class="w-full">
 			</div>

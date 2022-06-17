@@ -1,9 +1,10 @@
 <template>
-	<div v-if="isEventTimetable(event)" class="flex flex-col rounded-lg bg-itemBg border-l-8 border-primaryBg p-4 gap-2">
+	<div v-if="isEventTimetable(event)"
+		class="flex flex-col rounded-lg bg-itemBg border-l-8 border-primaryBg p-4 gap-2">
 		<IonText class="font-bold">{{ event.title }}</IonText>
 		<IonText v-if="event.data.lecturer">{{ event.data.lecturer }}</IonText>
 		<div class="flex gap-2 items-center text-secondaryText">
-			<IonIcon :icon="timeOutline" class="text-heading2" />
+			<IonIcon :icon="timeOutline" class="text-2xl" />
 			<IonText>
 				{{
 					event.data.start.hour.toString().padStart(2, '0')
@@ -14,10 +15,10 @@
 				}}:{{ event.data.end.minute.toString().padStart(2, '0') }}
 			</IonText>
 			<span v-if="classInst.admins.includes(id)" class="ml-auto flex items-center gap-2">
-				<IonIcon :icon="createOutline" class="text-warning text-heading2"
+				<IonIcon :icon="createOutline" class="text-warning text-2xl"
 					@click="openEditTimetableModal({ event, classInst }, $router)" />
 				<SpinLoading v-if="loading" />
-				<IonIcon v-else :icon="trashBinOutline" class="text-danger text-heading2" @click="deleteEvent(event)" />
+				<IonIcon v-else :icon="trashBinOutline" class="text-danger text-2xl" @click="deleteEvent(event)" />
 			</span>
 		</div>
 	</div>

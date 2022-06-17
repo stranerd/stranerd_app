@@ -3,7 +3,7 @@
 		<div class="flex justify-between items-center p-4 border-bottom-line"
 			@click="openCreateTimetableModal(classInst, $router)">
 			<IonText>Set up timetable</IonText>
-			<IonIcon :icon="arrowForwardOutline" class="text-heading2" />
+			<IonIcon :icon="arrowForwardOutline" class="text-2xl" />
 		</div>
 		<div class="flex items-center gap-2 w-full overflow-x-auto p-4">
 			<a v-for="day in days" :key="day.day"

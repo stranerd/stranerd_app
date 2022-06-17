@@ -9,11 +9,11 @@
 				<IonText class="font-bold w-full truncate capitalize">
 					{{ group.name }}
 				</IonText>
-				<IonText v-if="group.last" class="text-sub whitespace-nowrap">
+				<IonText v-if="group.last" class="text-sm whitespace-nowrap">
 					{{ formatTime(group.last.createdAt) }}
 				</IonText>
 			</div>
-			<div v-if="group.last" class="flex gap-2 items-center text-sub">
+			<div v-if="group.last" class="flex gap-2 items-center text-sm">
 				<IonText class="w-full truncate">
 					{{ group.last.user.id === id ? 'You' : group.last.user.bio.firstName }}
 					: {{ group.last.media ? 'Shared a file' : group.last.content }}

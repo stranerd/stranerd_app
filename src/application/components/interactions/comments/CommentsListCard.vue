@@ -9,7 +9,7 @@
 				</span>
 				<span>{{ comment.body }}</span>
 			</IonText>
-			<span class="text-secondaryText text-sub">{{ formatTime(comment.createdAt) }}</span>
+			<span class="text-secondaryText text-sm">{{ formatTime(comment.createdAt) }}</span>
 		</div>
 	</div>
 </template>

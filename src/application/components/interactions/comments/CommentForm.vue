@@ -1,5 +1,5 @@
 <template>
-	<form class="flex gap-4 card-padding items-center text-sub" @submit.prevent="createComment">
+	<form class="flex gap-4 card-padding items-center text-sm" @submit.prevent="createComment">
 		<IonInput v-model="factory.body" class="flex-grow" placeholder="Add a comment" />
 		<IonButton :disabled="!factory.valid" class="btn-primary" type="submit">
 			<IonIcon slot="icon-only" :icon="paperPlaneOutline" />

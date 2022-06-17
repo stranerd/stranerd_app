@@ -3,19 +3,19 @@
 		<span>
 			<IonIcon
 				:icon="discussion.isImage ? imageOutline : discussion.isVideo ? playCircleOutline : documentOutline"
-				class="text-heading5 text-gray" />
+				class="text-5xl text-gray" />
 		</span>
 		<div class="flex flex-col mr-auto">
 			<IonText class="font-semibold text-secondaryText">{{ discussion.media.name }}</IonText>
-			<span class="text-sub">{{ discussion.size }}</span>
+			<span class="text-sm">{{ discussion.size }}</span>
 		</div>
-		<SpinLoading v-if="loading" class="text-heading3" />
+		<SpinLoading v-if="loading" class="text-3xl" />
 		<span v-else-if="!content">
-			<IonIcon :icon="downloadOutline" class="text-heading3" color="primary" @click="download" />
+			<IonIcon :icon="downloadOutline" class="text-3xl" color="primary" @click="download" />
 		</span>
 	</div>
 	<div v-if="discussion.links.length > 0" class="bg-white card-padding flex rounded-xl items-center">
-		<IonIcon :icon="linkOutline" class="text-heading5 text-gray" />
+		<IonIcon :icon="linkOutline" class="text-5xl text-itemBg" />
 		<span class="font-semibold text-secondaryText" v-html="discussion.formattedContent" />
 	</div>
 </template>

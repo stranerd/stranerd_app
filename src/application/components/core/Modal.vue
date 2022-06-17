@@ -2,10 +2,10 @@
 	<div class="modal-content">
 		<div class="bg-headerBg text-headerText py-4 text-center">
 			<div class="flex justify-center items-center">
-				<span class="text-heading font-bold">
+				<span class="text-xl font-bold">
 					<slot name="title">Title</slot>
 				</span>
-				<IonIcon v-if="close" :icon="closeOutline" class="text-heading3 absolute right-2" @click="close" />
+				<IonIcon v-if="close" :icon="closeOutline" class="text-3xl absolute right-2" @click="close" />
 			</div>
 			<slot name="subtext" />
 		</div>

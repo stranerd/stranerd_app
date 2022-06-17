@@ -1,9 +1,9 @@
 <template>
 	<div class="flex flex-col items-start w-full border-bottom-line card-padding !gap-0">
-		<div class="flex items-center justify-between mb-2 w-full gap-4 text-secondaryText text-sub">
+		<div class="flex items-center justify-between mb-2 w-full gap-4 text-secondaryText text-sm">
 			<IonText class="font-bold">{{ questionIndex + 1 }} / {{ total }}</IonText>
 			<SpinLoading v-if="loading" />
-			<IonIcon v-else :icon="flagOutline" class="text-heading" @click="createReport(question)" />
+			<IonIcon v-else :icon="flagOutline" class="text-xl" @click="createReport(question)" />
 		</div>
 
 		<div class="mb-2">
@@ -18,12 +18,12 @@
 				class="w-full py-4" @click="answer(question.id, optionIndex)">
 				<div class="flex gap-2 items-center">
 					<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
-						:icon="radioButtonOn" class="text-primaryBg text-heading2" />
+						:icon="radioButtonOn" class="text-primaryBg text-2xl" />
 					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect"
-						:icon="checkmarkCircleOutline" class="text-success text-heading2" />
+						:icon="checkmarkCircleOutline" class="text-success text-2xl" />
 					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isInCorrect"
-						:icon="closeCircleOutline" class="text-danger text-heading2" />
-					<IonIcon v-else :icon="radioButtonOff" class="text-heading2" />
+						:icon="closeCircleOutline" class="text-danger text-2xl" />
+					<IonIcon v-else :icon="radioButtonOff" class="text-2xl" />
 					<IonText>
 						<DisplayHtml :html="option" />
 					</IonText>

@@ -1,9 +1,9 @@
 <template>
 	<DefaultLayout>
 		<form class="flex flex-col" @submit.prevent="updateSchool">
-			<IonList class="border-bottom-line md:rounded-xl text-sub p-4">
+			<IonList class="border-bottom-line md:rounded-xl text-sm p-4">
 				<IonListHeader>
-					<IonLabel class="font-bold text-heading">Choose your academic level*</IonLabel>
+					<IonLabel class="font-bold text-xl">Choose your academic level*</IonLabel>
 				</IonListHeader>
 				<IonRadioGroup v-model="factory.type" class="flex flex-col items-start" required>
 					<IonItem class="flex items-center gap-4">
@@ -23,7 +23,7 @@
 
 			<div v-if="factory.isCollegeType"
 				class="border-bottom-line p-4 flex flex-col gap-4">
-				<IonText class="text-heading font-semibold">University set up</IonText>
+				<IonText class="text-xl font-semibold">University set up</IonText>
 
 				<div class="flex flex-col items-start gap-1">
 					<IonLabel>What university are you in?</IonLabel>

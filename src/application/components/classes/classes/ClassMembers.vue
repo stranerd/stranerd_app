@@ -7,7 +7,7 @@
 		]" :key="name" class="flex flex-col py-2 border-bottom-line">
 			<div class="flex gap-4 items-center p-4" @click="show[index] = !show[index]">
 				<IonText class="font-bold capitalize truncate w-full">{{ name }}</IonText>
-				<IonIcon :icon="show[index] ? chevronUpOutline : chevronDownOutline" class="text-heading2" />
+				<IonIcon :icon="show[index] ? chevronUpOutline : chevronDownOutline" class="text-2xl" />
 			</div>
 			<div v-if="show[index]" class="flex flex-col">
 				<ClassMember v-for="user in users" :key="user.hash" :classInst="classInst" :user="user" />

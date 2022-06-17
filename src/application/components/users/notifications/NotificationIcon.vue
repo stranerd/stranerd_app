@@ -1,6 +1,6 @@
 <template>
-	<router-link class="relative text-sub leading-none" to="/notifications">
-		<IonIcon :icon="notificationsOutline" class="text-heading2" />
+	<router-link class="relative text-sm leading-none" to="/notifications">
+		<IonIcon :icon="notificationsOutline" class="text-2xl" />
 		<span v-if="isLoggedIn" :style="`width: ${unReadCount.length + 0.5}ch;`"
 			class="absolute bg-primaryBg text-primaryText aspect-square rounded-full flex items-center justify-center bottom-[50%] right-[50%] leading-none">
 			<span>{{ unReadCount }}</span>

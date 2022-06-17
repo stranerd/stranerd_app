@@ -3,7 +3,7 @@
 		<IonIcon
 			v-for="index in 5"
 			:key="'comment'+ index"
-			:class="[index <= rating - 1 ? 'text-yellow_star' : 'text-icon_inactive', 'h-4 text-heading3 text-[18px]']"
+			:class="[index <= rating - 1 ? 'text-yellow_star' : 'text-icon_inactive', 'h-4 text-3xl text-[18px]']"
 			:icon="starSharp"
 		/>
 	</div>

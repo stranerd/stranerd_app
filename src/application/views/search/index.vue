@@ -6,7 +6,7 @@
 				<div v-if="questions.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="text-secondaryText flex items-center">
-							<IonText class="text-heading font-bold">Questions</IonText>
+							<IonText class="text-xl font-bold">Questions</IonText>
 						</div>
 
 						<router-link :to="`/search/questions?search=${searchTerm}`"
@@ -19,7 +19,7 @@
 				<div v-if="testPreps.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="text-secondaryText flex items-center">
-							<IonText class="text-heading font-bold">TestPreps</IonText>
+							<IonText class="text-xl font-bold">TestPreps</IonText>
 						</div>
 						<router-link :to="`/search/preps?search=${searchTerm}`"
 							class="text-primary flex items-center font-bold">
@@ -31,7 +31,7 @@
 				<div v-if="flashCards.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="text-secondaryText flex items-center">
-							<IonText class="text-heading font-bold">FlashCards</IonText>
+							<IonText class="text-xl font-bold">FlashCards</IonText>
 						</div>
 
 						<router-link :to="`/search/flashCards?search=${searchTerm}`"
@@ -44,7 +44,7 @@
 				<div v-if="documents.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="text-secondaryText flex items-center">
-							<IonText class="text-heading font-bold">Documents</IonText>
+							<IonText class="text-xl font-bold">Documents</IonText>
 						</div>
 						<router-link :to="`/search/documents?search=${searchTerm}`"
 							class="text-primary flex items-center font-bold">
@@ -56,7 +56,7 @@
 				<div v-if="sets.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="text-secondaryText flex items-center">
-							<IonText class="text-heading font-bold">Folders</IonText>
+							<IonText class="text-xl font-bold">Folders</IonText>
 						</div>
 
 						<router-link :to="`/search/sets?search=${searchTerm}`"
@@ -69,7 +69,7 @@
 				<div v-if="users.length" class="border-bottom-line">
 					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
 						<div class="text-secondaryText flex items-center">
-							<IonText class="text-heading font-bold">Nerds</IonText>
+							<IonText class="text-xl font-bold">Nerds</IonText>
 						</div>
 
 						<router-link :to="`/search/nerds?search=${searchTerm}`"

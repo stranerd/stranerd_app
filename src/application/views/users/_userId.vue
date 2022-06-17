@@ -6,44 +6,44 @@
 					<Avatar :name="user.bio.fullName" :size="64" :src="user.bio.photo" />
 					<div class="flex items-center justify-between w-full text-secondaryText">
 						<div class="flex items-center gap-2">
-							<IonIcon :icon="podiumOutline" class="text-heading2" />
+							<IonIcon :icon="podiumOutline" class="text-2xl" />
 							<IonText class="flex-col flex">
-								<span class="text-heading">{{ formatNumber(user.score, 1) }}</span>
-								<span class="text-sub">Points</span>
+								<span class="text-xl">{{ formatNumber(user.score, 1) }}</span>
+								<span class="text-sm">Points</span>
 							</IonText>
 						</div>
 						<div class="flex items-center gap-2">
-							<IonIcon :icon="linkOutline" class="text-heading2" />
+							<IonIcon :icon="linkOutline" class="text-2xl" />
 							<IonText class="flex-col flex">
-								<span class="text-heading">{{ formatNumber(user.meta.connects) }}</span>
-								<span class="text-sub">Connects</span>
+								<span class="text-xl">{{ formatNumber(user.meta.connects) }}</span>
+								<span class="text-sm">Connects</span>
 							</IonText>
 						</div>
 						<div class="flex items-center gap-2">
-							<IonIcon :icon="checkmarkCircleOutline" class="text-heading2" />
+							<IonIcon :icon="checkmarkCircleOutline" class="text-2xl" />
 							<IonText class="flex-col flex">
-								<span class="text-heading">{{ formatNumber(user.meta.bestAnswers) }}</span>
-								<span class="text-sub">Best ans</span>
+								<span class="text-xl">{{ formatNumber(user.meta.bestAnswers) }}</span>
+								<span class="text-sm">Best ans</span>
 							</IonText>
 						</div>
 					</div>
 				</div>
 				<div class="flex flex-col gap-1">
-					<IonText class="text-heading font-bold flex gap-1 items-center">
+					<IonText class="text-xl font-bold flex gap-1 items-center">
 						<span>{{ user.bio.fullName }}</span>
 						<Verified :verified="user.isVerified" />
 					</IonText>
 					<template v-if="isUserCollege(user)">
 						<Institution :institutionId="user.school.institutionId"
-							class="text-secondaryText text-sub font-bold" />
+							class="text-secondaryText text-sm font-bold" />
 						<Department :departmentId="user.school.departmentId" :facultyId="user.school.facultyId"
-							class="text-secondaryText text-sub" />
+							class="text-secondaryText text-sm" />
 					</template>
 					<IonText v-if="user.bio.description" class="mt-4">{{ user.bio.description }}</IonText>
 				</div>
 
 				<IonButton class="btn-primary w-full">
-					<IonIcon :icon="linkOutline" class="text-heading3 mr-2" />
+					<IonIcon :icon="linkOutline" class="text-3xl mr-2" />
 					Connect
 				</IonButton>
 
@@ -63,7 +63,7 @@
 						:class="{ 'border-b-2 !text-primaryBg !border-primaryBg': path.name === tab}"
 						class="border-b border-itemBg text-secondaryText p-4 capitalize w-full flex justify-center items-center gap-2"
 						@click="tab = path.name">
-						<IonIcon :icon="path.icon" class="text-heading" />
+						<IonIcon :icon="path.icon" class="text-xl" />
 						<span>{{ formatNumber(user.meta[path.name]) }}</span>
 					</span>
 				</div>

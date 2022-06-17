@@ -3,7 +3,7 @@
 		<div v-if="flashCard">
 			<div class="flex flex-col">
 				<div class="border-bottom-line w-full flex p-4 gap-4 justify-between">
-					<IonText class="text-heading font-bold">{{ flashCard.title }}</IonText>
+					<IonText class="text-xl font-bold">{{ flashCard.title }}</IonText>
 					<Avatar :id="flashCard.user.id" :name="flashCard.user.bio.fullName" :size="24"
 						:src="flashCard.user.bio.photo" />
 				</div>
@@ -11,7 +11,7 @@
 					<div class="flex items-center" @click="cardMode = !cardMode">
 						<IonIcon
 							:icon="!cardMode ? copyOutline: listOutline"
-							class="text-secondaryText text-heading2 cursor-pointer mr-2 md:mt-0"
+							class="text-secondaryText text-2xl cursor-pointer mr-2 md:mt-0"
 						/>
 						<IonText class=" flex">
 							{{ !cardMode ? 'Card mode' : 'List mode' }}
@@ -19,14 +19,14 @@
 					</div>
 
 					<div class="flex items-center gap-4">
-						<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-heading2"
+						<Share :link="flashCard.shareLink" :title="flashCard.title" cssClass="text-2xl"
 							text="Share this flashcard" />
 						<SaveToSet :entity="flashCard" />
 						<template v-if="flashCard.user.id === id">
-							<IonIcon :icon="createOutline" class="text-primaryBg text-heading2"
+							<IonIcon :icon="createOutline" class="text-primaryBg text-2xl"
 								@click="openFlashCardEditModal(flashCard, $router)" />
 							<SpinLoading v-if="deleteLoading" />
-							<IonIcon v-else :icon="trashBinOutline" class="text-danger text-heading2"
+							<IonIcon v-else :icon="trashBinOutline" class="text-danger text-2xl"
 								@click="deleteFlashCard" />
 						</template>
 					</div>

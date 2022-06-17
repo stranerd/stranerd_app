@@ -2,8 +2,8 @@
 	<div class="showcase-flex">
 		<div class="flex flex-col md:flex-row justify-between gap-2 px-4 md:py-4 bg-white rounded-xl">
 			<div class="hidden md:block">
-				<IonText class="block text-heading font-semibold capitalize">Class Library</IonText>
-				<IonText class="text-sub">
+				<IonText class="block text-xl font-semibold capitalize">Class Library</IonText>
+				<IonText class="text-sm">
 					{{ discussions.length }} {{ pluralize(discussions.length, 'item', 'items') }}
 				</IonText>
 			</div>

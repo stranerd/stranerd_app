@@ -23,7 +23,7 @@
 				]" :key="item.route" :href="item.route"
 				class="px-4 py-6 border-bottom-line flex gap-4 items-center text-primaryBg"
 				target="_blank">
-				<IonIcon :icon="item.icon" class="text-heading3" />
+				<IonIcon :icon="item.icon" class="text-3xl" />
 				<span>{{ item.name }}</span>
 			</a>
 		</div>

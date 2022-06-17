@@ -3,9 +3,9 @@
 		class="flex flex-col justify-between card-padding">
 		<div class="flex gap-4 items-center">
 			<IonText class="font-500 truncate w-full">{{ set.name }}</IonText>
-			<IonIcon :icon="arrowForwardOutline" class="text-heading2" />
+			<IonIcon :icon="arrowForwardOutline" class="text-2xl" />
 		</div>
-		<div class="w-full flex items-center justify-between gap-2 text-sub text-secondaryText">
+		<div class="w-full flex items-center justify-between gap-2 text-sm text-secondaryText">
 			<Tag :tag="`${formatNumber(set.allSaved.length)} ${pluralize(set.allSaved.length, 'Item', 'Items')}`">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
@@ -17,9 +17,9 @@
 			<div class="flex items-center gap-3">
 				<Avatar v-if="set.user.id !== id" :id="set.user.id" :name="set.user.bio.fullName" :size="24"
 					:src="set.user.bio.photo" />
-				<Share :link="set.shareLink" :title="set.name" cssClass="text-heading2" text="Share this folder" />
-				<SpinLoading v-if="loading" class="text-heading2" />
-				<IonIcon v-if="set.user.id === id" :icon="settingsOutline" class="text-heading2"
+				<Share :link="set.shareLink" :title="set.name" cssClass="text-2xl" text="Share this folder" />
+				<SpinLoading v-if="loading" class="text-2xl" />
+				<IonIcon v-if="set.user.id === id" :icon="settingsOutline" class="text-2xl"
 					@click.prevent="showMenu" />
 			</div>
 		</div>
