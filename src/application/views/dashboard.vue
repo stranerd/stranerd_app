@@ -1,10 +1,10 @@
 <template>
 	<DefaultLayout>
 		<div>
-			<div class="card-padding flex items-center border-bottom-line">
+			<router-link class="card-padding !gap-4 flex items-center border-bottom-line" to="/connect">
 				<IonIcon :icon="linkOutline" />
-				<IonText class="ml-3">Stranerd Connect</IonText>
-			</div>
+				<IonText>Stranerd Connect</IonText>
+			</router-link>
 			<div class="card-padding flex items-center justify-between border-bottom-line">
 				<IonText class="font-bold">Recent</IonText>
 				<IonIcon :icon="chevronDownOutline" />
