@@ -2,7 +2,7 @@
 	<IonModal v-for="key in modalStack"
 		:key="key"
 		v-bind="modalProps"
-		@didDismiss="popoverClose(key)"
+		@didDismiss="modalClose(key)"
 	>
 		<component :is="modals[key].component" :close="() => modalClose(key)" />
 	</IonModal>

@@ -36,8 +36,8 @@ export class ConnectApiDataSource implements ConnectBaseDataSource {
 		return await this.stranerdClient.post<{ to: string }, ConnectFromModel>('/', { to: userId })
 	}
 
-	async accept (id: string) {
-		return await this.stranerdClient.put<any, boolean>(`/${id}/accept`, {})
+	async accept (id: string, accept: boolean) {
+		return await this.stranerdClient.put<any, boolean>(`/${id}/accept`, { accept })
 	}
 
 	async delete (id: string) {

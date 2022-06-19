@@ -62,8 +62,8 @@ export class ConnectRepository implements IConnectRepository {
 		return this.transformer.fromJSON(await this.dataSource.create(userId))
 	}
 
-	async accept (id: string) {
-		return await this.dataSource.accept(id)
+	async accept (id: string, accept: boolean) {
+		return await this.dataSource.accept(id, accept)
 	}
 
 	async delete (id: string) {

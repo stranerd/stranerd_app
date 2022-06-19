@@ -9,7 +9,7 @@
 				</IonText>
 				<PhotoList :photos="pastQuestion.questionMedia" />
 			</div>
-			<template v-if="isPastQuestionObj(pastQuestion)">
+			<template v-if="pastQuestion.isObj(pastQuestion)">
 				<div class="flex flex-col gap-4">
 					<div v-for="(option, index) in pastQuestion.data.options" :key="index"
 						class="flex gap-4 justify-between">
@@ -29,7 +29,7 @@
 					<PhotoList :photos="pastQuestion.data.explanationMedia" />
 				</div>
 			</template>
-			<template v-else-if="isPastQuestionNotObj(pastQuestion)">
+			<template v-else-if="pastQuestion.isNotObj(pastQuestion)">
 				<div>
 					<IonText class="text-secondaryText mb-2 w-full">
 						Answer:
@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { isPastQuestionObj, isPastQuestionNotObj, PastQuestionEntity } from '@modules/school'
+import { PastQuestionEntity } from '@modules/school'
 import { openPastQuestionEditModal, useDeletePastQuestion } from '@app/composable/school/pastQuestions'
 import { getAlphabet } from '@utils/commons'
 import { checkmarkDoneOutline } from 'ionicons/icons'
@@ -66,7 +66,7 @@ export default defineComponent({
 	setup (props) {
 		const { loading, error, deletePastQuestion } = useDeletePastQuestion(props.pastQuestion)
 		return {
-			loading, error, deletePastQuestion, isPastQuestionObj, isPastQuestionNotObj,
+			loading, error, deletePastQuestion,
 			openPastQuestionEditModal, getAlphabet, checkmarkDoneOutline
 		}
 	}

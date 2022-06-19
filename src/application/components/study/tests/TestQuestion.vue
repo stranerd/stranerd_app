@@ -13,7 +13,7 @@
 			<PhotoList v-if="question.questionMedia.length" :photos="question.questionMedia" />
 		</div>
 
-		<div v-if="isPastQuestionObj(question)" class=" flex flex-col w-full">
+		<div v-if="question.isObj(question)" class=" flex flex-col w-full">
 			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
 				class="w-full py-4" @click="answer(question.id, optionIndex)">
 				<div class="flex gap-2 items-center">
@@ -33,7 +33,7 @@
 			</div>
 		</div>
 
-		<template v-if="showAnswers && isPastQuestionObj(question)">
+		<template v-if="showAnswers && question.isObj(question)">
 			<span v-if="isCorrect" class="rounded-md bg-success py-2 px-4">
 				Nice, you are correct
 			</span>
@@ -57,7 +57,7 @@
 			</template>
 		</template>
 
-		<div v-if="isPastQuestionNotObj(question)">
+		<div v-if="question.isNotObj(question)">
 			<IonText class="block mb-2">
 				<DisplayHtml :html="question.data.answer" />
 			</IonText>
@@ -78,7 +78,7 @@ import {
 	radioButtonOn
 } from 'ionicons/icons'
 import { TestEntity, TestType } from '@modules/study'
-import { isPastQuestionNotObj, isPastQuestionObj, PastQuestionEntity, PastQuestionType } from '@modules/school'
+import { PastQuestionEntity, PastQuestionType } from '@modules/school'
 import { getAlphabet } from '@utils/commons'
 import { useCreateReport } from '@app/composable/reports/reports'
 import { ReportType } from '@modules/reports'
@@ -130,7 +130,7 @@ export default defineComponent({
 			checkmarkCircleOutline, radioButtonOff, chevronDownOutline,
 			chevronUpOutline, flagOutline, radioButtonOn, closeCircleOutline,
 			showAnswers, isCorrect, isInCorrect, showExplanation,
-			getAlphabet, loading, error, createReport, isPastQuestionObj, isPastQuestionNotObj
+			getAlphabet, loading, error, createReport
 		}
 	}
 })

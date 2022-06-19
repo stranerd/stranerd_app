@@ -7,6 +7,6 @@ export interface ConnectBaseDataSource {
 	listenToOne: (id: string, listener: Listeners<ConnectFromModel>) => Promise<() => void>
 	find: (id: string) => Promise<ConnectFromModel | null>
 	create: (userId: string) => Promise<ConnectFromModel>
-	accept: (id: string) => Promise<boolean>
+	accept: (id: string, accept: boolean) => Promise<boolean>
 	delete: (id: string) => Promise<void>
 }

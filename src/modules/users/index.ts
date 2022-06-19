@@ -30,8 +30,6 @@ import { BadgeEntity } from './domain/entities/badge'
 import { ConnectEntity } from './domain/entities/connect'
 import {
 	EmbeddedUser,
-	isUserAspirant,
-	isUserCollege,
 	RankingTimes,
 	UserBio,
 	UserRoles,
@@ -79,4 +77,4 @@ export {
 	ConnectEntity
 }
 export type { UserBio, UserRoles, EmbeddedUser }
-export { UserSchoolType, isUserCollege, isUserAspirant }
+export { UserSchoolType }

@@ -8,9 +8,9 @@ import {
 	UserDates,
 	UserRank,
 	UserRoles,
-	UserSchoolData,
+	UserSchoolData, UserSchoolType, CollegeType,
 	UserSession,
-	UserStatus
+	UserStatus, AspirantType
 } from '../types'
 
 type UserConstructorArgs = {
@@ -170,5 +170,8 @@ export class UserEntity extends BaseEntity {
 	set isVerified (isVerified) {
 		this.roles.isVerified = isVerified
 	}
-}
 
+	isCollege (user: UserEntity): user is Omit<UserEntity, 'school'> & { school: CollegeType } {
+		return user.school?.type === UserSchoolType.college
+	}
+}

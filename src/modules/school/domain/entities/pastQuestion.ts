@@ -1,5 +1,5 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
-import { PastQuestionData, PastQuestionType } from '../types'
+import { ObjType, PastQuestionData, PastQuestionType, TheoryType } from '../types'
 
 export class PastQuestionEntity extends BaseEntity {
 	public readonly id: string
@@ -27,6 +27,14 @@ export class PastQuestionEntity extends BaseEntity {
 		this.data = data.data
 		this.createdAt = data.createdAt
 		this.updatedAt = data.updatedAt
+	}
+
+	isObj (question: PastQuestionEntity): question is Omit<PastQuestionEntity, 'data'> & { data: ObjType } {
+		return question.data.type === PastQuestionType.objective
+	}
+
+	isNotObj (question: PastQuestionEntity): question is Omit<PastQuestionEntity, 'data'> & { data: TheoryType } {
+		return question.data.type !== PastQuestionType.objective
 	}
 }
 

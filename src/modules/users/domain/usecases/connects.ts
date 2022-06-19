@@ -1,5 +1,4 @@
-import { Listeners, QueryParams } from '@modules/core'
-import { PAGINATION_LIMIT } from '@utils/constants'
+import { Listeners } from '@modules/core'
 import { IConnectRepository } from '../irepositories/iconnect'
 import { ConnectEntity } from '../entities/connect'
 
@@ -10,33 +9,20 @@ export class ConnectsUseCase {
 		this.repository = repository
 	}
 
-	async find (id: string) {
-		return await this.repository.find(id)
+	async findBetweenUsers (path: [string, string]) {
+		return await this.repository.find(path.sort().join('---'))
 	}
 
-	async get () {
-		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt', desc: true }],
-			limit: PAGINATION_LIMIT
-		}
-		return await this.repository.get(conditions)
-	}
-
-	async listen (listener: Listeners<ConnectEntity>) {
-		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt', desc: true }],
-			all: true
-		}
-
-		return await this.repository.listenToMany(conditions, listener, (entity) => !!entity)
+	async listenBetweenUsers (path: [string, string], listener: Listeners<ConnectEntity>) {
+		return await this.repository.listenToOne(path.sort().join('---'), listener)
 	}
 
 	async create (userId: string) {
 		return await this.repository.create(userId)
 	}
 
-	async accept (id: string) {
-		return await this.repository.accept(id)
+	async accept (id: string, accept: boolean) {
+		return await this.repository.accept(id, accept)
 	}
 
 	async delete (id: string) {

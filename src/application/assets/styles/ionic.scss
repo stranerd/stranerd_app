@@ -225,13 +225,10 @@ ion-button {
 	--border-color: #{$color-primaryBg};
 }
 
-.btn-white {
-	@extend .btn-padding;
-	--background: $color-white;
-	--color: #{$color-primary};
-	--border-width: 1px;
-	--border-style: solid;
-	--border-color: $color-white;
+.outline-danger {
+	--color: #{$color-danger};
+	--background-hover: #{$color-danger};
+	--border-color: #{$color-danger};
 }
 
 ion-popover::part(content) {

@@ -8,7 +8,7 @@ export enum UserSchoolType {
 	'college' = 'college'
 }
 
-type SecondaryType = {
+export type SecondaryType = {
 	type: UserSchoolType.secondary
 	exams: {
 		institutionId: string
@@ -18,7 +18,7 @@ type SecondaryType = {
 	}[]
 }
 
-type AspirantType = {
+export type AspirantType = {
 	type: UserSchoolType.aspirant
 	exams: {
 		institutionId: string
@@ -28,7 +28,7 @@ type AspirantType = {
 	}[]
 }
 
-type CollegeType = {
+export type CollegeType = {
 	type: UserSchoolType.college
 	institutionId: string
 	facultyId: string
@@ -114,7 +114,3 @@ export interface UserRank {
 	score: number
 	level: number
 }
-
-export const isUserCollege = (user: UserEntity): user is Omit<UserEntity, 'school'> & { school: CollegeType } => user.school?.type === UserSchoolType.college
-
-export const isUserAspirant = (user: UserEntity): user is Omit<UserEntity, 'school'> & { school: AspirantType } => !!user.school && user.school.type !== UserSchoolType.college
