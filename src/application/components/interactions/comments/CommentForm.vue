@@ -1,6 +1,6 @@
 <template>
-	<form class="flex gap-4 card-padding items-center text-sm" @submit.prevent="createComment">
-		<IonInput v-model="factory.body" class="flex-grow" placeholder="Add a comment" />
+	<form class="flex gap-4 items-center" @submit.prevent="createComment">
+		<IonInput v-model="factory.body" :placeholder="`Add a ${title}...`" class="flex-grow" />
 		<IonButton :disabled="!factory.valid" class="btn-primary" type="submit">
 			<IonIcon slot="icon-only" :icon="paperPlaneOutline" />
 		</IonButton>
@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 import { useCreateComment } from '@app/composable/interactions/comments'
 import { InteractionEntities } from '@modules/interactions'
 import { paperPlaneOutline } from 'ionicons/icons'
@@ -27,7 +27,8 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { factory, loading, error, createComment } = useCreateComment(props.id, props.type)
-		return { factory, loading, error, createComment, paperPlaneOutline }
+		const title = computed(() => props.type === InteractionEntities.comments ? 'reply' : 'comment')
+		return { title, factory, loading, error, createComment, paperPlaneOutline }
 	}
 })
 </script>

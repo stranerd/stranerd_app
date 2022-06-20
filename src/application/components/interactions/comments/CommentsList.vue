@@ -1,21 +1,19 @@
 <template>
-	<div class="flex flex-col flex-grow relative pb-[68px] pt-3">
+	<div class="flex flex-col flex-grow relative py-3">
 		<CommentsListCard v-for="comment in comments" :key="comment.hash" :comment="comment" />
 		<BlockLoading v-if="loading" />
-		<CommentForm :id="id" :type="type" class="absolute bottom-0 inset-x-0" />
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import CommentsListCard from '@app/components/interactions/comments/CommentsListCard.vue'
-import CommentForm from '@app/components/interactions/comments/CommentForm.vue'
 import { useCommentsList } from '@app/composable/interactions/comments'
 import { InteractionEntities } from '@modules/interactions'
 
 export default defineComponent({
 	name: 'CommentsList',
-	components: { CommentsListCard, CommentForm },
+	components: { CommentsListCard },
 	props: {
 		id: {
 			type: String,

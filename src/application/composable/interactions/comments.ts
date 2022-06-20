@@ -2,6 +2,7 @@ import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 import { CommentEntity, CommentFactory, CommentsUseCases, InteractionEntities } from '@modules/interactions'
+import { useInteractionModal } from '@app/composable/core/modals'
 
 const global = {} as Record<string, {
 	comments: Ref<CommentEntity[]>
@@ -61,10 +62,19 @@ export const useCommentsList = (id: string, type: InteractionEntities) => {
 	}
 }
 
+let commentEntity = null as { id: string, type: InteractionEntities } | null
+export const getCommentEntity = () => commentEntity
+export const openCreateCommentModal = async (entity: { id: string, type: InteractionEntities }) => {
+	commentEntity = entity
+	useInteractionModal().openCreateComment()
+}
+
 export const useCreateComment = (id: string, type: InteractionEntities) => {
 	const factory = ref(new CommentFactory()) as Ref<CommentFactory>
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
+
+	if (!commentEntity) useInteractionModal().closeCreateComment()
 
 	const createComment = async () => {
 		await setError('')

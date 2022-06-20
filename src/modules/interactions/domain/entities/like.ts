@@ -1,6 +1,6 @@
 import { InteractionEntity } from '../types'
 import { BaseEntity } from '@modules/core'
-import { EmbeddedUser } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 
 export class LikeEntity extends BaseEntity {
 	public readonly id: string
@@ -15,7 +15,7 @@ export class LikeEntity extends BaseEntity {
 		this.id = id
 		this.value = value
 		this.entity = entity
-		this.user = user
+		this.user = generateEmbeddedUser(user)
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}

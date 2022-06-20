@@ -2,15 +2,17 @@ import { BaseEntity, parseMedia } from '@modules/core'
 import { capitalize, catchDivideByZero, formatNumber } from '@utils/commons'
 import { getRankImage } from './rank'
 import {
+	CollegeType,
 	EmbeddedUser,
 	UserAccount,
 	UserBio,
 	UserDates,
 	UserRank,
 	UserRoles,
-	UserSchoolData, UserSchoolType, CollegeType,
+	UserSchoolData,
+	UserSchoolType,
 	UserSession,
-	UserStatus, AspirantType
+	UserStatus
 } from '../types'
 
 type UserConstructorArgs = {

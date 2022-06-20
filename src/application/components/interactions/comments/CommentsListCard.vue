@@ -9,15 +9,20 @@
 				</span>
 				<span>{{ comment.body }}</span>
 			</IonText>
-			<span class="text-secondaryText text-sm">{{ formatTime(comment.createdAt) }}</span>
+			<div class="text-sm text-secondaryText flex items-center gap-4">
+				<span>{{ formatTime(comment.createdAt) }}</span>
+				<a v-if="comment.canReply"
+					@click="openCreateCommentModal({ id: comment.id, type: InteractionEntities.comments })">Reply</a>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { CommentEntity } from '@modules/interactions'
+import { CommentEntity, InteractionEntities } from '@modules/interactions'
 import { formatTime } from '@utils/dates'
+import { openCreateCommentModal } from '@app/composable/interactions/comments'
 
 export default defineComponent({
 	name: 'CommentsListCard',
@@ -28,7 +33,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		return { formatTime }
+		return { formatTime, InteractionEntities, openCreateCommentModal }
 	}
 })
 </script>

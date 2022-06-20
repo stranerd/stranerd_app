@@ -1,6 +1,6 @@
 import { InteractionEntity } from '../types'
 import { BaseEntity } from '@modules/core'
-import { EmbeddedUser } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 
 export class ViewEntity extends BaseEntity {
 	public readonly id: string
@@ -13,7 +13,7 @@ export class ViewEntity extends BaseEntity {
 		super()
 		this.id = id
 		this.entity = entity
-		this.user = user
+		this.user = generateEmbeddedUser(user)
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
