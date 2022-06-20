@@ -20,7 +20,7 @@ import { useRouteMeta } from '@app/composable/core/states'
 export default defineComponent({
 	name: 'SettingsAbout',
 	setup () {
-		useRouteMeta('About', { back: '/settings' })
+		useRouteMeta('About', { back: true })
 	}
 })
 </script>

@@ -26,7 +26,7 @@ export default defineComponent({
 	components: { QuestionForm },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Ask a Question', { back: '/questions' })
+		useRouteMeta('Ask a Question', { back: true })
 		const { factory, error, loading, createQuestion } = useCreateQuestion()
 		return { factory, error, loading, createQuestion }
 	}

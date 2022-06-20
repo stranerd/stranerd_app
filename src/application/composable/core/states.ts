@@ -4,7 +4,7 @@ import { isClient } from '@utils/environment'
 import { NetworkError, StatusCodes } from '@modules/core'
 import { capitalize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 export const useErrorHandler = () => {
 	const errorState = ref('')
@@ -77,17 +77,25 @@ export const useListener = (startFn: () => Promise<() => void>) => {
 	return { start, close, reset, restart, isRunning }
 }
 
-type MetaKeys = 'routeName' | 'back'
-type Meta = Record<MetaKeys, any>
+type Meta = {
+	routeName: string
+	back: boolean
+}
 type MetaObj = Partial<Omit<Meta, 'routeName'>>
 
 export const useRouteMeta = (routeName: string | ComputedRef<string>, metaObj: MetaObj = {}) => {
 	const name = typeof routeName === 'string' ? computed(() => routeName) : routeName
 
 	const route = useRoute()
+	const router = useRouter()
 	const setMeta = (data: Partial<Meta>) => {
+		const listRoute = router.options.routes.find((r) => r.name === route.name)
 		Object.entries(data).forEach(([key, value]) => {
 			route.meta[key] = value
+			if (listRoute) {
+				listRoute.meta ||= {}
+				listRoute.meta[key] = value
+			}
 		})
 	}
 

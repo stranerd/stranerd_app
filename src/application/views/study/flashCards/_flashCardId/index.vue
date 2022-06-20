@@ -57,7 +57,7 @@ export default defineComponent({
 		SaveToSet
 	},
 	setup () {
-		useRouteMeta('Flashcard Set')
+		useRouteMeta('Flashcard Set', { back: true })
 		const { id } = useAuth()
 		const cardMode = ref(true)
 		const { flashCardId } = useRoute().params

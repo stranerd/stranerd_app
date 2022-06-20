@@ -16,7 +16,7 @@ export default defineComponent({
 	components: { Discussions },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Group')
+		useRouteMeta('Group', { back: true })
 		const route = useRoute()
 		const { classId, groupId } = route.params
 		return { classId: classId as string, groupId: groupId as string }

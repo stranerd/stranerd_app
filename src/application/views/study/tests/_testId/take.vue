@@ -31,7 +31,7 @@ export default defineComponent({
 	components: { TestBody },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Test')
+		useRouteMeta('Test', { back: true })
 		const { testId } = useRoute().params
 		const { error, loading, test } = useTest(testId as string)
 		return { error, loading, test }

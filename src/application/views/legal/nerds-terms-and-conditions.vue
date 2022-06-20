@@ -13,7 +13,7 @@ export default defineComponent({
 	name: 'LegalNerdsTermsAndConditions',
 	components: { PdfReader },
 	setup () {
-		useRouteMeta('Nerds Terms and Conditions', {})
+		useRouteMeta('Nerds Terms and Conditions', { back: true })
 	}
 })
 </script>

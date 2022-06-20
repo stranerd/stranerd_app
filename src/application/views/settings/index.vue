@@ -40,7 +40,7 @@ export default defineComponent({
 	name: 'Settings',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Settings', {})
+		useRouteMeta('Settings', { back: true })
 		const { signout, loading } = useSessionSignout()
 		return {
 			signout, loading,

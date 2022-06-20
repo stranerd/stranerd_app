@@ -13,7 +13,7 @@ export default defineComponent({
 	name: 'LegalTermsOfUse',
 	components: { PdfReader },
 	setup () {
-		useRouteMeta('Terms of Use', {})
+		useRouteMeta('Terms of Use', { back: true })
 	}
 })
 </script>

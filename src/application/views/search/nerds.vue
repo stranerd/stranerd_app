@@ -16,7 +16,7 @@ export default defineComponent({
 	name: 'SearchNerds',
 	components: { SearchWrapper, SearchUsersList },
 	setup () {
-		useRouteMeta('Search Nerds')
+		useRouteMeta('Search Nerds', { back: true })
 	}
 })
 </script>

@@ -27,8 +27,8 @@ export default defineComponent({
 	name: 'QuestionsQuestionIdAnswersAnswerId',
 	components: { AnswerPageCard, CommentsList, CommentForm },
 	setup () {
-		const { questionId, answerId } = useRoute().params
-		useRouteMeta('Comments', { back: `/questions/${questionId}` })
+		const { answerId } = useRoute().params
+		useRouteMeta('Comments', { back: true })
 		const { error, loading, answer } = useAnswerById(answerId as string)
 		return { error, loading, answer, InteractionEntities }
 	}

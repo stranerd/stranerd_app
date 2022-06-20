@@ -52,7 +52,7 @@ export default defineComponent({
 	name: 'Connect',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Stranerd Connect', {})
+		useRouteMeta('Stranerd Connect', { back: true })
 		const isOpen = ref(false)
 		const tab = ref(0)
 		const openModal = (t = 0) => {

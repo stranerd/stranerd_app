@@ -18,7 +18,7 @@ export default defineComponent({
 	components: { TimetableList, ClassWrapper },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Timetable')
+		useRouteMeta('Timetable', { back: true })
 	}
 })
 </script>

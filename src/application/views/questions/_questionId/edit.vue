@@ -9,7 +9,6 @@ import { useAuth } from '@app/composable/auth/auth'
 import { useQuestionModal } from '@app/composable/core/modals'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
-import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'QuestionsQuestionIdEdit',
@@ -24,8 +23,7 @@ export default defineComponent({
 		return goBackToNonAuth()
 	}]),
 	setup () {
-		const { questionId } = useRoute().params
-		useRouteMeta('Edit Question', { back: `/questions/${questionId}` })
+		useRouteMeta('Edit Question', { back: true })
 	}
 })
 </script>

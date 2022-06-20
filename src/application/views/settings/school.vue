@@ -137,7 +137,7 @@ export default defineComponent({
 	components: { Institution },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Edit School', { back: '/settings' })
+		useRouteMeta('Edit School', { back: true })
 		const { factory, error, loading, updateSchool } = useUserSchoolUpdate()
 
 		const { schools, gatewayExams } = useInstitutionList()

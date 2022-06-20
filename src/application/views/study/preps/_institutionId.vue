@@ -77,7 +77,7 @@ export default defineComponent({
 	},
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Preps')
+		useRouteMeta('Preps', { back: true })
 		const { loading: testLoading, error: testError, createTest } = useCreateTest()
 		const route = useRoute()
 		const { institutionId } = route.params

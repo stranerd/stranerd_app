@@ -48,7 +48,7 @@ export default defineComponent({
 	name: 'StudyDocumentsDocumentId',
 	components: { Avatar, DocumentDetails, Share, SaveToSet },
 	setup () {
-		useRouteMeta('Document')
+		useRouteMeta('Document', { back: true })
 		const { documentId } = useRoute().params
 		const { error, loading, document } = useDocument(documentId as string)
 		return {

@@ -46,7 +46,7 @@ export default defineComponent({
 	components: { AdminWrapper, AdminFacultiesList, AdminGeneralCoursesList },
 	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
-		useRouteMeta('Institution')
+		useRouteMeta('Institution', { back: true })
 		const route = useRoute()
 		const { institutionId } = route.params
 		const { loading, deleteInstitution } = useDeleteInstitution(institutionId as string)

@@ -24,7 +24,7 @@ export default defineComponent({
 	components: { QuestionPageCard, AnswersList },
 	setup () {
 		const { questionId } = useRoute().params
-		useRouteMeta('Question', { back: '/questions' })
+		useRouteMeta('Question', { back: true })
 		const { error, loading, question } = useQuestion(questionId as string)
 		return { error, loading, question }
 	}

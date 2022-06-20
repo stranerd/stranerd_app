@@ -22,7 +22,7 @@ export default defineComponent({
 	name: 'AdminStudyQuestions',
 	components: { AdminPastQuestionsList, AdminWrapper },
 	setup () {
-		useRouteMeta('Test Questions')
+		useRouteMeta('Test Questions', { back: true })
 		return {
 			openCreatePastQuestion: useSchoolModal().openCreatePastQuestion
 		}

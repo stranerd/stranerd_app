@@ -14,7 +14,7 @@ export default defineComponent({
 	name: 'ExplorePreps',
 	components: { ExploreWrapper, ExploreTestPrepsList },
 	setup () {
-		useRouteMeta('Explore Preps')
+		useRouteMeta('Explore Preps', { back: true })
 	}
 })
 </script>

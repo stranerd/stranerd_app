@@ -40,7 +40,7 @@ import { useRouteMeta } from '@app/composable/core/states'
 export default defineComponent({
 	name: 'SettingsContact',
 	setup () {
-		useRouteMeta('Contact Us', { back: '/settings' })
+		useRouteMeta('Contact Us', { back: true })
 		const { user } = useAuth()
 		const { factory, loading, error, createMessage } = useCreateMessage()
 		return {

@@ -44,7 +44,7 @@ export default defineComponent({
 	name: 'ClassClassId',
 	components: { ClassWrapper, Institution, Department },
 	setup () {
-		useRouteMeta('About')
+		useRouteMeta('About', { back: true })
 		const { id } = useAuth()
 		return { id, openClassEditModal, createOutline, listOutline }
 	}

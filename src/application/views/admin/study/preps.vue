@@ -22,7 +22,7 @@ export default defineComponent({
 	components: { AdminWrapper, AdminTestPrepsList },
 	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
-		useRouteMeta('Preps')
+		useRouteMeta('Preps', { back: true })
 		return { openCreateTestPrep: useStudyModal().openCreateTestPrep }
 	}
 })

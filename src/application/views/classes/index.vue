@@ -15,7 +15,7 @@ export default defineComponent({
 	components: { ClassesList },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Classes')
+		useRouteMeta('Classes', {})
 	}
 })
 </script>

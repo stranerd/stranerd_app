@@ -28,7 +28,7 @@ export default defineComponent({
 		if (!canEdit) return `/study/flashCards/${flashCard.id}`
 	}]),
 	setup () {
-		useRouteMeta('Edit Flashcard')
+		useRouteMeta('Edit Flashcard', { back: true })
 		const { flashCardId } = useRoute().params
 		const { editFlashCard, factory, error, loading } = useEditFlashCard(flashCardId as string)
 		return { loading, error, editFlashCard, factory }

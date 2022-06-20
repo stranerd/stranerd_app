@@ -108,7 +108,7 @@ export default defineComponent({
 		SearchQuestionsList
 	},
 	setup () {
-		useRouteMeta('Search')
+		useRouteMeta('Search', { back: true })
 	}
 })
 </script>

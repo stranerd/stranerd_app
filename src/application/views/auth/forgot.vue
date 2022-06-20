@@ -73,7 +73,7 @@ export default defineComponent({
 	name: 'AuthForgot',
 	beforeRouteEnter: generateMiddlewares(['isNotAuthenticated']),
 	setup () {
-		useRouteMeta('Reset Password')
+		useRouteMeta('Reset Password', { back: true })
 		const {
 			factory, loading, error, message, sent, sendResetEmail, resetPassword
 		} = usePasswordReset()

@@ -59,7 +59,7 @@ export default defineComponent({
 	components: { AuthProviders },
 	beforeRouteEnter: generateMiddlewares(['isNotAuthenticated']),
 	setup () {
-		useRouteMeta('Signin')
+		useRouteMeta('Signin', { back: true })
 		const { factory, loading, error, signin } = useEmailSignin()
 		return { factory, loading, error, signin }
 	}

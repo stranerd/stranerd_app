@@ -48,7 +48,7 @@ export default defineComponent({
 		if (to.params.userId === useAuth().id.value) return '/account'
 	}]),
 	setup () {
-		useRouteMeta('Profile', {})
+		useRouteMeta('Profile', { back: true })
 		const { id } = useAuth()
 		const { userId } = useRoute().params
 		const { user, loading, error } = useUser(userId as string)

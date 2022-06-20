@@ -16,7 +16,7 @@ export default defineComponent({
 	components: { AdminWrapper, TagsList },
 	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
-		useRouteMeta('Question Tags')
+		useRouteMeta('Question Tags', { back: true })
 	}
 })
 </script>

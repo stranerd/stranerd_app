@@ -16,7 +16,7 @@ export default defineComponent({
 	name: 'SearchPreps',
 	components: { SearchWrapper, SearchTestPrepsList },
 	setup () {
-		useRouteMeta('Search Preps')
+		useRouteMeta('Search Preps', { back: true })
 	}
 })
 </script>

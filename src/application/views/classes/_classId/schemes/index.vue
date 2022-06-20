@@ -18,7 +18,7 @@ export default defineComponent({
 	components: { SchemeList, ClassWrapper },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Scheme of Work')
+		useRouteMeta('Scheme of Work', { back: true })
 	}
 })
 </script>

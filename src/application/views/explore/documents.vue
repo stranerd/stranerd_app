@@ -14,7 +14,7 @@ export default defineComponent({
 	name: 'ExploreDocuments',
 	components: { ExploreWrapper, ExploreDocumentsList },
 	setup () {
-		useRouteMeta('Explore Documents')
+		useRouteMeta('Explore Documents', { back: true })
 	}
 })
 </script>

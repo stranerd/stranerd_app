@@ -16,7 +16,7 @@ export default defineComponent({
 	components: { GeneralDashboard },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Stats', { back: '/account' })
+		useRouteMeta('Stats', { back: true })
 		const { user } = useAuth()
 		return { user }
 	}

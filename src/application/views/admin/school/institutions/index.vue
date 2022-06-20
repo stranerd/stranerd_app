@@ -24,7 +24,7 @@ export default defineComponent({
 	components: { AdminWrapper, AdminInstitutionsList },
 	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
-		useRouteMeta('Institutions')
+		useRouteMeta('Institutions', { back: true })
 		return { openCreateInstitution: useSchoolModal().openCreateInstitution }
 	}
 })

@@ -52,7 +52,7 @@ export default defineComponent({
 	name: 'SettingsProfile',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Edit Profile', { back: '/settings' })
+		useRouteMeta('Edit Profile', { back: true })
 		const { factory, error, loading, updateProfile } = useProfileUpdate()
 		const savePhoto = async (p: UploadedFile) => {
 			factory.value.photo = p

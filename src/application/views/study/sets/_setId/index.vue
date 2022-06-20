@@ -18,7 +18,7 @@ export default defineComponent({
 	name: 'StudySetsSetId',
 	components: { SetView },
 	setup () {
-		useRouteMeta('Folder')
+		useRouteMeta('Folder', { back: true })
 		const { setId } = useRoute().params
 		const { error, loading, set } = useSetById(setId as string)
 		return { error, loading, set }

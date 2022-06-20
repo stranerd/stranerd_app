@@ -23,7 +23,6 @@ import { getAnsweringQuestion, useCreateAnswer } from '@app/composable/questions
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
-import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'QuestionsQuestionIdAnswer',
@@ -38,8 +37,7 @@ export default defineComponent({
 		}
 	]),
 	setup () {
-		const { questionId } = useRoute().params
-		useRouteMeta('Question', { back: `/questions/${questionId}` })
+		useRouteMeta('Question', { back: true })
 		const { factory, error, loading, answeringQuestion, createAnswer } = useCreateAnswer()
 		return { factory, error, loading, answeringQuestion, createAnswer }
 	}

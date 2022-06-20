@@ -16,7 +16,7 @@ export default defineComponent({
 	name: 'SearchFlashCards',
 	components: { SearchWrapper, SearchFlashCardsList },
 	setup () {
-		useRouteMeta('Search Flashcards')
+		useRouteMeta('Search Flashcards', { back: true })
 	}
 })
 </script>

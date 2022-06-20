@@ -16,7 +16,7 @@ export default defineComponent({
 	name: 'SearchQuestions',
 	components: { SearchWrapper, SearchQuestionsList },
 	setup () {
-		useRouteMeta('Search Questions')
+		useRouteMeta('Search Questions', { back: true })
 	}
 })
 </script>

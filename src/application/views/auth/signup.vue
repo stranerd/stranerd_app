@@ -82,7 +82,7 @@ export default defineComponent({
 	components: { AuthProviders },
 	beforeRouteEnter: generateMiddlewares(['isNotAuthenticated']),
 	setup () {
-		useRouteMeta('Create account')
+		useRouteMeta('Create account', { back: true })
 		const { factory, loading, error, signup } = useEmailSignup()
 		return { factory, loading, error, signup }
 	}

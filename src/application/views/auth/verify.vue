@@ -48,7 +48,7 @@ export default defineComponent({
 		if (!getEmailVerificationEmail()) return '/auth/signin'
 	}]),
 	setup () {
-		useRouteMeta('Verify Email')
+		useRouteMeta('Verify Email', { back: true })
 		const { email, loading, error, message, sendVerificationEmail } = useEmailVerificationRequest()
 		const {
 			token, loading: completeLoading, error: completeError, completeVerification

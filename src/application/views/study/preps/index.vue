@@ -24,7 +24,7 @@ export default defineComponent({
 	components: { ContinueTests },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Test preps')
+		useRouteMeta('Test preps', {})
 		return { addOutline }
 	}
 })

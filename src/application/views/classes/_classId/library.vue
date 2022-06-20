@@ -18,7 +18,7 @@ export default defineComponent({
 	components: { ClassWrapper, ClassLibrary },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Library')
+		useRouteMeta('Library', { back: true })
 	}
 })
 </script>

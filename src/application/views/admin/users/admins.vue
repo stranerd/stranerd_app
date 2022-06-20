@@ -20,7 +20,7 @@ export default defineComponent({
 	components: { AdminWrapper, AdminsList, UpgradeUserToAdmin },
 	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
-		useRouteMeta('Admins')
+		useRouteMeta('Admins', { back: true })
 	}
 })
 </script>

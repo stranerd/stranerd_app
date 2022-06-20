@@ -64,7 +64,7 @@ export default defineComponent({
 		ExploreFlashCardsList
 	},
 	setup () {
-		useRouteMeta('Explore')
+		useRouteMeta('Explore', { back: true })
 	}
 })
 </script>

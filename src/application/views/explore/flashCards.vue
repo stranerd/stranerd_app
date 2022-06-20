@@ -14,7 +14,7 @@ export default defineComponent({
 	name: 'ExploreFlashCards',
 	components: { ExploreWrapper, ExploreFlashCardsList },
 	setup () {
-		useRouteMeta('Explore Flashcards')
+		useRouteMeta('Explore Flashcards', { back: true })
 	}
 })
 </script>

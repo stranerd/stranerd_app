@@ -18,7 +18,7 @@ export default defineComponent({
 	components: { ClassWrapper, ClassMembers },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Classmates')
+		useRouteMeta('Classmates', { back: true })
 	}
 })
 </script>

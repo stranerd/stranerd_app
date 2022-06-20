@@ -19,7 +19,7 @@ export default defineComponent({
 	components: { FlashCardForm },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Create Flashcard')
+		useRouteMeta('Create Flashcard', { back: true })
 		const { createFlashCard, factory, error, loading } = useCreateFlashCard()
 		return { error, loading, createFlashCard, factory }
 	}

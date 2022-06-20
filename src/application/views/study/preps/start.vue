@@ -17,7 +17,7 @@ export default defineComponent({
 	components: { ExploreTestPrepsList },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Choose Exam')
+		useRouteMeta('Choose Exam', { back: true })
 	}
 })
 </script>
