@@ -25,47 +25,47 @@
 
 @layer utilities {
 	html {
-		@apply text-[14.5px] md:text-[16px] bg-bodyBg text-bodyText
+		@apply text-[14.5px] md:text-[16px] bg-bodyBg text-bodyText;
 	}
 
 	.layout {
-		@apply flex flex-col h-full flex-grow
+		@apply flex flex-col h-full flex-grow;
 	}
 
 	.layout-page {
-		@apply flex flex-row lg:gap-10 flex-grow min-h-full
+		@apply flex flex-row lg:gap-10 flex-grow min-h-full md:ml-16;
 	}
 
 	.layout-body {
-		@apply lg:w-7/12 w-full min-h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw]
+		@apply lg:w-7/12 w-full min-h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw];
 	}
 
 	.layout-side-left {
-		@apply hidden lg:inline-block w-2/12 py-1 overflow-y-auto
+		@apply hidden lg:inline-block w-2/12 py-1 overflow-y-auto;
 	}
 
 	.layout-side-right {
-		@apply hidden lg:inline-block w-3/12 py-1 overflow-y-auto
+		@apply hidden lg:inline-block w-3/12 py-1 overflow-y-auto;
 	}
 
 	.btn {
-		@apply px-4 py-2 flex justify-center items-center font-semibold
+		@apply px-4 py-2 flex justify-center items-center font-semibold;
 	}
 
 	.headerShadow {
-		box-shadow: 0 0 15px 5px rgba(139, 158, 177, 0.1)
+		box-shadow: 0 0 15px 5px rgba(139, 158, 177, 0.1);
 	}
 
 	.footer-shadow {
-		box-shadow: 0 -5px 5px rgba(139, 158, 177, 0.05)
+		box-shadow: 0 -5px 5px rgba(139, 158, 177, 0.05);
 	}
 
 	.showcase {
-		@apply grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 md:gap-4
+		@apply grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 md:gap-4;
 	}
 
 	.showcase2 {
-		@apply grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 md:gap-4
+		@apply grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 md:gap-4;
 	}
 
 	.showcase-flex {
@@ -73,30 +73,30 @@
 	}
 
 	.blueTop {
-		@apply w-full flex items-center md:mb-4 justify-center
+		@apply w-full flex items-center md:mb-4 justify-center;
 	}
 
 	.nav-scroll {
-		@apply text-secondaryText text-sm items-center md:justify-between flex gap-2 font-semibold overflow-x-auto
+		@apply text-secondaryText text-sm items-center md:justify-between flex gap-2 font-semibold overflow-x-auto;
 	}
 
 	.nav-scroll > * {
-		@apply w-full p-2 cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap font-bold
+		@apply w-full p-2 cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap font-bold;
 	}
 
 	.nav-scroll > *.router-link-exact-active {
-		@apply border-b-2 text-primaryBg border-primaryBg
+		@apply border-b-2 text-primaryBg border-primaryBg;
 	}
 
 	.dot {
-		@apply h-[3px] w-[3px] text-[6px] rounded-full
+		@apply h-[3px] w-[3px] text-[6px] rounded-full;
 	}
 
 	.card-padding {
-		@apply p-4 gap-2 md:gap-4
+		@apply p-4 gap-2 md:gap-4;
 	}
 
-	[class*="-line"].card-padding {
+	[class*='-line'].card-padding {
 		@apply py-6;
 	}
 }

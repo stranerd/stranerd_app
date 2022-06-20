@@ -1,6 +1,7 @@
 <template>
 	<IonPage>
-		<Topbar v-if="!hideTop" />
+		<!-- <Topbar v-if="!hideTop" /> -->
+		<MainSidebar/>
 		<IonContent>
 			<div class="layout-page !px-0">
 				<div class="layout-body !w-full">
@@ -8,6 +9,7 @@
 				</div>
 			</div>
 		</IonContent>
+		<RightSidebar/>
 		<Fab v-if="!hideFab" />
 		<BottomNav v-if="!hideBottom" class="mt-auto" />
 	</IonPage>
@@ -15,9 +17,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Topbar from '@app/components/layout/topNavigations/Topbar.vue'
+// import Topbar from '@app/components/layout/topNavigations/Topbar.vue'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 import Fab from '@app/components/layout/Fab.vue'
+import MainSidebar from '@app/components/layout/sidebars/MainSidebar.vue'
+import RightSidebar from '../components/layout/sidebars/RightSidebar.vue'
 
 export default defineComponent({
 	name: 'DefaultLayout',
@@ -35,6 +39,6 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: { Topbar, BottomNav, Fab }
+	components: { BottomNav, Fab, MainSidebar, RightSidebar }
 })
 </script>
