@@ -1,7 +1,7 @@
 <template>
 	<div class="!gap-4 card-padding flex flex-col">
 		<div class="flex items-center gap-4 text-secondaryText text-sm justify-between">
-			<QuestionTag :tagId="question.tagId" class="font-bold" />
+			<InteractionTag :tagId="question.tagId" class="font-bold" />
 			<div class="flex flex-grow items-center justify-end gap-4">
 				<Share :text="question.strippedBody" title="Share this question" />
 				<IonIcon :icon="flagOutline" @click="openReportQuestionModal" />
@@ -40,7 +40,7 @@
 import { computed, defineComponent } from 'vue'
 import { createOutline, flagOutline, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
-import QuestionTag from '@app/components/questions/tags/Tag.vue'
+import InteractionTag from '@app/components/interactions/tags/Tag.vue'
 import { pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
 import { openAnswerModal } from '@app/composable/questions/answers'
@@ -58,7 +58,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { QuestionTag },
+	components: { InteractionTag },
 	setup (props) {
 		const { id } = useAuth()
 		const router = useRouter()

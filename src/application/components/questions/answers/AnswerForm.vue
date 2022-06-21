@@ -1,7 +1,7 @@
 <template>
 	<form class="flex flex-col gap-4" @submit.prevent="submit">
 		<div class="flex flex-col gap-4">
-			<QuestionTag :tagId="question.tagId" class="text-secondaryText font-bold" />
+			<InteractionTag :tagId="question.tagId" class="text-secondaryText font-bold" />
 			<DisplayHtml :html="question.body" />
 		</div>
 
@@ -50,11 +50,11 @@ import { closeOutline, imageOutline, paperPlaneOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { AnswerFactory, QuestionEntity } from '@modules/questions'
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
-import QuestionTag from '@app/components/questions/tags/Tag.vue'
+import InteractionTag from '@app/components/interactions/tags/Tag.vue'
 
 export default defineComponent({
 	name: 'AnswerForm',
-	components: { BaseEditor, QuestionTag },
+	components: { BaseEditor, InteractionTag },
 	props: {
 		factory: {
 			type: Object as PropType<AnswerFactory>,

@@ -7,7 +7,7 @@ export class TagApiDataSource implements TagBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBase + '/questions/tags')
+		this.stranerdClient = new HttpClient(apiBase + '/interactions/tags')
 	}
 
 	async create (data: TagToModel) {
@@ -23,14 +23,14 @@ export class TagApiDataSource implements TagBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<TagFromModel>) {
-		const listener = listenOnSocket(`questions/tags/${id}`, listeners)
+		const listener = listenOnSocket(`interactions/tags/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<TagFromModel>) {
-		const listener = listenOnSocket('questions/tags', listeners)
+		const listener = listenOnSocket('interactions/tags', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

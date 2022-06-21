@@ -2,8 +2,6 @@ import { modal, popover } from '@app/composable/core/modal'
 import CreateReport from '@app/components/modals/reports/CreateReport.vue'
 import CreateQuestion from '@app/components/modals/questions/CreateQuestion.vue'
 import EditQuestion from '@app/components/modals/questions/EditQuestion.vue'
-import CreateTag from '@app/components/modals/questions/CreateTag.vue'
-import EditTag from '@app/components/modals/questions/EditTag.vue'
 import CreateDashboardMenu from '@app/components/popovers/menus/CreateDashboardMenu.vue'
 import UserDashboardMenu from '@app/components/popovers/menus/UserDashboardMenu.vue'
 import CreateTestPrep from '@app/components/modals/study/CreateTestPrep.vue'
@@ -37,8 +35,10 @@ import EditPastQuestion from '@app/components/modals/school/EditPastQuestion.vue
 import Settings from '@app/components/modals/users/Settings.vue'
 import FabMenu from '@app/components/modals/users/FabMenu.vue'
 import CreateComment from '@app/components/modals/interactions/CreateComment.vue'
+import CreateTag from '@app/components/modals/interactions/CreateTag.vue'
+import EditTag from '@app/components/modals/interactions/EditTag.vue'
 
-const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion, CreateTag, EditTag })
+const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion })
 const SessionModal = modal.register('Session', { CreateSession: CreateReport, Ratings: CreateReport })
 const ReportModal = modal.register('Report', { CreateReport })
 const StudyModal = modal.register('Study', {
@@ -54,7 +54,7 @@ const SchoolModal = modal.register('School', {
 	CreatePastQuestion, EditPastQuestion, CreateCourse, EditCourse
 })
 const UserModal = modal.register('User', { Settings, FabMenu })
-const InteractionModal = modal.register('Interaction', { CreateComment })
+const InteractionModal = modal.register('Interaction', { CreateComment, CreateTag, EditTag })
 
 export const useQuestionModal = () => QuestionModal
 export const useSessionModal = () => SessionModal

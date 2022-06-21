@@ -1,8 +1,8 @@
 import { computed, onMounted, Ref, ref } from 'vue'
-import { TagEntity, TagFactory, TagsUseCases } from '@modules/questions'
+import { TagEntity, TagFactory, TagsUseCases, TagTypes } from '@modules/interactions'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { useQuestionModal } from '@app/composable/core/modals'
+import { useInteractionModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
 
 const global = {
@@ -29,7 +29,9 @@ export const useTagList = () => {
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTags()
 	})
-	return { ...global }
+	const questionTags = computed(() => global.tags.value.filter((tag) => tag.type === TagTypes.questions))
+	const departmentTags = computed(() => global.tags.value.filter((tag) => tag.type === TagTypes.departments))
+	return { ...global, questionTags, departmentTags }
 }
 
 export const useTag = (id: string) => {
@@ -46,10 +48,10 @@ export const useTag = (id: string) => {
 	return { tag }
 }
 
-let tagParent = null as string | null
-export const openCreateTagModal = (parent: string | null) => {
+let tagParent = null as TagEntity | null
+export const openCreateTagModal = (parent: TagEntity | null) => {
 	tagParent = parent
-	useQuestionModal().openCreateTag()
+	useInteractionModal().openCreateTag()
 }
 
 export const useCreateTag = () => {
@@ -58,7 +60,10 @@ export const useCreateTag = () => {
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 
-	if (tagParent) factory.value.parent = tagParent
+	if (tagParent) {
+		factory.value.parent = tagParent.id
+		factory.value.type = tagParent.type
+	}
 	tagParent = null
 
 	const createTag = async () => {
@@ -69,7 +74,7 @@ export const useCreateTag = () => {
 				const tag = await TagsUseCases.add(factory.value)
 				addToArray(global.tags.value, tag, (e) => e.id, (e) => e.title, true)
 				factory.value.reset()
-				useQuestionModal().closeCreateTag()
+				useInteractionModal().closeCreateTag()
 				await setMessage('Tag created successfully')
 			} catch (error) {
 				await setError(error)
@@ -84,7 +89,7 @@ export const useCreateTag = () => {
 let editingTag = null as TagEntity | null
 export const openTagEditModal = async (tag: TagEntity) => {
 	editingTag = tag
-	useQuestionModal().openEditTag()
+	useInteractionModal().openEditTag()
 }
 
 export const useEditTag = () => {
@@ -93,7 +98,7 @@ export const useEditTag = () => {
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	if (editingTag) factory.value.loadEntity(editingTag)
-	else useQuestionModal().closeEditTag()
+	else useInteractionModal().closeEditTag()
 
 	const editTag = async () => {
 		await setError('')
@@ -103,7 +108,7 @@ export const useEditTag = () => {
 				const updatedTag = await TagsUseCases.update(editingTag!.id, factory.value)
 				addToArray(global.tags.value, updatedTag, (e) => e.id, (e) => e.title, true)
 				factory.value.reset()
-				useQuestionModal().closeEditTag()
+				useInteractionModal().closeEditTag()
 				await setMessage('Tag updated successfully')
 			} catch (error) {
 				await setError(error)

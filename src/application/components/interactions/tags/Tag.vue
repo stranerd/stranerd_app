@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useTag } from '@app/composable/questions/tags'
+import { useTag } from '@app/composable/interactions/tags'
 
 export default defineComponent({
 	name: 'Tag',

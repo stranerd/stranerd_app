@@ -1,16 +1,16 @@
 <template>
 	<Modal>
 		<template v-slot:title>
-			Edit Tag
+			Create a tag
 		</template>
 		<TagForm
 			:error="error"
 			:factory="factory"
 			:loading="loading"
-			:submit="editTag"
+			:submit="createTag"
 		>
 			<template v-slot:buttonText>
-				Update Tag
+				Create Tag
 			</template>
 		</TagForm>
 	</Modal>
@@ -18,15 +18,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import TagForm from '@app/components/questions/tags/TagForm.vue'
-import { useEditTag } from '@app/composable/questions/tags'
+import TagForm from '@app/components/interactions/tags/TagForm.vue'
+import { useCreateTag } from '@app/composable/interactions/tags'
 
 export default defineComponent({
-	name: 'EditTagModal',
+	name: 'CreateTagModal',
 	components: { TagForm },
 	setup () {
-		const { factory, error, loading, editTag } = useEditTag()
-		return { factory, error, loading, editTag }
+		const { factory, error, loading, createTag } = useCreateTag()
+		return { factory, error, loading, createTag }
 	}
 })
 </script>

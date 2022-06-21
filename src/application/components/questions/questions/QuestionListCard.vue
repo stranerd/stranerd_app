@@ -19,7 +19,7 @@
 		<DisplayHtml :html="question.trimmedBody" class="pl-8" />
 
 		<div class="flex justify-between items-center gap-2 text-secondaryText text-sm pl-8">
-			<QuestionTag :tagId="question.tagId" />
+			<InteractionTag :tagId="question.tagId" />
 			<IonIcon :icon="ellipse" class="dot" />
 			<span class="mr-auto">{{ formatTime(question.createdAt) }}</span>
 			<IonIcon v-if="question.attachments.length" :icon="imageOutline" />
@@ -39,11 +39,11 @@ import { formatTime } from '@utils/dates'
 import { formatNumber, pluralize } from '@utils/commons'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { useAuth } from '@app/composable/auth/auth'
-import QuestionTag from '@app/components/questions/tags/Tag.vue'
+import InteractionTag from '@app/components/interactions/tags/Tag.vue'
 
 export default defineComponent({
 	name: 'QuestionListCard',
-	components: { QuestionTag },
+	components: { InteractionTag },
 	props: {
 		question: {
 			type: QuestionEntity,

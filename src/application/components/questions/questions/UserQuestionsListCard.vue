@@ -2,7 +2,7 @@
 	<router-link :id="question.id" :to="`/questions/${question.id}`" class="card-padding flex flex-col">
 		<span>{{ question.trimmedBody }}</span>
 		<div class="flex items-center justify-between text-secondaryText text-sm gap-2">
-			<QuestionTag :tagId="question.tagId" />
+			<InteractionTag :tagId="question.tagId" />
 			<IonIcon :icon="ellipse" class="dot" />
 			<span class="mr-auto">{{ formatTime(question.createdAt) }}</span>
 			<IonIcon v-if="question.attachments.length" :icon="imageOutline" />
@@ -20,11 +20,11 @@ import { ellipse, imageOutline, readerOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatNumber } from '@utils/commons'
 import { formatTime } from '@utils/dates'
-import QuestionTag from '@app/components/questions/tags/Tag.vue'
+import InteractionTag from '@app/components/interactions/tags/Tag.vue'
 
 export default defineComponent({
 	name: 'UserQuestionsListCard',
-	components: { QuestionTag },
+	components: { InteractionTag },
 	props: {
 		question: {
 			required: true,

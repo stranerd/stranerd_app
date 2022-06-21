@@ -3,7 +3,7 @@
 		class="card-padding flex flex-col">
 		<span>{{ answer.trimmedBody }}</span>
 		<div class="flex items-center justify-between text-secondaryText text-sm gap-2">
-			<QuestionTag :tagId="answer.tagId" />
+			<InteractionTag :tagId="answer.tagId" />
 			<IonIcon :icon="ellipse" class="dot" />
 			<span class="mr-auto">{{ formatTime(answer.createdAt) }}</span>
 			<IonIcon v-if="answer.attachments.length" :icon="imageOutline" />
@@ -17,11 +17,11 @@ import { AnswerEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { formatNumber } from '@utils/commons'
 import { ellipse, imageOutline, readerOutline } from 'ionicons/icons'
-import QuestionTag from '@app/components/questions/tags/Tag.vue'
+import InteractionTag from '@app/components/interactions/tags/Tag.vue'
 
 export default defineComponent({
 	name: 'UserAnswerListCard',
-	components: { QuestionTag },
+	components: { InteractionTag },
 	props: {
 		answer: {
 			required: true,

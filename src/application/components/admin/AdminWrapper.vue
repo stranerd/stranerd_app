@@ -3,7 +3,7 @@
 		<div>
 			<div class="nav-scroll">
 				<router-link to="/admin/users/admins">Admins</router-link>
-				<router-link to="/admin/questions/tags">Question Tags</router-link>
+				<router-link to="/admin/interactions/tags">Tags</router-link>
 				<router-link to="/admin/school/institutions">Institutions</router-link>
 				<router-link to="/admin/study/preps">Preps</router-link>
 				<router-link to="/admin/school/questions">Test Questions</router-link>
