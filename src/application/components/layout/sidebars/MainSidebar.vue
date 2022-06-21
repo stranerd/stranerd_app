@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-primaryBg fixed inset-y-0 w-16 flex flex-col items-center py-8 gap-7 z-50">
+	<div class="bg-primaryBg fixed inset-y-0 w-16 md:flex flex-col items-center py-8 gap-7 z-50 hidden ">
 		<img src="@/assets/images/logo/logo.svg" alt="logo" class="mb-3">
 
 		

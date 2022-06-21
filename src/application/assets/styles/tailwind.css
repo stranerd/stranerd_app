@@ -33,7 +33,7 @@
 	}
 
 	.layout-page {
-		@apply flex flex-row lg:gap-10 flex-grow min-h-full md:ml-16 w-[70%];
+		@apply flex flex-row flex-grow min-h-full md:ml-16 md:w-[70%] w-full;
 	}
 
 	.layout-body {

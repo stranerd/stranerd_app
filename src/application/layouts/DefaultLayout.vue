@@ -4,6 +4,7 @@
 		<MainSidebar/>
 		<IonContent>
 			<div class="layout-page !px-0">
+				<SubSidebar />
 				<div class="layout-body !w-full">
 					<slot />
 				</div>
@@ -22,10 +23,11 @@ import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 import Fab from '@app/components/layout/Fab.vue'
 import MainSidebar from '@app/components/layout/sidebars/MainSidebar.vue'
 import RightSidebar from '../components/layout/sidebars/RightSidebar.vue'
+import SubSidebar from '../components/layout/sidebars/SubSidebar.vue'
 
 export default defineComponent({
 	name: 'DefaultLayout',
-	props: {
+	props: {  
 		hideTop: {
 			required: false,
 			default: false
@@ -39,6 +41,6 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: { BottomNav, Fab, MainSidebar, RightSidebar }
+	components: { BottomNav, Fab, MainSidebar, RightSidebar, SubSidebar }
 })
 </script>
