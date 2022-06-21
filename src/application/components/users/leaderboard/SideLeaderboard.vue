@@ -1,11 +1,18 @@
 <template>
-	<div class="flex flex-col text-secondaryText gap-3">
-		<div class="flex flex-row justify-start items-center">
-			<IonSelect v-model="time" class="capitalize text-secondaryText text-xl font-bold ion-left-0"
+	<div class="flex flex-col text-secondaryText gap-3 ">
+		<div class="flex flex-col gap-4 justify-start items-center w-full">
+			<IonSelect v-model="time" class="capitalize text-secondaryText text-base font-bold ion-transition ion-left-0 w-full h-10 rounded-lg"
 				interface="action-sheet"
 				placeholder="Daily">
 				<IonSelectOption v-for="time in times" :key="time" :value="time" class="capitalize">
 					{{ time }} Ranking
+				</IonSelectOption>
+			</IonSelect>
+			<IonSelect v-model="time" class="capitalize text-secondaryText text-sm  ion-left-0 w-full h-10 rounded-lg"
+				interface="action-sheet"
+				placeholder="Daily">
+				<IonSelectOption v-for="time in times" :key="time" :value="time" class="capitalize">
+					Electrical & Electronics Engineering
 				</IonSelectOption>
 			</IonSelect>
 		</div>
@@ -28,9 +35,13 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+	.ion-transition {
+		background: $color-bodyBg !important;
+		border: $border;
+	}
 	.ion-left-0 {
-		--padding-start: 0px !important
+		--padding-start: 16px !important
 	}
 
 	ion-select::part(icon) {

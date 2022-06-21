@@ -1,9 +1,9 @@
 <template>
-	<IonPage>
+	<IonPage class="layout">
 		<HomeTopNavigation />
 		<IonContent>
-			<div class="layout-page !px-0">
-				<div class="layout-body !w-full">
+			<div class="layout-page">
+				<div class="w-full">
 					<slot />
 				</div>
 			</div>

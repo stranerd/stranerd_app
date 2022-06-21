@@ -1,15 +1,13 @@
 <template>
-	<IonPage>
+	<IonPage class="layout">
 		<HomeTopNavigation />
-		<div class="layout">
-			<IonContent>
-				<div class="layout-page" style="padding: 0 !important;">
-					<div class="!w-full layout-body">
-						<slot />
-					</div>
+		<IonContent>
+			<div class="layout-page">
+				<div class="w-full">
+					<slot />
 				</div>
-			</IonContent>
-		</div>
+			</div>
+		</IonContent>
 	</IonPage>
 </template>
 

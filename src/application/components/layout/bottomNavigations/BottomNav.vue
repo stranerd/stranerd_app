@@ -1,6 +1,6 @@
 <template>
 	<IonFooter class="ion-no-border border-top-line">
-		<IonToolbar class="lg:hidden pt-0.5">
+		<IonToolbar class="pt-0.5">
 			<div class="flex justify-around items-center text-sm">
 				<router-link
 					v-for="{ path, icon, iconOutline } in [

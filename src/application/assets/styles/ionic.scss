@@ -293,9 +293,9 @@ ion-item {
 }
 
 .border-left-line {
-	@media (max-width: $md) {
+	// @media (max-width: $md) {
 		border-left: $border;
-	}
+	// }
 }
 
 ion-radio, ion-checkmark {

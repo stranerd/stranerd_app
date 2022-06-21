@@ -1,11 +1,11 @@
 <template>
 	<div class="flex flex-col items-center text-secondaryText gap-2">
-		<router-link v-for="(person, index) in users" :key="person.id" :class="{'!bg-cyan': person.id === id}"
+		<router-link v-for="(person) in users" :key="person.id"
 			:to="`/users/${person.id}`"
 			class="py-3 px-3 rounded-xl flex w-full items-center bg-white"
 		>
-			<span :class="{'text-white !font-bold': person.id === id}" class="font-bold mr-2">{{ index + 1 }}</span>
-			<span :class="{'text-white !font-bold': person.id === id}" class="flex items-center gap-1">
+			<span class="font-bold mr-2"><avatar :src="person.bio.photo" :name="person.bio.fullName" :size="32"/> </span>
+			<span  class="flex items-center gap-1">
 				<span>{{ person.bio.fullName }}</span>
 				<Verified :verified="person.isVerified" />
 			</span>
@@ -15,8 +15,9 @@
 		</router-link>
 
 		<router-link v-if="user && hasNoAuthUser" :to="`/users/${user.id}`"
-			class="py-3 px-3 rounded-lg flex w-full bg-cyan text-white font-bold flex-row items-center">
-			<span class="font-bold mr-2">-</span>
+			class="py-3 px-3 rounded-lg flex w-full font-bold flex-row items-center">
+			{{}}
+			<span class="font-bold mr-2"> <avatar :src="user.bio.photo" :name="user.bio.fullName" :size="32"/> </span>
 			<span class="flex items-center gap-1">
 				<span>{{ user.bio.fullName }}</span>
 				<Verified :verified="user.isVerified" />
@@ -30,7 +31,7 @@
 			info="No user has earned points this period." />
 
 		<router-link class="w-full" to="/users/leaderboard">
-			<IonButton class="btn-primary py-2 w-full">
+			<IonButton class="btn-primary h-10 w-full">
 				Leaderboard
 			</IonButton>
 		</router-link>
@@ -43,8 +44,10 @@ import { useAuth } from '@app/composable/auth/auth'
 import { useLeaderboardList } from '@app/composable/users/leaderboard'
 import { RankingTimes } from '@modules/users'
 import { formatNumber } from '@utils/commons'
+import Avatar from '../../core/Avatar.vue'
 
 export default defineComponent({
+	components: { Avatar },
 	name: 'SideLeaderboardList',
 	props: {
 		time: {

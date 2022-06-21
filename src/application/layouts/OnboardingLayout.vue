@@ -1,7 +1,7 @@
 <template>
 	<IonPage>
 		<IonContent>
-			<div class="!w-full h-full layout-body">
+			<div class="w-full h-full">
 				<slot />
 			</div>
 		</IonContent>

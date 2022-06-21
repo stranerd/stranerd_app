@@ -1,15 +1,24 @@
 <template>
-	<IonPage>
-		<Topbar v-if="!hideTop" />
+	<IonPage class="layout">
+		<Topbar v-if="!hideTop" class="lg:hidden" />
 		<IonContent>
-			<div class="layout-page !px-0">
-				<div class="layout-body !w-full">
+			<div class="layout-page">
+				<div class="hidden lg:block w-[80px]">
+					<LeftSidebar class="h-screen overflow-y-auto" />
+				</div>
+				<div class="hidden lg:block w-[20.8333%]">
+					<SubSidebar class="h-screen overflow-y-auto" />
+				</div>
+				<div class="w-full lg:w-[calc(54.167%-80px)] min-h-full border-left-line border-right-line">
 					<slot />
+				</div>
+				<div class="hidden lg:block w-[25%]">
+					<RightSidebar class="h-screen overflow-y-auto" />
 				</div>
 			</div>
 		</IonContent>
-		<Fab v-if="!hideFab" />
-		<BottomNav v-if="!hideBottom" class="mt-auto" />
+		<Fab v-if="!hideFab" class="lg:hidden" />
+		<BottomNav v-if="!hideBottom" class="mt-auto lg:hidden" />
 	</IonPage>
 </template>
 
@@ -18,6 +27,9 @@ import { defineComponent } from 'vue'
 import Topbar from '@app/components/layout/topNavigations/Topbar.vue'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 import Fab from '@app/components/layout/Fab.vue'
+import LeftSidebar from '@app/components/layout/sidebars/LeftSidebar.vue'
+import RightSidebar from '@app/components/layout/sidebars/RightSidebar.vue'
+import SubSidebar from '@app/components/layout/sidebars/SubSidebar.vue'
 
 export default defineComponent({
 	name: 'DefaultLayout',
@@ -35,6 +47,6 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: { Topbar, BottomNav, Fab }
+	components: { Topbar, BottomNav, Fab, LeftSidebar, RightSidebar, SubSidebar }
 })
 </script>
