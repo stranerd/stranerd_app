@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-	width: 6px; /* Remove scrollbar space */
-	height: 6px; /* Remove scrollbar space */
+	width: 2px; /* Remove scrollbar space */
+	height: 2px; /* Remove scrollbar space */
 	background: #7483bf4e; /* Optional: just make scrollbar invisible */
 }
 

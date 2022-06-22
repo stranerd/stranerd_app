@@ -4,6 +4,7 @@
 			Edit a department
 		</template>
 		<DepartmentForm
+			:disabled="{}"
 			:error="error"
 			:factory="factory"
 			:loading="loading"

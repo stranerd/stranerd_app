@@ -1,6 +1,5 @@
 import { RankTypes } from '../entities/rank'
 import { Media } from '@modules/core'
-import { UserEntity } from '../entities/user'
 
 export enum UserSchoolType {
 	'secondary' = 'secondary',
@@ -33,6 +32,7 @@ export type CollegeType = {
 	institutionId: string
 	facultyId: string
 	departmentId: string
+	tagId: string
 }
 
 export type UserSchoolData = SecondaryType | AspirantType | CollegeType

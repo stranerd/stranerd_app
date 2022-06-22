@@ -9,7 +9,8 @@
 				<div class="hidden lg:block w-[20.8333%]">
 					<SubSidebar class="h-screen overflow-y-auto" />
 				</div>
-				<div class="w-full lg:w-[calc(54.167%-80px)] min-h-full border-left-line border-right-line">
+				<div
+					class="w-full lg:w-[calc(54.167%-80px)] h-screen overflow-y-auto border-left-line border-right-line">
 					<slot />
 				</div>
 				<div class="hidden lg:block w-[25%]">
