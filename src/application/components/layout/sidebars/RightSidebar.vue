@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col gap-8 p-8">
+	<div class="flex flex-col gap-8 px-8">
 		<div class="flex items-center gap-8">
 			<Search class="flex-grow" />
 			<router-link to="/notifications">
@@ -27,12 +27,8 @@ export default defineComponent({
 	name: 'RightSidebar',
 	components: { SideLeaderboard, Search, NotificationIcon },
 	setup () {
-
-		const { isLoggedIn, user, signout } = useAuth()
-
-		return {
-			isLoggedIn, user, signout, settingsOutline
-		}
+		const { user } = useAuth()
+		return { user, settingsOutline }
 	}
 })
 </script>

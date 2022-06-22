@@ -30,12 +30,13 @@ export class UsersUseCase {
 		})
 	}
 
-	async getLeaderboard (type: RankingTimes) {
+	async getLeaderboard (type: RankingTimes, tagId: string | null, page: number) {
 		const conditions: QueryParams = {
 			where: [{ field: `account.rankings.${type}`, condition: Conditions.gt, value: 0 }],
 			sort: [{ field: `account.rankings.${type}`, desc: true }],
-			limit: 50
+			limit: 50, page
 		}
+		if (tagId) conditions.where!.push({ field: 'school.tagId', value: tagId })
 
 		return await this.repository.get(conditions)
 	}

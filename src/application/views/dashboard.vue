@@ -1,6 +1,12 @@
 <template>
 	<DefaultLayout>
 		<div>
+			<router-link v-if="user && !user.school"
+				class="card-padding flex items-center justify-between border-bottom-line"
+				to="/settings/school">
+				<IonText>Account Setup</IonText>
+				<IonIcon :icon="arrowForwardOutline" />
+			</router-link>
 			<router-link class="card-padding !gap-4 flex items-center border-bottom-line" to="/connect">
 				<IonIcon :icon="linkOutline" />
 				<IonText>Stranerd Connect</IonText>
@@ -22,8 +28,9 @@
 import { defineComponent } from 'vue'
 import { useRouteMeta } from '@app/composable/core/states'
 import ClassesList from '@app/components/classes/classes/ClassesList.vue'
-import { chevronDownOutline, linkOutline } from 'ionicons/icons'
+import { arrowForwardOutline, chevronDownOutline, linkOutline } from 'ionicons/icons'
 import { generateMiddlewares } from '@app/middlewares'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'Dashboard',
@@ -31,7 +38,8 @@ export default defineComponent({
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Home', {})
-		return { linkOutline, chevronDownOutline }
+		const { user } = useAuth()
+		return { user, arrowForwardOutline, linkOutline, chevronDownOutline }
 	}
 })
 </script>

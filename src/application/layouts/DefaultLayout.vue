@@ -3,18 +3,18 @@
 		<Topbar v-if="!hideTop" class="lg:hidden" />
 		<IonContent>
 			<div class="layout-page">
-				<div class="hidden lg:block w-[80px]">
-					<LeftSidebar class="h-screen overflow-y-auto" />
+				<div class="hidden lg:block w-[80px] h-screen overflow-y-aut0">
+					<LeftSidebar class="h-full py-8" />
 				</div>
-				<div class="hidden lg:block w-[20.8333%]">
-					<SubSidebar class="h-screen overflow-y-auto" />
+				<div class="hidden lg:block w-[20.8333%] py-8 h-screen overflow-y-aut0">
+					<SubSidebar class="h-full" />
 				</div>
 				<div
-					class="w-full lg:w-[calc(54.167%-80px)] h-screen overflow-y-auto border-left-line border-right-line">
+					class="w-full lg:w-[calc(54.167%-80px)] h-screen overflow-y-auto border-l-2 border-r-2 border-l-itemBg border-r-itemBg lg:py-8">
 					<slot />
 				</div>
-				<div class="hidden lg:block w-[25%]">
-					<RightSidebar class="h-screen overflow-y-auto" />
+				<div class="hidden lg:block w-[25%] py-8 h-screen overflow-y-aut0">
+					<RightSidebar class="h-full" />
 				</div>
 			</div>
 		</IonContent>
