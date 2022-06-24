@@ -1,24 +1,7 @@
 <template>
-	<DefaultLayout>
-		<div class="flex flex-col py-4 text-secondaryText">
-			<router-link v-for="item in [
-					{ name: 'Edit Profile', icon: personOutline, route: '/settings/profile' },
-					{ name: 'Edit School', icon: schoolOutline, route: '/settings/school' },
-					{ name: 'Security', icon: shieldCheckmarkOutline, route: '/settings/security' },
-					{ name: 'Contact Us', icon: mailOutline, route: '/settings/contact' },
-					{ name: 'About', icon: informationCircleOutline, route: '/settings/about' },
-				]" :key="item.route" :to="item.route"
-				class="p-4 flex items-center gap-4">
-				<IonIcon :icon="item.icon" />
-				<span>{{ item.name }}</span>
-			</router-link>
-			<a class="border-top-line mt-2 px-4 py-6 flex items-center text-danger gap-4" @click.prevent="signout">
-				<IonIcon :icon="logOutOutline" />
-				<span>Sign out</span>
-			</a>
-			<PageLoading v-if="loading" />
-		</div>
-	</DefaultLayout>
+	<FullLayout>
+		<SettingsView />
+	</FullLayout>
 </template>
 
 <script lang="ts">
@@ -35,9 +18,11 @@ import {
 import { useSessionSignout } from '@app/composable/auth/session'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
+import SettingsView from '@app/components/users/settings/SettingsView.vue'
 
 export default defineComponent({
 	name: 'Settings',
+	components: { SettingsView },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Settings', { back: true })

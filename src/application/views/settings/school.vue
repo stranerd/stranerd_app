@@ -1,5 +1,8 @@
 <template>
 	<DefaultLayout>
+		<template v-slot:panel>
+			<SettingsPanel />
+		</template>
 		<form class="flex flex-col" @submit.prevent="updateSchool">
 			<IonList class="border-bottom-line md:rounded-xl text-sm p-4">
 				<IonListHeader>
@@ -131,10 +134,11 @@ import { useDepartmentList } from '@app/composable/school/departments'
 import { UserSchoolType } from '@modules/users'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
+import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
 
 export default defineComponent({
 	name: 'SettingsSchool',
-	components: { Institution },
+	components: { Institution, SettingsPanel },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Edit School', { back: true })

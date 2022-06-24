@@ -1,5 +1,8 @@
 <template>
 	<DefaultLayout>
+		<template v-slot:panel>
+			<SettingsPanel />
+		</template>
 		<div class="flex flex-col">
 			<router-link v-for="item in [
 					{ name: 'Privacy policy', route: '/legal/privacy-policy' },
@@ -16,9 +19,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRouteMeta } from '@app/composable/core/states'
+import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
 
 export default defineComponent({
 	name: 'SettingsAbout',
+	components: { SettingsPanel },
 	setup () {
 		useRouteMeta('About', { back: true })
 	}

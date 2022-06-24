@@ -2,7 +2,7 @@
 	<div class="flex flex-col gap-4 px-4 py-6">
 		<div class="flex items-center gap-6">
 			<Avatar :name="user.bio.fullName" :size="64" :src="user.bio.photo" />
-			<div class="flex items-center justify-between w-full text-secondaryText max-w-[300px]">
+			<div class="flex items-center justify-between w-full text-secondaryText max-w-[350px]">
 				<div class="flex items-center gap-2">
 					<IonIcon :icon="podiumOutline" />
 					<IonText class="flex-col flex">

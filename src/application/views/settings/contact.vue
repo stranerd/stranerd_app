@@ -1,5 +1,8 @@
 <template>
 	<DefaultLayout>
+		<template v-slot:panel>
+			<SettingsPanel />
+		</template>
 		<div class="flex flex-col">
 			<form class="p-4 border-bottom-line flex flex-col gap-4" @submit.prevent="createMessage">
 				<template v-if="!user">
@@ -36,9 +39,11 @@ import { logoInstagram, logoTwitter, logoWhatsapp, mailOutline, paperPlaneOutlin
 import { useCreateMessage } from '@app/composable/forms/messages'
 import { useAuth } from '@app/composable/auth/auth'
 import { useRouteMeta } from '@app/composable/core/states'
+import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
 
 export default defineComponent({
 	name: 'SettingsContact',
+	components: { SettingsPanel },
 	setup () {
 		useRouteMeta('Contact Us', { back: true })
 		const { user } = useAuth()

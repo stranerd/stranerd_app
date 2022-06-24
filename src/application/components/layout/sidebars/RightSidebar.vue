@@ -8,7 +8,7 @@
 			<router-link to="/settings">
 				<IonIcon :icon="settingsOutline" />
 			</router-link>
-			<Avatar :name="user?.bio.fullName" :size="36" :src="user?.bio.photo" />
+			<Avatar :id="user?.id" :name="user?.bio.fullName" :size="36" :src="user?.bio.photo" />
 		</div>
 
 		<SideLeaderboard />

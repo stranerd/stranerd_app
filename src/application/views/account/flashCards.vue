@@ -1,5 +1,8 @@
 <template>
 	<DefaultLayout>
+		<template v-slot:panel>
+			<ProfilePanel />
+		</template>
 		<UserFlashCards v-if="user" :user="user" />
 	</DefaultLayout>
 </template>
@@ -10,10 +13,11 @@ import { useAuth } from '@app/composable/auth/auth'
 import UserFlashCards from '@app/components/users/users/UserFlashCards.vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
+import ProfilePanel from '@app/components/layout/panels/ProfilePanel.vue'
 
 export default defineComponent({
 	name: 'AccountFlashCards',
-	components: { UserFlashCards },
+	components: { UserFlashCards, ProfilePanel },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Flashcards', { back: true })
