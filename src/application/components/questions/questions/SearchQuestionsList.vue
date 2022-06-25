@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import QuestionListCard from '@app/components/questions/questions/RecentQuestionListCard.vue'
+import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
 import { QuestionEntity } from '@modules/questions'
 
 export default defineComponent({

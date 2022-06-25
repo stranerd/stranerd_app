@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col gap-8 px-8">
-		<div class="flex items-center gap-8">
+		<div class="flex items-center gap-6">
 			<Search class="flex-grow" />
 			<router-link to="/notifications">
 				<NotificationIcon :key="user?.id" />
