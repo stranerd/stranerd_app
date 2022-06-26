@@ -8,7 +8,7 @@
 			:factory="factory"
 			:loading="loading"
 			:submit="createQuestion"
-			class="block-padding flex-grow lg:flex-grow-0"
+			class="page-padding flex-grow lg:flex-grow-0"
 		>
 			<template v-slot:buttonText>
 				Post Question

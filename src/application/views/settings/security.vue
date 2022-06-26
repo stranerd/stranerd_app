@@ -3,7 +3,7 @@
 		<template v-slot:panel>
 			<SettingsPanel />
 		</template>
-		<form class="card-padding !py-0 flex flex-col !gap-4" @submit.prevent="updatePassword">
+		<form class="flex flex-col page-padding gap-4" @submit.prevent="updatePassword">
 			<IonText class="text-xl font-semibold">
 				{{ hasPassword ? 'Update Password' : 'Add Password' }}
 			</IonText>

@@ -3,8 +3,8 @@
 		<template v-slot:panel>
 			<SettingsPanel />
 		</template>
-		<form class="flex flex-col" @submit.prevent="updateSchool">
-			<IonList class="border-bottom-line lg:rounded-xl text-sm block-padding !pt-0">
+		<form class="flex flex-col page-padding lg:gap-8" @submit.prevent="updateSchool">
+			<IonList class="border-bottom-line text-sm">
 				<IonListHeader>
 					<IonLabel class="font-bold text-xl">Choose your academic level*</IonLabel>
 				</IonListHeader>
@@ -24,8 +24,7 @@
 				</IonRadioGroup>
 			</IonList>
 
-			<div v-if="factory.isCollegeType"
-				class="border-bottom-line flex flex-col block-padding gap-4">
+			<div v-if="factory.isCollegeType" class="border-bottom-line flex flex-col gap-4">
 				<IonText class="text-xl font-semibold">University set up</IonText>
 
 				<div class="flex flex-col items-start gap-1">
@@ -75,7 +74,7 @@
 			</div>
 
 			<template v-else>
-				<div class="border-bottom-line block-padding flex flex-col lg:rounded-xl gap-4">
+				<div class="border-bottom-line flex flex-col gap-4">
 					<IonLabel class="font-semibold">What exam(s) are you studying for?</IonLabel>
 					<IonSelect v-model="factory.institutions"
 						:multiple="true" class="w-full capitalize"
@@ -89,7 +88,7 @@
 				</div>
 
 				<div v-for="(exam, index) in factory.exams" :key="exam.institutionId"
-					class="border-bottom-line block-padding flex flex-col lg:rounded-xl gap-4">
+					class="border-bottom-line flex flex-col gap-4">
 					<IonLabel class="font-semibold">
 						<Institution :institutionId="exam.institutionId" />
 						subject combination

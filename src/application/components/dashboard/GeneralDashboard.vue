@@ -1,14 +1,7 @@
 <template>
-	<div class="flex flex-col gap-4 md:gap-6">
-		<div v-if="user && !user.school"
-			class="border-bottom-line flex justify-between items-center md:bg-white p-4 md:rounded-xl md:pt-4 pt-0">
-			<span class="font-semibold">Complete your account set up</span>
-			<router-link to="/settings/school">
-				<IonIcon :icon="arrowForwardOutline" />
-			</router-link>
-		</div>
-		<div class="border-bottom-line py-2">
-			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
+	<div class="showcase-flex">
+		<div class="border-bottom-line card card-padding">
+			<div class="w-full flex justify-between">
 				<IonText class="font-bold">Activity</IonText>
 			</div>
 
@@ -21,8 +14,8 @@
 					iconClass="text-warning" subtitle="Longest streak" />
 			</div>
 		</div>
-		<div class="border-bottom-line py-2">
-			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
+		<div class="border-bottom-line card card-padding">
+			<div class="w-full flex justify-between">
 				<IonText class="font-bold">Questions</IonText>
 			</div>
 
@@ -36,8 +29,8 @@
 			</div>
 		</div>
 
-		<div class="border-bottom-line py-2">
-			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
+		<div class="border-bottom-line card card-padding">
+			<div class="w-full flex justify-between">
 				<IonText class="font-bold">Study materials</IonText>
 			</div>
 
@@ -54,8 +47,8 @@
 			</div>
 		</div>
 
-		<div class="py-2">
-			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
+		<div class="border-bottom-line card card-padding">
+			<div class="w-full flex justify-between">
 				<IonText class="font-bold">Tests</IonText>
 			</div>
 
@@ -74,7 +67,6 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import {
-	arrowForwardOutline,
 	checkmarkCircleOutline,
 	copyOutline,
 	documentOutline,
@@ -104,7 +96,7 @@ export default defineComponent({
 		const passed = computed(() => timedTests.value.filter((test) => test.passed))
 		const averageScore = computed(() => catchDivideByZero(timedTests.value.reduce((acc, cur) => acc + cur.score, 0), timedTests.value.length))
 		return {
-			arrowForwardOutline, rocketOutline, timeOutline, helpCircleOutline, readerOutline,
+			rocketOutline, timeOutline, helpCircleOutline, readerOutline,
 			copyOutline, documentOutline, playCircleOutline, folderOutline, checkmarkCircleOutline,
 			receiptOutline, schoolOutline,
 			timedTests, passed, averageScore,

@@ -19,7 +19,7 @@
 				</router-link>
 			</div>
 		</template>
-		<QuestionsList class="block-padding" />
+		<QuestionsList />
 	</DefaultLayout>
 </template>
 

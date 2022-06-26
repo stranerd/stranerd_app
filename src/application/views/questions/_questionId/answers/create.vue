@@ -1,12 +1,15 @@
 <template>
-	<DefaultLayout :hideBottom="true">
+	<DefaultLayout :hideBottom="true" :hideFab="true">
+		<template v-slot:panel>
+			<QuestionsPanel />
+		</template>
 		<AnswerForm
 			:error="error"
 			:factory="factory"
 			:loading="loading"
 			:question="answeringQuestion"
 			:submit="createAnswer"
-			class="p-4 flex-grow"
+			class="page-padding flex-grow lg:flex-grow-0"
 		>
 			<template v-slot:buttonText>
 				Answer
@@ -22,10 +25,11 @@ import AnswerForm from '@app/components/questions/answers/AnswerForm.vue'
 import { getAnsweringQuestion, useCreateAnswer } from '@app/composable/questions/answers'
 import { useRouteMeta } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
+import QuestionsPanel from '@app/components/layout/panels/QuestionsPanel.vue'
 
 export default defineComponent({
 	name: 'QuestionsQuestionIdAnswer',
-	components: { AnswerForm },
+	components: { AnswerForm, QuestionsPanel },
 	beforeRouteEnter: generateMiddlewares([
 		'isAuthenticated',
 		async ({ to }) => {

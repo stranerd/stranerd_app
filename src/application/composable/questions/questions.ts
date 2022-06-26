@@ -1,4 +1,4 @@
-import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
+import { computed, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
 import { Router, useRouter } from 'vue-router'
 import { QuestionEntity, QuestionFactory, QuestionsUseCases } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
@@ -42,6 +42,7 @@ const listener = useListener(async () => await QuestionsUseCases.listen({
 }, global.questions.value.at(-1)?.createdAt))
 
 export const useQuestionList = () => {
+	const router = useRouter()
 	const fetchQuestions = async () => {
 		await global.setError('')
 		try {
@@ -79,6 +80,9 @@ export const useQuestionList = () => {
 	})
 	onUnmounted(async () => {
 		await listener.close()
+	})
+	watch(() => global.tagId.value, async () => {
+		await router.push('/questions')
 	})
 
 	return {

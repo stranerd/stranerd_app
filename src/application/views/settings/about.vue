@@ -3,12 +3,12 @@
 		<template v-slot:panel>
 			<SettingsPanel />
 		</template>
-		<div class="flex flex-col">
+		<div class="showcase-flex">
 			<router-link v-for="item in [
 					{ name: 'Privacy policy', route: '/legal/privacy-policy' },
 					{ name: 'Terms & Conditions', route: '/legal/terms-and-conditions' },
 				]" :key="item.route" :to="item.route"
-				class="card-padding border-bottom-line text-primaryBg">
+				class="card-padding card border-bottom-line text-primaryBg">
 				{{ item.name }}
 			</router-link>
 			<span class="card-padding">© 2022 Stranerd LLC</span>

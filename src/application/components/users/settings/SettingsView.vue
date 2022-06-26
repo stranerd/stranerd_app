@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col py-4 text-secondaryText">
+	<div class="flex flex-col text-secondaryText">
 		<router-link v-for="item in [
 				{ name: 'Edit Profile', icon: personOutline, route: '/settings/profile' },
 				{ name: 'Edit School', icon: schoolOutline, route: '/settings/school' },

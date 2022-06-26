@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<IonText class="font-bold text-2xl card-padding !pt-0">Settings</IonText>
+	<div class="flex flex-col gap-8">
+		<IonText class="font-bold text-2xl card-padding !py-0">Settings</IonText>
 		<SettingsView />
 	</div>
 </template>

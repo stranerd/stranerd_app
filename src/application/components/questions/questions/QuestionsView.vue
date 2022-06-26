@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col py-4 text-secondaryText">
+	<div class="flex flex-col text-secondaryText">
 		<a :class="{'hasBg': tagId === ''}" class="card-padding" @click="tagId = ''">
 			All Questions
 		</a>

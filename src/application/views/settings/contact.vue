@@ -3,8 +3,9 @@
 		<template v-slot:panel>
 			<SettingsPanel />
 		</template>
-		<div class="flex flex-col">
-			<form class="card-padding !pt-0 border-bottom-line flex flex-col !gap-4" @submit.prevent="createMessage">
+		<div class="showcase-flex">
+			<form class="card card-padding border-bottom-line flex flex-col !gap-4"
+				@submit.prevent="createMessage">
 				<template v-if="!user">
 					<div class="flex gap-4 flex-col lg:flex-row">
 						<IonInput v-model="factory.firstName" placeholder="Your first name" required />
@@ -24,7 +25,7 @@
 					{ name: 'Twitter', icon: logoTwitter, route: 'https://twitter.com/stranerds' },
 					{ name: 'Instagram', icon: logoInstagram, route: 'https://www.instagram.com/stranerdapp' }
 				]" :key="item.route" :href="item.route"
-				class="card-padding !py-6 !gap-4 border-bottom-line flex items-center text-primaryBg"
+				class="card card-padding !py-6 !gap-4 border-bottom-line flex items-center text-primaryBg"
 				target="_blank">
 				<IonIcon :icon="item.icon" />
 				<span>{{ item.name }}</span>
