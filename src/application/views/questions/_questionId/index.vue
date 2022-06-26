@@ -1,5 +1,8 @@
 <template>
 	<DefaultLayout>
+		<template v-slot:panel>
+			<QuestionsPanel />
+		</template>
 		<div class="flex flex-col">
 			<BlockLoading v-if="loading" />
 			<template v-else-if="question">
@@ -18,10 +21,11 @@ import { useQuestion } from '@app/composable/questions/questions'
 import QuestionPageCard from '@app/components/questions/questions/QuestionPageCard.vue'
 import AnswersList from '@app/components/questions/answers/AnswersList.vue'
 import { useRouteMeta } from '@app/composable/core/states'
+import QuestionsPanel from '@app/components/layout/panels/QuestionsPanel.vue'
 
 export default defineComponent({
 	name: 'QuestionsQuestionId',
-	components: { QuestionPageCard, AnswersList },
+	components: { QuestionPageCard, AnswersList, QuestionsPanel },
 	setup () {
 		const { questionId } = useRoute().params
 		useRouteMeta('Question', { back: true })

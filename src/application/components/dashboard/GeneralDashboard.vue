@@ -9,7 +9,7 @@
 		</div>
 		<div class="border-bottom-line py-2">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-				<IonText class="font-bold">Activity</IonText>
+				<IonText class="font-bold px-4">Activity</IonText>
 			</div>
 
 			<div class="showcase2">
@@ -23,7 +23,7 @@
 		</div>
 		<div class="border-bottom-line py-2">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-				<IonText class="font-bold">Questions</IonText>
+				<IonText class="font-bold px-4">Questions</IonText>
 			</div>
 
 			<div class="showcase2">
@@ -38,7 +38,7 @@
 
 		<div class="border-bottom-line py-2">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-				<IonText class="font-bold">Study materials</IonText>
+				<IonText class="font-bold px-4">Study materials</IonText>
 			</div>
 
 			<div class="showcase2">
@@ -56,7 +56,7 @@
 
 		<div class="py-2">
 			<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
-				<IonText class="font-bold">Tests</IonText>
+				<IonText class="font-bold px-4">Tests</IonText>
 			</div>
 
 			<div class="showcase2">

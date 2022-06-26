@@ -1,5 +1,8 @@
 <template>
 	<DefaultLayout :hideBottom="true">
+		<template v-slot:panel>
+			<QuestionsPanel />
+		</template>
 		<AnswerForm
 			:error="error"
 			:factory="factory"
@@ -23,10 +26,11 @@ import { getAnsweringQuestion, useCreateAnswer } from '@app/composable/questions
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
+import QuestionsPanel from '@app/components/layout/panels/QuestionsPanel.vue'
 
 export default defineComponent({
 	name: 'QuestionsQuestionIdAnswer',
-	components: { AnswerForm, BaseEditor },
+	components: { AnswerForm, BaseEditor, QuestionsPanel },
 	beforeRouteEnter: generateMiddlewares([
 		'isAuthenticated',
 		async ({ to }) => {
