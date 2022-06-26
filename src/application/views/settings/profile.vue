@@ -3,7 +3,7 @@
 		<template v-slot:panel>
 			<SettingsPanel />
 		</template>
-		<form class="flex flex-col gap-6 justify-center p-4" @submit.prevent="updateProfile()">
+		<form class="flex flex-col !gap-6 justify-center card-padding !py-0" @submit.prevent="updateProfile()">
 			<Avatar :editable="true" :name="factory.first" :size="64" :src="factory.photo" @photo="savePhoto" />
 			<div class="flex flex-col items-start">
 				<div class="flex w-full gap-4">

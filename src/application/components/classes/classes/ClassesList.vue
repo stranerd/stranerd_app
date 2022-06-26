@@ -1,5 +1,5 @@
 <template>
-	<div class="showcase-flex">
+	<div class="flex flex-col">
 		<form v-if="!hideSearch" class="p-2 border-bottom-line" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" class="!bg-[transparent]" placeholder="Find a class"
 				type="search" />

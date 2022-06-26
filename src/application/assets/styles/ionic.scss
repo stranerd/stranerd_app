@@ -182,15 +182,6 @@ ion-button {
 	letter-spacing: 0.02rem;
 	margin: 0;
 	font-size: 12px;
-	@media (min-width: $md) {
-		--border-radius: 0.625rem;
-		border-radius: 0.625rem;
-		font-size: 14px;
-	}
-	@media (min-width: $lg) {
-		--border-radius: 0.75rem;
-		border-radius: 0.75rem;
-	}
 }
 
 .btn-primary {

@@ -19,7 +19,7 @@
 				</span>
 			</div>
 			<div class="flex items-center gap-4">
-				<IonIcon v-if="showEditButton" :icon="createOutline" class="text-primaryText"
+				<IonIcon v-if="showEditButton" :icon="createOutline" class="text-warning"
 					@click="openEditModal" />
 				<IonIcon v-if="showDeleteButton" :icon="trashBinOutline" class="text-danger"
 					@click="deleteQuestion" />

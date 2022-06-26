@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<IonText class="font-bold text-2xl px-4 mb-4">Settings</IonText>
+		<IonText class="font-bold text-2xl card-padding !pt-0">Settings</IonText>
 		<SettingsView />
 	</div>
 </template>

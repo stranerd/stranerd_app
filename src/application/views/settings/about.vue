@@ -8,10 +8,10 @@
 					{ name: 'Privacy policy', route: '/legal/privacy-policy' },
 					{ name: 'Terms & Conditions', route: '/legal/terms-and-conditions' },
 				]" :key="item.route" :to="item.route"
-				class="px-4 py-6 border-bottom-line text-primaryBg">
+				class="card-padding border-bottom-line text-primaryBg">
 				{{ item.name }}
 			</router-link>
-			<span class="p-4">© 2022 Stranerd LLC</span>
+			<span class="card-padding">© 2022 Stranerd LLC</span>
 		</div>
 	</DefaultLayout>
 </template>

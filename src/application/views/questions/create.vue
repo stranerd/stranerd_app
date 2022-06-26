@@ -1,11 +1,14 @@
 <template>
-	<DefaultLayout :hideBottom="true">
+	<DefaultLayout :hideBottom="true" :hideFab="true">
+		<template v-slot:panel>
+			<QuestionsPanel />
+		</template>
 		<QuestionForm
 			:error="error"
 			:factory="factory"
 			:loading="loading"
 			:submit="createQuestion"
-			class="p-4 flex-grow"
+			class="block-padding flex-grow lg:flex-grow-0"
 		>
 			<template v-slot:buttonText>
 				Post Question
@@ -20,10 +23,11 @@ import { generateMiddlewares } from '@app/middlewares'
 import QuestionForm from '@app/components/questions/questions/QuestionForm.vue'
 import { useCreateQuestion } from '@app/composable/questions/questions'
 import { useRouteMeta } from '@app/composable/core/states'
+import QuestionsPanel from '@app/components/layout/panels/QuestionsPanel.vue'
 
 export default defineComponent({
 	name: 'QuestionsCreate',
-	components: { QuestionForm },
+	components: { QuestionForm, QuestionsPanel },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Ask a Question', { back: true })

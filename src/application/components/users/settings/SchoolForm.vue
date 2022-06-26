@@ -126,7 +126,7 @@
 					{{ course.name }}
 				</IonSelectOption>
 			</IonSelect>
-			<div class="flex flex-col md:flex-row gap-4">
+			<div class="flex flex-col lg:flex-row gap-4">
 				<IonInput v-model="factory.getInstitution(exam.institutionId).startTime"
 					class="w-full" placeholder="Select start date" required
 					type="date" />

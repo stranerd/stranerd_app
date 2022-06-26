@@ -1,5 +1,5 @@
 <template>
-	<form class="flex flex-col gap-4" @submit.prevent="submit">
+	<form class="flex flex-col gap-4 lg:gap-6" @submit.prevent="submit">
 		<IonInput
 			v-model="factory.tagId"
 			class="h-9 flex-none"
@@ -23,11 +23,11 @@
 			<DisplayError :error="factory.errors.attachments" />
 		</div>
 
-		<div class="flex w-full items-center gap-6">
+		<div class="flex w-full justify-end items-center gap-6">
 			<FileInput
 				:multiple="true"
 				accept="image/x-png,image/jpeg,image/jpg"
-				class="w-full"
+				class="w-full lg:w-auto"
 				@files="catchAttachments"
 			>
 				<IonButton class="btn-outline w-full">
@@ -35,7 +35,7 @@
 					Add image
 				</IonButton>
 			</FileInput>
-			<IonButton :disabled="loading || !factory.valid" class="w-full btn-primary" type="submit">
+			<IonButton :disabled="loading || !factory.valid" class="w-full lg:w-auto btn-primary" type="submit">
 				<IonIcon :icon="paperPlaneOutline" class="mr-4" />
 				<slot name="buttonText">Submit</slot>
 			</IonButton>

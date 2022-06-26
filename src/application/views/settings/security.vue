@@ -3,14 +3,14 @@
 		<template v-slot:panel>
 			<SettingsPanel />
 		</template>
-		<form class="p-4 flex flex-col gap-4" @submit.prevent="updatePassword">
+		<form class="card-padding !py-0 flex flex-col !gap-4" @submit.prevent="updatePassword">
 			<IonText class="text-xl font-semibold">
 				{{ hasPassword ? 'Update Password' : 'Add Password' }}
 			</IonText>
 			<IonInput v-if="hasPassword" v-model="factory.oldPassword" class="w-full font-medium"
 				placeholder="Confirm Old Password"
 				type="password" />
-			<div class="flex md:flex-row gap-4 flex-col w-full">
+			<div class="flex lg:flex-row gap-4 flex-col w-full">
 				<IonInput v-model="factory.password" class="w-full font-medium"
 					placeholder="Enter New Password"
 					type="password" />

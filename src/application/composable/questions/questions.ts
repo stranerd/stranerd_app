@@ -3,7 +3,6 @@ import { Router, useRouter } from 'vue-router'
 import { QuestionEntity, QuestionFactory, QuestionsUseCases } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { useQuestionModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
 
 enum Answered {
@@ -104,7 +103,6 @@ export const useCreateQuestion = () => {
 				const question = await QuestionsUseCases.add(factory.value)
 				await setMessage('Question submitted successfully')
 				factory.value.reset()
-				useQuestionModal().closeCreateQuestion()
 				await router.push(`/questions/${question.id}`)
 			} catch (error) {
 				await setError(error)
@@ -189,7 +187,6 @@ export const useEditQuestion = () => {
 				await setLoading(true)
 				const question = await QuestionsUseCases.update(editingQuestion!.id, factory.value)
 				await setMessage('Question updated successfully')
-				useQuestionModal().closeEditQuestion()
 				factory.value.reset()
 				await router.push(`/questions/${question.id}`)
 			} catch (error) {

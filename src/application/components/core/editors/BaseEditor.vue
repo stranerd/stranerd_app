@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="flex flex-col">
 		<VueEditor
 			v-model="comp"
 			:class="{'is-invalid': error, 'is-valid': valid }"
@@ -74,6 +74,7 @@ export default defineComponent({
 <style lang="scss">
 	.quillWrapper {
 		background: $color-bodyBg;
+		min-height: 320px;
 		border-radius: 0.5rem;
 		color: $color-bodyText;
 		box-sizing: border-box;

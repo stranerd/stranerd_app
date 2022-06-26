@@ -7,11 +7,12 @@
 				{ name: 'Contact Us', icon: mailOutline, route: '/settings/contact' },
 				{ name: 'About', icon: informationCircleOutline, route: '/settings/about' },
 			]" :key="item.route" :to="item.route"
-			class="p-4 flex items-center gap-4">
+			class="card-padding flex items-center !gap-4" exact-active-class="hasBg">
 			<IonIcon :icon="item.icon" />
 			<span>{{ item.name }}</span>
 		</router-link>
-		<a class="border-top-line mt-2 px-4 py-6 flex items-center text-danger gap-4" @click.prevent="signout">
+		<a class="border-top-line mt-2 card-padding !gap-4 flex items-center text-danger"
+			@click.prevent="signout">
 			<IonIcon :icon="logOutOutline" />
 			<span>Sign out</span>
 		</a>

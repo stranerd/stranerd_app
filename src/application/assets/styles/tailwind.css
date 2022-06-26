@@ -57,7 +57,7 @@
 	}
 
 	.showcase-flex {
-		@apply flex flex-col;
+		@apply flex flex-col lg:gap-8;
 	}
 
 	.blueTop {
@@ -80,11 +80,23 @@
 		@apply h-[3px] w-[3px] text-[6px] rounded-full;
 	}
 
+	.hasBg {
+		@apply lg:bg-itemBg
+	}
+
+	.card {
+		@apply lg:rounded-xl lg:shadow-lg lg:mx-8;
+	}
+
 	.card-padding {
-		@apply p-4 gap-2 lg:gap-4
+		@apply p-4 gap-2 lg:gap-3 lg:p-6;
 	}
 
 	[class*='-line'].card-padding {
-		@apply py-6 md:py-4;
+		@apply py-6;
+	}
+
+	.block-padding {
+		@apply p-4 md:p-8
 	}
 }

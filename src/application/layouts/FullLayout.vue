@@ -1,22 +1,24 @@
 <template>
 	<IonPage class="layout">
-		<Topbar v-if="!hideTop" class="lg:hidden" />
 		<IonContent>
 			<div class="layout-page">
 				<div class="hidden lg:block w-[80px] h-screen overflow-y-aut0">
 					<LeftSidebar class="h-full py-8" />
 				</div>
 				<div
-					class="w-full lg:w-[calc(75%-80px)] h-screen overflow-y-auto border-l-2 border-r-2 border-l-itemBg border-r-itemBg lg:py-8">
-					<slot />
+					class="w-full lg:w-[calc(75%-80px)] h-screen flex flex-col overflow-y-auto border-l-2 border-r-2 border-l-itemBg border-r-itemBg lg:py-8">
+					<Topbar v-if="!hideTop" class="lg:hidden" />
+					<div class="flex flex-col flex-grow">
+						<slot />
+					</div>
+					<Fab v-if="!hideFab" class="lg:hidden" />
+					<BottomNav v-if="!hideBottom" class="mt-auto lg:hidden" />
 				</div>
 				<div class="hidden lg:block w-[25%] py-8 h-screen overflow-y-auto">
 					<RightSidebar class="h-full" />
 				</div>
 			</div>
 		</IonContent>
-		<Fab v-if="!hideFab" class="lg:hidden" />
-		<BottomNav v-if="!hideBottom" class="mt-auto lg:hidden" />
 	</IonPage>
 </template>
 

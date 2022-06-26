@@ -1,5 +1,5 @@
 <template>
-	<router-link :to="`/questions/${question.id}`" class="flex flex-col card-padding">
+	<router-link :to="`/questions/${question.id}`" class="flex flex-col card card-padding">
 		<div class="flex items-center text-secondaryText text-sm justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="question.user.id" :name="question.user.bio.fullName" :size="24"
@@ -16,9 +16,9 @@
 			</IonButton>
 		</div>
 
-		<DisplayHtml :html="question.trimmedBody" class="pl-8" />
+		<DisplayHtml :html="question.trimmedBody" class="pl-8 lg:pl-0" />
 
-		<div class="flex justify-between items-center gap-2 text-secondaryText text-sm pl-8">
+		<div class="flex justify-between items-center gap-2 text-secondaryText text-sm pl-8 lg:pl-0">
 			<InteractionTag :tagId="question.tagId" />
 			<IonIcon :icon="ellipse" class="dot" />
 			<span class="mr-auto">{{ formatTime(question.createdAt) }}</span>

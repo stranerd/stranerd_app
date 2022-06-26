@@ -1,6 +1,6 @@
 <template>
 	<div class="showcase-flex">
-		<div class="flex gap-[1px]">
+		<div class="flex lg:hidden gap-[1px]">
 			<IonSelect v-model="answered"
 				class="w-full"
 				interface="action-sheet"
