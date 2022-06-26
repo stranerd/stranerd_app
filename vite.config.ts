@@ -31,6 +31,9 @@ export default defineConfig({
 			]
 		})
 	],
+	build: {
+		minify: 'terser'
+	},
 	resolve: {
 		alias: {
 			'@root': path.join(__dirname, 'src'),

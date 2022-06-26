@@ -20,13 +20,12 @@ import { defineComponent } from 'vue'
 import { generateMiddlewares } from '@app/middlewares'
 import AnswerForm from '@app/components/questions/answers/AnswerForm.vue'
 import { getAnsweringQuestion, useCreateAnswer } from '@app/composable/questions/answers'
-import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'QuestionsQuestionIdAnswer',
-	components: { AnswerForm, BaseEditor },
+	components: { AnswerForm },
 	beforeRouteEnter: generateMiddlewares([
 		'isAuthenticated',
 		async ({ to }) => {

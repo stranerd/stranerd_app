@@ -12,7 +12,7 @@
 			</div>
 			<div class="flex items-center justify-end gap-4">
 				<Share :text="answer.strippedBody" title="Share this answer" />
-				<IonIcon :icon="flagOutline" @click="openReportAnswerModal" />
+				<IonIcon :icon="flagOutline" @click="openReportModal" />
 			</div>
 		</div>
 
@@ -43,7 +43,7 @@ export default defineComponent({
 		return {
 			ellipse, shareSocial, flagOutline,
 			formatTime, pluralize,
-			openReportAnswerModal: () => openCreateReportModal(ReportType.answers, props.answer.id)
+			openReportModal: () => openCreateReportModal(ReportType.answers, props.answer.id)
 		}
 	}
 })

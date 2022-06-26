@@ -4,7 +4,7 @@
 			<InteractionTag :tagId="question.tagId" class="font-bold" />
 			<div class="flex flex-grow items-center justify-end gap-4">
 				<Share :text="question.strippedBody" title="Share this question" />
-				<IonIcon :icon="flagOutline" @click="openReportQuestionModal" />
+				<IonIcon :icon="flagOutline" @click="openReportModal" />
 			</div>
 		</div>
 
@@ -86,7 +86,7 @@ export default defineComponent({
 			showAnswerButton, openAnswerModal,
 			showEditButton, showDeleteButton,
 			loading, error, deleteQuestion,
-			openReportQuestionModal: () => openCreateReportModal(ReportType.questions, props.question.id),
+			openReportModal: () => openCreateReportModal(ReportType.questions, props.question.id),
 			openEditModal: () => openQuestionEditModal(props.question, router)
 		}
 	}

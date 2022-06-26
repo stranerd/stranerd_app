@@ -15,7 +15,6 @@ import { defineComponent } from 'vue'
 import { ClassEntity } from '@modules/classes'
 import { useAnnouncementList } from '@app/composable/classes/announcements'
 import AnnouncementsListCard from '@app/components/classes/announcements/AnnouncementsListCard.vue'
-import AnnouncementForm from '@app/components/classes/announcements/AnnouncementForm.vue'
 import BlockLoading from '@app/components/core/loading/BlockLoading.vue'
 
 export default defineComponent({
@@ -26,7 +25,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { BlockLoading, AnnouncementsListCard, AnnouncementForm },
+	components: { BlockLoading, AnnouncementsListCard },
 	setup (props) {
 		const {
 			loading,

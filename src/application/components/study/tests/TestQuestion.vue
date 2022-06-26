@@ -3,7 +3,7 @@
 		<div class="flex items-center justify-between mb-2 w-full gap-4 text-secondaryText text-sm">
 			<IonText class="font-bold">{{ questionIndex + 1 }} / {{ total }}</IonText>
 			<SpinLoading v-if="loading" />
-			<IonIcon v-else :icon="flagOutline" @click="createReport(question)" />
+			<IonIcon v-else :icon="flagOutline" @click="createReport" />
 		</div>
 
 		<div class="mb-2">

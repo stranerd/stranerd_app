@@ -10,7 +10,7 @@
 			<span>{{ formatTime(answer.createdAt) }}</span>
 			<div class="flex flex-grow items-center justify-end gap-4 text-secondaryText">
 				<Share :text="answer.strippedBody" title="Share this answer" />
-				<IonIcon :icon="flagOutline" @click="openReportAnswerModal" />
+				<IonIcon :icon="flagOutline" @click="openReportModal" />
 			</div>
 		</div>
 
@@ -121,7 +121,7 @@ export default defineComponent({
 			showEditButton,
 			showDeleteButton,
 			showMarkBest,
-			openReportAnswerModal: () => openCreateReportModal(ReportType.answers, props.answer.id)
+			openReportModal: () => openCreateReportModal(ReportType.answers, props.answer.id)
 		}
 	}
 })

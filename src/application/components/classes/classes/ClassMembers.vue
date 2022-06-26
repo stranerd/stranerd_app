@@ -36,7 +36,7 @@ export default defineComponent({
 	components: { ClassMember },
 	setup (props) {
 		const { id } = useAuth()
-		const show = ref([])
+		const show = ref([] as boolean[])
 		const { loading, error, admins, tutors, members, requests } = useClassMembersList(props.classInst)
 		return {
 			id, show, admins, tutors, members, loading, error, requests,

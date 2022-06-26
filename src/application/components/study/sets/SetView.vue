@@ -54,7 +54,6 @@ import { folderOpenOutline } from 'ionicons/icons'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import DocumentListCard from '@app/components/study/documents/DocumentListCard.vue'
-import SetListCard from '@app/components/study/sets/SetListCard.vue'
 
 export default defineComponent({
 	name: 'SetView',
@@ -67,8 +66,7 @@ export default defineComponent({
 	components: {
 		TestPrepListCard,
 		FlashCardListCard,
-		DocumentListCard,
-		SetListCard
+		DocumentListCard
 	},
 	setup (props) {
 		const { loading, error, documents, flashCards, testPreps } = useSet(props.set)

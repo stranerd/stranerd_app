@@ -70,11 +70,7 @@ import { useCreateTest } from '@app/composable/study/tests'
 
 export default defineComponent({
 	name: 'StudyPrepsInstitutionId',
-	components: {
-		Course,
-		TestPrepListCard,
-		EmptyState
-	},
+	components: { Course },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Preps', { back: true })

@@ -41,7 +41,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const show = reactive({})
+		const show = reactive({} as Record<string, boolean>)
 		const { loading, error, schemes } = useSchemesList(props.classInst.id)
 		return {
 			show, loading, error, schemes, openCreateSchemeModal,

@@ -8,9 +8,9 @@ import { computed, defineComponent, PropType } from 'vue'
 import { useUserSetList } from '@app/composable/users/users/sets'
 import { bookmark, bookmarkOutline } from 'ionicons/icons'
 import { openSaveModal } from '@app/composable/study/menus'
-import { DocumentEntity, FlashCardEntity, SetEntity, TestPrepEntity } from '@modules/study'
+import { DocumentEntity, FlashCardEntity, TestPrepEntity } from '@modules/study'
 
-type Saveable = FlashCardEntity | DocumentEntity | TestPrepEntity | SetEntity
+type Saveable = FlashCardEntity | DocumentEntity | TestPrepEntity
 
 export default defineComponent({
 	name: 'SaveToSet',
