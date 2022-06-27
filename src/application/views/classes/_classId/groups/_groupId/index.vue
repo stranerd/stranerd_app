@@ -1,5 +1,5 @@
 <template>
-	<DefaultLayout :hideBottom="true" :hideTop="true">
+	<DefaultLayout :hideBottom="true" :hideTop="true" :hideFab="true">
 		<Discussions :classId="classId" :groupId="groupId" />
 	</DefaultLayout>
 </template>

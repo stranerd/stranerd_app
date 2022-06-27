@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="flex gap-4 items-center w-full text-sm">
+		class="flex gap-2.5 items-center w-full text-sm">
 		<Avatar :id="discussion.user.id" :name="discussion.user.bio.fullName" :size="24"
 			:src="discussion.user.bio.photo" />
 		<div class="min-w-[25%] max-w-[70%] lg:max-w-[55%] rounded-t-xl flex flex-col gap-1">
