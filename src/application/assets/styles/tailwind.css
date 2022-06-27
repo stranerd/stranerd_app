@@ -81,7 +81,7 @@
 	}
 
 	.card-padding {
-		@apply p-4 gap-2 lg:gap-4
+		@apply p-4 gap-2 lg:gap-4 lg:p-6;
 	}
 
 	[class*='-line'].card-padding {

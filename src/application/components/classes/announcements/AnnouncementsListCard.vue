@@ -1,5 +1,5 @@
 <template>
-	<div class="rounded-xl flex flex-col !gap-4 card-padding bg-itemBg">
+	<div class="rounded-xl flex flex-col !gap-4 card-padding bg-itemBg ">
 		<IonText>{{ announcement.body }}</IonText>
 		<div class="flex gap-2 items-center text-sm text-secondaryText">
 			<Avatar :id="announcement.user.id" :name="announcement.user.bio.fullName"

@@ -64,7 +64,12 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.router-link-active.router-link-exact-active{
+	background: $color-itemBg;
+	margin-inline: -2.45rem;
+	padding-left: 2.45rem;
+}
 .fade-enter-from, .fade-leave-to {
 	opacity: 0;
 }

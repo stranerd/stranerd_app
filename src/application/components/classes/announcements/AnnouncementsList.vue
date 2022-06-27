@@ -1,5 +1,5 @@
 <template>
-	<div class="showcase-flex gap-4 p-4">
+	<div class="showcase-flex gap-4 lg:gap-8 p-4">
 		<EmptyState v-if="!loading && !error && announcements.length === 0"
 			info="No announcements" />
 		<AnnouncementsListCard v-for="announcement in announcements" :key="announcement.hash"

@@ -1,6 +1,6 @@
 <template>
 	<div v-if="isEventTimetable(event)"
-		class="flex flex-col rounded-lg bg-itemBg border-l-8 border-primaryBg p-4 gap-2">
+		class="flex flex-col rounded-lg bg-itemBg border-l border-primaryBg p-4 gap-2">
 		<IonText class="font-bold">{{ event.title }}</IonText>
 		<IonText v-if="event.data.lecturer">{{ event.data.lecturer }}</IonText>
 		<div class="flex gap-2 items-center text-secondaryText">
