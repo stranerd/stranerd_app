@@ -12,12 +12,14 @@
 				<IonIcon :icon="icon" />
 				<span>{{ name }}</span>
 			</router-link>
+			<IonButton class="mt-6" @click="closeModal">Cancel</IonButton>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useUserModal } from '@app/composable/core/modals'
 import {
 	chatbubblesOutline,
 	documentOutline,
@@ -30,8 +32,9 @@ import {
 export default defineComponent({
 	name: 'FabMenu',
 	setup () {
+		const closeModal = () => useUserModal().closeFabMenu()
 		return {
-			helpCircleOutline, flashOutline, documentOutline,
+			helpCircleOutline, flashOutline, documentOutline, closeModal,
 			peopleOutline, megaphoneOutline, chatbubblesOutline
 		}
 	}

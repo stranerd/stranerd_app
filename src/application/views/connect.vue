@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<IonModal :isOpen="isOpen" cssClass="modal-class" @didDismiss="closeModal()">
-				<div class="modal-content p-6">
+				<div class="modal-content p-6 lg:p-8">
 					<div class="flex flex-col gap-4 items-center text-center">
 						<template v-if="tab === 0">
 							<IonIcon :icon="informationCircleOutline" class="text-4xl text-info" />
@@ -33,7 +33,7 @@
 								Request a connection with a student or a class, via name or email. A discussion is
 								opened with the student or class once the request is accepted.
 							</IonText>
-							<IonButton class="btn-primary w-full" @click="closeModal()">Got it</IonButton>
+							<IonButton class="btn-primary w-full mt-4" @click="closeModal()">Got it</IonButton>
 						</template>
 					</div>
 				</div>

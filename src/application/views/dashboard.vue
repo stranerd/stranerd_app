@@ -6,7 +6,7 @@
 		<div class="lg:hidden">
 			<DashboardView />
 		</div>
-		<div class="hidden lg:flex">
+		<div class="hidden lg:block">
 			<GeneralDashboard />
 		</div>
 	</DefaultLayout>
