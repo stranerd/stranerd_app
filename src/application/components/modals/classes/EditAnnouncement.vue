@@ -3,7 +3,8 @@
 		<template v-slot:title>
 			Edit Announcement
 		</template>
-		<AnnouncementForm :error="error" :factory="factory" :loading="loading" :submit="editAnnouncement">
+		<AnnouncementForm :disabled="{ classId: true }" :error="error" :factory="factory" :loading="loading"
+			:submit="editAnnouncement">
 			<template v-slot:buttonText>Update Announcement</template>
 		</AnnouncementForm>
 	</Modal>

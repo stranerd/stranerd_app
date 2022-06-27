@@ -11,14 +11,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { getGroupClass, useCreateGroup } from '@app/composable/classes/groups'
+import { useCreateGroup } from '@app/composable/classes/groups'
 import GroupForm from '@app/components/classes/groups/GroupForm.vue'
 
 export default defineComponent({
 	name: 'CreateGroupModal',
 	components: { GroupForm },
 	setup () {
-		const { createGroup, factory, error, loading } = useCreateGroup(getGroupClass()!)
+		const { createGroup, factory, error, loading } = useCreateGroup()
 		return { error, loading, createGroup, factory }
 	}
 })

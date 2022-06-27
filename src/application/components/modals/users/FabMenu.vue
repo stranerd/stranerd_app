@@ -5,14 +5,16 @@
 				{ name: 'Ask a question', path: '/questions/create', icon: helpCircleOutline },
 				{ name: 'Create a class', path: '/classes/create', icon: peopleOutline },
 				{ name: 'Create flashcard set', path: '/study/flashCards/create', icon: flashOutline },
-				{ name: 'Make an announcement', path: '/classes/announcements/create', icon: megaphoneOutline },
-				{ name: 'Start a discussion', path: '/classes/groups/create', icon: chatbubblesOutline },
+				...(adminClasses.length ? [
+					{ name: 'Make an announcement', path: '/classes/announcements/create', icon: megaphoneOutline },
+					{ name: 'Start a discussion', path: '/classes/groups/create', icon: chatbubblesOutline },
+				] : []),
 				{ name: 'Write a note', path: '/study/documents/create', icon: documentOutline },
 			]" :key="path" :to="path" class="flex items-center gap-4 py-4">
 				<IonIcon :icon="icon" />
 				<span>{{ name }}</span>
 			</router-link>
-			<IonButton class="mt-6" @click="closeModal">Cancel</IonButton>
+			<IonButton class="btn-primary mt-6" @click="closeModal">Cancel</IonButton>
 		</div>
 	</div>
 </template>
@@ -28,13 +30,15 @@ import {
 	megaphoneOutline,
 	peopleOutline
 } from 'ionicons/icons'
+import { useClassList } from '@app/composable/classes/classes'
 
 export default defineComponent({
 	name: 'FabMenu',
 	setup () {
+		const { adminClasses } = useClassList()
 		const closeModal = () => useUserModal().closeFabMenu()
 		return {
-			helpCircleOutline, flashOutline, documentOutline, closeModal,
+			adminClasses, helpCircleOutline, flashOutline, documentOutline, closeModal,
 			peopleOutline, megaphoneOutline, chatbubblesOutline
 		}
 	}

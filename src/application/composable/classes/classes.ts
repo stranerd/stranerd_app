@@ -25,6 +25,7 @@ const classGlobal = {} as Record<string, {
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler> & ReturnType<typeof useSuccessHandler>>
 
 export const useClassList = () => {
+	const { id } = useAuth()
 	const fetchClasses = async () => {
 		await global.setError('')
 		try {
@@ -41,7 +42,9 @@ export const useClassList = () => {
 		if (!global.fetched.value && !global.loading.value) await fetchClasses()
 	})
 
-	return { ...global, fetchClasses }
+	const adminClasses = computed(() => global.classes.value.filter((c) => c.admins.includes(id.value)))
+
+	return { ...global, adminClasses, fetchClasses }
 }
 
 export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) => {

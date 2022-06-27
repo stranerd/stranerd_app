@@ -3,7 +3,8 @@
 		<template v-slot:title>
 			Edit Group
 		</template>
-		<GroupForm :error="error" :factory="factory" :loading="loading" :submit="editGroup">
+		<GroupForm :disabled="{ classId: true }" :error="error" :factory="factory" :loading="loading"
+			:submit="editGroup">
 			<template v-slot:buttonText>Update Group</template>
 		</GroupForm>
 	</Modal>

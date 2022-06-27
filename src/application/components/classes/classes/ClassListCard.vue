@@ -1,13 +1,13 @@
 <template>
-	<div class="!gap-4 card-padding flex flex-col">
-		<div class="flex gap-4 items-center cursor-pointer" @click="show = !show">
+	<div class="flex flex-col">
+		<div class="flex gap-4 items-center cursor-pointer card-padding" @click="show = !show">
 			<Avatar :name="classInst.name" :size="36" :src="classInst.photo" />
 			<IonText class="font-bold capitalize truncate w-full">{{ classInst.name }}</IonText>
 			<span>
 				<IonIcon :class="{'rotate-180': show}" :icon="chevronDownOutline" class="transition-all duration-300" />
 			</span>
 		</div>
-		<div v-if="show" class="flex flex-col gap-2 text-secondaryText px-2">
+		<div v-if="show" class="flex flex-col gap-2 text-secondaryText">
 			<transition-group appear name="fade">
 				<router-link v-for="{ name, path, icon } in [
 						{ name: 'Announcements', path: 'announcements', icon: megaphoneOutline },
@@ -19,7 +19,7 @@
 						{ name: 'Library', path: 'library', icon: libraryOutline },
 						{ name: 'About', path: '', icon: informationCircleOutline }
 					]" :key="path" :to="`/classes/${classInst.id}/${path}`"
-					class="flex gap-4 items-center py-2">
+					class="flex gap-4 items-center card-padding !py-2" exact-active-class="hasBg">
 					<IonIcon :icon="icon" />
 					<IonText>{{ name }}</IonText>
 				</router-link>

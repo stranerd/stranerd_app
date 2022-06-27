@@ -1,5 +1,5 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
-import { ClassEntity, GroupEntity, GroupFactory, GroupsUseCases } from '@modules/classes'
+import { GroupEntity, GroupFactory, GroupsUseCases } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
@@ -69,22 +69,20 @@ export const useGroupList = (classId: string) => {
 	}
 }
 
-let groupClass = null as ClassEntity | null
-export const getGroupClass = () => groupClass
-export const openGroupModal = async (classInst: ClassEntity, router: Router) => {
-	groupClass = classInst
-	await router.push(`/classes/${classInst.id}/groups/create`)
+let createClassId = null as string | null
+export const setGroupClassId = (classId: string) => {
+	createClassId = classId
 }
 
-export const useCreateGroup = (groupClass: ClassEntity) => {
+export const useCreateGroup = () => {
 	const router = useRouter()
 	const factory = ref(new GroupFactory()) as Ref<GroupFactory>
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	if (!groupClass) useClassModal().closeCreateGroup()
-	else factory.value.classId = groupClass!.id
+	if (createClassId) factory.value.classId = createClassId
+	createClassId = null
 
 	const createGroup = async () => {
 		await setError('')

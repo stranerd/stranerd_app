@@ -11,14 +11,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { getAnnouncementClass, useCreateAnnouncement } from '@app/composable/classes/announcements'
+import { useCreateAnnouncement } from '@app/composable/classes/announcements'
 import AnnouncementForm from '@app/components/classes/announcements/AnnouncementForm.vue'
 
 export default defineComponent({
 	name: 'CreateAnnouncementModal',
 	components: { AnnouncementForm },
 	setup () {
-		const { createAnnouncement, factory, error, loading } = useCreateAnnouncement(getAnnouncementClass()!)
+		const { createAnnouncement, factory, error, loading } = useCreateAnnouncement()
 		return { error, loading, createAnnouncement, factory }
 	}
 })

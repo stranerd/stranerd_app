@@ -1,5 +1,10 @@
 <template>
 	<ClassWrapper>
+		<template v-slot:header="{ classInst }">
+			<router-link :to="`/classes/announcements/create?classId=${classInst.id}`">
+				<IonButton class="btn-primary">Make Announcement</IonButton>
+			</router-link>
+		</template>
 		<template v-slot="{ classInst }">
 			<AnnouncementsList :classInst="classInst" />
 		</template>

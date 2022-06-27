@@ -1,5 +1,5 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
-import { AnnouncementEntity, AnnouncementFactory, AnnouncementsUseCases, ClassEntity } from '@modules/classes'
+import { AnnouncementEntity, AnnouncementFactory, AnnouncementsUseCases } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
@@ -67,22 +67,20 @@ export const useAnnouncementList = (classId: string) => {
 	return { ...global[classId], fetchOlderAnnouncements: fetchAnnouncements, unReadAnnouncements }
 }
 
-let announcementClass = null as ClassEntity | null
-export const getAnnouncementClass = () => announcementClass
-export const openAnnouncementModal = async (classInst: ClassEntity, router: Router) => {
-	announcementClass = classInst
-	await router.push(`/classes/${classInst.id}/announcements/create`)
+let createClassId = null as string | null
+export const setAnnouncementClassId = (classId: string) => {
+	createClassId = classId
 }
 
-export const useCreateAnnouncement = (announcementClass: ClassEntity) => {
+export const useCreateAnnouncement = () => {
 	const router = useRouter()
 	const factory = ref(new AnnouncementFactory()) as Ref<AnnouncementFactory>
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	if (!announcementClass) useClassModal().closeCreateAnnouncement()
-	else factory.value.classId = announcementClass!.id
+	if (createClassId) factory.value.classId = createClassId
+	createClassId = null
 
 	const createAnnouncement = async () => {
 		await setError('')
