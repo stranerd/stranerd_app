@@ -7,7 +7,7 @@
 					<LeftSidebar class="h-full py-8" />
 				</div>
 				<div
-					class="w-full lg:w-[calc(75%-80px)] h-screen overflow-y-auto border-l-2 border-r-2 border-l-itemBg border-r-itemBg lg:py-8">
+					class="w-full lg:w-[calc(75%-80px)] h-screen overflow-y-auto lg:border-l-2 lg:border-r-2 border-l-itemBg border-r-itemBg lg:py-8">
 					<slot />
 				</div>
 				<div class="hidden lg:block w-[25%] py-8 h-screen overflow-y-auto">

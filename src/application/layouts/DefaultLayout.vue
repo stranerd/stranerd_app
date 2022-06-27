@@ -12,7 +12,7 @@
 					</slot>
 				</div>
 				<div
-					class="w-full lg:w-[calc(55%-80px)] h-screen overflow-y-auto border-l-2 border-r-2 border-l-itemBg border-r-itemBg lg:py-8 lg:px-4">
+					class="w-full lg:w-[calc(55%-80px)] h-screen overflow-y-auto lg:border-l-2 lg:border-r-2 border-l-itemBg border-r-itemBg lg:py-8 lg:px-4">
 					<div class="hidden lg:block px-4 mb-4">
 						<IonText class="font-bold text-2xl">{{ $route.meta.routeName ?? 'Stranerd' }}</IonText>
 					</div>
