@@ -24,16 +24,16 @@
 				</div>
 			</div>
 			<IonModal :isOpen="isOpen" cssClass="modal-class" @didDismiss="closeModal()">
-				<div class="modal-content p-6">
-					<div class="flex flex-col gap-4 items-center text-center">
+				<div class="modal-content p-8">
+					<div class="flex flex-col  items-center text-center">
 						<template v-if="tab === 0">
 							<IonIcon :icon="informationCircleOutline" class="text-4xl text-info" />
-							<IonText class="font-bold text-lg">Send a request</IonText>
-							<IonText class="text-secondaryText">
+							<IonText class="font-bold text-lg mt-5">Send a request</IonText>
+							<IonText class="text-secondaryText mt-4">
 								Request a connection with a student or a class, via name or email. A discussion is
 								opened with the student or class once the request is accepted.
 							</IonText>
-							<IonButton class="btn-primary w-full" @click="closeModal()">Got it</IonButton>
+							<IonButton class="btn-primary w-full mt-8" @click="closeModal()">Got it</IonButton>
 						</template>
 					</div>
 				</div>

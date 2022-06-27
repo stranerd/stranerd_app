@@ -4,24 +4,27 @@
 			<Avatar :name="classInst.name" :size="36" :src="classInst.photo" />
 			<IonText class="font-bold capitalize truncate w-full">{{ classInst.name }}</IonText>
 			<span>
-				<IonIcon :icon="show ? chevronUpOutline : chevronDownOutline" />
+				<IonIcon :icon="chevronDownOutline" :class="[show ?'rotate-180':'', 'transition-all duration-300' ]" />
 			</span>
 		</div>
 		<div v-if="show" class="flex flex-col gap-2 text-secondaryText px-2">
-			<router-link v-for="{ name, path, icon } in [
-					{ name: 'Announcements', path: 'announcements', icon: megaphoneOutline },
-					{ name: 'Events', path: 'events', icon: calendarOutline },
-					{ name: 'Timetable', path: 'timetable', icon: calendarClearOutline },
-					{ name: 'Scheme of Work', path: 'schemes', icon: listOutline },
-					{ name: 'Discussions', path: 'groups', icon: chatbubblesOutline },
-					{ name: 'Classmates', path: 'members', icon: peopleOutline },
-					{ name: 'Library', path: 'library', icon: libraryOutline },
-					{ name: 'About', path: '', icon: informationCircleOutline }
-				]" :key="path" :to="`/classes/${classInst.id}/${path}`"
-				class="flex gap-4 items-center py-2">
-				<IonIcon :icon="icon" />
-				<IonText>{{ name }}</IonText>
-			</router-link>
+			<transition-group name="fade" appear>
+				<router-link v-for="{ name, path, icon } in [
+						{ name: 'Announcements', path: 'announcements', icon: megaphoneOutline },
+						{ name: 'Events', path: 'events', icon: calendarOutline },
+						{ name: 'Timetable', path: 'timetable', icon: calendarClearOutline },
+						{ name: 'Scheme of Work', path: 'schemes', icon: listOutline },
+						{ name: 'Discussions', path: 'groups', icon: chatbubblesOutline },
+						{ name: 'Classmates', path: 'members', icon: peopleOutline },
+						{ name: 'Library', path: 'library', icon: libraryOutline },
+						{ name: 'About', path: '', icon: informationCircleOutline }
+					]" :key="path" :to="`/classes/${classInst.id}/${path}`"
+					class="flex gap-4 items-center py-2">
+					<IonIcon :icon="icon" />
+					<IonText>{{ name }}</IonText>
+				</router-link>
+			</transition-group>
+	
 		</div>
 	</div>
 </template>
@@ -51,7 +54,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const show = ref(false)
+		const show = ref(true)
 		return {
 			show, chevronDownOutline, chevronUpOutline,
 			chatbubblesOutline, informationCircleOutline, libraryOutline,
@@ -60,3 +63,13 @@ export default defineComponent({
 	}
 })
 </script>
+
+<style scoped>
+.fade-enter-from, .fade-leave-to {
+	opacity: 0;
+}
+
+.fade-enter-active, .fade-leave-active {
+	transition: opacity .25s ease-in-out;
+}
+</style>
