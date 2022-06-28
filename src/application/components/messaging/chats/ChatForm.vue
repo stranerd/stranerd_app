@@ -61,9 +61,9 @@
 			</div>
 		</div>
 		<form class="flex items-center gap-2" @submit.prevent="createTextChat">
-			<IonIcon :icon="showFileUpload ? closeCircleOutline : addCircleOutline"
+			<IonIcon :icon="showFileUpload ? closeCircleOutline : addCircleOutline" class="text-2xl"
 				@click="showFileUpload = !showFileUpload" />
-			<IonInput v-model="factory.body" class="flex-grow rounded-full h-8" placeholder="Write here" required />
+			<IonInput v-model="factory.body" class="flex-grow rounded-full" placeholder="Write here" required />
 			<IonButton :disabled="!factory.valid || loadingCounter" class="btn-primary" type="submit">
 				<IonIcon slot="icon-only" :icon="paperPlaneOutline" />
 			</IonButton>
@@ -145,8 +145,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	ion-button {
-		height: 32px;
-		width: 32px;
+		height: 36px;
+		width: 36px;
 		--padding-start: 0.4rem !important;
 		--padding-end: 0.4rem !important;
 		--padding-top: 0.4rem !important;

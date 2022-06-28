@@ -40,7 +40,7 @@ export const useAnnouncementList = (classId: string) => {
 		}
 	}
 
-	const unReadAnnouncements = computed(() => global[classId].announcements.value.filter((a) => !a.readAt[id.value]).length)
+	const unReadAnnouncements = computed(() => global[classId].announcements.value.filter((a) => !a.isRead(id.value)).length)
 
 	const fetchAnnouncements = async () => {
 		await global[classId].setError('')

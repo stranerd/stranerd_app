@@ -70,6 +70,10 @@ export class EventEntity extends BaseEntity {
 	isOneOff (event: EventEntity): event is Omit<EventEntity, 'data'> & { data: EventOneOffType } {
 		return event.data?.type === EventType.oneOff
 	}
+
+	isRead (userId: string) {
+		return !!this.readAt[userId]
+	}
 }
 
 type EventConstructorArgs = {

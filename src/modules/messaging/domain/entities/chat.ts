@@ -67,6 +67,18 @@ export class ChatEntity extends BaseEntity {
 		if (data.type === ChatType.classes) return `/messages/classes/${data.classId}/${to}`
 		return ''
 	}
+
+	search (search: string) {
+		const val = [
+			this.body.toLowerCase().includes(search.toLowerCase()),
+			(this.media?.name ?? '').toLowerCase().includes(search.toLowerCase())
+		]
+		return val.some((v) => v)
+	}
+
+	isRead (userId: string) {
+		return !!this.readAt[userId]
+	}
 }
 
 type ChatConstructorArgs = {

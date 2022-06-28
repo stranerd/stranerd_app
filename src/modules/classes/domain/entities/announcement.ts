@@ -55,5 +55,9 @@ export class AnnouncementEntity extends BaseEntity {
 	get tutors () {
 		return this.users[ClassUsers.tutors]
 	}
+
+	isRead (userId: string) {
+		return !!this.readAt[userId]
+	}
 }
 

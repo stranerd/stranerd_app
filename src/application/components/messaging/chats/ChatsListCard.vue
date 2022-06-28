@@ -40,6 +40,7 @@ import { formatTimeAsDigits } from '@utils/dates'
 import { documentOutline, downloadOutline, ellipse } from 'ionicons/icons'
 import { useDownload } from '@app/composable/meta/media'
 import { isWeb } from '@utils/constants'
+import { useChat } from '@app/composable/messaging/chats'
 
 export default defineComponent({
 	name: 'ChatsListCard',
@@ -51,6 +52,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { id } = useAuth()
+		useChat(props.chat)
 		const {
 			content, loading, openFile, downloadWeb, download: downloadApp
 		} = useDownload(props.chat.media?.name ?? '', props.chat.media?.link ?? '', 'messaging/chats')

@@ -1,8 +1,9 @@
 import { IChatRepository } from '../irepositories/ichat'
 import { ChatFactory } from '../factories/chat'
-import { Conditions, Listeners, QueryParams } from '@modules/core'
+import { Conditions, Listeners, QueryKeys, QueryParams } from '@modules/core'
 import { CHAT_PAGINATION_LIMIT } from '@utils/constants'
 import { ChatEntity } from '../entities/chat'
+import { ChatType } from '@modules/messaging'
 
 export class ChatsUseCase {
 	private repository: IChatRepository
@@ -21,8 +22,25 @@ export class ChatsUseCase {
 
 	async get (path: [string, string], date?: number) {
 		const conditions: QueryParams = {
-			where: [{ field: 'from.id', condition: Conditions.in, value: path },
-				{ field: 'to', condition: Conditions.in, value: path }],
+			where: [
+				{
+					condition: QueryKeys.and,
+					value: [
+						{ field: 'data.type', value: ChatType.classes },
+						{ field: 'data.members', value: path[0] },
+						{ field: 'to', value: path[1] }
+					]
+				},
+				{
+					condition: QueryKeys.and,
+					value: [
+						{ field: 'data.type', value: ChatType.personal },
+						{ field: 'data.members', value: path[0] },
+						{ field: 'data.members', value: path[1] }
+					]
+				}
+			],
+			whereType: QueryKeys.or,
 			sort: [{ field: 'createdAt', desc: true }],
 			limit: CHAT_PAGINATION_LIMIT
 		}
@@ -34,8 +52,25 @@ export class ChatsUseCase {
 
 	async listen (path: [string, string], listener: Listeners<ChatEntity>, date?: number) {
 		const conditions: QueryParams = {
-			where: [{ field: 'from.id', condition: Conditions.in, value: path },
-				{ field: 'to', condition: Conditions.in, value: path }],
+			where: [
+				{
+					condition: QueryKeys.and,
+					value: [
+						{ field: 'data.type', value: ChatType.classes },
+						{ field: 'data.members', value: path[0] },
+						{ field: 'to', value: path[1] }
+					]
+				},
+				{
+					condition: QueryKeys.and,
+					value: [
+						{ field: 'data.type', value: ChatType.personal },
+						{ field: 'data.members', value: path[0] },
+						{ field: 'data.members', value: path[1] }
+					]
+				}
+			],
+			whereType: QueryKeys.or,
 			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
@@ -46,6 +81,51 @@ export class ChatsUseCase {
 			if (!path.includes(entity.from.id) || !path.includes(entity.to)) return false
 			if (date) return entity.createdAt >= date
 			else return true
+		})
+	}
+
+	async getClassLibrary (classId: string) {
+		const conditions: QueryParams = {
+			where: [
+				{ field: 'data.classId', value: classId },
+				{ field: 'data.type', value: ChatType.classes },
+				{
+					condition: QueryKeys.or,
+					value: [
+						{ field: 'media', condition: Conditions.ne, value: null },
+						{ field: 'links.0', condition: Conditions.exists, value: true }
+					]
+				}
+			],
+			sort: [{ field: 'createdAt', desc: true }],
+			all: true
+		}
+
+		return await this.repository.get(conditions)
+	}
+
+	async listenToClassLibrary (classId: string, listener: Listeners<ChatEntity>) {
+		const conditions: QueryParams = {
+			where: [
+				{ field: 'data.classId', value: classId },
+				{ field: 'data.type', value: ChatType.classes },
+				{
+					condition: QueryKeys.or,
+					value: [
+						{ field: 'media', condition: Conditions.ne, value: null },
+						{ field: 'links.0', condition: Conditions.exists, value: true }
+					]
+				}
+			],
+			sort: [{ field: 'createdAt', desc: true }],
+			all: true
+		}
+
+		return await this.repository.listenToMany(conditions, listener, (entity) => {
+			return [
+				entity.data.type === ChatType.classes && entity.data.classId === classId,
+				entity.media !== null || entity.links.length > 0
+			].every((v) => v)
 		})
 	}
 }

@@ -39,6 +39,11 @@ export class ChatMetaEntity extends BaseEntity {
 		return Object.keys(this.data.users).filter((key) => key !== userId).at(0) ?? ''
 	}
 
+	getToLink (userId: string) {
+		if (this.data.type === ChatType.classes) return `/messages/classes/${this.data.group.classId}/${this.data.group.id}`
+		return `/messages/personal/${this.getTo(userId)}`
+	}
+
 	getToName (userId: string) {
 		if (this.data.type === ChatType.classes) return this.data.group.name
 		return this.data.users[this.getTo(userId)]?.bio.fullName ?? ''
@@ -49,12 +54,28 @@ export class ChatMetaEntity extends BaseEntity {
 		return this.data.users[this.getTo(userId)]?.bio.photo ?? null
 	}
 
+	search (search: string) {
+		const val = []
+		if (this.data.type === ChatType.personal) {
+			Object.values(this.data.users).forEach((u) => {
+				val.push(u.bio.fullName.toLowerCase().includes(search.toLowerCase()))
+			})
+		}
+		if (this.data.type === ChatType.classes) val.push(this.data.group.name.toLowerCase().includes(search.toLowerCase()))
+		if (this.last) val.push(this.last.search(search))
+		return val.some((v) => v)
+	}
+
 	isPersonal (meta: ChatMetaEntity): meta is Omit<ChatMetaEntity, 'data'> & { data: ChatMetaPersonal } {
 		return meta.data.type === ChatType.personal
 	}
 
 	isClasses (meta: ChatMetaEntity): meta is Omit<ChatMetaEntity, 'data'> & { data: ChatMetaClasses } {
 		return meta.data.type === ChatType.classes
+	}
+
+	hasUnRead (userId: string) {
+		return (this.last?.createdAt ?? 0) > (this.readAt[userId] ?? 0)
 	}
 }
 

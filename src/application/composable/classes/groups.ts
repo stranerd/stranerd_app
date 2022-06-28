@@ -1,11 +1,10 @@
-import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
+import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { GroupEntity, GroupFactory, GroupsUseCases } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { useClassModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
-import { useAuth } from '@app/composable/auth/auth'
 
 const global = {} as Record<string, {
 	groups: Ref<GroupEntity[]>
@@ -14,15 +13,14 @@ const global = {} as Record<string, {
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useGroupList = (classId: string) => {
-	const { id } = useAuth()
 	if (global[classId] === undefined) {
 		const listener = useListener(async () => {
 			return await GroupsUseCases.listenToClassGroups(classId, {
 				created: async (entity) => {
-					addToArray(global[classId].groups.value, entity, (e) => e.id, (e) => e.last?.createdAt ?? 0)
+					addToArray(global[classId].groups.value, entity, (e) => e.id, (e) => e.name, true)
 				},
 				updated: async (entity) => {
-					addToArray(global[classId].groups.value, entity, (e) => e.id, (e) => e.last?.createdAt ?? 0)
+					addToArray(global[classId].groups.value, entity, (e) => e.id, (e) => e.name, true)
 				},
 				deleted: async (entity) => {
 					global[classId].groups.value = global[classId].groups.value.filter((c) => c.id !== entity.id)
@@ -38,14 +36,12 @@ export const useGroupList = (classId: string) => {
 		}
 	}
 
-	const unReadGroups = computed(() => global[classId].groups.value.filter((a) => (a.readAt[id.value] ?? 0) < (a.last?.createdAt ?? 0)).length)
-
 	const fetchGroups = async () => {
 		await global[classId].setError('')
 		try {
 			await global[classId].setLoading(true)
 			const groups = await GroupsUseCases.getClassGroups(classId)
-			groups.results.forEach((g) => addToArray(global[classId].groups.value, g, (e) => e.id, (e) => e.last?.createdAt ?? 0))
+			groups.results.forEach((g) => addToArray(global[classId].groups.value, g, (e) => e.id, (e) => e.name, true))
 			global[classId].fetched.value = true
 		} catch (error) {
 			await global[classId].setError(error)
@@ -64,8 +60,7 @@ export const useGroupList = (classId: string) => {
 	return {
 		error: global[classId].error,
 		loading: global[classId].loading,
-		groups: global[classId].groups,
-		unReadGroups
+		groups: global[classId].groups
 	}
 }
 
@@ -93,7 +88,7 @@ export const useCreateGroup = () => {
 				await setMessage('Group created successfully.')
 				factory.value.reset()
 				useClassModal().closeCreateGroup()
-				await router.push(`/classes/${group.classId}/groups/${group.id}`)
+				await router.push(`/messages/classes/${group.classId}/${group.id}`)
 			} catch (error) {
 				await setError(error)
 			}

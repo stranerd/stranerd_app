@@ -1,6 +1,6 @@
 <template>
 	<IonFab slot="fixed" class="bottom-[4.5rem] right-[1rem]" horizontal="end" vertical="bottom">
-		<IonFabButton color="primary" @click="openModal">
+		<IonFabButton @click="openModal">
 			<IonIcon :icon="addOutline" />
 		</IonFabButton>
 	</IonFab>
@@ -19,3 +19,10 @@ export default defineComponent({
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+	ion-fab-button {
+		--background: #{$color-primaryBg};
+		--color: #{$color-primaryText};
+	}
+</style>

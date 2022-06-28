@@ -24,29 +24,6 @@ const classGlobal = {} as Record<string, {
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler> & ReturnType<typeof useSuccessHandler>>
 
-export const useClassList = () => {
-	const { id } = useAuth()
-	const fetchClasses = async () => {
-		await global.setError('')
-		try {
-			await global.setLoading(true)
-			global.classes.value = await ClassesUseCases.search(global.searchTerm.value)
-			global.fetched.value = true
-		} catch (error) {
-			await global.setError(error)
-		}
-		await global.setLoading(false)
-	}
-
-	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchClasses()
-	})
-
-	const adminClasses = computed(() => global.classes.value.filter((c) => c.admins.includes(id.value)))
-
-	return { ...global, adminClasses, fetchClasses }
-}
-
 export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) => {
 	const { id } = useAuth()
 	const { redirect } = useRedirectToAuth()

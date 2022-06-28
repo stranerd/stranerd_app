@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref, Ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { ChatMetaEntity, ChatMetasUseCases } from '@modules/messaging'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
@@ -11,6 +11,7 @@ const global = {} as Record<string, {
 	meta: Ref<ChatMetaEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
+	search: Ref<string>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useChatMetas = () => {
@@ -22,11 +23,11 @@ export const useChatMetas = () => {
 			}
 			return ChatMetasUseCases.listen({
 				created: async (entity) => {
-					if (entity.readAt[id.value] > (entity.last?.readAt[id.value] ?? 0)) await player.play()
+					// if (entity.hasUnRead(userId)) await player.play()
 					addToArray(global[userId].meta.value, entity, (e) => e.id, (e) => (e.last?.createdAt ?? 0))
 				},
 				updated: async (entity) => {
-					if (entity.readAt[id.value] > (entity.last?.readAt[id.value] ?? 0)) await player.play()
+					// if (entity.hasUnRead(userId)) await player.play()
 					addToArray(global[userId].meta.value, entity, (e) => e.id, (e) => (e.last?.createdAt ?? 0))
 				},
 				deleted: async (entity) => {
@@ -37,6 +38,7 @@ export const useChatMetas = () => {
 		global[userId] = {
 			meta: ref([]),
 			fetched: ref(false),
+			search: ref(''),
 			listener,
 			...useErrorHandler(),
 			...useLoadingHandler()
@@ -63,5 +65,6 @@ export const useChatMetas = () => {
 	onUnmounted(async () => {
 		await global[userId].listener.close()
 	})
-	return { ...global[userId] }
+	const filteredMeta = computed(() => global[userId].meta.value.filter((m) => m.search(global[userId].search.value)))
+	return { ...global[userId], meta: filteredMeta }
 }

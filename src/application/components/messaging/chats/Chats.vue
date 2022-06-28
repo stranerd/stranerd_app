@@ -52,7 +52,7 @@ export default defineComponent({
 		classId: {
 			type: String,
 			required: false,
-			default: ''
+			default: '---'
 		}
 	},
 	setup (props) {
