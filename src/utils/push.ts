@@ -3,7 +3,7 @@ import { Notify } from '@utils/dialog'
 import { storage } from '@utils/storage'
 import { isWeb } from '@utils/constants'
 import { HttpClient } from '@modules/core'
-import { NotificationEntity, NotificationsUseCases } from '@modules/users'
+import { NotificationData, NotificationEntity, NotificationsUseCases } from '@modules/users'
 import { router } from '@app/router'
 import { ChatData, ChatEntity } from '@modules/messaging'
 
@@ -32,7 +32,7 @@ export const setupPush = async (userId: string) => {
 		await clearAllNotifications()
 		const parsed = JSON.parse(notification.data.value) as PushValue
 		if (parsed.type === 'chats') await router.push(ChatEntity.getLink(parsed.data.to, parsed.data.data))
-		else if (parsed.type === 'notifications') await router.push(NotificationEntity.getLink(parsed.data as any))
+		else if (parsed.type === 'notifications') await router.push(NotificationEntity.getLink(parsed.data.data))
 		else await router.push('/notifications')
 	})
 
@@ -64,8 +64,7 @@ type NotificationPushData = {
 	type: 'notifications'
 	data: {
 		id: string
-		action: string
-		data: Record<string, any>
+		data: NotificationData
 	}
 }
 

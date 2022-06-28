@@ -33,5 +33,6 @@ export const ChatsUseCases = new ChatsUseCase(chatRepository)
 export const ChatMetasUseCases = new ChatMetasUseCase(chatMetaRepository)
 export const SessionsUseCases = new SessionsUseCase(sessionRepository)
 
-export { ChatEntity, ChatFactory, ChatMetaEntity, ChatType, ChatData }
+export { ChatEntity, ChatFactory, ChatMetaEntity, ChatType }
 export { SessionEntity, SessionFactory }
+export type { ChatData }

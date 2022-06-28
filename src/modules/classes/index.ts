@@ -34,7 +34,7 @@ import { GroupFactory } from './domain/factories/group'
 import { DiscussionFactory } from './domain/factories/discussion'
 import { EventFactory } from './domain/factories/event'
 import { SchemeFactory } from './domain/factories/scheme'
-import { ClassUsers, EmbeddedGroup, EventType, isEventOneOff, isEventTimetable } from './domain/types'
+import { ClassUsers, EmbeddedGroup, EventType } from './domain/types'
 
 const announcementDataSource = new AnnouncementApiDataSource()
 const classDataSource = new ClassApiDataSource()
@@ -66,8 +66,8 @@ export const SchemesUseCases = new SchemesUseCase(schemeRepository)
 
 export { AnnouncementEntity, AnnouncementFactory }
 export { ClassEntity, ClassFactory, ClassUsers }
-export { GroupEntity, GroupFactory, EmbeddedGroup }
+export { GroupEntity, GroupFactory }
 export { DiscussionEntity, DiscussionFactory }
 export { EventEntity, EventFactory, EventType }
 export { SchemeEntity, SchemeFactory }
-export { isEventTimetable, isEventOneOff }
+export type { EmbeddedGroup }

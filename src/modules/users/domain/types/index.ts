@@ -1,6 +1,8 @@
 import { RankTypes } from '../entities/rank'
 import { Media } from '@modules/core'
 
+export * from './notifications'
+
 export enum UserSchoolType {
 	'secondary' = 'secondary',
 	'aspirant' = 'aspirant',
