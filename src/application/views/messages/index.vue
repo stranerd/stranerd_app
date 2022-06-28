@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import MessagesList from '@app/components/messages/MessagesList.vue'
+import MessagesList from '@app/components/messaging/MessagesList.vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 
