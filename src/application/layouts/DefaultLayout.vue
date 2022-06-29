@@ -11,19 +11,21 @@
 					</slot>
 				</div>
 				<div class="layout-page-main">
-					<div :class="{'lg:px-8': !ignorePagePadding}"
-						class="hidden lg:flex gap-4 justify-between items-center">
-						<IonText class="font-bold text-2xl">{{ $route.meta.routeName ?? 'Stranerd' }}</IonText>
-						<div>
-							<slot name="content-top-left" />
+					<slot name="content-top">
+						<div class="hidden lg:flex gap-4 justify-between items-center px-8 mb-8">
+							<IonText class="font-bold text-2xl">{{ $route.meta.routeName ?? 'Stranerd' }}</IonText>
+							<div>
+								<slot name="content-top-left" />
+							</div>
 						</div>
-					</div>
-					<Topbar v-if="!hideTop" class="lg:hidden fixed" />
+					</slot>
+					<Topbar v-if="!hideTop" class="lg:hidden" />
 					<div :class="{'lg:px-8': !ignorePagePadding}" class="layout-page-content">
 						<slot />
 					</div>
 					<Fab v-if="!hideFab" class="lg:hidden" />
-					<BottomNav v-if="!hideBottom" class="mt-auto lg:hidden fixed bottom-0" />
+					<BottomNav v-if="!hideBottom" class="mt-auto lg:hidden" />
+					<slot name="content-bottom" />
 				</div>
 				<div class="layout-page-right">
 					<RightSidebar class="h-full" />

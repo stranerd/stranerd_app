@@ -1,5 +1,5 @@
 <template>
-	<router-link :to="chatMeta.getToLink(id)" class="flex items-center leading-none py-2 gap-2"
+	<router-link :to="chatMeta.getToLink(id)" class="flex items-center leading-none card-padding !py-2 !gap-2"
 		exact-active-class="hasBg">
 		<span>
 			<Avatar :name="chatMeta.getToName(id)" :size="40" :src="chatMeta.getToPhoto(id)" />

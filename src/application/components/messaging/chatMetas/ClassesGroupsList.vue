@@ -1,6 +1,6 @@
 <template>
-	<div v-if="classInst" class="!gap-4 card-padding flex flex-col">
-		<div class="flex gap-4 items-center" @click="show = !show">
+	<div v-if="classInst" class="flex flex-col">
+		<div class="flex card-padding gap-4 items-center" @click="show = !show">
 			<IonText class="font-bold capitalize truncate w-full">{{ classInst.name }}</IonText>
 			<IonIcon :icon="show ? chevronUpOutline : chevronDownOutline" />
 		</div>
