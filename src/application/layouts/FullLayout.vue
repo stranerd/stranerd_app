@@ -6,12 +6,12 @@
 					<LeftSidebar class="h-full py-8" />
 				</div>
 				<div class="layout-page-main">
-					<Topbar v-if="!hideTop" class="lg:hidden fixed" />
+					<Topbar v-if="!hideTop" class="lg:hidden" />
 					<div class="layout-page-content">
 						<slot />
 					</div>
 					<Fab v-if="!hideFab" class="lg:hidden" />
-					<BottomNav v-if="!hideBottom" class="mt-auto lg:hidden fixed bottom-0" />
+					<BottomNav v-if="!hideBottom" class="mt-auto lg:hidden" />
 				</div>
 				<div class="layout-page-right">
 					<RightSidebar class="h-full" />
