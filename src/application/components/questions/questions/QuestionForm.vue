@@ -1,10 +1,11 @@
 <template>
-	<form class="flex flex-col gap-4 lg:gap-6" @submit.prevent="submit">
-		<IonInput
-			v-model="factory.tagId"
-			class="h-9 flex-none"
-			placeholder="Associated subject/course?"
-		/>
+	<form class="flex flex-col gap-6" @submit.prevent="submit">
+		<IonSelect v-model="factory.tagId" :disabled="disabled.tagId" class="capitalize"
+			interface="action-sheet" placeholder="Associated subject">
+			<IonSelectOption v-for="tag in childrenTags" :key="tag.hash" :value="tag.id" class="capitalize">
+				{{ tag.title }}
+			</IonSelectOption>
+		</IonSelect>
 
 		<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
 			class="flex-grow"
@@ -46,11 +47,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 import { closeOutline, imageOutline, paperPlaneOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
+import { useTagList } from '@app/composable/interactions/tags'
 
 export default defineComponent({
 	name: 'QuestionForm',
@@ -71,13 +73,20 @@ export default defineComponent({
 		error: {
 			type: String,
 			required: true
+		},
+		disabled: {
+			type: Object,
+			required: false,
+			default: () => ({})
 		}
 	},
 	setup (props) {
+		const { questionTags } = useTagList()
+		const childrenTags = computed(() => questionTags.value.filter((t) => t.parent))
 		const catchAttachments = useFileInputCallback(async (files) => {
 			files.map(props.factory.addAttachment)
 		})
-		return { imageOutline, paperPlaneOutline, closeOutline, catchAttachments }
+		return { childrenTags, imageOutline, paperPlaneOutline, closeOutline, catchAttachments }
 	}
 })
 </script>

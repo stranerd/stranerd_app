@@ -4,11 +4,12 @@
 			<QuestionsPanel />
 		</template>
 		<QuestionForm
+			:disabled="{ tagId: true }"
 			:error="error"
 			:factory="factory"
 			:loading="loading"
 			:submit="editQuestion"
-			class="page-padding flex-grow lg:flex-grow-0"
+			class="page-padding h-full lg:h-auto"
 		>
 			<template v-slot:buttonText>
 				Save Question

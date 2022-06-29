@@ -9,7 +9,7 @@
 			:loading="loading"
 			:question="answeringQuestion"
 			:submit="createAnswer"
-			class="page-padding flex-grow lg:flex-grow-0"
+			class="page-padding h-full lg:h-auto"
 		>
 			<template v-slot:buttonText>
 				Answer
