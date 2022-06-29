@@ -35,4 +35,12 @@ export class NotificationsUseCase {
 	async markSeen (id: string, seen: boolean) {
 		return await this.repository.markSeen(id, seen)
 	}
+
+	async getUnReadCount () {
+		const res = await this.repository.get({
+			where: [{ field: 'seen', value: false }],
+			limit: 1
+		})
+		return res.docs.total
+	}
 }

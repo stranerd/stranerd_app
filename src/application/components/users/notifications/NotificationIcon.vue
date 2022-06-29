@@ -18,11 +18,10 @@ export default defineComponent({
 	name: 'NotificationIcon',
 	setup () {
 		const { isLoggedIn } = useAuth()
-		const { notifications: allNotifications } = useNotificationList()
+		const { unRead } = useNotificationList()
 		const unReadCount = computed(() => {
-			const count = allNotifications.value.filter((n) => !n.seen).length
-			if (count === 0) return ''
-			return count > 99 ? '99+' : count.toString()
+			if (unRead.value === 0) return ''
+			return unRead.value > 99 ? '99+' : unRead.value.toString()
 		})
 		return { isLoggedIn, notificationsOutline, unReadCount }
 	}

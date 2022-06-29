@@ -128,4 +128,32 @@ export class ChatsUseCase {
 			].every((v) => v)
 		})
 	}
+
+	async getUnReadCount (path: [string, string]) {
+		const res = await this.repository.get({
+			where: [
+				{
+					condition: QueryKeys.and,
+					value: [
+						{ field: 'data.type', value: ChatType.classes },
+						{ field: 'data.members', value: path[0] },
+						{ field: 'to', value: path[1] },
+						{ field: `readAt.${path[0]}`, value: false, condition: Conditions.exists }
+					]
+				},
+				{
+					condition: QueryKeys.and,
+					value: [
+						{ field: 'data.type', value: ChatType.personal },
+						{ field: 'data.members', value: path[0] },
+						{ field: 'data.members', value: path[1] },
+						{ field: `readAt.${path[0]}`, value: false, condition: Conditions.exists }
+					]
+				}
+			],
+			whereType: QueryKeys.or,
+			limit: 1
+		})
+		return res.docs.total
+	}
 }

@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref, Ref } from 'vue'
+import { onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { NotificationEntity, NotificationsUseCases } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
@@ -9,6 +9,7 @@ const global = {} as Record<string, {
 	hasMore: Ref<boolean>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
+	unRead: Ref<number>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useNotificationList = () => {
@@ -35,6 +36,7 @@ export const useNotificationList = () => {
 			notifications: ref([]),
 			hasMore: ref(false),
 			fetched: ref(false),
+			unRead: ref(0),
 			listener,
 			...useErrorHandler(),
 			...useLoadingHandler()
@@ -60,6 +62,12 @@ export const useNotificationList = () => {
 		await fetchNotifications()
 		await global[userId].listener.restart()
 	}
+
+	const fetchUnRead = async () => {
+		global[userId].unRead.value = await NotificationsUseCases.getUnReadCount()
+	}
+
+	watch(global[userId].notifications, fetchUnRead, { deep: true })
 
 	onMounted(async () => {
 		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchNotifications()

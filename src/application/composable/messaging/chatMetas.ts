@@ -1,6 +1,6 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { ChatMetaEntity, ChatMetasUseCases } from '@modules/messaging'
+import { ChatMetaEntity, ChatMetasUseCases, ChatsUseCases } from '@modules/messaging'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { AudioSounds, useAudioPlayer } from '@app/composable/core/audios'
 import { addToArray } from '@utils/commons'
@@ -67,4 +67,23 @@ export const useChatMetas = () => {
 	})
 	const filteredMeta = computed(() => global[userId].meta.value.filter((m) => m.search(global[userId].search.value)))
 	return { ...global[userId], meta: filteredMeta }
+}
+
+const metaGlobal = {} as Record<string, {
+	unRead: Ref<number>
+} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+
+export const useChatMeta = (chatMeta: ChatMetaEntity) => {
+	const { id } = useAuth()
+	if (metaGlobal[chatMeta.id] === undefined) metaGlobal[chatMeta.id] = {
+		unRead: ref(0),
+		...useErrorHandler(),
+		...useLoadingHandler()
+	}
+
+	const fetchUnRead = async () => {
+		metaGlobal[chatMeta.id].unRead.value = await ChatsUseCases.getUnReadCount([id.value, chatMeta.getTo(id.value)])
+	}
+
+	return { ...metaGlobal[chatMeta.id], fetchUnRead }
 }
