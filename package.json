@@ -83,7 +83,7 @@
 		"unplugin-vue-components": "^0.20.1",
 		"vite": "^2.9.13",
 		"vite-plugin-pages": "^0.24.3",
-		"vue-tsc": "0.38.2"
+		"vue-tsc": "0.34.16"
 	},
 	"commitlint": {
 		"extends": [

@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col">
-		<div class="p-4">
+		<div class="px-4 mb-4">
 			<IonSearchbar v-model.trim="search" placeholder="Search" type="search" />
 		</div>
 		<BlockLoading v-if="loading" />

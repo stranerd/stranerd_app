@@ -6,7 +6,7 @@
 		<template v-slot:content-top>
 			<div />
 		</template>
-		<MessagingView class="lg:hidden" />
+		<MessagingView class="lg:hidden pt-4" />
 		<div class="h-full w-full hidden lg:flex justify-center items-center">
 			<p class="text-3xl">Select a contact</p>
 		</div>
