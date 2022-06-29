@@ -1,5 +1,5 @@
 <template>
-	<div v-if="user">
+	<div v-if="user" class="pl-4">
 		<UserPageCard :user="user" class="border-bottom-line" />
 
 		<div v-if="0" class="border-bottom-line gap-4 py-6 flex items-center">
