@@ -1,7 +1,7 @@
 <template>
 	<DefaultLayout>
-		<div v-if="user">
-			<UserPageCard :user="user" />
+		<div v-if="user" class="py-6 lg:pt-0">
+			<UserPageCard :user="user" class="px-4 lg:px-0 pb-6" />
 			<div class="flex flex-col gap-4">
 				<div class="flex items-center justify-between">
 					<span v-for="path in [

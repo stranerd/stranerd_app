@@ -1,6 +1,6 @@
 <template>
-	<div class="flex flex-col">
-		<form class="p-4" @submit.prevent="search">
+	<div class="showcase-flex">
+		<form class="p-4 lg:p-0" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 		</form>
 		<EmptyState v-if="!loading && !error && questions.length === 0" class="border-bottom-line"

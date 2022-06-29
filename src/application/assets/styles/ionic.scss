@@ -68,11 +68,17 @@ ion-popover {
 	.searchbar-search-icon {
 		position: static !important;
 		margin: 0 1rem 0 0.5rem !important;
+		@media (min-width: $lg) {
+			margin-left: 1rem !important;
+		}
 	}
 
 	.searchbar-cancel-button {
 		position: static !important;
 		margin: 0 0.5rem 0 1rem !important;
+		@media (min-width: $lg) {
+			margin-right: 1rem !important;
+		}
 	}
 }
 

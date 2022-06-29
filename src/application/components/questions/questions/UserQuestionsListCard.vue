@@ -1,5 +1,5 @@
 <template>
-	<router-link :id="question.id" :to="`/questions/${question.id}`" class="card-padding flex flex-col">
+	<router-link :id="question.id" :to="`/questions/${question.id}`" class="card card-padding flex flex-col">
 		<span>{{ question.trimmedBody }}</span>
 		<div class="flex items-center justify-between text-secondaryText text-sm gap-2">
 			<InteractionTag :tagId="question.tagId" />

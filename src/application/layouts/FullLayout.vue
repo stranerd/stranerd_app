@@ -7,7 +7,7 @@
 				</div>
 				<div class="layout-page-main">
 					<Topbar v-if="!hideTop" class="lg:hidden fixed" />
-					<div class=" layout-page-content">
+					<div class="layout-page-content">
 						<slot />
 					</div>
 					<Fab v-if="!hideFab" class="lg:hidden" />

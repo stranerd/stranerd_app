@@ -1,14 +1,14 @@
 <template>
 	<div v-if="user">
-		<UserPageCard :user="user" class="border-bottom-line" />
+		<UserPageCard :user="user" class="border-bottom-line px-4 lg:px-8 pb-6" />
 
-		<div v-if="0" class="border-bottom-line gap-4 py-6 flex items-center">
+		<div v-if="0" class="border-bottom-line gap-4 py-6 px-4 lg:px-8 flex items-center">
 			<IonIcon :icon="helpCircleOutline" />
 			<IonText>You have 5 questions to ask</IonText>
 			<IonIcon :icon="cartOutline" class="ml-auto" />
 		</div>
 
-		<div class="flex flex-col gap-6 py-8 text-secondaryText">
+		<div class="flex flex-col gap-6 py-8 px-4 lg:px-8 text-secondaryText">
 			<router-link v-for="{ label, route, icon } in [
 				{ label: 'Stats', route: '/account/stats', icon: gridOutline },
 				{ label: 'Questions', route: '/account/questions', icon: helpCircleOutline },

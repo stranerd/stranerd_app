@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col card-padding" @click="markNotificationSeen">
+	<div class="flex flex-col card card-padding" @click="markNotificationSeen">
 		<router-link :class="notification.seen ? 'text-secondaryText' : 'font-bold'" :to="notification.link">
 			{{ notification.body }}
 		</router-link>

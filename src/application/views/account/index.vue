@@ -1,6 +1,6 @@
 <template>
 	<FullLayout>
-		<ProfileView />
+		<ProfileView class="py-6 lg:pt-0" />
 	</FullLayout>
 </template>
 
