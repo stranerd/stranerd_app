@@ -30,12 +30,12 @@ import {
 	megaphoneOutline,
 	peopleOutline
 } from 'ionicons/icons'
-import { useClassList } from '@app/composable/classes/classes'
+import { useUserClassList } from '@app/composable/users/users/classes'
 
 export default defineComponent({
 	name: 'FabMenu',
 	setup () {
-		const { adminClasses } = useClassList()
+		const { adminClasses } = useUserClassList()
 		const closeModal = () => useUserModal().closeFabMenu()
 		return {
 			adminClasses, helpCircleOutline, flashOutline, documentOutline, closeModal,

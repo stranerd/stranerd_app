@@ -48,6 +48,10 @@
 		@apply w-full lg:w-[calc(75%-80px)] flex flex-col h-screen overflow-y-auto lg:border-l-2 lg:border-r-2 lg:border-l-itemBg lg:border-r-itemBg lg:py-8 lg:gap-8
 	}
 
+	.layout-page-content {
+		@apply flex-grow mt-[58px] mb-[46px] lg:my-0;
+	}
+
 	.layout-page-panel + .layout-page-main {
 		@apply lg:w-[calc(55%-80px)];
 	}

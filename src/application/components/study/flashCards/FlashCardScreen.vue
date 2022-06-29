@@ -60,7 +60,6 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-
 		const isFullscreen = ref(false)
 		const flipped = ref(false)
 		const isPlaying = ref(false)

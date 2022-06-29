@@ -30,7 +30,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { GroupFactory } from '@modules/classes'
-import { useClassList } from '@app/composable/classes/classes'
+import { useUserClassList } from '@app/composable/users/users/classes'
 
 export default defineComponent({
 	name: 'GroupForm',
@@ -58,7 +58,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const { adminClasses } = useClassList()
+		const { adminClasses } = useUserClassList()
 		return { adminClasses }
 	}
 })

@@ -38,7 +38,7 @@ export const useEventList = (classId: string) => {
 		}
 	}
 
-	const unReadEvents = computed(() => global[classId].events.value.filter((a) => !a.readAt[id.value]).length)
+	const unReadEvents = computed(() => global[classId].events.value.filter((a) => !a.isRead(id.value)).length)
 
 	const fetchEvents = async () => {
 		await global[classId].setError('')

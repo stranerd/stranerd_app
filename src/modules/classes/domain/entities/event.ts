@@ -1,5 +1,5 @@
 import { EmbeddedUser } from '@modules/users'
-import { ClassUsers, EventDataType, EventType } from '../types'
+import { ClassUsers, EventDataType, EventOneOffType, EventTimetableType, EventType } from '../types'
 import { BaseEntity } from '@modules/core'
 
 export class EventEntity extends BaseEntity {
@@ -61,6 +61,18 @@ export class EventEntity extends BaseEntity {
 
 	getAllUsers () {
 		return Array.from(new Set(Object.values(this.users).flat()))
+	}
+
+	isTimetable (event: EventEntity): event is Omit<EventEntity, 'data'> & { data: EventTimetableType } {
+		return event.data?.type === EventType.timetable
+	}
+
+	isOneOff (event: EventEntity): event is Omit<EventEntity, 'data'> & { data: EventOneOffType } {
+		return event.data?.type === EventType.oneOff
+	}
+
+	isRead (userId: string) {
+		return !!this.readAt[userId]
 	}
 }
 

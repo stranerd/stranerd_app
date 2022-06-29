@@ -77,12 +77,14 @@ export const useUserClassList = (id = useAuth().id.value) => {
 		await global[id].setLoading(false)
 	}
 
+	const adminClasses = computed(() => global[id].classes.value.filter((c) => c.admins.includes(id)))
+
 	watch(() => global[id].searchValue.value, () => {
 		if (!global[id].searchValue.value) global[id].searchMode.value = false
 	})
 
 	return {
-		...global[id], search,
+		...global[id], search, adminClasses,
 		classes: computed(() => global[id].classes.value.filter((q) => q.users.members.includes(id) || q.requests.includes(id)))
 	}
 }
