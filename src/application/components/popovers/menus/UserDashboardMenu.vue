@@ -1,6 +1,6 @@
 <template>
 	<Popover>
-		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
+		<router-link class="flex gap-2 items-center border-bottom-line card-padding"
 			to="/account">
 			<div class="w-48 flex items-center gap-3">
 				<IonIcon :icon="personOutline" />
@@ -8,21 +8,21 @@
 			</div>
 		</router-link>
 		<router-link v-if="user?.isAdmin"
-			class="flex gap-4 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
+			class="flex gap-4 items-center border-bottom-line card-padding"
 			to="/admin/">
 			<div class="w-48 flex items-center gap-3">
 				<IonIcon :icon="cogOutline" />
 				<IonLabel class="font-bold">Admin</IonLabel>
 			</div>
 		</router-link>
-		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
+		<router-link class="flex gap-2 items-center border-bottom-line card-padding"
 			to="/study">
 			<div class="w-48 flex items-center gap-3">
 				<IonIcon :icon="libraryOutline" />
 				<IonLabel class="font-bold">Study</IonLabel>
 			</div>
 		</router-link>
-		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
+		<router-link class="flex gap-2 items-center border-bottom-line card-padding"
 			to="/users/leaderboard">
 			<div class="w-48 flex items-center gap-3">
 				<IonIcon :icon="podiumOutline" />
@@ -30,7 +30,7 @@
 			</div>
 		</router-link>
 		<router-link v-if="user"
-			class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
+			class="flex gap-2 items-center hover:text-secondaryText border-bottom-line card-padding"
 			to="/settings">
 			<div class="w-48 flex items-center gap-3">
 				<IonIcon :icon="settingsOutline" />
@@ -38,7 +38,7 @@
 			</div>
 		</router-link>
 		<div v-if="user"
-			class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
+			class="flex gap-2 items-center hover:text-secondaryText border-bottom-line card-padding"
 			@click="signout()">
 			<div class="w-48 flex items-center gap-3">
 				<IonIcon :icon="logOutOutline" />

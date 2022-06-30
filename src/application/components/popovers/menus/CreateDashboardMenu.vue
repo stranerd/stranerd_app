@@ -1,27 +1,27 @@
 <template>
 	<Popover>
-		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
+		<router-link class="flex gap-2 items-center border-bottom-line card-padding"
 			to="/study/flashCards/create">
 			<div class="w-48 flex items-center gap-3">
 				<IonIcon :icon="flashOutline" />
 				<IonLabel class="font-bold">Create a flashcard</IonLabel>
 			</div>
 		</router-link>
-		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
+		<router-link class="flex gap-2 items-center border-bottom-line card-padding"
 			to="/study/documents/create">
 			<div class="w-48 flex items-center gap-3">
 				<IonIcon :icon="readerOutline" />
 				<IonLabel class="font-bold">Upload a document</IonLabel>
 			</div>
 		</router-link>
-		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
+		<router-link class="flex gap-2 items-center border-bottom-line card-padding"
 			to="/study/sets/create">
 			<div class="w-48 flex items-center gap-3">
 				<IonIcon :icon="folderOutline" />
 				<IonLabel class="font-bold">Create a study folder</IonLabel>
 			</div>
 		</router-link>
-		<router-link class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
+		<router-link class="flex gap-2 items-center border-bottom-line card-padding"
 			to="/questions/create">
 			<div class="w-48 flex items-center gap-3">
 				<IonIcon :icon="helpCircleOutline" />
@@ -29,7 +29,7 @@
 			</div>
 		</router-link>
 		<router-link v-if="user?.isVerified"
-			class="flex gap-2 items-center text-gray hover:text-secondaryText border-bottom-line card-padding"
+			class="flex gap-2 items-center border-bottom-line card-padding"
 			to="/classes/create">
 			<div class="w-48 flex items-center gap-3">
 				<IonIcon :icon="peopleOutline" />

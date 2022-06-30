@@ -1,15 +1,15 @@
 <template>
-	<div class="w-full relative bg-primary  flex justify-between items-start lg:py-32 py-10 pb-20 ">
+	<div class="w-full relative  flex justify-between items-start lg:py-32 py-10 pb-20 ">
 		<div class="flex flex-col lg:flex-row justify-center items-center mx-auto max-w-[120rem] w-full px-6">
 			<div
 				class="lg:w-6/12 w-full h-auto flex flex-col lg:items-start items-center lg:text-left text-center gap-3">
 				<IonText
-					class="text-white text-xl md:text-3xl leading-6 lg:text-5xl lg:leading-[56px] lg:font-bold font-extrabold capitalize">
+					class="text-xl md:text-3xl leading-6 lg:text-5xl lg:leading-[56px] lg:font-bold font-extrabold capitalize">
 					Start studying <br>
 					better. smarter. faster. <br>
 					anytime. anywhere.
 				</IonText>
-				<IonText class=" text-xs md:text-lg w-[15rem] lg:w-full lg:text-2xl text-white ">
+				<IonText class=" text-xs md:text-lg w-[15rem] lg:w-full lg:text-2xl">
 					With Test preps, Flashcards, Notes and Expert Answers.
 				</IonText>
 				<router-link class="h-auto mx-auto lg:m-0" to="/dashboard">
@@ -18,7 +18,7 @@
 						Get Started Now
 					</IonButton>
 				</router-link>
-				<IonText class="text-white mt-8 lg:block hidden">
+				<IonText class="mt-8 lg:block hidden">
 					or download the app instead
 				</IonText>
 				<div class="lg:flex gap-4 hidden">

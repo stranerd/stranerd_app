@@ -99,17 +99,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-input {
-		--background: #{$color-newGray} !important;
-		--padding-start: 1.8rem !important;
-		--padding-end: 1.5rem !important;
-		--padding-top: .75rem !important;
-		--padding-bottom: .75rem !important;
-		--color: #{$color-mainDark} !important;
-		--placeholder-color: #{$color-mainDark} !important;
-		border-radius: 12px;
-	}
-
 	.filter {
 		padding: 1rem;
 		border-radius: 12px 0 0 12px;
@@ -125,18 +114,10 @@ export default defineComponent({
 		position: absolute;
 		width: 100%;
 		top: 100%;
-		background: $color-white;
-		border: 1px solid $color-lightGray;
 		border-radius: 0.25rem;
 
 		& > * {
 			padding: 0.5rem 1rem;
-			border-bottom: 1px solid $color-lightGray;
-		}
-
-		.isActive {
-			background-color: $color-primary;
-			color: $color-white;
 		}
 	}
 </style>

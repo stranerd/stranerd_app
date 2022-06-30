@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full bg-white pb-12 lg:pb-48">
+	<div class="w-full pb-12 lg:pb-48">
 		<div class="text-center px-3">
 			<div class="max-w-xl text-center mx-auto flex flex-col justify-center">
 				<IonText

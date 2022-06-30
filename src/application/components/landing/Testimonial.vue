@@ -1,12 +1,12 @@
 <template>
-	<div class="md:px-8 px-4 py-10 bg-white flex flex-col">
+	<div class="md:px-8 px-4 py-10 flex flex-col">
 		<IonText
 			class="font-extrabold mx-auto lg:mt-48 lg:mb-24 mt-20 mb-12 text-center lg:text-5xl text-base text-secondaryText ">
 			Made for students, loved by students
 		</IonText>
 		<div class="container mx-auto">
 			<div
-				class="bg-primary p-5 lg:p-[3.25rem] lg:rounded-[3rem] rounded-3xl text-white max-w-[99rem] lg:h-[21rem] h-[18rem] flex flex-col justify-center">
+				class="p-5 lg:p-[3.25rem] lg:rounded-[3rem] rounded-3xl max-w-[99rem] lg:h-[21rem] h-[18rem] flex flex-col justify-center">
 				<img alt="" class="object-contain h-9" src="@app/assets/images/New/comment.svg">
 				<IonText class="text-center font-bold text-xs lg:text-2xl mt-6">
 					{{ testimonies[tab].text }}
@@ -21,9 +21,8 @@
 
 			<div class="flex my-4 gap-2 justify-center">
 				<IonIcon v-for="(t, i) in testimonies.length" :key="t"
-					:class="tab === i ? 'text-white' : 'text-gray'"
 					:icon="ellipseOutline"
-					class="border border-gray rounded-full" @click="tab = i" />
+					class="rounded-full" @click="tab = i" />
 			</div>
 		</div>
 	</div>

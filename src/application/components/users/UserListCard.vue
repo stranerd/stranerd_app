@@ -1,6 +1,6 @@
 <template>
 	<router-link :to="`/users/${user.id}`"
-		class="w-full bg-white rounded-xl flex flex-col card-padding box-border">
+		class="w-full rounded-xl flex flex-col card-padding box-border">
 		<div class="items-start gap-2 flex">
 			<Avatar :id="user.id" :name="user.bio.fullName" :size="40" :src="user.bio.photo" />
 			<div class="flex flex-col justify-start items-start">
@@ -9,17 +9,17 @@
 					<Verified :verified="user.isVerified" />
 				</h2>
 				<span
-					class="py-1 px-4 rounded-full text-sm w-auto flex border-2 font-bold bg-primary text-white">
+					class="py-1 px-4 rounded-full text-sm w-auto flex border-2 font-bold">
 					{{ user.rank.id }}
 				</span>
 			</div>
 		</div>
-		<div class="text-gray flex justify-between items-center font-bold">
-			<div class="bg-light_gray rounded-full flex gap-1 items-center">
+		<div class="flex justify-between items-center font-bold">
+			<div class="rounded-full flex gap-1 items-center">
 				<IonIcon :icon="helpCircleOutline" />
 				<span>{{ formatNumber(user.meta.questions, 0) }}</span>
 			</div>
-			<div class="bg-light_gray rounded-full flex gap-1 items-center">
+			<div class="rounded-full flex gap-1 items-center">
 				<IonIcon :icon="chatboxEllipsesOutline" />
 				<span>{{ formatNumber(user.meta.answers, 0) }}</span>
 			</div>

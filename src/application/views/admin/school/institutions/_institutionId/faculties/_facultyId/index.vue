@@ -5,15 +5,15 @@
 				<span class="text-xl mr-auto uppercase">{{ faculty.name }}</span>
 				<a class="flex items-center gap-1 mr-4 text-sm"
 					@click.prevent="openDepartmentCreateModal(faculty.id)">
-					<IonIcon :icon="addOutline" class="text-green" />
+					<IonIcon :icon="addOutline" class="text-success" />
 					<IonLabel>Add Department</IonLabel>
 				</a>
 				<a class="flex items-center gap-1 mr-4 text-sm" @click.prevent="openFacultyEditModal(faculty)">
-					<IonIcon :icon="pencilOutline" class="text-orange" />
+					<IonIcon :icon="pencilOutline" class="text-warning" />
 					<IonLabel>Edit Faculty</IonLabel>
 				</a>
 				<a class="flex items-center gap-1 text-sm" @click.prevent="deleteFaculty">
-					<IonIcon :icon="trashBinOutline" class="text-red" />
+					<IonIcon :icon="trashBinOutline" class="text-danger" />
 					<IonLabel>Delete Faculty</IonLabel>
 				</a>
 			</div>

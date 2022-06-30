@@ -1,6 +1,6 @@
 <template>
-	<div class="w-full h-full bg-primary flex flex-col justify-between">
-		<div class="bg-white h-[40%] rounded-b-[35%] flex flex-col justify-center items-center gap-4">
+	<div class="w-full h-full flex flex-col justify-between">
+		<div class="h-[40%] rounded-b-[35%] flex flex-col justify-center items-center gap-4">
 			<SlideOne v-if="tab === 0" />
 			<SlideTwo v-if="tab === 1" />
 			<SlideThree v-if="tab === 2" />
@@ -18,7 +18,7 @@
 				<IonButton v-if="tab !== tabs" class="btn-outline w-full">
 					Skip
 				</IonButton>
-				<IonButton v-else class="btn-white text-secondaryText font-bold w-full">
+				<IonButton v-else class="font-bold w-full">
 					Get Started
 				</IonButton>
 			</router-link>

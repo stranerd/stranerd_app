@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full bg-white md:px-8 px-4">
+	<div class="w-full md:px-8 px-4">
 		<div class="text-center container px-3 mx-auto lg:mt-48 mt-20 ">
 			<div class="flex flex-col justify-center items-center lg:gap-6 gap-3">
 				<img alt="testprep image" src="@app/assets/images/auth/join.svg" />
@@ -12,7 +12,7 @@
 
 				<router-link class="w-full h-auto mx-auto" to="/auth/signup">
 					<IonButton
-						class="btn-primary text-white lg:w-[20rem] w-32 lg:h-20 h-12 lg:text-2xl text-sm md:text-lg block mx-auto">
+						class="lg:w-[20rem] w-32 lg:h-20 h-12 lg:text-2xl text-sm md:text-lg block mx-auto">
 						Sign Up
 					</IonButton>
 				</router-link>

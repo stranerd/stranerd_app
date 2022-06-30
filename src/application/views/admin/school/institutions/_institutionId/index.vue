@@ -5,20 +5,20 @@
 				<span class="text-xl mr-auto uppercase">{{ institution.name }}</span>
 				<a class="flex items-center gap-1 mr-4 text-sm"
 					@click.prevent="openCourseCreateModal(institution.id, null)">
-					<IonIcon :icon="addOutline" class="text-green" />
+					<IonIcon :icon="addOutline" class="text-success" />
 					<IonLabel>Add General Course</IonLabel>
 				</a>
 				<a v-if="!institution.isGateway" class="flex items-center gap-1 mr-4 text-sm"
 					@click.prevent="openFacultyCreateModal(institution.id)">
-					<IonIcon :icon="addOutline" class="text-green" />
+					<IonIcon :icon="addOutline" class="text-success" />
 					<IonLabel>Add Faculty</IonLabel>
 				</a>
 				<a class="flex items-center gap-1 mr-4 text-sm" @click.prevent="openInstitutionEditModal(institution)">
-					<IonIcon :icon="pencilOutline" class="text-orange" />
+					<IonIcon :icon="pencilOutline" class="text-warning" />
 					<IonLabel>Edit Inst.</IonLabel>
 				</a>
 				<a class="flex items-center gap-1 text-sm" @click.prevent="deleteInstitution">
-					<IonIcon :icon="trashBinOutline" class="text-red" />
+					<IonIcon :icon="trashBinOutline" class="text-danger" />
 					<IonLabel>Delete Inst.</IonLabel>
 				</a>
 			</div>

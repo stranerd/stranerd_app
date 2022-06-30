@@ -84,10 +84,6 @@
 		@apply flex flex-col lg:gap-8;
 	}
 
-	.blueTop {
-		@apply w-full flex items-center md:mb-4 justify-center;
-	}
-
 	.nav-scroll {
 		@apply text-secondaryText text-sm items-center md:justify-between flex gap-2 font-semibold overflow-x-auto;
 	}

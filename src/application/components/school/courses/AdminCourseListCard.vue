@@ -2,11 +2,11 @@
 	<IonItem>
 		<IonLabel class="capitalize">{{ course.name }}</IonLabel>
 		<a class="flex items-center gap-2 mr-4" @click.prevent="openCourseEditModal(course)">
-			<IonIcon :icon="pencilOutline" class="text-orange" />
+			<IonIcon :icon="pencilOutline" class="text-warning" />
 			<IonLabel>Edit</IonLabel>
 		</a>
 		<a class="flex items-center gap-2" @click.prevent="deleteCourse(course)">
-			<IonIcon :icon="trashBinOutline" class="text-red" />
+			<IonIcon :icon="trashBinOutline" />
 			<IonLabel>Delete</IonLabel>
 		</a>
 		<PageLoading v-if="loading" />

@@ -6,7 +6,7 @@
 			<DocumentListCard v-for="document in filtered" :key="document.hash" :document="document" />
 		</div>
 		<div v-if="hasMore && !sliced"
-			class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
+			class="text-center py-8 text-lg w-full font-semibold cursor-pointer">
 			<a @click.prevent="fetchOlderDocuments">Load More</a>
 		</div>
 	</div>

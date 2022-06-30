@@ -1,12 +1,12 @@
 <template>
 	<form @submit.prevent="submit">
 		<div class="mb-4">
-			<IonInput v-model="factory.title" class="!h-12 text-left bg-new_gray" placeholder="Enter Document Title" />
+			<IonInput v-model="factory.title" class="!h-12 text-left" placeholder="Enter Document Title" />
 			<DisplayError :error="factory.errors.title" />
 		</div>
 
 		<div class="mb-4">
-			<IonInput v-model="factory.content" class="!h-12 text-left bg-new_gray"
+			<IonInput v-model="factory.content" class="!h-12 text-left"
 				placeholder="Add a short description" />
 			<DisplayError :error="factory.errors.content" />
 		</div>

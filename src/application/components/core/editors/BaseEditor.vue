@@ -141,17 +141,17 @@ export default defineComponent({
 
 	.ql-editor:focus {
 		outline: 0;
-		// border: 0px solid blue;
+		// border: 0px solid $color-info;
 		// box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 	}
 
 	.is-valid .ql-editor:focus {
-		//border: 0px solid green;
+		//border: 0px solid $color-success;
 		// box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
 	}
 
 	.is-invalid .ql-editor:focus {
-		//border: 0px solid red;
+		//border: 0px solid $color-danger;
 		// box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
 	}
 

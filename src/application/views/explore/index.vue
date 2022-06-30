@@ -9,7 +9,7 @@
 						</IonText>
 					</div>
 					<router-link :to="`/explore/preps`"
-						class="text-primary flex items-center font-bold">
+						class="flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>
@@ -23,7 +23,7 @@
 						</IonText>
 					</div>
 					<router-link :to="`/explore/flashCards`"
-						class="text-primary flex items-center font-bold">
+						class="flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>
@@ -37,7 +37,7 @@
 						</IonText>
 					</div>
 					<router-link :to="`/explore/documents`"
-						class="text-primary flex items-center font-bold">
+						class="flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>

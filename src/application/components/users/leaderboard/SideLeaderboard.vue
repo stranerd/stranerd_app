@@ -25,7 +25,7 @@
 					<span>{{ person.bio.fullName }}</span>
 					<Verified :verified="person.isVerified" />
 				</span>
-				<span class="font-bold text-primary ml-auto">
+				<span class="font-bold ml-auto">
 					{{ formatNumber(person.account.rankings[time], 2) }}
 				</span>
 			</router-link>

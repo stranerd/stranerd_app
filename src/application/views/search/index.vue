@@ -10,7 +10,7 @@
 						</div>
 
 						<router-link :to="`/search/questions?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
+							class="flex items-center font-bold">
 							<span>view all</span>
 						</router-link>
 					</div>
@@ -22,7 +22,7 @@
 							<IonText class="text-xl font-bold">TestPreps</IonText>
 						</div>
 						<router-link :to="`/search/preps?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
+							class="flex items-center font-bold">
 							<span>view all</span>
 						</router-link>
 					</div>
@@ -35,7 +35,7 @@
 						</div>
 
 						<router-link :to="`/search/flashCards?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
+							class="flex items-center font-bold">
 							<span>view all</span>
 						</router-link>
 					</div>
@@ -47,7 +47,7 @@
 							<IonText class="text-xl font-bold">Documents</IonText>
 						</div>
 						<router-link :to="`/search/documents?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
+							class="flex items-center font-bold">
 							<span>view all</span>
 						</router-link>
 					</div>
@@ -60,7 +60,7 @@
 						</div>
 
 						<router-link :to="`/search/sets?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
+							class="flex items-center font-bold">
 							<span>view all</span>
 						</router-link>
 					</div>
@@ -73,7 +73,7 @@
 						</div>
 
 						<router-link :to="`/search/nerds?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
+							class="flex items-center font-bold">
 							<span>view all</span>
 						</router-link>
 					</div>

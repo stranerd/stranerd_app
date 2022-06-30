@@ -1,5 +1,5 @@
 <template>
-	<IonIcon :icon="chatboxEllipses" class="text-cyan" />
+	<IonIcon :icon="chatboxEllipses" />
 	<IonText class="text-xl text-secondaryText font-bold">
 		Expert Answers
 	</IonText>

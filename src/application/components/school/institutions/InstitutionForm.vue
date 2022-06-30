@@ -49,15 +49,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-input, ion-textarea {
-		background-color: $color-newGray;
-		border-radius: 0.25rem !important;
-	}
-
-	label {
-		font-size: 1.2rem;
-		font-weight: 500;
-	}
-</style>

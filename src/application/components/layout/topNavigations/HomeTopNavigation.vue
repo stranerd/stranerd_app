@@ -4,7 +4,7 @@
 			<router-link class="hidden lg:block" to="/">
 				<Logo :secondary="true" />
 			</router-link>
-			<div class="gap-8 lg:flex hidden items-center text-gray">
+			<div class="gap-8 lg:flex hidden items-center">
 				<router-link class="link-custom px-4" to="/">
 					Home
 				</router-link>
@@ -18,10 +18,10 @@
 				<Search class="flex-grow min-w-[20rem]" />
 			</div>
 			<div class="gap-8 lg:flex hidden">
-				<router-link class="btn border border-faded_gray text-primary !px-10 rounded-xl" to="/auth/signup">
+				<router-link class="btn !px-10 rounded-xl" to="/auth/signup">
 					Sign Up
 				</router-link>
-				<router-link class="btn btn-custom text-white bg-primary !px-10 rounded-xl"
+				<router-link class="btn !px-10 rounded-xl"
 					to="/auth/signin">
 					Log In
 				</router-link>

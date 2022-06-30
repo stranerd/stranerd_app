@@ -14,7 +14,7 @@
 					</span>
 				</template>
 			</Tag>
-			<div class="flex items-center text-gray gap-3">
+			<div class="flex items-center gap-3">
 				<Avatar v-if="document.user.id !== id" :id="document.user.id" :name="document.user.bio.fullName"
 					:size="24"
 					:src="document.user.bio.photo" />

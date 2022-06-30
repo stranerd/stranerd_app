@@ -2,7 +2,7 @@
 	<footer>
 		<div class="w-full bg-secondaryText md:px-8 px-4">
 			<div class="container mx-auto px-3 py-10 lg:py-24">
-				<div class="text-white">
+				<div>
 					<div class="flex items-stretch flex-wrap lg:flex-nowrap gap-10 lg:gap-36 xl:gap-48 my-10">
 						<div
 							class="w-full md:w-1/2 flex items-stretch md:flex-auto flex-none gap-10 lg:gap-36 xl:gap-48">

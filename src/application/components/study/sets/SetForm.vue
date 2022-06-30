@@ -1,7 +1,7 @@
 <template>
 	<form class="flex flex-col gap-4 text-center justify-center items-center" @submit.prevent="submit">
-		<div class="bg-light_gray w-full rounded-md flex items-center px-4">
-			<IonText class="text-primary font-bold w-12">
+		<div class="w-full rounded-md flex items-center px-4">
+			<IonText class="font-bold w-12">
 				TITLE
 			</IonText>
 			<IonInput v-model="factory.name"
@@ -60,21 +60,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-radio {
-		--color: #{$color-iconInactive} !important;
-		--color-checked: #{$color-primary} !important;
-	}
-
-	ion-label {
-		--color: #{$color-iconInactive} !important;
-	}
-
-	ion-label {
-		@media (max-width: 640px) {
-			font-size: 12px !important;
-		}
-	}
-</style>
-
