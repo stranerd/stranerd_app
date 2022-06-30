@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col card-padding !px-0">
+	<div class="flex flex-col card-padding !gap-4 !px-0">
 		<div class="flex gap-4 items-center cursor-pointer card-padding !py-0" @click="show = !show">
 			<Avatar :name="classInst.name" :size="36" :src="classInst.photo" />
 			<IonText class="font-bold capitalize truncate w-full">{{ classInst.name }}</IonText>
@@ -7,7 +7,7 @@
 				<IonIcon :class="{'rotate-180': show}" :icon="chevronDownOutline" class="transition-all duration-300" />
 			</span>
 		</div>
-		<div v-if="show" class="flex flex-col gap-2 text-secondaryText">
+		<div v-if="show" class="flex flex-col text-secondaryText">
 			<transition-group appear name="fade">
 				<router-link v-for="{ name, path, icon } in [
 						{ name: 'Announcements', path: 'announcements', icon: megaphoneOutline },
@@ -19,7 +19,7 @@
 						{ name: 'Library', path: 'library', icon: libraryOutline },
 						{ name: 'About', path: '', icon: informationCircleOutline }
 					]" :key="path" :to="`/classes/${classInst.id}/${path}`"
-					class="flex gap-4 items-center card-padding !py-2" exact-active-class="hasBg">
+					class="flex gap-4 items-center px-6 py-3" exact-active-class="hasBg">
 					<IonIcon :icon="icon" />
 					<IonText>{{ name }}</IonText>
 				</router-link>
@@ -36,7 +36,6 @@ import {
 	calendarOutline,
 	chatbubblesOutline,
 	chevronDownOutline,
-	chevronUpOutline,
 	informationCircleOutline,
 	libraryOutline,
 	listOutline,
@@ -55,8 +54,7 @@ export default defineComponent({
 	setup () {
 		const show = ref(false)
 		return {
-			show, chevronDownOutline, chevronUpOutline,
-			chatbubblesOutline, informationCircleOutline, libraryOutline,
+			show, chevronDownOutline, chatbubblesOutline, informationCircleOutline, libraryOutline,
 			megaphoneOutline, peopleOutline, listOutline, calendarOutline, calendarClearOutline
 		}
 	}

@@ -17,7 +17,7 @@
 				class="flex gap-4 items-center text-sm">
 				<IonText class="w-full truncate">
 					<span v-if="chatMeta.isClasses(chatMeta)">
-						{{ chatMeta.last.from.id === id ? 'You' : chatMeta.last.from.bio.firstName }} :&nbsp;
+						{{ chatMeta.last.from.id === id ? 'You' : chatMeta.last.from.bio.firstName }}:&nbsp;
 					</span>
 					{{ chatMeta.last.media ? 'Shared a file' : chatMeta.last.body }}
 				</IonText>

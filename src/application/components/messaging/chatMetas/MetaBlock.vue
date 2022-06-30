@@ -1,8 +1,10 @@
 <template>
-	<div class="flex flex-col">
-		<div class="flex card-padding gap-4 items-center" @click="show = !show">
+	<div class="flex flex-col card-padding !gap-4 !px-0">
+		<div class="flex card-padding !py-0 !gap-4 items-center" @click="show = !show">
 			<IonText class="font-bold capitalize truncate w-full">{{ title }}</IonText>
-			<IonIcon :icon="show ? chevronUpOutline : chevronDownOutline" />
+			<span>
+				<IonIcon :class="{'rotate-180': show}" :icon="chevronDownOutline" class="transition-all duration-300" />
+			</span>
 		</div>
 		<div v-if="show" class="flex flex-col">
 			<ChatMetasListCard v-for="chatMeta in metas" :key="chatMeta.hash" :chatMeta="chatMeta" />
@@ -13,7 +15,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue'
 import ChatMetasListCard from '@app/components/messaging/chatMetas/ChatMetasListCard.vue'
-import { chevronDownOutline, chevronUpOutline } from 'ionicons/icons'
+import { chevronDownOutline } from 'ionicons/icons'
 import { ChatMetaEntity } from '@modules/messaging'
 
 export default defineComponent({
@@ -36,7 +38,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const show = ref(props.open || false)
-		return { show, chevronUpOutline, chevronDownOutline }
+		return { show, chevronDownOutline }
 	}
 })
 </script>

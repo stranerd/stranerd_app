@@ -9,33 +9,27 @@
 				class="border-bottom-line py-6" />
 		</router-link>
 		<MetaBlock v-if="unRead.length" :metas="unRead" :open="true" class="border-bottom-line" title="Unread" />
-		<ClassesGroupsList v-for="group in groups" :key="group.key" :classId="group.key" :metas="group.values"
+		<MetaBlock v-for="group in groups" :key="group.key" :metas="group.values"
+			:open="$route.query.classId === group.key"
+			:title="classes.find((c) => c.id === group.key)?.name ?? 'Class'"
 			class="border-bottom-line" />
 		<MetaBlock :metas="connects" class="border-bottom-line" title="Student Connect" />
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import ClassesGroupsList from '@app/components/messaging/chatMetas/ClassesGroupsList.vue'
+import { defineComponent } from 'vue'
 import MetaBlock from '@app/components/messaging/chatMetas/MetaBlock.vue'
 import { useChatMetas } from '@app/composable/messaging/chatMetas'
-import { groupBy } from '@utils/commons'
-import { useAuth } from '@app/composable/auth/auth'
+import { useUserClassList } from '@app/composable/users/users/classes'
 
 export default defineComponent({
 	name: 'ChatMetasList',
-	components: { ClassesGroupsList, MetaBlock },
+	components: { MetaBlock },
 	setup () {
-		const { id } = useAuth()
-		const { meta, error, loading, search } = useChatMetas()
-		const groups = computed(() => groupBy(meta.value.filter((m) => m.isClasses(m)), (m) => {
-			if (m.isClasses(m)) return m.data.group.classId
-			return ''
-		}))
-		const connects = computed(() => meta.value.filter((m) => m.isPersonal(m)))
-		const unRead = computed(() => meta.value.filter((m) => m.hasUnRead(id.value)))
-		return { search, groups, connects, unRead, error, loading }
+		const { classes } = useUserClassList()
+		const { groups, connects, unRead, error, loading, search } = useChatMetas()
+		return { classes, search, groups, connects, unRead, error, loading }
 	}
 })
 </script>

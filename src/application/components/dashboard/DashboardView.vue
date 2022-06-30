@@ -11,14 +11,7 @@
 			<IonIcon :icon="linkOutline" />
 			<IonText>Stranerd Connect</IonText>
 		</router-link>
-		<div class="card-padding flex items-center justify-between border-bottom-line">
-			<IonText class="font-bold">Recent</IonText>
-			<IonIcon :icon="chevronDownOutline" />
-		</div>
-		<div class="card-padding flex items-center justify-between border-bottom-line">
-			<IonText class="font-bold">Direct messages</IonText>
-			<IonIcon :icon="chevronDownOutline" />
-		</div>
+		<DashboardChatMetasList />
 		<ClassesList :hideSearch="true" />
 	</div>
 </template>
@@ -26,15 +19,16 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ClassesList from '@app/components/classes/classes/ClassesList.vue'
-import { arrowForwardOutline, chevronDownOutline, linkOutline } from 'ionicons/icons'
+import DashboardChatMetasList from '@app/components/messaging/chatMetas/DashboardChatMetasList.vue'
+import { arrowForwardOutline, linkOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'DashboardView',
-	components: { ClassesList },
+	components: { ClassesList, DashboardChatMetasList },
 	setup () {
 		const { user } = useAuth()
-		return { user, arrowForwardOutline, linkOutline, chevronDownOutline }
+		return { user, arrowForwardOutline, linkOutline }
 	}
 })
 </script>

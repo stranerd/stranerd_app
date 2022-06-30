@@ -3,7 +3,7 @@ import { useAuth } from '@app/composable/auth/auth'
 import { ChatMetaEntity, ChatMetasUseCases, ChatsUseCases } from '@modules/messaging'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { AudioSounds, useAudioPlayer } from '@app/composable/core/audios'
-import { addToArray } from '@utils/commons'
+import { addToArray, groupBy } from '@utils/commons'
 
 const player = useAudioPlayer(AudioSounds.CHAT)
 
@@ -66,7 +66,12 @@ export const useChatMetas = () => {
 		await global[userId].listener.close()
 	})
 	const filteredMeta = computed(() => global[userId].meta.value.filter((m) => m.search(global[userId].search.value)))
-	return { ...global[userId], meta: filteredMeta }
+	const groups = computed(() => groupBy(global[userId].meta.value.filter((m) => m.isClasses(m)), (m) => {
+		return m.isClasses(m) ? m.data.group.classId : ''
+	}))
+	const connects = computed(() => global[userId].meta.value.filter((m) => m.isPersonal(m)))
+	const unRead = computed(() => global[userId].meta.value.filter((m) => m.hasUnRead(id.value)))
+	return { ...global[userId], groups, connects, unRead, meta: filteredMeta }
 }
 
 const metaGlobal = {} as Record<string, {
