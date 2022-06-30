@@ -1,6 +1,6 @@
 <template>
-	<div class="flex flex-col">
-		<div class="flex gap-4 items-center cursor-pointer card-padding" @click="show = !show">
+	<div class="flex flex-col card-padding !px-0">
+		<div class="flex gap-4 items-center cursor-pointer card-padding !py-0" @click="show = !show">
 			<Avatar :name="classInst.name" :size="36" :src="classInst.photo" />
 			<IonText class="font-bold capitalize truncate w-full">{{ classInst.name }}</IonText>
 			<span>

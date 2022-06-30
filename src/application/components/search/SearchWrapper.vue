@@ -9,6 +9,7 @@
 					<router-link :to="`/search/flashCards?search=${searchTerm}`">FlashCards</router-link>
 					<router-link :to="`/search/documents?search=${searchTerm}`">Documents</router-link>
 					<router-link :to="`/search/users?search=${searchTerm}`">Students</router-link>
+					<router-link :to="`/search/classes?search=${searchTerm}`">Classes</router-link>
 				</div>
 			</div>
 			<div class="py-4">
@@ -20,7 +21,7 @@
 						<IonIcon :icon="closeOutline" @click.prevent="clearFromRecent(r)" />
 					</div>
 				</div>
-				<slot v-else :answers="answers" :count="count" :documents="documents" :fetched="fetched"
+				<slot v-else :classes="classes" :count="count" :documents="documents" :fetched="fetched"
 					:flashCards="flashCards" :questions="questions" :searchTerm="searchTerm" :users="users" />
 			</div>
 		</div>

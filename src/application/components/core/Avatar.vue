@@ -1,6 +1,5 @@
 <template>
-	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}/`"
-		class="rounded-full relative self-start">
+	<component :is="id ? 'router-link' : 'span'" :to="`/users/${id}/`" class="rounded-full relative">
 		<span v-if="!src && name" :style="`width: ${size}px; height: ${size}px; object-fit: cover;`"
 			class="flex items-center justify-center uppercase bg-secondaryText text-primaryText font-semibold rounded-full">
 			<span :style="`font-size: ${size/2}px;line-height: 1em`">{{ name[0] }}</span>
@@ -13,8 +12,9 @@
 			alt=""
 			class="!max-w-[1920px] rounded-full bg-secondaryText"
 		>
-		<FileInput v-if="editable" accept="image/*"
-			class="rounded-full absolute h-6 w-6 -right-1 bottom-0 bg-primaryBg border border-primaryText text-primaryText flex items-center justify-center"
+		<FileInput v-if="editable" :style="`left: calc(${size}px - 1.75rem)`"
+			accept="image/*"
+			class="rounded-full absolute h-7 w-7 p-1 bottom-0 bg-primaryBg border border-primaryText text-primaryText flex items-center justify-center"
 			@files="catchPhoto">
 			<IonIcon :icon="cameraOutline" />
 		</FileInput>

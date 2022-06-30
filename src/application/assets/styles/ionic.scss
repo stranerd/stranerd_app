@@ -37,8 +37,9 @@ ion-popover {
 	--height: auto;
 	--width: 100vw;
 	@media (min-width: $lg) {
-		--width: 480px !important;
+		--width: 600px !important;
 		--border-radius: 1rem;
+		--margin: auto;
 	}
 
 
@@ -174,11 +175,9 @@ ion-input.invalid::after {
 
 ion-button {
 	--box-shadow: none;
-	box-shadow: none;
 	--border-radius: 0.5rem;
-	border-radius: 0.5rem;
 	font-weight: 500;
-	line-height: 1.2em;
+	line-height: 1em;
 	text-transform: capitalize;
 	letter-spacing: 0.02rem;
 	margin: 0;

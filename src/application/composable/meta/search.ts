@@ -1,18 +1,19 @@
 import { computed, onMounted, ref } from 'vue'
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
-import { AnswerEntity, QuestionEntity, QuestionsUseCases } from '@modules/questions'
+import { QuestionEntity, QuestionsUseCases } from '@modules/questions'
 import { UserEntity, UsersUseCases } from '@modules/users'
 import { useRoute, useRouter } from 'vue-router'
 import { DocumentEntity, DocumentsUseCases, FlashCardEntity, FlashCardsUseCases } from '@modules/study'
 import { storage } from '@utils/storage'
+import { ClassEntity, ClassesUseCases } from '@modules/classes'
 
 const global = {
 	searchTerm: ref(''),
 	fetched: ref(false),
 	res: {
 		questions: ref([] as QuestionEntity[]),
-		answers: ref([] as AnswerEntity[]),
 		users: ref([] as UserEntity[]),
+		classes: ref([] as ClassEntity[]),
 		documents: ref([] as DocumentEntity[]),
 		flashCards: ref([] as FlashCardEntity[])
 	},
@@ -28,7 +29,6 @@ export const useSearch = () => {
 	const route = useRoute()
 
 	global.searchTerm.value = route.query.search as string ?? ''
-	if (!global.searchTerm.value) global.fetched.value = false
 
 	const getRecentSearches = async () => {
 		const searches = await storage.get(SEARCH_STORAGE_KEY) ?? '[]'
@@ -53,7 +53,10 @@ export const useSearch = () => {
 
 	const navigateToSearch = async () => {
 		const val = global.searchTerm.value.trim()
-		if (!route.path.startsWith('/search')) await router.push(`/search?search=${val}`)
+		await router.push({
+			path: route.path.startsWith('/search') ? route.path : '/search',
+			query: { search: val }
+		})
 	}
 
 	const search = async () => {
@@ -64,7 +67,7 @@ export const useSearch = () => {
 			try {
 				await global.setLoading(true)
 				const searchObj = {
-					questions: QuestionsUseCases, users: UsersUseCases,
+					questions: QuestionsUseCases, users: UsersUseCases, classes: ClassesUseCases,
 					flashCards: FlashCardsUseCases, documents: DocumentsUseCases
 				}
 				await Promise.all(
@@ -88,10 +91,7 @@ export const useSearch = () => {
 		}
 	}
 
-	const count = computed(() => {
-		return Object.values(global.res).map((val) => val.value.length)
-			.reduce((acc, cur) => acc + cur, 0) - global.res.answers.value.length
-	})
+	const count = computed(() => Object.values(global.res).map((val) => val.value.length).reduce((acc, cur) => acc + cur, 0))
 
 	onMounted(async () => {
 		await getRecentSearches()

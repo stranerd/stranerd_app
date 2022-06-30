@@ -1,7 +1,5 @@
-import { modal, popover } from '@app/composable/core/modal'
+import { modal } from '@app/composable/core/modal'
 import CreateReport from '@app/components/modals/reports/CreateReport.vue'
-import CreateDashboardMenu from '@app/components/popovers/menus/CreateDashboardMenu.vue'
-import UserDashboardMenu from '@app/components/popovers/menus/UserDashboardMenu.vue'
 import CreateTestPrep from '@app/components/modals/study/CreateTestPrep.vue'
 import EditTestPrep from '@app/components/modals/study/EditTestPrep.vue'
 import CreateSet from '@app/components/modals/study/CreateSet.vue'
@@ -65,7 +63,4 @@ export const allModals = [
 	useClassModal, useSchoolModal, useUserModal, useInteractionModal
 ]
 
-const MenuPopover = popover.register('Menu', { CreateDashboardMenu, UserDashboardMenu })
-
-export const useMenuPopover = () => MenuPopover
-export const allPopovers = [useMenuPopover]
+export const allPopovers = [] as typeof allModals

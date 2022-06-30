@@ -1,7 +1,7 @@
 <template>
 	<SearchWrapper>
 		<template
-			v-slot:default="{ count, searchTerm, documents, flashCards, questions, users }">
+			v-slot:default="{ count, searchTerm, classes, documents, flashCards, questions, users }">
 			<div class="flex flex-col">
 				<div v-if="questions.length" class="border-bottom-line py-6">
 					<div class="w-full flex justify-between items-center px-4 lg:px-0 mb-4">
@@ -39,6 +39,15 @@
 					</div>
 					<SearchUsersList :sliced="true" :users="users" />
 				</div>
+				<div v-if="classes.length" class="border-bottom-line py-6">
+					<div class="w-full flex justify-between items-center px-4 lg:px-0 mb-4">
+						<IonText class="font-bold">Classes</IonText>
+						<router-link :to="`/search/classes?search=${searchTerm}`" class="text-info">
+							view all
+						</router-link>
+					</div>
+					<SearchClassesList :classes="classes" :sliced="true" />
+				</div>
 				<EmptyState v-if="!count" info="No results found." />
 			</div>
 		</template>
@@ -52,16 +61,14 @@ import SearchDocumentsList from '@app/components/study/documents/SearchDocuments
 import SearchFlashCardsList from '@app/components/study/flashCards/SearchFlashCardsList.vue'
 import SearchQuestionsList from '@app/components/questions/questions/SearchQuestionsList.vue'
 import SearchUsersList from '@app/components/users/SearchUsersList.vue'
+import SearchClassesList from '@app/components/classes/classes/SearchClassesList.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'Search',
 	components: {
-		SearchWrapper,
-		SearchDocumentsList,
-		SearchFlashCardsList,
-		SearchUsersList,
-		SearchQuestionsList
+		SearchWrapper, SearchDocumentsList, SearchFlashCardsList,
+		SearchUsersList, SearchQuestionsList, SearchClassesList
 	},
 	setup () {
 		useRouteMeta('Search', { back: true })

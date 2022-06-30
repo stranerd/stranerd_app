@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-primaryBg text-primaryText flex flex-col items-center gap-8">
+	<div class="bg-headerBg text-headerText flex flex-col items-center gap-8">
 		<img alt="logo" class="mb-4" src="@/assets/images/logo/logo.svg">
 		<router-link
 			v-for="{ path, icon, iconOutline } in [
