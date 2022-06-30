@@ -30,12 +30,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-input {
-		--padding-top: 0.5rem !important;
-		--padding-bottom: 0.5rem !important;
-		--padding-left: 0 !important;
-		--padding-right: 0 !important;
-	}
-</style>

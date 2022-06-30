@@ -1,9 +1,7 @@
 <template>
-	<div>
+	<div class="showcase-flex">
 		<EmptyState v-if="filtered.length === 0" info="No results found." />
-		<div class="showcase">
-			<QuestionListCard v-for="question in filtered" :key="question.hash" :question="question" />
-		</div>
+		<QuestionListCard v-for="question in filtered" :key="question.hash" :question="question" />
 	</div>
 </template>
 

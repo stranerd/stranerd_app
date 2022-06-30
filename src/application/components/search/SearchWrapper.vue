@@ -1,30 +1,27 @@
 <template>
 	<DefaultLayout>
-		<div class="h-full w-full lg:w-8/12 mx-auto lg:mt-6">
-			<div class="rounded-xl px-4 pt-4 flex flex-col">
+		<div>
+			<div class="rounded-xl px-4 pt-4 lg:p-0 flex flex-col gap-4">
 				<Search />
-				<div class="nav-scroll mt-4">
+				<div class="nav-scroll">
 					<router-link :to="`/search?search=${searchTerm}`">All</router-link>
-					<router-link :to="`/search/preps?search=${searchTerm}`">TestPreps</router-link>
-					<router-link :to="`/search/documents?search=${searchTerm}`">Documents</router-link>
-					<router-link :to="`/search/flashCards?search=${searchTerm}`">FlashCards</router-link>
-					<router-link :to="`/search/sets?search=${searchTerm}`">Folders</router-link>
-					<router-link :to="`/search/nerds?search=${searchTerm}`">Nerds</router-link>
 					<router-link :to="`/search/questions?search=${searchTerm}`">Questions</router-link>
+					<router-link :to="`/search/flashCards?search=${searchTerm}`">FlashCards</router-link>
+					<router-link :to="`/search/documents?search=${searchTerm}`">Documents</router-link>
+					<router-link :to="`/search/users?search=${searchTerm}`">Students</router-link>
 				</div>
 			</div>
-			<div class="md:mt-6 md:px-4 lg:px-0">
+			<div class="py-4">
 				<BlockLoading v-if="loading" />
-				<div v-else-if="!fetched" class="flex flex-col gap-4 max-w-[500px] mx-auto p-4 md:p-0">
-					<div v-for="r in recent" :key="r" class="flex items-center gap-4">
-						<IonIcon :icon="closeOutline" @click="clearFromRecent(r)" />
-						<IonText class="w-full text-xl truncate">{{ r }}</IonText>
-						<IonIcon :icon="arrowRedoOutline" @click="() => {searchTerm = r; search()}" />
+				<div v-else-if="!fetched" class="flex flex-col">
+					<div v-for="r in recent" :key="r" class="flex p-4 items-center gap-4 text-xl">
+						<IonIcon :icon="searchOutline" @click="() => {searchTerm = r; search()}" />
+						<IonText class="w-full truncate" @click="() => {searchTerm = r; search()}">{{ r }}</IonText>
+						<IonIcon :icon="closeOutline" @click.prevent="clearFromRecent(r)" />
 					</div>
 				</div>
 				<slot v-else :answers="answers" :count="count" :documents="documents" :fetched="fetched"
-					:flashCards="flashCards" :questions="questions" :searchTerm="searchTerm"
-					:sets="sets" :testPreps="testPreps" :users="users" />
+					:flashCards="flashCards" :questions="questions" :searchTerm="searchTerm" :users="users" />
 			</div>
 		</div>
 	</DefaultLayout>
@@ -34,7 +31,7 @@
 import { defineComponent } from 'vue'
 import { useSearch } from '@app/composable/meta/search'
 import Search from '@app/components/search/Search.vue'
-import { arrowRedoOutline, closeOutline } from 'ionicons/icons'
+import { closeOutline, searchOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'SearchWrapper',
@@ -42,7 +39,7 @@ export default defineComponent({
 	setup () {
 		return {
 			...useSearch(),
-			closeOutline, arrowRedoOutline
+			closeOutline, searchOutline
 		}
 	}
 })

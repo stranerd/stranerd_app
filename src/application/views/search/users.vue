@@ -1,7 +1,7 @@
 <template>
 	<SearchWrapper>
-		<template v-slot:default="{ testPreps }">
-			<SearchTestPrepsList :testPreps="testPreps" />
+		<template v-slot:default="{ users }">
+			<SearchUsersList :users="users" />
 		</template>
 	</SearchWrapper>
 </template>
@@ -9,14 +9,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import SearchWrapper from '@app/components/search/SearchWrapper.vue'
-import SearchTestPrepsList from '@app/components/study/testPreps/SearchTestPrepsList.vue'
+import SearchUsersList from '@app/components/users/SearchUsersList.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
-	name: 'SearchPreps',
-	components: { SearchWrapper, SearchTestPrepsList },
+	name: 'SearchUsers',
+	components: { SearchWrapper, SearchUsersList },
 	setup () {
-		useRouteMeta('Search Preps', { back: true })
+		useRouteMeta('Search Nerds', { back: true })
 	}
 })
 </script>

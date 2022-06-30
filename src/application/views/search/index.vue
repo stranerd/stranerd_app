@@ -1,80 +1,40 @@
 <template>
 	<SearchWrapper>
 		<template
-			v-slot:default="{ count, searchTerm, testPreps, documents, flashCards, sets, questions, users }">
-			<div class="py-4 md:py-0 flex flex-col gap-4 md:gap-6">
-				<div v-if="questions.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-secondaryText flex items-center">
-							<IonText class="text-xl font-bold">Questions</IonText>
-						</div>
-
-						<router-link :to="`/search/questions?search=${searchTerm}`"
-							class="flex items-center font-bold">
-							<span>view all</span>
+			v-slot:default="{ count, searchTerm, documents, flashCards, questions, users }">
+			<div class="flex flex-col">
+				<div v-if="questions.length" class="border-bottom-line py-6">
+					<div class="w-full flex justify-between items-center px-4 lg:px-0 mb-4">
+						<IonText class="font-bold">Questions</IonText>
+						<router-link :to="`/search/questions?search=${searchTerm}`" class="text-info">
+							view all
 						</router-link>
 					</div>
 					<SearchQuestionsList :questions="questions" :sliced="true" />
 				</div>
-				<div v-if="testPreps.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-secondaryText flex items-center">
-							<IonText class="text-xl font-bold">TestPreps</IonText>
-						</div>
-						<router-link :to="`/search/preps?search=${searchTerm}`"
-							class="flex items-center font-bold">
-							<span>view all</span>
-						</router-link>
-					</div>
-					<SearchTestPrepsList :sliced="true" :testPreps="testPreps" />
-				</div>
-				<div v-if="flashCards.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-secondaryText flex items-center">
-							<IonText class="text-xl font-bold">FlashCards</IonText>
-						</div>
-
-						<router-link :to="`/search/flashCards?search=${searchTerm}`"
-							class="flex items-center font-bold">
-							<span>view all</span>
+				<div v-if="flashCards.length" class="border-bottom-line py-6">
+					<div class="w-full flex justify-between items-center px-4 lg:px-0 mb-4">
+						<IonText class="font-bold">Flashcards</IonText>
+						<router-link :to="`/search/flashCards?search=${searchTerm}`" class="text-info">
+							view all
 						</router-link>
 					</div>
 					<SearchFlashCardsList :flashCards="flashCards" :sliced="true" />
 				</div>
-				<div v-if="documents.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-secondaryText flex items-center">
-							<IonText class="text-xl font-bold">Documents</IonText>
-						</div>
-						<router-link :to="`/search/documents?search=${searchTerm}`"
-							class="flex items-center font-bold">
-							<span>view all</span>
+				<div v-if="documents.length" class="border-bottom-line py-6">
+					<div class="w-full flex justify-between items-center px-4 lg:px-0 mb-4">
+						<IonText class="font-bold">Documents</IonText>
+						<router-link :to="`/search/documents?search=${searchTerm}`" class="text-info">
+							view all
 						</router-link>
 					</div>
 					<SearchDocumentsList :documents="documents" :sliced="true" />
 				</div>
-				<div v-if="sets.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-secondaryText flex items-center">
-							<IonText class="text-xl font-bold">Folders</IonText>
-						</div>
-
-						<router-link :to="`/search/sets?search=${searchTerm}`"
-							class="flex items-center font-bold">
-							<span>view all</span>
-						</router-link>
-					</div>
-					<SearchSetsList :sets="sets" :sliced="true" />
-				</div>
-				<div v-if="users.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-secondaryText flex items-center">
-							<IonText class="text-xl font-bold">Nerds</IonText>
-						</div>
-
-						<router-link :to="`/search/nerds?search=${searchTerm}`"
-							class="flex items-center font-bold">
-							<span>view all</span>
+				<div v-if="users.length" class="border-bottom-line py-6">
+					<div class="w-full flex justify-between items-center px-4 lg:px-0 mb-4">
+						<IonText class="font-bold">Students</IonText>
+						<router-link :to="`/search/users?search=${searchTerm}`" class="text-info">
+							view all
 						</router-link>
 					</div>
 					<SearchUsersList :sliced="true" :users="users" />
@@ -88,10 +48,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import SearchWrapper from '@app/components/search/SearchWrapper.vue'
-import SearchTestPrepsList from '@app/components/study/testPreps/SearchTestPrepsList.vue'
 import SearchDocumentsList from '@app/components/study/documents/SearchDocumentsList.vue'
 import SearchFlashCardsList from '@app/components/study/flashCards/SearchFlashCardsList.vue'
-import SearchSetsList from '@app/components/study/sets/SearchSetsList.vue'
 import SearchQuestionsList from '@app/components/questions/questions/SearchQuestionsList.vue'
 import SearchUsersList from '@app/components/users/SearchUsersList.vue'
 import { useRouteMeta } from '@app/composable/core/states'
@@ -100,10 +58,8 @@ export default defineComponent({
 	name: 'Search',
 	components: {
 		SearchWrapper,
-		SearchTestPrepsList,
 		SearchDocumentsList,
 		SearchFlashCardsList,
-		SearchSetsList,
 		SearchUsersList,
 		SearchQuestionsList
 	},

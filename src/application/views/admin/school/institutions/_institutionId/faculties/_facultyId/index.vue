@@ -51,12 +51,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style scoped>
-	ion-button {
-		--padding-top: 1rem !important;
-		--padding-bottom: 1rem !important;
-		--padding-start: 1rem !important;
-		--padding-end: 1rem !important;
-	}
-</style>

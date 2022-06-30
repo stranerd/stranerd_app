@@ -71,7 +71,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.quillWrapper {
 		background: $color-bodyBg;
 		min-height: 320px;
