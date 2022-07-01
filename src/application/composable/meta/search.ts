@@ -3,7 +3,7 @@ import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { QuestionEntity, QuestionsUseCases } from '@modules/questions'
 import { UserEntity, UsersUseCases } from '@modules/users'
 import { useRoute, useRouter } from 'vue-router'
-import { DocumentEntity, DocumentsUseCases, FlashCardEntity, FlashCardsUseCases } from '@modules/study'
+import { FlashCardEntity, FlashCardsUseCases, NoteEntity, NotesUseCases } from '@modules/study'
 import { storage } from '@utils/storage'
 import { ClassEntity, ClassesUseCases } from '@modules/classes'
 
@@ -14,7 +14,7 @@ const global = {
 		questions: ref([] as QuestionEntity[]),
 		users: ref([] as UserEntity[]),
 		classes: ref([] as ClassEntity[]),
-		documents: ref([] as DocumentEntity[]),
+		notes: ref([] as NoteEntity[]),
 		flashCards: ref([] as FlashCardEntity[])
 	},
 	recent: ref([] as string[]),
@@ -68,7 +68,7 @@ export const useSearch = () => {
 				await global.setLoading(true)
 				const searchObj = {
 					questions: QuestionsUseCases, users: UsersUseCases, classes: ClassesUseCases,
-					flashCards: FlashCardsUseCases, documents: DocumentsUseCases
+					flashCards: FlashCardsUseCases, notes: NotesUseCases
 				}
 				await Promise.all(
 					Object.entries(searchObj).map(async ([key, useCase]) => {

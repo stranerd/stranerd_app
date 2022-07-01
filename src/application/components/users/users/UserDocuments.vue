@@ -3,25 +3,25 @@
 		<form class="p-4 lg:p-0" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 		</form>
-		<EmptyState v-if="!loading && !error && documents.length === 0" class="border-bottom-line"
-			info="This user hasn't created any documents yet" />
-		<DocumentListCard v-for="document in (searchMode ? searchResults : documents)" :key="document.hash"
-			:document="document" class="border-bottom-line" />
+		<EmptyState v-if="!loading && !error && notes.length === 0" class="border-bottom-line"
+			info="This user hasn't created any notes yet" />
+		<NoteListCard v-for="note in (searchMode ? searchResults : notes)" :key="note.hash"
+			:note="note" class="border-bottom-line" />
 		<BlockLoading v-if="loading" />
-		<LoadMore v-if="hasMore" :load="fetchOlderDocuments" />
+		<LoadMore v-if="hasMore" :load="fetchOlderNotes" />
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import DocumentListCard from '@app/components/study/documents/DocumentListCard.vue'
-import { useUserDocumentList } from '@app/composable/users/users/documents'
+import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
+import { useUserNoteList } from '@app/composable/users/users/notes'
 import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({
-	name: 'ProfileDocuments',
-	components: { DocumentListCard, EmptyState },
+	name: 'ProfileNotes',
+	components: { NoteListCard, EmptyState },
 	props: {
 		user: {
 			type: UserEntity,
@@ -30,11 +30,11 @@ export default defineComponent({
 	},
 	setup (props) {
 		const {
-			documents, error, loading, hasMore, fetchOlderDocuments,
+			notes, error, loading, hasMore, fetchOlderNotes,
 			searchMode, searchResults, searchValue, search
-		} = useUserDocumentList(props.user.id)
+		} = useUserNoteList(props.user.id)
 		return {
-			documents, error, loading, hasMore, fetchOlderDocuments,
+			notes, error, loading, hasMore, fetchOlderNotes,
 			searchMode, searchResults, searchValue, search
 		}
 	}

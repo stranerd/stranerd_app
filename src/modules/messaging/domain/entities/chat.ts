@@ -42,7 +42,7 @@ export class ChatEntity extends BaseEntity {
 		return this.isMedia && isVideo(this.media).valid
 	}
 
-	get isDocument () {
+	get isNote () {
 		return this.isMedia && (!this.isImage && !this.isVideo)
 	}
 

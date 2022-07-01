@@ -4,8 +4,8 @@ import CreateTestPrep from '@app/components/modals/study/CreateTestPrep.vue'
 import EditTestPrep from '@app/components/modals/study/EditTestPrep.vue'
 import CreateSet from '@app/components/modals/study/CreateSet.vue'
 import EditSet from '@app/components/modals/study/EditSet.vue'
-import CreateDocument from '@app/components/modals/study/CreateDocument.vue'
-import EditDocument from '@app/components/modals/study/EditDocument.vue'
+import CreateNote from '@app/components/modals/study/CreateNote.vue'
+import EditNote from '@app/components/modals/study/EditNote.vue'
 import SaveEntity from '@app/components/modals/study/SaveEntity.vue'
 import CreateTimetable from '@app/components/modals/classes/CreateTimetable.vue'
 import EditTimetable from '@app/components/modals/classes/EditTimetable.vue'
@@ -30,7 +30,7 @@ import EditTag from '@app/components/modals/interactions/EditTag.vue'
 const SessionModal = modal.register('Session', { CreateSession: CreateReport, Ratings: CreateReport })
 const ReportModal = modal.register('Report', { CreateReport })
 const StudyModal = modal.register('Study', {
-	CreateSet, EditSet, SaveEntity, CreateTestPrep, EditTestPrep, CreateDocument, EditDocument
+	CreateSet, EditSet, SaveEntity, CreateTestPrep, EditTestPrep, CreateNote, EditNote
 })
 const ClassModal = modal.register('Class', {
 	CreateScheme, EditScheme, CreateTimetable, EditTimetable

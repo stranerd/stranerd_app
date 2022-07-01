@@ -58,7 +58,7 @@ export default defineComponent({
 	setup (props) {
 		const { loading, error, chats } = useClassLibrary(props.classInst.id)
 		const { groups } = useGroupList(props.classInst.id)
-		const filters = ['All', 'Images', 'Videos', 'Documents', 'Links']
+		const filters = ['All', 'Images', 'Videos', 'Notes', 'Links']
 		const filter = ref(filters[0])
 		const group = ref('')
 		const search = ref('')
@@ -67,7 +67,7 @@ export default defineComponent({
 			if (group.value) matches.push(c.data.type === ChatType.classes && c.to === group.value)
 			if (filter.value === filters[1]) matches.push(c.isImage)
 			if (filter.value === filters[2]) matches.push(c.isVideo)
-			if (filter.value === filters[3]) matches.push(c.isDocument)
+			if (filter.value === filters[3]) matches.push(c.isNote)
 			if (filter.value === filters[4]) matches.push(c.links.length > 0)
 			return matches.every((m) => m)
 		}))

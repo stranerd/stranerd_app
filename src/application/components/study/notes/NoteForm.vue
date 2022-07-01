@@ -1,7 +1,7 @@
 <template>
 	<form @submit.prevent="submit">
 		<div class="mb-4">
-			<IonInput v-model="factory.title" class="!h-12 text-left" placeholder="Enter Document Title" />
+			<IonInput v-model="factory.title" class="!h-12 text-left" placeholder="Enter Note Title" />
 			<DisplayError :error="factory.errors.title" />
 		</div>
 
@@ -21,15 +21,13 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { closeOutline, documentOutline, image } from 'ionicons/icons'
-import { useFileInputCallback } from '@app/composable/core/forms'
-import { DocumentFactory } from '@modules/study'
+import { NoteFactory } from '@modules/study'
 
 export default defineComponent({
-	name: 'DocumentForm',
+	name: 'NoteForm',
 	props: {
 		factory: {
-			type: DocumentFactory,
+			type: NoteFactory,
 			required: true
 		},
 		submit: {
@@ -43,15 +41,6 @@ export default defineComponent({
 		error: {
 			type: String,
 			required: true
-		}
-	},
-	setup (props) {
-		const catchMedia = useFileInputCallback(async ([file]) => {
-			props.factory.media = file
-		})
-
-		return {
-			image, documentOutline, closeOutline, catchMedia
 		}
 	}
 })

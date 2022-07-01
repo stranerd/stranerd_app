@@ -1,18 +1,18 @@
 <template>
 	<div>
-		<p>{{ document }}</p>
+		<p>{{ note }}</p>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { DocumentEntity } from '@modules/study'
+import { NoteEntity } from '@modules/study'
 
 export default defineComponent({
-	name: 'DocumentDetails',
+	name: 'NoteDetails',
 	props: {
-		document: {
-			type: Object as PropType<DocumentEntity>,
+		note: {
+			type: Object as PropType<NoteEntity>,
 			required: true
 		}
 	}

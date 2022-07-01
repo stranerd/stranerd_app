@@ -1,9 +1,9 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import {
-	DocumentEntity,
-	DocumentsUseCases,
 	FlashCardEntity,
 	FlashCardsUseCases,
+	NoteEntity,
+	NotesUseCases,
 	SetEntity,
 	SetFactory,
 	SetSaved,
@@ -26,7 +26,7 @@ const global = {} as Record<string, {
 const setGlobal = {} as Record<string, {
 	hash: Ref<string>
 	saved: {
-		documents: Ref<DocumentEntity[]>
+		notes: Ref<NoteEntity[]>
 		flashCards: Ref<FlashCardEntity[]>
 		testPreps: Ref<TestPrepEntity[]>
 	}
@@ -83,16 +83,16 @@ export const useSetById = (setId: string) => {
 export const useSet = (set: SetEntity) => {
 	const listenerFn = async () => {
 		const listeners = await Promise.all([
-			DocumentsUseCases.listenInList(set.saved.documents, {
+			NotesUseCases.listenInList(set.saved.notes, {
 				created: async (entity) => {
-					addToArray(setGlobal[set.id].saved.documents.value, entity, (e) => e.id, (e) => e.title)
+					addToArray(setGlobal[set.id].saved.notes.value, entity, (e) => e.id, (e) => e.title)
 				},
 				updated: async (entity) => {
-					addToArray(setGlobal[set.id].saved.documents.value, entity, (e) => e.id, (e) => e.title)
+					addToArray(setGlobal[set.id].saved.notes.value, entity, (e) => e.id, (e) => e.title)
 				},
 				deleted: async (entity) => {
-					const index = setGlobal[set.id].saved.documents.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) setGlobal[set.id].saved.documents.value.splice(index, 1)
+					const index = setGlobal[set.id].saved.notes.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].saved.notes.value.splice(index, 1)
 				}
 			}),
 			FlashCardsUseCases.listenInList(set.saved.flashCards, {
@@ -129,7 +129,7 @@ export const useSet = (set: SetEntity) => {
 		setGlobal[set.id] = {
 			hash: ref(set.hash),
 			saved: {
-				documents: ref([]),
+				notes: ref([]),
 				flashCards: ref([]),
 				testPreps: ref([])
 			},
@@ -144,10 +144,10 @@ export const useSet = (set: SetEntity) => {
 		await setGlobal[set.id].setError('')
 		try {
 			await setGlobal[set.id].setLoading(true)
-			const [documents, flashCards, testPreps] = await Promise.all([
-				DocumentsUseCases.getInList(set.saved.documents), FlashCardsUseCases.getInList(set.saved.flashCards), TestPrepsUseCases.getInList(set.saved.testPreps)
+			const [notes, flashCards, testPreps] = await Promise.all([
+				NotesUseCases.getInList(set.saved.notes), FlashCardsUseCases.getInList(set.saved.flashCards), TestPrepsUseCases.getInList(set.saved.testPreps)
 			])
-			setGlobal[set.id].saved.documents.value = documents.results
+			setGlobal[set.id].saved.notes.value = notes.results
 			setGlobal[set.id].saved.flashCards.value = flashCards.results
 			setGlobal[set.id].saved.testPreps.value = testPreps.results
 			setGlobal[set.id].fetched.value = true
@@ -169,13 +169,13 @@ export const useSet = (set: SetEntity) => {
 		await setGlobal[set.id].listener.close()
 	})
 
-	const documents = computed(() => setGlobal[set.id].saved.documents.value.filter((document) => set.saved.documents.includes(document.id)))
+	const notes = computed(() => setGlobal[set.id].saved.notes.value.filter((note) => set.saved.notes.includes(note.id)))
 	const flashCards = computed(() => setGlobal[set.id].saved.flashCards.value.filter((flashCard) => set.saved.flashCards.includes(flashCard.id)))
 	const testPreps = computed(() => setGlobal[set.id].saved.testPreps.value.filter((testPrep) => set.saved.testPreps.includes(testPrep.id)))
 
 	return {
 		...setGlobal[set.id], fetchAllSetEntities,
-		documents, flashCards, testPreps
+		notes, flashCards, testPreps
 	}
 }
 

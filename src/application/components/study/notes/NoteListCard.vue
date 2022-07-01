@@ -1,12 +1,12 @@
 <template>
-	<router-link :to="`/study/documents/${document.id}`"
+	<router-link :to="`/study/notes/${note.id}`"
 		class="flex flex-col justify-between card card-padding">
 		<div class="flex gap-4 items-center">
-			<IonText class="font-500 truncate w-full">{{ document.title }}</IonText>
+			<IonText class="font-500 truncate w-full">{{ note.title }}</IonText>
 			<IonIcon :icon="arrowForwardOutline" />
 		</div>
 		<div class="w-full flex items-center justify-between gap-2 text-sm">
-			<Tag tag="Document">
+			<Tag tag="Note">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
 						<IonIcon :icon="documentOutline" class="text-base mr-1" />
@@ -15,13 +15,13 @@
 				</template>
 			</Tag>
 			<div class="flex items-center gap-3">
-				<Avatar v-if="document.user.id !== id" :id="document.user.id" :name="document.user.bio.fullName"
+				<Avatar v-if="note.user.id !== id" :id="note.user.id" :name="note.user.bio.fullName"
 					:size="24"
-					:src="document.user.bio.photo" />
-				<Share :link="document.shareLink" :text="document.content" :title="document.title" />
-				<SaveToSet :entity="document" />
+					:src="note.user.bio.photo" />
+				<Share :link="note.shareLink" :text="note.content" :title="note.title" />
+				<SaveToSet :entity="note" />
 				<SpinLoading v-if="loading" />
-				<IonIcon v-if="document.user.id === id" :icon="settingsOutline" @click.prevent="showMenu" />
+				<IonIcon v-if="note.user.id === id" :icon="settingsOutline" @click.prevent="showMenu" />
 			</div>
 		</div>
 	</router-link>
@@ -37,18 +37,18 @@ import {
 	trashBinOutline
 } from 'ionicons/icons'
 import { defineComponent } from 'vue'
-import { DocumentEntity } from '@modules/study'
+import { NoteEntity } from '@modules/study'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { openDocumentEditModal, useDeleteDocument } from '@app/composable/study/documents'
+import { openNoteEditModal, useDeleteNote } from '@app/composable/study/notes'
 import { useRouter } from 'vue-router'
 import { actionSheetController } from '@ionic/vue'
 
 export default defineComponent({
-	name: 'DocumentListCard',
+	name: 'NoteListCard',
 	props: {
-		document: {
-			type: DocumentEntity,
+		note: {
+			type: NoteEntity,
 			required: true
 		},
 		edit: {
@@ -60,16 +60,16 @@ export default defineComponent({
 	components: { SaveToSet },
 	setup (props) {
 		const { id } = useAuth()
-		const { deleteDocument, loading } = useDeleteDocument(props.document.id)
+		const { deleteNote, loading } = useDeleteNote(props.note.id)
 		const router = useRouter()
 		const showMenu = async () => {
 			const actionSheet = await actionSheetController.create({
 				buttons: [
 					{
-						text: 'Edit document', icon: pencilOutline,
-						handler: () => openDocumentEditModal(props.document, router)
+						text: 'Edit note', icon: pencilOutline,
+						handler: () => openNoteEditModal(props.note, router)
 					},
-					{ text: 'Delete document', role: 'destructive', icon: trashBinOutline, handler: deleteDocument },
+					{ text: 'Delete note', role: 'destructive', icon: trashBinOutline, handler: deleteNote },
 					{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
 				]
 			})

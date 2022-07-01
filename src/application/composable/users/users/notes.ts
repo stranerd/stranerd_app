@@ -1,20 +1,20 @@
 import { onMounted, onUnmounted, ref, Ref, watch } from 'vue'
-import { DocumentEntity, DocumentsUseCases } from '@modules/study'
+import { NoteEntity, NotesUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
-	documents: Ref<DocumentEntity[]>
+	notes: Ref<NoteEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
 	searchMode: Ref<boolean>
 	searchValue: Ref<string>
-	searchResults: Ref<DocumentEntity[]>
+	searchResults: Ref<NoteEntity[]>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-export const useUserDocumentList = (id: string) => {
+export const useUserNoteList = (id: string) => {
 	if (global[id] === undefined) global[id] = {
-		documents: ref([]),
+		notes: ref([]),
 		fetched: ref(false),
 		hasMore: ref(false),
 		searchMode: ref(false),
@@ -24,13 +24,13 @@ export const useUserDocumentList = (id: string) => {
 		...useLoadingHandler()
 	}
 
-	const fetchDocuments = async () => {
+	const fetchNotes = async () => {
 		await global[id].setError('')
 		try {
 			await global[id].setLoading(true)
-			const documents = await DocumentsUseCases.getUserDocuments(id, global[id].documents.value.at(-1)?.createdAt)
-			global[id].hasMore.value = !!documents.pages.next
-			documents.results.forEach((q) => addToArray(global[id].documents.value, q, (e) => e.id, (e) => e.createdAt))
+			const notes = await NotesUseCases.getUserNotes(id, global[id].notes.value.at(-1)?.createdAt)
+			global[id].hasMore.value = !!notes.pages.next
+			notes.results.forEach((q) => addToArray(global[id].notes.value, q, (e) => e.id, (e) => e.createdAt))
 			global[id].fetched.value = true
 		} catch (error) {
 			await global[id].setError(error)
@@ -39,21 +39,21 @@ export const useUserDocumentList = (id: string) => {
 	}
 
 	const listener = useListener(async () => {
-		return await DocumentsUseCases.listenToUserDocuments(id, {
+		return await NotesUseCases.listenToUserNotes(id, {
 			created: async (entity) => {
-				addToArray(global[id].documents.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(global[id].notes.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				addToArray(global[id].documents.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(global[id].notes.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
-				global[id].documents.value = global[id].documents.value.filter((c) => c.id !== entity.id)
+				global[id].notes.value = global[id].notes.value.filter((c) => c.id !== entity.id)
 			}
-		}, global[id].documents.value.at(-1)?.createdAt)
+		}, global[id].notes.value.at(-1)?.createdAt)
 	})
 
 	onMounted(async () => {
-		if (!global[id].fetched.value && !global[id].loading.value) await fetchDocuments()
+		if (!global[id].fetched.value && !global[id].loading.value) await fetchNotes()
 		await listener.start()
 	})
 
@@ -68,7 +68,7 @@ export const useUserDocumentList = (id: string) => {
 		await global[id].setError('')
 		try {
 			await global[id].setLoading(true)
-			global[id].searchResults.value = await DocumentsUseCases.searchUserDocuments(id, searchValue)
+			global[id].searchResults.value = await NotesUseCases.searchUserNotes(id, searchValue)
 			global[id].fetched.value = true
 		} catch (error) {
 			await global[id].setError(error)
@@ -80,5 +80,5 @@ export const useUserDocumentList = (id: string) => {
 		if (!global[id].searchValue.value) global[id].searchMode.value = false
 	})
 
-	return { ...global[id], fetchOlderDocuments: fetchDocuments, search }
+	return { ...global[id], fetchOlderNotes: fetchNotes, search }
 }

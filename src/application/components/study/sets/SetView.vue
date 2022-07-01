@@ -35,8 +35,8 @@
 			<FlashCardListCard v-for="flashCard in filteredFlashCards" :key="flashCard.hash"
 				:flashCard="flashCard" class="border-bottom-line" />
 		</template>
-		<template v-if="['All', 'Documents'].includes(filter)">
-			<DocumentListCard v-for="document in filteredDocuments" :key="document.hash" :document="document"
+		<template v-if="['All', 'Notes'].includes(filter)">
+			<NoteListCard v-for="note in filteredNotes" :key="note.hash" :note="note"
 				class="border-bottom-line" />
 		</template>
 		<BlockLoading v-if="loading" />
@@ -51,7 +51,7 @@ import { pluralize } from '@utils/commons'
 import { folderOpenOutline } from 'ionicons/icons'
 import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
-import DocumentListCard from '@app/components/study/documents/DocumentListCard.vue'
+import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 
 export default defineComponent({
 	name: 'SetView',
@@ -64,19 +64,19 @@ export default defineComponent({
 	components: {
 		TestPrepListCard,
 		FlashCardListCard,
-		DocumentListCard
+		NoteListCard
 	},
 	setup (props) {
-		const { loading, error, documents, flashCards, testPreps } = useSet(props.set)
-		const filters = ['All', 'Test Preps', 'Flashcards', 'Documents']
+		const { loading, error, notes, flashCards, testPreps } = useSet(props.set)
+		const filters = ['All', 'Test Preps', 'Flashcards', 'Notes']
 		const filter = ref(filters[0])
 		const search = ref('')
 		const filteredTestPreps = computed(() => testPreps.value.filter((prep) => prep.search(search.value)))
 		const filteredFlashCards = computed(() => flashCards.value.filter((flashCard) => flashCard.search(search.value)))
-		const filteredDocuments = computed(() => documents.value.filter((document) => document.search(search.value)))
+		const filteredNotes = computed(() => notes.value.filter((note) => note.search(search.value)))
 		return {
-			loading, error, folderOpenOutline, documents, flashCards, testPreps, pluralize,
-			filter, filters, search, filteredTestPreps, filteredFlashCards, filteredDocuments
+			loading, error, folderOpenOutline, notes, flashCards, testPreps, pluralize,
+			filter, filters, search, filteredTestPreps, filteredFlashCards, filteredNotes
 		}
 	}
 })

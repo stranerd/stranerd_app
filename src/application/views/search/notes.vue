@@ -1,7 +1,7 @@
 <template>
 	<SearchWrapper>
-		<template v-slot:default="{ documents }">
-			<SearchDocumentsList :documents="documents" />
+		<template v-slot:default="{ notes }">
+			<SearchNotesList :notes="notes" />
 		</template>
 	</SearchWrapper>
 </template>
@@ -9,14 +9,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import SearchWrapper from '@app/components/search/SearchWrapper.vue'
-import SearchDocumentsList from '@app/components/study/documents/SearchDocumentsList.vue'
+import SearchNotesList from '@app/components/study/notes/SearchNotesList.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
-	name: 'SearchDocuments',
-	components: { SearchWrapper, SearchDocumentsList },
+	name: 'SearchNotes',
+	components: { SearchWrapper, SearchNotesList },
 	setup () {
-		useRouteMeta('SearchDocuments', { back: true })
+		useRouteMeta('SearchNotes', { back: true })
 	}
 })
 </script>

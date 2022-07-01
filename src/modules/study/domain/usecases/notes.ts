@@ -1,19 +1,19 @@
-import { IDocumentRepository } from '../irepositories/idocument'
-import { DocumentFactory } from '../factories/document'
+import { INoteRepository } from '../irepositories/inote'
+import { NoteFactory } from '../factories/note'
 import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { PAGINATION_LIMIT } from '@utils/constants'
-import { DocumentEntity } from '../entities/document'
+import { NoteEntity } from '../entities/note'
 
 const searchFields = ['title', 'content']
 
-export class DocumentsUseCase {
-	private repository: IDocumentRepository
+export class NotesUseCase {
+	private repository: INoteRepository
 
-	constructor (repository: IDocumentRepository) {
+	constructor (repository: INoteRepository) {
 		this.repository = repository
 	}
 
-	async add (factory: DocumentFactory) {
+	async add (factory: NoteFactory) {
 		return await this.repository.add(await factory.toModel())
 	}
 
@@ -21,7 +21,7 @@ export class DocumentsUseCase {
 		return await this.repository.delete(id)
 	}
 
-	async update (id: string, factory: DocumentFactory) {
+	async update (id: string, factory: NoteFactory) {
 		return await this.repository.update(id, await factory.toModel())
 	}
 
@@ -48,7 +48,7 @@ export class DocumentsUseCase {
 		return await this.repository.get(conditions)
 	}
 
-	async getUserDocuments (userId: string, date?: number) {
+	async getUserNotes (userId: string, date?: number) {
 		const conditions: QueryParams = {
 			sort: [{ field: 'createdAt', desc: true }],
 			limit: PAGINATION_LIMIT,
@@ -59,11 +59,11 @@ export class DocumentsUseCase {
 		return await this.repository.get(conditions)
 	}
 
-	async listenToOne (id: string, listener: Listeners<DocumentEntity>) {
+	async listenToOne (id: string, listener: Listeners<NoteEntity>) {
 		return await this.repository.listenToOne(id, listener)
 	}
 
-	async listen (listener: Listeners<DocumentEntity>, date?: number) {
+	async listen (listener: Listeners<NoteEntity>, date?: number) {
 		const conditions: QueryParams = {
 			sort: [{ field: 'createdAt', desc: true }],
 			all: true
@@ -76,7 +76,7 @@ export class DocumentsUseCase {
 		})
 	}
 
-	async listenInList (ids: string[], listener: Listeners<DocumentEntity>) {
+	async listenInList (ids: string[], listener: Listeners<NoteEntity>) {
 		const conditions: QueryParams = {
 			where: [{ field: 'id', condition: Conditions.in, value: ids }],
 			all: true
@@ -85,7 +85,7 @@ export class DocumentsUseCase {
 		return await this.repository.listenToMany(conditions, listener, (entity) => ids.includes(entity.id))
 	}
 
-	async listenToUserDocuments (userId: string, listener: Listeners<DocumentEntity>, date?: number) {
+	async listenToUserNotes (userId: string, listener: Listeners<NoteEntity>, date?: number) {
 		const conditions: QueryParams = {
 			sort: [{ field: 'createdAt', desc: true }],
 			all: true,
@@ -107,7 +107,7 @@ export class DocumentsUseCase {
 		return (await this.repository.get(query)).results
 	}
 
-	async searchUserDocuments (userId: string, search: string) {
+	async searchUserNotes (userId: string, search: string) {
 		const query = {
 			where: [{ field: 'user.id', value: userId }],
 			all: true, search: { value: search, fields: searchFields }

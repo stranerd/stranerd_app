@@ -1,7 +1,6 @@
-import { Media } from '@modules/core'
 import { EmbeddedUser } from '@modules/users'
 
-export interface DocumentFromModel extends DocumentToModel {
+export interface NoteFromModel extends NoteToModel {
 	id: string
 	links: { original: string, normalized: string }[]
 	user: EmbeddedUser
@@ -9,9 +8,8 @@ export interface DocumentFromModel extends DocumentToModel {
 	updatedAt: number
 }
 
-export interface DocumentToModel {
+export interface NoteToModel {
 	title: string
 	content: string
 	isPrivate: boolean
-	media: Media | null
 }

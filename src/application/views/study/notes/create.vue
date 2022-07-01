@@ -8,9 +8,9 @@ import { useStudyModal } from '@app/composable/core/modals'
 import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
-	name: 'StudyDocumentsCreate',
+	name: 'StudyNotesCreate',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth }) => {
-		useStudyModal().openCreateDocument()
+		useStudyModal().openCreateNote()
 		return goBackToNonAuth()
 	}])
 })

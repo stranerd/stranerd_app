@@ -1,20 +1,20 @@
 <template>
 	<ExploreWrapper>
-		<ExploreDocumentsList />
+		<ExploreNotesList />
 	</ExploreWrapper>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/explore/ExploreWrapper.vue'
-import ExploreDocumentsList from '@app/components/study/documents/ExploreDocumentsList.vue'
+import ExploreNotesList from '@app/components/study/notes/ExploreNotesList.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
-	name: 'ExploreDocuments',
-	components: { ExploreWrapper, ExploreDocumentsList },
+	name: 'ExploreNotes',
+	components: { ExploreWrapper, ExploreNotesList },
 	setup () {
-		useRouteMeta('Explore Documents', { back: true })
+		useRouteMeta('Explore Notes', { back: true })
 	}
 })
 </script>

@@ -33,15 +33,15 @@
 				<div class="w-full flex justify-between md:mb-4 px-4 md:px-0">
 					<div class="text-secondaryText flex items-center">
 						<IonText class="text-xl font-bold mr-3">
-							Documents
+							Notes
 						</IonText>
 					</div>
-					<router-link :to="`/explore/documents`"
+					<router-link :to="`/explore/notes`"
 						class="flex items-center font-bold">
 						<span>view all</span>
 					</router-link>
 				</div>
-				<ExploreDocumentsList :sliced="true" />
+				<ExploreNotesList :sliced="true" />
 			</div>
 		</div>
 	</ExploreWrapper>
@@ -51,7 +51,7 @@
 import { defineComponent } from 'vue'
 import ExploreWrapper from '@app/components/explore/ExploreWrapper.vue'
 import ExploreTestPrepsList from '@app/components/study/testPreps/ExploreTestPrepsList.vue'
-import ExploreDocumentsList from '@app/components/study/documents/ExploreDocumentsList.vue'
+import ExploreNotesList from '@app/components/study/notes/ExploreNotesList.vue'
 import ExploreFlashCardsList from '@app/components/study/flashCards/ExploreFlashCardsList.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
@@ -60,7 +60,7 @@ export default defineComponent({
 	components: {
 		ExploreWrapper,
 		ExploreTestPrepsList,
-		ExploreDocumentsList,
+		ExploreNotesList,
 		ExploreFlashCardsList
 	},
 	setup () {

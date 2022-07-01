@@ -4,21 +4,21 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { getEditingDocument } from '@app/composable/study/documents'
+import { getEditingNote } from '@app/composable/study/notes'
 import { useAuth } from '@app/composable/auth/auth'
 import { useStudyModal } from '@app/composable/core/modals'
 import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
-	name: 'StudyDocumentsDocumentIdEdit',
+	name: 'StudyNotesNoteIdEdit',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth, to }) => {
 		const { id } = useAuth()
-		const { documentId } = to.params
-		const document = getEditingDocument()
-		if (!document || document.id !== documentId) return '/study/documents/'
-		const canEdit = document.user.id === id.value
-		if (!canEdit) return `/study/documents/${document.id}`
-		useStudyModal().openEditDocument()
+		const { noteId } = to.params
+		const note = getEditingNote()
+		if (!note || note.id !== noteId) return '/study/notes/'
+		const canEdit = note.user.id === id.value
+		if (!canEdit) return `/study/notes/${note.id}`
+		useStudyModal().openEditNote()
 		return goBackToNonAuth()
 	}])
 })

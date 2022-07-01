@@ -1,22 +1,22 @@
 <template>
 	<DefaultLayout>
-		<div v-if="document">
+		<div v-if="note">
 			<div class="py-4">
 				<div
 					class="flex flex-col md:flex-row md:justify-between justify-start items-start px-4 w-full lg:w-8/12 w-full mx-auto">
 					<IonText class="text-xl font-bold text-secondaryText text-start">
-						{{ document.title }}
+						{{ note.title }}
 					</IonText>
 					<div class="items-center font-normal flex gap-3">
-						<Avatar :id="document.user.id" :name="document.user.bio.fullName" :size="24"
-							:src="document.user.bio.photo" />
-						<Share :link="document.shareLink" :title="document.title" text="Share this document" />
-						<SaveToSet :entity="document" />
+						<Avatar :id="note.user.id" :name="note.user.bio.fullName" :size="24"
+							:src="note.user.bio.photo" />
+						<Share :link="note.shareLink" :title="note.title" text="Share this note" />
+						<SaveToSet :entity="note" />
 					</div>
 				</div>
 			</div>
 			<div class="w-full lg:w-8/12 w-full mx-auto">
-				<DocumentDetails :document="document" />
+				<NoteDetails :note="note" />
 			</div>
 		</div>
 		<PageLoading v-if="loading" />
@@ -38,21 +38,21 @@ import {
 import Avatar from '@app/components/core/Avatar.vue'
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
-import { useDocument } from '@app/composable/study/documents'
+import { useNote } from '@app/composable/study/notes'
 import Share from '@app/components/core/Share.vue'
-import DocumentDetails from '@app/components/study/documents/DocumentDetails.vue'
+import NoteDetails from '@app/components/study/notes/NoteDetails.vue'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
-	name: 'StudyDocumentsDocumentId',
-	components: { Avatar, DocumentDetails, Share, SaveToSet },
+	name: 'StudyNotesNoteId',
+	components: { Avatar, NoteDetails, Share, SaveToSet },
 	setup () {
-		useRouteMeta('Document', { back: true })
-		const { documentId } = useRoute().params
-		const { error, loading, document } = useDocument(documentId as string)
+		useRouteMeta('Note', { back: true })
+		const { noteId } = useRoute().params
+		const { error, loading, note } = useNote(noteId as string)
 		return {
-			add, remove, scan, chevronDown, loading, document, error,
+			add, remove, scan, chevronDown, loading, note, error,
 			chevronUp, pencil, contract, shareSocial, checkmarkCircleOutline
 		}
 	}

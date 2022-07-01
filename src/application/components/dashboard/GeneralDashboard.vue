@@ -36,8 +36,8 @@
 
 			<div class="showcase2">
 				<DashboardCard :icon="documentOutline"
-					:subtitle="`${pluralize(user?.meta.documents, 'Document', 'Documents')} uploaded`"
-					:title="user ? formatNumber(user?.meta.documents) : 'N/A'" />
+					:subtitle="`${pluralize(user?.meta.notes, 'Note', 'Notes')} uploaded`"
+					:title="user ? formatNumber(user?.meta.notes) : 'N/A'" />
 				<DashboardCard :icon="flashOutline"
 					:subtitle="`${pluralize(user?.meta.flashCards, 'Flashcard', 'Flashcards')} created`"
 					:title="user? formatNumber(user?.meta.flashCards) : 'N/A'" />

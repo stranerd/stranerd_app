@@ -1,14 +1,13 @@
-import { BaseEntity, Media, parseMedia } from '@modules/core'
+import { BaseEntity } from '@modules/core'
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 
-export class DocumentEntity extends BaseEntity {
+export class NoteEntity extends BaseEntity {
 	public readonly id: string
 	public readonly title: string
 	public readonly content: string
 	public readonly user: EmbeddedUser
 	public readonly isPrivate: boolean
 	public readonly links: { original: string, normalized: string }[]
-	public readonly media: Media | null
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -19,10 +18,9 @@ export class DocumentEntity extends BaseEntity {
 		             user,
 		             isPrivate,
 		             links,
-		             media,
 		             createdAt,
 		             updatedAt
-	             }: DocumentConstructorArgs) {
+	             }: NoteConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title
@@ -30,7 +28,6 @@ export class DocumentEntity extends BaseEntity {
 		this.user = generateEmbeddedUser(user)
 		this.isPrivate = isPrivate
 		this.links = links
-		this.media = media ? parseMedia(media) : null
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -40,7 +37,7 @@ export class DocumentEntity extends BaseEntity {
 	}
 
 	get shareLink () {
-		return `/study/documents/${this.id}`
+		return `/study/notes/${this.id}`
 	}
 
 	search (search: string) {
@@ -48,11 +45,10 @@ export class DocumentEntity extends BaseEntity {
 	}
 }
 
-type DocumentConstructorArgs = {
+type NoteConstructorArgs = {
 	id: string,
 	isPrivate: boolean
 	links: { original: string, normalized: string }[]
-	media: Media | null
 	user: EmbeddedUser
 	title: string
 	content: string

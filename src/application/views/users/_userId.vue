@@ -8,7 +8,7 @@
 							{ name: 'questions', icon: helpCircleOutline },
 							{ name: 'answers', icon: checkmarkCircleOutline },
 							{ name: 'flashCards', icon: flashOutline },
-							{ name: 'documents', icon: readerOutline }
+							{ name: 'notes', icon: readerOutline }
 						]" :key="path.name"
 						:class="{ 'border-b-2 !text-primaryBg !border-primaryBg': path.name === tab}"
 						class="border-b border-itemBg text-secondaryText p-4 capitalize w-full flex justify-center items-center gap-2"
@@ -20,7 +20,7 @@
 				<UserQuestions v-if="tab === 'questions'" :user="user" />
 				<UserAnswers v-if="tab === 'answers'" :user="user" />
 				<UserFlashCards v-if="tab === 'flashCards'" :user="user" />
-				<UserDocuments v-if="tab === 'documents'" :user="user" />
+				<UserNotes v-if="tab === 'notes'" :user="user" />
 			</div>
 		</div>
 	</DefaultLayout>
@@ -36,14 +36,14 @@ import { formatNumber } from '@utils/commons'
 import UserQuestions from '@app/components/users/users/UserQuestions.vue'
 import UserAnswers from '@app/components/users/users/UserAnswers.vue'
 import UserFlashCards from '@app/components/users/users/UserFlashCards.vue'
-import UserDocuments from '@app/components/users/users/UserDocuments.vue'
+import UserNotes from '@app/components/users/users/UserNotes.vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 import UserPageCard from '@app/components/users/users/UserPageCard.vue'
 
 export default defineComponent({
 	name: 'UsersUserId',
-	components: { UserQuestions, UserAnswers, UserFlashCards, UserDocuments, UserPageCard },
+	components: { UserQuestions, UserAnswers, UserFlashCards, UserNotes, UserPageCard },
 	beforeRouteEnter: generateMiddlewares([async ({ to }) => {
 		if (to.params.userId === useAuth().id.value) return '/account'
 	}]),

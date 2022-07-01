@@ -1,7 +1,7 @@
 <template>
 	<SearchWrapper>
 		<template
-			v-slot:default="{ count, searchTerm, classes, documents, flashCards, questions, users }">
+			v-slot:default="{ count, searchTerm, classes, notes, flashCards, questions, users }">
 			<div class="flex flex-col">
 				<div v-if="questions.length" class="border-bottom-line py-6">
 					<div class="w-full flex justify-between items-center px-4 lg:px-0 mb-4">
@@ -21,14 +21,14 @@
 					</div>
 					<SearchFlashCardsList :flashCards="flashCards" :sliced="true" />
 				</div>
-				<div v-if="documents.length" class="border-bottom-line py-6">
+				<div v-if="notes.length" class="border-bottom-line py-6">
 					<div class="w-full flex justify-between items-center px-4 lg:px-0 mb-4">
-						<IonText class="font-bold">Documents</IonText>
-						<router-link :to="`/search/documents?search=${searchTerm}`" class="text-info">
+						<IonText class="font-bold">Notes</IonText>
+						<router-link :to="`/search/notes?search=${searchTerm}`" class="text-info">
 							view all
 						</router-link>
 					</div>
-					<SearchDocumentsList :documents="documents" :sliced="true" />
+					<SearchNotesList :notes="notes" :sliced="true" />
 				</div>
 				<div v-if="users.length" class="border-bottom-line py-6">
 					<div class="w-full flex justify-between items-center px-4 lg:px-0 mb-4">
@@ -57,7 +57,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import SearchWrapper from '@app/components/search/SearchWrapper.vue'
-import SearchDocumentsList from '@app/components/study/documents/SearchDocumentsList.vue'
+import SearchNotesList from '@app/components/study/notes/SearchNotesList.vue'
 import SearchFlashCardsList from '@app/components/study/flashCards/SearchFlashCardsList.vue'
 import SearchQuestionsList from '@app/components/questions/questions/SearchQuestionsList.vue'
 import SearchUsersList from '@app/components/users/SearchUsersList.vue'
@@ -67,7 +67,7 @@ import { useRouteMeta } from '@app/composable/core/states'
 export default defineComponent({
 	name: 'Search',
 	components: {
-		SearchWrapper, SearchDocumentsList, SearchFlashCardsList,
+		SearchWrapper, SearchNotesList, SearchFlashCardsList,
 		SearchUsersList, SearchQuestionsList, SearchClassesList
 	},
 	setup () {

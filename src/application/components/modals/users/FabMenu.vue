@@ -9,7 +9,7 @@
 					{ name: 'Make an announcement', path: '/classes/announcements/create', icon: megaphoneOutline },
 					{ name: 'Start a discussion', path: '/classes/groups/create', icon: chatbubblesOutline },
 				] : []),
-				{ name: 'Write a note', path: '/study/documents/create', icon: documentOutline },
+				{ name: 'Write a note', path: '/study/notes/create', icon: documentOutline },
 			]" :key="path" :to="path" class="flex items-center gap-4 py-4">
 				<IonIcon :icon="icon" />
 				<span>{{ name }}</span>

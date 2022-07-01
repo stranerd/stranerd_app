@@ -1,15 +1,15 @@
 import { Listeners, QueryParams } from '@modules/core'
-import { IDocumentRepository } from '../../domain/irepositories/idocument'
-import { DocumentEntity } from '../../domain/entities/document'
-import { DocumentBaseDataSource } from '../datasources/document-base'
-import { DocumentTransformer } from '../transformers/document'
-import { DocumentToModel } from '../models/document'
+import { INoteRepository } from '../../domain/irepositories/inote'
+import { NoteEntity } from '../../domain/entities/note'
+import { NoteBaseDataSource } from '../datasources/note-base'
+import { NoteTransformer } from '../transformers/note'
+import { NoteToModel } from '../models/note'
 
-export class DocumentRepository implements IDocumentRepository {
-	private dataSource: DocumentBaseDataSource
-	private transformer: DocumentTransformer
+export class NoteRepository implements INoteRepository {
+	private dataSource: NoteBaseDataSource
+	private transformer: NoteTransformer
 
-	constructor (dataSource: DocumentBaseDataSource, transformer: DocumentTransformer) {
+	constructor (dataSource: NoteBaseDataSource, transformer: NoteTransformer) {
 		this.dataSource = dataSource
 		this.transformer = transformer
 	}
@@ -22,7 +22,7 @@ export class DocumentRepository implements IDocumentRepository {
 		}
 	}
 
-	async listenToOne (id: string, listener: Listeners<DocumentEntity>) {
+	async listenToOne (id: string, listener: Listeners<NoteEntity>) {
 		return this.dataSource.listenToOne(id, {
 			created: async (model) => {
 				await listener.created(this.transformer.fromJSON(model))
@@ -36,7 +36,7 @@ export class DocumentRepository implements IDocumentRepository {
 		})
 	}
 
-	async listenToMany (query: QueryParams, listener: Listeners<DocumentEntity>, matches: (entity: DocumentEntity) => boolean) {
+	async listenToMany (query: QueryParams, listener: Listeners<NoteEntity>, matches: (entity: NoteEntity) => boolean) {
 		return this.dataSource.listenToMany(query, {
 			created: async (model) => {
 				const entity = this.transformer.fromJSON(model)
@@ -53,7 +53,7 @@ export class DocumentRepository implements IDocumentRepository {
 		})
 	}
 
-	async add (data: DocumentToModel) {
+	async add (data: NoteToModel) {
 		return this.transformer.fromJSON(await this.dataSource.create(data))
 	}
 
@@ -62,7 +62,7 @@ export class DocumentRepository implements IDocumentRepository {
 		return model ? this.transformer.fromJSON(model) : null
 	}
 
-	async update (id: string, data: DocumentToModel) {
+	async update (id: string, data: NoteToModel) {
 		return this.transformer.fromJSON(await this.dataSource.update(id, data))
 	}
 
