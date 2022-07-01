@@ -2,7 +2,8 @@
 	<IonHeader class="block ion-no-border inset-x-0 w-full z-10">
 		<IonToolbar class="px-4 border-bottom-line min-h-[4rem] flex items-center justify-center">
 			<div class="flex items-center justify-between">
-				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline" class="text-base" text="" />
+				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline" class="text-base text-headerText"
+					defaultHref="/dashboard" text="" />
 				<IonText class="font-bold text-xl">
 					{{ $route.meta.routeName ?? 'Stranerd' }}
 				</IonText>

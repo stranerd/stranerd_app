@@ -7,13 +7,6 @@ import EditSet from '@app/components/modals/study/EditSet.vue'
 import CreateDocument from '@app/components/modals/study/CreateDocument.vue'
 import EditDocument from '@app/components/modals/study/EditDocument.vue'
 import SaveEntity from '@app/components/modals/study/SaveEntity.vue'
-import CreateClass from '@app/components/modals/classes/CreateClass.vue'
-import EditClass from '@app/components/modals/classes/EditClass.vue'
-import EditClassCourses from '@app/components/modals/classes/EditClassCourses.vue'
-import CreateGroup from '@app/components/modals/classes/CreateGroup.vue'
-import EditGroup from '@app/components/modals/classes/EditGroup.vue'
-import CreateAnnouncement from '@app/components/modals/classes/CreateAnnouncement.vue'
-import EditAnnouncement from '@app/components/modals/classes/EditAnnouncement.vue'
 import CreateTimetable from '@app/components/modals/classes/CreateTimetable.vue'
 import EditTimetable from '@app/components/modals/classes/EditTimetable.vue'
 import CreateScheme from '@app/components/modals/classes/CreateScheme.vue'
@@ -40,9 +33,7 @@ const StudyModal = modal.register('Study', {
 	CreateSet, EditSet, SaveEntity, CreateTestPrep, EditTestPrep, CreateDocument, EditDocument
 })
 const ClassModal = modal.register('Class', {
-	CreateClass, EditClass, EditClassCourses, CreateGroup, EditGroup,
-	CreateAnnouncement, EditAnnouncement, CreateTimetable, EditTimetable,
-	CreateScheme, EditScheme
+	CreateScheme, EditScheme, CreateTimetable, EditTimetable
 })
 const SchoolModal = modal.register('School', {
 	CreateInstitution, EditInstitution, CreateFaculty, EditFaculty, CreateDepartment, EditDepartment,

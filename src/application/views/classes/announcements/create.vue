@@ -1,19 +1,29 @@
 <template>
-	<div />
+	<DefaultLayout :hideBottom="true" :hideFab="true">
+		<AnnouncementForm :error="error" :factory="factory" :loading="loading" :submit="createAnnouncement"
+			class="page-padding">
+			<template v-slot:buttonText>Post Announcement</template>
+		</AnnouncementForm>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useClassModal } from '@app/composable/core/modals'
 import { generateMiddlewares } from '@app/middlewares'
-import { setAnnouncementClassId } from '@app/composable/classes/announcements'
+import { setAnnouncementClassId, useCreateAnnouncement } from '@app/composable/classes/announcements'
+import AnnouncementForm from '@app/components/classes/announcements/AnnouncementForm.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'ClassesAnnouncementsCreate',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ to, goBackToNonAuth }) => {
+	components: { AnnouncementForm },
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ to }) => {
 		if (to.query.classId) setAnnouncementClassId(to.query.classId as string)
-		useClassModal().openCreateAnnouncement()
-		return goBackToNonAuth()
-	}])
+	}]),
+	setup () {
+		useRouteMeta('Post an announcement', { back: true })
+		const { createAnnouncement, factory, error, loading } = useCreateAnnouncement()
+		return { error, loading, createAnnouncement, factory }
+	}
 })
 </script>

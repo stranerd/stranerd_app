@@ -17,10 +17,9 @@
 				</div>
 				<div v-if="classInst.admins.includes(id)" class="flex flex-col card-padding text-secondaryText">
 					<a v-for="{ name, icon, click } in [
-							{ name: 'Edit Class Info', icon: createOutline, click: () => openClassEditModal(classInst, $router) },
-							{ name: 'Courses List', icon: listOutline, click: () => openClassEditModal(classInst, $router, true) }
-						]" :key="name" class="flex gap-4 items-center py-2"
-						@click="click">
+						{ name: 'Edit Class Info', icon: createOutline, click: () => openClassEditModal(classInst, $router) },
+						{ name: 'Courses List', icon: listOutline, click: () => openClassEditModal(classInst, $router, true) }
+					]" :key="name" class="flex gap-4 items-center py-2" @click="click">
 						<IonIcon :icon="icon" />
 						<IonText>{{ name }}</IonText>
 					</a>

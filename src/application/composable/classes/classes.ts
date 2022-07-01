@@ -3,7 +3,6 @@ import { Router, useRouter } from 'vue-router'
 import { ClassEntity, ClassesUseCases, ClassFactory, ClassUsers } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { useClassModal } from '@app/composable/core/modals'
 import { useAuth } from '@app/composable/auth/auth'
 import { UserEntity, UsersUseCases } from '@modules/users'
 import { useRedirectToAuth } from '@app/composable/auth/session'
@@ -185,7 +184,6 @@ export const useCreateClass = () => {
 				const classInst = await ClassesUseCases.add(factory.value)
 				await setMessage('Class submitted successfully')
 				factory.value.reset()
-				useClassModal().closeCreateClass()
 				await router.replace(`/classes/${classInst.id}`)
 			} catch (error) {
 				await setError(error)
@@ -296,8 +294,6 @@ export const useEditClass = () => {
 				await setLoading(true)
 				await ClassesUseCases.update(editingClass!.id, factory.value)
 				await setMessage('Class updated successfully')
-				useClassModal().closeEditClass()
-				useClassModal().closeEditClassCourses()
 				factory.value.reset()
 				await router.replace(`/classes/${editingClass!.id}`)
 			} catch (error) {

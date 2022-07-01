@@ -1,6 +1,6 @@
 <template>
 	<IonPage class="layout">
-		<IonContent>
+		<IonContent :scrollY="false">
 			<div class="layout-page">
 				<div class="layout-page-left">
 					<LeftSidebar class="h-full py-8" />

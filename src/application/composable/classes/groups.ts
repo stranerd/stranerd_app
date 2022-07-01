@@ -3,7 +3,6 @@ import { GroupEntity, GroupFactory, GroupsUseCases } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
-import { useClassModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
 
 const global = {} as Record<string, {
@@ -87,7 +86,6 @@ export const useCreateGroup = () => {
 				const group = await GroupsUseCases.add(factory.value)
 				await setMessage('Group created successfully.')
 				factory.value.reset()
-				useClassModal().closeCreateGroup()
 				await router.push(`/messages/classes/${group.classId}/${group.id}`)
 			} catch (error) {
 				await setError(error)
@@ -115,7 +113,6 @@ export const useEditGroup = () => {
 	const router = useRouter()
 
 	if (editingGroup) factory.value.loadEntity(editingGroup)
-	else useClassModal().closeEditGroup()
 
 	const editGroup = async () => {
 		await setError('')
@@ -125,7 +122,6 @@ export const useEditGroup = () => {
 				const group = await GroupsUseCases.update(editingGroup!.id, factory.value)
 				await setMessage('Group updated successfully')
 				factory.value.reset()
-				useClassModal().closeEditGroup()
 				await router.push(`/classes/${group.classId}/groups/${group.id}`)
 			} catch (error) {
 				await setError(error)

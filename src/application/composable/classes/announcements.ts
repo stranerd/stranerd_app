@@ -3,7 +3,6 @@ import { AnnouncementEntity, AnnouncementFactory, AnnouncementsUseCases } from '
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
-import { useClassModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
 
@@ -90,7 +89,6 @@ export const useCreateAnnouncement = () => {
 				const announcement = await AnnouncementsUseCases.add(factory.value)
 				await setMessage('Announcement posted successfully.')
 				factory.value.reset()
-				useClassModal().closeCreateAnnouncement()
 				await router.push(`/classes/${announcement.classId}/announcements/${announcement.id}`)
 			} catch (error) {
 				await setError(error)
@@ -118,7 +116,6 @@ export const useEditAnnouncement = () => {
 	const router = useRouter()
 
 	if (editingAnnouncement) factory.value.loadEntity(editingAnnouncement)
-	else useClassModal().closeEditAnnouncement()
 
 	const editAnnouncement = async () => {
 		await setError('')
@@ -128,7 +125,6 @@ export const useEditAnnouncement = () => {
 				const announcement = await AnnouncementsUseCases.update(editingAnnouncement!.id, factory.value)
 				await setMessage('Announcement updated successfully')
 				factory.value.reset()
-				useClassModal().closeEditAnnouncement()
 				await router.push(`/classes/${announcement.classId}/announcements/${announcement.id}`)
 			} catch (error) {
 				await setError(error)
