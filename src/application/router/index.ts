@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router'
-// @ts-ignore
-import routes from '~pages'
+import routes from 'vue-auto-routing'
 import { allModals, allPopovers } from '@app/composable/core/modals'
 
 const router = createRouter({ history: createWebHistory(), routes })

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
 <head>
 	<title>Stranerd</title>
-	<link href="/images/icon.png" rel="shortcut icon" type="image/png" />
+	<link href="<%= BASE_URL %>favicon.ico" rel="icon">
 
 	<meta charset="utf-8" />
 	<meta content="light dark" name="color-scheme" />
@@ -12,14 +12,16 @@
 		name="viewport"
 	/>
 
-	<!-- add to homescreen for ios -->
 	<meta content="yes" name="apple-mobile-web-app-capable" />
 	<meta content="Stranerd" name="apple-mobile-web-app-title" />
 	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
 </head>
 <body>
+<noscript>
+	<strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+		Please enable it to continue.</strong>
+</noscript>
 <div id="app"></div>
-<script src="/src/main.ts" type="module"></script>
+<!-- built files will be auto injected -->
 </body>
 </html>
-
