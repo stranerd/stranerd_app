@@ -2,7 +2,10 @@ import { createRouter, createWebHistory } from '@ionic/vue-router'
 import routes from 'vue-auto-routing'
 import { allModals, allPopovers } from '@app/composable/core/modals'
 
-const router = createRouter({ history: createWebHistory(), routes })
+const router = createRouter({
+	history: createWebHistory(),
+	routes: routes.map((r) => ({ ...r, path: r.path + '/' }))
+})
 
 router.beforeEach(async () => {
 	await Promise.all(allModals.map((modal) => modal().closeAll()))

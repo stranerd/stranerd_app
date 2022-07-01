@@ -20,6 +20,26 @@
 			<DisplayError :error="factory.errors.body" />
 		</div>
 
+		<div class="border-bottom-line" />
+
+		<div class="flex justify-between items-center">
+			<IonLabel>Reminder <span class="font-normal">(optional)</span></IonLabel>
+			<IonIcon v-if="factory.reminder !== null" :icon="trashBinOutline" class="text-danger"
+				@click="factory.reminder = null" />
+			<IonIcon v-else :icon="addOutline" @click="factory.reminder = Date.now()" />
+		</div>
+
+		<div v-if="factory.reminder !== null" class="flex gap-4">
+			<div class="flex flex-col w-full gap-2">
+				<IonLabel>Date</IonLabel>
+				<IonInput v-model="factory.reminderDate" type="date" />
+			</div>
+			<div class="flex flex-col w-full gap-2">
+				<IonLabel>Time</IonLabel>
+				<IonInput v-model="factory.reminderTime" type="time" />
+			</div>
+		</div>
+
 		<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full md:w-auto" type="submit">
 			<slot name="buttonText">Submit</slot>
 			<IonRippleEffect class="rounded-lg" />
@@ -32,6 +52,7 @@
 import { defineComponent, PropType } from 'vue'
 import { AnnouncementFactory } from '@modules/classes'
 import { useUserClassList } from '@app/composable/users/users/classes'
+import { addOutline, trashBinOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'AnnouncementForm',
@@ -60,7 +81,7 @@ export default defineComponent({
 	},
 	setup () {
 		const { adminClasses } = useUserClassList()
-		return { adminClasses }
+		return { adminClasses, addOutline, trashBinOutline }
 	}
 })
 </script>

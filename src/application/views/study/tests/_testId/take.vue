@@ -1,5 +1,5 @@
 <template>
-	<DefaultLayout :hideBottom="true">
+	<DefaultLayout :hideBottom="true" :hideFab="true">
 		<div v-if="test">
 			<div
 				class="flex items-center md:justify-between justify-center w-full lg:w-8/12 p-4 mx-auto text-lg border-bottom-line">
