@@ -1,4 +1,4 @@
-import { EmbeddedUser } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { ClassUsers, EventDataType, EventOneOffType, EventTimetableType, EventType } from '../types'
 import { BaseEntity } from '@modules/core'
 
@@ -27,7 +27,7 @@ export class EventEntity extends BaseEntity {
 		super()
 		this.id = id
 		this.title = title
-		this.user = user
+		this.user = generateEmbeddedUser(user)
 		this.data = data
 		this.classId = classId
 		this.users = users

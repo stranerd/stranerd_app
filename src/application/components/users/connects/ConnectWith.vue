@@ -1,23 +1,24 @@
 <template>
 	<template v-if="fetched">
-		<IonButton v-if="!connect" class="btn-primary w-full" @click="createConnect">
+		<IonButton v-if="!connect" class="btn-primary w-full" @click="createConnect(userId)">
 			<SpinLoading v-if="loading" />
 			<IonIcon v-else :icon="linkOutline" />
 			<span class="ml-2">Connect</span>
 		</IonButton>
 		<IonButton v-else-if="connect.pending && connect.to.id === userId" class="btn-outline w-full"
-			@click="deleteConnect">
+			@click="deleteConnect(connect)">
 			<SpinLoading v-if="loading" />
 			<IonIcon v-else :icon="closeOutline" />
 			<span class="ml-2">Cancel Request</span>
 		</IonButton>
 		<IonButton v-else-if="connect.pending && connect.from.id === userId" class="btn-primary w-full"
-			@click="acceptConnect(true)">
+			@click="acceptConnect(connect, true)">
 			<SpinLoading v-if="loading" />
 			<IonIcon v-else :icon="linkOutline" />
 			<span class="ml-2">Accept Connect</span>
 		</IonButton>
-		<IonButton v-else-if="connect.accepted" class="btn-outline outline-danger w-full" @click="deleteConnect">
+		<IonButton v-else-if="connect.accepted" class="btn-outline outline-danger w-full"
+			@click="deleteConnect(connect)">
 			<SpinLoading v-if="loading" />
 			<IonIcon v-else :icon="unlinkOutline" />
 			<span class="ml-2">Disconnect</span>
@@ -26,8 +27,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useConnectWith } from '@app/composable/users/connects'
+import { computed, defineComponent } from 'vue'
+import { useConnects } from '@app/composable/users/connects'
 import { closeOutline, linkOutline, unlinkOutline } from 'ionicons/icons'
 
 export default defineComponent({
@@ -40,9 +41,10 @@ export default defineComponent({
 	},
 	setup (props) {
 		const {
-			connect, loading, error, fetched,
+			connects, loading, error, fetched,
 			createConnect, acceptConnect, deleteConnect
-		} = useConnectWith(props.userId)
+		} = useConnects()
+		const connect = computed(() => connects.value.find((c) => [c.from.id, c.to.id].includes(props.userId)) ?? null)
 		return {
 			connect, loading, error, fetched,
 			createConnect, acceptConnect, deleteConnect,

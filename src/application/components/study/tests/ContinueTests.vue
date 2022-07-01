@@ -2,7 +2,7 @@
 	<div>
 		<EmptyState v-if="!loading && !error && unCompletedTests.length === 0" info="You have no uncompleted tests" />
 		<BlockLoading v-if="loading" />
-		<div v-else class="showcase">
+		<div v-else class="showcase-flex">
 			<ContinueTestCard v-for="test in unCompletedTests" :key="test.hash" :test="test" />
 		</div>
 	</div>

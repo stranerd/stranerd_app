@@ -37,7 +37,7 @@ export const useUser = (userId: string) => {
 		if (id.value && id.value === userId) {
 			// Don't start a listener if it is the current auth user
 			// Instead watch the auth user for changes
-			watch(() => user.value?.hash, () => global[userId].user.value = user.value)
+			watch(user, () => global[userId].user.value = user.value)
 			return () => {
 			}
 		}

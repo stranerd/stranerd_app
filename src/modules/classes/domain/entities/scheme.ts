@@ -1,4 +1,4 @@
-import { EmbeddedUser } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { ClassUsers } from '../types'
 import { BaseEntity } from '@modules/core'
 
@@ -31,7 +31,7 @@ export class SchemeEntity extends BaseEntity {
 		super()
 		this.id = id
 		this.title = title
-		this.user = user
+		this.user = generateEmbeddedUser(user)
 		this.topic = topic
 		this.start = start
 		this.end = end

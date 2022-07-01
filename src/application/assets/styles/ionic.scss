@@ -36,9 +36,9 @@ ion-popover {
 	--background: #{$color-bodyBg};
 	--height: auto;
 	--width: 100vw;
+	--border-radius: 1rem;
 	@media (min-width: $lg) {
 		--width: 600px !important;
-		--border-radius: 1rem;
 		--margin: auto;
 	}
 

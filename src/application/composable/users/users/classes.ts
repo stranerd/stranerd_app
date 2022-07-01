@@ -79,7 +79,7 @@ export const useUserClassList = (id = useAuth().id.value) => {
 
 	const adminClasses = computed(() => global[id].classes.value.filter((c) => c.admins.includes(id)))
 
-	watch(() => global[id].searchValue.value, () => {
+	watch(global[id].searchValue, () => {
 		if (!global[id].searchValue.value) global[id].searchMode.value = false
 	})
 

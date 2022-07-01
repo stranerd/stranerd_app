@@ -9,12 +9,12 @@ export class ConnectsUseCase {
 		this.repository = repository
 	}
 
-	async findBetweenUsers (path: [string, string]) {
-		return await this.repository.find(path.sort().join('---'))
+	async get () {
+		return await this.repository.get({ all: true })
 	}
 
-	async listenBetweenUsers (path: [string, string], listener: Listeners<ConnectEntity>) {
-		return await this.repository.listenToOne(path.sort().join('---'), listener)
+	async listen (listener: Listeners<ConnectEntity>) {
+		return await this.repository.listenToMany({ all: true }, listener, (entity) => !!entity.id)
 	}
 
 	async create (userId: string) {

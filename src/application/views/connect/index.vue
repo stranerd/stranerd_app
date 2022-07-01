@@ -1,7 +1,7 @@
 <template>
 	<DefaultLayout>
-		<div>
-			<div class="flex flex-col items-start border-bottom-line card-padding">
+		<div class="showcase-flex">
+			<div class="flex flex-col items-start border-bottom-line card card-padding">
 				<IonText class="text-lg">An easy way to work with students from other schools.</IonText>
 				<IonText class="text-secondaryText">
 					Stranerd connect makes communicating and collaborating with students from other schools easier.
@@ -10,7 +10,7 @@
 					See how Stranerd Connect works
 				</IonButton>
 			</div>
-			<div class="flex flex-col !gap-4 card-padding border-bottom-line">
+			<div class="flex flex-col !gap-4 card card-padding border-bottom-line">
 				<IonText class="font-bold">How do you want to connect?</IonText>
 				<div v-for="{ icon, title, sub } in [
 					{ icon: personOutline, title: 'Student connect', sub: '1 on 1 discussion with any student.' },
@@ -25,7 +25,7 @@
 			</div>
 			<IonModal :isOpen="isOpen" cssClass="modal-class" @didDismiss="closeModal()">
 				<div class="modal-content p-6 lg:p-8">
-					<div class="flex flex-col gap-4 items-center text-center">
+					<div class="flex flex-col gap-2 items-center text-center">
 						<template v-if="tab === 0">
 							<IonIcon :icon="informationCircleOutline" class="text-4xl text-info" />
 							<IonText class="font-bold text-lg">Send a request</IonText>
@@ -72,8 +72,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 	.modal-class {
-		--width: auto;
 		--max-width: calc(100vw - 2rem);
-		--border-radius: 1rem;
 	}
 </style>

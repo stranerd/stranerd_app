@@ -81,7 +81,7 @@ export const useQuestionList = () => {
 	onUnmounted(async () => {
 		await listener.close()
 	})
-	watch(() => global.tagId.value, async () => {
+	watch(global.tagId, async () => {
 		await router.push('/questions')
 	})
 

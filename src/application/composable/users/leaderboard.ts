@@ -1,4 +1,4 @@
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { RankingTimes, UserEntity, UsersUseCases } from '@modules/users'
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
@@ -37,17 +37,15 @@ export const useLeaderboardList = () => {
 		}
 	})
 
+	const watcher = watch([global.tagId, global.time], async () => {
+		global.fetched.value = false
+		await fetchUsers()
+	})
+
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchUsers()
 	})
-	watch(() => global.time.value, async () => {
-		global.fetched.value = false
-		await fetchUsers()
-	})
-	watch(() => global.tagId.value, async () => {
-		global.fetched.value = false
-		await fetchUsers()
-	})
+	onUnmounted(watcher)
 
 	return { ...global, hasNoAuthUser, fetchMoreUsers: fetchUsers }
 }

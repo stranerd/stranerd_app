@@ -57,7 +57,7 @@ export const useCurrentSession = () => {
 		}
 	}
 
-	watch(() => currentSessionId.value, async () => {
+	watch(currentSessionId, async () => {
 		await fetchSession(id.value, currentSessionId.value)
 	})
 

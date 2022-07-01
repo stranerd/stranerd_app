@@ -10,6 +10,8 @@ const global = {} as Record<string, {
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
 	unRead: Ref<number>
+	timer: Ref<number>
+	timeOut: Ref<any>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useNotificationList = () => {
@@ -37,10 +39,14 @@ export const useNotificationList = () => {
 			hasMore: ref(false),
 			fetched: ref(false),
 			unRead: ref(0),
+			timer: ref(0),
+			timeOut: ref(null),
 			listener,
 			...useErrorHandler(),
 			...useLoadingHandler()
 		}
+		watch(global[userId].notifications, () => global[userId].timer.value++, { deep: true })
+		watch(global[userId].timer, async (cur, prev) => prev > cur && cur === 0 && await fetchUnRead())
 	}
 
 	const fetchNotifications = async () => {
@@ -67,13 +73,16 @@ export const useNotificationList = () => {
 		global[userId].unRead.value = await NotificationsUseCases.getUnReadCount()
 	}
 
-	watch(global[userId].notifications, fetchUnRead, { deep: true })
-
 	onMounted(async () => {
+		if (!global[userId].timeOut.value) global[userId].timeOut.value = setInterval(() => {
+			if (global[userId].timer.value > 0) global[userId].timer.value--
+		}, 500)
 		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchNotifications()
 		await global[userId].listener.start()
 	})
 	onUnmounted(async () => {
+		clearInterval(global[userId].timeOut.value)
+		global[userId].timeOut.value = null
 		// await global[userId].listener.close()
 	})
 

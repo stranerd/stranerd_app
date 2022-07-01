@@ -13,7 +13,7 @@ export const useProfileUpdate = () => {
 	const { user } = useAuth()
 
 	if (user.value) factory.value.loadEntity(user.value)
-	watch(() => user.value?.hash, () => user.value && factory.value.loadEntity(user.value))
+	watch(user, () => user.value && factory.value.loadEntity(user.value))
 
 	const updateProfile = async (skipAlert = false) => {
 		await setError('')
@@ -40,7 +40,7 @@ export const useUserSchoolUpdate = () => {
 	const { user } = useAuth()
 
 	if (user.value) factory.value.loadEntity(user.value)
-	watch(() => user.value?.hash, () => user.value && factory.value.loadEntity(user.value))
+	watch(user, () => user.value && factory.value.loadEntity(user.value))
 
 	const updateSchool = async () => {
 		await setError('')

@@ -13,7 +13,7 @@
 			:open="$route.query.classId === group.key"
 			:title="classes.find((c) => c.id === group.key)?.name ?? 'Class'"
 			class="border-bottom-line" />
-		<MetaBlock :metas="connects" class="border-bottom-line" title="Student Connect" />
+		<MetaBlock :metas="connects" :showConnects="true" class="border-bottom-line" title="Student Connect" />
 	</div>
 </template>
 

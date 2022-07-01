@@ -105,7 +105,7 @@ export const useRouteMeta = (routeName: string | ComputedRef<string>, metaObj: M
 		set: setMeta
 	})
 
-	watch(() => name.value, () => {
+	watch(name, () => {
 		setMeta({ routeName: name.value })
 	})
 	return { meta }

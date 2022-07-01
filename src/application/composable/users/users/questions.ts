@@ -76,7 +76,7 @@ export const useUserQuestionList = (id: string) => {
 		await global[id].setLoading(false)
 	}
 
-	watch(() => global[id].searchValue.value, () => {
+	watch(global[id].searchValue, () => {
 		if (!global[id].searchValue.value) global[id].searchMode.value = false
 	})
 

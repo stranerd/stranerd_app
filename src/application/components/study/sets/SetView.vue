@@ -1,6 +1,6 @@
 <template>
-	<div class="flex flex-col gap-4 py-4">
-		<div class="flex flex-col justify-between gap-2 px-4">
+	<div class="showcase-flex">
+		<div class="flex flex-col justify-between gap-4 p-4 lg:p-0">
 			<div class="flex items-center gap-2">
 				<IonIcon :icon="folderOpenOutline" class="text-3xl" />
 				<div class="flex flex-col">
@@ -27,21 +27,19 @@
 			</div>
 		</div>
 		<EmptyState v-if="!set.allSaved.length" info="This folder is empty" />
-		<div v-if="set.allSaved.length" class="showcase">
-			<template v-if="['All', 'Test Preps'].includes(filter)">
-				<TestPrepListCard v-for="testPrep in filteredTestPreps" :key="testPrep.hash" :testPrep="testPrep"
-					class="border-bottom-line" />
-			</template>
-			<template v-if="['All', 'Flashcards'].includes(filter)">
-				<FlashCardListCard v-for="flashCard in filteredFlashCards" :key="flashCard.hash"
-					:flashCard="flashCard" class="border-bottom-line" />
-			</template>
-			<template v-if="['All', 'Documents'].includes(filter)">
-				<DocumentListCard v-for="document in filteredDocuments" :key="document.hash" :document="document"
-					class="border-bottom-line" />
-			</template>
-		</div>
-		<PageLoading v-if="loading" />
+		<template v-if="['All', 'Test Preps'].includes(filter)">
+			<TestPrepListCard v-for="testPrep in filteredTestPreps" :key="testPrep.hash" :testPrep="testPrep"
+				class="border-bottom-line" />
+		</template>
+		<template v-if="['All', 'Flashcards'].includes(filter)">
+			<FlashCardListCard v-for="flashCard in filteredFlashCards" :key="flashCard.hash"
+				:flashCard="flashCard" class="border-bottom-line" />
+		</template>
+		<template v-if="['All', 'Documents'].includes(filter)">
+			<DocumentListCard v-for="document in filteredDocuments" :key="document.hash" :document="document"
+				class="border-bottom-line" />
+		</template>
+		<BlockLoading v-if="loading" />
 	</div>
 </template>
 
