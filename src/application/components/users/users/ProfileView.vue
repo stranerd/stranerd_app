@@ -14,7 +14,8 @@
 				{ label: 'Questions', route: '/account/questions', icon: helpCircleOutline },
 				{ label: 'Answers', route: '/account/answers', icon: readerOutline },
 				{ label: 'Flashcards', route: '/account/flashCards', icon: flashOutline },
-				{ label: 'Documents', route: '/account/documents', icon: documentTextOutline },
+				{ label: 'Notes', route: '/account/notes', icon: documentTextOutline },
+				{ label: 'My Library', route: '/account/files', icon: libraryOutline },
 				{ label: 'Saved', route: '/account/sets', icon: bookmarkOutline },
 				{ label: 'Settings', route: '/settings', icon: settingsOutline },
 			]" :key="route" :to="route" class="flex gap-3 items-center">
@@ -35,6 +36,7 @@ import {
 	flashOutline,
 	gridOutline,
 	helpCircleOutline,
+	libraryOutline,
 	readerOutline,
 	settingsOutline
 } from 'ionicons/icons'
@@ -47,7 +49,7 @@ export default defineComponent({
 		const { id, user } = useAuth()
 		return {
 			id, user,
-			gridOutline, helpCircleOutline, readerOutline, flashOutline,
+			gridOutline, helpCircleOutline, readerOutline, flashOutline, libraryOutline,
 			documentTextOutline, bookmarkOutline, settingsOutline, cartOutline
 		}
 	}

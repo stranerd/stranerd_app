@@ -1,5 +1,5 @@
 <template>
-	<form class="flex flex-col gap-6 justify-center" @submit.prevent="submit">
+	<form class="flex flex-col gap-6" @submit.prevent="submit">
 		<Avatar :editable="true" :name="factory.name" :size="80" :src="factory.photo" @photo="savePhoto" />
 
 		<div class="flex flex-col gap-2">

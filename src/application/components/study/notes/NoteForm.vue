@@ -1,27 +1,34 @@
 <template>
-	<form @submit.prevent="submit">
-		<div class="mb-4">
-			<IonInput v-model="factory.title" class="!h-12 text-left" placeholder="Enter Note Title" />
+	<form class="flex flex-col" @submit.prevent="submit">
+		<IonSelect v-model="factory.isPrivate" class="capitalize" interface="action-sheet" placeholder="Privacy">
+			<IonSelectOption v-for="{ key, value } in [
+				{ key: 'Public', value: false },
+				{ key: 'Private', value: true }
+			]" :key="key" :value="value" class="capitalize" style="--border-radius: 0;">
+				{{ key }}
+			</IonSelectOption>
+		</IonSelect>
+
+		<div class="border-bottom-line">
+			<IonInput v-model="factory.title" placeholder="Title" style="--background: transparent;" />
 			<DisplayError :error="factory.errors.title" />
 		</div>
 
-		<div class="mb-4">
-			<IonInput v-model="factory.content" class="!h-12 text-left"
-				placeholder="Add a short description" />
-			<DisplayError :error="factory.errors.content" />
+		<div class="flex-grow border-bottom-line" />
+
+		<div class="flex items-center justify-center p-4 gap-12 text-xl text-secondaryText">
+			<IonIcon :icon="imageOutline" />
+			<IonIcon :icon="listOutline" />
+			<IonIcon :icon="textOutline" />
+			<IonIcon :icon="trashBinOutline" class="text-danger" />
 		</div>
-
-		<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full md:!h-12" type="submit">
-			<slot name="buttonText">Submit</slot>
-		</IonButton>
-
-		<PageLoading v-if="loading" />
 	</form>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { NoteFactory } from '@modules/study'
+import { imageOutline, listOutline, textOutline, trashBinOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'NoteForm',
@@ -42,6 +49,22 @@ export default defineComponent({
 			type: String,
 			required: true
 		}
+	},
+	setup () {
+		return { imageOutline, listOutline, textOutline, trashBinOutline }
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+	ion-input, ion-select {
+		border-radius: 0;
+	}
+
+	ion-input {
+		--background: transparent !important;
+		background: transparent !important;
+		--padding-top: 1.5rem !important;
+		--padding-bottom: 1.5rem !important;
+	}
+</style>

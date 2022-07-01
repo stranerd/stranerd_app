@@ -28,34 +28,29 @@ ion-popover {
 	}
 }
 
-.font-500 {
-	font-weight: 500;
-}
-
-.modal-class {
+ion-modal.modal-class {
 	--background: #{$color-bodyBg};
-	--height: auto;
+	--height: fit;
+	--max-height: 100vh;
 	--width: 100vw;
 	--border-radius: 1rem;
 	@media (min-width: $lg) {
 		--width: 600px !important;
-		--margin: auto;
+		--max-height: 50%;
+		--border-radius: 2rem;
 	}
 
-
-	&.bottom {
-		align-items: flex-end;
-	}
-
-	.ion-page {
-		position: relative;
-		display: block;
-		contain: content;
+	&::part(content) {
 		overflow-y: auto;
-		max-height: 100vh;
-		width: 100vw;
-		@media (min-width: $md) {
-			width: auto;
+	}
+
+	@media (min-width: $lg) {
+		&::part(content) {
+			bottom: 25%;
+			border-radius: var(--border-radius);
+		}
+		&::part(handle) {
+			display: none;
 		}
 	}
 }
@@ -115,8 +110,8 @@ ion-input, ion-textarea, ion-select {
 	outline: 1px solid transparent;
 
 	&:focus-within {
-		--icon-color: #{$color-primaryBg} !important;
-		outline-color: $color-primaryBg;
+		--icon-color: #{$color-info} !important;
+		outline-color: $color-info;
 	}
 }
 
@@ -221,6 +216,10 @@ ion-select::part(icon) {
 ion-icon {
 	cursor: pointer;
 	font-size: 1.4em;
+}
+
+ion-label {
+	font-weight: 600;
 }
 
 ion-item {

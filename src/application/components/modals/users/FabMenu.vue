@@ -9,12 +9,13 @@
 					{ name: 'Make an announcement', path: '/classes/announcements/create', icon: megaphoneOutline },
 					{ name: 'Start a discussion', path: '/classes/groups/create', icon: chatbubblesOutline },
 				] : []),
-				{ name: 'Write a note', path: '/study/notes/create', icon: documentOutline },
+				{ name: 'Upload a file', path: '/study/files/create', icon: documentOutline },
+				{ name: 'Write a note', path: '/study/notes/create', icon: createOutline },
 			]" :key="path" :to="path" class="flex items-center gap-4 py-4">
 				<IonIcon :icon="icon" />
 				<span>{{ name }}</span>
 			</router-link>
-			<IonButton class="btn-primary mt-6" @click="closeModal">Cancel</IonButton>
+			<IonButton class="btn-primary mt-2" @click="closeModal">Cancel</IonButton>
 		</div>
 	</div>
 </template>
@@ -24,6 +25,7 @@ import { defineComponent } from 'vue'
 import { useUserModal } from '@app/composable/core/modals'
 import {
 	chatbubblesOutline,
+	createOutline,
 	documentOutline,
 	flashOutline,
 	helpCircleOutline,
@@ -39,7 +41,7 @@ export default defineComponent({
 		const closeModal = () => useUserModal().closeFabMenu()
 		return {
 			adminClasses, helpCircleOutline, flashOutline, documentOutline, closeModal,
-			peopleOutline, megaphoneOutline, chatbubblesOutline
+			createOutline, peopleOutline, megaphoneOutline, chatbubblesOutline
 		}
 	}
 })
