@@ -45,8 +45,8 @@
 								Start a discussion with a student in another class.
 								Send and get notified immediately it is accepted.
 							</IonText>
-							<IonInput class="w-full mt-2" placeholder="Enter email or name" />
-							<IonButton class="btn-primary w-full mt-2" @click="closeModal()">Send Request</IonButton>
+							<IonInput v-model="searchTerm" class="w-full mt-2" placeholder="Enter email or name" />
+							<IonButton class="btn-primary w-full mt-2" @click="searchUsers">Send Request</IonButton>
 						</template>
 						<template v-if="tab === 2">
 							<IonIcon :icon="informationCircleOutline" class="text-5xl text-info" />
@@ -74,12 +74,16 @@ import {
 	personOutline
 } from 'ionicons/icons'
 import { generateMiddlewares } from '@app/middlewares'
+import { useSearch } from '@app/composable/meta/search'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'Connect',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Stranerd Connect', { back: true })
+		const router = useRouter()
+		const { searchTerm, search } = useSearch()
 		const isOpen = ref(false)
 		const tab = ref(0)
 		const openModal = (t = 0) => {
@@ -89,9 +93,15 @@ export default defineComponent({
 		const closeModal = () => {
 			isOpen.value = false
 		}
+		searchTerm.value = ''
+		const searchUsers = async () => {
+			closeModal()
+			await router.push(`/search/users?search=${searchTerm.value}`)
+			await search()
+		}
 		return {
 			peopleOutline, personOutline, alertCircleOutline, informationCircleOutline,
-			closeOutline, isOpen, tab, openModal, closeModal
+			closeOutline, isOpen, tab, openModal, closeModal, searchTerm, searchUsers
 		}
 	}
 })
