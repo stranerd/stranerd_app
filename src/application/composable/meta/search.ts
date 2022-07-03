@@ -71,9 +71,8 @@ export const useSearch = () => {
 					flashCards: FlashCardsUseCases, notes: NotesUseCases
 				}
 				await Promise.all(
-					Object.entries(searchObj).map(async ([key, useCase]) => {
-						//@ts-ignore
-						global.res[key].value = await useCase.search(val)
+					Object.entries(searchObj).map(async (s) => {
+						global.res[s[0]].value = await s[1].search(val)
 					})
 				)
 				global.fetched.value = true
@@ -84,7 +83,6 @@ export const useSearch = () => {
 			await global.setLoading(false)
 		} else {
 			Object.keys(global.res).forEach((key) => {
-				//@ts-ignore
 				global.res[key].value = []
 			})
 			global.fetched.value = false

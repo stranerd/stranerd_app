@@ -3,9 +3,9 @@ import { capitalize } from '@utils/commons'
 
 const merge = (...args: string[]) => args.join('')
 
-function spreadModals<T> (type: string, modals: Record<string, T>) {
-	return Object.fromEntries(Object.entries(modals).map(([key, val]) => [merge(type, key), { component: val, type }]))
-}
+const spreadModals = <T> (type: string, modals: Record<string, T>) => Object.fromEntries(
+	Object.entries(modals).map(([key, val]) => [merge(type, key), { component: val, type }])
+)
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 const registerModals = (stack: Ref<string[]>, modals: Record<string, any>) => {

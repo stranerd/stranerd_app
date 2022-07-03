@@ -34,7 +34,7 @@ export const getRandomValue = () => Date.now() + Math.random().toString(36)
 
 export const capitalize = (value: string) => value.trim().split(' ').map((c: string) => (c[0]?.toUpperCase() ?? '') + c.slice(1)).join(' ')
 
-export function groupBy<Type, Unique extends string | number> (array: Array<Type>, func: (item: Type) => Unique) {
+export const groupBy = <Type, Unique extends string | number> (array: Array<Type>, func: (item: Type) => Unique) => {
 	return array.reduce((acc, cur) => {
 		const key = func(cur)
 		const index = acc.findIndex((a) => a.key === key)
@@ -53,9 +53,7 @@ export const copyToClipboard = async (text: string) => {
 	await Clipboard.write({ string: text })
 }
 
-export function copyObject<T extends Record<any, any>> (target: T, ...sources: T[]) {
-	return Object.assign(target, ...sources)
-}
+export const copyObject = <T extends Record<any, any>> (target: T, ...sources: T[]) => Object.assign(target, ...sources)
 
 export const getAlphabet = (num: number) => 'abcdefghijklmnopqrstuv'.split('')[num - 1] ?? 'a'
 
@@ -78,7 +76,7 @@ const ngrokURL = 'https://local.stranerd.eu.ngrok.io'
 export const parseURL = (url: string) => url.replace(isWeb ? ngrokURL : localURL, isWeb ? localURL : ngrokURL)
 export const unParseURL = (url: string) => !isWeb ? url.replace(ngrokURL, localURL) : url
 
-export function addToArray<T> (array: T[], item: T, getKey: (a: T) => any, getComparer: (a: T) => number | string, asc = false) {
+export const addToArray = <T> (array: T[], item: T, getKey: (a: T) => any, getComparer: (a: T) => number | string, asc = false) => {
 	const existingIndex = array.findIndex((el) => getKey(el) === getKey(item))
 	const index = array.findIndex((el) => asc ? getComparer(el) >= getComparer(item) : getComparer(el) <= getComparer(item))
 	if (existingIndex !== -1 && existingIndex === index) {
