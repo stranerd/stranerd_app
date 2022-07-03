@@ -1,41 +1,39 @@
 <template>
-	<div class="card-padding">
-		<div class="flex items-center gap-2">
-			<Avatar :name="user.bio.fullName" :size="24" :src="user.bio.photo" />
-			<IonText class="flex gap-1 items-center">
-				<span>{{ user.bio.fullName }}</span>
-				<Verified :verified="user.roles.isVerified" />
-			</IonText>
-			<span class="ml-auto flex gap-3 items-center">
-				<template v-if="classInst.admins.includes(id)">
-					<template v-if="classInst.requests.includes(user.id)">
-						<IonIcon :icon="checkmarkOutline" class="text-success"
-							@click="acceptRequest(user.id, true)" />
-						<IonIcon :icon="closeOutline" class="text-danger"
-							@click="acceptRequest(user.id, false)" />
-					</template>
-					<template v-else-if="classInst.members.includes(user.id)">
-						<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
-							:icon="classInst.admins.includes(user.id) ? person : personOutline"
-							class="text-primaryBg"
-							@click="changeRole(user.id, ClassUsers.admins, !classInst.admins.includes(user.id))" />
-						<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
-							:icon="personRemoveOutline" class="text-danger"
-							@click="addToClass(user.id, false)" />
-					</template>
-					<template v-else>
-						<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
-							:icon="personAddOutline" class="text-primaryBg"
-							@click="addToClass(user.id, true)" />
-					</template>
+	<router-link :to="`/users/${user.id}`" class="flex items-center card-padding">
+		<Avatar :name="user.bio.fullName" :size="24" :src="user.bio.photo" />
+		<IonText class="flex gap-1 items-center">
+			<span>{{ user.bio.fullName }}</span>
+			<Verified :verified="user.roles.isVerified" />
+		</IonText>
+		<span class="ml-auto flex gap-3 items-center">
+			<template v-if="classInst.admins.includes(id)">
+				<template v-if="classInst.requests.includes(user.id)">
+					<IonIcon :icon="checkmarkOutline" class="text-success"
+						@click="acceptRequest(user.id, true)" />
+					<IonIcon :icon="closeOutline" class="text-danger"
+						@click="acceptRequest(user.id, false)" />
 				</template>
-				<template v-if="classInst.members.includes(user.id)">
-					<IonIcon v-if="user.id === id && classInst.user.id !== id"
-						:icon="exitOutline" class="text-danger" @click="leaveClass()" />
+				<template v-else-if="classInst.members.includes(user.id)">
+					<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
+						:icon="classInst.admins.includes(user.id) ? person : personOutline"
+						class="text-primaryBg"
+						@click="changeRole(user.id, ClassUsers.admins, !classInst.admins.includes(user.id))" />
+					<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
+						:icon="personRemoveOutline" class="text-danger"
+						@click="addToClass(user.id, false)" />
 				</template>
-			</span>
-		</div>
-	</div>
+				<template v-else>
+					<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
+						:icon="personAddOutline" class="text-primaryBg"
+						@click="addToClass(user.id, true)" />
+				</template>
+			</template>
+			<template v-if="classInst.members.includes(user.id)">
+				<IonIcon v-if="user.id === id && classInst.user.id !== id"
+					:icon="exitOutline" class="text-danger" @click="leaveClass()" />
+			</template>
+		</span>
+	</router-link>
 </template>
 
 <script lang="ts">

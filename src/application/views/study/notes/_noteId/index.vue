@@ -24,17 +24,6 @@
 </template>
 
 <script lang="ts">
-import {
-	add,
-	checkmarkCircleOutline,
-	chevronDown,
-	chevronUp,
-	contract,
-	pencil,
-	remove,
-	scan,
-	shareSocial
-} from 'ionicons/icons'
 import Avatar from '@app/components/core/Avatar.vue'
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
@@ -51,10 +40,7 @@ export default defineComponent({
 		useRouteMeta('Note', { back: true })
 		const { noteId } = useRoute().params
 		const { error, loading, note } = useNote(noteId as string)
-		return {
-			add, remove, scan, chevronDown, loading, note, error,
-			chevronUp, pencil, contract, shareSocial, checkmarkCircleOutline
-		}
+		return { loading, note, error }
 	}
 })
 </script>

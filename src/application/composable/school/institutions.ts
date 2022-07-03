@@ -4,6 +4,7 @@ import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/comp
 import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
+import { useRouter } from 'vue-router'
 
 const global = {
 	fetched: ref(false),
@@ -50,6 +51,7 @@ export const useInstitution = (id: string) => {
 }
 
 export const useCreateInstitution = () => {
+	const router = useRouter()
 	const factory = ref(new InstitutionFactory()) as Ref<InstitutionFactory>
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -65,6 +67,7 @@ export const useCreateInstitution = () => {
 				factory.value.reset()
 				useSchoolModal().closeCreateInstitution()
 				await setMessage('Institution created successfully')
+				await router.push(`/admin/school/institutions/${institution.id}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -82,6 +85,7 @@ export const openInstitutionEditModal = async (institution: InstitutionEntity) =
 }
 
 export const useEditInstitution = () => {
+	const router = useRouter()
 	const factory = ref(new InstitutionFactory()) as Ref<InstitutionFactory>
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -99,6 +103,7 @@ export const useEditInstitution = () => {
 				factory.value.reset()
 				useSchoolModal().closeEditInstitution()
 				await setMessage('Institution updated successfully')
+				await router.push(`/admin/school/institutions/${updatedInstitution.id}`)
 			} catch (error) {
 				await setError(error)
 			}

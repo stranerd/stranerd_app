@@ -117,4 +117,8 @@
 	.page-padding {
 		@apply p-4 lg:p-0
 	}
+
+	ion-icon {
+		@apply transition-all duration-300
+	}
 }

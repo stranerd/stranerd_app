@@ -8,8 +8,7 @@
 			<div class="flex gap-4 items-center p-4" @click="show[index] = !show[index]">
 				<IonText class="font-bold capitalize truncate w-full">{{ name }}</IonText>
 				<span>
-					<IonIcon :class="{'rotate-180': show[index]}" :icon="chevronDownOutline"
-						class="transition-all duration-300" />
+					<IonIcon :class="{'rotate-90': show[index]}" :icon="chevronForwardOutline" />
 				</span>
 			</div>
 			<div v-if="show[index]" class="flex flex-col">
@@ -26,7 +25,7 @@ import { useClassMembersList } from '@app/composable/classes/classes'
 import { ClassEntity } from '@modules/classes'
 import ClassMember from '@app/components/classes/classes/ClassMember.vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { chevronDownOutline } from 'ionicons/icons'
+import { chevronForwardOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'ClassMembers',
@@ -43,7 +42,7 @@ export default defineComponent({
 		const { loading, error, admins, tutors, members, requests } = useClassMembersList(props.classInst)
 		return {
 			id, show, admins, tutors, members, loading, error, requests,
-			chevronDownOutline
+			chevronForwardOutline
 		}
 	}
 })

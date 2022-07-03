@@ -3,7 +3,7 @@
 		<div class="flex card-padding !py-0 !gap-4 items-center" @click="show = !show">
 			<IonText class="font-bold capitalize truncate w-full">{{ title }}</IonText>
 			<span>
-				<IonIcon :class="{'rotate-180': show}" :icon="chevronDownOutline" class="transition-all duration-300" />
+				<IonIcon :class="{'rotate-90': show}" :icon="chevronForwardOutline" />
 			</span>
 		</div>
 		<div v-if="show" class="flex flex-col">
@@ -19,7 +19,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue'
 import ChatMetasListCard from '@app/components/messaging/chatMetas/ChatMetasListCard.vue'
-import { chevronDownOutline } from 'ionicons/icons'
+import { chevronForwardOutline } from 'ionicons/icons'
 import { ChatMetaEntity } from '@modules/messaging'
 import { useConnects } from '@app/composable/users/connects'
 
@@ -35,21 +35,16 @@ export default defineComponent({
 			type: Array as PropType<ChatMetaEntity[]>,
 			required: true
 		},
-		open: {
-			type: Boolean,
-			required: false,
-			default: false
-		},
 		showConnects: {
 			type: Boolean,
 			required: false,
 			default: false
 		}
 	},
-	setup (props) {
-		const show = ref(props.open || false)
+	setup () {
+		const show = ref(true)
 		const { pendingConnects } = useConnects()
-		return { show, chevronDownOutline, pendingConnects }
+		return { show, chevronForwardOutline, pendingConnects }
 	}
 })
 </script>

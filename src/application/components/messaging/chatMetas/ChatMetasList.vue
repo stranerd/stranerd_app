@@ -8,9 +8,8 @@
 			<EmptyState :info="search ? 'No results' : 'Join a class to have discussions'"
 				class="border-bottom-line py-6" />
 		</router-link>
-		<MetaBlock v-if="unRead.length" :metas="unRead" :open="true" class="border-bottom-line" title="Unread" />
+		<MetaBlock v-if="unRead.length" :metas="unRead" class="border-bottom-line" title="Unread" />
 		<MetaBlock v-for="group in groups" :key="group.key" :metas="group.values"
-			:open="$route.query.classId === group.key"
 			:title="classes.find((c) => c.id === group.key)?.name ?? 'Class'"
 			class="border-bottom-line" />
 		<MetaBlock :metas="connects" :showConnects="true" class="border-bottom-line" title="Student Connect" />

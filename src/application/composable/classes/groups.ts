@@ -86,7 +86,7 @@ export const useCreateGroup = () => {
 				const group = await GroupsUseCases.add(factory.value)
 				await setMessage('Group created successfully.')
 				factory.value.reset()
-				await router.push(`/messages/classes/${group.classId}/${group.id}`)
+				await router.push(`/classes/${group.classId}/groups/${group.id}`)
 			} catch (error) {
 				await setError(error)
 			}

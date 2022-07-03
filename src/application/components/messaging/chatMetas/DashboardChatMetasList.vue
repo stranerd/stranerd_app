@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col">
-		<MetaBlock v-if="unRead.length" :metas="unRead" class="border-bottom-line" title="Recent" />
-		<MetaBlock :metas="connects" class="border-bottom-line" title="Direct Messages" />
+		<MetaBlock v-if="unRead.length" :metas="unRead" class="border-bottom-line" title="Unread" />
+		<MetaBlock :metas="connects" class="border-bottom-line" title="Stranerd Connect" />
 		<BlockLoading v-if="loading" />
 	</div>
 </template>

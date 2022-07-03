@@ -4,6 +4,7 @@ import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/comp
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 import { useSchoolModal } from '@app/composable/core/modals'
+import { useRouter } from 'vue-router'
 
 const global = {
 	fetched: ref(false),
@@ -53,6 +54,7 @@ export const openFacultyCreateModal = async (institutionId: string) => {
 }
 
 export const useCreateFaculty = () => {
+	const router = useRouter()
 	const factory = ref(new FacultyFactory()) as Ref<FacultyFactory>
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -69,6 +71,7 @@ export const useCreateFaculty = () => {
 				factory.value.reset()
 				useSchoolModal().closeCreateFaculty()
 				await setMessage('Faculty created successfully')
+				await router.push(`/admin/school/institutions/${faculty.institutionId}/faculties/${faculty.id}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -86,6 +89,7 @@ export const openFacultyEditModal = async (faculty: FacultyEntity) => {
 }
 
 export const useEditFaculty = () => {
+	const router = useRouter()
 	const factory = ref(new FacultyFactory()) as Ref<FacultyFactory>
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -103,6 +107,7 @@ export const useEditFaculty = () => {
 				factory.value.reset()
 				useSchoolModal().closeEditFaculty()
 				await setMessage('Faculty updated successfully')
+				await router.push(`/admin/school/institutions/${updatedFaculty.institutionId}/faculties/${updatedFaculty.id}`)
 			} catch (error) {
 				await setError(error)
 			}

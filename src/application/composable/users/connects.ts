@@ -1,5 +1,5 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { ConnectEntity, ConnectsUseCases } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
@@ -9,7 +9,7 @@ const global = {} as Record<string, {
 	connects: Ref<ConnectEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
-} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler> & ReturnType<typeof useSuccessHandler>>
 
 export const useConnects = () => {
 	const { id } = useAuth()
@@ -34,6 +34,7 @@ export const useConnects = () => {
 			fetched: ref(false),
 			listener,
 			...useErrorHandler(),
+			...useSuccessHandler(),
 			...useLoadingHandler()
 		}
 	}
@@ -60,12 +61,13 @@ export const useConnects = () => {
 		await global[userId].listener.close()
 	})
 
-	const createConnect = async (userId: string) => {
+	const createConnect = async (user: string) => {
 		await global[userId].setError('')
 		await global[userId].setLoading(true)
 		try {
-			const connect = await ConnectsUseCases.create(userId)
+			const connect = await ConnectsUseCases.create(user)
 			addToArray(global[userId].connects.value, connect, (e) => e.id, (e) => e.createdAt)
+			await global[userId].setMessage('Connection created')
 		} catch (e) {
 			await global[userId].setError(e)
 		}
@@ -83,6 +85,7 @@ export const useConnects = () => {
 		await global[userId].setLoading(true)
 		try {
 			await ConnectsUseCases.accept(connect.id, accept)
+			await global[userId].setMessage(`Connection ${type}ed`)
 		} catch (e) {
 			await global[userId].setError(e)
 		}
@@ -100,6 +103,7 @@ export const useConnects = () => {
 		await global[userId].setLoading(true)
 		try {
 			await ConnectsUseCases.delete(connect.id)
+			await global[userId].setMessage('Connection removed')
 		} catch (e) {
 			await global[userId].setError(e)
 		}

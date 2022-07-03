@@ -4,7 +4,7 @@
 			<Avatar :name="classInst.name" :size="36" :src="classInst.photo" />
 			<IonText class="font-bold capitalize truncate w-full">{{ classInst.name }}</IonText>
 			<span>
-				<IonIcon :class="{'rotate-180': show}" :icon="chevronDownOutline" class="transition-all duration-300" />
+				<IonIcon :class="{'rotate-90': show}" :icon="chevronForwardOutline" />
 			</span>
 		</div>
 		<div v-if="show" class="flex flex-col text-secondaryText">
@@ -35,7 +35,7 @@ import {
 	calendarClearOutline,
 	calendarOutline,
 	chatbubblesOutline,
-	chevronDownOutline,
+	chevronForwardOutline,
 	informationCircleOutline,
 	libraryOutline,
 	listOutline,
@@ -54,7 +54,7 @@ export default defineComponent({
 	setup () {
 		const show = ref(false)
 		return {
-			show, chevronDownOutline, chatbubblesOutline, informationCircleOutline, libraryOutline,
+			show, chevronForwardOutline, chatbubblesOutline, informationCircleOutline, libraryOutline,
 			megaphoneOutline, peopleOutline, listOutline, calendarOutline, calendarClearOutline
 		}
 	}

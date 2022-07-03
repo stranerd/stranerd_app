@@ -26,7 +26,7 @@ export default defineComponent({
 	setup () {
 		const modalProps = {
 			cssClass: 'modal-class',
-			breakpoints: isPlatform('desktop') ? undefined : [0.1, 0.5, 1],
+			breakpoints: isPlatform('desktop') ? undefined : [0.5, 1],
 			initialBreakpoint: 1,
 			isOpen: true
 		}

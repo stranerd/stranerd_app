@@ -1,5 +1,5 @@
 <template>
-	<Modal class="h-screen md:h-auto">
+	<Modal>
 		<template v-slot:title>
 			Set up your account
 		</template>

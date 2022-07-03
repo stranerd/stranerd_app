@@ -10,7 +10,7 @@
 			</div>
 			<slot name="subtext" />
 		</div>
-		<div class="px-4 md:px-8 py-4 md:py-8">
+		<div class="px-4 md:px-8 py-4 md:py-8 max-h-fit overflow-y-auto">
 			<slot>
 				<p>This is the default content of the modal</p>
 			</slot>

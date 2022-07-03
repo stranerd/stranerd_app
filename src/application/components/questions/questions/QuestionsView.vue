@@ -8,7 +8,7 @@
 				class="flex justify-between card-padding"
 				@click="show = show === parent.id ? '' : parent.id">
 				<IonText class="font-bold capitalize">{{ parent.title }}</IonText>
-				<IonIcon :icon="show === parent.id ? chevronDownOutline : chevronForwardOutline" />
+				<IonIcon :class="{'rotate-90': show === parent.id}" :icon="chevronForwardOutline" />
 			</div>
 			<template v-if="show === parent.id">
 				<a v-for="tag in children" :key="tag.hash" :class="{'hasBg': tagId === tag.id}" class="card-padding"
@@ -25,7 +25,7 @@ import { computed, defineComponent, ref } from 'vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import { useTagList } from '@app/composable/interactions/tags'
 import { groupBy } from '@utils/commons'
-import { chevronDownOutline, chevronForwardOutline } from 'ionicons/icons'
+import { chevronForwardOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'QuestionsView',
@@ -40,7 +40,7 @@ export default defineComponent({
 				children: grouped.find((g) => g.key === t.id)?.values ?? []
 			}))
 		})
-		return { show, tagId, groups, chevronForwardOutline, chevronDownOutline }
+		return { show, tagId, groups, chevronForwardOutline }
 	}
 })
 </script>

@@ -10,6 +10,7 @@
 				<IonText class="font-bold capitalize w-full truncate">{{ classInst.name }}</IonText>
 			</div>
 			<slot v-if="classInst && classInst.members.includes(id)" :classInst="classInst" />
+			<SearchClassListCard v-else-if="classInst" :classInst="classInst" />
 		</div>
 	</DefaultLayout>
 </template>
@@ -19,9 +20,11 @@ import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { useClass } from '@app/composable/classes/classes'
 import { useAuth } from '@app/composable/auth/auth'
+import SearchClassListCard from '@app/components/classes/classes/SearchClassListCard.vue'
 
 export default defineComponent({
 	name: 'ClassWrapper',
+	components: { SearchClassListCard },
 	props: {
 		hideTitle: {
 			type: Boolean,

@@ -89,7 +89,7 @@ export const useCreateAnnouncement = () => {
 				const announcement = await AnnouncementsUseCases.add(factory.value)
 				await setMessage('Announcement posted successfully.')
 				factory.value.reset()
-				await router.push(`/classes/${announcement.classId}/announcements/${announcement.id}`)
+				await router.push(`/classes/${announcement.classId}/announcements`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -125,7 +125,7 @@ export const useEditAnnouncement = () => {
 				const announcement = await AnnouncementsUseCases.update(editingAnnouncement!.id, factory.value)
 				await setMessage('Announcement updated successfully')
 				factory.value.reset()
-				await router.push(`/classes/${announcement.classId}/announcements/${announcement.id}`)
+				await router.push(`/classes/${announcement.classId}/announcements`)
 			} catch (error) {
 				await setError(error)
 			}

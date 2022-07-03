@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 import { CommentEntity, CommentFactory, CommentsUseCases, InteractionEntities } from '@modules/interactions'
 import { useInteractionModal } from '@app/composable/core/modals'
@@ -73,6 +73,7 @@ export const useCreateComment = (id: string, type: InteractionEntities) => {
 	const factory = ref(new CommentFactory()) as Ref<CommentFactory>
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
+	const { message, setMessage } = useSuccessHandler()
 
 	if (!commentEntity) useInteractionModal().closeCreateComment()
 
@@ -83,6 +84,8 @@ export const useCreateComment = (id: string, type: InteractionEntities) => {
 				await setLoading(true)
 				await CommentsUseCases.add({ id, type }, factory.value)
 				factory.value.reset()
+				useInteractionModal().closeCreateComment()
+				await setMessage('Tag created successfully')
 			} catch (error) {
 				await setError(error)
 			}
@@ -90,5 +93,5 @@ export const useCreateComment = (id: string, type: InteractionEntities) => {
 		} else factory.value.validateAll()
 	}
 
-	return { factory, error, loading, createComment }
+	return { factory, error, message, loading, createComment }
 }

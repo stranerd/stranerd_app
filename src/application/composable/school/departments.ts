@@ -4,6 +4,7 @@ import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/comp
 import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
+import { useRouter } from 'vue-router'
 
 const global = {
 	fetched: ref(false),
@@ -53,6 +54,7 @@ export const openDepartmentCreateModal = async (facultyId: string) => {
 }
 
 export const useCreateDepartment = () => {
+	const router = useRouter()
 	const factory = ref(new DepartmentFactory()) as Ref<DepartmentFactory>
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -69,6 +71,7 @@ export const useCreateDepartment = () => {
 				factory.value.reset()
 				useSchoolModal().closeCreateDepartment()
 				await setMessage('Department created successfully')
+				await router.push(`/admin/school/institutions/${department.institutionId}/faculties/${department.facultyId}/departments/${department.id}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -86,6 +89,7 @@ export const openDepartmentEditModal = async (department: DepartmentEntity) => {
 }
 
 export const useEditDepartment = () => {
+	const router = useRouter()
 	const factory = ref(new DepartmentFactory()) as Ref<DepartmentFactory>
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -103,6 +107,7 @@ export const useEditDepartment = () => {
 				factory.value.reset()
 				useSchoolModal().closeEditDepartment()
 				await setMessage('Department updated successfully')
+				await router.push(`/admin/school/institutions/${updatedDepartment.institutionId}/faculties/${updatedDepartment.facultyId}/departments/${updatedDepartment.id}`)
 			} catch (error) {
 				await setError(error)
 			}

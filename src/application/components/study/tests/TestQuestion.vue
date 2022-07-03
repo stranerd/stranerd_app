@@ -45,7 +45,7 @@
 				<span class="text-primaryBg flex items-center font-bold py-8 gap-2"
 					@click="showExplanation = !showExplanation">
 					<span>{{ showExplanation ? 'hide' : 'show' }} solution</span>
-					<IonIcon :icon="showExplanation ? chevronUpOutline : chevronDownOutline" />
+					<IonIcon :class="{'rotate-90': showExplanation}" :icon="chevronForwardOutline" />
 				</span>
 
 				<div v-if="showExplanation">
@@ -70,8 +70,7 @@
 import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
 import {
 	checkmarkCircleOutline,
-	chevronDownOutline,
-	chevronUpOutline,
+	chevronForwardOutline,
 	closeCircleOutline,
 	flagOutline,
 	radioButtonOff,
@@ -127,8 +126,8 @@ export default defineComponent({
 			factory.value.message = 'Flagged'
 		})
 		return {
-			checkmarkCircleOutline, radioButtonOff, chevronDownOutline,
-			chevronUpOutline, flagOutline, radioButtonOn, closeCircleOutline,
+			checkmarkCircleOutline, radioButtonOff, chevronForwardOutline,
+			flagOutline, radioButtonOn, closeCircleOutline,
 			showAnswers, isCorrect, isInCorrect, showExplanation,
 			getAlphabet, loading, error, createReport
 		}

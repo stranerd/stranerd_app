@@ -12,7 +12,7 @@
 				<div class="py-2 flex justify-between items-center cursor-pointer"
 					@click="show[course] = !show[course]">
 					<IonText class="font-bold capitalize">{{ course }}</IonText>
-					<IonIcon :icon="show[course] ? chevronUpOutline : chevronDownOutline" />
+					<IonIcon :class="{'rotate-90': show[course]}" :icon="chevronForwardOutline" />
 				</div>
 				<template v-if="show[course]">
 					<SchemesListCard v-for="scheme in values" :key="scheme.hash" :classInst="classInst"
@@ -28,7 +28,7 @@
 import { defineComponent, reactive } from 'vue'
 import { ClassEntity } from '@modules/classes'
 import { openCreateSchemeModal, useSchemesList } from '@app/composable/classes/schemes'
-import { arrowForwardOutline, chevronDownOutline, chevronUpOutline } from 'ionicons/icons'
+import { arrowForwardOutline, chevronForwardOutline } from 'ionicons/icons'
 import SchemesListCard from '@app/components/classes/schemes/SchemesListCard.vue'
 
 export default defineComponent({
@@ -45,7 +45,7 @@ export default defineComponent({
 		const { loading, error, schemes } = useSchemesList(props.classInst.id)
 		return {
 			show, loading, error, schemes, openCreateSchemeModal,
-			arrowForwardOutline, chevronDownOutline, chevronUpOutline
+			arrowForwardOutline, chevronForwardOutline
 		}
 	}
 })

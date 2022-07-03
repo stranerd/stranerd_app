@@ -1,6 +1,7 @@
 <template>
 	<div class="showcase-flex">
-		<a class="flex lg:hidden justify-between items-center p-4 border-bottom-line"
+		<a v-if="classInst.admins.includes(id)"
+			class="flex lg:hidden justify-between items-center p-4 border-bottom-line"
 			@click="openCreateTimetableModal(classInst, $router)">
 			<IonText>Set up timetable</IonText>
 			<IonIcon :icon="arrowForwardOutline" />
@@ -28,6 +29,7 @@ import { openCreateTimetableModal, useTimetable } from '@app/composable/classes/
 import { arrowForwardOutline } from 'ionicons/icons'
 import { useRoute } from 'vue-router'
 import TimetableListCard from '@app/components/classes/timetable/TimetableListCard.vue'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'TimetableList',
@@ -39,6 +41,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
+		const { id } = useAuth()
 		const route = useRoute()
 		const { day: dayStr } = route.query
 		const day = parseInt(dayStr as string)
@@ -52,7 +55,7 @@ export default defineComponent({
 		const timetable = computed(() => events.value
 			.filter((e) => e.data.type === EventType.timetable && e.data.start.day === activeDay.value))
 		return {
-			loading, error, openCreateTimetableModal,
+			id, loading, error, openCreateTimetableModal,
 			activeDay, days, timetable, arrowForwardOutline
 		}
 	}

@@ -31,8 +31,8 @@ ion-popover {
 ion-modal.modal-class {
 	--background: #{$color-bodyBg};
 	--height: fit;
-	--max-height: 100vh;
-	--width: 100vw;
+	--max-height: 100%;
+	--width: 100%;
 	--border-radius: 1rem;
 	@media (min-width: $lg) {
 		--width: 600px !important;
@@ -40,8 +40,10 @@ ion-modal.modal-class {
 		--border-radius: 2rem;
 	}
 
-	&::part(content) {
-		overflow-y: auto;
+	.modal-content {
+		max-height: 100%;
+		display: flex;
+		flex-direction: column;
 	}
 
 	@media (min-width: $lg) {

@@ -101,6 +101,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 		await classGlobal[classInst.id].setLoading(true)
 		await ClassesUseCases.acceptRequest(classInst.id, userId, accept)
 			.catch(classGlobal[classInst.id].setError)
+		await classGlobal[classInst.id].setMessage(accept ? 'Request accept!' : 'Request rejected!')
 		await classGlobal[classInst.id].setLoading(false)
 	}
 
@@ -128,6 +129,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 		await classGlobal[classInst.id].setLoading(true)
 		await ClassesUseCases.addMembers(classInst.id, [userId], add)
 			.catch(classGlobal[classInst.id].setError)
+		await classGlobal[classInst.id].setMessage(add ? 'User added!' : 'User removed!')
 		await classGlobal[classInst.id].setLoading(false)
 	}
 
@@ -141,6 +143,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 		await classGlobal[classInst.id].setLoading(true)
 		await ClassesUseCases.changeMemberRole(classInst.id, userId, role, add)
 			.catch(classGlobal[classInst.id].setError)
+		await classGlobal[classInst.id].setMessage(`Role ${role} ${add ? 'added' : 'removed'}!`)
 		await classGlobal[classInst.id].setLoading(false)
 	}
 
@@ -182,9 +185,9 @@ export const useCreateClass = () => {
 			try {
 				await setLoading(true)
 				const classInst = await ClassesUseCases.add(factory.value)
-				await setMessage('Class submitted successfully')
+				await setMessage('Class created successfully')
 				factory.value.reset()
-				await router.replace(`/classes/${classInst.id}`)
+				await router.push(`/classes/${classInst.id}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -295,7 +298,7 @@ export const useEditClass = () => {
 				await ClassesUseCases.update(editingClass!.id, factory.value)
 				await setMessage('Class updated successfully')
 				factory.value.reset()
-				await router.replace(`/classes/${editingClass!.id}`)
+				await router.push(`/classes/${editingClass!.id}`)
 			} catch (error) {
 				await setError(error)
 			}
