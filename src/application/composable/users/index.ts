@@ -11,7 +11,7 @@ export const useSearchUsers = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 
-	const searchUsers = async () => {
+	const search = async () => {
 		if (state.detail) {
 			await setLoading(true)
 			try {
@@ -32,6 +32,6 @@ export const useSearchUsers = () => {
 
 	return {
 		...toRefs(state), users, error, loading,
-		searchUsers, reset
+		search, reset
 	}
 }

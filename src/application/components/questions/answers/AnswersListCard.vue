@@ -16,7 +16,7 @@
 
 		<DisplayHtml :html="answer.body" class="pl-7" />
 
-		<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" class="pl-7" />
+		<Gallery v-if="answer.attachments.length" :media="answer.attachments" class="pl-7" />
 
 		<div class="flex items-center gap-6 text-secondaryText text-sm pl-7">
 			<div class="flex items-center gap-1">
@@ -55,10 +55,8 @@ import {
 	thumbsUp,
 	thumbsUpOutline
 } from 'ionicons/icons'
-import PhotoList from '@app/components/core/media/PhotoList.vue'
 import { useAnswer } from '@app/composable/questions/answers'
 import { useAuth } from '@app/composable/auth/auth'
-import DisplayHtml from '@app/components/core/text/DisplayHtml.vue'
 import { openCreateReportModal } from '@app/composable/reports/reports'
 import { formatNumber } from '@utils/commons'
 import { ReportType } from '@modules/reports'
@@ -67,7 +65,6 @@ import { LikeEntity } from '@modules/interactions'
 
 export default defineComponent({
 	name: 'AnswerListCard',
-	components: { DisplayHtml, PhotoList },
 	props: {
 		answer: {
 			type: AnswerEntity,

@@ -13,11 +13,16 @@
 	--ion-color-step-850: $color-bodyText;
 	--ion-background-color: $color-bodyBg;
 	--ion-font-family: 'DM Sans', sans-serif;
+	--icon-size: 1.4em;
 	font-family: 'DM Sans', sans-serif;
 
 	/** primary **/
 	--ion-color-primary: #{$color-primaryBg};
 	--ion-color-primary-contrast: #{$color-primaryText};
+}
+
+ion-back-button {
+	--icon-font-size: var(--icon-size);
 }
 
 ion-popover {
@@ -65,17 +70,17 @@ ion-modal.modal-class {
 
 	.searchbar-search-icon {
 		position: static !important;
-		margin: 0 1rem 0 0.5rem !important;
+		margin: 0 0.5rem !important;
 		@media (min-width: $lg) {
-			margin-left: 1rem !important;
+			margin: 0 1rem !important;
 		}
 	}
 
 	.searchbar-cancel-button {
 		position: static !important;
-		margin: 0 0.5rem 0 1rem !important;
+		margin: 0 0.5rem !important;
 		@media (min-width: $lg) {
-			margin-right: 1rem !important;
+			margin: 0 1rem !important;
 		}
 	}
 }
@@ -217,7 +222,7 @@ ion-select::part(icon) {
 
 ion-icon {
 	cursor: pointer;
-	font-size: 1.4em;
+	font-size: var(--icon-size);
 }
 
 ion-label {

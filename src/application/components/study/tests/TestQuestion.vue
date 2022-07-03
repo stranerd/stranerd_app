@@ -10,7 +10,7 @@
 			<IonText class="mb-2 w-full">
 				<DisplayHtml :html="question.question" />
 			</IonText>
-			<PhotoList v-if="question.questionMedia.length" :photos="question.questionMedia" />
+			<Gallery v-if="question.questionMedia.length" :media="question.questionMedia" />
 		</div>
 
 		<div v-if="question.isObj(question)" class=" flex flex-col w-full">
@@ -28,8 +28,8 @@
 						<DisplayHtml :html="option" />
 					</IonText>
 				</div>
-				<PhotoList v-if="question.data.optionsMedia[optionIndex]?.length"
-					:photos="question.data.optionsMedia[optionIndex]" />
+				<Gallery v-if="question.data.optionsMedia[optionIndex]?.length"
+					:media="question.data.optionsMedia[optionIndex]" />
 			</div>
 		</div>
 
@@ -52,7 +52,7 @@
 					<IonText class="block mb-2">
 						<DisplayHtml :html="question.data.explanation" />
 					</IonText>
-					<PhotoList v-if="question.data.explanationMedia.length" :photos="question.data.explanationMedia" />
+					<Gallery v-if="question.data.explanationMedia.length" :media="question.data.explanationMedia" />
 				</div>
 			</template>
 		</template>
@@ -61,7 +61,7 @@
 			<IonText class="block mb-2">
 				<DisplayHtml :html="question.data.answer" />
 			</IonText>
-			<PhotoList v-if="question.data.answerMedia.length" :photos="question.data.answerMedia" />
+			<Gellery v-if="question.data.answerMedia.length" :media="question.data.answerMedia" />
 		</div>
 	</div>
 </template>

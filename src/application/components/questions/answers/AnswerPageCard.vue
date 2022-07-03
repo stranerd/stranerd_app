@@ -18,7 +18,7 @@
 
 		<DisplayHtml :html="answer.body" />
 
-		<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" class="py-3" />
+		<Gallery v-if="answer.attachments.length" :media="answer.attachments" class="py-3" />
 	</div>
 </template>
 

@@ -7,7 +7,7 @@
 					Question:
 					<DisplayHtml :html="pastQuestion.question" />
 				</IonText>
-				<PhotoList :photos="pastQuestion.questionMedia" />
+				<Gallery :media="pastQuestion.questionMedia" />
 			</div>
 			<template v-if="pastQuestion.isObj(pastQuestion)">
 				<div class="flex flex-col gap-4">
@@ -26,7 +26,7 @@
 						Explanation:
 						<DisplayHtml :html="pastQuestion.data.explanation" />
 					</IonText>
-					<PhotoList :photos="pastQuestion.data.explanationMedia" />
+					<Gallery :media="pastQuestion.data.explanationMedia" />
 				</div>
 			</template>
 			<template v-else-if="pastQuestion.isNotObj(pastQuestion)">
@@ -35,7 +35,7 @@
 						Answer:
 						<DisplayHtml :html="pastQuestion.data.answer" />
 					</IonText>
-					<PhotoList :photos="pastQuestion.data.answerMedia" />
+					<Gallery :media="pastQuestion.data.answerMedia" />
 				</div>
 			</template>
 		</div>

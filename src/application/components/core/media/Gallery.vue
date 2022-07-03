@@ -1,19 +1,21 @@
 <template>
-	<div v-if="photos.length">
+	<div v-if="media.length">
 		<div v-if="zoomed" class="zoomed">
 			<div class="under" @click="zoomed = false" />
 			<div class="inner">
 				<span id="close" @click="zoomed = false">
 					<IonIcon :icon="close" class="text-3xl" />
 				</span>
-				<img :src="photos[index].link" alt="" class="w-full">
+				<img :src="media[index].link" alt="" class="w-full">
 			</div>
 		</div>
-		<div class="scroller flex gap-2">
-			<img v-for="(photo, index) in photos" :key="photo.link" :src="photo.link" alt=""
-				class="rounded-lg h-20 w-20"
-				@click="enterZoom(index)">
-		</div>
+		<slot :media="media">
+			<div class="scroller flex gap-2">
+				<img v-for="(m, index) in media" :key="m.link" :src="m.link" alt=""
+					class="rounded-lg h-20 w-20"
+					@click="enterZoom(index)">
+			</div>
+		</slot>
 	</div>
 </template>
 
@@ -23,9 +25,9 @@ import { Media } from '@modules/core'
 import { close } from 'ionicons/icons'
 
 export default defineComponent({
-	name: 'PhotoList',
+	name: 'Gallery',
 	props: {
-		photos: {
+		media: {
 			type: Array as PropType<Media[]>,
 			required: true
 		}
@@ -92,6 +94,9 @@ export default defineComponent({
 				padding: 0.5rem;
 				width: 2.5rem;
 				height: 2.5rem;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 			}
 		}
 	}

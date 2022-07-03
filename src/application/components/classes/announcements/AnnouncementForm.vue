@@ -26,7 +26,7 @@
 			<IonLabel>Reminder <span class="font-normal">(optional)</span></IonLabel>
 			<IonIcon v-if="factory.reminder !== null" :icon="trashBinOutline" class="text-danger"
 				@click="factory.reminder = null" />
-			<IonIcon v-else :icon="addOutline" @click="factory.reminder = Date.now()" />
+			<IonIcon v-else :icon="addOutline" @click="factory.reminder = Date.now() + (1000 * 60 * 5)" />
 		</div>
 
 		<div v-if="factory.reminder !== null" class="flex gap-4">

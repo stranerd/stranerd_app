@@ -17,8 +17,9 @@ import { useRouteMeta } from '@app/composable/core/states'
 export default defineComponent({
 	name: 'ClassesAnnouncementsCreate',
 	components: { AnnouncementForm },
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ to }) => {
-		if (to.query.classId) setAnnouncementClassId(to.query.classId as string)
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
+		const classId = to.query.classId || to.params.classId || from.params.classId || from.query.classId
+		if (classId) setAnnouncementClassId(classId as string)
 	}]),
 	setup () {
 		useRouteMeta('Post an announcement', { back: true })

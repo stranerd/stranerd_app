@@ -16,8 +16,9 @@ import { useRouteMeta } from '@app/composable/core/states'
 export default defineComponent({
 	name: 'ClassesGroupsCreate',
 	components: { GroupForm },
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ to }) => {
-		if (to.query.classId) setGroupClassId(to.query.classId as string)
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
+		const classId = to.query.classId || to.params.classId || from.params.classId || from.query.classId
+		if (classId) setGroupClassId(classId as string)
 	}]),
 	setup () {
 		useRouteMeta('Start a discussion', { back: true })
