@@ -18,11 +18,15 @@ export type ChatMetaClasses = {
 
 export type ChatMetaData = ChatMetaPersonal | ChatMetaClasses
 
-export type ChatData = {
+export type ChatPersonal = {
 	type: ChatType.personal
 	members: string[]
-} | {
+}
+
+export type ChatClasses = {
 	type: ChatType.classes
 	members: string[]
 	classId: string
 }
+
+export type ChatData = ChatPersonal | ChatClasses

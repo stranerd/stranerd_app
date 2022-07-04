@@ -1,7 +1,7 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractUrls, isImage, isVideo } from '@stranerd/validate'
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
-import { ChatData, ChatType } from '../types'
+import { ChatClasses, ChatData, ChatPersonal, ChatType } from '../types'
 import { formatNumber } from '@utils/commons'
 
 export class ChatEntity extends BaseEntity {
@@ -78,6 +78,14 @@ export class ChatEntity extends BaseEntity {
 
 	isRead (userId: string) {
 		return !!this.readAt[userId]
+	}
+
+	isPersonal (chat: ChatEntity): chat is Omit<ChatEntity, 'data'> & { data: ChatPersonal } {
+		return chat.data.type === ChatType.personal
+	}
+
+	isClasses (chat: ChatEntity): chat is Omit<ChatEntity, 'data'> & { data: ChatClasses } {
+		return chat.data.type === ChatType.classes
 	}
 }
 
