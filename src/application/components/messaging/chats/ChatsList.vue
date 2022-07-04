@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col">
+	<div class="flex flex-col h-full max-h-full">
 		<EmptyState v-if="!loading && chats.length === 0" class="h-full flex items-center"
 			info="No messages found. Send a message now" />
 		<div v-chat-scroll class="flex flex-col gap-3 overflow-y-auto hide-scrollbar"

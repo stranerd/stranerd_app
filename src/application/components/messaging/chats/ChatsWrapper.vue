@@ -26,7 +26,7 @@
 			<ChatForm v-if="chatMeta && chatMeta.members.includes(id)" :to="to" class="py-2 px-4" />
 		</template>
 		<ChatsList v-if="chatMeta && chatMeta.members.includes(id)" :to="to" class="py-1 px-4" />
-		<div v-else class="h-full flex flex-col gap-4 justify-center items-center">
+		<div v-else-if="!loading" class="h-full flex flex-col gap-4 justify-center items-center">
 			<p class="text-2xl">You cant access this chat</p>
 			<router-link to="/messages">
 				<IonButton class="btn-outline">

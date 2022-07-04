@@ -1,6 +1,5 @@
 <template>
-	<div
-		class="flex gap-2.5 items-center w-full text-sm">
+	<div class="flex gap-2.5 items-start w-full">
 		<Avatar :id="chat.from.id" :name="chat.from.bio.fullName" :size="24"
 			:src="chat.from.bio.photo" />
 		<div class="min-w-[25%] max-w-[70%] lg:max-w-[55%] rounded-t-xl flex flex-col gap-1">
