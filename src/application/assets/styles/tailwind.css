@@ -103,7 +103,7 @@
 	}
 
 	.card-sm {
-		@apply rounded-xl shadow-card;
+		@apply rounded-xl shadow-card border border-disabled;
 	}
 
 	.card-padding {

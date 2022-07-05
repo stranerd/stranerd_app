@@ -2,11 +2,11 @@
 	<router-link :to="chatMeta.getToLink(id)" class="flex items-center leading-none card-padding !py-2 !gap-4"
 		exact-active-class="hasBg">
 		<span v-if="hasAvatar">
-			<Avatar :name="chatMeta.getToName(id)" :size="40" :src="chatMeta.getToPhoto(id)" />
+			<Avatar :name="chatMeta.getToName(id)" :size="48" :src="chatMeta.getToPhoto(id)" />
 		</span>
 		<div class="flex flex-col w-full gap-1 leading-none">
 			<div class="flex gap-2 items-center">
-				<IonText class="font- w-full truncate capitalize">
+				<IonText class="text-base w-full truncate capitalize">
 					{{ chatMeta.getToName(id) }}
 				</IonText>
 				<IonText v-if="chatMeta.last" class="text-sm whitespace-nowrap">

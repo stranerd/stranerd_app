@@ -1,39 +1,44 @@
 <template>
-	<router-link :to="`/questions/${question.id}`" class="flex flex-col card card-padding">
-		<div class="flex items-center text-secondaryText text-sm justify-between">
-			<div class="flex items-center gap-2">
-				<Avatar :id="question.user.id" :name="question.user.bio.fullName" :size="24"
-					:src="question.user.bio.photo" />
-				<span class="flex items-center gap-1 font-bold">
-					<span>{{ question.user.bio.fullName }}</span>
+	<router-link :to="`/questions/${question.id}`" class="flex flex-col card card-padding !gap-6">
+		<div class="flex items-start gap-4 text-secondaryText">
+			<Avatar :id="question.user.id" :name="question.user.bio.fullName" :size="48"
+				:src="question.user.bio.photo" />
+			<div class="flex flex-col">
+				<span class="flex items-center gap-1">
+					<span class="font-bold">{{ question.user.bio.fullName }}</span>
 					<Verified :verified="question.isUserVerified" />
+					<IonIcon :icon="ellipse" class="dot" />
+					<span class="text-sm">{{ formatTime(question.createdAt) }}</span>
 				</span>
+				<InteractionTag :tagId="question.tagId" class="text-sm" />
+				<DisplayHtml :html="question.trimmedBody" class="mt-2" />
 			</div>
-			<IonButton v-if="showAnswerButton"
-				class="btn-primary" style="--border-radius: 10rem;"
-				@click.prevent="openAnswerModal(question, $router)">
-				Answer
-			</IonButton>
 		</div>
 
-		<DisplayHtml :html="question.trimmedBody" class="pl-8 lg:pl-0" />
+		<div class="flex justify-between items-center gap-2.5 text-secondaryText text-sm">
+			<div class="flex gap-3 items-center">
+				<span v-if="question.attachments.length" class="flex gap-1 items-center">
+					<IonIcon :icon="attachOutline" class="rotate-45" />
+					<span>{{ formatNumber(question.attachments.length) }}</span>
+				</span>
+				<span class="flex gap-2 items-center">
+					<IonIcon :icon="helpCircleOutline" />
+					<span>
+						{{
+							formatNumber(question.answers.length)
+						}} {{ pluralize(question.answers.length, 'answer', 'answers') }}
+					</span>
+				</span>
+			</div>
 
-		<div class="flex items-center gap-2.5 text-secondaryText text-sm pl-8 lg:pl-0">
-			<InteractionTag :tagId="question.tagId" />
-			<IonIcon :icon="ellipse" class="dot" />
-			<span class="mr-auto">{{ formatTime(question.createdAt) }}</span>
-
-			<SaveToSet :entity="question" />
-
-			<span v-if="question.attachments.length" class="flex gap-1 items-center">
-				<IonIcon :icon="attachOutline" />
-				<span>{{ formatNumber(question.attachments.length) }}</span>
-			</span>
-			<span class="flex gap-1 items-center">
-				<IonIcon :icon="chatbubbleOutline" />
-				<span>{{ formatNumber(question.answers.length) }}</span>
-			</span>
-			<Share :text="question.strippedBody" title="Share this question" />
+			<div class="flex gap-6 items-center">
+				<SaveToSet :entity="question" />
+				<span class="flex gap-1 items-center">
+					<IonIcon :icon="chatbubbleOutline" />
+					<span>{{ formatNumber(question.answers.length) }}</span>
+				</span>
+				<Share :text="question.strippedBody" title="Share this question" />
+			</div>
 		</div>
 	</router-link>
 </template>
@@ -43,10 +48,10 @@ import { computed, defineComponent } from 'vue'
 import {
 	arrowRedoOutline,
 	attachOutline,
-	bookmarkOutline,
 	chatbubbleOutline,
 	ellipse,
-	flagOutline
+	flagOutline,
+	helpCircleOutline
 } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
@@ -73,8 +78,8 @@ export default defineComponent({
 			}
 		})
 		return {
-			showAnswerButton, openAnswerModal, formatTime, formatNumber, pluralize, bookmarkOutline,
-			arrowRedoOutline, flagOutline, attachOutline, chatbubbleOutline, ellipse
+			showAnswerButton, openAnswerModal, formatTime, formatNumber, pluralize,
+			arrowRedoOutline, flagOutline, attachOutline, chatbubbleOutline, ellipse, helpCircleOutline
 		}
 	}
 })

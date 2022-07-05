@@ -10,6 +10,11 @@
 			</IonText>
 			<IonIcon :icon="ellipse" class="dot" />
 			<IonText>{{ formatTime(announcement.createdAt) }}</IonText>
+
+			<IonButton class="ml-auto flex items-center">
+				<IonIcon :icon="eyeOutline" class="mr-3" />
+				<IonText>{{ formatNumber(Object.keys(announcement.readAt).length) }}</IonText>
+			</IonButton>
 		</div>
 	</div>
 </template>
@@ -19,7 +24,8 @@ import { defineComponent } from 'vue'
 import { AnnouncementEntity, ClassEntity } from '@modules/classes'
 import { formatTime } from '@utils/dates'
 import { useAuth } from '@app/composable/auth/auth'
-import { ellipse } from 'ionicons/icons'
+import { ellipse, eyeOutline } from 'ionicons/icons'
+import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'AnnouncementsListCard',
@@ -35,7 +41,7 @@ export default defineComponent({
 	},
 	setup () {
 		const { id } = useAuth()
-		return { id, formatTime, ellipse }
+		return { id, formatTime, formatNumber, ellipse, eyeOutline }
 	}
 })
 </script>
