@@ -123,7 +123,7 @@ export enum StatusCodes {
 export enum QueryKeys { and = 'and', or = 'or' }
 
 export enum Conditions {
-	lt = 'lt', lte = 'lte', gt = 'gt', gte = 'gte',
+	lt = 'lt', lte = 'lte', gt = 'gt', gte = 'gte', regex = 'regex',
 	eq = 'eq', ne = 'ne', in = 'in', nin = 'nin', exists = 'exists'
 }
 

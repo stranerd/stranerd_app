@@ -39,7 +39,7 @@
 					</div>
 					<div class="flex items-center gap-2 overflow-x-auto text-secondaryText">
 						<div v-for="(file, index) in fileData" :key="file.hash"
-							class="rounded-xl flex cursor-pointer w-12 h-12 border border-itemBg text-2xl"
+							class="rounded-xl flex cursor-pointer justify-center items-center w-12 h-12 border border-itemBg text-2xl"
 							style="flex-shrink: 0;"
 							@click="fileIndex = index">
 							<img v-if="file.factory.media?.type.includes('image')" :src="file.data"
@@ -170,4 +170,39 @@ export default defineComponent({
 		background: $color-bodyBg;
 		border: 1px solid $color-itemBg;
 	}
+
+	.chat-block {
+		width: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 10;
+		background: $color-bodyBg;
+
+		.body {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+
+			& > * {
+				padding: 1rem;
+			}
+
+			.content {
+				flex-grow: 1;
+				border-top: $border;
+				border-bottom: $border;
+				overflow-y: auto;
+				padding: 0.25rem 1rem;
+
+				&::-webkit-scrollbar {
+					display: none;
+				}
+			}
+		}
+	}
+
 </style>
