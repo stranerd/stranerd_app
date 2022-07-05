@@ -13,7 +13,7 @@
 			</div>
 			<div v-for="set in sets" :key="set.hash" class="flex gap-2 items-center border-bottom-line py-4 text-xl">
 				<IonIcon :icon="folderOutline" />
-				<IonText class="w-full truncate font-semibold">{{ set.name }}</IonText>
+				<IonText class="w-fit flex-grow truncate">{{ set.name }}</IonText>
 				<IonIcon :icon="set.allSaved.includes(entity.id) ? bookmark : bookmarkOutline"
 					@click="set.allSaved.includes(entity.id) ? removeFromSet(type, entity.id, set) : saveToSet(type, entity.id, set)"
 				/>

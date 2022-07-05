@@ -2,6 +2,7 @@ import { BaseEntity } from '@modules/core'
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 
 export enum SetSaved {
+	questions = 'questions',
 	notes = 'notes',
 	flashCards = 'flashCards',
 	testPreps = 'testPreps'

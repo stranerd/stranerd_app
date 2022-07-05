@@ -9,8 +9,9 @@ import { useUserSetList } from '@app/composable/users/users/sets'
 import { bookmark, bookmarkOutline } from 'ionicons/icons'
 import { openSaveModal } from '@app/composable/study/menus'
 import { FlashCardEntity, NoteEntity, TestPrepEntity } from '@modules/study'
+import { QuestionEntity } from '@modules/questions'
 
-type Saveable = FlashCardEntity | NoteEntity | TestPrepEntity
+type Saveable = FlashCardEntity | NoteEntity | TestPrepEntity | QuestionEntity
 
 export default defineComponent({
 	name: 'SaveToSet',

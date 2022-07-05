@@ -1,12 +1,12 @@
 <template>
-	<router-link :to="chatMeta.getToLink(id)" class="flex items-center leading-none card-padding !py-2 !gap-2"
+	<router-link :to="chatMeta.getToLink(id)" class="flex items-center leading-none card-padding !py-2 !gap-4"
 		exact-active-class="hasBg">
-		<span>
+		<span v-if="hasAvatar">
 			<Avatar :name="chatMeta.getToName(id)" :size="40" :src="chatMeta.getToPhoto(id)" />
 		</span>
 		<div class="flex flex-col w-full gap-1 leading-none">
 			<div class="flex gap-2 items-center">
-				<IonText class="font-bold w-full truncate capitalize">
+				<IonText class="font- w-full truncate capitalize">
 					{{ chatMeta.getToName(id) }}
 				</IonText>
 				<IonText v-if="chatMeta.last" class="text-sm whitespace-nowrap">
@@ -15,15 +15,17 @@
 			</div>
 			<div v-if="chatMeta.last" :class="{'font-bold': chatMeta.hasUnRead(id)}"
 				class="flex gap-4 items-center text-sm">
-				<IonText class="w-full truncate">
+				<IonText class="w-fit flex-grow truncate">
 					<span v-if="chatMeta.isClasses(chatMeta)">
 						{{ chatMeta.last.from.id === id ? 'You' : chatMeta.last.from.bio.firstName }}:&nbsp;
 					</span>
 					{{ chatMeta.last.media ? 'Shared a file' : chatMeta.last.body }}
 				</IonText>
-				<span v-if="unReadCount.length" :style="`width: ${unReadCount.length + 1}ch;`"
-					class="bg-primaryBg text-primaryText aspect-square rounded-full flex items-center justify-center leading-none">
-					<span>{{ unReadCount }}</span>
+				<span>
+					<span v-if="unReadCount.length" :style="`width: ${unReadCount.length + 1}ch;`"
+						class="bg-primaryBg text-primaryText aspect-square rounded-full flex items-center justify-center leading-none">
+						<span>{{ unReadCount }}</span>
+					</span>
 				</span>
 			</div>
 		</div>
@@ -43,6 +45,11 @@ export default defineComponent({
 		chatMeta: {
 			type: ChatMetaEntity,
 			required: true
+		},
+		hasAvatar: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
 	setup (props) {

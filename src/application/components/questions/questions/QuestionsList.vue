@@ -20,6 +20,7 @@
 				</IonSelectOption>
 			</IonSelect>
 		</div>
+		
 		<EmptyState v-if="!loading && !error && questions.length === 0" class="border-bottom-line"
 			info="There are no questions available." />
 		<QuestionListCard v-for="question in questions" :key="question.hash" :question="question"
