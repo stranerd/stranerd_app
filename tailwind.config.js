@@ -28,7 +28,10 @@ module.exports = {
 			'2xl': '1536px'
 		},
 		extend: {
-			colors: newColors
+			colors: newColors,
+			boxShadow: {
+				card: '0px 4px 8px rgba(22, 37, 101, 0.1)',
+			},
 		}
 	},
 	plugins: []

@@ -39,7 +39,7 @@
 	}
 
 	.layout-page-main {
-		@apply w-full lg:w-[calc(75%-80px)] flex flex-col lg:border-x-2 lg:border-x-itemBg lg:pt-8
+		@apply w-full lg:w-[calc(75%-80px)] flex flex-col lg:border-x-2 lg:border-x-itemBg lg:pt-8;
 	}
 
 	.layout-page-content {
@@ -95,15 +95,15 @@
 	}
 
 	.hasBg {
-		@apply lg:bg-itemBg
+		@apply lg:bg-itemBg;
 	}
 
 	.card {
-		@apply lg:rounded-xl lg:shadow-lg;
+		@apply lg:rounded-xl lg:shadow-card;
 	}
 
 	.card-sm {
-		@apply rounded-xl shadow-lg;
+		@apply rounded-xl shadow-card;
 	}
 
 	.card-padding {
@@ -115,10 +115,10 @@
 	}
 
 	.page-padding {
-		@apply p-4 lg:p-0
+		@apply p-4 lg:p-0;
 	}
 
 	ion-icon {
-		@apply transition-all duration-300
+		@apply transition-all duration-300;
 	}
 }

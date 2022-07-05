@@ -52,7 +52,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const show = ref(false)
+		const show = ref(true)
 		return {
 			show, chevronForwardOutline, chatbubblesOutline, informationCircleOutline, libraryOutline,
 			megaphoneOutline, peopleOutline, listOutline, calendarOutline, calendarClearOutline
