@@ -12,6 +12,10 @@
 			alt=""
 			class="!max-w-[1920px] rounded-full bg-secondaryText"
 		>
+		<!-- <div v-if="id" :style="`left: calc(${size}px - 1.75rem)`"
+			class="rounded-full absolute h-7 w-7 p-1 bottom-0 bg-green-500 border border-primaryText text-primaryText flex items-center justify-center"
+		>
+		</div> -->
 		<FileInput v-if="editable" :style="`left: calc(${size}px - 1.75rem)`"
 			accept="image/*"
 			class="rounded-full absolute h-7 w-7 p-1 bottom-0 bg-primaryBg border border-primaryText text-primaryText flex items-center justify-center"

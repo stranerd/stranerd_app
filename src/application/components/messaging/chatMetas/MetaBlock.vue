@@ -2,16 +2,16 @@
 	<div class="flex flex-col card-padding !gap-4 !px-0">
 		<div class="flex card-padding !py-0 !gap-4 items-center" @click="show = !show">
 			<div class="relative" v-if="hasAvatar">
-				<Avatar :name="title" :size="40"  />
+				<Avatar :name="title" :size="48"  />
 				<IonIcon :icon="peopleOutline" class="absolute text-xs -bottom-1.5 -right-1 text-primaryText bg-primaryBg rounded-full p-1 border border-bodyBg"/>
 			</div>
 			
-			<IonText class="font-bold capitalize truncate w-full">{{ title }}</IonText>
+			<IonText class="font-bold text-base capitalize truncate w-full">{{ title }}</IonText>
 			<span>
 				<IonIcon :class="{'rotate-90': show}" :icon="chevronForwardOutline" />
 			</span>
 		</div>
-		<div v-if="show" :class="['flex flex-col', hasAvatar ? 'ml-[14%]' : ''  ]">
+		<div v-if="show" :class="['flex flex-col', hasAvatar ? 'ml-[16%]' : ''  ]">
 			<router-link v-if="showConnects && pendingConnects.length" class=" card-padding !py-2 text-info"
 				to="/connect/requests">
 				Requests ({{ pendingConnects.length }})

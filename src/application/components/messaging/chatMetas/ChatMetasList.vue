@@ -13,7 +13,7 @@
 			:title="classes.find((c) => c.id === group.key)?.name ?? 'Class'"
 			:hasAvatar="true"  />
 		<!-- <MetaBlock :metas="connects" :showConnects="true" class="border-bottom-line" title="Direct Messages" /> -->
-		<ChatMetasListCard v-for="chatMeta in connects" :key="chatMeta.hash" :chatMeta="chatMeta" :hasAvatar="!hasAvatar"/>
+		<ChatMetasListCard v-for="chatMeta in connects" :key="chatMeta.hash" :chatMeta="chatMeta" :hasAvatar="true"/>
 	</div>
 </template>
 
