@@ -100,4 +100,22 @@ export class QuestionsUseCase {
 		}
 		return (await this.repository.get(query)).results
 	}
+
+	async getInList (ids: string[]) {
+		const conditions: QueryParams = {
+			where: [{ field: 'id', condition: Conditions.in, value: ids }],
+			all: true
+		}
+
+		return await this.repository.get(conditions)
+	}
+
+	async listenInList (ids: string[], listener: Listeners<QuestionEntity>) {
+		const conditions: QueryParams = {
+			where: [{ field: 'id', condition: Conditions.in, value: ids }],
+			all: true
+		}
+
+		return await this.repository.listenToMany(conditions, listener, (entity) => ids.includes(entity.id))
+	}
 }

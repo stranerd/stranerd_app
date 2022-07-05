@@ -22,12 +22,8 @@ export class SetsUseCase {
 		return await this.repository.delete(id)
 	}
 
-	async saveProp (setId: string, type: keyof SetFromModel['saved'], values: string[]) {
-		return await this.repository.saveProp(setId, type, values)
-	}
-
-	async deleteProp (setId: string, type: keyof SetFromModel['saved'], values: string[]) {
-		return await this.repository.deleteProp(setId, type, values)
+	async saveProp (setId: string, type: keyof SetFromModel['saved'], values: string[], add: boolean) {
+		return await this.repository.saveProp(setId, type, values, add)
 	}
 
 	async update (id: string, factory: SetFactory) {

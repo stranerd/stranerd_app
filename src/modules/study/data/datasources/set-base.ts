@@ -9,6 +9,5 @@ export interface SetBaseDataSource {
 	listenToMany: (query: QueryParams, listener: Listeners<SetFromModel>) => Promise<() => void>
 	find: (id: string) => Promise<SetFromModel | null>
 	delete: (id: string) => Promise<void>
-	saveProp: (setId: string, type: string, propIds: string[]) => Promise<void>
-	deleteProp: (setId: string, type: string, propIds: string[]) => Promise<void>
+	saveProp: (setId: string, type: string, propIds: string[], add: boolean) => Promise<void>
 }

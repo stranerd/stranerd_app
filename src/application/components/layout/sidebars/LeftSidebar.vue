@@ -1,11 +1,10 @@
 <template>
 	<div class="bg-headerBg text-headerText flex flex-col items-center gap-8">
 		<img alt="logo" class="mb-4" src="@/assets/images/logo/logo.svg">
-		<router-link
-			v-for="{ path, icon, iconOutline } in [
+		<router-link v-for="{ path, icon, iconOutline } in [
 				{ name: 'Home', path: '/dashboard', icon: home, iconOutline:homeOutline },
-				{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
 				{ name: 'Discussions', path: '/messages', icon: chatbubbles, iconOutline:chatbubblesOutline },
+				{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
 				{ name: 'Tests', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
 				...(isAdmin ? [{ name: 'Admin', path: `/admin/`, icon: statsChart, iconOutline: statsChartOutline }] : [])
 			]" :key="path" :to="path"

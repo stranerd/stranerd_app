@@ -16,6 +16,7 @@ import { useStudyModal } from '@app/composable/core/modals'
 import { Alert, Notify } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 import { Router } from 'vue-router'
+import { QuestionEntity, QuestionsUseCases } from '@modules/questions'
 
 const global = {} as Record<string, {
 	set: Ref<SetEntity | null>
@@ -26,6 +27,7 @@ const global = {} as Record<string, {
 const setGlobal = {} as Record<string, {
 	hash: Ref<string>
 	saved: {
+		questions: Ref<QuestionEntity[]>
 		notes: Ref<NoteEntity[]>
 		flashCards: Ref<FlashCardEntity[]>
 		testPreps: Ref<TestPrepEntity[]>
@@ -83,6 +85,18 @@ export const useSetById = (setId: string) => {
 export const useSet = (set: SetEntity) => {
 	const listenerFn = async () => {
 		const listeners = await Promise.all([
+			QuestionsUseCases.listenInList(set.saved.questions, {
+				created: async (entity) => {
+					addToArray(setGlobal[set.id].saved.questions.value, entity, (e) => e.id, (e) => e.trimmedBody)
+				},
+				updated: async (entity) => {
+					addToArray(setGlobal[set.id].saved.questions.value, entity, (e) => e.id, (e) => e.trimmedBody)
+				},
+				deleted: async (entity) => {
+					const index = setGlobal[set.id].saved.questions.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setGlobal[set.id].saved.questions.value.splice(index, 1)
+				}
+			}),
 			NotesUseCases.listenInList(set.saved.notes, {
 				created: async (entity) => {
 					addToArray(setGlobal[set.id].saved.notes.value, entity, (e) => e.id, (e) => e.title)
@@ -129,6 +143,7 @@ export const useSet = (set: SetEntity) => {
 		setGlobal[set.id] = {
 			hash: ref(set.hash),
 			saved: {
+				questions: ref([]),
 				notes: ref([]),
 				flashCards: ref([]),
 				testPreps: ref([])
@@ -144,9 +159,11 @@ export const useSet = (set: SetEntity) => {
 		await setGlobal[set.id].setError('')
 		try {
 			await setGlobal[set.id].setLoading(true)
-			const [notes, flashCards, testPreps] = await Promise.all([
-				NotesUseCases.getInList(set.saved.notes), FlashCardsUseCases.getInList(set.saved.flashCards), TestPrepsUseCases.getInList(set.saved.testPreps)
+			const [questions, notes, flashCards, testPreps] = await Promise.all([
+				QuestionsUseCases.getInList(set.saved.questions), NotesUseCases.getInList(set.saved.notes),
+				FlashCardsUseCases.getInList(set.saved.flashCards), TestPrepsUseCases.getInList(set.saved.testPreps)
 			])
+			setGlobal[set.id].saved.questions.value = questions.results
 			setGlobal[set.id].saved.notes.value = notes.results
 			setGlobal[set.id].saved.flashCards.value = flashCards.results
 			setGlobal[set.id].saved.testPreps.value = testPreps.results
@@ -169,13 +186,14 @@ export const useSet = (set: SetEntity) => {
 		await setGlobal[set.id].listener.close()
 	})
 
+	const questions = computed(() => setGlobal[set.id].saved.questions.value.filter((question) => set.saved.questions.includes(question.id)))
 	const notes = computed(() => setGlobal[set.id].saved.notes.value.filter((note) => set.saved.notes.includes(note.id)))
 	const flashCards = computed(() => setGlobal[set.id].saved.flashCards.value.filter((flashCard) => set.saved.flashCards.includes(flashCard.id)))
 	const testPreps = computed(() => setGlobal[set.id].saved.testPreps.value.filter((testPrep) => set.saved.testPreps.includes(testPrep.id)))
 
 	return {
 		...setGlobal[set.id], fetchAllSetEntities,
-		notes, flashCards, testPreps
+		questions, notes, flashCards, testPreps
 	}
 }
 
@@ -186,7 +204,7 @@ export const useSaveToSet = () => {
 	const saveToSet = async (prop: SetSaved, itemId: string, set: SetEntity) => {
 		try {
 			await setLoading(true)
-			await SetsUseCases.saveProp(set.id, prop, [itemId])
+			await SetsUseCases.saveProp(set.id, prop, [itemId], true)
 			useStudyModal().closeSaveEntity()
 			await Notify({ title: 'Saved to folder successfully' })
 		} catch (e) {
@@ -198,7 +216,7 @@ export const useSaveToSet = () => {
 	const removeFromSet = async (prop: SetSaved, itemId: string, set: SetEntity) => {
 		try {
 			await setLoading(true)
-			await SetsUseCases.deleteProp(set.id, prop, [itemId])
+			await SetsUseCases.saveProp(set.id, prop, [itemId], false)
 			//@ts-ignore
 			if (setGlobal[set.id]) setGlobal[set.id][prop].value = setGlobal[set.id][prop].value.filter((item) => item.id !== itemId)
 			useStudyModal().closeSaveEntity()

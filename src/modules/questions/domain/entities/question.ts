@@ -68,5 +68,9 @@ export class QuestionEntity extends BaseEntity {
 	get isUserVerified () {
 		return this.user.roles.isVerified
 	}
+
+	search (search: string) {
+		return this.strippedBody.toLowerCase().includes(search.toLowerCase())
+	}
 }
 

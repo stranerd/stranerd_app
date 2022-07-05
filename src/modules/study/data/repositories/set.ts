@@ -70,11 +70,7 @@ export class SetRepository implements ISetRepository {
 		return this.dataSource.delete(id)
 	}
 
-	async saveProp (setId: string, type: string, propIds: string[]) {
-		return this.dataSource.saveProp(setId, type, propIds)
-	}
-
-	async deleteProp (setId: string, type: string, propIds: string[]) {
-		return this.dataSource.deleteProp(setId, type, propIds)
+	async saveProp (setId: string, type: string, propIds: string[], add: boolean) {
+		return this.dataSource.saveProp(setId, type, propIds, add)
 	}
 }
