@@ -10,9 +10,9 @@
 				...(isAdmin ? [{ name: 'Admin', path: `/admin/`, icon: statsChart, iconOutline: statsChartOutline }] : [])
 			]" :key="path" :to="path"
 			class="flex flex-col items-center justify-center">
-			<IonIcon :icon="$route.path === path ? icon : iconOutline" class="text-3xl" />
+			<IonIcon :icon="$route.path === path ? icon : iconOutline" class="text-2xl" />
 		</router-link>
-		<div class="bg-bodyBg text-primaryBg rounded-full p-4 flex justify-center items-center"
+		<div class="bg-bodyBg text-primaryBg rounded-full p-2.5 flex justify-center items-center"
 			@click="openModal">
 			<IonIcon :icon="addOutline" class="text-2xl" />
 		</div>

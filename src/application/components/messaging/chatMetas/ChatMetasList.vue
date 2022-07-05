@@ -8,11 +8,12 @@
 			<EmptyState :info="search ? 'No results' : 'Join a class to have discussions'"
 				class="border-bottom-line py-6" />
 		</router-link>
-		<MetaBlock v-if="unRead.length" :metas="unRead" class="border-bottom-line" title="Unread" />
+		<!-- <MetaBlock v-if="unRead.length" :metas="unRead" class="border-bottom-line" title="Unread" /> -->
 		<MetaBlock v-for="group in groups" :key="group.key" :metas="group.values"
 			:title="classes.find((c) => c.id === group.key)?.name ?? 'Class'"
-			class="border-bottom-line" />
-		<MetaBlock :metas="connects" :showConnects="true" class="border-bottom-line" title="Student Connect" />
+			:hasAvatar="true"  />
+		<!-- <MetaBlock :metas="connects" :showConnects="true" class="border-bottom-line" title="Direct Messages" /> -->
+		<ChatMetasListCard v-for="chatMeta in connects" :key="chatMeta.hash" :chatMeta="chatMeta" :hasAvatar="!hasAvatar"/>
 	</div>
 </template>
 
@@ -21,10 +22,10 @@ import { defineComponent } from 'vue'
 import MetaBlock from '@app/components/messaging/chatMetas/MetaBlock.vue'
 import { useChatMetas } from '@app/composable/messaging/chatMetas'
 import { useUserClassList } from '@app/composable/users/users/classes'
-
+import ChatMetasListCard from '@app/components/messaging/chatMetas/ChatMetasListCard.vue'
 export default defineComponent({
 	name: 'ChatMetasList',
-	components: { MetaBlock },
+	components: { MetaBlock, ChatMetasListCard },
 	setup () {
 		const { classes } = useUserClassList()
 		const { groups, connects, unRead, error, loading, search } = useChatMetas()

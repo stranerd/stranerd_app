@@ -1,12 +1,12 @@
 <template>
-	<router-link :to="chatMeta.getToLink(id)" class="flex items-center leading-none card-padding !py-2 !gap-2"
+	<router-link :to="chatMeta.getToLink(id)" class="flex items-center leading-none card-padding !py-2 !gap-4"
 		exact-active-class="hasBg">
-		<span>
+		<span v-if="hasAvatar">
 			<Avatar :name="chatMeta.getToName(id)" :size="40" :src="chatMeta.getToPhoto(id)" />
 		</span>
 		<div class="flex flex-col w-full gap-1 leading-none">
 			<div class="flex gap-2 items-center">
-				<IonText class="font-bold w-full truncate capitalize">
+				<IonText class="font- w-full truncate capitalize">
 					{{ chatMeta.getToName(id) }}
 				</IonText>
 				<IonText v-if="chatMeta.last" class="text-sm whitespace-nowrap">
@@ -43,6 +43,11 @@ export default defineComponent({
 		chatMeta: {
 			type: ChatMetaEntity,
 			required: true
+		},
+		hasAvatar: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
 	setup (props) {

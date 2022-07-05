@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col card-padding !gap-4 !px-0">
 		<div class="flex gap-4 items-center cursor-pointer card-padding !py-0" @click="show = !show">
-			<Avatar :name="classInst.name" :size="36" :src="classInst.photo" />
+			<Avatar :name="classInst.name" :size="40" :src="classInst.photo" />
 			<IonText class="font-bold capitalize truncate w-full">{{ classInst.name }}</IonText>
 			<span>
 				<IonIcon :class="{'rotate-90': show}" :icon="chevronForwardOutline" />

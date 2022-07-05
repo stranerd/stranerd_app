@@ -13,27 +13,34 @@
 				class="btn-primary" style="--border-radius: 10rem;"
 				@click.prevent="openAnswerModal(question, $router)">
 				Answer
-			</IonButton>
+			</IonButton> 
 		</div>
 
 		<DisplayHtml :html="question.trimmedBody" class="pl-8 lg:pl-0" />
 
-		<div class="flex justify-between items-center gap-2 text-secondaryText text-sm pl-8 lg:pl-0">
+		<div class="flex justify-between items-center gap-2.5 text-secondaryText text-sm pl-8 lg:pl-0">
 			<InteractionTag :tagId="question.tagId" />
 			<IonIcon :icon="ellipse" class="dot" />
 			<span class="mr-auto">{{ formatTime(question.createdAt) }}</span>
-			<IonIcon v-if="question.attachments.length" :icon="imageOutline" />
-			<span class="flex gap-1 items-center">
-				<span>{{ formatNumber(question.answers.length) }}</span>
-				<IonIcon :icon="readerOutline" />
+	
+			<IonIcon  :icon="bookmarkOutline" />
+		
+			<span class="flex gap-1 items-center" v-if="question.attachments.length">
+				<IonIcon  :icon="attachOutline" />
+				<span>{{ formatNumber(question.attachments.length) }}</span>
 			</span>
+			<span class="flex gap-1 items-center">
+				<IonIcon :icon="chatbubbleOutline" />
+				<span>{{ formatNumber(question.answers.length) }}</span>
+			</span>
+			<Share :text="question.strippedBody" title="Share this question" />
 		</div>
 	</router-link>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { arrowRedoOutline, ellipse, flagOutline, imageOutline, readerOutline } from 'ionicons/icons'
+import { arrowRedoOutline, ellipse, flagOutline, attachOutline, chatbubbleOutline, bookmarkOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { formatNumber, pluralize } from '@utils/commons'
@@ -58,8 +65,8 @@ export default defineComponent({
 			}
 		})
 		return {
-			showAnswerButton, openAnswerModal, formatTime, formatNumber, pluralize,
-			arrowRedoOutline, flagOutline, imageOutline, readerOutline, ellipse
+			showAnswerButton, openAnswerModal, formatTime, formatNumber, pluralize,bookmarkOutline,
+			arrowRedoOutline, flagOutline, attachOutline, chatbubbleOutline, ellipse
 		}
 	}
 })
