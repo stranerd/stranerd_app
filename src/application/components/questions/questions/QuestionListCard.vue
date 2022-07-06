@@ -15,30 +15,25 @@
 			</div>
 		</div>
 
-		<div class="flex justify-between items-center gap-2.5 text-secondaryText text-sm">
-			<div class="flex gap-3 items-center">
-				<span v-if="question.attachments.length" class="flex gap-1 items-center">
-					<IonIcon :icon="attachOutline" class="rotate-45" />
-					<span>{{ formatNumber(question.attachments.length) }}</span>
+		<div class="flex items-center gap-5 text-secondaryText text-sm">
+			<span v-if="question.attachments.length" class="flex gap-1 items-center">
+				<IonIcon :icon="attachOutline" class="rotate-45" />
+				<span>{{ formatNumber(question.attachments.length) }}</span>
+			</span>
+			<span class="flex gap-1 items-center mr-auto">
+				<IonIcon :icon="helpCircleOutline" />
+				<span>
+					{{
+						formatNumber(question.answers.length)
+					}} {{ pluralize(question.answers.length, 'answer', 'answers') }}
 				</span>
-				<span class="flex gap-2 items-center">
-					<IonIcon :icon="helpCircleOutline" />
-					<span>
-						{{
-							formatNumber(question.answers.length)
-						}} {{ pluralize(question.answers.length, 'answer', 'answers') }}
-					</span>
-				</span>
-			</div>
-
-			<div class="flex gap-6 items-center">
-				<SaveToSet :entity="question" />
-				<span class="flex gap-1 items-center">
-					<IonIcon :icon="chatbubbleOutline" />
-					<span>{{ formatNumber(question.answers.length) }}</span>
-				</span>
-				<Share :text="question.strippedBody" title="Share this question" />
-			</div>
+			</span>
+			<SaveToSet :entity="question" />
+			<span class="flex gap-1 items-center">
+				<IonIcon :icon="chatbubbleOutline" />
+				<span>{{ formatNumber(question.answers.length) }}</span>
+			</span>
+			<Share :text="question.strippedBody" title="Share this question" />
 		</div>
 	</router-link>
 </template>

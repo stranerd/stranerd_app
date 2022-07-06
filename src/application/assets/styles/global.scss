@@ -20,7 +20,7 @@ $color-danger: var(--clr-danger);
 $color-info: var(--clr-info);
 $color-warning: var(--clr-warning);
 
-$border: 0.5px solid $color-itemBg !important;
+$border: 1px solid $color-itemBg !important;
 
 .hide-scrollbar {
 	-ms-overflow-style: none;
