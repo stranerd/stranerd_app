@@ -10,7 +10,10 @@
 		</router-link>
 		<MetaBlock v-for="group in groups" :key="group.key" :hasAvatar="true"
 			:metas="group.values"
-			:title="classes.find((c) => c.id === group.key)?.name ?? 'Class'" />
+			:title="classes.find((c) => c.id === group.key)?.name ?? 'Class'" 
+			:photo="classes.find((c) => c.id === group.key)?.photo ?? 'Class'" 
+			
+		/>
 		<ChatMetasListCard v-for="chatMeta in connects" :key="chatMeta.hash" :chatMeta="chatMeta" :hasAvatar="true" />
 	</div>
 </template>

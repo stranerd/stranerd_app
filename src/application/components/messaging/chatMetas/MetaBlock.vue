@@ -2,10 +2,11 @@
 	<div class="flex flex-col card-padding !gap-4 !px-0">
 		<div class="flex card-padding !py-0 !gap-4 items-center" @click="show = !show">
 			<div v-if="hasAvatar" class="relative">
-				<Avatar :name="title" :size="48" />
+				<Avatar :name="title" :size="48" :src="photo" />
 				<IonIcon :icon="peopleOutline"
 					class="absolute text-xs -bottom-1.5 -right-1 text-primaryText bg-primaryBg rounded-full p-1 border border-bodyBg" />
 			</div>
+			<!-- {{metas}} -->
 			<IonText class="font-bold capitalize truncate w-full">{{ title }}</IonText>
 			<span>
 				<IonIcon :class="{'rotate-90': show}" :icon="chevronForwardOutline" />
@@ -37,6 +38,10 @@ export default defineComponent({
 			type: String,
 			required: true
 		},
+		photo: {
+			type: Object,
+			// required: true
+		},
 		metas: {
 			type: Array as PropType<ChatMetaEntity[]>,
 			required: true
@@ -52,7 +57,7 @@ export default defineComponent({
 			default: false
 		}
 	},
-	setup () {
+	setup (props) {
 		const show = ref(true)
 		const { pendingConnects } = useConnects()
 		return { show, chevronForwardOutline, pendingConnects, peopleOutline }

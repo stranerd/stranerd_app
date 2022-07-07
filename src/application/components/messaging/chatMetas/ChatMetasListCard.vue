@@ -1,8 +1,12 @@
 <template>
-	<router-link :to="chatMeta.getToLink(id)" class="flex items-center leading-none card-padding !py-2 !gap-4"
+	<router-link :to="chatMeta.getToLink(id)" class="flex items-center leading-none card-padding !py-2 !gap-4 relative"
 		exact-active-class="hasBg">
 		<span v-if="hasAvatar">
 			<Avatar :name="chatMeta.getToName(id)" :size="48" :src="chatMeta.getToPhoto(id)" />
+		</span>
+		<span v-else>
+			<IonIcon :icon="peopleOutline"
+				class="  text-sm text-primaryText bg-secondaryText p-1 -ml-[26px] rounded" />
 		</span>
 		<div class="flex flex-col w-full gap-1 leading-none">
 			<div class="flex gap-2 items-center">
@@ -38,6 +42,7 @@ import { formatTime } from '@utils/dates'
 import { useAuth } from '@app/composable/auth/auth'
 import { ChatMetaEntity } from '@modules/messaging'
 import { useChatMeta } from '@app/composable/messaging/chatMetas'
+import {  peopleOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'ChatMetasListCard',
@@ -63,7 +68,7 @@ export default defineComponent({
 			if (unRead.value === 0) return ''
 			return unRead.value > 99 ? '99+' : unRead.value.toString()
 		})
-		return { formatTime, id, unReadCount }
+		return { formatTime, id, unReadCount, peopleOutline }
 	}
 })
 </script>
