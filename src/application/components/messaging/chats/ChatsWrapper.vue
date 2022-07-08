@@ -23,7 +23,7 @@
 			<div v-else />
 		</template>
 		<template v-slot:content-bottom>
-			<ChatForm v-if="chatMeta && chatMeta.members.includes(id)" :to="to" class="py-2 px-4" />
+			<ChatForm v-if="chatMeta && chatMeta.members.includes(id)" :name="chatMeta.getToName(id)" :to="to" class="py-2 px-4" />
 		</template>
 		<ChatsList v-if="chatMeta && chatMeta.members.includes(id)" :to="to" class="py-1 px-4" />
 		<div v-else-if="!loading" class="h-full flex flex-col gap-4 justify-center items-center">

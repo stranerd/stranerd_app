@@ -2,10 +2,10 @@
 	<div class="flex gap-2.5 items-start w-full">
 		<Avatar :id="chat.from.id" :name="chat.from.bio.fullName" :size="24"
 			:src="chat.from.bio.photo" />
-		<div class="min-w-[25%] max-w-[70%] lg:max-w-[55%] rounded-t-xl flex flex-col gap-1">
+		<div class="min-w-[25%] max-w-[100%] lg:max-w-[55%] rounded-t-xl flex flex-col gap-1">
 			<span class="flex gap-1 items-center">
 				<span :class="{ 'text-info': chat.from.id === id }" class="font-bold">
-					{{ chat.from.id !== id ? chat.from.bio.fullName : 'You' }}</span>
+					{{ chat.from.bio.fullName  }}</span>
 				<Verified :verified="chat.from.roles.isVerified" />
 				<IonIcon :icon="ellipse" class="dot" />
 				<span class="text-[0.9em] leading-none text-secondaryText">
@@ -26,7 +26,7 @@
 					</span>
 				</div>
 			</div>
-			<span class="leading-none" v-html="chat.formattedBody" />
+			<span class="leading-tight" v-html="chat.formattedBody" />
 		</div>
 	</div>
 </template>

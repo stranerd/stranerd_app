@@ -63,7 +63,7 @@
 		<form class="flex items-center gap-2" @submit.prevent="createTextChat">
 			<IonIcon :icon="showFileUpload ? closeCircleOutline : addCircleOutline" class="text-2xl"
 				@click="showFileUpload = !showFileUpload" />
-			<IonInput v-model="factory.body" class="flex-grow rounded-full" placeholder="Write here" required />
+			<IonInput v-model="factory.body" class="flex-grow rounded-full" :placeholder="`Message ${name}`" required />
 			<IonButton :disabled="!factory.valid || loadingCounter" class="btn-primary" type="submit">
 				<IonIcon slot="icon-only" :icon="paperPlaneOutline" />
 			</IonButton>
@@ -95,6 +95,10 @@ export default defineComponent({
 	name: 'ChatForm',
 	props: {
 		to: {
+			required: true,
+			type: String
+		},
+		name: {
 			required: true,
 			type: String
 		}
