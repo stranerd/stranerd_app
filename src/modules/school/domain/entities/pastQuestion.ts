@@ -29,6 +29,10 @@ export class PastQuestionEntity extends BaseEntity {
 		this.updatedAt = data.updatedAt
 	}
 
+	get saveFilePath () {
+		return `study/tests/${this.id}`
+	}
+
 	isObj (question: PastQuestionEntity): question is Omit<PastQuestionEntity, 'data'> & { data: ObjType } {
 		return question.data.type === PastQuestionType.objective
 	}

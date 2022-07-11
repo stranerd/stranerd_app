@@ -2,7 +2,6 @@ import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractUrls, isImage, isVideo } from '@stranerd/validate'
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { ChatClasses, ChatData, ChatPersonal, ChatType } from '../types'
-import { formatNumber } from '@utils/commons'
 
 export class ChatEntity extends BaseEntity {
 	readonly id: string
@@ -30,6 +29,11 @@ export class ChatEntity extends BaseEntity {
 		this.readAt = readAt
 	}
 
+	get saveFilePath () {
+		if (this.data.type === ChatType.personal) return `messaging/${ChatType.personal}/${this.to}/files`
+		return `messaging/${ChatType.classes}/${this.data.classId}/${this.to}/files`
+	}
+
 	get isMedia () {
 		return !!this.media
 	}
@@ -42,16 +46,8 @@ export class ChatEntity extends BaseEntity {
 		return this.isMedia && isVideo(this.media).valid
 	}
 
-	get isNote () {
+	get isDoc () {
 		return this.isMedia && (!this.isImage && !this.isVideo)
-	}
-
-	get size () {
-		const size = this.media?.size ?? 0
-		const ranges = [{ val: -1, key: 'b' }, { val: 1024, key: 'kb' },
-			{ val: 1024 * 1024, key: 'mb' }, { val: 1024 * 1024 * 1024, key: 'gb' }]
-		const range = ranges.find(({ val }) => size >= val)
-		return `${formatNumber(size / (range?.val ?? -1))}${range?.key ?? 'b'}`
 	}
 
 	get formattedBody () {

@@ -45,6 +45,10 @@ export class QuestionEntity extends BaseEntity {
 		this.updatedAt = updatedAt
 	}
 
+	get saveFilePath () {
+		return `questions/questions/${this.id}`
+	}
+
 	get trimmedBody () {
 		return trimToLength(this.strippedBody, 120)
 	}

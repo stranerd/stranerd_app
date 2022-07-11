@@ -18,7 +18,8 @@
 
 		<DisplayHtml :html="answer.body" />
 
-		<Gallery v-if="answer.attachments.length" :media="answer.attachments" class="py-3" />
+		<Gallery v-if="answer.attachments.length" :media="answer.attachments" :path="answer.saveFilePath"
+			class="py-3" />
 	</div>
 </template>
 

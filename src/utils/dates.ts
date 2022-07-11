@@ -1,3 +1,5 @@
+import { formatNumber } from '@utils/commons'
+
 export enum TIMES {
 	minute = 60,
 	hour = 60 * 60,
@@ -5,6 +7,11 @@ export enum TIMES {
 	month = 60 * 60 * 24 * 30,
 	year = 60 * 60 * 24 * 30 * 12
 }
+
+export const months = [
+	'January', 'February', 'March', 'April', 'May', 'June',
+	'July', 'August', 'September', 'October', 'November', 'December'
+]
 
 export const getTwoDigits = (digit: number): string => digit.toString().padStart(2, '0')
 export const formatTimeAsDigits = (date: Date) => {
@@ -14,7 +21,7 @@ export const formatTimeAsDigits = (date: Date) => {
 }
 export const formatDateAsDigits = (date: Date, showYear = true) => {
 	const year = date.getFullYear()
-	const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'][date.getMonth()]
+	const month = months[date.getMonth()].slice(0, 3)
 	const day = getTwoDigits(date.getDate())
 	return `${month} ${day}` + (showYear ? `, ${year}` : '')
 }
@@ -61,4 +68,21 @@ export const getDigitalTime = (timeInSecs: number) => {
 	if (hours) hr = `${hours < 10 ? '0' + hours : hours}:`
 	const rest = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`
 	return hr + rest
+}
+
+export const formatDuration = (duration: number) => {
+	duration = duration < 0 ? 0 : duration
+	const hours = Math.floor(duration / 3600)
+	const minutes = Math.floor((duration - hours * 3600) / 60)
+	const seconds = Math.floor(duration - (hours * 3600) - (minutes * 60))
+	const paths = [minutes, seconds]
+	if (hours > 0) paths.unshift(hours)
+	return paths.map((x) => x.toString().padStart(2, '0')).join(':')
+}
+
+export const formatFileSize = (size: number) => {
+	const ranges = [{ val: -1, key: 'b' }, { val: 1024, key: 'kb' },
+		{ val: 1024 * 1024, key: 'mb' }, { val: 1024 * 1024 * 1024, key: 'gb' }]
+	const range = ranges.find(({ val }) => size >= val)
+	return `${formatNumber(size / (range?.val ?? -1))}${range?.key ?? 'b'}`
 }

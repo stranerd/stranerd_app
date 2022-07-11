@@ -1,12 +1,21 @@
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { onMounted, ref } from 'vue'
 import { Directory, Filesystem } from '@capacitor/filesystem'
 import writeFile from 'capacitor-blob-writer'
 import { FileOpener } from '@awesome-cordova-plugins/file-opener'
-import { HttpClient } from '@modules/core'
+import { HttpClient, Media } from '@modules/core'
 import { isWeb } from '@utils/constants'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 
 const getBase64 = (binary: string) => `data:;base64,${binary}`
+
+export const openMedia = ref(null as { media: Media, path: string } | null)
+export const closeMediaFullScreen = () => {
+	openMedia.value = null
+}
+
+export const openViewFile = (media: Media, path: string) => {
+	openMedia.value = { media, path }
+}
 
 export const useDownload = (fileName: string, fileLink: string, type: string) => {
 	const { loading, setLoading } = useLoadingHandler()

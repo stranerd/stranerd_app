@@ -66,7 +66,7 @@ export class EventsUseCase {
 			limit: PAGINATION_LIMIT
 		}
 
-		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
+		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })
 
 		return await this.repository.listenToMany(classId, conditions, listener, (entity) => {
 			if (entity.classId !== classId) return false

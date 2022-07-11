@@ -1,9 +1,12 @@
 import { IChatRepository } from '../irepositories/ichat'
 import { ChatFactory } from '../factories/chat'
 import { Conditions, Listeners, QueryKeys, QueryParams } from '@modules/core'
-import { CHAT_PAGINATION_LIMIT } from '@utils/constants'
+import { CHAT_PAGINATION_LIMIT, PAGINATION_LIMIT } from '@utils/constants'
 import { ChatEntity } from '../entities/chat'
 import { ChatType } from '@modules/messaging'
+import { imageMimeTypes, videoMimeTypes } from '@stranerd/validate'
+
+type Library = 'images' | 'videos' | 'docs' | 'links'
 
 export class ChatsUseCase {
 	private repository: IChatRepository
@@ -75,7 +78,7 @@ export class ChatsUseCase {
 			all: true
 		}
 
-		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
+		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })
 
 		return await this.repository.listenToMany(conditions, listener, (entity) => {
 			if (!entity.data.members.includes(path[0])) return false
@@ -86,49 +89,55 @@ export class ChatsUseCase {
 		})
 	}
 
-	async getClassLibrary (classId: string) {
+	getClassLibraryCondition (type: Library) {
+		if (type === 'links') return [{ field: 'links.0', condition: Conditions.exists, value: true }]
+		if (type === 'images') return [{ field: 'media.type', condition: Conditions.in, value: imageMimeTypes }]
+		if (type === 'videos') return [{ field: 'media.type', condition: Conditions.in, value: videoMimeTypes }]
+		return [
+			{ field: 'media', condition: Conditions.ne, value: null },
+			{ field: 'media.type', condition: Conditions.nin, value: [...imageMimeTypes, ...videoMimeTypes] }
+		]
+	}
+
+	async getClassLibrary (classId: string, type: Library, groupId?: string, date?: number) {
 		const conditions: QueryParams = {
 			where: [
 				{ field: 'data.classId', value: classId },
 				{ field: 'data.type', value: ChatType.classes },
-				{
-					condition: QueryKeys.or,
-					value: [
-						{ field: 'media', condition: Conditions.ne, value: null },
-						{ field: 'links.0', condition: Conditions.exists, value: true }
-					]
-				}
+				...this.getClassLibraryCondition(type)
 			],
 			sort: [{ field: 'createdAt', desc: true }],
-			all: true
+			limit: PAGINATION_LIMIT
 		}
+
+		if (groupId) conditions.where!.push({ field: 'to', value: groupId })
+		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
 
 		return await this.repository.get(conditions)
 	}
 
-	async listenToClassLibrary (classId: string, listener: Listeners<ChatEntity>) {
+	async listenToClassLibrary (classId: string, type: Library, listener: Listeners<ChatEntity>, groupId?: string, date?: number) {
 		const conditions: QueryParams = {
 			where: [
 				{ field: 'data.classId', value: classId },
 				{ field: 'data.type', value: ChatType.classes },
-				{
-					condition: QueryKeys.or,
-					value: [
-						{ field: 'media', condition: Conditions.ne, value: null },
-						{ field: 'links.0', condition: Conditions.exists, value: true }
-					]
-				}
+				...this.getClassLibraryCondition(type)
 			],
 			sort: [{ field: 'createdAt', desc: true }],
 			all: true
 		}
 
-		return await this.repository.listenToMany(conditions, listener, (entity) => {
-			return [
-				entity.data.type === ChatType.classes && entity.data.classId === classId,
-				entity.media !== null || entity.links.length > 0
-			].every((v) => v)
-		})
+		if (groupId) conditions.where!.push({ field: 'to', value: groupId })
+		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })
+
+		return await this.repository.listenToMany(conditions, listener, ((entity) => {
+			if (groupId && entity.to !== groupId) return false
+			if (type === 'links' && entity.links.length > 0) return true
+			if (type === 'images' && entity.isImage) return true
+			if (type === 'videos' && entity.isVideo) return true
+			if (type === 'docs' && entity.isMedia) return true
+			return false
+		}))
 	}
 
 	async getUnReadCount (path: [string, string]) {

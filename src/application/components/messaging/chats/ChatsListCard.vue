@@ -12,18 +12,14 @@
 					{{ formatTimeAsDigits(new Date(chat.createdAt)) }}
 				</span>
 			</span>
-			<div v-if="chat.isMedia" class="flex flex-col" @click="openFile">
+			<div v-if="chat.isMedia" class="flex flex-col" @click="openViewFile(chat.media, chat.saveFilePath)">
 				<img v-if="chat.isImage" :src="chat.media.link" alt="" class="w-full rounded-t-xl">
 				<div :class="{'rounded-t-xl': !chat.isImage}"
-					class="bg-itemBg flex gap-2 items-center p-2 rounded-b-xl">
+					class="bg-itemBg flex truncate gap-2 items-center p-2 rounded-b-xl">
 					<span>
 						<IonIcon :icon="documentOutline" />
 					</span>
 					<IonText class="w-full truncate">{{ chat.media.name }}</IonText>
-					<span>
-						<SpinLoading v-if="loading" />
-						<IonIcon v-else-if="!content" :icon="downloadOutline" @click="download" />
-					</span>
 				</div>
 			</div>
 			<span class="leading-none" v-html="chat.formattedBody" />
@@ -37,7 +33,7 @@ import { ChatEntity } from '@modules/messaging'
 import { useAuth } from '@app/composable/auth/auth'
 import { formatTimeAsDigits } from '@utils/dates'
 import { documentOutline, downloadOutline, ellipse } from 'ionicons/icons'
-import { useDownload } from '@app/composable/meta/media'
+import { openViewFile } from '@app/composable/meta/media'
 import { isWeb } from '@utils/constants'
 import { useChat } from '@app/composable/messaging/chats'
 
@@ -52,14 +48,9 @@ export default defineComponent({
 	setup (props) {
 		const { id } = useAuth()
 		useChat(props.chat)
-		const {
-			content, loading, openFile, downloadWeb, download: downloadApp
-		} = useDownload(props.chat.media?.name ?? '', props.chat.media?.link ?? '', 'messaging/chats')
-		const download = isWeb ? downloadWeb : downloadApp
 		return {
 			id, formatTimeAsDigits, isWeb,
-			documentOutline, downloadOutline, ellipse,
-			content, download, openFile, loading
+			documentOutline, downloadOutline, ellipse, openViewFile
 		}
 	}
 })

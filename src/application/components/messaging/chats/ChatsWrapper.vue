@@ -5,7 +5,7 @@
 		</template>
 		<template v-slot:content-top>
 			<div v-if="chatMeta"
-				class="flex items-center bg-headerBg lg:bg-bodyBg text-headerText lg:text-bodyText p-4 gap-4 w-full">
+				class="flex items-center bg-headerBg lg:bg-bodyBg text-headerText lg:text-bodyText p-4 lg:pt-0 gap-4 w-full">
 				<router-link to="/messages">
 					<IonIcon :icon="arrowBackOutline" />
 				</router-link>

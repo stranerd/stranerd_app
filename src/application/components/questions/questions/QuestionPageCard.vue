@@ -27,7 +27,8 @@
 			</div>
 		</div>
 
-		<Gallery v-if="question.attachments.length" :media="question.attachments" class="py-3" />
+		<Gallery v-if="question.attachments.length" :media="question.attachments" :path="question.saveFilePath"
+			class="py-3" />
 
 		<IonButton v-if="showAnswerButton"
 			class="btn-primary w-full" @click="openAnswerModal(question, $router)">

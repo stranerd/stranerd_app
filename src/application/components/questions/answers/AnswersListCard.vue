@@ -16,7 +16,8 @@
 
 		<DisplayHtml :html="answer.body" class="pl-7" />
 
-		<Gallery v-if="answer.attachments.length" :media="answer.attachments" class="pl-7" />
+		<Gallery v-if="answer.attachments.length" :media="answer.attachments" :path="answer.saveFilePath"
+			class="pl-7" />
 
 		<div class="flex items-center gap-6 text-secondaryText text-sm pl-7">
 			<div class="flex items-center gap-1">

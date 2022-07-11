@@ -41,7 +41,7 @@ export const groupBy = <Type, Unique extends string | number> (array: Array<Type
 		if (index === -1) acc.push({ key, values: [cur] })
 		else acc[index].values.push(cur)
 		return acc
-	}, [] as { key: Unique, values: Type[] }[])
+	}, [] as { key: Unique, values: Type[] }[]) as { key: Unique, values: Type[] }[]
 }
 
 export const trimToLength = (body: string, length: number) => {

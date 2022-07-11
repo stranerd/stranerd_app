@@ -75,7 +75,11 @@
 	}
 
 	.showcase-flex {
-		@apply flex flex-col lg:gap-8;
+		@apply flex flex-col lg:gap-6;
+	}
+
+	.showcase-files {
+		@apply grid grid-cols-3 md:grid-cols-4 gap-2 p-2;
 	}
 
 	.nav-scroll {
@@ -99,7 +103,7 @@
 	}
 
 	.card {
-		@apply lg:rounded-xl lg:shadow-card;
+		@apply lg:rounded-xl lg:shadow-card lg:border lg:border-disabled;
 	}
 
 	.card-sm {
@@ -111,7 +115,7 @@
 	}
 
 	[class*='-line'].card-padding {
-		@apply py-6;
+		@apply py-5 lg:py-6;
 	}
 
 	.page-padding {

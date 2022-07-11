@@ -10,7 +10,8 @@
 			<IonText class="mb-2 w-full">
 				<DisplayHtml :html="question.question" />
 			</IonText>
-			<Gallery v-if="question.questionMedia.length" :media="question.questionMedia" />
+			<Gallery v-if="question.questionMedia.length" :media="question.questionMedia"
+				:path="question.saveFilePath" />
 		</div>
 
 		<div v-if="question.isObj(question)" class=" flex flex-col w-full">
@@ -29,7 +30,8 @@
 					</IonText>
 				</div>
 				<Gallery v-if="question.data.optionsMedia[optionIndex]?.length"
-					:media="question.data.optionsMedia[optionIndex]" />
+					:media="question.data.optionsMedia[optionIndex]"
+					:path="question.saveFilePath" />
 			</div>
 		</div>
 
@@ -52,7 +54,8 @@
 					<IonText class="block mb-2">
 						<DisplayHtml :html="question.data.explanation" />
 					</IonText>
-					<Gallery v-if="question.data.explanationMedia.length" :media="question.data.explanationMedia" />
+					<Gallery v-if="question.data.explanationMedia.length" :media="question.data.explanationMedia"
+						:path="question.saveFilePath" />
 				</div>
 			</template>
 		</template>

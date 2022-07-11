@@ -7,8 +7,8 @@
 			style="transform: translateY(calc(-100% - 1rem))">
 			<FileInput v-for="{ icon, label, accept } in [
 				{ icon: imageOutline, label: 'Photos', accept: 'image/*' },
-				{ icon: documentOutline, label: 'Notes', accept: '*' },
 				{ icon: videocamOutline, label: 'Videos', accept: 'video/*' },
+				{ icon: documentOutline, label: 'Documents', accept: '*' },
 			]" :key="label" :accept="accept" :multiple="true" @files="catchFiles">
 				<div class="flex gap-2 items-center">
 					<span
