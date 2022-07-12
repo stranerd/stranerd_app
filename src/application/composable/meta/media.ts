@@ -5,25 +5,26 @@ import { FileOpener } from '@awesome-cordova-plugins/file-opener'
 import { HttpClient, Media } from '@modules/core'
 import { isWeb } from '@utils/constants'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-
-const getBase64 = (binary: string) => `data:;base64,${binary}`
+import { Router } from 'vue-router'
 
 export const openMedia = ref(null as { media: Media, path: string } | null)
 export const closeMediaFullScreen = () => {
 	openMedia.value = null
 }
-
-export const openViewFile = (media: Media, path: string) => {
+export const openViewFile = async (media: Media, path: string, router: Router) => {
 	openMedia.value = { media, path }
+	await router.push('/file/view')
 }
 
-export const useDownload = (fileName: string, fileLink: string, type: string) => {
+const getBase64 = (binary: string) => `data:;base64,${binary}`
+
+export const useDownload = (media: Media, path: string) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { message, setMessage } = useSuccessHandler()
 	const content = ref('')
 	const options = {
-		path: `downloaded/${type}/${fileName}`,
+		path: `downloaded/${path}/${media.name}`,
 		directory: Directory.Library
 	}
 
@@ -31,7 +32,7 @@ export const useDownload = (fileName: string, fileLink: string, type: string) =>
 		if (content.value || loading.value) return
 		await setLoading(true)
 		try {
-			const { blob } = await new HttpClient('').download(fileLink)
+			const { blob } = await new HttpClient('').download(media.link)
 			if (!blob) return loading.value = false
 			await writeFile({ ...options, recursive: true, blob })
 			const contents = await Filesystem.readFile(options)
@@ -46,9 +47,9 @@ export const useDownload = (fileName: string, fileLink: string, type: string) =>
 		await setError('')
 		await setLoading(true)
 		try {
-			const { base64 } = await new HttpClient('').download(fileLink)
+			const { base64 } = await new HttpClient('').download(media.link)
 			const a = document.createElement('a')
-			a.download = fileName
+			a.download = media.name
 			a.href = base64
 			document.body.appendChild(a)
 			a.click()
@@ -64,7 +65,7 @@ export const useDownload = (fileName: string, fileLink: string, type: string) =>
 		if (isWeb) return
 		if (!content.value) await download()
 		const stat = await Filesystem.getUri(options)
-		await FileOpener.open(stat.uri, '')
+		await FileOpener.open(stat.uri, media.type)
 	}
 
 	const deleteFromDownloads = async () => {

@@ -8,7 +8,7 @@
 		<AnswerCard v-for="answer in (searchMode ? searchResults : answers)" :key="answer.hash" :answer="answer"
 			class="border-bottom-line" />
 		<BlockLoading v-if="loading" />
-		<LoadMore v-if="hasMore" :load="fetchOlderAnswers" />
+		<LoadMore v-if="hasMore && !searchMode" :load="fetchOlderAnswers" />
 	</div>
 </template>
 
@@ -20,7 +20,7 @@ import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({
-	name: 'ProfileAnswers',
+	name: 'UserAnswers',
 	components: { AnswerCard, EmptyState },
 	props: {
 		user: {

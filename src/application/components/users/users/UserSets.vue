@@ -19,7 +19,7 @@ import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({
-	name: 'ProfileSets',
+	name: 'UserSets',
 	components: { SetListCard, EmptyState },
 	props: {
 		user: {

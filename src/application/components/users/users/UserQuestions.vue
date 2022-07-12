@@ -8,7 +8,7 @@
 		<UserQuestionsCard v-for="question in (searchMode ? searchResults : questions)" :key="question.hash"
 			:question="question" class="border-bottom-line" />
 		<BlockLoading v-if="loading" />
-		<LoadMore v-if="hasMore" :load="fetchOlderQuestions" />
+		<LoadMore v-if="hasMore && !searchMode" :load="fetchOlderQuestions" />
 	</div>
 </template>
 
@@ -20,7 +20,7 @@ import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({
-	name: 'ProfileQuestions',
+	name: 'UserQuestions',
 	components: { UserQuestionsCard, EmptyState },
 	props: {
 		user: {

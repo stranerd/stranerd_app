@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref, Ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import { ChatEntity, ChatsUseCases } from '@modules/messaging'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
@@ -12,6 +12,9 @@ const global = {} as Record<string, {
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
 	listener: ReturnType<typeof useListener>
+	searchMode: Ref<boolean>
+	searchValue: Ref<string>
+	searchResults: Ref<ChatEntity[]>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useClassLibrary = (classId: string) => {
@@ -37,6 +40,9 @@ export const useClassLibrary = (classId: string) => {
 			fetched: ref(false),
 			hasMore: ref(false),
 			listener,
+			searchMode: ref(false),
+			searchResults: ref([]),
+			searchValue: ref(''),
 			...useErrorHandler(),
 			...useLoadingHandler()
 		}
@@ -60,6 +66,25 @@ export const useClassLibrary = (classId: string) => {
 		await global[classId].setLoading(false)
 	}
 
+	const search = async () => {
+		const searchValue = global[classId].searchValue.value
+		if (!searchValue) return
+		global[classId].searchMode.value = true
+		await global[classId].setError('')
+		try {
+			await global[classId].setLoading(true)
+			global[classId].searchResults.value = await ChatsUseCases.searchClassLibrary(classId, global[classId].type.value, searchValue, global[classId].groupId.value ?? undefined)
+			global[classId].fetched.value = true
+		} catch (error) {
+			await global[classId].setError(error)
+		}
+		await global[classId].setLoading(false)
+	}
+
+	watch(global[classId].searchValue, () => {
+		if (!global[classId].searchValue.value) global[classId].searchMode.value = false
+	})
+
 	watch([global[classId].groupId, global[classId].type], async () => {
 		global[classId].chats.value = []
 		await fetchChats()
@@ -73,5 +98,7 @@ export const useClassLibrary = (classId: string) => {
 		await global[classId].listener.close()
 	})
 
-	return { ...global[classId], fetchOlderChats: fetchChats }
+	const chats = computed(() => global[classId].searchMode.value ? global[classId].searchResults.value : global[classId].chats.value)
+
+	return { ...global[classId], chats, fetchOlderChats: fetchChats, search }
 }

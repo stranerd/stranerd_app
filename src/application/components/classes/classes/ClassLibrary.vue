@@ -20,6 +20,9 @@
 					{{ label }}
 				</div>
 			</div>
+			<form @submit.prevent="search">
+				<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
+			</form>
 		</div>
 		<EmptyState v-if="!loading && !error && chats.length === 0" :info="'No chats found'" />
 		<ImagesList v-if="type === 'images'" :media="images" />
@@ -53,7 +56,10 @@ export default defineComponent({
 	},
 	components: { ImagesList, DocsList, LinksList, VideosList },
 	setup (props) {
-		const { loading, error, chats, groupId, type, hasMore, fetchOlderChats } = useClassLibrary(props.classInst.id)
+		const {
+			loading, error, chats, groupId, type, hasMore, fetchOlderChats,
+			searchValue, search
+		} = useClassLibrary(props.classInst.id)
 		const { groups } = useGroupList(props.classInst.id)
 		const images = computed(() => groupBy(chats.value.filter((c) => c.isImage)
 			.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
@@ -77,7 +83,7 @@ export default defineComponent({
 		}))
 		return {
 			groupId, type, groups, hasMore, fetchOlderChats, loading, error, chats,
-			images, videos, docs, links
+			images, videos, docs, links, searchValue, search
 		}
 	}
 })

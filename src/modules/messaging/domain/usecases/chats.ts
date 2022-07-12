@@ -6,6 +6,7 @@ import { ChatEntity } from '../entities/chat'
 import { ChatType } from '@modules/messaging'
 import { imageMimeTypes, videoMimeTypes } from '@stranerd/validate'
 
+const searchFields = ['body', 'media.name']
 type Library = 'images' | 'videos' | 'docs' | 'links'
 
 export class ChatsUseCase {
@@ -114,6 +115,22 @@ export class ChatsUseCase {
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
 
 		return await this.repository.get(conditions)
+	}
+
+	async searchClassLibrary (classId: string, type: Library, search: string, groupId?: string) {
+		const query: QueryParams = {
+			where: [
+				{ field: 'data.classId', value: classId },
+				{ field: 'data.type', value: ChatType.classes },
+				...this.getClassLibraryCondition(type)
+			],
+			all: true,
+			search: { value: search, fields: searchFields }
+		}
+
+		if (groupId) query.where!.push({ field: 'to', value: groupId })
+
+		return (await this.repository.get(query)).results
 	}
 
 	async listenToClassLibrary (classId: string, type: Library, listener: Listeners<ChatEntity>, groupId?: string, date?: number) {

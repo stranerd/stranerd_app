@@ -4,7 +4,7 @@
 			<IonText class="font-bold py-4">{{ key }}</IonText>
 			<div class="w-full showcase-files">
 				<img v-for="media in values" :key="media.hash" :src="media.media.link"
-					alt="" @click="openViewFile(media.media, media.path)">
+					alt="" @click="openViewFile(media.media, media.path, $router)">
 			</div>
 		</div>
 	</div>
@@ -12,8 +12,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { openViewFile } from '@app/composable/meta/media'
 import { Media } from '@modules/core'
+import { openViewFile } from '@app/composable/meta/media'
 
 export default defineComponent({
 	name: 'ImagesList',
@@ -29,7 +29,7 @@ export default defineComponent({
 				}[]
 			}[]>,
 			required: true
-		},
+		}
 	},
 	setup () {
 		return { openViewFile }

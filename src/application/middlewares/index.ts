@@ -5,7 +5,7 @@ import { REDIRECT_SESSION_NAME } from '@utils/constants'
 
 type MiddleWareArgs = {
 	to: RouteLocationNormalized,
-	from: RouteLocationNormalized,
+	from: RouteLocationNormalized | null,
 	goBackToNonAuth: () => string
 }
 
@@ -36,7 +36,8 @@ export const isAuthenticated = defineMiddleware(async ({ to }) => {
 const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, isAccountVerified }
 type Middleware = MiddlewareFunction | keyof typeof globalMiddlewares
 
-export const generateMiddlewares = (middlewares: Middleware[]): NavigationGuardWithThis<undefined> => async (to, from) => {
+export const generateMiddlewares = (middlewares: Middleware[]): NavigationGuardWithThis<undefined> => async (to, fromRoute) => {
+	const from = fromRoute.name ? fromRoute : null
 	let redirect = null
 	for (const middleware of middlewares) {
 		const callback = typeof middleware === 'string' ? globalMiddlewares[middleware] : middleware

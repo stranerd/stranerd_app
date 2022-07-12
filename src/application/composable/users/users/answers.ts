@@ -69,7 +69,6 @@ export const useUserAnswerList = (id: string) => {
 		try {
 			await global[id].setLoading(true)
 			global[id].searchResults.value = await AnswersUseCases.searchUserAnswers(id, searchValue)
-			global[id].fetched.value = true
 		} catch (error) {
 			await global[id].setError(error)
 		}

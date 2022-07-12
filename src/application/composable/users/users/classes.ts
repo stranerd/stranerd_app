@@ -70,7 +70,6 @@ export const useUserClassList = (id = useAuth().id.value) => {
 		try {
 			await global[id].setLoading(true)
 			global[id].searchResults.value = await ClassesUseCases.search(searchValue)
-			global[id].fetched.value = true
 		} catch (error) {
 			await global[id].setError(error)
 		}

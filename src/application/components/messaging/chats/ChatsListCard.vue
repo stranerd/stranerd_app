@@ -12,7 +12,8 @@
 					{{ formatTimeAsDigits(new Date(chat.createdAt)) }}
 				</span>
 			</span>
-			<div v-if="chat.isMedia" class="flex flex-col" @click="openViewFile(chat.media, chat.saveFilePath)">
+			<div v-if="chat.isMedia" class="flex flex-col"
+				@click="openViewFile(chat.media, chat.saveFilePath, $router)">
 				<img v-if="chat.isImage" :src="chat.media.link" alt="" class="w-full rounded-t-xl">
 				<div :class="{'rounded-t-xl': !chat.isImage}"
 					class="bg-itemBg flex truncate gap-2 items-center p-2 rounded-b-xl">
@@ -33,9 +34,9 @@ import { ChatEntity } from '@modules/messaging'
 import { useAuth } from '@app/composable/auth/auth'
 import { formatTimeAsDigits } from '@utils/dates'
 import { documentOutline, downloadOutline, ellipse } from 'ionicons/icons'
-import { openViewFile } from '@app/composable/meta/media'
 import { isWeb } from '@utils/constants'
 import { useChat } from '@app/composable/messaging/chats'
+import { openViewFile } from '@app/composable/meta/media'
 
 export default defineComponent({
 	name: 'ChatsListCard',

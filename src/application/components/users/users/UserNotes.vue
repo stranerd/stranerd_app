@@ -8,7 +8,7 @@
 		<NoteListCard v-for="note in (searchMode ? searchResults : notes)" :key="note.hash"
 			:note="note" class="border-bottom-line" />
 		<BlockLoading v-if="loading" />
-		<LoadMore v-if="hasMore" :load="fetchOlderNotes" />
+		<LoadMore v-if="hasMore && !searchMode" :load="fetchOlderNotes" />
 	</div>
 </template>
 
@@ -20,7 +20,7 @@ import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({
-	name: 'ProfileNotes',
+	name: 'UserNotes',
 	components: { NoteListCard, EmptyState },
 	props: {
 		user: {

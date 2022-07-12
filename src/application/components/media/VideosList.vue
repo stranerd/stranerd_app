@@ -4,7 +4,7 @@
 			<IonText class="font-bold py-4">{{ key }}</IonText>
 			<div class="w-full showcase-files">
 				<div v-for="media in values" :key="media.hash" class="w-full relative"
-					@click="openViewFile(media.media, media.path)">
+					@click="openViewFile(media.media, media.path, $router)">
 					<video :autoplay="false" :controls="false" :src="media.media.link" />
 					<div class="absolute bottom-0 w-full flex items-center justify-between gap-4 p-2 font-semibold">
 						<IonIcon :icon="videocamOutline" />
@@ -20,8 +20,8 @@
 import { defineComponent, PropType } from 'vue'
 import { videocamOutline } from 'ionicons/icons'
 import { formatDuration } from '@utils/dates'
-import { openViewFile } from '@app/composable/meta/media'
 import { Media } from '@modules/core'
+import { openViewFile } from '@app/composable/meta/media'
 
 export default defineComponent({
 	name: 'VideosList',

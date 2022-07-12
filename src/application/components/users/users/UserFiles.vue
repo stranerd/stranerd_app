@@ -18,7 +18,7 @@ import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({
-	name: 'ProfileFiles',
+	name: 'UserFiles',
 	components: { EmptyState },
 	props: {
 		user: {

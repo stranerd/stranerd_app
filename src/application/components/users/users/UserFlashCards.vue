@@ -8,7 +8,7 @@
 		<FlashCardListCard v-for="flashCard in (searchMode ? searchResults : flashCards)" :key="flashCard.hash"
 			:flashCard="flashCard" class="border-bottom-line" />
 		<BlockLoading v-if="loading" />
-		<LoadMore v-if="hasMore" :load="fetchOlderFlashCards" />
+		<LoadMore v-if="hasMore && !searchMode" :load="fetchOlderFlashCards" />
 	</div>
 </template>
 
@@ -20,7 +20,7 @@ import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({
-	name: 'ProfileFlashCards',
+	name: 'UserFlashCards',
 	components: { FlashCardListCard, EmptyState },
 	props: {
 		user: {

@@ -206,6 +206,13 @@ ion-button {
 	--border-color: #{$color-primaryBg};
 }
 
+.primary-danger {
+	--background: #{$color-danger};
+	--background-hover: #{$color-danger};
+	--color: #{$color-primaryText};
+	--border-color: #{$color-danger};
+}
+
 .outline-danger {
 	--color: #{$color-danger};
 	--background-hover: #{$color-danger};
