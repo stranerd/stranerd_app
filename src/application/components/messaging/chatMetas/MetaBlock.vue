@@ -11,7 +11,7 @@
 				<IonIcon :class="{'rotate-90': show}" :icon="chevronForwardOutline" />
 			</span>
 		</div>
-		<div v-if="show" :class="{'ml-16': hasAvatar }" class="flex flex-col">
+		<div v-if="show" :class="{'ml-16 md:ml-14': hasAvatar }" class="flex flex-col">
 			<router-link v-if="showConnects && pendingConnects.length" class=" card-padding !py-2 text-info"
 				to="/connect/requests">
 				Requests ({{ pendingConnects.length }})

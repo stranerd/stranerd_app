@@ -15,7 +15,6 @@
 						{ name: 'Timetable', path: 'timetable', icon: calendarClearOutline },
 						{ name: 'Scheme of Work', path: 'schemes', icon: listOutline },
 						{ name: 'Discussions', path: 'groups', icon: chatbubblesOutline },
-						{ name: 'Classmates', path: 'members', icon: peopleOutline },
 						{ name: 'Library', path: 'library', icon: libraryOutline },
 						{ name: 'About', path: '', icon: informationCircleOutline }
 					]" :key="path" :to="`/classes/${classInst.id}/${path}`"
