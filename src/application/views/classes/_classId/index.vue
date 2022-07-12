@@ -15,7 +15,9 @@
 					</div>
 					<IonText class="text-secondaryText">{{ classInst.description }}</IonText>
 				</div>
-				<div v-if="classInst.admins.includes(id)" class="flex flex-col card-padding text-secondaryText">
+
+				<div v-if="classInst.admins.includes(id)"
+					class="flex flex-col card-padding text-secondaryText border-bottom-line">
 					<a v-for="{ name, icon, click } in [
 						{ name: 'Edit Class Info', icon: createOutline, click: () => openClassEditModal(classInst, $router) },
 						{ name: 'Courses List', icon: listOutline, click: () => openClassEditModal(classInst, $router, true) }
@@ -24,6 +26,7 @@
 						<IonText>{{ name }}</IonText>
 					</a>
 				</div>
+				<ClassMembers :key="classInst.hash" :classInst="classInst" />
 			</div>
 		</template>
 	</ClassWrapper>
@@ -38,10 +41,11 @@ import { useAuth } from '@app/composable/auth/auth'
 import { createOutline, listOutline } from 'ionicons/icons'
 import { openClassEditModal } from '@app/composable/classes/classes'
 import { useRouteMeta } from '@app/composable/core/states'
+import ClassMembers from '@app/components/classes/classes/ClassMembers.vue'
 
 export default defineComponent({
 	name: 'ClassClassId',
-	components: { ClassWrapper, Institution, Department },
+	components: { ClassWrapper, Institution, Department, ClassMembers },
 	setup () {
 		useRouteMeta('About', { back: true })
 		const { id } = useAuth()

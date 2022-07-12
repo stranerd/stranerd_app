@@ -1,17 +1,17 @@
 <template>
 	<div class="flex flex-col">
-		<div v-for="({ name, users }, index) in [
+		<div v-for="({ name, users }) in [
 			...(classInst.admins.includes(id) ? [{ name: 'Add Users', users }, { name: 'Requests', users: requests }] : []),
 			{ name: 'Admin', users: admins },
 			{ name: 'Members', users: members }
 		]" :key="name" class="flex flex-col py-2 border-bottom-line">
-			<div class="flex gap-4 items-center p-4" @click="show[index] = !show[index]">
+			<div class="flex gap-4 items-center p-4">
 				<IonText class="font-bold capitalize truncate w-full">{{ name }}</IonText>
-				<span>
+				<!-- <span>
 					<IonIcon :class="{'rotate-90': show[index]}" :icon="chevronForwardOutline" />
-				</span>
+				</span> -->
 			</div>
-			<div v-if="show[index]" class="flex flex-col">
+			<div  class="flex flex-col">
 				<form class="card-padding !py-0 lg:p-0" @submit.prevent="search" @reset.prevent="reset">
 					<IonSearchbar v-if="name === 'Add Users'" v-model="detail"
 						placeholder="Enter email or name to add user" />
