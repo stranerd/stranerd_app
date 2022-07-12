@@ -1,5 +1,6 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
+import { isImage, isVideo } from '@stranerd/validate'
 
 export class FileEntity extends BaseEntity {
 	public readonly id: string
@@ -34,9 +35,22 @@ export class FileEntity extends BaseEntity {
 		return `/study/files/${this.id}`
 	}
 
-	search (search: string) {
-		return this.title.toLowerCase().includes(search.toLowerCase()) || this.media.name.toLowerCase().includes(search.toLowerCase())
+	get saveFilePath () {
+		return `study/files/${this.id}`
 	}
+
+	get isImage () {
+		return isImage(this.media).valid
+	}
+
+	get isVideo () {
+		return isVideo(this.media).valid
+	}
+
+	get isDoc () {
+		return !this.isImage && !this.isVideo
+	}
+
 }
 
 type FileConstructorArgs = {

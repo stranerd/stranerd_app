@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col !gap-4 card-sm card-padding">
-		<IonText>{{ announcement.body }}</IonText>
+		<span class="leading-none" v-html="announcement.formattedBody" />
 		<div class="flex gap-2 items-center text-sm text-secondaryText">
 			<Avatar :id="announcement.user.id" :name="announcement.user.bio.fullName"
 				:size="24" :src="announcement.user.bio.photo" />

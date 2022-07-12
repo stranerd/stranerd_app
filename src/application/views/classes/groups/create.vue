@@ -17,7 +17,7 @@ export default defineComponent({
 	name: 'ClassesGroupsCreate',
 	components: { GroupForm },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
-		const classId = to.query.classId || to.params.classId || from.params.classId || from.query.classId
+		const classId = to.query.classId || to.params.classId || from?.params.classId || from?.query.classId
 		if (classId) setGroupClassId(classId as string)
 	}]),
 	setup () {

@@ -3,8 +3,10 @@ import { FileFactory } from '../factories/file'
 import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { PAGINATION_LIMIT } from '@utils/constants'
 import { FileEntity } from '../entities/file'
+import { imageMimeTypes, videoMimeTypes } from '@stranerd/validate'
 
 const searchFields = ['title', 'media.name']
+type Library = 'images' | 'videos' | 'docs'
 
 export class FilesUseCase {
 	private repository: IFileRepository
@@ -29,16 +31,6 @@ export class FilesUseCase {
 		return await this.repository.find(id)
 	}
 
-	async get (date?: number) {
-		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt', desc: true }],
-			limit: PAGINATION_LIMIT
-		}
-		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.lt, value: date }]
-
-		return await this.repository.get(conditions)
-	}
-
 	async getInList (ids: string[]) {
 		const conditions: QueryParams = {
 			where: [{ field: 'id', condition: Conditions.in, value: ids }],
@@ -48,32 +40,8 @@ export class FilesUseCase {
 		return await this.repository.get(conditions)
 	}
 
-	async getUserFiles (userId: string, date?: number) {
-		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt', desc: true }],
-			limit: PAGINATION_LIMIT,
-			where: [{ field: 'user.id', value: userId }]
-		}
-		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
-
-		return await this.repository.get(conditions)
-	}
-
 	async listenToOne (id: string, listener: Listeners<FileEntity>) {
 		return await this.repository.listenToOne(id, listener)
-	}
-
-	async listen (listener: Listeners<FileEntity>, date?: number) {
-		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt', desc: true }],
-			all: true
-		}
-		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.gt, value: date }]
-
-		return await this.repository.listenToMany(conditions, listener, (entity) => {
-			if (date) return entity.createdAt >= date
-			return true
-		})
 	}
 
 	async listenInList (ids: string[], listener: Listeners<FileEntity>) {
@@ -85,21 +53,6 @@ export class FilesUseCase {
 		return await this.repository.listenToMany(conditions, listener, (entity) => ids.includes(entity.id))
 	}
 
-	async listenToUserFiles (userId: string, listener: Listeners<FileEntity>, date?: number) {
-		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt', desc: true }],
-			all: true,
-			where: [{ field: 'user.id', value: userId }]
-		}
-		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })
-
-		return await this.repository.listenToMany(conditions, listener, (entity) => {
-			const matches = [entity.user.id === userId]
-			if (date) matches.push(entity.createdAt >= date)
-			return matches.every((m) => m)
-		})
-	}
-
 	async search (detail: string) {
 		const query: QueryParams = {
 			all: true, search: { value: detail, fields: searchFields }
@@ -107,11 +60,57 @@ export class FilesUseCase {
 		return (await this.repository.get(query)).results
 	}
 
-	async searchUserFiles (userId: string, search: string) {
-		const query = {
-			where: [{ field: 'user.id', value: userId }],
-			all: true, search: { value: search, fields: searchFields }
+	getConditions (type: Library) {
+		if (type === 'images') return [{ field: 'media.type', condition: Conditions.in, value: imageMimeTypes }]
+		if (type === 'videos') return [{ field: 'media.type', condition: Conditions.in, value: videoMimeTypes }]
+		return [{ field: 'media.type', condition: Conditions.nin, value: [...imageMimeTypes, ...videoMimeTypes] }]
+	}
+
+	async getUserFiles (userId: string, type: Library, date?: number) {
+		const conditions: QueryParams = {
+			where: [
+				{ field: 'user.id', value: userId },
+				...this.getConditions(type)
+			],
+			sort: [{ field: 'createdAt', desc: true }],
+			limit: PAGINATION_LIMIT
 		}
+
+		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.lt, value: date })
+
+		return await this.repository.get(conditions)
+	}
+
+	async searchUserFiles (userId: string, type: Library, search: string) {
+		const query: QueryParams = {
+			where: [
+				{ field: 'user.id', value: userId },
+				...this.getConditions(type)
+			],
+			all: true,
+			search: { value: search, fields: searchFields }
+		}
+
 		return (await this.repository.get(query)).results
+	}
+
+	async listenToUserFiles (userId: string, type: Library, listener: Listeners<FileEntity>, date?: number) {
+		const conditions: QueryParams = {
+			where: [
+				{ field: 'user.id', value: userId },
+				...this.getConditions(type)
+			],
+			sort: [{ field: 'createdAt', desc: true }],
+			all: true
+		}
+
+		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })
+
+		return await this.repository.listenToMany(conditions, listener, ((entity) => {
+			if (entity.user.id !== userId) return false
+			if (type === 'images' && entity.isImage) return true
+			if (type === 'videos' && entity.isVideo) return true
+			return type === 'docs' && entity.isDoc
+		}))
 	}
 }

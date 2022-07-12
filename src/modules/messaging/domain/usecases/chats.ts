@@ -148,11 +148,12 @@ export class ChatsUseCase {
 		if (date) conditions.where!.push({ field: 'createdAt', condition: Conditions.gt, value: date })
 
 		return await this.repository.listenToMany(conditions, listener, ((entity) => {
+			if (!(entity.isClasses(entity) && entity.data.classId === classId)) return false
 			if (groupId && entity.to !== groupId) return false
 			if (type === 'links' && entity.links.length > 0) return true
 			if (type === 'images' && entity.isImage) return true
 			if (type === 'videos' && entity.isVideo) return true
-			if (type === 'docs' && entity.isMedia) return true
+			if (type === 'docs' && entity.isDoc) return true
 			return false
 		}))
 	}

@@ -1,54 +1,103 @@
-import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
+import { computed, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
 import { FileEntity, FileFactory, FilesUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { Router, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { addToArray } from '@utils/commons'
+import { useAuth } from '@app/composable/auth/auth'
 
-const global = {
-	files: ref([] as FileEntity[]),
-	fetched: ref(false),
-	hasMore: ref(false),
-	...useErrorHandler(),
-	...useLoadingHandler()
-}
-const listener = useListener(async () => await FilesUseCases.listen({
-	created: async (entity) => {
-		addToArray(global.files.value, entity, (e) => e.id, (e) => e.createdAt)
-	},
-	updated: async (entity) => {
-		addToArray(global.files.value, entity, (e) => e.id, (e) => e.createdAt)
-	},
-	deleted: async (entity) => {
-		const index = global.files.value.findIndex((q) => q.id === entity.id)
-		if (index !== -1) global.files.value.splice(index, 1)
-	}
-}, global.files.value.at(-1)?.createdAt))
+type Filters = 'images' | 'videos' | 'docs'
 
-export const useFileList = () => {
-	const fetchFiles = async () => {
-		await global.setError('')
-		try {
-			await global.setLoading(true)
-			const files = await FilesUseCases.get(global.files.value.at(-1)?.createdAt)
-			global.hasMore.value = !!files.pages.next
-			files.results.forEach((n) => addToArray(global.files.value, n, (e) => e.id, (e) => e.createdAt))
-			global.fetched.value = true
-		} catch (error) {
-			await global.setError(error)
+const global = {} as Record<string, {
+	files: Ref<FileEntity[]>
+	type: Ref<Filters>
+	fetched: Ref<boolean>
+	hasMore: Ref<boolean>
+	listener: ReturnType<typeof useListener>
+	searchMode: Ref<boolean>
+	searchValue: Ref<string>
+	searchResults: Ref<FileEntity[]>
+} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+
+export const useFileList = (userId = useAuth().id.value) => {
+	if (global[userId] === undefined) {
+		const listener = useListener(async () => {
+			return FilesUseCases.listenToUserFiles(userId, global[userId].type.value, {
+				created: async (entity) => {
+					addToArray(global[userId].files.value, entity, (e) => e.id, (e) => e.createdAt)
+				},
+				updated: async (entity) => {
+					addToArray(global[userId].files.value, entity, (e) => e.id, (e) => e.createdAt)
+				},
+				deleted: async (entity) => {
+					const index = global[userId].files.value.findIndex((c) => c.id === entity.id)
+					if (index !== -1) global[userId].files.value.splice(index, 1)
+				}
+			}, global[userId].files.value.at(0)?.createdAt)
+		})
+		global[userId] = {
+			files: ref([]),
+			type: ref('images'),
+			fetched: ref(false),
+			hasMore: ref(false),
+			listener,
+			searchMode: ref(false),
+			searchResults: ref([]),
+			searchValue: ref(''),
+			...useErrorHandler(),
+			...useLoadingHandler()
 		}
-		await global.setLoading(false)
 	}
 
+	const fetchFiles = async () => {
+		await global[userId].setError('')
+		try {
+			await global[userId].setLoading(true)
+			const files = await FilesUseCases.getUserFiles(userId, global[userId].type.value, global[userId].files.value.at(-1)?.createdAt)
+			files.results.map((d) => addToArray(global[userId].files.value, d, (e) => e.id, (e) => e.createdAt))
+			global[userId].hasMore.value = !!files.pages.next
+			global[userId].fetched.value = true
+		} catch (e) {
+			await global[userId].setError(e)
+		}
+		await global[userId].setLoading(false)
+	}
+
+	const search = async () => {
+		const searchValue = global[userId].searchValue.value
+		if (!searchValue) return
+		global[userId].searchMode.value = true
+		await global[userId].setError('')
+		try {
+			await global[userId].setLoading(true)
+			global[userId].searchResults.value = await FilesUseCases.searchUserFiles(userId, global[userId].type.value, searchValue)
+			global[userId].fetched.value = true
+		} catch (error) {
+			await global[userId].setError(error)
+		}
+		await global[userId].setLoading(false)
+	}
+
+	watch(global[userId].searchValue, () => {
+		if (!global[userId].searchValue.value) global[userId].searchMode.value = false
+	})
+
+	watch([global[userId].type], async () => {
+		global[userId].files.value = []
+		await fetchFiles()
+		await global[userId].listener.restart()
+	})
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchFiles()
-		await listener.start()
+		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchFiles()
+		await global[userId].listener.start()
 	})
 	onUnmounted(async () => {
-		await listener.close()
+		await global[userId].listener.close()
 	})
 
-	return { ...global, fetchOlderFiles: fetchFiles }
+	const files = computed(() => global[userId].searchMode.value ? global[userId].searchResults.value : global[userId].files.value)
+
+	return { ...global[userId], files, fetchOlderFiles: fetchFiles, search }
 }
 
 export const useCreateFile = () => {
@@ -65,7 +114,7 @@ export const useCreateFile = () => {
 				await setLoading(true)
 				const file = await FilesUseCases.add(factory.value)
 				await setMessage('File submitted successfully')
-				await router.push(`/study/files/${file.id}`)
+				await router.push('/account/files/')
 				factory.value.reset()
 			} catch (error) {
 				await setError(error)
@@ -77,40 +126,7 @@ export const useCreateFile = () => {
 	return { error, loading, factory, createFile }
 }
 
-let editingFile = null as FileEntity | null
-export const getEditingFile = () => editingFile
-export const openFileEditModal = async (file: FileEntity, router: Router) => {
-	editingFile = file
-	await router.push(`/study/files/${file.id}/edit`)
-}
-export const useEditFile = () => {
-	const router = useRouter()
-	const { error, setError } = useErrorHandler()
-	const { loading, setLoading } = useLoadingHandler()
-	const { setMessage } = useSuccessHandler()
-	const factory = ref(new FileFactory()) as Ref<FileFactory>
-	if (editingFile) factory.value.loadEntity(editingFile)
-
-	const editFile = async () => {
-		await setError('')
-		if (factory.value.valid && !loading.value) {
-			try {
-				await setLoading(true)
-				const file = await FilesUseCases.update(editingFile!.id, factory.value)
-				await setMessage('File updated successfully')
-				factory.value.reset()
-				await router.push(`/study/files/${file.id}`)
-			} catch (error) {
-				await setError(error)
-			}
-			await setLoading(false)
-		} else factory.value.validateAll()
-	}
-
-	return { error, loading, factory, editFile }
-}
-
-export const useDeleteFile = (fileId: string) => {
+export const useDeleteFile = (file: FileEntity) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -124,9 +140,9 @@ export const useDeleteFile = (fileId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await FilesUseCases.delete(fileId)
-				global.files.value = global.files.value
-					.filter((q) => q.id !== fileId)
+				await FilesUseCases.delete(file.id)
+				if (global[file.user.id]) global[file.user.id].files.value = global[file.user.id].files.value
+					.filter((q) => q.id !== file.id)
 				await setMessage('File deleted successfully')
 			} catch (error) {
 				await setError(error)
@@ -136,56 +152,4 @@ export const useDeleteFile = (fileId: string) => {
 	}
 
 	return { loading, error, deleteFile }
-}
-
-export const useFile = (fileId: string) => {
-	const { error, setError } = useErrorHandler()
-	const { loading, setLoading } = useLoadingHandler()
-	const file = computed({
-		get: () => global.files.value.find((q) => q.id === fileId) ?? null,
-		set: (q) => {
-			if (q) addToArray(global.files.value, q, (e) => e.id, (e) => e.createdAt)
-		}
-	})
-
-	const fetchFile = async () => {
-		await setError('')
-		try {
-			await setLoading(true)
-			let file = global.files.value.find((q) => q.id === fileId) ?? null
-			if (file) {
-				await setLoading(false)
-				return
-			}
-			file = await FilesUseCases.find(fileId)
-			if (file) addToArray(global.files.value, file, (e) => e.id, (e) => e.createdAt)
-		} catch (error) {
-			await setError(error)
-		}
-		await setLoading(false)
-	}
-	const listener = useListener(async () => {
-		return await FilesUseCases.listenToOne(fileId, {
-			created: async (entity) => {
-				addToArray(global.files.value, entity, (e) => e.id, (e) => e.createdAt)
-			},
-			updated: async (entity) => {
-				addToArray(global.files.value, entity, (e) => e.id, (e) => e.createdAt)
-			},
-			deleted: async (entity) => {
-				const index = global.files.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.files.value.splice(index, 1)
-			}
-		})
-	})
-
-	onMounted(async () => {
-		await fetchFile()
-		await listener.start()
-	})
-	onUnmounted(async () => {
-		await listener.close()
-	})
-
-	return { error, loading, file }
 }

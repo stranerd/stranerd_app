@@ -17,12 +17,16 @@
 			<IonIcon v-else :icon="linkOutline" />
 			<span class="ml-2">Accept Connect</span>
 		</IonButton>
-		<IonButton v-else-if="connect.accepted" class="btn-outline outline-danger w-full"
-			@click="deleteConnect(connect)">
-			<SpinLoading v-if="loading" />
-			<IonIcon v-else :icon="unlinkOutline" />
-			<span class="ml-2">Disconnect</span>
-		</IonButton>
+		<template v-else-if="connect.accepted">
+			<router-link :to="`/messages/personal/${userId}`">
+				<IonButton class="btn-primary w-full">Message</IonButton>
+			</router-link>
+			<IonButton class="btn-outline outline-danger w-full" @click="deleteConnect(connect)">
+				<SpinLoading v-if="loading" />
+				<IonIcon v-else :icon="unlinkOutline" />
+				<span class="ml-2">Disconnect</span>
+			</IonButton>
+		</template>
 	</template>
 </template>
 

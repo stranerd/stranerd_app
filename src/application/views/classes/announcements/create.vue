@@ -18,7 +18,7 @@ export default defineComponent({
 	name: 'ClassesAnnouncementsCreate',
 	components: { AnnouncementForm },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ from, to }) => {
-		const classId = to.query.classId || to.params.classId || from.params.classId || from.query.classId
+		const classId = to.query.classId || to.params.classId || from?.params.classId || from?.query.classId
 		if (classId) setAnnouncementClassId(classId as string)
 	}]),
 	setup () {

@@ -1,6 +1,7 @@
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity } from '@modules/core'
 import { ClassUsers } from '../types'
+import { extractUrls } from '@stranerd/validate'
 
 type AnnouncementConstructorArgs = {
 	id: string
@@ -54,6 +55,14 @@ export class AnnouncementEntity extends BaseEntity {
 
 	get tutors () {
 		return this.users[ClassUsers.tutors]
+	}
+
+	get formattedBody () {
+		let body = this.body
+		extractUrls(body).forEach(({ original, normalized }) => {
+			body = body.replaceAll(original, `<a href="${normalized}" target="_blank" style="text-decoration: underline; color: #027eb5;">${original}</a>`)
+		})
+		return body
 	}
 
 	isRead (userId: string) {

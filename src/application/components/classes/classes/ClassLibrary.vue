@@ -30,7 +30,7 @@
 		<DocsList v-if="type === 'docs'" :media="docs" />
 		<LinksList v-if="type === 'links'" :media="links" />
 		<BlockLoading v-if="loading" />
-		<LoadMore v-if="hasMore" :load="fetchOlderChats" />
+		<LoadMore v-if="hasMore && !searchMode" :load="fetchOlderChats" />
 	</div>
 </template>
 
@@ -58,7 +58,7 @@ export default defineComponent({
 	setup (props) {
 		const {
 			loading, error, chats, groupId, type, hasMore, fetchOlderChats,
-			searchValue, search
+			searchValue, searchMode, search
 		} = useClassLibrary(props.classInst.id)
 		const { groups } = useGroupList(props.classInst.id)
 		const images = computed(() => groupBy(chats.value.filter((c) => c.isImage)
@@ -83,7 +83,7 @@ export default defineComponent({
 		}))
 		return {
 			groupId, type, groups, hasMore, fetchOlderChats, loading, error, chats,
-			images, videos, docs, links, searchValue, search
+			images, videos, docs, links, searchValue, search, searchMode
 		}
 	}
 })
