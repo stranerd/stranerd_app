@@ -1,13 +1,7 @@
 <template>
 	<div class="showcase-flex">
 		<div class="flex lg:hidden gap-[1px]">
-			<IonSelect v-model="tagId" class="capitalize w-full"
-				interface="action-sheet" placeholder="Associated subject">
-				<IonSelectOption value="">All</IonSelectOption>
-				<IonSelectOption v-for="tag in childrenTags" :key="tag.hash" :value="tag.id" class="capitalize">
-					{{ tag.title }}
-				</IonSelectOption>
-			</IonSelect>
+			<SelectTag v-model:value="tagId" :allowAll="true" class="w-full" />
 			<IonSelect v-model="answered"
 				class="w-full" interface="action-sheet" placeholder="State">
 				<IonSelectOption v-for="choice in answeredChoices" :key="choice.key"
@@ -27,25 +21,23 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
 import EmptyState from '@app/components/core/EmptyState.vue'
-import { useTagList } from '@app/composable/interactions/tags'
+import SelectTag from '@app/components/questions/questions/SelectTag.vue'
 
 export default defineComponent({
 	name: 'QuestionsList',
-	components: { QuestionListCard, EmptyState },
+	components: { QuestionListCard, EmptyState, SelectTag },
 	setup () {
 		const {
 			filteredQuestions: questions, error, loading, hasMore, fetchOlderQuestions,
 			answeredChoices, answered, tagId
 		} = useQuestionList()
-		const { questionTags } = useTagList()
-		const childrenTags = computed(() => questionTags.value.filter((t) => t.parent))
 
 		return {
-			questions, error, loading, hasMore, childrenTags, tagId,
+			questions, error, loading, hasMore, tagId,
 			fetchOlderQuestions, answeredChoices, answered
 		}
 	}

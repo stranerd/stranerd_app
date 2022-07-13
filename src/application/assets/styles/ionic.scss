@@ -223,10 +223,6 @@ ion-button {
 	display: none !important;
 }
 
-ion-select::part(icon) {
-	content: '\02304';
-}
-
 ion-icon {
 	cursor: pointer;
 	font-size: var(--icon-size);
