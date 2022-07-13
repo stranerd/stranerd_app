@@ -15,7 +15,7 @@
 						{ label: 'Docs', value: 'docs' }, { label: 'Links', value: 'links' }
 					]" :key="value"
 					:class="{ 'bg-primaryBg !text-primaryText': type === value, 'rounded-l-xl': idx === 0, 'rounded-r-xl': idx === 3 }"
-					class="flex-grow p-2 border border-primaryBg text-primaryBg text-center"
+					class="flex-grow p-2 border border-primaryBg text-primaryBg text-center cursor-pointer"
 					@click="type = value">
 					{{ label }}
 				</div>

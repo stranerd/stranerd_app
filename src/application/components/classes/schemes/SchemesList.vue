@@ -1,6 +1,6 @@
 <template>
 	<div class="showcase-flex">
-		<div class="flex justify-between items-center p-4 border-bottom-line"
+		<div class="flex justify-between items-center p-4 border-bottom-line "
 			@click="openCreateSchemeModal(classInst, $router)">
 			<IonText>Set up scheme of work</IonText>
 			<IonIcon :icon="arrowForwardOutline" />
