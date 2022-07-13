@@ -45,6 +45,6 @@ export class AnnouncementApiDataSource implements AnnouncementBaseDataSource {
 	}
 
 	async markRead (classId: string) {
-		return await this.stranerdClient.post<any, boolean>(`/${classId}`, {})
+		return await this.stranerdClient.post<any, boolean>(`/${classId}/read`, {})
 	}
 }

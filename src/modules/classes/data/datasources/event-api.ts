@@ -45,6 +45,6 @@ export class EventApiDataSource implements EventBaseDataSource {
 	}
 
 	async markRead (classId: string) {
-		return await this.stranerdClient.post<any, boolean>(`/${classId}`, {})
+		return await this.stranerdClient.post<any, boolean>(`/${classId}/read`, {})
 	}
 }
