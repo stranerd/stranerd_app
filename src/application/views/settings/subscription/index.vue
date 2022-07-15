@@ -10,7 +10,7 @@
 		</div>
 
 		<router-link class="border-bottom-line p-4 lg:p-0 flex items-center md:mt-12"
-			to="#">
+			to="/settings/subscription/plans">
 			<IonText>See available plans</IonText>
 		</router-link>
 
