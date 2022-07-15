@@ -13,6 +13,10 @@ const global = {} as Record<string, {
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
+export const markAnnouncementSeen = async (announcement: AnnouncementEntity, userId: string) => {
+	if (!announcement.isRead(userId)) await AnnouncementsUseCases.markRead(announcement.classId)
+}
+
 export const useAnnouncementList = (classId: string) => {
 	const { id } = useAuth()
 	if (global[classId] === undefined) {

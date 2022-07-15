@@ -4,7 +4,7 @@
 		<span v-if="hasAvatar">
 			<Avatar :name="chatMeta.getToName(id)" :size="48" :src="chatMeta.getToPhoto(id)" />
 		</span>
-		<div class="flex flex-col w-full gap-1 leading-none">
+		<div class="flex flex-col flex-grow truncate gap-1 leading-none">
 			<div class="flex gap-2 items-center">
 				<IonText class="text-base w-full truncate capitalize">
 					{{ chatMeta.getToName(id) }}

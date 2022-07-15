@@ -2,7 +2,10 @@
 	<DefaultLayout :hideBottom="true">
 		<div v-if="openMedia"
 			class="h-full flex-grow overflow-y-auto flex flex-col justify-center items-center text-center p-4 gap-2">
-			<span class="text-5xl leading-none">
+			<img v-if="isImage(openMedia.media).valid" :src="content || openMedia.media.link" alt="" class="w-full">
+			<video v-else-if="isVideo(openMedia.media).valid" :src="content || openMedia.media.link" class="w-full"
+				controls />
+			<span v-else class="text-5xl leading-none">
 				<IonIcon :icon="documentOutline" />
 			</span>
 			<IonText class="text-lg font-semibold">{{ openMedia.media.name }}</IonText>
@@ -25,6 +28,7 @@ import { useRouteMeta } from '@app/composable/core/states'
 import { formatFileSize } from '@utils/dates'
 import { closeMediaFullScreen, openMedia, useDownload } from '@app/composable/meta/media'
 import { isWeb } from '@utils/constants'
+import { isImage, isVideo } from '@stranerd/validate'
 
 export default defineComponent({
 	name: 'FileView',
@@ -39,7 +43,7 @@ export default defineComponent({
 		} = useDownload(openMedia.value!.media, openMedia.value!.path)
 		const download = isWeb ? downloadWeb : downloadApp
 		return {
-			openMedia, documentOutline, formatFileSize,
+			openMedia, documentOutline, formatFileSize, isImage, isVideo,
 			content, loading, openFile, download, deleteFromDownloads
 		}
 	}

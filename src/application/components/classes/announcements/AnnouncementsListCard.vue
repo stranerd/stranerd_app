@@ -20,12 +20,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { AnnouncementEntity, ClassEntity } from '@modules/classes'
 import { formatTime } from '@utils/dates'
 import { useAuth } from '@app/composable/auth/auth'
 import { ellipse, eyeOutline } from 'ionicons/icons'
 import { formatNumber } from '@utils/commons'
+import { markAnnouncementSeen } from '@app/composable/classes/announcements'
 
 export default defineComponent({
 	name: 'AnnouncementsListCard',
@@ -39,8 +40,11 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup () {
+	setup (props) {
 		const { id } = useAuth()
+		onMounted(async () => {
+			await markAnnouncementSeen(props.announcement, id.value)
+		})
 		return { id, formatTime, formatNumber, ellipse, eyeOutline }
 	}
 })
