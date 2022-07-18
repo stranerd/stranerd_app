@@ -1,4 +1,5 @@
 export enum InteractionEntities {
+	questions = 'questions',
 	answers = 'answers',
 	comments = 'comments'
 }

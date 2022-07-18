@@ -23,9 +23,7 @@
 			<span class="flex gap-1 items-center mr-auto">
 				<IonIcon :icon="helpCircleOutline" />
 				<span>
-					{{
-						formatNumber(question.answers.length)
-					}} {{ pluralize(question.answers.length, 'answer', 'answers') }}
+					{{ formatNumber(question.answers.length + question.meta.comments) }}
 				</span>
 			</span>
 			<SaveToSet :entity="question" />
@@ -40,17 +38,10 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import {
-	arrowRedoOutline,
-	attachOutline,
-	chatbubbleOutline,
-	ellipse,
-	flagOutline,
-	helpCircleOutline
-} from 'ionicons/icons'
+import { attachOutline, chatbubbleOutline, ellipse, helpCircleOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
-import { formatNumber, pluralize } from '@utils/commons'
+import { formatNumber } from '@utils/commons'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { useAuth } from '@app/composable/auth/auth'
 import InteractionTag from '@app/components/interactions/tags/Tag.vue'
@@ -73,8 +64,8 @@ export default defineComponent({
 			}
 		})
 		return {
-			showAnswerButton, openAnswerModal, formatTime, formatNumber, pluralize,
-			arrowRedoOutline, flagOutline, attachOutline, chatbubbleOutline, ellipse, helpCircleOutline
+			showAnswerButton, openAnswerModal, formatTime, formatNumber,
+			attachOutline, chatbubbleOutline, ellipse, helpCircleOutline
 		}
 	}
 })

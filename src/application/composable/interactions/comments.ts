@@ -85,7 +85,7 @@ export const useCreateComment = (id: string, type: InteractionEntities) => {
 				await CommentsUseCases.add({ id, type }, factory.value)
 				factory.value.reset()
 				useInteractionModal().closeCreateComment()
-				await setMessage('Tag created successfully')
+				await setMessage('Comment posted successfully')
 			} catch (error) {
 				await setError(error)
 			}

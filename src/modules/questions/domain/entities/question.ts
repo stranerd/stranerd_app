@@ -1,6 +1,7 @@
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractTextFromHTML, trimToLength } from '@utils/commons'
+import { QuestionMeta } from '../types'
 
 type QuestionConstructorArgs = {
 	id: string
@@ -11,6 +12,7 @@ type QuestionConstructorArgs = {
 	user: EmbeddedUser
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
+	meta: QuestionMeta
 	createdAt: number
 	updatedAt: number
 }
@@ -24,13 +26,14 @@ export class QuestionEntity extends BaseEntity {
 	public readonly bestAnswers: string[]
 	public readonly answers: { id: string, userId: string }[]
 	public readonly isAnswered: boolean
+	public readonly meta: QuestionMeta
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
 		             id, body, tagId, isAnswered,
 		             bestAnswers, createdAt, user, attachments,
-		             answers, updatedAt
+		             meta, answers, updatedAt
 	             }: QuestionConstructorArgs) {
 		super()
 		this.id = id
@@ -41,6 +44,7 @@ export class QuestionEntity extends BaseEntity {
 		this.user = generateEmbeddedUser(user)
 		this.bestAnswers = bestAnswers
 		this.answers = answers
+		this.meta = meta
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
