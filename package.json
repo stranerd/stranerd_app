@@ -87,8 +87,7 @@
 		"sass-loader": "^13.0.2",
 		"tailwindcss": "^3.1.5",
 		"typescript": "~4.7.4",
-		"unplugin-vue-components": "^0.21.1",
-		"vue-auto-routing": "^1.0.1"
+		"unplugin-vue-components": "^0.21.1"
 	},
 	"commitlint": {
 		"extends": [

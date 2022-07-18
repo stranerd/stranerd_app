@@ -4850,7 +4850,7 @@ fast-diff@1.1.2:
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.1.2.tgz#4b62c42b8e03de3f848460b639079920695d0154"
   integrity sha512-KaJUt+M9t1qaIteSvjc6P3RbMdXsNhK61GRftR6SNxqmhthcd9MGIi4T+o0jD8LUSpSnSKXE20nLtJ3fOHxQig==
 
-fast-glob@^3.2.11, fast-glob@^3.2.4, fast-glob@^3.2.7, fast-glob@^3.2.9:
+fast-glob@^3.2.11, fast-glob@^3.2.7, fast-glob@^3.2.9:
   version "3.2.11"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.11.tgz#a1172ad95ceb8a16e20caa5c5e56480e5129c1d9"
   integrity sha512-xrO3+1bxSo3ZVHAnqzyuewYT6aMFHRAd4Kcs92MAonjwQZLsK9d0SF1IyQ3k5PoirxTW0Oe/RqFgMQ6TcNE5Ew==
@@ -7734,11 +7734,6 @@ prepend-http@^2.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
 
-prettier@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.1.tgz#795a1a78dd52f073da0cd42b21f9c91381923ff5"
-  integrity sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
-
 prettier@>=2.3, prettier@^2.4.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.5.1.tgz#fff75fa9d519c54cf0fce328c1017d94546bc56a"
@@ -9487,13 +9482,6 @@ vm2@^3.9.3:
     acorn "^8.7.0"
     acorn-walk "^8.2.0"
 
-vue-auto-routing@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/vue-auto-routing/-/vue-auto-routing-1.0.1.tgz#6bc9f17d8288baf2a04d4ef2bbdbc12c5444a067"
-  integrity sha512-7RFIdzZHsCToVYv90ljcCx/hrRaY27d9VYSoUYlPSD26VddqKosEGXkogZ6iMKH9ba71Kkf94/qZfUDCwZgu2Q==
-  dependencies:
-    vue-route-generator "^1.0.0"
-
 vue-eslint-parser@^9.0.0:
   version "9.0.3"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-9.0.3.tgz#0c17a89e0932cc94fa6a79f0726697e13bfe3c96"
@@ -9538,14 +9526,6 @@ vue-pdf-embed@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/vue-pdf-embed/-/vue-pdf-embed-1.1.4.tgz#80a95c313ffc4f76c14d9c90ca28c567d5469729"
   integrity sha512-d4c7nM3LneWUiL4MssIyPHfGgVMRPh4Z7UgLsXMZ+lbAtH/6SBUFHdzZQLY2BASdh16BM/v6YCbmtQU+KIQdrg==
-
-vue-route-generator@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/vue-route-generator/-/vue-route-generator-1.0.0.tgz#7211de178820c2773657b08832470f17102efcee"
-  integrity sha512-u+DjfGwQ5Um8Wvzb5wqlCSwZbUthjiZBC8SY3eCnZlqE1yTCJrKRtp8xN7ffNpcipwllA8IKEyBEga0b5xQSZQ==
-  dependencies:
-    fast-glob "^3.2.4"
-    prettier "2.2.1"
 
 vue-router@^4.1.1:
   version "4.1.1"
