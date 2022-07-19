@@ -22,7 +22,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useUserModal } from '@app/composable/core/modals'
 import {
 	chatbubblesOutline,
 	createOutline,

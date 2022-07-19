@@ -10,7 +10,7 @@
 			<IonIcon :icon="ellipse" class="dot" />
 			<span>{{ formatTime(answer.createdAt) }}</span>
 			<div class="flex flex-grow items-center justify-end gap-4 text-secondaryText">
-				<Share :text="answer.strippedBody" title="Share this answer" />
+				<Share :link="answer.shareLink" :text="answer.strippedBody" title="Share this answer" />
 				<IonIcon :icon="flagOutline" @click="openReportModal" />
 			</div>
 		</div>

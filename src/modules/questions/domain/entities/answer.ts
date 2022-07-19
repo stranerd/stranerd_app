@@ -60,6 +60,10 @@ export class AnswerEntity extends BaseEntity {
 	get isUserVerified () {
 		return this.user.roles.isVerified
 	}
+
+	get shareLink () {
+		return `/questions/${this.questionId}`
+	}
 }
 
 type AnswerConstructorArgs = {

@@ -1,32 +1,25 @@
 <template>
 	<template v-if="fetched">
-		<IonButton v-if="!connect" class="btn-primary w-full" @click="createConnect(userId)">
+		<IonButton v-if="!connect" class="btn-primary" @click="createConnect(userId)">
 			<SpinLoading v-if="loading" />
 			<IonIcon v-else :icon="linkOutline" />
 			<span class="ml-2">Connect</span>
 		</IonButton>
-		<IonButton v-else-if="connect.pending && connect.to.id === userId" class="btn-outline w-full"
+		<IonButton v-else-if="connect.pending && connect.to.id === userId" class="btn-outline"
 			@click="deleteConnect(connect)">
 			<SpinLoading v-if="loading" />
 			<IonIcon v-else :icon="closeOutline" />
 			<span class="ml-2">Cancel Request</span>
 		</IonButton>
-		<IonButton v-else-if="connect.pending && connect.from.id === userId" class="btn-primary w-full"
+		<IonButton v-else-if="connect.pending && connect.from.id === userId" class="btn-primary"
 			@click="acceptConnect(connect, true)">
 			<SpinLoading v-if="loading" />
 			<IonIcon v-else :icon="linkOutline" />
 			<span class="ml-2">Accept Connect</span>
 		</IonButton>
-		<template v-else-if="connect.accepted">
-			<router-link :to="`/messages/personal/${userId}`">
-				<IonButton class="btn-primary w-full">Message</IonButton>
-			</router-link>
-			<IonButton class="btn-outline outline-danger w-full" @click="deleteConnect(connect)">
-				<SpinLoading v-if="loading" />
-				<IonIcon v-else :icon="unlinkOutline" />
-				<span class="ml-2">Disconnect</span>
-			</IonButton>
-		</template>
+		<router-link v-else-if="connect.accepted" :to="`/messages/personal/${userId}`">
+			<IonButton class="btn-primary">Message</IonButton>
+		</router-link>
 	</template>
 </template>
 
@@ -57,3 +50,9 @@ export default defineComponent({
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+	ion-button {
+		--border-radius: 10rem;
+	}
+</style>

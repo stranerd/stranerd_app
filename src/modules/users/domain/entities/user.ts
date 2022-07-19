@@ -173,6 +173,10 @@ export class UserEntity extends BaseEntity {
 		this.roles.isVerified = isVerified
 	}
 
+	get shareLink () {
+		return `/users/${this.id}`
+	}
+
 	isCollege (user: UserEntity): user is Omit<UserEntity, 'school'> & { school: CollegeType } {
 		return user.school?.type === UserSchoolType.college
 	}

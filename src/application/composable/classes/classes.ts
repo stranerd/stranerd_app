@@ -340,7 +340,8 @@ export const useDeleteClass = (classId: string) => {
 	return { loading, error, deleteClass }
 }
 
-export let viewedBy = null as { classInst: ClassEntity, views: Record<string, number> } | null
+let viewedBy = null as { classInst: ClassEntity, views: Record<string, number> } | null
+export const getViewedBy = () => viewedBy
 export const openViewedByModal = (classInst: ClassEntity, views: Record<string, number>) => {
 	viewedBy = { classInst, views }
 	useClassModal().openViewedBy()

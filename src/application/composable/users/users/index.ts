@@ -2,6 +2,7 @@ import { onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import { UserEntity, UsersUseCases } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
+import { useUserModal } from '@app/composable/core/modals'
 
 const global = {} as Record<string, {
 	user: Ref<UserEntity | null>
@@ -60,4 +61,11 @@ export const useUser = (userId: string) => {
 		loading: global[userId].loading,
 		user: global[userId].user
 	}
+}
+
+let profileMenuUser = null as UserEntity | null
+export const getProfileMenuUser = () => profileMenuUser
+export const openProfileMenuModal = (user: UserEntity) => {
+	profileMenuUser = user
+	useUserModal().openProfileMenu()
 }

@@ -24,6 +24,7 @@ import CreatePastQuestion from '@app/components/modals/school/CreatePastQuestion
 import EditPastQuestion from '@app/components/modals/school/EditPastQuestion.vue'
 import Settings from '@app/components/modals/users/Settings.vue'
 import FabMenu from '@app/components/modals/users/FabMenu.vue'
+import ProfileMenu from '@app/components/modals/users/ProfileMenu.vue'
 import CreateComment from '@app/components/modals/interactions/CreateComment.vue'
 import CreateTag from '@app/components/modals/interactions/CreateTag.vue'
 import EditTag from '@app/components/modals/interactions/EditTag.vue'
@@ -40,7 +41,7 @@ const SchoolModal = modal.register('School', {
 	CreateInstitution, EditInstitution, CreateFaculty, EditFaculty, CreateDepartment, EditDepartment,
 	CreatePastQuestion, EditPastQuestion, CreateCourse, EditCourse
 })
-const UserModal = modal.register('User', { Settings, FabMenu })
+const UserModal = modal.register('User', { Settings, FabMenu, ProfileMenu })
 const InteractionModal = modal.register('Interaction', { CreateComment, CreateTag, EditTag })
 
 export const useSessionModal = () => SessionModal

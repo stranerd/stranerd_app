@@ -77,6 +77,10 @@ export class QuestionEntity extends BaseEntity {
 		return this.user.roles.isVerified
 	}
 
+	get shareLink () {
+		return `/questions/${this.id}`
+	}
+
 	search (search: string) {
 		return this.strippedBody.toLowerCase().includes(search.toLowerCase())
 	}

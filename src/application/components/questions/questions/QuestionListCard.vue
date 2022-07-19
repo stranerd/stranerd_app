@@ -31,7 +31,7 @@
 				<IonIcon :icon="chatbubbleOutline" />
 				<span>{{ formatNumber(question.answers.length) }}</span>
 			</span>
-			<Share :text="question.strippedBody" title="Share this question" />
+			<Share :link="question.shareLink" :text="question.strippedBody" title="Share this question" />
 		</div>
 	</router-link>
 </template>

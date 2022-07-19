@@ -1,7 +1,8 @@
 <template>
 	<router-link class="relative leading-none" to="/notifications">
 		<IonIcon :icon="notificationsOutline" />
-		<span v-if="isLoggedIn && unReadCount.length" :style="`width: ${unReadCount.length + 0.5}ch;`"
+		<span v-if="isLoggedIn && unReadCount.length"
+			:style="`width: ${unReadCount.length + 0.5}ch; min-width: 2ch;max-width:3.1ch`"
 			class="absolute bg-headerText lg:bg-headerBg text-sm text-headerBg lg:text-headerText aspect-square rounded-full flex items-center justify-center bottom-[50%] right-[50%] leading-none">
 			<span>{{ unReadCount }}</span>
 		</span>
