@@ -21,6 +21,10 @@ export class ConnectEntity extends BaseEntity {
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
+
+	get members () {
+		return [this.from.id, this.to.id]
+	}
 }
 
 type ConnectConstructorArgs = {

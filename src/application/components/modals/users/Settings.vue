@@ -1,10 +1,10 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Set up your account
 		</template>
-		<ProfileForm v-if="tab === 0" :next="() => { tab = 1; saveSchoolState(); }" />
-		<SchoolForm v-if="tab === 1" :back="() => tab = 0" :next="() => { closeSettings(); saveSchoolState(); }" />
+		<ProfileForm v-if="tab === 0" :next="() => tab = 1" />
+		<SchoolForm v-if="tab === 1" :back="() => tab = 0" :next="() => { close?.(); saveSchoolState(); }" />
 	</Modal>
 </template>
 
@@ -17,9 +17,15 @@ import { saveSchoolState } from '@app/composable/auth/auth'
 export default defineComponent({
 	name: 'SettingsModal',
 	components: { ProfileForm, SchoolForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const tab = ref(0)
-		return { tab, closeSettings: () => null, saveSchoolState }
+		return { tab, saveSchoolState }
 	}
 })
 </script>

@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Create a tag
 		</template>
@@ -24,6 +24,12 @@ import { useCreateTag } from '@app/composable/interactions/tags'
 export default defineComponent({
 	name: 'CreateTagModal',
 	components: { TagForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, createTag } = useCreateTag()
 		return { factory, error, loading, createTag }

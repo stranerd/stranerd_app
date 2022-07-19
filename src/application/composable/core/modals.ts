@@ -11,6 +11,7 @@ import CreateTimetable from '@app/components/modals/classes/CreateTimetable.vue'
 import EditTimetable from '@app/components/modals/classes/EditTimetable.vue'
 import CreateScheme from '@app/components/modals/classes/CreateScheme.vue'
 import EditScheme from '@app/components/modals/classes/EditScheme.vue'
+import ViewedBy from '@app/components/modals/classes/ViewedBy.vue'
 import CreateInstitution from '@app/components/modals/school/CreateInstitution.vue'
 import EditInstitution from '@app/components/modals/school/EditInstitution.vue'
 import CreateFaculty from '@app/components/modals/school/CreateFaculty.vue'
@@ -33,7 +34,7 @@ const StudyModal = modal.register('Study', {
 	CreateSet, EditSet, SaveEntity, CreateTestPrep, EditTestPrep, CreateNote, EditNote
 })
 const ClassModal = modal.register('Class', {
-	CreateScheme, EditScheme, CreateTimetable, EditTimetable
+	CreateScheme, EditScheme, CreateTimetable, EditTimetable, ViewedBy
 })
 const SchoolModal = modal.register('School', {
 	CreateInstitution, EditInstitution, CreateFaculty, EditFaculty, CreateDepartment, EditDepartment,

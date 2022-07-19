@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Create Study Folder
 		</template>
@@ -17,6 +17,12 @@ import SetForm from '@app/components/study/sets/SetForm.vue'
 export default defineComponent({
 	name: 'CreateSetModal',
 	components: { SetForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { createSet, factory, error, loading } = useCreateSet()
 		return { error, loading, createSet, factory }

@@ -11,10 +11,10 @@
 			<IonIcon :icon="ellipse" class="dot" />
 			<IonText>{{ formatTime(announcement.createdAt) }}</IonText>
 
-			<IonButton class="ml-auto flex items-center">
-				<IonIcon :icon="eyeOutline" class="mr-3" />
+			<span class="ml-auto flex items-center gap-2" @click="openViewedByModal(classInst, announcement.readAt)">
+				<IonIcon :icon="eyeOutline" />
 				<IonText>{{ formatNumber(Object.keys(announcement.readAt).length) }}</IonText>
-			</IonButton>
+			</span>
 		</div>
 	</div>
 </template>
@@ -27,6 +27,7 @@ import { useAuth } from '@app/composable/auth/auth'
 import { ellipse, eyeOutline } from 'ionicons/icons'
 import { formatNumber } from '@utils/commons'
 import { markAnnouncementSeen } from '@app/composable/classes/announcements'
+import { openViewedByModal } from '@app/composable/classes/classes'
 
 export default defineComponent({
 	name: 'AnnouncementsListCard',
@@ -45,7 +46,7 @@ export default defineComponent({
 		onMounted(async () => {
 			await markAnnouncementSeen(props.announcement, id.value)
 		})
-		return { id, formatTime, formatNumber, ellipse, eyeOutline }
+		return { formatTime, formatNumber, ellipse, eyeOutline, openViewedByModal }
 	}
 })
 </script>

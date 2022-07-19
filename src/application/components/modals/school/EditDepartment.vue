@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Edit a department
 		</template>
@@ -25,6 +25,12 @@ import { useEditDepartment } from '@app/composable/school/departments'
 export default defineComponent({
 	name: 'EditDepartmentModal',
 	components: { DepartmentForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, editDepartment } = useEditDepartment()
 		return { factory, error, loading, editDepartment }

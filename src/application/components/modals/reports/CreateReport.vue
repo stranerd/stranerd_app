@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Report {{ factory.isQuestionsType ? 'Question' : factory.isAnswersType ? 'Answer' : 'User' }}
 		</template>
@@ -23,8 +23,14 @@ import QuestionReportForm from '@app/components/reports/QuestionReportForm.vue'
 import AnswerReportForm from '@app/components/reports/AnswerReportForm.vue'
 
 export default defineComponent({
-	components: { QuestionReportForm, AnswerReportForm },
 	name: 'CreateReport',
+	components: { QuestionReportForm, AnswerReportForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, loading, error, message, createReport } = useCreateReport()
 		return { factory, loading, error, message, createReport }
