@@ -28,8 +28,7 @@ export default defineComponent({
 		close: {
 			type: Function as PropType<() => void>,
 			required: false,
-			default: () => {
-			}
+			default: null
 		}
 	},
 	setup () {

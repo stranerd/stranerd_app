@@ -11,7 +11,7 @@
 			</IonText>
 			<div class="text-sm text-secondaryText flex items-center gap-4">
 				<span>{{ formatTime(comment.createdAt) }}</span>
-				<a v-if="comment.canReply"
+				<a v-if="0 && comment.canReply"
 					@click="openCreateCommentModal({ id: comment.id, type: InteractionEntities.comments })">Reply</a>
 			</div>
 		</div>

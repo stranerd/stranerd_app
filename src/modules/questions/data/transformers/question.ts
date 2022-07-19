@@ -6,12 +6,12 @@ export class QuestionTransformer {
 		const {
 			id, body, tagId, isAnswered,
 			bestAnswers, createdAt, user, attachments,
-			answers, updatedAt
+			meta, answers, updatedAt
 		} = model
 		return new QuestionEntity({
 			id, body, tagId, isAnswered,
 			bestAnswers, createdAt, user, attachments,
-			answers, updatedAt
+			meta, answers, updatedAt
 		})
 	}
 

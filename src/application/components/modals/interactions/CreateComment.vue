@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			<span />
 		</template>
@@ -15,6 +15,12 @@ import { getCommentEntity } from '@app/composable/interactions/comments'
 export default defineComponent({
 	name: 'CreateCommentModal',
 	components: { CommentForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const entity = getCommentEntity()
 		return { entity }

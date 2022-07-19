@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Save to
 		</template>
@@ -31,6 +31,12 @@ import { add, bookmark, bookmarkOutline, folderOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'SaveEntity',
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { entity, type } = useSaveModalData()
 		const { loading, error, sets } = useUserSetList()

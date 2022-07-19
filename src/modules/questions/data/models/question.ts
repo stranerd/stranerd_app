@@ -1,5 +1,6 @@
 import { EmbeddedUser } from '@modules/users'
 import { Media } from '@modules/core'
+import { QuestionMeta } from '../../domain/types'
 
 export interface QuestionFromModel extends QuestionToModel {
 	id: string
@@ -7,6 +8,7 @@ export interface QuestionFromModel extends QuestionToModel {
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
 	isAnswered: boolean
+	meta: QuestionMeta
 	createdAt: number
 	updatedAt: number
 }

@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Create a faculty
 		</template>
@@ -24,6 +24,12 @@ import { useCreateFaculty } from '@app/composable/school/faculties'
 export default defineComponent({
 	name: 'CreateFacultyModal',
 	components: { FacultyForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, createFaculty } = useCreateFaculty()
 		return { factory, error, loading, createFaculty }

@@ -11,6 +11,7 @@ import CreateTimetable from '@app/components/modals/classes/CreateTimetable.vue'
 import EditTimetable from '@app/components/modals/classes/EditTimetable.vue'
 import CreateScheme from '@app/components/modals/classes/CreateScheme.vue'
 import EditScheme from '@app/components/modals/classes/EditScheme.vue'
+import ViewedBy from '@app/components/modals/classes/ViewedBy.vue'
 import CreateInstitution from '@app/components/modals/school/CreateInstitution.vue'
 import EditInstitution from '@app/components/modals/school/EditInstitution.vue'
 import CreateFaculty from '@app/components/modals/school/CreateFaculty.vue'
@@ -23,6 +24,7 @@ import CreatePastQuestion from '@app/components/modals/school/CreatePastQuestion
 import EditPastQuestion from '@app/components/modals/school/EditPastQuestion.vue'
 import Settings from '@app/components/modals/users/Settings.vue'
 import FabMenu from '@app/components/modals/users/FabMenu.vue'
+import ProfileMenu from '@app/components/modals/users/ProfileMenu.vue'
 import CreateComment from '@app/components/modals/interactions/CreateComment.vue'
 import CreateTag from '@app/components/modals/interactions/CreateTag.vue'
 import EditTag from '@app/components/modals/interactions/EditTag.vue'
@@ -33,13 +35,13 @@ const StudyModal = modal.register('Study', {
 	CreateSet, EditSet, SaveEntity, CreateTestPrep, EditTestPrep, CreateNote, EditNote
 })
 const ClassModal = modal.register('Class', {
-	CreateScheme, EditScheme, CreateTimetable, EditTimetable
+	CreateScheme, EditScheme, CreateTimetable, EditTimetable, ViewedBy
 })
 const SchoolModal = modal.register('School', {
 	CreateInstitution, EditInstitution, CreateFaculty, EditFaculty, CreateDepartment, EditDepartment,
 	CreatePastQuestion, EditPastQuestion, CreateCourse, EditCourse
 })
-const UserModal = modal.register('User', { Settings, FabMenu })
+const UserModal = modal.register('User', { Settings, FabMenu, ProfileMenu })
 const InteractionModal = modal.register('Interaction', { CreateComment, CreateTag, EditTag })
 
 export const useSessionModal = () => SessionModal

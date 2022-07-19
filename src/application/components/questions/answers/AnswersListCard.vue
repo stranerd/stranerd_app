@@ -1,5 +1,6 @@
 <template>
-	<div class="rounded-xl flex flex-col !gap-4 card-padding">
+	<router-link :to="`/questions/${question.id}/answers/${answer.id}`"
+		class="rounded-xl flex flex-col !gap-4 card-padding">
 		<div class="flex items-center gap-2 text-sm">
 			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="20" :src="answer.user.bio.photo" />
 			<span class="font-bold flex items-center gap-1">
@@ -9,7 +10,7 @@
 			<IonIcon :icon="ellipse" class="dot" />
 			<span>{{ formatTime(answer.createdAt) }}</span>
 			<div class="flex flex-grow items-center justify-end gap-4 text-secondaryText">
-				<Share :text="answer.strippedBody" title="Share this answer" />
+				<Share :link="answer.shareLink" :text="answer.strippedBody" title="Share this answer" />
 				<IonIcon :icon="flagOutline" @click="openReportModal" />
 			</div>
 		</div>
@@ -40,7 +41,7 @@
 			</span>
 			<IonIcon v-if="answer.best" :icon="checkmarkCircleOutline" class="text-success" />
 		</div>
-	</div>
+	</router-link>
 </template>
 
 <script lang="ts">

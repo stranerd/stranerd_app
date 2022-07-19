@@ -7,6 +7,7 @@ import { useAuth } from '@app/composable/auth/auth'
 import { UserEntity, UsersUseCases } from '@modules/users'
 import { useRedirectToAuth } from '@app/composable/auth/session'
 import { addToArray } from '@utils/commons'
+import { useClassModal } from '@app/composable/core/modals'
 
 const global = {
 	classes: ref([] as ClassEntity[]),
@@ -337,4 +338,11 @@ export const useDeleteClass = (classId: string) => {
 	}
 
 	return { loading, error, deleteClass }
+}
+
+let viewedBy = null as { classInst: ClassEntity, views: Record<string, number> } | null
+export const getViewedBy = () => viewedBy
+export const openViewedByModal = (classInst: ClassEntity, views: Record<string, number>) => {
+	viewedBy = { classInst, views }
+	useClassModal().openViewedBy()
 }

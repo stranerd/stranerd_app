@@ -1,6 +1,5 @@
 const path = require('path')
 const Components = require('unplugin-vue-components/webpack')
-const VueAutoRouting = require('vue-auto-routing/lib/webpack-plugin')
 
 module.exports = {
 	runtimeCompiler: true,
@@ -14,10 +13,6 @@ module.exports = {
 	},
 	configureWebpack: {
 		plugins: [
-			new VueAutoRouting({
-				pages: 'src/application/views',
-				importPrefix: '@app/views/'
-			}),
 			Components({
 				dirs: ['src/application/components/core', 'src/application/layouts'],
 				dts: true,

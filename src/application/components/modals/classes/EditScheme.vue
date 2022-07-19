@@ -1,5 +1,5 @@
 <template>
-	<Modal class="h-screen md:h-auto">
+	<Modal :close="close" class="h-screen md:h-auto">
 		<template v-slot:title>
 			Edit Scheme
 		</template>
@@ -19,6 +19,12 @@ import SchemeForm from '@app/components/classes/schemes/SchemeForm.vue'
 export default defineComponent({
 	name: 'EditSchemeModal',
 	components: { SchemeForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, schemeClass, editScheme } = useEditScheme()
 		return { error, loading, factory, schemeClass, editScheme }

@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Create a course
 		</template>
@@ -24,6 +24,12 @@ import { useCreateCourse } from '@app/composable/school/courses'
 export default defineComponent({
 	name: 'CreateCourseModal',
 	components: { CourseForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, createCourse } = useCreateCourse()
 		return { factory, error, loading, createCourse }

@@ -11,7 +11,7 @@
 				<span>{{ formatTime(answer.createdAt) }}</span>
 			</div>
 			<div class="flex items-center justify-end gap-4">
-				<Share :text="answer.strippedBody" title="Share this answer" />
+				<Share :link="answer.shareLink" :text="answer.strippedBody" title="Share this answer" />
 				<IonIcon :icon="flagOutline" @click="openReportModal" />
 			</div>
 		</div>

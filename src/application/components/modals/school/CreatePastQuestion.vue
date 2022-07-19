@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Create a question
 		</template>
@@ -24,6 +24,12 @@ import { useCreatePastQuestion } from '@app/composable/school/pastQuestions'
 export default defineComponent({
 	name: 'CreatePastQuestionModal',
 	components: { PastQuestionForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, createPastQuestion } = useCreatePastQuestion()
 		return { factory, error, loading, createPastQuestion }

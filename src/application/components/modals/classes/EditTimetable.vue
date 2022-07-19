@@ -1,5 +1,5 @@
 <template>
-	<Modal class="h-screen md:h-auto">
+	<Modal class="h-screen md:h-auto" :close="close">
 		<template v-slot:title>
 			Edit Timetable
 		</template>
@@ -19,6 +19,12 @@ import TimetableForm from '@app/components/classes/timetable/TimetableForm.vue'
 export default defineComponent({
 	name: 'EditTimetableModal',
 	components: { TimetableForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, eventClass, editEvent } = useEditEvent()
 		return { error, loading, factory, eventClass, editEvent }

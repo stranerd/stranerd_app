@@ -1,6 +1,6 @@
 <template>
 	<FullLayout>
-		<ProfileView class="py-6 lg:pt-0" />
+		<UserProfile v-if="user" :user="user" class="py-6 lg:py-0 lg:px-8" />
 	</FullLayout>
 </template>
 
@@ -9,14 +9,17 @@ import { defineComponent } from 'vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 import FullLayout from '@app/layouts/FullLayout.vue'
-import ProfileView from '@app/components/users/users/ProfileView.vue'
+import UserProfile from '@app/components/users/users/UserProfile.vue'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'Account',
-	components: { FullLayout, ProfileView },
+	components: { FullLayout, UserProfile },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Profile', {})
+		const { user } = useAuth()
+		return { user }
 	}
 })
 </script>

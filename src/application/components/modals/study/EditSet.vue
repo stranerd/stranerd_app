@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Edit Study Folder
 		</template>
@@ -17,6 +17,12 @@ import SetForm from '@app/components/study/sets/SetForm.vue'
 export default defineComponent({
 	name: 'EditSetModal',
 	components: { SetForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { editSet, factory, error, loading } = useEditSet()
 		return { error, loading, editSet, factory }

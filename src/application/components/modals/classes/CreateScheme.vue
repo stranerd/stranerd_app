@@ -1,5 +1,5 @@
 <template>
-	<Modal class="h-screen md:h-auto">
+	<Modal :close="close" class="h-screen md:h-auto">
 		<template v-slot:title>
 			Set up Scheme
 		</template>
@@ -18,6 +18,12 @@ import SchemeForm from '@app/components/classes/schemes/SchemeForm.vue'
 export default defineComponent({
 	name: 'CreateSchemeModal',
 	components: { SchemeForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, schemeClass, createScheme } = useCreateScheme()
 		return { error, loading, factory, schemeClass, createScheme }

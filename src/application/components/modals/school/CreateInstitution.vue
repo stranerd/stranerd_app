@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Create an institution
 		</template>
@@ -24,6 +24,12 @@ import { useCreateInstitution } from '@app/composable/school/institutions'
 export default defineComponent({
 	name: 'CreateInstitutionModal',
 	components: { InstitutionForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, createInstitution } = useCreateInstitution()
 		return { factory, error, loading, createInstitution }

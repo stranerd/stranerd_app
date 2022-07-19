@@ -15,14 +15,13 @@
 				<IonIcon :icon="icon" />
 				<span>{{ name }}</span>
 			</router-link>
-			<IonButton class="btn-primary mt-2" @click="closeModal">Cancel</IonButton>
+			<IonButton class="btn-primary mt-2" @click="close">Cancel</IonButton>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useUserModal } from '@app/composable/core/modals'
 import {
 	chatbubblesOutline,
 	createOutline,
@@ -36,11 +35,16 @@ import { useUserClassList } from '@app/composable/users/users/classes'
 
 export default defineComponent({
 	name: 'FabMenu',
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { adminClasses } = useUserClassList()
-		const closeModal = () => useUserModal().closeFabMenu()
 		return {
-			adminClasses, helpCircleOutline, flashOutline, documentOutline, closeModal,
+			adminClasses, helpCircleOutline, flashOutline, documentOutline,
 			createOutline, peopleOutline, megaphoneOutline, chatbubblesOutline
 		}
 	}

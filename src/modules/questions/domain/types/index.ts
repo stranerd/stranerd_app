@@ -1,3 +1,9 @@
+export enum QuestionMetaType {
+	comments = 'comments'
+}
+
+export type QuestionMeta = Record<QuestionMetaType, number>
+
 export enum AnswerMetaType {
 	comments = 'comments',
 	likes = 'likes',
