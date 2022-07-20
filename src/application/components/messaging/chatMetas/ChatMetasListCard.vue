@@ -6,7 +6,7 @@
 		</span>
 		<div class="flex flex-col flex-grow truncate gap-1 leading-none">
 			<div class="flex gap-2 items-center">
-				<IonText class="text-base w-full truncate capitalize">
+				<IonText class="text-base w-full truncate capitalize font-bold">
 					{{ chatMeta.getToName(id) }}
 				</IonText>
 				<IonText v-if="chatMeta.last" class="text-sm whitespace-nowrap">
@@ -16,7 +16,7 @@
 			<div v-if="chatMeta.last" :class="{'font-bold': chatMeta.hasUnRead(id)}"
 				class="flex gap-4 items-center text-sm">
 				<IonText class="w-fit flex-grow truncate">
-					<span v-if="chatMeta.isClasses(chatMeta)">
+					<span v-if="chatMeta.isClasses(chatMeta)" class="font-bold">
 						{{ chatMeta.last.from.id === id ? 'You' : chatMeta.last.from.bio.firstName }}:&nbsp;
 					</span>
 					{{ chatMeta.last.media ? 'Shared a file' : chatMeta.last.body }}

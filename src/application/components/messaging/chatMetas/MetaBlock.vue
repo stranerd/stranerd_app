@@ -16,8 +16,16 @@
 				to="/connect/requests">
 				Requests ({{ pendingConnects.length }})
 			</router-link>
-			<ChatMetasListCard v-for="chatMeta in metas" :key="chatMeta.hash" :chatMeta="chatMeta"
-				:hasAvatar="!hasAvatar" />
+			
+			<div  v-for="chatMeta in metas" :key="chatMeta.hash" >
+				<div v-if="hasAvatar" class="relative">
+					<IonIcon :icon="chatbubblesOutline"
+						class="absolute top-2 -left-12 text-primaryText bg-secondaryText rounded-full p-3.5 border border-bodyBg" />
+				</div>
+				<ChatMetasListCard :chatMeta="chatMeta"
+					:hasAvatar="!hasAvatar" />
+			</div>
+			
 		</div>
 	</div>
 </template>
@@ -25,7 +33,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue'
 import ChatMetasListCard from '@app/components/messaging/chatMetas/ChatMetasListCard.vue'
-import { chevronForwardOutline, peopleOutline } from 'ionicons/icons'
+import { chevronForwardOutline, peopleOutline, chatbubblesOutline } from 'ionicons/icons'
 import { ChatMetaEntity } from '@modules/messaging'
 import { useConnects } from '@app/composable/users/connects'
 import { Media } from '@modules/core'
@@ -60,7 +68,7 @@ export default defineComponent({
 	setup () {
 		const show = ref(true)
 		const { pendingConnects } = useConnects()
-		return { show, chevronForwardOutline, pendingConnects, peopleOutline }
+		return { show, chevronForwardOutline, pendingConnects, peopleOutline, chatbubblesOutline }
 	}
 })
 </script>
