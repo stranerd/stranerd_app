@@ -152,9 +152,10 @@ ion-select.valid {
 }
 
 ion-input.valid::after {
-	content: '\02713';
-	margin: 0.5em 1em 0.5em 0;
+	content: '✔';
+	margin: 0rem 1rem;
 	color: $color-success;
+	border-radius: 100%;
 }
 
 ion-input.invalid,
@@ -185,7 +186,7 @@ ion-input.invalid::after {
 
 ion-button {
 	--box-shadow: none;
-	--border-radius: 1.4rem;
+	--border-radius: 0.5rem;
 	font-weight: 500;
 	line-height: 1em;
 	text-transform: capitalize;
