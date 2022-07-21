@@ -104,13 +104,15 @@ ion-searchbar {
 	--icon-color: inherit !important;
 }
 
-ion-input, ion-textarea, ion-select {
+ion-input,
+ion-textarea,
+ion-select {
 	--padding-start: 1rem !important;
 	--padding-end: 1rem !important;
 	--background: #{$color-itemBg} !important;
 	background: #{$color-itemBg} !important;
 	--box-shadow: none;
-	border-radius: .5rem;
+	border-radius: 0.5rem;
 	--icon-color: transparent !important;
 	--placeholder-color: #{$color-secondaryText} !important;
 	--placeholder-opacity: 1;
@@ -135,12 +137,16 @@ ion-input, ion-textarea, ion-select {
 	font-size: 1.5em !important;
 }
 
-ion-alert, ion-popover, ion-action-sheet {
+ion-alert,
+ion-popover,
+ion-action-sheet {
 	--background: #{$color-bodyBg} !important;
 	--color: #{$color-bodyText} !important;
 }
 
-ion-input.valid, ion-textarea.valid, ion-select.valid {
+ion-input.valid,
+ion-textarea.valid,
+ion-select.valid {
 	--icon-color: #{$color-success} !important;
 	outline-color: $color-success;
 }
@@ -151,7 +157,9 @@ ion-input.valid::after {
 	color: $color-success;
 }
 
-ion-input.invalid, ion-textarea.invalid, ion-select.invalid {
+ion-input.invalid,
+ion-textarea.invalid,
+ion-select.invalid {
 	--icon-color: #{$color-danger} !important;
 	outline-color: $color-danger;
 }
@@ -177,7 +185,7 @@ ion-input.invalid::after {
 
 ion-button {
 	--box-shadow: none;
-	--border-radius: 0.5rem;
+	--border-radius: 1.4rem;
 	font-weight: 500;
 	line-height: 1em;
 	text-transform: capitalize;
@@ -254,7 +262,8 @@ ion-item {
 	}
 }
 
-ion-radio, ion-checkmark {
+ion-radio,
+ion-checkmark {
 	--color: inherit;
 	--color-checked: #{$color-primaryBg};
 }

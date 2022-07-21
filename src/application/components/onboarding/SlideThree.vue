@@ -1,10 +1,10 @@
 <template>
-	<IonIcon :icon="reader" />
-	<IonText class="text-xl text-secondaryText font-bold">
-		Notes
+	<img alt="" class="mt-4" src="@app/assets/images/onboarding/three.svg" />
+	<IonText class="text-2xl text-secondaryText font-bold mt-20">
+		Community
 	</IonText>
-	<IonText class="text-secondaryText max-w-[80vw] text-center">
-		Read beautiful and concise notes that cover every important aspects in topics under different subjects.
+	<IonText class="text-secondaryText max-w-[75vw] text-center text-lg">
+		Ask a question or Chat with students outside the boundary of your classes.
 	</IonText>
 </template>
 
