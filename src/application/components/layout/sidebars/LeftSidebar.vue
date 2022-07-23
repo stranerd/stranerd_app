@@ -1,6 +1,5 @@
 <template>
-	<div class="bg-headerBg text-headerText flex flex-col items-center gap-8">
-		<img alt="logo" class="mb-4" src="@/assets/images/logo/logo.svg">
+	<div class="flex flex-col items-center gap-8">
 		<router-link v-for="{ path, icon, iconOutline } in [
 				{ name: 'Home', path: '/dashboard', icon: home, iconOutline:homeOutline },
 				{ name: 'Discussions', path: '/messages', icon: chatbubbles, iconOutline:chatbubblesOutline },
@@ -11,7 +10,7 @@
 			class="flex flex-col items-center justify-center">
 			<IonIcon :icon="$route.path === path ? icon : iconOutline" class="text-2xl" />
 		</router-link>
-		<div class="bg-bodyBg text-primaryBg rounded-full p-2.5 flex justify-center items-center"
+		<div class="bg-primaryBg text-primaryText rounded-full p-2.5 flex justify-center items-center"
 			@click="openModal">
 			<IonIcon :icon="addOutline" class="text-2xl" />
 		</div>

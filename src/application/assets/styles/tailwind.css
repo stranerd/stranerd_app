@@ -19,11 +19,11 @@
 	}
 
 	.layout {
-		@apply flex flex-col h-full flex-grow;
+		@apply flex flex-col h-full flex-grow max-h-[100%];
 	}
 
 	.layout-page {
-		@apply flex h-full w-full;
+		@apply flex h-fit flex-grow w-full overflow-y-auto;
 	}
 
 	.layout-page > * {
@@ -31,7 +31,7 @@
 	}
 
 	.layout-page-left {
-		@apply hidden lg:block w-[80px];
+		@apply hidden lg:block w-[80px] lg:border-r-2 lg:border-r-itemBg;
 	}
 
 	.layout-page-panel {

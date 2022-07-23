@@ -1,6 +1,6 @@
 <template>
 	<IonPage>
-		<IonContent>
+		<IonContent :scrollY="false">
 			<div class="w-full h-full">
 				<slot />
 			</div>

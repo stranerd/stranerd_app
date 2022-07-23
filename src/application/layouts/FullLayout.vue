@@ -1,20 +1,22 @@
 <template>
-	<IonPage class="layout">
-		<IonContent :scrollY="false">
-			<div class="layout-page">
-				<div class="layout-page-left">
-					<LeftSidebar class="h-full py-8" />
-				</div>
-				<div class="layout-page-main">
-					<Topbar v-if="!hideTop" class="lg:hidden" />
-					<div class="layout-page-content">
-						<slot />
+	<IonPage>
+		<IonContent>
+			<div class="layout">
+				<Topbar v-if="!hideTop" />
+				<div class="layout-page">
+					<div class="layout-page-left">
+						<LeftSidebar class="h-full py-8" />
 					</div>
-					<Fab v-if="!hideFab" class="lg:hidden" />
-					<BottomNav v-if="!hideBottom" class="mt-auto lg:hidden" />
-				</div>
-				<div class="layout-page-right">
-					<RightSidebar class="h-full" />
+					<div class="layout-page-main">
+						<div class="layout-page-content">
+							<slot />
+						</div>
+						<Fab v-if="!hideFab" class="lg:hidden" />
+						<BottomNav v-if="!hideBottom" class="mt-auto lg:hidden" />
+					</div>
+					<div class="layout-page-right">
+						<RightSidebar class="h-full" />
+					</div>
 				</div>
 			</div>
 		</IonContent>

@@ -1,7 +1,7 @@
 <template>
 	<div class="showcase-flex">
 		<div class="flex lg:hidden gap-[1px]">
-			<SelectTag v-model:value="tagId" :allowAll="true" class="w-full" />
+			<SelectTag v-model:value="tagId" :allowAll="true" class="w-full !rounded-none" />
 			<IonSelect v-model="answered"
 				class="w-full" interface="action-sheet" placeholder="State">
 				<IonSelectOption v-for="choice in answeredChoices" :key="choice.key"

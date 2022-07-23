@@ -1,34 +1,36 @@
 <template>
 	<IonPage class="layout">
 		<IonContent :scrollY="false">
-			<div class="layout-page">
-				<div class="layout-page-left">
-					<LeftSidebar class="h-full py-8" />
-				</div>
-				<div class="layout-page-panel">
-					<slot name="panel">
-						<DashboardPanel />
-					</slot>
-				</div>
-				<div class="layout-page-main">
-					<slot name="content-top">
-						<div class="hidden lg:flex gap-4 justify-between items-center px-8 mb-8">
-							<IonText class="font-bold text-2xl">{{ $route.meta.routeName ?? 'Stranerd' }}</IonText>
-							<div>
-								<slot name="content-top-left" />
-							</div>
-						</div>
-					</slot>
-					<Topbar v-if="!hideTop" class="lg:hidden" />
-					<div :class="{'lg:px-8': !ignorePagePadding}" class="layout-page-content">
-						<slot />
+			<div class="layout">
+				<Topbar v-if="!hideTop" />
+				<div class="layout-page">
+					<div class="layout-page-left">
+						<LeftSidebar class="h-full py-8" />
 					</div>
-					<Fab v-if="!hideFab" class="lg:hidden" />
-					<BottomNav v-if="!hideBottom" class="mt-auto lg:hidden" />
-					<slot name="content-bottom" />
-				</div>
-				<div class="layout-page-right">
-					<RightSidebar class="h-full" />
+					<div class="layout-page-panel">
+						<slot name="panel">
+							<DashboardPanel />
+						</slot>
+					</div>
+					<div class="layout-page-main">
+						<slot name="content-top">
+							<div class="hidden lg:flex gap-4 justify-between items-center px-8 mb-4">
+								<IonText class="font-bold text-2xl">{{ $route.meta.routeName ?? 'Stranerd' }}</IonText>
+								<div>
+									<slot name="content-top-left" />
+								</div>
+							</div>
+						</slot>
+						<div :class="{'lg:px-8': !ignorePagePadding}" class="layout-page-content">
+							<slot />
+						</div>
+						<Fab v-if="!hideFab" class="lg:hidden" />
+						<BottomNav v-if="!hideBottom" class="mt-auto lg:hidden" />
+						<slot name="content-bottom" />
+					</div>
+					<div class="layout-page-right">
+						<RightSidebar class="h-full" />
+					</div>
 				</div>
 			</div>
 		</IonContent>

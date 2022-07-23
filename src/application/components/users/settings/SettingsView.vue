@@ -4,7 +4,7 @@
 				{ name: 'Edit Profile', icon: personOutline, route: '/settings/profile' },
 				{ name: 'Edit School', icon: schoolOutline, route: '/settings/school' },
 				{ name: 'Security', icon: shieldCheckmarkOutline, route: '/settings/security' },
-				{ name: 'Subscription', icon: cardOutline, route: '/settings/subscription' },
+				// { name: 'Subscription', icon: cardOutline, route: '/settings/subscription' },
 				{ name: 'Contact Us', icon: mailOutline, route: '/settings/contact' },
 				{ name: 'About', icon: informationCircleOutline, route: '/settings/about' },
 			]" :key="item.route" :to="item.route"

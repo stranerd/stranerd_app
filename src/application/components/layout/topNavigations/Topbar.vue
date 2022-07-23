@@ -1,17 +1,28 @@
 <template>
 	<IonHeader class="block ion-no-border inset-x-0 w-full z-10">
 		<IonToolbar class="px-4 border-bottom-line min-h-[4rem] flex items-center justify-center">
-			<div class="flex items-center justify-between">
-				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline" class="text-base text-headerText"
+			<div class="flex items-center justify-between lg:gap-16 py-2">
+				<img alt="" class="hidden lg:inline-block" src="@/assets/images/logo/logo.svg">
+				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
+					class="text-base text-headerText lg:hidden"
 					defaultHref="/dashboard" text="" />
-				<IonText class="font-bold text-xl">
+				<IonText class="font-bold text-xl lg:hidden">
 					{{ $route.meta.routeName ?? 'Stranerd' }}
 				</IonText>
-				<div class="flex gap-6 items-center">
-					<router-link to="/search">
+				<Search class="flex-grow hidden lg:flex" />
+				<div class="flex gap-6 lg:gap-8 items-center">
+					<router-link class="lg:hidden" to="/search">
 						<IonIcon :icon="searchOutline" />
 					</router-link>
-					<NotificationIcon />
+					<NotificationIcon :key="user?.id" />
+					<router-link class="hidden lg:inline-block" to="/users/leaderboard">
+						<IonIcon :icon="podiumOutline" />
+					</router-link>
+					<router-link class="hidden lg:inline-block" to="/settings">
+						<IonIcon :icon="settingsOutline" />
+					</router-link>
+					<Avatar :id="user?.id" :name="user?.bio.fullName" :size="36" :src="user?.bio.photo"
+						class="hidden lg:inline-block" />
 				</div>
 			</div>
 		</IonToolbar>
@@ -20,14 +31,17 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { arrowBackOutline, searchOutline } from 'ionicons/icons'
+import { arrowBackOutline, podiumOutline, searchOutline, settingsOutline } from 'ionicons/icons'
 import NotificationIcon from '@app/components/users/notifications/NotificationIcon.vue'
+import Search from '@app/components/search/Search.vue'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'Topbar',
-	components: { NotificationIcon },
+	components: { NotificationIcon, Search },
 	setup () {
-		return { arrowBackOutline, searchOutline }
+		const { user } = useAuth()
+		return { user, arrowBackOutline, searchOutline, settingsOutline, podiumOutline }
 	}
 })
 </script>
@@ -43,5 +57,11 @@ export default defineComponent({
 		--background: #{$color-headerBg};
 		--color: #{$color-headerText};
 		--box-shadow: none;
+	}
+
+	::v-deep() {
+		ion-searchbar {
+			background: $color-primaryHover !important;
+		}
 	}
 </style>

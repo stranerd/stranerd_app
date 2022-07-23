@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col gap-8">
+	<div class="flex flex-col gap-4">
 		<IonText class="font-bold text-2xl card-padding !py-0">Questions</IonText>
 		<QuestionsView />
 	</div>

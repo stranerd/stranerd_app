@@ -1,17 +1,18 @@
 <template>
 	<div class="flex flex-col text-secondaryText">
-		<a :class="{'hasBg': tagId === ''}" class="card-padding" @click="tagId = ''">
+		<a :class="{'hasBg': tagId === ''}" class="card-padding !py-4" @click="tagId = ''">
 			All Questions
 		</a>
 		<template v-for="{ parent, children } in groups" :key="parent.hash">
 			<div :class="{'hasBg': children.map((t) => t.id).includes(tagId) && show !== parent.id}"
-				class="flex justify-between card-padding"
+				class="flex justify-between card-padding !py-4"
 				@click="show = show === parent.id ? '' : parent.id">
 				<IonText class="font-bold capitalize">{{ parent.title }}</IonText>
 				<IonIcon :class="{'rotate-90': show === parent.id}" :icon="chevronForwardOutline" />
 			</div>
 			<template v-if="show === parent.id">
-				<a v-for="tag in children" :key="tag.hash" :class="{'hasBg': tagId === tag.id}" class="card-padding"
+				<a v-for="tag in children" :key="tag.hash" :class="{'hasBg': tagId === tag.id}"
+					class="card-padding !py-4"
 					@click="tagId = tag.id">
 					{{ tag.title }}
 				</a>

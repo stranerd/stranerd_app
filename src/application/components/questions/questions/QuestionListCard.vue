@@ -1,19 +1,21 @@
 <template>
-	<router-link :to="`/questions/${question.id}`" class="flex flex-col card card-padding !gap-6">
-		<div class="flex items-start gap-4 text-secondaryText">
-			<Avatar :id="question.user.id" :name="question.user.bio.fullName" :size="48"
+	<router-link :to="`/questions/${question.id}`" class="flex flex-col card card-padding !gap-4">
+		<div class="flex items-center gap-4 text-secondaryText">
+			<Avatar :id="question.user.id" :name="question.user.bio.fullName" :size="40"
 				:src="question.user.bio.photo" />
 			<div class="flex flex-col">
 				<span class="flex items-center gap-1">
 					<span class="font-bold">{{ question.user.bio.fullName }}</span>
 					<Verified :verified="question.isUserVerified" />
-					<IonIcon :icon="ellipse" class="dot" />
-					<span class="text-sm">{{ formatTime(question.createdAt) }}</span>
 				</span>
-				<InteractionTag :tagId="question.tagId" class="text-sm" />
-				<DisplayHtml :html="question.trimmedBody" class="mt-2" />
+				<div class="flex gap-1 items-center text-sm">
+					<InteractionTag :tagId="question.tagId" />
+					<IonIcon :icon="ellipse" class="dot" />
+					<span>{{ formatTime(question.createdAt) }}</span>
+				</div>
 			</div>
 		</div>
+		<DisplayHtml :html="question.trimmedBody" />
 
 		<div class="flex items-center gap-5 text-secondaryText text-sm">
 			<span v-if="question.attachments.length" class="flex gap-1 items-center">

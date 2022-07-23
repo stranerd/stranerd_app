@@ -1,10 +1,12 @@
 <template>
-	<IonPage class="layout">
-		<HomeTopNavigation />
-		<IonContent>
-			<div class="layout-page">
-				<div class="w-full">
-					<slot />
+	<IonPage>
+		<IonContent :scrollY="false">
+			<div class="layout">
+				<HomeTopNavigation />
+				<div class="layout-page">
+					<div class="w-full">
+						<slot />
+					</div>
 				</div>
 			</div>
 		</IonContent>
