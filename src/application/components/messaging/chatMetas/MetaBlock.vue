@@ -11,11 +11,7 @@
 				<IonIcon :class="{'rotate-90': show}" :icon="chevronForwardOutline" />
 			</span>
 		</div>
-		<div v-if="show" :class="{'ml-16': hasAvatar }" class="flex flex-col">
-			<router-link v-if="showConnects && pendingConnects.length" class=" card-padding !py-2 text-info"
-				to="/connect/requests">
-				Requests ({{ pendingConnects.length }})
-			</router-link>
+		<div v-if="show" class="flex flex-col">
 			<ChatMetasListCard v-for="chatMeta in metas" :key="chatMeta.hash" :chatMeta="chatMeta"
 				:hasAvatar="!hasAvatar" />
 		</div>
@@ -27,7 +23,6 @@ import { defineComponent, PropType, ref } from 'vue'
 import ChatMetasListCard from '@app/components/messaging/chatMetas/ChatMetasListCard.vue'
 import { chevronForwardOutline, peopleOutline } from 'ionicons/icons'
 import { ChatMetaEntity } from '@modules/messaging'
-import { useConnects } from '@app/composable/users/connects'
 import { Media } from '@modules/core'
 
 export default defineComponent({
@@ -46,11 +41,6 @@ export default defineComponent({
 			type: Array as PropType<ChatMetaEntity[]>,
 			required: true
 		},
-		showConnects: {
-			type: Boolean,
-			required: false,
-			default: false
-		},
 		hasAvatar: {
 			type: Boolean,
 			required: false,
@@ -59,8 +49,7 @@ export default defineComponent({
 	},
 	setup () {
 		const show = ref(true)
-		const { pendingConnects } = useConnects()
-		return { show, chevronForwardOutline, pendingConnects, peopleOutline }
+		return { show, chevronForwardOutline, peopleOutline }
 	}
 })
 </script>

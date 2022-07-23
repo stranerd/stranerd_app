@@ -4,7 +4,7 @@
 		<div class="flex gap-2 items-center text-sm text-secondaryText">
 			<Avatar :id="announcement.user.id" :name="announcement.user.bio.fullName"
 				:size="24" :src="announcement.user.bio.photo" />
-			<IonText class="flex gap-1 items-center">
+			<IonText class="flex gap-1 items-center font-bold">
 				<span>{{ announcement.user.bio.fullName }}</span>
 				<Verified :verified="announcement.isUserVerified" />
 			</IonText>

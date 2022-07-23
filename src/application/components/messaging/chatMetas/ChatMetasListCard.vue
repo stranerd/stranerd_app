@@ -4,9 +4,13 @@
 		<span v-if="hasAvatar">
 			<Avatar :name="chatMeta.getToName(id)" :size="48" :src="chatMeta.getToPhoto(id)" />
 		</span>
+		<span v-else
+			class="w-[48px] h-[48px] text-primaryText bg-secondaryText border border-bodyBg rounded-full flex items-center justify-center text-lg">
+			<IonIcon :icon="chatbubblesOutline" />
+		</span>
 		<div class="flex flex-col flex-grow truncate gap-1 leading-none">
 			<div class="flex gap-2 items-center">
-				<IonText class="text-base w-full truncate capitalize">
+				<IonText class="text-base w-full truncate capitalize font-bold">
 					{{ chatMeta.getToName(id) }}
 				</IonText>
 				<IonText v-if="chatMeta.last" class="text-sm whitespace-nowrap">
@@ -16,7 +20,7 @@
 			<div v-if="chatMeta.last" :class="{'font-bold': chatMeta.hasUnRead(id)}"
 				class="flex gap-4 items-center text-sm">
 				<IonText class="w-fit flex-grow truncate">
-					<span v-if="chatMeta.isClasses(chatMeta)">
+					<span v-if="chatMeta.isClasses(chatMeta)" class="font-bold">
 						{{ chatMeta.last.from.id === id ? 'You' : chatMeta.last.from.bio.firstName }}:&nbsp;
 					</span>
 					{{ chatMeta.last.media ? 'Shared a file' : chatMeta.last.body }}
@@ -39,6 +43,7 @@ import { formatTime } from '@utils/dates'
 import { useAuth } from '@app/composable/auth/auth'
 import { ChatMetaEntity } from '@modules/messaging'
 import { useChatMeta } from '@app/composable/messaging/chatMetas'
+import { chatbubblesOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'ChatMetasListCard',
@@ -64,7 +69,7 @@ export default defineComponent({
 			if (unRead.value === 0) return ''
 			return unRead.value > 99 ? '99+' : unRead.value.toString()
 		})
-		return { formatTime, id, unReadCount }
+		return { formatTime, id, unReadCount, chatbubblesOutline }
 	}
 })
 </script>
