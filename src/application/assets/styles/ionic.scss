@@ -110,7 +110,7 @@ ion-input, ion-textarea, ion-select {
 	--background: #{$color-itemBg} !important;
 	background: #{$color-itemBg} !important;
 	--box-shadow: none;
-	border-radius: .5rem;
+	border-radius: 0.5rem;
 	--icon-color: transparent !important;
 	--placeholder-color: #{$color-secondaryText} !important;
 	--placeholder-opacity: 1;
@@ -146,9 +146,10 @@ ion-input.valid, ion-textarea.valid, ion-select.valid {
 }
 
 ion-input.valid::after {
-	content: '\02713';
-	margin: 0.5em 1em 0.5em 0;
+	content: '✔';
+	margin: 0 1rem;
 	color: $color-success;
+	border-radius: 100%;
 }
 
 ion-input.invalid, ion-textarea.invalid, ion-select.invalid {
@@ -158,8 +159,9 @@ ion-input.invalid, ion-textarea.invalid, ion-select.invalid {
 
 ion-input.invalid::after {
 	content: '\024D8';
-	margin: 0.5em 1em 0.5em 0;
+	margin: 0 1rem;
 	color: $color-danger;
+	border-radius: 100%;
 }
 
 .btn-padding {

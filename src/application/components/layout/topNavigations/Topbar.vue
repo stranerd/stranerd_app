@@ -1,8 +1,10 @@
 <template>
 	<IonHeader class="block ion-no-border inset-x-0 w-full z-10">
-		<IonToolbar class="px-4 border-bottom-line min-h-[4rem] flex items-center justify-center">
+		<IonToolbar class="px-4 lg:px-6 border-bottom-line min-h-[4rem] flex items-center justify-center">
 			<div class="flex items-center justify-between lg:gap-16 py-2">
-				<img alt="" class="hidden lg:inline-block" src="@/assets/images/logo/logo.svg">
+				<router-link to="/" class="hidden lg:inline-block">
+					<img alt="" src="@/assets/images/logo/logo.svg">
+				</router-link>
 				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
 					class="text-base text-headerText lg:hidden"
 					defaultHref="/dashboard" text="" />
