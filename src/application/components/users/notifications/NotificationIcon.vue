@@ -1,5 +1,5 @@
 <template>
-	<router-link class="relative leading-none" to="/notifications">
+	<router-link class="relative leading-none" to="/account/notifications">
 		<IonIcon :icon="notificationsOutline" />
 		<span v-if="isLoggedIn && unReadCount.length"
 			:style="`width: ${unReadCount.length + 0.5}ch; min-width: 2ch;max-width:3.1ch`"

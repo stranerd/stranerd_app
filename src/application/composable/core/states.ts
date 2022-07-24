@@ -1,4 +1,4 @@
-import { computed, ComputedRef, ref, watch } from 'vue'
+import { computed, ComputedRef, Ref, ref, watch } from 'vue'
 import { Notify } from '@utils/dialog'
 import { isClient } from '@utils/environment'
 import { NetworkError, StatusCodes } from '@modules/core'
@@ -110,3 +110,7 @@ export const useRouteMeta = (routeName: string | ComputedRef<string>, metaObj: M
 	})
 	return { meta }
 }
+
+type Computable<T> = ComputedRef<T> | Ref<T>
+export const andComputed = <T> (refs: Computable<T>[]) => computed(() => refs.map((r) => r.value).reduce((acc, cur) => acc && cur))
+export const orComputed = <T> (refs: Computable<T>[]) => computed(() => refs.map((r) => r.value).reduce((acc, cur) => acc || cur))

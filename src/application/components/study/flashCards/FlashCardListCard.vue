@@ -38,9 +38,7 @@ import {
 	trashBinOutline
 } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
-import Avatar from '@app/components/core/Avatar.vue'
 import { FlashCardEntity } from '@modules/study'
-import Share from '@app/components/core/Share.vue'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { actionSheetController } from '@ionic/vue'
@@ -49,7 +47,7 @@ import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'FlashCardListCard',
-	components: { Avatar, Share, SaveToSet },
+	components: { SaveToSet },
 	props: {
 		flashCard: {
 			type: FlashCardEntity,

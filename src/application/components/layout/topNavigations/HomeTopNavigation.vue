@@ -38,13 +38,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Logo from '@app/components/core/Logo.vue'
 import Search from '@app/components/search/Search.vue'
 
 export default defineComponent({
 	name: 'HomeTopNavigation',
-	components: { Logo, Search }
-
+	components: { Search }
 })
 </script>
 

@@ -24,18 +24,16 @@
 </template>
 
 <script lang="ts">
-import Avatar from '@app/components/core/Avatar.vue'
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { useNote } from '@app/composable/study/notes'
-import Share from '@app/components/core/Share.vue'
 import NoteDetails from '@app/components/study/notes/NoteDetails.vue'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudyNotesNoteId',
-	components: { Avatar, NoteDetails, Share, SaveToSet },
+	components: { NoteDetails, SaveToSet },
 	setup () {
 		useRouteMeta('Note', { back: true })
 		const { noteId } = useRoute().params

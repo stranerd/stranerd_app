@@ -35,11 +35,10 @@ import { useAuth } from '@app/composable/auth/auth'
 import { ellipse } from 'ionicons/icons'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import Department from '@app/components/school/departments/Department.vue'
-import SpinLoading from '@app/components/core/loading/SpinLoading.vue'
 
 export default defineComponent({
 	name: 'SearchClassListCard',
-	components: { SpinLoading, Institution, Department },
+	components: { Institution, Department },
 	props: {
 		classInst: {
 			type: ClassEntity,

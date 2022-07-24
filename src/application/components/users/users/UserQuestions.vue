@@ -16,12 +16,11 @@
 import { defineComponent } from 'vue'
 import UserQuestionsCard from '@app/components/questions/questions/UserQuestionsListCard.vue'
 import { useUserQuestionList } from '@app/composable/users/users/questions'
-import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({
 	name: 'UserQuestions',
-	components: { UserQuestionsCard, EmptyState },
+	components: { UserQuestionsCard },
 	props: {
 		user: {
 			type: UserEntity,

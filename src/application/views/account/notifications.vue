@@ -20,14 +20,13 @@
 import { defineComponent } from 'vue'
 import { useNotificationList } from '@app/composable/users/notifications'
 import NotificationsListCard from '@app/components/users/notifications/NotificationsListCard.vue'
-import EmptyState from '@app/components/core/EmptyState.vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
-	name: 'Notifications',
+	name: 'AccountNotifications',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
-	components: { NotificationsListCard, EmptyState },
+	components: { NotificationsListCard },
 	setup () {
 		useRouteMeta('Notifications', { back: true })
 		const { notifications, error, loading, hasMore, fetchOlderNotifications } = useNotificationList()

@@ -15,12 +15,11 @@
 import { defineComponent } from 'vue'
 import SetListCard from '@app/components/study/sets/SetListCard.vue'
 import { useUserSetList } from '@app/composable/users/users/sets'
-import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({
 	name: 'UserSets',
-	components: { SetListCard, EmptyState },
+	components: { SetListCard },
 	props: {
 		user: {
 			type: UserEntity,

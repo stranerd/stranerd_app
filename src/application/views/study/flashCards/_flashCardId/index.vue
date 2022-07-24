@@ -39,7 +39,6 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { copyOutline, createOutline, listOutline, trashBinOutline } from 'ionicons/icons'
-import Avatar from '@app/components/core/Avatar.vue'
 import { openFlashCardEditModal, useDeleteFlashCard, useFlashCard } from '@app/composable/study/flashCards'
 import { useRoute } from 'vue-router'
 import FlashCardScreen from '@root/application/components/study/flashCards/FlashCardScreen.vue'
@@ -50,12 +49,7 @@ import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'StudyFlashCardsFlashcardId',
-	components: {
-		Avatar,
-		FlashCardScreen,
-		FlashCardListView,
-		SaveToSet
-	},
+	components: { FlashCardScreen, FlashCardListView, SaveToSet },
 	setup () {
 		useRouteMeta('Flashcard Set', { back: true })
 		const { id } = useAuth()

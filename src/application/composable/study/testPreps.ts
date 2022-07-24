@@ -1,4 +1,4 @@
-import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
+import { computed, ComputedRef, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
 import { TestPrepEntity, TestPrepFactory, TestPrepsUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
@@ -11,6 +11,12 @@ export type InstitutionTestPreps = {
 }
 
 const global = {
+	testPreps: ref([] as TestPrepEntity[]),
+	fetched: ref(false),
+	...useErrorHandler(),
+	...useLoadingHandler()
+}
+const saved = {
 	testPreps: ref([] as TestPrepEntity[]),
 	fetched: ref(false),
 	...useErrorHandler(),
@@ -62,6 +68,26 @@ export const groupedByInstitution = (testPreps: TestPrepEntity[]) => computed({
 	}
 })
 
+export const useSavedTestPreps = (list: ComputedRef<string[]>) => {
+	const fetchPreps = async () => {
+		try {
+			const testPreps = await TestPrepsUseCases.getInList(list.value)
+			saved.testPreps.value = testPreps.results
+			saved.fetched.value = true
+		} catch (error) {
+			await saved.setError(error)
+		}
+		await saved.setLoading(false)
+	}
+
+	onMounted(async () => {
+		if (!saved.fetched.value && !saved.loading.value) await fetchPreps()
+	})
+	watch(list, fetchPreps, { deep: true })
+
+	return { ...saved, fetchPreps }
+}
+
 export const useTestPrep = (id: string) => {
 	const testPrep = computed({
 		get: () => global.testPreps.value.find((s) => s.id === id) ?? null,
@@ -87,7 +113,8 @@ export const useCreateTestPrep = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await TestPrepsUseCases.add(factory.value)
+				const testPrep = await TestPrepsUseCases.add(factory.value)
+				addToArray(global.testPreps.value, testPrep, (e) => e.id, (e) => e.createdAt)
 				await setMessage('TestPrep submitted successfully')
 				useStudyModal().closeCreateTestPrep()
 				factory.value.reset()
@@ -119,7 +146,8 @@ export const useEditTestPrep = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await TestPrepsUseCases.update(editingTestPrep!.id, factory.value)
+				const testPrep = await TestPrepsUseCases.update(editingTestPrep!.id, factory.value)
+				addToArray(global.testPreps.value, testPrep, (e) => e.id, (e) => e.createdAt)
 				await setMessage('TestPrep updated successfully')
 				useStudyModal().closeEditTestPrep()
 				factory.value.reset()

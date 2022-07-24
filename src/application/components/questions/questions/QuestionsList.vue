@@ -24,12 +24,11 @@
 import { defineComponent } from 'vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
-import EmptyState from '@app/components/core/EmptyState.vue'
 import SelectTag from '@app/components/questions/questions/SelectTag.vue'
 
 export default defineComponent({
 	name: 'QuestionsList',
-	components: { QuestionListCard, EmptyState, SelectTag },
+	components: { QuestionListCard, SelectTag },
 	setup () {
 		const {
 			filteredQuestions: questions, error, loading, hasMore, fetchOlderQuestions,

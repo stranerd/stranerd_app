@@ -14,7 +14,6 @@
 import { computed, defineComponent } from 'vue'
 // @ts-ignore
 import { VueEditor } from 'vue3-editor'
-import DisplayError from '@app/components/core/text/DisplayError.vue'
 /* const customToolBar = [
  [{ size: ['small', false, 'large', 'huge'] }],
  [{ header: [false,1,2,3,4,5,6] }],
@@ -31,7 +30,7 @@ import DisplayError from '@app/components/core/text/DisplayError.vue'
 
 export default defineComponent({
 	name: 'BaseEditor',
-	components: { DisplayError, VueEditor },
+	components: { VueEditor },
 	props: {
 		value: {
 			required: true,

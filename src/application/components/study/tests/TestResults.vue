@@ -27,12 +27,12 @@
 
 <script lang="ts">
 import { useCreateTest, useTestDetails } from '@app/composable/study/tests'
-import { computed, defineComponent, onMounted } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { TestEntity } from '@modules/study'
 import DonutChart from '@app/components/core/DonutChart.vue'
 import { formatNumber } from '@utils/commons'
 import { useRouter } from 'vue-router'
-import { useTestPrepList } from '@app/composable/study/testPreps'
+import { useTestPrep } from '@app/composable/study/testPreps'
 
 export default defineComponent({
 	name: 'TestResults',
@@ -46,8 +46,7 @@ export default defineComponent({
 	setup (props) {
 		const router = useRouter()
 		const { error, loading, questions, endTest } = useTestDetails(props.test)
-		const { testPreps } = useTestPrepList()
-		const prep = computed(() => testPreps.value.find((p) => p.id === props.test.prepId))
+		const { testPrep: prep } = useTestPrep(props.test.prepId)
 		const { createTest, loading: createLoading } = useCreateTest()
 		onMounted(async () => {
 			await endTest()

@@ -16,12 +16,11 @@
 import { defineComponent } from 'vue'
 import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 import { useUserNoteList } from '@app/composable/users/users/notes'
-import EmptyState from '@app/components/core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({
 	name: 'UserNotes',
-	components: { NoteListCard, EmptyState },
+	components: { NoteListCard },
 	props: {
 		user: {
 			type: UserEntity,

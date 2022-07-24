@@ -11,13 +11,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { chevronBackOutline, chevronForwardOutline, ellipseOutline } from 'ionicons/icons'
-import EmptyState from '@app/components/core/EmptyState.vue'
 import ContinueTestCard from '@app/components/study/tests/ContinueTestCard.vue'
 import { useTestList } from '@app/composable/study/tests'
 
 export default defineComponent({
 	name: 'ContinueTests',
-	components: { EmptyState, ContinueTestCard },
+	components: { ContinueTestCard },
 	setup () {
 		const { unCompletedTests, loading, error } = useTestList()
 		return {
