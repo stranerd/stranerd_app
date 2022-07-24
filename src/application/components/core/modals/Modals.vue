@@ -18,22 +18,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { isPlatform } from '@ionic/vue'
-import { modal, popover } from '@app/composable/core/modal'
+import { modal, modalProps, popover, popoverProps } from '@app/composable/core/modal'
 
 export default defineComponent({
 	name: 'Modals',
 	setup () {
-		const modalProps = {
-			cssClass: 'modal-class',
-			breakpoints: isPlatform('desktop') ? undefined : [0.5, 1],
-			initialBreakpoint: 1,
-			isOpen: true
-		}
-		const popoverProps = {
-			cssClass: 'popover-class',
-			isOpen: true
-		}
 		const { modals, stack: modalStack, close: modalClose } = modal
 		const { popovers, stack: popoverStack, close: popoverClose } = popover
 		return {

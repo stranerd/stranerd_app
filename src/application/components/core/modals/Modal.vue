@@ -1,6 +1,6 @@
 <template>
 	<div class="modal-content">
-		<div class="bg-headerBg text-headerText p-4 text-center">
+		<div :class="{'bg-headerBg text-headerText': !removeHeaderBg}" class="p-4 text-center">
 			<div class="flex justify-between items-center text-xl gap-4">
 				<span />
 				<span class="font-bold">
@@ -10,7 +10,7 @@
 			</div>
 			<slot name="subtext" />
 		</div>
-		<div class="px-4 md:px-8 py-4 md:py-8 max-h-fit overflow-y-auto">
+		<div class="px-4 md:px-8 pt-4 pb-6 md:py-8 max-h-fit overflow-y-auto">
 			<slot>
 				<p>This is the default content of the modal</p>
 			</slot>
@@ -29,6 +29,11 @@ export default defineComponent({
 			type: Function as PropType<() => void>,
 			required: false,
 			default: null
+		},
+		removeHeaderBg: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
 	setup () {

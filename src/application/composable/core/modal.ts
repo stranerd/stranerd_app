@@ -1,5 +1,6 @@
 import { Component as Vue, ref, Ref } from 'vue'
 import { capitalize } from '@utils/commons'
+import { isPlatform } from '@ionic/vue'
 
 const merge = (...args: string[]) => args.join('')
 
@@ -56,3 +57,14 @@ export const usePopover = (stack: Ref<string[]>) => {
 
 export const modal = useModal(ref([]))
 export const popover = usePopover(ref([]))
+
+export const modalProps = {
+	cssClass: 'modal-class',
+	breakpoints: isPlatform('desktop') ? undefined : [0.5, 1],
+	initialBreakpoint: 1,
+	isOpen: true
+}
+export const popoverProps = {
+	cssClass: 'popover-class',
+	isOpen: true
+}

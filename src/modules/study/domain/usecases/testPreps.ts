@@ -3,8 +3,16 @@ import { TestPrepFactory } from '../factories/testPrep'
 import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { PAGINATION_LIMIT } from '@utils/constants'
 import { TestPrepEntity } from '../entities/testPrep'
+import { PastQuestionType } from '@modules/school'
 
 const searchFields = ['name']
+
+type Filters = {
+	institutionId: string | null,
+	courseId: string | null,
+	year: number | null,
+	questionTypes: PastQuestionType[]
+}
 
 export class TestPrepsUseCase {
 	private repository: ITestPrepRepository
@@ -78,6 +86,19 @@ export class TestPrepsUseCase {
 		const query: QueryParams = {
 			all: true, search: { value: detail, fields: searchFields }
 		}
+		return (await this.repository.get(query)).results
+	}
+
+	async searchWithFilters (search: string, filters: Filters) {
+		const query: QueryParams = {
+			where: [{ field: 'data.questionType', value: filters.questionTypes, condition: Conditions.in }],
+			all: true, search: { value: search, fields: searchFields }
+		}
+
+		if (filters.institutionId) query.where!.push({ field: 'data.institutionId', value: filters.institutionId })
+		if (filters.courseId) query.where!.push({ field: 'data.courseId', value: filters.courseId })
+		if (filters.year) query.where!.push({ field: 'data.year', value: filters.year })
+
 		return (await this.repository.get(query)).results
 	}
 }

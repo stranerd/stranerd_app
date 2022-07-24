@@ -1,18 +1,23 @@
-import { computed, ComputedRef, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
+import { computed, ComputedRef, onMounted, onUnmounted, reactive, Ref, ref, watch } from 'vue'
 import { TestPrepEntity, TestPrepFactory, TestPrepsUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { addToArray, groupBy } from '@utils/commons'
+import { addToArray } from '@utils/commons'
 import { useStudyModal } from '@app/composable/core/modals'
-
-export type InstitutionTestPreps = {
-	institutionId: string,
-	preps: TestPrepEntity[]
-}
+import { PastQuestionType } from '@modules/school'
 
 const global = {
+	filters: reactive({
+		institutionId: null as string | null,
+		courseId: null as string | null,
+		year: null as number | null,
+		questionTypes: [] as PastQuestionType[]
+	}),
 	testPreps: ref([] as TestPrepEntity[]),
 	fetched: ref(false),
+	searchMode: ref(false),
+	searchValue: ref(''),
+	searchResults: ref([] as TestPrepEntity[]),
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
@@ -58,15 +63,27 @@ export const useTestPrepList = () => {
 	onUnmounted(async () => {
 		await listener.close()
 	})
-	return { ...global }
-}
 
-export const groupedByInstitution = (testPreps: TestPrepEntity[]) => computed({
-	get: () => groupBy(testPreps, (prep) => prep.data.institutionId)
-		.map(({ key, values }) => ({ institutionId: key, preps: values })),
-	set: () => {
+	const search = async () => {
+		const searchValue = global.searchValue.value
+		if (!searchValue) return
+		global.searchMode.value = true
+		await global.setError('')
+		try {
+			await global.setLoading(true)
+			global.searchResults.value = await TestPrepsUseCases.searchWithFilters(searchValue, global.filters)
+		} catch (error) {
+			await global.setError(error)
+		}
+		await global.setLoading(false)
 	}
-})
+
+	watch(global.searchValue, () => {
+		if (!global.searchValue.value) global.searchMode.value = false
+	})
+
+	return { ...global, search }
+}
 
 export const useSavedTestPreps = (list: ComputedRef<string[]>) => {
 	const fetchPreps = async () => {
@@ -89,17 +106,32 @@ export const useSavedTestPreps = (list: ComputedRef<string[]>) => {
 }
 
 export const useTestPrep = (id: string) => {
+	const { error, setError } = useErrorHandler()
+	const { loading, setLoading } = useLoadingHandler()
 	const testPrep = computed({
 		get: () => global.testPreps.value.find((s) => s.id === id) ?? null,
 		set: (s) => {
 			if (s) addToArray(global.testPreps.value, s, (e) => e.id, (e) => e.createdAt)
 		}
 	})
+
+	const findTestPrep = async () => {
+		await setError('')
+		try {
+			await setLoading(true)
+			const prep = global.testPreps.value.find((t) => t.id === id) ?? null
+			if (!prep) testPrep.value = await TestPrepsUseCases.find(id)
+		} catch (error) {
+			await setError(error)
+		}
+		await setLoading(false)
+	}
+
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchTestPreps()
+		await findTestPrep()
 	})
 
-	return { testPrep }
+	return { testPrep, loading, error }
 }
 
 export const useCreateTestPrep = () => {

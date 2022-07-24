@@ -5,7 +5,7 @@
 		</div>
 		<div class="flex flex-col md:flex-row gap-4 items-center justify-center w-full mb-8">
 			<div class="md:w-1/4 w-full">
-				<IonSelect v-model="filters.institution"
+				<IonSelect v-model="filters.institutionId"
 					class="capitalize" interface="action-sheet"
 					placeholder="Institution">
 					<IonSelectOption :value="null">All</IonSelectOption>
@@ -16,7 +16,7 @@
 				</IonSelect>
 			</div>
 			<div class="md:w-1/4 w-full">
-				<IonSelect v-model="filters.course" class="capitalize"
+				<IonSelect v-model="filters.courseId" class="capitalize"
 					interface="action-sheet" placeholder="Course">
 					<IonSelectOption :value="null">All</IonSelectOption>
 					<IonSelectOption v-for="course in courses" :key="course" :value="course" class="capitalize">
@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, watch } from 'vue'
+import { computed, defineComponent, watch } from 'vue'
 import TestPrepListCard from '@app/components/study/testPreps/AdminTestPrepListCard.vue'
 import { useTestPrepList } from '@app/composable/study/testPreps'
 import { groupBy } from '@utils/commons'
@@ -63,28 +63,22 @@ export default defineComponent({
 	name: 'AdminTestPrepsList',
 	components: { TestPrepListCard, Institution, Course },
 	setup () {
-		const filters = reactive({
-			institution: null as string | null,
-			course: null as string | null,
-			year: null as number | null,
-			questionType: null as string | null
-		})
-		const { loading, error, testPreps } = useTestPrepList()
+		const { loading, error, testPreps, filters } = useTestPrepList()
 		const institutions = computed(() => new Set(groupBy(testPreps.value, (i) => i.data.institutionId).map(({ key }) => key)))
-		const courses = computed(() => new Set(groupBy(testPreps.value.filter((p) => p.data.institutionId === filters.institution), (i) => i.data.courseId).map(({ key }) => key)))
-		const years = computed(() => new Set(groupBy(testPreps.value.filter((p) => p.data.institutionId === filters.institution && p.data.courseId === filters.course), (i) => i.data.year).map(({ key }) => key)))
-		const questionTypes = computed(() => new Set(groupBy(testPreps.value.filter((p) => p.data.institutionId === filters.institution && p.data.courseId === filters.course && p.data.year === filters.year), (i) => i.data.questionType).map(({ key }) => key)))
+		const courses = computed(() => new Set(groupBy(testPreps.value.filter((p) => p.data.institutionId === filters.institutionId), (i) => i.data.courseId).map(({ key }) => key)))
+		const years = computed(() => new Set(groupBy(testPreps.value.filter((p) => p.data.institutionId === filters.institutionId && p.data.courseId === filters.courseId), (i) => i.data.year).map(({ key }) => key)))
+		const questionTypes = computed(() => new Set(groupBy(testPreps.value.filter((p) => p.data.institutionId === filters.institutionId && p.data.courseId === filters.courseId && p.data.year === filters.year), (i) => i.data.questionType).map(({ key }) => key)))
 		const filteredPreps = computed(() => testPreps.value.filter((prep) => {
 			const matches = [] as boolean[]
-			if (filters.institution) matches.push(prep.data.institutionId === filters.institution)
-			if (filters.course) matches.push(prep.data.courseId === filters.course)
+			if (filters.institutionId) matches.push(prep.data.institutionId === filters.institutionId)
+			if (filters.courseId) matches.push(prep.data.courseId === filters.courseId)
 			if (filters.year) matches.push(prep.data.year === filters.year)
 			if (filters.questionType) matches.push(prep.data.questionType === filters.questionType)
 			return matches.every((m) => m)
 		}))
 
-		watch(() => filters.institution, () => filters.course = null)
-		watch(() => filters.course, () => filters.year = null)
+		watch(() => filters.institutionId, () => filters.courseId = null)
+		watch(() => filters.courseId, () => filters.year = null)
 		watch(() => filters.year, () => filters.questionType = null)
 
 		return {
