@@ -20,6 +20,10 @@ export class WalletEntity extends BaseEntity {
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
+
+	get currentSubscriptionId () {
+		return this.subscription.current?.id ?? null
+	}
 }
 
 type WalletConstructorArgs = {

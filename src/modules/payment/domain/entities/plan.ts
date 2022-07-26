@@ -34,6 +34,18 @@ export class PlanEntity extends BaseEntity {
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
+
+	get features () {
+		return [
+			{ name: 'Class', available: true },
+			{ name: 'Flashcards', available: true },
+			{ name: 'File storage', available: true },
+			{ name: 'Answer a question', available: true },
+			{ name: 'Ask a question', available: !!this.id },
+			{ name: 'Answers', available: !!this.id },
+			{ name: 'Student connect', available: !!this.id }
+		]
+	}
 }
 
 type PlanConstructorArgs = {
