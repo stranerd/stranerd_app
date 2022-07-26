@@ -69,17 +69,16 @@ export default defineComponent({
 		const years = computed(() => new Set(groupBy(testPreps.value.filter((p) => p.data.institutionId === filters.institutionId && p.data.courseId === filters.courseId), (i) => i.data.year).map(({ key }) => key)))
 		const questionTypes = computed(() => new Set(groupBy(testPreps.value.filter((p) => p.data.institutionId === filters.institutionId && p.data.courseId === filters.courseId && p.data.year === filters.year), (i) => i.data.questionType).map(({ key }) => key)))
 		const filteredPreps = computed(() => testPreps.value.filter((prep) => {
-			const matches = [] as boolean[]
+			const matches = [filters.questionTypes.includes(prep.data.questionType)]
 			if (filters.institutionId) matches.push(prep.data.institutionId === filters.institutionId)
 			if (filters.courseId) matches.push(prep.data.courseId === filters.courseId)
 			if (filters.year) matches.push(prep.data.year === filters.year)
-			if (filters.questionType) matches.push(prep.data.questionType === filters.questionType)
 			return matches.every((m) => m)
 		}))
 
 		watch(() => filters.institutionId, () => filters.courseId = null)
 		watch(() => filters.courseId, () => filters.year = null)
-		watch(() => filters.year, () => filters.questionType = null)
+		watch(() => filters.year, () => filters.questionTypes = [])
 
 		return {
 			loading, error, filteredPreps, testPreps, filters,
