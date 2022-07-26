@@ -18,6 +18,7 @@ import { CardEntity } from './domain/entities/card'
 import { TransactionEntity } from './domain/entities/transaction'
 import { PlanEntity } from './domain/entities/plan'
 import { WalletEntity } from './domain/entities/wallet'
+import type { FlutterwaveSecrets } from './domain/types'
 import { Currencies, PlanDataType, TransactionStatus, TransactionType } from './domain/types'
 
 const cardDataSource = new CardApiDataSource()
@@ -41,4 +42,4 @@ export const PlansUseCases = new PlansUseCase(planRepository)
 export const WalletsUseCases = new WalletsUseCase(walletRepository)
 
 export { CardEntity, TransactionEntity, PlanEntity, WalletEntity }
-export { Currencies, TransactionStatus, TransactionType, PlanDataType }
+export { Currencies, TransactionStatus, TransactionType, PlanDataType, FlutterwaveSecrets }

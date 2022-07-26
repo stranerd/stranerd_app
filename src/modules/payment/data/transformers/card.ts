@@ -4,13 +4,13 @@ import { CardEntity } from '../../domain/entities/card'
 export class CardTransformer {
 	fromJSON (model: CardFromModel) {
 		const {
-			id, first6Digits, last4Digits, issuer, country, type,
-			token, expiredAt, userId, email, primary, expired,
+			id, last4Digits, issuer, country, type,
+			token, expiredAt, userId, primary, expired,
 			createdAt, updatedAt
 		} = model
 		return new CardEntity({
-			id, first6Digits, last4Digits, issuer, country, type,
-			token, expiredAt, userId, email, primary, expired,
+			id, last4Digits, issuer, country, type,
+			token, expiredAt, userId, primary, expired,
 			createdAt, updatedAt
 		})
 	}

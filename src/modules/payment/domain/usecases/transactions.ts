@@ -11,6 +11,10 @@ export class TransactionsUseCase {
 		this.repository = repository
 	}
 
+	async getFlutterwaveSecrets () {
+		return this.repository.getFlutterwaveSecrets()
+	}
+
 	async create (type: TransactionType) {
 		return await this.repository.create(type)
 	}

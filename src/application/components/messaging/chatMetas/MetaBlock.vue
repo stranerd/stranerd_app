@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col py-2 gap-2 px-0">
+	<div class="flex flex-col py-4 gap-2 px-0">
 		<div class="flex card-padding !py-0 !gap-4 items-center" @click="show = !show">
 			<div v-if="hasAvatar" class="relative">
 				<Avatar :name="title" :size="48" :src="photo" />

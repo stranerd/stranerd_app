@@ -12,7 +12,7 @@ export class TransactionApiDataSource implements TransactionBaseDataSource {
 	}
 
 	async getFlutterwaveSecrets () {
-		return await this.stranerdClient.get<any, FlutterwaveSecrets>('/', {})
+		return await this.stranerdClient.get<any, FlutterwaveSecrets>('/flutterwave/secrets', {})
 	}
 
 	async find (id: string) {

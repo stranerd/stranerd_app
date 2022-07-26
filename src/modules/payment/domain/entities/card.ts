@@ -2,7 +2,6 @@ import { BaseEntity } from '@modules/core'
 
 export class CardEntity extends BaseEntity {
 	public readonly id: string
-	public readonly first6Digits: string
 	public readonly last4Digits: string
 	public readonly issuer: string
 	public readonly country: string
@@ -12,17 +11,15 @@ export class CardEntity extends BaseEntity {
 	public readonly expired: boolean
 	public readonly primary: boolean
 	public readonly userId: string
-	public readonly email: string
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, first6Digits, last4Digits, issuer, country, type, token,
-		             expiredAt, expired, primary, userId, email, createdAt, updatedAt
+		             id, last4Digits, issuer, country, type, token,
+		             expiredAt, expired, primary, userId, createdAt, updatedAt
 	             }: CardConstructorArgs) {
 		super()
 		this.id = id
-		this.first6Digits = first6Digits
 		this.last4Digits = last4Digits
 		this.issuer = issuer
 		this.country = country
@@ -32,7 +29,6 @@ export class CardEntity extends BaseEntity {
 		this.expired = expired
 		this.primary = primary
 		this.userId = userId
-		this.email = email
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -48,7 +44,6 @@ export class CardEntity extends BaseEntity {
 
 type CardConstructorArgs = {
 	id: string
-	first6Digits: string
 	last4Digits: string
 	issuer: string
 	country: string
@@ -58,7 +53,6 @@ type CardConstructorArgs = {
 	expired: boolean
 	primary: boolean
 	userId: string
-	email: string
 	createdAt: number
 	updatedAt: number
 }

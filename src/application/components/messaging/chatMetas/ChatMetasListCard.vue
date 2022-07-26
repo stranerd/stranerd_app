@@ -28,7 +28,7 @@
 				<span>
 					<span v-if="unReadCount.length"
 						:style="`width: ${unReadCount.length + 0.5}ch; min-width: 2ch;max-width:3.1ch`"
-						class="bg-primaryBg text-primaryText aspect-square rounded-full flex items-center justify-center leading-none">
+						class="bg-primaryBg text-primaryText text-xs aspect-square rounded-full flex items-center justify-center leading-none">
 						<span>{{ unReadCount }}</span>
 					</span>
 				</span>

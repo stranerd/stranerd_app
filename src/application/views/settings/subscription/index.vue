@@ -16,17 +16,7 @@
 				<IonIcon :icon="arrowForwardOutline" />
 			</router-link>
 
-			<div class="flex flex-col border-bottom-line gap-7 p-4 lg:p-0">
-				<IonText class="font-bold">Payment method</IonText>
-				<span class="flex items-center gap-2">
-					<IonIcon :icon="cardOutline" />
-					<IonText>**** **** **** 3227</IonText>
-				</span>
-				<span class="flex items-center gap-4">
-					<IonIcon :icon="addOutline" />
-					<IonText>Add debit/credit card</IonText>
-				</span>
-			</div>
+			<CardsList class="border-bottom-line card-padding !lg:p-0" />
 		</div>
 	</DefaultLayout>
 </template>
@@ -36,20 +26,21 @@ import { computed, defineComponent } from 'vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
-import { addOutline, arrowForwardOutline, cardOutline } from 'ionicons/icons'
+import { arrowForwardOutline } from 'ionicons/icons'
 import { useWallet } from '@app/composable/payment/wallets'
 import { usePlanList } from '@app/composable/payment/plans'
+import CardsList from '@app/components/payment/cards/CardsList.vue'
 
 export default defineComponent({
 	name: 'SettingsSubscription',
-	components: { SettingsPanel },
+	components: { SettingsPanel, CardsList },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Subscription', { back: true })
 		const { wallet } = useWallet()
 		const { plans } = usePlanList()
 		const plan = computed(() => plans.value.find((p) => p.id === wallet.value?.currentSubscriptionId))
-		return { addOutline, cardOutline, arrowForwardOutline, plan }
+		return { arrowForwardOutline, plan }
 	}
 })
 </script>
