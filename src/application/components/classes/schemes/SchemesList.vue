@@ -6,7 +6,14 @@
 			<IonIcon :icon="arrowForwardOutline" />
 		</div>
 		<div class="flex flex-col">
-			<EmptyState v-if="!loading && !error && schemes.length === 0" info="No scheme of work" />
+			<EmptyState v-if="!loading && !error && schemes.length === 0">
+				<div class="flex flex-col items-center gap-4 mt-[calc(20vh)]">
+					<img src="@/assets/images/emptyStates/data.svg" alt="No scheme of work">
+					<p class="text-lg font-bold">No scheme of work</p>
+					<span class="text-center ">Contact your class admin to add your scheme of work.</span>
+
+				</div>
+			</EmptyState>
 			<div v-for="{ key: course, values } in schemes" :key="course"
 				class="flex flex-col border-bottom-line p-4 gap-4">
 				<div class="py-2 flex justify-between items-center cursor-pointer"

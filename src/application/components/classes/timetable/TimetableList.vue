@@ -15,7 +15,14 @@
 					{{ day.name }}
 				</a>
 			</div>
-			<EmptyState v-if="!loading && !error && timetable.length === 0" info="No timetable" />
+			<EmptyState v-if="!loading && !error && timetable.length === 0">
+				<div class="flex flex-col items-center gap-4 mt-[calc(20vh)]">
+					<img src="@/assets/images/emptyStates/data.svg" alt="empty state">
+					<p class="text-lg font-bold">No timetable</p>
+					<span class="text-center ">Contact your class admin to add your timetable.</span>
+
+				</div>
+			</EmptyState>
 			<TimetableListCard v-for="event in timetable" :key="event.hash" :classInst="classInst" :event="event" />
 		</div>
 		<BlockLoading v-if="loading" />

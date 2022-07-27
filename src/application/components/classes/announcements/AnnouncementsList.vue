@@ -1,7 +1,13 @@
 <template>
 	<div class="showcase-flex gap-4 p-4 lg:p-0">
-		<EmptyState v-if="!loading && !error && announcements.length === 0"
-			info="No announcements" />
+		<EmptyState v-if="!loading && !error && announcements.length === 0">
+			<div class="flex flex-col items-center gap-4 mt-[calc(20vh)]">
+				<img src="@/assets/images/emptyStates/data.svg" alt="empty state">
+				<p class="text-lg font-bold">No announcements</p>
+				<span class="text-center ">Keep in touch! Important information from class admins are will show up here.</span>
+
+			</div>
+		</EmptyState>
 		<AnnouncementsListCard v-for="announcement in announcements" :key="announcement.hash"
 			:announcement="announcement"
 			:classInst="classInst" />
