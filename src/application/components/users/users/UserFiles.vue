@@ -16,7 +16,13 @@
 				<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 			</form>
 		</div>
-		<EmptyState v-if="!loading && !error && files.length === 0" :info="'No files found'" />
+		<EmptyState v-if="!loading && !error && files.length === 0">
+			<div class="flex flex-col items-center gap-4">
+				<img src="@/assets/images/emptyStates/file.svg" alt="question empty state">
+				<p class="text-lg font-bold">No files</p>
+				<span class="text-center max-w-sm">Documents and media shared in discussions will show up here.</span>
+			</div>
+		</EmptyState>
 		<ImagesList v-if="type === 'images'" :media="images" />
 		<VideosList v-if="type === 'videos'" :media="videos" />
 		<DocsList v-if="type === 'docs'" :media="docs" />
