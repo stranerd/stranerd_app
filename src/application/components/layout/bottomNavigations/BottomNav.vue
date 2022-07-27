@@ -1,11 +1,11 @@
 <template>
 	<IonFooter class="ion-no-border border-top-line">
-		<IonToolbar class="py-1.5">
+		<IonToolbar class="py-1">
 			<div class="flex justify-around items-center">
 				<router-link
 					v-for="{ path, icon, iconOutline } in [
 						{ name: 'Home', path: '/dashboard', icon: home, iconOutline:homeOutline },
-						{ name: 'Discussions', path: '/messages', icon: people, iconOutline:peopleOutline },
+						{ name: 'Discussions', path: '/messages', icon: chatbubbles, iconOutline:chatbubblesOutline },
 						{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
 						{ name: 'Tests', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
 						...(isLoggedIn ? [{ name: 'Account', path: `/account`, icon: person, iconOutline: personOutline }] : []),
@@ -26,8 +26,8 @@ import {
 	helpCircleOutline,
 	home,
 	homeOutline,
-	people,
-	peopleOutline,
+	chatbubbles,
+	chatbubblesOutline,
 	person,
 	personOutline,
 	receipt,
@@ -44,7 +44,7 @@ export default defineComponent({
 		const { isLoggedIn, isAdmin } = useAuth()
 		return {
 			isLoggedIn, isAdmin,
-			personOutline, person, peopleOutline, people, receiptOutline, receipt,
+			personOutline, person, chatbubblesOutline, chatbubbles, receiptOutline, receipt,
 			helpCircleOutline, helpCircle, homeOutline, home, searchOutline, search, statsChartOutline, statsChart
 		}
 	}

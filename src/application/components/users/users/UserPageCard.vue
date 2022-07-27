@@ -24,15 +24,15 @@
 		<IonText v-if="user.bio.description">{{ user.bio.description }}</IonText>
 		<div class="flex items-center gap-4 w-full text-secondaryText text-sm">
 			<IonText>
-				<span class="font-bold">{{ formatNumber(user.score, 1) }}</span>
+				<span class="font-bold text-bodyText">{{ formatNumber(user.score, 1) }}</span>
 				<span>&nbsp;{{ pluralize(user.score, 'pt', 'pts') }}</span>
 			</IonText>
 			<IonText>
-				<span class="font-bold">{{ formatNumber(user.meta.connects) }}</span>
+				<span class="font-bold text-bodyText">{{ formatNumber(user.meta.connects) }}</span>
 				<span>&nbsp;{{ pluralize(user.meta.connects, 'connect', 'connects') }}</span>
 			</IonText>
 			<IonText>
-				<span class="font-bold">{{ formatNumber(user.meta.bestAnswers) }}</span>
+				<span class="font-bold text-bodyText">{{ formatNumber(user.meta.bestAnswers) }}</span>
 				<span>&nbsp;best {{ pluralize(user.meta.bestAnswers, 'answer', 'answers') }}</span>
 			</IonText>
 		</div>

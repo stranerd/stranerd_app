@@ -7,8 +7,10 @@
 			<div />
 		</template>
 		<MessagingView class="lg:hidden pt-4" />
-		<div class="h-full w-full hidden lg:flex justify-center items-center">
-			<p class="text-3xl">Select a contact</p>
+		<div class="h-full w-full hidden lg:flex flex-col justify-center items-center gap-4">
+			<img src="../../assets/images/emptyStates/contact.svg" alt="empty state">
+			<p class="text-2xl font-bold">Start sending messages</p>
+			<span class="text-center max-w-xl">Join a class to participate in group discussions and Connect with your classmates or students in other classes to send direct messages.</span>
 		</div>
 	</DefaultLayout>
 </template>

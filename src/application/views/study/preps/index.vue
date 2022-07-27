@@ -20,7 +20,7 @@
 
 			<div class="p-4 py-6 lg:px-0 flex-grow flex flex-col">
 				<template v-if="tab === 'Textbooks'">
-					<EmptySearch />
+					<EmptyTests />
 				</template>
 				<template v-else>
 					<div v-if="searchMode" class="min-h-full showcase-flex gap-4">

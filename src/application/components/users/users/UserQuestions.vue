@@ -3,8 +3,14 @@
 		<form class="p-4 lg:p-0" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 		</form>
-		<EmptyState v-if="!loading && !error && questions.length === 0" class="border-bottom-line"
-			info="This user hasn't asked any questions yet" />
+		<EmptyState v-if="!loading && !error && questions.length === 0">
+			<div class="flex flex-col items-center gap-4">
+				<img src="@/assets/images/emptyStates/question.svg" alt="question empty state">
+				<p class="text-lg font-bold">No questions</p>
+				<span class="text-center ">Questions you ask will show up here.</span>
+				<IonButton class="btn-outline" style="--border-radius:20px">Ask a question</IonButton>
+			</div>
+		</EmptyState>
 		<UserQuestionsCard v-for="question in (searchMode ? searchResults : questions)" :key="question.hash"
 			:question="question" class="border-bottom-line" />
 		<BlockLoading v-if="loading" />

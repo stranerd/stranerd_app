@@ -1,9 +1,9 @@
 <template>
 	<router-link :to="`/questions/${question.id}`" class="flex flex-col card card-padding !gap-4">
-		<div class="flex items-center gap-4 text-secondaryText">
+		<div class="flex items-start gap-4 text-secondaryText">
 			<Avatar :id="question.user.id" :name="question.user.bio.fullName" :size="40"
 				:src="question.user.bio.photo" />
-			<div class="flex flex-col">
+			<div class="flex flex-col flex-1">
 				<span class="flex items-center gap-1">
 					<span class="font-bold">{{ question.user.bio.fullName }}</span>
 					<Verified :verified="question.isUserVerified" />
@@ -13,34 +13,33 @@
 					<IonIcon :icon="ellipse" class="dot" />
 					<span>{{ formatTime(question.createdAt) }}</span>
 				</div>
+
+				<DisplayHtml :html="question.trimmedBody" class="mt-4" />
+
+				<div class="flex items-center gap-5 text-secondaryText text-sm w-full mt-4">
+					<span v-if="question.attachments.length" class="flex gap-1 items-center">
+						<IonIcon :icon="attachOutline" class="rotate-45" />
+						<span>{{ formatNumber(question.attachments.length) }}</span>
+					</span>
+			
+					<span class="flex gap-1 items-center mr-auto">
+						<IonIcon :icon="chatbubbleEllipsesOutline" />
+						<span>{{ formatNumber(question.answers.length + question.meta.comments) }}</span>
+					</span>
+				
+					<Share :link="question.shareLink" :text="question.strippedBody" title="Share this question" />
+					<SaveToSet :entity="question" class="mt-1.5" />
+				</div>
 			</div>
 		</div>
-		<DisplayHtml :html="question.trimmedBody" />
+		
 
-		<div class="flex items-center gap-5 text-secondaryText text-sm">
-			<span v-if="question.attachments.length" class="flex gap-1 items-center">
-				<IonIcon :icon="attachOutline" class="rotate-45" />
-				<span>{{ formatNumber(question.attachments.length) }}</span>
-			</span>
-			<span class="flex gap-1 items-center mr-auto">
-				<IonIcon :icon="helpCircleOutline" />
-				<span>
-					{{ formatNumber(question.answers.length + question.meta.comments) }}
-				</span>
-			</span>
-			<SaveToSet :entity="question" />
-			<span class="flex gap-1 items-center">
-				<IonIcon :icon="chatbubbleOutline" />
-				<span>{{ formatNumber(question.answers.length) }}</span>
-			</span>
-			<Share :link="question.shareLink" :text="question.strippedBody" title="Share this question" />
-		</div>
 	</router-link>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { attachOutline, chatbubbleOutline, ellipse, helpCircleOutline } from 'ionicons/icons'
+import { attachOutline, chatbubbleEllipsesOutline, ellipse, helpCircleOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { formatNumber } from '@utils/commons'
@@ -67,7 +66,7 @@ export default defineComponent({
 		})
 		return {
 			showAnswerButton, openAnswerModal, formatTime, formatNumber,
-			attachOutline, chatbubbleOutline, ellipse, helpCircleOutline
+			attachOutline, chatbubbleEllipsesOutline, ellipse, helpCircleOutline
 		}
 	}
 })
