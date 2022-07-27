@@ -1,12 +1,13 @@
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { FlutterwaveSecrets, TransactionsUseCases, TransactionType } from '@modules/payment'
 import { useScripts } from '@app/composable/core/scripts'
+import { domain } from '@utils/environment'
 
 const global = {
 	flutterwave: null as FlutterwaveSecrets | null
 }
 
-export const useCreateTransaction = (type: TransactionType) => {
+export const useCreateTransaction = (type: TransactionType, description: string) => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	useScripts('flutterwave', 'https://checkout.flutterwave.com/v3.js')
@@ -26,7 +27,7 @@ export const useCreateTransaction = (type: TransactionType) => {
 						public_key: global.flutterwave!.publicKey,
 						tx_ref: id, amount, currency, customer: { email },
 						payment_options: 'card',
-						customizations: { title: 'Stranerd', logo: '/images/icon.png' },
+						customizations: { title: 'Stranerd', description, logo: domain + '/images/icon.png' },
 						callback: () => {
 							modal.close()
 							res()
