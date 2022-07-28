@@ -1,48 +1,17 @@
-import { onMounted, onUnmounted, ref } from 'vue'
-import { WalletEntity, WalletsUseCases } from '@modules/payment'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { WalletsUseCases } from '@modules/payment'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-
-const global = {
-	wallet: ref(null as WalletEntity | null),
-	fetched: ref(false),
-	...useErrorHandler(),
-	...useSuccessHandler(),
-	...useLoadingHandler()
-}
-const setWallet = async (entity: WalletEntity) => {
-	global.wallet.value = entity
-}
-const listener = useListener(async () => await WalletsUseCases.listen({
-	created: setWallet,
-	updated: setWallet,
-	deleted: setWallet
-}))
+import { useAuth } from '@app/composable/auth/auth'
 
 export const useWallet = () => {
-	const fetchWallet = async () => {
-		await global.setError('')
-		try {
-			await global.setLoading(true)
-			await setWallet(await WalletsUseCases.get())
-			global.fetched.value = true
-		} catch (error) {
-			await global.setError(error)
-		}
-		await global.setLoading(false)
-	}
-
-	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchWallet()
-		await listener.start()
-	})
-	onUnmounted(async () => {
-		await listener.close()
-	})
+	const { wallet } = useAuth()
+	const { error, setError } = useErrorHandler()
+	const { loading, setLoading } = useLoadingHandler()
+	const { message, setMessage } = useSuccessHandler()
 
 	const subscribeToPlan = async (subscriptionId: string) => {
-		await global.setError('')
-		if (global.wallet.value?.currentSubscriptionId === subscriptionId) return
+		await setError('')
+		if (wallet.value?.subscription.active) return
 		const res = await Alert({
 			title: 'Are you sure you want to subscribe to this plan?',
 			confirmButtonText: 'Yes',
@@ -50,37 +19,18 @@ export const useWallet = () => {
 		})
 		if (!res) return
 		try {
-			await global.setLoading(true)
-			global.wallet.value = await WalletsUseCases.subscribeToPlan(subscriptionId)
-			await global.setMessage('Subscribed successfully!')
+			await setLoading(true)
+			wallet.value = await WalletsUseCases.subscribeToPlan(subscriptionId)
+			await setMessage('Subscribed successfully!')
 		} catch (error) {
-			await global.setError(error)
+			await setError(error)
 		}
-		await global.setLoading(false)
-	}
-
-	const renewSubscription = async () => {
-		await global.setError('')
-		if (global.wallet.value?.currentSubscriptionId && global.wallet.value?.subscription.active) return
-		const res = await Alert({
-			title: 'Are you sure you want to renew your current plan?',
-			confirmButtonText: 'Yes',
-			cancelButtonText: 'No'
-		})
-		if (!res) return
-		try {
-			await global.setLoading(true)
-			global.wallet.value = await WalletsUseCases.cancelSubscription()
-			await global.setMessage('Renewal successfully!')
-		} catch (error) {
-			await global.setError(error)
-		}
-		await global.setLoading(false)
+		await setLoading(false)
 	}
 
 	const cancelSubscription = async () => {
-		await global.setError('')
-		if (global.wallet.value && !global.wallet.value?.currentSubscriptionId) return
+		await setError('')
+		if (wallet.value && !wallet.value?.subscription.next) return
 		const res = await Alert({
 			title: 'Are you sure you want to cancel your current plan?',
 			confirmButtonText: 'Yes',
@@ -88,14 +38,14 @@ export const useWallet = () => {
 		})
 		if (!res) return
 		try {
-			await global.setLoading(true)
-			global.wallet.value = await WalletsUseCases.cancelSubscription()
-			await global.setMessage('Cancelled successfully!')
+			await setLoading(true)
+			wallet.value = await WalletsUseCases.cancelSubscription()
+			await setMessage('Cancelled successfully!')
 		} catch (error) {
-			await global.setError(error)
+			await setError(error)
 		}
-		await global.setLoading(false)
+		await setLoading(false)
 	}
 
-	return { ...global, subscribeToPlan, renewSubscription, cancelSubscription }
+	return { error, loading, message, subscribeToPlan, cancelSubscription }
 }

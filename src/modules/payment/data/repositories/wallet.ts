@@ -37,14 +37,8 @@ export class WalletRepository implements IWalletRepository {
 		return this.transformer.fromJSON(model)
 	}
 
-	async renewSubscription () {
-		const model = await this.dataSource.renewSubscription()
-		return this.transformer.fromJSON(model)
-	}
-
 	async cancelSubscription () {
 		const model = await this.dataSource.cancelSubscription()
 		return this.transformer.fromJSON(model)
 	}
-
 }

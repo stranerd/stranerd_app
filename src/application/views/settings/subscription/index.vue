@@ -27,9 +27,9 @@ import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
 import { arrowForwardOutline } from 'ionicons/icons'
-import { useWallet } from '@app/composable/payment/wallets'
 import { usePlanList } from '@app/composable/payment/plans'
 import CardsList from '@app/components/payment/cards/CardsList.vue'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'SettingsSubscription',
@@ -37,9 +37,9 @@ export default defineComponent({
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Subscription', { back: true })
-		const { wallet } = useWallet()
+		const { wallet } = useAuth()
 		const { plans } = usePlanList()
-		const plan = computed(() => plans.value.find((p) => p.id === wallet.value?.currentSubscriptionId))
+		const plan = computed(() => plans.value.find((p) => p.id === wallet.value?.subscription.current?.id))
 		return { arrowForwardOutline, plan }
 	}
 })

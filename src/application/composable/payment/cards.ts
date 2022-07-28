@@ -57,7 +57,7 @@ export const useCard = (card: CardEntity) => {
 		await setError('')
 		if (card.primary) return
 		const res = await Alert({
-			title: 'Do you want this card your default for payments and subscriptions?',
+			title: 'Do you want this card as your default for payments and subscriptions?',
 			confirmButtonText: 'Yes',
 			cancelButtonText: 'No'
 		})

@@ -2,19 +2,19 @@
 	<div v-if="user">
 		<UserPageCard :user="user" class="border-bottom-line px-4 lg:px-8 pb-6" />
 
-		<div v-if="0" class="border-bottom-line gap-4 py-6 px-4 lg:px-8 flex items-center">
+		<div v-if="wallet" class="border-bottom-line gap-4 py-6 px-4 lg:px-8 flex items-center">
 			<IonIcon :icon="helpCircleOutline" />
-			<IonText>You have 5 questions to ask</IonText>
+			<IonText>
+				You have {{ wallet?.subscription.data.questions }}
+				{{ pluralize(wallet?.subscription.data.questions, 'question', 'questions') }} to ask
+			</IonText>
 			<IonIcon :icon="cartOutline" class="ml-auto" />
 		</div>
 
 		<div class="flex flex-col gap-6 py-8 px-4 lg:px-8 text-secondaryText">
 			<router-link v-for="{ label, route, icon } in [
+				{ label: 'Home', route: '/account/', icon: gridOutline },
 				{ label: 'Stats', route: '/account/stats', icon: gridOutline },
-				{ label: 'Questions', route: '/account/questions', icon: helpCircleOutline },
-				{ label: 'Answers', route: '/account/answers', icon: readerOutline },
-				{ label: 'Flashcards', route: '/account/flashCards', icon: flashOutline },
-				{ label: 'Notes', route: '/account/notes', icon: documentTextOutline },
 				{ label: 'My Library', route: '/account/files', icon: libraryOutline },
 				{ label: 'Saved', route: '/account/sets', icon: bookmarkOutline },
 				{ label: 'Settings', route: '/settings', icon: settingsOutline },
@@ -41,14 +41,15 @@ import {
 	settingsOutline
 } from 'ionicons/icons'
 import UserPageCard from '@app/components/users/users/UserPageCard.vue'
+import { pluralize } from '@utils/commons'
 
 export default defineComponent({
 	name: 'ProfileView',
 	components: { UserPageCard },
 	setup () {
-		const { id, user } = useAuth()
+		const { id, user, wallet } = useAuth()
 		return {
-			id, user,
+			id, user, wallet, pluralize,
 			gridOutline, helpCircleOutline, readerOutline, flashOutline, libraryOutline,
 			documentTextOutline, bookmarkOutline, settingsOutline, cartOutline
 		}

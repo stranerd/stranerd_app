@@ -15,9 +15,9 @@
 		<IonButton v-if="!plan.id" :disabled="true" class="btn-primary">
 			Subscribe
 		</IonButton>
-		<IonButton v-else-if="wallet?.currentSubscriptionId === plan.id"
+		<IonButton v-else-if="wallet?.subscription.current?.id === plan.id"
 			:disabled="loading || wallet?.subscription.active"
-			class="btn-primary" @click="renewSubscription">
+			class="btn-primary" @click="subscribeToPlan(plan.id)">
 			{{ wallet?.subscription.active ? 'Subscribed' : 'Renew' }}
 		</IonButton>
 		<IonButton v-else :disabled="loading" class="btn-primary" @click="subscribeToPlan(plan.id)">
@@ -32,6 +32,7 @@ import { cardOutline, checkmarkOutline, closeOutline } from 'ionicons/icons'
 import { formatCurrency } from '@utils/commons'
 import { useWallet } from '@app/composable/payment/wallets'
 import { PlanEntity } from '@modules/payment'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'PlansListCard',
@@ -42,10 +43,11 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const { wallet, loading, error, subscribeToPlan, renewSubscription, cancelSubscription } = useWallet()
+		const { wallet } = useAuth()
+		const { loading, error, subscribeToPlan, cancelSubscription } = useWallet()
 		return {
 			checkmarkOutline, cardOutline, closeOutline, loading, error,
-			formatCurrency, wallet, subscribeToPlan, renewSubscription, cancelSubscription
+			formatCurrency, wallet, subscribeToPlan, cancelSubscription
 		}
 	}
 })

@@ -5,6 +5,5 @@ export interface WalletBaseDataSource {
 	get: () => Promise<WalletFromModel>
 	listen: (listener: Listeners<WalletFromModel>) => Promise<() => void>
 	subscribeToPlan: (subscriptionId: string) => Promise<WalletFromModel>
-	renewSubscription: () => Promise<WalletFromModel>
 	cancelSubscription: () => Promise<WalletFromModel>
 }

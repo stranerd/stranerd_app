@@ -25,10 +25,6 @@ export class WalletApiDataSource implements WalletBaseDataSource {
 		return await this.stranerdClient.post<{ subscriptionId: string }, WalletFromModel>('/subscriptions', { subscriptionId })
 	}
 
-	async renewSubscription () {
-		return await this.stranerdClient.put<any, WalletFromModel>('/subscriptions', {})
-	}
-
 	async cancelSubscription () {
 		return await this.stranerdClient.delete<any, WalletFromModel>('/subscriptions', {})
 	}

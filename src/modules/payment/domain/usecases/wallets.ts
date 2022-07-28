@@ -21,10 +21,6 @@ export class WalletsUseCase {
 		return await this.repository.subscribeToPlan(subscriptionId)
 	}
 
-	async renewSubscription () {
-		return await this.repository.renewSubscription()
-	}
-
 	async cancelSubscription () {
 		return await this.repository.cancelSubscription()
 	}

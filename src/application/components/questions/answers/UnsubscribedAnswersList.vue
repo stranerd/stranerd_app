@@ -1,6 +1,6 @@
 <template>
-	<div class="flex flex-col">
-		<h2 v-if="answers.length" class="text-xl font-bold p-4 lg:p-0 flex items-center">
+	<div class="flex flex-col gap-4">
+		<h2 class="text-xl font-bold p-4 lg:p-0 flex items-center">
 			<span>Answers</span>
 			<span
 				:style="`width: ${question.answers.length.toString().length + 0.5}ch; min-width: 2ch;max-width:3.1ch;`"
@@ -8,31 +8,31 @@
 				<span>{{ formatNumber(question.answers.length) }}</span>
 			</span>
 		</h2>
-		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :like="likes[answer.id]"
-			:question="question" />
-		<EmptyState v-if="answers.length === 0" info="No answers yet" />
+		<div class="bg-itemBg flex flex-col items-center py-8 gap-1 rounded-xl mx-4 lg:mx-0">
+			<IonText class="font-bold">You are not subscribed</IonText>
+			<IonText>Subscribe to be able to see answers to questions</IonText>
+			<router-link to="/settings/subscription/plans">
+				<IonButton class="btn-primary">Subscribe</IonButton>
+			</router-link>
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useAnswerList } from '@app/composable/questions/answers'
 import { QuestionEntity } from '@modules/questions'
-import AnswersListCard from '@app/components/questions/answers/AnswersListCard.vue'
 import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
-	name: 'AnswersList',
+	name: 'UnsubscribedAnswersList',
 	props: {
 		question: {
 			type: QuestionEntity,
 			required: true
 		}
 	},
-	components: { AnswersListCard },
 	setup (props) {
-		const { answers, likes, error, loading } = useAnswerList(props.question.id)
-		return { answers, likes, error, loading, formatNumber }
+		return { formatNumber }
 	}
 })
 </script>
