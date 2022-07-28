@@ -93,3 +93,10 @@ export const addToArray = <T> (array: T[], item: T, getKey: (a: T) => any, getCo
 	}
 	return array
 }
+
+export const formatCurrency = (currency: string) => {
+	const currencies = {
+		NGN: '&#8358;', USD: '$'
+	} as Record<string, string>
+	return currencies[currency] ?? currencies.USD
+}

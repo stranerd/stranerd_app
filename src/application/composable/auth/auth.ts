@@ -6,10 +6,12 @@ import { isClient } from '@utils/environment'
 import { setupPush } from '@utils/push'
 import { useUserModal } from '@app/composable/core/modals'
 import { storage } from '@utils/storage'
+import { WalletEntity, WalletsUseCases } from '@modules/payment'
 
 const global = {
 	auth: ref(null as AuthDetails | null),
 	user: ref(null as UserEntity | null),
+	wallet: ref(null as WalletEntity | null),
 	location: ref(null as UserLocation | null),
 	listener: null as null | (() => void)
 }
@@ -67,6 +69,7 @@ export const useAuth = () => {
 		global.auth.value = details
 		if (details?.id) {
 			global.user.value = await UsersUseCases.find(details.id)
+			global.wallet.value = await WalletsUseCases.get()
 			if (global.auth.value?.isVerified && !global.user.value?.school) setTimeout(async () => {
 				if ((await getSchoolState()) !== id.value) useUserModal().openSettings()
 			}, 5000)
@@ -80,12 +83,23 @@ export const useAuth = () => {
 		const setUser = async (user: UserEntity) => {
 			global.user.value = user
 		}
-		if (id) {
-			global.listener = await UsersUseCases.listenToOne(id, {
-				created: setUser,
-				updated: setUser,
-				deleted: setUser
-			})
+		const setWallet = async (wallet: WalletEntity) => {
+			global.wallet.value = wallet
+		}
+		if (id) global.listener = async () => {
+			const listeners = [
+				await UsersUseCases.listenToOne(id, {
+					created: setUser,
+					updated: setUser,
+					deleted: setUser
+				}),
+				await WalletsUseCases.listen({
+					created: setWallet,
+					updated: setWallet,
+					deleted: setWallet
+				})
+			]
+			return async () => await Promise.all(listeners.map((fn) => fn()))
 		}
 	}
 
@@ -113,7 +127,7 @@ export const useAuth = () => {
 	const getLocalAmount = (amount: number) => parseFloat(Number(amount * CONVERSION_RATES[getLocalCurrency()]).toFixed(2))
 
 	return {
-		id, bio, user: global.user, auth: global.auth, location: global.location,
+		id, bio, user: global.user, auth: global.auth, location: global.location, wallet: global.wallet,
 		isLoggedIn, isEmailVerified, isAdmin, isTutor, currentSessionId, hasPassword,
 		setAuthUser, setUserLocation, signin, signout,
 		getLocalAmount, getLocalCurrency, getLocalCurrencySymbol
