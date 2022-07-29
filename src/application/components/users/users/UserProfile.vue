@@ -5,7 +5,7 @@
 			<div class="flex items-center justify-between">
 				<span v-for="path in [
 						{ name: 'questions', icon: helpCircleOutline },
-						{ name: 'answers', icon: checkmarkCircleOutline },
+						...(isSubscribed ? [{ name: 'answers', icon: checkmarkCircleOutline }] : []),
 						{ name: 'flashCards', icon: flashOutline },
 						{ name: 'notes', icon: readerOutline }
 					]" :key="path.name"
@@ -17,7 +17,7 @@
 				</span>
 			</div>
 			<UserQuestions v-if="tab === 'questions'" :user="user" />
-			<UserAnswers v-if="tab === 'answers'" :user="user" />
+			<UserAnswers v-if="tab === 'answers' && isSubscribed" :user="user" />
 			<UserFlashCards v-if="tab === 'flashCards'" :user="user" />
 			<UserNotes v-if="tab === 'notes'" :user="user" />
 		</div>
@@ -46,10 +46,10 @@ export default defineComponent({
 	},
 	components: { UserQuestions, UserAnswers, UserFlashCards, UserNotes, UserPageCard },
 	setup () {
-		const { id } = useAuth()
+		const { id, isSubscribed } = useAuth()
 		const tab = ref('questions')
 		return {
-			id, formatNumber,
+			id, isSubscribed, formatNumber,
 			tab, helpCircleOutline, readerOutline, checkmarkCircleOutline, flashOutline
 		}
 	}

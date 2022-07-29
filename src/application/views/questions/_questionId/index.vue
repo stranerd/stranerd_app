@@ -7,7 +7,7 @@
 			<BlockLoading v-if="loading" />
 			<template v-else-if="question">
 				<QuestionPageCard :question="question" class="border-bottom-line" />
-				<AnswersList v-if="wallet?.subscription.active" :question="question" />
+				<AnswersList v-if="isSubscribed" :question="question" />
 				<UnsubscribedAnswersList v-else :question="question" />
 			</template>
 			<EmptyState v-else info="Question Not Found" />
@@ -32,9 +32,9 @@ export default defineComponent({
 	setup () {
 		const { questionId } = useRoute().params
 		useRouteMeta('Question', { back: true })
-		const { wallet } = useAuth()
+		const { isSubscribed } = useAuth()
 		const { error, loading, question } = useQuestion(questionId as string)
-		return { wallet, error, loading, question }
+		return { isSubscribed, error, loading, question }
 	}
 })
 </script>
