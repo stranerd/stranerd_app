@@ -1,10 +1,9 @@
 <template>
-	<div class="showcase-flex">
-		<form class="p-4 lg:p-0" @submit.prevent="search">
+	<div class="showcase-flex flex-1">
+		<form v-if="answers.length" class="p-4 lg:p-0" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 		</form>
-		<EmptyState v-if="!loading && !error && answers.length === 0" class="border-bottom-line"
-			info="This user hasn't answered any questions yet." />
+		<EmptyUserAnswers v-if="!loading && !error && answers.length === 0" />
 		<AnswerCard v-for="answer in (searchMode ? searchResults : answers)" :key="answer.hash" :answer="answer"
 			class="border-bottom-line" />
 		<BlockLoading v-if="loading" />

@@ -1,10 +1,9 @@
 <template>
-	<div class="showcase-flex">
-		<form class="p-4 lg:p-0" @submit.prevent="search">
+	<div class="showcase-flex flex-1">
+		<form v-if="flashCards.length" class="p-4 lg:p-0" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 		</form>
-		<EmptyState v-if="!loading && !error && flashCards.length === 0" class="border-bottom-line"
-			info="This user hasn't created any flashCards yet" />
+		<EmptyUserFlashCards v-if="!loading && !error && flashCards.length === 0" />
 		<FlashCardListCard v-for="flashCard in (searchMode ? searchResults : flashCards)" :key="flashCard.hash"
 			:flashCard="flashCard" class="border-bottom-line" />
 		<BlockLoading v-if="loading" />

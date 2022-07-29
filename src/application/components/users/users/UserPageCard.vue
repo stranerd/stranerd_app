@@ -22,7 +22,7 @@
 			</template>
 		</div>
 		<IonText v-if="user.bio.description">{{ user.bio.description }}</IonText>
-		<div class="flex items-center gap-4 w-full text-secondaryText text-sm">
+		<div class="flex items-center gap-4 w-full text-sm">
 			<IonText>
 				<span class="font-bold">{{ formatNumber(user.score, 1) }}</span>
 				<span>&nbsp;{{ pluralize(user.score, 'pt', 'pts') }}</span>

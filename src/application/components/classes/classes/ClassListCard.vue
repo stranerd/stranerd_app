@@ -14,7 +14,6 @@
 						{ name: 'Events', path: 'events', icon: calendarOutline },
 						{ name: 'Timetable', path: 'timetable', icon: calendarClearOutline },
 						{ name: 'Scheme of Work', path: 'schemes', icon: listOutline },
-						{ name: 'Discussions', path: 'groups', icon: chatbubblesOutline },
 						{ name: 'Library', path: 'library', icon: libraryOutline },
 						{ name: 'About', path: '', icon: informationCircleOutline }
 					]" :key="path" :to="`/classes/${classInst.id}/${path}`"
@@ -33,7 +32,6 @@ import { ClassEntity } from '@modules/classes'
 import {
 	calendarClearOutline,
 	calendarOutline,
-	chatbubblesOutline,
 	chevronForwardOutline,
 	informationCircleOutline,
 	libraryOutline,
@@ -53,7 +51,7 @@ export default defineComponent({
 	setup () {
 		const show = ref(true)
 		return {
-			show, chevronForwardOutline, chatbubblesOutline, informationCircleOutline, libraryOutline,
+			show, chevronForwardOutline, informationCircleOutline, libraryOutline,
 			megaphoneOutline, peopleOutline, listOutline, calendarOutline, calendarClearOutline
 		}
 	}

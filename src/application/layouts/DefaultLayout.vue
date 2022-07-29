@@ -2,7 +2,7 @@
 	<IonPage class="layout">
 		<IonContent :scrollY="false">
 			<div class="layout">
-				<Topbar v-if="!hideTop" />
+				<Topbar :class="[hideTop? 'hidden lg:block':'' ]" />
 				<div class="layout-page">
 					<div class="layout-page-left">
 						<LeftSidebar class="h-full py-8" />
