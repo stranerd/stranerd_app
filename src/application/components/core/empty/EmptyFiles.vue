@@ -1,11 +1,8 @@
 <template>
 	<div class="flex justify-center items-center flex-col text-center gap-4 my-auto">
-		<img src="@/assets/images/emptyStates/answer.svg">
-		<p class="text-lg font-bold">No answers</p>
-		<span class="text-center ">Answers to questions will show up here.</span>
-		<router-link to="/questions">
-			<IonButton class="btn-outline">Answer a question</IonButton>
-		</router-link>
+		<img src="@/assets/images/emptyStates/file.svg">
+		<p class="text-lg font-bold">No files</p>
+		<span class="text-center">Files will show up here.</span>
 	</div>
 </template>
 
@@ -13,7 +10,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'EmptyUserAnswers'
+	name: 'EmptyFiles'
 })
 </script>
 

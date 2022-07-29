@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col">
+	<div class="flex flex-col h-full">
 		<div class="flex flex-col gap-4 py-4 border-bottom-line px-4 lg:px-0 lg:pt-0">
 			<div class="flex items-center w-full">
 				<a v-for="({ label, value }, idx) in [
@@ -12,11 +12,11 @@
 					{{ label }}
 				</a>
 			</div>
-			<form @submit.prevent="search">
+			<form v-if="files.length" @submit.prevent="search">
 				<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 			</form>
 		</div>
-		<EmptyState v-if="!loading && !error && files.length === 0" :info="'No files found'" />
+		<EmptyFiles v-if="!loading && !error && files.length === 0" />
 		<ImagesList v-if="type === 'images'" :media="images" />
 		<VideosList v-if="type === 'videos'" :media="videos" />
 		<DocsList v-if="type === 'docs'" :media="docs" />
