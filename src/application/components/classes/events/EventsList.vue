@@ -1,6 +1,8 @@
 <template>
-	<div class="showcase-flex gap-4 p-4 lg:p-0">
-		<EmptyState v-if="!loading && !error && events.length === 0" info="No events" />
+	<div class="showcase-flex gap-4 p-4 lg:p-0 flex-1">
+		<EmptyData v-if="!loading && !error && events.length === 0"
+			sub="Keep in touch! Important events from class admins are will show up here."
+			title="No events" />
 		<EventsListCard v-for="event in events" :key="event.hash" :classInst="classInst" :event="event" />
 		<BlockLoading v-if="loading" />
 		<LoadMore v-if="hasMore" :load="fetchOlderEvents" />

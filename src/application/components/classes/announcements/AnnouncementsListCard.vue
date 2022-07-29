@@ -11,7 +11,8 @@
 			<IonIcon :icon="ellipse" class="dot" />
 			<IonText>{{ formatTime(announcement.createdAt) }}</IonText>
 
-			<span class="ml-auto flex items-center gap-2" @click="openViewedByModal(classInst, announcement.readAt)">
+			<span class="ml-auto flex items-center gap-2"
+				@click="classInst.admins.includes(id) ? openViewedByModal(classInst, announcement.readAt) : null">
 				<IonIcon :icon="eyeOutline" />
 				<IonText>{{ formatNumber(Object.keys(announcement.readAt).length) }}</IonText>
 			</span>
@@ -46,7 +47,7 @@ export default defineComponent({
 		onMounted(async () => {
 			await markAnnouncementSeen(props.announcement, id.value)
 		})
-		return { formatTime, formatNumber, ellipse, eyeOutline, openViewedByModal }
+		return { id, formatTime, formatNumber, ellipse, eyeOutline, openViewedByModal }
 	}
 })
 </script>

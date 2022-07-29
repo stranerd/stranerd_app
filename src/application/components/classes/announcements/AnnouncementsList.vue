@@ -1,10 +1,10 @@
 <template>
-	<div class="showcase-flex gap-4 p-4 lg:p-0">
-		<EmptyState v-if="!loading && !error && announcements.length === 0"
-			info="No announcements" />
+	<div class="showcase-flex gap-4 p-4 lg:p-0 flex-1">
+		<EmptyData v-if="!loading && !error && announcements.length === 0"
+			sub="Keep in touch! Important information from class admins are will show up here."
+			title="No announcements" />
 		<AnnouncementsListCard v-for="announcement in announcements" :key="announcement.hash"
-			:announcement="announcement"
-			:classInst="classInst" />
+			:announcement="announcement" :classInst="classInst" />
 		<BlockLoading v-if="loading" />
 		<LoadMore v-if="hasMore" :load="fetchOlderAnnouncements" />
 	</div>

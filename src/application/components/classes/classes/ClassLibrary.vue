@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col">
+	<div class="flex flex-col flex-1">
 		<div class="flex flex-col gap-4 py-4 border-bottom-line px-4 lg:px-0 lg:pt-0">
 			<IonSelect v-model="groupId" class="capitalize" interface="action-sheet" placeholder="Sort by discussion">
 				<IonSelectOption :value="null" class="capitalize">
@@ -20,11 +20,11 @@
 					{{ label }}
 				</a>
 			</div>
-			<form @submit.prevent="search">
+			<form v-if="chats.length" @submit.prevent="search">
 				<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 			</form>
 		</div>
-		<EmptyState v-if="!loading && !error && chats.length === 0" :info="'No chats found'" />
+		<EmptyFiles v-if="!loading && !error && chats.length === 0" />
 		<ImagesList v-if="type === 'images'" :media="images" />
 		<VideosList v-if="type === 'videos'" :media="videos" />
 		<DocsList v-if="type === 'docs'" :media="docs" />

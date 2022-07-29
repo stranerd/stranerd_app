@@ -3,6 +3,7 @@
 		<template v-slot:title>
 			Viewed by
 		</template>
+		<span>Only admins can see who viewed</span>
 		<ViewedByUser v-for="user in viewers"
 			:key="user.hash"
 			:connect="connects.find((c) => c.members.includes(id) && c.members.includes(user.id)) ?? null"

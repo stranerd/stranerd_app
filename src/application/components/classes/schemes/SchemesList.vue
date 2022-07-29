@@ -1,12 +1,13 @@
 <template>
-	<div class="showcase-flex">
+	<div class="showcase-flex flex-1">
 		<div class="flex justify-between items-center p-4 border-bottom-line"
 			@click="openCreateSchemeModal(classInst, $router)">
 			<IonText>Set up scheme of work</IonText>
 			<IonIcon :icon="arrowForwardOutline" />
 		</div>
-		<div class="flex flex-col">
-			<EmptyState v-if="!loading && !error && schemes.length === 0" info="No scheme of work" />
+		<div class="flex flex-col flex-1">
+			<EmptyData v-if="!loading && !error && schemes.length === 0" sub="Contact your class admin to add your scheme of work."
+				title="No scheme of work" />
 			<div v-for="{ key: course, values } in schemes" :key="course"
 				class="flex flex-col border-bottom-line p-4 gap-4">
 				<div class="py-2 flex justify-between items-center cursor-pointer"
