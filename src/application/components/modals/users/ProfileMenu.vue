@@ -2,12 +2,12 @@
 	<div class="modal-content">
 		<div class="p-6 py-8 md:p-8 flex flex-col text-secondaryText">
 			<template v-if="user.id === id">
-				<router-link v-for="{ label, route, icon } in [
+				<router-link v-for="{ label, route, icon, hide } in [
 					{ label: 'Stats', route: '/account/stats', style: '', icon: gridOutline },
 					{ label: 'My Library', route: '/account/files', style: '', icon: libraryOutline },
 					{ label: 'Saved', route: '/account/sets', style: '', icon: bookmarkOutline },
-					{ label: 'Settings', route: '/settings', style: '', icon: settingsOutline },
-				]" :key="route" :to="route" class="flex gap-4 py-4 items-center">
+					{ label: 'Settings', route: '/settings', style: '', icon: settingsOutline, hide:true },
+				]" :key="route" :to="route" :class="[hide&&'md:hidden','flex gap-4 py-4 items-center']">
 					<IonIcon :icon="icon" />
 					<span>{{ label }}</span>
 				</router-link>
