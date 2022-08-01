@@ -20,7 +20,7 @@
 					<router-link class="hidden lg:inline-block" to="/users/leaderboard">
 						<IonIcon :icon="podiumOutline" />
 					</router-link>
-					<router-link class="hidden lg:inline-block" to="/settings">
+					<router-link class="hidden lg:inline-block" to="/settings/profile">
 						<IonIcon :icon="settingsOutline" />
 					</router-link>
 					<Avatar :id="user?.id" :name="user?.bio.fullName" :size="36" :src="user?.bio.photo"
