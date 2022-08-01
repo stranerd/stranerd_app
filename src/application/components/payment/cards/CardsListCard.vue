@@ -3,7 +3,8 @@
 		<IonIcon :icon="cardOutline" />
 		<IonText class="w-full">**** **** **** {{ card.last4Digits }}</IonText>
 		<SpinLoading v-if="loading" />
-		<IonIcon v-else :class="{'text-primaryBg': card.primary }" :icon="card.primary ? radioButtonOnOutline : radioButtonOffOutline"
+		<IonIcon v-else :class="{'text-primaryBg': card.primary }"
+			:icon="card.primary ? radioButtonOnOutline : radioButtonOffOutline"
 			@click="makeCardPrimary" />
 	</div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-	<Modal class="h-screen md:h-auto" :close="close">
+	<Modal :close="close" class="h-screen md:h-auto">
 		<template v-slot:title>
 			Edit Timetable
 		</template>

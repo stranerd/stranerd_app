@@ -15,7 +15,8 @@
 					{{ day.name }}
 				</a>
 			</div>
-			<EmptyData v-if="!loading && !error && timetable.length === 0" sub="Contact your class admin to add your timetable."
+			<EmptyData v-if="!loading && !error && timetable.length === 0"
+				sub="Contact your class admin to add your timetable."
 				title="No timetable" />
 			<TimetableListCard v-for="event in timetable" :key="event.hash" :classInst="classInst" :event="event" />
 		</div>

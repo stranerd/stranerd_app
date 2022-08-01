@@ -6,7 +6,8 @@
 			<IonIcon :icon="arrowForwardOutline" />
 		</div>
 		<div class="flex flex-col flex-1">
-			<EmptyData v-if="!loading && !error && schemes.length === 0" sub="Contact your class admin to add your scheme of work."
+			<EmptyData v-if="!loading && !error && schemes.length === 0"
+				sub="Contact your class admin to add your scheme of work."
 				title="No scheme of work" />
 			<div v-for="{ key: course, values } in schemes" :key="course"
 				class="flex flex-col border-bottom-line p-4 gap-4">

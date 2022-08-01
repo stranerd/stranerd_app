@@ -2,13 +2,13 @@
 	<DefaultLayout>
 		<div class="showcase-flex">
 			<div class="flex flex-col items-center text-center border-bottom-line card card-padding">
-				<img src="../../assets/images/connect.svg" alt="connect illustration">
+				<img alt="connect illustration" src="../../assets/images/connect.svg">
 				<IonText class="text-xl px-5 mt-5">An easy way to work with students from other schools.</IonText>
 				<IonText class="text-secondaryText">
 					Stranerd connect makes communicating and collaborating with students from other schools easier.
 				</IonText>
 				<IonButton class="btn-primary mt-2 font-normal" @click="openModal()">
-					<IonIcon :icon="bulb"  class="text-warning mr-3"/>
+					<IonIcon :icon="bulb" class="text-warning mr-3" />
 					See how Stranerd Connect works
 				</IonButton>
 			</div>
@@ -18,7 +18,8 @@
 					<div v-for="{ icon, title, sub, tab } in [
 							{ icon: personOutline, title: 'Student connect', sub: '1 on 1 discussion with any student.',tab: 1 },
 							{ icon: peopleOutline, title: 'Class connect', sub: 'Class to class discussion with any class.', tab: 2 },
-						]" :key="title" class="flex flex-col text-center rounded-xl gap-4 items-center border border-itemBg p-4 cursor-pointer"
+						]" :key="title"
+						class="flex flex-col text-center rounded-xl gap-4 items-center border border-itemBg p-4 cursor-pointer"
 						@click="openModal(tab)">
 						<IonIcon :icon="icon" />
 						<div class="flex flex-col gap-1">
@@ -27,7 +28,7 @@
 						</div>
 					</div>
 				</div>
-			
+
 			</div>
 			<IonModal :isOpen="isOpen" cssClass="modal-class" @didDismiss="closeModal">
 				<div class="modal-content p-6 lg:p-8">
@@ -45,7 +46,7 @@
 							<div class="w-full flex justify-between items-center text-lg">
 								<IonText class="font-bold">Student Connect</IonText>
 								<IonIcon :icon="closeOutline" @click="closeModal" />
-								
+
 							</div>
 							<IonText class="w-full text-secondaryText">
 								Start a discussion with a student in another class.
@@ -74,10 +75,11 @@ import { defineComponent, ref } from 'vue'
 import { useRouteMeta } from '@app/composable/core/states'
 import {
 	alertCircleOutline,
+	bulb,
 	closeOutline,
 	informationCircleOutline,
 	peopleOutline,
-	personOutline, bulb
+	personOutline
 } from 'ionicons/icons'
 import { generateMiddlewares } from '@app/middlewares'
 import { useSearch } from '@app/composable/meta/search'

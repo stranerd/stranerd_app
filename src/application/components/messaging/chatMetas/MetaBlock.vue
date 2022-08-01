@@ -11,7 +11,7 @@
 				<IonIcon :class="{'rotate-90': show}" :icon="chevronForwardOutline" />
 			</span>
 		</div>
-		<div v-if="show" class="flex flex-col">
+		<div v-if="show && metas.length" class="flex flex-col">
 			<ChatMetasListCard v-for="chatMeta in metas" :key="chatMeta.hash" :chatMeta="chatMeta"
 				:hasAvatar="!hasAvatar" />
 		</div>
@@ -47,7 +47,7 @@ export default defineComponent({
 			default: false
 		}
 	},
-	setup () {
+	setup() {
 		const show = ref(true)
 		return { show, chevronForwardOutline, peopleOutline }
 	}

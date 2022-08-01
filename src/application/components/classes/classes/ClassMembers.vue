@@ -11,7 +11,7 @@
 					<IonIcon :class="{'rotate-90': show[index]}" :icon="chevronForwardOutline" />
 				</span> -->
 			</div>
-			<div  class="flex flex-col">
+			<div class="flex flex-col">
 				<form class="card-padding !py-0 lg:p-0" @submit.prevent="search" @reset.prevent="reset">
 					<IonSearchbar v-if="name === 'Add Users'" v-model="detail"
 						placeholder="Enter email or name to add user" />

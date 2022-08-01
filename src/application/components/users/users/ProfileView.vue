@@ -18,7 +18,7 @@
 				{ label: 'My Library', route: '/account/files', icon: libraryOutline },
 				{ label: 'Saved', route: '/account/sets', icon: bookmarkOutline },
 				{ label: 'Settings', route: '/settings', icon: settingsOutline, hide:true },
-			]" :key="route" :to="route" :class="[hide&&'md:hidden','flex gap-3 items-center']" >
+			]" :key="route" :class="[hide&&'md:hidden','flex gap-3 items-center']" :to="route">
 				<IonIcon :icon="icon" />
 				<span>{{ label }}</span>
 			</router-link>

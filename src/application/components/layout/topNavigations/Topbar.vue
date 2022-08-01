@@ -2,7 +2,7 @@
 	<IonHeader class="block ion-no-border inset-x-0 w-full z-10">
 		<IonToolbar class="px-4 lg:px-6 border-bottom-line min-h-[4rem] flex items-center justify-center">
 			<div class="flex items-center justify-between lg:gap-16 py-2">
-				<router-link to="/" class="hidden lg:inline-block">
+				<router-link class="hidden lg:inline-block" to="/">
 					<img alt="" src="@/assets/images/logo/logo.svg">
 				</router-link>
 				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"

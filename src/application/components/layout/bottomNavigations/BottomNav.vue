@@ -22,12 +22,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import {
+	chatbubbles,
+	chatbubblesOutline,
 	helpCircle,
 	helpCircleOutline,
 	home,
 	homeOutline,
-	chatbubbles,
-	chatbubblesOutline,
 	person,
 	personOutline,
 	receipt,
