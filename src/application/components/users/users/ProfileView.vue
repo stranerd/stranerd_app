@@ -11,14 +11,14 @@
 			<IonIcon :icon="cartOutline" class="ml-auto" />
 		</div>
 
-		<div class="flex flex-col gap-6 py-8 px-4 lg:px-8 text-secondaryText">
-			<router-link v-for="{ label, route, icon } in [
+		<div class="flex flex-col gap-6 py-8 px-4 lg:px-8 text-secondaryText ">
+			<router-link v-for="{ label, route, icon,hide } in [
 				{ label: 'Home', route: '/account/', icon: gridOutline },
 				{ label: 'Stats', route: '/account/stats', icon: gridOutline },
 				{ label: 'My Library', route: '/account/files', icon: libraryOutline },
 				{ label: 'Saved', route: '/account/sets', icon: bookmarkOutline },
-				{ label: 'Settings', route: '/settings', icon: settingsOutline },
-			]" :key="route" :to="route" class="flex gap-3 items-center">
+				{ label: 'Settings', route: '/settings', icon: settingsOutline, hide:true },
+			]" :key="route" :to="route" :class="[hide&&'md:hidden','flex gap-3 items-center']" >
 				<IonIcon :icon="icon" />
 				<span>{{ label }}</span>
 			</router-link>

@@ -105,6 +105,7 @@ ion-searchbar {
 }
 
 ion-input, ion-textarea, ion-select {
+	margin: 0 !important;
 	--padding-start: 1rem !important;
 	--padding-end: 1rem !important;
 	--background: #{$color-itemBg} !important;
@@ -119,6 +120,15 @@ ion-input, ion-textarea, ion-select {
 	&:focus-within {
 		--icon-color: #{$color-info} !important;
 		outline-color: $color-info;
+	}
+}
+
+.textarea-wrapper {
+	height: 100%;
+
+	textarea {
+		height: 100%;
+		resize: vertical !important;
 	}
 }
 

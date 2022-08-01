@@ -11,10 +11,9 @@
 
 		<div class="border-bottom-line">
 			<IonInput v-model="factory.title" placeholder="Title" style="--background: transparent;" />
-			<DisplayError :error="factory.errors.title" />
 		</div>
 
-		<div class="flex-grow border-bottom-line" />
+		<IonTextarea v-model="factory.content" class="flex-grow border-bottom-line" />
 
 		<div class="flex items-center justify-center p-4 gap-12 text-xl text-secondaryText">
 			<IonIcon :icon="imageOutline" />
@@ -57,11 +56,15 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-input, ion-select {
+	ion-input, ion-select, ion-textarea {
 		border-radius: 0;
+
+		&:focus-within {
+			outline-color: transparent !important;
+		}
 	}
 
-	ion-input {
+	ion-input, ion-textarea {
 		--background: transparent !important;
 		background: transparent !important;
 		--padding-top: 1.5rem !important;
