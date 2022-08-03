@@ -1,10 +1,12 @@
-import { WalletsUseCases } from '@modules/payment'
+import { CardsUseCases, WalletsUseCases } from '@modules/payment'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
+import { useRouter } from 'vue-router'
 
 export const useWallet = () => {
 	const { wallet } = useAuth()
+	const router = useRouter()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { message, setMessage } = useSuccessHandler()
@@ -20,8 +22,14 @@ export const useWallet = () => {
 		if (!res) return
 		try {
 			await setLoading(true)
-			wallet.value = await WalletsUseCases.subscribeToPlan(subscriptionId)
-			await setMessage('Subscribed successfully!')
+			const primaryCard = await CardsUseCases.getPrimary()
+			if (primaryCard) {
+				wallet.value = await WalletsUseCases.subscribeToPlan(subscriptionId)
+				await setMessage('Subscribed successfully!')
+			} else {
+				await setError('You do not have a primary card. Add one!')
+				await router.push('/settings/subscription/#cards')
+			}
 		} catch (error) {
 			await setError(error)
 		}

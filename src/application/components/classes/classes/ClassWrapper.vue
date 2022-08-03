@@ -3,7 +3,7 @@
 		<template v-if="classInst && classInst.admins.includes(id)" v-slot:content-top-left>
 			<slot :classInst="classInst" name="header" />
 		</template>
-		<div class="flex flex-col h-full">
+		<div class="flex flex-col">
 			<BlockLoading v-if="loading" />
 			<div v-if="classInst && !hideTitle" class="flex items-center gap-4 border-bottom-line p-4 lg:hidden">
 				<Avatar :name="classInst.name" :size="24" :src="classInst.photo" />
@@ -32,7 +32,7 @@ export default defineComponent({
 			default: false
 		}
 	},
-	setup () {
+	setup() {
 		const { id } = useAuth()
 		const route = useRoute()
 		const { classId } = route.params

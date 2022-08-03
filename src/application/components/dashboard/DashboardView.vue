@@ -12,7 +12,7 @@
 			<IonText>Stranerd Connect</IonText>
 		</router-link>
 		<MetaBlock v-if="unRead.length" :metas="unRead" class="border-bottom-line" title="Unread" />
-		<ClassesList :hideSearch="true" />
+		<ClassesList />
 		<MetaBlock :metas="connects" class="border-bottom-line" title="Direct Messages" />
 		<BlockLoading v-if="loading" />
 	</div>
@@ -29,7 +29,7 @@ import { useChatMetas } from '@app/composable/messaging/chatMetas'
 export default defineComponent({
 	name: 'DashboardView',
 	components: { ClassesList, MetaBlock },
-	setup () {
+	setup() {
 		const { user } = useAuth()
 		const { connects, unRead, error, loading } = useChatMetas()
 		return { user, arrowForwardOutline, linkOutline, connects, unRead, error, loading }

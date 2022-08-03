@@ -22,6 +22,7 @@
 		</div>
 	</DefaultLayout>
 </template>
+
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
@@ -32,15 +33,15 @@ import { addOutline, trashBinOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'ClassesClassIdCourses',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ to }) => {
+	beforeRouteEnter: generateMiddlewares([ 'isAuthenticated', async ({ to }) => {
 		const { id } = useAuth()
 		const { classId = '' } = to.params
 		const classInst = getEditingClass()
-		if (!classInst || classInst.id !== classId) return `/classes/${classId}`
+		if (!classInst || classInst.id !== classId) return `/classes/${ classId }`
 		const canEdit = classInst.admins.includes(id.value)
-		if (!canEdit) return `/classes/${classInst.id}`
-	}]),
-	setup () {
+		if (!canEdit) return `/classes/${ classInst.id }`
+	} ]),
+	setup() {
 		useRouteMeta('Edit courses', { back: true })
 		const { editClass, factory, error, loading } = useEditClass()
 		const course = ref('')

@@ -8,7 +8,7 @@
 			class="w-[48px] h-[48px] text-primaryText bg-secondaryText border border-bodyBg rounded-full flex items-center justify-center text-lg">
 			<IonIcon :icon="chatbubblesOutline" />
 		</span>
-		<div class="flex flex-col flex-grow truncate gap-1 leading-none">
+		<div class="flex flex-col flex-grow truncate leading-none text-secondaryText">
 			<div class="flex gap-2 items-center">
 				<IonText class="text-base w-full truncate capitalize font-bold">
 					{{ chatMeta.getToName(id) }}
@@ -58,10 +58,10 @@ export default defineComponent({
 			default: false
 		}
 	},
-	setup (props) {
+	setup(props) {
 		const { id } = useAuth()
 		const { unRead, fetchUnRead } = useChatMeta(props.chatMeta)
-		watch([() => props.chatMeta.last, () => props.chatMeta.readAt[id.value]], fetchUnRead, {
+		watch([ () => props.chatMeta.last, () => props.chatMeta.readAt[id.value] ], fetchUnRead, {
 			immediate: true,
 			deep: true
 		})

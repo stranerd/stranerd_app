@@ -1,7 +1,6 @@
 <template>
 	<div>
-		<img v-if="secondary" alt="Stranerd" class="logo-img" src="@app/assets/images/logo/logo-dark.svg">
-		<img v-else alt="Stranerd" class="logo-img" src="@app/assets/images/logo/logo-white.svg">
+		<img alt="Stranerd" class="w-12" src="/images/icon.png">
 	</div>
 </template>
 
@@ -9,19 +8,6 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'Logo',
-	props: {
-		secondary: {
-			type: Boolean,
-			default: false,
-			required: false
-		}
-	}
+	name: 'Logo'
 })
 </script>
-
-<style lang="scss" scoped>
-	.logo-img {
-		height: 24px;
-	}
-</style>

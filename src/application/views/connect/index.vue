@@ -2,7 +2,7 @@
 	<DefaultLayout>
 		<div class="showcase-flex">
 			<div class="flex flex-col items-center text-center border-bottom-line card card-padding">
-				<img alt="connect illustration" src="../../assets/images/connect.svg">
+				<img alt="connect illustration" src="@app/assets/images/connect.svg">
 				<IonText class="text-xl px-5 mt-5">An easy way to work with students from other schools.</IonText>
 				<IonText class="text-secondaryText">
 					Stranerd connect makes communicating and collaborating with students from other schools easier.
@@ -87,8 +87,8 @@ import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'Connect',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
-	setup () {
+	beforeRouteEnter: generateMiddlewares([ 'isAuthenticated' ]),
+	setup() {
 		useRouteMeta('Stranerd Connect', { back: true })
 		const router = useRouter()
 		const { searchTerm, search } = useSearch()
@@ -104,7 +104,7 @@ export default defineComponent({
 		searchTerm.value = ''
 		const searchUsers = async () => {
 			closeModal()
-			await router.push(`/search/users?search=${searchTerm.value}`)
+			await router.push(`/search/users?search=${ searchTerm.value }`)
 			await search()
 		}
 		return {
@@ -116,7 +116,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	.modal-class {
-		--max-width: calc(100vw - 2rem);
-	}
+.modal-class {
+	--max-width: calc(100vw - 2rem);
+}
 </style>

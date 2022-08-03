@@ -4,10 +4,9 @@
 			<IonSearchbar v-model.trim="search" placeholder="Search" type="search" />
 		</div>
 		<BlockLoading v-if="loading" />
-		<router-link v-if="!loading && !error && groups.length === 0" to="/classes">
-			<EmptyState :info="search ? 'No results' : 'Join a class to have discussions'"
-				class="border-bottom-line py-6" />
-		</router-link>
+		<EmptyState v-if="!loading && !error && groups.length === 0"
+			:info="search ? 'No results' : 'Join a class to have discussions'"
+			class="border-bottom-line py-6" />
 		<MetaBlock v-for="group in groups" :key="group.key" :hasAvatar="true"
 			:metas="group.values"
 			:photo="classes.find((c) => c.id === group.key)?.photo"
@@ -26,7 +25,7 @@ import ChatMetasListCard from '@app/components/messaging/chatMetas/ChatMetasList
 export default defineComponent({
 	name: 'ChatMetasList',
 	components: { MetaBlock, ChatMetasListCard },
-	setup () {
+	setup() {
 		const { classes } = useUserClassList()
 		const { groups, connects, unRead, error, loading, search } = useChatMetas()
 		return { classes, search, groups, connects, unRead, error, loading }

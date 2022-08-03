@@ -3,12 +3,12 @@
 		<IonToolbar class="px-4 lg:px-6 border-bottom-line min-h-[4rem] flex items-center justify-center">
 			<div class="flex items-center justify-between lg:gap-16 py-2">
 				<router-link class="hidden lg:inline-block" to="/">
-					<img alt="" src="@/assets/images/logo/logo.svg">
+					<Logo />
 				</router-link>
 				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
 					class="text-base text-headerText lg:hidden"
 					defaultHref="/dashboard" text="" />
-				<IonText class="font-bold text-xl lg:hidden">
+				<IonText class="font-bold text-xl lg:hidden truncate max-w-[240px]">
 					{{ $route.meta.routeName ?? 'Stranerd' }}
 				</IonText>
 				<Search class="flex-grow hidden lg:flex" />

@@ -1,5 +1,5 @@
 <template>
-	<router-link :to="`/users/${user.id}`" class="flex items-center card-padding">
+	<router-link :to="`/users/${user.id}`" class="flex items-center card card-padding">
 		<Avatar :id="user.id" :name="user.bio.fullName" :size="24" :src="user.bio.photo" />
 		<IonText class="flex gap-1 items-center">
 			<span>{{ user.bio.fullName }}</span>
@@ -64,7 +64,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup (props) {
+	setup(props) {
 		const { id } = useAuth()
 		const {
 			loading, error, admins, tutors, members,

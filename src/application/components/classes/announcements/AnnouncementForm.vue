@@ -20,8 +20,6 @@
 			<DisplayError :error="factory.errors.body" />
 		</div>
 
-		<div class="border-bottom-line" />
-
 		<div class="flex justify-between items-center">
 			<IonLabel>Reminder <span class="font-normal">(optional)</span></IonLabel>
 			<IonIcon v-if="factory.reminder !== null" :icon="trashBinOutline" class="text-danger"
@@ -79,7 +77,7 @@ export default defineComponent({
 			default: () => ({})
 		}
 	},
-	setup () {
+	setup() {
 		const { adminClasses } = useUserClassList()
 		return { adminClasses, addOutline, trashBinOutline }
 	}

@@ -1,20 +1,21 @@
 <template>
-	<div class="flex flex-col">
+	<div class="flex flex-col lg:gap-6">
 		<div v-for="({ name, users }) in [
 			...(classInst.admins.includes(id) ? [{ name: 'Add Users', users }, { name: 'Requests', users: requests }] : []),
 			{ name: 'Admin', users: admins },
 			{ name: 'Members', users: members }
-		]" :key="name" class="flex flex-col py-2 border-bottom-line">
-			<div class="flex gap-4 items-center p-4">
+		]" :key="name" class="flex flex-col border-bottom-line">
+			<div class="flex gap-4 items-center p-4 lg:px-0">
 				<IonText class="font-bold capitalize truncate w-full">{{ name }}</IonText>
 				<!-- <span>
 					<IonIcon :class="{'rotate-90': show[index]}" :icon="chevronForwardOutline" />
 				</span> -->
 			</div>
-			<div class="flex flex-col">
-				<form class="card-padding !py-0 lg:p-0" @submit.prevent="search" @reset.prevent="reset">
-					<IonSearchbar v-if="name === 'Add Users'" v-model="detail"
-						placeholder="Enter email or name to add user" />
+			<div class="flex flex-col lg:gap-4">
+				<form v-if="name === 'Add Users'" :class="{'mb-4 lg:mb-0': !users.length }"
+					class="card-padding !py-0 lg:p-0"
+					@submit.prevent="search" @reset.prevent="reset">
+					<IonSearchbar v-model="detail" placeholder="Enter email or name to add user" />
 				</form>
 				<ClassMember v-for="user in users" :key="user.hash" :classInst="classInst" :user="user" />
 			</div>
@@ -41,7 +42,7 @@ export default defineComponent({
 		}
 	},
 	components: { ClassMember },
-	setup (props) {
+	setup(props) {
 		const { id } = useAuth()
 		const show = ref([] as boolean[])
 		const { loading, error, admins, tutors, members, requests } = useClassMembersList(props.classInst)

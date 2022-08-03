@@ -54,7 +54,7 @@ import { useRoute } from 'vue-router'
 export default defineComponent({
 	name: 'ChatsWrapper',
 	components: { MessagingPanel, ChatsList, ChatForm },
-	setup () {
+	setup() {
 		const { id } = useAuth()
 		const route = useRoute()
 		const { to, classId } = route.params as { to: string, classId: string }

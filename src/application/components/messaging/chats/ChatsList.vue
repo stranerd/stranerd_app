@@ -2,9 +2,9 @@
 	<div class="flex flex-col h-full max-h-full">
 		<EmptyState v-if="!loading && chats.length === 0" class="h-full flex items-center"
 			info="No messages found. Send a message now" />
-		<div v-chat-scroll class="flex flex-col gap-3 overflow-y-auto hide-scrollbar"
+		<div v-chat-scroll class="flex flex-col gap-6 overflow-y-auto hide-scrollbar"
 			@scroll-top="() => hasMore && fetchOlderChats()">
-			<div v-for="date in chats" :key="date.key" class="flex flex-col gap-6">
+			<div v-for="date in chats" :key="date.key" class="flex flex-col gap-4">
 				<span class="w-full text-center text-sm">{{ formatTime(date.key, true) }}</span>
 				<ChatsListCard v-for="chat in date.values" :key="chat.hash"
 					:chat="chat" />
@@ -28,7 +28,7 @@ export default defineComponent({
 			type: String
 		}
 	},
-	setup (props) {
+	setup(props) {
 		const { loading, error, hasMore, chats, fetchOlderChats } = useChats(props.to)
 		return { loading, error, hasMore, chats, fetchOlderChats, formatTime }
 	}

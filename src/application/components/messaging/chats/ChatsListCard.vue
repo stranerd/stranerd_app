@@ -1,7 +1,6 @@
 <template>
 	<div class="flex gap-2.5 items-start w-full">
-		<Avatar :id="chat.from.id" :name="chat.from.bio.fullName" :size="24"
-			:src="chat.from.bio.photo" />
+		<Avatar :id="chat.from.id" :name="chat.from.bio.fullName" :size="36" :src="chat.from.bio.photo" />
 		<div class="min-w-[25%] max-w-[100%] lg:max-w-[55%] rounded-t-xl flex flex-col gap-1">
 			<span class="flex gap-1 items-center">
 				<span :class="{ 'text-info': chat.from.id === id }" class="font-bold">
@@ -46,7 +45,7 @@ export default defineComponent({
 			type: ChatEntity
 		}
 	},
-	setup (props) {
+	setup(props) {
 		const { id } = useAuth()
 		useChat(props.chat)
 		return {

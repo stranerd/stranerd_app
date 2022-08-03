@@ -2,7 +2,7 @@
 	<ClassWrapper :hideTitle="true">
 		<template v-slot="{ classInst }">
 			<div>
-				<div class="!gap-4 card-padding lg:px-0 flex flex-col border-bottom-line">
+				<div class="px-4 py-6 gap-4 lg:p-0 flex flex-col border-bottom-line">
 					<div class="flex gap-4 items-start">
 						<Avatar :name="classInst.name" :size="64" :src="classInst.photo" />
 						<div class="flex flex-col w-full">
@@ -20,7 +20,7 @@
 					<IonText class="text-secondaryText">{{ classInst.description }}</IonText>
 				</div>
 
-				<div class="flex flex-col card-padding text-secondaryText border-bottom-line">
+				<div class="flex flex-col card-padding lg:px-0 text-secondaryText border-bottom-line">
 					<template v-if="classInst.admins.includes(id)">
 						<a class="flex gap-4 items-center py-2"
 							@click="() => openClassEditModal(classInst, $router, true)">
@@ -35,6 +35,7 @@
 						</div>
 					</Share>
 				</div>
+
 				<ClassMembers :key="classInst.hash" :classInst="classInst" />
 			</div>
 		</template>

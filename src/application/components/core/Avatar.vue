@@ -24,10 +24,10 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import { Media, UploadedFile } from '@modules/core'
-import { DEFAULT_PROFILE_PHOTO } from '@utils/constants'
 import { cameraOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 
+const DEFAULT_PROFILE_PHOTO = '/images/avatars/user_profile.svg'
 export default defineComponent({
 	name: 'Avatar',
 	props: {
@@ -56,13 +56,13 @@ export default defineComponent({
 			default: false
 		}
 	},
-	setup (props, { emit }) {
+	setup(props, { emit }) {
 		const source = computed({
 			get: () => typeof props.src?.link === 'string' ? props.src.link : false,
 			set: () => {
 			}
 		})
-		const catchPhoto = useFileInputCallback(async ([file]) => emit('photo', file))
+		const catchPhoto = useFileInputCallback(async ([ file ]) => emit('photo', file))
 		return { source, DEFAULT_PROFILE_PHOTO, cameraOutline, catchPhoto }
 	}
 })

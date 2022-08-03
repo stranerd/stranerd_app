@@ -120,7 +120,7 @@
 						</div>
 					</div>
 					<p class="w-full text-center my-10">
-						© 2021 | Stranerd LLC. All rights reserved.
+						© {{ new Date().getFullYear() }} | Stranerd LLC. All rights reserved.
 					</p>
 				</div>
 			</div>
@@ -134,7 +134,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'LandingFooter',
-	setup () {
+	setup() {
 		return {
 			logoInstagram, logoTwitter, logoFacebook, logoLinkedin
 		}
