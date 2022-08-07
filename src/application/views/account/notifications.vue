@@ -1,10 +1,9 @@
 <template>
 	<DefaultLayout>
-		<div class="showcase-flex">
-			<EmptyState
-				v-if="!loading && !error && !notifications.length"
-				info="You have no notifications yet"
-			/>
+		<div class="showcase-flex gap-4 flex-1 h-full">
+			<EmptyData v-if="!loading && !error && !notifications.length"
+				sub="Keep in touch! Notifications about your activity will show up here."
+				title="No notifications yet" />
 			<NotificationsListCard
 				v-for="notification in notifications"
 				:key="notification.hash" :notification="notification"

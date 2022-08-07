@@ -4,7 +4,7 @@
 		<p class="text-lg font-bold">No notes</p>
 		<span class="text-center ">Notes will show up here.</span>
 		<router-link to="/study/notes/create">
-			<IonButton class="btn-outline">Create a flashcard</IonButton>
+			<IonButton class="btn-outline">Create a  note</IonButton>
 		</router-link>
 	</div>
 </template>
