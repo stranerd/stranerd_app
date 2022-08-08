@@ -1,8 +1,8 @@
 <template>
 	<DefaultLayout>
 		<div class="showcase-flex">
-			<div class="flex flex-col items-center text-center border-bottom-line card card-padding">
-				<img alt="connect illustration" src="@app/assets/images/connect.svg">
+			<div class="flex flex-col items-center text-center border-bottom-line card-padding">
+				<img alt="" src="@app/assets/images/connect.svg">
 				<IonText class="text-xl px-5 mt-5">An easy way to work with students from other schools.</IonText>
 				<IonText class="text-secondaryText">
 					Stranerd connect makes communicating and collaborating with students from other schools easier.
@@ -12,14 +12,18 @@
 					See how Stranerd Connect works
 				</IonButton>
 			</div>
-			<div class="flex flex-col !gap-4 card card-padding ">
-				<IonText class="font-bold text-center">How do you want to connect?</IonText>
-				<div class="flex gap-3">
+			<div class="w-full h-px bg-itemBg "></div>
+
+			<IonText class="font-bold text-center mt-5">How do you want to connect?</IonText>
+
+			<div class="flex flex-col !gap-4 card-padding w-full">
+
+				<div class="flex gap-3 w-full">
 					<div v-for="{ icon, title, sub, tab } in [
 							{ icon: personOutline, title: 'Student connect', sub: '1 on 1 discussion with any student.',tab: 1 },
 							{ icon: peopleOutline, title: 'Class connect', sub: 'Class to class discussion with any class.', tab: 2 },
 						]" :key="title"
-						class="flex flex-col text-center rounded-xl gap-4 items-center border border-itemBg p-4 cursor-pointer"
+						class="flex flex-col text-center rounded-xl gap-4 items-center border border-itemBg p-4 cursor-pointer flex-1"
 						@click="openModal(tab)">
 						<IonIcon :icon="icon" />
 						<div class="flex flex-col gap-1">
@@ -88,7 +92,7 @@ import { useRouter } from 'vue-router'
 export default defineComponent({
 	name: 'Connect',
 	beforeRouteEnter: generateMiddlewares([ 'isAuthenticated' ]),
-	setup() {
+	setup () {
 		useRouteMeta('Stranerd Connect', { back: true })
 		const router = useRouter()
 		const { searchTerm, search } = useSearch()

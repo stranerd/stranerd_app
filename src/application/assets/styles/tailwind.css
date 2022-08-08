@@ -103,11 +103,11 @@
 	}
 
 	.card {
-		@apply lg:rounded-xl lg:shadow-card lg:border lg:border-disabled;
+		@apply lg:rounded-xl lg:border lg:border-disabled;
 	}
 
 	.card-sm {
-		@apply rounded-xl shadow-card border border-disabled;
+		@apply rounded-xl border border-disabled;
 	}
 
 	.card-padding {

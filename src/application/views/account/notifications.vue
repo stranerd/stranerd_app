@@ -1,10 +1,9 @@
 <template>
 	<DefaultLayout>
-		<div class="showcase-flex">
-			<EmptyState
-				v-if="!loading && !error && !notifications.length"
-				info="You have no notifications yet"
-			/>
+		<div class="showcase-flex flex-1 h-full">
+			<EmptyData v-if="!loading && !error && !notifications.length"
+				sub="Keep in touch! Notifications about your activity will show up here."
+				title="No notifications yet" />
 			<NotificationsListCard
 				v-for="notification in notifications"
 				:key="notification.hash" :notification="notification"
@@ -25,7 +24,7 @@ import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AccountNotifications',
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
+	beforeRouteEnter: generateMiddlewares([ 'isAuthenticated' ]),
 	components: { NotificationsListCard },
 	setup () {
 		useRouteMeta('Notifications', { back: true })
