@@ -28,7 +28,7 @@
 		</template>
 		<ChatsList v-if="chatMeta && chatMeta.members.includes(id)" :to="to" class="py-1 px-4" />
 		<div v-else-if="!loading" class="h-full flex flex-col gap-4 justify-center items-center">
-			<p class="text-2xl">You cant access this chat</p>
+			<p class="text-2xl font-light">You cant access this chat</p>
 			<router-link to="/messages">
 				<IonButton class="btn-outline">
 					Back To Messages
@@ -54,7 +54,7 @@ import { useRoute } from 'vue-router'
 export default defineComponent({
 	name: 'ChatsWrapper',
 	components: { MessagingPanel, ChatsList, ChatForm },
-	setup() {
+	setup () {
 		const { id } = useAuth()
 		const route = useRoute()
 		const { to, classId } = route.params as { to: string, classId: string }

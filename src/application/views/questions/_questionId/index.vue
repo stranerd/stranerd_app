@@ -3,14 +3,14 @@
 		<template v-slot:panel>
 			<QuestionsPanel />
 		</template>
-		<div class="flex flex-col lg:gap-8">
+		<div class="flex flex-col lg:gap-8 h-full">
 			<BlockLoading v-if="loading" />
 			<template v-else-if="question">
 				<QuestionPageCard :question="question" class="border-bottom-line" />
 				<AnswersList v-if="isSubscribed" :question="question" />
 				<UnsubscribedAnswersList v-else :question="question" />
 			</template>
-			<EmptyState v-else info="Question Not Found" />
+			<NotFound v-else title="Question Not Found" />
 		</div>
 	</DefaultLayout>
 </template>

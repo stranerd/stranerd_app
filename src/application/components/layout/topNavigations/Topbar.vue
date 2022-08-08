@@ -7,7 +7,7 @@
 				</router-link>
 				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
 					class="text-base text-headerText lg:hidden"
-					defaultHref="/dashboard" text="" />
+					defaultHref="/dashboard" text="" mode="ios" />
 				<IonText class="font-bold text-xl lg:hidden truncate max-w-[240px]">
 					{{ $route.meta.routeName ?? 'Stranerd' }}
 				</IonText>

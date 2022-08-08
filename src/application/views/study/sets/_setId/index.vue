@@ -1,8 +1,9 @@
 <template>
 	<DefaultLayout>
-		<div>
-			<SetView v-if="set" :key="set.hash" :set="set" />
+		<div class="h-full flex flex-col">
 			<BlockLoading v-if="loading" />
+			<SetView v-else-if="set" :key="set.hash" :set="set" />
+			<NotFound v-else title="Folder not found" />
 		</div>
 	</DefaultLayout>
 </template>

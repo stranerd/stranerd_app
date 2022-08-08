@@ -13,13 +13,13 @@
 			<IonInput v-model="factory.title" placeholder="Title" style="--background: transparent;" />
 		</div>
 
-		<IonTextarea v-model="factory.content" class="flex-grow border-bottom-line" />
+		<IonTextarea v-model="factory.content" class="flex-1 border-bottom-line" />
 
-		<div class="flex items-center justify-center p-4 gap-12 text-xl text-secondaryText">
-			<IonIcon :icon="imageOutline" />
-			<IonIcon :icon="listOutline" />
-			<IonIcon :icon="textOutline" />
-			<IonIcon :icon="trashBinOutline" class="text-danger" />
+		<div class="p-4 lg:p-0">
+			<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full" @click="submit()">
+				<SpinLoading v-if="loading" />
+				<slot v-else name="buttonTitle">Submit</slot>
+			</IonButton>
 		</div>
 	</form>
 </template>
@@ -27,7 +27,6 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { NoteFactory } from '@modules/study'
-import { imageOutline, listOutline, textOutline, trashBinOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'NoteForm',
@@ -48,26 +47,23 @@ export default defineComponent({
 			type: String,
 			required: true
 		}
-	},
-	setup () {
-		return { imageOutline, listOutline, textOutline, trashBinOutline }
 	}
 })
 </script>
 
 <style lang="scss" scoped>
-	ion-input, ion-select, ion-textarea {
-		border-radius: 0;
+ion-input, ion-select, ion-textarea {
+	border-radius: 0;
 
-		&:focus-within {
-			outline-color: transparent !important;
-		}
+	&:focus-within {
+		outline-color: transparent !important;
 	}
+}
 
-	ion-input, ion-textarea {
-		--background: transparent !important;
-		background: transparent !important;
-		--padding-top: 1.5rem !important;
-		--padding-bottom: 1.5rem !important;
-	}
+ion-input, ion-textarea {
+	--background: transparent !important;
+	background: transparent !important;
+	--padding-top: 1.5rem !important;
+	--padding-bottom: 1.5rem !important;
+}
 </style>

@@ -1,18 +1,10 @@
 <template>
 	<DefaultLayout>
-		<div v-if="test">
-			<div
-				class="flex items-center md:justify-between justify-center w-full lg:w-8/12 p-4 mx-auto text-lg border-bottom-line">
-				<IonText class="font-bold hidden md:block capitalize">
-					Results
-				</IonText>
-				<IonText class="text-secondaryText text-center capitalize">
-					{{ test.name }}
-				</IonText>
-			</div>
-			<TestResults v-if="test" :test="test" class="lg:w-8/12 w-full mx-auto" />
+		<div class="h-full flex flex-col">
+			<PageLoading v-if="loading" />
+			<TestResults v-else-if="test" :test="test" />
+			<NotFound v-else title="Test not found" />
 		</div>
-		<PageLoading v-if="loading" />
 	</DefaultLayout>
 </template>
 
@@ -27,7 +19,7 @@ import { useRouteMeta } from '@app/composable/core/states'
 export default defineComponent({
 	name: 'StudyTestsTestIdResults',
 	components: { TestResults },
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
+	beforeRouteEnter: generateMiddlewares([ 'isAuthenticated' ]),
 	setup () {
 		useRouteMeta('Results', { back: true })
 		const { testId } = useRoute().params

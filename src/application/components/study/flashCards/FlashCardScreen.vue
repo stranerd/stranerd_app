@@ -1,29 +1,32 @@
 <template>
-	<div id="screen" class="px-4">
-		<Swipe :key="page" :class="[isFullscreen ? 'flex-grow' : '']" @swipeLeft="increase" @swipeRight="decrease">
-			<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full h-full text-xl']"
-				@click="flipped = !flipped">
-				<div class="front w-full">
-					<section v-if="!flipped"
-						class="h-[48vh] overflow-y-auto flex text-center custom-shadow p-4 mx-auto">
-						<DisplayHtml :html="flashCard.set[page].question" class="w-full my-auto overflow-y-auto" />
-					</section>
-				</div>
+	<div id="screen" class="flex flex-col">
+		<div class="flex-1 flex flex-col">
+			<Swipe :key="page" :class="[isFullscreen ? 'flex-grow' : '']" class="px-4 my-auto" @swipeLeft="increase"
+				@swipeRight="decrease">
+				<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full h-full text-xl']"
+					@click="flipped = !flipped">
+					<div class="front w-full">
+						<section v-if="!flipped"
+							class="h-[48vh] overflow-y-auto flex text-center custom-shadow p-4 mx-auto">
+							<DisplayHtml :html="flashCard.set[page].question" class="w-full my-auto overflow-y-auto" />
+						</section>
+					</div>
 
-				<div class="back bg-bodyBg w-full">
-					<section v-if="flipped"
-						class="h-[48vh] overflow-y-auto flex text-center custom-shadow p-4 mx-auto">
-						<DisplayHtml :html="flashCard.set[page].answer" class="w-full my-auto" />
-					</section>
+					<div class="back w-full">
+						<section v-if="flipped"
+							class="h-[48vh] overflow-y-auto flex text-center custom-shadow p-4 mx-auto">
+							<DisplayHtml :html="flashCard.set[page].answer" class="w-full my-auto" />
+						</section>
+					</div>
 				</div>
-			</div>
-		</Swipe>
+			</Swipe>
+		</div>
 
-		<div class="bg-itemBg transition-all absolute inset-x-0 z-10 bottom-[64px]">
+		<div class="bg-itemBg">
 			<div :style="`width:${percentage}%;`" class="h-1 bg-primaryBg" />
 		</div>
 		<div
-			class="w-full flex items-center absolute inset-x-0 bottom-0 justify-between mx-auto gap-4 text-secondaryText p-6">
+			class="w-full flex items-center justify-between gap-4 text-secondaryText p-4">
 			<IonIcon :icon="isPlaying ? pauseOutline : playOutline" @click="isPlaying ? pauseCard() : playCard()" />
 			<div class="flex items-center gap-4">
 				<IonIcon :icon="chevronBackOutline" @click="decrease" />
@@ -125,45 +128,46 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	.custom-shadow {
-		box-shadow: 0px 0px 50px rgba(77, 92, 111, 0.1);
-		border-radius: 12px;
-	}
+.custom-shadow {
+	box-shadow: 0px 0px 50px rgba(77, 92, 111, 0.1);
+	border-radius: 12px;
+}
 
-	.divx {
-		border-radius: 12px;
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
+.divx {
+	border-radius: 12px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 
-	.divx > .front, .divx > .back {
-		text-align: center;
-		border-radius: 12px;
-		transition-duration: 0.7s;
-		transition-property: transform, opacity;
-		box-shadow: 0 0 10px rgba(22, 37, 101, 0.1);
-	}
+.divx > .front, .divx > .back {
+	text-align: center;
+	background: $color-bodyBg;
+	border-radius: 12px;
+	transition-duration: 0.7s;
+	transition-property: transform, opacity;
+	box-shadow: 0 0 10px rgba(22, 37, 101, 0.1);
+}
 
-	.vertical > .front {
-		opacity: 1;
-		transform: rotateX(0deg);
-	}
+.vertical > .front {
+	opacity: 1;
+	transform: rotateX(0deg);
+}
 
-	.vertical > .back {
-		opacity: 0;
-		transform: rotateX(180deg);
-	}
+.vertical > .back {
+	opacity: 0;
+	transform: rotateX(180deg);
+}
 
-	.vertical-flipped > .front {
-		opacity: 0;
-		transform: rotateX(180deg);
-	}
+.vertical-flipped > .front {
+	opacity: 0;
+	transform: rotateX(180deg);
+}
 
-	.vertical-flipped > .back {
-		opacity: 1;
-		transform: rotateX(0deg);
-	}
+.vertical-flipped > .back {
+	opacity: 1;
+	transform: rotateX(0deg);
+}
 </style>

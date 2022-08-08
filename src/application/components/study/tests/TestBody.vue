@@ -72,7 +72,7 @@ export default defineComponent({
 			})
 			if (!res) return
 			await endTest()
-			if (props.test.isTimed) await router.push(`/study/tests/${props.test.id}/results`)
+			if (props.test.isTimed) await router.push(`/study/tests/${ props.test.id }/results`)
 			else await router.push('/dashboard')
 		}
 		return {

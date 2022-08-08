@@ -5,7 +5,7 @@
 		</template>
 		<NoteForm :error="error" :factory="factory" :loading="loading" :submit="createNote">
 			<template v-slot:buttonText>
-				Create Note
+				Save
 			</template>
 		</NoteForm>
 	</Modal>
