@@ -1,29 +1,23 @@
 <template>
 	<IonHeader class="w-full flex flex-col z-10 nav-shadow" role="navigation">
-		<div class="md:px-16 p-4 hidden lg:flex items-center justify-between">
-			<router-link class="hidden lg:block" to="/">
-				<Logo :secondary="true" />
-			</router-link>
-			<div class="gap-8 lg:flex hidden items-center">
-				<router-link class="link-custom px-4" to="/">
-					Home
-				</router-link>
-				<router-link class="link-custom px-4" to="/questions">
-					Questions
-				</router-link>
-				<router-link class="link-custom px-4" to="/study">
-					Study
-				</router-link>
-
-				<Search class="flex-grow min-w-[20rem]" />
+		<div class="container lg:flex mx-auto items-center justify-between p-4 hidden">
+			<div class="flex font-bold items-center gap-4">
+				<Logo/>	
+				<span class="text-2xl ">Stranerd</span>
 			</div>
-			<div class="gap-8 lg:flex hidden">
-				<router-link class="btn !px-10 rounded-xl" to="/auth/signup">
-					Sign Up
-				</router-link>
-				<router-link class="btn !px-10 rounded-xl"
+		
+			<div class="flex items-center justify-between gap-12">
+				<span>Home</span>
+				<span>Features</span>
+				<span>About</span>
+			</div>
+			<div class="flex items-center justify-between gap-8 px-3">
+				<router-link class="  rounded-md border border-primaryBg text-primaryBg font-bold px-4 py-1.5"
 					to="/auth/signin">
 					Log In
+				</router-link>
+				<router-link class=" rounded-md font-bold bg-primaryBg px-4 py-1.5 text-white" to="/auth/signup">
+					Sign Up
 				</router-link>
 			</div>
 		</div>
@@ -38,11 +32,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Search from '@app/components/search/Search.vue'
 
 export default defineComponent({
 	name: 'HomeTopNavigation',
-	components: { Search }
 })
 </script>
 
