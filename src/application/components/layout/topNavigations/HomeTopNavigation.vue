@@ -22,7 +22,7 @@
 			</div>
 		</div>
 
-		<IonToolbar class="lg:hidden px-4 border-0 h-12 flex items-center justify-center">
+		<IonToolbar class="hidden  px-4 border-0 h-12  items-center justify-center">
 			<div class="flex items-center justify-center font-bold text-base">
 				<span>{{ $route.meta.routeName ?? 'Stranerd' }}</span>
 			</div>

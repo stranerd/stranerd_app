@@ -3,7 +3,8 @@
 		<div class="flex items-center justify-center">
 		
 			<div class="flex flex-col items-center justify-center  lg:w-6/12 sm:w-8/12 w-full p-4">
-				<h1 class="md:block text-5xl hidden font-extrabold mb-8 text-center">Forgot Password?</h1>
+				<img src="@/assets/images/auth/signup.svg" alt="hero" class="mr-auto md:hidden mt-6">
+				<h1 class="md:block md:text-3xl text-2xl text-start w-full font-extrabold mb-8 md:mt-16 mt-8 md:text-center">Forgot Password?</h1>
 				<form class="h-[65%] w-full md:w-[70%] flex flex-col gap-4" @submit.prevent="resetPassword">
 					<div class="flex flex-col">
 						<IonLabel class="font-bold mb-2">Email</IonLabel>
