@@ -19,9 +19,9 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { videocamOutline } from 'ionicons/icons'
-import { formatDuration } from '@utils/dates'
 import { Media } from '@modules/core'
 import { openViewFile } from '@app/composable/meta/media'
+import { formatDuration } from '@utils/commons'
 
 export default defineComponent({
 	name: 'VideosList',
@@ -46,8 +46,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	video {
-		aspect-ratio: 16 / 10;
-		width: 100%;
-	}
+video {
+	aspect-ratio: 16 / 10;
+	width: 100%;
+}
 </style>

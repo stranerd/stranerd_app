@@ -1,5 +1,3 @@
-import { formatNumber } from '@utils/commons'
-
 export enum TIMES {
 	minute = 60,
 	hour = 60 * 60,
@@ -68,21 +66,4 @@ export const getDigitalTime = (timeInSecs: number) => {
 	if (hours) hr = `${hours < 10 ? '0' + hours : hours}:`
 	const rest = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`
 	return hr + rest
-}
-
-export const formatDuration = (duration: number) => {
-	duration = duration < 0 ? 0 : duration
-	const hours = Math.floor(duration / 3600)
-	const minutes = Math.floor((duration - hours * 3600) / 60)
-	const seconds = Math.floor(duration - (hours * 3600) - (minutes * 60))
-	const paths = [minutes, seconds]
-	if (hours > 0) paths.unshift(hours)
-	return paths.map((x) => x.toString().padStart(2, '0')).join(':')
-}
-
-export const formatFileSize = (size: number) => {
-	const ranges = [{ val: -1, key: 'b' }, { val: 1024, key: 'kb' },
-		{ val: 1024 * 1024, key: 'mb' }, { val: 1024 * 1024 * 1024, key: 'gb' }]
-	const range = ranges.find(({ val }) => size >= val)
-	return `${formatNumber(size / (range?.val ?? -1))}${range?.key ?? 'b'}`
 }

@@ -12,7 +12,7 @@
 import { defineComponent } from 'vue'
 import { useFlashCard } from '@app/composable/study/flashCards'
 import { useRoute } from 'vue-router'
-import FlashCardDetails from '@root/application/components/study/flashCards/FlashCardDetails.vue'
+import FlashCardDetails from '@app/components/study/flashCards/FlashCardDetails.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
