@@ -17,6 +17,7 @@ export interface ClassToModel {
 		institutionId: string
 		facultyId: string
 		departmentId: string
+		year: number
 	}
 	description: string
 	courses: string[]

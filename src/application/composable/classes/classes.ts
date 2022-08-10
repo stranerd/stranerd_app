@@ -185,10 +185,16 @@ export const useCreateClass = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const classInst = await ClassesUseCases.add(factory.value)
-				await setMessage('Class created successfully')
+				const existingClass = await ClassesUseCases.findBySchool(factory.value.departmentId, factory.value.year)
+				if (existingClass) {
+					await setMessage('This class already exists! Redirecting to class now!')
+					await router.push(`/classes/${existingClass.id}`)
+				} else {
+					const classInst = await ClassesUseCases.add(factory.value)
+					await setMessage('Class created successfully')
+					await router.push(`/classes/${classInst.id}`)
+				}
 				factory.value.reset()
-				await router.push(`/classes/${classInst.id}`)
 			} catch (error) {
 				await setError(error)
 			}

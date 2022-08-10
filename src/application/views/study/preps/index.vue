@@ -92,6 +92,7 @@ import { useTestPrepList } from '@app/composable/study/testPreps'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
 import { PastQuestionType } from '@modules/school'
+import { years } from '@utils/constants'
 
 export default defineComponent({
 	name: 'StudyPreps',
@@ -102,7 +103,6 @@ export default defineComponent({
 		const tab = ref('MCQs')
 		const isOpen = ref(false)
 		const { filters, searchValue, searchMode, searchResults, search } = useTestPrepList()
-		const years = new Array(new Date().getFullYear() - 1980).fill(0).map((_, i, arr) => arr.length - i + 1980)
 		const { institutions } = useInstitutionList()
 		const { courses, fetchGeneralCourses } = useCourseList()
 		const filteredCourses = computed(() => courses.value.filter((c) => c.institutionId === filters.institutionId))

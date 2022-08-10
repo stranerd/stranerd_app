@@ -1,12 +1,13 @@
-import { isArrayOfX, isFile, isLongerThan, isLongerThanX, isString } from '@stranerd/validate'
+import { isArrayOfX, isFile, isLongerThan, isLongerThanX, isNumber, isString } from '@stranerd/validate'
 import { BaseFactory, Media, UploadedFile } from '@modules/core'
 import { ClassEntity } from '../entities/class'
 import { ClassToModel } from '../../data/models/class'
+import { years } from '@utils/constants'
 
 type Content = Media | UploadedFile | null
 type Keys = {
 	name: string, description: string, courses: string[], photo: Content,
-	departmentId: string, facultyId: string, institutionId: string
+	departmentId: string, facultyId: string, institutionId: string, year: number
 }
 
 export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
@@ -15,6 +16,7 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 		departmentId: { required: true, rules: [isString, isLongerThanX(0)] },
 		facultyId: { required: true, rules: [isString, isLongerThanX(0)] },
 		institutionId: { required: true, rules: [isString, isLongerThanX(0)] },
+		year: { required: true, rules: [isNumber] },
 		description: { required: true, rules: [isString, isLongerThanX(2)] },
 		courses: {
 			required: true,
@@ -28,7 +30,7 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 	constructor () {
 		super({
 			name: '', description: '', courses: [], photo: null,
-			departmentId: '', facultyId: '', institutionId: ''
+			departmentId: '', facultyId: '', institutionId: '', year: new Date().getFullYear()
 		})
 	}
 
@@ -88,6 +90,18 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 		this.set('institutionId', value)
 	}
 
+	get year () {
+		return this.values.year
+	}
+
+	set year (value: number) {
+		this.set('year', value)
+	}
+
+	get years () {
+		return years.map((i) => ({ value: i, label: `${i}/${i + 1}` }))
+	}
+
 	addCourse = (value: string) => this.set('courses', [...new Set([...this.values.courses, value])])
 
 	removeCourse = (value: string) => this.set('courses', this.values.courses.filter((course) => course !== value))
@@ -109,13 +123,14 @@ export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 				institutionId,
 				facultyId,
 				departmentId,
+				year,
 				description,
 				courses,
 				photo
 			} = this.validValues
 			return {
 				name, description, courses, photo: photo as Media,
-				school: { institutionId, facultyId, departmentId }
+				school: { institutionId, facultyId, departmentId, year }
 			}
 		} else {
 			throw new Error('Validation errors')
