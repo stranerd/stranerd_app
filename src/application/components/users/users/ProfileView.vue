@@ -17,6 +17,7 @@
 				{ label: 'Stats', route: '/account/stats', icon: gridOutline },
 				{ label: 'My Library', route: '/account/files', icon: libraryOutline },
 				{ label: 'Saved', route: '/account/sets', icon: bookmarkOutline },
+				{ label: 'Wallet', route: '/account/wallet', icon: walletOutline },
 				{ label: 'Settings', route: '/settings', icon: settingsOutline, hide:true },
 			]" :key="route" :class="[hide&&'md:hidden','flex gap-3 items-center']" :to="route">
 				<IonIcon :icon="icon" />
@@ -38,7 +39,8 @@ import {
 	helpCircleOutline,
 	libraryOutline,
 	readerOutline,
-	settingsOutline
+	settingsOutline,
+	walletOutline
 } from 'ionicons/icons'
 import UserPageCard from '@app/components/users/users/UserPageCard.vue'
 import { pluralize } from '@utils/commons'
@@ -51,7 +53,7 @@ export default defineComponent({
 		return {
 			id, user, wallet, pluralize,
 			gridOutline, helpCircleOutline, readerOutline, flashOutline, libraryOutline,
-			documentTextOutline, bookmarkOutline, settingsOutline, cartOutline
+			documentTextOutline, bookmarkOutline, settingsOutline, cartOutline, walletOutline
 		}
 	}
 })

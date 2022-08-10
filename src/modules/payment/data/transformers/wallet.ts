@@ -3,9 +3,9 @@ import { WalletEntity } from '../../domain/entities/wallet'
 
 export class WalletTransformer {
 	fromJSON (model: WalletFromModel) {
-		const { id, userId, balance, subscription, createdAt, updatedAt } = model
+		const { id, userId, balance, account, subscription, createdAt, updatedAt } = model
 		return new WalletEntity({
-			id, userId, balance, subscription, createdAt, updatedAt
+			id, userId, balance, account, subscription, createdAt, updatedAt
 		})
 	}
 

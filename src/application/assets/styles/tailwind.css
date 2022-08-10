@@ -95,7 +95,7 @@
 	}
 
 	.dot {
-		@apply h-[3px] w-[3px] text-[6px] rounded-full;
+		@apply h-[0.25rem] w-[0.25rem] text-[0.5rem] rounded-full;
 	}
 
 	.hasBg {

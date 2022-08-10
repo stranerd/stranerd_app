@@ -1,12 +1,13 @@
 <template>
 	<div class="modal-content">
-		<div class="p-6 py-8 md:p-8 flex flex-col text-secondaryText">
+		<div class="p-6 md:p-8 flex flex-col text-secondaryText">
 			<template v-if="user.id === id">
 				<router-link v-for="{ label, route, icon, hide } in [
-					{ label: 'Stats', route: '/account/stats', style: '', icon: gridOutline },
-					{ label: 'My Library', route: '/account/files', style: '', icon: libraryOutline },
-					{ label: 'Saved', route: '/account/sets', style: '', icon: bookmarkOutline },
-					{ label: 'Settings', route: '/settings', style: '', icon: settingsOutline, hide:true },
+					{ label: 'Stats', route: '/account/stats', icon: gridOutline },
+					{ label: 'My Library', route: '/account/files', icon: libraryOutline },
+					{ label: 'Saved', route: '/account/sets', icon: bookmarkOutline },
+					{ label: 'Wallet', route: '/account/wallet', icon: walletOutline },
+					{ label: 'Settings', route: '/settings', icon: settingsOutline, hide:true },
 				]" :key="route" :class="[hide&&'md:hidden','flex gap-4 py-4 items-center']" :to="route">
 					<IonIcon :icon="icon" />
 					<span>{{ label }}</span>
@@ -45,7 +46,8 @@ import {
 	libraryOutline,
 	linkOutline,
 	settingsOutline,
-	shareOutline
+	shareOutline,
+	walletOutline
 } from 'ionicons/icons'
 import { getProfileMenuUser } from '@app/composable/users/users'
 import { useAuth } from '@app/composable/auth/auth'
@@ -68,9 +70,22 @@ export default defineComponent({
 		const { connects, deleteConnect, loading: connectLoading } = useConnects()
 		const connect = computed(() => connects.value.find((c) => c.members.includes(id.value) && c.members.includes(user?.id as any)))
 		return {
-			user, id, isAdmin,
-			gridOutline, libraryOutline, bookmarkOutline, settingsOutline, createOutline, shareOutline, linkOutline,
-			verifiedLoading, verifyUser, connect, connectLoading, deleteConnect
+			user,
+			id,
+			isAdmin,
+			gridOutline,
+			libraryOutline,
+			bookmarkOutline,
+			settingsOutline,
+			createOutline,
+			shareOutline,
+			linkOutline,
+			walletOutline,
+			verifiedLoading,
+			verifyUser,
+			connect,
+			connectLoading,
+			deleteConnect
 		}
 	}
 })

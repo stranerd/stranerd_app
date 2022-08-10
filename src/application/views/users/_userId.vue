@@ -1,8 +1,8 @@
 <template>
 	<DefaultLayout>
-		<div class="h-full flex flex-col">
+		<div class="min-h-full flex flex-col">
 			<BlockLoading v-if="loading" />
-			<UserProfile v-else-if="user" :user="user" class="py-6 lg:pt-0" />
+			<UserProfile v-else-if="user" :user="user" class="py-6 lg:p-0" />
 			<NotFound v-else title="User not found" />
 		</div>
 	</DefaultLayout>
@@ -20,9 +20,9 @@ import UserProfile from '@app/components/users/users/UserProfile.vue'
 export default defineComponent({
 	name: 'UsersUserId',
 	components: { UserProfile },
-	beforeRouteEnter: generateMiddlewares([ async ({ to }) => {
+	beforeRouteEnter: generateMiddlewares([async ({ to }) => {
 		if (to.params.userId === useAuth().id.value) return '/account'
-	} ]),
+	}]),
 	setup () {
 		useRouteMeta('Profile', { back: true })
 		const { userId } = useRoute().params

@@ -35,12 +35,11 @@
 				</IonButton>
 			</FileInput>
 			<IonButton :disabled="loading || !factory.valid" class="w-full btn-primary" type="submit">
-				<IonIcon :icon="paperPlaneOutline" class="mr-4" />
+				<SpinLoading v-if="loading" class="mr-4" />
+				<IonIcon v-else :icon="paperPlaneOutline" class="mr-4" />
 				<slot name="buttonText">Submit</slot>
 			</IonButton>
 		</div>
-
-		<PageLoading v-if="loading" />
 	</form>
 </template>
 

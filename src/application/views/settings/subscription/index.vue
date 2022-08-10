@@ -4,7 +4,7 @@
 			<SettingsPanel />
 		</template>
 
-		<div class="flex flex-col lg:gap-8">
+		<div class="flex flex-col lg:gap-4">
 			<div class="flex flex-col border-bottom-line gap-4 p-4 lg:p-0">
 				<IonText>Current Plan</IonText>
 				<IonText class="text-xl font-bold capitalize">{{ plan?.name }}</IonText>
@@ -16,7 +16,7 @@
 				<IonIcon :icon="arrowForwardOutline" />
 			</router-link>
 
-			<CardsList class="border-bottom-line card-padding !lg:p-0" />
+			<CardsList class="border-bottom-line card-padding lg:p-0" />
 		</div>
 	</DefaultLayout>
 </template>

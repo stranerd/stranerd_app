@@ -1,6 +1,9 @@
 export enum Currencies {
-	NGN = 'NGN',
-	USD = 'USD'
+	NGN = 'NGN'
+}
+
+export enum CurrencyCountries {
+	NG = 'NG'
 }
 
 export enum TransactionStatus {
@@ -12,7 +15,8 @@ export enum TransactionStatus {
 
 export enum TransactionType {
 	NewCard = 'NewCard',
-	Subscription = 'Subscription'
+	Subscription = 'Subscription',
+	BestAnswer = 'BestAnswer'
 }
 
 type TransactionNewCard = {
@@ -24,7 +28,13 @@ type TransactionSubscription = {
 	subscriptionId: string
 }
 
-export type TransactionData = TransactionNewCard | TransactionSubscription
+type TransactionBestAnswer = {
+	type: TransactionType.BestAnswer
+	answerId: string
+	questionId: string
+}
+
+export type TransactionData = TransactionNewCard | TransactionSubscription | TransactionBestAnswer
 
 export type SubscriptionModel = {
 	active: boolean
@@ -32,10 +42,10 @@ export type SubscriptionModel = {
 		id: string
 		activatedAt: number
 		expiredAt: number
+		jobId: string
 	} | null
 	next: {
 		id: string
-		jobId: string
 		renewedAt: number
 	} | null
 	data: PlanData
@@ -50,3 +60,17 @@ export type PlanData = Record<PlanDataType, number>
 export type FlutterwaveSecrets = {
 	publicKey: string
 }
+
+export type Bank = {
+	id: number
+	name: string
+	code: string
+}
+
+export type AccountDetails = {
+	country: CurrencyCountries
+	number: string
+	bankCode: string
+	bankName: string
+}
+

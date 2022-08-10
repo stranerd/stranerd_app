@@ -249,20 +249,42 @@ ion-item {
 }
 
 .border-bottom-line {
-	@media (max-width: $md) {
-		border-bottom: $border;
+	border-bottom: $border;
+}
+
+.card.border-bottom-line, .card-sm.border-bottom-line {
+	@media (max-width: $lg) {
+		border-bottom: none;
 	}
 }
 
 .border-top-line {
-	@media (max-width: $md) {
-		border-top: $border;
+	border-top: $border;
+}
+
+.card.border-top-line, .card-sm.border-top-line {
+	@media (max-width: $lg) {
+		border-top: none;
 	}
 }
 
 .border-left-line {
-	@media (max-width: $md) {
-		border-left: $border;
+	border-left: $border;
+}
+
+.card.border-left-line, .card-sm.border-left-line {
+	@media (max-width: $lg) {
+		border-left: none;
+	}
+}
+
+.border-right-line {
+	border-right: $border;
+}
+
+.card.border-right-line, .card-sm.border-right-line {
+	@media (max-width: $lg) {
+		border-right: none;
 	}
 }
 
