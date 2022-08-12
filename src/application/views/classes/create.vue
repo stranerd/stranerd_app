@@ -16,7 +16,7 @@ import ClassForm from '@app/components/classes/classes/ClassForm.vue'
 export default defineComponent({
 	name: 'ClassesCreate',
 	components: { ClassForm },
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', 'isAccountVerified']),
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Create a class', { back: true })
 		const { createClass, factory, error, loading } = useCreateClass()

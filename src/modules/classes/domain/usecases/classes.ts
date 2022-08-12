@@ -89,6 +89,17 @@ export class ClassesUseCase {
 		return await this.repository.requestClass(id, request)
 	}
 
+	async getDepartmentClasses (departmentId?: string) {
+		const conditions: QueryParams = departmentId ? {
+			where: [{ field: 'school.departmentId', value: departmentId }],
+			all: true
+		} : {
+			sort: [{ field: 'createdAt', desc: true }],
+			limit: 5
+		}
+		return await this.repository.get(conditions)
+	}
+
 	async search (detail: string) {
 		const query: QueryParams = {
 			all: true, search: { value: detail, fields: searchFields }

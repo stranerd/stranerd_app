@@ -1,4 +1,4 @@
-import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
+import { computed, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
 import { Router, useRouter } from 'vue-router'
 import { ClassEntity, ClassesUseCases, ClassFactory, ClassUsers } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
@@ -12,7 +12,9 @@ import { useClassModal } from '@app/composable/core/modals'
 const global = {
 	classes: ref([] as ClassEntity[]),
 	fetched: ref(false),
-	searchTerm: ref(''),
+	searchMode: ref(false),
+	searchValue: ref(''),
+	searchResults: ref([] as ClassEntity[]),
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
@@ -23,6 +25,46 @@ const classGlobal = {} as Record<string, {
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler> & ReturnType<typeof useSuccessHandler>>
+
+export const useClassesList = () => {
+	const { user } = useAuth()
+	const fetchClasses = async () => {
+		await global.setError('')
+		try {
+			await global.setLoading(true)
+			const classes = await ClassesUseCases.getDepartmentClasses(user.value?.isCollege(user.value) ? user.value.school.departmentId : undefined)
+			classes.results.forEach((c) => addToArray(global.classes.value, c, (e) => e.id, (e) => e.name, true))
+			global.fetched.value = true
+		} catch (error) {
+			await global.setError(error)
+		}
+		await global.setLoading(false)
+	}
+
+	onMounted(async () => {
+		if (!global.fetched.value && !global.loading.value) await fetchClasses()
+	})
+
+	const search = async () => {
+		const searchValue = global.searchValue.value
+		if (!searchValue) return
+		global.searchMode.value = true
+		await global.setError('')
+		try {
+			await global.setLoading(true)
+			global.searchResults.value = await ClassesUseCases.search(searchValue)
+		} catch (error) {
+			await global.setError(error)
+		}
+		await global.setLoading(false)
+	}
+
+	watch(global.searchValue, () => {
+		if (!global.searchValue.value) global.searchMode.value = false
+	})
+
+	return { ...global, search }
+}
 
 export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) => {
 	const { id } = useAuth()
@@ -314,36 +356,6 @@ export const useEditClass = () => {
 	}
 
 	return { error, loading, factory, editClass }
-}
-
-export const useDeleteClass = (classId: string) => {
-	const { loading, setLoading } = useLoadingHandler()
-	const { error, setError } = useErrorHandler()
-	const { setMessage } = useSuccessHandler()
-	const router = useRouter()
-
-	const deleteClass = async () => {
-		await setError('')
-		const accepted = await Alert({
-			title: 'Are you sure you want to delete this class?',
-			confirmButtonText: 'Yes, delete'
-		})
-		if (accepted) {
-			await setLoading(true)
-			try {
-				await ClassesUseCases.delete(classId)
-				global.classes.value = global.classes.value
-					.filter((q) => q.id !== classId)
-				await setMessage('Class deleted successfully')
-				await router.push('/classes')
-			} catch (error) {
-				await setError(error)
-			}
-			await setLoading(false)
-		}
-	}
-
-	return { loading, error, deleteClass }
 }
 
 let viewedBy = null as { classInst: ClassEntity, views: Record<string, number> } | null

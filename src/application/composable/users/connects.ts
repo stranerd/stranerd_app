@@ -2,8 +2,9 @@ import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { ConnectEntity, ConnectsUseCases } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
-import { Alert } from '@utils/dialog'
+import { Alert, Notify } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
+import { useRouter } from 'vue-router'
 
 const global = {} as Record<string, {
 	connects: Ref<ConnectEntity[]>
@@ -12,7 +13,8 @@ const global = {} as Record<string, {
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler> & ReturnType<typeof useSuccessHandler>>
 
 export const useConnects = () => {
-	const { id } = useAuth()
+	const router = useRouter()
+	const { id, isSubscribed } = useAuth()
 	const userId = id.value
 	if (global[userId] === undefined) {
 		const listener = useListener(async () => {
@@ -62,6 +64,10 @@ export const useConnects = () => {
 	})
 
 	const createConnect = async (user: string) => {
+		if (!isSubscribed.value) {
+			await router.push('/settings/subscription/plans')
+			return await Notify({ title: 'You need an active subscription to connect with users!' })
+		}
 		await global[userId].setError('')
 		await global[userId].setLoading(true)
 		try {
