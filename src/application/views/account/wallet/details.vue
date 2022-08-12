@@ -1,8 +1,5 @@
 <template>
 	<DefaultLayout>
-		<template v-slot:panel>
-			<ProfilePanel />
-		</template>
 		<form v-if="editMode" class="flex flex-col gap-6 page-padding" @submit.prevent="updateAccount">
 			<div class="flex flex-col gap-2">
 				<IonLabel>Account number</IonLabel>
@@ -45,13 +42,11 @@
 import { defineComponent, ref } from 'vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
-import ProfilePanel from '@app/components/layout/panels/ProfilePanel.vue'
 import { useEditAccount } from '@app/composable/payment/wallets'
 import { createOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'AccountWalletDetails',
-	components: { ProfilePanel },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Account Details', { back: true })

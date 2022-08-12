@@ -14,8 +14,14 @@
 					</div>
 					<div :class="{'lg:px-8': !ignorePagePadding}" class="layout-page-main">
 						<slot name="content-top">
-							<div class="hidden lg:flex gap-4 justify-between items-center mb-4">
-								<IonText class="font-bold text-2xl">{{ $route.meta.routeName ?? 'Stranerd' }}</IonText>
+							<div class="hidden lg:flex gap-8 justify-between items-center mb-4">
+								<div class="flex gap-8 items-center">
+									<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
+										class="text-base" defaultHref="/dashboard" mode="ios" text="" />
+									<IonText class="font-bold text-2xl truncate max-w-[400px]">
+										{{ $route.meta.routeName ?? '' }}
+									</IonText>
+								</div>
 								<div>
 									<slot name="content-top-left" />
 								</div>
@@ -45,6 +51,7 @@ import Fab from '@app/components/layout/Fab.vue'
 import LeftSidebar from '@app/components/layout/sidebars/LeftSidebar.vue'
 import RightSidebar from '@app/components/layout/sidebars/RightSidebar.vue'
 import DashboardPanel from '@app/components/layout/panels/DashboardPanel.vue'
+import { arrowBackOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'DefaultLayout',
@@ -66,6 +73,9 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: { Topbar, BottomNav, Fab, LeftSidebar, RightSidebar, DashboardPanel }
+	components: { Topbar, BottomNav, Fab, LeftSidebar, RightSidebar, DashboardPanel },
+	setup () {
+		return { arrowBackOutline }
+	}
 })
 </script>
