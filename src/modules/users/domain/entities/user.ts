@@ -177,6 +177,12 @@ export class UserEntity extends BaseEntity {
 		return `/users/${this.id}`
 	}
 
+	get firstInstitution () {
+		if (!this.school) return null
+		if (this.school?.type === UserSchoolType.college) return this.school.institutionId
+		return this.school.exams.at(0)?.institutionId ?? null
+	}
+
 	isCollege (user: UserEntity): user is Omit<UserEntity, 'school'> & { school: CollegeType } {
 		return user.school?.type === UserSchoolType.college
 	}

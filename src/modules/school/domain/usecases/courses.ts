@@ -1,6 +1,7 @@
 import { ICourseRepository } from '../irepositories/icourse'
 import { CourseFactory } from '../factories/course'
-import { QueryParams } from '@modules/core'
+import { Conditions, QueryParams } from '@modules/core'
+import { PastQuestionType } from '@modules/school'
 
 export class CoursesUseCase {
 	private repository: ICourseRepository
@@ -35,6 +36,17 @@ export class CoursesUseCase {
 		return await this.repository.get(conditions)
 	}
 
+	async getFacultyCourses (facultyId: string, general: boolean) {
+		const conditions: QueryParams = {
+			where: [{ field: 'facultyId', value: facultyId }],
+			sort: [{ field: 'createdAt', desc: true }],
+			all: true
+		}
+		if (general) conditions.where!.push({ field: 'departmentId', value: null })
+
+		return await this.repository.get(conditions)
+	}
+
 	async getInstitutionCourses (institutionId: string, general: boolean) {
 		const conditions: QueryParams = {
 			where: [{ field: 'institutionId', value: institutionId }],
@@ -44,5 +56,11 @@ export class CoursesUseCase {
 		if (general) conditions.where!.push({ field: 'facultyId', value: null })
 
 		return await this.repository.get(conditions)
+	}
+
+	async search (search: string) {
+		const query: QueryParams = { all: true, search: { value: search, fields: ['name'] } }
+
+		return (await this.repository.get(query)).results
 	}
 }

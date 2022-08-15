@@ -4,7 +4,7 @@
 			<div class="flex mb-4 p-4">
 				<span class="text-xl mr-auto uppercase">{{ institution.name }}</span>
 				<a class="flex items-center gap-1 mr-4 text-sm"
-					@click.prevent="openCourseCreateModal(institution.id, null)">
+					@click.prevent="openCourseCreateModal(institution.id, null, null)">
 					<IonIcon :icon="addOutline" class="text-success" />
 					<IonLabel>Add General Course</IonLabel>
 				</a>

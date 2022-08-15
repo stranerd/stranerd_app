@@ -1,4 +1,4 @@
-import { computed, ComputedRef, onMounted, onUnmounted, reactive, Ref, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, reactive, Ref, ref } from 'vue'
 import { TestPrepEntity, TestPrepFactory, TestPrepsUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
@@ -13,15 +13,6 @@ const global = {
 		year: null as number | null,
 		questionTypes: [] as PastQuestionType[]
 	}),
-	testPreps: ref([] as TestPrepEntity[]),
-	fetched: ref(false),
-	searchMode: ref(false),
-	searchValue: ref(''),
-	searchResults: ref([] as TestPrepEntity[]),
-	...useErrorHandler(),
-	...useLoadingHandler()
-}
-const saved = {
 	testPreps: ref([] as TestPrepEntity[]),
 	fetched: ref(false),
 	...useErrorHandler(),
@@ -64,45 +55,7 @@ export const useTestPrepList = () => {
 		await listener.close()
 	})
 
-	const search = async () => {
-		const searchValue = global.searchValue.value
-		if (!searchValue) return
-		global.searchMode.value = true
-		await global.setError('')
-		try {
-			await global.setLoading(true)
-			global.searchResults.value = await TestPrepsUseCases.searchWithFilters(searchValue, global.filters)
-		} catch (error) {
-			await global.setError(error)
-		}
-		await global.setLoading(false)
-	}
-
-	watch(global.searchValue, () => {
-		if (!global.searchValue.value) global.searchMode.value = false
-	})
-
-	return { ...global, search }
-}
-
-export const useSavedTestPreps = (list: ComputedRef<string[]>) => {
-	const fetchPreps = async () => {
-		try {
-			const testPreps = await TestPrepsUseCases.getInList(list.value)
-			saved.testPreps.value = testPreps.results
-			saved.fetched.value = true
-		} catch (error) {
-			await saved.setError(error)
-		}
-		await saved.setLoading(false)
-	}
-
-	onMounted(async () => {
-		if (!saved.fetched.value && !saved.loading.value) await fetchPreps()
-	})
-	watch(list, fetchPreps, { deep: true })
-
-	return { ...saved, fetchPreps }
+	return { ...global }
 }
 
 export const useTestPrep = (id: string) => {

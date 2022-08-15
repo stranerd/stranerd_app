@@ -125,7 +125,7 @@ export default defineComponent({
 	setup (props) {
 		const { institutions, loading: institutionLoading } = useInstitutionList()
 		const { courses: allCourses, loading: courseLoading } = useCourseList()
-		const courses = computed(() => new Set(allCourses.value.filter((c) => c.institutionId === props.factory.institutionId)))
+		const courses = computed(() => allCourses.value.filter((c) => c.institutionId === props.factory.institutionId))
 		return {
 			getAlphabet, addOutline, trashBinOutline,
 			institutions, courses, institutionLoading, courseLoading, years

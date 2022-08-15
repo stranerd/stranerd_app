@@ -1,7 +1,7 @@
 <template>
 	<PrepsWrapper>
 		<div class="h-full flex flex-col">
-			<span>Continue tests</span>
+			<EmptySearch />
 		</div>
 	</PrepsWrapper>
 </template>
@@ -13,11 +13,11 @@ import { generateMiddlewares } from '@app/middlewares'
 import PrepsWrapper from '@app/components/study/testPreps/PrepsWrapper.vue'
 
 export default defineComponent({
-	name: 'StudyPreps',
+	name: 'StudyPrepsSolutions',
 	components: { PrepsWrapper },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Test preps', {})
+		useRouteMeta('Test preps', { back: true })
 	}
 })
 </script>

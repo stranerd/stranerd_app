@@ -23,9 +23,9 @@ export default defineComponent({
 	},
 	components: { CourseListCard },
 	setup (props) {
-		const { loading, error, courses: allCourses, fetchGeneralCourses } = useCourseList()
+		const { loading, error, courses: allCourses, fetchInstitutionCourses } = useCourseList()
 		onMounted(async () => {
-			await fetchGeneralCourses(props.institutionId)
+			await fetchInstitutionCourses(props.institutionId, true)
 		})
 		const courses = computed(() => allCourses.value.filter((c) => c.institutionId === props.institutionId && !c.facultyId))
 		return { loading, error, courses }

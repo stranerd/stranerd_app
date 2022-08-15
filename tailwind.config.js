@@ -30,8 +30,12 @@ module.exports = {
 		extend: {
 			colors: newColors,
 			boxShadow: {
-				card: '0px 4px 8px rgba(22, 37, 101, 0.1)',
+				card: '0px 4px 8px rgba(22, 37, 101, 0.1)'
 			},
+			flex: {
+				'2': '2 2 0%',
+				'3': '3 3 0%'
+			}
 		}
 	},
 	plugins: []

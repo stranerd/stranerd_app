@@ -181,7 +181,7 @@ export default defineComponent({
 			props.next()
 		}
 		const { schools, gatewayExams } = useInstitutionList()
-		const { courses, fetchGeneralCourses } = useCourseList()
+		const { courses, fetchInstitutionCourses } = useCourseList()
 		const { faculties, fetchFaculties } = useFacultyList()
 		const { departments, fetchDepartments } = useDepartmentList()
 		const filteredFaculties = computed(() => faculties.value.filter((f) => f.institutionId === factory.value.institutionId))
@@ -189,10 +189,7 @@ export default defineComponent({
 
 		watch(() => factory.value.institutionId, async () => {
 			factory.value.resetProp('facultyId')
-			if (factory.value.institutionId) {
-				await fetchFaculties(factory.value.institutionId)
-				await fetchGeneralCourses(factory.value.institutionId)
-			}
+			if (factory.value.institutionId) await fetchFaculties(factory.value.institutionId)
 		})
 
 		watch(() => factory.value.facultyId, async () => {
@@ -201,14 +198,11 @@ export default defineComponent({
 		})
 
 		watch(() => factory.value.exams, async () => {
-			await Promise.all(factory.value.exams.map(async (exam) => fetchGeneralCourses(exam.institutionId)))
+			await Promise.all(factory.value.exams.map(async (exam) => fetchInstitutionCourses(exam.institutionId)))
 		})
 		onMounted(async () => {
-			await Promise.all(factory.value.exams.map(async (exam) => fetchGeneralCourses(exam.institutionId)))
-			if (factory.value.institutionId) {
-				await fetchFaculties(factory.value.institutionId)
-				await fetchGeneralCourses(factory.value.institutionId)
-			}
+			await Promise.all(factory.value.exams.map(async (exam) => fetchInstitutionCourses(exam.institutionId)))
+			if (factory.value.institutionId) await fetchFaculties(factory.value.institutionId)
 			if (factory.value.facultyId) await fetchDepartments(factory.value.facultyId)
 		})
 
@@ -221,13 +215,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-list-header {
-		--color: inherit;
-		--color-checked: #{$color-primaryBg};
-		padding-left: 0 !important;
+ion-list-header {
+	--color: inherit;
+	--color-checked: #{$color-primaryBg};
+	padding-left: 0 !important;
 
-		ion-label {
-			margin-top: 0 !important;
-		}
+	ion-label {
+		margin-top: 0 !important;
 	}
+}
 </style>
