@@ -13,7 +13,8 @@ const newColors = {
 	success: 'var(--clr-success)',
 	danger: 'var(--clr-danger)',
 	info: 'var(--clr-info)',
-	warning: 'var(--clr-warning)'
+	warning: 'var(--clr-warning)',
+	royal: 'var(--clr-royal)'
 }
 
 module.exports = {

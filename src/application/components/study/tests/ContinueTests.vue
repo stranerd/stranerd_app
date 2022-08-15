@@ -1,16 +1,13 @@
 <template>
-	<div>
-		<EmptyState v-if="!loading && !error && unCompletedTests.length === 0" info="You have no uncompleted tests" />
+	<div class="showcase-flex gap-4">
+		<EmptyTests v-if="!loading && !error && unCompletedTests.length === 0" />
 		<BlockLoading v-if="loading" />
-		<div v-else class="showcase-flex">
-			<ContinueTestCard v-for="test in unCompletedTests" :key="test.hash" :test="test" />
-		</div>
+		<ContinueTestCard v-for="test in unCompletedTests" :key="test.hash" :test="test" />
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { chevronBackOutline, chevronForwardOutline, ellipseOutline } from 'ionicons/icons'
 import ContinueTestCard from '@app/components/study/tests/ContinueTestCard.vue'
 import { useTestList } from '@app/composable/study/tests'
 
@@ -19,10 +16,7 @@ export default defineComponent({
 	components: { ContinueTestCard },
 	setup () {
 		const { unCompletedTests, loading, error } = useTestList()
-		return {
-			chevronForwardOutline, chevronBackOutline, ellipseOutline,
-			unCompletedTests, loading, error
-		}
+		return { unCompletedTests, loading, error }
 	}
 })
 </script>

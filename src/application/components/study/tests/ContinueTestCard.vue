@@ -1,22 +1,22 @@
 <template>
 	<router-link :to="`/study/tests/${test.id}`"
-		class="w-full flex flex-col card-padding justify-between">
+		class="flex flex-col card-padding rounded-xl border border-2 border-itemBg !gap-6">
 		<div class="flex flex-col">
-			<div class="flex justify-between">
-				<IonText class="text-left w-full font-500 truncate capitalize">
-					<Institution v-if="testPrep && testPrep.isPastQuestionType"
-						:institutionId="testPrep.data.institutionId" />
+			<div class="flex justify-between gap-4">
+				<IonText class="flex-1 font-bold truncate capitalize">
+					<Course v-if="testPrep && testPrep.isPastQuestionType"
+						:courseId="testPrep.data.courseId" />
 					<span v-else>{{ test.name }}</span>
 				</IonText>
-				<Tag :tag="test.isTimed ? 'Timed' : 'Study'" />
+				<Tag :class="test.isTimed ? '!bg-royal' : '!bg-warning'" :tag="test.isTimed ? 'Timed' : 'Study'"
+					class="!text-white !text-xs" />
 			</div>
 
-			<IonText class="text-left w-full text-sm truncate">
-				<span v-if="testPrep && testPrep.isPastQuestionType">
-					<Course :courseId="testPrep.data.courseId" />
-					{{ testPrep.data.questionType }}
-					({{ testPrep.data.year }})
-				</span>
+			<Institution v-if="testPrep && testPrep.isPastQuestionType" :institutionId="testPrep.data.institutionId"
+				class="text-sm" />
+
+			<IonText v-if="testPrep" class="flex flex-col text-sm capitalize">
+				{{ testPrep.data.questionType }} {{ testPrep.data.year }}
 			</IonText>
 		</div>
 
@@ -25,18 +25,15 @@
 </template>
 
 <script lang="ts">
-import { calendarOutline } from 'ionicons/icons'
 import { defineComponent } from 'vue'
-import { formatNumber } from '@utils/commons'
 import { TestEntity } from '@modules/study'
 import { useTestPrep } from '@app/composable/study/testPreps'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import Course from '@app/components/school/courses/Course.vue'
-import Tag from '../../core/Tag.vue'
 
 export default defineComponent({
 	name: 'ContinueTestCard',
-	components: { Institution, Course, Tag },
+	components: { Institution, Course },
 	props: {
 		test: {
 			required: true,
@@ -45,21 +42,16 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { testPrep } = useTestPrep(props.test.prepId)
-		return { formatNumber, calendarOutline, testPrep }
+		return { testPrep }
 	}
 })
 </script>
 
 <style lang="scss" scoped>
-	ion-progress-bar {
-		height: .5rem !important;
-		border-radius: 12px !important;
-		@media (max-width: 768px) {
-			height: .25rem !important;
-		}
-	}
-
-	ion-progress-bar::part(progress) {
-		border-radius: 120px !important;
-	}
+ion-progress-bar {
+	--background: #{$color-itemBg};
+	--progress-background: #{$color-success};
+	height: .5rem !important;
+	border-radius: 12px !important;
+}
 </style>

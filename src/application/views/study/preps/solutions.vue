@@ -17,7 +17,7 @@ export default defineComponent({
 	components: { PrepsWrapper },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		useRouteMeta('Test preps', { back: true })
+		useRouteMeta('Test preps', {})
 	}
 })
 </script>

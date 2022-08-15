@@ -18,7 +18,7 @@
 								<div class="flex gap-8 items-center">
 									<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
 										class="text-base" defaultHref="/dashboard" mode="ios" text="" />
-									<IonText class="font-bold text-2xl truncate max-w-[400px]">
+									<IonText class="font-bold text-2xl truncate max-w-[400px] capitalize">
 										{{ $route.meta.routeName ?? '' }}
 									</IonText>
 								</div>

@@ -8,7 +8,7 @@
 				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
 					class="text-base text-headerText lg:hidden"
 					defaultHref="/dashboard" text="" mode="ios" />
-				<IonText class="font-bold text-xl lg:hidden truncate max-w-[240px]">
+				<IonText class="font-bold text-xl lg:hidden truncate max-w-[240px] capitalize">
 					{{ $route.meta.routeName ?? '' }}
 				</IonText>
 				<Search class="flex-grow hidden lg:flex" />

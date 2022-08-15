@@ -3,8 +3,7 @@
 		<img alt="" src="@/assets/images/emptyStates/tests.svg">
 		<IonText class="font-bold">Nothing here</IonText>
 		<span class="max-w-[200px] text-sm">
-			You have not saved any tests.
-			Find using the search bar above.
+			You have not started any tests.
 		</span>
 	</div>
 </template>
