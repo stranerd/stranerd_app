@@ -100,3 +100,20 @@ export const formatCurrency = (currency: string) => {
 	} as Record<string, string>
 	return currencies[currency] ?? currencies.USD
 }
+
+export const formatDuration = (duration: number) => {
+	duration = duration < 0 ? 0 : duration
+	const hours = Math.floor(duration / 3600)
+	const minutes = Math.floor((duration - hours * 3600) / 60)
+	const seconds = Math.floor(duration - (hours * 3600) - (minutes * 60))
+	const paths = [minutes, seconds]
+	if (hours > 0) paths.unshift(hours)
+	return paths.map((x) => x.toString().padStart(2, '0')).join(':')
+}
+
+export const formatFileSize = (size: number) => {
+	const ranges = [{ val: -1, key: 'b' }, { val: 1024, key: 'kb' },
+		{ val: 1024 * 1024, key: 'mb' }, { val: 1024 * 1024 * 1024, key: 'gb' }]
+	const range = ranges.find(({ val }) => size >= val)
+	return `${formatNumber(size / (range?.val ?? -1))}${range?.key ?? 'b'}`
+}

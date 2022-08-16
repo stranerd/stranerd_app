@@ -13,5 +13,5 @@ export const isIos = Capacitor.getPlatform() === 'ios'
 export const isAndroid = Capacitor.getPlatform() === 'android'
 
 const startYear = 1980
-const endYear = 2025
-export const years = new Array(1 + endYear - startYear).fill(0).map((_, idx) => startYear + idx)
+export const years = new Array(new Date().getFullYear() - startYear).fill(0)
+	.map((_, i, arr) => arr.length - i + startYear)

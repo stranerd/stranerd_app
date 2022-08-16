@@ -20,9 +20,9 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { documentOutline } from 'ionicons/icons'
-import { formatFileSize } from '@utils/dates'
 import { Media } from '@modules/core'
 import { openViewFile } from '@app/composable/meta/media'
+import { formatFileSize } from '@utils/commons'
 
 export default defineComponent({
 	name: 'DocsList',

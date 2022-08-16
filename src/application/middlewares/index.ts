@@ -13,9 +13,6 @@ type MiddlewareFunction = (d: MiddleWareArgs) => Promise<string | void>
 
 export const defineMiddleware = (middleware: MiddlewareFunction) => middleware
 
-export const isAccountVerified = defineMiddleware(async () => {
-	if (!useAuth().user.value?.isVerified) return '/dashboard'
-})
 export const isAdmin = defineMiddleware(async () => {
 	if (!useAuth().isAdmin.value) return '/dashboard'
 })
@@ -33,7 +30,7 @@ export const isAuthenticated = defineMiddleware(async ({ to }) => {
 	}
 })
 
-const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, isAccountVerified }
+const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin }
 type Middleware = MiddlewareFunction | keyof typeof globalMiddlewares
 
 export const generateMiddlewares = (middlewares: Middleware[]): NavigationGuardWithThis<undefined> => async (to, fromRoute) => {

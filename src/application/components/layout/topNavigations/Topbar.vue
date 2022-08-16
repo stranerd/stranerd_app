@@ -9,7 +9,7 @@
 					class="text-base text-headerText lg:hidden"
 					defaultHref="/dashboard" text="" mode="ios" />
 				<IonText class="font-bold text-xl lg:hidden truncate max-w-[240px]">
-					{{ $route.meta.routeName ?? 'Stranerd' }}
+					{{ $route.meta.routeName ?? '' }}
 				</IonText>
 				<Search class="flex-grow hidden lg:flex" />
 				<div class="flex gap-6 lg:gap-8 items-center">

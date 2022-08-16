@@ -41,6 +41,18 @@ export class ClassesUseCase {
 		return await this.repository.find(id)
 	}
 
+	async findBySchool (departmentId: string, year: number) {
+		const conditions: QueryParams = {
+			where: [
+				{ field: 'school.departmentId', value: departmentId },
+				{ field: 'school.year', value: year }
+			],
+			limit: 1
+		}
+		const { results } = await this.repository.get(conditions)
+		return results.at(0) ?? null
+	}
+
 	async getMyClasses (userId: string) {
 		const conditions: QueryParams = {
 			where: [{ field: `users.${ClassUsers.members}`, value: userId }, { field: 'requests', value: userId }],
@@ -75,6 +87,17 @@ export class ClassesUseCase {
 
 	async requestClass (id: string, request: boolean) {
 		return await this.repository.requestClass(id, request)
+	}
+
+	async getDepartmentClasses (departmentId?: string) {
+		const conditions: QueryParams = departmentId ? {
+			where: [{ field: 'school.departmentId', value: departmentId }],
+			all: true
+		} : {
+			sort: [{ field: 'createdAt', desc: true }],
+			limit: 5
+		}
+		return await this.repository.get(conditions)
 	}
 
 	async search (detail: string) {

@@ -63,6 +63,19 @@
 			<DisplayError :error="factory.errors.departmentId" />
 		</div>
 
+		<div class="flex flex-col gap-2">
+			<IonLabel>Set</IonLabel>
+			<IonSelect v-model="factory.year" :disabled="disabled.year"
+				class="capitalize" interface="action-sheet"
+				placeholder="Select your set" required>
+				<IonSelectOption v-for="set in factory.years" :key="set.value"
+					:value="set.value" class="capitalize">
+					{{ set.label }}
+				</IonSelectOption>
+			</IonSelect>
+			<DisplayError :error="factory.errors.year" />
+		</div>
+
 		<IonButton :disabled="loading || !factory.valid" class="w-full btn-primary" type="submit">
 			<SpinLoading v-if="loading" />
 			<slot v-else name="buttonText">Submit</slot>

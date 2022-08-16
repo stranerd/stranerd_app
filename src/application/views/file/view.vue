@@ -25,10 +25,10 @@ import { computed, defineComponent } from 'vue'
 import { documentOutline } from 'ionicons/icons'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
-import { formatFileSize } from '@utils/dates'
 import { closeMediaFullScreen, openMedia, useDownload } from '@app/composable/meta/media'
 import { isWeb } from '@utils/constants'
 import { isImage, isVideo } from '@stranerd/validate'
+import { formatFileSize } from '@utils/commons'
 
 export default defineComponent({
 	name: 'FileView',
@@ -51,7 +51,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-button::part(native) {
-		min-width: 100px;
-	}
+ion-button::part(native) {
+	min-width: 100px;
+}
 </style>

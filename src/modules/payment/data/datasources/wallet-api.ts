@@ -2,6 +2,7 @@ import { HttpClient, Listeners, listenOnSocket } from '@modules/core'
 import { apiBase } from '@utils/environment'
 import { WalletFromModel } from '../models/wallet'
 import { WalletBaseDataSource } from './wallet-base'
+import { AccountDetails, Bank, CurrencyCountries } from '../../domain/types'
 
 export class WalletApiDataSource implements WalletBaseDataSource {
 	private stranerdClient: HttpClient
@@ -27,5 +28,13 @@ export class WalletApiDataSource implements WalletBaseDataSource {
 
 	async cancelSubscription () {
 		return await this.stranerdClient.delete<any, WalletFromModel>('/subscriptions', {})
+	}
+
+	async getBanks (country: CurrencyCountries) {
+		return await this.stranerdClient.get<any, Bank[]>(`/banks/${country}`, {})
+	}
+
+	async updateAccount (account: AccountDetails) {
+		return await this.stranerdClient.post<AccountDetails, WalletFromModel>('/account', account)
 	}
 }

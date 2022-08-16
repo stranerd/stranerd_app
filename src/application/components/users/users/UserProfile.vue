@@ -1,5 +1,5 @@
 <template>
-	<div class="h-full flex flex-col">
+	<div class="min-h-full flex flex-col">
 		<UserPageCard :user="user" class="px-4 lg:px-0 pb-6" />
 		<div class="flex flex-col lg:gap-4 flex-1">
 			<div class="flex items-center justify-between">

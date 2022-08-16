@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { Currencies, TransactionData, TransactionStatus } from '../types'
+import { Currencies, TransactionData, TransactionStatus, TransactionType } from '../types'
 
 export class TransactionEntity extends BaseEntity {
 	public readonly id: string
@@ -14,9 +14,9 @@ export class TransactionEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, userId, email, status, data, title, amount, currency,
-		             createdAt, updatedAt
-	             }: TransactionConstructorArgs) {
+					 id, userId, email, status, data, title, amount, currency,
+					 createdAt, updatedAt
+				 }: TransactionConstructorArgs) {
 		super()
 		this.id = id
 		this.userId = userId
@@ -28,6 +28,14 @@ export class TransactionEntity extends BaseEntity {
 		this.data = data
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
+	}
+
+	get isNegative () {
+		return [TransactionType.Subscription].includes(this.data.type)
+	}
+
+	get failed () {
+		return this.status === TransactionStatus.failed
 	}
 }
 

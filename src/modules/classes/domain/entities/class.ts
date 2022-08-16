@@ -9,6 +9,7 @@ type ClassConstructorArgs = {
 		institutionId: string
 		facultyId: string
 		departmentId: string
+		year: number
 	}
 	description: string
 	photo: Media | null
@@ -27,6 +28,7 @@ export class ClassEntity extends BaseEntity {
 		institutionId: string
 		facultyId: string
 		departmentId: string
+		year: number
 	}
 	public readonly description: string
 	public readonly photo: Media | null
@@ -37,11 +39,11 @@ export class ClassEntity extends BaseEntity {
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
-	constructor({
-		id, name, school, description, photo,
-		createdAt, user, courses,
-		users, updatedAt, requests
-	}: ClassConstructorArgs) {
+	constructor ({
+					 id, name, school, description, photo,
+					 createdAt, user, courses,
+					 users, updatedAt, requests
+				 }: ClassConstructorArgs) {
 		super()
 		this.id = id
 		this.name = name
@@ -56,32 +58,32 @@ export class ClassEntity extends BaseEntity {
 		this.updatedAt = updatedAt
 	}
 
-	get isUserVerified() {
+	get isUserVerified () {
 		return this.user.roles.isVerified
 	}
 
-	get membersAndRequests() {
+	get membersAndRequests () {
 		return this.users[ClassUsers.members].concat(this.requests)
 	}
 
-	get members() {
+	get members () {
 		return this.users[ClassUsers.members]
 	}
 
-	get admins() {
+	get admins () {
 		return this.users[ClassUsers.admins]
 	}
 
-	get tutors() {
+	get tutors () {
 		return this.users[ClassUsers.tutors]
 	}
 
-	get participants() {
+	get participants () {
 		return this.users[ClassUsers.members].filter((id) => !this.admins.includes(id) && !this.tutors.includes(id))
 	}
 
-	get shareLink() {
-		return `/classes/${ this.id }`
+	get shareLink () {
+		return `/classes/${this.id}`
 	}
 }
 

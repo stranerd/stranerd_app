@@ -34,7 +34,7 @@ export default defineComponent({
 		const { wallet } = useAuth()
 		if (!wallet.value) return goBackToNonAuth()
 		if (!wallet.value?.subscription.data.questions) {
-			await Notify({ title: 'You don\'t have any questions left' })
+			Notify({ title: 'You don\'t have any questions left' })
 			return '/settings/subscription'
 		}
 	}]),

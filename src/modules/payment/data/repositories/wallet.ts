@@ -3,6 +3,7 @@ import { IWalletRepository } from '../../domain/irepositories/iwallet'
 import { WalletEntity } from '../../domain/entities/wallet'
 import { WalletBaseDataSource } from '../datasources/wallet-base'
 import { WalletTransformer } from '../transformers/wallet'
+import { AccountDetails, CurrencyCountries } from '../../domain/types'
 
 export class WalletRepository implements IWalletRepository {
 	private dataSource: WalletBaseDataSource
@@ -39,6 +40,15 @@ export class WalletRepository implements IWalletRepository {
 
 	async cancelSubscription () {
 		const model = await this.dataSource.cancelSubscription()
+		return this.transformer.fromJSON(model)
+	}
+
+	async getBanks (country: CurrencyCountries) {
+		return await this.dataSource.getBanks(country)
+	}
+
+	async updateAccount (account: AccountDetails) {
+		const model = await this.dataSource.updateAccount(account)
 		return this.transformer.fromJSON(model)
 	}
 }

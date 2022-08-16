@@ -27,10 +27,10 @@ export class CardsUseCase {
 
 	async getPrimary () {
 		const { results } = await this.repository.get({
-			where: [ { field: 'primary', value: true }, { field: 'expired', value: false } ],
+			where: [{ field: 'primary', value: true }, { field: 'expired', value: false }],
 			limit: 1
 		})
-		return results[0] ?? null
+		return results.at(0) ?? null
 	}
 
 	async listenToOne (id: string, listener: Listeners<CardEntity>) {

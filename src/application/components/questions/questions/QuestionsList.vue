@@ -48,4 +48,3 @@ export default defineComponent({
 		border-radius: 0;
 	}
 </style>
-

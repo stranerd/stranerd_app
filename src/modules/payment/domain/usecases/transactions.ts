@@ -27,12 +27,15 @@ export class TransactionsUseCase {
 		return await this.repository.find(id)
 	}
 
-	async get (date?: number) {
+	async getInRange (fromDate: number, toDate: number, lastDate?: number) {
 		const conditions: QueryParams = {
+			where: [
+				{ field: 'createdAt', condition: Conditions.gte, value: fromDate },
+				{ field: 'createdAt', condition: Conditions.lt, value: lastDate ?? toDate }
+			],
 			sort: [{ field: 'createdAt', desc: true }],
 			limit: PAGINATION_LIMIT
 		}
-		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.lt, value: date }]
 
 		return await this.repository.get(conditions)
 	}
