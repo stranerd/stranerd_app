@@ -47,6 +47,15 @@ export class TestPrepsUseCase {
 		return await this.repository.get(conditions)
 	}
 
+	async getCoursePreps (courseId: string) {
+		const conditions: QueryParams = {
+			where: [{ field: 'data.courseId', value: courseId }],
+			all: true
+		}
+
+		return await this.repository.get(conditions)
+	}
+
 	async getInList (ids: string[]) {
 		const conditions: QueryParams = {
 			where: [{ field: 'id', condition: Conditions.in, value: ids }],
@@ -58,19 +67,6 @@ export class TestPrepsUseCase {
 
 	async listenToOne (id: string, listener: Listeners<TestPrepEntity>) {
 		return await this.repository.listenToOne(id, listener)
-	}
-
-	async listen (listener: Listeners<TestPrepEntity>, date?: number) {
-		const conditions: QueryParams = {
-			sort: [{ field: 'createdAt', desc: true }],
-			all: true
-		}
-		if (date) conditions.where = [{ field: 'createdAt', condition: Conditions.gt, value: date }]
-
-		return await this.repository.listenToMany(conditions, listener, (entity) => {
-			if (date) return entity.createdAt >= date
-			return true
-		})
 	}
 
 	async listenInList (ids: string[], listener: Listeners<TestPrepEntity>) {
@@ -86,19 +82,6 @@ export class TestPrepsUseCase {
 		const query: QueryParams = {
 			all: true, search: { value: detail, fields: searchFields }
 		}
-		return (await this.repository.get(query)).results
-	}
-
-	async searchWithFilters (search: string, filters: Filters) {
-		const query: QueryParams = {
-			where: [{ field: 'data.questionType', value: filters.questionTypes, condition: Conditions.in }],
-			all: true, search: { value: search, fields: searchFields }
-		}
-
-		if (filters.institutionId) query.where!.push({ field: 'data.institutionId', value: filters.institutionId })
-		if (filters.courseId) query.where!.push({ field: 'data.courseId', value: filters.courseId })
-		if (filters.year) query.where!.push({ field: 'data.year', value: filters.year })
-
 		return (await this.repository.get(query)).results
 	}
 }

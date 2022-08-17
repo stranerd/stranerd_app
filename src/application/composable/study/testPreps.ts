@@ -1,6 +1,6 @@
-import { computed, onMounted, onUnmounted, reactive, Ref, ref } from 'vue'
+import { computed, onMounted, reactive, Ref, ref } from 'vue'
 import { TestPrepEntity, TestPrepFactory, TestPrepsUseCases } from '@modules/study'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 import { useStudyModal } from '@app/composable/core/modals'
@@ -15,30 +15,17 @@ const global = {
 	}),
 	testPreps: ref([] as TestPrepEntity[]),
 	fetched: ref(false),
+	courses: {} as Record<string, boolean>,
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
-const listener = useListener(async () => {
-	return await TestPrepsUseCases.listen({
-		created: async (entity) => {
-			addToArray(global.testPreps.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		updated: async (entity) => {
-			addToArray(global.testPreps.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		deleted: async (entity) => {
-			const index = global.testPreps.value.findIndex((q) => q.id === entity.id)
-			if (index !== -1) global.testPreps.value.splice(index, 1)
-		}
-	})
-})
 
 const fetchTestPreps = async () => {
 	await global.setError('')
 	try {
 		await global.setLoading(true)
 		const testPreps = await TestPrepsUseCases.get()
-		testPreps.results.forEach((t) => addToArray(global.testPreps.value, t, (e) => e.id, (e) => e.createdAt))
+		testPreps.results.forEach((t) => addToArray(global.testPreps.value, t, (e) => e.id, (e) => e.data.year))
 		global.fetched.value = true
 	} catch (error) {
 		await global.setError(error)
@@ -47,15 +34,25 @@ const fetchTestPreps = async () => {
 }
 
 export const useTestPrepList = () => {
+	const fetchCoursePreps = async (courseId: string) => {
+		if (global.courses[courseId]) return
+		await global.setError('')
+		try {
+			await global.setLoading(true)
+			const testPreps = await TestPrepsUseCases.getCoursePreps(courseId)
+			testPreps.results.forEach((t) => addToArray(global.testPreps.value, t, (e) => e.id, (e) => e.data.year))
+			global.courses[courseId] = true
+		} catch (error) {
+			await global.setError(error)
+		}
+		await global.setLoading(false)
+	}
+
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTestPreps()
-		await listener.start()
-	})
-	onUnmounted(async () => {
-		await listener.close()
 	})
 
-	return { ...global }
+	return { ...global, fetchCoursePreps }
 }
 
 export const useTestPrep = (id: string) => {
