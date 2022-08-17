@@ -1,22 +1,24 @@
 <template>
 	<IonHeader class="w-full flex flex-col z-10 nav-shadow" role="navigation">
-		<div class="container lg:flex mx-auto items-center justify-between p-4 hidden">
-			<div class="flex font-bold items-center gap-4">
-				<Logo/>	
-				<span class="text-2xl ">Stranerd</span>
-			</div>
+		<div class="container flex mx-auto items-center justify-between p-4">
+
+			<img src="/images/icon_with_text.svg" alt="logo" class="h-5 md:h-auto">
+
 		
-			<div class="flex items-center justify-between gap-12">
-				<span>Home</span>
-				<span>Features</span>
+			<div class="md:flex items-center justify-between gap-12 text-base hidden">
+				<span>Solutions</span>
+				<span>Upload</span>
+				<span>Pricing</span>
 				<span>About</span>
+				<span>Contact</span>
 			</div>
-			<div class="flex items-center justify-between gap-8 px-3">
-				<router-link class="  rounded-md border border-primaryBg text-primaryBg font-bold px-4 py-1.5"
+
+			<div class="flex items-center  md:gap-8 gap-2 px-3 w-auto">
+				<router-link class="btn-outline"
 					to="/auth/signin">
 					Log In
 				</router-link>
-				<router-link class=" rounded-md font-bold bg-primaryBg px-4 py-1.5 text-white" to="/auth/signup">
+				<router-link class="btn" to="/auth/signup">
 					Sign Up
 				</router-link>
 			</div>
@@ -44,9 +46,11 @@ export default defineComponent({
 		--color: #{$color-headerText};
 	}
 
-	.link-custom {
-		font-weight: 700;
-		font-size: 16px;
+	.btn-outline {
+	@apply  rounded-md border border-primaryBg text-primaryBg font-bold px-4 py-1.5 text-xs
+	}
+	.btn {
+	@apply  rounded-md font-bold bg-primaryBg px-4 py-1.5 text-white text-xs
 	}
 
 	.nav-shadow {

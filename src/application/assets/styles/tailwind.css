@@ -125,4 +125,8 @@
 	ion-icon {
 		@apply transition-all duration-300;
 	}
+
+	.landing_btn-outline {
+		@apply border-primaryBg border border-solid rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs;
+	}
 }

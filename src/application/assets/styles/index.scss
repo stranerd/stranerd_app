@@ -5,59 +5,58 @@
 
 :root {
 	--clr-primaryBg: #162565;
-	--clr-primaryText: #FFFFFF;
+	--clr-primaryText: #ffffff;
 	--clr-primaryHover: #194084;
-	--clr-bodyBg: #FFFFFF;
-	--clr-bodyText: #05090D;
+	--clr-bodyBg: #ffffff;
+	--clr-bodyText: #05090d;
 	--clr-headerBg: #162565;
-	--clr-headerText: #FFFFFF;
-	--clr-itemBg: #F1F3F7;
-	--clr-secondaryText: #494C58;
-	--clr-disabled: #C5C9D9;
-	--clr-outlineHover: #B6D9FF;
-	--clr-success: #0FDC64;
-	--clr-danger: #FF3232;
-	--clr-info: #218FDF;
-	--clr-warning: #FFA84B;
+	--clr-headerText: #ffffff;
+	--clr-itemBg: #f1f3f7;
+	--clr-secondaryText: #494c58;
+	--clr-disabled: #c5c9d9;
+	--clr-outlineHover: #b6d9ff;
+	--clr-success: #0fdc64;
+	--clr-danger: #ff3232;
+	--clr-info: #218fdf;
+	--clr-warning: #ffa84b;
+	--clr-orange: #ff8800;
 }
 
 $theme: any;
 @media (prefers-color-scheme: $theme) {
 	:root {
-		--clr-primaryBg: #FFFFFF;
-		--clr-primaryText: #1E2230;
-		--clr-primaryHover: #F1EAEA;
-		--clr-bodyBg: #1E2230;
-		--clr-bodyText: #FFFFFF;
-		--clr-headerBg: #05090D;
-		--clr-headerText: #FFFFFF;
-		--clr-itemBg: #494C58;
-		--clr-secondaryText: #F1F3F7;
+		--clr-primaryBg: #ffffff;
+		--clr-primaryText: #1e2230;
+		--clr-primaryHover: #f1eaea;
+		--clr-bodyBg: #1e2230;
+		--clr-bodyText: #ffffff;
+		--clr-headerBg: #05090d;
+		--clr-headerText: #ffffff;
+		--clr-itemBg: #494c58;
+		--clr-secondaryText: #f1f3f7;
 		--clr-disabled: #313142;
-		--clr-outlineHover: #181C27;
-		--clr-success: #0FDC64;
-		--clr-danger: #FF3232;
-		--clr-info: #218FDF;
-		--clr-warning: #FFA84B;
+		--clr-outlineHover: #181c27;
+		--clr-success: #0fdc64;
+		--clr-danger: #ff3232;
+		--clr-info: #218fdf;
+		--clr-warning: #ffa84b;
+		--clr-orange: #ff8800;
 	}
 }
 
-$spacers: (
-	0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14,
-	16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 72, 80, 96
-);
+$spacers: (0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 72, 80, 96);
 $grid-breakpoints: (
 	'': 0,
 	'sm:': '640px',
 	'md:': '768px',
 	'lg:': '1280px',
 	'xl:': '1420px',
-	'2xl:': '1536px'
+	'2xl:': '1536px',
 );
 
 @each $key in $spacers {
 	@each $bp, $width in $grid-breakpoints {
-		body[data-no-gap='true'] *[class*="#{$bp}gap-#{$key}"] {
+		body[data-no-gap='true'] *[class*='#{$bp}gap-#{$key}'] {
 			@media (min-width: $width) {
 				gap: 0 !important;
 
