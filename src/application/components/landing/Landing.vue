@@ -6,6 +6,7 @@
 	<Connect />
 	<Testimonial />
 	<App />
+	<Supported />
 	<LandingFooter />
 </template>
 
@@ -18,6 +19,7 @@ import Products from '@app/components/landing/Products.vue'
 import Connect from '@app/components/landing/Connect.vue'
 import Testimonial from '@app/components/landing/Testimonial.vue'
 import App from '@app/components/landing/App.vue'
+import Supported from '@app/components/landing/Supported.vue'
 
 
 </script>
