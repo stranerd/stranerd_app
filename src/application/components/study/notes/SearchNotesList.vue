@@ -1,6 +1,5 @@
 <template>
 	<div class="showcase-flex">
-		<EmptyState v-if="filtered.length === 0" info="No results found." />
 		<NoteListCard v-for="note in filtered" :key="note.hash" :note="note" />
 	</div>
 </template>

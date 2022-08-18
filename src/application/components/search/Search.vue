@@ -12,14 +12,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, watch } from 'vue'
 import { useSearch } from '@app/composable/meta/search'
 import { searchOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'Search',
 	setup () {
-		const { searchTerm, search } = useSearch()
+		const { searchTerm, navigateToSearch, search } = useSearch()
+		watch(searchTerm, navigateToSearch)
 		return { search, searchTerm, searchOutline }
 	}
 })

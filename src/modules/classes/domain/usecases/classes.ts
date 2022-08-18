@@ -3,6 +3,7 @@ import { ClassFactory } from '../factories/class'
 import { ClassEntity } from '../entities/class'
 import { Listeners, QueryKeys, QueryParams } from '@modules/core'
 import { ClassUsers } from '../types'
+import { PAGINATION_LIMIT } from '@utils/constants'
 
 const searchFields = ['name', 'description']
 
@@ -105,6 +106,14 @@ export class ClassesUseCase {
 			all: true, search: { value: detail, fields: searchFields }
 		}
 
+		return (await this.repository.get(query)).results
+	}
+
+	async searchExplore () {
+		const query: QueryParams = {
+			sort: [{ field: 'createdAt', desc: true }],
+			limit: PAGINATION_LIMIT
+		}
 		return (await this.repository.get(query)).results
 	}
 }

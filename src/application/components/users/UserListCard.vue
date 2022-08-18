@@ -1,5 +1,5 @@
 <template>
-	<router-link :to="`/users/${user.id}`" class="flex card card-padding items-center">
+	<router-link :to="`/users/${user.id}`" class="flex card card-padding items-start">
 		<Avatar :id="user.id" :name="user.bio.fullName" :size="36" :src="user.bio.photo" />
 		<div class="flex flex-col gap-1">
 			<IonText class="font-bold flex gap-1 items-center">

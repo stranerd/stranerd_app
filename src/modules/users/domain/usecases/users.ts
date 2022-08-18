@@ -3,6 +3,7 @@ import { RankingTimes } from '../types'
 import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { UserEntity } from '../entities/user'
 import { UserSchoolFactory } from '../factories/userSchool'
+import { PAGINATION_LIMIT } from '@utils/constants'
 
 const searchFields = ['bio.firstName', 'bio.lastName', 'bio.email']
 
@@ -77,6 +78,14 @@ export class UsersUseCase {
 	async search (detail: string) {
 		const query: QueryParams = {
 			all: true, search: { value: detail, fields: searchFields }
+		}
+		return (await this.repository.get(query)).results
+	}
+
+	async searchExplore () {
+		const query: QueryParams = {
+			sort: [{ field: 'dates.createdAt', desc: true }],
+			limit: PAGINATION_LIMIT
 		}
 		return (await this.repository.get(query)).results
 	}

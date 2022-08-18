@@ -107,6 +107,14 @@ export class NotesUseCase {
 		return (await this.repository.get(query)).results
 	}
 
+	async searchExplore () {
+		const query: QueryParams = {
+			sort: [{ field: 'createdAt', desc: true }],
+			limit: PAGINATION_LIMIT
+		}
+		return (await this.repository.get(query)).results
+	}
+
 	async searchUserNotes (userId: string, search: string) {
 		const query = {
 			where: [{ field: 'user.id', value: userId }],

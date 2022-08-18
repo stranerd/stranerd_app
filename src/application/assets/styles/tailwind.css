@@ -87,11 +87,11 @@
 	}
 
 	.nav-scroll > * {
-		@apply w-full py-2 px-4 cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap font-bold border-b-2 border-itemBg lg:border-b-0;
+		@apply w-full py-2 px-4 cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap font-bold border-b-2 border-itemBg;
 	}
 
 	.nav-scroll > *.router-link-exact-active {
-		@apply border-b-2 text-primaryBg border-primaryBg;
+		@apply text-primaryBg border-primaryBg;
 	}
 
 	.dot {
