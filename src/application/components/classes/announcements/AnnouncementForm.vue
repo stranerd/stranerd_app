@@ -30,7 +30,7 @@
 		<div v-if="factory.reminder !== null" class="flex gap-4">
 			<div class="flex flex-col w-full gap-2">
 				<IonLabel>Date</IonLabel>
-				<IonInput v-model="factory.reminderDate" type="date" />
+				<IonInput v-model="factory.reminderDate" :min="factory.minDate" type="date" />
 			</div>
 			<div class="flex flex-col w-full gap-2">
 				<IonLabel>Time</IonLabel>
@@ -77,7 +77,7 @@ export default defineComponent({
 			default: () => ({})
 		}
 	},
-	setup() {
+	setup () {
 		const { adminClasses } = useUserClassList()
 		return { adminClasses, addOutline, trashBinOutline }
 	}

@@ -94,7 +94,6 @@ export const useSearch = () => {
 	}
 
 	const fetchExplore = async () => {
-		console.log('exploring')
 		await global.setError('')
 		try {
 			await global.setLoading(true)

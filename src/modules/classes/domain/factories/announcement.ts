@@ -51,6 +51,13 @@ export class AnnouncementFactory extends BaseFactory<AnnouncementEntity, Announc
 		this.setReminder([value, this.reminderTime].join('-'))
 	}
 
+	get minDate () {
+		const date = new Date()
+		return [date.getFullYear(), date.getMonth(), date.getDate()]
+			.map((x) => x.toString().padStart(2, '0'))
+			.join('-')
+	}
+
 	get reminderTime () {
 		const date = new Date(this.reminder ?? Date.now())
 		return [date.getHours(), date.getMinutes()]
@@ -63,8 +70,9 @@ export class AnnouncementFactory extends BaseFactory<AnnouncementEntity, Announc
 	}
 
 	setReminder (value: string) {
-		const args = value.replaceAll(':', '-').split('-').map(parseInt)
-		//@ts-ignore
+		const args = value.replaceAll(':', '-').split('-').map((x) => parseInt(x))
+		if (args.includes(NaN)) return
+		// @ts-ignore
 		this.reminder = new Date(...args).getTime()
 	}
 

@@ -21,6 +21,18 @@
 						<span>Share profile</span>
 					</div>
 				</Share>
+				<template v-if="connect && !connect.accepted">
+					<span class="text-primaryBg flex gap-4 py-4 items-center" @click="acceptConnect(connect, true)">
+						<SpinLoading v-if="connectLoading" />
+						<IonIcon v-else :icon="linkOutline" />
+						<span>Accept connection</span>
+					</span>
+					<span class="text-danger flex gap-4 py-4 items-center" @click="acceptConnect(connect, false)">
+						<SpinLoading v-if="connectLoading" />
+						<IonIcon v-else :icon="linkOutline" />
+						<span>Reject connection</span>
+					</span>
+				</template>
 				<span v-if="connect && connect.accepted" class="text-danger flex gap-4 py-4 items-center"
 					@click="deleteConnect(connect)">
 					<SpinLoading v-if="connectLoading" />
@@ -67,25 +79,14 @@ export default defineComponent({
 		const user = getProfileMenuUser()
 		if (!user) props.close()
 		const { loading: verifiedLoading, verifyUser } = useVerifiedRoles()
-		const { connects, deleteConnect, loading: connectLoading } = useConnects()
+		const { connects, acceptConnect, deleteConnect, loading: connectLoading } = useConnects()
 		const connect = computed(() => connects.value.find((c) => c.members.includes(id.value) && c.members.includes(user?.id as any)))
 		return {
-			user,
-			id,
-			isAdmin,
-			gridOutline,
-			libraryOutline,
-			bookmarkOutline,
-			settingsOutline,
-			createOutline,
-			shareOutline,
-			linkOutline,
-			walletOutline,
-			verifiedLoading,
-			verifyUser,
-			connect,
-			connectLoading,
-			deleteConnect
+			user, id, isAdmin,
+			gridOutline, libraryOutline, bookmarkOutline, settingsOutline,
+			createOutline, shareOutline, linkOutline, walletOutline,
+			verifiedLoading, verifyUser,
+			connect, connectLoading, deleteConnect, acceptConnect
 		}
 	}
 })

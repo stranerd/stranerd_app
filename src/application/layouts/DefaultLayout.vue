@@ -14,7 +14,8 @@
 					</div>
 					<div :class="{'lg:px-8': !ignorePagePadding}" class="layout-page-main">
 						<slot name="content-top">
-							<div class="hidden lg:flex gap-8 justify-between items-center mb-4">
+							<div :class="{'lg:px-8': ignorePagePadding}"
+								class="hidden lg:flex gap-8 justify-between items-center mb-4">
 								<div class="flex gap-8 items-center">
 									<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
 										class="text-base" defaultHref="/dashboard" mode="ios" text="" />

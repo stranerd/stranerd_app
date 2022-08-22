@@ -62,19 +62,12 @@ export const unregisterDeviceOnLogout = async () => {
 
 type NotificationPushData = {
 	type: 'notifications'
-	data: {
-		id: string
-		data: NotificationData
-	}
+	data: { id: string, data: NotificationData }
 }
 
 type ChatPushData = {
 	type: 'chats'
-	data: {
-		id: string
-		to: string
-		data: ChatData
-	}
+	data: { id: string, to: string, data: ChatData }
 }
 
 type PushValue = NotificationPushData | ChatPushData

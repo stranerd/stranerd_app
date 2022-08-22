@@ -12,6 +12,12 @@ const global = {} as Record<string, {
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
+const eventGlobal = {} as Record<string, {
+	event: Ref<EventEntity | null>
+	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
+} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+
 export const useEventList = (classId: string) => {
 	const { id } = useAuth()
 	if (global[classId] === undefined) {
@@ -44,7 +50,7 @@ export const useEventList = (classId: string) => {
 		await global[classId].setError('')
 		try {
 			await global[classId].setLoading(true)
-			const events = await EventsUseCases.getClassOneOffEvents(classId)
+			const events = await EventsUseCases.getClassOneOffEvents(classId, global[classId].events.value.at(-1)?.createdAt)
 			events.results.forEach((a) => addToArray(global[classId].events.value, a, (e) => e.id, (e) => e.createdAt))
 			global[classId].hasMore.value = !!events.pages.next
 			global[classId].fetched.value = true
@@ -63,6 +69,53 @@ export const useEventList = (classId: string) => {
 	})
 
 	return { ...global[classId], fetchOlderEvents: fetchEvents, unReadEvents }
+}
+
+export const useEvent = (classId: string, id: string) => {
+	if (eventGlobal[id] === undefined) {
+		const listener = useListener(async () => {
+			return await EventsUseCases.listenToOne(classId, id, {
+				created: async (entity) => {
+					eventGlobal[id].event.value = entity
+				},
+				updated: async (entity) => {
+					eventGlobal[id].event.value = entity
+				},
+				deleted: async (entity) => {
+					eventGlobal[id].event.value = entity
+				}
+			})
+		})
+		eventGlobal[id] = {
+			event: ref(null),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
+	}
+
+	const fetchEvent = async () => {
+		await eventGlobal[id].setError('')
+		try {
+			await eventGlobal[id].setLoading(true)
+			eventGlobal[id].event.value = await EventsUseCases.find(classId, id)
+			eventGlobal[id].fetched.value = true
+		} catch (error) {
+			await eventGlobal[id].setError(error)
+		}
+		await eventGlobal[id].setLoading(false)
+	}
+
+	onMounted(async () => {
+		if (!eventGlobal[id].fetched.value && !eventGlobal[id].loading.value) await fetchEvent()
+		await eventGlobal[id].listener.start()
+	})
+	onUnmounted(async () => {
+		await eventGlobal[id].listener.close()
+	})
+
+	return { ...eventGlobal[id] }
 }
 
 export const useDeleteEvent = (classId: string, eventId: string) => {

@@ -3,7 +3,9 @@
 		<div class="px-4 py-6 md:p-8 flex flex-col">
 			<router-link v-for="{ path, icon, name } in [
 				{ name: 'Ask a question', path: '/questions/create', icon: helpCircleOutline },
-				{ name: 'Create a class', path: '/classes/create', icon: peopleOutline },
+				...(user && user.isCollege(user) ? [
+					{ name: 'Create a class', path: '/classes/create', icon: peopleOutline },
+				] : []),
 				{ name: 'Create flashcard set', path: '/study/flashCards/create', icon: flashOutline },
 				...(adminClasses.length ? [
 					{ name: 'Make an announcement', path: '/classes/announcements/create', icon: megaphoneOutline },
@@ -32,6 +34,7 @@ import {
 	peopleOutline
 } from 'ionicons/icons'
 import { useUserClassList } from '@app/composable/users/users/classes'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'FabMenu',
@@ -42,9 +45,10 @@ export default defineComponent({
 		}
 	},
 	setup () {
+		const { user } = useAuth()
 		const { adminClasses } = useUserClassList()
 		return {
-			adminClasses, helpCircleOutline, flashOutline, documentOutline,
+			user, adminClasses, helpCircleOutline, flashOutline, documentOutline,
 			createOutline, peopleOutline, megaphoneOutline, chatbubblesOutline
 		}
 	}

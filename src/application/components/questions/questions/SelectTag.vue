@@ -1,6 +1,6 @@
 <template>
 	<span class="w-full flex justify-between gap-4 bg-itemBg px-4 py-3 rounded-lg" @click="open = true">
-		<span>{{ selectedTag?.title ?? allowAll ? 'All subjects' : 'Select subject' }}</span>
+		<span>{{ selectedTag?.title ?? (allowAll ? 'All subjects' : 'Select subject') }}</span>
 		<span>&#x02304;</span>
 		<IonModal :isOpen="open" v-bind="modalProps" @didDismiss="open = false">
 			<div class="h-full flex flex-col gap-8 modal-content p-4 lg:p-8">
@@ -84,7 +84,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-modal.modal-class {
-		--height: 100%;
-	}
+ion-modal.modal-class {
+	--height: 100%;
+}
 </style>

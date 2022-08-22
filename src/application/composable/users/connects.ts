@@ -64,6 +64,7 @@ export const useConnects = () => {
 	})
 
 	const createConnect = async (user: string) => {
+		if (global[userId].loading.value) return
 		if (!isSubscribed.value) {
 			await router.push('/settings/subscription/plans')
 			return await Notify({ title: 'You need an active subscription to connect with users!' })
@@ -81,6 +82,7 @@ export const useConnects = () => {
 	}
 
 	const acceptConnect = async (connect: ConnectEntity, accept: boolean) => {
+		if (global[userId].loading.value) return
 		const type = accept ? 'accept' : 'reject'
 		const accepted = await Alert({
 			title: `Are you sure you want to ${type} this connection?`,
@@ -99,6 +101,7 @@ export const useConnects = () => {
 	}
 
 	const deleteConnect = async (connect: ConnectEntity) => {
+		if (global[userId].loading.value) return
 		const type = connect.pending ? 'cancel' : 'remove'
 		const accepted = await Alert({
 			title: `Are you sure you want to ${type} this connection?`,

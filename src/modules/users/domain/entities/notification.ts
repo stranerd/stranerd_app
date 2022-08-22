@@ -26,13 +26,19 @@ export class NotificationEntity extends BaseEntity {
 	}
 
 	static getLink (not: NotificationData) {
-		if (not.type === NotificationType.answers) return `/questions/${not.questionId}`
-		else if (not.type === NotificationType.sessions) return `/messages/personal/${not.userId}`
-		else if (not.type === NotificationType.users) return `/users/${not.userId}`
-		else if (not.type === NotificationType.account) return '/account'
-		else if (not.type === NotificationType.classes) return `/classes/${not.classId}`
-		else if (not.type === NotificationType.classAnnouncements) return `/classes/${not.classId}/announcements`
-		else if (not.type === NotificationType.classEvents) return `/classes/${not.classId}/events`
+		if (not.type === NotificationType.NewAnswer) return `/questions/${not.questionId}`
+		else if (not.type === NotificationType.NewQuestionComment) return `/questions/${not.questionId}/comments`
+		else if (not.type === NotificationType.NewAnswerComment) return `/questions/${not.questionId}/answers/${not.answerId}`
+		else if (not.type === NotificationType.ClassAccepted) return `/classes/${not.classId}`
+		else if (not.type === NotificationType.ClassRemoved) return `/classes/${not.classId}`
+		else if (not.type === NotificationType.ClassTimetableUpdated) return `/classes/${not.classId}/timetable`
+		else if (not.type === NotificationType.ClassSchemeUpdated) return `/classes/${not.classId}/schemes`
+		else if (not.type === NotificationType.NewClassAnnouncement) return `/classes/${not.classId}/announcements`
+		else if (not.type === NotificationType.NewClassTimetableEvent) return `/classes/${not.classId}/timetable`
+		else if (not.type === NotificationType.NewClassOneOffEvent) return `/classes/${not.classId}/events`
+		else if (not.type === NotificationType.ConnectRequested) return `/users/${not.userId}`
+		else if (not.type === NotificationType.ConnectAccepted) return `/users/${not.userId}`
+		else if (not.type === NotificationType.ConnectDeclined) return `/users/${not.userId}`
 		return '/dashboard'
 	}
 }

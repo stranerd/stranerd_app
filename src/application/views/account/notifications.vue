@@ -1,14 +1,11 @@
 <template>
-	<DefaultLayout>
-		<div class="showcase-flex flex-1 min-h-full">
+	<DefaultLayout :ignorePagePadding="true">
+		<div class="flex flex-col flex-1 min-h-full">
 			<EmptyData v-if="!loading && !error && !notifications.length"
 				sub="Keep in touch! Notifications about your activity will show up here."
 				title="No notifications yet" />
-			<NotificationsListCard
-				v-for="notification in notifications"
-				:key="notification.hash" :notification="notification"
-				class="border-bottom-line"
-			/>
+			<NotificationsListCard v-for="notification in notifications" :key="notification.hash"
+				:notification="notification" />
 			<BlockLoading v-if="loading" />
 			<LoadMore v-if="hasMore" :load="fetchOlderNotifications" />
 		</div>
@@ -27,7 +24,7 @@ export default defineComponent({
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	components: { NotificationsListCard },
 	setup () {
-		useRouteMeta('Notifications', { back: true })
+		useRouteMeta('Notifications', {})
 		const { notifications, error, loading, hasMore, fetchOlderNotifications } = useNotificationList()
 		return { notifications, error, loading, hasMore, fetchOlderNotifications }
 	}

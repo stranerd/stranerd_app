@@ -15,7 +15,7 @@
 					{{ day.name }}
 				</a>
 			</div>
-			<EmptyData v-if="!loading && !error && timetable.length === 0"
+			<EmptyData v-if="!loading && !error && events.length === 0"
 				sub="Contact your class admin to add your timetable."
 				title="No timetable" />
 			<TimetableListCard v-for="event in timetable" :key="event.hash" :classInst="classInst" :event="event" />
@@ -58,7 +58,7 @@ export default defineComponent({
 			.filter((e) => e.data.type === EventType.timetable && e.data.start.day === activeDay.value))
 		return {
 			id, loading, error, openCreateTimetableModal,
-			activeDay, days, timetable, arrowForwardOutline
+			activeDay, days, events, timetable, arrowForwardOutline
 		}
 	}
 })

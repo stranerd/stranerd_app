@@ -10,7 +10,8 @@
 					<Department :departmentId="classInst.school.departmentId" :facultyId="classInst.school.facultyId" />
 				</span>
 			</div>
-			<IonButton v-if="!classInst.members.includes(id)" :disabled="loading" class="btn-primary"
+			<IonButton v-if="!classInst.members.includes(id) && !classInst.requests.includes(id)" :disabled="loading"
+				class="btn-primary"
 				style="--border-radius: 10rem;"
 				@click="requestToJoinClass(!classInst.requests.includes(id))">
 				<SpinLoading v-if="loading" />

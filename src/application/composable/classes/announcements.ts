@@ -13,6 +13,12 @@ const global = {} as Record<string, {
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
+const announcementGlobal = {} as Record<string, {
+	announcement: Ref<AnnouncementEntity | null>
+	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
+} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+
 export const markAnnouncementSeen = async (announcement: AnnouncementEntity, userId: string) => {
 	if (!announcement.isRead(userId)) await AnnouncementsUseCases.markRead(announcement.classId)
 }
@@ -49,7 +55,7 @@ export const useAnnouncementList = (classId: string) => {
 		await global[classId].setError('')
 		try {
 			await global[classId].setLoading(true)
-			const announcements = await AnnouncementsUseCases.getClassAnnouncements(classId)
+			const announcements = await AnnouncementsUseCases.getClassAnnouncements(classId, global[classId].announcements.value.at(-1)?.createdAt)
 			announcements.results.forEach((a) => addToArray(global[classId].announcements.value, a, (e) => e.id, (e) => e.createdAt))
 			global[classId].hasMore.value = !!announcements.pages.next
 			global[classId].fetched.value = true
@@ -68,6 +74,53 @@ export const useAnnouncementList = (classId: string) => {
 	})
 
 	return { ...global[classId], fetchOlderAnnouncements: fetchAnnouncements, unReadAnnouncements }
+}
+
+export const useAnnouncement = (classId: string, id: string) => {
+	if (global[id] === undefined) {
+		const listener = useListener(async () => {
+			return await AnnouncementsUseCases.listenToOne(classId, id, {
+				created: async (entity) => {
+					announcementGlobal[id].announcement.value = entity
+				},
+				updated: async (entity) => {
+					announcementGlobal[id].announcement.value = entity
+				},
+				deleted: async (entity) => {
+					announcementGlobal[id].announcement.value = entity
+				}
+			})
+		})
+		announcementGlobal[id] = {
+			announcement: ref(null),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
+	}
+
+	const fetchAnnouncement = async () => {
+		await announcementGlobal[id].setError('')
+		try {
+			await announcementGlobal[id].setLoading(true)
+			announcementGlobal[id].announcement.value = await AnnouncementsUseCases.find(classId, id)
+			announcementGlobal[id].fetched.value = true
+		} catch (error) {
+			await announcementGlobal[id].setError(error)
+		}
+		await announcementGlobal[id].setLoading(false)
+	}
+
+	onMounted(async () => {
+		if (!announcementGlobal[id].fetched.value && !announcementGlobal[id].loading.value) await fetchAnnouncement()
+		await announcementGlobal[id].listener.start()
+	})
+	onUnmounted(async () => {
+		await announcementGlobal[id].listener.close()
+	})
+
+	return { ...announcementGlobal[id] }
 }
 
 let createClassId = null as string | null

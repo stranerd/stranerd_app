@@ -9,13 +9,13 @@
 			@click="deleteConnect(connect)">
 			<SpinLoading v-if="loading" />
 			<IonIcon v-else :icon="closeOutline" />
-			<span class="ml-2">Cancel Request</span>
+			<span class="ml-2">Cancel</span>
 		</IonButton>
 		<IonButton v-else-if="connect.pending && connect.from.id === userId" class="btn-primary"
 			@click="acceptConnect(connect, true)">
 			<SpinLoading v-if="loading" />
 			<IonIcon v-else :icon="linkOutline" />
-			<span class="ml-2">Accept Connect</span>
+			<span class="ml-2">Accept</span>
 		</IonButton>
 		<router-link v-else-if="connect.accepted" :to="`/messages/personal/${userId}`">
 			<IonButton class="btn-primary">Message</IonButton>
@@ -52,7 +52,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-button {
-		--border-radius: 10rem;
-	}
+ion-button {
+	--border-radius: 10rem;
+}
 </style>

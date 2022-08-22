@@ -217,10 +217,17 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 
 const factory = ref(new ClassFactory()) as Ref<ClassFactory>
 export const useCreateClass = () => {
+	const { user } = useAuth()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 	const router = useRouter()
+
+	if (user.value && user.value.isCollege(user.value)) {
+		factory.value.institutionId = user.value.school.institutionId
+		factory.value.facultyId = user.value.school.facultyId
+		factory.value.departmentId = user.value.school.departmentId
+	}
 
 	const createClass = async () => {
 		await setError('')

@@ -10,6 +10,12 @@ const global = {} as Record<string, {
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
+const commentGlobal = {} as Record<string, {
+	comment: Ref<CommentEntity | null>
+	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
+} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+
 export const useCommentsList = (id: string, type: InteractionEntities) => {
 	if (global[id] === undefined) {
 		const listener = useListener(async () => {
@@ -59,6 +65,57 @@ export const useCommentsList = (id: string, type: InteractionEntities) => {
 		error: global[id].error,
 		loading: global[id].loading,
 		comments: global[id].comments
+	}
+}
+
+export const useCommentsById = (id: string) => {
+	if (commentGlobal[id] === undefined) {
+		const listener = useListener(async () => {
+			return await CommentsUseCases.listenToOne(id, {
+				created: async (entity) => {
+					commentGlobal[id].comment.value = entity
+				},
+				updated: async (entity) => {
+					commentGlobal[id].comment.value = entity
+				},
+				deleted: async (entity) => {
+					commentGlobal[id].comment.value = entity
+				}
+			})
+		})
+		commentGlobal[id] = {
+			comment: ref(null),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
+	}
+
+	const fetchComment = async () => {
+		await commentGlobal[id].setError('')
+		try {
+			await commentGlobal[id].setLoading(true)
+			commentGlobal[id].comment.value = await CommentsUseCases.find(id)
+			commentGlobal[id].fetched.value = true
+		} catch (error) {
+			await commentGlobal[id].setError(error)
+		}
+		await commentGlobal[id].setLoading(false)
+	}
+
+	onMounted(async () => {
+		if (!commentGlobal[id].fetched.value && !commentGlobal[id].loading.value) await fetchComment()
+		await commentGlobal[id].listener.start()
+	})
+	onUnmounted(async () => {
+		await commentGlobal[id].listener.close()
+	})
+
+	return {
+		error: commentGlobal[id].error,
+		loading: commentGlobal[id].loading,
+		comment: commentGlobal[id].comment
 	}
 }
 
