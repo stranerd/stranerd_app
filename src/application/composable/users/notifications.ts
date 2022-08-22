@@ -94,6 +94,7 @@ export const useNotification = (notification: NotificationEntity) => {
 	const { error, setError } = useErrorHandler()
 	const markNotificationSeen = async () => {
 		if (notification.seen) return
+		if (loading.value) return
 		await setError('')
 		try {
 			await setLoading(true)

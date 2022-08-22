@@ -68,10 +68,8 @@ export const useListener = (startFn: () => Promise<() => void>) => {
 	}
 
 	const restart = async () => {
-		if (isRunning.value) {
-			await close()
-			await start()
-		}
+		if (isRunning.value) listener = await startFn()
+		else await start()
 	}
 
 	return { start, close, reset, restart, isRunning }

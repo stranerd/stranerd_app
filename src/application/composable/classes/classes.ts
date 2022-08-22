@@ -20,7 +20,6 @@ const global = {
 }
 
 const classGlobal = {} as Record<string, {
-	hash: Ref<string>
 	users: Ref<UserEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
@@ -87,7 +86,6 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 	if (classGlobal[classInst.id] === undefined) {
 		const listener = useListener(listenerFn)
 		classGlobal[classInst.id] = {
-			hash: ref(classInst.hash),
 			users: ref([]),
 			fetched: ref(false),
 			listener,
@@ -193,11 +191,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 	onMounted(async () => {
 		if (skipHooks) return
 		if (!classGlobal[classInst.id].fetched.value && !classGlobal[classInst.id].loading.value) await fetchUsers()
-		if (classGlobal[classInst.id].hash.value !== classInst.hash) {
-			classGlobal[classInst.id].hash.value = classInst.hash
-			await classGlobal[classInst.id].listener.reset(listenerFn)
-		}
-		await classGlobal[classInst.id].listener.start()
+		await classGlobal[classInst.id].listener.reset(listenerFn)
 	})
 	onUnmounted(async () => {
 		if (skipHooks) return

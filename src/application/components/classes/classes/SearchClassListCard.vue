@@ -13,14 +13,14 @@
 			<IonButton v-if="!classInst.members.includes(id) && !classInst.requests.includes(id)" :disabled="loading"
 				class="btn-primary"
 				style="--border-radius: 10rem;"
-				@click="requestToJoinClass(!classInst.requests.includes(id))">
+				@click="requestToJoinClass(true)">
 				<SpinLoading v-if="loading" />
 				<span v-else>Join</span>
 			</IonButton>
 		</div>
 		<IonText class="text-secondaryText">{{ classInst.description }}</IonText>
 		<IonButton v-if="classInst.requests.includes(id)" class="btn-outline"
-			@click="requestToJoinClass(!classInst.requests.includes(id))">
+			@click="requestToJoinClass(false)">
 			<SpinLoading v-if="loading" />
 			<span v-else>Cancel Request</span>
 		</IonButton>

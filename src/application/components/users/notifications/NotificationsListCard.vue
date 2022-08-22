@@ -1,11 +1,13 @@
 <template>
-	<router-link :class="{'text-secondaryText': notification.seen}" :to="notification.link">
-		<component :is="components[notification.data.type]" v-if="components[notification.data.type]"
-			v-bind="{ ...notification.data, notification }" />
-		<div v-else class="flex flex-col border-bottom-line card-padding">
-			<span>{{ notification.body }}</span>
-			<span class="text-sm">{{ formatTime(notification.createdAt) }}</span>
-		</div>
+	<router-link :class="notification.seen ? 'text-secondaryText' : 'font-medium'" :to="notification.link">
+		<Waypoint @change="onChange">
+			<component :is="components[notification.data.type]" v-if="components[notification.data.type]"
+				v-bind="{ ...notification.data, notification }" />
+			<div v-else class="flex flex-col border-bottom-line card-padding">
+				<span>{{ notification.body }}</span>
+				<span class="text-sm">{{ formatTime(notification.createdAt) }}</span>
+			</div>
+		</Waypoint>
 	</router-link>
 </template>
 
@@ -14,6 +16,8 @@ import { defineComponent, PropType } from 'vue'
 import { NotificationEntity, NotificationType } from '@modules/users'
 import { formatTime } from '@utils/dates'
 import { useNotification } from '@app/composable/users/notifications'
+// @ts-ignore
+import { Waypoint } from 'vue-waypoint'
 import NewAnswer from '@app/components/users/notifications/types/questions/NewAnswer.vue'
 import NewQuestionComment from '@app/components/users/notifications/types/questions/NewQuestionComment.vue'
 import NewAnswerComment from '@app/components/users/notifications/types/questions/NewAnswerComment.vue'
@@ -46,8 +50,15 @@ const components = {
 	[NotificationType.NewClassTimetableEvent]: NewClassTimetableEvent
 }
 
+interface WaypointState {
+	el: Element
+	going: 'IN' | 'OUT'
+	direction: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT'
+}
+
 export default defineComponent({
 	name: 'NotificationsListCard',
+	components: { Waypoint },
 	props: {
 		notification: {
 			type: Object as PropType<NotificationEntity>,
@@ -56,7 +67,10 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { loading, error, markNotificationSeen } = useNotification(props.notification)
-		return { loading, error, markNotificationSeen, formatTime, components }
+		const onChange = async (state: WaypointState) => {
+			if (state.going === 'IN') await markNotificationSeen()
+		}
+		return { loading, error, markNotificationSeen, onChange, formatTime, components }
 	}
 })
 </script>

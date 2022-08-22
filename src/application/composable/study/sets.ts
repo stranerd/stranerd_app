@@ -176,11 +176,8 @@ export const useSet = (set: SetEntity) => {
 
 	onMounted(async () => {
 		if (!setGlobal[set.id].fetched.value && !setGlobal[set.id].loading.value) await fetchAllSetEntities()
-		if (setGlobal[set.id].hash.value !== set.hash) {
-			setGlobal[set.id].hash.value = set.hash
-			await setGlobal[set.id].listener.reset(listenerFn)
-		}
-		await setGlobal[set.id].listener.start()
+		if (setGlobal[set.id].hash.value !== set.hash) setGlobal[set.id].hash.value = set.hash
+		await setGlobal[set.id].listener.reset(listenerFn)
 	})
 	onUnmounted(async () => {
 		await setGlobal[set.id].listener.close()
@@ -217,8 +214,8 @@ export const useSaveToSet = () => {
 		try {
 			await setLoading(true)
 			await SetsUseCases.saveProp(set.id, prop, [itemId], false)
-			//@ts-ignore
-			if (setGlobal[set.id]) setGlobal[set.id][prop].value = setGlobal[set.id][prop].value.filter((item) => item.id !== itemId)
+			// @ts-ignore
+			if (setGlobal[set.id]) setGlobal[set.id].saved[prop].value = setGlobal[set.id][prop].value.filter((item) => item.id !== itemId)
 			useStudyModal().closeSaveEntity()
 			await Notify({ title: 'Removed from folder successfully' })
 		} catch (e) {

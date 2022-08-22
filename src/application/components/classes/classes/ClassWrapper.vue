@@ -11,7 +11,7 @@
 					<IonText class="font-bold capitalize w-full truncate">{{ classInst.name }}</IonText>
 				</div>
 				<slot v-if="classInst.members.includes(id)" :classInst="classInst" />
-				<SearchClassListCard v-else :classInst="classInst" />
+				<SearchClassListCard v-else :key="classInst.hash" :classInst="classInst" />
 			</template>
 			<NotFound v-else title="Class not found" />
 		</div>

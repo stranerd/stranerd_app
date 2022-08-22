@@ -64,12 +64,12 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup(props) {
+	setup (props) {
 		const { id } = useAuth()
 		const {
 			loading, error, admins, tutors, members,
 			acceptRequest, leaveClass, addToClass, changeRole
-		} = useClassMembersList(props.classInst)
+		} = useClassMembersList(props.classInst, true)
 		return {
 			ClassUsers,
 			admins, tutors, members, loading, error, id,
