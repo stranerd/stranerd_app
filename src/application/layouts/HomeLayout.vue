@@ -4,7 +4,7 @@
 			<div class="layout">
 				<HomeTopNavigation />
 				<div class="layout-page">
-					<div class="w-full">
+					<div class="w-full z-0">
 						<slot />
 					</div>
 				</div>

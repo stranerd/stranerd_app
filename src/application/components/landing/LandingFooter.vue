@@ -1,128 +1,58 @@
 <template>
-	<footer>
-		<div class="w-full bg-secondaryText md:px-8 px-4">
-			<div class="container mx-auto px-3 py-10 lg:py-24">
-				<div>
-					<div class="flex items-stretch flex-wrap lg:flex-nowrap gap-10 lg:gap-36 xl:gap-48 my-10">
-						<div
-							class="w-full md:w-1/2 flex items-stretch md:flex-auto flex-none gap-10 lg:gap-36 xl:gap-48">
-							<div class="w-1/2 flex-auto">
-								<div>
-									<h2 class="footer-title font-bold">Company</h2>
-									<ul class="footer-links-contain text-sm">
-										<li class="my-10">
-											<router-link class="font-light" to="/legal/privacy-policy">Privacy Policy
-											</router-link>
-										</li>
-										<li class="my-10">
-											<router-link class="font-light" to="/legal/terms-of-use">Terms of Service
-											</router-link>
-										</li>
-										<li class="my-10">
-											<router-link class="font-light" to="/legal/terms-and-conditions">
-												Terms and Conditions
-											</router-link>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="w-1/2 flex-auto">
-								<div class="">
-									<h2 class="footer-title font-bold">Community</h2>
-									<ul class="footer-links-contain text-sm">
-										<li class="my-10">
-											<router-link class="font-light" to="/questions/create">
-												Ask a question
-											</router-link>
-										</li>
-										<li class="my-10">
-											<a class="font-light" href="https://stranerd.medium.com">Blog</a>
-										</li>
-										<li class="my-10">
-											<a class="font-light" href="https://www.instagram.com/stranerdafrica_/">
-												Stranerd Africa
-											</a>
-										</li>
-										<li class="my-10">
-											<a class="font-light" href="https://www.instagram.com/officialstranerd/">
-												Stranerd Official
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div
-							class="w-full md:w-1/2 flex items-stretch md:flex-auto flex-none gap-10 lg:gap-36 xl:gap-48">
-							<div class="w-1/2 flex-auto">
-								<div class="">
-									<h2 class="footer-title font-bold">About</h2>
-									<ul class="footer-links-contain text-sm">
-										<li class="my-10">
-											<router-link class="font-light" to="">Company</router-link>
-										</li>
-										<li class="my-10">
-											<router-link class="font-light" to="">Team</router-link>
-										</li>
-										<li class="my-10">
-											<router-link class="font-light" to="">Press</router-link>
-										</li>
-										<li class="my-10">
-											<router-link class="font-light" to="">Careers</router-link>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="w-1/2 flex-auto">
-								<div class="">
-									<h2 class="footer-title font-bold">Help</h2>
-									<ul class="footer-links-contain text-sm">
-										<li class="my-10">
-											<router-link class="font-light" to="/legal/faqs">
-												FAQs
-											</router-link>
-										</li>
-										<li class="my-10">
-											<a class="font-light" href="mailto:support@stranerd.com">Support</a>
-										</li>
-										<li class="my-10">
-											<a class="font-light" href="https://stranerd.medium.com">Blog</a>
-										</li>
-										<li class="my-10">
-											<a class="font-light" href="mailto:support@stranerd.com">Contact</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="flex flex-col sm:flex-row md:items-center justify-center">
-						<div class="flex gap-5 items-center justify-center md:justify-end my-10">
-							<a aria-label="instagram link" class="inline-block"
-								href="https://www.instagram.com/stranerdapp/"
-								target="_blank">
-								<IonIcon :icon="logoInstagram" />
-							</a>
-							<a aria-label="twitter link" class="inline-block" href="https://twitter.com/stranerds"
-								target="_blank">
-								<IonIcon :icon="logoTwitter" />
-							</a>
-							<a aria-label="facebook link" class="inline-block"
-								href="https://facebook.com/officialstranerd"
-								target="_blank">
-								<IonIcon :icon="logoFacebook" />
-							</a>
-							<a aria-label="facebook link" class="inline-block"
-								href="https://www.linkedin.com/company/stranerd"
-								target="_blank">
-								<IonIcon :icon="logoLinkedin" />
-							</a>
-						</div>
-					</div>
-					<p class="w-full text-center my-10">
-						© {{ new Date().getFullYear() }} | Stranerd LLC. All rights reserved.
-					</p>
+	<footer class="bg-primaryBg text-white p-4 py-24 w-full">
+		<div class="container mx-auto flex justify-between flex-wrap gap-5">
+			<div class="flex flex-col gap-4 w-[45%] md:w-auto">
+				<span class="font-bold md:text-2xl text-xl">Company</span>
+				<a href="#">About us</a>
+				<a href="#">Team</a>
+				<a href="#">Privacy Policy</a>
+				<a href="#">Terms of Service</a>
+				<a href="#">Terms and Conditions</a>
+				<p class="mt-8 pc">© 2022 | Stranerd LLC. All rights reserved.</p>
+			</div>
+			<div class="flex flex-col gap-4 w-[45%] md:w-auto">
+				<span class="font-bold md:text-2xl text-xl">Community</span>
+				<a href="https://stranerd.medium.com" target="_blank">Blog</a>
+				<a href="#">Stranerd APP</a>
+				<a href="#">Stranerd Official</a>
+			</div>
+			<div class="flex flex-col gap-4 w-[40%] md:w-auto mt-12 md:mt-0">
+				<span class="font-bold md:text-2xl text-xl">Help</span>
+				<router-link class="font-light" to="/legal/faqs">FAQs</router-link>
+				<a href="#">Honor Code</a>
+				<a href="mailto:support@stranerd.com" target="_blank">Support</a>
+				<a href="mailto:support@stranerd.com" target="_blank">Contact us</a>
+			</div>
+			<div class="flex flex-col w-[45%] md:w-auto mt-12 md:mt-0">
+				<span class="font-bold md:text-[32px] text-base">Download the app</span>
+				<p class="md:text-lg mt-3 text-xs">Complete access from anywhere at anytime.</p>
+				<div class="flex gap-4 items-center mt-6">
+					<a href="https://play.google.com/store/apps/details?id=com.stranerd.app" target="_blank" rel="noopener noreferrer">
+						<img src="@/assets/images/auth/playstore.svg" alt="playstore button" class="h-6 md:h-16"  />
+					</a>
+				
+					<img src="@/assets/images/auth/appstore.svg" alt="appstore button" class="h-6  md:h-16 cursor-not-allowed" />
 				</div>
+			</div>
+			<div class="flex flex-col w-full  mobile mt-6 gap-8">
+				<div class="flex items-center gap-6">
+					<a href="https://www.instagram.com/stranerdapp/" target="_blank" rel="noopener noreferrer">
+						<IonIcon :icon="logoInstagram" />
+					</a>
+					<!-- <a href="#" target="_blank" rel="noopener noreferrer">
+						<img src="../assets/icons/youtube.svg" alt="instagram"   />
+					</a> -->
+					<a href="https://twitter.com/stranerds" target="_blank" rel="noopener noreferrer">
+						<IonIcon :icon="logoTwitter" />
+					</a>
+					<a href="https://facebook.com/officialstranerd" target="_blank" rel="noopener noreferrer">
+						<IonIcon :icon="logoFacebook" />
+					</a>
+					<a href="https://www.linkedin.com/company/stranerd" target="_blank" rel="noopener noreferrer">
+						<IonIcon :icon="logoLinkedin" />
+					</a>
+				</div>
+				<p>© {{ new Date().getFullYear() }} | Stranerd LLC. All rights reserved.</p>
 			</div>
 		</div>
 	</footer>
