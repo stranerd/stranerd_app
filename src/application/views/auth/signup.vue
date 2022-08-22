@@ -1,13 +1,17 @@
 <template>
 	<AuthLayout>
-		<div class="w-full h-full flex">
-			<div class="w-7/12 lg:flex flex-col items-center justify-center h-full hidden">
-				<h1 class="text-5xl font-extrabold mb-12">Studying has never been easier</h1>
-				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png">
-			</div>
-			<div class="flex flex-col items-center mt-6 md:justify-center lg:w-5/12 w-full p-4">
-				<h1 class="md:block text-5xl hidden font-extrabold mb-8 text-center">Sign up today</h1>
+		<div class="flex items-center justify-center">
+		
+			<div class="flex flex-col items-center justify-center  lg:w-6/12 sm:w-8/12 w-full p-4">
+				<img src="@/assets/images/auth/signup.svg" alt="hero" class="mr-auto md:hidden mt-6">
+				<h1 class="md:block md:text-3xl text-2xl text-start w-full font-extrabold mb-8 md:mt-16 mt-8 md:text-center">Create account</h1>
 				<form class="flex flex-col gap-4" @submit.prevent="signup">
+					<AuthProviders />
+					<div class="flex justify-between  items-center my-4">
+						<div class="border-faded_gray border-b h-1 w-4/12" />
+						<span class="text-gray">Or sign up with </span>
+						<div class="border-faded_gray border-b h-1 w-4/12" />
+					</div>
 					<div class="flex w-full gap-4">
 						<div class="flex flex-col w-1/2">
 							<IonLabel class="font-bold mb-2">First Name</IonLabel>
@@ -54,10 +58,7 @@
 						<SpinLoading v-if="loading" />
 						<span v-else>Sign up</span>
 					</IonButton>
-					<div class="flex justify-center items-center">
-						<span>Or</span>
-					</div>
-					<AuthProviders />
+
 					<span class="w-full flex justify-center items-center mt-2 text-secondaryText">
 						Have an account?
 						<router-link class="text-primaryBg font-bold ml-2" to="/auth/signin">

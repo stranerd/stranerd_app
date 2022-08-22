@@ -1,63 +1,54 @@
 <template>
 	<IonHeader class="w-full flex flex-col z-10 nav-shadow" role="navigation">
-		<div class="md:px-16 p-4 hidden lg:flex items-center justify-between">
-			<router-link class="hidden lg:block" to="/">
-				<Logo :secondary="true" />
+		<div class="container flex mx-auto items-center justify-between p-4">
+			<router-link to="/">
+				<img alt="logo" class="h-5 md:h-auto" src="/images/icon_with_text.svg">
 			</router-link>
-			<div class="gap-8 lg:flex hidden items-center">
-				<router-link class="link-custom px-4" to="/">
-					Home
-				</router-link>
-				<router-link class="link-custom px-4" to="/questions">
-					Questions
-				</router-link>
-				<router-link class="link-custom px-4" to="/study">
-					Study
-				</router-link>
 
-				<Search class="flex-grow min-w-[20rem]" />
+			<div class="md:flex items-center justify-between gap-12 text-base hidden">
+				<span>Solutions</span>
+				<span>Upload</span>
+				<span>Pricing</span>
+				<span>About</span>
+				<span>Contact</span>
 			</div>
-			<div class="gap-8 lg:flex hidden">
-				<router-link class="btn !px-10 rounded-xl" to="/auth/signup">
-					Sign Up
-				</router-link>
-				<router-link class="btn !px-10 rounded-xl"
+
+			<div class="flex items-center  md:gap-8 gap-2 px-3 w-auto">
+				<router-link class="btn-outline"
 					to="/auth/signin">
 					Log In
 				</router-link>
+				<router-link class="btn" to="/auth/signup">
+					Sign Up
+				</router-link>
 			</div>
 		</div>
-
-		<IonToolbar class="lg:hidden px-4 border-0 h-12 flex items-center justify-center">
-			<div class="flex items-center justify-center font-bold text-base">
-				<span>{{ $route.meta.routeName ?? 'Stranerd' }}</span>
-			</div>
-		</IonToolbar>
 	</IonHeader>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Search from '@app/components/search/Search.vue'
 
 export default defineComponent({
-	name: 'HomeTopNavigation',
-	components: { Search }
+	name: 'HomeTopNavigation'
 })
 </script>
 
 <style lang="scss" scoped>
-	ion-toolbar {
-		--background: #{$color-headerBg};
-		--color: #{$color-headerText};
-	}
+ion-toolbar {
+	--background: #{$color-headerBg};
+	--color: #{$color-headerText};
+}
 
-	.link-custom {
-		font-weight: 700;
-		font-size: 16px;
-	}
+.btn-outline {
+	@apply rounded-md border border-primaryBg text-primaryBg font-bold px-4 py-1.5 text-xs
+}
 
-	.nav-shadow {
-		box-shadow: 0 5px 10px rgba(84, 109, 211, 0.1);
-	}
+.btn {
+	@apply rounded-md font-bold bg-primaryBg px-4 py-1.5 text-white text-xs
+}
+
+.nav-shadow {
+	box-shadow: 0 5px 10px rgba(84, 109, 211, 0.1);
+}
 </style>

@@ -1,12 +1,10 @@
 <template>
 	<AuthLayout>
-		<div class="w-full h-full flex">
-			<div class="w-7/12 lg:flex flex-col items-center justify-center h-full hidden">
-				<h1 class="text-5xl font-extrabold mb-12">Welcome back</h1>
-				<img alt="" class="object-contain h-[65%]" src="@app/assets/images/auth/auth.png">
-			</div>
-			<div class="flex flex-col items-center mt-6 md:justify-center lg:w-5/12 w-full p-4">
-				<h1 class="md:block text-5xl hidden font-extrabold mb-8 text-center">Forgot Password?</h1>
+		<div class="flex items-center justify-center">
+			<div class="flex flex-col items-center justify-center  lg:w-6/12 sm:w-8/12 w-full p-4">
+				<img alt="hero" class="mr-auto md:hidden mt-6" src="@/assets/images/auth/signup.svg">
+				<h1 class="md:block md:text-3xl text-2xl text-start w-full font-extrabold mb-8 md:mt-16 mt-8 md:text-center">
+					Forgot Password?</h1>
 				<form class="h-[65%] w-full md:w-[70%] flex flex-col gap-4" @submit.prevent="resetPassword">
 					<div class="flex flex-col">
 						<IonLabel class="font-bold mb-2">Email</IonLabel>
