@@ -1,0 +1,28 @@
+<template>
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28 -z-20">
+		<div class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
+			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
+				<span class="md:text-lg text-sm">What is Stranerd Connect?</span>
+				<h2 class="lg:text-5xl text-3xl font-bold  text-primaryBg lg:leading-[62px]">Peer to peer and class to class collaboration</h2>
+				<p class="lg:text-lg text-sm">
+					Stranerd Connect is a communication medium for messaging and file sharing. You can reach out to other users and classes to work together on assignments or projects. 
+				</p>
+				<button class="landing_btn-outline">
+					Get Started
+				</button>
+			</div>
+
+			<img src="@/assets/images/landing/stranerdConnect.svg" alt="hero" class="w-auto z-20">
+		</div>
+
+
+	</div>
+</template>
+
+<script setup lang="ts">
+
+</script>
+
+<style scoped>
+
+</style>

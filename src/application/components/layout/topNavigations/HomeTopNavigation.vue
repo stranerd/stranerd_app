@@ -8,8 +8,8 @@
 			<div class="md:flex items-center justify-between gap-12 text-base hidden">
 				<span>Solutions</span>
 				<span>Upload</span>
-				<span>Pricing</span>
-				<span>About</span>
+				<router-link to="/pricing">Pricing</router-link>
+				<router-link to="/about">About</router-link>
 				<span>Contact</span>
 			</div>
 
