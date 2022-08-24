@@ -1,13 +1,9 @@
 <template>
-	<div class="flex flex-col">
-		<h2 v-if="answers.length" class="text-xl font-bold p-4 lg:p-0 flex items-center">
-			<span>Answers</span>
-			<span
-				:style="`width: ${question.answers.length.toString().length + 0.5}ch; min-width: 2ch;max-width:3.1ch;`"
-				class="text-primaryText bg-primaryBg text-xs rounded-full ml-auto aspect-square flex items-center justify-center">
-				<span>{{ formatNumber(question.answers.length) }}</span>
-			</span>
+	<div class="py-6 showcase-flex">
+		<h2 class="px-4 lg:p-0 pb-4">
+			<span class="font-semibold">Answers</span> ({{ formatNumber(question.answers.length) }})
 		</h2>
+		<BlockLoading v-if="loading" />
 		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :like="likes[answer.id]"
 			:question="question" />
 		<EmptyState v-if="answers.length === 0" info="No answers yet" />

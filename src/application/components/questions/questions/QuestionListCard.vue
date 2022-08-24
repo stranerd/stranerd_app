@@ -35,7 +35,7 @@
 				</span>
 
 				<Share :link="question.shareLink" :text="question.strippedBody" title="Share this question" />
-				<SaveToSet :entity="question" class="mt-1.5" />
+				<SaveToSet :entity="question" />
 			</div>
 		</div>
 	</router-link>

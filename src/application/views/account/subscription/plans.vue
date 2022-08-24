@@ -16,7 +16,7 @@ import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
 import PlansList from '@app/components/payment/plans/PlansList.vue'
 
 export default defineComponent({
-	name: 'SettingsSubscriptionPlans',
+	name: 'AccountSubscriptionPlans',
 	components: { SettingsPanel, PlansList },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {

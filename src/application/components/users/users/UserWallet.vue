@@ -14,7 +14,7 @@
 		<div class="flex flex-col card-padding lg:p-0 text-secondaryText border-bottom-line">
 			<router-link v-for="{ label, route, icon } in [
 				{ label: 'Account details', route: '/account/wallet/details', icon: businessOutline },
-				{ label: 'Subscription', route: '/settings/subscription', icon: cardOutline },
+				{ label: 'Subscription', route: '/account/subscription', icon: cardOutline },
 				{ label: 'Transaction history', route: '/account/wallet/transactions', icon: fileTrayFullOutline },
 			]" :key="route" :to="route" class="flex gap-4 py-3 items-center">
 				<IonIcon :icon="icon" />

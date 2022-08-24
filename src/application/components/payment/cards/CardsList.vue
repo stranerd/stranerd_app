@@ -1,13 +1,13 @@
 <template>
-	<div id="cards" class="flex flex-col !gap-6">
+	<div id="cards" class="flex flex-col gap-4">
 		<IonText class="font-bold">Payment method</IonText>
 		<EmptyState v-if="!loading && !error && cards.length === 0" info="No cards saved" />
 		<CardsListCard v-for="card in cards" :key="card.hash" :card="card" />
 		<BlockLoading v-if="loading" />
-		<a class="flex items-center gap-4" @click="createTransaction">
-			<IonIcon :icon="addOutline" />
+		<IonButton class="btn-primary" @click="createTransaction">
+			<IonIcon :icon="addOutline" class="mr-4" />
 			<IonText>Add debit/credit card</IonText>
-		</a>
+		</IonButton>
 	</div>
 </template>
 
@@ -22,7 +22,7 @@ import CardsListCard from '@app/components/payment/cards/CardsListCard.vue'
 export default defineComponent({
 	name: 'CardsList',
 	components: { CardsListCard },
-	setup() {
+	setup () {
 		const { cards, loading, error } = useCardsList()
 		const { createTransaction } = useCreateTransaction(TransactionType.NewCard, 'A test amount will be charged and added to your wallet to see if the card works fine')
 		return { createTransaction, cards, loading, error, addOutline }

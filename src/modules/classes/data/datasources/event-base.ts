@@ -1,5 +1,6 @@
 import { Listeners, QueryParams, QueryResults } from '@modules/core'
 import { EventFromModel, EventToModel } from '../models/event'
+import { EventType } from '../../domain/types'
 
 export interface EventBaseDataSource {
 	create: (classId: string, data: EventToModel) => Promise<EventFromModel>
@@ -9,5 +10,5 @@ export interface EventBaseDataSource {
 	listenToMany: (classId: string, query: QueryParams, listener: Listeners<EventFromModel>) => Promise<() => void>
 	find: (classId: string, id: string) => Promise<EventFromModel | null>
 	delete: (classId: string, id: string) => Promise<void>
-	markRead: (classId: string) => Promise<boolean>
+	markRead: (classId: string, type: EventType) => Promise<boolean>
 }

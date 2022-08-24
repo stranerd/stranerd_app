@@ -1,10 +1,10 @@
-import { onMounted, onUnmounted, ref, Ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { ClassEntity, EventEntity, EventFactory, EventsUseCases, EventType } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 import { useClassModal } from '@app/composable/core/modals'
 import { Router, useRouter } from 'vue-router'
+import { useAuth } from '@app/composable/auth/auth'
 
 const global = {} as Record<string, {
 	events: Ref<EventEntity[]>
@@ -13,6 +13,7 @@ const global = {} as Record<string, {
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useTimetable = (classId: string) => {
+	const { id } = useAuth()
 	if (global[classId] === undefined) {
 		const listener = useListener(async () => {
 			return await EventsUseCases.listenToClassTimetable(classId, {
@@ -35,6 +36,8 @@ export const useTimetable = (classId: string) => {
 			...useLoadingHandler()
 		}
 	}
+
+	const unReadTimetable = computed(() => global[classId].events.value.filter((a) => !a.isRead(id.value)).length)
 
 	const fetchEvents = async () => {
 		await global[classId].setError('')
@@ -60,7 +63,8 @@ export const useTimetable = (classId: string) => {
 	return {
 		error: global[classId].error,
 		loading: global[classId].loading,
-		events: global[classId].events
+		events: global[classId].events,
+		unReadTimetable
 	}
 }
 
@@ -140,30 +144,4 @@ export const useEditEvent = () => {
 	}
 
 	return { error, loading, factory, editEvent, eventClass: editingEvent!.classInst }
-}
-
-export const useDeleteEvent = (classId: string, eventId: string) => {
-	const { loading, setLoading } = useLoadingHandler()
-	const { error, setError } = useErrorHandler()
-	const { setMessage } = useSuccessHandler()
-
-	const deleteEvent = async () => {
-		await setError('')
-		const accepted = await Alert({
-			title: 'Are you sure you want to delete this event?',
-			confirmButtonText: 'Yes, delete'
-		})
-		if (accepted) {
-			await setLoading(true)
-			try {
-				await EventsUseCases.delete(classId, eventId)
-				await setMessage('Event deleted successfully')
-			} catch (error) {
-				await setError(error)
-			}
-			await setLoading(false)
-		}
-	}
-
-	return { loading, error, deleteEvent }
 }

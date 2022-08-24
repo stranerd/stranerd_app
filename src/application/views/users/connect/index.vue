@@ -1,24 +1,24 @@
 <template>
-	<DefaultLayout>
-		<div class="showcase-flex">
-			<div class="flex flex-col items-center text-center border-bottom-line card-padding">
-				<img alt="" src="@app/assets/images/connect.svg">
-				<IonText class="text-xl px-5 mt-5">An easy way to work with students from other schools.</IonText>
-				<IonText class="text-secondaryText">
-					Stranerd connect makes communicating and collaborating with students from other schools easier.
-				</IonText>
-				<IonButton class="btn-primary mt-2 font-normal" @click="openModal()">
-					<IonIcon :icon="bulb" class="text-warning mr-3" />
-					See how Stranerd Connect works
-				</IonButton>
+	<DefaultLayout :ignorePagePadding="true">
+		<div class="flex flex-col">
+			<div class="border-bottom-line lg:px-8">
+				<div class="flex flex-col items-center text-center border-bottom-line card-padding">
+					<img alt="" src="@app/assets/images/connect.svg">
+					<IonText class="text-xl px-5 mt-5">An easy way to work with students from other schools.</IonText>
+					<IonText class="text-secondaryText">
+						Stranerd connect makes communicating and collaborating with students from other schools easier.
+					</IonText>
+					<IonButton class="btn-primary mt-2 font-normal" @click="openModal()">
+						<IonIcon :icon="bulb" class="text-warning mr-3" />
+						See how Stranerd Connect works
+					</IonButton>
+				</div>
 			</div>
-			<div class="w-full h-px bg-itemBg "></div>
 
-			<IonText class="font-bold text-center mt-5">How do you want to connect?</IonText>
+			<div class="border-bottom-line lg:px-8 flex flex-col items-center py-6">
+				<IonText class="font-bold text-center">How do you want to connect?</IonText>
 
-			<div class="flex flex-col !gap-4 card-padding w-full">
-
-				<div class="flex gap-3 w-full">
+				<div class="flex !gap-3 card-padding w-full">
 					<div v-for="{ icon, title, sub, tab } in [
 							{ icon: personOutline, title: 'Student connect', sub: '1 on 1 discussion with any student.',tab: 1 },
 							{ icon: peopleOutline, title: 'Class connect', sub: 'Class to class discussion with any class.', tab: 2 },
@@ -32,8 +32,21 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
+
+			<div class="border-bottom-line lg:px-8 text-secondaryText">
+				<router-link class="border-bottom-line card-padding flex items-center" to="/users/connect/requests">
+					<IonIcon :icon="linkOutline" />
+					<span>Connection requests</span>
+					<div class="flex-1"></div>
+					<span v-if="receivedConnects.length"
+						:style="`width: ${receivedConnects.length.toString().length + 0.5}ch; min-width: 2ch;max-width:3.1ch;`"
+						class="text-primaryText bg-primaryBg text-xs rounded-full ml-auto aspect-square flex items-center justify-center">
+						<span>{{ formatNumber(receivedConnects.length) }}</span>
+					</span>
+				</router-link>
+			</div>
+
 			<IonModal :isOpen="isOpen" cssClass="modal-class" @didDismiss="closeModal">
 				<div class="modal-content p-6 lg:p-8">
 					<div class="flex flex-col gap-2 items-center">
@@ -50,14 +63,20 @@
 							<div class="w-full flex justify-between items-center text-lg">
 								<IonText class="font-bold">Student Connect</IonText>
 								<IonIcon :icon="closeOutline" @click="closeModal" />
-
 							</div>
 							<IonText class="w-full text-secondaryText">
 								Start a discussion with a student in another class.
 								Send and get notified immediately it is accepted.
 							</IonText>
-							<IonInput v-model="searchTerm" class="w-full mt-2" placeholder="Enter email or name" />
-							<IonButton class="btn-primary w-full mt-2" @click="searchUsers">Send Request</IonButton>
+							<template v-if="fetched">
+								<div v-if="!users.length" class="w-full">No users found</div>
+								<SearchConnectedUser v-for="user in users" :key="user.hash" :user="user" />
+							</template>
+							<template v-else>
+								<IonInput v-model="detail" class="w-full mt-2" placeholder="Enter email or name" />
+								<IonButton :disabled="!detail" class="btn-primary w-full mt-2" @click="search">Search
+								</IonButton>
+							</template>
 						</template>
 						<template v-if="tab === 2">
 							<IonIcon :icon="informationCircleOutline" class="text-5xl text-info" />
@@ -75,27 +94,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useRouteMeta } from '@app/composable/core/states'
 import {
 	alertCircleOutline,
 	bulb,
 	closeOutline,
 	informationCircleOutline,
+	linkOutline,
 	peopleOutline,
 	personOutline
 } from 'ionicons/icons'
 import { generateMiddlewares } from '@app/middlewares'
-import { useSearch } from '@app/composable/meta/search'
-import { useRouter } from 'vue-router'
+import { useConnects } from '@app/composable/users/connects'
+import { formatNumber } from '@utils/commons'
+import { useSearchUsers } from '@app/composable/users'
+import SearchConnectedUser from '@app/components/users/connects/SearchConnectedUser.vue'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
-	name: 'Connect',
-	beforeRouteEnter: generateMiddlewares([ 'isAuthenticated' ]),
+	name: 'UsersConnect',
+	components: { SearchConnectedUser },
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Stranerd Connect', { back: true })
-		const router = useRouter()
-		const { searchTerm, search } = useSearch()
+		const { id } = useAuth()
+		const { receivedConnects } = useConnects()
+		const { detail, users: searchedUsers, reset, fetched, loading, search } = useSearchUsers()
+		const users = computed(() => searchedUsers.value.filter((u) => u.id !== id.value))
 		const isOpen = ref(false)
 		const tab = ref(0)
 		const openModal = (t = 0) => {
@@ -104,16 +130,13 @@ export default defineComponent({
 		}
 		const closeModal = () => {
 			isOpen.value = false
-		}
-		searchTerm.value = ''
-		const searchUsers = async () => {
-			closeModal()
-			await router.push(`/search/users?search=${ searchTerm.value }`)
-			await search()
+			reset()
 		}
 		return {
 			peopleOutline, personOutline, alertCircleOutline, informationCircleOutline,
-			closeOutline, isOpen, tab, openModal, closeModal, searchTerm, searchUsers, bulb
+			closeOutline, linkOutline, receivedConnects, formatNumber,
+			isOpen, tab, openModal, closeModal, bulb,
+			detail, users, reset, fetched, loading, search
 		}
 	}
 })

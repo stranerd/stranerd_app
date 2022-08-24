@@ -9,17 +9,19 @@
 		</div>
 		<div v-if="show" class="flex flex-col text-secondaryText">
 			<transition-group appear name="fade">
-				<router-link v-for="{ name, path, icon } in [
-						{ name: 'Announcements', path: 'announcements', icon: megaphoneOutline },
-						{ name: 'Events', path: 'events', icon: calendarOutline },
-						{ name: 'Timetable', path: 'timetable', icon: calendarClearOutline },
-						{ name: 'Scheme of Work', path: 'schemes', icon: listOutline },
-						{ name: 'Library', path: 'library', icon: libraryOutline },
-						{ name: 'About', path: '', icon: informationCircleOutline }
+				<router-link v-for="{ name, path, icon, unRead } in [
+						{ name: 'Announcements', path: 'announcements', icon: megaphoneOutline, unRead: !!unReadAnnouncements },
+						{ name: 'Events', path: 'events', icon: calendarOutline, unRead: !!unReadEvents },
+						{ name: 'Timetable', path: 'timetable', icon: calendarClearOutline, unRead: !!unReadTimetable },
+						{ name: 'Scheme of Work', path: 'schemes', icon: listOutline, unRead: !!unReadSchemes },
+						{ name: 'Library', path: 'library', icon: libraryOutline, unRead: false },
+						{ name: 'About', path: '', icon: informationCircleOutline, unRead: false }
 					]" :key="path" :to="`/classes/${classInst.id}/${path}`"
 					class="flex gap-4 items-center px-6 py-3" exact-active-class="hasBg">
 					<IonIcon :icon="icon" />
 					<IonText>{{ name }}</IonText>
+					<div class="flex-1" />
+					<IonIcon v-if="unRead" :icon="ellipse" class="dot text-info" />
 				</router-link>
 			</transition-group>
 		</div>
@@ -33,12 +35,17 @@ import {
 	calendarClearOutline,
 	calendarOutline,
 	chevronForwardOutline,
+	ellipse,
 	informationCircleOutline,
 	libraryOutline,
 	listOutline,
 	megaphoneOutline,
 	peopleOutline
 } from 'ionicons/icons'
+import { useAnnouncementList } from '@app/composable/classes/announcements'
+import { useEventList } from '@app/composable/classes/events'
+import { useTimetable } from '@app/composable/classes/timetable'
+import { useSchemesList } from '@app/composable/classes/schemes'
 
 export default defineComponent({
 	name: 'ClassListCard',
@@ -48,10 +55,15 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup () {
+	setup (props) {
 		const show = ref(true)
+		const { unReadAnnouncements } = useAnnouncementList(props.classInst.id)
+		const { unReadEvents } = useEventList(props.classInst.id)
+		const { unReadTimetable } = useTimetable(props.classInst.id)
+		const { unReadSchemes } = useSchemesList(props.classInst.id)
 		return {
-			show, chevronForwardOutline, informationCircleOutline, libraryOutline,
+			show, unReadAnnouncements, unReadEvents, unReadTimetable, unReadSchemes,
+			chevronForwardOutline, informationCircleOutline, libraryOutline, ellipse,
 			megaphoneOutline, peopleOutline, listOutline, calendarOutline, calendarClearOutline
 		}
 	}
@@ -59,11 +71,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	.fade-enter-from, .fade-leave-to {
-		opacity: 0;
-	}
+.fade-enter-from, .fade-leave-to {
+	opacity: 0;
+}
 
-	.fade-enter-active, .fade-leave-active {
-		transition: opacity .25s ease-in-out;
-	}
+.fade-enter-active, .fade-leave-active {
+	transition: opacity .25s ease-in-out;
+}
 </style>

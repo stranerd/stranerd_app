@@ -2,6 +2,7 @@ import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from
 import { apiBase } from '@utils/environment'
 import { EventFromModel, EventToModel } from '../models/event'
 import { EventBaseDataSource } from './event-base'
+import { EventType } from '../../domain/types'
 
 export class EventApiDataSource implements EventBaseDataSource {
 	private stranerdClient: HttpClient
@@ -44,7 +45,7 @@ export class EventApiDataSource implements EventBaseDataSource {
 		return await this.stranerdClient.put<EventToModel, EventFromModel>(`/${classId}/${id}`, data)
 	}
 
-	async markRead (classId: string) {
-		return await this.stranerdClient.post<any, boolean>(`/${classId}/read`, {})
+	async markRead (classId: string, type: EventType) {
+		return await this.stranerdClient.post<any, boolean>(`/${classId}/read`, { type })
 	}
 }

@@ -1,8 +1,8 @@
 <template>
 	<router-link :to="`/questions/${question.id}/answers/${answer.id}`"
-		class="rounded-xl flex flex-col !gap-4 card-padding">
+		class="rounded-xl flex flex-col !gap-4 card-padding lg:rounded-xl lg:border lg:border-disabled">
 		<div class="flex items-center gap-2 text-sm">
-			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="20" :src="answer.user.bio.photo" />
+			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="24" :src="answer.user.bio.photo" />
 			<span class="font-bold flex items-center gap-1">
 				<span>{{ answer.user.bio.fullName }}</span>
 				<Verified :verified="answer.isUserVerified" />
@@ -15,12 +15,12 @@
 			</div>
 		</div>
 
-		<DisplayHtml :html="answer.body" class="pl-7" />
+		<DisplayHtml :html="answer.body" class="pl-8" />
 
 		<Gallery v-if="answer.attachments.length" :media="answer.attachments" :path="answer.saveFilePath"
-			class="pl-7" />
+			class="pl-8" />
 
-		<div class="flex items-center gap-6 text-secondaryText text-sm pl-7">
+		<div class="flex items-center gap-6 text-secondaryText text-sm pl-8">
 			<div class="flex items-center gap-1">
 				<IonIcon :icon="like && like.value ? thumbsUp : thumbsUpOutline" @click="() => likeAnswer(true)" />
 				<span>{{ formatNumber(answer.meta.likes) }}</span>
@@ -34,7 +34,7 @@
 				<IonIcon :icon="chatbubbleOutline" />
 				<span>{{ formatNumber(answer.meta.comments) }}</span>
 			</router-link>
-			<div class="flex-grow" />
+			<div class="flex-1" />
 			<span v-if="showMarkBest" class="flex items-center gap-1" @click.prevent="markBestAnswer(question)">
 				<span>Mark as best</span>
 				<IonIcon :icon="checkmarkCircleOutline" />

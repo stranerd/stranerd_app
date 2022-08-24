@@ -1,6 +1,7 @@
 import { Listeners, QueryParams, QueryResults } from '@modules/core'
 import { EventToModel } from '../../data/models/event'
 import { EventEntity } from '../entities/event'
+import { EventType } from '../types'
 
 export interface IEventRepository {
 	add: (classId: string, data: EventToModel) => Promise<EventEntity>
@@ -10,5 +11,5 @@ export interface IEventRepository {
 	find: (classId: string, id: string) => Promise<EventEntity | null>
 	update: (classId: string, id: string, data: EventToModel) => Promise<EventEntity>
 	delete: (classId: string, id: string) => Promise<void>
-	markRead: (classId: string) => Promise<boolean>
+	markRead: (classId: string, type: EventType) => Promise<boolean>
 }

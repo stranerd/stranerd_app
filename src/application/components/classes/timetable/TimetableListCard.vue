@@ -25,9 +25,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { ClassEntity, EventEntity } from '@modules/classes'
-import { openEditTimetableModal, useDeleteEvent } from '@app/composable/classes/timetable'
+import { openEditTimetableModal } from '@app/composable/classes/timetable'
+import { markEventSeen, useDeleteEvent } from '@app/composable/classes/events'
 import { createOutline, timeOutline, trashBinOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 
@@ -46,6 +47,9 @@ export default defineComponent({
 	setup (props) {
 		const { id } = useAuth()
 		const { loading, error, deleteEvent } = useDeleteEvent(props.event.classId, props.event.id)
+		onMounted(async () => {
+			await markEventSeen(props.event, id.value)
+		})
 		return {
 			id, deleteEvent, loading, error, openEditTimetableModal, timeOutline,
 			trashBinOutline, createOutline

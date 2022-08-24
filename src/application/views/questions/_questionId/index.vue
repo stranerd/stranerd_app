@@ -1,12 +1,12 @@
 <template>
-	<DefaultLayout>
+	<DefaultLayout :ignorePagePadding="true">
 		<template v-slot:panel>
 			<QuestionsPanel />
 		</template>
-		<div class="flex flex-col lg:gap-8 h-full">
+		<div class="h-full lg:px-8 showcase-flex">
 			<BlockLoading v-if="loading" />
 			<template v-else-if="question">
-				<QuestionPageCard :question="question" class="border-bottom-line" />
+				<QuestionPageCard :question="question" />
 				<AnswersList v-if="isSubscribed" :question="question" />
 				<UnsubscribedAnswersList v-else :question="question" />
 			</template>

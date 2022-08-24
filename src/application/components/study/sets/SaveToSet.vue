@@ -1,5 +1,5 @@
 <template>
-	<span @click.prevent="openSaveModal(entity)">
+	<span class="mt-1.5" @click.prevent="openSaveModal(entity)">
 		<slot :isSaved="isSaved">
 			<IonIcon :class="{ 'text-primaryBg': isSaved }" :icon="isSaved ? bookmark : bookmarkOutline" />
 		</slot>

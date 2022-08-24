@@ -13,16 +13,16 @@ export class PlanEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             amount,
-		             currency,
-		             name,
-		             interval,
-		             active,
-		             data,
-		             createdAt,
-		             updatedAt
-	             }: PlanConstructorArgs) {
+					 id,
+					 amount,
+					 currency,
+					 name,
+					 interval,
+					 active,
+					 data,
+					 createdAt,
+					 updatedAt
+				 }: PlanConstructorArgs) {
 		super()
 		this.id = id
 		this.name = name
@@ -37,13 +37,13 @@ export class PlanEntity extends BaseEntity {
 
 	get features () {
 		return [
-			{ name: 'Class', available: true },
+			{ name: 'Classroom', available: true },
 			{ name: 'Flashcards', available: true },
-			{ name: 'File storage', available: true },
-			{ name: 'Answer a question', available: true },
-			{ name: 'Ask a question', available: !!this.id },
-			{ name: 'Answers', available: !!this.id },
-			{ name: 'Student connect', available: !!this.id }
+			{ name: 'Homework Help', available: true },
+			{ name: 'Stranerd Connect', available: !!this.id },
+			{ name: 'Practice Tests', available: !!this.id },
+			{ name: 'Past Question Solutions', available: !!this.id },
+			{ name: 'Solution Manuals', available: !!this.id }
 		]
 	}
 }

@@ -18,6 +18,10 @@ const eventGlobal = {} as Record<string, {
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
+export const markEventSeen = async (event: EventEntity, userId: string) => {
+	if (!event.isRead(userId)) await EventsUseCases.markRead(event.classId, event.data.type)
+}
+
 export const useEventList = (classId: string) => {
 	const { id } = useAuth()
 	if (global[classId] === undefined) {
