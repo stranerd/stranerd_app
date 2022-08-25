@@ -17,11 +17,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { ClassEntity, EventEntity } from '@modules/classes'
 import { calendarClearOutline, timeOutline, trashBinOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
-import { useDeleteEvent } from '@app/composable/classes/timetable'
+import { markEventSeen, useDeleteEvent } from '@app/composable/classes/events'
 import { formatDateAsDigits, formatTimeAsDigits } from '@utils/dates'
 
 export default defineComponent({
@@ -38,6 +38,9 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { id } = useAuth()
+		onMounted(async () => {
+			await markEventSeen(props.event, id.value)
+		})
 		const { loading, error, deleteEvent } = useDeleteEvent(props.event.classId, props.event.id)
 		return {
 			id, loading, error, deleteEvent, formatDateAsDigits, formatTimeAsDigits,

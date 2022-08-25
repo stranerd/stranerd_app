@@ -72,5 +72,24 @@ export const useCard = (card: CardEntity) => {
 		await global.setLoading(false)
 	}
 
-	return { loading, error, message, makeCardPrimary }
+	const deleteCard = async () => {
+		await setError('')
+		const accepted = await Alert({
+			title: 'Are you sure you want to delete this card?',
+			confirmButtonText: 'Yes, delete'
+		})
+		if (accepted) {
+			await setLoading(true)
+			try {
+				await CardsUseCases.delete(card.id)
+				global.cards.value = global.cards.value.filter((c) => c.id !== card.id)
+				await setMessage('Card deleted successfully')
+			} catch (error) {
+				await setError(error)
+			}
+			await setLoading(false)
+		}
+	}
+
+	return { loading, error, message, makeCardPrimary, deleteCard }
 }

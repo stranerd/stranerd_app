@@ -1,45 +1,43 @@
 <template>
-	<div class="gap-4 p-4 lg:p-0 flex flex-col">
-		<div class="flex items-center gap-4 text-secondaryText text-sm justify-between">
-			<InteractionTag :tagId="question.tagId" class="font-bold" />
-			<div class="flex flex-grow items-center justify-end gap-4">
-				<Share :link="question.shareLink" :text="question.strippedBody" title="Share this question" />
-				<IonIcon :icon="flagOutline" @click="openReportModal" />
-			</div>
-		</div>
-
-		<DisplayHtml :html="question.body" />
-
-		<div class="flex items-center justify-between gap-4 text-secondaryText text-sm">
-			<div class="flex items-center gap-2">
-				<Avatar :id="question.user.id" :size="24" :src="question.user.bio.photo" />
+	<div class="!gap-4 card-padding flex flex-col border-bottom-line lg:rounded-xl lg:border lg:border-disabled">
+		<div class="flex justify-between gap-2">
+			<Avatar :id="question.user.id" :size="36" :src="question.user.bio.photo" />
+			<div class="flex flex-col">
 				<span class="font-semibold text-secondaryText flex gap-1 items-center">
 					<span>{{ question.user.bio.fullName }}</span>
 					<Verified :verified="question.isUserVerified" />
 				</span>
+				<div class="flex gap-2 items-center text-secondaryText text-sm">
+					<InteractionTag :tagId="question.tagId" />
+					<IonIcon :icon="ellipse" class="dot" />
+					<span>{{ formatTime(question.createdAt) }}</span>
+				</div>
 			</div>
-			<div class="flex items-center gap-4">
-				<IonIcon v-if="showEditButton" :icon="createOutline" class="text-warning"
-					@click="openEditModal" />
-				<IonIcon v-if="showDeleteButton" :icon="trashBinOutline" class="text-danger"
-					@click="deleteQuestion" />
-				<span>{{ formatTime(question.createdAt) }}</span>
-			</div>
+			<div class="flex-1" />
+			<IonButton v-if="showAnswerButton" class="btn-primary" @click="openAnswerModal(question, $router)">
+				Answer
+			</IonButton>
 		</div>
+
+		<DisplayHtml :html="question.body" />
 
 		<Gallery v-if="question.attachments.length" :media="question.attachments" :path="question.saveFilePath"
 			class="py-3" />
 
-		<IonButton v-if="showAnswerButton"
-			class="btn-primary w-full" @click="openAnswerModal(question, $router)">
-			Add your answer
-		</IonButton>
+		<div class="flex items-center gap-4 text-secondaryText text-sm">
+			<IonIcon :icon="flagOutline" @click="openReportModal" />
+			<div class="flex-1" />
+			<Share :link="question.shareLink" :text="question.strippedBody" title="Share this question" />
+			<SaveToSet :entity="question" />
+			<IonIcon v-if="showEditButton" :icon="createOutline" class="text-warning" @click="openEditModal" />
+			<IonIcon v-if="showDeleteButton" :icon="trashBinOutline" class="text-danger" @click="deleteQuestion" />
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { createOutline, flagOutline, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
+import { createOutline, ellipse, flagOutline, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import InteractionTag from '@app/components/interactions/tags/Tag.vue'
 import { pluralize } from '@utils/commons'
@@ -50,6 +48,7 @@ import { formatTime } from '@utils/dates'
 import { useRouter } from 'vue-router'
 import { openCreateReportModal } from '@app/composable/reports/reports'
 import { ReportType } from '@modules/reports'
+import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
 	name: 'QuestionPageCard',
@@ -59,7 +58,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { InteractionTag },
+	components: { InteractionTag, SaveToSet },
 	setup (props) {
 		const { id } = useAuth()
 		const router = useRouter()
@@ -82,10 +81,9 @@ export default defineComponent({
 		const { loading, error, deleteQuestion } = useDeleteQuestion(props.question.id)
 
 		return {
-			shareSocial, flagOutline, pencil, trashBinOutline, createOutline,
+			shareSocial, flagOutline, pencil, trashBinOutline, createOutline, ellipse,
 			formatTime, pluralize,
-			showAnswerButton, openAnswerModal,
-			showEditButton, showDeleteButton,
+			showAnswerButton, openAnswerModal, showEditButton, showDeleteButton,
 			loading, error, deleteQuestion,
 			openReportModal: () => openCreateReportModal(ReportType.questions, props.question.id),
 			openEditModal: () => openQuestionEditModal(props.question, router)

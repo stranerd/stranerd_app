@@ -3,7 +3,7 @@ import { EventFactory } from '../factories/event'
 import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { PAGINATION_LIMIT } from '@utils/constants'
 import { EventEntity } from '../entities/event'
-import { EventType } from '@modules/classes/domain/types'
+import { EventType } from '../types'
 
 export class EventsUseCase {
 	private repository: IEventRepository
@@ -81,7 +81,7 @@ export class EventsUseCase {
 		return await this.repository.update(data.classId, id, data)
 	}
 
-	async markRead (classId: string) {
-		return this.repository.markRead(classId)
+	async markRead (classId: string, type: EventType) {
+		return this.repository.markRead(classId, type)
 	}
 }

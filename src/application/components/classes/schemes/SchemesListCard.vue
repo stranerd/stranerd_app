@@ -19,9 +19,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import { ClassEntity, SchemeEntity } from '@modules/classes'
-import { openEditSchemeModal, useDeleteScheme } from '@app/composable/classes/schemes'
+import { markSchemeSeen, openEditSchemeModal, useDeleteScheme } from '@app/composable/classes/schemes'
 import { calendarClearOutline, createOutline, trashBinOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { formatDateAsDigits } from '@utils/dates'
@@ -41,6 +41,9 @@ export default defineComponent({
 	setup (props) {
 		const { id } = useAuth()
 		const { loading, error, deleteScheme } = useDeleteScheme(props.scheme.classId, props.scheme.id)
+		onMounted(async () => {
+			await markSchemeSeen(props.scheme, id.value)
+		})
 		return {
 			id, deleteScheme, loading, error, openEditSchemeModal, calendarClearOutline,
 			trashBinOutline, createOutline, formatDateAsDigits

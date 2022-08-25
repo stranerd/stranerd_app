@@ -16,18 +16,18 @@ export class SchemeEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             title,
-		             classId,
-		             user,
-		             topic,
-		             start,
-		             end,
-		             users,
-		             readAt,
-		             createdAt,
-		             updatedAt
-	             }: SchemeConstructorArgs) {
+					 id,
+					 title,
+					 classId,
+					 user,
+					 topic,
+					 start,
+					 end,
+					 users,
+					 readAt,
+					 createdAt,
+					 updatedAt
+				 }: SchemeConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title
@@ -56,6 +56,10 @@ export class SchemeEntity extends BaseEntity {
 
 	getAllUsers () {
 		return Array.from(new Set(Object.values(this.users).flat()))
+	}
+
+	isRead (userId: string) {
+		return !!this.readAt[userId]
 	}
 }
 

@@ -4,7 +4,6 @@
 				{ name: 'Edit Profile', icon: personOutline, route: '/settings/profile' },
 				{ name: 'Edit School', icon: schoolOutline, route: '/settings/school' },
 				{ name: 'Security', icon: shieldCheckmarkOutline, route: '/settings/security' },
-				{ name: 'Subscription', icon: cardOutline, route: '/settings/subscription' },
 				{ name: 'Contact Us', icon: mailOutline, route: '/settings/contact' },
 				{ name: 'About', icon: informationCircleOutline, route: '/settings/about' },
 			]" :key="item.route" :to="item.route"
@@ -24,7 +23,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import {
-	cardOutline,
 	informationCircleOutline,
 	logOutOutline,
 	mailOutline,
@@ -42,7 +40,7 @@ export default defineComponent({
 		return {
 			signout, loading,
 			personOutline, schoolOutline, notificationsOutline, shieldCheckmarkOutline,
-			informationCircleOutline, mailOutline, logOutOutline, cardOutline
+			informationCircleOutline, mailOutline, logOutOutline
 		}
 	}
 })

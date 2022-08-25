@@ -66,7 +66,7 @@ export const useConnects = () => {
 	const createConnect = async (user: string) => {
 		if (global[userId].loading.value) return
 		if (!isSubscribed.value) {
-			await router.push('/settings/subscription/plans')
+			await router.push('/account/subscription/plans')
 			return await Notify({ title: 'You need an active subscription to connect with users!' })
 		}
 		await global[userId].setError('')
@@ -120,10 +120,14 @@ export const useConnects = () => {
 	}
 
 	const pendingConnects = computed(() => global[userId].connects.value
-		.filter((c) => c.pending && c.to.id === userId))
+		.filter((c) => c.pending))
+	const receivedConnects = computed(() => pendingConnects.value
+		.filter((c) => c.to.id === userId))
+	const sentConnects = computed(() => pendingConnects.value
+		.filter((c) => c.from.id === userId))
 
 	return {
-		...global[userId], pendingConnects,
+		...global[userId], pendingConnects, receivedConnects, sentConnects,
 		createConnect, acceptConnect, deleteConnect
 	}
 }

@@ -29,7 +29,7 @@ export const useWallet = () => {
 				await setMessage('Subscribed successfully!')
 			} else {
 				await setError('You do not have a primary card. Add one!')
-				await router.push('/settings/subscription/#cards')
+				await router.push('/account/subscription/#cards')
 			}
 		} catch (error) {
 			await setError(error)

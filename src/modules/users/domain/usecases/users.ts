@@ -5,7 +5,7 @@ import { UserEntity } from '../entities/user'
 import { UserSchoolFactory } from '../factories/userSchool'
 import { PAGINATION_LIMIT } from '@utils/constants'
 
-const searchFields = ['bio.firstName', 'bio.lastName', 'bio.email']
+const searchFields = ['bio.firstName', 'bio.lastName', 'bio.fullName', 'bio.email']
 
 export class UsersUseCase {
 	private repository: IUserRepository

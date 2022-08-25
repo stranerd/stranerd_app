@@ -4,6 +4,7 @@ import { EventEntity } from '../../domain/entities/event'
 import { EventBaseDataSource } from '../datasources/event-base'
 import { EventTransformer } from '../transformers/event'
 import { EventToModel } from '../models/event'
+import { EventType } from '../../domain/types'
 
 export class EventRepository implements IEventRepository {
 	private dataSource: EventBaseDataSource
@@ -70,7 +71,7 @@ export class EventRepository implements IEventRepository {
 		return this.dataSource.delete(classId, id)
 	}
 
-	async markRead (classId: string) {
-		return this.dataSource.markRead(classId)
+	async markRead (classId: string, type: EventType) {
+		return this.dataSource.markRead(classId, type)
 	}
 }

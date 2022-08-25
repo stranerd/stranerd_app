@@ -1,17 +1,20 @@
 <template>
-	<div class="flex items-center gap-2">
+	<div class="flex items-center gap-2 border border-disabled rounded-xl card-padding">
 		<IonIcon :icon="cardOutline" />
 		<IonText class="w-full">**** **** **** {{ card.last4Digits }}</IonText>
 		<SpinLoading v-if="loading" />
-		<IonIcon v-else :class="{'text-primaryBg': card.primary }"
-			:icon="card.primary ? radioButtonOnOutline : radioButtonOffOutline"
-			@click="makeCardPrimary" />
+		<template v-else>
+			<IonIcon v-if="!card.primary" :icon="removeCircleOutline" class="text-danger" @click="deleteCard" />
+			<IonIcon :class="{'text-primaryBg': card.primary }"
+				:icon="card.primary ? radioButtonOnOutline : radioButtonOffOutline"
+				@click="makeCardPrimary" />
+		</template>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { cardOutline, radioButtonOffOutline, radioButtonOnOutline } from 'ionicons/icons'
+import { cardOutline, radioButtonOffOutline, radioButtonOnOutline, removeCircleOutline } from 'ionicons/icons'
 import { CardEntity } from '@modules/payment'
 import { useCard } from '@app/composable/payment/cards'
 
@@ -24,10 +27,10 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { loading, error, message, makeCardPrimary } = useCard(props.card)
+		const { loading, error, message, makeCardPrimary, deleteCard } = useCard(props.card)
 		return {
-			cardOutline, radioButtonOnOutline, radioButtonOffOutline,
-			makeCardPrimary, loading, error, message
+			cardOutline, radioButtonOnOutline, radioButtonOffOutline, removeCircleOutline,
+			makeCardPrimary, deleteCard, loading, error, message
 		}
 	}
 })

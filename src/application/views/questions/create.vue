@@ -35,7 +35,7 @@ export default defineComponent({
 		if (!wallet.value) return goBackToNonAuth()
 		if (!wallet.value?.subscription.data.questions) {
 			Notify({ title: 'You don\'t have any questions left' })
-			return '/settings/subscription'
+			return '/account/subscription'
 		}
 	}]),
 	setup () {

@@ -7,7 +7,7 @@
 			<IonIcon :icon="arrowForwardOutline" />
 		</router-link>
 		<router-link class="card-padding !gap-4 flex items-center border-bottom-line" exact-active-class="hasBg"
-			to="/connect">
+			to="/users/connect">
 			<IonIcon :icon="linkOutline" />
 			<IonText>Stranerd Connect</IonText>
 		</router-link>

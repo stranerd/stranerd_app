@@ -6,6 +6,7 @@
 					{ label: 'Stats', route: '/account/stats', icon: gridOutline },
 					{ label: 'My Library', route: '/account/files', icon: libraryOutline },
 					{ label: 'Saved', route: '/account/sets', icon: bookmarkOutline },
+					{ label: 'Subscription', route: '/account/subscription', icon: cardOutline },
 					{ label: 'Wallet', route: '/account/wallet', icon: walletOutline },
 					{ label: 'Settings', route: '/settings', icon: settingsOutline, hide:true },
 				]" :key="route" :class="[hide&&'md:hidden','flex gap-4 py-4 items-center']" :to="route">
@@ -53,6 +54,7 @@
 import { computed, defineComponent } from 'vue'
 import {
 	bookmarkOutline,
+	cardOutline,
 	createOutline,
 	gridOutline,
 	libraryOutline,
@@ -83,7 +85,7 @@ export default defineComponent({
 		const connect = computed(() => connects.value.find((c) => c.members.includes(id.value) && c.members.includes(user?.id as any)))
 		return {
 			user, id, isAdmin,
-			gridOutline, libraryOutline, bookmarkOutline, settingsOutline,
+			cardOutline, gridOutline, libraryOutline, bookmarkOutline, settingsOutline,
 			createOutline, shareOutline, linkOutline, walletOutline,
 			verifiedLoading, verifyUser,
 			connect, connectLoading, deleteConnect, acceptConnect

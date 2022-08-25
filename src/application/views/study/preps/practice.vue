@@ -1,7 +1,7 @@
 <template>
 	<PrepsWrapper>
 		<div class="h-full flex flex-col lg:gap-8">
-			<div class="flex items-center p-4 lg:p-0 gap-4">
+			<div class="flex items-center px-4 py-6 lg:p-0 gap-4">
 				<form v-if="institutions.length" class="flex-2" @submit.prevent="search">
 					<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 				</form>

@@ -5,6 +5,7 @@ import { Alert } from '@utils/dialog'
 import { addToArray, groupBy } from '@utils/commons'
 import { useClassModal } from '@app/composable/core/modals'
 import { Router, useRouter } from 'vue-router'
+import { useAuth } from '@app/composable/auth/auth'
 
 const global = {} as Record<string, {
 	schemes: Ref<SchemeEntity[]>
@@ -12,7 +13,12 @@ const global = {} as Record<string, {
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
+export const markSchemeSeen = async (scheme: SchemeEntity, userId: string) => {
+	if (!scheme.isRead(userId)) await SchemesUseCases.markRead(scheme.classId)
+}
+
 export const useSchemesList = (classId: string) => {
+	const { id } = useAuth()
 	if (global[classId] === undefined) {
 		const listener = useListener(async () => {
 			return await SchemesUseCases.listenToClassSchemes(classId, {
@@ -36,6 +42,8 @@ export const useSchemesList = (classId: string) => {
 		}
 	}
 
+	const unReadSchemes = computed(() => global[classId].schemes.value.filter((s) => !s.isRead(id.value)).length)
+
 	const fetchSchemes = async () => {
 		await global[classId].setError('')
 		try {
@@ -58,7 +66,7 @@ export const useSchemesList = (classId: string) => {
 	})
 
 	return {
-		...global[classId],
+		...global[classId], unReadSchemes,
 		schemes: computed(() => groupBy(global[classId].schemes.value, (scheme) => scheme.title))
 	}
 }

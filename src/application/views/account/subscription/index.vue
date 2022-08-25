@@ -4,26 +4,28 @@
 			<SettingsPanel />
 		</template>
 
-		<div class="flex flex-col lg:gap-4">
-			<div class="flex flex-col border-bottom-line gap-4 p-4 lg:p-0">
+		<div class="flex flex-col">
+			<div class="flex flex-col border-bottom-line gap-4 p-4 lg:py-6 lg:px-0">
 				<IonText>Current Plan</IonText>
-				<IonText class="text-xl font-bold capitalize">{{ plan?.name }}</IonText>
-				<div v-if="wallet" class="gap-4 flex items-center">
-					<IonIcon :icon="helpCircleOutline" />
-					<IonText>
-						You have {{ wallet?.subscription.data.questions }}
-						{{ pluralize(wallet?.subscription.data.questions, 'question', 'questions') }} to ask
-					</IonText>
+				<div class="flex flex-col gap-4 border border-disabled card-padding rounded-xl">
+					<IonText class="text-xl font-bold capitalize">{{ plan?.name }}</IonText>
+					<div v-if="wallet" class="gap-2 flex items-center">
+						<IonIcon :icon="helpCircleOutline" />
+						<IonText>
+							You have {{ wallet?.subscription.data.questions }}
+							{{ pluralize(wallet?.subscription.data.questions, 'question', 'questions') }} to ask
+						</IonText>
+					</div>
 				</div>
 			</div>
 
-			<router-link class="border-bottom-line card-padding lg:p-0 flex items-center justify-between gap-4"
-				to="/settings/subscription/plans">
+			<router-link class="border-bottom-line card-padding lg:px-0 flex items-center justify-between gap-4"
+				to="/account/subscription/plans">
 				<IonText>See available plans</IonText>
 				<IonIcon :icon="arrowForwardOutline" />
 			</router-link>
 
-			<CardsList class="border-bottom-line card-padding lg:p-0" />
+			<CardsList class="border-bottom-line p-4 lg:py-6 lg:px-0 border-bottom-line" />
 		</div>
 	</DefaultLayout>
 </template>
@@ -40,7 +42,7 @@ import { useAuth } from '@app/composable/auth/auth'
 import { pluralize } from '@utils/commons'
 
 export default defineComponent({
-	name: 'SettingsSubscription',
+	name: 'AccountSubscription',
 	components: { SettingsPanel, CardsList },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
