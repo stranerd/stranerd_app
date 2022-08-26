@@ -1,7 +1,6 @@
 import { ICourseRepository } from '../irepositories/icourse'
 import { CourseFactory } from '../factories/course'
-import { Conditions, QueryParams } from '@modules/core'
-import { PastQuestionType } from '@modules/school'
+import { QueryParams } from '@modules/core'
 
 export class CoursesUseCase {
 	private repository: ICourseRepository

@@ -16,10 +16,10 @@ export class AnswerEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, body, questionId, tagId,
-		             createdAt, user, attachments, meta,
-		             best, updatedAt
-	             }: AnswerConstructorArgs) {
+					 id, body, questionId, tagId,
+					 createdAt, user, attachments, meta,
+					 best, updatedAt
+				 }: AnswerConstructorArgs) {
 		super()
 		this.id = id
 		this.body = body

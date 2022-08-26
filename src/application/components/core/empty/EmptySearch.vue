@@ -20,10 +20,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-button {
-		min-width: 200px;
-		--border-radius: 10rem;
-		--padding-top: 1.25rem;
-		--padding-bottom: 1.25rem;
-	}
+ion-button {
+	min-width: 200px;
+	--border-radius: 10rem;
+	--padding-top: 1.25rem;
+	--padding-bottom: 1.25rem;
+}
 </style>

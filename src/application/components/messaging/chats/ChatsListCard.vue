@@ -45,7 +45,7 @@ export default defineComponent({
 			type: ChatEntity
 		}
 	},
-	setup(props) {
+	setup (props) {
 		const { id } = useAuth()
 		useChat(props.chat)
 		return {

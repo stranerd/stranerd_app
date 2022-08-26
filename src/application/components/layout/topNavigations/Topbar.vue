@@ -7,7 +7,7 @@
 				</router-link>
 				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
 					class="text-base text-headerText lg:hidden"
-					defaultHref="/dashboard" text="" mode="ios" />
+					defaultHref="/dashboard" mode="ios" text="" />
 				<IonText class="font-bold text-xl lg:hidden truncate max-w-[240px] capitalize">
 					{{ $route.meta.routeName ?? '' }}
 				</IonText>
@@ -49,21 +49,21 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-toolbar {
-		--background: #{$color-headerBg};
-		--color: #{$color-headerText};
-		--box-shadow: none;
-	}
+ion-toolbar {
+	--background: #{$color-headerBg};
+	--color: #{$color-headerText};
+	--box-shadow: none;
+}
 
-	ion-header {
-		--background: #{$color-headerBg};
-		--color: #{$color-headerText};
-		--box-shadow: none;
-	}
+ion-header {
+	--background: #{$color-headerBg};
+	--color: #{$color-headerText};
+	--box-shadow: none;
+}
 
-	::v-deep() {
-		ion-searchbar {
-			background: $color-primaryHover !important;
-		}
+::v-deep() {
+	ion-searchbar {
+		background: $color-primaryHover !important;
 	}
+}
 </style>

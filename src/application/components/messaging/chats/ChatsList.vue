@@ -28,7 +28,7 @@ export default defineComponent({
 			type: String
 		}
 	},
-	setup(props) {
+	setup (props) {
 		const { loading, error, hasMore, chats, fetchOlderChats } = useChats(props.to)
 		return { loading, error, hasMore, chats, fetchOlderChats, formatTime }
 	}

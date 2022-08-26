@@ -31,10 +31,10 @@ export class QuestionEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, body, tagId, isAnswered,
-		             bestAnswers, createdAt, user, attachments,
-		             meta, answers, updatedAt
-	             }: QuestionConstructorArgs) {
+					 id, body, tagId, isAnswered,
+					 bestAnswers, createdAt, user, attachments,
+					 meta, answers, updatedAt
+				 }: QuestionConstructorArgs) {
 		super()
 		this.id = id
 		this.body = body

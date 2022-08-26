@@ -1,19 +1,19 @@
 <template>
 	<HomeLayout>
-		<About />
+		<Connect />
 	</HomeLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRouteMeta } from '@app/composable/core/states'
-import About from '@app/components/landing/about/index.vue'
+import Connect from '@app/components/landing/connect/index.vue'
 
 export default defineComponent({
-	name: 'PageAbout',
-	components: { About },
+	name: 'PageConnect',
+	components: { Connect },
 	setup () {
-		useRouteMeta('About', {})
+		useRouteMeta('Connect', {})
 	}
 })
 </script>

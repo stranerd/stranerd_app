@@ -17,13 +17,13 @@ export class SetEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             name,
-		             user,
-		             saved,
-		             createdAt,
-		             updatedAt
-	             }: SetConstructorArgs) {
+					 id,
+					 name,
+					 user,
+					 saved,
+					 createdAt,
+					 updatedAt
+				 }: SetConstructorArgs) {
 		super()
 		this.id = id
 		this.user = generateEmbeddedUser(user)

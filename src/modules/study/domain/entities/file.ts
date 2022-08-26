@@ -11,13 +11,13 @@ export class FileEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             title,
-		             media,
-		             user,
-		             createdAt,
-		             updatedAt
-	             }: FileConstructorArgs) {
+					 id,
+					 title,
+					 media,
+					 user,
+					 createdAt,
+					 updatedAt
+				 }: FileConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title

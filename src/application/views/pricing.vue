@@ -1,19 +1,19 @@
 <template>
 	<HomeLayout>
-		<About />
+		<Pricing />
 	</HomeLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRouteMeta } from '@app/composable/core/states'
-import About from '@app/components/landing/about/index.vue'
+import Pricing from '@app/components/landing/pricing/index.vue'
 
 export default defineComponent({
-	name: 'PageAbout',
-	components: { About },
+	name: 'SolutionsSchools',
+	components: { Pricing },
 	setup () {
-		useRouteMeta('About', {})
+		useRouteMeta('Pricing', {})
 	}
 })
 </script>

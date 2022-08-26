@@ -42,7 +42,7 @@ export default defineComponent({
 		}
 	},
 	components: { ClassMember },
-	setup(props) {
+	setup (props) {
 		const { id } = useAuth()
 		const show = ref([] as boolean[])
 		const { loading, error, admins, tutors, members, requests } = useClassMembersList(props.classInst)

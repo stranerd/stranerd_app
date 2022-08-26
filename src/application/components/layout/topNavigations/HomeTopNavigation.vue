@@ -6,16 +6,14 @@
 			</router-link>
 
 			<div class="lg:flex items-center justify-between gap-12 text-base hidden">
-				<span>Solutions</span>
-				<a href="http://" target="_blank" rel="noopener noreferrer">Upload</a>
+				<router-link to="/#solutions">Solutions</router-link>
+				<a href="https://upload.stranerd.com" rel="noopener noreferrer" target="_blank">Upload</a>
 				<router-link to="/pricing">Pricing</router-link>
 				<router-link to="/about">About</router-link>
-				<!-- <span>Contact</span> -->
 			</div>
 
-			<div class="flex items-center  md:gap-8 gap-2 px-3 w-auto">
-				<router-link class="btn-outline"
-					to="/auth/signin">
+			<div class="flex items-center md:gap-8 gap-2 px-3 w-auto">
+				<router-link class="btn-outline" to="/auth/signin">
 					Log In
 				</router-link>
 				<router-link class="btn" to="/auth/signup">

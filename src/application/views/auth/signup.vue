@@ -1,10 +1,11 @@
 <template>
 	<AuthLayout>
 		<div class="flex items-center justify-center">
-		
+
 			<div class="flex flex-col items-center justify-center  lg:w-6/12 sm:w-8/12 w-full p-4">
-				<img src="@/assets/images/auth/signup.svg" alt="hero" class="mr-auto md:hidden mt-6">
-				<h1 class="md:block md:text-3xl text-2xl text-start w-full font-extrabold mb-8 md:mt-16 mt-8 md:text-center">Create account</h1>
+				<img alt="hero" class="mr-auto md:hidden mt-6" src="@/assets/images/auth/signup.svg">
+				<h1 class="md:block md:text-3xl text-2xl text-start w-full font-extrabold mb-8 md:mt-16 mt-8 md:text-center">
+					Create account</h1>
 				<form class="flex flex-col gap-4" @submit.prevent="signup">
 					<AuthProviders />
 					<div class="flex justify-between  items-center my-4">

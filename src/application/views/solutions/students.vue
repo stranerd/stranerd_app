@@ -1,19 +1,19 @@
 <template>
 	<HomeLayout>
-		<About />
+		<ForStudent />
 	</HomeLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRouteMeta } from '@app/composable/core/states'
-import About from '@app/components/landing/about/index.vue'
+import ForStudent from '@app/components/landing/forStudent/index.vue'
 
 export default defineComponent({
-	name: 'PageAbout',
-	components: { About },
+	name: 'SolutionsStudents',
+	components: { ForStudent },
 	setup () {
-		useRouteMeta('About', {})
+		useRouteMeta('Students', {})
 	}
 })
 </script>

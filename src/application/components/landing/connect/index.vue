@@ -3,24 +3,24 @@
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
-				<span class="md:text-lg text-sm">Improving lecturing experience</span>
-				<h2 class="lg:text-5xl text-3xl font-bold  text-primaryBg lg:leading-[62px]">Manage your courses and
-					students better</h2>
+				<span class="md:text-lg text-sm">What is Stranerd Connect?</span>
+				<h2 class="lg:text-5xl text-3xl font-bold  text-primaryBg lg:leading-[62px]">Peer to peer and class to
+					class collaboration</h2>
 				<p class="lg:text-lg text-sm">
-					An easier way to better improve communications and interactions with students studying your
-					course(s).
+					Stranerd Connect is a communication medium for messaging and file sharing. You can reach out to
+					other users and classes to work together on assignments or projects.
 				</p>
 				<button class="landing_btn-outline">
-					Get started
+					Get Started
 				</button>
 			</div>
-			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/forSchools.svg">
+			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/stranerdConnect.svg">
 		</div>
 	</div>
 
 	<div class="w-full lg:min-h-[696px] h-auto flex flex-col bg-primaryBg relative py-12 md:py-28 -z-20 px-6">
 		<h1 class="lg:text-6xl text-4xl font-bold text-bodyBg text-center mb-16">Features</h1>
-		<div class=" mx-auto place-content-center self-center grid lg:grid-cols-3 grid-cols-2 md:gap-8 gap-4  h-full">
+		<div class=" mx-auto place-content-center self-center grid lg:grid-cols-2 grid-cols-2 md:gap-8 gap-4  h-full">
 			<div v-for="n in features" :key="n.title" class="card">
 				<IonIcon :icon="n.icon" :style="`color:${n.color}`" />
 				<h2 class="font-bold">{{ n.title }}</h2>
@@ -29,7 +29,7 @@
 		</div>
 	</div>
 
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-[#ad92eb1e] relative py-12 md:py-28 -z-20">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-[#00c6b52c] relative py-12 md:py-28 -z-20">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
@@ -56,47 +56,30 @@
 
 <script lang="ts" setup>
 import LandingFooter from '@app/components/landing/LandingFooter.vue'
-import { clipboard, document, people, reader, school } from 'ionicons/icons'
+import { people, person } from 'ionicons/icons'
 
 const features = [
 	{
-		icon: school,
-		title: 'Courses',
-		desc: 'Create seperate spaces for different courses you manage.',
+		icon: person,
+		title: 'Student Connect',
+		desc: '1 on 1 discussions with any student in any class.',
 		color: '#00C6B5'
 	},
 	{
-		icon: reader,
-		title: 'Posts',
-		desc: 'Latest information from educators keeping their students up to date.',
-		color: '#FF6496'
-	},
-	{
 		icon: people,
-		title: 'Attendance',
-		desc: 'An easier way to take attendance of students who attend your class.',
-		color: '#218FDF'
-	},
-	{
-		icon: clipboard,
-		title: 'Assignments',
-		desc: 'Manage assignments, set deadlines, and collect submissions.',
-		color: '#AC92EB'
-	},
-	{
-		icon: document,
-		title: 'Files',
-		desc: 'Uploading resources in an organised manner immune to data loss.',
-		color: '#FF8800'
+		title: 'Class Connect',
+		desc: 'Class to class discussions with other classes.',
+		color: '#FF6496'
 	}
+
 
 ]
 </script>
 
 <style scoped>
 @media (min-width: 1000px) {
-	.lg\:grid-cols-3 {
-		grid-template-columns: repeat(3, minmax(0, 378px)) !important;
+	.lg\:grid-cols-2 {
+		grid-template-columns: repeat(2, minmax(0, 378px)) !important;
 	}
 }
 

@@ -4,7 +4,6 @@ import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/comp
 import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
-import { TestPrepsUseCases } from '@modules/study'
 
 const global = {
 	fetched: ref(false),

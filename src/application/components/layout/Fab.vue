@@ -21,8 +21,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-fab-button {
-		--background: #{$color-primaryBg};
-		--color: #{$color-primaryText};
-	}
+ion-fab-button {
+	--background: #{$color-primaryBg};
+	--color: #{$color-primaryText};
+}
 </style>

@@ -34,23 +34,23 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-input {
-		border-radius: 10rem;
-	}
+ion-input {
+	border-radius: 10rem;
+}
 
-	ion-button {
-		height: 36px;
-		width: 36px;
-		--padding-start: 0.4rem !important;
-		--padding-end: 0.4rem !important;
-		--padding-top: 0.4rem !important;
-		--padding-bottom: 0.4rem !important;
-		--border-radius: 10rem !important;
-		@media (min-width: $md) {
-			--padding-start: 0.6rem !important;
-			--padding-end: 0.6rem !important;
-			--padding-top: 0.6rem !important;
-			--padding-bottom: 0.6rem !important;
-		}
+ion-button {
+	height: 36px;
+	width: 36px;
+	--padding-start: 0.4rem !important;
+	--padding-end: 0.4rem !important;
+	--padding-top: 0.4rem !important;
+	--padding-bottom: 0.4rem !important;
+	--border-radius: 10rem !important;
+	@media (min-width: $md) {
+		--padding-start: 0.6rem !important;
+		--padding-end: 0.6rem !important;
+		--padding-top: 0.6rem !important;
+		--padding-bottom: 0.6rem !important;
 	}
+}
 </style>

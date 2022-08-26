@@ -101,7 +101,7 @@ export default {
 			valueTotal = Number(valueTotal.toFixed(2))
 
 			if (valueTotal > this.total) {
-				const err = `Sum of all the sections' values (${valueTotal}) should not exceed \`total\` (${this.total})`
+				const err = `Sum of all the sections' values (${ valueTotal }) should not exceed \`total\` (${ this.total })`
 				throw new Error(err)
 			}
 			const degreesInACircle = 360
@@ -156,8 +156,8 @@ export default {
 			let currentDefaultColorIdx = 0
 
 			return this.sections.map((section, idx) => ({
-				label: section.label || `Section ${idx + 1}`,
-				percent: `${section.value} (${(section.value / this.total) * 100}%)`,
+				label: section.label || `Section ${ idx + 1 }`,
+				percent: `${ section.value } (${ (section.value / this.total) * 100 }%)`,
 				styles: {
 					backgroundColor: section.color || defaultColors[currentDefaultColorIdx++]
 				}
@@ -168,7 +168,7 @@ export default {
 			return placementStyles[this.legendPlacement]
 		},
 		donutStyles () {
-			const size = `${this.size}${this.unit}`
+			const size = `${ this.size }${ this.unit }`
 			const styles = {
 				width: size,
 				paddingBottom: size,
@@ -180,8 +180,8 @@ export default {
 			const availablePercent = 100
 			const size = availablePercent - this.thickness
 
-			const sizePercent = `${size}%`
-			const pos = `calc(50% - ${size / 2}%)`
+			const sizePercent = `${ size }%`
+			const pos = `calc(50% - ${ size / 2 }%)`
 
 			return {
 				height: sizePercent,
@@ -246,7 +246,7 @@ export default {
 					else widthInPx = null
 				}
 
-				this.fontSize = widthInPx ? `${(widthInPx * scaleDownBy).toFixed(2)}px` : '1em'
+				this.fontSize = widthInPx ? `${ (widthInPx * scaleDownBy).toFixed(2) }px` : '1em'
 			})
 		},
 		emitSectionEvent (sectionEventName, ...args) {

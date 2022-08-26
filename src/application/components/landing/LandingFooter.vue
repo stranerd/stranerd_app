@@ -4,16 +4,16 @@
 			<div class="flex flex-col items-start w-[45%] md:w-auto mt-12 md:mt-0 gap-8 pc">
 				<img alt="logo" class="h-10" src="/images/icon_white.svg">
 				<div class="flex items-center gap-6">
-					<a href="https://www.instagram.com/stranerdapp/" target="_blank" rel="noopener noreferrer">
+					<a href="https://www.instagram.com/stranerdapp/" rel="noopener noreferrer" target="_blank">
 						<IonIcon :icon="logoInstagram" />
 					</a>
-					<a href="https://twitter.com/stranerds" target="_blank" rel="noopener noreferrer">
+					<a href="https://twitter.com/stranerds" rel="noopener noreferrer" target="_blank">
 						<IonIcon :icon="logoTwitter" />
 					</a>
-					<a href="https://facebook.com/officialstranerd" target="_blank" rel="noopener noreferrer">
+					<a href="https://facebook.com/officialstranerd" rel="noopener noreferrer" target="_blank">
 						<IonIcon :icon="logoFacebook" />
 					</a>
-					<a href="https://www.linkedin.com/company/stranerd" target="_blank" rel="noopener noreferrer">
+					<a href="https://www.linkedin.com/company/stranerd" rel="noopener noreferrer" target="_blank">
 						<IonIcon :icon="logoLinkedin" />
 					</a>
 				</div>
@@ -40,20 +40,20 @@
 				<a href="mailto:support@stranerd.com" target="_blank">Support</a>
 				<a href="mailto:support@stranerd.com" target="_blank">Contact us</a>
 			</div>
-	
+
 			<div class="flex flex-col items-start w-full md:w-auto mt-12 md:mt-0 gap-8 mobile">
 				<img alt="logo" class="h-10" src="/images/icon_white.svg">
 				<div class="flex items-center gap-6">
-					<a href="https://www.instagram.com/stranerdapp/" target="_blank" rel="noopener noreferrer">
+					<a href="https://www.instagram.com/stranerdapp/" rel="noopener noreferrer" target="_blank">
 						<IonIcon :icon="logoInstagram" />
 					</a>
-					<a href="https://twitter.com/stranerds" target="_blank" rel="noopener noreferrer">
+					<a href="https://twitter.com/stranerds" rel="noopener noreferrer" target="_blank">
 						<IonIcon :icon="logoTwitter" />
 					</a>
-					<a href="https://facebook.com/officialstranerd" target="_blank" rel="noopener noreferrer">
+					<a href="https://facebook.com/officialstranerd" rel="noopener noreferrer" target="_blank">
 						<IonIcon :icon="logoFacebook" />
 					</a>
-					<a href="https://www.linkedin.com/company/stranerd" target="_blank" rel="noopener noreferrer">
+					<a href="https://www.linkedin.com/company/stranerd" rel="noopener noreferrer" target="_blank">
 						<IonIcon :icon="logoLinkedin" />
 					</a>
 				</div>
@@ -69,7 +69,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
 	name: 'LandingFooter',
-	setup() {
+	setup () {
 		return {
 			logoInstagram, logoTwitter, logoFacebook, logoLinkedin
 		}
@@ -77,11 +77,12 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-.mobile{
+<style lang="scss" scoped>
+.mobile {
 	@apply md:hidden flex
 }
-.pc{
+
+.pc {
 	@apply md:flex hidden
 }
 </style>
