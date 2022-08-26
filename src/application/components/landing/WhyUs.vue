@@ -9,9 +9,9 @@
 				<p class="lg:text-lg text-sm">
 					At stranerd, we are on a mission to make scaling through school a more easier and affordable process for students, while equipping lecturers with tools to provide a more palatable learning experience for students.
 				</p>
-				<button class="landing_btn-outline">
+				<router-link to="/auth/signin"  class="btn landing_btn-outline">
 					Join today
-				</button>
+				</router-link>
 			</div>
 		</div>
 

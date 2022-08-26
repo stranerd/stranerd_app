@@ -7,9 +7,9 @@
 				<p class="lg:text-lg text-sm">
 					We target growth in metrics that directly lead to a better lecturing and learning experiences, bringing about ease to the daily activities of students and lecturers.
 				</p>
-				<button class="landing_btn-outline !border-bodyBg">
+				<router-link to="/auth/signin"  class="btn landing_btn-outline !border-bodyBg">
 					Get started
-				</button>
+				</router-link>
 			</div>
 
 			<img src="@/assets/images/landing/aim.svg" alt="hero" class="w-auto z-20">

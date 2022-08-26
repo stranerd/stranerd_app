@@ -9,9 +9,9 @@
 				<p class="lg:text-lg text-sm">
 					Feedback from personels in the education community on the impact Stranerd has on their academic activities.
 				</p>
-				<button class="landing_btn-outline">
+				<router-link to="/auth/signin" class="btn landing_btn-outline">
 					Join today
-				</button>
+				</router-link>
 			</div>
 		</div>
 

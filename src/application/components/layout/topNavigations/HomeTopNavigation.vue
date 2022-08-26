@@ -5,12 +5,12 @@
 				<img alt="logo" class="h-5 md:h-auto" src="/images/icon_with_text.svg">
 			</router-link>
 
-			<div class="md:flex items-center justify-between gap-12 text-base hidden">
+			<div class="lg:flex items-center justify-between gap-12 text-base hidden">
 				<span>Solutions</span>
-				<span>Upload</span>
+				<a href="http://" target="_blank" rel="noopener noreferrer">Upload</a>
 				<router-link to="/pricing">Pricing</router-link>
 				<router-link to="/about">About</router-link>
-				<span>Contact</span>
+				<!-- <span>Contact</span> -->
 			</div>
 
 			<div class="flex items-center  md:gap-8 gap-2 px-3 w-auto">

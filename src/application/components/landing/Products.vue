@@ -9,8 +9,11 @@
 				<p class="lg:text-lg text-sm">
 					{{product.sub}}
 				</p>
-				<button class="landing_btn-outline">
+				<router-link v-if="product.link" :to="product.link" class="btn landing_btn-outline">
 					Learn More
+				</router-link>
+				<button v-else class="btn text-danger bg-[#ff32323d]">
+					Coming soon
 				</button>
 			</div>
 		</div>
@@ -24,21 +27,21 @@ const products = [
 		name:'Class collaboration and study tools',
 		super: 'For students',
 		sub: 'Students have the ability to join digital classrooms, create study materials, take test preps, get homework help, and search for existing materials, to aid learning.',
-		link:'#',
+		link:'forstudents',
 		img: new URL('@/assets/images/landing/product1.png', import.meta.url).href
 	},
 	{
 		name:'Course and student management',
 		super: 'For lecturers',
 		sub: 'Providing the means to improve the efficiency and effectiveness of lecturing with tools for interactivity, sharing information and assessing students. ',
-		link:'#',
+		link:'forschools',
 		img: new URL('@/assets/images/landing/product2.png', import.meta.url).href
 	},
 	{
 		name:'Online learning management system',
 		super: 'For schools',
 		sub: 'Academic instituitions will be provided with easier means of administrative management, to bolster educating and learning success rate.',
-		link:'#',
+		link:false,
 		img: new URL('@/assets/images/landing/product3.png', import.meta.url).href
 	}
 ]
@@ -50,5 +53,7 @@ const products = [
 flex-direction: row-reverse;
 } 
 }
-
+.btn {
+	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs
+}
 </style>

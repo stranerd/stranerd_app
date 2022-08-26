@@ -7,9 +7,9 @@
 				<p class="lg:text-lg text-sm">
 					Connect with students outside the boundaries of your class and school to collaborate or learn from.
 				</p>
-				<button class="landing_btn-outline !border-bodyBg">
+				<router-link to="/stranerdConnect" class="landing_btn-outline btn !border-bodyBg">
 					Learn more
-				</button>
+				</router-link>
 			</div>
 
 			<img src="@/assets/images/landing/connect.png" alt="hero" class="w-auto z-20">
