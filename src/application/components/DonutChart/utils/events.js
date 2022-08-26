@@ -7,7 +7,7 @@ export const nativeSectionEvents = [
 	'mousemove'
 ].map((nativeEventName) => ({
 	nativeEventName,
-	sectionEventName: `section-${nativeEventName}`
+	sectionEventName: `section-${ nativeEventName }`
 }))
 
 export default null

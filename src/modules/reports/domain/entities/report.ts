@@ -11,14 +11,14 @@ export class ReportEntity extends BaseEntity {
 	readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             data,
-		             user,
-		             reportedId,
-		             message,
-		             createdAt,
-		             updatedAt
-	             }: ReportConstructorArgs) {
+					 id,
+					 data,
+					 user,
+					 reportedId,
+					 message,
+					 createdAt,
+					 updatedAt
+				 }: ReportConstructorArgs) {
 		super()
 		this.id = id
 		if (data.type === ReportType.users) data.reported = generateEmbeddedUser(data.reported)

@@ -15,9 +15,9 @@ export class CardEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, last4Digits, issuer, country, type, token,
-		             expiredAt, expired, primary, userId, createdAt, updatedAt
-	             }: CardConstructorArgs) {
+					 id, last4Digits, issuer, country, type, token,
+					 expiredAt, expired, primary, userId, createdAt, updatedAt
+				 }: CardConstructorArgs) {
 		super()
 		this.id = id
 		this.last4Digits = last4Digits

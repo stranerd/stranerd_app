@@ -12,14 +12,14 @@ export class ReviewEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             review,
-		             rating,
-		             createdAt,
-		             tutorId,
-		             user,
-		             updatedAt
-	             }: ReviewConstructorArgs) {
+					 id,
+					 review,
+					 rating,
+					 createdAt,
+					 tutorId,
+					 user,
+					 updatedAt
+				 }: ReviewConstructorArgs) {
 		super()
 		this.id = id
 		this.review = review

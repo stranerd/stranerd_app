@@ -47,7 +47,7 @@ export default defineComponent({
 			default: false
 		}
 	},
-	setup() {
+	setup () {
 		const show = ref(true)
 		return { show, chevronForwardOutline, peopleOutline }
 	}

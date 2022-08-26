@@ -69,16 +69,16 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	.score, .cdc-text {
-		font-size: 1.1rem;
-		font-weight: 700;
+.score, .cdc-text {
+	font-size: 1.1rem;
+	font-weight: 700;
 
-		@media (min-width: $md) {
-			font-size: 1.25rem;
-		}
-
-		@media (min-width: $lg) {
-			font-size: 1.5rem;
-		}
+	@media (min-width: $md) {
+		font-size: 1.25rem;
 	}
+
+	@media (min-width: $lg) {
+		font-size: 1.5rem;
+	}
+}
 </style>

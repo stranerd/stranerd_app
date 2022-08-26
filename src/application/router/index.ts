@@ -2,7 +2,13 @@ import { createRouter, createWebHistory } from '@ionic/vue-router'
 import { routes } from '@app/router/routes'
 import { allModals, allPopovers } from '@app/composable/core/modals'
 
-const router = createRouter({ history: createWebHistory(), routes })
+const router = createRouter({
+	history: createWebHistory(),
+	routes,
+	scrollBehavior: async (to) => {
+		if (to.hash) return { el: to.hash }
+	}
+})
 
 router.beforeEach(async () => {
 	await Promise.all(allModals.map((modal) => modal().closeAll()))

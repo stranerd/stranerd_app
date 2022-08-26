@@ -25,7 +25,7 @@ import ChatMetasListCard from '@app/components/messaging/chatMetas/ChatMetasList
 export default defineComponent({
 	name: 'ChatMetasList',
 	components: { MetaBlock, ChatMetasListCard },
-	setup() {
+	setup () {
 		const { classes } = useUserClassList()
 		const { groups, connects, unRead, error, loading, search } = useChatMetas()
 		return { classes, search, groups, connects, unRead, error, loading }

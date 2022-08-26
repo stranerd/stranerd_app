@@ -56,7 +56,7 @@ import ClassMembers from '@app/components/classes/classes/ClassMembers.vue'
 export default defineComponent({
 	name: 'ClassClassId',
 	components: { ClassWrapper, Institution, Department, ClassMembers },
-	setup() {
+	setup () {
 		useRouteMeta('About', { back: true })
 		const { id } = useAuth()
 		return { id, openClassEditModal, createOutline, listOutline, shareOutline }

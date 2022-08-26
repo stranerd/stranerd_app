@@ -38,8 +38,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	img {
-		aspect-ratio: 1/1;
-		width: 100%;
-	}
+img {
+	aspect-ratio: 1/1;
+	width: 100%;
+}
 </style>

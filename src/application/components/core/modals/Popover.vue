@@ -21,13 +21,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	.popover {
-		min-width: 10rem;
-		@media (max-width: $md) {
-			// position: fixed;
-			bottom: 0;
-			left: 0;
-			right: 0;
-		}
+.popover {
+	min-width: 10rem;
+	@media (max-width: $md) {
+		// position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
 	}
+}
 </style>

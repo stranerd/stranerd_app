@@ -25,7 +25,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	img {
-		min-width: 150px;
-	}
+img {
+	min-width: 150px;
+}
 </style>

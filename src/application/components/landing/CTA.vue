@@ -9,9 +9,9 @@
 					Get access to a digital classroom, homework help, test and exam help, and solution manuals tailored
 					to your courses.
 				</p>
-				<button class="btn bg-warning">
+				<router-link class="btn bg-warning" to="/auth/signin">
 					Get Started
-				</button>
+				</router-link>
 			</article>
 
 		</div>
@@ -23,8 +23,7 @@
 </template>
 
 <style lang="scss" scoped>
-button {
+a {
 	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs
 }
-
 </style>

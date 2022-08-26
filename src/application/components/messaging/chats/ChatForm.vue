@@ -148,65 +148,65 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-button {
-		height: 36px;
-		width: 36px;
-		--padding-start: 0.4rem !important;
-		--padding-end: 0.4rem !important;
-		--padding-top: 0.4rem !important;
-		--padding-bottom: 0.4rem !important;
-		--border-radius: 10rem !important;
-		border-radius: 10rem !important;
-		@media (min-width: $md) {
-			--padding-start: 0.6rem !important;
-			--padding-end: 0.6rem !important;
-			--padding-top: 0.6rem !important;
-			--padding-bottom: 0.6rem !important;
-		}
+ion-button {
+	height: 36px;
+	width: 36px;
+	--padding-start: 0.4rem !important;
+	--padding-end: 0.4rem !important;
+	--padding-top: 0.4rem !important;
+	--padding-bottom: 0.4rem !important;
+	--border-radius: 10rem !important;
+	border-radius: 10rem !important;
+	@media (min-width: $md) {
+		--padding-start: 0.6rem !important;
+		--padding-end: 0.6rem !important;
+		--padding-top: 0.6rem !important;
+		--padding-bottom: 0.6rem !important;
 	}
+}
 
-	.loading-counter {
-		position: fixed;
-		right: 1rem;
-		top: 1rem;
-		padding: 0.5rem 0.75rem;
-		border-radius: 0.75rem;
-		background: $color-bodyBg;
-		border: 1px solid $color-itemBg;
-	}
+.loading-counter {
+	position: fixed;
+	right: 1rem;
+	top: 1rem;
+	padding: 0.5rem 0.75rem;
+	border-radius: 0.75rem;
+	background: $color-bodyBg;
+	border: 1px solid $color-itemBg;
+}
 
-	.chat-block {
+.chat-block {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+	background: $color-bodyBg;
+
+	.body {
 		width: 100%;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 10;
-		background: $color-bodyBg;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
 
-		.body {
-			width: 100%;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
+		& > * {
+			padding: 1rem;
+		}
 
-			& > * {
-				padding: 1rem;
-			}
+		.content {
+			flex-grow: 1;
+			border-top: $border;
+			border-bottom: $border;
+			overflow-y: auto;
+			padding: 0.25rem 1rem;
 
-			.content {
-				flex-grow: 1;
-				border-top: $border;
-				border-bottom: $border;
-				overflow-y: auto;
-				padding: 0.25rem 1rem;
-
-				&::-webkit-scrollbar {
-					display: none;
-				}
+			&::-webkit-scrollbar {
+				display: none;
 			}
 		}
 	}
+}
 
 </style>

@@ -17,10 +17,10 @@ export class SessionEntity extends BaseEntity {
 	readonly endedAt: number | null
 
 	constructor ({
-		             id, duration, price, message, student, tutor,
-		             accepted, done, createdAt, cancelled, endedAt,
-		             updatedAt, startedAt
-	             }: SessionConstructorArgs) {
+					 id, duration, price, message, student, tutor,
+					 accepted, done, createdAt, cancelled, endedAt,
+					 updatedAt, startedAt
+				 }: SessionConstructorArgs) {
 		super()
 		this.id = id
 		this.message = message
