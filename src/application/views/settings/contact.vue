@@ -37,7 +37,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { logoInstagram, logoTwitter, logoWhatsapp, mailOutline, paperPlaneOutline } from 'ionicons/icons'
-import { useCreateMessage } from '@app/composable/forms/messages'
+import { useCreateMessage } from '@app/composable/meta/messages'
 import { useAuth } from '@app/composable/auth/auth'
 import { useRouteMeta } from '@app/composable/core/states'
 import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
