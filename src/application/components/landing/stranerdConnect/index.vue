@@ -1,6 +1,6 @@
 <template>
 	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28 -z-20">
-		<div class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
+		<div class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-10 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
 				<span class="md:text-lg text-sm">What is Stranerd Connect?</span>
 				<h2 class="lg:text-5xl text-3xl font-bold  text-primaryBg lg:leading-[62px]">Peer to peer and class to class collaboration</h2>

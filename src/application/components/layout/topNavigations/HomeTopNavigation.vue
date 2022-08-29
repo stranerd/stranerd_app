@@ -1,5 +1,5 @@
 <template>
-	<IonHeader class="w-full flex flex-col z-10 nav-shadow" role="navigation">
+	<IonHeader class="w-full flex flex-col z-10 border-b" role="navigation">
 		<div class="container flex mx-auto items-center justify-between p-4">
 			<div class="flex gap-3">
 				<IonIcon :icon="menuOutline" class="block md:hidden" @click="toggleMenu"/>
@@ -93,9 +93,7 @@ ion-toolbar {
 	@apply rounded-md font-bold bg-primaryBg px-4 py-1.5 text-white text-xs
 }
 
-.nav-shadow {
-	box-shadow: 0 5px 10px rgba(84, 109, 211, 0.1);
-}
+
 details {
   user-select: none;
    & summary svg.turn {
