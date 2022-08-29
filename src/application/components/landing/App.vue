@@ -9,10 +9,10 @@
 				</p>
 				<div class="flex gap-4 items-center mt-6">
 					<a href="https://play.google.com/store/apps/details?id=com.stranerd.app" target="_blank" rel="noopener noreferrer">
-						<img src="@/assets/images/auth/playstore.svg" alt="playstore button" class="h-6 md:h-16"  />
+						<img src="@/assets/images/auth/playstore.svg" alt="playstore button" class="md:h-16"  />
 					</a>
 				
-					<img src="@/assets/images/auth/appstore.svg" alt="appstore button" class="h-6  md:h-16 cursor-not-allowed" />
+					<img src="@/assets/images/auth/appstore.svg" alt="appstore button" class=" md:h-16 cursor-not-allowed" />
 				</div>
 			</div>
 
