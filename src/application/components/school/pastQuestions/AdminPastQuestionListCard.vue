@@ -1,47 +1,47 @@
 <template>
 	<div
-		class="flex flex-col lg:flex-row items-end justify-between gap-4 bg-white rounded-xl font-bold text-sub text-main_dark p-4">
+		class="flex flex-col lg:flex-row items-end justify-between gap-4 font-bold text-sm p-4">
 		<div class="w-full flex flex-col gap-4">
 			<div>
-				<IonText class="text-main_dark mb-2 w-full">
+				<IonText class="text-secondaryText mb-2 w-full">
 					Question:
 					<DisplayHtml :html="pastQuestion.question" />
 				</IonText>
-				<PhotoList :photos="pastQuestion.questionMedia" />
+				<Gallery :media="pastQuestion.questionMedia" :path="pastQuestion.saveFilePath" />
 			</div>
-			<template v-if="pastQuestion.isObjective">
+			<template v-if="pastQuestion.isObj(pastQuestion)">
 				<div class="flex flex-col gap-4">
 					<div v-for="(option, index) in pastQuestion.data.options" :key="index"
 						class="flex gap-4 justify-between">
-						<IonText class="text-main_dark w-full">
+						<IonText class="text-secondaryText w-full">
 							Option {{ getAlphabet(index + 1).toUpperCase() }}:
 							<DisplayHtml :html="option" />
 						</IonText>
 						<IonIcon :icon="pastQuestion.data.correctIndex === index ? checkmarkDoneOutline : null"
-							class="text-xl text-green" />
+							class="text-success" />
 					</div>
 				</div>
 				<div>
-					<IonText class="text-main_dark mb-2 w-full">
+					<IonText class="text-secondaryText mb-2 w-full">
 						Explanation:
 						<DisplayHtml :html="pastQuestion.data.explanation" />
 					</IonText>
-					<PhotoList :photos="pastQuestion.data.explanationMedia" />
+					<Gallery :media="pastQuestion.data.explanationMedia" :path="pastQuestion.saveFilePath" />
 				</div>
 			</template>
-			<template v-else>
+			<template v-else-if="pastQuestion.isNotObj(pastQuestion)">
 				<div>
-					<IonText class="text-main_dark mb-2 w-full">
+					<IonText class="text-secondaryText mb-2 w-full">
 						Answer:
 						<DisplayHtml :html="pastQuestion.data.answer" />
 					</IonText>
-					<PhotoList :photos="pastQuestion.data.answerMedia" />
+					<Gallery :media="pastQuestion.data.answerMedia" :path="pastQuestion.saveFilePath" />
 				</div>
 			</template>
 		</div>
 		<div class="w-full font-bold text-right cursor-pointer">
-			<a class="text-orange mr-4" @click.prevent="openPastQuestionEditModal(pastQuestion)">Edit</a>
-			<a class="text-red" @click.prevent="deletePastQuestion">Delete</a>
+			<a class="text-warning mr-4" @click.prevent="openPastQuestionEditModal(pastQuestion)">Edit</a>
+			<a class="text-danger" @click.prevent="deletePastQuestion">Delete</a>
 		</div>
 		<DisplayError :error="error" />
 		<PageLoading v-if="loading" />
@@ -65,7 +65,10 @@ export default defineComponent({
 	},
 	setup (props) {
 		const { loading, error, deletePastQuestion } = useDeletePastQuestion(props.pastQuestion)
-		return { loading, error, deletePastQuestion, openPastQuestionEditModal, getAlphabet, checkmarkDoneOutline }
+		return {
+			loading, error, deletePastQuestion,
+			openPastQuestionEditModal, getAlphabet, checkmarkDoneOutline
+		}
 	}
 })
 </script>

@@ -9,7 +9,7 @@ export class GroupFactory extends BaseFactory<GroupEntity, GroupToModel, GroupTo
 		classId: { required: true, rules: [isString] }
 	}
 
-	reserved = []
+	reserved = ['classId']
 
 	constructor () {
 		super({ name: '', classId: '' })

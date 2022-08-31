@@ -1,14 +1,14 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { ClassFromModel, ClassToModel } from '../models/class'
 import { ClassBaseDataSource } from './class-base'
-import { ClassUsers } from '@modules/classes/domain/entities/class'
+import { ClassUsers } from '../../domain/types'
 
 export class ClassApiDataSource implements ClassBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/classes/classes')
+		this.stranerdClient = new HttpClient(apiBase + '/classes/classes')
 	}
 
 	async create (data: ClassToModel) {
@@ -16,7 +16,7 @@ export class ClassApiDataSource implements ClassBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, ClassFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, ClassFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -38,7 +38,7 @@ export class ClassApiDataSource implements ClassBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: ClassToModel) {
@@ -50,7 +50,7 @@ export class ClassApiDataSource implements ClassBaseDataSource {
 	}
 
 	async leaveClass (id: string) {
-		await this.stranerdClient.put<{}, boolean>(`/${id}/leave`, {})
+		await this.stranerdClient.put<any, boolean>(`/${id}/leave`, {})
 	}
 
 	async acceptRequest (id: string, userId: string, accept: boolean) {

@@ -1,35 +1,20 @@
 <template>
-	<div class="showcase-flex">
-		<EmptyState v-if="!loading && !error && announcements.length === 0"
-			info="This class has no announcements yet!" />
-		<AnnouncementForm v-if="classInst.admins.includes(id)"
-			:error="createError"
-			:factory="factory"
-			:loading="createLoading"
-			:submit="createAnnouncement"
-			class="bg-white px-4 md:py-4 rounded-xl"
-		>
-			<template v-slot:buttonText>
-				Post
-			</template>
-		</AnnouncementForm>
+	<div class="showcase-flex gap-4 p-4 lg:p-0 flex-1">
+		<EmptyData v-if="!loading && !error && announcements.length === 0"
+			sub="Keep in touch! Important information from class admins are will show up here."
+			title="No announcements" />
 		<AnnouncementsListCard v-for="announcement in announcements" :key="announcement.hash"
-			:announcement="announcement"
-			:classInst="classInst" />
-		<div v-if="hasMore" class="text-center py-4 text-primary w-full font-semibold cursor-pointer">
-			<a @click.prevent="fetchOlderAnnouncements">Load More</a>
-		</div>
-		<PageLoading v-if="loading" />
+			:announcement="announcement" :classInst="classInst" />
+		<BlockLoading v-if="loading" />
+		<LoadMore v-if="hasMore" :load="fetchOlderAnnouncements" />
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { ClassEntity } from '@modules/classes'
-import { useAnnouncementList, useCreateAnnouncement } from '@app/composable/classes/announcements'
+import { useAnnouncementList } from '@app/composable/classes/announcements'
 import AnnouncementsListCard from '@app/components/classes/announcements/AnnouncementsListCard.vue'
-import { useAuth } from '@app/composable/auth/auth'
-import AnnouncementForm from '@app/components/classes/announcements/AnnouncementForm.vue'
 
 export default defineComponent({
 	name: 'AnnouncementsList',
@@ -39,9 +24,8 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { AnnouncementsListCard, AnnouncementForm },
+	components: { AnnouncementsListCard },
 	setup (props) {
-		const { id } = useAuth()
 		const {
 			loading,
 			error,
@@ -49,13 +33,8 @@ export default defineComponent({
 			hasMore,
 			fetchOlderAnnouncements
 		} = useAnnouncementList(props.classInst.id)
-		const { factory, error: createError, loading: createLoading, createAnnouncement } = useCreateAnnouncement()
-		onMounted(() => {
-			factory.value.classId = props.classInst.id
-		})
 		return {
-			id, loading, error, announcements, hasMore, fetchOlderAnnouncements,
-			factory, createError, createLoading, createAnnouncement
+			loading, error, announcements, hasMore, fetchOlderAnnouncements
 		}
 	}
 })

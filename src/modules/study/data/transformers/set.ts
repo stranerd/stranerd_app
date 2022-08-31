@@ -7,22 +7,18 @@ export class SetTransformer {
 			id,
 			name,
 			saved,
-			data,
-			userId,
-			userBio,
-			userRoles,
+			user,
 			createdAt,
 			updatedAt
 		} = model
 		return new SetEntity({
-			id, name, saved, data, userId, userBio, userRoles, createdAt, updatedAt
+			id, name, saved, user, createdAt, updatedAt
 		})
 	}
 
 	toJSON (entity: SetEntity): SetToModel {
 		return {
-			name: entity.name,
-			data: entity.data
+			name: entity.name
 		}
 	}
 }

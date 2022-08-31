@@ -1,16 +1,10 @@
 import { computed, onMounted, Ref, ref } from 'vue'
-import {
-	AddInstitution,
-	DeleteInstitution,
-	EditInstitution,
-	GetInstitutions,
-	InstitutionEntity,
-	InstitutionFactory
-} from '@modules/school'
+import { InstitutionEntity, InstitutionFactory, InstitutionsUseCases } from '@modules/school'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
+import { useRouter } from 'vue-router'
 
 const global = {
 	fetched: ref(false),
@@ -23,7 +17,7 @@ const fetchInstitutions = async () => {
 	await global.setError('')
 	await global.setLoading(true)
 	try {
-		const institutions = await GetInstitutions.call()
+		const institutions = await InstitutionsUseCases.get()
 		institutions.results.forEach((i) => addToArray(global.institutions.value, i, (e) => e.id, (e) => e.name, true))
 		global.fetched.value = true
 	} catch (error) {
@@ -32,10 +26,11 @@ const fetchInstitutions = async () => {
 	await global.setLoading(false)
 }
 
-export const useInstitutionList = () => {
+export const useInstitutionList = (skipHooks = false) => {
 	const schools = computed(() => global.institutions.value.filter((i) => !i.isGateway))
 	const gatewayExams = computed(() => global.institutions.value.filter((i) => i.isGateway))
 	onMounted(async () => {
+		if (skipHooks) return
 		if (!global.fetched.value && !global.loading.value) await fetchInstitutions()
 	})
 	return { ...global, schools, gatewayExams }
@@ -56,6 +51,7 @@ export const useInstitution = (id: string) => {
 }
 
 export const useCreateInstitution = () => {
+	const router = useRouter()
 	const factory = ref(new InstitutionFactory()) as Ref<InstitutionFactory>
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -66,11 +62,12 @@ export const useCreateInstitution = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const institution = await AddInstitution.call(factory.value)
+				const institution = await InstitutionsUseCases.add(factory.value)
 				addToArray(global.institutions.value, institution, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeCreateInstitution()
 				await setMessage('Institution created successfully')
+				await router.push(`/admin/school/institutions/${institution.id}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -88,6 +85,7 @@ export const openInstitutionEditModal = async (institution: InstitutionEntity) =
 }
 
 export const useEditInstitution = () => {
+	const router = useRouter()
 	const factory = ref(new InstitutionFactory()) as Ref<InstitutionFactory>
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -100,11 +98,12 @@ export const useEditInstitution = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const updatedInstitution = await EditInstitution.call(editingInstitution!.id, factory.value)
+				const updatedInstitution = await InstitutionsUseCases.update(editingInstitution!.id, factory.value)
 				addToArray(global.institutions.value, updatedInstitution, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeEditInstitution()
 				await setMessage('Institution updated successfully')
+				await router.push(`/admin/school/institutions/${updatedInstitution.id}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -115,7 +114,7 @@ export const useEditInstitution = () => {
 	return { factory, loading, error, editInstitution }
 }
 
-export const useDeleteInstitution = (institution: InstitutionEntity) => {
+export const useDeleteInstitution = (institutionId: string) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -129,9 +128,9 @@ export const useDeleteInstitution = (institution: InstitutionEntity) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteInstitution.call(institution.id)
+				await InstitutionsUseCases.delete(institutionId)
 				global.institutions.value = global.institutions.value
-					.filter((s) => s.id !== institution.id)
+					.filter((s) => s.id !== institutionId)
 				await setMessage('Institution deleted successfully')
 			} catch (error) {
 				await setError(error)

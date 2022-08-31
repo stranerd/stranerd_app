@@ -1,12 +1,47 @@
 @import './global.scss';
 @import './ionic.scss';
 @import './tailwind.css';
-@import './auth.scss';
-@import './layout.scss';
-@import '~katex/dist/katex.min.css';
+@import 'katex/dist/katex.min.css';
 
-.footer-shadow {
-	box-shadow: 0px -5px 5px rgba(139, 158, 177, 0.05);
+:root {
+	--clr-primaryBg: #162565;
+	--clr-primaryText: #FFFFFF;
+	--clr-primaryHover: #194084;
+	--clr-bodyBg: #FFFFFF;
+	--clr-bodyText: #05090D;
+	--clr-headerBg: #162565;
+	--clr-headerText: #FFFFFF;
+	--clr-itemBg: #F1F3F7;
+	--clr-secondaryText: #494C58;
+	--clr-disabled: #C5C9D9;
+	--clr-outlineHover: #B6D9FF;
+	--clr-success: #0FDC64;
+	--clr-danger: #FF3232;
+	--clr-info: #218FDF;
+	--clr-warning: #FF8800;
+	--clr-royal: #AC92EB;
+}
+
+$theme: any;
+@media (prefers-color-scheme: $theme) {
+	:root {
+		--clr-primaryBg: #FFFFFF;
+		--clr-primaryText: #1E2230;
+		--clr-primaryHover: #F1EAEA;
+		--clr-bodyBg: #1E2230;
+		--clr-bodyText: #FFFFFF;
+		--clr-headerBg: #05090D;
+		--clr-headerText: #FFFFFF;
+		--clr-itemBg: #494C58;
+		--clr-secondaryText: #F1F3F7;
+		--clr-disabled: #313142;
+		--clr-outlineHover: #181C27;
+		--clr-success: #0FDC64;
+		--clr-danger: #FF3232;
+		--clr-info: #218FDF;
+		--clr-warning: #FF8800;
+		--clr-royal: #AC92EB;
+	}
 }
 
 $spacers: (
@@ -24,7 +59,7 @@ $grid-breakpoints: (
 
 @each $key in $spacers {
 	@each $bp, $width in $grid-breakpoints {
-		body[data-no-gap='true'] .#{$bp}gap-#{$key} {
+		body[data-no-gap='true'] *[class*="#{$bp}gap-#{$key}"] {
 			@media (min-width: $width) {
 				gap: 0 !important;
 
@@ -35,3 +70,44 @@ $grid-breakpoints: (
 		}
 	}
 }
+
+.border-bottom-line {
+	border-bottom: $border;
+}
+
+.card.border-bottom-line, .card-sm.border-bottom-line {
+	@media (max-width: $lg) {
+		border-bottom: none;
+	}
+}
+
+.border-top-line {
+	border-top: $border;
+}
+
+.card.border-top-line, .card-sm.border-top-line {
+	@media (max-width: $lg) {
+		border-top: none;
+	}
+}
+
+.border-left-line {
+	border-left: $border;
+}
+
+.card.border-left-line, .card-sm.border-left-line {
+	@media (max-width: $lg) {
+		border-left: none;
+	}
+}
+
+.border-right-line {
+	border-right: $border;
+}
+
+.card.border-right-line, .card-sm.border-right-line {
+	@media (max-width: $lg) {
+		border-right: none;
+	}
+}
+

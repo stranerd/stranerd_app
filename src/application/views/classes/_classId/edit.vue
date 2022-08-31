@@ -1,32 +1,37 @@
 <template>
-	<IonPage>
-		<IonContent>
-			<h1>Edit Class</h1>
-		</IonContent>
-	</IonPage>
+	<DefaultLayout :hideBottom="true" :hideFab="true">
+		<ClassForm :disabled="{ departmentId: true, facultyId: true, institutionId: true, year: true }" :error="error"
+			:factory="factory"
+			:loading="loading"
+			:submit="editClass" class="page-padding">
+			<template v-slot:buttonText>Save</template>
+		</ClassForm>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { useClassModal } from '@app/composable/core/modals'
-import { getEditingClass } from '@app/composable/classes/classes'
-import { IonContent, IonPage } from '@ionic/vue'
+import { getEditingClass, useEditClass } from '@app/composable/classes/classes'
+import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
+import ClassForm from '@app/components/classes/classes/ClassForm.vue'
 
 export default defineComponent({
 	name: 'ClassesClassIdEdit',
-	displayName: 'Edit Class',
-	components: { IonContent, IonPage },
-	middlewares: ['isAuthenticated', async ({ from, to }) => {
+	components: { ClassForm },
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ to }) => {
 		const { id } = useAuth()
 		const { classId = '' } = to.params
 		const classInst = getEditingClass()
 		if (!classInst || classInst.id !== classId) return `/classes/${classId}`
 		const canEdit = classInst.admins.includes(id.value)
 		if (!canEdit) return `/classes/${classInst.id}`
-		useClassModal().openEditClass()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
-	}]
+	}]),
+	setup () {
+		useRouteMeta('Edit class', { back: true })
+		const { editClass, factory, error, loading } = useEditClass()
+		return { error, loading, editClass, factory }
+	}
 })
 </script>

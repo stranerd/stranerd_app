@@ -1,9 +1,6 @@
 <template>
-	<div>
-		<EmptyState v-if="filtered.length === 0" info="No results found." />
-		<div class="showcase">
-			<UserListCard v-for="user in filtered" :key="user.hash" :user="user" />
-		</div>
+	<div class="showcase-flex">
+		<UserListCard v-for="user in filtered" :key="user.hash" :user="user" />
 	</div>
 </template>
 

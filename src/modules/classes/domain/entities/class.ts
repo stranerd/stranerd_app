@@ -1,68 +1,65 @@
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
-import { appName } from '@utils/environment'
+import { ClassUsers } from '../types'
 
 type ClassConstructorArgs = {
 	id: string
 	name: string
+	school: {
+		institutionId: string
+		facultyId: string
+		departmentId: string
+		year: number
+	}
 	description: string
 	photo: Media | null
-	coverPhoto: Media | null
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	users: Record<ClassUsers, string[]>
 	requests: string[]
+	courses: string[]
 	createdAt: number
 	updatedAt: number
-}
-
-export enum ClassUsers {
-	admins = 'admins',
-	tutors = 'tutors',
-	members = 'members'
 }
 
 export class ClassEntity extends BaseEntity {
 	public readonly id: string
 	public readonly name: string
+	public readonly school: {
+		institutionId: string
+		facultyId: string
+		departmentId: string
+		year: number
+	}
 	public readonly description: string
 	public readonly photo: Media | null
-	public readonly coverPhoto: Media | null
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
+	public readonly user: EmbeddedUser
 	public readonly users: Record<ClassUsers, string[]>
 	public readonly requests: string[]
+	public readonly courses: string[]
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, name, description, photo, coverPhoto,
-		             createdAt, userId, userBio, userRoles,
-		             users, updatedAt, requests
-	             }: ClassConstructorArgs) {
+					 id, name, school, description, photo,
+					 createdAt, user, courses,
+					 users, updatedAt, requests
+				 }: ClassConstructorArgs) {
 		super()
 		this.id = id
 		this.name = name
+		this.school = school
 		this.description = description
 		this.photo = photo ? parseMedia(photo) : null
-		this.coverPhoto = coverPhoto ? parseMedia(coverPhoto) : null
-		this.userId = userId
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
+		this.user = generateEmbeddedUser(user)
 		this.users = users
 		this.requests = requests
+		this.courses = courses
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
 	get isUserVerified () {
-		return this.userRoles[appName].isVerified
-	}
-
-	get avatar () {
-		return null
+		return this.user.roles.isVerified
 	}
 
 	get membersAndRequests () {
@@ -83,6 +80,10 @@ export class ClassEntity extends BaseEntity {
 
 	get participants () {
 		return this.users[ClassUsers.members].filter((id) => !this.admins.includes(id) && !this.tutors.includes(id))
+	}
+
+	get shareLink () {
+		return `/classes/${this.id}`
 	}
 }
 

@@ -1,66 +1,69 @@
 <template>
-	<ion-header class="block ion-no-border inset-x-0 w-full lg:shadow-md z-10">
-		<ion-toolbar class="lg:hidden bg-white px-4 border-bottom-line md:h-auto flex items-center justify-center">
-			<div class="flex items-center justify-between">
-				<router-link to="/">
-					<IonText class="font-semibold text-main_dark text-heading">
-						{{ $route.meta.displayName ?? 'Stranerd' }}
-					</IonText>
+	<IonHeader class="block ion-no-border inset-x-0 w-full z-10">
+		<IonToolbar class="px-4 lg:px-6 border-bottom-line min-h-[4rem] flex items-center justify-center">
+			<div class="flex items-center justify-between lg:gap-16 py-2">
+				<router-link class="hidden lg:inline-block" to="/">
+					<Logo />
 				</router-link>
-				<div class="flex items-center">
-					<ion-icon :icon="addCircleOutline" class="text-xl text-main_dark mr-6"
-						@click="openCreateDashboardMenu" />
-					<router-link class="flex items-center"
-						exact-active-class="!text-main_dark"
-						to="/search">
-						<ion-icon :icon="searchOutline" class="text-xl text-main_dark mr-6" />
+				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
+					class="text-base text-headerText lg:hidden"
+					defaultHref="/dashboard" mode="ios" text="" />
+				<IonText class="font-bold text-xl lg:hidden truncate max-w-[240px] capitalize">
+					{{ $route.meta.routeName ?? '' }}
+				</IonText>
+				<Search class="flex-grow hidden lg:flex" />
+				<div class="flex gap-6 lg:gap-8 items-center">
+					<router-link class="lg:hidden" to="/search">
+						<IonIcon :icon="searchOutline" />
 					</router-link>
-					<router-link class="flex items-center" to="/notifications">
-						<NotificationIcon :key="user?.id" class="text-xl text-main_dark mr-6" />
+					<NotificationIcon :key="user?.id" />
+					<router-link class="hidden lg:inline-block" to="/users/leaderboard">
+						<IonIcon :icon="podiumOutline" />
 					</router-link>
-					<Avatar v-if="isLoggedIn" :name="user?.bio.fullName" :size="24" :src="user?.bio.photo"
-						@click="openUserDashboardMenu" />
-					<router-link v-else class="flex items-center" to="/account">
-						<Avatar :size="24" />
+					<router-link class="hidden lg:inline-block" to="/settings">
+						<IonIcon :icon="settingsOutline" />
 					</router-link>
+					<Avatar :id="user?.id" :name="user?.bio.fullName" :size="36" :src="user?.bio.photo"
+						class="hidden lg:inline-block" />
 				</div>
 			</div>
-		</ion-toolbar>
-
-		<!-- large screens -->
-		<BigScreenBar />
-	</ion-header>
+		</IonToolbar>
+	</IonHeader>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonHeader, IonToolbar } from '@ionic/vue'
-import BigScreenBar from './screens/BigScreenBar.vue'
-import { addCircleOutline, searchOutline } from 'ionicons/icons'
-import { useAuth } from '@app/composable/auth/auth'
-import { useMenuPopover } from '@app/composable/core/modals'
+import { arrowBackOutline, podiumOutline, searchOutline, settingsOutline } from 'ionicons/icons'
 import NotificationIcon from '@app/components/users/notifications/NotificationIcon.vue'
+import Search from '@app/components/search/Search.vue'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'Topbar',
-	components: { IonHeader, IonToolbar, BigScreenBar, NotificationIcon },
+	components: { NotificationIcon, Search },
 	setup () {
-		const { isLoggedIn, user } = useAuth()
-		const openUserDashboardMenu = useMenuPopover().openUserDashboardMenu
-		const openCreateDashboardMenu = useMenuPopover().openCreateDashboardMenu
-		return { user, isLoggedIn, openUserDashboardMenu, openCreateDashboardMenu, addCircleOutline, searchOutline }
+		const { user } = useAuth()
+		return { user, arrowBackOutline, searchOutline, settingsOutline, podiumOutline }
 	}
 })
 </script>
 
 <style lang="scss" scoped>
-	ion-toolbar {
-		--background: #FFFFFF;
-		--box-shadow: none;
-	}
+ion-toolbar {
+	--background: #{$color-headerBg};
+	--color: #{$color-headerText};
+	--box-shadow: none;
+}
 
-	ion-header {
-		--background: #FFFFFF;
-		--box-shadow: none;
+ion-header {
+	--background: #{$color-headerBg};
+	--color: #{$color-headerText};
+	--box-shadow: none;
+}
+
+::v-deep() {
+	ion-searchbar {
+		background: $color-primaryHover !important;
 	}
+}
 </style>

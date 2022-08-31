@@ -1,10 +1,10 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Edit Note
 		</template>
 		<NoteForm :error="error" :factory="factory" :loading="loading" :submit="editNote">
-			<template v-slot:buttonText>Update folder</template>
+			<template v-slot:buttonText>Save</template>
 		</NoteForm>
 	</Modal>
 </template>
@@ -17,6 +17,12 @@ import NoteForm from '@app/components/study/notes/NoteForm.vue'
 export default defineComponent({
 	name: 'EditNoteModal',
 	components: { NoteForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { editNote, factory, error, loading } = useEditNote()
 		return { error, loading, editNote, factory }

@@ -54,11 +54,11 @@
 			<div class="mb-8 flex flex-col">
 				<IonRadioGroup v-model="factory.correctIndex" class="flex flex-col gap-4">
 					<div v-for="(_, index) in factory.options" :key="index" class="flex gap-4 justify-between">
-						<IonIcon :icon="trashOutline" class="cursor-pointer text-xl text-red"
+						<IonIcon :icon="trashBinOutline" class="text-danger"
 							@click="factory.removeOption(index)" />
 						<IonTextarea v-model="factory.options[index]"
 							:placeholder="`Enter Option ${getAlphabet(index + 1).toUpperCase()}`"
-							class="my-0 flex-grow-1" rows="3" />
+							class="my-0 flex-grow" rows="3" />
 						<IonRadio :value="index" />
 					</div>
 				</IonRadioGroup>
@@ -82,9 +82,9 @@
 		</template>
 
 		<div class="flex w-full mt-8 items-center gap-6">
-			<ion-button :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
+			<IonButton :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
 				<slot name="buttonText">Submit</slot>
-			</ion-button>
+			</IonButton>
 		</div>
 
 		<PageLoading v-if="loading" />
@@ -94,25 +94,23 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 import { PastQuestionFactory } from '@modules/school'
-import { IonRadio, IonRadioGroup, IonSelect, IonSelectOption, IonTextarea } from '@ionic/vue'
 import { getAlphabet } from '@utils/commons'
-import { addOutline, trashOutline } from 'ionicons/icons'
+import { addOutline, trashBinOutline } from 'ionicons/icons'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
 import { years } from '@utils/constants'
 
 export default defineComponent({
 	name: 'PastQuestionForm',
-	components: { IonSelect, IonSelectOption, IonTextarea, IonRadio, IonRadioGroup },
 	props: {
 		factory: {
 			type: PastQuestionFactory,
 			required: true
 		},
 		submit: {
-			type: Function,
+			type: Function as PropType<() => Promise<void>>,
 			required: true
 		},
 		loading: {
@@ -127,23 +125,11 @@ export default defineComponent({
 	setup (props) {
 		const { institutions, loading: institutionLoading } = useInstitutionList()
 		const { courses: allCourses, loading: courseLoading } = useCourseList()
-		const courses = computed(() => new Set(allCourses.value.filter((c) => c.institutionId === props.factory.institutionId)))
+		const courses = computed(() => allCourses.value.filter((c) => c.institutionId === props.factory.institutionId))
 		return {
-			getAlphabet, addOutline, trashOutline,
+			getAlphabet, addOutline, trashBinOutline,
 			institutions, courses, institutionLoading, courseLoading, years
 		}
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-input, ion-textarea, ion-select {
-		background-color: $color-newGray;
-		border-radius: 0.25rem !important;
-	}
-
-	label {
-		font-size: 1.2rem;
-		font-weight: 500;
-	}
-</style>

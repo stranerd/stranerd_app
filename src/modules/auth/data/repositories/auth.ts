@@ -17,8 +17,8 @@ export class AuthRepository implements IAuthRepository {
 		return await this.dataSource.signinWithEmail(email, password, extras)
 	}
 
-	async signinWithGoogle (idToken: string, extras: AuthExtras) {
-		return await this.dataSource.signinWithGoogle(idToken, extras)
+	async signinWithGoogle (data: { accessToken: string, idToken: string }, extras: AuthExtras) {
+		return await this.dataSource.signinWithGoogle(data, extras)
 	}
 
 	async signupWithEmail (data: NewUser, extras: AuthExtras) {
@@ -55,5 +55,9 @@ export class AuthRepository implements IAuthRepository {
 
 	async signout () {
 		return await this.dataSource.signout()
+	}
+
+	async updateRole (data: { id: string, value: boolean, role: string }) {
+		return await this.dataSource.updateRole(data)
 	}
 }

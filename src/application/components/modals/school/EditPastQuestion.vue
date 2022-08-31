@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Edit a question
 		</template>
@@ -24,6 +24,12 @@ import { useEditPastQuestion } from '@app/composable/school/pastQuestions'
 export default defineComponent({
 	name: 'EditPastQuestionModal',
 	components: { PastQuestionForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, editPastQuestion } = useEditPastQuestion()
 		return { factory, error, loading, editPastQuestion }

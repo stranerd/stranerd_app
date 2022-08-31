@@ -1,78 +1,60 @@
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractTextFromHTML, trimToLength } from '@utils/commons'
-import { appName } from '@utils/environment'
+import { QuestionMeta } from '../types'
 
 type QuestionConstructorArgs = {
 	id: string
 	body: string
 	isAnswered: boolean
-	data: QuestionData
 	attachments: Media[]
-	subject: string
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	tagId: string
+	user: EmbeddedUser
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
+	meta: QuestionMeta
 	createdAt: number
 	updatedAt: number
 }
 
-export enum QuestionType {
-	users = 'users',
-	classes = 'classes'
-}
-
-type UserType = {
-	type: QuestionType.users
-}
-
-type ClassType = {
-	type: QuestionType.classes
-	classId: string
-}
-
-export type QuestionData = UserType | ClassType
-
 export class QuestionEntity extends BaseEntity {
 	public readonly id: string
 	public readonly body: string
-	public readonly data: QuestionData
 	public readonly attachments: Media[]
-	public readonly subject: string
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
+	public readonly tagId: string
+	public readonly user: EmbeddedUser
 	public readonly bestAnswers: string[]
 	public readonly answers: { id: string, userId: string }[]
 	public readonly isAnswered: boolean
+	public readonly meta: QuestionMeta
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, body, subject, isAnswered, data,
-		             bestAnswers, createdAt, userId, userBio, userRoles, attachments,
-		             answers, updatedAt
-	             }: QuestionConstructorArgs) {
+					 id, body, tagId, isAnswered,
+					 bestAnswers, createdAt, user, attachments,
+					 meta, answers, updatedAt
+				 }: QuestionConstructorArgs) {
 		super()
 		this.id = id
 		this.body = body
 		this.isAnswered = isAnswered
-		this.data = data
-		this.attachments = attachments.map(parseMedia) ?? []
-		this.subject = subject
-		this.userId = userId
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
+		this.tagId = tagId
+		this.attachments = attachments.map(parseMedia)
+		this.user = generateEmbeddedUser(user)
 		this.bestAnswers = bestAnswers
 		this.answers = answers
+		this.meta = meta
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
+	get saveFilePath () {
+		return `questions/questions/${this.id}`
+	}
+
 	get trimmedBody () {
-		return trimToLength(this.strippedBody, 80)
+		return trimToLength(this.strippedBody, 120)
 	}
 
 	get strippedBody () {
@@ -92,7 +74,15 @@ export class QuestionEntity extends BaseEntity {
 	}
 
 	get isUserVerified () {
-		return this.userRoles[appName].isVerified
+		return this.user.roles.isVerified
+	}
+
+	get shareLink () {
+		return `/questions/${this.id}`
+	}
+
+	search (search: string) {
+		return this.strippedBody.toLowerCase().includes(search.toLowerCase())
 	}
 }
 

@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { ReviewFromModel, ReviewToModel } from '../models/review'
 import { ReviewBaseDataSource } from './review-base'
 
@@ -7,7 +7,7 @@ export class ReviewApiDataSource implements ReviewBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/users/reviews')
+		this.stranerdClient = new HttpClient(apiBase + '/users/reviews')
 	}
 
 	async create (data: ReviewToModel) {
@@ -15,7 +15,7 @@ export class ReviewApiDataSource implements ReviewBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, ReviewFromModel | null>(`/${id}`, {})
+		return await this.stranerdClient.get<any, ReviewFromModel | null>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {

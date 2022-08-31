@@ -1,28 +1,25 @@
 <template>
-	<div v-if="loading" class="col-span-12 flex items-center justify-center w-full py-8">
-		<ion-progress-bar type="indeterminate"></ion-progress-bar>
-	</div>
-	<div v-else class="col-span-12 flex flex-col md:gap-4">
-		<AnswerCard v-for="answer in answers" :key="answer.hash" :answer="answer" />
-		<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
-			<a @click.prevent="fetchOlderAnswers">Load More</a>
-		</div>
-		<EmptyState v-if="!loading && !error && answers.length === 0"
-			info="This user hasn't answered any questions yet." />
+	<div class="showcase-flex flex-1">
+		<form v-if="answers.length" class="p-4 lg:p-0" @submit.prevent="search">
+			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
+		</form>
+		<EmptyUserAnswers v-if="!loading && !error && answers.length === 0" />
+		<AnswerCard v-for="answer in (searchMode ? searchResults : answers)" :key="answer.hash" :answer="answer"
+			class="border-bottom-line" />
+		<BlockLoading v-if="loading" />
+		<LoadMore v-if="hasMore && !searchMode" :load="fetchOlderAnswers" />
 	</div>
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue'
 import AnswerCard from '@app/components/questions/answers/UserAnswerListCard.vue'
 import { useUserAnswerList } from '@app/composable/users/users/answers'
-import { IonProgressBar } from '@ionic/vue'
-import EmptyState from '../../core/EmptyState.vue'
 import { UserEntity } from '@modules/users'
-import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'ProfileAnswers',
-	components: { AnswerCard, IonProgressBar, EmptyState },
+	name: 'UserAnswers',
+	components: { AnswerCard },
 	props: {
 		user: {
 			type: UserEntity,
@@ -30,8 +27,14 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { answers, error, loading, hasMore, fetchOlderAnswers } = useUserAnswerList(props.user.id)
-		return { answers, error, loading, hasMore, fetchOlderAnswers }
+		const {
+			answers, error, loading, hasMore, fetchOlderAnswers,
+			search, searchMode, searchResults, searchValue
+		} = useUserAnswerList(props.user.id)
+		return {
+			answers, error, loading, hasMore, fetchOlderAnswers,
+			searchMode, searchResults, searchValue, search
+		}
 	}
 })
 </script>

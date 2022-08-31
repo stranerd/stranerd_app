@@ -1,12 +1,11 @@
 <template>
-	<img alt="" class="w-12 " src="@app/assets/images/New/flashcard2.png" />
-	<ion-text class="text-xl text-main_dark font-bold">
-		Flashcards
-	</ion-text>
-	<ion-text class="text-main_dark max-w-[80vw] text-center">
-		Memorize answers to questions on the back of cards. Scientifically proven to help students get better
-		grades
-	</ion-text>
+	<img alt="" src="@app/assets/images/onboarding/two.svg" />
+	<IonText class="text-2xl text-secondaryText font-bold mt-20">
+		Classes
+	</IonText>
+	<IonText class="text-secondaryText max-w-[75vw] text-center text-lg">
+		Interacting with your classmates for information and file sharing.
+	</IonText>
 </template>
 
 <script lang="ts">

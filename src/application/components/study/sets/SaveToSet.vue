@@ -1,5 +1,9 @@
 <template>
-	<ion-icon :icon="isSaved ? bookmark : bookmarkOutline" class="text-xl" @click.prevent="openSaveModal(entity)" />
+	<span class="mt-1.5" @click.prevent="openSaveModal(entity)">
+		<slot :isSaved="isSaved">
+			<IonIcon :class="{ 'text-primaryBg': isSaved }" :icon="isSaved ? bookmark : bookmarkOutline" />
+		</slot>
+	</span>
 </template>
 
 <script lang="ts">
@@ -7,9 +11,10 @@ import { computed, defineComponent, PropType } from 'vue'
 import { useUserSetList } from '@app/composable/users/users/sets'
 import { bookmark, bookmarkOutline } from 'ionicons/icons'
 import { openSaveModal } from '@app/composable/study/menus'
-import { FlashCardEntity, NoteEntity, SetEntity, TestPrepEntity, VideoEntity } from '@modules/study'
+import { FlashCardEntity, NoteEntity, TestPrepEntity } from '@modules/study'
+import { QuestionEntity } from '@modules/questions'
 
-type Saveable = FlashCardEntity | NoteEntity | VideoEntity | TestPrepEntity | SetEntity
+type Saveable = FlashCardEntity | NoteEntity | TestPrepEntity | QuestionEntity
 
 export default defineComponent({
 	name: 'SaveToSet',

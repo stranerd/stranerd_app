@@ -1,35 +1,33 @@
-import { computed, onMounted, onUnmounted, ref, Ref, watch } from 'vue'
-import {
-	AddAnnouncement,
-	AnnouncementEntity,
-	AnnouncementFactory,
-	ClassEntity,
-	DeleteAnnouncement,
-	GetAnnouncements,
-	ListenToAnnouncements,
-	UpdateAnnouncement
-} from '@modules/classes'
+import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
+import { AnnouncementEntity, AnnouncementFactory, AnnouncementsUseCases } from '@modules/classes'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
-import { useClassModal } from '@app/composable/core/modals'
-import { storage } from '@utils/storage'
 import { addToArray } from '@utils/commons'
+import { useAuth } from '@app/composable/auth/auth'
 
 const global = {} as Record<string, {
 	announcements: Ref<AnnouncementEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
 	listener: ReturnType<typeof useListener>
-	readTime: Ref<number>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-const getReadStateKey = (classId: string) => `classes-${classId}-announcements`
+const announcementGlobal = {} as Record<string, {
+	announcement: Ref<AnnouncementEntity | null>
+	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
+} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+
+export const markAnnouncementSeen = async (announcement: AnnouncementEntity, userId: string) => {
+	if (!announcement.isRead(userId)) await AnnouncementsUseCases.markRead(announcement.classId)
+}
 
 export const useAnnouncementList = (classId: string) => {
+	const { id } = useAuth()
 	if (global[classId] === undefined) {
 		const listener = useListener(async () => {
-			return await ListenToAnnouncements.call(classId, {
+			return await AnnouncementsUseCases.listenToClassAnnouncements(classId, {
 				created: async (entity) => {
 					addToArray(global[classId].announcements.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
@@ -45,23 +43,21 @@ export const useAnnouncementList = (classId: string) => {
 			announcements: ref([]),
 			fetched: ref(false),
 			hasMore: ref(false),
-			readTime: ref(0),
 			listener,
 			...useErrorHandler(),
 			...useLoadingHandler()
 		}
 	}
 
-	watch(() => global[classId].readTime.value, async () => await storage.set(getReadStateKey(classId), global[classId].readTime.value))
-	const unReadAnnouncements = computed(() => global[classId].announcements.value.filter((a) => a.createdAt > global[classId].readTime.value).length)
+	const unReadAnnouncements = computed(() => global[classId].announcements.value.filter((a) => !a.isRead(id.value)).length)
 
 	const fetchAnnouncements = async () => {
 		await global[classId].setError('')
 		try {
 			await global[classId].setLoading(true)
-			const announcements = await GetAnnouncements.call(classId)
+			const announcements = await AnnouncementsUseCases.getClassAnnouncements(classId, global[classId].announcements.value.at(-1)?.createdAt)
 			announcements.results.forEach((a) => addToArray(global[classId].announcements.value, a, (e) => e.id, (e) => e.createdAt))
-			global[classId].fetched.value = !!announcements.pages.next
+			global[classId].hasMore.value = !!announcements.pages.next
 			global[classId].fetched.value = true
 		} catch (error) {
 			await global[classId].setError(error)
@@ -71,8 +67,6 @@ export const useAnnouncementList = (classId: string) => {
 
 	onMounted(async () => {
 		if (!global[classId].fetched.value && !global[classId].loading.value) await fetchAnnouncements()
-		const lastRead = await storage.get(getReadStateKey(classId))
-		if (lastRead) global[classId].readTime.value = lastRead
 		await global[classId].listener.start()
 	})
 	onUnmounted(async () => {
@@ -82,19 +76,56 @@ export const useAnnouncementList = (classId: string) => {
 	return { ...global[classId], fetchOlderAnnouncements: fetchAnnouncements, unReadAnnouncements }
 }
 
-export const saveAnnouncementReadState = async (announcement: AnnouncementEntity) => {
-	const key = getReadStateKey(announcement.classId)
-	const lastRead = await storage.get(key)
-	if (lastRead >= announcement.createdAt) return
-	await storage.set(key, announcement.createdAt)
-	if (global[announcement.classId]) global[announcement.classId].readTime.value = announcement.createdAt
+export const useAnnouncement = (classId: string, id: string) => {
+	if (global[id] === undefined) {
+		const listener = useListener(async () => {
+			return await AnnouncementsUseCases.listenToOne(classId, id, {
+				created: async (entity) => {
+					announcementGlobal[id].announcement.value = entity
+				},
+				updated: async (entity) => {
+					announcementGlobal[id].announcement.value = entity
+				},
+				deleted: async (entity) => {
+					announcementGlobal[id].announcement.value = entity
+				}
+			})
+		})
+		announcementGlobal[id] = {
+			announcement: ref(null),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
+	}
+
+	const fetchAnnouncement = async () => {
+		await announcementGlobal[id].setError('')
+		try {
+			await announcementGlobal[id].setLoading(true)
+			announcementGlobal[id].announcement.value = await AnnouncementsUseCases.find(classId, id)
+			announcementGlobal[id].fetched.value = true
+		} catch (error) {
+			await announcementGlobal[id].setError(error)
+		}
+		await announcementGlobal[id].setLoading(false)
+	}
+
+	onMounted(async () => {
+		if (!announcementGlobal[id].fetched.value && !announcementGlobal[id].loading.value) await fetchAnnouncement()
+		await announcementGlobal[id].listener.start()
+	})
+	onUnmounted(async () => {
+		await announcementGlobal[id].listener.close()
+	})
+
+	return { ...announcementGlobal[id] }
 }
 
-let announcementClass = null as ClassEntity | null
-export const getAnnouncementClass = () => announcementClass
-export const openAnnouncementModal = async (classInst: ClassEntity, router: Router) => {
-	announcementClass = classInst
-	await router.push(`/classes/${classInst.id}/announcements/create`)
+let createClassId = null as string | null
+export const setAnnouncementClassId = (classId: string) => {
+	createClassId = classId
 }
 
 export const useCreateAnnouncement = () => {
@@ -104,19 +135,18 @@ export const useCreateAnnouncement = () => {
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	if (!announcementClass) useClassModal().closeCreateAnnouncement()
-	else factory.value.classId = announcementClass!.id
+	if (createClassId) factory.value.classId = createClassId
+	createClassId = null
 
 	const createAnnouncement = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const announcement = await AddAnnouncement.call(factory.value)
+				const announcement = await AnnouncementsUseCases.add(factory.value)
 				await setMessage('Announcement posted successfully.')
 				factory.value.reset()
-				useClassModal().closeCreateAnnouncement()
-				await router.push(`/classes/${announcement.classId}/announcements/${announcement.id}`)
+				await router.push(`/classes/${announcement.classId}/announcements`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -143,18 +173,16 @@ export const useEditAnnouncement = () => {
 	const router = useRouter()
 
 	if (editingAnnouncement) factory.value.loadEntity(editingAnnouncement)
-	else useClassModal().closeEditAnnouncement()
 
 	const editAnnouncement = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const announcement = await UpdateAnnouncement.call(editingAnnouncement!.id, factory.value)
+				const announcement = await AnnouncementsUseCases.update(editingAnnouncement!.id, factory.value)
 				await setMessage('Announcement updated successfully')
 				factory.value.reset()
-				useClassModal().closeEditAnnouncement()
-				await router.push(`/classes/${announcement.classId}/announcements/${announcement.id}`)
+				await router.push(`/classes/${announcement.classId}/announcements`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -165,7 +193,7 @@ export const useEditAnnouncement = () => {
 	return { error, loading, factory, editAnnouncement }
 }
 
-export const useDeleteAnnouncement = (announcementId: string) => {
+export const useDeleteAnnouncement = (classId: string, announcementId: string) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -179,7 +207,7 @@ export const useDeleteAnnouncement = (announcementId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteAnnouncement.call(announcementId)
+				await AnnouncementsUseCases.delete(classId, announcementId)
 				await setMessage('Announcement deleted successfully')
 			} catch (error) {
 				await setError(error)

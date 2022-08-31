@@ -1,10 +1,10 @@
 <template>
 	<form class="w-full" @submit.prevent="search">
-		<ion-searchbar v-model.trim="searchTerm"
+		<IonSearchbar v-model.trim="searchTerm"
 			:search-icon="searchOutline"
 			class="w-full"
 			mode="md"
-			placeholder="Search by subjects, topics and related keywords"
+			placeholder="Search"
 			showCancelButton="never"
 			type="search"
 		/>
@@ -12,16 +12,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, watch } from 'vue'
 import { useSearch } from '@app/composable/meta/search'
-import { IonSearchbar } from '@ionic/vue'
 import { searchOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'Search',
-	components: { IonSearchbar },
 	setup () {
-		const { searchTerm, search } = useSearch()
+		const { searchTerm, navigateToSearch, search } = useSearch()
+		watch(searchTerm, navigateToSearch)
 		return { search, searchTerm, searchOutline }
 	}
 })

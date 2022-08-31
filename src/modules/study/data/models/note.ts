@@ -1,19 +1,15 @@
-import { Media } from '@modules/core'
-import { UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 
 export interface NoteFromModel extends NoteToModel {
 	id: string
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	links: { original: string, normalized: string }[]
+	user: EmbeddedUser
 	createdAt: number
 	updatedAt: number
 }
 
 export interface NoteToModel {
 	title: string
-	description: string
-	isHosted: boolean
-	link: string | null
-	media: Media | null
+	content: string
+	isPrivate: boolean
 }

@@ -1,161 +1,127 @@
 <template>
-	<div class="bg-white rounded-xl flex flex-col card-padding">
-		<div class="flex items-center">
-			<Avatar :id="answer.userId" :name="answer.userBio.fullName" :size="24" :src="answer.userBio.photo"
-				class="mr-2" />
-			<span class="font-semibold text-main_dark flex items-center gap-1">
-				<span>{{ answer.userBio.fullName }}</span>
-				<IonIcon v-if="answer.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
+	<router-link :to="`/questions/${question.id}/answers/${answer.id}`"
+		class="rounded-xl flex flex-col !gap-4 card-padding lg:rounded-xl lg:border lg:border-disabled">
+		<div class="flex items-center gap-2 text-sm">
+			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="24" :src="answer.user.bio.photo" />
+			<span class="font-bold flex items-center gap-1">
+				<span>{{ answer.user.bio.fullName }}</span>
+				<Verified :verified="answer.isUserVerified" />
 			</span>
+			<IonIcon :icon="ellipse" class="dot" />
+			<span>{{ formatTime(answer.createdAt) }}</span>
+			<div class="flex flex-grow items-center justify-end gap-4 text-secondaryText">
+				<Share :link="answer.shareLink" :text="answer.strippedBody" title="Share this answer" />
+				<IonIcon :icon="flagOutline" @click="openReportModal" />
+			</div>
 		</div>
 
-		<div class="flex flex-col">
-			<ion-text class="text-gray font-semibold">Answer</ion-text>
-			<DisplayHtml :html="answer.title" />
-		</div>
+		<DisplayHtml :html="answer.body" class="pl-8" />
 
-		<div v-if="answer.body" class="flex flex-col">
-			<ion-text class="text-gray font-semibold">Explanation</ion-text>
-			<DisplayHtml :html="answer.body" />
-		</div>
+		<Gallery v-if="answer.attachments.length" :media="answer.attachments" :path="answer.saveFilePath"
+			class="pl-8" />
 
-		<PhotoList v-if="answer.attachments.length" :photos="answer.attachments" />
-
-		<div class="flex items-center gap-2 text-icon_inactive">
-			<div
-				:class="[answer.votes.find((v) => v.vote === 1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
-				class="flex flex-row items-center mr-2">
-				<IonIcon :icon="thumbsUpOutline" class="text-[22px] cursor-pointer"
-					@click="() => voteAnswer(true)" />
-				<span class="ml-1">{{ formatNumber(answer.upVotes) }}</span>
+		<div class="flex items-center gap-6 text-secondaryText text-sm pl-8">
+			<div class="flex items-center gap-1">
+				<IonIcon :icon="like && like.value ? thumbsUp : thumbsUpOutline" @click="() => likeAnswer(true)" />
+				<span>{{ formatNumber(answer.meta.likes) }}</span>
 			</div>
-			<div
-				:class="[answer.votes.find((v) => v.vote === -1 && v.userId === id) ? 'text-primary':'text-icon_inactive']"
-				class="flex flex-row items-center mr-2">
-				<IonIcon :icon="thumbsDownOutline" class="text-[22px] cursor-pointer"
-					@click="() => voteAnswer(false)" />
-				<span class="ml-1 ">{{ formatNumber(answer.downVotes) }}</span>
+			<div class="flex items-center gap-1">
+				<IonIcon :icon="like && !like.value ? thumbsDown : thumbsDownOutline"
+					@click="() => likeAnswer(false)" />
+				<span>{{ formatNumber(answer.meta.dislikes) }}</span>
 			</div>
-			<div class="flex items-center">
-				<IonIcon :icon="chatbubbleOutline" class="text-[22px] cursor-pointer"
-					@click="showComments = !showComments" />
-				<span class="ml-1">{{ formatNumber(comments.length) }}</span>
-			</div>
-			<span
-				v-if="isLoggedIn && question && !question.isAnswered && !answer.best && question.userId === id"
-				class="items-center flex cursor-pointer" @click.prevent="markBestAnswer(question)">
-				<span class="mr-1">Mark as best</span>
-				<IonIcon :icon="starOutline" class="text-[20px]" />
+			<router-link :to="`/questions/${question.id}/answers/${answer.id}`" class="flex items-center gap-1">
+				<IonIcon :icon="chatbubbleOutline" />
+				<span>{{ formatNumber(answer.meta.comments) }}</span>
+			</router-link>
+			<div class="flex-1" />
+			<span v-if="showMarkBest" class="flex items-center gap-1" @click.prevent="markBestAnswer(question)">
+				<span>Mark as best</span>
+				<IonIcon :icon="checkmarkCircleOutline" />
 			</span>
-			<IonIcon v-if="answer.best" :icon="starOutline" class="text-[20px] text-yellow_star" />
+			<IonIcon v-if="answer.best" :icon="checkmarkCircleOutline" class="text-success" />
 		</div>
-
-		<form class="flex gap-2 pr-4 items-center bg-new_gray rounded-lg"
-			@submit.prevent="createComment">
-			<ion-input v-model="commentFactory.body" :autoGrow="true" :rows="1"
-				class="focus:outline-none placeholder-gray-400 mt-0 pt-0"
-				placeholder="Add comment" />
-			<IonIcon :icon="paperPlaneOutline" class="text-[22px] text-primary cursor-pointer"
-				@click="createComment" />
-		</form>
-
-		<AnswerCommentsList v-if="showComments" :answerId="answer.id" />
-	</div>
-	<PageLoading v-if="loading || commentLoading" />
+	</router-link>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from 'vue'
-import { IonIcon } from '@ionic/vue'
+import { computed, defineComponent } from 'vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
 import {
 	chatbubbleOutline,
 	checkmarkCircleOutline,
-	chevronDownOutline,
-	chevronUpOutline,
-	paperPlaneOutline,
-	starOutline,
+	ellipse,
+	flagOutline,
+	thumbsDown,
 	thumbsDownOutline,
+	thumbsUp,
 	thumbsUpOutline
 } from 'ionicons/icons'
-import PhotoList from '@app/components/core/media/PhotoList.vue'
 import { useAnswer } from '@app/composable/questions/answers'
-import { useAnswerCommentList, useCreateAnswerComments } from '@app/composable/questions/answer-comments'
 import { useAuth } from '@app/composable/auth/auth'
-import AnswerCommentsList from '@app/components/questions/comments/AnswerCommentsList.vue'
-import DisplayHtml from '@app/components/core/text/DisplayHtml.vue'
+import { openCreateReportModal } from '@app/composable/reports/reports'
 import { formatNumber } from '@utils/commons'
+import { ReportType } from '@modules/reports'
+import { formatTime } from '@utils/dates'
+import { LikeEntity } from '@modules/interactions'
 
 export default defineComponent({
 	name: 'AnswerListCard',
-	components: { DisplayHtml, IonIcon, PhotoList, AnswerCommentsList },
 	props: {
 		answer: {
-			type: AnswerEntity as PropType<AnswerEntity>,
+			type: AnswerEntity,
 			required: true
 		},
+		like: {
+			type: LikeEntity,
+			required: false,
+			default: null
+		},
 		question: {
-			required: true,
-			type: Object as PropType<QuestionEntity>
+			type: QuestionEntity,
+			required: true
 		}
 	},
 	setup (props) {
-		const showComments = ref(false)
-		const showExplanation = ref(false)
-		const { id, isLoggedIn, user } = useAuth()
+		const { id } = useAuth()
 		const showEditButton = computed({
-			get: () => props.answer.userId === id.value && props.answer.canBeEdited,
+			get: () => props.answer.user.id === id.value && props.answer.canBeEdited,
 			set: () => {
 			}
 		})
 		const showDeleteButton = computed({
-			get: () => props.answer.userId === id.value && props.answer.canBeDeleted,
+			get: () => props.answer.user.id === id.value && props.answer.canBeDeleted,
 			set: () => {
 			}
 		})
-		const { error, loading, markBestAnswer, voteAnswer } = useAnswer(props.answer)
-		const { comments } = useAnswerCommentList(props.answer.id)
-		const {
-			loading: commentLoading,
-			error: commentError,
-			factory: commentFactory,
-			createComment
-		} = useCreateAnswerComments(props.answer.id)
+		const showMarkBest = computed({
+			get: () => !props.question.isAnswered && !props.answer.best && props.question.user.id === id.value,
+			set: () => {
+			}
+		})
+		const { error, loading, markBestAnswer, likeAnswer } = useAnswer(props.answer)
 
 		return {
-			id, chatbubbleOutline,
-			isLoggedIn,
-			user,
-			voteAnswer,
+			id,
+			formatNumber,
+			formatTime,
 			loading,
 			error,
-			commentLoading,
-			commentError,
-			commentFactory,
-			createComment,
 			markBestAnswer,
-			formatNumber,
+			likeAnswer,
+			chatbubbleOutline,
+			ellipse,
+			flagOutline,
+			thumbsDown,
 			thumbsDownOutline,
+			thumbsUp,
 			thumbsUpOutline,
-			starOutline,
-			paperPlaneOutline,
-			chevronUpOutline,
-			chevronDownOutline,
 			checkmarkCircleOutline,
-			showExplanation,
-			showComments,
 			showEditButton,
 			showDeleteButton,
-			comments
+			showMarkBest,
+			openReportModal: () => openCreateReportModal(ReportType.answers, props.answer.id)
 		}
 	}
 })
 </script>
-
-<style scoped>
-	ion-textarea {
-		--background: transparent;
-		--padding-bottom: 0;
-		--padding-top: 0;
-	}
-</style>

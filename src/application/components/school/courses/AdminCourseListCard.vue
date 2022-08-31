@@ -2,11 +2,11 @@
 	<IonItem>
 		<IonLabel class="capitalize">{{ course.name }}</IonLabel>
 		<a class="flex items-center gap-2 mr-4" @click.prevent="openCourseEditModal(course)">
-			<IonIcon :icon="pencilOutline" class="text-orange" />
+			<IonIcon :icon="pencilOutline" class="text-warning" />
 			<IonLabel>Edit</IonLabel>
 		</a>
 		<a class="flex items-center gap-2" @click.prevent="deleteCourse(course)">
-			<IonIcon :icon="trashOutline" class="text-red" />
+			<IonIcon :icon="trashBinOutline" />
 			<IonLabel>Delete</IonLabel>
 		</a>
 		<PageLoading v-if="loading" />
@@ -17,12 +17,10 @@
 import { defineComponent } from 'vue'
 import { CourseEntity } from '@modules/school'
 import { openCourseEditModal, useDeleteCourse } from '@app/composable/school/courses'
-import { IonItem, IonLabel } from '@ionic/vue'
-import { pencilOutline, trashOutline } from 'ionicons/icons'
+import { pencilOutline, trashBinOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'AdminCourseListCard',
-	components: { IonItem, IonLabel },
 	props: {
 		course: {
 			type: CourseEntity,
@@ -30,10 +28,10 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const { loading, deleteCourse } = useDeleteCourse(props.course)
+		const { loading, deleteCourse } = useDeleteCourse(props.course.id)
 		return {
 			loading, deleteCourse, openCourseEditModal,
-			trashOutline, pencilOutline
+			trashBinOutline, pencilOutline
 		}
 	}
 })

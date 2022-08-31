@@ -1,125 +1,40 @@
 <template>
 	<SearchWrapper>
-		<template
-			v-slot:default="{ count, searchTerm, testPreps, notes, videos, flashCards, sets, questions, users }">
-			<div class="py-4 md:py-0 flex flex-col gap-4 md:gap-6">
-				<div v-if="questions.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
-							<ion-text class="text-heading font-bold">Questions</ion-text>
-						</div>
-
-						<router-link :to="`/search/questions?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
-							<span>view all</span>
-						</router-link>
-					</div>
-					<SearchQuestionsList :questions="questions" :sliced="true" />
-				</div>
-				<div v-if="testPreps.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
-							<ion-text class="text-heading font-bold">TestPreps</ion-text>
-						</div>
-						<router-link :to="`/search/preps?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
-							<span>view all</span>
-						</router-link>
-					</div>
-					<SearchTestPrepsList :sliced="true" :testPreps="testPreps" />
-				</div>
-				<div v-if="flashCards.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
-							<ion-text class="text-heading font-bold">FlashCards</ion-text>
-						</div>
-
-						<router-link :to="`/search/flashCards?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
-							<span>view all</span>
-						</router-link>
-					</div>
-					<SearchFlashCardsList :flashCards="flashCards" :sliced="true" />
-				</div>
-				<div v-if="notes.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
-							<ion-text class="text-heading font-bold">Notes</ion-text>
-						</div>
-						<router-link :to="`/search/notes?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
-							<span>view all</span>
-						</router-link>
-					</div>
-					<SearchNotesList :notes="notes" :sliced="true" />
-				</div>
-				<div v-if="videos.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
-							<ion-text class="text-heading font-bold">Videos</ion-text>
-						</div>
-						<router-link :to="`/search/videos?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
-							<span>view all</span>
-						</router-link>
-					</div>
-					<SearchVideosList :sliced="true" :videos="videos" />
-				</div>
-				<div v-if="sets.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
-							<ion-text class="text-heading font-bold">Folders</ion-text>
-						</div>
-
-						<router-link :to="`/search/sets?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
-							<span>view all</span>
-						</router-link>
-					</div>
-					<SearchSetsList :sets="sets" :sliced="true" />
-				</div>
-				<div v-if="users.length" class="border-bottom-line">
-					<div class="w-full flex justify-between px-4 md:px-0 md:mb-4">
-						<div class="text-main_dark flex items-center">
-							<ion-text class="text-heading font-bold">Nerds</ion-text>
-						</div>
-
-						<router-link :to="`/search/nerds?search=${searchTerm}`"
-							class="text-primary flex items-center font-bold">
-							<span>view all</span>
-						</router-link>
-					</div>
-					<SearchUsersList :sliced="true" :users="users" />
-				</div>
-				<EmptyState v-if="!count" info="No results found." />
-			</div>
-		</template>
+		<IonText class="font-bold px-4 lg:p-0">Latest</IonText>
+		<BlockLoading v-if="loading" />
+		<EmptyState v-if="!exploreCount" info="Nothing to explore." />
+		<SearchQuestionsList :questions="explore.questions" />
+		<SearchFlashCardsList :flashCards="explore.flashCards" />
+		<SearchNotesList :notes="explore.notes" />
+		<SearchUsersList v-if="0" :users="explore.users" />
+		<SearchClassesList :classes="explore.classes" />
 	</SearchWrapper>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import SearchWrapper from '@app/components/search/SearchWrapper.vue'
-import SearchTestPrepsList from '@app/components/study/testPreps/SearchTestPrepsList.vue'
 import SearchNotesList from '@app/components/study/notes/SearchNotesList.vue'
-import SearchVideosList from '@app/components/study/videos/SearchVideosList.vue'
 import SearchFlashCardsList from '@app/components/study/flashCards/SearchFlashCardsList.vue'
-import SearchSetsList from '@app/components/study/sets/SearchSetsList.vue'
 import SearchQuestionsList from '@app/components/questions/questions/SearchQuestionsList.vue'
 import SearchUsersList from '@app/components/users/SearchUsersList.vue'
+import SearchClassesList from '@app/components/classes/classes/SearchClassesList.vue'
+import { useRouteMeta } from '@app/composable/core/states'
+import { useSearch } from '@app/composable/meta/search'
 
 export default defineComponent({
 	name: 'Search',
-	displayName: 'Search',
 	components: {
-		SearchWrapper,
-		SearchTestPrepsList,
-		SearchNotesList,
-		SearchVideosList,
-		SearchFlashCardsList,
-		SearchSetsList,
-		SearchUsersList,
-		SearchQuestionsList
+		SearchWrapper, SearchNotesList, SearchFlashCardsList,
+		SearchUsersList, SearchQuestionsList, SearchClassesList
+	},
+	setup () {
+		useRouteMeta('Search', { back: true })
+		const { explore, exploreCount, loading, fetched, fetchExplore } = useSearch()
+		onMounted(async () => {
+			if (!loading.value && !fetched.value) await fetchExplore()
+		})
+		return { explore, exploreCount, loading }
 	}
 })
 </script>

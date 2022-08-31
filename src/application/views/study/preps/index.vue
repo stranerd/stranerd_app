@@ -1,62 +1,22 @@
 <template>
-	<DashboardLayout>
-		<div class="py-4 lg:py-8 md:px-4 lg:px-0">
-			<div class="px-4 md:p-0">
-				<IonSegment v-model="tab"
-					class="w-full bg-new_gray text-gray border border-new_gray border-xl md:border-white">
-					<IonSegmentButton class="w-full" value="tests">My Tests</IonSegmentButton>
-					<IonSegmentButton class="w-full" value="institutions">Explore</IonSegmentButton>
-				</IonSegment>
-			</div>
-
-			<div class="md:mt-4">
-				<ContinueTests v-if="tab === 'tests'" />
-				<ExploreTestPrepsList v-if="tab === 'institutions'" />
-			</div>
-		</div>
-	</DashboardLayout>
+	<PrepsWrapper>
+		<ContinueTests class="h-full p-4 lg:p-0" />
+	</PrepsWrapper>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import DashboardLayout from '@app/layouts/Dashboard.vue'
-import { IonSegment, IonSegmentButton } from '@ionic/vue'
-import ContinueTests from '@root/application/components/study/tests/ContinueTests.vue'
-import ExploreTestPrepsList from '@root/application/components/study/testPreps/ExploreTestPrepsList.vue'
+import { defineComponent } from 'vue'
+import { useRouteMeta } from '@app/composable/core/states'
+import { generateMiddlewares } from '@app/middlewares'
+import PrepsWrapper from '@app/components/study/testPreps/PrepsWrapper.vue'
+import ContinueTests from '@app/components/study/tests/ContinueTests.vue'
 
 export default defineComponent({
 	name: 'StudyPreps',
-	displayName: 'Preps',
-	components: { DashboardLayout, ContinueTests, IonSegment, IonSegmentButton, ExploreTestPrepsList },
+	components: { PrepsWrapper, ContinueTests },
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
-		const tab = ref('tests')
-		return {
-			tab
-		}
+		useRouteMeta('Test preps', {})
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-segment {
-		border-radius: 0.5rem;
-	}
-
-	ion-segment-button {
-		--background-checked: $color-white;
-		--background-focused: $color-white;
-		--indicator-color: $color-white;
-		--padding-top: 0.75rem;
-		--padding-bottom: 0.75rem;
-		font-weight: bold;
-		border-radius: 0.5rem;
-		text-transform: capitalize;
-		max-width: unset;
-		color: $color-gray;
-	}
-
-	.segment-button-checked {
-		color: $color-gray !important;
-		background: $color-white;
-	}
-</style>

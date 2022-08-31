@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Create a department
 		</template>
@@ -24,6 +24,12 @@ import { useCreateDepartment } from '@app/composable/school/departments'
 export default defineComponent({
 	name: 'CreateDepartmentModal',
 	components: { DepartmentForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, createDepartment } = useCreateDepartment()
 		return { factory, error, loading, createDepartment }

@@ -1,32 +1,37 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
-import {
-	AddAnswer,
-	AnswerEntity,
-	AnswerFactory,
-	DeleteAnswer,
-	EditAnswer,
-	GetAnswers,
-	ListenToAnswers,
-	MarkBestAnswer,
-	QuestionEntity,
-	VoteAnswer
-} from '@modules/questions'
+import { AnswerEntity, AnswerFactory, AnswersUseCases, QuestionEntity, QuestionsUseCases } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { addToArray } from '@utils/commons'
+import { InteractionEntities, LikeEntity, LikesUseCases } from '@modules/interactions'
 
 const global = {} as Record<string, {
 	answers: Ref<AnswerEntity[]>
 	fetched: Ref<boolean>
+	likes: Ref<Record<string, LikeEntity>>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
+const answerGlobal = {} as Record<string, {
+	answer: Ref<AnswerEntity | null>
+	fetched: Ref<boolean>
+	listener: ReturnType<typeof useListener>
+} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
+
+const getLikesOfAnswers = async (userId: string, questionId: string, answerIds: string[]) => {
+	const { results: likes } = await LikesUseCases.getInList(userId, answerIds, InteractionEntities.answers)
+	likes.forEach((like) => {
+		global[questionId].likes.value[like.entity.id] = like
+	})
+}
+
 export const useAnswerList = (questionId: string) => {
+	const { id } = useAuth()
 	if (global[questionId] === undefined) {
 		const listener = useListener(async () => {
-			return await ListenToAnswers.call(questionId, {
+			return await AnswersUseCases.listenToQuestionAnswers(questionId, {
 				created: async (entity) => {
 					addToArray(global[questionId].answers.value, entity, (e) => e.id, (e) => e.createdAt, true)
 				},
@@ -40,6 +45,7 @@ export const useAnswerList = (questionId: string) => {
 		})
 		global[questionId] = {
 			answers: ref([]),
+			likes: ref({}),
 			fetched: ref(false),
 			listener,
 			...useErrorHandler(),
@@ -51,8 +57,9 @@ export const useAnswerList = (questionId: string) => {
 		await global[questionId].setError('')
 		try {
 			await global[questionId].setLoading(true)
-			const answers = await GetAnswers.call(questionId)
+			const answers = await AnswersUseCases.getQuestionAnswers(questionId)
 			answers.results.forEach((a) => addToArray(global[questionId].answers.value, a, (e) => e.id, (e) => e.createdAt, true))
+			await getLikesOfAnswers(id.value, questionId, answers.results.map((a) => a.id))
 			global[questionId].fetched.value = true
 		} catch (error) {
 			await global[questionId].setError(error)
@@ -71,15 +78,16 @@ export const useAnswerList = (questionId: string) => {
 	return {
 		error: global[questionId].error,
 		loading: global[questionId].loading,
-		answers: global[questionId].answers
+		answers: global[questionId].answers,
+		likes: global[questionId].likes
 	}
 }
 
 let answeringQuestion = null as QuestionEntity | null
-export const showAddAnswer = ref(false)
-export const openAnswerModal = (question: QuestionEntity) => {
+export const getAnsweringQuestion = () => answeringQuestion
+export const openAnswerModal = async (question: QuestionEntity, router: Router) => {
 	answeringQuestion = question
-	showAddAnswer.value = true
+	await router.push(`/questions/${question.id}/answers/create`)
 }
 
 export const useCreateAnswer = () => {
@@ -90,18 +98,17 @@ export const useCreateAnswer = () => {
 	const { setMessage } = useSuccessHandler()
 
 	if (!answeringQuestion) router.push('/questions')
-	factory.value.questionId = answeringQuestion!.id
+	else factory.value.questionId = answeringQuestion!.id
 
 	const createAnswer = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const answer = await AddAnswer.call(factory.value)
+				const answer = await AnswersUseCases.add(factory.value)
 				await setMessage('Answer submitted successfully.')
 				factory.value.reset()
 				await router.push(`/questions/${answer.questionId}`)
-				showAddAnswer.value = false
 			} catch (error) {
 				await setError(error)
 			}
@@ -110,7 +117,7 @@ export const useCreateAnswer = () => {
 	}
 
 	return {
-		factory, error, loading, answeringQuestion,
+		factory, error, loading, answeringQuestion: answeringQuestion!,
 		createAnswer
 	}
 }
@@ -120,16 +127,16 @@ export const useAnswer = (answer: AnswerEntity) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 
-	const voteAnswer = async (vote: boolean) => {
+	const likeAnswer = async (value: boolean) => {
 		const userId = useAuth().id.value
 		if (!userId) return
-		const voted = answer.votes.find((v) => v.userId === userId)
-		if (vote && voted?.vote === 1) return
-		if (!vote && voted?.vote === -1) return
+		const liked = global[answer.questionId].likes.value[answer.id]
+		if (liked && liked.value === value) return
 		await setError('')
 		try {
 			await setLoading(true)
-			await VoteAnswer.call(answer.id, vote)
+			const like = await LikesUseCases.add({ id: answer.id, type: InteractionEntities.answers }, value)
+			global[answer.questionId].likes.value[like.entity.id] = like
 		} catch (error) {
 			await setError(error)
 		}
@@ -137,7 +144,7 @@ export const useAnswer = (answer: AnswerEntity) => {
 	}
 
 	const markBestAnswer = async (question: QuestionEntity) => {
-		if (question.isAnswered || question.userId !== id.value || answer.best) return
+		if (question.isAnswered || question.user.id !== id.value || answer.best) return
 		await setError('')
 		const accepted = await Alert({
 			title: 'Are you sure you want to mark this answer as the best',
@@ -146,7 +153,7 @@ export const useAnswer = (answer: AnswerEntity) => {
 		if (accepted) {
 			try {
 				await setLoading(true)
-				await MarkBestAnswer.call(question.id, answer.id)
+				await QuestionsUseCases.markBestAnswer(question.id, answer.id)
 			} catch (error) {
 				await setError(error)
 			}
@@ -155,8 +162,51 @@ export const useAnswer = (answer: AnswerEntity) => {
 	}
 
 	return {
-		loading, error, markBestAnswer, voteAnswer
+		loading, error, markBestAnswer, likeAnswer
 	}
+}
+
+export const useAnswerById = (answerId: string) => {
+	const fetchAnswer = async () => {
+		await answerGlobal[answerId].setError('')
+		try {
+			await answerGlobal[answerId].setLoading(true)
+			answerGlobal[answerId].answer.value = await AnswersUseCases.find(answerId)
+		} catch (error) {
+			await answerGlobal[answerId].setError(error)
+		}
+		await answerGlobal[answerId].setLoading(false)
+	}
+
+	if (answerGlobal[answerId] === undefined) {
+		const listener = useListener(async () => {
+			const setAnswer = async (entity: AnswerEntity) => {
+				answerGlobal[answerId].answer.value = entity
+			}
+			return await AnswersUseCases.listenToOne(answerId, {
+				created: setAnswer,
+				updated: setAnswer,
+				deleted: setAnswer
+			})
+		})
+		answerGlobal[answerId] = {
+			answer: ref(null),
+			fetched: ref(false),
+			listener,
+			...useErrorHandler(),
+			...useLoadingHandler()
+		}
+	}
+
+	onMounted(async () => {
+		if (!answerGlobal[answerId].fetched.value && !answerGlobal[answerId].loading.value) await fetchAnswer()
+		await answerGlobal[answerId].listener.start()
+	})
+	onUnmounted(async () => {
+		await answerGlobal[answerId].listener.close()
+	})
+
+	return { ...answerGlobal[answerId] }
 }
 
 let editingQuestionAnswer = null as { answer: AnswerEntity, question: QuestionEntity } | null
@@ -179,7 +229,7 @@ export const useEditAnswer = (answerId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const answer = await EditAnswer.call(answerId, factory.value)
+				const answer = await AnswersUseCases.update(answerId, factory.value)
 				await setMessage('Answer updated successfully')
 				factory.value.reset()
 				await router.push(`/questions/${answer.questionId}`)
@@ -207,7 +257,7 @@ export const useDeleteAnswer = (answerId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteAnswer.call(answerId)
+				await AnswersUseCases.delete(answerId)
 				await setMessage('Answer deleted successfully')
 			} catch (error) {
 				await setError(error)

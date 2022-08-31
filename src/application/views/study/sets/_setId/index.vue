@@ -1,24 +1,25 @@
 <template>
-	<Justified>
-		<div class="lg:w-8/12 w-full mx-auto md:px-4 py-4">
-			<SetWrapper v-if="set" :key="set.hash" :set="set" />
-			<PageLoading v-if="loading" />
+	<DefaultLayout>
+		<div class="h-full flex flex-col">
+			<BlockLoading v-if="loading" />
+			<SetView v-else-if="set" :key="set.hash" :set="set" />
+			<NotFound v-else title="Folder not found" />
 		</div>
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Justified from '@app/layouts/Justified.vue'
 import { useRoute } from 'vue-router'
 import { useSetById } from '@app/composable/study/sets'
-import SetWrapper from '@app/components/study/sets/SetWrapper.vue'
+import SetView from '@app/components/study/sets/SetView.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudySetsSetId',
-	displayName: 'Folder',
-	components: { Justified, SetWrapper },
+	components: { SetView },
 	setup () {
+		useRouteMeta('Folder', { back: true })
 		const { setId } = useRoute().params
 		const { error, loading, set } = useSetById(setId as string)
 		return { error, loading, set }

@@ -1,24 +1,32 @@
 <template>
-	<form @submit.prevent="submit">
-		<div class="mb-8">
-			<label>Name</label>
-			<IonInput v-model="factory.name" class="mb-2" placeholder="Enter Department Name" />
+	<form class="flex flex-col gap-6" @submit.prevent="submit">
+		<div class="flex flex-col gap-2">
+			<IonLabel>Name</IonLabel>
+			<IonInput v-model="factory.name" :disabled="disabled.name" placeholder="Enter Department Name" />
 			<DisplayError :error="factory.errors.name" />
 		</div>
 
-		<div class="flex w-full mt-8 items-center gap-6">
-			<ion-button :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
-				<slot name="buttonText">Submit</slot>
-			</ion-button>
+		<div class="flex flex-col gap-2">
+			<IonLabel>Tag</IonLabel>
+			<IonSelect v-model="factory.tagId" :disabled="disabled.tagId" class="capitalize w-full"
+				interface="action-sheet" placeholder="Select tag">
+				<IonSelectOption v-for="tag in departmentTags" :key="tag.hash" :value="tag.id" class="capitalize">
+					{{ tag.title }}
+				</IonSelectOption>
+			</IonSelect>
 		</div>
 
-		<PageLoading v-if="loading" />
+		<IonButton :disabled="loading || !factory.valid" class="w-full btn-primary" type="submit">
+			<SpinLoading v-if="loading" />
+			<slot v-else name="buttonText">Submit</slot>
+		</IonButton>
 	</form>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { DepartmentFactory } from '@modules/school'
+import { useTagList } from '@app/composable/interactions/tags'
 
 export default defineComponent({
 	name: 'DepartmentForm',
@@ -28,7 +36,7 @@ export default defineComponent({
 			required: true
 		},
 		submit: {
-			type: Function,
+			type: Function as PropType<() => Promise<void>>,
 			required: true
 		},
 		loading: {
@@ -38,19 +46,16 @@ export default defineComponent({
 		error: {
 			type: String,
 			required: true
+		},
+		disabled: {
+			type: Object,
+			required: false,
+			default: () => ({})
 		}
+	},
+	setup () {
+		const { departmentTags } = useTagList()
+		return { departmentTags }
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-input, ion-textarea, ion-select {
-		background-color: $color-newGray;
-		border-radius: 0.25rem !important;
-	}
-
-	label {
-		font-size: 1.2rem;
-		font-weight: 500;
-	}
-</style>

@@ -1,8 +1,19 @@
 import { BaseEntity, parseMedia } from '@modules/core'
-import { appName } from '@utils/environment'
-import { capitalize, catchDivideByZero, formatNumber, getPercentage } from '@utils/commons'
+import { capitalize, catchDivideByZero, formatNumber } from '@utils/commons'
 import { getRankImage } from './rank'
-import { UserAccount, UserBio, UserDates, UserRank, UserRoles, UserSchoolData, UserSession, UserStatus } from '../types'
+import {
+	CollegeType,
+	EmbeddedUser,
+	UserAccount,
+	UserBio,
+	UserDates,
+	UserRank,
+	UserRoles,
+	UserSchoolData,
+	UserSchoolType,
+	UserSession,
+	UserStatus
+} from '../types'
 
 type UserConstructorArgs = {
 	id: string
@@ -20,20 +31,23 @@ type UserConstructorArgs = {
 export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
 	const firstName = capitalize(bio?.firstName ?? 'Anon')
 	const lastName = capitalize(bio?.lastName ?? 'Ymous')
-	const fullName = firstName + ' ' + lastName
+	const fullName = capitalize(bio?.fullName ?? (firstName + ' ' + lastName))
 	const email = bio?.email ?? 'anon@ymous.com'
 	const description = bio?.description ?? ''
 	const photo = bio?.photo ? parseMedia(bio.photo) : null
-	const coverPhoto = bio?.coverPhoto ? parseMedia(bio.coverPhoto) : null
-	return { firstName, lastName, fullName, email, description, photo, coverPhoto }
+	return { firstName, lastName, fullName, email, description, photo }
 }
 
 export const generateDefaultRoles = (roles: Partial<UserRoles>): UserRoles => ({
-	[appName]: {
-		isAdmin: roles?.[appName]?.isAdmin ?? false,
-		isTutor: roles?.[appName]?.isTutor ?? false,
-		isVerified: roles?.[appName]?.isVerified ?? false
-	}
+	isStranerdAdmin: roles?.isStranerdAdmin ?? false,
+	isStranerdTutor: roles?.isStranerdTutor ?? false,
+	isVerified: roles?.isVerified ?? false
+})
+
+export const generateEmbeddedUser = (user: EmbeddedUser): EmbeddedUser => ({
+	...user,
+	bio: generateDefaultBio(user.bio),
+	roles: generateDefaultRoles(user.roles)
 })
 
 export class UserEntity extends BaseEntity {
@@ -97,14 +111,6 @@ export class UserEntity extends BaseEntity {
 		return this.account.score
 	}
 
-	get expectedScore () {
-		return this.nextRank ? this.rank.score : this.account.score
-	}
-
-	get scorePercentage () {
-		return getPercentage(this.score, this.expectedScore)
-	}
-
 	get rankImage () {
 		return getRankImage(this.rank.id)
 	}
@@ -136,34 +142,48 @@ export class UserEntity extends BaseEntity {
 		return this.account.meta
 	}
 
-	get nerdScoreColor () {
-		if (this.scorePercentage > 75) return { fg: '#00D246', bg: '#00D24622' }
-		if (this.scorePercentage > 40) return { fg: '#546DD3', bg: '#546DD322' }
-		return { fg: '#FF6666', bg: '#FF666622' }
+	get nerdScoreMessage () {
+		if (this.account.rankings.daily > 10) return 'Your performance has been excellent today. Keep it up.'
+		if (this.account.rankings.daily > 5) return 'You are on a streak today. Keep it rolling!'
+		if (this.account.rankings.daily > 2) return 'Keep doing what you are doing!'
+		return 'Time to pick up on your performance.'
 	}
 
 	get isAdmin () {
-		return this.roles[appName].isAdmin
+		return this.roles.isStranerdAdmin
 	}
 
 	set isAdmin (isAdmin) {
-		this.roles[appName].isAdmin = isAdmin
+		this.roles.isStranerdAdmin = isAdmin
 	}
 
 	get isTutor () {
-		return this.roles[appName].isTutor
+		return this.roles.isStranerdTutor
 	}
 
 	set isTutor (isTutor) {
-		this.roles[appName].isTutor = isTutor
+		this.roles.isStranerdTutor = isTutor
 	}
 
 	get isVerified () {
-		return this.roles[appName].isVerified
+		return this.roles.isVerified
 	}
 
 	set isVerified (isVerified) {
-		this.roles[appName].isVerified = isVerified
+		this.roles.isVerified = isVerified
+	}
+
+	get shareLink () {
+		return `/users/${this.id}`
+	}
+
+	get firstInstitution () {
+		if (!this.school) return null
+		if (this.school?.type === UserSchoolType.college) return this.school.institutionId
+		return this.school.exams.at(0)?.institutionId ?? null
+	}
+
+	isCollege (user: UserEntity): user is Omit<UserEntity, 'school'> & { school: CollegeType } {
+		return user.school?.type === UserSchoolType.college
 	}
 }
-

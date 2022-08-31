@@ -1,57 +1,51 @@
-import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
-import { GetLeaderboard, RankingTimes, UserEntity } from '@modules/users'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { RankingTimes, UserEntity, UsersUseCases } from '@modules/users'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { addToArray } from '@utils/commons'
 
-export const times = Object.values(RankingTimes)
-export const time = ref(RankingTimes.daily)
+const global = {
+	users: ref([] as UserEntity[]),
+	time: ref(RankingTimes.daily),
+	tagId: ref(null as string | null),
+	nextPage: ref(1),
+	fetched: ref(false),
+	...useErrorHandler(),
+	...useLoadingHandler()
+}
 
-const global = {} as Record<RankingTimes, {
-	users: Ref<UserEntity[]>,
-	fetched: Ref<boolean>,
-	listener: ReturnType<typeof useListener>
-} & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
-
-export const useLeaderboardList = (key: RankingTimes) => {
+export const useLeaderboardList = () => {
 	const { id } = useAuth()
-	if (!global[key]) {
-		const listener = useListener(async () => () => {
-		})
-		global[key] = {
-			users: ref([]),
-			fetched: ref(false),
-			listener,
-			...useErrorHandler(),
-			...useLoadingHandler()
-		}
-	}
 
 	const fetchUsers = async () => {
-		await global[key].setError('')
+		await global.setError('')
 		try {
-			await global[key].setLoading(true)
-			const users = await GetLeaderboard.call(key)
-			users.results.forEach((user) => addToArray(global[key].users.value, user, (e) => e.id, (e) => e.account.rankings[key]))
-			global[key].fetched.value = true
+			await global.setLoading(true)
+			const users = await UsersUseCases.getLeaderboard(global.time.value, global.tagId.value, global.nextPage.value)
+			if (global.nextPage.value === 1) global.users.value = []
+			users.results.forEach((user) => addToArray(global.users.value, user, (e) => e.id, (e) => e.account.rankings[global.time.value]))
+			global.nextPage.value = users.pages.next ?? 1
+			global.fetched.value = true
 		} catch (error) {
-			await global[key].setError(error)
+			await global.setError(error)
 		}
-		await global[key].setLoading(false)
+		await global.setLoading(false)
 	}
 	const hasNoAuthUser = computed({
-		get: () => !global[key].users.value.find((user) => user.id === id.value),
+		get: () => !global.users.value.find((user) => user.id === id.value),
 		set: () => {
 		}
 	})
 
-	onMounted(async () => {
-		if (!global[key].fetched.value && !global[key].loading.value) await fetchUsers()
-		await global[key].listener.start()
-	})
-	onUnmounted(async () => {
-		await global[key].listener.close()
+	const watcher = watch([global.tagId, global.time], async () => {
+		global.fetched.value = false
+		await fetchUsers()
 	})
 
-	return { ...global[key], hasNoAuthUser }
+	onMounted(async () => {
+		if (!global.fetched.value && !global.loading.value) await fetchUsers()
+	})
+	onUnmounted(watcher)
+
+	return { ...global, hasNoAuthUser, fetchMoreUsers: fetchUsers }
 }

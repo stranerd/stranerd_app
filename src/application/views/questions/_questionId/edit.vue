@@ -1,26 +1,47 @@
 <template>
-	<div />
+	<DefaultLayout :hideBottom="true" :hideFab="true">
+		<template v-slot:panel>
+			<QuestionsPanel />
+		</template>
+		<QuestionForm
+			:disabled="{ tagId: true }"
+			:error="error"
+			:factory="factory"
+			:loading="loading"
+			:submit="editQuestion"
+			class="page-padding h-full lg:h-auto"
+		>
+			<template v-slot:buttonText>
+				Save Question
+			</template>
+		</QuestionForm>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { getEditingQuestion } from '@app/composable/questions/questions'
+import { getEditingQuestion, useEditQuestion } from '@app/composable/questions/questions'
 import { useAuth } from '@app/composable/auth/auth'
-import { useQuestionModal } from '@app/composable/core/modals'
+import QuestionForm from '@app/components/questions/questions/QuestionForm.vue'
+import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
+import QuestionsPanel from '@app/components/layout/panels/QuestionsPanel.vue'
 
 export default defineComponent({
 	name: 'QuestionsQuestionIdEdit',
-	displayName: 'Edit Question',
-	middlewares: ['isAuthenticated', async ({ from, to }) => {
+	components: { QuestionForm, QuestionsPanel },
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ to }) => {
 		const { id } = useAuth()
 		const { questionId = '' } = to.params
 		const question = getEditingQuestion()
 		if (!question || question.id !== questionId) return `/questions/${questionId}`
-		const canEdit = question.userId === id.value && question.canBeEdited
+		const canEdit = question.user.id === id.value && question.canBeEdited
 		if (!canEdit) return `/questions/${question.id}`
-		useQuestionModal().openEditQuestion()
-		const backPath = from?.fullPath ?? '/dashboard'
-		return backPath.startsWith('/auth/') ? '/dashboard' : backPath
-	}]
+	}]),
+	setup () {
+		useRouteMeta('Edit Question', { back: true })
+		const { factory, error, loading, editQuestion } = useEditQuestion()
+		return { factory, error, loading, editQuestion }
+	}
 })
 </script>

@@ -1,45 +1,60 @@
 <template>
-	<ion-page>
-		<ion-content class="auth">
-			<div class="w-full mt-10 h-full flex flex-col items-center justify-start py-20">
-				<div class="flex flex-col items-center justify-center p-10 lg:bg-light_gray">
-					<h1 class="text-heading2 text-main_dark font-bold mb-2 text-center">Verify Your Email
-						Address</h1>
-					<span class="text-main_dark mb-4 text-center max-w-lg">
-						An email was just sent to <b>{{ email }}</b>. Follow the link to verify your account.
-						If an error occurred or you didn't receive the email, click the button below to resend the email.
-					</span>
-					<div class="h-[65%]">
-						<form @submit.prevent="sendVerificationEmail">
-							<ion-button class="w-full mb-4 uppercase" type="submit">Resend Mail
-								<ion-spinner v-if="loading" name="lines-small"></ion-spinner>
-							</ion-button>
-						</form>
+	<AuthLayout>
+		<div class="flex items-center justify-center">
+			<div class="flex flex-col items-center justify-center  lg:w-6/12 sm:w-8/12 w-full p-4">
+				<img alt="hero" class="mr-auto md:hidden mt-6" src="@/assets/images/auth/signup.svg">
+				<h1 class="md:block md:text-3xl text-2xl text-start w-full font-extrabold mb-8 md:mt-16 mt-8 md:text-center">
+					Verify Email</h1>
+				<form class="h-[65%] w-full md:w-[70%] flex flex-col gap-4" @submit.prevent="completeVerification">
+					<div class="flex flex-col">
+						<IonLabel class="font-bold mb-2">OTP</IonLabel>
+						<IonInput v-model="token" :size="24" placeholder="Enter OTP" position="floating" />
 					</div>
-					<router-link class="text-primary font-bold mt-8" to="/auth/signin">
-						Back to Sign In
-					</router-link>
-				</div>
+					<p class="cursor-pointer justify-center flex items-center gap-2" @click="sendVerificationEmail">
+						<SpinLoading v-if="loading" />
+						<span>Did not receive OTP? Resend?</span>
+					</p>
+					<IonButton :disabled="completeLoading || !token" class="w-full btn-primary mt-2"
+						type="submit">
+						<SpinLoading v-if="completeLoading" />
+						<span v-else>Resend Mail</span>
+					</IonButton>
+					<div class="w-full flex justify-center items-center">
+						<router-link class="text-primaryBg" to="/auth/signin">
+							Back to Sign In
+						</router-link>
+					</div>
+				</form>
 			</div>
-		</ion-content>
-	</ion-page>
+		</div>
+	</AuthLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { getEmailVerificationEmail, useEmailVerificationRequest } from '@app/composable/auth/signin'
-import { IonButton, IonContent, IonPage, IonSpinner } from '@ionic/vue'
+import {
+	getEmailVerificationEmail,
+	useCompleteEmailVerification,
+	useEmailVerificationRequest
+} from '@app/composable/auth/signin'
+import { generateMiddlewares } from '@app/middlewares'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'AuthVerify',
-	displayName: 'Verify Email',
-	components: { IonContent, IonPage, IonButton, IonSpinner },
-	middlewares: [async () => {
+	beforeRouteEnter: generateMiddlewares([async () => {
 		if (!getEmailVerificationEmail()) return '/auth/signin'
-	}],
+	}]),
 	setup () {
+		useRouteMeta('Verify Email', { back: true })
 		const { email, loading, error, message, sendVerificationEmail } = useEmailVerificationRequest()
-		return { email, loading, error, message, sendVerificationEmail }
+		const {
+			token, loading: completeLoading, error: completeError, completeVerification
+		} = useCompleteEmailVerification()
+		return {
+			email, loading, error, message, sendVerificationEmail,
+			token, completeLoading, completeError, completeVerification
+		}
 	}
 })
 </script>

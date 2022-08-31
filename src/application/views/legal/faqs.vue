@@ -1,26 +1,19 @@
 <template>
-	<Justified>
-		<div>
-			<div class="blueTop py-4">
-				<ion-text class="text-heading font-bold text-main_dark text-center">
-					FAQs
-				</ion-text>
-			</div>
-			<div class="lg:w-8/12 w-full mx-auto bg-white">
-				<Note link="/legal/FAQs.pdf" />
-			</div>
-		</div>
-	</Justified>
+	<DefaultLayout>
+		<PdfReader link="/legal/FAQs.pdf" />
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
-import Justified from '@app/layouts/Justified.vue'
 import { defineComponent } from 'vue'
-import Note from '@app/components/core/media/Note.vue'
+import PdfReader from '@app/components/core/media/PdfReader.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'LegalFAQs',
-	displayName: 'FAQs',
-	components: { Justified, Note }
+	components: { PdfReader },
+	setup () {
+		useRouteMeta('FAQs', { back: true })
+	}
 })
 </script>

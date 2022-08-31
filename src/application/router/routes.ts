@@ -1,23 +1,19 @@
 const getPath = (page: string[]) => page.map((path) => {
 	if (path === 'index') return ''
-	if (path === '~') return ':pathMatch(.*)*'
+	if (path === '_') return ':pathMatch(.*)*'
 	if (path.startsWith('^')) path = path.replace('^', '')
 	if (path.startsWith('_')) path = path.replace('_', ':')
 	return path
-}).join('/').replace(new RegExp('///', 'g'), '/').replace(new RegExp('//', 'g'), '/')
+}).join('/').replaceAll('///', '/').replaceAll('//', '/')
 
-const makeRoute = async (page: string[]) => {
+const makeRoute = (page: string[]) => {
 	const path = '/' + getPath(page)
-	const { default: component } = await import(`../views/${page.join('/')}.vue`)
-	const { displayName = '', middlewares = [], name = '' } = component
-	return {
-		path, name, component,
-		meta: { middlewares, displayName }
-	}
+	const name = page.join('-')
+	return { path, name, component: () => import(`../views/${page.join('/')}.vue`) }
 }
 
-const allPages = require.context('../views', true, /\.vue$/, 'lazy').keys()
-	.map((key: string) => key.slice(2).replace('.vue', '').split('/'))
+const allPages = ((require as any).context('../views', true, /\.vue$/, 'lazy').keys() as string[])
+	.map((key) => key.slice(2).replace('.vue', '').split('/'))
 	.map((path) => {
 		let parent = null as null | string
 
@@ -30,12 +26,12 @@ const allPages = require.context('../views', true, /\.vue$/, 'lazy').keys()
 const nestedPages = allPages.filter((page) => page.parent)
 
 export const routes = allPages.filter((page) => !page.parent)
-	.map(async (page) => {
+	.map((page) => {
 		const path = getPath(page.path)
 		const childrenPages = nestedPages.filter((p) => p.parent === path).map((p) => p.path)
 
-		const route = await makeRoute(page.path)
-		const children = await Promise.all(childrenPages.map(makeRoute))
+		const route = makeRoute(page.path)
+		const children = childrenPages.map(makeRoute)
 
 		return { ...route, children }
 	})

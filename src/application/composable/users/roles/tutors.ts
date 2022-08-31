@@ -1,8 +1,9 @@
 import { onMounted, onUnmounted, ref } from 'vue'
-import { GetAllTutors, ListenToAllTutors, ToggleTutor, UserEntity } from '@modules/users'
+import { UserEntity, UsersUseCases } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
+import { AuthUseCases } from '@modules/auth'
 
 const global = {
 	tutors: ref([] as UserEntity[]),
@@ -12,7 +13,7 @@ const global = {
 	...useLoadingHandler()
 }
 const listener = useListener(async () => {
-	return await ListenToAllTutors.call({
+	return await UsersUseCases.listenToAllTutors({
 		created: async (entity) => {
 			addToArray(global.tutors.value, entity, (e) => e.id, (e) => e.score)
 		},
@@ -31,7 +32,7 @@ export const useTutorsList = () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const tutors = await GetAllTutors.call()
+			const tutors = await UsersUseCases.getAllTutors()
 			tutors.results.forEach((t) => addToArray(global.tutors.value, t, (e) => e.id, (e) => e.score))
 			global.fetched.value = true
 		} catch (error) {
@@ -49,7 +50,7 @@ export const useTutorsList = () => {
 		if (accepted) {
 			await global.setLoading(true)
 			try {
-				await ToggleTutor.call(user.id, true)
+				await AuthUseCases.updateRole(user.id, 'isStranerdTutor', true)
 				user.isTutor = true
 				addToArray(global.tutors.value, user, (e) => e.id, (e) => e.score)
 				await global.setMessage('Successfully upgraded to tutor')
@@ -69,7 +70,7 @@ export const useTutorsList = () => {
 		if (accepted) {
 			await global.setLoading(true)
 			try {
-				await ToggleTutor.call(user.id, false)
+				await AuthUseCases.updateRole(user.id, 'isStranerdTutor', false)
 				global.tutors.value = global.tutors.value
 					.filter((u) => u.id !== user.id)
 				await global.setMessage('Successfully downgraded from tutor')

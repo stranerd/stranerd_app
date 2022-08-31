@@ -1,50 +1,50 @@
 <template>
-	<div class="showcase-flex">
-		<div class="flex flex-col md:flex-row justify-between gap-2 px-4 md:py-4 bg-white rounded-xl">
-			<div class="hidden md:block">
-				<ion-text class="block text-heading font-semibold capitalize">Class Library</ion-text>
-				<ion-text class="text-sub">
-					{{ discussions.length }} {{ pluralize(discussions.length, 'item', 'items') }}
-				</ion-text>
+	<div class="flex flex-col flex-1">
+		<div class="flex flex-col gap-4 py-4 border-bottom-line px-4 lg:px-0 lg:pt-0">
+			<IonSelect v-model="groupId" class="capitalize" interface="action-sheet" placeholder="Sort by discussion">
+				<IonSelectOption :value="null" class="capitalize">
+					All
+				</IonSelectOption>
+				<IonSelectOption v-for="group in groups" :key="group.hash" :value="group.id" class="capitalize">
+					{{ group.name }}
+				</IonSelectOption>
+			</IonSelect>
+			<div class="flex items-center w-full">
+				<a v-for="({ label, value }, idx) in [
+						{ label: 'Images', value: 'images' }, { label: 'Videos', value: 'videos' },
+						{ label: 'Docs', value: 'docs' }, { label: 'Links', value: 'links' }
+					]" :key="value"
+					:class="{ 'bg-primaryBg !text-primaryText': type === value, 'rounded-l-xl': idx === 0, 'rounded-r-xl': idx === 3 }"
+					class="flex-grow p-2 border border-primaryBg text-primaryBg text-center cursor-pointer"
+					@click="type = value">
+					{{ label }}
+				</a>
 			</div>
-			<div class="flex gap-2 w-full md:w-auto">
-				<ion-input v-model="search" class="flex-grow md:w-auto bg-new_gray text-gray min-w-[100px]"
-					placeholder="Search" />
-				<ion-select v-model="group"
-					class="bg-new_gray !text-gray flex-grow md:w-auto font-bold select-primary"
-					interface="action-sheet"
-					placeholder="Groups">
-					<ion-select-option class="capitalize" value="">
-						All
-					</ion-select-option>
-					<ion-select-option v-for="group in groups" :key="group.hash" :value="group.id" class="capitalize">
-						{{ group.name }}
-					</ion-select-option>
-				</ion-select>
-				<ion-select v-model="filter"
-					class="bg-new_gray !text-gray flex-grow md:w-auto font-bold select-primary"
-					interface="action-sheet"
-					placeholder="Filter">
-					<ion-select-option v-for="filter in filters" :key="filter" :value="filter" class="capitalize">
-						{{ filter }}
-					</ion-select-option>
-				</ion-select>
-			</div>
+			<form v-if="chats.length" @submit.prevent="search">
+				<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
+			</form>
 		</div>
-		<EmptyState v-if="!loading && !error && discussions.length === 0" :info="'No matching files in the library'" />
-		<ClassDiscussionCard v-for="discussion in discussions" :key="discussion.hash" :discussion="discussion" />
-		<PageLoading v-if="loading" />
+		<EmptyFiles v-if="!loading && !error && chats.length === 0" />
+		<ImagesList v-if="type === 'images'" :media="images" />
+		<VideosList v-if="type === 'videos'" :media="videos" />
+		<DocsList v-if="type === 'docs'" :media="docs" />
+		<LinksList v-if="type === 'links'" :media="links" />
+		<BlockLoading v-if="loading" />
+		<LoadMore v-if="hasMore && !searchMode" :load="fetchOlderChats" />
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { ClassEntity } from '@modules/classes'
-import ClassDiscussionCard from '@app/components/classes/classes/ClassDiscussionCard.vue'
-import { useClassDiscussions } from '@app/composable/classes/discussions'
-import { pluralize } from '@utils/commons'
-import { IonSelect, IonSelectOption } from '@ionic/vue'
 import { useGroupList } from '@app/composable/classes/groups'
+import { useClassLibrary } from '@app/composable/classes/library'
+import ImagesList from '@app/components/media/ImagesList.vue'
+import VideosList from '@app/components/media/VideosList.vue'
+import DocsList from '@app/components/media/DocsList.vue'
+import LinksList from '@app/components/media/LinksList.vue'
+import { groupBy } from '@utils/commons'
+import { months } from '@utils/dates'
 
 export default defineComponent({
 	name: 'ClassLibrary',
@@ -54,25 +54,36 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { ClassDiscussionCard, IonSelect, IonSelectOption },
+	components: { ImagesList, DocsList, LinksList, VideosList },
 	setup (props) {
-		const { loading, error, discussions } = useClassDiscussions(props.classInst.id)
+		const {
+			loading, error, chats, groupId, type, hasMore, fetchOlderChats,
+			searchValue, searchMode, search
+		} = useClassLibrary(props.classInst.id)
 		const { groups } = useGroupList(props.classInst.id)
-		const filters = ['All', 'Images', 'Videos', 'Documents']
-		const filter = ref(filters[0])
-		const group = ref('')
-		const search = ref('')
-		const filteredDiscussions = computed(() => discussions.value.filter((d) => {
-			const matches = [d.search(search.value)] as boolean[]
-			if (group.value) matches.push(d.groupId === group.value)
-			if (filter.value === filters[1]) matches.push(d.isImage)
-			if (filter.value === filters[2]) matches.push(d.isVideo)
-			if (filter.value === filters[3]) matches.push(d.isDocument)
-			return matches.every((m) => m)
+		const images = computed(() => groupBy(chats.value.filter((c) => c.isImage)
+			.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
+			const date = new Date(c.createdAt)
+			return `${months[date.getMonth()]} ${date.getFullYear()}`
+		}))
+		const videos = computed(() => groupBy(chats.value.filter((c) => c.isVideo)
+			.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
+			const date = new Date(c.createdAt)
+			return `${months[date.getMonth()]} ${date.getFullYear()}`
+		}))
+		const docs = computed(() => groupBy(chats.value.filter((c) => c.isDoc)
+			.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
+			const date = new Date(c.createdAt)
+			return `${months[date.getMonth()]} ${date.getFullYear()}`
+		}))
+		const links = computed(() => groupBy(chats.value.filter((c) => c.isDoc)
+			.map((c) => ({ hash: c.hash, links: c.links, createdAt: c.createdAt })), (c) => {
+			const date = new Date(c.createdAt)
+			return `${months[date.getMonth()]} ${date.getFullYear()}`
 		}))
 		return {
-			loading, error, discussions: filteredDiscussions, pluralize,
-			search, filter, filters, group, groups
+			groupId, type, groups, hasMore, fetchOlderChats, loading, error, chats,
+			images, videos, docs, links, searchValue, search, searchMode
 		}
 	}
 })

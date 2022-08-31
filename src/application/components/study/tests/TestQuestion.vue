@@ -1,88 +1,80 @@
 <template>
-	<div class="flex flex-col items-start w-full bg-white md:rounded-xl border-bottom-line p-4">
-		<PageLoading v-if="loading" />
-
-		<div class="flex item-center justify-between mb-2 w-full">
-			<ion-text class="text-main_dark font-bold md:text-2xl">
-				Question {{ questionIndex + 1 }}
-			</ion-text>
-			<div class="flex items-center text-lg text-icon_inactive gap-4">
-				<IonIcon :icon="flagOutline" @click="createReport(question)" />
-			</div>
+	<div class="flex flex-col items-start w-full border-bottom-line card-padding !gap-0">
+		<div class="flex items-center justify-between mb-2 w-full gap-4 text-secondaryText text-sm">
+			<IonText class="font-bold">{{ questionIndex + 1 }} / {{ total }}</IonText>
+			<SpinLoading v-if="loading" />
+			<IonIcon v-else :icon="flagOutline" @click="createReport" />
 		</div>
 
 		<div class="mb-2">
-			<IonText class="text-main_dark mb-2 w-full">
+			<IonText class="mb-2 w-full">
 				<DisplayHtml :html="question.question" />
 			</IonText>
-			<PhotoList v-if="question.questionMedia.length" :photos="question.questionMedia" />
+			<Gallery v-if="question.questionMedia.length" :media="question.questionMedia"
+				:path="question.saveFilePath" />
 		</div>
 
-		<div v-if="question.isObjective" class="answers flex flex-col w-full">
+		<div v-if="question.isObj(question)" class=" flex flex-col w-full">
 			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
-				class="w-full hover:bg-new_gray rounded-lg py-4"
-				@click="answer(question.id, optionIndex)">
+				class="w-full py-4" @click="answer(question.id, optionIndex)">
 				<div class="flex gap-2 items-center">
 					<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
-						:icon="radioButtonOn" color="primary" size="large" />
+						:icon="radioButtonOn" class="text-primaryBg" />
 					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect"
-						:icon="checkmarkCircleOutline"
-						color="success" size="large" />
+						:icon="checkmarkCircleOutline" class="text-success" />
 					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isInCorrect"
-						:icon="closeCircleOutline"
-						color="danger" size="large" />
-					<IonIcon v-else :icon="radioButtonOff" size="large" />
+						:icon="closeCircleOutline" class="text-danger" />
+					<IonIcon v-else :icon="radioButtonOff" />
 					<IonText>
 						<DisplayHtml :html="option" />
 					</IonText>
 				</div>
-				<PhotoList v-if="question.data.optionsMedia[optionIndex]?.length"
-					:photos="question.data.optionsMedia[optionIndex]" />
+				<Gallery v-if="question.data.optionsMedia[optionIndex]?.length"
+					:media="question.data.optionsMedia[optionIndex]"
+					:path="question.saveFilePath" />
 			</div>
 		</div>
 
-		<template v-if="showAnswers && question.isObjective">
-			<span v-if="isCorrect"
-				class="rounded-md text-white bg-[#00D246] p-2 px-4">
+		<template v-if="showAnswers && question.isObj(question)">
+			<span v-if="isCorrect" class="rounded-md bg-success py-2 px-4">
 				Nice, you are correct
 			</span>
-			<span v-if="isInCorrect" class="rounded-md text-white bg-[#FF6666] p-2 px-4">
+			<span v-if="isInCorrect" class="rounded-md bg-danger py-2 px-4">
 				Sorry, you're wrong. The answer is {{ getAlphabet(question.data.correctIndex + 1).toUpperCase() }}
 			</span>
 
-			<template v-if="question.data.explanation?.length > 0 || question.data.explanationMedia?.length > 0">
-				<span class="text-primary flex items-center font-bold py-8" @click="showExplanation = !showExplanation">
-					show solution <IonIcon :icon="showExplanation ? chevronUpOutline : chevronDownOutline" />
+			<template v-if="question.data.explanation.length > 0 || question.data.explanationMedia.length > 0">
+				<span class="text-primaryBg flex items-center font-bold py-8 gap-2"
+					@click="showExplanation = !showExplanation">
+					<span>{{ showExplanation ? 'hide' : 'show' }} solution</span>
+					<IonIcon :class="{'rotate-90': showExplanation}" :icon="chevronForwardOutline" />
 				</span>
 
 				<div v-if="showExplanation">
 					<IonText class="block mb-2">
 						<DisplayHtml :html="question.data.explanation" />
 					</IonText>
-					<PhotoList v-if="question.data.explanationMedia.length" :photos="question.data.explanationMedia" />
+					<Gallery v-if="question.data.explanationMedia.length" :media="question.data.explanationMedia"
+						:path="question.saveFilePath" />
 				</div>
 			</template>
 		</template>
 
-		<div v-if="!question.isObjective">
+		<div v-if="question.isNotObj(question)">
 			<IonText class="block mb-2">
 				<DisplayHtml :html="question.data.answer" />
 			</IonText>
-			<PhotoList v-if="question.data.answerMedia.length" :photos="question.data.answerMedia" />
+			<Gallery v-if="question.data.answerMedia.length" :media="question.data.answerMedia" />
 		</div>
-
-		<span v-if="error" class="text-danger my-4">{{ error }}</span>
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from 'vue'
+import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
 import {
 	checkmarkCircleOutline,
-	chevronDownOutline,
-	chevronUpOutline,
+	chevronForwardOutline,
 	closeCircleOutline,
-	ellipsisVerticalOutline,
 	flagOutline,
 	radioButtonOff,
 	radioButtonOn
@@ -96,6 +88,10 @@ import { ReportType } from '@modules/reports'
 export default defineComponent({
 	name: 'TestQuestion',
 	props: {
+		total: {
+			type: Number,
+			required: true
+		},
 		test: {
 			type: TestEntity,
 			required: true
@@ -109,8 +105,8 @@ export default defineComponent({
 			required: true
 		},
 		answer: {
-			required: true,
-			type: Function
+			type: Function as PropType<(id: string, idx: number) => Promise<void>>,
+			required: true
 		}
 	},
 	setup (props) {
@@ -133,20 +129,10 @@ export default defineComponent({
 			factory.value.message = 'Flagged'
 		})
 		return {
-			showAnswers,
-			checkmarkCircleOutline,
-			radioButtonOff,
-			chevronDownOutline,
-			chevronUpOutline,
-			flagOutline,
-			ellipsisVerticalOutline,
-			radioButtonOn,
-			closeCircleOutline,
-			getAlphabet,
-			isCorrect,
-			isInCorrect,
-			showExplanation,
-			loading, error, createReport
+			checkmarkCircleOutline, radioButtonOff, chevronForwardOutline,
+			flagOutline, radioButtonOn, closeCircleOutline,
+			showAnswers, isCorrect, isInCorrect, showExplanation,
+			getAlphabet, loading, error, createReport
 		}
 	}
 })

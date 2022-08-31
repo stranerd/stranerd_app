@@ -1,5 +1,5 @@
 import { onMounted, ref, Ref } from 'vue'
-import { AddReport, DeleteReport, GetReports, ReportEntity, ReportFactory, ReportType } from '@modules/reports'
+import { ReportEntity, ReportFactory, ReportsUseCases, ReportType } from '@modules/reports'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useReportModal } from '@app/composable/core/modals'
 import { Alert } from '@utils/dialog'
@@ -27,7 +27,7 @@ export const useCreateReport = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddReport.call(factory.value)
+				await ReportsUseCases.add(factory.value)
 				useReportModal().closeAll()
 				factory.value.reset()
 				await setMessage('Reported successfully')
@@ -58,7 +58,7 @@ export const useReportsList = () => {
 		try {
 			await global.setLoading(true)
 			const lastDate = global.reports.value[0]?.createdAt
-			const reports = await GetReports.call(lastDate)
+			const reports = await ReportsUseCases.get(lastDate)
 			global.hasMore.value = !!reports.pages.next
 			reports.results.forEach((r) => addToArray(global.reports.value, r, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
@@ -89,7 +89,7 @@ export const useDeleteReport = (id: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteReport.call(id)
+				await ReportsUseCases.delete(id)
 				global.reports.value = global.reports.value
 					.filter((r) => r.id !== id)
 				await setMessage('Report deleted successfully')

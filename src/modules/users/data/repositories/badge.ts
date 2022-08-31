@@ -15,8 +15,7 @@ export class BadgeRepository implements IBadgeRepository {
 
 	async get () {
 		const model = await this.dataSource.get()
-		if (model) return this.transformer.fromJSON(model)
-		else return null
+		return this.transformer.fromJSON(model)
 	}
 
 	async listenToOne (id: string, listener: Listeners<BadgeEntity>) {

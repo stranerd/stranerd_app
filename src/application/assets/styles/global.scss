@@ -4,26 +4,24 @@ $lg: 1280px;
 $xl: 1420px;
 $xxl: 1536px;
 
-$color-primary: #546dd2;
-$color-white: #fefefe;
-$color-black: #111b25;
-$color-red: #FF6666;
-$color-lightGray: #F7F7FC;
-$color-darkGray: #4D5C6F;
-$color-iconInactive: #8B9EB1;
-$color-fadedGray: #C7D6E3;
-$color-mainDark: #132740;
-$color-newGray: #F2F3F5;
-$color-newGrayTwo: #EBECEE;
-$color-cyan: #54B5D3;
-$color-gray: #64778A;
-$color-pink: #FF6496;
-$color-yellowStar: #FFDC00;
-$color-purple: #C864DC;
-$color-orange: #FFA84B;
-$color-green: #00D246;
+$color-primaryBg: var(--clr-primaryBg);
+$color-primaryText: var(--clr-primaryText);
+$color-primaryHover: var(--clr-primaryHover);
+$color-bodyBg: var(--clr-bodyBg);
+$color-bodyText: var(--clr-bodyText);
+$color-headerBg: var(--clr-headerBg);
+$color-headerText: var(--clr-headerText);
+$color-itemBg: var(--clr-itemBg);
+$color-secondaryText: var(--clr-secondaryText);
+$color-disabled: var(--clr-disabled);
+$color-outlineHover: var(--clr-outlineHover);
+$color-success: var(--clr-success);
+$color-danger: var(--clr-danger);
+$color-info: var(--clr-info);
+$color-warning: var(--clr-warning);
+$color-royal: var(--clr-royal);
 
-$border: 2px solid $color-newGray !important;
+$border: 2px solid $color-itemBg !important;
 
 .hide-scrollbar {
 	-ms-overflow-style: none;

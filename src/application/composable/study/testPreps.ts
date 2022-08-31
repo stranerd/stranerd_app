@@ -1,50 +1,31 @@
-import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
-import {
-	AddTestPrep,
-	DeleteTestPrep,
-	EditTestPrep,
-	GetTestPreps,
-	ListenToTestPreps,
-	TestPrepEntity,
-	TestPrepFactory
-} from '@modules/study'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { computed, onMounted, reactive, Ref, ref } from 'vue'
+import { TestPrepEntity, TestPrepFactory, TestPrepsUseCases } from '@modules/study'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { addToArray, groupBy } from '@utils/commons'
+import { addToArray } from '@utils/commons'
 import { useStudyModal } from '@app/composable/core/modals'
-
-export type InstitutionTestPreps = {
-	institutionId: string,
-	preps: TestPrepEntity[]
-}
+import { PastQuestionType } from '@modules/school'
 
 const global = {
+	filters: reactive({
+		institutionId: null as string | null,
+		courseId: null as string | null,
+		year: null as number | null,
+		questionTypes: [] as PastQuestionType[]
+	}),
 	testPreps: ref([] as TestPrepEntity[]),
 	fetched: ref(false),
+	courses: {} as Record<string, boolean>,
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
-const listener = useListener(async () => {
-	return await ListenToTestPreps.call({
-		created: async (entity) => {
-			addToArray(global.testPreps.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		updated: async (entity) => {
-			addToArray(global.testPreps.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		deleted: async (entity) => {
-			const index = global.testPreps.value.findIndex((q) => q.id === entity.id)
-			if (index !== -1) global.testPreps.value.splice(index, 1)
-		}
-	})
-})
 
 const fetchTestPreps = async () => {
 	await global.setError('')
 	try {
 		await global.setLoading(true)
-		const testPreps = await GetTestPreps.call()
-		testPreps.results.forEach((t) => addToArray(global.testPreps.value, t, (e) => e.id, (e) => e.createdAt))
+		const testPreps = await TestPrepsUseCases.get()
+		testPreps.results.forEach((t) => addToArray(global.testPreps.value, t, (e) => e.id, (e) => e.data.year))
 		global.fetched.value = true
 	} catch (error) {
 		await global.setError(error)
@@ -53,35 +34,54 @@ const fetchTestPreps = async () => {
 }
 
 export const useTestPrepList = () => {
+	const fetchCoursePreps = async (courseId: string) => {
+		if (global.courses[courseId]) return
+		await global.setError('')
+		try {
+			await global.setLoading(true)
+			const testPreps = await TestPrepsUseCases.getCoursePreps(courseId)
+			testPreps.results.forEach((t) => addToArray(global.testPreps.value, t, (e) => e.id, (e) => e.data.year))
+			global.courses[courseId] = true
+		} catch (error) {
+			await global.setError(error)
+		}
+		await global.setLoading(false)
+	}
+
 	onMounted(async () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTestPreps()
-		await listener.start()
 	})
-	onUnmounted(async () => {
-		await listener.close()
-	})
-	return { ...global }
+
+	return { ...global, fetchCoursePreps }
 }
 
-export const groupedByInstitution = (testPreps: TestPrepEntity[]) => computed({
-	get: () => groupBy(testPreps, (prep) => prep.data.institutionId)
-		.map(({ key, values }) => ({ institutionId: key, preps: values })),
-	set: () => {
-	}
-})
-
 export const useTestPrep = (id: string) => {
+	const { error, setError } = useErrorHandler()
+	const { loading, setLoading } = useLoadingHandler()
 	const testPrep = computed({
 		get: () => global.testPreps.value.find((s) => s.id === id) ?? null,
 		set: (s) => {
 			if (s) addToArray(global.testPreps.value, s, (e) => e.id, (e) => e.createdAt)
 		}
 	})
+
+	const findTestPrep = async () => {
+		await setError('')
+		try {
+			await setLoading(true)
+			const prep = global.testPreps.value.find((t) => t.id === id) ?? null
+			if (!prep) testPrep.value = await TestPrepsUseCases.find(id)
+		} catch (error) {
+			await setError(error)
+		}
+		await setLoading(false)
+	}
+
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchTestPreps()
+		await findTestPrep()
 	})
 
-	return { testPrep }
+	return { testPrep, loading, error }
 }
 
 export const useCreateTestPrep = () => {
@@ -95,7 +95,8 @@ export const useCreateTestPrep = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await AddTestPrep.call(factory.value)
+				const testPrep = await TestPrepsUseCases.add(factory.value)
+				addToArray(global.testPreps.value, testPrep, (e) => e.id, (e) => e.createdAt)
 				await setMessage('TestPrep submitted successfully')
 				useStudyModal().closeCreateTestPrep()
 				factory.value.reset()
@@ -127,7 +128,8 @@ export const useEditTestPrep = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await EditTestPrep.call(editingTestPrep!.id, factory.value)
+				const testPrep = await TestPrepsUseCases.update(editingTestPrep!.id, factory.value)
+				addToArray(global.testPreps.value, testPrep, (e) => e.id, (e) => e.createdAt)
 				await setMessage('TestPrep updated successfully')
 				useStudyModal().closeEditTestPrep()
 				factory.value.reset()
@@ -155,7 +157,7 @@ export const useDeleteTestPrep = (testPrepId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteTestPrep.call(testPrepId)
+				await TestPrepsUseCases.delete(testPrepId)
 				global.testPreps.value = global.testPreps.value
 					.filter((q) => q.id !== testPrepId)
 				await setMessage('TestPrep deleted successfully')

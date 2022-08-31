@@ -23,37 +23,11 @@ import { FacultyFactory } from './domain/factories/faculty'
 import { FacultyEntity } from './domain/entities/faculty'
 import { DepartmentFactory } from './domain/factories/department'
 import { DepartmentEntity } from './domain/entities/department'
-import { GetCoursesUseCase } from './domain/usecases/courses/getCourses'
-import { ListenToCoursesUseCase } from './domain/usecases/courses/listenToCourses'
-import { FindCourseUseCase } from './domain/usecases/courses/findCourse'
-import { AddCourseUseCase } from './domain/usecases/courses/addCourse'
-import { EditCourseUseCase } from './domain/usecases/courses/editCourse'
-import { DeleteCourseUseCase } from './domain/usecases/courses/deleteCourse'
-import { AddInstitutionUseCase } from './domain/usecases/institutions/addInstitution'
-import { DeleteInstitutionUseCase } from './domain/usecases/institutions/deleteInstitution'
-import { GetInstitutionsUseCase } from './domain/usecases/institutions/getInstitutions'
-import { ListenToInstitutionsUseCase } from './domain/usecases/institutions/listenToInstitutions'
-import { EditInstitutionUseCase } from './domain/usecases/institutions/editInstitution'
-import { FindInstitutionUseCase } from './domain/usecases/institutions/findInstitution'
-import { GetPastQuestionsUseCase } from './domain/usecases/pastQuestions/getPastQuestions'
-import { ListenToPastQuestionsUseCase } from './domain/usecases/pastQuestions/listenToPastQuestions'
-import { FindPastQuestionUseCase } from './domain/usecases/pastQuestions/findPastQuestion'
-import { AddPastQuestionUseCase } from './domain/usecases/pastQuestions/addPastQuestion'
-import { EditPastQuestionUseCase } from './domain/usecases/pastQuestions/editPastQuestion'
-import { DeletePastQuestionUseCase } from './domain/usecases/pastQuestions/deletePastQuestion'
-import { GetTestQuestionsUseCase } from './domain/usecases/pastQuestions/getTestQuestions'
-import { GetFacultiesUseCase } from './domain/usecases/faculties/getFaculties'
-import { ListenToFacultiesUseCase } from './domain/usecases/faculties/listenToFaculties'
-import { FindFacultyUseCase } from './domain/usecases/faculties/findFaculty'
-import { AddFacultyUseCase } from './domain/usecases/faculties/addFaculty'
-import { EditFacultyUseCase } from './domain/usecases/faculties/editFaculty'
-import { DeleteFacultyUseCase } from './domain/usecases/faculties/deleteFaculty'
-import { GetDepartmentsUseCase } from './domain/usecases/departments/getDepartments'
-import { ListenToDepartmentsUseCase } from './domain/usecases/departments/listenToDepartments'
-import { FindDepartmentUseCase } from './domain/usecases/departments/findDepartment'
-import { AddDepartmentUseCase } from './domain/usecases/departments/addDepartment'
-import { EditDepartmentUseCase } from './domain/usecases/departments/editDepartment'
-import { DeleteDepartmentUseCase } from './domain/usecases/departments/deleteDepartment'
+import { InstitutionsUseCase } from './domain/usecases/institutions'
+import { FacultiesUseCase } from './domain/usecases/faculties'
+import { DepartmentsUseCase } from './domain/usecases/departments'
+import { CoursesUseCase } from './domain/usecases/courses'
+import { PastQuestionsUseCase } from './domain/usecases/pastQuestions'
 
 const courseDataSource = new CourseApiDataSource()
 const institutionDataSource = new InstitutionApiDataSource()
@@ -73,41 +47,11 @@ const pastQuestionRepository = new PastQuestionRepository(pastQuestionDataSource
 const facultyRepository = new FacultyRepository(facultyDataSource, facultyTransformer)
 const departmentRepository = new DepartmentRepository(departmentDataSource, departmentTransformer)
 
-export const FindCourse = new FindCourseUseCase(courseRepository)
-export const GetCourses = new GetCoursesUseCase(courseRepository)
-export const ListenToCourses = new ListenToCoursesUseCase(courseRepository)
-export const AddCourse = new AddCourseUseCase(courseRepository)
-export const EditCourse = new EditCourseUseCase(courseRepository)
-export const DeleteCourse = new DeleteCourseUseCase(courseRepository)
-
-export const FindInstitution = new FindInstitutionUseCase(institutionRepository)
-export const GetInstitutions = new GetInstitutionsUseCase(institutionRepository)
-export const ListenToInstitutions = new ListenToInstitutionsUseCase(institutionRepository)
-export const AddInstitution = new AddInstitutionUseCase(institutionRepository)
-export const EditInstitution = new EditInstitutionUseCase(institutionRepository)
-export const DeleteInstitution = new DeleteInstitutionUseCase(institutionRepository)
-
-export const FindPastQuestion = new FindPastQuestionUseCase(pastQuestionRepository)
-export const GetPastQuestions = new GetPastQuestionsUseCase(pastQuestionRepository)
-export const ListenToPastQuestions = new ListenToPastQuestionsUseCase(pastQuestionRepository)
-export const AddPastQuestion = new AddPastQuestionUseCase(pastQuestionRepository)
-export const EditPastQuestion = new EditPastQuestionUseCase(pastQuestionRepository)
-export const DeletePastQuestion = new DeletePastQuestionUseCase(pastQuestionRepository)
-export const GetTestQuestions = new GetTestQuestionsUseCase(pastQuestionRepository)
-
-export const FindFaculty = new FindFacultyUseCase(facultyRepository)
-export const GetFaculties = new GetFacultiesUseCase(facultyRepository)
-export const ListenToFaculties = new ListenToFacultiesUseCase(facultyRepository)
-export const AddFaculty = new AddFacultyUseCase(facultyRepository)
-export const EditFaculty = new EditFacultyUseCase(facultyRepository)
-export const DeleteFaculty = new DeleteFacultyUseCase(facultyRepository)
-
-export const FindDepartment = new FindDepartmentUseCase(departmentRepository)
-export const GetDepartments = new GetDepartmentsUseCase(departmentRepository)
-export const ListenToDepartments = new ListenToDepartmentsUseCase(departmentRepository)
-export const AddDepartment = new AddDepartmentUseCase(departmentRepository)
-export const EditDepartment = new EditDepartmentUseCase(departmentRepository)
-export const DeleteDepartment = new DeleteDepartmentUseCase(departmentRepository)
+export const InstitutionsUseCases = new InstitutionsUseCase(institutionRepository)
+export const FacultiesUseCases = new FacultiesUseCase(facultyRepository)
+export const DepartmentsUseCases = new DepartmentsUseCase(departmentRepository)
+export const CoursesUseCases = new CoursesUseCase(courseRepository)
+export const PastQuestionsUseCases = new PastQuestionsUseCase(pastQuestionRepository)
 
 export { CourseEntity, CourseFactory }
 export { InstitutionEntity, InstitutionFactory }
@@ -115,5 +59,4 @@ export { PastQuestionFactory, PastQuestionEntity }
 export { FacultyFactory, FacultyEntity }
 export { DepartmentFactory, DepartmentEntity }
 
-export { PastQuestionType } from './domain/entities/pastQuestion'
-export type { PastQuestionData } from './domain/entities/pastQuestion'
+export { PastQuestionType } from './domain/types'

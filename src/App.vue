@@ -1,6 +1,7 @@
 <template>
-	<IonApp class="text-body">
-		<IonRouterOutlet :key="$route.fullPath" />
+	<IonApp>
+		<IonRouterOutlet :animated="false" />
+		<Modals />
 	</IonApp>
 </template>
 

@@ -1,48 +1,45 @@
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
-import { AnswerEntity, QuestionEntity, SearchQuestions } from '@modules/questions'
-import { SearchUsers, UserEntity } from '@modules/users'
-import { useRoute, useRouter } from 'vue-router'
-import {
-	FlashCardEntity,
-	NoteEntity,
-	SearchFlashCards,
-	SearchNotes,
-	SearchSets,
-	SearchTestPreps,
-	SearchVideos,
-	SetEntity,
-	TestPrepEntity,
-	VideoEntity
-} from '@modules/study'
+import { QuestionEntity, QuestionsUseCases } from '@modules/questions'
+import { UserEntity, UsersUseCases } from '@modules/users'
+import { useRouter } from 'vue-router'
+import { FlashCardEntity, FlashCardsUseCases, NoteEntity, NotesUseCases } from '@modules/study'
 import { storage } from '@utils/storage'
+import { ClassEntity, ClassesUseCases } from '@modules/classes'
 
 const global = {
 	searchTerm: ref(''),
 	fetched: ref(false),
-	res: {
-		questions: ref([] as QuestionEntity[]),
-		answers: ref([] as AnswerEntity[]),
-		users: ref([] as UserEntity[]),
-		videos: ref([] as VideoEntity[]),
-		notes: ref([] as NoteEntity[]),
-		flashCards: ref([] as FlashCardEntity[]),
-		testPreps: ref([] as TestPrepEntity[]),
-		sets: ref([] as SetEntity[])
-	},
+	searched: ref(false),
+	tab: ref(0),
+	results: reactive({
+		questions: [] as QuestionEntity[],
+		users: [] as UserEntity[],
+		classes: [] as ClassEntity[],
+		notes: [] as NoteEntity[],
+		flashCards: [] as FlashCardEntity[]
+	}),
+	explore: reactive({
+		questions: [] as QuestionEntity[],
+		users: [] as UserEntity[],
+		classes: [] as ClassEntity[],
+		notes: [] as NoteEntity[],
+		flashCards: [] as FlashCardEntity[]
+	}),
 	recent: ref([] as string[]),
 	...useErrorHandler(),
 	...useLoadingHandler()
+}
+
+const searchObj = {
+	questions: QuestionsUseCases, users: UsersUseCases, classes: ClassesUseCases,
+	flashCards: FlashCardsUseCases, notes: NotesUseCases
 }
 
 const SEARCH_STORAGE_KEY = 'recent_searches'
 
 export const useSearch = () => {
 	const router = useRouter()
-	const route = useRoute()
-
-	global.searchTerm.value = route.query.search as string ?? ''
-	if (!global.searchTerm.value) global.fetched.value = false
 
 	const getRecentSearches = async () => {
 		const searches = await storage.get(SEARCH_STORAGE_KEY) ?? '[]'
@@ -66,8 +63,7 @@ export const useSearch = () => {
 	}
 
 	const navigateToSearch = async () => {
-		const val = global.searchTerm.value.trim()
-		if (!route.path.startsWith('/search')) await router.push(`/search?search=${val}`)
+		await router.push('/search/results')
 	}
 
 	const search = async () => {
@@ -77,41 +73,52 @@ export const useSearch = () => {
 			await global.setError('')
 			try {
 				await global.setLoading(true)
-				const searchObj = {
-					questions: SearchQuestions, users: SearchUsers,
-					flashCards: SearchFlashCards, sets: SearchSets, testPreps: SearchTestPreps,
-					notes: SearchNotes, videos: SearchVideos
-				}
 				await Promise.all(
-					Object.entries(searchObj).map(async ([key, useCase]) => {
-						const { results } = await useCase.call(val)
-						//@ts-ignore
-						global.res[key].value = results
+					Object.entries(searchObj).map(async (s) => {
+						// @ts-ignore
+						global.results[s[0]] = await s[1].search(val)
 					})
 				)
-				global.fetched.value = true
+				global.searched.value = true
 				await saveSearch(val)
 			} catch (e) {
 				await global.setError(e)
 			}
 			await global.setLoading(false)
 		} else {
-			Object.keys(global.res).forEach((key) => {
-				//@ts-ignore
-				global.res[key].value = []
+			Object.keys(global.results).forEach((key) => {
+				global.results[key] = []
 			})
-			global.fetched.value = false
+			global.searched.value = false
 		}
 	}
 
-	const count = computed(() => {
-		return Object.values(global.res).map((val) => val.value.length)
-			.reduce((acc, cur) => acc + cur, 0) - global.res.answers.value.length
-	})
+	const fetchExplore = async () => {
+		await global.setError('')
+		try {
+			await global.setLoading(true)
+			await Promise.all(
+				Object.entries(searchObj).map(async (s) => {
+					// @ts-ignore
+					global.explore[s[0]] = await s[1].searchExplore()
+				})
+			)
+			global.fetched.value = true
+		} catch (e) {
+			await global.setError(e)
+		}
+		await global.setLoading(false)
+	}
+
+	const searchCount = computed(() => Object.values(global.results).map((val) => val.length).reduce((acc, cur) => acc + cur, 0))
+	const exploreCount = computed(() => Object.values(global.explore).map((val) => val.length).reduce((acc, cur) => acc + cur, 0))
 
 	onMounted(async () => {
 		await getRecentSearches()
 	})
 
-	return { ...global, ...global.res, count, search, clearFromRecent }
+	return {
+		...global, searchCount, exploreCount,
+		search, fetchExplore, clearFromRecent, navigateToSearch
+	}
 }

@@ -1,14 +1,32 @@
 const path = require('path')
+const Components = require('unplugin-vue-components/webpack')
+
 module.exports = {
 	runtimeCompiler: true,
 	css: {
 		loaderOptions: {
 			sass: {
-				additionalData: `
-         @import '@app/assets/styles/global.scss';
-        `
+				additionalData: `@import '@app/assets/styles/global.scss';
+`
 			}
 		}
+	},
+	configureWebpack: {
+		plugins: [
+			Components({
+				dirs: ['src/application/components/core', 'src/application/layouts'],
+				dts: true,
+				types: [{ from: 'vue-router', names: ['RouterLink', 'RouterView'] }],
+				resolvers: [
+					(componentName) => {
+						if (componentName.toLowerCase().startsWith('ion')) return {
+							name: componentName,
+							from: '@ionic/vue'
+						}
+					}
+				]
+			})
+		]
 	},
 	chainWebpack: (config) => {
 		config.resolve.alias

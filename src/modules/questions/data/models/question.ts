@@ -1,15 +1,14 @@
-import { UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 import { Media } from '@modules/core'
-import { QuestionData } from '../../domain/entities/question'
+import { QuestionMeta } from '../../domain/types'
 
 export interface QuestionFromModel extends QuestionToModel {
 	id: string
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
 	isAnswered: boolean
+	meta: QuestionMeta
 	createdAt: number
 	updatedAt: number
 }
@@ -17,6 +16,5 @@ export interface QuestionFromModel extends QuestionToModel {
 export interface QuestionToModel {
 	body: string
 	attachments: Media[]
-	subject: string
-	data: QuestionData
+	tagId: string
 }

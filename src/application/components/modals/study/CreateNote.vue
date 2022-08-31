@@ -1,11 +1,11 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
-			Upload a note
+			Create a note
 		</template>
 		<NoteForm :error="error" :factory="factory" :loading="loading" :submit="createNote">
 			<template v-slot:buttonText>
-				Upload Note
+				Save
 			</template>
 		</NoteForm>
 	</Modal>
@@ -19,6 +19,12 @@ import NoteForm from '@app/components/study/notes/NoteForm.vue'
 export default defineComponent({
 	name: 'CreateNoteModal',
 	components: { NoteForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { createNote, factory, error, loading } = useCreateNote()
 		return { error, loading, createNote, factory }

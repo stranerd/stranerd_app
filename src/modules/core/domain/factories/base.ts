@@ -8,7 +8,7 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 	abstract toModel: () => Promise<T>
 	abstract loadEntity: (entity: E) => void
 	abstract reserved: string[]
-	protected abstract readonly rules: Record<keyof K, { required: boolean | (() => boolean), rules: Rule[] }>
+	protected abstract readonly rules: Record<keyof K, { required: boolean | (() => boolean), nullable?: boolean, rules: Rule[] }>
 	protected readonly defaults: K
 	protected values: K
 	protected validValues: K
@@ -30,12 +30,12 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 			.every((valid) => valid)
 	}
 
-	set (property: keyof K, value: any) {
+	set (property: keyof K, value: any, ignoreRules = false) {
 		const check = this.checkValidity(property, value)
 
 		this.values[property] = value
-		this.validValues[property] = check.isValid ? value : this.defaults[property]
-		this.errors[property] = check.message ?? ''
+		this.validValues[property] = check.isValid || ignoreRules ? value : this.defaults[property]
+		this.errors[property] = this.defaults[property] === value ? '' : check.message
 
 		return check.isValid
 	}
@@ -48,8 +48,11 @@ export abstract class BaseFactory<E, T, K extends Record<string, any>> {
 	}
 
 	checkValidity (property: keyof K, value: any) {
-		const { isValid, errors } = Validator.single(value, this.rules[property].rules, this.rules[property].required)
-		return { isValid, message: errors.find((e) => !!e) ?? null }
+		const { isValid, errors } = Validator.single(value, this.rules[property].rules, {
+			required: this.rules[property].required,
+			nullable: this.rules[property].nullable
+		})
+		return { isValid, message: errors.find((e) => !!e) ?? '' }
 	}
 
 	reset () {

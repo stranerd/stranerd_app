@@ -11,7 +11,8 @@ import {
 	isNumber,
 	isString
 } from '@stranerd/validate'
-import { PastQuestionEntity, PastQuestionType } from '../entities/pastQuestion'
+import { PastQuestionEntity } from '../entities/pastQuestion'
+import { PastQuestionType } from '../types'
 import { PastQuestionToModel } from '../../data/models/pastQuestion'
 
 type Content = UploadedFile | Media

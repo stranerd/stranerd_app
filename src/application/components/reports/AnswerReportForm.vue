@@ -33,7 +33,7 @@ export default defineComponent({
 			required: true
 		},
 		submit: {
-			type: Function,
+			type: Function as PropType<() => Promise<void>>,
 			required: true
 		},
 		loading: {
@@ -50,10 +50,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	input[type="radio"] {
-		width: 18px;
-		height: 18px;
-	}
-</style>

@@ -1,10 +1,10 @@
 <template>
-	<div class="flex-col gap-1 gap-md-2">
-		<ion-button class="w-full font-bold capitalize flex gap-9 justify-center items-center my-6"
+	<div class="flex-col gap-4">
+		<IonButton class="btn-outline w-full font-bold capitalize flex justify-center items-center"
 			@click="loginWithGoogle">
-			<ion-icon :icon="logoGoogle" class="mr-4" size="100px" />
+			<IonIcon :icon="logoGoogle" class="mr-2" />
 			<span>Google</span>
-		</ion-button>
+		</IonButton>
 		<PageLoading v-if="loading" />
 	</div>
 </template>
@@ -12,23 +12,22 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
 import { useGoogleSignin } from '@app/composable/auth/signin'
-import { IonButton, IonIcon } from '@ionic/vue'
 import { logoGoogle } from 'ionicons/icons'
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth'
 import { googleClientId } from '@utils/environment'
 
 export default defineComponent({
 	name: 'AuthProviders',
-	components: { IonButton, IonIcon },
 	setup () {
 		const { loading, error, setError, signin } = useGoogleSignin()
 
 		const loginWithGoogle = async () => {
 			try {
 				const googleUser = await GoogleAuth.signIn()
-				const token = googleUser.authentication.idToken
+				const accessToken = googleUser.authentication.accessToken
+				const idToken = googleUser.authentication.idToken
 				await GoogleAuth.signOut()
-				await signin(token)
+				await signin({ idToken, accessToken })
 			} catch (error) {
 				await setError('Error signing in with google')
 			}
@@ -49,14 +48,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-button {
-		--background: transparent !important;
-		--color: #4D5C6F;
-		--border-color: #8B9EB1;
-		--border-style: solid;
-		--border-width: 2px;
-		--box-shadow: none;
-	}
-</style>

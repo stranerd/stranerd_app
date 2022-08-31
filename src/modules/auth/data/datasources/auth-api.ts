@@ -1,5 +1,5 @@
 import { closeSocket, HttpClient } from '@modules/core'
-import { apiBases, domain, googleClientId } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { deleteTokens, saveTokens } from '@utils/tokens'
 import {
 	AfterAuthUser,
@@ -15,7 +15,7 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 	private authClient: HttpClient
 
 	constructor () {
-		this.authClient = new HttpClient(apiBases.AUTH)
+		this.authClient = new HttpClient(apiBase + '/auth')
 	}
 
 	async getAuthUser () {
@@ -29,26 +29,21 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 		})
 	}
 
-	async signinWithGoogle (idToken: string, extras: AuthExtras) {
+	async signinWithGoogle (data: { accessToken: string, idToken: string }, extras: AuthExtras) {
 		return await this.authClient.post<any, AfterAuthUser>('/identities/google', {
-			idToken, referrer: extras.referrer,
-			clientId: googleClientId
+			...data, referrer: extras.referrer
 		})
 	}
 
-	async signupWithEmail ({ email, password, firstName, lastName }: NewUser, extras: AuthExtras) {
+	async signupWithEmail (user: NewUser, extras: AuthExtras) {
 		return await this.authClient.post<any, AfterAuthUser>('/emails/signup', {
-			email, password, firstName, lastName,
-			description: '', photo: null,
+			...user,
 			referrer: extras.referrer
 		})
 	}
 
 	async sendVerificationEmail (email: string) {
-		const redirectUrl = domain + '/auth/complete-verification'
-		await this.authClient.post<any, boolean>('/emails/verify/mail', {
-			email, redirectUrl
-		})
+		await this.authClient.post<any, boolean>('/emails/verify/mail', { email })
 	}
 
 	async completeEmailVerification (token: string) {
@@ -58,10 +53,7 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 	}
 
 	async sendPasswordResetEmail (email: string) {
-		const redirectUrl = domain + '/auth/reset'
-		await this.authClient.post<any, boolean>('/passwords/reset/mail', {
-			email, redirectUrl
-		})
+		await this.authClient.post<any, boolean>('/passwords/reset/mail', { email })
 	}
 
 	async resetPassword (token: string, password: string) {
@@ -88,5 +80,13 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 		await this.authClient.post<any, boolean>('/user/signout', {}).catch()
 		await deleteTokens()
 		await closeSocket()
+	}
+
+	async updateRole (data: { id: string, value: boolean, role: string }) {
+		return await this.authClient.post<any, boolean>('/user/roles', {
+			role: data.role,
+			userId: data.id,
+			value: data.value
+		})
 	}
 }

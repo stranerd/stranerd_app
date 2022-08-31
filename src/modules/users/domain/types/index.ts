@@ -1,6 +1,7 @@
-import { RankTypes } from '@modules/users/domain/entities/rank'
-import { appName } from '@utils/environment'
+import { RankTypes } from '../entities/rank'
 import { Media } from '@modules/core'
+
+export * from './notifications'
 
 export enum UserSchoolType {
 	'secondary' = 'secondary',
@@ -8,7 +9,7 @@ export enum UserSchoolType {
 	'college' = 'college'
 }
 
-type SecondaryType = {
+export type SecondaryType = {
 	type: UserSchoolType.secondary
 	exams: {
 		institutionId: string
@@ -18,7 +19,7 @@ type SecondaryType = {
 	}[]
 }
 
-type AspirantType = {
+export type AspirantType = {
 	type: UserSchoolType.aspirant
 	exams: {
 		institutionId: string
@@ -28,11 +29,12 @@ type AspirantType = {
 	}[]
 }
 
-type CollegeType = {
+export type CollegeType = {
 	type: UserSchoolType.college
 	institutionId: string
 	facultyId: string
 	departmentId: string
+	tagId: string
 }
 
 export type UserSchoolData = SecondaryType | AspirantType | CollegeType
@@ -51,15 +53,18 @@ export interface UserBio {
 	email: string
 	description: string
 	photo: Media | null
-	coverPhoto: Media | null
 }
 
 export interface UserRoles {
-	[appName]: {
-		isAdmin: boolean
-		isTutor: boolean
-		isVerified: boolean
-	}
+	isStranerdAdmin: boolean
+	isStranerdTutor: boolean
+	isVerified: boolean
+}
+
+export type EmbeddedUser = {
+	id: string
+	bio: UserBio
+	roles: UserRoles
 }
 
 export interface UserAccount {
@@ -73,6 +78,8 @@ export interface UserAccount {
 		tutorSessions: number
 		flashCards: number
 		sets: number
+		notes: number
+		connects: number
 	}
 	streak: {
 		count: number

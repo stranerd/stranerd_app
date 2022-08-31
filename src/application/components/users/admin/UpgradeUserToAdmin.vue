@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<form class="flex justify-between items-center mb-4" @submit.prevent="searchUsers">
-			<ion-input v-model="detail" class="bg-white border border-faded_gray w-full"
-				placeholder="Search users by name or email" />
+		<form class="flex justify-between items-center mb-4 px-4 md:px-0" @submit.prevent="search">
+			<IonInput v-model="detail" class="w-full"
+				placeholder="Search users" />
 		</form>
 		<DisplayError :error="error" />
 		<div v-if="fetched">
@@ -24,18 +24,9 @@ export default defineComponent({
 	components: { AdminsListCard },
 	setup () {
 		const {
-			loading, fetched, detail, users, error, searchUsers, reset
+			loading, fetched, detail, users, error, search, reset
 		} = useSearchUsers()
-		return { loading, fetched, detail, users, error, searchUsers, reset }
+		return { loading, fetched, detail, users, error, search, reset }
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-input {
-		--padding-top: 0.5rem !important;
-		--padding-bottom: 0.5rem !important;
-		--padding-left: 0 !important;
-		--padding-right: 0 !important;
-	}
-</style>

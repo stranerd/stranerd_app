@@ -1,9 +1,6 @@
 <template>
-	<div>
-		<EmptyState v-if="filtered.length === 0" info="No results found." />
-		<div class="showcase">
-			<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard" />
-		</div>
+	<div class="showcase-flex">
+		<FlashCardListCard v-for="flashCard in filtered" :key="flashCard.hash" :flashCard="flashCard" />
 	</div>
 </template>
 

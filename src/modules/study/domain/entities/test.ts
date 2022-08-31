@@ -17,19 +17,19 @@ export class TestEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             name,
-		             data,
-		             questions,
-		             questionType,
-		             answers,
-		             score,
-		             userId,
-		             prepId,
-		             done,
-		             createdAt,
-		             updatedAt
-	             }: TestConstructorArgs) {
+					 id,
+					 name,
+					 data,
+					 questions,
+					 questionType,
+					 answers,
+					 score,
+					 userId,
+					 prepId,
+					 done,
+					 createdAt,
+					 updatedAt
+				 }: TestConstructorArgs) {
 		super()
 		this.id = id
 		this.name = name
@@ -59,7 +59,7 @@ export class TestEntity extends BaseEntity {
 	}
 
 	get endedAt () {
-		//@ts-ignore
+		// @ts-ignore
 		return this.createdAt + (this.data.time ?? 0) * 60 * 1000
 	}
 

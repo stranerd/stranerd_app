@@ -1,41 +1,32 @@
 import { BaseEntity } from '@modules/core'
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
-import { appName } from '@utils/environment'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
+
+export enum SetSaved {
+	questions = 'questions',
+	notes = 'notes',
+	flashCards = 'flashCards',
+	testPreps = 'testPreps'
+}
 
 export class SetEntity extends BaseEntity {
 	public readonly id: string
 	public readonly name: string
-	public readonly data: SetData
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
-	public readonly saved: {
-		notes: string[]
-		videos: string[]
-		flashCards: string[]
-		testPreps: string[]
-		sets: string[]
-	}
+	public readonly user: EmbeddedUser
+	public readonly saved: Record<SetSaved, string[]>
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             name,
-		             data,
-		             userId,
-		             userBio,
-		             userRoles,
-		             saved,
-		             createdAt,
-		             updatedAt
-	             }: SetConstructorArgs) {
+					 id,
+					 name,
+					 user,
+					 saved,
+					 createdAt,
+					 updatedAt
+				 }: SetConstructorArgs) {
 		super()
 		this.id = id
-		this.data = data
-		this.userId = userId
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
+		this.user = generateEmbeddedUser(user)
 		this.name = !name ? 'My Library' : name
 		this.saved = saved
 		this.createdAt = createdAt
@@ -47,48 +38,19 @@ export class SetEntity extends BaseEntity {
 	}
 
 	get isUserVerified () {
-		return this.userRoles[appName].isVerified
+		return this.user.roles.isVerified
 	}
 
 	get shareLink () {
 		return `/study/sets/${this.id}`
 	}
-
-	search (search: string) {
-		return this.name.toLowerCase().includes(search.toLowerCase())
-	}
 }
-
-export enum SetType {
-	users = 'users',
-	classes = 'classes'
-}
-
-type UserType = {
-	type: SetType.users
-}
-
-type ClassType = {
-	type: SetType.classes
-	classId: string
-}
-
-export type SetData = UserType | ClassType
 
 type SetConstructorArgs = {
 	id: string
 	name: string
-	data: SetData
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
-	saved: {
-		notes: string[]
-		videos: string[]
-		flashCards: string[]
-		testPreps: string[]
-		sets: string[]
-	}
+	user: EmbeddedUser
+	saved: Record<SetSaved, string[]>
 	createdAt: number
 	updatedAt: number
 }

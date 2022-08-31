@@ -1,37 +1,22 @@
 <template>
 	<div class="showcase-flex">
-		<div class="bg-white md:rounded-xl flex items-center justify-between gap-2 md:p-4">
-			<ion-text class="text-main_dark leading-tight text-heading font-bold hidden md:inline">
-				All questions
-			</ion-text>
-			<div class="flex items-center gap-4 w-full md:w-auto border-bottom-line">
-				<ion-select v-model="answered"
-					class="bg-white md:bg-new_gray !text-gray flex-grow w-full md:w-32 font-bold select-primary"
-					interface="action-sheet"
-					placeholder="State">
-					<ion-select-option v-for="choice in answeredChoices" :key="choice.key"
-						:value="choice.val" @click="answered = choice.val">
-						{{ choice.key }}
-					</ion-select-option>
-				</ion-select>
-
-				<router-link class="hidden md:inline" to="/questions/create">
-					<ion-button class="btn-primary font-bold">
-						Ask a question
-					</ion-button>
-				</router-link>
-			</div>
+		<div class="flex lg:hidden gap-[1px]">
+			<SelectTag v-model:value="tagId" :allowAll="true" class="w-full !rounded-none" />
+			<IonSelect v-model="answered"
+				class="w-full" interface="action-sheet" placeholder="State">
+				<IonSelectOption v-for="choice in answeredChoices" :key="choice.key"
+					:value="choice.val" @click="answered = choice.val">
+					{{ choice.key }}
+				</IonSelectOption>
+			</IonSelect>
 		</div>
-		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl mx-4" />
-		<EmptyState v-if="!loading && !error && questions.length === 0" :btnText="'Ask a question'"
-			:info="'No questions found! Start asking questions to help with homework and studying.'"
-			route="/questions/create"
-		/>
+
+		<EmptyState v-if="!loading && !error && questions.length === 0" class="border-bottom-line"
+			info="There are no questions available." />
 		<QuestionListCard v-for="question in questions" :key="question.hash" :question="question"
 			class="border-bottom-line" />
-		<div v-if="hasMore" class="text-center py-8 text-lg text-primary w-full font-semibold cursor-pointer">
-			<a @click.prevent="fetchOlderQuestions">Load More</a>
-		</div>
+		<BlockLoading v-if="loading" />
+		<LoadMore v-if="hasMore" :load="fetchOlderQuestions" />
 	</div>
 </template>
 
@@ -39,22 +24,27 @@
 import { defineComponent } from 'vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
-import EmptyState from '@app/components/core/EmptyState.vue'
-import { IonSelect, IonSelectOption, IonSkeletonText } from '@ionic/vue'
+import SelectTag from '@app/components/questions/questions/SelectTag.vue'
 
 export default defineComponent({
 	name: 'QuestionsList',
-	components: { QuestionListCard, EmptyState, IonSelect, IonSelectOption, IonSkeletonText },
+	components: { QuestionListCard, SelectTag },
 	setup () {
 		const {
 			filteredQuestions: questions, error, loading, hasMore, fetchOlderQuestions,
-			answeredChoices, answered, subject
+			answeredChoices, answered, tagId
 		} = useQuestionList()
 
 		return {
-			questions, error, loading, hasMore,
-			fetchOlderQuestions, answeredChoices, answered, subject
+			questions, error, loading, hasMore, tagId,
+			fetchOlderQuestions, answeredChoices, answered
 		}
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+ion-select {
+	border-radius: 0;
+}
+</style>

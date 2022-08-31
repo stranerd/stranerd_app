@@ -1,16 +1,16 @@
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity } from '@modules/core'
-import { appName } from '@utils/environment'
-import { ClassUsers } from './class'
+import { ClassUsers } from '../types'
+import { extractUrls } from '@stranerd/validate'
 
 type AnnouncementConstructorArgs = {
 	id: string
 	body: string
 	classId: string
+	reminder: number | null
 	users: Record<ClassUsers, string[]>
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
+	readAt: Record<string, number>
 	createdAt: number
 	updatedAt: number
 }
@@ -20,29 +20,29 @@ export class AnnouncementEntity extends BaseEntity {
 	public readonly body: string
 	public readonly users: Record<ClassUsers, string[]>
 	public readonly classId: string
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
+	public readonly reminder: number | null
+	public readonly user: EmbeddedUser
+	public readonly readAt: Record<string, number>
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, body, createdAt, users, classId, userId, userBio, userRoles, updatedAt
-	             }: AnnouncementConstructorArgs) {
+					 id, body, createdAt, users, classId, reminder, user, readAt, updatedAt
+				 }: AnnouncementConstructorArgs) {
 		super()
 		this.id = id
 		this.body = body
 		this.users = users
 		this.classId = classId
-		this.userId = userId
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
+		this.reminder = reminder
+		this.user = generateEmbeddedUser(user)
+		this.readAt = readAt
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
 	get isUserVerified () {
-		return this.userRoles[appName].isVerified
+		return this.user.roles.isVerified
 	}
 
 	get members () {
@@ -55,6 +55,18 @@ export class AnnouncementEntity extends BaseEntity {
 
 	get tutors () {
 		return this.users[ClassUsers.tutors]
+	}
+
+	get formattedBody () {
+		let body = this.body
+		extractUrls(body).forEach(({ original, normalized }) => {
+			body = body.replaceAll(original, `<a href="${normalized}" target="_blank" style="text-decoration: underline; color: #027eb5;">${original}</a>`)
+		})
+		return body
+	}
+
+	isRead (userId: string) {
+		return !!this.readAt[userId]
 	}
 }
 

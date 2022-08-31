@@ -13,12 +13,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Fetch secrets
-        uses: actions-hub/gcloud@master
         env:
-          PROJECT_ID: ${{ secrets.GCLOUD_PROJECT }}
-          APPLICATION_CREDENTIALS: ${{ secrets.GCLOUD_AUTH }}
-        with:
-          args: "secrets versions access latest --secret=Stranerd_Environment_Variables > env.json"
+          ENV_SECRETS: ${{ secrets.ENV_SECRETS }}
+        run: echo "$ENV_SECRETS" > env.json
       - name: Install Dependencies
         run: yarn
       - name: Setup Project

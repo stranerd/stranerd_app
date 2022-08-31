@@ -1,85 +1,71 @@
 <template>
 	<form class="flex flex-col gap-4 justify-center" @submit.prevent="submit">
+		<Avatar :editable="true" :name="factory.first" :size="64" :src="factory.photo" @photo="savePhoto" />
 		<div class="flex flex-col items-start">
-			<CoverAvatar :editable="true" :src="factory.coverPhoto" class="h-20"
-				@photo="(p) => { factory.coverPhoto = p; updateProfile() }" />
-			<span class="modal-padding-x relative top-[-40px] inline-flex items-center justify-center -mb-10">
-				<Avatar :editable="true" :name="factory.first" :size="80"
-					:src="factory.photo" @photo="(p) => { factory.photo = p; updateProfile() }" />
-			</span>
-		</div>
-		<div class="flex flex-col gap-4 modal-padding-x">
-			<div class="flex flex-col items-start">
-				<ion-label class="font-bold mb-1">Name</ion-label>
-				<div class="flex gap-4 w-full justify-between">
-					<ion-input v-model="factory.first"
-						class="w-full bg-transparent border border-faded_gray rounded-md"
-						placeholder="First name"
-					/>
-					<ion-input v-model="factory.last"
-						class="w-full bg-transparent border border-faded_gray rounded-md"
-						placeholder="Last name"
-					/>
+			<div class="flex w-full gap-4">
+				<div class="flex flex-col w-1/2">
+					<IonLabel class="font-bold text-sm mb-2">First Name</IonLabel>
+					<IonInput v-model="factory.first"
+						:class="{'valid': factory.isValid('first'), 'invalid': factory.errors.first}"
+						:size="24"
+						placeholder="First Name"
+						position="floating" type="text" />
+					<DisplayError :error="factory.errors.first" />
+				</div>
+				<div class="flex flex-col w-1/2">
+					<IonLabel class="font-bold text-sm mb-2">Last Name</IonLabel>
+					<IonInput v-model="factory.last"
+						:class="{'valid': factory.isValid('last'), 'invalid': factory.errors.last}"
+						:size="24" placeholder="Last Name"
+						position="floating"
+						type="text" />
+					<DisplayError :error="factory.errors.last" />
 				</div>
 			</div>
+		</div>
 
-			<div class="flex flex-col items-start">
-				<ion-label class="font-bold mb-1">Bio</ion-label>
-				<ion-textarea v-model="factory.description"
-					class="w-full bg-transparent border border-faded_gray rounded-md"
-					placeholder="Short description on your profile"
-					rows="3" show-cancel-button="never"
-				/>
-			</div>
+		<div class="flex flex-col items-start">
+			<IonLabel class="font-bold text-sm mb-2">Bio</IonLabel>
+			<IonTextarea v-model="factory.description"
+				:class="{'valid': factory.isValid('description'), 'invalid': factory.errors.description}"
+				placeholder="Short description on your profile"
+				rows="3" show-cancel-button="never" />
+		</div>
 
-			<div class="flex w-full justify-end gap-2 items-center">
-				<ion-button class="btn-outline text-primary w-24" size="small" type="button"
-					@click.prevent="next">
-					Skip
-					<ion-ripple-effect class="rounded-lg" />
-				</ion-button>
-				<ion-button :disabled="loading || !factory.valid" class="btn-primary w-24" size="small"
-					type="submit">
-					Next
-					<IonSpinner v-if="loading" name="lines-small" />
-					<ion-ripple-effect class="rounded-lg" />
-				</ion-button>
-			</div>
+		<div class="flex w-full justify-end gap-2 items-center">
+			<IonButton :disabled="loading || !factory.valid" class="btn-primary w-24" type="submit">
+				<SpinLoading v-if="loading" />
+				<span v-else>Next</span>
+				<IonRippleEffect class="rounded-lg" />
+			</IonButton>
 		</div>
 	</form>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { IonRippleEffect, IonSpinner, IonTextarea } from '@ionic/vue'
+import { defineComponent, PropType } from 'vue'
 import { useProfileUpdate } from '@app/composable/auth/profile'
+import { UploadedFile } from '@modules/core'
 
 export default defineComponent({
 	name: 'ProfileForm',
 	props: {
 		next: {
-			type: Function,
+			type: Function as PropType<() => any>,
 			required: true
 		}
 	},
-	components: { IonRippleEffect, IonTextarea, IonSpinner },
 	setup (props) {
 		const { factory, loading, error, updateProfile } = useProfileUpdate()
+		const savePhoto = async (p: UploadedFile) => {
+			factory.value.photo = p
+			await updateProfile(true)
+		}
 		const submit = async () => {
 			await updateProfile()
 			props.next()
 		}
-		return { factory, loading, error, updateProfile, submit }
+		return { factory, loading, error, updateProfile, submit, savePhoto }
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-label {
-		--color: $color-mainDark !important;
-		color: $color-mainDark !important;
-		@media (max-width: 640px) {
-			font-size: 12px !important;
-		}
-	}
-</style>

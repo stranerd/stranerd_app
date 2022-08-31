@@ -1,7 +1,8 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, Method } from 'axios'
 import { getTokens, saveTokens } from '@utils/tokens'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { AfterAuthUser } from '@modules/auth/domain/entities/auth'
+import { UploadedFile } from '@modules/core'
 
 export class NetworkError extends Error {
 	readonly statusCode: StatusCodes
@@ -17,10 +18,10 @@ export class NetworkError extends Error {
 export class HttpClient {
 	private readonly client: AxiosInstance
 
-	constructor (baseURL: string) {
+	constructor (baseURL = apiBase) {
 		this.client = axios.create({ baseURL })
 		this.client.interceptors.request.use(async (config) => {
-			const isFromOurServer = Object.values(apiBases).find((base) => !!config.baseURL?.startsWith(base))
+			const isFromOurServer = this.client.defaults.baseURL?.startsWith(apiBase)
 			if (!isFromOurServer) return config
 			const { accessToken, refreshToken } = await getTokens()
 			config.headers = config.headers ?? {}
@@ -63,16 +64,26 @@ export class HttpClient {
 
 	private async makeRequest<Body, ReturnValue> (url: string, method: Method, data: Body): Promise<ReturnValue> {
 		try {
+			const isGet = method === 'get'
+			if (!isGet) {
+				const formData = new FormData()
+				Object.entries(data).forEach(([key, val]) => {
+					if (val instanceof UploadedFile) formData.set(key, val.ref)
+					else if (Array.isArray(val) && val[0] instanceof UploadedFile) val.forEach((file) => formData.append(key, file.ref))
+					else if (val !== undefined) formData.set(key, JSON.stringify(val))
+				})
+				data = formData as any
+			}
 			const res = await this.client.request<Body, AxiosResponse<ReturnValue>>({
-				url, method, [method === 'get' ? 'params' : 'data']: data
+				url, method, [isGet ? 'params' : 'data']: data
 			})
 			return res.data
 		} catch (e) {
-			const error = e as unknown as AxiosError
+			const error = e as unknown as AxiosError<any>
 			if (!error.isAxiosError) throw error
 			if (!error.response) throw error
 			const status = error.response.status
-			const isFromOurServer = Object.values(apiBases).find((base) => this.client.defaults.baseURL?.startsWith(base)) && Object.values(StatusCodes).includes(status)
+			const isFromOurServer = this.client.defaults.baseURL?.startsWith(apiBase) && Object.values(StatusCodes).includes(status)
 			if (!isFromOurServer) throw error
 			if (status !== StatusCodes.AccessTokenExpired) throw new NetworkError(status, error.response.data)
 			const res = await this.getNewTokens()
@@ -83,11 +94,11 @@ export class HttpClient {
 
 	private async getNewTokens () {
 		try {
-			const { data } = await this.client.post<{}, AxiosResponse<AfterAuthUser>>('/token', {}, { baseURL: apiBases.AUTH })
+			const { data } = await this.client.post<any, AxiosResponse<AfterAuthUser>>('/auth/token', {}, { baseURL: apiBase })
 			await saveTokens(data)
 			return !!data
 		} catch (e) {
-			const error = e as unknown as AxiosError
+			const error = e as unknown as AxiosError<any>
 			if (!error.isAxiosError) throw error
 			if (!error.response) throw error
 			const status = error.response.status
@@ -103,7 +114,7 @@ export enum StatusCodes {
 	NotAuthorized = 403,
 	NotFound = 404,
 	ValidationError = 422,
-	EmailNotVerified = 460,
+	AccountNotVerified = 460,
 	AccessTokenExpired = 461,
 	RefreshTokenMisused = 462,
 	InvalidToken = 463
@@ -113,7 +124,7 @@ export enum QueryKeys { and = 'and', or = 'or' }
 
 export enum Conditions {
 	lt = 'lt', lte = 'lte', gt = 'gt', gte = 'gte',
-	eq = 'eq', ne = 'ne', in = 'in', nin = 'nin'
+	eq = 'eq', ne = 'ne', in = 'in', nin = 'nin', exists = 'exists'
 }
 
 type Where = { field: string, value: any, condition?: Conditions }

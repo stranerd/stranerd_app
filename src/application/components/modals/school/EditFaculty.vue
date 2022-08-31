@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Edit a faculty
 		</template>
@@ -24,6 +24,12 @@ import { useEditFaculty } from '@app/composable/school/faculties'
 export default defineComponent({
 	name: 'EditFacultyModal',
 	components: { FacultyForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, editFaculty } = useEditFaculty()
 		return { factory, error, loading, editFaculty }

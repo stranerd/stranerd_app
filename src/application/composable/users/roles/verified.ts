@@ -1,24 +1,25 @@
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { ToggleVerified, UserEntity } from '@modules/users'
+import { UserEntity } from '@modules/users'
 import { Alert } from '@utils/dialog'
+import { AuthUseCases } from '@modules/auth'
 
 export const useVerifiedRoles = () => {
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 
-	const verifyUser = async (user: UserEntity) => {
+	const verifyUser = async (user: UserEntity, verified: boolean) => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to make this user verified?',
+			title: `Are you sure you want to ${verified ? 'verify' : 'un-verify'} this user?`,
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await ToggleVerified.call(user.id, true)
-				user.isVerified = true
-				await setMessage('Successfully upgraded to verified')
+				await AuthUseCases.updateRole(user.id, 'isVerified', verified)
+				user.isVerified = verified
+				await setMessage(`Successfully ${verified ? 'verified' : 'unverified'}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -26,26 +27,5 @@ export const useVerifiedRoles = () => {
 		}
 	}
 
-	const deVerifyUser = async (user: UserEntity) => {
-		await setError('')
-		const accepted = await Alert({
-			title: 'Are you sure you want to un-verify this user?',
-			confirmButtonText: 'Yes, continue'
-		})
-		if (accepted) {
-			await setLoading(true)
-			try {
-				await ToggleVerified.call(user.id, false)
-				await setMessage('Successfully downgraded from verified')
-			} catch (error) {
-				await setError(error)
-			}
-			await setLoading(false)
-		}
-	}
-
-	return {
-		error, loading,
-		verifyUser, deVerifyUser
-	}
+	return { error, loading, verifyUser }
 }

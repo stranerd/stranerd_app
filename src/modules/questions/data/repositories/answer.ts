@@ -69,8 +69,4 @@ export class AnswerRepository implements IAnswerRepository {
 	async delete (id: string) {
 		return await this.dataSource.delete(id)
 	}
-
-	async vote (id: string, vote: boolean) {
-		return await this.dataSource.vote(id, vote)
-	}
 }

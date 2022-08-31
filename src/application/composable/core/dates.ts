@@ -13,7 +13,7 @@ export const useTimeDifference = (timeInMs: number) => {
 	const diffInSec = ref(Math.floor((Date.now() - date.getTime()) / 1000))
 	let interval = undefined as number | undefined
 
-	watch(() => diffInSec.value, () => {
+	watch(diffInSec, () => {
 		if ([TIMES.minute, TIMES.hour, TIMES.day, TIMES.month, TIMES.year].includes(diffInSec.value)) {
 			clearInterval(interval)
 			interval = startInterval(diffInSec.value, (time: number) => {
@@ -52,7 +52,7 @@ export const useCountdown = (timeInMs: number, triggers: Record<number, () => vo
 	const diffInSec = ref(val < 0 ? 0 : val)
 	let interval = undefined as number | undefined
 
-	watch(() => diffInSec.value, () => {
+	watch(diffInSec, () => {
 		if (val > 0) triggers[diffInSec.value]?.()
 		if ([TIMES.minute, TIMES.hour, TIMES.day, TIMES.month, TIMES.year].includes(diffInSec.value)) {
 			clearInterval(interval)

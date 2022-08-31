@@ -1,11 +1,11 @@
 <template>
-	<ion-icon :icon="reader" class=" text-5xl text-pink" />
-	<ion-text class="text-xl text-main_dark font-bold">
-		Notes
-	</ion-text>
-	<ion-text class="text-main_dark max-w-[80vw] text-center">
-		Read beautiful and concise notes that cover every important aspects in topics under different subjects.
-	</ion-text>
+	<img alt="" src="@app/assets/images/onboarding/three.svg" />
+	<IonText class="text-2xl text-secondaryText font-bold mt-20">
+		Community
+	</IonText>
+	<IonText class="text-secondaryText max-w-[75vw] text-center text-lg">
+		Ask a question or Chat with students outside the boundary of your classes.
+	</IonText>
 </template>
 
 <script lang="ts">

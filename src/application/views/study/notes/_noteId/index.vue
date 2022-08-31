@@ -1,61 +1,28 @@
 <template>
-	<Justified>
-		<div v-if="note">
-			<div class="blueTop py-4">
-				<div
-					class="flex flex-col md:flex-row md:justify-between justify-start items-start px-4 w-full lg:w-8/12 w-full mx-auto">
-					<ion-text class="text-heading font-bold text-main_dark text-start">
-						{{ note.title }}
-					</ion-text>
-					<div class="items-center text-gray font-normal flex gap-3">
-						<Avatar :id="note.userId" :name="note.userBio.fullName" :size="24"
-							:src="note.userBio.photo" />
-						<Share :link="note.shareLink" :title="note.title" cssClass="text-xl"
-							text="Share this note" />
-						<SaveToSet :entity="note" />
-					</div>
-				</div>
-			</div>
-			<div class="bg-white w-full lg:w-8/12 w-full mx-auto">
-				<NoteDetails :note="note" />
-			</div>
+	<DefaultLayout :hideBottom="true" :hideFab="true">
+		<div class="h-full flex flex-col">
+			<BlockLoading v-if="loading" />
+			<NoteDetails v-else-if="note" :note="note" class="h-full" />
+			<NotFound v-else title="Note not found" />
 		</div>
-		<PageLoading v-if="loading" />
-	</Justified>
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
-import Justified from '@app/layouts/Justified.vue'
-import {
-	add,
-	checkmarkCircleOutline,
-	chevronDown,
-	chevronUp,
-	contract,
-	pencil,
-	remove,
-	scan,
-	shareSocial
-} from 'ionicons/icons'
-import Avatar from '@app/components/core/Avatar.vue'
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { useNote } from '@app/composable/study/notes'
-import Share from '@app/components/core/Share.vue'
 import NoteDetails from '@app/components/study/notes/NoteDetails.vue'
-import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'StudyNotesNoteId',
-	displayName: 'Note',
-	components: { Justified, Avatar, NoteDetails, Share, SaveToSet },
+	components: { NoteDetails },
 	setup () {
+		useRouteMeta('Note', { back: true })
 		const { noteId } = useRoute().params
 		const { error, loading, note } = useNote(noteId as string)
-		return {
-			add, remove, scan, chevronDown, loading, note, error,
-			chevronUp, pencil, contract, shareSocial, checkmarkCircleOutline
-		}
+		return { loading, note, error }
 	}
 })
 </script>

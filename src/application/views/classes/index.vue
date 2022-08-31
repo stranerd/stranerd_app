@@ -1,18 +1,19 @@
 <template>
-	<DashboardLayout>
-		<ClassesList class="md:px-4 md:py-4" />
-	</DashboardLayout>
+	<DefaultLayout>
+		<ClassesList />
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import DashboardLayout from '@app/layouts/Dashboard.vue'
 import ClassesList from '@app/components/classes/classes/ClassesList.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'Classes',
-	displayName: 'Classes',
-	components: { DashboardLayout, ClassesList },
-	middlewares: ['isAuthenticated']
+	components: { ClassesList },
+	setup () {
+		useRouteMeta('Find a Class', { back: true })
+	}
 })
 </script>

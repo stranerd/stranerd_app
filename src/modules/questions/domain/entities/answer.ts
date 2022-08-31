@@ -1,52 +1,44 @@
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractTextFromHTML, trimToLength } from '@utils/commons'
-import { appName } from '@utils/environment'
+import { AnswerMeta } from '../types'
 
 export class AnswerEntity extends BaseEntity {
 	public readonly id: string
-	public readonly title: string
 	public readonly body: string
 	public readonly best: boolean
 	public readonly questionId: string
+	public readonly tagId: string
 	public readonly attachments: Media[]
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
-	public readonly votes: { userId: string, vote: 1 | -1 }[]
+	public readonly user: EmbeddedUser
+	public readonly meta: AnswerMeta
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, title, body, questionId,
-		             createdAt, userId, userBio, userRoles, attachments,
-		             best, votes, updatedAt
-	             }: AnswerConstructorArgs) {
+					 id, body, questionId, tagId,
+					 createdAt, user, attachments, meta,
+					 best, updatedAt
+				 }: AnswerConstructorArgs) {
 		super()
 		this.id = id
-		this.title = title
 		this.body = body
 		this.questionId = questionId
-		this.userId = userId
-		this.attachments = attachments.map(parseMedia) ?? []
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
-		this.best = best ?? false
-		this.votes = votes
+		this.tagId = tagId
+		this.user = generateEmbeddedUser(user)
+		this.attachments = attachments.map(parseMedia)
+		this.best = best
+		this.meta = meta
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
-	get trimmedTitle () {
-		return trimToLength(this.strippedTitle, 200)
+	get saveFilePath () {
+		return `questions/answers/${this.id}`
 	}
 
 	get trimmedBody () {
-		return trimToLength(this.strippedBody, 200)
-	}
-
-	get strippedTitle () {
-		return extractTextFromHTML(this.title)
+		return trimToLength(this.strippedBody, 120)
 	}
 
 	get strippedBody () {
@@ -65,30 +57,24 @@ export class AnswerEntity extends BaseEntity {
 		return !this.isModified
 	}
 
-	get upVotes () {
-		return this.votes.filter((v) => v.vote === 1).length
-	}
-
-	get downVotes () {
-		return this.votes.filter((v) => v.vote === -1).length
-	}
-
 	get isUserVerified () {
-		return this.userRoles[appName].isVerified
+		return this.user.roles.isVerified
+	}
+
+	get shareLink () {
+		return `/questions/${this.questionId}`
 	}
 }
 
 type AnswerConstructorArgs = {
 	id: string
-	title: string
 	body: string
 	questionId: string
+	tagId: string
 	attachments: Media[]
 	createdAt: number
 	updatedAt: number
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	best: boolean
-	votes: { userId: string, vote: 1 | -1 }[]
+	meta: AnswerMeta
 }

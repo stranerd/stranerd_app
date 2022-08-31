@@ -1,26 +1,17 @@
-import { ref } from 'vue'
-import { useModal, usePopover } from '@app/composable/core/modal'
-import CreateSession from '@app/components/modals/sessions/RequestSession.vue'
+import { modal } from '@app/composable/core/modal'
 import CreateReport from '@app/components/modals/reports/CreateReport.vue'
-import CreateQuestion from '@app/components/modals/questions/CreateQuestion.vue'
-import EditQuestion from '@app/components/modals/questions/EditQuestion.vue'
-import CreateDashboardMenu from '@app/components/popovers/menus/CreateDashboardMenu.vue'
-import UserDashboardMenu from '@app/components/popovers/menus/UserDashboardMenu.vue'
 import CreateTestPrep from '@app/components/modals/study/CreateTestPrep.vue'
 import EditTestPrep from '@app/components/modals/study/EditTestPrep.vue'
 import CreateSet from '@app/components/modals/study/CreateSet.vue'
 import EditSet from '@app/components/modals/study/EditSet.vue'
 import CreateNote from '@app/components/modals/study/CreateNote.vue'
 import EditNote from '@app/components/modals/study/EditNote.vue'
-import CreateVideo from '@app/components/modals/study/CreateVideo.vue'
-import EditVideo from '@app/components/modals/study/EditVideo.vue'
 import SaveEntity from '@app/components/modals/study/SaveEntity.vue'
-import CreateClass from '@app/components/modals/classes/CreateClass.vue'
-import EditClass from '@app/components/modals/classes/EditClass.vue'
-import CreateGroup from '@app/components/modals/classes/CreateGroup.vue'
-import EditGroup from '@app/components/modals/classes/EditGroup.vue'
-import CreateAnnouncement from '@app/components/modals/classes/CreateAnnouncement.vue'
-import EditAnnouncement from '@app/components/modals/classes/EditAnnouncement.vue'
+import CreateTimetable from '@app/components/modals/classes/CreateTimetable.vue'
+import EditTimetable from '@app/components/modals/classes/EditTimetable.vue'
+import CreateScheme from '@app/components/modals/classes/CreateScheme.vue'
+import EditScheme from '@app/components/modals/classes/EditScheme.vue'
+import ViewedBy from '@app/components/modals/classes/ViewedBy.vue'
 import CreateInstitution from '@app/components/modals/school/CreateInstitution.vue'
 import EditInstitution from '@app/components/modals/school/EditInstitution.vue'
 import CreateFaculty from '@app/components/modals/school/CreateFaculty.vue'
@@ -32,36 +23,37 @@ import EditCourse from '@app/components/modals/school/EditCourse.vue'
 import CreatePastQuestion from '@app/components/modals/school/CreatePastQuestion.vue'
 import EditPastQuestion from '@app/components/modals/school/EditPastQuestion.vue'
 import Settings from '@app/components/modals/users/Settings.vue'
+import FabMenu from '@app/components/modals/users/FabMenu.vue'
+import ProfileMenu from '@app/components/modals/users/ProfileMenu.vue'
+import CreateComment from '@app/components/modals/interactions/CreateComment.vue'
+import CreateTag from '@app/components/modals/interactions/CreateTag.vue'
+import EditTag from '@app/components/modals/interactions/EditTag.vue'
 
-export const modal = useModal(ref([]))
-const QuestionModal = modal.register('Question', { CreateQuestion, EditQuestion })
-const SessionModal = modal.register('Session', { CreateSession, Ratings: CreateSession })
+const SessionModal = modal.register('Session', { CreateSession: CreateReport, Ratings: CreateReport })
 const ReportModal = modal.register('Report', { CreateReport })
 const StudyModal = modal.register('Study', {
-	CreateSet, EditSet, CreateNote, EditNote, SaveEntity,
-	CreateVideo, EditVideo, CreateTestPrep, EditTestPrep
+	CreateSet, EditSet, SaveEntity, CreateTestPrep, EditTestPrep, CreateNote, EditNote
 })
 const ClassModal = modal.register('Class', {
-	CreateClass, EditClass, CreateGroup, EditGroup,
-	CreateAnnouncement, EditAnnouncement
+	CreateScheme, EditScheme, CreateTimetable, EditTimetable, ViewedBy
 })
 const SchoolModal = modal.register('School', {
 	CreateInstitution, EditInstitution, CreateFaculty, EditFaculty, CreateDepartment, EditDepartment,
 	CreatePastQuestion, EditPastQuestion, CreateCourse, EditCourse
 })
-const UserModal = modal.register('Onboarding', { Settings })
+const UserModal = modal.register('User', { Settings, FabMenu, ProfileMenu })
+const InteractionModal = modal.register('Interaction', { CreateComment, CreateTag, EditTag })
 
-export const useQuestionModal = () => QuestionModal
 export const useSessionModal = () => SessionModal
 export const useReportModal = () => ReportModal
 export const useStudyModal = () => StudyModal
 export const useClassModal = () => ClassModal
 export const useSchoolModal = () => SchoolModal
 export const useUserModal = () => UserModal
-export const allModals = [useQuestionModal, useSessionModal, useReportModal, useStudyModal, useClassModal, useSchoolModal]
+export const useInteractionModal = () => InteractionModal
+export const allModals = [
+	useSessionModal, useReportModal, useStudyModal,
+	useClassModal, useSchoolModal, useUserModal, useInteractionModal
+]
 
-export const popover = usePopover(ref([]))
-const MenuPopover = popover.register('Menu', { CreateDashboardMenu, UserDashboardMenu })
-
-export const useMenuPopover = () => MenuPopover
-export const allPopovers = [useMenuPopover]
+export const allPopovers = [] as typeof allModals

@@ -1,39 +1,23 @@
-import { apiBases } from '@utils/environment'
 import { Media, UploadedFile } from '../data/models/base'
 import { HttpClient } from './http'
-import { unParseURL } from '@utils/commons'
-
-export const UploaderService = {
-	single: async (path: string, file: UploadedFile): Promise<Media> => await uploadFile(path, file),
-	multiple: async (path: string, files: UploadedFile[]): Promise<Media[]> => await uploadFiles(path, files)
-}
 
 export const uploadFile = async (path: string, file: UploadedFile): Promise<Media> => {
 	try {
-		const data = new FormData()
-		data.append('path', path)
-		data.append('file', file.ref)
-		const utilsClient = new HttpClient(apiBases.UTILS)
-		const media = await utilsClient.post<any, Media>('/storage/file', data)
-		if (!media.link) media.link = unParseURL(apiBases.UTILS + media.path)
-		return media
+		return await new HttpClient().post<any, Media>('/storage/file', { path, file })
 	} catch (err: any) {
 		throw new Error('Error uploading file')
 	}
 }
 
-export const uploadFiles = async (path: string, files: UploadedFile[]): Promise<Media[]> => {
+export const uploadFiles = async (path: string, file: UploadedFile[]): Promise<Media[]> => {
 	try {
-		const data = new FormData()
-		data.append('path', path)
-		files.forEach((file) => data.append('file', file.ref))
-		const utilsClient = new HttpClient(apiBases.UTILS)
-		const medias = await utilsClient.post<any, Media[]>('/storage/files', data)
-		return medias.map((media) => {
-			if (!media.link) media.link = unParseURL(apiBases.UTILS + media.path)
-			return media
-		})
+		return await new HttpClient().post<any, Media[]>('/storage/files', { path, file })
 	} catch {
 		throw new Error('Error uploading files')
 	}
+}
+
+export const UploaderService = {
+	single: uploadFile,
+	multiple: uploadFiles
 }

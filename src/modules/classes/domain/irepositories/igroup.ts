@@ -3,11 +3,11 @@ import { GroupToModel } from '../../data/models/group'
 import { GroupEntity } from '../entities/group'
 
 export interface IGroupRepository {
-	add: (data: GroupToModel) => Promise<GroupEntity>
-	get: (query: QueryParams) => Promise<QueryResults<GroupEntity>>
-	listenToOne: (id: string, listener: Listeners<GroupEntity>) => Promise<() => void>
-	listenToMany: (query: QueryParams, listener: Listeners<GroupEntity>, matches: (entity: GroupEntity) => boolean) => Promise<() => void>
-	find: (id: string) => Promise<GroupEntity | null>
-	update: (id: string, data: GroupToModel) => Promise<GroupEntity>
-	delete: (id: string) => Promise<void>
+	add: (classId: string, data: GroupToModel) => Promise<GroupEntity>
+	get: (classId: string, query: QueryParams) => Promise<QueryResults<GroupEntity>>
+	listenToOne: (classId: string, id: string, listener: Listeners<GroupEntity>) => Promise<() => void>
+	listenToMany: (classId: string, query: QueryParams, listener: Listeners<GroupEntity>, matches: (entity: GroupEntity) => boolean) => Promise<() => void>
+	find: (classId: string, id: string) => Promise<GroupEntity | null>
+	update: (classId: string, id: string, data: GroupToModel) => Promise<GroupEntity>
+	delete: (classId: string, id: string) => Promise<void>
 }

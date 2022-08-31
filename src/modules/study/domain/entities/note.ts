@@ -1,59 +1,39 @@
-import { BaseEntity, Media, parseMedia } from '@modules/core'
-import { generateDefaultBio, generateDefaultRoles, UserBio, UserRoles } from '@modules/users'
-import { appName } from '@utils/environment'
+import { BaseEntity } from '@modules/core'
+import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 
 export class NoteEntity extends BaseEntity {
 	public readonly id: string
 	public readonly title: string
-	public readonly description: string
-	public readonly userId: string
-	public readonly userBio: UserBio
-	public readonly userRoles: UserRoles
-	public readonly isHosted: boolean
-	public readonly link: string | null
-	public readonly media: Media | null
+	public readonly content: string
+	public readonly user: EmbeddedUser
+	public readonly isPrivate: boolean
+	public readonly links: { original: string, normalized: string }[]
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             title,
-		             description,
-		             userId,
-		             userBio,
-		             userRoles,
-		             isHosted,
-		             link,
-		             media,
-		             createdAt,
-		             updatedAt
-	             }: NoteConstructorArgs) {
+					 id,
+					 title,
+					 content,
+					 user,
+					 isPrivate,
+					 links,
+					 createdAt,
+					 updatedAt
+				 }: NoteConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title
-		this.description = description
-		this.userId = userId
-		this.userBio = generateDefaultBio(userBio)
-		this.userRoles = generateDefaultRoles(userRoles)
-		this.isHosted = isHosted
-		this.link = link
-		this.media = media ? parseMedia(media) : null
+		this.content = content
+		this.user = generateEmbeddedUser(user)
+		this.isPrivate = isPrivate
+		this.links = links
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
-	get fileName () {
-		if (this.media) return this.media.name
-		const trimQuery = (this.link ?? '').split('?')[0] ?? ''
-		return trimQuery.split('/').pop() ?? this.title.replace(' ', '-').toLowerCase()
-	}
-
-	get fileLink () {
-		return this.media?.link ?? this.link!
-	}
-
 	get isUserVerified () {
-		return this.userRoles[appName].isVerified
+		return this.user.roles.isVerified
 	}
 
 	get shareLink () {
@@ -61,20 +41,17 @@ export class NoteEntity extends BaseEntity {
 	}
 
 	search (search: string) {
-		return this.title.toLowerCase().includes(search.toLowerCase()) || this.title.toLowerCase().includes(search.toLowerCase())
+		return this.title.toLowerCase().includes(search.toLowerCase()) || this.content.toLowerCase().includes(search.toLowerCase())
 	}
 }
 
 type NoteConstructorArgs = {
 	id: string,
-	isHosted: boolean
-	link: string | null
-	media: Media | null
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	isPrivate: boolean
+	links: { original: string, normalized: string }[]
+	user: EmbeddedUser
 	title: string
-	description: string
+	content: string
 	createdAt: number
 	updatedAt: number
 }

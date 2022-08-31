@@ -3,15 +3,16 @@ import { AnnouncementEntity } from '../../domain/entities/announcement'
 
 export class AnnouncementTransformer {
 	fromJSON (model: AnnouncementFromModel) {
-		const { id, body, classId, users, createdAt, userId, userBio, userRoles, updatedAt } = model
+		const { id, body, classId, reminder, users, readAt, createdAt, user, updatedAt } = model
 		return new AnnouncementEntity({
-			id, body, classId, users, createdAt, userId, userBio, userRoles, updatedAt
+			id, body, classId, reminder, users, readAt, createdAt, user, updatedAt
 		})
 	}
 
 	toJSON (entity: AnnouncementEntity): AnnouncementToModel {
 		return {
 			body: entity.body,
+			reminder: entity.reminder,
 			classId: entity.classId
 		}
 	}

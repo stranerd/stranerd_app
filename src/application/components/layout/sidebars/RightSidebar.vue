@@ -1,5 +1,6 @@
 <template>
-	<div class="w-full flex flex-col py-3 px-2">
+	<div class="flex flex-col gap-4 px-8">
+		<IonText class="font-bold text-2xl">Leaderboard</IonText>
 		<SideLeaderboard />
 	</div>
 </template>

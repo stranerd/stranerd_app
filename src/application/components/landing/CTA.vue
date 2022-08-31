@@ -1,58 +1,29 @@
 <template>
-	<div class="w-full relative bg-primary  flex justify-between items-start lg:py-32 py-10 pb-20 ">
-		<div class="flex flex-col lg:flex-row justify-center items-center mx-auto max-w-[120rem] w-full px-6">
-			<div
-				class="lg:w-6/12 w-full h-auto flex flex-col lg:items-start items-center lg:text-left text-center gap-3">
-				<ion-text
-					class="text-white text-xl md:text-3xl leading-6 lg:text-5xl lg:leading-[56px] lg:font-bold font-extrabold capitalize">
-					Start studying <br>
-					better. smarter. faster. <br>
-					anytime. anywhere.
-				</ion-text>
-				<ion-text class=" text-xs md:text-lg w-[15rem] lg:w-full lg:text-2xl text-white ">
-					With Test preps, Flashcards, Notes and Expert Answers.
-				</ion-text>
-				<router-link class="h-auto mx-auto lg:m-0" to="/dashboard">
-					<ion-button
-						class="btn-outline btn-outline-sm text-white mx-auto lg:m-0 lg:text-2xl text-sm md:text-lg block">
-						Get Started Now
-					</ion-button>
+	<div class="w-full lg:h-[696px] h-auto flex bg-primaryBg relative py-12">
+		<div class="container mx-auto text-primaryText p-6 flex justify-start items-center">
+			<article class="md:max-w-[560px] ">
+				<h1 class=" w-full md:text-6xl text-2xl font-bold pr-24 md:pr-0">
+					All your academic needs in one place
+				</h1>
+				<p class="mt-4 mb-8 text-xs md:text-lg">
+					Get access to a digital classroom, homework help, test and exam help, and solution manuals tailored
+					to your courses.
+				</p>
+				<router-link class="btn bg-warning" to="/auth/signin">
+					Get Started
 				</router-link>
-				<ion-text class="text-2xl text-white mt-8 lg:block hidden">
-					or download the app instead
-				</ion-text>
-				<div class="lg:flex gap-4 hidden">
-					<a href="https://play.google.com/store/apps/details?id=com.stranerd.app" target="_blank">
-						<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/playstore.svg">
-					</a>
-					<!--<router-link to="#">
-						<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/appstore.svg">
-					</router-link> -->
-				</div>
-			</div>
-			<div class="sm:hidden max-w-[49rem] h-60 w-full lg:mt-0 mt-12 ">
-				<img alt="" class="object-contain" src="@app/assets/images/auth/auth.png">
-			</div>
-			<div class="md:w-6/12 max-w-[49rem] w-full lg:mt-0 mt-12 hidden sm:block">
-				<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/auth.png">
-			</div>
-			<div class="flex gap-4 lg:hidden mt-5">
-				<a href="https://play.google.com/store/apps/details?id=com.stranerd.app" target="_blank">
-					<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/playstore.svg">
-				</a>
+			</article>
 
-				<!-- <router-link to="#">
-					<img alt="" class="object-contain h-[100%]" src="@app/assets/images/auth/appstore.svg">
-				</router-link> -->
-			</div>
 		</div>
+
+		<img alt="hero" class="absolute right-0 top-0 hidden 2xl:block" src="@/assets/images/landing/hero.svg">
+		<img alt="hero" class="absolute right-0 top-0 hidden lg:block 2xl:hidden"
+			src="@/assets/images/landing/hero-md.png">
 	</div>
 </template>
 
 <style lang="scss" scoped>
-	ion-button {
-		--padding-top: 1.5rem !important;
-		--padding-bottom: 1.5rem !important;
-		--border-width: 2px !important;
-	}
+a {
+	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs
+}
 </style>

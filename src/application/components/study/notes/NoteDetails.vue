@@ -1,10 +1,18 @@
 <template>
-	<div>
-		<Note v-if="content" :link="content" />
-		<IonSkeletonText v-else-if="loading" animated class="h-36 rounded-xl" />
-		<div v-else class="flex flex-col gap-2 items-center">
-			<p>The note needs to be downloaded before it can be viewed</p>
-			<IonButton class="btn-primary" size="small" @click="download">Download</IonButton>
+	<div class="flex flex-col">
+		<IonText class="border-bottom-line py-6 px-4 font-bold lg:px-0">{{ note.title }}</IonText>
+
+		<IonText class="flex-1 border-bottom-line py-6 px-4 lg:px-0">{{ note.content }}</IonText>
+
+		<div class="flex items-center justify-center p-4 gap-12 text-xl text-secondaryText">
+			<Share :link="note.shareLink" :title="note.title" text="Share this note" />
+			<SaveToSet :entity="note" />
+			<template v-if="note.user.id === id">
+				<IonIcon :icon="createOutline" class="text-primaryBg" @click="openNoteEditModal(note, $router)" />
+				<SpinLoading v-if="loading" />
+				<IonIcon v-else :icon="trashBinOutline" class="text-danger" @click="deleteNote" />
+			</template>
+			<Avatar v-else :id="note.user.id" :name="note.user.bio.fullName" :size="28" :src="note.user.bio.photo" />
 		</div>
 	</div>
 </template>
@@ -12,28 +20,27 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { NoteEntity } from '@modules/study'
-import Note from '@app/components/core/media/Note.vue'
-import { IonSkeletonText } from '@ionic/vue'
-import { useDownload } from '@app/composable/meta/media'
+import { createOutline, trashBinOutline } from 'ionicons/icons'
+import { useAuth } from '@app/composable/auth/auth'
+import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
+import { openNoteEditModal, useDeleteNote } from '@app/composable/study/notes'
 
 export default defineComponent({
 	name: 'NoteDetails',
+	components: { SaveToSet },
 	props: {
 		note: {
 			type: Object as PropType<NoteEntity>,
 			required: true
 		}
 	},
-	components: { Note, IonSkeletonText },
 	setup (props) {
-		const {
-			loading,
-			content,
-			error,
-			download,
-			deleteFromDownloads
-		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
-		return { loading, content, error, download, deleteFromDownloads }
+		const { id } = useAuth()
+		const { deleteNote, loading } = useDeleteNote(props.note.id as string)
+		return {
+			id, createOutline, trashBinOutline,
+			openNoteEditModal, deleteNote, loading
+		}
 	}
 })
 </script>

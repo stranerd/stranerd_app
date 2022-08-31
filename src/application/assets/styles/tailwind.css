@@ -3,112 +3,130 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-	width: 6px; /* Remove scrollbar space */
-	height: 6px; /* Remove scrollbar space */
-	background: #7483bf4e; /* Optional: just make scrollbar invisible */
+	width: 3px;
+	height: 0;
 }
 
-/* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
 	background: #4e474788;
 	border-radius: 100px;
 	cursor: pointer;
 }
 
-@media screen and (max-width: 680px) {
-	::-webkit-scrollbar {
-		width: 0;
-		height: 0; /* Remove scrollbar space */
-		background: #7483bf4e; /* Optional: just make scrollbar invisible */
-	}
-}
-
 @layer utilities {
-	body {
-		@apply md:bg-new_gray
-	}
-
-	.modal-padding-x {
-		@apply md:px-8 px-4
+	html {
+		@apply text-[14.5px] md:text-[16px] bg-bodyBg text-bodyText;
 	}
 
 	.layout {
-		@apply flex flex-col h-full flex-grow
+		@apply flex flex-col h-full flex-grow max-h-[100%];
 	}
 
 	.layout-page {
-		@apply flex flex-row lg:gap-10 flex-grow md:bg-new_gray min-h-full
+		@apply flex h-fit flex-grow w-full overflow-y-auto;
 	}
 
-	.layout-body {
-		@apply lg:w-7/12 w-full min-h-full flex flex-col p-0 overflow-y-auto overflow-x-hidden max-w-[100vw] md:bg-new_gray
+	.layout-page > * {
+		@apply h-full overflow-y-auto;
 	}
 
-	.layout-side-left {
-		@apply hidden lg:inline-block w-2/12 py-1 overflow-y-auto
+	.layout-page-left {
+		@apply hidden lg:block w-[80px] lg:border-r-2 lg:border-r-itemBg;
 	}
 
-	.layout-side-right {
-		@apply hidden lg:inline-block w-3/12 py-1 overflow-y-auto
+	.layout-page-panel {
+		@apply hidden lg:block w-[20%] py-8;
 	}
 
-	.text-sub {
-		@apply md:text-sm text-xs
+	.layout-page-main {
+		@apply w-full lg:w-[calc(75%-80px)] flex flex-col lg:border-x-2 lg:border-x-itemBg lg:pt-8;
 	}
 
-	.text-body {
-		@apply md:text-base text-sm
+	.layout-page-content {
+		@apply h-fit overflow-y-auto flex-grow;
 	}
 
-	.text-heading {
-		@apply md:text-xl text-base
+	.layout-page-panel + .layout-page-main {
+		@apply lg:w-[calc(55%-80px)];
 	}
 
-	.text-heading2 {
-		@apply md:text-2xl text-xl
-	}
-
-	.text-heading3 {
-		@apply md:text-3xl text-2xl
+	.layout-page-right {
+		@apply hidden lg:block w-[25%] py-8;
 	}
 
 	.btn {
-		@apply px-4 py-2 flex justify-center items-center font-semibold
+		@apply px-4 py-2 flex justify-center items-center font-semibold;
 	}
 
 	.headerShadow {
-		box-shadow: 0 0 15px 5px rgba(139, 158, 177, 0.1)
+		box-shadow: 0 0 15px 5px rgba(139, 158, 177, 0.1);
+	}
+
+	.footer-shadow {
+		box-shadow: 0 -5px 5px rgba(139, 158, 177, 0.05);
 	}
 
 	.showcase {
-		@apply grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 md:gap-4
+		@apply grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 md:gap-4;
+	}
+
+	.showcase2 {
+		@apply grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 md:gap-4;
 	}
 
 	.showcase-flex {
-		@apply flex flex-col md:gap-4;
+		@apply flex flex-col lg:gap-6;
 	}
 
-	.blueTop {
-		@apply bg-white w-full flex items-center rounded-b-2xl md:rounded-none md:mb-4 justify-center
+	.showcase-files {
+		@apply grid grid-cols-3 md:grid-cols-4 gap-2 p-2;
 	}
 
 	.nav-scroll {
-		@apply text-gray text-sub items-center md:justify-between flex gap-2 font-semibold overflow-x-auto
+		@apply text-secondaryText text-sm items-center md:justify-between flex overflow-x-auto;
 	}
 
 	.nav-scroll > * {
-		@apply w-full p-2 cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap
+		@apply w-full py-4 cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap border-b-2 border-itemBg;
 	}
 
-	.nav-scroll > *.router-link-exact-active {
-		@apply border-b-2 text-primary border-primary
+	.nav-scroll > *.router-link-exact-active, .nav-scroll > *.active {
+		@apply text-primaryBg border-primaryBg;
 	}
 
 	.dot {
-		@apply h-[5px] w-[5px] rounded-full
+		@apply h-[0.4rem] w-[0.4rem] text-[0.4rem] rounded-full;
+	}
+
+	.hasBg {
+		@apply lg:bg-itemBg;
+	}
+
+	.card {
+		@apply lg:rounded-xl lg:border lg:border-disabled;
+	}
+
+	.card-sm {
+		@apply rounded-xl border border-disabled;
 	}
 
 	.card-padding {
-		@apply p-4 gap-2 md:gap-4
+		@apply p-4 gap-2 lg:gap-4 lg:p-6;
+	}
+
+	[class*='-line'].card-padding {
+		@apply py-6;
+	}
+
+	.page-padding {
+		@apply p-4 lg:p-0;
+	}
+
+	ion-icon {
+		@apply transition-all duration-300;
+	}
+
+	.landing_btn-outline {
+		@apply border-primaryBg border border-solid rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs;
 	}
 }

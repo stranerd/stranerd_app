@@ -1,23 +1,51 @@
 <template>
-	<router-link :to="`/classes/${classInst.id}`"
-		class="rounded-xl bg-white gap-2 p-4 flex items-center w-full">
-		<Avatar :name="classInst.name" :size="40" :src="classInst.photo" class="md:hidden" />
-		<Avatar :name="classInst.name" :size="48" :src="classInst.photo" class="hidden md:inline" />
-		<div class="flex flex-col">
-			<ion-text class="text-main_dark font-500 capitalize">
-				{{ classInst.name }}
-			</ion-text>
-			<ion-text class="text-sub text-gray">
-				{{ classInst.members.length }} {{ pluralize(classInst.members.length, 'member', 'members') }}
-			</ion-text>
+	<div class="flex flex-col card-padding !gap-4 !px-0">
+		<div class="flex gap-4 items-center cursor-pointer card-padding !py-0" @click="show = !show">
+			<Avatar :name="classInst.name" :size="40" :src="classInst.photo" />
+			<IonText class="font-bold capitalize truncate w-full">{{ classInst.name }}</IonText>
+			<span>
+				<IonIcon :class="{'rotate-90': show}" :icon="chevronForwardOutline" />
+			</span>
 		</div>
-	</router-link>
+		<div v-if="show" class="flex flex-col text-secondaryText">
+			<transition-group appear name="fade">
+				<router-link v-for="{ name, path, icon, unRead } in [
+						{ name: 'Announcements', path: 'announcements', icon: megaphoneOutline, unRead: !!unReadAnnouncements },
+						{ name: 'Events', path: 'events', icon: calendarOutline, unRead: !!unReadEvents },
+						{ name: 'Timetable', path: 'timetable', icon: calendarClearOutline, unRead: !!unReadTimetable },
+						{ name: 'Scheme of Work', path: 'schemes', icon: listOutline, unRead: !!unReadSchemes },
+						{ name: 'Library', path: 'library', icon: libraryOutline, unRead: false },
+						{ name: 'About', path: '', icon: informationCircleOutline, unRead: false }
+					]" :key="path" :to="`/classes/${classInst.id}/${path}`"
+					class="flex gap-4 items-center px-6 py-3" exact-active-class="hasBg">
+					<IonIcon :icon="icon" />
+					<IonText>{{ name }}</IonText>
+					<div class="flex-1" />
+					<IonIcon v-if="unRead" :icon="ellipse" class="dot text-info" />
+				</router-link>
+			</transition-group>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { ClassEntity } from '@modules/classes'
-import { pluralize } from '@utils/commons'
+import {
+	calendarClearOutline,
+	calendarOutline,
+	chevronForwardOutline,
+	ellipse,
+	informationCircleOutline,
+	libraryOutline,
+	listOutline,
+	megaphoneOutline,
+	peopleOutline
+} from 'ionicons/icons'
+import { useAnnouncementList } from '@app/composable/classes/announcements'
+import { useEventList } from '@app/composable/classes/events'
+import { useTimetable } from '@app/composable/classes/timetable'
+import { useSchemesList } from '@app/composable/classes/schemes'
 
 export default defineComponent({
 	name: 'ClassListCard',
@@ -27,8 +55,27 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup () {
-		return { pluralize }
+	setup (props) {
+		const show = ref(true)
+		const { unReadAnnouncements } = useAnnouncementList(props.classInst.id)
+		const { unReadEvents } = useEventList(props.classInst.id)
+		const { unReadTimetable } = useTimetable(props.classInst.id)
+		const { unReadSchemes } = useSchemesList(props.classInst.id)
+		return {
+			show, unReadAnnouncements, unReadEvents, unReadTimetable, unReadSchemes,
+			chevronForwardOutline, informationCircleOutline, libraryOutline, ellipse,
+			megaphoneOutline, peopleOutline, listOutline, calendarOutline, calendarClearOutline
+		}
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+.fade-enter-from, .fade-leave-to {
+	opacity: 0;
+}
+
+.fade-enter-active, .fade-leave-active {
+	transition: opacity .25s ease-in-out;
+}
+</style>

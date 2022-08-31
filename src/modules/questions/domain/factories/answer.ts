@@ -11,30 +11,18 @@ import { AnswerEntity } from '../entities/answer'
 import { AnswerToModel } from '../../data/models/answer'
 
 type Content = UploadedFile | Media
-type Keys = {
-	title: string, body: string, questionId: string, attachments: Content[]
-}
 
-export class AnswerFactory extends BaseFactory<AnswerEntity, AnswerToModel, Keys> {
+export class AnswerFactory extends BaseFactory<AnswerEntity, AnswerToModel, AnswerToModel & { attachments: Content[] }> {
 	readonly rules = {
-		title: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		attachments: { required: true, rules: [isArrayOfX((com) => isImage(com).valid, 'images'), hasLessThanX(6)] },
-		body: { required: true, rules: [isString] },
+		body: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
 		questionId: { required: true, rules: [isString, isLongerThanX(0)] }
 	}
 
 	reserved = ['questionId']
 
 	constructor () {
-		super({ title: '', body: '', questionId: '', attachments: [] })
-	}
-
-	get title () {
-		return this.values.title
-	}
-
-	set title (value: string) {
-		this.set('title', value)
+		super({ body: '', questionId: '', attachments: [] })
 	}
 
 	get body () {
@@ -61,7 +49,6 @@ export class AnswerFactory extends BaseFactory<AnswerEntity, AnswerToModel, Keys
 	removeAttachment = (value: Content) => this.set('attachments', this.values.attachments.filter((doc) => doc.name !== value.name))
 
 	loadEntity = (entity: AnswerEntity) => {
-		this.title = entity.title
 		this.body = entity.body
 		this.questionId = entity.questionId
 		this.set('attachments', entity.attachments)
@@ -74,8 +61,8 @@ export class AnswerFactory extends BaseFactory<AnswerEntity, AnswerToModel, Keys
 				return doc
 			}))
 			this.set('attachments', docs)
-			const { attachments, title, body, questionId } = this.validValues
-			return { attachments: attachments as Media[], title, body, questionId }
+			const { attachments, body, questionId } = this.validValues
+			return { attachments: attachments as Media[], body, questionId }
 		} else {
 			throw new Error('Validation errors')
 		}

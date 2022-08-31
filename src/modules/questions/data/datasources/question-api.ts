@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { QuestionFromModel, QuestionToModel } from '../models/question'
 import { QuestionBaseDataSource } from './question-base'
 
@@ -7,7 +7,7 @@ export class QuestionApiDataSource implements QuestionBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/questions/questions')
+		this.stranerdClient = new HttpClient(apiBase + '/questions/questions')
 	}
 
 	async create (data: QuestionToModel) {
@@ -15,7 +15,7 @@ export class QuestionApiDataSource implements QuestionBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, QuestionFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, QuestionFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class QuestionApiDataSource implements QuestionBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async markBestAnswer (questionId: string, answerId: string) {

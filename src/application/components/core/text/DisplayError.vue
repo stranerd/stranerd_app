@@ -1,16 +1,14 @@
 <template>
-	<ion-text v-if="error" class="text-sub text-red">
+	<IonText v-if="error" class="text-sm text-danger">
 		{{ error }}
-	</ion-text>
+	</IonText>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { IonText } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'DisplayError',
-	components: { IonText },
 	props: {
 		error: {
 			type: String,

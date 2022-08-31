@@ -1,9 +1,9 @@
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Ref, ref, watch } from 'vue'
-import { ProfileUpdateFactory, UpdateProfile } from '@modules/auth'
+import { AuthUseCases, ProfileUpdateFactory } from '@modules/auth'
 import { useAuth } from '@app/composable/auth/auth'
 import { UserSchoolFactory } from '@modules/users/domain/factories/userSchool'
-import { UpdateUserSchool } from '@modules/users'
+import { UsersUseCases } from '@modules/users'
 
 export const useProfileUpdate = () => {
 	const factory = ref(new ProfileUpdateFactory()) as Ref<ProfileUpdateFactory>
@@ -13,15 +13,15 @@ export const useProfileUpdate = () => {
 	const { user } = useAuth()
 
 	if (user.value) factory.value.loadEntity(user.value)
-	watch(() => user.value?.hash, () => user.value && factory.value.loadEntity(user.value))
+	watch(user, () => user.value && factory.value.loadEntity(user.value))
 
-	const updateProfile = async () => {
+	const updateProfile = async (skipAlert = false) => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await UpdateProfile.call(factory.value)
-				await setMessage('Profile updated successfully!', true)
+				await AuthUseCases.updateProfile(factory.value)
+				await setMessage('Profile updated successfully!', skipAlert)
 			} catch (error) {
 				await setError(error)
 			}
@@ -40,14 +40,14 @@ export const useUserSchoolUpdate = () => {
 	const { user } = useAuth()
 
 	if (user.value) factory.value.loadEntity(user.value)
-	watch(() => user.value?.hash, () => user.value && factory.value.loadEntity(user.value))
+	watch(user, () => user.value && factory.value.loadEntity(user.value))
 
 	const updateSchool = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await UpdateUserSchool.call(factory.value)
+				await UsersUseCases.updateSchool(factory.value)
 				await setMessage('Updated successfully!')
 			} catch (error) {
 				await setError(error)

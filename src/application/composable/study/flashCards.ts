@@ -1,15 +1,5 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
-import {
-	AddFlashCard,
-	DeleteFlashCard,
-	EditFlashCard,
-	FindFlashCard,
-	FlashCardEntity,
-	FlashCardFactory,
-	GetFlashCards,
-	ListenToFlashCard,
-	ListenToFlashCards
-} from '@modules/study'
+import { FlashCardEntity, FlashCardFactory, FlashCardsUseCases } from '@modules/study'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
@@ -22,29 +12,25 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
-const listener = useListener(async () => {
-	const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
-	return await ListenToFlashCards.call({
-		created: async (entity) => {
-			addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		updated: async (entity) => {
-			addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		deleted: async (entity) => {
-			const index = global.flashCards.value.findIndex((q) => q.id === entity.id)
-			if (index !== -1) global.flashCards.value.splice(index, 1)
-		}
-	}, lastDate)
-})
+const listener = useListener(async () => await FlashCardsUseCases.listen({
+	created: async (entity) => {
+		addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
+	},
+	updated: async (entity) => {
+		addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
+	},
+	deleted: async (entity) => {
+		const index = global.flashCards.value.findIndex((q) => q.id === entity.id)
+		if (index !== -1) global.flashCards.value.splice(index, 1)
+	}
+}, global.flashCards.value.at(-1)?.createdAt))
 
 export const useFlashCardList = () => {
 	const fetchFlashCards = async () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const lastDate = global.flashCards.value[global.flashCards.value.length - 1]?.createdAt
-			const flashCards = await GetFlashCards.call(lastDate)
+			const flashCards = await FlashCardsUseCases.get(global.flashCards.value.at(-1)?.createdAt)
 			global.hasMore.value = !!flashCards.pages.next
 			flashCards.results.forEach((f) => addToArray(global.flashCards.value, f, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
@@ -77,7 +63,7 @@ export const useCreateFlashCard = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const flashCard = await AddFlashCard.call(factory.value)
+				const flashCard = await FlashCardsUseCases.add(factory.value)
 				await setMessage('FlashCard submitted successfully')
 				await router.push(`/study/flashCards/${flashCard.id}`)
 				factory.value.reset()
@@ -110,7 +96,7 @@ export const useEditFlashCard = (flashCardId: string) => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const flashCard = await EditFlashCard.call(flashCardId, factory.value)
+				const flashCard = await FlashCardsUseCases.update(flashCardId, factory.value)
 				await setMessage('FlashCard updated successfully')
 				await router.push(`/study/flashCards/${flashCard.id}`)
 				factory.value.reset()
@@ -138,7 +124,7 @@ export const useDeleteFlashCard = (flashCardId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteFlashCard.call(flashCardId)
+				await FlashCardsUseCases.delete(flashCardId)
 				global.flashCards.value = global.flashCards.value
 					.filter((q) => q.id !== flashCardId)
 				await setMessage('FlashCard deleted successfully')
@@ -171,7 +157,7 @@ export const useFlashCard = (flashCardId: string) => {
 				await setLoading(false)
 				return
 			}
-			flashCard = await FindFlashCard.call(flashCardId)
+			flashCard = await FlashCardsUseCases.find(flashCardId)
 			if (flashCard) addToArray(global.flashCards.value, flashCard, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
@@ -179,7 +165,7 @@ export const useFlashCard = (flashCardId: string) => {
 		await setLoading(false)
 	}
 	const listener = useListener(async () => {
-		return await ListenToFlashCard.call(flashCardId, {
+		return await FlashCardsUseCases.listenToOne(flashCardId, {
 			created: async (entity) => {
 				addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
 			},

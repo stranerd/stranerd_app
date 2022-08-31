@@ -1,31 +1,28 @@
 import { computed, onMounted, Ref, ref } from 'vue'
-import {
-	AddDepartment,
-	DeleteDepartment,
-	DepartmentEntity,
-	DepartmentFactory,
-	EditDepartment,
-	GetDepartments
-} from '@modules/school'
+import { DepartmentEntity, DepartmentFactory, DepartmentsUseCases } from '@modules/school'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
+import { useRouter } from 'vue-router'
 
 const global = {
 	fetched: ref(false),
 	departments: ref([] as DepartmentEntity[]),
+	faculties: {} as Record<string, boolean>,
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
 
-const fetchDepartments = async () => {
+const fetchDepartments = async (facultyId: string) => {
+	if (global.faculties[facultyId]) return
 	await global.setError('')
 	await global.setLoading(true)
 	try {
-		const departments = await GetDepartments.call()
+		const departments = await DepartmentsUseCases.getFacultyDepartments(facultyId)
 		departments.results.forEach((c) => addToArray(global.departments.value, c, (e) => e.id, (e) => e.name, true))
 		global.fetched.value = true
+		global.faculties[facultyId] = true
 	} catch (error) {
 		await global.setError(error)
 	}
@@ -33,20 +30,10 @@ const fetchDepartments = async () => {
 }
 
 export const useDepartmentList = () => {
-	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchDepartments()
-	})
-	return { ...global }
+	return { ...global, fetchDepartments }
 }
 
-export const getDepartmentsByFaculty = (facultyId: string) => computed({
-	get: () => global.departments.value.filter((c) => c.facultyId === facultyId),
-	set: (departments) => {
-		departments.forEach((c) => addToArray(global.departments.value, c, (e) => e.id, (e) => e.name, true))
-	}
-})
-
-export const useDepartment = (id: string) => {
+export const useDepartment = (facultyId: string, id: string) => {
 	const department = computed({
 		get: () => global.departments.value.find((s) => s.id === id) ?? null,
 		set: (c) => {
@@ -54,7 +41,7 @@ export const useDepartment = (id: string) => {
 		}
 	})
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchDepartments()
+		if (!global.faculties[facultyId]) await fetchDepartments(facultyId)
 	})
 
 	return { department }
@@ -67,6 +54,7 @@ export const openDepartmentCreateModal = async (facultyId: string) => {
 }
 
 export const useCreateDepartment = () => {
+	const router = useRouter()
 	const factory = ref(new DepartmentFactory()) as Ref<DepartmentFactory>
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -78,11 +66,12 @@ export const useCreateDepartment = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const department = await AddDepartment.call(factory.value)
+				const department = await DepartmentsUseCases.add(factory.value)
 				addToArray(global.departments.value, department, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeCreateDepartment()
 				await setMessage('Department created successfully')
+				await router.push(`/admin/school/institutions/${department.institutionId}/faculties/${department.facultyId}/departments/${department.id}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -100,6 +89,7 @@ export const openDepartmentEditModal = async (department: DepartmentEntity) => {
 }
 
 export const useEditDepartment = () => {
+	const router = useRouter()
 	const factory = ref(new DepartmentFactory()) as Ref<DepartmentFactory>
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -112,11 +102,12 @@ export const useEditDepartment = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const updatedDepartment = await EditDepartment.call(editingDepartment!.id, factory.value)
+				const updatedDepartment = await DepartmentsUseCases.update(editingDepartment!.id, factory.value)
 				addToArray(global.departments.value, updatedDepartment, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeEditDepartment()
 				await setMessage('Department updated successfully')
+				await router.push(`/admin/school/institutions/${updatedDepartment.institutionId}/faculties/${updatedDepartment.facultyId}/departments/${updatedDepartment.id}`)
 			} catch (error) {
 				await setError(error)
 			}
@@ -127,7 +118,7 @@ export const useEditDepartment = () => {
 	return { factory, loading, error, editDepartment }
 }
 
-export const useDeleteDepartment = (department: DepartmentEntity) => {
+export const useDeleteDepartment = (departmentId: string) => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
@@ -141,9 +132,9 @@ export const useDeleteDepartment = (department: DepartmentEntity) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteDepartment.call(department.id)
+				await DepartmentsUseCases.delete(departmentId)
 				global.departments.value = global.departments.value
-					.filter((s) => s.id !== department.id)
+					.filter((s) => s.id !== departmentId)
 				await setMessage('Department deleted successfully')
 			} catch (error) {
 				await setError(error)

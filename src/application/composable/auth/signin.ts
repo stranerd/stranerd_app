@@ -1,14 +1,6 @@
 import { onMounted, Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import {
-	CompleteEmailVerification,
-	EmailSigninFactory,
-	EmailSignupFactory,
-	SendVerificationEmail,
-	SigninWithEmail,
-	SigninWithGoogle,
-	SignupWithEmail
-} from '@modules/auth'
+import { AuthUseCases, EmailSigninFactory, EmailSignupFactory } from '@modules/auth'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'
@@ -43,7 +35,7 @@ export const useEmailSignin = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const user = await SigninWithEmail.call(factory.value, {
+				const user = await AuthUseCases.signinWithEmail(factory.value, {
 					referrer: await getReferrerId()
 				})
 				await createSession(user, router)
@@ -66,7 +58,7 @@ export const useEmailSignup = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const user = await SignupWithEmail.call(factory.value, {
+				const user = await AuthUseCases.signupWithEmail(factory.value, {
 					referrer: await getReferrerId()
 				})
 				await createSession(user, router)
@@ -80,14 +72,15 @@ export const useEmailSignup = () => {
 	return { factory, loading, error, signup }
 }
 
-export const useCompleteEmailVerification = (token: string) => {
+export const useCompleteEmailVerification = () => {
 	const router = useRouter()
+	const token = ref('')
 	const { error, loading, setError, setLoading } = global.emailVerificationComplete
 	const completeVerification = async () => {
 		await setError('')
 		await setLoading(true)
 		try {
-			const user = await CompleteEmailVerification.call(token)
+			const user = await AuthUseCases.completeEmailVerification(token.value)
 			await createSession(user, router)
 		} catch (error) {
 			await setError(error)
@@ -98,8 +91,7 @@ export const useCompleteEmailVerification = (token: string) => {
 		}
 		await setLoading(false)
 	}
-	onMounted(completeVerification)
-	return { loading, error, completeVerification }
+	return { token, loading, error, completeVerification }
 }
 
 export const setEmailVerificationEmail = (email: string) => global.emailVerificationRequest.email.value = email
@@ -114,7 +106,7 @@ export const useEmailVerificationRequest = () => {
 		await setError('')
 		await setLoading(true)
 		try {
-			await SendVerificationEmail.call(email)
+			await AuthUseCases.sendVerificationEmail(email)
 			await setMessage(`A verification email was just sent to ${email}. Proceed to your email to complete your verification.`)
 		} catch (error) {
 			await setError(error)
@@ -125,20 +117,19 @@ export const useEmailVerificationRequest = () => {
 
 	return {
 		email: global.emailVerificationRequest.email,
-		loading, error, message,
-		sendVerificationEmail
+		loading, error, message, sendVerificationEmail
 	}
 }
 
 export const useGoogleSignin = () => {
 	const router = useRouter()
 	const { error, loading, setError, setLoading } = global.emailVerificationRequest
-	const signin = async (idToken: string) => {
+	const signin = async (data: { accessToken: string, idToken: string }) => {
 		await setError('')
 		if (!loading.value) {
 			await setLoading(true)
 			try {
-				const user = await SigninWithGoogle.call(idToken, {
+				const user = await AuthUseCases.signinWithGoogle(data, {
 					referrer: await getReferrerId()
 				})
 				await createSession(user, router)

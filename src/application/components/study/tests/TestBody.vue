@@ -1,40 +1,38 @@
 <template>
-	<div class="flex flex-col lg:my-8 md:p-4 lg:p-0 pb-[68px] md:pb-[82px] lg:pb-[88px]">
-		<div v-if="tab === 'list'" class="flex flex-col md:gap-8">
-			<TestQuestion v-for="(question, index) in questions" :key="question.hash" :answer="updateAnswer"
-				:question="question" :questionIndex="index" :test="test" />
-		</div>
+	<div class="flex flex-col">
+		<BlockLoading v-if="loading" />
 
-		<div class="footer-shadow fixed bottom-0 inset-x-0 bg-white z-[10]">
-			<div :style="`width:${test.progress * 100}%`" class="bg-primary h-1" />
-			<div class="lg:w-8/12 w-full px-4 mx-auto flex items-center justify-between py-2">
+		<TestQuestion v-for="(question, index) in questions" :key="question.hash" :answer="updateAnswer"
+			:question="question" :questionIndex="index" :test="test" :total="questions.length" />
+
+		<div class="pb-[50px]" />
+
+		<div class="footer-shadow fixed bottom-0 inset-x-0 bg-bodyBg z-[10] text-secondaryText text-sm">
+			<div :style="`width:${test.progress * 100}%`" class="h-1" />
+			<div class="w-full px-4 mx-auto flex items-center justify-between py-2">
 				<div>
-					<ion-text v-if="test.isOBJ" class="text-main_dark">
-						{{ test.answered }}/{{ formatNumber(questions.length) }} answered
-					</ion-text>
+					<IonText v-if="test.isOBJ" class="font-bold">
+						{{ test.answered }}/{{ formatNumber(questions.length) }}
+					</IonText>
 				</div>
 
 				<div>
 					<template v-if="test.isTimed && !test.done">
-						<div class="h-2 w-2 bg-red-500 rounded-full mr-4" />
-						<ion-text class="text-icon_inactive">
-							{{ countDown }}
-						</ion-text>
+						<div class="h-2 w-2 bg-danger rounded-full mr-4" />
+						<IonText>{{ countDown }}</IonText>
 					</template>
 				</div>
 
 				<div>
 					<router-link v-if="test.done && test.isTimed" :to="`/study/tests/${test.id}/results`">
-						<ion-button class="btn-primary btn-lgx">See Results</ion-button>
+						<IonButton class="btn-outline">See Results</IonButton>
 					</router-link>
-					<ion-button v-if="!test.done" class="btn-primary btn-lgx" @click="openSubmitTest">
+					<IonButton v-if="!test.done" class="btn-primary" @click="openSubmitTest">
 						{{ test.isTimed ? 'Submit' : 'End Study' }}
-					</ion-button>
+					</IonButton>
 				</div>
 			</div>
 		</div>
-
-		<PageLoading v-if="loading" />
 	</div>
 </template>
 
@@ -60,7 +58,7 @@ export default defineComponent({
 	},
 	setup (props) {
 		const router = useRouter()
-		const { error, tab, questionIndex, loading, questions, updateAnswer, endTest } = useTestDetails(props.test)
+		const { error, loading, questions, updateAnswer, endTest } = useTestDetails(props.test)
 		const { diffInSec } = useCountdown(props.test.endedAt, {})
 		const countDown = computed({
 			get: () => getDigitalTime(diffInSec.value),
@@ -79,28 +77,8 @@ export default defineComponent({
 		}
 		return {
 			error, loading, questions, openSubmitTest, updateAnswer,
-			countDown, tab, questionIndex, formatNumber
+			countDown, formatNumber
 		}
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	.btn-lgx {
-		@media (min-width: $lg) {
-			--padding-top: 1.25rem;
-			--padding-bottom: 1.25rem;
-			--padding-start: 3rem;
-			--padding-end: 3rem;
-		}
-	}
-
-	ion-select {
-		--background: #F7F7FC;
-		background: #F7F7FC;
-		--padding-start: 1rem;
-		--padding-end: 1rem;
-		--padding-top: 0.8rem;
-		--padding-bottom: 0.8rem;
-	}
-</style>

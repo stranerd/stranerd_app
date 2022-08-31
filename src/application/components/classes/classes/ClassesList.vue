@@ -1,35 +1,43 @@
 <template>
-	<div class="showcase-flex">
-		<div class="bg-white hidden md:flex rounded-xl items-center justify-between gap-2 p-4">
-			<ion-text class="text-main_dark leading-tight text-heading font-bold">
-				My Classes
-			</ion-text>
-			<div class="flex items-center gap-4 w-full md:w-auto border-bottom-line">
-				<router-link to="/classes/create">
-					<ion-button class="btn-primary font-bold">
-						Create a class
-					</ion-button>
-				</router-link>
+	<div class="flex flex-col">
+		<form class="p-4 border-bottom-line" @submit.prevent="search">
+			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
+		</form>
+		<template v-if="searchMode">
+			<div v-if="searchResults.length === 0" class="p-4">
+				<EmptyState class="bg-itemBg p-4 rounded-xl"
+					info="If you cannot find your class, contact your class representative to create it." />
 			</div>
-		</div>
-		<EmptyState v-if="!loading && !error && classes.length === 0" info="You are not a member of any class!" />
-		<ClassListCard v-for="classInst in classes" :key="classInst" :classInst="classInst" />
-		<IonSkeletonText v-if="loading" animated class="h-28 rounded-xl mx-4" />
+			<SearchClassListCard v-for="classInst in searchResults" :key="classInst.hash" :classInst="classInst"
+				class="border-bottom-line" />
+		</template>
+		<template v-else>
+			<EmptyState v-if="!loading && !error && classes.length === 0" class="border-bottom-line"
+				info="No classes found!" />
+			<SearchClassListCard v-for="classInst in classes" :key="classInst.hash" :classInst="classInst"
+				class="border-bottom-line" />
+		</template>
+		<BlockLoading v-if="loading" />
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ClassListCard from '@app/components/classes/classes/ClassListCard.vue'
-import { useClassList } from '@app/composable/classes/classes'
-import { IonSkeletonText } from '@ionic/vue'
+import { useClassesList } from '@app/composable/classes/classes'
+import SearchClassListCard from '@app/components/classes/classes/SearchClassListCard.vue'
 
 export default defineComponent({
 	name: 'ClassesList',
-	components: { ClassListCard, IonSkeletonText },
+	components: { SearchClassListCard },
 	setup () {
-		const { myClasses: classes, error, loading } = useClassList()
-		return { classes, error, loading }
+		const {
+			classes, error, loading,
+			searchMode, searchValue, searchResults, search
+		} = useClassesList()
+		return {
+			classes, error, loading,
+			searchMode, searchValue, searchResults, search
+		}
 	}
 })
 </script>

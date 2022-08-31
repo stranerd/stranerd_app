@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { NotificationFromModel } from '../models/notification'
 import { NotificationBaseDataSource } from './notification-base'
 
@@ -7,11 +7,11 @@ export class NotificationApiDataSource implements NotificationBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/users/notifications')
+		this.stranerdClient = new HttpClient(apiBase + '/users/notifications')
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, NotificationFromModel | null>(`/${id}`, {})
+		return await this.stranerdClient.get<any, NotificationFromModel | null>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {

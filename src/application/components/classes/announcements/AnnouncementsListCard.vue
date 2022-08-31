@@ -1,16 +1,22 @@
 <template>
-	<div class="bg-white rounded-xl flex flex-col card-padding">
-		<div class="flex gap-2 items-center">
-			<Avatar :id="announcement.userId" :name="announcement.userBio.fullName"
-				:size="32" :src="announcement.userBio.photo" />
-			<IonText class="text-main_dark flex gap-1 items-center">
-				<span>{{ announcement.userBio.fullName }}</span>
-				<IonIcon v-if="announcement.isUserVerified" :icon="checkmarkCircleOutline" color="primary" />
+	<div class="flex flex-col !gap-4 card-sm card-padding">
+		<span class="leading-none" v-html="announcement.formattedBody" />
+		<div class="flex gap-2 items-center text-sm text-secondaryText">
+			<Avatar :id="announcement.user.id" :name="announcement.user.bio.fullName"
+				:size="24" :src="announcement.user.bio.photo" />
+			<IonText class="flex gap-1 items-center font-bold">
+				<span>{{ announcement.user.bio.fullName }}</span>
+				<Verified :verified="announcement.isUserVerified" />
 			</IonText>
-			<span class="dot bg-icon_inactive" />
-			<IonText class="text-gray">{{ formatTime(announcement.createdAt) }}</IonText>
+			<IonIcon :icon="ellipse" class="dot" />
+			<IonText>{{ formatTime(announcement.createdAt) }}</IonText>
+
+			<span class="ml-auto flex items-center gap-2"
+				@click="classInst.admins.includes(id) ? openViewedByModal(classInst, announcement.readAt) : null">
+				<IonIcon :icon="eyeOutline" />
+				<IonText>{{ formatNumber(Object.keys(announcement.readAt).length) }}</IonText>
+			</span>
 		</div>
-		<IonText class="text-main_dark">{{ announcement.body }}</IonText>
 	</div>
 </template>
 
@@ -18,8 +24,11 @@
 import { defineComponent, onMounted } from 'vue'
 import { AnnouncementEntity, ClassEntity } from '@modules/classes'
 import { formatTime } from '@utils/dates'
-import { checkmarkCircleOutline } from 'ionicons/icons'
-import { saveAnnouncementReadState } from '@app/composable/classes/announcements'
+import { useAuth } from '@app/composable/auth/auth'
+import { ellipse, eyeOutline } from 'ionicons/icons'
+import { formatNumber } from '@utils/commons'
+import { markAnnouncementSeen } from '@app/composable/classes/announcements'
+import { openViewedByModal } from '@app/composable/classes/classes'
 
 export default defineComponent({
 	name: 'AnnouncementsListCard',
@@ -34,10 +43,11 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
+		const { id } = useAuth()
 		onMounted(async () => {
-			await saveAnnouncementReadState(props.announcement)
+			await markAnnouncementSeen(props.announcement, id.value)
 		})
-		return { formatTime, checkmarkCircleOutline }
+		return { id, formatTime, formatNumber, ellipse, eyeOutline, openViewedByModal }
 	}
 })
 </script>

@@ -1,30 +1,21 @@
 <template>
-	<div class="flex flex-col">
-		<h2 class="text-main_dark text-heading font-bold px-4 md:px-0">
-			Answers <span class="text-gray">({{ question.answers.length }})</span>
+	<div class="py-6 showcase-flex">
+		<h2 class="px-4 lg:p-0 pb-4">
+			<span class="font-semibold">Answers</span> ({{ formatNumber(question.answers.length) }})
 		</h2>
-		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :question="question" />
-		<template v-if="answers.length === 0">
-			<EmptyState v-if="showAnswerButton"
-				:info="`No answers yet. <br/>Help ${question.userName} answer this question!`"
-				class="mt-4 text-sub"
-			/>
-
-			<EmptyState v-else
-				class="mt-4 text-sub"
-				info="No answers yet"
-			/>
-		</template>
+		<BlockLoading v-if="loading" />
+		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :like="likes[answer.id]"
+			:question="question" />
+		<EmptyState v-if="answers.length === 0" info="No answers yet" />
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { openAnswerModal, useAnswerList } from '@app/composable/questions/answers'
+import { defineComponent } from 'vue'
+import { useAnswerList } from '@app/composable/questions/answers'
 import { QuestionEntity } from '@modules/questions'
 import AnswersListCard from '@app/components/questions/answers/AnswersListCard.vue'
-import EmptyState from '../../core/EmptyState.vue'
-import { useAuth } from '@app/composable/auth/auth'
+import { formatNumber } from '@utils/commons'
 
 export default defineComponent({
 	name: 'AnswersList',
@@ -34,21 +25,10 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: { AnswersListCard, EmptyState },
+	components: { AnswersListCard },
 	setup (props) {
-		const { id } = useAuth()
-		const { answers, error, loading } = useAnswerList(props.question.id)
-
-		const showAnswerButton = computed({
-			get: () => props.question.userId !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
-			set: () => {
-			}
-		})
-
-		return {
-			openAnswerModal: () => openAnswerModal(props.question),
-			answers, error, loading, showAnswerButton
-		}
+		const { answers, likes, error, loading } = useAnswerList(props.question.id)
+		return { answers, likes, error, loading, formatNumber }
 	}
 })
 </script>

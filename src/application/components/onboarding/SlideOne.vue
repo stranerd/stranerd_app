@@ -1,12 +1,11 @@
 <template>
-	<img alt="" class="w-12" src="@app/assets/images/New/testPrep.svg" />
-	<ion-text class="text-xl text-main_dark font-bold">
-		Test Prep
-	</ion-text>
-	<ion-text class="text-main_dark max-w-[80vw] text-center">
-		Practice tests and study solutions of all available questions on gateway exams (WAEC, JAMB, JUPEB
-		e.t.c.).
-	</ion-text>
+	<img alt="" src="@app/assets/images/onboarding/one.svg" />
+	<IonText class="text-2xl text-secondaryText font-bold mt-20">
+		Welcome to Stranerd
+	</IonText>
+	<IonText class="text-secondaryText max-w-[75vw] text-center text-lg">
+		All your academic activity in one place, for the first time.
+	</IonText>
 </template>
 
 <script lang="ts">

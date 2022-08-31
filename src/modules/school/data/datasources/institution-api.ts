@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { InstitutionFromModel, InstitutionToModel } from '../models/institution'
 import { InstitutionBaseDataSource } from './institution-base'
 
@@ -7,7 +7,7 @@ export class InstitutionApiDataSource implements InstitutionBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/school/institutions')
+		this.stranerdClient = new HttpClient(apiBase + '/school/institutions')
 	}
 
 	async create (data: InstitutionToModel) {
@@ -15,7 +15,7 @@ export class InstitutionApiDataSource implements InstitutionBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, InstitutionFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, InstitutionFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class InstitutionApiDataSource implements InstitutionBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: InstitutionToModel) {

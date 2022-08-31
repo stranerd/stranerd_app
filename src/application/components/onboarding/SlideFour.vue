@@ -1,23 +1,18 @@
 <template>
-	<ion-icon :icon="chatboxEllipses" class=" text-5xl text-cyan" />
-	<ion-text class="text-xl text-main_dark font-bold">
-		Expert Answers
-	</ion-text>
-	<ion-text class="text-main_dark max-w-[80vw] text-center">
-		Ask questions & get expert answers and detailed explanations to help with your homework and studying.
-	</ion-text>
+	<img alt="" src="@app/assets/images/onboarding/four.svg" />
+	<IonText class="text-2xl text-secondaryText font-bold mt-20">
+		Study Materials
+	</IonText>
+	<IonText class="text-secondaryText max-w-[75vw] text-center text-lg">
+		Use test preps, create flashcards, write notes and check archives for more.
+	</IonText>
 </template>
 
 <script lang="ts">
-import { chatboxEllipses } from 'ionicons/icons'
+import { defineComponent } from 'vue'
 
-export default {
-	name: 'SlideFour',
-	setup () {
-		return {
-			chatboxEllipses
-		}
-	}
-}
+export default defineComponent({
+	name: 'SlideFour'
+})
 </script>
 

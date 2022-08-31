@@ -1,26 +1,19 @@
 <template>
-	<Justified>
-		<div>
-			<div class="blueTop py-4">
-				<ion-text class="text-heading font-bold text-main_dark text-center">
-					Nerds Terms and Conditions
-				</ion-text>
-			</div>
-			<div class="lg:w-8/12 w-full mx-auto bg-white">
-				<Note link="/legal/nerds-terms-and-conditions.pdf" />
-			</div>
-		</div>
-	</Justified>
+	<DefaultLayout>
+		<PdfReader link="/legal/nerds-terms-and-conditions.pdf" />
+	</DefaultLayout>
 </template>
 
 <script lang="ts">
-import Justified from '@app/layouts/Justified.vue'
 import { defineComponent } from 'vue'
-import Note from '@app/components/core/media/Note.vue'
+import PdfReader from '@app/components/core/media/PdfReader.vue'
+import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
 	name: 'LegalNerdsTermsAndConditions',
-	displayName: 'Nerds Terms and Conditions',
-	components: { Justified, Note }
+	components: { PdfReader },
+	setup () {
+		useRouteMeta('Nerds Terms and Conditions', { back: true })
+	}
 })
 </script>

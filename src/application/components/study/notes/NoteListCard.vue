@@ -1,37 +1,48 @@
 <template>
-	<component :is="content ? 'router-link' : 'span'" :to="`/study/notes/${note.id}`"
-		class="w-full bg-white rounded-xl flex flex-col justify-between box-border card-padding text-main_dark">
-		<div class="w-full justify-between items-center flex gap-2">
-			<ion-text class="font-500 truncate w-full">{{ note.title }}</ion-text>
-			<IonSpinner v-if="loading" color="primary" />
-			<IonIcon v-else-if="!content" :icon="downloadOutline" class="text-primary text-xl" @click="download" />
+	<router-link :to="`/study/notes/${note.id}`"
+		class="flex flex-col justify-between card card-padding">
+		<div class="flex gap-4 items-center">
+			<IonText class="font-500 truncate w-full">{{ note.title }}</IonText>
+			<IonIcon :icon="arrowForwardOutline" />
 		</div>
-
-		<div class="w-full flex items-center justify-between gap-2 text-sub">
-			<Tag :index="2" tag="Note">
+		<div class="w-full flex items-center justify-between gap-2 text-sm">
+			<Tag tag="Note">
 				<template v-slot="slotProps">
 					<span class="flex items-center">
-						<ion-icon :icon="documentOutline" class="text-base mr-1" />
-						<ion-text class="text-sub">{{ slotProps.tag }}</ion-text>
+						<IonIcon :icon="documentOutline" class="text-base mr-1" />
+						<IonText class="text-sm">{{ slotProps.tag }}</IonText>
 					</span>
 				</template>
 			</Tag>
-			<div class="flex items-center text-gray gap-2">
-				<Avatar :id="note.userId" :name="note.userBio.fullName" :size="24" :src="note.userBio.photo" />
-				<Share :link="note.shareLink" :text="note.description" :title="note.title" cssClass="text-xl" />
+			<div class="flex items-center gap-3">
+				<Avatar v-if="note.user.id !== id" :id="note.user.id" :name="note.user.bio.fullName"
+					:size="24"
+					:src="note.user.bio.photo" />
+				<Share :link="note.shareLink" :text="note.content" :title="note.title" />
 				<SaveToSet :entity="note" />
+				<SpinLoading v-if="loading" />
+				<IonIcon v-if="note.user.id === id" :icon="settingsOutline" @click.prevent="showMenu" />
 			</div>
 		</div>
-	</component>
+	</router-link>
 </template>
 
 <script lang="ts">
-import { documentOutline, downloadOutline, ellipsisVerticalOutline } from 'ionicons/icons'
+import {
+	arrowForwardOutline,
+	closeOutline,
+	documentOutline,
+	pencilOutline,
+	settingsOutline,
+	trashBinOutline
+} from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { NoteEntity } from '@modules/study'
-import { IonSpinner } from '@ionic/vue'
-import { useDownload } from '@app/composable/meta/media'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
+import { useAuth } from '@app/composable/auth/auth'
+import { openNoteEditModal, useDeleteNote } from '@app/composable/study/notes'
+import { useRouter } from 'vue-router'
+import { actionSheetController } from '@ionic/vue'
 
 export default defineComponent({
 	name: 'NoteListCard',
@@ -39,27 +50,34 @@ export default defineComponent({
 		note: {
 			type: NoteEntity,
 			required: true
+		},
+		edit: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
-	components: { IonSpinner, SaveToSet },
+	components: { SaveToSet },
 	setup (props) {
-		const {
-			loading,
-			content,
-			error,
-			download,
-			deleteFromDownloads
-		} = useDownload(props.note.fileName, props.note.fileLink, 'notes')
-
+		const { id } = useAuth()
+		const { deleteNote, loading } = useDeleteNote(props.note.id)
+		const router = useRouter()
+		const showMenu = async () => {
+			const actionSheet = await actionSheetController.create({
+				buttons: [
+					{
+						text: 'Edit note', icon: pencilOutline,
+						handler: () => openNoteEditModal(props.note, router)
+					},
+					{ text: 'Delete note', role: 'destructive', icon: trashBinOutline, handler: deleteNote },
+					{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
+				]
+			})
+			await actionSheet.present()
+		}
 		return {
-			ellipsisVerticalOutline,
-			documentOutline,
-			downloadOutline,
-			download,
-			loading,
-			content,
-			error,
-			deleteFromDownloads
+			id, settingsOutline, arrowForwardOutline, documentOutline,
+			loading, showMenu
 		}
 	}
 })

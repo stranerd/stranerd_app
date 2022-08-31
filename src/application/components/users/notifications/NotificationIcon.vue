@@ -1,20 +1,30 @@
 <template>
-	<span class="flex items-center">
-		<IonIcon :class="{'text-red': hasUnread}" :icon="hasUnread ? notifications : notificationsOutline" />
-	</span>
+	<router-link class="relative leading-none" to="/account/notifications">
+		<IonIcon :icon="notificationsOutline" />
+		<span v-if="isLoggedIn && unReadCount.length"
+			:style="`width: ${unReadCount.length + 0.5}ch; min-width: 2ch;max-width:3.1ch`"
+			class="absolute bg-headerText text-xs text-headerBg aspect-square rounded-full flex items-center justify-center bottom-[50%] right-[50%] leading-none">
+			<span>{{ unReadCount }}</span>
+		</span>
+	</router-link>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { notifications, notificationsOutline } from 'ionicons/icons'
+import { notificationsOutline } from 'ionicons/icons'
 import { useNotificationList } from '@app/composable/users/notifications'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'NotificationIcon',
 	setup () {
-		const { notifications: allNotifications } = useNotificationList()
-		const hasUnread = computed(() => allNotifications.value.filter((n) => !n.seen).length > 0)
-		return { notifications, notificationsOutline, hasUnread }
+		const { isLoggedIn } = useAuth()
+		const { unRead } = useNotificationList()
+		const unReadCount = computed(() => {
+			if (unRead.value === 0) return ''
+			return unRead.value > 99 ? '99+' : unRead.value.toString()
+		})
+		return { isLoggedIn, notificationsOutline, unReadCount }
 	}
 })
 </script>

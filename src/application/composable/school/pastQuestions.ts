@@ -1,13 +1,5 @@
 import { reactive, Ref, ref } from 'vue'
-import {
-	AddPastQuestion,
-	DeletePastQuestion,
-	EditPastQuestion,
-	GetPastQuestions,
-	PastQuestionEntity,
-	PastQuestionFactory,
-	PastQuestionType
-} from '@modules/school'
+import { PastQuestionEntity, PastQuestionFactory, PastQuestionsUseCases, PastQuestionType } from '@modules/school'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
@@ -30,7 +22,7 @@ const fetchPastQuestions = async () => {
 	await global.setError('')
 	await global.setLoading(true)
 	try {
-		const pastQuestions = await GetPastQuestions.call({
+		const pastQuestions = await PastQuestionsUseCases.getCourseQuestions({
 			institutionId: global.filters.institution,
 			courseId: global.filters.course,
 			year: global.filters.year,
@@ -64,7 +56,7 @@ export const useCreatePastQuestion = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const pastQuestion = await AddPastQuestion.call(factory.value)
+				const pastQuestion = await PastQuestionsUseCases.add(factory.value)
 				addToArray(global.pastQuestions.value, pastQuestion, (e) => e.id, (e) => e.createdAt)
 				factory.value.reset()
 				useSchoolModal().closeCreatePastQuestion()
@@ -98,7 +90,7 @@ export const useEditPastQuestion = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const updatedPastQuestion = await EditPastQuestion.call(editingPastQuestion!.id, factory.value)
+				const updatedPastQuestion = await PastQuestionsUseCases.update(editingPastQuestion!.id, factory.value)
 				addToArray(global.pastQuestions.value, updatedPastQuestion, (e) => e.id, (e) => e.createdAt)
 				factory.value.reset()
 				useSchoolModal().closeEditPastQuestion()
@@ -127,7 +119,7 @@ export const useDeletePastQuestion = (pastQuestion: PastQuestionEntity) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeletePastQuestion.call(pastQuestion.id)
+				await PastQuestionsUseCases.delete(pastQuestion.id)
 				global.pastQuestions.value = global.pastQuestions.value
 					.filter((s) => s.id !== pastQuestion.id)
 				await setMessage('PastQuestion deleted successfully')

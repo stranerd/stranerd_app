@@ -1,13 +1,11 @@
-import { UserBio, UserRoles } from '@modules/users'
 import { ReportData, ReportType } from '../../domain/entities/report'
+import { EmbeddedUser } from '@modules/users'
 
 export interface ReportFromModel extends Omit<ReportToModel, 'type'> {
 	id: string
 	data: ReportData
-	reporterId: string
+	user: EmbeddedUser
 	reportedId: string
-	reporterBio: UserBio
-	reporterRoles: UserRoles
 	createdAt: number
 	updatedAt: number
 }

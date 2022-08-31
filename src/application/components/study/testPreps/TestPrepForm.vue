@@ -57,9 +57,9 @@
 		</div>
 
 		<div class="flex w-full mt-8 items-center gap-6">
-			<ion-button :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
+			<IonButton :disabled="loading || !factory.valid" class="ml-auto btn-primary" type="submit">
 				<slot name="buttonText">Submit</slot>
-			</ion-button>
+			</IonButton>
 		</div>
 
 		<PageLoading v-if="loading" />
@@ -67,22 +67,20 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 import { TestPrepFactory } from '@modules/study'
-import { IonSelect, IonSelectOption } from '@ionic/vue'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
 
 export default defineComponent({
 	name: 'TestPrepForm',
-	components: { IonSelect, IonSelectOption },
 	props: {
 		factory: {
 			type: TestPrepFactory,
 			required: true
 		},
 		submit: {
-			type: Function,
+			type: Function as PropType<() => Promise<void>>,
 			required: true
 		},
 		loading: {
@@ -102,15 +100,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-input, ion-textarea, ion-select {
-		background-color: $color-newGray;
-		border-radius: 0.25rem !important;
-	}
-
-	label {
-		font-size: 1.2rem;
-		font-weight: 500;
-	}
-</style>

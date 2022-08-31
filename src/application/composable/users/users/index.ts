@@ -1,7 +1,8 @@
-import { onUnmounted, onMounted, ref, Ref, watch } from 'vue'
-import { FindUser, ListenToUser, UserEntity } from '@modules/users'
+import { onMounted, onUnmounted, ref, Ref, watch } from 'vue'
+import { UserEntity, UsersUseCases } from '@modules/users'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
+import { useUserModal } from '@app/composable/core/modals'
 
 const global = {} as Record<string, {
 	user: Ref<UserEntity | null>
@@ -25,7 +26,7 @@ export const useUser = (userId: string) => {
 			// Dont fetch if it is the current auth user
 			// Instead get auth user details
 			if (id.value && id.value === userId) global[userId].user.value = user.value
-			else global[userId].user.value = await FindUser.call(userId)
+			else global[userId].user.value = await UsersUseCases.find(userId)
 			global[userId].fetched.value = true
 		} catch (error) {
 			await global[userId].setError(error)
@@ -37,14 +38,14 @@ export const useUser = (userId: string) => {
 		if (id.value && id.value === userId) {
 			// Don't start a listener if it is the current auth user
 			// Instead watch the auth user for changes
-			watch(() => user.value?.hash, () => global[userId].user.value = user.value)
+			watch(user, () => global[userId].user.value = user.value)
 			return () => {
 			}
 		}
 		const callback = async (user: UserEntity) => {
 			global[userId].user.value = user
 		}
-		return await ListenToUser.call(userId, { created: callback, updated: callback, deleted: callback })
+		return await UsersUseCases.listenToOne(userId, { created: callback, updated: callback, deleted: callback })
 	})
 
 	onMounted(async () => {
@@ -60,4 +61,11 @@ export const useUser = (userId: string) => {
 		loading: global[userId].loading,
 		user: global[userId].user
 	}
+}
+
+let profileMenuUser = null as UserEntity | null
+export const getProfileMenuUser = () => profileMenuUser
+export const openProfileMenuModal = (user: UserEntity) => {
+	profileMenuUser = user
+	useUserModal().openProfileMenu()
 }

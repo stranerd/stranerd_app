@@ -1,172 +1,63 @@
 /* Core CSS required for Ionic components to work properly */
-@import '~@ionic/vue/css/core.css';
+@import '@ionic/vue/css/core.css';
 
 /* Basic CSS for apps built with Ionic */
-@import '~@ionic/vue/css/normalize.css';
-@import '~@ionic/vue/css/structure.css';
-@import '~@ionic/vue/css/typography.css';
+@import '@ionic/vue/css/normalize.css';
+@import '@ionic/vue/css/structure.css';
+@import '@ionic/vue/css/typography.css';
 
-/* Optional CSS utils that can be commented out */
-// @import '~@ionic/vue/css/padding.css';
-// @import '~@ionic/vue/css/float-elements.css';
-// @import '~@ionic/vue/css/text-alignment.css';
-// @import '~@ionic/vue/css/text-transformation.css';
-// @import '~@ionic/vue/css/flex-utils.css';
-// @import '~@ionic/vue/css/display.css';
-
-/* Ionic Variables and Theming. For more info, please see:
-http://ionicframework.com/docs/theming/ */
-
-/** Ionic CSS Variables **/
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 
 :root {
-	--ion-font-family: 'Raleway', sans-serif;
+	--ion-text-color: $color-bodyText;
+	--ion-color-step-850: $color-bodyText;
+	--ion-background-color: $color-bodyBg;
+	--ion-font-family: 'DM Sans', sans-serif;
+	--icon-size: 1.4em;
+	font-family: 'DM Sans', sans-serif;
 
 	/** primary **/
-	--ion-color-primary: #546DD3;
-	--ion-color-primary-rgb: 56, 128, 255;
-	--ion-color-primary-contrast: #ffffff;
-	--ion-color-primary-contrast-rgb: 255, 255, 255;
-	--ion-color-primary-shade: #3171e0;
-	--ion-color-primary-tint: #4c8dff;
-
-	/** orange **/
-	--ion-color-orange: #FFA84B;
-	--ion-color-orange-rgb: 255, 168, 75;
-	--ion-color-orange-contrast: #ffffff;
-	--ion-color-orange-contrast-rgb: 255, 255, 255;
-	--ion-color-orange-shade: #FFC86B;
-	--ion-color-orange-tint: #DDA84B;
-
-	/** secondary **/
-	--ion-color-secondary: #FFA84B;
-	--ion-color-secondary-rgb: 61, 194, 255;
-	--ion-color-secondary-contrast: #ffffff;
-	--ion-color-secondary-contrast-rgb: 255, 255, 255;
-	--ion-color-secondary-shade: #36abe0;
-	--ion-color-secondary-tint: #50c8ff;
-
-	/** tertiary **/
-	--ion-color-tertiary: #C864DC;
-	--ion-color-tertiary-rgb: 82, 96, 255;
-	--ion-color-tertiary-contrast: #ffffff;
-	--ion-color-tertiary-contrast-rgb: 255, 255, 255;
-	--ion-color-tertiary-shade: #4854e0;
-	--ion-color-tertiary-tint: #6370ff;
-
-	/** success **/
-	--ion-color-success: #00D25A;
-	--ion-color-success-rgb: 45, 211, 111;
-	--ion-color-success-contrast: #ffffff;
-	--ion-color-success-contrast-rgb: 255, 255, 255;
-	--ion-color-success-shade: #28ba62;
-	--ion-color-success-tint: #42d77d;
-
-	/** pink **/
-	--ion-color-pink: #FF6496;
-	--ion-color-pink-rgb: 45, 211, 111;
-	--ion-color-pink-contrast: #ffffff;
-	--ion-color-pink-contrast-rgb: 255, 255, 255;
-	--ion-color-pink-shade: #FF8896;
-	--ion-color-pink-tint: #EE6496;
-
-	/** warning **/
-	--ion-color-warning: #ffc409;
-	--ion-color-warning-rgb: 255, 196, 9;
-	--ion-color-warning-contrast: #000000;
-	--ion-color-warning-contrast-rgb: 0, 0, 0;
-	--ion-color-warning-shade: #e0ac08;
-	--ion-color-warning-tint: #ffca22;
-
-	/** danger **/
-	--ion-color-danger: #FF6666;
-	--ion-color-danger-rgb: 235, 68, 90;
-	--ion-color-danger-contrast: #ffffff;
-	--ion-color-danger-contrast-rgb: 255, 255, 255;
-	--ion-color-danger-shade: #cf3c4f;
-	--ion-color-danger-tint: #ed576b;
-
-	/** dark **/
-	--ion-color-dark: #222428;
-	--ion-color-dark-rgb: 34, 36, 40;
-	--ion-color-dark-contrast: #ffffff;
-	--ion-color-dark-contrast-rgb: 255, 255, 255;
-	--ion-color-dark-shade: #1e2023;
-	--ion-color-dark-tint: #383a3e;
-
-	/** medium **/
-	--ion-color-medium: #92949c;
-	--ion-color-medium-rgb: 146, 148, 156;
-	--ion-color-medium-contrast: #ffffff;
-	--ion-color-medium-contrast-rgb: 255, 255, 255;
-	--ion-color-medium-shade: #808289;
-	--ion-color-medium-tint: #9d9fa6;
-
-	/** light **/
-	--ion-color-light: #f4f5f8;
-	--ion-color-light-rgb: 244, 245, 248;
-	--ion-color-light-contrast: #000000;
-	--ion-color-light-contrast-rgb: 0, 0, 0;
-	--ion-color-light-shade: #d7d8da;
-	--ion-color-light-tint: #f5f6f9;
+	--ion-color-primary: #{$color-primaryBg};
+	--ion-color-primary-contrast: #{$color-primaryText};
 }
 
-.ion-color-pink {
-	--ion-color-base: var(--ion-color-pink);
-	--ion-color-base-rgb: var(--ion-color-pink-rgb);
-	--ion-color-contrast: var(--ion-color-pink-contrast);
-	--ion-color-contrast-rgb: var(--ion-color-pink-contrast-rgb);
-	--ion-color-contrast-shade: var(--ion-color-pink-shade);
-	--ion-color-contrast-tint: var(--ion-color-pink-tint);
+ion-back-button {
+	--icon-font-size: var(--icon-size);
 }
 
 ion-popover {
 	--box-shadow: none !important;
+
+	&::part(content) {
+		width: auto !important;
+	}
 }
 
-// custom colors
-.ion-white {
-	--color: white !important;
-	--color-checked: white !important;
-}
-
-.ion-bg-white {
-	--background-color: white !important;
-}
-
-.ion-rounded-xl {
-	--border-radius: 0.75rem !important;
-}
-
-.font-500 {
-	font-weight: 500;
-}
-
-.modal-class {
-	--background: white;
-	--height: auto;
-	--width: 100vw;
-	@media (min-width: $md) {
-		--width: 800px;
+ion-modal.modal-class {
+	--background: #{$color-bodyBg};
+	--height: fit;
+	--max-height: 100%;
+	--width: 100%;
+	--border-radius: 1rem;
+	@media (min-width: $lg) {
+		--width: 600px !important;
+		--max-height: 50%;
+		--border-radius: 2rem;
 	}
 
-
-	&.bottom {
-		align-items: flex-end;
+	.modal-content {
+		max-height: 100%;
+		display: flex;
+		flex-direction: column;
 	}
 
-	.ion-page {
-		position: relative;
-		display: block;
-		contain: content;
-		overflow-y: auto;
-		max-height: 100vh;
-
-		.modal-content {
-			border-radius: 1.5rem 1.5rem 0 0;
-			max-height: 80vh;
-			overflow: auto;
+	@media (min-width: $lg) {
+		&::part(content) {
+			bottom: 25%;
+			border-radius: var(--border-radius);
+		}
+		&::part(handle) {
+			display: none;
 		}
 	}
 }
@@ -176,247 +67,188 @@ ion-popover {
 	flex-direction: row-reverse !important;
 	align-items: center;
 	font-size: 0.9rem !important;
-}
 
-.searchbar-search-icon, .searchbar-cancel-button {
-	position: static !important;
-	margin: 0 0.5rem !important;
+	.searchbar-search-icon {
+		position: static !important;
+		margin: 0 0.5rem !important;
+		@media (min-width: $lg) {
+			margin: 0 1rem !important;
+		}
+	}
+
+	.searchbar-cancel-button {
+		position: static !important;
+		margin: 0 0.5rem !important;
+		@media (min-width: $lg) {
+			margin: 0 1rem !important;
+		}
+	}
 }
 
 .searchbar-input {
 	padding: 0 !important;
+	font-size: inherit !important;
 }
 
 ion-searchbar {
-	--background: $color-white !important;
-	background: $color-white !important;
+	--background: transparent !important;
+	background: #{$color-itemBg} !important;
 	--box-shadow: none !important;
-	--border-radius: .75rem !important;
-	border-radius: .75rem !important;
-	--icon-color: $color-iconInactive;
-	--color: $color-mainDark;
-	color: $color-mainDark;
-	--placeholder-color: $color-iconInactive;
-	padding: 0 0.75rem !important;
-	height: 48px !important;
+	padding: 0 0.25rem !important;
+	height: 44px !important;
+	border-radius: 0.5rem !important;
+	--color: inherit !important;
+	--placeholder-color: inherit !important;
+	--cancel-button-color: inherit !important;
+	--clear-button-color: inherit !important;
+	--icon-color: inherit !important;
 }
 
 ion-input, ion-textarea, ion-select {
+	margin: 0 !important;
 	--padding-start: 1rem !important;
 	--padding-end: 1rem !important;
-	--color: $color-mainDark !important;
-	color: $color-mainDark !important;
-	--background: $color-newGray;
-	background-color: $color-newGray;
+	--background: #{$color-itemBg} !important;
+	background: #{$color-itemBg} !important;
 	--box-shadow: none;
-	--border-radius: .75rem;
-	border-radius: .75rem;
-	--icon-color: $color-iconInactive;
-	--placeholder-color: $color-iconInactive;
-	--border-color: $color-iconInactive !important;
+	border-radius: 0.5rem;
+	--icon-color: transparent !important;
+	--placeholder-color: #{$color-secondaryText} !important;
 	--placeholder-opacity: 1;
-	@media (max-width: 640px) {
-		--border-radius: .5rem;
-		border-radius: .5rem;
+	outline: 1px solid transparent;
+
+	&:focus-within {
+		--icon-color: #{$color-info} !important;
+		outline-color: $color-info;
 	}
 }
 
-.btn-secondary {
-	--background: $color-darkGray !important;
-	background: $color-darkGray !important;
-	--color: $color-white;
-	color: $color-white;
-	--padding-top: 0.75rem;
-	--padding-bottom: 0.75rem;
-	--padding-start: 1.5rem;
-	--padding-end: 1.5rem;
-	--border-width: 1px;
-	--border-style: solid;
-	--border-color: $color-darkGray;
+.textarea-wrapper {
+	height: 100%;
 
-	@media (max-width: 640px) {
-		--padding-top: 0.5rem;
-		--padding-bottom: 0.5rem;
-		--padding-start: 1rem;
-		--padding-end: 1rem;
+	textarea {
+		height: 100%;
+		resize: vertical !important;
 	}
 }
 
-.btn-outline {
-	--background: transparent;
-	--padding-top: 0.75rem;
-	--padding-bottom: 0.75rem;
-	--padding-start: 1.5rem;
-	--padding-end: 1.5rem;
-	--color: $color-white;
-	--border-width: 1px;
-	--border-style: solid;
-	--border-color: $color-primary;
-
-	@media (max-width: 640px) {
-		--background: transparent;
-		--padding-top: 0.5rem;
-		--padding-bottom: 0.5rem;
-		--padding-start: 1.25rem;
-		--padding-end: 1.25rem;
-		--color: inherit !important;
-	}
+.select-interface-option {
+	background: $color-bodyBg !important;
+	color: $color-bodyText !important;
 }
 
-ion-button.btn-outline-sm {
-	@media (max-width: 640px) {
-		--background: transparent;
-		--padding-top: 0.5rem;
-		--padding-bottom: 0.5rem;
-		--padding-start: 1.25rem;
-		--padding-end: 1.25rem;
-		--color: inherit !important;
+.action-sheet-button {
+	font-size: inherit !important;
+}
+
+.action-sheet-icon {
+	font-size: 1.5em !important;
+}
+
+ion-alert, ion-popover, ion-action-sheet {
+	--background: #{$color-bodyBg} !important;
+	--color: #{$color-bodyText} !important;
+}
+
+ion-input.valid, ion-textarea.valid, ion-select.valid {
+	--icon-color: #{$color-success} !important;
+	outline-color: $color-success;
+}
+
+ion-input.valid::after {
+	content: '✔';
+	margin: 0 1rem;
+	color: $color-success;
+	border-radius: 100%;
+}
+
+ion-input.invalid, ion-textarea.invalid, ion-select.invalid {
+	--icon-color: #{$color-danger} !important;
+	outline-color: $color-danger;
+}
+
+ion-input.invalid::after {
+	content: '\024D8';
+	margin: 0 1rem;
+	color: $color-danger;
+	border-radius: 100%;
+}
+
+.btn-padding {
+	--padding-top: 0.5rem;
+	--padding-bottom: 0.5rem;
+	--padding-start: 1rem;
+	--padding-end: 1rem;
+	@media (min-width: $lg) {
+		--padding-top: 1rem;
+		--padding-bottom: 1rem;
+		--padding-start: 1.5rem;
+		--padding-end: 1.5rem;
 	}
 }
 
 ion-button {
-	height: 100%;
 	--box-shadow: none;
-	box-shadow: none;
 	--border-radius: 0.5rem;
-	border-radius: 0.5rem;
-	font-weight: 700;
+	font-weight: 500;
+	line-height: 1em;
 	text-transform: capitalize;
 	letter-spacing: 0.02rem;
-	@media (min-width: $md) {
-		--border-radius: 0.625rem;
-		border-radius: 0.625rem;
-	}
-	@media (min-width: $lg) {
-		--border-radius: 0.75rem;
-		border-radius: 0.75rem;
-	}
+	margin: 0;
+	font-size: 0.875rem;
 }
 
 .btn-primary {
-	background: $color-primary;
-	--padding-top: 0.75rem;
-	--padding-bottom: 0.75rem;
-	--padding-start: 1.5rem;
-	--padding-end: 1.5rem;
-	--color: $color-white;
-	color: $color-white;
-
-	@media (max-width: 640px) {
-		--background: transparent;
-		--padding-top: 0.65rem;
-		--padding-bottom: 0.65rem;
-		--padding-start: 1.25rem;
-		--padding-end: 1.25rem;
-		--color: inherit !important;
-	}
+	@extend .btn-padding;
+	--background: #{$color-primaryBg};
+	--background-hover: #{$color-primaryHover};
+	--color: #{$color-primaryText};
+	--border-width: 1px;
+	--border-style: solid;
+	--border-color: $color-primaryBg;
 }
 
-.select-primary {
+.btn-outline {
+	@extend .btn-padding;
 	--background: transparent;
-	--padding-top: 0.75rem;
-	--padding-bottom: 0.75rem;
-	--padding-start: 1.25rem;
-	--padding-end: 1.25rem;
-	--color: inherit !important;
-	border-radius: 8px;
-
-	@media (min-width: 640px) {
-		--color: $color-white;
-		color: $color-white;
-		background: $color-primary;
-	}
+	--background-hover: #{$color-outlineHover};
+	--color: #{$color-primaryBg};
+	--border-width: 1px;
+	--border-style: solid;
+	--border-color: #{$color-primaryBg};
 }
 
-.btn-white {
-	--background: white;
-	--padding-top: 0.75rem;
-	--padding-bottom: 0.75rem;
-	--padding-start: 1.5rem;
-	--padding-end: 1.5rem;
-	color: $color-primary;
-
-	@media (max-width: 640px) {
-		--padding-top: 0.5rem;
-		--padding-bottom: 0.5rem;
-		--padding-start: 1.25rem;
-		--padding-end: 1.25rem;
-	}
+.primary-danger {
+	--background: #{$color-danger};
+	--background-hover: #{$color-danger};
+	--color: #{$color-primaryText};
+	--border-color: #{$color-danger};
 }
 
-.btn-lg {
-	--padding-top: 1.25rem;
-	--padding-bottom: 1.25rem;
-	--padding-start: 4.5rem;
-	--padding-end: 4.5rem;
-}
-
-ion-popover::part(content) {
-	width: auto !important;
-}
-
-ion-toolbar {
-	--background: $color-lightGray;
+.outline-danger {
+	--color: #{$color-danger};
+	--background-hover: #{$color-danger};
+	--border-color: #{$color-danger};
 }
 
 .item-bottom {
 	display: none !important;
 }
 
-ion-badge {
-	background-color: $color-yellowStar !important;
-	--color: $color-mainDark !important;
-	--padding-top: 4px !important;
-}
-
-ion-segment {
-	--background: $color-lightGray;
-	--color: $color-gray;
-	font-weight: bold;
-}
-
-ion-segment-button {
-	--background-checked: $color-darkGray;
-	--background-focused: $color-darkGray;
-	--indicator-color: $color-darkGray;
-	--indicator-box-shadow: none;
-	--padding-top: 0.5rem;
-	--padding-bottom: 0.5rem;
-	color: $color-mainDark;
-	font-weight: bold;
-}
-
-.segment-button-checked {
-	color: $color-white !important;
-	background: $color-darkGray;
-}
-
-ion-select::part(icon) {
-	content: url('../../assets/images/icons/down.svg');
-}
-
 ion-icon {
 	cursor: pointer;
+	font-size: var(--icon-size);
+}
+
+ion-label {
+	font-weight: 600;
 }
 
 ion-item {
 	--inner-border-width: 0px !important;
 }
 
-.border-bottom-line {
-	@media (max-width: $md) {
-		border-bottom: $border;
-	}
-}
-
-.border-top-line {
-	@media (max-width: $md) {
-		border-top: $border;
-	}
-}
-
-.border-left-line {
-	@media (max-width: $md) {
-		border-left: $border;
-	}
+ion-radio, ion-checkmark {
+	--color: inherit;
+	--color-checked: #{$color-primaryBg};
 }

@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Edit a course
 		</template>
@@ -24,6 +24,12 @@ import { useEditCourse } from '@app/composable/school/courses'
 export default defineComponent({
 	name: 'EditCourseModal',
 	components: { CourseForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, editCourse } = useEditCourse()
 		return { factory, error, loading, editCourse }

@@ -1,29 +1,27 @@
 <template>
-	<div
-		class="w-full min-h-40 bg-white rounded-xl flex flex-col justify-between box-border !gap-2 card-padding text-main_dark">
+	<div class="flex flex-col justify-between card card-padding">
 		<div>
 			<div class="flex justify-between gap-2">
-				<ion-text class="font-500 truncate w-full">
+				<IonText class="font-500 truncate w-full">
 					<Institution :institutionId="testPrep.data.institutionId" />
-				</ion-text>
+				</IonText>
 				<SaveToSet :entity="testPrep" />
 			</div>
-			<IonText class="text-gray truncate">
+			<IonText class="truncate">
 				<Course :courseId="testPrep.data.courseId" />
 				({{ testPrep.data.questionType }} {{ testPrep.data.year }})
 			</IonText>
 		</div>
 
 		<div class="w-full flex items-center justify-end gap-2">
-			<ion-button v-if="testPrep.canTest" class="btn-primary" size="small"
+			<IonButton v-if="testPrep.canTest" class="btn-primary"
 				@click="createTest(testPrep, true)">
 				Test
-			</ion-button>
-			<ion-button v-if="testPrep.canStudy" class="btn-outline text-primary"
-				size="small"
+			</IonButton>
+			<IonButton v-if="testPrep.canStudy" class="btn-outline"
 				@click="createTest(testPrep, false)">
 				Solutions
-			</ion-button>
+			</IonButton>
 		</div>
 
 		<PageLoading v-if="loading" />
@@ -31,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { calendarOutline, ellipsisVerticalOutline, playOutline } from 'ionicons/icons'
+import { calendarOutline, ellipsisVerticalOutline } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 import { TestPrepEntity } from '@modules/study'
 import { useCreateTest } from '@app/composable/study/tests'
@@ -51,7 +49,7 @@ export default defineComponent({
 	setup () {
 		const { loading, error, createTest } = useCreateTest()
 		return {
-			ellipsisVerticalOutline, calendarOutline, playOutline,
+			ellipsisVerticalOutline, calendarOutline,
 			loading, error, createTest
 		}
 	}

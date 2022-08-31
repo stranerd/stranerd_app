@@ -1,5 +1,5 @@
 <template>
-	<Modal>
+	<Modal :close="close">
 		<template v-slot:title>
 			Edit a testPrep
 		</template>
@@ -24,6 +24,12 @@ import { useEditTestPrep } from '@app/composable/study/testPreps'
 export default defineComponent({
 	name: 'EditTestPrepModal',
 	components: { TestPrepForm },
+	props: {
+		close: {
+			type: Function,
+			required: true
+		}
+	},
 	setup () {
 		const { factory, error, loading, editTestPrep } = useEditTestPrep()
 		return { factory, error, loading, editTestPrep }

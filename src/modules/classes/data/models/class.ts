@@ -1,12 +1,10 @@
-import { UserBio, UserRoles } from '@modules/users'
-import { ClassUsers } from '../../domain/entities/class'
+import { EmbeddedUser } from '@modules/users'
 import { Media } from '@modules/core'
+import { ClassUsers } from '../../domain/types'
 
 export interface ClassFromModel extends ClassToModel {
 	id: string
-	userId: string
-	userBio: UserBio
-	userRoles: UserRoles
+	user: EmbeddedUser
 	users: Record<ClassUsers, string[]>
 	requests: string[]
 	createdAt: number
@@ -15,7 +13,13 @@ export interface ClassFromModel extends ClassToModel {
 
 export interface ClassToModel {
 	name: string
+	school: {
+		institutionId: string
+		facultyId: string
+		departmentId: string
+		year: number
+	}
 	description: string
+	courses: string[]
 	photo: Media | null
-	coverPhoto: Media | null
 }

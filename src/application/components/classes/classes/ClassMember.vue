@@ -1,49 +1,39 @@
 <template>
-	<div class="bg-white card-padding rounded-xl">
-		<div class="flex items-center gap-2">
-			<Avatar :name="user.bio.fullName" :size="48" :src="user.bio.photo" />
-			<div class="flex flex-col">
-				<IonText class="text-main_dark text-bold">
-					{{ user.bio.fullName }}
-				</IonText>
-				<div class="flex gap-2 items-center">
-					<Tag :index="user.rank.level" :secondary="true" :tag="user.rank.id" />
-					<Tag :tag="`${user.formattedScore} pt`" />
-				</div>
-			</div>
-			<span class="ml-auto flex gap-3 items-center">
-				<template v-if="classInst.admins.includes(id)">
-					<template v-if="classInst.requests.includes(user.id)">
-						<IonIcon :icon="checkmarkOutline" class="cursor-pointer text-green text-2xl"
-							@click="acceptRequest(user.id, true)" />
-						<IonIcon :icon="closeOutline" class="cursor-pointer text-red text-2xl"
-							@click="acceptRequest(user.id, false)" />
-					</template>
-					<template v-else-if="classInst.members.includes(user.id)">
-						<IonIcon v-if="classInst.userId !== user.id && user.id !== id"
-							:icon="classInst.admins.includes(user.id) ? person : personOutline"
-							class="cursor-pointer text-primary text-2xl"
-							@click="changeRole(user.id, ClassUsers.admins, !classInst.admins.includes(user.id))" />
-						<IonIcon v-if="classInst.userId !== user.id && user.id !== id"
-							:icon="personRemoveOutline"
-							class="cursor-pointer text-red text-2xl"
-							@click="addToClass(user.id, false)" />
-					</template>
-					<template v-else>
-						<IonIcon v-if="classInst.userId !== user.id && user.id !== id"
-							:icon="personAddOutline"
-							class="cursor-pointer text-primary text-2xl"
-							@click="addToClass(user.id, true)" />
-					</template>
+	<router-link :to="`/users/${user.id}`" class="flex items-center card card-padding">
+		<Avatar :id="user.id" :name="user.bio.fullName" :size="24" :src="user.bio.photo" />
+		<IonText class="flex gap-1 items-center">
+			<span>{{ user.bio.fullName }}</span>
+			<Verified :verified="user.roles.isVerified" />
+		</IonText>
+		<span class="ml-auto flex gap-3 items-center">
+			<template v-if="classInst.admins.includes(id)">
+				<template v-if="classInst.requests.includes(user.id)">
+					<IonIcon :icon="checkmarkOutline" class="text-success"
+						@click.prevent="acceptRequest(user.id, true)" />
+					<IonIcon :icon="closeOutline" class="text-danger"
+						@click.prevent="acceptRequest(user.id, false)" />
 				</template>
-				<template v-if="classInst.members.includes(user.id)">
-					<IonIcon v-if="user.id === id && classInst.userId !== id"
-						:icon="exitOutline" class="cursor-pointer text-red text-2xl"
-						@click="leaveClass()" />
+				<template v-else-if="classInst.members.includes(user.id)">
+					<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
+						:icon="classInst.admins.includes(user.id) ? person : personOutline"
+						class="text-primaryBg"
+						@click.prevent="changeRole(user.id, ClassUsers.admins, !classInst.admins.includes(user.id))" />
+					<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
+						:icon="removeCircleOutline" class="text-danger"
+						@click.prevent="addToClass(user.id, false)" />
 				</template>
-			</span>
-		</div>
-	</div>
+				<template v-else>
+					<IonIcon v-if="classInst.user.id !== user.id && user.id !== id"
+						:icon="personAddOutline" class="text-primaryBg"
+						@click.prevent="addToClass(user.id, true)" />
+				</template>
+			</template>
+			<template v-if="classInst.members.includes(user.id)">
+				<IonIcon v-if="user.id === id && classInst.user.id !== id"
+					:icon="exitOutline" class="text-danger" @click.prevent="leaveClass()" />
+			</template>
+		</span>
+	</router-link>
 </template>
 
 <script lang="ts">
@@ -59,7 +49,7 @@ import {
 	person,
 	personAddOutline,
 	personOutline,
-	personRemoveOutline
+	removeCircleOutline
 } from 'ionicons/icons'
 
 export default defineComponent({
@@ -79,12 +69,12 @@ export default defineComponent({
 		const {
 			loading, error, admins, tutors, members,
 			acceptRequest, leaveClass, addToClass, changeRole
-		} = useClassMembersList(props.classInst)
+		} = useClassMembersList(props.classInst, true)
 		return {
 			ClassUsers,
 			admins, tutors, members, loading, error, id,
 			acceptRequest, leaveClass, addToClass, changeRole,
-			exitOutline, checkmarkOutline, closeOutline, personRemoveOutline, personOutline, person, personAddOutline
+			exitOutline, checkmarkOutline, closeOutline, removeCircleOutline, personOutline, person, personAddOutline
 		}
 	}
 })

@@ -1,7 +1,7 @@
 <template>
 	<span class="leading-none" @click.prevent="shareInfo">
 		<slot>
-			<ion-icon :class="cssClass" :icon='shareSocialOutline' />
+			<IonIcon :class="cssClass" :icon="shareOutline" />
 		</slot>
 	</span>
 </template>
@@ -11,7 +11,7 @@ import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import { domain } from '@utils/environment'
 import { share } from '@utils/commons'
-import { shareSocialOutline } from 'ionicons/icons'
+import { shareOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'Share',
@@ -46,7 +46,7 @@ export default defineComponent({
 				text: props.text
 			})
 		}
-		return { shareSocialOutline, shareInfo }
+		return { shareOutline, shareInfo }
 	}
 })
 </script>

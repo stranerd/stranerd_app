@@ -1,30 +1,22 @@
 <template>
 	<CTA />
-	<About />
+	<WhyUs />
+	<Aim />
+	<Products />
+	<Connect />
 	<Testimonial />
-	<GetStarted />
-	<Features />
-	<Footer />
+	<App />
+	<Supported />
+	<LandingFooter />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import Footer from '@app/components/landing/Footer.vue'
-import About from '@app/components/landing/About.vue'
-import Testimonial from '@app/components/landing/Testimonial.vue'
-import Features from '@app/components/landing/Features.vue'
-import GetStarted from '@app/components/landing/GetStarted.vue'
+<script lang="ts" setup>
+import LandingFooter from '@app/components/landing/LandingFooter.vue'
 import CTA from '@app/components/landing/CTA.vue'
-
-export default defineComponent({
-	name: 'Index',
-	components: {
-		Footer,
-		About,
-		Features,
-		GetStarted,
-		Testimonial,
-		CTA
-	}
-})
-</script>
+import WhyUs from '@app/components/landing/WhyUs.vue'
+import Aim from '@app/components/landing/Aim.vue'
+import Products from '@app/components/landing/Products.vue'
+import Connect from '@app/components/landing/Connect.vue'
+import Testimonial from '@app/components/landing/Testimonial.vue'
+import App from '@app/components/landing/App.vue'
+import Supported from '@app/components/landing/Supported.vue'</script>

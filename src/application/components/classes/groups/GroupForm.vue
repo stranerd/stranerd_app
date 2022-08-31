@@ -1,35 +1,46 @@
 <template>
-	<form class="flex flex-col md:flex-row md:items-center gap-2" @submit.prevent="submit">
-		<ion-input v-model="factory.name"
-			class="flex-grow w-full border border-new_gray"
-			placeholder="Enter a topic"
-			show-cancel-button="never"
-		/>
+	<form class="flex flex-col gap-6" @submit.prevent="submit">
+		<div v-if="!disabled.classId" class="flex flex-col gap-2">
+			<IonLabel>Class</IonLabel>
+			<IonSelect v-model="factory.classId" :disabled="disabled.classId"
+				class="capitalize" interface="action-sheet" placeholder="Select the class" required>
+				<IonSelectOption v-for="classInst in adminClasses" :key="classInst.hash" :value="classInst.id"
+					class="capitalize">
+					{{ classInst.name }}
+				</IonSelectOption>
+			</IonSelect>
+			<DisplayError :error="factory.errors.classId" />
+		</div>
 
-		<ion-button :disabled="loading || !factory.valid" class="btn-primary w-full md:w-auto" size="small"
-			type="submit">
-			<slot name="buttonText">Submit</slot>
-			<ion-ripple-effect class="rounded-lg" />
-		</ion-button>
-		<PageLoading v-if="loading" />
+		<div class="flex flex-col gap-2">
+			<IonLabel>Title</IonLabel>
+			<IonInput v-model="factory.name"
+				:class="{'valid': factory.isValid('name'), 'invalid': factory.errors.name}"
+				placeholder="Enter title" row="3" />
+			<DisplayError :error="factory.errors.name" />
+		</div>
+
+		<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
+			<SpinLoading v-if="loading" />
+			<slot v-else name="buttonText">Submit</slot>
+		</IonButton>
 	</form>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { GroupFactory } from '@modules/classes'
-import { IonRippleEffect } from '@ionic/vue'
+import { useUserClassList } from '@app/composable/users/users/classes'
 
 export default defineComponent({
 	name: 'GroupForm',
-	components: { IonRippleEffect },
 	props: {
 		factory: {
 			type: GroupFactory,
 			required: true
 		},
 		submit: {
-			type: Function,
+			type: Function as PropType<() => Promise<void>>,
 			required: true
 		},
 		loading: {
@@ -39,16 +50,16 @@ export default defineComponent({
 		error: {
 			type: String,
 			required: true
+		},
+		disabled: {
+			type: Object,
+			required: false,
+			default: () => ({})
 		}
+	},
+	setup () {
+		const { adminClasses } = useUserClassList()
+		return { adminClasses }
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-	ion-input {
-		--padding-top: 0.75rem;
-		--padding-bottom: 0.75rem;
-		--padding-right: 0;
-		--padding-left: 0;
-	}
-</style>

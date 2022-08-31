@@ -1,21 +1,8 @@
-import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
+import { computed, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
 import { Router, useRouter } from 'vue-router'
-import {
-	AddQuestion,
-	DeleteQuestion,
-	EditQuestion,
-	FindQuestion,
-	GetQuestions,
-	ListenToQuestion,
-	ListenToQuestions,
-	QuestionEntity,
-	QuestionFactory,
-	QuestionType
-} from '@modules/questions'
+import { QuestionEntity, QuestionFactory, QuestionsUseCases } from '@modules/questions'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
-import { useQuestionModal } from '@app/composable/core/modals'
-import { ClassEntity } from '@modules/classes'
 import { addToArray } from '@utils/commons'
 
 enum Answered {
@@ -34,36 +21,33 @@ const answeredChoices = [
 ]
 const global = {
 	questions: ref([] as QuestionEntity[]),
-	subject: ref(''),
+	tagId: ref(''),
 	answered: ref(answeredChoices[0].val),
 	fetched: ref(false),
 	hasMore: ref(false),
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
-const listener = useListener(async () => {
-	const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
-	return await ListenToQuestions.call({
-		created: async (entity) => {
-			addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		updated: async (entity) => {
-			addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
-		},
-		deleted: async (entity) => {
-			const index = global.questions.value.findIndex((q) => q.id === entity.id)
-			if (index !== -1) global.questions.value.splice(index, 1)
-		}
-	}, lastDate ? lastDate - 1 : undefined)
-})
+const listener = useListener(async () => await QuestionsUseCases.listen({
+	created: async (entity) => {
+		addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
+	},
+	updated: async (entity) => {
+		addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
+	},
+	deleted: async (entity) => {
+		const index = global.questions.value.findIndex((q) => q.id === entity.id)
+		if (index !== -1) global.questions.value.splice(index, 1)
+	}
+}, global.questions.value.at(-1)?.createdAt))
 
 export const useQuestionList = () => {
+	const router = useRouter()
 	const fetchQuestions = async () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const lastDate = global.questions.value[global.questions.value.length - 1]?.createdAt
-			const questions = await GetQuestions.call(lastDate)
+			const questions = await QuestionsUseCases.get(global.questions.value.at(-1)?.createdAt)
 			global.hasMore.value = !!questions.pages.next
 			questions.results.forEach((q) => addToArray(global.questions.value, q, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
@@ -74,7 +58,7 @@ export const useQuestionList = () => {
 	}
 	const filteredQuestions = computed({
 		get: () => global.questions.value.filter((q) => {
-			if (global.subject.value && q.subject !== global.subject.value) return false
+			if (global.tagId.value && q.tagId !== global.tagId.value) return false
 			if (global.answered.value === Answered.Answered && q.answers.length === 0) return false
 			if (global.answered.value === Answered.Unanswered && q.answers.length > 0) return false
 			if (global.answered.value === Answered.BestAnswered && !q.isAnswered) return false
@@ -97,6 +81,9 @@ export const useQuestionList = () => {
 	onUnmounted(async () => {
 		await listener.close()
 	})
+	watch(global.tagId, async () => {
+		await router.push('/questions')
+	})
 
 	return {
 		...global,
@@ -105,33 +92,21 @@ export const useQuestionList = () => {
 	}
 }
 
-let questionClass = null as ClassEntity | null
-export const getQuestionClass = () => questionClass
-export const openQuestionModalFromClass = async (classInst: ClassEntity, router: Router) => {
-	questionClass = classInst
-	await router.push('/questions/create')
-}
-
 export const useCreateQuestion = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 	const factory = ref(new QuestionFactory()) as Ref<QuestionFactory>
 	const router = useRouter()
-	if (questionClass) {
-		factory.value.type = QuestionType.classes
-		factory.value.classId = questionClass.id
-	}
 
 	const createQuestion = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const question = await AddQuestion.call(factory.value)
+				const question = await QuestionsUseCases.add(factory.value)
 				await setMessage('Question submitted successfully')
 				factory.value.reset()
-				useQuestionModal().closeCreateQuestion()
 				await router.push(`/questions/${question.id}`)
 			} catch (error) {
 				await setError(error)
@@ -162,7 +137,7 @@ export const useQuestion = (questionId: string) => {
 				await setLoading(false)
 				return
 			}
-			question = await FindQuestion.call(questionId)
+			question = await QuestionsUseCases.find(questionId)
 			if (question) addToArray(global.questions.value, question, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
@@ -170,7 +145,7 @@ export const useQuestion = (questionId: string) => {
 		await setLoading(false)
 	}
 	const listener = useListener(async () => {
-		return await ListenToQuestion.call(questionId, {
+		return await QuestionsUseCases.listenToOne(questionId, {
 			created: async (entity) => {
 				addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
@@ -214,9 +189,8 @@ export const useEditQuestion = () => {
 		if (factory.value.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const question = await EditQuestion.call(editingQuestion!.id, factory.value)
+				const question = await QuestionsUseCases.update(editingQuestion!.id, factory.value)
 				await setMessage('Question updated successfully')
-				useQuestionModal().closeEditQuestion()
 				factory.value.reset()
 				await router.push(`/questions/${question.id}`)
 			} catch (error) {
@@ -244,7 +218,7 @@ export const useDeleteQuestion = (questionId: string) => {
 		if (accepted) {
 			await setLoading(true)
 			try {
-				await DeleteQuestion.call(questionId)
+				await QuestionsUseCases.delete(questionId)
 				global.questions.value = global.questions.value
 					.filter((q) => q.id !== questionId)
 				await setMessage('Question deleted successfully')

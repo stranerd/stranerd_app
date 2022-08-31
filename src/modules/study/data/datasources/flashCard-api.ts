@@ -1,5 +1,5 @@
 import { HttpClient, Listeners, listenOnSocket, QueryParams, QueryResults } from '@modules/core'
-import { apiBases } from '@utils/environment'
+import { apiBase } from '@utils/environment'
 import { FlashCardFromModel, FlashCardToModel } from '../models/flashCard'
 import { FlashCardBaseDataSource } from './flashCard-base'
 
@@ -7,7 +7,7 @@ export class FlashCardApiDataSource implements FlashCardBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBases.STRANERD + '/study/flashCards')
+		this.stranerdClient = new HttpClient(apiBase + '/study/flashCards')
 	}
 
 	async create (data: FlashCardToModel) {
@@ -15,7 +15,7 @@ export class FlashCardApiDataSource implements FlashCardBaseDataSource {
 	}
 
 	async find (id: string) {
-		return await this.stranerdClient.get<{}, FlashCardFromModel>(`/${id}`, {})
+		return await this.stranerdClient.get<any, FlashCardFromModel>(`/${id}`, {})
 	}
 
 	async get (query: QueryParams) {
@@ -37,7 +37,7 @@ export class FlashCardApiDataSource implements FlashCardBaseDataSource {
 	}
 
 	async delete (id: string) {
-		await this.stranerdClient.delete<{}, boolean>(`/${id}`, {})
+		await this.stranerdClient.delete<any, boolean>(`/${id}`, {})
 	}
 
 	async update (id: string, data: FlashCardToModel) {

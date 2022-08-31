@@ -6,15 +6,20 @@ export enum TIMES {
 	year = 60 * 60 * 24 * 30 * 12
 }
 
-export const getTwoDigits = (digit: number): string => (digit < 10 ? '0' : '') + digit
+export const months = [
+	'January', 'February', 'March', 'April', 'May', 'June',
+	'July', 'August', 'September', 'October', 'November', 'December'
+]
+
+export const getTwoDigits = (digit: number): string => digit.toString().padStart(2, '0')
 export const formatTimeAsDigits = (date: Date) => {
 	const hour = getTwoDigits(date.getHours())
 	const minute = getTwoDigits(date.getMinutes())
 	return `${hour}:${minute}`
 }
-const formatDateAsDigits = (date: Date, showYear = true) => {
+export const formatDateAsDigits = (date: Date, showYear = true) => {
 	const year = date.getFullYear()
-	const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'][date.getMonth()]
+	const month = months[date.getMonth()].slice(0, 3)
 	const day = getTwoDigits(date.getDate())
 	return `${month} ${day}` + (showYear ? `, ${year}` : '')
 }
@@ -22,10 +27,12 @@ const formatDateAsDigits = (date: Date, showYear = true) => {
 export const formatTime = (time: number, withoutTime = false) => {
 	const date = new Date(time)
 	const now = new Date()
+	const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1)
 	const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 	const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1)
 	const lastWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7)
 	const oneYearAgo = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate())
+	if (date >= tomorrow) return formatDateAsDigits(date)
 	if (date > today) return withoutTime ? 'Today' : formatTimeAsDigits(date)
 	else if (date > yesterday) return 'Yesterday'
 	else if (date > lastWeek) return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][date.getDay()]

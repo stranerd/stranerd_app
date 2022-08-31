@@ -10,7 +10,7 @@ import {
 export interface AuthBaseDataSource {
 	getAuthUser: () => Promise<AuthDetails | null>
 	signinWithEmail: (email: string, password: string, extras: AuthExtras) => Promise<AfterAuthUser>
-	signinWithGoogle: (idToken: string, extras: AuthExtras) => Promise<AfterAuthUser>
+	signinWithGoogle: (data: { accessToken: string, idToken: string }, extras: AuthExtras) => Promise<AfterAuthUser>
 	signupWithEmail: (data: NewUser, extras: AuthExtras) => Promise<AfterAuthUser>
 	sendVerificationEmail: (email: string) => Promise<void>
 	completeEmailVerification: (token: string) => Promise<AfterAuthUser>
@@ -20,4 +20,5 @@ export interface AuthBaseDataSource {
 	updatePassword: (passwords: PasswordUpdate) => Promise<void>
 	session: (afterAuth: AfterAuthUser) => Promise<AuthDetails>
 	signout: () => Promise<void>
+	updateRole: (data: { id: string, value: boolean, role: string }) => Promise<boolean>
 }
