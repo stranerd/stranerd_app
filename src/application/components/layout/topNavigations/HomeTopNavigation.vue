@@ -17,7 +17,6 @@
 				</header>
 
 				<div class="flex flex-col">
-					<!-- <span class="border-top-line py-6 px-4">Solutions</span> -->
 					<details>
 						<summary class=" border-top-line py-6 px-4 flex ">
 							<p class="text-base font-medium text-gray300">
@@ -44,6 +43,7 @@
 						target="_blank">Upload</a>
 					<span class="border-top-line py-6 px-4" @click="navigateTo('/pricing')">Pricing</span>
 					<span class="border-top-line py-6 px-4" @click="navigateTo('/about')">About</span>
+					<span class="border-top-line py-6 px-4" @click="navigateTo('/contact')">Contact</span>
 				</div>
 			</div>
 
@@ -52,6 +52,7 @@
 				<a href="https://upload.stranerd.com" rel="noopener noreferrer" target="_blank">Upload</a>
 				<router-link to="/pricing">Pricing</router-link>
 				<router-link to="/about">About</router-link>
+				<router-link to="/contact">Contact</router-link>
 			</div>
 
 			<div class="flex items-center md:gap-8 gap-2 px-3 w-auto">

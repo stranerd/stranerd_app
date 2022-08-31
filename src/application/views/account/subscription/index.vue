@@ -1,9 +1,5 @@
 <template>
 	<DefaultLayout>
-		<template v-slot:panel>
-			<SettingsPanel />
-		</template>
-
 		<div class="flex flex-col">
 			<div class="flex flex-col border-bottom-line gap-4 p-4 lg:py-6 lg:px-0">
 				<IonText>Current Plan</IonText>
@@ -34,7 +30,6 @@
 import { computed, defineComponent } from 'vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
-import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
 import { arrowForwardOutline, helpCircleOutline } from 'ionicons/icons'
 import { usePlanList } from '@app/composable/payment/plans'
 import CardsList from '@app/components/payment/cards/CardsList.vue'
@@ -43,7 +38,7 @@ import { pluralize } from '@utils/commons'
 
 export default defineComponent({
 	name: 'AccountSubscription',
-	components: { SettingsPanel, CardsList },
+	components: { CardsList },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Subscription', { back: true })
