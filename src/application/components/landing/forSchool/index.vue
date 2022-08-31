@@ -1,7 +1,7 @@
 <template>
 	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28 -z-20">
 		<div
-			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
+			class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-10 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
 				<span class="md:text-lg text-sm">Improving lecturing experience</span>
 				<h2 class="lg:text-5xl text-3xl font-bold  text-primaryBg lg:leading-[62px]">Manage your courses and
@@ -19,7 +19,7 @@
 	</div>
 
 	<div class="w-full lg:min-h-[696px] h-auto flex flex-col bg-primaryBg relative py-12 md:py-28 -z-20 px-6">
-		<h1 class="lg:text-6xl text-4xl font-bold text-bodyBg text-center mb-16">Features</h1>
+		<h1 class="lg:text-6xl text-2xl font-bold text-bodyBg text-center mb-16">Features</h1>
 		<div class=" mx-auto place-content-center self-center grid lg:grid-cols-3 grid-cols-2 md:gap-8 gap-4  h-full">
 			<div v-for="n in features" :key="n.title" class="card">
 				<IonIcon :icon="n.icon" :style="`color:${n.color}`" />

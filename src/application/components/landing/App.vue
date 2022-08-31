@@ -12,16 +12,15 @@
 				<div class="flex gap-4 items-center mt-6">
 					<a href="https://play.google.com/store/apps/details?id=com.stranerd.app" rel="noopener noreferrer"
 						target="_blank">
-						<img alt="playstore button" class="h-6 md:h-16" src="@/assets/images/auth/playstore.svg" />
+						<img alt="playstore button" class="md:h-16" src="@/assets/images/auth/playstore.svg" />
 					</a>
 
-					<img alt="appstore button" class="h-6  md:h-16 cursor-not-allowed"
+					<img alt="appstore button" class=" md:h-16 cursor-not-allowed"
 						src="@/assets/images/auth/appstore.svg" />
 				</div>
 			</div>
 
 			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/phone.svg">
 		</div>
-
 	</div>
 </template>

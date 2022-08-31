@@ -1,5 +1,8 @@
 <template>
 	<HomeLayout>
+		<div class="bg-primaryBg text-primaryText text-center py-6 w-full">
+			<h1>Pricing</h1>
+		</div>
 		<Pricing />
 	</HomeLayout>
 </template>
