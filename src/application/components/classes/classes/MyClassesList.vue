@@ -7,8 +7,10 @@
 				<IonIcon :icon="arrowForwardCircleOutline" />
 			</div>
 			<IonText class="text-secondaryText">
-				If you don’t find your class, please
-				<router-link class="text-info" to="/settings/contact">contact us</router-link>
+				If you don’t find your class,
+				<router-link v-if="user && user.isCollege(user)" class="text-info" to="/classes/create">create one
+				</router-link>
+				<router-link v-else class="text-info" to="/contact">contact us</router-link>
 				.
 			</IonText>
 		</router-link>
@@ -23,13 +25,15 @@ import { defineComponent } from 'vue'
 import ClassListCard from '@app/components/classes/classes/ClassListCard.vue'
 import { useUserClassList } from '@app/composable/users/users/classes'
 import { arrowForwardCircleOutline } from 'ionicons/icons'
+import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'MyClassesList',
 	components: { ClassListCard },
 	setup () {
+		const { user } = useAuth()
 		const { classes, error, loading } = useUserClassList()
-		return { classes, error, loading, arrowForwardCircleOutline }
+		return { user, classes, error, loading, arrowForwardCircleOutline }
 	}
 })
 </script>

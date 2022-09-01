@@ -1,4 +1,4 @@
-import { modal } from '@app/composable/core/modal'
+import { modal, popover } from '@app/composable/core/modal'
 import CreateReport from '@app/components/modals/reports/CreateReport.vue'
 import CreateTestPrep from '@app/components/modals/study/CreateTestPrep.vue'
 import EditTestPrep from '@app/components/modals/study/EditTestPrep.vue'
@@ -28,6 +28,8 @@ import ProfileMenu from '@app/components/modals/users/ProfileMenu.vue'
 import CreateComment from '@app/components/modals/interactions/CreateComment.vue'
 import CreateTag from '@app/components/modals/interactions/CreateTag.vue'
 import EditTag from '@app/components/modals/interactions/EditTag.vue'
+import QuestionCreated from '@app/components/modals/reactions/QuestionCreated.vue'
+import NeedsSubscription from '@app/components/modals/reactions/NeedsSubscription.vue'
 
 const SessionModal = modal.register('Session', { CreateSession: CreateReport, Ratings: CreateReport })
 const ReportModal = modal.register('Report', { CreateReport })
@@ -43,6 +45,7 @@ const SchoolModal = modal.register('School', {
 })
 const UserModal = modal.register('User', { Settings, FabMenu, ProfileMenu })
 const InteractionModal = modal.register('Interaction', { CreateComment, CreateTag, EditTag })
+const ReactionModal = popover.register('Reaction', { QuestionCreated, NeedsSubscription })
 
 export const useSessionModal = () => SessionModal
 export const useReportModal = () => ReportModal
@@ -51,9 +54,11 @@ export const useClassModal = () => ClassModal
 export const useSchoolModal = () => SchoolModal
 export const useUserModal = () => UserModal
 export const useInteractionModal = () => InteractionModal
+export const useReactionModal = () => ReactionModal
+
 export const allModals = [
-	useSessionModal, useReportModal, useStudyModal,
-	useClassModal, useSchoolModal, useUserModal, useInteractionModal
+	useSessionModal, useReportModal, useStudyModal, useClassModal,
+	useSchoolModal, useUserModal, useInteractionModal, useReactionModal
 ]
 
 export const allPopovers = [] as typeof allModals
