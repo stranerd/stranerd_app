@@ -1,6 +1,6 @@
 <template>
 	<div class="modal-content">
-		<div :class="{'bg-headerBg text-headerText': !removeHeaderBg}" class="p-4 text-center">
+		<div v-if="!hideHeader" class="bg-headerBg text-headerText p-4 text-center">
 			<div class="flex justify-between items-center text-xl gap-4">
 				<span />
 				<span class="font-bold">
@@ -30,7 +30,7 @@ export default defineComponent({
 			required: false,
 			default: null
 		},
-		removeHeaderBg: {
+		hideHeader: {
 			type: Boolean,
 			required: false,
 			default: false

@@ -1,6 +1,6 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
-		<ClassForm :disabled="{ departmentId: true, facultyId: true, institutionId: true }" :error="error"
+		<ClassForm :disabled="{}" :error="error"
 			:factory="factory" :loading="loading"
 			:submit="createClass"
 			class="page-padding">

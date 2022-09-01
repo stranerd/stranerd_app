@@ -1,8 +1,8 @@
 <template>
 	<div class="flex flex-col border border-disabled gap-4 p-6 flex-1 rounded-2xl">
-		<span class="font-medium capitalize">{{ plan.name }}</span>
+		<span class="font-medium capitalize leading-none">{{ plan.name }}</span>
 		<IonText>
-			<span class="text-2xl font-semibold tracking-wider"><span
+			<span class="text-2xl font-semibold tracking-wider leading-none"><span
 				v-html="formatCurrency(plan.currency)" />{{ plan.amount }}</span>
 			<span>&nbsp;{{ plan.interval }}</span>
 		</IonText>
