@@ -21,11 +21,10 @@
 			</div>
 			<div class="flex flex-col gap-4 w-[45%] md:w-auto">
 				<span class="font-bold md:text-2xl text-xl">Company</span>
-				<a href="#">About us</a>
-				<a href="#">Team</a>
-				<a href="#">Privacy Policy</a>
-				<a href="#">Terms of Service</a>
-				<a href="#">Terms and Conditions</a>
+				<router-link to="/about">About us</router-link>
+				<router-link to="/legal/privacy-policy">Privacy Policy</router-link>
+				<router-link to="/legal/terms-and-conditions">Terms and Conditions</router-link>
+				<router-link to="/legal/tutors-terms-of-service">Tutors Terms of Service</router-link>
 			</div>
 			<div class="flex flex-col gap-4 w-[45%] md:w-auto">
 				<span class="font-bold md:text-2xl text-xl">Community</span>
@@ -35,10 +34,9 @@
 			</div>
 			<div class="flex flex-col gap-4 w-[40%] md:w-auto mt-12 md:mt-0">
 				<span class="font-bold md:text-2xl text-xl">Help</span>
-				<router-link class="font-light" to="/legal/faqs">FAQs</router-link>
-				<a href="#">Honor Code</a>
-				<a href="mailto:support@stranerd.com" target="_blank">Support</a>
-				<a href="mailto:support@stranerd.com" target="_blank">Contact us</a>
+				<router-link class="font-light" to="/faqs">FAQs</router-link>
+				<router-link to="/legal/honor-code">Honor Code</router-link>
+				<router-link to="/contact">Contact us</router-link>
 			</div>
 
 			<div class="flex flex-col items-start w-full md:w-auto mt-12 md:mt-0 gap-8 mobile">

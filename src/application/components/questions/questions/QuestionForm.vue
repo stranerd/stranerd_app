@@ -19,6 +19,11 @@
 			<DisplayError :error="factory.errors.attachments" />
 		</div>
 
+		<div class="text-center">
+			Ask only if you abide by
+			<router-link class="text-primaryBg font-bold" to="/legal/honor-code">our honor code</router-link>
+		</div>
+
 		<div class="flex w-full justify-end items-center gap-6">
 			<FileInput
 				:multiple="true"
