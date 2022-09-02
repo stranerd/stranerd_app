@@ -83,12 +83,9 @@
 			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/phone.svg">
 		</div>
 	</div>
-	<LandingFooter />
 </template>
 
 <script lang="ts" setup>
-import LandingFooter from '@app/components/landing/LandingFooter.vue'
-
 import {
 	book,
 	calendar,

@@ -51,11 +51,9 @@
 			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/phone.svg">
 		</div>
 	</div>
-	<LandingFooter />
 </template>
 
 <script lang="ts" setup>
-import LandingFooter from '@app/components/landing/LandingFooter.vue'
 import { people, person } from 'ionicons/icons'
 
 const features = [
@@ -71,8 +69,6 @@ const features = [
 		desc: 'Class to class discussions with other classes.',
 		color: '#FF6496'
 	}
-
-
 ]
 </script>
 
