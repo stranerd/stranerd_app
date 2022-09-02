@@ -33,11 +33,11 @@
 
 			<div class="flex flex-wrap items-center justify-center md:gap-5 gap-3">
 				<router-link v-for="item in contactLinks" :key="item.icon" to="/"
-					class="block h-28 w-28 rounded-2xl bg-white flex items-center justify-center"
+					class="md:h-56 md:w-56 h-28 w-28 rounded-2xl bg-white flex items-center justify-center"
 				>
 					<div class="text-primaryBg flex flex-col items-center justify-center gap-3">
-						<IonIcon :icon="item.icon" class="text-2xl font-bold"/>
-						<p class="text-md">{{item.text}}</p>
+						<IonIcon :icon="item.icon" class="text-2xl md:text-5xl font-bold"/>
+						<p class="text-md md:text-xl">{{item.text}}</p>
 					</div>
 				</router-link>
 			</div>

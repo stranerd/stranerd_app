@@ -41,6 +41,7 @@
 					<a class="border-top-line py-6 px-4" href="https://upload.stranerd.com/" target="_blank" rel="noopener noreferrer">Upload</a>
 					<span class="border-top-line py-6 px-4" @click="navigateTo('/pricing')">Pricing</span>
 					<span class="border-top-line py-6 px-4" @click="navigateTo('/about')">About</span>
+					<span class="border-top-line py-6 px-4" @click="navigateTo('/contact')">Contact</span>
 				</div>
 			</div>
 	
@@ -50,6 +51,7 @@
 				<a href="http://" target="_blank" rel="noopener noreferrer">Upload</a>
 				<router-link to="/pricing">Pricing</router-link>
 				<router-link to="/about">About</router-link>
+				<router-link to="/contact">Contact</router-link>
 				<!-- <span>Contact</span> -->
 			</div>
 
