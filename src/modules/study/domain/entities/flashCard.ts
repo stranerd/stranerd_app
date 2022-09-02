@@ -10,13 +10,13 @@ export class FlashCardEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             title,
-		             set,
-		             user,
-		             createdAt,
-		             updatedAt
-	             }: FlashCardConstructorArgs) {
+					 id,
+					 title,
+					 set,
+					 user,
+					 createdAt,
+					 updatedAt
+				 }: FlashCardConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title

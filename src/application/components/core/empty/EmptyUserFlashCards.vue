@@ -18,13 +18,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	img {
-		min-width: 150px;
-	}
+img {
+	min-width: 150px;
+}
 
-	ion-button {
-		--border-radius: 10rem;
-		--padding-top: 1.25rem;
-		--padding-bottom: 1.25rem;
-	}
+ion-button {
+	--border-radius: 10rem;
+	--padding-top: 1.25rem;
+	--padding-bottom: 1.25rem;
+}
 </style>

@@ -22,8 +22,8 @@ export class GroupEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, name, user, users, createdAt, classId, updatedAt
-	             }: GroupConstructorArgs) {
+					 id, name, user, users, createdAt, classId, updatedAt
+				 }: GroupConstructorArgs) {
 		super()
 		this.id = id
 		this.name = name

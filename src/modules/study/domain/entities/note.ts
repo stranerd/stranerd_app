@@ -12,15 +12,15 @@ export class NoteEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             title,
-		             content,
-		             user,
-		             isPrivate,
-		             links,
-		             createdAt,
-		             updatedAt
-	             }: NoteConstructorArgs) {
+					 id,
+					 title,
+					 content,
+					 user,
+					 isPrivate,
+					 links,
+					 createdAt,
+					 updatedAt
+				 }: NoteConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title

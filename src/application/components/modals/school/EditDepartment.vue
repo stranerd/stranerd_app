@@ -4,7 +4,7 @@
 			Edit a department
 		</template>
 		<DepartmentForm
-			:disabled="{}"
+			:disabled="{ tagId: true }"
 			:error="error"
 			:factory="factory"
 			:loading="loading"

@@ -19,7 +19,7 @@ import { useRouteMeta } from '@app/composable/core/states'
 export default defineComponent({
 	name: 'StudyTestsTestIdTake',
 	components: { TestBody },
-	beforeRouteEnter: generateMiddlewares([ 'isAuthenticated' ]),
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		const { testId } = useRoute().params
 		const { error, loading, test } = useTest(testId as string)

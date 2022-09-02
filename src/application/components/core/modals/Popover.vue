@@ -1,5 +1,5 @@
 <template>
-	<div class="popover rounded-xl text-sm shadow-md flex flex-col">
+	<div class="popover rounded-xl shadow-md flex flex-col p-6 md:p-8">
 		<slot />
 	</div>
 </template>
@@ -21,13 +21,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	.popover {
-		min-width: 10rem;
-		@media (max-width: $md) {
-			// position: fixed;
-			bottom: 0;
-			left: 0;
-			right: 0;
-		}
-	}
+.popover {
+	min-width: 20rem;
+}
 </style>

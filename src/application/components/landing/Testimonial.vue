@@ -1,18 +1,20 @@
 <template>
 	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28 -z-20">
-		<div class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
+		<div
+			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
 			<!-- <img src="@/assets/images/landing/testi.svg" alt="hero" class="w-auto z-20"> -->
-			<div class="shadow  w-full max-w-[576px] md:h-[576px] h-[320px] rounded-3xl md:p-8 p-5 flex flex-col justify-between">
+			<div
+				class="shadow  w-full max-w-[576px] md:h-[576px] h-[320px] rounded-3xl md:p-8 p-5 flex flex-col justify-between">
 				<div class="flex flex-col gap-5 justify-start items-start">
 					<img alt="" class="object-contain h-5 md:h-9" src="@app/assets/images/New/comment.svg">
 					<p class="text-base md:text-[28px] leading-[1.3]">
 						{{ testimonies[tab].text }}
 					</p>
 				</div>
-			
+
 				<div class="flex w-full justify-between">
 					<div class="flex gap-3">
-						<img src="/images/avatars/user_profile.svg" class=" md:w-16 md:h-16 rounded-full">
+						<img class=" md:w-16 md:h-16 rounded-full" src="/images/avatars/user_profile.svg">
 						<p class="flex flex-col">
 							<span class="font-bold md:text-lg text-sm">{{ testimonies[tab].author }}</span>
 							<span class="md:text-xl text-sm">{{ testimonies[tab].university }}</span>
@@ -20,8 +22,10 @@
 					</div>
 
 					<span class="flex gap-3">
-						<IonIcon :icon="chevronBackCircleOutline" class="rounded-full  text-2xl md:text-4xl" @click="prev"/>
-						<IonIcon :icon="chevronForwardCircleOutline" class="rounded-full  text-2xl md:text-4xl" @click="next"/>
+						<IonIcon :icon="chevronBackCircleOutline" class="rounded-full  text-2xl md:text-4xl"
+							@click="prev" />
+						<IonIcon :icon="chevronForwardCircleOutline" class="rounded-full  text-2xl md:text-4xl"
+							@click="next" />
 					</span>
 				</div>
 			</div>
@@ -30,31 +34,31 @@
 				<span class="md:text-lg text-sm">Testimonials</span>
 				<h2 class="lg:text-5xl text-3xl font-bold  text-primaryBg lg:leading-[62px]">What our users say</h2>
 				<p class="lg:text-lg text-sm">
-					Feedback from personels in the education community on the impact Stranerd has on their academic activities.
+					Feedback from personels in the education community on the impact Stranerd has on their academic
+					activities.
 				</p>
-				<router-link to="/auth/signin" class="btn landing_btn-outline">
+				<router-link class="btn landing_btn-outline" to="/auth/signin">
 					Join today
 				</router-link>
 			</div>
 		</div>
-
-
 	</div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { chevronBackCircleOutline, chevronForwardCircleOutline } from 'ionicons/icons'
-import {ref} from 'vue'
+import { ref } from 'vue'
+
 const tab = ref(0)
-const next = ()=>{
-	if(tab.value === testimonies.length-1){
+const next = () => {
+	if (tab.value === testimonies.length - 1) {
 		tab.value = 0
-	}else tab.value++
+	} else tab.value++
 }
-const prev = ()=>{
-	if(tab.value === 0){
-		tab.value = testimonies.length-1
-	}else tab.value--
+const prev = () => {
+	if (tab.value === 0) {
+		tab.value = testimonies.length - 1
+	} else tab.value--
 }
 const testimonies = [
 	{
@@ -86,7 +90,7 @@ const testimonies = [
 </script>
 
 <style scoped>
-.shadow{
+.shadow {
 	box-shadow: 0px 0px 32px rgba(22, 37, 101, 0.05);
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
 	<span class="leading-none" @click.prevent="shareInfo">
 		<slot>
-			<IonIcon :class="cssClass" :icon='shareOutline' />
+			<IonIcon :class="cssClass" :icon="shareOutline" />
 		</slot>
 	</span>
 </template>

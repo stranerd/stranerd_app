@@ -66,5 +66,6 @@ export const modalProps = {
 }
 export const popoverProps = {
 	cssClass: 'popover-class',
+	reference: 'event',
 	isOpen: true
 }

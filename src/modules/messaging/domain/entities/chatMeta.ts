@@ -13,14 +13,14 @@ export class ChatMetaEntity extends BaseEntity {
 	readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             members,
-		             data,
-		             last,
-		             readAt,
-		             createdAt,
-		             updatedAt
-	             }: ChatMetaConstructorArgs) {
+					 id,
+					 members,
+					 data,
+					 last,
+					 readAt,
+					 createdAt,
+					 updatedAt
+				 }: ChatMetaConstructorArgs) {
 		super()
 		this.id = id
 		this.members = members

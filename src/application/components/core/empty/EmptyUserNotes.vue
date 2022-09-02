@@ -4,7 +4,7 @@
 		<p class="text-lg font-bold">No notes</p>
 		<span class="text-center ">Notes will show up here.</span>
 		<router-link to="/study/notes/create">
-			<IonButton class="btn-outline">Create a  note</IonButton>
+			<IonButton class="btn-outline">Create a note</IonButton>
 		</router-link>
 	</div>
 </template>
@@ -18,13 +18,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	img {
-		min-width: 150px;
-	}
+img {
+	min-width: 150px;
+}
 
-	ion-button {
-		--border-radius: 10rem;
-		--padding-top: 1.25rem;
-		--padding-bottom: 1.25rem;
-	}
+ion-button {
+	--border-radius: 10rem;
+	--padding-top: 1.25rem;
+	--padding-bottom: 1.25rem;
+}
 </style>

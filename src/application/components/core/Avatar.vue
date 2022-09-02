@@ -56,13 +56,13 @@ export default defineComponent({
 			default: false
 		}
 	},
-	setup(props, { emit }) {
+	setup (props, { emit }) {
 		const source = computed({
 			get: () => typeof props.src?.link === 'string' ? props.src.link : false,
 			set: () => {
 			}
 		})
-		const catchPhoto = useFileInputCallback(async ([ file ]) => emit('photo', file))
+		const catchPhoto = useFileInputCallback(async ([file]) => emit('photo', file))
 		return { source, DEFAULT_PROFILE_PHOTO, cameraOutline, catchPhoto }
 	}
 })

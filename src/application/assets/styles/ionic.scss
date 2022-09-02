@@ -27,9 +27,10 @@ ion-back-button {
 
 ion-popover {
 	--box-shadow: none !important;
+	--width: auto;
 
 	&::part(content) {
-		width: auto !important;
+		position: static;
 	}
 }
 

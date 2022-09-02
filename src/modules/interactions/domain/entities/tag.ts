@@ -10,8 +10,8 @@ export class TagEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id, title, type, parent, createdAt, updatedAt
-	             }: TagConstructorArgs) {
+					 id, title, type, parent, createdAt, updatedAt
+				 }: TagConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title

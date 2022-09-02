@@ -14,16 +14,16 @@ export class EventEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             title,
-		             classId,
-		             user,
-		             data,
-		             users,
-		             readAt,
-		             createdAt,
-		             updatedAt
-	             }: EventConstructorArgs) {
+					 id,
+					 title,
+					 classId,
+					 user,
+					 data,
+					 users,
+					 readAt,
+					 createdAt,
+					 updatedAt
+				 }: EventConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title

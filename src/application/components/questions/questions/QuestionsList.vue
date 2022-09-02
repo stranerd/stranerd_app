@@ -44,7 +44,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-	ion-select {
-		border-radius: 0;
-	}
+ion-select {
+	border-radius: 0;
+}
 </style>
