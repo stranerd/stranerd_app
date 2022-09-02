@@ -4,7 +4,6 @@
 			<h1>Contact</h1>
 		</div>
 		<Contact />
-
 	</HomeLayout>
 </template>
 

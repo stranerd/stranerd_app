@@ -9,7 +9,7 @@
 					<span v-else>{{ test.name }}</span>
 				</IonText>
 				<Tag :class="test.isTimed ? '!bg-royal' : '!bg-warning'" :tag="test.isTimed ? 'Timed' : 'Study'"
-					class="!text-white !text-xs" />
+					class="!text-primaryText !text-xs" />
 			</div>
 
 			<Institution v-if="testPrep && testPrep.isPastQuestionType" :institutionId="testPrep.data.institutionId"
