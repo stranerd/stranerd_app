@@ -24,7 +24,7 @@ export const formatDateAsDigits = (date: Date, showYear = true) => {
 	return `${month} ${day}` + (showYear ? `, ${year}` : '')
 }
 
-export const formatTime = (time: number, withoutTime = false) => {
+export const  formatTime = (time: number, withoutTime = false) => {
 	const date = new Date(time)
 	const now = new Date()
 	const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1)

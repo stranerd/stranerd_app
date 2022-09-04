@@ -14,7 +14,7 @@
 					Get started
 				</button>
 			</div>
-			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/forSchools.svg">
+			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/forSchools.png">
 		</div>
 	</div>
 

@@ -5,7 +5,7 @@
 				<HomeTopNavigation />
 				<div class="layout-page">
 					<div class="w-full">
-						<div class="min-h-[95vh]">
+						<div class="min-h-[95vh] ">
 							<slot />
 						</div>
 						<LandingFooter />
