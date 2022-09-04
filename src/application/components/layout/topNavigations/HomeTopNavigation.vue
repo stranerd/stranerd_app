@@ -92,7 +92,7 @@ ion-toolbar {
 }
 
 .btn {
-	@apply rounded-md font-bold bg-primaryBg px-4 py-1.5 text-white text-xs
+	@apply rounded-md font-bold bg-primaryBg px-4 py-1.5 text-primaryText text-xs
 }
 
 
