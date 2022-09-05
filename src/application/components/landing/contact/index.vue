@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full lg:min-h-[696px] h-auto flex relative py-12 md:py-28">
+	<div class="w-full lg:min-h-[696px] h-auto flex py-12 md:py-28">
 		<div
 			class="container mx-auto p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
@@ -19,7 +19,7 @@
 		</div>
 	</div>
 
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-primaryBg text-primaryText relative py-12 md:py-28">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-primaryBg text-primaryText py-12 md:py-28">
 		<div
 			class="container mx-auto p-6 flex flex-col gap-6 lg:gap-16 items-center justify-center">
 			<h2 class="lg:text-5xl text-3xl font-bold text-bodyBg lg:leading-[62px]">Contact links</h2>
@@ -38,7 +38,7 @@
 		</div>
 	</div>
 
-	<div class="w-full lg:min-h-[696px] h-auto flex relative py-12 md:py-28">
+	<div class="w-full lg:min-h-[696px] h-auto flex py-12 md:py-28">
 		<div
 			class="container mx-auto p-6 flex flex-col lg:flex-row-reverse gap-6 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col w-full md:max-w-xl lg:w-[50%] ">

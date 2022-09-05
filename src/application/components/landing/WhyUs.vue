@@ -1,8 +1,8 @@
 <template>
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg py-12 md:py-28">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
-			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/why-us.png">
+			<img alt="hero" class="w-auto" src="@/assets/images/landing/why-us.png">
 
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
 				<span class="md:text-lg text-sm">Why choose Stranerd?</span>
@@ -13,7 +13,7 @@
 					for students, while equipping lecturers with tools to provide a more palatable learning experience
 					for students.
 				</p>
-				<router-link class="btn landing_btn-outline z-20" to="/auth/signin">
+				<router-link class="btn landing_btn-outline" to="/auth/signin">
 					Join today
 				</router-link>
 			</div>

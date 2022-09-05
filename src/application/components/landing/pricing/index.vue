@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28 ">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg py-12 md:py-28 ">
 
 		<div class="container mx-auto text-bodyText p-6 flex flex-col  md:items-center justify-center">
 			<h1 class="lg:text-5xl text-3xl font-bold  text-primaryBg lg:leading-[62px]">Flexible Plans</h1>
