@@ -1,5 +1,5 @@
 <template>
-	<div id="solutions" class="w-full lg:min-h-[696px] h-auto flex flex-col bg-bodyBg relative py-12 md:py-28 -z-20">
+	<div id="solutions" class="w-full lg:min-h-[696px] h-auto flex flex-col bg-bodyBg relative py-12 md:py-28">
 		<h1 class="lg:text-6xl text-4xl font-bold text-primaryBg text-center ">Our product</h1>
 		<div
 			v-for="product in products"

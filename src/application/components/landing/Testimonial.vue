@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28 -z-20">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
 			<!-- <img src="@/assets/images/landing/testi.svg" alt="hero" class="w-auto z-20"> -->

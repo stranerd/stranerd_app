@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28 -z-20">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-10 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
@@ -14,11 +14,11 @@
 					Find your class
 				</router-link>
 			</div>
-			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/forStudents.svg">
+			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/forStudents.png">
 		</div>
 	</div>
 
-	<div class="w-full lg:min-h-[696px] h-auto flex flex-col bg-primaryBg relative py-12 md:py-28 -z-20 px-6">
+	<div class="w-full lg:min-h-[696px] h-auto flex flex-col bg-primaryBg relative py-12 md:py-28 px-6">
 		<h1 class="lg:text-6xl text-2xl font-bold text-bodyBg text-center mb-16">Classroom features</h1>
 		<div class=" mx-auto justify-center grid lg:grid-cols-3 grid-cols-2 md:gap-8 gap-4  h-full">
 			<div v-for="n in classroomFeatures" :key="n.title" class="card">
@@ -29,10 +29,10 @@
 		</div>
 	</div>
 
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28 -z-20">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
-			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/forStudents2.svg">
+			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/forStudents2.png">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
 				<span class="md:text-lg text-sm">Study Tools</span>
 				<h2 class="lg:text-5xl text-3xl font-bold  text-primaryBg lg:leading-[62px]">Create and access study
@@ -50,7 +50,7 @@
 		</div>
 	</div>
 
-	<div class="w-full lg:min-h-[696px] h-auto flex flex-col bg-primaryBg relative py-12 md:py-28 -z-20 px-6">
+	<div class="w-full lg:min-h-[696px] h-auto flex flex-col bg-primaryBg relative py-12 md:py-28 px-6">
 		<h1 class="lg:text-6xl text-4xl font-bold text-bodyBg text-center mb-16">The study tools are</h1>
 		<div class=" mx-auto justify-center grid lg:grid-cols-3 grid-cols-2 md:gap-8 gap-4  h-full">
 			<div v-for="n in studyTools" :key="n.title" class="card">
@@ -61,7 +61,7 @@
 		</div>
 	</div>
 
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-[#EDF8FF] relative py-12 md:py-28 -z-20">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-[#EDF8FF] relative py-12 md:py-28">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
@@ -80,7 +80,7 @@
 						src="@/assets/images/auth/appstore1.svg" />
 				</div>
 			</div>
-			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/phone.svg">
+			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/phone.png">
 		</div>
 	</div>
 </template>
