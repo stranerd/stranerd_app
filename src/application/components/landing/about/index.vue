@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28 -z-20">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-10 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
@@ -18,7 +18,7 @@
 		</div>
 	</div>
 
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-primaryBg relative py-12 md:py-28 -z-20">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-primaryBg relative py-12 md:py-28">
 		<div
 			class="container mx-auto text-primaryText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
 			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/mission.png">
