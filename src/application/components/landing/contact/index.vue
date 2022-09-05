@@ -8,9 +8,6 @@
 				<p class="text-lg">
 					Want to find out more information? Let us know how we can help you by filling out this form.
 				</p>
-				<router-link class="btn landing_btn-outline lg:hidden" to="/auth/signup">
-					See all
-				</router-link>
 			</div>
 
 			<div class="w-full md:max-w-xl lg:w-[50%] bg-bodyBg shadow-xl p-5 rounded-xl">

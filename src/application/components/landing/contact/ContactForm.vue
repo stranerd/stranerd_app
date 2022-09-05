@@ -51,8 +51,10 @@
 			<div class="flex flex-col">
 				<IonLabel class="font-bold mb-2">Country</IonLabel>
 				<IonSelect v-model="factory.country"
-					:size="24" placeholder="Please Select" position="floating">
-					<ion-select-option value="nigeria">Nigeria</ion-select-option>
+					:size="24" interface="action-sheet" placeholder="Please Select">
+					<IonSelectOption v-for="country in countries" :key="country.name" :value="country.name">
+						{{ country.name }}
+					</IonSelectOption>
 				</IonSelect>
 			</div>
 
@@ -73,5 +75,5 @@
 import { useCreateMessage } from '@app/composable/meta/messages'
 import { MessageType } from '@modules/meta'
 
-const { factory, loading, error, createMessage } = useCreateMessage()
+const { countries, factory, loading, error, createMessage } = useCreateMessage()
 </script>

@@ -1,7 +1,13 @@
-import { Ref, ref, watch } from 'vue'
+import { onMounted, Ref, ref, watch } from 'vue'
 import { MessageFactory, MessagesUseCases } from '@modules/meta'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
+import { HttpClient } from '@modules/core'
+
+const global = {
+	countries: ref([] as { name: string, independent: boolean }[]),
+	fetched: ref(false)
+}
 
 export const useCreateMessage = () => {
 	const { user } = useAuth()
@@ -39,7 +45,18 @@ export const useCreateMessage = () => {
 		} else factory.value.validateAll()
 	}
 
+	onMounted(async () => {
+		if (global.fetched.value) return
+		try {
+			global.countries.value = await new HttpClient().get('https://restcountries.com/v2/all', { fields: 'name' })
+			global.fetched.value = true
+			// eslint-disable-next-line no-empty
+		} catch (err) {
+		}
+	})
+
 	return {
+		...global,
 		factory, error, loading, message,
 		createMessage
 	}
