@@ -2,9 +2,9 @@
 	<IonHeader class="w-full flex flex-col z-10 border-b" role="navigation">
 		<div class="container flex mx-auto items-center justify-between p-4">
 			<div class="flex gap-3">
-				<IonIcon :icon="menuOutline" class="block md:hidden" @click="toggleMenu" />
+				<IonIcon :icon="menuOutline" class="block lg:hidden" @click="toggleMenu" />
 				<span @click="navigateTo('/')">
-					<img alt="logo" class="h-5 md:h-auto" src="/images/icon_with_text.svg">
+					<img alt="logo" class="h-6 md:h-auto" src="/images/icon_with_text.svg">
 				</span>
 			</div>
 
@@ -48,7 +48,7 @@
 			</div>
 
 			<div class="lg:flex items-center justify-between gap-12 text-base hidden">
-				<router-link to="/#solutions">Solutions</router-link>
+				<router-link to="/solutions/students">Solutions</router-link>
 				<a href="https://upload.stranerd.com" rel="noopener noreferrer" target="_blank">Upload</a>
 				<router-link to="/pricing">Pricing</router-link>
 				<router-link to="/about">About</router-link>
