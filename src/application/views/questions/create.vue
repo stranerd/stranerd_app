@@ -30,12 +30,8 @@ import { useReactionModal } from '@app/composable/core/modals'
 export default defineComponent({
 	name: 'QuestionsCreate',
 	components: { QuestionForm, QuestionsPanel },
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth }) => {
-		const { wallet, isSubscribed } = useAuth()
-		if (!isSubscribed.value) {
-			useReactionModal().openNeedsSubscription()
-			return goBackToNonAuth()
-		}
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', 'isSubscribed', async ({ goBackToNonAuth }) => {
+		const { wallet } = useAuth()
 		if (!wallet.value?.subscription.data.questions) {
 			useReactionModal().openNoMoreQuestions()
 			return goBackToNonAuth()

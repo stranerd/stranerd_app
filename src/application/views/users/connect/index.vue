@@ -112,6 +112,8 @@ import { useSearchUsers } from '@app/composable/users'
 import SearchConnectedUser from '@app/components/users/connects/SearchConnectedUser.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useReactionModal } from '@app/composable/core/modals'
+import { saveRouteForAfterSub } from '@app/composable/payment/wallets'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'UsersConnect',
@@ -119,14 +121,18 @@ export default defineComponent({
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Stranerd Connect', { back: true })
+		const route = useRoute()
 		const { id, isSubscribed } = useAuth()
 		const { receivedConnects } = useConnects()
 		const { detail, users: searchedUsers, reset, fetched, loading, search } = useSearchUsers()
 		const users = computed(() => searchedUsers.value.filter((u) => u.id !== id.value))
 		const isOpen = ref(false)
 		const tab = ref(0)
-		const openModal = (t = 0) => {
-			if (t === 1 && !isSubscribed.value) return useReactionModal().openNeedsSubscription()
+		const openModal = async (t = 0) => {
+			if (t === 1 && !isSubscribed.value) {
+				await saveRouteForAfterSub(route.fullPath)
+				return useReactionModal().openNeedsSubscription()
+			}
 			isOpen.value = true
 			tab.value = t
 		}

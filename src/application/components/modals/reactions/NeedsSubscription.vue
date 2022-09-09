@@ -6,7 +6,9 @@
 			</div>
 			<IonText class="font-bold text-lg">You're not subscribed</IonText>
 			<IonText class="text-secondaryText text-sm">Subscribe to continue</IonText>
-			<IonButton class="w-full mt-2 btn-outline" @click="navigate">Subscribe</IonButton>
+			<router-link class="w-full mt-2" to="/account/subscription/plans">
+				<IonButton class="w-full btn-outline">Subscribe</IonButton>
+			</router-link>
 			<IonButton class="w-full btn-primary mt-2" @click="close">
 				Got It
 			</IonButton>
@@ -17,8 +19,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { alertCircleOutline } from 'ionicons/icons'
-import { useRouter } from 'vue-router'
-import { useWallet } from '@app/composable/payment/wallets'
 
 export default defineComponent({
 	name: 'NeedsSubscription',
@@ -29,13 +29,7 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const { saveRouteForAfterSub } = useWallet()
-		const router = useRouter()
-		const navigate = async () => {
-			await saveRouteForAfterSub()
-			await router.push('/account/subscription/plans')
-		}
-		return { alertCircleOutline, navigate }
+		return { alertCircleOutline }
 	}
 })
 </script>
