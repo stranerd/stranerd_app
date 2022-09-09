@@ -25,17 +25,20 @@ import { useCreateQuestion } from '@app/composable/questions/questions'
 import { useRouteMeta } from '@app/composable/core/states'
 import QuestionsPanel from '@app/components/layout/panels/QuestionsPanel.vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { Notify } from '@utils/dialog'
+import { useReactionModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'QuestionsCreate',
 	components: { QuestionForm, QuestionsPanel },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth }) => {
-		const { wallet } = useAuth()
-		if (!wallet.value) return goBackToNonAuth()
+		const { wallet, isSubscribed } = useAuth()
+		if (!isSubscribed.value) {
+			useReactionModal().openNeedsSubscription()
+			return goBackToNonAuth()
+		}
 		if (!wallet.value?.subscription.data.questions) {
-			Notify({ title: 'You don\'t have any questions left' })
-			return '/account/subscription'
+			useReactionModal().openNoMoreQuestions()
+			return goBackToNonAuth()
 		}
 	}]),
 	setup () {
