@@ -5,7 +5,11 @@ import { addToArray } from '@utils/commons'
 
 const noPlan = new PlanEntity({
 	id: null as unknown as string, createdAt: 0, updatedAt: 0,
-	active: true, amount: 0, currency: Currencies.NGN, interval: 'monthly', name: 'Solo', data: { questions: 0 }
+	active: true, amount: 0, currency: Currencies.NGN, interval: 'monthly', name: 'Free',
+	data: { questions: 0 }, features: {
+		classes: true, flashCards: true, homework: false, connect: false,
+		tests: false, solutions: false, manuals: false
+	}
 })
 
 const global = {

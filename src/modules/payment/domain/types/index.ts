@@ -57,6 +57,16 @@ export enum PlanDataType {
 
 export type PlanData = Record<PlanDataType, number>
 
+export type PlanFeatures = {
+	classes: boolean
+	flashCards: boolean
+	homework: boolean
+	connect: boolean
+	tests: boolean
+	solutions: boolean
+	manuals: boolean
+}
+
 export type FlutterwaveSecrets = {
 	publicKey: string
 }

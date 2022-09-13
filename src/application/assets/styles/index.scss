@@ -4,43 +4,43 @@
 @import 'katex/dist/katex.min.css';
 
 :root {
-	--clr-primaryBg: #162565;
-	--clr-primaryText: #FFFFFF;
-	--clr-primaryHover: #194084;
-	--clr-bodyBg: #FFFFFF;
-	--clr-bodyText: #05090D;
-	--clr-headerBg: #162565;
-	--clr-headerText: #FFFFFF;
-	--clr-itemBg: #F1F3F7;
-	--clr-secondaryText: #494C58;
-	--clr-disabled: #C5C9D9;
-	--clr-outlineHover: #B6D9FF;
-	--clr-success: #0FDC64;
-	--clr-danger: #FF3232;
-	--clr-info: #218FDF;
-	--clr-warning: #FF8800;
-	--clr-royal: #AC92EB;
+	--clr-primaryBg: rgb(22, 37, 101);
+	--clr-primaryText: rgb(255, 255, 255);
+	--clr-primaryHover: rgb(25, 64, 132);
+	--clr-bodyBg: rgb(255, 255, 255);
+	--clr-bodyText: rgb(5, 9, 13);
+	--clr-headerBg: rgb(22, 37, 101);
+	--clr-headerText: rgb(255, 255, 255);
+	--clr-itemBg: rgb(241, 243, 247);
+	--clr-secondaryText: rgb(73, 76, 88);
+	--clr-disabled: rgb(197, 201, 217);
+	--clr-outlineHover: rgb(182, 217, 255);
+	--clr-success: rgb(15, 220, 100);
+	--clr-danger: rgb(255, 50, 50);
+	--clr-info: rgb(33, 143, 223);
+	--clr-warning: rgb(255, 136, 0);
+	--clr-royal: rgb(172, 146, 235);
 }
 
 $theme: any;
 @media (prefers-color-scheme: $theme) {
 	:root {
-		--clr-primaryBg: #FFFFFF;
-		--clr-primaryText: #1E2230;
-		--clr-primaryHover: #F1EAEA;
-		--clr-bodyBg: #1E2230;
-		--clr-bodyText: #FFFFFF;
-		--clr-headerBg: #05090D;
-		--clr-headerText: #FFFFFF;
-		--clr-itemBg: #494C58;
-		--clr-secondaryText: #F1F3F7;
-		--clr-disabled: #313142;
-		--clr-outlineHover: #181C27;
-		--clr-success: #0FDC64;
-		--clr-danger: #FF3232;
-		--clr-info: #218FDF;
-		--clr-warning: #FF8800;
-		--clr-royal: #AC92EB;
+		--clr-primaryBg: rgb(255, 255, 255);
+		--clr-primaryText: rgb(30, 34, 48);
+		--clr-primaryHover: rgb(241, 234, 234);
+		--clr-bodyBg: rgb(30, 34, 48);
+		--clr-bodyText: rgb(255, 255, 255);
+		--clr-headerBg: rgb(5, 9, 13);
+		--clr-headerText: rgb(255, 255, 255);
+		--clr-itemBg: rgb(73, 76, 88);
+		--clr-secondaryText: rgb(241, 243, 247);
+		--clr-disabled: rgb(49, 49, 66);
+		--clr-outlineHover: rgb(24, 28, 39);
+		--clr-success: rgb(15, 220, 100);
+		--clr-danger: rgb(255, 50, 50);
+		--clr-info: rgb(33, 143, 223);
+		--clr-warning: rgb(255, 136, 0);
+		--clr-royal: rgb(172, 146, 235);
 	}
 }
 

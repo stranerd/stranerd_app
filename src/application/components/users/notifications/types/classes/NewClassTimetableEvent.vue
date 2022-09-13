@@ -17,9 +17,13 @@
 				<div class="flex gap-2">
 					<IonIcon :icon="timeOutline" />
 					<span>
-						{{ event.data.start.hour }}:{{ event.data.start.minute }}
+						{{
+							event.data.start.hour.toString().padStart(2, '0')
+						}}:{{ event.data.start.minute.toString().padStart(2, '0') }}
 						&nbsp;-&nbsp;
-						{{ event.data.end.hour }}:{{ event.data.end.minute }}
+						{{
+							event.data.end.hour.toString().padStart(2, '0')
+						}}:{{ event.data.end.minute.toString().padStart(2, '0') }}
 					</span>
 				</div>
 			</router-link>

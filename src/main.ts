@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import AppComponent from './App.vue'
 import { IonicVue } from '@ionic/vue'
 import 'katex/dist/katex.min'
-import './application/assets/styles/index.scss'
+import '@app/assets/styles/index.scss'
 import { parseLoggedInUser } from '@app/plugins/parseLoggedInUser'
 import { ipAddressGetter } from '@app/plugins/ipAddressGetter'
 import { authClient } from '@app/plugins/authClient'
@@ -14,6 +14,7 @@ import { clearAllNotifications } from '@utils/push'
 import { router } from '@app/router'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { ChatScroll } from '@app/directives/chat-scroll'
+import { registerServiceWorker } from './registerServiceWorker'
 
 const globalPlugins = [parseLoggedInUser, authClient, ipAddressGetter, cssListeners]
 
@@ -36,6 +37,8 @@ const init = async () => {
 	})
 
 	await defineCustomElements(window)
+
+	await registerServiceWorker()
 
 	await clearAllNotifications()
 }

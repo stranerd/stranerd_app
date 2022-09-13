@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full lg:h-[696px] h-auto flex bg-primaryBg relative py-12">
+	<div class="w-full lg:h-[696px] h-auto flex bg-primaryBg py-12 relative">
 		<div class="container mx-auto text-primaryText p-6 flex justify-start items-center">
 			<article class="md:max-w-[560px] ">
 				<h1 class=" w-full md:text-6xl text-2xl font-bold pr-24 md:pr-0">
@@ -16,7 +16,7 @@
 
 		</div>
 
-		<img alt="hero" class="absolute right-0 top-0 hidden 2xl:block" src="@/assets/images/landing/hero.svg">
+		<img alt="hero" class="absolute right-0 top-0 hidden 2xl:block" src="@/assets/images/landing/hero.png">
 		<img alt="hero" class="absolute right-0 top-0 hidden lg:block 2xl:hidden"
 			src="@/assets/images/landing/hero-md.png">
 	</div>

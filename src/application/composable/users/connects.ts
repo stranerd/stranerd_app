@@ -5,6 +5,8 @@ import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 import { useReactionModal } from '@app/composable/core/modals'
+import { saveRouteForAfterSub } from '@app/composable/payment/wallets'
+import { useRoute } from 'vue-router'
 
 const global = {} as Record<string, {
 	connects: Ref<ConnectEntity[]>
@@ -15,6 +17,7 @@ const global = {} as Record<string, {
 export const useConnects = () => {
 	const { id, isSubscribed } = useAuth()
 	const userId = id.value
+	const route = useRoute()
 	if (global[userId] === undefined) {
 		const listener = useListener(async () => {
 			return ConnectsUseCases.listen({
@@ -64,7 +67,10 @@ export const useConnects = () => {
 
 	const createConnect = async (user: string) => {
 		if (global[userId].loading.value) return
-		if (!isSubscribed.value) return useReactionModal().openNeedsSubscription()
+		if (!isSubscribed.value) {
+			await saveRouteForAfterSub(route.fullPath)
+			return useReactionModal().openNeedsSubscription()
+		}
 		await global[userId].setError('')
 		await global[userId].setLoading(true)
 		try {

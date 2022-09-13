@@ -2,6 +2,8 @@ import { NavigationGuardWithThis, RouteLocationNormalized } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 import { storage } from '@utils/storage'
 import { REDIRECT_SESSION_NAME } from '@utils/constants'
+import { saveRouteForAfterSub } from '@app/composable/payment/wallets'
+import { useReactionModal } from '@app/composable/core/modals'
 
 type MiddleWareArgs = {
 	to: RouteLocationNormalized,
@@ -29,8 +31,15 @@ export const isAuthenticated = defineMiddleware(async ({ to }) => {
 		return '/auth/verify'
 	}
 })
+export const isSubscribed = defineMiddleware(async ({ to, goBackToNonAuth }) => {
+	if (!useAuth().isSubscribed.value) {
+		await saveRouteForAfterSub(to.fullPath)
+		useReactionModal().openNeedsSubscription()
+		return goBackToNonAuth()
+	}
+})
 
-const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin }
+const globalMiddlewares = { isAuthenticated, isNotAuthenticated, isAdmin, isSubscribed }
 type Middleware = MiddlewareFunction | keyof typeof globalMiddlewares
 
 export const generateMiddlewares = (middlewares: Middleware[]): NavigationGuardWithThis<undefined> => async (to, fromRoute) => {

@@ -1,11 +1,11 @@
 <template>
-	<div id="solutions" class="w-full lg:min-h-[696px] h-auto flex flex-col bg-bodyBg relative py-12 md:py-28 -z-20">
+	<div id="solutions" class="w-full lg:min-h-[696px] h-auto flex flex-col bg-bodyBg py-12 md:py-28">
 		<h1 class="lg:text-6xl text-4xl font-bold text-primaryBg text-center ">Our product</h1>
 		<div
 			v-for="product in products"
 			:key="product.name"
 			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center product lg:mt-32 mt-12">
-			<img :src="product.img" alt="hero" class="w-auto z-20">
+			<img :src="product.img" alt="hero" class="w-auto">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
 				<span class="md:text-lg text-sm">{{ product.super }}</span>
 				<h2 class="lg:text-5xl text-3xl font-bold  text-primaryBg lg:leading-[62px]">{{ product.name }}</h2>

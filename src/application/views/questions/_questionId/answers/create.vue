@@ -37,7 +37,7 @@ export default defineComponent({
 			const { questionId } = to.params
 			const question = getAnsweringQuestion()
 			if (!question || question.id !== questionId || question.user.id === id.value) return `/questions/${questionId}`
-		}
+		}, 'isSubscribed'
 	]),
 	setup () {
 		useRouteMeta('Question', { back: true })

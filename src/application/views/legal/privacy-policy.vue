@@ -1,7 +1,7 @@
 <template>
-	<DefaultLayout>
-		<PdfReader link="/legal/privacy-policy.pdf" />
-	</DefaultLayout>
+	<HomeLayout>
+		<PdfReader class="max-w-[900px] mx-auto" link="/legal/privacy-policy.pdf" />
+	</HomeLayout>
 </template>
 
 <script lang="ts">

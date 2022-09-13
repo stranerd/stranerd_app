@@ -3,6 +3,7 @@
 	"description": "Stranerd App",
 	"version": "0.0.1",
 	"private": true,
+	"license": "UNLICENSED",
 	"scripts": {
 		"postinstall": "yarn jetify",
 		"serve": "vue-cli-service serve",
@@ -60,7 +61,14 @@
 		"vue-pdf-embed": "^1.1.4",
 		"vue-router": "^4.1.1",
 		"vue-waypoint": "^4.2.4",
-		"vue3-editor": "^0.1.1"
+		"vue3-editor": "^0.1.1",
+		"workbox-background-sync": "^6.5.4",
+		"workbox-expiration": "^6.5.4",
+		"workbox-precaching": "^6.5.4",
+		"workbox-routing": "^6.5.4",
+		"workbox-strategies": "^6.5.4",
+		"workbox-webpack-plugin": "^6.5.4",
+		"workbox-window": "^6.5.4"
 	},
 	"devDependencies": {
 		"@capacitor/cli": "3.6.0",
@@ -72,6 +80,7 @@
 		"@typescript-eslint/parser": "^5.30.5",
 		"@vue/cli-plugin-babel": "^5.0.8",
 		"@vue/cli-plugin-eslint": "^5.0.8",
+		"@vue/cli-plugin-pwa": "^5.0.8",
 		"@vue/cli-plugin-router": "^5.0.8",
 		"@vue/cli-plugin-typescript": "^5.0.8",
 		"@vue/cli-service": "^5.0.8",

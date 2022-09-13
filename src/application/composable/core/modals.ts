@@ -30,6 +30,7 @@ import CreateTag from '@app/components/modals/interactions/CreateTag.vue'
 import EditTag from '@app/components/modals/interactions/EditTag.vue'
 import QuestionCreated from '@app/components/modals/reactions/QuestionCreated.vue'
 import NeedsSubscription from '@app/components/modals/reactions/NeedsSubscription.vue'
+import NoMoreQuestions from '@app/components/modals/reactions/NoMoreQuestions.vue'
 
 const SessionModal = modal.register('Session', { CreateSession: CreateReport, Ratings: CreateReport })
 const ReportModal = modal.register('Report', { CreateReport })
@@ -45,7 +46,7 @@ const SchoolModal = modal.register('School', {
 })
 const UserModal = modal.register('User', { Settings, FabMenu, ProfileMenu })
 const InteractionModal = modal.register('Interaction', { CreateComment, CreateTag, EditTag })
-const ReactionModal = popover.register('Reaction', { QuestionCreated, NeedsSubscription })
+const ReactionModal = popover.register('Reaction', { QuestionCreated, NeedsSubscription, NoMoreQuestions })
 
 export const useSessionModal = () => SessionModal
 export const useReportModal = () => ReportModal

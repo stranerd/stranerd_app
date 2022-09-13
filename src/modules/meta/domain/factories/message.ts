@@ -34,7 +34,7 @@ export class MessageFactory extends BaseFactory<null, MessageToModel, Keys> {
 	constructor () {
 		super({
 			firstName: '', lastName: '', email: '', message: '', phone: '', country: '',
-			type: MessageType.student, school: '', position: ''
+			type: null as any, school: '', position: ''
 		})
 	}
 

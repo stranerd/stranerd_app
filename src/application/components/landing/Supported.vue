@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full lg:min-h-[696px] h-auto flex flex-col bg-bodyBg relative py-12 md:py-28 -z-20 overflow-x-hidden">
+	<div class="w-full lg:min-h-[696px] h-auto flex flex-col bg-bodyBg py-12 md:py-28 overflow-x-hidden">
 		<h1 class="lg:text-6xl text-4xl font-bold text-primaryBg text-center ">Supported by</h1>
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">

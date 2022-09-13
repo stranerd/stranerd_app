@@ -1,7 +1,7 @@
 <template>
-	<DefaultLayout>
-		<PdfReader link="/legal/terms-of-use.pdf" />
-	</DefaultLayout>
+	<HomeLayout>
+		<PdfReader class="max-w-[900px] mx-auto" link="/legal/honor-code.pdf" />
+	</HomeLayout>
 </template>
 
 <script lang="ts">
@@ -10,10 +10,10 @@ import PdfReader from '@app/components/core/media/PdfReader.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
-	name: 'LegalTermsOfUse',
+	name: 'LegalHonorCode',
 	components: { PdfReader },
 	setup () {
-		useRouteMeta('Terms of Use', { back: true })
+		useRouteMeta('HonorCode', { back: true })
 	}
 })
 </script>

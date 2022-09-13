@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28 -z-20">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg py-12 md:py-28">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-10 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
@@ -14,11 +14,11 @@
 					Get Started
 				</button>
 			</div>
-			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/stranerdConnect.svg">
+			<img alt="hero" class="w-auto" src="@/assets/images/landing/stranerdConnect.png">
 		</div>
 	</div>
 
-	<div class="w-full lg:min-h-[696px] h-auto flex flex-col bg-primaryBg relative py-12 md:py-28 -z-20 px-6">
+	<div class="w-full lg:min-h-[696px] h-auto flex flex-col bg-primaryBg py-12 md:py-28 px-6">
 		<h1 class="lg:text-6xl text-4xl font-bold text-bodyBg text-center mb-16">Features</h1>
 		<div class=" mx-auto place-content-center self-center grid lg:grid-cols-2 grid-cols-2 md:gap-8 gap-4  h-full">
 			<div v-for="n in features" :key="n.title" class="card">
@@ -29,7 +29,7 @@
 		</div>
 	</div>
 
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-[#00c6b52c] relative py-12 md:py-28 -z-20">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-[#00c6b52c] py-12 md:py-28">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
@@ -48,14 +48,12 @@
 						src="@/assets/images/auth/appstore1.svg" />
 				</div>
 			</div>
-			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/phone.svg">
+			<img alt="hero" class="w-auto" src="@/assets/images/landing/phone.png">
 		</div>
 	</div>
-	<LandingFooter />
 </template>
 
 <script lang="ts" setup>
-import LandingFooter from '@app/components/landing/LandingFooter.vue'
 import { people, person } from 'ionicons/icons'
 
 const features = [
@@ -71,8 +69,6 @@ const features = [
 		desc: 'Class to class discussions with other classes.',
 		color: '#FF6496'
 	}
-
-
 ]
 </script>
 

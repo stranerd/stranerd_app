@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg relative py-12 md:py-28 -z-20">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg py-12 md:py-28">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-10 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
@@ -14,14 +14,14 @@
 					Join today
 				</router-link>
 			</div>
-			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/vision.png">
+			<img alt="hero" class="w-auto" src="@/assets/images/landing/vision.png">
 		</div>
 	</div>
 
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-primaryBg relative py-12 md:py-28 -z-20">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-primaryBg py-12 md:py-28">
 		<div
 			class="container mx-auto text-primaryText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
-			<img alt="hero" class="w-auto z-20" src="@/assets/images/landing/mission.png">
+			<img alt="hero" class="w-auto" src="@/assets/images/landing/mission.png">
 
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
 				<span class="md:text-lg text-sm">Our Mission</span>
@@ -44,7 +44,3 @@
 
 <script lang="ts" setup>
 import Supported from '@app/components/landing/Supported.vue'</script>
-
-<style scoped>
-
-</style>

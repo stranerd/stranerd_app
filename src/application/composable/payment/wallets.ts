@@ -2,11 +2,19 @@ import { Bank, CardsUseCases, WalletAccountFactory, WalletsUseCases } from '@mod
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { onMounted, Ref, ref, watch } from 'vue'
+import { storage } from '@utils/storage'
+
+const AFTER_SUB_ROUTE_KEY = 'AFTER_SUBSCRIPTION_ROUTE_KEY'
+
+export const saveRouteForAfterSub = async (route: string) => {
+	await storage.set(AFTER_SUB_ROUTE_KEY, route)
+}
 
 export const useWallet = () => {
 	const { wallet } = useAuth()
+	const route = useRoute()
 	const router = useRouter()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
@@ -27,6 +35,9 @@ export const useWallet = () => {
 			if (primaryCard) {
 				wallet.value = await WalletsUseCases.subscribeToPlan(subscriptionId)
 				await setMessage('Subscribed successfully!')
+				const route = await storage.get(AFTER_SUB_ROUTE_KEY)
+				await storage.remove(AFTER_SUB_ROUTE_KEY)
+				if (route) await router.push(route)
 			} else {
 				await setError('You do not have a primary card. Add one!')
 				await router.push('/account/subscription/#cards')

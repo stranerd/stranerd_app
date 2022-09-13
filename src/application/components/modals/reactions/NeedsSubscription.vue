@@ -6,10 +6,8 @@
 			</div>
 			<IonText class="font-bold text-lg">You're not subscribed</IonText>
 			<IonText class="text-secondaryText text-sm">Subscribe to continue</IonText>
-			<router-link class="mt-2 w-full" to="/account/subscription/plans">
-				<IonButton class="w-full btn-outline">
-					Subscribe
-				</IonButton>
+			<router-link class="w-full mt-2" to="/account/subscription/plans">
+				<IonButton class="w-full btn-outline">Subscribe</IonButton>
 			</router-link>
 			<IonButton class="w-full btn-primary mt-2" @click="close">
 				Got It

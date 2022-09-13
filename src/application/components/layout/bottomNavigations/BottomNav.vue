@@ -8,8 +8,8 @@
 						{ name: 'Discussions', path: '/messages', icon: chatbubbles, iconOutline:chatbubblesOutline },
 						{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
 						{ name: 'Tests', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
-						...(isLoggedIn ? [{ name: 'Account', path: `/account`, icon: person, iconOutline: personOutline }] : []),
-						...(isAdmin ? [{ name: 'Admin', path: `/admin/`, icon: statsChart, iconOutline: statsChartOutline }] : [])
+						{ name: 'Account', path: '/account', icon: person, iconOutline: personOutline },
+						...(isAdmin ? [{ name: 'Admin', path: '/admin/', icon: statsChart, iconOutline: statsChartOutline }] : [])
 					]" :key="path" :class="{'text-secondaryText': $route.path !== path}" :to="path"
 					class="col-span-1 flex flex-col items-center justify-center text-xl">
 					<IonIcon :icon="$route.path === path ? icon : iconOutline" />
@@ -41,10 +41,9 @@ import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	setup () {
-		const { isLoggedIn, isAdmin } = useAuth()
+		const { isAdmin } = useAuth()
 		return {
-			isLoggedIn, isAdmin,
-			personOutline, person, chatbubblesOutline, chatbubbles, receiptOutline, receipt,
+			isAdmin, personOutline, person, chatbubblesOutline, chatbubbles, receiptOutline, receipt,
 			helpCircleOutline, helpCircle, homeOutline, home, searchOutline, search, statsChartOutline, statsChart
 		}
 	}
