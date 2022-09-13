@@ -40,6 +40,10 @@ module.exports = {
 		name: 'Stranerd',
 		themeColor: 'rgb(22, 37, 101)',
 		msTileColor: '#FFFFFF',
+		workboxPluginMode: 'InjectManifest',
+		workboxOptions: {
+			swSrc: './public/service_worker.js'
+		},
 		manifestOptions: {
 			name: 'Stranerd',
 			short_name: 'Stranerd',
