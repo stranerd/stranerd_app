@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue'
 import { UserEntity, UsersUseCases } from '@modules/users'
-import { AuthDetails, AuthTypes, UserLocation } from '@modules/auth/domain/entities/auth'
+import { AuthDetails, AuthTypes } from '@modules/auth/domain/entities/auth'
 import { AuthUseCases } from '@modules/auth'
 import { isClient } from '@utils/environment'
 import { setupPush } from '@utils/push'
@@ -12,15 +12,8 @@ const global = {
 	auth: ref(null as AuthDetails | null),
 	user: ref(null as UserEntity | null),
 	wallet: ref(null as WalletEntity | null),
-	location: ref(null as UserLocation | null),
 	listener: null as null | (() => void)
 }
-
-export const CONVERSION_RATES = {
-	USD: 1,
-	NGN: 500,
-	INR: 75
-} as const
 
 export const useAuth = () => {
 	const id = computed({
@@ -63,10 +56,6 @@ export const useAuth = () => {
 		set: () => {
 		}
 	})
-
-	const setUserLocation = (data: UserLocation) => {
-		global.location.value = data
-	}
 
 	const setAuthUser = async (details: AuthDetails | null) => {
 		if (global.listener) global.listener()
@@ -120,21 +109,10 @@ export const useAuth = () => {
 		if (isClient()) window.location.assign('/auth/signin')
 	}
 
-	const getKey = (): keyof typeof CONVERSION_RATES | null => {
-		if (!global.location.value) return null
-		const key = global.location.value.currencyCode as keyof typeof CONVERSION_RATES
-		return CONVERSION_RATES[key] ? key : null
-	}
-	const getLocalCurrency = () => getKey() ?? 'USD'
-	const getLocalCurrencySymbol = () => getKey() ? global.location.value?.currencySymbol ?? '$' : '$'
-
-	const getLocalAmount = (amount: number) => parseFloat(Number(amount * CONVERSION_RATES[getLocalCurrency()]).toFixed(2))
-
 	return {
-		id, bio, user: global.user, auth: global.auth, location: global.location, wallet: global.wallet,
+		id, bio, user: global.user, auth: global.auth, wallet: global.wallet,
 		isLoggedIn, isEmailVerified, isAdmin, isTutor, currentSessionId, hasPassword, isSubscribed,
-		setAuthUser, setUserLocation, signin, signout,
-		getLocalAmount, getLocalCurrency, getLocalCurrencySymbol
+		setAuthUser, signin, signout
 	}
 }
 
