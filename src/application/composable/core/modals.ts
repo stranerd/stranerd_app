@@ -32,7 +32,6 @@ import QuestionCreated from '@app/components/modals/reactions/QuestionCreated.vu
 import NeedsSubscription from '@app/components/modals/reactions/NeedsSubscription.vue'
 import NoMoreQuestions from '@app/components/modals/reactions/NoMoreQuestions.vue'
 
-const SessionModal = modal.register('Session', { CreateSession: CreateReport, Ratings: CreateReport })
 const ReportModal = modal.register('Report', { CreateReport })
 const StudyModal = modal.register('Study', {
 	CreateSet, EditSet, SaveEntity, CreateTestPrep, EditTestPrep, CreateNote, EditNote
@@ -48,7 +47,6 @@ const UserModal = modal.register('User', { Settings, FabMenu, ProfileMenu })
 const InteractionModal = modal.register('Interaction', { CreateComment, CreateTag, EditTag })
 const ReactionModal = popover.register('Reaction', { QuestionCreated, NeedsSubscription, NoMoreQuestions })
 
-export const useSessionModal = () => SessionModal
 export const useReportModal = () => ReportModal
 export const useStudyModal = () => StudyModal
 export const useClassModal = () => ClassModal
@@ -58,7 +56,7 @@ export const useInteractionModal = () => InteractionModal
 export const useReactionModal = () => ReactionModal
 
 export const allModals = [
-	useSessionModal, useReportModal, useStudyModal, useClassModal,
+	useReportModal, useStudyModal, useClassModal,
 	useSchoolModal, useUserModal, useInteractionModal, useReactionModal
 ]
 

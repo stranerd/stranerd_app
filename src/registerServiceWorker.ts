@@ -15,6 +15,7 @@ export const registerServiceWorker = async () => {
 		wb.addEventListener('externalwaiting' as any, showSkipWaitingPrompt)
 		wb.register().then((reg) => registration = reg)
 	} catch (err) {
+		// eslint-disable-next-line
 		console.error(err)
 	}
 }

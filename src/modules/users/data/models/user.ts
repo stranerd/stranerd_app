@@ -1,13 +1,4 @@
-import {
-	UserAccount,
-	UserBio,
-	UserDates,
-	UserRank,
-	UserRoles,
-	UserSchoolData,
-	UserSession,
-	UserStatus
-} from '../../domain/types'
+import { UserAccount, UserBio, UserDates, UserRank, UserRoles, UserSchoolData, UserStatus } from '../../domain/types'
 
 export interface UserFromModel extends UserToModel {
 	id: string
@@ -15,7 +6,6 @@ export interface UserFromModel extends UserToModel {
 	roles: UserRoles
 	account: UserAccount
 	status: UserStatus
-	session: UserSession
 	dates: UserDates
 	rank: UserRank
 	nextRank: UserRank | null

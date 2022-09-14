@@ -45,12 +45,6 @@ export const useAuth = () => {
 		get: () => !!global.wallet.value?.subscription.active, set: () => {
 		}
 	})
-	const currentSessionId = computed({
-		get: () => global.user.value?.currentSession ?? null,
-		set: () => {
-		}
-	})
-
 	const hasPassword = computed({
 		get: () => !!global.auth.value?.authTypes.includes(AuthTypes.email),
 		set: () => {
@@ -111,7 +105,7 @@ export const useAuth = () => {
 
 	return {
 		id, bio, user: global.user, auth: global.auth, wallet: global.wallet,
-		isLoggedIn, isEmailVerified, isAdmin, isTutor, currentSessionId, hasPassword, isSubscribed,
+		isLoggedIn, isEmailVerified, isAdmin, isTutor, hasPassword, isSubscribed,
 		setAuthUser, signin, signout
 	}
 }

@@ -86,24 +86,12 @@ export interface UserAccount {
 		longestStreak: number
 		lastEvaluatedAt: number
 	}
-	ratings: {
-		total: number
-		count: number
-	}
-	referrals: Record<string, boolean>
 	rankings: Record<RankingTimes, number>
 }
 
 export interface UserStatus {
 	connections: string[]
 	lastUpdatedAt: number
-}
-
-export interface UserSession {
-	currentSessions: string[]
-	currentTutorSessions: string[]
-	requests: string[]
-	lobby: string[]
 }
 
 export interface UserDates {
