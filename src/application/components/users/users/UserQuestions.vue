@@ -1,11 +1,11 @@
 <template>
 	<div class="showcase-flex flex-1">
-		<form v-if="questions.length" class="p-4 lg:p-0" @submit.prevent="search">
+		<form v-if="questions.length && 0" class="p-4 lg:p-0" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 		</form>
 		<EmptyUserQuestions v-if="!loading && !error && questions.length === 0" />
-		<UserQuestionsCard v-for="question in (searchMode ? searchResults : questions)" :key="question.hash"
-			:question="question" class="border-bottom-line" />
+		<QuestionListCard v-for="question in (searchMode ? searchResults : questions)" :key="question.hash"
+			:question="question" />
 		<BlockLoading v-if="loading" />
 		<LoadMore v-if="hasMore && !searchMode" :load="fetchOlderQuestions" />
 	</div>
@@ -13,13 +13,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import UserQuestionsCard from '@app/components/questions/questions/UserQuestionsListCard.vue'
+import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
 import { useUserQuestionList } from '@app/composable/users/users/questions'
 import { UserEntity } from '@modules/users'
 
 export default defineComponent({
 	name: 'UserQuestions',
-	components: { UserQuestionsCard },
+	components: { QuestionListCard },
 	props: {
 		user: {
 			type: UserEntity,

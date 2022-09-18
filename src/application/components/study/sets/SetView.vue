@@ -33,15 +33,14 @@
 		</template>
 		<template v-if="['All', 'Flashcards'].includes(filter)">
 			<FlashCardListCard v-for="flashCard in filteredFlashCards" :key="flashCard.hash"
-				:flashCard="flashCard" class="border-bottom-line" />
+				:flashCard="flashCard" />
 		</template>
 		<template v-if="['All', 'Notes'].includes(filter)">
 			<NoteListCard v-for="note in filteredNotes" :key="note.hash" :note="note"
 				class="border-bottom-line" />
 		</template>
 		<template v-if="['All', 'Questions'].includes(filter)">
-			<QuestionListCard v-for="question in filteredQuestions" :key="question.hash" :question="question"
-				class="border-bottom-line" />
+			<QuestionListCard v-for="question in filteredQuestions" :key="question.hash" :question="question" />
 		</template>
 		<BlockLoading v-if="loading" />
 	</div>

@@ -1,6 +1,6 @@
 <template>
 	<span v-if="tag"
-		class="py-1 px-3 text-sm rounded-2xl bg-itemBg text-secondaryText text-center leading-none font-bold">
+		class="py-1 px-3 text-sm rounded-2xl bg-itemBg text-secondaryText text-center leading-none">
 		<slot :tag="tag">{{ tag }}</slot>
 	</span>
 </template>

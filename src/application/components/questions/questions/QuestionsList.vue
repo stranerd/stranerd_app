@@ -13,8 +13,7 @@
 
 		<EmptyState v-if="!loading && !error && questions.length === 0" class="border-bottom-line"
 			info="There are no questions available." />
-		<QuestionListCard v-for="question in questions" :key="question.hash" :question="question"
-			class="border-bottom-line" />
+		<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
 		<BlockLoading v-if="loading" />
 		<LoadMore v-if="hasMore" :load="fetchOlderQuestions" />
 	</div>
