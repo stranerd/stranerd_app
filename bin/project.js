@@ -1,11 +1,11 @@
-const { CapacitorProject } = require('@capacitor/project')
+const { MobileProject } = require('@trapezedev/project')
 const fs = require('fs')
 const envs = require('../env.json')
 const { asset_links, google_client_ids, package_name, app_name, environment, domain } = envs
 
 const getProject = async () => {
-	const project = new CapacitorProject({
-		ios: { path: 'ios' },
+	const project = new MobileProject({
+		ios: { path: 'ios/App' },
 		android: { path: 'android' }
 	})
 	await project.load()
