@@ -1,17 +1,19 @@
 <template>
 	<DefaultLayout>
-		<ComingSoon class="h-full" title="We are building a digital classroom. Stay tuned!" />
+		<ClassesList />
 	</DefaultLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import ClassesList from '@app/components/classes/classes/ClassesList.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
-	name: 'Classes',
+	name: 'ClassesExplore',
+	components: { ClassesList },
 	setup () {
-		useRouteMeta('Classes', {})
+		useRouteMeta('Find a Class', { back: true })
 	}
 })
 </script>

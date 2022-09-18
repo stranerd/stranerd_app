@@ -1,6 +1,7 @@
 <template>
 	<DefaultLayout>
-		<ComingSoon class="h-full" title="We are building a digital classroom. Stay tuned!" />
+		<ComingSoon class="h-full"
+			title="We are working with your university to create test preps for you. Stay tuned!" />
 	</DefaultLayout>
 </template>
 
@@ -9,9 +10,9 @@ import { defineComponent } from 'vue'
 import { useRouteMeta } from '@app/composable/core/states'
 
 export default defineComponent({
-	name: 'Classes',
+	name: 'Study',
 	setup () {
-		useRouteMeta('Classes', {})
+		useRouteMeta('Study', {})
 	}
 })
 </script>
