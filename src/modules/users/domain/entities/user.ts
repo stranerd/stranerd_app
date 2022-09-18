@@ -1,6 +1,5 @@
 import { BaseEntity, parseMedia } from '@modules/core'
-import { capitalize, formatNumber } from '@utils/commons'
-import { getRankImage } from './rank'
+import { capitalize } from '@utils/commons'
 import {
 	CollegeType,
 	EmbeddedUser,
@@ -94,27 +93,8 @@ export class UserEntity extends BaseEntity {
 		return this.account.score
 	}
 
-	get rankImage () {
-		return getRankImage(this.rank.id)
-	}
-
-	get nextRankImage () {
-		return this.nextRank ? getRankImage(this.nextRank.id) : null
-	}
-
-	get formattedScore () {
-		return formatNumber(this.score, 2)
-	}
-
 	get meta () {
 		return this.account.meta
-	}
-
-	get nerdScoreMessage () {
-		if (this.account.rankings.daily > 10) return 'Your performance has been excellent today. Keep it up.'
-		if (this.account.rankings.daily > 5) return 'You are on a streak today. Keep it rolling!'
-		if (this.account.rankings.daily > 2) return 'Keep doing what you are doing!'
-		return 'Time to pick up on your performance.'
 	}
 
 	get isAdmin () {

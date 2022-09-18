@@ -113,14 +113,12 @@ ion-input, ion-textarea, ion-select {
 	margin: 0 !important;
 	--padding-start: 1rem !important;
 	--padding-end: 1rem !important;
-	--background: #{$color-itemBg} !important;
-	background: #{$color-itemBg} !important;
 	--box-shadow: none;
 	border-radius: 0.5rem;
 	--icon-color: transparent !important;
 	--placeholder-color: #{$color-secondaryText} !important;
 	--placeholder-opacity: 1;
-	outline: 1px solid transparent;
+	outline: 1px solid $color-itemBg;
 
 	&:focus-within {
 		--icon-color: #{$color-info} !important;

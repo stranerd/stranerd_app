@@ -17,9 +17,7 @@
 					<IonText v-for="{ count, label } in [
 						{ label: pluralize(user.meta.questions, 'question', 'questions'), count: formatNumber(user.meta.questions) },
 						{ label: pluralize(user.meta.flashCards, 'flashcard', 'flashcards'), count: formatNumber(user.meta.flashCards) },
-						/* { label: pluralize(user.score, 'pt', 'pts'), count: formatNumber(user.score, 1) },
-							{ label: pluralize(user.meta.connects, 'connect', 'connects'), count: formatNumber(user.meta.connects) },
-							{ label: 'best ' + pluralize(user.meta.bestAnswers, 'answers', 'answers'), count: formatNumber(user.meta.bestAnswers) } */
+						{ label: pluralize(user.score, 'pt', 'pts'), count: formatNumber(user.score, 1) }
 					]" :key="label">
 						<span class="font-bold">{{ count }}</span>
 						<span>&nbsp;{{ label }}</span>

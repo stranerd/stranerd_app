@@ -75,7 +75,7 @@
 	}
 
 	.showcase-flex {
-		@apply flex flex-col lg:gap-6;
+		@apply flex flex-col gap-4 p-4 lg:p-0 lg:gap-6;
 	}
 
 	.showcase-files {
@@ -103,11 +103,11 @@
 	}
 
 	.card {
-		@apply lg:rounded-xl lg:border lg:border-disabled;
+		@apply lg:rounded-xl lg:border lg:border-itemBg;
 	}
 
 	.card-sm {
-		@apply rounded-xl border border-disabled;
+		@apply rounded-xl border border-itemBg;
 	}
 
 	.card-padding {

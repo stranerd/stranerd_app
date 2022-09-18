@@ -1,13 +1,14 @@
 <template>
-	<div class="flex flex-col text-secondaryText gap-3 ">
-		<div class="flex flex-col gap-4 w-full">
+	<div class="flex flex-col text-secondaryText gap-3">
+		<div class="flex gap-4 w-full">
 			<IonSelect v-model="time"
-				class="capitalize font-bold !bg-bodyBg border border-itemBg border-2" interface="action-sheet">
+				class="capitalize !bg-bodyBg border border-itemBg border-2 w-1/3" interface="action-sheet">
 				<IonSelectOption v-for="time in RankingTimes" :key="time" :value="time" class="capitalize">
 					{{ time }} Ranking
 				</IonSelectOption>
 			</IonSelect>
-			<IonSelect v-model="tagId" class="capitalize" interface="action-sheet">
+			<IonSelect v-model="tagId"
+				class="capitalize !bg-bodyBg border border-itemBg border-2 w-2/3" interface="action-sheet">
 				<IonSelectOption :value="null" class="capitalize">All Departments</IonSelectOption>
 				<IonSelectOption v-for="tag in departmentTags" :key="tag.hash" :value="tag.id" class="capitalize">
 					{{ tag.title }}

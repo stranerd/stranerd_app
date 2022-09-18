@@ -1,5 +1,6 @@
 <template>
-	<span class="w-full flex justify-between items-center gap-4 bg-itemBg px-4 py-3 rounded-lg" @click="isOpen = true">
+	<span class="w-full flex justify-between items-center gap-4 border border-itemBg px-4 py-3 rounded-lg"
+		@click="isOpen = true">
 		<span>{{ selectedTag?.title ?? (allowAll ? 'All subjects' : 'Select subject') }}</span>
 		<span class="text-xs text-disabled">&#x25BC;</span>
 		<IonModal v-bind="{ ...modalProps, isOpen }" @didDismiss="isOpen = false">
