@@ -88,11 +88,11 @@ ion-toolbar {
 }
 
 .btn-outline {
-	@apply rounded-md border border-primaryBg text-primaryBg font-bold px-4 py-1.5 text-xs
+	@apply rounded-md border border-primaryBg text-primaryBg font-bold px-6 py-1.5 text-xs
 }
 
 .btn {
-	@apply rounded-md font-bold bg-primaryBg px-4 py-1.5 text-primaryText text-xs
+	@apply rounded-md border border-primaryBg bg-primaryBg font-bold px-6 py-1.5 text-primaryText text-xs
 }
 
 

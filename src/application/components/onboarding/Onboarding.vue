@@ -15,7 +15,7 @@
 			<IonButton v-if="tab < tabs" class=" w-full mx-auto max-w-[300px]" @click="tab++">
 				Next
 			</IonButton>
-			<router-link class="mx-auto w-full max-w-[300px]" to="/auth/signin">
+			<router-link class="mx-auto w-full max-w-[300px]" to="/auth/signup">
 				<IonButton v-if="tab !== tabs" class="btn-outline no-border w-full font-normal">
 					Skip
 				</IonButton>

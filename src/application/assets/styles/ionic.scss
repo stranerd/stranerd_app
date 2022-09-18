@@ -197,6 +197,12 @@ ion-button {
 	letter-spacing: 0.02rem;
 	margin: 0;
 	font-size: 0.875rem;
+
+	&::part(native) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }
 
 .btn-primary {
@@ -243,6 +249,7 @@ ion-icon {
 
 ion-label {
 	font-weight: 600;
+	line-height: 1rem;
 }
 
 ion-item {
