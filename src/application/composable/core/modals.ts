@@ -22,7 +22,6 @@ import CreateCourse from '@app/components/modals/school/CreateCourse.vue'
 import EditCourse from '@app/components/modals/school/EditCourse.vue'
 import CreatePastQuestion from '@app/components/modals/school/CreatePastQuestion.vue'
 import EditPastQuestion from '@app/components/modals/school/EditPastQuestion.vue'
-import Settings from '@app/components/modals/users/Settings.vue'
 import FabMenu from '@app/components/modals/users/FabMenu.vue'
 import ProfileMenu from '@app/components/modals/users/ProfileMenu.vue'
 import CreateComment from '@app/components/modals/interactions/CreateComment.vue'
@@ -43,7 +42,7 @@ const SchoolModal = modal.register('School', {
 	CreateInstitution, EditInstitution, CreateFaculty, EditFaculty, CreateDepartment, EditDepartment,
 	CreatePastQuestion, EditPastQuestion, CreateCourse, EditCourse
 })
-const UserModal = modal.register('User', { Settings, FabMenu, ProfileMenu })
+const UserModal = modal.register('User', { FabMenu, ProfileMenu })
 const InteractionModal = modal.register('Interaction', { CreateComment, CreateTag, EditTag })
 const ReactionModal = popover.register('Reaction', { QuestionCreated, NeedsSubscription, NoMoreQuestions })
 

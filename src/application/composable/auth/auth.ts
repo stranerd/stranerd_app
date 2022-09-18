@@ -4,9 +4,9 @@ import { AuthDetails, AuthTypes } from '@modules/auth/domain/entities/auth'
 import { AuthUseCases } from '@modules/auth'
 import { isClient } from '@utils/environment'
 import { setupPush } from '@utils/push'
-import { useUserModal } from '@app/composable/core/modals'
 import { storage } from '@utils/storage'
 import { WalletEntity, WalletsUseCases } from '@modules/payment'
+import { router } from '@app/router'
 
 const global = {
 	auth: ref(null as AuthDetails | null),
@@ -57,9 +57,9 @@ export const useAuth = () => {
 		if (details?.id) {
 			global.user.value = await UsersUseCases.find(details.id)
 			global.wallet.value = await WalletsUseCases.get()
-			if (global.auth.value?.isVerified && !global.user.value?.school) setTimeout(async () => {
-				if ((await getSchoolState()) !== id.value) useUserModal().openSettings()
-			}, 5000)
+			if (global.auth.value?.isVerified && !global.user.value?.school) {
+				if ((await getSchoolState()) !== id.value) await router.push('/account/setup')
+			}
 		} else global.user.value = null
 	}
 

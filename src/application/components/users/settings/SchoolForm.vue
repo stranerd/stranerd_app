@@ -1,15 +1,11 @@
 <template>
 	<PageLoading v-if="loading" />
-	<div v-if="tab === 0" class="flex flex-col gap-4 w-full">
+	<div v-if="tab === 0" class="flex flex-col gap-4 h-full">
 		<IonList class="text-sm">
 			<IonListHeader>
 				<IonLabel class="font-bold text-xl">Choose your academic level</IonLabel>
 			</IonListHeader>
 			<IonRadioGroup v-model="factory.type" class="flex flex-col items-start" required>
-				<IonItem class="flex items-center gap-4">
-					<IonRadio slot="start" :value="UserSchoolType.secondary" />
-					<IonLabel>Secondary school</IonLabel>
-				</IonItem>
 				<IonItem class="flex items-center gap-4">
 					<IonRadio slot="start" :value="UserSchoolType.aspirant" />
 					<IonLabel>Secondary school leaver</IonLabel>
@@ -20,19 +16,16 @@
 				</IonItem>
 			</IonRadioGroup>
 		</IonList>
-		<div class="flex w-full gap-2 items-center justify-between">
-			<IonButton class="btn-outline w-24" type="button"
-				@click.prevent="back">
+		<div class="flex gap-4 items-center mt-auto">
+			<IonButton class="btn-outline w-full" type="button" @click.prevent="back">
 				Back
-				<IonRippleEffect class="rounded-lg" />
 			</IonButton>
-			<IonButton class="btn-primary w-24" type="button" @click="tab = 1">
+			<IonButton class="btn-primary w-full" type="button" @click="tab = 1">
 				Next
-				<IonRippleEffect class="rounded-lg" />
 			</IonButton>
 		</div>
 	</div>
-	<form v-if="tab === 1" class="flex flex-col gap-4" @submit.prevent="submit">
+	<form v-if="tab === 1" class="flex flex-col gap-4 h-full" @submit.prevent="submit">
 		<template v-if="factory.isCollegeType">
 			<div class="flex flex-col items-start gap-2">
 				<IonLabel>What university are you in?</IonLabel>
@@ -74,15 +67,13 @@
 				</IonSelect>
 			</div>
 
-			<div class="flex w-full gap-2 items-center justify-between">
-				<IonButton class="btn-outline w-24" type="button" @click.prevent="tab=0">
+			<div class="flex gap-4 items-center mt-auto">
+				<IonButton class="btn-outline w-full" type="button" @click.prevent="back">
 					Back
-					<IonRippleEffect class="rounded-lg" />
 				</IonButton>
-				<IonButton :disabled="loading || !factory.valid" class="btn-primary w-24" type="submit">
+				<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
 					<SpinLoading v-if="loading" />
-					<span v-else>Save</span>
-					<IonRippleEffect class="rounded-lg" />
+					<span v-else>Done</span>
 				</IonButton>
 			</div>
 		</template>
@@ -99,19 +90,17 @@
 					</IonSelectOption>
 				</IonSelect>
 			</div>
-			<div class="flex w-full justify-between gap-2 items-center">
-				<IonButton class="btn-outline w-24" type="button" @click.prevent="tab=0">
+			<div class="flex gap-4 items-center mt-auto">
+				<IonButton class="btn-outline w-full" type="button" @click.prevent="tab = 0">
 					Back
-					<IonRippleEffect class="rounded-lg" />
 				</IonButton>
-				<IonButton class="btn-primary w-24" type="button" @click.prevent="tab = 2">
+				<IonButton class="btn-primary w-full" type="button" @click.prevent="tab = 2">
 					Next
-					<IonRippleEffect class="rounded-lg" />
 				</IonButton>
 			</div>
 		</template>
 	</form>
-	<form v-if="tab === 2" class="flex flex-col gap-4" @submit.prevent="submit">
+	<form v-if="tab === 2" class="flex flex-col gap-4 h-full" @submit.prevent="submit">
 		<div v-for="exam in factory.exams" :key="exam.institutionId"
 			class="flex flex-col gap-2">
 			<IonLabel class="font-semibold">
@@ -136,15 +125,13 @@
 					type="date" />
 			</div>
 		</div>
-		<div class="flex w-full justify-between gap-2 items-center">
-			<IonButton class="btn-outline w-24" type="button" @click.prevent="tab=1">
+		<div class="flex gap-4 items-center mt-auto">
+			<IonButton class="btn-outline w-full" type="button" @click.prevent="tab=1">
 				Back
-				<IonRippleEffect class="rounded-lg" />
 			</IonButton>
-			<IonButton :disabled="loading || !factory.valid" class="btn-primary w-24" type="submit">
+			<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
 				<SpinLoading v-if="loading" />
-				<span v-else>Save</span>
-				<IonRippleEffect class="rounded-lg" />
+				<span v-else>Done</span>
 			</IonButton>
 		</div>
 	</form>
@@ -174,7 +161,7 @@ export default defineComponent({
 		}
 	},
 	setup (props) {
-		const tab = ref(0)
+		const tab = ref(1)
 		const { factory, loading, error, updateSchool } = useUserSchoolUpdate()
 		const submit = async () => {
 			await updateSchool()

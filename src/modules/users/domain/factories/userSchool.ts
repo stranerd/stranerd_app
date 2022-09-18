@@ -68,7 +68,7 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 
 	constructor () {
 		super({
-			type: UserSchoolType.aspirant, institutionId: '', facultyId: '', departmentId: '', tagId: '', exams: []
+			type: UserSchoolType.college, institutionId: '', facultyId: '', departmentId: '', tagId: '', exams: []
 		})
 	}
 
