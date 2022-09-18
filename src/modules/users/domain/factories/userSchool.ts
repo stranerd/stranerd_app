@@ -99,6 +99,10 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 		this.resetProp('departmentId')
 	}
 
+	get departmentId () {
+		return this.values.departmentId
+	}
+
 	get departmentAndTag () {
 		return [this.values.departmentId, this.values.tagId].join('---')
 	}
@@ -137,10 +141,6 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 
 	get isAspirantType () {
 		return this.type === UserSchoolType.aspirant
-	}
-
-	get isSecondaryType () {
-		return this.type === UserSchoolType.secondary
 	}
 
 	getInstitution (institutionId: string) {

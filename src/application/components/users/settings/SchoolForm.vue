@@ -29,8 +29,8 @@
 		<template v-if="factory.isCollegeType">
 			<div class="flex flex-col items-start gap-2">
 				<IonLabel>What university are you in?</IonLabel>
-				<IonSelect v-model="factory.institutionId"
-					class="w-full capitalize"
+				<IonSelect :key="schools.length"
+					v-model="factory.institutionId" class="w-full capitalize"
 					interface="action-sheet" placeholder="Select university"
 					required>
 					<IonSelectOption v-for="school in schools" :key="school.hash" :value="school.id"
@@ -42,8 +42,8 @@
 
 			<div class="flex flex-col items-start gap-2">
 				<IonLabel>What faculty are you in?</IonLabel>
-				<IonSelect v-model="factory.facultyId"
-					class="w-full capitalize"
+				<IonSelect :key="filteredFaculties.length"
+					v-model="factory.facultyId" class="w-full capitalize"
 					interface="action-sheet" placeholder="Select faculty"
 					required>
 					<IonSelectOption v-for="faculty in filteredFaculties" :key="faculty.hash" :value="faculty.id"
@@ -55,8 +55,8 @@
 
 			<div class="flex flex-col items-start gap-2">
 				<IonLabel>What department are you in?</IonLabel>
-				<IonSelect v-model="factory.departmentAndTag"
-					class="w-full capitalize"
+				<IonSelect :key="filteredDepartments.length"
+					v-model="factory.departmentAndTag" class="w-full capitalize"
 					interface="action-sheet" placeholder="Select department"
 					required>
 					<IonSelectOption v-for="department in filteredDepartments" :key="department.hash"
@@ -138,14 +138,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, PropType, ref, watch } from 'vue'
+import { defineComponent, onMounted, PropType, ref, watch } from 'vue'
 import { useUserSchoolUpdate } from '@app/composable/auth/profile'
 import { UserSchoolType } from '@modules/users'
-import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
-import { useFacultyList } from '@app/composable/school/faculties'
-import { useDepartmentList } from '@app/composable/school/departments'
 import Institution from '@app/components/school/institutions/Institution.vue'
+import { useChooseSchool } from '@app/composable/school'
 
 export default defineComponent({
 	name: 'SchoolForm',
@@ -167,30 +165,31 @@ export default defineComponent({
 			await updateSchool()
 			props.next()
 		}
-		const { schools, gatewayExams } = useInstitutionList()
 		const { courses, fetchInstitutionCourses } = useCourseList()
-		const { faculties, fetchFaculties } = useFacultyList()
-		const { departments, fetchDepartments } = useDepartmentList()
-		const filteredFaculties = computed(() => faculties.value.filter((f) => f.institutionId === factory.value.institutionId))
-		const filteredDepartments = computed(() => departments.value.filter((d) => d.facultyId === factory.value.facultyId))
+		const {
+			school, schools, gatewayExams, filteredFaculties, filteredDepartments
+		} = useChooseSchool(factory.value.institutionId, factory.value.facultyId, factory.value.departmentId)
 
 		watch(() => factory.value.institutionId, async () => {
 			factory.value.resetProp('facultyId')
-			if (factory.value.institutionId) await fetchFaculties(factory.value.institutionId)
+			school.institutionId = factory.value.institutionId
 		})
 
 		watch(() => factory.value.facultyId, async () => {
 			factory.value.resetProp('departmentId')
-			if (factory.value.facultyId) await fetchDepartments(factory.value.facultyId)
+			school.facultyId = factory.value.facultyId
+		})
+
+		watch(() => factory.value.departmentId, async () => {
+			school.departmentId = factory.value.departmentId
 		})
 
 		watch(() => factory.value.exams, async () => {
 			await Promise.all(factory.value.exams.map(async (exam) => fetchInstitutionCourses(exam.institutionId)))
 		})
+
 		onMounted(async () => {
 			await Promise.all(factory.value.exams.map(async (exam) => fetchInstitutionCourses(exam.institutionId)))
-			if (factory.value.institutionId) await fetchFaculties(factory.value.institutionId)
-			if (factory.value.facultyId) await fetchDepartments(factory.value.facultyId)
 		})
 
 		return {

@@ -20,10 +20,10 @@
 				</IonRadioGroup>
 			</IonList>
 
-			<div v-if="factory.isCollegeType" class="border-bottom-line flex flex-col gap-4">
+			<div v-if="factory.isCollegeType" class="border-bottom-line flex flex-col gap-6">
 				<div class="flex flex-col items-start gap-1">
 					<IonLabel>What university are you in?</IonLabel>
-					<IonSelect v-model="factory.institutionId"
+					<IonSelect :key="schools.length" v-model="factory.institutionId"
 						class="w-full capitalize"
 						interface="action-sheet" placeholder="Select university"
 						required>
@@ -36,7 +36,7 @@
 
 				<div class="flex flex-col items-start gap-1">
 					<IonLabel>What faculty are you in?</IonLabel>
-					<IonSelect v-model="factory.facultyId"
+					<IonSelect :key="filteredFaculties.length" v-model="factory.facultyId"
 						class="w-full capitalize"
 						interface="action-sheet" placeholder="Select faculty"
 						required>
@@ -49,8 +49,8 @@
 
 				<div class="flex flex-col items-start gap-1">
 					<IonLabel>What department are you in?</IonLabel>
-					<IonSelect v-model="factory.departmentAndTag"
-						class="w-full capitalize"
+					<IonSelect :key="filteredDepartments.length"
+						v-model="factory.departmentAndTag" class="w-full capitalize"
 						interface="action-sheet" placeholder="Select department"
 						required>
 						<IonSelectOption v-for="department in filteredDepartments" :key="department.hash"
@@ -117,17 +117,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, watch } from 'vue'
+import { defineComponent, onMounted, watch } from 'vue'
 import { useUserSchoolUpdate } from '@app/composable/auth/profile'
 import Institution from '@app/components/school/institutions/Institution.vue'
-import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
-import { useFacultyList } from '@app/composable/school/faculties'
-import { useDepartmentList } from '@app/composable/school/departments'
 import { UserSchoolType } from '@modules/users'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
+import { useChooseSchool } from '@app/composable/school'
 
 export default defineComponent({
 	name: 'SettingsSchool',
@@ -137,30 +135,31 @@ export default defineComponent({
 		useRouteMeta('Edit School', { back: true })
 		const { factory, error, loading, updateSchool } = useUserSchoolUpdate()
 
-		const { schools, gatewayExams } = useInstitutionList()
 		const { courses, fetchInstitutionCourses } = useCourseList()
-		const { faculties, fetchFaculties } = useFacultyList()
-		const { departments, fetchDepartments } = useDepartmentList()
-		const filteredFaculties = computed(() => faculties.value.filter((f) => f.institutionId === factory.value.institutionId))
-		const filteredDepartments = computed(() => departments.value.filter((d) => d.facultyId === factory.value.facultyId))
+		const {
+			school, schools, gatewayExams, filteredFaculties, filteredDepartments
+		} = useChooseSchool(factory.value.institutionId, factory.value.facultyId, factory.value.departmentId)
 
 		watch(() => factory.value.institutionId, async () => {
 			factory.value.resetProp('facultyId')
-			if (factory.value.institutionId) await fetchFaculties(factory.value.institutionId)
+			school.institutionId = factory.value.institutionId
 		})
 
 		watch(() => factory.value.facultyId, async () => {
 			factory.value.resetProp('departmentId')
-			if (factory.value.facultyId) await fetchDepartments(factory.value.facultyId)
+			school.facultyId = factory.value.facultyId
+		})
+
+		watch(() => factory.value.departmentId, async () => {
+			school.departmentId = factory.value.departmentId
 		})
 
 		watch(() => factory.value.exams, async () => {
 			await Promise.all(factory.value.exams.map(async (exam) => fetchInstitutionCourses(exam.institutionId)))
 		})
+
 		onMounted(async () => {
 			await Promise.all(factory.value.exams.map(async (exam) => fetchInstitutionCourses(exam.institutionId)))
-			if (factory.value.institutionId) await fetchFaculties(factory.value.institutionId)
-			if (factory.value.facultyId) await fetchDepartments(factory.value.facultyId)
 		})
 
 		return {
