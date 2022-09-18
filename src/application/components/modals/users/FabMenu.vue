@@ -1,23 +1,24 @@
 <template>
 	<div class="modal-content">
-		<div class="px-4 py-6 md:p-8 flex flex-col">
+		<div class="px-4 pt-8 pb-10 md:p-8 flex flex-col">
 			<router-link v-for="{ path, icon, name } in [
 				{ name: 'Ask a question', path: '/questions/create', icon: helpCircleOutline },
-				...(user && user.isCollege(user) ? [
+				{ name: 'Create a flashcard set', path: '/study/flashCards/create', icon: copyOutline },
+
+				/* ...(user && user.isCollege(user) ? [
 					{ name: 'Create a class', path: '/classes/create', icon: peopleOutline },
 				] : []),
-				{ name: 'Create flashcard set', path: '/study/flashCards/create', icon: flashOutline },
 				...(adminClasses.length ? [
 					{ name: 'Make an announcement', path: '/classes/announcements/create', icon: megaphoneOutline },
 					{ name: 'Start a discussion', path: '/classes/groups/create', icon: chatbubblesOutline },
 				] : []),
 				{ name: 'Upload a file', path: '/study/files/create', icon: documentOutline },
-				{ name: 'Write a note', path: '/study/notes/create', icon: createOutline },
-			]" :key="path" :to="path" class="flex items-center gap-4 py-4">
+				{ name: 'Write a note', path: '/study/notes/create', icon: createOutline }, */
+			]" :key="path" :to="path" class="flex items-center gap-4 py-4 text-secondaryText">
 				<IonIcon :icon="icon" />
 				<span>{{ name }}</span>
+				<IonIcon :icon="arrowForwardOutline" />
 			</router-link>
-			<IonButton class="btn-primary mt-2" @click="close">Cancel</IonButton>
 		</div>
 	</div>
 </template>
@@ -25,10 +26,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import {
+	arrowForwardOutline,
 	chatbubblesOutline,
+	copyOutline,
 	createOutline,
 	documentOutline,
-	flashOutline,
 	helpCircleOutline,
 	megaphoneOutline,
 	peopleOutline
@@ -48,7 +50,7 @@ export default defineComponent({
 		const { user } = useAuth()
 		const { adminClasses } = useUserClassList()
 		return {
-			user, adminClasses, helpCircleOutline, flashOutline, documentOutline,
+			user, adminClasses, arrowForwardOutline, helpCircleOutline, copyOutline, documentOutline,
 			createOutline, peopleOutline, megaphoneOutline, chatbubblesOutline
 		}
 	}

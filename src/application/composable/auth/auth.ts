@@ -7,12 +7,36 @@ import { setupPush } from '@utils/push'
 import { storage } from '@utils/storage'
 import { WalletEntity, WalletsUseCases } from '@modules/payment'
 import { router } from '@app/router'
+import { useListener } from '@app/composable/core/states'
 
 const global = {
 	auth: ref(null as AuthDetails | null),
 	user: ref(null as UserEntity | null),
 	wallet: ref(null as WalletEntity | null),
-	listener: null as null | (() => void)
+	listener: useListener(async () => {
+		const id = global.auth.value?.id as string | undefined
+		if (!id) return () => {
+		}
+		const setUser = async (user: UserEntity) => {
+			global.user.value = user
+		}
+		const setWallet = async (wallet: WalletEntity) => {
+			global.wallet.value = wallet
+		}
+		const listeners = [
+			await UsersUseCases.listenToOne(id, {
+				created: setUser,
+				updated: setUser,
+				deleted: setUser
+			}),
+			await WalletsUseCases.listen({
+				created: setWallet,
+				updated: setWallet,
+				deleted: setWallet
+			})
+		]
+		return async () => await Promise.all(listeners.map((l) => l()))
+	})
 }
 
 export const useAuth = () => {
@@ -52,7 +76,7 @@ export const useAuth = () => {
 	})
 
 	const setAuthUser = async (details: AuthDetails | null) => {
-		if (global.listener) global.listener()
+		if (global.listener) await global.listener.close()
 		global.auth.value = details
 		if (details?.id) {
 			global.user.value = await UsersUseCases.find(details.id)
@@ -64,30 +88,7 @@ export const useAuth = () => {
 	}
 
 	const startProfileListener = async () => {
-		if (global.listener) global.listener()
-
-		const id = global.auth.value?.id
-		const setUser = async (user: UserEntity) => {
-			global.user.value = user
-		}
-		const setWallet = async (wallet: WalletEntity) => {
-			global.wallet.value = wallet
-		}
-		if (id) global.listener = async () => {
-			const listeners = [
-				await UsersUseCases.listenToOne(id, {
-					created: setUser,
-					updated: setUser,
-					deleted: setUser
-				}),
-				await WalletsUseCases.listen({
-					created: setWallet,
-					updated: setWallet,
-					deleted: setWallet
-				})
-			]
-			return async () => await Promise.all(listeners.map((fn) => fn()))
-		}
+		await global.listener.restart()
 	}
 
 	const signin = async (remembered: boolean) => {

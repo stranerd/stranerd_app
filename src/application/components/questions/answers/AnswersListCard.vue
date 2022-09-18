@@ -1,6 +1,5 @@
 <template>
-	<router-link :to="`/questions/${question.id}/answers/${answer.id}`"
-		class="rounded-xl flex flex-col !gap-4 card-padding lg:rounded-xl lg:border lg:border-disabled">
+	<div class="rounded-xl flex flex-col !gap-4 card-padding lg:rounded-xl lg:border lg:border-disabled">
 		<div class="flex items-center gap-2 text-sm">
 			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="24" :src="answer.user.bio.photo" />
 			<span class="font-bold flex items-center gap-1">
@@ -41,7 +40,7 @@
 			</span>
 			<IonIcon v-if="answer.best" :icon="checkmarkCircleOutline" class="text-success" />
 		</div>
-	</router-link>
+	</div>
 </template>
 
 <script lang="ts">

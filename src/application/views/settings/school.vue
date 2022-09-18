@@ -3,7 +3,7 @@
 		<template v-slot:panel>
 			<SettingsPanel />
 		</template>
-		<form class="flex flex-col page-padding gap-4 lg:gap-8" @submit.prevent="updateSchool">
+		<form class="flex flex-col page-padding gap-4 lg:gap-8" @submit.prevent="submit">
 			<IonList v-if="0" class="border-bottom-line text-sm">
 				<IonListHeader>
 					<IonLabel class="font-bold text-xl">Choose your academic level*</IonLabel>
@@ -126,6 +126,7 @@ import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
 import { useChooseSchool } from '@app/composable/school'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'SettingsSchool',
@@ -133,7 +134,12 @@ export default defineComponent({
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Edit School', { back: true })
+		const router = useRouter()
 		const { factory, error, loading, updateSchool } = useUserSchoolUpdate()
+		const submit = async () => {
+			await updateSchool()
+			await router.push('/account')
+		}
 
 		const { courses, fetchInstitutionCourses } = useCourseList()
 		const {
@@ -163,7 +169,7 @@ export default defineComponent({
 		})
 
 		return {
-			factory, error, loading, updateSchool, UserSchoolType,
+			factory, error, loading, submit, UserSchoolType,
 			schools, gatewayExams, filteredFaculties, filteredDepartments, courses
 		}
 	}

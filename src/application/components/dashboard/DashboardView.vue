@@ -2,7 +2,7 @@
 	<div>
 		<router-link v-if="user && !user.school"
 			class="card-padding flex items-center justify-between border-bottom-line"
-			to="/settings/school">
+			to="/account/setup">
 			<IonText>Account Setup</IonText>
 			<IonIcon :icon="arrowForwardOutline" />
 		</router-link>

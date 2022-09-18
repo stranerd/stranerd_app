@@ -31,7 +31,7 @@
 
 				<span class="flex gap-1 items-center mr-auto">
 					<IonIcon :icon="chatbubbleEllipsesOutline" />
-					<span>{{ formatNumber(question.answers.length + question.meta.comments) }}</span>
+					<span>{{ formatNumber(question.answers.length) }}</span>
 				</span>
 
 				<Share :link="question.shareLink" :text="question.strippedBody" title="Share this question" />

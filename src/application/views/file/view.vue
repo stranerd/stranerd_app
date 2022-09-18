@@ -1,14 +1,13 @@
 <template>
 	<DefaultLayout :hideBottom="true">
 		<div v-if="openMedia"
-			class="h-full flex-grow overflow-y-auto flex flex-col justify-center items-center text-center p-4 gap-2">
+			class="min-h-full flex-grow overflow-y-auto flex flex-col justify-center items-center text-center p-6 gap-2">
 			<img v-if="isImage(openMedia.media).valid" :src="content || openMedia.media.link" alt="" class="w-full">
 			<video v-else-if="isVideo(openMedia.media).valid" :src="content || openMedia.media.link" class="w-full"
 				controls />
 			<span v-else class="text-5xl leading-none">
 				<IonIcon :icon="documentOutline" />
 			</span>
-			<IonText class="text-lg font-semibold">{{ openMedia.media.name }}</IonText>
 			<IonText class="text-secondaryText">{{ formatFileSize(openMedia.media.size) }}</IonText>
 			<SpinLoading v-if="loading" />
 			<template v-else-if="content">
