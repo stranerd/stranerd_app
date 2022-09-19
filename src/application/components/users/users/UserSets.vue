@@ -4,8 +4,7 @@
 			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 		</form>
 		<SetListCard v-for="set in (searchMode ? searchResults : sets)" :key="set.hash" :set="set" />
-		<EmptyState v-if="!loading && !error && sets.length === 0" class="border-bottom-line"
-			info="This user hasn't created any folders yet." />
+		<EmptyState v-if="!loading && !error && sets.length === 0" info="This user hasn't created any folders yet." />
 		<BlockLoading v-if="loading" />
 	</div>
 </template>

@@ -31,6 +31,7 @@ import UserFlashCards from '@app/components/users/users/UserFlashCards.vue'
 import UserSets from '@app/components/users/users/UserSets.vue'
 import UserPageCard from '@app/components/users/users/UserPageCard.vue'
 import { UserEntity } from '@modules/users'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'UserProfile',
@@ -43,7 +44,9 @@ export default defineComponent({
 	components: { UserQuestions, UserFlashCards, UserSets, UserPageCard },
 	setup () {
 		const { id, isSubscribed } = useAuth()
-		const tab = ref('questions')
+		const { tab: t = '' } = useRoute().query
+		const tabValues = ['questions', 'flashCards', 'saved']
+		const tab = ref(tabValues.includes(t as string) ? t as string : tabValues[0])
 		return {
 			id, isSubscribed, formatNumber, tab,
 			helpCircleOutline, readerOutline, documentTextOutline, flashOutline

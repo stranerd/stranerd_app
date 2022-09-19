@@ -31,10 +31,10 @@ export class QuestionEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-					 id, body, tagId, isAnswered,
-					 bestAnswers, createdAt, user, attachments,
-					 meta, answers, updatedAt
-				 }: QuestionConstructorArgs) {
+		             id, body, tagId, isAnswered,
+		             bestAnswers, createdAt, user, attachments,
+		             meta, answers, updatedAt
+	             }: QuestionConstructorArgs) {
 		super()
 		this.id = id
 		this.body = body
@@ -54,7 +54,7 @@ export class QuestionEntity extends BaseEntity {
 	}
 
 	get trimmedBody () {
-		return trimToLength(this.strippedBody, 120)
+		return trimToLength(this.strippedBody, 80)
 	}
 
 	get strippedBody () {

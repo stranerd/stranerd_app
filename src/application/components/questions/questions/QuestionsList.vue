@@ -1,5 +1,5 @@
 <template>
-	<div class="flex lg:hidden gap-[1px]">
+	<div class="flex lg:hidden gap-[1px] border border-itemBg">
 		<SelectTag v-model:value="tagId" :allowAll="true" class="w-full !rounded-none" />
 		<IonSelect v-model="answered"
 			class="w-full" interface="action-sheet" placeholder="State">
@@ -10,8 +10,7 @@
 		</IonSelect>
 	</div>
 	<div class="showcase-flex">
-		<EmptyState v-if="!loading && !error && questions.length === 0" class="border-bottom-line"
-			info="There are no questions available." />
+		<EmptyState v-if="!loading && !error && questions.length === 0" info="There are no questions available." />
 		<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
 		<BlockLoading v-if="loading" />
 		<LoadMore v-if="hasMore" :load="fetchOlderQuestions" />
