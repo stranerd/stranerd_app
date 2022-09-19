@@ -1,6 +1,6 @@
 <template>
 	<div class="flex justify-center items-center flex-col text-center gap-4 my-auto">
-		<img src="@/assets/images/emptyStates/question.svg">
+		<img src="@/assets/images/emptyStates/question.png">
 		<p class="text-lg font-bold">No questions</p>
 		<span class="text-center ">Questions asked will show up here.</span>
 		<router-link to="/questions/create">

@@ -1,6 +1,6 @@
 <template>
 	<div class="flex justify-center items-center flex-col text-center gap-4 my-auto">
-		<img src="@/assets/images/emptyStates/data.svg">
+		<img src="@/assets/images/emptyStates/data.png">
 		<p class="text-lg font-bold">{{ title }}</p>
 		<span class="text-center">{{ sub }}</span>
 	</div>

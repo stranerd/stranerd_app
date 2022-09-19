@@ -7,7 +7,7 @@
 				<img alt="support1" class="w-36 md:w-auto" src="@/assets/images/landing/support1.svg">
 				<img alt="support2" class="w-36 md:w-auto" src="@/assets/images/landing/support2.svg">
 				<img alt="support3" class="w-36 md:w-auto" src="@/assets/images/landing/support3.svg">
-				<img alt="support4" class="w-36 md:w-auto" src="@/assets/images/landing/support4.svg">
+				<img alt="support4" class="w-36 md:w-auto" src="@/assets/images/landing/support4.png">
 			</div>
 		</div>
 
@@ -15,10 +15,9 @@
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
 			<div class="flex gap-8 md:mt-16 overflow-x-auto">
-				<img alt="featured1" class="w-36 md:w-auto" src="@/assets/images/landing/featured1.svg">
-				<img alt="featured2" class="w-36 md:w-auto" src="@/assets/images/landing/featured2.svg">
-				<img alt="featured3" class="w-36 md:w-auto" src="@/assets/images/landing/featured3.svg">
-
+				<img alt="featured1" class="w-36 md:w-auto" src="@/assets/images/landing/featured1.png">
+				<img alt="featured2" class="w-36 md:w-auto" src="@/assets/images/landing/featured2.png">
+				<img alt="featured3" class="w-36 md:w-auto" src="@/assets/images/landing/featured3.png">
 			</div>
 		</div>
 

@@ -7,7 +7,7 @@
 				<AnswersList v-if="isSubscribed" :question="question" />
 				<UnsubscribedAnswersList v-else :question="question" />
 			</template>
-			<NotFound v-else title="Question Not Found" />
+			<NotFound v-else title="Question not found" />
 		</div>
 	</DefaultLayout>
 </template>
