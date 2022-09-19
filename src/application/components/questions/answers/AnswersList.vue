@@ -1,12 +1,12 @@
 <template>
-	<div class="py-6 showcase-flex">
-		<h2 class="px-4 lg:p-0 pb-4">
+	<div class="flex flex-col gap-4">
+		<h2 class="text-lg">
 			<span class="font-semibold">Answers</span> ({{ formatNumber(question.answers.length) }})
 		</h2>
 		<BlockLoading v-if="loading" />
 		<AnswersListCard v-for="answer in answers" :key="answer.hash" :answer="answer" :like="likes[answer.id]"
-			:question="question" />
-		<EmptyState v-if="answers.length === 0" info="No answers yet" />
+			:question="question" class="lg:mb-2" />
+		<EmptyAnswers v-if="answers.length === 0" />
 	</div>
 </template>
 

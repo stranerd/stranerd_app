@@ -1,5 +1,5 @@
 <template>
-	<div class="!gap-4 card-padding flex flex-col border-bottom-line lg:rounded-xl lg:border lg:border-disabled">
+	<div class="!gap-4 card-sm card-padding flex flex-col">
 		<div class="flex justify-between gap-2">
 			<Avatar :id="question.user.id" :size="36" :src="question.user.bio.photo" />
 			<div class="flex flex-col">
@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<div class="flex-1" />
-			<IonButton v-if="showAnswerButton" class="btn-primary" @click="openAnswerModal(question, $router)">
+			<IonButton v-if="1||showAnswerButton" class="btn-primary" @click="openAnswerModal(question, $router)">
 				Answer
 			</IonButton>
 		</div>

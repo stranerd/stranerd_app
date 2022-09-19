@@ -1,5 +1,5 @@
 <template>
-	<div class="flex items-start card-padding !py-3 gap-2">
+	<div class="flex items-start py-3 gap-2">
 		<Avatar :id="comment.user.id" :name="comment.user.bio.fullName" :size="20" :src="comment.user.bio.photo" />
 		<div class="flex flex-col gap-1">
 			<IonText>

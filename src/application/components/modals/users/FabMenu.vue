@@ -1,6 +1,6 @@
 <template>
-	<div class="modal-content">
-		<div class="px-4 py-8 md:p-8 flex flex-col">
+	<Modal :close="close" :hideHeader="true">
+		<div class="flex flex-col">
 			<router-link v-for="{ path, icon, name } in [
 				{ name: 'Ask a question', path: '/questions/create', icon: helpCircleOutline },
 				{ name: 'Create a flashcard set', path: '/study/flashCards/create', icon: copyOutline }
@@ -10,7 +10,7 @@
 				<IonIcon :icon="arrowForwardOutline" />
 			</router-link>
 		</div>
-	</div>
+	</Modal>
 </template>
 
 <script lang="ts">

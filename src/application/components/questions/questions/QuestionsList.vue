@@ -1,15 +1,18 @@
 <template>
-	<div class="flex lg:hidden gap-[1px] border border-itemBg">
-		<SelectTag v-model:value="tagId" :allowAll="true" class="w-full !rounded-none" />
-		<IonSelect v-model="answered"
-			class="w-full" interface="action-sheet" placeholder="State">
-			<IonSelectOption v-for="choice in answeredChoices" :key="choice.key"
-				:value="choice.val" @click="answered = choice.val">
-				{{ choice.key }}
-			</IonSelectOption>
-		</IonSelect>
-	</div>
 	<div class="showcase-flex">
+		<div class="flex lg:hidden gap-[1px]">
+			<SelectTag v-model:value="tagId" :allowAll="true"
+				class="w-full !rounded-none !rounded-l-xl outline-0 border border-itemBg" />
+			<IonSelect v-model="answered"
+				class="w-full !rounded-none !rounded-r-xl outline-0 border border-itemBg"
+				interface="action-sheet"
+				placeholder="State">
+				<IonSelectOption v-for="choice in answeredChoices" :key="choice.key"
+					:value="choice.val" @click="answered = choice.val">
+					{{ choice.key }}
+				</IonSelectOption>
+			</IonSelect>
+		</div>
 		<EmptyState v-if="!loading && !error && questions.length === 0" info="There are no questions available." />
 		<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
 		<BlockLoading v-if="loading" />
@@ -39,9 +42,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-ion-select {
-	border-radius: 0;
-}
-</style>

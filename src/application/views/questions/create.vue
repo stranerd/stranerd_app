@@ -1,16 +1,23 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
-		<QuestionForm
-			:error="error"
-			:factory="factory"
-			:loading="loading"
-			:submit="createQuestion"
-			class="page-padding h-full lg:h-auto"
-		>
-			<template v-slot:buttonText>
-				Post Question
-			</template>
-		</QuestionForm>
+		<div class="flex flex-col gap-4 page-padding h-full lg:h-auto">
+			<span class="card p-4 bg-highlight text-center block">
+				You have <span class="font-bold">{{
+					wallet?.subscription.data.questions
+				}} questions</span> to ask
+			</span>
+			<QuestionForm
+				:error="error"
+				:factory="factory"
+				:loading="loading"
+				:submit="createQuestion"
+				class="flex-grow"
+			>
+				<template v-slot:buttonText>
+					Post Question
+				</template>
+			</QuestionForm>
+		</div>
 	</DefaultLayout>
 </template>
 
@@ -35,8 +42,9 @@ export default defineComponent({
 	}]),
 	setup () {
 		useRouteMeta('Ask a Question', { back: true })
+		const { wallet } = useAuth()
 		const { factory, error, loading, createQuestion } = useCreateQuestion()
-		return { factory, error, loading, createQuestion }
+		return { factory, error, loading, createQuestion, wallet }
 	}
 })
 </script>

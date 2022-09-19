@@ -1,5 +1,5 @@
 <template>
-	<div class="!gap-4 card-padding flex flex-col">
+	<div class="!gap-4 card-sm card-padding flex flex-col">
 		<div class="flex items-center gap-4 text-secondaryText text-sm justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="answer.user.id" :size="24" :src="answer.user.bio.photo" />

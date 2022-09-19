@@ -56,9 +56,13 @@ ion-modal.modal-class {
 		background: $color-itemBg !important;
 	}
 
+	&::part(content) {
+		overflow-y: auto;
+	}
+
 	@media (min-width: $lg) {
 		&::part(content) {
-			bottom: 25%;
+			position: static;
 			border-radius: var(--border-radius);
 		}
 		&::part(handle) {

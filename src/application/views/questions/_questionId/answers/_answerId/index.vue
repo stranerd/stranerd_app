@@ -1,9 +1,9 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
-		<div class="flex flex-col flex-grow h-full">
+		<div class="showcase-flex flex-grow h-full">
 			<BlockLoading v-if="loading" />
 			<template v-else-if="answer">
-				<AnswerPageCard :answer="answer" class="border-bottom-line" />
+				<AnswerPageCard :answer="answer" />
 				<CommentsList :id="answer.id" :type="InteractionEntities.answers" />
 				<CommentForm :id="answer.id" :type="InteractionEntities.answers"
 					class="fixed bottom-0 inset-x-0 card-padding text-sm" />

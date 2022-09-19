@@ -22,6 +22,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .popover {
-	min-width: 20rem;
+	width: clamp(20rem, 90vw, 600px);
 }
 </style>

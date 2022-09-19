@@ -1,6 +1,6 @@
 <template>
 	<DefaultLayout :ignorePagePadding="true">
-		<div class="h-full lg:px-8 showcase-flex">
+		<div class="h-full lg:px-8 showcase-flex !gap-6">
 			<BlockLoading v-if="loading" />
 			<template v-else-if="question">
 				<QuestionPageCard :question="question" />

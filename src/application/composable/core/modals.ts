@@ -42,9 +42,9 @@ const SchoolModal = modal.register('School', {
 	CreateInstitution, EditInstitution, CreateFaculty, EditFaculty, CreateDepartment, EditDepartment,
 	CreatePastQuestion, EditPastQuestion, CreateCourse, EditCourse
 })
-const UserModal = modal.register('User', { FabMenu, ProfileMenu })
+const UserModal = modal.register('User', { FabMenu, ProfileMenu, QuestionCreated })
 const InteractionModal = modal.register('Interaction', { CreateComment, CreateTag, EditTag })
-const ReactionModal = popover.register('Reaction', { QuestionCreated, NeedsSubscription, NoMoreQuestions })
+const ReactionModal = popover.register('Reaction', { NeedsSubscription, NoMoreQuestions })
 
 export const useReportModal = () => ReportModal
 export const useStudyModal = () => StudyModal
