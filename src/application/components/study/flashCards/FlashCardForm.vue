@@ -1,7 +1,13 @@
 <template>
-	<div>
-		<div class="flex flex-col gap-4 p-4">
+	<div class="flex flex-col gap-4">
+		<div class="flex flex-col gap-2">
+			<IonLabel class="text-lg">Title</IonLabel>
 			<IonInput v-model="factory.title" class="w-full" placeholder="Enter a title" show-cancel-button="never" />
+			<DisplayError :error="factory.errors.title" />
+		</div>
+
+		<div class="flex flex-col gap-2">
+			<IonLabel class="text-lg">Cards</IonLabel>
 			<IonReorderGroup class="flex flex-col gap-4" disabled="true">
 				<IonReorder v-for="(card, index) in factory.questions" :key="index"
 					class="flex flex-col p-4 gap-2 rounded-lg border border-itemBg">
@@ -12,22 +18,23 @@
 					<IonInput v-model="card.question" placeholder="Enter question or word" />
 					<IonInput v-model="card.answer" placeholder="Enter answer or definition" />
 				</IonReorder>
+				<a
+					class="flex items-center card-sm card-padding text-primaryBg justify-center font-bold"
+					@click="factory.addQuestion">
+					<IonIcon :icon="addOutline" />
+					<IonText>ADD CARD</IonText>
+				</a>
 			</IonReorderGroup>
 			<DisplayError :error="factory.errors.set" />
-
-			<div
-				class="flex items-center border border-itemBg p-2 rounded-lg justify-center font-bold cursor-pointer"
-				@click="factory.addQuestion">
-				<IonIcon :icon="addOutline" />
-				<IonText>ADD CARD</IonText>
-			</div>
-
-			<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full"
-				@click="submit()">
-				<SpinLoading v-if="loading" />
-				<slot v-else name="buttonTitle">Submit</slot>
-			</IonButton>
 		</div>
+
+		<div class="flex-1" />
+
+		<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full"
+			@click="submit()">
+			<SpinLoading v-if="loading" />
+			<slot v-else name="buttonTitle">Submit</slot>
+		</IonButton>
 	</div>
 </template>
 
@@ -52,10 +59,6 @@ export default defineComponent({
 			required: true
 		},
 		error: {
-			type: String,
-			required: true
-		},
-		title: {
 			type: String,
 			required: true
 		}

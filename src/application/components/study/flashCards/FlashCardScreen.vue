@@ -7,14 +7,14 @@
 					@click="flipped = !flipped">
 					<div class="front w-full">
 						<section v-if="!flipped"
-							class="h-[48vh] overflow-y-auto flex text-center custom-shadow p-4 mx-auto">
+							class="h-[60vh] overflow-y-auto flex text-center custom-shadow p-4 mx-auto">
 							<DisplayHtml :html="flashCard.set[page].question" class="w-full my-auto overflow-y-auto" />
 						</section>
 					</div>
 
 					<div class="back w-full">
 						<section v-if="flipped"
-							class="h-[48vh] overflow-y-auto flex text-center custom-shadow p-4 mx-auto">
+							class="h-[60vh] overflow-y-auto flex text-center custom-shadow p-4 mx-auto">
 							<DisplayHtml :html="flashCard.set[page].answer" class="w-full my-auto" />
 						</section>
 					</div>

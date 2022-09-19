@@ -1,9 +1,11 @@
 <template>
-	<div id="screen">
-		<div v-for="(card, index) in flashCard.set" :key="index" class="flex border-top-line border-bottom-line">
-			<DisplayHtml :html="card.question" class="w-1/2 p-4 border-right-line" />
+	<div id="screen" class="flex flex-col gap-4">
+		<div
+			v-for="(card, index) in flashCard.set.concat(...flashCard.set, ...flashCard.set, ...flashCard.set, ...flashCard.set)"
+			:key="index" class="flex card-sm">
+			<DisplayHtml :html="card.question" class="w-2/5 px-4 py-3 border-right-line" />
 
-			<DisplayHtml :html="card.answer" class="w-1/2 p-4 border-left-line" />
+			<DisplayHtml :html="card.answer" class="w-3/5 px-4 py-3" />
 		</div>
 	</div>
 </template>
