@@ -1,8 +1,5 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
-		<template v-slot:panel>
-			<QuestionsPanel />
-		</template>
 		<div class="flex flex-col flex-grow h-full">
 			<BlockLoading v-if="loading" />
 			<template v-else-if="answer">
@@ -25,11 +22,10 @@ import { useRouteMeta } from '@app/composable/core/states'
 import { InteractionEntities } from '@modules/interactions'
 import CommentsList from '@app/components/interactions/comments/CommentsList.vue'
 import CommentForm from '@app/components/interactions/comments/CommentForm.vue'
-import QuestionsPanel from '@app/components/layout/panels/QuestionsPanel.vue'
 
 export default defineComponent({
 	name: 'QuestionsQuestionIdAnswersAnswerId',
-	components: { AnswerPageCard, CommentsList, CommentForm, QuestionsPanel },
+	components: { AnswerPageCard, CommentsList, CommentForm },
 	setup () {
 		const { answerId } = useRoute().params
 		useRouteMeta('Comments', { back: true })

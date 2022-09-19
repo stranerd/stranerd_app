@@ -21,7 +21,7 @@ export default defineComponent({
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	components: { ProfileForm, SchoolForm },
 	setup () {
-		useRouteMeta('Account setup', { back: true })
+		useRouteMeta('Account setup', {})
 		const tab = ref(0)
 		const close = async () => {
 			await saveSchoolState()

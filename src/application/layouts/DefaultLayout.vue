@@ -7,11 +7,6 @@
 					<div class="layout-page-left">
 						<LeftSidebar class="h-full py-8" />
 					</div>
-					<div class="layout-page-panel">
-						<slot name="panel">
-							<DashboardPanel />
-						</slot>
-					</div>
 					<div :class="{'lg:px-8': !ignorePagePadding}" class="layout-page-main">
 						<slot name="content-top">
 							<div :class="{'lg:px-8': ignorePagePadding}"
@@ -51,7 +46,6 @@ import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 import Fab from '@app/components/layout/Fab.vue'
 import LeftSidebar from '@app/components/layout/sidebars/LeftSidebar.vue'
 import RightSidebar from '@app/components/layout/sidebars/RightSidebar.vue'
-import DashboardPanel from '@app/components/layout/panels/DashboardPanel.vue'
 import { arrowBackOutline } from 'ionicons/icons'
 
 export default defineComponent({
@@ -74,7 +68,7 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: { Topbar, BottomNav, Fab, LeftSidebar, RightSidebar, DashboardPanel },
+	components: { Topbar, BottomNav, Fab, LeftSidebar, RightSidebar },
 	setup () {
 		return { arrowBackOutline }
 	}

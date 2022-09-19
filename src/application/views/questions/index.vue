@@ -1,10 +1,8 @@
 <template>
 	<DefaultLayout>
-		<template v-slot:panel>
-			<QuestionsPanel />
-		</template>
 		<template v-slot:content-top-left>
 			<div class="flex items-center gap-4">
+				<SelectTag v-model:value="tagId" :allowAll="true" class="w-40" />
 				<IonSelect v-model="answered"
 					class="w-40"
 					interface="action-sheet"
@@ -26,13 +24,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import QuestionsList from '@app/components/questions/questions/QuestionsList.vue'
+import SelectTag from '@app/components/questions/questions/SelectTag.vue'
 import { useRouteMeta } from '@app/composable/core/states'
-import QuestionsPanel from '@app/components/layout/panels/QuestionsPanel.vue'
 import { useQuestionList } from '@app/composable/questions/questions'
 
 export default defineComponent({
 	name: 'Questions',
-	components: { QuestionsList, QuestionsPanel },
+	components: { QuestionsList, SelectTag },
 	setup () {
 		const { tagId, answeredChoices, answered } = useQuestionList()
 		useRouteMeta('All Questions', {})

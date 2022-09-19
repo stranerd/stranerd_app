@@ -9,6 +9,7 @@ const newColors = {
 	disabled: 'var(--clr-disabled)',
 	outlineHover: 'var(--clr-outlineHover)',
 	contrast: 'var(--clr-contrast)',
+	highlight: 'var(--clr-highlight)',
 	success: 'var(--clr-success)',
 	danger: 'var(--clr-danger)',
 	info: 'var(--clr-info)',

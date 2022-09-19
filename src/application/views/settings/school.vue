@@ -1,8 +1,5 @@
 <template>
 	<DefaultLayout>
-		<template v-slot:panel>
-			<SettingsPanel />
-		</template>
 		<form class="flex flex-col page-padding gap-4 lg:gap-8" @submit.prevent="submit">
 			<IonList v-if="0" class="border-bottom-line text-sm">
 				<IonListHeader>
@@ -124,13 +121,12 @@ import { useCourseList } from '@app/composable/school/courses'
 import { UserSchoolType } from '@modules/users'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
-import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
 import { useChooseSchool } from '@app/composable/school'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'SettingsSchool',
-	components: { Institution, SettingsPanel },
+	components: { Institution },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Edit School', { back: true })

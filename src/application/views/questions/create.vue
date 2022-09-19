@@ -1,8 +1,5 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
-		<template v-slot:panel>
-			<QuestionsPanel />
-		</template>
 		<QuestionForm
 			:error="error"
 			:factory="factory"
@@ -23,13 +20,12 @@ import { generateMiddlewares } from '@app/middlewares'
 import QuestionForm from '@app/components/questions/questions/QuestionForm.vue'
 import { useCreateQuestion } from '@app/composable/questions/questions'
 import { useRouteMeta } from '@app/composable/core/states'
-import QuestionsPanel from '@app/components/layout/panels/QuestionsPanel.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useReactionModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'QuestionsCreate',
-	components: { QuestionForm, QuestionsPanel },
+	components: { QuestionForm },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', 'isSubscribed', async ({ goBackToNonAuth }) => {
 		const { wallet } = useAuth()
 		if (!wallet.value?.subscription.data.questions) {

@@ -96,8 +96,6 @@ ion-modal.modal-class {
 }
 
 ion-searchbar {
-	--background: transparent !important;
-	background: #{$color-itemBg} !important;
 	--box-shadow: none !important;
 	padding: 0 0.25rem !important;
 	height: 44px !important;
