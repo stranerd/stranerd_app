@@ -1,18 +1,19 @@
 <template>
 	<DefaultLayout>
-		<div class="flex flex-col text-secondaryText">
+		<div class="showcase-flex text-secondaryText">
 			<router-link v-for="item in [
 					{ name: 'Edit Profile', icon: personOutline, route: '/settings/profile' },
 					{ name: 'Edit School', icon: schoolOutline, route: '/settings/school' },
 					{ name: 'Security', icon: shieldCheckmarkOutline, route: '/settings/security' },
+					{ name: 'Subscription', route: '/account/subscription', icon: cardOutline },
 					{ name: 'Contact Us', icon: mailOutline, route: '/contact' },
 					{ name: 'About', icon: informationCircleOutline, route: '/settings/about' },
 				]" :key="item.route" :to="item.route"
-				class="card-padding flex items-center !gap-4" exact-active-class="hasBg">
+				class="card-sm card-padding flex items-center !gap-4" exact-active-class="hasBg">
 				<IonIcon :icon="item.icon" />
 				<span>{{ item.name }}</span>
 			</router-link>
-			<a class="border-top-line mt-2 card-padding !gap-4 flex items-center text-danger"
+			<a class="card-sm card-padding !gap-4 flex items-center text-danger"
 				@click.prevent="signout">
 				<IonIcon :icon="logOutOutline" />
 				<span>Sign out</span>
@@ -25,6 +26,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import {
+	cardOutline,
 	informationCircleOutline,
 	logOutOutline,
 	mailOutline,
@@ -46,7 +48,7 @@ export default defineComponent({
 		return {
 			signout, loading,
 			personOutline, schoolOutline, notificationsOutline, shieldCheckmarkOutline,
-			informationCircleOutline, mailOutline, logOutOutline
+			informationCircleOutline, mailOutline, logOutOutline, cardOutline
 		}
 	}
 })

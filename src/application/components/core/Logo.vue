@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<img alt="Stranerd" class="w-12" src="/images/icon.png">
+		<img alt="Stranerd" class="w-8" src="/images/icon.svg">
 	</div>
 </template>
 

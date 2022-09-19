@@ -11,7 +11,7 @@
 				<IonText class="font-bold text-xl lg:hidden truncate max-w-[240px] capitalize">
 					{{ $route.meta.routeName ?? '' }}
 				</IonText>
-				<Search class="flex-grow hidden lg:flex border border-itemBg" />
+				<Search class="flex-grow hidden lg:flex" />
 				<div class="flex gap-6 lg:gap-8 items-center">
 					<router-link class="lg:hidden" to="/search">
 						<IonIcon :icon="searchOutline" />

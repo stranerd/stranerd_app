@@ -6,7 +6,7 @@
 				<span v-for="path in [
 						{ name: 'questions' },
 						{ name: 'flashCards' },
-						{ name: 'saved' }
+						...(user.id === id ? [{ name: 'saved' }] : [])
 					]" :key="path.name"
 					:class="{ '!text-primaryBg !border-primaryBg': path.name === tab}"
 					class="border-b-2 border-itemBg text-secondaryText p-2 capitalize w-full flex justify-center items-center gap-2"
@@ -45,7 +45,7 @@ export default defineComponent({
 	setup () {
 		const { id, isSubscribed } = useAuth()
 		const { tab: t = '' } = useRoute().query
-		const tabValues = ['questions', 'flashCards', 'saved']
+		const tabValues = ['questions', 'flashCards']
 		const tab = ref(tabValues.includes(t as string) ? t as string : tabValues[0])
 		return {
 			id, isSubscribed, formatNumber, tab,

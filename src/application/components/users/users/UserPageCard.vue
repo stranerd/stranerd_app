@@ -3,9 +3,10 @@
 		<div class="flex items-start gap-4 justify-between">
 			<Avatar :name="user.bio.fullName" :size="64" :src="user.bio.photo" />
 			<div class="flex flex-col w-full">
-				<IonText class="font-bold flex gap-1 items-center">
+				<IonText class="font-bold flex gap-1 items-center" @click.prevent="verify">
 					<span>{{ user.bio.fullName }}</span>
 					<Verified :verified="user.isVerified" />
+					<SpinLoading v-if="loading" />
 				</IonText>
 				<template v-if="user.isCollege(user)">
 					<Institution :institutionId="user.school.institutionId"
@@ -24,9 +25,9 @@
 					</IonText>
 				</div>
 			</div>
-			<span class="text-xl leading-none">
-				<IonIcon :icon="settingsOutline" @click="openProfileMenuModal(user)" />
-			</span>
+			<router-link v-if="user.id === id" class="text-xl leading-none lg:hidden" to="/settings">
+				<IonIcon :icon="settingsOutline" />
+			</router-link>
 		</div>
 		<IonText v-if="user.bio.description">{{ user.bio.description }}</IonText>
 	</div>
@@ -41,6 +42,7 @@ import Department from '@app/components/school/departments/Department.vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { openProfileMenuModal } from '@app/composable/users/users'
+import { useVerifiedRoles } from '@app/composable/users/roles/verified'
 
 export default defineComponent({
 	name: 'UserPageCard',
@@ -51,10 +53,16 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup () {
-		const { id } = useAuth()
+	setup (props) {
+		const { id, isAdmin } = useAuth()
+		const { loading, verifyUser } = useVerifiedRoles()
+		const verify = async () => {
+			if (!isAdmin.value) return
+			if (id.value === props.user.id) return
+			return await verifyUser(props.user, !props.user.isVerified)
+		}
 		return {
-			settingsOutline,
+			settingsOutline, loading, verify,
 			id, formatNumber, pluralize, openProfileMenuModal
 		}
 	}

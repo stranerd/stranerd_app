@@ -100,6 +100,7 @@ ion-searchbar {
 	padding: 0 0.25rem !important;
 	height: 44px !important;
 	border-radius: 0.5rem !important;
+	outline: 1px solid $color-itemBg;
 	--color: inherit !important;
 	--placeholder-color: inherit !important;
 	--cancel-button-color: inherit !important;

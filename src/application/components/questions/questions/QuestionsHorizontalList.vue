@@ -11,7 +11,7 @@
 				</slot>
 			</div>
 			<QuestionListCard v-for="question in slice" :key="question.hash" :question="question"
-				class="min-w-[85%] lg:min-w-[45%]" />
+				class="min-w-[85%] lg:min-w-[40%]" />
 		</div>
 	</div>
 </template>

@@ -1,16 +1,23 @@
 <template>
-	<div class="flex flex-col text-secondaryText">
-		<router-link v-for="{ name, path, icon, iconOutline } in [
-				{ name: 'Home', path: '/dashboard', icon: home, iconOutline: homeOutline },
-				{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline: helpCircleOutline },
-				{ name: 'Study', path: '/study', icon: book, iconOutline: bookOutline },
-				{ name: 'Classes', path: '/classes', icon: people, iconOutline: peopleOutline },
-				...(isAdmin ? [{ name: 'Admin', path: '/admin', icon: statsChart, iconOutline: statsChartOutline }] : [])
-			]" :key="path" :class="{'text-primaryBg font-bold bg-highlight': $route.path === path}" :to="path"
-			class="flex items-center text-lg gap-4 px-8 py-4">
-			<IonIcon :icon="$route.path === path ? icon : iconOutline" />
-			<span>{{ name }}</span>
+	<div class="flex flex-col gap-8">
+		<router-link class="flex items-center gap-2 px-8" to="/">
+			<Logo />
+			<span class="font-bold text-lg">Stranerd</span>
 		</router-link>
+		<div class="flex flex-col text-secondaryText">
+			<router-link v-for="{ name, path, icon, iconOutline } in [
+					{ name: 'Home', path: '/dashboard', icon: home, iconOutline: homeOutline },
+					{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline: helpCircleOutline },
+					{ name: 'Study', path: '/study', icon: book, iconOutline: bookOutline },
+					{ name: 'Classes', path: '/classes', icon: people, iconOutline: peopleOutline },
+					{ name: 'Profile', path: '/account', icon: person, iconOutline: personOutline },
+					...(isAdmin ? [{ name: 'Admin', path: '/admin', icon: statsChart, iconOutline: statsChartOutline }] : [])
+				]" :key="path" :class="{'text-primaryBg font-semibold bg-highlight': $route.path === path}" :to="path"
+				class="flex items-center text-lg gap-4 px-8 py-4">
+				<IonIcon :icon="$route.path === path ? icon : iconOutline" />
+				<span>{{ name }}</span>
+			</router-link>
+		</div>
 	</div>
 </template>
 
@@ -25,6 +32,8 @@ import {
 	homeOutline,
 	people,
 	peopleOutline,
+	person,
+	personOutline,
 	statsChart,
 	statsChartOutline
 } from 'ionicons/icons'
@@ -36,7 +45,7 @@ export default defineComponent({
 	setup () {
 		const { isAdmin } = useAuth()
 		return {
-			isAdmin,
+			isAdmin, person, personOutline,
 			addOutline, people, peopleOutline, helpCircle, helpCircleOutline,
 			home, homeOutline, book, bookOutline, statsChart, statsChartOutline
 		}

@@ -11,7 +11,7 @@
 				</slot>
 			</div>
 			<FlashCardListCard v-for="flashCard in slice" :key="flashCard.hash" :flashCard="flashCard"
-				class="min-w-[85%] lg:min-w-[45%]" />
+				class="min-w-[85%] lg:min-w-[40%]" />
 		</div>
 	</div>
 </template>

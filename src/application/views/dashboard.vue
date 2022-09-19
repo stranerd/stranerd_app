@@ -3,10 +3,10 @@
 		<div class="flex flex-col gap-4 lg:gap-8">
 			<div class="showcase-flex">
 				<router-link v-for="{ title, sub, route, color } in [
-					{ title: 'Ask a question', route: '/questions/create', sub: 'Get expert answers on questions you need help with for homework and learning.', color: 'bg-primaryBg' },
-					{ title: 'Create a flashcard', route: '/study/flashCards/create', sub: 'Use flashcards to study for improved memorization to do better in test and exams.', color: 'bg-success' },
-					{ title: 'Practice for tests and exams', route: '/study/', sub: 'Study with past questions and solutions, and test preps of your courses.', color: 'bg-royal' },
-				]" :key="route" :class="color" :to="route" class="card-sm card-padding flex flex-col text-contrast">
+					{ title: 'Ask a question', route: '/questions/create', sub: 'Get expert answers on questions you need help with for homework and learning.', color: 'bg-primaryBg text-primaryText' },
+					{ title: 'Create a flashcard', route: '/study/flashCards/create', sub: 'Use flashcards to study for improved memorization to do better in test and exams.', color: 'bg-success text-contrast' },
+					{ title: 'Practice for tests and exams', route: '/study/', sub: 'Study with past questions and solutions, and test preps of your courses.', color: 'bg-royal text-contrast' },
+				]" :key="route" :class="color" :to="route" class="card-sm card-padding flex flex-col">
 					<span class="flex gap-2 text-lg font-bold">
 						<IonText>{{ title }}</IonText>
 						<IonIcon :icon="arrowForwardOutline" />
