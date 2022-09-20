@@ -3,7 +3,7 @@
 		<div class="container flex mx-auto items-center justify-between p-4">
 			<div class="flex gap-3">
 				<IonIcon :icon="menuOutline" class="block lg:hidden" @click="toggleMenu" />
-				<span @click="navigateTo('/')">
+				<span @click="navigateTo('/')" class="cursor-pointer">
 					<img alt="logo" class="h-6 md:h-auto" src="/images/icon_with_text.svg">
 				</span>
 			</div>

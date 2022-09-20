@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg py-12 md:py-28">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg py-12 md:py-28  ">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
 			<img alt="hero" class="w-auto" src="@/assets/images/landing/why-us.png">
@@ -19,6 +19,6 @@
 			</div>
 		</div>
 
-		<img alt="hero" class="absolute md:-left-20 -left-40 -top-80 " src="@/assets/images/landing/orange.svg">
+		<!-- <img alt="hero" class="absolute md:-left-20 -left-40 -top-80 -z-20" src="@/assets/images/landing/orange.svg"> -->
 	</div>
 </template>
