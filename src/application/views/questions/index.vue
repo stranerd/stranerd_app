@@ -27,10 +27,12 @@ import QuestionsList from '@app/components/questions/questions/QuestionsList.vue
 import SelectTag from '@app/components/questions/questions/SelectTag.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 import { useQuestionList } from '@app/composable/questions/questions'
+import { generateMiddlewares } from '@app/middlewares'
 
 export default defineComponent({
 	name: 'Questions',
 	components: { QuestionsList, SelectTag },
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		const { tagId, answeredChoices, answered } = useQuestionList()
 		useRouteMeta('All Questions', {})

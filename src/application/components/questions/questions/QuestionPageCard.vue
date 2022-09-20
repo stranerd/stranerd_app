@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<div class="flex-1" />
-			<IonButton v-if="1||showAnswerButton" class="btn-primary" @click="openAnswerModal(question, $router)">
+			<IonButton v-if="showAnswerButton" class="btn-primary" @click="openAnswerModal(question, $router)">
 				Answer
 			</IonButton>
 		</div>
@@ -60,11 +60,11 @@ export default defineComponent({
 	},
 	components: { InteractionTag, SaveToSet },
 	setup (props) {
-		const { id } = useAuth()
+		const { id, user } = useAuth()
 		const router = useRouter()
 
 		const showAnswerButton = computed({
-			get: () => props.question.user.id !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
+			get: () => props.question.user.id !== id.value && user.value?.isVerified && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
 			set: () => {
 			}
 		})
