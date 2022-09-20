@@ -1,40 +1,59 @@
 <template>
-	<SearchWrapper>
-		<IonText class="font-bold px-4 lg:p-0">Latest</IonText>
-		<BlockLoading v-if="loading" />
-		<EmptyState v-if="!exploreCount" info="Nothing to explore." />
-		<SearchQuestionsList :questions="explore.questions" />
-		<SearchFlashCardsList :flashCards="explore.flashCards" />
-		<SearchNotesList :notes="explore.notes" />
-		<SearchUsersList v-if="0" :users="explore.users" />
-		<SearchClassesList :classes="explore.classes" />
+	<SearchWrapper baseRoute="/search">
+		<template v-slot="{ tab }">
+			<div class="showcase-flex !gap-6">
+				<div class="card-sm p-8 flex flex-col gap-2 items-center text-center">
+					<template v-if="tab === 'questions'">
+						<img alt="" class="mb-2" src="@app/assets/images/search/question.png">
+						<span class="font-bold text-lg">Find questions</span>
+						<div class="text-secondaryText">
+							Use the searchbar above to find questions you are looking for answers to.
+						</div>
+					</template>
+					<template v-else-if="tab === 'flashCards'">
+						<img alt="" class="mb-2" src="@app/assets/images/search/flashcard.png">
+						<span class="font-bold text-lg">Find flashcards</span>
+						<div class="text-secondaryText">
+							Use the searchbar above to find flashcards that you can use to study.
+						</div>
+					</template>
+					<template v-else-if="tab === 'users'">
+						<img alt="" class="mb-2" src="@app/assets/images/search/user.png">
+						<span class="font-bold text-lg">Find other users</span>
+						<div class="text-secondaryText">
+							Use the searchbar above to find friends, classmates, and other students to learn from.
+						</div>
+					</template>
+					<template v-else>
+						<img alt="" class="mb-2" src="@app/assets/images/search/all.png">
+						<span class="font-bold text-lg">Search for anything</span>
+						<div class="text-secondaryText">
+							Find questions, flashcards and friends or classmates using the searchbar above.
+						</div>
+					</template>
+				</div>
+				<SuggestedActions />
+			</div>
+		</template>
 	</SearchWrapper>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import SearchWrapper from '@app/components/search/SearchWrapper.vue'
-import SearchNotesList from '@app/components/study/notes/SearchNotesList.vue'
-import SearchFlashCardsList from '@app/components/study/flashCards/SearchFlashCardsList.vue'
-import SearchQuestionsList from '@app/components/questions/questions/SearchQuestionsList.vue'
-import SearchUsersList from '@app/components/users/SearchUsersList.vue'
-import SearchClassesList from '@app/components/classes/classes/SearchClassesList.vue'
 import { useRouteMeta } from '@app/composable/core/states'
-import { useSearch } from '@app/composable/meta/search'
 
 export default defineComponent({
 	name: 'Search',
-	components: {
-		SearchWrapper, SearchNotesList, SearchFlashCardsList,
-		SearchUsersList, SearchQuestionsList, SearchClassesList
-	},
+	components: { SearchWrapper },
 	setup () {
 		useRouteMeta('Search', { back: true })
-		const { explore, exploreCount, loading, fetched, fetchExplore } = useSearch()
-		onMounted(async () => {
-			if (!loading.value && !fetched.value) await fetchExplore()
-		})
-		return { explore, exploreCount, loading }
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+img {
+	width: 80px;
+}
+</style>

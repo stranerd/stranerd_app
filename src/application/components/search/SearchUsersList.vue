@@ -1,11 +1,12 @@
 <template>
-	<div class="showcase-flex">
-		<UserListCard v-for="user in filtered" :key="user.hash" :user="user" />
+	<div class="showcase-flex !p-0">
+		<EmptyState v-if="users.length === 0" info="No users found." />
+		<UserListCard v-for="user in users" :key="user.hash" :user="user" />
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import UserListCard from '@app/components/users/UserListCard.vue'
 import { UserEntity } from '@modules/users'
 
@@ -22,10 +23,6 @@ export default defineComponent({
 			default: false,
 			required: false
 		}
-	},
-	setup (props) {
-		const filtered = computed(() => props.users.slice(0, props.sliced ? 6 : undefined))
-		return { filtered }
 	}
 })
 </script>

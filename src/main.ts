@@ -36,7 +36,7 @@ const init = async () => {
 		defineCustomElements(window),
 		registerServiceWorker(),
 		clearAllNotifications()
-	])
+	]).catch()
 }
 
 init().then()

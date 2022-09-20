@@ -12,18 +12,7 @@
 					wallet.subscription.data.questions
 				}} questions</span> left
 			</span>
-			<IonText class="font-bold text-lg mb-2">Suggested actions</IonText>
-			<div class="flex flex-col gap-4 w-full text-secondaryText">
-				<router-link v-for="{ title, route, icon } in [
-					{ title: 'Ask a question', route: '/questions/create', icon: helpCircleOutline },
-					{ title: 'Create a flashcard', route: '/study/flashCards/create', icon: copyOutline },
-					{ title: 'Practice for tests and exams', route: '/study/', icon: bookOutline },
-				]" :key="route" :to="route" class="card-sm card-padding !gap-4 items-center flex">
-					<IonIcon :icon="icon" />
-					<IonText>{{ title }}</IonText>
-					<IonIcon :icon="arrowForwardOutline" class="ml-auto" />
-				</router-link>
-			</div>
+			<SuggestedActions />
 			<IonButton class="w-full btn-primary mt-auto" @click="close">
 				Got It
 			</IonButton>

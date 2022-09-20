@@ -2,14 +2,14 @@
 	<div class="min-h-full flex flex-col">
 		<UserPageCard :user="user" class="px-4 lg:px-0 pb-4" />
 		<div class="flex flex-col lg:gap-4 flex-1">
-			<div class="flex items-center justify-between px-4 text-sm">
+			<div class="flex items-center justify-between text-sm">
 				<span v-for="path in [
 						{ name: 'questions' },
 						{ name: 'flashCards' },
 						...(user.id === id ? [{ name: 'saved' }] : [])
 					]" :key="path.name"
 					:class="{ '!text-primaryBg !border-primaryBg': path.name === tab}"
-					class="border-b-2 border-itemBg text-secondaryText p-2 capitalize w-full flex justify-center items-center gap-2"
+					class="border-b-2 border-itemBg text-secondaryText p-3 capitalize w-full flex justify-center items-center gap-2"
 					@click="tab = path.name">
 					<span class="capitalize">{{ path.name }}</span>
 				</span>
@@ -44,7 +44,8 @@ export default defineComponent({
 	components: { UserQuestions, UserFlashCards, UserSets, UserPageCard },
 	setup () {
 		const { id, isSubscribed } = useAuth()
-		const { tab: t = '' } = useRoute().query
+		const route = useRoute()
+		const { tab: t = '' } = route.query
 		const tabValues = ['questions', 'flashCards']
 		const tab = ref(tabValues.includes(t as string) ? t as string : tabValues[0])
 		return {

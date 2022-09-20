@@ -1,11 +1,12 @@
 <template>
-	<div class="showcase-flex">
-		<ClassListCard v-for="classInst in filtered" :key="classInst.hash" :classInst="classInst" />
+	<div class="showcase-flex !p-0">
+		<EmptyState v-if="classes.length === 0" info="No classes found." />
+		<ClassListCard v-for="classInst in classes" :key="classInst.hash" :classInst="classInst" />
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import ClassListCard from '@app/components/classes/classes/SearchClassListCard.vue'
 import { ClassEntity } from '@modules/classes'
 
@@ -22,10 +23,6 @@ export default defineComponent({
 			default: false,
 			required: false
 		}
-	},
-	setup (props) {
-		const filtered = computed(() => props.classes.slice(0, props.sliced ? 6 : undefined))
-		return { filtered }
 	}
 })
 </script>

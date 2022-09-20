@@ -1,11 +1,12 @@
 <template>
-	<div class="showcase-flex">
-		<QuestionListCard v-for="question in filtered" :key="question.hash" :question="question" />
+	<div class="showcase-flex !p-0">
+		<EmptyState v-if="questions.length === 0" info="No questions found." />
+		<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
 import { QuestionEntity } from '@modules/questions'
 
@@ -22,10 +23,6 @@ export default defineComponent({
 			default: false,
 			required: false
 		}
-	},
-	setup (props) {
-		const filtered = computed(() => props.questions.slice(0, props.sliced ? 6 : undefined))
-		return { filtered }
 	}
 })
 </script>
