@@ -4,7 +4,7 @@ const envs = require('../env.json')
 const { asset_links, google_client_ids, package_name, app_name, environment, domain } = envs
 
 const getProject = async () => {
-	const project = new MobileProject({
+	const project = new MobileProject('./', {
 		ios: { path: 'ios/App' },
 		android: { path: 'android' }
 	})
