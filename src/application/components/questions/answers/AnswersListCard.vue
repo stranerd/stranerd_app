@@ -1,10 +1,7 @@
 <template>
 	<div class="flex flex-col !gap-4 card-sm card-padding">
 		<div class="flex items-center gap-2 text-sm">
-			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="20" :src="answer.user.bio.photo"
-				class="md:hidden" />
-			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="20" :src="answer.user.bio.photo"
-				class="hidden md:inline" />
+			<Avatar :name="answer.user.bio.fullName" :size="20" :src="answer.user.bio.photo" />
 			<span class="font-bold flex items-center gap-1">
 				<span>{{ answer.user.bio.fullName }}</span>
 				<Verified :verified="answer.isUserVerified" />

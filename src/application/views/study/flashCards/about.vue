@@ -1,14 +1,14 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
 		<div class="flex flex-col gap-4 page-padding items-center">
-			<img alt="" class="w-[140px]" src="@app/assets/images/about-flashcards.svg">
-			<div class="card-sm flex flex-col card-padding">
+			<img alt="" class="w-1/2 max-w-[250px]" src="@app/assets/images/about-flashcards.svg">
+			<div class="card-sm flex flex-col card-padding w-full">
 				<span class="font-bold text-lg">What is a flashcard?</span>
 				<span class="text-secondaryText">
 					Flashcard is a study tool that helps students easily remember answers and definitions. It is a card with question or words on the front, and answers or definitions on the back.
 				</span>
 			</div>
-			<div class="card-sm flex flex-col card-padding">
+			<div class="card-sm flex flex-col card-padding w-full">
 				<span class="font-bold text-lg">How to use</span>
 				<ul class="text-secondaryText list-disc pl-4">
 					<li>Read the question or word on card’s front</li>
@@ -18,7 +18,7 @@
 					<li>Repeat these steps until you have mastered your answer or definition.</li>
 				</ul>
 			</div>
-			<div class="card-sm flex flex-col card-padding">
+			<div class="card-sm flex flex-col card-padding w-full">
 				<span class="font-bold text-lg">How to create</span>
 				<ul class="text-secondaryText list-disc pl-4">
 					<li>
