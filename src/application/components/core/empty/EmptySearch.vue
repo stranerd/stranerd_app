@@ -1,6 +1,6 @@
 <template>
 	<div class="flex justify-center items-center flex-col text-center gap-3 my-auto">
-		<img alt="" src="@/assets/images/emptyStates/search.png">
+		<img alt="" src="@/assets/images/emptyStates/search.svg">
 		<IonText class="font-bold">Nothing was found</IonText>
 		<span class="max-w-[250px] text-sm">
 			We don’t have what you’re looking for yet.

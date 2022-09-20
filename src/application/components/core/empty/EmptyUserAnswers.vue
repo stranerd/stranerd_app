@@ -1,6 +1,6 @@
 <template>
 	<div class="flex justify-center items-center flex-col text-center gap-4 my-auto">
-		<img src="@/assets/images/emptyStates/answer.png">
+		<img src="@/assets/images/emptyStates/answer.svg">
 		<p class="text-lg font-bold">No answers</p>
 		<span class="text-center ">Answers to questions will show up here.</span>
 		<router-link to="/questions">

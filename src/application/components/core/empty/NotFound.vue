@@ -1,6 +1,6 @@
 <template>
 	<div class="flex justify-center items-center flex-col text-center gap-6 my-auto">
-		<img src="@/assets/images/emptyStates/404.png">
+		<img src="@/assets/images/emptyStates/404.svg">
 		<span>{{ title }}</span>
 	</div>
 </template>

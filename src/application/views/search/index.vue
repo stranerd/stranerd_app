@@ -4,28 +4,28 @@
 			<div class="showcase-flex !gap-6">
 				<div class="card-sm p-8 flex flex-col gap-2 items-center text-center">
 					<template v-if="tab === 'questions'">
-						<img alt="" class="mb-2" src="@app/assets/images/search/question.png">
+						<img alt="" class="mb-2" src="@app/assets/images/search/question.svg">
 						<span class="font-bold text-lg">Find questions</span>
 						<div class="text-secondaryText">
 							Use the searchbar above to find questions you are looking for answers to.
 						</div>
 					</template>
 					<template v-else-if="tab === 'flashCards'">
-						<img alt="" class="mb-2" src="@app/assets/images/search/flashcard.png">
+						<img alt="" class="mb-2" src="@app/assets/images/search/flashcard.svg">
 						<span class="font-bold text-lg">Find flashcards</span>
 						<div class="text-secondaryText">
 							Use the searchbar above to find flashcards that you can use to study.
 						</div>
 					</template>
 					<template v-else-if="tab === 'users'">
-						<img alt="" class="mb-2" src="@app/assets/images/search/user.png">
+						<img alt="" class="mb-2" src="@app/assets/images/search/user.svg">
 						<span class="font-bold text-lg">Find other users</span>
 						<div class="text-secondaryText">
 							Use the searchbar above to find friends, classmates, and other students to learn from.
 						</div>
 					</template>
 					<template v-else>
-						<img alt="" class="mb-2" src="@app/assets/images/search/all.png">
+						<img alt="" class="mb-2" src="@app/assets/images/search/all.svg">
 						<span class="font-bold text-lg">Search for anything</span>
 						<div class="text-secondaryText">
 							Find questions, flashcards and friends or classmates using the searchbar above.

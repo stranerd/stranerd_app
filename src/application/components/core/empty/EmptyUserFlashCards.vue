@@ -1,6 +1,6 @@
 <template>
 	<div class="flex justify-center items-center flex-col text-center gap-4 my-auto">
-		<img src="@/assets/images/emptyStates/flashcard.png">
+		<img src="@/assets/images/emptyStates/flashcard.svg">
 		<p class="text-lg font-bold">No flashcards</p>
 		<span class="text-center ">Flashcards will show up here.</span>
 		<router-link to="/study/flashCards/create">

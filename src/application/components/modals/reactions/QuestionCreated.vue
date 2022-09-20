@@ -1,7 +1,7 @@
 <template>
 	<Modal :close="close" :hideHeader="true" class="h-screen md:h-auto">
 		<div class="flex flex-col flex-grow gap-2 items-center">
-			<img alt="" class="w-24 my-2" src="@app/assets/images/questionCreated.png">
+			<img alt="" class="w-24 my-2" src="@app/assets/images/questionCreated.svg">
 			<IonText class="font-bold text-lg">Question asked successfully</IonText>
 			<IonText class="text-secondaryText text-center mb-2">
 				An expert tutor will answer this question soon.<br />
