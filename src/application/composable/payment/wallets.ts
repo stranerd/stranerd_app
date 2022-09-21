@@ -8,6 +8,10 @@ import { storage } from '@utils/storage'
 
 const AFTER_SUB_ROUTE_KEY = 'AFTER_SUBSCRIPTION_ROUTE_KEY'
 
+export const saveRouteForAfterSub = async (route: string) => {
+	await storage.set(AFTER_SUB_ROUTE_KEY, route)
+}
+
 export const useWallet = () => {
 	const { wallet } = useAuth()
 	const route = useRoute()
@@ -63,11 +67,7 @@ export const useWallet = () => {
 		await setLoading(false)
 	}
 
-	const saveRouteForAfterSub = async () => {
-		await storage.set(AFTER_SUB_ROUTE_KEY, route.fullPath)
-	}
-
-	return { error, loading, message, subscribeToPlan, cancelSubscription, saveRouteForAfterSub }
+	return { error, loading, message, subscribeToPlan, cancelSubscription }
 }
 
 export const useEditAccount = () => {

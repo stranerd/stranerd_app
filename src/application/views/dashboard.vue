@@ -1,14 +1,7 @@
 <template>
 	<DefaultLayout>
-		<template v-slot:panel>
-			<DashboardView />
-		</template>
-		<div class="lg:hidden">
-			<DashboardView />
-		</div>
-		<div class="hidden lg:block">
-			<GeneralDashboard />
-		</div>
+		<StudentDashboard v-if="false"/>
+		<TeacherDashboard v-else/>
 	</DefaultLayout>
 </template>
 
@@ -16,15 +9,18 @@
 import { defineComponent } from 'vue'
 import { useRouteMeta } from '@app/composable/core/states'
 import { generateMiddlewares } from '@app/middlewares'
-import DashboardView from '@app/components/dashboard/DashboardView.vue'
-import GeneralDashboard from '@app/components/dashboard/GeneralDashboard.vue'
-
+import StudentDashboard from '@app/components/student/dashboard.vue'
+import TeacherDashboard from '@app/components/teacher/dashboard.vue'
 export default defineComponent({
 	name: 'Dashboard',
-	components: { DashboardView, GeneralDashboard },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
+	components:{StudentDashboard, TeacherDashboard},
 	setup () {
 		useRouteMeta('Home', {})
+	
+		return {
+		
+		}
 	}
 })
 </script>

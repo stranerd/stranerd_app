@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col justify-between card card-padding">
+	<div class="flex flex-col justify-between card-sm card-padding">
 		<div>
 			<div class="flex justify-between gap-2">
 				<IonText class="font-500 truncate w-full">

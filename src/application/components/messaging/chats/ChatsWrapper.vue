@@ -1,11 +1,8 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true" :hideTop="true" :ignorePagePadding="true">
-		<template v-slot:panel>
-			<MessagingPanel />
-		</template>
 		<template v-slot:content-top>
 			<div v-if="chatMeta"
-				class="flex items-center bg-headerBg lg:bg-bodyBg text-headerText lg:text-bodyText p-4 lg:pt-0 gap-4 w-full">
+				class="flex items-center p-4 lg:pt-0 gap-4 w-full">
 				<router-link to="/messages">
 					<IonIcon :icon="arrowBackOutline" />
 				</router-link>
@@ -46,14 +43,13 @@ import { formatTime } from '@utils/dates'
 import { useAuth } from '@app/composable/auth/auth'
 import { useChatMetas } from '@app/composable/messaging/chatMetas'
 import { useUser } from '@app/composable/users/users'
-import MessagingPanel from '@app/components/layout/panels/MessagingPanel.vue'
 import ChatsList from '@app/components/messaging/chats/ChatsList.vue'
 import ChatForm from '@app/components/messaging/chats/ChatForm.vue'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'ChatsWrapper',
-	components: { MessagingPanel, ChatsList, ChatForm },
+	components: { ChatsList, ChatForm },
 	setup () {
 		const { id } = useAuth()
 		const route = useRoute()

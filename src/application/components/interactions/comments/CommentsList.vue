@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col flex-grow relative py-3">
+	<div class="flex flex-col flex-grow relative">
 		<CommentsListCard v-for="comment in comments" :key="comment.hash" :comment="comment" />
 		<BlockLoading v-if="loading" />
 	</div>

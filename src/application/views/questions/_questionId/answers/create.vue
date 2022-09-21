@@ -1,8 +1,5 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
-		<template v-slot:panel>
-			<QuestionsPanel />
-		</template>
 		<AnswerForm
 			:error="error"
 			:factory="factory"
@@ -25,11 +22,10 @@ import AnswerForm from '@app/components/questions/answers/AnswerForm.vue'
 import { getAnsweringQuestion, useCreateAnswer } from '@app/composable/questions/answers'
 import { useRouteMeta } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
-import QuestionsPanel from '@app/components/layout/panels/QuestionsPanel.vue'
 
 export default defineComponent({
 	name: 'QuestionsQuestionIdAnswer',
-	components: { AnswerForm, QuestionsPanel },
+	components: { AnswerForm },
 	beforeRouteEnter: generateMiddlewares([
 		'isAuthenticated',
 		async ({ to }) => {
@@ -37,7 +33,7 @@ export default defineComponent({
 			const { questionId } = to.params
 			const question = getAnsweringQuestion()
 			if (!question || question.id !== questionId || question.user.id === id.value) return `/questions/${questionId}`
-		}
+		}, 'isSubscribed'
 	]),
 	setup () {
 		useRouteMeta('Question', { back: true })

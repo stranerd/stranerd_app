@@ -1,6 +1,6 @@
 <template>
 	<form class="flex gap-4 items-center" @submit.prevent="createComment">
-		<IonInput v-model="factory.body" :placeholder="`Add a ${title}...`" class="flex-grow" />
+		<IonInput v-model="factory.body" :placeholder="`Add a ${title}...`" class="flex-grow bg-bodyBg" />
 		<IonButton :disabled="!factory.valid" class="btn-primary" type="submit">
 			<IonIcon slot="icon-only" :icon="paperPlaneOutline" />
 		</IonButton>

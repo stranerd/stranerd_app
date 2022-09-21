@@ -1,5 +1,5 @@
 <template>
-	<form class="flex flex-col gap-4 justify-center" @submit.prevent="submit">
+	<form class="flex flex-col gap-4 h-full" @submit.prevent="submit">
 		<Avatar :editable="true" :name="factory.first" :size="64" :src="factory.photo" @photo="savePhoto" />
 		<div class="flex flex-col items-start">
 			<div class="flex w-full gap-4">
@@ -32,11 +32,13 @@
 				rows="3" show-cancel-button="never" />
 		</div>
 
-		<div class="flex w-full justify-end gap-2 items-center">
-			<IonButton :disabled="loading || !factory.valid" class="btn-primary w-24" type="submit">
+		<div class="flex gap-4 items-center mt-auto">
+			<IonButton class="btn-outline w-full" type="button" @click.prevent="skip">
+				Skip
+			</IonButton>
+			<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
 				<SpinLoading v-if="loading" />
 				<span v-else>Next</span>
-				<IonRippleEffect class="rounded-lg" />
 			</IonButton>
 		</div>
 	</form>
@@ -53,6 +55,10 @@ export default defineComponent({
 		next: {
 			type: Function as PropType<() => any>,
 			required: true
+		},
+		skip: {
+			type: Function as PropType<() => any>,
+			required: true
 		}
 	},
 	setup (props) {
@@ -62,7 +68,7 @@ export default defineComponent({
 			await updateProfile(true)
 		}
 		const submit = async () => {
-			await updateProfile()
+			await updateProfile(true)
 			props.next()
 		}
 		return { factory, loading, error, updateProfile, submit, savePhoto }

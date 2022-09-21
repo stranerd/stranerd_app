@@ -1,16 +1,13 @@
 <template>
 	<DefaultLayout :ignorePagePadding="true">
-		<template v-slot:panel>
-			<QuestionsPanel />
-		</template>
-		<div class="h-full lg:px-8 showcase-flex">
+		<div class="h-full lg:px-8 showcase-flex !gap-6">
 			<BlockLoading v-if="loading" />
 			<template v-else-if="question">
 				<QuestionPageCard :question="question" />
 				<AnswersList v-if="isSubscribed" :question="question" />
 				<UnsubscribedAnswersList v-else :question="question" />
 			</template>
-			<NotFound v-else title="Question Not Found" />
+			<NotFound v-else title="Question not found" />
 		</div>
 	</DefaultLayout>
 </template>
@@ -23,12 +20,11 @@ import QuestionPageCard from '@app/components/questions/questions/QuestionPageCa
 import AnswersList from '@app/components/questions/answers/AnswersList.vue'
 import UnsubscribedAnswersList from '@app/components/questions/answers/UnsubscribedAnswersList.vue'
 import { useRouteMeta } from '@app/composable/core/states'
-import QuestionsPanel from '@app/components/layout/panels/QuestionsPanel.vue'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'QuestionsQuestionId',
-	components: { QuestionPageCard, AnswersList, UnsubscribedAnswersList, QuestionsPanel },
+	components: { QuestionPageCard, AnswersList, UnsubscribedAnswersList },
 	setup () {
 		const { questionId } = useRoute().params
 		useRouteMeta('Question', { back: true })

@@ -1,6 +1,5 @@
 import { BaseEntity, parseMedia } from '@modules/core'
-import { capitalize, catchDivideByZero, formatNumber } from '@utils/commons'
-import { getRankImage } from './rank'
+import { capitalize } from '@utils/commons'
 import {
 	CollegeType,
 	EmbeddedUser,
@@ -11,7 +10,6 @@ import {
 	UserRoles,
 	UserSchoolData,
 	UserSchoolType,
-	UserSession,
 	UserStatus
 } from '../types'
 
@@ -21,7 +19,6 @@ type UserConstructorArgs = {
 	roles: UserRoles
 	account: UserAccount
 	status: UserStatus
-	session: UserSession
 	dates: UserDates
 	rank: UserRank
 	nextRank: UserRank | null
@@ -56,7 +53,6 @@ export class UserEntity extends BaseEntity {
 	public readonly roles: UserRoles
 	public readonly account: UserAccount
 	public readonly status: UserStatus
-	public readonly session: UserSession
 	public readonly dates: UserDates
 	public readonly rank: UserRank
 	public readonly nextRank: UserRank | null
@@ -68,7 +64,6 @@ export class UserEntity extends BaseEntity {
 		             roles,
 		             account,
 		             status,
-		             session,
 		             dates,
 		             rank,
 		             school,
@@ -80,7 +75,6 @@ export class UserEntity extends BaseEntity {
 		this.roles = generateDefaultRoles(roles)
 		this.account = account
 		this.status = status
-		this.session = session
 		this.dates = dates
 		this.rank = rank
 		this.nextRank = nextRank
@@ -95,58 +89,12 @@ export class UserEntity extends BaseEntity {
 		return this.isOnline ? Date.now() : this.status.lastUpdatedAt
 	}
 
-	get averageRating () {
-		return catchDivideByZero(this.account.ratings.total, this.ratingCount)
-	}
-
-	get ratingCount () {
-		return this.account.ratings.count
-	}
-
-	get orderRating () {
-		return Math.pow(this.account.ratings.total, this.averageRating)
-	}
-
 	get score () {
 		return this.account.score
 	}
 
-	get rankImage () {
-		return getRankImage(this.rank.id)
-	}
-
-	get nextRankImage () {
-		return this.nextRank ? getRankImage(this.nextRank.id) : null
-	}
-
-	get formattedScore () {
-		return formatNumber(this.score, 2)
-	}
-
-	get currentSession () {
-		return this.session.currentSessions[0] || this.session.currentTutorSessions[0] || null
-	}
-
-	get canHostSessions () {
-		return !this.currentSession && this.isTutor && this.isOnline
-	}
-
-	get canRequestSessions () {
-		return !this.currentSession &&
-			this.session.requests.length === 0 &&
-			this.session.lobby.length === 0 &&
-			this.isOnline
-	}
-
 	get meta () {
 		return this.account.meta
-	}
-
-	get nerdScoreMessage () {
-		if (this.account.rankings.daily > 10) return 'Your performance has been excellent today. Keep it up.'
-		if (this.account.rankings.daily > 5) return 'You are on a streak today. Keep it rolling!'
-		if (this.account.rankings.daily > 2) return 'Keep doing what you are doing!'
-		return 'Time to pick up on your performance.'
 	}
 
 	get isAdmin () {

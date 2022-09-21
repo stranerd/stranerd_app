@@ -1,5 +1,5 @@
 <template>
-	<div class="!gap-4 card-padding flex flex-col border-bottom-line lg:rounded-xl lg:border lg:border-disabled">
+	<div class="!gap-4 card-sm card-padding flex flex-col">
 		<div class="flex justify-between gap-2">
 			<Avatar :id="question.user.id" :size="36" :src="question.user.bio.photo" />
 			<div class="flex flex-col">
@@ -60,11 +60,11 @@ export default defineComponent({
 	},
 	components: { InteractionTag, SaveToSet },
 	setup (props) {
-		const { id } = useAuth()
+		const { id, user } = useAuth()
 		const router = useRouter()
 
 		const showAnswerButton = computed({
-			get: () => props.question.user.id !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
+			get: () => props.question.user.id !== id.value && user.value?.isVerified && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
 			set: () => {
 			}
 		})

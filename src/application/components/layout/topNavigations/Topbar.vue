@@ -1,12 +1,12 @@
 <template>
 	<IonHeader class="block ion-no-border inset-x-0 w-full z-10">
-		<IonToolbar class="px-4 lg:px-6 border-bottom-line min-h-[4rem] flex items-center justify-center">
-			<div class="flex items-center justify-between lg:gap-16 py-2">
+		<IonToolbar class="px-4 lg:px-6 flex items-center justify-center">
+			<div class="flex items-center justify-between lg:gap-16 pt-4 pb-2">
 				<router-link class="hidden lg:inline-block" to="/">
 					<Logo />
 				</router-link>
 				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
-					class="text-base text-headerText lg:hidden"
+					class="text-base lg:hidden"
 					defaultHref="/dashboard" mode="ios" text="" />
 				<IonText class="font-bold text-xl lg:hidden truncate max-w-[240px] capitalize">
 					{{ $route.meta.routeName ?? '' }}
@@ -50,20 +50,17 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 ion-toolbar {
-	--background: #{$color-headerBg};
-	--color: #{$color-headerText};
+	--background: #{$color-bodyBg};
+	--color: #{$color-bodyText};
 	--box-shadow: none;
+	--padding-start: 0;
+	--padding-end: 0;
+	@media (min-width: $lg) {
+		border: $border;
+	}
 }
 
 ion-header {
-	--background: #{$color-headerBg};
-	--color: #{$color-headerText};
 	--box-shadow: none;
-}
-
-::v-deep() {
-	ion-searchbar {
-		background: $color-primaryHover !important;
-	}
 }
 </style>

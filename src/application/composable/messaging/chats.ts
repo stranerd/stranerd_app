@@ -70,10 +70,7 @@ export const useChats = (to: string) => {
 	})
 
 	return {
-		chats: computed({
-			get: () => orderChats(global[to].chats.value),
-			set: (sessions) => sessions.map((session) => session.values.map((c) => addToArray(global[to].chats.value, c, (e) => e.id, (e) => e.createdAt)))
-		}),
+		chats: computed(() => orderChats(global[to].chats.value)),
 		fetched: global[to].fetched,
 		loading: global[to].loading,
 		error: global[to].error,

@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full flex flex-col items-center justify-center card card-padding">
+	<div class="w-full flex flex-col items-center justify-center card-sm card-padding">
 		<p class="w-full" v-html="info" />
 		<slot>
 			<router-link v-if="btnText && route" :class="btnTextClass" :to="route"

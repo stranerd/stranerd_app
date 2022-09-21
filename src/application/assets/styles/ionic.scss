@@ -13,7 +13,7 @@
 	--ion-color-step-850: $color-bodyText;
 	--ion-background-color: $color-bodyBg;
 	--ion-font-family: 'DM Sans', sans-serif;
-	--icon-size: 1.4em;
+	--icon-size: 1.3em;
 	font-family: 'DM Sans', sans-serif;
 
 	/** primary **/
@@ -52,9 +52,17 @@ ion-modal.modal-class {
 		flex-direction: column;
 	}
 
+	&::part(handle) {
+		background: $color-itemBg !important;
+	}
+
+	&::part(content) {
+		overflow-y: auto;
+	}
+
 	@media (min-width: $lg) {
 		&::part(content) {
-			bottom: 25%;
+			position: static;
 			border-radius: var(--border-radius);
 		}
 		&::part(handle) {
@@ -92,12 +100,11 @@ ion-modal.modal-class {
 }
 
 ion-searchbar {
-	--background: transparent !important;
-	background: #{$color-itemBg} !important;
 	--box-shadow: none !important;
 	padding: 0 0.25rem !important;
 	height: 44px !important;
 	border-radius: 0.5rem !important;
+	outline: 1px solid $color-itemBg;
 	--color: inherit !important;
 	--placeholder-color: inherit !important;
 	--cancel-button-color: inherit !important;
@@ -109,14 +116,12 @@ ion-input, ion-textarea, ion-select {
 	margin: 0 !important;
 	--padding-start: 1rem !important;
 	--padding-end: 1rem !important;
-	--background: #{$color-itemBg} !important;
-	background: #{$color-itemBg} !important;
 	--box-shadow: none;
 	border-radius: 0.5rem;
 	--icon-color: transparent !important;
 	--placeholder-color: #{$color-secondaryText} !important;
 	--placeholder-opacity: 1;
-	outline: 1px solid transparent;
+	outline: 1px solid $color-itemBg;
 
 	&:focus-within {
 		--icon-color: #{$color-info} !important;
@@ -197,6 +202,12 @@ ion-button {
 	letter-spacing: 0.02rem;
 	margin: 0;
 	font-size: 0.875rem;
+
+	&::part(native) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }
 
 .btn-primary {
@@ -243,6 +254,7 @@ ion-icon {
 
 ion-label {
 	font-weight: 600;
+	line-height: 1rem;
 }
 
 ion-item {

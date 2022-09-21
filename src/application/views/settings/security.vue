@@ -1,8 +1,5 @@
 <template>
 	<DefaultLayout>
-		<template v-slot:panel>
-			<SettingsPanel />
-		</template>
 		<form class="flex flex-col page-padding gap-4" @submit.prevent="updatePassword">
 			<IonText class="text-xl font-semibold">
 				{{ hasPassword ? 'Update Password' : 'Add Password' }}
@@ -32,11 +29,9 @@ import { usePasswordUpdate } from '@app/composable/auth/passwords'
 import { useAuth } from '@app/composable/auth/auth'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
-import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
 
 export default defineComponent({
 	name: 'SettingsSecurity',
-	components: { SettingsPanel },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Security', { back: true })

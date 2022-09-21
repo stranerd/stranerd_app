@@ -1,8 +1,5 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
-		<template v-slot:panel>
-			<QuestionsPanel />
-		</template>
 		<QuestionForm
 			:disabled="{ tagId: true }"
 			:error="error"
@@ -25,11 +22,10 @@ import { useAuth } from '@app/composable/auth/auth'
 import QuestionForm from '@app/components/questions/questions/QuestionForm.vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
-import QuestionsPanel from '@app/components/layout/panels/QuestionsPanel.vue'
 
 export default defineComponent({
 	name: 'QuestionsQuestionIdEdit',
-	components: { QuestionForm, QuestionsPanel },
+	components: { QuestionForm },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ to }) => {
 		const { id } = useAuth()
 		const { questionId = '' } = to.params

@@ -2,20 +2,15 @@
 	<IonPage class="layout">
 		<IonContent :scrollY="false">
 			<div class="layout">
-				<Topbar :class="[hideTop? 'hidden lg:block':'' ]" />
+				<Topbar :class="{'hidden': hideTop}" class="lg:hidden" />
 				<div class="layout-page">
 					<div class="layout-page-left">
 						<LeftSidebar class="h-full py-8" />
 					</div>
-					<div class="layout-page-panel">
-						<slot name="panel">
-							<DashboardPanel />
-						</slot>
-					</div>
 					<div :class="{'lg:px-8': !ignorePagePadding}" class="layout-page-main">
 						<slot name="content-top">
 							<div :class="{'lg:px-8': ignorePagePadding}"
-								class="hidden lg:flex gap-8 justify-between items-center mb-4">
+								class="hidden lg:flex gap-8 justify-between items-center mb-8">
 								<div class="flex gap-8 items-center">
 									<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
 										class="text-base" defaultHref="/dashboard" mode="ios" text="" />
@@ -24,7 +19,9 @@
 									</IonText>
 								</div>
 								<div>
-									<slot name="content-top-left" />
+									<slot name="content-top-left">
+										<DesktopTopbar />
+									</slot>
 								</div>
 							</div>
 						</slot>
@@ -51,8 +48,8 @@ import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 import Fab from '@app/components/layout/Fab.vue'
 import LeftSidebar from '@app/components/layout/sidebars/LeftSidebar.vue'
 import RightSidebar from '@app/components/layout/sidebars/RightSidebar.vue'
-import DashboardPanel from '@app/components/layout/panels/DashboardPanel.vue'
 import { arrowBackOutline } from 'ionicons/icons'
+import DesktopTopbar from '@app/components/layout/topNavigations/DesktopTopbar.vue'
 
 export default defineComponent({
 	name: 'DefaultLayout',
@@ -74,7 +71,7 @@ export default defineComponent({
 			default: false
 		}
 	},
-	components: { Topbar, BottomNav, Fab, LeftSidebar, RightSidebar, DashboardPanel },
+	components: { Topbar, DesktopTopbar, BottomNav, Fab, LeftSidebar, RightSidebar },
 	setup () {
 		return { arrowBackOutline }
 	}

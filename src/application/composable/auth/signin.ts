@@ -11,8 +11,7 @@ const global = {
 	emailSignin: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
 	emailSignup: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
 	googleSignin: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
-	emailVerificationRequest: { email: ref(null as string | null), ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
-	emailVerificationComplete: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() }
+	emailVerification: { email: ref(''), ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() }
 }
 
 export const getReferrerId = async () => await storage.get('referrer') ?? global.referrerId.value
@@ -72,10 +71,11 @@ export const useEmailSignup = () => {
 	return { factory, loading, error, signup }
 }
 
-export const useCompleteEmailVerification = () => {
+export const useEmailVerification = () => {
 	const router = useRouter()
+	const sent = ref(false)
 	const token = ref('')
-	const { error, loading, setError, setLoading } = global.emailVerificationComplete
+	const { email, error, loading, message, setError, setLoading, setMessage } = global.emailVerification
 	const completeVerification = async () => {
 		await setError('')
 		await setLoading(true)
@@ -91,23 +91,14 @@ export const useCompleteEmailVerification = () => {
 		}
 		await setLoading(false)
 	}
-	return { token, loading, error, completeVerification }
-}
-
-export const setEmailVerificationEmail = (email: string) => global.emailVerificationRequest.email.value = email
-export const getEmailVerificationEmail = () => global.emailVerificationRequest.email.value
-
-export const useEmailVerificationRequest = () => {
-	const { error, loading, message, setError, setLoading, setMessage } = global.emailVerificationRequest
-
 	const sendVerificationEmail = async () => {
-		const email = global.emailVerificationRequest.email.value
-		if (!email) return
+		if (!email.value) return
 		await setError('')
 		await setLoading(true)
 		try {
-			await AuthUseCases.sendVerificationEmail(email)
-			await setMessage(`A verification email was just sent to ${email}. Proceed to your email to complete your verification.`)
+			await AuthUseCases.sendVerificationEmail(email.value)
+			await setMessage(`An OTP was just sent to ${email.value}.`)
+			sent.value = true
 		} catch (error) {
 			await setError(error)
 		}
@@ -116,14 +107,17 @@ export const useEmailVerificationRequest = () => {
 	onMounted(sendVerificationEmail)
 
 	return {
-		email: global.emailVerificationRequest.email,
-		loading, error, message, sendVerificationEmail
+		token, sent, email, loading, error, message,
+		sendVerificationEmail, completeVerification
 	}
 }
 
+export const setEmailVerificationEmail = (email: string) => global.emailVerification.email.value = email
+export const getEmailVerificationEmail = () => global.emailVerification.email.value
+
 export const useGoogleSignin = () => {
 	const router = useRouter()
-	const { error, loading, setError, setLoading } = global.emailVerificationRequest
+	const { error, loading, setError, setLoading } = global.googleSignin
 	const signin = async (data: { accessToken: string, idToken: string }) => {
 		await setError('')
 		if (!loading.value) {

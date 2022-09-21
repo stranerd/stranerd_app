@@ -1,8 +1,10 @@
 <template>
-	<router-link :to="`/questions/${question.id}/answers/${answer.id}`"
-		class="rounded-xl flex flex-col !gap-4 card-padding lg:rounded-xl lg:border lg:border-disabled">
+	<div class="flex flex-col !gap-4 card-sm card-padding">
 		<div class="flex items-center gap-2 text-sm">
-			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="24" :src="answer.user.bio.photo" />
+			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="20" :src="answer.user.bio.photo"
+				class="md:hidden" />
+			<Avatar :id="answer.user.id" :name="answer.user.bio.fullName" :size="20" :src="answer.user.bio.photo"
+				class="hidden md:inline" />
 			<span class="font-bold flex items-center gap-1">
 				<span>{{ answer.user.bio.fullName }}</span>
 				<Verified :verified="answer.isUserVerified" />
@@ -10,17 +12,15 @@
 			<IonIcon :icon="ellipse" class="dot" />
 			<span>{{ formatTime(answer.createdAt) }}</span>
 			<div class="flex flex-grow items-center justify-end gap-4 text-secondaryText">
-				<Share :link="answer.shareLink" :text="answer.strippedBody" title="Share this answer" />
 				<IonIcon :icon="flagOutline" @click="openReportModal" />
 			</div>
 		</div>
 
-		<DisplayHtml :html="answer.body" class="pl-8" />
+		<DisplayHtml :html="answer.body" />
 
-		<Gallery v-if="answer.attachments.length" :media="answer.attachments" :path="answer.saveFilePath"
-			class="pl-8" />
+		<Gallery v-if="answer.attachments.length" :media="answer.attachments" :path="answer.saveFilePath" />
 
-		<div class="flex items-center gap-6 text-secondaryText text-sm pl-8">
+		<div class="flex items-center gap-6 text-secondaryText text-sm">
 			<div class="flex items-center gap-1">
 				<IonIcon :icon="like && like.value ? thumbsUp : thumbsUpOutline" @click="() => likeAnswer(true)" />
 				<span>{{ formatNumber(answer.meta.likes) }}</span>
@@ -35,13 +35,14 @@
 				<span>{{ formatNumber(answer.meta.comments) }}</span>
 			</router-link>
 			<div class="flex-1" />
+			<Share :link="answer.shareLink" :text="answer.strippedBody" title="Share this answer" />
 			<span v-if="showMarkBest" class="flex items-center gap-1" @click.prevent="markBestAnswer(question)">
 				<span>Mark as best</span>
 				<IonIcon :icon="checkmarkCircleOutline" />
 			</span>
 			<IonIcon v-if="answer.best" :icon="checkmarkCircleOutline" class="text-success" />
 		</div>
-	</router-link>
+	</div>
 </template>
 
 <script lang="ts">

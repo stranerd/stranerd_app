@@ -20,12 +20,12 @@ export const usePasswordReset = () => {
 			await setLoading(true)
 			try {
 				await AuthUseCases.sendPasswordResetEmail(email)
-				await setMessage(`An OTP was sent to ${email}`)
+				await setMessage(`An OTP was just sent to ${email}`)
+				sent.value = true
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-			sent.value = true
 		}
 	}
 

@@ -9,17 +9,18 @@
 	--clr-primaryHover: rgb(25, 64, 132);
 	--clr-bodyBg: rgb(255, 255, 255);
 	--clr-bodyText: rgb(5, 9, 13);
-	--clr-headerBg: rgb(22, 37, 101);
-	--clr-headerText: rgb(255, 255, 255);
-	--clr-itemBg: rgb(241, 243, 247);
+	--clr-itemBg: rgb(228, 234, 240);
 	--clr-secondaryText: rgb(73, 76, 88);
 	--clr-disabled: rgb(197, 201, 217);
 	--clr-outlineHover: rgb(182, 217, 255);
-	--clr-success: rgb(15, 220, 100);
+	--clr-contrast: rgb(255, 255, 255);
+	--clr-highlight: rgba(241, 248, 255);
+	--clr-success: rgb(7, 177, 177);
+	--clr-green: rgb(0, 198, 181);
 	--clr-danger: rgb(255, 50, 50);
 	--clr-info: rgb(33, 143, 223);
 	--clr-warning: rgb(255, 136, 0);
-	--clr-royal: rgb(172, 146, 235);
+	--clr-royal: rgb(128, 99, 211);
 }
 
 $theme: any;
@@ -30,36 +31,34 @@ $theme: any;
 		--clr-primaryHover: rgb(241, 234, 234);
 		--clr-bodyBg: rgb(30, 34, 48);
 		--clr-bodyText: rgb(255, 255, 255);
-		--clr-headerBg: rgb(5, 9, 13);
-		--clr-headerText: rgb(255, 255, 255);
 		--clr-itemBg: rgb(73, 76, 88);
 		--clr-secondaryText: rgb(241, 243, 247);
 		--clr-disabled: rgb(49, 49, 66);
 		--clr-outlineHover: rgb(24, 28, 39);
-		--clr-success: rgb(15, 220, 100);
+		--clr-contrast: rgb(255, 255, 255);
+		--clr-highlight: rgba(14, 14, 14);
+		--clr-success: rgb(7, 177, 177);
+		--clr-green: rgb(0, 198, 181);
 		--clr-danger: rgb(255, 50, 50);
 		--clr-info: rgb(33, 143, 223);
 		--clr-warning: rgb(255, 136, 0);
-		--clr-royal: rgb(172, 146, 235);
+		--clr-royal: rgb(128, 99, 211);
 	}
 }
 
-$spacers: (
-	0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14,
-	16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 72, 80, 96
-);
+$spacers: (0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 72, 80, 96);
 $grid-breakpoints: (
 	'': 0,
 	'sm:': '640px',
 	'md:': '768px',
 	'lg:': '1280px',
 	'xl:': '1420px',
-	'2xl:': '1536px'
+	'2xl:': '1536px',
 );
 
 @each $key in $spacers {
 	@each $bp, $width in $grid-breakpoints {
-		body[data-no-gap='true'] *[class*="#{$bp}gap-#{$key}"] {
+		body[data-no-gap='true'] *[class*='#{$bp}gap-#{$key}'] {
 			@media (min-width: $width) {
 				gap: 0 !important;
 
@@ -75,7 +74,8 @@ $grid-breakpoints: (
 	border-bottom: $border;
 }
 
-.card.border-bottom-line, .card-sm.border-bottom-line {
+.card.border-bottom-line,
+.card-sm.border-bottom-line {
 	@media (max-width: $lg) {
 		border-bottom: none;
 	}
@@ -85,7 +85,8 @@ $grid-breakpoints: (
 	border-top: $border;
 }
 
-.card.border-top-line, .card-sm.border-top-line {
+.card.border-top-line,
+.card-sm.border-top-line {
 	@media (max-width: $lg) {
 		border-top: none;
 	}
@@ -95,7 +96,8 @@ $grid-breakpoints: (
 	border-left: $border;
 }
 
-.card.border-left-line, .card-sm.border-left-line {
+.card.border-left-line,
+.card-sm.border-left-line {
 	@media (max-width: $lg) {
 		border-left: none;
 	}
@@ -105,9 +107,9 @@ $grid-breakpoints: (
 	border-right: $border;
 }
 
-.card.border-right-line, .card-sm.border-right-line {
+.card.border-right-line,
+.card-sm.border-right-line {
 	@media (max-width: $lg) {
 		border-right: none;
 	}
 }
-

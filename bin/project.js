@@ -1,11 +1,11 @@
-const { CapacitorProject } = require('@capacitor/project')
+const { MobileProject } = require('@trapezedev/project')
 const fs = require('fs')
 const envs = require('../env.json')
 const { asset_links, google_client_ids, package_name, app_name, environment, domain } = envs
 
 const getProject = async () => {
-	const project = new CapacitorProject({
-		ios: { path: 'ios' },
+	const project = new MobileProject('./', {
+		ios: { path: 'ios/App' },
 		android: { path: 'android' }
 	})
 	await project.load()
@@ -15,8 +15,8 @@ const getProject = async () => {
 const setup = async () => {
 	const folder = './public/.well-known'
 	if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true })
-	fs.writeFileSync(`${folder}/assetlinks.json`, JSON.stringify(asset_links.android ?? {}, null, 4))
-	fs.writeFileSync(`${folder}/apple-app-site-association`, JSON.stringify(asset_links.ios ?? {}, null, 4))
+	fs.writeFileSync(`${ folder }/assetlinks.json`, JSON.stringify(asset_links.android ?? {}, null, 4))
+	fs.writeFileSync(`${ folder }/apple-app-site-association`, JSON.stringify(asset_links.ios ?? {}, null, 4))
 
 	const reversedIosClientId = google_client_ids.ios.split('.').reverse().join('.')
 
@@ -35,7 +35,7 @@ const setup = async () => {
 			await project.ios.setBuildProperty(target.name, build.name, 'GOOGLE_CLIENT_ID', reversedIosClientId)
 			await project.ios.setBuildProperty(target.name, build.name, 'DOMAIN', domain)
 			await project.ios.addEntitlements(target.name, build.name, {
-				'com.apple.developer.associated-domains': [`applinks:${domain}`]
+				'com.apple.developer.associated-domains': [`applinks:${ domain }`]
 			})
 		}))
 	}))
@@ -49,8 +49,8 @@ const setup = async () => {
 	const ANDROID_SOURCE = './android/app/google-services.json'
 	const IOS_SOURCE = './ios/App/App/GoogleService-Info.plist'
 
-	const ANDROID_CONFIG = `./bin/config/${environment}/google-services.json`
-	const IOS_CONFIG = `./bin/config/${environment}/GoogleService-Info.plist`
+	const ANDROID_CONFIG = `./bin/config/${ environment }/google-services.json`
+	const IOS_CONFIG = `./bin/config/${ environment }/GoogleService-Info.plist`
 
 	const args = process.argv.slice(3)
 	if (args.includes('--skip-apps')) return
@@ -62,7 +62,8 @@ const setup = async () => {
 }
 
 const version = async () => {
-	const versionCode = Math.floor((Date.now() / 1000 - 1640995200) / 100)
+	const firstVersionDate = 1640995200000
+	const versionCode = Math.floor((Date.now() - firstVersionDate) / 1e5)
 	const versionName = process.argv[3].toString()
 	if (!versionName) return console.log('Provide a version please')
 
@@ -85,7 +86,7 @@ const env = async () => {
 	const entries = Object.entries(envs).map(([key, value]) => ([key, typeof value === 'string' ? value : JSON.stringify(value)]))
 	const envFormattedEntries = entries.reduce((accumulator, currentValue) => {
 		const [key, value] = currentValue
-		return accumulator + `VUE_APP_API_${key.toUpperCase()}=${value}\n`
+		return accumulator + `VUE_APP_API_${ key.toUpperCase() }=${ value }\n`
 	}, '')
 	fs.writeFileSync('.env', envFormattedEntries)
 }

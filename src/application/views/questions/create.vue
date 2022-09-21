@@ -1,19 +1,23 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
-		<template v-slot:panel>
-			<QuestionsPanel />
-		</template>
-		<QuestionForm
-			:error="error"
-			:factory="factory"
-			:loading="loading"
-			:submit="createQuestion"
-			class="page-padding h-full lg:h-auto"
-		>
-			<template v-slot:buttonText>
-				Post Question
-			</template>
-		</QuestionForm>
+		<div class="flex flex-col gap-4 page-padding h-full lg:h-auto">
+			<span class="card p-4 bg-highlight text-center block">
+				You have <span class="font-bold">{{
+					wallet?.subscription.data.questions
+				}} questions</span> to ask
+			</span>
+			<QuestionForm
+				:error="error"
+				:factory="factory"
+				:loading="loading"
+				:submit="createQuestion"
+				class="flex-grow"
+			>
+				<template v-slot:buttonText>
+					Post Question
+				</template>
+			</QuestionForm>
+		</div>
 	</DefaultLayout>
 </template>
 
@@ -23,25 +27,24 @@ import { generateMiddlewares } from '@app/middlewares'
 import QuestionForm from '@app/components/questions/questions/QuestionForm.vue'
 import { useCreateQuestion } from '@app/composable/questions/questions'
 import { useRouteMeta } from '@app/composable/core/states'
-import QuestionsPanel from '@app/components/layout/panels/QuestionsPanel.vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { Notify } from '@utils/dialog'
+import { useReactionModal } from '@app/composable/core/modals'
 
 export default defineComponent({
 	name: 'QuestionsCreate',
-	components: { QuestionForm, QuestionsPanel },
-	beforeRouteEnter: generateMiddlewares(['isAuthenticated', async ({ goBackToNonAuth }) => {
+	components: { QuestionForm },
+	beforeRouteEnter: generateMiddlewares(['isAuthenticated', 'isSubscribed', async ({ goBackToNonAuth }) => {
 		const { wallet } = useAuth()
-		if (!wallet.value) return goBackToNonAuth()
 		if (!wallet.value?.subscription.data.questions) {
-			Notify({ title: 'You don\'t have any questions left' })
-			return '/account/subscription'
+			useReactionModal().openNoMoreQuestions()
+			return goBackToNonAuth()
 		}
 	}]),
 	setup () {
 		useRouteMeta('Ask a Question', { back: true })
+		const { wallet } = useAuth()
 		const { factory, error, loading, createQuestion } = useCreateQuestion()
-		return { factory, error, loading, createQuestion }
+		return { factory, error, loading, createQuestion, wallet }
 	}
 })
 </script>

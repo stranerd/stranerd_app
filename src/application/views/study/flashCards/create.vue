@@ -1,9 +1,17 @@
 <template>
-	<DefaultLayout>
-		<FlashCardForm :error="error" :factory="factory" :loading="loading" :submit="createFlashCard"
-			title="Create a Flashcard set">
-			<template v-slot:buttonTitle>Create</template>
-		</FlashCardForm>
+	<DefaultLayout :hideBottom="true" :hideFab="true">
+		<div class="flex flex-col gap-4 page-padding h-full lg:h-auto">
+			<router-link class="card-sm gap-4 flex p-4 items-center text-secondaryText" to="/study/flashCards/about">
+				<IonIcon :icon="helpCircleOutline" />
+				<span>See how it works</span>
+				<div class="flex-1" />
+				<IonIcon :icon="arrowForwardOutline" />
+			</router-link>
+			<FlashCardForm :error="error" :factory="factory" :loading="loading" :submit="createFlashCard"
+				class="flex-grow">
+				<template v-slot:buttonTitle>Create</template>
+			</FlashCardForm>
+		</div>
 	</DefaultLayout>
 </template>
 
@@ -13,6 +21,7 @@ import FlashCardForm from '@app/components/study/flashCards/FlashCardForm.vue'
 import { useCreateFlashCard } from '@app/composable/study/flashCards'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
+import { arrowForwardOutline, helpCircleOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'StudyFlashCardsCreate',
@@ -21,7 +30,7 @@ export default defineComponent({
 	setup () {
 		useRouteMeta('Create Flashcard', { back: true })
 		const { createFlashCard, factory, error, loading } = useCreateFlashCard()
-		return { error, loading, createFlashCard, factory }
+		return { error, loading, createFlashCard, factory, helpCircleOutline, arrowForwardOutline }
 	}
 })
 </script>

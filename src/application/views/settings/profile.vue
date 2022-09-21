@@ -1,9 +1,6 @@
 <template>
 	<DefaultLayout>
-		<template v-slot:panel>
-			<SettingsPanel />
-		</template>
-		<form class="flex flex-col page-padding gap-6 justify-center" @submit.prevent="updateProfile()">
+		<form class="flex flex-col page-padding gap-6 justify-center" @submit.prevent="submit">
 			<Avatar :editable="true" :name="factory.first" :size="64" :src="factory.photo" @photo="savePhoto" />
 			<div class="flex flex-col items-start">
 				<div class="flex w-full gap-4">
@@ -50,20 +47,24 @@ import { useProfileUpdate } from '@app/composable/auth/profile'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 import { UploadedFile } from '@modules/core'
-import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'SettingsProfile',
-	components: { SettingsPanel },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Edit Profile', { back: true })
+		const router = useRouter()
 		const { factory, error, loading, updateProfile } = useProfileUpdate()
 		const savePhoto = async (p: UploadedFile) => {
 			factory.value.photo = p
 			await updateProfile(true)
 		}
-		return { factory, error, loading, updateProfile, savePhoto }
+		const submit = async () => {
+			await updateProfile(true)
+			await router.push('/account')
+		}
+		return { factory, error, loading, submit, savePhoto }
 	}
 })
 </script>

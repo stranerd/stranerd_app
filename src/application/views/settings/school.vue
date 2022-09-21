@@ -1,18 +1,11 @@
 <template>
 	<DefaultLayout>
-		<template v-slot:panel>
-			<SettingsPanel />
-		</template>
-		<form class="flex flex-col page-padding lg:gap-8" @submit.prevent="updateSchool">
-			<IonList class="border-bottom-line text-sm">
+		<form class="flex flex-col page-padding gap-4 lg:gap-8" @submit.prevent="submit">
+			<IonList v-if="0" class="border-bottom-line text-sm">
 				<IonListHeader>
 					<IonLabel class="font-bold text-xl">Choose your academic level*</IonLabel>
 				</IonListHeader>
 				<IonRadioGroup v-model="factory.type" class="flex flex-col items-start" required>
-					<IonItem class="flex items-center gap-4">
-						<IonRadio slot="start" :value="UserSchoolType.secondary" />
-						<IonLabel>Secondary school</IonLabel>
-					</IonItem>
 					<IonItem class="flex items-center gap-4">
 						<IonRadio slot="start" :value="UserSchoolType.aspirant" />
 						<IonLabel>Secondary school leaver</IonLabel>
@@ -24,12 +17,10 @@
 				</IonRadioGroup>
 			</IonList>
 
-			<div v-if="factory.isCollegeType" class="border-bottom-line flex flex-col gap-4">
-				<IonText class="text-xl font-semibold">University set up</IonText>
-
+			<div v-if="factory.isCollegeType" class="border-bottom-line flex flex-col gap-6">
 				<div class="flex flex-col items-start gap-1">
 					<IonLabel>What university are you in?</IonLabel>
-					<IonSelect v-model="factory.institutionId"
+					<IonSelect :key="schools.length" v-model="factory.institutionId"
 						class="w-full capitalize"
 						interface="action-sheet" placeholder="Select university"
 						required>
@@ -42,7 +33,7 @@
 
 				<div class="flex flex-col items-start gap-1">
 					<IonLabel>What faculty are you in?</IonLabel>
-					<IonSelect v-model="factory.facultyId"
+					<IonSelect :key="filteredFaculties.length" v-model="factory.facultyId"
 						class="w-full capitalize"
 						interface="action-sheet" placeholder="Select faculty"
 						required>
@@ -55,8 +46,8 @@
 
 				<div class="flex flex-col items-start gap-1">
 					<IonLabel>What department are you in?</IonLabel>
-					<IonSelect v-model="factory.departmentAndTag"
-						class="w-full capitalize"
+					<IonSelect :key="filteredDepartments.length"
+						v-model="factory.departmentAndTag" class="w-full capitalize"
 						interface="action-sheet" placeholder="Select department"
 						required>
 						<IonSelectOption v-for="department in filteredDepartments" :key="department.hash"
@@ -123,54 +114,58 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, watch } from 'vue'
+import { defineComponent, onMounted, watch } from 'vue'
 import { useUserSchoolUpdate } from '@app/composable/auth/profile'
 import Institution from '@app/components/school/institutions/Institution.vue'
-import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
-import { useFacultyList } from '@app/composable/school/faculties'
-import { useDepartmentList } from '@app/composable/school/departments'
 import { UserSchoolType } from '@modules/users'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
-import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
+import { useChooseSchool } from '@app/composable/school'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'SettingsSchool',
-	components: { Institution, SettingsPanel },
+	components: { Institution },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Edit School', { back: true })
+		const router = useRouter()
 		const { factory, error, loading, updateSchool } = useUserSchoolUpdate()
+		const submit = async () => {
+			await updateSchool()
+			await router.push('/account')
+		}
 
-		const { schools, gatewayExams } = useInstitutionList()
 		const { courses, fetchInstitutionCourses } = useCourseList()
-		const { faculties, fetchFaculties } = useFacultyList()
-		const { departments, fetchDepartments } = useDepartmentList()
-		const filteredFaculties = computed(() => faculties.value.filter((f) => f.institutionId === factory.value.institutionId))
-		const filteredDepartments = computed(() => departments.value.filter((d) => d.facultyId === factory.value.facultyId))
+		const {
+			school, schools, gatewayExams, filteredFaculties, filteredDepartments
+		} = useChooseSchool(factory.value.institutionId, factory.value.facultyId, factory.value.departmentId)
 
 		watch(() => factory.value.institutionId, async () => {
 			factory.value.resetProp('facultyId')
-			if (factory.value.institutionId) await fetchFaculties(factory.value.institutionId)
+			school.institutionId = factory.value.institutionId
 		})
 
 		watch(() => factory.value.facultyId, async () => {
 			factory.value.resetProp('departmentId')
-			if (factory.value.facultyId) await fetchDepartments(factory.value.facultyId)
+			school.facultyId = factory.value.facultyId
+		})
+
+		watch(() => factory.value.departmentId, async () => {
+			school.departmentId = factory.value.departmentId
 		})
 
 		watch(() => factory.value.exams, async () => {
 			await Promise.all(factory.value.exams.map(async (exam) => fetchInstitutionCourses(exam.institutionId)))
 		})
+
 		onMounted(async () => {
 			await Promise.all(factory.value.exams.map(async (exam) => fetchInstitutionCourses(exam.institutionId)))
-			if (factory.value.institutionId) await fetchFaculties(factory.value.institutionId)
-			if (factory.value.facultyId) await fetchDepartments(factory.value.facultyId)
 		})
 
 		return {
-			factory, error, loading, updateSchool, UserSchoolType,
+			factory, error, loading, submit, UserSchoolType,
 			schools, gatewayExams, filteredFaculties, filteredDepartments, courses
 		}
 	}

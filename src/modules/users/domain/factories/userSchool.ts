@@ -68,7 +68,7 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 
 	constructor () {
 		super({
-			type: UserSchoolType.aspirant, institutionId: '', facultyId: '', departmentId: '', tagId: '', exams: []
+			type: UserSchoolType.college, institutionId: '', facultyId: '', departmentId: '', tagId: '', exams: []
 		})
 	}
 
@@ -97,6 +97,10 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 	set facultyId (value: string) {
 		this.set('facultyId', value)
 		this.resetProp('departmentId')
+	}
+
+	get departmentId () {
+		return this.values.departmentId
 	}
 
 	get departmentAndTag () {
@@ -137,10 +141,6 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 
 	get isAspirantType () {
 		return this.type === UserSchoolType.aspirant
-	}
-
-	get isSecondaryType () {
-		return this.type === UserSchoolType.secondary
 	}
 
 	getInstitution (institutionId: string) {

@@ -1,9 +1,8 @@
 <template>
 	<div class="flex-col gap-4">
-		<IonButton class="btn-outline w-full font-bold capitalize flex justify-center items-center"
-			@click="loginWithGoogle">
-			<IonIcon :icon="logoGoogle" class="mr-2" />
-			<span>Google</span>
+		<IonButton class="btn-outline w-full font-bold" @click="signinWithGoogle">
+			<img alt="" class="h-[1.25rem] mr-5" src="@app/assets/images/auth/google.svg">
+			<span>Continue with Google</span>
 		</IonButton>
 		<PageLoading v-if="loading" />
 	</div>
@@ -12,7 +11,6 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
 import { useGoogleSignin } from '@app/composable/auth/signin'
-import { logoGoogle } from 'ionicons/icons'
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth'
 import { googleClientId } from '@utils/environment'
 
@@ -21,7 +19,7 @@ export default defineComponent({
 	setup () {
 		const { loading, error, setError, signin } = useGoogleSignin()
 
-		const loginWithGoogle = async () => {
+		const signinWithGoogle = async () => {
 			try {
 				const googleUser = await GoogleAuth.signIn()
 				const accessToken = googleUser.authentication.accessToken
@@ -44,7 +42,7 @@ export default defineComponent({
 			}
 		})
 
-		return { loading, error, logoGoogle, loginWithGoogle }
+		return { loading, error, signinWithGoogle }
 	}
 })
 </script>

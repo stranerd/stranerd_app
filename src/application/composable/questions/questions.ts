@@ -4,7 +4,9 @@ import { QuestionEntity, QuestionFactory, QuestionsUseCases } from '@modules/que
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
-import { useReactionModal } from '@app/composable/core/modals'
+import { useUserModal } from '@app/composable/core/modals'
+import { useAuth } from '@app/composable/auth/auth'
+import { Listeners } from '@modules/core'
 
 enum Answered {
 	All,
@@ -29,26 +31,35 @@ const global = {
 	...useErrorHandler(),
 	...useLoadingHandler()
 }
-const listener = useListener(async () => await QuestionsUseCases.listen({
-	created: async (entity) => {
-		addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
-	},
-	updated: async (entity) => {
-		addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
-	},
-	deleted: async (entity) => {
-		const index = global.questions.value.findIndex((q) => q.id === entity.id)
-		if (index !== -1) global.questions.value.splice(index, 1)
+const listener = useListener(async () => {
+	const { user, id } = useAuth()
+	const listener: Listeners<QuestionEntity> = {
+		created: async (entity) => {
+			addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
+		},
+		updated: async (entity) => {
+			addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
+		},
+		deleted: async (entity) => {
+			const index = global.questions.value.findIndex((q) => q.id === entity.id)
+			if (index !== -1) global.questions.value.splice(index, 1)
+		}
 	}
-}, global.questions.value.at(-1)?.createdAt))
+	return user.value?.isVerified ?
+		await QuestionsUseCases.listen(listener, global.questions.value.at(-1)?.createdAt) :
+		await QuestionsUseCases.listenToUserQuestions(id.value, listener, global.questions.value.at(-1)?.createdAt)
+})
 
 export const useQuestionList = () => {
 	const router = useRouter()
+	const { user, id } = useAuth()
 	const fetchQuestions = async () => {
 		await global.setError('')
 		try {
 			await global.setLoading(true)
-			const questions = await QuestionsUseCases.get(global.questions.value.at(-1)?.createdAt)
+			const questions = user.value?.isVerified ?
+				await QuestionsUseCases.get(global.questions.value.at(-1)?.createdAt) :
+				await QuestionsUseCases.getUserQuestions(id.value, global.questions.value.at(-1)?.createdAt)
 			global.hasMore.value = !!questions.pages.next
 			questions.results.forEach((q) => addToArray(global.questions.value, q, (e) => e.id, (e) => e.createdAt))
 			global.fetched.value = true
@@ -109,7 +120,7 @@ export const useCreateQuestion = () => {
 				await setMessage('Question submitted successfully')
 				factory.value.reset()
 				await router.push(`/questions/${question.id}`)
-				useReactionModal().openQuestionCreated()
+				useUserModal().openQuestionCreated()
 			} catch (error) {
 				await setError(error)
 			}

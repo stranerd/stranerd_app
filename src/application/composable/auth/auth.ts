@@ -1,26 +1,43 @@
 import { computed, ref } from 'vue'
 import { UserEntity, UsersUseCases } from '@modules/users'
-import { AuthDetails, AuthTypes, UserLocation } from '@modules/auth/domain/entities/auth'
+import { AuthDetails, AuthTypes } from '@modules/auth/domain/entities/auth'
 import { AuthUseCases } from '@modules/auth'
 import { isClient } from '@utils/environment'
 import { setupPush } from '@utils/push'
-import { useUserModal } from '@app/composable/core/modals'
 import { storage } from '@utils/storage'
 import { WalletEntity, WalletsUseCases } from '@modules/payment'
+import { router } from '@app/router'
+import { useListener } from '@app/composable/core/states'
 
 const global = {
 	auth: ref(null as AuthDetails | null),
 	user: ref(null as UserEntity | null),
 	wallet: ref(null as WalletEntity | null),
-	location: ref(null as UserLocation | null),
-	listener: null as null | (() => void)
+	listener: useListener(async () => {
+		const id = global.auth.value?.id as string | undefined
+		if (!id) return () => {
+		}
+		const setUser = async (user: UserEntity) => {
+			global.user.value = user
+		}
+		const setWallet = async (wallet: WalletEntity) => {
+			global.wallet.value = wallet
+		}
+		const listeners = [
+			await UsersUseCases.listenToOne(id, {
+				created: setUser,
+				updated: setUser,
+				deleted: setUser
+			}),
+			await WalletsUseCases.listen({
+				created: setWallet,
+				updated: setWallet,
+				deleted: setWallet
+			})
+		]
+		return async () => await Promise.all(listeners.map((l) => l()))
+	})
 }
-
-export const CONVERSION_RATES = {
-	USD: 1,
-	NGN: 500,
-	INR: 75
-} as const
 
 export const useAuth = () => {
 	const id = computed({
@@ -52,59 +69,26 @@ export const useAuth = () => {
 		get: () => !!global.wallet.value?.subscription.active, set: () => {
 		}
 	})
-	const currentSessionId = computed({
-		get: () => global.user.value?.currentSession ?? null,
-		set: () => {
-		}
-	})
-
 	const hasPassword = computed({
 		get: () => !!global.auth.value?.authTypes.includes(AuthTypes.email),
 		set: () => {
 		}
 	})
 
-	const setUserLocation = (data: UserLocation) => {
-		global.location.value = data
-	}
-
 	const setAuthUser = async (details: AuthDetails | null) => {
-		if (global.listener) global.listener()
+		if (global.listener) await global.listener.close()
 		global.auth.value = details
 		if (details?.id) {
 			global.user.value = await UsersUseCases.find(details.id)
 			global.wallet.value = await WalletsUseCases.get()
-			if (global.auth.value?.isVerified && !global.user.value?.school) setTimeout(async () => {
-				if ((await getSchoolState()) !== id.value) useUserModal().openSettings()
-			}, 5000)
+			if (global.auth.value?.isVerified && !global.user.value?.school) {
+				if ((await getSchoolState()) !== id.value) await router.push('/account/setup')
+			}
 		} else global.user.value = null
 	}
 
 	const startProfileListener = async () => {
-		if (global.listener) global.listener()
-
-		const id = global.auth.value?.id
-		const setUser = async (user: UserEntity) => {
-			global.user.value = user
-		}
-		const setWallet = async (wallet: WalletEntity) => {
-			global.wallet.value = wallet
-		}
-		if (id) global.listener = async () => {
-			const listeners = [
-				await UsersUseCases.listenToOne(id, {
-					created: setUser,
-					updated: setUser,
-					deleted: setUser
-				}),
-				await WalletsUseCases.listen({
-					created: setWallet,
-					updated: setWallet,
-					deleted: setWallet
-				})
-			]
-			return async () => await Promise.all(listeners.map((fn) => fn()))
-		}
+		await global.listener.restart()
 	}
 
 	const signin = async (remembered: boolean) => {
@@ -120,21 +104,10 @@ export const useAuth = () => {
 		if (isClient()) window.location.assign('/auth/signin')
 	}
 
-	const getKey = (): keyof typeof CONVERSION_RATES | null => {
-		if (!global.location.value) return null
-		const key = global.location.value.currencyCode as keyof typeof CONVERSION_RATES
-		return CONVERSION_RATES[key] ? key : null
-	}
-	const getLocalCurrency = () => getKey() ?? 'USD'
-	const getLocalCurrencySymbol = () => getKey() ? global.location.value?.currencySymbol ?? '$' : '$'
-
-	const getLocalAmount = (amount: number) => parseFloat(Number(amount * CONVERSION_RATES[getLocalCurrency()]).toFixed(2))
-
 	return {
-		id, bio, user: global.user, auth: global.auth, location: global.location, wallet: global.wallet,
-		isLoggedIn, isEmailVerified, isAdmin, isTutor, currentSessionId, hasPassword, isSubscribed,
-		setAuthUser, setUserLocation, signin, signout,
-		getLocalAmount, getLocalCurrency, getLocalCurrencySymbol
+		id, bio, user: global.user, auth: global.auth, wallet: global.wallet,
+		isLoggedIn, isEmailVerified, isAdmin, isTutor, hasPassword, isSubscribed,
+		setAuthUser, signin, signout
 	}
 }
 

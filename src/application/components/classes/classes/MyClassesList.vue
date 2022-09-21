@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col">
 		<router-link v-if="!loading && !error && classes.length === 0"
-			class="card-padding flex flex-col !gap-0 border-bottom-line" to="/classes/">
+			class="card-padding flex flex-col !gap-0 border-bottom-line" to="/classes/explore">
 			<div class="font-bold flex items-center text-lg gap-2">
 				<IonText>Find your class</IonText>
 				<IonIcon :icon="arrowForwardCircleOutline" />

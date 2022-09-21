@@ -15,22 +15,6 @@ export type NewUser = {
 	photo: Media | null
 }
 
-export type UserLocation = {
-	ip: string,
-	city: string,
-	state: string,
-	stateCode: string,
-	country: string,
-	countryCode: string,
-	continent: string,
-	continentCode: string
-	latitude: string,
-	longitude: string,
-	currencyCode: string,
-	currencySymbol: string
-	timezone: string
-}
-
 export type ProfileUpdate = Omit<UserBio, 'fullName' | 'email'>
 
 export type PasswordUpdate = {

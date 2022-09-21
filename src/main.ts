@@ -2,11 +2,9 @@ import { createApp } from 'vue'
 import AppComponent from './App.vue'
 import { IonicVue } from '@ionic/vue'
 import 'katex/dist/katex.min'
-import './application/assets/styles/index.scss'
-import { parseLoggedInUser } from '@app/plugins/parseLoggedInUser'
-import { ipAddressGetter } from '@app/plugins/ipAddressGetter'
-import { authClient } from '@app/plugins/authClient'
+import '@app/assets/styles/index.scss'
 import { defineCustomElements } from '@ionic/pwa-elements/loader'
+import { parseLoggedInUser } from '@app/plugins/parseLoggedInUser'
 import { cssListeners } from '@app/plugins/cssListeners'
 import { App } from '@capacitor/app'
 import { domain } from '@utils/environment'
@@ -14,8 +12,9 @@ import { clearAllNotifications } from '@utils/push'
 import { router } from '@app/router'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { ChatScroll } from '@app/directives/chat-scroll'
+import { registerServiceWorker } from './registerServiceWorker'
 
-const globalPlugins = [parseLoggedInUser, authClient, ipAddressGetter, cssListeners]
+const globalPlugins = [parseLoggedInUser, cssListeners]
 
 const init = async () => {
 	const app = createApp(AppComponent)
@@ -25,19 +24,19 @@ const init = async () => {
 	app.use(router).use(IonicVue)
 	app.directive('chat-scroll', ChatScroll)
 
-	await router.isReady()
-
+	await router.isReady().catch()
 	app.mount('#app')
-	await SplashScreen.hide()
 
-	App.addListener('appUrlOpen', async (event) => {
-		const path = event.url.split(domain).pop()
-		await router.push(path ?? '/dashboard')
-	})
-
-	await defineCustomElements(window)
-
-	await clearAllNotifications()
+	await Promise.all([
+		SplashScreen.hide(),
+		App.addListener('appUrlOpen', async (event) => {
+			const path = event.url.split(domain).pop()
+			await router.push(path ?? '/dashboard')
+		}),
+		defineCustomElements(window),
+		registerServiceWorker(),
+		clearAllNotifications()
+	]).catch()
 }
 
 init().then()

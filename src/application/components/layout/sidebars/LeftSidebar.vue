@@ -1,18 +1,22 @@
 <template>
-	<div class="flex flex-col items-center gap-8">
-		<router-link v-for="{ path, icon, iconOutline } in [
-				{ name: 'Home', path: '/dashboard', icon: home, iconOutline:homeOutline },
-				{ name: 'Discussions', path: '/messages', icon: chatbubbles, iconOutline:chatbubblesOutline },
-				{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
-				{ name: 'Tests', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
-				...(isAdmin ? [{ name: 'Admin', path: `/admin/`, icon: statsChart, iconOutline: statsChartOutline }] : [])
-			]" :key="path" :to="path"
-			class="flex flex-col items-center justify-center">
-			<IonIcon :icon="$route.path === path ? icon : iconOutline" class="text-2xl" />
+	<div class="flex flex-col gap-8">
+		<router-link class="flex items-center gap-2 px-8" to="/">
+			<Logo />
+			<span class="font-bold text-lg">Stranerd</span>
 		</router-link>
-		<div class="bg-primaryBg text-primaryText rounded-full p-2.5 flex justify-center items-center"
-			@click="openModal">
-			<IonIcon :icon="addOutline" class="text-2xl" />
+		<div class="flex flex-col text-secondaryText">
+			<router-link v-for="{ name, path, icon, iconOutline } in [
+					{ name: 'Home', path: '/dashboard', icon: home, iconOutline: homeOutline },
+					{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline: helpCircleOutline },
+					{ name: 'Study', path: '/study', icon: book, iconOutline: bookOutline },
+					{ name: 'Classes', path: '/classes', icon: people, iconOutline: peopleOutline },
+					{ name: 'Profile', path: '/account', icon: person, iconOutline: personOutline },
+					...(isAdmin ? [{ name: 'Admin', path: '/admin', icon: statsChart, iconOutline: statsChartOutline }] : [])
+				]" :key="path" :class="{'text-primaryBg font-semibold bg-highlight': $route.path === path}" :to="path"
+				class="flex items-center text-lg gap-4 px-8 py-4">
+				<IonIcon :icon="$route.path === path ? icon : iconOutline" />
+				<span>{{ name }}</span>
+			</router-link>
 		</div>
 	</div>
 </template>
@@ -20,18 +24,19 @@
 <script lang="ts">
 import {
 	addOutline,
-	chatbubbles,
-	chatbubblesOutline,
+	book,
+	bookOutline,
 	helpCircle,
 	helpCircleOutline,
 	home,
 	homeOutline,
-	receipt,
-	receiptOutline,
+	people,
+	peopleOutline,
+	person,
+	personOutline,
 	statsChart,
 	statsChartOutline
 } from 'ionicons/icons'
-import { useUserModal } from '@app/composable/core/modals'
 import { useAuth } from '@app/composable/auth/auth'
 import { defineComponent } from 'vue'
 
@@ -40,9 +45,9 @@ export default defineComponent({
 	setup () {
 		const { isAdmin } = useAuth()
 		return {
-			isAdmin, openModal: () => useUserModal().openFabMenu(),
-			addOutline, chatbubbles, chatbubblesOutline, helpCircle, helpCircleOutline,
-			home, homeOutline, receipt, receiptOutline, statsChart, statsChartOutline
+			isAdmin, person, personOutline,
+			addOutline, people, peopleOutline, helpCircle, helpCircleOutline,
+			home, homeOutline, book, bookOutline, statsChart, statsChartOutline
 		}
 	}
 })
