@@ -5,7 +5,7 @@
 			<template v-else-if="question">
 				<QuestionPageCard :question="question" />
 				<AnswersList v-if="isSubscribed" :question="question" />
-				<UnsubscribedAnswersList v-else :question="question" />
+				<SubscribeCTA v-else />
 			</template>
 			<NotFound v-else title="Question not found" />
 		</div>
@@ -18,13 +18,13 @@ import { useRoute } from 'vue-router'
 import { useQuestion } from '@app/composable/questions/questions'
 import QuestionPageCard from '@app/components/questions/questions/QuestionPageCard.vue'
 import AnswersList from '@app/components/questions/answers/AnswersList.vue'
-import UnsubscribedAnswersList from '@app/components/questions/answers/UnsubscribedAnswersList.vue'
+import SubscribeCTA from '@app/components/payment/plans/SubscribeCTA.vue'
 import { useRouteMeta } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
 	name: 'QuestionsQuestionId',
-	components: { QuestionPageCard, AnswersList, UnsubscribedAnswersList },
+	components: { QuestionPageCard, AnswersList, SubscribeCTA },
 	setup () {
 		const { questionId } = useRoute().params
 		useRouteMeta('Question', { back: true })

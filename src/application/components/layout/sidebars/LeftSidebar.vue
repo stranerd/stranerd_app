@@ -18,6 +18,7 @@
 				<span>{{ name }}</span>
 			</router-link>
 		</div>
+		<SubscribeCTA v-if="!isSubscribed" class="mx-8 mt-auto" />
 	</div>
 </template>
 
@@ -39,13 +40,15 @@ import {
 } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { defineComponent } from 'vue'
+import SubscribeCTA from '@app/components/payment/plans/SubscribeCTA.vue'
 
 export default defineComponent({
 	name: 'LeftSidebar',
+	components: { SubscribeCTA },
 	setup () {
-		const { isAdmin } = useAuth()
+		const { isAdmin, isSubscribed } = useAuth()
 		return {
-			isAdmin, person, personOutline,
+			isAdmin, isSubscribed, person, personOutline,
 			addOutline, people, peopleOutline, helpCircle, helpCircleOutline,
 			home, homeOutline, book, bookOutline, statsChart, statsChartOutline
 		}

@@ -14,16 +14,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { QuestionEntity } from '@modules/questions'
 
 export default defineComponent({
-	name: 'UnsubscribedAnswersList',
-	props: {
-		question: {
-			type: QuestionEntity,
-			required: true
-		}
-	}
+	name: 'SubscribeCTA'
 })
 </script>
 
