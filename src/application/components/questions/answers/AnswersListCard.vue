@@ -1,10 +1,11 @@
 <template>
 	<div class="flex flex-col !gap-4 card-sm card-padding">
 		<div class="flex items-center gap-2 text-sm">
-			<Avatar :name="answer.user.bio.fullName" :size="20" :src="answer.user.bio.photo" />
+			<IonIcon v-if="answer.isUserVerified" :icon="checkmarkCircle" class="text-primaryBg"
+				style="font-size: 1.5em;" />
+			<Avatar v-else :size="20" :src="answer.user.bio.photo" name="Expert Tutor" />
 			<span class="font-bold flex items-center gap-1">
-				<span>{{ answer.user.bio.fullName }}</span>
-				<Verified :verified="answer.isUserVerified" />
+				<span>Expert Tutor</span>
 			</span>
 			<IonIcon :icon="ellipse" class="dot" />
 			<span>{{ formatTime(answer.createdAt) }}</span>
@@ -47,6 +48,7 @@ import { computed, defineComponent } from 'vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
 import {
 	chatbubbleOutline,
+	checkmarkCircle,
 	checkmarkCircleOutline,
 	ellipse,
 	flagOutline,
@@ -107,6 +109,7 @@ export default defineComponent({
 			error,
 			markBestAnswer,
 			likeAnswer,
+			checkmarkCircle,
 			chatbubbleOutline,
 			ellipse,
 			flagOutline,
