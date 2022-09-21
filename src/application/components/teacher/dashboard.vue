@@ -12,7 +12,7 @@
 			</router-link>
 		</div>
 
-		<div class="grid grid-cols-2 gap-4">
+		<router-link to="/courses/id" class="grid grid-cols-2 gap-4">
 			<div class="card-sm card-padding flex flex-col" v-for="n in 10" :key="n">
 				<div class="flex w-full justify-between">
 					<IonText class="font-bold">MEG 511</IonText>
@@ -21,7 +21,7 @@
 				<ionText class="text-xs font-bold text-gray">University of Lagos</ionText>
 				<ionText class="text-xs  text-gray">Electrical Engineering</ionText>
 			</div>
-		</div>
+		</router-link>
 
 	</div>
 </template>
