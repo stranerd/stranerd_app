@@ -60,11 +60,11 @@ export default defineComponent({
 	},
 	components: { InteractionTag, SaveToSet },
 	setup (props) {
-		const { id, user } = useAuth()
+		const { id } = useAuth()
 		const router = useRouter()
 
 		const showAnswerButton = computed({
-			get: () => props.question.user.id !== id.value && user.value?.isVerified && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
+			get: () => props.question.user.id !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
 			set: () => {
 			}
 		})
