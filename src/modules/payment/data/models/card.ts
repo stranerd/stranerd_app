@@ -1,7 +1,6 @@
 export interface CardFromModel {
 	id: string
 	last4Digits: string
-	issuer: string
 	country: string
 	type: string
 	token: string
