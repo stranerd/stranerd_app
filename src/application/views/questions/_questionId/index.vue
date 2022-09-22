@@ -5,7 +5,8 @@
 			<template v-else-if="question">
 				<QuestionPageCard :question="question" />
 				<AnswersList v-if="isSubscribed" :question="question" />
-				<SubscribeCTA v-else />
+				<SubscribeCTA v-else sub="Get access to the answers of all questions"
+					title="Upgrade to Stranerd Premium to view answers" />
 			</template>
 			<NotFound v-else title="Question not found" />
 		</div>
