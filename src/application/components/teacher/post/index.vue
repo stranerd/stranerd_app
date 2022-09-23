@@ -2,7 +2,7 @@
 	<div class="showcase-flex flex-1 p-4 ">
 		<div class="flex items-center justify-between px-4 py-3 rounded-lg border">
 			<span class="flex items-center text-secondaryText">
-				<IonIcon :icon="documentTextOutline" class="mr-4" />
+				<IonIcon :icon="readerOutline" class="mr-4" />
 				Make a post
 			</span>
 			<IonIcon :icon="arrowForwardOutline" class="text-secondaryText" />
@@ -13,13 +13,15 @@
 				Search
 			</span>
 		</div>
-		<PostCard/>
+		<PostCard tag="Announcement"/>
+		<PostCard tag="Assignment" postHeading="Week 1 Assignment"/>
+		<PostCard tag="Discussion"/>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { arrowForwardOutline, documentTextOutline, search } from 'ionicons/icons'
+import { arrowForwardOutline, readerOutline, search } from 'ionicons/icons'
 import PostCard from './postcard.vue'
 
 
@@ -29,7 +31,7 @@ export default defineComponent({
 	setup (props) {
 	
 		return {
-			arrowForwardOutline, documentTextOutline, search
+			arrowForwardOutline, readerOutline, search
 		}
 	}
 })
