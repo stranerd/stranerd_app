@@ -1,10 +1,10 @@
 
 <template>
 	<div class="commentBox py-4">
-        <div v-for="(item, index) in comm" :key="index">
-            <EachComment :comment="item.comment" :replies="item.replies"/>
-        </div>
-    </div>
+		<div v-for="(item, index) in comm" :key="index">
+			<EachComment :comment="item.comment" :replies="item.replies"/>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
