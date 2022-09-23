@@ -1,6 +1,6 @@
 <template>
 	<div class="showcase-flex flex-1">
-		<router-link to="/post">
+		<router-link to="/upload">
 			<div class="flex items-center justify-between px-4 py-3 rounded-lg border">
 				<span class="flex items-center text-secondaryText">
 					<IonIcon :icon="documentOutline" class="mr-4" />

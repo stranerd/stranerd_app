@@ -1,12 +1,11 @@
 <template>
 	<div class="showcase-flex flex-1">
-		This is the attendance Seection
+		This is the attnendance Seection
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
 
 export default defineComponent({
 	name: 'TeacherAttendance',
@@ -14,7 +13,7 @@ export default defineComponent({
 	setup (props) {
 	
 		return {
-		
+			
 		}
 	}
 })
