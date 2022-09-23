@@ -1,32 +1,32 @@
 <template>
 	<div class="p-4 border rounded-lg">
 		<IonText class="block mb-4 font-bold">{{title}}</IonText>
-        <IonText class="block mb-4">{{desc}}</IonText>
-        <div class="flex items-center mb-4">
-            <div class="w-8 flex items-center justify-start">
-                <IonIcon :icon="timeOutline" class="text-secondaryText" />
-            </div>
+		<IonText class="block mb-4">{{desc}}</IonText>
+		<div class="flex items-center mb-4">
+			<div class="w-8 flex items-center justify-start">
+				<IonIcon :icon="timeOutline" class="text-secondaryText" />
+			</div>
             
-            <IonText class="flex items-center">
-                <span class="text-danger">{{time}} {{date}}</span>
-                <span class="block mx-3 h-1 w-1 bg-secondaryText rounded-full"></span>
-                <span class="text-secondaryText">{{deadline}}</span>
-            </IonText>
-        </div>
+			<IonText class="flex items-center">
+				<span class="text-danger">{{time}} {{date}}</span>
+				<span class="block mx-3 h-1 w-1 bg-secondaryText rounded-full"></span>
+				<span class="text-secondaryText">{{deadline}}</span>
+			</IonText>
+		</div>
 
-        <div class="flex items-center mb-4">
-            <div class="w-8 flex items-center justify-start">
-                <IonIcon :icon="attachOutline" class="text-secondaryText" />
-            </div>
-            <IonText class="text-secondaryText">{{attachment}} attachments</IonText>
-        </div>
+		<div class="flex items-center mb-4">
+			<div class="w-8 flex items-center justify-start">
+				<IonIcon :icon="attachOutline" class="text-secondaryText" />
+			</div>
+			<IonText class="text-secondaryText">{{attachment}} attachments</IonText>
+		</div>
 
-        <div class="flex items-center ">
-            <div class="w-8 flex items-center justify-start">
-                <IonIcon :icon="personOutline" class="text-secondaryText" />
-            </div>
-            <IonText class="text-secondaryText">{{author}}</IonText>
-        </div>
+		<div class="flex items-center ">
+			<div class="w-8 flex items-center justify-start">
+				<IonIcon :icon="personOutline" class="text-secondaryText" />
+			</div>
+			<IonText class="text-secondaryText">{{author}}</IonText>
+		</div>
 	</div>
 </template>
 
