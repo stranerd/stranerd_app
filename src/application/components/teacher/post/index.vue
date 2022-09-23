@@ -1,12 +1,14 @@
 <template>
 	<div class="showcase-flex flex-1 p-4 ">
-		<div class="flex items-center justify-between px-4 py-3 rounded-lg border">
-			<span class="flex items-center text-secondaryText">
-				<IonIcon :icon="readerOutline" class="mr-4" />
-				Make a post
-			</span>
-			<IonIcon :icon="arrowForwardOutline" class="text-secondaryText" />
-		</div>
+		<router-link to="/post">
+			<div class="flex items-center justify-between px-4 py-3 rounded-lg border">
+				<span class="flex items-center text-secondaryText">
+					<IonIcon :icon="readerOutline" class="mr-4" />
+					Make a post
+				</span>
+				<IonIcon :icon="arrowForwardOutline" class="text-secondaryText" />
+			</div>
+		</router-link>
 		<div class="px-4 py-3 rounded-lg border">
 			<span class="flex items-center text-itemBg">
 				<IonIcon :icon="search" class="mr-4" />

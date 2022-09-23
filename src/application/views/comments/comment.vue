@@ -1,6 +1,6 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
-		<div class="comments p-4 h-full flex flex-col justify-between relative border border-danger">
+		<div class="comments p-4 h-full flex flex-col justify-between relative">
 			<div class="h-full overflow-auto">
 				<postCard :preview="false" tag="Discussion"/>
 				<CommentBox/>

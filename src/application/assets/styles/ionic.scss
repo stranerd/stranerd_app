@@ -230,6 +230,16 @@ ion-button {
 	--border-color: #{$color-primaryBg};
 }
 
+.btn-outline-dashed {
+	@extend .btn-padding;
+	--background: transparent;
+	--background-hover: #{$color-outlineHover};
+	--color: #{$color-primaryBg};
+	--border-width: 1px;
+	--border-style: dashed;
+	--border-color: #{$color-primaryBg};
+}
+
 .primary-danger {
 	--background: #{$color-danger};
 	--background-hover: #{$color-danger};
