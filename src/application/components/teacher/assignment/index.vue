@@ -1,10 +1,10 @@
 <template>
 	<div class="showcase-flex flex-1">
 		<router-link to="/post-assignment">
-			<div class="flex items-center justify-between px-4 py-3 rounded-lg border">
+			<div class="flex items-center justify-between px-4 py-3 rounded-lg border text-sm">
 				<span class="flex items-center text-secondaryText">
 					<IonIcon :icon="clipboardOutline" class="mr-4" />
-					Post an assignment
+					<IonText>Post an assignment</IonText>
 				</span>
 				<IonIcon :icon="arrowForwardOutline" class="text-secondaryText" />
 			</div>

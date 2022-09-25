@@ -1,7 +1,7 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
 		<!-- <span>make a post section</span> -->
-		<form class="h-full w-full p-4 flex flex-col items-center justify-between">
+		<form class="h-full w-full p-4 flex flex-col items-center justify-between text-sm">
 			<div class=" w-full">
 				<div class="flex flex-col w-full mb-4">
 					<IonLabel class="text-secondaryText mb-2">Type</IonLabel>

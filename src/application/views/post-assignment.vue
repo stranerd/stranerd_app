@@ -1,11 +1,11 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
-		<form class="h-full w-full p-4 flex flex-col items-center justify-between">
+		<form class="h-full w-full p-4 flex flex-col items-center justify-between text-sm">
 			<div class=" w-full">
 				<div class="flex flex-col w-full mb-4">
 					<IonLabel class="text-secondaryText mb-2">Title</IonLabel>
 					<IonInput :size="24"
-						inputmode="text" placeholder="Post an assignment" position="floating" type="text" />
+						inputmode="text" placeholder="Name the assignment" position="floating" type="text" />
 				</div>
 
 				<div class="flex flex-col w-full mb-4">
@@ -23,19 +23,21 @@
 					</IonButton >
 				</div>
 
+				<span class="border my-4 w-full block"></span>
+
 				<div class="flex flex-col w-full mb-4">
 					<IonLabel class="text-secondaryText mb-2">Deadline <span class="font-normal">(Optional)</span></IonLabel>
 					<div class="flex items-center justify-between gap-3">
 						<div class="flex flex-col w-full mt-4">
 							<IonLabel class="text-secondaryText mb-2">Date</IonLabel>
-							<div class="w-fit h-fit relative">
+							<div class="w-full h-fit relative">
 								<IonInput :size="24" inputmode="text" placeholder="DD/MM/YY" position="floating" type="text" />
 								<IonIcon :icon="calendarClearOutline" class="absolute top-1/2 right-3 -translate-y-1/2 text-secondaryText"/>
 							</div>
 						</div>
 						<div class="flex flex-col w-full mt-4">
 							<IonLabel class="text-secondaryText mb-2">Time</IonLabel>
-							<div class="w-fit h-fit relative">
+							<div class="w-full h-fit relative">
 								<IonInput :size="24" inputmode="text" placeholder="00:00" position="floating" type="text" />
 								<IonIcon :icon="timeOutline" class="absolute top-1/2 right-3 -translate-y-1/2 text-secondaryText"/>
 							</div>

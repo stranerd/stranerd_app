@@ -1,9 +1,9 @@
 <template>
-	<div class="p-4 border rounded-lg">
+	<div class="p-4 border rounded-lg text-sm">
 		<IonText class="block mb-4 font-bold">{{title}}</IonText>
 		<IonText class="block mb-4">{{desc}}</IonText>
 		<div class="flex items-center mb-4">
-			<div class="w-8 flex items-center justify-start">
+			<div class="w-6 flex items-center justify-start">
 				<IonIcon :icon="timeOutline" class="text-secondaryText" />
 			</div>
             
@@ -15,14 +15,14 @@
 		</div>
 
 		<div class="flex items-center mb-4">
-			<div class="w-8 flex items-center justify-start">
+			<div class="w-6 flex items-center justify-start">
 				<IonIcon :icon="attachOutline" class="text-secondaryText" />
 			</div>
 			<IonText class="text-secondaryText">{{attachment}} attachments</IonText>
 		</div>
 
 		<div class="flex items-center ">
-			<div class="w-8 flex items-center justify-start">
+			<div class="w-6 flex items-center justify-start">
 				<IonIcon :icon="personOutline" class="text-secondaryText" />
 			</div>
 			<IonText class="text-secondaryText">{{author}}</IonText>

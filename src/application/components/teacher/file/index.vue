@@ -1,18 +1,18 @@
 <template>
 	<div class="showcase-flex flex-1">
 		<router-link to="/upload">
-			<div class="flex items-center justify-between px-4 py-3 rounded-lg border">
+			<div class="flex items-center justify-between px-4 py-3 text-sm rounded-lg border">
 				<span class="flex items-center text-secondaryText">
 					<IonIcon :icon="documentOutline" class="mr-4" />
-					Upload a file
+					<IonText>Upload a file</IonText>
 				</span>
 				<IonIcon :icon="arrowForwardOutline" class="text-secondaryText" />
 			</div>
 		</router-link>
-		<div class="px-4 py-3 rounded-lg border">
+		<div class="px-4 py-3 rounded-lg border text-sm">
 			<span class="flex items-center text-itemBg">
 				<IonIcon :icon="search" class="mr-4" />
-				Search
+				<IonText>Search</IonText>
 			</span>
 		</div>
 		

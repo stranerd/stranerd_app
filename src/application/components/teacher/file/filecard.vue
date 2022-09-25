@@ -1,6 +1,6 @@
 <template>
-	<div class="py-4 px-6 my-4 border rounded-lg flex items-center justify-between">
-		<div class="flex items-center">
+	<div class="py-4 px-6 my-4 border rounded-lg flex items-center justify-between text-sm">
+		<div class="flex items-center ">
 			<IonIcon :icon="documentOutline" class="text-5xl font-thin mr-4" />
 			<div>
 				<IonText class="block ">{{title}}</IonText>

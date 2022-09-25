@@ -1,7 +1,6 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
-		<!-- <span>Create a Course</span> -->
-		<form class="h-full w-full p-4 flex flex-col items-center justify-between">
+		<form class="h-full w-full p-4 flex flex-col items-center justify-between text-sm">
 			<div class=" w-full">
 				<div class="flex flex-col w-full mb-4">
 					<IonLabel class="text-secondaryText mb-2">Course</IonLabel>
@@ -11,7 +10,6 @@
 
 				<div class="flex flex-col w-full mb-4">
 					<IonLabel class="text-secondaryText mb-2">Level</IonLabel>
-					<!-- <IonInput :size="24" inputmode="email" placeholder="Enter your email" position="floating" type="email" /> -->
 					<IonSelect :size="24" interface="action-sheet" placeholder="Select level">
 						<IonSelectOption  value="level">
 							Level 1
