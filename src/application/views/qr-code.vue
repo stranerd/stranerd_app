@@ -1,11 +1,11 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
-        <div class="p-4 w-full h-full flex items-center justify-center">
-            <div class="text-base w-full flex items-center justify-between">
-                <IonText>Scanned by</IonText>
-                <IonText class="text-blackText">21</IonText>
-            </div>
-        </div>
+		<div class="p-4 w-full h-full flex items-center justify-center">
+			<div class="text-base w-full flex items-center justify-between">
+				<IonText>Scanned by</IonText>
+				<IonText class="text-blackText">21</IonText>
+			</div>
+		</div>
 	</DefaultLayout>
 </template>
 

@@ -1,8 +1,8 @@
 <template>
 	<div class="">
 		<div class="text-sm font-bold flex items-center justify-between mb-4">
-			 <IonText>All students</IonText>
-			 <IonText>Classes attended</IonText>
+			<IonText>All students</IonText>
+			<IonText>Classes attended</IonText>
 		</div>
 
 		<StudentCard name="Chiamaka Ndukwe"/>
