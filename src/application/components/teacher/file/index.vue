@@ -15,31 +15,30 @@
 				<IonText>Search</IonText>
 			</span>
 		</div>
-		
+
 		<div class="">
-			<FileCard title="Week 1 Handout.pdf"/>
-			<FileCard title="Week 2 Handout.pdf"/>
-			<FileCard title="Week 3 Handout.pdf"/>
-			<FileCard title="Week 4 Handout.pdf"/>
-			<FileCard title="Week 5 Handout.pdf"/>
+			<FileCard title="Week 1 Handout.pdf" />
+			<FileCard title="Week 2 Handout.pdf" />
+			<FileCard title="Week 3 Handout.pdf" />
+			<FileCard title="Week 4 Handout.pdf" />
+			<FileCard title="Week 5 Handout.pdf" />
 		</div>
-		
+
 	</div>
 </template>
 
 <script lang="ts">
-/* eslint-disable */
 import { defineComponent } from 'vue'
 import { arrowForwardOutline, documentOutline, search } from 'ionicons/icons'
 import FileCard from './filecard.vue'
 
 export default defineComponent({
 	name: 'TeacherFile',
-	components: {FileCard},
-	setup (props) {
-	
+	components: { FileCard },
+	setup(props) {
+
 		return {
-			arrowForwardOutline, documentOutline, search 
+			arrowForwardOutline, documentOutline, search
 		}
 	}
 })

@@ -9,8 +9,8 @@
 
 			<form class="commentInput bg-bodyBg w-full p-4 flex items-center gap-2 text-sm">
 				<IonInput :size="24" inputmode="text" placeholder="Add a comment" position="floating" class="rounded-full"/>
-				<IonButton class=" bg-primaryBg !px-0 p-2  !rounded-full overflow-hidden" type="submit">
-					<IonIcon class=" !p-0 " :icon="paperPlaneOutline" />
+				<IonButton class="" type="submit">
+					<IonIcon class="!text-xl !p-0 " :icon="paperPlaneOutline" />
 				</IonButton>
 			</form>
 		</div>

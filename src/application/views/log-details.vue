@@ -21,23 +21,22 @@
 
 			<div class="p-4 rounded-lg border mb-4">
 				<IonText class="text-bodyText font-bold text-base block">Attended by</IonText>
-				<AttendedCard name="Chiamaka Ndukwe"/>
-				<AttendedCard name="Tony Ndicka"/>
-				<AttendedCard name="Adeyemi Kareem"/>
-				<AttendedCard name="Yinka Bonucci"/>
-				<AttendedCard name="Wisdom Omole"/>
-				<AttendedCard name="Chiamaka Ndukwe"/>
-				<AttendedCard name="Tony Ndicka"/>
-				<AttendedCard name="Adeyemi Kareem"/>
-				<AttendedCard name="Yinka Bonucci"/>
-                
+				<AttendedCard name="Chiamaka Ndukwe" />
+				<AttendedCard name="Tony Ndicka" />
+				<AttendedCard name="Adeyemi Kareem" />
+				<AttendedCard name="Yinka Bonucci" />
+				<AttendedCard name="Wisdom Omole" />
+				<AttendedCard name="Chiamaka Ndukwe" />
+				<AttendedCard name="Tony Ndicka" />
+				<AttendedCard name="Adeyemi Kareem" />
+				<AttendedCard name="Yinka Bonucci" />
+
 			</div>
 		</div>
 	</DefaultLayout>
 </template>
 
 <script lang="ts">
-/* eslint-disable */
 import { defineComponent } from 'vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
@@ -48,8 +47,8 @@ import AttendedCard from '../components/teacher/logDetails/attendedCard.vue'
 export default defineComponent({
 	name: 'CreateCourses',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
-    components: { AttendedCard },
-	setup () {
+	components: { AttendedCard },
+	setup() {
 		useRouteMeta('Tue, 26 July', { back: true })
 
 		return { qrCodeOutline, arrowForwardOutline }

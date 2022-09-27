@@ -210,6 +210,16 @@ ion-button {
 	}
 }
 
+.btn-primary-rounded{
+	--background: #{$color-primaryBg};
+	--background-hover: #{$color-primaryHover};
+	--color: #{$color-primaryText};
+	--border-radius: 100%;
+	height: 40px;
+	width: 40px;
+
+}
+
 .btn-primary {
 	@extend .btn-padding;
 	--background: #{$color-primaryBg};

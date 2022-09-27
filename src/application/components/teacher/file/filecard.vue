@@ -10,13 +10,12 @@
 				</IonText>
 			</div>
 		</div>
-		
-		<IonIcon :icon="downloadOutline" class="text-2xl text-primaryBg font-thin"/>
+
+		<IonIcon :icon="downloadOutline" class="text-2xl text-primaryBg font-thin" />
 	</div>
 </template>
 
 <script lang="ts">
-/* eslint-disable */
 import { defineComponent } from 'vue'
 import { downloadOutline, documentOutline } from 'ionicons/icons'
 
@@ -30,15 +29,15 @@ export default defineComponent({
 		},
 		size: {
 			type: String,
-            default: '725 KB'
+			default: '725 KB'
 		},
 		fileType: {
 			type: String,
-            default: 'PDF'
+			default: 'PDF'
 		}
 	},
-	setup (props) {
-	
+	setup(props) {
+
 		return {
 			downloadOutline, documentOutline
 		}
