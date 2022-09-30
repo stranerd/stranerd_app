@@ -18,4 +18,4 @@ export const googleClientId = isIos ? googleClientIds.ios : isAndroid ? googleCl
 const host = (process.env.VUE_APP_API_DOMAIN ?? '') + (isDev ? `:${process.env.VUE_APP_API_PORT}` : '')
 export const domain = parseURL(`http${!isDev ? 's' : ''}://${host}`)
 
-export const apiBase = process.env.VUE_APP_API_API_BASE ?? ''
+export const apiBase = parseURL(process.env.VUE_APP_API_API_BASE ?? '')
