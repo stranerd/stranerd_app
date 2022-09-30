@@ -35,6 +35,7 @@ const setup = async () => {
 			await project.ios.setBuildProperty(target.name, build.name, 'GOOGLE_CLIENT_ID', reversedIosClientId)
 			await project.ios.setBuildProperty(target.name, build.name, 'DOMAIN', domain)
 			await project.ios.addEntitlements(target.name, build.name, {
+				'aps-environment': environment,
 				'com.apple.developer.associated-domains': [`applinks:${ domain }`]
 			})
 		}))

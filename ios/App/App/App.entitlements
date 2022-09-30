@@ -7,5 +7,7 @@
 		<string>applinks:localhost</string>
 		<string>applinks:stranerd.com</string>
 	</array>
+	<key>aps-environment</key>
+	<string>local</string>
 </dict>
 </plist>
