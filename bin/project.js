@@ -47,7 +47,7 @@ const setup = async (args) => {
 			const identity = isProduction && build.name === 'Release' ? 'Apple Distribution' : 'Apple Development'
 			await project.ios.setBuildProperty(target.name, build.name, 'CODE_SIGN_IDENTITY', identity)
 			await project.ios.setBuildProperty(target.name, build.name, 'DEVELOPMENT_TEAM', iosTeamId)
-			await project.ios.addEntitlements(target.name, build.name, {
+			await project.ios.setEntitlements(target.name, build.name, {
 				'com.apple.developer.associated-domains': [`applinks:${ domain }`]
 			})
 		}))
