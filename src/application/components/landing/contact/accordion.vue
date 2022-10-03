@@ -1,6 +1,6 @@
 <template>
-	<details :ontoggle="switchIcon" class=" border-disabled border-b">
-		<summary class="flex items-center py-5 w-[100%] font-bold text-lg">{{ faq.question }}
+	<details :ontoggle="switchIcon" class=" border-disabled border-b ">
+		<summary class="flex items-center py-5 w-[100%] font-bold text-lg cursor-pointer">{{ faq.question }}
 			<button class="ml-auto">
 				<IonIcon v-if="open" :icon="add" class="text-lg font-bold" />
 				<IonIcon v-else :icon="remove" class="text-lg font-bold" />

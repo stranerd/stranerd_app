@@ -9,8 +9,8 @@
 				<p class="lg:text-lg text-sm">
 					Connect with students outside the boundaries of your class and school to collaborate or learn from.
 				</p>
-				<router-link class="landing_btn-outline btn !border-bodyBg" to="/connect">
-					Learn more
+				<router-link class="landing_btn-outline btn !border-bodyBg" to="#">
+					Coming Soon
 				</router-link>
 			</div>
 
