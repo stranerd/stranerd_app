@@ -17,7 +17,7 @@ import FaqsList from '@app/components/landing/contact/FaqsList.vue'
 
 export default defineComponent({
 	name: 'PageFAQs',
-	components:{FaqsList},
+	components:{ FaqsList },
 	setup () {
 		useRouteMeta('FAQs', {})
 	}

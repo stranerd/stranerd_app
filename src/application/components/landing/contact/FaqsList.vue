@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Accordion from './accordion.vue'
+import Accordion from './Accordion.vue'
 const faqs = [
 	{
 		question: 'What is stranerd?',
@@ -33,5 +33,3 @@ const faqs = [
 	},
 ]
 </script>
-
-<style scoped></style>
