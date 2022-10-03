@@ -5,7 +5,7 @@
 			<router-link :to="route" class="text-info">view all</router-link>
 		</span>
 		<div class="showcase-flex !flex-row overflow-x-auto hide-scrollbar items-start">
-			<div v-if="empty" class="flex flex-col gap-4 border border-itemBg min-w-full card-padding">
+			<div v-if="empty" class="flex flex-col card-sm min-w-full card-padding">
 				<slot name="empty">
 					<span>{{ empty }}</span>
 				</slot>
