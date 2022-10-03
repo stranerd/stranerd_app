@@ -6,8 +6,7 @@
 				<span class="md:text-lg text-sm">Our aim</span>
 				<h2 class="lg:text-5xl text-3xl font-bold  lg:leading-[62px]">Making academic activities seamless</h2>
 				<p class="lg:text-lg text-sm">
-					We target growth in metrics that directly lead to a better lecturing and learning experiences,
-					bringing about ease to the daily activities of students and lecturers.
+					We target growth in metrics that directly lead to a better lecturing and learning experience bringing about ease to daily activities for students and lecturers.
 				</p>
 				<router-link class="btn landing_btn-outline !border-bodyBg" to="/auth/signin">
 					Get started

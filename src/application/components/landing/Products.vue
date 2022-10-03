@@ -28,21 +28,21 @@ const products = [
 	{
 		name: 'Class collaboration and study tools',
 		super: 'For students',
-		sub: 'Students have the ability to join digital classrooms, create study materials, take test preps, get homework help, and search for existing materials, to aid learning.',
+		sub: 'Get homework help, take test preps, and exam preps and search for existing materials to aid learning all in one place.',
 		link: 'solutions/students',
 		img: new URL('@/assets/images/landing/product1.png', import.meta.url).href
 	},
 	{
 		name: 'Course and student management',
 		super: 'For lecturers',
-		sub: 'Providing the means to improve the efficiency and effectiveness of lecturing with tools for interactivity, sharing information and assessing students. ',
+		sub: 'Providing the means to improve the efficiency and effectiveness of lecturing with tools for interactivity, information sharing and assessing students.',
 		link: 'solutions/schools',
 		img: new URL('@/assets/images/landing/product2.png', import.meta.url).href
 	},
 	{
 		name: 'Online learning management system',
 		super: 'For schools',
-		sub: 'Academic instituitions will be provided with easier means of administrative management, to bolster educating and learning success rate.',
+		sub: 'Providing African Universities with an easier means of administrative management, enabling them to focus on the educational and learning experience for the students.',
 		link: false,
 		img: new URL('@/assets/images/landing/product3.png', import.meta.url).href
 	}

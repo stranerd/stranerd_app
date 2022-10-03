@@ -6,8 +6,7 @@
 					All your academic needs in one place
 				</h1>
 				<p class="mt-4 mb-8 text-xs md:text-lg">
-					Get access to a digital classroom, homework help, test and exam help, and solution manuals tailored
-					to your courses.
+					Get access to expert tutors, homework help, test and exam help, and solution manuals tailored to your courses,
 				</p>
 				<router-link class="btn bg-warning" to="/auth/signin">
 					Get Started
