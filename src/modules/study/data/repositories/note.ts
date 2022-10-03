@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { INoteRepository } from '../../domain/irepositories/inote'
 import { NoteEntity } from '../../domain/entities/note'
-import { NoteBaseDataSource } from '../datasources/note-base'
+import { NoteBaseDataSource } from '../datasources/noteBase'
 import { NoteTransformer } from '../transformers/note'
 import { NoteToModel } from '../models/note'
 

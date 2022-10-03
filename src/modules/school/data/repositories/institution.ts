@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IInstitutionRepository } from '../../domain/irepositories/iinstitution'
 import { InstitutionEntity } from '../../domain/entities/institution'
-import { InstitutionBaseDataSource } from '../datasources/institution-base'
+import { InstitutionBaseDataSource } from '../datasources/institutionBase'
 import { InstitutionTransformer } from '../transformers/institution'
 import { InstitutionToModel } from '../models/institution'
 

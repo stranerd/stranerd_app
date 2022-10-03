@@ -1,5 +1,5 @@
-import { ChatApiDataSource } from './data/datasources/chat-api'
-import { ChatMetaApiDataSource } from './data/datasources/chatMeta-api'
+import { ChatApiDataSource } from './data/datasources/chatApi'
+import { ChatMetaApiDataSource } from './data/datasources/chatMetaApi'
 import { ChatTransformer } from './data/transformers/chat'
 import { ChatMetaTransformer } from './data/transformers/chatMeta'
 import { ChatRepository } from './data/repositories/chat'

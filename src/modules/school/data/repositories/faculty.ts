@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IFacultyRepository } from '../../domain/irepositories/ifaculty'
 import { FacultyEntity } from '../../domain/entities/faculty'
-import { FacultyBaseDataSource } from '../datasources/faculty-base'
+import { FacultyBaseDataSource } from '../datasources/facultyBase'
 import { FacultyTransformer } from '../transformers/faculty'
 import { FacultyToModel } from '../models/faculty'
 

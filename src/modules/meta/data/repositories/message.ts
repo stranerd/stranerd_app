@@ -1,5 +1,5 @@
 import { IMessageRepository } from '../../domain/irepositories/imessage'
-import { FormBaseDataSource } from '../datasources/form-base'
+import { FormBaseDataSource } from '../datasources/formBase'
 import { MessageToModel } from '../models/message'
 
 export class MessageRepository implements IMessageRepository {

@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { ICardRepository } from '../../domain/irepositories/icard'
 import { CardEntity } from '../../domain/entities/card'
-import { CardBaseDataSource } from '../datasources/card-base'
+import { CardBaseDataSource } from '../datasources/cardBase'
 import { CardTransformer } from '../transformers/card'
 
 export class CardRepository implements ICardRepository {

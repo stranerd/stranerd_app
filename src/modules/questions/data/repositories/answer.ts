@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IAnswerRepository } from '../../domain/irepositories/ianswer'
 import { AnswerEntity } from '../../domain/entities/answer'
-import { AnswerBaseDataSource } from '../datasources/answer-base'
+import { AnswerBaseDataSource } from '../datasources/answerBase'
 import { AnswerTransformer } from '../transformers/answer'
 import { AnswerToModel } from '../models/answer'
 

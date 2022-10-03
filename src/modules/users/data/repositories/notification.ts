@@ -1,6 +1,6 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { INotificationRepository } from '../../domain/irepositories/inotification'
-import { NotificationBaseDataSource } from '../datasources/notification-base'
+import { NotificationBaseDataSource } from '../datasources/notificationBase'
 import { NotificationTransformer } from '../transformers/notification'
 import { NotificationEntity } from '../../domain/entities/notification'
 

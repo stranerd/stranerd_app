@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { ITagRepository } from '../../domain/irepositories/itag'
 import { TagEntity } from '../../domain/entities/tag'
-import { TagBaseDataSource } from '../datasources/tag-base'
+import { TagBaseDataSource } from '../datasources/tagBase'
 import { TagTransformer } from '../transformers/tag'
 import { TagToModel } from '../models/tag'
 

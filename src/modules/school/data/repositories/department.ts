@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IDepartmentRepository } from '../../domain/irepositories/idepartment'
 import { DepartmentEntity } from '../../domain/entities/department'
-import { DepartmentBaseDataSource } from '../datasources/department-base'
+import { DepartmentBaseDataSource } from '../datasources/departmentBase'
 import { DepartmentTransformer } from '../transformers/department'
 import { DepartmentToModel } from '../models/department'
 

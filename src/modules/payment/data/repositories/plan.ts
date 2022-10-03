@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IPlanRepository } from '../../domain/irepositories/iplan'
 import { PlanEntity } from '../../domain/entities/plan'
-import { PlanBaseDataSource } from '../datasources/plan-base'
+import { PlanBaseDataSource } from '../datasources/planBase'
 import { PlanTransformer } from '../transformers/plan'
 
 export class PlanRepository implements IPlanRepository {

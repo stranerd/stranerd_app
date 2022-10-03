@@ -1,4 +1,4 @@
-import { AuthBaseDataSource } from '../datasources/auth-base'
+import { AuthBaseDataSource } from '../datasources/authBase'
 import { IAuthRepository } from '../../domain/irepositories/iauth'
 import { AfterAuthUser, AuthExtras, NewUser, PasswordUpdate, ProfileUpdate } from '../../domain/entities/auth'
 

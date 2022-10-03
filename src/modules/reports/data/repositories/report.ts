@@ -1,6 +1,6 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IReportRepository } from '../../domain/irepositories/ireport'
-import { ReportBaseDataSource } from '../datasources/report-base'
+import { ReportBaseDataSource } from '../datasources/reportBase'
 import { ReportTransformer } from '../transformers/report'
 import { ReportToModel } from '../models/report'
 import { ReportEntity } from '../../domain/entities/report'

@@ -1,4 +1,4 @@
-import { AuthApiDataSource } from './data/datasources/auth-api'
+import { AuthApiDataSource } from './data/datasources/authApi'
 import { AuthRepository } from './data/repositories/auth'
 import { AuthUseCase } from './domain/usecases/auth'
 

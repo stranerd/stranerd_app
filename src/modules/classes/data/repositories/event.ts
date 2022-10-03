@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IEventRepository } from '../../domain/irepositories/ievent'
 import { EventEntity } from '../../domain/entities/event'
-import { EventBaseDataSource } from '../datasources/event-base'
+import { EventBaseDataSource } from '../datasources/eventBase'
 import { EventTransformer } from '../transformers/event'
 import { EventToModel } from '../models/event'
 import { EventType } from '../../domain/types'

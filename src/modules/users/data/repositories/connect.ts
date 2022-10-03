@@ -1,6 +1,6 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IConnectRepository } from '../../domain/irepositories/iconnect'
-import { ConnectBaseDataSource } from '../datasources/connect-base'
+import { ConnectBaseDataSource } from '../datasources/connectBase'
 import { ConnectTransformer } from '../transformers/connect'
 import { ConnectEntity } from '../../domain/entities/connect'
 

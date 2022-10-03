@@ -1,4 +1,4 @@
-import { MessageApiDataSource } from './data/datasources/message-api'
+import { MessageApiDataSource } from './data/datasources/messageApi'
 import { MessageRepository } from './data/repositories/message'
 import { MessagesUseCase } from './domain/usecases/messages'
 import { MessageFactory } from './domain/factories/message'
