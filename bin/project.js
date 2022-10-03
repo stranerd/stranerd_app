@@ -33,7 +33,7 @@ const setup = async (args) => {
 	const versionCode = 1
 	const versionName = '0.0.0'
 
-	const iosTeamId = 'SK23HB744S'
+	const iosTeamId = asset_links.ios?.applinks?.details?.at(0)?.appID?.split('.').at(0) ?? ''
 	await Promise.all(project.ios.getTargets().map(async (target) => {
 		await Promise.all(target.buildConfigurations.map(async (build) => {
 			await project.ios.setBundleId(target.name, build.name, package_name)
