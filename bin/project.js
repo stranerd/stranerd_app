@@ -3,6 +3,7 @@ const { MobileProject } = require('@trapezedev/project')
 const fs = require('fs')
 const { exec } = require('child_process')
 const envs = require('../env.json')
+const { isNumber, isMoreThan } = require('@stranerd/validate')
 const { asset_links, google_client_ids, package_name, app_name, environment, domain } = envs
 const isProduction = environment === 'production'
 
@@ -77,7 +78,9 @@ const setup = async (args) => {
 
 const version = async (args) => {
 	const firstVersionDate = 1640995200000
-	const versionCode = Math.floor((Date.now() - firstVersionDate) / 1e5)
+	const providedVersionCode = parseInt(args[1])
+	const versionCode = isNumber(providedVersionCode).valid && isMoreThan(providedVersionCode, 0) ?
+		providedVersionCode : Math.floor((Date.now() - firstVersionDate) / 1e5)
 	const versionName = args[0].toString()
 	if (!versionName) return console.log('Provide a version please')
 
@@ -94,6 +97,7 @@ const version = async (args) => {
 	await project.android.setVersionName(versionName)
 	await project.android.setVersionCode(versionCode)
 	await project.commit()
+	console.log(`Versioned to ${versionName}(${versionCode})`)
 }
 
 const env = async () => {
