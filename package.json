@@ -68,7 +68,7 @@
 		"workbox-window": "^6.5.4"
 	},
 	"devDependencies": {
-		"@capacitor/assets": "^1.0.6",
+		"@capacitor/assets": "^1.0.10",
 		"@capacitor/cli": "4.3.0",
 		"@commitlint/cli": "^17.1.2",
 		"@commitlint/config-conventional": "^17.1.0",
