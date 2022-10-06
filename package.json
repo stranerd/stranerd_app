@@ -27,6 +27,7 @@
 	"dependencies": {
 		"@awesome-cordova-plugins/core": "^5.45.0",
 		"@awesome-cordova-plugins/file-opener": "^5.45.0",
+		"@capacitor-community/apple-sign-in": "^4.0.0",
 		"@capacitor/android": "^4.3.0",
 		"@capacitor/app": "4.0.1",
 		"@capacitor/clipboard": "^4.0.1",
