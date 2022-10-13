@@ -53,6 +53,7 @@
 		"cordova-plugin-file-opener2": "^3.0.5",
 		"core-js": "^3.25.3",
 		"katex": "^0.16.2",
+		"plist": "^3.0.6",
 		"socket.io-client": "^4.5.2",
 		"sweetalert2": "^11.4.35",
 		"vue": "^3.2.40",

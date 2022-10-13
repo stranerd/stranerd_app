@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 const { MobileProject } = require('@trapezedev/project')
 const fs = require('fs')
-const { exec } = require('child_process')
+const { build } = require('plist')
+const { appBuild, installCertAndProfile } = require('./app.js')
 const envs = require('../env.json')
 const { isNumber, isMoreThan } = require('@stranerd/validate')
 const { asset_links, google_client_ids, package_name, app_name, environment, domain } = envs
@@ -34,7 +35,11 @@ const setup = async (args) => {
 	const versionCode = 1
 	const versionName = '0.0.0'
 
-	const iosTeamId = asset_links.ios?.applinks?.details?.at(0)?.appID?.split('.').at(0) ?? ''
+	const { Name, Entitlements, TeamIdentifier } = installCertAndProfile(
+		`./bin/config/${ environment }/profile.mobileprovision`,
+		`./bin/config/${ environment }/certificate.p12`
+	)
+	const teamID = TeamIdentifier[0]
 	await Promise.all(project.ios.getTargets().map(async (target) => {
 		await Promise.all(target.buildConfigurations.map(async (build) => {
 			await project.ios.setBundleId(target.name, build.name, package_name)
@@ -45,11 +50,12 @@ const setup = async (args) => {
 			await project.ios.setBuildProperty(target.name, build.name, 'DOMAIN', domain)
 			await project.ios.setBuildProperty(target.name, build.name, 'CODE_SIGN_STYLE', 'Manual')
 			await project.ios.setBuildProperty(target.name, build.name, 'IPHONEOS_DEPLOYMENT_TARGET', '13.0')
-			const identity = isProduction && build.name === 'Release' ? 'Apple Distribution' : 'Apple Development'
+			const identity = isProduction ? 'Apple Distribution' : 'Apple Development'
 			await project.ios.setBuildProperty(target.name, build.name, 'CODE_SIGN_IDENTITY', identity)
-			await project.ios.setBuildProperty(target.name, build.name, 'DEVELOPMENT_TEAM', iosTeamId)
+			await project.ios.setBuildProperty(target.name, build.name, 'PROVISIONING_PROFILE_SPECIFIER', Name)
+			await project.ios.setBuildProperty(target.name, build.name, 'DEVELOPMENT_TEAM', teamID)
 			await project.ios.setEntitlements(target.name, build.name, {
-				'aps-environment': isProduction ? 'production' : 'development',
+				...Entitlements,
 				'com.apple.developer.applesignin': ['Default'],
 				'com.apple.developer.associated-domains': [`applinks:${ domain }`]
 			})
@@ -68,13 +74,17 @@ const setup = async (args) => {
 
 	const googleServicesConfig = `./bin/config/${ environment }/google-services.json`
 	const googlePlistConfig = `./bin/config/${ environment }/GoogleService-Info.plist`
-	const exportPlistConfig = `./bin/config/${ environment }/Export.plist`
 
 	if (args.includes('--skip-apps')) return
 
+	fs.writeFileSync(exportPlistPath, build({
+		destination: isProduction ? 'upload' : 'export',
+		method: isProduction ? 'app-store' : 'development',
+		provisioningProfiles: { [package_name]: Name },
+		signingStyle: 'manual', teamID
+	}))
 	copyTo(googleServicesConfig, googleServicesPath, 'Provide a google-services.json file for your current environment')
 	copyTo(googlePlistConfig, googlePlistPath, 'Provide a GoogleService-Info.plist file for your current environment')
-	copyTo(exportPlistConfig, exportPlistPath, 'Provide a Export.plist file for your current environment')
 }
 
 const version = async (args) => {
@@ -98,7 +108,7 @@ const version = async (args) => {
 	await project.android.setVersionName(versionName)
 	await project.android.setVersionCode(versionCode)
 	await project.commit()
-	console.log(`Versioned to ${versionName}(${versionCode})`)
+	console.log(`Versioned to ${ versionName }(${ versionCode })`)
 }
 
 const env = async () => {
@@ -110,75 +120,7 @@ const env = async () => {
 	fs.writeFileSync('.env', envFormattedEntries)
 }
 
-// TODO: figure how to install provisioningFile
-const appBuild = async (args) => {
-	const validPlatforms = ['android', 'ios']
-	const platform = args[0]
+const actions = { setup, version, env, appBuild }
 
-	if (!validPlatforms.includes(platform)) {
-		console.log(`Invalid platform. Supported values: ${validPlatforms.join(', ')}`)
-		process.exit(1)
-	}
-
-	const validConfigurations = ['Release', 'Debug']
-	const configuration = args[1] ?? validConfigurations[0]
-
-	if (!validConfigurations.includes(configuration)) {
-		console.log(`Invalid configuration. Supported values: ${validConfigurations.join(', ')}`)
-		process.exit(1)
-	}
-
-	const android = () => {
-		const validTypes = ['assemble', 'bundle']
-		const type = args[2] ?? validTypes[0]
-
-		if (!validTypes.includes(type)) {
-			console.log(`Invalid type. Supported values: ${validTypes.join(', ')}`)
-			process.exit(1)
-		}
-
-		const isAssemble = type === validTypes[0]
-		const isBundle = type === validTypes[1]
-
-		const sign = 'apksigner sign --ks ./stranerd.keystore --ks-key-alias kevin@stranerd.com'
-		const signAssemble = `zipalign 4 ./app/build/outputs/apk/release/app-release-unsigned.apk ./app/build/outputs/apk/release/app-release.apk && ${sign} ./app/build/outputs/apk/release/app-release.apk`
-		const signBundle = `${sign} --min-sdk-version 22 ./app/build/outputs/bundle/release/app-release.aab`
-
-		const install = args.includes('--install') ? `./gradlew install${configuration} &&` : ''
-
-		return `cd android && rm -rf app/build &&
-./gradlew ${type + configuration} && ${install}
-${isAssemble ? signAssemble : ''}${isBundle ? signBundle : ''}
-`
-	}
-
-	const ios = () => {
-		const archiveFile = 'Archive/App'
-		const ipaFile = 'Output'
-		const exportPlistFile = 'App/Export.plist'
-
-		return `cd ios/App && rm -rf ${ipaFile} &&
-xcodebuild archive -workspace App.xcworkspace -configuration ${configuration} -scheme App -archivePath ${archiveFile} &&
-xcodebuild -exportArchive -archivePath ${archiveFile}.xcarchive -exportPath ${ipaFile} -exportOptionsPlist ${exportPlistFile}
-`
-	}
-
-	const platforms = {
-		android, ios,
-		default: () => 'echo Invalid platform provided'
-	}
-
-	const runner = platforms[platform] ?? platforms.default
-	const proc = exec(runner(), { maxBuffer: 1024 * 1024 * 5 })
-	proc.stdout.pipe(process.stdout)
-	proc.stderr.pipe(process.stderr)
-	process.stdin.pipe(proc.stdin)
-}
-
-const actions = {
-	setup, version, env, appBuild,
-	default: async () => console.log('Invalid action provided')
-}
-
-const run = actions[process.argv[2]] ?? actions.default
+const run = actions[process.argv[2]] ?? (async () => console.log(`Invalid action provided. Valid actions are: ${ Object.keys(actions).filter((x) => x !== 'default') }`))
 run(process.argv.slice(3)).then()
