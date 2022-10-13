@@ -47,6 +47,10 @@ export class AuthUseCase {
 		return await this.repository.signinWithGoogle(data, extras)
 	}
 
+	async signinWithApple (data: { firstName: string | null, lastName: string | null, email: string | null, idToken: string }, extras: AuthExtras) {
+		return await this.repository.signinWithApple(data, extras)
+	}
+
 	async signinWithEmail (factory: EmailSigninFactory, extras: AuthExtras) {
 		const { email, password } = await factory.toModel()
 		return await this.repository.signinWithEmail(email, password, extras)
