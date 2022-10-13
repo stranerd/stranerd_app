@@ -5,12 +5,16 @@ import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/comp
 import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'
 import { storage } from '@utils/storage'
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth'
+import { domain, googleClientId, packageName } from '@utils/environment'
+import { SignInWithApple } from '@capacitor-community/apple-sign-in'
 
 const global = {
 	referrerId: ref(undefined as string | undefined),
 	emailSignin: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
 	emailSignup: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
 	googleSignin: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
+	appleSignin: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
 	emailVerification: { email: ref(''), ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() }
 }
 
@@ -57,9 +61,7 @@ export const useEmailSignup = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const user = await AuthUseCases.signupWithEmail(factory.value, {
-					referrer: await getReferrerId()
-				})
+				const user = await AuthUseCases.signupWithEmail(factory.value, { referrer: await getReferrerId() })
 				await createSession(user, router)
 				await storage.remove('referrer')
 			} catch (error) {
@@ -118,18 +120,63 @@ export const getEmailVerificationEmail = () => global.emailVerification.email.va
 export const useGoogleSignin = () => {
 	const router = useRouter()
 	const { error, loading, setError, setLoading } = global.googleSignin
-	const signin = async (data: { accessToken: string, idToken: string }) => {
+	const signin = async () => {
 		await setError('')
 		if (!loading.value) {
 			await setLoading(true)
 			try {
-				const user = await AuthUseCases.signinWithGoogle(data, {
-					referrer: await getReferrerId()
-				})
+				const googleUser = await GoogleAuth.signIn()
+				const { accessToken, idToken } = googleUser.authentication
+				await GoogleAuth.signOut()
+				const user = await AuthUseCases.signinWithGoogle(
+					{ accessToken, idToken },
+					{ referrer: await getReferrerId() })
 				await createSession(user, router)
 				await storage.remove('referrer')
 			} catch (error) {
-				await setError(error)
+				await setError(error ?? 'Error signing in with google')
+			}
+			await setLoading(false)
+		}
+	}
+
+	onMounted(async () => {
+		try {
+			GoogleAuth.initialize({
+				clientId: googleClientId,
+				scopes: ['profile', 'email']
+			})
+		} catch (err) {
+			await setError(err)
+		}
+	})
+
+	return { loading, error, signin, setError }
+}
+
+export const useAppleSignin = () => {
+	const router = useRouter()
+	const { error, loading, setError, setLoading } = global.appleSignin
+	const signin = async () => {
+		await setError('')
+		if (!loading.value) {
+			await setLoading(true)
+			try {
+				const { response } = await SignInWithApple.authorize({
+					clientId: packageName,
+					redirectURI: domain,
+					scopes: 'name email'
+				})
+				const user = await AuthUseCases.signinWithApple({
+					firstName: response.givenName,
+					lastName: response.familyName,
+					email: response.email,
+					idToken: response.identityToken
+				}, { referrer: await getReferrerId() })
+				await createSession(user, router)
+				await storage.remove('referrer')
+			} catch (error) {
+				await setError('Error signing in with apple')
 			}
 			await setLoading(false)
 		}

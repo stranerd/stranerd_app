@@ -50,6 +50,7 @@ const setup = async (args) => {
 			await project.ios.setBuildProperty(target.name, build.name, 'DEVELOPMENT_TEAM', iosTeamId)
 			await project.ios.setEntitlements(target.name, build.name, {
 				'aps-environment': isProduction ? 'production' : 'development',
+				'com.apple.developer.applesignin': ['Default'],
 				'com.apple.developer.associated-domains': [`applinks:${ domain }`]
 			})
 		}))

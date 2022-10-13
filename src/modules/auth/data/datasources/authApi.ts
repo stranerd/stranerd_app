@@ -35,6 +35,12 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 		})
 	}
 
+	async signinWithApple (data: { firstName: string | null, lastName: string | null, email: string | null, idToken: string }, extras: AuthExtras) {
+		return await this.authClient.post<any, AfterAuthUser>('/identities/apple', {
+			...data, referrer: extras.referrer
+		})
+	}
+
 	async signupWithEmail (user: NewUser, extras: AuthExtras) {
 		return await this.authClient.post<any, AfterAuthUser>('/emails/signup', {
 			...user,

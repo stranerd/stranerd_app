@@ -30,7 +30,7 @@ type AlertArgs = ToastArgs & {
 export const Alert = async (args: AlertArgs) => {
 	const { value } = await Dialog.confirm({
 		title: args.title,
-		message: args.title,
+		message: '',
 		okButtonTitle: args.confirmButtonText,
 		cancelButtonTitle: args.cancelButtonText ?? 'Cancel'
 	})
