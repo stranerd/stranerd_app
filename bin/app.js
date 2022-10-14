@@ -52,7 +52,7 @@ const appBuild = async (args) => {
 		const isAssemble = type === validTypes[0]
 		const isBundle = type === validTypes[1]
 
-		const sign = 'apksigner sign --ks ./stranerd.keystore --ks-key-alias kevin@stranerd.com'
+		const sign = 'apksigner sign --ks ./app.keystore --ks-key-alias kevin@stranerd.com'
 		const signAssemble = `zipalign 4 ./app/build/outputs/apk/release/app-release-unsigned.apk ./app/build/outputs/apk/release/app-release.apk && ${ sign } ./app/build/outputs/apk/release/app-release.apk`
 		const signBundle = `${ sign } --min-sdk-version 22 ./app/build/outputs/bundle/release/app-release.aab`
 

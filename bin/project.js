@@ -68,10 +68,12 @@ const setup = async (args) => {
 
 	await project.commit()
 
+	const androidKeystorePath = './android/app.keystore'
 	const googleServicesPath = './android/app/google-services.json'
 	const googlePlistPath = './ios/App/App/GoogleService-Info.plist'
 	const exportPlistPath = './ios/App/App/Export.plist'
 
+	const androidKeystoreConfig = `./bin/config/${ environment }/app.keystore`
 	const googleServicesConfig = `./bin/config/${ environment }/google-services.json`
 	const googlePlistConfig = `./bin/config/${ environment }/GoogleService-Info.plist`
 
@@ -83,6 +85,7 @@ const setup = async (args) => {
 		provisioningProfiles: { [package_name]: Name },
 		signingStyle: 'manual', teamID
 	}))
+	copyTo(androidKeystoreConfig, androidKeystorePath, 'Provide an app.keystore file for your current environment')
 	copyTo(googleServicesConfig, googleServicesPath, 'Provide a google-services.json file for your current environment')
 	copyTo(googlePlistConfig, googlePlistPath, 'Provide a GoogleService-Info.plist file for your current environment')
 }
