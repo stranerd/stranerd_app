@@ -21,11 +21,11 @@ const init = async () => {
 
 	for (const plugin of globalPlugins) await plugin({ app, router }).catch()
 
-	app.use(router).use(IonicVue)
-	app.directive('chat-scroll', ChatScroll)
-
+	app.use(router)
+		.use(IonicVue)
+		.directive('chat-scroll', ChatScroll)
+		.mount('#app')
 	await router.isReady().catch()
-	app.mount('#app')
 
 	await Promise.all([
 		SplashScreen.hide(),

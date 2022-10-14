@@ -81,9 +81,9 @@ export const useAuth = () => {
 		if (details?.id) {
 			global.user.value = await UsersUseCases.find(details.id)
 			global.wallet.value = await WalletsUseCases.get()
-			if (global.auth.value?.isVerified && !global.user.value?.school) setTimeout(async () => {
+			if (global.auth.value?.isVerified && !global.user.value?.school) {
 				if ((await getSchoolState()) !== id.value) await router.push('/account/setup')
-			}, 5000)
+			}
 		} else global.user.value = null
 	}
 
