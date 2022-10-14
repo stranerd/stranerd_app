@@ -23,11 +23,13 @@ const copyTo = (from, to, error) => {
 }
 
 const setup = async (args) => {
+	const skipApps = args.includes('--skip-apps')
 	const folder = './public/.well-known'
 	if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true })
 	fs.writeFileSync(`${ folder }/assetlinks.json`, JSON.stringify(asset_links.android ?? {}, null, 4))
 	fs.writeFileSync(`${ folder }/apple-app-site-association`, JSON.stringify(asset_links.ios ?? {}, null, 4))
 
+	if (skipApps) return
 	const reversedIosClientId = google_client_ids.ios.split('.').reverse().join('.')
 
 	const project = await getProject()
@@ -76,8 +78,6 @@ const setup = async (args) => {
 	const androidKeystoreConfig = `./bin/config/${ environment }/app.keystore`
 	const googleServicesConfig = `./bin/config/${ environment }/google-services.json`
 	const googlePlistConfig = `./bin/config/${ environment }/GoogleService-Info.plist`
-
-	if (args.includes('--skip-apps')) return
 
 	fs.writeFileSync(exportPlistPath, build({
 		destination: isProduction ? 'upload' : 'export',
