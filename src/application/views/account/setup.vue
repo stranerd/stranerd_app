@@ -9,12 +9,12 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { saveSchoolState } from '@app/composable/auth/auth'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 import ProfileForm from '@app/components/users/settings/ProfileForm.vue'
 import SchoolForm from '@app/components/users/settings/SchoolForm.vue'
 import { router } from '@app/router'
+import { saveSchoolState } from '@app/composable/auth/session'
 
 export default defineComponent({
 	name: 'AccountSetup',

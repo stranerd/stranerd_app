@@ -4,9 +4,7 @@ import { AuthDetails, AuthTypes } from '@modules/auth/domain/entities/auth'
 import { AuthUseCases } from '@modules/auth'
 import { isClient } from '@utils/environment'
 import { setupPush } from '@utils/push'
-import { storage } from '@utils/storage'
 import { WalletEntity, WalletsUseCases } from '@modules/payment'
-import { router } from '@app/router'
 import { useListener } from '@app/composable/core/states'
 
 const global = {
@@ -81,9 +79,6 @@ export const useAuth = () => {
 		if (details?.id) {
 			global.user.value = await UsersUseCases.find(details.id)
 			global.wallet.value = await WalletsUseCases.get()
-			if (global.auth.value?.isVerified && !global.user.value?.school) {
-				if ((await getSchoolState()) !== id.value) await router.push('/account/setup')
-			}
 		} else global.user.value = null
 	}
 
@@ -110,7 +105,3 @@ export const useAuth = () => {
 		setAuthUser, signin, signout
 	}
 }
-
-const SCHOOL_STATE_KEY = 'onboarding_school_show_key'
-const getSchoolState = async () => storage.get(SCHOOL_STATE_KEY)
-export const saveSchoolState = async () => storage.set(SCHOOL_STATE_KEY, useAuth().id.value)
