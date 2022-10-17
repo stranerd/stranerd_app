@@ -61,5 +61,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This allows access to the camera to capture images</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This allows access to the microphone to capture audios and videos</string>
 </dict>
 </plist>
