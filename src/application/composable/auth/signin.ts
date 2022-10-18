@@ -6,8 +6,9 @@ import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'
 import { storage } from '@utils/storage'
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth'
-import { domain, googleClientId, packageName } from '@utils/environment'
+import { googleClientId, packageName } from '@utils/environment'
 import { SignInWithApple } from '@capacitor-community/apple-sign-in'
+import { isWeb } from '@utils/constants'
 
 const global = {
 	referrerId: ref(undefined as string | undefined),
@@ -162,10 +163,10 @@ export const useAppleSignin = () => {
 		if (!loading.value) {
 			await setLoading(true)
 			try {
+				const clientId = isWeb ? packageName.replace('.app', '') : packageName
+				const redirectURI = 'https://' + clientId.split('.').reverse().join('.')
 				const { response } = await SignInWithApple.authorize({
-					clientId: packageName,
-					redirectURI: domain,
-					scopes: 'name email'
+					clientId, redirectURI, scopes: 'name email'
 				})
 				const user = await AuthUseCases.signinWithApple({
 					firstName: response.givenName,
