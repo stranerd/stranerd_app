@@ -151,7 +151,7 @@ export const useDeleteTestPrep = (testPrepId: string) => {
 	const deleteTestPrep = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this testPrep?',
+			message: 'Are you sure you want to delete this testPrep?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

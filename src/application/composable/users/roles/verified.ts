@@ -11,7 +11,7 @@ export const useVerifiedRoles = () => {
 	const verifyUser = async (user: UserEntity, verified: boolean) => {
 		await setError('')
 		const accepted = await Alert({
-			title: `Are you sure you want to ${verified ? 'verify' : 'un-verify'} this user?`,
+			message: `Are you sure you want to ${verified ? 'verify' : 'un-verify'} this user?`,
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {

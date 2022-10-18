@@ -141,7 +141,7 @@ export const useDeleteGroup = (classId: string, groupId: string) => {
 	const deleteGroup = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this group?',
+			message: 'Are you sure you want to delete this group?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

@@ -126,7 +126,7 @@ export const useDeleteFaculty = (facultyId: string) => {
 	const deleteFaculty = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this faculty?',
+			message: 'Are you sure you want to delete this faculty?',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {

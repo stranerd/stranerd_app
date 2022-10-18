@@ -130,7 +130,7 @@ export const useDeleteEvent = (classId: string, eventId: string) => {
 	const deleteEvent = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this event?',
+			message: 'Are you sure you want to delete this event?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

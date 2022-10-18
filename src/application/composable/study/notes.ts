@@ -118,7 +118,7 @@ export const useDeleteNote = (noteId: string) => {
 	const deleteNote = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this note?',
+			message: 'Are you sure you want to delete this note?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

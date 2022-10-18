@@ -57,7 +57,7 @@ export const useCard = (card: CardEntity) => {
 		await setError('')
 		if (card.primary) return
 		const res = await Alert({
-			title: 'Do you want this card as your default for payments and subscriptions?',
+			message: 'Do you want this card as your default for payments and subscriptions?',
 			confirmButtonText: 'Yes',
 			cancelButtonText: 'No'
 		})
@@ -75,7 +75,7 @@ export const useCard = (card: CardEntity) => {
 	const deleteCard = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this card?',
+			message: 'Are you sure you want to delete this card?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

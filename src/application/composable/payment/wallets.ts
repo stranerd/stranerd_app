@@ -24,7 +24,7 @@ export const useWallet = () => {
 		await setError('')
 		if (wallet.value?.subscription.active) return
 		const res = await Alert({
-			title: 'Are you sure you want to subscribe to this plan?',
+			message: 'Are you sure you want to subscribe to this plan?',
 			confirmButtonText: 'Yes',
 			cancelButtonText: 'No'
 		})
@@ -52,7 +52,7 @@ export const useWallet = () => {
 		await setError('')
 		if (wallet.value && !wallet.value?.subscription.next) return
 		const res = await Alert({
-			title: 'Are you sure you want to cancel your current plan?',
+			message: 'Are you sure you want to cancel your current plan?',
 			confirmButtonText: 'Yes',
 			cancelButtonText: 'No'
 		})

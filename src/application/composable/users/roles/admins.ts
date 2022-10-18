@@ -56,7 +56,7 @@ export const useAdminsList = () => {
 	const adminUser = async (user: UserEntity) => {
 		await global.setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to make this user an admin?',
+			message: 'Are you sure you want to make this user an admin?',
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {
@@ -76,7 +76,7 @@ export const useAdminsList = () => {
 	const deAdminUser = async (user: UserEntity) => {
 		await global.setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to de-admin this user?',
+			message: 'Are you sure you want to de-admin this user?',
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {

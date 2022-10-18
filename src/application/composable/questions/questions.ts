@@ -214,7 +214,7 @@ export const useDeleteQuestion = (questionId: string) => {
 	const deleteQuestion = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this question?',
+			message: 'Are you sure you want to delete this question?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

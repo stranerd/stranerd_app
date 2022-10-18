@@ -83,7 +83,7 @@ export const useDeleteReport = (id: string) => {
 	const deleteReport = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want  to delete this report?',
+			message: 'Are you sure you want  to delete this report?',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {

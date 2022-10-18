@@ -35,7 +35,7 @@ export const useSessionSignout = () => {
 	const signout = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to sign out?',
+			message: 'Are you sure you want to sign out?',
 			confirmButtonText: 'Yes, signout'
 		})
 		if (accepted) {

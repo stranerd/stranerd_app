@@ -20,7 +20,7 @@ export const useErrorHandler = () => {
 			].includes(error.statusCode)) await useAuth().signout()
 		} else errorState.value = error.message ?? error
 		if (isClient() && errorState.value && !skipAlert) Notify({
-			title: errorState.value
+			message: errorState.value
 		}).then()
 	}
 	return { error: errorState, setError }
@@ -31,7 +31,7 @@ export const useSuccessHandler = () => {
 	const setMessage = async (message: string, skipAlert = false) => {
 		successState.value = message
 		if (isClient() && successState.value && !skipAlert) Notify({
-			title: successState.value
+			message: successState.value
 		})
 	}
 	return { message: successState, setMessage }

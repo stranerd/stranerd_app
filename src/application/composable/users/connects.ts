@@ -87,7 +87,7 @@ export const useConnects = () => {
 		if (global[userId].loading.value) return
 		const type = accept ? 'accept' : 'reject'
 		const accepted = await Alert({
-			title: `Are you sure you want to ${type} this connection?`,
+			message: `Are you sure you want to ${type} this connection?`,
 			confirmButtonText: `Yes, ${type}`
 		})
 		if (!accepted) return
@@ -106,7 +106,7 @@ export const useConnects = () => {
 		if (global[userId].loading.value) return
 		const type = connect.pending ? 'cancel' : 'remove'
 		const accepted = await Alert({
-			title: `Are you sure you want to ${type} this connection?`,
+			message: `Are you sure you want to ${type} this connection?`,
 			confirmButtonText: `Yes, ${type}`
 		})
 		if (!accepted) return

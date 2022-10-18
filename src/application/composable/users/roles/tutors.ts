@@ -44,7 +44,7 @@ export const useTutorsList = () => {
 	const tutorUser = async (user: UserEntity) => {
 		await global.setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to toggle this user a tutor?',
+			message: 'Are you sure you want to toggle this user a tutor?',
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {
@@ -64,7 +64,7 @@ export const useTutorsList = () => {
 	const deTutorUser = async (user: UserEntity) => {
 		await global.setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to de-tutor this user?',
+			message: 'Are you sure you want to de-tutor this user?',
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {

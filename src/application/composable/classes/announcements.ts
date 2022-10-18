@@ -201,7 +201,7 @@ export const useDeleteAnnouncement = (classId: string, announcementId: string) =
 	const deleteAnnouncement = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this announcement?',
+			message: 'Are you sure you want to delete this announcement?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

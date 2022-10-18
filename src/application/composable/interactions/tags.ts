@@ -128,7 +128,7 @@ export const useDeleteTag = () => {
 	const deleteTag = async (tag: TagEntity) => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this tag?',
+			message: 'Are you sure you want to delete this tag?',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {
