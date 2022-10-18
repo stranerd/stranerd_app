@@ -1,6 +1,14 @@
 <template>
 	<form class="flex flex-col gap-6" @submit.prevent="submit">
-		<SelectTag v-model:value="factory.tagId" />
+		<div v-if="!disabled.isPrivate && !disabled.tagId" class="flex gap-4">
+			<IonSelect v-if="!disabled.isPrivate" v-model="factory.isPrivate" class="capitalize flex-1"
+				interface="action-sheet"
+				placeholder="Question privacy">
+				<IonSelectOption :value="true">Private Question</IonSelectOption>
+				<IonSelectOption :value="false">Public Question</IonSelectOption>
+			</IonSelect>
+			<SelectTag v-if="!disabled.tagId" v-model:value="factory.tagId" class="flex-1" />
+		</div>
 
 		<BaseEditor v-model:value="factory.body" :error="factory.errors.body" :valid="factory.isValid('body')"
 			class="flex-grow"
@@ -74,7 +82,7 @@ export default defineComponent({
 			required: true
 		},
 		disabled: {
-			type: Object,
+			type: Object as PropType<Partial<Record<keyof QuestionFactory, boolean>>>,
 			required: false,
 			default: () => ({})
 		}

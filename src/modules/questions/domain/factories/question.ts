@@ -1,6 +1,7 @@
 import {
 	hasLessThanX,
 	isArrayOfX,
+	isBoolean,
 	isExtractedHTMLLongerThanX,
 	isImage,
 	isLongerThanX,
@@ -15,6 +16,7 @@ type Content = UploadedFile | Media
 export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel, QuestionToModel & { attachments: Content[] }> {
 	readonly rules = {
 		body: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
+		isPrivate: { required: true, rules: [isBoolean] },
 		attachments: { required: true, rules: [isArrayOfX((com) => isImage(com).valid, 'images'), hasLessThanX(6)] },
 		tagId: { required: true, rules: [isString, isLongerThanX(0)] }
 	}
@@ -22,7 +24,7 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 	reserved = []
 
 	constructor () {
-		super({ body: '', tagId: '', attachments: [] })
+		super({ body: '', tagId: '', attachments: [], isPrivate: false })
 	}
 
 	get body () {
@@ -41,6 +43,14 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 		this.set('tagId', value)
 	}
 
+	get isPrivate () {
+		return this.values.isPrivate
+	}
+
+	set isPrivate (value: boolean) {
+		this.set('isPrivate', value)
+	}
+
 	get attachments () {
 		return this.values.attachments
 	}
@@ -52,6 +62,7 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 	loadEntity = (entity: QuestionEntity) => {
 		this.body = entity.body
 		this.tagId = entity.tagId
+		this.isPrivate = entity.isPrivate
 		this.set('attachments', entity.attachments)
 	}
 
@@ -63,8 +74,8 @@ export class QuestionFactory extends BaseFactory<QuestionEntity, QuestionToModel
 			}))
 			this.set('attachments', docs)
 
-			const { attachments, body, tagId } = this.validValues
-			return { attachments: attachments as Media[], body, tagId }
+			const { attachments, body, tagId, isPrivate } = this.validValues
+			return { attachments: attachments as Media[], body, tagId, isPrivate }
 		} else {
 			throw new Error('Validation errors')
 		}

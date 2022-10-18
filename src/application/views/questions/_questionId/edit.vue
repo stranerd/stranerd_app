@@ -1,7 +1,7 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
 		<QuestionForm
-			:disabled="{ tagId: true }"
+			:disabled="{ tagId: true, isPrivate: true }"
 			:error="error"
 			:factory="factory"
 			:loading="loading"

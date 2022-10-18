@@ -17,4 +17,5 @@ export interface QuestionToModel {
 	body: string
 	attachments: Media[]
 	tagId: string
+	isPrivate: boolean
 }
