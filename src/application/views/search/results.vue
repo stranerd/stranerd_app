@@ -19,21 +19,21 @@
 							<IonText class="font-bold">Questions</IonText>
 							<router-link class="text-info" to="/search/results?tab=questions">view all</router-link>
 						</span>
-						<SearchQuestionsList :questions="results.questions.slice(3)" :sliced="true" />
+						<SearchQuestionsList :questions="results.questions.slice(0, 3)" :sliced="true" />
 					</div>
 					<div class="flex flex-col gap-2">
 						<span class="flex gap-4 justify-between gap-4">
 							<IonText class="font-bold">Flashcards</IonText>
 							<router-link class="text-info" to="/search/results?tab=flashCards">view all</router-link>
 						</span>
-						<SearchFlashCardsList :flashCards="results.flashCards.slice(3)" :sliced="true" />
+						<SearchFlashCardsList :flashCards="results.flashCards.slice(0, 3)" :sliced="true" />
 					</div>
 					<div class="flex flex-col gap-2">
 						<span class="flex gap-4 justify-between gap-4">
 							<IonText class="font-bold">Students</IonText>
 							<router-link class="text-info" to="/search/results?tab=users">view all</router-link>
 						</span>
-						<SearchUsersList :sliced="true" :users="results.users.slice(3)" />
+						<SearchUsersList :sliced="true" :users="results.users.slice(0, 3)" />
 					</div>
 				</template>
 				<SuggestedActions />

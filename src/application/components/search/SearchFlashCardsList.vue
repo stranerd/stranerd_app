@@ -17,11 +17,6 @@ export default defineComponent({
 		flashCards: {
 			type: Array as PropType<FlashCardEntity[]>,
 			required: true
-		},
-		sliced: {
-			type: Boolean,
-			default: false,
-			required: false
 		}
 	}
 })

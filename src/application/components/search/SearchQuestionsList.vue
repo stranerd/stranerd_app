@@ -17,11 +17,6 @@ export default defineComponent({
 		questions: {
 			type: Array as PropType<QuestionEntity[]>,
 			required: true
-		},
-		sliced: {
-			type: Boolean,
-			default: false,
-			required: false
 		}
 	}
 })

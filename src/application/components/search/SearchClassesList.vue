@@ -17,11 +17,6 @@ export default defineComponent({
 		classes: {
 			type: Array as PropType<ClassEntity[]>,
 			required: true
-		},
-		sliced: {
-			type: Boolean,
-			default: false,
-			required: false
 		}
 	}
 })

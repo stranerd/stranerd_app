@@ -17,11 +17,6 @@ export default defineComponent({
 		users: {
 			type: Array as PropType<UserEntity[]>,
 			required: true
-		},
-		sliced: {
-			type: Boolean,
-			default: false,
-			required: false
 		}
 	}
 })

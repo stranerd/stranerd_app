@@ -6,7 +6,7 @@
 					<Logo />
 				</router-link>
 				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
-					class="text-base lg:hidden"
+					class="lg:hidden"
 					defaultHref="/dashboard" mode="ios" text="" />
 				<IonText class="font-bold text-xl lg:hidden truncate max-w-[240px] capitalize">
 					{{ $route.meta.routeName ?? '' }}

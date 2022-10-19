@@ -17,11 +17,6 @@ export default defineComponent({
 		notes: {
 			type: Array as PropType<NoteEntity[]>,
 			required: true
-		},
-		sliced: {
-			type: Boolean,
-			default: false,
-			required: false
 		}
 	}
 })
