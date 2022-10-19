@@ -3,10 +3,7 @@
 		<div class="flex justify-between gap-2">
 			<Avatar :id="question.user.id" :size="36" :src="question.user.bio.photo" />
 			<div class="flex flex-col">
-				<span class="font-semibold text-secondaryText flex gap-1 items-center">
-					<span>{{ question.user.bio.fullName }}</span>
-					<Verified :verified="question.isUserVerified" />
-				</span>
+				<UserName class="font-semibold text-secondaryText" :name="question.user.bio.fullName" :isTutor="question.user.roles.isStranerdTutor" />
 				<div class="flex gap-2 items-center text-secondaryText text-sm">
 					<InteractionTag :tagId="question.tagId" />
 					<IonIcon :icon="ellipse" class="dot" />

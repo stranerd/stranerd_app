@@ -57,10 +57,6 @@ export class AnswerEntity extends BaseEntity {
 		return !this.isModified
 	}
 
-	get isUserVerified () {
-		return this.user.roles.isVerified
-	}
-
 	get shareLink () {
 		return `/questions/${this.questionId}`
 	}

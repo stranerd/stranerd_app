@@ -3,10 +3,7 @@
 		<div class="flex items-center gap-4 text-secondaryText text-sm justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="answer.user.id" :size="24" :src="answer.user.bio.photo" />
-				<span class="font-semibold flex gap-1 items-center">
-					<span>{{ answer.user.bio.fullName }}</span>
-					<Verified :verified="answer.isUserVerified" />
-				</span>
+				<UserName class="font-semibold" :name="answer.user.bio.fullName" :isTutor="answer.user.roles.isStranerdTutor" />
 				<IonIcon :icon="ellipse" class="dot" />
 				<span>{{ formatTime(answer.createdAt) }}</span>
 			</div>

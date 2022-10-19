@@ -63,7 +63,7 @@ export const useAdminsList = () => {
 			await global.setLoading(true)
 			try {
 				await AuthUseCases.updateRole(user.id, 'isStranerdAdmin', true)
-				user.isAdmin = true
+				user.roles.isStranerdAdmin = true
 				addToArray(global.admins.value, user, (e) => e.id, (e) => e.bio.fullName, true)
 				await global.setMessage('Successfully upgraded to admin')
 			} catch (error) {

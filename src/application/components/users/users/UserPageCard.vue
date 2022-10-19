@@ -3,11 +3,7 @@
 		<div class="flex items-start gap-4 justify-between">
 			<Avatar :name="user.bio.fullName" :size="64" :src="user.bio.photo" />
 			<div class="flex flex-col w-full">
-				<IonText class="font-bold flex gap-1 items-center" @click.prevent="verify">
-					<span>{{ user.bio.fullName }}</span>
-					<Verified :verified="user.isVerified" />
-					<SpinLoading v-if="loading" />
-				</IonText>
+				<UserName :isTutor="user.roles.isStranerdTutor" :name="user.bio.fullName" class="font-bold" />
 				<template v-if="user.isCollege(user)">
 					<Institution :institutionId="user.school.institutionId"
 						class="text-secondaryText text-sm font-bold" />
@@ -42,7 +38,6 @@ import Department from '@app/components/school/departments/Department.vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { openProfileMenuModal } from '@app/composable/users/users'
-import { useVerifiedRoles } from '@app/composable/users/roles/verified'
 
 export default defineComponent({
 	name: 'UserPageCard',
@@ -53,17 +48,10 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup (props) {
-		const { id, isAdmin } = useAuth()
-		const { loading, verifyUser } = useVerifiedRoles()
-		const verify = async () => {
-			if (!isAdmin.value) return
-			if (id.value === props.user.id) return
-			return await verifyUser(props.user, !props.user.isVerified)
-		}
+	setup () {
+		const { id } = useAuth()
 		return {
-			settingsOutline, loading, verify,
-			id, formatNumber, pluralize, openProfileMenuModal
+			settingsOutline, id, formatNumber, pluralize, openProfileMenuModal
 		}
 	}
 })

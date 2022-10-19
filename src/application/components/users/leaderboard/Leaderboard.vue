@@ -21,10 +21,7 @@
 				class="p-4 gap-3 rounded-lg flex w-full font-bold items-center"
 			>
 				<Avatar :name="person.bio.fullName" :size="32" :src="person.bio.photo" />
-				<span class="flex items-center gap-1">
-					<span>{{ person.bio.fullName }}</span>
-					<Verified :verified="person.isVerified" />
-				</span>
+				<UserName :name="person.bio.fullName" :isTutor="person.roles.isStranerdTutor" />
 				<span class="font-bold ml-auto">
 					{{ formatNumber(person.account.rankings[time], 2) }}
 				</span>

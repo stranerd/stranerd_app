@@ -1,11 +1,11 @@
 <template>
 	<div class="flex flex-col !gap-4 card-sm card-padding">
 		<div class="flex items-center gap-2 text-sm">
-			<IonIcon v-if="answer.isUserVerified" :icon="checkmarkCircle" class="text-primaryBg"
+			<IonIcon v-if="answer.user.roles.isStranerdTutor" :icon="checkmarkCircle" class="text-primaryBg"
 				style="font-size: 1.5em;" />
 			<Avatar v-else :name="answer.user.bio.fullName" :size="20" :src="answer.user.bio.photo" />
 			<span class="font-bold flex items-center gap-1">
-				<span v-if="answer.isUserVerified">Expert Tutor</span>
+				<span v-if="answer.user.roles.isStranerdTutor">Expert Tutor</span>
 				<span v-else>{{ answer.user.bio.fullName }}</span>
 			</span>
 			<IonIcon :icon="ellipse" class="dot" />

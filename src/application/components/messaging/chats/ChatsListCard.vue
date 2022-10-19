@@ -3,9 +3,8 @@
 		<Avatar :id="chat.from.id" :name="chat.from.bio.fullName" :size="36" :src="chat.from.bio.photo" />
 		<div class="min-w-[25%] max-w-[100%] lg:max-w-[55%] rounded-t-xl flex flex-col gap-1">
 			<span class="flex gap-1 items-center">
-				<span :class="{ 'text-info': chat.from.id === id }" class="font-bold">
-					{{ chat.from.bio.fullName }}</span>
-				<Verified :verified="chat.from.roles.isVerified" />
+				<UserName :class="{ 'text-info': chat.from.id === id }" :isTutor="chat.from.roles.isStranerdTutor" :name="chat.from.bio.fullName"
+					class="font-bold" />
 				<IonIcon :icon="ellipse" class="dot" />
 				<span class="text-[0.9em] leading-none text-secondaryText">
 					{{ formatTimeAsDigits(new Date(chat.createdAt)) }}

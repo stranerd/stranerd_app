@@ -51,7 +51,7 @@ export const useTutorsList = () => {
 			await global.setLoading(true)
 			try {
 				await AuthUseCases.updateRole(user.id, 'isStranerdTutor', true)
-				user.isTutor = true
+				user.roles.isStranerdTutor = true
 				addToArray(global.tutors.value, user, (e) => e.id, (e) => e.score)
 				await global.setMessage('Successfully upgraded to tutor')
 			} catch (error) {

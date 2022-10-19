@@ -47,7 +47,6 @@ export interface UserBio {
 export interface UserRoles {
 	isStranerdAdmin: boolean
 	isStranerdTutor: boolean
-	isVerified: boolean
 }
 
 export type EmbeddedUser = {

@@ -54,14 +54,14 @@ export class UsersUseCase {
 		return await this.repository.listenToMany({
 			where: [{ field: 'roles.isStranerdAdmin', value: true }],
 			all: true
-		}, listener, (entity) => entity.isAdmin)
+		}, listener, (entity) => entity.roles.isStranerdAdmin)
 	}
 
 	async listenToAllTutors (listener: Listeners<UserEntity>) {
 		return await this.repository.listenToMany({
 			where: [{ field: 'roles.isStranerdTutor', value: true }],
 			all: true
-		}, listener, (entity) => entity.isTutor)
+		}, listener, (entity) => entity.roles.isStranerdTutor)
 	}
 
 	async listenToOne (id: string, listeners: Listeners<UserEntity>) {

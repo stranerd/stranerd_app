@@ -2,10 +2,7 @@
 	<div v-if="user && connect.from.id === id" class="card-padding flex items-center">
 		<Avatar :id="user.id" :name="user.bio.fullName" :src="user.bio.photo" />
 		<div class="flex-1 truncate">
-			<IonText class="flex gap-1 items-center">
-				<span>{{ user.bio.fullName }}</span>
-				<Verified :verified="user.isVerified" />
-			</IonText>
+			<UserName :isTutor="user.roles.isStranerdTutor" :name="user.bio.fullName" />
 			<Institution v-if="user.isCollege(user)" :institutionId="user.school.institutionId" />
 		</div>
 		<IonButton class="btn-outline" @click="deleteConnect(connect)">
@@ -16,8 +13,7 @@
 		<Avatar :id="user.id" :name="user.bio.fullName" :src="user.bio.photo" />
 		<div class="flex flex-col flex-1 truncate gap-1">
 			<span class="flex gap-1 items-center">
-				<IonText class="truncate">{{ user.bio.fullName }}</IonText>
-				<Verified :verified="user.isVerified" />
+				<UserName :isTutor="user.roles.isStranerdTutor" :name="user.bio.fullName" class="truncate" />
 				<span class="flex-1" />
 				<span class="text-secondaryText text-sm">{{ formatTime(connect.createdAt) }}</span>
 			</span>

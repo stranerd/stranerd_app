@@ -40,11 +40,6 @@
 					<IonIcon v-else :icon="linkOutline" />
 					<span>Remove connection</span>
 				</span>
-				<span class="flex gap-4 py-4 items-center" @click="verifyUser(user, !user.roles.isVerified)">
-					<SpinLoading v-if="verifiedLoading" />
-					<IonIcon v-else :icon="createOutline" />
-					<span>Mark as {{ user.roles.isVerified ? 'unverified' : 'verified' }}</span>
-				</span>
 			</template>
 		</div>
 	</div>
@@ -65,7 +60,6 @@ import {
 } from 'ionicons/icons'
 import { getProfileMenuUser } from '@app/composable/users/users'
 import { useAuth } from '@app/composable/auth/auth'
-import { useVerifiedRoles } from '@app/composable/users/roles/verified'
 import { useConnects } from '@app/composable/users/connects'
 
 export default defineComponent({
@@ -80,14 +74,12 @@ export default defineComponent({
 		const { id, isAdmin } = useAuth()
 		const user = getProfileMenuUser()
 		if (!user) props.close()
-		const { loading: verifiedLoading, verifyUser } = useVerifiedRoles()
 		const { connects, acceptConnect, deleteConnect, loading: connectLoading } = useConnects()
 		const connect = computed(() => connects.value.find((c) => c.members.includes(id.value) && c.members.includes(user?.id as any)))
 		return {
 			user, id, isAdmin,
 			cardOutline, gridOutline, libraryOutline, bookmarkOutline, settingsOutline,
 			createOutline, shareOutline, linkOutline, walletOutline,
-			verifiedLoading, verifyUser,
 			connect, connectLoading, deleteConnect, acceptConnect
 		}
 	}

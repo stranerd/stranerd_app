@@ -25,10 +25,6 @@ export class CommentEntity extends BaseEntity {
 	get canReply () {
 		return this.entity.type !== InteractionEntities.comments
 	}
-
-	get isUserVerified () {
-		return this.user.roles.isVerified
-	}
 }
 
 type CommentConstructorArgs = {

@@ -12,15 +12,15 @@ export class NoteEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-					 id,
-					 title,
-					 content,
-					 user,
-					 isPrivate,
-					 links,
-					 createdAt,
-					 updatedAt
-				 }: NoteConstructorArgs) {
+		             id,
+		             title,
+		             content,
+		             user,
+		             isPrivate,
+		             links,
+		             createdAt,
+		             updatedAt
+	             }: NoteConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title
@@ -30,10 +30,6 @@ export class NoteEntity extends BaseEntity {
 		this.links = links
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
-	}
-
-	get isUserVerified () {
-		return this.user.roles.isVerified
 	}
 
 	get shareLink () {

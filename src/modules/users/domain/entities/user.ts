@@ -37,8 +37,7 @@ export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
 
 export const generateDefaultRoles = (roles: Partial<UserRoles>): UserRoles => ({
 	isStranerdAdmin: roles?.isStranerdAdmin ?? false,
-	isStranerdTutor: roles?.isStranerdTutor ?? false,
-	isVerified: roles?.isVerified ?? false
+	isStranerdTutor: roles?.isStranerdTutor ?? false
 })
 
 export const generateEmbeddedUser = (user: EmbeddedUser): EmbeddedUser => ({
@@ -95,30 +94,6 @@ export class UserEntity extends BaseEntity {
 
 	get meta () {
 		return this.account.meta
-	}
-
-	get isAdmin () {
-		return this.roles.isStranerdAdmin
-	}
-
-	set isAdmin (isAdmin) {
-		this.roles.isStranerdAdmin = isAdmin
-	}
-
-	get isTutor () {
-		return this.roles.isStranerdTutor
-	}
-
-	set isTutor (isTutor) {
-		this.roles.isStranerdTutor = isTutor
-	}
-
-	get isVerified () {
-		return this.roles.isVerified
-	}
-
-	set isVerified (isVerified) {
-		this.roles.isVerified = isVerified
 	}
 
 	get shareLink () {

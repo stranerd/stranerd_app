@@ -56,11 +56,11 @@ export const useAuth = () => {
 		}
 	})
 	const isAdmin = computed({
-		get: () => !!global.user.value?.isAdmin, set: () => {
+		get: () => !!global.user.value?.roles.isStranerdAdmin, set: () => {
 		}
 	})
 	const isTutor = computed({
-		get: () => !!global.user.value?.isTutor, set: () => {
+		get: () => !!global.user.value?.roles.isStranerdTutor, set: () => {
 		}
 	})
 	const isSubscribed = computed({
