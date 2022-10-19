@@ -9,12 +9,12 @@
 				<DisplayError :error="error" />
 				<div v-if="fetched">
 					<DisplayError v-if="users.length === 0" error="No such user found" />
-					<AdminsListCard v-for="user in users" :key="user.hash" :user="user" class="mb-4" />
+					<TutorsListCard v-for="user in users" :key="user.hash" :user="user" class="mb-4" />
 					<hr class="my-0">
 				</div>
 				<PageLoading v-if="loading" />
 			</div>
-			<AdminsList />
+			<TutorsList />
 		</div>
 	</AdminWrapper>
 </template>
@@ -22,18 +22,18 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
-import AdminsList from '@app/components/users/admins/AdminsList.vue'
+import TutorsList from '@app/components/users/tutors/TutorsList.vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
-import AdminsListCard from '@app/components/users/admins/AdminsListCard.vue'
+import TutorsListCard from '@app/components/users/tutors/TutorsListCard.vue'
 import { useSearchUsers } from '@app/composable/users'
 
 export default defineComponent({
-	name: 'AdminUsersAdmins',
-	components: { AdminWrapper, AdminsList, AdminsListCard },
+	name: 'AdminUsersTutors',
+	components: { AdminWrapper, TutorsList, TutorsListCard },
 	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
-		useRouteMeta('Admins', { back: true })
+		useRouteMeta('Tutors', { back: true })
 		const {
 			loading, fetched, detail, users, error, search, reset
 		} = useSearchUsers()

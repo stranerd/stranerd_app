@@ -1,7 +1,6 @@
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { UserEntity, UsersUseCases } from '@modules/users'
-import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 import { AuthUseCases } from '@modules/auth'
@@ -29,7 +28,6 @@ const listener = useListener(async () => {
 })
 
 export const useAdminsList = () => {
-	const { id } = useAuth()
 	const fetchAdmins = async () => {
 		await global.setError('')
 		try {
@@ -42,50 +40,20 @@ export const useAdminsList = () => {
 		}
 		await global.setLoading(false)
 	}
-	const filteredAdmins = computed({
-		get: () => global.admins.value.filter((admin) => {
-			let matched = true
-			if (admin.id === id.value) matched = false
-			return matched
-		}),
-		set: (admins) => {
-			admins.map((a) => addToArray(global.admins.value, a, (e) => e.id, (e) => e.bio.fullName, true))
-		}
-	})
 
-	const adminUser = async (user: UserEntity) => {
+	const adminUser = async (user: UserEntity, value: boolean) => {
 		await global.setError('')
 		const accepted = await Alert({
-			message: 'Are you sure you want to make this user an admin?',
+			message: `Are you sure you want to ${value ? 'upgrade this user to an admin' : 'downgrade this user from admin'}`,
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {
 			await global.setLoading(true)
 			try {
-				await AuthUseCases.updateRole(user.id, 'isStranerdAdmin', true)
+				await AuthUseCases.updateRole(user.id, 'isStranerdAdmin', value)
 				user.roles.isStranerdAdmin = true
 				addToArray(global.admins.value, user, (e) => e.id, (e) => e.bio.fullName, true)
-				await global.setMessage('Successfully upgraded to admin')
-			} catch (error) {
-				await global.setError(error)
-			}
-			await global.setLoading(false)
-		}
-	}
-
-	const deAdminUser = async (user: UserEntity) => {
-		await global.setError('')
-		const accepted = await Alert({
-			message: 'Are you sure you want to de-admin this user?',
-			confirmButtonText: 'Yes, continue'
-		})
-		if (accepted) {
-			await global.setLoading(true)
-			try {
-				await AuthUseCases.updateRole(user.id, 'isStranerdAdmin', false)
-				global.admins.value = global.admins.value
-					.filter((u) => u.id !== user.id)
-				await global.setMessage('Successfully downgraded from admin')
+				await global.setMessage(`Successfully ${value ? 'upgraded to' : 'downgraded from'} admin`)
 			} catch (error) {
 				await global.setError(error)
 			}
@@ -101,5 +69,5 @@ export const useAdminsList = () => {
 		await listener.close()
 	})
 
-	return { ...global, filteredAdmins, adminUser, deAdminUser }
+	return { ...global, adminUser }
 }

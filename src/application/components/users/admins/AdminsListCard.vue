@@ -5,10 +5,10 @@
 			<UserName :isTutor="user.roles.isStranerdTutor" :name="user.bio.fullName" />
 		</div>
 		<a v-if="user.roles.isStranerdAdmin" class="w-3/12 font-bold text-right text-danger"
-			@click.prevent="deAdminUser(user)">
+			@click.prevent="adminUser(user, false)">
 			Remove
 		</a>
-		<a v-else class="w-3/12 font-bold text-right text-success" @click.prevent="adminUser(user)">
+		<a v-else class="w-3/12 font-bold text-right text-success" @click.prevent="adminUser(user, true)">
 			Make Admin
 		</a>
 		<PageLoading v-if="loading" />
@@ -29,8 +29,8 @@ export default defineComponent({
 		}
 	},
 	setup () {
-		const { loading, error, deAdminUser, adminUser } = useAdminsList()
-		return { loading, error, deAdminUser, adminUser }
+		const { loading, error, adminUser } = useAdminsList()
+		return { loading, error, adminUser }
 	}
 })
 </script>
