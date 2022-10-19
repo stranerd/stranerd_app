@@ -1,8 +1,7 @@
 <template>
 	<div class="flex flex-col gap-8">
-		<router-link class="flex items-center gap-2 px-8" to="/">
-			<Logo />
-			<span class="font-bold text-lg">Stranerd</span>
+		<router-link class="px-8" to="/">
+			<Logo :showName="true" />
 		</router-link>
 		<div class="flex flex-col text-secondaryText">
 			<router-link v-for="{ name, path, icon, iconOutline } in [

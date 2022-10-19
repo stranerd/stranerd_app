@@ -2,10 +2,10 @@
 	<IonHeader class="w-full" role="navigation">
 		<IonToolbar v-if="!show" class="flex flex-col z-10">
 			<div class="w-full flex mx-auto items-center justify-between p-4">
-				<div class="flex gap-3">
+				<div class="flex gap-3 items-center">
 					<IonIcon :icon="menuOutline" class="block lg:hidden" @click="toggleMenu" />
 					<span @click="navigateTo('/')">
-						<img alt="logo" class="h-6 md:h-auto" src="/images/icon_with_text.svg">
+						<Logo :showName="true" :size="1.5" />
 					</span>
 				</div>
 
@@ -30,9 +30,9 @@
 		<IonToolbar v-if="show" class="fixed inset-0 bg-bodyBg">
 			<header class="flex justify-between items-center py-6 px-4">
 				<span @click="navigateTo('/')">
-					<img alt="logo" class="h-6 md:h-auto" src="/images/icon_with_text.svg">
+					<Logo :showName="true" :size="1.5" />
 				</span>
-				<IonIcon :icon="closeOutline" class="block md:hidden" @click="toggleMenu" />
+				<IonIcon :icon="closeOutline" @click="toggleMenu" />
 			</header>
 
 			<div class="flex flex-col">
