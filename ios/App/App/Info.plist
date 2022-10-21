@@ -62,8 +62,8 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This allows access to the camera to capture images</string>
+	<string>Your camera is required to capture images to upload to your profile picture or in chats</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>This allows access to the microphone to capture audios and videos</string>
+	<string>Your microphone is required to capture audios and videos to upload in chats</string>
 </dict>
 </plist>
