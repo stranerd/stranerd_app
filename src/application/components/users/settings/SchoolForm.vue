@@ -17,8 +17,8 @@
 			</IonRadioGroup>
 		</IonList>
 		<div class="flex gap-4 items-center mt-auto">
-			<IonButton class="btn-outline w-full" type="button" @click.prevent="back">
-				Back
+			<IonButton class="btn-outline w-full" type="button" @click.prevent="skip">
+				Skip
 			</IonButton>
 			<IonButton class="btn-primary w-full" type="button" @click="tab = 1">
 				Next
@@ -68,8 +68,8 @@
 			</div>
 
 			<div class="flex gap-4 items-center mt-auto">
-				<IonButton class="btn-outline w-full" type="button" @click.prevent="back">
-					Back
+				<IonButton class="btn-outline w-full" type="button" @click.prevent="skip">
+					Skip
 				</IonButton>
 				<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
 					<SpinLoading v-if="loading" />
@@ -153,7 +153,7 @@ export default defineComponent({
 			type: Function as PropType<() => any>,
 			required: true
 		},
-		back: {
+		skip: {
 			type: Function as PropType<() => any>,
 			required: true
 		}

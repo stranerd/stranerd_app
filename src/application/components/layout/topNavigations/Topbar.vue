@@ -5,9 +5,11 @@
 				<router-link class="hidden lg:inline-block" to="/">
 					<Logo />
 				</router-link>
-				<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
-					class="lg:hidden"
-					defaultHref="/dashboard" mode="ios" text="" />
+				<span v-if="$route.meta.back" class="flex gap-0.5 lg:hidden">
+					<span />
+					<IonBackButton :icon="arrowBackOutline" defaultHref="/dashboard" mode="ios"
+						text="" />
+				</span>
 				<IonText class="font-bold text-xl lg:hidden truncate max-w-[240px] capitalize">
 					{{ $route.meta.routeName ?? '' }}
 				</IonText>
