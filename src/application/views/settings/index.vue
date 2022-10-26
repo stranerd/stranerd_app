@@ -14,11 +14,16 @@
 				<span>{{ item.name }}</span>
 			</router-link>
 			<a class="card-sm card-padding !gap-4 flex items-center text-danger"
+				@click.prevent="deleteAccount">
+				<IonIcon :icon="trashBinOutline" />
+				<span>Delete your account</span>
+			</a>
+			<a class="card-sm card-padding !gap-4 flex items-center text-danger"
 				@click.prevent="signout">
 				<IonIcon :icon="logOutOutline" />
 				<span>Sign out</span>
 			</a>
-			<PageLoading v-if="loading" />
+			<PageLoading v-if="signoutLoading || deleteAccountLoading" />
 		</div>
 	</DefaultLayout>
 </template>
@@ -33,9 +38,10 @@ import {
 	notificationsOutline,
 	personOutline,
 	schoolOutline,
-	shieldCheckmarkOutline
+	shieldCheckmarkOutline,
+	trashBinOutline
 } from 'ionicons/icons'
-import { useSessionSignout } from '@app/composable/auth/session'
+import { useDeleteAccount, useSessionSignout } from '@app/composable/auth/session'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 
@@ -44,11 +50,12 @@ export default defineComponent({
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Settings', { back: true })
-		const { signout, loading } = useSessionSignout()
+		const { signout, loading: signoutLoading } = useSessionSignout()
+		const { deleteAccount, loading: deleteAccountLoading } = useDeleteAccount()
 		return {
-			signout, loading,
+			signout, signoutLoading, deleteAccount, deleteAccountLoading,
 			personOutline, schoolOutline, notificationsOutline, shieldCheckmarkOutline,
-			informationCircleOutline, mailOutline, logOutOutline, cardOutline
+			informationCircleOutline, mailOutline, logOutOutline, cardOutline, trashBinOutline
 		}
 	}
 })

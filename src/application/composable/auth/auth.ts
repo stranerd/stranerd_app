@@ -3,7 +3,7 @@ import { UserEntity, UsersUseCases } from '@modules/users'
 import { AuthDetails, AuthTypes } from '@modules/auth/domain/entities/auth'
 import { AuthUseCases } from '@modules/auth'
 import { isClient } from '@utils/environment'
-import { setupPush } from '@utils/push'
+import { setupPush, unregisterDeviceOnLogout } from '@utils/push'
 import { WalletEntity, WalletsUseCases } from '@modules/payment'
 import { useListener } from '@app/composable/core/states'
 
@@ -94,7 +94,15 @@ export const useAuth = () => {
 	}
 
 	const signout = async () => {
+		await unregisterDeviceOnLogout()
 		await AuthUseCases.sessionSignout()
+		await setAuthUser(null)
+		if (isClient()) window.location.assign('/auth/signin')
+	}
+
+	const deleteAccount = async () => {
+		await unregisterDeviceOnLogout()
+		await AuthUseCases.deleteAccount()
 		await setAuthUser(null)
 		if (isClient()) window.location.assign('/auth/signin')
 	}
@@ -102,6 +110,6 @@ export const useAuth = () => {
 	return {
 		id, bio, user: global.user, auth: global.auth, wallet: global.wallet,
 		isLoggedIn, isEmailVerified, isAdmin, isTutor, hasPassword, isSubscribed,
-		setAuthUser, signin, signout
+		setAuthUser, signin, signout, deleteAccount
 	}
 }

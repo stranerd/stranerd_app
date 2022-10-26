@@ -21,5 +21,6 @@ export interface AuthBaseDataSource {
 	updatePassword: (passwords: PasswordUpdate) => Promise<void>
 	session: (afterAuth: AfterAuthUser) => Promise<AuthDetails>
 	signout: () => Promise<void>
+	deleteAccount: () => Promise<void>
 	updateRole: (data: { id: string, value: boolean, role: string }) => Promise<boolean>
 }

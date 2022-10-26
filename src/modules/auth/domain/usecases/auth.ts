@@ -43,6 +43,10 @@ export class AuthUseCase {
 		return await this.repository.signout()
 	}
 
+	async deleteAccount () {
+		return await this.repository.deleteAccount()
+	}
+
 	async signinWithGoogle (data: { accessToken: string, idToken: string }, extras: AuthExtras) {
 		return await this.repository.signinWithGoogle(data, extras)
 	}
