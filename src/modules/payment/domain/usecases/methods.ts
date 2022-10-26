@@ -1,11 +1,11 @@
-import { ICardRepository } from '../irepositories/icard'
+import { IMethodRepository } from '../irepositories/imethod'
 import { Listeners } from '@modules/core'
-import { CardEntity } from '../entities/card'
+import { MethodEntity } from '../entities/method'
 
-export class CardsUseCase {
-	private repository: ICardRepository
+export class MethodsUseCase {
+	private repository: IMethodRepository
 
-	constructor (repository: ICardRepository) {
+	constructor (repository: IMethodRepository) {
 		this.repository = repository
 	}
 
@@ -33,11 +33,11 @@ export class CardsUseCase {
 		return results.at(0) ?? null
 	}
 
-	async listenToOne (id: string, listener: Listeners<CardEntity>) {
+	async listenToOne (id: string, listener: Listeners<MethodEntity>) {
 		return await this.repository.listenToOne(id, listener)
 	}
 
-	async listen (listener: Listeners<CardEntity>) {
+	async listen (listener: Listeners<MethodEntity>) {
 		return await this.repository.listenToMany({ all: true }, listener, () => true)
 	}
 }

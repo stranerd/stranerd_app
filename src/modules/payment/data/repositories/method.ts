@@ -1,14 +1,14 @@
 import { Listeners, QueryParams } from '@modules/core'
-import { ICardRepository } from '../../domain/irepositories/icard'
-import { CardEntity } from '../../domain/entities/card'
-import { CardBaseDataSource } from '../datasources/cardBase'
-import { CardTransformer } from '../transformers/card'
+import { IMethodRepository } from '../../domain/irepositories/imethod'
+import { MethodEntity } from '../../domain/entities/method'
+import { MethodBaseDataSource } from '../datasources/methodBase'
+import { MethodTransformer } from '../transformers/method'
 
-export class CardRepository implements ICardRepository {
-	private dataSource: CardBaseDataSource
-	private transformer: CardTransformer
+export class MethodRepository implements IMethodRepository {
+	private dataSource: MethodBaseDataSource
+	private transformer: MethodTransformer
 
-	constructor (dataSource: CardBaseDataSource, transformer: CardTransformer) {
+	constructor (dataSource: MethodBaseDataSource, transformer: MethodTransformer) {
 		this.dataSource = dataSource
 		this.transformer = transformer
 	}
@@ -21,7 +21,7 @@ export class CardRepository implements ICardRepository {
 		}
 	}
 
-	async listenToOne (id: string, listener: Listeners<CardEntity>) {
+	async listenToOne (id: string, listener: Listeners<MethodEntity>) {
 		return this.dataSource.listenToOne(id, {
 			created: async (model) => {
 				await listener.created(this.transformer.fromJSON(model))
@@ -35,7 +35,7 @@ export class CardRepository implements ICardRepository {
 		})
 	}
 
-	async listenToMany (query: QueryParams, listener: Listeners<CardEntity>, matches: (entity: CardEntity) => boolean) {
+	async listenToMany (query: QueryParams, listener: Listeners<MethodEntity>, matches: (entity: MethodEntity) => boolean) {
 		return this.dataSource.listenToMany(query, {
 			created: async (model) => {
 				const entity = this.transformer.fromJSON(model)

@@ -1,8 +1,8 @@
-import { Bank, CardsUseCases, WalletAccountFactory, WalletsUseCases } from '@modules/payment'
+import { Bank, MethodsUseCases, WalletAccountFactory, WalletsUseCases } from '@modules/payment'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { onMounted, Ref, ref, watch } from 'vue'
 import { storage } from '@utils/storage'
 
@@ -14,7 +14,6 @@ export const saveRouteForAfterSub = async (route: string) => {
 
 export const useWallet = () => {
 	const { wallet } = useAuth()
-	const route = useRoute()
 	const router = useRouter()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
@@ -31,16 +30,16 @@ export const useWallet = () => {
 		if (!res) return
 		try {
 			await setLoading(true)
-			const primaryCard = await CardsUseCases.getPrimary()
-			if (primaryCard) {
+			const primaryMethod = await MethodsUseCases.getPrimary()
+			if (primaryMethod) {
 				wallet.value = await WalletsUseCases.subscribeToPlan(subscriptionId)
 				await setMessage('Subscribed successfully!')
 				const route = await storage.get(AFTER_SUB_ROUTE_KEY)
 				await storage.remove(AFTER_SUB_ROUTE_KEY)
 				if (route) await router.push(route)
 			} else {
-				await setError('You do not have a primary card. Add one!')
-				await router.push('/account/subscription/#cards')
+				await setError('You do not have a primary method. Add one!')
+				await router.push('/account/subscription/#methods')
 			}
 		} catch (error) {
 			await setError(error)
