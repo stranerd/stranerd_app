@@ -1,5 +1,12 @@
 <template>
 	<PageLoading v-if="loading" />
+	<div class="card-sm bg-highlight card-padding flex flex-col mb-8 items-center text-center gap-3">
+		<IonText class="font-bold text-lg">Personalize Stranerd to what you study.</IonText>
+		<IonText>We use this information to provide tools and resources that are relevant to you.</IonText>
+		<IonText>Course-specific resources, tailored search results, and recommendations on what to study next for each
+			of your courses.
+		</IonText>
+	</div>
 	<div v-if="tab === 0" class="flex flex-col gap-4 h-full">
 		<IonList class="text-sm">
 			<IonListHeader>

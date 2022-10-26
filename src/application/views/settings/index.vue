@@ -14,14 +14,14 @@
 				<span>{{ item.name }}</span>
 			</router-link>
 			<a class="card-sm card-padding !gap-4 flex items-center text-danger"
-				@click.prevent="deleteAccount">
-				<IonIcon :icon="trashBinOutline" />
-				<span>Delete your account</span>
-			</a>
-			<a class="card-sm card-padding !gap-4 flex items-center text-danger"
 				@click.prevent="signout">
 				<IonIcon :icon="logOutOutline" />
 				<span>Sign out</span>
+			</a>
+			<a class="card-sm card-padding !gap-4 flex items-center text-danger"
+				@click.prevent="deleteAccount">
+				<IonIcon :icon="trashBinOutline" />
+				<span>Delete your account</span>
 			</a>
 			<PageLoading v-if="signoutLoading || deleteAccountLoading" />
 		</div>

@@ -15,14 +15,14 @@
 				</IonText>
 				<Search class="flex-grow hidden lg:flex" />
 				<div class="flex gap-6 lg:gap-8 items-center">
-					<router-link class="lg:hidden" to="/search">
+					<router-link class="lg:hidden flex items-center" to="/search">
 						<IonIcon :icon="searchOutline" />
 					</router-link>
 					<NotificationIcon :key="user?.id" />
-					<router-link class="hidden lg:inline-block" to="/users/leaderboard">
+					<router-link class="hidden lg:inline-flex items-center" to="/users/leaderboard">
 						<IonIcon :icon="podiumOutline" />
 					</router-link>
-					<router-link class="hidden lg:inline-block" to="/settings">
+					<router-link class="hidden lg:inline-flex items-center" to="/settings">
 						<IonIcon :icon="settingsOutline" />
 					</router-link>
 					<Avatar :id="user?.id" :name="user?.bio.fullName" :size="36" :src="user?.bio.photo"
