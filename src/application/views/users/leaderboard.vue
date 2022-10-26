@@ -1,6 +1,6 @@
 <template>
 	<DefaultLayout>
-		<Leaderboard />
+		<Leaderboard class="showcase-flex" />
 	</DefaultLayout>
 </template>
 
@@ -13,7 +13,7 @@ export default defineComponent({
 	name: 'UsersLeaderboard',
 	components: { Leaderboard },
 	setup () {
-		useRouteMeta('LeaderBoard', { back: true })
+		useRouteMeta('Leaderboard', { back: true })
 	}
 })
 </script>

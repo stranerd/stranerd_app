@@ -3,18 +3,18 @@
 		<Search />
 		<div class="flex flex-col gap-4 border border-itemBg p-8">
 			<IonText class="font-bold text-2xl">Leaderboard</IonText>
-			<SideLeaderboard />
+			<Leaderboard />
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import SideLeaderboard from '@app/components/users/leaderboard/SideLeaderboard.vue'
+import Leaderboard from '@app/components/users/leaderboard/Leaderboard.vue'
 import Search from '@app/components/search/Search.vue'
 
 export default defineComponent({
 	name: 'RightSidebar',
-	components: { SideLeaderboard, Search }
+	components: { Leaderboard, Search }
 })
 </script>

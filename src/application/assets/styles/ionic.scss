@@ -106,7 +106,7 @@ ion-searchbar {
 	padding: 0 0.25rem !important;
 	height: 44px !important;
 	border-radius: 0.5rem !important;
-	outline: 1px solid $color-itemBg;
+	border: 1px solid $color-itemBg;
 	--color: inherit !important;
 	--placeholder-color: inherit !important;
 	--cancel-button-color: inherit !important;
@@ -123,11 +123,11 @@ ion-input, ion-textarea, ion-select {
 	--icon-color: transparent !important;
 	--placeholder-color: #{$color-secondaryText} !important;
 	--placeholder-opacity: 1;
-	outline: 1px solid $color-itemBg;
+	border: 1px solid $color-itemBg;
 
 	&:focus-within {
 		--icon-color: #{$color-info} !important;
-		outline-color: $color-info;
+		border-color: $color-info;
 	}
 }
 
@@ -160,7 +160,7 @@ ion-alert, ion-popover, ion-action-sheet {
 
 ion-input.valid, ion-textarea.valid, ion-select.valid {
 	--icon-color: #{$color-success} !important;
-	outline-color: $color-success;
+	border-color: $color-success;
 }
 
 ion-input.valid::after {
@@ -172,7 +172,7 @@ ion-input.valid::after {
 
 ion-input.invalid, ion-textarea.invalid, ion-select.invalid {
 	--icon-color: #{$color-danger} !important;
-	outline-color: $color-danger;
+	border-color: $color-danger;
 }
 
 ion-input.invalid::after {
