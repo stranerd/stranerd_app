@@ -29,7 +29,7 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 		})
 	}
 
-	async signinWithGoogle (data: { accessToken: string, idToken: string }, extras: AuthExtras) {
+	async signinWithGoogle (data: { idToken: string }, extras: AuthExtras) {
 		return await this.authClient.post<any, AfterAuthUser>('/identities/google', {
 			...data, referrer: extras.referrer
 		})

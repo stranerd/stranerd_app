@@ -17,7 +17,7 @@ export class AuthRepository implements IAuthRepository {
 		return await this.dataSource.signinWithEmail(email, password, extras)
 	}
 
-	async signinWithGoogle (data: { accessToken: string, idToken: string }, extras: AuthExtras) {
+	async signinWithGoogle (data: { idToken: string }, extras: AuthExtras) {
 		return await this.dataSource.signinWithGoogle(data, extras)
 	}
 

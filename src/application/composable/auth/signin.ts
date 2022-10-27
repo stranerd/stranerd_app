@@ -127,10 +127,10 @@ export const useGoogleSignin = () => {
 			await setLoading(true)
 			try {
 				const googleUser = await GoogleAuth.signIn()
-				const { accessToken, idToken } = googleUser.authentication
+				const { idToken } = googleUser.authentication
 				await GoogleAuth.signOut()
 				const user = await AuthUseCases.signinWithGoogle(
-					{ accessToken, idToken },
+					{ idToken },
 					{ referrer: await getReferrerId() })
 				await createSession(user, router)
 				await storage.remove('referrer')

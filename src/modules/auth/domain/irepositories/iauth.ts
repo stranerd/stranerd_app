@@ -3,7 +3,7 @@ import { AfterAuthUser, AuthDetails, AuthExtras, NewUser, PasswordUpdate, Profil
 export interface IAuthRepository {
 	getAuthUser: () => Promise<AuthDetails | null>
 	signinWithEmail: (email: string, password: string, extras: AuthExtras) => Promise<AfterAuthUser>
-	signinWithGoogle: (data: { accessToken: string, idToken: string }, extras: AuthExtras) => Promise<AfterAuthUser>
+	signinWithGoogle: (data: { idToken: string }, extras: AuthExtras) => Promise<AfterAuthUser>
 	signinWithApple: (data: { firstName: string | null, lastName: string | null, email: string | null, idToken: string }, extras: AuthExtras) => Promise<AfterAuthUser>
 	signupWithEmail: (data: NewUser, extras: AuthExtras) => Promise<AfterAuthUser>
 	sendVerificationEmail: (email: string) => Promise<void>
