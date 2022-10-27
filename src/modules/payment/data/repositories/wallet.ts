@@ -33,8 +33,8 @@ export class WalletRepository implements IWalletRepository {
 		})
 	}
 
-	async subscribeToPlan (subscriptionId: string) {
-		const model = await this.dataSource.subscribeToPlan(subscriptionId)
+	async subscribeToPlan (planId: string) {
+		const model = await this.dataSource.subscribeToPlan(planId)
 		return this.transformer.fromJSON(model)
 	}
 

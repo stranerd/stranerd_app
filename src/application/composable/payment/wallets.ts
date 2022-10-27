@@ -19,7 +19,7 @@ export const useWallet = () => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { message, setMessage } = useSuccessHandler()
 
-	const subscribeToPlan = async (subscriptionId: string) => {
+	const subscribeToPlan = async (planId: string) => {
 		await setError('')
 		if (wallet.value?.subscription.active) return
 		const res = await Alert({
@@ -32,7 +32,7 @@ export const useWallet = () => {
 			await setLoading(true)
 			const primaryMethod = await MethodsUseCases.getPrimary()
 			if (primaryMethod) {
-				wallet.value = await WalletsUseCases.subscribeToPlan(subscriptionId)
+				wallet.value = await WalletsUseCases.subscribeToPlan(planId)
 				await setMessage('Subscribed successfully!')
 				const route = await storage.get(AFTER_SUB_ROUTE_KEY)
 				await storage.remove(AFTER_SUB_ROUTE_KEY)

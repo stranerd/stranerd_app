@@ -22,8 +22,8 @@ export class WalletApiDataSource implements WalletBaseDataSource {
 		return listener
 	}
 
-	async subscribeToPlan (subscriptionId: string) {
-		return await this.stranerdClient.post<{ subscriptionId: string }, WalletFromModel>('/subscriptions', { subscriptionId })
+	async subscribeToPlan (planId: string) {
+		return await this.stranerdClient.post<{ planId: string }, WalletFromModel>('/subscriptions', { planId })
 	}
 
 	async cancelSubscription () {
