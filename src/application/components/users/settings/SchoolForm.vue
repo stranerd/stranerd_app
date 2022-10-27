@@ -1,13 +1,6 @@
 <template>
 	<PageLoading v-if="loading" />
-	<div class="card-sm bg-highlight card-padding flex flex-col mb-8 items-center text-center gap-3">
-		<IonText class="font-bold text-lg">Personalize Stranerd to what you study.</IonText>
-		<IonText>We use this information to provide tools and resources that are relevant to you.</IonText>
-		<IonText>Course-specific resources, tailored search results, and recommendations on what to study next for each
-			of your courses.
-		</IonText>
-	</div>
-	<div v-if="tab === 0" class="flex flex-col gap-4 h-full">
+	<div v-if="tab === 0" class="flex flex-col gap-4 flex-1">
 		<IonList class="text-sm">
 			<IonListHeader>
 				<IonLabel class="font-bold text-xl">Choose your academic level</IonLabel>
@@ -32,7 +25,7 @@
 			</IonButton>
 		</div>
 	</div>
-	<form v-if="tab === 1" class="flex flex-col gap-4 h-full" @submit.prevent="submit">
+	<form v-if="tab === 1" class="flex flex-col gap-4 flex-1" @submit.prevent="submit">
 		<template v-if="factory.isCollegeType">
 			<div class="flex flex-col items-start gap-2">
 				<IonLabel>What university are you in?</IonLabel>
@@ -107,7 +100,7 @@
 			</div>
 		</template>
 	</form>
-	<form v-if="tab === 2" class="flex flex-col gap-4 h-full" @submit.prevent="submit">
+	<form v-if="tab === 2" class="flex flex-col gap-4 flex-1" @submit.prevent="submit">
 		<div v-for="exam in factory.exams" :key="exam.institutionId"
 			class="flex flex-col gap-2">
 			<IonLabel class="font-semibold">
