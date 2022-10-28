@@ -21,6 +21,11 @@
 	--ion-color-primary-contrast: #{$color-primaryText};
 }
 
+ion-page {
+	background: $color-bodyBg;
+	color: $color-bodyText;
+}
+
 ion-back-button {
 	--icon-font-size: var(--icon-size);
 }
