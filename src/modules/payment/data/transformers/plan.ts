@@ -4,11 +4,11 @@ import { PlanEntity } from '../../domain/entities/plan'
 export class PlanTransformer {
 	fromJSON (model: PlanFromModel) {
 		const {
-			id, amount, currency, name, interval, active, data, features,
+			id, amount, currency, name, interval, active, data,
 			createdAt, updatedAt
 		} = model
 		return new PlanEntity({
-			id, amount, currency, name, interval, active, data, features,
+			id, amount, currency, name, interval, active, data,
 			createdAt, updatedAt
 		})
 	}

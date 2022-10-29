@@ -52,20 +52,11 @@ export type SubscriptionModel = {
 }
 
 export enum PlanDataType {
-	questions = 'questions'
+	questions = 'questions',
+	flashCards = 'flashCards'
 }
 
 export type PlanData = Record<PlanDataType, number>
-
-export type PlanFeatures = {
-	classes: boolean
-	flashCards: boolean
-	homework: boolean
-	connect: boolean
-	tests: boolean
-	solutions: boolean
-	manuals: boolean
-}
 
 export type FlutterwaveSecrets = {
 	publicKey: string

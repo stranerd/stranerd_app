@@ -97,6 +97,10 @@ export default defineComponent({
 		}
 	}
 
+	.ql-editor.ql-blank:before {
+		color: inherit;
+	}
+
 	.ql-toolbar {
 		display: none;
 		flex-wrap: nowrap;

@@ -3,12 +3,12 @@
 		<div class="flex page-padding flex-col gap-8">
 			<div class="flex flex-col gap-2">
 				<IonText class="font-bold text-lg">Assignment help</IonText>
-				<IonText class="text-secondaryText">Get expert answers to questions you need help</IonText>
+				<IonText class="text-secondaryText">Get answers to assignment questions from expert tutors</IonText>
 				<router-link class="w-full mt-2" to="/questions/create">
 					<IonButton class="btn-primary w-full">
 						<div class="flex w-full items-center gap-4">
 							<IonIcon :icon="helpCircleOutline" />
-							<span class="flex-1 text-left">Ask a question</span>
+							<span class="flex-1 text-left">Post your assignment</span>
 							<IonIcon :icon="arrowForwardOutline" />
 						</div>
 					</IonButton>

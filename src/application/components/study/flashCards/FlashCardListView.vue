@@ -1,7 +1,7 @@
 <template>
 	<div id="screen" class="flex flex-col gap-4">
 		<div
-			v-for="(card, index) in flashCard.set.concat(...flashCard.set, ...flashCard.set, ...flashCard.set, ...flashCard.set)"
+			v-for="(card, index) in flashCard.set"
 			:key="index" class="flex card-sm">
 			<DisplayHtml :html="card.question" class="w-2/5 px-4 py-3 border-right-line" />
 

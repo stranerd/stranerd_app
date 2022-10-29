@@ -200,13 +200,11 @@ ion-input.invalid::after {
 }
 
 .btn-padding {
-	--padding-top: 0.6rem;
-	--padding-bottom: 0.6rem;
+	--padding-top: 1rem;
+	--padding-bottom: 1rem;
 	--padding-start: 1rem;
 	--padding-end: 1rem;
 	@media (min-width: $lg) {
-		--padding-top: 1rem;
-		--padding-bottom: 1rem;
 		--padding-start: 1.5rem;
 		--padding-end: 1.5rem;
 	}
