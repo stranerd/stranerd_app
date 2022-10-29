@@ -6,7 +6,7 @@
 @import '@ionic/vue/css/structure.css';
 @import '@ionic/vue/css/typography.css';
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
 
 :root {
 	--ion-text-color: $color-bodyText;
@@ -188,8 +188,8 @@ ion-input.invalid::after {
 }
 
 .btn-padding {
-	--padding-top: 0.5rem;
-	--padding-bottom: 0.5rem;
+	--padding-top: 0.6rem;
+	--padding-bottom: 0.6rem;
 	--padding-start: 1rem;
 	--padding-end: 1rem;
 	@media (min-width: $lg) {

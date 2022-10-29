@@ -1,8 +1,12 @@
 <template>
 	<div class="showcase-flex">
+		<div class="flex flex-col">
+			<IonText class="font-bold text-lg">Explore questions</IonText>
+			<IonText class="text-secondaryText">All questions asked show up here, browse or answer</IonText>
+		</div>
 		<div class="flex lg:hidden">
 			<SelectTag v-model:value="tagId" :allowAll="true"
-				class="w-full !rounded-none !rounded-l-xl outline-0 border border-itemBg" />
+				class="w-full !rounded-none !rounded-l-xl border border-itemBg" />
 			<IonSelect v-model="answered"
 				class="w-full !rounded-none !rounded-r-xl"
 				interface="action-sheet"

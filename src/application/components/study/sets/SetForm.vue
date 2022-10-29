@@ -14,11 +14,9 @@
 		<div class="flex gap-4 w-full">
 			<IonButton class="btn-outline flex-grow w-full" @click="closeModal">
 				Cancel
-				<IonRippleEffect class="rounded-lg" />
 			</IonButton>
 			<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full flex-grow" type="submit">
 				<slot name="buttonText">Save Set</slot>
-				<IonRippleEffect class="rounded-lg" />
 			</IonButton>
 		</div>
 		<PageLoading v-if="loading" />

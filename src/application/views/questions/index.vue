@@ -35,7 +35,7 @@ export default defineComponent({
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		const { tagId, answeredChoices, answered } = useQuestionList()
-		useRouteMeta('All Questions', {})
+		useRouteMeta('Questions', {})
 		return { tagId, answeredChoices, answered }
 	}
 })

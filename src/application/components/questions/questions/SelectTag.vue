@@ -1,10 +1,10 @@
 <template>
-	<span class="w-full flex justify-between items-center gap-4 border border-itemBg px-4 py-3 rounded-lg"
+	<span class="w-full flex justify-between items-center gap-4 border border-itemBg px-4 py-3 rounded-xl"
 		@click="isOpen = true">
 		<span class="text-secondaryText">
 			{{ selectedTag?.title ?? (allowAll ? 'All subjects' : 'Select a subject') }}
 		</span>
-		<span class="text-xs text-disabled">&#x25BC;</span>
+		<IonIcon :icon="caretDownOutline" class="text-sm text-secondaryText opacity-50" />
 		<IonModal v-bind="{ ...modalProps, isOpen }" @didDismiss="isOpen = false">
 			<div class="h-full overflow-y-auto flex flex-col gap-8 modal-content p-4 lg:p-8">
 				<div class="flex justify-between">
@@ -42,7 +42,7 @@
 import { computed, defineComponent, ref } from 'vue'
 import { useTagList } from '@app/composable/interactions/tags'
 import { modalProps } from '@app/composable/core/modal'
-import { closeOutline } from 'ionicons/icons'
+import { caretDownOutline, closeOutline } from 'ionicons/icons'
 import { groupBy } from '@utils/commons'
 
 export default defineComponent({
@@ -75,7 +75,7 @@ export default defineComponent({
 		}
 		return {
 			groups, selectedTag, selectTag,
-			isOpen, modalProps, closeOutline
+			isOpen, modalProps, closeOutline, caretDownOutline
 		}
 	}
 })
