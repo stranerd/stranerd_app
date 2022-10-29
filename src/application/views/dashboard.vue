@@ -1,17 +1,17 @@
 <template>
 	<DefaultLayout>
-		<div class="flex flex-col gap-4 lg:gap-8">
-			<div class="showcase-flex">
-				<router-link v-for="{ title, sub, route, color } in [
-					{ title: 'Ask a question', route: '/questions/create', sub: 'Get expert answers on questions you need help with for homework and learning.', color: 'bg-primaryBg text-primaryText' },
-					{ title: 'Create a flashcard', route: '/study/flashCards/create', sub: 'Use flashcards to study for improved memorization to do better in test and exams.', color: 'bg-success text-contrast' },
-					{ title: 'Practice for tests and exams', route: '/study/', sub: 'Study with past questions and solutions, and test preps of your courses.', color: 'bg-royal text-contrast' },
-				]" :key="route" :class="color" :to="route" class="card-sm card-padding flex flex-col">
-					<span class="flex gap-2 text-lg font-bold">
-						<IonText>{{ title }}</IonText>
-						<IonIcon :icon="arrowForwardOutline" />
-					</span>
-					<IonText>{{ sub }}</IonText>
+		<div class="flex page-padding flex-col gap-8">
+			<div class="flex flex-col gap-2">
+				<IonText class="font-bold text-lg">Assignment help</IonText>
+				<IonText class="text-secondaryText">Get expert answers to questions you need help</IonText>
+				<router-link class="w-full mt-2" to="/questions/create">
+					<IonButton class="btn-primary w-full">
+						<div class="flex w-full items-center gap-4">
+							<IonIcon :icon="helpCircleOutline" />
+							<span class="flex-1 text-left">Ask a question</span>
+							<IonIcon :icon="arrowForwardOutline" />
+						</div>
+					</IonButton>
 				</router-link>
 			</div>
 			<QuestionsHorizontalList
@@ -53,7 +53,7 @@ import FlashCardsHorizontalList from '@app/components/study/flashCards/FlashCard
 import { useAuth } from '@app/composable/auth/auth'
 import { useUserQuestionList } from '@app/composable/users/users/questions'
 import { useUserFlashCardList } from '@app/composable/users/users/flashCards'
-import { arrowForwardOutline } from 'ionicons/icons'
+import { arrowForwardOutline, helpCircleOutline } from 'ionicons/icons'
 
 export default defineComponent({
 	name: 'Dashboard',
@@ -65,7 +65,7 @@ export default defineComponent({
 		const { questions, error: questionsError, loading: questionsLoading } = useUserQuestionList(id.value)
 		const { flashCards, error: flashCardsError, loading: flashCardsLoading } = useUserFlashCardList(id.value)
 		return {
-			arrowForwardOutline, questions, questionsError, questionsLoading,
+			helpCircleOutline, arrowForwardOutline, questions, questionsError, questionsLoading,
 			flashCards, flashCardsError, flashCardsLoading
 		}
 	}

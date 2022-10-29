@@ -1,10 +1,10 @@
 <template>
-	<div class="flex flex-col lg:gap-4">
-		<span class="flex gap-4 justify-between px-4 lg:px-0 gap-4">
+	<div class="flex flex-col gap-4">
+		<span class="flex justify-between gap-4">
 			<IonText class="font-bold">{{ title }}</IonText>
 			<router-link :to="route" class="text-info">view all</router-link>
 		</span>
-		<div class="showcase-flex !flex-row overflow-x-auto hide-scrollbar items-start">
+		<div class="showcase-flex !p-0 !flex-row overflow-x-auto hide-scrollbar items-start">
 			<div v-if="empty" class="flex flex-col card-sm min-w-full card-padding">
 				<slot name="empty">
 					<span>{{ empty }}</span>
