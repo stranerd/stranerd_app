@@ -2,9 +2,13 @@
 	<div>
 		<EmptyState v-if="!loading && !error && institutions.length === 0" info="No institutions found." />
 		<div class="flex flex-col gap-4">
-			<InstitutionListCard v-for="institution in exams" :key="institution.hash" :institution="institution" />
-			<div class="mb-4" />
-			<InstitutionListCard v-for="institution in schools" :key="institution.hash" :institution="institution" />
+			<template v-if="exams.length">
+				<InstitutionListCard v-for="institution in exams" :key="institution.hash" :institution="institution" />
+			</template>
+			<template v-if="schools.length">
+				<InstitutionListCard v-for="institution in schools" :key="institution.hash"
+					:institution="institution" />
+			</template>
 		</div>
 		<PageLoading v-if="loading" />
 	</div>

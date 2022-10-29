@@ -9,7 +9,7 @@
 				<router-link to="/admin/study/preps">Preps</router-link>
 				<router-link to="/admin/school/questions">Test Questions</router-link>
 			</div>
-			<div class="py-4">
+			<div class="page-padding">
 				<slot />
 			</div>
 		</div>

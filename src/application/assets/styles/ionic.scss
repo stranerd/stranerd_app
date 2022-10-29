@@ -6,7 +6,7 @@
 @import '@ionic/vue/css/structure.css';
 @import '@ionic/vue/css/typography.css';
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap');
 
 :root {
 	--ion-text-color: #{$color-bodyText};
@@ -200,10 +200,10 @@ ion-input.invalid::after {
 }
 
 .btn-padding {
-	--padding-top: 1rem;
-	--padding-bottom: 1rem;
-	--padding-start: 1rem;
-	--padding-end: 1rem;
+	--padding-top: 1.25rem;
+	--padding-bottom: 1.25rem;
+	--padding-start: 1.25rem;
+	--padding-end: 1.25rem;
 	@media (min-width: $lg) {
 		--padding-start: 1.5rem;
 		--padding-end: 1.5rem;
@@ -213,7 +213,7 @@ ion-input.invalid::after {
 ion-button {
 	--box-shadow: none;
 	--border-radius: 0.5rem;
-	font-weight: 500;
+	font-weight: 600;
 	line-height: 1em;
 	text-transform: capitalize;
 	letter-spacing: 0.02rem;

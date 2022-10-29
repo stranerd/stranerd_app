@@ -1,5 +1,5 @@
 <template>
-	<div class="showcase-flex px-4">
+	<div class="showcase-flex !p-0">
 		<IonButton class="btn-primary w-full" @click="openCreateTagModal(null)">Create Tag</IonButton>
 		<BlockLoading v-if="loading" />
 		<PageLoading v-if="deleteLoading" />

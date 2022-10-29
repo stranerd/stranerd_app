@@ -4,14 +4,14 @@
 			<IonText class="text-xl font-semibold">
 				{{ hasPassword ? 'Update Password' : 'Add Password' }}
 			</IonText>
-			<IonInput v-if="hasPassword" v-model="factory.oldPassword" class="w-full font-medium"
+			<IonInput v-if="hasPassword" v-model="factory.oldPassword" class="w-full"
 				placeholder="Confirm Old Password"
 				type="password" />
 			<div class="flex lg:flex-row gap-4 flex-col w-full">
-				<IonInput v-model="factory.password" class="w-full font-medium"
+				<IonInput v-model="factory.password" class="w-full"
 					placeholder="Enter New Password"
 					type="password" />
-				<IonInput v-model="factory.cPassword" class="w-full font-medium"
+				<IonInput v-model="factory.cPassword" class="w-full"
 					placeholder="Confirm New Password"
 					type="password" />
 			</div>

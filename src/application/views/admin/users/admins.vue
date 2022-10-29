@@ -2,7 +2,7 @@
 	<AdminWrapper>
 		<div>
 			<div class="mb-4">
-				<form class="flex justify-between items-center mb-4 px-4 md:px-0" @submit.prevent="search">
+				<form class="flex justify-between items-center mb-4" @submit.prevent="search">
 					<IonInput v-model="detail" class="w-full"
 						placeholder="Search users" />
 				</form>

@@ -38,7 +38,7 @@
 			<div class="flex flex-col">
 				<details>
 					<summary class=" border-top-line py-6 px-4 flex ">
-						<p class="text-base font-medium text-gray300">
+						<p class="text-base font-semibold text-gray300">
 							Solutions
 						</p>
 						<IonIcon :icon="chevronDownOutline" class="ml-2" />
