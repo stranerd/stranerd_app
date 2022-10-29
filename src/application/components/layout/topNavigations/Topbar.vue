@@ -57,17 +57,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 ion-toolbar {
-	--background: #{$color-bodyBg};
-	--color: #{$color-bodyText};
-	--box-shadow: none;
-	--padding-start: 0;
-	--padding-end: 0;
 	@media (min-width: $lg) {
 		border: $border;
 	}
-}
-
-ion-header {
-	--box-shadow: none;
 }
 </style>

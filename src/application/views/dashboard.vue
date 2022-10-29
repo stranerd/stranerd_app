@@ -60,7 +60,7 @@ export default defineComponent({
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	components: { QuestionsHorizontalList, FlashCardsHorizontalList },
 	setup () {
-		useRouteMeta('Home', {})
+		useRouteMeta('Stranerd', {})
 		const { id } = useAuth()
 		const { questions, error: questionsError, loading: questionsLoading } = useUserQuestionList(id.value)
 		const { flashCards, error: flashCardsError, loading: flashCardsLoading } = useUserFlashCardList(id.value)

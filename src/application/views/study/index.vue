@@ -26,10 +26,10 @@
 						{ icon: searchOutline, title: 'Explore flashcards', sub: 'Find flashcards created by others', route: '/study/flashCards' },
 						{ icon: documentTextOutline, title: 'Study with past questions', sub: '', route: '' },
 						{ icon: readerOutline, title: 'Access textbook solutions', sub: '', route: '' }
-					]" :key="title" :class="{'opacity-75': !route}" :to="route"
+					]" :key="title" :class="{'opacity-50': !route}" :to="route"
 					class="flex items-center card-padding !gap-4 card-sm">
 					<span
-						class="rounded-full w-12 aspect-square flex items-center justify-center bg-secondaryText text-itemBg">
+						class="rounded-full w-12 h-12 flex items-center justify-center bg-secondaryText text-itemBg">
 						<IonIcon :icon="icon" />
 					</span>
 					<span class="flex flex-col">

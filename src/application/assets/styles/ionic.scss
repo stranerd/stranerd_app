@@ -9,9 +9,9 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
 
 :root {
-	--ion-text-color: $color-bodyText;
-	--ion-color-step-850: $color-bodyText;
-	--ion-background-color: $color-bodyBg;
+	--ion-text-color: #{$color-bodyText};
+	--ion-color-step-850: #{$color-bodyText};
+	--ion-background-color: #{$color-bodyBg};
 	--ion-font-family: 'DM Sans', sans-serif;
 	--icon-size: 1.3em;
 	font-family: 'DM Sans', sans-serif;
@@ -24,6 +24,18 @@
 ion-page {
 	background: $color-bodyBg;
 	color: $color-bodyText;
+}
+
+ion-toolbar {
+	--background: #{$color-bodyBg};
+	--color: #{$color-bodyText};
+	--box-shadow: none;
+	--padding-start: 0;
+	--padding-end: 0;
+}
+
+ion-header {
+	--box-shadow: none;
 }
 
 ion-back-button {

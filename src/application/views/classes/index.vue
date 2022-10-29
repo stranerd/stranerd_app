@@ -1,6 +1,6 @@
 <template>
 	<DefaultLayout>
-		<div class="flex page-padding flex-col gap-8 opacity-75">
+		<div class="flex page-padding flex-col gap-8 opacity-50">
 			<div class="flex flex-col gap-2">
 				<IonText class="font-bold text-lg">Make your own classes</IonText>
 				<IonText class="text-secondaryText">Bring students together to share sets, files and info</IonText>
