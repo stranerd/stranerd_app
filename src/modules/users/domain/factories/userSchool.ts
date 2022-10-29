@@ -24,7 +24,6 @@ type Keys = {
 	institutionId: string
 	facultyId: string
 	departmentId: string
-	tagId: string
 	exams: Exam[]
 }
 
@@ -41,10 +40,6 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 			rules: [isString, isLongerThanX(0)]
 		},
 		departmentId: {
-			required: () => this.isCollegeType,
-			rules: [isString, isLongerThanX(0)]
-		},
-		tagId: {
 			required: () => this.isCollegeType,
 			rules: [isString, isLongerThanX(0)]
 		},
@@ -68,7 +63,7 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 
 	constructor () {
 		super({
-			type: UserSchoolType.college, institutionId: '', facultyId: '', departmentId: '', tagId: '', exams: []
+			type: UserSchoolType.college, institutionId: '', facultyId: '', departmentId: '', exams: []
 		})
 	}
 
@@ -103,14 +98,8 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 		return this.values.departmentId
 	}
 
-	get departmentAndTag () {
-		return [this.values.departmentId, this.values.tagId].join('---')
-	}
-
-	set departmentAndTag (value: string) {
-		const [departmentId, tagId] = value.split('---')
-		this.set('departmentId', departmentId)
-		this.set('tagId', tagId)
+	set departmentId (value: string) {
+		this.set('departmentId', value)
 	}
 
 	get exams () {
@@ -182,7 +171,7 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 		if (entity.school.type === UserSchoolType.college) {
 			this.institutionId = entity.school.institutionId
 			this.facultyId = entity.school.facultyId
-			this.departmentAndTag = [entity.school.departmentId, entity.school.tagId].join('---')
+			this.departmentId = entity.school.departmentId
 		} else {
 			this.set('exams', entity.school.exams)
 			this.insts = entity.school.exams.map((e) => e.institutionId)
@@ -191,9 +180,9 @@ export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, K
 
 	toModel = async () => {
 		if (this.valid) {
-			const { type, institutionId, facultyId, departmentId, tagId, exams } = this.validValues
+			const { type, institutionId, facultyId, departmentId, exams } = this.validValues
 			return (this.isCollegeType ? {
-				type, institutionId, facultyId, departmentId, tagId
+				type, institutionId, facultyId, departmentId
 			} : { type, exams }) as UserSchoolData
 		} else {
 			throw new Error('Validation errors')

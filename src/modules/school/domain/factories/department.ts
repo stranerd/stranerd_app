@@ -13,7 +13,7 @@ export class DepartmentFactory extends BaseFactory<DepartmentEntity, DepartmentT
 	reserved = []
 
 	constructor () {
-		super({ name: '', facultyId: '', tagId: '' })
+		super({ name: '', facultyId: '' })
 	}
 
 	get name () {
@@ -32,24 +32,15 @@ export class DepartmentFactory extends BaseFactory<DepartmentEntity, DepartmentT
 		this.set('facultyId', value)
 	}
 
-	get tagId () {
-		return this.values.tagId
-	}
-
-	set tagId (value: string) {
-		this.set('tagId', value)
-	}
-
 	loadEntity = (entity: DepartmentEntity) => {
 		this.name = entity.name
 		this.facultyId = entity.facultyId
-		this.tagId = entity.tagId
 	}
 
 	toModel = async () => {
 		if (this.valid) {
-			const { name, facultyId, tagId } = this.validValues
-			return { name, facultyId, tagId }
+			const { name, facultyId } = this.validValues
+			return { name, facultyId }
 		} else {
 			throw new Error('Validation errors')
 		}

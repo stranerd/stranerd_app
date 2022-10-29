@@ -39,23 +39,6 @@
 					</IonAccordion>
 				</IonAccordionGroup>
 			</IonAccordion>
-			<IonAccordion key="departments">
-				<IonItem slot="header" class="text-base">
-					<IonLabel class="capitalize my-4">Departments Tags</IonLabel>
-				</IonItem>
-				<IonList slot="content" class="ml-4">
-					<IonItem v-for="tag in departmentTags" :key="tag.hash" class="text-sm">
-						<IonLabel class="w-full">{{ tag.title }}</IonLabel>
-						<span class="flex gap-4 justify-end">
-							<IonIcon :icon="pencilOutline" class="text-warning" @click="openTagEditModal(tag)" />
-							<IonIcon :icon="trashBinOutline" class="text-danger" @click="deleteTag(tag)" />
-						</span>
-					</IonItem>
-					<IonItem v-if="!departmentTags.length" class="text-sm">
-						<IonLabel>No department tags</IonLabel>
-					</IonItem>
-				</IonList>
-			</IonAccordion>
 		</IonAccordionGroup>
 	</div>
 </template>
@@ -69,7 +52,7 @@ import { addOutline, pencilOutline, trashBinOutline } from 'ionicons/icons'
 export default defineComponent({
 	name: 'TagsList',
 	setup () {
-		const { tags, questionTags, departmentTags, error, loading } = useTagList()
+		const { tags, questionTags, error, loading } = useTagList()
 		const { deleteTag, loading: deleteLoading, error: deleteError } = useDeleteTag()
 		const groups = computed(() => {
 			const grouped = groupBy(questionTags.value, (tag) => tag.parent ?? '')
@@ -79,7 +62,7 @@ export default defineComponent({
 			}))
 		})
 		return {
-			tags, groups, departmentTags, error, loading, openCreateTagModal, openTagEditModal,
+			tags, groups, error, loading, openCreateTagModal, openTagEditModal,
 			deleteTag, deleteLoading, deleteError,
 			addOutline, pencilOutline, trashBinOutline
 		}

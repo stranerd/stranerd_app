@@ -23,7 +23,6 @@ export type CollegeType = {
 	institutionId: string
 	facultyId: string
 	departmentId: string
-	tagId: string
 }
 
 export type UserSchoolData = AspirantType | CollegeType
