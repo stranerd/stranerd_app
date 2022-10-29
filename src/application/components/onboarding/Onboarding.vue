@@ -58,7 +58,7 @@ export default defineComponent({
 			},
 			{
 				title: 'Study with flashcards', image: require('@app/assets/images/onboarding/3.png'),
-				description: 'Share tough questions you come across in homework or while studying to get expert answers to them.'
+				description: 'Create or find flashcards to study with. The number one study material for improving memorization.'
 			},
 			{
 				title: 'Rank on leaderboard', image: require('@app/assets/images/onboarding/4.png'),

@@ -13,8 +13,9 @@
 	--clr-secondaryText: rgb(73, 76, 88);
 	--clr-disabled: rgb(197, 201, 217);
 	--clr-outlineHover: rgb(182, 217, 255);
-	--clr-contrast: rgb(255, 255, 255);
 	--clr-highlight: rgba(241, 248, 255);
+	// Same for light & dark theme
+	--clr-contrast: rgb(255, 255, 255);
 	--clr-success: rgb(7, 177, 177);
 	--clr-danger: rgb(255, 50, 50);
 	--clr-info: rgb(33, 143, 223);
@@ -22,8 +23,7 @@
 	--clr-royal: rgb(128, 99, 211);
 }
 
-$theme: any;
-@media (prefers-color-scheme: $theme) {
+@media (prefers-color-scheme: dark) {
 	:root {
 		--clr-primaryBg: rgb(255, 255, 255);
 		--clr-primaryText: rgb(30, 34, 48);
@@ -34,13 +34,7 @@ $theme: any;
 		--clr-secondaryText: rgb(241, 243, 247);
 		--clr-disabled: rgb(49, 49, 66);
 		--clr-outlineHover: rgb(24, 28, 39);
-		--clr-contrast: rgb(255, 255, 255);
 		--clr-highlight: rgba(14, 14, 14);
-		--clr-success: rgb(7, 177, 177);
-		--clr-danger: rgb(255, 50, 50);
-		--clr-info: rgb(33, 143, 223);
-		--clr-warning: rgb(255, 136, 0);
-		--clr-royal: rgb(128, 99, 211);
 	}
 }
 

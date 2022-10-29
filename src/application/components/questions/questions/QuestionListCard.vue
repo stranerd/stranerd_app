@@ -1,9 +1,20 @@
 <template>
 	<router-link :to="`/questions/${question.id}`" class="flex flex-col card-sm card-padding">
-		<div class="flex gap-1 items-center text-sm text-secondaryText">
-			<InteractionTag :tagId="question.tagId" class="font-bold" />
-			<IonIcon :icon="ellipse" class="dot" />
-			<span>{{ formatTime(question.createdAt) }}</span>
+		<div class="flex justify-between gap-2 items-center">
+			<Avatar :id="question.user.id" :size="36" :src="question.user.bio.photo" />
+			<div class="flex flex-col truncate">
+				<UserName :isTutor="question.user.roles.isStranerdTutor" :name="question.user.bio.fullName"
+					class="font-semibold text-secondaryText" />
+				<div class="flex gap-2 items-center text-secondaryText text-sm">
+					<InteractionTag :tagId="question.tagId" class="truncate" />
+					<IonIcon :icon="ellipse" class="dot" />
+					<span>{{ formatTime(question.createdAt) }}</span>
+				</div>
+			</div>
+			<div class="flex-1" />
+			<IonButton v-if="showAnswerButton" class="btn-primary" @click="openAnswerModal(question, $router)">
+				Answer
+			</IonButton>
 		</div>
 		<DisplayHtml :html="question.trimmedBody" />
 

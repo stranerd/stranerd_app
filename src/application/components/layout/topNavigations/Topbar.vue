@@ -5,10 +5,18 @@
 				<router-link class="hidden lg:inline-block" to="/">
 					<Logo />
 				</router-link>
-				<span v-if="$route.meta.back" class="flex gap-0.5 lg:hidden">
+				<span class="flex gap-0.5 lg:hidden">
 					<span />
-					<IonBackButton :icon="arrowBackOutline" defaultHref="/dashboard" mode="ios"
+					<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline" defaultHref="/dashboard" mode="ios"
 						text="" />
+					<router-link v-else-if="user" class="flex items-center" to="/users/leaderboard">
+						<span class="h-8 w-8 p-1 bg-warning rounded-full flex items-center justify-center">
+							<IonIcon :icon="trophyOutline" />
+						</span>
+						<span class="rounded-r-full px-4 -ml-2 py-0.5 bg-[#FF880022]">
+							{{ user.account.rankings.daily }}
+						</span>
+					</router-link>
 				</span>
 				<IonText class="font-bold text-xl lg:hidden truncate max-w-[240px] capitalize">
 					{{ $route.meta.routeName ?? '' }}
@@ -19,9 +27,6 @@
 						<IonIcon :icon="searchOutline" />
 					</router-link>
 					<NotificationIcon :key="user?.id" />
-					<router-link class="hidden lg:inline-flex items-center" to="/users/leaderboard">
-						<IonIcon :icon="podiumOutline" />
-					</router-link>
 					<router-link class="hidden lg:inline-flex items-center" to="/settings">
 						<IonIcon :icon="settingsOutline" />
 					</router-link>
@@ -35,7 +40,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { arrowBackOutline, podiumOutline, searchOutline, settingsOutline } from 'ionicons/icons'
+import { arrowBackOutline, searchOutline, settingsOutline, trophyOutline } from 'ionicons/icons'
 import NotificationIcon from '@app/components/users/notifications/NotificationIcon.vue'
 import Search from '@app/components/search/Search.vue'
 import { useAuth } from '@app/composable/auth/auth'
@@ -45,7 +50,7 @@ export default defineComponent({
 	components: { NotificationIcon, Search },
 	setup () {
 		const { user } = useAuth()
-		return { user, arrowBackOutline, searchOutline, settingsOutline, podiumOutline }
+		return { user, arrowBackOutline, searchOutline, settingsOutline, trophyOutline }
 	}
 })
 </script>
