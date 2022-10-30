@@ -37,10 +37,10 @@
 
 			<div class="flex flex-col">
 				<details>
-					<summary class=" border-top-line py-6 px-4 flex ">
-						<p class="text-base font-semibold text-gray300">
+					<summary class="flex items-center border-top-line py-6 px-4">
+						<a class="text-base font-semibold">
 							Solutions
-						</p>
+						</a>
 						<IonIcon :icon="chevronDownOutline" class="ml-2" />
 					</summary>
 

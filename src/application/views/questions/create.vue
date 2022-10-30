@@ -1,7 +1,7 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
 		<div class="flex flex-col gap-4 page-padding h-full lg:h-auto">
-			<span class="card p-4 bg-highlight text-center block">
+			<span class="card-sm p-4 bg-highlight text-center block">
 				You have <span class="font-bold">{{
 					wallet?.subscription.data.questions
 				}} questions</span> to ask

@@ -2,7 +2,7 @@
 	<footer class="bg-primaryBg text-primaryText p-4 py-24 w-full">
 		<div class="container mx-auto flex md:justify-around flex-wrap gap-5">
 			<div class="flex flex-col items-start w-[45%] md:w-auto mt-12 md:mt-0 gap-8 pc">
-				<img alt="logo" class="h-10" src="/images/icon_white.svg">
+				<Logo :showName="true" :size="2.5" />
 				<div class="flex items-center gap-6">
 					<a href="https://www.instagram.com/stranerdapp/" rel="noopener noreferrer" target="_blank">
 						<IonIcon :icon="logoInstagram" />
@@ -40,7 +40,7 @@
 			</div>
 
 			<div class="flex flex-col items-start w-full md:w-auto mt-12 md:mt-0 gap-8 mobile">
-				<img alt="logo" class="h-10" src="/images/icon_white.svg">
+				<Logo :showName="true" :size="2.5" />
 				<div class="flex items-center gap-6">
 					<a href="https://www.instagram.com/stranerdapp/" rel="noopener noreferrer" target="_blank">
 						<IonIcon :icon="logoInstagram" />

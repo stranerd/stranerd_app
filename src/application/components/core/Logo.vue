@@ -1,8 +1,8 @@
 <template>
 	<div class="flex items-center gap-2">
 		<img :style="`width: ${size}rem;`" alt="Stranerd" src="/images/icon.png">
-		<span v-if="showName" :style="`font-size: clamp(0.5rem, ${size*0.75}rem, 3rem)`"
-			class="font-extrabold">Stranerd</span>
+		<span v-if="showName" :style="`font-size: clamp(0.5rem, ${size*0.8}rem, 3rem)`"
+			class="font-extrabold">&nbsp;Stranerd</span>
 	</div>
 </template>
 

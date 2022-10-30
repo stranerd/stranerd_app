@@ -7,7 +7,7 @@
 				An expert tutor will answer this question soon.<br />
 				Students can also answer this question.
 			</IonText>
-			<span v-if="wallet" class="card p-4 bg-highlight text-center w-full mb-4">
+			<span v-if="wallet" class="card-sm p-4 bg-highlight text-center w-full mb-4">
 				You have <span class="font-bold">{{
 					wallet.subscription.data.questions
 				}} questions</span> left

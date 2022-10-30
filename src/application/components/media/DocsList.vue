@@ -3,7 +3,7 @@
 		<div v-for="{ key, values } in media" :key="key" class="showcase-flex">
 			<IonText class="font-bold lg:!p-0 card-padding border-bottom-line">{{ key }}</IonText>
 			<div v-for="media in values" :key="media.hash"
-				class="card card-padding flex items-center border-bottom-line"
+				class="card-sm card-padding flex items-center border-bottom-line"
 				@click="openViewFile(media.media, media.path, $router)">
 				<span class="text-3xl">
 					<IonIcon :icon="documentOutline" />
