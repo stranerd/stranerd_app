@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
 	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg py-12 md:py-28">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
@@ -42,8 +42,51 @@
 			</div>
 		</div>
 	</div>
-</template>
+</template> -->
 
+<template>
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-primaryText py-4 md:py-8">
+		<div
+			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
+			<div
+				class="shadow  w-full max-w-[576px] md:h-[576px] h-[320px] rounded-3xl md:p-8 p-5 flex flex-col justify-between">
+				<div class="flex flex-col gap-5 justify-start items-start">
+					<img alt="" class="object-contain h-5 md:h-9" src="@app/assets/images/New/comment.svg">
+					<p class="text-sm md:text-2xl leading-[1.3]">
+						{{ testimonies[tab].text }}
+					</p>
+				</div>
+
+				<div class="flex w-full justify-between">
+					<div class="flex gap-3">
+						<img class=" md:w-16 md:h-16 rounded-full" src="/images/avatars/user_profile.svg">
+						<p class="flex flex-col">
+							<span class="font-bold md:text-lg text-sm">{{ testimonies[tab].author }}</span>
+							<span class="md:text-xl text-sm">{{ testimonies[tab].university }}</span>
+						</p>
+					</div>
+
+					<span class="flex gap-3">
+						<IonIcon :icon="chevronBackCircleOutline" class="rounded-full  text-2xl md:text-4xl"
+							@click="prev" />
+						<IonIcon :icon="chevronForwardCircleOutline" class="rounded-full  text-2xl md:text-4xl"
+							@click="next" />
+					</span>
+				</div>
+			</div>
+
+			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl text-bodyText">
+				<h2 class="lg:text-4xl text-xl font-bold lg:leading-[62px]">What students say</h2>
+				<p class="lg:text-lg text-sm">
+					Feedback from students about the impact Stranerd has on their academic activities and educational journey.
+				</p>
+				<router-link class="btn bg-primaryBg text-primaryText " to="/auth/signin">
+					Join today
+				</router-link>
+			</div>
+		</div>
+	</div>
+</template>
 <script lang="ts" setup>
 import { chevronBackCircleOutline, chevronForwardCircleOutline } from 'ionicons/icons'
 import { ref } from 'vue'
@@ -91,5 +134,9 @@ const testimonies = [
 <style scoped>
 .shadow {
 	box-shadow: 0px 0px 32px rgba(22, 37, 101, 0.05);
+}
+
+a {
+	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs
 }
 </style>

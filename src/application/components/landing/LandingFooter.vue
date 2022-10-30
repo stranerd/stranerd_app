@@ -1,5 +1,5 @@
 <template>
-	<footer class="bg-primaryBg text-primaryText p-4 py-24 w-full">
+	<footer class="bg-primaryText text-primaryBg p-4 py-24 w-full">
 		<div class="container mx-auto flex md:justify-around flex-wrap gap-5">
 			<div class="flex flex-col items-start w-[45%] md:w-auto mt-12 md:mt-0 gap-8 pc">
 				<Logo :showName="true" :size="2.5" />
