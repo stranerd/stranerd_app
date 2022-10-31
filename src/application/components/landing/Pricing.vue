@@ -21,7 +21,7 @@
 
 
 <template>
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-primaryBg py-12 md:py-28">
+	<div class="w-full h-auto flex bg-primaryBg py-12">
 		<div class="container mx-auto text-primaryText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
 			<div class="bg-primaryText rounded flex flex-col md:flex-row  w-auto lg:w-1/2">
 				<div class="text-left p-6 border-b md:w-1/2 md:border-b-0 md:border-r">
@@ -52,7 +52,7 @@
 							<p class="text-sm md:text-lg text-bodyText font-bold">Flashcards</p>
 						</div>
 						<div class="flex items-center gap-4">
-							<IonIcon :icon="checkmarkOutline" class="text-danger" />
+							<IonIcon :icon="checkmarkOutline" class="text-success" />
 							<p class="text-sm md:text-lg text-bodyText font-bold">Assignment help</p>
 						</div>
 					</div>

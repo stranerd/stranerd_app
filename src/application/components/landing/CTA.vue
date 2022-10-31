@@ -22,9 +22,9 @@
 </template> -->
 
 <template>
-	<div class="hero w-full lg:h-[696px] md:h-[496px] h-auto py-12 relative" >
+	<div class="hero w-full lg:h-[696px] md:h-[496px] h-auto px-6 py-12 relative" >
 		<div class="overlay absolute top-0 left-0 w-full h-full bg-[rgba(5,9,13,.500)] "></div>
-		<div class="mx-auto lg:max-w-[1200px] text-bodyText p-6 relative">
+		<div class="mx-auto  text-bodyText p-6 relative">
 			<article class="md:max-w-[560px] ">
 				<h1 class=" w-full md:text-5xl text-3xl font-bold text-primaryText">
 					We make studying easier and enjoyable.
