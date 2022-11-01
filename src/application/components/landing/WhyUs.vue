@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg py-12 md:py-28 relative z-[-1]">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg py-12 md:py-28 relative">
 		<img alt="hero" class="absolute md:-left-20 -left-40 -top-80" src="@/assets/images/landing/orange.svg">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center relative">
