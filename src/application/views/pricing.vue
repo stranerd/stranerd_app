@@ -4,7 +4,7 @@
 			<div class="overlay absolute top-0 left-0 w-full h-full bg-[rgba(5,9,13,.500)] "></div>
 			<h1 class="relative text-2xl md:text-5xl font-bold">What we offer</h1>
 		</div>
-		<Pricing />
+		<Pricing/>
 	</HomeLayout>
 </template>
 

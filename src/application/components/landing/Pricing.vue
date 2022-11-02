@@ -23,7 +23,7 @@
 <template>
 	<div class="w-full h-auto flex bg-primaryBg py-12">
 		<div class="container mx-auto text-primaryText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
-			<div class="bg-primaryText rounded flex flex-col md:flex-row  w-auto lg:w-1/2">
+			<div class="bg-primaryText rounded flex flex-col md:flex-row  w-auto md:w-[500px] lg:w-1/2">
 				<div class="text-left p-6 border-b md:w-1/2 md:border-b-0 md:border-r">
 					<p class="text-sm md:text-xl text-secondaryText font-bold">Basic</p>
 					<h3 class="text-xl md:text-2xl text-bodyText font-bold">Free</h3>
@@ -70,7 +70,6 @@
 					Learn more
 				</router-link>
 			</div>
-
 			<!-- <img alt="hero" class="w-auto" src="@/assets/images/landing/connect.png"> -->
 		</div>
 	</div>

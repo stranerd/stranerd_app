@@ -1,6 +1,7 @@
 <template>
-	<div>
+	<div class="bg-primaryText md:p-6">
 		<Accordion v-for="faq in faqs" :key="faq.answer" :faq="faq" />
+		<router-link to="/" class="mx-auto text-primaryBg my-6 block w-fit">Load more</router-link>
 	</div>
 </template>
 

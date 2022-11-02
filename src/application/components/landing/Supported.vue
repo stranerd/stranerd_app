@@ -56,23 +56,29 @@
 				</p>
 			</div>
 			<div class="flex md:hidden flex-row overflow-auto w-auto lg:w-1/2 gap-6">
-				<div v-for="partner in partners" :key="partner.id"
-					class="rounded-lg h-[148px] w-[268px] flex-none flex items-center justify-center bg-primaryText">
-					<img :src="partner.img" alt="">
-				</div>
+				<Vue3Marquee>
+					<div v-for="partner in partners" :key="partner.id"
+						class="rounded-lg h-[148px] w-[268px] flex-none flex items-center justify-center bg-primaryText mx-3">
+						<img :src="partner.img" alt="">
+					</div>
+				</Vue3Marquee>
 			</div>
 
-			<div class="hidden md:flex flex-row flex-wrap w-auto lg:w-1/2 gap-6">
+			<div class="hidden md:flex flex-row overflow-auto flex-wrap w-auto h-[400px] lg:w-1/2 gap-6">
+				<!-- <Vue3Marquee> -->
 				<div v-for="partner in partners" :key="partner.id"
 					class="rounded-lg h-[148px] w-[268px] flex-none flex items-center justify-center bg-primaryText">
 					<img :src="partner.img" alt=""/>
 				</div>
+				<!-- </Vue3Marquee> -->
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang=ts>
+import { Vue3Marquee } from 'vue3-marquee'
+import 'vue3-marquee/dist/style.css'
 const partners = [
 	{ img: new URL('@/assets/images/newLanding/partner/partner_unilag.svg', import.meta.url).href, id: 1 },
 	{ img: new URL('@/assets/images/newLanding/partner/partner_village_capital.svg', import.meta.url).href, id: 2 },
