@@ -1,7 +1,7 @@
 <template>
-	<CTA />
-	<!-- <WhyUs /> -->
-	<!-- <Aim /> -->
+	<CTA class="z-[1]" />
+	<WhyUs />
+	<Aim />
 	<Products />
 	<Pricing />
 	<App />
@@ -17,5 +17,4 @@ import Products from '@app/components/landing/Products.vue'
 import Pricing from '@root/application/components/landing/Pricing.vue'
 import Testimonial from '@app/components/landing/Testimonial.vue'
 import App from '@app/components/landing/App.vue'
-import Supported from '@app/components/landing/Supported.vue'
-</script>
+import Supported from '@app/components/landing/Supported.vue'</script>

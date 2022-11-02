@@ -7,7 +7,7 @@
 		</div>
 
 		<div class="flex flex-col gap-2">
-			<IonLabel class="text-lg">Cards</IonLabel>
+			<IonLabel class="text-lg">Cards ({{ factory.questions.length }})</IonLabel>
 			<IonReorderGroup class="flex flex-col gap-4" disabled="true">
 				<IonReorder v-for="(card, index) in factory.questions" :key="index"
 					class="flex flex-col p-4 gap-2 rounded-lg border border-itemBg">

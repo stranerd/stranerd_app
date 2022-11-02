@@ -1,12 +1,13 @@
 <!-- <template>
 	<div class="w-full lg:h-[696px] h-auto flex bg-primaryBg py-12 relative">
 		<div class="container mx-auto text-primaryText p-6 flex justify-start items-center">
-			<article class="md:max-w-[560px] ">
+			<article class="md:max-w-[560px]">
 				<h1 class=" w-full md:text-6xl text-2xl font-bold pr-24 md:pr-0">
 					All your academic needs in one place
 				</h1>
 				<p class="mt-4 mb-8 text-xs md:text-lg">
-					Get access to expert tutors, homework help, test and exam help, and solution manuals tailored to your courses,
+					Get access to expert tutors, homework help, test and exam help, and solution manuals tailored to
+					your courses,
 				</p>
 				<router-link class="btn bg-warning" to="/auth/signin">
 					Get Started
