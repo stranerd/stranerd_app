@@ -47,7 +47,7 @@
 <template>
 	<div class="w-full h-auto flex bg-primaryText py-4 md:py-8">
 		<div
-			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
+			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-between">
 			<div
 				class="shadow  w-full max-w-[576px] md:h-[576px] h-[320px] rounded-3xl md:p-8 p-5 flex flex-col justify-between">
 				<div class="flex flex-col gap-5 justify-start items-start">
@@ -133,7 +133,7 @@ const testimonies = [
 
 <style scoped>
 .shadow {
-	box-shadow: 0px 0px 32px rgba(22, 37, 101, 0.05);
+	box-shadow: 0px 0px 12px var(--clr-itemBg);
 }
 
 a {
