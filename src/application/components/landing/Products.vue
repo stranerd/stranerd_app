@@ -1,5 +1,4 @@
 
-
 <template>
 	<div id="solutions" class="w-full lg:min-h-[696px] h-auto flex flex-col bg-primaryText pt-12 pb-24">
 		<div
@@ -8,7 +7,7 @@
 			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center product lg:mt-20 mt-8">
 			<img :src="product.img" alt="hero" class="w-auto lg:max-w-[47%] rounded-2xl">
 			<div class="flex flex-col md:gap-5 gap-3 w-full lg:max-w-[47%]">
-				<h2 class="md:text-4xl text-xl font-bold  text-bodyText lg:leading-[62px]">{{ product.name }}</h2>
+				<h2 class="md:text-4xl text-2xl font-bold  text-bodyText lg:leading-[62px]">{{ product.name }}</h2>
 				<p class="md:text-xl text-sm">
 					{{ product.sub }}
 				</p>

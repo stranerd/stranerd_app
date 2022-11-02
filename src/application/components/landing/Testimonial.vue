@@ -1,48 +1,3 @@
-<!-- <template>
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-bodyBg py-12 md:py-28">
-		<div
-			class="container mx-auto text-bodyText p-6 flex flex-col lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
-			<div
-				class="shadow  w-full max-w-[576px] md:h-[576px] h-[320px] rounded-3xl md:p-8 p-5 flex flex-col justify-between">
-				<div class="flex flex-col gap-5 justify-start items-start">
-					<img alt="" class="object-contain h-5 md:h-9" src="@app/assets/images/New/comment.svg">
-					<p class="text-base md:text-[28px] leading-[1.3]">
-						{{ testimonies[tab].text }}
-					</p>
-				</div>
-
-				<div class="flex w-full justify-between">
-					<div class="flex gap-3">
-						<img class=" md:w-16 md:h-16 rounded-full" src="/images/avatars/user_profile.svg">
-						<p class="flex flex-col">
-							<span class="font-bold md:text-lg text-sm">{{ testimonies[tab].author }}</span>
-							<span class="md:text-xl text-sm">{{ testimonies[tab].university }}</span>
-						</p>
-					</div>
-
-					<span class="flex gap-3">
-						<IonIcon :icon="chevronBackCircleOutline" class="rounded-full  text-2xl md:text-4xl"
-							@click="prev" />
-						<IonIcon :icon="chevronForwardCircleOutline" class="rounded-full  text-2xl md:text-4xl"
-							@click="next" />
-					</span>
-				</div>
-			</div>
-
-			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
-				<span class="md:text-lg text-sm">Testimonials</span>
-				<h2 class="lg:text-5xl text-3xl font-bold  text-primaryBg lg:leading-[62px]">What our users say</h2>
-				<p class="lg:text-lg text-sm">
-					Feedback from personels in the education community on the impact Stranerd has on their academic
-					activities.
-				</p>
-				<router-link class="btn landing_btn-outline" to="/auth/signin">
-					Join today
-				</router-link>
-			</div>
-		</div>
-	</div>
-</template> -->
 
 <template>
 	<div class="w-full h-auto flex bg-primaryText py-4 md:py-8">
@@ -67,17 +22,15 @@
 					</div>
 
 					<span class="flex gap-3">
-						<IonIcon :icon="chevronBackCircleOutline" class="rounded-full  text-2xl md:text-4xl"
-							@click="prev" />
-						<IonIcon :icon="chevronForwardCircleOutline" class="rounded-full  text-2xl md:text-4xl"
-							@click="next" />
+						<IonIcon :icon="chevronBackCircleOutline" class="rounded-full  text-2xl md:text-4xl" @click="prev" />
+						<IonIcon :icon="chevronForwardCircleOutline" class="rounded-full  text-2xl md:text-4xl" @click="next" />
 					</span>
 				</div>
 			</div>
 
-			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl text-bodyText">
-				<h2 class="lg:text-4xl text-xl font-bold lg:leading-[62px]">What students say</h2>
-				<p class="lg:text-lg text-sm">
+			<div class="flex flex-col md:gap-5 gap-3 lg:max-w-[47%] text-bodyText">
+				<h2 class="md:text-4xl text-2xl font-bold">What students say</h2>
+				<p class="md:text-lg text-sm">
 					Feedback from students about the impact Stranerd has on their academic activities and educational journey.
 				</p>
 				<router-link class="btn bg-primaryBg text-primaryText " to="/auth/signin">

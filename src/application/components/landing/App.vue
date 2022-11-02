@@ -2,22 +2,20 @@
 	<div class="w-full  h-auto flex bg-primaryText py-12 ">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-6 lg:gap-16 md:items-center justify-between">
-			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl">
-				<h2 class="lg:text-4xl text-xl font-bold lg:leading-[62px]">Download our App</h2>
-				<p class="lg:text-lg text-sm">
+			<div class="flex flex-col md:gap-5 gap-3 lg:max-w-[47%]">
+				<h2 class="md:text-4xl text-2xl font-bold">Download our App</h2>
+				<p class="md:text-lg text-sm">
 					Wherever you may be, carry Stranerd in your pocket. Get full access from anywhere at anytime with your mobile phone.
 				</p>
-				<div class="flex gap-4 items-center mt-6">
+				<div class="flex gap-4 items-center">
 					<a href="https://play.google.com/store/apps/details?id=com.stranerd.app" rel="noopener noreferrer"
-						target="_blank" class=""> 
-						<img alt="playstore button" class="md:h-16 " src="@/assets/images/newLanding/play_store.svg" />
+						target="_blank" class="overflow-hidden">
+						<img alt="playstore button" class="md:h-16" src="@/assets/images/newLanding/play_store.svg" />
 					</a>
 					<a href="https://play.google.com/store/apps/details?id=com.stranerd.app" rel="noopener noreferrer"
-						target="_blank" class=""> 
-						<img alt="playstore button" class="md:h-16 " src="@/assets/images/newLanding/apple_store.svg" />
+						target="_blank" class="overflow-hidden"> 
+						<img alt="playstore button" class="md:h-16" src="@/assets/images/newLanding/apple_store.svg" />
 					</a>
-					<!-- <img alt="appstore button" class=" md:h-16 cursor-not-allowed"
-						src="@/assets/images/auth/appstore.svg" /> -->
 				</div>
 			</div>
 			<div class="w-auto lg:w-1/2 relative">

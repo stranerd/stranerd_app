@@ -1,10 +1,10 @@
 <template>
-	<div class="w-full h-auto flex bg-primaryText py-12">
+	<div class="w-full h-auto flex bg-primaryText py-6">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-10 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl">
 				<span class="md:text-xl text-sm font-bold text-secondaryText">Our Vision</span>
-				<h2 class="lg:text-4xl text-2xl font-bold text-bodyText lg:leading-[42px]">To build the largest community of students and educators</h2>
+				<h2 class="md:text-4xl text-2xl font-bold text-bodyText lg:leading-[42px]">To build the largest community of students and educators</h2>
 				<p class="md:text-xl text-sm text-bodyText">
 					We want to bring the most value to education by improving the interactivity of students with educators.
 				</p>
@@ -16,13 +16,13 @@
 		</div>
 	</div>
 
-	<div class="w-full h-auto flex bg-primaryText py-12">
+	<div class="w-full h-auto flex bg-primaryText pb-6">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-10 lg:gap-16 md:items-center justify-center">
 			<img alt="hero" class="w-auto" src="@/assets/images/landing/mission.png"/>
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl">
 				<span class="md:text-xl text-sm font-bold text-secondaryText">Our Mission</span>
-				<h2 class="lg:text-4xl text-2xl font-bold text-bodyText lg:leading-[42px]">Providing tools and resources to improve education</h2>
+				<h2 class="md:text-4xl text-2xl font-bold text-bodyText lg:leading-[42px]">Providing tools and resources to improve education</h2>
 				<p class="md:text-xl text-sm text-bodyText">
 					We are creating solutions fundamental to the betterment of academic enviroments, making learning easier and efficient.
 				</p>

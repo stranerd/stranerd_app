@@ -1,6 +1,6 @@
 <template>
-	<div class="hero w-full lg:h-[696px] flex justify-start items-center md:h-[496px] h-auto lg:px-9 px-4 py-12 relative" >
-
+	<div class="hero w-full lg:h-[696px] flex justify-start items-center md:h-[496px] h-auto lg:px-9 px-4 py-12" >
+		
 		<article class="container mx-auto text-white">
 			<div class="md:max-w-[560px] ">
 				<h1 class=" w-full md:text-5xl text-3xl font-bold ">
@@ -24,7 +24,7 @@
 					<span class="absolute -top-2 -right-1/2">+</span>
 				</span>
 			</div>
-			<p class="text-xl md:text-3xl font-bold text-center">Get better grades in assignment, tests and exams with Stranerd</p>
+			<p class="text-2xl md:text-3xl font-bold text-center">Get better grades in assignment, tests and exams with Stranerd</p>
 		</div>
 	</div>
 </template>
@@ -37,6 +37,5 @@ a {
 	background: rgba(5,9,13,.500) url('../../assets/images/newLanding/hero.png');
 	background-size: cover;
 	background-blend-mode: darken;
-
 }
 </style>

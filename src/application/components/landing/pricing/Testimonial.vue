@@ -18,7 +18,7 @@
 						<img class=" md:w-16 md:h-16 rounded-full" src="/images/avatars/user_profile.svg">
 						<p class="flex flex-col">
 							<span class="font-bold md:text-lg text-sm">{{ testimonies[tab].author }}</span>
-							<span class="md:text-xl text-sm">{{ testimonies[tab].university }}</span>
+							<span class="md:text-lg text-sm">{{ testimonies[tab].university }}</span>
 						</p>
 					</div>
 
@@ -32,8 +32,8 @@
 			</div>
 
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl text-primaryText">
-				<h2 class="lg:text-4xl text-xl font-bold lg:leading-[62px]">What students say</h2>
-				<p class="lg:text-lg text-sm">
+				<h2 class="md:text-4xl text-2xl font-bold ">What students say</h2>
+				<p class="md:text-xl text-sm">
 					Feedback from students about the impact Stranerd has on their academic activities and educational journey.
 				</p>
 				<router-link class="btn bg-primaryText text-primaryBg " to="/auth/signin">
