@@ -1,7 +1,7 @@
 <template>
 	<CTA class="z-[1]" />
-	<WhyUs />
-	<Aim />
+	<!-- <WhyUs /> -->
+	<!-- <Aim /> -->
 	<Products />
 	<Pricing />
 	<App />
