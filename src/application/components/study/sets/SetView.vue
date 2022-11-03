@@ -1,6 +1,6 @@
 <template>
 	<div class="showcase-flex">
-		<div class="flex flex-col justify-between gap-4 p-4 lg:p-0">
+		<div class="flex flex-col justify-between gap-4">
 			<div class="flex items-center gap-2">
 				<IonIcon :icon="folderOpenOutline" class="text-3xl" />
 				<div class="flex flex-col">
@@ -27,21 +27,11 @@
 			</div>
 		</div>
 		<EmptyState v-if="!set.allSaved.length" info="This folder is empty" />
-		<template v-if="['All', 'Test Preps'].includes(filter)">
-			<TestPrepListCard v-for="testPrep in filteredTestPreps" :key="testPrep.hash" :testPrep="testPrep"
-				class="border-bottom-line" />
-		</template>
 		<template v-if="['All', 'Flashcards'].includes(filter)">
-			<FlashCardListCard v-for="flashCard in filteredFlashCards" :key="flashCard.hash"
-				:flashCard="flashCard" class="border-bottom-line" />
-		</template>
-		<template v-if="['All', 'Notes'].includes(filter)">
-			<NoteListCard v-for="note in filteredNotes" :key="note.hash" :note="note"
-				class="border-bottom-line" />
+			<FlashCardListCard v-for="flashCard in filteredFlashCards" :key="flashCard.hash" />
 		</template>
 		<template v-if="['All', 'Questions'].includes(filter)">
-			<QuestionListCard v-for="question in filteredQuestions" :key="question.hash" :question="question"
-				class="border-bottom-line" />
+			<QuestionListCard v-for="question in filteredQuestions" :key="question.hash" :question="question" />
 		</template>
 		<BlockLoading v-if="loading" />
 	</div>
@@ -53,9 +43,7 @@ import { SetEntity } from '@modules/study'
 import { useSet } from '@app/composable/study/sets'
 import { pluralize } from '@utils/commons'
 import { folderOpenOutline } from 'ionicons/icons'
-import TestPrepListCard from '@app/components/study/testPreps/TestPrepListCard.vue'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
-import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
 
 export default defineComponent({
@@ -66,24 +54,17 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: {
-		QuestionListCard,
-		TestPrepListCard,
-		FlashCardListCard,
-		NoteListCard
-	},
+	components: { QuestionListCard, FlashCardListCard },
 	setup (props) {
 		const { loading, error, questions, notes, flashCards, testPreps } = useSet(props.set)
-		const filters = ['All', 'Test Preps', 'Flashcards', 'Notes', 'Questions']
+		const filters = ['All', 'Flashcards', 'Questions']
 		const filter = ref(filters[0])
 		const search = ref('')
-		const filteredTestPreps = computed(() => testPreps.value.filter((prep) => prep.search(search.value)))
 		const filteredFlashCards = computed(() => flashCards.value.filter((flashCard) => flashCard.search(search.value)))
-		const filteredNotes = computed(() => notes.value.filter((note) => note.search(search.value)))
 		const filteredQuestions = computed(() => questions.value.filter((question) => question.search(search.value)))
 		return {
 			loading, error, folderOpenOutline, notes, flashCards, testPreps, pluralize,
-			filter, filters, search, filteredTestPreps, filteredFlashCards, filteredNotes, filteredQuestions
+			filter, filters, search, filteredFlashCards, filteredQuestions
 		}
 	}
 })

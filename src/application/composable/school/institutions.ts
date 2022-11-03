@@ -122,7 +122,7 @@ export const useDeleteInstitution = (institutionId: string) => {
 	const deleteInstitution = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this institution?',
+			message: 'Are you sure you want to delete this institution?',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {

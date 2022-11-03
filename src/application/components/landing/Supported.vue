@@ -18,7 +18,6 @@
 				<img alt="featured1" class="w-36 md:w-auto" src="@/assets/images/landing/featured1.svg">
 				<img alt="featured2" class="w-36 md:w-auto" src="@/assets/images/landing/featured2.svg">
 				<img alt="featured3" class="w-36 md:w-auto" src="@/assets/images/landing/featured3.svg">
-
 			</div>
 		</div>
 

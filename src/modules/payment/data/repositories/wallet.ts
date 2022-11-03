@@ -1,7 +1,7 @@
 import { Listeners } from '@modules/core'
 import { IWalletRepository } from '../../domain/irepositories/iwallet'
 import { WalletEntity } from '../../domain/entities/wallet'
-import { WalletBaseDataSource } from '../datasources/wallet-base'
+import { WalletBaseDataSource } from '../datasources/walletBase'
 import { WalletTransformer } from '../transformers/wallet'
 import { AccountDetails, CurrencyCountries } from '../../domain/types'
 
@@ -33,8 +33,8 @@ export class WalletRepository implements IWalletRepository {
 		})
 	}
 
-	async subscribeToPlan (subscriptionId: string) {
-		const model = await this.dataSource.subscribeToPlan(subscriptionId)
+	async subscribeToPlan (planId: string) {
+		const model = await this.dataSource.subscribeToPlan(planId)
 		return this.transformer.fromJSON(model)
 	}
 

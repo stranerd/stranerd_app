@@ -1,20 +1,17 @@
 <template>
 	<DefaultLayout>
-		<template v-slot:panel>
-			<SettingsPanel />
-		</template>
 		<form class="flex flex-col page-padding gap-4" @submit.prevent="updatePassword">
 			<IonText class="text-xl font-semibold">
 				{{ hasPassword ? 'Update Password' : 'Add Password' }}
 			</IonText>
-			<IonInput v-if="hasPassword" v-model="factory.oldPassword" class="w-full font-medium"
+			<IonInput v-if="hasPassword" v-model="factory.oldPassword" class="w-full"
 				placeholder="Confirm Old Password"
 				type="password" />
 			<div class="flex lg:flex-row gap-4 flex-col w-full">
-				<IonInput v-model="factory.password" class="w-full font-medium"
+				<IonInput v-model="factory.password" class="w-full"
 					placeholder="Enter New Password"
 					type="password" />
-				<IonInput v-model="factory.cPassword" class="w-full font-medium"
+				<IonInput v-model="factory.cPassword" class="w-full"
 					placeholder="Confirm New Password"
 					type="password" />
 			</div>
@@ -32,11 +29,9 @@ import { usePasswordUpdate } from '@app/composable/auth/passwords'
 import { useAuth } from '@app/composable/auth/auth'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
-import SettingsPanel from '@app/components/layout/panels/SettingsPanel.vue'
 
 export default defineComponent({
 	name: 'SettingsSecurity',
-	components: { SettingsPanel },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Security', { back: true })

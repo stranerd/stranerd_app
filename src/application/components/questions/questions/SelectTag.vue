@@ -1,13 +1,16 @@
 <template>
-	<span class="w-full flex justify-between gap-4 bg-itemBg px-4 py-3 rounded-lg" @click="open = true">
-		<span>{{ selectedTag?.title ?? (allowAll ? 'All subjects' : 'Select subject') }}</span>
-		<span>&#x02304;</span>
-		<IonModal :isOpen="open" v-bind="modalProps" @didDismiss="open = false">
-			<div class="h-full flex flex-col gap-8 modal-content p-4 lg:p-8">
+	<span class="w-full flex justify-between items-center gap-4 border border-itemBg px-4 py-3 rounded-xl"
+		@click="isOpen = true">
+		<span class="text-secondaryText">
+			{{ selectedTag?.title ?? (allowAll ? 'All subjects' : 'Select a subject') }}
+		</span>
+		<IonIcon :icon="caretDownOutline" class="text-sm text-secondaryText opacity-50" />
+		<IonModal v-bind="{ ...modalProps, isOpen }" @didDismiss="isOpen = false">
+			<div class="h-full overflow-y-auto flex flex-col gap-8 modal-content p-4 lg:p-8">
 				<div class="flex justify-between">
 					<span />
 					<span class="text-xl font-bold">Select Subject</span>
-					<IonIcon :icon="closeOutline" @click="open = false" />
+					<IonIcon :icon="closeOutline" @click="isOpen = false" />
 				</div>
 				<div v-if="allowAll" class="flex flex-col gap-2">
 					<IonText class="font-bold"></IonText>
@@ -19,7 +22,7 @@
 						</div>
 					</div>
 				</div>
-				<div v-for="{ parent, children } in  groups" :key="parent.id" class="flex flex-col gap-2">
+				<div v-for="{ parent, children } in groups" :key="parent.id" class="flex flex-col gap-2">
 					<IonText class="font-bold">{{ parent.title }}</IonText>
 					<div class="flex gap-2 flex-wrap">
 						<div v-for="tag in children" :key="tag.id"
@@ -38,8 +41,8 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import { useTagList } from '@app/composable/interactions/tags'
-import { isPlatform } from '@ionic/vue'
-import { closeOutline } from 'ionicons/icons'
+import { modalProps } from '@app/composable/core/modal'
+import { caretDownOutline, closeOutline } from 'ionicons/icons'
 import { groupBy } from '@utils/commons'
 
 export default defineComponent({
@@ -56,7 +59,7 @@ export default defineComponent({
 		}
 	},
 	setup (props, { emit }) {
-		const open = ref(false)
+		const isOpen = ref(false)
 		const { questionTags } = useTagList()
 		const selectedTag = computed(() => questionTags.value.find((t) => t.id === props.value))
 		const groups = computed(() => {
@@ -66,18 +69,13 @@ export default defineComponent({
 				children: grouped.find((g) => g.key === t.id)?.values ?? []
 			}))
 		})
-		const modalProps = {
-			cssClass: 'modal-class',
-			breakpoints: isPlatform('desktop') ? undefined : [0.9],
-			initialBreakpoint: 0.9
-		}
 		const selectTag = (tagId: string) => {
 			emit('update:value', tagId)
-			open.value = false
+			isOpen.value = false
 		}
 		return {
 			groups, selectedTag, selectTag,
-			open, modalProps, closeOutline
+			isOpen, modalProps, closeOutline, caretDownOutline
 		}
 	}
 })

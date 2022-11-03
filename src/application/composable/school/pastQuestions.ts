@@ -113,7 +113,7 @@ export const useDeletePastQuestion = (pastQuestion: PastQuestionEntity) => {
 	const deletePastQuestion = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this pastQuestion?',
+			message: 'Are you sure you want to delete this pastQuestion?',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {

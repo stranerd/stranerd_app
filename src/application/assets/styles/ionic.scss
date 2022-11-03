@@ -6,14 +6,14 @@
 @import '@ionic/vue/css/structure.css';
 @import '@ionic/vue/css/typography.css';
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap');
 
 :root {
-	--ion-text-color: $color-bodyText;
-	--ion-color-step-850: $color-bodyText;
-	--ion-background-color: $color-bodyBg;
+	--ion-text-color: #{$color-bodyText};
+	--ion-color-step-850: #{$color-bodyText};
+	--ion-background-color: #{$color-bodyBg};
 	--ion-font-family: 'DM Sans', sans-serif;
-	--icon-size: 1.4em;
+	--icon-size: 1.3em;
 	font-family: 'DM Sans', sans-serif;
 
 	/** primary **/
@@ -21,11 +21,29 @@
 	--ion-color-primary-contrast: #{$color-primaryText};
 }
 
+ion-page {
+	background: $color-bodyBg;
+	color: $color-bodyText;
+}
+
+ion-toolbar {
+	--background: #{$color-bodyBg};
+	--color: #{$color-bodyText};
+	--box-shadow: none;
+	--padding-start: 0;
+	--padding-end: 0;
+}
+
+ion-header {
+	--box-shadow: none;
+}
+
 ion-back-button {
 	--icon-font-size: var(--icon-size);
 }
 
 ion-popover {
+	--backdrop-opacity: 0.65;
 	--box-shadow: none !important;
 	--width: auto;
 
@@ -39,6 +57,7 @@ ion-modal.modal-class {
 	--height: fit;
 	--max-height: 100%;
 	--width: 100%;
+	--backdrop-opacity: 0.65;
 	--border-radius: 1rem;
 	@media (min-width: $lg) {
 		--width: 600px !important;
@@ -52,9 +71,17 @@ ion-modal.modal-class {
 		flex-direction: column;
 	}
 
+	&::part(handle) {
+		background: $color-itemBg !important;
+	}
+
+	&::part(content) {
+		overflow-y: auto;
+	}
+
 	@media (min-width: $lg) {
 		&::part(content) {
-			bottom: 25%;
+			position: static;
 			border-radius: var(--border-radius);
 		}
 		&::part(handle) {
@@ -92,12 +119,11 @@ ion-modal.modal-class {
 }
 
 ion-searchbar {
-	--background: transparent !important;
-	background: #{$color-itemBg} !important;
 	--box-shadow: none !important;
 	padding: 0 0.25rem !important;
 	height: 44px !important;
 	border-radius: 0.5rem !important;
+	border: 1px solid $color-itemBg;
 	--color: inherit !important;
 	--placeholder-color: inherit !important;
 	--cancel-button-color: inherit !important;
@@ -109,18 +135,16 @@ ion-input, ion-textarea, ion-select {
 	margin: 0 !important;
 	--padding-start: 1rem !important;
 	--padding-end: 1rem !important;
-	--background: #{$color-itemBg} !important;
-	background: #{$color-itemBg} !important;
 	--box-shadow: none;
 	border-radius: 0.5rem;
 	--icon-color: transparent !important;
 	--placeholder-color: #{$color-secondaryText} !important;
 	--placeholder-opacity: 1;
-	outline: 1px solid transparent;
+	border: 1px solid $color-itemBg;
 
 	&:focus-within {
 		--icon-color: #{$color-info} !important;
-		outline-color: $color-info;
+		border-color: $color-info;
 	}
 }
 
@@ -153,7 +177,7 @@ ion-alert, ion-popover, ion-action-sheet {
 
 ion-input.valid, ion-textarea.valid, ion-select.valid {
 	--icon-color: #{$color-success} !important;
-	outline-color: $color-success;
+	border-color: $color-success;
 }
 
 ion-input.valid::after {
@@ -165,7 +189,7 @@ ion-input.valid::after {
 
 ion-input.invalid, ion-textarea.invalid, ion-select.invalid {
 	--icon-color: #{$color-danger} !important;
-	outline-color: $color-danger;
+	border-color: $color-danger;
 }
 
 ion-input.invalid::after {
@@ -176,13 +200,11 @@ ion-input.invalid::after {
 }
 
 .btn-padding {
-	--padding-top: 0.5rem;
-	--padding-bottom: 0.5rem;
-	--padding-start: 1rem;
-	--padding-end: 1rem;
+	--padding-top: 1.25rem;
+	--padding-bottom: 1.25rem;
+	--padding-start: 1.25rem;
+	--padding-end: 1.25rem;
 	@media (min-width: $lg) {
-		--padding-top: 1rem;
-		--padding-bottom: 1rem;
 		--padding-start: 1.5rem;
 		--padding-end: 1.5rem;
 	}
@@ -191,12 +213,18 @@ ion-input.invalid::after {
 ion-button {
 	--box-shadow: none;
 	--border-radius: 0.5rem;
-	font-weight: 500;
+	font-weight: 600;
 	line-height: 1em;
 	text-transform: capitalize;
 	letter-spacing: 0.02rem;
 	margin: 0;
 	font-size: 0.875rem;
+
+	&::part(native) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }
 
 .btn-primary {
@@ -243,6 +271,7 @@ ion-icon {
 
 ion-label {
 	font-weight: 600;
+	line-height: 1rem;
 }
 
 ion-item {

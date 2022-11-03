@@ -1,8 +1,5 @@
 <template>
 	<DefaultLayout>
-		<template v-slot:panel>
-			<PrepsPanel />
-		</template>
 		<div class="h-full flex flex-col">
 			<div class="nav-scroll lg:hidden">
 				<router-link v-for="{ label, route } in [
@@ -22,10 +19,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import PrepsPanel from '@app/components/layout/panels/PrepsPanel.vue'
 
 export default defineComponent({
-	name: 'PrepsWrapper',
-	components: { PrepsPanel }
+	name: 'PrepsWrapper'
 })
 </script>

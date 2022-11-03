@@ -20,7 +20,7 @@ export const setupPush = async (userId: string) => {
 	})
 
 	await PushNotifications.addListener('registrationError', async () => {
-		await Notify({ title: 'Failed to register for push notifications. Restart the app to retry' })
+		await Notify({ message: 'Failed to register for push notifications. Restart the app to retry' })
 	})
 
 	await PushNotifications.addListener('pushNotificationReceived', async (notification) => {
@@ -38,7 +38,7 @@ export const setupPush = async (userId: string) => {
 
 	const result = await PushNotifications.requestPermissions()
 	if (result.receive === 'granted') await PushNotifications.register()
-	else await Notify({ title: 'Permissions are needed to send push notifications. You can always change the permissions in your device\'s settings' })
+	else await Notify({ message: 'Permissions are needed to send push notifications. You can always change the permissions in your device\'s settings' })
 }
 
 export const clearAllNotifications = async () => {

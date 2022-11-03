@@ -21,7 +21,7 @@
 				<IonIcon :icon="arrowForwardOutline" />
 			</router-link>
 
-			<CardsList class="border-bottom-line p-4 lg:py-6 lg:px-0 border-bottom-line" />
+			<MethodsList class="border-bottom-line p-4 lg:py-6 lg:px-0 border-bottom-line" />
 		</div>
 	</DefaultLayout>
 </template>
@@ -32,13 +32,13 @@ import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 import { arrowForwardOutline, helpCircleOutline } from 'ionicons/icons'
 import { usePlanList } from '@app/composable/payment/plans'
-import CardsList from '@app/components/payment/cards/CardsList.vue'
+import MethodsList from '@app/components/payment/methods/MethodsList.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { pluralize } from '@utils/commons'
 
 export default defineComponent({
 	name: 'AccountSubscription',
-	components: { CardsList },
+	components: { MethodsList },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
 		useRouteMeta('Subscription', { back: true })

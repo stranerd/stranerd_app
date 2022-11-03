@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IGroupRepository } from '../../domain/irepositories/igroup'
 import { GroupEntity } from '../../domain/entities/group'
-import { GroupBaseDataSource } from '../datasources/group-base'
+import { GroupBaseDataSource } from '../datasources/groupBase'
 import { GroupTransformer } from '../transformers/group'
 import { GroupToModel } from '../models/group'
 

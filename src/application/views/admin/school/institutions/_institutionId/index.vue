@@ -2,7 +2,6 @@
 	<AdminWrapper>
 		<div v-if="institution">
 			<div class="flex mb-4 p-4">
-				<span class="text-xl mr-auto uppercase">{{ institution.name }}</span>
 				<a class="flex items-center gap-1 mr-4 text-sm"
 					@click.prevent="openCourseCreateModal(institution.id, null, null)">
 					<IonIcon :icon="addOutline" class="text-success" />
@@ -29,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import AdminWrapper from '@app/components/admin/AdminWrapper.vue'
 import AdminFacultiesList from '@app/components/school/faculties/AdminFacultiesList.vue'
 import AdminGeneralCoursesList from '@app/components/school/courses/AdminGeneralCoursesList.vue'
@@ -46,11 +45,11 @@ export default defineComponent({
 	components: { AdminWrapper, AdminFacultiesList, AdminGeneralCoursesList },
 	beforeRouteEnter: generateMiddlewares(['isAdmin']),
 	setup () {
-		useRouteMeta('Institution', { back: true })
 		const route = useRoute()
 		const { institutionId } = route.params
 		const { loading, deleteInstitution } = useDeleteInstitution(institutionId as string)
 		const { institution } = useInstitution(institutionId as string)
+		useRouteMeta(computed(() => institution.value?.name.toUpperCase() ?? 'Institution'), { back: true })
 		return {
 			addOutline, pencilOutline, trashBinOutline,
 			institution, loading, deleteInstitution,

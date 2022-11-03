@@ -134,7 +134,7 @@ export const useDeleteFile = (file: FileEntity) => {
 	const deleteFile = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this file?',
+			message: 'Are you sure you want to delete this file?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

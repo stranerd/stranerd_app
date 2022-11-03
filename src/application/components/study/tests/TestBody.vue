@@ -67,7 +67,7 @@ export default defineComponent({
 		})
 		const openSubmitTest = async () => {
 			const res = await Alert({
-				title: 'Are you sure you want to submit?',
+				message: 'Are you sure you want to submit?',
 				confirmButtonText: 'Submit'
 			})
 			if (!res) return

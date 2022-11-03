@@ -1,12 +1,10 @@
 <template>
 	<div class="showcase-flex">
-		<form class="p-4 lg:p-0" @submit.prevent="search">
+		<form v-if="sets.length && 0" class="p-4 lg:p-0" @submit.prevent="search">
 			<IonSearchbar v-model.trim="searchValue" placeholder="Search" type="search" />
 		</form>
-		<SetListCard v-for="set in (searchMode ? searchResults : sets)" :key="set.hash" :set="set"
-			class="border-bottom-line" />
-		<EmptyState v-if="!loading && !error && sets.length === 0" class="border-bottom-line"
-			info="This user hasn't created any folders yet." />
+		<SetListCard v-for="set in (searchMode ? searchResults : sets)" :key="set.hash" :set="set" />
+		<EmptyState v-if="!loading && !error && sets.length === 0" info="This user hasn't created any folders yet." />
 		<BlockLoading v-if="loading" />
 	</div>
 </template>

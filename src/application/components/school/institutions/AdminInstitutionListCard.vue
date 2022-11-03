@@ -1,5 +1,5 @@
 <template>
-	<router-link :to="`/admin/school/institutions/${institution.id}`" class="p-4">
+	<router-link :to="`/admin/school/institutions/${institution.id}`" class="card-sm card-padding">
 		<span class="uppercase text-[20px]">{{ institution.name }}</span>
 	</router-link>
 </template>

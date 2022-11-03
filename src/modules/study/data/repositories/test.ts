@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { ITestRepository } from '../../domain/irepositories/itest'
 import { TestEntity } from '../../domain/entities/test'
-import { TestBaseDataSource } from '../datasources/test-base'
+import { TestBaseDataSource } from '../datasources/testBase'
 import { TestTransformer } from '../transformers/test'
 import { TestToModel } from '../models/test'
 

@@ -30,8 +30,7 @@ export const useTagList = () => {
 		if (!global.fetched.value && !global.loading.value) await fetchTags()
 	})
 	const questionTags = computed(() => global.tags.value.filter((tag) => tag.type === TagTypes.questions))
-	const departmentTags = computed(() => global.tags.value.filter((tag) => tag.type === TagTypes.departments))
-	return { ...global, questionTags, departmentTags }
+	return { ...global, questionTags }
 }
 
 export const useTag = (id: string) => {
@@ -128,7 +127,7 @@ export const useDeleteTag = () => {
 	const deleteTag = async (tag: TagEntity) => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this tag?',
+			message: 'Are you sure you want to delete this tag?',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {

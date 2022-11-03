@@ -5,14 +5,18 @@ import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/comp
 import { createSession } from '@app/composable/auth/session'
 import { NetworkError, StatusCodes } from '@modules/core'
 import { storage } from '@utils/storage'
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth'
+import { googleClientId, packageName } from '@utils/environment'
+import { SignInWithApple } from '@capacitor-community/apple-sign-in'
+import { isWeb } from '@utils/constants'
 
 const global = {
 	referrerId: ref(undefined as string | undefined),
 	emailSignin: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
 	emailSignup: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
 	googleSignin: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
-	emailVerificationRequest: { email: ref(null as string | null), ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
-	emailVerificationComplete: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() }
+	appleSignin: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
+	emailVerification: { email: ref(''), ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() }
 }
 
 export const getReferrerId = async () => await storage.get('referrer') ?? global.referrerId.value
@@ -58,9 +62,7 @@ export const useEmailSignup = () => {
 		if (factory.value.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const user = await AuthUseCases.signupWithEmail(factory.value, {
-					referrer: await getReferrerId()
-				})
+				const user = await AuthUseCases.signupWithEmail(factory.value, { referrer: await getReferrerId() })
 				await createSession(user, router)
 				await storage.remove('referrer')
 			} catch (error) {
@@ -72,10 +74,11 @@ export const useEmailSignup = () => {
 	return { factory, loading, error, signup }
 }
 
-export const useCompleteEmailVerification = () => {
+export const useEmailVerification = () => {
 	const router = useRouter()
+	const sent = ref(false)
 	const token = ref('')
-	const { error, loading, setError, setLoading } = global.emailVerificationComplete
+	const { email, error, loading, message, setError, setLoading, setMessage } = global.emailVerification
 	const completeVerification = async () => {
 		await setError('')
 		await setLoading(true)
@@ -91,23 +94,14 @@ export const useCompleteEmailVerification = () => {
 		}
 		await setLoading(false)
 	}
-	return { token, loading, error, completeVerification }
-}
-
-export const setEmailVerificationEmail = (email: string) => global.emailVerificationRequest.email.value = email
-export const getEmailVerificationEmail = () => global.emailVerificationRequest.email.value
-
-export const useEmailVerificationRequest = () => {
-	const { error, loading, message, setError, setLoading, setMessage } = global.emailVerificationRequest
-
 	const sendVerificationEmail = async () => {
-		const email = global.emailVerificationRequest.email.value
-		if (!email) return
+		if (!email.value) return
 		await setError('')
 		await setLoading(true)
 		try {
-			await AuthUseCases.sendVerificationEmail(email)
-			await setMessage(`A verification email was just sent to ${email}. Proceed to your email to complete your verification.`)
+			await AuthUseCases.sendVerificationEmail(email.value)
+			await setMessage(`An OTP was just sent to ${email.value}.`)
+			sent.value = true
 		} catch (error) {
 			await setError(error)
 		}
@@ -116,26 +110,74 @@ export const useEmailVerificationRequest = () => {
 	onMounted(sendVerificationEmail)
 
 	return {
-		email: global.emailVerificationRequest.email,
-		loading, error, message, sendVerificationEmail
+		token, sent, email, loading, error, message,
+		sendVerificationEmail, completeVerification
 	}
 }
 
+export const setEmailVerificationEmail = (email: string) => global.emailVerification.email.value = email
+export const getEmailVerificationEmail = () => global.emailVerification.email.value
+
 export const useGoogleSignin = () => {
 	const router = useRouter()
-	const { error, loading, setError, setLoading } = global.emailVerificationRequest
-	const signin = async (data: { accessToken: string, idToken: string }) => {
+	const { error, loading, setError, setLoading } = global.googleSignin
+	const signin = async () => {
 		await setError('')
 		if (!loading.value) {
 			await setLoading(true)
 			try {
-				const user = await AuthUseCases.signinWithGoogle(data, {
-					referrer: await getReferrerId()
-				})
+				const googleUser = await GoogleAuth.signIn()
+				const { idToken } = googleUser.authentication
+				await GoogleAuth.signOut()
+				const user = await AuthUseCases.signinWithGoogle(
+					{ idToken },
+					{ referrer: await getReferrerId() })
 				await createSession(user, router)
 				await storage.remove('referrer')
 			} catch (error) {
-				await setError(error)
+				await setError(error ?? 'Error signing in with google')
+			}
+			await setLoading(false)
+		}
+	}
+
+	onMounted(async () => {
+		try {
+			GoogleAuth.initialize({
+				clientId: googleClientId,
+				scopes: ['profile', 'email']
+			})
+		} catch (err) {
+			await setError(err)
+		}
+	})
+
+	return { loading, error, signin, setError }
+}
+
+export const useAppleSignin = () => {
+	const router = useRouter()
+	const { error, loading, setError, setLoading } = global.appleSignin
+	const signin = async () => {
+		await setError('')
+		if (!loading.value) {
+			await setLoading(true)
+			try {
+				const clientId = isWeb ? packageName.replace('.app', '') : packageName
+				const redirectURI = 'https://' + clientId.split('.').reverse().join('.')
+				const { response } = await SignInWithApple.authorize({
+					clientId, redirectURI, scopes: 'name email'
+				})
+				const user = await AuthUseCases.signinWithApple({
+					firstName: response.givenName,
+					lastName: response.familyName,
+					email: response.email,
+					idToken: response.identityToken
+				}, { referrer: await getReferrerId() })
+				await createSession(user, router)
+				await storage.remove('referrer')
+			} catch (error) {
+				await setError('Error signing in with apple')
 			}
 			await setLoading(false)
 		}

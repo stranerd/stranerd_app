@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { ICommentRepository } from '../../domain/irepositories/icomment'
 import { CommentEntity } from '../../domain/entities/comment'
-import { CommentBaseDataSource } from '../datasources/comment-base'
+import { CommentBaseDataSource } from '../datasources/commentBase'
 import { CommentTransformer } from '../transformers/comment'
 import { CommentToModel } from '../models/comment'
 

@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IFileRepository } from '../../domain/irepositories/ifile'
 import { FileEntity } from '../../domain/entities/file'
-import { FileBaseDataSource } from '../datasources/file-base'
+import { FileBaseDataSource } from '../datasources/fileBase'
 import { FileTransformer } from '../transformers/file'
 import { FileToModel } from '../models/file'
 

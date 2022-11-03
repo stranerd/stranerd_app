@@ -1,6 +1,6 @@
 <template>
 	<form class="flex flex-col gap-4" @submit.prevent="submit">
-		<div class="flex flex-col gap-4">
+		<div class="flex flex-col gap-4 card-sm card-padding">
 			<InteractionTag :tagId="question.tagId" class="text-secondaryText font-bold" />
 			<DisplayHtml :html="question.body" />
 		</div>

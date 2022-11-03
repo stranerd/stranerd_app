@@ -1,5 +1,5 @@
-import { QuestionApiDataSource } from './data/datasources/question-api'
-import { AnswerApiDataSource } from './data/datasources/answer-api'
+import { QuestionApiDataSource } from './data/datasources/questionApi'
+import { AnswerApiDataSource } from './data/datasources/answerApi'
 import { QuestionTransformer } from './data/transformers/question'
 import { AnswerTransformer } from './data/transformers/answer'
 import { QuestionRepository } from './data/repositories/question'

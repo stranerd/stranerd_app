@@ -1,6 +1,6 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IReferralRepository } from '../../domain/irepositories/ireferral'
-import { ReferralBaseDataSource } from '../datasources/referral-base'
+import { ReferralBaseDataSource } from '../datasources/referralBase'
 import { ReferralTransformer } from '../transformers/referral'
 import { ReferralEntity } from '../../domain/entities/referral'
 

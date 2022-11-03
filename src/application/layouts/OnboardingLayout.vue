@@ -1,8 +1,13 @@
 <template>
 	<IonPage>
 		<IonContent :scrollY="false">
-			<div class="w-full h-full">
-				<slot />
+			<div class="layout">
+				<IonHeader>
+					<IonToolbar class="h-0" />
+				</IonHeader>
+				<div class="layout-page">
+					<slot />
+				</div>
 			</div>
 		</IonContent>
 	</IonPage>

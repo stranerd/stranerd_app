@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IClassRepository } from '../../domain/irepositories/iclass'
 import { ClassEntity } from '../../domain/entities/class'
-import { ClassBaseDataSource } from '../datasources/class-base'
+import { ClassBaseDataSource } from '../datasources/classBase'
 import { ClassTransformer } from '../transformers/class'
 import { ClassToModel } from '../models/class'
 import { ClassUsers } from '../../domain/types'

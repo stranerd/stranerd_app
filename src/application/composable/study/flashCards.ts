@@ -118,7 +118,7 @@ export const useDeleteFlashCard = (flashCardId: string) => {
 	const deleteFlashCard = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this flashCard?',
+			message: 'Are you sure you want to delete this flashCard?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

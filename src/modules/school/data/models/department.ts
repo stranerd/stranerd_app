@@ -8,5 +8,4 @@ export interface DepartmentFromModel extends DepartmentToModel {
 export interface DepartmentToModel {
 	name: string
 	facultyId: string
-	tagId: string
 }

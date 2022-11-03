@@ -1,6 +1,6 @@
 <template>
-	<div class="flex justify-center items-center flex-col text-center gap-4 my-auto">
-		<span class="text-4xl font-light leading-none">404</span>
+	<div class="flex justify-center items-center flex-col text-center gap-6 my-auto">
+		<img src="@/assets/images/emptyStates/404.svg">
 		<span>{{ title }}</span>
 	</div>
 </template>
@@ -19,3 +19,9 @@ export default defineComponent({
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+img {
+	min-width: 150px;
+}
+</style>

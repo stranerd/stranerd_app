@@ -2,7 +2,7 @@ import { messageSW, Workbox } from 'workbox-window'
 import { isWeb } from '@utils/constants'
 
 export const registerServiceWorker = async () => {
-	if (!isWeb || process.env.NODE_ENV !== 'development') return
+	if (!isWeb || process.env.NODE_ENV !== 'production') return
 	if (!('serviceWorker' in navigator)) return
 	try {
 		const wb = new Workbox('./service_worker.js')
@@ -15,6 +15,7 @@ export const registerServiceWorker = async () => {
 		wb.addEventListener('externalwaiting' as any, showSkipWaitingPrompt)
 		wb.register().then((reg) => registration = reg)
 	} catch (err) {
+		// eslint-disable-next-line
 		console.error(err)
 	}
 }

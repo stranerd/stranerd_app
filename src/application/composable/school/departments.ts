@@ -126,7 +126,7 @@ export const useDeleteDepartment = (departmentId: string) => {
 	const deleteDepartment = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this department?',
+			message: 'Are you sure you want to delete this department?',
 			confirmButtonText: 'Yes, remove'
 		})
 		if (accepted) {

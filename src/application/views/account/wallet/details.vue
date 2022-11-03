@@ -22,15 +22,15 @@
 				<span>Save</span>
 			</IonButton>
 		</form>
-		<div v-else class="flex flex-col lg:gap-8">
-			<div class="flex flex-col card card-padding border-bottom-line">
+		<div v-else class="showcase-flex">
+			<div class="flex flex-col card-sm card-padding border-bottom-line">
 				<div class="flex justify-between items-center">
 					<IonText class="font-light">Account number</IonText>
 					<IonIcon :icon="createOutline" class="text-secondaryText" @click="editMode = !editMode" />
 				</div>
 				<IonText class="font-bold text-xl">{{ wallet?.account?.number || 'N/A' }}</IonText>
 			</div>
-			<div class="flex flex-col card card-padding border-bottom-line">
+			<div class="flex flex-col card-sm card-padding border-bottom-line">
 				<IonText class="font-light">Bank</IonText>
 				<IonText class="font-bold text-xl">{{ wallet?.account?.bankName || 'N/A' }}</IonText>
 			</div>

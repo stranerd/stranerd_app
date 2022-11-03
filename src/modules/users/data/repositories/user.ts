@@ -1,6 +1,6 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IUserRepository } from '../../domain/irepositories/iuser'
-import { UserBaseDataSource } from '../datasources/user-base'
+import { UserBaseDataSource } from '../datasources/userBase'
 import { UserTransformer } from '../transformers/user'
 import { UserEntity } from '../../domain/entities/user'
 import { UserSchoolData } from '../../domain/types'

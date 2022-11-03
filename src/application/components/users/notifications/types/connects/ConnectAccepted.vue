@@ -15,10 +15,7 @@
 					</router-link>
 				</div>
 				<div class="flex flex-col">
-					<IonText class="font-bold flex gap-1 items-center">
-						<span>{{ user.bio.fullName }}</span>
-						<Verified :verified="user.isVerified" />
-					</IonText>
+					<UserName class="font-bold" :name="user.bio.fullName" :isTutor="user.roles.isStranerdTutor" />
 					<template v-if="user.isCollege(user)">
 						<Institution :institutionId="user.school.institutionId"
 							class="text-secondaryText text-sm font-bold" />

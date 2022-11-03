@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IAnnouncementRepository } from '../../domain/irepositories/iannouncement'
 import { AnnouncementEntity } from '../../domain/entities/announcement'
-import { AnnouncementBaseDataSource } from '../datasources/announcement-base'
+import { AnnouncementBaseDataSource } from '../datasources/announcementBase'
 import { AnnouncementTransformer } from '../transformers/announcement'
 import { AnnouncementToModel } from '../models/announcement'
 

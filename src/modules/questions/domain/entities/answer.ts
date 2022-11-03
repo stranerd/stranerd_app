@@ -16,10 +16,10 @@ export class AnswerEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-					 id, body, questionId, tagId,
-					 createdAt, user, attachments, meta,
-					 best, updatedAt
-				 }: AnswerConstructorArgs) {
+		             id, body, questionId, tagId,
+		             createdAt, user, attachments, meta,
+		             best, updatedAt
+	             }: AnswerConstructorArgs) {
 		super()
 		this.id = id
 		this.body = body
@@ -38,7 +38,7 @@ export class AnswerEntity extends BaseEntity {
 	}
 
 	get trimmedBody () {
-		return trimToLength(this.strippedBody, 120)
+		return trimToLength(this.strippedBody, 80)
 	}
 
 	get strippedBody () {
@@ -55,10 +55,6 @@ export class AnswerEntity extends BaseEntity {
 
 	get canBeDeleted () {
 		return !this.isModified
-	}
-
-	get isUserVerified () {
-		return this.user.roles.isVerified
 	}
 
 	get shareLink () {

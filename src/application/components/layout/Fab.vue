@@ -1,5 +1,5 @@
 <template>
-	<IonFab slot="fixed" class="bottom-[4rem] right-[1rem]" horizontal="end" vertical="bottom">
+	<IonFab slot="fixed" class="bottom-[5rem] right-[1rem]" horizontal="end" vertical="bottom">
 		<IonFabButton @click="openModal">
 			<IonIcon :icon="addOutline" />
 		</IonFabButton>
@@ -24,5 +24,6 @@ export default defineComponent({
 ion-fab-button {
 	--background: #{$color-primaryBg};
 	--color: #{$color-primaryText};
+	margin-bottom: env(safe-area-inset-bottom);
 }
 </style>

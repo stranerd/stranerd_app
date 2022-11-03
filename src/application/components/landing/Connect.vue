@@ -9,13 +9,12 @@
 				<p class="lg:text-lg text-sm">
 					Connect with students outside the boundaries of your class and school to collaborate or learn from.
 				</p>
-				<router-link class="landing_btn-outline btn !border-bodyBg" to="/connect">
-					Learn more
-				</router-link>
+				<button class="landing_btn-outline btn !border-bodyBg">
+					Coming Soon
+				</button>
 			</div>
 
 			<img alt="hero" class="w-auto" src="@/assets/images/landing/connect.png">
 		</div>
-
 	</div>
 </template>

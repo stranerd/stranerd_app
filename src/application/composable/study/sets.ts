@@ -203,7 +203,7 @@ export const useSaveToSet = () => {
 			await setLoading(true)
 			await SetsUseCases.saveProp(set.id, prop, [itemId], true)
 			useStudyModal().closeSaveEntity()
-			await Notify({ title: 'Saved to folder successfully' })
+			await Notify({ message: 'Saved to folder successfully' })
 		} catch (e) {
 			await setError(e)
 		}
@@ -217,7 +217,7 @@ export const useSaveToSet = () => {
 			// @ts-ignore
 			if (setGlobal[set.id]) setGlobal[set.id].saved[prop].value = setGlobal[set.id][prop].value.filter((item) => item.id !== itemId)
 			useStudyModal().closeSaveEntity()
-			await Notify({ title: 'Removed from folder successfully' })
+			await Notify({ message: 'Removed from folder successfully' })
 		} catch (e) {
 			await setError(e)
 		}
@@ -292,7 +292,7 @@ export const useDeleteSet = (setId: string) => {
 	const deleteSet = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this folder?',
+			message: 'Are you sure you want to delete this folder?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

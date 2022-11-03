@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IPastQuestionRepository } from '../../domain/irepositories/ipastQuestion'
 import { PastQuestionEntity } from '../../domain/entities/pastQuestion'
-import { PastQuestionBaseDataSource } from '../datasources/pastQuestion-base'
+import { PastQuestionBaseDataSource } from '../datasources/pastQuestionBase'
 import { PastQuestionTransformer } from '../transformers/pastQuestion'
 import { PastQuestionToModel } from '../models/pastQuestion'
 

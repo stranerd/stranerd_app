@@ -43,8 +43,16 @@ export class AuthUseCase {
 		return await this.repository.signout()
 	}
 
-	async signinWithGoogle (data: { accessToken: string, idToken: string }, extras: AuthExtras) {
+	async deleteAccount () {
+		return await this.repository.deleteAccount()
+	}
+
+	async signinWithGoogle (data: { idToken: string }, extras: AuthExtras) {
 		return await this.repository.signinWithGoogle(data, extras)
+	}
+
+	async signinWithApple (data: { firstName: string | null, lastName: string | null, email: string | null, idToken: string }, extras: AuthExtras) {
+		return await this.repository.signinWithApple(data, extras)
 	}
 
 	async signinWithEmail (factory: EmailSigninFactory, extras: AuthExtras) {

@@ -1,19 +1,10 @@
 <template>
 	<router-link :to="`/study/flashCards/${flashCard.id}`"
-		class="flex flex-col justify-between card card-padding">
-		<div class="flex gap-4 items-center">
-			<IonText class="font-500 truncate w-full">{{ flashCard.title }}</IonText>
-			<IonIcon :icon="arrowForwardOutline" />
-		</div>
+		class="flex flex-col card-sm justify-between card-padding">
+		<IonText class="font-500 truncate w-full">{{ flashCard.title }}</IonText>
 		<div class="w-full flex items-center justify-between gap-2 text-sm text-secondaryText">
-			<Tag :tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'Card', 'Cards')}`">
-				<template v-slot="slotProps">
-					<span class="flex items-center">
-						<IonIcon :icon="copyOutline" class="mr-1" />
-						<IonText>{{ slotProps.tag }}</IonText>
-					</span>
-				</template>
-			</Tag>
+			<Tag
+				:tag="`${formatNumber(flashCard.set.length)} ${pluralize(flashCard.set.length, 'card', 'cards')}`" />
 			<div class="flex items-center gap-3">
 				<Avatar v-if="flashCard.user.id !== id" :id="flashCard.user.id" :name="flashCard.user.bio.fullName"
 					:size="24"
@@ -29,14 +20,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import {
-	arrowForwardOutline,
-	closeOutline,
-	copyOutline,
-	pencilOutline,
-	settingsOutline,
-	trashBinOutline
-} from 'ionicons/icons'
+import { closeOutline, pencilOutline, settingsOutline, trashBinOutline } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import { FlashCardEntity } from '@modules/study'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
@@ -72,7 +56,7 @@ export default defineComponent({
 			await actionSheet.present()
 		}
 		return {
-			id, settingsOutline, copyOutline, arrowForwardOutline,
+			id, settingsOutline,
 			formatNumber, pluralize, loading, showMenu
 		}
 	}

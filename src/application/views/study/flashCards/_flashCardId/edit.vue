@@ -1,7 +1,7 @@
 <template>
-	<DefaultLayout>
+	<DefaultLayout :hideBottom="true" :hideFab="true">
 		<FlashCardForm :error="error" :factory="factory" :loading="loading" :submit="editFlashCard"
-			title="Edit a Flashcard set">
+			class="flex-grow page-padding h-full lg:h-auto">
 			<template v-slot:buttonTitle>Save</template>
 		</FlashCardForm>
 	</DefaultLayout>

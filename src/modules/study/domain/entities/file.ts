@@ -11,13 +11,13 @@ export class FileEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-					 id,
-					 title,
-					 media,
-					 user,
-					 createdAt,
-					 updatedAt
-				 }: FileConstructorArgs) {
+		             id,
+		             title,
+		             media,
+		             user,
+		             createdAt,
+		             updatedAt
+	             }: FileConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title
@@ -25,10 +25,6 @@ export class FileEntity extends BaseEntity {
 		this.user = generateEmbeddedUser(user)
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
-	}
-
-	get isUserVerified () {
-		return this.user.roles.isVerified
 	}
 
 	get shareLink () {

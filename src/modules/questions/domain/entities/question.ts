@@ -13,6 +13,7 @@ type QuestionConstructorArgs = {
 	bestAnswers: string[]
 	answers: { id: string, userId: string }[]
 	meta: QuestionMeta
+	isPrivate: boolean
 	createdAt: number
 	updatedAt: number
 }
@@ -27,14 +28,15 @@ export class QuestionEntity extends BaseEntity {
 	public readonly answers: { id: string, userId: string }[]
 	public readonly isAnswered: boolean
 	public readonly meta: QuestionMeta
+	public readonly isPrivate: boolean
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
 	constructor ({
-					 id, body, tagId, isAnswered,
-					 bestAnswers, createdAt, user, attachments,
-					 meta, answers, updatedAt
-				 }: QuestionConstructorArgs) {
+		             id, body, tagId, isAnswered, isPrivate,
+		             bestAnswers, createdAt, user, attachments,
+		             meta, answers, updatedAt
+	             }: QuestionConstructorArgs) {
 		super()
 		this.id = id
 		this.body = body
@@ -45,6 +47,7 @@ export class QuestionEntity extends BaseEntity {
 		this.bestAnswers = bestAnswers
 		this.answers = answers
 		this.meta = meta
+		this.isPrivate = isPrivate
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
@@ -54,7 +57,7 @@ export class QuestionEntity extends BaseEntity {
 	}
 
 	get trimmedBody () {
-		return trimToLength(this.strippedBody, 120)
+		return trimToLength(this.strippedBody, 80)
 	}
 
 	get strippedBody () {
@@ -71,10 +74,6 @@ export class QuestionEntity extends BaseEntity {
 
 	get canBeDeleted () {
 		return !this.isModified
-	}
-
-	get isUserVerified () {
-		return this.user.roles.isVerified
 	}
 
 	get shareLink () {

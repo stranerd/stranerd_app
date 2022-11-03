@@ -19,8 +19,8 @@ export class WalletsUseCase {
 		return await this.repository.listen(listener)
 	}
 
-	async subscribeToPlan (subscriptionId: string) {
-		return await this.repository.subscribeToPlan(subscriptionId)
+	async subscribeToPlan (planId: string) {
+		return await this.repository.subscribeToPlan(planId)
 	}
 
 	async cancelSubscription () {

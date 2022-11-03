@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { ITransactionRepository } from '../../domain/irepositories/itransaction'
 import { TransactionEntity } from '../../domain/entities/transaction'
-import { TransactionBaseDataSource } from '../datasources/transaction-base'
+import { TransactionBaseDataSource } from '../datasources/transactionBase'
 import { TransactionTransformer } from '../transformers/transaction'
 import { TransactionType } from '@modules/payment/domain/types'
 

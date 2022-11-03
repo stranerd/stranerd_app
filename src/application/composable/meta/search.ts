@@ -1,4 +1,4 @@
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { QuestionEntity, QuestionsUseCases } from '@modules/questions'
 import { UserEntity, UsersUseCases } from '@modules/users'
@@ -9,17 +9,9 @@ import { ClassEntity, ClassesUseCases } from '@modules/classes'
 
 const global = {
 	searchTerm: ref(''),
-	fetched: ref(false),
 	searched: ref(false),
 	tab: ref(0),
 	results: reactive({
-		questions: [] as QuestionEntity[],
-		users: [] as UserEntity[],
-		classes: [] as ClassEntity[],
-		notes: [] as NoteEntity[],
-		flashCards: [] as FlashCardEntity[]
-	}),
-	explore: reactive({
 		questions: [] as QuestionEntity[],
 		users: [] as UserEntity[],
 		classes: [] as ClassEntity[],
@@ -93,32 +85,17 @@ export const useSearch = () => {
 		}
 	}
 
-	const fetchExplore = async () => {
-		await global.setError('')
-		try {
-			await global.setLoading(true)
-			await Promise.all(
-				Object.entries(searchObj).map(async (s) => {
-					// @ts-ignore
-					global.explore[s[0]] = await s[1].searchExplore()
-				})
-			)
-			global.fetched.value = true
-		} catch (e) {
-			await global.setError(e)
-		}
-		await global.setLoading(false)
-	}
+	watch(global.searchTerm, () => {
+		if (!global.searchTerm.value) global.searched.value = false
+	})
 
 	const searchCount = computed(() => Object.values(global.results).map((val) => val.length).reduce((acc, cur) => acc + cur, 0))
-	const exploreCount = computed(() => Object.values(global.explore).map((val) => val.length).reduce((acc, cur) => acc + cur, 0))
 
 	onMounted(async () => {
 		await getRecentSearches()
 	})
 
 	return {
-		...global, searchCount, exploreCount,
-		search, fetchExplore, clearFromRecent, navigateToSearch
+		...global, searchCount, search, clearFromRecent, navigateToSearch
 	}
 }

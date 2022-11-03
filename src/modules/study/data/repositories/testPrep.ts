@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { ITestPrepRepository } from '../../domain/irepositories/itestPrep'
 import { TestPrepEntity } from '../../domain/entities/testPrep'
-import { TestPrepBaseDataSource } from '../datasources/testPrep-base'
+import { TestPrepBaseDataSource } from '../datasources/testPrepBase'
 import { TestPrepTransformer } from '../transformers/testPrep'
 import { TestPrepToModel } from '../models/testPrep'
 

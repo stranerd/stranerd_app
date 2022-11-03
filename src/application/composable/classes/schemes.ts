@@ -153,7 +153,7 @@ export const useDeleteScheme = (classId: string, schemeId: string) => {
 	const deleteScheme = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this scheme?',
+			message: 'Are you sure you want to delete this scheme?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

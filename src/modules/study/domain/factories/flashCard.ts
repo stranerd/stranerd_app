@@ -1,4 +1,4 @@
-import { hasMoreThanX, isArrayOfX, isLongerThanX, isString } from '@stranerd/validate'
+import { hasLessThanOrEqualToX, hasMoreThanX, isArrayOfX, isLongerThanX, isString } from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
 import { FlashCardEntity } from '../entities/flashCard'
 import { FlashCardToModel } from '../../data/models/flashCard'
@@ -10,7 +10,7 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 			required: true,
 			rules: [
 				isArrayOfX((cur: any) => isString(cur?.question).valid && isString(cur?.answer).valid, 'questions'),
-				hasMoreThanX(0)
+				hasMoreThanX(0), hasLessThanOrEqualToX(128)
 			]
 		}
 	}
@@ -34,12 +34,14 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 	}
 
 	addQuestion () {
-		this.set('set', [...this.questions, { question: '', answer: '' }])
+		if (this.questions.length === 128) this.errors.set = 'cannot add more than 128 cards'
+		else this.set('set', [...this.questions, { question: '', answer: '' }])
 	}
 
 	removeQuestion (index: number) {
 		if (this.questions.length === 1) return
 		this.questions.splice(index, 1)
+		this.set('set', this.questions)
 	}
 
 	loadEntity = (entity: FlashCardEntity) => {

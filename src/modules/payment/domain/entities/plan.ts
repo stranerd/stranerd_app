@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { Currencies, PlanData, PlanFeatures } from '../types'
+import { Currencies, PlanData } from '../types'
 
 export class PlanEntity extends BaseEntity {
 	public readonly id: string
@@ -9,7 +9,6 @@ export class PlanEntity extends BaseEntity {
 	public readonly amount: number
 	public readonly currency: Currencies
 	public readonly data: PlanData
-	public readonly features: PlanFeatures
 	public readonly createdAt: number
 	public readonly updatedAt: number
 
@@ -21,7 +20,6 @@ export class PlanEntity extends BaseEntity {
 		             interval,
 		             active,
 		             data,
-		             features,
 		             createdAt,
 		             updatedAt
 	             }: PlanConstructorArgs) {
@@ -33,21 +31,31 @@ export class PlanEntity extends BaseEntity {
 		this.amount = amount
 		this.currency = currency
 		this.data = data
-		this.features = features
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}
 
-	get featuresList () {
+	get features () {
 		return [
-			{ name: 'Classroom', available: this.features.classes },
-			{ name: 'Flashcards', available: this.features.flashCards },
-			{ name: 'Homework Help', available: this.features.homework },
-			{ name: 'Stranerd Connect', available: this.features.connect },
-			{ name: 'Practice Tests', available: this.features.tests },
-			{ name: 'Past Question Solutions', available: this.features.solutions },
-			{ name: 'Solution Manuals', available: this.features.manuals }
+			{ name: 'Flashcards', available: this.data.flashCards },
+			{ name: 'Assignment Help', available: this.data.questions }
 		]
+	}
+
+	get featuresDescription () {
+		const res = ['Creating and using flashcards']
+		if (this.data.questions) {
+			res.push(
+				`Only ${this.data.questions} questions to ask`,
+				'Expert answers to all question you ask',
+				'Unlimited access to all questions answer'
+			)
+		}
+		return res
+	}
+
+	get isFree () {
+		return this.amount === 0
 	}
 }
 
@@ -59,7 +67,6 @@ type PlanConstructorArgs = {
 	currency: Currencies
 	interval: string
 	data: PlanData
-	features: PlanFeatures
 	createdAt: number
 	updatedAt: number
 }

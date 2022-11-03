@@ -31,23 +31,15 @@
 	}
 
 	.layout-page-left {
-		@apply hidden lg:block w-[80px] lg:border-r-2 lg:border-r-itemBg;
-	}
-
-	.layout-page-panel {
-		@apply hidden lg:block w-[20%] py-8;
+		@apply hidden lg:block w-[17.5%];
 	}
 
 	.layout-page-main {
-		@apply w-full lg:w-[calc(75%-80px)] flex flex-col lg:border-x-2 lg:border-x-itemBg lg:pt-8;
+		@apply w-full lg:w-[calc(57.5%)] flex flex-col lg:border-x-2 lg:border-x-itemBg lg:pt-8;
 	}
 
 	.layout-page-content {
 		@apply h-fit overflow-y-auto flex-grow;
-	}
-
-	.layout-page-panel + .layout-page-main {
-		@apply lg:w-[calc(55%-80px)];
 	}
 
 	.layout-page-right {
@@ -75,7 +67,7 @@
 	}
 
 	.showcase-flex {
-		@apply flex flex-col lg:gap-6;
+		@apply flex flex-col gap-4 p-4 lg:p-0 lg:gap-6;
 	}
 
 	.showcase-files {
@@ -87,7 +79,7 @@
 	}
 
 	.nav-scroll > * {
-		@apply w-full py-4 cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap border-b-2 border-itemBg;
+		@apply w-full py-4 px-2 cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap border-b-2 border-itemBg;
 	}
 
 	.nav-scroll > *.router-link-exact-active, .nav-scroll > *.active {
@@ -95,7 +87,7 @@
 	}
 
 	.dot {
-		@apply h-[0.4rem] w-[0.4rem] text-[0.4rem] rounded-full;
+		@apply h-[0.6em] w-[0.6em] text-[0.6em] rounded-full;
 	}
 
 	.hasBg {
@@ -103,11 +95,11 @@
 	}
 
 	.card {
-		@apply lg:rounded-xl lg:border lg:border-disabled;
+		@apply lg:rounded-xl lg:border lg:border-itemBg;
 	}
 
 	.card-sm {
-		@apply rounded-xl border border-disabled;
+		@apply rounded-xl border border-itemBg;
 	}
 
 	.card-padding {

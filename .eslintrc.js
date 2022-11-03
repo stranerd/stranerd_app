@@ -4,6 +4,7 @@ module.exports = {
 		browser: true,
 		es2021: true
 	},
+	plugins: ['check-file'],
 	extends: [
 		'plugin:vue/vue3-essential',
 		'eslint:recommended',
@@ -60,7 +61,23 @@ module.exports = {
 		'vue/no-mutating-props': 'off',
 		'object-property-newline': 'off',
 		'require-atomic-updates': 'off',
-		'require-await': 'off'
+		'require-await': 'off',
+		'check-file/filename-naming-convention':[
+			'error',
+			{
+				'src/**/*.{vue}':'PASCAL_CASE',
+				'src/application/views/**/*.{vue}': '*(_)*[a-z]*([A-Z]*([a-z0-9]))',
+				'src/**/*.{js|ts}':'CAMEL_CASE',
+			},
+			{ ignoreMiddleExtensions: true }
+		],
+		'check-file/folder-naming-convention':[
+			'error',
+			{
+				'!*src/**/(views)/**':'CAMEL_CASE', // every folder in src except those in views should use strictly camelCase
+				'src/application/views/**/*/': '*(_)*[a-z]*([A-Z]*([a-z0-9]))' // folders in views use camelCase but can start with _
+			}
+		]
 	},
 	overrides: [
 		{

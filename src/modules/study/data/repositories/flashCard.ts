@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IFlashCardRepository } from '../../domain/irepositories/iflashCard'
 import { FlashCardEntity } from '../../domain/entities/flashCard'
-import { FlashCardBaseDataSource } from '../datasources/flashCard-base'
+import { FlashCardBaseDataSource } from '../datasources/flashCardBase'
 import { FlashCardTransformer } from '../transformers/flashCard'
 import { FlashCardToModel } from '../models/flashCard'
 

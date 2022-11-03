@@ -2,14 +2,12 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { Currencies, PlanEntity, PlansUseCases } from '@modules/payment'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
+import { useUserModal } from '@app/composable/core/modals'
 
 const noPlan = new PlanEntity({
 	id: null as unknown as string, createdAt: 0, updatedAt: 0,
-	active: true, amount: 0, currency: Currencies.NGN, interval: 'monthly', name: 'Free',
-	data: { questions: 0 }, features: {
-		classes: true, flashCards: true, homework: false, connect: false,
-		tests: false, solutions: false, manuals: false
-	}
+	active: true, amount: 0, currency: Currencies.NGN, interval: 'monthly', name: 'Basic',
+	data: { questions: 0, flashCards: 1 }
 })
 
 const global = {
@@ -55,3 +53,11 @@ export const usePlanList = () => {
 
 	return { ...global }
 }
+
+let subscribingTo = null as PlanEntity | null
+export const getCurrentlySubscribingTo = () => subscribingTo
+export const openSubscriptionDetailsMenu = (plan: PlanEntity) => {
+	subscribingTo = plan
+	useUserModal().openSubscriptionDetails()
+}
+

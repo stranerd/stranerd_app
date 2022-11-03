@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { ISchemeRepository } from '../../domain/irepositories/ischeme'
 import { SchemeEntity } from '../../domain/entities/scheme'
-import { SchemeBaseDataSource } from '../datasources/scheme-base'
+import { SchemeBaseDataSource } from '../datasources/schemeBase'
 import { SchemeTransformer } from '../transformers/scheme'
 import { SchemeToModel } from '../models/scheme'
 

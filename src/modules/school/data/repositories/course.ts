@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { ICourseRepository } from '../../domain/irepositories/icourse'
 import { CourseEntity } from '../../domain/entities/course'
-import { CourseBaseDataSource } from '../datasources/course-base'
+import { CourseBaseDataSource } from '../datasources/courseBase'
 import { CourseTransformer } from '../transformers/course'
 import { CourseToModel } from '../models/course'
 

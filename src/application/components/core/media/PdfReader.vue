@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<PdfEmbed :source="link" style="margin: 10px auto;" @loaded="loaded" @loading-failed="loadingFailed" />
+		<PdfEmbed :source="link" style="margin: 0 auto;" @loaded="loaded" @loading-failed="loadingFailed" />
 		<BlockLoading v-if="loading" />
 	</div>
 </template>

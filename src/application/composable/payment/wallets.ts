@@ -1,10 +1,12 @@
-import { Bank, CardsUseCases, WalletAccountFactory, WalletsUseCases } from '@modules/payment'
+import { Bank, MethodsUseCases, TransactionType, WalletAccountFactory, WalletsUseCases } from '@modules/payment'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { onMounted, Ref, ref, watch } from 'vue'
 import { storage } from '@utils/storage'
+import { createTransaction } from '@app/composable/payment/transactions'
+import { useUserModal } from '@app/composable/core/modals'
 
 const AFTER_SUB_ROUTE_KEY = 'AFTER_SUBSCRIPTION_ROUTE_KEY'
 
@@ -12,36 +14,33 @@ export const saveRouteForAfterSub = async (route: string) => {
 	await storage.set(AFTER_SUB_ROUTE_KEY, route)
 }
 
+const subscribe = async (planId: string): ReturnType<typeof WalletsUseCases.subscribeToPlan> => {
+	const primaryMethod = await MethodsUseCases.getPrimary()
+	if (primaryMethod) return await WalletsUseCases.subscribeToPlan(planId)
+	else {
+		const res = await createTransaction(TransactionType.NewCard, 'A test amount will be charged and added to your wallet to see if the card works fine')
+		if (res) return await subscribe(planId)
+		else throw new Error('Failed to capture your payment details')
+	}
+}
+
 export const useWallet = () => {
 	const { wallet } = useAuth()
-	const route = useRoute()
 	const router = useRouter()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { message, setMessage } = useSuccessHandler()
 
-	const subscribeToPlan = async (subscriptionId: string) => {
+	const subscribeToPlan = async (planId: string) => {
 		await setError('')
-		if (wallet.value?.subscription.active) return
-		const res = await Alert({
-			title: 'Are you sure you want to subscribe to this plan?',
-			confirmButtonText: 'Yes',
-			cancelButtonText: 'No'
-		})
-		if (!res) return
 		try {
 			await setLoading(true)
-			const primaryCard = await CardsUseCases.getPrimary()
-			if (primaryCard) {
-				wallet.value = await WalletsUseCases.subscribeToPlan(subscriptionId)
-				await setMessage('Subscribed successfully!')
-				const route = await storage.get(AFTER_SUB_ROUTE_KEY)
-				await storage.remove(AFTER_SUB_ROUTE_KEY)
-				if (route) await router.push(route)
-			} else {
-				await setError('You do not have a primary card. Add one!')
-				await router.push('/account/subscription/#cards')
-			}
+			wallet.value = await subscribe(planId)
+			await setMessage('Subscribed successfully!')
+			useUserModal().closeSubscriptionDetails()
+			const route = await storage.get(AFTER_SUB_ROUTE_KEY)
+			await storage.remove(AFTER_SUB_ROUTE_KEY)
+			if (route) await router.push(route)
 		} catch (error) {
 			await setError(error)
 		}
@@ -52,7 +51,7 @@ export const useWallet = () => {
 		await setError('')
 		if (wallet.value && !wallet.value?.subscription.next) return
 		const res = await Alert({
-			title: 'Are you sure you want to cancel your current plan?',
+			message: 'Are you sure you want to cancel your current subscription?',
 			confirmButtonText: 'Yes',
 			cancelButtonText: 'No'
 		})

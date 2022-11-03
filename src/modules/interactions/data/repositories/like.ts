@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { ILikeRepository } from '../../domain/irepositories/ilike'
 import { LikeEntity } from '../../domain/entities/like'
-import { LikeBaseDataSource } from '../datasources/like-base'
+import { LikeBaseDataSource } from '../datasources/likeBase'
 import { LikeTransformer } from '../transformers/like'
 import { LikeToModel } from '../models/like'
 

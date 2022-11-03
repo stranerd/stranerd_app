@@ -147,7 +147,7 @@ export const useAnswer = (answer: AnswerEntity) => {
 		if (question.isAnswered || question.user.id !== id.value || answer.best) return
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to mark this answer as the best',
+			message: 'Are you sure you want to mark this answer as the best',
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {
@@ -251,7 +251,7 @@ export const useDeleteAnswer = (answerId: string) => {
 	const deleteAnswer = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this answer?',
+			message: 'Are you sure you want to delete this answer?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

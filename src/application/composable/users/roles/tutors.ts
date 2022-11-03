@@ -41,39 +41,19 @@ export const useTutorsList = () => {
 		await global.setLoading(false)
 	}
 
-	const tutorUser = async (user: UserEntity) => {
+	const tutorUser = async (user: UserEntity, value: boolean) => {
 		await global.setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to toggle this user a tutor?',
+			message: `Are you sure you want to ${value ? 'upgrade this user to a tutor' : 'downgrade this user from tutor'}`,
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {
 			await global.setLoading(true)
 			try {
-				await AuthUseCases.updateRole(user.id, 'isStranerdTutor', true)
-				user.isTutor = true
+				await AuthUseCases.updateRole(user.id, 'isStranerdTutor', value)
+				user.roles.isStranerdTutor = true
 				addToArray(global.tutors.value, user, (e) => e.id, (e) => e.score)
-				await global.setMessage('Successfully upgraded to tutor')
-			} catch (error) {
-				await global.setError(error)
-			}
-			await global.setLoading(false)
-		}
-	}
-
-	const deTutorUser = async (user: UserEntity) => {
-		await global.setError('')
-		const accepted = await Alert({
-			title: 'Are you sure you want to de-tutor this user?',
-			confirmButtonText: 'Yes, continue'
-		})
-		if (accepted) {
-			await global.setLoading(true)
-			try {
-				await AuthUseCases.updateRole(user.id, 'isStranerdTutor', false)
-				global.tutors.value = global.tutors.value
-					.filter((u) => u.id !== user.id)
-				await global.setMessage('Successfully downgraded from tutor')
+				await global.setMessage(`Successfully ${value ? 'upgraded to' : 'downgraded from'} tutor`)
 			} catch (error) {
 				await global.setError(error)
 			}
@@ -89,5 +69,5 @@ export const useTutorsList = () => {
 		await listener.close()
 	})
 
-	return { ...global, tutorUser, deTutorUser }
+	return { ...global, tutorUser }
 }

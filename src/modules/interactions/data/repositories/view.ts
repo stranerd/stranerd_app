@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { IViewRepository } from '../../domain/irepositories/iview'
 import { ViewEntity } from '../../domain/entities/view'
-import { ViewBaseDataSource } from '../datasources/view-base'
+import { ViewBaseDataSource } from '../datasources/viewBase'
 import { ViewTransformer } from '../transformers/view'
 import { ViewToModel } from '../models/view'
 

@@ -1,14 +1,12 @@
 <template>
-	<div class="!gap-4 card-padding flex flex-col border-bottom-line lg:rounded-xl lg:border lg:border-disabled">
-		<div class="flex justify-between gap-2">
+	<div class="!gap-4 card-sm card-padding flex flex-col">
+		<div class="flex justify-between gap-2 items-center">
 			<Avatar :id="question.user.id" :size="36" :src="question.user.bio.photo" />
-			<div class="flex flex-col">
-				<span class="font-semibold text-secondaryText flex gap-1 items-center">
-					<span>{{ question.user.bio.fullName }}</span>
-					<Verified :verified="question.isUserVerified" />
-				</span>
+			<div class="flex flex-col truncate">
+				<UserName :isTutor="question.user.roles.isStranerdTutor" :name="question.user.bio.fullName"
+					class="font-semibold text-secondaryText" />
 				<div class="flex gap-2 items-center text-secondaryText text-sm">
-					<InteractionTag :tagId="question.tagId" />
+					<InteractionTag :tagId="question.tagId" class="truncate" />
 					<IonIcon :icon="ellipse" class="dot" />
 					<span>{{ formatTime(question.createdAt) }}</span>
 				</div>

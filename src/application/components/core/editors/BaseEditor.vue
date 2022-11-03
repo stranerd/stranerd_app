@@ -70,7 +70,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .quillWrapper {
 	background: $color-bodyBg;
 	min-height: 320px;
@@ -79,14 +79,26 @@ export default defineComponent({
 	box-sizing: border-box;
 	position: relative;
 	display: flex;
+	flex: 1;
 	flex-direction: column;
 	font-family: inherit !important;
 	font-size: inherit !important;
-	height: 100%;
 
 	.ql-container {
 		font-family: inherit !important;
 		font-size: inherit !important;
+		flex: 1;
+		min-height: 100%;
+		display: flex;
+		flex-direction: column;
+
+		.ql-editor {
+			flex: 1;
+		}
+	}
+
+	.ql-editor.ql-blank:before {
+		color: inherit;
 	}
 
 	.ql-toolbar {

@@ -40,10 +40,10 @@ export class ClassEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-					 id, name, school, description, photo,
-					 createdAt, user, courses,
-					 users, updatedAt, requests
-				 }: ClassConstructorArgs) {
+		             id, name, school, description, photo,
+		             createdAt, user, courses,
+		             users, updatedAt, requests
+	             }: ClassConstructorArgs) {
 		super()
 		this.id = id
 		this.name = name
@@ -56,10 +56,6 @@ export class ClassEntity extends BaseEntity {
 		this.courses = courses
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
-	}
-
-	get isUserVerified () {
-		return this.user.roles.isVerified
 	}
 
 	get membersAndRequests () {

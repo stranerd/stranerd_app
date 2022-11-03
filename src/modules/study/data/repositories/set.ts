@@ -1,7 +1,7 @@
 import { Listeners, QueryParams } from '@modules/core'
 import { ISetRepository } from '../../domain/irepositories/iset'
 import { SetEntity } from '../../domain/entities/set'
-import { SetBaseDataSource } from '../datasources/set-base'
+import { SetBaseDataSource } from '../datasources/setBase'
 import { SetTransformer } from '../transformers/set'
 import { SetToModel } from '../models/set'
 

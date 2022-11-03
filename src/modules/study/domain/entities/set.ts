@@ -17,13 +17,13 @@ export class SetEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-					 id,
-					 name,
-					 user,
-					 saved,
-					 createdAt,
-					 updatedAt
-				 }: SetConstructorArgs) {
+		             id,
+		             name,
+		             user,
+		             saved,
+		             createdAt,
+		             updatedAt
+	             }: SetConstructorArgs) {
 		super()
 		this.id = id
 		this.user = generateEmbeddedUser(user)
@@ -35,10 +35,6 @@ export class SetEntity extends BaseEntity {
 
 	get allSaved () {
 		return Object.values(this.saved).flat(1)
-	}
-
-	get isUserVerified () {
-		return this.user.roles.isVerified
 	}
 
 	get shareLink () {

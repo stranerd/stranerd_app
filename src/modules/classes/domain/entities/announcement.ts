@@ -27,8 +27,8 @@ export class AnnouncementEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-					 id, body, createdAt, users, classId, reminder, user, readAt, updatedAt
-				 }: AnnouncementConstructorArgs) {
+		             id, body, createdAt, users, classId, reminder, user, readAt, updatedAt
+	             }: AnnouncementConstructorArgs) {
 		super()
 		this.id = id
 		this.body = body
@@ -39,10 +39,6 @@ export class AnnouncementEntity extends BaseEntity {
 		this.readAt = readAt
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
-	}
-
-	get isUserVerified () {
-		return this.user.roles.isVerified
 	}
 
 	get members () {

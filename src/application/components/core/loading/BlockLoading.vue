@@ -1,7 +1,5 @@
 <template>
-	<div class="px-4 h-28 my-2">
-		<IonSkeletonText animated class="rounded-xl h-full" />
-	</div>
+	<IonSkeletonText animated class="rounded-xl h-28 my-2" />
 </template>
 
 <script lang="ts">

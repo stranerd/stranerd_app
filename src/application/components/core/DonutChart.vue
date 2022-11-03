@@ -21,7 +21,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import { formatNumber } from '@utils/commons'
-import Donut from '@app/components/DonutChart/Donut.vue'
+import Donut from '@app/components/donutChart/Donut.vue'
 
 export default defineComponent({
 	name: 'DonutChart',

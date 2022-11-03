@@ -1,48 +1,55 @@
 <template>
-	<div class="flex flex-col items-center gap-8">
-		<router-link v-for="{ path, icon, iconOutline } in [
-				{ name: 'Home', path: '/dashboard', icon: home, iconOutline:homeOutline },
-				{ name: 'Discussions', path: '/messages', icon: chatbubbles, iconOutline:chatbubblesOutline },
-				{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline:helpCircleOutline },
-				{ name: 'Tests', path: '/study/preps/', icon: receipt, iconOutline:receiptOutline },
-				...(isAdmin ? [{ name: 'Admin', path: `/admin/`, icon: statsChart, iconOutline: statsChartOutline }] : [])
-			]" :key="path" :to="path"
-			class="flex flex-col items-center justify-center">
-			<IonIcon :icon="$route.path === path ? icon : iconOutline" class="text-2xl" />
+	<div class="flex flex-col gap-8">
+		<router-link class="px-8" to="/">
+			<Logo :showName="true" />
 		</router-link>
-		<div class="bg-primaryBg text-primaryText rounded-full p-2.5 flex justify-center items-center"
-			@click="openModal">
-			<IonIcon :icon="addOutline" class="text-2xl" />
+		<div class="flex flex-col text-secondaryText">
+			<router-link v-for="{ name, path, icon, iconOutline } in [
+					{ name: 'Home', path: '/dashboard', icon: home, iconOutline: homeOutline },
+					{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline: helpCircleOutline },
+					{ name: 'Study', path: '/study', icon: book, iconOutline: bookOutline },
+					{ name: 'Classes', path: '/classes', icon: people, iconOutline: peopleOutline },
+					{ name: 'Profile', path: '/account', icon: person, iconOutline: personOutline },
+					...(isAdmin ? [{ name: 'Admin', path: '/admin', icon: statsChart, iconOutline: statsChartOutline }] : [])
+				]" :key="path" :class="{'text-primaryBg font-semibold bg-highlight': $route.path === path}" :to="path"
+				class="flex items-center text-lg gap-4 px-8 py-4">
+				<IonIcon :icon="$route.path === path ? icon : iconOutline" />
+				<span>{{ name }}</span>
+			</router-link>
 		</div>
+		<SubscribeCTA v-if="!isSubscribed" class="mx-8 mt-auto" />
 	</div>
 </template>
 
 <script lang="ts">
 import {
 	addOutline,
-	chatbubbles,
-	chatbubblesOutline,
+	book,
+	bookOutline,
 	helpCircle,
 	helpCircleOutline,
 	home,
 	homeOutline,
-	receipt,
-	receiptOutline,
+	people,
+	peopleOutline,
+	person,
+	personOutline,
 	statsChart,
 	statsChartOutline
 } from 'ionicons/icons'
-import { useUserModal } from '@app/composable/core/modals'
 import { useAuth } from '@app/composable/auth/auth'
 import { defineComponent } from 'vue'
+import SubscribeCTA from '@app/components/payment/plans/SubscribeCTA.vue'
 
 export default defineComponent({
 	name: 'LeftSidebar',
+	components: { SubscribeCTA },
 	setup () {
-		const { isAdmin } = useAuth()
+		const { isAdmin, isSubscribed } = useAuth()
 		return {
-			isAdmin, openModal: () => useUserModal().openFabMenu(),
-			addOutline, chatbubbles, chatbubblesOutline, helpCircle, helpCircleOutline,
-			home, homeOutline, receipt, receiptOutline, statsChart, statsChartOutline
+			isAdmin, isSubscribed, person, personOutline,
+			addOutline, people, peopleOutline, helpCircle, helpCircleOutline,
+			home, homeOutline, book, bookOutline, statsChart, statsChartOutline
 		}
 	}
 })

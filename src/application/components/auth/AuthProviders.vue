@@ -1,50 +1,36 @@
 <template>
-	<div class="flex-col gap-4">
-		<IonButton class="btn-outline w-full font-bold capitalize flex justify-center items-center"
-			@click="loginWithGoogle">
-			<IonIcon :icon="logoGoogle" class="mr-2" />
-			<span>Google</span>
+	<div class="flex flex-col gap-4">
+		<IonButton :disabled="googleLoading" class="btn-outline w-full font-bold" @click="googleSignin">
+			<div class="flex gap-2 items-center normal-case">
+				<SpinLoading v-if="googleLoading" class="h-[1.25rem]" />
+				<IonIcon v-else :icon="logoGoogle" class="text-[1.3rem]" />
+				<span>Sign in with Google</span>
+			</div>
 		</IonButton>
-		<PageLoading v-if="loading" />
+		<IonButton v-if="showAppleSignin" :disabled="appleLoading" class="btn-outline w-full font-bold"
+			@click="appleSignin">
+			<span class="flex gap-2 items-center normal-case">
+				<SpinLoading v-if="appleLoading" class="h-[1.25rem]" />
+				<IonIcon v-else :icon="logoApple" class="text-[1.3rem]" />
+				<span>Sign in with Apple</span>
+			</span>
+		</IonButton>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
-import { useGoogleSignin } from '@app/composable/auth/signin'
-import { logoGoogle } from 'ionicons/icons'
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth'
-import { googleClientId } from '@utils/environment'
+import { defineComponent } from 'vue'
+import { useAppleSignin, useGoogleSignin } from '@app/composable/auth/signin'
+import { logoApple, logoGoogle } from 'ionicons/icons'
+import { isIos, isWeb } from '@utils/constants'
 
 export default defineComponent({
 	name: 'AuthProviders',
 	setup () {
-		const { loading, error, setError, signin } = useGoogleSignin()
-
-		const loginWithGoogle = async () => {
-			try {
-				const googleUser = await GoogleAuth.signIn()
-				const accessToken = googleUser.authentication.accessToken
-				const idToken = googleUser.authentication.idToken
-				await GoogleAuth.signOut()
-				await signin({ idToken, accessToken })
-			} catch (error) {
-				await setError('Error signing in with google')
-			}
-		}
-
-		onMounted(async () => {
-			try {
-				GoogleAuth.initialize({
-					clientId: googleClientId,
-					scopes: ['profile', 'email']
-				})
-			} catch (err) {
-				await setError(err)
-			}
-		})
-
-		return { loading, error, logoGoogle, loginWithGoogle }
+		const { loading: googleLoading, signin: googleSignin } = useGoogleSignin()
+		const { loading: appleLoading, signin: appleSignin } = useAppleSignin()
+		const showAppleSignin = isWeb || isIos
+		return { googleLoading, appleLoading, googleSignin, appleSignin, logoGoogle, logoApple, showAppleSignin }
 	}
 })
 </script>

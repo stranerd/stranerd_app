@@ -2,7 +2,9 @@
 	<IonPage>
 		<IonContent :scrollY="false">
 			<div class="layout">
-				<HomeTopNavigation />
+				<IonHeader>
+					<IonToolbar class="h-0" />
+				</IonHeader>
 				<div class="layout-page">
 					<div class="w-full">
 						<slot />
@@ -15,10 +17,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import HomeTopNavigation from '@app/components/layout/topNavigations/HomeTopNavigation.vue'
 
 export default defineComponent({
-	name: 'AuthLayout',
-	components: { HomeTopNavigation }
+	name: 'AuthLayout'
 })
 </script>

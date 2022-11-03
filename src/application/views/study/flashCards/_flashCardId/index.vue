@@ -1,5 +1,5 @@
 <template>
-	<DefaultLayout :hideBottom="true">
+	<DefaultLayout :hideBottom="true" :hideFab="true">
 		<div class="h-full flex flex-col">
 			<BlockLoading v-if="loading" />
 			<FlashCardDetails v-else-if="flashCard" :flashCard="flashCard" class="h-full" />

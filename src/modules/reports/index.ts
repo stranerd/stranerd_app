@@ -1,4 +1,4 @@
-import { ReportApiDataSource } from './data/datasources/report-api'
+import { ReportApiDataSource } from './data/datasources/reportApi'
 import { ReportTransformer } from './data/transformers/report'
 import { ReportRepository } from './data/repositories/report'
 import { ReportsUseCase } from './domain/usecases/reports'

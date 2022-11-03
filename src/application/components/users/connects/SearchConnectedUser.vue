@@ -1,10 +1,7 @@
 <template>
 	<div class="flex items-center w-full gap-2">
 		<Avatar :name="user.bio.fullName" :src="user.bio.photo" />
-		<IonText class="flex gap-1 items-center truncate">
-			<span>{{ user.bio.fullName }}</span>
-			<Verified :verified="user.isVerified" />
-		</IonText>
+		<UserName class="truncate" :name="user.bio.fullName" :isTutor="user.roles.isStranerdTutor" />
 		<div class="flex-1" />
 		<span v-if="connect" class="text-success">Connected</span>
 		<IonButton v-else :disabled="loading" class="btn-primary" @click="createConnect(user.id)">

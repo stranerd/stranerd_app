@@ -4,7 +4,7 @@ import { QuestionEntity, QuestionFactory, QuestionsUseCases } from '@modules/que
 import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
-import { useReactionModal } from '@app/composable/core/modals'
+import { useUserModal } from '@app/composable/core/modals'
 
 enum Answered {
 	All,
@@ -109,7 +109,7 @@ export const useCreateQuestion = () => {
 				await setMessage('Question submitted successfully')
 				factory.value.reset()
 				await router.push(`/questions/${question.id}`)
-				useReactionModal().openQuestionCreated()
+				useUserModal().openQuestionCreated()
 			} catch (error) {
 				await setError(error)
 			}
@@ -214,7 +214,7 @@ export const useDeleteQuestion = (questionId: string) => {
 	const deleteQuestion = async () => {
 		await setError('')
 		const accepted = await Alert({
-			title: 'Are you sure you want to delete this question?',
+			message: 'Are you sure you want to delete this question?',
 			confirmButtonText: 'Yes, delete'
 		})
 		if (accepted) {

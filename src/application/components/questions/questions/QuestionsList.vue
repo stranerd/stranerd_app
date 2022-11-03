@@ -1,20 +1,24 @@
 <template>
 	<div class="showcase-flex">
-		<div class="flex lg:hidden gap-[1px]">
-			<SelectTag v-model:value="tagId" :allowAll="true" class="w-full !rounded-none" />
+		<div class="flex flex-col">
+			<IonText class="font-bold text-lg">Explore questions</IonText>
+			<IonText class="text-secondaryText">All questions asked show up here, browse or answer</IonText>
+		</div>
+		<div class="flex lg:hidden">
+			<SelectTag v-model:value="tagId" :allowAll="true"
+				class="w-full !rounded-none !rounded-l-xl border border-itemBg" />
 			<IonSelect v-model="answered"
-				class="w-full" interface="action-sheet" placeholder="State">
+				class="w-full !rounded-none !rounded-r-xl"
+				interface="action-sheet"
+				placeholder="State">
 				<IonSelectOption v-for="choice in answeredChoices" :key="choice.key"
 					:value="choice.val" @click="answered = choice.val">
 					{{ choice.key }}
 				</IonSelectOption>
 			</IonSelect>
 		</div>
-
-		<EmptyState v-if="!loading && !error && questions.length === 0" class="border-bottom-line"
-			info="There are no questions available." />
-		<QuestionListCard v-for="question in questions" :key="question.hash" :question="question"
-			class="border-bottom-line" />
+		<EmptyState v-if="!loading && !error && questions.length === 0" info="There are no questions available." />
+		<QuestionListCard v-for="question in questions" :key="question.hash" :question="question" />
 		<BlockLoading v-if="loading" />
 		<LoadMore v-if="hasMore" :load="fetchOlderQuestions" />
 	</div>
@@ -42,9 +46,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-ion-select {
-	border-radius: 0;
-}
-</style>

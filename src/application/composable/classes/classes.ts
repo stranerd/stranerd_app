@@ -111,7 +111,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 	const requestToJoinClass = async (join: boolean) => {
 		if (!id.value) return await redirect()
 		const accepted = await Alert({
-			title: `Are you sure you want to ${join ? 'join this class' : 'cancel this request'}?`,
+			message: `Are you sure you want to ${join ? 'join this class' : 'cancel this request'}?`,
 			confirmButtonText: 'Yes!'
 		})
 		if (!accepted) return
@@ -133,7 +133,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 
 	const acceptRequest = async (userId: string, accept: boolean) => {
 		const accepted = await Alert({
-			title: `Are you sure you want to ${accept ? 'accept' : 'reject'} this user's request?`,
+			message: `Are you sure you want to ${accept ? 'accept' : 'reject'} this user's request?`,
 			confirmButtonText: 'Yes!'
 		})
 		if (!accepted) return
@@ -148,7 +148,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 
 	const leaveClass = async () => {
 		const accepted = await Alert({
-			title: 'Are you sure you want to leave this class?',
+			message: 'Are you sure you want to leave this class?',
 			confirmButtonText: 'Yes!'
 		})
 		if (!accepted) return
@@ -162,7 +162,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 
 	const addToClass = async (userId: string, add: boolean) => {
 		const accepted = await Alert({
-			title: `Are you sure you want to ${add ? 'add this user to' : 'remove this user from'} the class?`,
+			message: `Are you sure you want to ${add ? 'add this user to' : 'remove this user from'} the class?`,
 			confirmButtonText: 'Yes!'
 		})
 		if (!accepted) return
@@ -176,7 +176,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 
 	const changeRole = async (userId: string, role: ClassUsers, add: boolean) => {
 		const accepted = await Alert({
-			title: `Are you sure you want to ${add ? 'add this role to' : 'remove this role from'} the user?`,
+			message: `Are you sure you want to ${add ? 'add this role to' : 'remove this role from'} the user?`,
 			confirmButtonText: 'Yes!'
 		})
 		if (!accepted) return
@@ -295,7 +295,7 @@ export const useClass = (classId: string) => {
 	const requestToJoinClass = async (join: boolean) => {
 		if (!id.value) return await redirect()
 		const accepted = await Alert({
-			title: `Are you sure you want to ${join ? 'join this class' : 'cancel this request'}?`,
+			message: `Are you sure you want to ${join ? 'join this class' : 'cancel this request'}?`,
 			confirmButtonText: 'Yes!'
 		})
 		if (!accepted) return

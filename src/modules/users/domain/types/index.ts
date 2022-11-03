@@ -4,19 +4,8 @@ import { Media } from '@modules/core'
 export * from './notifications'
 
 export enum UserSchoolType {
-	'secondary' = 'secondary',
 	'aspirant' = 'aspirant',
 	'college' = 'college'
-}
-
-export type SecondaryType = {
-	type: UserSchoolType.secondary
-	exams: {
-		institutionId: string
-		courseIds: string[]
-		startDate: number
-		endDate: number
-	}[]
 }
 
 export type AspirantType = {
@@ -34,10 +23,9 @@ export type CollegeType = {
 	institutionId: string
 	facultyId: string
 	departmentId: string
-	tagId: string
 }
 
-export type UserSchoolData = SecondaryType | AspirantType | CollegeType
+export type UserSchoolData = AspirantType | CollegeType
 
 export enum RankingTimes {
 	daily = 'daily',
@@ -58,7 +46,6 @@ export interface UserBio {
 export interface UserRoles {
 	isStranerdAdmin: boolean
 	isStranerdTutor: boolean
-	isVerified: boolean
 }
 
 export type EmbeddedUser = {
@@ -86,24 +73,12 @@ export interface UserAccount {
 		longestStreak: number
 		lastEvaluatedAt: number
 	}
-	ratings: {
-		total: number
-		count: number
-	}
-	referrals: Record<string, boolean>
 	rankings: Record<RankingTimes, number>
 }
 
 export interface UserStatus {
 	connections: string[]
 	lastUpdatedAt: number
-}
-
-export interface UserSession {
-	currentSessions: string[]
-	currentTutorSessions: string[]
-	requests: string[]
-	lobby: string[]
 }
 
 export interface UserDates {

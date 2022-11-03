@@ -1,4 +1,4 @@
-import { AuthBaseDataSource } from '../datasources/auth-base'
+import { AuthBaseDataSource } from '../datasources/authBase'
 import { IAuthRepository } from '../../domain/irepositories/iauth'
 import { AfterAuthUser, AuthExtras, NewUser, PasswordUpdate, ProfileUpdate } from '../../domain/entities/auth'
 
@@ -17,8 +17,12 @@ export class AuthRepository implements IAuthRepository {
 		return await this.dataSource.signinWithEmail(email, password, extras)
 	}
 
-	async signinWithGoogle (data: { accessToken: string, idToken: string }, extras: AuthExtras) {
+	async signinWithGoogle (data: { idToken: string }, extras: AuthExtras) {
 		return await this.dataSource.signinWithGoogle(data, extras)
+	}
+
+	async signinWithApple (data: { firstName: string | null, lastName: string | null, email: string | null, idToken: string }, extras: AuthExtras) {
+		return await this.dataSource.signinWithApple(data, extras)
 	}
 
 	async signupWithEmail (data: NewUser, extras: AuthExtras) {
@@ -55,6 +59,10 @@ export class AuthRepository implements IAuthRepository {
 
 	async signout () {
 		return await this.dataSource.signout()
+	}
+
+	async deleteAccount () {
+		return await this.dataSource.deleteAccount()
 	}
 
 	async updateRole (data: { id: string, value: boolean, role: string }) {

@@ -36,10 +36,10 @@
 		</div>
 
 		<template v-if="showAnswers && question.isObj(question)">
-			<span v-if="isCorrect" class="rounded-md bg-success py-2 px-4">
+			<span v-if="isCorrect" class="rounded-xl bg-success py-2 px-4">
 				Nice, you are correct
 			</span>
-			<span v-if="isInCorrect" class="rounded-md bg-danger py-2 px-4">
+			<span v-if="isInCorrect" class="rounded-xl bg-danger py-2 px-4">
 				Sorry, you're wrong. The answer is {{ getAlphabet(question.data.correctIndex + 1).toUpperCase() }}
 			</span>
 

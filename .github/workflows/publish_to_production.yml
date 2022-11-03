@@ -20,8 +20,8 @@ jobs:
         run: yarn
       - name: Setup Project
         run: yarn bin:project:setup --skip-apps
-      - name: Build App
-        run: yarn build
+      - name: Build Web
+        run: yarn build:web
       - name: Deploy to GAE
         uses: actions-hub/gcloud@master
         env:

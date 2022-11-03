@@ -1,5 +1,5 @@
 <template>
-	<router-link :class="notification.seen ? 'text-secondaryText' : 'font-medium'" :to="notification.link">
+	<router-link :class="notification.seen ? 'text-secondaryText' : 'font-semibold'" :to="notification.link">
 		<Waypoint @change="onChange">
 			<component :is="components[notification.data.type]" v-if="components[notification.data.type]"
 				v-bind="{ ...notification.data, notification }" />

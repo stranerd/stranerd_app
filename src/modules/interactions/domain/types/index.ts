@@ -16,6 +16,5 @@ export enum CommentMetaType {
 export type CommentMeta = Record<CommentMetaType, number>
 
 export enum TagTypes {
-	questions = 'questions',
-	departments = 'departments'
+	questions = 'questions'
 }
