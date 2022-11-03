@@ -7,7 +7,7 @@ export interface TransactionBaseDataSource {
 	get: (query: QueryParams) => Promise<QueryResults<TransactionFromModel>>
 	find: (id: string) => Promise<TransactionFromModel | null>
 	create: (type: TransactionType) => Promise<TransactionFromModel>
-	fulfill: (id: string) => Promise<void>
+	fulfill: (id: string) => Promise<boolean>
 	listenToOne: (id: string, listener: Listeners<TransactionFromModel>) => Promise<() => void>
 	listenToMany: (query: QueryParams, listener: Listeners<TransactionFromModel>) => Promise<() => void>
 }

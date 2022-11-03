@@ -1,15 +1,26 @@
-import { Bank, MethodsUseCases, WalletAccountFactory, WalletsUseCases } from '@modules/payment'
+import { Bank, MethodsUseCases, TransactionType, WalletAccountFactory, WalletsUseCases } from '@modules/payment'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
 import { useRouter } from 'vue-router'
 import { onMounted, Ref, ref, watch } from 'vue'
 import { storage } from '@utils/storage'
+import { createTransaction } from '@app/composable/payment/transactions'
 
 const AFTER_SUB_ROUTE_KEY = 'AFTER_SUBSCRIPTION_ROUTE_KEY'
 
 export const saveRouteForAfterSub = async (route: string) => {
 	await storage.set(AFTER_SUB_ROUTE_KEY, route)
+}
+
+const subscribe = async (planId: string): ReturnType<typeof WalletsUseCases.subscribeToPlan> => {
+	const primaryMethod = await MethodsUseCases.getPrimary()
+	if (primaryMethod) return await WalletsUseCases.subscribeToPlan(planId)
+	else {
+		const res = await createTransaction(TransactionType.NewCard, 'A test amount will be charged and added to your wallet to see if the card works fine')
+		if (res) return await subscribe(planId)
+		else throw new Error('Failed to capture your payment details')
+	}
 }
 
 export const useWallet = () => {
@@ -30,17 +41,11 @@ export const useWallet = () => {
 		if (!res) return
 		try {
 			await setLoading(true)
-			const primaryMethod = await MethodsUseCases.getPrimary()
-			if (primaryMethod) {
-				wallet.value = await WalletsUseCases.subscribeToPlan(planId)
-				await setMessage('Subscribed successfully!')
-				const route = await storage.get(AFTER_SUB_ROUTE_KEY)
-				await storage.remove(AFTER_SUB_ROUTE_KEY)
-				if (route) await router.push(route)
-			} else {
-				await setError('You do not have a primary method. Add one!')
-				await router.push('/account/subscription/#methods')
-			}
+			wallet.value = await subscribe(planId)
+			await setMessage('Subscribed successfully!')
+			const route = await storage.get(AFTER_SUB_ROUTE_KEY)
+			await storage.remove(AFTER_SUB_ROUTE_KEY)
+			if (route) await router.push(route)
 		} catch (error) {
 			await setError(error)
 		}

@@ -27,7 +27,7 @@ export class MethodsUseCase {
 
 	async getPrimary () {
 		const { results } = await this.repository.get({
-			where: [{ field: 'primary', value: true }, { field: 'expired', value: false }],
+			where: [{ field: 'primary', value: true }, { field: 'data.expired', value: false }],
 			limit: 1
 		})
 		return results.at(0) ?? null

@@ -42,6 +42,6 @@ export class TransactionApiDataSource implements TransactionBaseDataSource {
 	}
 
 	async fulfill (id: string) {
-		await this.stranerdClient.put<any, boolean>(`/${id}/fulfill`, {})
+		return await this.stranerdClient.put<any, boolean>(`/${id}/fulfill`, {})
 	}
 }
