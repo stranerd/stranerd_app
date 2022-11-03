@@ -2,6 +2,7 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { Currencies, PlanEntity, PlansUseCases } from '@modules/payment'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
+import { useUserModal } from '@app/composable/core/modals'
 
 const noPlan = new PlanEntity({
 	id: null as unknown as string, createdAt: 0, updatedAt: 0,
@@ -52,3 +53,11 @@ export const usePlanList = () => {
 
 	return { ...global }
 }
+
+let subscribingTo = null as PlanEntity | null
+export const getCurrentlySubscribingTo = () => subscribingTo
+export const openSubscriptionDetailsMenu = (plan: PlanEntity) => {
+	subscribingTo = plan
+	useUserModal().openSubscriptionDetails()
+}
+

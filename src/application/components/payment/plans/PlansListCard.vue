@@ -4,7 +4,7 @@
 		<span class="text-3xl font-semibold tracking-wider">
 			<span v-if="plan.isFree">Free</span>
 			<span v-else>
-				<span v-html="formatCurrency(plan.currency)" />{{ plan.amount }}
+				<span v-html="formatCurrency(plan.currency) + plan.amount" />
 			</span>
 		</span>
 		<span class="font-light">{{ plan.isFree ? 'forever' : plan.interval }}</span>
@@ -17,18 +17,19 @@
 			</span>
 		</div>
 
-		<IonButton v-if="!plan.id" :disabled="true" class="btn-primary">
-			Subscribe
+		<IonButton v-if="!plan.id" :disabled="loading || !wallet?.subscription.next" class="btn-primary"
+			@click="cancelSubscription">
+			{{ wallet?.subscription.next || wallet?.subscription.active ? 'End current subscription' : 'Subscribed' }}
 		</IonButton>
 		<IonButton v-else-if="!plan.active" :disabled="true" class="btn-primary primary-danger">
 			Coming soon
 		</IonButton>
 		<IonButton v-else-if="wallet?.subscription.current?.id === plan.id"
 			:disabled="loading || wallet?.subscription.active"
-			class="btn-primary" @click="subscribeToPlan(plan.id)">
+			class="btn-primary" @click="openSubscriptionDetailsMenu(plan)">
 			{{ wallet?.subscription.active ? 'Subscribed' : 'Renew' }}
 		</IonButton>
-		<IonButton v-else :disabled="loading" class="btn-primary" @click="subscribeToPlan(plan.id)">
+		<IonButton v-else :disabled="loading" class="btn-primary" @click="openSubscriptionDetailsMenu(plan)">
 			Subscribe
 		</IonButton>
 	</div>
@@ -41,6 +42,7 @@ import { formatCurrency } from '@utils/commons'
 import { useWallet } from '@app/composable/payment/wallets'
 import { PlanEntity } from '@modules/payment'
 import { useAuth } from '@app/composable/auth/auth'
+import { openSubscriptionDetailsMenu } from '@app/composable/payment/plans'
 
 export default defineComponent({
 	name: 'PlansListCard',
@@ -52,10 +54,10 @@ export default defineComponent({
 	},
 	setup () {
 		const { wallet } = useAuth()
-		const { loading, error, subscribeToPlan, cancelSubscription } = useWallet()
+		const { loading, error, cancelSubscription } = useWallet()
 		return {
 			checkmarkOutline, cardOutline, closeOutline, loading, error,
-			formatCurrency, wallet, subscribeToPlan, cancelSubscription
+			formatCurrency, wallet, openSubscriptionDetailsMenu, cancelSubscription
 		}
 	}
 })

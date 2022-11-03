@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 import { onMounted, Ref, ref, watch } from 'vue'
 import { storage } from '@utils/storage'
 import { createTransaction } from '@app/composable/payment/transactions'
+import { useUserModal } from '@app/composable/core/modals'
 
 const AFTER_SUB_ROUTE_KEY = 'AFTER_SUBSCRIPTION_ROUTE_KEY'
 
@@ -32,17 +33,11 @@ export const useWallet = () => {
 
 	const subscribeToPlan = async (planId: string) => {
 		await setError('')
-		if (wallet.value?.subscription.active) return
-		const res = await Alert({
-			message: 'Are you sure you want to subscribe to this plan?',
-			confirmButtonText: 'Yes',
-			cancelButtonText: 'No'
-		})
-		if (!res) return
 		try {
 			await setLoading(true)
 			wallet.value = await subscribe(planId)
 			await setMessage('Subscribed successfully!')
+			useUserModal().closeSubscriptionDetails()
 			const route = await storage.get(AFTER_SUB_ROUTE_KEY)
 			await storage.remove(AFTER_SUB_ROUTE_KEY)
 			if (route) await router.push(route)
@@ -56,7 +51,7 @@ export const useWallet = () => {
 		await setError('')
 		if (wallet.value && !wallet.value?.subscription.next) return
 		const res = await Alert({
-			message: 'Are you sure you want to cancel your current plan?',
+			message: 'Are you sure you want to cancel your current subscription?',
 			confirmButtonText: 'Yes',
 			cancelButtonText: 'No'
 		})

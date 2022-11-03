@@ -42,6 +42,18 @@ export class PlanEntity extends BaseEntity {
 		]
 	}
 
+	get featuresDescription () {
+		const res = ['Creating and using flashcards']
+		if (this.data.questions) {
+			res.push(
+				`Only ${this.data.questions} questions to ask`,
+				'Expert answers to all question you ask',
+				'Unlimited access to all questions answer'
+			)
+		}
+		return res
+	}
+
 	get isFree () {
 		return this.amount === 0
 	}
