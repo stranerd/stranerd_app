@@ -47,11 +47,11 @@
 				<div class="flex flex-col items-start gap-1">
 					<IonLabel>What department are you in?</IonLabel>
 					<IonSelect :key="filteredDepartments.length"
-						v-model="factory.departmentAndTag" class="w-full capitalize"
+						v-model="factory.departmentId" class="w-full capitalize"
 						interface="action-sheet" placeholder="Select department"
 						required>
 						<IonSelectOption v-for="department in filteredDepartments" :key="department.hash"
-							:value="department.idAndTag"
+							:value="department.id"
 							class="capitalize">
 							{{ department.name }}
 						</IonSelectOption>
