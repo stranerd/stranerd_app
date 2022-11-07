@@ -9,6 +9,7 @@
 							<slot />
 						</div>
 						<LandingFooter />
+						<BottomNav :hideContent="true" />
 					</div>
 				</div>
 			</div>
@@ -20,9 +21,10 @@
 import { defineComponent } from 'vue'
 import HomeTopNavigation from '../components/layout/topNavigations/HomeTopNavigation.vue'
 import LandingFooter from '@app/components/landing/LandingFooter.vue'
+import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 
 export default defineComponent({
 	name: 'HomeLayout',
-	components: { HomeTopNavigation, LandingFooter }
+	components: { HomeTopNavigation, LandingFooter, BottomNav }
 })
 </script>

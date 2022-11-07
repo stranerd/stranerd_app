@@ -26,7 +26,6 @@ def capacitor_pods
   pod 'CapacitorToast', :path => '../../node_modules/@capacitor/toast'
   pod 'CodetrixStudioCapacitorGoogleAuth', :path => '../../node_modules/@codetrix-studio/capacitor-google-auth'
   pod 'CapacitorBlobWriter', :path => '../../node_modules/capacitor-blob-writer'
-  pod 'CordovaPlugins', :path => '../capacitor-cordova-ios-plugins'
 end
 
 target 'App' do

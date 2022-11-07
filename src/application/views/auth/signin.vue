@@ -1,6 +1,6 @@
 <template>
 	<AuthLayout>
-		<form class="flex flex-col lg:w-6/12 sm:w-8/12 w-full p-4 mx-auto pt-16 gap-5" @submit.prevent="signin">
+		<form class="flex flex-col lg:w-6/12 sm:w-8/12 w-full p-4 mx-auto pt-8 gap-5" @submit.prevent="signin">
 			<h1 class="md:text-3xl text-2xl w-full font-bold md:text-center">
 				Sign in
 			</h1>
