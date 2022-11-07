@@ -4,6 +4,10 @@
 		"classpath": "com.getcapacitor.community.applesignin.SignInWithApple"
 	},
 	{
+		"pkg": "@capacitor-community/file-opener",
+		"classpath": "com.ryltsov.alex.plugins.file.opener.FileOpenerPlugin"
+	},
+	{
 		"pkg": "@capacitor/app",
 		"classpath": "com.capacitorjs.plugins.app.AppPlugin"
 	},

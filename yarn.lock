@@ -40,13 +40,6 @@
   dependencies:
     "@types/cordova" latest
 
-"@awesome-cordova-plugins/file-opener@^5.45.0":
-  version "5.45.0"
-  resolved "https://registry.yarnpkg.com/@awesome-cordova-plugins/file-opener/-/file-opener-5.45.0.tgz#0a90f89f9e02cfa593c867c834a80f77f8961ecb"
-  integrity sha512-+pwYVGUx0N7vLrwsvrSauwWJdo7twfco7XvfawRTmit1pN5nsVkKVHyH1vR0A6ivLn7OgavLfzG6b+EWqoUogQ==
-  dependencies:
-    "@types/cordova" latest
-
 "@babel/code-frame@^7.0.0":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.16.7.tgz#44416b6bd7624b998f5b1af5d470856c40138789"
@@ -1464,6 +1457,11 @@
   dependencies:
     "@types/scriptjs" "0.0.2"
     scriptjs "^2.5.9"
+
+"@capacitor-community/file-opener@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@capacitor-community/file-opener/-/file-opener-1.0.3.tgz#1f6b9800112d33a7f6378659004f210730a14a07"
+  integrity sha512-rBTS1KBfTD6Q0StDEAgIhjqcWW9F0sslZhxavja0bXrHjXM0Y3j8gtNEqbqe5lTCgnA93ZG3dZKOmyOHe2EkyA==
 
 "@capacitor/android@^4.3.0":
   version "4.3.0"
@@ -4557,11 +4555,6 @@ copy-webpack-plugin@^9.0.1:
     normalize-path "^3.0.0"
     schema-utils "^3.1.1"
     serialize-javascript "^6.0.0"
-
-cordova-plugin-file-opener2@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-file-opener2/-/cordova-plugin-file-opener2-3.0.5.tgz#3bf481a724bcec9cfa2257a71915309df5ea5b4d"
-  integrity sha512-tjLHDamH5+y0bJZYVe2967L1S4R8tL4Y0rJUzJGoxsyiw3FUlrJNS199POOpzZZ6Xhlntn9a2o7+84r1dMN21A==
 
 core-js-compat@^3.21.0, core-js-compat@^3.22.1, core-js-compat@^3.8.3:
   version "3.23.3"
