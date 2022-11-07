@@ -29,7 +29,7 @@
 							<slot />
 						</div>
 						<Fab v-if="!hideFab" class="lg:hidden" />
-						<BottomNav v-if="!hideBottom" class="mt-auto lg:hidden" />
+						<BottomNav :hideContent="hideBottom" class="mt-auto lg:hidden" />
 						<slot name="content-bottom" />
 					</div>
 					<div class="layout-page-right">

@@ -1,7 +1,7 @@
 import { onMounted, ref } from 'vue'
 import { Directory, Filesystem } from '@capacitor/filesystem'
 import writeFile from 'capacitor-blob-writer'
-import { FileOpener } from '@awesome-cordova-plugins/file-opener'
+import { FileOpener } from '@capacitor-community/file-opener'
 import { HttpClient, Media } from '@modules/core'
 import { isWeb } from '@utils/constants'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
@@ -65,7 +65,7 @@ export const useDownload = (media: Media, path: string) => {
 		if (isWeb) return
 		if (!content.value) await download()
 		const stat = await Filesystem.getUri(options)
-		await FileOpener.open(stat.uri, media.type)
+		await FileOpener.open({ filePath: stat.uri })
 	}
 
 	const deleteFromDownloads = async () => {

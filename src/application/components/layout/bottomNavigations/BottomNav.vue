@@ -1,7 +1,7 @@
 <template>
 	<IonFooter class="ion-no-border">
-		<IonToolbar>
-			<div class="flex justify-around items-center overflow-x-auto pb-1">
+		<IonToolbar :class="{'h-0': hideContent}">
+			<div v-if="!hideContent" class="flex justify-around items-center overflow-x-auto pb-1">
 				<router-link
 					v-for="{ name, path, icon, iconOutline } in [
 						{ name: 'Home', path: '/dashboard', icon: home, iconOutline: homeOutline },
@@ -41,6 +41,14 @@ import {
 import { useAuth } from '@app/composable/auth/auth'
 
 export default defineComponent({
+	name: 'BottomNav',
+	props: {
+		hideContent: {
+			type: Boolean,
+			default: false,
+			required: false
+		}
+	},
 	setup () {
 		const { isAdmin } = useAuth()
 		return {

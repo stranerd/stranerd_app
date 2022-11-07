@@ -1,7 +1,7 @@
 <template>
 	<IonHeader class="block ion-no-border inset-x-0 w-full z-10">
-		<IonToolbar class="px-4 lg:px-6 flex items-center justify-center">
-			<div class="flex items-center justify-between lg:gap-16 pt-4 pb-2">
+		<IonToolbar :class="{'h-0': hideContent}" class="px-4 lg:px-6 flex items-center justify-center">
+			<div v-if="!hideContent" class="flex items-center justify-between lg:gap-16 pt-4 pb-2">
 				<router-link class="hidden lg:inline-block" to="/">
 					<Logo />
 				</router-link>
@@ -48,6 +48,13 @@ import { useAuth } from '@app/composable/auth/auth'
 export default defineComponent({
 	name: 'Topbar',
 	components: { NotificationIcon, Search },
+	props: {
+		hideContent: {
+			type: Boolean,
+			default: false,
+			required: false
+		}
+	},
 	setup () {
 		const { user } = useAuth()
 		return { user, arrowBackOutline, searchOutline, settingsOutline, trophyOutline }
