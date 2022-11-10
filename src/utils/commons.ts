@@ -58,14 +58,15 @@ export const copyObject = <T extends Record<any, any>> (target: T, ...sources: T
 export const getAlphabet = (num: number) => 'abcdefghijklmnopqrstuv'.split('')[num - 1] ?? 'a'
 
 export const share = async ({ title, text, url }: { title: string, text: string, url: string }) => {
-	await Share.share({
+	if (await Share.canShare()) await Share.share({
 		title, text, url, dialogTitle: title
-	}).catch(async () => {
+	})
+	else {
 		await copyToClipboard(url)
 		await Notify({
 			message: 'Your device doesnt support the share api. The link has been copied to your clipboard instead'
 		})
-	})
+	}
 }
 
 export const getPercentage = (num: number, den: number) => catchDivideByZero(num, den) * 100
