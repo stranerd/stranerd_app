@@ -59,7 +59,7 @@
 			<img alt="hero" class="w-auto rounded-2xl" src="@/assets/images/newLanding/flashcard-page/flashcards_sample.png">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl">
 				<span class="md:text-2xl text-xl font-bold text-bodyText">Creating impressive flashcard sets</span>
-				<div>
+				<ul>
 					<li>Flashcards are not summaries of your notes, they’re for testing your knowledge. So ask questions.</li>
 					<li>Have an objective for each set you create.</li>
 					<li>One concept per flashcard. Don’t force too many ideas on one card. Spread out.</li>
@@ -67,7 +67,7 @@
 					<li>Don’t forget to throw in the occasional keyword flashcard.</li>
 					<li>Some topics are more suited to flashcards than others.</li>
 					<li>Take your time.</li>
-				</div>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -89,5 +89,11 @@ a {
 
 .btn {
 	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs
+}
+
+ul{
+	list-style-type:disc;
+	list-style-position: outside;
+	margin-left: 20px;
 }
 </style>
