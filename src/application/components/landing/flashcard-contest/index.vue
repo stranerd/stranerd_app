@@ -3,8 +3,8 @@
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-10 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl">
-				<h2 class="md:text-4xl text-2xl font-bold text-bodyText lg:leading-[42px]">Join our <span
-						class="text-warning underline">flashcard creators competition</span> stand a chance to win an
+				<h2 class="md:text-4xl text-2xl font-bold text-bodyText lg:leading-[62px]">Join our <span
+					class="text-warning underline">flashcard creators competition</span> stand a chance to win an
 					amazing prize</h2>
 
 			</div>
