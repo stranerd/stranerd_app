@@ -1,6 +1,6 @@
 <template>
 	<HomeLayout>
-		<FlashCard/>
+		<FlashCard />
 	</HomeLayout>
 </template>
 
@@ -17,7 +17,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style scoped>
-
-</style>

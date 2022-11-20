@@ -8,34 +8,33 @@
 					To enter the Flashcard Contest, fill the form and read all of the contest guidelines below.
 				</p>
 			</div>
-			<div class=" md:w-1/2 shadow-lg bg-primaryText rounded-2xl p-8 ">
+			<div class=" md:w-1/2 shadow-lg bg-primaryText rounded-2xl lg:p-8">
 				<form class="flex flex-col gap-4" @submit.prevent="createMessage">
 
 					<div class="flex flex-col md:flex-row w-full gap-4">
 						<div class="flex flex-col md:w-1/2">
 							<IonLabel class="font-bold mb-2">Email</IonLabel>
-							<IonInput  :size="24" class="flex-grow-0" position="floating"
+							<IonInput :size="24" class="flex-grow-0" position="floating"
 								type="email" />
 						</div>
 						<div class="flex flex-col md:w-1/2">
 							<IonLabel class="font-bold mb-2">Phone</IonLabel>
-							<IonInput  :size="24" class="flex-grow-0" position="floating"
+							<IonInput :size="24" class="flex-grow-0" position="floating"
 								type="number" />
 						</div>
 					</div>
 					<div class="flex flex-col md:flex-row w-full gap-4">
 						<div class="flex flex-col md:w-1/2">
 							<IonLabel class="font-bold mb-2">Instagram</IonLabel>
-							<IonInput  :size="24" class="flex-grow-0" inputmode="email"
+							<IonInput :size="24" class="flex-grow-0" inputmode="email"
 								position="floating" type="text" />
 						</div>
 						<div class="flex flex-col md:w-1/2">
 							<IonLabel class="font-bold mb-2">Twitter</IonLabel>
-							<IonInput  :size="24" class="flex-grow-0" position="floating"
+							<IonInput :size="24" class="flex-grow-0" position="floating"
 								type="text" />
 						</div>
 					</div>
-
 
 					<IonButton :disabled="loading || !factory.valid" class="w-full btn-primary h-12 mt-2 "
 						type="submit">
@@ -50,7 +49,6 @@
 
 <script lang="ts" setup>
 import { useCreateMessage } from '@app/composable/meta/messages'
-import { MessageType } from '@modules/meta'
 
 const { countries, factory, loading, error, createMessage } = useCreateMessage()
 </script>

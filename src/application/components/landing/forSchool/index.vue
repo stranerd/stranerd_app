@@ -40,12 +40,14 @@
 					unlimited access to any activity.
 				</p>
 				<div class="flex gap-4 items-center mt-6">
-					<a href="https://play.google.com/store/apps/details?id=com.stranerd.app" rel="noopener noreferrer"
-						target="_blank">
-						<img alt="playstore button" class="h-12 md:h-16" src="@/assets/images/auth/playstore1.svg" />
+					<a :href="PLAYSTORE_LINK" rel="noopener noreferrer" target="_blank">
+						<img alt="playstore button" class="h-12 md:h-16"
+							src="@/assets/images/newLanding/play_store.svg" />
 					</a>
-					<img alt="appstore button" class="h-12  md:h-16 cursor-not-allowed"
-						src="@/assets/images/auth/appstore1.svg" />
+					<a :href="APPSTORE_LINK" rel="noopener noreferrer" target="_blank">
+						<img alt="appstore button" class="h-12  md:h-16"
+							src="@/assets/images/newLanding/apple_store.svg" />
+					</a>
 				</div>
 			</div>
 			<img alt="hero" class="w-auto" src="@/assets/images/landing/phone.png">
@@ -55,6 +57,7 @@
 
 <script lang="ts" setup>
 import { clipboard, document, people, reader, school } from 'ionicons/icons'
+import { APPSTORE_LINK, PLAYSTORE_LINK } from '@utils/constants'
 
 const features = [
 	{
