@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="p-6">
 		<PdfEmbed :source="link" style="margin: 0 auto;" @loaded="loaded" @loading-failed="loadingFailed" />
 		<BlockLoading v-if="loading" />
 	</div>

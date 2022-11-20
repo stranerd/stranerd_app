@@ -1,5 +1,5 @@
 <template>
-	<IonHeader class="w-full" role="navigation">
+	<IonHeader class="w-full container mx-auto" role="navigation">
 		<IonToolbar v-if="!show" class="flex flex-col z-10">
 			<div class="w-full flex mx-auto items-center justify-between p-4">
 				<div class="flex gap-3 items-center">
