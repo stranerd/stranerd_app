@@ -1,5 +1,5 @@
 <template>
-	<CTA class="z-[1]" />
+	<CTA />
 	<Products />
 	<Pricing />
 	<App />
@@ -9,8 +9,6 @@
 
 <script lang="ts" setup>
 import CTA from '@app/components/landing/CTA.vue'
-import WhyUs from '@app/components/landing/WhyUs.vue'
-import Aim from '@app/components/landing/Aim.vue'
 import Products from '@app/components/landing/Products.vue'
 import Pricing from '@root/application/components/landing/Pricing.vue'
 import Testimonial from '@app/components/landing/Testimonial.vue'

@@ -7,7 +7,7 @@
 						{ name: 'Home', path: '/dashboard', icon: home, iconOutline: homeOutline },
 						{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline: helpCircleOutline },
 						{ name: 'Study', path: '/study', icon: book, iconOutline: bookOutline },
-						{ name: 'Classes', path: '/classes', icon: people, iconOutline: peopleOutline },
+						{ name: 'Chat', path: '/chat', icon: chatboxEllipses, iconOutline: chatboxEllipsesOutline },
 						{ name: 'Profile', path: '/account', icon: person, iconOutline: personOutline },
 						...(isAdmin ? [{ name: 'Admin', path: '/admin', icon: statsChart, iconOutline: statsChartOutline }] : [])
 					]" :key="path" :class="$route.path === path ? 'text-primaryBg' : 'text-secondaryText'" :to="path"
@@ -25,12 +25,12 @@ import { defineComponent } from 'vue'
 import {
 	book,
 	bookOutline,
+	chatboxEllipses,
+	chatboxEllipsesOutline,
 	helpCircle,
 	helpCircleOutline,
 	home,
 	homeOutline,
-	people,
-	peopleOutline,
 	person,
 	personOutline,
 	search,
@@ -52,7 +52,7 @@ export default defineComponent({
 	setup () {
 		const { isAdmin } = useAuth()
 		return {
-			isAdmin, personOutline, person, peopleOutline, people, bookOutline, book,
+			isAdmin, personOutline, person, chatboxEllipses, chatboxEllipsesOutline, bookOutline, book,
 			helpCircleOutline, helpCircle, homeOutline, home, searchOutline, search, statsChartOutline, statsChart
 		}
 	}

@@ -8,7 +8,7 @@
 					{ name: 'Home', path: '/dashboard', icon: home, iconOutline: homeOutline },
 					{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline: helpCircleOutline },
 					{ name: 'Study', path: '/study', icon: book, iconOutline: bookOutline },
-					{ name: 'Classes', path: '/classes', icon: people, iconOutline: peopleOutline },
+					{ name: 'Chat', path: '/chat', icon: chatboxEllipses, iconOutline: chatboxEllipsesOutline },
 					{ name: 'Profile', path: '/account', icon: person, iconOutline: personOutline },
 					...(isAdmin ? [{ name: 'Admin', path: '/admin', icon: statsChart, iconOutline: statsChartOutline }] : [])
 				]" :key="path" :class="{'text-primaryBg font-semibold bg-highlight': $route.path === path}" :to="path"
@@ -26,12 +26,12 @@ import {
 	addOutline,
 	book,
 	bookOutline,
+	chatboxEllipses,
+	chatboxEllipsesOutline,
 	helpCircle,
 	helpCircleOutline,
 	home,
 	homeOutline,
-	people,
-	peopleOutline,
 	person,
 	personOutline,
 	statsChart,
@@ -48,7 +48,7 @@ export default defineComponent({
 		const { isAdmin, isSubscribed } = useAuth()
 		return {
 			isAdmin, isSubscribed, person, personOutline,
-			addOutline, people, peopleOutline, helpCircle, helpCircleOutline,
+			addOutline, chatboxEllipses, chatboxEllipsesOutline, helpCircle, helpCircleOutline,
 			home, homeOutline, book, bookOutline, statsChart, statsChartOutline
 		}
 	}
