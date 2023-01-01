@@ -1,6 +1,6 @@
 import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
-import { extractTextFromHTML, trimToLength } from '@utils/commons'
+import { extractTextFromHTML, trimToLength } from '@stranerd/validate'
 import { AnswerMeta } from '../types'
 
 export class AnswerEntity extends BaseEntity {
