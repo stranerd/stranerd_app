@@ -6,6 +6,8 @@ import { isClient } from '@utils/environment'
 import { setupPush, unregisterDeviceOnLogout } from '@utils/push'
 import { WalletEntity, WalletsUseCases } from '@modules/payment'
 import { useListener } from '@app/composable/core/states'
+import { getSchoolState } from '@app/composable/auth/session'
+import { Router } from 'vue-router'
 
 const global = {
 	auth: ref(null as AuthDetails | null),
@@ -86,11 +88,26 @@ export const useAuth = () => {
 		await global.listener.restart()
 	}
 
-	const signin = async (remembered: boolean) => {
+	const signin = async (remembered: boolean, router: Router) => {
 		await Promise.all([
 			setupPush(id.value),
 			startProfileListener()
 		])
+		if ((await getSchoolState()) !== id.value) {
+			if (!global.user.value?.bio.photo) {
+				await router.push('/account/setup')
+				return false
+			}
+			if (!global.user.value?.bio.phone) {
+				await router.push('/account/setup/phone')
+				return false
+			}
+			if (!global.user.value?.school) {
+				await router.push('/account/setup/school')
+				return false
+			}
+		}
+		return true
 	}
 
 	const signout = async () => {
