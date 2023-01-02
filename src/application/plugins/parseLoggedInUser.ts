@@ -15,5 +15,5 @@ export const parseLoggedInUser = definePlugin(async ({ router }) => {
 		setEmailVerificationEmail(user.email)
 		await router.push('/auth/verify')
 	}
-	if (isLoggedIn.value) await signin(true)
+	if (isLoggedIn.value) await signin(true, router)
 })

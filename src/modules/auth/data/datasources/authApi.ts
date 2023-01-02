@@ -60,11 +60,11 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 	}
 
 	async sendVerificationText (phone: Phone) {
-		await this.authClient.post<any, boolean>('/user/phone/verify/text', { phone })
+		await this.authClient.post<any, boolean>('/phone/verify/text', { phone })
 	}
 
 	async completePhoneVerification (token: string) {
-		return await this.authClient.post<any, AfterAuthUser>('/user/phone/verify', { token })
+		return await this.authClient.post<any, AfterAuthUser>('/phone/verify', { token })
 	}
 
 	async sendPasswordResetEmail (email: string) {

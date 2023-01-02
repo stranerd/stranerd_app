@@ -72,6 +72,7 @@ export const usePhoneUpdate = () => {
 		await setLoading(true)
 		try {
 			await AuthUseCases.completePhoneVerification(token.value)
+			await setMessage('Phone number updated successfully!')
 		} catch (error) {
 			await setError(error)
 		}

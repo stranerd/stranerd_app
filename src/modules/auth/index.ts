@@ -8,7 +8,7 @@ export { PasswordResetFactory } from './domain/factories/passwordReset'
 export { ProfileUpdateFactory } from './domain/factories/profileUpdate'
 export { PasswordUpdateFactory } from './domain/factories/passwordUpdate'
 export { PhoneUpdateFactory } from './domain/factories/phoneUpdate'
-export { Phone } from './domain/entities/auth'
+export type { Phone } from './domain/entities/auth'
 
 const authDataSource = new AuthApiDataSource()
 
