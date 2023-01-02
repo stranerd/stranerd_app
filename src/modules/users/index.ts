@@ -14,7 +14,7 @@ import { UsersUseCase } from './domain/usecases/users'
 import { NotificationsUseCase } from './domain/usecases/notifications'
 import { ReferralsUseCase } from './domain/usecases/referrals'
 import { ConnectsUseCase } from './domain/usecases/connects'
-import { generateDefaultBio, generateDefaultRoles, generateEmbeddedUser, UserEntity } from './domain/entities/user'
+import { UserEntity } from './domain/entities/user'
 import { NotificationEntity } from './domain/entities/notification'
 import { ReferralEntity } from './domain/entities/referral'
 import { ConnectEntity } from './domain/entities/connect'
@@ -51,9 +51,6 @@ export const ConnectsUseCases = new ConnectsUseCase(connectRepository)
 export {
 	UserEntity,
 	RankingTimes,
-	generateDefaultBio,
-	generateDefaultRoles,
-	generateEmbeddedUser,
 	NotificationEntity,
 	ReferralEntity,
 	ConnectEntity

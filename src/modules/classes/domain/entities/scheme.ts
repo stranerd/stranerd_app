@@ -1,4 +1,4 @@
-import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 import { ClassUsers } from '../types'
 import { BaseEntity } from '@modules/core'
 
@@ -16,22 +16,22 @@ export class SchemeEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-					 id,
-					 title,
-					 classId,
-					 user,
-					 topic,
-					 start,
-					 end,
-					 users,
-					 readAt,
-					 createdAt,
-					 updatedAt
-				 }: SchemeConstructorArgs) {
+		             id,
+		             title,
+		             classId,
+		             user,
+		             topic,
+		             start,
+		             end,
+		             users,
+		             readAt,
+		             createdAt,
+		             updatedAt
+	             }: SchemeConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title
-		this.user = generateEmbeddedUser(user)
+		this.user = user
 		this.topic = topic
 		this.start = start
 		this.end = end

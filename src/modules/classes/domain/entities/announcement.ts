@@ -1,4 +1,4 @@
-import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 import { BaseEntity } from '@modules/core'
 import { ClassUsers } from '../types'
 import { extractUrls } from '@stranerd/validate'
@@ -35,7 +35,7 @@ export class AnnouncementEntity extends BaseEntity {
 		this.users = users
 		this.classId = classId
 		this.reminder = reminder
-		this.user = generateEmbeddedUser(user)
+		this.user = user
 		this.readAt = readAt
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt

@@ -1,5 +1,5 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
-import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 import { isImage, isVideo } from '@stranerd/validate'
 
 export class FileEntity extends BaseEntity {
@@ -22,7 +22,7 @@ export class FileEntity extends BaseEntity {
 		this.id = id
 		this.title = title
 		this.media = parseMedia(media)
-		this.user = generateEmbeddedUser(user)
+		this.user = user
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt
 	}

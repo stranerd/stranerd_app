@@ -1,4 +1,4 @@
-import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractTextFromHTML, trimToLength } from '@stranerd/validate'
 import { AnswerMeta } from '../types'
@@ -25,7 +25,7 @@ export class AnswerEntity extends BaseEntity {
 		this.body = body
 		this.questionId = questionId
 		this.tagId = tagId
-		this.user = generateEmbeddedUser(user)
+		this.user = user
 		this.attachments = attachments.map(parseMedia)
 		this.best = best
 		this.meta = meta

@@ -26,6 +26,7 @@ import { computed, defineComponent, PropType } from 'vue'
 import { Media, UploadedFile } from '@modules/core'
 import { cameraOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
+import { parseURL } from '@utils/commons'
 
 const DEFAULT_PROFILE_PHOTO = '/images/avatars/user_profile.svg'
 export default defineComponent({
@@ -58,7 +59,7 @@ export default defineComponent({
 	},
 	setup (props, { emit }) {
 		const source = computed({
-			get: () => typeof props.src?.link === 'string' ? props.src.link : false,
+			get: () => typeof props.src?.link === 'string' ? parseURL(props.src.link) : false,
 			set: () => {
 			}
 		})

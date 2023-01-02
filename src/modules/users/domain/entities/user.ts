@@ -1,8 +1,6 @@
-import { BaseEntity, parseMedia } from '@modules/core'
-import { capitalize } from '@utils/commons'
+import { BaseEntity } from '@modules/core'
 import {
 	CollegeType,
-	EmbeddedUser,
 	UserAccount,
 	UserBio,
 	UserDates,
@@ -24,27 +22,6 @@ type UserConstructorArgs = {
 	nextRank: UserRank | null
 	school: UserSchoolData | null
 }
-
-export const generateDefaultBio = (bio: Partial<UserBio>): UserBio => {
-	const firstName = capitalize(bio?.firstName ?? 'Anon')
-	const lastName = capitalize(bio?.lastName ?? 'Ymous')
-	const fullName = capitalize(bio?.fullName ?? (firstName + ' ' + lastName))
-	const email = bio?.email ?? 'anon@ymous.com'
-	const description = bio?.description ?? ''
-	const photo = bio?.photo ? parseMedia(bio.photo) : null
-	return { firstName, lastName, fullName, email, description, photo }
-}
-
-export const generateDefaultRoles = (roles: Partial<UserRoles>): UserRoles => ({
-	isStranerdAdmin: roles?.isStranerdAdmin ?? false,
-	isStranerdTutor: roles?.isStranerdTutor ?? false
-})
-
-export const generateEmbeddedUser = (user: EmbeddedUser): EmbeddedUser => ({
-	...user,
-	bio: generateDefaultBio(user.bio),
-	roles: generateDefaultRoles(user.roles)
-})
 
 export class UserEntity extends BaseEntity {
 	public readonly id: string
@@ -70,8 +47,8 @@ export class UserEntity extends BaseEntity {
 	             }: UserConstructorArgs) {
 		super()
 		this.id = id
-		this.bio = generateDefaultBio(bio)
-		this.roles = generateDefaultRoles(roles)
+		this.bio = bio
+		this.roles = roles
 		this.account = account
 		this.status = status
 		this.dates = dates

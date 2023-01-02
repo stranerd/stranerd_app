@@ -1,5 +1,5 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
-import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 
 export class ReportEntity extends BaseEntity {
 	readonly id: string
@@ -21,12 +21,10 @@ export class ReportEntity extends BaseEntity {
 	             }: ReportConstructorArgs) {
 		super()
 		this.id = id
-		if (data.type === ReportType.users) data.reported = generateEmbeddedUser(data.reported)
-		else if (data.type === ReportType.questions || data.type === ReportType.answers) data.reported.user = generateEmbeddedUser(data.reported.user)
 		if (data.type === ReportType.pastQuestions) data.reported.questionMedia = data.reported.questionMedia.map(parseMedia)
 		this.data = data
 		this.reportedId = reportedId
-		this.user = generateEmbeddedUser(user)
+		this.user = user
 		this.message = message
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt

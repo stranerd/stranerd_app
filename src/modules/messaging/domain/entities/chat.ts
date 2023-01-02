@@ -1,6 +1,6 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { extractUrls, isImage, isVideo } from '@stranerd/validate'
-import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 import { ChatClasses, ChatData, ChatPersonal, ChatType } from '../types'
 
 export class ChatEntity extends BaseEntity {
@@ -18,7 +18,7 @@ export class ChatEntity extends BaseEntity {
 	constructor ({ id, from, to, body, links, media, data, createdAt, updatedAt, readAt }: ChatConstructorArgs) {
 		super()
 		this.id = id
-		this.from = generateEmbeddedUser(from)
+		this.from = from
 		this.to = to
 		this.body = body
 		this.links = links
