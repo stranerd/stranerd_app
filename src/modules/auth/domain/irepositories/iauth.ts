@@ -1,4 +1,4 @@
-import { AfterAuthUser, AuthDetails, AuthExtras, NewUser, PasswordUpdate, ProfileUpdate } from '../entities/auth'
+import { AfterAuthUser, AuthDetails, AuthExtras, NewUser, PasswordUpdate, Phone, ProfileUpdate } from '../entities/auth'
 
 export interface IAuthRepository {
 	getAuthUser: () => Promise<AuthDetails | null>
@@ -8,6 +8,8 @@ export interface IAuthRepository {
 	signupWithEmail: (data: NewUser, extras: AuthExtras) => Promise<AfterAuthUser>
 	sendVerificationEmail: (email: string) => Promise<void>
 	completeEmailVerification: (token: string) => Promise<AfterAuthUser>
+	sendVerificationText: (phone: Phone) => Promise<void>
+	completePhoneVerification: (token: string) => Promise<AfterAuthUser>
 	sendPasswordResetEmail: (email: string) => Promise<void>
 	resetPassword: (token: string, password: string) => Promise<AfterAuthUser>
 	updateProfile: (profile: ProfileUpdate) => Promise<void>

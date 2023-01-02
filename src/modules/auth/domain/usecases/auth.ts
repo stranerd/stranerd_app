@@ -6,6 +6,7 @@ import { EmailSignupFactory } from '../factories/emailSignup'
 import { PasswordUpdateFactory } from '../factories/passwordUpdate'
 import { ProfileUpdateFactory } from '../factories/profileUpdate'
 import { UserRoles } from '@modules/users'
+import { PhoneUpdateFactory } from '../factories/phoneUpdate'
 
 export class AuthUseCase {
 	private repository: IAuthRepository
@@ -75,4 +76,13 @@ export class AuthUseCase {
 	async updateRole (id: string, role: keyof UserRoles, value: boolean) {
 		return await this.repository.updateRole({ id, value, role })
 	}
+
+	async sendVerificationText (factory: PhoneUpdateFactory) {
+		return await this.repository.sendVerificationText(await factory.toModel())
+	}
+
+	async completePhoneVerification (token: string) {
+		return await this.repository.completePhoneVerification(token)
+	}
+
 }
