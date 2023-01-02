@@ -75,7 +75,7 @@ export default defineComponent({
 		}
 		const submit = async () => {
 			await updateProfile(true)
-			await router.push('/account/setup/school')
+			await router.push('/account/setup/phone')
 
 		}
 		return { factory, loading, error, updateProfile, submit, savePhoto, skip }

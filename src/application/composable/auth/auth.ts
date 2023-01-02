@@ -94,7 +94,7 @@ export const useAuth = () => {
 			startProfileListener()
 		])
 		if ((await getSchoolState()) !== id.value) {
-			if (!global.user.value?.bio.description || !global.user.value?.bio.photo) {
+			if (!global.user.value?.bio.photo) {
 				await router.push('/account/setup')
 				return false
 			}

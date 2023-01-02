@@ -66,6 +66,10 @@ export const usePhoneUpdate = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { message, setMessage } = useSuccessHandler()
+	const { user } = useAuth()
+
+	if (user.value) factory.value.loadEntity(user.value)
+	watch(user, () => user.value && factory.value.loadEntity(user.value))
 	const completeVerification = async () => {
 		if (loading.value) return
 		await setError('')
