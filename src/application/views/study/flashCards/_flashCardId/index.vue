@@ -1,8 +1,11 @@
 <template>
-	<DefaultLayout :hideBottom="true" :hideFab="true">
+	<DefaultLayout :hideBottom="true" :hideFab="true" :hideTop="!loading && !!flashCard">
+		<template v-slot:content-top>
+			<div v-if="flashCard" />
+		</template>
 		<div class="h-full flex flex-col">
 			<BlockLoading v-if="loading" />
-			<FlashCardDetails v-else-if="flashCard" :flashCard="flashCard" class="h-full" />
+			<FlashCardDetails v-else-if="flashCard" :flashCard="flashCard" />
 			<NotFound v-else title="Flashcard not found" />
 		</div>
 	</DefaultLayout>

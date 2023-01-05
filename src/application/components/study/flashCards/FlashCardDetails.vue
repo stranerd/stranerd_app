@@ -1,62 +1,77 @@
 <template>
-	<div class="flex flex-col lg:gap-4">
-		<div class="flex flex-col p-4 lg:p-0 gap-4">
-			<div class="card-sm flex p-4 gap-4 justify-between">
-				<IonText class="font-bold">{{ flashCard.title }}</IonText>
-				<Avatar :id="flashCard.user.id" :name="flashCard.user.bio.fullName" :size="20"
-					:src="flashCard.user.bio.photo" />
-			</div>
-			<div class="flex justify-between items-center gap-4 text-secondaryText">
-				<div class="flex items-center" @click="cardMode = !cardMode">
-					<IonIcon :icon="!cardMode ? copyOutline: listOutline" class="text-secondaryText mr-2 md:mt-0" />
-					<IonText class="flex text-sm">
-						{{ !cardMode ? 'Card mode' : 'List mode' }}
-					</IonText>
-				</div>
-
-				<div class="flex items-center gap-4">
-					<Share :link="flashCard.shareLink" :title="flashCard.title" text="Share this flashcard" />
-					<SaveToSet :entity="flashCard" />
-					<template v-if="flashCard.user.id === id">
-						<IonIcon :icon="createOutline" @click="openFlashCardEditModal(flashCard, $router)" />
-						<SpinLoading v-if="loading" />
-						<IonIcon v-else :icon="trashBinOutline" class="text-danger" @click="deleteFlashCard" />
-					</template>
-				</div>
+	<ReadList v-if="tab === 'read'" :close="() => tab = null" :flashCard="flashCard" />
+	<div v-else class="showcase-flex !gap-6">
+		<div class="flex gap-4 justify-between items-center">
+			<IonIcon :icon="arrowBackOutline" />
+			<div class="flex gap-4 items-center">
+				<span class="font-bold text-lg">
+					{{ flashCard.set.length }} {{ pluralize(flashCard.set.length, 'term', 'terms') }}
+				</span>
 			</div>
 		</div>
-		<FlashCardScreen v-if="cardMode" :flashCard="flashCard" class="flex-1" />
-		<FlashCardListView v-else :flashCard="flashCard" class="px-4 lg:px-0" />
+		<div class="flex gap-4 lg:gap-6 overflow-x-auto hide-scrollbar min-h-[150px]">
+			<div v-for="(set, idx) in flashCard.set" :key="idx"
+				class="flex flex-col card-sm card-padding min-w-[85%] lg:min-w-[40%]">
+				<h1>{{ set.question }}</h1>
+			</div>
+		</div>
+		<div class="flex flex-col">
+			<IonText class="font-bold text-lg">{{ flashCard.title }}</IonText>
+			<div class="flex items-center gap-2 text-secondaryText">
+				<Avatar :id="flashCard.user.id" :name="flashCard.user.bio.fullName" :size="20"
+					:src="flashCard.user.bio.photo" />
+				<UserName :isTutor="flashCard.user.roles.isStranerdTutor" :name="flashCard.user.bio.fullName"
+					class="font-bold" />
+				<IonIcon :icon="ellipse" class="dot" />
+				<span>
+					{{ flashCard.set.length }} {{ pluralize(flashCard.set.length, 'term', 'terms') }}
+				</span>
+			</div>
+		</div>
+		<div class="flex flex-col gap-4">
+			<a v-for="{ label, sub, icon, route } in [
+				{ label: 'Flashcard', icon: copyOutline, sub: 'The best way to memorize your studies', route: 'flash' },
+				{ label: 'Test', icon: documentTextOutline, sub: 'Multiple choice questions practice test', route: 'test' },
+				{ label: 'Match', icon: gitCompareOutline, sub: 'Pick questions and answers that correspond', route: 'match' },
+				{ label: 'Read', icon: readerOutline, sub: 'Study questions with answers together', route: 'read' },
+			]" :key="route" class="flex items-center card-padding !gap-4 card-sm" @click="tab = route">
+				<span class="rounded-full w-12 h-12 flex items-center justify-center bg-secondaryText text-itemBg">
+					<IonIcon :icon="icon" />
+				</span>
+				<span class="flex flex-col">
+					<span class="text-lg font-bold">{{ label }}</span>
+					<span class="text-secondaryText">{{ sub }}</span>
+				</span>
+			</a>
+		</div>
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { copyOutline, createOutline, listOutline, trashBinOutline } from 'ionicons/icons'
-import { openFlashCardEditModal, useDeleteFlashCard } from '@app/composable/study/flashCards'
-import FlashCardScreen from '@app/components/study/flashCards/FlashCardScreen.vue'
-import FlashCardListView from '@app/components/study/flashCards/FlashCardListView.vue'
-import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
+import {
+	arrowBackOutline,
+	copyOutline,
+	documentTextOutline,
+	ellipse,
+	gitCompareOutline,
+	readerOutline
+} from 'ionicons/icons'
+import { useDeleteFlashCard } from '@app/composable/study/flashCards'
+import ReadList from '@app/components/study/flashCards/modes/ReadList.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { FlashCardEntity } from '@modules/study'
+import { pluralize } from '@utils/commons'
 
-export default defineComponent({
-	name: 'FlashCardDetails',
-	components: { FlashCardScreen, FlashCardListView, SaveToSet },
-	props: {
-		flashCard: {
-			type: FlashCardEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const { id } = useAuth()
-		const cardMode = ref(true)
-		const { deleteFlashCard, loading, error } = useDeleteFlashCard(props.flashCard.id)
-		return {
-			id, cardMode, createOutline, trashBinOutline, copyOutline, listOutline,
-			openFlashCardEditModal, deleteFlashCard, loading, error
-		}
+const props = defineProps({
+	flashCard: {
+		type: FlashCardEntity,
+		required: true
 	}
 })
+
+const { id } = useAuth()
+const tab = ref(null as string | null)
+const cardMode = ref(true)
+const { deleteFlashCard, loading, error } = useDeleteFlashCard(props.flashCard.id)
 </script>

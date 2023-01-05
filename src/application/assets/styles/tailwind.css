@@ -95,11 +95,11 @@
 	}
 
 	.card {
-		@apply lg:rounded-xl lg:border lg:border-itemBg;
+		@apply lg:rounded-xl lg:border lg:border-itemBg lg:bg-itemBg;
 	}
 
 	.card-sm {
-		@apply rounded-xl border border-itemBg;
+		@apply rounded-xl border border-itemBg bg-itemBg;
 	}
 
 	.card-padding {
