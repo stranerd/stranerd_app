@@ -4,7 +4,7 @@
 			<div v-if="flashCard" />
 		</template>
 		<div class="h-full flex flex-col">
-			<BlockLoading v-if="loading" />
+			<BlockLoading v-if="loading" class="page-padding" />
 			<FlashCardDetails v-else-if="flashCard" :flashCard="flashCard" />
 			<NotFound v-else title="Flashcard not found" />
 		</div>

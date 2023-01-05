@@ -1,18 +1,17 @@
 <template>
-	<ReadList v-if="tab === 'read'" :close="() => tab = null" :flashCard="flashCard" />
+	<Flash v-if="tab === 'flash'" :close="() => tab = null" :flashCard="flashCard" />
+	<Read v-else-if="tab === 'read'" :close="() => tab = null" :flashCard="flashCard" />
 	<div v-else class="showcase-flex !gap-6">
 		<div class="flex gap-4 justify-between items-center">
-			<IonIcon :icon="arrowBackOutline" />
+			<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline" defaultHref="/dashboard" mode="ios"
+				text="" />
 			<div class="flex gap-4 items-center">
-				<span class="font-bold text-lg">
-					{{ flashCard.set.length }} {{ pluralize(flashCard.set.length, 'term', 'terms') }}
-				</span>
+				<Share :link="flashCard.shareLink" :title="flashCard.title" text="Share this flashcard" />
 			</div>
 		</div>
-		<div class="flex gap-4 lg:gap-6 overflow-x-auto hide-scrollbar min-h-[150px]">
-			<div v-for="(set, idx) in flashCard.set" :key="idx"
-				class="flex flex-col card-sm card-padding min-w-[85%] lg:min-w-[40%]">
-				<h1>{{ set.question }}</h1>
+		<div class="flex gap-4 lg:gap-6 overflow-x-auto hide-scrollbar">
+			<div v-for="(set, idx) in flashCard.set" :key="idx" class="flex flex-col min-w-[85%] lg:min-w-[40%]">
+				<Flip :back="set.answer" :front="set.question" height="h-[200px]" />
 			</div>
 		</div>
 		<div class="flex flex-col">
@@ -31,16 +30,16 @@
 		<div class="flex flex-col gap-4">
 			<a v-for="{ label, sub, icon, route } in [
 				{ label: 'Flashcard', icon: copyOutline, sub: 'The best way to memorize your studies', route: 'flash' },
-				{ label: 'Test', icon: documentTextOutline, sub: 'Multiple choice questions practice test', route: 'test' },
-				{ label: 'Match', icon: gitCompareOutline, sub: 'Pick questions and answers that correspond', route: 'match' },
+				//{ label: 'Test', icon: documentTextOutline, sub: 'Multiple choice questions practice test', route: 'test' },
+				//{ label: 'Match', icon: gitCompareOutline, sub: 'Pick questions and answers that correspond', route: 'match' },
 				{ label: 'Read', icon: readerOutline, sub: 'Study questions with answers together', route: 'read' },
 			]" :key="route" class="flex items-center card-padding !gap-4 card-sm" @click="tab = route">
-				<span class="rounded-full w-12 h-12 flex items-center justify-center bg-secondaryText text-itemBg">
+				<span class="rounded-full w-14 h-14 flex items-center justify-center bg-bodyBg">
 					<IonIcon :icon="icon" />
 				</span>
 				<span class="flex flex-col">
-					<span class="text-lg font-bold">{{ label }}</span>
-					<span class="text-secondaryText">{{ sub }}</span>
+					<span class="font-bold">{{ label }}</span>
+					<span class="text-sm text-secondaryText">{{ sub }}</span>
 				</span>
 			</a>
 		</div>
@@ -49,16 +48,11 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import {
-	arrowBackOutline,
-	copyOutline,
-	documentTextOutline,
-	ellipse,
-	gitCompareOutline,
-	readerOutline
-} from 'ionicons/icons'
+import { arrowBackOutline, copyOutline, ellipse, readerOutline } from 'ionicons/icons'
 import { useDeleteFlashCard } from '@app/composable/study/flashCards'
-import ReadList from '@app/components/study/flashCards/modes/ReadList.vue'
+import Read from '@app/components/study/flashCards/modes/Read.vue'
+import Flash from '@app/components/study/flashCards/modes/Flash.vue'
+import Flip from '@app/components/study/flashCards/modes/Flip.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { FlashCardEntity } from '@modules/study'
 import { pluralize } from '@utils/commons'

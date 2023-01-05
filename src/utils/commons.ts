@@ -35,14 +35,13 @@ export const copyObject = <T extends Record<any, any>> (target: T, ...sources: T
 export const getAlphabet = (num: number) => 'abcdefghijklmnopqrstuv'.split('')[num - 1] ?? 'a'
 
 export const share = async ({ title, text, url }: { title: string, text: string, url: string }) => {
-	if (await Share.canShare()) await Share.share({
+	const { value } = await Share.canShare()
+	if (value) await Share.share({
 		title, text, url, dialogTitle: title
 	})
 	else {
 		await copyToClipboard(url)
-		await Notify({
-			message: 'Your device doesnt support the share api. The link has been copied to your clipboard instead'
-		})
+		await Notify({ message: 'Copied link to your clipboard!' })
 	}
 }
 
