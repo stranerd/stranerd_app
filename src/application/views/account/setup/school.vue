@@ -28,7 +28,7 @@
 				</IonList>
 				<div class="flex gap-4 items-center mt-auto">
 					<IonButton class="btn-outline w-full" type="button" @click.prevent="skip">
-						Skip
+						Skip Setup
 					</IonButton>
 					<IonButton class="btn-primary w-full" type="button" @click="tab = 1">
 						Next
@@ -80,11 +80,11 @@
 
 					<div class="flex gap-4 items-center mt-auto">
 						<IonButton class="btn-outline w-full" type="button" @click.prevent="skip">
-							Skip
+							Skip Setup
 						</IonButton>
 						<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
 							<SpinLoading v-if="loading" />
-							<span v-else>Done</span>
+							<span v-else>Save</span>
 						</IonButton>
 					</div>
 				</template>
@@ -142,7 +142,7 @@
 					</IonButton>
 					<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
 						<SpinLoading v-if="loading" />
-						<span v-else>Done</span>
+						<span v-else>Save</span>
 					</IonButton>
 				</div>
 			</form>

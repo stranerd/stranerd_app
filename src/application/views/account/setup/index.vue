@@ -36,7 +36,7 @@
 
 				<div class="flex gap-4 items-center mt-auto">
 					<IonButton class="btn-outline w-full" type="button" @click.prevent="skip">
-						Skip
+						Skip Setup
 					</IonButton>
 					<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full" type="submit">
 						<SpinLoading v-if="loading" />
