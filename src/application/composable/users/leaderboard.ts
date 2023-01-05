@@ -23,7 +23,7 @@ export const useLeaderboardList = () => {
 			await global.setLoading(true)
 			const users = await UsersUseCases.getLeaderboard(global.time.value, global.tagId.value, global.nextPage.value)
 			if (global.nextPage.value === 1) global.users.value = []
-			users.results.forEach((user) => addToArray(global.users.value, user, (e) => e.id, (e) => e.account.rankings[global.time.value]))
+			users.results.forEach((user) => addToArray(global.users.value, user, (e) => e.id, (e) => e.account.rankings[global.time.value].value))
 			global.nextPage.value = users.pages.next ?? 1
 			global.fetched.value = true
 		} catch (error) {

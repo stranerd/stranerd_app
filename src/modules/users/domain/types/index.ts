@@ -75,7 +75,7 @@ export interface UserAccount {
 		longestStreak: number
 		lastEvaluatedAt: number
 	}
-	rankings: Record<RankingTimes, number>
+	rankings: Record<RankingTimes, { value: number, lastUpdatedAt: number }>
 }
 
 export interface UserStatus {

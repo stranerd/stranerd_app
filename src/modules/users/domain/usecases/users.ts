@@ -33,8 +33,11 @@ export class UsersUseCase {
 
 	async getLeaderboard (type: RankingTimes, tagId: string | null, page: number) {
 		const conditions: QueryParams = {
-			where: [{ field: `account.rankings.${type}`, condition: Conditions.gt, value: 0 }],
-			sort: [{ field: `account.rankings.${type}`, desc: true }],
+			where: [{ field: `account.rankings.${type}.value`, condition: Conditions.gt, value: 0 }],
+			sort: [
+				{ field: `account.rankings.${type}.value`, desc: true },
+				{ field: `account.rankings.${type}.lastUpdatedAt`, desc: false }
+			],
 			limit: 50, page
 		}
 		if (tagId) conditions.where!.push({ field: 'school.tagId', value: tagId })

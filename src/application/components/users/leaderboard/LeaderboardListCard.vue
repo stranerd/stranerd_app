@@ -7,7 +7,7 @@
 			<IonIcon :icon="star" />
 		</span>
 		<span class="ml-auto">
-			{{ formatNumber(user.account.rankings[time], 2) }}pts
+			{{ formatNumber(user.account.rankings[time].value, 2) }}pts
 		</span>
 	</router-link>
 </template>

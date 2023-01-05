@@ -14,7 +14,7 @@
 							<IonIcon :icon="trophyOutline" />
 						</span>
 						<span class="rounded-r-full px-4 -ml-2 py-0.5 bg-[#FF880022]">
-							{{ user.account.rankings.daily }}
+							{{ user.account.rankings.daily.value }}
 						</span>
 					</router-link>
 				</span>
