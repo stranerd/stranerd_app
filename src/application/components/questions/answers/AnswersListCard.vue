@@ -60,9 +60,9 @@ import {
 } from 'ionicons/icons'
 import { useAnswer } from '@app/composable/questions/answers'
 import { useAuth } from '@app/composable/auth/auth'
-import { openCreateReportModal } from '@app/composable/reports/reports'
+import { openCreateReportModal } from '@app/composable/moderation/reports'
 import { formatNumber } from '@utils/commons'
-import { ReportType } from '@modules/reports'
+import { ReportType } from '@modules/moderation'
 import { formatTime } from '@utils/dates'
 import { LikeEntity } from '@modules/interactions'
 

@@ -1,5 +1,5 @@
 import { modal, popover } from '@app/composable/core/modal'
-import CreateReport from '@app/components/modals/reports/CreateReport.vue'
+import CreateReport from '@app/components/modals/moderation/CreateReport.vue'
 import CreateTestPrep from '@app/components/modals/study/CreateTestPrep.vue'
 import EditTestPrep from '@app/components/modals/study/EditTestPrep.vue'
 import CreateSet from '@app/components/modals/study/CreateSet.vue'
@@ -32,7 +32,7 @@ import QuestionCreated from '@app/components/modals/users/QuestionCreated.vue'
 import NeedsSubscription from '@app/components/modals/reactions/NeedsSubscription.vue'
 import NoMoreQuestions from '@app/components/modals/reactions/NoMoreQuestions.vue'
 
-const ReportModal = modal.register('Report', { CreateReport })
+const ModerationModal = modal.register('Moderation', { CreateReport })
 const StudyModal = modal.register('Study', {
 	CreateSet, EditSet, SaveEntity, CreateTestPrep, EditTestPrep, CreateNote, EditNote
 })
@@ -47,7 +47,7 @@ const UserModal = modal.register('User', { FabMenu, ProfileMenu, QuestionCreated
 const InteractionModal = modal.register('Interaction', { CreateComment, CreateTag, EditTag })
 const ReactionModal = popover.register('Reaction', { NeedsSubscription, NoMoreQuestions })
 
-export const useReportModal = () => ReportModal
+export const useModerationModal = () => ModerationModal
 export const useStudyModal = () => StudyModal
 export const useClassModal = () => ClassModal
 export const useSchoolModal = () => SchoolModal
@@ -56,7 +56,7 @@ export const useInteractionModal = () => InteractionModal
 export const useReactionModal = () => ReactionModal
 
 export const allModals = [
-	useReportModal, useStudyModal, useClassModal,
+	useModerationModal, useStudyModal, useClassModal,
 	useSchoolModal, useUserModal, useInteractionModal, useReactionModal
 ]
 

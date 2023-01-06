@@ -2,8 +2,7 @@
 	<div class="flex flex-col items-start w-full border-bottom-line card-padding !gap-0">
 		<div class="flex items-center justify-between mb-2 w-full gap-4 text-secondaryText text-sm">
 			<IonText class="font-bold">{{ questionIndex + 1 }} / {{ total }}</IonText>
-			<SpinLoading v-if="loading" />
-			<IonIcon v-else :icon="flagOutline" @click="createReport" />
+			<IonIcon :icon="flagOutline" @click="openReportModal" />
 		</div>
 
 		<div class="mb-2">
@@ -82,8 +81,8 @@ import {
 import { TestEntity, TestType } from '@modules/study'
 import { PastQuestionEntity, PastQuestionType } from '@modules/school'
 import { getAlphabet } from '@utils/commons'
-import { useCreateReport } from '@app/composable/reports/reports'
-import { ReportType } from '@modules/reports'
+import { openCreateReportModal, useCreateReport } from '@app/composable/moderation/reports'
+import { ReportType } from '@modules/moderation'
 
 export default defineComponent({
 	name: 'TestQuestion',
@@ -125,14 +124,14 @@ export default defineComponent({
 		const showExplanation = ref(false)
 		onMounted(() => {
 			factory.value.type = ReportType.pastQuestions
-			factory.value.reportedId = props.question.id
+			factory.value.id = props.question.id
 			factory.value.message = 'Flagged'
 		})
 		return {
 			checkmarkCircleOutline, radioButtonOff, chevronForwardOutline,
 			flagOutline, radioButtonOn, closeCircleOutline,
-			showAnswers, isCorrect, isInCorrect, showExplanation,
-			getAlphabet, loading, error, createReport
+			showAnswers, isCorrect, isInCorrect, showExplanation, getAlphabet,
+			openReportModal: () => openCreateReportModal(ReportType.pastQuestions, props.question.id)
 		}
 	}
 })

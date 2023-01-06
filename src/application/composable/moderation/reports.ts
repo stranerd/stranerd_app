@@ -1,25 +1,25 @@
 import { onMounted, ref, Ref } from 'vue'
-import { ReportEntity, ReportFactory, ReportsUseCases, ReportType } from '@modules/reports'
+import { ReportEntity, ReportFactory, ReportsUseCases, ReportType } from '@modules/moderation'
 import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { useReportModal } from '@app/composable/core/modals'
+import { useModerationModal } from '@app/composable/core/modals'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 
-let reportedEntity = null as { type: ReportType, reportedId: string } | null
-export const openCreateReportModal = (type: ReportType, reportedId: string) => {
-	reportedEntity = { type, reportedId }
-	useReportModal().openCreateReport()
+let reportedEntity = null as { type: ReportType, id: string } | null
+export const openCreateReportModal = (type: ReportType, id: string) => {
+	reportedEntity = { type, id }
+	useModerationModal().openCreateReport()
 }
 
 export const useCreateReport = () => {
-	const factory = ref(new ReportFactory()) as Ref<ReportFactory>
+	const factory = ref(new ReportFactory(reportedEntity?.type ?? ReportType.users, reportedEntity?.id ?? '')) as Ref<ReportFactory>
 	const { message, setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
-	if (!reportedEntity) useReportModal().closeCreateReport()
+	if (!reportedEntity) useModerationModal().closeCreateReport()
 	else {
 		factory.value.type = reportedEntity.type
-		factory.value.reportedId = reportedEntity.reportedId
+		factory.value.id = reportedEntity.id
 	}
 
 	const createReport = async () => {
@@ -28,7 +28,7 @@ export const useCreateReport = () => {
 			try {
 				await setLoading(true)
 				await ReportsUseCases.add(factory.value)
-				useReportModal().closeAll()
+				useModerationModal().closeAll()
 				factory.value.reset()
 				await setMessage('Reported successfully')
 			} catch (error) {

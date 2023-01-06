@@ -7,7 +7,7 @@ export class ReportApiDataSource implements ReportBaseDataSource {
 	private stranerdClient: HttpClient
 
 	constructor () {
-		this.stranerdClient = new HttpClient(apiBase + '/reports/reports')
+		this.stranerdClient = new HttpClient(apiBase + '/moderation/reports')
 	}
 
 	async create (data: ReportToModel) {
@@ -27,14 +27,14 @@ export class ReportApiDataSource implements ReportBaseDataSource {
 	}
 
 	async listenToOne (id: string, listeners: Listeners<ReportFromModel>) {
-		const listener = listenOnSocket(`reports/reports/${id}`, listeners)
+		const listener = listenOnSocket(`moderation/reports/${id}`, listeners)
 		const model = await this.find(id)
 		if (model) await listeners.updated(model)
 		return listener
 	}
 
 	async listenToMany (query: QueryParams, listeners: Listeners<ReportFromModel>) {
-		const listener = listenOnSocket('reports/reports', listeners)
+		const listener = listenOnSocket('moderation/reports', listeners)
 		const models = await this.get(query)
 		await Promise.all(models.results.map(listeners.updated))
 		return listener

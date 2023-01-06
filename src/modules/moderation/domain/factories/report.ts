@@ -3,9 +3,7 @@ import { arrayContainsX, isLongerThanX, isString } from '@stranerd/validate'
 import { ReportToModel } from '../../data/models/report'
 import { ReportEntity, ReportType } from '../entities/report'
 
-type Keys = {
-	reportedId: string, type: ReportType, message: string
-}
+type Keys = { id: string, type: ReportType, message: string }
 
 export class ReportFactory extends BaseFactory<ReportEntity, ReportToModel, Keys> {
 	public rules = {
@@ -13,14 +11,14 @@ export class ReportFactory extends BaseFactory<ReportEntity, ReportToModel, Keys
 			required: true,
 			rules: [isString, arrayContainsX(Object.values<string>(ReportType), (cur, val) => cur === val)]
 		},
-		reportedId: { required: true, rules: [isString, isLongerThanX(0)] },
+		id: { required: true, rules: [isString, isLongerThanX(0)] },
 		message: { required: true, rules: [isString, isLongerThanX(0)] }
 	}
 
-	reserved = ['type', 'reportedId', 'message']
+	reserved = ['type', 'id', 'message']
 
-	constructor () {
-		super({ reportedId: '', type: ReportType.users, message: '' })
+	constructor (type: ReportType, id: string) {
+		super({ id, type, message: '' })
 	}
 
 	get message () {
@@ -39,38 +37,36 @@ export class ReportFactory extends BaseFactory<ReportEntity, ReportToModel, Keys
 		this.set('type', value)
 	}
 
-	get reportedId () {
-		return this.values.reportedId
+	get id () {
+		return this.values.id
 	}
 
-	set reportedId (value: string) {
-		this.set('reportedId', value)
+	set id (value: string) {
+		this.set('id', value)
 	}
 
-	get isQuestionsType () {
-		return this.type === ReportType.questions
-	}
-
-	get isAnswersType () {
-		return this.type === ReportType.answers
-	}
-
-	get isUsersType () {
-		return this.type === ReportType.users
+	get title () {
+		return {
+			[ReportType.users]: 'User',
+			[ReportType.questions]: 'Question',
+			[ReportType.answers]: 'Answer',
+			[ReportType.pastQuestions]: 'Past Question',
+			[ReportType.flashCards]: 'Flashcard'
+		}[this.type] ?? ''
 	}
 
 	public toModel = async () => {
 		if (this.valid) {
-			const { type, reportedId, message } = this.validValues
-			return { type, reportedId, message }
+			const { type, id, message } = this.validValues
+			return { entity: { type, id }, message }
 		} else {
 			throw new Error('Validation errors')
 		}
 	}
 
 	public loadEntity = (entity: ReportEntity) => {
-		this.reportedId = entity.reportedId
-		this.type = entity.data.type
+		this.id = entity.entity.id
+		this.type = entity.entity.type
 		this.message = entity.message
 	}
 }

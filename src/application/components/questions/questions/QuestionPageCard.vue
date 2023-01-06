@@ -44,8 +44,8 @@ import { openAnswerModal } from '@app/composable/questions/answers'
 import { openQuestionEditModal, useDeleteQuestion } from '@app/composable/questions/questions'
 import { formatTime } from '@utils/dates'
 import { useRouter } from 'vue-router'
-import { openCreateReportModal } from '@app/composable/reports/reports'
-import { ReportType } from '@modules/reports'
+import { openCreateReportModal } from '@app/composable/moderation/reports'
+import { ReportType } from '@modules/moderation'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
 export default defineComponent({
