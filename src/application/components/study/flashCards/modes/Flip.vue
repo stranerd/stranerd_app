@@ -1,5 +1,5 @@
 <template>
-	<div :class="[flipped ? 'vertical-flipped': 'vertical', 'divx w-full h-full']" @click="flipped = !flipped">
+	<div :id="id" :class="[flipped ? 'vertical-flipped': 'vertical', 'flap']" @click="flipped = !flipped">
 		<div class="front w-full">
 			<section v-if="!flipped" :class="height" class="overflow-y-auto flex text-center custom-shadow p-4 mx-auto">
 				<DisplayHtml :html="front" class="w-full my-auto overflow-y-auto" />
@@ -11,11 +11,15 @@
 				<DisplayHtml :html="back" class="w-full my-auto overflow-y-auto" />
 			</section>
 		</div>
+
+		<IonIcon :icon="expandOutline" class="absolute z-1 right-[1rem] top-[1rem]" @click.prevent="toggleFullscreen" />
 	</div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { expandOutline } from 'ionicons/icons'
+import { getRandomValue } from '@utils/commons'
 
 const props = defineProps({
 	front: {
@@ -33,7 +37,13 @@ const props = defineProps({
 	}
 })
 
+const id = getRandomValue()
 const flipped = ref(false)
+const isFullscreen = ref(false)
+const toggleFullscreen = () => {
+	isFullscreen.value ? document.exitFullscreen() : document.getElementById(id)?.requestFullscreen()
+	isFullscreen.value = !isFullscreen.value
+}
 </script>
 
 <style lang="scss" scoped>
@@ -42,16 +52,18 @@ const flipped = ref(false)
 	border-radius: 12px;
 }
 
-.divx {
+.flap {
 	border-radius: 12px;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
+	height: 100%;
 }
 
-.divx > .front, .divx > .back {
+.flap > .front, .flap > .back {
 	text-align: center;
 	background: $color-itemBg;
 	border-radius: 12px;
