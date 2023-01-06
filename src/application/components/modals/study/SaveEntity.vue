@@ -4,14 +4,14 @@
 			Save to
 		</template>
 		<div class="flex flex-col">
-			<router-link class="ml-auto flex gap-1 items-center" to="/study/sets/create">
+			<router-link class="ml-auto flex gap-1 items-center pb-4" to="/study/sets/create">
 				<IonIcon :icon="add" />
 				<span>Create Folder</span>
 			</router-link>
 			<div v-if="sets.length === 0" class="text-center text-xl">
 				No folders created. Go create one before you can save items
 			</div>
-			<div v-for="set in sets" :key="set.hash" class="flex gap-2 items-center border-bottom-line py-4 text-xl">
+			<div v-for="set in sets" :key="set.hash" class="flex gap-2 items-center border-top-line py-4 text-lg">
 				<IonIcon :icon="folderOutline" />
 				<IonText class="w-fit flex-grow truncate">{{ set.name }}</IonText>
 				<IonIcon :icon="set.allSaved.includes(entity.id) ? bookmark : bookmarkOutline"

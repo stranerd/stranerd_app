@@ -1,8 +1,8 @@
 <template>
 	<div class="flex flex-col h-full">
-		<div class="flex gap-4 justify-between items-center p-4">
+		<div class="flex gap-4 justify-between items-center p-4 text-lg">
 			<IonIcon :icon="closeOutline" @click="close" />
-			<span class="font-bold text-lg">
+			<span class="font-bold">
 				{{ page + 1 }}/{{ formatNumber(flashCard.set.length) }}
 			</span>
 			<span />

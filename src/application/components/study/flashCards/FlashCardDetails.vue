@@ -1,12 +1,14 @@
 <template>
 	<Flash v-if="tab === 'flash'" :close="() => tab = null" :flashCard="flashCard" />
 	<Read v-else-if="tab === 'read'" :close="() => tab = null" :flashCard="flashCard" />
+	<Settings v-else-if="tab === 'settings'" :close="() => tab = null" :flashCard="flashCard" />
 	<div v-else class="showcase-flex !gap-6">
-		<div class="flex gap-4 justify-between items-center">
+		<div class="flex gap-4 justify-between items-center text-lg">
 			<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline" defaultHref="/dashboard" mode="ios"
 				text="" />
 			<div class="flex gap-4 items-center">
 				<Share :link="flashCard.shareLink" :title="flashCard.title" text="Share this flashcard" />
+				<IonIcon :icon="ellipsisHorizontalOutline" @click="tab = 'settings'" />
 			</div>
 		</div>
 		<div class="flex gap-4 lg:gap-6 overflow-x-auto hide-scrollbar">
@@ -48,11 +50,12 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { arrowBackOutline, copyOutline, ellipse, readerOutline } from 'ionicons/icons'
+import { arrowBackOutline, copyOutline, ellipse, ellipsisHorizontalOutline, readerOutline } from 'ionicons/icons'
 import { useDeleteFlashCard } from '@app/composable/study/flashCards'
 import Read from '@app/components/study/flashCards/modes/Read.vue'
 import Flash from '@app/components/study/flashCards/modes/Flash.vue'
 import Flip from '@app/components/study/flashCards/modes/Flip.vue'
+import Settings from '@app/components/study/flashCards/modes/Settings.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { FlashCardEntity } from '@modules/study'
 import { pluralize } from '@utils/commons'

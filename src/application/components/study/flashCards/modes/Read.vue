@@ -1,8 +1,8 @@
 <template>
 	<div class="showcase-flex">
-		<div class="flex gap-4 justify-between items-center">
+		<div class="flex gap-4 justify-between items-center text-lg">
 			<IonIcon :icon="closeOutline" @click="close" />
-			<span class="font-bold text-lg">
+			<span class="font-bold">
 				{{ flashCard.set.length }} {{ pluralize(flashCard.set.length, 'term', 'terms') }}
 			</span>
 			<span />
