@@ -1,7 +1,5 @@
-
 <template>
 	<div class="w-full h-auto flex flex-col bg-primaryBg py-4 md:py-8  overflow-x-hidden">
-
 		<div
 			class="container mx-auto text-primaryText p-6 flex flex-col-reverse lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl text-primaryText">
@@ -23,7 +21,7 @@
 				<!-- <dynamic-marquee> -->
 				<div v-for="partner in partners" :key="partner.id"
 					class="rounded-lg h-[148px] w-[268px] flex-none flex items-center justify-center bg-primaryText">
-					<img :src="partner.img" alt=""/>
+					<img :src="partner.img" alt="" />
 				</div>
 				<!-- </dynamic-marquee> -->
 			</div>
@@ -31,9 +29,10 @@
 	</div>
 </template>
 
-<script setup lang=ts>
+<script lang="ts" setup>
 import { Vue3Marquee } from 'vue3-marquee'
 import 'vue3-marquee/dist/style.css'
+
 const partners = [
 	{ img: new URL('@/assets/images/newLanding/partner/partner_unilag.svg', import.meta.url).href, id: 1 },
 	{ img: new URL('@/assets/images/newLanding/partner/partner_village_capital.svg', import.meta.url).href, id: 2 },
