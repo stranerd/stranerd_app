@@ -44,7 +44,7 @@ export const useCreateReport = () => {
 	}
 }
 
-const global = {
+const store = {
 	reports: ref([] as ReportEntity[]),
 	fetched: ref(false),
 	hasMore: ref(false),
@@ -54,25 +54,25 @@ const global = {
 
 export const useReportsList = () => {
 	const fetchReports = async () => {
-		await global.setError('')
+		await store.setError('')
 		try {
-			await global.setLoading(true)
-			const lastDate = global.reports.value[0]?.createdAt
+			await store.setLoading(true)
+			const lastDate = store.reports.value[0]?.createdAt
 			const reports = await ReportsUseCases.get(lastDate)
-			global.hasMore.value = !!reports.pages.next
-			reports.results.forEach((r) => addToArray(global.reports.value, r, (e) => e.id, (e) => e.createdAt))
-			global.fetched.value = true
+			store.hasMore.value = !!reports.pages.next
+			reports.results.forEach((r) => addToArray(store.reports.value, r, (e) => e.id, (e) => e.createdAt))
+			store.fetched.value = true
 		} catch (error) {
-			await global.setError(error)
+			await store.setError(error)
 		}
-		await global.setLoading(false)
+		await store.setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchReports()
+		if (!store.fetched.value && !store.loading.value) await fetchReports()
 	})
 
-	return { ...global, fetchOlderReports: fetchReports }
+	return { ...store, fetchOlderReports: fetchReports }
 }
 
 export const useDeleteReport = (id: string) => {
@@ -90,7 +90,7 @@ export const useDeleteReport = (id: string) => {
 			await setLoading(true)
 			try {
 				await ReportsUseCases.delete(id)
-				global.reports.value = global.reports.value
+				store.reports.value = store.reports.value
 					.filter((r) => r.id !== id)
 				await setMessage('Report deleted successfully')
 			} catch (error) {

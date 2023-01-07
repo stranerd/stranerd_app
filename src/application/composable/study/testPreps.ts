@@ -6,7 +6,7 @@ import { addToArray } from '@utils/commons'
 import { useStudyModal } from '@app/composable/core/modals'
 import { PastQuestionType } from '@modules/school'
 
-const global = {
+const store = {
 	filters: reactive({
 		institutionId: null as string | null,
 		courseId: null as string | null,
@@ -21,47 +21,47 @@ const global = {
 }
 
 const fetchTestPreps = async () => {
-	await global.setError('')
+	await store.setError('')
 	try {
-		await global.setLoading(true)
+		await store.setLoading(true)
 		const testPreps = await TestPrepsUseCases.get()
-		testPreps.results.forEach((t) => addToArray(global.testPreps.value, t, (e) => e.id, (e) => e.data.year))
-		global.fetched.value = true
+		testPreps.results.forEach((t) => addToArray(store.testPreps.value, t, (e) => e.id, (e) => e.data.year))
+		store.fetched.value = true
 	} catch (error) {
-		await global.setError(error)
+		await store.setError(error)
 	}
-	await global.setLoading(false)
+	await store.setLoading(false)
 }
 
 export const useTestPrepList = () => {
 	const fetchCoursePreps = async (courseId: string) => {
-		if (global.courses[courseId]) return
-		await global.setError('')
+		if (store.courses[courseId]) return
+		await store.setError('')
 		try {
-			await global.setLoading(true)
+			await store.setLoading(true)
 			const testPreps = await TestPrepsUseCases.getCoursePreps(courseId)
-			testPreps.results.forEach((t) => addToArray(global.testPreps.value, t, (e) => e.id, (e) => e.data.year))
-			global.courses[courseId] = true
+			testPreps.results.forEach((t) => addToArray(store.testPreps.value, t, (e) => e.id, (e) => e.data.year))
+			store.courses[courseId] = true
 		} catch (error) {
-			await global.setError(error)
+			await store.setError(error)
 		}
-		await global.setLoading(false)
+		await store.setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchTestPreps()
+		if (!store.fetched.value && !store.loading.value) await fetchTestPreps()
 	})
 
-	return { ...global, fetchCoursePreps }
+	return { ...store, fetchCoursePreps }
 }
 
 export const useTestPrep = (id: string) => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const testPrep = computed({
-		get: () => global.testPreps.value.find((s) => s.id === id) ?? null,
+		get: () => store.testPreps.value.find((s) => s.id === id) ?? null,
 		set: (s) => {
-			if (s) addToArray(global.testPreps.value, s, (e) => e.id, (e) => e.createdAt)
+			if (s) addToArray(store.testPreps.value, s, (e) => e.id, (e) => e.createdAt)
 		}
 	})
 
@@ -69,7 +69,7 @@ export const useTestPrep = (id: string) => {
 		await setError('')
 		try {
 			await setLoading(true)
-			const prep = global.testPreps.value.find((t) => t.id === id) ?? null
+			const prep = store.testPreps.value.find((t) => t.id === id) ?? null
 			if (!prep) testPrep.value = await TestPrepsUseCases.find(id)
 		} catch (error) {
 			await setError(error)
@@ -96,7 +96,7 @@ export const useCreateTestPrep = () => {
 			try {
 				await setLoading(true)
 				const testPrep = await TestPrepsUseCases.add(factory.value)
-				addToArray(global.testPreps.value, testPrep, (e) => e.id, (e) => e.createdAt)
+				addToArray(store.testPreps.value, testPrep, (e) => e.id, (e) => e.createdAt)
 				await setMessage('TestPrep submitted successfully')
 				useStudyModal().closeCreateTestPrep()
 				factory.value.reset()
@@ -129,7 +129,7 @@ export const useEditTestPrep = () => {
 			try {
 				await setLoading(true)
 				const testPrep = await TestPrepsUseCases.update(editingTestPrep!.id, factory.value)
-				addToArray(global.testPreps.value, testPrep, (e) => e.id, (e) => e.createdAt)
+				addToArray(store.testPreps.value, testPrep, (e) => e.id, (e) => e.createdAt)
 				await setMessage('TestPrep updated successfully')
 				useStudyModal().closeEditTestPrep()
 				factory.value.reset()
@@ -158,7 +158,7 @@ export const useDeleteTestPrep = (testPrepId: string) => {
 			await setLoading(true)
 			try {
 				await TestPrepsUseCases.delete(testPrepId)
-				global.testPreps.value = global.testPreps.value
+				store.testPreps.value = store.testPreps.value
 					.filter((q) => q.id !== testPrepId)
 				await setMessage('TestPrep deleted successfully')
 			} catch (error) {

@@ -5,7 +5,7 @@ import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 import { AuthUseCases } from '@modules/auth'
 
-const global = {
+const store = {
 	tutors: ref([] as UserEntity[]),
 	fetched: ref(false),
 	...useErrorHandler(),
@@ -15,59 +15,59 @@ const global = {
 const listener = useListener(async () => {
 	return await UsersUseCases.listenToAllTutors({
 		created: async (entity) => {
-			addToArray(global.tutors.value, entity, (e) => e.id, (e) => e.score)
+			addToArray(store.tutors.value, entity, (e) => e.id, (e) => e.score)
 		},
 		updated: async (entity) => {
-			addToArray(global.tutors.value, entity, (e) => e.id, (e) => e.score)
+			addToArray(store.tutors.value, entity, (e) => e.id, (e) => e.score)
 		},
 		deleted: async (entity) => {
-			const index = global.tutors.value.findIndex((t) => t.id === entity.id)
-			global.tutors.value.splice(index, 1)
+			const index = store.tutors.value.findIndex((t) => t.id === entity.id)
+			store.tutors.value.splice(index, 1)
 		}
 	})
 })
 
 export const useTutorsList = () => {
 	const fetchTutors = async () => {
-		await global.setError('')
+		await store.setError('')
 		try {
-			await global.setLoading(true)
+			await store.setLoading(true)
 			const tutors = await UsersUseCases.getAllTutors()
-			tutors.results.forEach((t) => addToArray(global.tutors.value, t, (e) => e.id, (e) => e.score))
-			global.fetched.value = true
+			tutors.results.forEach((t) => addToArray(store.tutors.value, t, (e) => e.id, (e) => e.score))
+			store.fetched.value = true
 		} catch (error) {
-			await global.setError(error)
+			await store.setError(error)
 		}
-		await global.setLoading(false)
+		await store.setLoading(false)
 	}
 
 	const tutorUser = async (user: UserEntity, value: boolean) => {
-		await global.setError('')
+		await store.setError('')
 		const accepted = await Alert({
 			message: `Are you sure you want to ${value ? 'upgrade this user to a tutor' : 'downgrade this user from tutor'}`,
 			confirmButtonText: 'Yes, continue'
 		})
 		if (accepted) {
-			await global.setLoading(true)
+			await store.setLoading(true)
 			try {
 				await AuthUseCases.updateRole(user.id, 'isStranerdTutor', value)
 				user.roles.isStranerdTutor = true
-				addToArray(global.tutors.value, user, (e) => e.id, (e) => e.score)
-				await global.setMessage(`Successfully ${value ? 'upgraded to' : 'downgraded from'} tutor`)
+				addToArray(store.tutors.value, user, (e) => e.id, (e) => e.score)
+				await store.setMessage(`Successfully ${value ? 'upgraded to' : 'downgraded from'} tutor`)
 			} catch (error) {
-				await global.setError(error)
+				await store.setError(error)
 			}
-			await global.setLoading(false)
+			await store.setLoading(false)
 		}
 	}
 
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchTutors()
+		if (!store.fetched.value && !store.loading.value) await fetchTutors()
 		await listener.start()
 	})
 	onUnmounted(async () => {
 		await listener.close()
 	})
 
-	return { ...global, tutorUser }
+	return { ...store, tutorUser }
 }

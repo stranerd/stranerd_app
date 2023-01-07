@@ -9,19 +9,19 @@ import { useListener } from '@app/composable/core/states'
 import { getSchoolState } from '@app/composable/auth/session'
 import { Router } from 'vue-router'
 
-const global = {
+const store = {
 	auth: ref(null as AuthDetails | null),
 	user: ref(null as UserEntity | null),
 	wallet: ref(null as WalletEntity | null),
 	listener: useListener(async () => {
-		const id = global.auth.value?.id as string | undefined
+		const id = store.auth.value?.id as string | undefined
 		if (!id) return () => {
 		}
 		const setUser = async (user: UserEntity) => {
-			global.user.value = user
+			store.user.value = user
 		}
 		const setWallet = async (wallet: WalletEntity) => {
-			global.wallet.value = wallet
+			store.wallet.value = wallet
 		}
 		const listeners = [
 			await UsersUseCases.listenToOne(id, {
@@ -41,51 +41,51 @@ const global = {
 
 export const useAuth = () => {
 	const id = computed({
-		get: () => global.auth.value?.id ?? '', set: () => {
+		get: () => store.auth.value?.id ?? '', set: () => {
 		}
 	})
 	const bio = computed({
-		get: () => global.user.value?.bio, set: () => {
+		get: () => store.user.value?.bio, set: () => {
 		}
 	})
 
 	const isLoggedIn = computed({
-		get: () => !!id.value && !!global.user.value, set: () => {
+		get: () => !!id.value && !!store.user.value, set: () => {
 		}
 	})
 	const isEmailVerified = computed({
-		get: () => !!global.auth.value?.isVerified, set: () => {
+		get: () => !!store.auth.value?.isVerified, set: () => {
 		}
 	})
 	const isAdmin = computed({
-		get: () => !!global.user.value?.roles.isStranerdAdmin, set: () => {
+		get: () => !!store.user.value?.roles.isStranerdAdmin, set: () => {
 		}
 	})
 	const isTutor = computed({
-		get: () => !!global.user.value?.roles.isStranerdTutor, set: () => {
+		get: () => !!store.user.value?.roles.isStranerdTutor, set: () => {
 		}
 	})
 	const isSubscribed = computed({
-		get: () => !!global.wallet.value?.subscription.active, set: () => {
+		get: () => !!store.wallet.value?.subscription.active, set: () => {
 		}
 	})
 	const hasPassword = computed({
-		get: () => !!global.auth.value?.authTypes.includes(AuthTypes.email),
+		get: () => !!store.auth.value?.authTypes.includes(AuthTypes.email),
 		set: () => {
 		}
 	})
 
 	const setAuthUser = async (details: AuthDetails | null) => {
-		if (global.listener) await global.listener.close()
-		global.auth.value = details
+		if (store.listener) await store.listener.close()
+		store.auth.value = details
 		if (details?.id) {
-			global.user.value = await UsersUseCases.find(details.id)
-			global.wallet.value = await WalletsUseCases.get()
-		} else global.user.value = null
+			store.user.value = await UsersUseCases.find(details.id)
+			store.wallet.value = await WalletsUseCases.get()
+		} else store.user.value = null
 	}
 
 	const startProfileListener = async () => {
-		await global.listener.restart()
+		await store.listener.restart()
 	}
 
 	const signin = async (remembered: boolean, router: Router) => {
@@ -94,15 +94,15 @@ export const useAuth = () => {
 			startProfileListener()
 		])
 		if ((await getSchoolState()) !== id.value) {
-			if (!global.user.value?.bio.photo) {
+			if (!store.user.value?.bio.photo) {
 				await router.push('/account/setup')
 				return false
 			}
-			if (!global.user.value?.bio.phone) {
+			if (!store.user.value?.bio.phone) {
 				await router.push('/account/setup/phone')
 				return false
 			}
-			if (!global.user.value?.school) {
+			if (!store.user.value?.school) {
 				await router.push('/account/setup/school')
 				return false
 			}
@@ -125,7 +125,7 @@ export const useAuth = () => {
 	}
 
 	return {
-		id, bio, user: global.user, auth: global.auth, wallet: global.wallet,
+		id, bio, user: store.user, auth: store.auth, wallet: store.wallet,
 		isLoggedIn, isEmailVerified, isAdmin, isTutor, hasPassword, isSubscribed,
 		setAuthUser, signin, signout, deleteAccount
 	}

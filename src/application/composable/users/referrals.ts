@@ -4,7 +4,7 @@ import { ReferralEntity, ReferralsUseCases } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { addToArray } from '@utils/commons'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	referrals: Ref<ReferralEntity[]>
 	hasMore: Ref<boolean>
 	fetched: Ref<boolean>
@@ -14,24 +14,24 @@ const global = {} as Record<string, {
 export const useReferralList = () => {
 	const { id } = useAuth()
 	const userId = id.value ?? 'empty'
-	if (global[userId] === undefined) {
+	if (store[userId] === undefined) {
 		const listener = useListener(async () => {
 			if (!id.value) return () => {
 			}
 			return ReferralsUseCases.listen({
 				created: async (entity) => {
-					addToArray(global[userId].referrals.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(store[userId].referrals.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				updated: async (entity) => {
-					addToArray(global[userId].referrals.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(store[userId].referrals.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				deleted: async (entity) => {
-					const index = global[userId].referrals.value.findIndex((t) => t.id === entity.id)
-					if (index !== -1) global[userId].referrals.value.splice(index, 1)
+					const index = store[userId].referrals.value.findIndex((t) => t.id === entity.id)
+					if (index !== -1) store[userId].referrals.value.splice(index, 1)
 				}
-			}, global[userId].referrals.value.at(-1)?.createdAt)
+			}, store[userId].referrals.value.at(-1)?.createdAt)
 		})
-		global[userId] = {
+		store[userId] = {
 			referrals: ref([]),
 			hasMore: ref(false),
 			fetched: ref(false),
@@ -43,26 +43,26 @@ export const useReferralList = () => {
 
 	const fetchReferrals = async () => {
 		if (!id.value) return
-		await global[userId].setError('')
-		await global[userId].setLoading(true)
+		await store[userId].setError('')
+		await store[userId].setLoading(true)
 		try {
-			const referrals = await ReferralsUseCases.get(global[userId].referrals.value.at(-1)?.createdAt)
-			global[userId].hasMore.value = !!referrals.pages.next
-			referrals.results.forEach((t) => addToArray(global[userId].referrals.value, t, (e) => e.id, (e) => e.createdAt))
+			const referrals = await ReferralsUseCases.get(store[userId].referrals.value.at(-1)?.createdAt)
+			store[userId].hasMore.value = !!referrals.pages.next
+			referrals.results.forEach((t) => addToArray(store[userId].referrals.value, t, (e) => e.id, (e) => e.createdAt))
 		} catch (e) {
-			await global[userId].setError(e)
+			await store[userId].setError(e)
 		}
-		await global[userId].setLoading(false)
+		await store[userId].setLoading(false)
 	}
 
 	onMounted(async () => {
 		if (!id.value) return
-		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchReferrals()
-		await global[userId].listener.start()
+		if (!store[userId].fetched.value && !store[userId].loading.value) await fetchReferrals()
+		await store[userId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[userId].listener.close()
+		await store[userId].listener.close()
 	})
 
-	return { ...global[userId], fetchOlderReferrals: fetchReferrals }
+	return { ...store[userId], fetchOlderReferrals: fetchReferrals }
 }

@@ -5,7 +5,7 @@ import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
 
-const global = {
+const store = {
 	fetched: ref(false),
 	filters: reactive({
 		institution: null as string | null,
@@ -19,25 +19,25 @@ const global = {
 }
 
 const fetchPastQuestions = async () => {
-	await global.setError('')
-	await global.setLoading(true)
+	await store.setError('')
+	await store.setLoading(true)
 	try {
 		const pastQuestions = await PastQuestionsUseCases.getCourseQuestions({
-			institutionId: global.filters.institution,
-			courseId: global.filters.course,
-			year: global.filters.year,
-			questionType: global.filters.questionType
+			institutionId: store.filters.institution,
+			courseId: store.filters.course,
+			year: store.filters.year,
+			questionType: store.filters.questionType
 		})
-		global.pastQuestions.value = pastQuestions.results
-		global.fetched.value = true
+		store.pastQuestions.value = pastQuestions.results
+		store.fetched.value = true
 	} catch (error) {
-		await global.setError(error)
+		await store.setError(error)
 	}
-	await global.setLoading(false)
+	await store.setLoading(false)
 }
 
 export const usePastQuestionList = () => {
-	return { ...global, fetchPastQuestions }
+	return { ...store, fetchPastQuestions }
 }
 
 export const useCreatePastQuestion = () => {
@@ -46,10 +46,10 @@ export const useCreatePastQuestion = () => {
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 
-	if (global.filters.institution) factory.value.institutionId = global.filters.institution
-	if (global.filters.course) factory.value.courseId = global.filters.course
-	if (global.filters.year) factory.value.year = global.filters.year
-	if (global.filters.questionType) factory.value.type = global.filters.questionType
+	if (store.filters.institution) factory.value.institutionId = store.filters.institution
+	if (store.filters.course) factory.value.courseId = store.filters.course
+	if (store.filters.year) factory.value.year = store.filters.year
+	if (store.filters.questionType) factory.value.type = store.filters.questionType
 
 	const createPastQuestion = async () => {
 		await setError('')
@@ -57,7 +57,7 @@ export const useCreatePastQuestion = () => {
 			await setLoading(true)
 			try {
 				const pastQuestion = await PastQuestionsUseCases.add(factory.value)
-				addToArray(global.pastQuestions.value, pastQuestion, (e) => e.id, (e) => e.createdAt)
+				addToArray(store.pastQuestions.value, pastQuestion, (e) => e.id, (e) => e.createdAt)
 				factory.value.reset()
 				useSchoolModal().closeCreatePastQuestion()
 				await setMessage('PastQuestion created successfully')
@@ -91,7 +91,7 @@ export const useEditPastQuestion = () => {
 			await setLoading(true)
 			try {
 				const updatedPastQuestion = await PastQuestionsUseCases.update(editingPastQuestion!.id, factory.value)
-				addToArray(global.pastQuestions.value, updatedPastQuestion, (e) => e.id, (e) => e.createdAt)
+				addToArray(store.pastQuestions.value, updatedPastQuestion, (e) => e.id, (e) => e.createdAt)
 				factory.value.reset()
 				useSchoolModal().closeEditPastQuestion()
 				await setMessage('PastQuestion updated successfully')
@@ -120,7 +120,7 @@ export const useDeletePastQuestion = (pastQuestion: PastQuestionEntity) => {
 			await setLoading(true)
 			try {
 				await PastQuestionsUseCases.delete(pastQuestion.id)
-				global.pastQuestions.value = global.pastQuestions.value
+				store.pastQuestions.value = store.pastQuestions.value
 					.filter((s) => s.id !== pastQuestion.id)
 				await setMessage('PastQuestion deleted successfully')
 			} catch (error) {

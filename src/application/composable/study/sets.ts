@@ -18,13 +18,13 @@ import { addToArray } from '@utils/commons'
 import { Router } from 'vue-router'
 import { QuestionEntity, QuestionsUseCases } from '@modules/questions'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	set: Ref<SetEntity | null>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-const setGlobal = {} as Record<string, {
+const setStore = {} as Record<string, {
 	hash: Ref<string>
 	saved: {
 		questions: Ref<QuestionEntity[]>
@@ -37,21 +37,21 @@ const setGlobal = {} as Record<string, {
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useSetById = (setId: string) => {
-	if (global[setId] === undefined) {
+	if (store[setId] === undefined) {
 		const listener = useListener(async () => {
 			return SetsUseCases.listenToOne(setId, {
 				created: async (entity) => {
-					global[setId].set.value = entity
+					store[setId].set.value = entity
 				},
 				updated: async (entity) => {
-					global[setId].set.value = entity
+					store[setId].set.value = entity
 				},
 				deleted: async () => {
-					global[setId].set.value = null
+					store[setId].set.value = null
 				}
 			})
 		})
-		global[setId] = {
+		store[setId] = {
 			set: ref(null),
 			fetched: ref(false),
 			listener,
@@ -61,25 +61,25 @@ export const useSetById = (setId: string) => {
 	}
 
 	const fetchSet = async () => {
-		await global[setId].setError('')
+		await store[setId].setError('')
 		try {
-			await global[setId].setLoading(true)
-			global[setId].set.value = await SetsUseCases.find(setId)
+			await store[setId].setLoading(true)
+			store[setId].set.value = await SetsUseCases.find(setId)
 		} catch (error) {
-			await global[setId].setError(error)
+			await store[setId].setError(error)
 		}
-		await global[setId].setLoading(false)
+		await store[setId].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global[setId].fetched.value && !global[setId].loading.value) await fetchSet()
-		await global[setId].listener.start()
+		if (!store[setId].fetched.value && !store[setId].loading.value) await fetchSet()
+		await store[setId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[setId].listener.close()
+		await store[setId].listener.close()
 	})
 
-	return { ...global[setId] }
+	return { ...store[setId] }
 }
 
 export const useSet = (set: SetEntity) => {

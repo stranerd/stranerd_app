@@ -5,14 +5,14 @@ import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	events: Ref<EventEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-const eventGlobal = {} as Record<string, {
+const eventStore = {} as Record<string, {
 	event: Ref<EventEntity | null>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
@@ -24,21 +24,21 @@ export const markEventSeen = async (event: EventEntity, userId: string) => {
 
 export const useEventList = (classId: string) => {
 	const { id } = useAuth()
-	if (global[classId] === undefined) {
+	if (store[classId] === undefined) {
 		const listener = useListener(async () => {
 			return await EventsUseCases.listenToClassOneOffEvents(classId, {
 				created: async (entity) => {
-					addToArray(global[classId].events.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(store[classId].events.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				updated: async (entity) => {
-					addToArray(global[classId].events.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(store[classId].events.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				deleted: async (entity) => {
-					global[classId].events.value = global[classId].events.value.filter((c) => c.id !== entity.id)
+					store[classId].events.value = store[classId].events.value.filter((c) => c.id !== entity.id)
 				}
 			})
 		})
-		global[classId] = {
+		store[classId] = {
 			events: ref([]),
 			fetched: ref(false),
 			hasMore: ref(false),
@@ -48,49 +48,49 @@ export const useEventList = (classId: string) => {
 		}
 	}
 
-	const unReadEvents = computed(() => global[classId].events.value.filter((a) => !a.isRead(id.value)).length)
+	const unReadEvents = computed(() => store[classId].events.value.filter((a) => !a.isRead(id.value)).length)
 
 	const fetchEvents = async () => {
-		await global[classId].setError('')
+		await store[classId].setError('')
 		try {
-			await global[classId].setLoading(true)
-			const events = await EventsUseCases.getClassOneOffEvents(classId, global[classId].events.value.at(-1)?.createdAt)
-			events.results.forEach((a) => addToArray(global[classId].events.value, a, (e) => e.id, (e) => e.createdAt))
-			global[classId].hasMore.value = !!events.pages.next
-			global[classId].fetched.value = true
+			await store[classId].setLoading(true)
+			const events = await EventsUseCases.getClassOneOffEvents(classId, store[classId].events.value.at(-1)?.createdAt)
+			events.results.forEach((a) => addToArray(store[classId].events.value, a, (e) => e.id, (e) => e.createdAt))
+			store[classId].hasMore.value = !!events.pages.next
+			store[classId].fetched.value = true
 		} catch (error) {
-			await global[classId].setError(error)
+			await store[classId].setError(error)
 		}
-		await global[classId].setLoading(false)
+		await store[classId].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global[classId].fetched.value && !global[classId].loading.value) await fetchEvents()
-		await global[classId].listener.start()
+		if (!store[classId].fetched.value && !store[classId].loading.value) await fetchEvents()
+		await store[classId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[classId].listener.close()
+		await store[classId].listener.close()
 	})
 
-	return { ...global[classId], fetchOlderEvents: fetchEvents, unReadEvents }
+	return { ...store[classId], fetchOlderEvents: fetchEvents, unReadEvents }
 }
 
 export const useEvent = (classId: string, id: string) => {
-	if (eventGlobal[id] === undefined) {
+	if (eventStore[id] === undefined) {
 		const listener = useListener(async () => {
 			return await EventsUseCases.listenToOne(classId, id, {
 				created: async (entity) => {
-					eventGlobal[id].event.value = entity
+					eventStore[id].event.value = entity
 				},
 				updated: async (entity) => {
-					eventGlobal[id].event.value = entity
+					eventStore[id].event.value = entity
 				},
 				deleted: async (entity) => {
-					eventGlobal[id].event.value = entity
+					eventStore[id].event.value = entity
 				}
 			})
 		})
-		eventGlobal[id] = {
+		eventStore[id] = {
 			event: ref(null),
 			fetched: ref(false),
 			listener,
@@ -100,26 +100,26 @@ export const useEvent = (classId: string, id: string) => {
 	}
 
 	const fetchEvent = async () => {
-		await eventGlobal[id].setError('')
+		await eventStore[id].setError('')
 		try {
-			await eventGlobal[id].setLoading(true)
-			eventGlobal[id].event.value = await EventsUseCases.find(classId, id)
-			eventGlobal[id].fetched.value = true
+			await eventStore[id].setLoading(true)
+			eventStore[id].event.value = await EventsUseCases.find(classId, id)
+			eventStore[id].fetched.value = true
 		} catch (error) {
-			await eventGlobal[id].setError(error)
+			await eventStore[id].setError(error)
 		}
-		await eventGlobal[id].setLoading(false)
+		await eventStore[id].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!eventGlobal[id].fetched.value && !eventGlobal[id].loading.value) await fetchEvent()
-		await eventGlobal[id].listener.start()
+		if (!eventStore[id].fetched.value && !eventStore[id].loading.value) await fetchEvent()
+		await eventStore[id].listener.start()
 	})
 	onUnmounted(async () => {
-		await eventGlobal[id].listener.close()
+		await eventStore[id].listener.close()
 	})
 
-	return { ...eventGlobal[id] }
+	return { ...eventStore[id] }
 }
 
 export const useDeleteEvent = (classId: string, eventId: string) => {

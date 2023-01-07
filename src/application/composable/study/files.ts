@@ -8,7 +8,7 @@ import { useAuth } from '@app/composable/auth/auth'
 
 type Filters = 'images' | 'videos' | 'docs'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	files: Ref<FileEntity[]>
 	type: Ref<Filters>
 	fetched: Ref<boolean>
@@ -20,22 +20,22 @@ const global = {} as Record<string, {
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useFileList = (userId = useAuth().id.value) => {
-	if (global[userId] === undefined) {
+	if (store[userId] === undefined) {
 		const listener = useListener(async () => {
-			return FilesUseCases.listenToUserFiles(userId, global[userId].type.value, {
+			return FilesUseCases.listenToUserFiles(userId, store[userId].type.value, {
 				created: async (entity) => {
-					addToArray(global[userId].files.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(store[userId].files.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				updated: async (entity) => {
-					addToArray(global[userId].files.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(store[userId].files.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				deleted: async (entity) => {
-					const index = global[userId].files.value.findIndex((c) => c.id === entity.id)
-					if (index !== -1) global[userId].files.value.splice(index, 1)
+					const index = store[userId].files.value.findIndex((c) => c.id === entity.id)
+					if (index !== -1) store[userId].files.value.splice(index, 1)
 				}
-			}, global[userId].files.value.at(0)?.createdAt)
+			}, store[userId].files.value.at(0)?.createdAt)
 		})
-		global[userId] = {
+		store[userId] = {
 			files: ref([]),
 			type: ref('images'),
 			fetched: ref(false),
@@ -50,54 +50,54 @@ export const useFileList = (userId = useAuth().id.value) => {
 	}
 
 	const fetchFiles = async () => {
-		await global[userId].setError('')
+		await store[userId].setError('')
 		try {
-			await global[userId].setLoading(true)
-			const files = await FilesUseCases.getUserFiles(userId, global[userId].type.value, global[userId].files.value.at(-1)?.createdAt)
-			files.results.map((d) => addToArray(global[userId].files.value, d, (e) => e.id, (e) => e.createdAt))
-			global[userId].hasMore.value = !!files.pages.next
-			global[userId].fetched.value = true
+			await store[userId].setLoading(true)
+			const files = await FilesUseCases.getUserFiles(userId, store[userId].type.value, store[userId].files.value.at(-1)?.createdAt)
+			files.results.map((d) => addToArray(store[userId].files.value, d, (e) => e.id, (e) => e.createdAt))
+			store[userId].hasMore.value = !!files.pages.next
+			store[userId].fetched.value = true
 		} catch (e) {
-			await global[userId].setError(e)
+			await store[userId].setError(e)
 		}
-		await global[userId].setLoading(false)
+		await store[userId].setLoading(false)
 	}
 
 	const search = async () => {
-		const searchValue = global[userId].searchValue.value
+		const searchValue = store[userId].searchValue.value
 		if (!searchValue) return
-		global[userId].searchMode.value = true
-		await global[userId].setError('')
+		store[userId].searchMode.value = true
+		await store[userId].setError('')
 		try {
-			await global[userId].setLoading(true)
-			global[userId].searchResults.value = await FilesUseCases.searchUserFiles(userId, global[userId].type.value, searchValue)
-			global[userId].fetched.value = true
+			await store[userId].setLoading(true)
+			store[userId].searchResults.value = await FilesUseCases.searchUserFiles(userId, store[userId].type.value, searchValue)
+			store[userId].fetched.value = true
 		} catch (error) {
-			await global[userId].setError(error)
+			await store[userId].setError(error)
 		}
-		await global[userId].setLoading(false)
+		await store[userId].setLoading(false)
 	}
 
-	watch(global[userId].searchValue, () => {
-		if (!global[userId].searchValue.value) global[userId].searchMode.value = false
+	watch(store[userId].searchValue, () => {
+		if (!store[userId].searchValue.value) store[userId].searchMode.value = false
 	})
 
-	watch([global[userId].type], async () => {
-		global[userId].files.value = []
+	watch([store[userId].type], async () => {
+		store[userId].files.value = []
 		await fetchFiles()
-		await global[userId].listener.restart()
+		await store[userId].listener.restart()
 	})
 	onMounted(async () => {
-		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchFiles()
-		await global[userId].listener.start()
+		if (!store[userId].fetched.value && !store[userId].loading.value) await fetchFiles()
+		await store[userId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[userId].listener.close()
+		await store[userId].listener.close()
 	})
 
-	const files = computed(() => global[userId].searchMode.value ? global[userId].searchResults.value : global[userId].files.value)
+	const files = computed(() => store[userId].searchMode.value ? store[userId].searchResults.value : store[userId].files.value)
 
-	return { ...global[userId], files, fetchOlderFiles: fetchFiles, search }
+	return { ...store[userId], files, fetchOlderFiles: fetchFiles, search }
 }
 
 export const useCreateFile = () => {
@@ -141,7 +141,7 @@ export const useDeleteFile = (file: FileEntity) => {
 			await setLoading(true)
 			try {
 				await FilesUseCases.delete(file.id)
-				if (global[file.user.id]) global[file.user.id].files.value = global[file.user.id].files.value
+				if (store[file.user.id]) store[file.user.id].files.value = store[file.user.id].files.value
 					.filter((q) => q.id !== file.id)
 				await setMessage('File deleted successfully')
 			} catch (error) {

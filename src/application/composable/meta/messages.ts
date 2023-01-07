@@ -4,7 +4,7 @@ import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/comp
 import { useAuth } from '@app/composable/auth/auth'
 import { HttpClient } from '@modules/core'
 
-const global = {
+const store = {
 	countries: ref([] as { name: string, independent: boolean }[]),
 	fetched: ref(false)
 }
@@ -46,17 +46,17 @@ export const useCreateMessage = () => {
 	}
 
 	onMounted(async () => {
-		if (global.fetched.value) return
+		if (store.fetched.value) return
 		try {
-			global.countries.value = await new HttpClient().get('https://restcountries.com/v2/all', { fields: 'name' })
-			global.fetched.value = true
+			store.countries.value = await new HttpClient().get('https://restcountries.com/v2/all', { fields: 'name' })
+			store.fetched.value = true
 			// eslint-disable-next-line no-empty
 		} catch (err) {
 		}
 	})
 
 	return {
-		...global,
+		...store,
 		factory, error, loading, message,
 		createMessage
 	}

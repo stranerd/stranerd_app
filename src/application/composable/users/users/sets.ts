@@ -4,7 +4,7 @@ import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable
 import { useAuth } from '@app/composable/auth/auth'
 import { addToArray } from '@utils/commons'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	sets: Ref<SetEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
@@ -14,21 +14,21 @@ const global = {} as Record<string, {
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useUserSetList = (id: string = useAuth().id.value) => {
-	if (global[id] === undefined) {
+	if (store[id] === undefined) {
 		const listener = useListener(async () => {
 			return await SetsUseCases.listenToUserSets(id, {
 				created: async (entity) => {
-					addToArray(global[id].sets.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(store[id].sets.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				updated: async (entity) => {
-					addToArray(global[id].sets.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(store[id].sets.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				deleted: async (entity) => {
-					global[id].sets.value = global[id].sets.value.filter((c) => c.id !== entity.id)
+					store[id].sets.value = store[id].sets.value.filter((c) => c.id !== entity.id)
 				}
 			})
 		})
-		global[id] = {
+		store[id] = {
 			sets: ref([]),
 			fetched: ref(false),
 			listener,
@@ -41,44 +41,44 @@ export const useUserSetList = (id: string = useAuth().id.value) => {
 	}
 
 	const fetchSets = async () => {
-		await global[id].setError('')
+		await store[id].setError('')
 		try {
-			await global[id].setLoading(true)
+			await store[id].setLoading(true)
 			const sets = await SetsUseCases.getUserSets(id)
-			sets.results.forEach((a) => addToArray(global[id].sets.value, a, (e) => e.id, (e) => e.createdAt))
-			global[id].fetched.value = true
+			sets.results.forEach((a) => addToArray(store[id].sets.value, a, (e) => e.id, (e) => e.createdAt))
+			store[id].fetched.value = true
 		} catch (error) {
-			await global[id].setError(error)
+			await store[id].setError(error)
 		}
-		await global[id].setLoading(false)
+		await store[id].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global[id].fetched.value && !global[id].loading.value) await fetchSets()
-		await global[id].listener.start()
+		if (!store[id].fetched.value && !store[id].loading.value) await fetchSets()
+		await store[id].listener.start()
 	})
 
 	onUnmounted(async () => {
-		await global[id].listener.close()
+		await store[id].listener.close()
 	})
 
 	const search = async () => {
-		const searchValue = global[id].searchValue.value
+		const searchValue = store[id].searchValue.value
 		if (!searchValue) return
-		global[id].searchMode.value = true
-		await global[id].setError('')
+		store[id].searchMode.value = true
+		await store[id].setError('')
 		try {
-			await global[id].setLoading(true)
-			global[id].searchResults.value = await SetsUseCases.searchUserSets(id, searchValue)
+			await store[id].setLoading(true)
+			store[id].searchResults.value = await SetsUseCases.searchUserSets(id, searchValue)
 		} catch (error) {
-			await global[id].setError(error)
+			await store[id].setError(error)
 		}
-		await global[id].setLoading(false)
+		await store[id].setLoading(false)
 	}
 
-	watch(global[id].searchValue, () => {
-		if (!global[id].searchValue.value) global[id].searchMode.value = false
+	watch(store[id].searchValue, () => {
+		if (!store[id].searchValue.value) store[id].searchMode.value = false
 	})
 
-	return { ...global[id], search }
+	return { ...store[id], search }
 }

@@ -20,7 +20,7 @@ const answeredChoices = [
 	{ val: Answered.Unanswered, key: 'Unanswered' }
 
 ]
-const global = {
+const store = {
 	questions: ref([] as QuestionEntity[]),
 	tagId: ref(''),
 	answered: ref(answeredChoices[0].val),
@@ -31,42 +31,42 @@ const global = {
 }
 const listener = useListener(async () => await QuestionsUseCases.listen({
 	created: async (entity) => {
-		addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
+		addToArray(store.questions.value, entity, (e) => e.id, (e) => e.createdAt)
 	},
 	updated: async (entity) => {
-		addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
+		addToArray(store.questions.value, entity, (e) => e.id, (e) => e.createdAt)
 	},
 	deleted: async (entity) => {
-		const index = global.questions.value.findIndex((q) => q.id === entity.id)
-		if (index !== -1) global.questions.value.splice(index, 1)
+		const index = store.questions.value.findIndex((q) => q.id === entity.id)
+		if (index !== -1) store.questions.value.splice(index, 1)
 	}
-}, global.questions.value.at(-1)?.createdAt))
+}, store.questions.value.at(-1)?.createdAt))
 
 export const useQuestionList = () => {
 	const router = useRouter()
 	const fetchQuestions = async () => {
-		await global.setError('')
+		await store.setError('')
 		try {
-			await global.setLoading(true)
-			const questions = await QuestionsUseCases.get(global.questions.value.at(-1)?.createdAt)
-			global.hasMore.value = !!questions.pages.next
-			questions.results.forEach((q) => addToArray(global.questions.value, q, (e) => e.id, (e) => e.createdAt))
-			global.fetched.value = true
+			await store.setLoading(true)
+			const questions = await QuestionsUseCases.get(store.questions.value.at(-1)?.createdAt)
+			store.hasMore.value = !!questions.pages.next
+			questions.results.forEach((q) => addToArray(store.questions.value, q, (e) => e.id, (e) => e.createdAt))
+			store.fetched.value = true
 		} catch (error) {
-			await global.setError(error)
+			await store.setError(error)
 		}
-		await global.setLoading(false)
+		await store.setLoading(false)
 	}
 	const filteredQuestions = computed({
-		get: () => global.questions.value.filter((q) => {
-			if (global.tagId.value && q.tagId !== global.tagId.value) return false
-			if (global.answered.value === Answered.Answered && q.answers.length === 0) return false
-			if (global.answered.value === Answered.Unanswered && q.answers.length > 0) return false
-			if (global.answered.value === Answered.BestAnswered && !q.isAnswered) return false
+		get: () => store.questions.value.filter((q) => {
+			if (store.tagId.value && q.tagId !== store.tagId.value) return false
+			if (store.answered.value === Answered.Answered && q.answers.length === 0) return false
+			if (store.answered.value === Answered.Unanswered && q.answers.length > 0) return false
+			if (store.answered.value === Answered.BestAnswered && !q.isAnswered) return false
 			return true
 		}),
 		set: (questions) => {
-			questions.map((q) => addToArray(global.questions.value, q, (e) => e.id, (e) => e.createdAt))
+			questions.map((q) => addToArray(store.questions.value, q, (e) => e.id, (e) => e.createdAt))
 		}
 	})
 
@@ -76,18 +76,18 @@ export const useQuestionList = () => {
 	}
 
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchQuestions()
+		if (!store.fetched.value && !store.loading.value) await fetchQuestions()
 		await listener.start()
 	})
 	onUnmounted(async () => {
 		await listener.close()
 	})
-	watch(global.tagId, async () => {
+	watch(store.tagId, async () => {
 		await router.push('/questions')
 	})
 
 	return {
-		...global,
+		...store,
 		filteredQuestions, answeredChoices,
 		fetchOlderQuestions
 	}
@@ -124,9 +124,9 @@ export const useQuestion = (questionId: string) => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const question = computed({
-		get: () => global.questions.value.find((q) => q.id === questionId) ?? null,
+		get: () => store.questions.value.find((q) => q.id === questionId) ?? null,
 		set: (q) => {
-			if (q) addToArray(global.questions.value, q, (e) => e.id, (e) => e.createdAt)
+			if (q) addToArray(store.questions.value, q, (e) => e.id, (e) => e.createdAt)
 		}
 	})
 
@@ -134,13 +134,13 @@ export const useQuestion = (questionId: string) => {
 		await setError('')
 		try {
 			await setLoading(true)
-			let question = global.questions.value.find((q) => q.id === questionId) ?? null
+			let question = store.questions.value.find((q) => q.id === questionId) ?? null
 			if (question) {
 				await setLoading(false)
 				return
 			}
 			question = await QuestionsUseCases.find(questionId)
-			if (question) addToArray(global.questions.value, question, (e) => e.id, (e) => e.createdAt)
+			if (question) addToArray(store.questions.value, question, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
 		}
@@ -149,14 +149,14 @@ export const useQuestion = (questionId: string) => {
 	const listener = useListener(async () => {
 		return await QuestionsUseCases.listenToOne(questionId, {
 			created: async (entity) => {
-				addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(store.questions.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				addToArray(global.questions.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(store.questions.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
-				const index = global.questions.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.questions.value.splice(index, 1)
+				const index = store.questions.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) store.questions.value.splice(index, 1)
 			}
 		})
 	})
@@ -221,7 +221,7 @@ export const useDeleteQuestion = (questionId: string) => {
 			await setLoading(true)
 			try {
 				await QuestionsUseCases.delete(questionId)
-				global.questions.value = global.questions.value
+				store.questions.value = store.questions.value
 					.filter((q) => q.id !== questionId)
 				await setMessage('Question deleted successfully')
 				await router.push('/questions')

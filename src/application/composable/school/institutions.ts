@@ -6,7 +6,7 @@ import { useSchoolModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
 import { useRouter } from 'vue-router'
 
-const global = {
+const store = {
 	fetched: ref(false),
 	institutions: ref([] as InstitutionEntity[]),
 	...useErrorHandler(),
@@ -14,37 +14,37 @@ const global = {
 }
 
 const fetchInstitutions = async () => {
-	await global.setError('')
-	await global.setLoading(true)
+	await store.setError('')
+	await store.setLoading(true)
 	try {
 		const institutions = await InstitutionsUseCases.get()
-		institutions.results.forEach((i) => addToArray(global.institutions.value, i, (e) => e.id, (e) => e.name, true))
-		global.fetched.value = true
+		institutions.results.forEach((i) => addToArray(store.institutions.value, i, (e) => e.id, (e) => e.name, true))
+		store.fetched.value = true
 	} catch (error) {
-		await global.setError(error)
+		await store.setError(error)
 	}
-	await global.setLoading(false)
+	await store.setLoading(false)
 }
 
 export const useInstitutionList = (skipHooks = false) => {
-	const schools = computed(() => global.institutions.value.filter((i) => !i.isGateway))
-	const gatewayExams = computed(() => global.institutions.value.filter((i) => i.isGateway))
+	const schools = computed(() => store.institutions.value.filter((i) => !i.isGateway))
+	const gatewayExams = computed(() => store.institutions.value.filter((i) => i.isGateway))
 	onMounted(async () => {
 		if (skipHooks) return
-		if (!global.fetched.value && !global.loading.value) await fetchInstitutions()
+		if (!store.fetched.value && !store.loading.value) await fetchInstitutions()
 	})
-	return { ...global, schools, gatewayExams }
+	return { ...store, schools, gatewayExams }
 }
 
 export const useInstitution = (id: string) => {
 	const institution = computed({
-		get: () => global.institutions.value.find((s) => s.id === id) ?? null,
+		get: () => store.institutions.value.find((s) => s.id === id) ?? null,
 		set: (i) => {
-			if (i) addToArray(global.institutions.value, i, (e) => e.id, (e) => e.name, true)
+			if (i) addToArray(store.institutions.value, i, (e) => e.id, (e) => e.name, true)
 		}
 	})
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchInstitutions()
+		if (!store.fetched.value && !store.loading.value) await fetchInstitutions()
 	})
 
 	return { institution }
@@ -63,7 +63,7 @@ export const useCreateInstitution = () => {
 			await setLoading(true)
 			try {
 				const institution = await InstitutionsUseCases.add(factory.value)
-				addToArray(global.institutions.value, institution, (e) => e.id, (e) => e.name, true)
+				addToArray(store.institutions.value, institution, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeCreateInstitution()
 				await setMessage('Institution created successfully')
@@ -99,7 +99,7 @@ export const useEditInstitution = () => {
 			await setLoading(true)
 			try {
 				const updatedInstitution = await InstitutionsUseCases.update(editingInstitution!.id, factory.value)
-				addToArray(global.institutions.value, updatedInstitution, (e) => e.id, (e) => e.name, true)
+				addToArray(store.institutions.value, updatedInstitution, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeEditInstitution()
 				await setMessage('Institution updated successfully')
@@ -129,7 +129,7 @@ export const useDeleteInstitution = (institutionId: string) => {
 			await setLoading(true)
 			try {
 				await InstitutionsUseCases.delete(institutionId)
-				global.institutions.value = global.institutions.value
+				store.institutions.value = store.institutions.value
 					.filter((s) => s.id !== institutionId)
 				await setMessage('Institution deleted successfully')
 			} catch (error) {

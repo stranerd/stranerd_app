@@ -5,7 +5,7 @@ import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
 
-const global = {
+const store = {
 	fetched: ref(false),
 	courses: ref([] as CourseEntity[]),
 	departments: {} as Record<string, boolean>,
@@ -19,99 +19,99 @@ const global = {
 }
 
 const fetchDepartmentCourses = async (departmentId: string) => {
-	if (global.departments[departmentId]) return
-	await global.setError('')
-	await global.setLoading(true)
+	if (store.departments[departmentId]) return
+	await store.setError('')
+	await store.setLoading(true)
 	try {
 		const courses = await CoursesUseCases.getDepartmentCourses(departmentId)
-		courses.results.forEach((c) => addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true))
-		global.fetched.value = true
-		global.departments[departmentId] = true
+		courses.results.forEach((c) => addToArray(store.courses.value, c, (e) => e.id, (e) => e.name, true))
+		store.fetched.value = true
+		store.departments[departmentId] = true
 	} catch (error) {
-		await global.setError(error)
+		await store.setError(error)
 	}
-	await global.setLoading(false)
+	await store.setLoading(false)
 }
 
 const fetchFacultyCourses = async (facultyId: string, general = false) => {
 	const key = general ? `${facultyId}-general` : facultyId
-	if (global.faculties[key]) return
-	await global.setError('')
-	await global.setLoading(true)
+	if (store.faculties[key]) return
+	await store.setError('')
+	await store.setLoading(true)
 	try {
 		const courses = await CoursesUseCases.getFacultyCourses(facultyId, general)
 		courses.results.forEach((c) => {
-			addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true)
-			if (c.departmentId) global.departments[c.departmentId] = true
-			else global.faculties[`${c.facultyId}-general`] = true
+			addToArray(store.courses.value, c, (e) => e.id, (e) => e.name, true)
+			if (c.departmentId) store.departments[c.departmentId] = true
+			else store.faculties[`${c.facultyId}-general`] = true
 		})
-		global.fetched.value = true
-		global.faculties[key] = true
+		store.fetched.value = true
+		store.faculties[key] = true
 	} catch (error) {
-		await global.setError(error)
+		await store.setError(error)
 	}
-	await global.setLoading(false)
+	await store.setLoading(false)
 }
 
 const fetchInstitutionCourses = async (institutionId: string, general = false) => {
 	const key = general ? `${institutionId}-general` : institutionId
-	if (global.institutions[key]) return
-	await global.setError('')
-	await global.setLoading(true)
+	if (store.institutions[key]) return
+	await store.setError('')
+	await store.setLoading(true)
 	try {
 		const courses = await CoursesUseCases.getInstitutionCourses(institutionId, general)
 		courses.results.forEach((c) => {
-			addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true)
+			addToArray(store.courses.value, c, (e) => e.id, (e) => e.name, true)
 			if (c.facultyId) {
-				global.faculties[c.facultyId] = true
-				if (c.departmentId) global.departments[c.departmentId] = true
-				else global.faculties[`${c.facultyId}-general`] = true
-			} else global.institutions[`${institutionId}-general`] = true
+				store.faculties[c.facultyId] = true
+				if (c.departmentId) store.departments[c.departmentId] = true
+				else store.faculties[`${c.facultyId}-general`] = true
+			} else store.institutions[`${institutionId}-general`] = true
 		})
-		global.fetched.value = true
-		global.institutions[key] = true
+		store.fetched.value = true
+		store.institutions[key] = true
 	} catch (error) {
-		await global.setError(error)
+		await store.setError(error)
 	}
-	await global.setLoading(false)
+	await store.setLoading(false)
 }
 
 export const useCourseList = () => {
 	const search = async () => {
-		const searchValue = global.searchValue.value
+		const searchValue = store.searchValue.value
 		if (!searchValue) return
-		global.searchMode.value = true
-		await global.setError('')
+		store.searchMode.value = true
+		await store.setError('')
 		try {
-			await global.setLoading(true)
-			global.searchResults.value = await CoursesUseCases.search(searchValue)
+			await store.setLoading(true)
+			store.searchResults.value = await CoursesUseCases.search(searchValue)
 		} catch (error) {
-			await global.setError(error)
+			await store.setError(error)
 		}
-		await global.setLoading(false)
+		await store.setLoading(false)
 	}
 
-	watch(global.searchValue, () => {
-		if (!global.searchValue.value) global.searchMode.value = false
+	watch(store.searchValue, () => {
+		if (!store.searchValue.value) store.searchMode.value = false
 	})
 
 	return {
-		...global, search,
+		...store, search,
 		fetchDepartmentCourses, fetchFacultyCourses, fetchInstitutionCourses
 	}
 }
 
 export const useCourse = (id: string) => {
 	const course = computed({
-		get: () => global.courses.value.find((s) => s.id === id) ?? null,
+		get: () => store.courses.value.find((s) => s.id === id) ?? null,
 		set: (c) => {
-			if (c) addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true)
+			if (c) addToArray(store.courses.value, c, (e) => e.id, (e) => e.name, true)
 		}
 	})
 	onMounted(async () => {
 		if (!course.value) {
 			const c = await CoursesUseCases.find(id)
-			if (c) addToArray(global.courses.value, c, (e) => e.id, (e) => e.name, true)
+			if (c) addToArray(store.courses.value, c, (e) => e.id, (e) => e.name, true)
 		}
 	})
 
@@ -140,7 +140,7 @@ export const useCreateCourse = () => {
 			await setLoading(true)
 			try {
 				const course = await CoursesUseCases.add(factory.value)
-				addToArray(global.courses.value, course, (e) => e.id, (e) => e.name, true)
+				addToArray(store.courses.value, course, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeCreateCourse()
 				await setMessage('Course created successfully')
@@ -174,7 +174,7 @@ export const useEditCourse = () => {
 			await setLoading(true)
 			try {
 				const updatedCourse = await CoursesUseCases.update(editingCourse!.id, factory.value)
-				addToArray(global.courses.value, updatedCourse, (e) => e.id, (e) => e.name, true)
+				addToArray(store.courses.value, updatedCourse, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeEditCourse()
 				await setMessage('Course updated successfully')
@@ -203,7 +203,7 @@ export const useDeleteCourse = (courseId: string) => {
 			await setLoading(true)
 			try {
 				await CoursesUseCases.delete(courseId)
-				global.courses.value = global.courses.value
+				store.courses.value = store.courses.value
 					.filter((s) => s.id !== courseId)
 				await setMessage('Course deleted successfully')
 			} catch (error) {

@@ -5,7 +5,7 @@ import { Alert } from '@utils/dialog'
 import { useInteractionModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
 
-const global = {
+const store = {
 	fetched: ref(false),
 	tags: ref([] as TagEntity[]),
 	...useErrorHandler(),
@@ -13,35 +13,35 @@ const global = {
 }
 
 const fetchTags = async () => {
-	await global.setError('')
-	await global.setLoading(true)
+	await store.setError('')
+	await store.setLoading(true)
 	try {
 		const tags = await TagsUseCases.getAllTags()
-		tags.results.forEach((i) => addToArray(global.tags.value, i, (e) => e.id, (e) => e.title, true))
-		global.fetched.value = true
+		tags.results.forEach((i) => addToArray(store.tags.value, i, (e) => e.id, (e) => e.title, true))
+		store.fetched.value = true
 	} catch (error) {
-		await global.setError(error)
+		await store.setError(error)
 	}
-	await global.setLoading(false)
+	await store.setLoading(false)
 }
 
 export const useTagList = () => {
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchTags()
+		if (!store.fetched.value && !store.loading.value) await fetchTags()
 	})
-	const questionTags = computed(() => global.tags.value.filter((tag) => tag.type === TagTypes.questions))
-	return { ...global, questionTags }
+	const questionTags = computed(() => store.tags.value.filter((tag) => tag.type === TagTypes.questions))
+	return { ...store, questionTags }
 }
 
 export const useTag = (id: string) => {
 	const tag = computed({
-		get: () => global.tags.value.find((s) => s.id === id) ?? null,
+		get: () => store.tags.value.find((s) => s.id === id) ?? null,
 		set: (i) => {
-			if (i) addToArray(global.tags.value, i, (e) => e.id, (e) => e.title, true)
+			if (i) addToArray(store.tags.value, i, (e) => e.id, (e) => e.title, true)
 		}
 	})
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchTags()
+		if (!store.fetched.value && !store.loading.value) await fetchTags()
 	})
 
 	return { tag }
@@ -71,7 +71,7 @@ export const useCreateTag = () => {
 			await setLoading(true)
 			try {
 				const tag = await TagsUseCases.add(factory.value)
-				addToArray(global.tags.value, tag, (e) => e.id, (e) => e.title, true)
+				addToArray(store.tags.value, tag, (e) => e.id, (e) => e.title, true)
 				factory.value.reset()
 				useInteractionModal().closeCreateTag()
 				await setMessage('Tag created successfully')
@@ -105,7 +105,7 @@ export const useEditTag = () => {
 			await setLoading(true)
 			try {
 				const updatedTag = await TagsUseCases.update(editingTag!.id, factory.value)
-				addToArray(global.tags.value, updatedTag, (e) => e.id, (e) => e.title, true)
+				addToArray(store.tags.value, updatedTag, (e) => e.id, (e) => e.title, true)
 				factory.value.reset()
 				useInteractionModal().closeEditTag()
 				await setMessage('Tag updated successfully')
@@ -134,7 +134,7 @@ export const useDeleteTag = () => {
 			await setLoading(true)
 			try {
 				await TagsUseCases.delete(tag.id)
-				global.tags.value = global.tags.value
+				store.tags.value = store.tags.value
 					.filter((s) => s.id !== tag.id)
 				await setMessage('Tag deleted successfully')
 			} catch (error) {

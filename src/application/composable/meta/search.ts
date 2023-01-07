@@ -7,7 +7,7 @@ import { FlashCardEntity, FlashCardsUseCases, NoteEntity, NotesUseCases } from '
 import { storage } from '@utils/storage'
 import { ClassEntity, ClassesUseCases } from '@modules/classes'
 
-const global = {
+const store = {
 	searchTerm: ref(''),
 	searched: ref(false),
 	tab: ref(0),
@@ -36,7 +36,7 @@ export const useSearch = () => {
 	const getRecentSearches = async () => {
 		const searches = await storage.get(SEARCH_STORAGE_KEY) ?? '[]'
 		const recent = JSON.parse(searches) as string[]
-		global.recent.value = recent
+		store.recent.value = recent
 		return recent
 	}
 
@@ -44,13 +44,13 @@ export const useSearch = () => {
 		let searches = await getRecentSearches()
 		searches.unshift(val)
 		searches = [...new Set(searches)].slice(0, 10)
-		global.recent.value = searches
+		store.recent.value = searches
 		await storage.set(SEARCH_STORAGE_KEY, JSON.stringify(searches))
 	}
 
 	const clearFromRecent = async (val: string) => {
-		const searches = global.recent.value.filter((r) => r !== val)
-		global.recent.value = searches
+		const searches = store.recent.value.filter((r) => r !== val)
+		store.recent.value = searches
 		await storage.set(SEARCH_STORAGE_KEY, JSON.stringify(searches))
 	}
 
@@ -59,43 +59,43 @@ export const useSearch = () => {
 	}
 
 	const search = async () => {
-		const val = global.searchTerm.value.trim()
+		const val = store.searchTerm.value.trim()
 		if (val) {
 			await navigateToSearch()
-			await global.setError('')
+			await store.setError('')
 			try {
-				await global.setLoading(true)
+				await store.setLoading(true)
 				await Promise.all(
 					Object.entries(searchObj).map(async (s) => {
 						// @ts-ignore
-						global.results[s[0]] = await s[1].search(val)
+						store.results[s[0]] = await s[1].search(val)
 					})
 				)
-				global.searched.value = true
+				store.searched.value = true
 				await saveSearch(val)
 			} catch (e) {
-				await global.setError(e)
+				await store.setError(e)
 			}
-			await global.setLoading(false)
+			await store.setLoading(false)
 		} else {
-			Object.keys(global.results).forEach((key) => {
-				global.results[key] = []
+			Object.keys(store.results).forEach((key) => {
+				store.results[key] = []
 			})
-			global.searched.value = false
+			store.searched.value = false
 		}
 	}
 
-	watch(global.searchTerm, () => {
-		if (!global.searchTerm.value) global.searched.value = false
+	watch(store.searchTerm, () => {
+		if (!store.searchTerm.value) store.searched.value = false
 	})
 
-	const searchCount = computed(() => Object.values(global.results).map((val) => val.length).reduce((acc, cur) => acc + cur, 0))
+	const searchCount = computed(() => Object.values(store.results).map((val) => val.length).reduce((acc, cur) => acc + cur, 0))
 
 	onMounted(async () => {
 		await getRecentSearches()
 	})
 
 	return {
-		...global, searchCount, search, clearFromRecent, navigateToSearch
+		...store, searchCount, search, clearFromRecent, navigateToSearch
 	}
 }

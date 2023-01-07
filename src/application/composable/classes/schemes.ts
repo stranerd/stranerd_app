@@ -7,7 +7,7 @@ import { useClassModal } from '@app/composable/core/modals'
 import { Router, useRouter } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	schemes: Ref<SchemeEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
@@ -19,21 +19,21 @@ export const markSchemeSeen = async (scheme: SchemeEntity, userId: string) => {
 
 export const useSchemesList = (classId: string) => {
 	const { id } = useAuth()
-	if (global[classId] === undefined) {
+	if (store[classId] === undefined) {
 		const listener = useListener(async () => {
 			return await SchemesUseCases.listenToClassSchemes(classId, {
 				created: async (entity) => {
-					addToArray(global[classId].schemes.value, entity, (e) => e.id, (e) => e.start, true)
+					addToArray(store[classId].schemes.value, entity, (e) => e.id, (e) => e.start, true)
 				},
 				updated: async (entity) => {
-					addToArray(global[classId].schemes.value, entity, (e) => e.id, (e) => e.start, true)
+					addToArray(store[classId].schemes.value, entity, (e) => e.id, (e) => e.start, true)
 				},
 				deleted: async (entity) => {
-					global[classId].schemes.value = global[classId].schemes.value.filter((c) => c.id !== entity.id)
+					store[classId].schemes.value = store[classId].schemes.value.filter((c) => c.id !== entity.id)
 				}
 			})
 		})
-		global[classId] = {
+		store[classId] = {
 			schemes: ref([]),
 			fetched: ref(false),
 			listener,
@@ -42,32 +42,32 @@ export const useSchemesList = (classId: string) => {
 		}
 	}
 
-	const unReadSchemes = computed(() => global[classId].schemes.value.filter((s) => !s.isRead(id.value)).length)
+	const unReadSchemes = computed(() => store[classId].schemes.value.filter((s) => !s.isRead(id.value)).length)
 
 	const fetchSchemes = async () => {
-		await global[classId].setError('')
+		await store[classId].setError('')
 		try {
-			await global[classId].setLoading(true)
+			await store[classId].setLoading(true)
 			const schemes = await SchemesUseCases.getClassSchemes(classId)
-			schemes.results.forEach((g) => addToArray(global[classId].schemes.value, g, (e) => e.id, (e) => e.start, true))
-			global[classId].fetched.value = true
+			schemes.results.forEach((g) => addToArray(store[classId].schemes.value, g, (e) => e.id, (e) => e.start, true))
+			store[classId].fetched.value = true
 		} catch (error) {
-			await global[classId].setError(error)
+			await store[classId].setError(error)
 		}
-		await global[classId].setLoading(false)
+		await store[classId].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global[classId].fetched.value && !global[classId].loading.value) await fetchSchemes()
-		await global[classId].listener.start()
+		if (!store[classId].fetched.value && !store[classId].loading.value) await fetchSchemes()
+		await store[classId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[classId].listener.close()
+		await store[classId].listener.close()
 	})
 
 	return {
-		...global[classId], unReadSchemes,
-		schemes: computed(() => groupBy(global[classId].schemes.value, (scheme) => scheme.title))
+		...store[classId], unReadSchemes,
+		schemes: computed(() => groupBy(store[classId].schemes.value, (scheme) => scheme.title))
 	}
 }
 

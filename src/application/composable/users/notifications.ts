@@ -4,7 +4,7 @@ import { NotificationEntity, NotificationsUseCases } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { addToArray } from '@utils/commons'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	notifications: Ref<NotificationEntity[]>
 	hasMore: Ref<boolean>
 	fetched: Ref<boolean>
@@ -17,24 +17,24 @@ const global = {} as Record<string, {
 export const useNotificationList = () => {
 	const { id } = useAuth()
 	const userId = id.value
-	if (global[userId] === undefined) {
+	if (store[userId] === undefined) {
 		const listener = useListener(async () => {
 			if (!userId) return () => {
 			}
 			return NotificationsUseCases.listen({
 				created: async (entity) => {
-					addToArray(global[userId].notifications.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(store[userId].notifications.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				updated: async (entity) => {
-					addToArray(global[userId].notifications.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(store[userId].notifications.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				deleted: async (entity) => {
-					const index = global[userId].notifications.value.findIndex((t) => t.id === entity.id)
-					if (index !== -1) global[userId].notifications.value.splice(index, 1)
+					const index = store[userId].notifications.value.findIndex((t) => t.id === entity.id)
+					if (index !== -1) store[userId].notifications.value.splice(index, 1)
 				}
-			}, global[userId].notifications.value.at(-1)?.createdAt)
+			}, store[userId].notifications.value.at(-1)?.createdAt)
 		})
-		global[userId] = {
+		store[userId] = {
 			notifications: ref([]),
 			hasMore: ref(false),
 			fetched: ref(false),
@@ -45,48 +45,48 @@ export const useNotificationList = () => {
 			...useErrorHandler(),
 			...useLoadingHandler()
 		}
-		watch(global[userId].notifications, () => global[userId].timer.value++, { deep: true })
-		watch(global[userId].timer, async (cur, prev) => prev > cur && cur === 0 && await fetchUnRead())
+		watch(store[userId].notifications, () => store[userId].timer.value++, { deep: true })
+		watch(store[userId].timer, async (cur, prev) => prev > cur && cur === 0 && await fetchUnRead())
 	}
 
 	const fetchNotifications = async () => {
 		if (!userId) return
-		await global[userId].setError('')
-		await global[userId].setLoading(true)
+		await store[userId].setError('')
+		await store[userId].setLoading(true)
 		try {
-			const notifications = await NotificationsUseCases.get(global[userId].notifications.value.at(-1)?.createdAt)
-			global[userId].hasMore.value = !!notifications.pages.next
-			notifications.results.forEach((t) => addToArray(global[userId].notifications.value, t, (e) => e.id, (e) => e.createdAt))
-			global[userId].fetched.value = true
+			const notifications = await NotificationsUseCases.get(store[userId].notifications.value.at(-1)?.createdAt)
+			store[userId].hasMore.value = !!notifications.pages.next
+			notifications.results.forEach((t) => addToArray(store[userId].notifications.value, t, (e) => e.id, (e) => e.createdAt))
+			store[userId].fetched.value = true
 		} catch (e) {
-			await global[userId].setError(e)
+			await store[userId].setError(e)
 		}
-		await global[userId].setLoading(false)
+		await store[userId].setLoading(false)
 	}
 
 	const fetchOlderNotifications = async () => {
 		await fetchNotifications()
-		await global[userId].listener.restart()
+		await store[userId].listener.restart()
 	}
 
 	const fetchUnRead = async () => {
-		global[userId].unRead.value = await NotificationsUseCases.getUnReadCount()
+		store[userId].unRead.value = await NotificationsUseCases.getUnReadCount()
 	}
 
 	onMounted(async () => {
-		if (!global[userId].timeOut.value) global[userId].timeOut.value = setInterval(() => {
-			if (global[userId].timer.value > 0) global[userId].timer.value--
+		if (!store[userId].timeOut.value) store[userId].timeOut.value = setInterval(() => {
+			if (store[userId].timer.value > 0) store[userId].timer.value--
 		}, 500)
-		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchNotifications()
-		await global[userId].listener.start()
+		if (!store[userId].fetched.value && !store[userId].loading.value) await fetchNotifications()
+		await store[userId].listener.start()
 	})
 	onUnmounted(async () => {
-		clearInterval(global[userId].timeOut.value)
-		global[userId].timeOut.value = null
-		// await global[userId].listener.close()
+		clearInterval(store[userId].timeOut.value)
+		store[userId].timeOut.value = null
+		// await store[userId].listener.close()
 	})
 
-	return { ...global[userId], fetchOlderNotifications }
+	return { ...store[userId], fetchOlderNotifications }
 }
 
 export const useNotification = (notification: NotificationEntity) => {

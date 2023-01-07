@@ -5,7 +5,7 @@ import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { addToArray } from '@utils/commons'
 
-const global = {
+const store = {
 	flashCards: ref([] as FlashCardEntity[]),
 	fetched: ref(false),
 	hasMore: ref(false),
@@ -14,41 +14,41 @@ const global = {
 }
 const listener = useListener(async () => await FlashCardsUseCases.listen({
 	created: async (entity) => {
-		addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
+		addToArray(store.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
 	},
 	updated: async (entity) => {
-		addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
+		addToArray(store.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
 	},
 	deleted: async (entity) => {
-		const index = global.flashCards.value.findIndex((q) => q.id === entity.id)
-		if (index !== -1) global.flashCards.value.splice(index, 1)
+		const index = store.flashCards.value.findIndex((q) => q.id === entity.id)
+		if (index !== -1) store.flashCards.value.splice(index, 1)
 	}
-}, global.flashCards.value.at(-1)?.createdAt))
+}, store.flashCards.value.at(-1)?.createdAt))
 
 export const useFlashCardList = () => {
 	const fetchFlashCards = async () => {
-		await global.setError('')
+		await store.setError('')
 		try {
-			await global.setLoading(true)
-			const flashCards = await FlashCardsUseCases.get(global.flashCards.value.at(-1)?.createdAt)
-			global.hasMore.value = !!flashCards.pages.next
-			flashCards.results.forEach((f) => addToArray(global.flashCards.value, f, (e) => e.id, (e) => e.createdAt))
-			global.fetched.value = true
+			await store.setLoading(true)
+			const flashCards = await FlashCardsUseCases.get(store.flashCards.value.at(-1)?.createdAt)
+			store.hasMore.value = !!flashCards.pages.next
+			flashCards.results.forEach((f) => addToArray(store.flashCards.value, f, (e) => e.id, (e) => e.createdAt))
+			store.fetched.value = true
 		} catch (error) {
-			await global.setError(error)
+			await store.setError(error)
 		}
-		await global.setLoading(false)
+		await store.setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchFlashCards()
+		if (!store.fetched.value && !store.loading.value) await fetchFlashCards()
 		await listener.start()
 	})
 	onUnmounted(async () => {
 		await listener.close()
 	})
 
-	return { ...global, fetchOlderFlashCards: fetchFlashCards }
+	return { ...store, fetchOlderFlashCards: fetchFlashCards }
 }
 
 export const useCreateFlashCard = () => {
@@ -125,7 +125,7 @@ export const useDeleteFlashCard = (flashCardId: string) => {
 			await setLoading(true)
 			try {
 				await FlashCardsUseCases.delete(flashCardId)
-				global.flashCards.value = global.flashCards.value
+				store.flashCards.value = store.flashCards.value
 					.filter((q) => q.id !== flashCardId)
 				await setMessage('FlashCard deleted successfully')
 			} catch (error) {
@@ -142,9 +142,9 @@ export const useFlashCard = (flashCardId: string) => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const flashCard = computed({
-		get: () => global.flashCards.value.find((q) => q.id === flashCardId) ?? null,
+		get: () => store.flashCards.value.find((q) => q.id === flashCardId) ?? null,
 		set: (q) => {
-			if (q) addToArray(global.flashCards.value, q, (e) => e.id, (e) => e.createdAt)
+			if (q) addToArray(store.flashCards.value, q, (e) => e.id, (e) => e.createdAt)
 		}
 	})
 
@@ -152,13 +152,13 @@ export const useFlashCard = (flashCardId: string) => {
 		await setError('')
 		try {
 			await setLoading(true)
-			let flashCard = global.flashCards.value.find((q) => q.id === flashCardId) ?? null
+			let flashCard = store.flashCards.value.find((q) => q.id === flashCardId) ?? null
 			if (flashCard) {
 				await setLoading(false)
 				return
 			}
 			flashCard = await FlashCardsUseCases.find(flashCardId)
-			if (flashCard) addToArray(global.flashCards.value, flashCard, (e) => e.id, (e) => e.createdAt)
+			if (flashCard) addToArray(store.flashCards.value, flashCard, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
 		}
@@ -167,14 +167,14 @@ export const useFlashCard = (flashCardId: string) => {
 	const listener = useListener(async () => {
 		return await FlashCardsUseCases.listenToOne(flashCardId, {
 			created: async (entity) => {
-				addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(store.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				addToArray(global.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(store.flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
-				const index = global.flashCards.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.flashCards.value.splice(index, 1)
+				const index = store.flashCards.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) store.flashCards.value.splice(index, 1)
 			}
 		})
 	})

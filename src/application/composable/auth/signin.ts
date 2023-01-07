@@ -10,7 +10,7 @@ import { googleClientId, packageName } from '@utils/environment'
 import { SignInWithApple } from '@capacitor-community/apple-sign-in'
 import { isWeb } from '@utils/constants'
 
-const global = {
+const store = {
 	referrerId: ref(undefined as string | undefined),
 	emailSignin: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
 	emailSignup: { ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() },
@@ -19,10 +19,10 @@ const global = {
 	emailVerification: { email: ref(''), ...useErrorHandler(), ...useLoadingHandler(), ...useSuccessHandler() }
 }
 
-export const getReferrerId = async () => await storage.get('referrer') ?? global.referrerId.value
+export const getReferrerId = async () => await storage.get('referrer') ?? store.referrerId.value
 
 export const setReferrerId = async (id: string) => {
-	global.referrerId.value = id
+	store.referrerId.value = id
 	await storage.set('referrer', id)
 }
 export const saveReferrerId = async () => {
@@ -33,7 +33,7 @@ export const saveReferrerId = async () => {
 export const useEmailSignin = () => {
 	const router = useRouter()
 	const factory = ref(new EmailSigninFactory()) as Ref<EmailSigninFactory>
-	const { error, loading, setError, setLoading } = global.emailSignin
+	const { error, loading, setError, setLoading } = store.emailSignin
 	const signin = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
@@ -56,7 +56,7 @@ export const useEmailSignin = () => {
 export const useEmailSignup = () => {
 	const router = useRouter()
 	const factory = ref(new EmailSignupFactory()) as Ref<EmailSignupFactory>
-	const { error, loading, setError, setLoading } = global.emailSignup
+	const { error, loading, setError, setLoading } = store.emailSignup
 	const signup = async () => {
 		await setError('')
 		if (factory.value.valid && !loading.value) {
@@ -78,7 +78,7 @@ export const useEmailVerification = () => {
 	const router = useRouter()
 	const sent = ref(false)
 	const token = ref('')
-	const { email, error, loading, message, setError, setLoading, setMessage } = global.emailVerification
+	const { email, error, loading, message, setError, setLoading, setMessage } = store.emailVerification
 	const completeVerification = async () => {
 		await setError('')
 		await setLoading(true)
@@ -115,12 +115,12 @@ export const useEmailVerification = () => {
 	}
 }
 
-export const setEmailVerificationEmail = (email: string) => global.emailVerification.email.value = email
-export const getEmailVerificationEmail = () => global.emailVerification.email.value
+export const setEmailVerificationEmail = (email: string) => store.emailVerification.email.value = email
+export const getEmailVerificationEmail = () => store.emailVerification.email.value
 
 export const useGoogleSignin = () => {
 	const router = useRouter()
-	const { error, loading, setError, setLoading } = global.googleSignin
+	const { error, loading, setError, setLoading } = store.googleSignin
 	const signin = async () => {
 		await setError('')
 		if (!loading.value) {
@@ -157,7 +157,7 @@ export const useGoogleSignin = () => {
 
 export const useAppleSignin = () => {
 	const router = useRouter()
-	const { error, loading, setError, setLoading } = global.appleSignin
+	const { error, loading, setError, setLoading } = store.appleSignin
 	const signin = async () => {
 		await setError('')
 		if (!loading.value) {

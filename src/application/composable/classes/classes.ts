@@ -9,7 +9,7 @@ import { useRedirectToAuth } from '@app/composable/auth/session'
 import { addToArray } from '@utils/commons'
 import { useClassModal } from '@app/composable/core/modals'
 
-const global = {
+const store = {
 	classes: ref([] as ClassEntity[]),
 	fetched: ref(false),
 	searchMode: ref(false),
@@ -19,7 +19,7 @@ const global = {
 	...useLoadingHandler()
 }
 
-const classGlobal = {} as Record<string, {
+const classStore = {} as Record<string, {
 	users: Ref<UserEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
@@ -28,41 +28,41 @@ const classGlobal = {} as Record<string, {
 export const useClassesList = () => {
 	const { user } = useAuth()
 	const fetchClasses = async () => {
-		await global.setError('')
+		await store.setError('')
 		try {
-			await global.setLoading(true)
+			await store.setLoading(true)
 			const classes = await ClassesUseCases.getDepartmentClasses(user.value?.isCollege(user.value) ? user.value.school.departmentId : undefined)
-			classes.results.forEach((c) => addToArray(global.classes.value, c, (e) => e.id, (e) => e.name, true))
-			global.fetched.value = true
+			classes.results.forEach((c) => addToArray(store.classes.value, c, (e) => e.id, (e) => e.name, true))
+			store.fetched.value = true
 		} catch (error) {
-			await global.setError(error)
+			await store.setError(error)
 		}
-		await global.setLoading(false)
+		await store.setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchClasses()
+		if (!store.fetched.value && !store.loading.value) await fetchClasses()
 	})
 
 	const search = async () => {
-		const searchValue = global.searchValue.value
+		const searchValue = store.searchValue.value
 		if (!searchValue) return
-		global.searchMode.value = true
-		await global.setError('')
+		store.searchMode.value = true
+		await store.setError('')
 		try {
-			await global.setLoading(true)
-			global.searchResults.value = await ClassesUseCases.search(searchValue)
+			await store.setLoading(true)
+			store.searchResults.value = await ClassesUseCases.search(searchValue)
 		} catch (error) {
-			await global.setError(error)
+			await store.setError(error)
 		}
-		await global.setLoading(false)
+		await store.setLoading(false)
 	}
 
-	watch(global.searchValue, () => {
-		if (!global.searchValue.value) global.searchMode.value = false
+	watch(store.searchValue, () => {
+		if (!store.searchValue.value) store.searchMode.value = false
 	})
 
-	return { ...global, search }
+	return { ...store, search }
 }
 
 export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) => {
@@ -71,21 +71,21 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 	const listenerFn = async () => {
 		return UsersUseCases.listenToUsersInList(classInst.membersAndRequests, {
 			created: async (entity) => {
-				addToArray(classGlobal[classInst.id].users.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
+				addToArray(classStore[classInst.id].users.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
 			},
 			updated: async (entity) => {
-				addToArray(classGlobal[classInst.id].users.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
+				addToArray(classStore[classInst.id].users.value, entity, (e) => e.id, (e) => e.bio.fullName, true)
 			},
 			deleted: async (entity) => {
-				const index = classGlobal[classInst.id].users.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) classGlobal[classInst.id].users.value.splice(index, 1)
+				const index = classStore[classInst.id].users.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) classStore[classInst.id].users.value.splice(index, 1)
 			}
 		})
 	}
 
-	if (classGlobal[classInst.id] === undefined) {
+	if (classStore[classInst.id] === undefined) {
 		const listener = useListener(listenerFn)
-		classGlobal[classInst.id] = {
+		classStore[classInst.id] = {
 			users: ref([]),
 			fetched: ref(false),
 			listener,
@@ -96,16 +96,16 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 	}
 
 	const fetchUsers = async () => {
-		await classGlobal[classInst.id].setError('')
+		await classStore[classInst.id].setError('')
 		try {
-			await classGlobal[classInst.id].setLoading(true)
+			await classStore[classInst.id].setLoading(true)
 			const users = await UsersUseCases.getUsersInList(classInst.membersAndRequests)
-			users.forEach((user) => addToArray(classGlobal[classInst.id].users.value, user, (e) => e.id, (e) => e.bio.fullName, true))
-			classGlobal[classInst.id].fetched.value = true
+			users.forEach((user) => addToArray(classStore[classInst.id].users.value, user, (e) => e.id, (e) => e.bio.fullName, true))
+			classStore[classInst.id].fetched.value = true
 		} catch (error) {
-			await classGlobal[classInst.id].setError(error)
+			await classStore[classInst.id].setError(error)
 		}
-		await classGlobal[classInst.id].setLoading(false)
+		await classStore[classInst.id].setLoading(false)
 	}
 
 	const requestToJoinClass = async (join: boolean) => {
@@ -116,19 +116,19 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 		})
 		if (!accepted) return
 		const isInClass = classInst?.members.includes(id.value)
-		if (isInClass) return await classGlobal[classInst.id].setError('You are already a member of the class')
+		if (isInClass) return await classStore[classInst.id].setError('You are already a member of the class')
 		const hasRequested = classInst?.requests.includes(id.value)
-		if (hasRequested && join) return await classGlobal[classInst.id].setError('You have already requested to join the class')
-		if (!hasRequested && !join) return await classGlobal[classInst.id].setError('You haven\'t requested to join the class yet')
-		await classGlobal[classInst.id].setError('')
-		await classGlobal[classInst.id].setLoading(true)
+		if (hasRequested && join) return await classStore[classInst.id].setError('You have already requested to join the class')
+		if (!hasRequested && !join) return await classStore[classInst.id].setError('You haven\'t requested to join the class yet')
+		await classStore[classInst.id].setError('')
+		await classStore[classInst.id].setLoading(true)
 		try {
 			await ClassesUseCases.requestClass(classInst.id, join)
-			await classGlobal[classInst.id].setMessage(join ? 'Request sent successfully!' : 'Request cancelled successfully!')
+			await classStore[classInst.id].setMessage(join ? 'Request sent successfully!' : 'Request cancelled successfully!')
 		} catch (e) {
-			await classGlobal[classInst.id].setError(e)
+			await classStore[classInst.id].setError(e)
 		}
-		await classGlobal[classInst.id].setLoading(false)
+		await classStore[classInst.id].setLoading(false)
 	}
 
 	const acceptRequest = async (userId: string, accept: boolean) => {
@@ -137,13 +137,13 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 			confirmButtonText: 'Yes!'
 		})
 		if (!accepted) return
-		if (!classInst.requests.includes(userId)) return await classGlobal[classInst.id].setError('The user didn\'t request to join the class')
-		await classGlobal[classInst.id].setError('')
-		await classGlobal[classInst.id].setLoading(true)
+		if (!classInst.requests.includes(userId)) return await classStore[classInst.id].setError('The user didn\'t request to join the class')
+		await classStore[classInst.id].setError('')
+		await classStore[classInst.id].setLoading(true)
 		await ClassesUseCases.acceptRequest(classInst.id, userId, accept)
-			.catch(classGlobal[classInst.id].setError)
-		await classGlobal[classInst.id].setMessage(accept ? 'Request accept!' : 'Request rejected!')
-		await classGlobal[classInst.id].setLoading(false)
+			.catch(classStore[classInst.id].setError)
+		await classStore[classInst.id].setMessage(accept ? 'Request accept!' : 'Request rejected!')
+		await classStore[classInst.id].setLoading(false)
 	}
 
 	const leaveClass = async () => {
@@ -152,12 +152,12 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 			confirmButtonText: 'Yes!'
 		})
 		if (!accepted) return
-		if (!classInst.members.includes(id.value)) return await classGlobal[classInst.id].setError('You are not a member of the class')
-		await classGlobal[classInst.id].setError('')
-		await classGlobal[classInst.id].setLoading(true)
+		if (!classInst.members.includes(id.value)) return await classStore[classInst.id].setError('You are not a member of the class')
+		await classStore[classInst.id].setError('')
+		await classStore[classInst.id].setLoading(true)
 		await ClassesUseCases.leaveClass(classInst.id)
-			.catch(classGlobal[classInst.id].setError)
-		await classGlobal[classInst.id].setLoading(false)
+			.catch(classStore[classInst.id].setError)
+		await classStore[classInst.id].setLoading(false)
 	}
 
 	const addToClass = async (userId: string, add: boolean) => {
@@ -166,12 +166,12 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 			confirmButtonText: 'Yes!'
 		})
 		if (!accepted) return
-		await classGlobal[classInst.id].setError('')
-		await classGlobal[classInst.id].setLoading(true)
+		await classStore[classInst.id].setError('')
+		await classStore[classInst.id].setLoading(true)
 		await ClassesUseCases.addMembers(classInst.id, [userId], add)
-			.catch(classGlobal[classInst.id].setError)
-		await classGlobal[classInst.id].setMessage(add ? 'User added!' : 'User removed!')
-		await classGlobal[classInst.id].setLoading(false)
+			.catch(classStore[classInst.id].setError)
+		await classStore[classInst.id].setMessage(add ? 'User added!' : 'User removed!')
+		await classStore[classInst.id].setLoading(false)
 	}
 
 	const changeRole = async (userId: string, role: ClassUsers, add: boolean) => {
@@ -180,31 +180,31 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 			confirmButtonText: 'Yes!'
 		})
 		if (!accepted) return
-		await classGlobal[classInst.id].setError('')
-		await classGlobal[classInst.id].setLoading(true)
+		await classStore[classInst.id].setError('')
+		await classStore[classInst.id].setLoading(true)
 		await ClassesUseCases.changeMemberRole(classInst.id, userId, role, add)
-			.catch(classGlobal[classInst.id].setError)
-		await classGlobal[classInst.id].setMessage(`Role ${role} ${add ? 'added' : 'removed'}!`)
-		await classGlobal[classInst.id].setLoading(false)
+			.catch(classStore[classInst.id].setError)
+		await classStore[classInst.id].setMessage(`Role ${role} ${add ? 'added' : 'removed'}!`)
+		await classStore[classInst.id].setLoading(false)
 	}
 
 	onMounted(async () => {
 		if (skipHooks) return
-		if (!classGlobal[classInst.id].fetched.value && !classGlobal[classInst.id].loading.value) await fetchUsers()
-		await classGlobal[classInst.id].listener.reset(listenerFn)
+		if (!classStore[classInst.id].fetched.value && !classStore[classInst.id].loading.value) await fetchUsers()
+		await classStore[classInst.id].listener.reset(listenerFn)
 	})
 	onUnmounted(async () => {
 		if (skipHooks) return
-		await classGlobal[classInst.id].listener.close()
+		await classStore[classInst.id].listener.close()
 	})
 
-	const admins = computed(() => classGlobal[classInst.id].users.value.filter((user) => classInst.admins.includes(user.id)))
-	const tutors = computed(() => classGlobal[classInst.id].users.value.filter((user) => classInst.tutors.includes(user.id)))
-	const members = computed(() => classGlobal[classInst.id].users.value.filter((user) => classInst.participants.includes(user.id)))
-	const requests = computed(() => classGlobal[classInst.id].users.value.filter((user) => classInst.requests.includes(user.id)))
+	const admins = computed(() => classStore[classInst.id].users.value.filter((user) => classInst.admins.includes(user.id)))
+	const tutors = computed(() => classStore[classInst.id].users.value.filter((user) => classInst.tutors.includes(user.id)))
+	const members = computed(() => classStore[classInst.id].users.value.filter((user) => classInst.participants.includes(user.id)))
+	const requests = computed(() => classStore[classInst.id].users.value.filter((user) => classInst.requests.includes(user.id)))
 
 	return {
-		...classGlobal[classInst.id], admins, tutors, members, requests,
+		...classStore[classInst.id], admins, tutors, members, requests,
 		acceptRequest, leaveClass, changeRole, addToClass, requestToJoinClass
 	}
 }
@@ -255,9 +255,9 @@ export const useClass = (classId: string) => {
 	const { id } = useAuth()
 	const { redirect } = useRedirectToAuth()
 	const classInst = computed({
-		get: () => global.classes.value.find((q) => q.id === classId) ?? null,
+		get: () => store.classes.value.find((q) => q.id === classId) ?? null,
 		set: (q) => {
-			if (q) addToArray(global.classes.value, q, (e) => e.id, (e) => e.name, true)
+			if (q) addToArray(store.classes.value, q, (e) => e.id, (e) => e.name, true)
 		}
 	})
 
@@ -265,13 +265,13 @@ export const useClass = (classId: string) => {
 		await setError('')
 		try {
 			await setLoading(true)
-			let classInst = global.classes.value.find((q) => q.id === classId) ?? null
+			let classInst = store.classes.value.find((q) => q.id === classId) ?? null
 			if (classInst) {
 				await setLoading(false)
 				return
 			}
 			classInst = await ClassesUseCases.find(classId)
-			if (classInst) addToArray(global.classes.value, classInst, (e) => e.id, (e) => e.name, true)
+			if (classInst) addToArray(store.classes.value, classInst, (e) => e.id, (e) => e.name, true)
 		} catch (error) {
 			await setError(error)
 		}
@@ -280,14 +280,14 @@ export const useClass = (classId: string) => {
 	const listener = useListener(async () => {
 		return await ClassesUseCases.listenToOne(classId, {
 			created: async (entity) => {
-				addToArray(global.classes.value, entity, (e) => e.id, (e) => e.name, true)
+				addToArray(store.classes.value, entity, (e) => e.id, (e) => e.name, true)
 			},
 			updated: async (entity) => {
-				addToArray(global.classes.value, entity, (e) => e.id, (e) => e.name, true)
+				addToArray(store.classes.value, entity, (e) => e.id, (e) => e.name, true)
 			},
 			deleted: async (entity) => {
-				const index = global.classes.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.classes.value.splice(index, 1)
+				const index = store.classes.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) store.classes.value.splice(index, 1)
 			}
 		})
 	})

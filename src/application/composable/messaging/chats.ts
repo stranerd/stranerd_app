@@ -4,7 +4,7 @@ import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable
 import { useAuth } from '@app/composable/auth/auth'
 import { addToArray, groupBy } from '@utils/commons'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	chats: Ref<ChatEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
@@ -19,20 +19,20 @@ const orderChats = (chats: ChatEntity[]) => groupBy(chats.slice().reverse(), (c)
 export const useChats = (to: string) => {
 	const { id } = useAuth()
 	const path = [id.value, to] as [string, string]
-	if (global[to] === undefined) {
+	if (store[to] === undefined) {
 		const listener = useListener(async () => await ChatsUseCases.listen(path, {
 			created: async (entity) => {
-				addToArray(global[to].chats.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(store[to].chats.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				addToArray(global[to].chats.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(store[to].chats.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
-				const index = global[to].chats.value.findIndex((c) => c.id === entity.id)
-				if (index !== -1) global[to].chats.value.splice(index, 1)
+				const index = store[to].chats.value.findIndex((c) => c.id === entity.id)
+				if (index !== -1) store[to].chats.value.splice(index, 1)
 			}
-		}, global[to].chats.value.at(-1)?.createdAt))
-		global[to] = {
+		}, store[to].chats.value.at(-1)?.createdAt))
+		store[to] = {
 			chats: ref([]),
 			fetched: ref(false),
 			hasMore: ref(false),
@@ -43,38 +43,38 @@ export const useChats = (to: string) => {
 	}
 
 	const fetchChats = async () => {
-		await global[to].setError('')
+		await store[to].setError('')
 		try {
-			await global[to].setLoading(true)
-			const c = await ChatsUseCases.get(path, global[to].chats.value.at(-1)?.createdAt)
-			global[to].hasMore.value = !!c.pages.next
-			c.results.map((c) => addToArray(global[to].chats.value, c, (e) => e.id, (e) => e.createdAt))
-			global[to].fetched.value = true
+			await store[to].setLoading(true)
+			const c = await ChatsUseCases.get(path, store[to].chats.value.at(-1)?.createdAt)
+			store[to].hasMore.value = !!c.pages.next
+			c.results.map((c) => addToArray(store[to].chats.value, c, (e) => e.id, (e) => e.createdAt))
+			store[to].fetched.value = true
 		} catch (e) {
-			await global[to].setError(e)
+			await store[to].setError(e)
 		}
-		await global[to].setLoading(false)
+		await store[to].setLoading(false)
 	}
 
 	const fetchOlderChats = async () => {
 		await fetchChats()
-		await global[to].listener.restart()
+		await store[to].listener.restart()
 	}
 
 	onMounted(async () => {
-		if (!global[to].fetched.value && !global[to].loading.value) await fetchChats()
-		await global[to].listener.start()
+		if (!store[to].fetched.value && !store[to].loading.value) await fetchChats()
+		await store[to].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[to].listener.close()
+		await store[to].listener.close()
 	})
 
 	return {
-		chats: computed(() => orderChats(global[to].chats.value)),
-		fetched: global[to].fetched,
-		loading: global[to].loading,
-		error: global[to].error,
-		hasMore: global[to].hasMore,
+		chats: computed(() => orderChats(store[to].chats.value)),
+		fetched: store[to].fetched,
+		loading: store[to].loading,
+		error: store[to].error,
+		hasMore: store[to].hasMore,
 		fetchOlderChats
 	}
 }
