@@ -3,7 +3,7 @@ import { ChatEntity, ChatsUseCases } from '@modules/messaging'
 import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 
-type Filters = 'images' | 'videos' | 'docs' | 'links'
+type Filters = 'images' | 'videos' | 'docs' | 'links' | string
 
 const store = {} as Record<string, {
 	chats: Ref<ChatEntity[]>

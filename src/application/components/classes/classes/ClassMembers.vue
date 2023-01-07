@@ -42,9 +42,9 @@ const { detail, users, search, reset } = useSearchUsers()
 
 const list = computed(() => [
 	...(props.classInst.admins.includes(id.value) ? [
-		{ name: 'Add Users', users }, { name: 'Requests', users: requests }
+		{ name: 'Add Users', users: users.value }, { name: 'Requests', users: requests.value }
 	] : []),
-	{ name: 'Admin', users: admins },
-	{ name: 'Members', users: members }
+	{ name: 'Admin', users: admins.value },
+	{ name: 'Members', users: members.value }
 ])
 </script>

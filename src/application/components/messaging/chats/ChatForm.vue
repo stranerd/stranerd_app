@@ -26,12 +26,13 @@
 					<IonIcon :icon="trashBinOutline" class="text-danger" @click="remove" />
 				</div>
 				<div class="content flex flex-col items-center justify-center gap-2">
-					<img v-if="fileData[fileIndex].factory.media.type.includes('image')" :src="fileData[fileIndex].data"
+					<img v-if="fileData[fileIndex].factory.media?.type.includes('image')"
+						:src="fileData[fileIndex].data"
 						class="object-cover" />
-					<video v-else-if="fileData[fileIndex].factory.media.type.includes('video')"
+					<video v-else-if="fileData[fileIndex].factory.media?.type.includes('video')"
 						:src="fileData[fileIndex].data" class="object-cover" controls />
 					<IonIcon v-else :icon="documentOutline" class="text-4xl" />
-					<span>{{ fileData[fileIndex].factory.media.name }}</span>
+					<span>{{ fileData[fileIndex].factory.media?.name }}</span>
 				</div>
 				<div>
 					<div class="mb-4">

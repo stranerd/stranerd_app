@@ -3,14 +3,15 @@
 		<Avatar :id="chat.from.id" :name="chat.from.bio.fullName" :size="36" :src="chat.from.bio.photo" />
 		<div class="min-w-[25%] max-w-[100%] lg:max-w-[55%] rounded-t-xl flex flex-col gap-1">
 			<span class="flex gap-1 items-center">
-				<UserName :class="{ 'text-info': chat.from.id === id }" :isTutor="chat.from.roles.isStranerdTutor" :name="chat.from.bio.fullName"
+				<UserName :class="{ 'text-info': chat.from.id === id }" :isTutor="chat.from.roles.isStranerdTutor"
+					:name="chat.from.bio.fullName"
 					class="font-bold" />
 				<IonIcon :icon="ellipse" class="dot" />
 				<span class="text-[0.9em] leading-none text-secondaryText">
 					{{ formatTimeAsDigits(new Date(chat.createdAt)) }}
 				</span>
 			</span>
-			<div v-if="chat.isMedia" class="flex flex-col"
+			<div v-if="chat.media && chat.isMedia" class="flex flex-col"
 				@click="openViewFile(chat.media, chat.saveFilePath, $router)">
 				<img v-if="chat.isImage" :src="chat.media.link" alt="" class="w-full rounded-t-xl">
 				<div :class="{'rounded-t-xl': !chat.isImage}"
