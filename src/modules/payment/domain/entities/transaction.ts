@@ -14,9 +14,9 @@ export class TransactionEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-					 id, userId, email, status, data, title, amount, currency,
-					 createdAt, updatedAt
-				 }: TransactionConstructorArgs) {
+		             id, userId, email, status, data, title, amount, currency,
+		             createdAt, updatedAt
+	             }: TransactionConstructorArgs) {
 		super()
 		this.id = id
 		this.userId = userId

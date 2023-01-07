@@ -12,7 +12,7 @@
 					@click="openEditSchemeModal({ scheme, classInst }, $router)" />
 				<SpinLoading v-if="loading" />
 				<IonIcon v-else :icon="trashBinOutline" class="text-danger"
-					@click="deleteScheme(scheme)" />
+					@click="deleteScheme" />
 			</span>
 		</div>
 	</div>

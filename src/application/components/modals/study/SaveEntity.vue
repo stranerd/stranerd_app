@@ -1,5 +1,5 @@
 <template>
-	<Modal :close="close">
+	<Modal v-if="entity" :close="close">
 		<template v-slot:title>
 			Save to
 		</template>

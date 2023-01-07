@@ -34,7 +34,7 @@
 				</IonSelect>
 			</div>
 			<div class="md:w-1/4 w-full">
-				<IonSelect v-model="filters.questionType"
+				<IonSelect v-model="filters.questionTypes"
 					class="capitalize" interface="action-sheet"
 					placeholder="Mode">
 					<IonSelectOption :value="null">All</IonSelectOption>

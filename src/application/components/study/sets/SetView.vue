@@ -28,7 +28,7 @@
 		</div>
 		<EmptyState v-if="!set.allSaved.length" info="This folder is empty" />
 		<template v-if="['All', 'Flashcards'].includes(filter)">
-			<FlashCardListCard v-for="flashCard in filteredFlashCards" :key="flashCard.hash" />
+			<FlashCardListCard v-for="flashCard in filteredFlashCards" :key="flashCard.hash" :flashCard="flashCard" />
 		</template>
 		<template v-if="['All', 'Questions'].includes(filter)">
 			<QuestionListCard v-for="question in filteredQuestions" :key="question.hash" :question="question" />

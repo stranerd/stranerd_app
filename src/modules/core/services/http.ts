@@ -25,7 +25,9 @@ export class HttpClient {
 			if (!isFromOurServer) return config
 			const { accessToken, refreshToken } = await getTokens()
 			config.headers = config.headers ?? {}
+			// @ts-ignore
 			if (accessToken) config.headers['Access-Token'] = accessToken
+			// @ts-ignore
 			if (refreshToken) config.headers['Refresh-Token'] = refreshToken
 			return config
 		}, (error) => Promise.reject(error))

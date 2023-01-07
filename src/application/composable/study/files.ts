@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router'
 import { addToArray } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
 
-type Filters = 'images' | 'videos' | 'docs'
+type Filters = 'images' | 'videos' | 'docs' | string
 
 const store = {} as Record<string, {
 	files: Ref<FileEntity[]>

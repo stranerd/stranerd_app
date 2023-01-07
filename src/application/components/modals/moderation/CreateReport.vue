@@ -3,8 +3,8 @@
 		<template v-slot:title>
 			Report {{ factory.title }}
 		</template>
-		<template v-if="factory.isQuestionsType || factory.isAnswersType" v-slot:subtext>
-			What is wrong with this {{ factory.title }}
+		<template v-slot:subtext>
+			What is wrong with this {{ factory.title.toLowerCase() }}
 		</template>
 
 		<form class="flex flex-col gap-4" @submit.prevent="createReport">

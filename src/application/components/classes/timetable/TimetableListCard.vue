@@ -18,7 +18,7 @@
 				<IonIcon :icon="createOutline" class="text-warning"
 					@click="openEditTimetableModal({ event, classInst }, $router)" />
 				<SpinLoading v-if="loading" />
-				<IonIcon v-else :icon="trashBinOutline" class="text-danger" @click="deleteEvent(event)" />
+				<IonIcon v-else :icon="trashBinOutline" class="text-danger" @click="deleteEvent" />
 			</span>
 		</div>
 	</div>

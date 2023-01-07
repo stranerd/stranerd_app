@@ -5,7 +5,7 @@
 			<IonIcon :icon="pencilOutline" class="text-warning" />
 			<IonLabel>Edit</IonLabel>
 		</a>
-		<a class="flex items-center gap-2" @click.prevent="deleteCourse(course)">
+		<a class="flex items-center gap-2" @click.prevent="deleteCourse">
 			<IonIcon :icon="trashBinOutline" />
 			<IonLabel>Delete</IonLabel>
 		</a>
