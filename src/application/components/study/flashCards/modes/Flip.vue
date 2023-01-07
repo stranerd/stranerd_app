@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { expandOutline } from 'ionicons/icons'
-import { getRandomValue } from '@utils/commons'
+import { getRandomValue } from '@stranerd/validate'
 
 const props = defineProps({
 	front: {

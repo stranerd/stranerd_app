@@ -82,7 +82,8 @@ import {
 	timeOutline
 } from 'ionicons/icons'
 import DashboardCard from './DashboardCard.vue'
-import { catchDivideByZero, formatNumber, pluralize } from '@utils/commons'
+import { formatNumber, pluralize } from '@utils/commons'
+import { catchDivideByZero } from '@stranerd/validate'
 import { useAuth } from '@app/composable/auth/auth'
 import { useTestList } from '@app/composable/study/tests'
 

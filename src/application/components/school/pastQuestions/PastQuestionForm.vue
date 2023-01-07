@@ -57,7 +57,7 @@
 						<IonIcon :icon="trashBinOutline" class="text-danger"
 							@click="factory.removeOption(index)" />
 						<IonTextarea v-model="factory.options[index]"
-							:placeholder="`Enter Option ${getAlphabet(index + 1).toUpperCase()}`"
+							:placeholder="`Enter Option ${getAlphabet(index).toUpperCase()}`"
 							class="my-0 flex-grow" rows="3" />
 						<IonRadio :value="index" />
 					</div>
@@ -96,7 +96,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import { PastQuestionFactory } from '@modules/school'
-import { getAlphabet } from '@utils/commons'
+import { getAlphabet } from '@stranerd/validate'
 import { addOutline, trashBinOutline } from 'ionicons/icons'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'

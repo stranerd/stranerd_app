@@ -14,7 +14,7 @@
 					<div v-for="(option, index) in pastQuestion.data.options" :key="index"
 						class="flex gap-4 justify-between">
 						<IonText class="text-secondaryText w-full">
-							Option {{ getAlphabet(index + 1).toUpperCase() }}:
+							Option {{ getAlphabet(index).toUpperCase() }}:
 							<DisplayHtml :html="option" />
 						</IonText>
 						<IonIcon :icon="pastQuestion.data.correctIndex === index ? checkmarkDoneOutline : null"
@@ -52,7 +52,7 @@
 import { defineComponent } from 'vue'
 import { PastQuestionEntity } from '@modules/school'
 import { openPastQuestionEditModal, useDeletePastQuestion } from '@app/composable/school/pastQuestions'
-import { getAlphabet } from '@utils/commons'
+import { getAlphabet } from '@stranerd/validate'
 import { checkmarkDoneOutline } from 'ionicons/icons'
 
 export default defineComponent({

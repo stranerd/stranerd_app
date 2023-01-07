@@ -87,7 +87,8 @@ import {
 	videocamOutline
 } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
-import { getRandomValue, pluralize } from '@utils/commons'
+import { pluralize } from '@utils/commons'
+import { getRandomValue } from '@stranerd/validate'
 import { ChatFactory } from '@modules/messaging'
 import { useCreateChat } from '@app/composable/messaging/chats'
 

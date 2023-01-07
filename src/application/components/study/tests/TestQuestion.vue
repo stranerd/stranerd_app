@@ -39,7 +39,7 @@
 				Nice, you are correct
 			</span>
 			<span v-if="isInCorrect" class="rounded-xl bg-danger py-2 px-4">
-				Sorry, you're wrong. The answer is {{ getAlphabet(question.data.correctIndex + 1).toUpperCase() }}
+				Sorry, you're wrong. The answer is {{ getAlphabet(question.data.correctIndex).toUpperCase() }}
 			</span>
 
 			<template v-if="question.data.explanation.length > 0 || question.data.explanationMedia.length > 0">
@@ -80,7 +80,7 @@ import {
 } from 'ionicons/icons'
 import { TestEntity, TestType } from '@modules/study'
 import { PastQuestionEntity, PastQuestionType } from '@modules/school'
-import { getAlphabet } from '@utils/commons'
+import { getAlphabet } from '@stranerd/validate'
 import { openCreateReportModal, useCreateReport } from '@app/composable/moderation/reports'
 import { ReportType } from '@modules/moderation'
 
