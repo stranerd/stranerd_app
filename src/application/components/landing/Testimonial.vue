@@ -86,10 +86,10 @@ const testimonies = [
 
 <style scoped>
 .shadow {
-	box-shadow: 0px 0px 12px var(--clr-itemBg);
+	box-shadow: 0 0 12px var(--clr-itemBg);
 }
 
 a {
-	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs
+	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs;
 }
 </style>

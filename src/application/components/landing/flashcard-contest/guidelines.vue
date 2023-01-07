@@ -29,9 +29,9 @@
 </template>
 
 <style scoped>
-	ul{
-		list-style-type:disc;
-		list-style-position: outside;
-		margin-left: 20px;
-	}
+ul {
+	list-style-type: disc;
+	list-style-position: outside;
+	margin-left: 20px;
+}
 </style>

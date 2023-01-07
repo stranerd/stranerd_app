@@ -24,6 +24,7 @@ export default defineComponent({
 ion-fab-button {
 	--background: #{$color-primaryBg};
 	--color: #{$color-primaryText};
+
 	margin-bottom: env(safe-area-inset-bottom);
 }
 </style>

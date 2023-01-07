@@ -46,8 +46,9 @@
 
 <style lang="scss" scoped>
 a {
-	@apply rounded-lg h-12 md:h-16 min-w-[116px] md:min-w-[165px] md:text-lg text-xs
+	@apply rounded-lg h-12 md:h-16 min-w-[116px] md:min-w-[165px] md:text-lg text-xs;
 }
+
 @media screen and (min-width: $md) {
 	.product:nth-child(odd) {
 		flex-direction: row-reverse;
@@ -55,6 +56,6 @@ a {
 }
 
 .btn {
-	@apply rounded-lg h-12 md:h-16 min-w-[116px] max-w-fit md:min-w-[165px] md:max-w-fit md:text-lg text-xs
+	@apply rounded-lg h-12 md:h-16 min-w-[116px] max-w-fit md:min-w-[165px] md:max-w-fit md:text-lg text-xs;
 }
 </style>

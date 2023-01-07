@@ -24,7 +24,7 @@ export default defineComponent({
 
 <style scoped>
 .contact_header {
-	background: rgba(5, 9, 13, .500) url('@/assets/images/newLanding/contact_header_banner.png');
+	background: rgb(5 9 13 / 50%) url("@/assets/images/newLanding/contact_header_banner.png");
 	background-size: cover;
 	background-position: center 25%;
 	background-blend-mode: darken;

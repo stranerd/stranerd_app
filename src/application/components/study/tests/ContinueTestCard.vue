@@ -51,7 +51,8 @@ export default defineComponent({
 ion-progress-bar {
 	--background: #{$color-itemBg};
 	--progress-background: #{$color-success};
-	height: .5rem !important;
+
+	height: 0.5rem !important;
 	border-radius: 12px !important;
 }
 </style>

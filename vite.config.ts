@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import Components from 'unplugin-vue-components/vite'
 import Compression from 'vite-plugin-compression'
+import Checker from 'vite-plugin-checker'
 import * as path from 'path'
 
 export default defineConfig({
@@ -31,7 +32,13 @@ export default defineConfig({
 				}
 			]
 		}),
-		Compression({ algorithm: 'brotliCompress' })
+		Compression({ algorithm: 'brotliCompress' }),
+		Checker({
+			typescript: true,
+			vueTsc: true,
+			eslint: { lintCommand: 'eslint ./src/**/*.{js,ts,vue}' },
+			stylelint: { lintCommand: 'stylelint ./src/**/*.{css,scss,vue}' }
+		})
 	],
 	build: {
 		minify: 'terser'

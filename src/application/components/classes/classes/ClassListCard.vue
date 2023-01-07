@@ -76,6 +76,6 @@ export default defineComponent({
 }
 
 .fade-enter-active, .fade-leave-active {
-	transition: opacity .25s ease-in-out;
+	transition: opacity 0.25s ease-in-out;
 }
 </style>

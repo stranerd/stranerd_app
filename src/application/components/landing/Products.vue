@@ -44,8 +44,9 @@ const products = [
 
 <style lang="scss" scoped>
 a {
-	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs
+	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs;
 }
+
 @media screen and (min-width: $lg) {
 	.product:nth-child(odd) {
 		flex-direction: row-reverse;
@@ -53,6 +54,6 @@ a {
 }
 
 .btn {
-	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs
+	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs;
 }
 </style>

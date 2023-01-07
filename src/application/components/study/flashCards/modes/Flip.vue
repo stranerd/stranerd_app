@@ -48,7 +48,7 @@ const toggleFullscreen = () => {
 
 <style lang="scss" scoped>
 .custom-shadow {
-	box-shadow: 0px 0px 50px rgba(77, 92, 111, 0.1);
+	box-shadow: 0 0 50px rgb(77 92 111 / 10%);
 	border-radius: 12px;
 }
 
@@ -69,7 +69,7 @@ const toggleFullscreen = () => {
 	border-radius: 12px;
 	transition-duration: 0.7s;
 	transition-property: transform, opacity;
-	box-shadow: 0 0 10px rgba(22, 37, 101, 0.1);
+	box-shadow: 0 0 10px rgb(22 37 101 / 10%);
 }
 
 .vertical > .front {

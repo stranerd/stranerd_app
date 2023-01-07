@@ -97,7 +97,7 @@ export default defineComponent({
 		}
 	}
 
-	.ql-editor.ql-blank:before {
+	.ql-editor.ql-blank::before {
 		color: inherit;
 	}
 
@@ -108,10 +108,12 @@ export default defineComponent({
 		overflow-y: hidden;
 		font-family: inherit !important;
 		font-size: inherit !important;
+
 		// padding: 4px 0 !important;
 
 		.ql-formats {
 			display: flex;
+
 			// padding: 8px;
 			margin: 0 !important;
 
@@ -152,17 +154,18 @@ export default defineComponent({
 
 .ql-editor:focus {
 	outline: 0;
+
 	// border: 0px solid $color-info;
 	// box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 
 .is-valid .ql-editor:focus {
-	//border: 0px solid $color-success;
+	// border: 0px solid $color-success;
 	// box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
 }
 
 .is-invalid .ql-editor:focus {
-	//border: 0px solid $color-danger;
+	// border: 0px solid $color-danger;
 	// box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
 }
 

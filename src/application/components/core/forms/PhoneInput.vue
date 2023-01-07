@@ -32,10 +32,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import 'vue-tel-input/dist/vue-tel-input.css';
+@import "vue-tel-input/dist/vue-tel-input.css";
 
-.vti__dropdown.open, .vti__dropdown.disabled,
-.vti__dropdown:hover, .vti__dropdown-list, .vti__dropdown-item.highlighted {
+.vti__dropdown.open, .vti__dropdown.disabled, .vti__dropdown:hover, .vti__dropdown-list, .vti__dropdown-item.highlighted {
 	background-color: $color-bodyBg !important;
 }
 

@@ -1,40 +1,44 @@
-@import './global.scss';
-@import './ionic.scss';
-@import './tailwind.css';
-@import 'katex/dist/katex.min.css';
+@import "./global";
+
+@import "./ionic";
+
+@import "./tailwind.css";
+
+@import "katex/dist/katex.min.css";
 
 :root {
-	--clr-primaryBg: rgb(22, 37, 101);
-	--clr-primaryText: rgb(255, 255, 255);
-	--clr-primaryHover: rgb(25, 64, 132);
-	--clr-bodyBg: rgb(232, 234, 240);
-	--clr-bodyText: rgb(5, 9, 13);
-	--clr-itemBg: rgb(246, 247, 251);
-	--clr-secondaryText: rgb(73, 76, 88);
-	--clr-disabled: rgb(197, 201, 217);
-	--clr-outlineHover: rgb(182, 217, 255);
-	--clr-highlight: rgba(235, 244, 255);
+	--clr-primaryBg: rgb(22 37 101);
+	--clr-primaryText: rgb(255 255 255);
+	--clr-primaryHover: rgb(25 64 132);
+	--clr-bodyBg: rgb(232 234 240);
+	--clr-bodyText: rgb(5 9 13);
+	--clr-itemBg: rgb(246 247 251);
+	--clr-secondaryText: rgb(73 76 88);
+	--clr-disabled: rgb(197 201 217);
+	--clr-outlineHover: rgb(182 217 255);
+	--clr-highlight: rgb(235 244 255);
+
 	// Same for light & dark theme
-	--clr-contrast: rgb(255, 255, 255);
-	--clr-success: rgb(7, 177, 177);
-	--clr-danger: rgb(255, 50, 50);
-	--clr-info: rgb(33, 143, 223);
-	--clr-warning: rgb(255, 136, 0);
-	--clr-royal: rgb(128, 99, 211);
+	--clr-contrast: rgb(255 255 255);
+	--clr-success: rgb(7 177 177);
+	--clr-danger: rgb(255 50 50);
+	--clr-info: rgb(33 143 223);
+	--clr-warning: rgb(255 136 0);
+	--clr-royal: rgb(128 99 211);
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--clr-primaryBg: rgb(255, 255, 255);
-		--clr-primaryText: rgb(30, 34, 48);
-		--clr-primaryHover: rgb(241, 234, 234);
-		--clr-bodyBg: rgb(30, 34, 48);
-		--clr-bodyText: rgb(255, 255, 255);
-		--clr-itemBg: rgb(44, 47, 59);
-		--clr-secondaryText: rgb(241, 243, 247);
-		--clr-disabled: rgb(49, 49, 66);
-		--clr-outlineHover: rgb(24, 28, 39);
-		--clr-highlight: rgba(14, 14, 14);
+		--clr-primaryBg: rgb(255 255 255);
+		--clr-primaryText: rgb(30 34 48);
+		--clr-primaryHover: rgb(241 234 234);
+		--clr-bodyBg: rgb(30 34 48);
+		--clr-bodyText: rgb(255 255 255);
+		--clr-itemBg: rgb(44 47 59);
+		--clr-secondaryText: rgb(241 243 247);
+		--clr-disabled: rgb(49 49 66);
+		--clr-outlineHover: rgb(24 28 39);
+		--clr-highlight: rgb(14 14 14);
 	}
 }
 
@@ -43,12 +47,12 @@ $spacers: (
 	16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 72, 80, 96
 );
 $grid-breakpoints: (
-	'': 0,
-	'sm:': '640px',
-	'md:': '768px',
-	'lg:': '1280px',
-	'xl:': '1420px',
-	'2xl:': '1536px'
+	"": 0,
+	"sm:": "640px",
+	"md:": "768px",
+	"lg:": "1280px",
+	"xl:": "1420px",
+	"2xl:": "1536px"
 );
 
 @each $key in $spacers {
@@ -104,4 +108,3 @@ $grid-breakpoints: (
 		border-right: none;
 	}
 }
-

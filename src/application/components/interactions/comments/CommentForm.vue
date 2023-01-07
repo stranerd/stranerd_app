@@ -41,6 +41,7 @@ ion-input {
 ion-button {
 	height: 36px;
 	width: 36px;
+
 	--padding-start: 0.4rem !important;
 	--padding-end: 0.4rem !important;
 	--padding-top: 0.4rem !important;

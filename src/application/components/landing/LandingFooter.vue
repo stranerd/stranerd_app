@@ -1,4 +1,3 @@
-
 <template>
 	<footer class="bg-primaryText text-bodyText p-6 py-24 w-full">
 		<div class="container max-w-[1200px] mx-auto flex md:justify-between flex-wrap gap-5">
@@ -14,7 +13,7 @@
 				<router-link to="/legal/honor-code">Contact us</router-link>
 				<router-link to="/contact">Email us</router-link>
 			</div>
-			
+
 			<div class="flex flex-col gap-4 w-[45%] md:w-auto mt-6 md:mt-0">
 				<span class="font-bold md:text-2xl text-xl">Community</span>
 				<a href="https://stranerd.medium.com" target="_blank">Blog</a>
@@ -64,15 +63,15 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .mobile {
-	@apply md:hidden flex
+	@apply md:hidden flex;
 }
 
 .pc {
-	@apply md:flex hidden
+	@apply md:flex hidden;
 }
 
-a{
-	color: theme('colors.secondaryText');
+a {
+	color: $color-secondaryText;
 	font-weight: bold;
 }
 </style>

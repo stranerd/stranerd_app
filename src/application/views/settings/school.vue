@@ -176,6 +176,7 @@ export default defineComponent({
 ion-list-header {
 	--color: inherit;
 	--color-checked: #{$color-primaryBg};
+
 	padding-left: 0 !important;
 
 	ion-label {

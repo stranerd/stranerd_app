@@ -96,19 +96,18 @@ ion-header {
 }
 
 .btn-outline {
-	@apply rounded-md border border-primaryBg text-primaryBg font-bold px-6 py-1.5 text-xs
+	@apply rounded-md border border-primaryBg text-primaryBg font-bold px-6 py-1.5 text-xs;
 }
 
 .btn {
-	@apply rounded-md border border-primaryBg bg-primaryBg font-bold px-6 py-1.5 text-primaryText text-xs
+	@apply rounded-md border border-primaryBg bg-primaryBg font-bold px-6 py-1.5 text-primaryText text-xs;
 }
-
 
 details {
 	user-select: none;
 
 	& summary svg.turn {
-		color: #C0C0C0;
+		color: #c0c0c0;
 	}
 }
 

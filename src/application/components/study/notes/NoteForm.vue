@@ -4,13 +4,17 @@
 			<IonSelectOption v-for="{ key, value } in [
 				{ key: 'Public', value: false },
 				{ key: 'Private', value: true }
-			]" :key="key" :value="value" class="capitalize" style="--border-radius: 0;">
+			]" :key="key" :value="value" class="capitalize" style="
+
+--border-radius: 0;">
 				{{ key }}
 			</IonSelectOption>
 		</IonSelect>
 
 		<div class="border-bottom-line">
-			<IonInput v-model="factory.title" placeholder="Title" style="--background: transparent;" />
+			<IonInput v-model="factory.title" placeholder="Title" style="
+
+--background: transparent;" />
 		</div>
 
 		<IonTextarea v-model="factory.content" class="flex-1 border-bottom-line" />
@@ -62,7 +66,9 @@ ion-input, ion-select, ion-textarea {
 
 ion-input, ion-textarea {
 	--background: transparent !important;
+
 	background: transparent !important;
+
 	--padding-top: 1.5rem !important;
 	--padding-bottom: 1.5rem !important;
 }

@@ -188,6 +188,7 @@ const classroomFeatures = [
 }
 
 .card {
-	@apply flex flex-col items-center justify-center gap-2 md:p-6 p-4  text-center bg-bodyBg md:rounded-3xl rounded-2xl md:h-[276px] h-36 md:text-lg text-xs
+	@apply flex flex-col items-center justify-center gap-2 md:p-6 p-4
+		text-center bg-bodyBg md:rounded-3xl rounded-2xl md:h-[276px] h-36 md:text-lg text-xs;
 }
 </style>

@@ -73,6 +73,6 @@ export default defineComponent({
 
 <style scoped>
 .no-border {
-	--border-color: transparent !important
+	--border-color: transparent !important;
 }
 </style>

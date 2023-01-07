@@ -36,11 +36,11 @@
 
 <style lang="scss" scoped>
 a {
-	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs
+	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs;
 }
 
 .hero {
-	background: rgba(5, 9, 13, .500) url('../../assets/images/newLanding/hero.png');
+	background: rgb(5 9 13 / 50%) url("../../assets/images/newLanding/hero.png");
 	background-size: cover;
 	background-blend-mode: darken;
 }

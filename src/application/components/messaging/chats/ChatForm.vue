@@ -4,7 +4,7 @@
 			{{ loadingCounter }} {{ pluralize(loadingCounter, 'message', 'messages') }} sending
 		</span>
 		<div v-if="showFileUpload" class="absolute flex flex-col gap-4 py-4"
-			style="transform: translateY(calc(-100% - 1rem))">
+			style="transform: translateY(calc(-100% - 1rem));">
 			<FileInput v-for="{ icon, label, accept } in [
 				{ icon: imageOutline, label: 'Photos', accept: 'image/*' },
 				{ icon: videocamOutline, label: 'Videos', accept: 'video/*' },
@@ -153,11 +153,13 @@ export default defineComponent({
 ion-button {
 	height: 36px;
 	width: 36px;
+
 	--padding-start: 0.4rem !important;
 	--padding-end: 0.4rem !important;
 	--padding-top: 0.4rem !important;
 	--padding-bottom: 0.4rem !important;
 	--border-radius: 10rem !important;
+
 	border-radius: 10rem !important;
 	@media (min-width: $md) {
 		--padding-start: 0.6rem !important;

@@ -1,20 +1,25 @@
 /* Core CSS required for Ionic components to work properly */
-@import '@ionic/vue/css/core.css';
+
+@import "@ionic/vue/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-@import '@ionic/vue/css/normalize.css';
-@import '@ionic/vue/css/structure.css';
-@import '@ionic/vue/css/typography.css';
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap');
+@import "@ionic/vue/css/normalize.css";
+
+@import "@ionic/vue/css/structure.css";
+
+@import "@ionic/vue/css/typography.css";
+
+@import "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap";
 
 :root {
 	--ion-text-color: #{$color-bodyText};
 	--ion-color-step-850: #{$color-bodyText};
 	--ion-background-color: #{$color-bodyBg};
-	--ion-font-family: 'DM Sans', sans-serif;
+	--ion-font-family: "DM Sans", sans-serif;
 	--icon-size: 1.3em;
-	font-family: 'DM Sans', sans-serif;
+
+	font-family: "DM Sans", sans-serif;
 
 	/** primary **/
 	--ion-color-primary: #{$color-primaryBg};
@@ -78,12 +83,12 @@ ion-modal.modal-class {
 	&::part(content) {
 		overflow-y: auto;
 	}
-
 	@media (min-width: $lg) {
 		&::part(content) {
 			position: static;
 			border-radius: var(--border-radius);
 		}
+
 		&::part(handle) {
 			display: none;
 		}
@@ -120,10 +125,12 @@ ion-modal.modal-class {
 
 ion-searchbar {
 	--box-shadow: none !important;
+
 	padding: 0 0.25rem !important;
 	height: 44px !important;
 	border-radius: 0.5rem !important;
 	border: 1px solid $color-itemBg;
+
 	--color: inherit !important;
 	--placeholder-color: inherit !important;
 	--cancel-button-color: inherit !important;
@@ -133,17 +140,22 @@ ion-searchbar {
 
 ion-input, ion-textarea, ion-select {
 	margin: 0 !important;
+
 	--padding-start: 1rem !important;
 	--padding-end: 1rem !important;
 	--box-shadow: none;
+
 	border-radius: 0.5rem;
+
 	--icon-color: transparent !important;
 	--placeholder-color: #{$color-secondaryText} !important;
 	--placeholder-opacity: 1;
+
 	border: 1px solid $color-itemBg;
 
 	&:focus-within {
 		--icon-color: #{$color-info} !important;
+
 		border-color: $color-info;
 	}
 }
@@ -177,11 +189,12 @@ ion-alert, ion-popover, ion-action-sheet {
 
 ion-input.valid, ion-textarea.valid, ion-select.valid {
 	--icon-color: #{$color-success} !important;
+
 	border-color: $color-success;
 }
 
 ion-input.valid::after {
-	content: '✔';
+	content: "✔";
 	margin: 0 1rem;
 	color: $color-success;
 	border-radius: 100%;
@@ -189,11 +202,12 @@ ion-input.valid::after {
 
 ion-input.invalid, ion-textarea.invalid, ion-select.invalid {
 	--icon-color: #{$color-danger} !important;
+
 	border-color: $color-danger;
 }
 
 ion-input.invalid::after {
-	content: '\024D8';
+	content: "\024D8";
 	margin: 0 1rem;
 	color: $color-danger;
 	border-radius: 100%;
@@ -213,6 +227,7 @@ ion-input.invalid::after {
 ion-button {
 	--box-shadow: none;
 	--border-radius: 0.5rem;
+
 	font-weight: 600;
 	line-height: 1em;
 	text-transform: capitalize;
@@ -229,6 +244,7 @@ ion-button {
 
 .btn-primary {
 	@extend .btn-padding;
+
 	--background: #{$color-primaryBg};
 	--background-hover: #{$color-primaryHover};
 	--color: #{$color-primaryText};
@@ -239,6 +255,7 @@ ion-button {
 
 .btn-outline {
 	@extend .btn-padding;
+
 	--background: transparent;
 	--background-hover: #{$color-outlineHover};
 	--color: #{$color-primaryBg};
@@ -275,7 +292,7 @@ ion-label {
 }
 
 ion-item {
-	--inner-border-width: 0px !important;
+	--inner-border-width: 0 !important;
 }
 
 ion-radio, ion-checkmark {
