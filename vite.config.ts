@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import Components from 'unplugin-vue-components/vite'
+import Compression from 'vite-plugin-compression'
 import * as path from 'path'
 
 export default defineConfig({
@@ -29,7 +30,8 @@ export default defineConfig({
 					}
 				}
 			]
-		})
+		}),
+		Compression({ algorithm: 'brotliCompress' })
 	],
 	build: {
 		minify: 'terser'
