@@ -10,8 +10,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 // @ts-ignore
 import { VueEditor } from 'vue3-editor'
 /* const customToolBar = [
@@ -28,46 +28,41 @@ import { VueEditor } from 'vue3-editor'
  ['clean']
  ] */
 
-export default defineComponent({
-	name: 'BaseEditor',
-	components: { VueEditor },
-	props: {
-		value: {
-			required: true,
-			type: String
-		},
-		placeholder: {
-			required: true,
-			type: String
-		},
-		error: {
-			required: true,
-			type: String
-		},
-		valid: {
-			required: true,
-			type: Boolean
-		}
+const props = defineProps({
+	value: {
+		required: true,
+		type: String
 	},
-	setup (props, { emit }) {
-		const comp = computed({
-			get: () => props.value,
-			set: (ev: string) => {
-				emit('update:value', ev)
-			}
-		})
-		return {
-			comp,
-			toolbar: [
-				[{ header: [2, 3, 4, 5, false] }],
-				['bold', 'italic', 'underline', 'strike'],
-				[{ script: 'sub' }, { script: 'super' }],
-				['code-block'],
-				['clean']
-			]
-		}
+	placeholder: {
+		required: true,
+		type: String
+	},
+	error: {
+		required: true,
+		type: String
+	},
+	valid: {
+		required: true,
+		type: Boolean
 	}
 })
+
+const emit = defineEmits(['update:value'])
+
+const comp = computed({
+	get: () => props.value,
+	set: (ev: string) => {
+		emit('update:value', ev)
+	}
+})
+
+const toolbar = [
+	[{ header: [2, 3, 4, 5, false] }],
+	['bold', 'italic', 'underline', 'strike'],
+	[{ script: 'sub' }, { script: 'super' }],
+	['code-block'],
+	['clean']
+]
 </script>
 
 <style lang="scss">

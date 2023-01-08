@@ -16,23 +16,16 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import InstitutionForm from '@app/components/school/institutions/InstitutionForm.vue'
 import { useEditInstitution } from '@app/composable/school/institutions'
 
-export default defineComponent({
-	name: 'EditInstitutionModal',
-	components: { InstitutionForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { factory, error, loading, editInstitution } = useEditInstitution()
-		return { factory, error, loading, editInstitution }
+defineProps({
+	close: {
+		type: Function,
+		required: true
 	}
 })
+
+const { factory, error, loading, editInstitution } = useEditInstitution()
 </script>

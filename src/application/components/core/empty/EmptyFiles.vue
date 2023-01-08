@@ -6,14 +6,6 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-	name: 'EmptyFiles'
-})
-</script>
-
 <style lang="scss" scoped>
 img {
 	min-width: 150px;

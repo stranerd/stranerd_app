@@ -15,22 +15,16 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useAdminsList } from '@app/composable/users/roles/admins'
 import { UserEntity } from '@modules/users'
 
-export default defineComponent({
-	name: 'AdminsListCard',
-	props: {
-		user: {
-			required: true,
-			type: UserEntity
-		}
-	},
-	setup () {
-		const { loading, error, adminUser } = useAdminsList()
-		return { loading, error, adminUser }
+defineProps({
+	user: {
+		required: true,
+		type: UserEntity
 	}
 })
+
+const { loading, error, adminUser } = useAdminsList()
 </script>

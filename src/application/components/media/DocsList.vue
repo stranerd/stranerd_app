@@ -17,31 +17,25 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { documentOutline } from 'ionicons/icons'
 import { Media } from '@modules/core'
 import { openViewFile } from '@app/composable/meta/media'
 import { formatFileSize } from '@utils/commons'
 
-export default defineComponent({
-	name: 'DocsList',
-	props: {
-		media: {
-			type: Array as PropType<{
-				key: string,
-				values: {
-					hash: string,
-					createdAt: number
-					media: Media
-					path: string
-				}[]
-			}[]>,
-			required: true
-		}
-	},
-	setup () {
-		return { formatFileSize, openViewFile, documentOutline }
+defineProps({
+	media: {
+		type: Array as PropType<{
+			key: string,
+			values: {
+				hash: string,
+				createdAt: number
+				media: Media
+				path: string
+			}[]
+		}[]>,
+		required: true
 	}
 })
 </script>

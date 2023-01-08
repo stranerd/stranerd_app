@@ -18,19 +18,12 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useAppleSignin, useGoogleSignin } from '@app/composable/auth/signin'
 import { logoApple, logoGoogle } from 'ionicons/icons'
 import { isIos, isWeb } from '@utils/constants'
 
-export default defineComponent({
-	name: 'AuthProviders',
-	setup () {
-		const { loading: googleLoading, signin: googleSignin } = useGoogleSignin()
-		const { loading: appleLoading, signin: appleSignin } = useAppleSignin()
-		const showAppleSignin = isWeb || isIos
-		return { googleLoading, appleLoading, googleSignin, appleSignin, logoGoogle, logoApple, showAppleSignin }
-	}
-})
+const { loading: googleLoading, signin: googleSignin } = useGoogleSignin()
+const { loading: appleLoading, signin: appleSignin } = useAppleSignin()
+const showAppleSignin = isWeb || isIos
 </script>

@@ -6,22 +6,16 @@
 	</span>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useTag } from '@app/composable/interactions/tags'
 
-export default defineComponent({
-	name: 'Tag',
-	props: {
-		tagId: {
-			type: String,
-			default: '',
-			required: true
-		}
-	},
-	setup (props) {
-		const { tag } = useTag(props.tagId)
-		return { tag }
+const props = defineProps({
+	tagId: {
+		type: String,
+		default: '',
+		required: true
 	}
 })
+
+const { tag } = useTag(props.tagId)
 </script>

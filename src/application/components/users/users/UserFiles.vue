@@ -25,8 +25,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import ImagesList from '@app/components/media/ImagesList.vue'
 import VideosList from '@app/components/media/VideosList.vue'
 import DocsList from '@app/components/media/DocsList.vue'
@@ -34,33 +34,23 @@ import { groupBy } from '@utils/commons'
 import { months } from '@utils/dates'
 import { useFileList } from '@app/composable/study/files'
 
-export default defineComponent({
-	name: 'UserFilesList',
-	components: { ImagesList, DocsList, VideosList },
-	setup () {
-		const {
-			loading, error, files, type, hasMore, fetchOlderFiles,
-			searchValue, search, searchMode
-		} = useFileList()
-		const images = computed(() => groupBy(files.value.filter((c) => c.isImage)
-			.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
-			const date = new Date(c.createdAt)
-			return `${months[date.getMonth()]} ${date.getFullYear()}`
-		}))
-		const videos = computed(() => groupBy(files.value.filter((c) => c.isVideo)
-			.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
-			const date = new Date(c.createdAt)
-			return `${months[date.getMonth()]} ${date.getFullYear()}`
-		}))
-		const docs = computed(() => groupBy(files.value.filter((c) => c.isDoc)
-			.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
-			const date = new Date(c.createdAt)
-			return `${months[date.getMonth()]} ${date.getFullYear()}`
-		}))
-		return {
-			type, hasMore, fetchOlderFiles, loading, error, files,
-			images, videos, docs, searchValue, search, searchMode
-		}
-	}
-})
+const {
+	loading, error, files, type, hasMore, fetchOlderFiles,
+	searchValue, search, searchMode
+} = useFileList()
+const images = computed(() => groupBy(files.value.filter((c) => c.isImage)
+	.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
+	const date = new Date(c.createdAt)
+	return `${months[date.getMonth()]} ${date.getFullYear()}`
+}))
+const videos = computed(() => groupBy(files.value.filter((c) => c.isVideo)
+	.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
+	const date = new Date(c.createdAt)
+	return `${months[date.getMonth()]} ${date.getFullYear()}`
+}))
+const docs = computed(() => groupBy(files.value.filter((c) => c.isDoc)
+	.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
+	const date = new Date(c.createdAt)
+	return `${months[date.getMonth()]} ${date.getFullYear()}`
+}))
 </script>

@@ -28,30 +28,19 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { calendarOutline, ellipsisVerticalOutline } from 'ionicons/icons'
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { TestPrepEntity } from '@modules/study'
 import { useCreateTest } from '@app/composable/study/tests'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import Course from '@app/components/school/courses/Course.vue'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
-export default defineComponent({
-	name: 'TestPrepListCard',
-	components: { Institution, Course, SaveToSet },
-	props: {
-		testPrep: {
-			type: TestPrepEntity,
-			required: true
-		}
-	},
-	setup () {
-		const { loading, error, createTest } = useCreateTest()
-		return {
-			ellipsisVerticalOutline, calendarOutline,
-			loading, error, createTest
-		}
+const props = defineProps({
+	testPrep: {
+		type: TestPrepEntity,
+		required: true
 	}
 })
+
+const { loading, error, createTest } = useCreateTest()
 </script>

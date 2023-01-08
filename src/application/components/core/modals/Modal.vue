@@ -18,26 +18,20 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { closeOutline } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'Modal',
-	props: {
-		close: {
-			type: Function as PropType<() => void>,
-			required: false,
-			default: null
-		},
-		hideHeader: {
-			type: Boolean,
-			required: false,
-			default: false
-		}
+defineProps({
+	close: {
+		type: Function as PropType<() => void>,
+		required: false,
+		default: null
 	},
-	setup () {
-		return { closeOutline }
+	hideHeader: {
+		type: Boolean,
+		required: false,
+		default: false
 	}
 })
 </script>

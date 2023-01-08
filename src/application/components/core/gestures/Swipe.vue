@@ -4,18 +4,12 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useSwipeGesture } from '@app/composable/core/gestures'
 
-export default defineComponent({
-	name: 'Swipe',
-	setup (_, { emit }) {
-		const { element } = useSwipeGesture({
-			onRight: async () => emit('swipeRight'),
-			onLeft: async () => emit('swipeLeft')
-		})
-		return { element }
-	}
+const emit = defineEmits(['swipeRight', 'swipeLeft'])
+const { element } = useSwipeGesture({
+	onRight: async () => emit('swipeRight'),
+	onLeft: async () => emit('swipeLeft')
 })
 </script>

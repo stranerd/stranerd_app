@@ -66,37 +66,32 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { computed, PropType } from 'vue'
 import { TestPrepFactory } from '@modules/study'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
 
-export default defineComponent({
-	name: 'TestPrepForm',
-	props: {
-		factory: {
-			type: TestPrepFactory,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		}
+const props = defineProps({
+	factory: {
+		type: TestPrepFactory,
+		required: true
 	},
-	setup (props) {
-		const { institutions, loading: institutionLoading } = useInstitutionList()
-		const { courses: allCourses, loading: courseLoading } = useCourseList()
-		const courses = computed(() => allCourses.value.filter((course) => course.institutionId === props.factory.institutionId))
-		return { institutions, institutionLoading, courses, courseLoading }
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
 	}
 })
+
+const { institutions, loading: institutionLoading } = useInstitutionList()
+const { courses: allCourses, loading: courseLoading } = useCourseList()
+const courses = computed(() => allCourses.value.filter((course) => course.institutionId === props.factory.institutionId))
 </script>

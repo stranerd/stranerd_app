@@ -72,13 +72,11 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 import {
 	addCircleOutline,
 	addOutline,
-	chevronBackOutline,
-	chevronForwardOutline,
 	closeCircleOutline,
 	closeOutline,
 	documentOutline,
@@ -93,60 +91,50 @@ import { getRandomValue } from '@stranerd/validate'
 import { ChatFactory } from '@modules/messaging'
 import { useCreateChat } from '@app/composable/messaging/chats'
 
-export default defineComponent({
-	name: 'ChatForm',
-	props: {
-		to: {
-			required: true,
-			type: String
-		},
-		name: {
-			required: true,
-			type: String
-		}
+const props = defineProps({
+	to: {
+		required: true,
+		type: String
 	},
-	setup (props) {
-		const showFileUpload = ref(false)
-		const showFileCaption = ref(false)
-		const fileIndex = ref(0)
-		const {
-			loadingCounter, error, factory, createTextChat, createMediaChat
-		} = useCreateChat(props.to)
-		const fileData = ref([] as { data: string, factory: ChatFactory, hash: string }[])
-		const catchFiles = useFileInputCallback(async (files) => {
-			fileData.value = files.map((file) => {
-				const factory = new ChatFactory()
-				factory.media = file
-				return { data: window.URL.createObjectURL(file.data), factory, hash: getRandomValue() }
-			})
-			fileIndex.value = 0
-			showFileCaption.value = true
-			showFileUpload.value = false
-		})
-		const catchMoreFiles = useFileInputCallback(async (files) => {
-			fileData.value.push(...files.map((file) => {
-				const factory = new ChatFactory()
-				factory.media = file
-				return { data: window.URL.createObjectURL(file.data), factory, hash: getRandomValue() }
-			}))
-		})
-		const remove = () => {
-			if (fileData.value.length === 1) showFileCaption.value = false
-			fileData.value.splice(fileIndex.value, 1)
-			if (fileIndex.value !== 0) fileIndex.value--
-		}
-		const uploadFiles = async () => {
-			showFileCaption.value = false
-			await createMediaChat(fileData.value.map((f) => f.factory) as ChatFactory[])
-		}
-		return {
-			loadingCounter, error, factory, createTextChat, uploadFiles, pluralize,
-			addCircleOutline, closeOutline, paperPlaneOutline, closeCircleOutline, trashBinOutline, imageOutline,
-			documentOutline, videocamOutline, addOutline, chevronForwardOutline, chevronBackOutline,
-			showFileUpload, catchFiles, catchMoreFiles, fileData, showFileCaption, fileIndex, remove
-		}
+	name: {
+		required: true,
+		type: String
 	}
 })
+
+const showFileUpload = ref(false)
+const showFileCaption = ref(false)
+const fileIndex = ref(0)
+const {
+	loadingCounter, error, factory, createTextChat, createMediaChat
+} = useCreateChat(props.to)
+const fileData = ref([] as { data: string, factory: ChatFactory, hash: string }[])
+const catchFiles = useFileInputCallback(async (files) => {
+	fileData.value = files.map((file) => {
+		const factory = new ChatFactory()
+		factory.media = file
+		return { data: window.URL.createObjectURL(file.data), factory, hash: getRandomValue() }
+	})
+	fileIndex.value = 0
+	showFileCaption.value = true
+	showFileUpload.value = false
+})
+const catchMoreFiles = useFileInputCallback(async (files) => {
+	fileData.value.push(...files.map((file) => {
+		const factory = new ChatFactory()
+		factory.media = file
+		return { data: window.URL.createObjectURL(file.data), factory, hash: getRandomValue() }
+	}))
+})
+const remove = () => {
+	if (fileData.value.length === 1) showFileCaption.value = false
+	fileData.value.splice(fileIndex.value, 1)
+	if (fileIndex.value !== 0) fileIndex.value--
+}
+const uploadFiles = async () => {
+	showFileCaption.value = false
+	await createMediaChat(fileData.value.map((f) => f.factory) as ChatFactory[])
+}
 </script>
 
 <style lang="scss" scoped>

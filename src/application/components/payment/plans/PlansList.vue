@@ -4,17 +4,9 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { usePlanList } from '@app/composable/payment/plans'
 import PlansListCard from '@app/components/payment/plans/PlansListCard.vue'
 
-export default defineComponent({
-	name: 'PlansList',
-	components: { PlansListCard },
-	setup () {
-		const { plans, loading, error } = usePlanList()
-		return { plans, loading, error }
-	}
-})
+const { plans, loading, error } = usePlanList()
 </script>

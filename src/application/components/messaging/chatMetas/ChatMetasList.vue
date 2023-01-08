@@ -15,20 +15,12 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import MetaBlock from '@app/components/messaging/chatMetas/MetaBlock.vue'
 import { useChatMetas } from '@app/composable/messaging/chatMetas'
 import { useUserClassList } from '@app/composable/users/users/classes'
 import ChatMetasListCard from '@app/components/messaging/chatMetas/ChatMetasListCard.vue'
 
-export default defineComponent({
-	name: 'ChatMetasList',
-	components: { MetaBlock, ChatMetasListCard },
-	setup () {
-		const { classes } = useUserClassList()
-		const { groups, connects, unRead, error, loading, search } = useChatMetas()
-		return { classes, search, groups, connects, unRead, error, loading }
-	}
-})
+const { classes } = useUserClassList()
+const { groups, connects, unRead, error, loading, search } = useChatMetas()
 </script>

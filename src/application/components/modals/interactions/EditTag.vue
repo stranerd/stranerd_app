@@ -17,23 +17,16 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import TagForm from '@app/components/interactions/tags/TagForm.vue'
 import { useEditTag } from '@app/composable/interactions/tags'
 
-export default defineComponent({
-	name: 'EditTagModal',
-	components: { TagForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { factory, error, loading, editTag } = useEditTag()
-		return { factory, error, loading, editTag }
+defineProps({
+	close: {
+		type: Function,
+		required: true
 	}
 })
+
+const { factory, error, loading, editTag } = useEditTag()
 </script>

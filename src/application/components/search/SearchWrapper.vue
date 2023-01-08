@@ -20,26 +20,20 @@
 	</DefaultLayout>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 import Search from '@app/components/search/Search.vue'
 import { useRoute } from 'vue-router'
 
-export default defineComponent({
-	name: 'SearchWrapper',
-	props: {
-		baseRoute: {
-			type: String,
-			required: true
-		}
-	},
-	components: { Search },
-	setup () {
-		const route = useRoute()
-		const { tab: t = '' } = route.query
-		const tabValues = ['questions', 'flashCards', 'users']
-		const tab = ref(tabValues.includes(t as string) ? t as string : 'all')
-		return { tab }
+defineProps({
+	baseRoute: {
+		type: String,
+		required: true
 	}
 })
+
+const route = useRoute()
+const { tab: t = '' } = route.query
+const tabValues = ['questions', 'flashCards', 'users']
+const tab = ref(tabValues.includes(t as string) ? t as string : 'all')
 </script>

@@ -11,22 +11,15 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { TransactionEntity } from '@modules/payment'
 import { formatCurrency } from '@utils/commons'
 import { formatTime } from '@utils/dates'
 
-export default defineComponent({
-	name: 'TransactionsListCard',
-	props: {
-		transaction: {
-			type: TransactionEntity,
-			required: true
-		}
-	},
-	setup () {
-		return { formatCurrency, formatTime }
+defineProps({
+	transaction: {
+		type: TransactionEntity,
+		required: true
 	}
 })
 </script>

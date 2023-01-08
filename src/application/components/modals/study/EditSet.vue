@@ -9,23 +9,16 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useEditSet } from '@app/composable/study/sets'
 import SetForm from '@app/components/study/sets/SetForm.vue'
 
-export default defineComponent({
-	name: 'EditSetModal',
-	components: { SetForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { editSet, factory, error, loading } = useEditSet()
-		return { error, loading, editSet, factory }
+defineProps({
+	close: {
+		type: Function,
+		required: true
 	}
 })
+
+const { editSet, factory, error, loading } = useEditSet()
 </script>

@@ -38,28 +38,21 @@
 	</IonHeader>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { arrowBackOutline, searchOutline, settingsOutline, trophyOutline } from 'ionicons/icons'
 import NotificationIcon from '@app/components/users/notifications/NotificationIcon.vue'
 import Search from '@app/components/search/Search.vue'
 import { useAuth } from '@app/composable/auth/auth'
 
-export default defineComponent({
-	name: 'Topbar',
-	components: { NotificationIcon, Search },
-	props: {
-		hideContent: {
-			type: Boolean,
-			default: false,
-			required: false
-		}
-	},
-	setup () {
-		const { user } = useAuth()
-		return { user, arrowBackOutline, searchOutline, settingsOutline, trophyOutline }
+const props = defineProps({
+	hideContent: {
+		type: Boolean,
+		default: false,
+		required: false
 	}
 })
+
+const { user } = useAuth()
 </script>
 
 <style lang="scss" scoped>

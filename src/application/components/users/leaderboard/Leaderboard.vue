@@ -18,20 +18,10 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useLeaderboardList } from '@app/composable/users/leaderboard'
 import { RankingTimes } from '@modules/users'
 import LeaderboardListCard from '@app/components/users/leaderboard/LeaderboardListCard.vue'
 
-export default defineComponent({
-	name: 'Leaderboard',
-	components: { LeaderboardListCard },
-	setup () {
-		const { users, time, tagId, loading, error, nextPage, fetchMoreUsers } = useLeaderboardList()
-		return {
-			RankingTimes, users, loading, error, nextPage, fetchMoreUsers, time, tagId
-		}
-	}
-})
+const { users, time, tagId, loading, error, nextPage, fetchMoreUsers } = useLeaderboardList()
 </script>

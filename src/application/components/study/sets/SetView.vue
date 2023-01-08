@@ -37,8 +37,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
 import { SetEntity } from '@modules/study'
 import { useSet } from '@app/composable/study/sets'
 import { pluralize } from '@utils/commons'
@@ -46,26 +46,17 @@ import { folderOpenOutline } from 'ionicons/icons'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
 
-export default defineComponent({
-	name: 'SetView',
-	props: {
-		set: {
-			type: SetEntity,
-			required: true
-		}
-	},
-	components: { QuestionListCard, FlashCardListCard },
-	setup (props) {
-		const { loading, error, questions, notes, flashCards, testPreps } = useSet(props.set)
-		const filters = ['All', 'Flashcards', 'Questions']
-		const filter = ref(filters[0])
-		const search = ref('')
-		const filteredFlashCards = computed(() => flashCards.value.filter((flashCard) => flashCard.search(search.value)))
-		const filteredQuestions = computed(() => questions.value.filter((question) => question.search(search.value)))
-		return {
-			loading, error, folderOpenOutline, notes, flashCards, testPreps, pluralize,
-			filter, filters, search, filteredFlashCards, filteredQuestions
-		}
+const props = defineProps({
+	set: {
+		type: SetEntity,
+		required: true
 	}
 })
+
+const { loading, error, questions, notes, flashCards, testPreps } = useSet(props.set)
+const filters = ['All', 'Flashcards', 'Questions']
+const filter = ref(filters[0])
+const search = ref('')
+const filteredFlashCards = computed(() => flashCards.value.filter((flashCard) => flashCard.search(search.value)))
+const filteredQuestions = computed(() => questions.value.filter((question) => question.search(search.value)))
 </script>

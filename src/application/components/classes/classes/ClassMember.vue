@@ -33,8 +33,7 @@
 	</router-link>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useClassMembersList } from '@app/composable/classes/classes'
 import { useAuth } from '@app/composable/auth/auth'
 import { ClassEntity, ClassUsers } from '@modules/classes'
@@ -49,30 +48,20 @@ import {
 	removeCircleOutline
 } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'ClassMember',
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		},
-		user: {
-			type: UserEntity,
-			required: true
-		}
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
 	},
-	setup (props) {
-		const { id } = useAuth()
-		const {
-			loading, error, admins, tutors, members,
-			acceptRequest, leaveClass, addToClass, changeRole
-		} = useClassMembersList(props.classInst, true)
-		return {
-			ClassUsers,
-			admins, tutors, members, loading, error, id,
-			acceptRequest, leaveClass, addToClass, changeRole,
-			exitOutline, checkmarkOutline, closeOutline, removeCircleOutline, personOutline, person, personAddOutline
-		}
+	user: {
+		type: UserEntity,
+		required: true
 	}
 })
+
+const { id } = useAuth()
+const {
+	loading, error, admins, tutors, members,
+	acceptRequest, leaveClass, addToClass, changeRole
+} = useClassMembersList(props.classInst, true)
 </script>

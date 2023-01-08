@@ -14,27 +14,24 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 
-export default defineComponent({
-	name: 'EmptyState',
-	props: {
-		onClick: {
-			type: Function as PropType<() => Promise<void>>
-		},
-		info: {
-			type: String
-		},
-		route: {
-			type: String
-		},
-		btnText: {
-			type: String
-		},
-		btnTextClass: {
-			type: String
-		}
+defineProps({
+	onClick: {
+		type: Function as PropType<() => Promise<void>>
+	},
+	info: {
+		type: String
+	},
+	route: {
+		type: String
+	},
+	btnText: {
+		type: String
+	},
+	btnTextClass: {
+		type: String
 	}
 })
 </script>

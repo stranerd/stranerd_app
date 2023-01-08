@@ -47,18 +47,8 @@
 	</footer>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { logoFacebook, logoInstagram, logoLinkedin, logoTwitter } from 'ionicons/icons'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-	name: 'LandingFooter',
-	setup () {
-		return {
-			logoInstagram, logoTwitter, logoFacebook, logoLinkedin
-		}
-	}
-})
 </script>
 
 <style lang="scss" scoped>

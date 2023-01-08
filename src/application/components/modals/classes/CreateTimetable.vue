@@ -10,23 +10,16 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useCreateEvent } from '@app/composable/classes/timetable'
 import TimetableForm from '@app/components/classes/timetable/TimetableForm.vue'
 
-export default defineComponent({
-	name: 'CreateTimetableModal',
-	components: { TimetableForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { factory, error, loading, eventClass, createEvent } = useCreateEvent()
-		return { error, loading, factory, eventClass, createEvent }
+defineProps({
+	close: {
+		type: Function,
+		required: true
 	}
 })
+
+const { factory, error, loading, eventClass, createEvent } = useCreateEvent()
 </script>

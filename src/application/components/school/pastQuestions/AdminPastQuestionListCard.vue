@@ -48,27 +48,18 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { PastQuestionEntity } from '@modules/school'
 import { openPastQuestionEditModal, useDeletePastQuestion } from '@app/composable/school/pastQuestions'
 import { getAlphabet } from '@stranerd/validate'
 import { checkmarkDoneOutline } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'AdminPastQuestionListCard',
-	props: {
-		pastQuestion: {
-			type: PastQuestionEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const { loading, error, deletePastQuestion } = useDeletePastQuestion(props.pastQuestion)
-		return {
-			loading, error, deletePastQuestion,
-			openPastQuestionEditModal, getAlphabet, checkmarkDoneOutline
-		}
+const props = defineProps({
+	pastQuestion: {
+		type: PastQuestionEntity,
+		required: true
 	}
 })
+
+const { loading, error, deletePastQuestion } = useDeletePastQuestion(props.pastQuestion)
 </script>

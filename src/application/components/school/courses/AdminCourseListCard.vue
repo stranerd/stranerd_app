@@ -13,26 +13,17 @@
 	</IonItem>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { CourseEntity } from '@modules/school'
 import { openCourseEditModal, useDeleteCourse } from '@app/composable/school/courses'
 import { pencilOutline, trashBinOutline } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'AdminCourseListCard',
-	props: {
-		course: {
-			type: CourseEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const { loading, deleteCourse } = useDeleteCourse(props.course.id)
-		return {
-			loading, deleteCourse, openCourseEditModal,
-			trashBinOutline, pencilOutline
-		}
+const props = defineProps({
+	course: {
+		type: CourseEntity,
+		required: true
 	}
 })
+
+const { loading, deleteCourse } = useDeleteCourse(props.course.id)
 </script>

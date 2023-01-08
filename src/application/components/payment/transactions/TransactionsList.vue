@@ -14,23 +14,11 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import TransactionsListCard from '@app/components/payment/transactions/TransactionsListCard.vue'
 import { useTransactionsList } from '@app/composable/payment/transactions'
 
-export default defineComponent({
-	name: 'TransactionsList',
-	components: { TransactionsListCard },
-	setup () {
-		const {
-			transactions, error, loading, hasMore, from, to, fetchOlderTransactions
-		} = useTransactionsList()
-
-		return {
-			transactions, error, loading, hasMore, from, to,
-			fetchOlderTransactions
-		}
-	}
-})
+const {
+	transactions, error, loading, hasMore, from, to, fetchOlderTransactions
+} = useTransactionsList()
 </script>

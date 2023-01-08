@@ -41,7 +41,7 @@
 	</IonPage>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue'
 import Topbar from '@app/components/layout/topNavigations/Topbar.vue'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
@@ -51,29 +51,22 @@ import RightSidebar from '@app/components/layout/sidebars/RightSidebar.vue'
 import { arrowBackOutline } from 'ionicons/icons'
 import DesktopTopbar from '@app/components/layout/topNavigations/DesktopTopbar.vue'
 
-export default defineComponent({
-	name: 'DefaultLayout',
-	props: {
-		hideTop: {
-			required: false,
-			default: false
-		},
-		hideFab: {
-			required: false,
-			default: false
-		},
-		hideBottom: {
-			required: false,
-			default: false
-		},
-		ignorePagePadding: {
-			required: false,
-			default: false
-		}
+defineProps({
+	hideTop: {
+		required: false,
+		default: false
 	},
-	components: { Topbar, DesktopTopbar, BottomNav, Fab, LeftSidebar, RightSidebar },
-	setup () {
-		return { arrowBackOutline }
+	hideFab: {
+		required: false,
+		default: false
+	},
+	hideBottom: {
+		required: false,
+		default: false
+	},
+	ignorePagePadding: {
+		required: false,
+		default: false
 	}
 })
 </script>

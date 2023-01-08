@@ -27,31 +27,21 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { ChatEntity } from '@modules/messaging'
 import { useAuth } from '@app/composable/auth/auth'
 import { formatTimeAsDigits } from '@utils/dates'
-import { documentOutline, downloadOutline, ellipse } from 'ionicons/icons'
-import { isWeb } from '@utils/constants'
+import { documentOutline, ellipse } from 'ionicons/icons'
 import { useChat } from '@app/composable/messaging/chats'
 import { openViewFile } from '@app/composable/meta/media'
 
-export default defineComponent({
-	name: 'ChatsListCard',
-	props: {
-		chat: {
-			required: true,
-			type: ChatEntity
-		}
-	},
-	setup (props) {
-		const { id } = useAuth()
-		useChat(props.chat)
-		return {
-			id, formatTimeAsDigits, isWeb,
-			documentOutline, downloadOutline, ellipse, openViewFile
-		}
+const props = defineProps({
+	chat: {
+		required: true,
+		type: ChatEntity
 	}
 })
+
+const { id } = useAuth()
+useChat(props.chat)
 </script>

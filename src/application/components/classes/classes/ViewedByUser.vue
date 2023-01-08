@@ -17,35 +17,30 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { ConnectEntity, UserEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 
-export default defineComponent({
-	name: 'ViewedByUser',
-	props: {
-		user: {
-			type: UserEntity,
-			required: true
-		},
-		connect: {
-			type: Object as PropType<ConnectEntity | null>,
-			required: true,
-			default: null
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		createConnect: {
-			type: Function as PropType<(id: string) => Promise<void>>,
-			required: true
-		}
+const props = defineProps({
+	user: {
+		type: UserEntity,
+		required: true
 	},
-	setup () {
-		const { id } = useAuth()
-		return { id }
+	connect: {
+		type: Object as PropType<ConnectEntity | null>,
+		required: true,
+		default: null
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	createConnect: {
+		type: Function as PropType<(id: string) => Promise<void>>,
+		required: true
 	}
 })
+
+const { id } = useAuth()
 </script>

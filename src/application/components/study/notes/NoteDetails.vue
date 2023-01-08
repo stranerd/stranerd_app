@@ -17,30 +17,21 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { NoteEntity } from '@modules/study'
 import { createOutline, trashBinOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 import { openNoteEditModal, useDeleteNote } from '@app/composable/study/notes'
 
-export default defineComponent({
-	name: 'NoteDetails',
-	components: { SaveToSet },
-	props: {
-		note: {
-			type: Object as PropType<NoteEntity>,
-			required: true
-		}
-	},
-	setup (props) {
-		const { id } = useAuth()
-		const { deleteNote, loading } = useDeleteNote(props.note.id as string)
-		return {
-			id, createOutline, trashBinOutline,
-			openNoteEditModal, deleteNote, loading
-		}
+const props = defineProps({
+	note: {
+		type: Object as PropType<NoteEntity>,
+		required: true
 	}
 })
+
+const { id } = useAuth()
+const { deleteNote, loading } = useDeleteNote(props.note.id as string)
 </script>

@@ -15,15 +15,3 @@
 		</div>
 	</DefaultLayout>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { cogOutline } from 'ionicons/icons'
-
-export default defineComponent({
-	name: 'AdminWrapper',
-	setup () {
-		return { cogOutline }
-	}
-})
-</script>

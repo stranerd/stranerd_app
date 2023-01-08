@@ -20,8 +20,7 @@
 	</IonFooter>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import {
 	book,
 	bookOutline,
@@ -40,23 +39,15 @@ import {
 } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 
-export default defineComponent({
-	name: 'BottomNav',
-	props: {
-		hideContent: {
-			type: Boolean,
-			default: false,
-			required: false
-		}
-	},
-	setup () {
-		const { isAdmin } = useAuth()
-		return {
-			isAdmin, personOutline, person, chatboxEllipses, chatboxEllipsesOutline, bookOutline, book,
-			helpCircleOutline, helpCircle, homeOutline, home, searchOutline, search, statsChartOutline, statsChart
-		}
+const props = defineProps({
+	hideContent: {
+		type: Boolean,
+		default: false,
+		required: false
 	}
 })
+
+const { isAdmin } = useAuth()
 </script>
 
 <style lang="scss" scoped>

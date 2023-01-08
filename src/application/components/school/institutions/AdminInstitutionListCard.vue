@@ -4,17 +4,13 @@
 	</router-link>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { InstitutionEntity } from '@modules/school'
 
-export default defineComponent({
-	name: 'AdminInstitutionListCard',
-	props: {
-		institution: {
-			type: InstitutionEntity,
-			required: true
-		}
+defineProps({
+	institution: {
+		type: InstitutionEntity,
+		required: true
 	}
 })
 </script>

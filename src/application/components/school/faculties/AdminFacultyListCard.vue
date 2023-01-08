@@ -5,17 +5,13 @@
 	</router-link>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { FacultyEntity } from '@modules/school'
 
-export default defineComponent({
-	name: 'AdminFacultyListCard',
-	props: {
-		faculty: {
-			type: FacultyEntity,
-			required: true
-		}
+defineProps({
+	faculty: {
+		type: FacultyEntity,
+		required: true
 	}
 })
 </script>

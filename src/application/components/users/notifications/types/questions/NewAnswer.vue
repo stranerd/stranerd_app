@@ -14,28 +14,22 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { NotificationEntity } from '@modules/users'
 import { formatTime } from '@utils/dates'
 import { useAnswerById } from '@app/composable/questions/answers'
 import { ellipse } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'NewAnswer',
-	props: {
-		notification: {
-			type: NotificationEntity,
-			required: true
-		},
-		answerId: {
-			type: String,
-			required: true
-		}
+const props = defineProps({
+	notification: {
+		type: NotificationEntity,
+		required: true
 	},
-	setup (props) {
-		const { answer } = useAnswerById(props.answerId)
-		return { answer, formatTime, ellipse }
+	answerId: {
+		type: String,
+		required: true
 	}
 })
+
+const { answer } = useAnswerById(props.answerId)
 </script>

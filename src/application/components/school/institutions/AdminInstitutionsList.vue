@@ -14,17 +14,9 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import InstitutionListCard from '@app/components/school/institutions/AdminInstitutionListCard.vue'
 import { useInstitutionList } from '@app/composable/school/institutions'
 
-export default defineComponent({
-	name: 'AdminInstitutionsList',
-	components: { InstitutionListCard },
-	setup () {
-		const { loading, error, institutions, schools, gatewayExams: exams } = useInstitutionList()
-		return { loading, error, institutions, schools, exams }
-	}
-})
+const { loading, error, institutions, schools, gatewayExams: exams } = useInstitutionList()
 </script>

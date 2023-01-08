@@ -29,15 +29,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { APPSTORE_LINK, PLAYSTORE_LINK } from '@utils/constants'
-
-export default defineComponent({
-	setup () {
-		return { APPSTORE_LINK, PLAYSTORE_LINK }
-	}
-})
 </script>
 
 <style lang="scss" scoped>

@@ -6,17 +6,9 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import ContinueTestCard from '@app/components/study/tests/ContinueTestCard.vue'
 import { useTestList } from '@app/composable/study/tests'
 
-export default defineComponent({
-	name: 'ContinueTests',
-	components: { ContinueTestCard },
-	setup () {
-		const { unCompletedTests, loading, error } = useTestList()
-		return { unCompletedTests, loading, error }
-	}
-})
+const { unCompletedTests, loading, error } = useTestList()
 </script>

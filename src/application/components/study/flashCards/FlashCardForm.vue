@@ -38,33 +38,27 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { addOutline, closeOutline, trashBinOutline } from 'ionicons/icons'
 import { FlashCardFactory } from '@modules/study'
 
-export default defineComponent({
-	name: 'FlashcardForm',
-	props: {
-		factory: {
-			type: FlashCardFactory,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		}
+defineProps({
+	factory: {
+		type: FlashCardFactory,
+		required: true
 	},
-	setup () {
-		return { closeOutline, trashBinOutline, addOutline }
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
 	}
 })
 </script>

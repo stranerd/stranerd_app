@@ -20,20 +20,12 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import ClassListCard from '@app/components/classes/classes/ClassListCard.vue'
 import { useUserClassList } from '@app/composable/users/users/classes'
 import { arrowForwardCircleOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 
-export default defineComponent({
-	name: 'MyClassesList',
-	components: { ClassListCard },
-	setup () {
-		const { user } = useAuth()
-		const { classes, error, loading } = useUserClassList()
-		return { user, classes, error, loading, arrowForwardCircleOutline }
-	}
-})
+const { user } = useAuth()
+const { classes, error, loading } = useUserClassList()
 </script>

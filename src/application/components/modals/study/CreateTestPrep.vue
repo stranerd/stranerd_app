@@ -16,23 +16,16 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import TestPrepForm from '@app/components/study/testPreps/TestPrepForm.vue'
 import { useCreateTestPrep } from '@app/composable/study/testPreps'
 
-export default defineComponent({
-	name: 'CreateTestPrepModal',
-	components: { TestPrepForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { factory, error, loading, createTestPrep } = useCreateTestPrep()
-		return { factory, error, loading, createTestPrep }
+defineProps({
+	close: {
+		type: Function,
+		required: true
 	}
 })
+
+const { factory, error, loading, createTestPrep } = useCreateTestPrep()
 </script>

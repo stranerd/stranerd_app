@@ -24,25 +24,13 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useQuestionList } from '@app/composable/questions/questions'
 import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
 import SelectTag from '@app/components/questions/questions/SelectTag.vue'
 
-export default defineComponent({
-	name: 'QuestionsList',
-	components: { QuestionListCard, SelectTag },
-	setup () {
-		const {
-			filteredQuestions: questions, error, loading, hasMore, fetchOlderQuestions,
-			answeredChoices, answered, tagId
-		} = useQuestionList()
-
-		return {
-			questions, error, loading, hasMore, tagId,
-			fetchOlderQuestions, answeredChoices, answered
-		}
-	}
-})
+const {
+	filteredQuestions: questions, error, loading, hasMore, fetchOlderQuestions,
+	answeredChoices, answered, tagId
+} = useQuestionList()
 </script>

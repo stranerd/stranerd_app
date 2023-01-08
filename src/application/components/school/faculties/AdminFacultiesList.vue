@@ -8,27 +8,21 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, onMounted } from 'vue'
+<script lang="ts" setup>
+import { computed, onMounted } from 'vue'
 import FacultyListCard from '@app/components/school/faculties/AdminFacultyListCard.vue'
 import { useFacultyList } from '@app/composable/school/faculties'
 
-export default defineComponent({
-	name: 'AdminFacultiesList',
-	props: {
-		institutionId: {
-			type: String,
-			required: true
-		}
-	},
-	components: { FacultyListCard },
-	setup (props) {
-		const { loading, error, faculties: allFaculties, fetchFaculties } = useFacultyList()
-		onMounted(async () => {
-			await fetchFaculties(props.institutionId)
-		})
-		const faculties = computed(() => allFaculties.value.filter((f) => f.institutionId === props.institutionId))
-		return { loading, error, faculties }
+const props = defineProps({
+	institutionId: {
+		type: String,
+		required: true
 	}
 })
+
+const { loading, error, faculties: allFaculties, fetchFaculties } = useFacultyList()
+onMounted(async () => {
+	await fetchFaculties(props.institutionId)
+})
+const faculties = computed(() => allFaculties.value.filter((f) => f.institutionId === props.institutionId))
 </script>

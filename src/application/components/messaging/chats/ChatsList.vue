@@ -13,24 +13,17 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useChats } from '@app/composable/messaging/chats'
 import { formatTime } from '@utils/dates'
 import ChatsListCard from '@app/components/messaging/chats/ChatsListCard.vue'
 
-export default defineComponent({
-	name: 'ChatsList',
-	components: { ChatsListCard },
-	props: {
-		to: {
-			required: true,
-			type: String
-		}
-	},
-	setup (props) {
-		const { loading, error, hasMore, chats, fetchOlderChats } = useChats(props.to)
-		return { loading, error, hasMore, chats, fetchOlderChats, formatTime }
+const props = defineProps({
+	to: {
+		required: true,
+		type: String
 	}
 })
+
+const { loading, error, hasMore, chats, fetchOlderChats } = useChats(props.to)
 </script>

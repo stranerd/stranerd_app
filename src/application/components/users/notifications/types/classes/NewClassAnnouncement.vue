@@ -15,34 +15,28 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { NotificationEntity } from '@modules/users'
 import { formatTime } from '@utils/dates'
 import { useClass } from '@app/composable/classes/classes'
 import { useAnnouncement } from '@app/composable/classes/announcements'
 import { ellipse } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'NewClassAnnouncement',
-	props: {
-		notification: {
-			type: NotificationEntity,
-			required: true
-		},
-		classId: {
-			type: String,
-			required: true
-		},
-		announcementId: {
-			type: String,
-			required: true
-		}
+const props = defineProps({
+	notification: {
+		type: NotificationEntity,
+		required: true
 	},
-	setup (props) {
-		const { classInst } = useClass(props.classId)
-		const { announcement } = useAnnouncement(props.classId, props.announcementId)
-		return { classInst, announcement, formatTime, ellipse }
+	classId: {
+		type: String,
+		required: true
+	},
+	announcementId: {
+		type: String,
+		required: true
 	}
 })
+
+const { classInst } = useClass(props.classId)
+const { announcement } = useAnnouncement(props.classId, props.announcementId)
 </script>

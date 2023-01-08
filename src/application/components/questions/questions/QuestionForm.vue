@@ -53,45 +53,39 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { closeOutline, imageOutline, paperPlaneOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { QuestionFactory } from '@modules/questions'
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 import SelectTag from '@app/components/questions/questions/SelectTag.vue'
 
-export default defineComponent({
-	name: 'QuestionForm',
-	components: { BaseEditor, SelectTag },
-	props: {
-		factory: {
-			type: Object as PropType<QuestionFactory>,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		},
-		disabled: {
-			type: Object as PropType<Partial<Record<keyof QuestionFactory, boolean>>>,
-			required: false,
-			default: () => ({})
-		}
+const props = defineProps({
+	factory: {
+		type: Object as PropType<QuestionFactory>,
+		required: true
 	},
-	setup (props) {
-		const catchAttachments = useFileInputCallback(async (files) => {
-			files.map(props.factory.addAttachment)
-		})
-		return { imageOutline, paperPlaneOutline, closeOutline, catchAttachments }
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
+	},
+	disabled: {
+		type: Object as PropType<Partial<Record<keyof QuestionFactory, boolean>>>,
+		required: false,
+		default: () => ({})
 	}
+})
+
+const catchAttachments = useFileInputCallback(async (files) => {
+	files.map(props.factory.addAttachment)
 })
 </script>

@@ -7,23 +7,17 @@
 	</Modal>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue'
 import CommentForm from '@app/components/interactions/comments/CommentForm.vue'
 import { getCommentEntity } from '@app/composable/interactions/comments'
 
-export default defineComponent({
-	name: 'CreateCommentModal',
-	components: { CommentForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const entity = getCommentEntity()
-		return { entity }
+defineProps({
+	close: {
+		type: Function,
+		required: true
 	}
 })
+
+const entity = getCommentEntity()
 </script>

@@ -16,19 +16,10 @@
 	</IonPopover>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue'
 import { modal, modalProps, popover, popoverProps } from '@app/composable/core/modal'
 
-export default defineComponent({
-	name: 'Modals',
-	setup () {
-		const { modals, stack: modalStack, close: modalClose } = modal
-		const { popovers, stack: popoverStack, close: popoverClose } = popover
-		return {
-			modals, modalStack, modalClose, modalProps,
-			popovers, popoverStack, popoverClose, popoverProps
-		}
-	}
-})
+const { modals, stack: modalStack, close: modalClose } = modal
+const { popovers, stack: popoverStack, close: popoverClose } = popover
 </script>

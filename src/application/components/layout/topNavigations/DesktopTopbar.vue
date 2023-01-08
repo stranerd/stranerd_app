@@ -8,20 +8,13 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue'
 import { addCircleOutline, arrowBackOutline, searchOutline, settingsOutline } from 'ionicons/icons'
 import NotificationIcon from '@app/components/users/notifications/NotificationIcon.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { useUserModal } from '@app/composable/core/modals'
 
-export default defineComponent({
-	name: 'DesktopTopbar',
-	components: { NotificationIcon },
-	setup () {
-		const { user } = useAuth()
-		const openModal = () => useUserModal().openFabMenu()
-		return { user, openModal, arrowBackOutline, searchOutline, settingsOutline, addCircleOutline }
-	}
-})
+const { user } = useAuth()
+const openModal = () => useUserModal().openFabMenu()
 </script>

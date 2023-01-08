@@ -16,36 +16,30 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { computed, PropType } from 'vue'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import { FlashCardEntity } from '@modules/study'
 
-export default defineComponent({
-	name: 'FlashCardsHorizontalList',
-	props: {
-		title: {
-			type: String,
-			required: true
-		},
-		route: {
-			type: String,
-			required: true
-		},
-		flashCards: {
-			type: Array as PropType<FlashCardEntity[]>,
-			required: true
-		},
-		empty: {
-			type: String,
-			required: false,
-			default: ''
-		}
+const props = defineProps({
+	title: {
+		type: String,
+		required: true
 	},
-	components: { FlashCardListCard },
-	setup (props) {
-		const slice = computed(() => props.flashCards.slice(0, 10))
-		return { slice }
+	route: {
+		type: String,
+		required: true
+	},
+	flashCards: {
+		type: Array as PropType<FlashCardEntity[]>,
+		required: true
+	},
+	empty: {
+		type: String,
+		required: false,
+		default: ''
 	}
 })
+
+const slice = computed(() => props.flashCards.slice(0, 10))
 </script>

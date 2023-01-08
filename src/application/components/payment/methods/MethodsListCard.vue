@@ -12,26 +12,17 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { cardOutline, radioButtonOffOutline, radioButtonOnOutline, removeCircleOutline } from 'ionicons/icons'
 import { MethodEntity } from '@modules/payment'
 import { useMethod } from '@app/composable/payment/methods'
 
-export default defineComponent({
-	name: 'MethodsListCard',
-	props: {
-		method: {
-			type: MethodEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const { loading, error, message, makeMethodPrimary, deleteMethod } = useMethod(props.method)
-		return {
-			cardOutline, radioButtonOnOutline, radioButtonOffOutline, removeCircleOutline,
-			makeMethodPrimary, deleteMethod, loading, error, message
-		}
+const props = defineProps({
+	method: {
+		type: MethodEntity,
+		required: true
 	}
 })
+
+const { loading, error, message, makeMethodPrimary, deleteMethod } = useMethod(props.method)
 </script>

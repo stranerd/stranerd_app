@@ -10,29 +10,23 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { Media } from '@modules/core'
 import { openViewFile } from '@app/composable/meta/media'
 
-export default defineComponent({
-	name: 'ImagesList',
-	props: {
-		media: {
-			type: Array as PropType<{
-				key: string,
-				values: {
-					hash: string,
-					createdAt: number
-					media: Media
-					path: string
-				}[]
-			}[]>,
-			required: true
-		}
-	},
-	setup () {
-		return { openViewFile }
+defineProps({
+	media: {
+		type: Array as PropType<{
+			key: string,
+			values: {
+				hash: string,
+				createdAt: number
+				media: Media
+				path: string
+			}[]
+		}[]>,
+		required: true
 	}
 })
 </script>

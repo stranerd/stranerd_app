@@ -2,7 +2,7 @@
 	<router-link :to="`/users/${user.id}`" class="flex card-sm card-padding items-center">
 		<Avatar :id="user.id" :name="user.bio.fullName" :size="60" :src="user.bio.photo" />
 		<div class="flex flex-col flex-1">
-			<UserName class="font-bold" :name="user.bio.fullName" :isTutor="user.roles.isStranerdTutor" />
+			<UserName :isTutor="user.roles.isStranerdTutor" :name="user.bio.fullName" class="font-bold" />
 			<template v-if="user.isCollege(user)">
 				<Institution :institutionId="user.school.institutionId"
 					class="text-secondaryText text-sm font-bold" />
@@ -23,24 +23,16 @@
 	</router-link>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { UserEntity } from '@modules/users'
 import Department from '@app/components/school/departments/Department.vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import { formatNumber, pluralize } from '@utils/commons'
 
-export default defineComponent({
-	name: 'UserListCard',
-	components: { Institution, Department },
-	props: {
-		user: {
-			type: UserEntity,
-			required: true
-		}
-	},
-	setup () {
-		return { pluralize, formatNumber }
+defineProps({
+	user: {
+		type: UserEntity,
+		required: true
 	}
 })
 </script>

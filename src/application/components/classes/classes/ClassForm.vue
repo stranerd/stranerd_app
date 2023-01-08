@@ -83,66 +83,56 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType, watch } from 'vue'
+<script lang="ts" setup>
+import { PropType, watch } from 'vue'
 import { ClassFactory } from '@modules/classes'
 import { closeOutline } from 'ionicons/icons'
 import { UploadedFile } from '@modules/core'
 import { useChooseSchool } from '@app/composable/school'
 
-export default defineComponent({
-	name: 'ClassForm',
-	props: {
-		factory: {
-			type: ClassFactory,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		},
-		disabled: {
-			type: Object,
-			required: false,
-			default: () => ({})
-		}
+const props = defineProps({
+	factory: {
+		type: ClassFactory,
+		required: true
 	},
-	setup (props) {
-		const {
-			school, schools, filteredFaculties, filteredDepartments
-		} = useChooseSchool(props.factory.institutionId, props.factory.facultyId, props.factory.departmentId)
-
-		watch(() => props.factory.institutionId, async () => {
-			props.factory.resetProp('facultyId')
-			school.institutionId = props.factory.institutionId
-		})
-
-		watch(() => props.factory.facultyId, async () => {
-			props.factory.resetProp('departmentId')
-			school.facultyId = props.factory.facultyId
-		})
-
-		watch(() => props.factory.departmentId, async () => {
-			school.departmentId = props.factory.departmentId
-		})
-
-
-		const savePhoto = async (p: UploadedFile) => {
-			props.factory.photo = p
-		}
-
-		return {
-			closeOutline, savePhoto,
-			schools, filteredFaculties, filteredDepartments
-		}
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
+	},
+	disabled: {
+		type: Object,
+		required: false,
+		default: () => ({})
 	}
 })
+
+const {
+	school, schools, filteredFaculties, filteredDepartments
+} = useChooseSchool(props.factory.institutionId, props.factory.facultyId, props.factory.departmentId)
+
+watch(() => props.factory.institutionId, async () => {
+	props.factory.resetProp('facultyId')
+	school.institutionId = props.factory.institutionId
+})
+
+watch(() => props.factory.facultyId, async () => {
+	props.factory.resetProp('departmentId')
+	school.facultyId = props.factory.facultyId
+})
+
+watch(() => props.factory.departmentId, async () => {
+	school.departmentId = props.factory.departmentId
+})
+
+const savePhoto = async (p: UploadedFile) => {
+	props.factory.photo = p
+}
 </script>

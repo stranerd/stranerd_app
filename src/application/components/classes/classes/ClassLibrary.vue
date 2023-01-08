@@ -34,8 +34,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import { ClassEntity } from '@modules/classes'
 import { useGroupList } from '@app/composable/classes/groups'
 import { useClassLibrary } from '@app/composable/classes/library'
@@ -46,45 +46,36 @@ import LinksList from '@app/components/media/LinksList.vue'
 import { groupBy } from '@utils/commons'
 import { months } from '@utils/dates'
 
-export default defineComponent({
-	name: 'ClassLibrary',
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		}
-	},
-	components: { ImagesList, DocsList, LinksList, VideosList },
-	setup (props) {
-		const {
-			loading, error, chats, groupId, type, hasMore, fetchOlderChats,
-			searchValue, searchMode, search
-		} = useClassLibrary(props.classInst.id)
-		const { groups } = useGroupList(props.classInst.id)
-		const images = computed(() => groupBy(chats.value.filter((c) => c.isImage)
-			.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
-			const date = new Date(c.createdAt)
-			return `${months[date.getMonth()]} ${date.getFullYear()}`
-		}))
-		const videos = computed(() => groupBy(chats.value.filter((c) => c.isVideo)
-			.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
-			const date = new Date(c.createdAt)
-			return `${months[date.getMonth()]} ${date.getFullYear()}`
-		}))
-		const docs = computed(() => groupBy(chats.value.filter((c) => c.isDoc)
-			.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
-			const date = new Date(c.createdAt)
-			return `${months[date.getMonth()]} ${date.getFullYear()}`
-		}))
-		const links = computed(() => groupBy(chats.value.filter((c) => c.isDoc)
-			.map((c) => ({ hash: c.hash, links: c.links, createdAt: c.createdAt })), (c) => {
-			const date = new Date(c.createdAt)
-			return `${months[date.getMonth()]} ${date.getFullYear()}`
-		}))
-		return {
-			groupId, type, groups, hasMore, fetchOlderChats, loading, error, chats,
-			images, videos, docs, links, searchValue, search, searchMode
-		}
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
 	}
 })
+
+const {
+	loading, error, chats, groupId, type, hasMore, fetchOlderChats,
+	searchValue, searchMode, search
+} = useClassLibrary(props.classInst.id)
+const { groups } = useGroupList(props.classInst.id)
+const images = computed(() => groupBy(chats.value.filter((c) => c.isImage)
+	.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
+	const date = new Date(c.createdAt)
+	return `${months[date.getMonth()]} ${date.getFullYear()}`
+}))
+const videos = computed(() => groupBy(chats.value.filter((c) => c.isVideo)
+	.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
+	const date = new Date(c.createdAt)
+	return `${months[date.getMonth()]} ${date.getFullYear()}`
+}))
+const docs = computed(() => groupBy(chats.value.filter((c) => c.isDoc)
+	.map((c) => ({ hash: c.hash, media: c.media!, path: c.saveFilePath, createdAt: c.createdAt })), (c) => {
+	const date = new Date(c.createdAt)
+	return `${months[date.getMonth()]} ${date.getFullYear()}`
+}))
+const links = computed(() => groupBy(chats.value.filter((c) => c.isDoc)
+	.map((c) => ({ hash: c.hash, links: c.links, createdAt: c.createdAt })), (c) => {
+	const date = new Date(c.createdAt)
+	return `${months[date.getMonth()]} ${date.getFullYear()}`
+}))
 </script>

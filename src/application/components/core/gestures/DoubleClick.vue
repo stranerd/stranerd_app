@@ -4,17 +4,12 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useDoubleClickGesture } from '@app/composable/core/gestures'
 
-export default defineComponent({
-	name: 'DoubleClick',
-	setup (_, { emit }) {
-		const { element } = useDoubleClickGesture({
-			onDoubleClick: async () => emit('doubleClick')
-		})
-		return { element }
-	}
+const emit = defineEmits(['doubleClick'])
+
+const { element } = useDoubleClickGesture({
+	onDoubleClick: async () => emit('doubleClick')
 })
 </script>

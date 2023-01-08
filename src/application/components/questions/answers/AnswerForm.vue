@@ -43,44 +43,38 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { closeOutline, imageOutline, paperPlaneOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { AnswerFactory, QuestionEntity } from '@modules/questions'
 import BaseEditor from '@app/components/core/editors/BaseEditor.vue'
 import InteractionTag from '@app/components/interactions/tags/Tag.vue'
 
-export default defineComponent({
-	name: 'AnswerForm',
-	components: { BaseEditor, InteractionTag },
-	props: {
-		factory: {
-			type: Object as PropType<AnswerFactory>,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		},
-		question: {
-			type: QuestionEntity,
-			required: true
-		}
+const props = defineProps({
+	factory: {
+		type: Object as PropType<AnswerFactory>,
+		required: true
 	},
-	setup (props) {
-		const catchAttachments = useFileInputCallback(async (files) => {
-			files.map(props.factory.addAttachment)
-		})
-		return { imageOutline, paperPlaneOutline, closeOutline, catchAttachments }
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
+	},
+	question: {
+		type: QuestionEntity,
+		required: true
 	}
+})
+
+const catchAttachments = useFileInputCallback(async (files) => {
+	files.map(props.factory.addAttachment)
 })
 </script>

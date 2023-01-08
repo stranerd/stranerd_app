@@ -5,25 +5,18 @@
 	</IonText>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { checkmarkCircle } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'UserName',
-	props: {
-		name: {
-			type: String,
-			required: true
-		},
-		isTutor: {
-			type: Boolean,
-			required: false,
-			default: false
-		}
+defineProps({
+	name: {
+		type: String,
+		required: true
 	},
-	setup () {
-		return { checkmarkCircle }
+	isTutor: {
+		type: Boolean,
+		required: false,
+		default: false
 	}
 })
 </script>

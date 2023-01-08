@@ -16,23 +16,16 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import FacultyForm from '@app/components/school/faculties/FacultyForm.vue'
 import { useEditFaculty } from '@app/composable/school/faculties'
 
-export default defineComponent({
-	name: 'EditFacultyModal',
-	components: { FacultyForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { factory, error, loading, editFaculty } = useEditFaculty()
-		return { factory, error, loading, editFaculty }
+defineProps({
+	close: {
+		type: Function,
+		required: true
 	}
 })
+
+const { factory, error, loading, editFaculty } = useEditFaculty()
 </script>

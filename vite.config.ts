@@ -8,6 +8,14 @@ import * as path from 'path'
 
 export default defineConfig({
 	plugins: [
+		{
+			name: 'singleHMR',
+			handleHotUpdate: ({ modules }) => modules.map((m) => {
+				m.importedModules = new Set()
+				m.importers = new Set()
+				return m
+			})
+		},
 		vue(),
 		Pages({
 			dirs: 'src/application/views',

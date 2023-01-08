@@ -21,11 +21,9 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType, ref } from 'vue'
+<script lang="ts" setup>
+import { PropType, ref } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { documentTextOutline, flashOutline, helpCircleOutline, readerOutline } from 'ionicons/icons'
-import { formatNumber } from '@utils/commons'
 import UserQuestions from '@app/components/users/users/UserQuestions.vue'
 import UserFlashCards from '@app/components/users/users/UserFlashCards.vue'
 import UserSets from '@app/components/users/users/UserSets.vue'
@@ -33,25 +31,16 @@ import UserPageCard from '@app/components/users/users/UserPageCard.vue'
 import { UserEntity } from '@modules/users'
 import { useRoute } from 'vue-router'
 
-export default defineComponent({
-	name: 'UserProfile',
-	props: {
-		user: {
-			type: Object as PropType<UserEntity>,
-			required: true
-		}
-	},
-	components: { UserQuestions, UserFlashCards, UserSets, UserPageCard },
-	setup () {
-		const { id, isSubscribed } = useAuth()
-		const route = useRoute()
-		const { tab: t = '' } = route.query
-		const tabValues = ['questions', 'flashCards']
-		const tab = ref(tabValues.includes(t as string) ? t as string : tabValues[0])
-		return {
-			id, isSubscribed, formatNumber, tab,
-			helpCircleOutline, readerOutline, documentTextOutline, flashOutline
-		}
+const props = defineProps({
+	user: {
+		type: Object as PropType<UserEntity>,
+		required: true
 	}
 })
+
+const { id, isSubscribed } = useAuth()
+const route = useRoute()
+const { tab: t = '' } = route.query
+const tabValues = ['questions', 'flashCards']
+const tab = ref(tabValues.includes(t as string) ? t as string : tabValues[0])
 </script>

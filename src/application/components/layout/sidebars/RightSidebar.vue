@@ -8,13 +8,7 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import Leaderboard from '@app/components/users/leaderboard/Leaderboard.vue'
 import Search from '@app/components/search/Search.vue'
-
-export default defineComponent({
-	name: 'RightSidebar',
-	components: { Leaderboard, Search }
-})
 </script>

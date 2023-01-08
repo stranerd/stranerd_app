@@ -16,23 +16,16 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import CourseForm from '@app/components/school/courses/CourseForm.vue'
 import { useCreateCourse } from '@app/composable/school/courses'
 
-export default defineComponent({
-	name: 'CreateCourseModal',
-	components: { CourseForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { factory, error, loading, createCourse } = useCreateCourse()
-		return { factory, error, loading, createCourse }
+defineProps({
+	close: {
+		type: Function,
+		required: true
 	}
 })
+
+const { factory, error, loading, createCourse } = useCreateCourse()
 </script>

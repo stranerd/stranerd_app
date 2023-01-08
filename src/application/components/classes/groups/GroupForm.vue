@@ -27,39 +27,34 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { GroupFactory } from '@modules/classes'
 import { useUserClassList } from '@app/composable/users/users/classes'
 
-export default defineComponent({
-	name: 'GroupForm',
-	props: {
-		factory: {
-			type: GroupFactory,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		},
-		disabled: {
-			type: Object,
-			required: false,
-			default: () => ({})
-		}
+const props = defineProps({
+	factory: {
+		type: GroupFactory,
+		required: true
 	},
-	setup () {
-		const { adminClasses } = useUserClassList()
-		return { adminClasses }
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
+	},
+	disabled: {
+		type: Object,
+		required: false,
+		default: () => ({})
 	}
 })
+
+const { adminClasses } = useUserClassList()
 </script>

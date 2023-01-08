@@ -11,23 +11,16 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useEditScheme } from '@app/composable/classes/schemes'
 import SchemeForm from '@app/components/classes/schemes/SchemeForm.vue'
 
-export default defineComponent({
-	name: 'EditSchemeModal',
-	components: { SchemeForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { factory, error, loading, schemeClass, editScheme } = useEditScheme()
-		return { error, loading, factory, schemeClass, editScheme }
+defineProps({
+	close: {
+		type: Function,
+		required: true
 	}
 })
+
+const { factory, error, loading, schemeClass, editScheme } = useEditScheme()
 </script>

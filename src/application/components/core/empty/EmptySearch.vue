@@ -11,14 +11,6 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-	name: 'EmptySearch'
-})
-</script>
-
 <style lang="scss" scoped>
 ion-button {
 	min-width: 200px;

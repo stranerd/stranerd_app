@@ -18,36 +18,28 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+<script lang="ts" setup>
+import { onMounted } from 'vue'
 import { ClassEntity, SchemeEntity } from '@modules/classes'
 import { markSchemeSeen, openEditSchemeModal, useDeleteScheme } from '@app/composable/classes/schemes'
 import { calendarClearOutline, createOutline, trashBinOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { formatDateAsDigits } from '@utils/dates'
 
-export default defineComponent({
-	name: 'SchemesListCard',
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		},
-		scheme: {
-			type: SchemeEntity,
-			required: true
-		}
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
 	},
-	setup (props) {
-		const { id } = useAuth()
-		const { loading, error, deleteScheme } = useDeleteScheme(props.scheme.classId, props.scheme.id)
-		onMounted(async () => {
-			await markSchemeSeen(props.scheme, id.value)
-		})
-		return {
-			id, deleteScheme, loading, error, openEditSchemeModal, calendarClearOutline,
-			trashBinOutline, createOutline, formatDateAsDigits
-		}
+	scheme: {
+		type: SchemeEntity,
+		required: true
 	}
+})
+
+const { id } = useAuth()
+const { loading, error, deleteScheme } = useDeleteScheme(props.scheme.classId, props.scheme.id)
+onMounted(async () => {
+	await markSchemeSeen(props.scheme, id.value)
 })
 </script>

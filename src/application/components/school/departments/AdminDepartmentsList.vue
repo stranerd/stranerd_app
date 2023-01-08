@@ -8,27 +8,21 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, onMounted } from 'vue'
+<script lang="ts" setup>
+import { computed, onMounted } from 'vue'
 import DepartmentListCard from '@app/components/school/departments/AdminDepartmentListCard.vue'
 import { useDepartmentList } from '@app/composable/school/departments'
 
-export default defineComponent({
-	name: 'AdminDepartmentsList',
-	props: {
-		facultyId: {
-			type: String,
-			required: true
-		}
-	},
-	components: { DepartmentListCard },
-	setup (props) {
-		const { loading, error, departments: allDepartments, fetchDepartments } = useDepartmentList()
-		onMounted(async () => {
-			await fetchDepartments(props.facultyId)
-		})
-		const departments = computed(() => allDepartments.value.filter((d) => d.facultyId === props.facultyId))
-		return { loading, error, departments }
+const props = defineProps({
+	facultyId: {
+		type: String,
+		required: true
 	}
 })
+
+const { loading, error, departments: allDepartments, fetchDepartments } = useDepartmentList()
+onMounted(async () => {
+	await fetchDepartments(props.facultyId)
+})
+const departments = computed(() => allDepartments.value.filter((d) => d.facultyId === props.facultyId))
 </script>

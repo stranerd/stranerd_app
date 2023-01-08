@@ -26,29 +26,20 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive } from 'vue'
+<script lang="ts" setup>
+import { reactive } from 'vue'
 import { ClassEntity } from '@modules/classes'
 import { openCreateSchemeModal, useSchemesList } from '@app/composable/classes/schemes'
 import { arrowForwardOutline, chevronForwardOutline } from 'ionicons/icons'
 import SchemesListCard from '@app/components/classes/schemes/SchemesListCard.vue'
 
-export default defineComponent({
-	name: 'SchemesList',
-	components: { SchemesListCard },
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const show = reactive({} as Record<string, boolean>)
-		const { loading, error, schemes } = useSchemesList(props.classInst.id)
-		return {
-			show, loading, error, schemes, openCreateSchemeModal,
-			arrowForwardOutline, chevronForwardOutline
-		}
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
 	}
 })
+
+const show = reactive({} as Record<string, boolean>)
+const { loading, error, schemes } = useSchemesList(props.classInst.id)
 </script>

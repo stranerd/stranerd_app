@@ -23,29 +23,26 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { InstitutionFactory } from '@modules/school'
 
-export default defineComponent({
-	name: 'InstitutionForm',
-	props: {
-		factory: {
-			type: InstitutionFactory,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		}
+defineProps({
+	factory: {
+		type: InstitutionFactory,
+		required: true
+	},
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
 	}
 })
 </script>

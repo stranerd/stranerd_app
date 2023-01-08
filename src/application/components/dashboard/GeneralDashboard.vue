@@ -64,22 +64,19 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import {
 	checkmarkCircleOutline,
-	copyOutline,
 	documentOutline,
 	flameOutline,
 	flashOutline,
 	folderOutline,
 	helpCircleOutline,
-	playCircleOutline,
 	readerOutline,
 	receiptOutline,
 	rocketOutline,
-	schoolOutline,
-	timeOutline
+	schoolOutline
 } from 'ionicons/icons'
 import DashboardCard from './DashboardCard.vue'
 import { formatNumber, pluralize } from '@utils/commons'
@@ -87,22 +84,9 @@ import { catchDivideByZero } from '@stranerd/validate'
 import { useAuth } from '@app/composable/auth/auth'
 import { useTestList } from '@app/composable/study/tests'
 
-export default defineComponent({
-	name: 'GeneralDashboard',
-	components: { DashboardCard },
-	setup () {
-		const { user } = useAuth()
-		const { tests } = useTestList()
-		const timedTests = computed(() => tests.value.filter((test) => test.isTimed))
-		const passed = computed(() => timedTests.value.filter((test) => test.passed))
-		const averageScore = computed(() => catchDivideByZero(timedTests.value.reduce((acc, cur) => acc + cur.score, 0), timedTests.value.length))
-		return {
-			rocketOutline, timeOutline, helpCircleOutline, readerOutline,
-			copyOutline, documentOutline, playCircleOutline, folderOutline, checkmarkCircleOutline,
-			receiptOutline, schoolOutline,
-			timedTests, passed, averageScore,
-			user, formatNumber, pluralize, flameOutline, flashOutline
-		}
-	}
-})
+const { user } = useAuth()
+const { tests } = useTestList()
+const timedTests = computed(() => tests.value.filter((test) => test.isTimed))
+const passed = computed(() => timedTests.value.filter((test) => test.passed))
+const averageScore = computed(() => catchDivideByZero(timedTests.value.reduce((acc, cur) => acc + cur.score, 0), timedTests.value.length))
 </script>

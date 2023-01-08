@@ -15,7 +15,7 @@
 					</router-link>
 				</div>
 				<div class="flex flex-col">
-					<UserName class="font-bold" :name="user.bio.fullName" :isTutor="user.roles.isStranerdTutor" />
+					<UserName :isTutor="user.roles.isStranerdTutor" :name="user.bio.fullName" class="font-bold" />
 					<template v-if="user.isCollege(user)">
 						<Institution :institutionId="user.school.institutionId"
 							class="text-secondaryText text-sm font-bold" />
@@ -43,8 +43,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import { useConnects } from '@app/composable/users/connects'
 import { NotificationEntity } from '@modules/users'
 import { formatTime } from '@utils/dates'
@@ -54,28 +54,22 @@ import Department from '@app/components/school/departments/Department.vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import { ellipse } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'ConnectAccepted',
-	components: { Institution, Department },
-	props: {
-		notification: {
-			type: NotificationEntity,
-			required: true
-		},
-		connectId: {
-			type: String,
-			required: true
-		},
-		userId: {
-			type: String,
-			required: true
-		}
+const props = defineProps({
+	notification: {
+		type: NotificationEntity,
+		required: true
 	},
-	setup (props) {
-		const { connects } = useConnects()
-		const { user } = useUser(props.userId)
-		const connect = computed(() => connects.value.find((c) => c.id === props.connectId))
-		return { connect, user, formatTime, formatNumber, pluralize, ellipse }
+	connectId: {
+		type: String,
+		required: true
+	},
+	userId: {
+		type: String,
+		required: true
 	}
 })
+
+const { connects } = useConnects()
+const { user } = useUser(props.userId)
+const connect = computed(() => connects.value.find((c) => c.id === props.connectId))
 </script>

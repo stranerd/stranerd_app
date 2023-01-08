@@ -13,20 +13,13 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { arrowForwardOutline, copyOutline, helpCircleOutline } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'FabMenu',
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		return { arrowForwardOutline, helpCircleOutline, copyOutline }
+defineProps({
+	close: {
+		type: Function,
+		required: true
 	}
 })
 </script>

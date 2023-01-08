@@ -54,52 +54,47 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType, ref } from 'vue'
+<script lang="ts" setup>
+import { PropType, ref } from 'vue'
 import { ClassEntity, EventFactory } from '@modules/classes'
 
-export default defineComponent({
-	name: 'TimetableForm',
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		},
-		factory: {
-			type: EventFactory,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		},
-		disabled: {
-			type: Object,
-			required: false,
-			default: () => ({})
-		}
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
 	},
-	setup (props) {
-		const activeDay = ref(props.factory.startDay ?? 1)
-		const days = [
-			{ day: 1, name: 'Monday' }, { day: 2, name: 'Tuesday' }, { day: 3, name: 'Wednesday' },
-			{ day: 4, name: 'Thursday' }, { day: 5, name: 'Friday' }, { day: 6, name: 'Saturday' },
-			{ day: 0, name: 'Sunday' }
-		]
-		const chooseDay = (day: number) => {
-			activeDay.value = day
-			if (props.disabled['day']) return
-			props.factory.startDay = props.factory.endDay = day
-		}
-		return { activeDay, days, chooseDay }
+	factory: {
+		type: EventFactory,
+		required: true
+	},
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
+	},
+	disabled: {
+		type: Object,
+		required: false,
+		default: () => ({})
 	}
 })
+
+const activeDay = ref(props.factory.startDay ?? 1)
+const days = [
+	{ day: 1, name: 'Monday' }, { day: 2, name: 'Tuesday' }, { day: 3, name: 'Wednesday' },
+	{ day: 4, name: 'Thursday' }, { day: 5, name: 'Friday' }, { day: 6, name: 'Saturday' },
+	{ day: 0, name: 'Sunday' }
+]
+const chooseDay = (day: number) => {
+	activeDay.value = day
+	if (props.disabled['day']) return
+	props.factory.startDay = props.factory.endDay = day
+}
 </script>

@@ -11,25 +11,16 @@
 	</router-link>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { AnswerEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
-import { formatNumber } from '@utils/commons'
-import { ellipse, imageOutline, readerOutline } from 'ionicons/icons'
+import { ellipse, imageOutline } from 'ionicons/icons'
 import InteractionTag from '@app/components/interactions/tags/Tag.vue'
 
-export default defineComponent({
-	name: 'UserAnswerListCard',
-	components: { InteractionTag },
-	props: {
-		answer: {
-			required: true,
-			type: AnswerEntity
-		}
-	},
-	setup () {
-		return { formatTime, formatNumber, readerOutline, ellipse, imageOutline }
+defineProps({
+	answer: {
+		required: true,
+		type: AnswerEntity
 	}
 })
 </script>

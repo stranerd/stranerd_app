@@ -21,35 +21,30 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import { useConnects } from '@app/composable/users/connects'
 import { NotificationEntity } from '@modules/users'
 import { formatTime } from '@utils/dates'
 import { ellipse } from 'ionicons/icons'
 import { useUser } from '@app/composable/users/users'
 
-export default defineComponent({
-	name: 'ConnectRequested',
-	props: {
-		notification: {
-			type: NotificationEntity,
-			required: true
-		},
-		connectId: {
-			type: String,
-			required: true
-		},
-		userId: {
-			type: String,
-			required: true
-		}
+const props = defineProps({
+	notification: {
+		type: NotificationEntity,
+		required: true
 	},
-	setup (props) {
-		const { connects, acceptConnect, deleteConnect, loading } = useConnects()
-		const { user } = useUser(props.userId)
-		const connect = computed(() => connects.value.find((c) => c.id === props.connectId))
-		return { connect, user, acceptConnect, deleteConnect, loading, formatTime, ellipse }
+	connectId: {
+		type: String,
+		required: true
+	},
+	userId: {
+		type: String,
+		required: true
 	}
 })
+
+const { connects, acceptConnect, deleteConnect, loading } = useConnects()
+const { user } = useUser(props.userId)
+const connect = computed(() => connects.value.find((c) => c.id === props.connectId))
 </script>

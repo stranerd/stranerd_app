@@ -22,29 +22,20 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useSaveModalData } from '@app/composable/study/menus'
 import { useUserSetList } from '@app/composable/users/users/sets'
 import { useSaveToSet } from '@app/composable/study/sets'
 import { add, bookmark, bookmarkOutline, folderOutline } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'SaveEntity',
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { entity, type } = useSaveModalData()
-		const { loading, error, sets } = useUserSetList()
-		const { loading: saveLoading, error: saveError, saveToSet, removeFromSet } = useSaveToSet()
-		return {
-			entity, type, loading, error, sets, saveLoading, saveError, saveToSet, removeFromSet,
-			add, bookmark, bookmarkOutline, folderOutline
-		}
+defineProps({
+	close: {
+		type: Function,
+		required: true
 	}
 })
+
+const { entity, type } = useSaveModalData()
+const { loading, error, sets } = useUserSetList()
+const { loading: saveLoading, error: saveError, saveToSet, removeFromSet } = useSaveToSet()
 </script>

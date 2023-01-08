@@ -20,23 +20,16 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useAuth } from '@app/composable/auth/auth'
-import { arrowForwardOutline, bookOutline, copyOutline, helpCircleOutline } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'QuestionCreated',
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { wallet } = useAuth()
-		return { wallet, arrowForwardOutline, helpCircleOutline, copyOutline, bookOutline }
+defineProps({
+	close: {
+		type: Function,
+		required: true
 	}
 })
+
+const { wallet } = useAuth()
 </script>
 

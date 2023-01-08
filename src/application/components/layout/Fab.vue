@@ -6,18 +6,12 @@
 	</IonFab>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue'
 import { addOutline } from 'ionicons/icons'
 import { useUserModal } from '@app/composable/core/modals'
 
-export default defineComponent({
-	name: 'Fab',
-	setup () {
-		const openModal = () => useUserModal().openFabMenu()
-		return { addOutline, openModal }
-	}
-})
+const openModal = () => useUserModal().openFabMenu()
 </script>
 
 <style lang="scss" scoped>

@@ -25,37 +25,31 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { TagFactory, TagTypes } from '@modules/interactions'
 
-export default defineComponent({
-	name: 'TagForm',
-	props: {
-		factory: {
-			type: Object as PropType<TagFactory>,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		},
-		disabled: {
-			type: Object,
-			required: false,
-			default: () => ({})
-		}
+defineProps({
+	factory: {
+		type: Object as PropType<TagFactory>,
+		required: true
 	},
-	setup () {
-		return { TagTypes }
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
+	},
+	disabled: {
+		type: Object,
+		required: false,
+		default: () => ({})
 	}
 })
 </script>

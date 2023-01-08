@@ -5,19 +5,15 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import { FlashCardEntity } from '@modules/study'
 
-export default defineComponent({
-	name: 'SearchFlashCardsList',
-	components: { FlashCardListCard },
-	props: {
-		flashCards: {
-			type: Array as PropType<FlashCardEntity[]>,
-			required: true
-		}
+defineProps({
+	flashCards: {
+		type: Array as PropType<FlashCardEntity[]>,
+		required: true
 	}
 })
 </script>

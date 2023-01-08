@@ -6,21 +6,15 @@
 	</span>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useInstitution } from '@app/composable/school/institutions'
 
-export default defineComponent({
-	name: 'Institution',
-	props: {
-		institutionId: {
-			type: String,
-			required: true
-		}
-	},
-	setup (props) {
-		const { institution } = useInstitution(props.institutionId)
-		return { institution }
+const props = defineProps({
+	institutionId: {
+		type: String,
+		required: true
 	}
 })
+
+const { institution } = useInstitution(props.institutionId)
 </script>

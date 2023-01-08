@@ -16,31 +16,25 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { videocamOutline } from 'ionicons/icons'
 import { Media } from '@modules/core'
 import { openViewFile } from '@app/composable/meta/media'
 import { formatDuration } from '@utils/commons'
 
-export default defineComponent({
-	name: 'VideosList',
-	props: {
-		media: {
-			type: Array as PropType<{
-				key: string,
-				values: {
-					hash: string,
-					createdAt: number
-					media: Media
-					path: string
-				}[]
-			}[]>,
-			required: true
-		}
-	},
-	setup () {
-		return { videocamOutline, openViewFile, formatDuration }
+defineProps({
+	media: {
+		type: Array as PropType<{
+			key: string,
+			values: {
+				hash: string,
+				createdAt: number
+				media: Media
+				path: string
+			}[]
+		}[]>,
+		required: true
 	}
 })
 </script>

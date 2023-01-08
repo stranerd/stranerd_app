@@ -2,33 +2,29 @@
 	<VueTelInput v-model="phone" mode="international" @validate="update" />
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType, ref } from 'vue'
+<script lang="ts" setup>
+import { PropType, ref } from 'vue'
 // @ts-ignore
 import { VueTelInput } from 'vue-tel-input'
 import { Phone } from '@modules/auth'
 
-export default defineComponent({
-	name: 'PhoneInput',
-	components: { VueTelInput },
-	props: {
-		value: {
-			type: Object as PropType<Phone | null>,
-			default: null,
-			validator: (p: any) => p === null || (typeof p.code === 'string' && typeof p.number === 'string')
-		}
-	},
-	setup (props, { emit }) {
-		const phone = ref((props.value?.code ?? '') + (props.value?.number ?? ''))
-		const update = (event: any) => {
-			emit('update:value', event.valid ? {
-				code: '+' + event.countryCallingCode,
-				number: event.nationalNumber
-			} : null)
-		}
-		return { update, phone }
+const props = defineProps({
+	value: {
+		type: Object as PropType<Phone | null>,
+		default: null,
+		validator: (p: any) => p === null || (typeof p.code === 'string' && typeof p.number === 'string')
 	}
 })
+
+const emit = defineEmits(['update:value'])
+
+const phone = ref((props.value?.code ?? '') + (props.value?.number ?? ''))
+const update = (event: any) => {
+	emit('update:value', event.valid ? {
+		code: '+' + event.countryCallingCode,
+		number: event.nationalNumber
+	} : null)
+}
 </script>
 
 <style lang="scss">

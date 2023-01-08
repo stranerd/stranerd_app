@@ -10,25 +10,18 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useAnswerList } from '@app/composable/questions/answers'
 import { QuestionEntity } from '@modules/questions'
 import AnswersListCard from '@app/components/questions/answers/AnswersListCard.vue'
 import { formatNumber } from '@utils/commons'
 
-export default defineComponent({
-	name: 'AnswersList',
-	props: {
-		question: {
-			type: QuestionEntity,
-			required: true
-		}
-	},
-	components: { AnswersListCard },
-	setup (props) {
-		const { answers, likes, error, loading } = useAnswerList(props.question.id)
-		return { answers, likes, error, loading, formatNumber }
+const props = defineProps({
+	question: {
+		type: QuestionEntity,
+		required: true
 	}
 })
+
+const { answers, likes, error, loading } = useAnswerList(props.question.id)
 </script>

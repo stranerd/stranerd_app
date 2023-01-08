@@ -21,9 +21,8 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {
-	addOutline,
 	book,
 	bookOutline,
 	chatboxEllipses,
@@ -38,20 +37,8 @@ import {
 	statsChartOutline
 } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
-import { defineComponent } from 'vue'
 import SubscribeCTA from '@app/components/payment/plans/SubscribeCTA.vue'
 
-export default defineComponent({
-	name: 'LeftSidebar',
-	components: { SubscribeCTA },
-	setup () {
-		const { isAdmin, isSubscribed } = useAuth()
-		return {
-			isAdmin, isSubscribed, person, personOutline,
-			addOutline, chatboxEllipses, chatboxEllipsesOutline, helpCircle, helpCircleOutline,
-			home, homeOutline, book, bookOutline, statsChart, statsChartOutline
-		}
-	}
-})
+const { isAdmin, isSubscribed } = useAuth()
 </script>
 

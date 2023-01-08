@@ -16,22 +16,16 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue'
 import { CommentEntity, InteractionEntities } from '@modules/interactions'
 import { formatTime } from '@utils/dates'
 import { openCreateCommentModal } from '@app/composable/interactions/comments'
 
-export default defineComponent({
-	name: 'CommentsListCard',
-	props: {
-		comment: {
-			type: CommentEntity,
-			required: true
-		}
-	},
-	setup () {
-		return { formatTime, InteractionEntities, openCreateCommentModal }
+defineProps({
+	comment: {
+		type: CommentEntity,
+		required: true
 	}
 })
 </script>

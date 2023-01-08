@@ -11,30 +11,20 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import AnswerCard from '@app/components/questions/answers/UserAnswerListCard.vue'
 import { useUserAnswerList } from '@app/composable/users/users/answers'
 import { UserEntity } from '@modules/users'
 
-export default defineComponent({
-	name: 'UserAnswers',
-	components: { AnswerCard },
-	props: {
-		user: {
-			type: UserEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const {
-			answers, error, loading, hasMore, fetchOlderAnswers,
-			search, searchMode, searchResults, searchValue
-		} = useUserAnswerList(props.user.id)
-		return {
-			answers, error, loading, hasMore, fetchOlderAnswers,
-			searchMode, searchResults, searchValue, search
-		}
+const props = defineProps({
+	user: {
+		type: UserEntity,
+		required: true
 	}
 })
+
+const {
+	answers, error, loading, hasMore, fetchOlderAnswers,
+	search, searchMode, searchResults, searchValue
+} = useUserAnswerList(props.user.id)
 </script>

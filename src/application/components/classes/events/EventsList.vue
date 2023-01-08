@@ -9,24 +9,17 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { ClassEntity } from '@modules/classes'
 import { useEventList } from '@app/composable/classes/events'
 import EventsListCard from '@app/components/classes/events/EventsListCard.vue'
 
-export default defineComponent({
-	name: 'EventsList',
-	components: { EventsListCard },
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const { loading, error, events, hasMore, fetchOlderEvents } = useEventList(props.classInst.id)
-		return { loading, error, events, hasMore, fetchOlderEvents }
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
 	}
 })
+
+const { loading, error, events, hasMore, fetchOlderEvents } = useEventList(props.classInst.id)
 </script>

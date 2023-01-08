@@ -11,17 +11,9 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useFlashCardList } from '@app/composable/study/flashCards'
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 
-export default defineComponent({
-	name: 'FlashCardsList',
-	components: { FlashCardListCard },
-	setup () {
-		const { flashCards, error, loading, hasMore, fetchOlderFlashCards } = useFlashCardList()
-		return { flashCards, error, loading, hasMore, fetchOlderFlashCards }
-	}
-})
+const { flashCards, error, loading, hasMore, fetchOlderFlashCards } = useFlashCardList()
 </script>

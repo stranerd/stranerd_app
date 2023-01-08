@@ -68,8 +68,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, onMounted, PropType, ref } from 'vue'
 import {
 	checkmarkCircleOutline,
 	chevronForwardOutline,
@@ -84,55 +84,46 @@ import { getAlphabet } from '@stranerd/validate'
 import { openCreateReportModal, useCreateReport } from '@app/composable/moderation/reports'
 import { ReportType } from '@modules/moderation'
 
-export default defineComponent({
-	name: 'TestQuestion',
-	props: {
-		total: {
-			type: Number,
-			required: true
-		},
-		test: {
-			type: TestEntity,
-			required: true
-		},
-		question: {
-			type: PastQuestionEntity,
-			required: true
-		},
-		questionIndex: {
-			type: Number,
-			required: true
-		},
-		answer: {
-			type: Function as PropType<(id: string, idx: number) => Promise<void>>,
-			required: true
-		}
+const props = defineProps({
+	total: {
+		type: Number,
+		required: true
 	},
-	setup (props) {
-		const showAnswers = computed(() => {
-			if (props.test.data.type === TestType.unTimed) {
-				if (props.test.questionType === PastQuestionType.objective) return props.test.answers[props.question.id] !== undefined
-				else return true
-			}
-			return props.test.done
-		})
-		const { factory, loading, error, createReport } = useCreateReport()
-		// @ts-ignore
-		const isCorrect = computed(() => showAnswers.value && props.test.answers[props.question.id] === props.question.data.correctIndex)
-		// @ts-ignore
-		const isInCorrect = computed(() => showAnswers.value && props.test.answers[props.question.id] !== props.question.data.correctIndex)
-		const showExplanation = ref(false)
-		onMounted(() => {
-			factory.value.type = ReportType.pastQuestions
-			factory.value.id = props.question.id
-			factory.value.message = 'Flagged'
-		})
-		return {
-			checkmarkCircleOutline, radioButtonOff, chevronForwardOutline,
-			flagOutline, radioButtonOn, closeCircleOutline,
-			showAnswers, isCorrect, isInCorrect, showExplanation, getAlphabet,
-			openReportModal: () => openCreateReportModal(ReportType.pastQuestions, props.question.id)
-		}
+	test: {
+		type: TestEntity,
+		required: true
+	},
+	question: {
+		type: PastQuestionEntity,
+		required: true
+	},
+	questionIndex: {
+		type: Number,
+		required: true
+	},
+	answer: {
+		type: Function as PropType<(id: string, idx: number) => Promise<void>>,
+		required: true
 	}
+})
+
+const showAnswers = computed(() => {
+	if (props.test.data.type === TestType.unTimed) {
+		if (props.test.questionType === PastQuestionType.objective) return props.test.answers[props.question.id] !== undefined
+		else return true
+	}
+	return props.test.done
+})
+const { factory, loading, error, createReport } = useCreateReport()
+// @ts-ignore
+const isCorrect = computed(() => showAnswers.value && props.test.answers[props.question.id] === props.question.data.correctIndex)
+// @ts-ignore
+const isInCorrect = computed(() => showAnswers.value && props.test.answers[props.question.id] !== props.question.data.correctIndex)
+const showExplanation = ref(false)
+const openReportModal = () => openCreateReportModal(ReportType.pastQuestions, props.question.id)
+onMounted(() => {
+	factory.value.type = ReportType.pastQuestions
+	factory.value.id = props.question.id
+	factory.value.message = 'Flagged'
 })
 </script>
