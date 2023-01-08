@@ -35,6 +35,7 @@ module.exports = {
 		"scss/dollar-variable-pattern": null,
 		"indentation": ["tab", { "baseIndentLevel": 0 }],
 		"scss/at-extend-no-missing-placeholder": null,
-		"max-line-length": 150
+		"max-line-length": 150,
+		"custom-property-empty-line-before": null
 	}
 }

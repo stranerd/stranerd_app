@@ -9,9 +9,7 @@
 			<div v-else-if="connect" class="rounded-full border-primaryBg border text-primaryBg py-1 px-3">
 				Connected
 			</div>
-			<IonButton v-else-if="!connect" class="btn-primary" style="
-
---border-radius: 10rem;"
+			<IonButton v-else-if="!connect" class="btn-primary" style="--border-radius: 10rem;"
 				@click="createConnect(user.id)">
 				Connect
 			</IonButton>

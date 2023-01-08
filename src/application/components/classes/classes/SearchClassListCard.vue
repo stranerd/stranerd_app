@@ -12,9 +12,7 @@
 			</div>
 			<IonButton v-if="!classInst.members.includes(id) && !classInst.requests.includes(id)" :disabled="loading"
 				class="btn-primary"
-				style="
-
---border-radius: 10rem;"
+				style="--border-radius: 10rem;"
 				@click="requestToJoinClass(true)">
 				<SpinLoading v-if="loading" />
 				<span v-else>Join</span>
