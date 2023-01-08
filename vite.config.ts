@@ -29,7 +29,7 @@ export default defineConfig({
 		}),
 		Components({
 			dirs: ['src/application/components/core', 'src/application/layouts'],
-			dts: true,
+			dts: 'src/types/components.d.ts',
 			types: [{ from: 'vue-router', names: ['RouterLink', 'RouterView'] }],
 			resolvers: [
 				(componentName) => {
