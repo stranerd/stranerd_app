@@ -1,7 +1,8 @@
 import { computed, onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import { ChatEntity, ChatsUseCases } from '@modules/messaging'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
+import { useListener } from '@app/composable/core/listener'
 
 type Filters = 'images' | 'videos' | 'docs' | 'links' | string
 

@@ -1,10 +1,11 @@
 import { computed, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
 import { FileEntity, FileFactory, FilesUseCases } from '@modules/study'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useRouter } from 'vue-router'
 import { addToArray } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
+import { useListener } from '@app/composable/core/listener'
 
 type Filters = 'images' | 'videos' | 'docs' | string
 

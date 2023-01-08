@@ -1,13 +1,14 @@
 import { computed, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
 import { Router, useRouter } from 'vue-router'
 import { ClassEntity, ClassesUseCases, ClassFactory, ClassUsers } from '@modules/classes'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
 import { UserEntity, UsersUseCases } from '@modules/users'
 import { useRedirectToAuth } from '@app/composable/auth/session'
 import { addToArray } from '@utils/commons'
 import { useClassModal } from '@app/composable/core/modals'
+import { useListener } from '@app/composable/core/listener'
 
 const store = {
 	classes: ref([] as ClassEntity[]),

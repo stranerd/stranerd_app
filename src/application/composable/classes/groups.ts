@@ -1,9 +1,10 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { GroupEntity, GroupFactory, GroupsUseCases } from '@modules/classes'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { addToArray } from '@utils/commons'
+import { useListener } from '@app/composable/core/listener'
 
 const store = {} as Record<string, {
 	groups: Ref<GroupEntity[]>

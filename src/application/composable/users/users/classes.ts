@@ -1,8 +1,9 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { ClassEntity, ClassesUseCases } from '@modules/classes'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
+import { useListener } from '@app/composable/core/listener'
 
 const store = {} as Record<string, {
 	classes: Ref<ClassEntity[]>

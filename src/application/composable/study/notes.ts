@@ -1,9 +1,10 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import { NoteEntity, NoteFactory, NotesUseCases } from '@modules/study'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { addToArray } from '@utils/commons'
+import { useListener } from '@app/composable/core/listener'
 
 const store = {
 	notes: ref([] as NoteEntity[]),

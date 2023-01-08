@@ -1,11 +1,12 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import { TestEntity, TestPrepEntity, TestsUseCases, TestType } from '@modules/study'
 import { PastQuestionEntity, PastQuestionsUseCases } from '@modules/school'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { useRouter } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 import { useRedirectToAuth } from '@app/composable/auth/session'
 import { addToArray } from '@utils/commons'
+import { useListener } from '@app/composable/core/listener'
 
 const store = {
 	tests: ref([] as TestEntity[]),

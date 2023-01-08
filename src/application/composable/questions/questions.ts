@@ -1,10 +1,11 @@
 import { computed, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
 import { Router, useRouter } from 'vue-router'
 import { QuestionEntity, QuestionFactory, QuestionsUseCases } from '@modules/questions'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 import { useUserModal } from '@app/composable/core/modals'
+import { useListener } from '@app/composable/core/listener'
 
 enum Answered {
 	All,

@@ -11,12 +11,13 @@ import {
 	TestPrepEntity,
 	TestPrepsUseCases
 } from '@modules/study'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useStudyModal } from '@app/composable/core/modals'
 import { Alert, Notify } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 import { Router } from 'vue-router'
 import { QuestionEntity, QuestionsUseCases } from '@modules/questions'
+import { useListener } from '@app/composable/core/listener'
 
 const store = {} as Record<string, {
 	set: Ref<SetEntity | null>

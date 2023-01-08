@@ -1,8 +1,9 @@
 import { onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import { SetEntity, SetsUseCases } from '@modules/study'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { addToArray } from '@utils/commons'
+import { useListener } from '@app/composable/core/listener'
 
 const store = {} as Record<string, {
 	sets: Ref<SetEntity[]>

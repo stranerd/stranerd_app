@@ -5,7 +5,7 @@ import { AuthUseCases } from '@modules/auth'
 import { isClient } from '@utils/environment'
 import { setupPush, unregisterDeviceOnLogout } from '@utils/push'
 import { WalletEntity, WalletsUseCases } from '@modules/payment'
-import { useListener } from '@app/composable/core/states'
+import { useListener } from '@app/composable/core/listener'
 import { getSchoolState } from '@app/composable/auth/session'
 import { Router } from 'vue-router'
 

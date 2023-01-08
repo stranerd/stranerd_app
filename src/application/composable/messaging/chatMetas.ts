@@ -1,9 +1,10 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { ChatMetaEntity, ChatMetasUseCases, ChatsUseCases } from '@modules/messaging'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { AudioSounds, useAudioPlayer } from '@app/composable/core/audios'
 import { addToArray, groupBy } from '@utils/commons'
+import { useListener } from '@app/composable/core/listener'
 
 const player = useAudioPlayer(AudioSounds.CHAT)
 

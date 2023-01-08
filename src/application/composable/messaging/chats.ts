@@ -1,8 +1,9 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { ChatEntity, ChatFactory, ChatsUseCases } from '@modules/messaging'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { addToArray, groupBy } from '@utils/commons'
+import { useListener } from '@app/composable/core/listener'
 
 const store = {} as Record<string, {
 	chats: Ref<ChatEntity[]>

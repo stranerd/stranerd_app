@@ -1,8 +1,9 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 import { CommentEntity, CommentFactory, CommentsUseCases, InteractionEntities } from '@modules/interactions'
 import { useInteractionModal } from '@app/composable/core/modals'
+import { useListener } from '@app/composable/core/listener'
 
 const store = {} as Record<string, {
 	comments: Ref<CommentEntity[]>

@@ -1,10 +1,11 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { ClassEntity, EventEntity, EventFactory, EventsUseCases, EventType } from '@modules/classes'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 import { useClassModal } from '@app/composable/core/modals'
 import { Router, useRouter } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
+import { useListener } from '@app/composable/core/listener'
 
 const store = {} as Record<string, {
 	events: Ref<EventEntity[]>

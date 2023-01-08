@@ -1,8 +1,9 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { Currencies, PlanEntity, PlansUseCases } from '@modules/payment'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 import { useUserModal } from '@app/composable/core/modals'
+import { useListener } from '@app/composable/core/listener'
 
 const noPlan = new PlanEntity({
 	id: null as unknown as string, createdAt: 0, updatedAt: 0,

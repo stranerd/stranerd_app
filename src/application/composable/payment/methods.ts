@@ -1,8 +1,9 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { MethodEntity, MethodsUseCases } from '@modules/payment'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 import { Alert } from '@utils/dialog'
+import { useListener } from '@app/composable/core/listener'
 
 const store = {
 	methods: ref([] as MethodEntity[]),

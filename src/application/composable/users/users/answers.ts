@@ -1,7 +1,8 @@
 import { onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import { AnswerEntity, AnswersUseCases } from '@modules/questions'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
+import { useListener } from '@app/composable/core/listener'
 
 const store = {} as Record<string, {
 	answers: Ref<AnswerEntity[]>
