@@ -40,7 +40,7 @@ a {
 }
 
 .hero {
-	background: rgb(5 9 13 / 50%) url("../../assets/images/newLanding/hero.png");
+	background: rgb(5 9 13 / 50%) url("@app/assets/images/newLanding/hero.png");
 	background-size: cover;
 	background-blend-mode: darken;
 }

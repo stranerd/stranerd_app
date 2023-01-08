@@ -154,19 +154,20 @@
 import { defineComponent, onMounted, ref, watch } from 'vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
-import { router } from '@app/router'
 import { saveSchoolState } from '@app/composable/auth/session'
 import { useUserSchoolUpdate } from '@app/composable/auth/profile'
 import { useCourseList } from '@app/composable/school/courses'
 import { useChooseSchool } from '@app/composable/school'
 import { UserSchoolType } from '@modules/users'
 import Institution from '@app/components/school/institutions/Institution.vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'AccountSetupSchool',
 	components: { Institution },
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
+		const router = useRouter()
 		useRouteMeta('Account setup', { back: true })
 		const skip = async () => {
 			await saveSchoolState()

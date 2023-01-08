@@ -52,15 +52,16 @@
 import { defineComponent } from 'vue'
 import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
-import { router } from '@app/router'
 import { saveSchoolState } from '@app/composable/auth/session'
 import { useProfileUpdate } from '@app/composable/auth/profile'
 import { UploadedFile } from '@modules/core'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
 	name: 'AccountSetup',
 	beforeRouteEnter: generateMiddlewares(['isAuthenticated']),
 	setup () {
+		const router = useRouter()
 		useRouteMeta('Account setup', {})
 
 		const { factory, loading, error, updateProfile } = useProfileUpdate()

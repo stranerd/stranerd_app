@@ -22,11 +22,10 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .contact_header {
-	background: rgb(5 9 13 / 50%) url("@/assets/images/newLanding/contact_header_banner.png");
+	background: rgb(5 9 13 / 50%) url("@app/assets/images/newLanding/contact_header_banner.png") center 25%;
 	background-size: cover;
-	background-position: center 25%;
 	background-blend-mode: darken;
 }
 

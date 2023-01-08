@@ -75,7 +75,7 @@ const features = [
 ]
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @media (min-width: 1000px) {
 	.lg\:grid-cols-2 {
 		grid-template-columns: repeat(2, minmax(0, 378px)) !important;

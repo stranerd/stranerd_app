@@ -71,7 +71,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .no-border {
 	--border-color: transparent !important;
 }

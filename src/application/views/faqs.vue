@@ -24,11 +24,10 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .pricing_header {
-	background: rgb(5 9 13 / 50%) url("@/assets/images/newLanding/faqs_header_banner.png");
+	background: rgb(5 9 13 / 50%) url("@app/assets/images/newLanding/faqs_header_banner.png") center 80%;
 	background-size: cover;
-	background-position: center 80%;
 	background-blend-mode: darken;
 }
 

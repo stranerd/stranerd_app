@@ -1,4 +1,3 @@
-
 <template>
 	<div class="w-full h-auto flex bg-primaryText py-4 md:py-8">
 		<div
@@ -22,8 +21,10 @@
 					</div>
 
 					<span class="flex gap-3">
-						<IonIcon :icon="chevronBackCircleOutline" class="rounded-full  text-2xl md:text-4xl" @click="prev" />
-						<IonIcon :icon="chevronForwardCircleOutline" class="rounded-full  text-2xl md:text-4xl" @click="next" />
+						<IonIcon :icon="chevronBackCircleOutline" class="rounded-full  text-2xl md:text-4xl"
+							@click="prev" />
+						<IonIcon :icon="chevronForwardCircleOutline" class="rounded-full  text-2xl md:text-4xl"
+							@click="next" />
 					</span>
 				</div>
 			</div>
@@ -31,7 +32,8 @@
 			<div class="flex flex-col md:gap-5 gap-3 lg:max-w-[47%] text-bodyText">
 				<h2 class="md:text-4xl text-2xl font-bold">What students say</h2>
 				<p class="md:text-lg text-sm">
-					Feedback from students about the impact Stranerd has on their academic activities and educational journey.
+					Feedback from students about the impact Stranerd has on their academic activities and educational
+					journey.
 				</p>
 				<router-link class="btn bg-primaryBg text-primaryText " to="/auth/signin">
 					Join today
@@ -84,7 +86,7 @@ const testimonies = [
 ]
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .shadow {
 	box-shadow: 0 0 12px var(--clr-itemBg);
 }

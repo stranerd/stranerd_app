@@ -4,7 +4,8 @@
 			<div
 				class="bg-bodyBg h-auto w-full max-w-[606px] mx-auto border flex items-center gap-4 pl-4 rounded-lg my-6">
 				<IonIcon :icon="searchOutline" class="" />
-				<input class="bg-transparent py-3 focus:border-0 focus:outline-0 w-full" placeholder="Search for question"
+				<input class="bg-transparent py-3 focus:border-0 focus:outline-0 w-full"
+					placeholder="Search for question"
 					type="text" />
 			</div>
 			<FaqsList />
@@ -28,7 +29,7 @@ import App from '../App.vue'
 import Testimonial from '@app/components/landing/Testimonial.vue'
 import { searchOutline } from 'ionicons/icons'</script>
 
-<style scoped>
+<style lang="scss" scoped>
 a {
 	@apply rounded-lg h-12 md:h-16 w-[116px] md:w-[165px] md:text-lg text-xs;
 }
