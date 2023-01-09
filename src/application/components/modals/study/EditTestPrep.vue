@@ -19,10 +19,11 @@
 <script lang="ts" setup>
 import TestPrepForm from '@app/components/study/testPreps/TestPrepForm.vue'
 import { useEditTestPrep } from '@app/composable/study/testPreps'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

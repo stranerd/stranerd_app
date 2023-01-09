@@ -51,6 +51,7 @@ import { openCreateReportModal } from '@app/composable/moderation/reports'
 import { ReportType } from '@modules/moderation'
 import { useAuth } from '@app/composable/auth/auth'
 import { openFlashCardEditModal, useDeleteFlashCard } from '@app/composable/study/flashCards'
+import { PropType } from 'vue'
 
 const props = defineProps({
 	flashCard: {
@@ -58,7 +59,7 @@ const props = defineProps({
 		required: true
 	},
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

@@ -63,7 +63,8 @@
 			<IonText class="block mb-2">
 				<DisplayHtml :html="question.data.answer" />
 			</IonText>
-			<Gallery v-if="question.data.answerMedia.length" :media="question.data.answerMedia" />
+			<Gallery v-if="question.data.answerMedia.length" :media="question.data.answerMedia"
+				:path="question.saveFilePath" />
 		</div>
 	</div>
 </template>

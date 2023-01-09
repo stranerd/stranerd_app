@@ -30,8 +30,8 @@
 					<IonLabel class="font-bold text-sm mb-2">Bio</IonLabel>
 					<IonTextarea v-model="factory.description"
 						:class="{'valid': factory.isValid('description'), 'invalid': factory.errors.description}"
-						placeholder="Short description on your profile"
-						rows="3" show-cancel-button="never" />
+						:rows="3"
+						placeholder="Short description on your profile" show-cancel-button="never" />
 				</div>
 
 				<div class="flex gap-4 items-center mt-auto">

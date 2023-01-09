@@ -13,10 +13,11 @@
 <script lang="ts" setup>
 import { useCreateEvent } from '@app/composable/classes/timetable'
 import TimetableForm from '@app/components/classes/timetable/TimetableForm.vue'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

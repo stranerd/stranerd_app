@@ -12,10 +12,11 @@
 <script lang="ts" setup>
 import { useEditNote } from '@app/composable/study/notes'
 import NoteForm from '@app/components/study/notes/NoteForm.vue'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

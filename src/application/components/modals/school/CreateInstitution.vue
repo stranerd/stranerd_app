@@ -19,10 +19,11 @@
 <script lang="ts" setup>
 import InstitutionForm from '@app/components/school/institutions/InstitutionForm.vue'
 import { useCreateInstitution } from '@app/composable/school/institutions'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

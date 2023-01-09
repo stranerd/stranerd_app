@@ -13,10 +13,11 @@
 <script lang="ts" setup>
 import { useCreateScheme } from '@app/composable/classes/schemes'
 import SchemeForm from '@app/components/classes/schemes/SchemeForm.vue'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

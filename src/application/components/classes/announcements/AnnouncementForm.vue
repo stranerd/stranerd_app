@@ -16,7 +16,7 @@
 			<IonLabel>Announcement</IonLabel>
 			<IonTextarea v-model="factory.body"
 				:class="{'valid': factory.isValid('body'), 'invalid': factory.errors.body}"
-				placeholder="Write announcement" row="3" />
+				:row="3" placeholder="Write announcement" />
 			<DisplayError :error="factory.errors.body" />
 		</div>
 

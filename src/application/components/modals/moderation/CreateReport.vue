@@ -26,11 +26,11 @@
 <script lang="ts" setup>
 import { ReportType } from '@modules/moderation'
 import { useCreateReport } from '@app/composable/moderation/reports'
-import { computed } from 'vue'
+import { computed, PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

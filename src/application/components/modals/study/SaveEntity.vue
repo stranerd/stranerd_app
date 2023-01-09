@@ -27,10 +27,11 @@ import { useSaveModalData } from '@app/composable/study/menus'
 import { useUserSetList } from '@app/composable/users/users/sets'
 import { useSaveToSet } from '@app/composable/study/sets'
 import { add, bookmark, bookmarkOutline, folderOutline } from 'ionicons/icons'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

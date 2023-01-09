@@ -29,7 +29,7 @@
 import { FlashCardEntity } from '@modules/study'
 import { chevronBackOutline, chevronForwardOutline, closeOutline, pauseOutline, playOutline } from 'ionicons/icons'
 import { formatNumber } from '@utils/commons'
-import { computed, ref } from 'vue'
+import { computed, PropType, ref } from 'vue'
 import Flip from '@app/components/study/flashCards/modes/Flip.vue'
 
 const props = defineProps({
@@ -38,7 +38,7 @@ const props = defineProps({
 		required: true
 	},
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

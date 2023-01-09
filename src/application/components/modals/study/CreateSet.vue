@@ -12,10 +12,11 @@
 <script lang="ts" setup>
 import { useCreateSet } from '@app/composable/study/sets'
 import SetForm from '@app/components/study/sets/SetForm.vue'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

@@ -19,10 +19,11 @@
 <script lang="ts" setup>
 import DepartmentForm from '@app/components/school/departments/DepartmentForm.vue'
 import { useCreateDepartment } from '@app/composable/school/departments'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

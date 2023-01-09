@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, PropType } from 'vue'
 import { getViewedBy, useClassMembersList } from '@app/composable/classes/classes'
 import { useConnects } from '@app/composable/users/connects'
 import { useAuth } from '@app/composable/auth/auth'
@@ -23,7 +23,7 @@ import ViewedByUser from '@app/components/classes/classes/ViewedByUser.vue'
 
 const props = defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

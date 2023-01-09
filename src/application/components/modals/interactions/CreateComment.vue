@@ -8,13 +8,13 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue'
+import { PropType } from 'vue'
 import CommentForm from '@app/components/interactions/comments/CommentForm.vue'
 import { getCommentEntity } from '@app/composable/interactions/comments'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

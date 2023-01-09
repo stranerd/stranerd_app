@@ -15,9 +15,11 @@
 </template>
 
 <script lang="ts" setup>
+import { PropType } from 'vue'
+
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

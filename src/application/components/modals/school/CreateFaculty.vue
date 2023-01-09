@@ -19,10 +19,11 @@
 <script lang="ts" setup>
 import FacultyForm from '@app/components/school/faculties/FacultyForm.vue'
 import { useCreateFaculty } from '@app/composable/school/faculties'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

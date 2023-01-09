@@ -19,10 +19,11 @@
 <script lang="ts" setup>
 import PastQuestionForm from '@app/components/school/pastQuestions/PastQuestionForm.vue'
 import { useCreatePastQuestion } from '@app/composable/school/pastQuestions'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

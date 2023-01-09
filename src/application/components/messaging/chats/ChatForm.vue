@@ -54,7 +54,7 @@
 								<IonIcon :icon="addOutline" />
 							</div>
 						</FileInput>
-						<IonButton :disabled="loadingCounter" class="btn-primary ml-auto" @click="uploadFiles">
+						<IonButton :disabled="!!loadingCounter" class="btn-primary ml-auto" @click="uploadFiles">
 							<IonIcon slot="icon-only" :icon="paperPlaneOutline" />
 						</IonButton>
 					</div>
@@ -65,7 +65,7 @@
 			<IonIcon :icon="showFileUpload ? closeCircleOutline : addCircleOutline" class="text-2xl"
 				@click="showFileUpload = !showFileUpload" />
 			<IonInput v-model="factory.body" :placeholder="`Message ${name}`" class="flex-grow rounded-full" required />
-			<IonButton :disabled="!factory.valid || loadingCounter" class="btn-primary" type="submit">
+			<IonButton :disabled="!factory.valid || !!loadingCounter" class="btn-primary" type="submit">
 				<IonIcon slot="icon-only" :icon="paperPlaneOutline" />
 			</IonButton>
 		</form>

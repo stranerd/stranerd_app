@@ -22,10 +22,11 @@
 
 <script lang="ts" setup>
 import { useAuth } from '@app/composable/auth/auth'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

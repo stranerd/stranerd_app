@@ -17,10 +17,11 @@
 
 <script lang="ts" setup>
 import { alertCircleOutline } from 'ionicons/icons'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

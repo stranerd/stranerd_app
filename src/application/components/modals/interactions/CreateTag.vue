@@ -19,10 +19,11 @@
 <script lang="ts" setup>
 import TagForm from '@app/components/interactions/tags/TagForm.vue'
 import { useCreateTag } from '@app/composable/interactions/tags'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

@@ -47,10 +47,11 @@ import { getCurrentlySubscribingTo } from '@app/composable/payment/plans'
 import { useWallet } from '@app/composable/payment/wallets'
 import { formatCurrency } from '@utils/commons'
 import { checkmarkOutline } from 'ionicons/icons'
+import { PropType } from 'vue'
 
 const props = defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

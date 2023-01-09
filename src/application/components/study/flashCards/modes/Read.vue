@@ -18,6 +18,7 @@
 import { FlashCardEntity } from '@modules/study'
 import { closeOutline } from 'ionicons/icons'
 import { pluralize } from '@utils/commons'
+import { PropType } from 'vue'
 
 const props = defineProps({
 	flashCard: {
@@ -25,7 +26,7 @@ const props = defineProps({
 		required: true
 	},
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

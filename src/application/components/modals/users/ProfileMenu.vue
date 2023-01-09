@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, PropType } from 'vue'
 import {
 	bookmarkOutline,
 	cardOutline,
@@ -63,7 +63,7 @@ import { useConnects } from '@app/composable/users/connects'
 
 const props = defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })

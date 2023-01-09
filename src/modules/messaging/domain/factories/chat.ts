@@ -23,7 +23,7 @@ export class ChatFactory extends BaseFactory<ChatEntity, ChatToModel, Keys> {
 		return this.values.body
 	}
 
-	set body (value: string | null) {
+	set body (value: string) {
 		this.set('body', value)
 	}
 

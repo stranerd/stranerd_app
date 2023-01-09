@@ -15,10 +15,11 @@
 
 <script lang="ts" setup>
 import { arrowForwardOutline, copyOutline, helpCircleOutline } from 'ionicons/icons'
+import { PropType } from 'vue'
 
 defineProps({
 	close: {
-		type: Function,
+		type: Function as PropType<() => void>,
 		required: true
 	}
 })
