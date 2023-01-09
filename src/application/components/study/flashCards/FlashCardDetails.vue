@@ -1,5 +1,6 @@
 <template>
 	<Flash v-if="tab === 'flash'" :close="() => tab = null" :flashCard="flashCard" />
+	<Match v-if="tab === 'match'" :close="() => tab = null" :flashCard="flashCard" />
 	<Read v-else-if="tab === 'read'" :close="() => tab = null" :flashCard="flashCard" />
 	<Settings v-else-if="tab === 'settings'" :close="() => tab = null" :flashCard="flashCard" />
 	<div v-else class="showcase-flex !gap-6">
@@ -32,8 +33,7 @@
 		<div class="flex flex-col gap-4">
 			<a v-for="{ label, sub, icon, route } in [
 				{ label: 'Flashcard', icon: copyOutline, sub: 'The best way to memorize your studies', route: 'flash' },
-				//{ label: 'Test', icon: documentTextOutline, sub: 'Multiple choice questions practice test', route: 'test' },
-				//{ label: 'Match', icon: gitCompareOutline, sub: 'Pick questions and answers that correspond', route: 'match' },
+				{ label: 'Match', icon: gitCompareOutline, sub: 'Pick questions and answers that correspond', route: 'match' },
 				{ label: 'Read', icon: readerOutline, sub: 'Study questions with answers together', route: 'read' },
 			]" :key="route" class="flex items-center card-padding !gap-4 card-sm" @click="tab = route">
 				<span class="rounded-full w-14 h-14 flex items-center justify-center bg-bodyBg">
@@ -50,10 +50,18 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { arrowBackOutline, copyOutline, ellipse, ellipsisHorizontalOutline, readerOutline } from 'ionicons/icons'
+import {
+	arrowBackOutline,
+	copyOutline,
+	ellipse,
+	ellipsisHorizontalOutline,
+	gitCompareOutline,
+	readerOutline
+} from 'ionicons/icons'
 import { useDeleteFlashCard } from '@app/composable/study/flashCards'
 import Read from '@app/components/study/flashCards/modes/Read.vue'
 import Flash from '@app/components/study/flashCards/modes/Flash.vue'
+import Match from '@app/components/study/flashCards/modes/Match.vue'
 import Flip from '@app/components/study/flashCards/modes/Flip.vue'
 import Settings from '@app/components/study/flashCards/modes/Settings.vue'
 import { useAuth } from '@app/composable/auth/auth'

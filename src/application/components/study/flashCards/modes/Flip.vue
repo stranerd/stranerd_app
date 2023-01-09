@@ -1,12 +1,12 @@
 <template>
-	<div :id="id" :class="[flipped ? 'vertical-flipped': 'vertical', 'flap']" @click="flipped = !flipped">
-		<div class="front w-full">
+	<div :id="id" :class="[flipped ? 'vertical-flipped': 'vertical', 'flap']">
+		<div class="front w-full" @click.prevent="flipped = !flipped">
 			<section v-if="!flipped" :class="height" class="overflow-y-auto flex text-center custom-shadow p-4 mx-auto">
 				<DisplayHtml :html="front" class="w-full my-auto overflow-y-auto" />
 			</section>
 		</div>
 
-		<div class="back w-full">
+		<div class="back w-full" @click.prevent="flipped = !flipped">
 			<section v-if="flipped" :class="height" class="overflow-y-auto flex text-center custom-shadow p-4 mx-auto">
 				<DisplayHtml :html="back" class="w-full my-auto overflow-y-auto" />
 			</section>

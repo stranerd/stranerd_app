@@ -122,4 +122,8 @@ export class FlashCardsUseCase {
 		}
 		return (await this.repository.get(query)).results
 	}
+
+	async saveMatch (id: string, time: number) {
+		return await this.repository.saveMatch(id, time)
+	}
 }

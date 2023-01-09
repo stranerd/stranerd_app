@@ -191,3 +191,24 @@ export const useFlashCard = (flashCardId: string) => {
 	return { error, loading, flashCard }
 }
 
+export const useSaveFlashCardMatch = (flashCardId: string) => {
+	const record = ref(null as { time: number, record: boolean } | null)
+	const { loading, setLoading } = useLoadingHandler()
+	const { error, setError } = useErrorHandler()
+
+	const saveMatch = async (time: number) => {
+		await setError('')
+		if (!loading.value) {
+			await setLoading(true)
+			try {
+				record.value = await FlashCardsUseCases.saveMatch(flashCardId, time)
+			} catch (error) {
+				await setError(error)
+			}
+			await setLoading(false)
+		}
+	}
+
+	return { loading, error, saveMatch, record }
+}
+
