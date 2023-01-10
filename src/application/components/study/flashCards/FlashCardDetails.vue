@@ -1,6 +1,6 @@
 <template>
 	<Flash v-if="tab === 'flash'" :close="() => tab = null" :flashCard="flashCard" />
-	<Match v-if="tab === 'match'" :close="() => tab = null" :flashCard="flashCard" />
+	<Match v-else-if="tab === 'match'" :close="() => tab = null" :flashCard="flashCard" />
 	<Read v-else-if="tab === 'read'" :close="() => tab = null" :flashCard="flashCard" />
 	<Settings v-else-if="tab === 'settings'" :close="() => tab = null" :flashCard="flashCard" />
 	<div v-else class="showcase-flex !gap-6">

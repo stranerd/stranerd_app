@@ -52,7 +52,7 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 	toModel = async () => {
 		if (this.valid) {
 			const { title, set } = this.validValues
-			return { title, set }
+			return { title, set: set.filter((s) => s.question && s.answer) }
 		} else {
 			throw new Error('Validation errors')
 		}
