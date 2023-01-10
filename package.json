@@ -60,14 +60,7 @@
 		"vue-tel-input": "^6.0.5",
 		"vue-waypoint": "^4.2.5",
 		"vue3-editor": "^0.1.1",
-		"vue3-marquee": "^3.1.2",
-		"workbox-background-sync": "^6.5.4",
-		"workbox-expiration": "^6.5.4",
-		"workbox-precaching": "^6.5.4",
-		"workbox-routing": "^6.5.4",
-		"workbox-strategies": "^6.5.4",
-		"workbox-webpack-plugin": "^6.5.4",
-		"workbox-window": "^6.5.4"
+		"vue3-marquee": "^3.1.2"
 	},
 	"devDependencies": {
 		"@capacitor/assets": "^2.0.4",
@@ -100,6 +93,7 @@
 		"vite-plugin-checker": "^0.5.3",
 		"vite-plugin-compression": "^0.5.1",
 		"vite-plugin-pages": "^0.28.0",
+		"vite-plugin-pwa": "^0.14.1",
 		"vue-tsc": "^1.0.22"
 	},
 	"commitlint": {
