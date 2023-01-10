@@ -9,7 +9,7 @@
 						{ name: 'Study', path: '/study', icon: book, iconOutline: bookOutline },
 						{ name: 'Chat', path: '/chat', icon: chatboxEllipses, iconOutline: chatboxEllipsesOutline },
 						{ name: 'Profile', path: '/account', icon: person, iconOutline: personOutline },
-						...(isAdmin ? [{ name: 'Admin', path: '/admin', icon: statsChart, iconOutline: statsChartOutline }] : [])
+						...(isAdmin ? [{ name: 'Admin', path: '/admin/', icon: statsChart, iconOutline: statsChartOutline }] : [])
 					]" :key="path" :class="$route.path === path ? 'text-primaryBg' : 'text-secondaryText'" :to="path"
 					class="col-span-1 flex flex-col items-center justify-center text-lg leading-none min-w-[40px]">
 					<IonIcon :icon="$route.path === path ? icon : iconOutline" />
@@ -32,8 +32,6 @@ import {
 	homeOutline,
 	person,
 	personOutline,
-	search,
-	searchOutline,
 	statsChart,
 	statsChartOutline
 } from 'ionicons/icons'

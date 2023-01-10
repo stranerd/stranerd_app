@@ -10,7 +10,7 @@
 					{ name: 'Study', path: '/study', icon: book, iconOutline: bookOutline },
 					{ name: 'Chat', path: '/chat', icon: chatboxEllipses, iconOutline: chatboxEllipsesOutline },
 					{ name: 'Profile', path: '/account', icon: person, iconOutline: personOutline },
-					...(isAdmin ? [{ name: 'Admin', path: '/admin', icon: statsChart, iconOutline: statsChartOutline }] : [])
+					...(isAdmin ? [{ name: 'Admin', path: '/admin/', icon: statsChart, iconOutline: statsChartOutline }] : [])
 				]" :key="path" :class="{'text-primaryBg font-semibold bg-highlight': $route.path === path}" :to="path"
 				class="flex items-center text-lg gap-4 px-8 py-4">
 				<IonIcon :icon="$route.path === path ? icon : iconOutline" />

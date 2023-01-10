@@ -9,7 +9,7 @@
 		"serve": "vite --port 8080",
 		"preserve": "yarn bin:project:env",
 		"build:web": "vite build",
-		"build:app": "vite build --skip-plugins compression",
+		"build:app": "SKIP_COMPRESSION=1 vite build",
 		"prebuild:web": "yarn bin:project:env",
 		"prebuild:app": "yarn bin:project:env",
 		"postbuild:app": "cap sync",

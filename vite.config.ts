@@ -6,6 +6,9 @@ import Compression from 'vite-plugin-compression'
 import Checker from 'vite-plugin-checker'
 import * as path from 'path'
 
+const isDev = process.env.NODE_ENV === 'development'
+const skipCompression = !!process.env.SKIP_COMPRESSION
+
 export default defineConfig({
 	plugins: [
 		{
@@ -40,13 +43,15 @@ export default defineConfig({
 				}
 			]
 		}),
-		Compression({ algorithm: 'brotliCompress' }),
-		Checker({
-			typescript: true,
-			vueTsc: true,
-			eslint: { lintCommand: 'eslint ./src/**/*.{js,ts,vue}' },
-			stylelint: { lintCommand: 'stylelint ./src/**/*.{css,scss,vue}' }
-		})
+		...(!skipCompression ? [Compression({ algorithm: 'brotliCompress' })] : []),
+		...(isDev ? [
+			Checker({
+				typescript: true,
+				vueTsc: true,
+				eslint: { lintCommand: 'eslint ./src/**/*.{js,ts,vue}' },
+				stylelint: { lintCommand: 'stylelint ./src/**/*.{css,scss,vue}' }
+			})
+		] : [])
 	],
 	build: {
 		minify: 'terser'
