@@ -26,14 +26,16 @@
 		</div>
 
 		<div v-else-if="started" class="p-2 lg:p-0 grid grid-cols-3 gap-2" style="grid-auto-rows: min(25vh, 300px);">
-			<div v-for="idx in indexes" :key="idx"
-				:class="errors[idx] ? 'error': success[idx] ? 'success': idx === pending ? 'info': ''"
-				class="flex p-2 card-sm justify-center items-center text-center"
-				@click="() => select(idx)">
-				<DisplayHtml
-					:html="flashCard.set[isQuestion(idx) ? idx : idx - flashCard.set.length][isQuestion(idx) ? 'question' : 'answer']"
-					class="w-full my-auto overflow-y-auto" />
-			</div>
+			<Transition v-for="idx in indexes" :key="idx" name="fade">
+				<div v-if="!success[idx]"
+					:class="errors[idx] ? 'error' : idx === pending ? 'info': ''"
+					class="flex p-2 card-sm justify-center items-center text-center"
+					@click="() => select(idx)">
+					<DisplayHtml
+						:html="flashCard.set[isQuestion(idx) ? idx : idx - flashCard.set.length][isQuestion(idx) ? 'question' : 'answer']"
+						class="w-full my-auto overflow-y-auto" />
+				</div>
+			</Transition>
 		</div>
 
 		<div v-else class="showcase-flex !gap-6">
@@ -123,11 +125,16 @@ const select = async (idx: number) => {
 	border-color: $color-danger !important;
 }
 
-.success {
-	border-color: $color-success !important;
-}
-
 .info {
 	border-color: $color-info !important;
+}
+
+.fade-leave-active {
+	transition: opacity 1s ease;
+}
+
+.fade-leave-to {
+	opacity: 0;
+	border-color: $color-success !important;
 }
 </style>
