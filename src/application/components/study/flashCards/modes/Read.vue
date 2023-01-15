@@ -1,5 +1,5 @@
 <template>
-	<div class="showcase-flex">
+	<div class="showcase-flex page-side-padding">
 		<div class="flex gap-4 justify-between items-center text-lg">
 			<IonIcon :icon="closeOutline" @click="close" />
 			<span class="font-bold">

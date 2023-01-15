@@ -7,7 +7,7 @@
 					<div class="layout-page-left">
 						<LeftSidebar class="h-full py-8" />
 					</div>
-					<div :class="{'lg:px-8': !ignorePagePadding}" class="layout-page-main">
+					<div :class="{'page-side-padding': !ignorePagePadding}" class="layout-page-main">
 						<slot name="content-top">
 							<div :class="{'lg:px-8': ignorePagePadding}"
 								class="hidden lg:flex gap-8 justify-between items-center mb-8">

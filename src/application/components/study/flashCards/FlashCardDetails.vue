@@ -1,9 +1,10 @@
 <template>
 	<Flash v-if="tab === 'flash'" :close="() => tab = null" :flashCard="flashCard" />
+	<Test v-else-if="tab === 'test'" :close="() => tab = null" :flashCard="flashCard" />
 	<Match v-else-if="tab === 'match'" :close="() => tab = null" :flashCard="flashCard" />
 	<Read v-else-if="tab === 'read'" :close="() => tab = null" :flashCard="flashCard" />
 	<Settings v-else-if="tab === 'settings'" :close="() => tab = null" :flashCard="flashCard" />
-	<div v-else class="showcase-flex !gap-6">
+	<div v-else class="page-side-padding showcase-flex !gap-6">
 		<div class="flex gap-4 justify-between items-center text-lg">
 			<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline" defaultHref="/dashboard" mode="ios"
 				text="" />
@@ -33,6 +34,7 @@
 		<div class="flex flex-col gap-4">
 			<a v-for="{ label, sub, icon, route } in [
 				{ label: 'Flashcard', icon: copyOutline, sub: 'The best way to memorize your studies', route: 'flash' },
+				{ label: 'Test', icon: documentTextOutline, sub: 'Multiple choice questions practice test', route: 'test' },
 				{ label: 'Match', icon: gitCompareOutline, sub: 'Pick questions and answers that correspond', route: 'match' },
 				{ label: 'Read', icon: readerOutline, sub: 'Study questions with answers together', route: 'read' },
 			]" :key="route" class="flex items-center card-padding !gap-4 card-sm" @click="tab = route">
@@ -53,30 +55,27 @@ import { ref } from 'vue'
 import {
 	arrowBackOutline,
 	copyOutline,
+	documentTextOutline,
 	ellipse,
 	ellipsisHorizontalOutline,
 	gitCompareOutline,
 	readerOutline
 } from 'ionicons/icons'
-import { useDeleteFlashCard } from '@app/composable/study/flashCards'
 import Read from '@app/components/study/flashCards/modes/Read.vue'
 import Flash from '@app/components/study/flashCards/modes/Flash.vue'
 import Match from '@app/components/study/flashCards/modes/Match.vue'
+import Test from '@app/components/study/flashCards/modes/Test.vue'
 import Flip from '@app/components/study/flashCards/modes/Flip.vue'
 import Settings from '@app/components/study/flashCards/modes/Settings.vue'
-import { useAuth } from '@app/composable/auth/auth'
 import { FlashCardEntity } from '@modules/study'
 import { pluralize } from '@utils/commons'
 
-const props = defineProps({
+defineProps({
 	flashCard: {
 		type: FlashCardEntity,
 		required: true
 	}
 })
 
-const { id } = useAuth()
 const tab = ref(null as string | null)
-const cardMode = ref(true)
-const { deleteFlashCard, loading, error } = useDeleteFlashCard(props.flashCard.id)
 </script>

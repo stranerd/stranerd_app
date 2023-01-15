@@ -1,16 +1,15 @@
 <template>
-	<div class="flex flex-col">
-		<div class="flex gap-4 justify-between items-center p-4 text-lg">
-			<IonIcon :icon="closeOutline" @click="close" />
-			<span v-if="done" class="font-bold">Results</span>
-			<span v-else-if="started" class="flex gap-2">
-				<IonIcon :icon="stopwatchOutline" />
-				<span>{{ time.toFixed(1) }} s</span>
-			</span>
-			<span v-else class="font-bold">Match</span>
-			<span />
-		</div>
-
+	<div class="flex gap-4 justify-between items-center card-padding text-lg">
+		<IonIcon :icon="closeOutline" @click="close" />
+		<span v-if="done" class="font-bold">Results</span>
+		<span v-else-if="started" class="flex gap-2">
+			<IonIcon :icon="stopwatchOutline" />
+			<span>{{ time.toFixed(1) }} s</span>
+		</span>
+		<span v-else class="font-bold">Match</span>
+		<span />
+	</div>
+	<div class="flex flex-col page-side-padding">
 		<div v-if="done" class="showcase-flex !gap-4">
 			<template v-if="record">
 				<p class="text-2xl font-bold text-center">

@@ -1,3 +1,3 @@
 <template>
-	<IonSkeletonText animated class="rounded-xl h-28 my-2" />
+	<IonSkeletonText animated class="rounded-xl h-28 m-2" />
 </template>

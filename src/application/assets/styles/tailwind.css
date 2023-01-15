@@ -98,11 +98,11 @@
 	}
 
 	.card {
-		@apply lg:rounded-xl lg:border lg:border-itemBg lg:bg-itemBg;
+		@apply lg:rounded-lg lg:border lg:border-itemBg lg:bg-itemBg;
 	}
 
 	.card-sm {
-		@apply rounded-xl border border-itemBg bg-itemBg;
+		@apply rounded-lg border border-itemBg bg-itemBg;
 	}
 
 	.card-padding {
@@ -115,6 +115,10 @@
 
 	.page-padding {
 		@apply p-4 lg:p-0;
+	}
+
+	.page-side-padding {
+		@apply lg:px-8;
 	}
 
 	ion-icon {

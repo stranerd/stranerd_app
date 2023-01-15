@@ -1,5 +1,5 @@
 <template>
-	<DefaultLayout :hideBottom="true" :hideFab="true" :hideTop="!loading && !!flashCard">
+	<DefaultLayout :hideBottom="true" :hideFab="true" :hideTop="!loading && !!flashCard" :ignorePagePadding="true">
 		<template v-slot:content-top>
 			<div v-if="flashCard" />
 		</template>
