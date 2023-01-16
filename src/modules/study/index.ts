@@ -76,9 +76,9 @@ export { TestType } from './domain/entities/test'
 export type { TestData } from './domain/entities/test'
 
 export type Test = {
+	id: string
 	question: string
 	questionMedia: Media[]
 	options: { body: string, media: Media[], correct: boolean }[]
 	correct: number
-	idx: number
 }

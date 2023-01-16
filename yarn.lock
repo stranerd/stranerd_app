@@ -1641,10 +1641,10 @@
   resolved "https://registry.npmjs.org/@stencil/core/-/core-2.16.1.tgz"
   integrity sha512-s/UJp9qxExL3DyQPT70kiuWeb3AdjbUZM+5lEIXn30I2DLcLYPOPXfsoWJODieQywq+3vPiLZeIdkoqjf6jcSw==
 
-"@stranerd/validate@^3.5.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@stranerd/validate/-/validate-3.5.0.tgz#5db7b567d50781455d095b4c6e17a9cdc6d81e3e"
-  integrity sha512-RiMot8zO/jKxI+S2r5EYNj/sPKdBlRHwKZ6JvP1hfE+OB7L1/B5TwuXIaXzMyOy+K4wzja754y9Q4mTgRLlvCg==
+"@stranerd/validate@^3.5.1":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@stranerd/validate/-/validate-3.5.1.tgz#86006b8d1c961251e5d3cc063eef2522bda6eb72"
+  integrity sha512-C6xs8KHLfZbY+VrqNELKDdqmd51jQcctZr88cRANQeNh9qohVBOUF7Hydw2d3k0LiNPsVitWrf+fdbGrGsq+sg==
   dependencies:
     url-regex-safe "^3.0.0"
 

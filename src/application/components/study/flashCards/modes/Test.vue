@@ -1,6 +1,6 @@
 <template>
-	<TakeTest v-if="state.started" :close="close" :instant="state.instant" :questions="state.questions"
-		:submit="close" />
+	<TakeTest v-if="state.started" :answers="state.answers" :close="close" :instant="state.instant" :onAnswer="onAnswer"
+		:questions="state.questions" :restart="start" :submit="submit" :submitted="state.submitted" />
 	<div v-else class="flex flex-col">
 		<div class="flex gap-4 justify-between items-center p-4 text-lg">
 			<IonIcon :icon="closeOutline" @click="close" />
@@ -31,7 +31,7 @@
 <script lang="ts" setup>
 import { FlashCardEntity, Test } from '@modules/study'
 import { closeOutline } from 'ionicons/icons'
-import { PropType, reactive } from 'vue'
+import { PropType, reactive, watch } from 'vue'
 import { useRedirectToAuth } from '@app/composable/auth/session'
 import { useAuth } from '@app/composable/auth/auth'
 import { getRandomSample, shuffleArray } from '@stranerd/validate'
@@ -57,23 +57,41 @@ const state = reactive({
 	noQuestions: length,
 	started: false,
 	instant: false,
-	questions: [] as Test[]
+	questions: [] as Test[],
+	submitted: false,
+	answers: {} as Record<string, number>
 })
 
-const list = new Array(length).fill(0).map((_, i) => i)
-
-const start = () => {
-	if (!isLoggedIn.value) return redirect()
+const resetQuestions = () => {
+	const list = new Array(length).fill(0).map((_, i) => i)
 	const questions = props.flashCard.set.map((q, idx) => ({
+		id: idx.toString(),
 		question: q.question,
 		questionMedia: [],
 		correct: 0,
-		idx,
 		options: shuffleArray([
 			idx, ...getRandomSample(list.filter((i) => i !== idx), length < 4 ? length - 1 : 3)
 		]).map((i) => ({ body: props.flashCard.set[i].answer, media: [], correct: i === idx }))
 	})).map((q) => ({ ...q, correct: q.options.findIndex((o) => o.correct) }))
 	state.questions = getRandomSample(questions, state.noQuestions)
+}
+
+resetQuestions()
+watch(() => state.noQuestions, resetQuestions)
+
+const start = () => {
+	if (!isLoggedIn.value) return redirect()
+	state.submitted = false
+	state.answers = {}
 	state.started = true
+}
+
+const submit = () => {
+	state.submitted = true
+}
+
+const onAnswer = (questionId: string, optionIdx: number) => {
+	if (state.submitted) return
+	state.answers[questionId] = optionIdx
 }
 </script>
