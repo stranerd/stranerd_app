@@ -52,17 +52,22 @@ export const useFlashCardList = () => {
 	return { ...store, fetchOlderFlashCards: fetchFlashCards }
 }
 
+let clone = null as FlashCardEntity | null
 export const cloneFlashCard = async (flashCard: FlashCardEntity, router: Router) => {
-	factory.value.loadEntity(flashCard)
+	clone = flashCard
 	await router.push('/study/flashCards/create')
 }
 
-const factory = ref(new FlashCardFactory()) as Ref<FlashCardFactory>
 export const useCreateFlashCard = () => {
 	const router = useRouter()
+	const factory = ref(new FlashCardFactory()) as Ref<FlashCardFactory>
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
+	if (clone) {
+		factory.value.loadEntity(clone)
+		clone = null
+	}
 
 	const createFlashCard = async () => {
 		await setError('')
