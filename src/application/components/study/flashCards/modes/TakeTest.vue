@@ -1,10 +1,10 @@
 <template>
 	<div v-if="state.settings" class="h-full flex flex-col">
-		<div class="flex gap-4 justify-between items-center card-padding text-lg mb-auto">
+		<div class="flex gap-4 justify-between items-center card-padding text-lg">
 			<span class="font-bold">Options</span>
 			<IonIcon :icon="closeOutline" @click="state.settings = false" />
 		</div>
-		<div class="flex gap-4 items-center card-padding border-top-line">
+		<div class="mt-auto flex gap-4 items-center card-padding border-top-line">
 			<IonIcon :icon="paperPlaneOutline" />
 			<span>Submit Test</span>
 		</div>

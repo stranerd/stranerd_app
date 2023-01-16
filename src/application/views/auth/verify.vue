@@ -14,11 +14,11 @@
 				</div>
 			</div>
 
-			<p class="cursor-pointer justify-center flex items-center text-primaryBg text-sm gap-2"
+			<a class="justify-center flex items-center text-primaryBg text-sm gap-2"
 				@click="sendVerificationEmail">
 				<SpinLoading v-if="loading" />
 				<span>Did not receive OTP? Resend?</span>
-			</p>
+			</a>
 
 			<IonButton :disabled="loading || !token" class="w-full btn-primary" type="submit">
 				<SpinLoading v-if="loading" />

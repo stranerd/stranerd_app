@@ -1,9 +1,9 @@
 <template>
-	<span class="leading-none" @click.prevent="shareInfo">
+	<a class="leading-none" @click.prevent="shareInfo">
 		<slot>
 			<IonIcon :class="cssClass" :icon="shareOutline" />
 		</slot>
-	</span>
+	</a>
 </template>
 
 <script lang="ts" setup>

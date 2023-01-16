@@ -1,5 +1,5 @@
 <template>
-	<span class="cursor-pointer" @click="openFileSelect">
+	<a class="cursor-pointer" @click="openFileSelect">
 		<input
 			ref="fileInput"
 			:accept="accept"
@@ -10,7 +10,7 @@
 			@change.prevent="handler"
 		>
 		<slot />
-	</span>
+	</a>
 </template>
 
 <script lang="ts" setup>

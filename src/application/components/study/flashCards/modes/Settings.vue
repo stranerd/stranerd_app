@@ -1,10 +1,10 @@
 <template>
 	<div class="h-full flex flex-col">
-		<div class="flex gap-4 justify-between items-center card-padding text-lg mb-auto">
+		<a class="flex gap-4 justify-between items-center card-padding text-lg">
 			<span class="font-bold">Options</span>
 			<IonIcon :icon="closeOutline" @click="close" />
-		</div>
-		<SaveToSet :entity="flashCard" class="card-padding border-top-line">
+		</a>
+		<SaveToSet :entity="flashCard" class="card-padding border-top-line !mt-auto">
 			<div class="flex gap-4 items-center">
 				<IonIcon :icon="bookmarkOutline" />
 				<span>Save</span>
@@ -17,21 +17,28 @@
 				<span>Share</span>
 			</div>
 		</Share>
-		<div class="flex gap-4 items-center card-padding border-top-line" @click="openReportModal">
+		<a class="flex gap-4 items-center card-padding border-top-line" @click="openReportModal">
 			<IonIcon :icon="flagOutline" />
 			<span>Report</span>
-		</div>
+		</a>
 		<template v-if="flashCard.user.id === id">
-			<div class="flex gap-4 items-center card-padding border-top-line"
+			<a class="flex gap-4 items-center card-padding border-top-line"
 				@click="openFlashCardEditModal(flashCard, $router)">
 				<IonIcon :icon="pencilOutline" />
 				<span>Edit</span>
-			</div>
-			<div class="flex gap-4 items-center card-padding border-top-line text-danger" @click="deleteFlashCard">
+			</a>
+			<a class="flex gap-4 items-center card-padding border-top-line text-danger" @click="deleteFlashCard">
 				<IonIcon :icon="trashBinOutline" />
 				<span>Delete</span>
-			</div>
+			</a>
 			<PageLoading v-if="loading" />
+		</template>
+		<template v-else>
+			<a class="flex gap-4 items-center card-padding border-top-line"
+				@click.prevent="cloneFlashCard(flashCard, $router)">
+				<IonIcon :icon="copyOutline" />
+				<span>Clone</span>
+			</a>
 		</template>
 	</div>
 </template>
@@ -41,6 +48,7 @@ import { FlashCardEntity } from '@modules/study'
 import {
 	bookmarkOutline,
 	closeOutline,
+	copyOutline,
 	flagOutline,
 	pencilOutline,
 	shareOutline,
@@ -50,7 +58,7 @@ import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 import { openCreateReportModal } from '@app/composable/moderation/reports'
 import { ReportType } from '@modules/moderation'
 import { useAuth } from '@app/composable/auth/auth'
-import { openFlashCardEditModal, useDeleteFlashCard } from '@app/composable/study/flashCards'
+import { cloneFlashCard, openFlashCardEditModal, useDeleteFlashCard } from '@app/composable/study/flashCards'
 import { PropType } from 'vue'
 
 const props = defineProps({
