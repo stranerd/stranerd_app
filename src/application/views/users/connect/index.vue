@@ -19,18 +19,18 @@
 				<IonText class="font-bold text-center">How do you want to connect?</IonText>
 
 				<div class="flex !gap-3 card-padding w-full">
-					<div v-for="{ icon, title, sub, tab } in [
+					<a v-for="{ icon, title, sub, tab } in [
 							{ icon: personOutline, title: 'Student connect', sub: '1 on 1 discussion with any student.',tab: 1 },
 							{ icon: peopleOutline, title: 'Class connect', sub: 'Class to class discussion with any class.', tab: 2 },
 						]" :key="title"
-						class="flex flex-col text-center rounded-xl gap-4 items-center border border-itemBg p-4 cursor-pointer flex-1"
+						class="flex flex-col text-center rounded-xl gap-4 items-center border border-itemBg p-4 flex-1"
 						@click="openModal(tab)">
 						<IonIcon :icon="icon" />
 						<div class="flex flex-col gap-1">
 							<IonText>{{ title }}</IonText>
 							<IonText class="text-sm text-secondaryText">{{ sub }}</IonText>
 						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 

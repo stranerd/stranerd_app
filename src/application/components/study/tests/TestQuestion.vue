@@ -14,7 +14,7 @@
 		</div>
 
 		<div v-if="question.isObj(question)" class=" flex flex-col w-full">
-			<div v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
+			<a v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
 				class="w-full py-4" @click="answer(question.id, optionIndex)">
 				<div class="flex gap-2 items-center">
 					<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
@@ -31,7 +31,7 @@
 				<Gallery v-if="question.data.optionsMedia[optionIndex]?.length"
 					:media="question.data.optionsMedia[optionIndex]"
 					:path="question.saveFilePath" />
-			</div>
+			</a>
 		</div>
 
 		<template v-if="showAnswers && question.isObj(question)">
@@ -43,11 +43,11 @@
 			</span>
 
 			<template v-if="question.data.explanation.length > 0 || question.data.explanationMedia.length > 0">
-				<span class="text-primaryBg flex items-center font-bold py-8 gap-2"
+				<a class="text-primaryBg flex items-center font-bold py-8 gap-2"
 					@click="showExplanation = !showExplanation">
 					<span>{{ showExplanation ? 'hide' : 'show' }} solution</span>
 					<IonIcon :class="{'rotate-90': showExplanation}" :icon="chevronForwardOutline" />
-				</span>
+				</a>
 
 				<div v-if="showExplanation">
 					<IonText class="block mb-2">

@@ -13,19 +13,20 @@
 				<SaveToSet :entity="flashCard" />
 				<SpinLoading v-if="loading" />
 				<IonIcon v-if="flashCard.user.id === id" :icon="settingsOutline" @click.prevent="showMenu" />
+				<IonIcon v-else :icon="copyOutline" @click.prevent="cloneFlashCard(flashCard, $router)" />
 			</div>
 		</div>
 	</router-link>
 </template>
 
 <script lang="ts" setup>
-import { closeOutline, pencilOutline, settingsOutline, trashBinOutline } from 'ionicons/icons'
+import { closeOutline, copyOutline, pencilOutline, settingsOutline, trashBinOutline } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import { FlashCardEntity } from '@modules/study'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { actionSheetController } from '@ionic/vue'
-import { openFlashCardEditModal, useDeleteFlashCard } from '@app/composable/study/flashCards'
+import { cloneFlashCard, openFlashCardEditModal, useDeleteFlashCard } from '@app/composable/study/flashCards'
 import { useRouter } from 'vue-router'
 
 const props = defineProps({

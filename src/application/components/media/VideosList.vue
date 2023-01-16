@@ -3,14 +3,14 @@
 		<div v-for="{ key, values } in media" :key="key" class="flex flex-col items-center">
 			<IonText class="font-bold py-4">{{ key }}</IonText>
 			<div class="w-full showcase-files">
-				<div v-for="media in values" :key="media.hash" class="w-full relative"
+				<a v-for="media in values" :key="media.hash" class="w-full relative"
 					@click="openViewFile(media.media, media.path, $router)">
 					<video :autoplay="false" :controls="false" :src="media.media.link" />
 					<div class="absolute bottom-0 w-full flex items-center justify-between gap-4 p-2 font-semibold">
 						<IonIcon :icon="videocamOutline" />
 						<IonText class="leading-none">{{ formatDuration(media.media.duration) }}</IonText>
 					</div>
-				</div>
+				</a>
 			</div>
 		</div>
 	</div>

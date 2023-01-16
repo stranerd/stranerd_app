@@ -1,9 +1,9 @@
 <template>
-	<span class="mt-1.5" @click.prevent="openSaveModal(entity)">
+	<a class="mt-1.5" @click.prevent="openSaveModal(entity)">
 		<slot :isSaved="isSaved">
 			<IonIcon :class="{ 'text-primaryBg': isSaved }" :icon="isSaved ? bookmark : bookmarkOutline" />
 		</slot>
-	</span>
+	</a>
 </template>
 
 <script lang="ts" setup>

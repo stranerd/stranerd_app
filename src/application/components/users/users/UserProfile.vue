@@ -3,7 +3,7 @@
 		<UserPageCard :user="user" class="px-4 lg:px-0 pb-4" />
 		<div class="flex flex-col lg:gap-4 flex-1">
 			<div class="flex items-center justify-between text-sm">
-				<span v-for="path in [
+				<a v-for="path in [
 						{ name: 'questions' },
 						{ name: 'flashCards' },
 						...(user.id === id ? [{ name: 'saved' }] : [])
@@ -12,7 +12,7 @@
 					class="border-b-2 border-itemBg text-secondaryText p-3 capitalize w-full flex justify-center items-center gap-2"
 					@click="tab = path.name">
 					<span class="capitalize">{{ path.name }}</span>
-				</span>
+				</a>
 			</div>
 			<UserQuestions v-if="tab === 'questions'" :user="user" />
 			<UserFlashCards v-if="tab === 'flashCards'" :user="user" />
