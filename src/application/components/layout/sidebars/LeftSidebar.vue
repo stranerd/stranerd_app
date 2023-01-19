@@ -8,7 +8,6 @@
 					{ name: 'Home', path: '/dashboard', icon: home, iconOutline: homeOutline },
 					{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline: helpCircleOutline },
 					{ name: 'Study', path: '/study', icon: book, iconOutline: bookOutline },
-					{ name: 'Chat', path: '/chat', icon: chatboxEllipses, iconOutline: chatboxEllipsesOutline },
 					{ name: 'Profile', path: '/account', icon: person, iconOutline: personOutline },
 					...(isAdmin ? [{ name: 'Admin', path: '/admin/', icon: statsChart, iconOutline: statsChartOutline }] : [])
 				]" :key="path" :class="{'text-primaryBg font-semibold bg-highlight': $route.path === path}" :to="path"
@@ -25,8 +24,6 @@
 import {
 	book,
 	bookOutline,
-	chatboxEllipses,
-	chatboxEllipsesOutline,
 	helpCircle,
 	helpCircleOutline,
 	home,
