@@ -36,7 +36,7 @@ import { paperPlaneOutline } from 'ionicons/icons'
 export default defineComponent({
 	name: 'Chat',
 	setup () {
-		useRouteMeta('Chat', {})
+		useRouteMeta('Chat', { back: true })
 		const { loading, error, conversations, question, submit } = useConverse()
 		return {
 			loading, error, conversations, question, submit,
