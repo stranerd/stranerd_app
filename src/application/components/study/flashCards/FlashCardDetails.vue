@@ -34,7 +34,7 @@
 		<div class="flex flex-col gap-4">
 			<a v-for="{ label, sub, icon, route } in [
 				{ label: 'Flashcard', icon: copyOutline, sub: 'The best way to memorize your studies', route: 'flash' },
-				{ label: 'Test', icon: documentTextOutline, sub: 'Multiple choice questions practice test', route: 'test' },
+				// { label: 'Test', icon: documentTextOutline, sub: 'Multiple choice questions practice test', route: 'test' },
 				{ label: 'Match', icon: gitCompareOutline, sub: 'Pick questions and answers that correspond', route: 'match' },
 				{ label: 'Read', icon: readerOutline, sub: 'Study questions with answers together', route: 'read' },
 			]" :key="route" class="flex items-center card-padding !gap-4 card-sm" @click="tab = route">
@@ -55,7 +55,6 @@ import { ref } from 'vue'
 import {
 	arrowBackOutline,
 	copyOutline,
-	documentTextOutline,
 	ellipse,
 	ellipsisHorizontalOutline,
 	gitCompareOutline,

@@ -12,12 +12,13 @@
 			</section>
 		</div>
 
-		<IonIcon :icon="expandOutline" class="absolute z-1 right-[1rem] top-[1rem]" @click.prevent="toggleFullscreen" />
+		<IonIcon v-if="canFullScreen" :icon="expandOutline" class="absolute z-1 right-[1rem] top-[1rem]"
+			@click.prevent="toggleFullscreen" />
 	</div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { expandOutline } from 'ionicons/icons'
 import { getRandomValue } from '@stranerd/validate'
 
@@ -40,10 +41,15 @@ const props = defineProps({
 const id = getRandomValue()
 const flipped = ref(false)
 const isFullscreen = ref(false)
-const toggleFullscreen = () => {
-	isFullscreen.value ? document.exitFullscreen() : document.getElementById(id)?.requestFullscreen()
+const canFullScreen = ref(false)
+const toggleFullscreen = async () => {
+	if (!canFullScreen.value) return
+	isFullscreen.value ? await document.exitFullscreen() : await document.getElementById(id)?.requestFullscreen?.()
 	isFullscreen.value = !isFullscreen.value
 }
+onMounted(() => {
+	canFullScreen.value = 'requestFullscreen' in (document.getElementById(id) ?? {})
+})
 </script>
 
 <style lang="scss" scoped>

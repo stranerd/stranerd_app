@@ -29,7 +29,7 @@
 import { FlashCardEntity } from '@modules/study'
 import { chevronBackOutline, chevronForwardOutline, closeOutline, pauseOutline, playOutline } from 'ionicons/icons'
 import { formatNumber } from '@utils/commons'
-import { computed, PropType, ref } from 'vue'
+import { computed, onUnmounted, PropType, ref } from 'vue'
 import Flip from '@app/components/study/flashCards/modes/Flip.vue'
 
 const props = defineProps({
@@ -66,4 +66,6 @@ const pauseCard = () => {
 	clearInterval(interval)
 	isPlaying.value = false
 }
+
+onUnmounted(pauseCard)
 </script>
