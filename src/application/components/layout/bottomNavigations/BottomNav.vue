@@ -1,7 +1,7 @@
 <template>
 	<IonFooter class="ion-no-border">
 		<IonToolbar :class="{'h-0': hideContent}">
-			<div v-if="!hideContent" class="flex justify-around items-center overflow-x-auto pb-1">
+			<div v-if="!hideContent" class="flex justify-around items-center overflow-x-auto py-1">
 				<router-link
 					v-for="{ name, path, icon, iconOutline } in [
 						{ name: 'Home', path: '/dashboard', icon: home, iconOutline: homeOutline },

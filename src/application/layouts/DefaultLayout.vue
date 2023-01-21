@@ -7,10 +7,9 @@
 					<div class="layout-page-left">
 						<LeftSidebar class="h-full py-8" />
 					</div>
-					<div :class="{'page-side-padding': !ignorePagePadding}" class="layout-page-main">
+					<div class="layout-page-main">
 						<slot name="content-top">
-							<div :class="{'lg:px-8': ignorePagePadding}"
-								class="hidden lg:flex gap-8 justify-between items-center mb-8">
+							<div class="hidden lg:flex gap-8 justify-between items-center mb-8 page-side-padding">
 								<div class="flex gap-8 items-center">
 									<IonBackButton v-if="$route.meta.back" :icon="arrowBackOutline"
 										class="text-base" defaultHref="/dashboard" mode="ios" text="" />
@@ -25,12 +24,14 @@
 								</div>
 							</div>
 						</slot>
-						<div class="layout-page-content">
+						<div :class="{'page-side-padding': !ignorePagePadding}" class="layout-page-content">
 							<slot />
 						</div>
-						<Fab v-if="!hideFab" class="lg:hidden" />
-						<BottomNav :hideContent="hideBottom" class="mt-auto lg:hidden" />
-						<slot name="content-bottom" />
+						<div :class="{'page-side-padding': !ignorePagePadding}" class="mt-auto">
+							<Fab v-if="!hideFab" class="lg:hidden" />
+							<BottomNav :hideContent="hideBottom" class="lg:hidden" />
+							<slot name="content-bottom" />
+						</div>
 					</div>
 					<div class="layout-page-right">
 						<RightSidebar class="h-full" />
@@ -42,7 +43,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue'
 import Topbar from '@app/components/layout/topNavigations/Topbar.vue'
 import BottomNav from '@app/components/layout/bottomNavigations/BottomNav.vue'
 import Fab from '@app/components/layout/Fab.vue'

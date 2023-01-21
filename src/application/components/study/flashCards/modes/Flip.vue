@@ -1,5 +1,5 @@
 <template>
-	<div :id="id" :class="[flipped ? 'vertical-flipped': 'vertical', 'flap']">
+	<div :id="id" :class="[flipped ? 'vertical-flipped': 'vertical', isFullscreen ? 'fullscreen' : '', 'flap']">
 		<div class="front w-full" @click.prevent="flipped = !flipped">
 			<section v-if="!flipped" :class="height" class="overflow-y-auto flex text-center custom-shadow p-4 mx-auto">
 				<DisplayHtml :html="front" class="w-full my-auto overflow-y-auto" />
@@ -67,6 +67,10 @@ onMounted(() => {
 	align-items: center;
 	width: 100%;
 	height: 100%;
+}
+
+.fullscreen section {
+	height: 80vh !important;
 }
 
 .flap > .front, .flap > .back {

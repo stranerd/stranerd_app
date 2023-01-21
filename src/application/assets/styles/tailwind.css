@@ -41,7 +41,7 @@
 	}
 
 	.layout-page-content {
-		@apply h-fit overflow-y-auto flex-grow;
+		@apply h-fit overflow-y-auto flex-grow pb-4;
 	}
 
 	.layout-page-right {

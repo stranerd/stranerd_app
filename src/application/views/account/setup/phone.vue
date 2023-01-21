@@ -1,45 +1,43 @@
 <template>
 	<DefaultLayout :hideBottom="true" :hideFab="true">
-		<div class="h-full page-padding">
-			<form class="flex flex-col gap-4 h-full">
+		<form class="flex flex-col gap-4 h-full page-padding">
+			<div class="flex flex-col">
+				<IonLabel class="text-secondaryText mb-2">Phone</IonLabel>
+				<div class="flex gap-2 items-center">
+					<PhoneInput v-model:value="factory.phone" class="w-full" />
+					<IonButton v-if="sent" :disabled="!factory.phone" class="btn-primary"
+						@click="sendVerificationText">
+						<IonIcon slot="icon-only" :icon="sent ? refreshOutline : checkmarkOutline" />
+					</IonButton>
+				</div>
+			</div>
+
+			<template v-if="sent">
 				<div class="flex flex-col">
-					<IonLabel class="text-secondaryText mb-2">Phone</IonLabel>
-					<div class="flex gap-2 items-center">
-						<PhoneInput v-model:value="factory.phone" class="w-full" />
-						<IonButton v-if="sent" :disabled="!factory.phone" class="btn-primary"
-							@click="sendVerificationText">
-							<IonIcon slot="icon-only" :icon="sent ? refreshOutline : checkmarkOutline" />
-						</IonButton>
-					</div>
+					<IonLabel class="text-secondaryText mb-2">OTP</IonLabel>
+					<IonInput v-model="token" :size="24" placeholder="Enter OTP sent to your phone"
+						position="floating" />
 				</div>
 
-				<template v-if="sent">
-					<div class="flex flex-col">
-						<IonLabel class="text-secondaryText mb-2">OTP</IonLabel>
-						<IonInput v-model="token" :size="24" placeholder="Enter OTP sent to your phone"
-							position="floating" />
-					</div>
-
-					<div class="flex gap-4 items-center mt-auto">
-						<IonButton class="btn-outline w-full" type="button" @click.prevent="skip">
-							Skip Setup
-						</IonButton>
-						<IonButton :disabled="loading || !token" class="w-full btn-primary" @click.prevent="submit">
-							<SpinLoading v-if="loading" />
-							<span v-else>Verify Phone</span>
-						</IonButton>
-					</div>
-				</template>
-
-				<template v-else>
-					<IonButton :disabled="loading || !factory.phone" class="w-full btn-primary"
-						@click.prevent="sendVerificationText">
-						<SpinLoading v-if="loading" />
-						<span v-else>Send OTP</span>
+				<div class="flex gap-4 items-center mt-auto">
+					<IonButton class="btn-outline w-full" type="button" @click.prevent="skip">
+						Skip Setup
 					</IonButton>
-				</template>
-			</form>
-		</div>
+					<IonButton :disabled="loading || !token" class="w-full btn-primary" @click.prevent="submit">
+						<SpinLoading v-if="loading" />
+						<span v-else>Verify Phone</span>
+					</IonButton>
+				</div>
+			</template>
+
+			<template v-else>
+				<IonButton :disabled="loading || !factory.phone" class="w-full btn-primary"
+					@click.prevent="sendVerificationText">
+					<SpinLoading v-if="loading" />
+					<span v-else>Send OTP</span>
+				</IonButton>
+			</template>
+		</form>
 	</DefaultLayout>
 </template>
 
