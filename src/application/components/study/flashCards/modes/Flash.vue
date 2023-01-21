@@ -13,7 +13,8 @@
 
 		<div class="flex-1 flex flex-col my-6 text-xl">
 			<Swipe :key="page" class="px-4 h-full" @swipeLeft="increase" @swipeRight="decrease">
-				<Flip :back="flashCard.set[page].answer" :front="flashCard.set[page].question" />
+				<Flip :key="isPlaying" :back="flashCard.set[page].answer" :front="flashCard.set[page].question"
+					:play="isPlaying ? 2500 : 0" />
 			</Swipe>
 		</div>
 
@@ -59,7 +60,7 @@ const decrease = () => {
 }
 
 const playCard = () => {
-	interval = setInterval(increase, 3000)
+	interval = setInterval(increase, 5000)
 	isPlaying.value = true
 }
 const pauseCard = () => {

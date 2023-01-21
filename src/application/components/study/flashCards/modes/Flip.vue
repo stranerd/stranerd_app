@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { expandOutline } from 'ionicons/icons'
 import { getRandomValue } from '@stranerd/validate'
 
@@ -35,6 +35,11 @@ const props = defineProps({
 		type: String,
 		required: false,
 		default: 'h-[70vh]'
+	},
+	play: {
+		type: Number,
+		required: false,
+		default: 0
 	}
 })
 
@@ -42,6 +47,7 @@ const id = getRandomValue()
 const flipped = ref(false)
 const isFullscreen = ref(false)
 const canFullScreen = ref(false)
+let interval = null as any
 const toggleFullscreen = async () => {
 	if (!canFullScreen.value) return
 	isFullscreen.value ? await document.exitFullscreen() : await document.getElementById(id)?.requestFullscreen?.()
@@ -49,6 +55,12 @@ const toggleFullscreen = async () => {
 }
 onMounted(() => {
 	canFullScreen.value = 'requestFullscreen' in (document.getElementById(id) ?? {})
+	if (props.play) interval = setInterval(() => {
+		flipped.value = !flipped.value
+	}, props.play)
+})
+onUnmounted(() => {
+	clearInterval(interval)
 })
 </script>
 
