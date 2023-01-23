@@ -25,8 +25,7 @@
 	</router-link>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { SetEntity } from '@modules/study'
 import {
 	arrowForwardOutline,
@@ -42,35 +41,27 @@ import { openSetEditModal, useDeleteSet } from '@app/composable/study/sets'
 import { useRouter } from 'vue-router'
 import { actionSheetController } from '@ionic/vue'
 
-export default defineComponent({
-	name: 'SetListCard',
-	props: {
-		set: {
-			type: SetEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const { id } = useAuth()
-		const { deleteSet, loading } = useDeleteSet(props.set.id)
-		const router = useRouter()
-		const showMenu = async () => {
-			const actionSheet = await actionSheetController.create({
-				buttons: [
-					{
-						text: 'Edit folder', icon: pencilOutline,
-						handler: () => openSetEditModal(props.set, router)
-					},
-					{ text: 'Delete folder', role: 'destructive', icon: trashBinOutline, handler: deleteSet },
-					{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
-				]
-			})
-			await actionSheet.present()
-		}
-		return {
-			id, arrowForwardOutline, folderOutline, settingsOutline,
-			pluralize, formatNumber, loading, showMenu
-		}
+const props = defineProps({
+	set: {
+		type: SetEntity,
+		required: true
 	}
 })
+
+const { id } = useAuth()
+const { deleteSet, loading } = useDeleteSet(props.set.id)
+const router = useRouter()
+const showMenu = async () => {
+	const actionSheet = await actionSheetController.create({
+		buttons: [
+			{
+				text: 'Edit folder', icon: pencilOutline,
+				handler: () => openSetEditModal(props.set, router)
+			},
+			{ text: 'Delete folder', role: 'destructive', icon: trashBinOutline, handler: deleteSet },
+			{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
+		]
+	})
+	await actionSheet.present()
+}
 </script>

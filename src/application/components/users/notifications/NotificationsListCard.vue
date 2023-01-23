@@ -11,7 +11,7 @@
 	</router-link>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent, PropType } from 'vue'
 import { NotificationEntity, NotificationType } from '@modules/users'
 import { formatTime } from '@utils/dates'
@@ -56,21 +56,15 @@ interface WaypointState {
 	direction: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT'
 }
 
-export default defineComponent({
-	name: 'NotificationsListCard',
-	components: { Waypoint },
-	props: {
-		notification: {
-			type: Object as PropType<NotificationEntity>,
-			required: true
-		}
-	},
-	setup (props) {
-		const { loading, error, markNotificationSeen } = useNotification(props.notification)
-		const onChange = async (state: WaypointState) => {
-			if (state.going === 'IN') await markNotificationSeen()
-		}
-		return { loading, error, markNotificationSeen, onChange, formatTime, components }
+const props = defineProps({
+	notification: {
+		type: Object as PropType<NotificationEntity>,
+		required: true
 	}
 })
+
+const { loading, error, markNotificationSeen } = useNotification(props.notification)
+const onChange = async (state: WaypointState) => {
+	if (state.going === 'IN') await markNotificationSeen()
+}
 </script>

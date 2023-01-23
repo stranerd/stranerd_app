@@ -9,7 +9,7 @@ import { storage } from '@utils/storage'
 import { setEmailVerificationEmail } from '@app/composable/auth/signin'
 
 const SCHOOL_STATE_KEY = 'onboarding_school_show_key'
-const getSchoolState = async () => storage.get(SCHOOL_STATE_KEY)
+export const getSchoolState = async () => storage.get(SCHOOL_STATE_KEY)
 export const saveSchoolState = async () => storage.set(SCHOOL_STATE_KEY, useAuth().id.value)
 
 export const createSession = async (afterAuth: AfterAuthUser, router: Router) => {
@@ -18,14 +18,14 @@ export const createSession = async (afterAuth: AfterAuthUser, router: Router) =>
 		return await router.push('/auth/verify')
 	}
 	await AuthUseCases.sessionSignin(afterAuth)
-	const { setAuthUser, signin, user, id } = useAuth()
+	const { setAuthUser, signin } = useAuth()
 	await setAuthUser(afterAuth.user)
-	await signin(false)
-
-	if (!user.value?.school && (await getSchoolState()) !== id.value) return await router.push('/account/setup')
-	const redirect = await storage.get(REDIRECT_SESSION_NAME)
-	if (redirect) await storage.remove(REDIRECT_SESSION_NAME)
-	await router.push(redirect ?? '/dashboard')
+	const successful = await signin(false, router)
+	if (successful) {
+		const redirect = await storage.get(REDIRECT_SESSION_NAME)
+		if (redirect) await storage.remove(REDIRECT_SESSION_NAME)
+		await router.push(redirect ?? '/dashboard')
+	}
 }
 
 export const useSessionSignout = () => {

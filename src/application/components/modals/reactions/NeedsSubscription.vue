@@ -14,16 +14,13 @@
 	</Popover>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 
-export default defineComponent({
-	name: 'NeedsSubscription',
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
+defineProps({
+	close: {
+		type: Function as PropType<() => void>,
+		required: true
 	}
 })
 </script>

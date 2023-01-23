@@ -6,7 +6,7 @@ import { addToArray } from '@utils/commons'
 import { useSchoolModal } from '@app/composable/core/modals'
 import { useRouter } from 'vue-router'
 
-const global = {
+const store = {
 	fetched: ref(false),
 	faculties: ref([] as FacultyEntity[]),
 	institutions: {} as Record<string, boolean>,
@@ -15,33 +15,33 @@ const global = {
 }
 
 const fetchFaculties = async (institutionId: string) => {
-	if (global.institutions[institutionId]) return
-	await global.setError('')
-	await global.setLoading(true)
+	if (store.institutions[institutionId]) return
+	await store.setError('')
+	await store.setLoading(true)
 	try {
 		const faculties = await FacultiesUseCases.getInstitutionFaculties(institutionId)
-		faculties.results.forEach((c) => addToArray(global.faculties.value, c, (e) => e.id, (e) => e.name, true))
-		global.fetched.value = true
-		global.institutions[institutionId] = true
+		faculties.results.forEach((c) => addToArray(store.faculties.value, c, (e) => e.id, (e) => e.name, true))
+		store.fetched.value = true
+		store.institutions[institutionId] = true
 	} catch (error) {
-		await global.setError(error)
+		await store.setError(error)
 	}
-	await global.setLoading(false)
+	await store.setLoading(false)
 }
 
 export const useFacultyList = () => {
-	return { ...global, fetchFaculties }
+	return { ...store, fetchFaculties }
 }
 
 export const useFaculty = (institutionId: string, id: string) => {
 	const faculty = computed({
-		get: () => global.faculties.value.find((s) => s.id === id) ?? null,
+		get: () => store.faculties.value.find((s) => s.id === id) ?? null,
 		set: (c) => {
-			if (c) addToArray(global.faculties.value, c, (e) => e.id, (e) => e.name, true)
+			if (c) addToArray(store.faculties.value, c, (e) => e.id, (e) => e.name, true)
 		}
 	})
 	onMounted(async () => {
-		if (!global.institutions[institutionId]) await fetchFaculties(institutionId)
+		if (!store.institutions[institutionId]) await fetchFaculties(institutionId)
 	})
 
 	return { faculty }
@@ -67,7 +67,7 @@ export const useCreateFaculty = () => {
 			await setLoading(true)
 			try {
 				const faculty = await FacultiesUseCases.add(factory.value)
-				addToArray(global.faculties.value, faculty, (e) => e.id, (e) => e.name, true)
+				addToArray(store.faculties.value, faculty, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeCreateFaculty()
 				await setMessage('Faculty created successfully')
@@ -103,7 +103,7 @@ export const useEditFaculty = () => {
 			await setLoading(true)
 			try {
 				const updatedFaculty = await FacultiesUseCases.update(editingFaculty!.id, factory.value)
-				addToArray(global.faculties.value, updatedFaculty, (e) => e.id, (e) => e.name, true)
+				addToArray(store.faculties.value, updatedFaculty, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeEditFaculty()
 				await setMessage('Faculty updated successfully')
@@ -133,7 +133,7 @@ export const useDeleteFaculty = (facultyId: string) => {
 			await setLoading(true)
 			try {
 				await FacultiesUseCases.delete(facultyId)
-				global.faculties.value = global.faculties.value
+				store.faculties.value = store.faculties.value
 					.filter((s) => s.id !== facultyId)
 				await setMessage('Faculty deleted successfully')
 			} catch (error) {

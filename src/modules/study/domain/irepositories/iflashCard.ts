@@ -10,4 +10,5 @@ export interface IFlashCardRepository {
 	find: (id: string) => Promise<FlashCardEntity | null>
 	update: (id: string, data: FlashCardToModel) => Promise<FlashCardEntity>
 	delete: (id: string) => Promise<void>
+	saveMatch: (id: string, time: number) => Promise<{ time: number, record: boolean }>
 }

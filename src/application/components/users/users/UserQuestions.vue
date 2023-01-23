@@ -11,30 +11,20 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
 import { useUserQuestionList } from '@app/composable/users/users/questions'
 import { UserEntity } from '@modules/users'
 
-export default defineComponent({
-	name: 'UserQuestions',
-	components: { QuestionListCard },
-	props: {
-		user: {
-			type: UserEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const {
-			questions, error, loading, hasMore, fetchOlderQuestions,
-			search, searchMode, searchResults, searchValue
-		} = useUserQuestionList(props.user.id)
-		return {
-			questions, error, loading, hasMore, fetchOlderQuestions,
-			searchMode, searchResults, searchValue, search
-		}
+const props = defineProps({
+	user: {
+		type: UserEntity,
+		required: true
 	}
 })
+
+const {
+	questions, error, loading, hasMore, fetchOlderQuestions,
+	search, searchMode, searchResults, searchValue
+} = useUserQuestionList(props.user.id)
 </script>

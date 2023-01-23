@@ -9,4 +9,5 @@ export interface FlashCardBaseDataSource {
 	listenToMany: (query: QueryParams, listener: Listeners<FlashCardFromModel>) => Promise<() => void>
 	find: (id: string) => Promise<FlashCardFromModel | null>
 	delete: (id: string) => Promise<void>
+	saveMatch: (id: string, time: number) => Promise<{ time: number, record: boolean }>
 }

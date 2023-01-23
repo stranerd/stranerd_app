@@ -27,7 +27,7 @@
 	</router-link>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {
 	arrowForwardOutline,
 	closeOutline,
@@ -36,7 +36,6 @@ import {
 	settingsOutline,
 	trashBinOutline
 } from 'ionicons/icons'
-import { defineComponent } from 'vue'
 import { NoteEntity } from '@modules/study'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 import { useAuth } from '@app/composable/auth/auth'
@@ -44,41 +43,32 @@ import { openNoteEditModal, useDeleteNote } from '@app/composable/study/notes'
 import { useRouter } from 'vue-router'
 import { actionSheetController } from '@ionic/vue'
 
-export default defineComponent({
-	name: 'NoteListCard',
-	props: {
-		note: {
-			type: NoteEntity,
-			required: true
-		},
-		edit: {
-			type: Boolean,
-			required: false,
-			default: false
-		}
+const props = defineProps({
+	note: {
+		type: NoteEntity,
+		required: true
 	},
-	components: { SaveToSet },
-	setup (props) {
-		const { id } = useAuth()
-		const { deleteNote, loading } = useDeleteNote(props.note.id)
-		const router = useRouter()
-		const showMenu = async () => {
-			const actionSheet = await actionSheetController.create({
-				buttons: [
-					{
-						text: 'Edit note', icon: pencilOutline,
-						handler: () => openNoteEditModal(props.note, router)
-					},
-					{ text: 'Delete note', role: 'destructive', icon: trashBinOutline, handler: deleteNote },
-					{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
-				]
-			})
-			await actionSheet.present()
-		}
-		return {
-			id, settingsOutline, arrowForwardOutline, documentOutline,
-			loading, showMenu
-		}
+	edit: {
+		type: Boolean,
+		required: false,
+		default: false
 	}
 })
+
+const { id } = useAuth()
+const { deleteNote, loading } = useDeleteNote(props.note.id)
+const router = useRouter()
+const showMenu = async () => {
+	const actionSheet = await actionSheetController.create({
+		buttons: [
+			{
+				text: 'Edit note', icon: pencilOutline,
+				handler: () => openNoteEditModal(props.note, router)
+			},
+			{ text: 'Delete note', role: 'destructive', icon: trashBinOutline, handler: deleteNote },
+			{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
+		]
+	})
+	await actionSheet.present()
+}
 </script>

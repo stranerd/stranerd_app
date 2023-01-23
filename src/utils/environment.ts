@@ -1,12 +1,12 @@
 import { parseURL } from '@utils/commons'
 import { isAndroid, isIos } from '@utils/constants'
 
-const isDev = process.env.VUE_APP_API_ENVIRONMENT === 'local'
+const isDev = import.meta.env.VITE_ENVIRONMENT === 'local'
 
 export const isServer = () => false
 export const isClient = () => true
 
-const googleClients = JSON.parse(process.env.VUE_APP_API_GOOGLE_CLIENT_IDS ?? '{}')
+const googleClients = JSON.parse(import.meta.env.VITE_GOOGLE_CLIENT_IDS ?? '{}')
 const googleClientIds = {
 	web: googleClients.web ?? '',
 	android: googleClients.web ?? '',
@@ -15,9 +15,9 @@ const googleClientIds = {
 
 export const googleClientId = isIos ? googleClientIds.ios : isAndroid ? googleClientIds.android : googleClientIds.web
 
-const host = (process.env.VUE_APP_API_DOMAIN ?? '')
+const host = (import.meta.env.VITE_DOMAIN ?? '')
 export const domain = parseURL(`http${!isDev ? 's' : ''}://${host}`)
 
-export const apiBase = parseURL(process.env.VUE_APP_API_API_BASE ?? '')
+export const apiBase = parseURL(import.meta.env.VITE_API_BASE ?? '')
 
-export const packageName = process.env.VUE_APP_API_PACKAGE_NAME!
+export const packageName = import.meta.env.VITE_PACKAGE_NAME!

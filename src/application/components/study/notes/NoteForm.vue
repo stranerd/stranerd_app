@@ -24,29 +24,26 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { NoteFactory } from '@modules/study'
 
-export default defineComponent({
-	name: 'NoteForm',
-	props: {
-		factory: {
-			type: NoteFactory,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		}
+defineProps({
+	factory: {
+		type: NoteFactory,
+		required: true
+	},
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
 	}
 })
 </script>
@@ -62,7 +59,9 @@ ion-input, ion-select, ion-textarea {
 
 ion-input, ion-textarea {
 	--background: transparent !important;
+
 	background: transparent !important;
+
 	--padding-top: 1.5rem !important;
 	--padding-bottom: 1.5rem !important;
 }

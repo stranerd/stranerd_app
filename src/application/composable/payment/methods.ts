@@ -1,10 +1,11 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { MethodEntity, MethodsUseCases } from '@modules/payment'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 import { Alert } from '@utils/dialog'
+import { useListener } from '@app/composable/core/listener'
 
-const global = {
+const store = {
 	methods: ref([] as MethodEntity[]),
 	fetched: ref(false),
 	...useErrorHandler(),
@@ -12,40 +13,40 @@ const global = {
 }
 const listener = useListener(async () => await MethodsUseCases.listen({
 	created: async (entity) => {
-		addToArray(global.methods.value, entity, (e) => e.id, (e) => e.createdAt, true)
+		addToArray(store.methods.value, entity, (e) => e.id, (e) => e.createdAt, true)
 	},
 	updated: async (entity) => {
-		addToArray(global.methods.value, entity, (e) => e.id, (e) => e.createdAt, true)
+		addToArray(store.methods.value, entity, (e) => e.id, (e) => e.createdAt, true)
 	},
 	deleted: async (entity) => {
-		const index = global.methods.value.findIndex((q) => q.id === entity.id)
-		if (index !== -1) global.methods.value.splice(index, 1)
+		const index = store.methods.value.findIndex((q) => q.id === entity.id)
+		if (index !== -1) store.methods.value.splice(index, 1)
 	}
 }))
 
 export const useMethodsList = () => {
 	const fetchMethods = async () => {
-		await global.setError('')
+		await store.setError('')
 		try {
-			await global.setLoading(true)
+			await store.setLoading(true)
 			const methods = await MethodsUseCases.get()
-			methods.results.forEach((q) => addToArray(global.methods.value, q, (e) => e.id, (e) => e.createdAt, true))
-			global.fetched.value = true
+			methods.results.forEach((q) => addToArray(store.methods.value, q, (e) => e.id, (e) => e.createdAt, true))
+			store.fetched.value = true
 		} catch (error) {
-			await global.setError(error)
+			await store.setError(error)
 		}
-		await global.setLoading(false)
+		await store.setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchMethods()
+		if (!store.fetched.value && !store.loading.value) await fetchMethods()
 		await listener.start()
 	})
 	onUnmounted(async () => {
 		await listener.close()
 	})
 
-	return { ...global }
+	return { ...store }
 }
 
 export const useMethod = (method: MethodEntity) => {
@@ -67,9 +68,9 @@ export const useMethod = (method: MethodEntity) => {
 			method = await MethodsUseCases.makePrimary(method.id)
 			await setMessage('Method now primary')
 		} catch (error) {
-			await global.setError(error)
+			await store.setError(error)
 		}
-		await global.setLoading(false)
+		await store.setLoading(false)
 	}
 
 	const deleteMethod = async () => {
@@ -82,7 +83,7 @@ export const useMethod = (method: MethodEntity) => {
 			await setLoading(true)
 			try {
 				await MethodsUseCases.delete(method.id)
-				global.methods.value = global.methods.value.filter((c) => c.id !== method.id)
+				store.methods.value = store.methods.value.filter((c) => c.id !== method.id)
 				await setMessage('Method deleted successfully')
 			} catch (error) {
 				await setError(error)

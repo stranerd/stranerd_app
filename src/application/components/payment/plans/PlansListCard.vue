@@ -35,30 +35,21 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { cardOutline, checkmarkOutline, closeOutline } from 'ionicons/icons'
+<script lang="ts" setup>
+import { checkmarkOutline, closeOutline } from 'ionicons/icons'
 import { formatCurrency } from '@utils/commons'
 import { useWallet } from '@app/composable/payment/wallets'
 import { PlanEntity } from '@modules/payment'
 import { useAuth } from '@app/composable/auth/auth'
 import { openSubscriptionDetailsMenu } from '@app/composable/payment/plans'
 
-export default defineComponent({
-	name: 'PlansListCard',
-	props: {
-		plan: {
-			type: PlanEntity,
-			required: true
-		}
-	},
-	setup () {
-		const { wallet } = useAuth()
-		const { loading, error, cancelSubscription } = useWallet()
-		return {
-			checkmarkOutline, cardOutline, closeOutline, loading, error,
-			formatCurrency, wallet, openSubscriptionDetailsMenu, cancelSubscription
-		}
+defineProps({
+	plan: {
+		type: PlanEntity,
+		required: true
 	}
 })
+
+const { wallet } = useAuth()
+const { loading, error, cancelSubscription } = useWallet()
 </script>

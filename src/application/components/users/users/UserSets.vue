@@ -9,30 +9,20 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import SetListCard from '@app/components/study/sets/SetListCard.vue'
 import { useUserSetList } from '@app/composable/users/users/sets'
 import { UserEntity } from '@modules/users'
 
-export default defineComponent({
-	name: 'UserSets',
-	components: { SetListCard },
-	props: {
-		user: {
-			type: UserEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const {
-			sets, error, loading,
-			searchMode, searchResults, searchValue, search
-		} = useUserSetList(props.user.id)
-		return {
-			sets, error, loading,
-			searchMode, searchResults, searchValue, search
-		}
+const props = defineProps({
+	user: {
+		type: UserEntity,
+		required: true
 	}
 })
+
+const {
+	sets, error, loading,
+	searchMode, searchResults, searchValue, search
+} = useUserSetList(props.user.id)
 </script>

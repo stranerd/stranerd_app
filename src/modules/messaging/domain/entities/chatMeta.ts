@@ -1,7 +1,6 @@
 import { BaseEntity } from '@modules/core'
 import { ChatEntity } from './chat'
 import { ChatMetaClasses, ChatMetaData, ChatMetaPersonal, ChatType } from '../types'
-import { generateEmbeddedUser } from '@modules/users'
 
 export class ChatMetaEntity extends BaseEntity {
 	readonly id: string
@@ -13,21 +12,18 @@ export class ChatMetaEntity extends BaseEntity {
 	readonly updatedAt: number
 
 	constructor ({
-					 id,
-					 members,
-					 data,
-					 last,
-					 readAt,
-					 createdAt,
-					 updatedAt
-				 }: ChatMetaConstructorArgs) {
+		             id,
+		             members,
+		             data,
+		             last,
+		             readAt,
+		             createdAt,
+		             updatedAt
+	             }: ChatMetaConstructorArgs) {
 		super()
 		this.id = id
 		this.members = members
 		this.data = data
-		if (this.data.type === ChatType.personal) this.data.users = Object.fromEntries(
-			Object.entries(this.data.users).map(([key, user]) => [key, generateEmbeddedUser(user)])
-		)
 		this.last = last
 		this.readAt = readAt
 		this.createdAt = createdAt

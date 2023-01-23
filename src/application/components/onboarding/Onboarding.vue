@@ -40,39 +40,33 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-	name: 'Onboarding',
-	setup () {
-		const tab = ref(1)
-		const data = [
-			{
-				title: 'Welcome to Stranerd', image: require('@app/assets/images/onboarding/1.png'),
-				description: 'Get access to expert answers and study materials for assignment help, and test & exam preparation.'
-			},
-			{
-				title: 'Get assignment help', image: require('@app/assets/images/onboarding/2.png'),
-				description: 'Share tough questions you come across in homework or while studying to get expert answers to them.'
-			},
-			{
-				title: 'Study with flashcards', image: require('@app/assets/images/onboarding/3.png'),
-				description: 'Create or find flashcards to study with. The number one study material for improving memorization.'
-			},
-			{
-				title: 'Rank on leaderboard', image: require('@app/assets/images/onboarding/4.png'),
-				description: 'Fight for the daily, weekly, monthly, or overall top spot in your department or in general with points from studying.'
-			}
-		]
-		const tabs = data.length
-		return { tabs, tab, data }
+const tab = ref(1)
+const data = [
+	{
+		title: 'Welcome to Stranerd', image: require('@app/assets/images/onboarding/1.png'),
+		description: 'Get access to expert answers and study materials for assignment help, and test & exam preparation.'
+	},
+	{
+		title: 'Get assignment help', image: require('@app/assets/images/onboarding/2.png'),
+		description: 'Share tough questions you come across in homework or while studying to get expert answers to them.'
+	},
+	{
+		title: 'Study with flashcards', image: require('@app/assets/images/onboarding/3.png'),
+		description: 'Create or find flashcards to study with. The number one study material for improving memorization.'
+	},
+	{
+		title: 'Rank on leaderboard', image: require('@app/assets/images/onboarding/4.png'),
+		description: 'Fight for the daily, weekly, monthly, or overall top spot in your department or in general with points from studying.'
 	}
-})
+]
+const tabs = data.length
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .no-border {
-	--border-color: transparent !important
+	--border-color: transparent !important;
 }
 </style>

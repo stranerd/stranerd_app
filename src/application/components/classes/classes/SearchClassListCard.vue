@@ -27,29 +27,21 @@
 	</router-link>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { ClassEntity } from '@modules/classes'
-import { pluralize } from '@utils/commons'
 import { useClassMembersList } from '@app/composable/classes/classes'
 import { useAuth } from '@app/composable/auth/auth'
 import { ellipse } from 'ionicons/icons'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import Department from '@app/components/school/departments/Department.vue'
 
-export default defineComponent({
-	name: 'SearchClassListCard',
-	components: { Institution, Department },
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const { id } = useAuth()
-		const { loading, requestToJoinClass } = useClassMembersList(props.classInst, true)
-		return { id, pluralize, loading, requestToJoinClass, ellipse }
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
 	}
 })
+
+const { id } = useAuth()
+const { loading, requestToJoinClass } = useClassMembersList(props.classInst, true)
 </script>

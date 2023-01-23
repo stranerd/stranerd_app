@@ -5,19 +5,15 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 import { NoteEntity } from '@modules/study'
 
-export default defineComponent({
-	name: 'SearchNotesList',
-	components: { NoteListCard },
-	props: {
-		notes: {
-			type: Array as PropType<NoteEntity[]>,
-			required: true
-		}
+defineProps({
+	notes: {
+		type: Array as PropType<NoteEntity[]>,
+		required: true
 	}
 })
 </script>

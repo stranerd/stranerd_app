@@ -4,7 +4,7 @@ import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { addToArray } from '@utils/commons'
 
-const global = {
+const store = {
 	users: ref([] as UserEntity[]),
 	time: ref(RankingTimes.daily),
 	tagId: ref(null as string | null),
@@ -18,34 +18,34 @@ export const useLeaderboardList = () => {
 	const { id } = useAuth()
 
 	const fetchUsers = async () => {
-		await global.setError('')
+		await store.setError('')
 		try {
-			await global.setLoading(true)
-			const users = await UsersUseCases.getLeaderboard(global.time.value, global.tagId.value, global.nextPage.value)
-			if (global.nextPage.value === 1) global.users.value = []
-			users.results.forEach((user) => addToArray(global.users.value, user, (e) => e.id, (e) => e.account.rankings[global.time.value]))
-			global.nextPage.value = users.pages.next ?? 1
-			global.fetched.value = true
+			await store.setLoading(true)
+			const users = await UsersUseCases.getLeaderboard(store.time.value, store.tagId.value, store.nextPage.value)
+			if (store.nextPage.value === 1) store.users.value = []
+			users.results.forEach((user) => addToArray(store.users.value, user, (e) => e.id, (e) => e.account.rankings[store.time.value].value))
+			store.nextPage.value = users.pages.next ?? 1
+			store.fetched.value = true
 		} catch (error) {
-			await global.setError(error)
+			await store.setError(error)
 		}
-		await global.setLoading(false)
+		await store.setLoading(false)
 	}
 	const hasNoAuthUser = computed({
-		get: () => !global.users.value.find((user) => user.id === id.value),
+		get: () => !store.users.value.find((user) => user.id === id.value),
 		set: () => {
 		}
 	})
 
-	const watcher = watch([global.tagId, global.time], async () => {
-		global.fetched.value = false
+	const watcher = watch([store.tagId, store.time], async () => {
+		store.fetched.value = false
 		await fetchUsers()
 	})
 
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchUsers()
+		if (!store.fetched.value && !store.loading.value) await fetchUsers()
 	})
 	onUnmounted(watcher)
 
-	return { ...global, hasNoAuthUser, fetchMoreUsers: fetchUsers }
+	return { ...store, hasNoAuthUser, fetchMoreUsers: fetchUsers }
 }

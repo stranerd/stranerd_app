@@ -1,5 +1,5 @@
 <template>
-	<div class="showcase-flex">
+	<div v-if="user" class="showcase-flex">
 		<div class="border-bottom-line card card-padding">
 			<div class="w-full flex justify-between">
 				<IonText class="font-bold">Activity</IonText>
@@ -7,10 +7,10 @@
 
 			<div class="showcase2">
 				<DashboardCard :icon="flameOutline"
-					:title="`${user ? formatNumber(user?.account.streak.count) : 'N/A'} ${pluralize(user?.account.streak.count, 'day', 'days')}`"
+					:title="`${user ? formatNumber(user.account.streak.count) : 'N/A'} ${pluralize(user.account.streak.count, 'day', 'days')}`"
 					iconClass="text-warning" subtitle="Current streak" />
 				<DashboardCard :icon="rocketOutline"
-					:title="`${user ? formatNumber(user?.account.streak.longestStreak) : 'N/A'} ${pluralize(user?.account.streak.longestStreak, 'day', 'days')}`"
+					:title="`${user ? formatNumber(user.account.streak.longestStreak) : 'N/A'} ${pluralize(user.account.streak.longestStreak, 'day', 'days')}`"
 					iconClass="text-warning" subtitle="Longest streak" />
 			</div>
 		</div>
@@ -20,12 +20,12 @@
 			</div>
 
 			<div class="showcase2">
-				<DashboardCard :icon="helpCircleOutline" :title="user ? formatNumber(user?.meta.questions) : 'N/A'"
+				<DashboardCard :icon="helpCircleOutline" :title="user ? formatNumber(user.meta.questions) : 'N/A'"
 					subtitle="Questions" />
-				<DashboardCard :icon="readerOutline" :title="user ? formatNumber(user?.meta.answers) : 'N/A'"
+				<DashboardCard :icon="readerOutline" :title="user ? formatNumber(user.meta.answers) : 'N/A'"
 					subtitle="Answers" />
 				<DashboardCard :icon="checkmarkCircleOutline"
-					:title="user ? formatNumber(user?.meta.bestAnswers) : 'N/A'" subtitle="Best answers" />
+					:title="user ? formatNumber(user.meta.bestAnswers) : 'N/A'" subtitle="Best answers" />
 			</div>
 		</div>
 
@@ -36,14 +36,14 @@
 
 			<div class="showcase2">
 				<DashboardCard :icon="documentOutline"
-					:subtitle="`${pluralize(user?.meta.notes, 'Note', 'Notes')} uploaded`"
-					:title="user ? formatNumber(user?.meta.notes) : 'N/A'" />
+					:subtitle="`${pluralize(user.meta.notes, 'Note', 'Notes')} uploaded`"
+					:title="user ? formatNumber(user.meta.notes) : 'N/A'" />
 				<DashboardCard :icon="flashOutline"
-					:subtitle="`${pluralize(user?.meta.flashCards, 'Flashcard', 'Flashcards')} created`"
-					:title="user? formatNumber(user?.meta.flashCards) : 'N/A'" />
+					:subtitle="`${pluralize(user.meta.flashCards, 'Flashcard', 'Flashcards')} created`"
+					:title="user? formatNumber(user.meta.flashCards) : 'N/A'" />
 				<DashboardCard :icon="folderOutline"
-					:subtitle="`${pluralize(user?.meta.sets, 'Folder', 'Folders')} created`"
-					:title="user ? formatNumber(user?.meta.sets) : 'N/A'" />
+					:subtitle="`${pluralize(user.meta.sets, 'Folder', 'Folders')} created`"
+					:title="user ? formatNumber(user.meta.sets) : 'N/A'" />
 			</div>
 		</div>
 
@@ -64,44 +64,29 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import {
 	checkmarkCircleOutline,
-	copyOutline,
 	documentOutline,
 	flameOutline,
 	flashOutline,
 	folderOutline,
 	helpCircleOutline,
-	playCircleOutline,
 	readerOutline,
 	receiptOutline,
 	rocketOutline,
-	schoolOutline,
-	timeOutline
+	schoolOutline
 } from 'ionicons/icons'
 import DashboardCard from './DashboardCard.vue'
-import { catchDivideByZero, formatNumber, pluralize } from '@utils/commons'
+import { formatNumber, pluralize } from '@utils/commons'
+import { catchDivideByZero } from '@stranerd/validate'
 import { useAuth } from '@app/composable/auth/auth'
 import { useTestList } from '@app/composable/study/tests'
 
-export default defineComponent({
-	name: 'GeneralDashboard',
-	components: { DashboardCard },
-	setup () {
-		const { user } = useAuth()
-		const { tests } = useTestList()
-		const timedTests = computed(() => tests.value.filter((test) => test.isTimed))
-		const passed = computed(() => timedTests.value.filter((test) => test.passed))
-		const averageScore = computed(() => catchDivideByZero(timedTests.value.reduce((acc, cur) => acc + cur.score, 0), timedTests.value.length))
-		return {
-			rocketOutline, timeOutline, helpCircleOutline, readerOutline,
-			copyOutline, documentOutline, playCircleOutline, folderOutline, checkmarkCircleOutline,
-			receiptOutline, schoolOutline,
-			timedTests, passed, averageScore,
-			user, formatNumber, pluralize, flameOutline, flashOutline
-		}
-	}
-})
+const { user } = useAuth()
+const { tests } = useTestList()
+const timedTests = computed(() => tests.value.filter((test) => test.isTimed))
+const passed = computed(() => timedTests.value.filter((test) => test.passed))
+const averageScore = computed(() => catchDivideByZero(timedTests.value.reduce((acc, cur) => acc + cur.score, 0), timedTests.value.length))
 </script>

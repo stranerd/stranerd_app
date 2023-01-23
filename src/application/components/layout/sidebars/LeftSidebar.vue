@@ -8,9 +8,8 @@
 					{ name: 'Home', path: '/dashboard', icon: home, iconOutline: homeOutline },
 					{ name: 'Questions', path: '/questions', icon: helpCircle, iconOutline: helpCircleOutline },
 					{ name: 'Study', path: '/study', icon: book, iconOutline: bookOutline },
-					{ name: 'Classes', path: '/classes', icon: people, iconOutline: peopleOutline },
 					{ name: 'Profile', path: '/account', icon: person, iconOutline: personOutline },
-					...(isAdmin ? [{ name: 'Admin', path: '/admin', icon: statsChart, iconOutline: statsChartOutline }] : [])
+					...(isAdmin ? [{ name: 'Admin', path: '/admin/', icon: statsChart, iconOutline: statsChartOutline }] : [])
 				]" :key="path" :class="{'text-primaryBg font-semibold bg-highlight': $route.path === path}" :to="path"
 				class="flex items-center text-lg gap-4 px-8 py-4">
 				<IonIcon :icon="$route.path === path ? icon : iconOutline" />
@@ -21,37 +20,22 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {
-	addOutline,
 	book,
 	bookOutline,
 	helpCircle,
 	helpCircleOutline,
 	home,
 	homeOutline,
-	people,
-	peopleOutline,
 	person,
 	personOutline,
 	statsChart,
 	statsChartOutline
 } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
-import { defineComponent } from 'vue'
 import SubscribeCTA from '@app/components/payment/plans/SubscribeCTA.vue'
 
-export default defineComponent({
-	name: 'LeftSidebar',
-	components: { SubscribeCTA },
-	setup () {
-		const { isAdmin, isSubscribed } = useAuth()
-		return {
-			isAdmin, isSubscribed, person, personOutline,
-			addOutline, people, peopleOutline, helpCircle, helpCircleOutline,
-			home, homeOutline, book, bookOutline, statsChart, statsChartOutline
-		}
-	}
-})
+const { isAdmin, isSubscribed } = useAuth()
 </script>
 

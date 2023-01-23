@@ -1,4 +1,4 @@
-import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { ClassUsers } from '../types'
 
@@ -50,7 +50,7 @@ export class ClassEntity extends BaseEntity {
 		this.school = school
 		this.description = description
 		this.photo = photo ? parseMedia(photo) : null
-		this.user = generateEmbeddedUser(user)
+		this.user = user
 		this.users = users
 		this.requests = requests
 		this.courses = courses

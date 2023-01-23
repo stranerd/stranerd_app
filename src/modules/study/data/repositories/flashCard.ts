@@ -69,4 +69,8 @@ export class FlashCardRepository implements IFlashCardRepository {
 	async delete (id: string) {
 		return this.dataSource.delete(id)
 	}
+
+	async saveMatch (id: string, time: number) {
+		return this.dataSource.saveMatch(id, time)
+	}
 }

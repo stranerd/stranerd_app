@@ -15,27 +15,21 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { linkOutline } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'LinksList',
-	props: {
-		media: {
-			type: Array as PropType<{
-				key: string,
-				values: {
-					hash: string,
-					createdAt: number
-					links: { original: string, normalized: string }[]
-				}[]
-			}[]>,
-			required: true
-		}
-	},
-	setup () {
-		return { linkOutline }
+defineProps({
+	media: {
+		type: Array as PropType<{
+			key: string,
+			values: {
+				hash: string,
+				createdAt: number
+				links: { original: string, normalized: string }[]
+			}[]
+		}[]>,
+		required: true
 	}
 })
 </script>

@@ -6,7 +6,7 @@ import { FileEntity } from '../entities/file'
 import { imageMimeTypes, videoMimeTypes } from '@stranerd/validate'
 
 const searchFields = ['title', 'media.name']
-type Library = 'images' | 'videos' | 'docs'
+type Library = 'images' | 'videos' | 'docs' | string
 
 export class FilesUseCase {
 	private repository: IFileRepository

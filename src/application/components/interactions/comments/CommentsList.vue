@@ -5,28 +5,22 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import CommentsListCard from '@app/components/interactions/comments/CommentsListCard.vue'
 import { useCommentsList } from '@app/composable/interactions/comments'
 import { InteractionEntities } from '@modules/interactions'
 
-export default defineComponent({
-	name: 'CommentsList',
-	components: { CommentsListCard },
-	props: {
-		id: {
-			type: String,
-			required: true
-		},
-		type: {
-			type: String as PropType<InteractionEntities>,
-			required: true
-		}
+const props = defineProps({
+	id: {
+		type: String,
+		required: true
 	},
-	setup (props) {
-		const { comments, loading, error } = useCommentsList(props.id, props.type)
-		return { comments, loading, error }
+	type: {
+		type: String as PropType<InteractionEntities>,
+		required: true
 	}
 })
+
+const { comments, loading, error } = useCommentsList(props.id, props.type)
 </script>

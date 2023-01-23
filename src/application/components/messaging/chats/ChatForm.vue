@@ -4,7 +4,7 @@
 			{{ loadingCounter }} {{ pluralize(loadingCounter, 'message', 'messages') }} sending
 		</span>
 		<div v-if="showFileUpload" class="absolute flex flex-col gap-4 py-4"
-			style="transform: translateY(calc(-100% - 1rem))">
+			style="transform: translateY(calc(-100% - 1rem));">
 			<FileInput v-for="{ icon, label, accept } in [
 				{ icon: imageOutline, label: 'Photos', accept: 'image/*' },
 				{ icon: videocamOutline, label: 'Videos', accept: 'video/*' },
@@ -26,12 +26,13 @@
 					<IonIcon :icon="trashBinOutline" class="text-danger" @click="remove" />
 				</div>
 				<div class="content flex flex-col items-center justify-center gap-2">
-					<img v-if="fileData[fileIndex].factory.media.type.includes('image')" :src="fileData[fileIndex].data"
+					<img v-if="fileData[fileIndex].factory.media?.type.includes('image')"
+						:src="fileData[fileIndex].data"
 						class="object-cover" />
-					<video v-else-if="fileData[fileIndex].factory.media.type.includes('video')"
+					<video v-else-if="fileData[fileIndex].factory.media?.type.includes('video')"
 						:src="fileData[fileIndex].data" class="object-cover" controls />
 					<IonIcon v-else :icon="documentOutline" class="text-4xl" />
-					<span>{{ fileData[fileIndex].factory.media.name }}</span>
+					<span>{{ fileData[fileIndex].factory.media?.name }}</span>
 				</div>
 				<div>
 					<div class="mb-4">
@@ -53,7 +54,7 @@
 								<IonIcon :icon="addOutline" />
 							</div>
 						</FileInput>
-						<IonButton :disabled="loadingCounter" class="btn-primary ml-auto" @click="uploadFiles">
+						<IonButton :disabled="!!loadingCounter" class="btn-primary ml-auto" @click="uploadFiles">
 							<IonIcon slot="icon-only" :icon="paperPlaneOutline" />
 						</IonButton>
 					</div>
@@ -64,20 +65,18 @@
 			<IonIcon :icon="showFileUpload ? closeCircleOutline : addCircleOutline" class="text-2xl"
 				@click="showFileUpload = !showFileUpload" />
 			<IonInput v-model="factory.body" :placeholder="`Message ${name}`" class="flex-grow rounded-full" required />
-			<IonButton :disabled="!factory.valid || loadingCounter" class="btn-primary" type="submit">
+			<IonButton :disabled="!factory.valid || !!loadingCounter" class="btn-primary" type="submit">
 				<IonIcon slot="icon-only" :icon="paperPlaneOutline" />
 			</IonButton>
 		</form>
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 import {
 	addCircleOutline,
 	addOutline,
-	chevronBackOutline,
-	chevronForwardOutline,
 	closeCircleOutline,
 	closeOutline,
 	documentOutline,
@@ -87,75 +86,68 @@ import {
 	videocamOutline
 } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
-import { getRandomValue, pluralize } from '@utils/commons'
+import { pluralize } from '@utils/commons'
+import { getRandomValue } from '@stranerd/validate'
 import { ChatFactory } from '@modules/messaging'
 import { useCreateChat } from '@app/composable/messaging/chats'
 
-export default defineComponent({
-	name: 'ChatForm',
-	props: {
-		to: {
-			required: true,
-			type: String
-		},
-		name: {
-			required: true,
-			type: String
-		}
+const props = defineProps({
+	to: {
+		required: true,
+		type: String
 	},
-	setup (props) {
-		const showFileUpload = ref(false)
-		const showFileCaption = ref(false)
-		const fileIndex = ref(0)
-		const {
-			loadingCounter, error, factory, createTextChat, createMediaChat
-		} = useCreateChat(props.to)
-		const fileData = ref([] as { data: string, factory: ChatFactory, hash: string }[])
-		const catchFiles = useFileInputCallback(async (files) => {
-			fileData.value = files.map((file) => {
-				const factory = new ChatFactory()
-				factory.media = file
-				return { data: window.URL.createObjectURL(file.data), factory, hash: getRandomValue() }
-			})
-			fileIndex.value = 0
-			showFileCaption.value = true
-			showFileUpload.value = false
-		})
-		const catchMoreFiles = useFileInputCallback(async (files) => {
-			fileData.value.push(...files.map((file) => {
-				const factory = new ChatFactory()
-				factory.media = file
-				return { data: window.URL.createObjectURL(file.data), factory, hash: getRandomValue() }
-			}))
-		})
-		const remove = () => {
-			if (fileData.value.length === 1) showFileCaption.value = false
-			fileData.value.splice(fileIndex.value, 1)
-			if (fileIndex.value !== 0) fileIndex.value--
-		}
-		const uploadFiles = async () => {
-			showFileCaption.value = false
-			await createMediaChat(fileData.value.map((f) => f.factory) as ChatFactory[])
-		}
-		return {
-			loadingCounter, error, factory, createTextChat, uploadFiles, pluralize,
-			addCircleOutline, closeOutline, paperPlaneOutline, closeCircleOutline, trashBinOutline, imageOutline,
-			documentOutline, videocamOutline, addOutline, chevronForwardOutline, chevronBackOutline,
-			showFileUpload, catchFiles, catchMoreFiles, fileData, showFileCaption, fileIndex, remove
-		}
+	name: {
+		required: true,
+		type: String
 	}
 })
+
+const showFileUpload = ref(false)
+const showFileCaption = ref(false)
+const fileIndex = ref(0)
+const {
+	loadingCounter, error, factory, createTextChat, createMediaChat
+} = useCreateChat(props.to)
+const fileData = ref([] as { data: string, factory: ChatFactory, hash: string }[])
+const catchFiles = useFileInputCallback(async (files) => {
+	fileData.value = files.map((file) => {
+		const factory = new ChatFactory()
+		factory.media = file
+		return { data: window.URL.createObjectURL(file.data), factory, hash: getRandomValue() }
+	})
+	fileIndex.value = 0
+	showFileCaption.value = true
+	showFileUpload.value = false
+})
+const catchMoreFiles = useFileInputCallback(async (files) => {
+	fileData.value.push(...files.map((file) => {
+		const factory = new ChatFactory()
+		factory.media = file
+		return { data: window.URL.createObjectURL(file.data), factory, hash: getRandomValue() }
+	}))
+})
+const remove = () => {
+	if (fileData.value.length === 1) showFileCaption.value = false
+	fileData.value.splice(fileIndex.value, 1)
+	if (fileIndex.value !== 0) fileIndex.value--
+}
+const uploadFiles = async () => {
+	showFileCaption.value = false
+	await createMediaChat(fileData.value.map((f) => f.factory) as ChatFactory[])
+}
 </script>
 
 <style lang="scss" scoped>
 ion-button {
 	height: 36px;
 	width: 36px;
+
 	--padding-start: 0.4rem !important;
 	--padding-end: 0.4rem !important;
 	--padding-top: 0.4rem !important;
 	--padding-bottom: 0.4rem !important;
 	--border-radius: 10rem !important;
+
 	border-radius: 10rem !important;
 	@media (min-width: $md) {
 		--padding-start: 0.6rem !important;

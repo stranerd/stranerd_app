@@ -9,14 +9,6 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-	name: 'EmptyUserAnswers'
-})
-</script>
-
 <style lang="scss" scoped>
 img {
 	min-width: 150px;

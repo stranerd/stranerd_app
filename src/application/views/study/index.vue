@@ -29,12 +29,12 @@
 					]" :key="title" :class="{'opacity-50': !route}" :to="route"
 					class="flex items-center card-padding !gap-4 card-sm">
 					<span
-						class="rounded-full w-12 h-12 flex items-center justify-center bg-secondaryText text-itemBg">
+						class="rounded-full w-14 h-14 flex items-center justify-center bg-bodyBg">
 						<IonIcon :icon="icon" />
 					</span>
 					<span class="flex flex-col">
-						<span class="text-lg font-bold">{{ title }}</span>
-						<span class="text-secondaryText">{{ route ? sub : 'Coming soon' }}</span>
+						<span class="font-bold">{{ title }}</span>
+						<span class="text-sm text-secondaryText">{{ route ? sub : 'Coming soon' }}</span>
 					</span>
 				</component>
 			</div>

@@ -16,36 +16,28 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+<script lang="ts" setup>
+import { onMounted } from 'vue'
 import { ClassEntity, EventEntity } from '@modules/classes'
 import { calendarClearOutline, timeOutline, trashBinOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 import { markEventSeen, useDeleteEvent } from '@app/composable/classes/events'
 import { formatDateAsDigits, formatTimeAsDigits } from '@utils/dates'
 
-export default defineComponent({
-	name: 'EventListCard',
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		},
-		event: {
-			type: EventEntity,
-			required: true
-		}
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
 	},
-	setup (props) {
-		const { id } = useAuth()
-		onMounted(async () => {
-			await markEventSeen(props.event, id.value)
-		})
-		const { loading, error, deleteEvent } = useDeleteEvent(props.event.classId, props.event.id)
-		return {
-			id, loading, error, deleteEvent, formatDateAsDigits, formatTimeAsDigits,
-			timeOutline, calendarClearOutline, trashBinOutline
-		}
+	event: {
+		type: EventEntity,
+		required: true
 	}
 })
+
+const { id } = useAuth()
+onMounted(async () => {
+	await markEventSeen(props.event, id.value)
+})
+const { loading, error, deleteEvent } = useDeleteEvent(props.event.classId, props.event.id)
 </script>

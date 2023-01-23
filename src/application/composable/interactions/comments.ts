@@ -1,37 +1,38 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 import { CommentEntity, CommentFactory, CommentsUseCases, InteractionEntities } from '@modules/interactions'
 import { useInteractionModal } from '@app/composable/core/modals'
+import { useListener } from '@app/composable/core/listener'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	comments: Ref<CommentEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-const commentGlobal = {} as Record<string, {
+const commentStore = {} as Record<string, {
 	comment: Ref<CommentEntity | null>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useCommentsList = (id: string, type: InteractionEntities) => {
-	if (global[id] === undefined) {
+	if (store[id] === undefined) {
 		const listener = useListener(async () => {
 			return await CommentsUseCases.listen({ id, type }, {
 				created: async (entity) => {
-					addToArray(global[id].comments.value, entity, (e) => e.id, (e) => e.createdAt, true)
+					addToArray(store[id].comments.value, entity, (e) => e.id, (e) => e.createdAt, true)
 				},
 				updated: async (entity) => {
-					addToArray(global[id].comments.value, entity, (e) => e.id, (e) => e.createdAt, true)
+					addToArray(store[id].comments.value, entity, (e) => e.id, (e) => e.createdAt, true)
 				},
 				deleted: async (entity) => {
-					global[id].comments.value = global[id].comments.value.filter((c) => c.id !== entity.id)
+					store[id].comments.value = store[id].comments.value.filter((c) => c.id !== entity.id)
 				}
 			})
 		})
-		global[id] = {
+		store[id] = {
 			comments: ref([]),
 			fetched: ref(false),
 			listener,
@@ -41,49 +42,49 @@ export const useCommentsList = (id: string, type: InteractionEntities) => {
 	}
 
 	const fetchComments = async () => {
-		await global[id].setError('')
+		await store[id].setError('')
 		try {
-			await global[id].setLoading(true)
+			await store[id].setLoading(true)
 			const comments = await CommentsUseCases.get({ id, type })
-			comments.results.forEach((c) => addToArray(global[id].comments.value, c, (e) => e.id, (e) => e.createdAt, true))
-			global[id].fetched.value = true
+			comments.results.forEach((c) => addToArray(store[id].comments.value, c, (e) => e.id, (e) => e.createdAt, true))
+			store[id].fetched.value = true
 		} catch (error) {
-			await global[id].setError(error)
+			await store[id].setError(error)
 		}
-		await global[id].setLoading(false)
+		await store[id].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global[id].fetched.value && !global[id].loading.value) await fetchComments()
-		await global[id].listener.start()
+		if (!store[id].fetched.value && !store[id].loading.value) await fetchComments()
+		await store[id].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[id].listener.close()
+		await store[id].listener.close()
 	})
 
 	return {
-		error: global[id].error,
-		loading: global[id].loading,
-		comments: global[id].comments
+		error: store[id].error,
+		loading: store[id].loading,
+		comments: store[id].comments
 	}
 }
 
 export const useCommentsById = (id: string) => {
-	if (commentGlobal[id] === undefined) {
+	if (commentStore[id] === undefined) {
 		const listener = useListener(async () => {
 			return await CommentsUseCases.listenToOne(id, {
 				created: async (entity) => {
-					commentGlobal[id].comment.value = entity
+					commentStore[id].comment.value = entity
 				},
 				updated: async (entity) => {
-					commentGlobal[id].comment.value = entity
+					commentStore[id].comment.value = entity
 				},
 				deleted: async (entity) => {
-					commentGlobal[id].comment.value = entity
+					commentStore[id].comment.value = entity
 				}
 			})
 		})
-		commentGlobal[id] = {
+		commentStore[id] = {
 			comment: ref(null),
 			fetched: ref(false),
 			listener,
@@ -93,29 +94,29 @@ export const useCommentsById = (id: string) => {
 	}
 
 	const fetchComment = async () => {
-		await commentGlobal[id].setError('')
+		await commentStore[id].setError('')
 		try {
-			await commentGlobal[id].setLoading(true)
-			commentGlobal[id].comment.value = await CommentsUseCases.find(id)
-			commentGlobal[id].fetched.value = true
+			await commentStore[id].setLoading(true)
+			commentStore[id].comment.value = await CommentsUseCases.find(id)
+			commentStore[id].fetched.value = true
 		} catch (error) {
-			await commentGlobal[id].setError(error)
+			await commentStore[id].setError(error)
 		}
-		await commentGlobal[id].setLoading(false)
+		await commentStore[id].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!commentGlobal[id].fetched.value && !commentGlobal[id].loading.value) await fetchComment()
-		await commentGlobal[id].listener.start()
+		if (!commentStore[id].fetched.value && !commentStore[id].loading.value) await fetchComment()
+		await commentStore[id].listener.start()
 	})
 	onUnmounted(async () => {
-		await commentGlobal[id].listener.close()
+		await commentStore[id].listener.close()
 	})
 
 	return {
-		error: commentGlobal[id].error,
-		loading: commentGlobal[id].loading,
-		comment: commentGlobal[id].comment
+		error: commentStore[id].error,
+		loading: commentStore[id].loading,
+		comment: commentStore[id].comment
 	}
 }
 

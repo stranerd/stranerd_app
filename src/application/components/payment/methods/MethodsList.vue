@@ -11,21 +11,13 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { addOutline } from 'ionicons/icons'
 import { useCreateTransaction } from '@app/composable/payment/transactions'
 import { TransactionType } from '@modules/payment'
 import { useMethodsList } from '@app/composable/payment/methods'
 import MethodsListCard from '@app/components/payment/methods/MethodsListCard.vue'
 
-export default defineComponent({
-	name: 'MethodsList',
-	components: { MethodsListCard },
-	setup () {
-		const { methods, loading, error } = useMethodsList()
-		const { createTransaction } = useCreateTransaction(TransactionType.NewCard, 'A test amount will be charged and added to your wallet to see if the card works fine')
-		return { createTransaction, methods, loading, error, addOutline }
-	}
-})
+const { methods, loading, error } = useMethodsList()
+const { createTransaction } = useCreateTransaction(TransactionType.NewCard, 'A test amount will be charged and added to your wallet to see if the card works fine')
 </script>

@@ -7,17 +7,10 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue'
 import { useTutorsList } from '@app/composable/users/roles/tutors'
 import TutorsListCard from '@app/components/users/tutors/TutorsListCard.vue'
 
-export default defineComponent({
-	name: 'TutorsList',
-	components: { TutorsListCard },
-	setup () {
-		const { loading, error, tutors } = useTutorsList()
-		return { loading, error, tutors }
-	}
-})
+const { loading, error, tutors } = useTutorsList()
 </script>

@@ -33,6 +33,7 @@ import { TestPrepsUseCase } from './domain/usecases/testPreps'
 import { TestsUseCase } from './domain/usecases/tests'
 import { NotesUseCase } from './domain/usecases/notes'
 import { FilesUseCase } from './domain/usecases/files'
+import { Media } from '@modules/core'
 
 const setDataSource = new SetApiDataSource()
 const flashCardDataSource = new FlashCardApiDataSource()
@@ -73,3 +74,11 @@ export { PrepType } from './domain/entities/testPrep'
 export type { PrepData } from './domain/entities/testPrep'
 export { TestType } from './domain/entities/test'
 export type { TestData } from './domain/entities/test'
+
+export type Test = {
+	id: string
+	question: string
+	questionMedia: Media[]
+	options: { body: string, media: Media[], correct: boolean }[]
+	correct: number
+}

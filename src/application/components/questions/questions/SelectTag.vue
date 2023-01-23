@@ -38,47 +38,41 @@
 	</span>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { computed, defineComponent, ref } from 'vue'
 import { useTagList } from '@app/composable/interactions/tags'
 import { modalProps } from '@app/composable/core/modal'
 import { caretDownOutline, closeOutline } from 'ionicons/icons'
 import { groupBy } from '@utils/commons'
 
-export default defineComponent({
-	name: 'SelectTag',
-	props: {
-		value: {
-			type: String,
-			required: true
-		},
-		allowAll: {
-			type: Boolean,
-			required: false,
-			default: false
-		}
+const props = defineProps({
+	value: {
+		type: String,
+		required: true
 	},
-	setup (props, { emit }) {
-		const isOpen = ref(false)
-		const { questionTags } = useTagList()
-		const selectedTag = computed(() => questionTags.value.find((t) => t.id === props.value))
-		const groups = computed(() => {
-			const grouped = groupBy(questionTags.value, (tag) => tag.parent ?? '')
-			return (grouped.find((g) => g.key === '')?.values ?? []).map((t) => ({
-				parent: t,
-				children: grouped.find((g) => g.key === t.id)?.values ?? []
-			}))
-		})
-		const selectTag = (tagId: string) => {
-			emit('update:value', tagId)
-			isOpen.value = false
-		}
-		return {
-			groups, selectedTag, selectTag,
-			isOpen, modalProps, closeOutline, caretDownOutline
-		}
+	allowAll: {
+		type: Boolean,
+		required: false,
+		default: false
 	}
 })
+
+const emit = defineEmits(['update:value'])
+
+const isOpen = ref(false)
+const { questionTags } = useTagList()
+const selectedTag = computed(() => questionTags.value.find((t) => t.id === props.value))
+const groups = computed(() => {
+	const grouped = groupBy(questionTags.value, (tag) => tag.parent ?? '')
+	return (grouped.find((g) => g.key === '')?.values ?? []).map((t) => ({
+		parent: t,
+		children: grouped.find((g) => g.key === t.id)?.values ?? []
+	}))
+})
+const selectTag = (tagId: string) => {
+	emit('update:value', tagId)
+	isOpen.value = false
+}
 </script>
 
 <style lang="scss" scoped>

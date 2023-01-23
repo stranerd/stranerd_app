@@ -16,11 +16,3 @@
 		</div>
 	</DefaultLayout>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-	name: 'PrepsWrapper'
-})
-</script>

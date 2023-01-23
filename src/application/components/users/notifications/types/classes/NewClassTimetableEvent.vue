@@ -31,38 +31,32 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { NotificationEntity } from '@modules/users'
 import { formatTime } from '@utils/dates'
 import { useClass } from '@app/composable/classes/classes'
 import { useEvent } from '@app/composable/classes/events'
 import { ellipse, timeOutline } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'NewClassTimetableEvent',
-	props: {
-		notification: {
-			type: NotificationEntity,
-			required: true
-		},
-		classId: {
-			type: String,
-			required: true
-		},
-		eventId: {
-			type: String,
-			required: true
-		},
-		timeInMin: {
-			type: Number,
-			required: true
-		}
+const props = defineProps({
+	notification: {
+		type: NotificationEntity,
+		required: true
 	},
-	setup (props) {
-		const { classInst } = useClass(props.classId)
-		const { event } = useEvent(props.classId, props.eventId)
-		return { classInst, event, ellipse, timeOutline, formatTime }
+	classId: {
+		type: String,
+		required: true
+	},
+	eventId: {
+		type: String,
+		required: true
+	},
+	timeInMin: {
+		type: Number,
+		required: true
 	}
 })
+
+const { classInst } = useClass(props.classId)
+const { event } = useEvent(props.classId, props.eventId)
 </script>

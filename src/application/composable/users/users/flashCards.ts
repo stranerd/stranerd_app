@@ -1,9 +1,10 @@
 import { onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import { FlashCardEntity, FlashCardsUseCases } from '@modules/study'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
+import { useListener } from '@app/composable/core/listener'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	flashCards: Ref<FlashCardEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
@@ -13,7 +14,7 @@ const global = {} as Record<string, {
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useUserFlashCardList = (id: string) => {
-	if (global[id] === undefined) global[id] = {
+	if (store[id] === undefined) store[id] = {
 		flashCards: ref([]),
 		fetched: ref(false),
 		hasMore: ref(false),
@@ -25,35 +26,35 @@ export const useUserFlashCardList = (id: string) => {
 	}
 
 	const fetchFlashCards = async () => {
-		await global[id].setError('')
+		await store[id].setError('')
 		try {
-			await global[id].setLoading(true)
-			const flashCards = await FlashCardsUseCases.getUserFlashCards(id, global[id].flashCards.value.at(-1)?.createdAt)
-			global[id].hasMore.value = !!flashCards.pages.next
-			flashCards.results.forEach((q) => addToArray(global[id].flashCards.value, q, (e) => e.id, (e) => e.createdAt))
-			global[id].fetched.value = true
+			await store[id].setLoading(true)
+			const flashCards = await FlashCardsUseCases.getUserFlashCards(id, store[id].flashCards.value.at(-1)?.createdAt)
+			store[id].hasMore.value = !!flashCards.pages.next
+			flashCards.results.forEach((q) => addToArray(store[id].flashCards.value, q, (e) => e.id, (e) => e.createdAt))
+			store[id].fetched.value = true
 		} catch (error) {
-			await global[id].setError(error)
+			await store[id].setError(error)
 		}
-		await global[id].setLoading(false)
+		await store[id].setLoading(false)
 	}
 
 	const listener = useListener(async () => {
 		return await FlashCardsUseCases.listenToUserFlashCards(id, {
 			created: async (entity) => {
-				addToArray(global[id].flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(store[id].flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				addToArray(global[id].flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(store[id].flashCards.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
-				global[id].flashCards.value = global[id].flashCards.value.filter((c) => c.id !== entity.id)
+				store[id].flashCards.value = store[id].flashCards.value.filter((c) => c.id !== entity.id)
 			}
-		}, global[id].flashCards.value.at(-1)?.createdAt)
+		}, store[id].flashCards.value.at(-1)?.createdAt)
 	})
 
 	onMounted(async () => {
-		if (!global[id].fetched.value && !global[id].loading.value) await fetchFlashCards()
+		if (!store[id].fetched.value && !store[id].loading.value) await fetchFlashCards()
 		await listener.start()
 	})
 
@@ -62,22 +63,22 @@ export const useUserFlashCardList = (id: string) => {
 	})
 
 	const search = async () => {
-		const searchValue = global[id].searchValue.value
+		const searchValue = store[id].searchValue.value
 		if (!searchValue) return
-		global[id].searchMode.value = true
-		await global[id].setError('')
+		store[id].searchMode.value = true
+		await store[id].setError('')
 		try {
-			await global[id].setLoading(true)
-			global[id].searchResults.value = await FlashCardsUseCases.searchUserFlashCards(id, searchValue)
+			await store[id].setLoading(true)
+			store[id].searchResults.value = await FlashCardsUseCases.searchUserFlashCards(id, searchValue)
 		} catch (error) {
-			await global[id].setError(error)
+			await store[id].setError(error)
 		}
-		await global[id].setLoading(false)
+		await store[id].setLoading(false)
 	}
 
-	watch(global[id].searchValue, () => {
-		if (!global[id].searchValue.value) global[id].searchMode.value = false
+	watch(store[id].searchValue, () => {
+		if (!store[id].searchValue.value) store[id].searchMode.value = false
 	})
 
-	return { ...global[id], fetchOlderFlashCards: fetchFlashCards, search }
+	return { ...store[id], fetchOlderFlashCards: fetchFlashCards, search }
 }

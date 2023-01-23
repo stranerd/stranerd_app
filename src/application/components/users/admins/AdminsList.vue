@@ -7,17 +7,9 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useAdminsList } from '@app/composable/users/roles/admins'
 import AdminsListCard from '@app/components/users/admins/AdminsListCard.vue'
 
-export default defineComponent({
-	name: 'AdminsList',
-	components: { AdminsListCard },
-	setup () {
-		const { loading, error, admins } = useAdminsList()
-		return { loading, error, admins }
-	}
-})
+const { loading, error, admins } = useAdminsList()
 </script>

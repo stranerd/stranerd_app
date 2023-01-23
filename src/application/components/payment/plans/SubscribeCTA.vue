@@ -8,22 +8,17 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-	name: 'SubscribeCTA',
-	props: {
-		title: {
-			type: String,
-			required: false,
-			default: 'Use Stranerd Premium'
-		},
-		sub: {
-			type: String,
-			required: false,
-			default: 'Ask a question and get expert tutor answers, and view answers to questions you find.'
-		}
+<script lang="ts" setup>
+defineProps({
+	title: {
+		type: String,
+		required: false,
+		default: 'Use Stranerd Premium'
+	},
+	sub: {
+		type: String,
+		required: false,
+		default: 'Ask a question and get expert tutor answers, and view answers to questions you find.'
 	}
 })
 </script>

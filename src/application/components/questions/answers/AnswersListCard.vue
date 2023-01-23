@@ -44,8 +44,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import { AnswerEntity, QuestionEntity } from '@modules/questions'
 import {
 	chatbubbleOutline,
@@ -60,70 +60,46 @@ import {
 } from 'ionicons/icons'
 import { useAnswer } from '@app/composable/questions/answers'
 import { useAuth } from '@app/composable/auth/auth'
-import { openCreateReportModal } from '@app/composable/reports/reports'
+import { openCreateReportModal } from '@app/composable/moderation/reports'
 import { formatNumber } from '@utils/commons'
-import { ReportType } from '@modules/reports'
+import { ReportType } from '@modules/moderation'
 import { formatTime } from '@utils/dates'
 import { LikeEntity } from '@modules/interactions'
 
-export default defineComponent({
-	name: 'AnswerListCard',
-	props: {
-		answer: {
-			type: AnswerEntity,
-			required: true
-		},
-		like: {
-			type: LikeEntity,
-			required: false,
-			default: null
-		},
-		question: {
-			type: QuestionEntity,
-			required: true
-		}
+const props = defineProps({
+	answer: {
+		type: AnswerEntity,
+		required: true
 	},
-	setup (props) {
-		const { id } = useAuth()
-		const showEditButton = computed({
-			get: () => props.answer.user.id === id.value && props.answer.canBeEdited,
-			set: () => {
-			}
-		})
-		const showDeleteButton = computed({
-			get: () => props.answer.user.id === id.value && props.answer.canBeDeleted,
-			set: () => {
-			}
-		})
-		const showMarkBest = computed({
-			get: () => !props.question.isAnswered && !props.answer.best && props.question.user.id === id.value,
-			set: () => {
-			}
-		})
-		const { error, loading, markBestAnswer, likeAnswer } = useAnswer(props.answer)
-
-		return {
-			id,
-			formatNumber,
-			formatTime,
-			loading,
-			error,
-			markBestAnswer,
-			likeAnswer,
-			checkmarkCircle,
-			chatbubbleOutline,
-			ellipse,
-			flagOutline,
-			thumbsDown,
-			thumbsDownOutline,
-			thumbsUp,
-			thumbsUpOutline,
-			checkmarkCircleOutline,
-			showEditButton,
-			showDeleteButton,
-			showMarkBest,
-			openReportModal: () => openCreateReportModal(ReportType.answers, props.answer.id)
-		}
+	like: {
+		type: LikeEntity,
+		required: false,
+		default: null
+	},
+	question: {
+		type: QuestionEntity,
+		required: true
 	}
 })
+
+const { id } = useAuth()
+const showEditButton = computed({
+	get: () => props.answer.user.id === id.value && props.answer.canBeEdited,
+	set: () => {
+	}
+})
+const showDeleteButton = computed({
+	get: () => props.answer.user.id === id.value && props.answer.canBeDeleted,
+	set: () => {
+	}
+})
+const showMarkBest = computed({
+	get: () => !props.question.isAnswered && !props.answer.best && props.question.user.id === id.value,
+	set: () => {
+	}
+})
+const { error, loading, markBestAnswer, likeAnswer } = useAnswer(props.answer)
+
+const openReportModal = () => openCreateReportModal(ReportType.answers, props.answer.id)
+
 </script>

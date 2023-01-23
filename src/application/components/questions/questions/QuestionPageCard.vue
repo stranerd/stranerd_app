@@ -33,59 +33,46 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { createOutline, ellipse, flagOutline, pencil, shareSocial, trashBinOutline } from 'ionicons/icons'
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { createOutline, ellipse, flagOutline, trashBinOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import InteractionTag from '@app/components/interactions/tags/Tag.vue'
-import { pluralize } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
 import { openAnswerModal } from '@app/composable/questions/answers'
 import { openQuestionEditModal, useDeleteQuestion } from '@app/composable/questions/questions'
 import { formatTime } from '@utils/dates'
 import { useRouter } from 'vue-router'
-import { openCreateReportModal } from '@app/composable/reports/reports'
-import { ReportType } from '@modules/reports'
+import { openCreateReportModal } from '@app/composable/moderation/reports'
+import { ReportType } from '@modules/moderation'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
-export default defineComponent({
-	name: 'QuestionPageCard',
-	props: {
-		question: {
-			type: QuestionEntity,
-			required: true
-		}
-	},
-	components: { InteractionTag, SaveToSet },
-	setup (props) {
-		const { id } = useAuth()
-		const router = useRouter()
-
-		const showAnswerButton = computed({
-			get: () => props.question.user.id !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
-			set: () => {
-			}
-		})
-		const showEditButton = computed({
-			get: () => props.question.user.id === id.value && props.question.canBeEdited,
-			set: () => {
-			}
-		})
-		const showDeleteButton = computed({
-			get: () => props.question.user.id === id.value && props.question.canBeDeleted,
-			set: () => {
-			}
-		})
-		const { loading, error, deleteQuestion } = useDeleteQuestion(props.question.id)
-
-		return {
-			shareSocial, flagOutline, pencil, trashBinOutline, createOutline, ellipse,
-			formatTime, pluralize,
-			showAnswerButton, openAnswerModal, showEditButton, showDeleteButton,
-			loading, error, deleteQuestion,
-			openReportModal: () => openCreateReportModal(ReportType.questions, props.question.id),
-			openEditModal: () => openQuestionEditModal(props.question, router)
-		}
+const props = defineProps({
+	question: {
+		type: QuestionEntity,
+		required: true
 	}
 })
+
+const { id } = useAuth()
+const router = useRouter()
+
+const showAnswerButton = computed({
+	get: () => props.question.user.id !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
+	set: () => {
+	}
+})
+const showEditButton = computed({
+	get: () => props.question.user.id === id.value && props.question.canBeEdited,
+	set: () => {
+	}
+})
+const showDeleteButton = computed({
+	get: () => props.question.user.id === id.value && props.question.canBeDeleted,
+	set: () => {
+	}
+})
+const { loading, error, deleteQuestion } = useDeleteQuestion(props.question.id)
+const openReportModal = () => openCreateReportModal(ReportType.questions, props.question.id)
+const openEditModal = () => openQuestionEditModal(props.question, router)
 </script>

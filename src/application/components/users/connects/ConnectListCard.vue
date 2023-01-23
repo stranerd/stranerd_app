@@ -30,8 +30,7 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { ConnectEntity } from '@modules/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { useUser } from '@app/composable/users/users'
@@ -39,20 +38,14 @@ import { formatTime } from '@utils/dates'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import { useConnects } from '@app/composable/users/connects'
 
-export default defineComponent({
-	name: 'ConnectListCard',
-	components: { Institution },
-	props: {
-		connect: {
-			type: ConnectEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const { id } = useAuth()
-		const { user } = useUser(props.connect.from.id === id.value ? props.connect.to.id : props.connect.from.id)
-		const { acceptConnect, deleteConnect, loading, error } = useConnects()
-		return { id, user, deleteConnect, acceptConnect, loading, error, formatTime }
+const props = defineProps({
+	connect: {
+		type: ConnectEntity,
+		required: true
 	}
 })
+
+const { id } = useAuth()
+const { user } = useUser(props.connect.from.id === id.value ? props.connect.to.id : props.connect.from.id)
+const { acceptConnect, deleteConnect, loading, error } = useConnects()
 </script>

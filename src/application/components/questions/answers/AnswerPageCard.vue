@@ -3,7 +3,8 @@
 		<div class="flex items-center gap-4 text-secondaryText text-sm justify-between">
 			<div class="flex items-center gap-2">
 				<Avatar :id="answer.user.id" :size="24" :src="answer.user.bio.photo" />
-				<UserName class="font-semibold" :name="answer.user.bio.fullName" :isTutor="answer.user.roles.isStranerdTutor" />
+				<UserName :isTutor="answer.user.roles.isStranerdTutor" :name="answer.user.bio.fullName"
+					class="font-semibold" />
 				<IonIcon :icon="ellipse" class="dot" />
 				<span>{{ formatTime(answer.createdAt) }}</span>
 			</div>
@@ -20,29 +21,19 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { ellipse, flagOutline, shareSocial } from 'ionicons/icons'
+<script lang="ts" setup>
+import { ellipse, flagOutline } from 'ionicons/icons'
 import { AnswerEntity } from '@modules/questions'
-import { pluralize } from '@utils/commons'
 import { formatTime } from '@utils/dates'
-import { openCreateReportModal } from '@app/composable/reports/reports'
-import { ReportType } from '@modules/reports'
+import { openCreateReportModal } from '@app/composable/moderation/reports'
+import { ReportType } from '@modules/moderation'
 
-export default defineComponent({
-	name: 'AnswerPageCard',
-	props: {
-		answer: {
-			type: AnswerEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		return {
-			ellipse, shareSocial, flagOutline,
-			formatTime, pluralize,
-			openReportModal: () => openCreateReportModal(ReportType.answers, props.answer.id)
-		}
+const props = defineProps({
+	answer: {
+		type: AnswerEntity,
+		required: true
 	}
 })
+
+const openReportModal = () => openCreateReportModal(ReportType.answers, props.answer.id)
 </script>

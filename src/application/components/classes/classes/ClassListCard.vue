@@ -28,8 +28,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 import { ClassEntity } from '@modules/classes'
 import {
 	calendarClearOutline,
@@ -39,35 +39,25 @@ import {
 	informationCircleOutline,
 	libraryOutline,
 	listOutline,
-	megaphoneOutline,
-	peopleOutline
+	megaphoneOutline
 } from 'ionicons/icons'
 import { useAnnouncementList } from '@app/composable/classes/announcements'
 import { useEventList } from '@app/composable/classes/events'
 import { useTimetable } from '@app/composable/classes/timetable'
 import { useSchemesList } from '@app/composable/classes/schemes'
 
-export default defineComponent({
-	name: 'ClassListCard',
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const show = ref(true)
-		const { unReadAnnouncements } = useAnnouncementList(props.classInst.id)
-		const { unReadEvents } = useEventList(props.classInst.id)
-		const { unReadTimetable } = useTimetable(props.classInst.id)
-		const { unReadSchemes } = useSchemesList(props.classInst.id)
-		return {
-			show, unReadAnnouncements, unReadEvents, unReadTimetable, unReadSchemes,
-			chevronForwardOutline, informationCircleOutline, libraryOutline, ellipse,
-			megaphoneOutline, peopleOutline, listOutline, calendarOutline, calendarClearOutline
-		}
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
 	}
 })
+
+const show = ref(true)
+const { unReadAnnouncements } = useAnnouncementList(props.classInst.id)
+const { unReadEvents } = useEventList(props.classInst.id)
+const { unReadTimetable } = useTimetable(props.classInst.id)
+const { unReadSchemes } = useSchemesList(props.classInst.id)
 </script>
 
 <style lang="scss" scoped>
@@ -76,6 +66,6 @@ export default defineComponent({
 }
 
 .fade-enter-active, .fade-leave-active {
-	transition: opacity .25s ease-in-out;
+	transition: opacity 0.25s ease-in-out;
 }
 </style>

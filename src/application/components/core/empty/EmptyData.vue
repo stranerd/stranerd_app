@@ -6,20 +6,15 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-	name: 'EmptyData',
-	props: {
-		title: {
-			type: String,
-			required: true
-		},
-		sub: {
-			type: String,
-			required: true
-		}
+<script lang="ts" setup>
+defineProps({
+	title: {
+		type: String,
+		required: true
+	},
+	sub: {
+		type: String,
+		required: true
 	}
 })
 </script>

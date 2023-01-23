@@ -29,30 +29,20 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { UserEntity } from '@modules/users'
 import { formatNumber, pluralize } from '@utils/commons'
 import { settingsOutline } from 'ionicons/icons'
 import Department from '@app/components/school/departments/Department.vue'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import { useAuth } from '@app/composable/auth/auth'
-import { openProfileMenuModal } from '@app/composable/users/users'
 
-export default defineComponent({
-	name: 'UserPageCard',
-	components: { Department, Institution },
-	props: {
-		user: {
-			type: UserEntity,
-			required: true
-		}
-	},
-	setup () {
-		const { id } = useAuth()
-		return {
-			settingsOutline, id, formatNumber, pluralize, openProfileMenuModal
-		}
+defineProps({
+	user: {
+		type: UserEntity,
+		required: true
 	}
 })
+
+const { id } = useAuth()
 </script>

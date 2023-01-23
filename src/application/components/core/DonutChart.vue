@@ -18,65 +18,56 @@
 	</Donut>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { computed, PropType } from 'vue'
 import { formatNumber } from '@utils/commons'
 import Donut from '@app/components/donutChart/Donut.vue'
 
-export default defineComponent({
-	name: 'DonutChart',
-	components: { Donut },
-	props: {
-		size: {
-			required: false,
-			type: Number,
-			default: 168
-		},
-		percentage: {
-			required: true,
-			type: Number,
-			default: 0
-		},
-		onClick: {
-			required: false,
-			type: Function as PropType<() => void>,
-			default: () => {
-			}
-		},
-		fgColor: {
-			type: String,
-			required: false,
-			default: '#546DD3'
-		},
-		bgColor: {
-			type: String,
-			required: false,
-			default: '#546DD322'
-		},
-		thickness: {
-			type: Number,
-			required: false,
-			default: 32
+const props = defineProps({
+	size: {
+		required: false,
+		type: Number,
+		default: 168
+	},
+	percentage: {
+		required: true,
+		type: Number,
+		default: 0
+	},
+	onClick: {
+		required: false,
+		type: Function as PropType<() => void>,
+		default: () => {
 		}
 	},
-	setup (props) {
-		const sections = computed(() => [{ value: props.percentage, color: props.fgColor }])
-		const totalSections = computed(() => sections.value.map((s) => s.value).reduce((acc, v) => acc + v, 0))
-		return { sections, formatNumber, totalSections }
+	fgColor: {
+		type: String,
+		required: false,
+		default: '#546DD3'
+	},
+	bgColor: {
+		type: String,
+		required: false,
+		default: '#546DD322'
+	},
+	thickness: {
+		type: Number,
+		required: false,
+		default: 32
 	}
-
 })
+
+const sections = computed(() => [{ value: props.percentage, color: props.fgColor }])
+const totalSections = computed(() => sections.value.map((s) => s.value).reduce((acc, v) => acc + v, 0))
 </script>
 
 <style lang="scss" scoped>
 .score, .cdc-text {
 	font-size: 1.1rem;
 	font-weight: 700;
-
 	@media (min-width: $md) {
 		font-size: 1.25rem;
 	}
-
 	@media (min-width: $lg) {
 		font-size: 1.5rem;
 	}

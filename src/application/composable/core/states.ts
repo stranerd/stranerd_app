@@ -2,7 +2,7 @@ import { computed, ComputedRef, Ref, ref, watch } from 'vue'
 import { Notify } from '@utils/dialog'
 import { isClient } from '@utils/environment'
 import { NetworkError, StatusCodes } from '@modules/core'
-import { capitalize } from '@utils/commons'
+import { capitalizeText } from '@stranerd/validate'
 import { useAuth } from '@app/composable/auth/auth'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -11,7 +11,7 @@ export const useErrorHandler = () => {
 	const setError = async (error: any, skipAlert = false) => {
 		if (error instanceof NetworkError) {
 			errorState.value = error.errors
-				.map(({ message, field }) => `${capitalize(field ?? 'Error')}: ${message}`)
+				.map(({ message, field }) => `${capitalizeText(field ?? 'Error')}: ${message}`)
 				.join('\n')
 			if ([
 				StatusCodes.NotAuthenticated,
@@ -41,38 +41,6 @@ export const useLoadingHandler = () => {
 	const loadingState = ref(false)
 	const setLoading = async (loading: boolean) => loadingState.value = loading
 	return { loading: loadingState, setLoading }
-}
-
-export const useListener = (startFn: () => Promise<() => void>) => {
-	let listener = null as null | (() => void)
-	const isRunning = ref(false)
-	const watchers = ref(0)
-
-	const close = async () => {
-		watchers.value--
-		if (watchers.value > 0) return
-		listener?.()
-		isRunning.value = false
-	}
-
-	const start = async () => {
-		watchers.value++
-		if (watchers.value > 1) return
-		listener = await startFn()
-		isRunning.value = true
-	}
-
-	const reset = async (reset: () => Promise<() => void>) => {
-		startFn = reset
-		await restart()
-	}
-
-	const restart = async () => {
-		if (isRunning.value) listener = await startFn()
-		else await start()
-	}
-
-	return { start, close, reset, restart, isRunning }
 }
 
 type Meta = {

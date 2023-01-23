@@ -4,16 +4,13 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 
-export default defineComponent({
-	name: 'LoadMore',
-	props: {
-		load: {
-			required: true,
-			type: Function as PropType<() => Promise<void>>
-		}
+defineProps({
+	load: {
+		required: true,
+		type: Function as PropType<() => Promise<void>>
 	}
 })
 </script>

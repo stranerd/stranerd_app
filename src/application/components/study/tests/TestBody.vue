@@ -36,9 +36,9 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useTestDetails } from '@app/composable/study/tests'
-import { computed, defineComponent } from 'vue'
+import { computed } from 'vue'
 import { TestEntity } from '@modules/study'
 import { useCountdown } from '@app/composable/core/dates'
 import { getDigitalTime } from '@utils/dates'
@@ -47,38 +47,29 @@ import { formatNumber } from '@utils/commons'
 import { useRouter } from 'vue-router'
 import { Alert } from '@utils/dialog'
 
-export default defineComponent({
-	name: 'TestBody',
-	components: { TestQuestion },
-	props: {
-		test: {
-			type: TestEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const router = useRouter()
-		const { error, loading, questions, updateAnswer, endTest } = useTestDetails(props.test)
-		const { diffInSec } = useCountdown(props.test.endedAt, {})
-		const countDown = computed({
-			get: () => getDigitalTime(diffInSec.value),
-			set: () => {
-			}
-		})
-		const openSubmitTest = async () => {
-			const res = await Alert({
-				message: 'Are you sure you want to submit?',
-				confirmButtonText: 'Submit'
-			})
-			if (!res) return
-			await endTest()
-			if (props.test.isTimed) await router.push(`/study/tests/${props.test.id}/results`)
-			else await router.push('/dashboard')
-		}
-		return {
-			error, loading, questions, openSubmitTest, updateAnswer,
-			countDown, formatNumber
-		}
+const props = defineProps({
+	test: {
+		type: TestEntity,
+		required: true
 	}
 })
+
+const router = useRouter()
+const { error, loading, questions, updateAnswer, endTest } = useTestDetails(props.test)
+const { diffInSec } = useCountdown(props.test.endedAt, {})
+const countDown = computed({
+	get: () => getDigitalTime(diffInSec.value),
+	set: () => {
+	}
+})
+const openSubmitTest = async () => {
+	const res = await Alert({
+		message: 'Are you sure you want to submit?',
+		confirmButtonText: 'Submit'
+	})
+	if (!res) return
+	await endTest()
+	if (props.test.isTimed) await router.push(`/study/tests/${props.test.id}/results`)
+	else await router.push('/dashboard')
+}
 </script>

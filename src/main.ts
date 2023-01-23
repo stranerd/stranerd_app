@@ -12,7 +12,6 @@ import { clearAllNotifications } from '@utils/push'
 import { router } from '@app/router'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { ChatScroll } from '@app/directives/chat-scroll'
-import { registerServiceWorker } from './registerServiceWorker'
 
 const globalPlugins = [parseLoggedInUser, cssListeners]
 
@@ -34,7 +33,6 @@ const init = async () => {
 			await router.push(path ?? '/dashboard')
 		}),
 		defineCustomElements(window),
-		registerServiceWorker(),
 		clearAllNotifications()
 	]).catch()
 }

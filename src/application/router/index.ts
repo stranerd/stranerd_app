@@ -1,10 +1,19 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router'
-import { routes } from '@app/router/routes'
+// @ts-ignore
+import routes from '~pages'
 import { allModals, allPopovers } from '@app/composable/core/modals'
+import { RouteRecordRaw } from 'vue-router'
+
+const modifiedRoutes = routes.map((r: RouteRecordRaw) => ({
+	...r,
+	path: r.path
+		.replaceAll('?', '')
+		.replaceAll('/:all(.*)/', '/:all(.*)')
+}))
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes,
+	routes: modifiedRoutes,
 	scrollBehavior: async (to) => {
 		if (to.hash) return { el: to.hash }
 	}

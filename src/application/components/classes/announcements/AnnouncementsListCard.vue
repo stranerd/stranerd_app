@@ -17,8 +17,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+<script lang="ts" setup>
+import { onMounted } from 'vue'
 import { AnnouncementEntity, ClassEntity } from '@modules/classes'
 import { formatTime } from '@utils/dates'
 import { useAuth } from '@app/composable/auth/auth'
@@ -27,24 +27,19 @@ import { formatNumber } from '@utils/commons'
 import { markAnnouncementSeen } from '@app/composable/classes/announcements'
 import { openViewedByModal } from '@app/composable/classes/classes'
 
-export default defineComponent({
-	name: 'AnnouncementsListCard',
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		},
-		announcement: {
-			type: AnnouncementEntity,
-			required: true
-		}
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
 	},
-	setup (props) {
-		const { id } = useAuth()
-		onMounted(async () => {
-			await markAnnouncementSeen(props.announcement, id.value)
-		})
-		return { id, formatTime, formatNumber, ellipse, eyeOutline, openViewedByModal }
+	announcement: {
+		type: AnnouncementEntity,
+		required: true
 	}
+})
+
+const { id } = useAuth()
+onMounted(async () => {
+	await markAnnouncementSeen(props.announcement, id.value)
 })
 </script>

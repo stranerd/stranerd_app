@@ -50,38 +50,35 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { ClassEntity, SchemeFactory } from '@modules/classes'
 
-export default defineComponent({
-	name: 'SchemeForm',
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		},
-		factory: {
-			type: SchemeFactory,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		},
-		disabled: {
-			type: Object,
-			required: false,
-			default: () => ({})
-		}
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
+	},
+	factory: {
+		type: SchemeFactory,
+		required: true
+	},
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
+	},
+	disabled: {
+		type: Object,
+		required: false,
+		default: () => ({})
 	}
 })
 </script>

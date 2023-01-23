@@ -1,30 +1,31 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { ClassEntity, ClassesUseCases } from '@modules/classes'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
+import { useListener } from '@app/composable/core/listener'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	classes: Ref<ClassEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useUserClassList = (id = useAuth().id.value) => {
-	if (global[id] === undefined) global[id] = {
+	if (store[id] === undefined) store[id] = {
 		classes: ref([]),
 		fetched: ref(false),
 		listener: useListener(async () => {
 			return await ClassesUseCases.listenToMyClasses(id, {
 				created: async (entity) => {
-					addToArray(global[id].classes.value, entity, (e) => e.id, (e) => e.name, true)
+					addToArray(store[id].classes.value, entity, (e) => e.id, (e) => e.name, true)
 				},
 				updated: async (entity) => {
-					addToArray(global[id].classes.value, entity, (e) => e.id, (e) => e.name, true)
+					addToArray(store[id].classes.value, entity, (e) => e.id, (e) => e.name, true)
 				},
 				deleted: async (entity) => {
-					const index = global[id].classes.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) global[id].classes.value.splice(index, 1)
+					const index = store[id].classes.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) store[id].classes.value.splice(index, 1)
 				}
 			})
 		}),
@@ -33,31 +34,31 @@ export const useUserClassList = (id = useAuth().id.value) => {
 	}
 
 	const fetchClasses = async () => {
-		await global[id].setError('')
+		await store[id].setError('')
 		try {
-			await global[id].setLoading(true)
+			await store[id].setLoading(true)
 			const classes = await ClassesUseCases.getMyClasses(id)
-			classes.results.forEach((c) => addToArray(global[id].classes.value, c, (e) => e.id, (e) => e.name, true))
-			global[id].fetched.value = true
+			classes.results.forEach((c) => addToArray(store[id].classes.value, c, (e) => e.id, (e) => e.name, true))
+			store[id].fetched.value = true
 		} catch (error) {
-			await global[id].setError(error)
+			await store[id].setError(error)
 		}
-		await global[id].setLoading(false)
+		await store[id].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global[id].fetched.value && !global[id].loading.value) await fetchClasses()
-		await global[id].listener.start()
+		if (!store[id].fetched.value && !store[id].loading.value) await fetchClasses()
+		await store[id].listener.start()
 	})
 
 	onUnmounted(async () => {
-		await global[id].listener.close()
+		await store[id].listener.close()
 	})
 
-	const adminClasses = computed(() => global[id].classes.value.filter((c) => c.admins.includes(id)))
+	const adminClasses = computed(() => store[id].classes.value.filter((c) => c.admins.includes(id)))
 
 	return {
-		...global[id], adminClasses,
-		classes: computed(() => global[id].classes.value.filter((q) => q.users.members.includes(id) || q.requests.includes(id)))
+		...store[id], adminClasses,
+		classes: computed(() => store[id].classes.value.filter((q) => q.users.members.includes(id) || q.requests.includes(id)))
 	}
 }

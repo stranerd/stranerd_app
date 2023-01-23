@@ -10,32 +10,17 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { ClassEntity } from '@modules/classes'
 import { useAnnouncementList } from '@app/composable/classes/announcements'
 import AnnouncementsListCard from '@app/components/classes/announcements/AnnouncementsListCard.vue'
 
-export default defineComponent({
-	name: 'AnnouncementsList',
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		}
-	},
-	components: { AnnouncementsListCard },
-	setup (props) {
-		const {
-			loading,
-			error,
-			announcements,
-			hasMore,
-			fetchOlderAnnouncements
-		} = useAnnouncementList(props.classInst.id)
-		return {
-			loading, error, announcements, hasMore, fetchOlderAnnouncements
-		}
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
 	}
 })
+
+const { loading, error, announcements, hasMore, fetchOlderAnnouncements } = useAnnouncementList(props.classInst.id)
 </script>

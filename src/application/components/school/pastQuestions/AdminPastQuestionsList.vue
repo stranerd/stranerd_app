@@ -56,8 +56,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, watch } from 'vue'
+<script lang="ts" setup>
+import { computed, watch } from 'vue'
 import PastQuestionListCard from '@app/components/school/pastQuestions/AdminPastQuestionListCard.vue'
 import { usePastQuestionList } from '@app/composable/school/pastQuestions'
 import { useInstitutionList } from '@app/composable/school/institutions'
@@ -65,24 +65,14 @@ import { PastQuestionType } from '@modules/school'
 import { useCourseList } from '@app/composable/school/courses'
 import { years } from '@utils/constants'
 
-export default defineComponent({
-	name: 'AdminPastQuestionsList',
-	components: { PastQuestionListCard },
-	setup () {
-		const { loading, fetched, error, pastQuestions, filters, fetchPastQuestions } = usePastQuestionList()
-		const { institutions, loading: institutionLoading } = useInstitutionList()
-		const { courses: allCourses, loading: courseLoading, fetchInstitutionCourses } = useCourseList()
-		const courses = computed(() => new Set(allCourses.value.filter((c) => c.institutionId === filters.institution)))
-		const questionTypes = Object.keys(PastQuestionType)
+const { loading, fetched, error, pastQuestions, filters, fetchPastQuestions } = usePastQuestionList()
+const { institutions, loading: institutionLoading } = useInstitutionList()
+const { courses: allCourses, loading: courseLoading, fetchInstitutionCourses } = useCourseList()
+const courses = computed(() => new Set(allCourses.value.filter((c) => c.institutionId === filters.institution)))
+const questionTypes = Object.keys(PastQuestionType)
 
-		watch(() => filters.institution, async () => {
-			if (filters.institution) await fetchInstitutionCourses(filters.institution)
-		})
-
-		return {
-			loading, institutionLoading, courseLoading, error, pastQuestions, filters, fetched,
-			institutions, courses, years, questionTypes, fetchPastQuestions
-		}
-	}
+watch(() => filters.institution, async () => {
+	if (filters.institution) await fetchInstitutionCourses(filters.institution)
 })
+
 </script>

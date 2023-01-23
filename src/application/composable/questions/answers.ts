@@ -1,20 +1,21 @@
 import { onMounted, onUnmounted, ref, Ref } from 'vue'
 import { AnswerEntity, AnswerFactory, AnswersUseCases, QuestionEntity, QuestionsUseCases } from '@modules/questions'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { addToArray } from '@utils/commons'
 import { InteractionEntities, LikeEntity, LikesUseCases } from '@modules/interactions'
+import { useListener } from '@app/composable/core/listener'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	answers: Ref<AnswerEntity[]>
 	fetched: Ref<boolean>
 	likes: Ref<Record<string, LikeEntity>>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-const answerGlobal = {} as Record<string, {
+const answerStore = {} as Record<string, {
 	answer: Ref<AnswerEntity | null>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
@@ -23,27 +24,27 @@ const answerGlobal = {} as Record<string, {
 const getLikesOfAnswers = async (userId: string, questionId: string, answerIds: string[]) => {
 	const { results: likes } = await LikesUseCases.getInList(userId, answerIds, InteractionEntities.answers)
 	likes.forEach((like) => {
-		global[questionId].likes.value[like.entity.id] = like
+		store[questionId].likes.value[like.entity.id] = like
 	})
 }
 
 export const useAnswerList = (questionId: string) => {
 	const { id } = useAuth()
-	if (global[questionId] === undefined) {
+	if (store[questionId] === undefined) {
 		const listener = useListener(async () => {
 			return await AnswersUseCases.listenToQuestionAnswers(questionId, {
 				created: async (entity) => {
-					addToArray(global[questionId].answers.value, entity, (e) => e.id, (e) => e.createdAt, true)
+					addToArray(store[questionId].answers.value, entity, (e) => e.id, (e) => e.createdAt, true)
 				},
 				updated: async (entity) => {
-					addToArray(global[questionId].answers.value, entity, (e) => e.id, (e) => e.createdAt, true)
+					addToArray(store[questionId].answers.value, entity, (e) => e.id, (e) => e.createdAt, true)
 				},
 				deleted: async (entity) => {
-					global[questionId].answers.value = global[questionId].answers.value.filter((c) => c.id !== entity.id)
+					store[questionId].answers.value = store[questionId].answers.value.filter((c) => c.id !== entity.id)
 				}
 			})
 		})
-		global[questionId] = {
+		store[questionId] = {
 			answers: ref([]),
 			likes: ref({}),
 			fetched: ref(false),
@@ -54,32 +55,32 @@ export const useAnswerList = (questionId: string) => {
 	}
 
 	const fetchAnswers = async () => {
-		await global[questionId].setError('')
+		await store[questionId].setError('')
 		try {
-			await global[questionId].setLoading(true)
+			await store[questionId].setLoading(true)
 			const answers = await AnswersUseCases.getQuestionAnswers(questionId)
-			answers.results.forEach((a) => addToArray(global[questionId].answers.value, a, (e) => e.id, (e) => e.createdAt, true))
+			answers.results.forEach((a) => addToArray(store[questionId].answers.value, a, (e) => e.id, (e) => e.createdAt, true))
 			await getLikesOfAnswers(id.value, questionId, answers.results.map((a) => a.id))
-			global[questionId].fetched.value = true
+			store[questionId].fetched.value = true
 		} catch (error) {
-			await global[questionId].setError(error)
+			await store[questionId].setError(error)
 		}
-		await global[questionId].setLoading(false)
+		await store[questionId].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global[questionId].fetched.value && !global[questionId].loading.value) await fetchAnswers()
-		await global[questionId].listener.start()
+		if (!store[questionId].fetched.value && !store[questionId].loading.value) await fetchAnswers()
+		await store[questionId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[questionId].listener.close()
+		await store[questionId].listener.close()
 	})
 
 	return {
-		error: global[questionId].error,
-		loading: global[questionId].loading,
-		answers: global[questionId].answers,
-		likes: global[questionId].likes
+		error: store[questionId].error,
+		loading: store[questionId].loading,
+		answers: store[questionId].answers,
+		likes: store[questionId].likes
 	}
 }
 
@@ -130,13 +131,13 @@ export const useAnswer = (answer: AnswerEntity) => {
 	const likeAnswer = async (value: boolean) => {
 		const userId = useAuth().id.value
 		if (!userId) return
-		const liked = global[answer.questionId].likes.value[answer.id]
+		const liked = store[answer.questionId].likes.value[answer.id]
 		if (liked && liked.value === value) return
 		await setError('')
 		try {
 			await setLoading(true)
 			const like = await LikesUseCases.add({ id: answer.id, type: InteractionEntities.answers }, value)
-			global[answer.questionId].likes.value[like.entity.id] = like
+			store[answer.questionId].likes.value[like.entity.id] = like
 		} catch (error) {
 			await setError(error)
 		}
@@ -168,20 +169,20 @@ export const useAnswer = (answer: AnswerEntity) => {
 
 export const useAnswerById = (answerId: string) => {
 	const fetchAnswer = async () => {
-		await answerGlobal[answerId].setError('')
+		await answerStore[answerId].setError('')
 		try {
-			await answerGlobal[answerId].setLoading(true)
-			answerGlobal[answerId].answer.value = await AnswersUseCases.find(answerId)
+			await answerStore[answerId].setLoading(true)
+			answerStore[answerId].answer.value = await AnswersUseCases.find(answerId)
 		} catch (error) {
-			await answerGlobal[answerId].setError(error)
+			await answerStore[answerId].setError(error)
 		}
-		await answerGlobal[answerId].setLoading(false)
+		await answerStore[answerId].setLoading(false)
 	}
 
-	if (answerGlobal[answerId] === undefined) {
+	if (answerStore[answerId] === undefined) {
 		const listener = useListener(async () => {
 			const setAnswer = async (entity: AnswerEntity) => {
-				answerGlobal[answerId].answer.value = entity
+				answerStore[answerId].answer.value = entity
 			}
 			return await AnswersUseCases.listenToOne(answerId, {
 				created: setAnswer,
@@ -189,7 +190,7 @@ export const useAnswerById = (answerId: string) => {
 				deleted: setAnswer
 			})
 		})
-		answerGlobal[answerId] = {
+		answerStore[answerId] = {
 			answer: ref(null),
 			fetched: ref(false),
 			listener,
@@ -199,14 +200,14 @@ export const useAnswerById = (answerId: string) => {
 	}
 
 	onMounted(async () => {
-		if (!answerGlobal[answerId].fetched.value && !answerGlobal[answerId].loading.value) await fetchAnswer()
-		await answerGlobal[answerId].listener.start()
+		if (!answerStore[answerId].fetched.value && !answerStore[answerId].loading.value) await fetchAnswer()
+		await answerStore[answerId].listener.start()
 	})
 	onUnmounted(async () => {
-		await answerGlobal[answerId].listener.close()
+		await answerStore[answerId].listener.close()
 	})
 
-	return { ...answerGlobal[answerId] }
+	return { ...answerStore[answerId] }
 }
 
 let editingQuestionAnswer = null as { answer: AnswerEntity, question: QuestionEntity } | null

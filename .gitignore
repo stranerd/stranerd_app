@@ -42,4 +42,3 @@ sw.*
 capacitor.config.json
 public/.well-known/assetlinks.json
 public/.well-known/apple-app-site-association
-components.d.ts

@@ -46,7 +46,7 @@
 
 		<div class="mb-8">
 			<label>Question</label>
-			<IonTextarea v-model="factory.question" class="mb-2" placeholder="Enter Question" rows="3" />
+			<IonTextarea v-model="factory.question" class="mb-2" placeholder="Enter Question" :rows="3" />
 			<DisplayError :error="factory.errors.question" />
 		</div>
 
@@ -57,8 +57,8 @@
 						<IonIcon :icon="trashBinOutline" class="text-danger"
 							@click="factory.removeOption(index)" />
 						<IonTextarea v-model="factory.options[index]"
-							:placeholder="`Enter Option ${getAlphabet(index + 1).toUpperCase()}`"
-							class="my-0 flex-grow" rows="3" />
+							:placeholder="`Enter Option ${getAlphabet(index).toUpperCase()}`"
+							:rows="3" class="my-0 flex-grow" />
 						<IonRadio :value="index" />
 					</div>
 				</IonRadioGroup>
@@ -69,14 +69,14 @@
 			</div>
 			<div class="mb-8">
 				<label>Explanation</label>
-				<IonTextarea v-model="factory.explanation" class="mb-2" placeholder="Enter Explanation" rows="3" />
+				<IonTextarea v-model="factory.explanation" class="mb-2" placeholder="Enter Explanation" :rows="3" />
 				<DisplayError :error="factory.errors.explanation" />
 			</div>
 		</template>
 		<template v-else>
 			<div class="mb-8">
 				<label>Answer</label>
-				<IonTextarea v-model="factory.answer" class="mb-2" placeholder="Enter Answer" rows="3" />
+				<IonTextarea v-model="factory.answer" class="mb-2" placeholder="Enter Answer" :rows="3" />
 				<DisplayError :error="factory.errors.answer" />
 			</div>
 		</template>
@@ -93,43 +93,35 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { computed, PropType } from 'vue'
 import { PastQuestionFactory } from '@modules/school'
-import { getAlphabet } from '@utils/commons'
+import { getAlphabet } from '@stranerd/validate'
 import { addOutline, trashBinOutline } from 'ionicons/icons'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'
 import { years } from '@utils/constants'
 
-export default defineComponent({
-	name: 'PastQuestionForm',
-	props: {
-		factory: {
-			type: PastQuestionFactory,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		}
+const props = defineProps({
+	factory: {
+		type: PastQuestionFactory,
+		required: true
 	},
-	setup (props) {
-		const { institutions, loading: institutionLoading } = useInstitutionList()
-		const { courses: allCourses, loading: courseLoading } = useCourseList()
-		const courses = computed(() => allCourses.value.filter((c) => c.institutionId === props.factory.institutionId))
-		return {
-			getAlphabet, addOutline, trashBinOutline,
-			institutions, courses, institutionLoading, courseLoading, years
-		}
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
 	}
 })
+
+const { institutions, loading: institutionLoading } = useInstitutionList()
+const { courses: allCourses, loading: courseLoading } = useCourseList()
+const courses = computed(() => allCourses.value.filter((c) => c.institutionId === props.factory.institutionId))
 </script>

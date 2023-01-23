@@ -6,7 +6,7 @@ import { useSchoolModal } from '@app/composable/core/modals'
 import { addToArray } from '@utils/commons'
 import { useRouter } from 'vue-router'
 
-const global = {
+const store = {
 	fetched: ref(false),
 	departments: ref([] as DepartmentEntity[]),
 	faculties: {} as Record<string, boolean>,
@@ -15,33 +15,33 @@ const global = {
 }
 
 const fetchDepartments = async (facultyId: string) => {
-	if (global.faculties[facultyId]) return
-	await global.setError('')
-	await global.setLoading(true)
+	if (store.faculties[facultyId]) return
+	await store.setError('')
+	await store.setLoading(true)
 	try {
 		const departments = await DepartmentsUseCases.getFacultyDepartments(facultyId)
-		departments.results.forEach((c) => addToArray(global.departments.value, c, (e) => e.id, (e) => e.name, true))
-		global.fetched.value = true
-		global.faculties[facultyId] = true
+		departments.results.forEach((c) => addToArray(store.departments.value, c, (e) => e.id, (e) => e.name, true))
+		store.fetched.value = true
+		store.faculties[facultyId] = true
 	} catch (error) {
-		await global.setError(error)
+		await store.setError(error)
 	}
-	await global.setLoading(false)
+	await store.setLoading(false)
 }
 
 export const useDepartmentList = () => {
-	return { ...global, fetchDepartments }
+	return { ...store, fetchDepartments }
 }
 
 export const useDepartment = (facultyId: string, id: string) => {
 	const department = computed({
-		get: () => global.departments.value.find((s) => s.id === id) ?? null,
+		get: () => store.departments.value.find((s) => s.id === id) ?? null,
 		set: (c) => {
-			if (c) addToArray(global.departments.value, c, (e) => e.id, (e) => e.name, true)
+			if (c) addToArray(store.departments.value, c, (e) => e.id, (e) => e.name, true)
 		}
 	})
 	onMounted(async () => {
-		if (!global.faculties[facultyId]) await fetchDepartments(facultyId)
+		if (!store.faculties[facultyId]) await fetchDepartments(facultyId)
 	})
 
 	return { department }
@@ -67,7 +67,7 @@ export const useCreateDepartment = () => {
 			await setLoading(true)
 			try {
 				const department = await DepartmentsUseCases.add(factory.value)
-				addToArray(global.departments.value, department, (e) => e.id, (e) => e.name, true)
+				addToArray(store.departments.value, department, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeCreateDepartment()
 				await setMessage('Department created successfully')
@@ -103,7 +103,7 @@ export const useEditDepartment = () => {
 			await setLoading(true)
 			try {
 				const updatedDepartment = await DepartmentsUseCases.update(editingDepartment!.id, factory.value)
-				addToArray(global.departments.value, updatedDepartment, (e) => e.id, (e) => e.name, true)
+				addToArray(store.departments.value, updatedDepartment, (e) => e.id, (e) => e.name, true)
 				factory.value.reset()
 				useSchoolModal().closeEditDepartment()
 				await setMessage('Department updated successfully')
@@ -133,7 +133,7 @@ export const useDeleteDepartment = (departmentId: string) => {
 			await setLoading(true)
 			try {
 				await DepartmentsUseCases.delete(departmentId)
-				global.departments.value = global.departments.value
+				store.departments.value = store.departments.value
 					.filter((s) => s.id !== departmentId)
 				await setMessage('Department deleted successfully')
 			} catch (error) {

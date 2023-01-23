@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 
 export enum SetSaved {
 	questions = 'questions',
@@ -26,8 +26,8 @@ export class SetEntity extends BaseEntity {
 	             }: SetConstructorArgs) {
 		super()
 		this.id = id
-		this.user = generateEmbeddedUser(user)
-		this.name = !name ? 'My Library' : name
+		this.user = user
+		this.name = name
 		this.saved = saved
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt

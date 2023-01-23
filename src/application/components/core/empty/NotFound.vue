@@ -5,17 +5,12 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-	name: 'NotFound',
-	props: {
-		title: {
-			type: String,
-			required: false,
-			default: 'Page not found'
-		}
+<script lang="ts" setup>
+defineProps({
+	title: {
+		type: String,
+		required: false,
+		default: 'Page not found'
 	}
 })
 </script>

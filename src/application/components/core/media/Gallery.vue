@@ -6,25 +6,19 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { Media } from '@modules/core'
 import { openViewFile } from '@app/composable/meta/media'
 
-export default defineComponent({
-	name: 'Gallery',
-	props: {
-		media: {
-			type: Array as PropType<Media[]>,
-			required: true
-		},
-		path: {
-			type: String,
-			required: true
-		}
+defineProps({
+	media: {
+		type: Array as PropType<Media[]>,
+		required: true
 	},
-	setup () {
-		return { openViewFile }
+	path: {
+		type: String,
+		required: true
 	}
 })
 </script>

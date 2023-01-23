@@ -3,6 +3,7 @@
 		<div class="showcase-flex text-secondaryText">
 			<router-link v-for="item in [
 					{ name: 'Edit Profile', icon: personOutline, route: '/settings/profile' },
+					{ name: 'Edit Phone', icon: callOutline, route: '/settings/phone' },
 					{ name: 'Edit School', icon: schoolOutline, route: '/settings/school' },
 					{ name: 'Security', icon: shieldCheckmarkOutline, route: '/settings/security' },
 					{ name: 'Subscription', route: '/account/subscription', icon: cardOutline },
@@ -31,6 +32,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import {
+	callOutline,
 	cardOutline,
 	informationCircleOutline,
 	logOutOutline,
@@ -54,7 +56,7 @@ export default defineComponent({
 		const { deleteAccount, loading: deleteAccountLoading } = useDeleteAccount()
 		return {
 			signout, signoutLoading, deleteAccount, deleteAccountLoading,
-			personOutline, schoolOutline, notificationsOutline, shieldCheckmarkOutline,
+			personOutline, schoolOutline, notificationsOutline, shieldCheckmarkOutline, callOutline,
 			informationCircleOutline, mailOutline, logOutOutline, cardOutline, trashBinOutline
 		}
 	}

@@ -7,7 +7,7 @@ import { ChatType } from '@modules/messaging'
 import { imageMimeTypes, videoMimeTypes } from '@stranerd/validate'
 
 const searchFields = ['body', 'media.name']
-type Library = 'images' | 'videos' | 'docs' | 'links'
+type Library = 'images' | 'videos' | 'docs' | 'links' | string
 
 export class ChatsUseCase {
 	private repository: IChatRepository

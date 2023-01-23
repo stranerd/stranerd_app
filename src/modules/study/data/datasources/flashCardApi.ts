@@ -43,4 +43,8 @@ export class FlashCardApiDataSource implements FlashCardBaseDataSource {
 	async update (id: string, data: FlashCardToModel) {
 		return await this.stranerdClient.put<FlashCardToModel, FlashCardFromModel>(`/${id}`, data)
 	}
+
+	async saveMatch (id: string, time: number) {
+		return await this.stranerdClient.post<{ time: number }, { time: number, record: boolean }>(`/${id}/match`, { time })
+	}
 }

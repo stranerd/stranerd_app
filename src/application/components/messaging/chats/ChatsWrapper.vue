@@ -35,8 +35,8 @@
 	</DefaultLayout>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import { arrowBackOutline, createOutline } from 'ionicons/icons'
 import { openGroupEditModal, useGroupList } from '@app/composable/classes/groups'
 import { formatTime } from '@utils/dates'
@@ -47,22 +47,12 @@ import ChatsList from '@app/components/messaging/chats/ChatsList.vue'
 import ChatForm from '@app/components/messaging/chats/ChatForm.vue'
 import { useRoute } from 'vue-router'
 
-export default defineComponent({
-	name: 'ChatsWrapper',
-	components: { ChatsList, ChatForm },
-	setup () {
-		const { id } = useAuth()
-		const route = useRoute()
-		const { to, classId } = route.params as { to: string, classId: string }
-		const { loading, error, meta } = useChatMetas()
-		const chatMeta = computed(() => meta.value.find((m) => m.getTo(id.value) === to) ?? null)
-		const { groups } = useGroupList(classId ?? '---')
-		const { user } = useUser(to)
-		const group = computed(() => groups.value.find((group) => group.id === to) ?? null)
-		return {
-			to, arrowBackOutline, createOutline,
-			formatTime, loading, error, chatMeta, id, openGroupEditModal, group, user
-		}
-	}
-})
+const { id } = useAuth()
+const route = useRoute()
+const { to, classId } = route.params as { to: string, classId: string }
+const { loading, error, meta } = useChatMetas()
+const chatMeta = computed(() => meta.value.find((m) => m.getTo(id.value) === to) ?? null)
+const { groups } = useGroupList(classId ?? '---')
+const { user } = useUser(to)
+const group = computed(() => groups.value.find((group) => group.id === to) ?? null)
 </script>

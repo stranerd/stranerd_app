@@ -24,27 +24,20 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { UserEntity } from '@modules/users'
 import { WalletEntity } from '@modules/payment'
 import { businessOutline, cardOutline, fileTrayFullOutline } from 'ionicons/icons'
 import { formatCurrency } from '@utils/commons'
 
-export default defineComponent({
-	name: 'UserWallet',
-	props: {
-		user: {
-			type: UserEntity,
-			required: true
-		},
-		wallet: {
-			type: WalletEntity,
-			required: true
-		}
+defineProps({
+	user: {
+		type: UserEntity,
+		required: true
 	},
-	setup () {
-		return { formatCurrency, businessOutline, cardOutline, fileTrayFullOutline }
+	wallet: {
+		type: WalletEntity,
+		required: true
 	}
 })
 </script>

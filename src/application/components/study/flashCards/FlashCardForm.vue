@@ -8,7 +8,7 @@
 
 		<div class="flex flex-col gap-2">
 			<IonLabel class="text-lg">Cards ({{ factory.questions.length }})</IonLabel>
-			<IonReorderGroup class="flex flex-col gap-4" disabled="true">
+			<IonReorderGroup :disabled="true" class="flex flex-col gap-4">
 				<IonReorder v-for="(card, index) in factory.questions" :key="index"
 					class="flex flex-col p-4 gap-2 rounded-lg border border-itemBg">
 					<div class="flex w-full items-center justify-between">
@@ -38,33 +38,27 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { addOutline, closeOutline, trashBinOutline } from 'ionicons/icons'
+<script lang="ts" setup>
+import { PropType } from 'vue'
+import { addOutline, trashBinOutline } from 'ionicons/icons'
 import { FlashCardFactory } from '@modules/study'
 
-export default defineComponent({
-	name: 'FlashcardForm',
-	props: {
-		factory: {
-			type: FlashCardFactory,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		}
+defineProps({
+	factory: {
+		type: FlashCardFactory,
+		required: true
 	},
-	setup () {
-		return { closeOutline, trashBinOutline, addOutline }
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
 	}
 })
 </script>

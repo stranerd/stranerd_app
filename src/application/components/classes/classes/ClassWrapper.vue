@@ -1,7 +1,7 @@
 <template>
 	<DefaultLayout>
 		<template v-if="classInst && classInst.admins.includes(id)" v-slot:content-top-left>
-			<slot :classInst="classInst" name="header" />
+			<slot v-if="classInst" :classInst="classInst" name="header" />
 		</template>
 		<div class="flex flex-col h-full">
 			<BlockLoading v-if="loading" />
@@ -18,29 +18,22 @@
 	</DefaultLayout>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useRoute } from 'vue-router'
 import { useClass } from '@app/composable/classes/classes'
 import { useAuth } from '@app/composable/auth/auth'
 import SearchClassListCard from '@app/components/classes/classes/SearchClassListCard.vue'
 
-export default defineComponent({
-	name: 'ClassWrapper',
-	components: { SearchClassListCard },
-	props: {
-		hideTitle: {
-			type: Boolean,
-			required: false,
-			default: false
-		}
-	},
-	setup () {
-		const { id } = useAuth()
-		const route = useRoute()
-		const { classId } = route.params
-		const { loading, error, classInst } = useClass(classId as string)
-		return { loading, error, classInst, id }
+const props = defineProps({
+	hideTitle: {
+		type: Boolean,
+		required: false,
+		default: false
 	}
 })
+
+const { id } = useAuth()
+const route = useRoute()
+const { classId } = route.params
+const { loading, error, classInst } = useClass(classId as string)
 </script>

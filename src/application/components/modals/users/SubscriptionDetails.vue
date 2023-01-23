@@ -42,26 +42,21 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { getCurrentlySubscribingTo } from '@app/composable/payment/plans'
 import { useWallet } from '@app/composable/payment/wallets'
 import { formatCurrency } from '@utils/commons'
 import { checkmarkOutline } from 'ionicons/icons'
+import { PropType } from 'vue'
 
-export default defineComponent({
-	name: 'SubscriptionDetails',
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup (props) {
-		const plan = getCurrentlySubscribingTo()
-		if (!plan) props.close()
-		const { loading, error, subscribeToPlan } = useWallet()
-		return { loading, error, formatCurrency, plan, subscribeToPlan, checkmarkOutline }
+const props = defineProps({
+	close: {
+		type: Function as PropType<() => void>,
+		required: true
 	}
 })
+
+const plan = getCurrentlySubscribingTo()
+if (!plan) props.close()
+const { loading, error, subscribeToPlan } = useWallet()
 </script>

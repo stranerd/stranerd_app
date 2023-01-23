@@ -15,22 +15,16 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useTutorsList } from '@app/composable/users/roles/tutors'
 import { UserEntity } from '@modules/users'
 
-export default defineComponent({
-	name: 'TutorsListCard',
-	props: {
-		user: {
-			required: true,
-			type: UserEntity
-		}
-	},
-	setup () {
-		const { loading, error, tutorUser } = useTutorsList()
-		return { loading, error, tutorUser }
+defineProps({
+	user: {
+		required: true,
+		type: UserEntity
 	}
 })
+
+const { loading, error, tutorUser } = useTutorsList()
 </script>

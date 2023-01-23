@@ -1,7 +1,7 @@
 import { useAuth } from '@app/composable/auth/auth'
 import { AuthUseCases } from '@modules/auth'
 import { deleteTokens, getTokens } from '@utils/tokens'
-import { definePlugin } from '@app/plugins/index'
+import { definePlugin } from '@app/plugins'
 import { setEmailVerificationEmail } from '@app/composable/auth/signin'
 
 export const parseLoggedInUser = definePlugin(async ({ router }) => {
@@ -15,5 +15,5 @@ export const parseLoggedInUser = definePlugin(async ({ router }) => {
 		setEmailVerificationEmail(user.email)
 		await router.push('/auth/verify')
 	}
-	if (isLoggedIn.value) await signin(true)
+	if (isLoggedIn.value) await signin(true, router)
 })

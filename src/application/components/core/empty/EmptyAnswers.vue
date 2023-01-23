@@ -6,15 +6,3 @@
 	</div>
 	<SuggestedActions />
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { arrowForwardOutline, bookOutline, copyOutline, helpCircleOutline } from 'ionicons/icons'
-
-export default defineComponent({
-	name: 'EmptyAnswers',
-	setup () {
-		return { arrowForwardOutline, helpCircleOutline, copyOutline, bookOutline }
-	}
-})
-</script>

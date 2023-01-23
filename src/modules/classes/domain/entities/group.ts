@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 import { ClassUsers } from '@modules/classes/domain/types'
 
 type GroupConstructorArgs = {
@@ -22,13 +22,13 @@ export class GroupEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-					 id, name, user, users, createdAt, classId, updatedAt
-				 }: GroupConstructorArgs) {
+		             id, name, user, users, createdAt, classId, updatedAt
+	             }: GroupConstructorArgs) {
 		super()
 		this.id = id
 		this.name = name
 		this.classId = classId
-		this.user = generateEmbeddedUser(user)
+		this.user = user
 		this.users = users
 		this.createdAt = createdAt
 		this.updatedAt = updatedAt

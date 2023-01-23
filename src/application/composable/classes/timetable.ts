@@ -1,12 +1,13 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { ClassEntity, EventEntity, EventFactory, EventsUseCases, EventType } from '@modules/classes'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
 import { useClassModal } from '@app/composable/core/modals'
 import { Router, useRouter } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
+import { useListener } from '@app/composable/core/listener'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	events: Ref<EventEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
@@ -14,21 +15,21 @@ const global = {} as Record<string, {
 
 export const useTimetable = (classId: string) => {
 	const { id } = useAuth()
-	if (global[classId] === undefined) {
+	if (store[classId] === undefined) {
 		const listener = useListener(async () => {
 			return await EventsUseCases.listenToClassTimetable(classId, {
 				created: async (entity) => {
-					addToArray(global[classId].events.value, entity, (e) => e.id, (e) => e.startOrder, true)
+					addToArray(store[classId].events.value, entity, (e) => e.id, (e) => e.startOrder, true)
 				},
 				updated: async (entity) => {
-					addToArray(global[classId].events.value, entity, (e) => e.id, (e) => e.startOrder, true)
+					addToArray(store[classId].events.value, entity, (e) => e.id, (e) => e.startOrder, true)
 				},
 				deleted: async (entity) => {
-					global[classId].events.value = global[classId].events.value.filter((c) => c.id !== entity.id)
+					store[classId].events.value = store[classId].events.value.filter((c) => c.id !== entity.id)
 				}
 			})
 		})
-		global[classId] = {
+		store[classId] = {
 			events: ref([]),
 			fetched: ref(false),
 			listener,
@@ -37,33 +38,33 @@ export const useTimetable = (classId: string) => {
 		}
 	}
 
-	const unReadTimetable = computed(() => global[classId].events.value.filter((a) => !a.isRead(id.value)).length)
+	const unReadTimetable = computed(() => store[classId].events.value.filter((a) => !a.isRead(id.value)).length)
 
 	const fetchEvents = async () => {
-		await global[classId].setError('')
+		await store[classId].setError('')
 		try {
-			await global[classId].setLoading(true)
+			await store[classId].setLoading(true)
 			const events = await EventsUseCases.getClassTimetable(classId)
-			events.results.forEach((g) => addToArray(global[classId].events.value, g, (e) => e.id, (e) => e.startOrder, true))
-			global[classId].fetched.value = true
+			events.results.forEach((g) => addToArray(store[classId].events.value, g, (e) => e.id, (e) => e.startOrder, true))
+			store[classId].fetched.value = true
 		} catch (error) {
-			await global[classId].setError(error)
+			await store[classId].setError(error)
 		}
-		await global[classId].setLoading(false)
+		await store[classId].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global[classId].fetched.value && !global[classId].loading.value) await fetchEvents()
-		await global[classId].listener.start()
+		if (!store[classId].fetched.value && !store[classId].loading.value) await fetchEvents()
+		await store[classId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[classId].listener.close()
+		await store[classId].listener.close()
 	})
 
 	return {
-		error: global[classId].error,
-		loading: global[classId].loading,
-		events: global[classId].events,
+		error: store[classId].error,
+		loading: store[classId].loading,
+		events: store[classId].events,
 		unReadTimetable
 	}
 }

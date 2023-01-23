@@ -11,23 +11,17 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useCreateNote } from '@app/composable/study/notes'
 import NoteForm from '@app/components/study/notes/NoteForm.vue'
+import { PropType } from 'vue'
 
-export default defineComponent({
-	name: 'CreateNoteModal',
-	components: { NoteForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { createNote, factory, error, loading } = useCreateNote()
-		return { error, loading, createNote, factory }
+defineProps({
+	close: {
+		type: Function as PropType<() => void>,
+		required: true
 	}
 })
+
+const { createNote, factory, error, loading } = useCreateNote()
 </script>

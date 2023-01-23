@@ -1,6 +1,6 @@
 import { AuthBaseDataSource } from '../datasources/authBase'
 import { IAuthRepository } from '../../domain/irepositories/iauth'
-import { AfterAuthUser, AuthExtras, NewUser, PasswordUpdate, ProfileUpdate } from '../../domain/entities/auth'
+import { AfterAuthUser, AuthExtras, NewUser, PasswordUpdate, Phone, ProfileUpdate } from '../../domain/entities/auth'
 
 export class AuthRepository implements IAuthRepository {
 	private dataSource: AuthBaseDataSource
@@ -35,6 +35,14 @@ export class AuthRepository implements IAuthRepository {
 
 	async completeEmailVerification (token: string) {
 		return await this.dataSource.completeEmailVerification(token)
+	}
+
+	async sendVerificationText (phone: Phone) {
+		return await this.dataSource.sendVerificationText(phone)
+	}
+
+	async completePhoneVerification (token: string) {
+		return await this.dataSource.completePhoneVerification(token)
 	}
 
 	async sendPasswordResetEmail (email: string) {

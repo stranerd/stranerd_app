@@ -15,20 +15,14 @@
 	</Popover>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { alertCircleOutline } from 'ionicons/icons'
+import { PropType } from 'vue'
 
-export default defineComponent({
-	name: 'NoMoreQuestions',
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		return { alertCircleOutline }
+defineProps({
+	close: {
+		type: Function as PropType<() => void>,
+		required: true
 	}
 })
 </script>

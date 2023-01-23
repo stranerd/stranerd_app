@@ -1,9 +1,10 @@
 import { onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import { AnswerEntity, AnswersUseCases } from '@modules/questions'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { addToArray } from '@utils/commons'
+import { useListener } from '@app/composable/core/listener'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	answers: Ref<AnswerEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
@@ -13,7 +14,7 @@ const global = {} as Record<string, {
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useUserAnswerList = (id: string) => {
-	if (global[id] === undefined) global[id] = {
+	if (store[id] === undefined) store[id] = {
 		answers: ref([]),
 		fetched: ref(false),
 		hasMore: ref(false),
@@ -25,35 +26,35 @@ export const useUserAnswerList = (id: string) => {
 	}
 
 	const fetchAnswers = async () => {
-		await global[id].setError('')
+		await store[id].setError('')
 		try {
-			await global[id].setLoading(true)
-			const answers = await AnswersUseCases.getUserAnswers(id, global[id].answers.value.at(-1)?.createdAt)
-			global[id].hasMore.value = !!answers.pages.next
-			answers.results.forEach((a) => addToArray(global[id].answers.value, a, (e) => e.id, (e) => e.createdAt))
-			global[id].fetched.value = true
+			await store[id].setLoading(true)
+			const answers = await AnswersUseCases.getUserAnswers(id, store[id].answers.value.at(-1)?.createdAt)
+			store[id].hasMore.value = !!answers.pages.next
+			answers.results.forEach((a) => addToArray(store[id].answers.value, a, (e) => e.id, (e) => e.createdAt))
+			store[id].fetched.value = true
 		} catch (error) {
-			await global[id].setError(error)
+			await store[id].setError(error)
 		}
-		await global[id].setLoading(false)
+		await store[id].setLoading(false)
 	}
 
 	const listener = useListener(async () => {
 		return await AnswersUseCases.listenToUserAnswers(id, {
 			created: async (entity) => {
-				addToArray(global[id].answers.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(store[id].answers.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				addToArray(global[id].answers.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(store[id].answers.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
-				global[id].answers.value = global[id].answers.value.filter((c) => c.id !== entity.id)
+				store[id].answers.value = store[id].answers.value.filter((c) => c.id !== entity.id)
 			}
-		}, global[id].answers.value.at(-1)?.createdAt)
+		}, store[id].answers.value.at(-1)?.createdAt)
 	})
 
 	onMounted(async () => {
-		if (!global[id].fetched.value && !global[id].loading.value) await fetchAnswers()
+		if (!store[id].fetched.value && !store[id].loading.value) await fetchAnswers()
 		await listener.start()
 	})
 
@@ -62,22 +63,22 @@ export const useUserAnswerList = (id: string) => {
 	})
 
 	const search = async () => {
-		const searchValue = global[id].searchValue.value
+		const searchValue = store[id].searchValue.value
 		if (!searchValue) return
-		global[id].searchMode.value = true
-		await global[id].setError('')
+		store[id].searchMode.value = true
+		await store[id].setError('')
 		try {
-			await global[id].setLoading(true)
-			global[id].searchResults.value = await AnswersUseCases.searchUserAnswers(id, searchValue)
+			await store[id].setLoading(true)
+			store[id].searchResults.value = await AnswersUseCases.searchUserAnswers(id, searchValue)
 		} catch (error) {
-			await global[id].setError(error)
+			await store[id].setError(error)
 		}
-		await global[id].setLoading(false)
+		await store[id].setLoading(false)
 	}
 
-	watch(global[id].searchValue, () => {
-		if (!global[id].searchValue.value) global[id].searchMode.value = false
+	watch(store[id].searchValue, () => {
+		if (!store[id].searchValue.value) store[id].searchMode.value = false
 	})
 
-	return { ...global[id], fetchOlderAnswers: fetchAnswers, search }
+	return { ...store[id], fetchOlderAnswers: fetchAnswers, search }
 }

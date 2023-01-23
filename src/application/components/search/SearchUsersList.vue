@@ -5,19 +5,15 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import UserListCard from '@app/components/users/UserListCard.vue'
 import { UserEntity } from '@modules/users'
 
-export default defineComponent({
-	name: 'SearchUsersList',
-	components: { UserListCard },
-	props: {
-		users: {
-			type: Array as PropType<UserEntity[]>,
-			required: true
-		}
+defineProps({
+	users: {
+		type: Array as PropType<UserEntity[]>,
+		required: true
 	}
 })
 </script>

@@ -21,49 +21,47 @@
 	</component>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { computed, PropType } from 'vue'
 import { Media, UploadedFile } from '@modules/core'
 import { cameraOutline } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
+import { parseURL } from '@utils/commons'
 
 const DEFAULT_PROFILE_PHOTO = '/images/avatars/user_profile.svg'
-export default defineComponent({
-	name: 'Avatar',
-	props: {
-		id: {
-			type: String,
-			default: ''
-		},
-		src: {
-			type: Object as PropType<Media | UploadedFile | null>,
-			default: null,
-			validator: (p: any) => p === null || p === undefined || typeof p.link === 'string' || typeof p.url === 'string'
-		},
-		name: {
-			type: String,
-			required: false,
-			default: ''
-		},
-		size: {
-			required: false,
-			type: Number,
-			default: 40
-		},
-		editable: {
-			type: Boolean,
-			required: false,
-			default: false
-		}
+
+const props = defineProps({
+	id: {
+		type: String,
+		default: ''
 	},
-	setup (props, { emit }) {
-		const source = computed({
-			get: () => typeof props.src?.link === 'string' ? props.src.link : false,
-			set: () => {
-			}
-		})
-		const catchPhoto = useFileInputCallback(async ([file]) => emit('photo', file))
-		return { source, DEFAULT_PROFILE_PHOTO, cameraOutline, catchPhoto }
+	src: {
+		type: Object as PropType<Media | UploadedFile | null>,
+		default: null,
+		validator: (p: any) => p === null || p === undefined || typeof p.link === 'string' || typeof p.url === 'string'
+	},
+	name: {
+		type: String,
+		required: false,
+		default: ''
+	},
+	size: {
+		required: false,
+		type: Number,
+		default: 40
+	},
+	editable: {
+		type: Boolean,
+		required: false,
+		default: false
 	}
 })
+const emit = defineEmits(['photo'])
+
+const source = computed({
+	get: () => typeof props.src?.link === 'string' ? parseURL(props.src.link) : false,
+	set: () => {
+	}
+})
+const catchPhoto = useFileInputCallback(async ([file]) => emit('photo', file))
 </script>

@@ -1,19 +1,20 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { AnnouncementEntity, AnnouncementFactory, AnnouncementsUseCases } from '@modules/classes'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { addToArray } from '@utils/commons'
 import { useAuth } from '@app/composable/auth/auth'
+import { useListener } from '@app/composable/core/listener'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	announcements: Ref<AnnouncementEntity[]>
 	fetched: Ref<boolean>
 	hasMore: Ref<boolean>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-const announcementGlobal = {} as Record<string, {
+const announcementStore = {} as Record<string, {
 	announcement: Ref<AnnouncementEntity | null>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
@@ -25,21 +26,21 @@ export const markAnnouncementSeen = async (announcement: AnnouncementEntity, use
 
 export const useAnnouncementList = (classId: string) => {
 	const { id } = useAuth()
-	if (global[classId] === undefined) {
+	if (store[classId] === undefined) {
 		const listener = useListener(async () => {
 			return await AnnouncementsUseCases.listenToClassAnnouncements(classId, {
 				created: async (entity) => {
-					addToArray(global[classId].announcements.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(store[classId].announcements.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				updated: async (entity) => {
-					addToArray(global[classId].announcements.value, entity, (e) => e.id, (e) => e.createdAt)
+					addToArray(store[classId].announcements.value, entity, (e) => e.id, (e) => e.createdAt)
 				},
 				deleted: async (entity) => {
-					global[classId].announcements.value = global[classId].announcements.value.filter((c) => c.id !== entity.id)
+					store[classId].announcements.value = store[classId].announcements.value.filter((c) => c.id !== entity.id)
 				}
 			})
 		})
-		global[classId] = {
+		store[classId] = {
 			announcements: ref([]),
 			fetched: ref(false),
 			hasMore: ref(false),
@@ -49,49 +50,49 @@ export const useAnnouncementList = (classId: string) => {
 		}
 	}
 
-	const unReadAnnouncements = computed(() => global[classId].announcements.value.filter((a) => !a.isRead(id.value)).length)
+	const unReadAnnouncements = computed(() => store[classId].announcements.value.filter((a) => !a.isRead(id.value)).length)
 
 	const fetchAnnouncements = async () => {
-		await global[classId].setError('')
+		await store[classId].setError('')
 		try {
-			await global[classId].setLoading(true)
-			const announcements = await AnnouncementsUseCases.getClassAnnouncements(classId, global[classId].announcements.value.at(-1)?.createdAt)
-			announcements.results.forEach((a) => addToArray(global[classId].announcements.value, a, (e) => e.id, (e) => e.createdAt))
-			global[classId].hasMore.value = !!announcements.pages.next
-			global[classId].fetched.value = true
+			await store[classId].setLoading(true)
+			const announcements = await AnnouncementsUseCases.getClassAnnouncements(classId, store[classId].announcements.value.at(-1)?.createdAt)
+			announcements.results.forEach((a) => addToArray(store[classId].announcements.value, a, (e) => e.id, (e) => e.createdAt))
+			store[classId].hasMore.value = !!announcements.pages.next
+			store[classId].fetched.value = true
 		} catch (error) {
-			await global[classId].setError(error)
+			await store[classId].setError(error)
 		}
-		await global[classId].setLoading(false)
+		await store[classId].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global[classId].fetched.value && !global[classId].loading.value) await fetchAnnouncements()
-		await global[classId].listener.start()
+		if (!store[classId].fetched.value && !store[classId].loading.value) await fetchAnnouncements()
+		await store[classId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[classId].listener.close()
+		await store[classId].listener.close()
 	})
 
-	return { ...global[classId], fetchOlderAnnouncements: fetchAnnouncements, unReadAnnouncements }
+	return { ...store[classId], fetchOlderAnnouncements: fetchAnnouncements, unReadAnnouncements }
 }
 
 export const useAnnouncement = (classId: string, id: string) => {
-	if (global[id] === undefined) {
+	if (store[id] === undefined) {
 		const listener = useListener(async () => {
 			return await AnnouncementsUseCases.listenToOne(classId, id, {
 				created: async (entity) => {
-					announcementGlobal[id].announcement.value = entity
+					announcementStore[id].announcement.value = entity
 				},
 				updated: async (entity) => {
-					announcementGlobal[id].announcement.value = entity
+					announcementStore[id].announcement.value = entity
 				},
 				deleted: async (entity) => {
-					announcementGlobal[id].announcement.value = entity
+					announcementStore[id].announcement.value = entity
 				}
 			})
 		})
-		announcementGlobal[id] = {
+		announcementStore[id] = {
 			announcement: ref(null),
 			fetched: ref(false),
 			listener,
@@ -101,26 +102,26 @@ export const useAnnouncement = (classId: string, id: string) => {
 	}
 
 	const fetchAnnouncement = async () => {
-		await announcementGlobal[id].setError('')
+		await announcementStore[id].setError('')
 		try {
-			await announcementGlobal[id].setLoading(true)
-			announcementGlobal[id].announcement.value = await AnnouncementsUseCases.find(classId, id)
-			announcementGlobal[id].fetched.value = true
+			await announcementStore[id].setLoading(true)
+			announcementStore[id].announcement.value = await AnnouncementsUseCases.find(classId, id)
+			announcementStore[id].fetched.value = true
 		} catch (error) {
-			await announcementGlobal[id].setError(error)
+			await announcementStore[id].setError(error)
 		}
-		await announcementGlobal[id].setLoading(false)
+		await announcementStore[id].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!announcementGlobal[id].fetched.value && !announcementGlobal[id].loading.value) await fetchAnnouncement()
-		await announcementGlobal[id].listener.start()
+		if (!announcementStore[id].fetched.value && !announcementStore[id].loading.value) await fetchAnnouncement()
+		await announcementStore[id].listener.start()
 	})
 	onUnmounted(async () => {
-		await announcementGlobal[id].listener.close()
+		await announcementStore[id].listener.close()
 	})
 
-	return { ...announcementGlobal[id] }
+	return { ...announcementStore[id] }
 }
 
 let createClassId = null as string | null

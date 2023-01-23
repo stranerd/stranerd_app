@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { catchDivideByZero } from '@utils/commons'
+import { catchDivideByZero } from '@stranerd/validate'
 import { PastQuestionType } from '@modules/school'
 
 export class TestEntity extends BaseEntity {
@@ -17,19 +17,19 @@ export class TestEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-					 id,
-					 name,
-					 data,
-					 questions,
-					 questionType,
-					 answers,
-					 score,
-					 userId,
-					 prepId,
-					 done,
-					 createdAt,
-					 updatedAt
-				 }: TestConstructorArgs) {
+		             id,
+		             name,
+		             data,
+		             questions,
+		             questionType,
+		             answers,
+		             score,
+		             userId,
+		             prepId,
+		             done,
+		             createdAt,
+		             updatedAt
+	             }: TestConstructorArgs) {
 		super()
 		this.id = id
 		this.name = name

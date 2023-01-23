@@ -4,6 +4,7 @@ import {
 	AuthExtras,
 	NewUser,
 	PasswordUpdate,
+	Phone,
 	ProfileUpdate
 } from '../../domain/entities/auth'
 
@@ -14,7 +15,9 @@ export interface AuthBaseDataSource {
 	signinWithApple: (data: { firstName: string | null, lastName: string | null, email: string | null, idToken: string }, extras: AuthExtras) => Promise<AfterAuthUser>
 	signupWithEmail: (data: NewUser, extras: AuthExtras) => Promise<AfterAuthUser>
 	sendVerificationEmail: (email: string) => Promise<void>
+	sendVerificationText: (phone: Phone) => Promise<void>
 	completeEmailVerification: (token: string) => Promise<AfterAuthUser>
+	completePhoneVerification: (token: string) => Promise<AfterAuthUser>
 	sendPasswordResetEmail: (email: string) => Promise<void>
 	resetPassword: (token: string, password: string) => Promise<AfterAuthUser>
 	updateProfile: (profile: ProfileUpdate) => Promise<void>

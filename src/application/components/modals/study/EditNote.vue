@@ -9,23 +9,17 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useEditNote } from '@app/composable/study/notes'
 import NoteForm from '@app/components/study/notes/NoteForm.vue'
+import { PropType } from 'vue'
 
-export default defineComponent({
-	name: 'EditNoteModal',
-	components: { NoteForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { editNote, factory, error, loading } = useEditNote()
-		return { error, loading, editNote, factory }
+defineProps({
+	close: {
+		type: Function as PropType<() => void>,
+		required: true
 	}
 })
+
+const { editNote, factory, error, loading } = useEditNote()
 </script>

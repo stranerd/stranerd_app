@@ -18,42 +18,34 @@
 				<IonIcon :icon="createOutline" class="text-warning"
 					@click="openEditTimetableModal({ event, classInst }, $router)" />
 				<SpinLoading v-if="loading" />
-				<IonIcon v-else :icon="trashBinOutline" class="text-danger" @click="deleteEvent(event)" />
+				<IonIcon v-else :icon="trashBinOutline" class="text-danger" @click="deleteEvent" />
 			</span>
 		</div>
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+<script lang="ts" setup>
+import { onMounted } from 'vue'
 import { ClassEntity, EventEntity } from '@modules/classes'
 import { openEditTimetableModal } from '@app/composable/classes/timetable'
 import { markEventSeen, useDeleteEvent } from '@app/composable/classes/events'
 import { createOutline, timeOutline, trashBinOutline } from 'ionicons/icons'
 import { useAuth } from '@app/composable/auth/auth'
 
-export default defineComponent({
-	name: 'TimetableListCard',
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		},
-		event: {
-			type: EventEntity,
-			required: true
-		}
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
 	},
-	setup (props) {
-		const { id } = useAuth()
-		const { loading, error, deleteEvent } = useDeleteEvent(props.event.classId, props.event.id)
-		onMounted(async () => {
-			await markEventSeen(props.event, id.value)
-		})
-		return {
-			id, deleteEvent, loading, error, openEditTimetableModal, timeOutline,
-			trashBinOutline, createOutline
-		}
+	event: {
+		type: EventEntity,
+		required: true
 	}
+})
+
+const { id } = useAuth()
+const { loading, error, deleteEvent } = useDeleteEvent(props.event.classId, props.event.id)
+onMounted(async () => {
+	await markEventSeen(props.event, id.value)
 })
 </script>

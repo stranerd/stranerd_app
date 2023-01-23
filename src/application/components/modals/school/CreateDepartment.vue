@@ -16,23 +16,17 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import DepartmentForm from '@app/components/school/departments/DepartmentForm.vue'
 import { useCreateDepartment } from '@app/composable/school/departments'
+import { PropType } from 'vue'
 
-export default defineComponent({
-	name: 'CreateDepartmentModal',
-	components: { DepartmentForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { factory, error, loading, createDepartment } = useCreateDepartment()
-		return { factory, error, loading, createDepartment }
+defineProps({
+	close: {
+		type: Function as PropType<() => void>,
+		required: true
 	}
 })
+
+const { factory, error, loading, createDepartment } = useCreateDepartment()
 </script>

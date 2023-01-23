@@ -1,5 +1,5 @@
 import { Component as Vue, ref, Ref } from 'vue'
-import { capitalize } from '@utils/commons'
+import { capitalizeText } from '@stranerd/validate'
 import { isPlatform } from '@ionic/vue'
 
 const merge = (...args: string[]) => args.join('')
@@ -26,7 +26,7 @@ const registerModals = (stack: Ref<string[]>, modals: Record<string, any>) => {
 
 		const helpers = Object.fromEntries(
 			Object.keys(modalObject)
-				.map((key) => capitalize(key))
+				.map((key) => capitalizeText(key))
 				.map((key) => {
 					return [
 						[`open${key}`, async (...args: any[]) => open(merge(type, key), ...args)],
@@ -37,7 +37,7 @@ const registerModals = (stack: Ref<string[]>, modals: Record<string, any>) => {
 		) as Record<`open${Capitalize<Key>}` | `close${Capitalize<Key>}`, () => void>
 
 		const closeAll = () => Object.keys(modalObject)
-			.forEach((key) => helpers[`close${capitalize(key) as Capitalize<Key>}`]?.())
+			.forEach((key) => helpers[`close${capitalizeText(key) as Capitalize<Key>}`]?.())
 
 		return { ...helpers, closeAll }
 	}

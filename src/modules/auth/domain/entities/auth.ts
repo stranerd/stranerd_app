@@ -15,7 +15,7 @@ export type NewUser = {
 	photo: Media | null
 }
 
-export type ProfileUpdate = Omit<UserBio, 'fullName' | 'email'>
+export type ProfileUpdate = Omit<UserBio, 'fullName' | 'email' | 'phone'>
 
 export type PasswordUpdate = {
 	oldPassword: string
@@ -44,8 +44,15 @@ export type AuthDetails = {
 	isVerified: boolean
 	roles: Record<string, Record<string, boolean>>
 	authTypes: AuthTypes[]
+	photo: Media | null
+	phone: Phone | null
 }
 
 export type AuthExtras = {
 	referrer?: string
+}
+
+export type Phone = {
+	code: string,
+	number: string
 }

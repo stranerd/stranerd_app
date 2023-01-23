@@ -1,4 +1,4 @@
-import { EmbeddedUser, generateEmbeddedUser } from '@modules/users'
+import { EmbeddedUser } from '@modules/users'
 import { ClassUsers, EventDataType, EventOneOffType, EventTimetableType, EventType } from '../types'
 import { BaseEntity } from '@modules/core'
 
@@ -14,20 +14,20 @@ export class EventEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-					 id,
-					 title,
-					 classId,
-					 user,
-					 data,
-					 users,
-					 readAt,
-					 createdAt,
-					 updatedAt
-				 }: EventConstructorArgs) {
+		             id,
+		             title,
+		             classId,
+		             user,
+		             data,
+		             users,
+		             readAt,
+		             createdAt,
+		             updatedAt
+	             }: EventConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title
-		this.user = generateEmbeddedUser(user)
+		this.user = user
 		this.data = data
 		this.classId = classId
 		this.users = users

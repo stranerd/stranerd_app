@@ -2,22 +2,17 @@
 	<pre class="body" v-html="value" />
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 
-export default defineComponent({
-	name: 'DisplayHtml',
-	props: {
-		html: {
-			type: String,
-			required: true
-		}
-	},
-	setup (props) {
-		const value = computed(() => props.html.replace(/<p><br><\/p>/gi, ''))
-		return { value }
+const props = defineProps({
+	html: {
+		type: String,
+		required: true
 	}
 })
+
+const value = computed(() => props.html.replace(/<p><br><\/p>/gi, ''))
 </script>
 
 <style lang="scss" scoped>

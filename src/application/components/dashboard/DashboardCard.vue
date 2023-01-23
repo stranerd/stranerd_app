@@ -6,29 +6,24 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-	name: 'DashboardCard',
-	props: {
-		icon: {
-			type: String,
-			required: true
-		},
-		title: {
-			type: String,
-			required: true
-		},
-		subtitle: {
-			type: String,
-			required: true
-		},
-		iconClass: {
-			type: String,
-			required: false,
-			default: 'text-info'
-		}
+<script lang="ts" setup>
+defineProps({
+	icon: {
+		type: String,
+		required: true
+	},
+	title: {
+		type: String,
+		required: true
+	},
+	subtitle: {
+		type: String,
+		required: true
+	},
+	iconClass: {
+		type: String,
+		required: false,
+		default: 'text-info'
 	}
 })
 </script>

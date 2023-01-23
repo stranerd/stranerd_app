@@ -16,23 +16,17 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import CourseForm from '@app/components/school/courses/CourseForm.vue'
 import { useEditCourse } from '@app/composable/school/courses'
+import { PropType } from 'vue'
 
-export default defineComponent({
-	name: 'EditCourseModal',
-	components: { CourseForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { factory, error, loading, editCourse } = useEditCourse()
-		return { factory, error, loading, editCourse }
+defineProps({
+	close: {
+		type: Function as PropType<() => void>,
+		required: true
 	}
 })
+
+const { factory, error, loading, editCourse } = useEditCourse()
 </script>

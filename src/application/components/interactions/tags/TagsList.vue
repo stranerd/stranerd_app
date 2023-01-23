@@ -43,29 +43,19 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { computed, defineComponent } from 'vue'
 import { openCreateTagModal, openTagEditModal, useDeleteTag, useTagList } from '@app/composable/interactions/tags'
 import { groupBy } from '@utils/commons'
 import { addOutline, pencilOutline, trashBinOutline } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'TagsList',
-	setup () {
-		const { tags, questionTags, error, loading } = useTagList()
-		const { deleteTag, loading: deleteLoading, error: deleteError } = useDeleteTag()
-		const groups = computed(() => {
-			const grouped = groupBy(questionTags.value, (tag) => tag.parent ?? '')
-			return (grouped.find((g) => g.key === '')?.values ?? []).map((t) => ({
-				parent: t,
-				children: grouped.find((g) => g.key === t.id)?.values ?? []
-			}))
-		})
-		return {
-			tags, groups, error, loading, openCreateTagModal, openTagEditModal,
-			deleteTag, deleteLoading, deleteError,
-			addOutline, pencilOutline, trashBinOutline
-		}
-	}
+const { tags, questionTags, error, loading } = useTagList()
+const { deleteTag, loading: deleteLoading, error: deleteError } = useDeleteTag()
+const groups = computed(() => {
+	const grouped = groupBy(questionTags.value, (tag) => tag.parent ?? '')
+	return (grouped.find((g) => g.key === '')?.values ?? []).map((t) => ({
+		parent: t,
+		children: grouped.find((g) => g.key === t.id)?.values ?? []
+	}))
 })
 </script>

@@ -21,23 +21,12 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useClassesList } from '@app/composable/classes/classes'
 import SearchClassListCard from '@app/components/classes/classes/SearchClassListCard.vue'
 
-export default defineComponent({
-	name: 'ClassesList',
-	components: { SearchClassListCard },
-	setup () {
-		const {
-			classes, error, loading,
-			searchMode, searchValue, searchResults, search
-		} = useClassesList()
-		return {
-			classes, error, loading,
-			searchMode, searchValue, searchResults, search
-		}
-	}
-})
+const {
+	classes, error, loading,
+	searchMode, searchValue, searchResults, search
+} = useClassesList()
 </script>

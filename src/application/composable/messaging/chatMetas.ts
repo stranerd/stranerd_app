@@ -1,13 +1,14 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { ChatMetaEntity, ChatMetasUseCases, ChatsUseCases } from '@modules/messaging'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { AudioSounds, useAudioPlayer } from '@app/composable/core/audios'
 import { addToArray, groupBy } from '@utils/commons'
+import { useListener } from '@app/composable/core/listener'
 
 const player = useAudioPlayer(AudioSounds.CHAT)
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	meta: Ref<ChatMetaEntity[]>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
@@ -17,25 +18,25 @@ const global = {} as Record<string, {
 export const useChatMetas = () => {
 	const { id } = useAuth()
 	const userId = id.value ?? 'empty'
-	if (global[userId] === undefined) {
+	if (store[userId] === undefined) {
 		const listener = useListener(async () => {
 			if (!id.value) return () => {
 			}
 			return ChatMetasUseCases.listen({
 				created: async (entity) => {
 					// if (entity.hasUnRead(userId)) await player.play()
-					addToArray(global[userId].meta.value, entity, (e) => e.id, (e) => (e.last?.createdAt ?? 0))
+					addToArray(store[userId].meta.value, entity, (e) => e.id, (e) => (e.last?.createdAt ?? 0))
 				},
 				updated: async (entity) => {
 					// if (entity.hasUnRead(userId)) await player.play()
-					addToArray(global[userId].meta.value, entity, (e) => e.id, (e) => (e.last?.createdAt ?? 0))
+					addToArray(store[userId].meta.value, entity, (e) => e.id, (e) => (e.last?.createdAt ?? 0))
 				},
 				deleted: async (entity) => {
-					global[userId].meta.value = global[userId].meta.value.filter((m) => m.id !== entity.id)
+					store[userId].meta.value = store[userId].meta.value.filter((m) => m.id !== entity.id)
 				}
 			})
 		})
-		global[userId] = {
+		store[userId] = {
 			meta: ref([]),
 			fetched: ref(false),
 			search: ref(''),
@@ -46,49 +47,49 @@ export const useChatMetas = () => {
 	}
 	const fetchMeta = async () => {
 		if (!id.value) return
-		await global[userId].setError('')
+		await store[userId].setError('')
 		try {
-			await global[userId].setLoading(true)
+			await store[userId].setLoading(true)
 			const metas = await ChatMetasUseCases.get()
-			metas.results.forEach((r) => addToArray(global[userId].meta.value, r, (e) => e.id, (e) => (e.last?.createdAt ?? 0)))
-			global[userId].fetched.value = true
+			metas.results.forEach((r) => addToArray(store[userId].meta.value, r, (e) => e.id, (e) => (e.last?.createdAt ?? 0)))
+			store[userId].fetched.value = true
 		} catch (e) {
-			await global[userId].setError(e)
+			await store[userId].setError(e)
 		}
-		await global[userId].setLoading(false)
+		await store[userId].setLoading(false)
 	}
 	onMounted(async () => {
 		if (!id.value) return
-		if (!global[userId].fetched.value && !global[userId].loading.value) await fetchMeta()
-		await global[userId].listener.start()
+		if (!store[userId].fetched.value && !store[userId].loading.value) await fetchMeta()
+		await store[userId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[userId].listener.close()
+		await store[userId].listener.close()
 	})
-	const filteredMeta = computed(() => global[userId].meta.value.filter((m) => m.search(global[userId].search.value)))
-	const groups = computed(() => groupBy(global[userId].meta.value.filter((m) => m.isClasses(m)), (m) => {
+	const filteredMeta = computed(() => store[userId].meta.value.filter((m) => m.search(store[userId].search.value)))
+	const groups = computed(() => groupBy(store[userId].meta.value.filter((m) => m.isClasses(m)), (m) => {
 		return m.isClasses(m) ? m.data.group.classId : ''
 	}))
-	const connects = computed(() => global[userId].meta.value.filter((m) => m.isPersonal(m)))
-	const unRead = computed(() => global[userId].meta.value.filter((m) => m.hasUnRead(id.value)))
-	return { ...global[userId], groups, connects, unRead, meta: filteredMeta }
+	const connects = computed(() => store[userId].meta.value.filter((m) => m.isPersonal(m)))
+	const unRead = computed(() => store[userId].meta.value.filter((m) => m.hasUnRead(id.value)))
+	return { ...store[userId], groups, connects, unRead, meta: filteredMeta }
 }
 
-const metaGlobal = {} as Record<string, {
+const metaStore = {} as Record<string, {
 	unRead: Ref<number>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useChatMeta = (chatMeta: ChatMetaEntity) => {
 	const { id } = useAuth()
-	if (metaGlobal[chatMeta.id] === undefined) metaGlobal[chatMeta.id] = {
+	if (metaStore[chatMeta.id] === undefined) metaStore[chatMeta.id] = {
 		unRead: ref(0),
 		...useErrorHandler(),
 		...useLoadingHandler()
 	}
 
 	const fetchUnRead = async () => {
-		metaGlobal[chatMeta.id].unRead.value = await ChatsUseCases.getUnReadCount([id.value, chatMeta.getTo(id.value)])
+		metaStore[chatMeta.id].unRead.value = await ChatsUseCases.getUnReadCount([id.value, chatMeta.getTo(id.value)])
 	}
 
-	return { ...metaGlobal[chatMeta.id], fetchUnRead }
+	return { ...metaStore[chatMeta.id], fetchUnRead }
 }

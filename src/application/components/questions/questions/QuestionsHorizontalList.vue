@@ -16,36 +16,30 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { computed, PropType } from 'vue'
 import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
 import { QuestionEntity } from '@modules/questions'
 
-export default defineComponent({
-	name: 'QuestionsHorizontalList',
-	props: {
-		title: {
-			type: String,
-			required: true
-		},
-		route: {
-			type: String,
-			required: true
-		},
-		questions: {
-			type: Array as PropType<QuestionEntity[]>,
-			required: true
-		},
-		empty: {
-			type: String,
-			required: false,
-			default: ''
-		}
+const props = defineProps({
+	title: {
+		type: String,
+		required: true
 	},
-	components: { QuestionListCard },
-	setup (props) {
-		const slice = computed(() => props.questions.slice(0, 10))
-		return { slice }
+	route: {
+		type: String,
+		required: true
+	},
+	questions: {
+		type: Array as PropType<QuestionEntity[]>,
+		required: true
+	},
+	empty: {
+		type: String,
+		required: false,
+		default: ''
 	}
 })
+
+const slice = computed(() => props.questions.slice(0, 10))
 </script>

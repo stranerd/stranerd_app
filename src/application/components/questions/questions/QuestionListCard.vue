@@ -34,9 +34,9 @@
 	</router-link>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { chatbubbleEllipsesOutline, ellipse, helpCircleOutline, imageOutline } from 'ionicons/icons'
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { chatbubbleEllipsesOutline, ellipse, imageOutline } from 'ionicons/icons'
 import { QuestionEntity } from '@modules/questions'
 import { formatTime } from '@utils/dates'
 import { formatNumber } from '@utils/commons'
@@ -45,26 +45,17 @@ import { useAuth } from '@app/composable/auth/auth'
 import InteractionTag from '@app/components/interactions/tags/Tag.vue'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 
-export default defineComponent({
-	name: 'QuestionListCard',
-	components: { InteractionTag, SaveToSet },
-	props: {
-		question: {
-			type: QuestionEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const { id } = useAuth()
-		const showAnswerButton = computed({
-			get: () => props.question.user.id !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
-			set: () => {
-			}
-		})
-		return {
-			showAnswerButton, openAnswerModal, formatTime, formatNumber,
-			imageOutline, chatbubbleEllipsesOutline, ellipse, helpCircleOutline
-		}
+const props = defineProps({
+	question: {
+		type: QuestionEntity,
+		required: true
+	}
+})
+
+const { id } = useAuth()
+const showAnswerButton = computed({
+	get: () => props.question.user.id !== id.value && !props.question.isAnswered && !props.question.answers.find((a) => a.userId === id.value),
+	set: () => {
 	}
 })
 </script>

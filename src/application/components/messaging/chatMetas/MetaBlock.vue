@@ -18,38 +18,32 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType, ref } from 'vue'
+<script lang="ts" setup>
+import { PropType, ref } from 'vue'
 import ChatMetasListCard from '@app/components/messaging/chatMetas/ChatMetasListCard.vue'
 import { chevronForwardOutline, peopleOutline } from 'ionicons/icons'
 import { ChatMetaEntity } from '@modules/messaging'
 import { Media } from '@modules/core'
 
-export default defineComponent({
-	name: 'MetaBlock',
-	components: { ChatMetasListCard },
-	props: {
-		title: {
-			type: String,
-			required: true
-		},
-		photo: {
-			type: Object as PropType<Media>,
-			required: false
-		},
-		metas: {
-			type: Array as PropType<ChatMetaEntity[]>,
-			required: true
-		},
-		hasAvatar: {
-			type: Boolean,
-			required: false,
-			default: false
-		}
+defineProps({
+	title: {
+		type: String,
+		required: true
 	},
-	setup () {
-		const show = ref(true)
-		return { show, chevronForwardOutline, peopleOutline }
+	photo: {
+		type: Object as PropType<Media>,
+		required: false
+	},
+	metas: {
+		type: Array as PropType<ChatMetaEntity[]>,
+		required: true
+	},
+	hasAvatar: {
+		type: Boolean,
+		required: false,
+		default: false
 	}
 })
+
+const show = ref(true)
 </script>

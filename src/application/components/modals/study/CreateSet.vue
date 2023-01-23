@@ -9,23 +9,17 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useCreateSet } from '@app/composable/study/sets'
 import SetForm from '@app/components/study/sets/SetForm.vue'
+import { PropType } from 'vue'
 
-export default defineComponent({
-	name: 'CreateSetModal',
-	components: { SetForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { createSet, factory, error, loading } = useCreateSet()
-		return { error, loading, createSet, factory }
+defineProps({
+	close: {
+		type: Function as PropType<() => void>,
+		required: true
 	}
 })
+
+const { createSet, factory, error, loading } = useCreateSet()
 </script>

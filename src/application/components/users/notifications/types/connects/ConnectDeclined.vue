@@ -12,32 +12,26 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { NotificationEntity } from '@modules/users'
 import { formatTime } from '@utils/dates'
 import { ellipse } from 'ionicons/icons'
 import { useUser } from '@app/composable/users/users'
 
-export default defineComponent({
-	name: 'ConnectDeclined',
-	props: {
-		notification: {
-			type: NotificationEntity,
-			required: true
-		},
-		connectId: {
-			type: String,
-			required: true
-		},
-		userId: {
-			type: String,
-			required: true
-		}
+const props = defineProps({
+	notification: {
+		type: NotificationEntity,
+		required: true
 	},
-	setup (props) {
-		const { user } = useUser(props.userId)
-		return { user, formatTime, ellipse }
+	connectId: {
+		type: String,
+		required: true
+	},
+	userId: {
+		type: String,
+		required: true
 	}
 })
+
+const { user } = useUser(props.userId)
 </script>

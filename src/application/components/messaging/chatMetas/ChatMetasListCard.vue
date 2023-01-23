@@ -37,39 +37,34 @@
 	</router-link>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, watch } from 'vue'
+<script lang="ts" setup>
+import { computed, watch } from 'vue'
 import { formatTime } from '@utils/dates'
 import { useAuth } from '@app/composable/auth/auth'
 import { ChatMetaEntity } from '@modules/messaging'
 import { useChatMeta } from '@app/composable/messaging/chatMetas'
 import { chatbubblesOutline } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'ChatMetasListCard',
-	props: {
-		chatMeta: {
-			type: ChatMetaEntity,
-			required: true
-		},
-		hasAvatar: {
-			type: Boolean,
-			required: false,
-			default: false
-		}
+const props = defineProps({
+	chatMeta: {
+		type: ChatMetaEntity,
+		required: true
 	},
-	setup (props) {
-		const { id } = useAuth()
-		const { unRead, fetchUnRead } = useChatMeta(props.chatMeta)
-		watch([() => props.chatMeta.last, () => props.chatMeta.readAt[id.value]], fetchUnRead, {
-			immediate: true,
-			deep: true
-		})
-		const unReadCount = computed(() => {
-			if (unRead.value === 0) return ''
-			return unRead.value > 99 ? '99+' : unRead.value.toString()
-		})
-		return { formatTime, id, unReadCount, chatbubblesOutline }
+	hasAvatar: {
+		type: Boolean,
+		required: false,
+		default: false
 	}
+})
+
+const { id } = useAuth()
+const { unRead, fetchUnRead } = useChatMeta(props.chatMeta)
+watch([() => props.chatMeta.last, () => props.chatMeta.readAt[id.value]], fetchUnRead, {
+	immediate: true,
+	deep: true
+})
+const unReadCount = computed(() => {
+	if (unRead.value === 0) return ''
+	return unRead.value > 99 ? '99+' : unRead.value.toString()
 })
 </script>

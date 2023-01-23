@@ -1,5 +1,6 @@
 import { RankTypes } from '../entities/rank'
 import { Media } from '@modules/core'
+import { Phone } from '@modules/auth'
 
 export * from './notifications'
 
@@ -41,6 +42,7 @@ export interface UserBio {
 	email: string
 	description: string
 	photo: Media | null
+	phone: Phone | null
 }
 
 export interface UserRoles {
@@ -73,7 +75,7 @@ export interface UserAccount {
 		longestStreak: number
 		lastEvaluatedAt: number
 	}
-	rankings: Record<RankingTimes, number>
+	rankings: Record<RankingTimes, { value: number, lastUpdatedAt: number }>
 }
 
 export interface UserStatus {

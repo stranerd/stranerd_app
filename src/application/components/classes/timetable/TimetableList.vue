@@ -24,8 +24,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
 import { ClassEntity, EventType } from '@modules/classes'
 import { openCreateTimetableModal, useTimetable } from '@app/composable/classes/timetable'
 import { arrowForwardOutline } from 'ionicons/icons'
@@ -33,33 +33,24 @@ import { useRoute } from 'vue-router'
 import TimetableListCard from '@app/components/classes/timetable/TimetableListCard.vue'
 import { useAuth } from '@app/composable/auth/auth'
 
-export default defineComponent({
-	name: 'TimetableList',
-	components: { TimetableListCard },
-	props: {
-		classInst: {
-			type: ClassEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const { id } = useAuth()
-		const route = useRoute()
-		const { day: dayStr } = route.query
-		const day = parseInt(dayStr as string)
-		const activeDay = ref(day >= 0 && day < 7 ? day : 1)
-		const days = [
-			{ day: 1, name: 'Monday' }, { day: 2, name: 'Tuesday' }, { day: 3, name: 'Wednesday' },
-			{ day: 4, name: 'Thursday' }, { day: 5, name: 'Friday' }, { day: 6, name: 'Saturday' },
-			{ day: 0, name: 'Sunday' }
-		]
-		const { loading, error, events } = useTimetable(props.classInst.id)
-		const timetable = computed(() => events.value
-			.filter((e) => e.data.type === EventType.timetable && e.data.start.day === activeDay.value))
-		return {
-			id, loading, error, openCreateTimetableModal,
-			activeDay, days, events, timetable, arrowForwardOutline
-		}
+const props = defineProps({
+	classInst: {
+		type: ClassEntity,
+		required: true
 	}
 })
+
+const { id } = useAuth()
+const route = useRoute()
+const { day: dayStr } = route.query
+const day = parseInt(dayStr as string)
+const activeDay = ref(day >= 0 && day < 7 ? day : 1)
+const days = [
+	{ day: 1, name: 'Monday' }, { day: 2, name: 'Tuesday' }, { day: 3, name: 'Wednesday' },
+	{ day: 4, name: 'Thursday' }, { day: 5, name: 'Friday' }, { day: 6, name: 'Saturday' },
+	{ day: 0, name: 'Sunday' }
+]
+const { loading, error, events } = useTimetable(props.classInst.id)
+const timetable = computed(() => events.value
+	.filter((e) => e.data.type === EventType.timetable && e.data.start.day === activeDay.value))
 </script>

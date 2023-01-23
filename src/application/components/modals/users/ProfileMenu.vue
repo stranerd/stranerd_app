@@ -1,5 +1,5 @@
 <template>
-	<div class="modal-content">
+	<div v-if="user" class="modal-content">
 		<div class="p-6 md:p-8 flex flex-col text-secondaryText">
 			<template v-if="user.id === id">
 				<router-link v-for="{ label, route, icon, hide } in [
@@ -45,12 +45,11 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed, PropType } from 'vue'
 import {
 	bookmarkOutline,
 	cardOutline,
-	createOutline,
 	gridOutline,
 	libraryOutline,
 	linkOutline,
@@ -62,26 +61,15 @@ import { getProfileMenuUser } from '@app/composable/users/users'
 import { useAuth } from '@app/composable/auth/auth'
 import { useConnects } from '@app/composable/users/connects'
 
-export default defineComponent({
-	name: 'ProfileMenu',
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup (props) {
-		const { id, isAdmin } = useAuth()
-		const user = getProfileMenuUser()
-		if (!user) props.close()
-		const { connects, acceptConnect, deleteConnect, loading: connectLoading } = useConnects()
-		const connect = computed(() => connects.value.find((c) => c.members.includes(id.value) && c.members.includes(user?.id as any)))
-		return {
-			user, id, isAdmin,
-			cardOutline, gridOutline, libraryOutline, bookmarkOutline, settingsOutline,
-			createOutline, shareOutline, linkOutline, walletOutline,
-			connect, connectLoading, deleteConnect, acceptConnect
-		}
+const props = defineProps({
+	close: {
+		type: Function as PropType<() => void>,
+		required: true
 	}
 })
+const { id, isAdmin } = useAuth()
+const user = getProfileMenuUser()
+if (!user) props.close()
+const { connects, acceptConnect, deleteConnect, loading: connectLoading } = useConnects()
+const connect = computed(() => connects.value.find((c) => c.members.includes(id.value) && c.members.includes(user?.id as any)))
 </script>

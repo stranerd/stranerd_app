@@ -4,17 +4,14 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 
-export default defineComponent({
-	name: 'Popover',
-	props: {
-		close: {
-			type: Function as PropType<() => void>,
-			required: false,
-			default: () => {
-			}
+defineProps({
+	close: {
+		type: Function as PropType<() => void>,
+		required: false,
+		default: () => {
 		}
 	}
 })

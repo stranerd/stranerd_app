@@ -61,7 +61,7 @@
 		</div>
 	</div>
 
-	<div class="w-full lg:min-h-[696px] h-auto flex bg-[#EDF8FF] py-12 md:py-28">
+	<div class="w-full lg:min-h-[696px] h-auto flex bg-highlight py-12 md:py-28">
 		<div
 			class="container mx-auto text-bodyText p-6 flex flex-col-reverse lg:flex-row gap-6 lg:gap-16 md:items-center justify-center">
 			<div class="flex flex-col md:gap-5 gap-3 md:max-w-xl ">
@@ -72,12 +72,14 @@
 					unlimited access to any activity.
 				</p>
 				<div class="flex gap-4 items-center mt-6">
-					<a href="https://play.google.com/store/apps/details?id=com.stranerd.app" rel="noopener noreferrer"
-						target="_blank">
-						<img alt="playstore button" class="h-12 md:h-16" src="@/assets/images/auth/playstore1.svg" />
+					<a :href="PLAYSTORE_LINK" rel="noopener noreferrer" target="_blank">
+						<img alt="playstore button" class="h-12 md:h-16"
+							src="@/assets/images/newLanding/play_store.svg" />
 					</a>
-					<img alt="appstore button" class="h-12  md:h-16 cursor-not-allowed"
-						src="@/assets/images/auth/appstore1.svg" />
+					<a :href="APPSTORE_LINK" rel="noopener noreferrer" target="_blank">
+						<img alt="appstore button" class="h-12 md:h-16"
+							src="@/assets/images/newLanding/apple_store.svg" />
+					</a>
 				</div>
 			</div>
 			<img alt="hero" class="w-auto" src="@/assets/images/landing/phone.png">
@@ -99,6 +101,7 @@ import {
 	list,
 	megaphone
 } from 'ionicons/icons'
+import { APPSTORE_LINK, PLAYSTORE_LINK } from '@utils/constants'
 
 const studyTools = [
 	{
@@ -175,10 +178,9 @@ const classroomFeatures = [
 		desc: 'Organised files shared in a class, sorted by diiscussions.',
 		color: '#FF8787'
 	}
-]
-</script>
+]</script>
 
-<style scoped>
+<style lang="scss" scoped>
 @media (min-width: 1000px) {
 	.lg\:grid-cols-3 {
 		grid-template-columns: repeat(3, minmax(0, 378px)) !important;
@@ -186,6 +188,7 @@ const classroomFeatures = [
 }
 
 .card {
-	@apply flex flex-col items-center justify-center gap-2 md:p-6 p-4  text-center bg-bodyBg md:rounded-3xl rounded-2xl md:h-[276px] h-36 md:text-lg text-xs
+	@apply flex flex-col items-center justify-center gap-2 md:p-6 p-4
+		text-center bg-bodyBg md:rounded-3xl rounded-2xl md:h-[276px] h-36 md:text-lg text-xs;
 }
 </style>

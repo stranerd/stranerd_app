@@ -1,11 +1,12 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import { NoteEntity, NoteFactory, NotesUseCases } from '@modules/study'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { Alert } from '@utils/dialog'
 import { Router, useRouter } from 'vue-router'
 import { addToArray } from '@utils/commons'
+import { useListener } from '@app/composable/core/listener'
 
-const global = {
+const store = {
 	notes: ref([] as NoteEntity[]),
 	fetched: ref(false),
 	hasMore: ref(false),
@@ -14,41 +15,41 @@ const global = {
 }
 const listener = useListener(async () => await NotesUseCases.listen({
 	created: async (entity) => {
-		addToArray(global.notes.value, entity, (e) => e.id, (e) => e.createdAt)
+		addToArray(store.notes.value, entity, (e) => e.id, (e) => e.createdAt)
 	},
 	updated: async (entity) => {
-		addToArray(global.notes.value, entity, (e) => e.id, (e) => e.createdAt)
+		addToArray(store.notes.value, entity, (e) => e.id, (e) => e.createdAt)
 	},
 	deleted: async (entity) => {
-		const index = global.notes.value.findIndex((q) => q.id === entity.id)
-		if (index !== -1) global.notes.value.splice(index, 1)
+		const index = store.notes.value.findIndex((q) => q.id === entity.id)
+		if (index !== -1) store.notes.value.splice(index, 1)
 	}
-}, global.notes.value.at(-1)?.createdAt))
+}, store.notes.value.at(-1)?.createdAt))
 
 export const useNoteList = () => {
 	const fetchNotes = async () => {
-		await global.setError('')
+		await store.setError('')
 		try {
-			await global.setLoading(true)
-			const notes = await NotesUseCases.get(global.notes.value.at(-1)?.createdAt)
-			global.hasMore.value = !!notes.pages.next
-			notes.results.forEach((n) => addToArray(global.notes.value, n, (e) => e.id, (e) => e.createdAt))
-			global.fetched.value = true
+			await store.setLoading(true)
+			const notes = await NotesUseCases.get(store.notes.value.at(-1)?.createdAt)
+			store.hasMore.value = !!notes.pages.next
+			notes.results.forEach((n) => addToArray(store.notes.value, n, (e) => e.id, (e) => e.createdAt))
+			store.fetched.value = true
 		} catch (error) {
-			await global.setError(error)
+			await store.setError(error)
 		}
-		await global.setLoading(false)
+		await store.setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchNotes()
+		if (!store.fetched.value && !store.loading.value) await fetchNotes()
 		await listener.start()
 	})
 	onUnmounted(async () => {
 		await listener.close()
 	})
 
-	return { ...global, fetchOlderNotes: fetchNotes }
+	return { ...store, fetchOlderNotes: fetchNotes }
 }
 
 export const useCreateNote = () => {
@@ -125,7 +126,7 @@ export const useDeleteNote = (noteId: string) => {
 			await setLoading(true)
 			try {
 				await NotesUseCases.delete(noteId)
-				global.notes.value = global.notes.value
+				store.notes.value = store.notes.value
 					.filter((q) => q.id !== noteId)
 				await setMessage('Note deleted successfully')
 			} catch (error) {
@@ -142,9 +143,9 @@ export const useNote = (noteId: string) => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const note = computed({
-		get: () => global.notes.value.find((q) => q.id === noteId) ?? null,
+		get: () => store.notes.value.find((q) => q.id === noteId) ?? null,
 		set: (q) => {
-			if (q) addToArray(global.notes.value, q, (e) => e.id, (e) => e.createdAt)
+			if (q) addToArray(store.notes.value, q, (e) => e.id, (e) => e.createdAt)
 		}
 	})
 
@@ -152,13 +153,13 @@ export const useNote = (noteId: string) => {
 		await setError('')
 		try {
 			await setLoading(true)
-			let note = global.notes.value.find((q) => q.id === noteId) ?? null
+			let note = store.notes.value.find((q) => q.id === noteId) ?? null
 			if (note) {
 				await setLoading(false)
 				return
 			}
 			note = await NotesUseCases.find(noteId)
-			if (note) addToArray(global.notes.value, note, (e) => e.id, (e) => e.createdAt)
+			if (note) addToArray(store.notes.value, note, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
 		}
@@ -167,14 +168,14 @@ export const useNote = (noteId: string) => {
 	const listener = useListener(async () => {
 		return await NotesUseCases.listenToOne(noteId, {
 			created: async (entity) => {
-				addToArray(global.notes.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(store.notes.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			updated: async (entity) => {
-				addToArray(global.notes.value, entity, (e) => e.id, (e) => e.createdAt)
+				addToArray(store.notes.value, entity, (e) => e.id, (e) => e.createdAt)
 			},
 			deleted: async (entity) => {
-				const index = global.notes.value.findIndex((q) => q.id === entity.id)
-				if (index !== -1) global.notes.value.splice(index, 1)
+				const index = store.notes.value.findIndex((q) => q.id === entity.id)
+				if (index !== -1) store.notes.value.splice(index, 1)
 			}
 		})
 	})

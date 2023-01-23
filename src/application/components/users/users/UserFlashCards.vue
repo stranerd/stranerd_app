@@ -11,30 +11,20 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import FlashCardListCard from '@app/components/study/flashCards/FlashCardListCard.vue'
 import { useUserFlashCardList } from '@app/composable/users/users/flashCards'
 import { UserEntity } from '@modules/users'
 
-export default defineComponent({
-	name: 'UserFlashCards',
-	components: { FlashCardListCard },
-	props: {
-		user: {
-			type: UserEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const {
-			flashCards, error, loading, hasMore, fetchOlderFlashCards,
-			searchMode, searchResults, searchValue, search
-		} = useUserFlashCardList(props.user.id)
-		return {
-			flashCards, error, loading, hasMore, fetchOlderFlashCards,
-			searchMode, searchResults, searchValue, search
-		}
+const props = defineProps({
+	user: {
+		type: UserEntity,
+		required: true
 	}
 })
+
+const {
+	flashCards, error, loading, hasMore, fetchOlderFlashCards,
+	searchMode, searchResults, searchValue, search
+} = useUserFlashCardList(props.user.id)
 </script>

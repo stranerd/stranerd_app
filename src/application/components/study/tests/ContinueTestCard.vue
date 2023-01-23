@@ -24,34 +24,28 @@
 	</router-link>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { TestEntity } from '@modules/study'
 import { useTestPrep } from '@app/composable/study/testPreps'
 import Institution from '@app/components/school/institutions/Institution.vue'
 import Course from '@app/components/school/courses/Course.vue'
 
-export default defineComponent({
-	name: 'ContinueTestCard',
-	components: { Institution, Course },
-	props: {
-		test: {
-			required: true,
-			type: TestEntity
-		}
-	},
-	setup (props) {
-		const { testPrep } = useTestPrep(props.test.prepId)
-		return { testPrep }
+const props = defineProps({
+	test: {
+		required: true,
+		type: TestEntity
 	}
 })
+
+const { testPrep } = useTestPrep(props.test.prepId)
 </script>
 
 <style lang="scss" scoped>
 ion-progress-bar {
 	--background: #{$color-itemBg};
 	--progress-background: #{$color-success};
-	height: .5rem !important;
+
+	height: 0.5rem !important;
 	border-radius: 12px !important;
 }
 </style>

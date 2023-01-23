@@ -16,23 +16,17 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import PastQuestionForm from '@app/components/school/pastQuestions/PastQuestionForm.vue'
 import { useEditPastQuestion } from '@app/composable/school/pastQuestions'
+import { PropType } from 'vue'
 
-export default defineComponent({
-	name: 'EditPastQuestionModal',
-	components: { PastQuestionForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { factory, error, loading, editPastQuestion } = useEditPastQuestion()
-		return { factory, error, loading, editPastQuestion }
+defineProps({
+	close: {
+		type: Function as PropType<() => void>,
+		required: true
 	}
 })
+
+const { factory, error, loading, editPastQuestion } = useEditPastQuestion()
 </script>

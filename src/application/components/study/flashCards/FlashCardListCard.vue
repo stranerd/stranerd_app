@@ -13,52 +13,43 @@
 				<SaveToSet :entity="flashCard" />
 				<SpinLoading v-if="loading" />
 				<IonIcon v-if="flashCard.user.id === id" :icon="settingsOutline" @click.prevent="showMenu" />
+				<IonIcon v-else :icon="copyOutline" @click.prevent="cloneFlashCard(flashCard, $router)" />
 			</div>
 		</div>
 	</router-link>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { closeOutline, pencilOutline, settingsOutline, trashBinOutline } from 'ionicons/icons'
+<script lang="ts" setup>
+import { closeOutline, copyOutline, pencilOutline, settingsOutline, trashBinOutline } from 'ionicons/icons'
 import { formatNumber, pluralize } from '@utils/commons'
 import { FlashCardEntity } from '@modules/study'
 import SaveToSet from '@app/components/study/sets/SaveToSet.vue'
 import { useAuth } from '@app/composable/auth/auth'
 import { actionSheetController } from '@ionic/vue'
-import { openFlashCardEditModal, useDeleteFlashCard } from '@app/composable/study/flashCards'
+import { cloneFlashCard, openFlashCardEditModal, useDeleteFlashCard } from '@app/composable/study/flashCards'
 import { useRouter } from 'vue-router'
 
-export default defineComponent({
-	name: 'FlashCardListCard',
-	components: { SaveToSet },
-	props: {
-		flashCard: {
-			type: FlashCardEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const { id } = useAuth()
-		const { deleteFlashCard, loading } = useDeleteFlashCard(props.flashCard.id)
-		const router = useRouter()
-		const showMenu = async () => {
-			const actionSheet = await actionSheetController.create({
-				buttons: [
-					{
-						text: 'Edit flashCard', icon: pencilOutline,
-						handler: () => openFlashCardEditModal(props.flashCard, router)
-					},
-					{ text: 'Delete flashCard', role: 'destructive', icon: trashBinOutline, handler: deleteFlashCard },
-					{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
-				]
-			})
-			await actionSheet.present()
-		}
-		return {
-			id, settingsOutline,
-			formatNumber, pluralize, loading, showMenu
-		}
+const props = defineProps({
+	flashCard: {
+		type: FlashCardEntity,
+		required: true
 	}
 })
+
+const { id } = useAuth()
+const { deleteFlashCard, loading } = useDeleteFlashCard(props.flashCard.id)
+const router = useRouter()
+const showMenu = async () => {
+	const actionSheet = await actionSheetController.create({
+		buttons: [
+			{
+				text: 'Edit flashCard', icon: pencilOutline,
+				handler: () => openFlashCardEditModal(props.flashCard, router)
+			},
+			{ text: 'Delete flashCard', role: 'destructive', icon: trashBinOutline, handler: deleteFlashCard },
+			{ text: 'Cancel', icon: closeOutline, role: 'cancel' }
+		]
+	})
+	await actionSheet.present()
+}
 </script>

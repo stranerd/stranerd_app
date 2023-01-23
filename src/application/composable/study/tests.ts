@@ -1,13 +1,14 @@
 import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import { TestEntity, TestPrepEntity, TestsUseCases, TestType } from '@modules/study'
 import { PastQuestionEntity, PastQuestionsUseCases } from '@modules/school'
-import { useErrorHandler, useListener, useLoadingHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { useRouter } from 'vue-router'
 import { useAuth } from '@app/composable/auth/auth'
 import { useRedirectToAuth } from '@app/composable/auth/session'
 import { addToArray } from '@utils/commons'
+import { useListener } from '@app/composable/core/listener'
 
-const global = {
+const store = {
 	tests: ref([] as TestEntity[]),
 	fetched: ref(false),
 	hasMore: ref(false),
@@ -17,40 +18,40 @@ const global = {
 const listener = useListener(async () => {
 	return await TestsUseCases.listen({
 		created: async (entity) => {
-			addToArray(global.tests.value, entity, (e) => e.id, (e) => e.createdAt)
+			addToArray(store.tests.value, entity, (e) => e.id, (e) => e.createdAt)
 		},
 		updated: async (entity) => {
-			addToArray(global.tests.value, entity, (e) => e.id, (e) => e.createdAt)
+			addToArray(store.tests.value, entity, (e) => e.id, (e) => e.createdAt)
 		},
 		deleted: async (entity) => {
-			const index = global.tests.value.findIndex((q) => q.id === entity.id)
-			if (index !== -1) global.tests.value.splice(index, 1)
+			const index = store.tests.value.findIndex((q) => q.id === entity.id)
+			if (index !== -1) store.tests.value.splice(index, 1)
 		}
 	})
 })
 
-const testGlobal = {} as Record<string, {
+const testStore = {} as Record<string, {
 	questions: Ref<PastQuestionEntity[]>
 	fetched: Ref<boolean>,
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useTestList = () => {
 	const fetchTests = async () => {
-		await global.setError('')
+		await store.setError('')
 		try {
-			await global.setLoading(true)
+			await store.setLoading(true)
 			const tests = await TestsUseCases.get()
-			global.hasMore.value = !!tests.pages.next
-			tests.results.forEach((t) => addToArray(global.tests.value, t, (e) => e.id, (e) => e.createdAt))
-			global.fetched.value = true
+			store.hasMore.value = !!tests.pages.next
+			tests.results.forEach((t) => addToArray(store.tests.value, t, (e) => e.id, (e) => e.createdAt))
+			store.fetched.value = true
 		} catch (error) {
-			await global.setError(error)
+			await store.setError(error)
 		}
-		await global.setLoading(false)
+		await store.setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global.fetched.value && !global.loading.value) await fetchTests()
+		if (!store.fetched.value && !store.loading.value) await fetchTests()
 		await listener.start()
 	})
 	onUnmounted(async () => {
@@ -58,13 +59,13 @@ export const useTestList = () => {
 	})
 
 	const unCompletedTests = computed({
-		get: () => global.tests.value.filter((test) => !test.done),
+		get: () => store.tests.value.filter((test) => !test.done),
 		set: (tests) => {
-			tests.forEach((t) => addToArray(global.tests.value, t, (e) => e.id, (e) => e.createdAt))
+			tests.forEach((t) => addToArray(store.tests.value, t, (e) => e.id, (e) => e.createdAt))
 		}
 	})
 
-	return { ...global, unCompletedTests, fetchOlderTests: fetchTests }
+	return { ...store, unCompletedTests, fetchOlderTests: fetchTests }
 }
 
 export const useCreateTest = () => {
@@ -100,9 +101,9 @@ export const useTest = (testId: string) => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const test = computed({
-		get: () => global.tests.value.find((q) => q.id === testId) ?? null,
+		get: () => store.tests.value.find((q) => q.id === testId) ?? null,
 		set: (q) => {
-			if (q) addToArray(global.tests.value, q, (e) => e.id, (e) => e.createdAt)
+			if (q) addToArray(store.tests.value, q, (e) => e.id, (e) => e.createdAt)
 		}
 	})
 
@@ -110,13 +111,13 @@ export const useTest = (testId: string) => {
 		await setError('')
 		try {
 			await setLoading(true)
-			let test = global.tests.value.find((q) => q.id === testId) ?? null
+			let test = store.tests.value.find((q) => q.id === testId) ?? null
 			if (test) {
 				await setLoading(false)
 				return
 			}
 			test = await TestsUseCases.find(testId)
-			if (test) addToArray(global.tests.value, test, (e) => e.id, (e) => e.createdAt)
+			if (test) addToArray(store.tests.value, test, (e) => e.id, (e) => e.createdAt)
 		} catch (error) {
 			await setError(error)
 		}
@@ -135,7 +136,7 @@ export const useTest = (testId: string) => {
 }
 
 export const useTestDetails = (test: TestEntity) => {
-	if (testGlobal[test.id] === undefined) testGlobal[test.id] = {
+	if (testStore[test.id] === undefined) testStore[test.id] = {
 		questions: ref([]),
 		fetched: ref(false),
 		...useErrorHandler(),
@@ -143,41 +144,41 @@ export const useTestDetails = (test: TestEntity) => {
 	}
 
 	const fetchQuestions = async () => {
-		await testGlobal[test.id].setError('')
+		await testStore[test.id].setError('')
 		try {
-			await testGlobal[test.id].setLoading(true)
-			testGlobal[test.id].questions.value = await PastQuestionsUseCases.getQuestionsInList(test.questions)
-			testGlobal[test.id].fetched.value = true
+			await testStore[test.id].setLoading(true)
+			testStore[test.id].questions.value = await PastQuestionsUseCases.getQuestionsInList(test.questions)
+			testStore[test.id].fetched.value = true
 		} catch (error) {
-			await testGlobal[test.id].setError(error)
+			await testStore[test.id].setError(error)
 		}
-		await testGlobal[test.id].setLoading(false)
+		await testStore[test.id].setLoading(false)
 	}
 
 	const endTest = async () => {
-		await testGlobal[test.id].setLoading(true)
+		await testStore[test.id].setLoading(true)
 		if (!test.done) await TestsUseCases.end(test.id)
-		await testGlobal[test.id].setLoading(false)
+		await testStore[test.id].setLoading(false)
 	}
 
 	const updateAnswer = async (questionId: string, answer: number) => {
-		await testGlobal[test.id].setError('')
+		await testStore[test.id].setError('')
 		if (test.done) return
 		try {
-			await testGlobal[test.id].setLoading(true)
+			await testStore[test.id].setLoading(true)
 			await TestsUseCases.updateAnswer(test.id, questionId, answer)
 		} catch (error) {
-			await testGlobal[test.id].setError(error)
+			await testStore[test.id].setError(error)
 		}
-		await testGlobal[test.id].setLoading(false)
+		await testStore[test.id].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!testGlobal[test.id].fetched.value && !testGlobal[test.id].loading.value) await fetchQuestions()
+		if (!testStore[test.id].fetched.value && !testStore[test.id].loading.value) await fetchQuestions()
 	})
 
 	return {
-		...testGlobal[test.id],
+		...testStore[test.id],
 		endTest, updateAnswer
 	}
 }

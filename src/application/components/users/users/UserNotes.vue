@@ -11,30 +11,20 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import NoteListCard from '@app/components/study/notes/NoteListCard.vue'
 import { useUserNoteList } from '@app/composable/users/users/notes'
 import { UserEntity } from '@modules/users'
 
-export default defineComponent({
-	name: 'UserNotes',
-	components: { NoteListCard },
-	props: {
-		user: {
-			type: UserEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const {
-			notes, error, loading, hasMore, fetchOlderNotes,
-			searchMode, searchResults, searchValue, search
-		} = useUserNoteList(props.user.id)
-		return {
-			notes, error, loading, hasMore, fetchOlderNotes,
-			searchMode, searchResults, searchValue, search
-		}
+const props = defineProps({
+	user: {
+		type: UserEntity,
+		required: true
 	}
 })
+
+const {
+	notes, error, loading, hasMore, fetchOlderNotes,
+	searchMode, searchResults, searchValue, search
+} = useUserNoteList(props.user.id)
 </script>

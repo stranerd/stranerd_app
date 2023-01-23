@@ -11,20 +11,21 @@ import {
 	TestPrepEntity,
 	TestPrepsUseCases
 } from '@modules/study'
-import { useErrorHandler, useListener, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useStudyModal } from '@app/composable/core/modals'
 import { Alert, Notify } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
 import { Router } from 'vue-router'
 import { QuestionEntity, QuestionsUseCases } from '@modules/questions'
+import { useListener } from '@app/composable/core/listener'
 
-const global = {} as Record<string, {
+const store = {} as Record<string, {
 	set: Ref<SetEntity | null>
 	fetched: Ref<boolean>
 	listener: ReturnType<typeof useListener>
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
-const setGlobal = {} as Record<string, {
+const setStore = {} as Record<string, {
 	hash: Ref<string>
 	saved: {
 		questions: Ref<QuestionEntity[]>
@@ -37,21 +38,21 @@ const setGlobal = {} as Record<string, {
 } & ReturnType<typeof useErrorHandler> & ReturnType<typeof useLoadingHandler>>
 
 export const useSetById = (setId: string) => {
-	if (global[setId] === undefined) {
+	if (store[setId] === undefined) {
 		const listener = useListener(async () => {
 			return SetsUseCases.listenToOne(setId, {
 				created: async (entity) => {
-					global[setId].set.value = entity
+					store[setId].set.value = entity
 				},
 				updated: async (entity) => {
-					global[setId].set.value = entity
+					store[setId].set.value = entity
 				},
 				deleted: async () => {
-					global[setId].set.value = null
+					store[setId].set.value = null
 				}
 			})
 		})
-		global[setId] = {
+		store[setId] = {
 			set: ref(null),
 			fetched: ref(false),
 			listener,
@@ -61,25 +62,25 @@ export const useSetById = (setId: string) => {
 	}
 
 	const fetchSet = async () => {
-		await global[setId].setError('')
+		await store[setId].setError('')
 		try {
-			await global[setId].setLoading(true)
-			global[setId].set.value = await SetsUseCases.find(setId)
+			await store[setId].setLoading(true)
+			store[setId].set.value = await SetsUseCases.find(setId)
 		} catch (error) {
-			await global[setId].setError(error)
+			await store[setId].setError(error)
 		}
-		await global[setId].setLoading(false)
+		await store[setId].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!global[setId].fetched.value && !global[setId].loading.value) await fetchSet()
-		await global[setId].listener.start()
+		if (!store[setId].fetched.value && !store[setId].loading.value) await fetchSet()
+		await store[setId].listener.start()
 	})
 	onUnmounted(async () => {
-		await global[setId].listener.close()
+		await store[setId].listener.close()
 	})
 
-	return { ...global[setId] }
+	return { ...store[setId] }
 }
 
 export const useSet = (set: SetEntity) => {
@@ -87,50 +88,50 @@ export const useSet = (set: SetEntity) => {
 		const listeners = await Promise.all([
 			QuestionsUseCases.listenInList(set.saved.questions, {
 				created: async (entity) => {
-					addToArray(setGlobal[set.id].saved.questions.value, entity, (e) => e.id, (e) => e.trimmedBody)
+					addToArray(setStore[set.id].saved.questions.value, entity, (e) => e.id, (e) => e.trimmedBody)
 				},
 				updated: async (entity) => {
-					addToArray(setGlobal[set.id].saved.questions.value, entity, (e) => e.id, (e) => e.trimmedBody)
+					addToArray(setStore[set.id].saved.questions.value, entity, (e) => e.id, (e) => e.trimmedBody)
 				},
 				deleted: async (entity) => {
-					const index = setGlobal[set.id].saved.questions.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) setGlobal[set.id].saved.questions.value.splice(index, 1)
+					const index = setStore[set.id].saved.questions.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setStore[set.id].saved.questions.value.splice(index, 1)
 				}
 			}),
 			NotesUseCases.listenInList(set.saved.notes, {
 				created: async (entity) => {
-					addToArray(setGlobal[set.id].saved.notes.value, entity, (e) => e.id, (e) => e.title)
+					addToArray(setStore[set.id].saved.notes.value, entity, (e) => e.id, (e) => e.title)
 				},
 				updated: async (entity) => {
-					addToArray(setGlobal[set.id].saved.notes.value, entity, (e) => e.id, (e) => e.title)
+					addToArray(setStore[set.id].saved.notes.value, entity, (e) => e.id, (e) => e.title)
 				},
 				deleted: async (entity) => {
-					const index = setGlobal[set.id].saved.notes.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) setGlobal[set.id].saved.notes.value.splice(index, 1)
+					const index = setStore[set.id].saved.notes.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setStore[set.id].saved.notes.value.splice(index, 1)
 				}
 			}),
 			FlashCardsUseCases.listenInList(set.saved.flashCards, {
 				created: async (entity) => {
-					addToArray(setGlobal[set.id].saved.flashCards.value, entity, (e) => e.id, (e) => e.title)
+					addToArray(setStore[set.id].saved.flashCards.value, entity, (e) => e.id, (e) => e.title)
 				},
 				updated: async (entity) => {
-					addToArray(setGlobal[set.id].saved.flashCards.value, entity, (e) => e.id, (e) => e.title)
+					addToArray(setStore[set.id].saved.flashCards.value, entity, (e) => e.id, (e) => e.title)
 				},
 				deleted: async (entity) => {
-					const index = setGlobal[set.id].saved.flashCards.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) setGlobal[set.id].saved.flashCards.value.splice(index, 1)
+					const index = setStore[set.id].saved.flashCards.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setStore[set.id].saved.flashCards.value.splice(index, 1)
 				}
 			}),
 			TestPrepsUseCases.listenInList(set.saved.testPreps, {
 				created: async (entity) => {
-					addToArray(setGlobal[set.id].saved.testPreps.value, entity, (e) => e.id, (e) => e.name)
+					addToArray(setStore[set.id].saved.testPreps.value, entity, (e) => e.id, (e) => e.name)
 				},
 				updated: async (entity) => {
-					addToArray(setGlobal[set.id].saved.testPreps.value, entity, (e) => e.id, (e) => e.name)
+					addToArray(setStore[set.id].saved.testPreps.value, entity, (e) => e.id, (e) => e.name)
 				},
 				deleted: async (entity) => {
-					const index = setGlobal[set.id].saved.testPreps.value.findIndex((q) => q.id === entity.id)
-					if (index !== -1) setGlobal[set.id].saved.testPreps.value.splice(index, 1)
+					const index = setStore[set.id].saved.testPreps.value.findIndex((q) => q.id === entity.id)
+					if (index !== -1) setStore[set.id].saved.testPreps.value.splice(index, 1)
 				}
 			})
 		])
@@ -138,9 +139,9 @@ export const useSet = (set: SetEntity) => {
 			await Promise.all(listeners.map(((listener) => listener())))
 		}
 	}
-	if (setGlobal[set.id] === undefined) {
+	if (setStore[set.id] === undefined) {
 		const listener = useListener(listenerFn)
-		setGlobal[set.id] = {
+		setStore[set.id] = {
 			hash: ref(set.hash),
 			saved: {
 				questions: ref([]),
@@ -156,40 +157,40 @@ export const useSet = (set: SetEntity) => {
 	}
 
 	const fetchAllSetEntities = async () => {
-		await setGlobal[set.id].setError('')
+		await setStore[set.id].setError('')
 		try {
-			await setGlobal[set.id].setLoading(true)
+			await setStore[set.id].setLoading(true)
 			const [questions, notes, flashCards, testPreps] = await Promise.all([
 				QuestionsUseCases.getInList(set.saved.questions), NotesUseCases.getInList(set.saved.notes),
 				FlashCardsUseCases.getInList(set.saved.flashCards), TestPrepsUseCases.getInList(set.saved.testPreps)
 			])
-			setGlobal[set.id].saved.questions.value = questions.results
-			setGlobal[set.id].saved.notes.value = notes.results
-			setGlobal[set.id].saved.flashCards.value = flashCards.results
-			setGlobal[set.id].saved.testPreps.value = testPreps.results
-			setGlobal[set.id].fetched.value = true
+			setStore[set.id].saved.questions.value = questions.results
+			setStore[set.id].saved.notes.value = notes.results
+			setStore[set.id].saved.flashCards.value = flashCards.results
+			setStore[set.id].saved.testPreps.value = testPreps.results
+			setStore[set.id].fetched.value = true
 		} catch (error) {
-			await setGlobal[set.id].setError(error)
+			await setStore[set.id].setError(error)
 		}
-		await setGlobal[set.id].setLoading(false)
+		await setStore[set.id].setLoading(false)
 	}
 
 	onMounted(async () => {
-		if (!setGlobal[set.id].fetched.value && !setGlobal[set.id].loading.value) await fetchAllSetEntities()
-		if (setGlobal[set.id].hash.value !== set.hash) setGlobal[set.id].hash.value = set.hash
-		await setGlobal[set.id].listener.reset(listenerFn)
+		if (!setStore[set.id].fetched.value && !setStore[set.id].loading.value) await fetchAllSetEntities()
+		if (setStore[set.id].hash.value !== set.hash) setStore[set.id].hash.value = set.hash
+		await setStore[set.id].listener.reset(listenerFn)
 	})
 	onUnmounted(async () => {
-		await setGlobal[set.id].listener.close()
+		await setStore[set.id].listener.close()
 	})
 
-	const questions = computed(() => setGlobal[set.id].saved.questions.value.filter((question) => set.saved.questions.includes(question.id)))
-	const notes = computed(() => setGlobal[set.id].saved.notes.value.filter((note) => set.saved.notes.includes(note.id)))
-	const flashCards = computed(() => setGlobal[set.id].saved.flashCards.value.filter((flashCard) => set.saved.flashCards.includes(flashCard.id)))
-	const testPreps = computed(() => setGlobal[set.id].saved.testPreps.value.filter((testPrep) => set.saved.testPreps.includes(testPrep.id)))
+	const questions = computed(() => setStore[set.id].saved.questions.value.filter((question) => set.saved.questions.includes(question.id)))
+	const notes = computed(() => setStore[set.id].saved.notes.value.filter((note) => set.saved.notes.includes(note.id)))
+	const flashCards = computed(() => setStore[set.id].saved.flashCards.value.filter((flashCard) => set.saved.flashCards.includes(flashCard.id)))
+	const testPreps = computed(() => setStore[set.id].saved.testPreps.value.filter((testPrep) => set.saved.testPreps.includes(testPrep.id)))
 
 	return {
-		...setGlobal[set.id], fetchAllSetEntities,
+		...setStore[set.id], fetchAllSetEntities,
 		questions, notes, flashCards, testPreps
 	}
 }
@@ -215,7 +216,7 @@ export const useSaveToSet = () => {
 			await setLoading(true)
 			await SetsUseCases.saveProp(set.id, prop, [itemId], false)
 			// @ts-ignore
-			if (setGlobal[set.id]) setGlobal[set.id].saved[prop].value = setGlobal[set.id][prop].value.filter((item) => item.id !== itemId)
+			if (setStore[set.id]) setStore[set.id].saved[prop].value = setStore[set.id][prop].value.filter((item) => item.id !== itemId)
 			useStudyModal().closeSaveEntity()
 			await Notify({ message: 'Removed from folder successfully' })
 		} catch (e) {

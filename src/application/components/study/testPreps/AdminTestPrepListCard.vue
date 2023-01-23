@@ -13,22 +13,16 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { TestPrepEntity } from '@modules/study'
 import { openTestPrepEditModal, useDeleteTestPrep } from '@app/composable/study/testPreps'
 
-export default defineComponent({
-	name: 'AdminTestPrepListCard',
-	props: {
-		testPrep: {
-			type: TestPrepEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const { loading, error, deleteTestPrep } = useDeleteTestPrep(props.testPrep.id)
-		return { loading, error, deleteTestPrep, openTestPrepEditModal }
+const props = defineProps({
+	testPrep: {
+		type: TestPrepEntity,
+		required: true
 	}
 })
+
+const { loading, error, deleteTestPrep } = useDeleteTestPrep(props.testPrep.id)
 </script>

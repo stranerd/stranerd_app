@@ -16,7 +16,7 @@
 			<IonLabel>Announcement</IonLabel>
 			<IonTextarea v-model="factory.body"
 				:class="{'valid': factory.isValid('body'), 'invalid': factory.errors.body}"
-				placeholder="Write announcement" row="3" />
+				:row="3" placeholder="Write announcement" />
 			<DisplayError :error="factory.errors.body" />
 		</div>
 
@@ -46,40 +46,35 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { AnnouncementFactory } from '@modules/classes'
 import { useUserClassList } from '@app/composable/users/users/classes'
 import { addOutline, trashBinOutline } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'AnnouncementForm',
-	props: {
-		factory: {
-			type: AnnouncementFactory,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		},
-		disabled: {
-			type: Object,
-			required: false,
-			default: () => ({})
-		}
+const props = defineProps({
+	factory: {
+		type: AnnouncementFactory,
+		required: true
 	},
-	setup () {
-		const { adminClasses } = useUserClassList()
-		return { adminClasses, addOutline, trashBinOutline }
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
+	},
+	disabled: {
+		type: Object,
+		required: false,
+		default: () => ({})
 	}
 })
+
+const { adminClasses } = useUserClassList()
 </script>

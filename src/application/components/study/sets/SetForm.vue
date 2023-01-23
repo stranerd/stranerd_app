@@ -23,38 +23,31 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { closeOutline } from 'ionicons/icons'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { SetFactory } from '@modules/study'
 import { useStudyModal } from '@app/composable/core/modals'
 
-export default defineComponent({
-	name: 'SetForm',
-	props: {
-		factory: {
-			type: SetFactory,
-			required: true
-		},
-		submit: {
-			type: Function as PropType<() => Promise<void>>,
-			required: true
-		},
-		loading: {
-			type: Boolean,
-			required: true
-		},
-		error: {
-			type: String,
-			required: true
-		}
+defineProps({
+	factory: {
+		type: SetFactory,
+		required: true
 	},
-	setup () {
-		const closeModal = () => {
-			useStudyModal().closeAll()
-		}
-
-		return { closeOutline, closeModal }
+	submit: {
+		type: Function as PropType<() => Promise<void>>,
+		required: true
+	},
+	loading: {
+		type: Boolean,
+		required: true
+	},
+	error: {
+		type: String,
+		required: true
 	}
 })
+
+const closeModal = () => {
+	useStudyModal().closeAll()
+}
 </script>

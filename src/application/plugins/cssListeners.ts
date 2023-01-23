@@ -1,4 +1,4 @@
-import { definePlugin } from '@app/plugins/index'
+import { definePlugin } from '@app/plugins'
 
 export const cssListeners = definePlugin(async () => {
 	const hasNoGapSupport = () => {

@@ -5,19 +5,15 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import QuestionListCard from '@app/components/questions/questions/QuestionListCard.vue'
 import { QuestionEntity } from '@modules/questions'
 
-export default defineComponent({
-	name: 'SearchQuestionsList',
-	components: { QuestionListCard },
-	props: {
-		questions: {
-			type: Array as PropType<QuestionEntity[]>,
-			required: true
-		}
+defineProps({
+	questions: {
+		type: Array as PropType<QuestionEntity[]>,
+		required: true
 	}
 })
 </script>

@@ -25,34 +25,28 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useCreateTest, useTestDetails } from '@app/composable/study/tests'
-import { defineComponent, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { TestEntity } from '@modules/study'
 import DonutChart from '@app/components/core/DonutChart.vue'
 import { formatNumber } from '@utils/commons'
 import { useRouter } from 'vue-router'
 import { useTestPrep } from '@app/composable/study/testPreps'
 
-export default defineComponent({
-	name: 'TestResults',
-	components: { DonutChart },
-	props: {
-		test: {
-			type: TestEntity,
-			required: true
-		}
-	},
-	setup (props) {
-		const router = useRouter()
-		const { error, loading, questions, endTest } = useTestDetails(props.test)
-		const { testPrep: prep } = useTestPrep(props.test.prepId)
-		const { createTest, loading: createLoading } = useCreateTest()
-		onMounted(async () => {
-			await endTest()
-			if (!props.test.isTimed) await router.replace(`/study/tests/${props.test.id}/take`)
-		})
-		return { error, loading, questions, formatNumber, createTest, createLoading, prep }
+const props = defineProps({
+	test: {
+		type: TestEntity,
+		required: true
 	}
+})
+
+const router = useRouter()
+const { error, loading, questions, endTest } = useTestDetails(props.test)
+const { testPrep: prep } = useTestPrep(props.test.prepId)
+const { createTest, loading: createLoading } = useCreateTest()
+onMounted(async () => {
+	await endTest()
+	if (!props.test.isTimed) await router.replace(`/study/tests/${props.test.id}/take`)
 })
 </script>

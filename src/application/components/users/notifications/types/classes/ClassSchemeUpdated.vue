@@ -16,32 +16,26 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { NotificationEntity } from '@modules/users'
 import { formatTime } from '@utils/dates'
 import { useClass } from '@app/composable/classes/classes'
 import { arrowForwardOutline, ellipse } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'ClassSchemeUpdated',
-	props: {
-		notification: {
-			type: NotificationEntity,
-			required: true
-		},
-		classId: {
-			type: String,
-			required: true
-		},
-		title: {
-			type: String,
-			required: true
-		}
+const props = defineProps({
+	notification: {
+		type: NotificationEntity,
+		required: true
 	},
-	setup (props) {
-		const { classInst } = useClass(props.classId)
-		return { classInst, formatTime, arrowForwardOutline, ellipse }
+	classId: {
+		type: String,
+		required: true
+	},
+	title: {
+		type: String,
+		required: true
 	}
 })
+
+const { classInst } = useClass(props.classId)
 </script>

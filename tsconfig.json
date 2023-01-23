@@ -44,5 +44,8 @@
 		"node_modules",
 		"build",
 		"dist"
-	]
+	],
+	"vueCompilerOptions": {
+		"narrowingTypesInInlineHandlers": true
+	}
 }

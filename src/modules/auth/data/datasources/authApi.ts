@@ -7,6 +7,7 @@ import {
 	AuthExtras,
 	NewUser,
 	PasswordUpdate,
+	Phone,
 	ProfileUpdate
 } from '../../domain/entities/auth'
 import { AuthBaseDataSource } from './authBase'
@@ -56,6 +57,14 @@ export class AuthApiDataSource implements AuthBaseDataSource {
 		return await this.authClient.post<any, AfterAuthUser>('/emails/verify', {
 			token
 		})
+	}
+
+	async sendVerificationText (phone: Phone) {
+		await this.authClient.post<any, boolean>('/phone/verify/text', { phone })
+	}
+
+	async completePhoneVerification (token: string) {
+		return await this.authClient.post<any, AfterAuthUser>('/phone/verify', { token })
 	}
 
 	async sendPasswordResetEmail (email: string) {

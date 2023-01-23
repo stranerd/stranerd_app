@@ -7,35 +7,29 @@
 			<IonIcon :icon="star" />
 		</span>
 		<span class="ml-auto">
-			{{ formatNumber(user.account.rankings[time], 2) }}pts
+			{{ formatNumber(user.account.rankings[time].value, 2) }}pts
 		</span>
 	</router-link>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType } from 'vue'
 import { formatNumber } from '@utils/commons'
 import { RankingTimes, UserEntity } from '@modules/users'
 import { star } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'LeaderboardListCard',
-	props: {
-		user: {
-			type: UserEntity,
-			required: true
-		},
-		rank: {
-			type: Number,
-			required: true
-		},
-		time: {
-			type: String as PropType<RankingTimes>,
-			required: true
-		}
+defineProps({
+	user: {
+		type: UserEntity,
+		required: true
 	},
-	setup () {
-		return { formatNumber, star }
+	rank: {
+		type: Number,
+		required: true
+	},
+	time: {
+		type: String as PropType<RankingTimes>,
+		required: true
 	}
 })
 </script>

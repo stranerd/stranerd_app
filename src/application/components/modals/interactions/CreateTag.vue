@@ -16,23 +16,17 @@
 	</Modal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import TagForm from '@app/components/interactions/tags/TagForm.vue'
 import { useCreateTag } from '@app/composable/interactions/tags'
+import { PropType } from 'vue'
 
-export default defineComponent({
-	name: 'CreateTagModal',
-	components: { TagForm },
-	props: {
-		close: {
-			type: Function,
-			required: true
-		}
-	},
-	setup () {
-		const { factory, error, loading, createTag } = useCreateTag()
-		return { factory, error, loading, createTag }
+defineProps({
+	close: {
+		type: Function as PropType<() => void>,
+		required: true
 	}
 })
+
+const { factory, error, loading, createTag } = useCreateTag()
 </script>

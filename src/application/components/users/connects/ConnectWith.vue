@@ -23,32 +23,23 @@
 	</template>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import { useConnects } from '@app/composable/users/connects'
-import { closeOutline, linkOutline, unlinkOutline } from 'ionicons/icons'
+import { closeOutline, linkOutline } from 'ionicons/icons'
 
-export default defineComponent({
-	name: 'ConnectWith',
-	props: {
-		userId: {
-			type: String,
-			required: true
-		}
-	},
-	setup (props) {
-		const {
-			connects, loading, error, fetched,
-			createConnect, acceptConnect, deleteConnect
-		} = useConnects()
-		const connect = computed(() => connects.value.find((c) => [c.from.id, c.to.id].includes(props.userId)) ?? null)
-		return {
-			connect, loading, error, fetched,
-			createConnect, acceptConnect, deleteConnect,
-			closeOutline, linkOutline, unlinkOutline
-		}
+const props = defineProps({
+	userId: {
+		type: String,
+		required: true
 	}
 })
+
+const {
+	connects, loading, error, fetched,
+	createConnect, acceptConnect, deleteConnect
+} = useConnects()
+const connect = computed(() => connects.value.find((c) => [c.from.id, c.to.id].includes(props.userId)) ?? null)
 </script>
 
 <style lang="scss" scoped>
