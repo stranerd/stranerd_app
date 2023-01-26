@@ -69,9 +69,7 @@ const props = defineProps({
 	}
 })
 
-const { isLoggedIn } = useAuth()
 const { record, loading, saveMatch } = useSaveFlashCardMatch(props.flashCard.id)
-const { redirect } = useRedirectToAuth()
 
 const started = ref(false)
 const done = ref(false)
@@ -88,7 +86,6 @@ onUnmounted(() => {
 })
 
 const start = () => {
-	if (!isLoggedIn.value) return redirect()
 	indexes.value = shuffleArray(indexes.value)
 	success.value = {}
 	errors.value = {}

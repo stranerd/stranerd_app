@@ -1,6 +1,38 @@
 <template>
-	<TakeTest v-if="state.started" :answers="state.answers" :close="close" :instant="state.instant" :onAnswer="onAnswer"
-		:questions="state.questions" :restart="start" :submit="submit" :submitted="state.submitted" />
+	<TakeTest v-if="state.started" :answers="state.answers" :close="close"
+		:correct="correct.length"
+		:instant="state.instant"
+		:onAnswer="onAnswer" :questions="state.questions" :restart="start" :submit="submit"
+		:submitted="state.submitted"
+	>
+		<template v-slot:study>
+			<a v-for="{ label, sub, icon, func } in [
+				{ label: 'Flashcard', icon: copyOutline, sub: 'The best way to memorize your studies', func: () => $router.push(`/study/flashCards/${flashCard.id}/flash`) },
+				{ label: 'Read', icon: readerOutline, sub: 'Study questions with answers together', func: () => $router.push(`/study/flashCards/${flashCard.id}/read`) },
+			]" :key="label" class="flex items-center card-padding !gap-4 card-sm" @click="func">
+				<span class="rounded-full w-14 h-14 flex items-center justify-center bg-bodyBg">
+					<IonIcon :icon="icon" />
+				</span>
+				<span class="flex flex-col">
+					<span class="font-bold">{{ label }}</span>
+					<span class="text-sm text-secondaryText">{{ sub }}</span>
+				</span>
+			</a>
+		</template>
+		<template v-if="correct.length !== state.questions.length" v-slot:retry>
+			<a v-for="{ label, sub, icon, func } in [
+				{ label: 'Retake failed questions', icon: closeOutline, sub: 'Test with the questions you missed', func: retakeFailed },
+			]" :key="label" class="flex items-center card-padding !gap-4 card-sm" @click="func">
+				<span class="rounded-full w-14 h-14 flex items-center justify-center bg-bodyBg">
+					<IonIcon :icon="icon" />
+				</span>
+				<span class="flex flex-col">
+					<span class="font-bold">{{ label }}</span>
+					<span class="text-sm text-secondaryText">{{ sub }}</span>
+				</span>
+			</a>
+		</template>
+	</TakeTest>
 	<div v-else class="flex flex-col">
 		<div class="flex gap-4 justify-between items-center p-4 text-lg">
 			<IonIcon :icon="closeOutline" @click="close" />
@@ -30,10 +62,8 @@
 
 <script lang="ts" setup>
 import { FlashCardEntity, Test } from '@modules/study'
-import { closeOutline } from 'ionicons/icons'
-import { PropType, reactive, watch } from 'vue'
-import { useRedirectToAuth } from '@app/composable/auth/session'
-import { useAuth } from '@app/composable/auth/auth'
+import { closeOutline, copyOutline, readerOutline } from 'ionicons/icons'
+import { computed, PropType, reactive, watch } from 'vue'
 import { getRandomSample, shuffleArray } from '@stranerd/validate'
 import TakeTest from '@app/components/study/flashCards/modes/TakeTest.vue'
 
@@ -47,9 +77,6 @@ const props = defineProps({
 		required: true
 	}
 })
-
-const { isLoggedIn } = useAuth()
-const { redirect } = useRedirectToAuth()
 
 // eslint-disable-next-line vue/no-setup-props-destructure
 const length = props.flashCard.set.length
@@ -80,9 +107,15 @@ resetQuestions()
 watch(() => state.noQuestions, resetQuestions)
 
 const start = () => {
-	if (!isLoggedIn.value) return redirect()
 	state.submitted = false
 	state.answers = {}
+	state.started = true
+}
+
+const retakeFailed = () => {
+	state.questions = state.questions.filter((q) => state.answers[q.id] !== q.correct)
+	state.answers = {}
+	state.submitted = false
 	state.started = true
 }
 
@@ -94,4 +127,6 @@ const onAnswer = (questionId: string, optionIdx: number) => {
 	if (state.submitted) return
 	state.answers[questionId] = optionIdx
 }
+
+const correct = computed(() => state.questions.filter((q) => state.answers[q.id] === q.correct))
 </script>

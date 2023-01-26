@@ -1,6 +1,7 @@
 <template>
 	<Donut
 		:auto-adjust-text-size="true"
+		:background="background"
 		:foreground="bgColor"
 		:has-legend="false"
 		:sections="sections"
@@ -8,7 +9,6 @@
 		:start-angle="0"
 		:thickness="thickness"
 		:total="totalSections < 100 ? 100 : totalSections"
-		background="#FFFFFF"
 		unit="px"
 		@section-click="onClick"
 	>
@@ -54,11 +54,18 @@ const props = defineProps({
 		type: Number,
 		required: false,
 		default: 32
+	},
+	full: {
+		type: Boolean,
+		required: false,
+		default: false
 	}
 })
 
 const sections = computed(() => [{ value: props.percentage, color: props.fgColor }])
 const totalSections = computed(() => sections.value.map((s) => s.value).reduce((acc, v) => acc + v, 0))
+
+const background = computed(() => props.full ? 'transparent' : getComputedStyle(document.body).getPropertyValue('--clr-bodyBg'))
 </script>
 
 <style lang="scss" scoped>
