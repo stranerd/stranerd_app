@@ -83,6 +83,7 @@ ion-modal.modal-class {
 	&::part(content) {
 		overflow-y: auto;
 	}
+
 	@media (min-width: $lg) {
 		&::part(content) {
 			position: static;
@@ -219,8 +220,8 @@ ion-input.invalid::after {
 	--padding-start: 1.25rem;
 	--padding-end: 1.25rem;
 	@media (min-width: $lg) {
-		--padding-start: 1.25rem;
-		--padding-end: 1.25rem;
+		--padding-top: 1.25rem;
+		--padding-bottom: 1.25rem;
 	}
 }
 
