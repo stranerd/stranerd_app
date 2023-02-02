@@ -1,10 +1,13 @@
 {
 	"compilerOptions": {
-		"target": "ES2017",
+		"target": "ESNext",
+		"useDefineForClassFields": true,
 		"module": "ESNext",
 		"moduleResolution": "Node",
 		"strict": true,
 		"jsx": "preserve",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
 		"importHelpers": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
@@ -16,6 +19,7 @@
 			"@types/node",
 			"vite/client"
 		],
+		"noEmit": true,
 		"paths": {
 			"@root/*": [
 				"src/*"
@@ -37,9 +41,7 @@
 			"scripthost"
 		]
 	},
-	"include": [
-		"src"
-	],
+	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
 	"exclude": [
 		"node_modules",
 		"build",

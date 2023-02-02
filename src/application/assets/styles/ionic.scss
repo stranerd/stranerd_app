@@ -83,7 +83,6 @@ ion-modal.modal-class {
 	&::part(content) {
 		overflow-y: auto;
 	}
-
 	@media (min-width: $lg) {
 		&::part(content) {
 			position: static;
