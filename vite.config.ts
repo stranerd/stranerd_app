@@ -147,6 +147,8 @@ const pwa = VitePWA({
 	}
 })
 
+pwa
+
 export default defineConfig({
 	plugins: [
 		{
@@ -189,8 +191,8 @@ export default defineConfig({
 				eslint: { lintCommand: 'eslint ./src/**/*.{js,ts,vue}' }
 				// stylelint: { lintCommand: 'stylelint ./src/**/*.{css,scss,vue}' }
 			})
-		] : []),
-		pwa
+		] : [])
+		// pwa
 	],
 	build: {
 		minify: 'terser'

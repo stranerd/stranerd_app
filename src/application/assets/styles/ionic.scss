@@ -219,8 +219,8 @@ ion-input.invalid::after {
 	--padding-start: 1.25rem;
 	--padding-end: 1.25rem;
 	@media (min-width: $lg) {
-		--padding-start: 1.25rem;
-		--padding-end: 1.25rem;
+		--padding-top: 1.25rem;
+		--padding-bottom: 1.25rem;
 	}
 }
 

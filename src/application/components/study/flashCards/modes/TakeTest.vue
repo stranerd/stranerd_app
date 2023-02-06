@@ -19,7 +19,8 @@
 	</div>
 	<div v-else class="flex flex-col">
 		<div class="flex gap-4 justify-between items-center p-4 text-lg">
-			<IonIcon :icon="closeOutline" @click="close" />
+			<IonIcon v-if="state.corrections" :icon="closeOutline" @click="state.corrections = !state.corrections" />
+			<IonIcon v-else :icon="closeOutline" @click="close" />
 			<span class="font-bold">
 				{{ state.page + 1 }}/{{ formatNumber(questions.length) }}
 			</span>
@@ -32,13 +33,25 @@
 		</div>
 
 		<div v-if="submitted && !state.corrections" class="page-side-padding showcase-flex !gap-6">
-			<p>Results</p>
+			<div class="flex gap-6 items-center justify-center">
+				<DonutChart :bgColor="score >= 50 ? '#00D24622' : '#FF666622'"
+					:fgColor="score >= 50 ? '#00D246' : '#FF6666'"
+					:percentage="score" :size="105" :thickness="12">
+					{{ formatNumber(score, 1) }}%
+				</DonutChart>
+				<DonutChart :full="true" :percentage="0" :size="105" :thickness="0" bgColor="#00D24622"
+					fgColor="#00D246">
+					{{ formatNumber(correct, 1) }}
+				</DonutChart>
+				<DonutChart :full="true" :percentage="0" :size="105" :thickness="0" bgColor="#FF666622"
+					fgColor="#FF6666">
+					{{ formatNumber(questions.length - correct, 1) }}
+				</DonutChart>
+			</div>
+			<IonText class="font-bold text-lg mt-6">Back to study</IonText>
 			<div class="flex flex-col gap-4">
 				<a v-for="{ label, sub, icon, func } in [
 					{ label: 'Correction', icon: checkmarkOutline, sub: 'Compare correct answers with your own', func: () => state.corrections = true },
-					...(restart ? [
-						{ label: 'Retake the test', icon: documentTextOutline, sub: 'Start the test again', func: restartTest },
-					] : [])
 				]" :key="label" class="flex items-center card-padding !gap-4 card-sm" @click="func">
 					<span class="rounded-full w-14 h-14 flex items-center justify-center bg-bodyBg">
 						<IonIcon :icon="icon" />
@@ -48,7 +61,23 @@
 						<span class="text-sm text-secondaryText">{{ sub }}</span>
 					</span>
 				</a>
+				<slot name="study" />
 			</div>
+			<template v-if="restart">
+				<IonText class="font-bold text-lg mt-6">Try again</IonText>
+				<a v-for="{ label, sub, icon, func } in [
+					{ label: 'Retake the test', icon: documentTextOutline, sub: 'Start the test again', func: restartTest }
+				]" :key="label" class="flex items-center card-padding !gap-4 card-sm" @click="func">
+					<span class="rounded-full w-14 h-14 flex items-center justify-center bg-bodyBg">
+						<IonIcon :icon="icon" />
+					</span>
+					<span class="flex flex-col">
+						<span class="font-bold">{{ label }}</span>
+						<span class="text-sm text-secondaryText">{{ sub }}</span>
+					</span>
+				</a>
+				<slot name="retry" />
+			</template>
 		</div>
 		<div v-else class="page-side-padding showcase-flex !gap-6">
 			<p class="text-xl">
@@ -80,6 +109,7 @@ import {
 import { computed, PropType, reactive } from 'vue'
 import { Test } from '@modules/study'
 import { formatNumber } from '@utils/commons'
+import { getPercentage } from '@stranerd/validate'
 
 const props = defineProps({
 	questions: {
@@ -112,6 +142,10 @@ const props = defineProps({
 	},
 	close: {
 		type: Function as PropType<() => void>,
+		required: true
+	},
+	correct: {
+		type: Number,
 		required: true
 	}
 })
@@ -149,6 +183,8 @@ const restartTest = async () => {
 	state.page = 0
 	state.settings = false
 }
+
+const score = computed(() => getPercentage(props.correct, props.questions.length))
 </script>
 
 <style lang="scss" scoped>

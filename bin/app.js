@@ -42,7 +42,7 @@ const appBuild = async (args) => {
 
 	const android = () => {
 		const validTypes = ['assemble', 'bundle']
-		const type = args[2] ?? validTypes[0]
+		const type = args[2] ?? validTypes[1]
 
 		if (!validTypes.includes(type)) {
 			console.log(`Invalid type. Supported values: ${ validTypes.join(', ') }`)
