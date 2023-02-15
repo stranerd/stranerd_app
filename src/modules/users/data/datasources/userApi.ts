@@ -34,6 +34,6 @@ export class UserApiDataSource implements UserBaseDataSource {
 	}
 
 	async updateSchool (school: UserSchoolData) {
-		await this.stranerdClient.put<UserSchoolData, boolean>('/school', school)
+		await this.stranerdClient.put<{ school: UserSchoolData }, boolean>('/school', { school })
 	}
 }
