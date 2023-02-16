@@ -1,9 +1,9 @@
-import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
-import { ChatEntity, ChatFactory, ChatsUseCases } from '@modules/messaging'
-import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
 import { useAuth } from '@app/composable/auth/auth'
-import { addToArray, groupBy } from '@utils/commons'
 import { useListener } from '@app/composable/core/listener'
+import { useErrorHandler, useLoadingHandler } from '@app/composable/core/states'
+import { ChatEntity, ChatFactory, ChatsUseCases } from '@modules/messaging'
+import { addToArray, groupBy } from '@utils/commons'
+import { computed, onMounted, onUnmounted, ref, Ref } from 'vue'
 
 const store = {} as Record<string, {
 	chats: Ref<ChatEntity[]>
@@ -81,23 +81,23 @@ export const useChats = (to: string) => {
 }
 
 export const useCreateChat = (to: string) => {
-	const factory = ref(new ChatFactory()) as Ref<ChatFactory>
+	const factory = new ChatFactory()
 	const loadingCounter = ref(0)
 	const { error, setError } = useErrorHandler()
-	factory.value.to = to
+	factory.to = to
 
 	const createTextChat = async () => {
 		await setError('')
-		if (factory.value.valid && !loadingCounter.value) {
+		if (factory.valid && !loadingCounter.value) {
 			loadingCounter.value++
 			try {
-				await ChatsUseCases.add(factory.value)
-				factory.value.reset()
+				await ChatsUseCases.add(factory)
+				factory.reset()
 			} catch (e) {
 				await setError(e)
 			}
 			loadingCounter.value--
-			factory.value.reset()
+			factory.reset()
 		}
 	}
 

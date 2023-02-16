@@ -1,9 +1,9 @@
-import { onMounted, ref, Ref } from 'vue'
-import { ReportEntity, ReportFactory, ReportsUseCases, ReportType } from '@modules/moderation'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { useModerationModal } from '@app/composable/core/modals'
-import { Alert } from '@utils/dialog'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { ReportEntity, ReportFactory, ReportsUseCases, ReportType } from '@modules/moderation'
 import { addToArray } from '@utils/commons'
+import { Alert } from '@utils/dialog'
+import { onMounted, ref } from 'vue'
 
 let reportedEntity = null as { type: ReportType, id: string } | null
 export const openCreateReportModal = (type: ReportType, id: string) => {
@@ -12,30 +12,30 @@ export const openCreateReportModal = (type: ReportType, id: string) => {
 }
 
 export const useCreateReport = () => {
-	const factory = ref(new ReportFactory(reportedEntity?.type ?? ReportType.users, reportedEntity?.id ?? '')) as Ref<ReportFactory>
+	const factory = new ReportFactory(reportedEntity?.type ?? ReportType.users, reportedEntity?.id ?? '')
 	const { message, setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	if (!reportedEntity) useModerationModal().closeCreateReport()
 	else {
-		factory.value.type = reportedEntity.type
-		factory.value.id = reportedEntity.id
+		factory.type = reportedEntity.type
+		factory.id = reportedEntity.id
 	}
 
 	const createReport = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await ReportsUseCases.add(factory.value)
+				await ReportsUseCases.add(factory)
 				useModerationModal().closeAll()
-				factory.value.reset()
+				factory.reset()
 				await setMessage('Reported successfully')
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return {

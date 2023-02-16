@@ -1,22 +1,15 @@
-import {
-	hasLessThanX,
-	isArrayOfX,
-	isExtractedHTMLLongerThanX,
-	isImage,
-	isLongerThanX,
-	isString
-} from '@stranerd/validate'
 import { BaseFactory, Media, UploadedFile } from '@modules/core'
-import { AnswerEntity } from '../entities/answer'
+import { v } from 'valleyed'
 import { AnswerToModel } from '../../data/models/answer'
+import { AnswerEntity } from '../entities/answer'
 
 type Content = UploadedFile | Media
 
 export class AnswerFactory extends BaseFactory<AnswerEntity, AnswerToModel, AnswerToModel & { attachments: Content[] }> {
 	readonly rules = {
-		attachments: { required: true, rules: [isArrayOfX((com) => isImage(com).valid, 'images'), hasLessThanX(6)] },
-		body: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
-		questionId: { required: true, rules: [isString, isLongerThanX(0)] }
+		attachments: v.array(v.file().image()).max(5),
+		body: v.string().min(3, true),
+		questionId: v.string().min(1)
 	}
 
 	reserved = ['questionId']

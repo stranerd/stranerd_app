@@ -1,10 +1,10 @@
-import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
-import { NoteEntity, NoteFactory, NotesUseCases } from '@modules/study'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@utils/dialog'
-import { Router, useRouter } from 'vue-router'
-import { addToArray } from '@utils/commons'
 import { useListener } from '@app/composable/core/listener'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { NoteEntity, NoteFactory, NotesUseCases } from '@modules/study'
+import { addToArray } from '@utils/commons'
+import { Alert } from '@utils/dialog'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { Router, useRouter } from 'vue-router'
 
 const store = {
 	notes: ref([] as NoteEntity[]),
@@ -54,25 +54,25 @@ export const useNoteList = () => {
 
 export const useCreateNote = () => {
 	const router = useRouter()
-	const factory = ref(new NoteFactory()) as Ref<NoteFactory>
+	const factory = new NoteFactory()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 
 	const createNote = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const note = await NotesUseCases.add(factory.value)
+				const note = await NotesUseCases.add(factory)
 				await setMessage('Note submitted successfully')
 				await router.push(`/study/notes/${note.id}`)
-				factory.value.reset()
+				factory.reset()
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, createNote }
@@ -89,23 +89,23 @@ export const useEditNote = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
-	const factory = ref(new NoteFactory()) as Ref<NoteFactory>
-	if (editingNote) factory.value.loadEntity(editingNote)
+	const factory = new NoteFactory()
+	if (editingNote) factory.loadEntity(editingNote)
 
 	const editNote = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const note = await NotesUseCases.update(editingNote!.id, factory.value)
+				const note = await NotesUseCases.update(editingNote!.id, factory)
 				await setMessage('Note updated successfully')
-				factory.value.reset()
+				factory.reset()
 				await router.push(`/study/notes/${note.id}`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, editNote }

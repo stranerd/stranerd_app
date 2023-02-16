@@ -53,10 +53,8 @@
 import { FlashCardEntity } from '@modules/study'
 import { closeOutline, stopwatchOutline } from 'ionicons/icons'
 import { onUnmounted, PropType, ref } from 'vue'
-import { shuffleArray } from '@stranerd/validate'
+import { shuffleArray } from 'valleyed'
 import { useSaveFlashCardMatch } from '@app/composable/study/flashCards'
-import { useRedirectToAuth } from '@app/composable/auth/session'
-import { useAuth } from '@app/composable/auth/auth'
 
 const props = defineProps({
 	flashCard: {

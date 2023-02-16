@@ -140,28 +140,28 @@ export default defineComponent({
 		const { courses, fetchInstitutionCourses } = useCourseList()
 		const {
 			school, schools, gatewayExams, filteredFaculties, filteredDepartments
-		} = useChooseSchool(factory.value.institutionId, factory.value.facultyId, factory.value.departmentId)
+		} = useChooseSchool(factory.institutionId, factory.facultyId, factory.departmentId)
 
-		watch(() => factory.value.institutionId, async () => {
-			factory.value.resetProp('facultyId')
-			school.institutionId = factory.value.institutionId
+		watch(() => factory.institutionId, async () => {
+			factory.resetProp('facultyId')
+			school.institutionId = factory.institutionId
 		})
 
-		watch(() => factory.value.facultyId, async () => {
-			factory.value.resetProp('departmentId')
-			school.facultyId = factory.value.facultyId
+		watch(() => factory.facultyId, async () => {
+			factory.resetProp('departmentId')
+			school.facultyId = factory.facultyId
 		})
 
-		watch(() => factory.value.departmentId, async () => {
-			school.departmentId = factory.value.departmentId
+		watch(() => factory.departmentId, async () => {
+			school.departmentId = factory.departmentId
 		})
 
-		watch(() => factory.value.exams, async () => {
-			await Promise.all(factory.value.exams.map(async (exam) => fetchInstitutionCourses(exam.institutionId)))
+		watch(() => factory.exams, async () => {
+			await Promise.all(factory.exams.map(async (exam) => fetchInstitutionCourses(exam.institutionId)))
 		})
 
 		onMounted(async () => {
-			await Promise.all(factory.value.exams.map(async (exam) => fetchInstitutionCourses(exam.institutionId)))
+			await Promise.all(factory.exams.map(async (exam) => fetchInstitutionCourses(exam.institutionId)))
 		})
 
 		return {

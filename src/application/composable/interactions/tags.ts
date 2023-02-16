@@ -54,32 +54,32 @@ export const openCreateTagModal = (parent: TagEntity | null) => {
 }
 
 export const useCreateTag = () => {
-	const factory = ref(new TagFactory()) as Ref<TagFactory>
+	const factory = new TagFactory()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 
 	if (tagParent) {
-		factory.value.parent = tagParent.id
-		factory.value.type = tagParent.type
+		factory.parent = tagParent.id
+		factory.type = tagParent.type
 	}
 	tagParent = null
 
 	const createTag = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const tag = await TagsUseCases.add(factory.value)
+				const tag = await TagsUseCases.add(factory)
 				addToArray(store.tags.value, tag, (e) => e.id, (e) => e.title, true)
-				factory.value.reset()
+				factory.reset()
 				useInteractionModal().closeCreateTag()
 				await setMessage('Tag created successfully')
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { factory, loading, error, createTag }
@@ -92,28 +92,28 @@ export const openTagEditModal = async (tag: TagEntity) => {
 }
 
 export const useEditTag = () => {
-	const factory = ref(new TagFactory()) as Ref<TagFactory>
+	const factory = new TagFactory()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
-	if (editingTag) factory.value.loadEntity(editingTag)
+	if (editingTag) factory.loadEntity(editingTag)
 	else useInteractionModal().closeEditTag()
 
 	const editTag = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const updatedTag = await TagsUseCases.update(editingTag!.id, factory.value)
+				const updatedTag = await TagsUseCases.update(editingTag!.id, factory)
 				addToArray(store.tags.value, updatedTag, (e) => e.id, (e) => e.title, true)
-				factory.value.reset()
+				factory.reset()
 				useInteractionModal().closeEditTag()
 				await setMessage('Tag updated successfully')
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { factory, loading, error, editTag }

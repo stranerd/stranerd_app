@@ -1,13 +1,13 @@
-import { isBoolean, isLongerThanX, isString } from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
-import { NoteEntity } from '../entities/note'
+import { v } from 'valleyed'
 import { NoteToModel } from '../../data/models/note'
+import { NoteEntity } from '../entities/note'
 
 export class NoteFactory extends BaseFactory<NoteEntity, NoteToModel, NoteToModel> {
 	readonly rules = {
-		title: { required: true, rules: [isString, isLongerThanX(2)] },
-		content: { required: true, rules: [isString] },
-		isPrivate: { required: true, rules: [isBoolean] }
+		title: v.string().min(3),
+		content: v.string(),
+		isPrivate: v.boolean()
 	}
 
 	reserved = []

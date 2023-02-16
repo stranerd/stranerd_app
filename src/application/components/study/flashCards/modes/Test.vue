@@ -64,7 +64,7 @@
 import { FlashCardEntity, Test } from '@modules/study'
 import { closeOutline, copyOutline, readerOutline } from 'ionicons/icons'
 import { computed, PropType, reactive, watch } from 'vue'
-import { getRandomSample, shuffleArray } from '@stranerd/validate'
+import { getRandomSample, shuffleArray } from 'valleyed'
 import TakeTest from '@app/components/study/flashCards/modes/TakeTest.vue'
 
 const props = defineProps({

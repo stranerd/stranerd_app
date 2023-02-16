@@ -1,11 +1,11 @@
 import { BaseFactory } from '@modules/core'
-import { isLongerThanX, isString } from '@stranerd/validate'
-import { SetEntity } from '../entities/set'
+import { v } from 'valleyed'
 import { SetToModel } from '../../data/models/set'
+import { SetEntity } from '../entities/set'
 
 export class SetFactory extends BaseFactory<SetEntity, SetToModel, SetToModel> {
 	readonly rules = {
-		name: { required: true, rules: [isString, isLongerThanX(2)] }
+		name: v.string().min(3)
 	}
 
 	reserved = []

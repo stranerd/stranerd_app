@@ -1,15 +1,7 @@
-import {
-	isInvalid,
-	isLessThan,
-	isLongerThanX,
-	isMoreThanOrEqualTo,
-	isNumber,
-	isString,
-	isValid
-} from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
-import { EventEntity } from '../entities/event'
+import { makeRule, v, isValid, isInvalid, isNumber } from 'valleyed'
 import { EventToModel } from '../../data/models/event'
+import { EventEntity } from '../entities/event'
 import { Cron, EventDataType, EventType, getCronOrder } from '../types'
 
 type Keys = {
@@ -17,28 +9,37 @@ type Keys = {
 	scheduledAt: number, start: Cron, end: Cron, lecturer: string
 }
 
-const isCronValid = (val: any) => {
-	const isDayValid = isNumber(val?.day).valid && isMoreThanOrEqualTo(val?.day, 0).valid && isLessThan(val?.day, 7).valid
-	const isHourValid = isNumber(val?.hour).valid && isMoreThanOrEqualTo(val?.hour, 0).valid && isLessThan(val?.hour, 24).valid
-	const isMinuteValid = isNumber(val?.minute).valid && isMoreThanOrEqualTo(val?.minute, 0).valid && isLessThan(val?.minute, 60).valid
-	return [isDayValid, isHourValid, isMinuteValid].every((e) => e) ? isValid() : isInvalid('not a valid cron object')
-}
+const isCronValid = () => makeRule<Cron>((value) => {
+	const val = value as Cron
+	const { valid } = v.object({
+		day: v.number().gte(0).lte(6),
+		hour: v.number().gte(0).lte(23),
+		minute: v.number().gte(0).lte(59),
+		tz: v.string().custom((tz: string) => {
+			try {
+				Intl.DateTimeFormat(undefined, { timeZone: tz })
+				return true
+			} catch (ex) {
+				return false
+			}
+		})
+	}).parse(val)
+	return valid ? isValid(val) : isInvalid(['not a valid cron object'], val)
+})
 
-const isCronMore = (val: any, start: any) => getCronOrder(val) >= getCronOrder(start) ? isValid() : isInvalid('must be after start')
-
+const isCronMore = (start: any) => makeRule<Cron>((val: any) =>
+	getCronOrder(val) >= getCronOrder(start) ? isValid(val) : isInvalid(['must be after start'], val))
 export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 	readonly rules = {
-		title: { required: true, rules: [isString, isLongerThanX(0)] },
-		classId: { required: true, rules: [isString] },
-		type: { required: true, rules: [isString] },
-		scheduledAt: { required: () => this.isOneOffType, rules: [isNumber] },
-		announcementId: { required: () => this.isOneOffType, nullable: true, rules: [isString] },
-		start: { required: () => this.isTimetableType, rules: [isCronValid] },
-		end: {
-			required: () => this.isTimetableType,
-			rules: [isCronValid, (val: any) => isCronMore(val, this.start)]
-		},
-		lecturer: { required: () => this.isTimetableType, rules: [isString, isLongerThanX(0)] }
+		title: v.string().min(1),
+		classId: v.string().min(1),
+		type: v.any<EventType>().in(Object.values(EventType)),
+		scheduledAt: v.time().asStamp().requiredIf(() => this.isOneOffType),
+		announcementId: v.string().min(1).nullable().requiredIf(() => this.isOneOffType),
+		start: v.any<Cron>().requiredIf(() => this.isTimetableType).addRule(isCronValid()),
+		end: v.any<Cron>().requiredIf(() => this.isTimetableType)
+			.addRule(isCronValid()).addRule(isCronMore(this.start)),
+		lecturer: v.string().min(1).requiredIf(() => this.isTimetableType)
 	}
 
 	reserved = ['classId', 'type']
@@ -122,7 +123,7 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 
 	set startTime (value: string) {
 		const [hour, minute] = value.split(':').map((x) => parseInt(x))
-		if (!isNumber(hour).valid || !isNumber(minute).valid) return
+		if (!isNumber()(hour).valid || !isNumber()(minute).valid) return
 		this.start = { ...this.start, hour, minute }
 	}
 
@@ -132,7 +133,7 @@ export class EventFactory extends BaseFactory<EventEntity, EventToModel, Keys> {
 
 	set endTime (value: string) {
 		const [hour, minute] = value.split(':').map((x) => parseInt(x))
-		if (!isNumber(hour).valid || !isNumber(minute).valid) return
+		if (!isNumber()(hour).valid || !isNumber()(minute).valid) return
 		this.end = { ...this.end, hour, minute }
 	}
 

@@ -1,13 +1,13 @@
-import { isExtractedHTMLLongerThanX, isNumber, isString } from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
-import { AnnouncementEntity } from '../entities/announcement'
+import { v } from 'valleyed'
 import { AnnouncementToModel } from '../../data/models/announcement'
+import { AnnouncementEntity } from '../entities/announcement'
 
 export class AnnouncementFactory extends BaseFactory<AnnouncementEntity, AnnouncementToModel, AnnouncementToModel> {
 	readonly rules = {
-		body: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
-		reminder: { required: true, nullable: true, rules: [isNumber] },
-		classId: { required: true, rules: [isString] }
+		body: v.string().min(3, true),
+		reminder: v.time().asStamp().nullable(),
+		classId: v.string().min(1)
 	}
 
 	reserved = ['classId']

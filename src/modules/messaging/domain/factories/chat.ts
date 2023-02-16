@@ -1,5 +1,5 @@
 import { BaseFactory, Media, UploadedFile } from '@modules/core'
-import { isFile, isLongerThanX, isString } from '@stranerd/validate'
+import { v } from 'valleyed'
 import { ChatToModel } from '../../data/models/chat'
 import { ChatEntity } from '../entities/chat'
 
@@ -8,9 +8,9 @@ type Keys = { body: string, to: string, media: Content | null }
 
 export class ChatFactory extends BaseFactory<ChatEntity, ChatToModel, Keys> {
 	readonly rules = {
-		body: { required: true, rules: [isString] },
-		to: { required: true, rules: [isString, isLongerThanX(0)] },
-		media: { required: true, nullable: true, rules: [isFile] }
+		body: v.string(),
+		to: v.string().min(1),
+		media: v.file().nullable()
 	}
 
 	reserved = ['to']

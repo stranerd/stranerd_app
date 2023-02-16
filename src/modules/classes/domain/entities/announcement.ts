@@ -1,7 +1,7 @@
 import { EmbeddedUser } from '@modules/users'
 import { BaseEntity } from '@modules/core'
 import { ClassUsers } from '../types'
-import { extractUrls } from '@stranerd/validate'
+import { extractUrls } from 'valleyed'
 
 type AnnouncementConstructorArgs = {
 	id: string
@@ -65,4 +65,3 @@ export class AnnouncementEntity extends BaseEntity {
 		return !!this.readAt[userId]
 	}
 }
-

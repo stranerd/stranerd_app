@@ -1,9 +1,9 @@
-import { computed, onMounted, Ref, ref } from 'vue'
-import { FacultiesUseCases, FacultyEntity, FacultyFactory } from '@modules/school'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@utils/dialog'
-import { addToArray } from '@utils/commons'
 import { useSchoolModal } from '@app/composable/core/modals'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { FacultiesUseCases, FacultyEntity, FacultyFactory } from '@modules/school'
+import { addToArray } from '@utils/commons'
+import { Alert } from '@utils/dialog'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const store = {
@@ -55,20 +55,20 @@ export const openFacultyCreateModal = async (institutionId: string) => {
 
 export const useCreateFaculty = () => {
 	const router = useRouter()
-	const factory = ref(new FacultyFactory()) as Ref<FacultyFactory>
+	const factory = new FacultyFactory()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
-	if (creatingInstitutionFaculty) factory.value.institutionId = creatingInstitutionFaculty
+	if (creatingInstitutionFaculty) factory.institutionId = creatingInstitutionFaculty
 
 	const createFaculty = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const faculty = await FacultiesUseCases.add(factory.value)
+				const faculty = await FacultiesUseCases.add(factory)
 				addToArray(store.faculties.value, faculty, (e) => e.id, (e) => e.name, true)
-				factory.value.reset()
+				factory.reset()
 				useSchoolModal().closeCreateFaculty()
 				await setMessage('Faculty created successfully')
 				await router.push(`/admin/school/institutions/${faculty.institutionId}/faculties/${faculty.id}`)
@@ -76,7 +76,7 @@ export const useCreateFaculty = () => {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { factory, loading, error, createFaculty }
@@ -90,21 +90,21 @@ export const openFacultyEditModal = async (faculty: FacultyEntity) => {
 
 export const useEditFaculty = () => {
 	const router = useRouter()
-	const factory = ref(new FacultyFactory()) as Ref<FacultyFactory>
+	const factory = new FacultyFactory()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
-	if (editingFaculty) factory.value.loadEntity(editingFaculty)
+	if (editingFaculty) factory.loadEntity(editingFaculty)
 	else useSchoolModal().closeEditFaculty()
 
 	const editFaculty = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const updatedFaculty = await FacultiesUseCases.update(editingFaculty!.id, factory.value)
+				const updatedFaculty = await FacultiesUseCases.update(editingFaculty!.id, factory)
 				addToArray(store.faculties.value, updatedFaculty, (e) => e.id, (e) => e.name, true)
-				factory.value.reset()
+				factory.reset()
 				useSchoolModal().closeEditFaculty()
 				await setMessage('Faculty updated successfully')
 				await router.push(`/admin/school/institutions/${updatedFaculty.institutionId}/faculties/${updatedFaculty.id}`)
@@ -112,7 +112,7 @@ export const useEditFaculty = () => {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { factory, loading, error, editFaculty }

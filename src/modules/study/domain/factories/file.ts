@@ -1,14 +1,14 @@
-import { isFile, isLongerThanX, isString } from '@stranerd/validate'
 import { BaseFactory, Media, UploadedFile } from '@modules/core'
-import { FileEntity } from '../entities/file'
+import { v } from 'valleyed'
 import { FileToModel } from '../../data/models/file'
+import { FileEntity } from '../entities/file'
 
 type Content = UploadedFile | Media
 
 export class FileFactory extends BaseFactory<FileEntity, FileToModel, FileToModel & { media: Content }> {
 	readonly rules = {
-		title: { required: true, rules: [isString, isLongerThanX(2)] },
-		media: { required: true, rules: [isFile] }
+		title: v.string().min(3),
+		media: v.file()
 	}
 
 	reserved = []

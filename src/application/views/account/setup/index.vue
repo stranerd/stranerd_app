@@ -64,7 +64,7 @@ export default defineComponent({
 
 		const { factory, loading, error, updateProfile } = useProfileUpdate()
 		const savePhoto = async (p: UploadedFile) => {
-			factory.value.photo = p
+			factory.photo = p
 			await updateProfile(true)
 		}
 

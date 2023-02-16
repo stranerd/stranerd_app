@@ -128,7 +128,7 @@ export const openCreateCommentModal = async (entity: { id: string, type: Interac
 }
 
 export const useCreateComment = (id: string, type: InteractionEntities) => {
-	const factory = ref(new CommentFactory()) as Ref<CommentFactory>
+	const factory = new CommentFactory()
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { message, setMessage } = useSuccessHandler()
@@ -137,18 +137,18 @@ export const useCreateComment = (id: string, type: InteractionEntities) => {
 
 	const createComment = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await CommentsUseCases.add({ id, type }, factory.value)
-				factory.value.reset()
+				await CommentsUseCases.add({ id, type }, factory)
+				factory.reset()
 				useInteractionModal().closeCreateComment()
 				await setMessage('Comment posted successfully')
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { factory, error, message, loading, createComment }

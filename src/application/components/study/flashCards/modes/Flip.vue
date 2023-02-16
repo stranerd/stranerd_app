@@ -20,7 +20,7 @@
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 import { expandOutline } from 'ionicons/icons'
-import { getRandomValue } from '@stranerd/validate'
+import { getRandomValue } from 'valleyed'
 
 const props = defineProps({
 	front: {

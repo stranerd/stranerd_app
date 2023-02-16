@@ -80,7 +80,7 @@ import {
 } from 'ionicons/icons'
 import DashboardCard from './DashboardCard.vue'
 import { formatNumber, pluralize } from '@utils/commons'
-import { catchDivideByZero } from '@stranerd/validate'
+import { divideByZero } from 'valleyed'
 import { useAuth } from '@app/composable/auth/auth'
 import { useTestList } from '@app/composable/study/tests'
 
@@ -88,5 +88,5 @@ const { user } = useAuth()
 const { tests } = useTestList()
 const timedTests = computed(() => tests.value.filter((test) => test.isTimed))
 const passed = computed(() => timedTests.value.filter((test) => test.passed))
-const averageScore = computed(() => catchDivideByZero(timedTests.value.reduce((acc, cur) => acc + cur.score, 0), timedTests.value.length))
+const averageScore = computed(() => divideByZero(timedTests.value.reduce((acc, cur) => acc + cur.score, 0), timedTests.value.length))
 </script>

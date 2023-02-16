@@ -51,7 +51,7 @@
 <script lang="ts" setup>
 import { PastQuestionEntity } from '@modules/school'
 import { openPastQuestionEditModal, useDeletePastQuestion } from '@app/composable/school/pastQuestions'
-import { getAlphabet } from '@stranerd/validate'
+import { getAlphabet } from 'valleyed'
 import { checkmarkDoneOutline } from 'ionicons/icons'
 
 const props = defineProps({

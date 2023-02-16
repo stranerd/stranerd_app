@@ -78,31 +78,31 @@ export const openCreateTimetableModal = async (classInst: ClassEntity, router: R
 
 export const useCreateEvent = () => {
 	const router = useRouter()
-	const factory = ref(new EventFactory()) as Ref<EventFactory>
-	factory.value.type = EventType.timetable
+	const factory = new EventFactory()
+	factory.type = EventType.timetable
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
 	if (!eventClass) useClassModal().closeCreateTimetable()
-	else factory.value.classId = eventClass.id
+	else factory.classId = eventClass.id
 
 	const createEvent = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const event = await EventsUseCases.add(factory.value)
+				const event = await EventsUseCases.add(factory)
 				await setMessage('Event created successfully.')
 				useClassModal().closeCreateTimetable()
-				factory.value.reset()
+				factory.reset()
 				const day = event.data.type === EventType.timetable ? event.data.start.day : 1
 				await router.push(`/classes/${event.classId}/timetable?day=${day}`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { factory, error, loading, createEvent, eventClass: eventClass! }
@@ -117,31 +117,31 @@ export const openEditTimetableModal = async (editEventInfo: { classInst: ClassEn
 
 export const useEditEvent = () => {
 	const router = useRouter()
-	const factory = ref(new EventFactory()) as Ref<EventFactory>
-	factory.value.type = EventType.timetable
+	const factory = new EventFactory()
+	factory.type = EventType.timetable
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 
-	if (editingEvent) factory.value.loadEntity(editingEvent.event)
+	if (editingEvent) factory.loadEntity(editingEvent.event)
 	else useClassModal().closeEditTimetable()
 
 	const editEvent = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const event = await EventsUseCases.update(editingEvent!.event.id, factory.value)
+				const event = await EventsUseCases.update(editingEvent!.event.id, factory)
 				await setMessage('Event updated successfully')
 				useClassModal().closeEditTimetable()
-				factory.value.reset()
+				factory.reset()
 				const day = event.data.type === EventType.timetable ? event.data.start.day : 1
 				await router.push(`/classes/${event.classId}/timetable?day=${day}`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, editEvent, eventClass: editingEvent!.classInst }
