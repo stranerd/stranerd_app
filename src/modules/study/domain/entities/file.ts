@@ -1,6 +1,6 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
 import { EmbeddedUser } from '@modules/users'
-import { isImage, isVideo } from '@stranerd/validate'
+import { isImage, isVideo } from 'valleyed'
 
 export class FileEntity extends BaseEntity {
 	public readonly id: string
@@ -11,13 +11,13 @@ export class FileEntity extends BaseEntity {
 	public readonly updatedAt: number
 
 	constructor ({
-		             id,
-		             title,
-		             media,
-		             user,
-		             createdAt,
-		             updatedAt
-	             }: FileConstructorArgs) {
+		id,
+		title,
+		media,
+		user,
+		createdAt,
+		updatedAt
+	}: FileConstructorArgs) {
 		super()
 		this.id = id
 		this.title = title
@@ -36,11 +36,11 @@ export class FileEntity extends BaseEntity {
 	}
 
 	get isImage () {
-		return isImage(this.media).valid
+		return isImage()(this.media).valid
 	}
 
 	get isVideo () {
-		return isVideo(this.media).valid
+		return isVideo()(this.media).valid
 	}
 
 	get isDoc () {

@@ -9,28 +9,26 @@
 			<IonText class="mb-2 w-full">
 				<DisplayHtml :html="question.question" />
 			</IonText>
-			<Gallery v-if="question.questionMedia.length" :media="question.questionMedia"
-				:path="question.saveFilePath" />
+			<Gallery v-if="question.questionMedia.length" :media="question.questionMedia" :path="question.saveFilePath" />
 		</div>
 
 		<div v-if="question.isObj(question)" class=" flex flex-col w-full">
-			<a v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex"
-				class="w-full py-4" @click="answer(question.id, optionIndex)">
+			<a v-for="(option, optionIndex) in question.data.options ?? []" :key="optionIndex" class="w-full py-4"
+				@click="answer(question.id, optionIndex)">
 				<div class="flex gap-2 items-center">
 					<IonIcon v-if="test.isTimed && !test.done && optionIndex === test.answers[question.id]"
 						:icon="radioButtonOn" class="text-primaryBg" />
 					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isCorrect"
 						:icon="checkmarkCircleOutline" class="text-success" />
-					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isInCorrect"
-						:icon="closeCircleOutline" class="text-danger" />
+					<IonIcon v-else-if="optionIndex === test.answers[question.id] && isInCorrect" :icon="closeCircleOutline"
+						class="text-danger" />
 					<IonIcon v-else :icon="radioButtonOff" />
 					<IonText>
 						<DisplayHtml :html="option" />
 					</IonText>
 				</div>
 				<Gallery v-if="question.data.optionsMedia[optionIndex]?.length"
-					:media="question.data.optionsMedia[optionIndex]"
-					:path="question.saveFilePath" />
+					:media="question.data.optionsMedia[optionIndex]" :path="question.saveFilePath" />
 			</a>
 		</div>
 
@@ -46,7 +44,7 @@
 				<a class="text-primaryBg flex items-center font-bold py-8 gap-2"
 					@click="showExplanation = !showExplanation">
 					<span>{{ showExplanation ? 'hide' : 'show' }} solution</span>
-					<IonIcon :class="{'rotate-90': showExplanation}" :icon="chevronForwardOutline" />
+					<IonIcon :class="{ 'rotate-90': showExplanation }" :icon="chevronForwardOutline" />
 				</a>
 
 				<div v-if="showExplanation">
@@ -70,7 +68,11 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, PropType, ref } from 'vue'
+import { openCreateReportModal, useCreateReport } from '@app/composable/moderation/reports'
+import { ReportType } from '@modules/moderation'
+import { PastQuestionEntity, PastQuestionType } from '@modules/school'
+import { TestEntity, TestType } from '@modules/study'
+import { getAlphabet } from 'valleyed'
 import {
 	checkmarkCircleOutline,
 	chevronForwardOutline,
@@ -79,11 +81,7 @@ import {
 	radioButtonOff,
 	radioButtonOn
 } from 'ionicons/icons'
-import { TestEntity, TestType } from '@modules/study'
-import { PastQuestionEntity, PastQuestionType } from '@modules/school'
-import { getAlphabet } from '@stranerd/validate'
-import { openCreateReportModal, useCreateReport } from '@app/composable/moderation/reports'
-import { ReportType } from '@modules/moderation'
+import { computed, onMounted, PropType, ref } from 'vue'
 
 const props = defineProps({
 	total: {
@@ -123,8 +121,8 @@ const isInCorrect = computed(() => showAnswers.value && props.test.answers[props
 const showExplanation = ref(false)
 const openReportModal = () => openCreateReportModal(ReportType.pastQuestions, props.question.id)
 onMounted(() => {
-	factory.value.type = ReportType.pastQuestions
-	factory.value.id = props.question.id
-	factory.value.message = 'Flagged'
+	factory.type = ReportType.pastQuestions
+	factory.id = props.question.id
+	factory.message = 'Flagged'
 })
 </script>

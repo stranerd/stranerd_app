@@ -96,7 +96,7 @@
 <script lang="ts" setup>
 import { computed, PropType } from 'vue'
 import { PastQuestionFactory } from '@modules/school'
-import { getAlphabet } from '@stranerd/validate'
+import { getAlphabet } from 'valleyed'
 import { addOutline, trashBinOutline } from 'ionicons/icons'
 import { useInstitutionList } from '@app/composable/school/institutions'
 import { useCourseList } from '@app/composable/school/courses'

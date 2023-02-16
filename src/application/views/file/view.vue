@@ -2,8 +2,8 @@
 	<DefaultLayout :hideBottom="true">
 		<div v-if="openMedia"
 			class="min-h-full flex-grow overflow-y-auto flex flex-col justify-center items-center text-center p-6 gap-2">
-			<img v-if="isImage(openMedia.media).valid" :src="content || openMedia.media.link" alt="" class="w-full">
-			<video v-else-if="isVideo(openMedia.media).valid" :src="content || openMedia.media.link" class="w-full"
+			<img v-if="isImage()(openMedia.media).valid" :src="content || openMedia.media.link" alt="" class="w-full">
+			<video v-else-if="isVideo()(openMedia.media).valid" :src="content || openMedia.media.link" class="w-full"
 				controls />
 			<span v-else class="text-5xl leading-none">
 				<IonIcon :icon="documentOutline" />
@@ -26,7 +26,7 @@ import { generateMiddlewares } from '@app/middlewares'
 import { useRouteMeta } from '@app/composable/core/states'
 import { closeMediaFullScreen, openMedia, useDownload } from '@app/composable/meta/media'
 import { isWeb } from '@utils/constants'
-import { isImage, isVideo } from '@stranerd/validate'
+import { isImage, isVideo } from 'valleyed'
 import { formatFileSize } from '@utils/commons'
 
 export default defineComponent({

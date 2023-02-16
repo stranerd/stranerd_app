@@ -1,8 +1,8 @@
 import { BaseFactory } from '@modules/core'
-import { arrayContainsX, isLongerThanX, isMoreThanX, isNumber, isString } from '@stranerd/validate'
-import { PrepType, TestPrepEntity } from '../entities/testPrep'
-import { TestPrepToModel } from '../../data/models/testPrep'
 import { PastQuestionType } from '@modules/school'
+import { v } from 'valleyed'
+import { TestPrepToModel } from '../../data/models/testPrep'
+import { PrepType, TestPrepEntity } from '../entities/testPrep'
 
 type Keys = {
 	name: string
@@ -17,29 +17,14 @@ type Keys = {
 
 export class TestPrepFactory extends BaseFactory<TestPrepEntity, TestPrepToModel, Keys> {
 	readonly rules = {
-		name: { required: true, rules: [isString, isLongerThanX(0)] },
-		questions: { required: true, rules: [isNumber, isMoreThanX(0)] },
-		time: { required: true, rules: [isNumber, isMoreThanX(0)] },
-		type: {
-			required: true,
-			rules: [arrayContainsX(Object.keys(PrepType), (cur, val) => cur === val)]
-		},
-		questionType: {
-			required: true,
-			rules: [arrayContainsX(Object.keys(PastQuestionType), (cur, val) => cur === val)]
-		},
-		courseId: {
-			required: () => this.isPastQuestion,
-			rules: [isString, isLongerThanX(0)]
-		},
-		institutionId: {
-			required: () => this.isPastQuestion,
-			rules: [isString, isLongerThanX(0)]
-		},
-		year: {
-			required: () => this.isPastQuestion,
-			rules: [isNumber, isMoreThanX(0)]
-		}
+		name: v.string().min(1),
+		questions: v.number().gt(0),
+		time: v.number().gt(0),
+		type: v.any<PrepType>().in(Object.values(PrepType)),
+		questionType: v.any<PastQuestionType>().in(Object.values(PastQuestionType)),
+		courseId: v.string().min(1).requiredIf(() => this.isPastQuestion),
+		institutionId: v.string().min(1).requiredIf(() => this.isPastQuestion),
+		year: v.number().gt(0).requiredIf(() => this.isPastQuestion),
 	}
 
 	reserved = []

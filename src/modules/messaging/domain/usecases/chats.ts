@@ -4,7 +4,7 @@ import { Conditions, Listeners, QueryKeys, QueryParams } from '@modules/core'
 import { CHAT_PAGINATION_LIMIT, PAGINATION_LIMIT } from '@utils/constants'
 import { ChatEntity } from '../entities/chat'
 import { ChatType } from '@modules/messaging'
-import { imageMimeTypes, videoMimeTypes } from '@stranerd/validate'
+import { imageMimeTypes, videoMimeTypes } from 'valleyed'
 
 const searchFields = ['body', 'media.name']
 type Library = 'images' | 'videos' | 'docs' | 'links' | string

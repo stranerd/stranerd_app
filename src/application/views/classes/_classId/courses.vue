@@ -47,7 +47,7 @@ export default defineComponent({
 		const course = ref('')
 		const addCourse = async () => {
 			if (!course.value) return
-			factory.value.addCourse(course.value)
+			factory.addCourse(course.value)
 			course.value = ''
 		}
 		return {

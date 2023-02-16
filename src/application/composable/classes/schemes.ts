@@ -81,29 +81,29 @@ export const openCreateSchemeModal = async (classInst: ClassEntity, router: Rout
 
 export const useCreateScheme = () => {
 	const router = useRouter()
-	const factory = ref(new SchemeFactory()) as Ref<SchemeFactory>
+	const factory = new SchemeFactory()
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
 	if (!schemeClass) useClassModal().closeCreateScheme()
-	else factory.value.classId = schemeClass.id
+	else factory.classId = schemeClass.id
 
 	const createScheme = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const scheme = await SchemesUseCases.add(factory.value)
+				const scheme = await SchemesUseCases.add(factory)
 				await setMessage('Scheme created successfully.')
 				useClassModal().closeCreateScheme()
-				factory.value.reset()
+				factory.reset()
 				await router.push(`/classes/${scheme.classId}/schemes`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { factory, error, loading, createScheme, schemeClass: schemeClass! }
@@ -118,29 +118,29 @@ export const openEditSchemeModal = async (editSchemeInfo: { classInst: ClassEnti
 
 export const useEditScheme = () => {
 	const router = useRouter()
-	const factory = ref(new SchemeFactory()) as Ref<SchemeFactory>
+	const factory = new SchemeFactory()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 
-	if (editingScheme) factory.value.loadEntity(editingScheme.scheme)
+	if (editingScheme) factory.loadEntity(editingScheme.scheme)
 	else useClassModal().closeEditScheme()
 
 	const editScheme = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const scheme = await SchemesUseCases.update(editingScheme!.scheme.id, factory.value)
+				const scheme = await SchemesUseCases.update(editingScheme!.scheme.id, factory)
 				await setMessage('Scheme updated successfully')
 				useClassModal().closeEditScheme()
-				factory.value.reset()
+				factory.reset()
 				await router.push(`/classes/${scheme.classId}/schemes`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, editScheme, schemeClass: editingScheme!.classInst }

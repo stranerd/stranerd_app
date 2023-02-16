@@ -57,7 +57,7 @@ export default defineComponent({
 		const router = useRouter()
 		const { factory, error, loading, updateProfile } = useProfileUpdate()
 		const savePhoto = async (p: UploadedFile) => {
-			factory.value.photo = p
+			factory.photo = p
 			await updateProfile(true)
 		}
 		const submit = async () => {

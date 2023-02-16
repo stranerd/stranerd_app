@@ -109,7 +109,7 @@ import {
 import { computed, PropType, reactive } from 'vue'
 import { Test } from '@modules/study'
 import { formatNumber } from '@utils/commons'
-import { getPercentage } from '@stranerd/validate'
+import { getPercentage } from 'valleyed'
 
 const props = defineProps({
 	questions: {

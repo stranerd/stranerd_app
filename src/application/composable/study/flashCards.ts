@@ -1,10 +1,10 @@
-import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
-import { FlashCardEntity, FlashCardFactory, FlashCardsUseCases } from '@modules/study'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@utils/dialog'
-import { Router, useRouter } from 'vue-router'
-import { addToArray } from '@utils/commons'
 import { useListener } from '@app/composable/core/listener'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { FlashCardEntity, FlashCardFactory, FlashCardsUseCases } from '@modules/study'
+import { addToArray } from '@utils/commons'
+import { Alert } from '@utils/dialog'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { Router, useRouter } from 'vue-router'
 
 const store = {
 	flashCards: ref([] as FlashCardEntity[]),
@@ -60,29 +60,29 @@ export const cloneFlashCard = async (flashCard: FlashCardEntity, router: Router)
 
 export const useCreateFlashCard = () => {
 	const router = useRouter()
-	const factory = ref(new FlashCardFactory()) as Ref<FlashCardFactory>
+	const factory = new FlashCardFactory()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 	if (clone) {
-		factory.value.loadEntity(clone)
+		factory.loadEntity(clone)
 		clone = null
 	}
 
 	const createFlashCard = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const flashCard = await FlashCardsUseCases.add(factory.value)
+				const flashCard = await FlashCardsUseCases.add(factory)
 				await setMessage('FlashCard submitted successfully')
 				await router.push(`/study/flashCards/${flashCard.id}`)
-				factory.value.reset()
+				factory.reset()
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, createFlashCard }
@@ -99,23 +99,23 @@ export const useEditFlashCard = (flashCardId: string) => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
-	const factory = ref(new FlashCardFactory()) as Ref<FlashCardFactory>
-	if (editingFlashCard) factory.value.loadEntity(editingFlashCard)
+	const factory = new FlashCardFactory()
+	if (editingFlashCard) factory.loadEntity(editingFlashCard)
 
 	const editFlashCard = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const flashCard = await FlashCardsUseCases.update(flashCardId, factory.value)
+				const flashCard = await FlashCardsUseCases.update(flashCardId, factory)
 				await setMessage('FlashCard updated successfully')
 				await router.push(`/study/flashCards/${flashCard.id}`)
-				factory.value.reset()
+				factory.reset()
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, editFlashCard }
@@ -221,4 +221,3 @@ export const useSaveFlashCardMatch = (flashCardId: string) => {
 
 	return { loading, error, saveMatch, record }
 }
-

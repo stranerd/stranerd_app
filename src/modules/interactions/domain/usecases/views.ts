@@ -1,7 +1,7 @@
-import { IViewRepository } from '../irepositories/iview'
 import { Listeners } from '@modules/core'
 import { ViewEntity } from '../entities/view'
-import { InteractionEntity } from '../types'
+import { IViewRepository } from '../irepositories/iview'
+import { Interaction } from '../types'
 
 export class ViewsUseCase {
 	private repository: IViewRepository
@@ -10,7 +10,7 @@ export class ViewsUseCase {
 		this.repository = repository
 	}
 
-	async add (entity: InteractionEntity) {
+	async add (entity: Interaction) {
 		return await this.repository.add({ entity })
 	}
 

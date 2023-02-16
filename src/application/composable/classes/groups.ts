@@ -71,28 +71,28 @@ export const setGroupClassId = (classId: string) => {
 
 export const useCreateGroup = () => {
 	const router = useRouter()
-	const factory = ref(new GroupFactory()) as Ref<GroupFactory>
+	const factory = new GroupFactory()
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	if (createClassId) factory.value.classId = createClassId
+	if (createClassId) factory.classId = createClassId
 	createClassId = null
 
 	const createGroup = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const group = await GroupsUseCases.add(factory.value)
+				const group = await GroupsUseCases.add(factory)
 				await setMessage('Group created successfully.')
-				factory.value.reset()
+				factory.reset()
 				await router.push(`/classes/${group.classId}/groups/${group.id}`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return {
@@ -110,25 +110,25 @@ export const useEditGroup = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
-	const factory = ref(new GroupFactory()) as Ref<GroupFactory>
+	const factory = new GroupFactory()
 	const router = useRouter()
 
-	if (editingGroup) factory.value.loadEntity(editingGroup)
+	if (editingGroup) factory.loadEntity(editingGroup)
 
 	const editGroup = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const group = await GroupsUseCases.update(editingGroup!.id, factory.value)
+				const group = await GroupsUseCases.update(editingGroup!.id, factory)
 				await setMessage('Group updated successfully')
-				factory.value.reset()
+				factory.reset()
 				await router.push(`/classes/${group.classId}/groups/${group.id}`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, editGroup }

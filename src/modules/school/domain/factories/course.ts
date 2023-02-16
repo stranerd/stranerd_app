@@ -1,13 +1,13 @@
 import { BaseFactory } from '@modules/core'
-import { isLongerThanX, isString } from '@stranerd/validate'
-import { CourseEntity } from '../entities/course'
+import { v } from 'valleyed'
 import { CourseToModel } from '../../data/models/course'
+import { CourseEntity } from '../entities/course'
 
 export class CourseFactory extends BaseFactory<CourseEntity, CourseToModel, CourseToModel> {
 	readonly rules = {
-		name: { required: true, rules: [isString, isLongerThanX(0)] },
-		institutionId: { required: true, rules: [isString, isLongerThanX(0)] },
-		departmentId: { required: true, nullable: true, rules: [isString, isLongerThanX(0)] }
+		name: v.string().min(1),
+		institutionId: v.string().min(1),
+		departmentId: v.string().min(1).nullable()
 	}
 
 	reserved = []

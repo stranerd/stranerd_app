@@ -1,15 +1,16 @@
-import { isLongerThanX, isMoreThan, isMoreThanX, isNumber, isString } from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
-import { SchemeEntity } from '../entities/scheme'
+import { isLaterThan, v } from 'valleyed'
 import { SchemeToModel } from '../../data/models/scheme'
+import { SchemeEntity } from '../entities/scheme'
 
 export class SchemeFactory extends BaseFactory<SchemeEntity, SchemeToModel, SchemeToModel> {
 	readonly rules = {
-		title: { required: true, rules: [isString, isLongerThanX(0)] },
-		topic: { required: true, rules: [isString, isLongerThanX(0)] },
-		start: { required: true, rules: [isNumber, isMoreThanX(0)] },
-		end: { required: true, rules: [isNumber, (val: any) => isMoreThan(val, this.start)] },
-		classId: { required: true, rules: [isString] }
+		title: v.string().min(1),
+		topic: v.string().min(1),
+		start: v.time().asStamp(),
+		end: v.time().asStamp()
+			.addRule((val) => isLaterThan(this.start)(val)),
+		classId: v.string().min(1)
 	}
 
 	reserved = ['classId']

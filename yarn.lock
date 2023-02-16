@@ -1641,13 +1641,6 @@
   resolved "https://registry.npmjs.org/@stencil/core/-/core-2.16.1.tgz"
   integrity sha512-s/UJp9qxExL3DyQPT70kiuWeb3AdjbUZM+5lEIXn30I2DLcLYPOPXfsoWJODieQywq+3vPiLZeIdkoqjf6jcSw==
 
-"@stranerd/validate@^3.5.1":
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/@stranerd/validate/-/validate-3.5.1.tgz#86006b8d1c961251e5d3cc063eef2522bda6eb72"
-  integrity sha512-C6xs8KHLfZbY+VrqNELKDdqmd51jQcctZr88cRANQeNh9qohVBOUF7Hydw2d3k0LiNPsVitWrf+fdbGrGsq+sg==
-  dependencies:
-    url-regex-safe "^3.0.0"
-
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   version "2.2.3"
   resolved "https://registry.npmjs.org/@surma/rollup-plugin-off-main-thread/-/rollup-plugin-off-main-thread-2.2.3.tgz"
@@ -7906,6 +7899,13 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+valleyed@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/valleyed/-/valleyed-4.0.7.tgz#6c4300fe4171d6bde6383de434a10fffd56b568b"
+  integrity sha512-IvGs5R7EHMjw1jZujQ0ywEgUwrmfE3VyZlHEXs96K1jzkEtnWElr74g3hGAVcyH4uk2ZrLTaDLQoFCOTGNM9JA==
+  dependencies:
+    url-regex-safe "^3.0.0"
 
 vite-plugin-checker@^0.5.3:
   version "0.5.3"

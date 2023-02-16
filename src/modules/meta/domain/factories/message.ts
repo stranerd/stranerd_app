@@ -1,6 +1,6 @@
-import { BaseFactory } from '@modules/core'
 import { isValidPhone, Phone } from '@modules/auth'
-import { arrayContainsX, isEmail, isLongerThanX, isString } from '@stranerd/validate'
+import { BaseFactory } from '@modules/core'
+import { v } from 'valleyed'
 import { MessageToModel } from '../../data/models/message'
 import { MessageType } from '../types'
 
@@ -11,18 +11,15 @@ type Keys = {
 
 export class MessageFactory extends BaseFactory<null, MessageToModel, Keys> {
 	public rules = {
-		firstName: { required: true, rules: [isString, isLongerThanX(0)] },
-		lastName: { required: true, rules: [isString, isLongerThanX(0)] },
-		email: { required: true, rules: [isEmail] },
-		phone: { required: true, rules: [isValidPhone] },
-		country: { required: true, rules: [isString, isLongerThanX(-1)] },
-		message: { required: true, rules: [isString, isLongerThanX(0)] },
-		type: {
-			required: true,
-			rules: [arrayContainsX(Object.values(MessageType), (cur, val) => cur === val)]
-		},
-		school: { required: () => this.isSchoolType, rules: [isString, isLongerThanX(0)] },
-		position: { required: () => this.isSchoolType, rules: [isString, isLongerThanX(0)] }
+		firstName: v.string().min(1),
+		lastName: v.string().min(1),
+		email: v.string().email(),
+		phone: v.any().addRule(isValidPhone),
+		country: v.string(),
+		message: v.string().min(1),
+		type: v.any<MessageType>().in(Object.values(MessageType)),
+		school: v.string().min(1).requiredIf(() => this.isSchoolType),
+		position: v.string().min(1).requiredIf(() => this.isSchoolType)
 	}
 
 	reserved = []

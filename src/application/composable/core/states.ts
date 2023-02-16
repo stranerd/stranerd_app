@@ -2,7 +2,7 @@ import { computed, ComputedRef, Ref, ref, watch } from 'vue'
 import { Notify } from '@utils/dialog'
 import { isClient } from '@utils/environment'
 import { NetworkError, StatusCodes } from '@modules/core'
-import { capitalizeText } from '@stranerd/validate'
+import { capitalize } from 'valleyed'
 import { useAuth } from '@app/composable/auth/auth'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -11,7 +11,7 @@ export const useErrorHandler = () => {
 	const setError = async (error: any, skipAlert = false) => {
 		if (error instanceof NetworkError) {
 			errorState.value = error.errors
-				.map(({ message, field }) => `${capitalizeText(field ?? 'Error')}: ${message}`)
+				.map(({ message, field }) => `${capitalize(field ?? 'Error')}: ${message}`)
 				.join('\n')
 			if ([
 				StatusCodes.NotAuthenticated,

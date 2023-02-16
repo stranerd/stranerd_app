@@ -1,10 +1,10 @@
-import { computed, onMounted, reactive, Ref, ref } from 'vue'
-import { TestPrepEntity, TestPrepFactory, TestPrepsUseCases } from '@modules/study'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@utils/dialog'
-import { addToArray } from '@utils/commons'
 import { useStudyModal } from '@app/composable/core/modals'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
 import { PastQuestionType } from '@modules/school'
+import { TestPrepEntity, TestPrepFactory, TestPrepsUseCases } from '@modules/study'
+import { addToArray } from '@utils/commons'
+import { Alert } from '@utils/dialog'
+import { computed, onMounted, reactive, ref } from 'vue'
 
 const store = {
 	filters: reactive({
@@ -85,26 +85,26 @@ export const useTestPrep = (id: string) => {
 }
 
 export const useCreateTestPrep = () => {
-	const factory = ref(new TestPrepFactory()) as Ref<TestPrepFactory>
+	const factory = new TestPrepFactory()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 
 	const createTestPrep = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const testPrep = await TestPrepsUseCases.add(factory.value)
+				const testPrep = await TestPrepsUseCases.add(factory)
 				addToArray(store.testPreps.value, testPrep, (e) => e.id, (e) => e.createdAt)
 				await setMessage('TestPrep submitted successfully')
 				useStudyModal().closeCreateTestPrep()
-				factory.value.reset()
+				factory.reset()
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, createTestPrep }
@@ -120,24 +120,24 @@ export const useEditTestPrep = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
-	const factory = ref(new TestPrepFactory()) as Ref<TestPrepFactory>
-	if (editingTestPrep) factory.value.loadEntity(editingTestPrep)
+	const factory = new TestPrepFactory()
+	if (editingTestPrep) factory.loadEntity(editingTestPrep)
 
 	const editTestPrep = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const testPrep = await TestPrepsUseCases.update(editingTestPrep!.id, factory.value)
+				const testPrep = await TestPrepsUseCases.update(editingTestPrep!.id, factory)
 				addToArray(store.testPreps.value, testPrep, (e) => e.id, (e) => e.createdAt)
 				await setMessage('TestPrep updated successfully')
 				useStudyModal().closeEditTestPrep()
-				factory.value.reset()
+				factory.reset()
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, editTestPrep }

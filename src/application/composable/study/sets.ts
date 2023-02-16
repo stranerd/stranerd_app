@@ -1,4 +1,7 @@
-import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
+import { useListener } from '@app/composable/core/listener'
+import { useStudyModal } from '@app/composable/core/modals'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { QuestionEntity, QuestionsUseCases } from '@modules/questions'
 import {
 	FlashCardEntity,
 	FlashCardsUseCases,
@@ -11,13 +14,10 @@ import {
 	TestPrepEntity,
 	TestPrepsUseCases
 } from '@modules/study'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { useStudyModal } from '@app/composable/core/modals'
-import { Alert, Notify } from '@utils/dialog'
 import { addToArray } from '@utils/commons'
+import { Alert, Notify } from '@utils/dialog'
+import { computed, onMounted, onUnmounted, Ref, ref } from 'vue'
 import { Router } from 'vue-router'
-import { QuestionEntity, QuestionsUseCases } from '@modules/questions'
-import { useListener } from '@app/composable/core/listener'
 
 const store = {} as Record<string, {
 	set: Ref<SetEntity | null>
@@ -229,25 +229,25 @@ export const useSaveToSet = () => {
 }
 
 export const useCreateSet = () => {
-	const factory = ref(new SetFactory()) as Ref<SetFactory>
+	const factory = new SetFactory()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 
 	const createSet = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await SetsUseCases.add(factory.value)
+				await SetsUseCases.add(factory)
 				await setMessage('Folder created successfully')
 				useStudyModal().closeCreateSet()
-				factory.value.reset()
+				factory.reset()
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, createSet }
@@ -263,23 +263,23 @@ export const useEditSet = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
-	const factory = ref(new SetFactory()) as Ref<SetFactory>
-	if (editingSet) factory.value.loadEntity(editingSet)
+	const factory = new SetFactory()
+	if (editingSet) factory.loadEntity(editingSet)
 
 	const editSet = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await SetsUseCases.update(editingSet!.id, factory.value)
+				await SetsUseCases.update(editingSet!.id, factory)
 				await setMessage('Folder updated successfully')
 				useStudyModal().closeEditSet()
-				factory.value.reset()
+				factory.reset()
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, editSet }
@@ -310,4 +310,3 @@ export const useDeleteSet = (setId: string) => {
 
 	return { loading, error, deleteSet }
 }
-

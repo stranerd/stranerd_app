@@ -1,8 +1,8 @@
-import { isArrayOfX, isFile, isLongerThan, isLongerThanX, isNumber, isString } from '@stranerd/validate'
 import { BaseFactory, Media, UploadedFile } from '@modules/core'
-import { ClassEntity } from '../entities/class'
-import { ClassToModel } from '../../data/models/class'
 import { years } from '@utils/constants'
+import { v } from 'valleyed'
+import { ClassToModel } from '../../data/models/class'
+import { ClassEntity } from '../entities/class'
 
 type Content = Media | UploadedFile | null
 type Keys = {
@@ -12,17 +12,14 @@ type Keys = {
 
 export class ClassFactory extends BaseFactory<ClassEntity, ClassToModel, Keys> {
 	readonly rules = {
-		name: { required: true, rules: [isString, isLongerThanX(2)] },
-		departmentId: { required: true, rules: [isString, isLongerThanX(0)] },
-		facultyId: { required: true, rules: [isString, isLongerThanX(0)] },
-		institutionId: { required: true, rules: [isString, isLongerThanX(0)] },
-		year: { required: true, rules: [isNumber] },
-		description: { required: true, rules: [isString, isLongerThanX(2)] },
-		courses: {
-			required: true,
-			rules: [isArrayOfX((cur) => isString(cur).valid && isLongerThan(cur as any, 0).valid, 'strings')]
-		},
-		photo: { required: true, nullable: true, rules: [isFile] }
+		name: v.string().min(3),
+		departmentId: v.string().min(1),
+		facultyId: v.string().min(1),
+		institutionId: v.string().min(1),
+		year: v.number(),
+		description: v.string().min(3),
+		courses: v.array(v.string().min(1)),
+		photo: v.file().image().nullable()
 	}
 
 	reserved = []
