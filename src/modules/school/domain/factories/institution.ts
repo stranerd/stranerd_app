@@ -1,12 +1,12 @@
 import { BaseFactory } from '@modules/core'
-import { isBoolean, isLongerThanX, isString } from '@stranerd/validate'
-import { InstitutionEntity } from '../entities/institution'
+import { v } from 'valleyed'
 import { InstitutionToModel } from '../../data/models/institution'
+import { InstitutionEntity } from '../entities/institution'
 
 export class InstitutionFactory extends BaseFactory<InstitutionEntity, InstitutionToModel, InstitutionToModel> {
 	readonly rules = {
-		name: { required: true, rules: [isString, isLongerThanX(0)] },
-		isGateway: { required: true, rules: [isBoolean] }
+		name: v.string().min(1),
+		isGateway: v.boolean()
 	}
 
 	reserved = []

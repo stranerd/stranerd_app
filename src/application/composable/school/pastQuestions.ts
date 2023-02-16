@@ -1,9 +1,9 @@
-import { reactive, Ref, ref } from 'vue'
-import { PastQuestionEntity, PastQuestionFactory, PastQuestionsUseCases, PastQuestionType } from '@modules/school'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { PastQuestionEntity, PastQuestionFactory, PastQuestionsUseCases, PastQuestionType } from '@modules/school'
 import { addToArray } from '@utils/commons'
+import { Alert } from '@utils/dialog'
+import { reactive, ref } from 'vue'
 
 const store = {
 	fetched: ref(false),
@@ -41,31 +41,31 @@ export const usePastQuestionList = () => {
 }
 
 export const useCreatePastQuestion = () => {
-	const factory = ref(new PastQuestionFactory()) as Ref<PastQuestionFactory>
+	const factory = new PastQuestionFactory()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 
-	if (store.filters.institution) factory.value.institutionId = store.filters.institution
-	if (store.filters.course) factory.value.courseId = store.filters.course
-	if (store.filters.year) factory.value.year = store.filters.year
-	if (store.filters.questionType) factory.value.type = store.filters.questionType
+	if (store.filters.institution) factory.institutionId = store.filters.institution
+	if (store.filters.course) factory.courseId = store.filters.course
+	if (store.filters.year) factory.year = store.filters.year
+	if (store.filters.questionType) factory.type = store.filters.questionType
 
 	const createPastQuestion = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const pastQuestion = await PastQuestionsUseCases.add(factory.value)
+				const pastQuestion = await PastQuestionsUseCases.add(factory)
 				addToArray(store.pastQuestions.value, pastQuestion, (e) => e.id, (e) => e.createdAt)
-				factory.value.reset()
+				factory.reset()
 				useSchoolModal().closeCreatePastQuestion()
 				await setMessage('PastQuestion created successfully')
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { factory, loading, error, createPastQuestion }
@@ -78,28 +78,28 @@ export const openPastQuestionEditModal = async (pastQuestion: PastQuestionEntity
 }
 
 export const useEditPastQuestion = () => {
-	const factory = ref(new PastQuestionFactory()) as Ref<PastQuestionFactory>
+	const factory = new PastQuestionFactory()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
-	if (editingPastQuestion) factory.value.loadEntity(editingPastQuestion)
+	if (editingPastQuestion) factory.loadEntity(editingPastQuestion)
 	else useSchoolModal().closeEditPastQuestion()
 
 	const editPastQuestion = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const updatedPastQuestion = await PastQuestionsUseCases.update(editingPastQuestion!.id, factory.value)
+				const updatedPastQuestion = await PastQuestionsUseCases.update(editingPastQuestion!.id, factory)
 				addToArray(store.pastQuestions.value, updatedPastQuestion, (e) => e.id, (e) => e.createdAt)
-				factory.value.reset()
+				factory.reset()
 				useSchoolModal().closeEditPastQuestion()
 				await setMessage('PastQuestion updated successfully')
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { factory, loading, error, editPastQuestion }

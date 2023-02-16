@@ -1,5 +1,5 @@
 import { BaseEntity, Media, parseMedia } from '@modules/core'
-import { extractUrls, isImage, isVideo } from '@stranerd/validate'
+import { extractUrls, isImage, isVideo } from 'valleyed'
 import { EmbeddedUser } from '@modules/users'
 import { ChatClasses, ChatData, ChatPersonal, ChatType } from '../types'
 
@@ -39,11 +39,11 @@ export class ChatEntity extends BaseEntity {
 	}
 
 	get isImage () {
-		return this.isMedia && isImage(this.media).valid
+		return this.isMedia && isImage()(this.media).valid
 	}
 
 	get isVideo () {
-		return this.isMedia && isVideo(this.media).valid
+		return this.isMedia && isVideo()(this.media).valid
 	}
 
 	get isDoc () {

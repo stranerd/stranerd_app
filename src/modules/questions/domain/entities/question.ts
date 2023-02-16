@@ -1,6 +1,6 @@
 import { EmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
-import { extractTextFromHTML, trimToLength } from '@stranerd/validate'
+import { stripHTML, trimToLength } from 'valleyed'
 import { QuestionMeta } from '../types'
 
 type QuestionConstructorArgs = {
@@ -61,7 +61,7 @@ export class QuestionEntity extends BaseEntity {
 	}
 
 	get strippedBody () {
-		return extractTextFromHTML(this.body)
+		return stripHTML(this.body)
 	}
 
 	get isModified () {
@@ -84,4 +84,3 @@ export class QuestionEntity extends BaseEntity {
 		return this.strippedBody.toLowerCase().includes(search.toLowerCase())
 	}
 }
-

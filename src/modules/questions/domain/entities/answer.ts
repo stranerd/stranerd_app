@@ -1,6 +1,6 @@
 import { EmbeddedUser } from '@modules/users'
 import { BaseEntity, Media, parseMedia } from '@modules/core'
-import { extractTextFromHTML, trimToLength } from '@stranerd/validate'
+import { stripHTML, trimToLength } from 'valleyed'
 import { AnswerMeta } from '../types'
 
 export class AnswerEntity extends BaseEntity {
@@ -42,7 +42,7 @@ export class AnswerEntity extends BaseEntity {
 	}
 
 	get strippedBody () {
-		return extractTextFromHTML(this.body)
+		return stripHTML(this.body)
 	}
 
 	get isModified () {

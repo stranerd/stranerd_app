@@ -1,12 +1,12 @@
 import { BaseFactory } from '@modules/core'
-import { isLongerThanX, isString } from '@stranerd/validate'
-import { FacultyEntity } from '../entities/faculty'
+import { v } from 'valleyed'
 import { FacultyToModel } from '../../data/models/faculty'
+import { FacultyEntity } from '../entities/faculty'
 
 export class FacultyFactory extends BaseFactory<FacultyEntity, FacultyToModel, FacultyToModel> {
 	readonly rules = {
-		name: { required: true, rules: [isString, isLongerThanX(0)] },
-		institutionId: { required: true, rules: [isString, isLongerThanX(0)] }
+		name: v.string().min(1),
+		institutionId: v.string().min(1)
 	}
 
 	reserved = []

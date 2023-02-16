@@ -93,28 +93,28 @@ export const openAnswerModal = async (question: QuestionEntity, router: Router) 
 
 export const useCreateAnswer = () => {
 	const router = useRouter()
-	const factory = ref(new AnswerFactory()) as Ref<AnswerFactory>
+	const factory = new AnswerFactory()
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
 	if (!answeringQuestion) router.push('/questions')
-	else factory.value.questionId = answeringQuestion!.id
+	else factory.questionId = answeringQuestion!.id
 
 	const createAnswer = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const answer = await AnswersUseCases.add(factory.value)
+				const answer = await AnswersUseCases.add(factory)
 				await setMessage('Answer submitted successfully.')
-				factory.value.reset()
+				factory.reset()
 				await router.push(`/questions/${answer.questionId}`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return {
@@ -220,25 +220,25 @@ export const useEditAnswer = (answerId: string) => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
-	const factory = ref(new AnswerFactory()) as Ref<AnswerFactory>
+	const factory = new AnswerFactory()
 	const router = useRouter()
 
-	if (editingQuestionAnswer) factory.value.loadEntity(editingQuestionAnswer.answer)
+	if (editingQuestionAnswer) factory.loadEntity(editingQuestionAnswer.answer)
 
 	const editAnswer = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const answer = await AnswersUseCases.update(answerId, factory.value)
+				const answer = await AnswersUseCases.update(answerId, factory)
 				await setMessage('Answer updated successfully')
-				factory.value.reset()
+				factory.reset()
 				await router.push(`/questions/${answer.questionId}`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, editAnswer }

@@ -64,11 +64,11 @@ const FlashcardMessages = [
 
 const { factory, loading, error, message, createReport } = useCreateReport()
 const messages = computed(() => {
-	if (factory.value.type === ReportType.questions) return QuestionMessages
-	if (factory.value.type === ReportType.answers) return AnswerMessages
-	if (factory.value.type === ReportType.users) return UserMessages
-	if (factory.value.type === ReportType.pastQuestions) return PastQuestionMessages
-	if (factory.value.type === ReportType.flashCards) return FlashcardMessages
+	if (factory.type === ReportType.questions) return QuestionMessages
+	if (factory.type === ReportType.answers) return AnswerMessages
+	if (factory.type === ReportType.users) return UserMessages
+	if (factory.type === ReportType.pastQuestions) return PastQuestionMessages
+	if (factory.type === ReportType.flashCards) return FlashcardMessages
 	return []
 })
 </script>

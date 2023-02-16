@@ -1,17 +1,14 @@
-import { arrayContainsX, isLongerThanX, isString } from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
 import { CurrencyCountries, WalletEntity } from '@modules/payment'
 import { AccountDetails } from '@modules/payment/domain/types'
+import { v } from 'valleyed'
 
 export class WalletAccountFactory extends BaseFactory<WalletEntity, AccountDetails, AccountDetails> {
 	readonly rules = {
-		country: {
-			required: true,
-			rules: [arrayContainsX(Object.keys(CurrencyCountries), (cur, val) => cur === val)]
-		},
-		number: { required: true, rules: [isString, isLongerThanX(0)] },
-		bankCode: { required: true, rules: [isString, isLongerThanX(0)] },
-		bankName: { required: true, rules: [isString] }
+		country: v.any<CurrencyCountries>().in(Object.values(CurrencyCountries)),
+		number: v.string().min(1),
+		bankCode: v.string().min(1),
+		bankName: v.string()
 	}
 
 	reserved = []

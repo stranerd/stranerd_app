@@ -32,14 +32,14 @@ export const saveReferrerId = async () => {
 
 export const useEmailSignin = () => {
 	const router = useRouter()
-	const factory = ref(new EmailSigninFactory()) as Ref<EmailSigninFactory>
+	const factory = new EmailSigninFactory()
 	const { error, loading, setError, setLoading } = store.emailSignin
 	const signin = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const user = await AuthUseCases.signinWithEmail(factory.value, {
+				const user = await AuthUseCases.signinWithEmail(factory, {
 					referrer: await getReferrerId()
 				})
 				await createSession(user, router)
@@ -48,28 +48,28 @@ export const useEmailSignin = () => {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 	return { factory, loading, error, signin }
 }
 
 export const useEmailSignup = () => {
 	const router = useRouter()
-	const factory = ref(new EmailSignupFactory()) as Ref<EmailSignupFactory>
+	const factory = new EmailSignupFactory()
 	const { error, loading, setError, setLoading } = store.emailSignup
 	const signup = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const user = await AuthUseCases.signupWithEmail(factory.value, { referrer: await getReferrerId() })
+				const user = await AuthUseCases.signupWithEmail(factory, { referrer: await getReferrerId() })
 				await createSession(user, router)
 				await storage.remove('referrer')
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 	return { factory, loading, error, signup }
 }

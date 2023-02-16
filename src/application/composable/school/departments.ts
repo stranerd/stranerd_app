@@ -1,9 +1,9 @@
-import { computed, onMounted, Ref, ref } from 'vue'
-import { DepartmentEntity, DepartmentFactory, DepartmentsUseCases } from '@modules/school'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { DepartmentEntity, DepartmentFactory, DepartmentsUseCases } from '@modules/school'
 import { addToArray } from '@utils/commons'
+import { Alert } from '@utils/dialog'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const store = {
@@ -55,20 +55,20 @@ export const openDepartmentCreateModal = async (facultyId: string) => {
 
 export const useCreateDepartment = () => {
 	const router = useRouter()
-	const factory = ref(new DepartmentFactory()) as Ref<DepartmentFactory>
+	const factory = new DepartmentFactory()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
-	if (creatingFacultyDepartment) factory.value.facultyId = creatingFacultyDepartment
+	if (creatingFacultyDepartment) factory.facultyId = creatingFacultyDepartment
 
 	const createDepartment = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const department = await DepartmentsUseCases.add(factory.value)
+				const department = await DepartmentsUseCases.add(factory)
 				addToArray(store.departments.value, department, (e) => e.id, (e) => e.name, true)
-				factory.value.reset()
+				factory.reset()
 				useSchoolModal().closeCreateDepartment()
 				await setMessage('Department created successfully')
 				await router.push(`/admin/school/institutions/${department.institutionId}/faculties/${department.facultyId}/departments/${department.id}`)
@@ -76,7 +76,7 @@ export const useCreateDepartment = () => {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { factory, loading, error, createDepartment }
@@ -90,21 +90,21 @@ export const openDepartmentEditModal = async (department: DepartmentEntity) => {
 
 export const useEditDepartment = () => {
 	const router = useRouter()
-	const factory = ref(new DepartmentFactory()) as Ref<DepartmentFactory>
+	const factory = new DepartmentFactory()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
-	if (editingDepartment) factory.value.loadEntity(editingDepartment)
+	if (editingDepartment) factory.loadEntity(editingDepartment)
 	else useSchoolModal().closeEditDepartment()
 
 	const editDepartment = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const updatedDepartment = await DepartmentsUseCases.update(editingDepartment!.id, factory.value)
+				const updatedDepartment = await DepartmentsUseCases.update(editingDepartment!.id, factory)
 				addToArray(store.departments.value, updatedDepartment, (e) => e.id, (e) => e.name, true)
-				factory.value.reset()
+				factory.reset()
 				useSchoolModal().closeEditDepartment()
 				await setMessage('Department updated successfully')
 				await router.push(`/admin/school/institutions/${updatedDepartment.institutionId}/faculties/${updatedDepartment.facultyId}/departments/${updatedDepartment.id}`)
@@ -112,7 +112,7 @@ export const useEditDepartment = () => {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { factory, loading, error, editDepartment }

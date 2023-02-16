@@ -2,7 +2,7 @@ import { Clipboard } from '@capacitor/clipboard'
 import { Share } from '@capacitor/share'
 import { Notify } from '@utils/dialog'
 import { isWeb } from '@utils/constants'
-import { addToArray, formatNumber, groupBy, pluralize } from '@stranerd/validate'
+import { addToArray, formatNumber, groupBy, pluralize } from 'valleyed'
 
 export { addToArray, formatNumber, groupBy, pluralize }
 

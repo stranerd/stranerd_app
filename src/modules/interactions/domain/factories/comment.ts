@@ -1,11 +1,11 @@
-import { isLongerThanX, isString } from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
-import { CommentEntity } from '../entities/comment'
+import { v } from 'valleyed'
 import { CommentToModel } from '../../data/models/comment'
+import { CommentEntity } from '../entities/comment'
 
 export class CommentFactory extends BaseFactory<CommentEntity, Omit<CommentToModel, 'entity'>, Omit<CommentToModel, 'entity'>> {
 	readonly rules = {
-		body: { required: true, rules: [isString, isLongerThanX(0)] }
+		body: v.string().min(1)
 	}
 
 	reserved = []

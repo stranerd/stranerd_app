@@ -87,7 +87,7 @@ import {
 } from 'ionicons/icons'
 import { useFileInputCallback } from '@app/composable/core/forms'
 import { pluralize } from '@utils/commons'
-import { getRandomValue } from '@stranerd/validate'
+import { getRandomValue } from 'valleyed'
 import { ChatFactory } from '@modules/messaging'
 import { useCreateChat } from '@app/composable/messaging/chats'
 

@@ -1,11 +1,11 @@
-import { computed, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
-import { Router, useRouter } from 'vue-router'
-import { QuestionEntity, QuestionFactory, QuestionsUseCases } from '@modules/questions'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@utils/dialog'
-import { addToArray } from '@utils/commons'
-import { useUserModal } from '@app/composable/core/modals'
 import { useListener } from '@app/composable/core/listener'
+import { useUserModal } from '@app/composable/core/modals'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { QuestionEntity, QuestionFactory, QuestionsUseCases } from '@modules/questions'
+import { addToArray } from '@utils/commons'
+import { Alert } from '@utils/dialog'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { Router, useRouter } from 'vue-router'
 
 enum Answered {
 	All,
@@ -98,24 +98,24 @@ export const useCreateQuestion = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
-	const factory = ref(new QuestionFactory()) as Ref<QuestionFactory>
+	const factory = new QuestionFactory()
 	const router = useRouter()
 
 	const createQuestion = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const question = await QuestionsUseCases.add(factory.value)
+				const question = await QuestionsUseCases.add(factory)
 				await setMessage('Question submitted successfully')
-				factory.value.reset()
+				factory.reset()
 				await router.push(`/questions/${question.id}`)
 				useUserModal().openQuestionCreated()
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, createQuestion }
@@ -184,23 +184,23 @@ export const useEditQuestion = () => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 	const router = useRouter()
-	const factory = ref(new QuestionFactory()) as Ref<QuestionFactory>
-	if (editingQuestion) factory.value.loadEntity(editingQuestion)
+	const factory = new QuestionFactory()
+	if (editingQuestion) factory.loadEntity(editingQuestion)
 
 	const editQuestion = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const question = await QuestionsUseCases.update(editingQuestion!.id, factory.value)
+				const question = await QuestionsUseCases.update(editingQuestion!.id, factory)
 				await setMessage('Question updated successfully')
-				factory.value.reset()
+				factory.reset()
 				await router.push(`/questions/${question.id}`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, editQuestion }

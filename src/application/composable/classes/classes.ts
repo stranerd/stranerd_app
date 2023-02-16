@@ -210,7 +210,7 @@ export const useClassMembersList = (classInst: ClassEntity, skipHooks = false) =
 	}
 }
 
-const factory = ref(new ClassFactory()) as Ref<ClassFactory>
+const factory = new ClassFactory()
 export const useCreateClass = () => {
 	const { user } = useAuth()
 	const { error, setError } = useErrorHandler()
@@ -219,31 +219,31 @@ export const useCreateClass = () => {
 	const router = useRouter()
 
 	if (user.value && user.value.isCollege(user.value)) {
-		factory.value.institutionId = user.value.school.institutionId
-		factory.value.facultyId = user.value.school.facultyId
-		factory.value.departmentId = user.value.school.departmentId
+		factory.institutionId = user.value.school.institutionId
+		factory.facultyId = user.value.school.facultyId
+		factory.departmentId = user.value.school.departmentId
 	}
 
 	const createClass = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const existingClass = await ClassesUseCases.findBySchool(factory.value.departmentId, factory.value.year)
+				const existingClass = await ClassesUseCases.findBySchool(factory.departmentId, factory.year)
 				if (existingClass) {
 					await setMessage('This class already exists! Redirecting to class now!')
 					await router.push(`/classes/${existingClass.id}`)
 				} else {
-					const classInst = await ClassesUseCases.add(factory.value)
+					const classInst = await ClassesUseCases.add(factory)
 					await setMessage('Class created successfully')
 					await router.push(`/classes/${classInst.id}`)
 				}
-				factory.value.reset()
+				factory.reset()
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, createClass }
@@ -338,23 +338,23 @@ export const useEditClass = () => {
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 	const router = useRouter()
-	const factory = ref(new ClassFactory()) as Ref<ClassFactory>
-	if (editingClass) factory.value.loadEntity(editingClass)
+	const factory = new ClassFactory()
+	if (editingClass) factory.loadEntity(editingClass)
 
 	const editClass = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				await ClassesUseCases.update(editingClass!.id, factory.value)
+				await ClassesUseCases.update(editingClass!.id, factory)
 				await setMessage('Class updated successfully')
-				factory.value.reset()
+				factory.reset()
 				await router.push(`/classes/${editingClass!.id}`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, editClass }

@@ -1,16 +1,7 @@
-import {
-	arrayContainsX,
-	hasMoreThan,
-	isArrayOf,
-	isArrayOfX,
-	isLongerThanX,
-	isMoreThanOrEqualTo,
-	isNumber,
-	isString
-} from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
-import { UserSchoolData, UserSchoolType } from '../types'
+import { v } from 'valleyed'
 import { UserEntity } from '../entities/user'
+import { UserSchoolData, UserSchoolType } from '../types'
 
 type Exam = {
 	institutionId: string
@@ -29,34 +20,19 @@ type Keys = {
 
 export class UserSchoolFactory extends BaseFactory<UserEntity, UserSchoolData, Keys> {
 	readonly rules = {
-		body: { required: true, rules: [isString, isLongerThanX(2)] },
-		type: { required: true, rules: [arrayContainsX(Object.values(UserSchoolType), (cur, val) => cur === val)] },
-		institutionId: {
-			required: () => this.isCollegeType,
-			rules: [isString, isLongerThanX(0)]
-		},
-		facultyId: {
-			required: () => this.isCollegeType,
-			rules: [isString, isLongerThanX(0)]
-		},
-		departmentId: {
-			required: () => this.isCollegeType,
-			rules: [isString, isLongerThanX(0)]
-		},
-		exams: {
-			required: () => !this.isCollegeType,
-			rules: [isArrayOfX((value: Exam) => {
-				const isInstitutionIdValid = isString(value.institutionId).valid
-				const isCourseIdsValid = isArrayOf(value.courseIds, (cur) => isString(cur).valid, 'strings').valid &&
-					hasMoreThan(value.courseIds, 0).valid
-				const isStartValid = isNumber(value.startDate).valid
-				const isEndValid = isNumber(value.endDate).valid && isMoreThanOrEqualTo(value.endDate, value.startDate).valid
-				return [
-					isInstitutionIdValid, isCourseIdsValid,
-					isStartValid, isEndValid
-				].every((v) => v)
-			}, 'exams')]
-		}
+		body: v.string().min(3),
+		type: v.any<UserSchoolType>().in(Object.values(UserSchoolType)),
+		institutionId: v.string().min(1).requiredIf(() => this.isCollegeType),
+		facultyId: v.string().min(1).requiredIf(() => this.isCollegeType),
+		departmentId: v.string().min(1).requiredIf(() => this.isCollegeType),
+		exams: v.array(v.any().addRule((val: any) =>
+			v.object({
+				institutionId: v.string().min(1),
+				courseIds: v.array(v.string().min(1)).min(1),
+				start: v.time().asStamp(),
+				end: v.time().min(val?.start).asStamp(),
+			}).parse(val)
+		)).requiredIf(() => !this.isCollegeType)
 	}
 	reserved = ['type']
 	insts = [] as string[]

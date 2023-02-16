@@ -1,5 +1,5 @@
 import { BaseFactory } from '@modules/core'
-import { arrayContainsX, isLongerThanX, isString } from '@stranerd/validate'
+import { v } from 'valleyed'
 import { ReportToModel } from '../../data/models/report'
 import { ReportEntity, ReportType } from '../entities/report'
 
@@ -7,12 +7,9 @@ type Keys = { id: string, type: ReportType, message: string }
 
 export class ReportFactory extends BaseFactory<ReportEntity, ReportToModel, Keys> {
 	public rules = {
-		type: {
-			required: true,
-			rules: [isString, arrayContainsX(Object.values<string>(ReportType), (cur, val) => cur === val)]
-		},
-		id: { required: true, rules: [isString, isLongerThanX(0)] },
-		message: { required: true, rules: [isString, isLongerThanX(0)] }
+		type: v.any<ReportType>().in(Object.values(ReportType)),
+		id: v.string().min(1),
+		message: v.string().min(1)
 	}
 
 	reserved = ['type', 'id', 'message']

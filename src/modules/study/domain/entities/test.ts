@@ -1,5 +1,5 @@
 import { BaseEntity } from '@modules/core'
-import { catchDivideByZero } from '@stranerd/validate'
+import { divideByZero } from 'valleyed'
 import { PastQuestionType } from '@modules/school'
 
 export class TestEntity extends BaseEntity {
@@ -51,7 +51,7 @@ export class TestEntity extends BaseEntity {
 
 	get progress () {
 		if (!this.isOBJ) return 1
-		return catchDivideByZero(this.answered + 1, this.questions.length)
+		return divideByZero(this.answered + 1, this.questions.length)
 	}
 
 	get isTimed () {

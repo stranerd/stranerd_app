@@ -1,7 +1,7 @@
 import { ILikeRepository } from '../irepositories/ilike'
 import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { LikeEntity } from '../entities/like'
-import { InteractionEntities, InteractionEntity } from '../types'
+import { InteractionEntities, Interaction } from '../types'
 
 export class LikesUseCase {
 	private repository: ILikeRepository
@@ -10,7 +10,7 @@ export class LikesUseCase {
 		this.repository = repository
 	}
 
-	async add (entity: InteractionEntity, value: boolean) {
+	async add (entity: Interaction, value: boolean) {
 		return await this.repository.add({ entity, value })
 	}
 

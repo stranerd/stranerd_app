@@ -103,25 +103,25 @@ export const useFileList = (userId = useAuth().id.value) => {
 
 export const useCreateFile = () => {
 	const router = useRouter()
-	const factory = ref(new FileFactory()) as Ref<FileFactory>
+	const factory = new FileFactory()
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
 
 	const createFile = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const file = await FilesUseCases.add(factory.value)
+				const file = await FilesUseCases.add(factory)
 				await setMessage('File submitted successfully')
 				await router.push('/account/files/')
-				factory.value.reset()
+				factory.reset()
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, createFile }

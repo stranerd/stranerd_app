@@ -131,28 +131,28 @@ export const setAnnouncementClassId = (classId: string) => {
 
 export const useCreateAnnouncement = () => {
 	const router = useRouter()
-	const factory = ref(new AnnouncementFactory()) as Ref<AnnouncementFactory>
+	const factory = new AnnouncementFactory()
 	const { loading, setLoading } = useLoadingHandler()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 
-	if (createClassId) factory.value.classId = createClassId
+	if (createClassId) factory.classId = createClassId
 	createClassId = null
 
 	const createAnnouncement = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const announcement = await AnnouncementsUseCases.add(factory.value)
+				const announcement = await AnnouncementsUseCases.add(factory)
 				await setMessage('Announcement posted successfully.')
-				factory.value.reset()
+				factory.reset()
 				await router.push(`/classes/${announcement.classId}/announcements`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return {
@@ -170,25 +170,25 @@ export const useEditAnnouncement = () => {
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { setMessage } = useSuccessHandler()
-	const factory = ref(new AnnouncementFactory()) as Ref<AnnouncementFactory>
+	const factory = new AnnouncementFactory()
 	const router = useRouter()
 
-	if (editingAnnouncement) factory.value.loadEntity(editingAnnouncement)
+	if (editingAnnouncement) factory.loadEntity(editingAnnouncement)
 
 	const editAnnouncement = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				const announcement = await AnnouncementsUseCases.update(editingAnnouncement!.id, factory.value)
+				const announcement = await AnnouncementsUseCases.update(editingAnnouncement!.id, factory)
 				await setMessage('Announcement updated successfully')
-				factory.value.reset()
+				factory.reset()
 				await router.push(`/classes/${announcement.classId}/announcements`)
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { error, loading, factory, editAnnouncement }

@@ -4,7 +4,7 @@ const fs = require('fs')
 const { build } = require('plist')
 const { appBuild, installCertAndProfile } = require('./app.js')
 const envs = require('../env.json')
-const { isNumber, isMoreThan } = require('@stranerd/validate')
+const { v } = require('valleyed')
 const { asset_links, google_client_ids, package_name, app_name, environment, domain } = envs
 const isProduction = environment === 'production'
 
@@ -93,7 +93,7 @@ const setup = async (args) => {
 const version = async (args) => {
 	const firstVersionDate = 1640995200000
 	const providedVersionCode = parseInt(args[1])
-	const versionCode = isNumber(providedVersionCode).valid && isMoreThan(providedVersionCode, 0) ?
+	const versionCode = v.number().gt(0).parse(providedVersionCode).valid ?
 		providedVersionCode : Math.floor((Date.now() - firstVersionDate) / 1e5)
 	const versionName = args[0].toString()
 	if (!versionName) return console.log('Provide a version please')

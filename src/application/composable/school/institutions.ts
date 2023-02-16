@@ -1,9 +1,9 @@
-import { computed, onMounted, Ref, ref } from 'vue'
-import { InstitutionEntity, InstitutionFactory, InstitutionsUseCases } from '@modules/school'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@utils/dialog'
 import { useSchoolModal } from '@app/composable/core/modals'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { InstitutionEntity, InstitutionFactory, InstitutionsUseCases } from '@modules/school'
 import { addToArray } from '@utils/commons'
+import { Alert } from '@utils/dialog'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const store = {
@@ -52,19 +52,19 @@ export const useInstitution = (id: string) => {
 
 export const useCreateInstitution = () => {
 	const router = useRouter()
-	const factory = ref(new InstitutionFactory()) as Ref<InstitutionFactory>
+	const factory = new InstitutionFactory()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
 
 	const createInstitution = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const institution = await InstitutionsUseCases.add(factory.value)
+				const institution = await InstitutionsUseCases.add(factory)
 				addToArray(store.institutions.value, institution, (e) => e.id, (e) => e.name, true)
-				factory.value.reset()
+				factory.reset()
 				useSchoolModal().closeCreateInstitution()
 				await setMessage('Institution created successfully')
 				await router.push(`/admin/school/institutions/${institution.id}`)
@@ -72,7 +72,7 @@ export const useCreateInstitution = () => {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { factory, loading, error, createInstitution }
@@ -86,21 +86,21 @@ export const openInstitutionEditModal = async (institution: InstitutionEntity) =
 
 export const useEditInstitution = () => {
 	const router = useRouter()
-	const factory = ref(new InstitutionFactory()) as Ref<InstitutionFactory>
+	const factory = new InstitutionFactory()
 	const { error, setError } = useErrorHandler()
 	const { setMessage } = useSuccessHandler()
 	const { loading, setLoading } = useLoadingHandler()
-	if (editingInstitution) factory.value.loadEntity(editingInstitution)
+	if (editingInstitution) factory.loadEntity(editingInstitution)
 	else useSchoolModal().closeEditInstitution()
 
 	const editInstitution = async () => {
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			await setLoading(true)
 			try {
-				const updatedInstitution = await InstitutionsUseCases.update(editingInstitution!.id, factory.value)
+				const updatedInstitution = await InstitutionsUseCases.update(editingInstitution!.id, factory)
 				addToArray(store.institutions.value, updatedInstitution, (e) => e.id, (e) => e.name, true)
-				factory.value.reset()
+				factory.reset()
 				useSchoolModal().closeEditInstitution()
 				await setMessage('Institution updated successfully')
 				await router.push(`/admin/school/institutions/${updatedInstitution.id}`)
@@ -108,7 +108,7 @@ export const useEditInstitution = () => {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 	}
 
 	return { factory, loading, error, editInstitution }

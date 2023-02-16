@@ -1,14 +1,14 @@
-import { arrayContainsX, isLongerThanX, isString } from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
-import { TagEntity } from '../entities/tag'
-import { TagToModel } from '../../data/models/tag'
 import { TagTypes } from '@modules/interactions/domain/types'
+import { v } from 'valleyed'
+import { TagToModel } from '../../data/models/tag'
+import { TagEntity } from '../entities/tag'
 
 export class TagFactory extends BaseFactory<TagEntity, TagToModel, TagToModel> {
 	readonly rules = {
-		title: { required: true, rules: [isString, isLongerThanX(0)] },
-		type: { required: true, rules: [isString, arrayContainsX(Object.keys(TagTypes), (cur, val) => cur === val)] },
-		parent: { required: true, nullable: true, rules: [isString] }
+		title: v.string().min(1),
+		type: v.any<TagTypes>().in(Object.values(TagTypes)),
+		parent: v.string().min(1).nullable()
 	}
 
 	reserved = []

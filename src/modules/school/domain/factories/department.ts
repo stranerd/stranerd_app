@@ -1,13 +1,13 @@
 import { BaseFactory } from '@modules/core'
-import { isLongerThanX, isString } from '@stranerd/validate'
-import { DepartmentEntity } from '../entities/department'
+import { v } from 'valleyed'
 import { DepartmentToModel } from '../../data/models/department'
+import { DepartmentEntity } from '../entities/department'
 
 export class DepartmentFactory extends BaseFactory<DepartmentEntity, DepartmentToModel, DepartmentToModel> {
 	readonly rules = {
-		name: { required: true, rules: [isString, isLongerThanX(0)] },
-		facultyId: { required: true, rules: [isString, isLongerThanX(0)] },
-		tagId: { required: true, rules: [isString, isLongerThanX(0)] }
+		name: v.string().min(1),
+		facultyId: v.string().min(1),
+		tagId: v.string().min(1)
 	}
 
 	reserved = []

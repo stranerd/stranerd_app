@@ -1,12 +1,12 @@
-import { isExtractedHTMLLongerThanX, isString } from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
-import { GroupEntity } from '../entities/group'
+import { v } from 'valleyed'
 import { GroupToModel } from '../../data/models/group'
+import { GroupEntity } from '../entities/group'
 
 export class GroupFactory extends BaseFactory<GroupEntity, GroupToModel, GroupToModel> {
 	readonly rules = {
-		name: { required: true, rules: [isString, isExtractedHTMLLongerThanX(2)] },
-		classId: { required: true, rules: [isString] }
+		name: v.string().min(3),
+		classId: v.string().min(1)
 	}
 
 	reserved = ['classId']

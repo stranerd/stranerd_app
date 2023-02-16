@@ -1,37 +1,32 @@
 
 <template>
 	<form class="flex flex-col gap-4" @submit.prevent="createMessage">
-		
+
 		<div class="flex w-full gap-4">
 			<div class="flex flex-col w-1/2">
 				<IonLabel class="font-bold mb-2">First Name</IonLabel>
-				<IonInput v-model="factory.firstName"
-					:size="24" class="flex-grow-0" position="floating" type="text" />
+				<IonInput v-model="factory.firstName" :size="24" class="flex-grow-0" position="floating" type="text" />
 			</div>
 			<div class="flex flex-col w-1/2">
 				<IonLabel class="font-bold mb-2">Last Name</IonLabel>
-				<IonInput v-model="factory.lastName"
-					:size="24" class="flex-grow-0" position="floating" type="text" />
+				<IonInput v-model="factory.lastName" :size="24" class="flex-grow-0" position="floating" type="text" />
 			</div>
 		</div>
 		<div class="flex w-full gap-4">
 			<div class="flex flex-col w-1/2">
 				<IonLabel class="font-bold mb-2">Email</IonLabel>
-				<IonInput v-model="factory.email"
-					:size="24" class="flex-grow-0" inputmode="email"
-					position="floating" type="email" />
+				<IonInput v-model="factory.email" :size="24" class="flex-grow-0" inputmode="email" position="floating"
+					type="email" />
 			</div>
 			<div class="flex flex-col w-1/2">
 				<IonLabel class="font-bold mb-2">Phone</IonLabel>
-				<IonInput v-model="factory.phone"
-					:size="24" class="flex-grow-0" position="floating" type="number" />
+				<PhoneInput v-model:value="factory.phone" class="flex-grow-0" />
 			</div>
 		</div>
 
 		<div class="flex flex-col">
 			<IonLabel class="font-bold mb-2">Subject</IonLabel>
-			<IonInput 
-				:size="24" class="flex-grow-0" position="floating" type="text" />
+			<IonInput :size="24" class="flex-grow-0" position="floating" type="text" />
 		</div>
 
 		<div class="flex flex-col">
@@ -48,7 +43,6 @@
 
 <script lang="ts" setup>
 import { useCreateMessage } from '@app/composable/meta/messages'
-import { MessageType } from '@modules/meta'
 
 const { countries, factory, loading, error, createMessage } = useCreateMessage()
 </script>

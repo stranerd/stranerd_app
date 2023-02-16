@@ -1,19 +1,8 @@
 import { BaseFactory, Media, UploadedFile } from '@modules/core'
-import {
-	arrayContainsX,
-	hasMoreThanX,
-	isArrayOf,
-	isArrayOfX,
-	isExtractedHTMLLongerThanX,
-	isImage,
-	isLongerThanX,
-	isMoreThanX,
-	isNumber,
-	isString
-} from '@stranerd/validate'
+import { v } from 'valleyed'
+import { PastQuestionToModel } from '../../data/models/pastQuestion'
 import { PastQuestionEntity } from '../entities/pastQuestion'
 import { PastQuestionType } from '../types'
-import { PastQuestionToModel } from '../../data/models/pastQuestion'
 
 type Content = UploadedFile | Media
 type Keys = {
@@ -34,45 +23,19 @@ type Keys = {
 
 export class PastQuestionFactory extends BaseFactory<PastQuestionEntity, PastQuestionToModel, Keys> {
 	readonly rules = {
-		institutionId: { required: true, rules: [isString, isLongerThanX(0)] },
-		courseId: { required: true, rules: [isString, isLongerThanX(0)] },
-		year: { required: true, rules: [isNumber, isMoreThanX(0)] },
-		type: {
-			required: true,
-			rules: [arrayContainsX(Object.keys(PastQuestionType), (cur, val) => cur === val)]
-		},
-		question: { required: true, rules: [isString, isExtractedHTMLLongerThanX(0)] },
-		questionMedia: { required: true, rules: [isArrayOfX((com) => isImage(com).valid, 'images')] },
-		answer: {
-			required: () => !this.isObjective,
-			rules: [isString]
-		},
-		answerMedia: {
-			required: () => !this.isObjective,
-			rules: [isArrayOfX((com) => isImage(com).valid, 'images')]
-		},
-		options: {
-			required: () => this.isObjective,
-			rules: [isArrayOfX((cur: any) => isString(cur).valid, 'questions'), hasMoreThanX(0)]
-		},
-		optionsMedia: {
-			required: () => this.isObjective,
-			rules: [
-				isArrayOfX((cur: any) => isArrayOf(cur, (com) => isImage(com).valid, 'images').valid, 'images')
-			]
-		},
-		correctIndex: {
-			required: () => this.isObjective,
-			rules: [isNumber]
-		},
-		explanation: {
-			required: () => this.isObjective,
-			rules: [isString]
-		},
-		explanationMedia: {
-			required: () => this.isObjective,
-			rules: [isArrayOfX((com) => isImage(com).valid, 'images')]
-		}
+		institutionId: v.string().min(1),
+		courseId: v.string().min(1),
+		year: v.number().gt(0),
+		type: v.any<PastQuestionType>().in(Object.values(PastQuestionType)),
+		question: v.string().min(1, true),
+		questionMedia: v.array(v.file().image()),
+		answer: v.string().requiredIf(() => !this.isObjective),
+		answerMedia: v.array(v.file().image()).requiredIf(() => !this.isObjective),
+		options: v.array(v.string()).min(0).requiredIf(() => this.isObjective),
+		optionsMedia: v.array(v.array(v.file().image())).min(0).requiredIf(() => this.isObjective),
+		correctIndex: v.number().requiredIf(() => this.isObjective),
+		explanation: v.string().requiredIf(() => this.isObjective),
+		explanationMedia: v.array(v.file().image()).requiredIf(() => this.isObjective),
 	}
 
 	reserved = []

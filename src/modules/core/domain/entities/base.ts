@@ -1,4 +1,4 @@
-import { getRandomValue } from '@stranerd/validate'
+import { getRandomValue } from 'valleyed'
 
 export class BaseEntity {
 	public hash: string

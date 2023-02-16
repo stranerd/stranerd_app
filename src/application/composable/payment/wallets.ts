@@ -1,12 +1,12 @@
-import { Bank, MethodsUseCases, TransactionType, WalletAccountFactory, WalletsUseCases } from '@modules/payment'
-import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
-import { Alert } from '@utils/dialog'
 import { useAuth } from '@app/composable/auth/auth'
-import { useRouter } from 'vue-router'
-import { onMounted, Ref, ref, watch } from 'vue'
-import { storage } from '@utils/storage'
-import { createTransaction } from '@app/composable/payment/transactions'
 import { useUserModal } from '@app/composable/core/modals'
+import { useErrorHandler, useLoadingHandler, useSuccessHandler } from '@app/composable/core/states'
+import { createTransaction } from '@app/composable/payment/transactions'
+import { Bank, MethodsUseCases, TransactionType, WalletAccountFactory, WalletsUseCases } from '@modules/payment'
+import { Alert } from '@utils/dialog'
+import { storage } from '@utils/storage'
+import { onMounted, ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 
 const AFTER_SUB_ROUTE_KEY = 'AFTER_SUBSCRIPTION_ROUTE_KEY'
 
@@ -72,8 +72,8 @@ export const useWallet = () => {
 export const useEditAccount = () => {
 	const { wallet } = useAuth()
 	const banks = ref([] as Bank[])
-	const factory = ref(new WalletAccountFactory()) as Ref<WalletAccountFactory>
-	factory.value.loadEntity(wallet.value!)
+	const factory = new WalletAccountFactory()
+	factory.loadEntity(wallet.value!)
 	const { error, setError } = useErrorHandler()
 	const { loading, setLoading } = useLoadingHandler()
 	const { message, setMessage } = useSuccessHandler()
@@ -81,27 +81,27 @@ export const useEditAccount = () => {
 	const updateAccount = async () => {
 		let res = false
 		await setError('')
-		if (factory.value.valid && !loading.value) {
+		if (factory.valid && !loading.value) {
 			try {
 				await setLoading(true)
-				wallet.value = await WalletsUseCases.updateAccount(factory.value)
+				wallet.value = await WalletsUseCases.updateAccount(factory)
 				await setMessage('Account updated successfully')
-				factory.value.reset()
+				factory.reset()
 				res = true
 			} catch (error) {
 				await setError(error)
 			}
 			await setLoading(false)
-		} else factory.value.validateAll()
+		} else factory.validateAll()
 		return res
 	}
 
 	const fetchBanks = async () => {
-		banks.value = await WalletsUseCases.getBanks(factory.value.country)
+		banks.value = await WalletsUseCases.getBanks(factory.country)
 	}
 
-	watch(() => factory.value.country, fetchBanks)
-	watch(wallet, () => factory.value.loadEntity(wallet.value!))
+	watch(() => factory.country, fetchBanks)
+	watch(wallet, () => factory.loadEntity(wallet.value!))
 	onMounted(fetchBanks)
 
 	return { error, loading, message, wallet, factory, banks, updateAccount }

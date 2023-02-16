@@ -1,18 +1,15 @@
-import { hasLessThanOrEqualToX, hasMoreThanX, isArrayOfX, isLongerThanX, isString } from '@stranerd/validate'
 import { BaseFactory } from '@modules/core'
-import { FlashCardEntity } from '../entities/flashCard'
+import { v } from 'valleyed'
 import { FlashCardToModel } from '../../data/models/flashCard'
+import { FlashCardEntity } from '../entities/flashCard'
 
 export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToModel, FlashCardToModel> {
 	readonly rules = {
-		title: { required: true, rules: [isString, isLongerThanX(0)] },
-		set: {
-			required: true,
-			rules: [
-				isArrayOfX((cur: any) => isString(cur?.question).valid && isString(cur?.answer).valid, 'questions'),
-				hasMoreThanX(0), hasLessThanOrEqualToX(128)
-			]
-		}
+		title: v.string().min(1),
+		set: v.array(v.object({
+			question: v.string().min(1),
+			answer: v.string().min(1)
+		})).min(1).max(128)
 	}
 
 	reserved = []

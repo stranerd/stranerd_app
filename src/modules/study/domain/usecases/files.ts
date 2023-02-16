@@ -3,7 +3,7 @@ import { FileFactory } from '../factories/file'
 import { Conditions, Listeners, QueryParams } from '@modules/core'
 import { PAGINATION_LIMIT } from '@utils/constants'
 import { FileEntity } from '../entities/file'
-import { imageMimeTypes, videoMimeTypes } from '@stranerd/validate'
+import { imageMimeTypes, videoMimeTypes } from 'valleyed'
 
 const searchFields = ['title', 'media.name']
 type Library = 'images' | 'videos' | 'docs' | string

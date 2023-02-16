@@ -2,7 +2,7 @@ import { ICommentRepository } from '../irepositories/icomment'
 import { CommentFactory } from '../factories/comment'
 import { Listeners, QueryParams } from '@modules/core'
 import { CommentEntity } from '../entities/comment'
-import { InteractionEntity } from '../types'
+import { Interaction } from '../types'
 
 export class CommentsUseCase {
 	private repository: ICommentRepository
@@ -11,7 +11,7 @@ export class CommentsUseCase {
 		this.repository = repository
 	}
 
-	async add (entity: InteractionEntity, factory: CommentFactory) {
+	async add (entity: Interaction, factory: CommentFactory) {
 		const data = await factory.toModel()
 		return await this.repository.add({ ...data, entity })
 	}
@@ -20,7 +20,7 @@ export class CommentsUseCase {
 		return await this.repository.delete(id)
 	}
 
-	async update (entity: InteractionEntity, id: string, factory: CommentFactory) {
+	async update (entity: Interaction, id: string, factory: CommentFactory) {
 		const data = await factory.toModel()
 		return await this.repository.update(id, { ...data, entity })
 	}
@@ -29,7 +29,7 @@ export class CommentsUseCase {
 		return await this.repository.find(id)
 	}
 
-	async get (entity: InteractionEntity) {
+	async get (entity: Interaction) {
 		const conditions: QueryParams = {
 			where: [{ field: 'entity.id', value: entity.id }, { field: 'entity.type', value: entity.type }],
 			sort: [{ field: 'createdAt', desc: true }],
@@ -43,7 +43,7 @@ export class CommentsUseCase {
 		return await this.repository.listenToOne(id, listener)
 	}
 
-	async listen (entity: InteractionEntity, listener: Listeners<CommentEntity>) {
+	async listen (entity: Interaction, listener: Listeners<CommentEntity>) {
 		const conditions: QueryParams = {
 			where: [{ field: 'entity.id', value: entity.id }, { field: 'entity.type', value: entity.type }],
 			sort: [{ field: 'createdAt', desc: true }],
