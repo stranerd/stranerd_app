@@ -5,6 +5,8 @@ const { readFileSync } = require('fs')
 
 const installCertAndProfile = (profileFile, certificateFile) => {
 	const keychain = 'login.keychain'
+	const kcp = process.env.KEYCHAIN_PASSWORD
+	const cp = process.env.CERTIFICATE_PASSWORD
 
 	const rawPlist = readFileSync(profileFile).toString()
 	const startIndex = rawPlist.indexOf('<?xml')
@@ -13,10 +15,10 @@ const installCertAndProfile = (profileFile, certificateFile) => {
 	const data = parse(rawPlist.slice(startIndex, endIndex + endString.length))
 	const { UUID } = data
 	const command = `
-cp -fr "${ profileFile }" "$HOME/Library/MobileDevice/Provisioning Profiles/${ UUID }.mobileprovision" &&
-security unlock-keychain ${ keychain } && security set-keychain-settings ${ keychain } &&
-security import ${ certificateFile } -k ${ keychain } -T /usr/bin/codesign &&
-security set-key-partition-list -S apple-tool:,apple:,codesign: -s ${ keychain }
+cp -fr "${profileFile}" "$HOME/Library/MobileDevice/Provisioning Profiles/${UUID}.mobileprovision" &&
+security unlock-keychain ${kcp ? `-p ${kcp}` : ''} ${keychain} && security set-keychain-settings ${keychain} &&
+security import ${certificateFile} -k ${keychain} ${cp ? `-P ${cp}` : ''} -T /usr/bin/codesign &&
+security set-key-partition-list ${kcp ? `-k ${kcp}` : ''} -S apple-tool:,apple:,codesign: -s ${keychain}
 `
 	execSync(command, { maxBuffer: 1024 * 1024 * 5 })
 
@@ -28,7 +30,7 @@ const appBuild = async (args) => {
 	const platform = args[0]
 
 	if (!validPlatforms.includes(platform)) {
-		console.log(`Invalid platform. Supported values: ${ validPlatforms.join(', ') }`)
+		console.log(`Invalid platform. Supported values: ${validPlatforms.join(', ')}`)
 		process.exit(1)
 	}
 
@@ -36,7 +38,7 @@ const appBuild = async (args) => {
 	const configuration = args[1] ?? validConfigurations[0]
 
 	if (!validConfigurations.includes(configuration)) {
-		console.log(`Invalid configuration. Supported values: ${ validConfigurations.join(', ') }`)
+		console.log(`Invalid configuration. Supported values: ${validConfigurations.join(', ')}`)
 		process.exit(1)
 	}
 
@@ -45,7 +47,7 @@ const appBuild = async (args) => {
 		const type = args[2] ?? validTypes[1]
 
 		if (!validTypes.includes(type)) {
-			console.log(`Invalid type. Supported values: ${ validTypes.join(', ') }`)
+			console.log(`Invalid type. Supported values: ${validTypes.join(', ')}`)
 			process.exit(1)
 		}
 
@@ -53,14 +55,14 @@ const appBuild = async (args) => {
 		const isBundle = type === validTypes[1]
 
 		const sign = 'apksigner sign --ks ./app.keystore --ks-key-alias kevin@stranerd.com'
-		const signAssemble = `zipalign 4 ./app/build/outputs/apk/release/app-release-unsigned.apk ./app/build/outputs/apk/release/app-release.apk && ${ sign } ./app/build/outputs/apk/release/app-release.apk`
-		const signBundle = `${ sign } --min-sdk-version 22 ./app/build/outputs/bundle/release/app-release.aab`
+		const signAssemble = `zipalign 4 ./app/build/outputs/apk/release/app-release-unsigned.apk ./app/build/outputs/apk/release/app-release.apk && ${sign} ./app/build/outputs/apk/release/app-release.apk`
+		const signBundle = `${sign} --min-sdk-version 22 ./app/build/outputs/bundle/release/app-release.aab`
 
-		const install = args.includes('--install') ? `./gradlew install${ configuration } &&` : ''
+		const install = args.includes('--install') ? `./gradlew install${configuration} &&` : ''
 
 		return `cd android && rm -rf app/build &&
-./gradlew ${ type + configuration } && ${ install }
-${ isAssemble ? signAssemble : '' }${ isBundle ? signBundle : '' }
+./gradlew ${type + configuration} && ${install}
+${isAssemble ? signAssemble : ''}${isBundle ? signBundle : ''}
 `
 	}
 
@@ -69,9 +71,9 @@ ${ isAssemble ? signAssemble : '' }${ isBundle ? signBundle : '' }
 		const ipaFile = 'Output'
 		const exportPlistFile = 'App/Export.plist'
 
-		return `cd ios/App && rm -rf ${ ipaFile } &&
-xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath ${ archiveFile } -configuration ${ configuration } &&
-xcodebuild -exportArchive -archivePath ${ archiveFile }.xcarchive -exportOptionsPlist ${ exportPlistFile } -exportPath ${ ipaFile }
+		return `cd ios/App && rm -rf ${ipaFile} &&
+xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath ${archiveFile} -configuration ${configuration} &&
+xcodebuild -exportArchive -archivePath ${archiveFile}.xcarchive -exportOptionsPlist ${exportPlistFile} -exportPath ${ipaFile}
 `
 	}
 

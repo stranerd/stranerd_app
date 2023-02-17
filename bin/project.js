@@ -9,6 +9,7 @@ const { asset_links, google_client_ids, package_name, app_name, environment, dom
 const isProduction = environment === 'production'
 
 const getProject = async () => {
+	process.env.VERBOSE = 'false'
 	const project = new MobileProject('./', {
 		ios: { path: 'ios/App' },
 		android: { path: 'android' }
@@ -26,8 +27,8 @@ const setup = async (args) => {
 	const skipApps = args.includes('--skip-apps')
 	const folder = './public/.well-known'
 	if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true })
-	fs.writeFileSync(`${ folder }/assetlinks.json`, JSON.stringify(asset_links.android ?? {}, null, 4))
-	fs.writeFileSync(`${ folder }/apple-app-site-association`, JSON.stringify(asset_links.ios ?? {}, null, 4))
+	fs.writeFileSync(`${folder}/assetlinks.json`, JSON.stringify(asset_links.android ?? {}, null, 4))
+	fs.writeFileSync(`${folder}/apple-app-site-association`, JSON.stringify(asset_links.ios ?? {}, null, 4))
 
 	if (skipApps) return
 	const reversedIosClientId = google_client_ids.ios.split('.').reverse().join('.')
@@ -38,8 +39,8 @@ const setup = async (args) => {
 	const versionName = '0.0.0'
 
 	const { Name, Entitlements, TeamIdentifier } = installCertAndProfile(
-		`./bin/config/${ environment }/profile.mobileprovision`,
-		`./bin/config/${ environment }/certificate.p12`
+		`./bin/config/${environment}/profile.mobileprovision`,
+		`./bin/config/${environment}/certificate.p12`
 	)
 	const teamID = TeamIdentifier[0]
 	await Promise.all(project.ios.getTargets().map(async (target) => {
@@ -59,7 +60,7 @@ const setup = async (args) => {
 			await project.ios.setEntitlements(target.name, build.name, {
 				...Entitlements,
 				'com.apple.developer.applesignin': ['Default'],
-				'com.apple.developer.associated-domains': [`applinks:${ domain }`]
+				'com.apple.developer.associated-domains': [`applinks:${domain}`]
 			})
 		}))
 	}))
@@ -75,9 +76,9 @@ const setup = async (args) => {
 	const googlePlistPath = './ios/App/App/GoogleService-Info.plist'
 	const exportPlistPath = './ios/App/App/Export.plist'
 
-	const androidKeystoreConfig = `./bin/config/${ environment }/app.keystore`
-	const googleServicesConfig = `./bin/config/${ environment }/google-services.json`
-	const googlePlistConfig = `./bin/config/${ environment }/GoogleService-Info.plist`
+	const androidKeystoreConfig = `./bin/config/${environment}/app.keystore`
+	const googleServicesConfig = `./bin/config/${environment}/google-services.json`
+	const googlePlistConfig = `./bin/config/${environment}/GoogleService-Info.plist`
 
 	fs.writeFileSync(exportPlistPath, build({
 		destination: isProduction ? 'upload' : 'export',
@@ -96,7 +97,10 @@ const version = async (args) => {
 	const versionCode = v.number().gt(0).parse(providedVersionCode).valid ?
 		providedVersionCode : Math.floor((Date.now() - firstVersionDate) / 1e5)
 	const versionName = args[0].toString()
-	if (!versionName) return console.log('Provide a version please')
+	if (!versionName) {
+		console.log('Provide a version please')
+		return process.exit(1)
+	}
 
 	const project = await getProject()
 
@@ -111,19 +115,19 @@ const version = async (args) => {
 	await project.android.setVersionName(versionName)
 	await project.android.setVersionCode(versionCode)
 	await project.commit()
-	console.log(`Versioned to ${ versionName }(${ versionCode })`)
+	console.log(`Versioned to ${versionName}(${versionCode})`)
 }
 
 const env = async () => {
 	const entries = Object.entries(envs).map(([key, value]) => ([key, typeof value === 'string' ? value : JSON.stringify(value)]))
 	const envFormattedEntries = entries.reduce((accumulator, currentValue) => {
 		const [key, value] = currentValue
-		return accumulator + `VITE_${ key.toUpperCase() }=${ value }\n`
+		return accumulator + `VITE_${key.toUpperCase()}=${value}\n`
 	}, '')
 	fs.writeFileSync('.env', envFormattedEntries)
 }
 
 const actions = { setup, version, env, appBuild }
 
-const run = actions[process.argv[2]] ?? (async () => console.log(`Invalid action provided. Valid actions are: ${ Object.keys(actions).filter((x) => x !== 'default') }`))
+const run = actions[process.argv[2]] ?? (async () => console.log(`Invalid action provided. Valid actions are: ${Object.keys(actions).filter((x) => x !== 'default')}`))
 run(process.argv.slice(3)).then()
