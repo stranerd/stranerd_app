@@ -12,4 +12,6 @@ console.log(details)
 
 const command = `yarn bin:project:version ${details.join(' ')}`
 
-console.log(execSync(command).toString())
+console.log(
+	execSync(command, { maxBuffer: 1024 * 1024 * 5 }).toString()
+)

@@ -25,9 +25,6 @@ jobs:
         run: yarn
       - name: Setup Project
         run: yarn bin:project:setup
-        env:
-          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
-          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
       - name: Version Project
         run: node bin/version.js
         env:
@@ -40,4 +37,14 @@ jobs:
     needs: build
     runs-on: macos-latest
     steps:
-      - run: ls .
+      - name: Build android
+        run: node bin/project appBuild android
+      - name: Publish to play store
+        run: ls -R ./android/app/build
+  ios:
+    name: Publish to IOS
+    needs: build
+    runs-on: macos-latest
+    steps:
+      - name: Build and push to app store
+        run: node bin/project appBuild ios

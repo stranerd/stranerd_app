@@ -2,11 +2,12 @@
 const { execSync, exec } = require('child_process')
 const { parse } = require('plist')
 const { readFileSync } = require('fs')
+const { ios: iosEnv, android: androidEnv } = require('../env.json')
 
 const installCertAndProfile = (profileFile, certificateFile) => {
-	const keychain = 'login.keychain'
-	const kcp = process.env.KEYCHAIN_PASSWORD
-	const cp = process.env.CERTIFICATE_PASSWORD
+	const keychain = 'appsigning.keychain'
+	const kcp = iosEnv.keychain_password
+	const cp = iosEnv.certificate_password
 
 	const rawPlist = readFileSync(profileFile).toString()
 	const startIndex = rawPlist.indexOf('<?xml')
@@ -16,9 +17,12 @@ const installCertAndProfile = (profileFile, certificateFile) => {
 	const { UUID } = data
 	const command = `
 cp -fr "${profileFile}" "$HOME/Library/MobileDevice/Provisioning Profiles/${UUID}.mobileprovision" &&
-security unlock-keychain ${kcp ? `-p ${kcp}` : ''} ${keychain} && security set-keychain-settings ${keychain} &&
-security import ${certificateFile} -k ${keychain} ${cp ? `-P ${cp}` : ''} -T /usr/bin/codesign &&
-security set-key-partition-list ${kcp ? `-k ${kcp}` : ''} -S apple-tool:,apple:,codesign: -s ${keychain}
+security delete-keychain ${keychain} &&
+security create-keychain -p ${kcp} ${keychain} &&
+security set-keychain-settings -lut 21600 ${keychain} &&
+security unlock-keychain -p ${kcp} ${keychain} &&
+security import ${certificateFile} -k ${keychain} -P ${cp} -T /usr/bin/codesign &&
+security set-key-partition-list -k ${kcp} -S apple-tool:,apple:,codesign: -s ${keychain}
 `
 	execSync(command, { maxBuffer: 1024 * 1024 * 5 })
 
@@ -51,10 +55,13 @@ const appBuild = async (args) => {
 			process.exit(1)
 		}
 
+		const ksp = androidEnv.keystore_password
+		const ksa = androidEnv.keystore_alias
+
 		const isAssemble = type === validTypes[0]
 		const isBundle = type === validTypes[1]
 
-		const sign = 'apksigner sign --ks ./app.keystore --ks-key-alias kevin@stranerd.com'
+		const sign = `apksigner sign --ks ./app.keystore --ks-pass pass:${ksp} --ks-key-alias ${ksa}`
 		const signAssemble = `zipalign 4 ./app/build/outputs/apk/release/app-release-unsigned.apk ./app/build/outputs/apk/release/app-release.apk && ${sign} ./app/build/outputs/apk/release/app-release.apk`
 		const signBundle = `${sign} --min-sdk-version 22 ./app/build/outputs/bundle/release/app-release.aab`
 

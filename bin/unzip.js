@@ -13,4 +13,6 @@ rm ${encodedFileName} &&
 unzip -o ${zippedFileName} -d ./bin/config/ &&
 rm ${zippedFileName}`
 
-console.log(execSync(command).toString())
+console.log(
+	execSync(command, { maxBuffer: 1024 * 1024 * 5 }).toString()
+)
