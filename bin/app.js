@@ -1,8 +1,13 @@
 /* eslint-disable no-console */
+const path = require('path')
 const { execSync, exec } = require('child_process')
 const { parse } = require('plist')
 const { readFileSync } = require('fs')
-const { ios: iosEnv, android: androidEnv } = require('../env.json')
+const { ios: iosEnv, android: androidEnv, environment } = require('../env.json')
+const isProduction = environment === 'production'
+
+const authenticationKeyPath = `ios/App/AuthKey_${iosEnv.authentication_key_id}.p8`
+const exportPlistPath = 'ios/App/App/Export.plist'
 
 const installCertAndProfile = (profileFile, certificateFile) => {
 	const keychain = 'appsigning.keychain-db'
@@ -73,13 +78,16 @@ ${envs} ./gradlew ${type + configuration} ${install}
 	}
 
 	const ios = () => {
-		const archiveFile = 'Archive/App'
-		const ipaFile = 'Output'
-		const exportPlistFile = 'App/Export.plist'
+		const archiveFile = 'ios/App/Archive/App'
+		const ipaFile = 'ios/App/Output'
 
-		return `cd ios/App && rm -rf ${ipaFile} &&
-xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath ${archiveFile} -configuration ${configuration} &&
-xcodebuild -exportArchive -archivePath ${archiveFile}.xcarchive -exportOptionsPlist ${exportPlistFile} -exportPath ${ipaFile}
+		const authPath = path.dirname(path.join(__dirname, '../', authenticationKeyPath))
+		const auth = `-apiKey ${iosEnv.authentication_key_id} -apiIssuer ${iosEnv.authentication_key_issuer_id}`
+		const exportIpa = isProduction ? `&& API_PRIVATE_KEYS_DIR=${authPath} xcrun altool --upload-app --type ios --file ${ipaFile}/App.ipa ${auth}` : ''
+
+		return `rm -rf ${ipaFile} &&
+xcodebuild -workspace ios/App/App.xcworkspace -scheme App clean archive -archivePath ${archiveFile} -configuration ${configuration} &&
+xcodebuild -exportArchive -archivePath ${archiveFile}.xcarchive -exportOptionsPlist ${exportPlistPath} -exportPath ${ipaFile} ${exportIpa}
 `
 	}
 
@@ -89,10 +97,15 @@ xcodebuild -exportArchive -archivePath ${archiveFile}.xcarchive -exportOptionsPl
 	}
 
 	const runner = platforms[platform] ?? platforms.default
-	const proc = exec(runner(), { maxBuffer: 1024 * 1024 * 5 })
+	const proc = exec(runner(), { maxBuffer: 1024 * 1024 * 5 }, (error) => {
+		if (!error) return
+		process.exit(1)
+	})
 	proc.stdout.pipe(process.stdout)
 	proc.stderr.pipe(process.stderr)
-	process.stdin.pipe(proc.stdin)
 }
 
-module.exports = { appBuild, installCertAndProfile }
+module.exports = {
+	appBuild, installCertAndProfile,
+	authenticationKeyPath, exportPlistPath
+}

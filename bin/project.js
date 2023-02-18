@@ -2,7 +2,10 @@
 const { MobileProject } = require('@trapezedev/project')
 const fs = require('fs')
 const { build } = require('plist')
-const { appBuild, installCertAndProfile } = require('./app.js')
+const {
+	appBuild, installCertAndProfile,
+	authenticationKeyPath, exportPlistPath
+} = require('./app.js')
 const envs = require('../env.json')
 const { v } = require('valleyed')
 const { asset_links, google_client_ids, package_name, app_name, environment, domain } = envs
@@ -72,17 +75,17 @@ const setup = async (args) => {
 
 	await project.commit()
 
-	const androidKeystorePath = './android/app.keystore'
-	const googleServicesPath = './android/app/google-services.json'
-	const googlePlistPath = './ios/App/App/GoogleService-Info.plist'
-	const exportPlistPath = './ios/App/App/Export.plist'
+	const androidKeystorePath = 'android/app.keystore'
+	const googleServicesPath = 'android/app/google-services.json'
+	const googlePlistPath = 'ios/App/App/GoogleService-Info.plist'
 
-	const androidKeystoreConfig = `./bin/config/${environment}/app.keystore`
-	const googleServicesConfig = `./bin/config/${environment}/google-services.json`
-	const googlePlistConfig = `./bin/config/${environment}/GoogleService-Info.plist`
+	const androidKeystoreConfig = `bin/config/${environment}/app.keystore`
+	const googleServicesConfig = `bin/config/${environment}/google-services.json`
+	const googlePlistConfig = `bin/config/${environment}/GoogleService-Info.plist`
+	const iosAuthKeyConfig = `bin/config/${environment}/auth.p8`
 
 	fs.writeFileSync(exportPlistPath, build({
-		destination: isProduction ? 'upload' : 'export',
+		destination: 'export',
 		method: isProduction ? 'app-store' : 'development',
 		provisioningProfiles: { [package_name]: Name },
 		signingStyle: 'manual', teamID
@@ -90,6 +93,7 @@ const setup = async (args) => {
 	copyTo(androidKeystoreConfig, androidKeystorePath, 'Provide an app.keystore file for your current environment')
 	copyTo(googleServicesConfig, googleServicesPath, 'Provide a google-services.json file for your current environment')
 	copyTo(googlePlistConfig, googlePlistPath, 'Provide a GoogleService-Info.plist file for your current environment')
+	copyTo(iosAuthKeyConfig, authenticationKeyPath, 'Provide an auth.p8 file for your current environment')
 }
 
 const version = async (args) => {

@@ -15,3 +15,5 @@ Export.plist
 # Generated Config files
 App/App/capacitor.config.json
 App/App/config.xml
+
+*.p8
