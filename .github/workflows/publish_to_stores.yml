@@ -6,45 +6,38 @@ on:
       - 'v*'
 
 jobs:
-  build:
-    name: Create Release
+  android:
+    name: Publish to Android
     environment: production
     runs-on: macos-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Fetch secrets
-        env:
-          ENV_SECRETS: ${{ secrets.ENV_SECRETS }}
-        run: echo "$ENV_SECRETS" > env.json
-      - name: Setup Config folder
-        env:
-          BASE64_ZIPPED_CONTENT: ${{ secrets.BASE64_ZIPPED_CONTENT }}
-        run: node bin/unzip.js
-      - name: Install Dependencies
-        run: yarn
-      - name: Setup Project
-        run: yarn bin:project:setup
-      - name: Version Project
-        run: node bin/version.js
-        env:
-          APP_VERSION: ${{ github.ref }}
       - name: Build Project
-        run: yarn build:app
-      - run: ls ./
-  android:
-    name: Publish to Android
-    needs: build
-    runs-on: macos-latest
-    steps:
+        uses: ./.github/actions/publish
+        with:
+          ENV_SECRETS: ${{ secrets.ENV_SECRETS }}
+          BASE64_ZIPPED_CONTENT: ${{ secrets.BASE64_ZIPPED_CONTENT }}
       - name: Build android
         run: node bin/project appBuild android
-      - name: Publish to play store
-        run: ls -R ./android/app/build
+      - name: Push to play store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GCLOUD_AUTH }}
+          packageName: ${{ secrets.PACKAGE_NAME }}
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+          track: production
   ios:
     name: Publish to IOS
-    needs: build
+    environment: production
     runs-on: macos-latest
     steps:
-      - name: Build and push to app store
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build Project
+        uses: ./.github/actions/publish
+        with:
+          ENV_SECRETS: ${{ secrets.ENV_SECRETS }}
+          BASE64_ZIPPED_CONTENT: ${{ secrets.BASE64_ZIPPED_CONTENT }}
+      - name: Build ios and push to app store
         run: node bin/project appBuild ios

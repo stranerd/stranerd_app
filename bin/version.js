@@ -7,7 +7,11 @@ if (!version) {
 	process.exit(1)
 }
 
-const details = version.replace(')', '').split('(')
+const details = version
+	.split('/')
+	.at(-1)
+	.replace(')', '')
+	.split('(')
 console.log(details)
 
 const command = `yarn bin:project:version ${details.join(' ')}`

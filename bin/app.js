@@ -5,7 +5,7 @@ const { readFileSync } = require('fs')
 const { ios: iosEnv, android: androidEnv } = require('../env.json')
 
 const installCertAndProfile = (profileFile, certificateFile) => {
-	const keychain = 'appsigning.keychain'
+	const keychain = 'appsigning.keychain-db'
 	const kcp = iosEnv.keychain_password
 	const cp = iosEnv.certificate_password
 
@@ -15,18 +15,23 @@ const installCertAndProfile = (profileFile, certificateFile) => {
 	const endIndex = rawPlist.indexOf(endString)
 	const data = parse(rawPlist.slice(startIndex, endIndex + endString.length))
 	const { UUID } = data
-	const command = `
-cp -fr "${profileFile}" "$HOME/Library/MobileDevice/Provisioning Profiles/${UUID}.mobileprovision" &&
-security delete-keychain ${keychain} &&
+	const profilePath = '$HOME/Library/MobileDevice/Provisioning Profiles'
+	const command = `mkdir -p "${profilePath}" &&
+cp -fr "${profileFile}" "${profilePath}/${UUID}.mobileprovision" &&
+rm -f "$HOME/Library/Keychains/${keychain}" &&
 security create-keychain -p ${kcp} ${keychain} &&
 security set-keychain-settings -lut 21600 ${keychain} &&
 security unlock-keychain -p ${kcp} ${keychain} &&
-security import ${certificateFile} -k ${keychain} -P ${cp} -T /usr/bin/codesign &&
+security import ${certificateFile} -k ${keychain} -P ${cp} -A -t cert -f pkcs12 -T /usr/bin/codesign &&
 security set-key-partition-list -k ${kcp} -S apple-tool:,apple:,codesign: -s ${keychain}
 `
 	execSync(command, { maxBuffer: 1024 * 1024 * 5 })
 
-	return data
+	const certificateCommand = `security find-identity -v -p codesigning ${keychain}`
+	const certificateDetails = execSync(certificateCommand, { maxBuffer: 1024 * 1024 * 5 }).toString()
+	const certificate = certificateDetails.split('"')[1]?.split(':')[0]
+
+	return { data, certificate, keychain }
 }
 
 const appBuild = async (args) => {

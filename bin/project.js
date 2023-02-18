@@ -38,10 +38,11 @@ const setup = async (args) => {
 	const versionCode = 1
 	const versionName = '0.0.0'
 
-	const { Name, Entitlements, TeamIdentifier } = installCertAndProfile(
+	const { data, certificate: identity, keychain } = installCertAndProfile(
 		`./bin/config/${environment}/profile.mobileprovision`,
 		`./bin/config/${environment}/certificate.p12`
 	)
+	const { Name, Entitlements, TeamIdentifier } = data
 	const teamID = TeamIdentifier[0]
 	await Promise.all(project.ios.getTargets().map(async (target) => {
 		await Promise.all(target.buildConfigurations.map(async (build) => {
@@ -53,8 +54,8 @@ const setup = async (args) => {
 			await project.ios.setBuildProperty(target.name, build.name, 'DOMAIN', domain)
 			await project.ios.setBuildProperty(target.name, build.name, 'CODE_SIGN_STYLE', 'Manual')
 			await project.ios.setBuildProperty(target.name, build.name, 'IPHONEOS_DEPLOYMENT_TARGET', '13.0')
-			const identity = isProduction ? 'Apple Distribution' : 'Apple Development'
 			await project.ios.setBuildProperty(target.name, build.name, 'CODE_SIGN_IDENTITY', identity)
+			await project.ios.setBuildProperty(target.name, build.name, 'CODE_SIGN_KEYCHAIN', keychain)
 			await project.ios.setBuildProperty(target.name, build.name, 'PROVISIONING_PROFILE_SPECIFIER', Name)
 			await project.ios.setBuildProperty(target.name, build.name, 'DEVELOPMENT_TEAM', teamID)
 			await project.ios.setEntitlements(target.name, build.name, {
