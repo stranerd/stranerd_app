@@ -8,11 +8,10 @@ if (!version) {
 }
 
 const details = version
-	.split('/')
+	.split('v')
 	.at(-1)
 	.replace(')', '')
 	.split('(')
-console.log(details)
 
 const command = `yarn bin:project:version ${details.join(' ')}`
 

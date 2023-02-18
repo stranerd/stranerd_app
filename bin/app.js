@@ -23,7 +23,8 @@ security create-keychain -p ${kcp} ${keychain} &&
 security set-keychain-settings -lut 21600 ${keychain} &&
 security unlock-keychain -p ${kcp} ${keychain} &&
 security import ${certificateFile} -k ${keychain} -P ${cp} -A -t cert -f pkcs12 -T /usr/bin/codesign &&
-security set-key-partition-list -k ${kcp} -S apple-tool:,apple:,codesign: -s ${keychain}
+security set-key-partition-list -k ${kcp} -S apple-tool:,apple:,codesign: -s ${keychain} &&
+security list-keychains -d user -s login.keychain-db ${keychain}
 `
 	execSync(command, { maxBuffer: 1024 * 1024 * 5 })
 
@@ -62,19 +63,12 @@ const appBuild = async (args) => {
 
 		const ksp = androidEnv.keystore_password
 		const ksa = androidEnv.keystore_alias
+		const envs = `KEYSTORE_ALIAS=${ksa} KEYSTORE_PASS=${ksp}`
 
-		const isAssemble = type === validTypes[0]
-		const isBundle = type === validTypes[1]
-
-		const sign = `apksigner sign --ks ./app.keystore --ks-pass pass:${ksp} --ks-key-alias ${ksa}`
-		const signAssemble = `zipalign 4 ./app/build/outputs/apk/release/app-release-unsigned.apk ./app/build/outputs/apk/release/app-release.apk && ${sign} ./app/build/outputs/apk/release/app-release.apk`
-		const signBundle = `${sign} --min-sdk-version 22 ./app/build/outputs/bundle/release/app-release.aab`
-
-		const install = args.includes('--install') ? `./gradlew install${configuration} &&` : ''
+		const install = args.includes('--install') ? `&& ./gradlew install${configuration}` : ''
 
 		return `cd android && rm -rf app/build &&
-./gradlew ${type + configuration} && ${install}
-${isAssemble ? signAssemble : ''}${isBundle ? signBundle : ''}
+${envs} ./gradlew ${type + configuration} ${install}
 `
 	}
 

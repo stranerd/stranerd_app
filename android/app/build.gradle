@@ -2,8 +2,17 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+    signingConfigs {
+        sign {
+            storeFile file("../app.keystore")
+            storePassword System.getenv("KEYSTORE_PASS")
+            keyAlias System.getenv("KEYSTORE_ALIAS")
+            keyPassword System.getenv("KEYSTORE_PASS")
+        }
+    }
     defaultConfig {
         applicationId "com.stranerd.app.dev"
+        signingConfig signingConfigs.sign
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
