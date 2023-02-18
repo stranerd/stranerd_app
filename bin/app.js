@@ -1,10 +1,18 @@
 /* eslint-disable no-console */
+const path = require('path')
 const { execSync, exec } = require('child_process')
 const { parse } = require('plist')
 const { readFileSync } = require('fs')
+const { ios: iosEnv, android: androidEnv, environment } = require('../env.json')
+const isProduction = environment === 'production'
+
+const authenticationKeyPath = `ios/App/AuthKey_${iosEnv.authentication_key_id}.p8`
+const exportPlistPath = 'ios/App/App/Export.plist'
 
 const installCertAndProfile = (profileFile, certificateFile) => {
-	const keychain = 'login.keychain'
+	const keychain = 'appsigning.keychain-db'
+	const kcp = iosEnv.keychain_password
+	const cp = iosEnv.certificate_password
 
 	const rawPlist = readFileSync(profileFile).toString()
 	const startIndex = rawPlist.indexOf('<?xml')
@@ -12,15 +20,24 @@ const installCertAndProfile = (profileFile, certificateFile) => {
 	const endIndex = rawPlist.indexOf(endString)
 	const data = parse(rawPlist.slice(startIndex, endIndex + endString.length))
 	const { UUID } = data
-	const command = `
-cp -fr "${ profileFile }" "$HOME/Library/MobileDevice/Provisioning Profiles/${ UUID }.mobileprovision" &&
-security unlock-keychain ${ keychain } && security set-keychain-settings ${ keychain } &&
-security import ${ certificateFile } -k ${ keychain } -T /usr/bin/codesign &&
-security set-key-partition-list -S apple-tool:,apple:,codesign: -s ${ keychain }
+	const profilePath = '$HOME/Library/MobileDevice/Provisioning Profiles'
+	const command = `mkdir -p "${profilePath}" &&
+cp -fr "${profileFile}" "${profilePath}/${UUID}.mobileprovision" &&
+rm -f "$HOME/Library/Keychains/${keychain}" &&
+security create-keychain -p ${kcp} ${keychain} &&
+security set-keychain-settings -lut 21600 ${keychain} &&
+security unlock-keychain -p ${kcp} ${keychain} &&
+security import ${certificateFile} -k ${keychain} -P ${cp} -A -t cert -f pkcs12 -T /usr/bin/codesign &&
+security set-key-partition-list -k ${kcp} -S apple-tool:,apple:,codesign: -s ${keychain} &&
+security list-keychains -d user -s login.keychain-db ${keychain}
 `
 	execSync(command, { maxBuffer: 1024 * 1024 * 5 })
 
-	return data
+	const certificateCommand = `security find-identity -v -p codesigning ${keychain}`
+	const certificateDetails = execSync(certificateCommand, { maxBuffer: 1024 * 1024 * 5 }).toString()
+	const certificate = certificateDetails.split('"')[1]?.split(':')[0]
+
+	return { data, certificate, keychain }
 }
 
 const appBuild = async (args) => {
@@ -28,7 +45,7 @@ const appBuild = async (args) => {
 	const platform = args[0]
 
 	if (!validPlatforms.includes(platform)) {
-		console.log(`Invalid platform. Supported values: ${ validPlatforms.join(', ') }`)
+		console.log(`Invalid platform. Supported values: ${validPlatforms.join(', ')}`)
 		process.exit(1)
 	}
 
@@ -36,7 +53,7 @@ const appBuild = async (args) => {
 	const configuration = args[1] ?? validConfigurations[0]
 
 	if (!validConfigurations.includes(configuration)) {
-		console.log(`Invalid configuration. Supported values: ${ validConfigurations.join(', ') }`)
+		console.log(`Invalid configuration. Supported values: ${validConfigurations.join(', ')}`)
 		process.exit(1)
 	}
 
@@ -45,33 +62,32 @@ const appBuild = async (args) => {
 		const type = args[2] ?? validTypes[1]
 
 		if (!validTypes.includes(type)) {
-			console.log(`Invalid type. Supported values: ${ validTypes.join(', ') }`)
+			console.log(`Invalid type. Supported values: ${validTypes.join(', ')}`)
 			process.exit(1)
 		}
 
-		const isAssemble = type === validTypes[0]
-		const isBundle = type === validTypes[1]
+		const ksp = androidEnv.keystore_password
+		const ksa = androidEnv.keystore_alias
+		const envs = `KEYSTORE_ALIAS=${ksa} KEYSTORE_PASS=${ksp}`
 
-		const sign = 'apksigner sign --ks ./app.keystore --ks-key-alias kevin@stranerd.com'
-		const signAssemble = `zipalign 4 ./app/build/outputs/apk/release/app-release-unsigned.apk ./app/build/outputs/apk/release/app-release.apk && ${ sign } ./app/build/outputs/apk/release/app-release.apk`
-		const signBundle = `${ sign } --min-sdk-version 22 ./app/build/outputs/bundle/release/app-release.aab`
-
-		const install = args.includes('--install') ? `./gradlew install${ configuration } &&` : ''
+		const install = args.includes('--install') ? `&& ./gradlew install${configuration}` : ''
 
 		return `cd android && rm -rf app/build &&
-./gradlew ${ type + configuration } && ${ install }
-${ isAssemble ? signAssemble : '' }${ isBundle ? signBundle : '' }
+${envs} ./gradlew ${type + configuration} ${install}
 `
 	}
 
 	const ios = () => {
-		const archiveFile = 'Archive/App'
-		const ipaFile = 'Output'
-		const exportPlistFile = 'App/Export.plist'
+		const archiveFile = 'ios/App/Archive/App'
+		const ipaFile = 'ios/App/Output'
 
-		return `cd ios/App && rm -rf ${ ipaFile } &&
-xcodebuild -workspace App.xcworkspace -scheme App clean archive -archivePath ${ archiveFile } -configuration ${ configuration } &&
-xcodebuild -exportArchive -archivePath ${ archiveFile }.xcarchive -exportOptionsPlist ${ exportPlistFile } -exportPath ${ ipaFile }
+		const authPath = path.dirname(path.join(__dirname, '../', authenticationKeyPath))
+		const auth = `-apiKey ${iosEnv.authentication_key_id} -apiIssuer ${iosEnv.authentication_key_issuer_id}`
+		const exportIpa = isProduction ? `&& API_PRIVATE_KEYS_DIR=${authPath} xcrun altool --upload-app --type ios --file ${ipaFile}/App.ipa ${auth}` : ''
+
+		return `rm -rf ${ipaFile} &&
+xcodebuild -workspace ios/App/App.xcworkspace -scheme App clean archive -archivePath ${archiveFile} -configuration ${configuration} &&
+xcodebuild -exportArchive -archivePath ${archiveFile}.xcarchive -exportOptionsPlist ${exportPlistPath} -exportPath ${ipaFile} ${exportIpa}
 `
 	}
 
@@ -81,10 +97,15 @@ xcodebuild -exportArchive -archivePath ${ archiveFile }.xcarchive -exportOptions
 	}
 
 	const runner = platforms[platform] ?? platforms.default
-	const proc = exec(runner(), { maxBuffer: 1024 * 1024 * 5 })
+	const proc = exec(runner(), { maxBuffer: 1024 * 1024 * 5 }, (error) => {
+		if (!error) return
+		process.exit(1)
+	})
 	proc.stdout.pipe(process.stdout)
 	proc.stderr.pipe(process.stderr)
-	process.stdin.pipe(proc.stdin)
 }
 
-module.exports = { appBuild, installCertAndProfile }
+module.exports = {
+	appBuild, installCertAndProfile,
+	authenticationKeyPath, exportPlistPath
+}

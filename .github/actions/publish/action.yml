@@ -1,0 +1,42 @@
+name: Setup For Publish To Stores
+description: Copy env, Install dependencies, call project:setup & build into dist folder
+
+inputs:
+  ENV_SECRETS:
+    description: Content to write to the env.json file
+    required: true
+  BASE64_ZIPPED_CONTENT:
+    description: Base64 encoded content of a zipped file to unzip to bin/config for the environment
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'microsoft'
+        java-version: '11'
+    - name: Fetch secrets
+      shell: bash
+      env:
+        ENV_SECRETS: ${{ inputs.ENV_SECRETS }}
+      run: echo "$ENV_SECRETS" > env.json
+    - name: Setup Config folder
+      shell: bash
+      env:
+        BASE64_ZIPPED_CONTENT: ${{ inputs.BASE64_ZIPPED_CONTENT }}
+      run: node bin/unzip.js
+    - name: Install Dependencies
+      shell: bash
+      run: yarn
+    - name: Setup Project
+      shell: bash
+      run: yarn bin:project:setup
+    - name: Version Project
+      shell: bash
+      run: node bin/version.js
+      env:
+        APP_VERSION: ${{ github.ref }}
+    - name: Build Project
+      shell: bash
+      run: yarn build:app

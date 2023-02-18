@@ -1,0 +1,43 @@
+name: Publish To Stores
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  android:
+    name: Publish to Android
+    environment: production
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build Project
+        uses: ./.github/actions/publish
+        with:
+          ENV_SECRETS: ${{ secrets.ENV_SECRETS }}
+          BASE64_ZIPPED_CONTENT: ${{ secrets.BASE64_ZIPPED_CONTENT }}
+      - name: Build android
+        run: node bin/project appBuild android
+      - name: Push to play store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GCLOUD_AUTH }}
+          packageName: ${{ secrets.PACKAGE_NAME }}
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+          track: production
+  ios:
+    name: Publish to IOS
+    environment: production
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build Project
+        uses: ./.github/actions/publish
+        with:
+          ENV_SECRETS: ${{ secrets.ENV_SECRETS }}
+          BASE64_ZIPPED_CONTENT: ${{ secrets.BASE64_ZIPPED_CONTENT }}
+      - name: Build ios and push to app store
+        run: node bin/project appBuild ios
