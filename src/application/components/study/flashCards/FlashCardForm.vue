@@ -9,7 +9,7 @@
 		<div class="flex flex-col gap-2">
 			<IonLabel class="text-lg">Cards ({{ factory.questions.length }})</IonLabel>
 			<IonReorderGroup :disabled="true" class="flex flex-col gap-4">
-				<IonReorder v-for="(card, index) in factory.questions" :key="index"
+				<IonReorder v-for="(card, index) in factory.cards" :key="index"
 					class="flex flex-col p-4 gap-2 rounded-lg border border-itemBg">
 					<div class="flex w-full items-center justify-between">
 						<IonText class="text-secondaryText">{{ index + 1 }}</IonText>
@@ -18,8 +18,7 @@
 					<IonInput v-model="card.question" placeholder="Enter question or word" />
 					<IonInput v-model="card.answer" placeholder="Enter answer or definition" />
 				</IonReorder>
-				<a
-					class="flex items-center card-sm card-padding text-primaryBg justify-center font-bold"
+				<a class="flex items-center card-sm card-padding text-primaryBg justify-center font-bold"
 					@click="factory.addQuestion">
 					<IonIcon :icon="addOutline" />
 					<IonText>ADD CARD</IonText>
@@ -30,8 +29,7 @@
 
 		<div class="flex-1" />
 
-		<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full"
-			@click="submit()">
+		<IonButton :disabled="loading || !factory.valid" class="btn-primary w-full" @click="submit()">
 			<SpinLoading v-if="loading" />
 			<slot v-else name="buttonTitle">Submit</slot>
 		</IonButton>
@@ -39,9 +37,9 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue'
-import { addOutline, trashBinOutline } from 'ionicons/icons'
 import { FlashCardFactory } from '@modules/study'
+import { addOutline, trashBinOutline } from 'ionicons/icons'
+import { PropType } from 'vue'
 
 defineProps({
 	factory: {

@@ -9,7 +9,7 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 		set: v.array(v.object({
 			question: v.string().min(1),
 			answer: v.string().min(1)
-		})).min(1).max(128)
+		}), 'both question and answer must be not empty for all questions').min(1).max(128)
 	}
 
 	reserved = []
@@ -28,6 +28,27 @@ export class FlashCardFactory extends BaseFactory<FlashCardEntity, FlashCardToMo
 
 	get questions () {
 		return this.values.set
+	}
+
+	get cards () {
+		// eslint-disable-next-line @typescript-eslint/no-this-alias
+		const ctx = this
+		return this.values.set.map((s, index) => ({
+			get question () {
+				return s.question
+			},
+			get answer () {
+				return s.answer
+			},
+			set question (value: string) {
+				ctx.questions[index].question = value
+				ctx.set('set', ctx.questions)
+			},
+			set answer (value: string) {
+				ctx.questions[index].answer = value
+				ctx.set('set', ctx.questions)
+			}
+		}))
 	}
 
 	addQuestion () {
